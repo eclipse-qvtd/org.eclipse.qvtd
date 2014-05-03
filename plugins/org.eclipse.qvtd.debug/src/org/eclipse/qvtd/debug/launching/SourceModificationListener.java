@@ -79,27 +79,5 @@ class SourceModificationListener implements IResourceChangeListener
 
 	protected void handleSourceModified(IFile sourceFile,
 			ITerminate terminateable) {
-/*		IStatusHandler handler = DebugPlugin.getDefault().getStatusHandler(
-				QVTODebugConfiguration.MODIFIED_SOURCE_STATUS);
-		if (handler != null) {
-			Object resolved;
-			try {
-				resolved = handler.handleStatus(
-						QVTODebugConfiguration.MODIFIED_SOURCE_STATUS,
-						sourceFile.getFullPath());
-				if (resolved instanceof IStatus) {
-					IStatus resolvedStatus = (IStatus) resolved;
-					if (resolvedStatus.getSeverity() == IStatus.CANCEL) {
-						fTerminate.canTerminate();
-					}
-				}
-
-			} catch (CoreException e) {
-				QVTODebugCore.log(e.getStatus());
-			}
-
-		} else {
-			QVTODebugCore.log(QVTODebugConfiguration.MODIFIED_SOURCE_STATUS);
-		} */
 	}
 }

@@ -13,7 +13,7 @@ public class QVTiLineBreakpoint extends VMLineBreakpoint
     }
     
     public static QVTiLineBreakpoint getBreakpointByID(long id) {
-    	for (QVTiLineBreakpoint qvtBreakpoint : OCLDebugCore.INSTANCE.getQVTOBreakpoints(QVTiLineBreakpoint.class)) {
+    	for (QVTiLineBreakpoint qvtBreakpoint : OCLDebugCore.INSTANCE.getOCLBreakpoints(QVTiLineBreakpoint.class)) {
 			if (qvtBreakpoint.getID() == id) {
 				return qvtBreakpoint;
 			}

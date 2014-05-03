@@ -44,7 +44,7 @@ import org.eclipse.ui.dialogs.PropertyPage;
 import org.eclipse.ui.model.IWorkbenchAdapter;
 
 
-public class QVTOBreakpointPage extends PropertyPage {
+public class QVTiBreakpointPage extends PropertyPage {
     protected Button fEnabledButton;
     protected Button fHitCountButton;
     protected Text fHitCountText;
@@ -65,7 +65,7 @@ public class QVTOBreakpointPage extends PropertyPage {
     /**
      * the hit count fError message
      */
-    private static final String fgHitCountErrorMessage = DebugUIMessages.QVTOBreakpointPage_HitCountErrorMessage; 
+    private static final String fgHitCountErrorMessage = DebugUIMessages.QVTiBreakpointPage_HitCountErrorMessage; 
     
     /**
      * Store the breakpoint properties.
@@ -171,7 +171,7 @@ public class QVTOBreakpointPage extends PropertyPage {
      * @see org.eclipse.jface.preference.PreferencePage#createContents(org.eclipse.swt.widgets.Composite)
      */
     protected Control createContents(Composite parent) {
-        setTitle(DebugUIMessages.QVTOBreakpointPage_ModulePrepareBreakpoint);
+        setTitle(DebugUIMessages.QVTiBreakpointPage_ModulePrepareBreakpoint);
         noDefaultAndApplyButton();
         Composite mainComposite = createComposite(parent, 1);
         try {
@@ -189,7 +189,7 @@ public class QVTOBreakpointPage extends PropertyPage {
                 getShell().addShellListener(new ShellListener() {
                     public void shellActivated(ShellEvent e) {
                         Shell shell = (Shell)e.getSource();
-                        shell.setText(MessageFormat.format(DebugUIMessages.QVTOBreakpointPage_CreateBreakpointForModule, new Object[]{getName(getBreakpoint())})); 
+                        shell.setText(MessageFormat.format(DebugUIMessages.QVTiBreakpointPage_CreateBreakpointForModule, new Object[]{getName(getBreakpoint())})); 
                         shell.removeShellListener(this);
                     }
                     public void shellClosed(ShellEvent e) {
@@ -232,7 +232,7 @@ public class QVTOBreakpointPage extends PropertyPage {
         // TODO
         String typeName = getBreakpoint().getUnitURI().toPlatformString(true);
         if (typeName != null) {
-            createLabel(labelComposite, DebugUIMessages.QVTOBreakpointPage_Module); 
+            createLabel(labelComposite, DebugUIMessages.QVTiBreakpointPage_Module); 
             Text text = SWTFactory.createText(labelComposite, SWT.READ_ONLY, 1, typeName);
             text.setBackground(parent.getBackground());
         }
@@ -245,7 +245,7 @@ public class QVTOBreakpointPage extends PropertyPage {
      */
     private void createHitCountEditor(Composite parent) throws CoreException {
         Composite hitCountComposite = createComposite(parent, 2);
-        fHitCountButton= createCheckButton(hitCountComposite, DebugUIMessages.QVTOBreakpointPage_HitCount); 
+        fHitCountButton= createCheckButton(hitCountComposite, DebugUIMessages.QVTiBreakpointPage_HitCount); 
         fHitCountButton.addSelectionListener(new SelectionAdapter() {
             public void widgetSelected(SelectionEvent event) {
                 fHitCountText.setEnabled(fHitCountButton.getSelection());
@@ -302,7 +302,7 @@ public class QVTOBreakpointPage extends PropertyPage {
      * @throws CoreException
      */
     protected void createEnabledButton(Composite parent) throws CoreException {
-        fEnabledButton = createCheckButton(parent, DebugUIMessages.QVTOBreakpointPage_Enabled); 
+        fEnabledButton = createCheckButton(parent, DebugUIMessages.QVTiBreakpointPage_Enabled); 
         fEnabledButton.setSelection(getBreakpoint().isEnabled());
     }
     
@@ -388,7 +388,7 @@ public class QVTOBreakpointPage extends PropertyPage {
                 getBreakpoint().delete();
             }
         } catch (CoreException e) {
-            QVTdDebugUIPlugin.statusDialog(DebugUIMessages.QVTOBreakpointPage_CancelBreakpointCreationError, e.getStatus()); 
+            QVTdDebugUIPlugin.statusDialog(DebugUIMessages.QVTiBreakpointPage_CancelBreakpointCreationError, e.getStatus()); 
         }
         return super.performCancel();
     }

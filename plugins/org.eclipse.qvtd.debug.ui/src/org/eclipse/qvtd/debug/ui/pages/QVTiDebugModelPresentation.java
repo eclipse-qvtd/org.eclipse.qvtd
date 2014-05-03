@@ -35,7 +35,7 @@ import org.eclipse.ocl.examples.debug.core.VMVariable;
 import org.eclipse.ocl.examples.debug.vm.data.VMLocationData;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
-import org.eclipse.qvtd.debug.ui.actions.QVTODebugImages;
+import org.eclipse.qvtd.debug.ui.actions.QVTiDebugImages;
 import org.eclipse.qvtd.debug.ui.messages.DebugUIMessages;
 import org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeEditor;
 import org.eclipse.swt.graphics.Color;
@@ -45,9 +45,9 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.part.FileEditorInput;
 
 
-public class QVTODebugModelPresentation implements IDebugModelPresentation, IDebugEditorPresentation, IDebugModelPresentationExtension, IColorProvider, ILabelProvider {
+public class QVTiDebugModelPresentation implements IDebugModelPresentation, IDebugEditorPresentation, IDebugModelPresentationExtension, IColorProvider, ILabelProvider {
 	
-	public QVTODebugModelPresentation() {
+	public QVTiDebugModelPresentation() {
 		super();
 	}
 	
@@ -61,36 +61,36 @@ public class QVTODebugModelPresentation implements IDebugModelPresentation, IDeb
     		VMLocationData location = frame.getLocation();
     		String elementSignature = location.getElementSignature();
             if (elementSignature != null) {
-    			return QVTODebugImages.getImage(QVTODebugImages.MAPPING);
+    			return QVTiDebugImages.getImage(QVTiDebugImages.MAPPING);
             }
             else {
-    			return QVTODebugImages.getImage(QVTODebugImages.TRANSFORMATION);
+    			return QVTiDebugImages.getImage(QVTiDebugImages.TRANSFORMATION);
             } 
         }
         else if(element instanceof VMVariable) {
     		VMVariable var = (VMVariable) element;
     		if (var.isModelParameter()) {
-    			return QVTODebugImages.getImage(QVTODebugImages.MODEL_PARAMETER);
+    			return QVTiDebugImages.getImage(QVTiDebugImages.MODEL_PARAMETER);
     		} else if (var.isReference()) {
-    			return QVTODebugImages.getImage(QVTODebugImages.REFERENCE);
+    			return QVTiDebugImages.getImage(QVTiDebugImages.REFERENCE);
     		} else if (var.isAttribute()) {
-    			return QVTODebugImages.getImage(QVTODebugImages.ATTRIBUTE);
+    			return QVTiDebugImages.getImage(QVTiDebugImages.ATTRIBUTE);
     		} else if (var.isIntermProperty()) {
-    			return QVTODebugImages.getImage(QVTODebugImages.INTERM_PROPERTY);
+    			return QVTiDebugImages.getImage(QVTiDebugImages.INTERM_PROPERTY);
     		} else if (var.isLocalVariable()) {
-    			return QVTODebugImages.getImage(QVTODebugImages.LOCAL_VARIABLE);
+    			return QVTiDebugImages.getImage(QVTiDebugImages.LOCAL_VARIABLE);
     		} else if (var.isPredefinedVariable()) {
     			// TODO - add special case for this
     			try {
 					if("this".equals(var.getName())) { //$NON-NLS-1$
-						return QVTODebugImages.getImage(QVTODebugImages.THIS_VARIABLE);
+						return QVTiDebugImages.getImage(QVTiDebugImages.THIS_VARIABLE);
 					}
 				} catch (DebugException e) {
 					// do nothing use the std image
 				}
-    			return QVTODebugImages.getImage(QVTODebugImages.PREDEFINED_VARIABLE);
+    			return QVTiDebugImages.getImage(QVTiDebugImages.PREDEFINED_VARIABLE);
     		} else if(var.isCollectionElement()) {
-    			return QVTODebugImages.getImage(QVTODebugImages.COLLECTION_ELEMENT);
+    			return QVTiDebugImages.getImage(QVTiDebugImages.COLLECTION_ELEMENT);
     		}
     		
     	} else if (element instanceof VMLineBreakpoint) {
@@ -98,8 +98,8 @@ public class QVTODebugModelPresentation implements IDebugModelPresentation, IDeb
             try {
                 if (breakpoint.isConditionEnabled()) {                	
                     return breakpoint.isEnabled() ? 
-                    		QVTODebugImages.getImage(QVTODebugImages.CONDITIONAL_BPNT_ENABLED) :
-                    			QVTODebugImages.getImage(QVTODebugImages.CONDITIONAL_BPNT_DISABLED);
+                    		QVTiDebugImages.getImage(QVTiDebugImages.CONDITIONAL_BPNT_ENABLED) :
+                    			QVTiDebugImages.getImage(QVTiDebugImages.CONDITIONAL_BPNT_DISABLED);
                 } 
             } catch (CoreException ex) {
                 QVTdDebugUIPlugin.log(ex);
@@ -132,14 +132,14 @@ public class QVTODebugModelPresentation implements IDebugModelPresentation, IDeb
         else if (element instanceof VMThread) {
         	VMThread thread = (VMThread) element;
         	String name = "main"; //$NON-NLS-1$
-        	String state = thread.isSuspended() ? DebugUIMessages.QVTODebugModelPresentation_Suspended : DebugUIMessages.QVTODebugModelPresentation_Running;
-        	return MessageFormat.format(DebugUIMessages.QVTODebugModelPresentation_ThreadLabel, name, state);
+        	String state = thread.isSuspended() ? DebugUIMessages.QVTiDebugModelPresentation_Suspended : DebugUIMessages.QVTiDebugModelPresentation_Running;
+        	return MessageFormat.format(DebugUIMessages.QVTiDebugModelPresentation_ThreadLabel, name, state);
         } 
         else if (element instanceof VMDebugTarget) {
         	VMDebugTarget debugTarget = (VMDebugTarget) element;
 			String moduleName = debugTarget.getMainModuleName();
 			String launchConfigName = debugTarget.getLaunch().getLaunchConfiguration().getName();
-			return NLS.bind(DebugUIMessages.QVTODebugModelPresentation_TransformationLabel, moduleName, launchConfigName);
+			return NLS.bind(DebugUIMessages.QVTiDebugModelPresentation_TransformationLabel, moduleName, launchConfigName);
         }
         return null;
 	}

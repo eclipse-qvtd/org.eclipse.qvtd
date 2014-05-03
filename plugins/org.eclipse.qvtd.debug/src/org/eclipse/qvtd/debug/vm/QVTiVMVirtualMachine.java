@@ -28,7 +28,9 @@ public class QVTiVMVirtualMachine extends VMVirtualMachine
 		int i = 0;
 		for (UnitLocation location : stack) {
 			// include variables only for the current (top level) stack
-			result.add(createStackFrame(location, i++ == 0));
+			if (location != null) {
+				result.add(createStackFrame(location, i++ == 0));
+			}
 		}
 
 		return result.toArray(new VMStackFrameData[result.size()]);
@@ -56,10 +58,6 @@ public class QVTiVMVirtualMachine extends VMVirtualMachine
 	
 	private static String getElementSignature(NamedElement operation) {
         StringBuilder buf = new StringBuilder();
-/*    	EClassifier ctxType = QvtOperationalParserUtil.getContextualType(operation);        
-        if (ctxType != null) {
-            buf.append(ctxType.getName()).append("::"); //$NON-NLS-1$            
-        } */
 
         buf.append(operation.getName());        
         buf.append('(');

@@ -110,7 +110,7 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		}
 	}
 
-	private VMSuspendEvent createVMSuspendEvent(int eventDetail) {
+	private @NonNull VMSuspendEvent createVMSuspendEvent(int eventDetail) {
 		// build the VM stack frames
 		VMStackFrameData[] vmStack = QVTiVMVirtualMachine.createStackFrame(getLocationStack());		
 		assert vmStack.length > 0;
@@ -170,7 +170,7 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		return fLocationStack;
 	}
 	
-	private String getMainModuleName() {
+	private @NonNull String getMainModuleName() {
 		CompiledUnit mainUnit = fBPM.getUnitManager().getMainUnit();
 		if(mainUnit.getModules().isEmpty()) {
 			return "<null>"; //$NON-NLS-1$
@@ -379,7 +379,7 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		suspendAndWaitForResume(location, createVMSuspendEvent(eventDetail));
 	}
 	
-	private void suspendAndWaitForResume(UnitLocation location, VMSuspendEvent suspendEvent) {		
+	private void suspendAndWaitForResume(UnitLocation location, @NonNull VMSuspendEvent suspendEvent) {		
 		try {			
 			VMSuspendEvent vmSuspend = suspendEvent;
 			
@@ -400,6 +400,6 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 
 	private void terminate() throws VMInterruptedExecutionException {
 		IVMEvaluationEnvironment<?> evalEnv = getEvaluationEnvironment();
-		evalEnv.throwQVTException(new VMInterruptedExecutionException("User termination request"));
+		evalEnv.throwVMException(new VMInterruptedExecutionException("User termination request"));
 	}
 }

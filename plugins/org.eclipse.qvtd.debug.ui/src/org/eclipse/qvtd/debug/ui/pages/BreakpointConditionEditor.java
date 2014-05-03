@@ -39,7 +39,7 @@ public class BreakpointConditionEditor {
     private ProjectionViewer fViewer;       
     private String fOldValue;
     private String fErrorMessage;
-    private QVTOLineBreakpointPage fPage;
+    private QVTiLineBreakpointPage fPage;
     private VMLineBreakpoint fBreakpoint;
     private IHandlerService fHandlerService;
     private IHandler fHandler;
@@ -51,7 +51,7 @@ public class BreakpointConditionEditor {
      * @param parent the parent to add this widget to
      * @param page the page that is associated with this widget
      */
-    public BreakpointConditionEditor(Composite parent, QVTOLineBreakpointPage page) {
+    public BreakpointConditionEditor(Composite parent, QVTiLineBreakpointPage page) {
         fPage = page;
         fBreakpoint = (VMLineBreakpoint) fPage.getBreakpoint();
         String condition = new String();

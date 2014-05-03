@@ -68,19 +68,6 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 		delegate.setUndecoratedVisitor(this);
 	}
 
-/*	public QvtOperationalEvaluationVisitor createDebugInterceptor() {
-		return new DebugInterceptor(this);
-	} */
-	
-/*	@Override
-	protected QvtOperationalEvaluationVisitorImpl createNestedEvaluationVisitor(
-			QvtOperationalEvaluationVisitorImpl parent,
-			QvtOperationalEvaluationEnv nestedEvalEnv) {
-		return new QVTODebugEvaluator(parent, nestedEvalEnv);
-	} */
-
-//	public abstract @Nullable UnitLocation getCurrentLocation();
-
 	public abstract int getDepth();
 
 	public @NonNull QVTiEnvironment getEnvironment() {
@@ -153,31 +140,6 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 		evalEnv.processDeferredTasks();
 	}
 
-/*	@Override
-	public void notifyAfterDeferredAssign(AssignExp asssignExp,
-			Object assignLeftValue) {
-		QvtOperationalEvaluationEnv evalEnv = getOperationalEvaluationEnv();
-
-		UnitLocation startLocation = newLocalLocation(evalEnv, asssignExp,
-				asssignExp.getStartPosition(), getNodeLength(asssignExp));
-		setCurrentLocation(asssignExp, startLocation, false);
-
-		processDebugRequest(startLocation);
-
-		UnitLocation endLocation = newLocalLocation(evalEnv, asssignExp,
-				asssignExp.getStartPosition() + getNodeLength(asssignExp) - 1,
-				1);
-		setCurrentLocation(asssignExp, endLocation, true);
-	} */
-
-/*	public Object navigateProperty(EStructuralFeature property, Object target) {
-		OCLExpression<EClassifier> body = getPropertyBody(property);
-		if (body != null) {
-			return super.navigate(property, body, target);
-		}
-		return getEvaluationEnvironment().navigateProperty(property, null, target);
-	} */
-
 	@Override
 	protected Object postVisit(@NonNull Visitable visitable, @Nullable Object preState, @Nullable Object result) {
 		Element element = (Element)visitable;
@@ -203,73 +165,6 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 	}
 
 	protected abstract Object preVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element);
-
-//	private void pushLocation(UnitLocation location) {
-//		fLocationStack.add(0, location);
-//	}
-
-//	private UnitLocation popLocation() {
-//		UnitLocation removed = fLocationStack.remove(0);
-//		return removed;
-//	}
-	
-//	@Override
-//	protected InternalEvaluator createInterruptibleVisitor() {
-//		return (DebugInterceptor)createDebugInterceptor();
-//	}
-	
-/*	private final class DebugInterceptor extends QvtGenericEvaluationVisitor implements InternalEvaluator {
-		
-		public ModuleInstance callTransformationImplicitConstructor(OperationalTransformation transformation, List<ModelInstance> args) {
-			return QVTODebugEvaluator.this.callTransformationImplicitConstructor(transformation, args);
-		}
-		
-		public OperationCallResult runMainEntry(OperationalTransformation transformation, List<Object> args) {
-			return QVTODebugEvaluator.this.runMainEntry(transformation, args);
-		}
-
-		public Object execute(OperationalTransformation transformation) throws QvtRuntimeException {
-			fCurrentLocation = newLocalLocation(getOperationalEvaluationEnv(), transformation, transformation
-					.getStartPosition(), getNodeLength(transformation));
-			
-			return QVTODebugEvaluator.this.execute(transformation);
-		}
-
-		private DebugInterceptor(QvtOperationalEvaluationVisitor qvtExtVisitor) {
-			super(qvtExtVisitor);
-		}
-
-		public DebugInterceptor(QVTODebugEvaluator qvtoDebugEvaluator) {
-			// TODO Auto-generated constructor stub
-		}
-
-		public void setOperationalEvaluationEnv(
-				QvtOperationalEvaluationEnv evalEnv) {
-			QVTODebugEvaluator.this.setOperationalEvaluationEnv(evalEnv);
-		}
-
-		public QvtOperationalEvaluationEnv getOperationalEvaluationEnv() {
-			return QVTODebugEvaluator.this.getOperationalEvaluationEnv();
-		}
-
-		public IContext getContext() {
-			return QVTODebugEvaluator.this.getContext();
-		}
-
-		@Override
-		protected Object genericPreVisitAST(ASTNode visited) {
-			if (getContext().getMonitor() != null && getContext().getMonitor().isCanceled()) {    				
-				throwQVTException(new QvtInterruptedExecutionException());    				
-			}
-			return preElementVisit(visited);
-		}
-
-		@Override
-		protected Object genericPostVisitAST(ASTNode element,
-				Object preVisitState, Object result) {
-			return postElementVisit(element, preVisitState, result);
-		}
-	} */
 
 	public void throwQVTException(VMInterruptedExecutionException qvtInterruptedExecutionException) {
 		// TODO Auto-generated method stub

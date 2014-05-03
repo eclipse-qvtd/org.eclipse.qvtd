@@ -15,7 +15,7 @@ import org.eclipse.jface.text.source.IVerticalRulerInfo;
 import org.eclipse.ui.texteditor.AbstractRulerActionDelegate;
 import org.eclipse.ui.texteditor.ITextEditor;
 
-public class QVTOBreakpointPropertiesRulerActionDelegate  extends AbstractRulerActionDelegate {
+public class QVTiBreakpointPropertiesRulerActionDelegate  extends AbstractRulerActionDelegate {
 
     /**
      * @see AbstractRulerActionDelegate#createAction(ITextEditor, IVerticalRulerInfo)
@@ -23,6 +23,6 @@ public class QVTOBreakpointPropertiesRulerActionDelegate  extends AbstractRulerA
     protected IAction createAction(ITextEditor editor, IVerticalRulerInfo rulerInfo) {
     	
     	
-        return new QVTOBreakpointPropertiesRulerAction(editor, rulerInfo);
+        return new QVTiBreakpointPropertiesRulerAction(editor, rulerInfo);
     }
 }

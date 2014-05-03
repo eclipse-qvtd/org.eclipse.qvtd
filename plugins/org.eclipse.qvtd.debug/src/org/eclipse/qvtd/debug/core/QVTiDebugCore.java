@@ -51,7 +51,7 @@ public class QVTiDebugCore extends VMDebugCore
 	}
     
 	public @NonNull List<QVTiLineBreakpoint> getLineBreakpoints() {
-		return getQVTOBreakpoints(QVTiLineBreakpoint.class);
+		return getOCLBreakpoints(QVTiLineBreakpoint.class);
 	}
 
     public @Nullable ILog getLog() {

@@ -38,9 +38,9 @@ import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditor;
 
 
-public class QVTORunToLineAdapter implements IRunToLineTarget {
+public class QVTiRunToLineAdapter implements IRunToLineTarget {
 	
-	public QVTORunToLineAdapter() {
+	public QVTiRunToLineAdapter() {
 		super();
 	}
 	
@@ -48,19 +48,19 @@ public class QVTORunToLineAdapter implements IRunToLineTarget {
 		IEditorPart editorPart = (IEditorPart)part;
 		IEditorInput input = editorPart.getEditorInput();
 		if(input == null) {
-			throw new CoreException(QVTdDebugUIPlugin.createErrorStatus(DebugUIMessages.QVTORunToLineAdapter_NoInput));
+			throw new CoreException(QVTdDebugUIPlugin.createErrorStatus(DebugUIMessages.QVTiRunToLineAdapter_NoInput));
 		}
 		
 		ITextEditor textEditor = (ITextEditor)editorPart;
 		IDocumentProvider provider = textEditor.getDocumentProvider();
 		IDocument document = provider.getDocument(input);
 		if(document == null) {
-			throw new CoreException(QVTdDebugUIPlugin.createErrorStatus(DebugUIMessages.QVTORunToLineAdapter_NoDocument));
+			throw new CoreException(QVTdDebugUIPlugin.createErrorStatus(DebugUIMessages.QVTiRunToLineAdapter_NoDocument));
 		}
 		
 		IFile file = (IFile)input.getAdapter(IFile.class);
 		if (file == null) {
-			throw new CoreException(QVTdDebugUIPlugin.createErrorStatus(DebugUIMessages.QVTORunToLineAdapter_NoFile)); 
+			throw new CoreException(QVTdDebugUIPlugin.createErrorStatus(DebugUIMessages.QVTiRunToLineAdapter_NoFile)); 
 		}
 		
 		ITextSelection textSelection = (ITextSelection) selection;
@@ -69,12 +69,12 @@ public class QVTORunToLineAdapter implements IRunToLineTarget {
 		URI resourceURI = VMDebugCore.getResourceURI(file);
 		VMLineBreakpoint qvtBreakpoint = QVTiLineBreakpoint.createRunToLineBreakpoint(resourceURI, lineNumber);
 
-		String invalidLocationMessage = DebugUIMessages.QVTORunToLineAdapter_invalidLocation;
+		String invalidLocationMessage = DebugUIMessages.QVTiRunToLineAdapter_invalidLocation;
 		IStatus verifyStatus = new BreakpointLocationVerifier((QVTimperativeEditor) textEditor, qvtBreakpoint,
 				invalidLocationMessage).run();
 		if(!verifyStatus.isOK()) {
 			new ErrorDialog(part.getSite().getShell(), null,
-					DebugUIMessages.QVTORunToLineAdapter_runFailed, verifyStatus, IStatus.CANCEL).open();
+					DebugUIMessages.QVTiRunToLineAdapter_runFailed, verifyStatus, IStatus.CANCEL).open();
 			return;
 		}
 

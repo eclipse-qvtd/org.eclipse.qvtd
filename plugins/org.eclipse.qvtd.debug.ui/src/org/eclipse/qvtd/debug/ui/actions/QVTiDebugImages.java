@@ -15,9 +15,9 @@ import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.swt.graphics.Image;
 
-public class QVTODebugImages
+public class QVTiDebugImages
 {
-	private static final Logger logger = Logger.getLogger(QVTODebugImages.class);
+	private static final Logger logger = Logger.getLogger(QVTiDebugImages.class);
 
 	public static final String CONDITIONAL_BPNT_ENABLED = "conditionalBreakpointEnabled"; //$NON-NLS-1$
 
@@ -44,7 +44,7 @@ public class QVTODebugImages
 	private static ImageRegistry fgImageRegistry = QVTdDebugUIPlugin
 			.getDefault().getImageRegistry();
 
-	private QVTODebugImages() {
+	private QVTiDebugImages() {
 		super();
 	}
 

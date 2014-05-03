@@ -31,15 +31,15 @@ public class RetargettableActionAdapterFactory implements IAdapterFactory
 			return null;
         }
         if (IRunToLineTarget.class == adapterType) {
-			return new QVTORunToLineAdapter();
+			return new QVTiRunToLineAdapter();
         } else if (IToggleBreakpointsTarget.class == adapterType) {
-			return new QVTOToggleBreakpointAdapter();
+			return new QVTiToggleBreakpointAdapter();
         } 
 		return null;
 	}
 
 	@SuppressWarnings("rawtypes")
 	public Class[] getAdapterList() {
-		return new Class[] { QVTOToggleBreakpointAdapter.class, QVTORunToLineAdapter.class };
+		return new Class[] { QVTiToggleBreakpointAdapter.class, QVTiRunToLineAdapter.class };
 	}
 }

@@ -26,10 +26,10 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.dialogs.PropertyDialogAction;
 
 /**
- * Presents the standard properties dialog to configure the attributes of a QVTO
+ * Presents the standard properties dialog to configure the attributes of a QVTi
  * Breakpoint.
  */
-public class QVTOBreakpointPropertiesAction implements IObjectActionDelegate {
+public class QVTiBreakpointPropertiesAction implements IObjectActionDelegate {
 
 	private IWorkbenchPart fPart;
 	private VMLineBreakpoint fBreakpoint;

@@ -24,13 +24,13 @@ import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.ui.texteditor.IUpdate;
 
 
-public class QVTOBreakpointPropertiesRulerAction extends RulerBreakpointAction implements IUpdate {
+public class QVTiBreakpointPropertiesRulerAction extends RulerBreakpointAction implements IUpdate {
     
     private IBreakpoint fBreakpoint;
 
-    public QVTOBreakpointPropertiesRulerAction(ITextEditor editor, IVerticalRulerInfo info) {
+    public QVTiBreakpointPropertiesRulerAction(ITextEditor editor, IVerticalRulerInfo info) {
         super(editor, info); 
-        setText(DebugUIMessages.QVTOBreakpointProperties_RulerActionLabel);
+        setText(DebugUIMessages.QVTiBreakpointProperties_RulerActionLabel);
     }
 
     public void run() {

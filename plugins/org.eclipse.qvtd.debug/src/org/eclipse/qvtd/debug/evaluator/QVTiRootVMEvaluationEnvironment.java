@@ -16,7 +16,6 @@ import org.eclipse.ocl.examples.debug.vm.UnitLocation;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -175,10 +174,10 @@ public class QVTiRootVMEvaluationEnvironment extends QVTiRootEvaluationEnvironme
     	saveThrownException(exception);
     }
 
-	public void throwQVTException(@NonNull VMRuntimeException exception) throws VMRuntimeException {
+	public void throwVMException(@NonNull VMRuntimeException exception) throws VMRuntimeException {
 		try {
 			saveThrownException(exception);
-			exception.setStackQvtTrace(new VMStackTraceBuilder(this).buildStackTrace());
+			exception.setStackVMTrace(new VMStackTraceBuilder(this).buildStackTrace());
 		} catch (Exception e) {
 			getDebugCore().error("Failed to build QVT stack trace", e); //$NON-NLS-1$
 		}

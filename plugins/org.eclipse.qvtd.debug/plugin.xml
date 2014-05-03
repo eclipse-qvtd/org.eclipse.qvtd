@@ -9,8 +9,8 @@
     </extension>
    
     <extension point="org.eclipse.debug.core.breakpoints">
-       <breakpoint id="org.eclipse.qvtd.debug.core.QVTOBreakpoint"
-             class="org.eclipse.qvtd.debug.core.QVTOBreakpoint"
+       <breakpoint id="org.eclipse.qvtd.debug.core.QVTiBreakpoint"
+             class="org.eclipse.qvtd.debug.core.QVTiBreakpoint"
              markerType="org.eclipse.qvtd.debug.QVTdBreakpointMarker"
              name="QVTi Breakpoints"/>
     </extension>
@@ -36,7 +36,7 @@
     <!--extension point="org.eclipse.debug.core.watchExpressionDelegates">
        <watchExpressionDelegate
          	debugModel="org.eclipse.qvtd.debug"
-         	delegateClass="org.eclipse.qvtd.debug.core.QVTOWatchExpressionDelegate"/>
+         	delegateClass="org.eclipse.qvtd.debug.core.QVTiWatchExpressionDelegate"/>
     </extension-->   
 
 </plugin>

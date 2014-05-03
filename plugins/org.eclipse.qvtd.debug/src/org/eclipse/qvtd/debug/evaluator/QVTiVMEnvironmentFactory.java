@@ -2,6 +2,7 @@ package org.eclipse.qvtd.debug.evaluator;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.evaluator.IVMEnvironmentFactory;
 import org.eclipse.ocl.examples.debug.vm.IVMDebuggerShell;
 import org.eclipse.ocl.examples.pivot.NamedElement;
@@ -11,7 +12,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
 public class QVTiVMEnvironmentFactory extends QVTiEnvironmentFactory implements IVMEnvironmentFactory
 {
-	private IVMDebuggerShell shell;
+//	private @Nullable IVMDebuggerShell shell;
 	private long envId = 0;
 	
 	public QVTiVMEnvironmentFactory(EPackage.Registry reg, @NonNull MetaModelManager metaModelManager) {
@@ -28,7 +29,7 @@ public class QVTiVMEnvironmentFactory extends QVTiEnvironmentFactory implements 
 		return true;
 	}
 
-	public void setShell(@NonNull IVMDebuggerShell shell) {
-		this.shell = shell;
+	public void setShell(@Nullable IVMDebuggerShell shell) {
+//		this.shell = shell;
 	}
 }

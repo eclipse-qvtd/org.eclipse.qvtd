@@ -22,6 +22,7 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.model.ILineBreakpoint;
 import org.eclipse.debug.ui.actions.IToggleBreakpointsTarget;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ocl.examples.debug.core.VMLineBreakpoint;
@@ -32,9 +33,9 @@ import org.eclipse.qvtd.debug.ui.messages.DebugUIMessages;
 import org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeEditor;
 import org.eclipse.ui.IWorkbenchPart;
 
-public class QVTOToggleBreakpointAdapter implements IToggleBreakpointsTarget {
+public class QVTiToggleBreakpointAdapter implements IToggleBreakpointsTarget {
 	
-	public QVTOToggleBreakpointAdapter() {
+	public QVTiToggleBreakpointAdapter() {
 		super();
 	}
 
@@ -47,7 +48,7 @@ public class QVTOToggleBreakpointAdapter implements IToggleBreakpointsTarget {
 		ITextSelection textSelection = (ITextSelection) selection;
 		int lineNumber = textSelection.getStartLine() + 1;
 		
-		List<ILineBreakpoint> breakpoints = QVTiDebugCore.INSTANCE.getQVTOBreakpoints(ILineBreakpoint.class);
+		List<ILineBreakpoint> breakpoints = QVTiDebugCore.INSTANCE.getOCLBreakpoints(ILineBreakpoint.class);
 		for(ILineBreakpoint next : breakpoints) {			 
 			if(!unitFile.equals(next.getMarker().getResource())) {
 				continue;
@@ -65,20 +66,20 @@ public class QVTOToggleBreakpointAdapter implements IToggleBreakpointsTarget {
 			}
 		}
 
-		URI sourceURI = URI.createPlatformResourceURI(unitFile.getFullPath().toString(), true);
+		@SuppressWarnings("null")@NonNull URI sourceURI = URI.createPlatformResourceURI(unitFile.getFullPath().toString(), true);
 		final VMLineBreakpoint lineBreakpoint = new QVTiLineBreakpoint(sourceURI, lineNumber);
 		lineBreakpoint.register(true);
         
-        Job job = new Job(DebugUIMessages.QVTOToggleBreakpointAdapter_VerifyBreakpointJob) {
+        Job job = new Job(DebugUIMessages.QVTiToggleBreakpointAdapter_VerifyBreakpointJob) {
             @Override
 			protected IStatus run(IProgressMonitor monitor) {
 				return new BreakpointLocationVerifier(qvtEditor, lineBreakpoint,
-						DebugUIMessages.QVTOToggleBreakpointAdapter_CannotSetBreakpoint).run();
+						DebugUIMessages.QVTiToggleBreakpointAdapter_CannotSetBreakpoint).run();
             }
             
             @Override
             public boolean belongsTo(Object family) {
-            	return VMLineBreakpoint.QVTO_BREAKPOINT_JOBFAMILY == family;
+            	return VMLineBreakpoint.OCL_BREAKPOINT_JOBFAMILY == family;
             }
         };
         
