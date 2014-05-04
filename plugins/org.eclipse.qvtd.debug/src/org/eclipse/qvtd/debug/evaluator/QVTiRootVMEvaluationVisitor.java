@@ -1,13 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2009,2012 R.Dvorak and others.
+ * Copyright (c) 2014 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     Radek Dvorak - initial API and implementation
- *     Christopher Gerking - bug 394498
+ *     R.Dvorak and others - QVTo debugger framework
+ *     E.D.Willink - revised API for OCL/QVTi debugger framework
  *******************************************************************************/
 package org.eclipse.qvtd.debug.evaluator;
 
@@ -26,9 +26,8 @@ import org.eclipse.ocl.examples.debug.evaluator.IVMEvaluationEnvironment;
 import org.eclipse.ocl.examples.debug.evaluator.IterateBreakpointHelper;
 import org.eclipse.ocl.examples.debug.stepper.OCLStepperVisitor;
 import org.eclipse.ocl.examples.debug.stepper.IStepperVisitor;
-import org.eclipse.ocl.examples.debug.stubs.ASTBindingHelper;
 import org.eclipse.ocl.examples.debug.stubs.DebugOptions;
-import org.eclipse.ocl.examples.debug.stubs.VMInterruptedExecutionException;
+import org.eclipse.ocl.examples.debug.utils.ASTBindingHelper;
 import org.eclipse.ocl.examples.debug.utils.CompiledUnit;
 import org.eclipse.ocl.examples.debug.vm.ConditionChecker;
 import org.eclipse.ocl.examples.debug.vm.IVMDebuggerShell;
@@ -44,6 +43,7 @@ import org.eclipse.ocl.examples.debug.vm.request.VMRequest;
 import org.eclipse.ocl.examples.debug.vm.request.VMResumeRequest;
 import org.eclipse.ocl.examples.debug.vm.request.VMSuspendRequest;
 import org.eclipse.ocl.examples.debug.vm.request.VMTerminateRequest;
+import org.eclipse.ocl.examples.debug.vm.utils.VMInterruptedExecutionException;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.Operation;

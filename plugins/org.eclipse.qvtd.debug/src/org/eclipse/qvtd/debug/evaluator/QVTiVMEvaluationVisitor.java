@@ -1,17 +1,16 @@
 /*******************************************************************************
- * Copyright (c) 2009,2012 R.Dvorak and others.
+ * Copyright (c) 2014 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     Radek Dvorak - initial API and implementation
- *     Christopher Gerking - bug 394498
+ *     R.Dvorak and others - QVTo debugger framework
+ *     E.D.Willink - revised API for OCL/QVTi debugger framework
  *******************************************************************************/
 package org.eclipse.qvtd.debug.evaluator;
 
-import java.util.List;
 import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.Monitor;
@@ -19,8 +18,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.common.utils.TracingOption;
 import org.eclipse.ocl.examples.debug.evaluator.IVMEvaluationEnvironment;
-import org.eclipse.ocl.examples.debug.stubs.OperationCallResult;
-import org.eclipse.ocl.examples.debug.stubs.VMInterruptedExecutionException;
+import org.eclipse.ocl.examples.debug.vm.utils.VMInterruptedExecutionException;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -36,7 +34,6 @@ import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.IQVTiEvaluationEnvironment;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironment;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitor;
@@ -169,11 +166,6 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 	public void throwQVTException(VMInterruptedExecutionException qvtInterruptedExecutionException) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	public OperationCallResult runMainEntry(Transformation transformation, List<Object> args) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	   
     protected Element setCurrentEnvInstructionPointer(Element element) {
