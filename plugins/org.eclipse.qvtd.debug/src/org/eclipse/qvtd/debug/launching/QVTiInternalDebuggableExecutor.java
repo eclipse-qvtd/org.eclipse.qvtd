@@ -16,7 +16,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.debug.launching.InternalDebuggableExecutor;
+import org.eclipse.ocl.examples.debug.vm.launching.InternalDebuggableExecutor;
 import org.eclipse.qvtd.debug.core.QVTiEvaluationContext;
 import org.eclipse.qvtd.debug.evaluator.QVTiVMEnvironmentFactory;
 import org.eclipse.qvtd.debug.evaluator.QVTiVMEvaluator;

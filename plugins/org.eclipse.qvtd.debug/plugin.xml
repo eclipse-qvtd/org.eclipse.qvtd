@@ -17,7 +17,7 @@
     
    <extension point="org.eclipse.debug.core.launchConfigurationTypes">
       <launchConfigurationType id="org.eclipse.qvtd.debug.launching.QVTiLaunchConfigurationDelegate"
-            delegate="org.eclipse.qvtd.debug.launching.RunLaunchConfigurationDelegate"
+            delegate="org.eclipse.qvtd.debug.launching.QVTiLaunchConfigurationDelegate"
             modes="run"
             name="QVTi Transformation Run"/>
    </extension>

@@ -15,7 +15,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.debug.core.OCLDebugCore;
-import org.eclipse.ocl.examples.debug.core.VMLineBreakpoint;
+import org.eclipse.ocl.examples.debug.vm.core.VMLineBreakpoint;
 
 public class QVTiLineBreakpoint extends VMLineBreakpoint
 {

@@ -15,12 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.debug.evaluator.IVMEvaluationEnvironment;
 import org.eclipse.ocl.examples.debug.vm.UnitLocation;
 import org.eclipse.ocl.examples.debug.vm.VMVirtualMachine;
 import org.eclipse.ocl.examples.debug.vm.VariableFinder;
 import org.eclipse.ocl.examples.debug.vm.data.VMStackFrameData;
 import org.eclipse.ocl.examples.debug.vm.data.VMVariableData;
+import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationEnvironment;
 import org.eclipse.ocl.examples.debug.vm.launching.DebuggableRunner;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;

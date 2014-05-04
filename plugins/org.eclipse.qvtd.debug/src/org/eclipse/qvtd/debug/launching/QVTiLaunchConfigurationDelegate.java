@@ -27,10 +27,10 @@ import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.debug.utils.MiscUtil;
-import org.eclipse.ocl.examples.debug.utils.SafeRunner;
-import org.eclipse.ocl.examples.debug.utils.ShallowProcess;
-import org.eclipse.ocl.examples.debug.utils.StreamsProxy;
+import org.eclipse.ocl.examples.debug.vm.utils.MiscUtil;
+import org.eclipse.ocl.examples.debug.vm.utils.SafeRunner;
+import org.eclipse.ocl.examples.debug.vm.utils.ShallowProcess;
+import org.eclipse.ocl.examples.debug.vm.utils.StreamsProxy;
 import org.eclipse.ocl.examples.debug.vm.utils.VMRuntimeException;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
@@ -38,7 +38,7 @@ import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
 
-public class RunLaunchConfigurationDelegate extends LaunchConfigurationDelegate implements QVTiLaunchConstants
+public class QVTiLaunchConfigurationDelegate extends LaunchConfigurationDelegate implements QVTiLaunchConstants
 { 
     protected static final int LAUNCH_ERROR_CODE = 210;
     protected static final IStatus fgLaunchErrorStatus = new Status(IStatus.ERROR, QVTiDebugPlugin.PLUGIN_ID, LAUNCH_ERROR_CODE, "Launch configuration error", null); //$NON-NLS-1$	

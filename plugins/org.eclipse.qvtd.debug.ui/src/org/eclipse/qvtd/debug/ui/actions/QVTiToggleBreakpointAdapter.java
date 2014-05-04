@@ -26,7 +26,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.ocl.examples.debug.core.VMLineBreakpoint;
+import org.eclipse.ocl.examples.debug.vm.core.VMLineBreakpoint;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.debug.core.QVTiLineBreakpoint;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;

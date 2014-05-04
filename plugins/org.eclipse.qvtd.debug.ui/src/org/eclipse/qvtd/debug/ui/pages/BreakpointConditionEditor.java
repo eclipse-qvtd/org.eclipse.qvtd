@@ -22,7 +22,7 @@ import org.eclipse.jface.text.IDocumentListener;
 import org.eclipse.jface.text.TextViewerUndoManager;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
-import org.eclipse.ocl.examples.debug.core.VMLineBreakpoint;
+import org.eclipse.ocl.examples.debug.vm.core.VMLineBreakpoint;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.debug.ui.messages.DebugUIMessages;
 import org.eclipse.swt.SWT;

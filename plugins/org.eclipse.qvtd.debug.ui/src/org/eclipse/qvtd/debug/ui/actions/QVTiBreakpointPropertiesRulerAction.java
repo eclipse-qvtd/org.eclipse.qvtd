@@ -18,7 +18,7 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.ocl.examples.debug.core.VMLineBreakpoint;
+import org.eclipse.ocl.examples.debug.vm.core.VMLineBreakpoint;
 import org.eclipse.qvtd.debug.ui.messages.DebugUIMessages;
 import org.eclipse.ui.dialogs.PropertyDialogAction;
 import org.eclipse.ui.texteditor.ITextEditor;

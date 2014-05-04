@@ -16,8 +16,8 @@ import java.util.List;
 import org.eclipse.core.runtime.ILog;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.debug.core.VMDebugCore;
-import org.eclipse.ocl.examples.debug.utils.Trace;
+import org.eclipse.ocl.examples.debug.vm.core.VMDebugCore;
+import org.eclipse.ocl.examples.debug.vm.utils.Trace;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 
 /**

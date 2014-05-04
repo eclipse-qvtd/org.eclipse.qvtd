@@ -13,7 +13,7 @@ package org.eclipse.qvtd.debug.ui.pages;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.internal.ui.SWTFactory;
-import org.eclipse.ocl.examples.debug.core.VMLineBreakpoint;
+import org.eclipse.ocl.examples.debug.vm.core.VMLineBreakpoint;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.debug.ui.messages.DebugUIMessages;
 import org.eclipse.swt.SWT;

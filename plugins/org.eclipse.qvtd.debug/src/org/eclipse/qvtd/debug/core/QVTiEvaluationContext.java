@@ -17,7 +17,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.debug.core.EvaluationContext;
+import org.eclipse.ocl.examples.debug.vm.core.EvaluationContext;
 
 public class QVTiEvaluationContext extends EvaluationContext
 {

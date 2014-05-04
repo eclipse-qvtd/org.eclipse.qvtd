@@ -15,8 +15,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.debug.core.VMVirtualProcess;
 import org.eclipse.ocl.examples.debug.vm.IVMVirtualMachineShell;
+import org.eclipse.ocl.examples.debug.vm.core.VMVirtualProcess;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 
 public class QVTiVirtualProcess extends VMVirtualProcess
