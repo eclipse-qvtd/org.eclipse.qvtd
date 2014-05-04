@@ -24,6 +24,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.evaluator.IRootVMEvaluationVisitor;
 import org.eclipse.ocl.examples.debug.evaluator.IVMEvaluationEnvironment;
 import org.eclipse.ocl.examples.debug.evaluator.IterateBreakpointHelper;
+import org.eclipse.ocl.examples.debug.stepper.OCLStepperVisitor;
+import org.eclipse.ocl.examples.debug.stepper.IStepperVisitor;
 import org.eclipse.ocl.examples.debug.stubs.ASTBindingHelper;
 import org.eclipse.ocl.examples.debug.stubs.DebugOptions;
 import org.eclipse.ocl.examples.debug.stubs.VMInterruptedExecutionException;
@@ -181,7 +183,12 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 	public @NonNull QVTiRootVMEvaluationVisitor getRootEvaluationVisitor() {
 		return this;
 	}
-	
+
+	@Override
+	public @NonNull IStepperVisitor getStepperVisitor() {
+		return QVTiStepperVisitor.INSTANCE;
+	}
+
 	protected void handleLocationChanged(@NonNull Element  element, UnitLocation location, boolean isElementEnd) {
 		if (LOCATION.isActive()) {
 			LOCATION.println("[" + Thread.currentThread().getName() + "] " + element.eClass().getName() + ": " + element.toString() + " @ " + location + " " + (isElementEnd ? "start" : "end"));
@@ -287,6 +294,12 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		assert poppedVisitor == evaluationVisitor;
 	}
 
+	public void postIterate(@NonNull LoopExp loopExp/*, Object preState*/) {
+//		if (preState instanceof VMBreakpoint) {
+//			fIterateBPHelper.removeIterateBreakpoint((VMBreakpoint) preState);
+//		}
+	}
+
 	protected void postVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element, Object preState) {
 		if (element instanceof Transformation) {
 			// 
@@ -307,6 +320,17 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 				
 				setCurrentLocation(element, el, true);
 			}
+		}
+	}
+
+	public void preIterate(@NonNull LoopExp loopExp) {
+		UnitLocation topLocation = getCurrentLocation();
+		boolean skipIterate = (fCurrentStepMode == DebugEvent.UNSPECIFIED)
+				|| ((fCurrentStepMode == DebugEvent.STEP_OVER) && 
+					(topLocation.getStackDepth() > fCurrentLocation.getStackDepth()));
+
+		if (!skipIterate) {
+			/*return*/ fIterateBPHelper.stepIterateElement(loopExp, topLocation);
 		}
 	}
 
