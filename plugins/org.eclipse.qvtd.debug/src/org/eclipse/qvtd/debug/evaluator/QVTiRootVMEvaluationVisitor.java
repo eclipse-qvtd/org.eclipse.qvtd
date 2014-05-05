@@ -17,12 +17,10 @@ import java.util.Stack;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.evaluator.IterateBreakpointHelper;
-import org.eclipse.ocl.examples.debug.stepper.OCLStepperVisitor;
 import org.eclipse.ocl.examples.debug.vm.ConditionChecker;
 import org.eclipse.ocl.examples.debug.vm.IVMDebuggerShell;
 import org.eclipse.ocl.examples.debug.vm.UnitLocation;
@@ -30,6 +28,7 @@ import org.eclipse.ocl.examples.debug.vm.VMBreakpoint;
 import org.eclipse.ocl.examples.debug.vm.VMBreakpointManager;
 import org.eclipse.ocl.examples.debug.vm.ValidBreakpointLocator;
 import org.eclipse.ocl.examples.debug.vm.data.VMStackFrameData;
+import org.eclipse.ocl.examples.debug.vm.data.VMSuspension;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IRootVMEvaluationVisitor;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IStepperVisitor;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationEnvironment;
@@ -61,7 +60,7 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 	private UnitLocation fCurrentLocation;
 	private final IterateBreakpointHelper fIterateBPHelper;
 //	private final List<UnitLocation> fLocationStack;
-	private int fCurrentStepMode;
+	private @NonNull VMSuspension fCurrentStepMode;
 	private @NonNull Stack<QVTiVMEvaluationVisitor> visitorStack = new Stack<QVTiVMEvaluationVisitor>();
 
 	public QVTiRootVMEvaluationVisitor(@NonNull QVTiEnvironment env, @NonNull IQVTiVMEvaluationEnvironment evalEnv, @NonNull Transformation transformation, IVMDebuggerShell shell) {
@@ -70,7 +69,7 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		fBPM = shell.getBreakPointManager();
 		fIterateBPHelper = new IterateBreakpointHelper(fBPM);
 //		fLocationStack = new ArrayList<UnitLocation>();
-		fCurrentStepMode = DebugEvent.UNSPECIFIED;
+		fCurrentStepMode = VMSuspension.UNSPECIFIED;
 		pushVisitor(this);
 		fCurrentLocation = null; //getCurrentLocation();
 //		UnitLocation newLocation = newLocalLocation((IDebugEvaluationEnvironment) evalEnv, transformation, ASTBindingHelper.getStartPosition(transformation)); //, getNodeLength(element));
@@ -103,7 +102,7 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		int endPosition = ASTBindingHelper.getEndPosition(element);
 		UnitLocation endLocation = newLocalLocation(evalEnv, element, endPosition, endPosition); //, 1);
 		setCurrentLocation(element, endLocation, true);
-		suspendAndWaitForResume(endLocation, DebugEvent.BREAKPOINT);	// FIXME see if Interrupt BPt set
+		suspendAndWaitForResume(endLocation, VMSuspension.BREAKPOINT);	// FIXME see if Interrupt BPt set
 		if (e instanceof Exception) {
 			throw (RuntimeException)e;
 		}
@@ -112,11 +111,11 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		}
 	}
 
-	private @NonNull VMSuspendEvent createVMSuspendEvent(int eventDetail) {
+	private @NonNull VMSuspendEvent createVMSuspendEvent(@NonNull VMSuspension vmSuspension) {
 		// build the VM stack frames
 		VMStackFrameData[] vmStack = QVTiVMVirtualMachine.createStackFrame(getLocationStack());		
 		assert vmStack.length > 0;
-		return new VMSuspendEvent(vmStack, eventDetail);
+		return new VMSuspendEvent(vmStack, vmSuspension);
 	}
 
 	@Override
@@ -124,20 +123,20 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		throw new UnsupportedOperationException();			// Root visitor never gets disposed.
 	}
 	
-	private void doProcessRequest(UnitLocation location, VMRequest request) {
+	private void doProcessRequest(@NonNull UnitLocation location, @NonNull VMRequest request) {
 		if (VM_REQUEST.isActive()) {
 			VM_REQUEST.println("[" + Thread.currentThread().getName() + "] " + location.toString() + " " + request);
 		}
 		if (request instanceof VMResumeRequest) {
 			VMResumeRequest resumeRequest = (VMResumeRequest) request;
 			fCurrentLocation = getCurrentLocation();
-			fCurrentStepMode = resumeRequest.detail;
-			if (fCurrentStepMode == DebugEvent.UNSPECIFIED) {
+			fCurrentStepMode = resumeRequest.suspension;
+			if (fCurrentStepMode == VMSuspension.UNSPECIFIED) {
 				fIterateBPHelper.removeAllIterateBreakpoints();
 			}
 		} else if (request instanceof VMSuspendRequest) {
 			VMSuspendRequest suspendRequest = (VMSuspendRequest) request;
-			suspendAndWaitForResume(location, suspendRequest.detail);
+			suspendAndWaitForResume(location, suspendRequest.suspension);
 		} else if (request instanceof VMTerminateRequest) {
 			terminate();
 		} else {
@@ -205,8 +204,7 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 			return;
 		}
 		
-		switch (fCurrentStepMode) {
-		case DebugEvent.STEP_OVER:
+		if (fCurrentStepMode == VMSuspension.STEP_OVER) {
 			if (location.getStackDepth() <= fCurrentLocation.getStackDepth()
 					&& (!location.isTheSameLine(fCurrentLocation)
 						/*|| repeatedInIterator(location, fCurrentLocation)*/ )) {
@@ -214,21 +212,20 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 				suspendAndWaitForResume(location, fCurrentStepMode);
 				return;
 			}
-			break;
-		case DebugEvent.STEP_INTO:
+		}
+		else if (fCurrentStepMode == VMSuspension.STEP_INTO) {
 			if (!location.isTheSameLocation(fCurrentLocation) /*|| repeatedInIterator(location, fCurrentLocation)*/) {
 				fCurrentLocation = null;
 				suspendAndWaitForResume(location, fCurrentStepMode);
 				return;
 			}
-			break;
-		case DebugEvent.STEP_RETURN:
+		}
+		else if (fCurrentStepMode == VMSuspension.STEP_RETURN) {
 			if (location.getStackDepth() < fCurrentLocation.getStackDepth()) {
 				fCurrentLocation = null;
 				suspendAndWaitForResume(location, fCurrentStepMode);
 				return;
 			}
-			break;
 		}
 
 		// check if we trigger a registered breakpoint
@@ -255,7 +252,7 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 				
 				if(reason != null) {
 					// breakpoint condition parsing or evaluation failed, notify the debug client
-					VMSuspendEvent suspendOnBpConditionErrr = createVMSuspendEvent(VMSuspendEvent.BREAKPOINT_CONDITION_ERR);
+					VMSuspendEvent suspendOnBpConditionErrr = createVMSuspendEvent(VMSuspension.BREAKPOINT_CONDITION_ERR);
 					suspendOnBpConditionErrr.setBreakpointID(breakpoint.getID());
 					suspendOnBpConditionErrr.setReason(reason, status.getMessage());
 					// suspend VM and wait for resolution by the debug client
@@ -269,7 +266,7 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 			
 			if (Boolean.TRUE.equals(isTriggered)) {
 				boolean isIterateBp = fIterateBPHelper.isIterateBreakpoint(breakpoint);
-				int eventDetail = isIterateBp ? fCurrentStepMode : DebugEvent.BREAKPOINT;
+				VMSuspension eventDetail = isIterateBp ? fCurrentStepMode : VMSuspension.BREAKPOINT;
 				
 				// let the VM suspend and wait for resume request
 				suspendAndWaitForResume(location, eventDetail);
@@ -282,7 +279,7 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		
 	}
 
-	private UnitLocation newLocalLocation(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element node, int startPosition, int endPosition) {//, int length) {
+	private @NonNull UnitLocation newLocalLocation(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element node, int startPosition, int endPosition) {//, int length) {
 		return new UnitLocation(startPosition, endPosition, evalEnv, node);
 	}
 
@@ -325,8 +322,8 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 
 	public void preIterate(@NonNull LoopExp loopExp) {
 		UnitLocation topLocation = getCurrentLocation();
-		boolean skipIterate = (fCurrentStepMode == DebugEvent.UNSPECIFIED)
-				|| ((fCurrentStepMode == DebugEvent.STEP_OVER) && 
+		boolean skipIterate = (fCurrentStepMode == VMSuspension.UNSPECIFIED)
+				|| ((fCurrentStepMode == VMSuspension.STEP_OVER) && 
 					(topLocation.getStackDepth() > fCurrentLocation.getStackDepth()));
 
 		if (!skipIterate) {
@@ -347,8 +344,8 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 			LoopExp loop = (LoopExp) element;
 
 			UnitLocation topLocation = getCurrentLocation();
-			boolean skipIterate = (fCurrentStepMode == DebugEvent.UNSPECIFIED)
-					|| ((fCurrentStepMode == DebugEvent.STEP_OVER) && 
+			boolean skipIterate = (fCurrentStepMode == VMSuspension.UNSPECIFIED)
+					|| ((fCurrentStepMode == VMSuspension.STEP_OVER) && 
 						(topLocation.getStackDepth() > fCurrentLocation.getStackDepth()));
 
 			if (!skipIterate) {
@@ -368,7 +365,7 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		return null; //result;
 	}
 
-	private void processDebugRequest(UnitLocation location) {
+	private void processDebugRequest(@NonNull UnitLocation location) {
 		VMRequest event = fDebugShell.popRequest();
 		if (event == null) {
 			return;
@@ -399,11 +396,11 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		handleLocationChanged(element, newLocation, atEnd);
 	}
 	
-	private void suspendAndWaitForResume(UnitLocation location, int eventDetail) {
-		suspendAndWaitForResume(location, createVMSuspendEvent(eventDetail));
+	private void suspendAndWaitForResume(@NonNull UnitLocation location, @NonNull VMSuspension vmSuspension) {
+		suspendAndWaitForResume(location, createVMSuspendEvent(vmSuspension));
 	}
 	
-	private void suspendAndWaitForResume(UnitLocation location, @NonNull VMSuspendEvent suspendEvent) {		
+	private void suspendAndWaitForResume(@NonNull UnitLocation location, @NonNull VMSuspendEvent suspendEvent) {		
 		try {			
 			VMSuspendEvent vmSuspend = suspendEvent;
 			

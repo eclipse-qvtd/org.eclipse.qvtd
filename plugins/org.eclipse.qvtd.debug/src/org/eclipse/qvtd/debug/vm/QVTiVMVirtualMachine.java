@@ -33,7 +33,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
 public class QVTiVMVirtualMachine extends VMVirtualMachine
 {
-	public static VMStackFrameData[] createStackFrame(List<UnitLocation> stack) {
+	public static @NonNull VMStackFrameData[] createStackFrame(List<UnitLocation> stack) {
 		List<VMStackFrameData> result = new ArrayList<VMStackFrameData>();
 		
 		int i = 0;
