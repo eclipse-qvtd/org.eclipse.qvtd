@@ -22,6 +22,8 @@ import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
 
 public class QVTiVMEvaluator extends QVTiXtextEvaluator implements IVMEvaluator
 {
+	private boolean suspendOnStartup = false;
+
 	public QVTiVMEvaluator(@NonNull QVTiEnvironmentFactory envFactory, @NonNull URI transformationURI) throws IOException {
 		super(envFactory, transformationURI);
 	}
@@ -29,5 +31,10 @@ public class QVTiVMEvaluator extends QVTiXtextEvaluator implements IVMEvaluator
 	@Override
 	public @NonNull Transformation getDebuggable() {
 		return getTransformation();
+	}
+
+	@Override
+	public void setSuspendOnStartUp(boolean suspendOnStartup) {
+		this.suspendOnStartup = suspendOnStartup;
 	}
 }

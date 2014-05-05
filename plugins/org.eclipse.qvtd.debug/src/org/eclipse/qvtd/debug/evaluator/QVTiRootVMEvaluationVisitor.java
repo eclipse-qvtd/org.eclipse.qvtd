@@ -43,6 +43,7 @@ import org.eclipse.ocl.examples.debug.vm.utils.ASTBindingHelper;
 import org.eclipse.ocl.examples.debug.vm.utils.CompiledUnit;
 import org.eclipse.ocl.examples.debug.vm.utils.DebugOptions;
 import org.eclipse.ocl.examples.debug.vm.utils.VMInterruptedExecutionException;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -55,15 +56,15 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitorImpl
 
 public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor implements IRootVMEvaluationVisitor<Transformation>
 {
-	private final IVMDebuggerShell fDebugShell;
-	private final VMBreakpointManager fBPM;
+	private final @NonNull IVMDebuggerShell fDebugShell;
+	private final @NonNull VMBreakpointManager fBPM;
 	private UnitLocation fCurrentLocation;
-	private final IterateBreakpointHelper fIterateBPHelper;
+	private final @NonNull IterateBreakpointHelper fIterateBPHelper;
 //	private final List<UnitLocation> fLocationStack;
 	private @NonNull VMSuspension fCurrentStepMode;
 	private @NonNull Stack<QVTiVMEvaluationVisitor> visitorStack = new Stack<QVTiVMEvaluationVisitor>();
 
-	public QVTiRootVMEvaluationVisitor(@NonNull QVTiEnvironment env, @NonNull IQVTiVMEvaluationEnvironment evalEnv, @NonNull Transformation transformation, IVMDebuggerShell shell) {
+	public QVTiRootVMEvaluationVisitor(@NonNull QVTiEnvironment env, @NonNull IQVTiVMEvaluationEnvironment evalEnv, @NonNull Transformation transformation, @NonNull IVMDebuggerShell shell) {
 		super(new QVTiEvaluationVisitorImpl(env, evalEnv));
 		fDebugShell = shell;
 		fBPM = shell.getBreakPointManager();
@@ -72,28 +73,7 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		fCurrentStepMode = VMSuspension.UNSPECIFIED;
 		pushVisitor(this);
 		fCurrentLocation = null; //getCurrentLocation();
-//		UnitLocation newLocation = newLocalLocation((IDebugEvaluationEnvironment) evalEnv, transformation, ASTBindingHelper.getStartPosition(transformation)); //, getNodeLength(element));
-//		setCurrentLocation(transformation, newLocation, false);
-
-		fDebugShell.sessionStarted(this);
-
-		VMRequest request = null; 
-		try {
-			// suspend to let others to wake up us on demand
-			QVTiDebugCore.TRACE.trace(DebugOptions.EVALUATOR,
-			"Debug evaluator going to initial SUSPEND state"); //$NON-NLS-1$
-			
-			request = shell.waitAndPopRequest(new VMStartEvent(getMainModuleName(), true));
-		} catch (InterruptedException e) {
-			Thread.interrupted();
-			terminate();
-		}
-		
-		if(request instanceof VMResumeRequest == false) {
-			// TODO - decide a set of request we can handle during initial SUSPEND mode,
-			// or report fError
-			terminate();
-		}
+		start(true);		// FIXME Move to caller
 	}
 
 	@Override
@@ -176,7 +156,7 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		if(mainUnit.getModules().isEmpty()) {
 			return "<null>"; //$NON-NLS-1$
 		}
-		return mainUnit.getModules().get(0).getName();
+		return DomainUtil.nonNullState(mainUnit.getModules().get(0).getName());
 	}
 
 	public @NonNull QVTiRootVMEvaluationVisitor getRootEvaluationVisitor() {
@@ -394,6 +374,31 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 
 //		fLocationStack.set(0, newLocation);
 		handleLocationChanged(element, newLocation, atEnd);
+	}
+
+	protected void start(boolean suspendOnStartup) {
+//		UnitLocation newLocation = newLocalLocation((IDebugEvaluationEnvironment) evalEnv, transformation, ASTBindingHelper.getStartPosition(transformation)); //, getNodeLength(element));
+//		setCurrentLocation(transformation, newLocation, false);
+
+		fDebugShell.sessionStarted(this);
+
+		VMRequest request = null; 
+		try {
+			// suspend to let others to wake up us on demand
+			QVTiDebugCore.TRACE.trace(DebugOptions.EVALUATOR,
+			"Debug evaluator going to initial SUSPEND state"); //$NON-NLS-1$
+			
+			request = fDebugShell.waitAndPopRequest(new VMStartEvent(getMainModuleName(), suspendOnStartup));
+		} catch (InterruptedException e) {
+			Thread.interrupted();
+			terminate();
+		}
+		
+		if(request instanceof VMResumeRequest == false) {
+			// TODO - decide a set of request we can handle during initial SUSPEND mode,
+			// or report fError
+			terminate();
+		}
 	}
 	
 	private void suspendAndWaitForResume(@NonNull UnitLocation location, @NonNull VMSuspension vmSuspension) {
