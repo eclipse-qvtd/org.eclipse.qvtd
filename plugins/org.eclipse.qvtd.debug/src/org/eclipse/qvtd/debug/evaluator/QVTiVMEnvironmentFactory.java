@@ -16,14 +16,20 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.IVMDebuggerShell;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEnvironmentFactory;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.pivot.Environment;
 import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.IQVTiEvaluationEnvironment;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelManager;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
 
 public class QVTiVMEnvironmentFactory extends QVTiEnvironmentFactory implements IVMEnvironmentFactory
 {
-//	private @Nullable IVMDebuggerShell shell;
+	private @Nullable IVMDebuggerShell shell;
 	private long envId = 0;
 	
 	public QVTiVMEnvironmentFactory(EPackage.Registry reg, @NonNull MetaModelManager metaModelManager) {
@@ -31,8 +37,43 @@ public class QVTiVMEnvironmentFactory extends QVTiEnvironmentFactory implements 
 	}
 
 	@Override
+	public @NonNull QVTiVMEnvironment createEnvironment() {
+		QVTiVMEnvironment result = new QVTiVMEnvironment(this, null);
+		return result;
+	}
+
+	@Override
+	public @NonNull QVTiVMEnvironment createEnvironment(@NonNull Environment parent) {
+		if (!(parent instanceof QVTiVMEnvironment)) {
+			throw new IllegalArgumentException(
+				"Parent environment must be an OCLVM environment: " + parent); //$NON-NLS-1$
+		}
+		
+		QVTiVMEnvironment result = new QVTiVMEnvironment((QVTiVMEnvironment) parent);
+		return result;
+	}
+
+	public @NonNull IQVTiVMEvaluationEnvironment createEvaluationEnvironment(@NonNull QVTiModelManager modelManager, @NonNull Transformation transformation) {
+		return new QVTiRootVMEvaluationEnvironment(getMetaModelManager(), modelManager, transformation, ++envId);
+	}
+
+	@Override
 	public @NonNull IQVTiVMEvaluationEnvironment createEvaluationEnvironment(@NonNull IQVTiEvaluationEnvironment parent, @NonNull NamedElement operation) {
 		return new QVTiVMNestedEvaluationEnvironment((IQVTiVMEvaluationEnvironment) parent, ++envId, operation);
+	}
+	
+	@Override
+	public @NonNull IQVTiVMEvaluationEnvironment createEvaluationEnvironment(@NonNull EvaluationEnvironment parent) {
+		return new QVTiVMNestedEvaluationEnvironment((IQVTiVMEvaluationEnvironment) parent, ++envId, ((IQVTiVMEvaluationEnvironment)parent).getOperation());
+	}
+
+	public @NonNull QVTiRootVMEvaluationVisitor createEvaluationVisitor(@NonNull QVTiVMEnvironment env, @NonNull IQVTiEvaluationEnvironment evalEnv) {
+		return new QVTiRootVMEvaluationVisitor(env, (IQVTiVMEvaluationEnvironment) evalEnv, DomainUtil.nonNullState(shell));
+	}
+
+	@Override
+	public @NonNull QVTiVMModelManager createModelManager(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
+		return new QVTiVMModelManager(transformationAnalysis);
 	}
 
 	@Override
@@ -41,6 +82,6 @@ public class QVTiVMEnvironmentFactory extends QVTiEnvironmentFactory implements 
 	}
 
 	public void setShell(@Nullable IVMDebuggerShell shell) {
-//		this.shell = shell;
+		this.shell = shell;
 	}
 }

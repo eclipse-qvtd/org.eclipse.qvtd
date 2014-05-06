@@ -20,7 +20,6 @@ import org.eclipse.ocl.examples.debug.vm.launching.InternalDebuggableExecutor;
 import org.eclipse.qvtd.debug.core.QVTiEvaluationContext;
 import org.eclipse.qvtd.debug.evaluator.QVTiVMEnvironmentFactory;
 import org.eclipse.qvtd.debug.evaluator.QVTiVMEvaluator;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 
 /**
  * Internal transformation executor
@@ -37,7 +36,7 @@ public class QVTiInternalDebuggableExecutor extends InternalDebuggableExecutor
 	}
 
 	protected @NonNull QVTiVMEvaluator createEvaluator() throws IOException {
-		QVTiVMEvaluator evaluator = new QVTiVMEvaluator((QVTiEnvironmentFactory) envFactory, evaluationContext.getTransformationURI());
+		QVTiVMEvaluator evaluator = new QVTiVMEvaluator((QVTiVMEnvironmentFactory) envFactory, evaluationContext.getTransformationURI());
 		for (Map.Entry<String, URI> inEntry : evaluationContext.getInputURIs().entrySet()) {
 			@SuppressWarnings("null")@NonNull String inKey = inEntry.getKey();
 			@SuppressWarnings("null")@NonNull URI inURI = inEntry.getValue();

@@ -15,8 +15,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationEnvironment;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.NamedElement;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitor;
 
 public class QVTiNestedVMEvaluationVisitor extends QVTiVMEvaluationVisitor
 {
@@ -24,7 +22,7 @@ public class QVTiNestedVMEvaluationVisitor extends QVTiVMEvaluationVisitor
 	protected final @NonNull QVTiVMEvaluationVisitor parent;
 	protected final int depth;
 	
-	protected QVTiNestedVMEvaluationVisitor(@NonNull QVTiVMEvaluationVisitor parent, @NonNull QVTiEvaluationVisitor nestedEvaluationVisitor, @NonNull NamedElement operation) {
+	protected QVTiNestedVMEvaluationVisitor(@NonNull QVTiVMEvaluationVisitor parent, @NonNull IQVTiVMEvaluationVisitor nestedEvaluationVisitor) {
 		super(nestedEvaluationVisitor);
 		this.root = parent.getRootEvaluationVisitor();
 		this.parent = parent;
@@ -50,11 +48,11 @@ public class QVTiNestedVMEvaluationVisitor extends QVTiVMEvaluationVisitor
 		return root;
 	}
 
-	protected void postVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element, Object preState) {
+	protected void postVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element, @Nullable Element preState) {
 		root.postVisit(evalEnv, element, preState);
 	}
 
-	protected Object preVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element) {
+	protected @Nullable Element preVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element) {
 		return root.preVisit(evalEnv, element);
 	}
 }

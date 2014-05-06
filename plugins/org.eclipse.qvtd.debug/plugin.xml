@@ -10,7 +10,7 @@
    
     <extension point="org.eclipse.debug.core.breakpoints">
        <breakpoint id="org.eclipse.qvtd.debug.core.QVTiBreakpoint"
-             class="org.eclipse.qvtd.debug.core.QVTiBreakpoint"
+             class="org.eclipse.qvtd.debug.core.QVTiLineBreakpoint"
              markerType="org.eclipse.qvtd.debug.QVTdBreakpointMarker"
              name="QVTi Breakpoints"/>
     </extension>

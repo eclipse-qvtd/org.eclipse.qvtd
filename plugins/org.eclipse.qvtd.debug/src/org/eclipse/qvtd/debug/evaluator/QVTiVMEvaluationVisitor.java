@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.common.utils.TracingOption;
+import org.eclipse.ocl.examples.debug.vm.VMVirtualMachine;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationEnvironment;
 import org.eclipse.ocl.examples.debug.vm.utils.VMInterruptedExecutionException;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
@@ -34,35 +34,21 @@ import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.IQVTiEvaluationEnvironment;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironment;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitorImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractWrappingQVTimperativeVisitor;
 
-public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperativeVisitor<Object, Object, QVTiEvaluationVisitor, Object> implements QVTiEvaluationVisitor
+public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperativeVisitor<Object, Object, IQVTiVMEvaluationVisitor, Element> implements IQVTiVMEvaluationVisitor
 {
-	public static final @NonNull TracingOption LOCATION = new TracingOption(QVTiDebugPlugin.PLUGIN_ID, "location");
-	public static final @NonNull TracingOption PRE_VISIT = new TracingOption(QVTiDebugPlugin.PLUGIN_ID, "pre-visit");
-	public static final @NonNull TracingOption POST_VISIT = new TracingOption(QVTiDebugPlugin.PLUGIN_ID, "post-visit");
-	public static final @NonNull TracingOption VISITOR_STACK = new TracingOption(QVTiDebugPlugin.PLUGIN_ID, "visitorStack");
-	public static final @NonNull TracingOption VM_EVENT = new TracingOption(QVTiDebugPlugin.PLUGIN_ID, "vmEvent");
-	public static final @NonNull TracingOption VM_REQUEST = new TracingOption(QVTiDebugPlugin.PLUGIN_ID, "vmRequest");
-	public static final @NonNull TracingOption VM_RESPONSE = new TracingOption(QVTiDebugPlugin.PLUGIN_ID, "vmResponse");
-	
-	static {
-//		LOCATION.setState(true);
-//		PRE_VISIT.setState(true);
-//		POST_VISIT.setState(true);
-//		VISITOR_STACK.setState(true);
-//		VM_EVENT.setState(true);
-//		VM_REQUEST.setState(true);
-//		VM_RESPONSE.setState(true);
-	}
-	
-	protected QVTiVMEvaluationVisitor(@NonNull QVTiEvaluationVisitor nestedEvaluationVisitor) {
+	protected QVTiVMEvaluationVisitor(@NonNull IQVTiVMEvaluationVisitor nestedEvaluationVisitor) {
 		super(nestedEvaluationVisitor, new Object());
 		delegate.setUndecoratedVisitor(this);
+	}
+	
+	public @NonNull EvaluationVisitor getClonedEvaluator() {
+		IQVTiVMEvaluationEnvironment oldEvaluationEnvironment = getEvaluationEnvironment();
+		IQVTiVMEvaluationEnvironment clonedEvaluationEnvironment = oldEvaluationEnvironment.createClonedEvaluationEnvironment();
+		return new QVTiEvaluationVisitorImpl(getEnvironment(), clonedEvaluationEnvironment);
 	}
 
 	public abstract int getDepth();
@@ -120,12 +106,15 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 	}
 
 	@Override
-	protected @Nullable Object badVisit(@NonNull Visitable visitable, @Nullable Object preState, @NonNull Throwable e) throws RuntimeException {
+	protected @Nullable Object badVisit(@NonNull Visitable visitable, @Nullable Element preState, @NonNull Throwable e) throws RuntimeException {
+		if (e instanceof VMInterruptedExecutionException) {
+			throw (VMInterruptedExecutionException)e;
+		}
 		Element element = (Element)visitable;
 		IVMEvaluationEnvironment<?> evalEnv = getEvaluationEnvironment();
-		Object result = badVisit(evalEnv, element, preState, e);
-		if (POST_VISIT.isActive()) {
-			POST_VISIT.println("[" + Thread.currentThread().getName() + "] " + element.eClass().getName() + ": " + element.toString());
+		Object result = badVisit(evalEnv, element, preState, e);		// FIXME bad code exception here is confusing to user
+		if (VMVirtualMachine.POST_VISIT.isActive()) {
+			VMVirtualMachine.POST_VISIT.println("[" + Thread.currentThread().getName() + "] " + element.eClass().getName() + ": " + element.toString());
 		}
 		return result;
 	}
@@ -138,35 +127,37 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 	}
 
 	@Override
-	protected Object postVisit(@NonNull Visitable visitable, @Nullable Object preState, @Nullable Object result) {
+	protected Object postVisit(@NonNull Visitable visitable, @Nullable Element preState, @Nullable Object result) {
 		Element element = (Element)visitable;
+		if (VMVirtualMachine.POST_VISIT.isActive()) {
+			VMVirtualMachine.POST_VISIT.println("[" + Thread.currentThread().getName() + "] " + element.eClass().getName() + ": " + element.toString() + " => " + result);
+		}
+		setCurrentEnvInstructionPointer(preState);
 		IVMEvaluationEnvironment<?> evalEnv = getEvaluationEnvironment();
 		postVisit(evalEnv, element, preState);
-		if (POST_VISIT.isActive()) {
-			POST_VISIT.println("[" + Thread.currentThread().getName() + "] " + element.eClass().getName() + ": " + element.toString() + " => " + result);
-		}
 		return result;
 	}
 
-	protected abstract void postVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element, Object preState);
+	protected abstract void postVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element, @Nullable Element preState);
 
 	@Override
-	protected Object preVisit(@NonNull Visitable visitable) {
+	protected @Nullable Element preVisit(@NonNull Visitable visitable) {
 		Element element = (Element)visitable;
-		if (PRE_VISIT.isActive()) {
-			PRE_VISIT.println("[" + Thread.currentThread().getName() + "] " + element.eClass().getName() + ": " + element.toString());
+		if (VMVirtualMachine.PRE_VISIT.isActive()) {
+			VMVirtualMachine.PRE_VISIT.println("[" + Thread.currentThread().getName() + "] " + element.eClass().getName() + ": " + element.toString());
 		}
-		setCurrentEnvInstructionPointer(element);
+		Element previousIP = setCurrentEnvInstructionPointer(element);
 		IVMEvaluationEnvironment<?> evalEnv = getEvaluationEnvironment();
-		return preVisit(evalEnv, element);
+		preVisit(evalEnv, element);
+		return previousIP;
 	}
 
 	protected abstract Object preVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element);
 
-	public void throwQVTException(VMInterruptedExecutionException qvtInterruptedExecutionException) {
+//	public void throwQVTException(VMInterruptedExecutionException qvtInterruptedExecutionException) {
 		// TODO Auto-generated method stub
 		
-	}
+//	}
 	   
     protected Element setCurrentEnvInstructionPointer(Element element) {
 		IVMEvaluationEnvironment<?> evalEnv = getEvaluationEnvironment();
@@ -191,8 +182,9 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 	}
 
 	@Override
-	public @NonNull QVTiEvaluationVisitor createNestedEvaluator() {
-		return delegate.createNestedEvaluator();
+	public @NonNull IQVTiVMEvaluationVisitor createNestedEvaluator() {
+//		return delegate.createNestedEvaluator();
+		return new QVTiNestedVMEvaluationVisitor(this, delegate.createNestedEvaluator());
 	}
 
 	@Override
@@ -203,12 +195,6 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 	@Override
 	public @Nullable Object evaluate(@NonNull ExpressionInOCL expressionInOCL) {
 		return delegate.evaluate(expressionInOCL);
-	}
-
-	public @NonNull QVTiEvaluationVisitorImpl getClonedEvaluator() {
-		IQVTiVMEvaluationEnvironment oldEvaluationEnvironment = getEvaluationEnvironment();
-		IQVTiEvaluationEnvironment clonedEvaluationEnvironment = oldEvaluationEnvironment.createClonedEvaluationEnvironment();
-		return new QVTiEvaluationVisitorImpl(getEnvironment(), clonedEvaluationEnvironment);
 	}
 
 	public static IVMEvaluationEnvironment<?> cloneEvaluationEnv(IVMEvaluationEnvironment<?> evaluationEnvironment) {
@@ -260,6 +246,8 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 		return delegate.getRegexPattern(regex);
 	}
 
+	public abstract @NonNull QVTiRootVMEvaluationVisitor getRootEvaluationVisitor();
+
 	@Override
 	public @NonNull DomainType getStaticTypeOf(@Nullable Object value) {
 		return delegate.getStaticTypeOf(value);
@@ -293,8 +281,6 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 	public void setMonitor(@Nullable Monitor monitor) {
 		delegate.setMonitor(monitor);
 	}
-
-	public abstract @NonNull QVTiRootVMEvaluationVisitor getRootEvaluationVisitor();
 
 //	@Override
 //	public @Nullable Object visitTransformation(@NonNull Transformation object) {

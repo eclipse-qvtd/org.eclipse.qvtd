@@ -22,7 +22,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.IQVTiEvaluationEnvironmen
 
 public interface IQVTiVMEvaluationEnvironment extends IQVTiEvaluationEnvironment, IVMEvaluationEnvironment<Transformation>
 {
-	@NonNull IQVTiEvaluationEnvironment createClonedEvaluationEnvironment();
+	@NonNull IQVTiVMEvaluationEnvironment createClonedEvaluationEnvironment();
 	@NonNull Element getCurrentIP();
 	@NonNull UnitLocation getCurrentLocation();
 	@NonNull QVTiVMModelManager getModelManager();

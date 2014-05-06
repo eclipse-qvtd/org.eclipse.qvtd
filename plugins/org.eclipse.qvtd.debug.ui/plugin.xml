@@ -138,7 +138,7 @@
 
    <extension point="org.eclipse.debug.core.launchDelegates">
        <launchDelegate id="org.eclipse.qvtd.debug.ui.DebugLaunchDelegate"
-             delegate="org.eclipse.qvtd.debug.launching.DebugLaunchConfigurationDelegate"
+             delegate="org.eclipse.qvtd.debug.launching.QVTiVMLaunchConfigurationDelegate"
              modes="debug"
              name="QVTi Transformation Debug"
              sourceLocatorId="org.eclipse.qvtd.debug.srclookup.QVTiSourceLookupDirector"

@@ -60,11 +60,10 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
     	QVTiEnvironment qvtEnvironment = getEnvironment();
 		QVTiEnvironmentFactory factory = qvtEnvironment.getFactory();
         IQVTiEvaluationEnvironment nestedEvalEnv = factory.createEvaluationEnvironment(evaluationEnvironment);
-        QVTiEvaluationVisitorImpl ne = new QVTiEvaluationVisitorImpl(qvtEnvironment, nestedEvalEnv);
-        return ne;
+        QVTiEvaluationVisitorImpl nestedEvaluationVisitor = new QVTiEvaluationVisitorImpl(qvtEnvironment, nestedEvalEnv);
+        nestedEvaluationVisitor.setMonitor(getMonitor());
+        return nestedEvaluationVisitor;
     }
-
-	public void dispose() {}
 
 	private static void doMappingCallRecursion(@NonNull QVTiEvaluationVisitor nv, @NonNull Rule rule, @NonNull List<Variable> rootVariables,
 			@NonNull List<List<Object>> rootBindings, int depth) {
