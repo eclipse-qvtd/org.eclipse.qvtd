@@ -35,43 +35,78 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, D extends QVTim
 
 	public @Nullable R visitImperativeModel(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitImperativeModel(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitImperativeModel(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitMapping(@NonNull org.eclipse.qvtd.pivot.qvtimperative.Mapping object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitMapping(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitMapping(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitMappingCall(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingCall object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitMappingCall(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitMappingCall(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitMappingCallBinding(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitMappingCallBinding(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitMappingCallBinding(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitMiddlePropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitMiddlePropertyAssignment(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitMiddlePropertyAssignment(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitMiddlePropertyCallExp(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitMiddlePropertyCallExp(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitMiddlePropertyCallExp(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitVariablePredicate(@NonNull org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitVariablePredicate(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitVariablePredicate(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 }

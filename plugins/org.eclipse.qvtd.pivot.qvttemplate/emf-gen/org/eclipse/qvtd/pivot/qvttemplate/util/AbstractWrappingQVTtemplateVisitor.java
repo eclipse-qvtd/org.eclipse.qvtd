@@ -35,25 +35,45 @@ public abstract class AbstractWrappingQVTtemplateVisitor<R, C, D extends QVTtemp
 
 	public @Nullable R visitCollectionTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitCollectionTemplateExp(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitCollectionTemplateExp(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitObjectTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitObjectTemplateExp(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitObjectTemplateExp(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitPropertyTemplateItem(@NonNull org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitPropertyTemplateItem(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitPropertyTemplateItem(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.TemplateExp object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitTemplateExp(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitTemplateExp(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 }
