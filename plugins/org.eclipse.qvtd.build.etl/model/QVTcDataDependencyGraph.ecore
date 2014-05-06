@@ -18,6 +18,7 @@
         eType="#//Node" eOpposite="#//Node/outgoing"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//EdgeType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredProperty" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="derived" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Element" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="graph" lowerBound="1" eType="#//Graph"
@@ -32,15 +33,10 @@
     <eLiterals name="middleCont"/>
     <eLiterals name="inputCont" value="1"/>
     <eLiterals name="outputCont" value="2"/>
-    <eLiterals name="middleContMany" value="3"/>
-    <eLiterals name="inputContMany" value="4"/>
-    <eLiterals name="outputContMany" value="5"/>
-    <eLiterals name="relation" value="6"/>
-    <eLiterals name="primaryInput" value="7"/>
-    <eLiterals name="derivedInput" value="8"/>
-    <eLiterals name="output" value="9"/>
-    <eLiterals name="doublePrimaryInput" value="10"/>
-    <eLiterals name="doubleDerivedInput" value="11"/>
+    <eLiterals name="relation" value="3"/>
+    <eLiterals name="primaryInput" value="4"/>
+    <eLiterals name="doublePrimaryInput" value="5"/>
+    <eLiterals name="output" value="6"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="NodeType">
     <eLiterals name="mapping"/>

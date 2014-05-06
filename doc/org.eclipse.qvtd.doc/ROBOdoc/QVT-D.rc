@@ -33,7 +33,7 @@ options:
     --index
     --tabsize 8
 headertypes:
-	s  "Scripts"		robo_scripts
+	l  "Libraries"		robo_libraries
 	o  "Operations"		robo_operations	
 ignore files:
     README
