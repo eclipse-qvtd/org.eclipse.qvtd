@@ -1,4 +1,4 @@
-package org.eclipse.qvtd.etl.tests;
+package org.eclipse.qvtd.build.etl.tests;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;

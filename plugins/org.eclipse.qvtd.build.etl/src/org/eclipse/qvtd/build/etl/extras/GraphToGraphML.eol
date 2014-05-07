@@ -43,7 +43,6 @@ g.edgedefault = gml!GraphEdgedefaultType#directed;
 g.id = "G";
 
 var nodeNodeMap : Map;
- graph!Node.all().size().println();
 for (gn in graph!Node.all()) {
     var n = new gml!NodeType;
     n.id = "n" + (loopCount-1);

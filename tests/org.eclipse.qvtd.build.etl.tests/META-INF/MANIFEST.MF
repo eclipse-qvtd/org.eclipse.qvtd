@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Tests
 Bundle-SymbolicName: org.eclipse.qvtd.build.etl.tests
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.eclipse.qvtd.etl.tests.Activator
+Bundle-Activator: org.eclipse.qvtd.build.etl.tests.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.epsilon.common.dt,
