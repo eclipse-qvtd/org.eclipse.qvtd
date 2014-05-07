@@ -201,7 +201,12 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
 	            		QVTiEvaluationVisitor nv = ((QVTiEvaluationVisitor) undecoratedVisitor).createNestedEvaluator();
 	            		// The Undecorated visitor createNestedEvaluator should return the undecorated, so no need
 	            		// to call the getUndecoratedVisitor.
-	                	mappingCall.accept(nv);
+	                	try {
+	                		mappingCall.accept(nv);
+	                	}
+	                	finally {
+	                		nv.dispose();
+	                	}
 	            	}
 //            	}
 //            }
