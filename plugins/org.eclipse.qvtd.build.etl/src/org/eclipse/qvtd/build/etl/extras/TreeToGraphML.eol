@@ -1,0 +1,40 @@
+var root : new gml!DocumentRoot;
+var graphml : new gml!GraphmlType;
+var g : new gml!GraphType;
+
+root.graphml = graphml;
+root.xMLNSPrefixMap.put("", "http://graphml.graphdrawing.org/xmlns");
+root.xMLNSPrefixMap.put("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+root.xMLNSPrefixMap.put("y", "http://www.yworks.com/xml/graphml");
+root.xMLNSPrefixMap.put("yed", "http://www.yworks.com/xml/yed/3");
+root.xSISchemaLocation.put("http://graphml.graphdrawing.org/xmlns", "http://graphml.graphdrawing.org/xmlns/1.1/graphml.xsd");
+
+
+// Graph information
+graphml.graph.add(g);
+g.edgedefault = gml!GraphEdgedefaultType#directed;
+g.id = "G";
+
+for (l in tree!Node.all().select(n | not n.parent.isDefined())) {
+    var n = new gml!NodeType;
+    n.id = "n" + loopCount;
+    g.node.add(n);
+    l.addChildren(n);
+}
+
+"Done".println();
+
+operation tree!Node addChildren (parent : gml!NodeType) {
+    for (c in self.children) {
+        var n = new gml!NodeType;
+        n.id = parent.id + loopCount;
+        g.node.add(n);
+        
+        var e = new gml!EdgeType;
+        e.source = parent.id;
+        e.target = n.id;
+        g.edge.add(e);
+        c.addChildren(n);
+    }
+}
+

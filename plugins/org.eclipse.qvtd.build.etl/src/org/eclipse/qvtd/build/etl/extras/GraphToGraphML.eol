@@ -1,0 +1,126 @@
+var root : new gml!DocumentRoot;
+var graphml : new gml!GraphmlType;
+var g : new gml!GraphType;
+
+root.graphml = graphml;
+root.xMLNSPrefixMap.put("", "http://graphml.graphdrawing.org/xmlns");
+root.xMLNSPrefixMap.put("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+root.xMLNSPrefixMap.put("y", "http://www.yworks.com/xml/graphml");
+root.xMLNSPrefixMap.put("yed", "http://www.yworks.com/xml/yed/3");
+root.xSISchemaLocation.put("http://graphml.graphdrawing.org/xmlns", "http://graphml.graphdrawing.org/xmlns/1.1/graphml.xsd");
+// Yed Node attributes
+// <key attr.name="description" attr.type="string" for="node" id="d5"/>
+var key5 : new gml!KeyType;
+key5.attrName = "description";
+key5.attrType = gml!KeyTypeType#string;
+key5.`for` = gml!KeyForType#node;
+key5.id = "d5"; 
+graphml.key.add(key5);
+// <key for="node" id="d6" yfiles.type="nodegraphics"/>
+var key6 : new gml!KeyType;
+key6.`for` = gml!KeyForType#node;
+key6.id = "d6";
+key6.yfilesType="nodegraphics";
+graphml.key.add(key6);
+
+//<key attr.name="description" attr.type="string" for="edge" id="d8"/>
+var key8 : new gml!KeyType;
+key8.attrName = "description";
+key8.attrType = gml!KeyTypeType#string;
+key8.`for` = gml!KeyForType#edge;
+key8.id = "d8"; 
+graphml.key.add(key8);
+//<key for="edge" id="d9" yfiles.type="edgegraphics"/>
+var key9 : new gml!KeyType;
+key9.`for` = gml!KeyForType#edge;
+key9.id = "d9";
+key9.yfilesType="edgegraphics";
+graphml.key.add(key9);
+
+// Graph information
+graphml.graph.add(g);
+g.edgedefault = gml!GraphEdgedefaultType#directed;
+g.id = "G";
+
+var nodeNodeMap : Map;
+ graph!Node.all().size().println();
+for (gn in graph!Node.all()) {
+    var n = new gml!NodeType;
+    n.id = "n" + (loopCount-1);
+    g.node.add(n);
+    nodeNodeMap.put(gn, n.id);
+    
+    /* Yed Information */
+    var d5 : new gml!DataType;
+    var d6 : new gml!DataType;
+    var sNode : new gml!ShapeNodeType;
+    var label : new gml!NodeLabelType;
+    var shape : new gml!ShapeType1;
+    var fill = new gml!FillType;
+    
+    d5.key = key5.id;
+    n.data.add(d5);
+    d6.key = key6.id;
+    // Label
+    label.value = gn.label;
+    sNode.nodeLabel.add(label);
+    // Shape
+    //  - Mappings = round
+    //  - Domains = square
+    //  Fill (depends on node type) 
+    switch (gn.type) {
+        case graph!NodeType#mapping : fill.color = "#ff6600"; shape.type = gml!ShapeTypeType#ellipse;
+        case graph!NodeType#input : fill.color = "#ff00ff"; shape.type = gml!ShapeTypeType#rectangle;
+        case graph!NodeType#middle : fill.color = "#ffcc00"; shape.type = gml!ShapeTypeType#rectangle;
+        case graph!NodeType#output : fill.color = "#99ccff"; shape.type = gml!ShapeTypeType#rectangle;
+    }
+    
+    sNode.shape = shape;
+    
+    fill.transparent = false;
+    sNode.fill = fill;
+    d6.shapeNode = sNode;
+    n.data.add(d6);
+    
+}
+
+for (gE in graph!Edge.all()) {
+    var e = new gml!EdgeType;
+    e.source = nodeNodeMap.get(gE.source);
+    e.target = nodeNodeMap.get(gE.target);
+    e.id = "e" + (loopCount-1);
+    /* Yed Information */
+    var d9 = new gml!DataType;
+    d9.key = key9.id;
+    e.data.add(d9);
+    var plEdge = new gml!PolyLineEdgeType;
+    var arrow : new gml!ArrowsType;
+    arrow.target = gml!ArrowTypeType#standard;
+    arrow.source = gml!ArrowTypeType#none;
+    var style : new gml!LineStyleType;
+    style.type = gml!LineTypeType#line;    
+    switch (gE.type) {
+        case graph!EdgeType#primaryInput : style.color = "#008000";
+        case graph!EdgeType#doublePrimaryInput : style.color = "#ff0000";
+        case graph!EdgeType#output : style.color = "#000000";
+        case graph!EdgeType#inputCont : style.color = "#ff00ff";
+        case graph!EdgeType#middleCont : style.color = "#ffcc00";
+        case graph!EdgeType#outputCont : style.color = "#0000ff";
+        case graph!EdgeType#relation : style.color = "#993366";
+    }
+    if (gE.derived) {
+        style.type = gml!LineTypeType#dotted; 
+    }
+    var bend = new gml!BendStyleType;
+    bend.smoothed = false;
+    plEdge.bendStyle= bend;
+    plEdge.arrows= arrow;
+    plEdge.lineStyle = style;
+    d9.polyLineEdge = plEdge;
+    g.edge.add(e);
+}
+
+"Done".println();
+
+
+
