@@ -45,7 +45,6 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.part.FileEditorInput;
 
-
 public class QVTiDebugModelPresentation implements IDebugModelPresentation, IDebugEditorPresentation, IDebugModelPresentationExtension, IColorProvider, ILabelProvider {
 	
 	public QVTiDebugModelPresentation() {
@@ -56,9 +55,15 @@ public class QVTiDebugModelPresentation implements IDebugModelPresentation, IDeb
 	}
 
     public Image getImage(Object element) {
-//    	System.out.println("getImage: " + element.getClass().getSimpleName() + " " + element);
-    	if (element instanceof VMStackFrame) {
-        	VMStackFrame frame = (VMStackFrame) element;
+    	if (element instanceof VMDebugTarget) {
+    		return QVTiDebugImages.getImage(QVTiDebugImages.TRANSFORMATION);
+    	}
+    	else if (element instanceof VMThread) {
+        	return null;
+        }
+    	else if (element instanceof VMStackFrame) {
+        	return null;
+/*        	VMStackFrame frame = (VMStackFrame) element;
     		VMLocationData location = frame.getLocation();
     		String elementSignature = location.getElementSignature();
             if (elementSignature != null) {
@@ -66,7 +71,7 @@ public class QVTiDebugModelPresentation implements IDebugModelPresentation, IDeb
             }
             else {
     			return QVTiDebugImages.getImage(QVTiDebugImages.TRANSFORMATION);
-            } 
+            }  */
         }
         else if(element instanceof VMVariable) {
     		VMVariable var = (VMVariable) element;
@@ -111,17 +116,28 @@ public class QVTiDebugModelPresentation implements IDebugModelPresentation, IDeb
 	}
 
 	public String getText(Object element) {
-//    	System.out.println("getText: " + element.getClass().getSimpleName() + " " + element);
-        if (element instanceof VMStackFrame) {
+        if (element instanceof VMDebugTarget) {
+        	VMDebugTarget debugTarget = (VMDebugTarget) element;
+			String moduleName = debugTarget.getMainModuleName();
+			String launchConfigName = debugTarget.getLaunch().getLaunchConfiguration().getName();
+			return NLS.bind(DebugUIMessages.QVTiDebugModelPresentation_TransformationLabel, moduleName, launchConfigName);
+        }
+        else if (element instanceof VMThread) {
+        	VMThread thread = (VMThread) element;
+        	String name = "main"; //$NON-NLS-1$
+        	String state = thread.isSuspended() ? DebugUIMessages.QVTiDebugModelPresentation_Suspended : DebugUIMessages.QVTiDebugModelPresentation_Running;
+        	return MessageFormat.format(DebugUIMessages.QVTiDebugModelPresentation_ThreadLabel, name, state);
+        } 
+        else if (element instanceof VMStackFrame) {
         	VMStackFrame frame = (VMStackFrame) element;
     		VMLocationData location = frame.getLocation();
     		String source = frame.getUnitURI().lastSegment();
     		int line = frame.getLineNumber();
             StringBuilder s = new StringBuilder();
-            s.append(location.getModule());
+//            s.append(location.getModule());
             String elementSignature = location.getElementSignature();
             if (elementSignature != null) {
-            	s.append("::");
+//            	s.append("::");
             	s.append(elementSignature);
             }
         	s.append(" - ");
@@ -130,18 +146,6 @@ public class QVTiDebugModelPresentation implements IDebugModelPresentation, IDeb
         	s.append(line);
             return s.toString();
         } 
-        else if (element instanceof VMThread) {
-        	VMThread thread = (VMThread) element;
-        	String name = "main"; //$NON-NLS-1$
-        	String state = thread.isSuspended() ? DebugUIMessages.QVTiDebugModelPresentation_Suspended : DebugUIMessages.QVTiDebugModelPresentation_Running;
-        	return MessageFormat.format(DebugUIMessages.QVTiDebugModelPresentation_ThreadLabel, name, state);
-        } 
-        else if (element instanceof VMDebugTarget) {
-        	VMDebugTarget debugTarget = (VMDebugTarget) element;
-			String moduleName = debugTarget.getMainModuleName();
-			String launchConfigName = debugTarget.getLaunch().getLaunchConfiguration().getName();
-			return NLS.bind(DebugUIMessages.QVTiDebugModelPresentation_TransformationLabel, moduleName, launchConfigName);
-        }
         return null;
 	}
 
