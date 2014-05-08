@@ -36,13 +36,13 @@ operation mm!EPackage iterativeDFS() {
 	
 	var parentNode = new tree!Node;
     
-    parentNode.EClassifierName = self.name;
+    parentNode.EClassName = self.name;
 	maxDepth = 1;
     
     while (iterate) {
         maxDepth.println("IterativeDFS ");
         change = false;
-        for (c in self.eClassifiers.select(c | c.isKindOf(mm!EClassifier))) {
+        for (c in self.eClassifiers.select(c | c.isKindOf(mm!EClass))) {
             change = c.dfs(1, maxDepth, parentNode) or change;
         }
         if (not change) {
@@ -61,13 +61,13 @@ operation mm!EPackage iterativeDFS() {
 }
 
 // Returns true if added
-operation mm!EClassifier dfs(depth, maxDepth, parentNode) : Boolean {
+operation mm!EClass dfs(depth, maxDepth, parentNode) : Boolean {
     
     var change = false;
     //"Max depth reached, do nothing".println(tabs);
     if (depth <= maxDepth) {
     	// If self is abstract, consider all subclasses at same depth (flattening)
-	    if (self.isTypeOf(mm!EClass) and self.abstract) {
+	    if (self.abstract) {
 	        //"Abstract, do inheritance".println(tabs);
 	        for (sc in mm!EClass.all().select(c | c.eSuperTypes.includes(self))) {
 	        	if (sc.name <> parentNode.type) {
@@ -82,25 +82,21 @@ operation mm!EClassifier dfs(depth, maxDepth, parentNode) : Boolean {
 	        } else { 
 	            n = new tree!Node;
 	            //n.data.println();
-	            n.EClassifierName = self.name;
-	            if (self.isTypeOf(mm!EClass)) {
-	               n.superTypes = self.eSuperTypes.select(st | st.abstract).collect(st | st.name).flatten();
-	            }
+	            n.EClassName = self.name;
+	            n.superTypes = self.eSuperTypes.select(st | st.abstract).collect(st | st.name).flatten();
 	            visited.put(self, n);
 	        }
 	        if (depth == maxDepth) {
 	            n.parent.add(parentNode);
 	            change = true;
 	        }
-	        if (self.isTypeOf(mm!EClass)) {
-	        	// Navigate Containment, mine and inherited
-	        	//self.eStructuralFeatures.select(sf : mm!EReference | sf.containment)
-	            //		.includingAll(self.getAllSuperTypes().collect(st | st.eStructuralFeatures.select(sf : mm!EReference | sf.containment)).flatten()).println();
-	            for (sf in self.eStructuralFeatures.select(sf : mm!EReference | sf.containment)
-	            		.includingAll(self.getAllSuperTypes().collect(st | st.eStructuralFeatures.select(sf : mm!EReference | sf.containment))).flatten()) {
-					change = sf.eReferenceType.dfs(depth+1, maxDepth, n) or change;
-	            }
-	        }
+        	// Navigate Containment, mine and inherited
+        	//self.eStructuralFeatures.select(sf : mm!EReference | sf.containment)
+            //		.includingAll(self.getAllSuperTypes().collect(st | st.eStructuralFeatures.select(sf : mm!EReference | sf.containment)).flatten()).println();
+            for (sf in self.eStructuralFeatures.select(sf : mm!EReference | sf.containment)
+            		.includingAll(self.getAllSuperTypes().collect(st | st.eStructuralFeatures.select(sf : mm!EReference | sf.containment))).flatten()) {
+				change = sf.eReferenceType.dfs(depth+1, maxDepth, n) or change;
+            }
 	    }
     }
     return change;
