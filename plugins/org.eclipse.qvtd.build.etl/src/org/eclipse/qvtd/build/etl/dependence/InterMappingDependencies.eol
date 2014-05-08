@@ -10,15 +10,16 @@
  ******************************************************************************/
 import "../helpers/DataDependenceGraphHelpers.eol";
 
-/**
- * Inter Mapping Dependencies. A set of EOL operations to perform inter-mapping
+/****l* /org.eclipse.qvtd.build.etl/dependence/InterMappingDependencies
+ * NAME
+ *  InterMappingDependencies -- A set of EOL operations to perform inter-mapping
  * relations analysis for a QVT transformation.
  *
- * @cond ddg  A data dependence graph
- * @cond QVT  A QVTx AST model
- * @cond config The QVT transformation configuration
+ * SEE ALSO
+ *    
+ ******
  */
- 
+  
 /**
  * Analysis of the inter-mapping data dependencies. Creates a directed graph in
  * which an edge is created between mappings A and B, if an input var in B has
@@ -47,10 +48,10 @@ operation QVT!Transformation interMappingDependencies(graph : ddg!Graph, inputVa
 	            for (vA in outputVarMap.get(rA)) {
 	                if (x.isKindOf(vA.type, vB.type)) {
 	                    //vA.name.println("to " + rA.name + " var ");
-	                    var e = graph.owningModel().createInstance("Edge");
+	                    var e = graph.owningModel().createInstance("DependencyEdge");
 	                    e.source = graph.getNodeForQvtAstNode(rA, nodeMap);
 	                    e.target = graph.getNodeForQvtAstNode(rB, nodeMap);
-	                    e.type = graph.owningModel().getEnumerationValue("EdgeType", "output");
+	                    e.direction = ddg!DependencyDirection#output;
 	                    graph.element.add(e);
 	                }
 	            }

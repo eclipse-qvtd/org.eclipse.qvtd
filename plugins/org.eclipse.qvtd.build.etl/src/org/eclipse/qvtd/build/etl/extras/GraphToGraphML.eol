@@ -64,29 +64,39 @@ for (gn in graph!Node.all()) {
     label.value = gn.label;
     sNode.nodeLabel.add(label);
     // Shape
-    //  - Mappings = round
-    //  - Domains = square
-    //  Fill (depends on node type) 
-    switch (gn.type) {
-        case graph!NodeType#mapping : fill.color = "#ff6600"; shape.type = gml!ShapeTypeType#ellipse;
-        case graph!NodeType#input : fill.color = "#ff00ff"; shape.type = gml!ShapeTypeType#rectangle;
-        case graph!NodeType#middle : fill.color = "#ffcc00"; shape.type = gml!ShapeTypeType#rectangle;
-        case graph!NodeType#output : fill.color = "#99ccff"; shape.type = gml!ShapeTypeType#rectangle;
+    //  - MappingNode = round, orange
+    //  - DataTypeNode = diamond
+    //  - ClassNode = square
+    if (gn.isTypeOf(graph!MappingNode)) {
+        shape.type = gml!ShapeTypeType#ellipse;
+        fill.color = "#ff6600";
+    } else if (gn.isTypeOf(graph!DataTypeNode)) {
+        shape.type = gml!ShapeTypeType#diamond;
+    } else if (gn.isTypeOf(graph!ClassNode)) {
+        shape.type = gml!ShapeTypeType#rectangle;
     }
-    
+    if (gn.isTypeOf(graph!ClassNode)) {
+        switch (gn.`model`) {
+            case (graph!Model#input):
+                fill.color = "#ff00ff";
+            case (graph!Model#middle):
+                fill.color = "#ffcc00";
+            case (graph!Model#output):
+                fill.color = "#99ccff";
+        }
+        
+    }    
     sNode.shape = shape;
-    
     fill.transparent = false;
     sNode.fill = fill;
     d6.shapeNode = sNode;
     n.data.add(d6);
-    
 }
 
-for (gE in graph!Edge.all()) {
+for (ge in graph!Edge.all()) {
     var e = new gml!EdgeType;
-    e.source = nodeNodeMap.get(gE.source);
-    e.target = nodeNodeMap.get(gE.target);
+    e.source = nodeNodeMap.get(ge.source);
+    e.target = nodeNodeMap.get(ge.target);
     e.id = "e" + (loopCount-1);
     /* Yed Information */
     var d9 = new gml!DataType;
@@ -97,22 +107,30 @@ for (gE in graph!Edge.all()) {
     arrow.target = gml!ArrowTypeType#standard;
     arrow.source = gml!ArrowTypeType#none;
     var style : new gml!LineStyleType;
-    style.type = gml!LineTypeType#line;    
-    switch (gE.type) {
-        case graph!EdgeType#primaryInput : style.color = "#008000";
-        case graph!EdgeType#doublePrimaryInput : style.color = "#ff0000";
-        case graph!EdgeType#output : style.color = "#000000";
-        case graph!EdgeType#inputCont : style.color = "#ff00ff";
-        case graph!EdgeType#middleCont : style.color = "#ffcc00";
-        case graph!EdgeType#outputCont : style.color = "#0000ff";
-        case graph!EdgeType#relation : style.color = "#993366";
+    style.type = gml!LineTypeType#line;
+    if (ge.isTypeOf(graph!DependencyEdge)) {
+        if (ge.multiple) {
+            style.color = "#ff0000";
+        } else {
+            style.color = "#008000";
+        }
+        if (ge.derived) {
+	        style.type = gml!LineTypeType#dotted; 
+	    }
+	    
+    } else if (ge.isTypeOf(graph!ReferenceEdge)) {
+        style.color = "#993366";
+    } else if (ge.isTypeOf(graph!ContainmentEdge)) {
+        switch (ge.`model`) {
+            case (graph!Model#input):
+                style.color = "#ff00ff";
+            case (graph!Model#middle):
+                style.color = "#ffcc00";
+            case (graph!Model#output):
+                style.color = "#0000ff";
+        }
+        
     }
-    if (gE.derived) {
-        style.type = gml!LineTypeType#dotted; 
-    }
-    var bend = new gml!BendStyleType;
-    bend.smoothed = false;
-    plEdge.bendStyle= bend;
     plEdge.arrows= arrow;
     plEdge.lineStyle = style;
     d9.polyLineEdge = plEdge;

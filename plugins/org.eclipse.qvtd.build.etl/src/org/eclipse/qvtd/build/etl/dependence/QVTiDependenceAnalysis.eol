@@ -13,7 +13,7 @@ import "InterMappingDependencies.eol";
 import "MappingDataDependencies.eol";
 
 
-/****s* org.eclipse.qvtd.build.etl/dependence/QVTiDependenceAnalysis
+/****l* org.eclipse.qvtd.build.etl/dependence/QVTiDependenceAnalysis
  * NAME
  *  QVTiDependenceAnalysis -- Perform data dependence analysis on a QVTm
  *  (partitioned) transformation.

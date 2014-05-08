@@ -10,112 +10,35 @@
  ******************************************************************************/
 import "QVTHelpers.eol";
 
-/**
- * Data Dependencies Helpers. A set of EOL helpers to perform mapping data
+/****l* /org.eclipse.qvtd.build.etl/helpers/DataDependenceGraphHelpers
+ * NAME
+ *  DataDependenceGraphHelpers -- A set of EOL helpers to perform mapping data
  * dependence analysis for a QVT transformation.
  *
- * @cond ddg  A data dependence graph
- * @cond QVT  A QVTx AST model
- * @cond config The QVT transformation configuration
+ * SEE ALSO
+ *    
+ ******
  */
- 
-/**
- * Get the correspoiding graph node for the AST node. If a graph node for the
- * AST node does not exist, it creates a new one. If it exists, it returns
- * the previously created one. For porformance, the nodeMap attribute works
- * as a cache for previously created nodes.
- * 
- * @context ddg!Graph The graph in which the node should exist
- * @param astNode The QVT AST node for whihc the corresponding graph node is wanted
- * @param nodeMap The map to keep a cache of AST - Node relations
- * 
- */
-operation ddg!Graph getNodeForQvtAstNode(astNode : QVT!NamedElement, nodeMap : Map) : ddg!Node {
-    var n;
-    if (nodeMap.containsKey(astNode)) {
-        n = nodeMap.get(astNode);
-    } else {
-	    n = self.owningModel().createInstance("Node");
-	    n.label = getNodeName(astNode);
-	    n.qvtAstNode = astNode;
-	    n.type = self.getNodeType(astNode);   
-	    nodeMap.put(astNode, n);
-	    self.element.add(n);
-    }
-    return n;
-}
 
-operation getNodeName(m : QVT!Mapping) : String {
-    return m.name;
-}
-
-operation getNodeName(v : QVT!Variable) : String {
-    return v.type.name;
-}
-
-operation ddg!Graph getNodeType(m : QVT!Mapping) : Any {
-    //return ddg!NodeType#mapping;
-    return self.owningModel().getEnumerationValue("NodeType", "mapping");
-}
-
-operation ddg!Graph getNodeType(v : QVT!Variable) : Any {
-
-    if (v.oppositePattern().area.name == "middle") {
-        return self.owningModel().getEnumerationValue("NodeType", "middle");//ddg!NodeType#middle;
-    } else if(isInputDomain(v.oppositePattern().area)) {
-        return self.owningModel().getEnumerationValue("NodeType", "input");//ddg!NodeType#input;
-    } else if(isOutputDomain(v.oppositePattern().area)) {
-        return self.owningModel().getEnumerationValue("NodeType", "output");//ddg!NodeType#output;      
-    } 
-}
-
-
-operation ddg!Graph getNodeForTreeNode(treeNode : tree!Node, nodeMap : Map, nodeType) : ddg!Node {
-    var n;
-    if (nodeMap.containsKey(treeNode)) {
-        n = nodeMap.get(treeNode);
-    } else {
-        n = self.owningModel().createInstance("Node");
-        n.label = treeNode.EClassifierName;
-        n.type = nodeType;   
-        nodeMap.put(treeNode, n);
-        self.element.add(n);
-    }
-    return n;
-}
-
-operation ddg!Graph getNodeCopy(ddNode : ddg!Node, mergeMap : Map) : ddg!Node {
-    var n;
-    if (mergeMap.containsKey(ddNode)) {
-        n = mergeMap.get(ddNode);
-    } else {
-        n = self.owningModel().createInstance("Node");
-        n.label = ddNode.label;
-        n.qvtAstNode = ddNode.qvtAstNode;
-        switch (ddNode.type) {
-            case ddg!NodeType#mapping : n.type = ddg!NodeType#mapping;
-            case ddg!NodeType#input : n.type = ddg!NodeType#input;
-            case ddg!NodeType#middle : n.type = ddg!NodeType#middle;
-            case ddg!NodeType#output : n.type = ddg!NodeType#output;      
-        }
-        mergeMap.put(ddNode, n);
-        self.element.add(n);
-    }
-    return n;
-}
-
-
-/**
- * Analysis of variable relations. Creates an edge between variables if they
- * realted by either a containment relation or a trace relations. A Containment
- * relation exists if both variables' types are in the same metamodel and if 
- * the type of the context variable has a containment association of the type
- * of the loop variable. 
- * 
+/****o* org.eclipse.qvtd.build.etl/helpers/DataDependenceGraphHelpers/variableRelations
+ * NAME
+ *  variableRelations - Analysis of variable relations.
+ * FUNCTION
+ *  Creates an edge between variables if they realted by either a reference. A
+ *  containment relation exists if both variables' types are in the same
+ *  metamodel and if the type of the context variable has a containment
+ *  association of the type of the loop variable. 
  *
- * @context QVT!Variable  The variable being analyzed
- * @param graph The graph to populate
- * @param varMap   The map of AST variables to nodes
+ * CONTEXT
+ *  QVT!Variable  The variable being analyzed
+ * PARAMETERS
+ *  graph The graph to populate
+ *  vars The variables to look for relations
+ *  varMap The map of variables to graph nodes
+ * RESULT
+ *  An edge is added to the graph if there is a relation
+ * SEE ALSO
+ *
  */
 operation QVT!Variable variableRelations(graph : ddg!Graph, vars : Set, varMap : Map) {
 
@@ -125,62 +48,171 @@ operation QVT!Variable variableRelations(graph : ddg!Graph, vars : Set, varMap :
         var vbNode = graph.getNodeForQvtAstNode(vB, varMap);
         var refProp = self.hasRelation(vB);
         if(refProp <> null) {
-           var e = graph.owningModel().createInstance("Edge");
+            var e;
+            if (refProp.isContainer()) {
+                e = graph.owningModel().createInstance("ContainmentEdge");
+                e.`model` = vbNode.`model`;
+           } else {
+                e = graph.owningModel().createInstance("ReferenceEdge");
+           }
            e.source = vaNode;
            e.target = vbNode;
            e.referredProperty = refProp;
-           if (refProp.isContainer()) {
-               switch (vbNode.type) {
-	               case(graph.owningModel().getEnumerationValue("NodeType", "middle")) :
-	                   e.type = graph.owningModel().getEnumerationValue("EdgeType", "middleCont");
-	               case(graph.owningModel().getEnumerationValue("NodeType", "input")) :
-	                   e.type = graph.owningModel().getEnumerationValue("EdgeType", "inputCont");
-	               case(graph.owningModel().getEnumerationValue("NodeType", "output")) :
-	                   e.type = graph.owningModel().getEnumerationValue("EdgeType", "outputCont");
-	           }
-           } else {
-               e.type = graph.owningModel().getEnumerationValue("EdgeType", "relation");
-           }
            graph.element.add(e);
         }
     }
+} 
+
+/****o* org.eclipse.qvtd.build.etl/helpers/DataDependenceGraphHelpers/getNodeForQvtAstNode 
+ * NAME
+ *  getNodeForQvtAstNode - Get the correspoiding graph node for the AST node.
+ * FUNCTION
+ *  If a graph node for the AST node does not exist, it creates a new one. If it
+ *  exists, it returns the previously created one.
+ *
+ * CONTEXT
+ *  ddg!Graph   The data dependence graph   
+ * PARAMETERS
+ *  astNode The QVT AST node for whihc the corresponding graph node is wanted
+ *  nodeMap The map to keep a cache of AST - Node relations
+ * RESULT
+ *  ddg!Node The node that corresponds to the AST node
+ * SEE ALSO
+ *
+ */ 
+operation ddg!Graph getNodeForQvtAstNode(astNode : QVT!NamedElement, nodeMap : Map) : ddg!Node {
+    var n;
+    if (nodeMap.containsKey(astNode)) {
+        n = nodeMap.get(astNode);
+    } else {
+        // TODO Different node types for different AST node types. If the type of the AST node is  DataType, things change!
+        if (astNode.isTypeOf(QVT!Mapping)) {
+            n = self.owningModel().createInstance("MappingNode");
+            n.label = astNode.name;
+        } else if (astNode.isKindOf(QVT!Variable)) {
+            if (astNode.type.isTypeOf(QVT!PrimitiveType)) {
+                n = self.owningModel().createInstance("DataTypeNode");
+                "is prmitive ".println();
+            } else {
+                n = self.owningModel().createInstance("ClassNode");
+                if (isMiddleDomain(astNode.oppositePattern().area)) {
+                    n.`model` = ddg!Model#middle;
+			    } else if(isInputDomain(astNode.oppositePattern().area)) {
+                    n.`model` = ddg!Model#input;
+			    } else if(isOutputDomain(astNode.oppositePattern().area)) {
+			        n.`model` = ddg!Model#output;
+			    }
+            }
+            n.label = astNode.type.name;
+        } else {
+            astNode.type().name.println("why? ");
+        }
+	    n.qvtAstNode = astNode;
+	    nodeMap.put(astNode, n);
+	    self.element.add(n);
+    }
+    return n;
 }
 
-/**
- * Import metamodel containment trees into data dependence graph. Copies all
- * the nodes in the metamodel containment tree into the data dependence graph.
+/****o* org.eclipse.qvtd.build.etl/helpers/DataDependenceGraphHelpers/getNodeForTreeNode
+ * NAME
+ *  getNodeForTreeNode - Get the correspoiding graph node for the tree node.
+ * FUNCTION
+ *  If a graph node for the tree node does not exist, it creates a new one. If it
+ *  exists, it returns the previously created one.
  *
- * @context ddg!Graph   The graph to where the tree is imported
- * @param treeNodes A set of the tree nodes to be copied into the graph
- * @param treeType  The type of tree being imported: l=left,m=middle,r=right
+ * CONTEXT
+ *  ddg!Graph   The data dependence graph   
+ * PARAMETERS
+ *  treeNode The tree node for which the corresponding graph node is wanted
+ *  nodeMap The map to keep a cache of Tree - Node relations
+ * RESULT
+ *  ddg!Node The node that corresponds to the AST node
+ * SEE ALSO
+ *
+ */ 
+operation ddg!Graph getNodeForTreeNode(treeNode : tree!Node, nodeMap : Map) : ddg!Node {
+    var n;
+    if (nodeMap.containsKey(treeNode)) {
+        n = nodeMap.get(treeNode);
+    } else {
+        n = self.owningModel().createInstance("ClassNode");
+        n.label = treeNode.EClassifierName;
+        nodeMap.put(treeNode, n);
+        self.element.add(n);
+    }
+    return n;
+}
+
+/****o* org.eclipse.qvtd.build.etl/helpers/DataDependenceGraphHelpers/getNodeCopy
+ * NAME
+ *  getNodeCopy - Get a copy of the Node
+ * FUNCTION
+ *  Creates a new Node and copies all the attributes from the original one
+ * CONTEXT
+ *  ddg!Graph   The graph that owns the node
+ * PARAMETERS
+ *  ddNode The node to copy
+ *  mergeMap  The cache of copyed nodes
+ * SEE ALSO
+ *
  */
+operation ddg!Graph getNodeCopy(ddNode : ddg!Node, mergeMap : Map) : ddg!Node {
+    var n;
+    if (mergeMap.containsKey(ddNode)) {
+        n = mergeMap.get(ddNode);
+    } else {
+        if (ddNode.isTypeOf(ddg!ClassNode)) {
+            n = self.owningModel().createInstance("ClassNode");
+            n.`model` = ddNode.`model`;
+        } else if (ddNode.isTypeOf(ddg!DataTypeNode)) {
+            n = self.owningModel().createInstance("DataTypeNode");
+            n.attribute = ddNode.attribute;
+        } else if (ddNode.isTypeOf(ddg!MappingNode)) {
+            n = self.owningModel().createInstance("MappingNode");
+        }
+        n.label = ddNode.label;
+        n.qvtAstNode = ddNode.qvtAstNode;
+        mergeMap.put(ddNode, n);
+        self.element.add(n);
+    }
+    return n;
+}
+
+
+
+/****o* org.eclipse.qvtd.build.etl/helpers/DataDependenceGraphHelpers/importContainmentTree
+ * NAME
+ *  importContainmentTree - Import metamodel containment trees into data dependence graph.
+ * FUNCTION
+ *  Copies all the nodes in the metamodel containment tree into the data
+ *  dependence graph and creates containment edges between them.
+ * CONTEXT
+ *  ddg!Graph   The graph to where the tree is imported
+ * PARAMETERS
+ *  treeNodes A set of the tree nodes to be copied into the graph
+ *  treeType  The type of tree being imported: l=left,m=middle,r=right
+ * SEE ALSO
+ *
+ */ 
 operation ddg!Graph importContainmentTree(treeNodes : Collection, treeType : String, mergeMap : Map) {
-    var nodeType;
-    var edgeType;
+    var m;
     switch (treeType) {
         case("l") :
-            nodeType = self.owningModel().getEnumerationValue("NodeType", "input");
-            edgeType = self.owningModel().getEnumerationValue("EdgeType", "inputCont");
-            //nodeType = ddg!NodeType#input;
-            //edgeType = ddg!EdgeType#inputCont;
+            m = ddg!Model#input;
         case("m") :
-            nodeType = self.owningModel().getEnumerationValue("NodeType", "middle");
-            edgeType = self.owningModel().getEnumerationValue("EdgeType", "middleCont");
-            //nodeType = ddg!NodeType#middle;
-            //edgeType = ddg!EdgeType#middleCont;
+            m = ddg!Model#middle;
         case("r") :
-            nodeType = self.owningModel().getEnumerationValue("NodeType", "output");
-            edgeType = self.owningModel().getEnumerationValue("EdgeType", "outputCont");
-            //nodeType = ddg!NodeType#output;
-            //edgeType = ddg!EdgeType#outputCont;
+            m = ddg!Model#output;
     }
     for (tn in treeNodes.excluding(treeNodes.selectOne(n | n.parent.isEmpty()))) {
-        var n = self.getNodeForTreeNode(tn, mergeMap, nodeType);
+        var n = self.getNodeForTreeNode(tn, mergeMap);
+        n.`model` = m;
         for (c in tn.children) {
-            var e = self.owningModel().createInstance("Edge");
-            e.type = edgeType;
+            var e = self.owningModel().createInstance("ContainmentEdge");
+            e.`model` = m;
             e.source = n;
-            e.target = self.getNodeForTreeNode(c, mergeMap, nodeType);
+            e.target = self.getNodeForTreeNode(c, mergeMap);
             self.element.add(e);
         }
     }  
