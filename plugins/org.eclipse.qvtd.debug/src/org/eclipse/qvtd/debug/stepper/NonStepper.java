@@ -17,7 +17,7 @@ package org.eclipse.qvtd.debug.stepper;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.stepper.AbstractStepper;
-import org.eclipse.ocl.examples.debug.vm.evaluator.IRootVMEvaluationVisitor;
+import org.eclipse.ocl.examples.debug.vm.evaluator.IVMRootEvaluationVisitor;
 import org.eclipse.ocl.examples.pivot.Element;
 
 public class NonStepper extends AbstractStepper
@@ -25,12 +25,12 @@ public class NonStepper extends AbstractStepper
 	public static @NonNull NonStepper INSTANCE = new NonStepper();
 	
 	@Override
-	public @Nullable Element isPostStoppable(@NonNull IRootVMEvaluationVisitor<?> rootVMEvaluationVisitor, @NonNull Element childElement, @Nullable Element parentElement) {
+	public @Nullable Element isPostStoppable(@NonNull IVMRootEvaluationVisitor<?> rootVMEvaluationVisitor, @NonNull Element childElement, @Nullable Element parentElement) {
 		return null;
 	}
 
 	@Override
-	public boolean isPreStoppable(@NonNull IRootVMEvaluationVisitor<?> rootVMEvaluationVisitor, @NonNull Element element) {
+	public boolean isPreStoppable(@NonNull IVMRootEvaluationVisitor<?> rootVMEvaluationVisitor, @NonNull Element element) {
 		return false;
 	}
 }

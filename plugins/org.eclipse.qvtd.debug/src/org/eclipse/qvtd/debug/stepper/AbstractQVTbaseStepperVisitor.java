@@ -42,7 +42,7 @@ public abstract class AbstractQVTbaseStepperVisitor
 	 * @param context my initial result value
 	 */
 	protected AbstractQVTbaseStepperVisitor(@NonNull Object context) {
-		super();
+		super(context);
 	}	
 
 	public @Nullable IStepper visitBaseModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.BaseModel object) {

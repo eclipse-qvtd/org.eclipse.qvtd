@@ -27,7 +27,7 @@ public interface IQVTiVMEvaluationEnvironment extends IQVTiEvaluationEnvironment
 	@NonNull UnitLocation getCurrentLocation();
 	@NonNull QVTiVMModelManager getModelManager();
 	@Nullable IQVTiVMEvaluationEnvironment getParentEvaluationEnvironment();
-	@NonNull QVTiRootVMEvaluationEnvironment getRootEvaluationEnvironment();
+	@NonNull QVTiVMRootEvaluationEnvironment getRootEvaluationEnvironment();
 	void processDeferredTasks();
 	@NonNull Element setCurrentIP(@NonNull Element element);
 	void throwVMException(@NonNull VMRuntimeException qvtInterruptedExecutionException);

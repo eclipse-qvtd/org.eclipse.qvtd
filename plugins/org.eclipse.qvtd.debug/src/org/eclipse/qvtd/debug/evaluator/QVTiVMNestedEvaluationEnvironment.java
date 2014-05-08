@@ -105,8 +105,8 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 	}
 
 	@Override
-	public @NonNull QVTiRootVMEvaluationEnvironment getRootEvaluationEnvironment() {
-		return (QVTiRootVMEvaluationEnvironment) rootEvaluationEnvironment;
+	public @NonNull QVTiVMRootEvaluationEnvironment getRootEvaluationEnvironment() {
+		return (QVTiVMRootEvaluationEnvironment) rootEvaluationEnvironment;
 	}
 
 	public boolean isDeferredExecution() {

@@ -54,7 +54,7 @@ public class QVTiVMEnvironmentFactory extends QVTiEnvironmentFactory implements 
 	}
 
 	public @NonNull IQVTiVMEvaluationEnvironment createEvaluationEnvironment(@NonNull QVTiModelManager modelManager, @NonNull Transformation transformation) {
-		return new QVTiRootVMEvaluationEnvironment(getMetaModelManager(), modelManager, transformation, ++envId);
+		return new QVTiVMRootEvaluationEnvironment(getMetaModelManager(), modelManager, transformation, ++envId);
 	}
 
 	@Override
@@ -67,8 +67,8 @@ public class QVTiVMEnvironmentFactory extends QVTiEnvironmentFactory implements 
 		return new QVTiVMNestedEvaluationEnvironment((IQVTiVMEvaluationEnvironment) parent, ++envId, ((IQVTiVMEvaluationEnvironment)parent).getOperation());
 	}
 
-	public @NonNull QVTiRootVMEvaluationVisitor createEvaluationVisitor(@NonNull QVTiVMEnvironment env, @NonNull IQVTiEvaluationEnvironment evalEnv) {
-		return new QVTiRootVMEvaluationVisitor(env, (IQVTiVMEvaluationEnvironment) evalEnv, DomainUtil.nonNullState(shell));
+	public @NonNull QVTiVMRootEvaluationVisitor createEvaluationVisitor(@NonNull QVTiVMEnvironment env, @NonNull IQVTiEvaluationEnvironment evalEnv) {
+		return new QVTiVMRootEvaluationVisitor(env, (IQVTiVMEvaluationEnvironment) evalEnv, DomainUtil.nonNullState(shell));
 	}
 
 	@Override

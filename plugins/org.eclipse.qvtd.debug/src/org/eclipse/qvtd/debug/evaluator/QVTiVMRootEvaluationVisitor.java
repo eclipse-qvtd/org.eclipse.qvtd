@@ -28,7 +28,7 @@ import org.eclipse.ocl.examples.debug.vm.VMBreakpointManager;
 import org.eclipse.ocl.examples.debug.vm.VMVirtualMachine;
 import org.eclipse.ocl.examples.debug.vm.data.VMStackFrameData;
 import org.eclipse.ocl.examples.debug.vm.data.VMSuspension;
-import org.eclipse.ocl.examples.debug.vm.evaluator.IRootVMEvaluationVisitor;
+import org.eclipse.ocl.examples.debug.vm.evaluator.IVMRootEvaluationVisitor;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IStepper;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IStepperVisitor;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationEnvironment;
@@ -51,7 +51,7 @@ import org.eclipse.qvtd.debug.stepper.QVTiStepperVisitor;
 import org.eclipse.qvtd.debug.vm.QVTiVMVirtualMachine;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
-public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor implements IRootVMEvaluationVisitor<Transformation>
+public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor implements IVMRootEvaluationVisitor<Transformation>
 {
 	private final @NonNull IVMDebuggerShell fDebugShell;
 	private final @NonNull VMBreakpointManager fBPM;
@@ -62,7 +62,7 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 	private @NonNull Stack<QVTiVMEvaluationVisitor> visitorStack = new Stack<QVTiVMEvaluationVisitor>();
 	private final @NonNull Stack<IStepper> stepperStack = new Stack<IStepper>();
 
-	public QVTiRootVMEvaluationVisitor(@NonNull QVTiVMEnvironment env, @NonNull IQVTiVMEvaluationEnvironment evalEnv, @NonNull IVMDebuggerShell shell) {
+	public QVTiVMRootEvaluationVisitor(@NonNull QVTiVMEnvironment env, @NonNull IQVTiVMEvaluationEnvironment evalEnv, @NonNull IVMDebuggerShell shell) {
 		super(new QVTiVMEvaluationVisitorImpl(env, evalEnv));
 		fDebugShell = shell;
 		fBPM = shell.getBreakPointManager();
@@ -160,7 +160,7 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		return DomainUtil.nonNullState(mainUnit.getModules().get(0).getName());
 	}
 
-	public @NonNull QVTiRootVMEvaluationVisitor getRootEvaluationVisitor() {
+	public @NonNull QVTiVMRootEvaluationVisitor getRootEvaluationVisitor() {
 		return this;
 	}
 
@@ -264,7 +264,7 @@ public class QVTiRootVMEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		return new UnitLocation(startPosition, endPosition, evalEnv, node);
 	}
 
-	public void popVisitor(@NonNull QVTiNestedVMEvaluationVisitor evaluationVisitor) {
+	public void popVisitor(@NonNull QVTiVMNestedEvaluationVisitor evaluationVisitor) {
 		if (VMVirtualMachine.VISITOR_STACK.isActive()) {
 			VMVirtualMachine.VISITOR_STACK.println("[" + Thread.currentThread().getName() + "] " + "Pop " + evaluationVisitor.toString());
 		}

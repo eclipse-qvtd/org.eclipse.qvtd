@@ -12,11 +12,15 @@
 package org.eclipse.qvtd.debug.evaluator;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationVisitor;
+import org.eclipse.qvtd.debug.QVTiDebugPlugin;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitorImpl;
 
 /**
  * QVTiVMEvaluationVisitorImpl is the class for ...
  */
-public class QVTiVMEvaluationVisitorImpl extends QVTiAbstractVMEvaluationVisitor {
+public class QVTiVMEvaluationVisitorImpl extends QVTiEvaluationVisitorImpl implements IQVTiVMEvaluationVisitor {
 
         
     /**
@@ -41,4 +45,34 @@ public class QVTiVMEvaluationVisitorImpl extends QVTiAbstractVMEvaluationVisitor
     }
 
 	public void dispose() {}
+
+	@Override
+	public @NonNull IVMEvaluationVisitor<Transformation> getClonedEvaluator() {
+		IQVTiVMEvaluationEnvironment oldEvaluationEnvironment = getEvaluationEnvironment();
+		IQVTiVMEvaluationEnvironment clonedEvaluationEnvironment = oldEvaluationEnvironment.createClonedEvaluationEnvironment();
+		return new QVTiVMEvaluationVisitorImpl(getEnvironment(), clonedEvaluationEnvironment);
+	}
+
+    @Override
+	public @NonNull QVTiVMEnvironment getEnvironment() {
+		return (QVTiVMEnvironment) super.getEnvironment();
+	}
+
+	@Override
+	public @NonNull IQVTiVMEvaluationEnvironment getEvaluationEnvironment() {
+		return (IQVTiVMEvaluationEnvironment) super.getEvaluationEnvironment();
+	}
+
+	/* (non-Javadoc)
+     * @see org.eclipse.ocl.examples.pivot.evaluation.AbstractEvaluationVisitor#getModelManager()
+     */
+    @Override
+	public @NonNull QVTiVMModelManager getModelManager() {
+		return (QVTiVMModelManager) modelManager;
+	}
+
+	@Override
+	public @NonNull String getPluginId() {
+		return QVTiDebugPlugin.PLUGIN_ID;
+	}
 }

@@ -184,7 +184,7 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 	@Override
 	public @NonNull IQVTiVMEvaluationVisitor createNestedEvaluator() {
 //		return delegate.createNestedEvaluator();
-		return new QVTiNestedVMEvaluationVisitor(this, delegate.createNestedEvaluator());
+		return new QVTiVMNestedEvaluationVisitor(this, delegate.createNestedEvaluator());
 	}
 
 	@Override
@@ -246,7 +246,7 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 		return delegate.getRegexPattern(regex);
 	}
 
-	public abstract @NonNull QVTiRootVMEvaluationVisitor getRootEvaluationVisitor();
+	public abstract @NonNull QVTiVMRootEvaluationVisitor getRootEvaluationVisitor();
 
 	@Override
 	public @NonNull DomainType getStaticTypeOf(@Nullable Object value) {

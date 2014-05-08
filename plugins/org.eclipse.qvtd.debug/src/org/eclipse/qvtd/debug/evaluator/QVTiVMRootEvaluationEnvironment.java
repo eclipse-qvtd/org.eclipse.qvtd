@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.UnitLocation;
-import org.eclipse.ocl.examples.debug.vm.evaluator.IRootVMEvaluationEnvironment;
+import org.eclipse.ocl.examples.debug.vm.evaluator.IVMRootEvaluationEnvironment;
 import org.eclipse.ocl.examples.debug.vm.utils.ASTBindingHelper;
 import org.eclipse.ocl.examples.debug.vm.utils.VMRuntimeException;
 import org.eclipse.ocl.examples.debug.vm.utils.VMStackTraceBuilder;
@@ -33,7 +33,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelManager;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiRootEvaluationEnvironment;
 
-public class QVTiRootVMEvaluationEnvironment extends QVTiRootEvaluationEnvironment implements IQVTiVMEvaluationEnvironment,IRootVMEvaluationEnvironment<Transformation>
+public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironment implements IQVTiVMEvaluationEnvironment,IVMRootEvaluationEnvironment<Transformation>
 {
 //	private IContext myContext;
 	private List<Runnable> myDeferredTasks;
@@ -45,7 +45,7 @@ public class QVTiRootVMEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 	private @NonNull Element myCurrentIP;
 	private final long id;
 
-    public QVTiRootVMEvaluationEnvironment(@NonNull MetaModelManager metaModelManager, @NonNull QVTiModelManager modelManager, @NonNull Transformation transformation, long id) {
+    public QVTiVMRootEvaluationEnvironment(@NonNull MetaModelManager metaModelManager, @NonNull QVTiModelManager modelManager, @NonNull Transformation transformation, long id) {
 		super(metaModelManager, modelManager, transformation);
 		myCurrentIP = transformation;
 		this.id = id;
@@ -138,12 +138,12 @@ public class QVTiRootVMEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 	}
 
 	@Override
-	public @Nullable QVTiRootVMEvaluationEnvironment getParentEvaluationEnvironment() {
-		return (QVTiRootVMEvaluationEnvironment) super.getParentEvaluationEnvironment();
+	public @Nullable QVTiVMRootEvaluationEnvironment getParentEvaluationEnvironment() {
+		return (QVTiVMRootEvaluationEnvironment) super.getParentEvaluationEnvironment();
 	}
 
 	@Override
-	public @NonNull QVTiRootVMEvaluationEnvironment getRootEvaluationEnvironment() {
+	public @NonNull QVTiVMRootEvaluationEnvironment getRootEvaluationEnvironment() {
 		return this;
 	}
 

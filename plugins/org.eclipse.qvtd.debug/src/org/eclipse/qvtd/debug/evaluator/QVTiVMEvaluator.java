@@ -113,7 +113,7 @@ public class QVTiVMEvaluator implements IVMEvaluator
 //		if (contextVariable != null) {
 //			evalEnv.add(contextVariable, context);
 //		}
-        QVTiRootVMEvaluationVisitor visitor = envFactory.createEvaluationVisitor(env, evalEnv);
+        QVTiVMRootEvaluationVisitor visitor = envFactory.createEvaluationVisitor(env, evalEnv);
         visitor.start(suspendOnStartup);
         return (Boolean) transformation.accept(visitor);
 	}
