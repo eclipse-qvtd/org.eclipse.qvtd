@@ -1,66 +1,43 @@
 /*******************************************************************************
- * Copyright (c) 2009, 2013 R.Dvorak and others.
+ * Copyright (c) 2014 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     Radek Dvorak - initial API and implementation
+ *     R.Dvorak and others - QVTo debugger framework
+ *     E.D.Willink - revised API for OCL/QVTi debugger framework
  *******************************************************************************/
 package org.eclipse.qvtd.debug.srclookup;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.debug.core.sourcelookup.ISourceContainer;
-import org.eclipse.debug.core.sourcelookup.ISourcePathComputer;
-import org.eclipse.debug.core.sourcelookup.containers.ProjectSourceContainer;
-import org.eclipse.debug.core.sourcelookup.containers.WorkspaceSourceContainer;
-import org.eclipse.qvtd.debug.utils.WorkspaceUtils;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.debug.vm.srclookup.VMSourcePathComputer;
+import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 
-/**
- * @since 1.3
- */
-public class QVTiSourcePathComputer implements ISourcePathComputer {
+public class QVTiSourcePathComputer extends VMSourcePathComputer {
 		
-	public static final String ID = "org.eclipse.qvtd.debug.srclookup.QVTiSourcePathComputer";  //$NON-NLS-1$
+	public static final @NonNull String ID = "org.eclipse.qvtd.debug.srclookup.QVTiSourcePathComputer";  //$NON-NLS-1$
 	
-	private static final String JAVA_SRC_COMPUTER_ID = "org.eclipse.jdt.launching.sourceLookup.javaSourcePathComputer"; //$NON-NLS-1$
-	
-	private final ISourcePathComputer fJavaSourcePathComputer;
-	
-	
-	public QVTiSourcePathComputer() {
-		fJavaSourcePathComputer = DebugPlugin.getDefault().getLaunchManager().getSourcePathComputer(JAVA_SRC_COMPUTER_ID);
-	}
-	
-	public String getId() {
+	public @NonNull String getId() {
 		return ID;
 	}
-	
-	public ISourceContainer[] computeSourceContainers(ILaunchConfiguration configuration, IProgressMonitor monitor) throws CoreException {
-		IFile moduleFile = WorkspaceUtils.getModuleFile(configuration);
-		
-		ISourceContainer sourceContainer;
-		if (moduleFile != null && moduleFile.exists()) {
-			sourceContainer = new ProjectSourceContainer(moduleFile.getProject(), false);
-		}
-		else {
-			sourceContainer = new WorkspaceSourceContainer();
-		}
-		
-	    List<ISourceContainer> result = new ArrayList<ISourceContainer>();
-		result.add(sourceContainer);		
-		result.addAll(Arrays.asList(fJavaSourcePathComputer
-				.computeSourceContainers(configuration, monitor)));
-		
-		return result.toArray(new ISourceContainer[result.size()]);
-	}
+
+	protected IFile getModuleFile(@NonNull ILaunchConfiguration configuration) throws CoreException {
+//        String moduleFileName = configuration.getAttribute(LaunchConstants.MODULE, ""); //$NON-NLS-1$
+        String moduleFileName = configuration.getAttribute(QVTiLaunchConstants.TX_KEY, ""); //$NON-NLS-1$
+        URI moduleUri = URI.createURI(moduleFileName);
+        IFile moduleFile = getWorkspaceFile(moduleUri);
+        if(moduleFile == null) {
+        	//IStatus errorStatus = MiscUtil.makeErrorStatus( 
+        		//	NLS.bind(Messages.QvtLaunchConfigurationDelegate_transformationFileNotFound, moduleFileName));
+        	//throw new CoreException(errorStatus);
+        }
+        
+        return moduleFile;
+    }
 }

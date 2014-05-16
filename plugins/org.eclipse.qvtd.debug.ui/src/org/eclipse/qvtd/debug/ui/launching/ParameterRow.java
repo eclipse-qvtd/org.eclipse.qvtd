@@ -28,34 +28,6 @@ import org.eclipse.swt.widgets.Text;
 
 public class ParameterRow extends Composite implements ModifyListener
 {
-	/**
-	 * @wbp.parser.entryPoint
-	 *
-	public static Composite createParameterRow(@NonNull Group group) {
-		Composite row = new Composite(group, SWT.NONE);
-		row.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
-		GridLayout gridLayout = new GridLayout(4, false);
-		gridLayout.marginWidth = 0;
-		row.setLayout(gridLayout);
-		
-		Label name = new Label(row, SWT.NONE);
-//		name.setText(parameterName);
-		
-		Text path = new Text(row, SWT.BORDER);
-		path.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-//		name.setText(parameterPath);
-		
-		Button browseWS = new Button(row, SWT.NONE);
-		browseWS.setText("Browse Workspace...");
-		Button browseFile = new Button(row, SWT.NONE);
-		browseFile.setText("Browse File...");
-
-//		boolean isSave = (style & SWT.SAVE) != 0;
-//		LaunchingUtils.prepareBrowseWorkspaceButton(browseWS, path, isSave);
-//		LaunchingUtils.prepareBrowseFileSystemButton(browseFile, path, isSave);
-		return row;
-	} */
-	
 	protected @NonNull MainTab mainTab;
 	protected @NonNull Label name;
 	protected @NonNull Text path;
@@ -73,7 +45,7 @@ public class ParameterRow extends Composite implements ModifyListener
 		
 		path = new Text(this, SWT.BORDER);
 		path.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		name.setText(parameterPath);
+		path.setText(parameterPath);
 		
 		Button browseWS = new Button(this, SWT.NONE);
 		browseWS.setText("Browse Workspace...");

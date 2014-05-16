@@ -1,17 +1,14 @@
-/**
- * <copyright>
- *
- * Copyright (c) 2013 E.D.Willink and others.
- * All rights reserved.   This program and the accompanying materials
+/*******************************************************************************
+ * Copyright (c) 2014 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *   E.D.Willink - Initial API and implementation
- *
- * </copyright>
- */
+ *     R.Dvorak and others - QVTo debugger framework
+ *     E.D.Willink - revised API for OCL/QVTi debugger framework
+ *******************************************************************************/
 package org.eclipse.qvtd.debug.ui.launching;
 
 import java.util.ArrayList;
@@ -22,19 +19,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.ILaunchConfigurationWorkingCopy;
-import org.eclipse.debug.ui.AbstractLaunchConfigurationTab;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.qvtd.debug.launching.LaunchConstants;
+import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -56,27 +49,101 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.part.FileEditorInput;
 
-public class MainTab extends AbstractLaunchConfigurationTab implements ModifyListener, LaunchConstants
+public class MainTab extends AbstractMainTab implements QVTiLaunchConstants
 {
-	private static final Logger logger = Logger.getLogger(AbstractLaunchConfigurationTab.class);
+	protected class TransformationModifyListener implements ModifyListener
+	{
+		@Override
+		public void modifyText(ModifyEvent e) {
+/*			if (modelPath.isDisposed()) {
+				return;
+			}
+			String modelName = modelPath.getText();
+			@SuppressWarnings("null")@NonNull URI contextURI = URI.createURI(modelName, true);
+			URI elementsURI = contextURI.trimFragment();
+			try {
+				Resource resource = getMetaModelManager().getExternalResourceSet().getResource(elementsURI, true);
+		        if (resource == null) {
+		        	throw new IOException("There was an error loading the model file. ");
+		        }
+				List<String> elements = new ArrayList<String>();
+				for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
+					EObject eObject = tit.next();
+					String displayString = DomainUtil.getLabel(eObject);
+					URI uri = EcoreUtil.getURI(eObject);
+					elements.add(displayString);
+					element2uri.put(displayString, uri);
+					}
+				Collections.sort(elements);
+				elementCombo.setItems(elements.toArray(new String[elements.size()]));
+			}
+			catch (Exception ex) {
+				setErrorMessage("Failed to load '" + elementsURI + "': " + ex.toString());
+			}
+			if (!initializing) {
+				updateLaunchConfigurationDialog();
+			} */
+			if (txPath.isDisposed()) {
+				return;
+			}
+			String txName = txPath.getText();
+			@SuppressWarnings("null")@NonNull URI txURI = URI.createURI(txName, true);
+			try {
+				@SuppressWarnings("null")@NonNull Group inputsGroup2 = inputsGroup;
+				@SuppressWarnings("null")@NonNull Group outputsGroup2 = outputsGroup;
+				QVTiEnvironmentFactory envFactory = new QVTiEnvironmentFactory(null, getMetaModelManager());
+				QVTiXtextEvaluator xtextEvaluator = new QVTiXtextEvaluator(envFactory, txURI);
+				Transformation transformation = xtextEvaluator.getTransformation();
+				Set<TypedModel> inputs = new HashSet<TypedModel>();
+				Set<TypedModel> outputs = new HashSet<TypedModel>();
+				Map<String, String> inputMap = new HashMap<String, String>();
+				Map<String, String> outputMap = new HashMap<String, String>();
+				for (Rule rule : transformation.getRule()) {
+					if (rule instanceof Mapping) {
+						Mapping mapping = (Mapping)rule;
+						for (Domain domain : mapping.getDomain()) {
+							if (domain instanceof CoreDomain) {
+								CoreDomain coreDomain = (CoreDomain)domain;
+								BottomPattern bottomPattern = coreDomain.getBottomPattern();
+								TypedModel typedModel = coreDomain.getTypedModel();
+								String name = typedModel.getName();
+								if (bottomPattern.getRealizedVariable().isEmpty()) {
+									if (inputs.add(typedModel)) {
+										inputMap.put(name, getDefaultPath(inputsGroup2, name));
+									}
+								}
+								else {
+									if (outputs.add(typedModel)) {
+										outputMap.put(name, getDefaultPath(outputsGroup2, name));
+									}
+								}
+							}
+						}
+					}
+				}
+				for (String key : outputMap.keySet()) {
+					inputMap.remove(key);
+				}
+				updateParametersGroup(inputsGroup2, SWT.NONE, inputMap);
+				updateParametersGroup(outputsGroup2, SWT.SAVE, outputMap);
+			}
+			catch (Exception ex) {
+				setErrorMessage("Failed to load '" + txName + "': " + ex.toString());
+			}
+			updateLaunchConfigurationDialog();
+		}
+	}
 
 	protected Text txPath;
 	protected Button txBrowseWS;
 	protected Button txBrowseFile;
 	protected Group inputsGroup;
 	protected Group outputsGroup;
-	protected @Nullable MetaModelManager metaModelManager;		// FIXME Add a dispose() when not visible for a long time
 
 	@Override
 	public boolean canSave() {
+		assert !initializing;
 		ResourceSet resourceSet = getMetaModelManager().getExternalResourceSet();
 		URIConverter uriConverter = resourceSet.getURIConverter();
 		String txName = txPath.getText();
@@ -86,24 +153,21 @@ public class MainTab extends AbstractLaunchConfigurationTab implements ModifyLis
 			setErrorMessage("Selected file " + txName + " does not exist");
 			return false;
 		}
-		else {
-			setErrorMessage(null);
-			return true;			
-		}
+		setErrorMessage(null);
+		return true;			
 	}
 
 	@SuppressWarnings("null")
 	public void createControl(Composite parent) {
 		Composite control = createForm(parent);
-		txPath.addModifyListener(this);
+		txPath.addModifyListener(new TransformationModifyListener());
 		LaunchingUtils.prepareBrowseWorkspaceButton(txBrowseWS, txPath, false);
 		LaunchingUtils.prepareBrowseFileSystemButton(txBrowseFile, txPath, false);
-		refreshParametersGroup(inputsGroup, SWT.NONE, EMPTY_MAP);
-		refreshParametersGroup(outputsGroup, SWT.SAVE, EMPTY_MAP);
+		updateParametersGroup(inputsGroup, SWT.NONE, EMPTY_MAP);
+		updateParametersGroup(outputsGroup, SWT.SAVE, EMPTY_MAP);
 		control.setBounds(0, 0, 300, 300);
 		control.layout();
 		control.pack();
-		canSave();
 	}
 
 	/**
@@ -140,29 +204,6 @@ public class MainTab extends AbstractLaunchConfigurationTab implements ModifyLis
 		outputsGroup.setLayout(new GridLayout(1, false));
 		return control;
 	}
-	
-	@Override
-	public void dispose() {
-		MetaModelManager metaModelManager2 = metaModelManager;
-		if (metaModelManager2 != null) {
-			metaModelManager2.dispose();
-			metaModelManager = null;
-		}
-		super.dispose();
-	}
-
-	@Override
-	public Image getImage() {
-		return QVTdDebugUIPlugin.getDefault().createImage("icons/QVTiModelFile.gif");
-	}
-
-	protected @NonNull MetaModelManager getMetaModelManager() {
-		MetaModelManager metaModelManager2 = metaModelManager;
-		if (metaModelManager2 == null) {
-			metaModelManager = metaModelManager2 = new MetaModelManager();
-		}
-		return metaModelManager2;
-	}
 
 	protected String getDefaultPath(@NonNull Group group, String name) {
 		if (name != null) {
@@ -178,104 +219,29 @@ public class MainTab extends AbstractLaunchConfigurationTab implements ModifyLis
 		return "";
 	}
 
-	public String getName() {
-		return "Main";
+	@Override
+	public Image getImage() {
+		return QVTdDebugUIPlugin.getDefault().createImage("icons/QVTiModelFile.gif");
 	}
 
-	@SuppressWarnings("null")
 	public void initializeFrom(ILaunchConfiguration configuration) {
+		assert !initializing;
 		try {
+			initializing = true;
 			txPath.setText(configuration.getAttribute(TX_KEY, ""));
 			Map<String, String> inMap = configuration.getAttribute(IN_KEY, EMPTY_MAP);
 			Map<String, String> outMap = configuration.getAttribute(OUT_KEY, EMPTY_MAP);
-			refreshParametersGroup(inputsGroup, SWT.NONE, inMap);
-			refreshParametersGroup(outputsGroup, SWT.SAVE, outMap);
-			canSave();
-			updateLaunchConfigurationDialog();
+			if (inMap != null) {
+				refreshParametersGroup(inputsGroup, SWT.NONE, inMap);
+			}
+			if (outMap != null) {
+				refreshParametersGroup(outputsGroup, SWT.SAVE, outMap);
+			}
 		} catch (CoreException e) {
 			//Ignore
-		}
-	}
-
-	private boolean launchConfigurationExists(@NonNull String name) {
-		ILaunchConfiguration[] cs = new ILaunchConfiguration[]{};
-		try {
-			cs = getLaunchManager().getLaunchConfigurations();
-		}
-		catch (CoreException ex) {
-			logger.error("Failed to access ILaunchConfiguration", ex);
-		}
-		for (int i = 0; i < cs.length; i++) {
-			if (name.equals(cs[i].getName())){
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public void modifyText(ModifyEvent e) {
-		if (txPath.isDisposed()) {
-			return;
-		}
-		String txName = txPath.getText();
-		@SuppressWarnings("null")@NonNull URI txURI = URI.createURI(txName, true);
-		try {
-			@SuppressWarnings("null")@NonNull Group inputsGroup2 = inputsGroup;
-			@SuppressWarnings("null")@NonNull Group outputsGroup2 = outputsGroup;
-			QVTiEnvironmentFactory envFactory = new QVTiEnvironmentFactory(null, getMetaModelManager());
-			QVTiXtextEvaluator xtextEvaluator = new QVTiXtextEvaluator(envFactory, txURI);
-			Transformation transformation = xtextEvaluator.getTransformation();
-			Set<TypedModel> inputs = new HashSet<TypedModel>();
-			Set<TypedModel> outputs = new HashSet<TypedModel>();
-			Map<String, String> inputMap = new HashMap<String, String>();
-			Map<String, String> outputMap = new HashMap<String, String>();
-			for (Rule rule : transformation.getRule()) {
-				if (rule instanceof Mapping) {
-					Mapping mapping = (Mapping)rule;
-					for (Domain domain : mapping.getDomain()) {
-						if (domain instanceof CoreDomain) {
-							CoreDomain coreDomain = (CoreDomain)domain;
-							BottomPattern bottomPattern = coreDomain.getBottomPattern();
-							TypedModel typedModel = coreDomain.getTypedModel();
-							String name = typedModel.getName();
-							if (bottomPattern.getRealizedVariable().isEmpty()) {
-								if (inputs.add(typedModel)) {
-									inputMap.put(name, getDefaultPath(inputsGroup2, name));
-								}
-							}
-							else {
-								if (outputs.add(typedModel)) {
-									outputMap.put(name, getDefaultPath(outputsGroup2, name));
-								}
-							}
-						}
-					}
-				}
-			}
-			for (String key : outputMap.keySet()) {
-				inputMap.remove(key);
-			}
-			refreshParametersGroup(inputsGroup2, SWT.NONE, inputMap);
-			refreshParametersGroup(outputsGroup2, SWT.SAVE, outputMap);
-		}
-		catch (Exception ex) {
-			setErrorMessage("Failed to load '" + txName + "': " + ex.toString());
-		}
-		canSave();
-		updateLaunchConfigurationDialog();
-	}
-
-	// Return a new launch configuration name that does not
-	// already exists
-	protected String newLaunchConfigurationName(@NonNull String fileName) {
-		if (!launchConfigurationExists(fileName)) {
-			return fileName;
-		}
-		for (int i = 1; true; i++) {
-			String configurationName = fileName + " (" + i + ")";
-			if (!launchConfigurationExists(configurationName)) {
-				return configurationName;
-			}
+		} finally {
+			initializing = false;
+			updateLaunchConfigurationDialog();
 		}
 	}
 
@@ -299,14 +265,35 @@ public class MainTab extends AbstractLaunchConfigurationTab implements ModifyLis
 		configuration.setAttribute(OUT_KEY, outputMap);
 	}
 
-	protected void refreshParametersGroup(@NonNull Group group, int style, Map<String, String> map) {
+	protected void refreshParametersGroup(@NonNull Group group, int style, @NonNull Map<String, String> map) {
+		List<String> keys = new ArrayList<String>(map.keySet());
+		Collections.sort(keys);
+		Control[] children = group.getChildren();
+		for (int i = 0; i < children.length; i++) {
+			ParameterRow row = (ParameterRow)children[i];
+			String text = row.name.getText();
+			String path = map.get(text);
+			if (path != null) {
+				row.path.setText(path);
+			}
+		}
+		group.layout();
+	}
+
+	protected void setDefaults(@NonNull ILaunchConfigurationWorkingCopy configuration, @NonNull IFile iFile) {
+		configuration.setAttribute(TX_KEY, iFile.getFullPath().toString());
+		configuration.setAttribute(IN_KEY, EMPTY_MAP);
+		configuration.setAttribute(OUT_KEY, EMPTY_MAP);
+	}
+
+	protected void updateParametersGroup(@NonNull Group group, int style, @NonNull Map<String, String> map) {
 		List<String> keys = new ArrayList<String>(map.keySet());
 		Collections.sort(keys);
 		Control[] children = group.getChildren();
 		int iMax = Math.min(children.length, keys.size());
 		int i = 0;
 		for (; i < iMax; i++) {
-			ParameterRow row = (ParameterRow)children[0];
+			ParameterRow row = (ParameterRow)children[i];
 			String string = keys.get(i);
 			row.name.setText(string);
 			row.path.setText(map.get(string));
@@ -320,36 +307,5 @@ public class MainTab extends AbstractLaunchConfigurationTab implements ModifyLis
 			children[i].dispose();
 		}
 		group.layout();
-	}
-
-	public void setDefaults(ILaunchConfigurationWorkingCopy configuration) {
-		IWorkbench workbench = PlatformUI.getWorkbench();
-		if (workbench != null) {
-			IWorkbenchWindow workbenchWindow = workbench.getActiveWorkbenchWindow();
-			if (workbenchWindow != null) {
-				IWorkbenchPage activePage = workbenchWindow.getActivePage();
-				if (activePage != null) {
-					IEditorPart activeEditor = activePage.getActiveEditor();
-					if (activeEditor != null) {
-						IEditorInput editorInput = activeEditor.getEditorInput();
-						if (editorInput instanceof FileEditorInput) {
-							IFile iFile = ((FileEditorInput)editorInput).getFile();
-							String activeEditorName = iFile.getName();
-							if (activeEditorName.length() > 0){
-								configuration.rename(newLaunchConfigurationName(activeEditorName));
-								configuration.setAttribute(TX_KEY, iFile.getFullPath().toString());
-								configuration.setAttribute(IN_KEY, EMPTY_MAP);
-								configuration.setAttribute(OUT_KEY, EMPTY_MAP);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
-	@Override
-	public void updateLaunchConfigurationDialog() {
-		super.updateLaunchConfigurationDialog();
 	}
 }

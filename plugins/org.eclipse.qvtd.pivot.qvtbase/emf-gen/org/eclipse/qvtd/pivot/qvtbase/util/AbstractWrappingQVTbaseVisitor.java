@@ -35,61 +35,111 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, D extends QVTbaseVisi
 
 	public @Nullable R visitBaseModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.BaseModel object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitBaseModel(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitBaseModel(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitDomain(@NonNull org.eclipse.qvtd.pivot.qvtbase.Domain object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitDomain(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitDomain(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitFunction(@NonNull org.eclipse.qvtd.pivot.qvtbase.Function object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitFunction(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitFunction(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitFunctionParameter(@NonNull org.eclipse.qvtd.pivot.qvtbase.FunctionParameter object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitFunctionParameter(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitFunctionParameter(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitPattern(@NonNull org.eclipse.qvtd.pivot.qvtbase.Pattern object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitPattern(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitPattern(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitPredicate(@NonNull org.eclipse.qvtd.pivot.qvtbase.Predicate object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitPredicate(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitPredicate(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitRule(@NonNull org.eclipse.qvtd.pivot.qvtbase.Rule object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitRule(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitRule(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitTransformation(@NonNull org.eclipse.qvtd.pivot.qvtbase.Transformation object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitTransformation(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitTransformation(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitTypedModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.TypedModel object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitTypedModel(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitTypedModel(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitUnit(@NonNull org.eclipse.qvtd.pivot.qvtbase.Unit object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitUnit(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitUnit(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 }

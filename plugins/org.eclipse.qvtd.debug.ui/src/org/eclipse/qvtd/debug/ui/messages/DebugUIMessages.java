@@ -1,12 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2009 R.Dvorak and others.
+ * Copyright (c) 2014 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     Radek Dvorak - initial API and implementation
+ *     R.Dvorak and others - QVTo debugger framework
+ *     E.D.Willink - revised API for OCL/QVTi debugger framework
  *******************************************************************************/
 package org.eclipse.qvtd.debug.ui.messages;
 
@@ -24,41 +25,41 @@ public class DebugUIMessages
 
     public static String BreakpointConditionEditor_EnterCondition;
 
-    public static String QVTOBreakpointPage_CancelBreakpointCreationError;
-    public static String QVTOBreakpointPage_CreateBreakpointForModule;
-    public static String QVTOBreakpointPage_Enabled;
-    public static String QVTOBreakpointPage_HitCount;
-    public static String QVTOBreakpointPage_HitCountErrorMessage;
-    public static String QVTOBreakpointPage_Module;
-    public static String QVTOBreakpointPage_ModulePrepareBreakpoint;
+    public static String QVTiBreakpointPage_CancelBreakpointCreationError;
+    public static String QVTiBreakpointPage_CreateBreakpointForModule;
+    public static String QVTiBreakpointPage_Enabled;
+    public static String QVTiBreakpointPage_HitCount;
+    public static String QVTiBreakpointPage_HitCountErrorMessage;
+    public static String QVTiBreakpointPage_Module;
+    public static String QVTiBreakpointPage_ModulePrepareBreakpoint;
 
-	public static String QVTODebugModelPresentation_Running;
+	public static String QVTiDebugModelPresentation_Running;
 
-	public static String QVTODebugModelPresentation_Suspended;
+	public static String QVTiDebugModelPresentation_Suspended;
 
-	public static String QVTODebugModelPresentation_ThreadLabel;
+	public static String QVTiDebugModelPresentation_ThreadLabel;
 
-	public static String QVTODebugModelPresentation_TransformationLabel;
+	public static String QVTiDebugModelPresentation_TransformationLabel;
 
-    public static String QVTOToggleBreakpointAdapter_VerifyBreakpointJob;
-	public static String QVTOToggleBreakpointAdapter_CannotSetBreakpoint;
+    public static String QVTiToggleBreakpointAdapter_VerifyBreakpointJob;
+	public static String QVTiToggleBreakpointAdapter_CannotSetBreakpoint;
 	
-	public static String QVTOLineBreakpointPage_ConditionTrue;
-    public static String QVTOLineBreakpointPage_ConditionValueChange;
-    public static String QVTOLineBreakpointPage_EnableCondition;
-    public static String QVTOLineBreakpointPage_LineBreakpoint;
-    public static String QVTOLineBreakpointPage_LineNumber;
-    public static String QVTOLineBreakpointPage_SuspendCondition;
+	public static String QVTiLineBreakpointPage_ConditionTrue;
+    public static String QVTiLineBreakpointPage_ConditionValueChange;
+    public static String QVTiLineBreakpointPage_EnableCondition;
+    public static String QVTiLineBreakpointPage_LineBreakpoint;
+    public static String QVTiLineBreakpointPage_LineNumber;
+    public static String QVTiLineBreakpointPage_SuspendCondition;
 
-	public static String QVTOMainTab_mustRunAsQVTApp;
+	public static String QVTiMainTab_mustRunAsQVTApp;
 
-	public static String QVTORunToLineAdapter_invalidLocation;
+	public static String QVTiRunToLineAdapter_invalidLocation;
 
-	public static String QVTORunToLineAdapter_runFailed;
+	public static String QVTiRunToLineAdapter_runFailed;
  
-	public static String QVTORunToLineAdapter_NoFile;
-	public static String QVTORunToLineAdapter_NoDocument;
-	public static String QVTORunToLineAdapter_NoInput;
+	public static String QVTiRunToLineAdapter_NoFile;
+	public static String QVTiRunToLineAdapter_NoDocument;
+	public static String QVTiRunToLineAdapter_NoInput;
 	
     public static String BreakpointCondErrorHandler_EditConditionButtonLabel;
     public static String BreakpointCondErrorHandler_DialogTitle;
@@ -67,5 +68,5 @@ public class DebugUIMessages
 
 	public static String ModifiedSourceFileHandler_ModifiedDebuggedSource;
     
-    public static String QVTOBreakpointProperties_RulerActionLabel;
+    public static String QVTiBreakpointProperties_RulerActionLabel;
 }

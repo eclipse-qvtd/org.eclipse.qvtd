@@ -35,61 +35,111 @@ public abstract class AbstractWrappingQVTrelationVisitor<R, C, D extends QVTrela
 
 	public @Nullable R visitDomainPattern(@NonNull org.eclipse.qvtd.pivot.qvtrelation.DomainPattern object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitDomainPattern(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitDomainPattern(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitKey(@NonNull org.eclipse.qvtd.pivot.qvtrelation.Key object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitKey(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitKey(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitOppositePropertyCallExp(@NonNull org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitOppositePropertyCallExp(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitOppositePropertyCallExp(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitRelation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.Relation object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitRelation(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitRelation(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitRelationCallExp(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitRelationCallExp(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitRelationCallExp(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitRelationDomain(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationDomain object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitRelationDomain(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitRelationDomain(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitRelationDomainAssignment(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitRelationDomainAssignment(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitRelationDomainAssignment(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitRelationImplementation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitRelationImplementation(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitRelationImplementation(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitRelationModel(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationModel object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitRelationModel(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitRelationModel(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitRelationalTransformation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitRelationalTransformation(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitRelationalTransformation(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 }

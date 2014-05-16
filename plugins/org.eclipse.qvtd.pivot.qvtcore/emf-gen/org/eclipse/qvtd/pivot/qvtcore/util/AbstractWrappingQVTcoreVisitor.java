@@ -35,13 +35,23 @@ public abstract class AbstractWrappingQVTcoreVisitor<R, C, D extends QVTcoreVisi
 
 	public @Nullable R visitCoreModel(@NonNull org.eclipse.qvtd.pivot.qvtcore.CoreModel object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitCoreModel(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitCoreModel(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 
 	public @Nullable R visitMapping(@NonNull org.eclipse.qvtd.pivot.qvtcore.Mapping object) {
 		P prologue = preVisit(object);
-		R result = delegate.visitMapping(object);
-		return postVisit(object, prologue, result);
+		try {
+			R result = delegate.visitMapping(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
 	}
 }

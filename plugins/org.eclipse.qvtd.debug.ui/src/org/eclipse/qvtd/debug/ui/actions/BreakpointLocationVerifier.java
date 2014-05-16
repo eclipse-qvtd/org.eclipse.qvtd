@@ -1,12 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2009 R.Dvorak and others.
+ * Copyright (c) 2014 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     Radek Dvorak - initial API and implementation
+ *     R.Dvorak and others - QVTo debugger framework
+ *     E.D.Willink - revised API for OCL/QVTi debugger framework
  *******************************************************************************/
 package org.eclipse.qvtd.debug.ui.actions;
 
@@ -21,16 +22,16 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
+import org.eclipse.ocl.examples.debug.vm.utils.CompiledUnit;
+import org.eclipse.ocl.examples.debug.vm.utils.LineNumberProvider;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
 import org.eclipse.osgi.util.NLS;
+import org.eclipse.qvtd.debug.launching.QVTiDebuggableRunnerFactory;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
-import org.eclipse.qvtd.debug.utils.CompiledUnit;
-import org.eclipse.qvtd.debug.utils.LineNumberProvider;
-import org.eclipse.qvtd.debug.vm.ValidBreakpointLocator;
 import org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeEditor;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.texteditor.IDocumentProvider;
@@ -140,7 +141,7 @@ class BreakpointLocationVerifier {
         	return QVTdDebugUIPlugin.createErrorStatus("Failed to obtain AST"); //$NON-NLS-1$
         }
 
-		List<Element> elements = ValidBreakpointLocator
+		List<Element> elements = QVTiDebuggableRunnerFactory.validBreakpointLocator
 				.getBreakpointableElementsForLine(compilationUnit,
 						getLineNumberProvider(doc), lineNumber);                    	 
 		if(elements.isEmpty()) {

@@ -9,16 +9,15 @@ Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.core.filesystem;bundle-version="[1.0.0,2.0.0)",
  org.eclipse.debug.core;bundle-version="[3.5.0,4.0.0)",
+ org.eclipse.jdt.annotation;bundle-version="[1.1.0,2.0.0)";resolution:=optional,
+ org.eclipse.ocl.examples.debug;bundle-version="[1.0.0,2.0.0)";visibility:=reexport,
  org.eclipse.qvtd.xtext.qvtimperative
 Export-Package: org.eclipse.qvtd.debug,
  org.eclipse.qvtd.debug.core,
  org.eclipse.qvtd.debug.evaluator,
  org.eclipse.qvtd.debug.launching,
- org.eclipse.qvtd.debug.messages,
  org.eclipse.qvtd.debug.srclookup,
- org.eclipse.qvtd.debug.stubs,
- org.eclipse.qvtd.debug.utils,
- org.eclipse.qvtd.debug.vm,
- org.eclipse.qvtd.debug.vm.protocol
+ org.eclipse.qvtd.debug.stepper,
+ org.eclipse.qvtd.debug.vm
 Bundle-ActivationPolicy: lazy
-Bundle-Activator: org.eclipse.qvtd.debug.QVTdDebugPlugin
+Bundle-Activator: org.eclipse.qvtd.debug.QVTiDebugPlugin

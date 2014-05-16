@@ -1,12 +1,13 @@
 /*******************************************************************************
- * Copyright (c) 2009 R.Dvorak and others.
+ * Copyright (c) 2014 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     Radek Dvorak - initial API and implementation
+ *     R.Dvorak and others - QVTo debugger framework
+ *     E.D.Willink - revised API for OCL/QVTi debugger framework
  *******************************************************************************/
 package org.eclipse.qvtd.debug.ui.pages;
 
@@ -21,7 +22,7 @@ import org.eclipse.jface.text.IDocumentListener;
 import org.eclipse.jface.text.TextViewerUndoManager;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
-import org.eclipse.qvtd.debug.core.QVTOBreakpoint;
+import org.eclipse.ocl.examples.debug.vm.core.VMLineBreakpoint;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.debug.ui.messages.DebugUIMessages;
 import org.eclipse.swt.SWT;
@@ -39,8 +40,8 @@ public class BreakpointConditionEditor {
     private ProjectionViewer fViewer;       
     private String fOldValue;
     private String fErrorMessage;
-    private QVTOLineBreakpointPage fPage;
-    private QVTOBreakpoint fBreakpoint;
+    private QVTiLineBreakpointPage fPage;
+    private VMLineBreakpoint fBreakpoint;
     private IHandlerService fHandlerService;
     private IHandler fHandler;
     private IHandlerActivation fActivation;
@@ -51,9 +52,9 @@ public class BreakpointConditionEditor {
      * @param parent the parent to add this widget to
      * @param page the page that is associated with this widget
      */
-    public BreakpointConditionEditor(Composite parent, QVTOLineBreakpointPage page) {
+    public BreakpointConditionEditor(Composite parent, QVTiLineBreakpointPage page) {
         fPage = page;
-        fBreakpoint = (QVTOBreakpoint) fPage.getBreakpoint();
+        fBreakpoint = (VMLineBreakpoint) fPage.getBreakpoint();
         String condition = new String();
         try {
             condition = fBreakpoint.getCondition();
