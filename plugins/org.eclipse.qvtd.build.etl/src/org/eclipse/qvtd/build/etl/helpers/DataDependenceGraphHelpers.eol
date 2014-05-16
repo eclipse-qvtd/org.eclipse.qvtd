@@ -46,20 +46,23 @@ operation QVT!Variable variableRelations(graph : ddg!Graph, vars : Set, varMap :
     for (vB in vars) {
         //vB.println("vB ");
         var vbNode = graph.getNodeForQvtAstNode(vB, varMap);
-        var refProp = self.hasRelation(vB);
-        if(refProp <> null) {
-            var e;
-            if (refProp.isContainer()) {
-                e = graph.owningModel().createInstance("ContainmentEdge");
-                e.`model` = vbNode.`model`;
-           } else {
-                e = graph.owningModel().createInstance("ReferenceEdge");
-           }
-           e.source = vaNode;
-           e.target = vbNode;
-           e.referredProperty = refProp;
-           graph.element.add(e);
+        if (not vbNode.isTypeOf(ddg!DataTypeNode)) {
+            var refProp = self.hasRelation(vB);
+	        if(refProp <> null) {
+	            var e;
+	            if (refProp.isContainer()) {
+	                e = graph.owningModel().createInstance("ContainmentEdge");
+	                e.`model` = vbNode.`model`;
+	           } else {
+	                e = graph.owningModel().createInstance("ReferenceEdge");
+	           }
+	           e.source = vaNode;
+	           e.target = vbNode;
+	           e.referredProperty = refProp;
+	           graph.element.add(e);
+	        }
         }
+        
     }
 } 
 
@@ -92,7 +95,6 @@ operation ddg!Graph getNodeForQvtAstNode(astNode : QVT!NamedElement, nodeMap : M
         } else if (astNode.isKindOf(QVT!Variable)) {
             if (astNode.type.isTypeOf(QVT!PrimitiveType)) {
                 n = self.owningModel().createInstance("DataTypeNode");
-                "is prmitive ".println();
             } else {
                 n = self.owningModel().createInstance("ClassNode");
                 if (isMiddleDomain(astNode.oppositePattern().area)) {
@@ -137,7 +139,7 @@ operation ddg!Graph getNodeForTreeNode(treeNode : tree!Node, nodeMap : Map) : dd
         n = nodeMap.get(treeNode);
     } else {
         n = self.owningModel().createInstance("ClassNode");
-        n.label = treeNode.EClassifierName;
+        n.label = treeNode.EClassName;
         nodeMap.put(treeNode, n);
         self.element.add(n);
     }
@@ -242,7 +244,7 @@ operation QVT!Variable hasRelation(varB : QVT!Variable) : Any {
     for (p in self.oppositePattern().area.rule.guardPattern.predicate
             .includingAll(self.oppositePattern().area.rule.local.collect(l | l.guardPattern.predicate).flatten())
             .select(p | p.conditionExpression.isSimpleAttributeNavigation())) {
-        if (p.conditionExpression.findRreferencedVariables()
+        if (p.conditionExpression.findReferencedVariables()
                 .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
             // Expression in the form varB.prop = self
             if (p.conditionExpression.isArgumentVariable(varB) and 
@@ -254,7 +256,7 @@ operation QVT!Variable hasRelation(varB : QVT!Variable) : Any {
     }
     // Find assignments that only refer the two vars
     for (a in self.oppositePattern().area.rule.bottomPattern.assignment.select(a | a.isSimpleAttributeNavigation())) {
-        if (a.findRreferencedVariables()
+        if (a.findReferencedVariables()
                 .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
             // Only analyse expression in the form varB.prop := self
             if (a.slotExpression.referredVariable == self and 

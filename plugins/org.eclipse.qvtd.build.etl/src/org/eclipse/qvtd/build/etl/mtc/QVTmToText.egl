@@ -11,23 +11,92 @@ transformation [%=t.name %] {
     [% } %]
 }
 
-[% for (r in t.rule) { %]
-map [%=r.name%] in [%=t.name%] {
-[% for (d in r.domain) { %][%if (d.isCheckable) {%]check [%}if(d.isEnforceable){%]enforce [%}%][%=d.name%] ([%if (not d.guardPattern.variable.isEmpty()){%][%=d.guardPattern.variable.concat(", ") %] |[%}%]) {
-[%if (not d.bottomPattern.realizedVariable.isEmpty()){%][%=d.bottomPattern.realizedVariable.collect(rv | "realize "+ rv.name+":"+rv.type.name).concat(",")%] |[%}%]
+[% for (r in t.rule) { 
+r.declaration(t);
+} 
+} %]
+
+[% operation Mapping declaration(t) { %]
+map [%if (self.name.isDefined()){%][%=self.name%] in [%=t.name%][%}%] {
+[% for (d in self.domain) {
+    var domainName = "";
+    if (d.isCheckable) { domainName = "check ";}
+    if(d.isEnforceable) { domainName = domainName + "enforce ";}
+    domainName = domainName + d.name;%]
+    [%=domainName%] ([%
+    if (not d.guardPattern.variable.isEmpty()) {
+        for (v in d.guardPattern.variable){%]
+[%=v.name+":"+v.type.name%][%if(hasMore){%],
+[%out.print("        ");}%]
+      [%}%] |[%
+    }  
+    if (not d.guardPattern.predicate.isEmpty()) {
+        for (p in d.guardPattern.predicate){%]
+        
+        [%=p.toString()%];[%
+        }
+    }%]) {
+    [%
+    if (not d.bottomPattern.realizedVariable.includingAll(d.bottomPattern.variable).isEmpty()) {
+        for (v in d.bottomPattern.variable){%]
+        [%="realize "+v.name+":"+v.type.name%][%if(hasMore){%],[%}
+        }
+        for (v in d.bottomPattern.realizedVariable){%]
+        [%="realize "+v.name+":"+v.type.name%][%if(hasMore){%],[%}%]
+      [%}%] |[%
     }
-[%}%]
-    where ([%if (not r.guardPattern.variable.isEmpty()){%][%=r.guardPattern.variable.concat(", ") %] | [%}%]
-    [% for (p in r.guardPattern.predicate) { %]
-    [%=p.toString()%];
-    [%}%]
-    ) {
-    [% for (a in r.bottomPattern.assignment) { %]
-    [%=a.toString()%];
-    [%}%]
+    if (not d.bottomPattern.predicate.isEmpty()) {
+        for (p in d.bottomPattern.predicate){%]
+        
+        [%=p.toString()%];[%
+        }
     }
+    if (not d.bottomPattern.assignment.isEmpty()) {
+        for (p in d.bottomPattern.assignment){%]
+        
+        [%=p.toString()%];[%
+        }
+    }%]
+    }
+    [%
+}%]
+    where ([%
+    if (not self.guardPattern.variable.isEmpty()) {
+        for (v in self.guardPattern.variable){%]
+[%=v.name+":"+v.type.name%][%if(hasMore){%],
+[%out.print("        ");}%]
+      [%}%] |[%
+    }  
+    if (not self.guardPattern.predicate.isEmpty()) {
+        for (p in self.guardPattern.predicate){%]
+        
+        [%=p.toString()%];[%
+        }
+    }%]) {    [%
+    if (not self.bottomPattern.realizedVariable.includingAll(self.bottomPattern.variable).isEmpty()) {
+        for (v in self.bottomPattern.variable){%]
+        [%="realize "+v.name+":"+v.type.name%][%if(hasMore){%],[%}
+        }
+        for (v in self.bottomPattern.realizedVariable){%]
+        [%="realize "+v.name+":"+v.type.name%][%if(hasMore){%],[%}%]
+      [%}%] |[%
+    }
+    if (not self.bottomPattern.predicate.isEmpty()) {
+        for (p in self.bottomPattern.predicate){%]
+        
+        [%=p.toString()%];[%
+        }
+    }
+    if (not self.bottomPattern.assignment.isEmpty()) {
+        for (p in self.bottomPattern.assignment){%]
+        
+        [%=p.toString()%];[%
+        }
+    }%]}
+    [%
+    for (l in self.local) {
+        l.declaration(t);
+    }%]
 }
-
-[% } %] 
-[% } %]
-
+    
+[%}%]

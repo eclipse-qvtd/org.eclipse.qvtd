@@ -88,6 +88,8 @@ operation QVT!PropertyAssignment isSingleDomained() : Boolean {
  
  
 // Only call if isSimpleAttributeNavigation returns true
+// TODO If isSimpleAttributeNavigation is a requirement, the if statement should
+// not exist!
 operation QVT!OCLExpression getNavigatedProperty() : QVT!Property {
     if (self.source.isTypeOf(QVT!PropertyCallExp)) {
         return self.source.referredProperty;

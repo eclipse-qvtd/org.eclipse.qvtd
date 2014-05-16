@@ -590,7 +590,7 @@ operation qvti!Rule testMappingL(tNode : tree!Node) : Boolean {
                 // Does the predicate is single "domained", all variables belong to the same domain
                 if (p.conditionExpression.isSingleDomained()) {
                     // Are both the node's and its parent's type used in the predicate
-                    if (p.conditionExpression.findRreferencedVariables()
+                    if (p.conditionExpression.findReferencedVariables()
                             .forAll(v | v.type.name == tNode.elementName or v.type.name == tNode.parent.elementName)) {
                         // Find if the navigated property is a containment opposite.
                         var prop = p.conditionExpression.getNavigatedProperty();
@@ -626,7 +626,7 @@ operation qvti!Rule testMappingR(tNode : tree!Node) : Boolean {
                 // Does the predicate is single "domained", all variables belong to the same domain
                 if (a.isSingleDomained()) {
                     // Are both the node's and its parent's type used in the predicate
-                    if (a.findRreferencedVariables()
+                    if (a.findReferencedVariables()
                             .forAll(v | v.type.name == tNode.elementName or v.type.name == tNode.parent.elementName)) {
                         // Find if the navigated property is a containment opposite.
                         var prop = a.targetProperty;

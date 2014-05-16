@@ -9,6 +9,16 @@
  *     Horacio Hoyos - initial implementation
  ******************************************************************************/
 
+/****l* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers
+ * NAME
+ *  QVTiDependenceAnalysis -- A set of operations to query, format, interpret, 
+ *  etc., information from a QVTc model. 
+ * NOTES
+ *  Some of this operations can/should be moved to the QVTcore model/code 
+ * SEE ALSO
+ *    
+ */
+
 /**
  * Returns true if the area is of type QVT!CoreDomain and it's TypedModel is the
  * input domain.
@@ -126,52 +136,52 @@ operation QVT!OCLExpression getArea() : QVT!Area {
 /**
  * Returns the set of variables used in the OCL expression. 
  */
-operation QVT!OCLExpression findRreferencedVariables() : Set {
-    return self.findRreferencedVariables(Set{});
+operation QVT!OCLExpression findReferencedVariables() : Set {
+    return self.findReferencedVariables(Set{});
 }
 
 /**
  * Returns the set of variables used in the OCL expression, ignoring the
  * variables in the ignore set. Usefull for analyzing IteratorExp
  */
-operation QVT!OCLExpression findRreferencedVariables(ignore : Set) : Set {
+operation QVT!OCLExpression findReferencedVariables(ignore : Set) : Set {
     var varRefs : Set();
     if (self.isTypeOf(QVT!VariableExp)) {
         varRefs.add(self.referredVariable);
     } else if (self.isTypeOf(QVT!OperationCallExp)) {
-        varRefs.addAll(self.source.findRreferencedVariables());
+        varRefs.addAll(self.source.findReferencedVariables());
         for (arg in self.argument) {
-            varRefs.addAll(arg.findRreferencedVariables());
+            varRefs.addAll(arg.findReferencedVariables());
         }
     } else if (self.isTypeOf(QVT!PropertyCallExp)) {
-        varRefs.addAll(self.source.findRreferencedVariables());
+        varRefs.addAll(self.source.findReferencedVariables());
     } else if (self.isTypeOf(QVT!IfExp)) {
-        varRefs.addAll(self.condition.findRreferencedVariables());
-        varRefs.addAll(self.elseExpression.findRreferencedVariables());
-        varRefs.addAll(self.thenExpression.findRreferencedVariables());
+        varRefs.addAll(self.condition.findReferencedVariables());
+        varRefs.addAll(self.elseExpression.findReferencedVariables());
+        varRefs.addAll(self.thenExpression.findReferencedVariables());
     } else if (self.isTypeOf(QVT!CollectionLiteralExp)) {
         // TODO Check that it is a collection of variables. 
         // TODO what if it is a collection of collections or other OCL types?
         for (p in self.part) {
             if (p.isTypeOf(QVT!CollectionItem)) {
-                varRefs.addAll(p.item.findRreferencedVariables());
+                varRefs.addAll(p.item.findReferencedVariables());
             } else if (p.isTypeOf(QVT!CollectionRange)) {
                 varRefs.addAll(p.first);
                 varRefs.addAll(p.last);
             } else {
                 self.println();
-                throw "Error! Add findRreferencedVariables() for " + p.type() + " in collections";
+                throw "Error! Add findReferencedVariables() for " + p.type() + " in collections";
             }
         }
     } else if (self.isKindOf(QVT!IteratorExp)) {
         // Ignore iterator variables
-        varRefs.addAll(self.body.findRreferencedVariables(self.iterator));
-        varRefs.addAll(self.source.findRreferencedVariables());
+        varRefs.addAll(self.body.findReferencedVariables(self.iterator));
+        varRefs.addAll(self.source.findReferencedVariables());
     } else if (self.isKindOf(QVT!LiteralExp)) {
       // Noting to add
     } else {
         self.println();
-        throw "Error! Add findRreferencedVariables() for " + self.type();
+        throw "Error! Add findReferencedVariables() for " + self.type();
     }
     return varRefs.excludingAll(ignore);
 }
@@ -179,12 +189,12 @@ operation QVT!OCLExpression findRreferencedVariables(ignore : Set) : Set {
 /**
  * Returns the set of variables used in the assignemnt 
  */
-operation QVT!Assignment findRreferencedVariables() : Set {
+operation QVT!Assignment findReferencedVariables() : Set {
     
     var varRefs : Set();
-    varRefs = self.value.findRreferencedVariables();
+    varRefs = self.value.findReferencedVariables();
     if (self.isTypeOf(QVT!PropertyAssignment)) {
-        varRefs.addAll(self.slotExpression.findRreferencedVariables());
+        varRefs.addAll(self.slotExpression.findReferencedVariables());
     } else if (self.isTypeOf(QVT!VariableAssignment)) {
         varRefs.add(self.targetVariable);
     }
@@ -271,7 +281,7 @@ operation QVT!Variable retypeRealizedVar(pattern : QVT!Pattern) {
 operation QVT!GuardPattern fixPredicateVarReferences() {
     for (predicate in self.predicate) {
         //predicate.println("Predicate ");
-        var refVars =  predicate.findRreferencedVariables();
+        var refVars =  predicate.findReferencedVariables();
         //refVars.println("refVars ");
         // Find variables and fix references
         for (v in refVars) {
@@ -311,7 +321,7 @@ operation QVT!BottomPattern fixPredicateVarReferences() {
     
     for (predicate in self.predicate) {
         //predicate.println("Predicate ");
-        var refVars =  predicate.findRreferencedVariables();
+        var refVars =  predicate.findReferencedVariables();
         //refVars.println("refVars ");
         // Find variables and fix references
         for (v in refVars) {
@@ -368,7 +378,7 @@ operation QVT!BottomPattern fixPredicateVarReferences() {
 operation QVT!BottomPattern fixAssignmentVarReferences() {
     for (assignment in self.assignment) {
         //assignment.println("Assignment ");
-        var refVars =  assignment.findRreferencedVariables();
+        var refVars =  assignment.findReferencedVariables();
         //refVars.println("refVars ");
         // Find variables and fix references
         for (v in refVars) {
@@ -429,7 +439,7 @@ operation QVT!BottomPattern fixAssignmentVarReferences() {
 operation QVT!BottomPattern fixOperationCallReferences() {
     for (o in self.enforcementOperation) {
         //predicate.println("Predicate ");
-        var refVars =  o.operationCallExp.findRreferencedVariables();
+        var refVars =  o.operationCallExp.findReferencedVariables();
         //refVars.println("refVars ");
         // Find variables and fix references
         for (v in refVars) {
@@ -501,8 +511,8 @@ operation QVT!Variable findReferencesInPatterns(patterns : Sequence) {
  * Finds all variables referenced in a Preicate.
  */
 @cached
-operation QVT!Predicate findRreferencedVariables() : Collection {
-    return self.conditionExpression.findRreferencedVariables();
+operation QVT!Predicate findReferencedVariables() : Collection {
+    return self.conditionExpression.findReferencedVariables();
 }
 
 /**
@@ -571,106 +581,7 @@ operation QVT!Rule getOutputVars() : Set {
     //}
     return vars;
 }
- /* 
-// self contains vB
-operation QVT!Variable hasContainmentRelation(varB : QVT!Variable) : Boolean {
-    // Containment is in the same domain
-    if (self.oppositePattern().area == varB.oppositePattern().area) {
-        // Fin predicates that only refer the two variables
-        for (p in self.oppositePattern().area.rule.guardPattern.predicate.select(p | p.conditionExpression.isSimpleAttributeNavigation())) {
-            // Are both vars
-            if (p.conditionExpression.findRreferencedVariables()
-                    .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
-                // Find if the navigated property is a containment opposite.
-                var prop = p.conditionExpression.getNavigatedProperty();
-                //p.conditionExpression.toString().println("Predicate ");
-                //self.println("var A ");
-                //varB.println("var B ");
-                //p.conditionExpression.argument.referredVariable.name.println("argument.referredVariable ");
-                //p.conditionExpression.source.source.referredVariable.name.println("source.source.referredVariable ");
-                if (p.conditionExpression.isArgumentVariable(self) and 
-                    p.conditionExpression.isSourceVariable(varB) and prop.opposite.isDefined() and prop.opposite.isComposite()) {
-                    //p.conditionExpression.toString().println(self.name + " with " + varB.name + " in ");   
-                    return true;
-                }
-            }                
-        }
-        // Find assignments that only refer the two vars
-        var assignments;
-        if (isOutputDomain(self.oppositePattern().area)) {
-            assignments = self.oppositePattern().area.bottomPattern.assignment.select(a | a.isSimpleAttributeNavigation());
-        } else {
-            assignments = self.oppositePattern().area.rule.bottomPattern.assignment.select(a | a.isSimpleAttributeNavigation());
-        }
-        for (a in assignments) {
-            // Are both vars
-            if (a.findRreferencedVariables()
-                    .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
-                // Find if the navigated property is a containment opposite.
-                var prop = a.targetProperty;
-                //p.conditionExpression.toString().println("Predicate ");
-                //self.println("var A ");
-                //varB.println("var B ");
-                //p.conditionExpression.argument.referredVariable.name.println("argument.referredVariable ");
-                //p.conditionExpression.source.source.referredVariable.name.println("source.source.referredVariable ");
-                if (a.slotExpression.referredVariable == varB and 
-                    a.value.referredVariable == self and prop.opposite.isDefined() and prop.opposite.isComposite()) {
-                    //a.toString().println(self.name + " with " + varB.name + " in ");   
-                    return true;
-                }
-            }                
-        }
-        
-    }
-    return false;
-}
 
-// self is Middle and has a reference to vB
-operation qvti!Variable hasMiddleRelation(varB : qvti!Variable) : Boolean {
-    // self is Middle domain
-    if (self.oppositePattern().area.name == "middle" and varB.oppositePattern().area.name <> "middle") {
-        // Fin predicates that only refer the two variables
-        for (p in self.oppositePattern().area.rule.guardPattern.predicate.select(p | p.conditionExpression.isSimpleAttributeNavigation())) {
-            // Are both vars
-            if (p.conditionExpression.findRreferencedVariables()
-                    .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
-                // Find if the navigated property is a containment opposite.
-                //p.conditionExpression.toString().println("Predicate ");
-                //self.println("var A ");
-                //varB.println("var B ");
-                //p.conditionExpression.argument.referredVariable.name.println("argument.referredVariable ");
-                //p.conditionExpression.source.source.referredVariable.name.println("source.source.referredVariable ");
-                var prop = p.conditionExpression.getNavigatedProperty();
-                if (p.conditionExpression.isArgumentVariable(varB) and 
-                    p.conditionExpression.isSourceVariable(self) and not prop.isComposite()) {
-                    //p.conditionExpression.toString().println(self.name + " with " + varB.name + "in ");   
-                    return true;
-                }
-            }                
-        }
-        // Find assignments that only refer the two vars
-        for (a in self.oppositePattern().area.rule.bottomPattern.assignment.select(a | a.isSimpleAttributeNavigation())) {
-            // Are both vars
-            if (a.findRreferencedVariables()
-                    .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
-                // Find if the navigated property is a containment opposite.
-                var prop = a.targetProperty;
-                //a.toString().println("Assignment ");
-                //self.println("var A ");
-                //varB.println("var B ");
-                //p.conditionExpression.argument.referredVariable.name.println("argument.referredVariable ");
-                //p.conditionExpression.source.source.referredVariable.name.println("source.source.referredVariable ");
-                if (a.slotExpression.referredVariable == self and 
-                    a.value.referredVariable == varB and not prop.isComposite()) {
-                    //a.toString().println(self.name + " with " + varB.name + " in ");   
-                    return true;
-                }
-            }                
-        }
-        
-    }
-    return false;
-}*/
 
 @cached
 operation QVT!Property isContainer() : Boolean {
@@ -695,6 +606,16 @@ operation QVT!Property hasNavigableOpposite() : Boolean {
     } else {
         return false;
     }
+}
+
+@cached
+operation QVT!Mapping getAllAssignments() : Set {
+    var asgs : Set;
+    asgs.addAll(self.bottomPattern.assignment);
+    for (d in self.domain) {
+        asgs.addAll(d.bottomPattern.assignment);
+    }
+    return asgs;
 }
  
 /**

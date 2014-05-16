@@ -30,7 +30,7 @@ delete PropertyAssignment
 // Output domain predicates of realized variables
 @cascade
 delete Predicate
-    when : original.pattern.isTypeOf(QVTc!BottomPattern) and original.conditionExpression.findRreferencedVariables().forAll(v | isOutputDomain(v.oppositePattern().area))
+    when : original.pattern.isTypeOf(QVTc!BottomPattern) and original.conditionExpression.findReferencedVariables().forAll(v | isOutputDomain(v.oppositePattern().area))
 
 
 // Realized variables in the input domain are retyped into variables
@@ -57,7 +57,7 @@ retype PropertyAssignment to Predicate
             if (isMiddleDomain(original.bottomPattern.area)) {
                 return original.bottomPattern.area.domain.size() > 0 and
                        original.bottomPattern.area.domain.forAll(d | isOutputDomain(d)) and 
-                       original.findRreferencedVariables().forAll(v | isMiddleDomain(v.oppositePattern().area));
+                       original.findReferencedVariables().forAll(v | isMiddleDomain(v.oppositePattern().area));
             } else {
                 return false;
             }
@@ -107,7 +107,7 @@ migrate BottomPattern
 	    migrated.variable.addAll(original.realizedVariable.equivalent());
 	    for (a in original.assignment) {
 	        if (isInputDomain(original.area) or 
-	            a.findRreferencedVariables().forAll(v | isMiddleDomain(v.oppositePattern().area))) {
+	            a.findReferencedVariables().forAll(v | isMiddleDomain(v.oppositePattern().area))) {
 	               migrated.predicate.add(a.equivalent());
 	            }
 	    }
@@ -121,7 +121,7 @@ migrate PropertyAssignment
             if (isMiddleDomain(original.bottomPattern.area)) {
                 return original.bottomPattern.area.domain.size() > 0 and
                        original.bottomPattern.area.domain.forAll(d | isOutputDomain(d)) and 
-                       original.findRreferencedVariables().forAll(v | isMiddleDomain(v.oppositePattern().area));
+                       original.findReferencedVariables().forAll(v | isMiddleDomain(v.oppositePattern().area));
             } else {
                 return false;
             }

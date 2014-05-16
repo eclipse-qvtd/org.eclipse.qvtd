@@ -22,24 +22,6 @@ delete Area
             and (original.context.local.select(m | m.domain.isEmpty()).size() > 1)
             and original.domain.isEmpty()
 
-/*
-@cascade       
-delete CorePattern
-    when : original.area.isTypeOf(QVT!Mapping)
-            and original.area.context.isDefined()
-            and (original.area.context.local.select(m | m.domain.isEmpty()).size() > 1)
-            and original.area.domain.isEmpty()
-
-@cascade      
-delete Assignment
-    when : original.bottomPattern.area.isTypeOf(QVT!Mapping)
-            and original.bottomPattern.area.context.isDefined()
-            and (original.bottomPattern.area.context.local.select(m | m.domain.isEmpty()).size() > 1)
-            and original.bottomPattern.area.domain.isEmpty()
-
-*/
-
-
 // Merge domainless local mappigns
 migrate Mapping
     when : not original.context.isDefined()
@@ -137,9 +119,6 @@ migrate Mapping
             m.bottomPattern.fixOperationCallReferences();
             m.bottomPattern.fixAssignmentVarReferences();
         }
-        // Remove the refinements
-        // Keep them so we can use the information later!!
-        // migrated.refinement = Set{};
     }
 
 /**
