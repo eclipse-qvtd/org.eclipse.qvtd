@@ -11,7 +11,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.debug.srclookup;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.emf.common.util.URI;
@@ -27,17 +26,18 @@ public class QVTiSourcePathComputer extends VMSourcePathComputer {
 		return ID;
 	}
 
-	protected IFile getModuleFile(@NonNull ILaunchConfiguration configuration) throws CoreException {
+	protected URI getModuleFile(@NonNull ILaunchConfiguration configuration) throws CoreException {
 //        String moduleFileName = configuration.getAttribute(LaunchConstants.MODULE, ""); //$NON-NLS-1$
         String moduleFileName = configuration.getAttribute(QVTiLaunchConstants.TX_KEY, ""); //$NON-NLS-1$
         URI moduleUri = URI.createURI(moduleFileName);
-        IFile moduleFile = getWorkspaceFile(moduleUri);
-        if(moduleFile == null) {
+        return moduleUri;
+//        IFile moduleFile = getWorkspaceFile(moduleUri);
+//        if(moduleFile == null) {
         	//IStatus errorStatus = MiscUtil.makeErrorStatus( 
         		//	NLS.bind(Messages.QvtLaunchConfigurationDelegate_transformationFileNotFound, moduleFileName));
         	//throw new CoreException(errorStatus);
-        }
+//        }
         
-        return moduleFile;
+//        return moduleFile;
     }
 }
