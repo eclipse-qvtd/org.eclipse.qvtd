@@ -43,9 +43,9 @@ public class QVTiVMLaunchConfigurationDelegate extends VMLaunchConfigurationDele
 		return new QVTiDebugTarget(process, vm);
 	}
 
-	protected @NonNull DebuggableRunnerFactory createDebuggableRunnerFactory(@NonNull String uri, @NonNull EPackage.Registry packageRegistry,
+	protected @NonNull DebuggableRunnerFactory createDebuggableRunnerFactory(@NonNull EPackage.Registry packageRegistry,
 			@NonNull List<String> modelURIs, @Nullable String traceURI) {
-		return new QVTiDebuggableRunnerFactory(packageRegistry, uri, modelURIs, null);
+		return new QVTiDebuggableRunnerFactory(packageRegistry, modelURIs, null);
 	}
 	
 	protected @NonNull QVTiEvaluationContext createEvaluationContext(@NonNull ILaunchConfiguration configuration) throws CoreException {

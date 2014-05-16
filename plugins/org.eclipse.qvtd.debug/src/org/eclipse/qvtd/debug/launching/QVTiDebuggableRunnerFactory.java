@@ -33,9 +33,9 @@ public class QVTiDebuggableRunnerFactory extends DebuggableRunnerFactory
 {
 	public static final @NonNull ValidBreakpointLocator validBreakpointLocator = new ValidBreakpointLocator(QVTiIsBreakpointableVisitor.INSTANCE);
 	
-	public QVTiDebuggableRunnerFactory(@NonNull EPackage.Registry packageRegistry, @NonNull String debuggableURI,
+	public QVTiDebuggableRunnerFactory(@NonNull EPackage.Registry packageRegistry,
 			@NonNull List<String> modelURIs, @Nullable String traceFileURI) {
-		super(packageRegistry, debuggableURI, modelURIs, traceFileURI);
+		super(packageRegistry, modelURIs, traceFileURI);
 	}
 
 	public @NonNull DebuggableRunner createRunner(@NonNull EvaluationContext evaluationContext) throws DiagnosticException {
