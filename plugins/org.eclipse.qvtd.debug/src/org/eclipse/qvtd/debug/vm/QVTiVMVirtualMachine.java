@@ -27,6 +27,7 @@ import org.eclipse.ocl.examples.debug.vm.launching.DebuggableRunner;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Feature;
+import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.Root;
@@ -139,7 +140,7 @@ public class QVTiVMVirtualMachine extends VMVirtualMachine
 
 	private static @NonNull VMStackFrameData createStackFrame(@NonNull UnitLocation location, boolean includeVars) {
 		IVMEvaluationEnvironment<?> evalEnv = location.getEvalEnv();
-		Root module = location.getModule();
+		NamedElement module = location.getModule();
 		String moduleName = (module != null) ? module.getName() : "<null>"; //$NON-NLS-1$
 		
 		Element element = location.getElement();
