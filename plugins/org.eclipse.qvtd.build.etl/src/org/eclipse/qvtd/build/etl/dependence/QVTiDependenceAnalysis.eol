@@ -8,9 +8,9 @@
  * Contributors:
  *     Horacio Hoyos - initial implementation
  ******************************************************************************/
-import "OCLExpressionAnalysis.eol";
 import "InterMappingDependencies.eol";
 import "MappingDataDependencies.eol";
+import "../helpers/OCLExpressionAnalysis.eol";
 
 
 /****l* org.eclipse.qvtd.build.etl/dependence/QVTiDependenceAnalysis
@@ -72,7 +72,21 @@ for (r in qvti!Transformation.all().first().rule) {
         // Get all the assignments that hava a value that is a PropertyCallExp in which
         // the source is of the type and the referredProperty is the same
         r.getAllAssignments().select(a | a.value.isTypeOf(QVT!PropertyCallExp)
-        
+                and a.value.source.type == values.first() and a.value.referredProperty == values.last()).println("ass ");
+        for (p in r.getAllPredicates().select(p | p.conditionExpression.isTypeOf(QVT!OperationCallExp) 
+                and p.conditionExpression.referredOperation == getOperationByName("=", oclStdLib!AnyType.all().selectOne(t | t.name == "OclAny")))) {
+            // Any of the arguments can be the use
+            for (a in self.argument.select(a | a.isTypeOf(QVT!PropertyCallExp))) {
+                if (a.source.type == values.first() and a.referredProperty == values.last()) {
+                    p.println("is use ");
+                }
+            }
+            if (self.source.isTypeOf(QVT!PropertyCallExp)) {
+                if (a.source.source.type == values.first() and a.source.referredProperty == values.last()) {
+                    p.println("is use ");
+                }
+            }
+        }
     }
 }
 

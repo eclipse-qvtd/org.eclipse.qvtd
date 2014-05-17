@@ -6,7 +6,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Horacio Hoyos - initial script
  ******************************************************************************/
@@ -17,11 +17,11 @@
 	<property name="QVTcToQVTu" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTcToQVTu.mig"/>
 	<property name="QVTuToQVTm" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTuToQVTm.mig"/>
 	<property name="QVTmToQVTiPartition" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTmToQVTiPartition.etl"/>
-	
+
 	<target name="PivotSetup">
 		   <PivotSetup/>
 	</target>
-	
+
 	<target name="loadModels" depends="PivotSetup">
         <!-- OCL Library -->
         <epsilon.emf.loadModel
@@ -33,24 +33,24 @@
         <!-- Configuration -->
         <epsilon.emf.loadModel
             name = "config"
-            modelFile = "${name}Config.xmi" 
+            modelFile = "${name}Config.xmi"
             metamodelUri = "http://www.eclipse.org/qvt/examples/0.1/QVTcConfig"
             read="true" store="false"/>
     </target>
-	
+
 	<target name="QvtcToQvtu" depends="loadModels">
 		<!-- QVTc -->
         <epsilon.emf.loadModel
             name = "QVTc"
             aliases ="QVT"
-            modelFile = "${name}.qvtcas" 
+            modelFile = "${name}.qvtcas"
             metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
             read="true" store="false"/>
         <!-- QVTu -->
         <epsilon.emf.loadModel
             name = "QVTu"
             aliases ="QVT"
-            modelFile = "${name}.qvtu.qvtcas" 
+            modelFile = "${name}.qvtu.qvtcas"
             metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
             read="false" store="true"/>
 	    <epsilon.flock originalmodel="QVTc" migratedmodel="QVTu" uri="${QVTcToQVTu}">
@@ -62,20 +62,20 @@
 		<epsilon.disposeModel model="QVTc"/>
 		<epsilon.disposeModel model="QVTu"/>
 	</target>
-	
+
 	<target name="QvtuToQvtm" depends="QvtcToQvtu">
 		 <!-- QVTu -->
         <epsilon.emf.loadModel
             name = "QVTu"
             aliases ="QVT"
-            modelFile = "${name}.qvtu.qvtcas" 
+            modelFile = "${name}.qvtu.qvtcas"
             metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
             read="true" store="false"/>
 		<!-- QVTm Flatten  -->
         <epsilon.emf.loadModel
             name = "QVTm"
             aliases ="QVT"
-            modelFile = "${name}.qvtm.qvtcas" 
+            modelFile = "${name}.qvtm.qvtcas"
             metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
             read="false" store="true"/>
         <epsilon.flock originalmodel="QVTu" migratedmodel="QVTm" uri="${QVTuToQVTm}">
@@ -87,13 +87,13 @@
 		<epsilon.disposeModel model="QVTu"/>
 		<epsilon.disposeModel model="QVTm"/>
     </target>
-	
+
 	<target name="QvtmToQvtiPartition" depends="loadModels">
 		<!-- QVTm Flatten  -->
         <epsilon.emf.loadModel
             name = "QVTm"
             aliases ="QVT"
-            modelFile = "${name}.qvtm.qvtcas" 
+            modelFile = "${name}.qvtm.qvtcas"
             metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
             read="true" store="false"/>
 		<!-- QVTm Partition  -->
@@ -111,5 +111,5 @@
 	    </epsilon.etl>
 		<epsilon.disposeModel model="QVTm"/>
 		<epsilon.disposeModel model="QVTiP"/>
-    </target>       
+    </target>
 </project>
