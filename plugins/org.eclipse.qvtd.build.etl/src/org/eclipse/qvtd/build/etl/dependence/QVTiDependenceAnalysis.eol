@@ -61,7 +61,7 @@ qvti!Transformation.all().first().interMappingDependencies(img, inputVarMap, out
 // 2. Mapping data dependendence
 var mdd = new ddGraph!Graph;
 mdd.name = "MappingDataDependences";
-//qvti!Transformation.all().first().mappingDataDependencies(mdd, inputVarMap, outputVarMap);
+qvti!Transformation.all().first().mappingDataDependencies(mdd, inputVarMap, outputVarMap, dataTypeAssignments);
 
 
 // 3. Merge Data dependencies
@@ -73,7 +73,7 @@ var containmentTrees : Map;
 containmentTrees.put("l", lTree!Node.all());
 containmentTrees.put("m", mTree!Node.all());
 containmentTrees.put("r", rTree!Node.all());
-//mdd.mergedMappingDataDependencies(mdg, containmentTrees);
+mdd.mergedMappingDataDependencies(mdg, containmentTrees);
 
 
 //4. Reduced data dependencies
@@ -83,107 +83,8 @@ var rdg = new rdGraph!Graph;
 // Analize the dependencies to identify which input variables can be derived from others
 // primaryInputs are only the ones that don't have a containment relation or a 
 // middle relation with other input vars
-//mdd.reducedMergedMappingDataDependencies(rdg, containmentTrees);
+mdd.reducedMergedMappingDataDependencies(rdg, containmentTrees);
 
-/*
-for (m in ddGraph!Node.all().select(n | n.type == ddGraph!NodeType#mapping).sortBy(n | n.incoming.size())) {
-    // If an output var is abstract (i.e., doesn't exist in any of the containment
-    // trees) don't add the mapping to the merged graph. Input abstract variables
-    // are allowed because searching for elements of a type returns elements of the
-    // type and all its sub-types.
-    
-    var outputVarNodes = m.outgoing.collect(e | e.target).flatten();
-    
-    //if (not outputVarNodes.forAll(vN | lTree!Node.all().exists(n | n.type == vN.label)
-    //       or mTree!Node.all().exists(n | n.type == vN.label)
-    //        or rTree!Node.all().exists(n | n.type == vN.label))
-    //        ) {
-    //        continue;
-    //    }
-    
-    var inputVarNodes = m.incoming.collect(e | e.source).flatten();
-    // For each input variable, find the corresponding type in the domain
-    // containment tree and make the connection. If the type is abstrac (does not 
-    // exist in the tree), connect it to all its subtypes.
-    //m.println("m" + loopCount + " ");
-    var mappingNode = getNodeForNode(rdg, m);
-    for (vN in inputVarNodes) {
-        var sources = lTree!Node.all().select(n | (n.EClassifierName == vN.label) or n.superTypes.includes(vN.label)); 
-        if (sources.isEmpty()) {
-            sources = mTree!Node.all().select(n | (n.EClassifierName == vN.label) or n.superTypes.includes(vN.label));
-        }
-        if (sources.isEmpty()) {
-            sources = rTree!Node.all().select(n | (n.EClassifierName == vN.label) or n.superTypes.includes(vN.label));
-        }
-        if (sources.isEmpty()) {
-            // Error. WE should never get here!
-            vN.errln("Not valid type found for: ");
-        }
-        for (s in sources) {
-            var e = new rdGraph!Edge;
-            var double : Boolean = false;   // If there is another edge to the input, is a double input
-            var derived : Boolean = false;
-            
-            // Identify derived input variables. Derived variables are variables that can be assigned
-            // from other variables, e.g. ownership or middle model reference
-             
-            // 1. 1st candidates are variables that don't have outgoing edges to other variable (the
-            // same as if all the edges go to the  mapping)
-            //if (vN.outgoing.exists(o | o.target = m)) {
-            //    // 2. From these, look for any predicates that can help resolve them
-            //    var mapping = qvti!Mapping.all().selectOne(om | om.name == m.label );
-            //    // a. Get all the simple attribute navigation predicates
-            //    for (p in mapping.guardPattern.predicate.
-            //           includingAll(m.domain.collect(d | d.guardPattern).flatten()).
-            //                select(p | p.isSimpleAttributeNavigation() and p.isArgumentVariable())) {
-            //        //for (vN.outgoing.exists(o | o.target = m))
-            //    }
-            //} else {
-            //    derived = true;
-            // }
-            
-            if (rdGraph!Edge.all().exists(e | e.source == mergeMap.get(s) and e.target == mappingNode)) {
-                if (rdGraph!Edge.all().select(e | e.source == mergeMap.get(s) and e.target == mappingNode)
-                        .exists(o | o.type == mdGraph!EdgeType#derivedInput)) {
-                    e.type = rdGraph!EdgeType#doubleDerivedInput;
-                } else {
-                    e.type = rdGraph!EdgeType#doublePrimaryInput;
-                }
-            } else {
-                // Differentiate between primary and derived
-                if (vN.outgoing.exists(o | inputVarNodes.includes(o.target))) {
-                    e.type = rdGraph!EdgeType#derivedInput;
-                } else {
-                    e.type = rdGraph!EdgeType#primaryInput;
-                }
-            }
-            e.source = mergeMap.get(s);
-            e.target = mappingNode;
-            rdg.element.add(e);
-        }
-    }
-    for (vN in outputVarNodes) {
-        var targets = lTree!Node.all().select(n | (n.EClassifierName == vN.label) or n.superTypes.includes(vN.label)); 
-        if (targets.isEmpty()) {
-            targets = mTree!Node.all().select(n | (n.EClassifierName == vN.label) or n.superTypes.includes(vN.label));
-        }
-        if (targets.isEmpty()) {
-            targets = rTree!Node.all().select(n | (n.EClassifierName == vN.label) or n.superTypes.includes(vN.label));
-        }
-        if (targets.isEmpty()) {
-            // Error. WE should never get here!
-            vN.errln("Not valid type found for: ");
-        }
-        for (t in targets) {
-            var e = new rdGraph!Edge;
-            e.type = rdGraph!EdgeType#output;
-            e.source = mappingNode;
-            e.target = mergeMap.get(t);
-            rdg.element.add(e);
-        }
-    }
-}
-*/
 "Done".println();
 
 /* ==================================================================== */

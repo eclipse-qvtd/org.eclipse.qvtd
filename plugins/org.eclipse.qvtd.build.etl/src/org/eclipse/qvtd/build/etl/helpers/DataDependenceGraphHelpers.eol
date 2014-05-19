@@ -40,7 +40,7 @@ import "QVTHelpers.eol";
  * SEE ALSO
  *
  */
-operation QVT!Variable variableRelations(graph : ddg!Graph, vars : Set, varMap : Map) {
+operation QVT!Variable variableRelations(graph : ddg!Graph, vars : Sequence, varMap : Map) {
 
     var vaNode = graph.getNodeForQvtAstNode(self, varMap);
     for (vB in vars) {
@@ -133,16 +133,16 @@ operation ddg!Graph getNodeForQvtAstNode(astNode : QVT!NamedElement, nodeMap : M
  * SEE ALSO
  *
  */ 
-operation ddg!Graph getNodeForDataTypeUse(use : Sequence, nodeMap : Map) : ddg!Node {
+operation ddg!Graph getNodeForDataType(use : Sequence, nodeMap : Map) : ddg!Node {
     var n;
     if (nodeMap.containsKey(use)) {
         n = nodeMap.get(use);
     } else {
         // TODO Different node types for different AST node types. If the type of the AST node is  DataType, things change!
         n = self.owningModel().createInstance("DataTypeNode");
-        n.label = use.concat(".");
+        n.label = use.collect(u | u.name).concat(".");
         n.type = use.first();
-        n.attribute = use. last();
+        n.attribute = use.last();
         nodeMap.put(use, n);
         self.element.add(n);
     }

@@ -40,13 +40,15 @@ import "../helpers/Math.eol";
  * SEE ALSO
  *
  */ 
-operation QVT!Transformation mappingDataDependencies(graph : ddg!Graph, inputVarMap : Map, outputVarMap : Map) {
-    var ruleMap : Map;  //!< Cache nodes for mappings nodes (AST, graph!Node)
-    var varMap : Map;  //!< Cache nodes for mappings nodes (AST, graph!Node)
+operation QVT!Transformation mappingDataDependencies(graph : ddg!Graph, inputVarMap : Map, outputVarMap : Map, dataTypeAssignments : Map) {
+    var ruleMap : Map;      // Cache nodes for mappings nodes (AST, graph!Node)
+    var varMap : Map;       // Cache nodes for mappings nodes (AST, graph!Node)
+    var assgMap : Map;      // Cache nodes for DataType assignemnt nodes (Sequence, graph!Node)
     
     for (r in self.rule.select(r | not r.context.isDefined())) {
         var ruleNode = graph.getNodeForQvtAstNode(r, ruleMap);
         varMap.clear();
+        assgMap.clear();
         //r.println();
 	    // Input variables relations
 	    for (vA in inputVarMap.get(r)) {
@@ -74,6 +76,31 @@ operation QVT!Transformation mappingDataDependencies(graph : ddg!Graph, inputVar
 	    for (vIn in inputVarMap.get(r)) {
 	        //vA.println("vA ");
 	        vIn.variableRelations(graph, outputVarMap.get(r), varMap);
+	    }
+	    // DataType assignments treatd as outputs
+	    if (not dataTypeAssignments.get(r).isEmpty()) {
+            var dtNode = graph.getNodeForDataType(dataTypeAssignments.get(r), assgMap);
+	        var e = graph.owningModel().createInstance("DependencyEdge");
+            e.source = ruleNode;
+            e.target = dtNode;
+            e.direction = ddg!DependencyDirection#output;   
+            graph.element.add(e);     
+	    }
+	    // Find DataType Uses, treated as inputs
+        for (r2 in self.rule.select(r | not r.context.isDefined()).excluding(r)) {
+            if (not dataTypeAssignments.get(r2).isEmpty()) {
+                var value = dataTypeAssignments.get(r2);
+                if (r.hasDataTypeUse(value)) {
+                    var dtNode = graph.getNodeForDataType(value, assgMap);
+                    if (not graph.element.exists(e : ddg!DependencyEdge | e.source == dtNode and e.target==ruleNode)) {
+                        var e = graph.owningModel().createInstance("DependencyEdge");
+	                    e.source = dtNode;
+	                    e.target = ruleNode;
+	                    e.direction = ddg!DependencyDirection#input;
+	                    graph.element.add(e);
+                    }
+                }
+	        }   
 	    }
 	}
 }
@@ -110,44 +137,80 @@ operation ddg!Graph mergedMappingDataDependencies(mergeGraph : ddg!Graph, contai
 	    //  not exist in the tree), connect it to all its subtypes.
 	    var mappingNode = mergeGraph.getNodeCopy(m, mergeMap);
 	    for (vN in inputVarNodes) {
-	        var sources : Collection;
-	        for(key in containmentTrees.keySet()) {
-		        sources = containmentTrees.get(key).select(n | (n.EClassName == vN.label) or n.superTypes.includes(vN.label)); 
-		        if (not sources.isEmpty()) {
+	        var sources = new Sequence;
+            // Search in containment tree
+            for(key in containmentTrees.keySet()) {
+                sources = containmentTrees.get(key).select(n | (n.EClassName == vN.label) or n.superTypes.includes(vN.label)); 
+                if (not sources.isEmpty()) {
                     break;
-		        }
-		    }
+                }
+            }
 	        if (sources.isEmpty()) {
-	            vN.errln("mergedMappingDataDependencies Not valid type found for input: "); // Error. WE should never get here!
-	        }
-	        for (s in sources) {
-	            var e = mergeGraph.owningModel().createInstance("DependencyEdge");
-	            // If there is another edge to the input, is a double input
-	            e.multiple = mergeGraph.element.exists(e : ddg!Edge| e.source == mergeMap.get(s) and e.target == mappingNode);
-	            e.direction = ddg!DependencyDirection#input;
-	            e.source = mergeMap.get(s);
-	            e.target = mappingNode;
-	            mergeGraph.element.add(e);
+	            if (vN.isTypeOf(ddg!DataTypeNode)) {
+	                var n = mergeGraph.element.selectOne(n : ddg!DataTypeNode | n.label = vN.label and n.type = vN.type);
+	                if (n == null) {
+	                    n = mergeGraph.owningModel().createInstance("DataTypeNode");
+	                    n.label = vN.label;
+                        n.type = vN.type;
+                        n.attribute = vN.attribute;
+                        mergeGraph.element.add(n);
+	                }
+	                var e = mergeGraph.owningModel().createInstance("DependencyEdge");
+                    e.direction = ddg!DependencyDirection#input;
+                    e.source = n;
+                    e.target = mappingNode;
+                    mergeGraph.element.add(e);
+                } else {
+                    vN.errln("mergedMappingDataDependencies Not valid type found for input: "); // Error. WE should never get here!
+                }
+	        } else {
+	            for (s in sources) {
+	                var e = mergeGraph.owningModel().createInstance("DependencyEdge");
+	                // If there is another edge to the input, is a double input
+	                e.multiple = mergeGraph.element.exists(e : ddg!Edge| e.source == mergeMap.get(s) and e.target == mappingNode);
+	                e.direction = ddg!DependencyDirection#input;
+	                e.source = mergeMap.get(s);
+	                e.target = mappingNode;
+	                mergeGraph.element.add(e);
+                }
 	        }
 	    }
 	    for (vN in outputVarNodes) {
-	        var targets : Collection;
-	        for(key in containmentTrees.keySet()) {
+	        var targets = new Sequence;
+            for(key in containmentTrees.keySet()) {
                 targets = containmentTrees.get(key).select(n | (n.EClassName == vN.label)); 
                 if (not targets.isEmpty()) {
                     break;
                 }
             }
 	        if (targets.isEmpty()) {
-	            vN.errln("mergedMappingDataDependencies Not valid type found for output: ");    // Error. WE should never get here!
+	            if (vN.isTypeOf(ddg!DataTypeNode)) {
+                    var n = mergeGraph.element.selectOne(n : ddg!DataTypeNode | n.label = vN.label and n.type = vN.type);
+                    if (n == null) {
+                        n = mergeGraph.owningModel().createInstance("DataTypeNode");
+                        n.label = vN.label;
+                        n.type = vN.type;
+                        n.attribute = vN.attribute;
+                        mergeGraph.element.add(n);
+                    }
+                    var e = mergeGraph.owningModel().createInstance("DependencyEdge");
+                    e.direction = ddg!DependencyDirection#output;
+                    e.source = mappingNode;
+                    e.target = n;
+                    mergeGraph.element.add(e);
+                } else {
+                    vN.errln("mergedMappingDataDependencies Not valid type found for output: ");    // Error. WE should never get here!
+                }
+	        } else {
+	            for (t in targets) {
+	                var e = mergeGraph.owningModel().createInstance("DependencyEdge");
+	                e.source = mappingNode;
+	                e.target = mergeMap.get(t);
+	                e.direction = ddg!DependencyDirection#output;
+	                mergeGraph.element.add(e);
+	            }
 	        }
-	        for (t in targets) {
-	            var e = mergeGraph.owningModel().createInstance("DependencyEdge");
-	            e.source = mappingNode;
-	            e.target = mergeMap.get(t);
-	            e.direction = ddg!DependencyDirection#output;
-	            mergeGraph.element.add(e);
-	        }
+	        
 	    }
 	}
 }
@@ -225,18 +288,36 @@ operation ddg!Graph reducedMergedMappingDataDependencies(reduceGraph : ddg!Graph
 	            }
 	        }
 	        if (sources.isEmpty()) {
-	            vN.errln("reducedMergedMappingDataDependencies Not valid type found for input: "); // Error. WE should never get here!
+	           if (vN.isTypeOf(ddg!DataTypeNode)) {
+                    var n = reduceGraph.element.selectOne(n : ddg!DataTypeNode | n.label = vN.label and n.type = vN.type);
+                    if (n == null) {
+                        n = reduceGraph.owningModel().createInstance("DataTypeNode");
+                        n.label = vN.label;
+                        n.type = vN.type;
+                        n.attribute = vN.attribute;
+                        mergeGraph.element.add(n);
+                    }
+                    var e = reduceGraph.owningModel().createInstance("DependencyEdge");
+                    e.direction = ddg!DependencyDirection#input;
+                    e.source = n;
+                    e.target = mappingNode;
+                    reduceGraph.element.add(e);
+                } else {
+                    vN.errln("reducedMergedMappingDataDependencies Not valid type found for input: "); // Error. WE should never get here!
+                }
+	        } else {
+	            for (s in sources) {
+	                var e = reduceGraph.owningModel().createInstance("DependencyEdge");
+	                // If there is another edge to the input, is a double input
+	                e.multiple = reduceGraph.element.exists(e : ddg!Edge| e.source == mergeMap.get(s) and e.target == mappingNode);
+	                e.direction = ddg!DependencyDirection#input;
+	                e.derived = not C.exists(c | c.label = vN.label);
+	                e.source = mergeMap.get(s);
+	                e.target = mappingNode;
+	                reduceGraph.element.add(e);
+	            }
 	        }
-	        for (s in sources) {
-	            var e = reduceGraph.owningModel().createInstance("DependencyEdge");
-	            // If there is another edge to the input, is a double input
-	            e.multiple = reduceGraph.element.exists(e : ddg!Edge| e.source == mergeMap.get(s) and e.target == mappingNode);
-	            e.direction = ddg!DependencyDirection#input;
-	            e.derived = not C.exists(c | c.label = vN.label);
-	            e.source = mergeMap.get(s);
-	            e.target = mappingNode;
-	            reduceGraph.element.add(e);
-	        }
+	        
 	    }
 	    for (vN in m.outgoing.collect(e | e.target).flatten()) {
             var targets : Collection;
@@ -247,16 +328,32 @@ operation ddg!Graph reducedMergedMappingDataDependencies(reduceGraph : ddg!Graph
                 }
             }
             if (targets.isEmpty()) {
-                vN.errln("reducedMergedMappingDataDependencies Not valid type found for output: ");    // Error. WE should never get here!
-            }
-            for (t in targets) {
-                var e = reduceGraph.owningModel().createInstance("DependencyEdge");
-                e.direction = ddg!DependencyDirection#output;
-                e.source = mappingNode;
-                e.target = mergeMap.get(t);
-                reduceGraph.element.add(e);
+                if (vN.isTypeOf(ddg!DataTypeNode)) {
+                    var n = reduceGraph.element.selectOne(n : ddg!DataTypeNode | n.label = vN.label and n.type = vN.type);
+                    if (n == null) {
+                        n = reduceGraph.owningModel().createInstance("DataTypeNode");
+                        n.label = vN.label;
+                        n.type = vN.type;
+                        n.attribute = vN.attribute;
+                        reduceGraph.element.add(n);
+                    }
+                    var e = reduceGraph.owningModel().createInstance("DependencyEdge");
+                    e.direction = ddg!DependencyDirection#output;
+                    e.source = mappingNode;
+                    e.target = n;
+                    reduceGraph.element.add(e);
+                } else {
+                    vN.errln("reducedMergedMappingDataDependencies Not valid type found for output: ");    // Error. WE should never get here!
+                }
+            } else {
+                for (t in targets) {
+	                var e = reduceGraph.owningModel().createInstance("DependencyEdge");
+	                e.direction = ddg!DependencyDirection#output;
+	                e.source = mappingNode;
+	                e.target = mergeMap.get(t);
+	                reduceGraph.element.add(e);
+	            }    
             }
         }
-	    
     }
 }

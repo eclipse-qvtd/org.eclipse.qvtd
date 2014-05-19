@@ -726,11 +726,14 @@ operation QVT!Mapping getDataTypeAssignments() : Sequence {
  *
  */    
 operation QVT!Mapping hasDataTypeUse(values : Sequence) : Boolean {
-    //r.name.println();
+    //self.name.println();
     // Get all the assignments that hava a value that is a PropertyCallExp in which
     // the source is of the type and the referredProperty is the same
     if (self.getAllAssignments().exists(a | a.value.isTypeOf(QVT!PropertyCallExp)
-            and a.value.source.type == values.first() and a.value.referredProperty == values.last())) {
+            and a.value.source.isTypeOf(QVT!VariableExp) and a.value.source.type == values.first()
+            and a.value.referredProperty == values.last())) {
+        self.getAllAssignments().select(a | a.value.isTypeOf(QVT!PropertyCallExp)
+            and a.value.source.type == values.first() and a.value.referredProperty == values.last()).first().toString().println();    
         return true;        
     }
     for (p in self.getAllPredicates()) {
