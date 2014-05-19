@@ -6,7 +6,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="model" eType="#//Model"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataTypeNode" eSuperTypes="#//Node">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DependencyEdge" eSuperTypes="#//Edge">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="derived" lowerBound="1"

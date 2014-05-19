@@ -30,21 +30,21 @@ import "../helpers/DataDependenceGraphHelpers.eol";
  * @param inputVarMap   The map of mapings to input variables
  * @param outputVarMap  The map of mapings to output variables
  */
-operation QVT!Transformation interMappingDependencies(graph : ddg!Graph, inputVarMap : Map, outputVarMap : Map) {
+operation QVT!Transformation interMappingDependencies(graph : ddg!Graph, inputVarMap : Map, outputVarMap : Map, dataTypeAssignments : Map) {
     
     var x = new Native("org.eclipse.qvtd.build.etl.PivotUtil");
-    var nodeMap : Map;  //!< Cache nodes for AST nodes (AST, graph!Node)
-    
+    var nodeMap : Map;  // Cache nodes for AST nodes (AST, graph!Node)
+    var pairedMapps : Sequence;  // Value added if edge created
 	for (rB in self.rule) {
 	    //rB.name.println("From ");
 	    for (vB in inputVarMap.get(rB)) {
 	        //vB.name.println();
-	        // Search for compatible output vars ??(by type) in same side mappings (LM or MR))
-	        for (rA in self.rule /*.excluding(rB) .select(
+	        for (rA in self.rule /*.excluding(rB).select(
                 r | r.domain.collect(d | d.typedModel).flatten()
                     .includesAll(rB.domain.collect(d | d.typedModel).flatten())
                 )*/
 	            ) {
+	            // Search for compatible output vars ??(by type) in same side mappings (LM or MR))
 	            for (vA in outputVarMap.get(rA)) {
 	                if (x.isKindOf(vA.type, vB.type)) {
 	                    //vA.name.println("to " + rA.name + " var ");
@@ -55,6 +55,21 @@ operation QVT!Transformation interMappingDependencies(graph : ddg!Graph, inputVa
 	                    graph.element.add(e);
 	                }
 	            }
+	        }
+	    }
+	    pairedMapps.clear();
+	    for (rA in self.rule.excluding(rB)) {
+	        // Search for DataType uses
+	        if (not pairedMapps.includes(rA)) {
+	            var value = dataTypeAssignments.get(rA); 
+                if (rB.hasDataTypeUse(value)) {
+                    var e = graph.owningModel().createInstance("DependencyEdge");
+                    e.source = graph.getNodeForQvtAstNode(rA, nodeMap);
+                    e.target = graph.getNodeForQvtAstNode(rB, nodeMap);
+                    e.direction = ddg!DependencyDirection#output;
+                    graph.element.add(e);
+                    pairedMapps.add(rA);
+                }
 	        }
 	    }
 	}

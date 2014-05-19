@@ -94,14 +94,14 @@ operation ddg!Graph getNodeForQvtAstNode(astNode : QVT!NamedElement, nodeMap : M
             n.label = astNode.name;
         } else if (astNode.isKindOf(QVT!Variable)) {
             if (astNode.type.isTypeOf(QVT!PrimitiveType)) {
-                n = self.owningModel().createInstance("DataTypeNode");
+                errln("getNodeForQvtAstNode -> PrimitiveType, should not get here.");
             } else {
                 n = self.owningModel().createInstance("ClassNode");
-                if (isMiddleDomain(astNode.oppositePattern().area)) {
+                if (astNode.oppositePattern().area.isMiddleDomain()) {
                     n.`model` = ddg!Model#middle;
-			    } else if(isInputDomain(astNode.oppositePattern().area)) {
+			    } else if(astNode.oppositePattern().area.isInputDomain()) {
                     n.`model` = ddg!Model#input;
-			    } else if(isOutputDomain(astNode.oppositePattern().area)) {
+			    } else if(astNode.oppositePattern().area.isOutputDomain()) {
 			        n.`model` = ddg!Model#output;
 			    }
             }
@@ -112,6 +112,39 @@ operation ddg!Graph getNodeForQvtAstNode(astNode : QVT!NamedElement, nodeMap : M
 	    n.qvtAstNode = astNode;
 	    nodeMap.put(astNode, n);
 	    self.element.add(n);
+    }
+    return n;
+}
+
+/****o* org.eclipse.qvtd.build.etl/helpers/DataDependenceGraphHelpers/getNodeForDataType 
+ * NAME
+ *  getNodeForDataType - Get the correspoiding graph node for the AST node.
+ * FUNCTION
+ *  If a graph node for the AST node does not exist, it creates a new one. If it
+ *  exists, it returns the previously created one.
+ *
+ * CONTEXT
+ *  ddg!Graph   The data dependence graph   
+ * PARAMETERS
+ *  astNode The QVT AST node for whihc the corresponding graph node is wanted
+ *  nodeMap The map to keep a cache of AST - Node relations
+ * RESULT
+ *  ddg!Node The node that corresponds to the AST node
+ * SEE ALSO
+ *
+ */ 
+operation ddg!Graph getNodeForDataTypeUse(use : Sequence, nodeMap : Map) : ddg!Node {
+    var n;
+    if (nodeMap.containsKey(use)) {
+        n = nodeMap.get(use);
+    } else {
+        // TODO Different node types for different AST node types. If the type of the AST node is  DataType, things change!
+        n = self.owningModel().createInstance("DataTypeNode");
+        n.label = use.concat(".");
+        n.type = use.first();
+        n.attribute = use. last();
+        nodeMap.put(use, n);
+        self.element.add(n);
     }
     return n;
 }

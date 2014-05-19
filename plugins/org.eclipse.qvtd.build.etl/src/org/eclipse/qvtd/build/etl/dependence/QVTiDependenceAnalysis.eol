@@ -40,8 +40,8 @@ import "../helpers/OCLExpressionAnalysis.eol";
 
 var varMap : Map;       // (Variable, tree!Node)
 var inputVarMap : Map;  // (mapping, Set{variable})
-var primDataAssignmentMap : Map;    // (mapping, Sequence{Type, Attribute})
 var outputVarMap : Map; // (mapping, Set{realizedVariable})
+var dataTypeAssignments : Map;    // (mapping, Sequence{Type, Attribute})
 var nodeMap : Map;      // (mapping, graph!Node)
 var dataNodeMap : Map;      // (??, graph!Node)
 
@@ -50,55 +50,18 @@ for (r in qvti!Transformation.all().first().rule) {
     //r.name.println();
     inputVarMap.put(r, r.getInputVars());
     outputVarMap.put(r, r.getOutputVars());
-    // Find the assigments in which the value is a variable of a primitive data
-    // type, we only interested in PropertyAssignemts, and save the information
-    // of the type and attribute being set
-    for (a in r.getAllAssignments().select(a : QVT!PropertyAssignment | a.isSimpleAttributeNavigation()
-            and a.value.referredVariable.type.isTypeOf(QVT!PrimitiveType))) {
-        // Save the type and attribute that the primitive type is being assigned to
-        // (i.e., slotExpression.attribute)
-        var values : Sequence;
-        values.add(a.slotExpression.type);
-        values.add(a.targetProperty);
-        primDataAssignmentMap.put(r, values);
-    }
-}
-
-// Now that we have the assignments, we can find the uses.
-for (r in qvti!Transformation.all().first().rule) {
-    //r.name.println();
-    for (k in primDataAssignmentMap.keySet().excluding(r)) {
-        var values = primDataAssignmentMap.get(k);
-        // Get all the assignments that hava a value that is a PropertyCallExp in which
-        // the source is of the type and the referredProperty is the same
-        r.getAllAssignments().select(a | a.value.isTypeOf(QVT!PropertyCallExp)
-                and a.value.source.type == values.first() and a.value.referredProperty == values.last()).println("ass ");
-        for (p in r.getAllPredicates().select(p | p.conditionExpression.isTypeOf(QVT!OperationCallExp) 
-                and p.conditionExpression.referredOperation == getOperationByName("=", oclStdLib!AnyType.all().selectOne(t | t.name == "OclAny")))) {
-            // Any of the arguments can be the use
-            for (a in self.argument.select(a | a.isTypeOf(QVT!PropertyCallExp))) {
-                if (a.source.type == values.first() and a.referredProperty == values.last()) {
-                    p.println("is use ");
-                }
-            }
-            if (self.source.isTypeOf(QVT!PropertyCallExp)) {
-                if (a.source.source.type == values.first() and a.source.referredProperty == values.last()) {
-                    p.println("is use ");
-                }
-            }
-        }
-    }
+    dataTypeAssignments.put(r, r.getDataTypeAssignments());
 }
 
 // 1. Inter-mapping dependencies
 var img = new imGraph!Graph;
 img.name = "InterMapping";
-qvti!Transformation.all().first().interMappingDependencies(img, inputVarMap, outputVarMap, primDataAssignmentMap);
+qvti!Transformation.all().first().interMappingDependencies(img, inputVarMap, outputVarMap, dataTypeAssignments);
 
 // 2. Mapping data dependendence
 var mdd = new ddGraph!Graph;
 mdd.name = "MappingDataDependences";
-qvti!Transformation.all().first().mappingDataDependencies(mdd, inputVarMap, outputVarMap);
+//qvti!Transformation.all().first().mappingDataDependencies(mdd, inputVarMap, outputVarMap);
 
 
 // 3. Merge Data dependencies
@@ -110,7 +73,7 @@ var containmentTrees : Map;
 containmentTrees.put("l", lTree!Node.all());
 containmentTrees.put("m", mTree!Node.all());
 containmentTrees.put("r", rTree!Node.all());
-mdd.mergedMappingDataDependencies(mdg, containmentTrees);
+//mdd.mergedMappingDataDependencies(mdg, containmentTrees);
 
 
 //4. Reduced data dependencies
@@ -120,7 +83,7 @@ var rdg = new rdGraph!Graph;
 // Analize the dependencies to identify which input variables can be derived from others
 // primaryInputs are only the ones that don't have a containment relation or a 
 // middle relation with other input vars
-mdd.reducedMergedMappingDataDependencies(rdg, containmentTrees);
+//mdd.reducedMergedMappingDataDependencies(rdg, containmentTrees);
 
 /*
 for (m in ddGraph!Node.all().select(n | n.type == ddGraph!NodeType#mapping).sortBy(n | n.incoming.size())) {
@@ -242,9 +205,9 @@ operation ddGraph!Graph getNodeForVar(v : QVT!Variable) : ddGraph!Node {
         varMap.put(v, n);
         if (v.oppositePattern().area.name == "middle") {
             n.type = ddGraph!NodeType#middle;
-        } else if(isInputDomain(v.oppositePattern().area)) {
+        } else if(v.oppositePattern().area.isInputDomain()) {
             n.type = ddGraph!NodeType#input;
-        } else if(isOutputDomain(v.oppositePattern().area)) {
+        } else if(v.oppositePattern().area.isOutputDomain()) {
             n.type = ddGraph!NodeType#output;        
         } 
         self.element.add(n);
@@ -471,7 +434,7 @@ operation qvti!Rule testMappingR(tNode : tree!Node) : Boolean {
                     
                 }
             } else if (a.isPrimitiveVarAssignemnt()) {
-                if (isOutputDomain(a.targetVariable.oppositePattern().area)) {
+                if (a.targetVariable.oppositePattern().area.isOutputDomain()) {
                     return a.targetVariable.type.name == tNode.elementName;   
                 }
             }
