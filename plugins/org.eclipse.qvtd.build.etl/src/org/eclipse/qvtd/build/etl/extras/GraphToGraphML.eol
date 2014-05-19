@@ -112,7 +112,12 @@ for (ge in graph!Edge.all()) {
         if (ge.multiple) {
             style.color = "#ff0000";
         } else {
-            style.color = "#008000";
+            if (ge.direction == graph!DependencyDirection#input) {
+                style.color = "#008000";
+            } else {
+                style.color = "#000000";
+            }
+            
         }
         if (ge.derived) {
 	        style.type = gml!LineTypeType#dotted; 

@@ -56,8 +56,7 @@ operation QVT!Assignment isSimpleAttributeNavigation() : Boolean {
                 return true;
             }
         }
-    } 
-    
+    }
     return false;
  }
 
