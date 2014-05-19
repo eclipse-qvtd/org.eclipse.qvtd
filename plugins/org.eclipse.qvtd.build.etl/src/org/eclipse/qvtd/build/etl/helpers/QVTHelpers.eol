@@ -19,41 +19,60 @@
  *    
  */
 
-/**
- * Returns true if the area is of type QVT!CoreDomain and it's TypedModel is the
- * input domain.
- * <p>
- * The operation is @chached to improve performance.
- * @param area the area to be tested
+/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isInputDomain
+ * NAME
+ *  isInputDomain - Returns true if the area is of type QVT!CoreDomain and it's 
+ *  TypedModel is the input domain.
+ *
+ * CONTEXT
+ *  QVT!Area  The are under test
+ * ANNOTATIONS
+ *  cached
+ * SEE ALSO
+ *  /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isMiddleDomain
+ *  /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isOutputDomain
  */
 @chached
-operation isInputDomain(area : QVT!Area) : Boolean {
-    return area.isTypeOf(QVT!CoreDomain) and
-        config!Configuration.all.first().inputDirection.name == area.typedModel.name;
+operation QVT!Area isInputDomain() : Boolean {
+    return self.isTypeOf(QVT!CoreDomain) and
+        config!Configuration.all.first().inputDirection.name == self.typedModel.name;
 }
 
-/**
- * Returns true if the area is of type QVT!Mapping.
- * <p>
- * The operation is @chached to improve performance.
- * @param area the area to be tested
+/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isMiddleDomain
+ * NAME
+ *  isMiddleDomain - Returns true if the area belongs to the middle domain, i.e.
+ *  it is a QVT!Mapping.
+ *
+ * CONTEXT
+ *  QVT!Area  The are under test
+ * ANNOTATIONS
+ *  cached
+ * SEE ALSO
+ *  /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isInputDomain
+ *  /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isOutputDomain
  */
 @chached
-operation isMiddleDomain(area : QVT!Area) : Boolean {
-    return area.isTypeOf(QVT!Mapping);
+operation QVT!Area isMiddleDomain() : Boolean {
+    return self.isTypeOf(QVT!Mapping);
 }
 
-/**
- * Returns true if the area is of type QVT!CoreDomain and it's TypedModel is any
- * of the output domains.
- * <p>
- * The operation is @chached to improve performance.
- * @param area the area to be tested
+/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isOutputDomain
+ * NAME
+ *  isOutputDomain - Returns true if the area is of type QVT!CoreDomain and it's 
+ *  TypedModel is the output domain.
+ *
+ * CONTEXT
+ *  QVT!Area  The are under test
+ * ANNOTATIONS
+ *  cached
+ * SEE ALSO
+ *  /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isInputDomain
+ *  /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isMiddleDomain
  */
 @chached
-operation isOutputDomain(area : QVT!Area) : Boolean {
-    return area.isTypeOf(QVT!CoreDomain) and
-        config!Configuration.all.first().outputDirection.collect(od | od.name).includes(area.typedModel.name);
+operation QVT!Area isOutputDomain() : Boolean {
+    return self.isTypeOf(QVT!CoreDomain) and
+        config!Configuration.all.first().outputDirection.collect(od | od.name).includes(self.typedModel.name);
 }
 
 /**
@@ -551,12 +570,25 @@ operation QVT!Area getContextMappingPatterns() : Sequence {
     return searchPatterns;
 }
 
+/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/getInputVars
+ * NAME
+ *  getInputVars - Returns the input variables of the Mapping, excluding DataType
+ *  variables
+ *
+ * CONTEXT
+ *  QVT!Rule  The mapping
+ * ANNOTATIONS
+ *  cached
+ * SEE ALSO
+ *  /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/getOutputVars
+ */
 @cached
-operation QVT!Rule getInputVars() : Set {
+operation QVT!Rule getInputVars() : Sequence {
     
-    var vars;
+    var vars : Set;
     vars = self.guardPattern.variable
-        .includingAll(self.domain.collect(d | d.guardPattern).flatten().collect(gp | gp.variable).flatten());
+        .includingAll(self.domain.collect(d | d.guardPattern).flatten().collect(gp | gp.variable).flatten()
+        .select(v | not v.type.isTypeOf(QVT!PrimitiveType)));
     for (l in self.local) {
         vars = vars.includingAll(l.getInputVars());
     }
@@ -564,22 +596,32 @@ operation QVT!Rule getInputVars() : Set {
     //for (r in self.refinement) {
     //    vars = vars.includingAll(r.getInputVars());
     //}
-    return vars;
+    return vars.asSequence();
 }
 
+/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/getOutputVars
+ * NAME
+ *  getOutputVars - Returns the output variables of the Mapping, excluding DataType
+ *  variables
+ *
+ * CONTEXT
+ *  QVT!Rule  The mapping
+ * ANNOTATIONS
+ *  cached
+ * SEE ALSO
+ *  /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/getInputVars
+ */
 @cached
-operation QVT!Rule getOutputVars() : Set {
+operation QVT!Rule getOutputVars() : Sequence {
     
-    var vars;
+    var vars : Set;
     vars = self.bottomPattern.realizedVariable
-        .includingAll(self.domain.collect(d | d.bottomPattern).flatten().collect(bp | bp.realizedVariable).flatten());
+        .includingAll(self.domain.collect(d | d.bottomPattern).flatten().collect(bp | bp.realizedVariable).flatten()
+        .select(v | not v.type.isTypeOf(QVT!PrimitiveType)));
     for (l in self.local) {
         vars = vars.includingAll(l.getOutputVars());
     }
-    //for (r in self.refinement) {
-    //    vars = vars.includingAll(r.getOutputVars());
-    //}
-    return vars;
+    return vars.asSequence();
 }
 
 
@@ -609,14 +651,104 @@ operation QVT!Property hasNavigableOpposite() : Boolean {
 }
 
 @cached
-operation QVT!Mapping getAllAssignments() : Set {
-    var asgs : Set;
+operation QVT!Mapping getAllAssignments() : Sequence {
+    var asgs : Sequence;
     asgs.addAll(self.bottomPattern.assignment);
     for (d in self.domain) {
         asgs.addAll(d.bottomPattern.assignment);
     }
+    for (l in self.local) {
+        asgs.addAll(l.getAllAssignments());
+    }
     return asgs;
 }
+
+@cached
+operation QVT!Mapping getAllPredicates() : Sequence {
+    var pdcts : Sequence;
+    pdcts.addAll(self.bottomPattern.predicate);
+    pdcts.addAll(self.guardPattern.predicate);
+    for (d in self.domain) {
+        pdcts.addAll(d.bottomPattern.predicate);
+        pdcts.addAll(d.guardPattern.predicate);
+    }
+    for (l in self.local) {
+        pdcts.addAll(l.getAllPredicates());
+    }
+    return pdcts;
+}
+
+/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/getDataTypeAssignments
+ * NAME
+ *  getDataTypeAssignments - Returns a sequence of {Type, Attribtye} pairs whos
+ *  value is assigned from a DataType.
+ * FUNCTION
+ *  Identifies all the assignments in which the value part is a variable whos type
+ *  is a DataType and for each, it creates a {Type, Attribtye} pair that saves the 
+ *  information about what attribute of what Type was being assigned. 
+ * CONTEXT
+ *  QVT!Mapping  The mapping under test
+ * ANNOTATIONS
+ *  cached
+ * SEE ALSO
+ *
+ */
+@cached
+operation QVT!Mapping getDataTypeAssignments() : Sequence {
+        
+        var assgmts : Sequence;
+        // Find the assigments in which the value is a variable of a primitive data
+        // type, we only interested in PropertyAssignemts, and save the information
+        // of the type and attribute being set
+        for (a in self.getAllAssignments().select(a : QVT!PropertyAssignment | a.isSimpleAttributeNavigation()
+                and a.value.referredVariable.type.isTypeOf(QVT!PrimitiveType))) {
+            // Save the type and attribute that the primitive type is being assigned to
+            // (i.e., slotExpression.attribute)
+            assgmts.add(a.slotExpression.type);
+            assgmts.add(a.targetProperty);
+        }
+        return assgmts;
+    }
+
+/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/getDataTypeUses
+ * NAME
+ *  getDataTypeUses - Returns a sequence of {Type, Attribtye} pairs whos
+ *  value is assigned from a DataType.
+ * FUNCTION
+ *  Identifies all the assignments in which the value part is a variable whos type
+ *  is a DataType and for each, it creates a {Type, Attribtye} pair that saves the 
+ *  information about what attribute of what Type was being assigned. 
+ * CONTEXT
+ *  QVT!Mapping  The mapping under test
+ * ANNOTATIONS
+ *  cached
+ * SEE ALSO
+ *
+ */    
+operation QVT!Mapping hasDataTypeUse(values : Sequence) : Boolean {
+    //r.name.println();
+    // Get all the assignments that hava a value that is a PropertyCallExp in which
+    // the source is of the type and the referredProperty is the same
+    if (self.getAllAssignments().exists(a | a.value.isTypeOf(QVT!PropertyCallExp)
+            and a.value.source.type == values.first() and a.value.referredProperty == values.last())) {
+        return true;        
+    }
+    for (p in self.getAllPredicates()) {
+        // Any of the arguments can be the use
+        if (p.conditionExpression.isKindOf(QVT!OperationCallExp)) {
+            //p.conditionExpression.toString().println();
+            for (a in p.conditionExpression.argument.select(a | a.isTypeOf(QVT!PropertyCallExp))) {
+                if (a.source.type == values.first() and a.referredProperty == values.last()) {
+                    return true;
+                }
+            }
+            if (p.conditionExpression.source.source.type == values.first() and p.conditionExpression.source.referredProperty == values.last()) {
+                return true;
+            }
+        }
+    }
+    return false;
+}    
  
 /**
  * Returns the comment added to state the direction in which the transformation

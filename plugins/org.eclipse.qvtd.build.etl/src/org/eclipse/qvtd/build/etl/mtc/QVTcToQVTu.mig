@@ -11,37 +11,54 @@
 import "../helpers/QVTHelpers.eol";
 import "../helpers/OclLibHelper.eol";
 
+/****m* /org.eclipse.qvtd.build.etl/mtc/QVTcToQVTu
+ * NAME
+ *  QVTcToQVTu -- Flock migration script from QVTc to QVTu
+ *
+ * SEE ALSO
+ *    
+ ******
+ */
+ 
+/****d* /org.eclipse.qvtd.build.etl/mtc/QVTcToQVTu/PropertyAssignment
+ * CONTEXT
+ *  PropertyAssignment -- Flock migration script from QVTc to QVTu
+ *
+ * SEE ALSO
+ *    
+ ******
+ */
 // TODO Check that if the slot expression area is Null, the test is correct
 // Output domain to middle assignments are removed, iif the value expression
 // is not a variable
 // TODO Do we also have to migrate VariableAssignments?!?!?!
 @cascade
 delete PropertyAssignment
-    when : isOutputDomain(original.value.getArea())
+    when : original.value.getArea().isOutputDomain()
         and not original.value.isTypeOf(QVTc!VariableExp)
-        and isMiddleDomain(original.slotExpression.getArea())
+        and original.slotExpression.getArea().isMiddleDomain()
 
 // Middle domian to input assigments are removed
 @cascade
 delete PropertyAssignment
-    when : isInputDomain(original.slotExpression.getArea())
-        and isMiddleDomain(original.value.getArea())
+    when : original.slotExpression.getArea().isInputDomain()
+        and original.value.getArea().isMiddleDomain()
 
 // Output domain predicates of realized variables
 @cascade
 delete Predicate
-    when : original.pattern.isTypeOf(QVTc!BottomPattern) and original.conditionExpression.findReferencedVariables().forAll(v | isOutputDomain(v.oppositePattern().area))
+    when : original.pattern.isTypeOf(QVTc!BottomPattern) and original.conditionExpression.findReferencedVariables().forAll(v | v.oppositePattern().area.isOutputDomain())
 
 
 // Realized variables in the input domain are retyped into variables
 retype RealizedVariable to Variable
     when {
-        if (isInputDomain(original.oppositePattern().area)) {
+        if (original.oppositePattern().area.isInputDomain()) {
             return true;
         } else {
             if (isMiddleDomain(original.oppositePattern().area)) {
                 return original.oppositePattern().area.domain.size() > 0 and
-                       original.oppositePattern().area.domain.forAll(d | isOutputDomain(d));
+                       original.oppositePattern().area.domain.forAll(d | d.isOutputDomain());
             } else {
                 return false;
             }
@@ -51,13 +68,13 @@ retype RealizedVariable to Variable
 // Property assignments in the input domain are retyped to predicates   
 retype PropertyAssignment to Predicate
     when {
-        if (isInputDomain(original.bottomPattern.area)) {
+        if (original.bottomPattern.area.isInputDomain()) {
             return true;
         } else {
-            if (isMiddleDomain(original.bottomPattern.area)) {
+            if (original.bottomPattern.area.isMiddleDomain()) {
                 return original.bottomPattern.area.domain.size() > 0 and
-                       original.bottomPattern.area.domain.forAll(d | isOutputDomain(d)) and 
-                       original.findReferencedVariables().forAll(v | isMiddleDomain(v.oppositePattern().area));
+                       original.bottomPattern.area.domain.forAll(d | d.isOutputDomain()) and 
+                       original.findReferencedVariables().forAll(v | v.oppositePattern().area.isMiddleDomain());
             } else {
                 return false;
             }
@@ -72,7 +89,7 @@ migrate Transformation {
 
 // Input Domain
 migrate CoreDomain
-    when : isInputDomain(original) {
+    when : original.isInputDomain() {
 	    
 	    migrated.isCheckable = false;
 	    migrated.isEnforceable = false;
@@ -81,7 +98,7 @@ migrate CoreDomain
 // Output Domain(s)
 // THIS SHOULD BE HANDELED BY THE ENGINE!!??
 migrate CoreDomain
-    when : isOutputDomain(original) {
+    when : original.isOutputDomain() {
         if (isCheckMode()) {
             migrated.isEnforceable = false;
         }
@@ -93,12 +110,12 @@ migrate CoreDomain
 // Make sure variables and predicates are contained in the pattern    
 migrate BottomPattern 
     when {
-        if (isInputDomain(original.area)) {
+        if (original.area.isInputDomain()) {
             return true;
         } else {
-            if (isMiddleDomain(original.area)) {
+            if (original.area.isMiddleDomain()) {
                 return original.area.domain.size() > 0 and
-                       original.area.domain.forAll(d | isOutputDomain(d));
+                       original.area.domain.forAll(d | d.isOutputDomain());
             } else {
                 return false;
             }
@@ -106,8 +123,8 @@ migrate BottomPattern
     } {
 	    migrated.variable.addAll(original.realizedVariable.equivalent());
 	    for (a in original.assignment) {
-	        if (isInputDomain(original.area) or 
-	            a.findReferencedVariables().forAll(v | isMiddleDomain(v.oppositePattern().area))) {
+	        if (original.area.isInputDomain() or 
+	            a.findReferencedVariables().forAll(v | v.oppositePattern().area.isMiddleDomain())) {
 	               migrated.predicate.add(a.equivalent());
 	            }
 	    }
@@ -115,13 +132,13 @@ migrate BottomPattern
 
 migrate PropertyAssignment
     when {
-        if (isInputDomain(original.bottomPattern.area)) {
+        if (original.bottomPattern.area.isInputDomain()) {
             return true;
         } else {
-            if (isMiddleDomain(original.bottomPattern.area)) {
+            if (original.bottomPattern.area.isMiddleDomain()) {
                 return original.bottomPattern.area.domain.size() > 0 and
-                       original.bottomPattern.area.domain.forAll(d | isOutputDomain(d)) and 
-                       original.findReferencedVariables().forAll(v | isMiddleDomain(v.oppositePattern().area));
+                       original.bottomPattern.area.domain.forAll(d | d.isOutputDomain()) and 
+                       original.findReferencedVariables().forAll(v | v.oppositePattern().area.isMiddleDomain());
             } else {
                 return false;
             }
@@ -150,7 +167,7 @@ migrate PropertyAssignment
 
     
 migrate PropertyAssignment
-    when : isOutputDomain(original.bottomPattern.area) 
+    when : original.bottomPattern.area.isOutputDomain() 
         and isCheckMode()
         and original.isDefault {
     
