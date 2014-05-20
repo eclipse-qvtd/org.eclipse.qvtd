@@ -77,8 +77,6 @@ import org.eclipse.uml2.uml.util.UMLUtil;
 
 /**
  * Translator from the QVT 1.2 *.ecore master to the QVT 1.2 distribution
- * @author Ed.Willink
- *
  */
 @SuppressWarnings("restriction")
 public class Ecore2UML {
