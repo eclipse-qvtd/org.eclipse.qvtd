@@ -62,7 +62,7 @@ operation QVT!Transformation interMappingDependencies(graph : ddg!Graph, inputVa
 	        // Search for DataType uses
 	        if (not pairedMapps.includes(rA)) {
 	            var value = dataTypeAssignments.get(rA); 
-                if (rB.hasDataTypeUse(value)) {
+                if (not value.isEmpty() and rB.hasDataTypeUse(value)) {
                     var e = graph.owningModel().createInstance("DependencyEdge");
                     e.source = graph.getNodeForQvtAstNode(rA, nodeMap);
                     e.target = graph.getNodeForQvtAstNode(rB, nodeMap);

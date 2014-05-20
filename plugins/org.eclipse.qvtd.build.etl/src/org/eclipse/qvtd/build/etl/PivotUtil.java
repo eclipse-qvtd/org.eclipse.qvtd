@@ -71,8 +71,10 @@ public class PivotUtil {
         return min;
     }
     
-    // a.type is superType of b.type?
+    // typeA is either equal to typeB or a subclass
     public Boolean isKindOf(Type typeA, Type typeB) {
+    	//System.out.println("TypeA" + typeA);
+    	//System.out.println("TypeB" + typeB);
     	return typeA.equals(typeB) || typeA.getSuperClass().contains(typeB);
     }
 

@@ -247,11 +247,12 @@ operation ddg!Graph reducedMergedMappingDataDependencies(reduceGraph : ddg!Graph
         reduceGraph.importContainmentTree(containmentTrees.get(key), key, mergeMap);
     }
     for (m in self.element.select(n: ddg!MappingNode | true).sortBy(n | n.incoming.size())) {
+        //m.println("Map ");
         var inputVarNodes = m.incoming.collect(e | e.source).flatten();
         // For each input node, get the set of variables that can be derived from it.
         var derivedVars = new Map;
         for (vN in inputVarNodes) {
-            var derived = new Set;
+            var derived = new Sequence;
 		    derived.addAll(vN.outgoing.select(e | inputVarNodes.includes(e.target)).collect(e | e.target));
 		    for (ie in vN.incoming) {
                 if (ie.referredProperty.getOpposite().isDefined() and not ie.referredProperty.getOpposite().isMany()) {
@@ -264,7 +265,7 @@ operation ddg!Graph reducedMergedMappingDataDependencies(reduceGraph : ddg!Graph
         // its derived variables and the ones that can be derived from them.
         var derivedVarsUnion = new Map;
         for (key in derivedVars.keySet()) {
-            var derivedUnion = new Set;
+            var derivedUnion = new Sequence;
             derivedUnion.addAll(derivedVars.get(key));
             for (d in derivedVars.get(key)) {
                 for (du in derivedVars.get(d)) {
@@ -278,8 +279,13 @@ operation ddg!Graph reducedMergedMappingDataDependencies(reduceGraph : ddg!Graph
         // Get the set cover from the derived variables union. The reslut are the direct
         // inputs and the respective derived variables, derived.  
         var mappingNode = reduceGraph.getNodeCopy(m, mergeMap);
-        var C = greedySetCover(inputVarNodes.asSet(), derivedVarsUnion);
-        var sources : Collection;
+        
+        //inputVarNodes.println();
+        var C = greedySetCover(inputVarNodes.clone(), derivedVarsUnion);
+        
+        C.collect(c | c.label).println("cover set ");
+        //inputVarNodes.println();
+        var sources : Sequence;
         for (vN in inputVarNodes) {
 	        for(key in containmentTrees.keySet()) {
 	            sources = containmentTrees.get(key).select(n | (n.EClassName == vN.label) or n.superTypes.includes(vN.label)); 
@@ -311,7 +317,7 @@ operation ddg!Graph reducedMergedMappingDataDependencies(reduceGraph : ddg!Graph
 	                // If there is another edge to the input, is a double input
 	                e.multiple = reduceGraph.element.exists(e : ddg!Edge| e.source == mergeMap.get(s) and e.target == mappingNode);
 	                e.direction = ddg!DependencyDirection#input;
-	                e.derived = not C.exists(c | c.label = vN.label);
+	                e.derived = not C.exists(c | c == vN);
 	                e.source = mergeMap.get(s);
 	                e.target = mappingNode;
 	                reduceGraph.element.add(e);

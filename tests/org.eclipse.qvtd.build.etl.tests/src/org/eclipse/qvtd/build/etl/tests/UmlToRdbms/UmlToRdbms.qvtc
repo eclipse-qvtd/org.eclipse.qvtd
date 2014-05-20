@@ -389,11 +389,12 @@ map attributeColumns in umlRdbms {
     }
     map {
         check enforce rdbms (ct:String |) {
+            c.type := ct;
         }
         where (p2n:PrimitiveToName |
             p2n.typeName = ct;) {
             a2c.type := p2n;
-            c.type := ct;
+            
         }
     }
     map {
