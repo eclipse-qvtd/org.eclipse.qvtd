@@ -1,0 +1,148 @@
+var root : new gml!DocumentRoot;
+var graphml : new gml!GraphmlType;
+var g : new gml!GraphType;
+
+root.graphml = graphml;
+root.xMLNSPrefixMap.put("", "http://graphml.graphdrawing.org/xmlns");
+root.xMLNSPrefixMap.put("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+root.xMLNSPrefixMap.put("y", "http://www.yworks.com/xml/graphml");
+root.xMLNSPrefixMap.put("yed", "http://www.yworks.com/xml/yed/3");
+root.xSISchemaLocation.put("http://graphml.graphdrawing.org/xmlns", "http://graphml.graphdrawing.org/xmlns/1.1/graphml.xsd");
+// Yed Node attributes
+// <key attr.name="description" attr.type="string" for="node" id="d5"/>
+var key5 : new gml!KeyType;
+key5.attrName = "description";
+key5.attrType = gml!KeyTypeType#string;
+key5.`for` = gml!KeyForType#node;
+key5.id = "d5"; 
+graphml.key.add(key5);
+// <key for="node" id="d6" yfiles.type="nodegraphics"/>
+var key6 : new gml!KeyType;
+key6.`for` = gml!KeyForType#node;
+key6.id = "d6";
+key6.yfilesType="nodegraphics";
+graphml.key.add(key6);
+
+//<key attr.name="description" attr.type="string" for="edge" id="d8"/>
+var key8 : new gml!KeyType;
+key8.attrName = "description";
+key8.attrType = gml!KeyTypeType#string;
+key8.`for` = gml!KeyForType#edge;
+key8.id = "d8"; 
+graphml.key.add(key8);
+//<key for="edge" id="d9" yfiles.type="edgegraphics"/>
+var key9 : new gml!KeyType;
+key9.`for` = gml!KeyForType#edge;
+key9.id = "d9";
+key9.yfilesType="edgegraphics";
+graphml.key.add(key9);
+
+// Graph information
+graphml.graph.add(g);
+g.edgedefault = gml!GraphEdgedefaultType#directed;
+g.id = "G";
+
+var nodeNodeMap : Map;
+for (gn in graph!Node.all()) {
+    var n = new gml!NodeType;
+    n.id = "n" + (loopCount-1);
+    g.node.add(n);
+    nodeNodeMap.put(gn, n.id);
+    
+    /* Yed Information */
+    var d5 : new gml!DataType;
+    var d6 : new gml!DataType;
+    var sNode : new gml!ShapeNodeType;
+    var label : new gml!NodeLabelType;
+    var shape : new gml!ShapeType1;
+    var fill = new gml!FillType;
+    
+    d5.key = key5.id;
+    n.data.add(d5);
+    d6.key = key6.id;
+    // Label
+    label.value = gn.label;
+    sNode.nodeLabel.add(label);
+    // Shape
+    //  - MappingNode = round, orange
+    //  - DataTypeNode = diamond
+    //  - ClassNode = square
+    if (gn.isTypeOf(graph!MappingNode)) {
+        shape.type = gml!ShapeTypeType#ellipse;
+        fill.color = "#ff6600";
+    } else if (gn.isTypeOf(graph!DataTypeNode)) {
+        shape.type = gml!ShapeTypeType#diamond;
+    } else if (gn.isTypeOf(graph!ClassNode)) {
+        shape.type = gml!ShapeTypeType#rectangle;
+    }
+    if (gn.isTypeOf(graph!ClassNode)) {
+        switch (gn.`model`) {
+            case (graph!Model#input):
+                fill.color = "#ff00ff";
+            case (graph!Model#middle):
+                fill.color = "#ffcc00";
+            case (graph!Model#output):
+                fill.color = "#99ccff";
+        }
+        
+    }    
+    sNode.shape = shape;
+    fill.transparent = false;
+    sNode.fill = fill;
+    d6.shapeNode = sNode;
+    n.data.add(d6);
+}
+
+for (ge in graph!Edge.all()) {
+    var e = new gml!EdgeType;
+    e.source = nodeNodeMap.get(ge.source);
+    e.target = nodeNodeMap.get(ge.target);
+    e.id = "e" + (loopCount-1);
+    /* Yed Information */
+    var d9 = new gml!DataType;
+    d9.key = key9.id;
+    e.data.add(d9);
+    var plEdge = new gml!PolyLineEdgeType;
+    var arrow : new gml!ArrowsType;
+    arrow.target = gml!ArrowTypeType#standard;
+    arrow.source = gml!ArrowTypeType#none;
+    var style : new gml!LineStyleType;
+    style.type = gml!LineTypeType#line;
+    if (ge.isTypeOf(graph!DependencyEdge)) {
+        if (ge.multiple) {
+            style.color = "#ff0000";
+        } else {
+            if (ge.direction == graph!DependencyDirection#input) {
+                style.color = "#008000";
+            } else {
+                style.color = "#000000";
+            }
+            
+        }
+        if (ge.derived) {
+	        style.type = gml!LineTypeType#dotted; 
+	    }
+	    
+    } else if (ge.isTypeOf(graph!ReferenceEdge)) {
+        style.color = "#993366";
+    } else if (ge.isTypeOf(graph!ContainmentEdge)) {
+        switch (ge.`model`) {
+            case (graph!Model#input):
+                style.color = "#ff00ff";
+            case (graph!Model#middle):
+                style.color = "#ffcc00";
+            case (graph!Model#output):
+                style.color = "#0000ff";
+        }
+        
+    }
+    plEdge.arrows= arrow;
+    plEdge.lineStyle = style;
+    d9.polyLineEdge = plEdge;
+    g.edge.add(e);
+}
+
+"Done".println();
+
+
+

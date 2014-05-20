@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:eCoreContainemntTree="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree">
+  <eCoreContainemntTree:Node EClassName="simpleuml" children="/1 /2 /3 /4 /5"/>
+  <eCoreContainemntTree:Node EClassName="Attribute" parent="/0 /3">
+    <superTypes>UMLModelElement</superTypes>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassName="Association" parent="/0 /5">
+    <superTypes>PackageElement</superTypes>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassName="Class" parent="/0 /5" children="/1">
+    <superTypes>Classifier</superTypes>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassName="PrimitiveDataType" parent="/0 /5">
+    <superTypes>Classifier</superTypes>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassName="Package" parent="/0" children="/2 /3 /4">
+    <superTypes>UMLModelElement</superTypes>
+  </eCoreContainemntTree:Node>
+</xmi:XMI>

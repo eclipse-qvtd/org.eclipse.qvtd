@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:eCoreContainemntTree="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree">
+  <eCoreContainemntTree:Node EClassName="simplerdbms" children="/1 /2 /3 /4 /5"/>
+  <eCoreContainemntTree:Node EClassName="Column" parent="/0 /5">
+    <superTypes>RModelElement</superTypes>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassName="ForeignKey" parent="/0 /5">
+    <superTypes>RModelElement</superTypes>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassName="Key" parent="/0 /5">
+    <superTypes>RModelElement</superTypes>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassName="Schema" parent="/0" children="/5">
+    <superTypes>RModelElement</superTypes>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassName="Table" parent="/0 /4" children="/1 /3 /2">
+    <superTypes>RModelElement</superTypes>
+  </eCoreContainemntTree:Node>
+</xmi:XMI>

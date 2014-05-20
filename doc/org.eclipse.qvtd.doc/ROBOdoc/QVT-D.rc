@@ -1,0 +1,76 @@
+# Example QVT-D.rc
+#
+items:
+    NAME
+    FUNCTION
+    CONTEXT
+	PARAMETERS
+	ANNOTATIONS
+    RESULT
+    SEE ALSO
+ignore items:
+    HISTORY
+    BUGS
+item order:
+    FUNCTION
+    CONTEXT
+    PARAMETERS
+    ANNOTATIONS
+source items:
+    SYNOPSIS
+preformatted items:
+    INPUTS
+    OUTPUTS
+format items:
+    FUNCTION
+    SIDE EFFECTS
+options:
+    --html
+    --multidoc
+    --index
+    --tabsize 4
+headertypes:
+    f  "Migrations"    robo_migrations     1
+	d  "Delete"        robo_deletes
+	r  "Retype"        robo_retypes
+	m  "Migrate"       robo_migrates
+	l  "Libraries"     robo_libraries      1
+	o  "Operations"    robo_operations
+ignore files:
+    README
+    CVS
+    *.bak
+    *.classpath
+    *.gitignore
+    *.properties
+    *.project
+    *.xml
+accept files:
+    *.eol
+    *.etl
+    *.mig
+    *.egl
+header markers:
+    /****
+    #****
+remark markers:
+    *
+    #
+end markers:
+    ****
+    #****
+header separate characters:
+    ,
+header ignore characters:
+    [
+remark begin markers:
+    /*
+remark end markers:
+    */
+source line comments:
+    //
+keywords:
+    if
+    do
+    while
+    for

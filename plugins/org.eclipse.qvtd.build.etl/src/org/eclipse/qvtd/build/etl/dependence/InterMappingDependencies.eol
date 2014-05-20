@@ -1,0 +1,76 @@
+/*******************************************************************************
+ * Copyright (c) 2013 The University of York and Willink Transformations.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
+import "../helpers/DataDependenceGraphHelpers.eol";
+
+/****l* /org.eclipse.qvtd.build.etl/dependence/InterMappingDependencies
+ * NAME
+ *  InterMappingDependencies -- A set of EOL operations to perform inter-mapping
+ * relations analysis for a QVT transformation.
+ *
+ * SEE ALSO
+ *    
+ ******
+ */
+  
+/**
+ * Analysis of the inter-mapping data dependencies. Creates a directed graph in
+ * which an edge is created between mappings A and B, if an input var in B has
+ * the same type as an output var on A.
+ *
+ * @context QVT!Transformation  The transformation being analyzed
+ * @param graph The graph to populate
+ * @param inputVarMap   The map of mapings to input variables
+ * @param outputVarMap  The map of mapings to output variables
+ */
+operation QVT!Transformation interMappingDependencies(graph : ddg!Graph, inputVarMap : Map, outputVarMap : Map, dataTypeAssignments : Map) {
+    
+    var x = new Native("org.eclipse.qvtd.build.etl.PivotUtil");
+    var nodeMap : Map;  // Cache nodes for AST nodes (AST, graph!Node)
+    var pairedMapps : Sequence;  // Value added if edge created
+	for (rB in self.rule) {
+	    //rB.name.println("From ");
+	    for (vB in inputVarMap.get(rB)) {
+	        //vB.name.println();
+	        for (rA in self.rule /*.excluding(rB).select(
+                r | r.domain.collect(d | d.typedModel).flatten()
+                    .includesAll(rB.domain.collect(d | d.typedModel).flatten())
+                )*/
+	            ) {
+	            // Search for compatible output vars ??(by type) in same side mappings (LM or MR))
+	            for (vA in outputVarMap.get(rA)) {
+	                if (x.isKindOf(vA.type, vB.type)) {
+	                    //vA.name.println("to " + rA.name + " var ");
+	                    var e = graph.owningModel().createInstance("DependencyEdge");
+	                    e.source = graph.getNodeForQvtAstNode(rA, nodeMap);
+	                    e.target = graph.getNodeForQvtAstNode(rB, nodeMap);
+	                    e.direction = ddg!DependencyDirection#output;
+	                    graph.element.add(e);
+	                }
+	            }
+	        }
+	    }
+	    pairedMapps.clear();
+	    for (rA in self.rule.excluding(rB)) {
+	        // Search for DataType uses
+	        if (not pairedMapps.includes(rA)) {
+	            var value = dataTypeAssignments.get(rA); 
+                if (not value.isEmpty() and rB.hasDataTypeUse(value)) {
+                    var e = graph.owningModel().createInstance("DependencyEdge");
+                    e.source = graph.getNodeForQvtAstNode(rA, nodeMap);
+                    e.target = graph.getNodeForQvtAstNode(rB, nodeMap);
+                    e.direction = ddg!DependencyDirection#output;
+                    graph.element.add(e);
+                    pairedMapps.add(rA);
+                }
+	        }
+	    }
+	}
+}
