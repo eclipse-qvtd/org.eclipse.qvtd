@@ -2,11 +2,10 @@
 #
 items:
     NAME
-	MODELS 
     FUNCTION
-    SYNOPSIS
     CONTEXT
 	PARAMETERS
+	ANNOTATIONS
     RESULT
     SEE ALSO
 ignore items:
@@ -14,9 +13,9 @@ ignore items:
     BUGS
 item order:
     FUNCTION
-    SYNOPSIS
-    INPUTS
-    OUTPUTS
+    CONTEXT
+    PARAMETERS
+    ANNOTATIONS
 source items:
     SYNOPSIS
 preformatted items:
@@ -26,25 +25,31 @@ format items:
     FUNCTION
     SIDE EFFECTS
 options:
-    --src ./source
-    --doc ./doc
     --html
     --multidoc
     --index
-    --tabsize 8
+    --tabsize 4
 headertypes:
-	l  "Libraries"		robo_libraries
-	o  "Operations"		robo_operations	
+    f  "Migrations"    robo_migrations     1
+	d  "Delete"        robo_deletes
+	r  "Retype"        robo_retypes
+	m  "Migrate"       robo_migrates
+	l  "Libraries"     robo_libraries      1
+	o  "Operations"    robo_operations
 ignore files:
     README
     CVS
     *.bak
-    *~
-    "a test_*"
+    *.classpath
+    *.gitignore
+    *.properties
+    *.project
+    *.xml
 accept files:
-    *.c
-    *.h
-    *.pl
+    *.eol
+    *.etl
+    *.mig
+    *.egl
 header markers:
     /****
     #****
