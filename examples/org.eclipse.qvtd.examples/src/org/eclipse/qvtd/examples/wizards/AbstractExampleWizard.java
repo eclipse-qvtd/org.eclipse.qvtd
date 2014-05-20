@@ -12,8 +12,6 @@
  *   E.D.Willink - Re-use of org.eclipse.emf.ocl.examples.internal.wizard.AbstractExampleWizard
  *
  * </copyright>
- *
- * $Id: AbstractExampleWizard.java,v 1.2 2008/10/27 21:07:32 ewillink Exp $
  */
 
 package org.eclipse.qvtd.examples.wizards;

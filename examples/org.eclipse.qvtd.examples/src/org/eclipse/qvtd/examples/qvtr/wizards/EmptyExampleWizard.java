@@ -11,8 +11,6 @@
  * E.D.Willink - initial API and implementation
  * 
  * </copyright>
- *
- * $Id: EmptyExampleWizard.java,v 1.2 2009/08/16 12:41:53 ewillink Exp $
  */
 package org.eclipse.qvtd.examples.qvtr.wizards;
 

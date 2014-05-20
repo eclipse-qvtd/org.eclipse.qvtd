@@ -11,8 +11,6 @@
  * E.D.Willink - initial API and implementation
  * 
  * </copyright>
- *
- * $Id: QVTDeclarativeExamplesPlugin.java,v 1.1 2008/08/26 21:00:59 ewillink Exp $
  */
 package org.eclipse.qvtd.examples;
 

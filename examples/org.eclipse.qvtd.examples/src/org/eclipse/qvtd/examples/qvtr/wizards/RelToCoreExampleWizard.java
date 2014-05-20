@@ -11,8 +11,6 @@
  * E.D.Willink - initial API and implementation
  * 
  * </copyright>
- *
- * $Id: RelToCoreExampleWizard.java,v 1.2 2009/06/20 09:15:07 ewillink Exp $
  */
 package org.eclipse.qvtd.examples.qvtr.wizards;
 

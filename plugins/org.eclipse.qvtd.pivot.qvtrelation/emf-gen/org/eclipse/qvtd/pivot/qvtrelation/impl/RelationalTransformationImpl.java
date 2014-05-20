@@ -11,8 +11,6 @@
  *     E.D.Willink - initial API and implementation
  *
  * </copyright>
- *
- * $Id$
  */
 package org.eclipse.qvtd.pivot.qvtrelation.impl;
 

@@ -9,8 +9,6 @@
  *
  * Contributors:
  *     E.D.Willink - initial API and implementation
- *
- * $Id$
  */
 package org.eclipse.qvtd.xtext.qvtcorebase.ui;
 

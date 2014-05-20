@@ -13,8 +13,6 @@
  *   E.D.Willink - Initial API and implementation
  *
  * </copyright>
- *
- * $Id: plugin.xml,v 1.4 2010/07/10 09:39:41 ewillink Exp $
  */
 -->
 <?eclipse version="3.0"?>

@@ -11,8 +11,6 @@
  *     E.D.Willink - initial API and implementation
  *
  * </copyright>
- *
- * $Id$
  */
 grammar org.eclipse.qvtd.xtext.qvtcore.QVTcore with org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase
 
