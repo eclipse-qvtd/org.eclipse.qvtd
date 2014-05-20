@@ -1,6 +1,4 @@
-/**
- * <copyright>
- *
+/*******************************************************************************
  * Copyright (c) 2006,2007,2008 IBM Corporation and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -10,9 +8,7 @@
  * Contributors:
  *   IBM - Initial API and implementation
  *   E.D.Willink - Re-use of org.eclipse.emf.ocl.examples.internal.wizard.AbstractExampleWizard
- *
- * </copyright>
- */
+ *******************************************************************************/
 
 package org.eclipse.qvtd.examples.wizards;
 
