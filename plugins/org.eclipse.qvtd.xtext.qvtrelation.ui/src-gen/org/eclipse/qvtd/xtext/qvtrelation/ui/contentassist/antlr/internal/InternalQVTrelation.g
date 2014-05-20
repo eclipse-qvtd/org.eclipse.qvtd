@@ -3837,7 +3837,7 @@ rule__PrimaryExpCS__Alternatives_7_2_1_2
 :
 (
 { before(grammarAccess.getPrimaryExpCSAccess().getGroup_7_2_1_2_0()); }
-(rule__PrimaryExpCS__Group_7_2_1_2_0__0)
+(rule__PrimaryExpCS__Group_7_2_1_2_0__0)?
 { after(grammarAccess.getPrimaryExpCSAccess().getGroup_7_2_1_2_0()); }
 )
 

@@ -3135,8 +3135,7 @@ public class InternalQVTrelationLexer extends Lexer {
             "\1\u0088",
             "\1\u0089",
             "\1\u008a",
-            "\12\74\7\uffff\32\74\4\uffff\1\74\1\uffff\25\74\1\u008b\4"+
-            "\74",
+            "\12\74\7\uffff\32\74\4\uffff\1\74\1\uffff\25\74\1\u008b\4\74",
             "\12\74\7\uffff\32\74\4\uffff\1\74\1\uffff\32\74",
             "\1\u008e",
             "\1\u008f",

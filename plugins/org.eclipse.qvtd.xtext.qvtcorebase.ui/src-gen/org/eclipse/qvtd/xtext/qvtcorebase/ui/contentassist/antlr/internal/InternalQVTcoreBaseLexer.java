@@ -2867,8 +2867,7 @@ public class InternalQVTcoreBaseLexer extends Lexer {
             "\1\175\1\uffff\1\174",
             "\1\176",
             "\1\177",
-            "\12\66\7\uffff\32\66\4\uffff\1\66\1\uffff\25\66\1\u0080\4"+
-            "\66",
+            "\12\66\7\uffff\32\66\4\uffff\1\66\1\uffff\25\66\1\u0080\4\66",
             "\12\66\7\uffff\32\66\4\uffff\1\66\1\uffff\32\66",
             "\1\u0083",
             "\1\u0084",
@@ -3045,8 +3044,7 @@ public class InternalQVTcoreBaseLexer extends Lexer {
             "",
             "\1\u0100",
             "",
-            "\12\66\7\uffff\32\66\4\uffff\1\66\1\uffff\22\66\1\u0101\7"+
-            "\66",
+            "\12\66\7\uffff\32\66\4\uffff\1\66\1\uffff\22\66\1\u0101\7\66",
             "\1\u0103",
             "\1\u0104",
             "\1\u0105",

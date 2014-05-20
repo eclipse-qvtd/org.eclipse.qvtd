@@ -2748,23 +2748,22 @@ public class InternalQVTimperativeLexer extends Lexer {
 
     protected DFA11 dfa11 = new DFA11(this);
     static final String DFA11_eotS =
-        "\1\uffff\1\70\1\uffff\11\73\1\uffff\1\114\1\73\1\121\1\uffff\1"+
-        "\124\1\127\1\uffff\3\73\1\135\10\73\4\uffff\1\73\5\uffff\4\73\1"+
-        "\uffff\2\65\1\73\10\uffff\1\73\1\uffff\3\73\1\u0083\1\u0084\10\73"+
-        "\4\uffff\2\73\12\uffff\1\73\1\u0092\1\73\2\uffff\13\73\4\uffff\1"+
-        "\73\5\uffff\4\73\6\uffff\6\73\2\uffff\1\73\1\u00ad\1\u00ae\7\73"+
-        "\1\u00b6\1\73\1\u00b8\1\uffff\1\u00b9\2\73\1\u00bc\3\73\1\u00c0"+
-        "\6\73\1\u00c9\6\73\1\u00d0\4\73\2\uffff\4\73\1\u00d9\1\u00da\1\u00db"+
-        "\1\uffff\1\u00dc\2\uffff\2\73\1\uffff\1\73\1\u00e0\1\73\1\uffff"+
-        "\10\73\1\uffff\1\u00ea\2\73\1\u00ed\1\73\1\u00ef\1\uffff\4\73\1"+
-        "\u00f4\3\73\4\uffff\1\u00f8\2\73\1\uffff\10\73\1\u0103\1\uffff\1"+
-        "\73\1\u0105\1\uffff\1\73\1\uffff\1\u0108\3\73\1\uffff\3\73\1\uffff"+
-        "\2\73\1\u0111\2\73\1\u0114\4\73\1\uffff\1\73\1\uffff\1\u011a\1\u011b"+
-        "\1\uffff\1\u011c\1\u011d\1\u011e\1\u011f\1\u0120\1\73\1\u0122\1"+
-        "\u0123\1\uffff\2\73\1\uffff\1\73\1\u0127\2\73\1\u012a\7\uffff\1"+
-        "\73\2\uffff\1\u012c\2\73\1\uffff\2\73\1\uffff\1\73\1\uffff\6\73"+
-        "\1\u0138\1\u0139\1\u013a\2\73\3\uffff\4\73\1\u0141\1\73\1\uffff"+
-        "\1\73\1\u0144\1\uffff";
+        "\1\uffff\1\70\1\uffff\11\73\1\uffff\1\114\1\73\1\121\1\uffff\1\124"+
+        "\1\127\1\uffff\3\73\1\135\10\73\4\uffff\1\73\5\uffff\4\73\1\uffff"+
+        "\2\65\1\73\10\uffff\1\73\1\uffff\3\73\1\u0083\1\u0084\10\73\4\uffff"+
+        "\2\73\12\uffff\1\73\1\u0092\1\73\2\uffff\13\73\4\uffff\1\73\5\uffff"+
+        "\4\73\6\uffff\6\73\2\uffff\1\73\1\u00ad\1\u00ae\7\73\1\u00b6\1\73"+
+        "\1\u00b8\1\uffff\1\u00b9\2\73\1\u00bc\3\73\1\u00c0\6\73\1\u00c9"+
+        "\6\73\1\u00d0\4\73\2\uffff\4\73\1\u00d9\1\u00da\1\u00db\1\uffff"+
+        "\1\u00dc\2\uffff\2\73\1\uffff\1\73\1\u00e0\1\73\1\uffff\10\73\1"+
+        "\uffff\1\u00ea\2\73\1\u00ed\1\73\1\u00ef\1\uffff\4\73\1\u00f4\3"+
+        "\73\4\uffff\1\u00f8\2\73\1\uffff\10\73\1\u0103\1\uffff\1\73\1\u0105"+
+        "\1\uffff\1\73\1\uffff\1\u0108\3\73\1\uffff\3\73\1\uffff\2\73\1\u0111"+
+        "\2\73\1\u0114\4\73\1\uffff\1\73\1\uffff\1\u011a\1\u011b\1\uffff"+
+        "\1\u011c\1\u011d\1\u011e\1\u011f\1\u0120\1\73\1\u0122\1\u0123\1"+
+        "\uffff\2\73\1\uffff\1\73\1\u0127\2\73\1\u012a\7\uffff\1\73\2\uffff"+
+        "\1\u012c\2\73\1\uffff\2\73\1\uffff\1\73\1\uffff\6\73\1\u0138\1\u0139"+
+        "\1\u013a\2\73\3\uffff\4\73\1\u0141\1\73\1\uffff\1\73\1\u0144\1\uffff";
     static final String DFA11_eofS =
         "\u0145\uffff";
     static final String DFA11_minS =
@@ -2905,8 +2904,7 @@ public class InternalQVTimperativeLexer extends Lexer {
             "\1\177\1\uffff\1\176",
             "\1\u0080",
             "\1\u0081",
-            "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\25\73\1\u0082\4"+
-            "\73",
+            "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\25\73\1\u0082\4\73",
             "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\32\73",
             "\1\u0085",
             "\1\u0086",
@@ -3083,8 +3081,7 @@ public class InternalQVTimperativeLexer extends Lexer {
             "",
             "\1\u0106",
             "",
-            "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\22\73\1\u0107\7"+
-            "\73",
+            "\12\73\7\uffff\32\73\4\uffff\1\73\1\uffff\22\73\1\u0107\7\73",
             "\1\u0109",
             "\1\u010a",
             "\1\u010b",

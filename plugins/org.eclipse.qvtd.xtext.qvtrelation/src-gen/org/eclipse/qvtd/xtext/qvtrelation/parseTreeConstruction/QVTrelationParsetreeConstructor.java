@@ -320,11 +320,10 @@ protected class TopLevelCS_TransformationsAssignment_1 extends AssignmentToken  
 /************ begin Rule CollectionTemplateCS ****************
  *
  * //UnitCS: identifier+=[pivot::Element|UnrestrictedName] ('.' identifier+=[pivot::Element|UnrestrictedName])*;
- * 
  * CollectionTemplateCS:
  * 	name=UnrestrictedName? ":" type=CollectionTypeCS "{" (memberIdentifiers+=(TemplateCS | ElementTemplateCS) (","
- * 	memberIdentifiers+=(TemplateCS | ElementTemplateCS))* "++" (restIdentifier=[pivot::Variable|UnrestrictedName] |
- * 	"_"))? "}";
+ * 	memberIdentifiers+=(TemplateCS | ElementTemplateCS))* "++" (restIdentifier=[pivot::Variable|UnrestrictedName] | "_"))?
+ * 	"}";
  *
  **/
 
@@ -6837,17 +6836,14 @@ protected class NameExpCS_PathNameAssignment extends AssignmentToken  {
 /************ begin Rule ExpCSOrTemplateCS ****************
  *
  * //<OCLExpressionCS> ::= <PropertyCallExpCS> 
- *  //                    | <VariableExpCS>
- * 
+ * //                    | <VariableExpCS>
  * //                    | <LiteralExpCS>
- *  //                    | <LetExpCS>
- *  //                    | <IfExpCS>
- * 
+ * //                    | <LetExpCS>
+ * //                    | <IfExpCS>
  * //                    | '(' <OCLExpressionCS> ')'
- *  //                    | <template>  
- * 
+ * //                    | <template>  
  * //	notNameExpressionCS -> templateCS
- *  ExpCSOrTemplateCS returns essentialocl::ExpCS:
+ * ExpCSOrTemplateCS returns essentialocl::ExpCS:
  * 	ExpCS | TemplateCS;
  *
  **/
@@ -7210,7 +7206,7 @@ protected class TypedRefCS_TypedTypeRefCSParserRuleCall_2 extends RuleCallToken 
 /************ begin Rule Model ****************
  *
  * //generate essentialOCLCST "http://www.eclipse.org/ocl/3.0.0/EssentialOCLCST"
- *  Model returns ContextCS:
+ * Model returns ContextCS:
  * 	ownedExpression=ExpCS;
  *
  **/
@@ -7600,7 +7596,7 @@ protected class BinaryOperatorCS_NavigationOperatorCSParserRuleCall_1 extends Ru
 /************ begin Rule InfixOperatorCS ****************
  *
  * // Intended to be overrideable
- *  InfixOperatorCS returns BinaryOperatorCS:
+ * InfixOperatorCS returns BinaryOperatorCS:
  * 	EssentialOCLInfixOperatorCS;
  *
  **/
@@ -7647,7 +7643,7 @@ protected class InfixOperatorCS_EssentialOCLInfixOperatorCSParserRuleCall extend
 /************ begin Rule NavigationOperatorCS ****************
  *
  * // Intended to be overrideable
- *  NavigationOperatorCS:
+ * NavigationOperatorCS:
  * 	EssentialOCLNavigationOperatorCS;
  *
  **/
@@ -7694,7 +7690,7 @@ protected class NavigationOperatorCS_EssentialOCLNavigationOperatorCSParserRuleC
 /************ begin Rule UnaryOperatorCS ****************
  *
  * // Intended to be overrideable
- *  UnaryOperatorCS:
+ * UnaryOperatorCS:
  * 	EssentialOCLUnaryOperatorCS;
  *
  **/
@@ -9437,10 +9433,9 @@ protected class TuplePartCS_OwnedTypeAssignment_2 extends AssignmentToken  {
 /************ begin Rule CollectionLiteralExpCS ****************
  *
  * //---------------------------------------------------------------------
- *  //  Literals
- * 
+ * //  Literals
  * //---------------------------------------------------------------------
- *  CollectionLiteralExpCS:
+ * CollectionLiteralExpCS:
  * 	ownedType=CollectionTypeCS "{" (ownedParts+=CollectionLiteralPartCS ("," ownedParts+=CollectionLiteralPartCS)*)? "}";
  *
  **/
@@ -11836,19 +11831,14 @@ protected class TypeExpCS_MultiplicityAssignment_1 extends AssignmentToken  {
 /************ begin Rule ExpCS ****************
  *
  * //---------------------------------------------------------------------
- *  //  Expressions
- * 
+ * //  Expressions
  * //---------------------------------------------------------------------
- * 
  * // An ExpCS permits a LetExpCS only in the final term to ensure
- * 
  * //  that let is right associative, whereas infix operators are left associative.
- * 
  * //   a = 64 / 16 / let b : Integer in 8 / let c : Integer in 4 
- *  // is
- * 
+ * // is
  * //   a = (64 / 16) / (let b : Integer in 8 / (let c : Integer in 4 ))
- *  ExpCS:
+ * ExpCS:
  * 	PrefixedExpCS ({InfixExpCS.ownedExpression+=current} ownedOperator+=BinaryOperatorCS (ownedExpression+=PrefixedExpCS
  * 	(ownedOperator+=BinaryOperatorCS ownedExpression+=PrefixedExpCS)* (ownedOperator+=BinaryOperatorCS
  * 	ownedExpression+=LetExpCS)? | ownedExpression+=LetExpCS))? | {PrefixExpCS} ownedOperator+=UnaryOperatorCS+
@@ -12944,7 +12934,7 @@ protected class PrefixedExpCS_PrimaryExpCSParserRuleCall_1 extends RuleCallToken
  * 	NestedExpCS | IfExpCS | SelfExpCS | PrimitiveLiteralExpCS | TupleLiteralExpCS | CollectionLiteralExpCS |
  * 	TypeLiteralExpCS | {NameExpCS} pathName=PathNameCS ({IndexExpCS.nameExp=current} "[" firstIndexes+=ExpCS (","
  * 	firstIndexes+=ExpCS)* "]" ("[" secondIndexes+=ExpCS ("," secondIndexes+=ExpCS)* "]")? (atPre?="@" "pre")? |
- * 	{ConstructorExpCS.nameExp=current} "{" (ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)* |
+ * 	{ConstructorExpCS.nameExp=current} "{" ((ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)*)? |
  * 	value=StringLiteral) "}" | (atPre?="@" "pre")? ({InvocationExpCS.nameExp=current} "(" (argument+=NavigatingArgCS
  * 	argument+=NavigatingCommaArgCS* (argument+=NavigatingSemiArgCS argument+=NavigatingCommaArgCS*)?
  * 	(argument+=NavigatingBarArgCS argument+=NavigatingCommaArgCS*)?)? ")")?);
@@ -12954,7 +12944,7 @@ protected class PrefixedExpCS_PrimaryExpCSParserRuleCall_1 extends RuleCallToken
 // NestedExpCS | IfExpCS | SelfExpCS | PrimitiveLiteralExpCS | TupleLiteralExpCS | CollectionLiteralExpCS |
 // TypeLiteralExpCS | {NameExpCS} pathName=PathNameCS ({IndexExpCS.nameExp=current} "[" firstIndexes+=ExpCS (","
 // firstIndexes+=ExpCS)* "]" ("[" secondIndexes+=ExpCS ("," secondIndexes+=ExpCS)* "]")? (atPre?="@" "pre")? |
-// {ConstructorExpCS.nameExp=current} "{" (ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)* |
+// {ConstructorExpCS.nameExp=current} "{" ((ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)*)? |
 // value=StringLiteral) "}" | (atPre?="@" "pre")? ({InvocationExpCS.nameExp=current} "(" (argument+=NavigatingArgCS
 // argument+=NavigatingCommaArgCS* (argument+=NavigatingSemiArgCS argument+=NavigatingCommaArgCS*)?
 // (argument+=NavigatingBarArgCS argument+=NavigatingCommaArgCS*)?)? ")")?)
@@ -13267,7 +13257,7 @@ protected class PrimaryExpCS_TypeLiteralExpCSParserRuleCall_6 extends RuleCallTo
 
 // {NameExpCS} pathName=PathNameCS ({IndexExpCS.nameExp=current} "[" firstIndexes+=ExpCS ("," firstIndexes+=ExpCS)* "]"
 // ("[" secondIndexes+=ExpCS ("," secondIndexes+=ExpCS)* "]")? (atPre?="@" "pre")? | {ConstructorExpCS.nameExp=current}
-// "{" (ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)* | value=StringLiteral) "}" | (atPre?="@"
+// "{" ((ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)*)? | value=StringLiteral) "}" | (atPre?="@"
 // "pre")? ({InvocationExpCS.nameExp=current} "(" (argument+=NavigatingArgCS argument+=NavigatingCommaArgCS*
 // (argument+=NavigatingSemiArgCS argument+=NavigatingCommaArgCS*)? (argument+=NavigatingBarArgCS
 // argument+=NavigatingCommaArgCS*)?)? ")")?)
@@ -13378,7 +13368,7 @@ protected class PrimaryExpCS_PathNameAssignment_7_1 extends AssignmentToken  {
 
 // {IndexExpCS.nameExp=current} "[" firstIndexes+=ExpCS ("," firstIndexes+=ExpCS)* "]" ("[" secondIndexes+=ExpCS (","
 // secondIndexes+=ExpCS)* "]")? (atPre?="@" "pre")? | {ConstructorExpCS.nameExp=current} "{"
-// (ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)* | value=StringLiteral) "}" | (atPre?="@" "pre")?
+// ((ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)*)? | value=StringLiteral) "}" | (atPre?="@" "pre")?
 // ({InvocationExpCS.nameExp=current} "(" (argument+=NavigatingArgCS argument+=NavigatingCommaArgCS*
 // (argument+=NavigatingSemiArgCS argument+=NavigatingCommaArgCS*)? (argument+=NavigatingBarArgCS
 // argument+=NavigatingCommaArgCS*)?)? ")")?
@@ -13936,7 +13926,7 @@ protected class PrimaryExpCS_PreKeyword_7_2_0_6_1 extends KeywordToken  {
 
 
 
-// {ConstructorExpCS.nameExp=current} "{" (ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)* |
+// {ConstructorExpCS.nameExp=current} "{" ((ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)*)? |
 // value=StringLiteral) "}"
 protected class PrimaryExpCS_Group_7_2_1 extends GroupToken {
 	
@@ -14017,7 +14007,7 @@ protected class PrimaryExpCS_LeftCurlyBracketKeyword_7_2_1_1 extends KeywordToke
 
 }
 
-// ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)* | value=StringLiteral
+// (ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)*)? | value=StringLiteral
 protected class PrimaryExpCS_Alternatives_7_2_1_2 extends AlternativesToken {
 
 	public PrimaryExpCS_Alternatives_7_2_1_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -14034,13 +14024,14 @@ protected class PrimaryExpCS_Alternatives_7_2_1_2 extends AlternativesToken {
 		switch(index) {
 			case 0: return new PrimaryExpCS_Group_7_2_1_2_0(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new PrimaryExpCS_ValueAssignment_7_2_1_2_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new PrimaryExpCS_LeftCurlyBracketKeyword_7_2_1_1(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
 		}	
 	}
 
 }
 
-// ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)*
+// (ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)*)?
 protected class PrimaryExpCS_Group_7_2_1_2_0 extends GroupToken {
 	
 	public PrimaryExpCS_Group_7_2_1_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -14854,7 +14845,7 @@ protected class PrimaryExpCS_RightParenthesisKeyword_7_2_2_1_3 extends KeywordTo
 /************ begin Rule NavigatingArgCS ****************
  *
  * // Type-less init is an illegal infix expression
- *  NavigatingArgCS:
+ * NavigatingArgCS:
  * 	name=NavigatingArgExpCS (":" ownedType=TypeExpCS ("=" init=ExpCS)?)?;
  *
  **/
@@ -15124,7 +15115,7 @@ protected class NavigatingArgCS_InitAssignment_1_2_1 extends AssignmentToken  {
 /************ begin Rule NavigatingBarArgCS ****************
  *
  * // Type-less init is an illegal infix expression
- *  NavigatingBarArgCS returns NavigatingArgCS:
+ * NavigatingBarArgCS returns NavigatingArgCS:
  * 	prefix="|" name=NavigatingArgExpCS (":" ownedType=TypeExpCS ("=" init=ExpCS)?)?;
  *
  **/
@@ -15428,7 +15419,7 @@ protected class NavigatingBarArgCS_InitAssignment_2_2_1 extends AssignmentToken 
 /************ begin Rule NavigatingCommaArgCS ****************
  *
  * // Type-less init is an illegal infix expression
- *  NavigatingCommaArgCS returns NavigatingArgCS:
+ * NavigatingCommaArgCS returns NavigatingArgCS:
  * 	prefix="," name=NavigatingArgExpCS (":" ownedType=TypeExpCS ("=" init=ExpCS)?)?;
  *
  **/
@@ -15732,7 +15723,7 @@ protected class NavigatingCommaArgCS_InitAssignment_2_2_1 extends AssignmentToke
 /************ begin Rule NavigatingSemiArgCS ****************
  *
  * // Type-less init is an illegal infix expression
- *  NavigatingSemiArgCS returns NavigatingArgCS:
+ * NavigatingSemiArgCS returns NavigatingArgCS:
  * 	prefix=";" name=NavigatingArgExpCS (":" ownedType=TypeExpCS ("=" init=ExpCS)?)?;
  *
  **/
@@ -16036,8 +16027,8 @@ protected class NavigatingSemiArgCS_InitAssignment_2_2_1 extends AssignmentToken
 /************ begin Rule NavigatingArgExpCS ****************
  *
  * // Intended to be overridden
- *  //	'?'	-- defined by Complete OCL
- *  NavigatingArgExpCS returns ExpCS:
+ * //	'?'	-- defined by Complete OCL
+ * NavigatingArgExpCS returns ExpCS:
  * 	ExpCS;
  *
  **/

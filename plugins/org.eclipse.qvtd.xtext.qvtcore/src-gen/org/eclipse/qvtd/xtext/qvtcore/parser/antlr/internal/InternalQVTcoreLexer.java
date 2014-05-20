@@ -3082,8 +3082,7 @@ public class InternalQVTcoreLexer extends Lexer {
             "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\32\67",
             "",
             "\1\u0106",
-            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\22\67\1\u0107\7"+
-            "\67",
+            "\12\67\7\uffff\32\67\4\uffff\1\67\1\uffff\22\67\1\u0107\7\67",
             "\1\u0109",
             "\1\u010a",
             "\1\u010b",
