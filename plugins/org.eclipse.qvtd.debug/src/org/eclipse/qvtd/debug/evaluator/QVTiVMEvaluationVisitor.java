@@ -132,7 +132,7 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 		if (VMVirtualMachine.POST_VISIT.isActive()) {
 			VMVirtualMachine.POST_VISIT.println("[" + Thread.currentThread().getName() + "] " + element.eClass().getName() + ": " + element.toString() + " => " + result);
 		}
-		setCurrentEnvInstructionPointer(parentElement);
+//		setCurrentEnvInstructionPointer(parentElement);
 		IVMEvaluationEnvironment<?> evalEnv = getEvaluationEnvironment();
 		postVisit(evalEnv, element, result, parentElement);
 		return result;
@@ -146,7 +146,7 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 		if (VMVirtualMachine.PRE_VISIT.isActive()) {
 			VMVirtualMachine.PRE_VISIT.println("[" + Thread.currentThread().getName() + "] " + element.eClass().getName() + ": " + element.toString());
 		}
-		Element previousIP = setCurrentEnvInstructionPointer(element);
+		Element previousIP = setCurrentEnvInstructionPointer(null/*element*/);
 		IVMEvaluationEnvironment<?> evalEnv = getEvaluationEnvironment();
 		preVisit(evalEnv, element);
 		return previousIP;
