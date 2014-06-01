@@ -137,6 +137,11 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 		return prevValue;
 	}
 
+	public void setOperation(@NonNull NamedElement operation) {
+		this.myCurrentIP = operation;
+		this.myOperation = operation;
+	}
+
 	public void throwVMException(@NonNull VMRuntimeException exception) throws VMRuntimeException {
 		try {
 			getRootEvaluationEnvironment().saveThrownException(exception);

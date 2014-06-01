@@ -13,6 +13,9 @@ package org.eclipse.qvtd.debug.evaluator;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationVisitor;
+import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
+import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitorImpl;
@@ -43,6 +46,17 @@ public class QVTiVMEvaluationVisitorImpl extends QVTiEvaluationVisitorImpl imple
         QVTiVMEvaluationVisitorImpl ne = new QVTiVMEvaluationVisitorImpl(vmEnvironment, nestedEvalEnv);
         return ne;
     }
+
+	@Override
+	@NonNull
+	public EvaluationVisitor createNestedUndecoratedEvaluator(@NonNull NamedElement operation) {
+		EvaluationVisitor nestedEvaluationVisitor = super.createNestedUndecoratedEvaluator(operation);
+		EvaluationEnvironment nestedEvaluationEnvironment = nestedEvaluationVisitor.getEvaluationEnvironment();
+		if (nestedEvaluationEnvironment instanceof QVTiVMNestedEvaluationEnvironment) {
+			((QVTiVMNestedEvaluationEnvironment)nestedEvaluationEnvironment).setOperation(operation);
+		}
+		return nestedEvaluationVisitor;
+	}
 
 	public void dispose() {}
 
