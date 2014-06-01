@@ -127,18 +127,18 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 	}
 
 	@Override
-	protected Object postVisit(@NonNull Visitable visitable, @Nullable Element parentElement, @Nullable Object result) {
+	protected Object postVisit(@NonNull Visitable visitable, @Nullable Element prologue, @Nullable Object result) {
 		Element element = (Element)visitable;
 		if (VMVirtualMachine.POST_VISIT.isActive()) {
 			VMVirtualMachine.POST_VISIT.println("[" + Thread.currentThread().getName() + "] " + element.eClass().getName() + ": " + element.toString() + " => " + result);
 		}
 //		setCurrentEnvInstructionPointer(parentElement);
 		IVMEvaluationEnvironment<?> evalEnv = getEvaluationEnvironment();
-		postVisit(evalEnv, element, result, parentElement);
+		postVisit(evalEnv, element, result);
 		return result;
 	}
 
-	protected abstract void postVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element, @Nullable Object result, @Nullable Element parentElement);
+	protected abstract void postVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element, @Nullable Object result);
 
 	@Override
 	protected @Nullable Element preVisit(@NonNull Visitable visitable) {
@@ -182,7 +182,7 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 	}
 
 	@Override
-	public @NonNull IQVTiVMEvaluationVisitor createNestedEvaluator() {
+	public @NonNull IQVTiVMEvaluationVisitor createNestedEvaluator() { // FIXME Pass 'operation'
 //		return delegate.createNestedEvaluator();
 		return new QVTiVMNestedEvaluationVisitor(this, delegate.createNestedEvaluator());
 	}

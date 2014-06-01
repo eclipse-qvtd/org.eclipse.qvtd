@@ -21,7 +21,7 @@ public class PreStepper extends AbstractStepper
 	public static @NonNull PreStepper INSTANCE = new PreStepper();
 	
 	@Override
-	public @Nullable Element isPostStoppable(@NonNull IVMRootEvaluationVisitor<?> rootVMEvaluationVisitor, @NonNull Element childElement, @Nullable Element parentElement) {
+	public @Nullable Element isPostStoppable(@NonNull IVMRootEvaluationVisitor<?> rootVMEvaluationVisitor, @NonNull Element childElement, @Nullable Object result) {
 		return null;
 	}
 
