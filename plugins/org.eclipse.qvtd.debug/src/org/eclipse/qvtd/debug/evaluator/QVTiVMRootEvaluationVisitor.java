@@ -51,6 +51,9 @@ import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.ocl.examples.pivot.PivotFactory;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.debug.stepper.QVTiStepperVisitor;
 import org.eclipse.qvtd.debug.vm.QVTiVMVirtualMachine;
@@ -65,6 +68,7 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 //	private final List<UnitLocation> fLocationStack;
 	private @NonNull VMSuspension fCurrentStepMode;
 	private @NonNull Stack<QVTiVMEvaluationVisitor> visitorStack = new Stack<QVTiVMEvaluationVisitor>();
+	private final @NonNull Variable invalidVariable;
 
 	public QVTiVMRootEvaluationVisitor(@NonNull QVTiVMEnvironment env, @NonNull IQVTiVMEvaluationEnvironment evalEnv, @NonNull IVMDebuggerShell shell) {
 		super(new QVTiVMEvaluationVisitorImpl(env, evalEnv));
@@ -75,6 +79,10 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		fCurrentStepMode = VMSuspension.UNSPECIFIED;
 		pushVisitor(this);
 		fCurrentLocation = getCurrentLocation();
+		invalidVariable = DomainUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
+		invalidVariable.setName("$invalid");
+		String typeName = DomainUtil.nonNullEMF(PivotPackage.Literals.OCL_EXPRESSION.getName());
+		invalidVariable.setType(env.getMetaModelManager().getPivotType(typeName));
 	}
 
 	@Override
@@ -84,6 +92,7 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		if (!stepperStack.isEmpty()) {
 			stepperStack.pop();
 		}
+		evalEnv.add(invalidVariable, e);
 		int endPosition = ASTBindingHelper.getEndPosition(element);
 		UnitLocation endLocation = newLocalLocation(evalEnv, element, endPosition, endPosition); //, 1);
 		setCurrentLocation(element, endLocation, true);
@@ -339,6 +348,7 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 			if (postElement != null) {
 				evalEnv.setCurrentIP(postElement);
 				evalEnv.replace(evalEnv.getPCVariable(), postElement);
+				evalEnv.remove(invalidVariable);
 				UnitLocation unitLocation = parentStepper.createUnitLocation(evalEnv, postElement);
 				setCurrentLocation(postElement, unitLocation, false);
 				processDebugRequest(unitLocation);
@@ -369,6 +379,7 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 			}
 			setCurrentEnvInstructionPointer(element);
 			evalEnv.replace(evalEnv.getPCVariable(), element);
+			evalEnv.remove(invalidVariable);
 			UnitLocation unitLocation = stepper.createUnitLocation(evalEnv, element);
 			setCurrentLocation(element, unitLocation, false);
 			processDebugRequest(unitLocation);
