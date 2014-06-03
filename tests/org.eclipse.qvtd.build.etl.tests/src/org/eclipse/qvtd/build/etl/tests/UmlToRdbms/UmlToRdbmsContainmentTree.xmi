@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:eCoreContainemntTree="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree">
-  <eCoreContainemntTree:Node EClassName="umltordbms" children="/1 /2 /3 /4 /5 /6 /7 /8"/>
-  <eCoreContainemntTree:Node EClassName="AttributeToColumn" parent="/0 /4 /5">
-    <superTypes>FromAttribute</superTypes>
-    <superTypes>ToColumn</superTypes>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="AssociationToForeignKey" parent="/0 /4">
-    <superTypes>ToColumn</superTypes>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="BooleanToBoolean" parent="/0 /7">
-    <superTypes>PrimitiveToName</superTypes>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="ClassToTable" parent="/0 /7" children="/2 /1 /5">
+  <eCoreContainemntTree:Node EClassName="umltordbms" children="/1"/>
+  <eCoreContainemntTree:Node EClassName="PackageToSchema" parent="/0" children="/2 /3 /4 /5"/>
+  <eCoreContainemntTree:Node EClassName="ClassToTable" parent="/1" children="/6 /7 /8">
     <superTypes>FromAttributeOwner</superTypes>
     <superTypes>ToColumn</superTypes>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="NonLeafAttribute" parent="/0 /4 /5" children="/1 /5">
+  <eCoreContainemntTree:Node EClassName="BooleanToBoolean" parent="/1">
+    <superTypes>PrimitiveToName</superTypes>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassName="IntegerToNumber" parent="/1">
+    <superTypes>PrimitiveToName</superTypes>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassName="StringToVarchar" parent="/1">
+    <superTypes>PrimitiveToName</superTypes>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassName="AssociationToForeignKey" parent="/2">
+    <superTypes>ToColumn</superTypes>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassName="AttributeToColumn" parent="/2 /8">
+    <superTypes>FromAttribute</superTypes>
+    <superTypes>ToColumn</superTypes>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassName="NonLeafAttribute" parent="/2 /8" children="/7 /8">
     <superTypes>FromAttributeOwner</superTypes>
     <superTypes>FromAttribute</superTypes>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="IntegerToNumber" parent="/0 /7">
-    <superTypes>PrimitiveToName</superTypes>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="PackageToSchema" parent="/0" children="/4 /3 /6 /8"/>
-  <eCoreContainemntTree:Node EClassName="StringToVarchar" parent="/0 /7">
-    <superTypes>PrimitiveToName</superTypes>
   </eCoreContainemntTree:Node>
 </xmi:XMI>

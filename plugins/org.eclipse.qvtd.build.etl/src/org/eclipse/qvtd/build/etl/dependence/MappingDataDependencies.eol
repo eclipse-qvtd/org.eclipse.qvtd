@@ -146,6 +146,7 @@ operation ddg!Graph mergedMappingDataDependencies(mergeGraph : ddg!Graph, contai
                 }
             }
 	        if (sources.isEmpty()) {
+                vN.println("vN Emprt ");
 	            if (vN.isTypeOf(ddg!DataTypeNode)) {
 	                var n = mergeGraph.element.selectOne(n : ddg!DataTypeNode | n.label = vN.label and n.type = vN.type);
 	                if (n == null) {
@@ -283,7 +284,7 @@ operation ddg!Graph reducedMergedMappingDataDependencies(reduceGraph : ddg!Graph
         //inputVarNodes.println();
         var C = greedySetCover(inputVarNodes.clone(), derivedVarsUnion);
         
-        C.collect(c | c.label).println("cover set ");
+        //C.collect(c | c.label).println("cover set ");
         //inputVarNodes.println();
         var sources : Sequence;
         for (vN in inputVarNodes) {
@@ -301,7 +302,7 @@ operation ddg!Graph reducedMergedMappingDataDependencies(reduceGraph : ddg!Graph
                         n.label = vN.label;
                         n.type = vN.type;
                         n.attribute = vN.attribute;
-                        mergeGraph.element.add(n);
+                        reduceGraph.element.add(n);
                     }
                     var e = reduceGraph.owningModel().createInstance("DependencyEdge");
                     e.direction = ddg!DependencyDirection#input;

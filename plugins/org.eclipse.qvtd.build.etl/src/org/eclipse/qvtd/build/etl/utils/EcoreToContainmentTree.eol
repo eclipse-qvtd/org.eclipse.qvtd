@@ -42,7 +42,10 @@ operation mm!EPackage iterativeDFS() {
     while (iterate) {
         maxDepth.println("IterativeDFS ");
         change = false;
-        for (c in self.eClassifiers.select(c | c.isKindOf(mm!EClass))) {
+        for (c in self.eClassifiers.select(c | c.isKindOf(mm!EClass)
+                and not c.abstract
+                and not c.getEAllStructuralFeatures().exists(r : mm!EReference | r.container))) {
+            c.println();
             change = c.dfs(1, maxDepth, parentNode) or change;
         }
         if (not change) {
