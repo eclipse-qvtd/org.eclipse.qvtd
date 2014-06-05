@@ -1,10 +1,10 @@
-[% for (i in qvtc!TypedModel.all()) { %]
+[% for (i in qvti!TypedModel.all()) { %]
     [% for (p in i.usedPackage) { %]
 import [%=p.name.firstToUpperCase()%]: '[%=p.nsURI%]';
     [% } %]
 [% } %]
 
-[% for (t in qvtc!Transformation.all()) { %]
+[% for (t in qvti!Transformation.all()) { %]
 transformation [%=t.name %] {
     [% for (mp in t.modelParameter) { %]
     [%=mp.name%] imports [%=mp.usedPackage.collect(up | up.name.firstToUpperCase()).concat(",")%]; 
@@ -93,10 +93,6 @@ map [%if (self.name.isDefined()){%][%=self.name%] in [%=t.name%][%}%] {
         [%=p.toString()%];[%
         }
     }%]}
-    [%
-    for (l in self.local) {
-        l.declaration(t);
-    }%]
 }
     
 [%}%]

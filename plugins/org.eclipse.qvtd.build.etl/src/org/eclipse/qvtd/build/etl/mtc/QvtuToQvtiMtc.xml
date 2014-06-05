@@ -98,18 +98,18 @@
             read="true" store="false"/>
 		<!-- QVTm Partition  -->
         <epsilon.emf.loadModel
-            name = "QVTiP"
+            name = "QVTi"
             aliases ="QVT"
-            modelFile = "${name}Partition.qvtm.qvtcas"
-            metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
+            modelFile = "${name}.qvtias"
+            metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTimperative"
             read="false" store="true"/>
 		<epsilon.etl uri="${QVTmToQVTiPartition}">
             <model ref="QVTm"/>
-            <model ref="QVTiP"/>
+            <model ref="QVTi"/>
             <model ref="config"/>
             <model ref="oclStdLib"/>
 	    </epsilon.etl>
 		<epsilon.disposeModel model="QVTm"/>
-		<epsilon.disposeModel model="QVTiP"/>
+		<epsilon.disposeModel model="QVTi"/>
     </target>
 </project>

@@ -275,8 +275,8 @@ operation QVT!Variable hasRelation(varB : QVT!Variable) : Any {
     
     // Fin predicates that only refer the two variables
     for (p in self.oppositePattern().area.rule.guardPattern.predicate
-            .includingAll(self.oppositePattern().area.rule.local.collect(l | l.guardPattern.predicate).flatten())
-            .select(p | p.conditionExpression.isSimpleAttributeNavigation())) {
+            /*.includingAll(self.oppositePattern().area.rule.local.collect(l | l.guardPattern.predicate).flatten())
+            */.select(p | p.conditionExpression.isSimpleAttributeNavigation())) {
         if (p.conditionExpression.findReferencedVariables()
                 .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
             // Expression in the form varB.prop = self

@@ -1,570 +1,570 @@
 <?xml version="1.0" encoding="ASCII"?>
 <qVTcDataDependencyGraph:Graph xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qVTcDataDependencyGraph="http://www.eclipse.org/qvt/examples/0.2/QVTcDataDependencyGraph" name="MappingDataDependences">
-  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.2 //@element.10 //@element.12 //@element.15 //@element.16 //@element.20 //@element.21" outgoing="//@element.24" label="associationToForeignKey_LM">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.11"/>
+  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.2 //@element.6 //@element.7" outgoing="//@element.10 //@element.13 //@element.14" label="classToTable_MR">
+    <qvtAstNode href="UmlToRdbms.qvtias#m.umlRdbms.classToTable_MR"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.2 //@element.8" label="ClassToTable">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.11/@domain.1/@guardPattern/@variable.2"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.8" outgoing="//@element.2 //@element.4" label="PackageToSchema">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.9/@domain.1/@guardPattern/@variable.0"/>
   </element>
   <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.0" source="//@element.1"/>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.13" outgoing="//@element.10 //@element.11" label="PackageToSchema">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.11/@domain.1/@guardPattern/@variable.0"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.4" outgoing="//@element.6" label="Schema" model="output">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.9/@domain.0/@guardPattern/@variable.0"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.12 //@element.13 //@element.14" label="ClassToTable">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.11/@domain.1/@guardPattern/@variable.1"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.3" source="//@element.1">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.schema"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.11 //@element.17 //@element.22" outgoing="//@element.15" label="Package" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.16 //@element.17 //@element.18 //@element.19" label="Association" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.3"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.8 //@element.18" outgoing="//@element.20" label="Class" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.2"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.7" source="//@element.1">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.umlClass"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.14 //@element.19" outgoing="//@element.21 //@element.22" label="Class" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.1"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.7 //@element.8 //@element.15 //@element.16 //@element.17" label="ClassToTable">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.9/@domain.1/@guardPattern/@variable.1"/>
   </element>
   <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.0" source="//@element.3"/>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.5" source="//@element.3">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.umlPackage"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.0" source="//@element.4"/>
-  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.3" source="//@element.4">
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.0" source="//@element.5"/>
+  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.1" source="//@element.5">
     <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.owner"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.9" source="//@element.4">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.umlClass"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.10 //@element.15" label="Table" model="output">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.9/@domain.0/@bottomPattern/@realizedVariable.0"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.0" source="//@element.5"/>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.0" source="//@element.6"/>
-  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.5" source="//@element.6" model="input">
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.9" source="//@element.0" direction="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.13 //@element.16" label="Key" model="output">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.9/@domain.0/@bottomPattern/@realizedVariable.1"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.14 //@element.17" label="Column" model="output">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.9/@domain.0/@bottomPattern/@realizedVariable.2"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.11" source="//@element.0" direction="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.12" source="//@element.0" direction="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.9" source="//@element.5">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.table"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.11" source="//@element.5">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.primaryKey"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.12" source="//@element.5">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ToColumn.column"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.20 //@element.24 //@element.25" outgoing="//@element.28" label="integerToNumber_LM">
+    <qvtAstNode href="UmlToRdbms.qvtias#m.umlRdbms.integerToNumber_LM"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.20 //@element.22" label="PrimitiveDataType" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.2/@domain.0/@guardPattern/@variable.1"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.18" source="//@element.19"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.22 //@element.26" outgoing="//@element.24" label="Package" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.2/@domain.0/@guardPattern/@variable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.21" source="//@element.19" model="input">
     <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.7" source="//@element.6">
-    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.Association.destination"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.25 //@element.26" label="PackageToSchema">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.2/@domain.1/@guardPattern/@variable.0"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.9" source="//@element.6">
-    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.Association.source"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.0" source="//@element.7"/>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.0" source="//@element.9"/>
-  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.5" source="//@element.9" model="input">
-    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.24" label="AssociationToForeignKey">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.11/@domain.1/@bottomPattern/@realizedVariable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.23" source="//@element.0" direction="output"/>
-  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.27 //@element.31 //@element.32" outgoing="//@element.35" label="stringToVarchar_LM">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.7"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.27 //@element.29" label="PackageToSchema">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.7/@domain.1/@guardPattern/@variable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.25" source="//@element.26"/>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.29 //@element.33" outgoing="//@element.31" label="Package" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.28" source="//@element.26">
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.18" source="//@element.21"/>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.18" source="//@element.23"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.21" source="//@element.23">
     <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.umlPackage"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.32 //@element.33" label="PrimitiveDataType" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.1"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.28" label="IntegerToNumber">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.2/@domain.1/@bottomPattern/@realizedVariable.0"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.25" source="//@element.28"/>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.25" source="//@element.30"/>
-  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.28" source="//@element.30" model="input">
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.27" source="//@element.18" direction="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.31 //@element.35 //@element.37" outgoing="//@element.39" label="classToTable_LM">
+    <qvtAstNode href="UmlToRdbms.qvtias#m.umlRdbms.classToTable_LM"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.31 //@element.34" label="PackageToSchema">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.8/@domain.1/@guardPattern/@variable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.29" source="//@element.30"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.35 //@element.36" label="Class" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.8/@domain.0/@guardPattern/@variable.1"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.34 //@element.36" outgoing="//@element.37" label="Package" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.8/@domain.0/@guardPattern/@variable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.33" source="//@element.30">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.umlPackage"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.29" source="//@element.32"/>
+  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.33" source="//@element.32" model="input">
     <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.35" label="StringToVarchar">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.7/@domain.1/@bottomPattern/@realizedVariable.0"/>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.29" source="//@element.33"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.39" label="ClassToTable">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.8/@domain.1/@bottomPattern/@realizedVariable.0"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.34" source="//@element.25" direction="output"/>
-  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.38 //@element.41" outgoing="//@element.43" label="stringToVarchar_MR">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.6"/>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.38" source="//@element.29" direction="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.42 //@element.45 //@element.47" outgoing="//@element.50" label="booleanToBoolean_LM">
+    <qvtAstNode href="UmlToRdbms.qvtias#m.umlRdbms.booleanToBoolean_LM"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.38 //@element.40" label="StringToVarchar">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.6/@domain.1/@guardPattern/@variable.1"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.46 //@element.48" outgoing="//@element.42" label="Package" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.5/@domain.0/@guardPattern/@variable.0"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.36" source="//@element.37"/>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.40" outgoing="//@element.41" label="PackageToSchema">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.6/@domain.1/@guardPattern/@variable.0"/>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.40" source="//@element.41"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.45 //@element.46" label="PrimitiveDataType" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.5/@domain.0/@guardPattern/@variable.1"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.39" source="//@element.37">
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.47 //@element.48" label="PackageToSchema">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.5/@domain.1/@guardPattern/@variable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.40" source="//@element.43"/>
+  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.41" source="//@element.43" model="input">
+    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.40" source="//@element.44"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.41" source="//@element.44">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.umlPackage"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.50" label="BooleanToBoolean">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.5/@domain.1/@bottomPattern/@realizedVariable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.49" source="//@element.40" direction="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.53 //@element.58 //@element.60 //@element.63 //@element.65" outgoing="//@element.67" label="complexAttributeComplexAttributes_LM">
+    <qvtAstNode href="UmlToRdbms.qvtias#m.umlRdbms.complexAttributeComplexAttributes_LM"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.61 //@element.64" outgoing="//@element.53" label="Class" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.15/@domain.0/@guardPattern/@variable.1"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.51" source="//@element.52"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.58 //@element.59" label="NonLeafAttribute">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.15/@domain.1/@guardPattern/@variable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.60 //@element.61 //@element.62" label="Attribute" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.15/@domain.0/@guardPattern/@variable.3"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.59" outgoing="//@element.63 //@element.64" label="Attribute" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.15/@domain.0/@guardPattern/@variable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.62" outgoing="//@element.65" label="Class" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.15/@domain.0/@guardPattern/@variable.2"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.51" source="//@element.54"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.56" source="//@element.54">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.attribute"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.51" source="//@element.55"/>
+  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.52" source="//@element.55" model="input">
+    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.57" source="//@element.55">
+    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.Attribute.type"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.51" source="//@element.56"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.52" source="//@element.56">
+    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.Attribute.type"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.51" source="//@element.57"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.67" label="NonLeafAttribute">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.15/@domain.1/@bottomPattern/@realizedVariable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.66" source="//@element.51" direction="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.70 //@element.72" outgoing="//@element.75" label="booleanToBoolean_MR">
+    <qvtAstNode href="UmlToRdbms.qvtias#m.umlRdbms.booleanToBoolean_MR"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.73" outgoing="//@element.70" label="PackageToSchema">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.4/@domain.1/@guardPattern/@variable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.68" source="//@element.69"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.72 //@element.73" label="BooleanToBoolean">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.4/@domain.1/@guardPattern/@variable.1"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.68" source="//@element.71"/>
+  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.69" source="//@element.71">
     <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.owner"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.36" source="//@element.39"/>
-  <element xsi:type="qVTcDataDependencyGraph:DataTypeNode" incoming="//@element.43" label="StringToVarchar.typeName">
-    <attribute href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.typeName"/>
-    <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.StringToVarchar"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.42" source="//@element.36" direction="output"/>
-  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.46 //@element.48" outgoing="//@element.51" label="booleanToBoolean_MR">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.5"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.49" outgoing="//@element.46" label="PackageToSchema">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.5/@domain.1/@guardPattern/@variable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.44" source="//@element.45"/>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.48 //@element.49" label="BooleanToBoolean">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.5/@domain.1/@guardPattern/@variable.1"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.44" source="//@element.47"/>
-  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.45" source="//@element.47">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.owner"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DataTypeNode" incoming="//@element.51" label="BooleanToBoolean.typeName">
+  <element xsi:type="qVTcDataDependencyGraph:DataTypeNode" incoming="//@element.75" label="BooleanToBoolean.typeName">
     <attribute href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.typeName"/>
     <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.BooleanToBoolean"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.50" source="//@element.44" direction="output"/>
-  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.54" outgoing="//@element.56" label="packageToSchema_LM">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.1"/>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.74" source="//@element.68" direction="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.78" outgoing="//@element.80" label="packageToSchema_LM">
+    <qvtAstNode href="UmlToRdbms.qvtias#m.umlRdbms.packageToSchema_LM"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.54" label="Package" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.1/@domain.0/@guardPattern/@variable.0"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.78" label="Package" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.1/@domain.0/@guardPattern/@variable.0"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.52" source="//@element.53"/>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.56" label="PackageToSchema">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.1/@domain.1/@bottomPattern/@realizedVariable.0"/>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.76" source="//@element.77"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.80" label="PackageToSchema">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.1/@domain.1/@bottomPattern/@realizedVariable.0"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.55" source="//@element.52" direction="output"/>
-  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.59 //@element.62 //@element.64" outgoing="//@element.67" label="classToTable_LM">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.9"/>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.79" source="//@element.76" direction="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.83 //@element.88 //@element.91 //@element.92" outgoing="//@element.94" label="classComplexAttributes_LM">
+    <qvtAstNode href="UmlToRdbms.qvtias#m.umlRdbms.classComplexAttributes_LM"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.63 //@element.65" outgoing="//@element.59" label="Package" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.9/@domain.0/@guardPattern/@variable.0"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.83 //@element.87" label="ClassToTable">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.13/@domain.1/@guardPattern/@variable.0"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.57" source="//@element.58"/>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.62 //@element.63" label="PackageToSchema">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.9/@domain.1/@guardPattern/@variable.0"/>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.81" source="//@element.82"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.88 //@element.89 //@element.90" label="Attribute" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.13/@domain.0/@guardPattern/@variable.2"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.64 //@element.65" label="Class" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.9/@domain.0/@guardPattern/@variable.1"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.89" outgoing="//@element.91" label="Class" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.13/@domain.0/@guardPattern/@variable.0"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.57" source="//@element.60"/>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.58" source="//@element.60">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.umlPackage"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.87 //@element.90" outgoing="//@element.92" label="Class" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.13/@domain.0/@guardPattern/@variable.1"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.57" source="//@element.61"/>
-  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.58" source="//@element.61" model="input">
-    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.86" source="//@element.82">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.umlClass"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.67" label="ClassToTable">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.9/@domain.1/@bottomPattern/@realizedVariable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.66" source="//@element.57" direction="output"/>
-  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.70 //@element.77 //@element.78 //@element.80 //@element.82" outgoing="//@element.84" label="classPrimitiveAttributes_LM">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.12"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.70 //@element.72 //@element.76" label="Attribute" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.12/@domain.0/@guardPattern/@variable.2"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.68" source="//@element.69"/>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.72 //@element.79" outgoing="//@element.77" label="PrimitiveDataType" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.12/@domain.0/@guardPattern/@variable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.71" source="//@element.69">
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.81" source="//@element.84"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.85" source="//@element.84">
     <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.Attribute.type"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.78 //@element.79" label="PrimitiveToName">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.12/@domain.1/@guardPattern/@variable.1"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.80 //@element.81" label="ClassToTable">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.12/@domain.1/@guardPattern/@variable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.76 //@element.81" outgoing="//@element.82" label="Class" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.12/@domain.0/@guardPattern/@variable.1"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.75" source="//@element.69" model="input">
+  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.86" source="//@element.84" model="input">
     <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.68" source="//@element.71"/>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.68" source="//@element.73"/>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.71" source="//@element.73">
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.81" source="//@element.85"/>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.81" source="//@element.86"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.94" label="NonLeafAttribute">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.13/@domain.1/@bottomPattern/@realizedVariable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.93" source="//@element.81" direction="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.97 //@element.100 //@element.102" outgoing="//@element.105" label="stringToVarchar_LM">
+    <qvtAstNode href="UmlToRdbms.qvtias#m.umlRdbms.stringToVarchar_LM"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.101 //@element.103" outgoing="//@element.97" label="Package" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.6/@domain.0/@guardPattern/@variable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.95" source="//@element.96"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.100 //@element.101" label="PackageToSchema">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.6/@domain.1/@guardPattern/@variable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.102 //@element.103" label="PrimitiveDataType" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.6/@domain.0/@guardPattern/@variable.1"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.95" source="//@element.98"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.96" source="//@element.98">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.umlPackage"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.95" source="//@element.99"/>
+  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.96" source="//@element.99" model="input">
+    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.105" label="StringToVarchar">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.6/@domain.1/@bottomPattern/@realizedVariable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.104" source="//@element.95" direction="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.108 //@element.115 //@element.116 //@element.118 //@element.120 //@element.123" outgoing="//@element.125" label="complexAttributePrimitiveAttributes_LM">
+    <qvtAstNode href="UmlToRdbms.qvtias#m.umlRdbms.complexAttributePrimitiveAttributes_LM"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.108 //@element.112" label="NonLeafAttribute">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.14/@domain.1/@guardPattern/@variable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.106" source="//@element.107"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.117 //@element.121" outgoing="//@element.115" label="PrimitiveDataType" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.2"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.116 //@element.117" label="PrimitiveToName">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.14/@domain.1/@guardPattern/@variable.1"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.112" outgoing="//@element.118 //@element.119" label="Attribute" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.111" source="//@element.107">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.attribute"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.120 //@element.121 //@element.122" label="Attribute" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.3"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.119 //@element.122" outgoing="//@element.123" label="Class" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.1"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.106" source="//@element.109"/>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.106" source="//@element.110"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.109" source="//@element.110">
     <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.primitive"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.68" source="//@element.74"/>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.75" source="//@element.74">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.umlClass"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.68" source="//@element.75"/>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.84" label="AttributeToColumn">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.12/@domain.1/@bottomPattern/@realizedVariable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.83" source="//@element.68" direction="output"/>
-  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.87 //@element.90 //@element.92" outgoing="//@element.95" label="booleanToBoolean_LM">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.4"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.91 //@element.93" outgoing="//@element.87" label="Package" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.4/@domain.0/@guardPattern/@variable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.85" source="//@element.86"/>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.90 //@element.91" label="PackageToSchema">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.4/@domain.1/@guardPattern/@variable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.92 //@element.93" label="PrimitiveDataType" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.4/@domain.0/@guardPattern/@variable.1"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.85" source="//@element.88"/>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.86" source="//@element.88">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.umlPackage"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.85" source="//@element.89"/>
-  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.86" source="//@element.89" model="input">
-    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.95" label="BooleanToBoolean">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.4/@domain.1/@bottomPattern/@realizedVariable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.94" source="//@element.85" direction="output"/>
-  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.98 //@element.104 //@element.105 //@element.107" outgoing="//@element.109" label="classComplexAttributes_LM">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.13"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.98 //@element.100 //@element.103" label="Attribute" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.13/@domain.0/@guardPattern/@variable.2"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.96" source="//@element.97"/>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.100 //@element.106" outgoing="//@element.104" label="Class" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.13/@domain.0/@guardPattern/@variable.1"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.99" source="//@element.97" model="input">
-    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.105 //@element.106" label="ClassToTable">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.13/@domain.1/@guardPattern/@variable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.103" outgoing="//@element.107" label="Class" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.13/@domain.0/@guardPattern/@variable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.102" source="//@element.97">
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.106" source="//@element.111"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.114" source="//@element.111">
     <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.Attribute.type"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.96" source="//@element.99"/>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.96" source="//@element.101"/>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.99" source="//@element.101">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.umlClass"/>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.106" source="//@element.113"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.109" source="//@element.113">
+    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.Attribute.type"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.96" source="//@element.102"/>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.109" label="NonLeafAttribute">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.13/@domain.1/@bottomPattern/@realizedVariable.0"/>
+  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.114" source="//@element.113" model="input">
+    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.108" source="//@element.96" direction="output"/>
-  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.112 //@element.114" outgoing="//@element.117" label="integerToNumber_MR">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.3"/>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.106" source="//@element.114"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.125" label="AttributeToColumn">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.14/@domain.1/@bottomPattern/@realizedVariable.0"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.115" outgoing="//@element.112" label="PackageToSchema">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.3/@domain.1/@guardPattern/@variable.0"/>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.124" source="//@element.106" direction="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.128 //@element.130" outgoing="//@element.133" label="integerToNumber_MR">
+    <qvtAstNode href="UmlToRdbms.qvtias#m.umlRdbms.integerToNumber_MR"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.110" source="//@element.111"/>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.114 //@element.115" label="IntegerToNumber">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.3/@domain.1/@guardPattern/@variable.1"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.131" outgoing="//@element.128" label="PackageToSchema">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.3/@domain.1/@guardPattern/@variable.0"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.110" source="//@element.113"/>
-  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.111" source="//@element.113">
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.126" source="//@element.127"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.130 //@element.131" label="IntegerToNumber">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.3/@domain.1/@guardPattern/@variable.1"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.126" source="//@element.129"/>
+  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.127" source="//@element.129">
     <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.owner"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DataTypeNode" incoming="//@element.117" label="IntegerToNumber.typeName">
+  <element xsi:type="qVTcDataDependencyGraph:DataTypeNode" incoming="//@element.133" label="IntegerToNumber.typeName">
     <attribute href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.typeName"/>
     <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.IntegerToNumber"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.116" source="//@element.110" direction="output"/>
-  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.120 //@element.125 //@element.128 //@element.129 //@element.136 //@element.138 //@element.140" outgoing="//@element.131 //@element.134" label="attributeColumns_MR">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.16"/>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.132" source="//@element.126" direction="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.136 //@element.144 //@element.145 //@element.147 //@element.148 //@element.151 //@element.155" outgoing="//@element.158" label="associationToForeignKey_LM">
+    <qvtAstNode href="UmlToRdbms.qvtias#m.umlRdbms.associationToForeignKey_LM"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.126" outgoing="//@element.120 //@element.123" label="ClassToTable">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.16/@domain.1/@guardPattern/@variable.0"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.149 //@element.152" outgoing="//@element.136 //@element.138" label="Class" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.10/@domain.0/@guardPattern/@variable.1"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.118" source="//@element.119"/>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.125 //@element.126 //@element.127 //@element.132" label="AttributeToColumn">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.16/@domain.1/@guardPattern/@variable.1"/>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.134" source="//@element.135"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.138 //@element.153 //@element.156" outgoing="//@element.144" label="Package" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.10/@domain.0/@guardPattern/@variable.0"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.123" outgoing="//@element.128" label="Table" model="output">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.16/@domain.0/@guardPattern/@variable.0"/>
+  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.137" source="//@element.135" model="input">
+    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.122" source="//@element.119">
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.145 //@element.146" label="ClassToTable">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.10/@domain.1/@guardPattern/@variable.2"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.146 //@element.154" outgoing="//@element.147" label="Class" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.10/@domain.0/@guardPattern/@variable.2"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.148 //@element.149 //@element.150" label="ClassToTable">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.10/@domain.1/@guardPattern/@variable.1"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.151 //@element.152 //@element.153 //@element.154" label="Association" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.10/@domain.0/@guardPattern/@variable.3"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.150" outgoing="//@element.155 //@element.156" label="PackageToSchema">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.10/@domain.1/@guardPattern/@variable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.134" source="//@element.137"/>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.134" source="//@element.139"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.140" source="//@element.139">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.umlClass"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.134" source="//@element.140"/>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.134" source="//@element.141"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.135" source="//@element.141">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.umlClass"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.143" source="//@element.141">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.owner"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.134" source="//@element.142"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.135" source="//@element.142">
+    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.Association.source"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.137" source="//@element.142" model="input">
+    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.140" source="//@element.142">
+    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.Association.destination"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.134" source="//@element.143"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.137" source="//@element.143">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.umlPackage"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.158" label="AssociationToForeignKey">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.10/@domain.1/@bottomPattern/@realizedVariable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.157" source="//@element.134" direction="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.161 //@element.170 //@element.172 //@element.175 //@element.177 //@element.179 //@element.180 //@element.183" outgoing="//@element.185 //@element.187" label="associationToForeignKey_MR">
+    <qvtAstNode href="UmlToRdbms.qvtias#m.umlRdbms.associationToForeignKey_MR"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.161 //@element.167" label="Key" model="output">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.3"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.159" source="//@element.160"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.181" outgoing="//@element.170 //@element.171" label="ClassToTable">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.11/@domain.1/@guardPattern/@variable.2"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.182" outgoing="//@element.172 //@element.173 //@element.174" label="ClassToTable">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.11/@domain.1/@guardPattern/@variable.1"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.173" outgoing="//@element.175 //@element.176" label="PackageToSchema">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.11/@domain.1/@guardPattern/@variable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.174" outgoing="//@element.177 //@element.178" label="Table" model="output">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.1"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.167 //@element.171" outgoing="//@element.179" label="Table" model="output">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.2"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.166" source="//@element.160" model="output">
+    <referredProperty href="SimpleRDBMS.ecore.oclas#p.simplerdbms.Key.owner"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.180 //@element.181 //@element.182 //@element.188 //@element.189" label="AssociationToForeignKey">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.11/@domain.1/@guardPattern/@variable.3"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.176 //@element.178" outgoing="//@element.183" label="Schema" model="output">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.159" source="//@element.162"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.166" source="//@element.162">
     <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.table"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.127" outgoing="//@element.129" label="PrimitiveToName">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.16/@local.0/@domain.1/@guardPattern/@variable.0"/>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.159" source="//@element.163"/>
+  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.164" source="//@element.163">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.owner"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.118" source="//@element.121"/>
-  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.119" source="//@element.121">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.owner"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.165" source="//@element.163">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.table"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.124" source="//@element.121">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.AttributeToColumn.type"/>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.159" source="//@element.164"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.169" source="//@element.164">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.schema"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.118" source="//@element.122"/>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.118" source="//@element.124"/>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.131 //@element.132" label="Column" model="output">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.16/@domain.0/@bottomPattern/@realizedVariable.0"/>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.159" source="//@element.165"/>
+  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.169" source="//@element.165" model="output">
+    <referredProperty href="SimpleRDBMS.ecore.oclas#p.simplerdbms.Table.schema"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.130" source="//@element.118" direction="output"/>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.130" source="//@element.121">
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.159" source="//@element.166"/>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.159" source="//@element.168"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.162" source="//@element.168">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.AssociationToForeignKey.referenced"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.163" source="//@element.168">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.AssociationToForeignKey.owner"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.159" source="//@element.169"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.185 //@element.188" label="ForeignKey" model="output">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.11/@domain.0/@bottomPattern/@realizedVariable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.184" source="//@element.159" direction="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.187 //@element.189" label="Column" model="output">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.11/@domain.0/@bottomPattern/@realizedVariable.1"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.186" source="//@element.159" direction="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.184" source="//@element.168">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.AssociationToForeignKey.foreignKey"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.186" source="//@element.168">
     <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ToColumn.column"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DataTypeNode" incoming="//@element.134" label="Column.type">
+  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.192 //@element.198 //@element.200 //@element.201 //@element.204" outgoing="//@element.206" label="classPrimitiveAttributes_LM">
+    <qvtAstNode href="UmlToRdbms.qvtias#m.umlRdbms.classPrimitiveAttributes_LM"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.192 //@element.195" label="PrimitiveToName">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.12/@domain.1/@guardPattern/@variable.1"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.190" source="//@element.191"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.198 //@element.199" label="ClassToTable">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.12/@domain.1/@guardPattern/@variable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.195 //@element.202" outgoing="//@element.200" label="PrimitiveDataType" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.12/@domain.0/@guardPattern/@variable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.194" source="//@element.191">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.primitive"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.201 //@element.202 //@element.203" label="Attribute" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.12/@domain.0/@guardPattern/@variable.2"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.199 //@element.203" outgoing="//@element.204" label="Class" model="input">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.12/@domain.0/@guardPattern/@variable.1"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.190" source="//@element.193"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.197" source="//@element.193">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.umlClass"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.190" source="//@element.194"/>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.190" source="//@element.196"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.194" source="//@element.196">
+    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.Attribute.type"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.197" source="//@element.196" model="input">
+    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.190" source="//@element.197"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.206" label="AttributeToColumn">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.12/@domain.1/@bottomPattern/@realizedVariable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.205" source="//@element.190" direction="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.209 //@element.212" outgoing="//@element.214" label="stringToVarchar_MR">
+    <qvtAstNode href="UmlToRdbms.qvtias#m.umlRdbms.stringToVarchar_MR"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.209 //@element.211" label="StringToVarchar">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.7/@domain.1/@guardPattern/@variable.1"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.207" source="//@element.208"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.211" outgoing="//@element.212" label="PackageToSchema">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.7/@domain.1/@guardPattern/@variable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.210" source="//@element.208">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.owner"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.207" source="//@element.210"/>
+  <element xsi:type="qVTcDataDependencyGraph:DataTypeNode" incoming="//@element.214" label="StringToVarchar.typeName">
+    <attribute href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.typeName"/>
+    <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.StringToVarchar"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.213" source="//@element.207" direction="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.217" outgoing="//@element.219" label="packageToSchema_MR">
+    <qvtAstNode href="UmlToRdbms.qvtias#m.umlRdbms.packageToSchema_MR"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.217 //@element.220" label="PackageToSchema">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.0/@domain.1/@guardPattern/@variable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.215" source="//@element.216"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.219 //@element.220" label="Schema" model="output">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.0/@domain.0/@bottomPattern/@realizedVariable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.218" source="//@element.215" direction="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.218" source="//@element.216">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.schema"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.223 //@element.227 //@element.229 //@element.230 //@element.239 //@element.241 //@element.243" outgoing="//@element.234 //@element.237" label="attributeColumns_MR">
+    <qvtAstNode href="UmlToRdbms.qvtias#m.umlRdbms.attributeColumns_MR"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.231" outgoing="//@element.223" label="PrimitiveToName">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.16/@domain.1/@guardPattern/@variable.1"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.221" source="//@element.222"/>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.232" outgoing="//@element.227 //@element.228" label="ClassToTable">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.16/@domain.1/@guardPattern/@variable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.228" outgoing="//@element.229" label="Table" model="output">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.16/@domain.0/@guardPattern/@variable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.230 //@element.231 //@element.232 //@element.235" label="AttributeToColumn">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.16/@domain.1/@guardPattern/@variable.2"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.221" source="//@element.224"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.225" source="//@element.224">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.table"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.221" source="//@element.225"/>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.221" source="//@element.226"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.222" source="//@element.226">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.AttributeToColumn.type"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.224" source="//@element.226">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.owner"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.234 //@element.235" label="Column" model="output">
+    <qvtAstNode href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.16/@domain.0/@bottomPattern/@realizedVariable.0"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.233" source="//@element.221" direction="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.233" source="//@element.226">
+    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ToColumn.column"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DataTypeNode" incoming="//@element.237" label="Column.type">
     <attribute href="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.type"/>
     <type href="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.133" source="//@element.118" direction="output"/>
-  <element xsi:type="qVTcDataDependencyGraph:DataTypeNode" outgoing="//@element.136" label="StringToVarchar.typeName">
-    <attribute href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.typeName"/>
-    <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.StringToVarchar"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.118" source="//@element.135"/>
-  <element xsi:type="qVTcDataDependencyGraph:DataTypeNode" outgoing="//@element.138" label="BooleanToBoolean.typeName">
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.236" source="//@element.221" direction="output"/>
+  <element xsi:type="qVTcDataDependencyGraph:DataTypeNode" outgoing="//@element.239" label="BooleanToBoolean.typeName">
     <attribute href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.typeName"/>
     <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.BooleanToBoolean"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.118" source="//@element.137"/>
-  <element xsi:type="qVTcDataDependencyGraph:DataTypeNode" outgoing="//@element.140" label="IntegerToNumber.typeName">
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.221" source="//@element.238"/>
+  <element xsi:type="qVTcDataDependencyGraph:DataTypeNode" outgoing="//@element.241" label="IntegerToNumber.typeName">
     <attribute href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.typeName"/>
     <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.IntegerToNumber"/>
   </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.118" source="//@element.139"/>
-  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.143 //@element.150 //@element.153 //@element.155 //@element.156 //@element.157" outgoing="//@element.160" label="complexAttributePrimitiveAttributes_LM">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.14"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.143 //@element.147" label="PrimitiveToName">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.14/@domain.1/@guardPattern/@variable.1"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.141" source="//@element.142"/>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.150 //@element.151 //@element.152" label="Attribute" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.3"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.153 //@element.154" label="NonLeafAttribute">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.14/@domain.1/@guardPattern/@variable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.147 //@element.151" outgoing="//@element.155" label="PrimitiveDataType" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.2"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.146" source="//@element.142">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.primitive"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.152 //@element.158" outgoing="//@element.156" label="Class" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.1"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.154" outgoing="//@element.157 //@element.158" label="Attribute" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.141" source="//@element.144"/>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.146" source="//@element.144">
-    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.Attribute.type"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.148" source="//@element.144" model="input">
-    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.141" source="//@element.145"/>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.149" source="//@element.145">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.attribute"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.141" source="//@element.146"/>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.141" source="//@element.148"/>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.141" source="//@element.149"/>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.148" source="//@element.149">
-    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.Attribute.type"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.160" label="AttributeToColumn">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.14/@domain.1/@bottomPattern/@realizedVariable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.159" source="//@element.141" direction="output"/>
-  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.163 //@element.167 //@element.168" outgoing="//@element.171 //@element.174 //@element.175" label="classToTable_MR">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.8"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.163 //@element.166 //@element.176 //@element.177 //@element.178" label="ClassToTable">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.8/@domain.1/@guardPattern/@variable.1"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.161" source="//@element.162"/>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.169" outgoing="//@element.167" label="Schema" model="output">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.8/@domain.0/@guardPattern/@variable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.166" outgoing="//@element.168 //@element.169" label="PackageToSchema">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.8/@domain.1/@guardPattern/@variable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.165" source="//@element.162">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.owner"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.161" source="//@element.164"/>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.161" source="//@element.165"/>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.164" source="//@element.165">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.schema"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.171 //@element.176" label="Table" model="output">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.8/@domain.0/@bottomPattern/@realizedVariable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.170" source="//@element.161" direction="output"/>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.174 //@element.177" label="Column" model="output">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.8/@domain.0/@bottomPattern/@realizedVariable.2"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.175 //@element.178" label="Key" model="output">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.8/@domain.0/@bottomPattern/@realizedVariable.1"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.172" source="//@element.161" direction="output"/>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.173" source="//@element.161" direction="output"/>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.170" source="//@element.162">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.table"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.172" source="//@element.162">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ToColumn.column"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.173" source="//@element.162">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.primaryKey"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.181 //@element.188 //@element.190 //@element.191 //@element.193" outgoing="//@element.195" label="complexAttributeComplexAttributes_LM">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.15"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.181 //@element.184 //@element.187" label="Attribute" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.15/@domain.0/@guardPattern/@variable.3"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.179" source="//@element.180"/>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.188 //@element.189" label="NonLeafAttribute">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.15/@domain.1/@guardPattern/@variable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.184 //@element.192" outgoing="//@element.190" label="Class" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.15/@domain.0/@guardPattern/@variable.1"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.183" source="//@element.180" model="input">
-    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.189" outgoing="//@element.191 //@element.192" label="Attribute" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.15/@domain.0/@guardPattern/@variable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.187" outgoing="//@element.193" label="Class" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.15/@domain.0/@guardPattern/@variable.2"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.186" source="//@element.180">
-    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.Attribute.type"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.179" source="//@element.182"/>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.185" source="//@element.182">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.attribute"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.179" source="//@element.183"/>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.179" source="//@element.185"/>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.183" source="//@element.185">
-    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.Attribute.type"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.179" source="//@element.186"/>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.195" label="NonLeafAttribute">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.15/@domain.1/@bottomPattern/@realizedVariable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.194" source="//@element.179" direction="output"/>
-  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.198 //@element.201 //@element.203" outgoing="//@element.206" label="integerToNumber_LM">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.2"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.202 //@element.204" outgoing="//@element.198" label="Package" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.2/@domain.0/@guardPattern/@variable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.196" source="//@element.197"/>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.201 //@element.202" label="PackageToSchema">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.2/@domain.1/@guardPattern/@variable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.203 //@element.204" label="PrimitiveDataType" model="input">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.2/@domain.0/@guardPattern/@variable.1"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.196" source="//@element.199"/>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.197" source="//@element.199">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.umlPackage"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.196" source="//@element.200"/>
-  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.197" source="//@element.200" model="input">
-    <referredProperty href="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.206" label="IntegerToNumber">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.2/@domain.1/@bottomPattern/@realizedVariable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.205" source="//@element.196" direction="output"/>
-  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.209 //@element.217 //@element.219 //@element.222 //@element.224 //@element.227 //@element.228 //@element.230" outgoing="//@element.233 //@element.235" label="associationToForeignKey_MR">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.10"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.223 //@element.229" outgoing="//@element.209" label="Schema" model="output">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.10/@domain.0/@guardPattern/@variable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.207" source="//@element.208"/>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.217 //@element.218" label="Key" model="output">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.10/@domain.0/@guardPattern/@variable.3"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.225" outgoing="//@element.219 //@element.220 //@element.221" label="ClassToTable">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.10/@domain.1/@guardPattern/@variable.1"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.220" outgoing="//@element.222 //@element.223" label="PackageToSchema">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.10/@domain.1/@guardPattern/@variable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.224 //@element.225 //@element.226 //@element.236 //@element.237" label="AssociationToForeignKey">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.10/@domain.1/@guardPattern/@variable.3"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.218 //@element.231" outgoing="//@element.227" label="Table" model="output">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.10/@domain.0/@guardPattern/@variable.2"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.221" outgoing="//@element.228 //@element.229" label="Table" model="output">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.10/@domain.0/@guardPattern/@variable.1"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.226" outgoing="//@element.230 //@element.231" label="ClassToTable">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.10/@domain.1/@guardPattern/@variable.2"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.207" source="//@element.210"/>
-  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.214" source="//@element.210" model="output">
-    <referredProperty href="SimpleRDBMS.ecore.oclas#p.simplerdbms.Key.owner"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.207" source="//@element.211"/>
-  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.212" source="//@element.211">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.owner"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.215" source="//@element.211">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.table"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.207" source="//@element.212"/>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.208" source="//@element.212">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.schema"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.207" source="//@element.213"/>
-  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.211" source="//@element.213">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.AssociationToForeignKey.owner"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.216" source="//@element.213">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.AssociationToForeignKey.referenced"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.207" source="//@element.214"/>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.207" source="//@element.215"/>
-  <element xsi:type="qVTcDataDependencyGraph:ContainmentEdge" target="//@element.208" source="//@element.215" model="output">
-    <referredProperty href="SimpleRDBMS.ecore.oclas#p.simplerdbms.Table.schema"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.207" source="//@element.216"/>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.214" source="//@element.216">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.table"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.233 //@element.236" label="Column" model="output">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.10/@domain.0/@bottomPattern/@realizedVariable.1"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.232" source="//@element.207" direction="output"/>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.235 //@element.237" label="ForeignKey" model="output">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.10/@domain.0/@bottomPattern/@realizedVariable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.234" source="//@element.207" direction="output"/>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.232" source="//@element.213">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.ToColumn.column"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.234" source="//@element.213">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.AssociationToForeignKey.foreignKey"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:MappingNode" incoming="//@element.240" outgoing="//@element.242" label="packageToSchema_MR">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" outgoing="//@element.240 //@element.243" label="PackageToSchema">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.0/@domain.1/@guardPattern/@variable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.238" source="//@element.239"/>
-  <element xsi:type="qVTcDataDependencyGraph:ClassNode" incoming="//@element.242 //@element.243" label="Schema" model="output">
-    <qvtAstNode href="UmlToRdbmsPartition.qvtm.qvtcas#//@nestedPackage.0/@rule.0/@domain.0/@bottomPattern/@realizedVariable.0"/>
-  </element>
-  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.241" source="//@element.238" direction="output"/>
-  <element xsi:type="qVTcDataDependencyGraph:ReferenceEdge" target="//@element.241" source="//@element.239">
-    <referredProperty href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.schema"/>
-  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.221" source="//@element.240"/>
+  <element xsi:type="qVTcDataDependencyGraph:DataTypeNode" outgoing="//@element.243" label="StringToVarchar.typeName">
+    <attribute href="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.typeName"/>
+    <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.StringToVarchar"/>
+  </element>
+  <element xsi:type="qVTcDataDependencyGraph:DependencyEdge" target="//@element.221" source="//@element.242"/>
 </qVTcDataDependencyGraph:Graph>

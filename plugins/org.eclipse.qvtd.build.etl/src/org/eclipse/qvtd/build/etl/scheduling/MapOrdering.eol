@@ -9,7 +9,7 @@
  *     Horacio Hoyos - initial implementation
  ******************************************************************************/
 
- /****l* /org.eclipse.qvtd.build.etl/dependence/scheduling/MapOrdering
+/****l* /org.eclipse.qvtd.build.etl/dependence/scheduling/MapOrdering
  * NAME
  *  MapOrdering -- A set of EOL operations to perform scheduling analysys from
  *  data dependencies
@@ -27,107 +27,117 @@
  ******
  */
 
-// Do a Depth first search of the containment tree of the output model
-var queue : Sequence;
-var mapOredering : Map;
-var mapNesting : Map;
-var mapLinear : Map;
-var index : Integer  = 1;
+operation getMapOrdering(rTree, reducedGraph) : Map {
+	// Do a Depth first search of the containment tree of the output model
+	var mapOredering : Map;
+    var mapNesting : Map;
+    var mapLinear : Map;
+	var mapResult : Map;
+	var queue : Sequence;
+	
+	
+	
+	var index : Integer  = 1;
+	
+	queue.addAll(rTree!Node.all().select(n | n.parent.isEmpty()));
+	while (not queue.isEmpty()) {
+	    var n = queue.first();
+	    queue.remove(n);
+	    // Do stuff with n
+	    //n.println();
+	    //  Find all the mappings that have an output node if this type
+	    for (map1 in ddg!MappingNode.all().select(m | m.outgoing.exists(e | e.target.label = n.EClassName))) {
+	        // Find the predecesors and linearize
+	        map1.addMapping(mapOredering);
+	    }
+	    queue.addAll(n.children);
+	}
+	
+	"Ordering".println();
+	for (k in mapOredering.keySet()) {
+	    mapLinear.put(mapOredering.get(k), k);
+	}
+	for (k in mapLinear.keySet().sortBy(key | key)) {
+	    mapLinear.get(k).label.println(k + ": ");
+	}
+	" ".println();
+	" ".println();
+	//2. Select the predecessor in which each micromapping nests most efficiently
+	mapNesting.put(0, Sequence{1});
+	for (q in Sequence{2..mapLinear.keySet().size()}) {
+	    //mapLinear.get(q).label.println("Q ");
+	    var optimalNest = 0;        // If the optimal is 0, the mapping must be invoked at the root
+	    var qin = mapLinear.get(q).incoming.select(e | not e.derived).collect(e | e.source);
+	    //qin.collect(v | v.label).println("qin ");
+	    //mapLinear.get(q).incoming.select(e | e.multiple).collect(e | e.source).println("multi ");
+	    var qBestMatch = qin.size();
+	    for (n in Sequence{q-1..1}) {
+	        //mapLinear.get(n).label.println("N ");
+	        var nout = mapLinear.get(n).outgoing.collect(e | e.target);
+	        var nin = mapLinear.get(n).incoming.collect(e | e.source);
+	        // Containment relations of input vars are also available
+	        var nav = nin.outgoing.flatten().select(e | e.isTypeOf(ddg!ContainmentEdge)).collect(e | e.target);
+	        var ntot = nin.includingAll(nav.includingAll(nout)).asSet();
+	        //nin.println("nin ");
+	        //ntot.collect(v | v.label).println("ntot ");            
+	        //nin.includingAll(nout).exists(v | mapLinear.get(q).incoming.select(e | e.multiple).collect(e | e.source).includes(v)).println();      
+	        // Mappings with multiple relations can only be nested in previous nestings
+	        if (not nin.includingAll(nout).exists(v | mapLinear.get(q).incoming.select(e | e.multiple).collect(e | e.source).includes(v))) {
+	            if (ntot.includesAll(qin)) {
+	                // If all input vars are in nav+nout, this is the optimal Nest
+	                optimalNest = n;
+	                //n.println("ntot inlcudes qin: ");
+	            } else {
+	                var missing = qin.excludingAll(ntot);
+	                //missing.size().println("mising: ");
+	                if (missing.size() < qBestMatch) {         // We preffer the deepest match
+	                    qBestMatch = missing;
+	                    optimalNest = n;
+	                    //n.println("ntot best match: ");
+	                }
+	            }
+	        } else {
+	            // Look for extra elements from previous nestings
+	            var missing = qin.excludingAll(ntot);
+	            for (k in mapNesting.keySet()) {
+	                if (mapNesting.get(k).includes(n) and k <> 0) {
+	                    nout = mapLinear.get(k).outgoing.collect(e | e.target);
+	                    nin = mapLinear.get(k).incoming.collect(e | e.source);
+	                    nav = nin.outgoing.flatten().select(e | e.isTypeOf(ddg!ContainmentEdge)).collect(e | e.target);
+	                    ntot = nin.includingAll(nav.includingAll(nout)).asSet();
+	                    if (ntot.includesAll(missing)) {
+	                        //k.println("previous best match: ");
+	                        optimalNest = k;                        
+	                    }
+	                }
+	            }
+	        }
+	    }
+	    var nested : Sequence;
+	    if (mapNesting.containsKey(optimalNest)) {
+	        nested = mapNesting.get(optimalNest);
+	    }
+	    nested.add(q);
+	    mapNesting.put(optimalNest, nested);
+	}
+	// Pop ordering
+	//for (k in mapNesting.keySet().sortBy(key | key)) {
+	//    var sorted = mapNesting.get(k).sortBy(n | mapNesting.get(n).last());
+	//}
+	"Nesting".println();
+	for (k in mapNesting.keySet().sortBy(key | key)) {
+	    if (k == 0) {
+	        var rootMap = new qvti!Mapping;
+	        
+	        mapNesting.get(k).println(k + ": ");
+	    } else {
+	        mapNesting.get(k).sortBy(n | getNestedMax(mapNesting, n)).println(k + ": ");
+	    }
+	
+	         
+	}
 
-queue.addAll(rTree!Node.all().select(n | n.parent.isEmpty()));
-while (not queue.isEmpty()) {
-    var n = queue.first();
-    queue.remove(n);
-    // Do stuff with n
-    //n.println();
-    //  Find all the mappings that have an output node if this type
-    for (map1 in ddg!MappingNode.all().select(m | m.outgoing.exists(e | e.target.label = n.EClassName))) {
-        // Find the predecesors and linearize
-        map1.addMapping(mapOredering);
-    }
-    queue.addAll(n.children);
-}
 
-"Ordering".println();
-for (k in mapOredering.keySet()) {
-    mapLinear.put(mapOredering.get(k), k);
-}
-for (k in mapLinear.keySet().sortBy(key | key)) {
-    mapLinear.get(k).label.println(k + ": ");
-}
-" ".println();
-" ".println();
-//2. Select the predecessor in which each micromapping nests most efficiently
-mapNesting.put(0, Sequence{1});
-for (q in Sequence{2..mapLinear.keySet().size()}) {
-    //mapLinear.get(q).label.println("Q ");
-    var optimalNest = 0;        // If the optimal is 0, the mapping must be invoked at the root
-    var qin = mapLinear.get(q).incoming.select(e | not e.derived).collect(e | e.source);
-    //qin.collect(v | v.label).println("qin ");
-    //mapLinear.get(q).incoming.select(e | e.multiple).collect(e | e.source).println("multi ");
-    var qBestMatch = qin.size();
-    for (n in Sequence{q-1..1}) {
-        //mapLinear.get(n).label.println("N ");
-        var nout = mapLinear.get(n).outgoing.collect(e | e.target);
-        var nin = mapLinear.get(n).incoming.collect(e | e.source);
-        // Containment relations of input vars are also available
-        var nav = nin.outgoing.flatten().select(e | e.isTypeOf(ddg!ContainmentEdge)).collect(e | e.target);
-        var ntot = nin.includingAll(nav.includingAll(nout)).asSet();
-        //nin.println("nin ");
-        //ntot.collect(v | v.label).println("ntot ");            
-        //nin.includingAll(nout).exists(v | mapLinear.get(q).incoming.select(e | e.multiple).collect(e | e.source).includes(v)).println();      
-        // Mappings with multiple relations can only be nested in previous nestings
-        if (not nin.includingAll(nout).exists(v | mapLinear.get(q).incoming.select(e | e.multiple).collect(e | e.source).includes(v))) {
-	        if (ntot.includesAll(qin)) {
-                // If all input vars are in nav+nout, this is the optimal Nest
-                optimalNest = n;
-                //n.println("ntot inlcudes qin: ");
-            } else {
-                var missing = qin.excludingAll(ntot);
-                //missing.size().println("mising: ");
-                if (missing.size() < qBestMatch) {         // We preffer the deepest match
-                    qBestMatch = missing;
-                    optimalNest = n;
-                    //n.println("ntot best match: ");
-                }
-            }
-        } else {
-            // Look for extra elements from previous nestings
-            var missing = qin.excludingAll(ntot);
-			for (k in mapNesting.keySet()) {
-			    if (mapNesting.get(k).includes(n) and k <> 0) {
-			        nout = mapLinear.get(k).outgoing.collect(e | e.target);
-			        nin = mapLinear.get(k).incoming.collect(e | e.source);
-			        nav = nin.outgoing.flatten().select(e | e.isTypeOf(ddg!ContainmentEdge)).collect(e | e.target);
-			        ntot = nin.includingAll(nav.includingAll(nout)).asSet();
-			        if (ntot.includesAll(missing)) {
-			            //k.println("previous best match: ");
-			            optimalNest = k;                        
-			        }
-			    }
-			}
-        }
-    }
-    var nested : Sequence;
-    if (mapNesting.containsKey(optimalNest)) {
-        nested = mapNesting.get(optimalNest);
-    }
-    nested.add(q);
-    mapNesting.put(optimalNest, nested);
-}
-// Pop ordering
-//for (k in mapNesting.keySet().sortBy(key | key)) {
-//    var sorted = mapNesting.get(k).sortBy(n | mapNesting.get(n).last());
-//}
-"Nesting".println();
-for (k in mapNesting.keySet().sortBy(key | key)) {
-    if (k == 0) {
-        mapNesting.get(k).println(k + ": ");
-    } else {
-        mapNesting.get(k).sortBy(n | getNestedMax(mapNesting, n)).println(k + ": ");
-    }
-
-         
 }
 
 operation getNestedMax(mapNesting, n) {
@@ -139,17 +149,15 @@ operation getNestedMax(mapNesting, n) {
 }
 
 
-
-
 operation ddg!MappingNode addMapping(mapOredering) {
     
-    //self.println("1st level ");
+    //self.println("addMapping ");
     // Find all the mappings that are predecesor to this one, through 1 dataType
     var pre = self.incoming.collect(i | i.source).collect(d | d.incoming).flatten().collect(i2 | i2.source).select(pm | pm.isTypeOf(ddg!MappingNode));
     while (pre.size() > 0) {
         // 1. If I have an output variable which is contained in an output variable of one of my predecessor mappings.
         var map2 = pre.first();
-        //map2.println("2nd level");
+        //map2.println("predecessor: ");
         /*
         if (not self.incoming.exists(e : ddg!DependencyEdge| e.multiple)
                 and (map2.outgoing.collect(o | o.target.outgoing).flatten().exists(e : ddg!ContainmentEdge | e.`model` <> ddg!Model#input and self.outgoing.exists(o | o.target == e.target))
@@ -168,11 +176,11 @@ operation ddg!MappingNode addMapping(mapOredering) {
 	        mapNesting.put(map2,nested);
 	    }*/
 	    if (not mapOredering.containsKey(map2)) {
-	        mapOredering.put(map2, index);
-	        index = index + 1;
-	        //"Recursive ".println();
-            map2.addMapping(mapOredering);
-            //"Back".println();
+	        if (map2 <> self) {
+	            //"Recursive ".println();
+	            map2.addMapping(mapOredering);
+	            //"Back".println();
+	        }
 	    }
 	    pre.remove(map2);
 	}

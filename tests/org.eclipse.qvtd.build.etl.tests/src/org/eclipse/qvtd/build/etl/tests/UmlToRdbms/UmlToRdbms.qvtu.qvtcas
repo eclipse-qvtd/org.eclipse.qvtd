@@ -1478,15 +1478,16 @@
         <domain xsi:type="qvtcb:CoreDomain" name="rdbms" isCheckable="false" isEnforceable="true"
             typedModel="#//@nestedPackage.0/@modelParameter.1">
           <guardPattern>
-            <variable name="ct" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String">
-              <initExpression xsi:type="pivot:PropertyCallExp" isRequired="false"
-                  type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclInvalid"
-                  referredProperty="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#p.ocl.OclInvalid.oclBadProperty">
-                <source xsi:type="pivot:InvalidLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclInvalid"/>
-              </initExpression>
-            </variable>
+            <variable name="ct" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"/>
           </guardPattern>
-          <bottomPattern/>
+          <bottomPattern>
+            <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.type">
+              <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                  referredVariable="#//@nestedPackage.0/@rule.17/@local.0/@domain.0/@guardPattern/@variable.0"/>
+              <slotExpression xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"
+                  referredVariable="#//@nestedPackage.0/@rule.17/@domain.0/@bottomPattern/@realizedVariable.0"/>
+            </assignment>
+          </bottomPattern>
         </domain>
         <guardPattern>
           <predicate>
@@ -1516,12 +1517,6 @@
                   referredVariable="#//@nestedPackage.0/@rule.17/@local.0/@guardPattern/@variable.0"/>
             </conditionExpression>
           </predicate>
-          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.type">
-            <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-                referredVariable="#//@nestedPackage.0/@rule.17/@local.0/@domain.0/@guardPattern/@variable.0"/>
-            <slotExpression xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"
-                referredVariable="#//@nestedPackage.0/@rule.17/@domain.0/@bottomPattern/@realizedVariable.0"/>
-          </assignment>
         </bottomPattern>
       </local>
       <local>

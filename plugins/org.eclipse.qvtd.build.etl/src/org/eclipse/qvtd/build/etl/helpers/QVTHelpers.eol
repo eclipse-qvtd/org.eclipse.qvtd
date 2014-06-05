@@ -589,9 +589,9 @@ operation QVT!Rule getInputVars() : Sequence {
     vars = self.guardPattern.variable
         .includingAll(self.domain.collect(d | d.guardPattern).flatten().collect(gp | gp.variable).flatten()
         .select(v | not v.type.isTypeOf(QVT!PrimitiveType))).asSequence();
-    for (l in self.local) {
-        vars = vars.includingAll(l.getInputVars());
-    }
+    //for (l in self.local) {
+    //    vars = vars.includingAll(l.getInputVars());
+    //}
     // QVTc, QVTu, QVTm: Do the same for all refined rules
     //for (r in self.refinement) {
     //    vars = vars.includingAll(r.getInputVars());
@@ -618,9 +618,9 @@ operation QVT!Rule getOutputVars() : Sequence {
     vars = self.bottomPattern.realizedVariable
         .includingAll(self.domain.collect(d | d.bottomPattern).flatten().collect(bp | bp.realizedVariable).flatten()
         .select(v | not v.type.isTypeOf(QVT!PrimitiveType))).asSequence();
-    for (l in self.local) {
-        vars = vars.includingAll(l.getOutputVars());
-    }
+    //for (l in self.local) {
+    //    vars = vars.includingAll(l.getOutputVars());
+    //}
     return vars;
 }
 
@@ -657,9 +657,9 @@ operation QVT!Mapping getAllAssignments() : Sequence {
     for (d in self.domain) {
         asgs.addAll(d.bottomPattern.assignment);
     }
-    for (l in self.local) {
-        asgs.addAll(l.getAllAssignments());
-    }
+    //for (l in self.local) {
+    //    asgs.addAll(l.getAllAssignments());
+    //}
     return asgs;
 }
 
@@ -672,9 +672,9 @@ operation QVT!Mapping getAllPredicates() : Sequence {
         pdcts.addAll(d.bottomPattern.predicate);
         pdcts.addAll(d.guardPattern.predicate);
     }
-    for (l in self.local) {
-        pdcts.addAll(l.getAllPredicates());
-    }
+    //for (l in self.local) {
+    //    pdcts.addAll(l.getAllPredicates());
+    //}
     return pdcts;
 }
 
