@@ -127,18 +127,18 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 	}
 
 	@Override
-	protected Object postVisit(@NonNull Visitable visitable, @Nullable Element preState, @Nullable Object result) {
+	protected Object postVisit(@NonNull Visitable visitable, @Nullable Element prologue, @Nullable Object result) {
 		Element element = (Element)visitable;
 		if (VMVirtualMachine.POST_VISIT.isActive()) {
 			VMVirtualMachine.POST_VISIT.println("[" + Thread.currentThread().getName() + "] " + element.eClass().getName() + ": " + element.toString() + " => " + result);
 		}
-		setCurrentEnvInstructionPointer(preState);
+//		setCurrentEnvInstructionPointer(parentElement);
 		IVMEvaluationEnvironment<?> evalEnv = getEvaluationEnvironment();
-		postVisit(evalEnv, element, preState);
+		postVisit(evalEnv, element, result);
 		return result;
 	}
 
-	protected abstract void postVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element, @Nullable Element preState);
+	protected abstract void postVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element, @Nullable Object result);
 
 	@Override
 	protected @Nullable Element preVisit(@NonNull Visitable visitable) {
@@ -146,7 +146,7 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 		if (VMVirtualMachine.PRE_VISIT.isActive()) {
 			VMVirtualMachine.PRE_VISIT.println("[" + Thread.currentThread().getName() + "] " + element.eClass().getName() + ": " + element.toString());
 		}
-		Element previousIP = setCurrentEnvInstructionPointer(element);
+		Element previousIP = setCurrentEnvInstructionPointer(null/*element*/);
 		IVMEvaluationEnvironment<?> evalEnv = getEvaluationEnvironment();
 		preVisit(evalEnv, element);
 		return previousIP;
@@ -182,7 +182,7 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 	}
 
 	@Override
-	public @NonNull IQVTiVMEvaluationVisitor createNestedEvaluator() {
+	public @NonNull IQVTiVMEvaluationVisitor createNestedEvaluator() { // FIXME Pass 'operation'
 //		return delegate.createNestedEvaluator();
 		return new QVTiVMNestedEvaluationVisitor(this, delegate.createNestedEvaluator());
 	}

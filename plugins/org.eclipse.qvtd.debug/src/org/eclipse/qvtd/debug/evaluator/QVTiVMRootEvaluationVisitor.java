@@ -17,9 +17,11 @@ import java.util.Stack;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.evaluator.IterateBreakpointHelper;
+import org.eclipse.ocl.examples.debug.stepper.AbstractStepper;
 import org.eclipse.ocl.examples.debug.vm.ConditionChecker;
 import org.eclipse.ocl.examples.debug.vm.IVMDebuggerShell;
 import org.eclipse.ocl.examples.debug.vm.UnitLocation;
@@ -28,10 +30,10 @@ import org.eclipse.ocl.examples.debug.vm.VMBreakpointManager;
 import org.eclipse.ocl.examples.debug.vm.VMVirtualMachine;
 import org.eclipse.ocl.examples.debug.vm.data.VMStackFrameData;
 import org.eclipse.ocl.examples.debug.vm.data.VMSuspension;
-import org.eclipse.ocl.examples.debug.vm.evaluator.IVMRootEvaluationVisitor;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IStepper;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IStepperVisitor;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationEnvironment;
+import org.eclipse.ocl.examples.debug.vm.evaluator.IVMRootEvaluationVisitor;
 import org.eclipse.ocl.examples.debug.vm.event.VMResumeEvent;
 import org.eclipse.ocl.examples.debug.vm.event.VMStartEvent;
 import org.eclipse.ocl.examples.debug.vm.event.VMSuspendEvent;
@@ -43,9 +45,15 @@ import org.eclipse.ocl.examples.debug.vm.utils.ASTBindingHelper;
 import org.eclipse.ocl.examples.debug.vm.utils.CompiledUnit;
 import org.eclipse.ocl.examples.debug.vm.utils.DebugOptions;
 import org.eclipse.ocl.examples.debug.vm.utils.VMInterruptedExecutionException;
+import org.eclipse.ocl.examples.domain.elements.DomainTypedElement;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.LoopExp;
+import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.ocl.examples.pivot.PivotFactory;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.debug.stepper.QVTiStepperVisitor;
 import org.eclipse.qvtd.debug.vm.QVTiVMVirtualMachine;
@@ -55,12 +63,12 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 {
 	private final @NonNull IVMDebuggerShell fDebugShell;
 	private final @NonNull VMBreakpointManager fBPM;
-	private UnitLocation fCurrentLocation;
+	private @NonNull UnitLocation fCurrentLocation;
 	private final @NonNull IterateBreakpointHelper fIterateBPHelper;
 //	private final List<UnitLocation> fLocationStack;
 	private @NonNull VMSuspension fCurrentStepMode;
 	private @NonNull Stack<QVTiVMEvaluationVisitor> visitorStack = new Stack<QVTiVMEvaluationVisitor>();
-	private final @NonNull Stack<IStepper> stepperStack = new Stack<IStepper>();
+	private final @NonNull Variable invalidVariable;
 
 	public QVTiVMRootEvaluationVisitor(@NonNull QVTiVMEnvironment env, @NonNull IQVTiVMEvaluationEnvironment evalEnv, @NonNull IVMDebuggerShell shell) {
 		super(new QVTiVMEvaluationVisitorImpl(env, evalEnv));
@@ -70,15 +78,21 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 //		fLocationStack = new ArrayList<UnitLocation>();
 		fCurrentStepMode = VMSuspension.UNSPECIFIED;
 		pushVisitor(this);
-		fCurrentLocation = null; //getCurrentLocation();
+		fCurrentLocation = getCurrentLocation();
+		invalidVariable = DomainUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
+		invalidVariable.setName("$invalid");
+		String typeName = DomainUtil.nonNullEMF(PivotPackage.Literals.OCL_EXPRESSION.getName());
+		invalidVariable.setType(env.getMetaModelManager().getPivotType(typeName));
 	}
 
 	@Override
 	protected @Nullable Object badVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv,
 			@NonNull Element element, Object preState, @NonNull Throwable e) {
+		Stack<IVMEvaluationEnvironment.StepperEntry> stepperStack = evalEnv.getStepperStack();
 		if (!stepperStack.isEmpty()) {
 			stepperStack.pop();
 		}
+		evalEnv.add(invalidVariable, e);
 		int endPosition = ASTBindingHelper.getEndPosition(element);
 		UnitLocation endLocation = newLocalLocation(evalEnv, element, endPosition, endPosition); //, 1);
 		setCurrentLocation(element, endLocation, true);
@@ -109,7 +123,8 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		}
 		if (request instanceof VMResumeRequest) {
 			VMResumeRequest resumeRequest = (VMResumeRequest) request;
-			fCurrentLocation = getCurrentLocation();
+//			fCurrentLocation = getCurrentLocation();
+//			fCurrentLocation = fCurrentStepMode == VMSuspension.STEP_INTO ? null : getCurrentLocation();
 			fCurrentStepMode = resumeRequest.suspension;
 			if (fCurrentStepMode == VMSuspension.UNSPECIFIED) {
 				fIterateBPHelper.removeAllIterateBreakpoints();
@@ -154,10 +169,15 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 	
 	private @NonNull String getMainModuleName() {
 		CompiledUnit mainUnit = fBPM.getUnitManager().getMainUnit();
-		if (mainUnit.getModules().isEmpty()) {
+		List<NamedElement> modules = mainUnit.getModules();
+		if (modules.isEmpty()) {
 			return "<null>"; //$NON-NLS-1$
 		}
-		return DomainUtil.nonNullState(mainUnit.getModules().get(0).getName());
+		String name = modules.get(0).getName();
+		if (name == null) {
+			return "<null>"; //$NON-NLS-1$
+		}
+		return DomainUtil.nonNullState(name);
 	}
 
 	public @NonNull QVTiVMRootEvaluationVisitor getRootEvaluationVisitor() {
@@ -169,7 +189,7 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		return QVTiStepperVisitor.INSTANCE;
 	}
 
-	protected void handleLocationChanged(@NonNull Element  element, UnitLocation location, boolean isElementEnd) {
+	protected void handleLocationChanged(@NonNull Element element, @NonNull UnitLocation location, boolean isElementEnd) {
 		if (VMVirtualMachine.LOCATION.isActive()) {
 			VMVirtualMachine.LOCATION.println("[" + Thread.currentThread().getName() + "] " + element.eClass().getName() + ": " + element.toString() + " @ " + location + " " + (isElementEnd ? "start" : "end"));
 		}
@@ -184,29 +204,23 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 //			validbreakpointlocator.isBreakpointableElementEnd(element))) {
 //			return;
 //		}
-		
-		if (fCurrentStepMode == VMSuspension.STEP_OVER) {
-			if (location.getStackDepth() <= fCurrentLocation.getStackDepth()
-					&& (!location.isTheSameLine(fCurrentLocation)
-						/*|| repeatedInIterator(location, fCurrentLocation)*/ )) {
-				fCurrentLocation = null;
-				suspendAndWaitForResume(location, fCurrentStepMode);
-				return;
-			}
+		boolean doSuspendAndResume = false;
+		if (fCurrentStepMode == VMSuspension.STEP_INTO) {
+			doSuspendAndResume = true;
 		}
-		else if (fCurrentStepMode == VMSuspension.STEP_INTO) {
-			if (!location.isTheSameLocation(fCurrentLocation) /*|| repeatedInIterator(location, fCurrentLocation)*/) {
-				fCurrentLocation = null;
-				suspendAndWaitForResume(location, fCurrentStepMode);
-				return;
+		else if (fCurrentStepMode == VMSuspension.STEP_OVER) {
+			if (isSmallerStackDepth(location) || isNewLine(location) /*|| repeatedInIterator(location, fCurrentLocation)*/ ) {
+				doSuspendAndResume = true;
 			}
 		}
 		else if (fCurrentStepMode == VMSuspension.STEP_RETURN) {
-			if (location.getStackDepth() < fCurrentLocation.getStackDepth()) {
-				fCurrentLocation = null;
-				suspendAndWaitForResume(location, fCurrentStepMode);
-				return;
+			if (isSmallerStackDepth(location)) {
+				doSuspendAndResume = true;
 			}
+		}
+		if (doSuspendAndResume) {
+			suspendAndWaitForResume(location, fCurrentStepMode);
+			return;
 		}
 
 		// check if we trigger a registered breakpoint
@@ -260,6 +274,34 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		
 	}
 
+	/**
+	 * Return true if a call (stack push) has occurred on location wrt the last displayed location.
+	 */
+	protected boolean isLargerStackDepth(@NonNull UnitLocation location) {
+		return location.getStackDepth() > fCurrentLocation.getStackDepth();
+	}
+
+	/**
+	 * Return true if a line change has occurred on location wrt the last displayed location.
+	 */
+	protected boolean isNewLine(@NonNull UnitLocation location) {
+		return !location.isTheSameLine(fCurrentLocation);
+	}
+
+	/**
+	 * Return true if a position change has occurred on location wrrt the last displayed location.
+	 */
+	protected boolean isNewLocation(@NonNull UnitLocation location) {
+		return !location.isTheSameLocation(fCurrentLocation);
+	}
+
+	/**
+	 * Return true if a return (stack pop) has occurred on location wrt the last displayed location.
+	 */
+	protected boolean isSmallerStackDepth(@NonNull UnitLocation location) {
+		return location.getStackDepth() < fCurrentLocation.getStackDepth();
+	}
+
 	private @NonNull UnitLocation newLocalLocation(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element node, int startPosition, int endPosition) {
 		return new UnitLocation(startPosition, endPosition, evalEnv, node);
 	}
@@ -278,48 +320,46 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 //		}
 	}
 
-	protected void postVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element, @Nullable Element preState) {
+	protected void postVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element, @Nullable Object result) {
+		Stack<IVMEvaluationEnvironment.StepperEntry> stepperStack = evalEnv.getStepperStack();
 		if (stepperStack.isEmpty()) {
 			return;
 		}
-		stepperStack.pop();
-		if (stepperStack.isEmpty()) {
-			return;
-		}
-		IStepper parentStepper = stepperStack.peek();
-		Element postElement = parentStepper.isPostStoppable(this, element, preState);
-		if (postElement != null) {
-			UnitLocation unitLocation = parentStepper.createUnitLocation(evalEnv, postElement);
-			setCurrentLocation(postElement, unitLocation, false);
-			processDebugRequest(unitLocation);
-		}
-/*		if (element instanceof Transformation) {
-			// 
-		} else {
-			if (element instanceof Operation) {
-				int endPosition = ASTBindingHelper.getEndPosition(element);
-				UnitLocation endLocation = newLocalLocation(evalEnv, element, endPosition, endPosition); //, 1);
-				setCurrentLocation(element, endLocation, true);
-			} else if (element instanceof EStructuralFeature) {
-				// result = null;
-			} else if (element instanceof LoopExp) {
-				if (preState instanceof VMBreakpoint) {
-					fIterateBPHelper.removeIterateBreakpoint((VMBreakpoint) preState);
-				}
-			} else {
-				int endPosition = ASTBindingHelper.getEndPosition(element);
-				UnitLocation el = newLocalLocation(evalEnv, element, endPosition - 1, endPosition); //, 1);
-				
-				setCurrentLocation(element, el, true);
+
+		IStepper parentStepper = null;
+		EObject eContainer = element.eContainer();
+		Element parentElement = eContainer instanceof Element ? (Element)eContainer : null;
+		IVMEvaluationEnvironment.StepperEntry childStepperEntry = stepperStack.pop();
+		childStepperEntry.popFrom(evalEnv);
+		if (!stepperStack.isEmpty()) {
+			IVMEvaluationEnvironment.StepperEntry parentStepperEntry = stepperStack.peek();
+			if (element instanceof OCLExpression) { // NB not Variable
+				parentStepperEntry.pushTo(evalEnv, (DomainTypedElement) element, result);
 			}
-		} */
+			parentStepper = parentStepperEntry.stepper;
+		}
+		else if (evalEnv != getEvaluationEnvironment()) {		// Looping
+			if (parentElement != null) {
+				parentStepper = getStepperVisitor().getStepper(parentElement);
+			}
+		}
+		if (parentStepper != null) {
+			Element postElement = parentStepper.isPostStoppable(this, element, result);
+			if (postElement != null) {
+				evalEnv.setCurrentIP(postElement);
+				evalEnv.replace(evalEnv.getPCVariable(), postElement);
+				evalEnv.remove(invalidVariable);
+				UnitLocation unitLocation = parentStepper.createUnitLocation(evalEnv, postElement);
+				setCurrentLocation(postElement, unitLocation, false);
+				processDebugRequest(unitLocation);
+			}
+		}
 	}
 
 	public void preIterate(@NonNull LoopExp loopExp) {
 		UnitLocation topLocation = getCurrentLocation();
 		boolean skipIterate = (fCurrentStepMode == VMSuspension.UNSPECIFIED)
-				|| ((fCurrentStepMode == VMSuspension.STEP_OVER) && 
-					(topLocation.getStackDepth() > fCurrentLocation.getStackDepth()));
+				|| ((fCurrentStepMode == VMSuspension.STEP_OVER) && isLargerStackDepth(topLocation));
 
 		if (!skipIterate) {
 			/*return*/ fIterateBPHelper.stepIterateElement(loopExp, topLocation);
@@ -327,9 +367,19 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 	}
 
 	protected @Nullable Element preVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element) {
+		Stack<IVMEvaluationEnvironment.StepperEntry> stepperStack = evalEnv.getStepperStack();
 		IStepper stepper = getStepperVisitor().getStepper(element);
-		stepperStack.push(stepper);
+		stepperStack.push(new IVMEvaluationEnvironment.StepperEntry(stepper, element));
 		if (stepper.isPreStoppable(this, element)) {
+			if (stepper instanceof AbstractStepper) {
+				Element firstElement = ((AbstractStepper)stepper).getFirstElement(this, element);
+				if (firstElement != null) {
+					element = firstElement;
+				}
+			}
+			setCurrentEnvInstructionPointer(element);
+			evalEnv.replace(evalEnv.getPCVariable(), element);
+			evalEnv.remove(invalidVariable);
 			UnitLocation unitLocation = stepper.createUnitLocation(evalEnv, element);
 			setCurrentLocation(element, unitLocation, false);
 			processDebugRequest(unitLocation);
@@ -432,6 +482,7 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 	}
 	
 	private void suspendAndWaitForResume(@NonNull UnitLocation location, @NonNull VMSuspendEvent suspendEvent) {		
+		fCurrentLocation = location;
 		try {			
 			VMSuspendEvent vmSuspend = suspendEvent;
 			

@@ -12,6 +12,7 @@ package org.eclipse.qvtd.debug.stepper;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.debug.stepper.NonStepper;
 import org.eclipse.ocl.examples.debug.stepper.OCLStepperVisitor;
 import org.eclipse.ocl.examples.debug.stepper.PostStepper;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IStepper;

@@ -48,8 +48,8 @@ public class QVTiVMNestedEvaluationVisitor extends QVTiVMEvaluationVisitor
 		return root;
 	}
 
-	protected void postVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element, @Nullable Element preState) {
-		root.postVisit(evalEnv, element, preState);
+	protected void postVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element, @Nullable Object result) {
+		root.postVisit(evalEnv, element, result);
 	}
 
 	protected @Nullable Element preVisit(@NonNull IVMEvaluationEnvironment<?> evalEnv, @NonNull Element element) {

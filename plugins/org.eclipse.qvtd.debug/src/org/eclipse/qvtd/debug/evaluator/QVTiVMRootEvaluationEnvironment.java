@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
@@ -24,8 +25,12 @@ import org.eclipse.ocl.examples.debug.vm.evaluator.IVMRootEvaluationEnvironment;
 import org.eclipse.ocl.examples.debug.vm.utils.ASTBindingHelper;
 import org.eclipse.ocl.examples.debug.vm.utils.VMRuntimeException;
 import org.eclipse.ocl.examples.debug.vm.utils.VMStackTraceBuilder;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.PivotFactory;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -44,11 +49,17 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 //    private Trace myTraces;
 	private @NonNull Element myCurrentIP;
 	private final long id;
+	private final @NonNull Variable pcVariable;
+	private final @NonNull Stack<StepperEntry> stepperStack = new Stack<StepperEntry>();
 
     public QVTiVMRootEvaluationEnvironment(@NonNull MetaModelManager metaModelManager, @NonNull QVTiModelManager modelManager, @NonNull Transformation transformation, long id) {
 		super(metaModelManager, modelManager, transformation);
 		myCurrentIP = transformation;
 		this.id = id;
+		pcVariable = DomainUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
+		pcVariable.setName("$pc");
+		String typeName = DomainUtil.nonNullEMF(PivotPackage.Literals.OCL_EXPRESSION.getName());
+		pcVariable.setType(metaModelManager.getPivotType(typeName));
 	}
 
 	@Override
@@ -143,8 +154,18 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 	}
 
 	@Override
+	@NonNull public Variable getPCVariable() {
+		return pcVariable;
+	}
+
+	@Override
 	public @NonNull QVTiVMRootEvaluationEnvironment getRootEvaluationEnvironment() {
 		return this;
+	}
+
+	@Override
+	public @NonNull Stack<org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationEnvironment.StepperEntry> getStepperStack() {
+		return stepperStack;
 	}
 
     @Override
@@ -189,7 +210,7 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 			saveThrownException(exception);
 			exception.setStackVMTrace(new VMStackTraceBuilder(this).buildStackTrace());
 		} catch (Exception e) {
-			getDebugCore().error("Failed to build QVT stack trace", e); //$NON-NLS-1$
+			getDebugCore().error("Failed to build VM stack trace", e); //$NON-NLS-1$
 		}
 		
 		throw exception;

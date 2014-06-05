@@ -12,17 +12,20 @@
 package org.eclipse.qvtd.debug.evaluator;
 
 import java.util.Map;
+import java.util.Stack;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.UnitLocation;
 import org.eclipse.ocl.examples.debug.vm.core.VMDebugCore;
+import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationEnvironment;
 import org.eclipse.ocl.examples.debug.vm.utils.ASTBindingHelper;
 import org.eclipse.ocl.examples.debug.vm.utils.VMRuntimeException;
 import org.eclipse.ocl.examples.debug.vm.utils.VMStackTraceBuilder;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiNestedEvaluationEnvironment;
 
@@ -32,6 +35,7 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 	private @NonNull NamedElement myOperation;
     private final int myStackDepth;
 	private final long id;
+	private final @NonNull Stack<StepperEntry> stepperStack = new Stack<StepperEntry>();
     
 	public QVTiVMNestedEvaluationEnvironment(@NonNull IQVTiVMEvaluationEnvironment evaluationEnvironment, long id, @NonNull NamedElement operation) {
 		super(evaluationEnvironment);
@@ -100,6 +104,11 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 	}
 
 	@Override
+	@NonNull public Variable getPCVariable() {
+		return getRootEvaluationEnvironment().getPCVariable();
+	}
+
+	@Override
 	public @Nullable IQVTiVMEvaluationEnvironment getParentEvaluationEnvironment() {
 		return (IQVTiVMEvaluationEnvironment) super.getParentEvaluationEnvironment();
 	}
@@ -107,6 +116,11 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 	@Override
 	public @NonNull QVTiVMRootEvaluationEnvironment getRootEvaluationEnvironment() {
 		return (QVTiVMRootEvaluationEnvironment) rootEvaluationEnvironment;
+	}
+
+	@Override
+	public @NonNull Stack<IVMEvaluationEnvironment.StepperEntry> getStepperStack() {
+		return stepperStack;
 	}
 
 	public boolean isDeferredExecution() {
@@ -121,6 +135,11 @@ public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvir
 		Element prevValue = myCurrentIP;
 		myCurrentIP = element;
 		return prevValue;
+	}
+
+	public void setOperation(@NonNull NamedElement operation) {
+		this.myCurrentIP = operation;
+		this.myOperation = operation;
 	}
 
 	public void throwVMException(@NonNull VMRuntimeException exception) throws VMRuntimeException {
