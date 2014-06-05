@@ -22,32 +22,49 @@ import "../helpers/OclLibHelper.eol";
  
 /****d* /org.eclipse.qvtd.build.etl/mtc/QVTcToQVTu/PropertyAssignment
  * CONTEXT
- *  PropertyAssignment -- Flock migration script from QVTc to QVTu
+ *  PropertyAssignment -- Output domain to middle assignments are removed, iif
+ *  the value expression is not a variable
  *
  * SEE ALSO
  *    
  ******
  */
 // TODO Check that if the slot expression area is Null, the test is correct
-// Output domain to middle assignments are removed, iif the value expression
-// is not a variable
+// 
 // TODO Do we also have to migrate VariableAssignments?!?!?!
 @cascade
 delete PropertyAssignment
-    when : original.value.getArea().isOutputDomain()
+    when : (original.value.getArea() <> null) and original.value.getArea().isOutputDomain()
         and not original.value.isTypeOf(QVTc!VariableExp)
         and original.slotExpression.getArea().isMiddleDomain()
 
-// Middle domian to input assigments are removed
+
+/****d* /org.eclipse.qvtd.build.etl/mtc/QVTcToQVTu/PropertyAssignment
+ * CONTEXT
+ *  PropertyAssignment --  Middle domian to input assigments are removed
+ *
+ * SEE ALSO
+ *    
+ ******
+ */
 @cascade
 delete PropertyAssignment
     when : original.slotExpression.getArea().isInputDomain()
+        and (original.value.getArea() <> null)
         and original.value.getArea().isMiddleDomain()
 
-// Output domain predicates of realized variables
+/****d* /org.eclipse.qvtd.build.etl/mtc/QVTcToQVTu/Predicate
+ * CONTEXT
+ *  Predicate --  Output domain predicates of realized variables are removed
+ *
+ * SEE ALSO
+ *    
+ ******
+ */
 @cascade
 delete Predicate
-    when : original.pattern.isTypeOf(QVTc!BottomPattern) and original.conditionExpression.findReferencedVariables().forAll(v | v.oppositePattern().area.isOutputDomain())
+    when : original.pattern.isTypeOf(QVTc!BottomPattern)
+    and original.conditionExpression.findReferencedVariables().forAll(v | v.oppositePattern().area.isOutputDomain())
 
 
 // Realized variables in the input domain are retyped into variables
@@ -56,7 +73,7 @@ retype RealizedVariable to Variable
         if (original.oppositePattern().area.isInputDomain()) {
             return true;
         } else {
-            if (isMiddleDomain(original.oppositePattern().area)) {
+            if (original.oppositePattern().area.isMiddleDomain()) {
                 return original.oppositePattern().area.domain.size() > 0 and
                        original.oppositePattern().area.domain.forAll(d | d.isOutputDomain());
             } else {
