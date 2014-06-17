@@ -3,23 +3,28 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="QVTcConfig" nsURI="http://www.eclipse.org/qvt/examples/0.1/QVTcConfig"
     nsPrefix="qvtcconfig">
   <eClassifiers xsi:type="ecore:EClass" name="Configuration">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="inputDirection" eType="#//Direction"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="outputDirection" upperBound="-1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputDirection" lowerBound="1"
         eType="#//Direction"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mode" eType="#//Mode"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="transformation" eType="#//Transformation"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="middle" eType="#//Direction"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputDirection" lowerBound="1"
+        upperBound="-1" eType="#//Direction"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mode" lowerBound="1" eType="#//Mode"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transformation" lowerBound="1"
+        eType="#//Transformation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="middle" lowerBound="1"
+        eType="#//Direction"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Direction" eSuperTypes="#//NamedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" eType="#//Import"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" lowerBound="1"
+        eType="#//Import"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Import" eSuperTypes="#//NamedElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="metamodel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="package" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="metamodel" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="package" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Transformation" eSuperTypes="#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="direction" upperBound="-1"
