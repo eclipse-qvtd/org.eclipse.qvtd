@@ -93,6 +93,10 @@ map [%if (self.name.isDefined()){%][%=self.name%] in [%=t.name%][%}%] {
         [%=p.toString()%];[%
         }
     }%]}
+    [% for (mc in self.mappingCall) {%]
+    map [%=mc.referredMapping.name%]();
+    [% 
+    }%]
 }
     
 [%}%]
