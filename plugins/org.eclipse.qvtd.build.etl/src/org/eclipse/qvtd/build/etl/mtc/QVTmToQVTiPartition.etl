@@ -70,7 +70,7 @@ rule Mapping
                 }
 
         // Promote unguarded nested mappings
-        m.println();    
+        //m.println();    
         for (local in m.local) {
             local.promoteMappings();
         }
@@ -322,7 +322,7 @@ operation  QVTi!RealizedVariable copyToVariable() : QVTi!Variable {
 // guard variables? Only Promote mappings with no cars at all
 operation QVT!Mapping promoteMappings() {
     
-    self.println("promoteMappings ");
+    //self.println("promoteMappings ");
     //if (self.guardPattern.variable.isEmpty() and self.domain.collect(d | d.guardPattern.variable).flatten().isEmpty()) {
         for (local in self.local) {
             local.promoteMappings();
