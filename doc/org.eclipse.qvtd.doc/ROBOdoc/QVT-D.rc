@@ -30,12 +30,12 @@ options:
     --index
     --tabsize 4
 headertypes:
-    f  "Migrations"    robo_migrations     1
-	d  "Delete"        robo_deletes
-	r  "Retype"        robo_retypes
-	m  "Migrate"       robo_migrates
-	l  "Libraries"     robo_libraries      1
-	o  "Operations"    robo_operations
+    f  "Flock"          robo_flock          1
+	d  "Delete"         robo_deletes
+	r  "Retype"         robo_retypes
+	m  "Migrate"        robo_migrates
+	l  "Libraries"      robo_libraries      1
+	o  "Operations"     robo_operations
 ignore files:
     README
     CVS
