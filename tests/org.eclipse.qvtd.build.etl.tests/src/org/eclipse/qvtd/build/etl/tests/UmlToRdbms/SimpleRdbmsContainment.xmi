@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:qVTcDataDependencyGraph="http://www.eclipse.org/qvt/examples/0.2/QVTcDataDependencyGraph">
+  <qVTcDataDependencyGraph:ClassNode outgoing="/2" label="Schema" model="input">
+    <superTypes>RModelElement</superTypes>
+  </qVTcDataDependencyGraph:ClassNode>
+  <qVTcDataDependencyGraph:ClassNode incoming="/2" outgoing="/4 /6 /8" label="Table" model="input">
+    <superTypes>RModelElement</superTypes>
+  </qVTcDataDependencyGraph:ClassNode>
+  <qVTcDataDependencyGraph:ContainmentEdge target="/1" source="/0" model="input">
+    <referredProperty href="SimpleRDBMS.ecore#//Schema/tables"/>
+  </qVTcDataDependencyGraph:ContainmentEdge>
+  <qVTcDataDependencyGraph:ClassNode incoming="/4" label="Column" model="input">
+    <superTypes>RModelElement</superTypes>
+  </qVTcDataDependencyGraph:ClassNode>
+  <qVTcDataDependencyGraph:ContainmentEdge target="/3" source="/1" model="input">
+    <referredProperty href="SimpleRDBMS.ecore#//Table/columns"/>
+  </qVTcDataDependencyGraph:ContainmentEdge>
+  <qVTcDataDependencyGraph:ClassNode incoming="/6" label="Key" model="input">
+    <superTypes>RModelElement</superTypes>
+  </qVTcDataDependencyGraph:ClassNode>
+  <qVTcDataDependencyGraph:ContainmentEdge target="/5" source="/1" model="input">
+    <referredProperty href="SimpleRDBMS.ecore#//Table/keys"/>
+  </qVTcDataDependencyGraph:ContainmentEdge>
+  <qVTcDataDependencyGraph:ClassNode incoming="/8" label="ForeignKey" model="input">
+    <superTypes>RModelElement</superTypes>
+  </qVTcDataDependencyGraph:ClassNode>
+  <qVTcDataDependencyGraph:ContainmentEdge target="/7" source="/1" model="input">
+    <referredProperty href="SimpleRDBMS.ecore#//Table/foreignKeys"/>
+  </qVTcDataDependencyGraph:ContainmentEdge>
+</xmi:XMI>
