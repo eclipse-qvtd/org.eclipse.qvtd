@@ -1,0 +1,72 @@
+/*******************************************************************************
+ * Copyright (c) 2013 The University of York and Willink Transformations.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
+ 
+ /****l* /org.eclipse.qvtd.build.etl/dependence/scheduling/Scheduler
+ * NAME
+ *  Scheduler -- Invoke the data dependency analysis and map ordering functions
+ *  and add the mapping calls to the QVTi AST model.
+ *
+ * MODELS
+ *  Required models to run the script:
+ *      - NAME      ALIASES METAMODEL               ROL SOD
+ *      - qvti      QVT     QVTCore                  X          The QVTi (partitioned) AST
+ *      - rTree     tree    ECoreContainmentTree     X          The right metamodel containment tree
+ *      - rdGrapg   ddg     Dependency               X          The reduced dependencies graph
+ * SEE ALSO
+ *
+ ******
+ */
+import "EcoreToContainmentGraph.eol";
+import "../dependence/MappingDataDependencies.eol";
+import "../helpers/OCLExpressionAnalysis.eol";
+import "MapOrdering.eol";
+
+var inputVarMap : Map;  // (mapping, Set{variable})
+var outputVarMap : Map; // (mapping, Set{realizedVariable})
+var dataTypeAssignments : Map;    // (mapping, Sequence{Type, Attribute})
+var nodeMap : Map;      // (mapping, graph!Node)
+var dataNodeMap : Map;      // (??, graph!Node)
+
+
+// For each mapping get the set of input and output vars.
+for (r in qvti!Transformation.all().first().rule) {
+    //r.name.println();
+    inputVarMap.put(r, r.getInputVars());
+    outputVarMap.put(r, r.getOutputVars());
+    dataTypeAssignments.put(r, r.getDataTypeAssignments());
+}
+
+// Mapping data dependendence
+var mdd = new ddg!Graph;
+mdd.name = "MappingDataDependences";
+qvti!Transformation.all().first().mappingDataDependencies(mdd, inputVarMap, outputVarMap, dataTypeAssignments);
+mdd.reducedMergedMappingDataDependencies_New();
+
+/* 
+// Ordering
+var ordering : Map = getMapOrdering();
+
+// For each mapping, craete the mapping call
+for (map in ordering.keySet()) {
+    map.println();
+    for (call in ordering.get(map)) {
+        var mc = new qvti!MappingCall;
+        call.println("    ");
+        mc.referredMapping = call.qvtAstNode;
+        map.qvtAstNode.mappingCall.add(mc);
+    }
+}
+*/
+"Done".println();
+
+// Create the bindings. 
+// 
+

@@ -111,7 +111,7 @@ operation ddGraph!Graph getNodeForVar(v : QVT!Variable) : ddGraph!Node {
         } else if(v.oppositePattern().area.isOutputDomain()) {
             n.type = ddGraph!NodeType#output;        
         } 
-        self.element.add(n);
+        self.elements.add(n);
     }
     return n;
 }
@@ -156,7 +156,7 @@ operation qvti!Mapping getGraphNode() : ddGraph!Node  {
 	    gn.label = self.type;
 	    gn.qvtAstNode = self;
 	    gn.color = ddGraph!Color#orange;
-	    ddg.element.add(gn); 
+	    ddg.elements.add(gn); 
 	    dataNodeMap.put(self, gn);
     }
 }
@@ -169,7 +169,7 @@ operation qvti!CoreDomain getGraphNode() : ddGraph!Node  {
         gn.label = self.type;
         gn.qvtAstNode = self;
         gn.color = ddGraph!Color#orange;
-        ddg.element.add(gn);
+        ddg.elements.add(gn);
         dataNodeMap.put(self, gn); 
     }
 }
@@ -181,7 +181,7 @@ operation rTree!Node getGraphNode() : ddGraph!Node  {
         var gn = new ddGraph!Node;
         gn.label = self.type;
         gn.color = ddGraph!Color#orange;
-        ddg.element.add(gn); 
+        ddg.elements.add(gn); 
         dataNodeMap.put(self, gn);
     }
 }
@@ -191,11 +191,11 @@ operation visitL(roots : Collection, ddg : ddGraph!Graph, rootDd : ddGraph!Node)
     for (root in roots) {
         var gn = new ddGraph!Node;
         gn.label = root.elementName;
-        ddg.element.add(gn);
+        ddg.elements.add(gn);
         var e = new ddGraph!Edge;
         e.source = rootDd;
         e.target = gn;
-        ddg.element.add(e);
+        ddg.elements.add(e);
         dfsL(root);
     }
 }
@@ -354,11 +354,11 @@ operation createDomainTreeMappingDependence(roots : Collection, ddg : ddGraph!Gr
     for (root in roots) {
         var gn = new ddGraph!Node;
         gn.label = root.elementName;
-        ddg.element.add(gn);
+        ddg.elements.add(gn);
         var e = new ddGraph!Edge;
         e.source = rootDd;
         e.target = gn;
-        ddg.element.add(e);
+        ddg.elements.add(e);
         dfs(root);
     }
 }

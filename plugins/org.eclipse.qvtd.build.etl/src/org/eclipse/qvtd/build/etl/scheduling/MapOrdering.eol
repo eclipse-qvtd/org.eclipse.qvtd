@@ -17,9 +17,7 @@
  * MODELS
  *  Required models to run the script:
  *      - NAME      ALIASES METAMODEL               ROL SOD
- *      - qvti      QVT     QVTCore                  X          The QVTm (partitioned) AST
- *      - config            QVTcConfig               X          The transformation configuration
- *      - ocllib            Pivot                    X          The OCL standard library (http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas)
+ *      - qvti      QVT     QVTCore                  X          The QVTi (partitioned) AST
  *      - rTree     tree    ECoreContainmentTree     X          The right metamodel containment tree
  *      - rdGrapg   ddg     Dependency               X          The reduced dependencies graph
  * SEE ALSO
@@ -27,35 +25,33 @@
  ******
  */
 
-operation getMapOrdering(rTree, reducedGraph) : Map {
+
+operation getMapOrdering() : Map {
 	// Do a Depth first search of the containment tree of the output model
-	var mapOredering : Map;
+	var mapOrdering : Map;
     var mapNesting : Map;
     var mapLinear : Map;
 	var mapResult : Map;
+	var visited : Set;
 	var queue : Sequence;
-	
-	
-	
-	var index : Integer  = 1;
 	
 	queue.addAll(rTree!Node.all().select(n | n.parent.isEmpty()));
 	while (not queue.isEmpty()) {
 	    var n = queue.first();
 	    queue.remove(n);
 	    // Do stuff with n
-	    //n.println();
+	    //n.println("n ");
 	    //  Find all the mappings that have an output node if this type
 	    for (map1 in ddg!MappingNode.all().select(m | m.outgoing.exists(e | e.target.label = n.EClassName))) {
 	        // Find the predecesors and linearize
-	        map1.addMapping(mapOredering);
+	        map1.addMapping(mapOrdering, visited);
 	    }
 	    queue.addAll(n.children);
 	}
 	
 	"Ordering".println();
-	for (k in mapOredering.keySet()) {
-	    mapLinear.put(mapOredering.get(k), k);
+	for (k in mapOrdering.keySet()) {
+	    mapLinear.put(mapOrdering.get(k), k);
 	}
 	for (k in mapLinear.keySet().sortBy(key | key)) {
 	    mapLinear.get(k).label.println(k + ": ");
@@ -65,49 +61,42 @@ operation getMapOrdering(rTree, reducedGraph) : Map {
 	//2. Select the predecessor in which each micromapping nests most efficiently
 	mapNesting.put(0, Sequence{1});
 	for (q in Sequence{2..mapLinear.keySet().size()}) {
-	    //mapLinear.get(q).label.println("Q ");
+	    mapLinear.get(q).println("q: ");
 	    var optimalNest = 0;        // If the optimal is 0, the mapping must be invoked at the root
 	    var qin = mapLinear.get(q).incoming.select(e | not e.derived).collect(e | e.source);
-	    //qin.collect(v | v.label).println("qin ");
-	    //mapLinear.get(q).incoming.select(e | e.multiple).collect(e | e.source).println("multi ");
+	    qin.println("qin ");
 	    var qBestMatch = qin.size();
 	    for (n in Sequence{q-1..1}) {
-	        //mapLinear.get(n).label.println("N ");
+	        mapLinear.get(n).println("n: ");   
 	        var nout = mapLinear.get(n).outgoing.collect(e | e.target);
 	        var nin = mapLinear.get(n).incoming.collect(e | e.source);
 	        // Containment relations of input vars are also available
-	        var nav = nin.outgoing.flatten().select(e | e.isTypeOf(ddg!ContainmentEdge)).collect(e | e.target);
-	        var ntot = nin.includingAll(nav.includingAll(nout)).asSet();
-	        //nin.println("nin ");
-	        //ntot.collect(v | v.label).println("ntot ");            
-	        //nin.includingAll(nout).exists(v | mapLinear.get(q).incoming.select(e | e.multiple).collect(e | e.source).includes(v)).println();      
-	        // Mappings with multiple relations can only be nested in previous nestings
+	        //var nav = nin.outgoing.flatten().select(e | e.isTypeOf(ddg!ContainmentEdge)).collect(e | e.target);
+	        var ntot = nin.includingAll(nout).asSet();
+	        // Only relations with multiplicity = true
 	        if (not nin.includingAll(nout).exists(v | mapLinear.get(q).incoming.select(e | e.multiple).collect(e | e.source).includes(v))) {
 	            if (ntot.includesAll(qin)) {
 	                // If all input vars are in nav+nout, this is the optimal Nest
 	                optimalNest = n;
-	                //n.println("ntot inlcudes qin: ");
 	            } else {
 	                var missing = qin.excludingAll(ntot);
-	                //missing.size().println("mising: ");
 	                if (missing.size() < qBestMatch) {         // We preffer the deepest match
 	                    qBestMatch = missing;
 	                    optimalNest = n;
-	                    //n.println("ntot best match: ");
 	                }
 	            }
-	        } else {
+	        } else {   // Only relations with multiplicity = true
 	            // Look for extra elements from previous nestings
 	            var missing = qin.excludingAll(ntot);
 	            for (k in mapNesting.keySet()) {
 	                if (mapNesting.get(k).includes(n) and k <> 0) {
 	                    nout = mapLinear.get(k).outgoing.collect(e | e.target);
 	                    nin = mapLinear.get(k).incoming.collect(e | e.source);
-	                    nav = nin.outgoing.flatten().select(e | e.isTypeOf(ddg!ContainmentEdge)).collect(e | e.target);
-	                    ntot = nin.includingAll(nav.includingAll(nout)).asSet();
+	                    //nav = nin.outgoing.flatten().select(e | e.isTypeOf(ddg!ContainmentEdge)).collect(e | e.target);
+	                    ntot = nin.includingAll(nout).asSet();
 	                    if (ntot.includesAll(missing)) {
 	                        //k.println("previous best match: ");
-	                        optimalNest = k;                        
+	                        optimalNest = k;                     
 	                    }
 	                }
 	            }
@@ -128,15 +117,25 @@ operation getMapOrdering(rTree, reducedGraph) : Map {
 	for (k in mapNesting.keySet().sortBy(key | key)) {
 	    if (k == 0) {
 	        var rootMap = new qvti!Mapping;
-	        
+	        rootMap.name = qvti!Transformation.all().first().name + "_entry_map";
+	        rootMap.transformation = qvti!Transformation.all().first();
+	        // Add guard and bottom pattern!
+	        rootMap.guardPattern = new qvti!GuardPattern;
+	        rootMap.bottomPattern = new qvti!BottomPattern;
+	        var rootNode = new ddg!MappingNode;
+	        rootNode.label = rootMap.name;
+	        rootNode.qvtAstNode = rootMap;
+	        rootNode.graph = ddg!Graph.all().first();
+	        mapResult.put(rootNode, mapNesting.get(k).collect(m | mapLinear.get(m)).asSequence());
 	        mapNesting.get(k).println(k + ": ");
+	        
 	    } else {
 	        mapNesting.get(k).sortBy(n | getNestedMax(mapNesting, n)).println(k + ": ");
-	    }
-	
-	         
+	        mapResult.put(mapLinear.get(k),  mapNesting.get(k).sortBy(n | getNestedMax(mapNesting, n)).collect(m | mapLinear.get(m)).asSequence());
+	    }	         
 	}
-
+    mapResult.println();
+    return mapResult;
 
 }
 
@@ -149,23 +148,28 @@ operation getNestedMax(mapNesting, n) {
 }
 
 
-operation ddg!MappingNode addMapping(mapOredering) {
+operation ddg!MappingNode addMapping(mapOrdering, visited) {
     
     //self.println("addMapping ");
-    // Find all the mappings that are predecesor to this one, through 1 dataType
-    var pre = self.incoming.collect(i | i.source).collect(d | d.incoming).flatten().collect(i2 | i2.source).select(pm | pm.isTypeOf(ddg!MappingNode));
-    while (pre.size() > 0) {
-        // 1. If I have an output variable which is contained in an output variable of one of my predecessor mappings.
-        var map2 = pre.first();
-        //map2.println("predecessor: ");
-        /*
+    //visited.includes(self).println();
+    
+	    //self.println("addMapping ");
+	    visited.add(self);
+	    var index : Integer;
+	    // Find all the mappings that are predecesor to this one, through 1 dataType
+	    var pre = self.incoming.collect(i | i.source).collect(d | d.incoming).flatten().collect(i2 | i2.source).select(pm | pm.isTypeOf(ddg!MappingNode));
+	    while (pre.size() > 0) {
+	        // 1. If I have an output variable which is contained in an output variable of one of my predecessor mappings.
+	        var map2 = pre.first();
+	        //map2.println("predecessor: ");
+	        /*
         if (not self.incoming.exists(e : ddg!DependencyEdge| e.multiple)
                 and (map2.outgoing.collect(o | o.target.outgoing).flatten().exists(e : ddg!ContainmentEdge | e.`model` <> ddg!Model#input and self.outgoing.exists(o | o.target == e.target))
                 or map2.incoming.collect(i | i.source.outgoing).flatten().exists(e : ddg!ContainmentEdge | e.`model` == ddg!Model#input and self.incoming.exists(i | i.source == e.target)))) {
 	            "map2 is Containment".println();
-	        if (not mapOredering.containsKey(map2)) {
+	        if (not mapOrdering.containsKey(map2)) {
 	            "Recursive ".println();
-	            map2.addMapping(mapOredering, mapNesting);
+	            map2.addMapping(mapOrdering, mapNesting);
 	            "Back".println();
 	        }
 	        var nested : Sequence;
@@ -175,18 +179,21 @@ operation ddg!MappingNode addMapping(mapOredering) {
 	        nested.add(self);
 	        mapNesting.put(map2,nested);
 	    }*/
-	    if (not mapOredering.containsKey(map2)) {
-	        if (map2 <> self) {
+	       if (not visited.includes(map2)) {	    
 	            //"Recursive ".println();
-	            map2.addMapping(mapOredering);
+	           map2.addMapping(mapOrdering, visited);
 	            //"Back".println();
-	        }
+		  }    
+		    pre.remove(map2);
+		}
+		if (not mapOrdering.containsKey(self)) {
+		    if (mapOrdering.values.isEmpty()) {
+	            index = 1;
+		    } else {
+		        index = mapOrdering.values.sortBy(i | i).last() + 1;
+		    }
+		    mapOrdering.put(self, index);
 	    }
-	    pre.remove(map2);
-	}
-	if (not mapOredering.containsKey(self)) {
-        mapOredering.put(self, index);
-        index = index + 1;
-    }
+	
 }
 

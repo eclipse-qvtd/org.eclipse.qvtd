@@ -52,7 +52,7 @@ operation QVT!Transformation interMappingDependencies(graph : ddg!Graph, inputVa
 	                    e.source = graph.getNodeForQvtAstNode(rA, nodeMap);
 	                    e.target = graph.getNodeForQvtAstNode(rB, nodeMap);
 	                    e.direction = ddg!DependencyDirection#output;
-	                    graph.element.add(e);
+	                    graph.elements.add(e);
 	                }
 	            }
 	        }
@@ -67,7 +67,7 @@ operation QVT!Transformation interMappingDependencies(graph : ddg!Graph, inputVa
                     e.source = graph.getNodeForQvtAstNode(rA, nodeMap);
                     e.target = graph.getNodeForQvtAstNode(rB, nodeMap);
                     e.direction = ddg!DependencyDirection#output;
-                    graph.element.add(e);
+                    graph.elements.add(e);
                     pairedMapps.add(rA);
                 }
 	        }

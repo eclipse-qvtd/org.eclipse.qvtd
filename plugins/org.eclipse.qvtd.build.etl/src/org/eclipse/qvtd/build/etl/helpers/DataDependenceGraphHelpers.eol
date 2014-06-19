@@ -117,6 +117,7 @@ operation ddg!Graph getNodeForQvtAstNode(astNode : QVT!NamedElement, nodeMap : M
     return n;
 }
 
+
 /****o* org.eclipse.qvtd.build.etl/helpers/DataDependenceGraphHelpers/getNodeForDataType 
  * NAME
  *  getNodeForDataType - Get the correspoiding graph node for the AST node.
