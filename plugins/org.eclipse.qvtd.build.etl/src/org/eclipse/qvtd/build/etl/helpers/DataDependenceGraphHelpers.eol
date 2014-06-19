@@ -56,10 +56,11 @@ operation QVT!Variable variableRelations(graph : ddg!Graph, vars : Sequence, var
 	           } else {
 	                e = graph.owningModel().createInstance("ReferenceEdge");
 	           }
-	           e.source = vaNode;
-	           e.target = vbNode;
+	           // Expressions of the form vB.prop = self depict a relation from vB (vbNode) to self (vaNode)
+	           e.source = vbNode;
+	           e.target = vaNode;
 	           e.referredProperty = refProp;
-	           graph.element.add(e);
+	           graph.elements.add(e);
 	        }
         }
         
@@ -107,11 +108,11 @@ operation ddg!Graph getNodeForQvtAstNode(astNode : QVT!NamedElement, nodeMap : M
             }
             n.label = astNode.type.name;
         } else {
-            astNode.type().name.println("why? ");
+            astNode.println("why? ");
         }
 	    n.qvtAstNode = astNode;
 	    nodeMap.put(astNode, n);
-	    self.element.add(n);
+	    self.elements.add(n);
     }
     return n;
 }
@@ -144,7 +145,7 @@ operation ddg!Graph getNodeForDataType(use : Sequence, nodeMap : Map) : ddg!Node
         n.type = use.first();
         n.attribute = use.last();
         nodeMap.put(use, n);
-        self.element.add(n);
+        self.elements.add(n);
     }
     return n;
 }
@@ -174,7 +175,7 @@ operation ddg!Graph getNodeForTreeNode(treeNode : tree!Node, nodeMap : Map) : dd
         n = self.owningModel().createInstance("ClassNode");
         n.label = treeNode.EClassName;
         nodeMap.put(treeNode, n);
-        self.element.add(n);
+        self.elements.add(n);
     }
     return n;
 }
@@ -209,7 +210,7 @@ operation ddg!Graph getNodeCopy(ddNode : ddg!Node, mergeMap : Map) : ddg!Node {
         n.label = ddNode.label;
         n.qvtAstNode = ddNode.qvtAstNode;
         mergeMap.put(ddNode, n);
-        self.element.add(n);
+        self.elements.add(n);
     }
     return n;
 }
@@ -248,7 +249,7 @@ operation ddg!Graph importContainmentTree(treeNodes : Collection, treeType : Str
             e.`model` = m;
             e.source = n;
             e.target = self.getNodeForTreeNode(c, mergeMap);
-            self.element.add(e);
+            self.elements.add(e);
         }
     }  
 }
@@ -277,26 +278,32 @@ operation QVT!Variable hasRelation(varB : QVT!Variable) : Any {
     for (p in self.oppositePattern().area.rule.guardPattern.predicate
             /*.includingAll(self.oppositePattern().area.rule.local.collect(l | l.guardPattern.predicate).flatten())
             */.select(p | p.conditionExpression.isSimpleAttributeNavigation())) {
-        if (p.conditionExpression.findReferencedVariables()
-                .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
+        //if (p.conditionExpression.findReferencedVariables()
+          //      .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
             // Expression in the form varB.prop = self
-            if (p.conditionExpression.isArgumentVariable(varB) and 
-                            p.conditionExpression.isSourceVariable(self)) {
+            if (p.conditionExpression.isArgumentVariable(self) and 
+                            p.conditionExpression.isSourceVariable(varB)) {
+                self.name.println ("self ");
+                varB.name.println ("varB ");
+                p.toString().println();
                 return p.conditionExpression.getReferredProperty();
 
             }
-        }                
+        //}                
     }
     // Find assignments that only refer the two vars
     for (a in self.oppositePattern().area.rule.bottomPattern.assignment.select(a | a.isSimpleAttributeNavigation())) {
-        if (a.findReferencedVariables()
-                .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
+        //if (a.findReferencedVariables()
+        //        .forAll(v | v.type.name == self.type.name or v.type.name == varB.type.name)) {
             // Only analyse expression in the form varB.prop := self
-            if (a.slotExpression.referredVariable == self and 
-                a.value.referredVariable == varB) {
+            if (a.slotExpression.referredVariable == varB and 
+                a.value.referredVariable == self) {
+                self.name.println ("self ");
+                varB.name.println ("varB ");
+                a.toString().println();
                 return a.targetProperty;
             }
-        }          
+        //}          
     }
     return null;
 }
