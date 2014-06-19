@@ -283,9 +283,6 @@ operation QVT!Variable hasRelation(varB : QVT!Variable) : Any {
             // Expression in the form varB.prop = self
             if (p.conditionExpression.isArgumentVariable(self) and 
                             p.conditionExpression.isSourceVariable(varB)) {
-                self.name.println ("self ");
-                varB.name.println ("varB ");
-                p.toString().println();
                 return p.conditionExpression.getReferredProperty();
 
             }
@@ -298,9 +295,6 @@ operation QVT!Variable hasRelation(varB : QVT!Variable) : Any {
             // Only analyse expression in the form varB.prop := self
             if (a.slotExpression.referredVariable == varB and 
                 a.value.referredVariable == self) {
-                self.name.println ("self ");
-                varB.name.println ("varB ");
-                a.toString().println();
                 return a.targetProperty;
             }
         //}          
