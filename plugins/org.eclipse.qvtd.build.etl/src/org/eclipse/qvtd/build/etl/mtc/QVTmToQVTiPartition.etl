@@ -129,11 +129,13 @@ rule Mapping
                 p | not p.conditionExpression.findReferencedVariables().exists(v | v.oppositePattern().area.isInputDomain())
                 )));
             mrM.bottomPattern = new QVTi!BottomPattern;
+            // Move assignments to bottom pattern
             mrM.bottomPattern.assignment.addAll(m.bottomPattern.assignment.select(
                 a | not a.findReferencedVariables().exists(v | v.oppositePattern().area.isInputDomain())
                     and not a.findReferencedVariables().forAll(v | v.oppositePattern().area.isMiddleDomain())
                 ).equivalent()
                 );
+                
             // Move predicates to guard pattern
             mrM.guardPattern.predicate.addAll(emfTool.getECoreUtil().copyAll(m.bottomPattern.predicate.select(
                 p | not p.conditionExpression.findReferencedVariables().exists(v | v.oppositePattern().area.isInputDomain())
@@ -288,15 +290,19 @@ rule MRDomain
          od.typedModel ::= id.typedModel;
          od.guardPattern = new QVTi!GuardPattern;
          od.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.guardPattern.variable));
-         //od.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.bottomPattern.variable));
-         if(id.`rule`.equivalents().isDefined()) {
-             id.`rule`.equivalents().flatten().selectOne(m | m.~side = "r").guardPattern.predicate.
-                addAll(emfTool.getECoreUtil().copyAll(id.guardPattern.predicate.includingAll(id.bottomPattern.predicate)));
-         }
+         
          od.bottomPattern = new QVTi!BottomPattern;
          od.bottomPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.bottomPattern.variable));
          od.bottomPattern.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(id.bottomPattern.realizedVariable));
-         od.bottomPattern.assignment.addAll(id.bottomPattern.assignment.equivalent());
+         // Predicates and assignments are moved to the mapping patterns
+         if(id.`rule`.equivalents().isDefined()) {
+             id.`rule`.equivalents().flatten().selectOne(m | m.~side = "r").guardPattern.predicate.
+                addAll(emfTool.getECoreUtil().copyAll(id.guardPattern.predicate.includingAll(id.bottomPattern.predicate)));
+                
+         }
+         id.`rule`.equivalent().selectOne(m | m.~side = "r").bottomPattern.assignment.
+                addAll(id.bottomPattern.assignment.equivalent());
+         //od.bottomPattern.assignment.addAll();
     }
 
 operation  QVTi!RealizedVariable copyToVariable() : QVTi!Variable {
