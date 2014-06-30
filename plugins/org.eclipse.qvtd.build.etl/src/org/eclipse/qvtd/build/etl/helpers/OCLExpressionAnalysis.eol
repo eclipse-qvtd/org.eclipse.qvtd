@@ -16,6 +16,101 @@ import "../helpers/QVTHelpers.eol";
  * between variables used in them.
  */
  
+ /**
+ * Returns the set of variables used in the OCL expression. 
+ */
+operation QVT!OCLExpression findReferencedVariables() : Set {
+    return self.findReferencedVariables(Set{});
+}
+
+/**
+ * Fixes all references to a variable within the OCL expression. The v argument
+ * is the variable for which the references must be fixed.
+ * 
+ * @param v the variable for which the references must be fixed.
+ */
+operation QVT!OCLExpression fixVarReferences(v : QVT!Variable) {
+    if (self.isTypeOf(QVT!VariableExp)) {
+        if (self.referredVariable.name = v.name) {
+            self.referredVariable = v;
+        }
+    } else if (self.isTypeOf(QVT!OperationCallExp)) {
+        self.source.fixVarReferences(v);
+        for (arg in self.argument) {
+           arg.fixVarReferences(v);
+        }
+    } else if (self.isTypeOf(QVT!PropertyCallExp)) {
+        self.source.fixVarReferences(v);
+    } else if (self.isTypeOf(QVT!IfExp)) {
+        self.condition.fixVarReferences(v);
+        self.elseExpression.fixVarReferences(v);
+        self.thenExpression.fixVarReferences(v);
+    } else if (self.isTypeOf(QVT!CollectionLiteralExp)) {
+        for (p in self.part) {
+            if (p.isTypeOf(QVT!CollectionItem)) {
+                p.item.fixVarReferences(v);
+            } else if (p.isTypeOf(QVT!CollectionRange)) {
+                p.first.fixVarReferences(v);
+                p.last.fixVarReferences(v);
+            } 
+        } 
+        
+    } else if (self.isKindOf(QVT!LiteralExp)) {
+      // Noting to fix
+    } else if (self.isKindOf(QVT!IteratorExp)) {
+        self.body.fixVarReferences(v);
+        self.source.fixVarReferences(v);
+    } else {
+        self.println();
+        throw "Error! Add fixVarReference() for " + self.type();
+    }
+ }
+
+/**
+ * Returns the set of variables used in the OCL expression, ignoring the
+ * variables in the ignore set. Usefull for analyzing IteratorExp
+ */
+operation QVT!OCLExpression findReferencedVariables(ignore : Set) : Set {
+    var varRefs : Set();
+    if (self.isTypeOf(QVT!VariableExp)) {
+        varRefs.add(self.referredVariable);
+    } else if (self.isTypeOf(QVT!OperationCallExp)) {
+        varRefs.addAll(self.source.findReferencedVariables());
+        for (arg in self.argument) {
+            varRefs.addAll(arg.findReferencedVariables());
+        }
+    } else if (self.isTypeOf(QVT!PropertyCallExp)) {
+        varRefs.addAll(self.source.findReferencedVariables());
+    } else if (self.isTypeOf(QVT!IfExp)) {
+        varRefs.addAll(self.condition.findReferencedVariables());
+        varRefs.addAll(self.elseExpression.findReferencedVariables());
+        varRefs.addAll(self.thenExpression.findReferencedVariables());
+    } else if (self.isTypeOf(QVT!CollectionLiteralExp)) {
+        // TODO Check that it is a collection of variables. 
+        // TODO what if it is a collection of collections or other OCL types?
+        for (p in self.part) {
+            if (p.isTypeOf(QVT!CollectionItem)) {
+                varRefs.addAll(p.item.findReferencedVariables());
+            } else if (p.isTypeOf(QVT!CollectionRange)) {
+                varRefs.addAll(p.first);
+                varRefs.addAll(p.last);
+            } else {
+                self.println();
+                throw "Error! Add findReferencedVariables() for " + p.type() + " in collections";
+            }
+        }
+    } else if (self.isKindOf(QVT!IteratorExp)) {
+        // Ignore iterator variables
+        varRefs.addAll(self.body.findReferencedVariables(self.iterator));
+        varRefs.addAll(self.source.findReferencedVariables());
+    } else if (self.isKindOf(QVT!LiteralExp)) {
+      // Noting to add
+    } else {
+        self.println();
+        throw "Error! Add findReferencedVariables() for " + self.type();
+    }
+    return varRefs.excludingAll(ignore);
+}
  
  // Determine if the OCLExpression is of the form 
  // varA.attribute = varB

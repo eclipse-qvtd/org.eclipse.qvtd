@@ -46,44 +46,36 @@ operation QVT!Transformation mappingDataDependencies(graph : ddg!Graph, inputVar
     var assgMap : Map;      // Cache nodes for DataType assignemnt nodes (Sequence, graph!Node)
     
     for (r in self.rule.select(r | not r.context.isDefined())) {
-        var ruleNode = graph.getNodeForQvtAstNode(r, ruleMap);
+        var ruleNode = graph.getNodeForQvtAstNode(r, ruleMap).first();
         varMap.clear();
         assgMap.clear();
         //r.println();
 	    // Input variables relations
 	    for (vA in inputVarMap.get(r)) {
 	        //vA.println("vA ");
-	        // If vA's type is abstract, we need a relation to each of the subtypes
-	        if (vA.type.isAbstract) {
-	            for (vSub in vA.type.package.ownedType.select(t | t.superClass.includes(vA.type))) {
-	                var e = graph.owningModel().createInstance("DependencyEdge");
-	                var vaNode = graph.getNodeForQvtAstNode(vA, varMap); 
-	                e.source = vaNode;
-	                e.target = ruleNode;
-	                e.direction = ddg!DependencyDirection#input;   
-	                graph.elements.add(e);   
-	            }
-	        } else {
+	        for (vaNode in  graph.getNodeForQvtAstNode(vA, varMap)) {
 	            var e = graph.owningModel().createInstance("DependencyEdge");
-	            var vaNode = graph.getNodeForQvtAstNode(vA, varMap); 
+	            //var vaNode = graph.getNodeForQvtAstNode(vA, varMap); 
 	            e.source = vaNode;
 	            e.target = ruleNode;
 	            e.direction = ddg!DependencyDirection#input;   
-	            graph.elements.add(e);   
-	            vA.variableRelations(graph, inputVarMap.get(r).excluding(vA), varMap);
+	            graph.elements.add(e);
 	        }
-	        
+	        vA.variableRelations(graph, inputVarMap.get(r).excluding(vA), varMap);
 	    }
 	    // Output variables relations
 	    for (vA in outputVarMap.get(r)) {
 	        //vA.println("vA ");
-	        var vaNode = graph.getNodeForQvtAstNode(vA, varMap);
-	        var e = graph.owningModel().createInstance("DependencyEdge");
-	        e.source = ruleNode;
-	        e.target = vaNode;
-	        e.direction = ddg!DependencyDirection#output;
-	        graph.elements.add(e);       
-	        vA.variableRelations(graph, outputVarMap.get(r).excluding(vA), varMap);
+	        for (vaNode in  graph.getNodeForQvtAstNode(vA, varMap)) {
+		        //var vaNode = graph.getNodeForQvtAstNode(vA, varMap);
+		        var e = graph.owningModel().createInstance("DependencyEdge");
+		        e.source = ruleNode;
+		        e.target = vaNode;
+		        e.direction = ddg!DependencyDirection#output;
+		        graph.elements.add(e);       
+		        
+		    }
+		    vA.variableRelations(graph, outputVarMap.get(r).excluding(vA), varMap);
 	    }
         // Input to Output variable relations
 	    for (vIn in inputVarMap.get(r)) {
@@ -412,7 +404,7 @@ operation ddg!Graph reducedMergedMappingDataDependencies_New() {
     var models = Sequence {ddg!Model#input, ddg!Model#middle, ddg!Model#output};
     for (m in models) {
         var classNames = self.elements.select(n : ddg!ClassNode | n.`model` == m).collect(n | n.label).asSet();
-	    // For each class, merge the nodes
+        // For each class, merge the nodes
 	    for (name in classNames) {
 	        var nodesToMerge = self.elements.select(n : ddg!ClassNode | n.`model` == m and n.label = name);
 	        //nodesToMerge.println();
@@ -495,6 +487,7 @@ operation ddg!Graph reducedMergedMappingDataDependencies_New() {
         }
         // Get the set cover from the derived variables union. The reslut are the direct
         // inputs and the respective derived variables, derived.  
+        // TODO This might in fact not be required for scheduling. 
         var coverSet = greedySetCover(inputVarNodes.clone(), derivedVarsUnion);
         for (e in m.incoming) {
             // If there is another edge to the input, is a double input
@@ -502,5 +495,6 @@ operation ddg!Graph reducedMergedMappingDataDependencies_New() {
             e.derived = not coverSet.exists(c | c == e.source);
         }
     }    
+
 
 }

@@ -42,28 +42,29 @@ import "QVTHelpers.eol";
  */
 operation QVT!Variable variableRelations(graph : ddg!Graph, vars : Sequence, varMap : Map) {
 
-    var vaNode = graph.getNodeForQvtAstNode(self, varMap);
     for (vB in vars) {
         //vB.println("vB ");
-        var vbNode = graph.getNodeForQvtAstNode(vB, varMap);
-        if (not vbNode.isTypeOf(ddg!DataTypeNode)) {
-            var refProp = self.hasRelation(vB);
-	        if(refProp <> null) {
-	            var e;
-	            if (refProp.isContainer()) {
-	                e = graph.owningModel().createInstance("ContainmentEdge");
-	                e.`model` = vbNode.`model`;
-	           } else {
-	                e = graph.owningModel().createInstance("ReferenceEdge");
-	           }
-	           // Expressions of the form vB.prop = self depict a relation from vB (vbNode) to self (vaNode)
-	           e.source = vbNode;
-	           e.target = vaNode;
-	           e.referredProperty = refProp;
-	           graph.elements.add(e);
+        var refProp = self.hasRelation(vB);
+        if(refProp <> null) {
+            for (vbNode in graph.getNodeForQvtAstNode(vB, varMap)) {
+                if (not vbNode.isTypeOf(ddg!DataTypeNode)) {
+	                var e;
+	                for (vaNode in graph.getNodeForQvtAstNode(self, varMap)) {
+	                    if (refProp.isContainer()) {
+	                        e = graph.owningModel().createInstance("ContainmentEdge");
+	                        e.`model` = vbNode.`model`;
+	                    } else {
+	                        e = graph.owningModel().createInstance("ReferenceEdge");
+	                    }
+	                    // Expressions of the form vB.prop = self depict a relation from vB (vbNode) to self (vaNode)
+	                    e.source = vbNode;
+	                    e.target = vaNode;
+	                    e.referredProperty = refProp;
+	                    graph.elements.add(e);
+		            }
+	            }
 	        }
         }
-        
     }
 } 
 
@@ -84,37 +85,56 @@ operation QVT!Variable variableRelations(graph : ddg!Graph, vars : Sequence, var
  * SEE ALSO
  *
  */ 
-operation ddg!Graph getNodeForQvtAstNode(astNode : QVT!NamedElement, nodeMap : Map) : ddg!Node {
-    var n;
+operation ddg!Graph getNodeForQvtAstNode(astNode : QVT!NamedElement, nodeMap : Map) : Set {
+    var res :Set;
     if (nodeMap.containsKey(astNode)) {
-        n = nodeMap.get(astNode);
+        return nodeMap.get(astNode);
     } else {
         // TODO Different node types for different AST node types. If the type of the AST node is  DataType, things change!
         if (astNode.isTypeOf(QVT!Mapping)) {
-            n = self.owningModel().createInstance("MappingNode");
+            var n = self.owningModel().createInstance("MappingNode");
             n.label = astNode.name;
+            n.qvtAstNode = astNode;
+            res.add(n);
         } else if (astNode.isKindOf(QVT!Variable)) {
             if (astNode.type.isTypeOf(QVT!PrimitiveType)) {
                 errln("getNodeForQvtAstNode -> PrimitiveType, should not get here.");
             } else {
-                n = self.owningModel().createInstance("ClassNode");
-                if (astNode.oppositePattern().area.isMiddleDomain()) {
-                    n.`model` = ddg!Model#middle;
-			    } else if(astNode.oppositePattern().area.isInputDomain()) {
-                    n.`model` = ddg!Model#input;
-			    } else if(astNode.oppositePattern().area.isOutputDomain()) {
-			        n.`model` = ddg!Model#output;
-			    }
+                if (astNode.type.isAbstract) {
+                    for (vSub in astNode.type.package.ownedType.select(t | t.superClass.includes(astNode.type))) {
+                        var n = self.owningModel().createInstance("ClassNode");
+	                    if (astNode.oppositePattern().area.isMiddleDomain()) {
+	                        n.`model` = ddg!Model#middle;
+	                    } else if(astNode.oppositePattern().area.isInputDomain()) {
+	                        n.`model` = ddg!Model#input;
+	                    } else if(astNode.oppositePattern().area.isOutputDomain()) {
+	                        n.`model` = ddg!Model#output;
+	                    }
+	                    n.label = vSub.name;
+	                    n.qvtAstNode = astNode;
+	                    res.add(n);
+                    }
+                } else {
+                    var n = self.owningModel().createInstance("ClassNode");
+	                if (astNode.oppositePattern().area.isMiddleDomain()) {
+	                    n.`model` = ddg!Model#middle;
+	                } else if(astNode.oppositePattern().area.isInputDomain()) {
+	                    n.`model` = ddg!Model#input;
+	                } else if(astNode.oppositePattern().area.isOutputDomain()) {
+	                    n.`model` = ddg!Model#output;
+	                }
+	                n.label = astNode.type.name;
+	                n.qvtAstNode = astNode;
+	                res.add(n);
+                }
             }
-            n.label = astNode.type.name;
         } else {
             astNode.println("why? ");
         }
-	    n.qvtAstNode = astNode;
-	    nodeMap.put(astNode, n);
-	    self.elements.add(n);
+	    nodeMap.put(astNode, res);
     }
-    return n;
+    self.elements.addAll(res);
+    return res;
 }
 
 

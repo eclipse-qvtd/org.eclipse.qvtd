@@ -50,10 +50,10 @@ mdd.name = "MappingDataDependences";
 qvti!Transformation.all().first().mappingDataDependencies(mdd, inputVarMap, outputVarMap, dataTypeAssignments);
 mdd.reducedMergedMappingDataDependencies_New();
 
-/* 
-// Ordering
-var ordering : Map = getMapOrdering();
 
+// Ordering
+//var ordering : Map = getMapOrdering();
+/* 
 // For each mapping, craete the mapping call
 for (map in ordering.keySet()) {
     map.println();
