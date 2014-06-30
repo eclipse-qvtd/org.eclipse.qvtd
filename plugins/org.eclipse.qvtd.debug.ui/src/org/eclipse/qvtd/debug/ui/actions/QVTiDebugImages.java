@@ -11,50 +11,10 @@
  *******************************************************************************/
 package org.eclipse.qvtd.debug.ui.actions;
 
-import org.apache.log4j.Logger;
-import org.eclipse.jface.resource.ImageRegistry;
-import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
-import org.eclipse.swt.graphics.Image;
+import org.eclipse.ocl.examples.debug.vm.ui.actions.DebugVMImages;
 
-public class QVTiDebugImages
+public class QVTiDebugImages extends DebugVMImages
 {
-	private static final Logger logger = Logger.getLogger(QVTiDebugImages.class);
-
-	public static final String CONDITIONAL_BPNT_ENABLED = "conditionalBreakpointEnabled"; //$NON-NLS-1$
-
-	public static final String CONDITIONAL_BPNT_DISABLED = "conditionalBreakpointDisabled"; //$NON-NLS-1$
-
-	public static final String MODEL_PARAMETER = "modelParameter"; //$NON-NLS-1$
-
-	public static final String REFERENCE = "reference"; //$NON-NLS-1$
-
-	public static final String ATTRIBUTE = "attribute"; //$NON-NLS-1$
-
-	public static final String INTERM_PROPERTY = "intermediateProperty"; //$NON-NLS-1$
-
-	public static final String THIS_VARIABLE = "thisVariable"; //$NON-NLS-1$
-	
-	public static final String PREDEFINED_VARIABLE = "predefinedVariable"; //$NON-NLS-1$
-
-	public static final String LOCAL_VARIABLE = "localVariable"; //$NON-NLS-1$
-	
-	public static final String COLLECTION_ELEMENT = "collectionElement"; //$NON-NLS-1$
 	public static final String TRANSFORMATION = "Transformation"; //$NON-NLS-1$
 	public static final String MAPPING = "Mapping"; //$NON-NLS-1$
-	
-	private static ImageRegistry fgImageRegistry = QVTdDebugUIPlugin
-			.getDefault().getImageRegistry();
-
-	private QVTiDebugImages() {
-		super();
-	}
-
-	public static Image getImage(String key) {
-		Image image = fgImageRegistry.get(key);
-		if (image == null) {
-			logger.error("No image for '" + key + "'");
-		}
-		return image;
-	}
-
 }

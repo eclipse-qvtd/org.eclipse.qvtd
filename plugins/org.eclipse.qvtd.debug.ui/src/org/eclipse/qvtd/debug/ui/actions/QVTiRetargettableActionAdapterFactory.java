@@ -21,9 +21,9 @@ import org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeEditor;
  * Contributed via <code>org.eclipse.core.runtime.adapters</code> 
  * extension point. 
  */
-public class RetargettableActionAdapterFactory implements IAdapterFactory
+public class QVTiRetargettableActionAdapterFactory implements IAdapterFactory
 {	
-	public RetargettableActionAdapterFactory() {
+	public QVTiRetargettableActionAdapterFactory() {
 		super();
 	}
 	

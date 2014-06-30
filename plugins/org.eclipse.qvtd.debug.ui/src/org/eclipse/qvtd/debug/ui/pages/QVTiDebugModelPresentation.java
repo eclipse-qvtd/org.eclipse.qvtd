@@ -11,50 +11,25 @@
  *******************************************************************************/
 package org.eclipse.qvtd.debug.ui.pages;
 
-import java.text.MessageFormat;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.ILineBreakpoint;
-import org.eclipse.debug.core.model.IStackFrame;
-import org.eclipse.debug.core.model.IThread;
-import org.eclipse.debug.core.model.IValue;
-import org.eclipse.debug.ui.IDebugEditorPresentation;
-import org.eclipse.debug.ui.IDebugModelPresentation;
-import org.eclipse.debug.ui.IDebugModelPresentationExtension;
-import org.eclipse.debug.ui.IValueDetailListener;
-import org.eclipse.jface.viewers.IColorProvider;
-import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.ocl.examples.debug.vm.core.VMDebugTarget;
 import org.eclipse.ocl.examples.debug.vm.core.VMLineBreakpoint;
 import org.eclipse.ocl.examples.debug.vm.core.VMStackFrame;
 import org.eclipse.ocl.examples.debug.vm.core.VMThread;
-import org.eclipse.ocl.examples.debug.vm.core.VMValue;
 import org.eclipse.ocl.examples.debug.vm.core.VMVariable;
-import org.eclipse.ocl.examples.debug.vm.data.VMLocationData;
-import org.eclipse.osgi.util.NLS;
+import org.eclipse.ocl.examples.debug.vm.ui.pages.VMDebugModelPresentation;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.debug.ui.actions.QVTiDebugImages;
-import org.eclipse.qvtd.debug.ui.messages.DebugUIMessages;
 import org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeEditor;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.part.FileEditorInput;
 
-public class QVTiDebugModelPresentation implements IDebugModelPresentation, IDebugEditorPresentation, IDebugModelPresentationExtension, IColorProvider, ILabelProvider {
-	
-	public QVTiDebugModelPresentation() {
-		super();
-	}
-	
-	public void setAttribute(String attribute, Object value) {
-	}
-
-    public Image getImage(Object element) {
+public class QVTiDebugModelPresentation extends VMDebugModelPresentation
+{
+    public Image getImage(Object element) {		// FIXME Inherit most of this
     	if (element instanceof VMDebugTarget) {
     		return QVTiDebugImages.getImage(QVTiDebugImages.TRANSFORMATION);
     	}
@@ -115,7 +90,7 @@ public class QVTiDebugModelPresentation implements IDebugModelPresentation, IDeb
         return null;
 	}
 
-	public String getText(Object element) {
+/*	public String getText(Object element) {
         if (element instanceof VMDebugTarget) {
         	VMDebugTarget debugTarget = (VMDebugTarget) element;
 			String moduleName = debugTarget.getMainModuleName();
@@ -147,70 +122,12 @@ public class QVTiDebugModelPresentation implements IDebugModelPresentation, IDeb
             return s.toString();
         } 
         return null;
-	}
-
-    public void computeDetail(IValue value, IValueDetailListener listener) {
-    	if(value instanceof VMValue) {
-    		VMValue qvtValue = (VMValue) value;
-    		try {
-				listener.detailComputed(value, qvtValue.computeDetail());
-			} catch (DebugException e) {
-				QVTdDebugUIPlugin.log(e.getStatus());
-			}
-    	} else {
-    		listener.detailComputed(value, value.toString());
-    	}
-	}
-
-	public boolean isLabelProperty(Object element, String property) {
-		return false;
-	}
-
-	public IEditorInput getEditorInput(Object element) {
-		if (element instanceof IFile) {
-			return new FileEditorInput((IFile) element);
-		}
-		else if (element instanceof ILineBreakpoint) {
-			return new FileEditorInput((IFile) ((ILineBreakpoint) element).getMarker().getResource());
-		}
-		else {
-			return null;
-		}
-	}
+	} */
 
 	public String getEditorId(IEditorInput input, Object element) {
 		if (element instanceof IFile || element instanceof ILineBreakpoint) {
 			return QVTimperativeEditor.EDITOR_ID;
 		}
-
 		return null;
 	}
-	
-    public Color getForeground(Object element) {
-    	return null;
-    }
-    
-    public Color getBackground(Object element) {
-    	return null;
-    }	
-
-	public boolean addAnnotations(IEditorPart editorPart, IStackFrame frame) {
-		return false;
-	}
-
-	public void removeAnnotations(IEditorPart editorPart, IThread thread) {
-	}
-    
-    public void dispose() {
-    }
-        
-    public boolean requiresUIThread(Object element) {    
-    	return true;
-    }    
-    
-    public void addListener(ILabelProviderListener listener) {
-    }
-
-    public void removeListener(ILabelProviderListener listener) {
-	}    
 }

@@ -27,6 +27,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.debug.vm.ui.launching.LaunchingUtils;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;

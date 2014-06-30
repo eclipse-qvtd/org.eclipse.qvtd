@@ -20,12 +20,9 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.jface.dialogs.ErrorDialog;
-import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.qvtd.debug.ui.actions.QVTiDebugImages;
-import org.eclipse.qvtd.debug.ui.messages.DebugUIMessages;
 import org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeEditor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
@@ -243,39 +240,6 @@ public class QVTdDebugUIPlugin extends AbstractUIPlugin {
 
 	public static IStatus createErrorStatus(String message) {
 		return createStatus(IStatus.ERROR, message);
-	}
-
-	public static void statusDialog(IStatus status) {
-		switch (status.getSeverity()) {
-		case IStatus.ERROR:
-			statusDialog(DebugUIMessages.StatusDialog_Error, status);
-			break;
-		case IStatus.WARNING:
-			statusDialog(DebugUIMessages.StatusDialog_Warning, status);
-			break;
-		case IStatus.INFO:
-			statusDialog(DebugUIMessages.StatusDialog_Information,
-					status);
-			break;
-		}
-	}
-
-	public static void statusDialog(String title, IStatus status) {
-		Shell shell = getActiveWorkbenchShell();
-		if (shell != null) {
-			switch (status.getSeverity()) {
-			case IStatus.ERROR:
-				ErrorDialog.openError(shell, title, null, status);
-				break;
-			case IStatus.WARNING:
-				MessageDialog.openWarning(shell, title, status.getMessage());
-				break;
-			case IStatus.INFO:
-				MessageDialog
-						.openInformation(shell, title, status.getMessage());
-				break;
-			}
-		}
 	}
 	
 	@Override
