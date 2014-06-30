@@ -13,6 +13,7 @@ package org.eclipse.qvtd.xtext.qvtrelation.cs2as;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -22,16 +23,24 @@ import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
+import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.messages.OCLMessages;
+import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
+import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
+import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.ImplicitSourceTypeIterator;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.InvocationExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NameExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NavigatingArgCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NavigationRole;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.RoundBracketedClauseCS;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -50,6 +59,20 @@ import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.util.AbstractQVTrelation
 
 public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2RightVisitor
 {
+	private static final class OperationOrRuleFilter implements ScopeFilter
+	{
+		public static OperationOrRuleFilter INSTANCE = new OperationOrRuleFilter();
+		
+		public int compareMatches(@NonNull MetaModelManager metaModelManager, @NonNull Object match1, @Nullable Map<TemplateParameter, ParameterableElement> bindings1,
+				@NonNull Object match2, @Nullable Map<TemplateParameter, ParameterableElement> bindings2) {
+			return 0;
+		}
+
+		public boolean matches(@NonNull EnvironmentView environmentView, @NonNull Object object) {
+			return (object instanceof Operation) || (object instanceof Rule);
+		}
+	}
+
 	public QVTrelationCSLeft2RightVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
@@ -108,43 +131,17 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 		return super.getInvocations(asType, name, iteratorCount, expressionCount);
 	}
 
-/*	@Override
-	protected @NonNull OCLExpression resolveOperationReference(@Nullable TypedElement source, @NonNull Operation namedElement, @NonNull InvocationExpCS csInvocationExp) {
-		if (namedElement instanceof Relation) {
-			Relation relation = (Relation)namedElement;
-			@NonNull RelationCallExp relationCallExp = context.refreshModelElement(RelationCallExp.class, QVTrelationPackage.Literals.RELATION_CALL_EXP, csInvocationExp);
-			relationCallExp.setReferredRelation(relation);
-			context.setType(relationCallExp, metaModelManager.getBooleanType(), true);
-			resolveRelationArguments(csInvocationExp, null, relation, relationCallExp);
-			context.installPivotUsage(csInvocationExp, relationCallExp);		
-			return relationCallExp;
-		}
-		else if (namedElement instanceof Function) {
-			Function function = (Function)namedElement;
-//			Operation baseOperation = metaModelManager.resolveBaseOperation(function);
-			OCLExpression sourceExp = source != null ? resolveOperationSource(source, csInvocationExp, function) : null;
-			if (sourceExp == null) {
-				OperationCallExp operationCallExp = context.refreshModelElement(OperationCallExp.class, PivotPackage.Literals.OPERATION_CALL_EXP, csInvocationExp);
-				context.setReferredOperation(operationCallExp, function);
-				context.setType(operationCallExp, function.getType(), function.isRequired());
-				context.installPivotUsage(csInvocationExp, operationCallExp);
-				resolveOperationArguments(csInvocationExp, null, function, operationCallExp);
-				return operationCallExp;
-			}
-		}
-		return super.resolveOperationReference(source, namedElement, csInvocationExp);
-	} */
-	
-	protected void resolveRelationArguments(@NonNull InvocationExpCS csInvocationExp, @Nullable OCLExpression source,
+	protected void resolveRelationArguments(@NonNull RoundBracketedClauseCS csRoundBracketedClause, @Nullable OCLExpression source,
 			@NonNull Relation relation, @NonNull RelationCallExp relationCallExp) {
+		@SuppressWarnings("null")@NonNull NameExpCS csNameExp = csRoundBracketedClause.getNameExp();
 		List<OCLExpression> pivotArguments = new ArrayList<OCLExpression>();
-		List<NavigatingArgCS> csArguments = csInvocationExp.getArgument();
+		List<NavigatingArgCS> csArguments = csRoundBracketedClause.getArguments();
 		List<Domain> ownedDomains = relation.getDomain();
 		int domainsCount = ownedDomains.size();
 		int csArgumentCount = csArguments.size();
 		if (csArgumentCount > 0) {
 			if (csArguments.get(0).getRole() != NavigationRole.EXPRESSION) {
-				context.addDiagnostic(csInvocationExp, "Relation calls can only specify expressions");			
+				context.addDiagnostic(csNameExp, "Relation calls can only specify expressions");			
 			}
 			for (int argIndex = 0; argIndex < csArgumentCount; argIndex++) {
 				NavigatingArgCS csArgument = csArguments.get(argIndex);
@@ -162,35 +159,46 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 		}
 		if ((csArgumentCount != domainsCount) && (relation != metaModelManager.getOclInvalidOperation())) {
 			String boundMessage = DomainUtil.bind(OCLMessages.MismatchedArgumentCount_ERROR_, csArgumentCount, domainsCount);
-			context.addDiagnostic(csInvocationExp, boundMessage);			
+			context.addDiagnostic(csNameExp, boundMessage);			
 		}
 		context.refreshList(relationCallExp.getArgument(), pivotArguments);
 	}
 
 	@Override
-	protected @Nullable OCLExpression resolveBestInvocation(@Nullable OCLExpression sourceExp, @NonNull InvocationExpCS csInvocationExp, @NonNull List<NamedElement> invocations) {
+	protected @Nullable OCLExpression resolveBestInvocation(@Nullable OCLExpression sourceExp, @NonNull RoundBracketedClauseCS csRoundBracketedClause, @NonNull List<NamedElement> invocations) {
+		NameExpCS csNameExp = csRoundBracketedClause.getNameExp();
 		if (sourceExp == null) {
 			Relation relation = getBestRelation(invocations);
 			if (relation != null) {
-				@NonNull RelationCallExp relationCallExp = context.refreshModelElement(RelationCallExp.class, QVTrelationPackage.Literals.RELATION_CALL_EXP, csInvocationExp);
+				@NonNull RelationCallExp relationCallExp = context.refreshModelElement(RelationCallExp.class, QVTrelationPackage.Literals.RELATION_CALL_EXP, csNameExp);
 				relationCallExp.setReferredRelation(relation);
 				context.setType(relationCallExp, metaModelManager.getBooleanType(), true);
-				resolveOperationArgumentTypes(csInvocationExp);
-				resolveRelationArguments(csInvocationExp, null, relation, relationCallExp);
+				resolveOperationArgumentTypes(csRoundBracketedClause);
+				resolveRelationArguments(csRoundBracketedClause, null, relation, relationCallExp);
 				return relationCallExp;
 			}
 			Function function = getBestFunction(invocations);
 			if (function != null) {
 //				Operation baseOperation = metaModelManager.resolveBaseOperation(function);
-				OperationCallExp operationCallExp = context.refreshModelElement(OperationCallExp.class, PivotPackage.Literals.OPERATION_CALL_EXP, csInvocationExp);
+				OperationCallExp operationCallExp = context.refreshModelElement(OperationCallExp.class, PivotPackage.Literals.OPERATION_CALL_EXP, csNameExp);
 				context.setReferredOperation(operationCallExp, function);
 				context.setType(operationCallExp, function.getType(), function.isRequired());
-				resolveOperationArgumentTypes(csInvocationExp);
-				resolveOperationArguments(csInvocationExp, function, operationCallExp);
+				resolveOperationArgumentTypes(csRoundBracketedClause);
+				resolveOperationArguments(csRoundBracketedClause, function, operationCallExp);
 				return operationCallExp;
 			}
 		}
-		return super.resolveBestInvocation(sourceExp, csInvocationExp, invocations);
+		return super.resolveBestInvocation(sourceExp, csRoundBracketedClause, invocations);
+	}
+
+	@Override
+	protected @NonNull OCLExpression resolveInvocation(@Nullable OCLExpression sourceExp,@NonNull RoundBracketedClauseCS csRoundBracketedClause) {
+		NameExpCS csNameExp = csRoundBracketedClause.getNameExp();
+		PathNameCS csPathName = csNameExp.getPathName();
+		if (csPathName != null) {	// This isn't actually needed but it should be.
+			CS2Pivot.setElementType(csPathName, PivotPackage.Literals.NAMED_ELEMENT, csNameExp, OperationOrRuleFilter.INSTANCE);
+		}
+		return super.resolveInvocation(sourceExp, csRoundBracketedClause);
 	}
 
 	@Override

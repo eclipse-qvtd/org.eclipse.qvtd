@@ -1077,18 +1077,57 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 
 	//PrimaryExpCS returns ExpCS:
 	//	NestedExpCS | IfExpCS | SelfExpCS | PrimitiveLiteralExpCS | TupleLiteralExpCS | CollectionLiteralExpCS |
-	//	TypeLiteralExpCS | {NameExpCS} pathName=PathNameCS ({IndexExpCS.nameExp=current} "[" firstIndexes+=ExpCS (","
-	//	firstIndexes+=ExpCS)* "]" ("[" secondIndexes+=ExpCS ("," secondIndexes+=ExpCS)* "]")? (atPre?="@" "pre")? |
-	//	{ConstructorExpCS.nameExp=current} "{" ((ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)*)? |
-	//	value=StringLiteral) "}" | (atPre?="@" "pre")? ({InvocationExpCS.nameExp=current} "(" (argument+=NavigatingArgCS
-	//	argument+=NavigatingCommaArgCS* (argument+=NavigatingSemiArgCS argument+=NavigatingCommaArgCS*)?
-	//	(argument+=NavigatingBarArgCS argument+=NavigatingCommaArgCS*)?)? ")")?);
+	//	TypeLiteralExpCS | NameExpCS;
 	public EssentialOCLGrammarAccess.PrimaryExpCSElements getPrimaryExpCSAccess() {
 		return gaQVTcoreBase.getPrimaryExpCSAccess();
 	}
 	
 	public ParserRule getPrimaryExpCSRule() {
 		return getPrimaryExpCSAccess().getRule();
+	}
+
+	//NameExpCS:
+	//	pathName=PathNameCS squareBracketedClauses+=SquareBracketedClauseCS* roundBracketedClause=RoundBracketedClauseCS?
+	//	curlyBracketedClause=CurlyBracketedClauseCS? (atPre?="@" "pre")?;
+	public EssentialOCLGrammarAccess.NameExpCSElements getNameExpCSAccess() {
+		return gaQVTcoreBase.getNameExpCSAccess();
+	}
+	
+	public ParserRule getNameExpCSRule() {
+		return getNameExpCSAccess().getRule();
+	}
+
+	//CurlyBracketedClauseCS:
+	//	{CurlyBracketedClauseCS} "{" ((ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)*)? |
+	//	value=StringLiteral) "}";
+	public EssentialOCLGrammarAccess.CurlyBracketedClauseCSElements getCurlyBracketedClauseCSAccess() {
+		return gaQVTcoreBase.getCurlyBracketedClauseCSAccess();
+	}
+	
+	public ParserRule getCurlyBracketedClauseCSRule() {
+		return getCurlyBracketedClauseCSAccess().getRule();
+	}
+
+	//RoundBracketedClauseCS:
+	//	{RoundBracketedClauseCS} "(" (arguments+=NavigatingArgCS arguments+=NavigatingCommaArgCS*
+	//	(arguments+=NavigatingSemiArgCS arguments+=NavigatingCommaArgCS*)? (arguments+=NavigatingBarArgCS
+	//	arguments+=NavigatingCommaArgCS*)?)? ")";
+	public EssentialOCLGrammarAccess.RoundBracketedClauseCSElements getRoundBracketedClauseCSAccess() {
+		return gaQVTcoreBase.getRoundBracketedClauseCSAccess();
+	}
+	
+	public ParserRule getRoundBracketedClauseCSRule() {
+		return getRoundBracketedClauseCSAccess().getRule();
+	}
+
+	//SquareBracketedClauseCS:
+	//	"[" terms+=ExpCS ("," terms+=ExpCS)* "]";
+	public EssentialOCLGrammarAccess.SquareBracketedClauseCSElements getSquareBracketedClauseCSAccess() {
+		return gaQVTcoreBase.getSquareBracketedClauseCSAccess();
+	}
+	
+	public ParserRule getSquareBracketedClauseCSRule() {
+		return getSquareBracketedClauseCSAccess().getRule();
 	}
 
 	//// Type-less init is an illegal infix expression

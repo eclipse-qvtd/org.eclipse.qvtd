@@ -50,6 +50,7 @@ public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 	    
 		configureCollectionLiteralExpCS(c, f.getCollectionLiteralExpCSAccess());
 		configureCollectionTypeCS(c, f.getCollectionTypeCSAccess());
+		configureCurlyBracketedClauseCS(c, f.getCurlyBracketedClauseCSAccess());
 	    configureEssentialOCLNavigationOperatorCS(c, f.getEssentialOCLNavigationOperatorCSAccess());
 		configureIfExpCS(c, f.getIfExpCSAccess());
 		configureLetExpCS(c, f.getLetExpCSAccess());
@@ -61,6 +62,8 @@ public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 	    configureNestedExpCS(c, f.getNestedExpCSAccess());
 	    configurePathNameCS(c, f.getPathNameCSAccess());
 	    configurePrimaryExpCS(c, f.getPrimaryExpCSAccess());
+		configureRoundBracketedClauseCS(c, f.getRoundBracketedClauseCSAccess());
+		configureSquareBracketedClauseCS(c, f.getSquareBracketedClauseCSAccess());
 	    configureTupleLiteralExpCS(c, f.getTupleLiteralExpCSAccess());
 	    configureTupleTypeCS(c, f.getTupleTypeCSAccess());
 	    configureURIPathNameCS(c, f.getURIPathNameCSAccess());

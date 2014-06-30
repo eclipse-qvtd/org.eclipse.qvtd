@@ -19,7 +19,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.basecs.impl.ModelElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.InvocationExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NameExpCS;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.EnforcementOperationCS;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.QVTcoreBaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.util.QVTcoreBaseCSVisitor;
@@ -67,7 +67,7 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	 * @generated
 	 * @ordered
 	 */
-	protected InvocationExpCS operationCall;
+	protected NameExpCS operationCall;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -114,7 +114,7 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InvocationExpCS getOperationCall() {
+	public NameExpCS getOperationCall() {
 		return operationCall;
 	}
 
@@ -123,8 +123,8 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOperationCall(InvocationExpCS newOperationCall, NotificationChain msgs) {
-		InvocationExpCS oldOperationCall = operationCall;
+	public NotificationChain basicSetOperationCall(NameExpCS newOperationCall, NotificationChain msgs) {
+		NameExpCS oldOperationCall = operationCall;
 		operationCall = newOperationCall;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OPERATION_CALL, oldOperationCall, newOperationCall);
@@ -138,7 +138,7 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOperationCall(InvocationExpCS newOperationCall) {
+	public void setOperationCall(NameExpCS newOperationCall) {
 		if (newOperationCall != operationCall) {
 			NotificationChain msgs = null;
 			if (operationCall != null)
@@ -204,7 +204,7 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 				setDeletion((Boolean)newValue);
 				return;
 			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OPERATION_CALL:
-				setOperationCall((InvocationExpCS)newValue);
+				setOperationCall((NameExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -222,7 +222,7 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 				setDeletion(DELETION_EDEFAULT);
 				return;
 			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OPERATION_CALL:
-				setOperationCall((InvocationExpCS)null);
+				setOperationCall((NameExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);

@@ -26,7 +26,8 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.ImplicitSourceTypeIterator;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.InvocationExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NameExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.RoundBracketedClauseCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
@@ -96,19 +97,20 @@ public class QVTcoreBaseCSLeft2RightVisitor extends AbstractQVTcoreBaseCSLeft2Ri
 	}
 
 	@Override
-	protected OCLExpression resolveBestInvocation(@Nullable OCLExpression sourceExp, @NonNull InvocationExpCS csInvocationExp, @NonNull List<NamedElement> invocations) {
+	protected OCLExpression resolveBestInvocation(@Nullable OCLExpression sourceExp, @NonNull RoundBracketedClauseCS csRoundBracketedClause, @NonNull List<NamedElement> invocations) {
 		if (sourceExp == null) {
 			Function function = getBestFunction(invocations);
 			if (function != null) {
+				NameExpCS csNameExp = csRoundBracketedClause.getNameExp();
 //				Operation baseOperation = metaModelManager.resolveBaseOperation(function);
-				OperationCallExp operationCallExp = context.refreshModelElement(OperationCallExp.class, PivotPackage.Literals.OPERATION_CALL_EXP, csInvocationExp);
+				OperationCallExp operationCallExp = context.refreshModelElement(OperationCallExp.class, PivotPackage.Literals.OPERATION_CALL_EXP, csNameExp);
 				context.setReferredOperation(operationCallExp, function);
 				context.setType(operationCallExp, function.getType(), function.isRequired());
-				resolveOperationArgumentTypes(csInvocationExp);
-				resolveOperationArguments(csInvocationExp, function, operationCallExp);
+				resolveOperationArgumentTypes(csRoundBracketedClause);
+				resolveOperationArguments(csRoundBracketedClause, function, operationCallExp);
 				return operationCallExp;
 			}
 		}
-		return super.resolveBestInvocation(sourceExp, csInvocationExp, invocations);
+		return super.resolveBestInvocation(sourceExp, csRoundBracketedClause, invocations);
 	}
 }

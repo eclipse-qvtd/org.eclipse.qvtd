@@ -1442,22 +1442,6 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightCurlyBracketKeyword_4() { return cRightCurlyBracketKeyword_4; }
 	}
 
-	public class NameExpCSElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NameExpCS");
-		private final Assignment cPathNameAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cPathNamePathNameCSParserRuleCall_0 = (RuleCall)cPathNameAssignment.eContents().get(0);
-		
-		//NameExpCS returns essentialocl::NameExpCS:
-		//	pathName=PathNameCS;
-		public ParserRule getRule() { return rule; }
-
-		//pathName=PathNameCS
-		public Assignment getPathNameAssignment() { return cPathNameAssignment; }
-
-		//PathNameCS
-		public RuleCall getPathNamePathNameCSParserRuleCall_0() { return cPathNamePathNameCSParserRuleCall_0; }
-	}
-
 	public class ExpCSOrTemplateCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ExpCSOrTemplateCS");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -1651,7 +1635,6 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	private VarDeclarationIdCSElements pVarDeclarationIdCS;
 	private WhenCSElements pWhenCS;
 	private WhereCSElements pWhereCS;
-	private NameExpCSElements pNameExpCS;
 	private ExpCSOrTemplateCSElements pExpCSOrTemplateCS;
 	private TypedTypeRefCSElements pTypedTypeRefCS;
 	private TypedRefCSElements pTypedRefCS;
@@ -1938,16 +1921,6 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getWhereCSRule() {
 		return getWhereCSAccess().getRule();
-	}
-
-	//NameExpCS returns essentialocl::NameExpCS:
-	//	pathName=PathNameCS;
-	public NameExpCSElements getNameExpCSAccess() {
-		return (pNameExpCS != null) ? pNameExpCS : (pNameExpCS = new NameExpCSElements());
-	}
-	
-	public ParserRule getNameExpCSRule() {
-		return getNameExpCSAccess().getRule();
 	}
 
 	////<OCLExpressionCS> ::= <PropertyCallExpCS> 
@@ -2629,18 +2602,57 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 
 	//PrimaryExpCS returns ExpCS:
 	//	NestedExpCS | IfExpCS | SelfExpCS | PrimitiveLiteralExpCS | TupleLiteralExpCS | CollectionLiteralExpCS |
-	//	TypeLiteralExpCS | {NameExpCS} pathName=PathNameCS ({IndexExpCS.nameExp=current} "[" firstIndexes+=ExpCS (","
-	//	firstIndexes+=ExpCS)* "]" ("[" secondIndexes+=ExpCS ("," secondIndexes+=ExpCS)* "]")? (atPre?="@" "pre")? |
-	//	{ConstructorExpCS.nameExp=current} "{" ((ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)*)? |
-	//	value=StringLiteral) "}" | (atPre?="@" "pre")? ({InvocationExpCS.nameExp=current} "(" (argument+=NavigatingArgCS
-	//	argument+=NavigatingCommaArgCS* (argument+=NavigatingSemiArgCS argument+=NavigatingCommaArgCS*)?
-	//	(argument+=NavigatingBarArgCS argument+=NavigatingCommaArgCS*)?)? ")")?);
+	//	TypeLiteralExpCS | NameExpCS;
 	public EssentialOCLGrammarAccess.PrimaryExpCSElements getPrimaryExpCSAccess() {
 		return gaEssentialOCL.getPrimaryExpCSAccess();
 	}
 	
 	public ParserRule getPrimaryExpCSRule() {
 		return getPrimaryExpCSAccess().getRule();
+	}
+
+	//NameExpCS:
+	//	pathName=PathNameCS squareBracketedClauses+=SquareBracketedClauseCS* roundBracketedClause=RoundBracketedClauseCS?
+	//	curlyBracketedClause=CurlyBracketedClauseCS? (atPre?="@" "pre")?;
+	public EssentialOCLGrammarAccess.NameExpCSElements getNameExpCSAccess() {
+		return gaEssentialOCL.getNameExpCSAccess();
+	}
+	
+	public ParserRule getNameExpCSRule() {
+		return getNameExpCSAccess().getRule();
+	}
+
+	//CurlyBracketedClauseCS:
+	//	{CurlyBracketedClauseCS} "{" ((ownedParts+=ConstructorPartCS ("," ownedParts+=ConstructorPartCS)*)? |
+	//	value=StringLiteral) "}";
+	public EssentialOCLGrammarAccess.CurlyBracketedClauseCSElements getCurlyBracketedClauseCSAccess() {
+		return gaEssentialOCL.getCurlyBracketedClauseCSAccess();
+	}
+	
+	public ParserRule getCurlyBracketedClauseCSRule() {
+		return getCurlyBracketedClauseCSAccess().getRule();
+	}
+
+	//RoundBracketedClauseCS:
+	//	{RoundBracketedClauseCS} "(" (arguments+=NavigatingArgCS arguments+=NavigatingCommaArgCS*
+	//	(arguments+=NavigatingSemiArgCS arguments+=NavigatingCommaArgCS*)? (arguments+=NavigatingBarArgCS
+	//	arguments+=NavigatingCommaArgCS*)?)? ")";
+	public EssentialOCLGrammarAccess.RoundBracketedClauseCSElements getRoundBracketedClauseCSAccess() {
+		return gaEssentialOCL.getRoundBracketedClauseCSAccess();
+	}
+	
+	public ParserRule getRoundBracketedClauseCSRule() {
+		return getRoundBracketedClauseCSAccess().getRule();
+	}
+
+	//SquareBracketedClauseCS:
+	//	"[" terms+=ExpCS ("," terms+=ExpCS)* "]";
+	public EssentialOCLGrammarAccess.SquareBracketedClauseCSElements getSquareBracketedClauseCSAccess() {
+		return gaEssentialOCL.getSquareBracketedClauseCSAccess();
+	}
+	
+	public ParserRule getSquareBracketedClauseCSRule() {
+		return getSquareBracketedClauseCSAccess().getRule();
 	}
 
 	//// Type-less init is an illegal infix expression

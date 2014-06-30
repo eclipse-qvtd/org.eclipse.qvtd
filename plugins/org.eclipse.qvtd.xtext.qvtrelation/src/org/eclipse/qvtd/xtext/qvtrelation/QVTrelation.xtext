@@ -102,8 +102,6 @@ VarDeclarationIdCS: name=UnrestrictedName;
 WhenCS returns PatternCS: {PatternCS} 'when' '{' predicates+=PredicateCS* '}';
 
 WhereCS returns PatternCS: {PatternCS} 'where' '{' predicates+=PredicateCS* '}';
-
-NameExpCS returns essentialocl::NameExpCS: pathName=PathNameCS;
 		
 //<OCLExpressionCS> ::= <PropertyCallExpCS> 
 //                    | <VariableExpCS>

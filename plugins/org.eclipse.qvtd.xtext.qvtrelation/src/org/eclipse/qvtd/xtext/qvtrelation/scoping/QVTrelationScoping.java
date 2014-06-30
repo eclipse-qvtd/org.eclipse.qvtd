@@ -15,15 +15,12 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.PivotCSAttribution;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
-import org.eclipse.qvtd.xtext.qvtrelation.attributes.RelationCallExpCSAttribution;
 import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.QVTrelationCSPackage;
 
 public class QVTrelationScoping
 {	
 	public static void init() {
 		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
-		registry.put(EssentialOCLCSPackage.Literals.INVOCATION_EXP_CS, RelationCallExpCSAttribution.INSTANCE);
 		registry.put(QVTrelationCSPackage.Literals.COLLECTION_TEMPLATE_CS, PivotCSAttribution.INSTANCE);
 		registry.put(QVTrelationCSPackage.Literals.DOMAIN_CS, PivotCSAttribution.INSTANCE);
 		registry.put(QVTrelationCSPackage.Literals.KEY_DECL_CS, PivotCSAttribution.INSTANCE);

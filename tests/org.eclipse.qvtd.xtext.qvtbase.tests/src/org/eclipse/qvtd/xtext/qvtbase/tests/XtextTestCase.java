@@ -65,19 +65,8 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.TuplePartCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.TupleTypeCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.TypeRefCS;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.CollectionTypeCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.InfixExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.InvocationExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NavigatingArgCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NavigationOperatorCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NestedExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.PrefixExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.TypeNameExpCS;
 //import org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup;
 //import org.eclipse.ocl.examples.xtext.oclinecore.OCLinEcoreStandaloneSetup;
 //import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
@@ -223,65 +212,14 @@ public class XtextTestCase extends PivotTestCase
 //	}
 
 	protected static boolean hasCorrespondingPivot(ModelElementCS csElement) {
-		if (csElement instanceof TupleTypeCS) {
-			return true;
-		}
-		if (csElement instanceof TuplePartCS) {		// FIXME orphanage ambiguity
-			return false;
-		}
-//		if (csElement instanceof TypeRefCS) {
-//			return false;
-//		}
-		if (csElement instanceof InfixExpCS) {
-			return false;
-		}
-		if (csElement instanceof NestedExpCS) {
-			return false;
-		}
-		if (csElement instanceof PrefixExpCS) {
-			return false;
-		}
-		if (csElement instanceof NavigatingArgCS) {
-			return false;
-		}
-		if (csElement instanceof InvocationExpCS) {
-			return false;
-		}
-		if (csElement instanceof NavigationOperatorCS) {
-			return false;
-		}
-		if (csElement instanceof CollectionTypeCS) {
-			return false;
-		}
-		if (csElement instanceof TypeNameExpCS) {
+		if (!org.eclipse.ocl.examples.xtext.tests.XtextTestCase.hasCorrespondingPivot(csElement)) {
 			return false;
 		}
 		return true;
 	}
 
 	protected static boolean hasUniqueMoniker(ModelElementCS csElement) {
-		if (csElement instanceof TupleTypeCS) {
-			return false;
-		}
-		if (csElement instanceof TypeRefCS) {
-			return false;
-		}
-		if (csElement instanceof InfixExpCS) {
-			return false;
-		}
-		if (csElement instanceof NestedExpCS) {
-			return false;
-		}
-		if (csElement instanceof PrefixExpCS) {
-			return false;
-		}
-		if (csElement instanceof InvocationExpCS) {
-			return false;
-		}
-		if (csElement instanceof NavigationOperatorCS) {
-			return false;
-		}
-		if (csElement instanceof CollectionTypeCS) {
+		if (!org.eclipse.ocl.examples.xtext.tests.XtextTestCase.hasUniqueMoniker(csElement)) {
 			return false;
 		}
 		return true;

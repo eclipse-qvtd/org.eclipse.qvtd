@@ -12,29 +12,21 @@ package org.eclipse.qvtd.xtext.qvtrelation.cs2as;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
-import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
-import org.eclipse.ocl.examples.pivot.TemplateParameter;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
-import org.eclipse.ocl.examples.pivot.scoping.ScopeFilter;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.basecs.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.LibraryCS;
@@ -46,13 +38,11 @@ import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.base.cs2as.SingleContinuation;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.InvocationExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
-import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtbase.Unit;
@@ -97,20 +87,6 @@ import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.util.AbstractQVTrelation
 
 public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContainmentVisitor
 {
-	private static final class OperationOrRuleFilter implements ScopeFilter
-	{
-		public static OperationOrRuleFilter INSTANCE = new OperationOrRuleFilter();
-		
-		public int compareMatches(@NonNull MetaModelManager metaModelManager, @NonNull Object match1, @Nullable Map<TemplateParameter, ParameterableElement> bindings1,
-				@NonNull Object match2, @Nullable Map<TemplateParameter, ParameterableElement> bindings2) {
-			return 0;
-		}
-
-		public boolean matches(@NonNull EnvironmentView environmentView, @NonNull Object object) {
-			return (object instanceof Operation) || (object instanceof Rule);
-		}
-	}
-
 	protected static class DomainContentContinuation extends SingleContinuation<DomainCS>
 	{
 		private DomainContentContinuation(@NonNull CS2PivotConversion context, @NonNull DomainCS csElement) {
@@ -314,13 +290,6 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		@NonNull Unit pivotElement = refreshNamedElement(Unit.class, QVTbasePackage.Literals.UNIT, csElement);
 		Namespace namespace = csElement.getNamespace();
 		pivotElement.setUsedPackage(namespace);
-		return null;
-	}
-
-	@Override
-	public Continuation<?> visitInvocationExpCS(@NonNull InvocationExpCS csElement) {
-		PathNameCS csPathName = DomainUtil.nonNullState(csElement.getPathName());
-		CS2Pivot.setElementType(csPathName, PivotPackage.Literals.NAMED_ELEMENT, csElement, OperationOrRuleFilter.INSTANCE);
 		return null;
 	}
 
