@@ -15,7 +15,6 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.xtext.base.attributes.PivotCSAttribution;
-import org.eclipse.qvtd.xtext.qvtimperative.attributes.MappingCSAttribution;
 import org.eclipse.qvtd.xtext.qvtimperative.attributes.MappingCallBindingCSAttribution;
 import org.eclipse.qvtd.xtext.qvtimperative.attributes.MappingLoopCSAttribution;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.QVTimperativeCSPackage;
@@ -26,7 +25,6 @@ public class QVTimperativeScoping
 		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
 		registry.put(QVTimperativeCSPackage.Literals.MAPPING_CALL_BINDING_CS, MappingCallBindingCSAttribution.INSTANCE);
 		registry.put(QVTimperativeCSPackage.Literals.MAPPING_CALL_CS, PivotCSAttribution.INSTANCE);
-		registry.put(QVTimperativeCSPackage.Literals.MAPPING_CS, MappingCSAttribution.INSTANCE);	// Has no eContainer to lookup eContainer.
 		registry.put(QVTimperativeCSPackage.Literals.MAPPING_LOOP_CS, MappingLoopCSAttribution.INSTANCE);
 	}
 }

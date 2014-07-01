@@ -26,12 +26,10 @@ import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
-import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.AreaCS;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.AssignmentCS;
@@ -56,17 +54,19 @@ public class QVTcoreBaseCSPostOrderVisitor extends AbstractQVTcoreBaseCSPostOrde
 	}
 
 	protected @Nullable Assignment refreshPropertyAssignment(@NonNull PropertyCallExp propertyCallExp, @NonNull AssignmentCS csConstraint) {
-		@NonNull PropertyAssignment propertyAssignment = context.refreshModelElement(PropertyAssignment.class,
-			QVTcoreBasePackage.Literals.PROPERTY_ASSIGNMENT, csConstraint);
-		propertyAssignment.setSlotExpression(propertyCallExp.getSource());
-		propertyAssignment.setTargetProperty(propertyCallExp.getReferredProperty());
+		PropertyAssignment propertyAssignment = PivotUtil.getPivot(PropertyAssignment.class, csConstraint);
+		if (propertyAssignment != null) {
+			propertyAssignment.setSlotExpression(propertyCallExp.getSource());
+			propertyAssignment.setTargetProperty(propertyCallExp.getReferredProperty());
+		}
 		return propertyAssignment;
 	}
 
 	protected @Nullable Assignment refreshVariableAssignment(@NonNull VariableExp variableExp, @NonNull AssignmentCS csConstraint) {
-		@NonNull VariableAssignment variableAssignment = context.refreshModelElement(VariableAssignment.class,
-			QVTcoreBasePackage.Literals.VARIABLE_ASSIGNMENT, csConstraint);
-		variableAssignment.setTargetVariable((Variable) variableExp.getReferredVariable());
+		VariableAssignment variableAssignment = PivotUtil.getPivot(VariableAssignment.class, csConstraint);
+		if (variableAssignment != null) {
+			variableAssignment.setTargetVariable((Variable) variableExp.getReferredVariable());
+		}
 		return variableAssignment;
 	}
 
@@ -113,9 +113,11 @@ public class QVTcoreBaseCSPostOrderVisitor extends AbstractQVTcoreBaseCSPostOrde
 					if (isDefault) {
 						context.addDiagnostic(csElement, "misplaced default ignored");
 					}
-					@NonNull Predicate predicate = context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csConstraint);
-					predicate.setConditionExpression(target);
-					pPredicates.add(predicate);
+					Predicate predicate = PivotUtil.getPivot(Predicate.class, csConstraint);
+					if (predicate != null) {
+						predicate.setConditionExpression(target);
+						pPredicates.add(predicate);
+					}
 				}
 			}
 			PivotUtil.refreshList(pBottomPattern.getAssignment(), pAssignments);
@@ -164,9 +166,11 @@ public class QVTcoreBaseCSPostOrderVisitor extends AbstractQVTcoreBaseCSPostOrde
 					}
 				}
 				else {
-					@NonNull Predicate predicate = context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csConstraint);
-					predicate.setConditionExpression(target);
-					pPredicates.add(predicate);
+					Predicate predicate = PivotUtil.getPivot(Predicate.class, csConstraint);
+					if (predicate != null) {
+						predicate.setConditionExpression(target);
+						pPredicates.add(predicate);
+					}
 				}
 				if (csConstraint.isDefault()) {
 					context.addDiagnostic(csElement, "misplaced default ignored");

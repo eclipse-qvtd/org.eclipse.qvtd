@@ -12,6 +12,7 @@ package org.eclipse.qvtd.xtext.qvtrelation.cs2as;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -153,22 +154,6 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		}
 	}
 
-	protected static class RelationDomainAssignmentContentContinuation extends SingleContinuation<DefaultValueCS>
-	{
-		private RelationDomainAssignmentContentContinuation(@NonNull CS2PivotConversion context, @NonNull DefaultValueCS csElement) {
-			super(context, null, null, csElement);
-		}
-
-		@Override
-		public BasicContinuation<?> execute() {
-			RelationDomainAssignment pDomain = PivotUtil.getPivot(RelationDomainAssignment.class, csElement);
-			if (pDomain != null) {
-				pDomain.setVariable(csElement.getPropertyId());
-			}
-			return null;
-		}
-	}
-
 	public QVTrelationCSContainmentVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
@@ -241,9 +226,8 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 
 	@Override
 	public Continuation<?> visitDefaultValueCS(@NonNull DefaultValueCS csElement) {
-		@SuppressWarnings("unused")
-		RelationDomainAssignment pivotElement = context.refreshModelElement(RelationDomainAssignment.class, QVTrelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT, csElement);
-		return new RelationDomainAssignmentContentContinuation(context, csElement);
+		context.refreshModelElement(RelationDomainAssignment.class, QVTrelationPackage.Literals.RELATION_DOMAIN_ASSIGNMENT, csElement);
+		return null;
 	}
 
 	@Override

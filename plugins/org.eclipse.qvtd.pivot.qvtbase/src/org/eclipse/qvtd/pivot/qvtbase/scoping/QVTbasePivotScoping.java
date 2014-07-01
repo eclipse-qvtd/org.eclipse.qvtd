@@ -13,10 +13,11 @@ package org.eclipse.qvtd.pivot.qvtbase.scoping;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.ocl.examples.pivot.attributes.OperationAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
+import org.eclipse.qvtd.pivot.qvtbase.attributes.BaseModelAttribution;
 import org.eclipse.qvtd.pivot.qvtbase.attributes.DomainAttribution;
+import org.eclipse.qvtd.pivot.qvtbase.attributes.FunctionAttribution;
 import org.eclipse.qvtd.pivot.qvtbase.attributes.TransformationAttribution;
 import org.eclipse.qvtd.pivot.qvtbase.attributes.TypedModelAttribution;
 
@@ -24,8 +25,9 @@ public class QVTbasePivotScoping
 {	
 	public static void init() {
 		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
+		registry.put(QVTbasePackage.Literals.BASE_MODEL, BaseModelAttribution.INSTANCE);
 		registry.put(QVTbasePackage.Literals.DOMAIN, DomainAttribution.INSTANCE);
-		registry.put(QVTbasePackage.Literals.FUNCTION, OperationAttribution.INSTANCE);
+		registry.put(QVTbasePackage.Literals.FUNCTION, FunctionAttribution.INSTANCE);
 		registry.put(QVTbasePackage.Literals.TRANSFORMATION, TransformationAttribution.INSTANCE);
 		registry.put(QVTbasePackage.Literals.TYPED_MODEL, TypedModelAttribution.INSTANCE);
 	}

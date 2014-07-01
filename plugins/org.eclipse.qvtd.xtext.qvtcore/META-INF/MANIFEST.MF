@@ -10,7 +10,6 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.qvtd.xtext.qvtcore,
  org.eclipse.qvtd.xtext.qvtcore.as2cs,
- org.eclipse.qvtd.xtext.qvtcore.attributes,
  org.eclipse.qvtd.xtext.qvtcore.cs2as,
  org.eclipse.qvtd.xtext.qvtcore.formatting,
  org.eclipse.qvtd.xtext.qvtcore.parser.antlr,

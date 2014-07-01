@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -24,12 +25,20 @@ import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NameExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
+import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.Unit;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
+import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
+import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -38,8 +47,10 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.AssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.DomainCS;
+import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS;
@@ -58,6 +69,28 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 
 	@Override
 	public Continuation<?> visitAssignmentCS(@NonNull AssignmentCS csElement) {
+		ExpCS csTarget = csElement.getTarget();
+		EObject eContainer = csElement.eContainer();
+		if ((csElement.getInitialiser() == null) || (eContainer instanceof GuardPatternCS)) {
+			if (csTarget instanceof NameExpCS) {
+				context.refreshModelElement(VariablePredicate.class, QVTimperativePackage.Literals.VARIABLE_PREDICATE, csElement);
+			}
+			else {
+				context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csElement);
+			}
+		}
+		else if (csTarget instanceof NameExpCS) {
+			context.refreshModelElement(VariableAssignment.class, QVTcoreBasePackage.Literals.VARIABLE_ASSIGNMENT, csElement);
+		}
+		else {
+			EObject eContainerContainer = eContainer != null ? eContainer.eContainer() : null;
+			if ((eContainerContainer instanceof DomainCS) && (((DomainCS)eContainerContainer).getName() == null)) {
+				context.refreshModelElement(PropertyAssignment.class, QVTimperativePackage.Literals.MIDDLE_PROPERTY_ASSIGNMENT, csElement);
+			}
+			else {
+				context.refreshModelElement(PropertyAssignment.class, QVTcoreBasePackage.Literals.PROPERTY_ASSIGNMENT, csElement);
+			}
+		}
 		return null;
 	}
 
@@ -135,6 +168,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	public Continuation<?> visitTopLevelCS(@NonNull TopLevelCS csElement) {
 		importPackages(csElement);
 		@NonNull ImperativeModel pivotElement = refreshRoot(ImperativeModel.class, QVTimperativePackage.Literals.IMPERATIVE_MODEL, csElement);
+		context.refreshPivotList(Unit.class, pivotElement.getUnit(), csElement.getOwnedImport());
 		List<TransformationCS> csTransformations = csElement.getTransformations();
 		List<Transformation> txList = new ArrayList<Transformation>(csTransformations.size());
 		Map<Transformation, List<Mapping>> tx2mappings = new HashMap<Transformation, List<Mapping>>();

@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtimperative;
 
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePivotStandaloneSetup;
-import org.eclipse.qvtd.xtext.qvtimperative.scoping.QVTimperativeScoping;
+import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.QVTimperativeCSPackage;
 
 import com.google.inject.Injector;
 
@@ -31,7 +31,7 @@ public class QVTimperativeStandaloneSetup extends QVTimperativeStandaloneSetupGe
 
 	public static void init() {
 		QVTimperativePivotStandaloneSetup.doSetup();
-		QVTimperativeScoping.init();
+		QVTimperativeCSPackage.eINSTANCE.getName();
 //		QVTimperativeCS2MonikerVisitor.FACTORY.getClass();
 	}
 	

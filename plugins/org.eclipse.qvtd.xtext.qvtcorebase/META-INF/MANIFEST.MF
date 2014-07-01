@@ -11,7 +11,6 @@ Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.qvtd.xtext.qvtcorebase.utilities.QVTcoreBasePlugin$Implementation
 Export-Package: org.eclipse.qvtd.xtext.qvtcorebase,
  org.eclipse.qvtd.xtext.qvtcorebase.as2cs,
- org.eclipse.qvtd.xtext.qvtcorebase.attributes,
  org.eclipse.qvtd.xtext.qvtcorebase.cs2as,
  org.eclipse.qvtd.xtext.qvtcorebase.formatting,
  org.eclipse.qvtd.xtext.qvtcorebase.parser.antlr,

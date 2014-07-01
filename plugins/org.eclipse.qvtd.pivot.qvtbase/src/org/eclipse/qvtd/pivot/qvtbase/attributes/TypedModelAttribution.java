@@ -33,11 +33,6 @@ public class TypedModelAttribution extends AbstractAttribution
 				environmentView.addElement(unit.getName(), unit.getUsedPackage());
 			}
 		}
-//		org.eclipse.ocl.examples.pivot.Package targetPackage = (org.eclipse.ocl.examples.pivot.Package)target;
-//		MetaModelManager metaModelManager = environmentView.getMetaModelManager();
-//		environmentView.addNamedElements(metaModelManager.getLocalPackages(targetPackage));
-//		environmentView.addNamedElements(metaModelManager.getLocalClasses(targetPackage));
-//		environmentView.addNamedElements(targetPackage.getOwnedPrecedence());
 		return scopeView.getParent();
 	}
 }

@@ -12,9 +12,12 @@ package org.eclipse.qvtd.xtext.qvtcorebase.cs2as;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.basecs.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.cs2as.BasicContinuation;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
@@ -23,10 +26,13 @@ import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.base.cs2as.SingleContinuation;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
+import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.Unit;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
+import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
@@ -47,8 +53,28 @@ import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.UnrealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.util.AbstractQVTcoreBaseCSContainmentVisitor;
 
+import com.google.common.collect.Iterables;
+
 public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContainmentVisitor
 {
+	protected static class IsAssignmentPredicate implements com.google.common.base.Predicate<AssignmentCS>
+	{
+		public final static @NonNull IsAssignmentPredicate INSTANCE = new IsAssignmentPredicate();
+		
+		public boolean apply(AssignmentCS csAssignment) {
+			return csAssignment.getInitialiser() != null;
+		}
+	}
+
+	protected static class IsPredicatePredicate implements com.google.common.base.Predicate<AssignmentCS>
+	{
+		public final static @NonNull IsPredicatePredicate INSTANCE = new IsPredicatePredicate();
+		
+		public boolean apply(AssignmentCS csAssignment) {
+			return csAssignment.getInitialiser() == null;
+		}
+	}
+
 	protected static class DirectionContentContinuation extends SingleContinuation<DirectionCS>
 	{
 		private DirectionContentContinuation(@NonNull CS2PivotConversion context, @NonNull DirectionCS csElement) {
@@ -93,16 +119,13 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 	}	
 
 	@Override
-	public Continuation<?> visitAssignmentCS(@NonNull AssignmentCS csElement) {
-		return null;
-	}
-
-	@Override
 	public Continuation<?> visitBottomPatternCS(@NonNull BottomPatternCS csElement) {
 		@NonNull BottomPattern pBottomPattern = context.refreshModelElement(BottomPattern.class, QVTcoreBasePackage.Literals.BOTTOM_PATTERN, csElement);
 		context.refreshPivotList(RealizedVariable.class, pBottomPattern.getRealizedVariable(), csElement.getRealizedVariables());
 		context.refreshPivotList(Variable.class, pBottomPattern.getVariable(), csElement.getUnrealizedVariables());
 		context.refreshPivotList(EnforcementOperation.class, pBottomPattern.getEnforcementOperation(), csElement.getEnforcementOperations());
+		context.refreshPivotList(Assignment.class, pBottomPattern.getAssignment(), Iterables.filter(csElement.getConstraints(), IsAssignmentPredicate.INSTANCE));
+		context.refreshPivotList(Predicate.class, pBottomPattern.getPredicate(), Iterables.filter(csElement.getConstraints(), IsPredicatePredicate.INSTANCE));
 		context.refreshComments(pBottomPattern, csElement);
 		return null;
 	}
@@ -138,7 +161,19 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 	public Continuation<?> visitGuardPatternCS(@NonNull GuardPatternCS csElement) {
 		@NonNull GuardPattern pGuardPattern = context.refreshModelElement(GuardPattern.class, QVTcoreBasePackage.Literals.GUARD_PATTERN, csElement);
 		context.refreshPivotList(Variable.class, pGuardPattern.getVariable(), csElement.getUnrealizedVariables());
+		context.refreshPivotList(Predicate.class, pGuardPattern.getPredicate(), csElement.getConstraints());
 		context.refreshComments(pGuardPattern, csElement);
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitImportCS(@NonNull ImportCS csElement) {
+		PathNameCS csPathName = DomainUtil.nonNullState(csElement.getPathName());
+		CS2Pivot.setElementType(csPathName, PivotPackage.Literals.PACKAGE, csElement, null);
+		super.visitImportCS(csElement);
+		@NonNull Unit pivotElement = refreshNamedElement(Unit.class, QVTbasePackage.Literals.UNIT, csElement);
+		Namespace namespace = csElement.getNamespace();
+		pivotElement.setUsedPackage(namespace);
 		return null;
 	}
 

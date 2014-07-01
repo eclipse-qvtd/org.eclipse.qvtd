@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtcore;
 
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
-import org.eclipse.qvtd.xtext.qvtcore.scoping.QVTcoreScoping;
+import org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.QVTcoreCSPackage;
 
 import com.google.inject.Injector;
 
@@ -31,7 +31,7 @@ public class QVTcoreStandaloneSetup extends QVTcoreStandaloneSetupGenerated
 
 	public static void init() {
 		QVTcorePivotStandaloneSetup.doSetup();
-		QVTcoreScoping.init();
+		QVTcoreCSPackage.eINSTANCE.getName();
 //		QVTcoreCS2MonikerVisitor.FACTORY.getClass();
 	}
 	

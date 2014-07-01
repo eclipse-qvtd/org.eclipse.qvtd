@@ -12,7 +12,7 @@
 package org.eclipse.qvtd.xtext.qvtrelation;
 
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPivotStandaloneSetup;
-import org.eclipse.qvtd.xtext.qvtrelation.scoping.QVTrelationScoping;
+import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.QVTrelationCSPackage;
 
 import com.google.inject.Injector;
 
@@ -32,7 +32,7 @@ public class QVTrelationStandaloneSetup extends QVTrelationStandaloneSetupGenera
 
 	public static void init() {
 		QVTrelationPivotStandaloneSetup.doSetup();
-		QVTrelationScoping.init();
+		QVTrelationCSPackage.eINSTANCE.getName();
 //		QVTrelationCS2MonikerVisitor.FACTORY.getClass();
 	}
 	

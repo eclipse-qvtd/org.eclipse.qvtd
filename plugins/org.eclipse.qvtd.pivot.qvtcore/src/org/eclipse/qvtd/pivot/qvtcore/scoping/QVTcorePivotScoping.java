@@ -11,11 +11,16 @@
 package org.eclipse.qvtd.pivot.qvtcore.scoping;
 
 import java.util.Comparator;
+import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.examples.pivot.Variable;
+import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
+import org.eclipse.qvtd.pivot.qvtcore.attributes.MappingAttribution;
 import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreUtil;
 
 public class QVTcorePivotScoping
@@ -43,7 +48,8 @@ public class QVTcorePivotScoping
 		}
 	}
 	public static void init() {
-//		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
+		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
+		registry.put(QVTcorePackage.Literals.MAPPING, MappingAttribution.INSTANCE);
 		EnvironmentView.addDisambiguator(Variable.class, new GuardVariableDisambiguator());
 	}
 }

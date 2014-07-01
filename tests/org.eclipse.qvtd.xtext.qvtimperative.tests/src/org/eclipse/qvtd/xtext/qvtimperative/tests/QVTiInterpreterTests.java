@@ -271,7 +271,6 @@ public class QVTiInterpreterTests extends LoadTestCase
      */
     @Test
     public void testClassToRDBMS() throws Exception {
-    	EssentialOCLLinkingService.DEBUG_RETRY = true;
         CompleteOCLStandaloneSetup.doSetup();
         URI oclURI = DomainUtil.nonNullState(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true));
         //  CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metaModelManager);

@@ -29,15 +29,12 @@ import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.base.cs2as.SingleContinuation;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
-import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.AssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.GuardPatternCS;
@@ -75,19 +72,19 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 	@Override
 	protected @Nullable Assignment refreshPropertyAssignment(@NonNull PropertyCallExp propertyCallExp, @NonNull AssignmentCS csConstraint) {
-		@NonNull PropertyAssignment propertyAssignment;
+		@Nullable PropertyAssignment propertyAssignment;
 		Property referredProperty = propertyCallExp.getReferredProperty();
 		Property oppositeProperty = referredProperty.getOpposite();
 		if ((oppositeProperty != null) && oppositeProperty.isImplicit() && QVTimperativeCS2Pivot.isMiddle(referredProperty.getOwningType(), csConstraint)) {
-			propertyAssignment = context.refreshModelElement(MiddlePropertyAssignment.class,
-				QVTimperativePackage.Literals.MIDDLE_PROPERTY_ASSIGNMENT, csConstraint);
+			propertyAssignment = PivotUtil.getPivot(MiddlePropertyAssignment.class, csConstraint);
 		}
 		else {
-			propertyAssignment = context.refreshModelElement(PropertyAssignment.class,
-				QVTcoreBasePackage.Literals.PROPERTY_ASSIGNMENT, csConstraint);
+			propertyAssignment = PivotUtil.getPivot(PropertyAssignment.class, csConstraint);
 		}
-		propertyAssignment.setSlotExpression(propertyCallExp.getSource());
-		propertyAssignment.setTargetProperty(propertyCallExp.getReferredProperty());
+		if (propertyAssignment != null) {
+			propertyAssignment.setSlotExpression(propertyCallExp.getSource());
+			propertyAssignment.setTargetProperty(propertyCallExp.getReferredProperty());
+		}
 		return propertyAssignment;
 	}
 
@@ -102,21 +99,25 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 				OCLExpression target = csTarget != null ? context.visitLeft2Right(OCLExpression.class, csTarget) : null;
 				if (csInitialiser != null) {
 					if (target instanceof VariableExp) {
-						@NonNull VariablePredicate predicate = context.refreshModelElement(VariablePredicate.class, QVTimperativePackage.Literals.VARIABLE_PREDICATE, csConstraint);
-						Variable variable = (Variable) ((VariableExp)target).getReferredVariable();
-						OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
-						predicate.setConditionExpression(initialiser);
-						predicate.setTargetVariable(variable);
-						pPredicates.add(predicate);
+						VariablePredicate predicate = PivotUtil.getPivot(VariablePredicate.class, csConstraint);
+						if (predicate != null) {
+							Variable variable = (Variable) ((VariableExp)target).getReferredVariable();
+							OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
+							predicate.setConditionExpression(initialiser);
+							predicate.setTargetVariable(variable);
+							pPredicates.add(predicate);
+						}
 					}
 					else if (target != null) {
 						context.addDiagnostic(csElement, "unrecognised Guard Constraint target " + target.eClass().getName());
 					}
 				}
 				else {
-					@NonNull Predicate predicate = context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csConstraint);
-					predicate.setConditionExpression(target);
-					pPredicates.add(predicate);
+					Predicate predicate = PivotUtil.getPivot(Predicate.class, csConstraint);
+					if (predicate != null) {
+						predicate.setConditionExpression(target);
+						pPredicates.add(predicate);
+					}
 				}
 				if (csConstraint.isDefault()) {
 					context.addDiagnostic(csElement, "misplaced default ignored");

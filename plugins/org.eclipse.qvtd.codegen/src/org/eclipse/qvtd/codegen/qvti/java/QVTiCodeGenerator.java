@@ -55,6 +55,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	protected final @NonNull QVTiAnalyzer cgAnalyzer;
 	protected final @NonNull Transformation transformation;
 	private/* @LazyNonNull */String javaSourceCode = null;
+	protected final @NonNull QVTiGlobalContext globalContext = new QVTiGlobalContext(this);
 
 	public QVTiCodeGenerator(@NonNull MetaModelManager metaModelManager, @NonNull Transformation transformation) {
 		super(metaModelManager);
@@ -107,11 +108,6 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	@Override
-	protected @NonNull QVTiGlobalContext createGlobalContext() {
-		return new QVTiGlobalContext(this);
-	}
-
-	@Override
 	protected @NonNull QVTiCodeGenOptions createOptions() {
 		return new QVTiCodeGenOptions();
 	}
@@ -142,7 +138,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 
 	@Override
 	public @NonNull QVTiGlobalContext getGlobalContext() {
-		return (QVTiGlobalContext) super.getGlobalContext();
+		return globalContext;
 	}
 
 	@Override

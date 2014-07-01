@@ -26,10 +26,12 @@ import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.base.cs2as.PivotDependency;
 import org.eclipse.ocl.examples.xtext.base.cs2as.SingleContinuation;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.CollectionTemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.DefaultValueCS;
 import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.ObjectTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.PropertyTemplateCS;
 import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.TransformationCS;
@@ -129,6 +131,15 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 	@Override
 	public Continuation<?> visitCollectionTemplateCS(@NonNull CollectionTemplateCS csElement) {
 		return new CollectionTemplateCompletion(context, csElement);
+	}
+
+	@Override
+	public Continuation<?> visitDefaultValueCS(@NonNull DefaultValueCS csElement) {
+		RelationDomainAssignment pivotElement = PivotUtil.getPivot(RelationDomainAssignment.class, csElement);
+		if (pivotElement != null) {
+			pivotElement.setVariable(csElement.getPropertyId());
+		}
+		return null;
 	}
 
 	@Override

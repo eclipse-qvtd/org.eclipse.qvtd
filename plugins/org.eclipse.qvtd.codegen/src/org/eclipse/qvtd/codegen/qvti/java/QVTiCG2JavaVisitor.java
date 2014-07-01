@@ -79,7 +79,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 /**
  * A QVTiCG2JavaVisitor supports generation of Java code from an optimized QVTi CG transformation tree.
  */
-public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVisitor<Boolean>
+public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implements QVTiCGModelVisitor<Boolean>
 {
 	protected final @NonNull QVTiAnalyzer analyzer;
 	protected final @NonNull CGPackage cgPackage;
