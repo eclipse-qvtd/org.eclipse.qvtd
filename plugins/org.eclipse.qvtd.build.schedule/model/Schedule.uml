@@ -5,12 +5,17 @@
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Pu_pAQKvEeSvkcN9V2g0WQ"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Pu_pAgKvEeSvkcN9V2g0WQ" value="*"/>
     </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_s1FRkAKzEeSvkcN9V2g0WQ" name="distinctData" type="_oeg58AKzEeSvkcN9V2g0WQ" association="_s1GfsAKzEeSvkcN9V2g0WQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_s1FRkQKzEeSvkcN9V2g0WQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_s1FRkgKzEeSvkcN9V2g0WQ" value="*"/>
+    </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_GT3LUAKvEeSvkcN9V2g0WQ" name="AbstractDatum">
     <ownedAttribute xmi:type="uml:Property" xmi:id="_PvA3IQKvEeSvkcN9V2g0WQ" name="source" type="_-uCCYAKuEeSvkcN9V2g0WQ" association="_PvA3IAKvEeSvkcN9V2g0WQ">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_PvA3IgKvEeSvkcN9V2g0WQ" value="1"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_PvA3IwKvEeSvkcN9V2g0WQ" value="1"/>
     </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_NWuX0AK0EeSvkcN9V2g0WQ" name="type" type="_XcyB0AK0EeSvkcN9V2g0WQ"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_IUfmUAKvEeSvkcN9V2g0WQ" name="MapingAction">
     <generalization xmi:type="uml:Generalization" xmi:id="_J1FPUAKvEeSvkcN9V2g0WQ" general="_-uCCYAKuEeSvkcN9V2g0WQ"/>
@@ -22,4 +27,56 @@
     <generalization xmi:type="uml:Generalization" xmi:id="_NoRNEAKvEeSvkcN9V2g0WQ" general="_GT3LUAKvEeSvkcN9V2g0WQ"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_PvA3IAKvEeSvkcN9V2g0WQ" name="Action_results" memberEnd="_PvA3IQKvEeSvkcN9V2g0WQ _Pu_pAAKvEeSvkcN9V2g0WQ"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="_oeg58AKzEeSvkcN9V2g0WQ" name="DistinctData">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_s1GfsQKzEeSvkcN9V2g0WQ" name="target" type="_-uCCYAKuEeSvkcN9V2g0WQ" association="_s1GfsAKzEeSvkcN9V2g0WQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_s1GfsgKzEeSvkcN9V2g0WQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_s1GfswKzEeSvkcN9V2g0WQ" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_2m3UsAKzEeSvkcN9V2g0WQ" name="derived" type="_GT3LUAKvEeSvkcN9V2g0WQ" association="_2m5w8AKzEeSvkcN9V2g0WQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2m3UsQKzEeSvkcN9V2g0WQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2m3UsgKzEeSvkcN9V2g0WQ" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_3RatkAKzEeSvkcN9V2g0WQ" name="primary" type="_GT3LUAKvEeSvkcN9V2g0WQ" association="_3Rb7sAKzEeSvkcN9V2g0WQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3RatkQKzEeSvkcN9V2g0WQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3RatkgKzEeSvkcN9V2g0WQ" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_s1GfsAKzEeSvkcN9V2g0WQ" name="Action_distinctData" memberEnd="_s1GfsQKzEeSvkcN9V2g0WQ _s1FRkAKzEeSvkcN9V2g0WQ"/>
+  <packagedElement xmi:type="uml:Association" xmi:id="_2m5w8AKzEeSvkcN9V2g0WQ" name="distinctData_Derived" memberEnd="_2m5w8QKzEeSvkcN9V2g0WQ _2m3UsAKzEeSvkcN9V2g0WQ">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_2m5w8QKzEeSvkcN9V2g0WQ" name="distinctData" type="_oeg58AKzEeSvkcN9V2g0WQ" association="_2m5w8AKzEeSvkcN9V2g0WQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_2m5w8gKzEeSvkcN9V2g0WQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_2m5w8wKzEeSvkcN9V2g0WQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_3Rb7sAKzEeSvkcN9V2g0WQ" name="distinctData_Primary" memberEnd="_3Rb7sQKzEeSvkcN9V2g0WQ _3RatkAKzEeSvkcN9V2g0WQ">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_3Rb7sQKzEeSvkcN9V2g0WQ" name="distinctData" type="_oeg58AKzEeSvkcN9V2g0WQ" association="_3Rb7sAKzEeSvkcN9V2g0WQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3Rb7sgKzEeSvkcN9V2g0WQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3Rb7swKzEeSvkcN9V2g0WQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_VfIpYAK0EeSvkcN9V2g0WQ" name="Pivot">
+    <packagedElement xmi:type="uml:Class" xmi:id="_XcyB0AK0EeSvkcN9V2g0WQ" name="Type"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_glAKkAK0EeSvkcN9V2g0WQ" name="Schedule">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_imlAwAK0EeSvkcN9V2g0WQ" name="abstractDatum" type="_GT3LUAKvEeSvkcN9V2g0WQ" aggregation="composite" association="_immO4AK0EeSvkcN9V2g0WQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_imlAwQK0EeSvkcN9V2g0WQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_imlAwgK0EeSvkcN9V2g0WQ" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_ka43AAK0EeSvkcN9V2g0WQ" name="abstractAction" type="_-uCCYAKuEeSvkcN9V2g0WQ" aggregation="composite" association="_ka6FIAK0EeSvkcN9V2g0WQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ka43AQK0EeSvkcN9V2g0WQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ka43AgK0EeSvkcN9V2g0WQ" value="*"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_immO4AK0EeSvkcN9V2g0WQ" name="A_schedule_abstractDatum_1" memberEnd="_immO4QK0EeSvkcN9V2g0WQ _imlAwAK0EeSvkcN9V2g0WQ">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_immO4QK0EeSvkcN9V2g0WQ" name="schedule" type="_glAKkAK0EeSvkcN9V2g0WQ" association="_immO4AK0EeSvkcN9V2g0WQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_immO4gK0EeSvkcN9V2g0WQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_immO4wK0EeSvkcN9V2g0WQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_ka6FIAK0EeSvkcN9V2g0WQ" name="A_schedule_abstractAction_1" memberEnd="_ka6FIQK0EeSvkcN9V2g0WQ _ka43AAK0EeSvkcN9V2g0WQ">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_ka6FIQK0EeSvkcN9V2g0WQ" name="schedule" type="_glAKkAK0EeSvkcN9V2g0WQ" association="_ka6FIAK0EeSvkcN9V2g0WQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ka6FIgK0EeSvkcN9V2g0WQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ka6FIwK0EeSvkcN9V2g0WQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
 </uml:Model>
