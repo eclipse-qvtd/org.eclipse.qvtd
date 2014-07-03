@@ -5,8 +5,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="AttributeToColumn" eSuperTypes="#//FromAttribute #//ToColumn">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//PrimitiveToName"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AssociationToForeignKey" eSuperTypes="#//ToColumn">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AssociationToForeignKey" eSuperTypes="#//ToColumn #//UmlToRdbmsModelElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="association" eType="ecore:EClass SimpleUML.ecore#//Association">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper">
         <details key="body" value="1"/>
@@ -28,8 +27,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="referenced" eType="#//ClassToTable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanToBoolean" eSuperTypes="#//PrimitiveToName"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ClassToTable" eSuperTypes="#//FromAttributeOwner #//ToColumn">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassToTable" eSuperTypes="#//FromAttributeOwner #//ToColumn #//UmlToRdbmsModelElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="associationsToForeignKeys"
         upperBound="-1" eType="#//AssociationToForeignKey" containment="true" eOpposite="#//AssociationToForeignKey/owner"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1" eType="#//PackageToSchema"
@@ -59,9 +57,8 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FromAttribute" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="FromAttribute" abstract="true" eSuperTypes="#//UmlToRdbmsModelElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="ecore:EClass SimpleUML.ecore#//Attribute">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper">
         <details key="body" value="1"/>
@@ -81,8 +78,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IntegerToNumber" eSuperTypes="#//PrimitiveToName"/>
   <eClassifiers xsi:type="ecore:EClass" name="NonLeafAttribute" eSuperTypes="#//FromAttributeOwner #//FromAttribute"/>
-  <eClassifiers xsi:type="ecore:EClass" name="PackageToSchema">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PackageToSchema" eSuperTypes="#//UmlToRdbmsModelElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="classesToTables" ordered="false"
         lowerBound="1" upperBound="-1" eType="#//ClassToTable" containment="true"
         eOpposite="#//ClassToTable/owner"/>
@@ -107,8 +103,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveToName" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimitiveToName" abstract="true" eSuperTypes="#//UmlToRdbmsModelElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeName" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="owner" lowerBound="1" eType="#//PackageToSchema"
@@ -134,5 +129,8 @@
         <details key="body" value="middle"/>
       </eAnnotations>
     </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UmlToRdbmsModelElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

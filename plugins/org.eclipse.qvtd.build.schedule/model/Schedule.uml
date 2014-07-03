@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_73t8kAKuEeSvkcN9V2g0WQ" name="model">
+  <packagedElement xmi:type="uml:Class" xmi:id="_-uCCYAKuEeSvkcN9V2g0WQ" name="AbstractAction">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_Pu_pAAKvEeSvkcN9V2g0WQ" name="results" type="_GT3LUAKvEeSvkcN9V2g0WQ" association="_PvA3IAKvEeSvkcN9V2g0WQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Pu_pAQKvEeSvkcN9V2g0WQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Pu_pAgKvEeSvkcN9V2g0WQ" value="*"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_GT3LUAKvEeSvkcN9V2g0WQ" name="AbstractDatum">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_PvA3IQKvEeSvkcN9V2g0WQ" name="source" type="_-uCCYAKuEeSvkcN9V2g0WQ" association="_PvA3IAKvEeSvkcN9V2g0WQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_PvA3IgKvEeSvkcN9V2g0WQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_PvA3IwKvEeSvkcN9V2g0WQ" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_IUfmUAKvEeSvkcN9V2g0WQ" name="MapingAction">
+    <generalization xmi:type="uml:Generalization" xmi:id="_J1FPUAKvEeSvkcN9V2g0WQ" general="_-uCCYAKuEeSvkcN9V2g0WQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_KfgsYAKvEeSvkcN9V2g0WQ" name="ClassDatum">
+    <generalization xmi:type="uml:Generalization" xmi:id="_NKdPsAKvEeSvkcN9V2g0WQ" general="_GT3LUAKvEeSvkcN9V2g0WQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_L6I3UAKvEeSvkcN9V2g0WQ" name="PropertyDatum">
+    <generalization xmi:type="uml:Generalization" xmi:id="_NoRNEAKvEeSvkcN9V2g0WQ" general="_GT3LUAKvEeSvkcN9V2g0WQ"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_PvA3IAKvEeSvkcN9V2g0WQ" name="Action_results" memberEnd="_PvA3IQKvEeSvkcN9V2g0WQ _Pu_pAAKvEeSvkcN9V2g0WQ"/>
+</uml:Model>

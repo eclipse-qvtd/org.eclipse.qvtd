@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="ASCII"?>
+<qvtscheduling:Schedule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvtscheduling="http://www.eclipse.org/qvt/0.1/QVTscheduling/">
+  <datums xsi:type="qvtscheduling:ClassDatum" sources="//@actions.0" super="//@datums.1">
+    <type href="SimpleRDBMS.ecore.oclas#T.simplerdbms.Schema"/>
+    <variables href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.0/@domain.0/@bottomPattern/@realizedVariable.0"/>
+  </datums>
+  <datums>
+    <type href="SimpleRDBMS.ecore.oclas#T.simplerdbms.RModelElement"/>
+  </datums>
+  <datums xsi:type="qvtscheduling:ClassDatum" sources="//@actions.1" super="//@datums.3">
+    <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"/>
+    <variables href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.1/@domain.1/@bottomPattern/@realizedVariable.0"/>
+  </datums>
+  <datums>
+    <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.UmlToRdbmsModelElement"/>
+  </datums>
+  <datums xsi:type="qvtscheduling:ClassDatum" sources="//@actions.2" super="//@datums.5">
+    <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.IntegerToNumber"/>
+    <variables href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.2/@domain.1/@bottomPattern/@realizedVariable.0"/>
+  </datums>
+  <datums>
+    <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"/>
+  </datums>
+  <datums xsi:type="qvtscheduling:ClassDatum" sources="//@actions.5">
+    <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.BooleanToBoolean"/>
+    <variables href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.5/@domain.1/@bottomPattern/@realizedVariable.0"/>
+  </datums>
+  <datums xsi:type="qvtscheduling:ClassDatum" sources="//@actions.6">
+    <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.StringToVarchar"/>
+    <variables href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.6/@domain.1/@bottomPattern/@realizedVariable.0"/>
+  </datums>
+  <datums xsi:type="qvtscheduling:ClassDatum" sources="//@actions.8">
+    <type href="SimpleRDBMS.ecore.oclas#T.simplerdbms.Key"/>
+    <variables href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.8/@domain.0/@bottomPattern/@realizedVariable.1"/>
+  </datums>
+  <datums xsi:type="qvtscheduling:ClassDatum" sources="//@actions.8 //@actions.11 //@actions.16">
+    <type href="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"/>
+    <variables href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.8/@domain.0/@bottomPattern/@realizedVariable.2"/>
+    <variables href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.11/@domain.0/@bottomPattern/@realizedVariable.1"/>
+    <variables href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.16/@domain.0/@bottomPattern/@realizedVariable.0"/>
+  </datums>
+  <datums xsi:type="qvtscheduling:ClassDatum" sources="//@actions.8">
+    <type href="SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"/>
+    <variables href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.8/@domain.0/@bottomPattern/@realizedVariable.0"/>
+  </datums>
+  <datums xsi:type="qvtscheduling:ClassDatum" sources="//@actions.9" super="//@datums.12 //@datums.13">
+    <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"/>
+    <variables href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.9/@domain.1/@bottomPattern/@realizedVariable.0"/>
+  </datums>
+  <datums>
+    <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttributeOwner"/>
+  </datums>
+  <datums>
+    <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.ToColumn"/>
+  </datums>
+  <datums xsi:type="qvtscheduling:ClassDatum" sources="//@actions.10">
+    <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.AssociationToForeignKey"/>
+    <variables href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.10/@domain.1/@bottomPattern/@realizedVariable.0"/>
+  </datums>
+  <datums xsi:type="qvtscheduling:ClassDatum" sources="//@actions.11">
+    <type href="SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey"/>
+    <variables href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.11/@domain.0/@bottomPattern/@realizedVariable.0"/>
+  </datums>
+  <datums xsi:type="qvtscheduling:ClassDatum" sources="//@actions.12 //@actions.14" super="//@datums.17">
+    <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"/>
+    <variables href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.12/@domain.1/@bottomPattern/@realizedVariable.0"/>
+    <variables href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.14/@domain.1/@bottomPattern/@realizedVariable.0"/>
+  </datums>
+  <datums>
+    <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"/>
+  </datums>
+  <datums xsi:type="qvtscheduling:ClassDatum" sources="//@actions.13 //@actions.15">
+    <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.NonLeafAttribute"/>
+    <variables href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.13/@domain.1/@bottomPattern/@realizedVariable.0"/>
+    <variables href="UmlToRdbms.qvtias#//@nestedPackage.0/@rule.15/@domain.1/@bottomPattern/@realizedVariable.0"/>
+  </datums>
+  <actions xsi:type="qvtscheduling:MappingAction" results="//@datums.0">
+    <mapping href="UmlToRdbms.qvtias#m.umlRdbms.packageToSchema_MR"/>
+  </actions>
+  <actions xsi:type="qvtscheduling:MappingAction" results="//@datums.2">
+    <mapping href="UmlToRdbms.qvtias#m.umlRdbms.packageToSchema_LM"/>
+  </actions>
+  <actions xsi:type="qvtscheduling:MappingAction" results="//@datums.4">
+    <mapping href="UmlToRdbms.qvtias#m.umlRdbms.integerToNumber_LM"/>
+  </actions>
+  <actions xsi:type="qvtscheduling:MappingAction">
+    <mapping href="UmlToRdbms.qvtias#m.umlRdbms.integerToNumber_MR"/>
+  </actions>
+  <actions xsi:type="qvtscheduling:MappingAction">
+    <mapping href="UmlToRdbms.qvtias#m.umlRdbms.booleanToBoolean_MR"/>
+  </actions>
+  <actions xsi:type="qvtscheduling:MappingAction" results="//@datums.6">
+    <mapping href="UmlToRdbms.qvtias#m.umlRdbms.booleanToBoolean_LM"/>
+  </actions>
+  <actions xsi:type="qvtscheduling:MappingAction" results="//@datums.7">
+    <mapping href="UmlToRdbms.qvtias#m.umlRdbms.stringToVarchar_LM"/>
+  </actions>
+  <actions xsi:type="qvtscheduling:MappingAction">
+    <mapping href="UmlToRdbms.qvtias#m.umlRdbms.stringToVarchar_MR"/>
+  </actions>
+  <actions xsi:type="qvtscheduling:MappingAction" results="//@datums.8 //@datums.9 //@datums.10">
+    <mapping href="UmlToRdbms.qvtias#m.umlRdbms.classToTable_MR"/>
+  </actions>
+  <actions xsi:type="qvtscheduling:MappingAction" results="//@datums.11">
+    <mapping href="UmlToRdbms.qvtias#m.umlRdbms.classToTable_LM"/>
+  </actions>
+  <actions xsi:type="qvtscheduling:MappingAction" results="//@datums.14">
+    <mapping href="UmlToRdbms.qvtias#m.umlRdbms.associationToForeignKey_LM"/>
+  </actions>
+  <actions xsi:type="qvtscheduling:MappingAction" results="//@datums.15 //@datums.9">
+    <mapping href="UmlToRdbms.qvtias#m.umlRdbms.associationToForeignKey_MR"/>
+  </actions>
+  <actions xsi:type="qvtscheduling:MappingAction" results="//@datums.16">
+    <mapping href="UmlToRdbms.qvtias#m.umlRdbms.classPrimitiveAttributes_LM"/>
+  </actions>
+  <actions xsi:type="qvtscheduling:MappingAction" results="//@datums.18">
+    <mapping href="UmlToRdbms.qvtias#m.umlRdbms.classComplexAttributes_LM"/>
+  </actions>
+  <actions xsi:type="qvtscheduling:MappingAction" results="//@datums.16">
+    <mapping href="UmlToRdbms.qvtias#m.umlRdbms.complexAttributePrimitiveAttributes_LM"/>
+  </actions>
+  <actions xsi:type="qvtscheduling:MappingAction" results="//@datums.18">
+    <mapping href="UmlToRdbms.qvtias#m.umlRdbms.complexAttributeComplexAttributes_LM"/>
+  </actions>
+  <actions xsi:type="qvtscheduling:MappingAction" results="//@datums.9">
+    <mapping href="UmlToRdbms.qvtias#m.umlRdbms.attributeColumns_MR"/>
+  </actions>
+</qvtscheduling:Schedule>
