@@ -12,9 +12,9 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.ocl.examples.pivot;visibility:=reexport,
  org.eclipse.ocl.examples.xtext.base,
- org.eclipse.qvtd.pivot.qvtbase,
+ org.eclipse.qvtd.pivot.qvtbase;visibility:=reexport,
  org.eclipse.qvtd.pivot.qvtcorebase;visibility:=reexport,
- org.eclipse.qvtd.pivot.qvtimperative,
+ org.eclipse.qvtd.pivot.qvtimperative;visibility:=reexport,
  org.eclipse.qvtd.pivot.qvtcore,
  org.apache.ant;bundle-version="1.8.4",
  org.eclipse.epsilon.eol.engine,
@@ -22,7 +22,4 @@ Require-Bundle: org.eclipse.ui,
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.qvtd.build.etl,
- org.eclipse.qvtd.build.etl.ant,
- org.eclipse.qvtd.build.etl.qvtscheduling,
- org.eclipse.qvtd.build.etl.qvtscheduling.impl,
- org.eclipse.qvtd.build.etl.qvtscheduling.util
+ org.eclipse.qvtd.build.etl.ant

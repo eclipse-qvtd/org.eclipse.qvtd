@@ -18,12 +18,10 @@
  * @param name the name of the operation
  * @param owningType the type to which the operation belongs
  */
-@cached
-operation getOperationByName(name : String, owningType : oclStdLib!Type) : oclStdLib!Operation {
-    return oclStdLib!Operation.all.selectOne(o | o.owningType == owningType and o.name == name);
+operation oclStdLib!Type getOperationByName(name : String) : oclStdLib!Operation {
+	return self.ownedOperation.selectOne(o | o.name == name);
 }
 
-@cached
 operation getTypeByName(name : String) : oclStdLib!PrimitiveType {
     var t =  oclStdLib!PrimitiveType.all.selectOne(t | t.name == name);
     return t;

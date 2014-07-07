@@ -20,53 +20,7 @@ import "QVTHelpers.eol";
  ******
  */
 
-/****o* org.eclipse.qvtd.build.etl/helpers/DataDependenceGraphHelpers/variableRelations
- * NAME
- *  variableRelations - Analysis of variable relations.
- * FUNCTION
- *  Creates an edge between variables if they realted by either a reference. A
- *  containment relation exists if both variables' types are in the same
- *  metamodel and if the type of the context variable has a containment
- *  association of the type of the loop variable. 
- *
- * CONTEXT
- *  QVT!Variable  The variable being analyzed
- * PARAMETERS
- *  graph The graph to populate
- *  vars The variables to look for relations
- *  varMap The map of variables to graph nodes
- * RESULT
- *  An edge is added to the graph if there is a relation
- * SEE ALSO
- *
- */
-operation QVT!Variable variableRelations(graph : ddg!Graph, vars : Sequence, varMap : Map) {
 
-    for (vB in vars) {
-        //vB.println("vB ");
-        var refProp = self.hasRelation(vB);
-        if(refProp <> null) {
-            for (vbNode in graph.getNodeForQvtAstNode(vB, varMap)) {
-                if (not vbNode.isTypeOf(ddg!DataTypeNode)) {
-	                var e;
-	                for (vaNode in graph.getNodeForQvtAstNode(self, varMap)) {
-	                    if (refProp.isContainer()) {
-	                        e = graph.owningModel().createInstance("ContainmentEdge");
-	                        e.`model` = vbNode.`model`;
-	                    } else {
-	                        e = graph.owningModel().createInstance("ReferenceEdge");
-	                    }
-	                    // Expressions of the form vB.prop = self depict a relation from vB (vbNode) to self (vaNode)
-	                    e.source = vbNode;
-	                    e.target = vaNode;
-	                    e.referredProperty = refProp;
-	                    graph.elements.add(e);
-		            }
-	            }
-	        }
-        }
-    }
-} 
 
 /****o* org.eclipse.qvtd.build.etl/helpers/DataDependenceGraphHelpers/getNodeForQvtAstNode 
  * NAME

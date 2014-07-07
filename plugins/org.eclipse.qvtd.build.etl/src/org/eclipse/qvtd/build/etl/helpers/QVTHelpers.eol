@@ -471,41 +471,6 @@ operation QVT!Property hasNavigableOpposite() : Boolean {
     }
 }
 
-
-
-
-/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/getDataTypeAssignments
- * NAME
- *  getDataTypeAssignments - Returns a sequence of {Type, Attribtye} pairs whos
- *  value is assigned from a DataType.
- * FUNCTION
- *  Identifies all the assignments in which the value part is a variable whos type
- *  is a DataType and for each, it creates a {Type, Attribtye} pair that saves the 
- *  information about what attribute of what Type was being assigned. 
- * CONTEXT
- *  QVT!Mapping  The mapping under test
- * ANNOTATIONS
- *  cached
- * SEE ALSO
- *
- */
-@cached
-operation QVT!Mapping getDataTypeAssignments() : Sequence {
-        
-        var assgmts : Sequence;
-        // Find the assigments in which the value is a variable of a primitive data
-        // type, we only interested in PropertyAssignemts, and save the information
-        // of the type and attribute being set
-        for (a in self.getAllAssignments().select(a : QVT!PropertyAssignment | a.isSimpleAttributeNavigation()
-                and a.value.referredVariable.type.isTypeOf(QVT!PrimitiveType))) {
-            // Save the type and attribute that the primitive type is being assigned to
-            // (i.e., slotExpression.attribute)
-            assgmts.add(a.slotExpression.referredVariable.type);
-            assgmts.add(a.targetProperty);
-        }
-        return assgmts;
-    }
-
 /****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/getDataTypeUses
  * NAME
  *  getDataTypeUses - Returns a sequence of {Type, Attribtye} pairs whos
@@ -547,6 +512,219 @@ operation QVT!Mapping hasDataTypeUse(values : Sequence) : Boolean {
     }
     return false;
 }    
+
+
+// ========================================================= move to qvtimperative model
+
+/** 
+ * Returns the tranformation of a mapping. Does a bottom up recursive search
+ */
+operation QVT!Mapping getTransforamtion() : QVT!Transformation {
+    if (self.transformation.isDefined()) {
+        return self.transformation;
+    } else if (self.context.isDefined()) {
+        return self.context.getTransforamtion();
+    } else {
+        self.err("Cotextless mapping ");
+    }
+}
+ /* this can be getAllPatterns, see how is is called for all atributes with super classes */
+@cached
+operation QVT!Area getContextMappingPatterns() : Sequence {
+
+    var mapping;
+    if (self.isTypeOf(QVT!CoreDomain)) {
+        mapping = self.rule;
+    } else if (self.isTypeOf(QVT!Mapping)) {
+        mapping = self;
+    }
+    var searchPatterns = new Sequence;
+    if (mapping.context.isDefined()) {
+        searchPatterns.addAll(mapping.context.domain.collect(d | d.guardPattern).flatten());
+        searchPatterns.addAll(mapping.context.domain.collect(d | d.bottomPattern).flatten());
+        searchPatterns.add(mapping.context.guardPattern);
+        searchPatterns.add(mapping.context.bottomPattern);
+        searchPatterns.addAll(mapping.context.getContextMappingPatterns());
+    }
+    return searchPatterns;
+
+}
+
+/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/getInputVariables
+ * NAME
+ *  getInputVariables - Returns the input variables of the Mapping, excluding DataType
+ *  variables
+ *
+ * CONTEXT
+ *  QVT!Rule  The mapping
+ * ANNOTATIONS
+ *  cached
+ * SEE ALSO
+ *  /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/getOutputVariables
+ */
+@cached
+operation QVT!Rule getInputVariables() : Sequence {
+    
+    var vars: Sequence;
+    vars = self.guardPattern.variable
+        .includingAll(self.domain.collect(d | d.guardPattern).flatten().collect(gp | gp.variable).flatten()
+        .select(v | not v.type.isTypeOf(QVT!PrimitiveType))).asSequence();
+    //for (l in self.local) {
+    //    vars = vars.includingAll(l.getInputVars());
+    //}
+    // QVTc, QVTu, QVTm: Do the same for all refined rules
+    //for (r in self.refinement) {
+    //    vars = vars.includingAll(r.getInputVars());
+    //}
+    return vars;
+}
+
+/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/getOutputVariables
+ * NAME
+ *  getOutputVariables - Returns the output variables of the Mapping, excluding 
+ *  DataType variables
+ *
+ * CONTEXT
+ *  QVT!Rule  The mapping
+ * ANNOTATIONS
+ *  cached
+ * SEE ALSO
+ *  /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/getInputVariables
+ */
+@cached
+operation QVT!Rule getOutputVariables() : Sequence {
+    
+    var vars: Sequence;
+    vars = self.bottomPattern.realizedVariable
+        .includingAll(self.domain.collect(d | d.bottomPattern).flatten().collect(gp | gp.realizedVariable).flatten()
+        .select(v | not v.type.isTypeOf(QVT!PrimitiveType))).asSequence();
+    //for (l in self.local) {
+    //    vars = vars.includingAll(l.getInputVars());
+    //}
+    // QVTc, QVTu, QVTm: Do the same for all refined rules
+    //for (r in self.refinement) {
+    //    vars = vars.includingAll(r.getInputVars());
+    //}
+    return vars;
+}
+
+/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/getAllAssignments
+ * NAME
+ *  getAllAssignments - Returns all the assignments of the mapping
+ *
+ * CONTEXT
+ *  QVT!Mapping  The mapping
+ * ANNOTATIONS
+ *  cached
+ * SEE ALSO
+ *  /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/
+ */
+ /* TODO Added the commented code to add it to QVTc/u/m model */
+@cached
+operation qvti!Mapping getAllAssignments() : Sequence {
+    var asgs : Sequence;
+    asgs.addAll(self.bottomPattern.assignment);
+    for (d in self.domain) {
+        asgs.addAll(d.bottomPattern.assignment);
+    }
+    //for (l in self.local) {
+    //    asgs.addAll(l.getAllAssignments());
+    //}
+    return asgs;
+}
+
+
+/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/getAllPredicates
+ * NAME
+ *  getAllPredicates - Returns all the predicates of the mapping
+ *
+ * CONTEXT
+ *  QVT!Mapping  The mapping
+ * ANNOTATIONS
+ *  cached
+ * SEE ALSO
+ *  /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/
+ */
+/* TODO Added the commented code to add it to QVTc/u/m model */
+@cached
+operation qvti!Mapping getAllPredicates() : Sequence {
+    var pdcts : Sequence;
+    pdcts.addAll(self.bottomPattern.predicate);
+    pdcts.addAll(self.guardPattern.predicate);
+    for (d in self.domain) {
+        pdcts.addAll(d.bottomPattern.predicate);
+        pdcts.addAll(d.guardPattern.predicate);
+    }
+    //for (l in self.local) {
+    //    pdcts.addAll(l.getAllPredicates());
+    //}
+    return pdcts;
+}
+
+/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/getPrimitiveDataTypeAssignemnts
+ * NAME
+ *  getPrimitiveDataTypeAssignemnts - Returns all the property assignments of 
+ *  the mapping were the value is a variable with a primitive data type, i.e.,
+ *    varA.property = 'PrimitiveDataType'
+ *
+ * CONTEXT
+ *  QVT!Mapping  The mapping
+ * ANNOTATIONS
+ *  cached
+ * SEE ALSO
+ *  /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isPrimitivePropertyAssignemnt
+ */
+@cached
+operation QVT!Mapping getPrimitiveDataTypeAssignemnts() : Sequence {
+	
+	return self.getAllAssignments()
+		.select(a | a.isPrimitivePropertyAssignemnt());
+}
+
+
+/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isSimpleAttributeNavigation
+ * NAME
+ *  getAllPredicates - Determine if the Assignemnts is of the form 
+ *    varA.attribute := varB
+ *  1. The Assignment must be an Attribute assignment
+ *  2. The slot operation must be a VariableExp
+ *  3. The value must be VariableExp
+ * 
+ * CONTEXT
+ *  QVT!Assignment  The assignement to test
+ * ANNOTATIONS
+ *  cached
+ * SEE ALSO
+ *  /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/
+ */
+operation QVT!Assignment isSimpleAttributeNavigation() : Boolean {
+
+	return self.isTypeOf(QVT!PropertyAssignment)
+		and self.slotExpression.isTypeOf(QVT!VariableExp)
+		and self.value.isTypeOf(QVT!VariableExp);
+}
+
+/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isPrimitivePropertyAssignemnt
+ * NAME
+ *  getAllPredicates - Determine if the Assignemnts is of the form 
+ *    varA.attribute := 'PrimitiveLitExp'
+ *  1. The Assignment must be an Attribute assignment
+ *  2. The slot operation must be a VariableExp
+ *  3. The value must be OperationCallExpresion with 1 argument
+ *  4. The argument must be a PrimitiveType
+ *  
+ * CONTEXT
+ *  QVT!Assignment  The assignement to test
+ * ANNOTATIONS
+ *  cached
+ * SEE ALSO
+ *  /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isSimpleAttributeNavigation
+ */
+operation QVT!Assignment isPrimitivePropertyAssignemnt() : Boolean {
+    
+    return self.isSimpleAttributeNavigation()
+    	and self.value.type.isTypeOf(QVT!PrimitiveType);
+}
  
 /**
  * Returns the comment added to state the direction in which the transformation

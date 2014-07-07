@@ -17,15 +17,13 @@
  * MODELS
  *  Required models to run the script:
  *      - NAME      ALIASES METAMODEL               ROL SOD
- *      - qvti      QVT     QVTCore                  X          The QVTi (partitioned) AST
- *      - rTree     tree    ECoreContainmentTree     X          The right metamodel containment tree
- *      - rdGrapg   ddg     Dependency               X          The reduced dependencies graph
+ *      - qvti      QVT     QVTCore                  X   -        The QVTi (partitioned) AST
+ *      - rTree     tree    ECoreContainmentTree     X   -        The right metamodel containment tree
+ *      - qvts              QVTScheduling            -   X        The scheduling model
  * SEE ALSO
  *
  ******
  */
-import "EcoreToContainmentGraph.eol";
-import "../dependence/MappingDataDependencies.eol";
 import "../helpers/OCLExpressionAnalysis.eol";
 import "MapOrdering.eol";
 
@@ -35,20 +33,56 @@ var dataTypeAssignments : Map;    // (mapping, Sequence{Type, Attribute})
 var nodeMap : Map;      // (mapping, graph!Node)
 var dataNodeMap : Map;      // (??, graph!Node)
 
+//  
+var s = new qvts!Schedule;
 
-// For each mapping get the set of input and output vars.
 for (r in qvti!Transformation.all().first().rule) {
-    //r.name.println();
-    inputVarMap.put(r, r.getInputVars());
-    outputVarMap.put(r, r.getOutputVars());
-    dataTypeAssignments.put(r, r.getDataTypeAssignments());
+	//r.println("r ");
+    var action = new qvts!MappingAction;
+    action.schedule = s;
+    action.mapping = r;
+    var resultDatums = r.getOutputVariables().collect(v | v.getClassDatum());
+    s.datums.addAll(resultDatums);
+    action.results.addAll(resultDatums);
+   
+	// Create distinc data sets for input variables
+    for (vA in r.getInputVariables()) {
+    	//vA.name.println("  va ");
+    	var dd = new qvts!DistinctData;
+    	dd.primaryArgument = vA.getClassDatum();
+    	for (dv in vA.derivedVariables(r.getInputVariables().excluding(vA))) {
+        	//dv.println("    derived ");
+        	dd.secondaryArgument.add(dv.getClassDatum());
+        }
+        dd.target = action;
+    }
+    // Create result PropertyDatums for PrimitiveData types assigned to properties
+    resultDatums = r.getPrimitiveDataTypeAssignemnts().collect(a | a.getPropertyDatum());
+    s.datums.addAll(resultDatums);
+    action.results.addAll(resultDatums);
 }
 
+// Find uses of the PropertyDatum to create the arguments
+//var pivotUtil = new Native("org.eclipse.qvtd.build.etl.PivotUtil");
+for (d in s.datums.select(dt : qvts!PropertyDatum | true)) {
+	for (r in qvti!Transformation.all().first().rule)
+	    for (p in r.getAllPredicates().select(p |
+    	        p.conditionExpression.isSimpleAttributeNavigation()
+    		    and (p.conditionExpression.source.source.type == d.type
+    		         or d.type.superClass.includes(p.conditionExpression.source.source.type))
+    		    and p.conditionExpression.source.referredProperty == d.property)) {
+    		p.toString().println(r.name + " for ");
+            var dd = new qvts!DistinctData;
+            dd.primaryArgument = d;
+            qvts!MappingAction.all().selectOne(m | m.mapping == r).distinctArguments.add(dd);
+        }
+    }
+
 // Mapping data dependendence
-var mdd = new ddg!Graph;
-mdd.name = "MappingDataDependences";
-qvti!Transformation.all().first().mappingDataDependencies(mdd, inputVarMap, outputVarMap, dataTypeAssignments);
-mdd.reducedMergedMappingDataDependencies_New();
+//var mdd = new ddg!Graph;
+//mdd.name = "MappingDataDependences";
+//qvti!Transformation.all().first().mappingDataDependencies(mdd, inputVarMap, outputVarMap, dataTypeAssignments);
+//mdd.reducedMergedMappingDataDependencies_New();
 
 
 // Ordering
@@ -69,4 +103,147 @@ for (map in ordering.keySet()) {
 
 // Create the bindings. 
 // 
+
+
+/****o* getClassDatums
+ * NAME
+ *  getClassDatums - Returns the ClassDatum for the type of the variable
+ *
+ * CONTEXT
+ *  qvti!Variable  The variable
+ * ANNOTATIONS
+ *  cached
+ * RETURNS
+ *  qvts!AbstractDatum	The ClassDatum for the variable's type
+ *  SEE ALSO
+ */
+@cached 
+operation qvti!Variable getClassDatum() : qvts!AbstractDatum {
+	//var typeDatum = self.type.getClassDatum();
+	//typeDatum.super.addAll(self.type.getSuperClass().collect(t | t.getClassDatum()));
+	//return typeDatum.super.asSequence().including(typeDatum);
+	return self.type.getClassDatum();
+}
+
+/****o* getPropertyDatum
+ * NAME
+ *  getPropertyDatum - Returns the PropertyDatum for an assignment.
+ *  The PropertyDatum points to the type of the variable in the slot expression
+ *  and the property to the targetProperty
+ *
+ * CONTEXT
+ *  qvti!Assignment  The assignment
+ * ANNOTATIONS
+ *  
+ * RETURNS
+ *  Sequence	The ClassDatum for the variable type and its superTypes
+ *  SEE ALSO
+ */
+operation qvti!Assignment getPropertyDatum() : qvts!PropertyDatum {
+	
+	var d = new qvts!PropertyDatum;
+	d.type = self.slotExpression.referredVariable.type;
+	d.property = self.targetProperty;
+	return d;
+}
+
+
+/****o* getClassDatum
+ * NAME
+ *  getClassDatum - Returns the ClassDatum for a given type
+ *
+ * CONTEXT
+ *  qvti!Type  The type
+ * ANNOTATIONS
+ *  cached
+ * RETURNS
+ *  qvts!ClassDatum The class datum
+ *  SEE ALSO
+ */
+@cached
+operation qvti!Type getClassDatum() : qvts!AbstractDatum {
+	//self.name.println("getClassDatum ");
+	if (qvts!ClassDatum.all().exists(d | d.type == self)) {
+		"Exists".println();
+        return qvts!ClassDatum.all().selectOne(d | d.type == self);
+    } else {
+    	var d;
+    	if (self.isAbstract) {
+			d = new qvts!AbstractDatum;
+		} else {
+			d = new qvts!ClassDatum;
+		}
+        d.type = self;
+        return d;
+    }
+}
+
+/****o* derivedVariables
+ * NAME
+ *  derivedVariables - Analysis of variable relations to find derivable ones
+ * FUNCTION
+ *  Returns a list of variables that can be derived from the context variable. 
+ *  The function performs a full depth search looking for variables that can be
+ *  derived from the derived ones too.
+ *
+ * CONTEXT
+ *  QVT!Variable  The variable being analyzed
+ * PARAMETERS
+ *  vars The variables to look for relations
+ * RESULT
+ *  A 
+ * SEE ALSO
+ *
+ */
+operation qvti!Variable derivedVariables(vars : Sequence) : Set {
+
+	var derived : Set;
+    for (vB in vars) {
+        //vB.name.println("    vB ");
+        if (not self.hasRelation(vB).isEmpty()) {
+        	derived.add(vB);
+	        derived.addAll(vB.derivedVariables(vars.excluding(vB)));
+        }
+    }
+    return derived;
+} 
+
+/****o* hasRelation
+  *  NAME
+  *    hasRelation -- Identify relations between variables
+  *  SYNOPSIS
+  *    relation =  var1.hasRelation(var2);
+  *  FUNCTION
+  *    Analysies the predicates and assignments of the mapping that contains the 
+  *   variables and returns the type of relation found. 
+  *  CONTEXT
+  *     QVT!Variable   
+  *  PARAMETERS
+  *    varB - variable to analyze relations against
+  *  RESULT
+  *    Any  - The EReference that relates the variables, null if not existant
+  *   TODO
+  *   It may be usefull to divide this into hasPredicateRelation and hasAssignmentRelation
+  *   so we have more controll over what relations we are looking for.
+  *  SEE ALSO
+  *
+  */
+operation qvti!Variable hasRelation(variable : QVT!Variable) : Bag {
+    
+    // Fin predicates and assignemnts that only refer the two variables and
+    // return the properties that relate them
+    return self.oppositePattern().area.rule.guardPattern.predicate
+    	.select(p | p.conditionExpression.isSimpleAttributeNavigation()
+    		    and p.conditionExpression.isArgumentVariable(variable)
+    		    and p.conditionExpression.isSourceVariable(self))
+        .collect(p | p.conditionExpression.getReferredProperty())
+    	.includingAll(
+    		self.oppositePattern().area.rule.bottomPattern.assignment
+    		.select(a | a.isSimpleAttributeNavigation()
+    			and a.slotExpression.referredVariable == self
+    			and a.value.referredVariable == variable)
+    		.collect(a | a.targetProperty())
+    	);
+}
+
 
