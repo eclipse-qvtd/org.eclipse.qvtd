@@ -48,7 +48,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//AbstractAction"
         eOpposite="#//AbstractAction/distinctArguments"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="primaryArgument" lowerBound="1"
-        eType="#//AbstractDatum" eOpposite="#//AbstractDatum/primaryDistinctData"/>
+        upperBound="-1" eType="#//AbstractDatum" eOpposite="#//AbstractDatum/primaryDistinctData"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="secondaryArgument" upperBound="-1"
         eType="#//AbstractDatum" eOpposite="#//AbstractDatum/secondaryDistinctData"/>
   </eClassifiers>
