@@ -41,7 +41,7 @@ for (r in qvti!Transformation.all().first().rule) {
     var action = new qvts!MappingAction;
     action.schedule = s;
     action.mapping = r;
-    var resultDatums = r.getOutputVariables().collect(v | v.getClassDatum());
+    var resultDatums = r.getOutputVariables().collect(v | v.getClassDatum()).flatten();
     s.datums.addAll(resultDatums);
     action.results.addAll(resultDatums);
    
@@ -49,10 +49,10 @@ for (r in qvti!Transformation.all().first().rule) {
     for (vA in r.getInputVariables()) {
     	//vA.name.println("  va ");
     	var dd = new qvts!DistinctData;
-    	dd.primaryArgument = vA.getClassDatum();
+    	dd.primaryArgument.addAll(vA.getClassDatum());
     	for (dv in vA.derivedVariables(r.getInputVariables().excluding(vA))) {
         	//dv.println("    derived ");
-        	dd.secondaryArgument.add(dv.getClassDatum());
+        	dd.secondaryArgument.addAll(dv.getClassDatum());
         }
         dd.target = action;
     }
@@ -65,7 +65,7 @@ for (r in qvti!Transformation.all().first().rule) {
 // Find uses of the PropertyDatum to create the arguments
 //var pivotUtil = new Native("org.eclipse.qvtd.build.etl.PivotUtil");
 for (d in s.datums.select(dt : qvts!PropertyDatum | true)) {
-	for (r in qvti!Transformation.all().first().rule)
+	for (r in qvti!Transformation.all().first().rule) {
 	    for (p in r.getAllPredicates().select(p |
     	        p.conditionExpression.isSimpleAttributeNavigation()
     		    and (p.conditionExpression.source.source.type == d.type
@@ -73,20 +73,15 @@ for (d in s.datums.select(dt : qvts!PropertyDatum | true)) {
     		    and p.conditionExpression.source.referredProperty == d.property)) {
     		p.toString().println(r.name + " for ");
             var dd = new qvts!DistinctData;
-            dd.primaryArgument = d;
+            dd.primaryArgument.add(d);
             qvts!MappingAction.all().selectOne(m | m.mapping == r).distinctArguments.add(dd);
         }
     }
-
-// Mapping data dependendence
-//var mdd = new ddg!Graph;
-//mdd.name = "MappingDataDependences";
-//qvti!Transformation.all().first().mappingDataDependencies(mdd, inputVarMap, outputVarMap, dataTypeAssignments);
-//mdd.reducedMergedMappingDataDependencies_New();
-
+}
 
 // Ordering
-//var ordering : Map = getMapOrdering();
+var ordering : Map = s.defineMapOrdering();
+
 /* 
 // For each mapping, craete the mapping call
 for (map in ordering.keySet()) {
@@ -107,8 +102,14 @@ for (map in ordering.keySet()) {
 
 /****o* getClassDatums
  * NAME
- *  getClassDatums - Returns the ClassDatum for the type of the variable
+ *  getClassDatums - Returns the ClassDatum(s) for the type of the variable.
  *
+ * FUNCTION
+ *  If the variable's type is not abstract, this functions returns the ClassDatum
+ *  that corresponds to the type.
+ *  If the variable's type is abstract, this function returns the set of ClassDatum
+ *  of all the subtypes of the type. This correctly connects the AbstractAction
+ *  to all possible input datums.
  * CONTEXT
  *  qvti!Variable  The variable
  * ANNOTATIONS
@@ -118,11 +119,12 @@ for (map in ordering.keySet()) {
  *  SEE ALSO
  */
 @cached 
-operation qvti!Variable getClassDatum() : qvts!AbstractDatum {
-	//var typeDatum = self.type.getClassDatum();
-	//typeDatum.super.addAll(self.type.getSuperClass().collect(t | t.getClassDatum()));
-	//return typeDatum.super.asSequence().including(typeDatum);
-	return self.type.getClassDatum();
+operation qvti!Variable getClassDatum() : Sequence {
+	
+	if (self.type.isAbstract) {
+	   return self.type.getSubtypeClassDatum();
+	}
+	return self.type.getClassDatum().asSequence();
 }
 
 /****o* getPropertyDatum
@@ -150,7 +152,8 @@ operation qvti!Assignment getPropertyDatum() : qvts!PropertyDatum {
 
 /****o* getClassDatum
  * NAME
- *  getClassDatum - Returns the ClassDatum for a given type
+ *  getClassDatum - Returns the ClassDatum for a given type. If the type is
+ *  abstract the function return the ClassDatum of all the sub-types.  
  *
  * CONTEXT
  *  qvti!Type  The type
@@ -161,21 +164,35 @@ operation qvti!Assignment getPropertyDatum() : qvts!PropertyDatum {
  *  SEE ALSO
  */
 @cached
-operation qvti!Type getClassDatum() : qvts!AbstractDatum {
+operation qvti!Type getClassDatum() : qvts!ClassDatum {
 	//self.name.println("getClassDatum ");
-	if (qvts!ClassDatum.all().exists(d | d.type == self)) {
-		"Exists".println();
-        return qvts!ClassDatum.all().selectOne(d | d.type == self);
-    } else {
-    	var d;
-    	if (self.isAbstract) {
-			d = new qvts!AbstractDatum;
-		} else {
-			d = new qvts!ClassDatum;
-		}
-        d.type = self;
+	// KLUDGE: If not cached annotation have to check for previous definition
+	//if (qvts!ClassDatum.all().exists(d | d.type == self)) {
+	//	"Exists".println();
+    //    return qvts!ClassDatum.all().selectOne(d | d.type == self);
+    //} else {
+    	var d = new qvts!ClassDatum;
+		d.type = self;
         return d;
-    }
+    //}
+}
+
+/****o* getSubtypeClassDatum
+ * NAME
+ *  getSubtypeClassDatum - Returns the list of ClassDatum for all the subtypes
+ *  of the given type.  
+ *
+ * CONTEXT
+ *  qvti!Type  The type
+ * ANNOTATIONS
+ *  cached
+ * RETURNS
+ *  qvts!ClassDatum The class datum
+ *  SEE ALSO
+ */
+@cached
+operation qvti!Type getSubtypeClassDatum() : Sequence {
+    return self.getPackage().getOwnedType().select(t | t.getSuperClass().includes(self)).collect(t | t.getClassDatum()).asSequence();
 }
 
 /****o* derivedVariables
@@ -246,4 +263,78 @@ operation qvti!Variable hasRelation(variable : QVT!Variable) : Bag {
     	);
 }
 
+
+operation qvts!Schedule defineMapOrdering() {
+
+    var visited : Set;
+    var mapLinear : Map;
+    
+    var queue : Sequence;
+    // Do a Depth first search of the containment tree of the output model
+    queue.addAll(rTree!Node.all().select(n | n.parent.isEmpty()));
+    while (not queue.isEmpty()) {
+        var n = queue.first();
+        queue.remove(n);
+        // Do stuff with n
+        n.println("n ");
+        //  Find all the mappings that have an output node if this type
+        for (ma in self.actions.select(a : qvts!MappingAction | a.results.exists(r | r.type.name = n.EClassName))) {
+            // Find the predecesors and linearize
+            ma.getMappingOrderIndex(visited);
+        }
+        queue.addAll(n.children);
+    }
+    
+    "Ordering".println();
+    for (ma in self.actions.select(a : qvts!MappingAction | true).sortBy(ma | ma.count)) {
+        ma.mapping.name.println(ma.count + ":");
+    }
+    
+    " ".println();
+    " ".println();
+
+}
+
+operation qvts!MappingAction getMappingOrderIndex(visited) {
+    
+    visited.add(self);
+    var index : Integer;
+    // Find all the mappings that are predecesor to this one
+    var pre = self.getPredecesorMappings();
+    pre.collect(p | p.mapping.name).println(self.mapping.name + " pre: ");
+    while (pre.size() > 0) {
+        var pma = pre.first();
+        if (not visited.includes(pma)) {        
+            //"Recursive ".println();
+            pma.getMappingOrderIndex(visited);
+            //"Back".println();
+        }    
+        pre.remove(pma);
+    }
+    if (self.count == 0) {
+        index = qvts!MappingAction.all().sortBy(ma | ma.count).last().count + 1;
+        self.count = index;
+    }
+}
+
+/****o* getPredecesorMappings
+ *  NAME
+ *    getPredecesorMappings -- get the list of predecesor mappings
+ *  FUNCTION
+ *  A maping, A, is a predecesor of another mapping, B, if any of the results
+ *  the MappingAction of A, is an argument of the MappingAction of B.
+ *  CONTEXT
+ *     qvts!MappingAction The maping action to query (mapping B) 
+ *  RESULT
+ *    Sequence  - The list of predecessor MappingActions
+ *   TODO
+ *  SEE ALSO
+ *
+ */
+operation qvts!MappingAction getPredecesorMappings() : Sequence {
+
+    return self.distinctArguments
+        .collect(da | da.secondaryArgument.including(da.primaryArgument)).asSet()
+        .collect(a | a.sources).flatten();
+}
 

@@ -26,16 +26,17 @@ import "../helpers/OCLExpressionAnalysis.eol";
  ******
  */
 operation getMapOrdering() : Map {
-	// Do a Depth first search of the containment tree of the output model
+	
 	var mapOrdering : Map;
     var mapNesting : Map;
     var mapLinear : Map;
 	var mapResult : Map;
 	var visited : Set;
-	var queue : Sequence;
+	
 	
 	var bestNest : Map;        // If the optimal is 0, the mapping must be invoked at the root
 	
+	// Do a Depth first search of the containment tree of the output model
 	queue.addAll(rTree!Node.all().select(n | n.parent.isEmpty()));
 	while (not queue.isEmpty()) {
 	    var n = queue.first();
