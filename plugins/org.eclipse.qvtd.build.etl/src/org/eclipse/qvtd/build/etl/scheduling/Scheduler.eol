@@ -43,16 +43,18 @@ for (r in qvti!Transformation.all().first().rule) {
     action.mapping = r;
     var resultDatums = r.getOutputVariables().collect(v | v.getClassDatum()).flatten();
     s.datums.addAll(resultDatums);
-    action.results.addAll(resultDatums);
+    action.results.addAll(resultDatums.select(cd : qvts!ClassDatum | true));
    
 	// Create distinc data sets for input variables
     for (vA in r.getInputVariables()) {
     	//vA.name.println("  va ");
     	var dd = new qvts!DistinctData;
-    	dd.primaryArgument.addAll(vA.getClassDatum());
+    	dd.primaryArgument.add(vA.getClassDatum());
+    	dd.primaryArgument.addAll(vA.getClassDatum().getSubtypeClassDatums());
     	for (dv in vA.derivedVariables(r.getInputVariables().excluding(vA))) {
         	//dv.println("    derived ");
-        	dd.secondaryArgument.addAll(dv.getClassDatum());
+        	dd.secondaryArgument.add(dv.getClassDatum());
+        	dd.secondaryArgument.addAll(dv.getClassDatum().getSubtypeClassDatums());
         }
         dd.target = action;
     }
@@ -63,7 +65,6 @@ for (r in qvti!Transformation.all().first().rule) {
 }
 
 // Find uses of the PropertyDatum to create the arguments
-//var pivotUtil = new Native("org.eclipse.qvtd.build.etl.PivotUtil");
 for (d in s.datums.select(dt : qvts!PropertyDatum | true)) {
 	for (r in qvti!Transformation.all().first().rule) {
 	    for (p in r.getAllPredicates().select(p |
@@ -71,8 +72,7 @@ for (d in s.datums.select(dt : qvts!PropertyDatum | true)) {
     		    and (p.conditionExpression.source.source.type == d.type
     		         or d.type.superClass.includes(p.conditionExpression.source.source.type))
     		    and p.conditionExpression.source.referredProperty == d.property)) {
-    		p.toString().println(r.name + " for ");
-            var dd = new qvts!DistinctData;
+    		var dd = new qvts!DistinctData;
             dd.primaryArgument.add(d);
             qvts!MappingAction.all().selectOne(m | m.mapping == r).distinctArguments.add(dd);
         }
@@ -80,20 +80,133 @@ for (d in s.datums.select(dt : qvts!PropertyDatum | true)) {
 }
 
 // Ordering
-var ordering : Map = s.defineMapOrdering();
+s.defineMapOrdering();
 
-/* 
-// For each mapping, craete the mapping call
-for (map in ordering.keySet()) {
-    map.println();
-    for (call in ordering.get(map)) {
-        var mc = new qvti!MappingCall;
-        call.println("    ");
-        mc.referredMapping = call.qvtAstNode;
-        map.qvtAstNode.mappingCall.add(mc);
+// Nesting and bindings
+// 1. Create the base mapping
+var root = new qvti!Mapping;
+root.name = "__root__";
+root.guardPattern = new qvti!GuardPattern;
+root.bottomPattern = new qvti!BottomPattern;
+var nested : Boolean;
+for (mq in s.actions.sortBy(ma | ma.index)) {
+    nested = false;
+    mq.println("mq ");
+    var qin = mq.distinctArguments
+            .collect(da | da.secondaryArgument.including(da.primaryArgument)).flatten().asSet();
+    qin.collect(da | da.type.name).println("qin ");        
+    for (mn in s.actions.select(ma | ma.index < mq.index).sortBy(ma | ma.index).invert) {
+        mn.println("    mn ");
+        var nav = mn.getAvailableDatums();
+        nav.collect(da | da.type.name).println("        nav: ");
+        nav.includesAll(qin).println("        ");
+        if (nav.includesAll(qin)) {
+            // If for each ClassDatum there is only 1 input variable of the same type
+            // it is a perfect match, look no further
+            if (qin.forAll(cd | mq.mapping.getInputVariables().one(v | v.type == cd.type))) {
+                mq.parent = mn;
+	            nested = true;
+	            // Create the bindings?
+	            // mq.createBindings(qin, mn, nav);
+	            for (cd in qin) {
+	               var mb = new qvts!MappingBinding;
+	               mb.mappingAction = mq;
+	               var binding = new qvti!VariableExp;
+	               var candidates = mn.mapping.getInputVariables().includingAll(mn.mapping.getOutputVariables())
+	                                   .select(v | v.type == cd.type);
+	               if (not candidates.isEmpty()) {
+	                   binding.referredVariable = candidates.first();
+	               } else {
+	                   // TODO Tell my parent to pass me a variable
+	               }
+	               mb.bindingExp = binding;
+	               mb.boundVariable = mq.mapping.getInputVariables().selectOne(v | v.type == cd.type);
+	               // TODO how to select and then discard when we have multiple CalssDatums
+	               // with the same type?
+	            }
+	            break;
+            }
+        } else {
+            var matched = nav.select(cd | qin.includes(cd));
+            matched.collect(da | da.type.name).println("            matched: ");
+            var missing = qin.excludingAll(nav);
+            missing.collect(da | da.type.name).println("            missing: ");
+            // Can some missing be derived from the matched?
+            for (mcs in missing.clone()) {
+                for (match in matched) {
+	                var primaryMatch = mq.distinctArguments
+	                    .select(da | da.primaryArgument.exists(pa | pa.type == match.type)
+	                              or match.super.exists(sd | da.primaryArgument.exists(pa | pa.type == sd.type)));
+	                    
+	                var primary = primaryMatch.selectOne(da | da.secondaryArgument.exists(sa | sa.type = mcs.type));
+	                // Find a predicate that relates the two types.
+	                if (primary.isDefined()) {
+	                    var p = mq.mapping.getAllPredicates()
+	                        .selectOne(p | p.conditionExpression.isSimpleAttributeNavigation()
+	                                   and p.conditionExpression.source.source.type = primary.type
+	                                   and p.conditionExpression.argument.first().type = mcs.type);
+	                    if (p.isDefined()) {
+	                        // mq.createBindings(qin, mn, nav);
+	                        primary.type.name.println(mcs.type.name + " derived from ");
+		                    var mb = new qvts!MappingBinding;
+		                    mb.mappingAction = mq;
+		                    var bindingEx = new qvti!VariableExp;
+		                    bindingEx.referredVariable = p.conditionExpression.source.source.referredVariable;
+		                    mb.bindingExp = bindingEx;
+		                    mb.boundVariable = p.conditionExpression.argument.first();
+		                    missing.remove(mcs);
+	                    }
+	                }  
+	            }
+            }
+            // Find if a missing variable can be used as a loop
+            for (mcs in missing) {
+                for (match in matched) {
+                    var primaryMatch = mq.distinctArguments
+                        .select(da | da.primaryArgument.exists(pa | pa.type == mcs.type)
+                                  or mcs.super.exists(sd | da.primaryArgument.exists(pa | pa.type == sd.type)));
+                        
+                    var primary = primaryMatch.selectOne(da | da.secondaryArgument.exists(sa | sa.type = match.type));
+                    // Find a predicate that relates the two types.
+                    if (primary.isDefined()) {
+                        var p = mq.mapping.getAllPredicates()
+                            .selectOne(p | p.conditionExpression.isSimpleAttributeNavigation()
+                                       and p.conditionExpression.source.source.type == mcs.type
+                                       and primary.secondaryArgument.collect(sa | sa.type).includes(p.conditionExpression.argument.first().type));
+                        
+                        if (p.isDefined()) {   
+                            if (p.conditionExpression.source.referredProperty.opposite.isDefined()
+                                    and p.conditionExpression.source.referredProperty.opposite.isComposite) {
+	                            // mq.createBindings(qin, mn, nav);
+	                            primary.secondaryArgument.selectOne(sa | sa.type == match.type).type.name.println(mcs.type.name + " derived from ");
+	                            var mb = new qvts!MappingBinding;
+	                            mb.mappingAction = mq;
+	                            var bindingEx = new qvti!PropertyCallExp;
+	                            bindingEx.referredProperty = p.conditionExpression.source.referredProperty.opposite;
+	                            var sourceEx = new qvti!VariableExp;
+	                            sourceEx.referredVariable = p.conditionExpression.argument.first().referredVariable;
+	                            bindingEx.source = sourceEx;
+	                            mb.bindingExp = bindingEx;
+	                            mb.boundVariable = p.conditionExpression.source.source.referredVariable;
+	                            //missing.remove(mcs);
+                                nested = true;
+                            }
+                        }    
+                    }
+                }
+            }
+            if (nested) {
+                mq.parent = mn;
+                break;
+            }
+        }
+    }
+    if (not nested) {
+        // Nest in the root mapping
     }
 }
-*/
+
+
 "Done".println();
 
 // Create the bindings. 
@@ -119,12 +232,16 @@ for (map in ordering.keySet()) {
  *  SEE ALSO
  */
 @cached 
-operation qvti!Variable getClassDatum() : Sequence {
+operation qvti!Variable getClassDatum() : qvts!ClassDatum {
 	
-	if (self.type.isAbstract) {
-	   return self.type.getSubtypeClassDatum();
-	}
-	return self.type.getClassDatum().asSequence();
+	var d = new qvts!ClassDatum;
+    d.type = self.type;
+	d.variable = self;
+	//if (self.type.isAbstract) {
+	//   return self.type.getSubtypeClassDatum();
+	//}
+	//return self.type.getClassDatum().asSequence();
+	return d;
 }
 
 /****o* getPropertyDatum
@@ -149,38 +266,10 @@ operation qvti!Assignment getPropertyDatum() : qvts!PropertyDatum {
 	return d;
 }
 
-
-/****o* getClassDatum
- * NAME
- *  getClassDatum - Returns the ClassDatum for a given type. If the type is
- *  abstract the function return the ClassDatum of all the sub-types.  
- *
- * CONTEXT
- *  qvti!Type  The type
- * ANNOTATIONS
- *  cached
- * RETURNS
- *  qvts!ClassDatum The class datum
- *  SEE ALSO
- */
-@cached
-operation qvti!Type getClassDatum() : qvts!ClassDatum {
-	//self.name.println("getClassDatum ");
-	// KLUDGE: If not cached annotation have to check for previous definition
-	//if (qvts!ClassDatum.all().exists(d | d.type == self)) {
-	//	"Exists".println();
-    //    return qvts!ClassDatum.all().selectOne(d | d.type == self);
-    //} else {
-    	var d = new qvts!ClassDatum;
-		d.type = self;
-        return d;
-    //}
-}
-
 /****o* getSubtypeClassDatum
  * NAME
- *  getSubtypeClassDatum - Returns the list of ClassDatum for all the subtypes
- *  of the given type.  
+ *  getSubtypeClassDatums - Returns the list of ClassDatums for all the subtypes
+ *  of the type of the ClassDatum given type.  
  *
  * CONTEXT
  *  qvti!Type  The type
@@ -191,8 +280,12 @@ operation qvti!Type getClassDatum() : qvts!ClassDatum {
  *  SEE ALSO
  */
 @cached
-operation qvti!Type getSubtypeClassDatum() : Sequence {
-    return self.getPackage().getOwnedType().select(t | t.getSuperClass().includes(self)).collect(t | t.getClassDatum()).asSequence();
+operation qvts!ClassDatum getSubtypeClassDatums() : Sequence {
+    var subDatums = self.type.getPackage().getOwnedType().select(t | t.getSuperClass().includes(self)).collect(t | t.getClassDatum()).asSequence();
+    for (cd in subDatums) {
+        cd.super.add(ad);
+    } 
+    return subDatums;
 }
 
 /****o* derivedVariables
@@ -275,8 +368,7 @@ operation qvts!Schedule defineMapOrdering() {
     while (not queue.isEmpty()) {
         var n = queue.first();
         queue.remove(n);
-        // Do stuff with n
-        n.println("n ");
+        //n.println("n ");
         //  Find all the mappings that have an output node if this type
         for (ma in self.actions.select(a : qvts!MappingAction | a.results.exists(r | r.type.name = n.EClassName))) {
             // Find the predecesors and linearize
@@ -286,10 +378,9 @@ operation qvts!Schedule defineMapOrdering() {
     }
     
     "Ordering".println();
-    for (ma in self.actions.select(a : qvts!MappingAction | true).sortBy(ma | ma.count)) {
-        ma.mapping.name.println(ma.count + ":");
+    for (ma in self.actions.select(a : qvts!MappingAction | true).sortBy(ma | ma.index)) {
+        ma.mapping.name.println(ma.index + ":");
     }
-    
     " ".println();
     " ".println();
 
@@ -301,7 +392,7 @@ operation qvts!MappingAction getMappingOrderIndex(visited) {
     var index : Integer;
     // Find all the mappings that are predecesor to this one
     var pre = self.getPredecesorMappings();
-    pre.collect(p | p.mapping.name).println(self.mapping.name + " pre: ");
+    //pre.collect(p | p.mapping.name).println(self.mapping.name + " pre: ");
     while (pre.size() > 0) {
         var pma = pre.first();
         if (not visited.includes(pma)) {        
@@ -311,9 +402,9 @@ operation qvts!MappingAction getMappingOrderIndex(visited) {
         }    
         pre.remove(pma);
     }
-    if (self.count == 0) {
-        index = qvts!MappingAction.all().sortBy(ma | ma.count).last().count + 1;
-        self.count = index;
+    if (self.index == 0) {
+        index = qvts!MappingAction.all().sortBy(ma | ma.index).last().index + 1;
+        self.index = index;
     }
 }
 
@@ -327,7 +418,6 @@ operation qvts!MappingAction getMappingOrderIndex(visited) {
  *     qvts!MappingAction The maping action to query (mapping B) 
  *  RESULT
  *    Sequence  - The list of predecessor MappingActions
- *   TODO
  *  SEE ALSO
  *
  */
@@ -338,3 +428,28 @@ operation qvts!MappingAction getPredecesorMappings() : Sequence {
         .collect(a | a.sources).flatten();
 }
 
+/****o* getAvailableDatums
+ *  NAME
+ *    getAvailableDatums -- get the list of available datums in the mapping
+ *  FUNCTION
+ *   The available datums of a MappingAction are the union of its arguments,
+ *  results and the available datums of its parent.
+ *  
+ *  CONTEXT
+ *     qvts!MappingAction The maping action to query (mapping B) 
+ *  RESULT
+ *    Sequence  - The list of available datums
+ *  SEE ALSO
+ *
+ */
+operation qvts!MappingAction getAvailableDatums() : Set {
+     // TODO implement the derived arguments attribute!
+     var result = self.distinctArguments
+        .collect(da | da.secondaryArgument.including(da.primaryArgument))
+        .includingAll(self.results);
+    if (self.parent.isDefined()) {
+        result.addAll(self.parent.getAvailableDatums());
+    }
+    return result.flatten().asSet();
+    
+}
