@@ -31,6 +31,7 @@ Workflow {
 		platformUri = "${QVTimperativeRuntimeProject}/.."
    		scanClassPath = true
 		registerGeneratedEPackage = "org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.QVTimperativeCSPackage"
+		registerGenModelFile = "platform:/resource/org.eclipse.qvtd.xtext.qvtimperative/model/QVTimperativeCS.genmodel"
 	}
 	
 	component = DirectoryCleaner {
@@ -62,7 +63,7 @@ Workflow {
 //			}
 			
 			// the serialization component
-			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
+			fragment = serializer.SerializerFragment {}
 			
 			// a custom ResourceFactory for use with EMF 
 			fragment = resourceFactory.ResourceFactoryFragment {

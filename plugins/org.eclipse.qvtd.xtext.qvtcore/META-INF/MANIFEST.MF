@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.qvtd.xtext.qvtcore;singleton:=true
-Bundle-Version: 0.11.100.qualifier
+Bundle-Version: 0.12.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -12,13 +12,13 @@ Export-Package: org.eclipse.qvtd.xtext.qvtcore,
  org.eclipse.qvtd.xtext.qvtcore.attributes,
  org.eclipse.qvtd.xtext.qvtcore.cs2as,
  org.eclipse.qvtd.xtext.qvtcore.formatting,
- org.eclipse.qvtd.xtext.qvtcore.parseTreeConstruction,
  org.eclipse.qvtd.xtext.qvtcore.parser.antlr,
  org.eclipse.qvtd.xtext.qvtcore.parser.antlr.internal,
  org.eclipse.qvtd.xtext.qvtcore.qvtcorecs,
  org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.impl,
  org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.util,
  org.eclipse.qvtd.xtext.qvtcore.scoping,
+ org.eclipse.qvtd.xtext.qvtcore.serializer,
  org.eclipse.qvtd.xtext.qvtcore.services,
  org.eclipse.qvtd.xtext.qvtcore.utilities,
  org.eclipse.qvtd.xtext.qvtcore.validation

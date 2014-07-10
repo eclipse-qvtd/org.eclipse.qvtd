@@ -31,6 +31,7 @@ Workflow {
 		platformUri = "${QVTrelationRuntimeProject}/.."
    		scanClassPath = true
     	registerGeneratedEPackage = "org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.QVTrelationCSPackage"
+		registerGenModelFile = "platform:/resource/org.eclipse.qvtd.xtext.qvtrelation/model/QVTrelationCS.genmodel"
 	}
 	
 	component = DirectoryCleaner {
@@ -62,7 +63,7 @@ Workflow {
 //			}
 			
 			// the serialization component
-			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
+			fragment = serializer.SerializerFragment {}
 			
 			// a custom ResourceFactory for use with EMF 
 			fragment = resourceFactory.ResourceFactoryFragment {

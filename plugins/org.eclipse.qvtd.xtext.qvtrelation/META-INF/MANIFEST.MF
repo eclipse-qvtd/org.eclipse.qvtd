@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.qvtd.xtext.qvtrelation;singleton:=true
-Bundle-Version: 0.11.100.qualifier
+Bundle-Version: 0.12.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -13,13 +13,13 @@ Export-Package: org.eclipse.qvtd.xtext.qvtrelation,
  org.eclipse.qvtd.xtext.qvtrelation.attributes,
  org.eclipse.qvtd.xtext.qvtrelation.cs2as,
  org.eclipse.qvtd.xtext.qvtrelation.formatting,
- org.eclipse.qvtd.xtext.qvtrelation.parseTreeConstruction,
  org.eclipse.qvtd.xtext.qvtrelation.parser.antlr,
  org.eclipse.qvtd.xtext.qvtrelation.parser.antlr.internal,
  org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs,
  org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.impl,
  org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.util,
  org.eclipse.qvtd.xtext.qvtrelation.scoping,
+ org.eclipse.qvtd.xtext.qvtrelation.serializer,
  org.eclipse.qvtd.xtext.qvtrelation.services,
  org.eclipse.qvtd.xtext.qvtrelation.utilities,
  org.eclipse.qvtd.xtext.qvtrelation.validation
