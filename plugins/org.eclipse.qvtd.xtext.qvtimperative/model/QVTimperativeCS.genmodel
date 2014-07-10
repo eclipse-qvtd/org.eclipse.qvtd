@@ -14,7 +14,8 @@
   </genAnnotations>
   <foreignModel>QVTimperativeCS.ecore</foreignModel>
   <genPackages prefix="QVTimperativeCS" basePackage="org.eclipse.qvtd.xtext.qvtimperative"
-      resource="XML" disposableProviderFactory="true" fileExtensions="qvti" ecorePackage="QVTimperativeCS.ecore#/">
+      resource="XML" disposableProviderFactory="true" contentTypeIdentifier="org.eclipse.qvtd.xtext.qvtimperative"
+      fileExtensions="qvti" ecorePackage="QVTimperativeCS.ecore#/">
     <genClasses ecoreClass="QVTimperativeCS.ecore#//MappingCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCS/mappingCalls"/>
     </genClasses>

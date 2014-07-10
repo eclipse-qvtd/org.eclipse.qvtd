@@ -15,6 +15,27 @@
             genModel="model/QVTcoreCS.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.content_parser">
+      <!-- @generated QVTcoreCS -->
+      <parser
+            contentTypeIdentifier="org.eclipse.qvtd.xtext.qvtcore"
+            class="org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.util.QVTcoreCSResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.core.contenttype.contentTypes">
+      <!-- @generated QVTcoreCS -->
+      <content-type
+            base-type="org.eclipse.core.runtime.xml"
+            file-extensions="qvtc"
+            id="org.eclipse.qvtd.xtext.qvtcore"
+            name="%_UI_QVTcoreCS_content_type"
+            priority="normal">
+         <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
+            <parameter name="namespace" value="http://www.eclipse.org/qvt/0.9/QVTcoreCST"/>
+         </describer>
+      </content-type>
+   </extension>
+
    <extension point="org.eclipse.emf.ecore.extension_parser">
       <!-- @generated QVTcoreCS NOT-->
       <!--parser

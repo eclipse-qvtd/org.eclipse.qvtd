@@ -79,6 +79,8 @@ public class QVTcoreBaseFormatter extends AbstractEssentialOCLFormatter {
 		c.setLinewrap().before(a.getRightParenthesisKeyword_0_5());	
 		c.setLinewrap().after(a.getRightParenthesisKeyword_0_5());	
 		c.setIndentation(a.getVerticalLineKeyword_0_3(), a.getRightParenthesisKeyword_0_5());
+		c.setNoSpace().around(a.getLeftParenthesisKeyword_0_0());
+		c.setNoSpace().before(a.getRightParenthesisKeyword_0_5());
 		c.setNoSpace().between(a.getLeftParenthesisKeyword_0_0(), a.getVerticalLineKeyword_0_3());
 		c.setNoSpace().between(a.getVerticalLineKeyword_0_3(), a.getRightParenthesisKeyword_0_5());
 		c.setNoSpace().between(a.getLeftParenthesisKeyword_0_0(), a.getRightParenthesisKeyword_0_5());

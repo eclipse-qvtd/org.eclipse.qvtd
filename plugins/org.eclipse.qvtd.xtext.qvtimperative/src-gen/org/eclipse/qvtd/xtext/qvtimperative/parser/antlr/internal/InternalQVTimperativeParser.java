@@ -203,7 +203,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTopLevelCS"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:82:1: ruleTopLevelCS returns [EObject current=null] : ( ( ( (lv_ownedImport_0_0= ruleImportCS ) ) | ( (lv_ownedLibrary_1_0= ruleLibraryCS ) ) )* ( ( (lv_mappings_2_0= ruleMappingCS ) ) | ( (lv_transformations_3_0= ruleTransformationCS ) ) | ( (lv_queries_4_0= ruleQueryCS ) ) )* ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:82:1: ruleTopLevelCS returns [EObject current=null] : ( ( ( (lv_ownedImport_0_0= ruleImportCS ) ) | ( (lv_ownedLibrary_1_0= ruleLibraryCS ) ) )* ( ( (lv_transformations_2_0= ruleTransformationCS ) ) | ( (lv_mappings_3_0= ruleMappingCS ) ) | ( (lv_queries_4_0= ruleQueryCS ) ) )* ) ;
     public final EObject ruleTopLevelCS() throws RecognitionException {
         EObject current = null;
 
@@ -211,9 +211,9 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
         EObject lv_ownedLibrary_1_0 = null;
 
-        EObject lv_mappings_2_0 = null;
+        EObject lv_transformations_2_0 = null;
 
-        EObject lv_transformations_3_0 = null;
+        EObject lv_mappings_3_0 = null;
 
         EObject lv_queries_4_0 = null;
 
@@ -221,11 +221,11 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:85:28: ( ( ( ( (lv_ownedImport_0_0= ruleImportCS ) ) | ( (lv_ownedLibrary_1_0= ruleLibraryCS ) ) )* ( ( (lv_mappings_2_0= ruleMappingCS ) ) | ( (lv_transformations_3_0= ruleTransformationCS ) ) | ( (lv_queries_4_0= ruleQueryCS ) ) )* ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:86:1: ( ( ( (lv_ownedImport_0_0= ruleImportCS ) ) | ( (lv_ownedLibrary_1_0= ruleLibraryCS ) ) )* ( ( (lv_mappings_2_0= ruleMappingCS ) ) | ( (lv_transformations_3_0= ruleTransformationCS ) ) | ( (lv_queries_4_0= ruleQueryCS ) ) )* )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:85:28: ( ( ( ( (lv_ownedImport_0_0= ruleImportCS ) ) | ( (lv_ownedLibrary_1_0= ruleLibraryCS ) ) )* ( ( (lv_transformations_2_0= ruleTransformationCS ) ) | ( (lv_mappings_3_0= ruleMappingCS ) ) | ( (lv_queries_4_0= ruleQueryCS ) ) )* ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:86:1: ( ( ( (lv_ownedImport_0_0= ruleImportCS ) ) | ( (lv_ownedLibrary_1_0= ruleLibraryCS ) ) )* ( ( (lv_transformations_2_0= ruleTransformationCS ) ) | ( (lv_mappings_3_0= ruleMappingCS ) ) | ( (lv_queries_4_0= ruleQueryCS ) ) )* )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:86:1: ( ( ( (lv_ownedImport_0_0= ruleImportCS ) ) | ( (lv_ownedLibrary_1_0= ruleLibraryCS ) ) )* ( ( (lv_mappings_2_0= ruleMappingCS ) ) | ( (lv_transformations_3_0= ruleTransformationCS ) ) | ( (lv_queries_4_0= ruleQueryCS ) ) )* )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:86:2: ( ( (lv_ownedImport_0_0= ruleImportCS ) ) | ( (lv_ownedLibrary_1_0= ruleLibraryCS ) ) )* ( ( (lv_mappings_2_0= ruleMappingCS ) ) | ( (lv_transformations_3_0= ruleTransformationCS ) ) | ( (lv_queries_4_0= ruleQueryCS ) ) )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:86:1: ( ( ( (lv_ownedImport_0_0= ruleImportCS ) ) | ( (lv_ownedLibrary_1_0= ruleLibraryCS ) ) )* ( ( (lv_transformations_2_0= ruleTransformationCS ) ) | ( (lv_mappings_3_0= ruleMappingCS ) ) | ( (lv_queries_4_0= ruleQueryCS ) ) )* )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:86:2: ( ( (lv_ownedImport_0_0= ruleImportCS ) ) | ( (lv_ownedLibrary_1_0= ruleLibraryCS ) ) )* ( ( (lv_transformations_2_0= ruleTransformationCS ) ) | ( (lv_mappings_3_0= ruleMappingCS ) ) | ( (lv_queries_4_0= ruleQueryCS ) ) )*
             {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:86:2: ( ( (lv_ownedImport_0_0= ruleImportCS ) ) | ( (lv_ownedLibrary_1_0= ruleLibraryCS ) ) )*
             loop1:
@@ -330,17 +330,17 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:123:4: ( ( (lv_mappings_2_0= ruleMappingCS ) ) | ( (lv_transformations_3_0= ruleTransformationCS ) ) | ( (lv_queries_4_0= ruleQueryCS ) ) )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:123:4: ( ( (lv_transformations_2_0= ruleTransformationCS ) ) | ( (lv_mappings_3_0= ruleMappingCS ) ) | ( (lv_queries_4_0= ruleQueryCS ) ) )*
             loop2:
             do {
                 int alt2=4;
                 switch ( input.LA(1) ) {
-                case 19:
+                case 39:
                     {
                     alt2=1;
                     }
                     break;
-                case 39:
+                case 19:
                     {
                     alt2=2;
                     }
@@ -355,21 +355,21 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:123:5: ( (lv_mappings_2_0= ruleMappingCS ) )
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:123:5: ( (lv_transformations_2_0= ruleTransformationCS ) )
             	    {
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:123:5: ( (lv_mappings_2_0= ruleMappingCS ) )
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:124:1: (lv_mappings_2_0= ruleMappingCS )
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:123:5: ( (lv_transformations_2_0= ruleTransformationCS ) )
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:124:1: (lv_transformations_2_0= ruleTransformationCS )
             	    {
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:124:1: (lv_mappings_2_0= ruleMappingCS )
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:125:3: lv_mappings_2_0= ruleMappingCS
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:124:1: (lv_transformations_2_0= ruleTransformationCS )
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:125:3: lv_transformations_2_0= ruleTransformationCS
             	    {
             	    if ( state.backtracking==0 ) {
             	       
-            	      	        newCompositeNode(grammarAccess.getTopLevelCSAccess().getMappingsMappingCSParserRuleCall_1_0_0()); 
+            	      	        newCompositeNode(grammarAccess.getTopLevelCSAccess().getTransformationsTransformationCSParserRuleCall_1_0_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleMappingCS_in_ruleTopLevelCS189);
-            	    lv_mappings_2_0=ruleMappingCS();
+            	    pushFollow(FollowSets000.FOLLOW_ruleTransformationCS_in_ruleTopLevelCS189);
+            	    lv_transformations_2_0=ruleTransformationCS();
 
             	    state._fsp--;
             	    if (state.failed) return current;
@@ -380,9 +380,9 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
             	      	        }
             	             		add(
             	             			current, 
-            	             			"mappings",
-            	              		lv_mappings_2_0, 
-            	              		"MappingCS");
+            	             			"transformations",
+            	              		lv_transformations_2_0, 
+            	              		"TransformationCS");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -396,21 +396,21 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:142:6: ( (lv_transformations_3_0= ruleTransformationCS ) )
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:142:6: ( (lv_mappings_3_0= ruleMappingCS ) )
             	    {
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:142:6: ( (lv_transformations_3_0= ruleTransformationCS ) )
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:143:1: (lv_transformations_3_0= ruleTransformationCS )
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:142:6: ( (lv_mappings_3_0= ruleMappingCS ) )
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:143:1: (lv_mappings_3_0= ruleMappingCS )
             	    {
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:143:1: (lv_transformations_3_0= ruleTransformationCS )
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:144:3: lv_transformations_3_0= ruleTransformationCS
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:143:1: (lv_mappings_3_0= ruleMappingCS )
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:144:3: lv_mappings_3_0= ruleMappingCS
             	    {
             	    if ( state.backtracking==0 ) {
             	       
-            	      	        newCompositeNode(grammarAccess.getTopLevelCSAccess().getTransformationsTransformationCSParserRuleCall_1_1_0()); 
+            	      	        newCompositeNode(grammarAccess.getTopLevelCSAccess().getMappingsMappingCSParserRuleCall_1_1_0()); 
             	      	    
             	    }
-            	    pushFollow(FollowSets000.FOLLOW_ruleTransformationCS_in_ruleTopLevelCS216);
-            	    lv_transformations_3_0=ruleTransformationCS();
+            	    pushFollow(FollowSets000.FOLLOW_ruleMappingCS_in_ruleTopLevelCS216);
+            	    lv_mappings_3_0=ruleMappingCS();
 
             	    state._fsp--;
             	    if (state.failed) return current;
@@ -421,9 +421,9 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
             	      	        }
             	             		add(
             	             			current, 
-            	             			"transformations",
-            	              		lv_transformations_3_0, 
-            	              		"TransformationCS");
+            	             			"mappings",
+            	              		lv_mappings_3_0, 
+            	              		"MappingCS");
             	      	        afterParserOrEnumRuleCall();
             	      	    
             	    }
@@ -18788,37 +18788,37 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
         "\21\uffff}>";
     static final String[] DFA29_transitionS = {
             "\1\1",
-            "\1\2\1\3\2\17\10\uffff\1\7\1\uffff\1\16\1\11\3\uffff\1\17\3"+
-            "\uffff\1\4\1\17\1\uffff\1\5\1\uffff\1\17\1\6\2\uffff\1\17\1"+
-            "\10\1\12\1\15\1\13\1\14\2\17\15\uffff\16\17\4\uffff\4\17\2\uffff"+
-            "\1\17\3\uffff\2\17",
-            "\1\17\2\uffff\3\17\1\uffff\1\17\5\uffff\1\20\2\17\5\uffff\1"+
-            "\17\1\uffff\15\17\17\uffff\1\17\6\uffff\1\17",
-            "\1\17\2\uffff\3\17\1\uffff\1\17\5\uffff\1\20\2\17\5\uffff\1"+
-            "\17\1\uffff\15\17\17\uffff\1\17\6\uffff\1\17",
-            "\1\17\2\uffff\3\17\1\uffff\1\17\5\uffff\1\20\2\17\5\uffff\1"+
-            "\17\1\uffff\15\17\17\uffff\1\17\6\uffff\1\17",
-            "\1\17\2\uffff\3\17\1\uffff\1\17\5\uffff\1\20\2\17\5\uffff\1"+
-            "\17\1\uffff\15\17\17\uffff\1\17\6\uffff\1\17",
-            "\1\17\2\uffff\3\17\1\uffff\1\17\5\uffff\1\20\2\17\5\uffff\1"+
-            "\17\1\uffff\15\17\17\uffff\1\17\6\uffff\1\17",
-            "\1\17\2\uffff\3\17\1\uffff\1\17\5\uffff\1\20\2\17\5\uffff\1"+
-            "\17\1\uffff\15\17\17\uffff\1\17\6\uffff\1\17",
-            "\1\17\2\uffff\3\17\1\uffff\1\17\5\uffff\1\20\2\17\5\uffff\1"+
-            "\17\1\uffff\15\17\17\uffff\1\17\6\uffff\1\17",
-            "\1\17\2\uffff\3\17\1\uffff\1\17\5\uffff\1\20\2\17\5\uffff\1"+
-            "\17\1\uffff\15\17\17\uffff\1\17\6\uffff\1\17",
-            "\1\17\2\uffff\3\17\1\uffff\1\17\5\uffff\1\20\2\17\5\uffff\1"+
-            "\17\1\uffff\15\17\17\uffff\1\17\6\uffff\1\17",
+            "\1\2\1\3\2\17\10\uffff\1\7\1\uffff\1\16\1\11\3\uffff\1\17"+
+            "\3\uffff\1\4\1\17\1\uffff\1\5\1\uffff\1\17\1\6\2\uffff\1\17"+
+            "\1\10\1\12\1\15\1\13\1\14\2\17\15\uffff\16\17\4\uffff\4\17\2"+
+            "\uffff\1\17\3\uffff\2\17",
+            "\1\17\2\uffff\3\17\1\uffff\1\17\5\uffff\1\20\2\17\5\uffff"+
+            "\1\17\1\uffff\15\17\17\uffff\1\17\6\uffff\1\17",
+            "\1\17\2\uffff\3\17\1\uffff\1\17\5\uffff\1\20\2\17\5\uffff"+
+            "\1\17\1\uffff\15\17\17\uffff\1\17\6\uffff\1\17",
+            "\1\17\2\uffff\3\17\1\uffff\1\17\5\uffff\1\20\2\17\5\uffff"+
+            "\1\17\1\uffff\15\17\17\uffff\1\17\6\uffff\1\17",
+            "\1\17\2\uffff\3\17\1\uffff\1\17\5\uffff\1\20\2\17\5\uffff"+
+            "\1\17\1\uffff\15\17\17\uffff\1\17\6\uffff\1\17",
+            "\1\17\2\uffff\3\17\1\uffff\1\17\5\uffff\1\20\2\17\5\uffff"+
+            "\1\17\1\uffff\15\17\17\uffff\1\17\6\uffff\1\17",
+            "\1\17\2\uffff\3\17\1\uffff\1\17\5\uffff\1\20\2\17\5\uffff"+
+            "\1\17\1\uffff\15\17\17\uffff\1\17\6\uffff\1\17",
+            "\1\17\2\uffff\3\17\1\uffff\1\17\5\uffff\1\20\2\17\5\uffff"+
+            "\1\17\1\uffff\15\17\17\uffff\1\17\6\uffff\1\17",
+            "\1\17\2\uffff\3\17\1\uffff\1\17\5\uffff\1\20\2\17\5\uffff"+
+            "\1\17\1\uffff\15\17\17\uffff\1\17\6\uffff\1\17",
+            "\1\17\2\uffff\3\17\1\uffff\1\17\5\uffff\1\20\2\17\5\uffff"+
+            "\1\17\1\uffff\15\17\17\uffff\1\17\6\uffff\1\17",
             "\2\20\12\uffff\1\20\1\uffff\2\20\1\uffff\1\17\2\uffff\3\17"+
             "\1\20\1\17\1\uffff\1\20\2\uffff\2\20\2\17\5\20\1\17\1\uffff"+
             "\15\17\17\uffff\1\17\6\uffff\1\17",
-            "\1\17\2\uffff\3\17\1\uffff\1\17\5\uffff\1\20\2\17\5\uffff\1"+
-            "\17\1\uffff\15\17\17\uffff\1\17\6\uffff\1\17",
-            "\1\17\2\uffff\3\17\1\uffff\1\17\5\uffff\1\20\2\17\5\uffff\1"+
-            "\17\1\uffff\15\17\17\uffff\1\17\6\uffff\1\17",
-            "\1\17\2\uffff\3\17\1\uffff\1\17\5\uffff\1\20\2\17\5\uffff\1"+
-            "\17\1\uffff\15\17\17\uffff\1\17\6\uffff\1\17",
+            "\1\17\2\uffff\3\17\1\uffff\1\17\5\uffff\1\20\2\17\5\uffff"+
+            "\1\17\1\uffff\15\17\17\uffff\1\17\6\uffff\1\17",
+            "\1\17\2\uffff\3\17\1\uffff\1\17\5\uffff\1\20\2\17\5\uffff"+
+            "\1\17\1\uffff\15\17\17\uffff\1\17\6\uffff\1\17",
+            "\1\17\2\uffff\3\17\1\uffff\1\17\5\uffff\1\20\2\17\5\uffff"+
+            "\1\17\1\uffff\15\17\17\uffff\1\17\6\uffff\1\17",
             "",
             ""
     };
@@ -18874,32 +18874,32 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
             "\2\1\6\1\uffff\1\2\1\7\2\uffff\1\2\1\11\1\13\1\16\1\14\1\15"+
             "\2\2\15\uffff\16\2\4\uffff\4\2\2\uffff\1\2\3\uffff\2\2",
             "",
-            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2\1"+
-            "\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
-            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2\1"+
-            "\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
-            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2\1"+
-            "\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
-            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2\1"+
-            "\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
-            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2\1"+
-            "\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
-            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2\1"+
-            "\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
-            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2\1"+
-            "\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
-            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2\1"+
-            "\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
-            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2\1"+
-            "\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
-            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2\1"+
-            "\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
-            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2\1"+
-            "\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
-            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2\1"+
-            "\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
-            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2\1"+
-            "\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
+            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2"+
+            "\1\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
+            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2"+
+            "\1\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
+            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2"+
+            "\1\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
+            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2"+
+            "\1\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
+            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2"+
+            "\1\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
+            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2"+
+            "\1\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
+            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2"+
+            "\1\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
+            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2"+
+            "\1\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
+            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2"+
+            "\1\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
+            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2"+
+            "\1\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
+            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2"+
+            "\1\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
+            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2"+
+            "\1\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
+            "\1\2\2\uffff\3\2\1\uffff\1\2\5\uffff\1\20\2\2\5\uffff\1\2"+
+            "\1\uffff\15\2\17\uffff\1\2\6\uffff\1\2",
             ""
     };
 
@@ -19445,8 +19445,8 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
         public static final BitSet FOLLOW_EOF_in_entryRuleTopLevelCS91 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleImportCS_in_ruleTopLevelCS138 = new BitSet(new long[]{0x000000E200080002L});
         public static final BitSet FOLLOW_ruleLibraryCS_in_ruleTopLevelCS165 = new BitSet(new long[]{0x000000E200080002L});
-        public static final BitSet FOLLOW_ruleMappingCS_in_ruleTopLevelCS189 = new BitSet(new long[]{0x000000C000080002L});
-        public static final BitSet FOLLOW_ruleTransformationCS_in_ruleTopLevelCS216 = new BitSet(new long[]{0x000000C000080002L});
+        public static final BitSet FOLLOW_ruleTransformationCS_in_ruleTopLevelCS189 = new BitSet(new long[]{0x000000C000080002L});
+        public static final BitSet FOLLOW_ruleMappingCS_in_ruleTopLevelCS216 = new BitSet(new long[]{0x000000C000080002L});
         public static final BitSet FOLLOW_ruleQueryCS_in_ruleTopLevelCS243 = new BitSet(new long[]{0x000000C000080002L});
         public static final BitSet FOLLOW_ruleDirectionCS_in_entryRuleDirectionCS281 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleDirectionCS291 = new BitSet(new long[]{0x0000000000000002L});

@@ -2537,15 +2537,15 @@ rule__TopLevelCS__Alternatives_1
     }
 :
 (
-{ before(grammarAccess.getTopLevelCSAccess().getMappingsAssignment_1_0()); }
-(rule__TopLevelCS__MappingsAssignment_1_0)
-{ after(grammarAccess.getTopLevelCSAccess().getMappingsAssignment_1_0()); }
+{ before(grammarAccess.getTopLevelCSAccess().getTransformationsAssignment_1_0()); }
+(rule__TopLevelCS__TransformationsAssignment_1_0)
+{ after(grammarAccess.getTopLevelCSAccess().getTransformationsAssignment_1_0()); }
 )
 
     |(
-{ before(grammarAccess.getTopLevelCSAccess().getTransformationsAssignment_1_1()); }
-(rule__TopLevelCS__TransformationsAssignment_1_1)
-{ after(grammarAccess.getTopLevelCSAccess().getTransformationsAssignment_1_1()); }
+{ before(grammarAccess.getTopLevelCSAccess().getMappingsAssignment_1_1()); }
+(rule__TopLevelCS__MappingsAssignment_1_1)
+{ after(grammarAccess.getTopLevelCSAccess().getMappingsAssignment_1_1()); }
 )
 
     |(
@@ -14912,14 +14912,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__TopLevelCS__MappingsAssignment_1_0
+rule__TopLevelCS__TransformationsAssignment_1_0
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getTopLevelCSAccess().getMappingsMappingCSParserRuleCall_1_0_0()); }
-	ruleMappingCS{ after(grammarAccess.getTopLevelCSAccess().getMappingsMappingCSParserRuleCall_1_0_0()); }
+{ before(grammarAccess.getTopLevelCSAccess().getTransformationsTransformationCSParserRuleCall_1_0_0()); }
+	ruleTransformationCS{ after(grammarAccess.getTopLevelCSAccess().getTransformationsTransformationCSParserRuleCall_1_0_0()); }
 )
 
 ;
@@ -14927,14 +14927,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__TopLevelCS__TransformationsAssignment_1_1
+rule__TopLevelCS__MappingsAssignment_1_1
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getTopLevelCSAccess().getTransformationsTransformationCSParserRuleCall_1_1_0()); }
-	ruleTransformationCS{ after(grammarAccess.getTopLevelCSAccess().getTransformationsTransformationCSParserRuleCall_1_1_0()); }
+{ before(grammarAccess.getTopLevelCSAccess().getMappingsMappingCSParserRuleCall_1_1_0()); }
+	ruleMappingCS{ after(grammarAccess.getTopLevelCSAccess().getMappingsMappingCSParserRuleCall_1_1_0()); }
 )
 
 ;

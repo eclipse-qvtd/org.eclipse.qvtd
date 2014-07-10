@@ -13,6 +13,27 @@
             genModel="model/QVTrelationCS.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.content_parser">
+      <!-- @generated QVTrelationCS -->
+      <parser
+            contentTypeIdentifier="org.eclipse.qvtd.xtext.qvtrelation"
+            class="org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.util.QVTrelationCSResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.core.contenttype.contentTypes">
+      <!-- @generated QVTrelationCS -->
+      <content-type
+            base-type="org.eclipse.core.runtime.xml"
+            file-extensions="qvtr"
+            id="org.eclipse.qvtd.xtext.qvtrelation"
+            name="%_UI_QVTrelationCS_content_type"
+            priority="normal">
+         <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
+            <parameter name="namespace" value="http://www.eclipse.org/qvt/0.9/QVTrelationCST"/>
+         </describer>
+      </content-type>
+   </extension>
+
    <extension point="org.eclipse.emf.ecore.extension_parser">
       <!-- @generated QVTrelationCS NOT-->
       <!--parser

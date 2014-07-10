@@ -750,7 +750,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	
 	/**
 	 * Constraint:
-	 *     ((ownedImport+=ImportCS | ownedLibrary+=LibraryCS)* (mappings+=MappingCS | transformations+=TransformationCS | queries+=QueryCS)*)
+	 *     ((ownedImport+=ImportCS | ownedLibrary+=LibraryCS)* (transformations+=TransformationCS | mappings+=MappingCS | queries+=QueryCS)*)
 	 */
 	protected void sequence_TopLevelCS(EObject context, TopLevelCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

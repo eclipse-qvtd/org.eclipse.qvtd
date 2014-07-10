@@ -205,8 +205,8 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getSelfExpCSAccess().getGroup(), "rule__SelfExpCS__Group__0");
 					put(grammarAccess.getTopLevelCSAccess().getOwnedImportAssignment_0_0(), "rule__TopLevelCS__OwnedImportAssignment_0_0");
 					put(grammarAccess.getTopLevelCSAccess().getOwnedLibraryAssignment_0_1(), "rule__TopLevelCS__OwnedLibraryAssignment_0_1");
-					put(grammarAccess.getTopLevelCSAccess().getMappingsAssignment_1_0(), "rule__TopLevelCS__MappingsAssignment_1_0");
-					put(grammarAccess.getTopLevelCSAccess().getTransformationsAssignment_1_1(), "rule__TopLevelCS__TransformationsAssignment_1_1");
+					put(grammarAccess.getTopLevelCSAccess().getTransformationsAssignment_1_0(), "rule__TopLevelCS__TransformationsAssignment_1_0");
+					put(grammarAccess.getTopLevelCSAccess().getMappingsAssignment_1_1(), "rule__TopLevelCS__MappingsAssignment_1_1");
 					put(grammarAccess.getTopLevelCSAccess().getQueriesAssignment_1_2(), "rule__TopLevelCS__QueriesAssignment_1_2");
 					put(grammarAccess.getDirectionCSAccess().getNameAssignment_1(), "rule__DirectionCS__NameAssignment_1");
 					put(grammarAccess.getDirectionCSAccess().getImportsAssignment_2_1(), "rule__DirectionCS__ImportsAssignment_2_1");

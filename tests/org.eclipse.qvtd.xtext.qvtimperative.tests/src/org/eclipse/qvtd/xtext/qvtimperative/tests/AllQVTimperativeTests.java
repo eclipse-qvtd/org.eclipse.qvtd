@@ -30,6 +30,7 @@ public class AllQVTimperativeTests extends TestCase
 		result.addTestSuite(QVTiEditorTests.class);
 		result.addTestSuite(QVTiInterpreterTests.class);
 		result.addTestSuite(QVTiCompilerTests.class);
+		result.addTestSuite(QVTiSerializeTests.class);
 		return result;
 	}
 
