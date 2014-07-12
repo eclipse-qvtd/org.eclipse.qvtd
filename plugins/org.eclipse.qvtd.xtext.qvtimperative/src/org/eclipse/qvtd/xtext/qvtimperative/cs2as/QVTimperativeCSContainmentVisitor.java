@@ -20,6 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
+import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
@@ -90,6 +91,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	public Continuation<?> visitMappingCallCS(@NonNull MappingCallCS csElement) {
 		@NonNull MappingCall pivotElement = context.refreshModelElement(MappingCall.class, QVTimperativePackage.Literals.MAPPING_CALL, csElement);
 		context.refreshPivotList(MappingCallBinding.class, pivotElement.getBinding(), csElement.getBindings());
+		context.refreshComments(pivotElement, csElement);
 		return null;
 	}
 
@@ -97,6 +99,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	public Continuation<?> visitMappingCallBindingCS(@NonNull MappingCallBindingCS csElement) {
 		@NonNull MappingCallBinding pivotElement = context.refreshModelElement(MappingCallBinding.class, QVTimperativePackage.Literals.MAPPING_CALL_BINDING, csElement);
 		pivotElement.setIsLoop(csElement.isIsLoop());
+		context.refreshComments(pivotElement, csElement);
 		return null;
 	}
 
@@ -118,8 +121,8 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		}
 		//
 		Resource eResource = csElement.eResource();
-		if (eResource != null) {
-			context.installRootElement(eResource, pivotElement);		// Ensure containment viable for imported library type references
+		if (eResource instanceof BaseCSResource) {
+			context.installRootElement((BaseCSResource)eResource, pivotElement);		// Ensure containment viable for imported library type references
 //			importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
 		}
 		//

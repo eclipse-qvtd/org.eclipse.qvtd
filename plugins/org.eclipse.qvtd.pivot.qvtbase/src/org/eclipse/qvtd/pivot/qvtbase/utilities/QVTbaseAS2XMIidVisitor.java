@@ -24,6 +24,12 @@ import org.eclipse.qvtd.pivot.qvtbase.util.AbstractQVTbaseAS2XMIidVisitor;
 
 public class QVTbaseAS2XMIidVisitor extends AbstractQVTbaseAS2XMIidVisitor
 {
+	public static final @NonNull String DOMAIN_PREFIX = "qD."; //$NON-NLS-1$
+	public static final @NonNull String PATTERN_PREFIX = "qP."; //$NON-NLS-1$
+	public static final @NonNull String RULE_PREFIX = "qR."; //$NON-NLS-1$
+	public static final @NonNull String TYPED_MODEL_PREFIX = "qT."; //$NON-NLS-1$
+	public static final @NonNull String VARIABLE_PREFIX = "qV."; //$NON-NLS-1$
+
 	public QVTbaseAS2XMIidVisitor(@NonNull AS2XMIid context) {
 		super(context);
 	}	
@@ -35,7 +41,16 @@ public class QVTbaseAS2XMIidVisitor extends AbstractQVTbaseAS2XMIidVisitor
 
 	@Override
 	public @Nullable Boolean visitDomain(@NonNull Domain object) {
-		return false;
+		String name = object.getName();
+		if (name != null) {
+			s.append(DOMAIN_PREFIX);
+			appendParent(object);
+			appendName(name);
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	@Override
@@ -55,7 +70,16 @@ public class QVTbaseAS2XMIidVisitor extends AbstractQVTbaseAS2XMIidVisitor
 
 	@Override
 	public @Nullable Boolean visitTypedModel(@NonNull TypedModel object) {
-		return false;
+		String name = object.getName();
+		if (name != null) {
+			s.append(TYPED_MODEL_PREFIX);
+			appendParent(object);
+			appendName(name);
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	@Override

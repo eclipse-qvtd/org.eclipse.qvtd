@@ -15,6 +15,8 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
@@ -37,8 +39,8 @@ public class QVTimperativeAS2CS extends EssentialOCLPivot2CS
 			return new QVTimperativeDeclarationVisitor(converter);
 		}
 
-		public @NonNull BaseReferenceVisitor createReferenceVisitor(@NonNull Pivot2CSConversion converter) {
-			return new EssentialOCLReferenceVisitor(converter);
+		public @NonNull BaseReferenceVisitor createReferenceVisitor(@NonNull Pivot2CSConversion converter, @Nullable Namespace scope) {
+			return new EssentialOCLReferenceVisitor(converter, scope);
 		}
 
 		public @NonNull EClass[] getEClasses() {
@@ -70,6 +72,6 @@ public class QVTimperativeAS2CS extends EssentialOCLPivot2CS
 
 	@Override
 	public @NonNull BaseReferenceVisitor createDefaultReferenceVisitor(@NonNull Pivot2CSConversion converter) {
-		return new EssentialOCLReferenceVisitor(converter);
+		return new EssentialOCLReferenceVisitor(converter, null);
 	}
 }

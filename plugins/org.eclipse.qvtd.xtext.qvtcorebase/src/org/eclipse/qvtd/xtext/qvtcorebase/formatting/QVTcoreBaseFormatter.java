@@ -17,6 +17,7 @@ import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.Dire
 import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.GuardPatternCSElements;
 import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.ImportCSElements;
 import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.QueryCSElements;
+import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.ScopeNameCSElements;
 import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.TransformationCSElements;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
 
@@ -99,12 +100,18 @@ public class QVTcoreBaseFormatter extends AbstractEssentialOCLFormatter {
 
 	protected void configureQueryCS(FormattingConfig c, QueryCSElements a) {
 		c.setNoSpace().around(a.getLeftParenthesisKeyword_3());	
+		c.setNoSpace().around(a.getLeftParenthesisKeyword_3());	
 		c.setNoSpace().before(a.getCommaKeyword_4_1_0());
 		c.setNoSpace().before(a.getRightParenthesisKeyword_5());	
 		setNoSpaceLineWrap(c, a.getSemicolonKeyword_8_0());
 		c.setNoSpace().between(a.getLeftCurlyBracketKeyword_8_1_0(), a.getRightCurlyBracketKeyword_8_1_2());
 		setBraces(c, a.getLeftCurlyBracketKeyword_8_1_0(), a.getRightCurlyBracketKeyword_8_1_2());
 		c.setIndentation(a.getLeftParenthesisKeyword_3(), a.getRightParenthesisKeyword_5());
+	}
+
+	protected void configureScopeNameCS(FormattingConfig c, ScopeNameCSElements a) {
+		c.setNoSpace().around(a.getColonColonKeyword_1());	
+		c.setNoSpace().around(a.getColonColonKeyword_2_1());	
 	}
 
 	protected void configureTransformationCS(FormattingConfig c, TransformationCSElements a) {

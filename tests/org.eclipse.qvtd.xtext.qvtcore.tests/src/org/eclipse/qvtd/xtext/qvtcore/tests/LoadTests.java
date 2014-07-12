@@ -29,30 +29,30 @@ public class LoadTests extends LoadTestCase
 	}
 
 	public void testLoad_expressions_qvtc() throws IOException, InterruptedException {
-		doLoad_Concrete("expressions", "qvtc");
+		doLoad_Concrete("expressions.qvtc");
 	}	
 
 	public void testLoad_mini_qvtc() throws IOException, InterruptedException {
-		doLoad_Concrete("mini", "qvtc");
+		doLoad_Concrete("mini.qvtc");
 	}	
 
 	public void testLoad_uml2rdbms_qvtc() throws IOException, InterruptedException {
-		doLoad_Concrete("uml2rdbms", "qvtc");
+		doLoad_Concrete("uml2rdbms.qvtc");
 	}	
 
 	public void testLoad_uml2rdbms_qvti_qvtc() throws IOException, InterruptedException {
-		doLoad_Concrete("uml2rdbms.qvti", "qvtc");
+		doLoad_Concrete("uml2rdbms.qvti.qvtc");
 	}	
 
 	public void testLoad_uml2rdbms_qvtu_qvtc() throws IOException, InterruptedException {
-		doLoad_Concrete("uml2rdbms.qvtu", "qvtc");
+		doLoad_Concrete("uml2rdbms.qvtu.qvtc");
 	}	
 
 	public void testLoad_HSV2HLS_qvtc() throws IOException, InterruptedException {
-		doLoad_Concrete("HSV2HLS", "qvtc");
+		doLoad_Concrete("HSV2HLS.qvtc");
 	}	
 
 	public void testLoad_Class2RDBMS_qvtc() throws IOException, InterruptedException {
-		doLoad_Concrete("Class2RDBMS/Class2RDBMS", "qvtc");
+		doLoad_Concrete("Class2RDBMS/Class2RDBMS.qvtc");
 	}	
 }

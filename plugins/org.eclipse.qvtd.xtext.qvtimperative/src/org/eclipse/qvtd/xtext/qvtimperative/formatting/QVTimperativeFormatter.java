@@ -70,11 +70,10 @@ public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 		c.setLinewrap(0, 1, 1).after(f.getML_COMMENTRule());
 
 	    configureAssignmentCS(c, f.getAssignmentCSAccess());
-//	    configureBottomPatternCS(c, f.getBottomPatternCSAccess());
 	    configureDirectionCS(c, f.getDirectionCSAccess());
-//	    configureGuardPatternCS(c, f.getGuardPatternCSAccess());
 	    configureImportCS(c, f.getImportCSAccess());
 	    configureQueryCS(c, f.getQueryCSAccess());
+	    configureScopeNameCS(c, f.getScopeNameCSAccess());
 	    configureTransformationCS(c, f.getTransformationCSAccess());
 
 	    {
@@ -114,6 +113,8 @@ public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 			c.setLinewrap().after(a.getRightParenthesisKeyword_3());	
 			c.setNoSpace().after(a.getLeftParenthesisKeyword_1());
 			c.setNoSpace().before(a.getRightParenthesisKeyword_3());
+			//
+			c.setIndentation(a.getLeftParenthesisKeyword_1(), a.getRightParenthesisKeyword_3());
 			c.setNoSpace().between(a.getLeftParenthesisKeyword_1(), a.getRightParenthesisKeyword_3());
 		}
 	    {
@@ -137,6 +138,8 @@ public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 			c.setLinewrap().after(a.getRightParenthesisKeyword_3());	
 			c.setNoSpace().around(a.getLeftParenthesisKeyword_1());
 			c.setNoSpace().before(a.getRightParenthesisKeyword_3());
+			//
+			c.setIndentation(a.getLeftParenthesisKeyword_1(), a.getRightParenthesisKeyword_3());
 			c.setNoSpace().between(a.getLeftParenthesisKeyword_1(), a.getRightParenthesisKeyword_3());
 		}
 	    {
@@ -161,6 +164,8 @@ public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 			c.setLinewrap().after(a.getRightParenthesisKeyword_3());	
 			c.setNoSpace().around(a.getLeftParenthesisKeyword_1());
 			c.setNoSpace().before(a.getRightParenthesisKeyword_3());
+			//
+			c.setIndentation(a.getLeftParenthesisKeyword_1(), a.getRightParenthesisKeyword_3());
 			c.setNoSpace().between(a.getLeftParenthesisKeyword_1(), a.getRightParenthesisKeyword_3());
 		}
 	    {

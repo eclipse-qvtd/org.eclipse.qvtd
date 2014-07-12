@@ -11,21 +11,25 @@
 package org.eclipse.qvtd.xtext.qvtimperative.tests;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
-import org.eclipse.qvtd.xtext.qvtbase.tests.XtextTestCase;
+import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLLinkingService;
+import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.xtext.resource.XtextResource;
@@ -33,8 +37,21 @@ import org.eclipse.xtext.resource.XtextResource;
 /**
  * Tests that check that an Ecore model can be serialized to OCLinEcore.
  */
-public class QVTiSerializeTests extends XtextTestCase
+public class QVTiSerializeTests extends LoadTestCase
 {
+	protected void doSerializeRoundTrip(@NonNull String stem) throws Exception {
+		OCL ocl1 = OCL.newInstance();
+		OCL ocl2 = OCL.newInstance();
+		Resource asResource1 = doLoad_Concrete(ocl1, stem + ".qvti", stem + ".qvtias");
+		URI inputURI = getProjectFileURI(stem + ".qvtias");
+		URI referenceURI = getProjectFileURI(stem + "ref..qvtias");
+		doSerialize(inputURI, stem, referenceURI, null, true, true);
+		Resource asResource3 = doLoad_Concrete(ocl2, stem + ".serialized.qvti", stem + ".serialized.qvtias");
+		((Root)asResource3.getContents().get(0)).setExternalURI(((Root)asResource1.getContents().get(0)).getExternalURI());
+		assertSameModel(asResource1, asResource3);
+		ocl1.dispose();
+		ocl2.dispose();
+	}	
 
 	protected ASResource loadQVTiAS(@NonNull MetaModelManager MetaModelManager, @NonNull URI inputURI) {
 		Resource asResource = MetaModelManager.getExternalResourceSet().getResource(inputURI, true);
@@ -50,26 +67,21 @@ public class QVTiSerializeTests extends XtextTestCase
 
 	public static @NonNull XtextResource pivot2cs(@NonNull OCL ocl, @NonNull ResourceSet resourceSet, @NonNull ASResource asResource, @NonNull URI outputURI) throws IOException {
 		XtextResource xtextResource = DomainUtil.nonNullState((XtextResource) resourceSet.createResource(outputURI, QVTimperativeCSPackage.eCONTENT_TYPE));
-//		ResourceSet csResourceSet = resourceSet; //new ResourceSetImpl();
-//		csResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("cs", new EcoreResourceFactoryImpl());
-//		csResourceSet.getPackageRegistry().put(PivotPackage.eNS_URI, PivotPackage.eINSTANCE);
-//		Resource csResource = csResourceSet.createResource(uri);
-//		URI oclinecoreURI = ecoreResource.getURI().appendFileExtension("oclinecore");
 		ocl.pivot2cs(asResource, (BaseResource) xtextResource);
 		assertNoResourceErrors("Conversion failed", xtextResource);
-//		csResource.save(null);
 		//
-		//	CS save and reload
+		//	CS save
 		//		
 		URI savedURI = DomainUtil.nonNullState(asResource.getURI());
-//		asResource.setURI(PivotUtil.getNonPivotURI(savedURI).appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
 		asResource.setURI(outputURI.trimFileExtension().trimFileExtension().appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
 		asResource.save(null);
 		asResource.setURI(savedURI);
 		
 		assertNoDiagnosticErrors("Concrete Syntax validation failed", xtextResource);
 		try {
-			xtextResource.save(null);
+			HashMap<String, Object> saveOptions = new HashMap<String,Object>();
+			saveOptions.put(XMLResource.OPTION_LINE_DELIMITER, "\n");		// BUG 439440 Xtext ignores this
+			xtextResource.save(saveOptions);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -82,16 +94,6 @@ public class QVTiSerializeTests extends XtextTestCase
 		return xtextResource;
 	}
 
-	public XtextResource doSerialize(@NonNull String stem) throws Exception {
-		return doSerialize(stem, stem, null, true, true);
-	}
-	public XtextResource doSerialize(@NonNull String stem, @NonNull String referenceStem, @Nullable Map<String, Object> options, boolean doCompare, boolean validateSaved) throws Exception {
-		String inputName = stem + ".qvtias";
-		URI inputURI = getProjectFileURI(inputName);
-		String referenceName = referenceStem + ".ecore";
-		URI referenceURI = getProjectFileURI(referenceName);
-		return doSerialize(inputURI, stem, referenceURI, options, doCompare, validateSaved);
-	}
 	@SuppressWarnings("null")
 	public XtextResource doSerialize(@NonNull URI inputURI, @NonNull String stem, @NonNull URI referenceURI, @Nullable Map<String, Object> options, boolean doCompare, boolean validateSaved) throws Exception {
 		ResourceSet resourceSet = new ResourceSetImpl();
@@ -99,73 +101,50 @@ public class QVTiSerializeTests extends XtextTestCase
 		String outputName = stem + ".serialized.qvti";
 		URI outputURI = getProjectFileURI(outputName);
 		//
-		//	Load as Pivot
-		//
-		MetaModelManager metaModelManager = new MetaModelManager();
-		//
-		//	Load Pivot
+		//	Load QVTiAS
 		//		
-		OCL ocl1 = OCL.newInstance();
-		XtextResource xtextResource = null;
+		OCL ocl = OCL.newInstance();
 		try {
-			ASResource asResource = loadQVTiAS(ocl1.getMetaModelManager(), inputURI);
+			ASResource asResource = loadQVTiAS(ocl.getMetaModelManager(), inputURI);
 			assertNoResourceErrors("Normalisation failed", asResource);
 			assertNoValidationErrors("Normalisation invalid", asResource);
 			//
 			//	Pivot to CS
 			//		
-			xtextResource = pivot2cs(ocl1, resourceSet, asResource, outputURI);
+			XtextResource xtextResource = pivot2cs(ocl, resourceSet, asResource, outputURI);
 			resourceSet.getResources().clear();
-		}
-		finally {
-			ocl1.dispose();
-			ocl1 = null;
-		}
-/*		OCL ocl2 = OCL.newInstance();
-		try {
-			MetaModelManager metaModelManager2 = ocl2.getMetaModelManager();
-			BaseCSResource xtextResource2 = (BaseCSResource) resourceSet.createResource(outputURI);
-			MetaModelManagerResourceAdapter.getAdapter(xtextResource2, metaModelManager2);
-			xtextResource2.load(null);
-			Object cs2asErrors = options != null ? options.get("cs2asErrors") : null;
-			if (cs2asErrors != null) {
-				assertResourceErrors("Reload failed", xtextResource2, cs2asErrors.toString());
-			}
-			else {
-				assertNoResourceErrors("Reload failed", xtextResource2);
-				assertNoUnresolvedProxies("unresolved reload proxies", xtextResource2);
-			}
-			//
-			//	CS to Pivot
-			//	
-			String pivotName2 = stem + "2.ecore.oclas";
-			URI pivotURI2 = getProjectFileURI(pivotName2);
-			Resource pivotResource2 = cs2pivot(ocl2, xtextResource2, pivotURI2);
-			//
-			//	Pivot to Ecore
-			//		
-			String inputName2 = stem + "2.ecore";
-			URI ecoreURI2 = getProjectFileURI(inputName2);
-			Resource ecoreResource2 = pivot2ecore(ocl2, pivotResource2, ecoreURI2, validateSaved);
-			//
-			//
-			//
-	//		assertSameModel(asResource, pivotResource2);
-			Resource referenceResource = loadEcore(referenceURI);
-			if (doCompare) {	// Workaround for Bug 354621
-				assertSameModel(referenceResource, ecoreResource2);		
-			}
 			return xtextResource;
 		}
 		finally {
-			ocl2.dispose();
-			ocl2 = null;
-		} */
-		return null;
+			ocl.dispose();
+			ocl = null;
+		}
+	}
+	
+	@Override
+	public void setUp() throws Exception {
+		EssentialOCLLinkingService.DEBUG_RETRY = true;
+		super.setUp();
+		QVTimperativeStandaloneSetup.doSetup();
+	}
+	
+	public void testSerialize_ClassToRDBMS() throws Exception {
+		doSerializeRoundTrip("ClassToRDBMS/ClassToRDBMSSchedule");
+	}
+	
+	public void testSerialize_Expressions() throws Exception {
+		doSerializeRoundTrip("Expressions/Expressions");
 	}
 	
 	public void testSerialize_Graph2GraphHierarchical() throws Exception {
-		QVTimperativeStandaloneSetup.doSetup();
-		doSerialize("Graph2GraphHierarchical/Graph2GraphHierarchical");
+		doSerializeRoundTrip("Graph2GraphHierarchical/Graph2GraphHierarchical");
+	}
+	
+	public void testSerialize_Graph2GraphMinimal() throws Exception {
+		doSerializeRoundTrip("Graph2GraphMinimal/Graph2GraphMinimal");
+	}
+	
+	public void testSerialize_HSV2HLS_qvti() throws Exception {
+		doSerializeRoundTrip("HSV2HLS/HSV2HLS");
 	}
 }

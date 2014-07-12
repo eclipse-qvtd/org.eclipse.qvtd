@@ -17,6 +17,7 @@ import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.attributes.QVTimperativeEnvironmentUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS;
@@ -51,6 +52,14 @@ public class MappingCallBindingCSAttribution extends AbstractAttribution
 						QVTimperativeEnvironmentUtil.addSideGuardVariables(environmentView, mapping, null);
 						QVTimperativeEnvironmentUtil.addMiddleBottomVariables(environmentView, mapping);
 						QVTimperativeEnvironmentUtil.addSideBottomVariables(environmentView, mapping, null);
+						for (TypedModel typedModel : mapping.getTransformation().getModelParameter()) {
+							for (org.eclipse.ocl.examples.pivot.Package usedPackage : typedModel.getUsedPackage()) {
+								if (usedPackage != null) {
+									environmentView.addNamedElement(usedPackage);
+									environmentView.addAllTypes(usedPackage);
+								}
+							}
+						}
 					}
 				}
 			}

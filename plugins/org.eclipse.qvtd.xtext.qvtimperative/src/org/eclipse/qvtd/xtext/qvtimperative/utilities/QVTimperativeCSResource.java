@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
@@ -26,6 +25,7 @@ import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CS;
 import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
@@ -65,13 +65,13 @@ public class QVTimperativeCSResource extends EssentialOCLCSResource
 
 	@Override
 	public @Nullable NamedElement isPathable(@NonNull EObject element) {
-		if (element instanceof RealizedVariable) {
+		if (element instanceof FunctionParameter) {
+			return (FunctionParameter)element;
+		}
+		else if (element instanceof RealizedVariable) {
 			return (RealizedVariable)element;
 		}
 		else if ((element instanceof Variable) && (element.eContainer() instanceof CorePattern)) {
-			return (Variable)element;
-		}
-		else if ((element instanceof Variable) && (element.eContainer() instanceof LoopExp)) {
 			return (Variable)element;
 		}
 		else {
