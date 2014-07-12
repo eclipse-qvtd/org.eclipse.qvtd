@@ -12,11 +12,13 @@ package org.eclipse.qvtd.xtext.qvtimperative.ui;
 
 import java.util.List;
 
+import org.eclipse.qvtd.xtext.qvtimperative.ui.model.QVTimperativeDocumentProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
 
 import com.google.common.collect.Multimap;
 
@@ -50,7 +52,12 @@ public class QVTimperativeUiModule extends AbstractQVTimperativeUiModule
 		return Bug382088Workaround.class;		// BUG 382088
 	}
 
+	@Override
 	public Class<? extends XtextEditor> bindXtextEditor() {
 		return QVTimperativeEditor.class;
+	}
+
+	public Class<? extends XtextDocumentProvider> bindXtextDocumentProvider() {
+		return QVTimperativeDocumentProvider.class;
 	}
 }
