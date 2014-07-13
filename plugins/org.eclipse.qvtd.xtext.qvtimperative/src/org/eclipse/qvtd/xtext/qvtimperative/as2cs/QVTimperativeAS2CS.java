@@ -31,12 +31,16 @@ import org.eclipse.ocl.examples.xtext.essentialocl.pivot2cs.EssentialOCLReferenc
 
 public class QVTimperativeAS2CS extends EssentialOCLPivot2CS
 {	
-	private static final class Factory implements Pivot2CS.Factory
+	private static final class Factory implements Pivot2CS.Factory2
 	{
 		private static @NonNull Pivot2CS.Factory INSTANCE = new Factory();
 
 		public @NonNull QVTimperativeDeclarationVisitor createDeclarationVisitor(@NonNull Pivot2CSConversion converter) {
 			return new QVTimperativeDeclarationVisitor(converter);
+		}
+
+		public @NonNull BaseReferenceVisitor createReferenceVisitor(@NonNull Pivot2CSConversion converter) {
+			return new EssentialOCLReferenceVisitor(converter, null);
 		}
 
 		public @NonNull BaseReferenceVisitor createReferenceVisitor(@NonNull Pivot2CSConversion converter, @Nullable Namespace scope) {
