@@ -581,7 +581,7 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 	
 	/**
 	 * Constraint:
-	 *     (constraints+=AssignmentCS*)
+	 *     ((unrealizedVariables+=UnrealizedVariableCS unrealizedVariables+=UnrealizedVariableCS*)? constraints+=AssignmentCS*)
 	 */
 	protected void sequence_GuardPatternCS(EObject context, GuardPatternCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

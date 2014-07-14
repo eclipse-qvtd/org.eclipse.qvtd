@@ -90,13 +90,9 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		csDomain.setPivot(asCoreDomain);
 		csDomain.setBottomPattern(context.visitDeclaration(BottomPatternCS.class, asCoreDomain.getBottomPattern()));
 		csDomain.setGuardPattern(context.visitDeclaration(GuardPatternCS.class, asCoreDomain.getGuardPattern()));
-		if (asCoreDomain.isIsCheckable()) {
-			csDomain.setCheck(true);
-		}
+		csDomain.setCheck(asCoreDomain.isIsCheckable());
 		csDomain.setDirection(asCoreDomain.getTypedModel());
-		if (asCoreDomain.isIsEnforceable()) {
-			csDomain.setEnforce(true);
-		}
+		csDomain.setEnforce(asCoreDomain.isIsEnforceable());
 		return csDomain;
 	}
 
@@ -156,6 +152,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		csTargetExp.getOwnedOperator().add(csOperator);
 		csAssignment.setTarget(csTargetExp);
 		csAssignment.setInitialiser(createExpCS(asPropertyAssignment.getValue()));
+		csAssignment.setDefault(asPropertyAssignment.isIsDefault());
 		return csAssignment;
 	}
 
@@ -211,6 +208,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 			csAssignment.setTarget(createNameExpCS(asVariable));
 		}
 		csAssignment.setInitialiser(context.visitDeclaration(ExpCS.class, asVariableAssignment.getValue()));
+		csAssignment.setDefault(asVariableAssignment.isIsDefault());
 		return csAssignment;
 	}
 }

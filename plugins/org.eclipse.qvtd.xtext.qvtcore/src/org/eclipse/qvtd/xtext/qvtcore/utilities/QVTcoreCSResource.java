@@ -13,13 +13,23 @@ package org.eclipse.qvtd.xtext.qvtcore.utilities;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
+import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CS;
+import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
+import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
+import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
+import org.eclipse.qvtd.xtext.qvtcore.as2cs.QVTcoreAS2CS;
 import org.eclipse.qvtd.xtext.qvtcore.cs2as.QVTcoreCS2Pivot;
 
 public class QVTcoreCSResource extends EssentialOCLCSResource
@@ -29,6 +39,12 @@ public class QVTcoreCSResource extends EssentialOCLCSResource
 			@NonNull Map<? extends Resource, ? extends ASResource> cs2asResourceMap,
 			@NonNull MetaModelManager metaModelManager) {
 		return new QVTcoreCS2Pivot(cs2asResourceMap, metaModelManager);
+	}
+
+	@Override
+	public @NonNull Pivot2CS createPivot2CS(@NonNull Map<? extends /*BaseCS*/Resource, ? extends ASResource> cs2asResourceMap,
+			@NonNull MetaModelManager metaModelManager) {
+		return new QVTcoreAS2CS(ElementUtil.apiConvert(cs2asResourceMap), metaModelManager);
 	}
 
 	@Override
@@ -45,5 +61,21 @@ public class QVTcoreCSResource extends EssentialOCLCSResource
 	@Override
 	public @NonNull String getEditorName() {
 		return "QVT Core";
+	}
+
+	@Override
+	public @Nullable NamedElement isPathable(@NonNull EObject element) {
+		if (element instanceof FunctionParameter) {
+			return (FunctionParameter)element;
+		}
+		else if (element instanceof RealizedVariable) {
+			return (RealizedVariable)element;
+		}
+		else if ((element instanceof Variable) && (element.eContainer() instanceof CorePattern)) {
+			return (Variable)element;
+		}
+		else {
+			return super.isPathable(element);
+		}
 	}
 }

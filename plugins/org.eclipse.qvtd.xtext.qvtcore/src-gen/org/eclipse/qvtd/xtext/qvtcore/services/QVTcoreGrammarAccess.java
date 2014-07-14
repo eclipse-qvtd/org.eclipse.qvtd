@@ -327,8 +327,8 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 
 	////EnforcementOperationCS: ('creation'|'deletion') ExpCS ';';
 	//GuardPatternCS:
-	//	"(" unrealizedVariables+=UnrealizedVariableCS ("," unrealizedVariables+=UnrealizedVariableCS)* "|"
-	//	constraints+=AssignmentCS* ")" | {GuardPatternCS} "(" constraints+=AssignmentCS* ")";
+	//	{GuardPatternCS} "(" (unrealizedVariables+=UnrealizedVariableCS ("," unrealizedVariables+=UnrealizedVariableCS)* "|")?
+	//	constraints+=AssignmentCS* ")";
 	public QVTcoreBaseGrammarAccess.GuardPatternCSElements getGuardPatternCSAccess() {
 		return gaQVTcoreBase.getGuardPatternCSAccess();
 	}

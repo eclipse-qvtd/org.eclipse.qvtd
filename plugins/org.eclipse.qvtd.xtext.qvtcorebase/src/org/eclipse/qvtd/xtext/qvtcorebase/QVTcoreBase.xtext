@@ -40,11 +40,8 @@ DirectionCS: {DirectionCS} name=UnrestrictedName?
 //EnforcementOperationCS: ('creation'|'deletion') ExpCS ';';
 	
 GuardPatternCS:
-	( '(' unrealizedVariables+=UnrealizedVariableCS (',' unrealizedVariables+=UnrealizedVariableCS)* '|'
+	{GuardPatternCS} '(' (unrealizedVariables+=UnrealizedVariableCS (',' unrealizedVariables+=UnrealizedVariableCS)* '|')?
 		constraints+=AssignmentCS* ')'
-	)
-	| ( {GuardPatternCS} '(' constraints+=AssignmentCS* ')'
-	)
 ;
 
 ImportCS returns base::ImportCS:
