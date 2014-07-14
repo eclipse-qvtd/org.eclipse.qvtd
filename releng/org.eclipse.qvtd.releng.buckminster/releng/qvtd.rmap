@@ -121,7 +121,7 @@
     <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="git">
       <rm:property key="git.remote.uri" value="/gitroot/ocl/org.eclipse.ocl.git"/>
       <rm:property key="git.auto.fetch" value="true"/>
-      <rm:uri format="{0},{1}">
+      <rm:uri format="{0},tests/{1}">
         <bc:propertyRef key="git.ocl.local.repository.location"/>
         <bc:propertyRef key="buckminster.component"/>
       </rm:uri>
