@@ -3,6 +3,7 @@
   <rm:property key="checkout.location" value="${workspace.root}"/>
   <rm:property key="eclipse.download" value="http://download.eclipse.org"/>
   <rm:property key="git.qvtd.local.repository.location" value="C:\GIT\org.eclipse.qvtd"/>
+  <rm:property key="git.ocl.local.repository.location" value="C:\GIT\org.eclipse.ocl"/>
   <rm:property key="git.license.local.repository.location" value="C:\GIT\org.eclipse.license"/>
   <rm:property key="cvs.modeling.repository.location" value=":pserver:anonymous@dev.eclipse.org:/cvsroot/modeling"/>
   <rm:property key="cvs.eclipse.repository.location" value=":pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse"/>
@@ -14,6 +15,7 @@
   <rm:locator pattern="^org\.eclipse\.qvtd.*$" searchPathRef="qvtd-source-code"/>
   <rm:locator pattern="^org\.eclipse\.emf\.mwe.*" searchPathRef="mwe"/>
   <rm:locator pattern="^org\.eclipse\.license.*" searchPathRef="license-source-code"/>
+  <rm:locator pattern="^org\.eclipse\.ocl\.examples\.xtext\.tests.*" searchPathRef="ocl-source-code"/>
   <rm:locator pattern="^org\.eclipse\.ocl.*" searchPathRef="ocl"/>
   <rm:locator pattern="^org\.eclipse\.xpand.*" searchPathRef="xpand"/>
   <rm:locator pattern="^org\.eclipse\.xtend.lib.*" searchPathRef="xtext"/>
@@ -112,6 +114,16 @@
       <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}/modeling/emft/mwe/updates/releases">
         <bc:propertyRef key="eclipse.download"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="ocl-source-code">
+    <rm:provider componentTypes="eclipse.feature" readerType="git">
+      <rm:property key="git.remote.uri" value="/gitroot/ocl/org.eclipse.ocl.git"/>
+      <rm:property key="git.auto.fetch" value="true"/>
+      <rm:uri format="{0},{1}">
+        <bc:propertyRef key="git.ocl.local.repository.location"/>
+        <bc:propertyRef key="buckminster.component"/>
       </rm:uri>
     </rm:provider>
   </rm:searchPath>
