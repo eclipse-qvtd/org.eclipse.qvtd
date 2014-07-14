@@ -2,7 +2,7 @@ setpref complianceLevel=1.5
 
 # We import a target definition which will be our API Base Line
 importtargetdefinition "file://${checkout.location}/org.eclipse.qvtd.git/releng/org.eclipse.qvtd.releng.buckminster/APIBaseLine.target"
-#addbaseline -A "Eclipse QVTd API Base Line"
+addbaseline -A "Eclipse QVTd API Base Line"
 
 # We set the path of the new target platform
 setpref targetPlatformPath="${checkout.location}/buildroot/target.platform"
