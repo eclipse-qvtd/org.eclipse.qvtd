@@ -118,7 +118,7 @@
     </rm:provider>
   </rm:searchPath>
   <rm:searchPath name="ocl-source-code">
-    <rm:provider componentTypes="eclipse.feature" readerType="git">
+    <rm:provider componentTypes="osgi.bundle,eclipse.feature" readerType="git">
       <rm:property key="git.remote.uri" value="/gitroot/ocl/org.eclipse.ocl.git"/>
       <rm:property key="git.auto.fetch" value="true"/>
       <rm:uri format="{0},{1}">
