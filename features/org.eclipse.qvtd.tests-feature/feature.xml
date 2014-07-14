@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.qvtd.tests"
       label="%featureName"
-      version="0.11.0.qualifier"
+      version="0.11.100.qualifier"
       provider-name="%providerName"
       plugin="org.eclipse.qvtd.all.tests"
       license-feature="org.eclipse.license"
