@@ -13,10 +13,12 @@ package org.eclipse.qvtd.xtext.qvtcore.ui;
 import java.util.List;
 
 import org.eclipse.qvtd.xtext.qvtcore.ui.internal.QVTcoreActivator;
+import org.eclipse.qvtd.xtext.qvtcore.ui.model.QVTcoreDocumentProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory;
+import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
 
 import com.google.common.collect.Multimap;
 
@@ -50,5 +52,9 @@ public class QVTcoreUiModule extends org.eclipse.qvtd.xtext.qvtcore.ui.AbstractQ
 	
 	public Class<? extends ParserBasedContentAssistContextFactory.StatefulFactory> bindStatefulFactory() {
 		return Bug382088Workaround.class;		// BUG 382088
+	}
+
+	public Class<? extends XtextDocumentProvider> bindXtextDocumentProvider() {
+		return QVTcoreDocumentProvider.class;
 	}
 }

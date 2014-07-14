@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.qvtd.xtext.qvtcore.ui; singleton:=true
-Bundle-Version: 0.11.100.qualifier
+Bundle-Version: 0.12.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Bundle-Localization: plugin
@@ -12,6 +12,7 @@ Export-Package: org.eclipse.qvtd.xtext.qvtcore.ui,
  org.eclipse.qvtd.xtext.qvtcore.ui.contentassist.antlr.internal,
  org.eclipse.qvtd.xtext.qvtcore.ui.internal,
  org.eclipse.qvtd.xtext.qvtcore.ui.labeling,
+ org.eclipse.qvtd.xtext.qvtcore.ui.model,
  org.eclipse.qvtd.xtext.qvtcore.ui.outline,
  org.eclipse.qvtd.xtext.qvtcore.ui.quickfix
 Require-Bundle: org.eclipse.qvtd.xtext.qvtcore;visibility:=reexport,

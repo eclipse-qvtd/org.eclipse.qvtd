@@ -8,18 +8,18 @@
  * Contributors:
  *     E.D.Willink - initial API and implementation
  *******************************************************************************/
-package org.eclipse.qvtd.xtext.qvtimperative.ui.model;
+package org.eclipse.qvtd.xtext.qvtcore.ui.model;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.essentialocl.ui.model.BaseDocumentProvider;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.QVTimperativeCSPackage;
+import org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.QVTcoreCSPackage;
 
 /**
- * QVTimperativeDocumentProvider orchestrates the load and saving of optional XMI content
+ * QVTcoreDocumentProvider orchestrates the load and saving of optional XMI content
  * externally while maintaining the serialised human friendly form internally. 
  */
-public class QVTimperativeDocumentProvider extends BaseDocumentProvider
+public class QVTcoreDocumentProvider extends BaseDocumentProvider
 {
 	@Override
 	protected @NonNull String createTestDocument(@NonNull URI uri, @NonNull String lastSegment) {
@@ -29,11 +29,11 @@ public class QVTimperativeDocumentProvider extends BaseDocumentProvider
 
 	@Override
 	protected String getCScontentType() {
-		return QVTimperativeCSPackage.eCONTENT_TYPE;
+		return QVTcoreCSPackage.eCONTENT_TYPE;
 	}
 
 	@Override
 	protected @NonNull String getFileExtension() {
-		return "qvti";
+		return "qvtc";
 	}
 }
