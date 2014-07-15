@@ -20,6 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
+import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
@@ -104,8 +105,8 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 		}
 		//
 		Resource eResource = csElement.eResource();
-		if (eResource != null) {
-			context.installRootElement(eResource, pivotElement);		// Ensure containment viable for imported library type references
+		if (eResource instanceof BaseCSResource) {
+			context.installRootElement((BaseCSResource)eResource, pivotElement);		// Ensure containment viable for imported library type references
 //			importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
 		}
 		//

@@ -14,7 +14,6 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.NamedElement;
@@ -23,7 +22,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CS;
-import org.eclipse.ocl.examples.xtext.base.utilities.ElementUtil;
+import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
@@ -36,15 +35,15 @@ public class QVTcoreCSResource extends EssentialOCLCSResource
 {
 	@Override
 	public @NonNull CS2Pivot createCS2Pivot(
-			@NonNull Map<? extends Resource, ? extends ASResource> cs2asResourceMap,
+			@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap,
 			@NonNull MetaModelManager metaModelManager) {
 		return new QVTcoreCS2Pivot(cs2asResourceMap, metaModelManager);
 	}
 
 	@Override
-	public @NonNull Pivot2CS createPivot2CS(@NonNull Map<? extends /*BaseCS*/Resource, ? extends ASResource> cs2asResourceMap,
+	public @NonNull Pivot2CS createPivot2CS(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap,
 			@NonNull MetaModelManager metaModelManager) {
-		return new QVTcoreAS2CS(ElementUtil.apiConvert(cs2asResourceMap), metaModelManager);
+		return new QVTcoreAS2CS(cs2asResourceMap, metaModelManager);
 	}
 
 	@Override

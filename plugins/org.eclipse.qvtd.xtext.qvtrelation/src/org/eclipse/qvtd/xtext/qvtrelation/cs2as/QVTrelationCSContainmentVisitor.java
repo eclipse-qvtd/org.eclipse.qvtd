@@ -44,6 +44,7 @@ import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.base.cs2as.SingleContinuation;
+import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.InvocationExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -523,8 +524,8 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		Resource asResource = pivotElement.eResource();
 		if (asResource == null) {
 			Resource csResource = csElement.eResource();
-			if (csResource != null) {
-				context.installRootElement(csResource, pivotElement);
+			if (csResource instanceof BaseCSResource) {
+				context.installRootElement((BaseCSResource)csResource, pivotElement);
 			}
 		}
 		return null;
