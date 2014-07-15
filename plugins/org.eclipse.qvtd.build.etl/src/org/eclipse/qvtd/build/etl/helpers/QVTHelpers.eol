@@ -704,14 +704,10 @@ operation QVT!Assignment isSimpleAttributeNavigation() : Boolean {
 		and self.value.isTypeOf(QVT!VariableExp);
 }
 
-/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isPrimitivePropertyAssignemnt
+/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isPrimitivePropertyAssignemnt 
  * NAME
- *  getAllPredicates - Determine if the Assignemnts is of the form 
- *    varA.attribute := 'PrimitiveLitExp'
- *  1. The Assignment must be an Attribute assignment
- *  2. The slot operation must be a VariableExp
- *  3. The value must be OperationCallExpresion with 1 argument
- *  4. The argument must be a PrimitiveType
+ *  isPrimitivePropertyAssignemnt - Determine if the Assignemnts assigns a primitive
+ *  data type
  *  
  * CONTEXT
  *  QVT!Assignment  The assignement to test
