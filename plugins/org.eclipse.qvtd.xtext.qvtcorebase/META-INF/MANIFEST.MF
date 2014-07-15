@@ -26,6 +26,6 @@ Export-Package: org.eclipse.qvtd.xtext.qvtcorebase,
  org.eclipse.qvtd.xtext.qvtcorebase.validation
 Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.jdt.annotation;bundle-version="[1.1.0,2.0.0)";resolution:=optional,
- org.eclipse.ocl.examples.xtext.essentialocl;bundle-version="[3.4.0,4.0.0)";visibility:=reexport,
+ org.eclipse.ocl.examples.xtext.essentialocl;bundle-version="[0.9.0,1.0.0)";visibility:=reexport,
  org.eclipse.qvtd.pivot.qvtcorebase;visibility:=reexport
 Import-Package: org.apache.log4j
