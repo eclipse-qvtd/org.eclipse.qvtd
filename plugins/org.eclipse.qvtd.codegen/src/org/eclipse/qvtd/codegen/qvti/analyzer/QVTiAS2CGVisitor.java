@@ -41,14 +41,13 @@ import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Iteration;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.OpaqueExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.Parameter;
+import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiGlobalContext;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
@@ -330,18 +329,21 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		for (Parameter pParameter : asFunction.getOwnedParameter()) {
 			cgFunction.getParameters().add(doVisit(CGParameter.class, pParameter));
 		}
-		OpaqueExpression specification = asFunction.getBodyExpression();
+		ExpressionInOCL specification = asFunction.getBodyExpression();
 		if (specification != null) {
-			ExpressionInOCL expressionInOCL = PivotUtil.getExpressionInOCL(metaModelManager, specification);
-			if (expressionInOCL != null) {
-				Variable contextVariable = expressionInOCL.getContextVariable();
+			try {
+				ExpressionInOCL query = metaModelManager.getQueryOrThrow(asFunction, specification);
+				Variable contextVariable = query.getContextVariable();
 				if (contextVariable != null) {
 					getSelfParameter(contextVariable);
 				}
-				for (@SuppressWarnings("null")@NonNull Variable parameterVariable : expressionInOCL.getParameterVariable()) {
+				for (@SuppressWarnings("null")@NonNull Variable parameterVariable : query.getParameterVariable()) {
 					getParameter(parameterVariable);
 				}
-				cgFunction.setBody(doVisit(CGValuedElement.class, expressionInOCL.getBodyExpression()));
+				cgFunction.setBody(doVisit(CGValuedElement.class, query.getBodyExpression()));
+			} catch (ParserException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		analyzer.addFunction(asFunction, cgFunction);

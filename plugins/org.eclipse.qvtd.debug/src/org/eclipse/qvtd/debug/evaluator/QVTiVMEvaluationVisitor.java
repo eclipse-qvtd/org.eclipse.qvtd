@@ -26,7 +26,6 @@ import org.eclipse.ocl.examples.domain.evaluation.DomainLogger;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
@@ -190,11 +189,6 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 	@Override
 	public @Nullable Object evaluate(@NonNull DomainExpression body) {
 		return delegate.evaluate(body);
-	}
-
-	@Override
-	public @Nullable Object evaluate(@NonNull ExpressionInOCL expressionInOCL) {
-		return delegate.evaluate(expressionInOCL);
 	}
 
 	public static IVMEvaluationEnvironment<?> cloneEvaluationEnv(IVMEvaluationEnvironment<?> evaluationEnvironment) {
