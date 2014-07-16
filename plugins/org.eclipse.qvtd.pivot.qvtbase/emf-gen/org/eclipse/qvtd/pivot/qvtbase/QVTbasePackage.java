@@ -1152,13 +1152,22 @@ public interface QVTbasePackage extends EPackage {
 	int TRANSFORMATION__NS_URI = PivotPackage.CLASS_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Owned Instances</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION__OWNED_INSTANCES = PivotPackage.CLASS_FEATURE_COUNT + 5;
+
+	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION__OWNED_TYPE = PivotPackage.CLASS_FEATURE_COUNT + 5;
+	int TRANSFORMATION__OWNED_TYPE = PivotPackage.CLASS_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Profile Application</b></em>' containment reference list.
@@ -1167,7 +1176,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION__PROFILE_APPLICATION = PivotPackage.CLASS_FEATURE_COUNT + 6;
+	int TRANSFORMATION__PROFILE_APPLICATION = PivotPackage.CLASS_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Owned Tag</b></em>' containment reference list.
@@ -1176,7 +1185,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION__OWNED_TAG = PivotPackage.CLASS_FEATURE_COUNT + 7;
+	int TRANSFORMATION__OWNED_TAG = PivotPackage.CLASS_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Model Parameter</b></em>' containment reference list.
@@ -1185,7 +1194,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION__MODEL_PARAMETER = PivotPackage.CLASS_FEATURE_COUNT + 8;
+	int TRANSFORMATION__MODEL_PARAMETER = PivotPackage.CLASS_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Rule</b></em>' containment reference list.
@@ -1194,7 +1203,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION__RULE = PivotPackage.CLASS_FEATURE_COUNT + 9;
+	int TRANSFORMATION__RULE = PivotPackage.CLASS_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Extends</b></em>' reference.
@@ -1203,7 +1212,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION__EXTENDS = PivotPackage.CLASS_FEATURE_COUNT + 10;
+	int TRANSFORMATION__EXTENDS = PivotPackage.CLASS_FEATURE_COUNT + 11;
 
 	/**
 	 * The number of structural features of the '<em>Transformation</em>' class.
@@ -1212,7 +1221,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_FEATURE_COUNT = PivotPackage.CLASS_FEATURE_COUNT + 11;
+	int TRANSFORMATION_FEATURE_COUNT = PivotPackage.CLASS_FEATURE_COUNT + 12;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl <em>Typed Model</em>}' class.

@@ -1246,6 +1246,15 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATIONAL_TRANSFORMATION__NS_URI = QVTbasePackage.TRANSFORMATION__NS_URI;
 
 	/**
+	 * The feature id for the '<em><b>Owned Instances</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATIONAL_TRANSFORMATION__OWNED_INSTANCES = QVTbasePackage.TRANSFORMATION__OWNED_INSTANCES;
+
+	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
