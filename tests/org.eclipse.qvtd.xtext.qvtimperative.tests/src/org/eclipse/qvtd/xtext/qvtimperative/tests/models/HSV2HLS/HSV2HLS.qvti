@@ -1,7 +1,7 @@
 -- modeltype HSVTree: '../../model/HSVTree.ecore'; -- modeltype instead of import to match QVTo
 import 'HSVTree.ecore'::HSVTree; -- modeltype instead of import to match QVTo
-import 'HLSTree.ecore'::HLSTree;  -- No name because we defined the package
-import hsv2hls_0 : 'HSV2HLS.ecore'::HSV2HLS; -- A name is useful to define an alias for the same metamodel
+import xyzzy : 'HLSTree.ecore'::HLSTree;  -- No name because we defined the package
+import HSV2HLS : 'HSV2HLS.ecore'::HSV2HLS; -- A name is useful to define an alias for the same metamodel
 
 -- library '../../myOclHelper.ocl'; -- Import a complete OCL with helpers
 

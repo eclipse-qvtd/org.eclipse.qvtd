@@ -18,12 +18,12 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VoidType;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CSConversion;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
@@ -103,6 +103,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		assert asModel.eContainer() == null;
 		TopLevelCS csDocument = context.refreshElement(TopLevelCS.class, QVTimperativeCSPackage.Literals.TOP_LEVEL_CS, asModel);
 		csDocument.setPivot(asModel);
+		context.refreshList(csDocument.getOwnedImport(), context.visitDeclarations(ImportCS.class, asModel.getUnit(), null));
 		List<Mapping> asMappings = null;
 		List<Function> asQueries = null;
 		List<Transformation> asTransformations = null;
@@ -132,10 +133,6 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 			}
 			// else other packages, orphanage
 		}
-		List<Package> nestedPackages = asModel.getNestedPackage();
-		assert nestedPackages != null;
-//		gatherPackages(allPackages, nestedPackages); 
-//		context.refreshList(csDocument.getQueries(), context.visitDeclarations(QueryCS.class, allPackages, null));
 		if (asTransformations != null) {
 			context.refreshList(csDocument.getTransformations(), context.visitDeclarations(TransformationCS.class, asTransformations, null));
 		}

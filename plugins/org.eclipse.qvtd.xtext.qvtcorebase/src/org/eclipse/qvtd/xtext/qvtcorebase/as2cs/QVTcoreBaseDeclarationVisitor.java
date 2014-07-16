@@ -11,15 +11,37 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcorebase.as2cs;
 
+import java.util.List;
+import java.util.Map;
+
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableExp;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSFactory;
+import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
 import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ImportCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathElementWithURICS;
+import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.RootPackageCS;
+import org.eclipse.ocl.examples.xtext.base.pivot2cs.AliasAnalysis;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CSConversion;
+import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.InfixExpCS;
@@ -58,6 +80,30 @@ import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.UnrealizedVariableCS;
 
 public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarationVisitor implements QVTcoreBaseVisitor<ElementCS>
 {
+	/**
+	 * QVTcoreBaseAliasAnalysis revises AliasAnalysis to support only those names explicitly defined (as a consequence
+	 * of Unit AS elements).
+	 */
+	public static class QVTcoreBaseAliasAnalysis extends AliasAnalysis
+	{
+		public static @NonNull QVTcoreBaseAliasAnalysis getAdapter(@NonNull Resource resource, @NonNull MetaModelManager metaModelManager) {
+			List<Adapter> eAdapters = resource.eAdapters();
+			for (Adapter adapter : eAdapters) {
+				if (adapter instanceof QVTcoreBaseAliasAnalysis) {
+					QVTcoreBaseAliasAnalysis aliasAnalysis = (QVTcoreBaseAliasAnalysis)adapter;
+					if (aliasAnalysis.metaModelManager == metaModelManager) {
+						return aliasAnalysis;
+					}
+				}
+			}
+			return new QVTcoreBaseAliasAnalysis(resource, metaModelManager);
+		}
+
+		public QVTcoreBaseAliasAnalysis(@NonNull Resource resource, @NonNull MetaModelManager metaModelManager) {
+			super(resource, metaModelManager);
+ 		}
+	}
+	
 	public QVTcoreBaseDeclarationVisitor(@NonNull Pivot2CSConversion context) {
 		super(context);
 	}
@@ -68,12 +114,29 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		return scope;
 	}
 
-	protected void importPackage(@NonNull org.eclipse.ocl.examples.pivot.Package aPackage) {
-		context.importNamespace(aPackage, null);
-		org.eclipse.ocl.examples.pivot.Package nestingPackage = null;
-		while ((nestingPackage = aPackage.getNestingPackage()) != null) {
-			aPackage = nestingPackage;
-			context.importNamespace(aPackage, null);
+	/**
+	 * Post-processing sets up the AliasAdapter with the names from the Unit declarations
+	 */
+	@Override
+	public void postProcess(@NonNull BaseCSResource csResource, @NonNull Map<Namespace, List<String>> importedNamespaces) {
+		AliasAnalysis.dispose(csResource);
+		QVTcoreBaseAliasAnalysis aliasAdapter = QVTcoreBaseAliasAnalysis.getAdapter(csResource, context.getMetaModelManager());
+		List<EObject> contents = csResource.getContents();
+		if (contents.size() > 0) {
+			EObject root = contents.get(0);
+			if (root instanceof RootPackageCS) {
+				for (ImportCS csImport : ((RootPackageCS)root).getOwnedImport()) {
+					Element pivot = csImport.getPivot();
+					if (pivot instanceof Unit) {
+						Unit asUnit = (Unit)pivot;
+						String alias = asUnit.getName();
+						Namespace asNamespace = asUnit.getUsedPackage();
+						if ((asNamespace != null) && (alias != null)) {
+							aliasAdapter.getAlias(asNamespace, alias);
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -182,8 +245,35 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		return csDirection;
 	}
 
-	public ElementCS visitUnit(@NonNull Unit object) {
-		throw new UnsupportedOperationException();
+	public @Nullable ElementCS visitUnit(@NonNull Unit asUnit) {
+		BaseCSResource csResource = context.getCSResource();
+		Namespace asNamespace = asUnit.getUsedPackage();
+		EObject eObject = asNamespace.getETarget();
+		String importURI = null;
+		if (eObject instanceof EPackage) {
+			EPackage ePackage = (EPackage)eObject;
+			Resource resource = ePackage.eResource();
+			if (DomainUtil.isRegistered(resource)) {
+				importURI = ePackage.getNsURI();
+			}
+		}
+		if ((importURI == null) && (csResource != null)) {
+			URI fullURI = EcoreUtil.getURI(eObject != null ? eObject : asNamespace);
+			URI csURI = csResource.getURI();
+			URI deresolvedURI = fullURI.deresolve(csURI, true, true, false);
+			importURI = deresolvedURI.toString();
+		}
+		ImportCS csImport = context.refreshElement(ImportCS.class, BaseCSPackage.Literals.IMPORT_CS, asUnit);
+		csImport.setPivot(asUnit);
+		csImport.setName(asUnit.getName());
+		@SuppressWarnings("null") @NonNull PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
+		List<PathElementCS> csPath = csPathName.getPath();
+		PathElementWithURICS csSimpleRef = BaseCSFactory.eINSTANCE.createPathElementWithURICS();
+		csSimpleRef.setElement(asNamespace);
+		csSimpleRef.setUri(importURI);
+		csPath.add(csSimpleRef);
+		csImport.setPathName(csPathName);
+		return csImport;
 	}
 
 	@Override

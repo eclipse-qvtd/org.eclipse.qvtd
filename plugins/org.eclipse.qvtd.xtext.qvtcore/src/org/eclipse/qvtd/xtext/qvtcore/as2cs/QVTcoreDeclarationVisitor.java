@@ -17,9 +17,9 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CSConversion;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -27,7 +27,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
-import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.MappingCS;
@@ -51,18 +50,13 @@ public class QVTcoreDeclarationVisitor extends QVTcoreBaseDeclarationVisitor imp
 	}
 
 	public ElementCS visitBottomPattern(@NonNull BottomPattern asBottomPattern) {
-		Area asArea = asBottomPattern.getArea();
 		BottomPatternCS csBottomPattern = context.refreshElement(BottomPatternCS.class, QVTcoreBaseCSPackage.Literals.BOTTOM_PATTERN_CS, asBottomPattern);
 		csBottomPattern.setPivot(asBottomPattern);
-//		if (asArea instanceof Mapping) {
-			List<Element> asConstraints = new ArrayList<Element>(asBottomPattern.getAssignment());
-			asConstraints.addAll(asBottomPattern.getPredicate());
-			context.refreshList(csBottomPattern.getConstraints(), context.visitDeclarations(AssignmentCS.class, asConstraints, null));
-//		}
-//		else {
-			context.refreshList(csBottomPattern.getRealizedVariables(), context.visitDeclarations(RealizedVariableCS.class, asBottomPattern.getRealizedVariable(), null));
-			context.refreshList(csBottomPattern.getUnrealizedVariables(), context.visitDeclarations(UnrealizedVariableCS.class, asBottomPattern.getVariable(), null));
-//		}
+		List<Element> asConstraints = new ArrayList<Element>(asBottomPattern.getAssignment());
+		asConstraints.addAll(asBottomPattern.getPredicate());
+		context.refreshList(csBottomPattern.getConstraints(), context.visitDeclarations(AssignmentCS.class, asConstraints, null));
+		context.refreshList(csBottomPattern.getRealizedVariables(), context.visitDeclarations(RealizedVariableCS.class, asBottomPattern.getRealizedVariable(), null));
+		context.refreshList(csBottomPattern.getUnrealizedVariables(), context.visitDeclarations(UnrealizedVariableCS.class, asBottomPattern.getVariable(), null));
 		return csBottomPattern;
 	}
 
@@ -70,6 +64,7 @@ public class QVTcoreDeclarationVisitor extends QVTcoreBaseDeclarationVisitor imp
 		assert asModel.eContainer() == null;
 		TopLevelCS csDocument = context.refreshElement(TopLevelCS.class, QVTcoreCSPackage.Literals.TOP_LEVEL_CS, asModel);
 		csDocument.setPivot(asModel);
+		context.refreshList(csDocument.getOwnedImport(), context.visitDeclarations(ImportCS.class, asModel.getUnit(), null));
 		List<Mapping> asMappings = null;
 		List<Function> asQueries = null;
 		List<Transformation> asTransformations = null;
@@ -99,10 +94,6 @@ public class QVTcoreDeclarationVisitor extends QVTcoreBaseDeclarationVisitor imp
 			}
 			// else other packages, orphanage
 		}
-		List<Package> nestedPackages = asModel.getNestedPackage();
-		assert nestedPackages != null;
-//		gatherPackages(allPackages, nestedPackages); 
-//		context.refreshList(csDocument.getQueries(), context.visitDeclarations(QueryCS.class, allPackages, null));
 		if (asTransformations != null) {
 			context.refreshList(csDocument.getTransformations(), context.visitDeclarations(TransformationCS.class, asTransformations, null));
 		}
@@ -146,12 +137,4 @@ public class QVTcoreDeclarationVisitor extends QVTcoreBaseDeclarationVisitor imp
 		PivotUtil.refreshList(csMapping.getRefines(), asMapping.getRefinement());
 		return csMapping;
 	}
-
-/*	public ElementCS visitVariablePredicate(@NonNull VariablePredicate asVariablePredicate) {
-		AssignmentCS csPredicate = context.refreshElement(AssignmentCS.class, QVTcoreBaseCSPackage.Literals.ASSIGNMENT_CS, asVariablePredicate);
-		csPredicate.setPivot(asVariablePredicate);
-		csPredicate.setTarget(createNameExpCS(asVariablePredicate.getTargetVariable()));
-		csPredicate.setInitialiser(createExpCS(asVariablePredicate.getConditionExpression()));
-		return csPredicate;
-	} */
 }

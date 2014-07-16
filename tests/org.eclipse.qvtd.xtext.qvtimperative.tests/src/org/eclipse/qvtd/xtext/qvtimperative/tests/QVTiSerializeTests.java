@@ -44,7 +44,7 @@ public class QVTiSerializeTests extends LoadTestCase
 		OCL ocl2 = OCL.newInstance();
 		Resource asResource1 = doLoad_Concrete(ocl1, stem + ".qvti", stem + ".qvtias");
 		URI inputURI = getProjectFileURI(stem + ".qvtias");
-		URI referenceURI = getProjectFileURI(stem + "ref..qvtias");
+		URI referenceURI = getProjectFileURI(stem + "ref.qvtias");
 		doSerialize(inputURI, stem, referenceURI, null, true, true);
 		Resource asResource3 = doLoad_Concrete(ocl2, stem + ".serialized.qvti", stem + ".serialized.qvtias");
 		((Root)asResource3.getContents().get(0)).setExternalURI(((Root)asResource1.getContents().get(0)).getExternalURI());
