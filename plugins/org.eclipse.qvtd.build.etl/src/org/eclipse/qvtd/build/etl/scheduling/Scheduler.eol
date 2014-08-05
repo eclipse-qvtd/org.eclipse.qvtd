@@ -169,7 +169,6 @@ operation QVTs!Schedule simpleNest() {
                             // available variables, there is no way we can 
                             // find better matches higher in the tree.
                             ma.parent = pma;
-                            //"            match!".println();
                             break;              // As low as possible
                         }
                     }
@@ -310,11 +309,7 @@ operation QVTi!MappingCall hasLowerOrder(other : QVTi!MappingCall) : Boolean {
     
     var selfMa = QVTs!MappingAction.all().selectOne(ma | ma.mapping == self.referredMapping);
     var otherMa = QVTs!MappingAction.all().selectOne(ma | ma.mapping == other.referredMapping);
-    //otherMa.getPredecessors().collect(p | p.mapping.name).println("                   other pre: ");
     if (otherMa.getPredecessors().includes(selfMa)) {
-        //"                       Direct Predecesor".println();
-        //other.referredMapping.name.println("                   " + self.referredMapping.name + " hasLowerOrder than ");
-        //"                    End".println();
         return true;
     } else {
         var selfNestedLower : Boolean = false;      // This mapping action has a nested mapping that should be invoked before
