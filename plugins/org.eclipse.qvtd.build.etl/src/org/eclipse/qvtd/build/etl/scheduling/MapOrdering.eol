@@ -10,7 +10,7 @@
  ******************************************************************************/
 import "../helpers/OCLExpressionAnalysis.eol";
 
-/****l* /org.eclipse.qvtd.build.etl/dependence/scheduling/MapOrdering
+/****l* /org.eclipse.qvtd.build.etl.scheduling/MapOrdering
  * NAME
  *  MapOrdering -- A set of EOL operations to perform scheduling analysys from
  *  data dependencies
@@ -20,389 +20,150 @@ import "../helpers/OCLExpressionAnalysis.eol";
  *      - NAME      ALIASES METAMODEL               ROL SOD
  *      - qvti      QVT     QVTCore                  X          The QVTi (partitioned) AST
  *      - rTree     tree    ECoreContainmentTree     X          The right metamodel containment tree
- *      - rdGrapg   ddg     Dependency               X          The reduced dependencies graph
+ *      - qvts              QVTSchedule                  X      The QVT schedule model
  * SEE ALSO
  *
  ******
  */
-operation getMapOrdering() : Map {
-	
-	var mapOrdering : Map;
-    var mapNesting : Map;
-    var mapLinear : Map;
-	var mapResult : Map;
-	var visited : Set;
-	
-	
-	var bestNest : Map;        // If the optimal is 0, the mapping must be invoked at the root
-	
+
+
+/****o* MapOrdering/findMapOrdering
+ * NAME
+ *  findMapOrdering - Assings an index to all MappingActions to reflect the
+ *  ordering of the mappings based on the R type containment tree and the
+ *  type dependencies.
+ *
+ * CONTEXT
+ *  QVTs!Schedule  The schedule to be indexed
+ * ANNOTATIONS
+ *  cached
+ *  SEE ALSO
+ */
+operation QVTs!Schedule findMapOrdering()  {
 	// Do a Depth first search of the containment tree of the output model
+	var queue = new Sequence();
+	// Marked visited mappings to avoid loops
+	var visited = new Sequence();
 	queue.addAll(rTree!Node.all().select(n | n.parent.isEmpty()));
 	while (not queue.isEmpty()) {
 	    var n = queue.first();
 	    queue.remove(n);
 	    // Do stuff with n
 	    //n.println("n ");
-	    //  Find all the mappings that have an output node if this type
-	    for (map in ddg!MappingNode.all().select(m | m.outgoing.exists(e | e.target.label = n.EClassName))) {
+	    //  Find all the mappings that have an output node if this type 
+	    // TODO The ECoreContainment tree should save the actual type so we dont compare names!
+	    for (ma in self.actions.select(aa | aa.results.exists(e | e.type.name = n.EClassName))) {
 	        // Find the predecesors and linearize
-	        map.addMapping(mapOrdering, visited);
+	        if (visited.excludes(ma))
+	        	ma.getOrdering(visited);
 	    }
 	    queue.addAll(n.children);
 	}
 	
 	"Ordering".println();
+    /*
     for (k in mapOrdering.keySet()) {
 	    mapLinear.put(mapOrdering.get(k), k.qvtAstNode);
 	}
 	for (k in mapLinear.keySet().sortBy(key | key)) {
 	    mapLinear.get(k).name.println(k + ": ");
 	}
+	*/
 	" ".println();
 	" ".println();
-	//2. Select the predecessor in which each micromapping nests most efficiently
-	// Nesting depends on both the variable types and the relation between them
-    // defined bt the mapping predicates
-    // The optimal nesting is the one in which predicates in both mappings
-    // define the same relations between variables in qin and variables
-    // in ntot. 
-	
-	var possibleNestings : Map;
-	
-	for (n in Sequence{1..mapLinear.keySet().size()}) {
-	    //" ".println();
-	    //mapLinear.get(n).println("n: ");   
-        var nout = mapLinear.get(n).getOutputVars();
-        var nin = mapLinear.get(n).getInputVars();
-        var ntot = nin.includingAll(nout).asSequence();
-        //ntot.collect(v | v.name + ":" + v.type.name).println("    ntot ");
-        //1. For each pair of ntot vars, find the predicates that relates them
-        var nVarRelations : Map;
-        for (v1 in ntot) {
-            for (v2 in ntot.excluding(v1)) {
-                for (p in mapLinear.get(n).guardPattern.predicate.select(p | p.conditionExpression.isSimpleAttributeNavigation())) {
-                    // Expression in the form v1.prop = v2
-                    if (p.conditionExpression.isArgumentVariable(v2) and 
-                                p.conditionExpression.isSourceVariable(v1)) {
-                        var relation : Sequence;
-                        relation.add(v2);
-                        relation.add(p);
-                        var relations : Sequence;
-                        if (nVarRelations.containsKey(v1)) {
-                            relations = nVarRelations.get(v1);
-                        }
-                        relations.add(relation);
-                        nVarRelations.put(v1, relations);
-                    }
-                }
-                // Find assignments that only refer the two vars
-                for (a in mapLinear.get(n).bottomPattern.assignment.select(a | a.isSimpleAttributeNavigation())) {
-                    // Only analyse expression in the form varB.prop := self
-                    if (a.slotExpression.referredVariable == v1 and 
-                        a.value.referredVariable == v2) {
-                        var relation : Sequence;
-                        relation.add(v2);
-                        relation.add(a);
-                        var relations : Sequence;
-                        if (nVarRelations.containsKey(v1)) {
-                            relations = nVarRelations.get(v1);
-                        }
-                        relations.add(relation);
-                        nVarRelations.put(v1, relations);
-                    }
-                }
-            }
-        }       
-        if (n+1 < mapLinear.keySet().size()) {
-	        for (q in Sequence{n+1..mapLinear.keySet().size()}) {
-		        //mapLinear.get(q).println("    q: ");
-		        // q input variables
-		        var qin = mapLinear.get(q).getInputVars();
-		        //qin.collect(v | v.name + ":" + v.type.name).println("        qin ");
-		        var qBestMatch = qin.size();
-		        
-		        // Structure to keep track of possible nestings
-		        /*  {q :
-                 {n : ( (v1, v2,..., vn), ({dv1:(vj, prop)}, {dv2, (vj, prop)}, ...,{dvn, (vj, prop)})}}}
-	        */
-	            //var nestings : Map;
-		        
-		        var qVarRelations : Map;
-		        //1. For each pair of qin vars, find the predicates that relates them
-		        for (v1 in qin) {
-		            for (v2 in qin.excluding(v1)) {
-		                for (p in mapLinear.get(q).guardPattern.predicate.select(p | p.conditionExpression.isSimpleAttributeNavigation())) {
-		                    // Expression in the form v1.prop = v2
-		                    if (p.conditionExpression.isArgumentVariable(v2) and 
-		                                p.conditionExpression.isSourceVariable(v1)) {
-		                        var relation : Sequence;
-		                        relation.add(v2);
-		                        relation.add(p);
-		                        //p.toString().println("relation " + v2.name + ": ");
-		                        var relations : OrderedSet;
-		                        if (qVarRelations.containsKey(v1)) {
-		                            relations = qVarRelations.get(v1);
-		                        }
-		                        relations.add(relation);
-		                        qVarRelations.put(v1, relations);
-		                    }
-		                }   
-		            }
-		        }
-		        //qVarRelations.println();
-		        //nVarRelations.println("        ");
-		        // 3. Fin possbile qin bindings within ntot
-		        // a. Simple bindings when qin.size() = 1 and there is no other mapping (n) that
-		        // has the same output variable type.
-		        var qinVarMatches : Set;
-		        if (qin.size() == 1) {
-		            if (nin.collect(v | v.type).includes(qin.first().type)) {
-		                //n.println("BestMatch at nin: ");
-		                qinVarMatches.add(qin.first());
-		            } else if (nout.collect(v | v.type).includes(qin.first().type)) {
-		                // No other mapping creates variables of the same type
-		                if (n+2 <= mapLinear.keySet().size()) {
-		                    if (Sequence{n+2..mapLinear.keySet().size()}.collect(m | mapLinear.get(m))
-		                            .forAll(m |not m.getOutputVars().collect(v | v.type).includes(qin.first().type))) {
-		                        //n.println("BestMatch at nout: ");
-		                        qinVarMatches.add(qin.first());
-		                    }
-		                }
-		            }
-		        } else {
-		            //Find relations by matching the types of v1 variables, and then looking
-			        // for relations by the type of v2 and the predicate (same property?)
-			        for (qin_v1 in qVarRelations.keySet()) {
-			            for (ntot_v1 in nVarRelations.keySet().select(k | k.type == qin_v1.type)) {
-			                //ntot_v1.name.println("        " + qin_v1.name + " match V1: ");
-			                // Now see if the relations also hold
-			                // a. v2 is of the same type
-			                var qin_rel = qVarRelations.get(qin_v1);
-			                var ntot_rel =nVarRelations.get(ntot_v1);
-			                for (qin_s in qin_rel) {
-			                    var match = false;
-			                    for (ntot_s in ntot_rel) {
-			                        if (qin_s.first().type == ntot_s.first().type) {
-			                            //ntot_s.first().name.println("        " + qin_s.first().name + " match V2: ");
-			                            // b. Does the predicate/assignment also match?
-			                            if (qin_s.last().isTypeOf(QVT!Predicate)) {
-			                                if (ntot_s.last().isTypeOf(QVT!Predicate)) {
-			                                    if (qin_s.last().conditionExpression.source.referredProperty == 
-			                                            ntot_s.last().conditionExpression.source.referredProperty) {
-			                                        match = true;
-			                                        //"        MATCH by p-p".println();
-			                                    }
-			                                } else {
-			                                    if (qin_s.last().conditionExpression.source.referredProperty == 
-	                                                    ntot_s.last().targetProperty) {
-	                                                match = true; 
-	                                                //"        MATCH by p-a".println();
-	                                            }
-			                                }
-			                            } else {
-			                                
-			                            }
-			                        } 
-			                    }
-			                    if (match) {
-			                        qinVarMatches.add(qin_v1);
-	                                qinVarMatches.add(qin_s.first());
-			                    }
-			                }
-			            }
-			        }
-		        }
-		        // See if any of the remaining qin variables can be a loop variable
-		        // over a containment attribute of a variable in nin
-		        var qinVarDerivied : Map;
-		        //var qinDerived : Sequence;
-		        for (qin_v1 in qVarRelations.keySet().excludingAll(qinVarMatches)) {
-		            //qin_v1.name.println("    loop variable?: ");
-		            // Search for a variable in nin of the same type as v2 and see
-		            // if the relation is through containment
-		            var qin_rel = qVarRelations.get(qin_v1);
-		            for (qin_s in qin_rel) {
-		                if (qin_s.last().isTypeOf(QVT!Predicate)) {
-		                    //qin_s.last().toString().println();
-		                    for (nin_v1 in nin.select(v | v.type == qin_s.first().type) ) {
-		                    //nin_v1.name.println("         is container?: ");
-		                        if (qin_s.last().conditionExpression.source.referredProperty.getOpposite().isDefined()
-		                                and qin_s.last().conditionExpression.source.referredProperty.getOpposite().isMany()
-		                                and qin_s.last().conditionExpression.source.referredProperty.getOpposite().isComposite) {
-		                            var derivedFrom : Sequence;
-		                            derivedFrom.add(nin_v1);
-		                            derivedFrom.add(qin_s.last().conditionExpression.source.referredProperty.getOpposite());
-		                            qinVarDerivied.put(qin_v1, derivedFrom);
-		                            //nin_v1.name.println("        " + qin_v1.name + " derived by " + qin_s.last().conditionExpression.source.referredProperty.getOpposite().name + " from: ");
-		                            break;
-		                        }
-		                    }
-		                }    
-		            }
-		        }
-		        //qinDerived.add(qinVarDerivied);
-		        var availableVars : Sequence;
-		        availableVars.add(qinVarMatches);
-		        availableVars.add(qinVarDerivied);
-		        var nMatches : Map;
-		        if (possibleNestings.containsKey(q)) {
-                    nMatches = possibleNestings.get(q);
-                }
-		        nMatches.put(n, availableVars);
-		        possibleNestings.put(q, nMatches);
-		    }
-		}
-        // For each mapping, select the best nesting.
-        // The best nesting is the one with the most binded variables and 1 loop
-        // variable
-        
-	    /* 
-	        if (ntot.collect(v | v.type).includesAll(qin.collect(v | v.type))) {
-	            // All variables in qin are in qtot (by type)
-	            optimalNest = n;
-	            // TODO Save the bindings while we are at it!
-	            break;
-	        } else {
-	            var missing = qin.clone();
-	            for (t in ntot.collect(v | v.type)) {
-	                if (qin.exists(vq | vq.type == t)) {
-	                    missing.remove(qin.selectOne(vq | vq.type == t));
-	                }
-	            }
-	            //missing.collect(v | v.name + ":" + v.type.name).println("missing ");
-	            missing.size().println("missing ");
-                if (missing.size() <= qBestMatch) { // We prefer early invocations
-	                qBestMatch = missing.size();
-	                // If a type in the missing variables is in the ntot, it means we
-                    // need two variables of the same type, and hence this is not the optimal
-                    // nest. This mapping should be invoked after n, and in n's nesting
-                    if (ntot.collect(v | v.type).exists(t | missing.collect(v | v.type).includes(t)) ) {
-                        mapNesting.values.println("values ");
-                        optimalNest = mapNesting.values.indexOf(mapNesting.values.selectOne(s | s.includes(n)));
-                        optimalNest.println("super nest: ");
-                        if (optimalNest == -1) {
-				            optimalNest = 0;
-				        }         
-                    } else {
-                        optimalNest = n;
-                    }
-	               
-	           }
-	           
-	        }
-
-	        
-  
-	        if (not nin.includingAll(nout).exists(v | mapLinear.get(q).incoming.select(e | e.multiple).collect(e | e.source).includes(v))) {
-	            if (ntot.includesAll(qin)) {
-	                // If all input vars are in nav+nout, this is the optimal Nest
-	                optimalNest = n;
-	            } else {
-	                var missing = qin.excludingAll(ntot);
-	                if (missing.size() < qBestMatch) {         // We preffer the deepest match
-	                    qBestMatch = missing;
-	                    optimalNest = n;
-	                }
-	            }
-	        } else {   // Only relations with multiplicity = true
-	            // Look for extra elements from previous nestings
-	            var missing = qin.excludingAll(ntot);
-	            for (k in mapNesting.keySet()) {
-	                if (mapNesting.get(k).includes(n) and k <> 0) {
-	                    nout = mapLinear.get(k).outgoing.collect(e | e.target);
-	                    nin = mapLinear.get(k).incoming.collect(e | e.source);
-	                    //nav = nin.outgoing.flatten().select(e | e.isTypeOf(ddg!ContainmentEdge)).collect(e | e.target);
-	                    ntot = nin.includingAll(nout).asSet();
-	                    if (ntot.includesAll(missing)) {
-	                        //k.println("previous best match: ");
-	                        optimalNest = k;                     
-	                    }
-	                }
-	            }
-	        }
-        	    
-        
-	    var nested : Sequence;
-	    if (mapNesting.containsKey(optimalNest)) {
-	        nested = mapNesting.get(optimalNest);
-	    }
-	    nested.add(q);
-	    mapNesting.put(optimalNest, nested);
-    */
-	}
-	for (k in possibleNestings.keySet().sortBy(k | true)) {
-	    k.println("Nesting ");
-	    for (k2 in possibleNestings.get(k).keySet().sortBy(k | true)) {
-	        k2.println("    Nested in :");
-	        possibleNestings.get(k).get(k2).first().name.println("    Direct vars: ");
-	        for (k3 in possibleNestings.get(k).get(k2).last().keySet().sortBy(k | true)) {
-	            (k3.name + " by " +
-	               possibleNestings.get(k).get(k2).last().get(k3).last().name )
-	               .println("            From " + 
-	               possibleNestings.get(k).get(k2).last().get(k3).first().name + " loop over: ");
-	        }
-	        
-	    }
-	}
-	
-	"Nesting".println();
-	for (k in mapNesting.keySet().sortBy(key | key)) {
-	    if (k == 0) {
-	        //var rootMap = new qvti!Mapping;
-	        //rootMap.name = qvti!Transformation.all().first().name + "_entry_map";
-	        //rootMap.transformation = qvti!Transformation.all().first();
-	        // Add guard and bottom pattern!
-	        //rootMap.guardPattern = new qvti!GuardPattern;
-	        //rootMap.bottomPattern = new qvti!BottomPattern;
-	        //var rootNode = new ddg!MappingNode;
-	        //rootNode.label = rootMap.name;
-	        //rootNode.qvtAstNode = rootMap;
-	        //rootNode.graph = ddg!Graph.all().first();
-	        //mapResult.put(rootNode, mapNesting.get(k).collect(m | mapLinear.get(m)).asSequence());
-	        mapNesting.get(k).println(k + ": ");
-	        
-	    } else {
-	        //mapNesting.get(k).println(k + ": ");
-	        mapNesting.get(k).sortBy(n | getNestedMax(mapNesting, n)).println(k + ": ");
-	        //mapResult.put(mapLinear.get(k),  mapNesting.get(k).sortBy(n | getNestedMax(mapNesting, n)).collect(m | mapLinear.get(m)).asSequence());
-	    }	         
-	}
-    mapResult.println();
-    return mapResult;
-
 }
 
-operation getNestedMax(mapNesting, n) {
-    if (mapNesting.containsKey(n)) {
-        return mapNesting.get(n).last();
-    }  else {
-        return n;
-   }
-}
-
-
-operation ddg!MappingNode addMapping(mapOrdering, visited) {
-    
-    visited.add(self);
-    var index : Integer;
-    // Find all the mappings that are predecesor to this one, through 1 dataType
-    var pre = self.incoming.collect(i | i.source).collect(d | d.incoming).flatten().collect(i2 | i2.source).select(pm | pm.isTypeOf(ddg!MappingNode));
-    while (pre.size() > 0) {
-        var map = pre.first();
-        if (not visited.includes(map)) {	    
-            //"Recursive ".println();
-            map.addMapping(mapOrdering, visited);
-            //"Back".println();
-	    }    
-	    pre.remove(map);
+/****o* MapOrdering/getOrdering
+ * NAME
+ *  getOrdering - Assing an index to a mapping action based on its predecesors.
+ *  SYNOPSIS
+ *    ma.getOrdering();
+ *  FUNCTION
+ *    Assings an index to all the predecessors of the mapping action and then 
+ *   assings an index to itself. This is a recursive function.
+ * CONTEXT
+ *  QVTs!MappingAction  The MappingAction
+ * RETURNS
+ *  QVTs!AbstractDatum	The ClassDatum for the variable's type
+ *  SEE ALSO
+ */
+operation QVTs!MappingAction getOrdering(visited) {
+	
+	visited.add(self);
+	for (ma in self.getPredecessors()) {
+		if (visited.excludes(ma))
+			ma.getOrdering(visited);
 	}
-	if (not mapOrdering.containsKey(self)) {
-	    if (mapOrdering.values.isEmpty()) {
-            index = 1;
-	    } else {
-	        index = mapOrdering.values.sortBy(i | i).last() + 1;
-	    }
-	    mapOrdering.put(self, index);
-    }
+	self.count = self.schedule.getMaxIndex() + 1;
 }
+
+/****o* MapOrdering/getPredecessors
+ * NAME
+ *  getPredecessors - Get the predecessors of a mapping action
+ * FUNCTION
+ *  The predecessors of a mapping action are calculating by following the 
+ *  mapping arguments' sources. This method could be invoked recursively
+ *  to do a graph search iif a mechanism is added to prevent loops. 
+ * CONTEXT
+ *  QVTs!MappingAction  The MappingAction
+ * RETURNS
+ *  Sequence	The sequence of mapping predecesors. 
+ *  SEE ALSO
+ */
+@cached
+operation QVTs!MappingAction getPredecessors() : Set {
+	var args = self.getArguments();	
+	var concreteSources =  args.collect(a | a.sources).flatten().asSet();
+	var abstractSources = self.schedule.datums.select(cd | 
+            args.select(ad | ad.type.isAbstract).exists(ad | cd.super.includes(ad)))
+        .collect(a | a.sources).flatten().asSet();
+	return concreteSources.includingAll(abstractSources);
+}
+
+/****o* MapOrdering/getArguments
+ * NAME
+ *  getArguments - Get the arguments of a mapping action
+ * SYNOPSIS
+ *    ma.getArguments();
+ * FUNCTION
+ *    Get the arguments of an mapping action.
+ * TODO
+ *  This should be implemented as the derivied property of the mapping.   
+ * CONTEXT
+ *  QVTs!MappingAction  The MappingAction
+ * ANNOTATIONS
+ *  cached
+ * RETURNS
+ *  QVTs!AbstractDatum	The ClassDatum for the variable's type
+ *  SEE ALSO
+ */	
+@cahced
+operation QVTs!MappingAction getArguments() : Sequence {
+	
+	return self.distinctArguments.primaryArguments
+			.includingAll(self.distinctArguments.secondaryArguments).flatten();
+}
+
+/****o* MapOrdering/getMaxIndex
+ * NAME
+ *  getMaxIndex - Get the arguments of a mapping action
+ * SYNOPSIS
+ *    s.getMaxIndex();
+ * FUNCTION
+ *    Get the arguments of an mapping action.
+ * TODO
+ *  This should be implemented as the derivied property of the mapping.   
+ * CONTEXT
+ *  QVTs!Schedule  The Schedule
+ * ANNOTATIONS
+ *  cached
+ * RETURNS
+ *  QVTs!AbstractDatum	The ClassDatum for the variable's type
+ *  SEE ALSO
+ */		
+operation QVTs!Schedule getMaxIndex() : Integer {
+	return self.actions.sortBy(a | a.count).count.last();
+}
+
+/* =========================================== */
 

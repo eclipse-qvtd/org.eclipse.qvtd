@@ -9,7 +9,7 @@
  *     Horacio Hoyos - initial implementation
  ******************************************************************************/
  
- /****l* /org.eclipse.qvtd.build.etl/dependence/scheduling/Scheduler
+ /****l* /org.eclipse.qvtd.build.etl.scheduling/Scheduler
  * NAME
  *  Scheduler -- Invoke the data dependency analysis and map ordering functions
  *  and add the mapping calls to the QVTi AST model.
@@ -24,308 +24,480 @@
  *
  ******
  */
-import "../helpers/OCLExpressionAnalysis.eol";
+import "../helpers/QVTHelpers.eol";
 import "MapOrdering.eol";
 
-var inputVarMap : Map;  // (mapping, Set{variable})
-var outputVarMap : Map; // (mapping, Set{realizedVariable})
-var dataTypeAssignments : Map;    // (mapping, Sequence{Type, Attribute})
-var nodeMap : Map;      // (mapping, graph!Node)
-var dataNodeMap : Map;      // (??, graph!Node)
-
-//  
-var s = new qvts!Schedule;
-
-for (r in qvti!Transformation.all().first().rule) {
-	//r.println("r ");
-    var action = new qvts!MappingAction;
-    action.schedule = s;
-    action.mapping = r;
-    var results = r.getOutputVariables().collect(v | v.getArgument());
-    //results.collect(cd | cd.type.name).println("results: ");
-    s.abstractDepedencies.addAll(results.collect(a | a.classDependency));
-    action.results.addAll(results);
-    action.dataHooks.addAll(results.collect(a | a.classDependency));
-   
-	// Create distinc data sets for input variables
-	var arguments = r.getInputVariables().collect(v | v.getArgument());
-	//arguments.collect(cd | cd.type.name).println("arguments: ");
-	s.abstractDepedencies.addAll(arguments.collect(a | a.classDependency));
-    action.arguments.addAll(arguments);
-    action.dataDependencies.addAll(arguments.collect(a | a.classDependency));
-    
-    arguments.collect(a | a.createSecondaryArgumentRelations());
-        
-    // Create result PropertyDatums for PrimitiveData types assigned to properties
-    results = r.getPrimitiveDataTypeAssignemnts().collect(a | a.getPropertyDatum());
-    s.abstractDepedencies.addAll(results);
-    action.dataHooks.addAll(results);
-}
-
-// All ClassDependency subtypes are also dataDependencies for the Action. 
-for (ma in s.abstractActions) {
-	ma.dataDependencies.addAll(s.abstractDepedencies.select(ad | ma.dataDependencies.exists(dd | ad.super.includes(dd))));
-}
-
-
-// Find uses of the PropertyDatum to create the arguments
-for (d in s.abstractDepedencies.select(dt : qvts!PropertyDependency | true)) {
-	//d.property.println("d ");
-	for (aa in s.abstractActions) {
-		//r.name.println("rule: ");
-	    if (aa.mapping.getAllPredicates().exists(p |
-    	        p.conditionExpression.isSimpleAttributeNavigation()
-    		    and (p.conditionExpression.source.source.type == d.type
-    		         or d.type.superClass.includes(p.conditionExpression.source.source.type))
-    		    and p.conditionExpression.source.referredProperty == d.property)) {
-    		aa.dataDependencies.add(d);
-        }
-    }
-}
-
+var s = new QVTs!Schedule;
+s.createDependencyRelations(QVTi!Transformation.all().first().rule);
 // Ordering
-s.defineMapOrdering();
+s.findMapOrdering();
 
-
-// Nesting and bindings
-// 1. Create the base mapping
-var root = new qvti!Mapping;
-root.name = "__root__";
-root.guardPattern = new qvti!GuardPattern;
-root.bottomPattern = new qvti!BottomPattern;
-var nested : Boolean;
-
-for (mq in s.abstractActions.sortBy(ma | ma.index)) {
-    nested = false;
-    
-    // If the mapping has two variables of the same type, we don't know how to nested yet, nested at the root
-    // and all bindings must be global searches?
-    //mq.arguments.println();
-    if (mq.dataDependencies.forAll(dd | mq.arguments.one(a | a.classDependency == dd))) {
-    	var qin = mq.dataDependencies;
-    	mq.mapping.name.println("mq ");
-    	qin.collect(da | da.type.name).println("qin ");        
-    	for (mn in s.abstractActions.select(ma | ma.index < mq.index).sortBy(ma | ma.index).invert) {
-	        mn.mapping.name.println("    mn ");
-	        var nav = mn.getAvailableDepedencies();
-	        nav.collect(da | da.type.name).println("        nav: ");
-	        nav.collect(da | da.type).includesAll(qin.collect(da | da.type)).println("        ");
-	        if (nav.includesAll(qin)) {
-	            // If for each ClassDatum there is only 1 input variable of the same type
-	            // it is a perfect match, look no further
-	            mq.parent = mn;
-		        nested = true;
-		        break;
-	            // TODO Fix the correct binding later
-				// Create the bindings?
-		        // mq.createBindings(qin, mn, nav);
-				//
-	        } else {
-	            var missing = qin.excludingAll(nav);
-	            var matched = qin.excludingAll(missing);
-	            matched.collect(da | da.type.name).println("            matched: ");
-	            missing.collect(da | da.type.name).println("            missing: ");
-	            // Can some missing be derived from the matched?
-	            var matchedArgs = mq.arguments.select(a | matched.includes(a.classDependency));
-	            var missingArgs = mq.arguments.select(a | missing.includes(a.classDependency));
-	            var derived = missingArgs.select(ma | matchedArgs.secondaryArgumentRelations.flatten().exists(sa | sa.argument == ma));
-				
-				matchedArgs.collect(da | da.variable.name).println("            matchedArgs: ");
-	            missingArgs.collect(da | da.variable.name).println("            missingArgs: ");
-	            derived.collect(da | da.variable.name).println("            dervArgs: ");
-	            
-	            
-	            missingArgs.removeAll(derived);
-	            missingArgs.collect(da | da.variable.name).println("            missingArgs2: ");
-	            // Can the missing be derived from the matched as a loop?
-	            var loop = matchedArgs.select(ta | missingArgs.secondaryArgumentRelations.flatten().exists(sa | sa.argument == ta));
-	            loop.collect(da | da.variable.name).println("            loop: ");
-	            
-	            
-	            
-	           
-	            if (missingArgs.isEmpty()) {
-	                mq.parent = mn;
-	                nested = true;	// Don't break casue we might find a match higher and we preffer those.'
-	            }
-	        }
-	    }	
-    }
-    
-    /*         
-    for (mn in s.actions.select(ma | ma.index < mq.index).sortBy(ma | ma.index).invert) {
-        mn.println("    mn ");
-        var nav = mn.getAvailableDatums();
-        nav.collect(da | da.type.name).println("        nav: ");
-        nav.includesAll(qin).println("        ");
-        if (nav.includesAll(qin)) {
-            // If for each ClassDatum there is only 1 input variable of the same type
-            // it is a perfect match, look no further
-            mq.parent = mn;
-	        nested = true;
-            // TODO Fix the correct binding later
-			// Create the bindings?
-	        // mq.createBindings(qin, mn, nav);
-			//
-        } else {
-            var matched = nav.select(cd | qin.includes(cd));
-            matched.collect(da | da.type.name).println("            matched: ");
-            var missing = qin.excludingAll(nav);
-            missing.collect(da | da.type.name).println("            missing: ");
-            // Can some missing be derived from the matched?
-            for (mcs in missing.clone()) {
-                for (match in matched) {
-	                var primaryMatch = mq.distinctArguments
-	                    .select(da | da.primaryArgument.exists(pa | pa.type == match.type)
-	                              or match.super.exists(sd | da.primaryArgument.exists(pa | pa.type == sd.type)));
-	                    
-	                var primary = primaryMatch.selectOne(da | da.secondaryArgument.exists(sa | sa.type = mcs.type));
-	                // Find a predicate that relates the two types.
-	                if (primary.isDefined()) {
-	                    var p = mq.mapping.getAllPredicates()
-	                        .selectOne(p | p.conditionExpression.isSimpleAttributeNavigation()
-	                                   and p.conditionExpression.source.source.type = primary.type
-	                                   and p.conditionExpression.argument.first().type = mcs.type);
-	                    if (p.isDefined()) {
-	                        // mq.createBindings(qin, mn, nav);
-	                        primary.type.name.println(mcs.type.name + " derived from ");
-		                    var mb = new qvts!MappingBinding;
-		                    mb.mappingAction = mq;
-		                    var bindingEx = new qvti!VariableExp;
-		                    bindingEx.referredVariable = p.conditionExpression.source.source.referredVariable;
-		                    mb.bindingExp = bindingEx;
-		                    mb.boundVariable = p.conditionExpression.argument.first();
-		                    missing.remove(mcs);
-	                    }
-	                }  
-	            }
-            }
-            // Find if a missing variable can be used as a loop
-            for (mcs in missing) {
-                for (match in matched) {
-                    var primaryMatch = mq.distinctArguments
-                        .select(da | da.primaryArgument.exists(pa | pa.type == mcs.type)
-                                  or mcs.super.exists(sd | da.primaryArgument.exists(pa | pa.type == sd.type)));
-                        
-                    var primary = primaryMatch.selectOne(da | da.secondaryArgument.exists(sa | sa.type = match.type));
-                    // Find a predicate that relates the two types.
-                    if (primary.isDefined()) {
-                        var p = mq.mapping.getAllPredicates()
-                            .selectOne(p | p.conditionExpression.isSimpleAttributeNavigation()
-                                       and p.conditionExpression.source.source.type == mcs.type
-                                       and primary.secondaryArgument.collect(sa | sa.type).includes(p.conditionExpression.argument.first().type));
-                        
-                        if (p.isDefined()) {   
-                            if (p.conditionExpression.source.referredProperty.opposite.isDefined()
-                                    and p.conditionExpression.source.referredProperty.opposite.isComposite) {
-	                            // mq.createBindings(qin, mn, nav);
-	                            
-								//primary.secondaryArgument.selectOne(sa | sa.type == match.type).type.name.println(mcs.type.name + " derived from ");
-	                            //var mb = new qvts!MappingBinding;
-	                            //mb.mappingAction = mq;
-	                            //var bindingEx = new qvti!PropertyCallExp;
-	                            //bindingEx.referredProperty = p.conditionExpression.source.referredProperty.opposite;
-	                            //var sourceEx = new qvti!VariableExp;
-	                            //sourceEx.referredVariable = p.conditionExpression.argument.first().referredVariable;
-	                            //bindingEx.source = sourceEx;
-	                            //mb.bindingExp = bindingEx;
-	                            //mb.boundVariable = p.conditionExpression.source.source.referredVariable;
-	                            
-								//missing.remove(mcs);
-								
-                                nested = true;
-                            }
-                        }    
-                    }
-                }
-            }
-            if (nested) {
-                mq.parent = mn;
-                break;
-            }
-        }
-    }
-    if (not nested) {
-        // Nest in the root mapping
-    }
-    */
-}
-
+// Different Scheduleing Policies
+//QVTi!Transformation.all.first().simpleSchedule(s);
+QVTi!Transformation.all.first().simpleNestedSchedule(s);
 
 "Done".println();
 
-// Create the bindings. 
-// 
-
-
-/****o* getArgument() 
+/****o* Scheduler/simpleSchedule
  * NAME
- *  getClassDatums - Returns the ClassDatum(s) for the type of the variable.
- *
+ *  simpleSchedule - Creates a simple (naive) schedule, solely based on the map
+ *  ordering.
  * FUNCTION
- *  This functions returns the Argument that corresponds to the variable. 
- *  If the variable's type is does not has a ClassDatum, it is created.
+ *  Defines a simple schedule based on the mapping ordering by calling all the
+ *  mappings sequentially.  
+ *
  * CONTEXT
- *  qvti!Variable  The variable
+ *  QVTs!Schedule  The Schdule
+ * ANNOTATIONS
+ *  cached
+ * PARAMETERS
+ * 	rules 	The transformation for which the schedule is being craeted (QVTi!Rule)
+ *  SEE ALSO
+ */
+operation QVTi!Transformation simpleSchedule(schedule : QVTs!Schedule) {
+	
+	var baseMapping = self.createBaseMapping();
+	for (ma in schedule.actions.sortBy(a | a.count)) {
+		var mc = new QVTi!MappingCall;
+		mc.referredMapping = ma.mapping;
+		mc.context = baseMapping;
+	}
+	
+}
+
+/****o* Scheduler/simpleNestedSchedule
+ * NAME
+ *  simpleNestedSchedule - Creates a simple (naive) schedule, solely based on the 
+ *  map ordering and simple nesting based on Type availability
+ * FUNCTION
+ *  Defines a nested simple schedule based on the mapping ordering and by nesting
+ *  mappings under mappings that provide the most variable/types in order to
+ *  reduce the global searches. Placement should be as low down as possible, i.e.
+ *  prefer the more inmediate predecesor, but above any unused iteration
+ *  variables. 
+ *
+ *  Mappings with multiple input variables of the same type 
+ *
+ * CONTEXT
+ *  QVTs!Schedule  The Schdule
+ * ANNOTATIONS
+ *  cached
+ * PARAMETERS
+ * 	rules 	The transformation for which the schedule is being craeted (QVTi!Rule)
+ *  SEE ALSO
+ */
+operation QVTi!Transformation simpleNestedSchedule(schedule : QVTs!Schedule) {
+	
+	schedule.simpleNest();
+	var baseMapping = self.createBaseMapping();
+	for (ma in schedule.actions.sortBy(aa | aa.count)) {
+        var mc = new QVTi!MappingCall;
+        mc.referredMapping = ma.mapping;
+	    if (ma.parent.isDefined()) {
+            mc.context = ma.parent.mapping;
+        } else {
+            mc.context = baseMapping;
+        }
+	}
+	// Make sure order dependencies are preserved
+	QVTi.setCachingEnabled(false);
+    self.forceOrder();
+    QVTi.setCachingEnabled(true);
+}
+
+/****o* Scheduler/simpleNest
+ * NAME
+ *  simpleNest - Define the mapping action nesting.
+ * FUNCTION
+ *  Places a mapping action by searching up the the mapping dependencies to
+ *  locate the mapping for which the context variables result in the maximum
+ *  reuse of work already done. This is, the context that offers the biggest
+ *  number of already assigned variables.
+ * CONTEXT
+ *  QVTs!Schedule   The schedule
+ */
+operation QVTs!Schedule simpleNest() {
+    for (ma in self.actions.sortBy(a | a.count)) {
+        //ma.mapping.name.println("ma ");
+        var qin = ma.mapping.getInputVariables();
+        // If the mapping has two variables of the same type, try to nest, else put in the root
+        if (ma.mapping.getInputVariables().collect(v | v.type).size() == ma.mapping.getInputVariables().collect(v | v.type).asSet().size()) {
+            // Visit the predecesor mappings in "clossest" order, i.e. higher to lower index
+            for (pma in ma.getPredecessors().sortBy(aa | aa.count).invert()) {
+                //pma.mapping.println("    pma: ");
+                var nav = pma.getAvailableVariables();
+                if (nav.collect(v | v.type).includesAll(qin.collect(v | v.type))) {
+                    ma.parent = pma;
+                    break;              // As low as possible
+                } else {
+                    var matched = qin.select(v | nav.collect(v | v.type).includes(v.type));
+                    var missing = qin.select(v | not nav.collect(v | v.type).includes(v.type));
+                    // We are missing some types, can we derive them?
+                    derivedMissing(matched, missing);
+                    if (missing.isEmpty()) {
+                        ma.parent = pma;
+                        break;              // As low as possible
+                    } else {
+                        // One of the still missing variables can be used as a loop variable
+                        var loopV = null;
+                        for (m in missing) {
+                            for (mv in matched) {
+                                var relations = m.hasRelation(mv); 
+                                if (not relations.isEmpty()
+                                        and relations.first().opposite.isDefined()
+                                        and relations.first().opposite.isComposite) {
+                                    loopV = m;
+                                    break;
+                                }
+                            }
+                            if (loopV <> null) {
+                                break;  
+                            }
+                        }
+                        if (loopV <> null) {
+                            missing.remove(loopV);
+                            matched.add(loopV);
+                            // Try to derive more variables from the loop
+                            // We are missing some types, can we derive them?
+                            derivedMissing(matched, missing);
+                            
+                            // Once we have a loop varaible, we dont need a perfect
+                            // match, the mising varaibles would just have to be
+                            // global searched. Another option is to look
+                            // for another nesting position. However, since
+                            // we are matching against the whole predecesor
+                            // available variables, there is no way we can 
+                            // find better matches higher in the tree.
+                            ma.parent = pma;
+                            //"            match!".println();
+                            break;              // As low as possible
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/****o* Scheduler/derivedMissing
+ * NAME
+ *  derivedMissing - Test if any missing variables can be derived from the matched
+ *   and if so, remove them from missing and add them to matched.  
+ * FUNCTION
+ *  
+ * CONTEXT
+ *  QVTs!MappingAction  The MappingAction
+ */
+operation derivedMissing(matched : Sequence, missing : Sequence) {
+   // missing.collect(v | v.name).println("        missing ");
+    for (m in missing.clone()) {
+        if (m.canBeDerived(matched)) {
+            //m.name.println("        derived ");
+            missing.remove(m);
+            matched.add(m);
+        }
+    }
+}
+
+/****o* Scheduler/canBeDerived
+ * NAME
+ *  canBeDerived - Test if the variable can be derived from one in the sequence
+ * FUNCTION
+ *  Returns true if there is a relation of the form m.att = variable, where m
+ *  is a member of the input sequence, or if the relation is of the form
+ *  variable.att = m, and the att has an opposite and the opposite is not a
+ *  composition relations (composition relations are used for loop variables)  
+ * CONTEXT
+ *  QVTs!Variable  The variable
+ * PARAMETERS
+ *  matched     A sequence of variables to test derivation
+ * RETURNS
+ *  true        If the variable can be derived.
+ */
+operation QVTi!Variable canBeDerived(matched : Sequence) : Boolean {
+    for (mv in matched) {
+        if (not mv.hasRelation(self).isEmpty()) {
+            // Relations of the form matched.att = self
+            return true;
+        } else {
+            // Relations of the form self.att = matched can be used for derivation
+            // iif the relation has an opposite, and the opposite not composite
+            var relations = self.hasRelation(mv); 
+            if (not relations.isEmpty()
+                    and relations.first().opposite.isDefined()
+                    and not relations.first().opposite.isComposite) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+/****o* Scheduler/forceOrder
+ * NAME
+ *  forceOrder - Reorder the mapping calls so dependencies are met.
+ * FUNCTION
+ *  Uses a sort algorithm to determine the correct order of mapping calls
+ *  based on data dependencies. 
+ * CONTEXT
+ *  QVTs!Transformation  The transformation
+ */
+operation QVTs!Transformation forceOrder() {
+    
+    for (m in self.rule) {
+        m.name.println("m ");
+        var sorted = sortByDependency(m.mappingCall.asSequence());
+        m.mappingCall.clear();
+        m.mappingCall.addAll(sorted);
+    }
+}
+
+/****o* Scheduler/sortByDependency
+ * NAME
+ *  sortByDependency - Sort a collection of mapping calls based on data
+ *  dependencies.
+ * FUNCTION
+ *  Sorting is done using a quick sort algorithm.
+ * PARAMETERS
+ *  calls  The collection of mapping Calls to be sorted
+ */
+operation sortByDependency(calls : Collection) : Sequence {
+    //calls.collect(mc | mc.referredMapping.name).println("calls ");
+    var size = calls.size();
+    var sorted : Sequence;
+    if(size > 1) {
+        var ind : Integer = size/2;     
+        var L : Sequence;
+        var R : Sequence;
+        var pivot = calls.at(ind);
+        //pivot.referredMapping.name.println("Pivot ");
+        for (i in Sequence{0..size-1}) {
+            if (i <> ind) {
+                //pivot.referredMapping.name.println("                    " + calls.at(i).referredMapping.name + " hasLowerOrder? ");
+                if (calls.at(i).hasLowerOrder(pivot)) {
+                    L.add(calls.at(i));
+                } else {
+                    R.add(calls.at(i));
+                }
+            }
+        }
+        //L.collect(mc | mc.referredMapping.name).println("L ");
+        var sortedL = sortByDependency(L.clone());
+        //R.collect(mc | mc.referredMapping.name).println("R ");
+        var sortedR = sortByDependency(R.clone());
+        sorted.addAll(sortedL.including(pivot).includingAll(sortedR));
+        //sorted.collect(mc | mc.referredMapping.name).println("sorted ");
+        return sorted;
+    } else {
+        return calls;
+    }    
+}
+
+/****o* Scheduler/hasLowerOrder
+ * NAME
+ *  hasLowerOrder - Indicates whether this MappingCall has a lower order than
+ *  some other MappingCall.
+ * FUNCTION
+ *  This MappingCall has a lower order if:
+ *      * This MappingCall's referredMapping is a direct predecesor of the other referredMapping
+ *      * This MappingCall's referredMapping is a direct predecesor of any of the other referredMapping's nested calls  
+ * PARAMETERS
+ *  mc  The reference mappingCall with which to compare.
+ * RETURNS
+ *  true    If this MappingCall has a lower order, i.e. must be called first.
+ */
+operation QVTi!MappingCall hasLowerOrder(other : QVTi!MappingCall) : Boolean {
+    
+    var selfMa = QVTs!MappingAction.all().selectOne(ma | ma.mapping == self.referredMapping);
+    var otherMa = QVTs!MappingAction.all().selectOne(ma | ma.mapping == other.referredMapping);
+    //otherMa.getPredecessors().collect(p | p.mapping.name).println("                   other pre: ");
+    if (otherMa.getPredecessors().includes(selfMa)) {
+        //"                       Direct Predecesor".println();
+        //other.referredMapping.name.println("                   " + self.referredMapping.name + " hasLowerOrder than ");
+        //"                    End".println();
+        return true;
+    } else {
+        var selfNestedLower : Boolean = false;      // This mapping action has a nested mapping that should be invoked before
+        var otherNestedLower : Boolean = false;     // The other mapping action has a nested mapping that should be invoked before
+        if (not self.referredMapping.mappingCall.isEmpty()) {
+            selfNestedLower = self.referredMapping.mappingCall.exists(nmc | nmc.hasLowerOrder(other));
+        }
+        if (not other.referredMapping.mappingCall.isEmpty()) {
+            otherNestedLower = other.referredMapping.mappingCall.exists(nmc | self.hasLowerOrder(nmc));
+        }
+        return selfNestedLower or otherNestedLower;
+    }
+    return false;
+}
+
+
+operation QVTi!Transformation createBaseMapping() : QVTi!Mapping {
+    
+    var baseMapping = new QVTi!Mapping;
+    baseMapping.name = "__root__";
+    baseMapping.transformation = self;
+    baseMapping.guardPattern = new QVTi!GuardPattern;
+    baseMapping.bottomPattern = new QVTi!BottomPattern;
+    return baseMapping;
+    
+}
+
+/****o* Scheduler/getAvailableVariables
+ * NAME
+ *  getAvailableVariables - Navigates through the MappingAction hierarchy
+ *  to get the available variables to it.
+ * FUNCTION
+ *  The context of a MppingAction is the context of its caller. Thus, this 
+ *  operation recursively navigates through the calling contexts (i.e. parents)
+ *  and returns the union of available variables in all the calling contexts.
+ *  The available variables of a mapping are its input and output variables
+ *  with the variables available from its context.  
+ *  Don't cache the results as parents change dynamically.
+ * CONTEXT
+ *  QVTs!MappingAction  The MappingAction
+ */
+operation QVTs!MappingAction getAvailableVariables() : Sequence {
+    
+    var result = self.mapping.getInputVariables().includingAll(self.mapping.getOutputVariables());
+    if (self.parent.isDefined()) {
+        result.addAll(self.parent.getAvailableVariables());
+    }
+    return result;
+}
+
+/****o* Scheduler/createDependencyRelations
+ * NAME
+ *  createDependencyRelations - Creates the datums and actions to model the 
+ *  dependency relations of the given transformation rules.
+ * FUNCTION
+ *  The datums and actions represent the data dependency relations between
+ *  mappings and data types. By accepting a set of rules as a parameter,
+ *  the scheduling algorithm can pre-filter the rules on which the analysis
+ *  is performed. 
+ *
+ * CONTEXT
+ *  QVTs!Schedule  The Schdule
+ * ANNOTATIONS
+ *  cached
+ * PARAMETERS
+ * 	rules 	The transformation for which the schedule is being craeted (QVTi!Rule)
+ *  SEE ALSO
+ */
+operation QVTs!Schedule createDependencyRelations(rules : Collection) {
+	for (r in rules) {
+		//r.println("r ");
+	    var action = new QVTs!MappingAction;
+	    action.schedule = self;
+	    action.mapping = r;
+	    var resultDatums = r.getOutputVariables().collect(v | v.getClassDatum());
+	    self.datums.addAll(resultDatums);
+	    action.results.addAll(resultDatums);
+	   
+		// Create distinc data sets for input variables
+	    for (vA in r.getInputVariables()) {
+	    	//vA.name.println("  va ");
+	    	var dd = new QVTs!DistinctData;
+	    	var argDatum = vA.getClassDatum();
+	    	self.datums.add(argDatum);
+	    	dd.primaryArguments.add(argDatum);
+	    	for (dv in vA.derivedVariables(r.getInputVariables().excluding(vA))) {
+	        	//dv.println("    derived ");
+	        	argDatum = dv.getClassDatum();
+	        	dd.secondaryArguments.add(argDatum);
+	        	self.datums.add(argDatum);
+	        }
+	        dd.target = action;
+	    }
+	    // Create result PropertyDatums for PrimitiveData types assigned to properties
+	    resultDatums = r.getPrimitiveDataTypeAssignemnts().collect(a | a.getPropertyDatum());
+	    self.datums.addAll(resultDatums);
+	    action.results.addAll(resultDatums);
+	}
+	// Find uses of the PropertyDatum to create the arguments
+	for (d in self.datums.select(dt : QVTs!PropertyDatum | true)) {
+		for (r in QVTi!Transformation.all().first().rule) {
+		    for (p in r.getAllPredicates().select(p |
+	    	        p.conditionExpression.isSimpleAttributeNavigation()
+	    		    and (p.conditionExpression.source.source.type == d.type
+	    		         or d.type.superClass.includes(p.conditionExpression.source.source.type))
+	    		    and p.conditionExpression.source.referredProperty == d.property)) {
+	    		var dd = new QVTs!DistinctData;
+	            dd.primaryArguments.add(d);
+	            QVTs!MappingAction.all().selectOne(m | m.mapping == r).distinctArguments.add(dd);
+	        }
+	    }
+    }
+}
+
+/****o* Scheduler/getClassDatums
+ * NAME
+ *  getClassDatums - Returns the ClassDatum for the type of the variable
+ *
+ * CONTEXT
+ *  QVTi!Variable  The variable
  * ANNOTATIONS
  *  cached
  * RETURNS
- *  qvts!Argument	The Argument for the variable
+ *  QVTs!AbstractDatum	The ClassDatum for the variable's type
  *  SEE ALSO
  */
-operation qvti!RealizedVariable getArgument() : qvts!Parameter {
-	
-	var d = new qvts!OutputParameter;
-    d.classDependency = self.type.getClassDependency();
-    d.classDependency.domain = self.oppositePattern().area;
-	d.variable = self;
-	return d;
-}
-
-operation qvti!Variable getArgument() : qvts!Parameter {
-	
-	var d = new qvts!InputParameter;
-    d.classDependency = self.type.getClassDependency();
-    d.classDependency.domain = self.oppositePattern().area;
-	d.variable = self;
-	return d;
-}
-
-// KLUDGE If the implementation language change, the cache annotation must
-// be changed by a code addtion that caches 
 @cached 
-operation qvti!Type getClassDependency() : qvts!ClassDependency {
-	
-	var d = new qvts!ClassDependency;
-    d.type = self;
-    d.super.addAll(self.getSuperClass().collect(sc | sc.getClassDependency()));
-	return d;
+operation QVTi!Variable getClassDatum() : QVTs!AbstractDatum {
+	//var typeDatum = self.type.getClassDatum();
+	//typeDatum.super.addAll(self.type.getSuperClass().collect(t | t.getClassDatum()));
+	//return typeDatum.super.asSequence().including(typeDatum);
+	return self.type.getClassDatum();
 }
 
-
-/****o* getPropertyDatum
+/****o* Scheduler/getPropertyDatum
  * NAME
  *  getPropertyDatum - Returns the PropertyDatum for an assignment.
  *  The PropertyDatum points to the type of the variable in the slot expression
  *  and the property to the targetProperty
  *
  * CONTEXT
- *  qvti!Assignment  The assignment
+ *  QVTi!Assignment  The assignment
  * ANNOTATIONS
  *  
  * RETURNS
  *  Sequence	The ClassDatum for the variable type and its superTypes
  *  SEE ALSO
  */
-operation qvti!Assignment getPropertyDatum() : qvts!PropertyDependency {
+operation QVTi!Assignment getPropertyDatum() : QVTs!PropertyDatum {
 	
-	var d = new qvts!PropertyDependency;
+	var d = new QVTs!PropertyDatum;
 	d.type = self.slotExpression.referredVariable.type;
 	d.property = self.targetProperty;
 	return d;
 }
 
-/****o* derivedVariables
+/****o* Scheduler/getClassDatum
+ * NAME
+ *  getClassDatum - Returns the ClassDatum for a given type
+ *
+ * CONTEXT
+ *  QVTi!Type  The type
+ * ANNOTATIONS
+ *  cached
+ * RETURNS
+ *  QVTs!ClassDatum The class datum
+ *  SEE ALSO
+ */
+@cached
+operation QVTi!Type getClassDatum() : QVTs!AbstractDatum {
+	//self.name.println("getClassDatum ");
+	if (QVTs!ClassDatum.all().exists(d | d.type == self)) {
+		"Exists".println();
+        return QVTs!ClassDatum.all().selectOne(d | d.type == self);
+    } else {
+    	var d = new QVTs!ClassDatum;
+        d.type = self;
+        d.super.addAll(self.superClass.collect(t | t.getClassDatum()).flatten());
+        return d;
+    }
+}
+
+/****o* Scheduler/derivedVariables
  * NAME
  *  derivedVariables - Analysis of variable relations to find derivable ones
  * FUNCTION
@@ -342,185 +514,15 @@ operation qvti!Assignment getPropertyDatum() : qvts!PropertyDependency {
  * SEE ALSO
  *
  */
-operation qvti!Variable derivedVariables(vars : Sequence) : Set {
+operation QVTi!Variable derivedVariables(vars : Sequence) : Set {
 
 	var derived : Set;
     for (vB in vars) {
-        //vB.name.println("    vB ");
         if (not self.hasRelation(vB).isEmpty()) {
+            //vB.name.println(self.name + "    has relation to ");
         	derived.add(vB);
 	        derived.addAll(vB.derivedVariables(vars.excluding(vB)));
         }
     }
     return derived;
 } 
-
-/****o* hasRelation
-  *  NAME
-  *    hasRelation -- Identify relations between variables
-  *  SYNOPSIS
-  *    relation =  var1.hasRelation(var2);
-  *  FUNCTION
-  *    Analysies the predicates the mapping that contains the 
-  *   variables and returns the type of relation found. 
-  *  CONTEXT
-  *     QVT!Variable   
-  *  PARAMETERS
-  *    variable : QVT!Variable - variable to analyze relations against
-  *  RESULT
-  *    Any  - The EReference that relates the variables, null if not existant
-  *   TODO
-  *   It may be usefull to divide this into hasPredicateRelation and hasAssignmentRelation
-  *   so we have more controll over what relations we are looking for.
-  *  SEE ALSO
-  *
-  */
-operation qvti!Variable getRelation(variable : QVT!Variable) : Set {
-    
-    // Fin predicates and assignemnts that only refer the two variables and
-    // return the properties that relate them
-    return self.oppositePattern().area.rule.guardPattern.predicate
-    	.select(p | p.conditionExpression.isSimpleAttributeNavigation()
-    		    and p.conditionExpression.isArgumentVariable(variable)
-    		    and p.conditionExpression.isSourceVariable(self));
-        /* .collect(p | p.conditionExpression.getReferredProperty())
-    	.includingAll(
-    		self.oppositePattern().area.rule.bottomPattern.assignment
-    		.select(a | a.isSimpleAttributeNavigation()
-    			and a.slotExpression.referredVariable == self
-    			and a.value.referredVariable == variable)
-    		//.collect(a | a.targetProperty())
-    	);*/
-}
-
-
-operation qvti!Variable hasRelation(variable : QVT!RealizedVariable) : Bag {
-    
-    return self.oppositePattern().area.rule.bottomPattern.assignment
-    		.select(a | a.isSimpleAttributeNavigation()
-    			and a.slotExpression.referredVariable == self
-    			and a.value.referredVariable == variable);
-}
-
-
-
-operation qvts!InputParameter createSecondaryArgumentRelations() {
-	
-	for (pa in self.target.arguments) {
-        //v.name.println("    v ");
-        for (p in self.variable.getRelation(pa.variable)) {
-        	var sar = new qvts!SecondaryArgumentRelation;
-	        sar.relation = p.conditionExpression;
-	        sar.argument = pa;
-	        self.secondaryArgumentRelations.add(sar);
-        }
-    }
-}
-
-operation qvts!MappingAction getAvailableDepedencies() : OrderedSet {
-	
-	var results = self.dataDependencies.includingAll(self.dataHooks);
-	if (self.parent.isDefined()) {
-		results.addAll(self.parent.getAvailableDepedencies());
-	} 
-	return results;
-}
-
-
-operation qvts!Schedule defineMapOrdering() {
-
-    var visited : Set;
-    var mapLinear : Map;
-    
-    var queue : Sequence;
-    // Do a Depth first search of the containment tree of the output model
-    queue.addAll(rTree!Node.all().select(n | n.parent.isEmpty()));
-    while (not queue.isEmpty()) {
-        var n = queue.first();
-        queue.remove(n);
-        //n.println("n ");
-        //  Find all the mappings that have an output node if this type
-        for (ma in self.abstractActions.select(a : qvts!MappingAction | a.dataHooks.exists(dh | dh.type.name = n.EClassName))) {
-            // Find the predecesors and linearize
-            ma.getMappingOrderIndex(visited);
-        }
-        queue.addAll(n.children);
-    }
-    // Order any mappings not found in the predecessor search.
-    // TODO This will put all mappigns in the bottom of the list, check if this is the correct approach
-    for (ma in qvts!MappingAction.all.select(m | m.index == 0)) {
-    	ma.getMappingOrderIndex(visited);
-    }
-    "Ordering".println();
-    for (ma in self.abstractActions.select(a : qvts!MappingAction | true).sortBy(ma | ma.index)) {
-        ma.mapping.name.println(ma.index + ":");
-    }
-    " ".println();
-    " ".println();
-
-}
-
-operation qvts!MappingAction getMappingOrderIndex(visited) {
-    
-    visited.add(self);
-    var index : Integer;
-    // Find all the mappings that are predecesor to this one
-    var pre = self.getPredecesorMappings();
-    while (pre.size() > 0) {
-        var pma = pre.first();
-        if (not visited.includes(pma)) {        
-            //"Recursive ".println();
-            pma.getMappingOrderIndex(visited);
-            //"Back".println();
-        }    
-        pre.remove(pma);
-    }
-    if (self.index == 0) {
-        index = qvts!MappingAction.all().sortBy(ma | ma.index).last().index + 1;
-        self.index = index;
-    }
-}
-
-/****o* getPredecesorMappings
- *  NAME
- *    getPredecesorMappings -- get the list of predecesor mappings
- *  FUNCTION
- *  Predecessors of a MappingAction are all origins of its dataDependencies.
- *  CONTEXT
- *     qvts!MappingAction The maping action to query (mapping B) 
- *  RESULT
- *    Sequence  - The list of predecessor MappingActions
- *  SEE ALSO
- *
- */
-operation qvts!MappingAction getPredecesorMappings() : Sequence {
-	
-	return self.dataDependencies.origins.flatten();
-}
-
-
-operation createBindings(qin, mn, nav) {
-
-            if (qin.forAll(cd | mq.mapping.getInputVariables().one(v | v.type == cd.type))) {
-                mq.parent = mn;
-	            nested = true;
-	            
-	            for (cd in qin) {
-	               var mb = new qvts!MappingBinding;
-	               mb.mappingAction = mq;
-	               var binding = new qvti!VariableExp;
-	               var candidates = mn.mapping.getInputVariables().includingAll(mn.mapping.getOutputVariables())
-	                                   .select(v | v.type == cd.type);
-	               if (not candidates.isEmpty()) {
-	                   binding.referredVariable = candidates.first();
-	               } else {
-	                   // TODO Tell my parent to pass me a variable
-	               }
-	               mb.bindingExp = binding;
-	               mb.boundVariable = mq.mapping.getInputVariables().selectOne(v | v.type == cd.type);
-	               // TODO how to select and then discard when we have multiple CalssDatums
-	               // with the same type?
-	            }
-	            break;
-            }
-}

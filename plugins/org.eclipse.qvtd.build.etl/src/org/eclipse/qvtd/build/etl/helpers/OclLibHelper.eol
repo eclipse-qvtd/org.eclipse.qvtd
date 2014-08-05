@@ -22,7 +22,9 @@ operation oclStdLib!Type getOperationByName(name : String) : oclStdLib!Operation
 	return self.ownedOperation.selectOne(o | o.name == name);
 }
 
-operation getTypeByName(name : String) : oclStdLib!PrimitiveType {
+operation getPrimitiveTypeByName(name : String) : oclStdLib!PrimitiveType {
     var t =  oclStdLib!PrimitiveType.all.selectOne(t | t.name == name);
+    t =oclStdLib!AnyType.all().selectOne(t | t.name == "OclAny");
+    t.println("t ");
     return t;
 }

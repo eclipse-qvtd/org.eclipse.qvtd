@@ -5,6 +5,26 @@ pre {
     var emfTool = new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
 }
 
+/****t* /org.eclipse.qvtd.build.etl/mtc/QVTmToQVTiPartition
+ * NAME
+ *  QVTmToQVTiPartition -- Transform a QVTm transformation into its
+ *  partioned equivalent.
+ * FUNCTION
+ *  Each transformation rule is broken into n rules, depending on the number
+ *  of input domains.
+ *    
+ */
+
+/****u* /org.eclipse.qvtd.build.etl/mtc/QVTmToQVTiPartition/CoreModel
+ * NAME
+ *  CoreModel - Transform the model
+ * FUNCTION
+ *	Copy the model name and nested packages
+ * FROM
+ *	QVTm!CoreModel
+ * TO
+ *	QVTi!ImperativeModel
+ */
 rule CoreModel
     transform mIn:QVTm!CoreModel
     to mOut:QVTi!ImperativeModel {
@@ -12,6 +32,19 @@ rule CoreModel
         mOut.nestedPackage ::= mIn.nestedPackage;
     }
 
+/****u* /org.eclipse.qvtd.build.etl/mtc/QVTmToQVTiPartition/Transformation
+ * NAME
+ *  Transformation - Transform the transformation
+ * FUNCTION
+ *	Copy the transformation name and model parameters. Invoke the transformation
+ *  of the transformation's rules. Fix all the references to variables because
+ *  all the OCL expressions are copied with emf and thus point to the input
+ *  model.
+ * FROM
+ *  QVTm!Transformation
+ * TO
+ *  QVTi!Transformation
+ */
 rule Transformation
     transform tIn:QVTm!Transformation
     to tOut:QVTi!Transformation {
@@ -31,12 +64,23 @@ rule Transformation
                 d.bottomPattern.fixOperationCallReferences();
                 d.bottomPattern.fixAssignmentVarReferences();
 	        }
-        } 
+        }
     }
 
-rule TypedModels
+/****u* /org.eclipse.qvtd.build.etl/mtc/QVTmToQVTiPartition/TypedModels
+ * NAME
+ *  TypedModels - Transform the TypedModels
+ * FUNCTION
+ *	Copy the information about the typed models and make the "middle" model
+ *  explicit. 
+ * FROM
+ *  QVTm!TypedModel
+ * TO
+ *  QVTi!TypedModel
+ */
+rule TypedModel
     transform itm:QVTm!TypedModel
-    to otm:QVTm!TypedModel {
+    to otm:QVTi!TypedModel {
         
         if (itm.name.isDefined()) {
             otm.name = itm.name;
@@ -47,26 +91,39 @@ rule TypedModels
         otm.dependsOn ::= itm.dependsOn;
     }
 
-
+/****u* /org.eclipse.qvtd.build.etl/mtc/QVTmToQVTiPartition/Mapping
+ * NAME
+ *  Mapping - Transform the Mappings
+ * FUNCTION
+ *	Split each mapping into n mappings. 
+ * FROM
+ *	QVTm!Mapping
+ * TO
+ *  Set{ } 	- A set containing 1 to n mappings (n depends on the number of doamins)
+ * GUARD
+ *  Only mappings with guarded patterns, and if all the output variables' types
+ *  are not abstract and its not refined by other mappings
+ * TODO
+ * 	* 	The rule could be made more general to create the number of mappings bases 
+ *  on the number of domains.
+ *  * 	If it is refined, and it has input variables of abstract type, and for some
+ *		of the abstract type's subtypes there is not a mapping with an input
+ *		variable of these subtypes the rule needs to be transformed (in this case
+ *      an additional predicate should be added to limit the scope to the
+ *      unhandeled subtypes)
+ */
 rule Mapping
     transform m:QVTm!Mapping
     to mappings : Set {
-        
-        // Only mappings with guarded patterns 
-        // and if all the output variables' types are not abstract 
-        // and its not refined
-        // TODO it is refined, and it has input variables of abstract type, and for some of the
-        // abstract type's subtypes there is not a specification with an input variable of these subtypes
-        // (in this case an additional predicate should be added to limit the scope to the unhandeled subtypes)
         guard {
             //m.println(); 
-            //m.getOutputVars().collect(v | v.type.isTypeOf().println();
+            //m.getOutputVariables().collect(v | v.type.isTypeOf().println();
             
             //return (not m.context.isDefined() or (m.context.isDefined() and (not m.guardPattern.variable.isEmpty() 
             //    or
             //     not m.domain.collect(d | d.guardPattern.variable).flatten().isEmpty()
-            //    ))) and m.getOutputVars().forAll(v | not v.type.`abstract`) and m.specification.isEmpty();
-            return (not m.context.isDefined()) and m.getOutputVars().forAll(v | not v.type.`abstract`) and m.specification.isEmpty();    
+            //    ))) and m.getOutputVariables().forAll(v | not v.type.`abstract`) and m.specification.isEmpty();
+            return (not m.context.isDefined()) and m.getOutputVariables().forAll(v | not v.type.`abstract`) and m.specification.isEmpty();    
                 }
 
         // Promote unguarded nested mappings
@@ -215,7 +272,7 @@ rule MMPropertyAssignment
         oa.targetProperty =  ia.targetProperty;
         if (ia.bottomPattern.area.domain.exists(d | d.isOutputDomain())) {
             var op = new QVTi!Predicate;
-            op.conditionExpression = ia.toOCLExpression("=", "OclAny");
+            op.conditionExpression = ia.toOCLExpression();
             Assigdicate.add(op);
         }
         
@@ -235,7 +292,7 @@ rule MMVariableAssignment
         oa.targetVariable = ia.bottomPattern.equivalent().variable.select(v | v.name = ia.targetVariable.name);
         if (ia.bottomPattern.area.domain.exists(d | d.isOutputDomain())) {
             var op = new QVTi!Predicate;
-            op.conditionExpression = ia.toOCLExpression("=", "OclAny");
+            op.conditionExpression = ia.toOCLExpression();
             Assigdicate.add(op);
         }
     }     
@@ -356,13 +413,21 @@ operation QVT!Mapping promoteMappings() {
 }
 
 
-
-
-operation QVT!PropertyAssignment toOCLExpression(operationName : String , typeName : String) : QVTi!OperationCallExp {
+/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/toOCLExpression
+ * NAME
+ *  toOCLExpression - Transforms a property assignment to an OCL Expression
+ *
+ * CONTEXT
+ *  QVT!PropertyAssignment  The assignment to transform
+ * SEE ALSO
+*/
+operation QVT!PropertyAssignment toOCLExpression() : QVT!OperationCallExp {
     var exp = new QVTi!OperationCallExp;
     // It's an '=' operation. TODO, how to get the correct type?
-    exp.referredOperation = getOperationByName(operationName, oclStdLib!AnyType.all().selectOne(t | t.name == typeName));
-    exp.name = operationName;
+    // KLUDGE hhr 20140801 Getting '=' operation from predicate
+    // The correct way would be to query the OCLStdLibrary
+    exp.referredOperation = getEqualsOperation();
+    exp.name = exp.referredOperation.name;
     // The type is boolean
     exp.type = exp.referredOperation.type;
     // The source is a PropertyCallExp
@@ -379,11 +444,21 @@ operation QVT!PropertyAssignment toOCLExpression(operationName : String , typeNa
     return exp;
 }
 
-operation QVT!VariableAssignment toOCLExpression(operationName : String , typeName : String) : QVT!OperationCallExp {
+/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/toOCLExpression
+ * NAME
+ *  toOCLExpression - Transforms a variable assignment to an OCL Expression
+ *
+ * CONTEXT
+ *  QVT!PropertyAssignment  The assignment to transform
+ * SEE ALSO
+*/
+operation QVT!VariableAssignment toOCLExpression() : QVT!OperationCallExp {
     var exp = new QVT!OperationCallExp;
     // It's an '=' operation. TODO, how to get the correct type?
-    exp.referredOperation = getOperationByName(operationName, oclStdLib!AnyType.all().selectOne(t | t.name == typeName));
-    exp.name = operationName;
+    // KLUDGE hhr 20140801 Getting '=' operation from predicate
+    // The correct way would be to query the OCLStdLibrary
+    exp.referredOperation =  getEqualsOperation();
+    exp.name = exp.referredOperation.name;
     // The type is boolean
     exp.type = exp.referredOperation.type;
     // The source is a PropertyCallExp
@@ -401,4 +476,12 @@ operation QVT!VariableAssignment toOCLExpression(operationName : String , typeNa
     args.add(emfTool.getECoreUtil().copy(self.value));
     exp.argument = args;
     return exp;
+}
+
+@cahced
+operation getEqualsOperation() : QVT!Operation {
+	return QVTm!Predicate.all().first().conditionExpression.referredOperation;
+}
+post {
+	"Partition Done".println();
 }

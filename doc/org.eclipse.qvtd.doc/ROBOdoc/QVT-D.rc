@@ -1,6 +1,6 @@
-# Example QVT-D.rc
-#
+# QVT-D.rc
 items:
+# General items	
     NAME
     FUNCTION
     CONTEXT
@@ -8,13 +8,21 @@ items:
 	ANNOTATIONS
     RESULT
     SEE ALSO
+# ETL Specific
+    FROM
+    TO
+    GUARD
 ignore items:
     HISTORY
     BUGS
 item order:
+	NAME
     FUNCTION
     CONTEXT
     PARAMETERS
+    FROM
+    TO
+    GUARD
     ANNOTATIONS
 source items:
     SYNOPSIS
@@ -30,12 +38,14 @@ options:
     --index
     --tabsize 4
 headertypes:
+    d  "Delete"         robo_deletes
     f  "Flock"          robo_flock          1
-	d  "Delete"         robo_deletes
-	r  "Retype"         robo_retypes
+    l  "Libraries"      robo_libraries      1
 	m  "Migrate"        robo_migrates
-	l  "Libraries"      robo_libraries      1
 	o  "Operations"     robo_operations
+	r  "Retype"         robo_retypes
+	t  "Transformation" robo_transformations 1
+	u  "Rule"			robo_rule
 ignore files:
     README
     CVS

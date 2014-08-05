@@ -9,25 +9,24 @@
  *     Horacio Hoyos - initial implementation
  ******************************************************************************/
 import "../helpers/OclLibHelper.eol";
-import "../helpers/QVTHelpers.eol";
 
-/**
- * Helper functions to analyze OCLExpressions in QVTc and understand the relations
- * between variables used in them.
- */
- 
- /**
- * Returns the set of variables used in the OCL expression. 
- */
-operation QVT!OCLExpression findReferencedVariables() : Set {
-    return self.findReferencedVariables(Set{});
-}
+/****l* /org.eclipse.qvtd.build.etl/helpers/OCLExpressionAnalysis
+ * NAME
+ *  QVTiDependenceAnalysis -- Helper functions to analyze OCLExpressions in QVT
+ * and understand the relations between variables used in them.
+ */ 
 
-/**
- * Fixes all references to a variable within the OCL expression. The v argument
- * is the variable for which the references must be fixed.
- * 
- * @param v the variable for which the references must be fixed.
+/****o* OCLExpressionAnalysis/fixVarReferences
+ * NAME
+ *  fixVarReferences - Fixes all references to a variable within the OCL
+ *  expression.
+ * FUNCTION
+ *  Matches all variables in the expression with the same name and type as the
+ *  input variable and replaces them by references to it.
+ * CONTEXT
+ *  QVT!OCLExpression The expression for which the references are being fixed
+ * PARAMETERS
+ *  v The variable to fix
  */
 operation QVT!OCLExpression fixVarReferences(v : QVT!Variable) {
     if (self.isTypeOf(QVT!VariableExp)) {
@@ -54,7 +53,6 @@ operation QVT!OCLExpression fixVarReferences(v : QVT!Variable) {
                 p.last.fixVarReferences(v);
             } 
         } 
-        
     } else if (self.isKindOf(QVT!LiteralExp)) {
       // Noting to fix
     } else if (self.isKindOf(QVT!IteratorExp)) {
@@ -66,9 +64,27 @@ operation QVT!OCLExpression fixVarReferences(v : QVT!Variable) {
     }
  }
 
-/**
- * Returns the set of variables used in the OCL expression, ignoring the
- * variables in the ignore set. Usefull for analyzing IteratorExp
+/****o* OCLExpressionAnalysis/findReferencedVariables
+ * NAME
+ *  findReferencedVariables - Returns the set of variables used in the OCL
+ *  expression. 
+ * CONTEXT
+ *  QVT!OCLExpression The expression to analyze
+ *  
+ */
+operation QVT!OCLExpression findReferencedVariables() : Set {
+    return self.findReferencedVariables(Set{});
+}
+
+/****o* OCLExpressionAnalysis/findReferencedVariables
+ * NAME
+ *  findReferencedVariables - Returns the set of variables used in the OCL
+ *  expression, ignoring the variables in the ignore set. Usefull for analyzing
+ *  IteratorExp (ignore loop variables)
+ * CONTEXT
+ *  QVT!OCLExpression The expression to analyze
+ * PARAMETERS
+ *  ignore The set of variables to ignore in the analysis
  */
 operation QVT!OCLExpression findReferencedVariables(ignore : Set) : Set {
     var varRefs : Set();
@@ -134,11 +150,6 @@ operation QVT!OCLExpression isSimpleAttributeNavigation() : Boolean {
     }
     return false;
  }
- 
- 
- 
-
-
  
 // Only call if isSimpleAttributeNavigation returns true
 // We are only interested in domains

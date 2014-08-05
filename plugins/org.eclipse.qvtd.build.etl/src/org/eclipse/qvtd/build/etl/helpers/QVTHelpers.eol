@@ -8,18 +8,17 @@
  * Contributors:
  *     Horacio Hoyos - initial implementation
  ******************************************************************************/
+import "OCLExpressionAnalysis.eol";
 
 /****l* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers
  * NAME
- *  QVTiDependenceAnalysis -- A set of operations to query, format, interpret, 
- *  etc., information from a QVTc model. 
+ *  QVTHelpers -- A set of operations to query, format, interpret, etc., 
+ *  information from a QVT model. 
  * NOTES
  *  Some of this operations can/should be moved to the QVTcore model/code 
- * SEE ALSO
- *    
  */
 
-/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isInputDomain
+/****o* QVTHelpers/isInputDomain
  * NAME
  *  isInputDomain - Returns true if the area is of type QVT!CoreDomain and it's 
  *  TypedModel is the input domain.
@@ -29,8 +28,8 @@
  * ANNOTATIONS
  *  cached
  * SEE ALSO
- *  /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isMiddleDomain
- *  /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isOutputDomain
+ *  QVTHelpers/isMiddleDomain
+ *  QVTHelpers/isOutputDomain
  */
 @chached
 operation QVT!Area isInputDomain() : Boolean {
@@ -38,7 +37,7 @@ operation QVT!Area isInputDomain() : Boolean {
         config!Configuration.all.first().inputDirection.name == self.typedModel.name;
 }
 
-/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isMiddleDomain
+/****o* QVTHelpers/isMiddleDomain
  * NAME
  *  isMiddleDomain - Returns true if the area belongs to the middle domain, i.e.
  *  it is a QVT!Mapping.
@@ -48,15 +47,15 @@ operation QVT!Area isInputDomain() : Boolean {
  * ANNOTATIONS
  *  cached
  * SEE ALSO
- *  /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isInputDomain
- *  /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isOutputDomain
+ *  QVTHelpers/isInputDomain
+ *  QVTHelpers/isOutputDomain
  */
 @chached
 operation QVT!Area isMiddleDomain() : Boolean {
     return self.isTypeOf(QVT!Mapping);
 }
 
-/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isOutputDomain
+/****o* QVTHelpers/isOutputDomain
  * NAME
  *  isOutputDomain - Returns true if the area is of type QVT!CoreDomain and it's 
  *  TypedModel is the output domain.
@@ -66,8 +65,8 @@ operation QVT!Area isMiddleDomain() : Boolean {
  * ANNOTATIONS
  *  cached
  * SEE ALSO
- *  /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isInputDomain
- *  /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isMiddleDomain
+ *  QVTHelpers/isInputDomain
+ *  QVTHelpers/isMiddleDomain
  */
 @chached
 operation QVT!Area isOutputDomain() : Boolean {
@@ -146,7 +145,8 @@ operation QVT!OCLExpression getArea() : QVT!Area {
 /**
  * Returns the set of variables used in the assignemnt 
  */
-operation QVT!Assignment findReferencedVariables() : Set {
+@cached 
+operation QVT!Assignment findReferencedVariables() : Collection {
     
     var varRefs : Set();
     varRefs = self.value.findReferencedVariables();
@@ -156,6 +156,14 @@ operation QVT!Assignment findReferencedVariables() : Set {
         varRefs.add(self.targetVariable);
     }
     return varRefs;
+}
+
+/**
+ * Finds all variables referenced in a Preicate.
+ */
+@cached
+operation QVT!Predicate findReferencedVariables() : Collection {
+    return self.conditionExpression.findReferencedVariables();
 }
 
 
@@ -415,29 +423,43 @@ operation QVT!Variable findReferencesInPatterns(patterns : Sequence) {
     
     var targetVar = null;
     for (p in patterns) {
-        targetVar = p.findVariable(self);
+        targetVar = p.findVariableByName(self);
         if (targetVar <> null) {
            return targetVar;
         }
     }
 }
 
-
-/**
- * Finds all variables referenced in a Preicate.
+/****o* QVTHelpers/findVariableByName
+ * NAME
+ *  isInputDomain - Find all variables in the pattern that match the input variable
+ *  by name 
+ * CONTEXT
+ *  QVT!GuardPattern  The pattern to search
+ * ANNOTATIONS
+ *  cached
+ * TODO
+ *  If the QVT model had a getAllVariables() method that returned variables and
+ *  realized variables, these two methods could be combined. 
  */
-@cached
-operation QVT!Predicate findReferencedVariables() : Collection {
-    return self.conditionExpression.findReferencedVariables();
-}
-
-
 @cached
 operation QVT!GuardPattern findVariableByName(variable : QVT!TypedElement) {
     
     return self.variable.selectOne(lv | lv.name == variable.name);
 }
 
+/****o* QVTHelpers/findVariableByName
+ * NAME
+ *  isInputDomain - Find all variables in the pattern that match the input variable
+ *  by name 
+ * CONTEXT
+ *  QVT!GuardPattern  The pattern to search
+ * ANNOTATIONS
+ *  cached
+ * TODO
+ *  If the QVT model had a getAllVariables() method that returned variables and
+ *  realized variables, these two methods could be combined. 
+ */
 @cached
 operation QVT!BottomPattern findVariableByName(variable : QVT!TypedElement) {
     
@@ -471,7 +493,7 @@ operation QVT!Property hasNavigableOpposite() : Boolean {
     }
 }
 
-/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/getDataTypeUses
+/****o* QVTHelpers/getDataTypeUses
  * NAME
  *  getDataTypeUses - Returns a sequence of {Type, Attribtye} pairs whos
  *  value is assigned from a DataType.
@@ -512,6 +534,45 @@ operation QVT!Mapping hasDataTypeUse(values : Sequence) : Boolean {
     }
     return false;
 }    
+
+/****o* QVTHelpers/hasRelation
+  *  NAME
+  *   hasRelation -- Identify relations between variables
+  *  SYNOPSIS
+  *   relation =  var1.hasRelation(var2);
+  *  FUNCTION
+  *   Analysies the predicates and assignments of the mapping that contains the 
+  *   variables and looks for relations of the form:  var2.att = var1. If found,
+  *   the operation returns the attribute that relates the variables.    
+  *  CONTEXT
+  *     QVT!Variable
+  *  PARAMETERS
+  *    variable - variable to analyze relations against: variable.att = self
+  *  RESULT
+  *    Any  - The EReference that relates the variables, null if not existant
+  *   TODO
+  *   It may be usefull to divide this into hasPredicateRelation and hasAssignmentRelation
+  *   so we have more controll over what relations we are looking for.
+  *  SEE ALSO
+  *
+  */
+operation QVTi!Variable hasRelation(variable : QVT!Variable) : Bag {
+    
+    // Fin predicates and assignemnts that only refer the two variables and
+    // return the properties that relate them
+    return self.oppositePattern().area.rule.guardPattern.predicate
+        .select(p | p.conditionExpression.isSimpleAttributeNavigation()
+                and p.conditionExpression.isArgumentVariable(variable)
+                and p.conditionExpression.isSourceVariable(self))
+        .collect(p | p.conditionExpression.getReferredProperty())
+        .includingAll(
+            self.oppositePattern().area.rule.bottomPattern.assignment
+            .select(a | a.isSimpleAttributeNavigation()
+                and a.slotExpression.referredVariable == self
+                and a.value.referredVariable == variable)
+            .collect(a | a.targetProperty())
+        );
+}
 
 
 // ========================================================= move to qvtimperative model
@@ -621,7 +682,7 @@ operation QVT!Rule getOutputVariables() : Sequence {
  */
  /* TODO Added the commented code to add it to QVTc/u/m model */
 @cached
-operation qvti!Mapping getAllAssignments() : Sequence {
+operation QVT!Mapping getAllAssignments() : Sequence {
     var asgs : Sequence;
     asgs.addAll(self.bottomPattern.assignment);
     for (d in self.domain) {
@@ -647,7 +708,7 @@ operation qvti!Mapping getAllAssignments() : Sequence {
  */
 /* TODO Added the commented code to add it to QVTc/u/m model */
 @cached
-operation qvti!Mapping getAllPredicates() : Sequence {
+operation QVT!Mapping getAllPredicates() : Sequence {
     var pdcts : Sequence;
     pdcts.addAll(self.bottomPattern.predicate);
     pdcts.addAll(self.guardPattern.predicate);

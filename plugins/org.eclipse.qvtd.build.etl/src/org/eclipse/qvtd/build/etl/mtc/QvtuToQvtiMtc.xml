@@ -22,7 +22,7 @@
 		   <PivotSetup/>
 	</target>
 
-	<target name="loadModels" depends="PivotSetup">
+	<target name="loadModels" > <!-- depends="PivotSetup"> -->
         <!-- OCL Library -->
         <epsilon.emf.loadModel
             name = "oclStdLib"
