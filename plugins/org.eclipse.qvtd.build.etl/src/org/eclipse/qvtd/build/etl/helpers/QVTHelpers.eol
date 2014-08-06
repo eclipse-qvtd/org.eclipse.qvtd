@@ -74,35 +74,60 @@ operation QVT!Area isOutputDomain() : Boolean {
         config!Configuration.all.first().outputDirection.collect(od | od.name).includes(self.typedModel.name);
 }
 
-/**
- * Returns true if the transformation is invoked in check mode.
+
+/****o* QVTHelpers/isCheckMode
+ * NAME
+ *  isCheckMode - Indicates if the transformation is invoked in check mode.
+ * ANNOTATIONS
+ *  cached
+ * RESULT
+ *  True if the condifuration mode is Mode#checking
+ * SEE ALSO
+ *  QVTHelpers/isEnforceMode
  */
+@chached 
 operation isCheckMode() : Boolean {
     return config!Configuration.all.first().mode == config!Mode#checking;
 }
 
-/**
- * Returns true if the transformation is invoked in enforce mode.
+
+/****o* QVTHelpers/isEnforceMode
+ * NAME
+ *  isEnforceMode - Indicates if the transformation is invoked in enforce mode.
+ * ANNOTATIONS
+ *  cached
+ * RESULT
+ *  True if the condifuration mode is Mode#enforcement
+ * SEE ALSO
+ *  QVTHelpers/isCheckMode
  */
+@chached
 operation isEnforceMode() : Boolean {
     return config!Configuration.all.first().mode == config!Mode#enforcement;
 }
 
 
-
-/**
- * Returns the typed model of a tranformation that corresponds to the middle
- * model.
+/****o* QVTHelpers/getMiddleTypedModel
+ * NAME
+ *  getMiddleTypedModel - Returns the TypedModel reference for the middle domain
+ * ANNOTATIONS
+ *  cached
+ * RESULT
+ *  A reference to the TypeModel of the middle domain.
  */
+@cachecd
 operation QVT!Transformation getMiddleTypedModel() : QVT!TypedModel {
 
     return self.modelParameter.selectOne(tm | tm.name = config!Configuration.all.first().middle.name);
 }
 
-/**
- * Returns the pattern to which a variable belongs.
- * <p>
- * The operation is @chached to improve performance.
+/****o* QVTHelpers/oppositePattern
+ * NAME
+ *  oppositePattern - Returns the pattern to which a variable belongs
+ * ANNOTATIONS
+ *  cached
+ * RESULT
+ *  The core pattern in which the variable is instanciated/referenced
  */
 @cached
 operation QVT!Variable oppositePattern() : QVT!CorePattern  {
@@ -114,11 +139,20 @@ operation QVT!Variable oppositePattern() : QVT!CorePattern  {
     }
 }
 
-/**
- * Returns the area that defines the environment of an OCL expression. The results
- * depends on the type of the OCL expression. 
- * <p>
- * The operation is @chached to improve performance.
+/****o* QVTHelpers/getArea
+ * NAME
+ *  getArea - Returns the area that defines the context of an OCL Expression.
+ * FUNCTION
+ *  The area of an OCL Expression depends on the area of the variables used
+ *  in the expression, and thus all the parts of the expression are inspected
+ *  to find variable references and then their area
+ * ANNOTATIONS
+ *  cached
+ * RESULT
+ *  The core pattern in which the variable is instanciated/referenced
+ * TODO
+ *  What if the OCL Ecpression contains references to multiple variables in 
+ *  multiple areas? return a collection and let the caller decide?
  */
 @cached
 operation QVT!OCLExpression getArea() : QVT!Area {
@@ -140,10 +174,16 @@ operation QVT!OCLExpression getArea() : QVT!Area {
     return null;
 }
 
-
-
-/**
- * Returns the set of variables used in the assignemnt 
+/****o* QVTHelpers/findReferencedVariables
+ * NAME
+ *  findReferencedVariables - Returns the collection of all varaibles referenced
+ *  in the assignment.
+ * CONTEXT
+ *  QVT!Assignment
+ * ANNOTATIONS
+ *  cached
+ * RESULT
+ *  A collection of all the varaibles found.
  */
 @cached 
 operation QVT!Assignment findReferencedVariables() : Collection {
@@ -158,53 +198,109 @@ operation QVT!Assignment findReferencedVariables() : Collection {
     return varRefs;
 }
 
-/**
- * Finds all variables referenced in a Preicate.
+/****o* QVTHelpers/findReferencedVariables
+ * NAME
+ *  findReferencedVariables - Returns the collection of all varaibles referenced
+ *  in the assignment.
+ * CONTEXT
+ *  QVT!Predicate
+ * ANNOTATIONS
+ *  cached
+ * RESULT
+ *  A collection of all the varaibles found.
  */
 @cached
 operation QVT!Predicate findReferencedVariables() : Collection {
     return self.conditionExpression.findReferencedVariables();
 }
 
-
- 
-/**
- * Retypes a variable to the less abstract type of all variables in the patterns
- * with the same name.
- *
- * @param patterns the patterns to look for variables with the same name 
- */  
+/****o* QVTHelpers/retypeVar
+ * NAME
+ *  retypeVar - Retypes a variable to the less abstract type of all variables, in
+ * the pattern, with the same name.
+ * CONTEXT
+ *  QVT!Variable
+ * PARAMETERS
+ *  pattern     The pattern to search for variables with the same name
+ */
 operation QVT!Variable retypeVar(pattern : QVT!Pattern) {
     var refinedVars = pattern.variable.select(
                     v | v.name == self.name
                     );
     if (refinedVars.size() > 0) {
-        var x = new Native("org.eclipse.qvtd.build.etl.PivotUtil");
-        var lrv = x.getLowestRankVariable(refinedVars.including(self));
+        //var x = new Native("org.eclipse.qvtd.build.etl.PivotUtil");
+        //var lrv = x.getLowestRankVariable(refinedVars.including(self));
+        var lrv = getLowestRankVariable(refinedVars.including(self));
         self.type = lrv.type;
     }
 }
 
-/**
- * Retypes a realized variable to the less abstract type of all variables in the
- * bottom patterns with the same name.
- *
- * @param patterns the patterns to look for variables with the same name 
- */  
-operation QVT!Variable retypeRealizedVar(pattern : QVT!Pattern) {
+/****o* QVTHelpers/retypeRealizedVar
+ * NAME
+ *  retypeRealizedVar - Retypes a RealizedVariable to the less abstract type of
+ *  all realized variables, in the pattern, with the same name.
+ * CONTEXT
+ *  QVT!RealizedVariable
+ * PARAMETERS
+ *  pattern     The pattern to search for variables with the same name
+ */
+operation QVT!RealizedVariable retypeRealizedVar(pattern : QVT!Pattern) {
     var refinedVars = pattern.realizedVariable.select(
                     v | v.name == self.name
                     );
     if (refinedVars.size() > 0) {
-        var x = new Native("org.eclipse.qvtd.build.etl.PivotUtil");
-        var lrv = x.getLowestRankVariable(refinedVars.including(self));
+        //var x = new Native("org.eclipse.qvtd.build.etl.PivotUtil");
+        //var lrv = x.getLowestRankVariable(refinedVars.including(self));
+        var lrv = getLowestRankVariable(refinedVars.including(self));
         self.type = lrv.type;
     }
 }
 
+/****o* QVTHelpers/getLowestRankVariable
+ * NAME
+ *  getLowestRankVariable - Finds the variable with the less abstract type from
+ *  the collection of variables
+ * PARAMETERS
+ *  vars     The collection to perform the search
+ */
+operation getLowestRankVariable(vars : Collection) {
+        
+        var min = vars.first();
+        for(v in vars.excluding(min)) {
+            //minType = (ClassImpl) min.eGet(typeFeat);
+            if (v.type.superClass.includes(min.type)) {
+                min = v;    
+            }
+        }
+        // Verify that the min is actually the min, i.e. all the other variables are superiors
+        // in the hierarchy
+        /*for (TypedElement var : vars) {
+            if (!var.equals(min)) {
+                if (!((ClassImpl)min.eGet(typeFeat)).getSuperClass().contains(var.eGet(typeFeat))) {
+                    System.out.println("min is not min");
+                    return null;
+                }
+            }
+        }*/
+        return min;
+}
+
+/****o* QVTHelpers/fixPredicateVarReferences
+ * NAME
+ *  fixPredicateVarReferences - Fixes predicate's varaible references that point
+ *  to variables in some other model (same name, different model)
+ * FUNCTION
+ *  Loops trough all the predicates and fixes references to the variables. 
+ * CONTEXT
+ *  QVT!GuardPattern
+ * TODO
+ *  Only predicates with references to variables in other models should be checked,
+ *  and then only references to varaibles in other models fixed. Add a select
+ *  statement to filter these.
+ */
 operation QVT!GuardPattern fixPredicateVarReferences() {
     for (predicate in self.predicate) {
-        //predicate.println("Predicate ");
+        predicate.println("Predicate ");
         var refVars =  predicate.findReferencedVariables();
         //refVars.println("refVars ");
         // Find variables and fix references
@@ -240,7 +336,19 @@ operation QVT!GuardPattern fixPredicateVarReferences() {
     }
 }
 
-
+/****o* QVTHelpers/fixPredicateVarReferences
+ * NAME
+ *  fixPredicateVarReferences - Fixes predicate's varaible references that point
+ *  to variables in some other model (same name, different model)
+ * FUNCTION
+ *  Loops trough all the predicates and fixes references to the variables. 
+ * CONTEXT
+ *  QVT!BottomPattern
+ * TODO
+ *  Only predicates with references to variables in other models should be checked,
+ *  and then only references to varaibles in other models fixed. Add a select
+ *  statement to filter these.
+ */
 operation QVT!BottomPattern fixPredicateVarReferences() {
     
     for (predicate in self.predicate) {
@@ -298,7 +406,19 @@ operation QVT!BottomPattern fixPredicateVarReferences() {
 }
 
 
-
+/****o* QVTHelpers/fixAssignmentVarReferences
+ * NAME
+ *  fixAssignmentVarReferences - Fixes assignment's varaible references that point
+ *  to variables in some other model (same name, different model)
+ * FUNCTION
+ *  Loops trough all the assignments and fixes references to the variables. 
+ * CONTEXT
+ *  QVT!BottomPattern
+ * TODO
+ *  Only predicates with references to variables in other models should be checked,
+ *  and then only references to varaibles in other models fixed. Add a select
+ *  statement to filter these.
+ */
 operation QVT!BottomPattern fixAssignmentVarReferences() {
     for (assignment in self.assignment) {
         //assignment.println("Assignment ");
@@ -360,6 +480,19 @@ operation QVT!BottomPattern fixAssignmentVarReferences() {
     }
 }
 
+/****o* QVTHelpers/fixOperationCallReferences
+ * NAME
+ *  fixOperationCallReferences - Fixes OperationCall's varaible references that point
+ *  to variables in some other model (same name, different model)
+ * FUNCTION
+ *  Loops trough all the operation calls and fixes references to the variables. 
+ * CONTEXT
+ *  QVT!BottomPattern
+ * TODO
+ *  Only predicates with references to variables in other models should be checked,
+ *  and then only references to varaibles in other models fixed. Add a select
+ *  statement to filter these.
+ */
 operation QVT!BottomPattern fixOperationCallReferences() {
     for (o in self.enforcementOperation) {
         //predicate.println("Predicate ");
@@ -415,25 +548,33 @@ operation QVT!BottomPattern fixOperationCallReferences() {
     }
 }
 
-/**
- * Finds all variables referenced in a set of Pattern by finding all references
- * each of the patterns.
+/****o* QVTHelpers/findReferencesInPatterns
+ * NAME
+ *  findReferencesInPatterns - Searches in the patterns for a reference to a 
+ *  variable with the same name as this.
+ * CONTEXT
+ *  QVT!Variable  The variable to search
+ * PARAMETERS
+ *  patterns The collection of patterns to seach in
+ * RESULT
+ *  A reference to the varaible if found. null otherwise.
  */
-operation QVT!Variable findReferencesInPatterns(patterns : Sequence) {
+operation QVT!Variable findReferencesInPatterns(patterns : Sequence) : QVT!Variable {
     
     var targetVar = null;
     for (p in patterns) {
         targetVar = p.findVariableByName(self);
         if (targetVar <> null) {
-           return targetVar;
+           break;
         }
     }
+    return targetVar;
 }
 
 /****o* QVTHelpers/findVariableByName
  * NAME
- *  isInputDomain - Find all variables in the pattern that match the input variable
- *  by name 
+ *  findVariableByName - Find all variables in the pattern that match the input 
+ *  variable by name 
  * CONTEXT
  *  QVT!GuardPattern  The pattern to search
  * ANNOTATIONS
@@ -450,8 +591,8 @@ operation QVT!GuardPattern findVariableByName(variable : QVT!TypedElement) {
 
 /****o* QVTHelpers/findVariableByName
  * NAME
- *  isInputDomain - Find all variables in the pattern that match the input variable
- *  by name 
+ *  findVariableByName - Find all variables in the pattern that match the input 
+ *  variable by name 
  * CONTEXT
  *  QVT!GuardPattern  The pattern to search
  * ANNOTATIONS
@@ -467,7 +608,15 @@ operation QVT!BottomPattern findVariableByName(variable : QVT!TypedElement) {
 }
 
 
-
+/****o* QVTHelpers/isContainer
+ * NAME
+ *  isContainer - Indicates if the property is a containment relation
+ *  by name 
+ * CONTEXT
+ *  QVT!Property  The property
+ * ANNOTATIONS
+ *  cached
+ */
 @cached
 operation QVT!Property isContainer() : Boolean {
     if (self.getOpposite().isDefined()) {
@@ -477,6 +626,17 @@ operation QVT!Property isContainer() : Boolean {
     }
 }
 
+/****o* QVTHelpers/hasNavigableOpposite
+ * NAME
+ *  hasNavigableOpposite - Indicates if the property has a navigable opposite
+ * FUNCTION
+ *  The property has a navigable opposite if the opposite relation is defined
+ *  and if that relation has a many multiplicity.   
+ * CONTEXT
+ *  QVT!Property  The property
+ * ANNOTATIONS
+ *  cached
+ */
 operation QVT!Property hasNavigableOpposite() : Boolean {
     self.println("hasNavigableOpposite ");
     if (self.getOpposite().isDefined()) {
