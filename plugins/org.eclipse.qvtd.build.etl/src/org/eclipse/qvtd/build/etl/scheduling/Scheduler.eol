@@ -244,7 +244,7 @@ operation QVTi!Variable canBeDerived(matched : Sequence) : Boolean {
 operation QVTs!Transformation forceOrder() {
     
     for (m in self.rule) {
-        m.name.println("m ");
+        //m.name.println("m ");
         var sorted = sortByDependency(m.mappingCall.asSequence());
         m.mappingCall.clear();
         m.mappingCall.addAll(sorted);

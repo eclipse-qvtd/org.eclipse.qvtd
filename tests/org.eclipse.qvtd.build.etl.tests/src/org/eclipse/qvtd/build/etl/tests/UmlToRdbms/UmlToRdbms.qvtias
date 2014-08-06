@@ -39,6 +39,11 @@
               referredVariable="#//@nestedPackage.0/@rule.0/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
       </bottomPattern>
+      <mappingCall referredMapping="#m.umlRdbms.integerToNumber_LM"/>
+      <mappingCall referredMapping="#m.umlRdbms.stringToVarchar_LM"/>
+      <mappingCall referredMapping="#m.umlRdbms.booleanToBoolean_LM"/>
+      <mappingCall referredMapping="#m.umlRdbms.packageToSchema_MR"/>
+      <mappingCall referredMapping="#m.umlRdbms.classToTable_LM"/>
     </rule>
     <rule xsi:type="qvti:Mapping" xmi:id="m.umlRdbms.packageToSchema_MR" name="packageToSchema_MR">
       <domain xsi:type="qvtcb:CoreDomain" name="rdbms" isCheckable="false" isEnforceable="true"
@@ -203,6 +208,7 @@
               referredVariable="#//@nestedPackage.0/@rule.3/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
       </bottomPattern>
+      <mappingCall referredMapping="#m.umlRdbms.integerToNumber_MR"/>
     </rule>
     <rule xsi:type="qvti:Mapping" xmi:id="m.umlRdbms.booleanToBoolean_LM" name="booleanToBoolean_LM">
       <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="false" isEnforceable="false"
@@ -292,6 +298,7 @@
               referredVariable="#//@nestedPackage.0/@rule.4/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
       </bottomPattern>
+      <mappingCall referredMapping="#m.umlRdbms.booleanToBoolean_MR"/>
     </rule>
     <rule xsi:type="qvti:Mapping" xmi:id="m.umlRdbms.booleanToBoolean_MR" name="booleanToBoolean_MR">
       <domain xsi:type="qvtcb:CoreDomain" name="rdbms" isCheckable="false" isEnforceable="true"
@@ -465,6 +472,7 @@
               referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
       </bottomPattern>
+      <mappingCall referredMapping="#m.umlRdbms.stringToVarchar_MR"/>
     </rule>
     <rule xsi:type="qvti:Mapping" xmi:id="m.umlRdbms.classToTable_MR" name="classToTable_MR">
       <domain xsi:type="qvtcb:CoreDomain" name="rdbms" isCheckable="false" isEnforceable="true"
@@ -694,6 +702,8 @@
               referredVariable="#//@nestedPackage.0/@rule.9/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
       </bottomPattern>
+      <mappingCall referredMapping="#m.umlRdbms.classToTable_MR"/>
+      <mappingCall referredMapping="#m.umlRdbms.classPrimitiveAttributes_LM"/>
     </rule>
     <rule xsi:type="qvti:Mapping" xmi:id="m.umlRdbms.associationToForeignKey_MR" name="associationToForeignKey_MR">
       <domain xsi:type="qvtcb:CoreDomain" name="rdbms" isCheckable="false" isEnforceable="true"
@@ -1386,6 +1396,7 @@
               referredVariable="#//@nestedPackage.0/@rule.12/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
       </bottomPattern>
+      <mappingCall referredMapping="#m.umlRdbms.attributeColumns_MR"/>
     </rule>
     <rule xsi:type="qvti:Mapping" xmi:id="m.umlRdbms.classComplexAttributes_LM" name="classComplexAttributes_LM">
       <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="false" isEnforceable="false"
@@ -1992,6 +2003,16 @@
               referredVariable="#//@nestedPackage.0/@rule.16/@domain.0/@bottomPattern/@realizedVariable.0"/>
         </assignment>
       </bottomPattern>
+    </rule>
+    <rule xsi:type="qvti:Mapping" xmi:id="m.umlRdbms.__root__" name="__root__">
+      <guardPattern/>
+      <bottomPattern/>
+      <mappingCall referredMapping="#m.umlRdbms.packageToSchema_LM"/>
+      <mappingCall referredMapping="#m.umlRdbms.classComplexAttributes_LM"/>
+      <mappingCall referredMapping="#m.umlRdbms.complexAttributeComplexAttributes_LM"/>
+      <mappingCall referredMapping="#m.umlRdbms.associationToForeignKey_LM"/>
+      <mappingCall referredMapping="#m.umlRdbms.associationToForeignKey_MR"/>
+      <mappingCall referredMapping="#m.umlRdbms.complexAttributePrimitiveAttributes_LM"/>
     </rule>
   </nestedPackage>
   <nestedPackage xmi:id="P.$$" name="$$" nsPrefix="orphanage" nsURI="http://www.eclipse.org/ocl/3.1.0/orphanage">
