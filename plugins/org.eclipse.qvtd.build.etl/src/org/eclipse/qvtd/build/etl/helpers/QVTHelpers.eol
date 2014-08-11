@@ -132,12 +132,14 @@ operation QVT!Transformation getMiddleTypedModel() : QVT!TypedModel {
 @cached
 operation QVT!Variable oppositePattern() : QVT!CorePattern  {
     
-    if(self.isTypeOf(QVT!Variable)) {
-        return QVT!CorePattern.all.selectOne(p |p.variable.includes(self));
-    } else if (self.isTypeOf(QVT!RealizedVariable)) {
-        return QVT!BottomPattern.all.selectOne(p |p.realizedVariable.includes(self));
-    }
+    return self.owningModel().getAllOfType("GuardPattern").selectOne(p |p.variable.includes(self));
 }
+
+operation QVT!RealizedVariable oppositePattern() : QVT!CorePattern  {
+    
+    return self.owningModel().getAllOfType("BottomPattern").selectOne(p |p.realizedVariable.includes(self));
+}
+
 
 /****o* QVTHelpers/getArea
  * NAME
@@ -299,9 +301,9 @@ operation getLowestRankVariable(vars : Collection) {
  *  statement to filter these.
  */
 operation QVT!GuardPattern fixPredicateVarReferences() {
-    for (predicate in self.predicate) {
-        predicate.println("Predicate ");
-        var refVars =  predicate.findReferencedVariables();
+    for (predicate in self.predicate.select(p | p.findReferencedVariables().exists(v | v.owningModel() <> p.owningModel()))) {
+        //predicate.toString.println("Fixing Predicate ");
+        var refVars =  predicate.findReferencedVariables().select(v | v.owningModel() <> predicate.owningModel());
         //refVars.println("refVars ");
         // Find variables and fix references
         for (v in refVars) {
@@ -351,9 +353,9 @@ operation QVT!GuardPattern fixPredicateVarReferences() {
  */
 operation QVT!BottomPattern fixPredicateVarReferences() {
     
-    for (predicate in self.predicate) {
+    for (predicate in self.predicate.select(p | p.findReferencedVariables().exists(v | v.owningModel() <> p.owningModel()))) {
         //predicate.println("Predicate ");
-        var refVars =  predicate.findReferencedVariables();
+        var refVars =  predicate.findReferencedVariables().select(v | v.owningModel() <> predicate.owningModel());
         //refVars.println("refVars ");
         // Find variables and fix references
         for (v in refVars) {
@@ -420,9 +422,9 @@ operation QVT!BottomPattern fixPredicateVarReferences() {
  *  statement to filter these.
  */
 operation QVT!BottomPattern fixAssignmentVarReferences() {
-    for (assignment in self.assignment) {
-        //assignment.println("Assignment ");
-        var refVars =  assignment.findReferencedVariables();
+    for (assignment in self.assignment.select(a | a.findReferencedVariables().exists(v | v.owningModel() <> a.owningModel()))) {
+        //assignment.toString().println("Fixing Assignment ");
+        var refVars =  assignment.findReferencedVariables().select(v | v.owningModel() <> assignment.owningModel());
         //refVars.println("refVars ");
         // Find variables and fix references
         for (v in refVars) {
@@ -713,7 +715,6 @@ operation QVT!Mapping hasDataTypeUse(values : Sequence) : Boolean {
   *   TODO
   *   It may be usefull to divide this into hasPredicateRelation and hasAssignmentRelation
   *   so we have more controll over what relations we are looking for.
-  *  SEE ALSO
   *
   */
 operation QVTi!Variable hasRelation(variable : QVT!Variable) : Bag {
@@ -734,6 +735,22 @@ operation QVTi!Variable hasRelation(variable : QVT!Variable) : Bag {
         );
 }
 
+/****o* QVTHelpers/getUnidirComment 
+ * NAME
+ *  getUnidirComment - Returns a string that contains a comment to state the
+ *  direction and mode in which the transformation was invoked
+ */ 
+operation getUnidirComment() : String {
+    var comment : String = "/* ";
+    if (config!Configuration.all.first().mode == config!Mode#enforcement) {
+        comment = comment + "Enforce ";
+    } else {
+        comment = comment + "Check ";
+    }
+    comment = comment + config!Configuration.all.first().inputDirection.name + " to ";
+    comment = comment + config!Configuration.all.first().outputDirection.collect(d | d.name).concat(",") + " */";
+    return comment; 
+}
 
 // ========================================================= move to qvtimperative model
 
@@ -771,7 +788,7 @@ operation QVT!Area getContextMappingPatterns() : Sequence {
 
 }
 
-/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/getInputVariables
+/****o* QVTHelpers/getInputVariables
  * NAME
  *  getInputVariables - Returns the input variables of the Mapping, excluding DataType
  *  variables
@@ -800,7 +817,7 @@ operation QVT!Rule getInputVariables() : Sequence {
     return vars;
 }
 
-/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/getOutputVariables
+/****o* QVTHelpers/getOutputVariables
  * NAME
  *  getOutputVariables - Returns the output variables of the Mapping, excluding 
  *  DataType variables
@@ -829,7 +846,7 @@ operation QVT!Rule getOutputVariables() : Sequence {
     return vars;
 }
 
-/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/getAllAssignments
+/****o* QVTHelpers/getAllAssignments
  * NAME
  *  getAllAssignments - Returns all the assignments of the mapping
  *
@@ -855,7 +872,7 @@ operation QVT!Mapping getAllAssignments() : Sequence {
 }
 
 
-/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/getAllPredicates
+/****o* QVTHelpers/getAllPredicates
  * NAME
  *  getAllPredicates - Returns all the predicates of the mapping
  *
@@ -882,7 +899,7 @@ operation QVT!Mapping getAllPredicates() : Sequence {
     return pdcts;
 }
 
-/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/getPrimitiveDataTypeAssignemnts
+/****o* QVTHelpers/getPrimitiveDataTypeAssignemnts
  * NAME
  *  getPrimitiveDataTypeAssignemnts - Returns all the property assignments of 
  *  the mapping were the value is a variable with a primitive data type, i.e.,
@@ -903,7 +920,7 @@ operation QVT!Mapping getPrimitiveDataTypeAssignemnts() : Sequence {
 }
 
 
-/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isSimpleAttributeNavigation
+/****o* QVTHelpers/isSimpleAttributeNavigation
  * NAME
  *  getAllPredicates - Determine if the Assignemnts is of the form 
  *    varA.attribute := varB
@@ -935,27 +952,12 @@ operation QVT!Assignment isSimpleAttributeNavigation() : Boolean {
  * ANNOTATIONS
  *  cached
  * SEE ALSO
- *  /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/isSimpleAttributeNavigation
+ *  QVTHelpers/isSimpleAttributeNavigation
  */
 operation QVT!Assignment isPrimitivePropertyAssignemnt() : Boolean {
     
     return self.isSimpleAttributeNavigation()
     	and self.value.type.isTypeOf(QVT!PrimitiveType);
 }
- 
-/**
- * Returns the comment added to state the direction in which the transformation
- * was invoked.
- *
- */  
-operation getUnidirComment() : String {
-    var comment : String = "/* ";
-    if (config!Configuration.all.first().mode == config!Mode#enforcement) {
-        comment = comment + "Enforce ";
-    } else {
-        comment = comment + "Check ";
-    }
-    comment = comment + config!Configuration.all.first().inputDirection.name + " to ";
-    comment = comment + config!Configuration.all.first().outputDirection.collect(d | d.name).concat(",") + " */";
-    return comment; 
-}
+
+
