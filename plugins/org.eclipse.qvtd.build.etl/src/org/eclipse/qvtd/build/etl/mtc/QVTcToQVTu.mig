@@ -16,7 +16,7 @@ import "../helpers/OclLibHelper.eol";
  *  QVTcToQVTu -- Flock migration script from QVTc to QVTu
  *
  * SEE ALSO
- *    
+ *  /org.eclipse.qvtd.build.etl/mtc/QVTuToQVTm
  ******
  */
 
