@@ -11,7 +11,7 @@
 import "../helpers/QVTHelpers.eol";
 import "../helpers/OclLibHelper.eol";
 
-/****m* /org.eclipse.qvtd.build.etl/mtc/QVTcToQVTu
+/****f* /org.eclipse.qvtd.build.etl/mtc/QVTcToQVTu
  * NAME
  *  QVTcToQVTu -- Flock migration script from QVTc to QVTu
  *
@@ -19,44 +19,39 @@ import "../helpers/OclLibHelper.eol";
  *    
  ******
  */
- 
-/****d* /org.eclipse.qvtd.build.etl/mtc/QVTcToQVTu/PropertyAssignment
- * CONTEXT
- *  PropertyAssignment -- Output domain to middle assignments are removed, iif
+
+
+/****d* QVTcToQVTu/PropertyAssignment
+ * ORIGINAL
+ *  PropertyAssignment
+ * FUNCTION
+ *  * Output domain to middle assignments are removed, iif
  *  the value expression is not a variable
- *
- * SEE ALSO
- *    
- ******
- */
-// TODO Check that if the slot expression area is Null, the test is correct
-// 
-// TODO Do we also have to migrate VariableAssignments?!?!?!
-@cascade
-delete PropertyAssignment
-    when : (original.value.getArea() <> null) and original.value.getArea().isOutputDomain()
-        and not original.value.isTypeOf(QVTc!VariableExp)
-        and original.slotExpression.getArea().isMiddleDomain()
-
-
-/****d* /org.eclipse.qvtd.build.etl/mtc/QVTcToQVTu/PropertyAssignment
- * CONTEXT
- *  PropertyAssignment --  Middle domian to input assigments are removed
- *
- * SEE ALSO
+ *  * Middle domain to input domain assignments are removed
+ * TODO
+ *      Check that if the slot expression area is Null, the test is correct
+ *      Do we also have to migrate VariableAssignments?!?!?!
  *    
  ******
  */
 @cascade
 delete PropertyAssignment
-    when : original.slotExpression.getArea().isInputDomain()
-        and (original.value.getArea() <> null)
-        and original.value.getArea().isMiddleDomain()
+    when : (original.value.getArea() <> null) 
+             
+            and ( (original.value.getArea().isOutputDomain()
+                  and not original.value.isTypeOf(QVTc!VariableExp)
+                  and original.slotExpression.getArea().isMiddleDomain())
+                or
+                  (original.value.getArea().isMiddleDomain()
+                  and original.slotExpression.getArea().isInputDomain())
+                )
 
-/****d* /org.eclipse.qvtd.build.etl/mtc/QVTcToQVTu/Predicate
- * CONTEXT
- *  Predicate --  Output domain predicates of realized variables are removed
- *
+
+/****d* QVTcToQVTu/Predicate
+ * ORIGINAL
+ *  Predicate
+ * FUNCTION 
+ *  Delete output domain predicates of realized variables
  * SEE ALSO
  *    
  ******
@@ -66,23 +61,17 @@ delete Predicate
     when : original.pattern.isTypeOf(QVTc!BottomPattern)
     and original.conditionExpression.findReferencedVariables().forAll(v | v.oppositePattern().area.isOutputDomain())
 
-
-// Realized variables in the input domain are retyped into variables
-retype RealizedVariable to Variable
-    when {
-        if (original.oppositePattern().area.isInputDomain()) {
-            return true;
-        } else {
-            if (original.oppositePattern().area.isMiddleDomain()) {
-                return original.oppositePattern().area.domain.size() > 0 and
-                       original.oppositePattern().area.domain.forAll(d | d.isOutputDomain());
-            } else {
-                return false;
-            }
-        }
-    }  
-
-// Property assignments in the input domain are retyped to predicates   
+    
+/****r* QVTcToQVTu/PropertyAssignment
+ * ORIGINAL
+ *  PropertyAssignment
+ * EVOLVED
+ *  Predicate 
+ * FUNCTION
+ *  Property assignments from middle to middle are retyped to predicates 
+ *    
+ ******
+ */
 retype PropertyAssignment to Predicate
     when {
         if (original.bottomPattern.area.isInputDomain()) {
@@ -98,55 +87,55 @@ retype PropertyAssignment to Predicate
         }
     }  
 
-migrate Transformation {
-    var comment : QVTc!Comment = new QVTc!Comment;
-    comment.body = getUnidirComment();
-    migrated.ownedComment.add(comment);
-}
 
-// Input Domain
-migrate CoreDomain
-    when : original.isInputDomain() {
-	    
-	    migrated.isCheckable = false;
-	    migrated.isEnforceable = false;
-    }
-
-// Output Domain(s)
-// THIS SHOULD BE HANDELED BY THE ENGINE!!??
-migrate CoreDomain
-    when : original.isOutputDomain() {
-        if (isCheckMode()) {
-            migrated.isEnforceable = false;
-        }
-	    if (isEnforceMode()) {
-	        migrated.isCheckable = false;
-	    }
-    }
-
-// Make sure variables and predicates are contained in the pattern    
-migrate BottomPattern 
+/****r* QVTcToQVTu/RealizedVariable
+ * ORIGINAL
+ *  RealizedVariable
+ * EVOLVED
+ *  Variable
+ * FUNCTION
+ *  Realized variables in the input domain are retyped to variables
+ *    
+ ******
+ */
+retype RealizedVariable to Variable
     when {
-        if (original.area.isInputDomain()) {
+        if (original.oppositePattern().area.isInputDomain()) {
             return true;
         } else {
-            if (original.area.isMiddleDomain()) {
-                return original.area.domain.size() > 0 and
-                       original.area.domain.forAll(d | d.isOutputDomain());
+            if (original.oppositePattern().area.isMiddleDomain()) {
+                return original.oppositePattern().area.domain.size() > 0 and
+                       original.oppositePattern().area.domain.forAll(d | d.isOutputDomain());
             } else {
                 return false;
             }
         }
-    } {
-	    migrated.variable.addAll(original.realizedVariable.equivalent());
-	    for (a in original.assignment) {
-	        if (original.area.isInputDomain() or 
-	            a.findReferencedVariables().forAll(v | v.oppositePattern().area.isMiddleDomain())) {
-	               migrated.predicate.add(a.equivalent());
-	            }
-	    }
-}
+    }  
 
+
+/****m* QVTcToQVTu/CoreModel
+ * ORIGINAL
+ *  CoreModel
+ * FUNCTION
+ *  Fix the name and the external URI of the migrated model
+ *    
+ ******
+ */  
+migrate CoreModel
+    {
+        migrated.externalURI = original.externalURI.replace(".qvtc", ".qvtu.qvtc");
+    }
+    
+/****m* QVTcToQVTu/PropertyAssignment
+ * ORIGINAL
+ *  PropertyAssignment
+ * FUNCTION
+ *  For PropertyAssignment that have been retyped to Predicates, we need to 
+ *  define the OCL Expression that replaces the assignment. CST wise, this is
+ *  changing a ":=" for a "=", but AST wise it is more complex.
+ *    
+ ******
+ */  
 migrate PropertyAssignment
     when {
         if (original.bottomPattern.area.isInputDomain()) {
@@ -163,8 +152,10 @@ migrate PropertyAssignment
     
         var exp = new QVTc!OperationCallExp;
         // It's an '=' operation. TODO, how to get the correct type?
-        exp.referredOperation = getOperationByName("=", oclStdLib!AnyType.all().selectOne(t | t.name == "OclAny"));
-        exp.name = "=";
+        //exp.referredOperation = getOperationByName("=", oclStdLib!PrimitiveType.all().selectOne(t | t.name == "Boolean"));
+        // TODO hack till we figure out the correct way to use the OCLStdLib
+        exp.referredOperation = getEqualsOperation();
+        exp.name = exp.referredOperation.name;
         // The type is boolean
         exp.type = exp.referredOperation.type;
         // The source is a PropertyCallExp
@@ -182,7 +173,15 @@ migrate PropertyAssignment
     }
 
 
-    
+/****m* QVTcToQVTu/PropertyAssignment
+ * ORIGINAL
+ *  PropertyAssignment
+ * FUNCTION
+ *  Output domain PropertyAssignments should not he default is the operation
+ *  mode is Check.
+ *    
+ ******
+ */      
 migrate PropertyAssignment
     when : original.bottomPattern.area.isOutputDomain() 
         and isCheckMode()
@@ -191,3 +190,104 @@ migrate PropertyAssignment
     migrated.isDefault = false;
 }
 
+/****m* QVTcToQVTu/Transformation
+ * ORIGINAL
+ *  Transformation
+ * FUNCTION
+ *  Add additional information to the comments to indicate that the QVTu AST is
+ *  generated based on an especific configuration.
+ *    
+ ******
+ */
+migrate Transformation {
+    var comment : QVTc!Comment = new QVTc!Comment;
+    comment.body = getUnidirComment();
+    migrated.ownedComment.add(comment);
+}
+
+/****m* QVTcToQVTu/CoreDomain
+ * ORIGINAL
+ *  CoreDomain
+ * WHEN
+ *  The domain's typeModel is the input domain.
+ * FUNCTION
+ *  Since QVTu is uni-directional, make sure that all input domains' check and
+ *  enforce flags are false. 
+ * TODO
+ * Should it only be the enfornce one?
+ *    
+ ******
+ */
+migrate CoreDomain
+    when : original.isInputDomain() {
+	    
+	    //migrated.isCheckable = false;
+	    migrated.isEnforceable = false;
+    }
+
+/****m* QVTcToQVTu/CoreDomain
+ * ORIGINAL
+ *  CoreDomain
+ * WHEN
+ *  The domain's typeModel is the output domain.
+ * FUNCTION
+ *  Since QVTu is uni-directional, make sure that all input domains' check and
+ *  enforce flags are false. 
+ * TODO
+ * THIS SHOULD BE HANDELED BY THE ENGINE!!??
+ *    
+ ******
+ */
+migrate CoreDomain
+    when : original.isOutputDomain() {
+        if (isCheckMode()) {
+            migrated.isEnforceable = false;
+        }
+	    if (isEnforceMode()) {
+	        migrated.isCheckable = false;
+	    }
+    }
+
+/****m* QVTcToQVTu/BottomPattern
+ * ORIGINAL
+ *  BottomPattern
+ * WHEN
+ *  The pattern is in the input domain, or the pattern is in the middle domain
+ *  (i.e. a mapping) and the mapping only has output domains.  
+ * FUNCTION
+ *  Add the migrated realized varaibles and assignments to the pattern.
+ * TODO
+ * THIS SHOULD BE HANDELED BY THE ENGINE!!??
+ *    
+ ******
+ */   
+migrate BottomPattern 
+    when {
+        if (original.area.isInputDomain()) {
+            return true;
+        } else {
+            if (original.area.isMiddleDomain()) {
+                return not original.area.domain.isEmpty() and
+                       original.area.domain.forAll(d | d.isOutputDomain());
+            } else {
+                return false;
+            }
+        }
+    } {
+	    migrated.variable.addAll(original.realizedVariable.equivalent());
+	    for (a in original.assignment) {
+	        if (original.area.isInputDomain() or 
+	            a.findReferencedVariables().forAll(v | v.oppositePattern().area.isMiddleDomain())) {
+	               migrated.predicate.add(a.equivalent());
+	            }
+	    }
+}
+
+@cached
+operation getEqualsOperation() : QVT!Operation {
+    return QVTc!Predicate.all().first().conditionExpression.referredOperation;
+}
+
+post {
+    "QVTcToQVTu Done!".println();
+}
