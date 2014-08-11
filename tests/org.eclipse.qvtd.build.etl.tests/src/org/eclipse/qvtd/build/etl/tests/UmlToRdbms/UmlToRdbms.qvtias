@@ -23,13 +23,7 @@
       </domain>
       <guardPattern/>
       <bottomPattern>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.umlPackage">
-          <value xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Package"
-              referredVariable="#//@nestedPackage.0/@rule.0/@domain.0/@guardPattern/@variable.0"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
-              referredVariable="#//@nestedPackage.0/@rule.0/@domain.1/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.name">
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.UmlToRdbmsModelElement.name">
           <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
               referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
             <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Package"
@@ -38,10 +32,16 @@
           <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
               referredVariable="#//@nestedPackage.0/@rule.0/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.umlPackage">
+          <value xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Package"
+              referredVariable="#//@nestedPackage.0/@rule.0/@domain.0/@guardPattern/@variable.0"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
+              referredVariable="#//@nestedPackage.0/@rule.0/@domain.1/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
       </bottomPattern>
-      <mappingCall referredMapping="#m.umlRdbms.integerToNumber_LM"/>
       <mappingCall referredMapping="#m.umlRdbms.stringToVarchar_LM"/>
       <mappingCall referredMapping="#m.umlRdbms.booleanToBoolean_LM"/>
+      <mappingCall referredMapping="#m.umlRdbms.integerToNumber_LM"/>
       <mappingCall referredMapping="#m.umlRdbms.packageToSchema_MR"/>
       <mappingCall referredMapping="#m.umlRdbms.classToTable_LM"/>
     </rule>
@@ -63,7 +63,7 @@
       <bottomPattern>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name">
           <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-              referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.name">
+              referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.UmlToRdbmsModelElement.name">
             <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
                 referredVariable="#//@nestedPackage.0/@rule.1/@domain.1/@guardPattern/@variable.0"/>
           </value>
@@ -176,7 +176,13 @@
         </predicate>
       </guardPattern>
       <bottomPattern>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.name">
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.owner">
+          <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
+              referredVariable="#//@nestedPackage.0/@rule.3/@domain.1/@guardPattern/@variable.0"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
+              referredVariable="#//@nestedPackage.0/@rule.3/@domain.1/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.UmlToRdbmsModelElement.name">
           <value xsi:type="pivot:OperationCallExp" name="+" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.String.%43%..ocl.String">
             <source xsi:type="pivot:OperationCallExp" name="+" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
@@ -201,14 +207,50 @@
           <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
               referredVariable="#//@nestedPackage.0/@rule.3/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.owner">
-          <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
-              referredVariable="#//@nestedPackage.0/@rule.3/@domain.1/@guardPattern/@variable.0"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
-              referredVariable="#//@nestedPackage.0/@rule.3/@domain.1/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
       </bottomPattern>
       <mappingCall referredMapping="#m.umlRdbms.integerToNumber_MR"/>
+    </rule>
+    <rule xsi:type="qvti:Mapping" xmi:id="m.umlRdbms.booleanToBoolean_MR" name="booleanToBoolean_MR">
+      <domain xsi:type="qvtcb:CoreDomain" name="rdbms" isCheckable="false" isEnforceable="true"
+          typedModel="#//@nestedPackage.0/@modelParameter.1">
+        <guardPattern/>
+        <bottomPattern>
+          <realizedVariable name="sqlType" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"/>
+        </bottomPattern>
+      </domain>
+      <domain xsi:type="qvtcb:CoreDomain" name="middle" isEnforceable="false" typedModel="#//@nestedPackage.0/@modelParameter.2">
+        <guardPattern>
+          <variable name="p2s" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"/>
+          <variable name="p2n" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.BooleanToBoolean"/>
+        </guardPattern>
+        <bottomPattern/>
+      </domain>
+      <guardPattern>
+        <predicate>
+          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+            <source xsi:type="pivot:PropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
+                referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.owner">
+              <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
+                  referredVariable="#//@nestedPackage.0/@rule.4/@domain.1/@guardPattern/@variable.1"/>
+            </source>
+            <argument xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
+                referredVariable="#//@nestedPackage.0/@rule.4/@domain.1/@guardPattern/@variable.0"/>
+          </conditionExpression>
+        </predicate>
+      </guardPattern>
+      <bottomPattern>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.typeName">
+          <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+              referredVariable="#//@nestedPackage.0/@rule.4/@domain.0/@bottomPattern/@realizedVariable.0"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
+              referredVariable="#//@nestedPackage.0/@rule.4/@domain.1/@guardPattern/@variable.1"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:VariableAssignment" isDefault="false" targetVariable="#//@nestedPackage.0/@rule.4/@domain.0/@bottomPattern/@realizedVariable.0">
+          <value xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+              stringSymbol="BOOLEAN"/>
+        </assignment>
+      </bottomPattern>
     </rule>
     <rule xsi:type="qvti:Mapping" xmi:id="m.umlRdbms.booleanToBoolean_LM" name="booleanToBoolean_LM">
       <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="false" isEnforceable="false"
@@ -234,10 +276,10 @@
             <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Package"
                 referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.umlPackage">
               <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
-                  referredVariable="#//@nestedPackage.0/@rule.4/@domain.1/@guardPattern/@variable.0"/>
+                  referredVariable="#//@nestedPackage.0/@rule.5/@domain.1/@guardPattern/@variable.0"/>
             </source>
             <argument xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Package"
-                referredVariable="#//@nestedPackage.0/@rule.4/@domain.0/@guardPattern/@variable.0"/>
+                referredVariable="#//@nestedPackage.0/@rule.5/@domain.0/@guardPattern/@variable.0"/>
           </conditionExpression>
         </predicate>
         <predicate>
@@ -246,7 +288,7 @@
             <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                 referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
               <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"
-                  referredVariable="#//@nestedPackage.0/@rule.4/@domain.0/@guardPattern/@variable.1"/>
+                  referredVariable="#//@nestedPackage.0/@rule.5/@domain.0/@guardPattern/@variable.1"/>
             </source>
             <argument xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                 stringSymbol="Boolean"/>
@@ -258,15 +300,21 @@
             <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Package"
                 referredProperty="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace">
               <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"
-                  referredVariable="#//@nestedPackage.0/@rule.4/@domain.0/@guardPattern/@variable.1"/>
+                  referredVariable="#//@nestedPackage.0/@rule.5/@domain.0/@guardPattern/@variable.1"/>
             </source>
             <argument xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Package"
-                referredVariable="#//@nestedPackage.0/@rule.4/@domain.0/@guardPattern/@variable.0"/>
+                referredVariable="#//@nestedPackage.0/@rule.5/@domain.0/@guardPattern/@variable.0"/>
           </conditionExpression>
         </predicate>
       </guardPattern>
       <bottomPattern>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.name">
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.owner">
+          <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
+              referredVariable="#//@nestedPackage.0/@rule.5/@domain.1/@guardPattern/@variable.0"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
+              referredVariable="#//@nestedPackage.0/@rule.5/@domain.1/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.UmlToRdbmsModelElement.name">
           <value xsi:type="pivot:OperationCallExp" name="+" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.String.%43%..ocl.String">
             <source xsi:type="pivot:OperationCallExp" name="+" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
@@ -274,7 +322,7 @@
               <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                   referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
                 <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"
-                    referredVariable="#//@nestedPackage.0/@rule.4/@domain.0/@guardPattern/@variable.1"/>
+                    referredVariable="#//@nestedPackage.0/@rule.5/@domain.0/@guardPattern/@variable.1"/>
               </source>
               <argument xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                   stringSymbol="2"/>
@@ -283,64 +331,16 @@
                 stringSymbol="BOOLEAN"/>
           </value>
           <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.BooleanToBoolean"
-              referredVariable="#//@nestedPackage.0/@rule.4/@domain.1/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.owner">
-          <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
-              referredVariable="#//@nestedPackage.0/@rule.4/@domain.1/@guardPattern/@variable.0"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
-              referredVariable="#//@nestedPackage.0/@rule.4/@domain.1/@bottomPattern/@realizedVariable.0"/>
+              referredVariable="#//@nestedPackage.0/@rule.5/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.primitive">
           <value xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"
-              referredVariable="#//@nestedPackage.0/@rule.4/@domain.0/@guardPattern/@variable.1"/>
+              referredVariable="#//@nestedPackage.0/@rule.5/@domain.0/@guardPattern/@variable.1"/>
           <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
-              referredVariable="#//@nestedPackage.0/@rule.4/@domain.1/@bottomPattern/@realizedVariable.0"/>
+              referredVariable="#//@nestedPackage.0/@rule.5/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
       </bottomPattern>
       <mappingCall referredMapping="#m.umlRdbms.booleanToBoolean_MR"/>
-    </rule>
-    <rule xsi:type="qvti:Mapping" xmi:id="m.umlRdbms.booleanToBoolean_MR" name="booleanToBoolean_MR">
-      <domain xsi:type="qvtcb:CoreDomain" name="rdbms" isCheckable="false" isEnforceable="true"
-          typedModel="#//@nestedPackage.0/@modelParameter.1">
-        <guardPattern/>
-        <bottomPattern>
-          <realizedVariable name="sqlType" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"/>
-        </bottomPattern>
-      </domain>
-      <domain xsi:type="qvtcb:CoreDomain" name="middle" isEnforceable="false" typedModel="#//@nestedPackage.0/@modelParameter.2">
-        <guardPattern>
-          <variable name="p2s" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"/>
-          <variable name="p2n" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.BooleanToBoolean"/>
-        </guardPattern>
-        <bottomPattern/>
-      </domain>
-      <guardPattern>
-        <predicate>
-          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
-              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-            <source xsi:type="pivot:PropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
-                referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.owner">
-              <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
-                  referredVariable="#//@nestedPackage.0/@rule.5/@domain.1/@guardPattern/@variable.1"/>
-            </source>
-            <argument xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
-                referredVariable="#//@nestedPackage.0/@rule.5/@domain.1/@guardPattern/@variable.0"/>
-          </conditionExpression>
-        </predicate>
-      </guardPattern>
-      <bottomPattern>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.typeName">
-          <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-              referredVariable="#//@nestedPackage.0/@rule.5/@domain.0/@bottomPattern/@realizedVariable.0"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
-              referredVariable="#//@nestedPackage.0/@rule.5/@domain.1/@guardPattern/@variable.1"/>
-        </assignment>
-        <assignment xsi:type="qvtcb:VariableAssignment" isDefault="false" targetVariable="#//@nestedPackage.0/@rule.5/@domain.0/@bottomPattern/@realizedVariable.0">
-          <value xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-              stringSymbol="BOOLEAN"/>
-        </assignment>
-      </bottomPattern>
     </rule>
     <rule xsi:type="qvti:Mapping" xmi:id="m.umlRdbms.stringToVarchar_MR" name="stringToVarchar_MR">
       <domain xsi:type="qvtcb:CoreDomain" name="rdbms" isCheckable="false" isEnforceable="true"
@@ -440,13 +440,19 @@
         </predicate>
       </guardPattern>
       <bottomPattern>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.owner">
+          <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
+              referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@guardPattern/@variable.0"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
+              referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.primitive">
           <value xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"
               referredVariable="#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.1"/>
           <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
               referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.name">
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.UmlToRdbmsModelElement.name">
           <value xsi:type="pivot:OperationCallExp" name="+" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.String.%43%..ocl.String">
             <source xsi:type="pivot:OperationCallExp" name="+" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
@@ -463,12 +469,6 @@
                 stringSymbol="VARCHAR"/>
           </value>
           <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.StringToVarchar"
-              referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.owner">
-          <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
-              referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@guardPattern/@variable.0"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
               referredVariable="#//@nestedPackage.0/@rule.7/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
       </bottomPattern>
@@ -520,21 +520,6 @@
         </predicate>
       </guardPattern>
       <bottomPattern>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.table">
-          <value xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"
-              referredVariable="#//@nestedPackage.0/@rule.8/@domain.0/@bottomPattern/@realizedVariable.0"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
-              referredVariable="#//@nestedPackage.0/@rule.8/@domain.1/@guardPattern/@variable.1"/>
-        </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name">
-          <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-              referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.name">
-            <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
-                referredVariable="#//@nestedPackage.0/@rule.8/@domain.1/@guardPattern/@variable.1"/>
-          </value>
-          <slotExpression xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"
-              referredVariable="#//@nestedPackage.0/@rule.8/@domain.0/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ToColumn.column">
           <value xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"
               referredVariable="#//@nestedPackage.0/@rule.8/@domain.0/@bottomPattern/@realizedVariable.2"/>
@@ -544,6 +529,21 @@
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.primaryKey">
           <value xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Key"
               referredVariable="#//@nestedPackage.0/@rule.8/@domain.0/@bottomPattern/@realizedVariable.1"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
+              referredVariable="#//@nestedPackage.0/@rule.8/@domain.1/@guardPattern/@variable.1"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name">
+          <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+              referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.UmlToRdbmsModelElement.name">
+            <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
+                referredVariable="#//@nestedPackage.0/@rule.8/@domain.1/@guardPattern/@variable.1"/>
+          </value>
+          <slotExpression xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"
+              referredVariable="#//@nestedPackage.0/@rule.8/@domain.0/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.table">
+          <value xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"
+              referredVariable="#//@nestedPackage.0/@rule.8/@domain.0/@bottomPattern/@realizedVariable.0"/>
           <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
               referredVariable="#//@nestedPackage.0/@rule.8/@domain.1/@guardPattern/@variable.1"/>
         </assignment>
@@ -625,7 +625,7 @@
       </bottomPattern>
     </rule>
     <rule xsi:type="qvti:Mapping" xmi:id="m.umlRdbms.classToTable_LM" name="classToTable_LM">
-      <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="false" isEnforceable="false"
+      <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="true" isEnforceable="false"
           typedModel="#//@nestedPackage.0/@modelParameter.0">
         <guardPattern>
           <variable name="p" type="SimpleUML.ecore.oclas#T.simpleuml.Package"/>
@@ -657,18 +657,6 @@
         <predicate>
           <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-            <source xsi:type="pivot:PropertyCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-                referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
-              <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
-                  referredVariable="#//@nestedPackage.0/@rule.9/@domain.0/@guardPattern/@variable.1"/>
-            </source>
-            <argument xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-                stringSymbol="persistent"/>
-          </conditionExpression>
-        </predicate>
-        <predicate>
-          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
-              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
             <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Package"
                 referredProperty="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace">
               <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
@@ -678,15 +666,21 @@
                 referredVariable="#//@nestedPackage.0/@rule.9/@domain.0/@guardPattern/@variable.0"/>
           </conditionExpression>
         </predicate>
+        <predicate>
+          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+            <source xsi:type="pivot:PropertyCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
+              <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
+                  referredVariable="#//@nestedPackage.0/@rule.9/@domain.0/@guardPattern/@variable.1"/>
+            </source>
+            <argument xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                stringSymbol="persistent"/>
+          </conditionExpression>
+        </predicate>
       </guardPattern>
       <bottomPattern>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.umlClass">
-          <value xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
-              referredVariable="#//@nestedPackage.0/@rule.9/@domain.0/@guardPattern/@variable.1"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
-              referredVariable="#//@nestedPackage.0/@rule.9/@domain.1/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.name">
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.UmlToRdbmsModelElement.name">
           <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
               referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
             <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
@@ -698,6 +692,12 @@
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.owner">
           <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
               referredVariable="#//@nestedPackage.0/@rule.9/@domain.1/@guardPattern/@variable.0"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
+              referredVariable="#//@nestedPackage.0/@rule.9/@domain.1/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.umlClass">
+          <value xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
+              referredVariable="#//@nestedPackage.0/@rule.9/@domain.0/@guardPattern/@variable.1"/>
           <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
               referredVariable="#//@nestedPackage.0/@rule.9/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
@@ -735,18 +735,6 @@
             <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"
                 referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.table">
               <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
-                  referredVariable="#//@nestedPackage.0/@rule.10/@domain.1/@guardPattern/@variable.1"/>
-            </source>
-            <argument xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"
-                referredVariable="#//@nestedPackage.0/@rule.10/@domain.0/@guardPattern/@variable.1"/>
-          </conditionExpression>
-        </predicate>
-        <predicate>
-          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
-              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-            <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"
-                referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.table">
-              <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
                   referredVariable="#//@nestedPackage.0/@rule.10/@domain.1/@guardPattern/@variable.2"/>
             </source>
             <argument xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"
@@ -756,13 +744,13 @@
         <predicate>
           <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-            <source xsi:type="pivot:PropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
-                referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.owner">
+            <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"
+                referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.table">
               <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
                   referredVariable="#//@nestedPackage.0/@rule.10/@domain.1/@guardPattern/@variable.1"/>
             </source>
-            <argument xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
-                referredVariable="#//@nestedPackage.0/@rule.10/@domain.1/@guardPattern/@variable.0"/>
+            <argument xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"
+                referredVariable="#//@nestedPackage.0/@rule.10/@domain.0/@guardPattern/@variable.1"/>
           </conditionExpression>
         </predicate>
         <predicate>
@@ -775,6 +763,18 @@
             </source>
             <argument xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Schema"
                 referredVariable="#//@nestedPackage.0/@rule.10/@domain.0/@guardPattern/@variable.0"/>
+          </conditionExpression>
+        </predicate>
+        <predicate>
+          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+            <source xsi:type="pivot:PropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
+                referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.owner">
+              <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
+                  referredVariable="#//@nestedPackage.0/@rule.10/@domain.1/@guardPattern/@variable.1"/>
+            </source>
+            <argument xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
+                referredVariable="#//@nestedPackage.0/@rule.10/@domain.1/@guardPattern/@variable.0"/>
           </conditionExpression>
         </predicate>
         <predicate>
@@ -803,18 +803,6 @@
         </predicate>
         <predicate>
           <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
-              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-            <source xsi:type="pivot:PropertyCallExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"
-                referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Key.owner">
-              <source xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Key"
-                  referredVariable="#//@nestedPackage.0/@rule.10/@domain.0/@guardPattern/@variable.3"/>
-            </source>
-            <argument xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"
-                referredVariable="#//@nestedPackage.0/@rule.10/@domain.0/@guardPattern/@variable.2"/>
-          </conditionExpression>
-        </predicate>
-        <predicate>
-          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.String.%61%..ocl.OclSelf">
             <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                 referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.kind">
@@ -823,6 +811,18 @@
             </source>
             <argument xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                 stringSymbol="primary"/>
+          </conditionExpression>
+        </predicate>
+        <predicate>
+          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+            <source xsi:type="pivot:PropertyCallExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"
+                referredProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Key.owner">
+              <source xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Key"
+                  referredVariable="#//@nestedPackage.0/@rule.10/@domain.0/@guardPattern/@variable.3"/>
+            </source>
+            <argument xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"
+                referredVariable="#//@nestedPackage.0/@rule.10/@domain.0/@guardPattern/@variable.2"/>
           </conditionExpression>
         </predicate>
         <predicate>
@@ -854,6 +854,12 @@
           <slotExpression xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"
               referredVariable="#//@nestedPackage.0/@rule.10/@domain.0/@bottomPattern/@realizedVariable.1"/>
         </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ToColumn.column">
+          <value xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"
+              referredVariable="#//@nestedPackage.0/@rule.10/@domain.0/@bottomPattern/@realizedVariable.1"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AssociationToForeignKey"
+              referredVariable="#//@nestedPackage.0/@rule.10/@domain.1/@guardPattern/@variable.3"/>
+        </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.AssociationToForeignKey.foreignKey">
           <value xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey"
               referredVariable="#//@nestedPackage.0/@rule.10/@domain.0/@bottomPattern/@realizedVariable.0"/>
@@ -861,25 +867,10 @@
               referredVariable="#//@nestedPackage.0/@rule.10/@domain.1/@guardPattern/@variable.3"/>
         </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name">
-          <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-              referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.AssociationToForeignKey.name">
-            <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AssociationToForeignKey"
-                referredVariable="#//@nestedPackage.0/@rule.10/@domain.1/@guardPattern/@variable.3"/>
-          </value>
-          <slotExpression xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey"
-              referredVariable="#//@nestedPackage.0/@rule.10/@domain.0/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ToColumn.column">
-          <value xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"
-              referredVariable="#//@nestedPackage.0/@rule.10/@domain.0/@bottomPattern/@realizedVariable.1"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AssociationToForeignKey"
-              referredVariable="#//@nestedPackage.0/@rule.10/@domain.1/@guardPattern/@variable.3"/>
-        </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name">
           <value xsi:type="pivot:OperationCallExp" name="+" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.String.%43%..ocl.String">
             <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-                referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.AssociationToForeignKey.name">
+                referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.UmlToRdbmsModelElement.name">
               <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AssociationToForeignKey"
                   referredVariable="#//@nestedPackage.0/@rule.10/@domain.1/@guardPattern/@variable.3"/>
             </source>
@@ -888,6 +879,15 @@
           </value>
           <slotExpression xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"
               referredVariable="#//@nestedPackage.0/@rule.10/@domain.0/@bottomPattern/@realizedVariable.1"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name">
+          <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+              referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.UmlToRdbmsModelElement.name">
+            <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AssociationToForeignKey"
+                referredVariable="#//@nestedPackage.0/@rule.10/@domain.1/@guardPattern/@variable.3"/>
+          </value>
+          <slotExpression xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey"
+              referredVariable="#//@nestedPackage.0/@rule.10/@domain.0/@bottomPattern/@realizedVariable.0"/>
         </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.ForeignKey.owner">
           <value xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"
@@ -921,7 +921,7 @@
       </bottomPattern>
     </rule>
     <rule xsi:type="qvti:Mapping" xmi:id="m.umlRdbms.associationToForeignKey_LM" name="associationToForeignKey_LM">
-      <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="false" isEnforceable="false"
+      <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="true" isEnforceable="false"
           typedModel="#//@nestedPackage.0/@modelParameter.0">
         <guardPattern>
           <variable name="p" type="SimpleUML.ecore.oclas#T.simpleuml.Package"/>
@@ -948,10 +948,10 @@
             <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
                 referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.umlClass">
               <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
-                  referredVariable="#//@nestedPackage.0/@rule.11/@domain.1/@guardPattern/@variable.2"/>
+                  referredVariable="#//@nestedPackage.0/@rule.11/@domain.1/@guardPattern/@variable.1"/>
             </source>
             <argument xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
-                referredVariable="#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.2"/>
+                referredVariable="#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.1"/>
           </conditionExpression>
         </predicate>
         <predicate>
@@ -960,10 +960,10 @@
             <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
                 referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.umlClass">
               <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
-                  referredVariable="#//@nestedPackage.0/@rule.11/@domain.1/@guardPattern/@variable.1"/>
+                  referredVariable="#//@nestedPackage.0/@rule.11/@domain.1/@guardPattern/@variable.2"/>
             </source>
             <argument xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
-                referredVariable="#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.1"/>
+                referredVariable="#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.2"/>
           </conditionExpression>
         </predicate>
         <predicate>
@@ -994,18 +994,6 @@
           <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
             <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
-                referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Association.source">
-              <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Association"
-                  referredVariable="#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.3"/>
-            </source>
-            <argument xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
-                referredVariable="#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.1"/>
-          </conditionExpression>
-        </predicate>
-        <predicate>
-          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
-              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-            <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
                 referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Association.destination">
               <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Association"
                   referredVariable="#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.3"/>
@@ -1024,6 +1012,18 @@
             </source>
             <argument xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Package"
                 referredVariable="#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.0"/>
+          </conditionExpression>
+        </predicate>
+        <predicate>
+          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+            <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
+                referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Association.source">
+              <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Association"
+                  referredVariable="#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.3"/>
+            </source>
+            <argument xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
+                referredVariable="#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.1"/>
           </conditionExpression>
         </predicate>
         <predicate>
@@ -1072,7 +1072,7 @@
                   referredVariable="#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.3"/>
             </elseExpression>
             <thenExpression xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-                referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.AssociationToForeignKey.name">
+                referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.UmlToRdbmsModelElement.name">
               <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AssociationToForeignKey"
                   referredVariable="#//@nestedPackage.0/@rule.11/@domain.1/@bottomPattern/@realizedVariable.0"/>
             </thenExpression>
@@ -1086,19 +1086,19 @@
           <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AssociationToForeignKey"
               referredVariable="#//@nestedPackage.0/@rule.11/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.AssociationToForeignKey.referenced">
-          <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
-              referredVariable="#//@nestedPackage.0/@rule.11/@domain.1/@guardPattern/@variable.2"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AssociationToForeignKey"
-              referredVariable="#//@nestedPackage.0/@rule.11/@domain.1/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.AssociationToForeignKey.association">
           <value xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Association"
               referredVariable="#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.3"/>
           <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AssociationToForeignKey"
               referredVariable="#//@nestedPackage.0/@rule.11/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.AssociationToForeignKey.name">
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.AssociationToForeignKey.referenced">
+          <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
+              referredVariable="#//@nestedPackage.0/@rule.11/@domain.1/@guardPattern/@variable.2"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AssociationToForeignKey"
+              referredVariable="#//@nestedPackage.0/@rule.11/@domain.1/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.UmlToRdbmsModelElement.name">
           <value xsi:type="pivot:IfExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String">
             <condition xsi:type="pivot:OperationCallExp" name="and" isRequired="false"
                 type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
@@ -1258,7 +1258,7 @@
     </rule>
     <rule xsi:type="qvti:Mapping" xmi:id="m.umlRdbms.classPrimitiveAttributes_LM"
         name="classPrimitiveAttributes_LM">
-      <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="false" isEnforceable="false"
+      <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="true" isEnforceable="false"
           typedModel="#//@nestedPackage.0/@modelParameter.0">
         <guardPattern>
           <variable name="t" type="SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"/>
@@ -1280,18 +1280,6 @@
         <predicate>
           <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-            <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"
-                referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.primitive">
-              <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
-                  referredVariable="#//@nestedPackage.0/@rule.12/@domain.1/@guardPattern/@variable.1"/>
-            </source>
-            <argument xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"
-                referredVariable="#//@nestedPackage.0/@rule.12/@domain.0/@guardPattern/@variable.0"/>
-          </conditionExpression>
-        </predicate>
-        <predicate>
-          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
-              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
             <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
                 referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.umlClass">
               <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
@@ -1304,13 +1292,13 @@
         <predicate>
           <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-            <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
-                referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner">
-              <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
-                  referredVariable="#//@nestedPackage.0/@rule.12/@domain.0/@guardPattern/@variable.2"/>
+            <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"
+                referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.primitive">
+              <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
+                  referredVariable="#//@nestedPackage.0/@rule.12/@domain.1/@guardPattern/@variable.1"/>
             </source>
-            <argument xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
-                referredVariable="#//@nestedPackage.0/@rule.12/@domain.0/@guardPattern/@variable.1"/>
+            <argument xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"
+                referredVariable="#//@nestedPackage.0/@rule.12/@domain.0/@guardPattern/@variable.0"/>
           </conditionExpression>
         </predicate>
         <predicate>
@@ -1325,14 +1313,20 @@
                 referredVariable="#//@nestedPackage.0/@rule.12/@domain.0/@guardPattern/@variable.0"/>
           </conditionExpression>
         </predicate>
+        <predicate>
+          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+            <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
+                referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner">
+              <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
+                  referredVariable="#//@nestedPackage.0/@rule.12/@domain.0/@guardPattern/@variable.2"/>
+            </source>
+            <argument xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
+                referredVariable="#//@nestedPackage.0/@rule.12/@domain.0/@guardPattern/@variable.1"/>
+          </conditionExpression>
+        </predicate>
       </guardPattern>
       <bottomPattern>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.owner">
-          <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttributeOwner"
-              referredVariable="#//@nestedPackage.0/@rule.12/@domain.1/@guardPattern/@variable.0"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
-              referredVariable="#//@nestedPackage.0/@rule.12/@domain.1/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.kind">
           <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
               referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
@@ -1342,18 +1336,21 @@
           <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
               referredVariable="#//@nestedPackage.0/@rule.12/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.name">
-          <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-              referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
-            <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
-                referredVariable="#//@nestedPackage.0/@rule.12/@domain.0/@guardPattern/@variable.2"/>
-          </value>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.AttributeToColumn.type">
+          <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
+              referredVariable="#//@nestedPackage.0/@rule.12/@domain.1/@guardPattern/@variable.1"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
               referredVariable="#//@nestedPackage.0/@rule.12/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.owner">
           <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttributeOwner"
               referredVariable="#//@nestedPackage.0/@rule.12/@domain.1/@guardPattern/@variable.0"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
+              referredVariable="#//@nestedPackage.0/@rule.12/@domain.1/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.attribute">
+          <value xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
+              referredVariable="#//@nestedPackage.0/@rule.12/@domain.0/@guardPattern/@variable.2"/>
           <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
               referredVariable="#//@nestedPackage.0/@rule.12/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
@@ -1368,6 +1365,21 @@
           <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
               referredVariable="#//@nestedPackage.0/@rule.12/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.UmlToRdbmsModelElement.name">
+          <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+              referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+            <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
+                referredVariable="#//@nestedPackage.0/@rule.12/@domain.0/@guardPattern/@variable.2"/>
+          </value>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
+              referredVariable="#//@nestedPackage.0/@rule.12/@domain.1/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.owner">
+          <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttributeOwner"
+              referredVariable="#//@nestedPackage.0/@rule.12/@domain.1/@guardPattern/@variable.0"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
+              referredVariable="#//@nestedPackage.0/@rule.12/@domain.1/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.kind">
           <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
               referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
@@ -1383,23 +1395,11 @@
           <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
               referredVariable="#//@nestedPackage.0/@rule.12/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.AttributeToColumn.type">
-          <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
-              referredVariable="#//@nestedPackage.0/@rule.12/@domain.1/@guardPattern/@variable.1"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
-              referredVariable="#//@nestedPackage.0/@rule.12/@domain.1/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.attribute">
-          <value xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
-              referredVariable="#//@nestedPackage.0/@rule.12/@domain.0/@guardPattern/@variable.2"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
-              referredVariable="#//@nestedPackage.0/@rule.12/@domain.1/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
       </bottomPattern>
       <mappingCall referredMapping="#m.umlRdbms.attributeColumns_MR"/>
     </rule>
     <rule xsi:type="qvti:Mapping" xmi:id="m.umlRdbms.classComplexAttributes_LM" name="classComplexAttributes_LM">
-      <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="false" isEnforceable="false"
+      <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="true" isEnforceable="false"
           typedModel="#//@nestedPackage.0/@modelParameter.0">
         <guardPattern>
           <variable name="t" type="SimpleUML.ecore.oclas#T.simpleuml.Class"/>
@@ -1432,18 +1432,6 @@
         <predicate>
           <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-            <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
-                referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner">
-              <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
-                  referredVariable="#//@nestedPackage.0/@rule.13/@domain.0/@guardPattern/@variable.2"/>
-            </source>
-            <argument xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
-                referredVariable="#//@nestedPackage.0/@rule.13/@domain.0/@guardPattern/@variable.1"/>
-          </conditionExpression>
-        </predicate>
-        <predicate>
-          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
-              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
             <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Classifier"
                 referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Attribute.type">
               <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
@@ -1453,15 +1441,51 @@
                 referredVariable="#//@nestedPackage.0/@rule.13/@domain.0/@guardPattern/@variable.0"/>
           </conditionExpression>
         </predicate>
+        <predicate>
+          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+            <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
+                referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner">
+              <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
+                  referredVariable="#//@nestedPackage.0/@rule.13/@domain.0/@guardPattern/@variable.2"/>
+            </source>
+            <argument xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
+                referredVariable="#//@nestedPackage.0/@rule.13/@domain.0/@guardPattern/@variable.1"/>
+          </conditionExpression>
+        </predicate>
       </guardPattern>
       <bottomPattern>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.attribute">
-          <value xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
-              referredVariable="#//@nestedPackage.0/@rule.13/@domain.0/@guardPattern/@variable.2"/>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.kind">
+          <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+              referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
+            <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
+                referredVariable="#//@nestedPackage.0/@rule.13/@domain.0/@guardPattern/@variable.2"/>
+          </value>
           <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
               referredVariable="#//@nestedPackage.0/@rule.13/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.name">
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.owner">
+          <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttributeOwner"
+              referredVariable="#//@nestedPackage.0/@rule.13/@domain.1/@guardPattern/@variable.0"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
+              referredVariable="#//@nestedPackage.0/@rule.13/@domain.1/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.owner">
+          <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttributeOwner"
+              referredVariable="#//@nestedPackage.0/@rule.13/@domain.1/@guardPattern/@variable.0"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
+              referredVariable="#//@nestedPackage.0/@rule.13/@domain.1/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.kind">
+          <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+              referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
+            <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
+                referredVariable="#//@nestedPackage.0/@rule.13/@domain.0/@guardPattern/@variable.2"/>
+          </value>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
+              referredVariable="#//@nestedPackage.0/@rule.13/@domain.1/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.UmlToRdbmsModelElement.name">
           <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
               referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
             <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
@@ -1476,9 +1500,9 @@
           <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
               referredVariable="#//@nestedPackage.0/@rule.13/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.owner">
-          <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttributeOwner"
-              referredVariable="#//@nestedPackage.0/@rule.13/@domain.1/@guardPattern/@variable.0"/>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.attribute">
+          <value xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
+              referredVariable="#//@nestedPackage.0/@rule.13/@domain.0/@guardPattern/@variable.2"/>
           <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
               referredVariable="#//@nestedPackage.0/@rule.13/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
@@ -1493,7 +1517,7 @@
             <body xsi:type="pivot:PropertyCallExp" type="#//@nestedPackage.1/@ownedType.3"
                 referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.leafs">
               <source xsi:type="pivot:VariableExp" isRequired="false" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
-                  implicit="true" referredVariable="#//@nestedPackage.0/@rule.13/@bottomPattern/@assignment.4/@value/@iterator.0"/>
+                  implicit="true" referredVariable="#//@nestedPackage.0/@rule.13/@bottomPattern/@assignment.7/@value/@iterator.0"/>
             </body>
             <iterator name="1_" isRequired="false" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
                 implicit="true" representedParameter="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#i0i.ocl.Set.collect..T"/>
@@ -1501,35 +1525,11 @@
           <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.NonLeafAttribute"
               referredVariable="#//@nestedPackage.0/@rule.13/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.kind">
-          <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-              referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
-            <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
-                referredVariable="#//@nestedPackage.0/@rule.13/@domain.0/@guardPattern/@variable.2"/>
-          </value>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
-              referredVariable="#//@nestedPackage.0/@rule.13/@domain.1/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.owner">
-          <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttributeOwner"
-              referredVariable="#//@nestedPackage.0/@rule.13/@domain.1/@guardPattern/@variable.0"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
-              referredVariable="#//@nestedPackage.0/@rule.13/@domain.1/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.kind">
-          <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-              referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
-            <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
-                referredVariable="#//@nestedPackage.0/@rule.13/@domain.0/@guardPattern/@variable.2"/>
-          </value>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
-              referredVariable="#//@nestedPackage.0/@rule.13/@domain.1/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
       </bottomPattern>
     </rule>
     <rule xsi:type="qvti:Mapping" xmi:id="m.umlRdbms.complexAttributePrimitiveAttributes_LM"
         name="complexAttributePrimitiveAttributes_LM">
-      <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="false" isEnforceable="false"
+      <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="true" isEnforceable="false"
           typedModel="#//@nestedPackage.0/@modelParameter.0">
         <guardPattern>
           <variable name="ca" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"/>
@@ -1576,30 +1576,6 @@
         <predicate>
           <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-            <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
-                referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner">
-              <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
-                  referredVariable="#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.3"/>
-            </source>
-            <argument xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
-                referredVariable="#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.1"/>
-          </conditionExpression>
-        </predicate>
-        <predicate>
-          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
-              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-            <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
-                referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner">
-              <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
-                  referredVariable="#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.3"/>
-            </source>
-            <argument xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
-                referredVariable="#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.1"/>
-          </conditionExpression>
-        </predicate>
-        <predicate>
-          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
-              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
             <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Classifier"
                 referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Attribute.type">
               <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
@@ -1621,66 +1597,32 @@
                 referredVariable="#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.1"/>
           </conditionExpression>
         </predicate>
-      </guardPattern>
-      <bottomPattern>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.owner">
-          <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttributeOwner"
-              referredVariable="#//@nestedPackage.0/@rule.14/@domain.1/@guardPattern/@variable.0"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
-              referredVariable="#//@nestedPackage.0/@rule.14/@domain.1/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.name">
-          <value xsi:type="pivot:OperationCallExp" name="+" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.String.%43%..ocl.String">
-            <source xsi:type="pivot:OperationCallExp" name="+" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-                referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.String.%43%..ocl.String">
-              <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-                  referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.name">
-                <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.NonLeafAttribute"
-                    referredVariable="#//@nestedPackage.0/@rule.14/@domain.1/@guardPattern/@variable.0"/>
-              </source>
-              <argument xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-                  stringSymbol="_"/>
-            </source>
-            <argument xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-                referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+        <predicate>
+          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+            <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
+                referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner">
               <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
                   referredVariable="#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.3"/>
-            </argument>
-          </value>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
-              referredVariable="#//@nestedPackage.0/@rule.14/@domain.1/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.AttributeToColumn.type">
-          <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
-              referredVariable="#//@nestedPackage.0/@rule.14/@domain.1/@guardPattern/@variable.1"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
-              referredVariable="#//@nestedPackage.0/@rule.14/@domain.1/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.kind">
-          <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-              referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
-            <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
-                referredVariable="#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.3"/>
-          </value>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
-              referredVariable="#//@nestedPackage.0/@rule.14/@domain.1/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.owner">
-          <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttributeOwner"
-              referredVariable="#//@nestedPackage.0/@rule.14/@domain.1/@guardPattern/@variable.0"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
-              referredVariable="#//@nestedPackage.0/@rule.14/@domain.1/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.kind">
-          <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-              referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
-            <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
-                referredVariable="#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.3"/>
-          </value>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
-              referredVariable="#//@nestedPackage.0/@rule.14/@domain.1/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
+            </source>
+            <argument xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
+                referredVariable="#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.1"/>
+          </conditionExpression>
+        </predicate>
+        <predicate>
+          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+            <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
+                referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner">
+              <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
+                  referredVariable="#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.3"/>
+            </source>
+            <argument xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
+                referredVariable="#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.1"/>
+          </conditionExpression>
+        </predicate>
+      </guardPattern>
+      <bottomPattern>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.leafs">
           <value xsi:type="pivot:CollectionLiteralExp" type="#//@nestedPackage.1/@ownedType.3"
               kind="Set">
@@ -1704,11 +1646,69 @@
           <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
               referredVariable="#//@nestedPackage.0/@rule.14/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.kind">
+          <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+              referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
+            <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
+                referredVariable="#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.3"/>
+          </value>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
+              referredVariable="#//@nestedPackage.0/@rule.14/@domain.1/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.owner">
+          <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttributeOwner"
+              referredVariable="#//@nestedPackage.0/@rule.14/@domain.1/@guardPattern/@variable.0"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
+              referredVariable="#//@nestedPackage.0/@rule.14/@domain.1/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.AttributeToColumn.type">
+          <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
+              referredVariable="#//@nestedPackage.0/@rule.14/@domain.1/@guardPattern/@variable.1"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
+              referredVariable="#//@nestedPackage.0/@rule.14/@domain.1/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.owner">
+          <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttributeOwner"
+              referredVariable="#//@nestedPackage.0/@rule.14/@domain.1/@guardPattern/@variable.0"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
+              referredVariable="#//@nestedPackage.0/@rule.14/@domain.1/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.UmlToRdbmsModelElement.name">
+          <value xsi:type="pivot:OperationCallExp" name="+" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.String.%43%..ocl.String">
+            <source xsi:type="pivot:OperationCallExp" name="+" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.String.%43%..ocl.String">
+              <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                  referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.UmlToRdbmsModelElement.name">
+                <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.NonLeafAttribute"
+                    referredVariable="#//@nestedPackage.0/@rule.14/@domain.1/@guardPattern/@variable.0"/>
+              </source>
+              <argument xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                  stringSymbol="_"/>
+            </source>
+            <argument xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+              <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
+                  referredVariable="#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.3"/>
+            </argument>
+          </value>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
+              referredVariable="#//@nestedPackage.0/@rule.14/@domain.1/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.kind">
+          <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+              referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
+            <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
+                referredVariable="#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.3"/>
+          </value>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
+              referredVariable="#//@nestedPackage.0/@rule.14/@domain.1/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
       </bottomPattern>
     </rule>
     <rule xsi:type="qvti:Mapping" xmi:id="m.umlRdbms.complexAttributeComplexAttributes_LM"
         name="complexAttributeComplexAttributes_LM">
-      <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="false" isEnforceable="false"
+      <domain xsi:type="qvtcb:CoreDomain" name="uml" isCheckable="true" isEnforceable="false"
           typedModel="#//@nestedPackage.0/@modelParameter.0">
         <guardPattern>
           <variable name="ca" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"/>
@@ -1789,6 +1789,64 @@
         </predicate>
       </guardPattern>
       <bottomPattern>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.attribute">
+          <value xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
+              referredVariable="#//@nestedPackage.0/@rule.15/@domain.0/@guardPattern/@variable.3"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
+              referredVariable="#//@nestedPackage.0/@rule.15/@domain.1/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.UmlToRdbmsModelElement.name">
+          <value xsi:type="pivot:OperationCallExp" name="+" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.String.%43%..ocl.String">
+            <source xsi:type="pivot:OperationCallExp" name="+" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.String.%43%..ocl.String">
+              <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                  referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.UmlToRdbmsModelElement.name">
+                <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.NonLeafAttribute"
+                    referredVariable="#//@nestedPackage.0/@rule.15/@domain.1/@guardPattern/@variable.0"/>
+              </source>
+              <argument xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                  stringSymbol="_"/>
+            </source>
+            <argument xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
+              <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
+                  referredVariable="#//@nestedPackage.0/@rule.15/@domain.0/@guardPattern/@variable.3"/>
+            </argument>
+          </value>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
+              referredVariable="#//@nestedPackage.0/@rule.15/@domain.1/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.owner">
+          <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttributeOwner"
+              referredVariable="#//@nestedPackage.0/@rule.15/@domain.1/@guardPattern/@variable.0"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
+              referredVariable="#//@nestedPackage.0/@rule.15/@domain.1/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.attribute">
+          <value xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
+              referredVariable="#//@nestedPackage.0/@rule.15/@domain.0/@guardPattern/@variable.3"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
+              referredVariable="#//@nestedPackage.0/@rule.15/@domain.1/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.kind">
+          <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+              referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
+            <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
+                referredVariable="#//@nestedPackage.0/@rule.15/@domain.0/@guardPattern/@variable.3"/>
+          </value>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
+              referredVariable="#//@nestedPackage.0/@rule.15/@domain.1/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.kind">
+          <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+              referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
+            <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
+                referredVariable="#//@nestedPackage.0/@rule.15/@domain.0/@guardPattern/@variable.3"/>
+          </value>
+          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
+              referredVariable="#//@nestedPackage.0/@rule.15/@domain.1/@bottomPattern/@realizedVariable.0"/>
+        </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.owner">
           <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttributeOwner"
               referredVariable="#//@nestedPackage.0/@rule.15/@domain.1/@guardPattern/@variable.0"/>
@@ -1806,70 +1864,12 @@
             <body xsi:type="pivot:PropertyCallExp" type="#//@nestedPackage.1/@ownedType.3"
                 referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.leafs">
               <source xsi:type="pivot:VariableExp" isRequired="false" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
-                  implicit="true" referredVariable="#//@nestedPackage.0/@rule.15/@bottomPattern/@assignment.1/@value/@iterator.0"/>
+                  implicit="true" referredVariable="#//@nestedPackage.0/@rule.15/@bottomPattern/@assignment.7/@value/@iterator.0"/>
             </body>
             <iterator name="1_" isRequired="false" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
                 implicit="true" representedParameter="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#i0i.ocl.Set.collect..T"/>
           </value>
           <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.NonLeafAttribute"
-              referredVariable="#//@nestedPackage.0/@rule.15/@domain.1/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.kind">
-          <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-              referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
-            <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
-                referredVariable="#//@nestedPackage.0/@rule.15/@domain.0/@guardPattern/@variable.3"/>
-          </value>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
-              referredVariable="#//@nestedPackage.0/@rule.15/@domain.1/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.name">
-          <value xsi:type="pivot:OperationCallExp" name="+" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.String.%43%..ocl.String">
-            <source xsi:type="pivot:OperationCallExp" name="+" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-                referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.String.%43%..ocl.String">
-              <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-                  referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.name">
-                <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.NonLeafAttribute"
-                    referredVariable="#//@nestedPackage.0/@rule.15/@domain.1/@guardPattern/@variable.0"/>
-              </source>
-              <argument xsi:type="pivot:StringLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-                  stringSymbol="_"/>
-            </source>
-            <argument xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-                referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name">
-              <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
-                  referredVariable="#//@nestedPackage.0/@rule.15/@domain.0/@guardPattern/@variable.3"/>
-            </argument>
-          </value>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
-              referredVariable="#//@nestedPackage.0/@rule.15/@domain.1/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.kind">
-          <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-              referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
-            <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
-                referredVariable="#//@nestedPackage.0/@rule.15/@domain.0/@guardPattern/@variable.3"/>
-          </value>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
-              referredVariable="#//@nestedPackage.0/@rule.15/@domain.1/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.attribute">
-          <value xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
-              referredVariable="#//@nestedPackage.0/@rule.15/@domain.0/@guardPattern/@variable.3"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
-              referredVariable="#//@nestedPackage.0/@rule.15/@domain.1/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.owner">
-          <value xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttributeOwner"
-              referredVariable="#//@nestedPackage.0/@rule.15/@domain.1/@guardPattern/@variable.0"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
-              referredVariable="#//@nestedPackage.0/@rule.15/@domain.1/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.attribute">
-          <value xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
-              referredVariable="#//@nestedPackage.0/@rule.15/@domain.0/@guardPattern/@variable.3"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
               referredVariable="#//@nestedPackage.0/@rule.15/@domain.1/@bottomPattern/@realizedVariable.0"/>
         </assignment>
       </bottomPattern>
@@ -1931,28 +1931,6 @@
           </conditionExpression>
         </predicate>
         <predicate>
-          <conditionExpression xsi:type="pivot:OperationCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
-              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.Collection.includes..ocl.OclAny">
-            <source xsi:type="pivot:IteratorExp" type="#//@nestedPackage.1/@ownedType.4"
-                implicit="true" referredIteration="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#i.ocl.Set.collect..T">
-              <source xsi:type="pivot:PropertyCallExp" type="#//@nestedPackage.1/@ownedType.5"
-                  referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttributeOwner.fromAttributes">
-                <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
-                    referredVariable="#//@nestedPackage.0/@rule.16/@domain.1/@guardPattern/@variable.0"/>
-              </source>
-              <body xsi:type="pivot:PropertyCallExp" type="#//@nestedPackage.1/@ownedType.3"
-                  referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.leafs">
-                <source xsi:type="pivot:VariableExp" isRequired="false" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
-                    implicit="true" referredVariable="#//@nestedPackage.0/@rule.16/@guardPattern/@predicate.3/@conditionExpression/@source/@iterator.0"/>
-              </body>
-              <iterator name="1_" isRequired="false" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
-                  implicit="true" representedParameter="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#i0i.ocl.Set.collect..T"/>
-            </source>
-            <argument xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
-                referredVariable="#//@nestedPackage.0/@rule.16/@domain.1/@guardPattern/@variable.2"/>
-          </conditionExpression>
-        </predicate>
-        <predicate>
           <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
             <source xsi:type="pivot:PropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttributeOwner"
@@ -1964,20 +1942,33 @@
                 referredVariable="#//@nestedPackage.0/@rule.16/@domain.1/@guardPattern/@variable.0"/>
           </conditionExpression>
         </predicate>
+        <predicate>
+          <conditionExpression xsi:type="pivot:OperationCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.Collection.includes..ocl.OclAny">
+            <source xsi:type="pivot:IteratorExp" type="#//@nestedPackage.1/@ownedType.6"
+                implicit="true" referredIteration="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#i.ocl.Set.collect..T">
+              <source xsi:type="pivot:PropertyCallExp" type="#//@nestedPackage.1/@ownedType.7"
+                  referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttributeOwner.fromAttributes">
+                <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
+                    referredVariable="#//@nestedPackage.0/@rule.16/@domain.1/@guardPattern/@variable.0"/>
+              </source>
+              <body xsi:type="pivot:PropertyCallExp" type="#//@nestedPackage.1/@ownedType.8"
+                  referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.leafs">
+                <source xsi:type="pivot:VariableExp" isRequired="false" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
+                    implicit="true" referredVariable="#//@nestedPackage.0/@rule.16/@guardPattern/@predicate.4/@conditionExpression/@source/@iterator.0"/>
+              </body>
+              <iterator name="1_" isRequired="false" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
+                  implicit="true" representedParameter="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#i0i.ocl.Set.collect..T"/>
+            </source>
+            <argument xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
+                referredVariable="#//@nestedPackage.0/@rule.16/@domain.1/@guardPattern/@variable.2"/>
+          </conditionExpression>
+        </predicate>
       </guardPattern>
       <bottomPattern>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.kind">
-          <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-              referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.kind">
-            <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
-                referredVariable="#//@nestedPackage.0/@rule.16/@domain.1/@guardPattern/@variable.2"/>
-          </value>
-          <slotExpression xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"
-              referredVariable="#//@nestedPackage.0/@rule.16/@domain.0/@bottomPattern/@realizedVariable.0"/>
-        </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name">
           <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-              referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.name">
+              referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.UmlToRdbmsModelElement.name">
             <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
                 referredVariable="#//@nestedPackage.0/@rule.16/@domain.1/@guardPattern/@variable.2"/>
           </value>
@@ -1989,6 +1980,15 @@
               referredVariable="#//@nestedPackage.0/@rule.16/@domain.0/@bottomPattern/@realizedVariable.0"/>
           <slotExpression xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
               referredVariable="#//@nestedPackage.0/@rule.16/@domain.1/@guardPattern/@variable.2"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.kind">
+          <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+              referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.kind">
+            <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
+                referredVariable="#//@nestedPackage.0/@rule.16/@domain.1/@guardPattern/@variable.2"/>
+          </value>
+          <slotExpression xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"
+              referredVariable="#//@nestedPackage.0/@rule.16/@domain.0/@bottomPattern/@realizedVariable.0"/>
         </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.owner">
           <value xsi:type="pivot:VariableExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"
@@ -2016,77 +2016,98 @@
     </rule>
   </nestedPackage>
   <nestedPackage xmi:id="P.$$" name="$$" nsPrefix="orphanage" nsURI="http://www.eclipse.org/ocl/3.1.0/orphanage">
-    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.6"
+    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.9"
         elementType="SimpleRDBMS.ecore.oclas#T.simplerdbms.Key">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Set">
         <parameterSubstitution actual="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key"
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:OrderedSetType" name="OrderedSet" superClass="#//@nestedPackage.1/@ownedType.7 #//@nestedPackage.1/@ownedType.8"
+    <ownedType xsi:type="pivot:OrderedSetType" name="OrderedSet" superClass="#//@nestedPackage.1/@ownedType.10 #//@nestedPackage.1/@ownedType.11"
         elementType="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.OrderedSet">
         <parameterSubstitution actual="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..OrderedSetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.9"
+    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.12"
         elementType="SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Set">
         <parameterSubstitution actual="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey"
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.10"
+    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.13"
         elementType="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Set">
         <parameterSubstitution actual="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.11"
+    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.14"
         elementType="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Bag">
         <parameterSubstitution actual="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..BagT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.12"
+    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.15"
         elementType="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Set">
         <parameterSubstitution actual="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..SetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.13"
+    <ownedType xsi:type="pivot:BagType" name="Bag" superClass="#//@nestedPackage.1/@ownedType.16"
+        elementType="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn">
+      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Bag">
+        <parameterSubstitution actual="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
+            formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..BagT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.17"
+        elementType="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute">
+      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Set">
+        <parameterSubstitution actual="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
+            formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..SetT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.18"
+        elementType="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn">
+      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Set">
+        <parameterSubstitution actual="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
+            formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..SetT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.19"
         elementType="SimpleRDBMS.ecore.oclas#T.simplerdbms.Key">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.UniqueCollection">
         <parameterSubstitution actual="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key"
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="OrderedCollection" superClass="#//@nestedPackage.1/@ownedType.14"
+    <ownedType xsi:type="pivot:CollectionType" name="OrderedCollection" superClass="#//@nestedPackage.1/@ownedType.20"
         elementType="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.OrderedCollection">
         <parameterSubstitution actual="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..OrderedCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.14"
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.20"
         elementType="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.UniqueCollection">
         <parameterSubstitution actual="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.15"
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.21"
         elementType="SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.UniqueCollection">
         <parameterSubstitution actual="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey"
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.11"
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.14"
         elementType="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.UniqueCollection">
         <parameterSubstitution actual="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
@@ -2100,7 +2121,7 @@
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.16"
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.22"
         elementType="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.UniqueCollection">
         <parameterSubstitution actual="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
@@ -2108,6 +2129,27 @@
       </templateBinding>
     </ownedType>
     <ownedType xsi:type="pivot:CollectionType" name="Collection" superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclAny"
+        elementType="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn">
+      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Collection">
+        <parameterSubstitution actual="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
+            formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..CollectionT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.23"
+        elementType="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute">
+      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.UniqueCollection">
+        <parameterSubstitution actual="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
+            formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..UniqueCollectionT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.16"
+        elementType="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn">
+      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.UniqueCollection">
+        <parameterSubstitution actual="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
+            formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..UniqueCollectionT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:CollectionType" name="Collection" superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclAny"
         elementType="SimpleRDBMS.ecore.oclas#T.simplerdbms.Key">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Collection">
         <parameterSubstitution actual="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.Key"
@@ -2125,6 +2167,13 @@
         elementType="SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Collection">
         <parameterSubstitution actual="pivot:Class SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey"
+            formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..CollectionT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:CollectionType" name="Collection" superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclAny"
+        elementType="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute">
+      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Collection">
+        <parameterSubstitution actual="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..CollectionT"/>
       </templateBinding>
     </ownedType>

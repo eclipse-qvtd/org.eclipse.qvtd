@@ -132,12 +132,13 @@ operation QVT!Transformation getMiddleTypedModel() : QVT!TypedModel {
 @cached
 operation QVT!Variable oppositePattern() : QVT!CorePattern  {
     
-    return self.owningModel().getAllOfType("GuardPattern").selectOne(p |p.variable.includes(self));
+    return self.owningModel().getAllOfKind("CorePattern").selectOne(p | p.variable.includes(self));
 }
 
+@cached
 operation QVT!RealizedVariable oppositePattern() : QVT!CorePattern  {
     
-    return self.owningModel().getAllOfType("BottomPattern").selectOne(p |p.realizedVariable.includes(self));
+    return self.owningModel().getAllOfType("BottomPattern").selectOne(p | p.realizedVariable.includes(self));
 }
 
 
@@ -431,6 +432,7 @@ operation QVT!BottomPattern fixAssignmentVarReferences() {
             //v.println("Fixing ");
             // MiddleGuard Pattern depends on domain guard patterns
             var targetVar = v.findReferencesInPatterns(self.asSequence());
+            //targetVar.println("targetVar ");
             if (targetVar == null) {
                 var searchPatterns;
                 if (self.area.isTypeOf(QVT!CoreDomain)) {

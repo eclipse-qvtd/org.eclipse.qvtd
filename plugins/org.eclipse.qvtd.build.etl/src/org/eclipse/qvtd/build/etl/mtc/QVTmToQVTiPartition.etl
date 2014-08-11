@@ -131,7 +131,7 @@ rule Mapping
         for (local in m.local) {
             local.promoteMappings();
         }
-          
+        
         if (m.domain.one(d | d.isInputDomain())) {
             // Create LM mapping
             var lmM = new QVTi!Mapping;
@@ -236,7 +236,7 @@ rule PropertyAssignment
     to oa : QVTi!PropertyAssignment
     extends Assignment {
         
-        guard : not ia.findReferencedVariables().forAll(v | v.oppositePattern().area.isMiddleDomain())
+        guard : not ia.findReferencedVariables().forAll(v |v.oppositePattern().area.isMiddleDomain())
         
         oa.slotExpression =  emfTool.getECoreUtil().copy(ia.slotExpression);
         oa.targetProperty =  ia.targetProperty;

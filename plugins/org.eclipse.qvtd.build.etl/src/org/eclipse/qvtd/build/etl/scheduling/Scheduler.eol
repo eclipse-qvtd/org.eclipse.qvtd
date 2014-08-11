@@ -328,12 +328,19 @@ operation QVTi!MappingCall hasLowerOrder(other : QVTi!MappingCall) : Boolean {
 
 operation QVTi!Transformation createBaseMapping() : QVTi!Mapping {
     
-    var baseMapping = new QVTi!Mapping;
-    baseMapping.name = "__root__";
-    baseMapping.transformation = self;
-    baseMapping.guardPattern = new QVTi!GuardPattern;
-    baseMapping.bottomPattern = new QVTi!BottomPattern;
-    return baseMapping;
+    if (QVTi!Mapping.all.exists(m | m.name == "__root__")) {
+        err.println("root mapping should not exist");
+        return QVTi!Mapping.all.selectOne(m | m.name == "__root__");
+    } else {
+        "Creating root mapping". println();
+        var baseMapping = new QVTi!Mapping;
+	    baseMapping.name = "__root__";
+	    baseMapping.transformation = self;
+	    baseMapping.guardPattern = new QVTi!GuardPattern;
+	    baseMapping.bottomPattern = new QVTi!BottomPattern;
+	    return baseMapping;
+    }
+    
     
 }
 

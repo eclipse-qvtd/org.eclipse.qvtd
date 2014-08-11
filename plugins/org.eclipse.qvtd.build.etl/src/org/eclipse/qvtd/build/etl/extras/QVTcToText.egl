@@ -38,7 +38,7 @@ map [%if (self.name.isDefined()){%][%=self.name%] in [%=t.name%][%}%] {
     [%
     if (not d.bottomPattern.realizedVariable.includingAll(d.bottomPattern.variable).isEmpty()) {
         for (v in d.bottomPattern.variable){%]
-        [%="realize "+v.name+":"+v.type.name%][%if(hasMore){%],[%}
+        [%=v.name+":"+v.type.name%][%if(hasMore){%],[%}
         }
         for (v in d.bottomPattern.realizedVariable){%]
         [%="realize "+v.name+":"+v.type.name%][%if(hasMore){%],[%}%]
