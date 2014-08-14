@@ -207,7 +207,7 @@ rule Mapping
 		    
 		    // Create Middle domain
 		    var mM : QVTi!CoreDomain = new QVTi!CoreDomain;
-		    mM.isEnforceable = false;
+		    mM.isCheckable = true;
 		    mM.typedModel = m.getTransforamtion().getMiddleTypedModel().equivalent();
 		    mM.name = mM.typedModel.name; 
 		    mM.guardPattern = new QVTi!GuardPattern;
