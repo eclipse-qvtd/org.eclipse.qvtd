@@ -87,6 +87,7 @@ map integerToNumber in umlRdbms refines primitiveToName {
 map booleanToBoolean in umlRdbms refines primitiveToName {
     uml () {
         prim.name = 'Boolean';
+        prim.name = Class.allInstances();
     }
     check enforce rdbms () {
         sqlType := 'BOOLEAN';
