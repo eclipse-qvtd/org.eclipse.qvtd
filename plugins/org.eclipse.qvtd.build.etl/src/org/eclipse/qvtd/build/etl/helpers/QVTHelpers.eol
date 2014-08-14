@@ -823,13 +823,14 @@ operation QVT!Rule getInputVariables() : Sequence {
  * NAME
  *  getOutputVariables - Returns the output variables of the Mapping, excluding 
  *  DataType variables
- *
+ * FUNCTION
+ *  It only works for QVTm/QVTi as is does not check for nested mappings
  * CONTEXT
  *  QVT!Rule  The mapping
  * ANNOTATIONS
  *  cached
  * SEE ALSO
- *  /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/getInputVariables
+ *  QVTHelpers/getInputVariables
  */
 @cached
 operation QVT!Rule getOutputVariables() : Sequence {

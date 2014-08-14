@@ -36,7 +36,7 @@ QVTs!Schedule.all.first().findMapOrdering();
 
 //QVT!Transformation.all.first().rule = QVT!Transformation.all.first().rule.sortBy(r | r.name);
 
-//"Done".println();
+"Done".println();
 
 /****o* Scheduler/simpleSchedule
  * NAME
@@ -555,75 +555,6 @@ operation QVTs!Schedule createDependencyRelations(rules : Collection) {
                 QVTs!MappingAction.all().selectOne(m | m.mapping == r).distinctArguments.add(dd);
             }
         }
-    }
-}
-
-/****o* Scheduler/getClassDatums
- * NAME
- *  getClassDatums - Returns the ClassDatum for the type of the variable
- *
- * CONTEXT
- *  QVT!Variable  The variable
- * ANNOTATIONS
- *  cached
- * RETURNS
- *  QVTs!AbstractDatum  The ClassDatum for the variable's type
- *  SEE ALSO
- */
-@cached
-operation QVT!Variable getClassDatum() : QVTs!AbstractDatum {
-    //self.name.println("getClassDatum ");
-    var d = new QVTs!ClassDatum;
-    d.type = self.type;
-    //d.super.addAll(self.superClass.collect(t | t.getClassDatum()).flatten());
-    d.domain = self.oppositePattern().area;    // All variables should be in domains!
-    d.variable = self;
-    return d;
-}
-
-/****o* Scheduler/getPropertyDatum
- * NAME
- *  getPropertyDatum - Returns the PropertyDatum for an assignment.
- *  The PropertyDatum points to the type of the variable in the slot expression
- *  and the property to the targetProperty
- *
- * CONTEXT
- *  QVT!Assignment  The assignment
- * ANNOTATIONS
- *
- * RETURNS
- *  Sequence    The ClassDatum for the variable type and its superTypes
- *  SEE ALSO
- */
-operation QVT!Assignment getPropertyDatum() : QVTs!PropertyDatum {
-
-    var d = new QVTs!PropertyDatum;
-    d.type = self.slotExpression.referredVariable.type;
-    d.variable = self.slotExpression.referredVariable;
-    d.property = self.targetProperty;
-    return d;
-}
-
-/****o* Scheduler/getClassDatum
- * NAME
- *  getClassDatum - Returns the ClassDatum for a given type
- *
- * CONTEXT
- *  QVT!Type  The type
- * ANNOTATIONS
- *  cached
- * RETURNS
- *  QVTs!ClassDatum The class datum
- *  SEE ALSO
- */
-@cached
-operation QVT!Type getClassDatum() : QVTs!AbstractDatum {
-    //self.name.println("getClassDatum ");
-    if (QVTs!ClassDatum.all().exists(d | d.type == self)) {
-        "Exists".println();
-        return QVTs!ClassDatum.all().selectOne(d | d.type == self);
-    } else {
-        
     }
 }
 

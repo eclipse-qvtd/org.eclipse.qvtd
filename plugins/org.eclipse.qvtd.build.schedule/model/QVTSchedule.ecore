@@ -21,7 +21,7 @@
         eType="ecore:EClass http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targets" upperBound="-1"
         eType="#//AbstractAction" derived="true" eOpposite="#//AbstractAction/arguments"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="schdule" eType="#//Schedule"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="schedule" eType="#//Schedule"
         eOpposite="#//Schedule/datums"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractAction" abstract="true">
@@ -59,7 +59,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="OutputAction" eSuperTypes="#//AbstractAction"/>
   <eClassifiers xsi:type="ecore:EClass" name="Schedule">
     <eStructuralFeatures xsi:type="ecore:EReference" name="datums" upperBound="-1"
-        eType="#//AbstractDatum" containment="true" eOpposite="#//AbstractDatum/schdule"/>
+        eType="#//AbstractDatum" containment="true" eOpposite="#//AbstractDatum/schedule"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
         eType="#//AbstractAction" containment="true" eOpposite="#//AbstractAction/schedule"/>
   </eClassifiers>

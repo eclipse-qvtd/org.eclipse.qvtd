@@ -21,13 +21,33 @@ import "Scheduler.eol";
  *    
  */
 
+/****u* QVTpToSchedule/TransformationToSchedule
+ * NAME
+ *  TransformationToSchedule - Transform the trnsformation
+ * FUNCTION
+ *  Just creates the place holder for datums and actions
+ * FROM
+ *  QVTp!Transformation
+ * TO
+ *  QVTs!Schedule
+ */
 rule TransformationToSchedule
     transform t : QVTp!Transformation
     to s : QVTs!Schedule {
         
     }
 
-
+/****u* QVTpToSchedule/MappingToMappingAction
+ * NAME
+ *  MappingToMappingAction - A mapping genereates a mapping action and its datums
+ * FUNCTION
+ *  Visit the mapping input/ouput variables and assignments/predicates to create
+ *  the appropriate class and property datums.
+ * FROM
+ *  QVTp!Mapping
+ * TO
+ *  QVTs!MappingAction
+ */
 rule MappingToMappingAction
     transform m : QVTp!Mapping
     to ma : QVTs!MappingAction {
@@ -36,17 +56,12 @@ rule MappingToMappingAction
         ma.mapping = m;
         ma.results.addAll(m.getOutputVariables().equivalent());
         for (vA in m.getInputVariables()) {
-            //vA.name.println("  va ");
             var dd = new QVTs!DistinctData;
-            dd.primaryArgument ::= vA;  //vA.getClassDatum();
-            for (dv in vA.derivedVariables(m.getInputVariables().excluding(vA))) {
-                //dv.println("    derived ");
-                dd.secondaryArguments.add(dv.equivalent());
-            }
+            dd.primaryArgument ::= vA;
+            dd.secondaryArguments.addAll(vA.derivedVariables(m.getInputVariables().excluding(vA)).equivalent());
             ma.distinctArguments.add(dd);
         }
         var pTypeAsgmts = m.getPrimitiveDataTypeAssignemnts();
-        m.getAllAssignments().size().println();
         ma.results.addAll(m.getAllAssignments().equivalent());
         var pTypeAsgmtsTypes = pTypeAsgmts.collect(a | a.slotExpression.referredVariable.type);
         var pTypeAsgmtsProps = pTypeAsgmts.collect(a | a.targetProperty);       
@@ -56,21 +71,20 @@ rule MappingToMappingAction
 		        and (pTypeAsgmtsTypes.includes(p.conditionExpression.source.source.type)
 		             or pTypeAsgmtsTypes.exists(t | t.superClass.includes(p.conditionExpression.source.source.type)))
 		        and pTypeAsgmtsProps.includes(p.conditionExpression.source.referredProperty)).equivalent());
-		        
-        m.transformation.equivalent().datums.addAll(ma.results);
-        m.transformation.equivalent().datums.addAll(ma.results);
-        m.transformation.equivalent().datums.addAll(ma.distinctArguments.collect(da | da.secondaryArguments.including(da.primaryArgument)).flatten());
     }
 
 // Lazy so we dont transformn variables from iterators
+// Greedy so we also transform RealizedVariables
 @lazy
+@greedy
 rule VariableToClassDatum
     transform v : QVTp!Variable
     to d : QVTs!ClassDatum {
         
-        //self.name.println("getClassDatum ");
         d.type = v.type;
-        d.domain = v.oppositePattern().area;    // All variables should be in domains!
+        d.domain = v.oppositePattern().area;    // QVTi, all variables should be in domains!
+        d.schedule ::= v.oppositePattern().area.`rule`.transformation;
+        d.super.addAll(QVTp!Variable.all.select(v1 | v1.oppositePattern().isDefined() and v.type.superClass.includes(v1.type)).equivalent());
         d.variable = v;
     }
 
@@ -81,9 +95,10 @@ rule AssignmentToPropertyDatum
         
         guard : a.isPrimitivePropertyAssignemnt()
         
-        "AssignmentToPropertyDatum".println();
-        d.type = a.slotExpression.referredVariable.type;
+        d.type = a.slotExpression.referredVariable.type;    
+        d.schedule ::= a.bottomPattern.area.transformation;
 	    d.variable = a.slotExpression.referredVariable;
+	    d.domain = a.slotExpression.referredVariable.oppositePattern().area; 
 	    d.property = a.targetProperty;
     }
 
