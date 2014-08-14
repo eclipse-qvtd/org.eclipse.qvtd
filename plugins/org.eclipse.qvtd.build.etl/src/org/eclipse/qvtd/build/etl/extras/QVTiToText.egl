@@ -1,10 +1,10 @@
-[% for (i in qvti!TypedModel.all()) { %]
+[% for (i in QVTi!TypedModel.all()) { %]
     [% for (p in i.usedPackage) { %]
 import [%=p.name.firstToUpperCase()%]: '[%=p.nsURI%]';
     [% } %]
 [% } %]
 
-[% for (t in qvti!Transformation.all()) { %]
+[% for (t in QVTi!Transformation.all()) { %]
 transformation [%=t.name %] {
     [% for (mp in t.modelParameter) { %]
     [%=mp.name%] imports [%=mp.usedPackage.collect(up | up.name.firstToUpperCase()).concat(",")%]; 
@@ -39,10 +39,12 @@ map [%if (self.name.isDefined()){%][%=self.name%] in [%=t.name%][%}%] {
     [%
     if (not d.bottomPattern.realizedVariable.includingAll(d.bottomPattern.variable).isEmpty()) {
         for (v in d.bottomPattern.variable){%]
-        [%="realize "+v.name+":"+v.type.name%][%if(hasMore){%],[%}
+        [%=v.name+":"+v.type.name%][%if(hasMore){%],
+        [%}
         }
         for (v in d.bottomPattern.realizedVariable){%]
-        [%="realize "+v.name+":"+v.type.name%][%if(hasMore){%],[%}%]
+        [%="realize "+v.name+":"+v.type.name%][%if(hasMore){%],
+        [%}%]
       [%}%] |[%
     }
     if (not d.bottomPattern.predicate.isEmpty()) {
@@ -75,7 +77,7 @@ map [%if (self.name.isDefined()){%][%=self.name%] in [%=t.name%][%}%] {
     }%]) {    [%
     if (not self.bottomPattern.realizedVariable.includingAll(self.bottomPattern.variable).isEmpty()) {
         for (v in self.bottomPattern.variable){%]
-        [%="realize "+v.name+":"+v.type.name%][%if(hasMore){%],[%}
+        [%=v.name+":"+v.type.name%][%if(hasMore){%],[%}
         }
         for (v in self.bottomPattern.realizedVariable){%]
         [%="realize "+v.name+":"+v.type.name%][%if(hasMore){%],[%}%]
@@ -93,10 +95,17 @@ map [%if (self.name.isDefined()){%][%=self.name%] in [%=t.name%][%}%] {
         [%=p.toString()%];[%
         }
     }%]}
-    [% for (mc in self.mappingCall) {%]
-    map [%=mc.referredMapping.name%]();
-    [% 
+    [% for (mc in self.mappingCall) {
+    mc.call();
     }%]
 }
     
-[%}%]
+[%}
+operation MappingCall call() {%]
+    map [%=self.referredMapping.name%](
+    [% for (b in self.binding) {%]
+        [%=b.boundVariable.name%][%if(b.isLoop){%] <[%} else{%] :[%}%]= [%=b.value.toString()%]; 
+    [%}%]
+    );
+[% }
+%]
