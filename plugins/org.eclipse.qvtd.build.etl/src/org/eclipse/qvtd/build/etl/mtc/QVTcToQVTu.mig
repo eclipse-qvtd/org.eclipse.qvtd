@@ -212,16 +212,13 @@ migrate Transformation {
  *  The domain's typeModel is the input domain.
  * FUNCTION
  *  Since QVTu is uni-directional, make sure that all input domains' check and
- *  enforce flags are false. 
- * TODO
- * Should it only be the enfornce one?
+ *  enforce flags are false.
  *    
  ******
  */
 migrate CoreDomain
     when : original.isInputDomain() {
 	    
-	    //migrated.isCheckable = false;
 	    migrated.isEnforceable = false;
     }
 
@@ -231,10 +228,7 @@ migrate CoreDomain
  * WHEN
  *  The domain's typeModel is the output domain.
  * FUNCTION
- *  Since QVTu is uni-directional, make sure that all input domains' check and
- *  enforce flags are false. 
- * TODO
- * THIS SHOULD BE HANDELED BY THE ENGINE!!??
+ *  Since QVTu is uni-directional, output domaisn can either be check or enforce
  *    
  ******
  */
