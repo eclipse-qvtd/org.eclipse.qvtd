@@ -703,10 +703,10 @@ operation QVT!Mapping hasDataTypeUse(values : Sequence) : Boolean {
   *  NAME
   *   hasRelation -- Identify relations between variables
   *  SYNOPSIS
-  *   relation =  var1.hasRelation(var2);
+  *   relations =  var1.hasRelation(var2);
   *  FUNCTION
   *   Analysies the predicates and assignments of the mapping that contains the 
-  *   variables and looks for relations of the form:  var2.att = var1. If found,
+  *   variables and looks for relations of the form:  var1.att = var2. If found,
   *   the operation returns the attribute that relates the variables.    
   *  CONTEXT
   *     QVT!Variable
@@ -719,20 +719,20 @@ operation QVT!Mapping hasDataTypeUse(values : Sequence) : Boolean {
   *   so we have more controll over what relations we are looking for.
   *
   */
-operation QVTi!Variable hasRelation(variable : QVT!Variable) : Bag {
+operation QVTi!Variable hasRelation(other : QVT!Variable) : Bag {
     
     // Fin predicates and assignemnts that only refer the two variables and
     // return the properties that relate them
     return self.oppositePattern().area.rule.guardPattern.predicate
         .select(p | p.conditionExpression.isSimpleAttributeNavigation()
-                and p.conditionExpression.isArgumentVariable(variable)
+                and p.conditionExpression.isArgumentVariable(other)
                 and p.conditionExpression.isSourceVariable(self))
         .collect(p | p.conditionExpression.getReferredProperty())
         .includingAll(
             self.oppositePattern().area.rule.bottomPattern.assignment
             .select(a | a.isSimpleAttributeNavigation()
                 and a.slotExpression.referredVariable == self
-                and a.value.referredVariable == variable)
+                and a.value.referredVariable == other)
             .collect(a | a.targetProperty())
         );
 }
@@ -808,7 +808,7 @@ operation QVT!Rule getInputVariables() : Sequence {
     var vars: Sequence;
     vars = self.guardPattern.variable
         .includingAll(self.domain.collect(d | d.guardPattern).flatten().collect(gp | gp.variable).flatten()
-        .select(v | not v.type.isTypeOf(QVT!PrimitiveType))).asSequence();
+                     ).asSequence();
     //for (l in self.local) {
     //    vars = vars.includingAll(l.getInputVars());
     //}
