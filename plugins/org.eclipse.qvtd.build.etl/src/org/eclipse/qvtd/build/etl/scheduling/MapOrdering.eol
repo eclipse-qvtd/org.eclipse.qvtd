@@ -59,18 +59,6 @@ operation QVTs!Schedule findMapOrdering()  {
 	    }
 	    queue.addAll(n.children);
 	}
-	
-	"Ordering".println();
-    /*
-    for (k in mapOrdering.keySet()) {
-	    mapLinear.put(mapOrdering.get(k), k.qvtAstNode);
-	}
-	for (k in mapLinear.keySet().sortBy(key | key)) {
-	    mapLinear.get(k).name.println(k + ": ");
-	}
-	*/
-	" ".println();
-	" ".println();
 }
 
 /****o* MapOrdering/getOrdering
@@ -140,7 +128,7 @@ operation QVTs!MappingAction getPredecessors() : Set {
 @cahced
 operation QVTs!MappingAction getArguments() : Sequence {
 	
-	return self.distinctArguments.primaryArguments
+	return self.distinctArguments.primaryArgument
 			.includingAll(self.distinctArguments.secondaryArguments).flatten();
 }
 
