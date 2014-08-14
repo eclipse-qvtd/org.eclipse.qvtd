@@ -1,0 +1,100 @@
+/*******************************************************************************
+ * Copyright (c) 2014 The University of York and Willink Transformations.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
+import "../helpers/QVTHelpers.eol";
+import "Scheduler.eol";
+ 
+/****t* /org.eclipse.qvtd.build.etl/scheduling/QVTpToSchedule
+ * NAME
+ *  QVTmToQVTiPartition -- Transform a QVTm transformation into its
+ *  partioned equivalent.
+ * FUNCTION
+ *  Each transformation rule is broken into n rules, depending on the number
+ *  of input domains.
+ *    
+ */
+
+rule TransformationToSchedule
+    transform t : QVTp!Transformation
+    to s : QVTs!Schedule {
+        
+    }
+
+
+rule MappingToMappingAction
+    transform m : QVTp!Mapping
+    to ma : QVTs!MappingAction {
+        
+        ma.schedule ::= m.transformation;
+        ma.mapping = m;
+        ma.results.addAll(m.getOutputVariables().equivalent());
+        for (vA in m.getInputVariables()) {
+            //vA.name.println("  va ");
+            var dd = new QVTs!DistinctData;
+            dd.primaryArgument ::= vA;  //vA.getClassDatum();
+            for (dv in vA.derivedVariables(m.getInputVariables().excluding(vA))) {
+                //dv.println("    derived ");
+                dd.secondaryArguments.add(dv.equivalent());
+            }
+            ma.distinctArguments.add(dd);
+        }
+        var pTypeAsgmts = m.getPrimitiveDataTypeAssignemnts();
+        m.getAllAssignments().size().println();
+        ma.results.addAll(m.getAllAssignments().equivalent());
+        var pTypeAsgmtsTypes = pTypeAsgmts.collect(a | a.slotExpression.referredVariable.type);
+        var pTypeAsgmtsProps = pTypeAsgmts.collect(a | a.targetProperty);       
+        // Primitive type arguments
+        ma.distinctArguments.addAll(m.getAllPredicates().select(p |
+		        p.conditionExpression.isSimpleAttributeNavigation()
+		        and (pTypeAsgmtsTypes.includes(p.conditionExpression.source.source.type)
+		             or pTypeAsgmtsTypes.exists(t | t.superClass.includes(p.conditionExpression.source.source.type)))
+		        and pTypeAsgmtsProps.includes(p.conditionExpression.source.referredProperty)).equivalent());
+		        
+        m.transformation.equivalent().datums.addAll(ma.results);
+        m.transformation.equivalent().datums.addAll(ma.results);
+        m.transformation.equivalent().datums.addAll(ma.distinctArguments.collect(da | da.secondaryArguments.including(da.primaryArgument)).flatten());
+    }
+
+// Lazy so we dont transformn variables from iterators
+@lazy
+rule VariableToClassDatum
+    transform v : QVTp!Variable
+    to d : QVTs!ClassDatum {
+        
+        //self.name.println("getClassDatum ");
+        d.type = v.type;
+        d.domain = v.oppositePattern().area;    // All variables should be in domains!
+        d.variable = v;
+    }
+
+@greedy
+rule AssignmentToPropertyDatum
+    transform a : QVTp!Assignment
+    to d : QVTs!PropertyDatum {
+        
+        guard : a.isPrimitivePropertyAssignemnt()
+        
+        "AssignmentToPropertyDatum".println();
+        d.type = a.slotExpression.referredVariable.type;
+	    d.variable = a.slotExpression.referredVariable;
+	    d.property = a.targetProperty;
+    }
+
+@lazy    
+rule PredicateToDistinctData
+    transform p : QVTp!Predicate
+    to dd : QVTs!DistinctData {
+        
+        dd.primaryArgument ::= p.conditionExpression.source.source;
+    }    
+    
+post{
+    "QVTpToSchedule Done".println();
+}    

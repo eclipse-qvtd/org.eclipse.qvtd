@@ -17,6 +17,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="domain" eType="ecore:EClass http://www.eclipse.org/qvt/0.9/QVTcoreBase#//CoreDomain"
         derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLoop" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targets" upperBound="-1"
         eType="#//AbstractAction" derived="true" eOpposite="#//AbstractAction/arguments"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="schdule" eType="#//Schedule"
@@ -34,8 +36,6 @@
         eType="#//AbstractAction" eOpposite="#//AbstractAction/parent"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
         eType="#//AbstractDatum" derived="true" eOpposite="#//AbstractDatum/targets"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
-        eType="ecore:EClass http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="schedule" eType="#//Schedule"
         eOpposite="#//Schedule/actions"/>
   </eClassifiers>

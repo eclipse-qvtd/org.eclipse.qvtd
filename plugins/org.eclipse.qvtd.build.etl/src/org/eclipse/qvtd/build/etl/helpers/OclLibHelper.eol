@@ -18,7 +18,7 @@
  * @param name the name of the operation
  * @param owningType the type to which the operation belongs
  */
-operation oclStdLib!Class getOperationByName(name : String) : oclStdLib!Operation {
+operation oclStdLib!AnyType getOperationByName(name : String) : oclStdLib!Operation {
 	return self.ownedOperation.selectOne(o | o.name == name);
 }
 
