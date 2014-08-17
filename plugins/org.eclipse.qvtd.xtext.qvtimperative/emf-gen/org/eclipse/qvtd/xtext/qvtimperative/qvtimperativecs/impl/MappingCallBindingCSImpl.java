@@ -38,7 +38,6 @@ import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.util.QVTimperativeCS
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.MappingCallBindingCSImpl#getMappingCall <em>Mapping Call</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.MappingCallBindingCSImpl#getReferredVariable <em>Referred Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.MappingCallBindingCSImpl#getValue <em>Value</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.MappingCallBindingCSImpl#isIsLoop <em>Is Loop</em>}</li>
  * </ul>
  * </p>
  *
@@ -64,26 +63,6 @@ public class MappingCallBindingCSImpl extends ExpCSImpl implements MappingCallBi
 	 * @ordered
 	 */
 	protected ExpCS value;
-
-	/**
-	 * The default value of the '{@link #isIsLoop() <em>Is Loop</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsLoop()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean IS_LOOP_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isIsLoop() <em>Is Loop</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsLoop()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean isLoop = IS_LOOP_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -231,37 +210,6 @@ public class MappingCallBindingCSImpl extends ExpCSImpl implements MappingCallBi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isIsLoop() {
-		return isLoop;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setIsLoop(boolean newIsLoop) {
-		boolean oldIsLoop = isLoop;
-		isLoop = newIsLoop;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__IS_LOOP, oldIsLoop, isLoop));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		return super.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -318,8 +266,6 @@ public class MappingCallBindingCSImpl extends ExpCSImpl implements MappingCallBi
 				return basicGetReferredVariable();
 			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__VALUE:
 				return getValue();
-			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__IS_LOOP:
-				return isIsLoop();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -340,9 +286,6 @@ public class MappingCallBindingCSImpl extends ExpCSImpl implements MappingCallBi
 				return;
 			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__VALUE:
 				setValue((ExpCS)newValue);
-				return;
-			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__IS_LOOP:
-				setIsLoop((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -365,9 +308,6 @@ public class MappingCallBindingCSImpl extends ExpCSImpl implements MappingCallBi
 			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__VALUE:
 				setValue((ExpCS)null);
 				return;
-			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__IS_LOOP:
-				setIsLoop(IS_LOOP_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -386,8 +326,6 @@ public class MappingCallBindingCSImpl extends ExpCSImpl implements MappingCallBi
 				return referredVariable != null;
 			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__VALUE:
 				return value != null;
-			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__IS_LOOP:
-				return isLoop != IS_LOOP_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -27,5 +27,8 @@ public interface QVTimperativeCSVisitor<R> extends org.eclipse.qvtd.xtext.qvtcor
 	@Nullable R visitMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS object);
 	@Nullable R visitMappingCallBindingCS(@NonNull org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallBindingCS object);
 	@Nullable R visitMappingCallCS(@NonNull org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallCS object);
+	@Nullable R visitMappingLoopCS(@NonNull org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingLoopCS object);
+	@Nullable R visitMappingSequenceCS(@NonNull org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingSequenceCS object);
+	@Nullable R visitMappingStatementCS(@NonNull org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingStatementCS object);
 	@Nullable R visitTopLevelCS(@NonNull org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.TopLevelCS object);
 }

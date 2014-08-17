@@ -101,6 +101,18 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 				return createMappingCallCSAdapter();
 			}
 			@Override
+			public Adapter caseMappingLoopCS(MappingLoopCS object) {
+				return createMappingLoopCSAdapter();
+			}
+			@Override
+			public Adapter caseMappingSequenceCS(MappingSequenceCS object) {
+				return createMappingSequenceCSAdapter();
+			}
+			@Override
+			public Adapter caseMappingStatementCS(MappingStatementCS object) {
+				return createMappingStatementCSAdapter();
+			}
+			@Override
 			public Adapter caseTopLevelCS(TopLevelCS object) {
 				return createTopLevelCSAdapter();
 			}
@@ -211,6 +223,48 @@ public class QVTimperativeCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMappingCallCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingLoopCS <em>Mapping Loop CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingLoopCS
+	 * @generated
+	 */
+	public Adapter createMappingLoopCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingSequenceCS <em>Mapping Sequence CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingSequenceCS
+	 * @generated
+	 */
+	public Adapter createMappingSequenceCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingStatementCS <em>Mapping Statement CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingStatementCS
+	 * @generated
+	 */
+	public Adapter createMappingStatementCSAdapter() {
 		return null;
 	}
 

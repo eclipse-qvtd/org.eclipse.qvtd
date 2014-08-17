@@ -48,6 +48,18 @@ public abstract class AbstractNullQVTimperativeCSVisitor<R, C>
 		return null;
 	}
 
+	public @Nullable R visitMappingLoopCS(@NonNull org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingLoopCS object) {
+		return null;
+	}
+
+	public @Nullable R visitMappingSequenceCS(@NonNull org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingSequenceCS object) {
+		return null;
+	}
+
+	public @Nullable R visitMappingStatementCS(@NonNull org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingStatementCS object) {
+		return null;
+	}
+
 	public @Nullable R visitTopLevelCS(@NonNull org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.TopLevelCS object) {
 		return null;
 	}

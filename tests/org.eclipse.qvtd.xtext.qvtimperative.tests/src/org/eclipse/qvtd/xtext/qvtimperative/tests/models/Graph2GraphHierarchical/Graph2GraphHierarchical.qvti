@@ -16,10 +16,12 @@ map Graph2Middle in CopyGraph {	        					-- L to M for G
         middleG2G.graph1 := g1;
         middleG2G.name := g1.name.toLowerCase();
     }
-    map Node2Middle {
-    	n1 <= g1.element->select(e | e.oclIsTypeOf(simplegraph::Node));
-    	middleParent := middleG2G;
-    }
+    for child in g1.element->select(e | e.oclIsTypeOf(simplegraph::Node)) {
+	    map Node2Middle {
+	    	n1 := child;
+	    	middleParent := middleG2G;
+	    }
+	}
     map Middle2Graph {
     	g2Gmiddle := middleG2G;
     }
@@ -46,9 +48,11 @@ map Middle2Graph in CopyGraph {								-- M to R for G
     	g2Gmiddle.graph2 := g2;
         g2.name := g2Gmiddle.name;
     }
-    map Middle2Node {
-    	n2n <= g2Gmiddle.element2Element->select(e2e | e2e.oclIsTypeOf(simplegraph2graph::Node2Node));
-    }
+    for child in g2Gmiddle.element2Element->select(e2e | e2e.oclIsTypeOf(simplegraph2graph::Node2Node)) {
+	    map Middle2Node {
+	    	n2n := child;
+	    }
+	}
 }
 
 map Middle2Node in CopyGraph {						        -- M to R for N

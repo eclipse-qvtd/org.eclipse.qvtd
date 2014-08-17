@@ -22,33 +22,35 @@ map packageToSchemaLM in umlRdbms {
     -- classifier can be a Class or a PrimitiveDataType
     
     -- PrimitiveDataType
-    map integerToNumberLM {
-        p := p;
-        prim <= p.elements;
-        p2s := p2s;
-    }
-    map booleanToBooleanLM {
-        p := p;
-        prim <= p.elements;
-        p2s := p2s;
-    }
-    map stringToVarcharLM {
-        p := p;
-        prim <= p.elements;
-        p2s := p2s;
-    }
-    -- Class
-    map classToTableLM {
-        p := p;
-        c <= p.elements;
-        p2s := p2s;
-    }
-    -- Associations
-    map associationToForeignKeyLM {
-        p := p;
-        a <= p.elements;
-        p2s := p2s;
-    }
+    for child in p.elements {
+	    map integerToNumberLM {
+	        p := p;
+	        prim := child;
+	        p2s := p2s;
+	    }
+	    map booleanToBooleanLM {
+	        p := p;
+	        prim := child;
+	        p2s := p2s;
+	    }
+	    map stringToVarcharLM {
+	        p := p;
+	        prim := child;
+	        p2s := p2s;
+	    }
+	    -- Class
+	    map classToTableLM {
+	        p := p;
+	        c := child;
+	        p2s := p2s;
+	    }
+	    -- Associations
+		    map associationToForeignKeyLM {
+	        p := p;
+	        a := child;
+	        p2s := p2s;
+	    }
+	}
     
     /* M to M */
     
@@ -72,23 +74,27 @@ map packageToSchemaMR in umlRdbms {
         s_1 := s;
         p2s_1 := p2s;
     }
-    map integerToNumberMR {
-        p2s := p2s;
-        p2n <= p2s.primitivesToNames;
+    for child in p2s.primitivesToNames {
+	    map integerToNumberMR {
+	        p2s := p2s;
+	        p2n := child;
+	    }
+	    map booleanToBooleanMR {
+	        p2s := p2s;
+	        p2n := child;
+	    }
+	    map stringToVarcharMR {
+	        p2s := p2s;
+	        p2n := child;
+	    }
     }
-    map booleanToBooleanMR {
-        p2s := p2s;
-        p2n <= p2s.primitivesToNames;
-    }
-    map stringToVarcharMR {
-        p2s := p2s;
-        p2n <= p2s.primitivesToNames;
-    } 
-    map classToTableMR {
-        p2s := p2s;
-        c2t <= p2s.classesToTables;
-        s := s;
-    }
+    for child in p2s.classesToTables {
+	    map classToTableMR {
+	        p2s := p2s;
+	        c2t := child;
+	        s := s;
+	    }
+	}
 }
 
 map packageToSchemaMR_1 in umlRdbms {
@@ -200,23 +206,25 @@ map classToTableLM in umlRdbms {
         c2t.name := c.name;
     }
     -- A Class has attributes
-    map classPrimitiveAttributesLM {
-        c := c;
-        a <= c.attributes;
-        fao := c2t;
-    }
-    map classComplexAttributesLM {
-        c := c;
-        a <= c.attributes;
-        fao := c2t;
-    }
-    map complexAttributePrimitiveAttributesLM {
-        ca <= c.attributes;
-        c <= c.attributes.type;
-    }
-    map complexAttributeComplexAttributesLM {
-        ca <= c.attributes;
-        c <= c.attributes.type;
+    for anAttribute in c.attributes {
+	    map classPrimitiveAttributesLM {
+	        c := c;
+	        a := anAttribute;
+	        fao := c2t;
+	    }
+	    map classComplexAttributesLM {
+	        c := c;
+	        a := anAttribute;
+	        fao := c2t;
+	    }
+	    map complexAttributePrimitiveAttributesLM {
+	        ca := anAttribute;
+	        c := anAttribute.type;
+	    }
+	    map complexAttributeComplexAttributesLM {
+	        ca := anAttribute;
+	        c := anAttribute.type;
+	    }
     }
 }
 
@@ -239,22 +247,25 @@ map classToTableMR in umlRdbms {
         t_2 := t;
         c2t_2 := c2t;
     }
-    map associationToForeignKeyMR {
-        p2s := p2s;
-        dt := t;
---        sc2t := c2t;
---        dc2t <= c2t.associationsToForeignKeys.referenced;
-        a2f <= c2t.associationsToForeignKeys;
-        s := s;
-        st := t;
-        rk := c2t.primaryKey;
+   for child in c2t.associationsToForeignKeys {
+	    map associationToForeignKeyMR {
+	        p2s := p2s;
+	        dt := t;
+	--        sc2t := c2t;
+	--        dc2t <= c2t.associationsToForeignKeys.referenced;
+	        a2f := child;
+	        s := s;
+	        st := t;
+	        rk := c2t.primaryKey;
+	    }
     }
     -- A Class has attributes
-    map attributeColumnsMR {
-        c2t := c2t;
-        a2c <= c2t.fromAttributes->union(c2t.fromAttributes
-            ->selectByKind(umltordbms::NonLeafAttribute).fromAttributes);
-        t := t;
+    for child in c2t.fromAttributes->union(c2t.fromAttributes->selectByKind(umltordbms::NonLeafAttribute).fromAttributes) {
+	    map attributeColumnsMR {
+	        c2t := c2t;
+	        a2c := child;
+	        t := t;
+	    }
     }
 }
 
@@ -451,12 +462,14 @@ map complexAttributePrimitiveAttributesLM in umlRdbms {
         -- getAllAttributes(c)->includes(a);
         fao := ca.FromAttribute;
     ) {}
-    map complexAttributePrimitiveAttributesLM_1 {
-        c_1 := c;
-        ca_1 := ca;
-        fao_1 := fao;
-        a_1 <= c.attributes;
-    }
+    for anAttribute in c.attributes {
+	    map complexAttributePrimitiveAttributesLM_1 {
+	        c_1 := c;
+	        ca_1 := ca;
+	        fao_1 := fao;
+	        a_1 := anAttribute;
+	    }
+	}
 }
 
 map complexAttributePrimitiveAttributesLM_1 in umlRdbms {
@@ -489,12 +502,14 @@ map complexAttributeComplexAttributesLM in umlRdbms {
         --getAllAttributes(c)->includes(a);
         fao := ca.FromAttribute;
     ) {}
-    map complexAttributeComplexAttributesLM_1 {
-        ca_1 := ca;
-        a_1 <= c.attributes;
-        c_1 := c;
-        fao_1 := fao;
-    }
+    for anAttribute in c.attributes {
+    	map complexAttributeComplexAttributesLM_1 {
+	        ca_1 := ca;
+	        a_1 := anAttribute;
+	        c_1 := c;
+	        fao_1 := fao;
+	    }
+	}
 }
 
 map complexAttributeComplexAttributesLM_1 in umlRdbms {

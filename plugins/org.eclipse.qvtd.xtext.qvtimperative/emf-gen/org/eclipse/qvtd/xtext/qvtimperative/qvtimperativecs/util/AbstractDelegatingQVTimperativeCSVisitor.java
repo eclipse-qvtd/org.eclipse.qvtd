@@ -48,6 +48,18 @@ public abstract class AbstractDelegatingQVTimperativeCSVisitor<R, C, D extends Q
 		return delegate.visitMappingCallCS(object);
 	}
 
+	public @Nullable R visitMappingLoopCS(@NonNull org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingLoopCS object) {
+		return delegate.visitMappingLoopCS(object);
+	}
+
+	public @Nullable R visitMappingSequenceCS(@NonNull org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingSequenceCS object) {
+		return delegate.visitMappingSequenceCS(object);
+	}
+
+	public @Nullable R visitMappingStatementCS(@NonNull org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingStatementCS object) {
+		return delegate.visitMappingStatementCS(object);
+	}
+
 	public @Nullable R visitTopLevelCS(@NonNull org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.TopLevelCS object) {
 		return delegate.visitTopLevelCS(object);
 	}

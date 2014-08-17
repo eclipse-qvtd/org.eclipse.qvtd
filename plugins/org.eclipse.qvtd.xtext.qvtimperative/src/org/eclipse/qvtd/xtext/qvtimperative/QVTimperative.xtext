@@ -31,12 +31,20 @@ DirectionCS: {DirectionCS} name=UnrestrictedName
 ;
 
 MappingCS: {MappingCS} 'map' name=UnrestrictedName ('in' in=[qvtbase::Transformation|UnrestrictedName])?
-	'{' domains+=SourceDomainCS* domains+=TargetDomainCS* ('where' middle=MiddleDomainCS)? mappingCalls+=MappingCallCS* '}';
+	'{' domains+=SourceDomainCS* domains+=TargetDomainCS* ('where' middle=MiddleDomainCS)? mappingSequence=MappingSequenceCS? '}';
 	
 MappingCallCS: {MappingCallCS} 'map' referredMapping=[qvtimperative::Mapping|UnrestrictedName]
 	'{' bindings+=MappingCallBindingCS* '}';
 
-MappingCallBindingCS: referredVariable=[pivot::Variable|UnrestrictedName] (':='|isLoop?='<=') value=ExpCS ';';
+MappingCallBindingCS: referredVariable=[pivot::Variable|UnrestrictedName] ':=' value=ExpCS ';';
+	
+MappingLoopCS: 'for' ownedIterator=MappingIteratorCS 'in' inExpression=ExpCS '{' mappingSequence=MappingSequenceCS '}';
+	
+MappingIteratorCS returns essentialocl::VariableCS: name=UnrestrictedName (':' ownedType=TypeExpCS)?;
+
+MappingSequenceCS: mappingStatements+=MappingStatementCS+;
+	
+MappingStatementCS: MappingCallCS | MappingLoopCS;
 	
 SourceDomainCS returns DomainCS: check?='check' direction=[qvtbase::TypedModel|UnrestrictedName]
 	guardPattern=SourceGuardPatternCS bottomPattern=SourceBottomPatternCS

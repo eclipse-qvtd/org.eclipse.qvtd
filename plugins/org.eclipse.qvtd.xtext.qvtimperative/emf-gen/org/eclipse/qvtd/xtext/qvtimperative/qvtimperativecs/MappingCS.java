@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.AbstractMappingCS;
 
 /**
@@ -21,7 +20,7 @@ import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.AbstractMappingCS;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS#getMappingCalls <em>Mapping Calls</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS#getMappingSequence <em>Mapping Sequence</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,19 +30,29 @@ import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.AbstractMappingCS;
  */
 public interface MappingCS extends AbstractMappingCS {
 	/**
-	 * Returns the value of the '<em><b>Mapping Calls</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallCS}.
+	 * Returns the value of the '<em><b>Mapping Sequence</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Mapping Calls</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Mapping Sequence</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mapping Calls</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.QVTimperativeCSPackage#getMappingCS_MappingCalls()
+	 * @return the value of the '<em>Mapping Sequence</em>' containment reference.
+	 * @see #setMappingSequence(MappingSequenceCS)
+	 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.QVTimperativeCSPackage#getMappingCS_MappingSequence()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<MappingCallCS> getMappingCalls();
+	MappingSequenceCS getMappingSequence();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS#getMappingSequence <em>Mapping Sequence</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Mapping Sequence</em>' containment reference.
+	 * @see #getMappingSequence()
+	 * @generated
+	 */
+	void setMappingSequence(MappingSequenceCS value);
 
 } // MappingCS

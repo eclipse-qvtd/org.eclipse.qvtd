@@ -19,11 +19,41 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallCS;
+import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingLoopCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.util.AbstractQVTimperativeCSPreOrderVisitor;
 
 public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOrderVisitor
 {	
+/*	public static class MappingLoopIteratorCompletion extends SingleContinuation<MappingLoopCS>
+	{
+		protected static PivotDependency[] computeDependencies(@NonNull MappingLoopCS csElement) {
+			if (csElement.getOwnedType() != null) {
+				return new PivotDependency[]{new PivotDependency(csElement.getOwnedType())};
+			}
+			else {
+				return new PivotDependency[0];
+			}
+		}
+
+		public MappingLoopIteratorCompletion(@NonNull CS2PivotConversion context, @NonNull MappingLoopCS csElement) {
+			super(context, null, null, csElement, computeDependencies(csElement));
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			MappingLoop pivotElement = PivotUtil.getPivot(MappingLoop.class, csElement);
+			if (pivotElement != null) {
+				Variable iterator = pivotElement.getIterator();
+				if (iterator != null) {
+					Type type = PivotUtil.getPivot(Type.class, csElement.getOwnedType());
+					iterator.setType(type);
+				}
+			}
+			return null;
+		}
+	} */
+
 	public QVTimperativeCSPreOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
 	}
@@ -48,6 +78,12 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 		if (pivotElement != null) {
 			pivotElement.setReferredMapping(csElement.getReferredMapping());
 		}
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitMappingLoopCS(@NonNull MappingLoopCS csElement) {
+//		return new MappingLoopIteratorCompletion(context, csElement);
 		return null;
 	}
 
