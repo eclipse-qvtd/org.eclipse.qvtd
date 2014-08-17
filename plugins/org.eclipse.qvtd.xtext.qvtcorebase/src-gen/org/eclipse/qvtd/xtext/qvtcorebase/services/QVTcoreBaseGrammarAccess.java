@@ -303,90 +303,69 @@ public class QVTcoreBaseGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class GuardPatternCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "GuardPatternCS");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
-		private final Assignment cUnrealizedVariablesAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
-		private final RuleCall cUnrealizedVariablesUnrealizedVariableCSParserRuleCall_0_1_0 = (RuleCall)cUnrealizedVariablesAssignment_0_1.eContents().get(0);
-		private final Group cGroup_0_2 = (Group)cGroup_0.eContents().get(2);
-		private final Keyword cCommaKeyword_0_2_0 = (Keyword)cGroup_0_2.eContents().get(0);
-		private final Assignment cUnrealizedVariablesAssignment_0_2_1 = (Assignment)cGroup_0_2.eContents().get(1);
-		private final RuleCall cUnrealizedVariablesUnrealizedVariableCSParserRuleCall_0_2_1_0 = (RuleCall)cUnrealizedVariablesAssignment_0_2_1.eContents().get(0);
-		private final Keyword cVerticalLineKeyword_0_3 = (Keyword)cGroup_0.eContents().get(3);
-		private final Assignment cConstraintsAssignment_0_4 = (Assignment)cGroup_0.eContents().get(4);
-		private final RuleCall cConstraintsAssignmentCSParserRuleCall_0_4_0 = (RuleCall)cConstraintsAssignment_0_4.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_0_5 = (Keyword)cGroup_0.eContents().get(5);
-		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
-		private final Action cGuardPatternCSAction_1_0 = (Action)cGroup_1.eContents().get(0);
-		private final Keyword cLeftParenthesisKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
-		private final Assignment cConstraintsAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final RuleCall cConstraintsAssignmentCSParserRuleCall_1_2_0 = (RuleCall)cConstraintsAssignment_1_2.eContents().get(0);
-		private final Keyword cRightParenthesisKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cGuardPatternCSAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Assignment cUnrealizedVariablesAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
+		private final RuleCall cUnrealizedVariablesUnrealizedVariableCSParserRuleCall_2_0_0 = (RuleCall)cUnrealizedVariablesAssignment_2_0.eContents().get(0);
+		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
+		private final Keyword cCommaKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Assignment cUnrealizedVariablesAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
+		private final RuleCall cUnrealizedVariablesUnrealizedVariableCSParserRuleCall_2_1_1_0 = (RuleCall)cUnrealizedVariablesAssignment_2_1_1.eContents().get(0);
+		private final Keyword cVerticalLineKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
+		private final Assignment cConstraintsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cConstraintsAssignmentCSParserRuleCall_3_0 = (RuleCall)cConstraintsAssignment_3.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		////EnforcementOperationCS: ('creation'|'deletion') ExpCS ';';
 		//GuardPatternCS:
-		//	"(" unrealizedVariables+=UnrealizedVariableCS ("," unrealizedVariables+=UnrealizedVariableCS)* "|"
-		//	constraints+=AssignmentCS* ")" | {GuardPatternCS} "(" constraints+=AssignmentCS* ")";
+		//	{GuardPatternCS} "(" (unrealizedVariables+=UnrealizedVariableCS ("," unrealizedVariables+=UnrealizedVariableCS)* "|")?
+		//	constraints+=AssignmentCS* ")";
 		public ParserRule getRule() { return rule; }
 
-		//"(" unrealizedVariables+=UnrealizedVariableCS ("," unrealizedVariables+=UnrealizedVariableCS)* "|"
-		//constraints+=AssignmentCS* ")" | {GuardPatternCS} "(" constraints+=AssignmentCS* ")"
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//"(" unrealizedVariables+=UnrealizedVariableCS ("," unrealizedVariables+=UnrealizedVariableCS)* "|"
+		//{GuardPatternCS} "(" (unrealizedVariables+=UnrealizedVariableCS ("," unrealizedVariables+=UnrealizedVariableCS)* "|")?
 		//constraints+=AssignmentCS* ")"
-		public Group getGroup_0() { return cGroup_0; }
-
-		//"("
-		public Keyword getLeftParenthesisKeyword_0_0() { return cLeftParenthesisKeyword_0_0; }
-
-		//unrealizedVariables+=UnrealizedVariableCS
-		public Assignment getUnrealizedVariablesAssignment_0_1() { return cUnrealizedVariablesAssignment_0_1; }
-
-		//UnrealizedVariableCS
-		public RuleCall getUnrealizedVariablesUnrealizedVariableCSParserRuleCall_0_1_0() { return cUnrealizedVariablesUnrealizedVariableCSParserRuleCall_0_1_0; }
-
-		//("," unrealizedVariables+=UnrealizedVariableCS)*
-		public Group getGroup_0_2() { return cGroup_0_2; }
-
-		//","
-		public Keyword getCommaKeyword_0_2_0() { return cCommaKeyword_0_2_0; }
-
-		//unrealizedVariables+=UnrealizedVariableCS
-		public Assignment getUnrealizedVariablesAssignment_0_2_1() { return cUnrealizedVariablesAssignment_0_2_1; }
-
-		//UnrealizedVariableCS
-		public RuleCall getUnrealizedVariablesUnrealizedVariableCSParserRuleCall_0_2_1_0() { return cUnrealizedVariablesUnrealizedVariableCSParserRuleCall_0_2_1_0; }
-
-		//"|"
-		public Keyword getVerticalLineKeyword_0_3() { return cVerticalLineKeyword_0_3; }
-
-		//constraints+=AssignmentCS*
-		public Assignment getConstraintsAssignment_0_4() { return cConstraintsAssignment_0_4; }
-
-		//AssignmentCS
-		public RuleCall getConstraintsAssignmentCSParserRuleCall_0_4_0() { return cConstraintsAssignmentCSParserRuleCall_0_4_0; }
-
-		//")"
-		public Keyword getRightParenthesisKeyword_0_5() { return cRightParenthesisKeyword_0_5; }
-
-		//{GuardPatternCS} "(" constraints+=AssignmentCS* ")"
-		public Group getGroup_1() { return cGroup_1; }
+		public Group getGroup() { return cGroup; }
 
 		//{GuardPatternCS}
-		public Action getGuardPatternCSAction_1_0() { return cGuardPatternCSAction_1_0; }
+		public Action getGuardPatternCSAction_0() { return cGuardPatternCSAction_0; }
 
 		//"("
-		public Keyword getLeftParenthesisKeyword_1_1() { return cLeftParenthesisKeyword_1_1; }
+		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
+
+		//(unrealizedVariables+=UnrealizedVariableCS ("," unrealizedVariables+=UnrealizedVariableCS)* "|")?
+		public Group getGroup_2() { return cGroup_2; }
+
+		//unrealizedVariables+=UnrealizedVariableCS
+		public Assignment getUnrealizedVariablesAssignment_2_0() { return cUnrealizedVariablesAssignment_2_0; }
+
+		//UnrealizedVariableCS
+		public RuleCall getUnrealizedVariablesUnrealizedVariableCSParserRuleCall_2_0_0() { return cUnrealizedVariablesUnrealizedVariableCSParserRuleCall_2_0_0; }
+
+		//("," unrealizedVariables+=UnrealizedVariableCS)*
+		public Group getGroup_2_1() { return cGroup_2_1; }
+
+		//","
+		public Keyword getCommaKeyword_2_1_0() { return cCommaKeyword_2_1_0; }
+
+		//unrealizedVariables+=UnrealizedVariableCS
+		public Assignment getUnrealizedVariablesAssignment_2_1_1() { return cUnrealizedVariablesAssignment_2_1_1; }
+
+		//UnrealizedVariableCS
+		public RuleCall getUnrealizedVariablesUnrealizedVariableCSParserRuleCall_2_1_1_0() { return cUnrealizedVariablesUnrealizedVariableCSParserRuleCall_2_1_1_0; }
+
+		//"|"
+		public Keyword getVerticalLineKeyword_2_2() { return cVerticalLineKeyword_2_2; }
 
 		//constraints+=AssignmentCS*
-		public Assignment getConstraintsAssignment_1_2() { return cConstraintsAssignment_1_2; }
+		public Assignment getConstraintsAssignment_3() { return cConstraintsAssignment_3; }
 
 		//AssignmentCS
-		public RuleCall getConstraintsAssignmentCSParserRuleCall_1_2_0() { return cConstraintsAssignmentCSParserRuleCall_1_2_0; }
+		public RuleCall getConstraintsAssignmentCSParserRuleCall_3_0() { return cConstraintsAssignmentCSParserRuleCall_3_0; }
 
 		//")"
-		public Keyword getRightParenthesisKeyword_1_3() { return cRightParenthesisKeyword_1_3; }
+		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
 	}
 
 	public class ImportCSElements extends AbstractParserRuleElementFinder {
@@ -1050,8 +1029,8 @@ public class QVTcoreBaseGrammarAccess extends AbstractGrammarElementFinder {
 
 	////EnforcementOperationCS: ('creation'|'deletion') ExpCS ';';
 	//GuardPatternCS:
-	//	"(" unrealizedVariables+=UnrealizedVariableCS ("," unrealizedVariables+=UnrealizedVariableCS)* "|"
-	//	constraints+=AssignmentCS* ")" | {GuardPatternCS} "(" constraints+=AssignmentCS* ")";
+	//	{GuardPatternCS} "(" (unrealizedVariables+=UnrealizedVariableCS ("," unrealizedVariables+=UnrealizedVariableCS)* "|")?
+	//	constraints+=AssignmentCS* ")";
 	public GuardPatternCSElements getGuardPatternCSAccess() {
 		return (pGuardPatternCS != null) ? pGuardPatternCS : (pGuardPatternCS = new GuardPatternCSElements());
 	}

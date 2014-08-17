@@ -2,12 +2,13 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.qvtd.xtext.qvtcore.tests;singleton:=true
-Bundle-Version: 0.11.0.qualifier
+Bundle-Version: 0.12.0.qualifier
 Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.qvtd.xtext.qvtbase.tests,
- org.eclipse.qvtd.xtext.qvtcore.ui
+ org.eclipse.qvtd.xtext.qvtcore.ui,
+ org.eclipse.jdt.annotation;bundle-version="[1.1.0,2.0.0)"
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin

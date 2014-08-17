@@ -131,6 +131,10 @@ public class XtextTestCase extends PivotTestCase
 		unloadResourceSet(reloadResourceSet);
 	}
 	
+	public static void assertSameModel(@NonNull Resource expectedResource, @NonNull Resource actualResource) throws IOException, InterruptedException {
+		org.eclipse.ocl.examples.xtext.tests.XtextTestCase.assertSameModel(expectedResource, actualResource);
+	}
+	
 	/**
 	 * Install a platform:/resource/project... mapping for all folders in
 	 * $WORKSPACE_LOC/* if defined, or $user.dir/../* otherwise.

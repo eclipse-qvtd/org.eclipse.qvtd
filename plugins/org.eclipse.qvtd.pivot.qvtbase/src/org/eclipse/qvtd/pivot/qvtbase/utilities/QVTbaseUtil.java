@@ -20,6 +20,7 @@ import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
@@ -64,6 +65,15 @@ public class QVTbaseUtil
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof BaseModel) {
 				return (BaseModel) eObject;
+			}
+		}
+		return null;
+	}
+
+	public static @Nullable Rule getContainingRule(@Nullable EObject eObject) {
+		for ( ; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof Rule) {
+				return (Rule) eObject;
 			}
 		}
 		return null;

@@ -762,113 +762,86 @@ ruleGuardPatternCS returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-((	otherlv_0='(' 
-    {
-    	newLeafNode(otherlv_0, grammarAccess.getGuardPatternCSAccess().getLeftParenthesisKeyword_0_0());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getUnrealizedVariablesUnrealizedVariableCSParserRuleCall_0_1_0()); 
-	    }
-		lv_unrealizedVariables_1_0=ruleUnrealizedVariableCS		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getGuardPatternCSRule());
-	        }
-       		add(
-       			$current, 
-       			"unrealizedVariables",
-        		lv_unrealizedVariables_1_0, 
-        		"UnrealizedVariableCS");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)(	otherlv_2=',' 
-    {
-    	newLeafNode(otherlv_2, grammarAccess.getGuardPatternCSAccess().getCommaKeyword_0_2_0());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getUnrealizedVariablesUnrealizedVariableCSParserRuleCall_0_2_1_0()); 
-	    }
-		lv_unrealizedVariables_3_0=ruleUnrealizedVariableCS		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getGuardPatternCSRule());
-	        }
-       		add(
-       			$current, 
-       			"unrealizedVariables",
-        		lv_unrealizedVariables_3_0, 
-        		"UnrealizedVariableCS");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))*	otherlv_4='|' 
-    {
-    	newLeafNode(otherlv_4, grammarAccess.getGuardPatternCSAccess().getVerticalLineKeyword_0_3());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getConstraintsAssignmentCSParserRuleCall_0_4_0()); 
-	    }
-		lv_constraints_5_0=ruleAssignmentCS		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getGuardPatternCSRule());
-	        }
-       		add(
-       			$current, 
-       			"constraints",
-        		lv_constraints_5_0, 
-        		"AssignmentCS");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)*	otherlv_6=')' 
-    {
-    	newLeafNode(otherlv_6, grammarAccess.getGuardPatternCSAccess().getRightParenthesisKeyword_0_5());
-    }
-)
-    |((
+((
 	{ 
 	  /* */ 
 	}
     {
         $current = forceCreateModelElement(
-            grammarAccess.getGuardPatternCSAccess().getGuardPatternCSAction_1_0(),
+            grammarAccess.getGuardPatternCSAccess().getGuardPatternCSAction_0(),
             $current);
     }
-)	otherlv_8='(' 
+)	otherlv_1='(' 
     {
-    	newLeafNode(otherlv_8, grammarAccess.getGuardPatternCSAccess().getLeftParenthesisKeyword_1_1());
+    	newLeafNode(otherlv_1, grammarAccess.getGuardPatternCSAccess().getLeftParenthesisKeyword_1());
+    }
+((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getUnrealizedVariablesUnrealizedVariableCSParserRuleCall_2_0_0()); 
+	    }
+		lv_unrealizedVariables_2_0=ruleUnrealizedVariableCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getGuardPatternCSRule());
+	        }
+       		add(
+       			$current, 
+       			"unrealizedVariables",
+        		lv_unrealizedVariables_2_0, 
+        		"UnrealizedVariableCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_3=',' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getGuardPatternCSAccess().getCommaKeyword_2_1_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getConstraintsAssignmentCSParserRuleCall_1_2_0()); 
+	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getUnrealizedVariablesUnrealizedVariableCSParserRuleCall_2_1_1_0()); 
 	    }
-		lv_constraints_9_0=ruleAssignmentCS		{
+		lv_unrealizedVariables_4_0=ruleUnrealizedVariableCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getGuardPatternCSRule());
+	        }
+       		add(
+       			$current, 
+       			"unrealizedVariables",
+        		lv_unrealizedVariables_4_0, 
+        		"UnrealizedVariableCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*	otherlv_5='|' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getGuardPatternCSAccess().getVerticalLineKeyword_2_2());
+    }
+)?(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getConstraintsAssignmentCSParserRuleCall_3_0()); 
+	    }
+		lv_constraints_6_0=ruleAssignmentCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getGuardPatternCSRule());
 	        }
        		add(
        			$current, 
        			"constraints",
-        		lv_constraints_9_0, 
+        		lv_constraints_6_0, 
         		"AssignmentCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)*	otherlv_10=')' 
+)*	otherlv_7=')' 
     {
-    	newLeafNode(otherlv_10, grammarAccess.getGuardPatternCSAccess().getRightParenthesisKeyword_1_3());
+    	newLeafNode(otherlv_7, grammarAccess.getGuardPatternCSAccess().getRightParenthesisKeyword_4());
     }
-))
+)
 ;
 
 

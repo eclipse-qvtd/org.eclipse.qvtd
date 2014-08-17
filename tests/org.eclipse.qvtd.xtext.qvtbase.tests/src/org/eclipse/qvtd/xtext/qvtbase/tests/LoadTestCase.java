@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EMOFResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
@@ -36,49 +37,37 @@ public class LoadTestCase extends XtextTestCase
 {	
 	protected MetaModelManager metaModelManager = null;
 
-	public Resource doLoad_Concrete(String stem, String extension) throws IOException {
-		String inputName = stem + "." + extension;
+	public void doLoad_Concrete(@NonNull String inputName) throws IOException {
+		OCL ocl = OCL.newInstance();
 		URI inputURI = getProjectFileURI(inputName);
-		return doLoad_Concrete(inputURI);
+		URI pivotURI = inputURI.trimFileExtension().appendFileExtension("qvtias");
+		doLoad_Concrete(ocl, inputURI, pivotURI);
+		ocl.dispose();
 	}
 
-	protected Resource doLoad_Concrete(@NonNull URI inputURI) throws IOException {
-		String inputName = inputURI.lastSegment();
-		String cstName = inputName + ".xmi";
-		String pivotName = inputName + ".pivot";
-		URI cstURI = getProjectFileURI(cstName);
-		URI pivotURI = getProjectFileURI(pivotName);
-		//		URI savedURI = getProjectFileURI(savedName);
-		//		MetaModelManager metaModelManager = new MetaModelManager();
-		//		MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, metaModelManager);
-				CS2PivotResourceAdapter adapter = null;
-				try {
-					BaseCSResource xtextResource = (BaseCSResource) resourceSet.getResource(inputURI, true);
-					assertNoResourceErrors("Load failed", xtextResource);
-					adapter = xtextResource.getCS2ASAdapter(null);
-					Resource pivotResource = adapter.getASResource(xtextResource);
-		//			assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
-			//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
-					assertNoValidationErrors("Validation errors", xtextResource.getContents().get(0));
-			//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validated()");
-		//			xtextResource.setURI(savedURI);
-		//			xtextResource.save(null);
-		//			xtextResource.setURI(inputURI);
-		//			assertNoResourceErrors("Save failed", xtextResource);
-					saveAsXMI(xtextResource, cstURI);
-					pivotResource.setURI(pivotURI);
-					assertNoValidationErrors("Pivot validation errors", pivotResource.getContents().get(0));
-					Map<String, Object> options = new HashMap<String, Object>();
-					options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
-				    pivotResource.save(options);
-					return pivotResource;
-				}
-				finally {
-//					if (adapter != null) {
-//						adapter.dispose();
-//						adapter.getMetaModelManager().dispose();
-//					}
-				}
+	public Resource doLoad_Concrete(@NonNull OCL ocl, @NonNull String inputName, @NonNull String outputName) throws IOException {
+		URI inputURI = getProjectFileURI(inputName);
+		URI pivotURI = getProjectFileURI(outputName);
+		return doLoad_Concrete(ocl, inputURI, pivotURI);
+	}
+
+	protected Resource doLoad_Concrete(@NonNull OCL ocl, @NonNull URI inputURI, @NonNull URI pivotURI) throws IOException {
+		URI cstURI = pivotURI.trimFileExtension().appendFileExtension("xmi");
+		BaseCSResource xtextResource = (BaseCSResource) ocl.getMetaModelManager().getExternalResourceSet().getResource(inputURI, true);
+		assertNoResourceErrors("Load failed", xtextResource);
+		CS2PivotResourceAdapter adapter = xtextResource.getCS2ASAdapter(null);
+		Resource pivotResource = adapter.getASResource(xtextResource);
+//		assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
+//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
+		assertNoValidationErrors("Validation errors", xtextResource.getContents().get(0));
+//		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validated()");
+		saveAsXMI(xtextResource, cstURI);
+		pivotResource.setURI(pivotURI);
+		assertNoValidationErrors("Pivot validation errors", pivotResource.getContents().get(0));
+		Map<String, Object> options = new HashMap<String, Object>();
+		options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
+	    pivotResource.save(options);
+		return pivotResource;
 	}
 
 	protected void saveAsXMI(Resource resource, URI xmiURI) throws IOException {

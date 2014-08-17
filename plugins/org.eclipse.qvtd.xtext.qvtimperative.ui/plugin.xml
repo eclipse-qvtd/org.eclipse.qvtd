@@ -9,7 +9,7 @@
               class="org.eclipse.qvtd.xtext.qvtimperative.ui.QVTimperativeExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
               contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
               default="true"
-              extensions="qvti"
+              extensions="qvti,qvtias"
               icon="icons/QVTiModelFile.gif"
               id="org.eclipse.qvtd.xtext.qvtimperative.QVTimperative"
               name="%MF_QVTimperativeEditor">

@@ -60,6 +60,7 @@ public class QVTcoreFormatter extends QVTcoreBaseFormatter
 	    configureGuardPatternCS(c, f.getGuardPatternCSAccess());
 	    configureImportCS(c, f.getImportCSAccess());
 	    configureQueryCS(c, f.getQueryCSAccess());
+	    configureScopeNameCS(c, f.getScopeNameCSAccess());
 	    configureTransformationCS(c, f.getTransformationCSAccess());
 	    {
 	    	MappingCSElements a = f.getMappingCSAccess();

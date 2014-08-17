@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.qvtd.xtext.qvtcorebase;singleton:=true
-Bundle-Version: 0.11.0.qualifier
+Bundle-Version: 0.12.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
@@ -10,16 +10,17 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.qvtd.xtext.qvtcorebase.utilities.QVTcoreBasePlugin$Implementation
 Export-Package: org.eclipse.qvtd.xtext.qvtcorebase,
+ org.eclipse.qvtd.xtext.qvtcorebase.as2cs,
  org.eclipse.qvtd.xtext.qvtcorebase.attributes,
  org.eclipse.qvtd.xtext.qvtcorebase.cs2as,
  org.eclipse.qvtd.xtext.qvtcorebase.formatting,
- org.eclipse.qvtd.xtext.qvtcorebase.parseTreeConstruction,
  org.eclipse.qvtd.xtext.qvtcorebase.parser.antlr,
  org.eclipse.qvtd.xtext.qvtcorebase.parser.antlr.internal,
  org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs,
  org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.impl,
  org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.util,
  org.eclipse.qvtd.xtext.qvtcorebase.scoping,
+ org.eclipse.qvtd.xtext.qvtcorebase.serializer,
  org.eclipse.qvtd.xtext.qvtcorebase.services,
  org.eclipse.qvtd.xtext.qvtcorebase.utilities,
  org.eclipse.qvtd.xtext.qvtcorebase.validation

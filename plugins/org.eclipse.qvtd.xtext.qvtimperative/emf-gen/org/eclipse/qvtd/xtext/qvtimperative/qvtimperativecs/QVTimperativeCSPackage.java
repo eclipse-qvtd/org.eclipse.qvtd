@@ -59,6 +59,14 @@ public interface QVTimperativeCSPackage extends EPackage {
 	String eNS_PREFIX = "qvtics";
 
 	/**
+	 * The package content type ID.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	String eCONTENT_TYPE = "org.eclipse.qvtd.xtext.qvtimperative";
+
+	/**
 	 * The singleton instance of the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

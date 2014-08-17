@@ -93,7 +93,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		QVTimperativeStandaloneSetup.doSetup();
 	}
 
-	protected Resource doLoad_Concrete(@NonNull URI inputURI) throws IOException {
+	public Resource doLoad_ConcreteWithOCL(@NonNull URI inputURI) throws IOException {
 		String inputName = inputURI.lastSegment();
 		String cstName = inputName + ".xmi";
 		String pivotName = inputName + ".pivot";
@@ -187,7 +187,7 @@ public class QVTiCompilerTests extends LoadTestCase
 			}
 		}
 		MetaModelManagerResourceSetAdapter.getAdapter(DomainUtil.nonNullState(resourceSet), metaModelManager);
-		Resource resource = doLoad_Concrete(transformURI);
+		Resource resource = doLoad_ConcreteWithOCL(transformURI);
 		for (EObject eObject : resource.getContents()) {
 			if (eObject instanceof ImperativeModel) {
 				for (org.eclipse.ocl.examples.pivot.Package pPackage : ((ImperativeModel)eObject).getNestedPackage()) {

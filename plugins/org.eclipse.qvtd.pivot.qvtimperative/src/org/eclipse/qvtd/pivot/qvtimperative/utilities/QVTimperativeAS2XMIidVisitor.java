@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid;
@@ -29,7 +30,7 @@ public class QVTimperativeAS2XMIidVisitor extends AbstractQVTimperativeAS2XMIidV
 	@Override
 	public @Nullable Boolean visitMapping(@NonNull Mapping object) {
 		s.append(MAPPING_PREFIX);
-		appendParent(object);
+		appendParent((EObject)object);
 		appendName(object.getName());
 		return true;
 	}

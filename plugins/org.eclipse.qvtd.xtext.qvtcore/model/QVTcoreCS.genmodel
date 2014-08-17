@@ -14,7 +14,8 @@
   </genAnnotations>
   <foreignModel>QVTcoreCS.ecore</foreignModel>
   <genPackages prefix="QVTcoreCS" basePackage="org.eclipse.qvtd.xtext.qvtcore" resource="XML"
-      disposableProviderFactory="true" fileExtensions="qvtc" ecorePackage="QVTcoreCS.ecore#/">
+      disposableProviderFactory="true" contentTypeIdentifier="org.eclipse.qvtd.xtext.qvtcore"
+      fileExtensions="qvtc" ecorePackage="QVTcoreCS.ecore#/">
     <genClasses ecoreClass="QVTcoreCS.ecore#//MappingCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//MappingCS/composedMappings"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//MappingCS/refines"/>

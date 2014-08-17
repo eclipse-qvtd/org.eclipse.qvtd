@@ -12,11 +12,16 @@ package	org.eclipse.qvtd.pivot.qvtcorebase.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
+import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.util.AbstractQVTcoreBaseAS2XMIidVisitor;
 
 public class QVTcoreBaseAS2XMIidVisitor extends AbstractQVTcoreBaseAS2XMIidVisitor
@@ -24,6 +29,19 @@ public class QVTcoreBaseAS2XMIidVisitor extends AbstractQVTcoreBaseAS2XMIidVisit
 	public QVTcoreBaseAS2XMIidVisitor(@NonNull AS2XMIid context) {
 		super(context);
 	}	
+
+	@Override
+	protected void appendNameOf(@NonNull Object element) {
+		if (element instanceof BottomPattern) {
+			appendName("bottom");
+		}
+		else if (element instanceof GuardPattern) {
+			appendName("guard");
+		}
+		else {
+			super.appendNameOf(element);
+		}
+	}
 
 	@Override
 	public @Nullable Boolean visitAssignment(@NonNull Assignment object) {
@@ -43,5 +61,39 @@ public class QVTcoreBaseAS2XMIidVisitor extends AbstractQVTcoreBaseAS2XMIidVisit
 	@Override
 	public @Nullable Boolean visitEnforcementOperation(@NonNull EnforcementOperation object) {
 		return false;
+	}
+
+	@Override
+	public @Nullable Boolean visitRealizedVariable(@NonNull RealizedVariable object) {
+		if (object.eContainer() instanceof CorePattern) {
+			Rule rule = QVTcoreBaseUtil.getContainingRule(object);
+			if((rule != null) && (rule.getName() != null)) {
+				String name = object.getName();
+				if (name != null) {
+					s.append(VARIABLE_PREFIX);
+					appendParent(object);
+					appendName(name);
+					return true;
+				}
+			}
+		}
+		return super.visitRealizedVariable(object);
+	}
+
+	@Override
+	public @Nullable Boolean visitVariable(@NonNull Variable object) {
+		if (object.eContainer() instanceof CorePattern) {
+			Rule rule = QVTcoreBaseUtil.getContainingRule(object);
+			if((rule != null) && (rule.getName() != null)) {
+				String name = object.getName();
+				if (name != null) {
+					s.append(VARIABLE_PREFIX);
+					appendParent(object);
+					appendName(name);
+					return true;
+				}
+			}
+		}
+		return super.visitVariable(object);
 	}
 }

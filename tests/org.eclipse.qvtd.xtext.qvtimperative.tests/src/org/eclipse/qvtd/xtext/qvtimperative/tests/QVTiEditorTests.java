@@ -28,10 +28,10 @@ public class QVTiEditorTests extends LoadTestCase
 		QVTimperativeStandaloneSetup.doSetup();
 	}
 	public void testLoad_HSV2HLS_qvti() throws IOException, InterruptedException {
-		doLoad_Concrete("HSV2HLS/HSV2HLS", "qvti");
+		doLoad_Concrete("HSV2HLS/HSV2HLS.qvti");
 	}	
 
 //	public void testLoad_ClassToRDBMSSchedule_qvti() throws IOException, InterruptedException {
-//		doLoad_Concrete("ClassToRDBMSSchedule", "qvti");
+//		doLoad_Concrete("ClassToRDBMSSchedule.qvti");
 //	}	
 }
