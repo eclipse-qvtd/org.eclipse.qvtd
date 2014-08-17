@@ -33,7 +33,6 @@ import org.eclipse.ocl.examples.pivot.Variable;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#getMappingCall <em>Mapping Call</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#getBoundVariable <em>Bound Variable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#getValue <em>Value</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#isIsLoop <em>Is Loop</em>}</li>
  * </ul>
  * </p>
  *
@@ -126,30 +125,5 @@ public interface MappingCallBinding extends EObject, Element {
 	 * @generated
 	 */
 	void setValue(OCLExpression value);
-
-	/**
-	 * Returns the value of the '<em><b>Is Loop</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Whether the value is a collection of values to be looped over.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Is Loop</em>' attribute.
-	 * @see #setIsLoop(boolean)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCallBinding_IsLoop()
-	 * @generated
-	 */
-	boolean isIsLoop();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding#isIsLoop <em>Is Loop</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Loop</em>' attribute.
-	 * @see #isIsLoop()
-	 * @generated
-	 */
-	void setIsLoop(boolean value);
 
 } // MappingCallBinding

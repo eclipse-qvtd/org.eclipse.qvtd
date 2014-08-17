@@ -47,6 +47,9 @@ public class MappingCallBindingCSAttribution extends AbstractAttribution
 			MappingCallCS mappingCall = csMappingCallBinding.getMappingCall();
 			if (mappingCall != null) {
 				EObject eContainer = mappingCall.eContainer();
+				while ((eContainer != null) && !(eContainer instanceof MappingCS)) {
+					eContainer = eContainer.eContainer();
+				}
 				if (eContainer instanceof MappingCS) {
 					Mapping mapping = PivotUtil.getPivot(Mapping.class, (MappingCS)eContainer);
 					if (mapping != null) {

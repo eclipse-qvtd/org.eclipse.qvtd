@@ -23,11 +23,13 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate;
@@ -85,16 +87,22 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 	public Object visitCGMappingCallBinding(@NonNull CGMappingCallBinding cgMappingCallBinding) {
 		if (cgMappingCallBinding.isRequired()) {
 			MappingCallBinding mappingCallBinding = (MappingCallBinding)cgMappingCallBinding.getAst();
-			rewriteAsUnboxed(rewriteAsGuarded(cgMappingCallBinding.getValueOrValues(), "binding for '" + mappingCallBinding.getMappingCall().getReferredMapping().getName() + "::" + mappingCallBinding.getBoundVariable().getName() + "'"));	// FIXME referred mapping
+			rewriteAsUnboxed(rewriteAsGuarded(cgMappingCallBinding.getValue(), "binding for '" + mappingCallBinding.getMappingCall().getReferredMapping().getName() + "::" + mappingCallBinding.getBoundVariable().getName() + "'"));	// FIXME referred mapping
 		}
 		else {
-			rewriteAsUnboxed(cgMappingCallBinding.getValueOrValues());
+			rewriteAsUnboxed(cgMappingCallBinding.getValue());
 		}
 		return visitCGValuedElement(cgMappingCallBinding);
 	}
 
 	public Object visitCGMappingExp(@NonNull CGMappingExp object) {
 		return visitCGValuedElement(object);
+	}
+
+	public Object visitCGMappingLoop(@NonNull CGMappingLoop cgMappingLoop) {
+		visitCGIterationCallExp(cgMappingLoop);
+		rewriteAsUnboxed(cgMappingLoop.getSource());
+		return null;
 	}
 
 	public Object visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment cgMiddlePropertyAssignment) {
@@ -117,6 +125,10 @@ public class QVTiBoxingAnalyzer extends BoxingAnalyzer implements QVTiCGModelVis
 
 	public Object visitCGRealizedVariable(@NonNull CGRealizedVariable cgRealizedVariable) {
 		return visitCGVariable(cgRealizedVariable);
+	}
+
+	public Object visitCGSequence(@NonNull CGSequence object) {
+		return visitCGValuedElement(object);
 	}
 
 	public Object visitCGTransformation(@NonNull CGTransformation cgTransformation) {

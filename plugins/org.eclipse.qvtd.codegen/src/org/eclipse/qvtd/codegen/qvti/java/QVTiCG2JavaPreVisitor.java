@@ -28,11 +28,13 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate;
@@ -118,6 +120,10 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 		}
 	}
 
+	public Object visitCGMappingLoop(@NonNull CGMappingLoop object) {
+		return visitCGIterationCallExp(object);
+	}
+
 	public Object visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment object) {
 		return visitCGPropertyAssignment(object);
 	}
@@ -144,6 +150,10 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 //			localContext.getExecutorType(pType);
 //		}
 		return visitCGVariable(cgRealizedVariable);
+	}
+
+	public Object visitCGSequence(@NonNull CGSequence object) {
+		return visitCGValuedElement(object);
 	}
 
 	public Object visitCGTransformation(@NonNull CGTransformation object) {

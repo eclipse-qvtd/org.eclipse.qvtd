@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.xtext.base.basecs.impl.ModelElementCSImpl;
 import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallBindingCS;
@@ -44,7 +43,7 @@ import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.util.QVTimperativeCS
  *
  * @generated
  */
-public class MappingCallCSImpl extends ModelElementCSImpl implements MappingCallCS {
+public class MappingCallCSImpl extends MappingStatementCSImpl implements MappingCallCS {
 	/**
 	 * The cached value of the '{@link #getReferredMapping() <em>Referred Mapping</em>}' reference.
 	 * <!-- begin-user-doc -->

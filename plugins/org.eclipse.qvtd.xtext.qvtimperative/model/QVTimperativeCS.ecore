@@ -3,8 +3,8 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvtimperativecs" nsURI="http://www.eclipse.org/qvt/0.9/QVTimperativeCST"
     nsPrefix="qvtics">
   <eClassifiers xsi:type="ecore:EClass" name="MappingCS" eSuperTypes="../../org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCS.ecore#//AbstractMappingCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingCalls" upperBound="-1"
-        eType="#//MappingCallCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingSequence" eType="#//MappingSequenceCS"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingCallBindingCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="mappingCall" eType="#//MappingCallCS"
@@ -13,15 +13,29 @@
         eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Variable"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLoop" eType="ecore:EDataType ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Boolean"
-        defaultValueLiteral="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MappingCallCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCS.ecore#//ModelElementCS">
+  <eClassifiers xsi:type="ecore:EClass" name="MappingCallCS" eSuperTypes="#//MappingStatementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredMapping" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore#//Mapping"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bindings" ordered="false"
         upperBound="-1" eType="#//MappingCallBindingCS" containment="true" eOpposite="#//MappingCallBindingCS/mappingCall"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MappingLoopCS" eSuperTypes="#//MappingStatementCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedIterator" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCS.ecore#//VariableCS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inExpression" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingSequence" lowerBound="1"
+        eType="#//MappingSequenceCS" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MappingSequenceCS" eSuperTypes="#//MappingStatementCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingStatements" lowerBound="1"
+        upperBound="-1" eType="#//MappingStatementCS" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MappingStatementCS" abstract="true"
+      eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCS.ecore#//ModelElementCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="TopLevelCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCS.ecore#//RootPackageCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="transformations" upperBound="-1"
         eType="ecore:EClass ../../org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCS.ecore#//TransformationCS"

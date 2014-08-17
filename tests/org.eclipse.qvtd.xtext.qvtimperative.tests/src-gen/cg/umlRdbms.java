@@ -1,11 +1,11 @@
-/*
- * Â«codeGenHelper.getCopyright(' * ')Â»
- *************************************************************************
+/*******************************************************************************
+ * «codeGenHelper.getCopyright(' * ')»
+ *
  * This code is 100% auto-generated
  * using: org.eclipse.ocl.examples.codegen.java.JavaStream
  *
  * Do not edit it.
- */
+ ********************************************************************************/
 
 package cg;
 
@@ -30,7 +30,6 @@ import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.domain.values.BagValue;
 import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
-import org.eclipse.ocl.examples.domain.values.SequenceValue;
 import org.eclipse.ocl.examples.domain.values.SetValue;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
@@ -78,9 +77,9 @@ import test.umltordbms.UmltordbmsPackage;
 @SuppressWarnings("nls")
 public class umlRdbms extends AbstractTransformation
 {
-    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_SimpleRDBMS = IdManager.getNsURIPackageId("http://http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS", "simplerdbms", SimplerdbmsPackage.eINSTANCE);
-    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_UMLtoRDBMS = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS", "umltordbms", UmltordbmsPackage.eINSTANCE);
-    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_simpleUML = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/simpleUML", "simpleuml", SimpleumlPackage.eINSTANCE);
+    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_SimpleRDBMS = IdManager.getNsURIPackageId("http://http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS", null, SimplerdbmsPackage.eINSTANCE);
+    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_UMLtoRDBMS = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS", null, UmltordbmsPackage.eINSTANCE);
+    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_simpleUML = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/simpleUML", null, SimpleumlPackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Association = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_simpleUML.getClassId("Association", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_AssociationToForeignKey = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_UMLtoRDBMS.getClassId("AssociationToForeignKey", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Attribute = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_simpleUML.getClassId("Attribute", 0);
@@ -122,7 +121,6 @@ public class umlRdbms extends AbstractTransformation
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_ForeignKey = TypeId.ORDERED_SET.getSpecializedId(CLSSid_ForeignKey);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Key = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Key);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_PackageElement = TypeId.ORDERED_SET.getSpecializedId(CLSSid_PackageElement);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_Classifier = TypeId.SEQUENCE.getSpecializedId(CLSSid_Classifier);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Association = TypeId.SET.getSpecializedId(CLSSid_Association);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Attribute = TypeId.SET.getSpecializedId(CLSSid_Attribute);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_AttributeToColumn = TypeId.SET.getSpecializedId(CLSSid_AttributeToColumn);
@@ -173,14 +171,14 @@ public class umlRdbms extends AbstractTransformation
      * 
      * map packageToSchemaLM in umlRdbms) {
      * 
-     *   uml (p : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Package;
+     *   uml (p : simpleuml::Package;
      *  |
      * )
      * { |
      * }
      * middle ( |
      * )
-     * {realize p2s : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::PackageToSchema;
+     * {realize p2s : umltordbms::PackageToSchema;
      *  |
      * }
      * where ( |
@@ -189,31 +187,33 @@ public class umlRdbms extends AbstractTransformation
      * p2s = p;
      * p2s = p.name;
      * }
-     * map integerToNumberLM {
+     * for child : simpleuml::PackageElement in p.elements {
+     * 
+     *     map integerToNumberLM {
      * p := p;
-     * prim <= p.elements;
+     * prim := child;
      * p2s := p2s;
      * }
-     *   map booleanToBooleanLM {
+     *     map booleanToBooleanLM {
      * p := p;
-     * prim <= p.elements;
+     * prim := child;
      * p2s := p2s;
      * }
-     *   map stringToVarcharLM {
+     *     map stringToVarcharLM {
      * p := p;
-     * prim <= p.elements;
+     * prim := child;
      * p2s := p2s;
      * }
-     *   map classToTableLM {
+     *     map classToTableLM {
      * p := p;
-     * c <= p.elements;
+     * c := child;
      * p2s := p2s;
      * }
-     *   map associationToForeignKeyLM {
+     *     map associationToForeignKeyLM {
      * p := p;
-     * a <= p.elements;
+     * a := child;
      * p2s := p2s;
-     * }
+     * }}
      *   map packageToSchemaMR {
      * p2s := p2s;
      * }
@@ -222,8 +222,6 @@ public class umlRdbms extends AbstractTransformation
     protected boolean packageToSchemaLM(final @NonNull /*@NonInvalid*/ Package p) {
         try {
             // predicates
-            final @Nullable /*@Thrown*/ List<PackageElement> elements_0 = p.getElements();
-            assert elements_0 != null;
             // creations
             final /*@Thrown*/ PackageToSchema p2s = UmltordbmsFactory.eINSTANCE.createPackageToSchema();
             assert p2s != null;
@@ -232,40 +230,26 @@ public class umlRdbms extends AbstractTransformation
             p2s.setUmlPackage(p);
             final @Nullable /*@Thrown*/ String name = p.getName();
             p2s.setName(name);
-            // mapping calls
-            for (Object prim_2 : elements_0) {
-                if (prim_2 != null) {
-                    if (prim_2 instanceof PrimitiveDataType) {
-                        integerToNumberLM(p, p2s, (PrimitiveDataType)prim_2);
-                    }
+            // mapping statements
+            final @Nullable /*@Thrown*/ List<PackageElement> elements = p.getElements();
+            assert elements != null;
+            ;
+            for (PackageElement child : elements) {
+                final @NonNull /*@NonInvalid*/ PackageElement symbol_5 = (PackageElement)child;
+                if (symbol_5 instanceof PrimitiveDataType) {
+                    integerToNumberLM(p, p2s, (PrimitiveDataType)symbol_5);
                 }
-            }
-            for (Object prim_3 : elements_0) {
-                if (prim_3 != null) {
-                    if (prim_3 instanceof PrimitiveDataType) {
-                        booleanToBooleanLM(p, p2s, (PrimitiveDataType)prim_3);
-                    }
+                if (symbol_5 instanceof PrimitiveDataType) {
+                    booleanToBooleanLM(p, p2s, (PrimitiveDataType)symbol_5);
                 }
-            }
-            for (Object prim_4 : elements_0) {
-                if (prim_4 != null) {
-                    if (prim_4 instanceof PrimitiveDataType) {
-                        stringToVarcharLM(p, p2s, (PrimitiveDataType)prim_4);
-                    }
+                if (symbol_5 instanceof PrimitiveDataType) {
+                    stringToVarcharLM(p, p2s, (PrimitiveDataType)symbol_5);
                 }
-            }
-            for (Object c_4 : elements_0) {
-                if (c_4 != null) {
-                    if (c_4 instanceof Class) {
-                        classToTableLM((Class)c_4, p, p2s);
-                    }
+                if (symbol_5 instanceof Class) {
+                    classToTableLM((Class)symbol_5, p, p2s);
                 }
-            }
-            for (Object a_2 : elements_0) {
-                if (a_2 != null) {
-                    if (a_2 instanceof Association) {
-                        associationToForeignKeyLM((Association)a_2, p, p2s);
-                    }
+                if (symbol_5 instanceof Association) {
+                    associationToForeignKeyLM((Association)symbol_5, p, p2s);
                 }
             }
             packageToSchemaMR(p2s);
@@ -280,14 +264,14 @@ public class umlRdbms extends AbstractTransformation
      * 
      * map packageToSchemaMR in umlRdbms) {
      * 
-     *   middle (p2s : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::PackageToSchema;
+     *   middle (p2s : umltordbms::PackageToSchema;
      *  |
      * )
      * { |
      * }
      * rdbms ( |
      * )
-     * {realize s : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Schema;
+     * {realize s : simplerdbms::Schema;
      *  |
      * }
      * where ( |
@@ -299,59 +283,55 @@ public class umlRdbms extends AbstractTransformation
      * s_1 := s;
      * p2s_1 := p2s;
      * }
-     *   map integerToNumberMR {
+     *   for child : umltordbms::PrimitiveToName in p2s.primitivesToNames {
+     * 
+     *     map integerToNumberMR {
      * p2s := p2s;
-     * p2n <= p2s.primitivesToNames;
+     * p2n := child;
      * }
-     *   map booleanToBooleanMR {
+     *     map booleanToBooleanMR {
      * p2s := p2s;
-     * p2n <= p2s.primitivesToNames;
+     * p2n := child;
      * }
-     *   map stringToVarcharMR {
+     *     map stringToVarcharMR {
      * p2s := p2s;
-     * p2n <= p2s.primitivesToNames;
-     * }
-     *   map classToTableMR {
+     * p2n := child;
+     * }}
+     *   for child : umltordbms::ClassToTable in p2s.classesToTables {
+     * 
+     *     map classToTableMR {
      * p2s := p2s;
-     * c2t <= p2s.classesToTables;
+     * c2t := child;
      * s := s;
-     * }
+     * }}
      * }
      */
     protected boolean packageToSchemaMR(final @NonNull /*@NonInvalid*/ PackageToSchema p2s) {
         try {
             // predicates
-            final @Nullable /*@Thrown*/ List<PrimitiveToName> primitivesToNames_0 = p2s.getPrimitivesToNames();
-            assert primitivesToNames_0 != null;
             // creations
             final /*@Thrown*/ Schema s = SimplerdbmsFactory.eINSTANCE.createSchema();
             assert s != null;
             modelObjects[1/*rdbms*/].add(s);
             // assignments
             p2s.setSchema(s);
-            // mapping calls
+            // mapping statements
             packageToSchemaMR_1(p2s, s);
-            for (Object p2n_3 : primitivesToNames_0) {
-                if (p2n_3 != null) {
-                    integerToNumberMR((PrimitiveToName)p2n_3, p2s);
-                }
-            }
-            for (Object p2n_4 : primitivesToNames_0) {
-                if (p2n_4 != null) {
-                    booleanToBooleanMR((PrimitiveToName)p2n_4, p2s);
-                }
-            }
-            for (Object p2n_5 : primitivesToNames_0) {
-                if (p2n_5 != null) {
-                    stringToVarcharMR((PrimitiveToName)p2n_5, p2s);
-                }
+            final @Nullable /*@Thrown*/ List<PrimitiveToName> primitivesToNames = p2s.getPrimitivesToNames();
+            assert primitivesToNames != null;
+            ;
+            for (PrimitiveToName child : primitivesToNames) {
+                final @NonNull /*@NonInvalid*/ PrimitiveToName symbol_5 = (PrimitiveToName)child;
+                integerToNumberMR(symbol_5, p2s);
+                booleanToBooleanMR(symbol_5, p2s);
+                stringToVarcharMR(symbol_5, p2s);
             }
             final @Nullable /*@Thrown*/ List<ClassToTable> classesToTables = p2s.getClassesToTables();
             assert classesToTables != null;
-            for (Object c2t_3 : classesToTables) {
-                if (c2t_3 != null) {
-                    classToTableMR((ClassToTable)c2t_3, p2s, s);
-                }
+            ;
+            for (ClassToTable child_0 : classesToTables) {
+                final @NonNull /*@NonInvalid*/ ClassToTable symbol_11 = (ClassToTable)child_0;
+                classToTableMR(symbol_11, p2s, s);
             }
             return true;
         }
@@ -363,12 +343,12 @@ public class umlRdbms extends AbstractTransformation
     /**
      * 
      * map packageToSchemaMR_1 in umlRdbms) {
-     * middle (p2s_1 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::PackageToSchema;
+     * middle (p2s_1 : umltordbms::PackageToSchema;
      *  |
      * )
      * { |
      * }
-     * rdbms (s_1 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Schema;
+     * rdbms (s_1 : simplerdbms::Schema;
      *  |
      * )
      * { |
@@ -388,7 +368,7 @@ public class umlRdbms extends AbstractTransformation
             // assignments
             final @Nullable /*@Thrown*/ String name = p2s_1.getName();
             s_1.setName(name);
-            // mapping calls
+            // mapping statements
             return true;
         }
         catch (Exception e) {
@@ -399,16 +379,16 @@ public class umlRdbms extends AbstractTransformation
     /**
      * 
      * map integerToNumberLM in umlRdbms) {
-     * uml (p : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Package;
-     * prim : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::PrimitiveDataType;
+     * uml (p : simpleuml::Package;
+     * prim : simpleuml::PrimitiveDataType;
      *  |
      * )
      * { |
      * }
-     * middle (p2s : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::PackageToSchema;
+     * middle (p2s : umltordbms::PackageToSchema;
      *  |
      * )
-     * {realize p2n : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::PrimitiveToName;
+     * {realize p2n : umltordbms::PrimitiveToName;
      *  |
      * }
      * where ( |
@@ -450,7 +430,7 @@ public class umlRdbms extends AbstractTransformation
             final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR_2);
             final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_NUMBER);
             p2n.setName(sum_0);
-            // mapping calls
+            // mapping statements
             return true;
         }
         catch (Exception e) {
@@ -461,8 +441,8 @@ public class umlRdbms extends AbstractTransformation
     /**
      * 
      * map integerToNumberMR in umlRdbms) {
-     * middle (p2s : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::PackageToSchema;
-     * p2n : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::PrimitiveToName;
+     * middle (p2s : umltordbms::PackageToSchema;
+     * p2n : umltordbms::PrimitiveToName;
      *  |
      * )
      * { |
@@ -495,7 +475,7 @@ public class umlRdbms extends AbstractTransformation
             }
             // creations
             // assignments
-            // mapping calls
+            // mapping statements
             return true;
         }
         catch (Exception e) {
@@ -506,16 +486,16 @@ public class umlRdbms extends AbstractTransformation
     /**
      * 
      * map booleanToBooleanLM in umlRdbms) {
-     * uml (p : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Package;
-     * prim : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::PrimitiveDataType;
+     * uml (p : simpleuml::Package;
+     * prim : simpleuml::PrimitiveDataType;
      *  |
      * )
      * { |
      * }
-     * middle (p2s : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::PackageToSchema;
+     * middle (p2s : umltordbms::PackageToSchema;
      *  |
      * )
-     * {realize p2n : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::PrimitiveToName;
+     * {realize p2n : umltordbms::PrimitiveToName;
      *  |
      * }
      * where ( |
@@ -557,7 +537,7 @@ public class umlRdbms extends AbstractTransformation
             final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR_2);
             final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_BOOLEAN);
             p2n.setName(sum_0);
-            // mapping calls
+            // mapping statements
             return true;
         }
         catch (Exception e) {
@@ -568,8 +548,8 @@ public class umlRdbms extends AbstractTransformation
     /**
      * 
      * map booleanToBooleanMR in umlRdbms) {
-     * middle (p2s : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::PackageToSchema;
-     * p2n : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::PrimitiveToName;
+     * middle (p2s : umltordbms::PackageToSchema;
+     * p2n : umltordbms::PrimitiveToName;
      *  |
      * )
      * { |
@@ -602,7 +582,7 @@ public class umlRdbms extends AbstractTransformation
             }
             // creations
             // assignments
-            // mapping calls
+            // mapping statements
             return true;
         }
         catch (Exception e) {
@@ -613,16 +593,16 @@ public class umlRdbms extends AbstractTransformation
     /**
      * 
      * map stringToVarcharLM in umlRdbms) {
-     * uml (p : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Package;
-     * prim : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::PrimitiveDataType;
+     * uml (p : simpleuml::Package;
+     * prim : simpleuml::PrimitiveDataType;
      *  |
      * )
      * { |
      * }
-     * middle (p2s : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::PackageToSchema;
+     * middle (p2s : umltordbms::PackageToSchema;
      *  |
      * )
-     * {realize p2n : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::PrimitiveToName;
+     * {realize p2n : umltordbms::PrimitiveToName;
      *  |
      * }
      * where ( |
@@ -664,7 +644,7 @@ public class umlRdbms extends AbstractTransformation
             final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR_2);
             final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, STR_VARCHAR);
             p2n.setName(sum_0);
-            // mapping calls
+            // mapping statements
             return true;
         }
         catch (Exception e) {
@@ -675,8 +655,8 @@ public class umlRdbms extends AbstractTransformation
     /**
      * 
      * map stringToVarcharMR in umlRdbms) {
-     * middle (p2s : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::PackageToSchema;
-     * p2n : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::PrimitiveToName;
+     * middle (p2s : umltordbms::PackageToSchema;
+     * p2n : umltordbms::PrimitiveToName;
      *  |
      * )
      * { |
@@ -709,7 +689,7 @@ public class umlRdbms extends AbstractTransformation
             }
             // creations
             // assignments
-            // mapping calls
+            // mapping statements
             return true;
         }
         catch (Exception e) {
@@ -720,16 +700,16 @@ public class umlRdbms extends AbstractTransformation
     /**
      * 
      * map classToTableLM in umlRdbms) {
-     * uml (p : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Package;
-     * c : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Class;
+     * uml (p : simpleuml::Package;
+     * c : simpleuml::Class;
      *  |
      * )
      * { |
      * }
-     * middle (p2s : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::PackageToSchema;
+     * middle (p2s : umltordbms::PackageToSchema;
      *  |
      * )
-     * {realize c2t : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::ClassToTable;
+     * {realize c2t : umltordbms::ClassToTable;
      *  |
      * }
      * where ( |
@@ -740,24 +720,26 @@ public class umlRdbms extends AbstractTransformation
      * c2t = c;
      * c2t = c.name;
      * }
-     * map classPrimitiveAttributesLM {
+     * for anAttribute : simpleuml::Attribute in c.attributes {
+     * 
+     *     map classPrimitiveAttributesLM {
      * c := c;
-     * a <= c.attributes;
+     * a := anAttribute;
      * fao := c2t;
      * }
-     *   map classComplexAttributesLM {
+     *     map classComplexAttributesLM {
      * c := c;
-     * a <= c.attributes;
+     * a := anAttribute;
      * fao := c2t;
      * }
-     *   map complexAttributePrimitiveAttributesLM {
-     * ca <= c.attributes;
-     * c <= c.attributes.type;
+     *     map complexAttributePrimitiveAttributesLM {
+     * ca := anAttribute;
+     * c := anAttribute.type;
      * }
-     *   map complexAttributeComplexAttributesLM {
-     * ca <= c.attributes;
-     * c <= c.attributes.type;
-     * }
+     *     map complexAttributeComplexAttributesLM {
+     * ca := anAttribute;
+     * c := anAttribute.type;
+     * }}
      * }
      */
     protected boolean classToTableLM(final @NonNull /*@NonInvalid*/ Class c, final @NonNull /*@NonInvalid*/ Package p_3, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_7) {
@@ -778,31 +760,6 @@ public class umlRdbms extends AbstractTransformation
             if (!eq_1) {
                 return false;
             }
-            final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-            final @Nullable /*@Thrown*/ List<Attribute> attributes_0 = c.getAttributes();
-            assert attributes_0 != null;
-            final @NonNull /*@Thrown*/ OrderedSetValue BOXED_attributes_3 = idResolver.createOrderedSetOfAll(ORD_CLSSid_Attribute, attributes_0);
-            @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValuesUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Classifier);
-            @Nullable Iterator<?> ITERATOR__1_0 = BOXED_attributes_3.iterator();
-            @NonNull /*@Thrown*/ SequenceValue collect_0;
-            while (true) {
-                if (!ITERATOR__1_0.hasNext()) {
-                    collect_0 = accumulator;
-                    break;
-                }
-                @Nullable /*@NonInvalid*/ Attribute _1_0 = (Attribute)ITERATOR__1_0.next();
-                /**
-                 * type
-                 */
-                if (_1_0 == null) {
-                    throw new InvalidValueException("Null source for \'simpleuml::Attribute.type\'");
-                }
-                final @Nullable /*@Thrown*/ Classifier type_0 = _1_0.getType();
-                //
-                accumulator.add(type_0);
-            }
-            final List<Classifier> UNBOXED_collect_0 = collect_0.asEcoreObjects(idResolver, Classifier.class);
-            assert UNBOXED_collect_0 != null;
             // creations
             final /*@Thrown*/ ClassToTable c2t = UmltordbmsFactory.eINSTANCE.createClassToTable();
             assert c2t != null;
@@ -813,37 +770,23 @@ public class umlRdbms extends AbstractTransformation
             OPPOSITE_OF_ClassToTable_umlClass.put(c, c2t);
             final @Nullable /*@Thrown*/ String name = c.getName();
             c2t.setName(name);
-            // mapping calls
-            for (Object a_2 : attributes_0) {
-                if (a_2 != null) {
-                    classPrimitiveAttributesLM((Attribute)a_2, c, c2t);
+            // mapping statements
+            final @Nullable /*@Thrown*/ List<Attribute> attributes = c.getAttributes();
+            assert attributes != null;
+            ;
+            for (Attribute anAttribute : attributes) {
+                final @NonNull /*@NonInvalid*/ Attribute symbol_6 = (Attribute)anAttribute;
+                final @Nullable /*@Thrown*/ Classifier type_0 = symbol_6.getType();
+                if (type_0 == null) {
+                    throw new InvalidValueException("Null binding for \'complexAttributeComplexAttributesLM::c\'");
                 }
-            }
-            for (Object a_3 : attributes_0) {
-                if (a_3 != null) {
-                    classComplexAttributesLM((Attribute)a_3, c, c2t);
+                classPrimitiveAttributesLM(symbol_6, c, c2t);
+                classComplexAttributesLM(symbol_6, c, c2t);
+                if (type_0 instanceof Class) {
+                    complexAttributePrimitiveAttributesLM((Class)type_0, symbol_6);
                 }
-            }
-            for (Object c_6 : UNBOXED_collect_0) {
-                if (c_6 != null) {
-                    if (c_6 instanceof Class) {
-                        for (Object ca_2 : attributes_0) {
-                            if (ca_2 != null) {
-                                complexAttributePrimitiveAttributesLM((Class)c_6, (Attribute)ca_2);
-                            }
-                        }
-                    }
-                }
-            }
-            for (Object c_7 : UNBOXED_collect_0) {
-                if (c_7 != null) {
-                    if (c_7 instanceof Class) {
-                        for (Object ca_3 : attributes_0) {
-                            if (ca_3 != null) {
-                                complexAttributeComplexAttributesLM((Class)c_7, (Attribute)ca_3);
-                            }
-                        }
-                    }
+                if (type_0 instanceof Class) {
+                    complexAttributeComplexAttributesLM((Class)type_0, symbol_6);
                 }
             }
             return true;
@@ -856,16 +799,16 @@ public class umlRdbms extends AbstractTransformation
     /**
      * 
      * map classToTableMR in umlRdbms) {
-     * middle (p2s : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::PackageToSchema;
-     * c2t : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::ClassToTable;
+     * middle (p2s : umltordbms::PackageToSchema;
+     * c2t : umltordbms::ClassToTable;
      *  |
      * )
      * { |
      * }
-     * rdbms (s : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Schema;
+     * rdbms (s : simplerdbms::Schema;
      *  |
      * )
-     * {realize t : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Table;
+     * {realize t : simplerdbms::Table;
      *  |
      * }
      * where ( |
@@ -883,21 +826,24 @@ public class umlRdbms extends AbstractTransformation
      * t_2 := t;
      * c2t_2 := c2t;
      * }
-     *   map associationToForeignKeyMR {
+     *   for child : umltordbms::AssociationToForeignKey in c2t.associationsToForeignKeys {
+     * 
+     *     map associationToForeignKeyMR {
      * p2s := p2s;
      * dt := t;
-     * a2f <= c2t.associationsToForeignKeys;
+     * a2f := child;
      * s := s;
      * st := t;
      * rk := c2t.primaryKey;
-     * }
-     *   map attributeColumnsMR {
-     * 
-     *     c2t := c2t;
-     * a2c <= c2t.fromAttributes->union(
-     *       c2t.fromAttributes->selectByKind(_'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::NonLeafAttribute).fromAttributes);
+     * }}
+     *   for child : umltordbms::FromAttribute in c2t.fromAttributes->union(
+     *     c2t.fromAttributes->selectByKind(umltordbms::NonLeafAttribute).fromAttributes)
+     *    {
+     * map attributeColumnsMR {
+     * c2t := c2t;
+     * a2c := child;
      * t := t;
-     * }
+     * }}
      * }
      */
     protected boolean classToTableMR(final @NonNull /*@NonInvalid*/ ClassToTable c2t, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_8, final @NonNull /*@NonInvalid*/ Schema s) {
@@ -920,19 +866,19 @@ public class umlRdbms extends AbstractTransformation
             // assignments
             t.setKind(STR_base);
             t.setSchema(s);
-            // mapping calls
+            // mapping statements
             classToTableMR_1(c2t, t);
             classToTableMR_2(c2t, t);
             final @Nullable /*@Thrown*/ List<AssociationToForeignKey> associationsToForeignKeys = c2t.getAssociationsToForeignKeys();
             assert associationsToForeignKeys != null;
-            final @Nullable /*@Thrown*/ Key primaryKey = c2t.getPrimaryKey();
-            if (primaryKey == null) {
-                throw new InvalidValueException("Null binding for \'associationToForeignKeyMR::rk\'");
-            }
-            for (Object a2f_0 : associationsToForeignKeys) {
-                if (a2f_0 != null) {
-                    associationToForeignKeyMR((AssociationToForeignKey)a2f_0, t, p2s_8, primaryKey, s, t);
+            ;
+            for (AssociationToForeignKey child : associationsToForeignKeys) {
+                final @NonNull /*@NonInvalid*/ AssociationToForeignKey symbol_5 = (AssociationToForeignKey)child;
+                final @Nullable /*@Thrown*/ Key primaryKey = c2t.getPrimaryKey();
+                if (primaryKey == null) {
+                    throw new InvalidValueException("Null binding for \'associationToForeignKeyMR::rk\'");
                 }
+                associationToForeignKeyMR(symbol_5, t, p2s_8, primaryKey, s, t);
             }
             final @NonNull /*@Thrown*/ SetValue selectByKind = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(evaluator, BOXED_fromAttributes, TYP_umltordbms_c_c_NonLeafAttribute_0);
             @NonNull /*@Thrown*/ BagValue.Accumulator accumulator = ValuesUtil.createBagAccumulatorValue(BAG_CLSSid_FromAttribute);
@@ -948,7 +894,7 @@ public class umlRdbms extends AbstractTransformation
                  * fromAttributes
                  */
                 if (_1 == null) {
-                    throw new InvalidValueException("Null source for \'umltordbms::FromAttributeOwner.fromAttributes\'");
+                    throw new InvalidValueException("Null source for \'umltordbms::FromAttributeOwner::fromAttributes\'");
                 }
                 final @Nullable /*@Thrown*/ List<FromAttribute> fromAttributes_1 = _1.getFromAttributes();
                 assert fromAttributes_1 != null;
@@ -961,11 +907,11 @@ public class umlRdbms extends AbstractTransformation
             final @NonNull /*@Thrown*/ BagValue union = (BagValue)CollectionUnionOperation.INSTANCE.evaluate(BOXED_fromAttributes, collect);
             final List<FromAttribute> UNBOXED_union = union.asEcoreObjects(idResolver, FromAttribute.class);
             assert UNBOXED_union != null;
-            for (Object a2c_0 : UNBOXED_union) {
-                if (a2c_0 != null) {
-                    if (a2c_0 instanceof AttributeToColumn) {
-                        attributeColumnsMR((AttributeToColumn)a2c_0, c2t, t);
-                    }
+            ;
+            for (FromAttribute child_0 : UNBOXED_union) {
+                final @NonNull /*@NonInvalid*/ FromAttribute symbol_9 = (FromAttribute)child_0;
+                if (symbol_9 instanceof AttributeToColumn) {
+                    attributeColumnsMR((AttributeToColumn)symbol_9, c2t, t);
                 }
             }
             return true;
@@ -978,12 +924,12 @@ public class umlRdbms extends AbstractTransformation
     /**
      * 
      * map classToTableMR_1 in umlRdbms) {
-     * middle (c2t_1 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::ClassToTable;
+     * middle (c2t_1 : umltordbms::ClassToTable;
      *  |
      * )
      * { |
      * }
-     * rdbms (t_1 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Table;
+     * rdbms (t_1 : simplerdbms::Table;
      *  |
      * )
      * { |
@@ -1006,7 +952,7 @@ public class umlRdbms extends AbstractTransformation
             OPPOSITE_OF_ClassToTable_table.put(t_1, c2t_1);
             final @Nullable /*@Thrown*/ String name = c2t_1.getName();
             t_1.setName(name);
-            // mapping calls
+            // mapping statements
             return true;
         }
         catch (Exception e) {
@@ -1018,16 +964,16 @@ public class umlRdbms extends AbstractTransformation
      * 
      * map classToTableMR_2 in umlRdbms) {
      * 
-     *   middle (c2t_2 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::ClassToTable;
+     *   middle (c2t_2 : umltordbms::ClassToTable;
      *  |
      * )
      * { |
      * }
-     * rdbms (t_2 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Table;
+     * rdbms (t_2 : simplerdbms::Table;
      *  |
      * )
-     * {realize pk : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Key;
-     * realize pc : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Column;
+     * {realize pk : simplerdbms::Key;
+     * realize pc : simplerdbms::Column;
      *  |
      * }
      * where ( |
@@ -1073,7 +1019,7 @@ public class umlRdbms extends AbstractTransformation
             assert UNBOXED_OrderedSet != null;
             pc.getKey().addAll(UNBOXED_OrderedSet);
             pc.setType(STR_NUMBER);
-            // mapping calls
+            // mapping statements
             classToTableMR_2_1(c2t_2, pc, pk);
             classToTableMR_2_2(pc, pk, t_2);
             return true;
@@ -1086,13 +1032,13 @@ public class umlRdbms extends AbstractTransformation
     /**
      * 
      * map classToTableMR_2_1 in umlRdbms) {
-     * middle (c2t_2_1 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::ClassToTable;
+     * middle (c2t_2_1 : umltordbms::ClassToTable;
      *  |
      * )
      * { |
      * }
-     * rdbms (pk_2_1 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Key;
-     * pc_2_1 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Column;
+     * rdbms (pk_2_1 : simplerdbms::Key;
+     * pc_2_1 : simplerdbms::Column;
      *  |
      * )
      * { |
@@ -1113,7 +1059,7 @@ public class umlRdbms extends AbstractTransformation
             // assignments
             c2t_2_1.setPrimaryKey(pk_2_1);
             c2t_2_1.setColumn(pc_2_1);
-            // mapping calls
+            // mapping statements
             return true;
         }
         catch (Exception e) {
@@ -1128,9 +1074,9 @@ public class umlRdbms extends AbstractTransformation
      * )
      * { |
      * }
-     * rdbms (pk_2_2 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Key;
-     * pc_2_2 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Column;
-     * t_2_2 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Table;
+     * rdbms (pk_2_2 : simplerdbms::Key;
+     * pc_2_2 : simplerdbms::Column;
+     * t_2_2 : simplerdbms::Table;
      *  |
      * )
      * { |
@@ -1154,7 +1100,7 @@ public class umlRdbms extends AbstractTransformation
             pc_2_2.setName(sum);
             final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(name_0, STR__pk);
             pk_2_2.setName(sum_0);
-            // mapping calls
+            // mapping statements
             return true;
         }
         catch (Exception e) {
@@ -1165,20 +1111,20 @@ public class umlRdbms extends AbstractTransformation
     /**
      * 
      * map associationToForeignKeyLM in umlRdbms) {
-     * uml (p : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Package;
-     * sc : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Class;
-     * dc : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Class;
-     * a : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Association;
+     * uml (p : simpleuml::Package;
+     * sc : simpleuml::Class;
+     * dc : simpleuml::Class;
+     * a : simpleuml::Association;
      *  |
      * )
      * { |
      * }
-     * middle (p2s : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::PackageToSchema;
-     * sc2t : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::ClassToTable;
-     * dc2t : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::ClassToTable;
+     * middle (p2s : umltordbms::PackageToSchema;
+     * sc2t : umltordbms::ClassToTable;
+     * dc2t : umltordbms::ClassToTable;
      *  |
      * )
-     * {realize a2f : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::AssociationToForeignKey;
+     * {realize a2f : umltordbms::AssociationToForeignKey;
      *  |
      * }
      * where ( |
@@ -1223,7 +1169,7 @@ public class umlRdbms extends AbstractTransformation
             final @Nullable /*@Thrown*/ Class source = a.getSource();
             final @Nullable /*@Thrown*/ Class sc = source;
             if (dc == null) {
-                throw new InvalidValueException("Null source for \'umltordbms::ClassToTable.umlClass\'");
+                throw new InvalidValueException("Null source for \'umltordbms::ClassToTable::umlClass\'");
             }
             if (dc instanceof InvalidValueException) {
                 throw (InvalidValueException)dc;
@@ -1231,7 +1177,7 @@ public class umlRdbms extends AbstractTransformation
             final @Nullable /*@Thrown*/ ClassToTable ClassToTable = DomainUtil.nonNullState (OPPOSITE_OF_ClassToTable_umlClass.get(dc));
             final @Nullable /*@Thrown*/ ClassToTable dc2t = ClassToTable;
             if (sc == null) {
-                throw new InvalidValueException("Null source for \'umltordbms::ClassToTable.umlClass\'");
+                throw new InvalidValueException("Null source for \'umltordbms::ClassToTable::umlClass\'");
             }
             if (sc instanceof InvalidValueException) {
                 throw (InvalidValueException)sc;
@@ -1371,7 +1317,7 @@ public class umlRdbms extends AbstractTransformation
                 symbol_33 = symbol_32;
             }
             a2f.setName(symbol_33);
-            // mapping calls
+            // mapping statements
             return true;
         }
         catch (Exception e) {
@@ -1382,22 +1328,22 @@ public class umlRdbms extends AbstractTransformation
     /**
      * 
      * map associationToForeignKeyMR in umlRdbms) {
-     * middle (p2s : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::PackageToSchema;
-     * sc2t : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::ClassToTable;
-     * dc2t : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::ClassToTable;
-     * a2f : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::AssociationToForeignKey;
+     * middle (p2s : umltordbms::PackageToSchema;
+     * sc2t : umltordbms::ClassToTable;
+     * dc2t : umltordbms::ClassToTable;
+     * a2f : umltordbms::AssociationToForeignKey;
      *  |
      * )
      * { |
      * }
-     * rdbms (s : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Schema;
-     * st : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Table;
-     * dt : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Table;
-     * rk : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Key;
+     * rdbms (s : simplerdbms::Schema;
+     * st : simplerdbms::Table;
+     * dt : simplerdbms::Table;
+     * rk : simplerdbms::Key;
      *  |
      * )
-     * {realize fk : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::ForeignKey;
-     * realize fc : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Column;
+     * {realize fk : simplerdbms::ForeignKey;
+     * realize fc : simplerdbms::Column;
      *  |
      * }
      * where ( |
@@ -1463,9 +1409,9 @@ public class umlRdbms extends AbstractTransformation
             fc.setName(sum);
             fk.setOwner(st);
             fc.setOwner(st);
-            // mapping calls
+            // mapping statements
             if (referenced == null) {
-                throw new InvalidValueException("Null source for \'umltordbms::ClassToTable.table\'");
+                throw new InvalidValueException("Null source for \'umltordbms::ClassToTable::table\'");
             }
             final @Nullable /*@Thrown*/ Table table = referenced.getTable();
             if (table == null) {
@@ -1488,10 +1434,10 @@ public class umlRdbms extends AbstractTransformation
      * )
      * { |
      * }
-     * rdbms (fk : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::ForeignKey;
-     * fc : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Column;
-     * dt : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Table;
-     * rk : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Key;
+     * rdbms (fk : simplerdbms::ForeignKey;
+     * fc : simplerdbms::Column;
+     * dt : simplerdbms::Table;
+     * rk : simplerdbms::Key;
      *  |
      * )
      * { |
@@ -1524,11 +1470,11 @@ public class umlRdbms extends AbstractTransformation
             final @NonNull /*@Thrown*/ OrderedSetValue BOXED_column = idResolver.createOrderedSetOfAll(ORD_CLSSid_Column, column);
             final @Nullable /*@Thrown*/ Column first = (Column)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_column);
             if (first == null) {
-                throw new InvalidValueException("Null source for \'simplerdbms::Column.type\'");
+                throw new InvalidValueException("Null source for \'simplerdbms::Column::type\'");
             }
             final @Nullable /*@Thrown*/ String type = first.getType();
             fc.setType(type);
-            // mapping calls
+            // mapping statements
             return true;
         }
         catch (Exception e) {
@@ -1539,13 +1485,13 @@ public class umlRdbms extends AbstractTransformation
     /**
      * 
      * map associationToForeignKeyMR_2 in umlRdbms) {
-     * middle (a2f_1 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::AssociationToForeignKey;
+     * middle (a2f_1 : umltordbms::AssociationToForeignKey;
      *  |
      * )
      * { |
      * }
-     * rdbms (fk_1 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::ForeignKey;
-     * fc_1 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Column;
+     * rdbms (fk_1 : simplerdbms::ForeignKey;
+     * fc_1 : simplerdbms::Column;
      *  |
      * )
      * { |
@@ -1566,7 +1512,7 @@ public class umlRdbms extends AbstractTransformation
             // assignments
             a2f_1.setForeignKey(fk_1);
             a2f_1.setColumn(fc_1);
-            // mapping calls
+            // mapping statements
             return true;
         }
         catch (Exception e) {
@@ -1577,18 +1523,18 @@ public class umlRdbms extends AbstractTransformation
     /**
      * 
      * map classPrimitiveAttributesLM in umlRdbms) {
-     * uml (c : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Class;
-     * t : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::PrimitiveDataType;
-     * a : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Attribute;
+     * uml (c : simpleuml::Class;
+     * t : simpleuml::PrimitiveDataType;
+     * a : simpleuml::Attribute;
      *  |
      * )
      * { |
      * }
-     * middle (fao : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::ClassToTable;
-     * p2n : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::PrimitiveToName;
+     * middle (fao : umltordbms::ClassToTable;
+     * p2n : umltordbms::PrimitiveToName;
      *  |
      * )
-     * {realize atc : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::AttributeToColumn;
+     * {realize atc : umltordbms::AttributeToColumn;
      *  |
      * }
      * where ( |
@@ -1625,7 +1571,7 @@ public class umlRdbms extends AbstractTransformation
             }
             final @Nullable /*@Thrown*/ PrimitiveDataType t_0 = (PrimitiveDataType)type;
             if (t_0 == null) {
-                throw new InvalidValueException("Null source for \'umltordbms::PrimitiveToName.primitive\'");
+                throw new InvalidValueException("Null source for \'umltordbms::PrimitiveToName::primitive\'");
             }
             final @NonNull /*@Thrown*/ PrimitiveToName PrimitiveToName = DomainUtil.nonNullState (OPPOSITE_OF_PrimitiveToName_primitive.get(t_0));
             final @Nullable /*@Thrown*/ PrimitiveToName p2n_3 = PrimitiveToName;
@@ -1647,7 +1593,7 @@ public class umlRdbms extends AbstractTransformation
             final List<AttributeToColumn> UNBOXED_Set = Set.asEcoreObjects(idResolver, AttributeToColumn.class);
             assert UNBOXED_Set != null;
             atc.getLeafs().addAll(UNBOXED_Set);
-            // mapping calls
+            // mapping statements
             return true;
         }
         catch (Exception e) {
@@ -1658,17 +1604,17 @@ public class umlRdbms extends AbstractTransformation
     /**
      * 
      * map classComplexAttributesLM in umlRdbms) {
-     * uml (c : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Class;
-     * t : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Class;
-     * a : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Attribute;
+     * uml (c : simpleuml::Class;
+     * t : simpleuml::Class;
+     * a : simpleuml::Attribute;
      *  |
      * )
      * { |
      * }
-     * middle (fao : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::ClassToTable;
+     * middle (fao : umltordbms::ClassToTable;
      *  |
      * )
-     * {realize fa : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::NonLeafAttribute;
+     * {realize fa : umltordbms::NonLeafAttribute;
      *  |
      * }
      * where ( |
@@ -1731,7 +1677,7 @@ public class umlRdbms extends AbstractTransformation
                  * leafs
                  */
                 if (_1 == null) {
-                    throw new InvalidValueException("Null source for \'umltordbms::FromAttribute.leafs\'");
+                    throw new InvalidValueException("Null source for \'umltordbms::FromAttribute::leafs\'");
                 }
                 final @Nullable /*@Thrown*/ List<AttributeToColumn> leafs = _1.getLeafs();
                 assert leafs != null;
@@ -1745,7 +1691,7 @@ public class umlRdbms extends AbstractTransformation
             final List<AttributeToColumn> UNBOXED_asSet = asSet.asEcoreObjects(idResolver, AttributeToColumn.class);
             assert UNBOXED_asSet != null;
             fa.getLeafs().addAll(UNBOXED_asSet);
-            // mapping calls
+            // mapping statements
             return true;
         }
         catch (Exception e) {
@@ -1756,13 +1702,13 @@ public class umlRdbms extends AbstractTransformation
     /**
      * 
      * map complexAttributePrimitiveAttributesLM in umlRdbms) {
-     * uml (c : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Class;
-     * ca : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Attribute;
+     * uml (c : simpleuml::Class;
+     * ca : simpleuml::Attribute;
      *  |
      * )
      * { |
      * }
-     * middle (fao : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::NonLeafAttribute;
+     * middle (fao : umltordbms::NonLeafAttribute;
      *  |
      * )
      * { |
@@ -1772,12 +1718,14 @@ public class umlRdbms extends AbstractTransformation
      *   c)
      * { |
      * }
-     * map complexAttributePrimitiveAttributesLM_1 {
+     * for anAttribute : simpleuml::Attribute in c.attributes {
+     * 
+     *     map complexAttributePrimitiveAttributesLM_1 {
      * c_1 := c;
      * ca_1 := ca;
      * fao_1 := fao;
-     * a_1 <= c.attributes;
-     * }
+     * a_1 := anAttribute;
+     * }}
      * }
      */
     protected boolean complexAttributePrimitiveAttributesLM(final @NonNull /*@NonInvalid*/ Class c_2, final @NonNull /*@NonInvalid*/ Attribute ca) {
@@ -1795,16 +1743,16 @@ public class umlRdbms extends AbstractTransformation
             }
             // creations
             // assignments
-            // mapping calls
+            // mapping statements
             final @Nullable /*@Thrown*/ List<Attribute> attributes = c_2.getAttributes();
             assert attributes != null;
-            if (fao_2 == null) {
-                throw new InvalidValueException("Null binding for \'complexAttributePrimitiveAttributesLM_1::fao_1\'");
-            }
-            for (Object a_1_2 : attributes) {
-                if (a_1_2 != null) {
-                    complexAttributePrimitiveAttributesLM_1((Attribute)a_1_2, c_2, ca, fao_2);
+            ;
+            for (Attribute anAttribute : attributes) {
+                final @NonNull /*@NonInvalid*/ Attribute symbol_1 = (Attribute)anAttribute;
+                if (fao_2 == null) {
+                    throw new InvalidValueException("Null binding for \'complexAttributePrimitiveAttributesLM_1::fao_1\'");
                 }
+                complexAttributePrimitiveAttributesLM_1(symbol_1, c_2, ca, fao_2);
             }
             return true;
         }
@@ -1817,19 +1765,19 @@ public class umlRdbms extends AbstractTransformation
      * 
      * map complexAttributePrimitiveAttributesLM_1 in umlRdbms) {
      * 
-     *   uml (c_1 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Class;
-     * t_1 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::PrimitiveDataType;
-     * a_1 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Attribute;
-     * ca_1 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Attribute;
+     *   uml (c_1 : simpleuml::Class;
+     * t_1 : simpleuml::PrimitiveDataType;
+     * a_1 : simpleuml::Attribute;
+     * ca_1 : simpleuml::Attribute;
      *  |
      * )
      * { |
      * }
-     * middle (fao_1 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::NonLeafAttribute;
-     * p2n_1 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::PrimitiveToName;
+     * middle (fao_1 : umltordbms::NonLeafAttribute;
+     * p2n_1 : umltordbms::PrimitiveToName;
      *  |
      * )
-     * {realize fa : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::AttributeToColumn;
+     * {realize fa : umltordbms::AttributeToColumn;
      *  |
      * }
      * where ( |
@@ -1855,7 +1803,7 @@ public class umlRdbms extends AbstractTransformation
             }
             final @Nullable /*@Thrown*/ PrimitiveDataType t_1_0 = (PrimitiveDataType)type;
             if (t_1_0 == null) {
-                throw new InvalidValueException("Null source for \'umltordbms::PrimitiveToName.primitive\'");
+                throw new InvalidValueException("Null source for \'umltordbms::PrimitiveToName::primitive\'");
             }
             final @NonNull /*@Thrown*/ PrimitiveToName PrimitiveToName = DomainUtil.nonNullState (OPPOSITE_OF_PrimitiveToName_primitive.get(t_1_0));
             final @Nullable /*@Thrown*/ PrimitiveToName p2n_1_0 = PrimitiveToName;
@@ -1880,7 +1828,7 @@ public class umlRdbms extends AbstractTransformation
             final @Nullable /*@Thrown*/ String name_0 = a_1_0.getName();
             final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_0);
             fa.setName(sum_0);
-            // mapping calls
+            // mapping statements
             return true;
         }
         catch (Exception e) {
@@ -1891,13 +1839,13 @@ public class umlRdbms extends AbstractTransformation
     /**
      * 
      * map complexAttributeComplexAttributesLM in umlRdbms) {
-     * uml (c : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Class;
-     * ca : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Attribute;
+     * uml (c : simpleuml::Class;
+     * ca : simpleuml::Attribute;
      *  |
      * )
      * { |
      * }
-     * middle (fao : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::NonLeafAttribute;
+     * middle (fao : umltordbms::NonLeafAttribute;
      *  |
      * )
      * { |
@@ -1907,12 +1855,14 @@ public class umlRdbms extends AbstractTransformation
      *   c)
      * { |
      * }
-     * map complexAttributeComplexAttributesLM_1 {
+     * for anAttribute : simpleuml::Attribute in c.attributes {
+     * 
+     *     map complexAttributeComplexAttributesLM_1 {
      * ca_1 := ca;
-     * a_1 <= c.attributes;
+     * a_1 := anAttribute;
      * c_1 := c;
      * fao_1 := fao;
-     * }
+     * }}
      * }
      */
     protected boolean complexAttributeComplexAttributesLM(final @NonNull /*@NonInvalid*/ Class c_3, final @NonNull /*@NonInvalid*/ Attribute ca_0) {
@@ -1930,16 +1880,16 @@ public class umlRdbms extends AbstractTransformation
             }
             // creations
             // assignments
-            // mapping calls
+            // mapping statements
             final @Nullable /*@Thrown*/ List<Attribute> attributes = c_3.getAttributes();
             assert attributes != null;
-            if (fao_2 == null) {
-                throw new InvalidValueException("Null binding for \'complexAttributeComplexAttributesLM_1::fao_1\'");
-            }
-            for (Object a_1_2 : attributes) {
-                if (a_1_2 != null) {
-                    complexAttributeComplexAttributesLM_1((Attribute)a_1_2, c_3, ca_0, fao_2);
+            ;
+            for (Attribute anAttribute : attributes) {
+                final @NonNull /*@NonInvalid*/ Attribute symbol_1 = (Attribute)anAttribute;
+                if (fao_2 == null) {
+                    throw new InvalidValueException("Null binding for \'complexAttributeComplexAttributesLM_1::fao_1\'");
                 }
+                complexAttributeComplexAttributesLM_1(symbol_1, c_3, ca_0, fao_2);
             }
             return true;
         }
@@ -1951,18 +1901,18 @@ public class umlRdbms extends AbstractTransformation
     /**
      * 
      * map complexAttributeComplexAttributesLM_1 in umlRdbms) {
-     * uml (c_1 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Class;
-     * ca_1 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Attribute;
-     * t_1 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Class;
-     * a_1 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleUML.ecore#/'::Attribute;
+     * uml (c_1 : simpleuml::Class;
+     * ca_1 : simpleuml::Attribute;
+     * t_1 : simpleuml::Class;
+     * a_1 : simpleuml::Attribute;
      *  |
      * )
      * { |
      * }
-     * middle (fao_1 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::NonLeafAttribute;
+     * middle (fao_1 : umltordbms::NonLeafAttribute;
      *  |
      * )
-     * {realize fa : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::NonLeafAttribute;
+     * {realize fa : umltordbms::NonLeafAttribute;
      *  |
      * }
      * where ( |
@@ -2014,7 +1964,7 @@ public class umlRdbms extends AbstractTransformation
                  * leafs
                  */
                 if (_1 == null) {
-                    throw new InvalidValueException("Null source for \'umltordbms::FromAttribute.leafs\'");
+                    throw new InvalidValueException("Null source for \'umltordbms::FromAttribute::leafs\'");
                 }
                 final @Nullable /*@Thrown*/ List<AttributeToColumn> leafs = _1.getLeafs();
                 assert leafs != null;
@@ -2037,7 +1987,7 @@ public class umlRdbms extends AbstractTransformation
             final @Nullable /*@Thrown*/ String name_0 = a_1_1.getName();
             final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name_0);
             fa.setName(sum_0);
-            // mapping calls
+            // mapping statements
             return true;
         }
         catch (Exception e) {
@@ -2048,18 +1998,18 @@ public class umlRdbms extends AbstractTransformation
     /**
      * 
      * map attributeColumnsMR in umlRdbms) {
-     * middle (c2t : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::ClassToTable;
-     * a2c : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::AttributeToColumn;
-     * p2n : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::PrimitiveToName;
+     * middle (c2t : umltordbms::ClassToTable;
+     * a2c : umltordbms::AttributeToColumn;
+     * p2n : umltordbms::PrimitiveToName;
      *  |
      * )
      * { |
      * }
-     * rdbms (t : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Table;
+     * rdbms (t : simplerdbms::Table;
      * ct : String;
      *  |
      * )
-     * {realize c : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Column;
+     * {realize c : simplerdbms::Column;
      *  |
      * }
      * where ( |
@@ -2095,7 +2045,7 @@ public class umlRdbms extends AbstractTransformation
             final @Nullable /*@Thrown*/ PrimitiveToName type = a2c.getType();
             final @Nullable /*@Thrown*/ PrimitiveToName p2n_3 = type;
             if (p2n_3 == null) {
-                throw new InvalidValueException("Null source for \'umltordbms::PrimitiveToName.typeName\'");
+                throw new InvalidValueException("Null source for \'umltordbms::PrimitiveToName::typeName\'");
             }
             final @Nullable /*@Thrown*/ String typeName = p2n_3.getTypeName();
             final @Nullable /*@Thrown*/ String ct = typeName;
@@ -2105,7 +2055,7 @@ public class umlRdbms extends AbstractTransformation
             modelObjects[1/*rdbms*/].add(c);
             // assignments
             c.setOwner(t);
-            // mapping calls
+            // mapping statements
             attributeColumnsMR_1(a2c, c);
             if (ct == null) {
                 throw new InvalidValueException("Null binding for \'attributeColumnsMR_2::ct_2\'");
@@ -2122,12 +2072,12 @@ public class umlRdbms extends AbstractTransformation
     /**
      * 
      * map attributeColumnsMR_1 in umlRdbms) {
-     * middle (a2c_1 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::AttributeToColumn;
+     * middle (a2c_1 : umltordbms::AttributeToColumn;
      *  |
      * )
      * { |
      * }
-     * rdbms (c_1 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Column;
+     * rdbms (c_1 : simplerdbms::Column;
      *  |
      * )
      * { |
@@ -2146,7 +2096,7 @@ public class umlRdbms extends AbstractTransformation
             // creations
             // assignments
             a2c_1.setColumn(c_1_2);
-            // mapping calls
+            // mapping statements
             return true;
         }
         catch (Exception e) {
@@ -2157,13 +2107,13 @@ public class umlRdbms extends AbstractTransformation
     /**
      * 
      * map attributeColumnsMR_2 in umlRdbms) {
-     * middle (p2n_2 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::PrimitiveToName;
-     * a2c_2 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::AttributeToColumn;
+     * middle (p2n_2 : umltordbms::PrimitiveToName;
+     * a2c_2 : umltordbms::AttributeToColumn;
      *  |
      * )
      * { |
      * }
-     * rdbms (c_2 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Column;
+     * rdbms (c_2 : simplerdbms::Column;
      * ct_2 : String;
      *  |
      * )
@@ -2192,7 +2142,7 @@ public class umlRdbms extends AbstractTransformation
             // creations
             // assignments
             c_2_0.setType(ct_2);
-            // mapping calls
+            // mapping statements
             attributeColumnsMR_2_1(ct_2, p2n_2);
             return true;
         }
@@ -2204,7 +2154,7 @@ public class umlRdbms extends AbstractTransformation
     /**
      * 
      * map attributeColumnsMR_2_1 in umlRdbms) {
-     * middle (p2n_2_1 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::PrimitiveToName;
+     * middle (p2n_2_1 : umltordbms::PrimitiveToName;
      *  |
      * )
      * { |
@@ -2228,7 +2178,7 @@ public class umlRdbms extends AbstractTransformation
             // creations
             // assignments
             p2n_2_1.setTypeName(ct_2_1);
-            // mapping calls
+            // mapping statements
             return true;
         }
         catch (Exception e) {
@@ -2239,12 +2189,12 @@ public class umlRdbms extends AbstractTransformation
     /**
      * 
      * map attributeColumnsMR_3 in umlRdbms) {
-     * middle (a2c_3 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.ecore#/'::AttributeToColumn;
+     * middle (a2c_3 : umltordbms::AttributeToColumn;
      *  |
      * )
      * { |
      * }
-     * rdbms (c_3 : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/SimpleRDBMS.ecore#/'::Column;
+     * rdbms (c_3 : simplerdbms::Column;
      *  |
      * )
      * { |
@@ -2267,7 +2217,7 @@ public class umlRdbms extends AbstractTransformation
             c_3_0.setName(name);
             final @Nullable /*@Thrown*/ String kind = a2c_3.getKind();
             c_3_0.setKind(kind);
-            // mapping calls
+            // mapping statements
             return true;
         }
         catch (Exception e) {

@@ -16,6 +16,8 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -73,6 +75,10 @@ public class QVTiReferencesVisitor extends ReferencesVisitor implements QVTiCGMo
 		return visitCGValuedElement(object);
 	}
 
+	public @Nullable List<Object> visitCGMappingLoop(@NonNull CGMappingLoop object) {
+		return visitCGIterationCallExp(object);
+	}
+
 	public @Nullable List<Object> visitCGMiddlePropertyAssignment(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment object) {
 		return visitCGEcorePropertyAssignment(object);
 	}
@@ -91,6 +97,10 @@ public class QVTiReferencesVisitor extends ReferencesVisitor implements QVTiCGMo
 
 	public @Nullable List<Object> visitCGRealizedVariable(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable object) {
 		return visitCGVariable(object);
+	}
+
+	public @Nullable List<Object> visitCGSequence(@NonNull CGSequence object) {
+		return visitCGValuedElement(object);
 	}
 
 	public @Nullable List<Object> visitCGTransformation(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation object) {

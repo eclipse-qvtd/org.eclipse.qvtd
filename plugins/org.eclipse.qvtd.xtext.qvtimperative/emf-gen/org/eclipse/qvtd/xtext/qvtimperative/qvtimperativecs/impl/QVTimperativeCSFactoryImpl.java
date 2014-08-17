@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.*;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallCS;
@@ -69,6 +70,8 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 			case QVTimperativeCSPackage.MAPPING_CS: return createMappingCS();
 			case QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS: return createMappingCallBindingCS();
 			case QVTimperativeCSPackage.MAPPING_CALL_CS: return createMappingCallCS();
+			case QVTimperativeCSPackage.MAPPING_LOOP_CS: return createMappingLoopCS();
+			case QVTimperativeCSPackage.MAPPING_SEQUENCE_CS: return createMappingSequenceCS();
 			case QVTimperativeCSPackage.TOP_LEVEL_CS: return createTopLevelCS();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -103,6 +106,26 @@ public class QVTimperativeCSFactoryImpl extends EFactoryImpl implements QVTimper
 	public MappingCallCS createMappingCallCS() {
 		MappingCallCSImpl mappingCallCS = new MappingCallCSImpl();
 		return mappingCallCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MappingLoopCS createMappingLoopCS() {
+		MappingLoopCSImpl mappingLoopCS = new MappingLoopCSImpl();
+		return mappingLoopCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MappingSequenceCS createMappingSequenceCS() {
+		MappingSequenceCSImpl mappingSequenceCS = new MappingSequenceCSImpl();
+		return mappingSequenceCS;
 	}
 
 	/**

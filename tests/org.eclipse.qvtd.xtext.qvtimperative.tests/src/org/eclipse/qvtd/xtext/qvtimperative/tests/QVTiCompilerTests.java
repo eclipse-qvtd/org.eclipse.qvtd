@@ -141,7 +141,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		EPackage.Registry.INSTANCE.put(HSVTreePackage.eNS_URI, HSVTreePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(HSV2HLSPackage.eNS_URI, HSV2HLSPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(HLSTreePackage.eNS_URI, HLSTreePackage.eINSTANCE);
-		Class<? extends AbstractTransformation> txClass = generateCode(transformURI, genModelURI, "src-gen/");
+		Class<? extends AbstractTransformation> txClass = generateCode(transformURI, genModelURI, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");
 		
 		Constructor<? extends AbstractTransformation> txConstructor = txClass.getConstructor(DomainEvaluator.class);
 		DomainEvaluator evaluator = new TxEvaluator(DomainUtil.nonNullState(metaModelManager));
@@ -162,7 +162,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		EPackage.Registry.INSTANCE.put(SimpleumlPackage.eNS_URI, SimpleumlPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(UmltordbmsPackage.eNS_URI, UmltordbmsPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(SimplerdbmsPackage.eNS_URI, SimplerdbmsPackage.eINSTANCE);
-		Class<? extends AbstractTransformation> txClass = generateCode(transformURI, genModelURI, "src-gen/");
+		Class<? extends AbstractTransformation> txClass = generateCode(transformURI, genModelURI, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");
 		
 		Constructor<? extends AbstractTransformation> txConstructor = txClass.getConstructor(DomainEvaluator.class);
 		DomainEvaluator evaluator = new TxEvaluator(DomainUtil.nonNullState(metaModelManager));

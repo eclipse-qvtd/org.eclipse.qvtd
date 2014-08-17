@@ -25,6 +25,9 @@ import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 
 public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 {
@@ -61,6 +64,20 @@ public class QVTiStepperVisitor extends AbstractQVTimperativeStepperVisitor
 
 	@Override
 	public @Nullable IStepper visitMappingCall(@NonNull MappingCall object) {
+		return NonStepper.INSTANCE;
+	}
+
+	@Override
+	public @Nullable IStepper visitMappingLoop(@NonNull MappingLoop object) {
+		return NonStepper.INSTANCE;
+	}
+
+	public @Nullable IStepper visitMappingSequence(@NonNull MappingSequence object) {
+		return NonStepper.INSTANCE;
+	}
+
+	@Override
+	public @Nullable IStepper visitMappingStatement(@NonNull MappingStatement object) {
 		return NonStepper.INSTANCE;
 	}
 

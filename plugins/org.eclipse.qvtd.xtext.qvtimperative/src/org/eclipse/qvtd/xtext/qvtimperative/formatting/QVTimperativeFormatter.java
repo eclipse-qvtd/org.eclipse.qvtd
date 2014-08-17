@@ -17,6 +17,7 @@ import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCallBindingCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCallCSElements;
+import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingLoopCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MiddleBottomPatternCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MiddleGuardPatternCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.SourceBottomPatternCSElements;
@@ -95,6 +96,10 @@ public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 	    	MappingCallBindingCSElements a = f.getMappingCallBindingCSAccess();
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_3());
 	    }
+	    {
+	    	MappingLoopCSElements a = f.getMappingLoopCSAccess();
+	    	setAppendedBraces(c, a.getLeftCurlyBracketKeyword_4(), a.getRightCurlyBracketKeyword_6());
+		}
 	    {
 	    	MiddleBottomPatternCSElements a = f.getMiddleBottomPatternCSAccess();
 			c.setNoLinewrap().before(a.getLeftCurlyBracketKeyword_1());	

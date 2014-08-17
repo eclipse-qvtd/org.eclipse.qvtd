@@ -37,8 +37,7 @@ inv MatchingCallBindings('Mismatched bindings ' + referredMapping.name + joinNam
 inv UniqueCallBindings: binding->isUnique(boundVariable)
 
 context MappingCallBinding
-inv CompatibleScalarBinding: if not isLoop then value.type.conformsTo(boundVariable.type) or boundVariable.type.conformsTo(value.type) else true endif
-inv CompatibleLoopBinding: isLoop implies value.type.oclIsKindOf(ocl::CollectionType) --and let eleType : ocl::Type = value.type.oclAsType(ocl::CollectionType).elementType in true --eleType.conformsTo(boundVariable.type) or boundVariable.type.conformsTo(eleType)
+inv CompatibleBinding: value.type.conformsTo(boundVariable.type) or boundVariable.type.conformsTo(value.type)
 
 context MiddlePropertyAssignment
 inv IsMiddleProperty: true --TODO

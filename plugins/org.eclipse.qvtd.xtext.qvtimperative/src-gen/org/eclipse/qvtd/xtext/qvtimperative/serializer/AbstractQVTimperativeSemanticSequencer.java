@@ -45,6 +45,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.TypeLiteralExp
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.TypeNameExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.UnaryOperatorCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.UnlimitedNaturalLiteralExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.VariableCS;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.AssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.DirectionCS;
@@ -60,6 +61,8 @@ import org.eclipse.qvtd.xtext.qvtcorebase.serializer.QVTcoreBaseSemanticSequence
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallCS;
+import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingLoopCS;
+import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingSequenceCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess;
@@ -483,6 +486,12 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 					return; 
 				}
 				else break;
+			case EssentialOCLCSPackage.VARIABLE_CS:
+				if(context == grammarAccess.getMappingIteratorCSRule()) {
+					sequence_MappingIteratorCS(context, (VariableCS) semanticObject); 
+					return; 
+				}
+				else break;
 			}
 		else if(semanticObject.eClass().getEPackage() == QVTcoreBaseCSPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case QVTcoreBaseCSPackage.ASSIGNMENT_CS:
@@ -600,8 +609,22 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 				}
 				else break;
 			case QVTimperativeCSPackage.MAPPING_CALL_CS:
-				if(context == grammarAccess.getMappingCallCSRule()) {
+				if(context == grammarAccess.getMappingCallCSRule() ||
+				   context == grammarAccess.getMappingStatementCSRule()) {
 					sequence_MappingCallCS(context, (MappingCallCS) semanticObject); 
+					return; 
+				}
+				else break;
+			case QVTimperativeCSPackage.MAPPING_LOOP_CS:
+				if(context == grammarAccess.getMappingLoopCSRule() ||
+				   context == grammarAccess.getMappingStatementCSRule()) {
+					sequence_MappingLoopCS(context, (MappingLoopCS) semanticObject); 
+					return; 
+				}
+				else break;
+			case QVTimperativeCSPackage.MAPPING_SEQUENCE_CS:
+				if(context == grammarAccess.getMappingSequenceCSRule()) {
+					sequence_MappingSequenceCS(context, (MappingSequenceCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -636,7 +659,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	 *         domains+=SourceDomainCS* 
 	 *         domains+=TargetDomainCS* 
 	 *         middle=MiddleDomainCS? 
-	 *         mappingCalls+=MappingCallCS*
+	 *         mappingSequence=MappingSequenceCS?
 	 *     )
 	 */
 	protected void sequence_MappingCS(EObject context, MappingCS semanticObject) {
@@ -646,7 +669,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	
 	/**
 	 * Constraint:
-	 *     (referredVariable=[Variable|UnrestrictedName] isLoop?='<='? value=ExpCS)
+	 *     (referredVariable=[Variable|UnrestrictedName] value=ExpCS)
 	 */
 	protected void sequence_MappingCallBindingCS(EObject context, MappingCallBindingCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -658,6 +681,33 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	 *     (referredMapping=[Mapping|UnrestrictedName] bindings+=MappingCallBindingCS*)
 	 */
 	protected void sequence_MappingCallCS(EObject context, MappingCallCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (name=UnrestrictedName ownedType=TypeExpCS?)
+	 */
+	protected void sequence_MappingIteratorCS(EObject context, VariableCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (ownedIterator=MappingIteratorCS inExpression=ExpCS mappingSequence=MappingSequenceCS)
+	 */
+	protected void sequence_MappingLoopCS(EObject context, MappingLoopCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     mappingStatements+=MappingStatementCS+
+	 */
+	protected void sequence_MappingSequenceCS(EObject context, MappingSequenceCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

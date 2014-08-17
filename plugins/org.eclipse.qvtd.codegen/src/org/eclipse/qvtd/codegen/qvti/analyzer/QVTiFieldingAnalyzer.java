@@ -15,6 +15,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
@@ -22,15 +23,17 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate;
@@ -84,6 +87,10 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 			return visitCGValuedElement(object);
 		}
 
+		public @Nullable Set<CGVariable> visitCGMappingLoop(@NonNull CGMappingLoop object) {
+			return visitCGIterationCallExp(object);
+		}
+
 		public @Nullable Set<CGVariable> visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment object) {
 			return visitCGPropertyAssignment(object);
 		}
@@ -102,6 +109,10 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 
 		public @Nullable Set<CGVariable> visitCGRealizedVariable(@NonNull CGRealizedVariable object) {
 			return visitCGVariable(object);
+		}
+
+		public @Nullable Set<CGVariable> visitCGSequence(@NonNull CGSequence object) {
+			return visitCGValuedElement(object);
 		}
 
 		public @Nullable Set<CGVariable> visitCGTransformation(@NonNull CGTransformation object) {
@@ -163,6 +174,22 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 			return visitCGValuedElement(object);
 		}
 
+		public Boolean visitCGMappingLoop(@NonNull CGMappingLoop cgElement) {
+//			return visitCGIterationCallExp(object);
+			rewriteAsThrown(cgElement.getSource());
+			for (CGIterator cgIterator : cgElement.getIterators()) {
+				cgIterator.accept(this);
+			}
+//			if (cgElement.getReferredIteration().isValidating()) {
+//				rewriteAsCaught(cgElement.getBody());
+//			}
+//			else {
+				rewriteAsThrown(cgElement.getBody());
+//			}
+			cgElement.setCaught(false);
+			return false;
+		}
+
 		public Boolean visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment object) {
 			return visitCGPropertyAssignment(object);
 		}
@@ -181,6 +208,10 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 
 		public Boolean visitCGRealizedVariable(@NonNull CGRealizedVariable object) {
 			return visitCGVariable(object);
+		}
+
+		public Boolean visitCGSequence(@NonNull CGSequence object) {
+			return visitCGValuedElement(object);
 		}
 
 		public Boolean visitCGTransformation(@NonNull CGTransformation object) {

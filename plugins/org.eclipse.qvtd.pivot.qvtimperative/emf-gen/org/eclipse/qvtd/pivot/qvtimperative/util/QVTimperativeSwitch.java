@@ -17,6 +17,7 @@ import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.FeatureCallExp;
+import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.NavigationCallExp;
@@ -128,8 +129,9 @@ public class QVTimperativeSwitch<T> extends Switch<T> {
 			case QVTimperativePackage.MAPPING_CALL: {
 				MappingCall mappingCall = (MappingCall)theEObject;
 				T result = caseMappingCall(mappingCall);
-				if (result == null) result = caseOCLExpression(mappingCall);
+				if (result == null) result = caseMappingStatement(mappingCall);
 				if (result == null) result = caseReferringElement(mappingCall);
+				if (result == null) result = caseOCLExpression(mappingCall);
 				if (result == null) result = caseTypedElement(mappingCall);
 				if (result == null) result = caseNamedElement(mappingCall);
 				if (result == null) result = caseElement(mappingCall);
@@ -143,6 +145,46 @@ public class QVTimperativeSwitch<T> extends Switch<T> {
 				T result = caseMappingCallBinding(mappingCallBinding);
 				if (result == null) result = caseElement(mappingCallBinding);
 				if (result == null) result = caseVisitable(mappingCallBinding);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativePackage.MAPPING_LOOP: {
+				MappingLoop mappingLoop = (MappingLoop)theEObject;
+				T result = caseMappingLoop(mappingLoop);
+				if (result == null) result = caseLoopExp(mappingLoop);
+				if (result == null) result = caseMappingStatement(mappingLoop);
+				if (result == null) result = caseCallExp(mappingLoop);
+				if (result == null) result = caseOCLExpression(mappingLoop);
+				if (result == null) result = caseTypedElement(mappingLoop);
+				if (result == null) result = caseNamedElement(mappingLoop);
+				if (result == null) result = caseElement(mappingLoop);
+				if (result == null) result = caseNameable(mappingLoop);
+				if (result == null) result = caseVisitable(mappingLoop);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativePackage.MAPPING_SEQUENCE: {
+				MappingSequence mappingSequence = (MappingSequence)theEObject;
+				T result = caseMappingSequence(mappingSequence);
+				if (result == null) result = caseMappingStatement(mappingSequence);
+				if (result == null) result = caseOCLExpression(mappingSequence);
+				if (result == null) result = caseTypedElement(mappingSequence);
+				if (result == null) result = caseNamedElement(mappingSequence);
+				if (result == null) result = caseElement(mappingSequence);
+				if (result == null) result = caseNameable(mappingSequence);
+				if (result == null) result = caseVisitable(mappingSequence);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTimperativePackage.MAPPING_STATEMENT: {
+				MappingStatement mappingStatement = (MappingStatement)theEObject;
+				T result = caseMappingStatement(mappingStatement);
+				if (result == null) result = caseOCLExpression(mappingStatement);
+				if (result == null) result = caseTypedElement(mappingStatement);
+				if (result == null) result = caseNamedElement(mappingStatement);
+				if (result == null) result = caseElement(mappingStatement);
+				if (result == null) result = caseNameable(mappingStatement);
+				if (result == null) result = caseVisitable(mappingStatement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -272,6 +314,51 @@ public class QVTimperativeSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMappingCallBinding(MappingCallBinding object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Mapping Loop</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Mapping Loop</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMappingLoop(MappingLoop object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Mapping Sequence</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Mapping Sequence</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMappingSequence(MappingSequence object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Mapping Statement</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Mapping Statement</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMappingStatement(MappingStatement object) {
 		return null;
 	}
 
@@ -527,6 +614,21 @@ public class QVTimperativeSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCallExp(CallExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Loop Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Loop Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLoopExp(LoopExp object) {
 		return null;
 	}
 

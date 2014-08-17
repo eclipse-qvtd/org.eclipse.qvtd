@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
 /**
@@ -31,7 +30,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
  * @model
  * @generated
  */
-public interface MappingCallCS extends ModelElementCS {
+public interface MappingCallCS extends MappingStatementCS {
 	/**
 	 * Returns the value of the '<em><b>Referred Mapping</b></em>' reference.
 	 * <!-- begin-user-doc -->

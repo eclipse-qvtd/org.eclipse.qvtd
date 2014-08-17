@@ -22,7 +22,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall#getMappingExp <em>Mapping Exp</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall#getMappingCallBindings <em>Mapping Call Bindings</em>}</li>
  * </ul>
  * </p>
@@ -32,34 +31,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  * @generated
  */
 public interface CGMappingCall extends CGValuedElement {
-
-	/**
-	 * Returns the value of the '<em><b>Mapping Exp</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getMappingCalls <em>Mapping Calls</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Mapping Exp</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mapping Exp</em>' container reference.
-	 * @see #setMappingExp(CGMappingExp)
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMappingCall_MappingExp()
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getMappingCalls
-	 * @model opposite="mappingCalls" resolveProxies="false" required="true" transient="false"
-	 * @generated
-	 */
-	CGMappingExp getMappingExp();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall#getMappingExp <em>Mapping Exp</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Mapping Exp</em>' container reference.
-	 * @see #getMappingExp()
-	 * @generated
-	 */
-	void setMappingExp(CGMappingExp value);
 
 	/**
 	 * Returns the value of the '<em><b>Mapping Call Bindings</b></em>' containment reference list.

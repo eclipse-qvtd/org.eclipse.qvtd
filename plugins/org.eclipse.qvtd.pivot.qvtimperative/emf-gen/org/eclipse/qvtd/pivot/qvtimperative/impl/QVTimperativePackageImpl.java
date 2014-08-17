@@ -22,6 +22,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
@@ -62,6 +65,27 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	private EClass mappingCallBindingEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mappingLoopEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mappingSequenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mappingStatementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -171,7 +195,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMapping_MappingCall() {
+	public EReference getMapping_MappingStatements() {
 		return (EReference)mappingEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -200,15 +224,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 */
 	public EReference getMappingCall_Binding() {
 		return (EReference)mappingCallEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getMappingCall_Context() {
-		return (EReference)mappingCallEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -252,8 +267,35 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getMappingCallBinding_IsLoop() {
-		return (EAttribute)mappingCallBindingEClass.getEStructuralFeatures().get(3);
+	public EClass getMappingLoop() {
+		return mappingLoopEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMappingSequence() {
+		return mappingSequenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getMappingSequence_MappingStatements() {
+		return (EReference)mappingSequenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getMappingStatement() {
+		return mappingStatementEClass;
 	}
 
 	/**
@@ -341,18 +383,23 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		imperativeModelEClass = createEClass(IMPERATIVE_MODEL);
 
 		mappingEClass = createEClass(MAPPING);
-		createEReference(mappingEClass, MAPPING__MAPPING_CALL);
+		createEReference(mappingEClass, MAPPING__MAPPING_STATEMENTS);
 
 		mappingCallEClass = createEClass(MAPPING_CALL);
 		createEReference(mappingCallEClass, MAPPING_CALL__REFERRED_MAPPING);
 		createEReference(mappingCallEClass, MAPPING_CALL__BINDING);
-		createEReference(mappingCallEClass, MAPPING_CALL__CONTEXT);
 
 		mappingCallBindingEClass = createEClass(MAPPING_CALL_BINDING);
 		createEReference(mappingCallBindingEClass, MAPPING_CALL_BINDING__MAPPING_CALL);
 		createEReference(mappingCallBindingEClass, MAPPING_CALL_BINDING__BOUND_VARIABLE);
 		createEReference(mappingCallBindingEClass, MAPPING_CALL_BINDING__VALUE);
-		createEAttribute(mappingCallBindingEClass, MAPPING_CALL_BINDING__IS_LOOP);
+
+		mappingLoopEClass = createEClass(MAPPING_LOOP);
+
+		mappingSequenceEClass = createEClass(MAPPING_SEQUENCE);
+		createEReference(mappingSequenceEClass, MAPPING_SEQUENCE__MAPPING_STATEMENTS);
+
+		mappingStatementEClass = createEClass(MAPPING_STATEMENT);
 
 		middlePropertyAssignmentEClass = createEClass(MIDDLE_PROPERTY_ASSIGNMENT);
 		createEAttribute(middlePropertyAssignmentEClass, MIDDLE_PROPERTY_ASSIGNMENT__CACHE_INDEX);
@@ -399,9 +446,13 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		// Add supertypes to classes
 		imperativeModelEClass.getESuperTypes().add(theQVTbasePackage.getBaseModel());
 		mappingEClass.getESuperTypes().add(theQVTcoreBasePackage.getAbstractMapping());
-		mappingCallEClass.getESuperTypes().add(thePivotPackage.getOCLExpression());
+		mappingCallEClass.getESuperTypes().add(this.getMappingStatement());
 		mappingCallEClass.getESuperTypes().add(thePivotPackage.getReferringElement());
 		mappingCallBindingEClass.getESuperTypes().add(thePivotPackage.getElement());
+		mappingLoopEClass.getESuperTypes().add(thePivotPackage.getLoopExp());
+		mappingLoopEClass.getESuperTypes().add(this.getMappingStatement());
+		mappingSequenceEClass.getESuperTypes().add(this.getMappingStatement());
+		mappingStatementEClass.getESuperTypes().add(thePivotPackage.getOCLExpression());
 		middlePropertyAssignmentEClass.getESuperTypes().add(theQVTcoreBasePackage.getPropertyAssignment());
 		middlePropertyCallExpEClass.getESuperTypes().add(thePivotPackage.getOppositePropertyCallExp());
 		variablePredicateEClass.getESuperTypes().add(theQVTbasePackage.getPredicate());
@@ -410,20 +461,25 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEClass(imperativeModelEClass, ImperativeModel.class, "ImperativeModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(mappingEClass, Mapping.class, "Mapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMapping_MappingCall(), this.getMappingCall(), this.getMappingCall_Context(), "mappingCall", null, 0, -1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMapping_MappingStatements(), this.getMappingStatement(), null, "mappingStatements", null, 0, 1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(mappingEClass, this.getMapping(), "getAllMappings", 0, -1, IS_UNIQUE, !IS_ORDERED);
 
 		initEClass(mappingCallEClass, MappingCall.class, "MappingCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMappingCall_ReferredMapping(), this.getMapping(), null, "referredMapping", null, 1, 1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCall_Binding(), this.getMappingCallBinding(), this.getMappingCallBinding_MappingCall(), "binding", null, 0, -1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-		initEReference(getMappingCall_Context(), this.getMapping(), this.getMapping_MappingCall(), "context", null, 1, 1, MappingCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingCallBindingEClass, MappingCallBinding.class, "MappingCallBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMappingCallBinding_MappingCall(), this.getMappingCall(), this.getMappingCall_Binding(), "mappingCall", null, 0, 1, MappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCallBinding_BoundVariable(), thePivotPackage.getVariable(), null, "boundVariable", null, 1, 1, MappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCallBinding_Value(), thePivotPackage.getOCLExpression(), null, "value", null, 1, 1, MappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getMappingCallBinding_IsLoop(), ecorePackage.getEBoolean(), "isLoop", "false", 1, 1, MappingCallBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(mappingLoopEClass, MappingLoop.class, "MappingLoop", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(mappingSequenceEClass, MappingSequence.class, "MappingSequence", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMappingSequence_MappingStatements(), this.getMappingStatement(), null, "mappingStatements", null, 0, -1, MappingSequence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(mappingStatementEClass, MappingStatement.class, "MappingStatement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(middlePropertyAssignmentEClass, MiddlePropertyAssignment.class, "MiddlePropertyAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMiddlePropertyAssignment_CacheIndex(), ecorePackage.getEIntegerObject(), "cacheIndex", null, 0, 1, MiddlePropertyAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

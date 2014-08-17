@@ -11,8 +11,6 @@
 package org.eclipse.qvtd.pivot.qvtimperative;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.ReferringElement;
 
 /**
@@ -32,14 +30,13 @@ import org.eclipse.ocl.examples.pivot.ReferringElement;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getReferredMapping <em>Referred Mapping</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getBinding <em>Binding</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getContext <em>Context</em>}</li>
  * </ul>
  * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCall()
  * @generated
  */
-public interface MappingCall extends EObject, OCLExpression, ReferringElement {
+public interface MappingCall extends MappingStatement, ReferringElement {
 	/**
 	 * Returns the value of the '<em><b>Referred Mapping</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -87,35 +84,5 @@ public interface MappingCall extends EObject, OCLExpression, ReferringElement {
 	 * @generated
 	 */
 	EList<MappingCallBinding> getBinding();
-
-	/**
-	 * Returns the value of the '<em><b>Context</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getMappingCall <em>Mapping Call</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Context</em>' container reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * The Mapping that provides the invocation context for this MappingCall.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Context</em>' container reference.
-	 * @see #setContext(Mapping)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingCall_Context()
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.Mapping#getMappingCall
-	 * @generated
-	 */
-	Mapping getContext();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall#getContext <em>Context</em>}' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Context</em>' container reference.
-	 * @see #getContext()
-	 * @generated
-	 */
-	void setContext(Mapping value);
 
 } // MappingCall

@@ -57,6 +57,24 @@ public interface QVTimperativeCSFactory extends EFactory {
 	MappingCallCS createMappingCallCS();
 
 	/**
+	 * Returns a new object of class '<em>Mapping Loop CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Mapping Loop CS</em>'.
+	 * @generated
+	 */
+	MappingLoopCS createMappingLoopCS();
+
+	/**
+	 * Returns a new object of class '<em>Mapping Sequence CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Mapping Sequence CS</em>'.
+	 * @generated
+	 */
+	MappingSequenceCS createMappingSequenceCS();
+
+	/**
 	 * Returns a new object of class '<em>Top Level CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

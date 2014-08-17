@@ -49,6 +49,18 @@ public abstract class AbstractExtendingQVTimperativeCSVisitor<R, C>
 	}
 
 	public @Nullable R visitMappingCallCS(@NonNull org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallCS object) {
+		return visitMappingStatementCS(object);
+	}
+
+	public @Nullable R visitMappingLoopCS(@NonNull org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingLoopCS object) {
+		return visitMappingStatementCS(object);
+	}
+
+	public @Nullable R visitMappingSequenceCS(@NonNull org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingSequenceCS object) {
+		return visitMappingStatementCS(object);
+	}
+
+	public @Nullable R visitMappingStatementCS(@NonNull org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingStatementCS object) {
 		return visitModelElementCS(object);
 	}
 

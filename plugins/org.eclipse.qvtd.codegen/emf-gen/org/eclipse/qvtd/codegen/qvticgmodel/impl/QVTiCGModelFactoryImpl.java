@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.codegen.qvticgmodel.*;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
@@ -91,11 +92,13 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 			case QVTiCGModelPackage.CG_MAPPING_CALL: return createCGMappingCall();
 			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING: return createCGMappingCallBinding();
 			case QVTiCGModelPackage.CG_MAPPING_EXP: return createCGMappingExp();
+			case QVTiCGModelPackage.CG_MAPPING_LOOP: return createCGMappingLoop();
 			case QVTiCGModelPackage.CG_MIDDLE_PROPERTY_ASSIGNMENT: return createCGMiddlePropertyAssignment();
 			case QVTiCGModelPackage.CG_MIDDLE_PROPERTY_CALL_EXP: return createCGMiddlePropertyCallExp();
 			case QVTiCGModelPackage.CG_PREDICATE: return createCGPredicate();
 			case QVTiCGModelPackage.CG_PROPERTY_ASSIGNMENT: return createCGPropertyAssignment();
 			case QVTiCGModelPackage.CG_REALIZED_VARIABLE: return createCGRealizedVariable();
+			case QVTiCGModelPackage.CG_SEQUENCE: return createCGSequence();
 			case QVTiCGModelPackage.CG_TRANSFORMATION: return createCGTransformation();
 			case QVTiCGModelPackage.CG_TYPED_MODEL: return createCGTypedModel();
 			case QVTiCGModelPackage.CG_VARIABLE_PREDICATE: return createCGVariablePredicate();
@@ -209,6 +212,16 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public CGMappingLoop createCGMappingLoop() {
+		CGMappingLoopImpl cgMappingLoop = new CGMappingLoopImpl();
+		return cgMappingLoop;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public @NonNull CGMiddlePropertyAssignment createCGMiddlePropertyAssignment() {
 		CGMiddlePropertyAssignmentImpl cgMiddlePropertyAssignment = new CGMiddlePropertyAssignmentImpl();
 		return cgMiddlePropertyAssignment;
@@ -252,6 +265,16 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	public @NonNull CGRealizedVariable createCGRealizedVariable() {
 		CGRealizedVariableImpl cgRealizedVariable = new CGRealizedVariableImpl();
 		return cgRealizedVariable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CGSequence createCGSequence() {
+		CGSequenceImpl cgSequence = new CGSequenceImpl();
+		return cgSequence;
 	}
 
 	/**

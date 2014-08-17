@@ -31,8 +31,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingCallBindingImpl#getValueOrValues <em>Value Or Values</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingCallBindingImpl#isLoop <em>Loop</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingCallBindingImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -40,34 +39,14 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  */
 public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGMappingCallBinding {
 	/**
-	 * The cached value of the '{@link #getValueOrValues() <em>Value Or Values</em>}' containment reference.
+	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValueOrValues()
+	 * @see #getValue()
 	 * @generated
 	 * @ordered
 	 */
-	protected CGValuedElement valueOrValues;
-
-	/**
-	 * The default value of the '{@link #isLoop() <em>Loop</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isLoop()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean LOOP_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isLoop() <em>Loop</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isLoop()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean loop = LOOP_EDEFAULT;
+	protected CGValuedElement value;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -93,8 +72,8 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGValuedElement getValueOrValues() {
-		return valueOrValues;
+	public CGValuedElement getValue() {
+		return value;
 	}
 
 	/**
@@ -102,11 +81,11 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetValueOrValues(CGValuedElement newValueOrValues, NotificationChain msgs) {
-		CGValuedElement oldValueOrValues = valueOrValues;
-		valueOrValues = newValueOrValues;
+	public NotificationChain basicSetValue(CGValuedElement newValue, NotificationChain msgs) {
+		CGValuedElement oldValue = value;
+		value = newValue;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE_OR_VALUES, oldValueOrValues, newValueOrValues);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE, oldValue, newValue);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -117,49 +96,18 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValueOrValues(CGValuedElement newValueOrValues) {
-		if (newValueOrValues != valueOrValues) {
+	public void setValue(CGValuedElement newValue) {
+		if (newValue != value) {
 			NotificationChain msgs = null;
-			if (valueOrValues != null)
-				msgs = ((InternalEObject)valueOrValues).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE_OR_VALUES, null, msgs);
-			if (newValueOrValues != null)
-				msgs = ((InternalEObject)newValueOrValues).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE_OR_VALUES, null, msgs);
-			msgs = basicSetValueOrValues(newValueOrValues, msgs);
+			if (value != null)
+				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE, null, msgs);
+			if (newValue != null)
+				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE, null, msgs);
+			msgs = basicSetValue(newValue, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE_OR_VALUES, newValueOrValues, newValueOrValues));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isLoop() {
-		return loop;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setLoop(boolean newLoop) {
-		boolean oldLoop = loop;
-		loop = newLoop;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__LOOP, oldLoop, loop));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		return super.toString();
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE, newValue, newValue));
 	}
 
 	/**
@@ -170,8 +118,8 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE_OR_VALUES:
-				return basicSetValueOrValues(null, msgs);
+			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE:
+				return basicSetValue(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -184,10 +132,8 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE_OR_VALUES:
-				return getValueOrValues();
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__LOOP:
-				return isLoop();
+			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE:
+				return getValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -200,11 +146,8 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE_OR_VALUES:
-				setValueOrValues((CGValuedElement)newValue);
-				return;
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__LOOP:
-				setLoop((Boolean)newValue);
+			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE:
+				setValue((CGValuedElement)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -218,11 +161,8 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE_OR_VALUES:
-				setValueOrValues((CGValuedElement)null);
-				return;
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__LOOP:
-				setLoop(LOOP_EDEFAULT);
+			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE:
+				setValue((CGValuedElement)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -236,10 +176,8 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE_OR_VALUES:
-				return valueOrValues != null;
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__LOOP:
-				return loop != LOOP_EDEFAULT;
+			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE:
+				return value != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -260,7 +198,7 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	 */
 	@Override
 	public boolean isBoxed() {
-		return (valueOrValues != null) && valueOrValues.isBoxed();
+		return (value != null) && value.isBoxed();
 	}
 
 	/**
@@ -300,7 +238,7 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	 */
 	@Override
 	public boolean isUnboxed() {
-		return (valueOrValues != null) && valueOrValues.isUnboxed();
+		return (value != null) && value.isUnboxed();
 	}
 
 } //CGMappingCallBindingImpl

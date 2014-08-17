@@ -73,6 +73,8 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 			case QVTimperativePackage.MAPPING: return createMapping();
 			case QVTimperativePackage.MAPPING_CALL: return createMappingCall();
 			case QVTimperativePackage.MAPPING_CALL_BINDING: return createMappingCallBinding();
+			case QVTimperativePackage.MAPPING_LOOP: return createMappingLoop();
+			case QVTimperativePackage.MAPPING_SEQUENCE: return createMappingSequence();
 			case QVTimperativePackage.MIDDLE_PROPERTY_ASSIGNMENT: return createMiddlePropertyAssignment();
 			case QVTimperativePackage.MIDDLE_PROPERTY_CALL_EXP: return createMiddlePropertyCallExp();
 			case QVTimperativePackage.VARIABLE_PREDICATE: return createVariablePredicate();
@@ -119,6 +121,26 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	public MappingCallBinding createMappingCallBinding() {
 		MappingCallBindingImpl mappingCallBinding = new MappingCallBindingImpl();
 		return mappingCallBinding;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MappingLoop createMappingLoop() {
+		MappingLoopImpl mappingLoop = new MappingLoopImpl();
+		return mappingLoop;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public MappingSequence createMappingSequence() {
+		MappingSequenceImpl mappingSequence = new MappingSequenceImpl();
+		return mappingSequence;
 	}
 
 	/**

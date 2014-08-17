@@ -18,6 +18,7 @@ import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.FeatureCallExp;
+import org.eclipse.ocl.examples.pivot.LoopExp;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.NavigationCallExp;
@@ -116,6 +117,18 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 				return createMappingCallBindingAdapter();
 			}
 			@Override
+			public Adapter caseMappingLoop(MappingLoop object) {
+				return createMappingLoopAdapter();
+			}
+			@Override
+			public Adapter caseMappingSequence(MappingSequence object) {
+				return createMappingSequenceAdapter();
+			}
+			@Override
+			public Adapter caseMappingStatement(MappingStatement object) {
+				return createMappingStatementAdapter();
+			}
+			@Override
 			public Adapter caseMiddlePropertyAssignment(MiddlePropertyAssignment object) {
 				return createMiddlePropertyAssignmentAdapter();
 			}
@@ -180,16 +193,20 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 				return createReferringElementAdapter();
 			}
 			@Override
+			public Adapter caseCallExp(CallExp object) {
+				return createCallExpAdapter();
+			}
+			@Override
+			public Adapter caseLoopExp(LoopExp object) {
+				return createLoopExpAdapter();
+			}
+			@Override
 			public Adapter caseAssignment(Assignment object) {
 				return createAssignmentAdapter();
 			}
 			@Override
 			public Adapter casePropertyAssignment(PropertyAssignment object) {
 				return createPropertyAssignmentAdapter();
-			}
-			@Override
-			public Adapter caseCallExp(CallExp object) {
-				return createCallExpAdapter();
 			}
 			@Override
 			public Adapter caseFeatureCallExp(FeatureCallExp object) {
@@ -308,6 +325,48 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMappingCallBindingAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingLoop <em>Mapping Loop</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingLoop
+	 * @generated
+	 */
+	public Adapter createMappingLoopAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingSequence <em>Mapping Sequence</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingSequence
+	 * @generated
+	 */
+	public Adapter createMappingSequenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingStatement <em>Mapping Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.MappingStatement
+	 * @generated
+	 */
+	public Adapter createMappingStatementAdapter() {
 		return null;
 	}
 
@@ -546,6 +605,20 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCallExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.LoopExp <em>Loop Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.pivot.LoopExp
+	 * @generated
+	 */
+	public Adapter createLoopExpAdapter() {
 		return null;
 	}
 

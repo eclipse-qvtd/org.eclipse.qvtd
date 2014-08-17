@@ -15,14 +15,18 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
+import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.cs2as.BasicContinuation;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
+import org.eclipse.ocl.examples.xtext.base.cs2as.SingleContinuation;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
@@ -31,6 +35,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
@@ -38,11 +43,31 @@ import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.AssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallBindingCS;
+import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingLoopCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.util.AbstractQVTimperativeCSPostOrderVisitor;
 
 public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPostOrderVisitor
 {
+	protected static class MappingCallBindingCSCompletion extends SingleContinuation<MappingCallBindingCS>
+	{
+		public MappingCallBindingCSCompletion(@NonNull CS2PivotConversion context, @NonNull MappingCallBindingCS csElement) {
+			super(context, null, null, csElement);
+		}
+
+		@Override
+		public BasicContinuation<?> execute() {
+			MappingCallBinding pBinding = PivotUtil.getPivot(MappingCallBinding.class, csElement);
+			if (pBinding != null) {
+				ExpCS expression = csElement.getValue();
+				if (expression != null) {
+					OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
+					pBinding.setValue(target);
+				}
+			}
+			return null;
+		}
+	}
 
 	public QVTimperativeCSPostOrderVisitor(@NonNull CS2PivotConversion context) {
 		super(context);
@@ -109,12 +134,28 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 	@Override
 	public Continuation<?> visitMappingCallBindingCS(@NonNull MappingCallBindingCS csElement) {
-		MappingCallBinding pBinding = PivotUtil.getPivot(MappingCallBinding.class, csElement);
-		if (pBinding != null) {
-			ExpCS expression = csElement.getValue();
+		return new MappingCallBindingCSCompletion(context, csElement);		// Must wait till MappingLoop iterators initialized
+	}
+
+	@Override
+	public Continuation<?> visitMappingLoopCS(@NonNull MappingLoopCS csElement) {
+		MappingLoop pMappingLoop = PivotUtil.getPivot(MappingLoop.class, csElement);
+		if (pMappingLoop != null) {
+			ExpCS expression = csElement.getInExpression();
 			if (expression != null) {
 				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
-				pBinding.setValue(target);
+				pMappingLoop.setSource(target);
+				List<Variable> iterators = pMappingLoop.getIterator();
+				if (iterators.size() > 0) {
+					Variable iterator = iterators.get(0);
+					if (iterator.getType() == null) {
+						Type type = target.getType();
+						if (type instanceof CollectionType) {
+							type = ((CollectionType)type).getElementType();
+						}
+						iterator.setType(type);
+					}
+				}
 			}
 		}
 		return null;

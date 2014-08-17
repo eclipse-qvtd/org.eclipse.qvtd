@@ -20,8 +20,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding#getValueOrValues <em>Value Or Values</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding#isLoop <em>Loop</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,56 +30,29 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  */
 public interface CGMappingCallBinding extends CGValuedElement {
 	/**
-	 * Returns the value of the '<em><b>Value Or Values</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Value Or Values</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Value</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value Or Values</em>' containment reference.
-	 * @see #setValueOrValues(CGValuedElement)
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMappingCallBinding_ValueOrValues()
+	 * @return the value of the '<em>Value</em>' containment reference.
+	 * @see #setValue(CGValuedElement)
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMappingCallBinding_Value()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	CGValuedElement getValueOrValues();
+	CGValuedElement getValue();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding#getValueOrValues <em>Value Or Values</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding#getValue <em>Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value Or Values</em>' containment reference.
-	 * @see #getValueOrValues()
+	 * @param value the new value of the '<em>Value</em>' containment reference.
+	 * @see #getValue()
 	 * @generated
 	 */
-	void setValueOrValues(CGValuedElement value);
-
-	/**
-	 * Returns the value of the '<em><b>Loop</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Loop</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Loop</em>' attribute.
-	 * @see #setLoop(boolean)
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMappingCallBinding_Loop()
-	 * @model default="false" required="true"
-	 * @generated
-	 */
-	boolean isLoop();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding#isLoop <em>Loop</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Loop</em>' attribute.
-	 * @see #isLoop()
-	 * @generated
-	 */
-	void setLoop(boolean value);
+	void setValue(CGValuedElement value);
 
 } // CGMappingCallBinding

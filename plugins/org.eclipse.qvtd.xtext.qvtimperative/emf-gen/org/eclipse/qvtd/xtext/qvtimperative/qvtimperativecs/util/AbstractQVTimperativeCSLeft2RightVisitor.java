@@ -52,6 +52,18 @@ public abstract class AbstractQVTimperativeCSLeft2RightVisitor
 	}
 
 	public @Nullable Element visitMappingCallCS(@NonNull org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallCS csElement) {
+		return visitMappingStatementCS(csElement);
+	}
+
+	public @Nullable Element visitMappingLoopCS(@NonNull org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingLoopCS csElement) {
+		return visitMappingStatementCS(csElement);
+	}
+
+	public @Nullable Element visitMappingSequenceCS(@NonNull org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingSequenceCS csElement) {
+		return visitMappingStatementCS(csElement);
+	}
+
+	public @Nullable Element visitMappingStatementCS(@NonNull org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingStatementCS csElement) {
 		return visitModelElementCS(csElement);
 	}
 

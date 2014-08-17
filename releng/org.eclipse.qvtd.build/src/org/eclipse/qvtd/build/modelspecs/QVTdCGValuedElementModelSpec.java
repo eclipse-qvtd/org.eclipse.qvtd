@@ -26,10 +26,12 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.utilities.QVTiEquivalenceUtils;
 
 /**
@@ -87,7 +89,7 @@ public class QVTdCGValuedElementModelSpec extends CGValuedElementModelSpec
 
 		new QVTdCGValuedElementModelSpec(CGFunctionCallExp.class, null,					Box.FALSE, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 		new QVTdCGValuedElementModelSpec(CGFunctionParameter.class, null,				Box.FALSE, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
-		new QVTdCGValuedElementModelSpec(CGMappingCallBinding.class, "valueOrValues",	Box.DELEG, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.SELF );
+		new QVTdCGValuedElementModelSpec(CGMappingCallBinding.class, "value",			Box.DELEG, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.SELF );
 		new QVTdCGValuedElementModelSpec(CGMiddlePropertyCallExp.class, null,			Box.FALSE, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 		new QVTdCGValuedElementModelSpec(CGPredicate.class, "conditionExpression",		Box.BIBOX, null     , LOG_PRED , Nul.NEVER, INV_PRED , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , CTL_PRED , null     , null     , Eq.SELF );
 		new QVTdCGValuedElementModelSpec(CGPropertyAssignment.class, "initValue",		Box.DELEG, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , EQ_EQUIV);
@@ -96,8 +98,10 @@ public class QVTdCGValuedElementModelSpec extends CGValuedElementModelSpec
 
 		new QVTdCGValuedElementModelSpec(CGMapping.class, null,							Box.BIBOX, null     , null     , null     , null     , null     , null     , null     , Ct.TRUE , null     , null     , null     , Ctx.TRUE , Ctl.BODY , null     , null     , null    );
 		new QVTdCGValuedElementModelSpec(CGMappingExp.class, null,						Box.BIBOX, null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , EQ_EQUIV);
+		new QVTdCGValuedElementModelSpec(CGSequence.class, null,						null,      null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , Eq.SELF );
 
 		new QVTdCGValuedElementModelSpec(CGMappingCall.class, null,						null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.SELF );
+		new QVTdCGValuedElementModelSpec(CGMappingLoop.class, null,						null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.SELF );
 	}
 	
 	protected QVTdCGValuedElementModelSpec(@NonNull Class<?> cgClass, @Nullable String delegate,

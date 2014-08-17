@@ -92,7 +92,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGPropertyAssignment()
 	 * @generated
 	 */
-	int CG_PROPERTY_ASSIGNMENT = 13;
+	int CG_PROPERTY_ASSIGNMENT = 14;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -347,7 +347,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGTransformation()
 	 * @generated
 	 */
-	int CG_TRANSFORMATION = 15;
+	int CG_TRANSFORMATION = 17;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment <em>CG Ecore Property Assignment</em>}'.
@@ -503,7 +503,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGPredicate()
 	 * @generated
 	 */
-	int CG_PREDICATE = 12;
+	int CG_PREDICATE = 13;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGRealizedVariableImpl <em>CG Realized Variable</em>}' class.
@@ -513,7 +513,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGRealizedVariable()
 	 * @generated
 	 */
-	int CG_REALIZED_VARIABLE = 14;
+	int CG_REALIZED_VARIABLE = 15;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -1277,22 +1277,13 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_MAPPING_CALL__OWNS = CGModelPackage.CG_VALUED_ELEMENT__OWNS;
 
 	/**
-	 * The feature id for the '<em><b>Mapping Exp</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MAPPING_CALL__MAPPING_EXP = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Mapping Call Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MAPPING_CALL__MAPPING_CALL_BINDINGS = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
+	int CG_MAPPING_CALL__MAPPING_CALL_BINDINGS = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>CG Mapping Call</em>' class.
@@ -1301,7 +1292,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MAPPING_CALL_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
+	int CG_MAPPING_CALL_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -1358,22 +1349,13 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_MAPPING_CALL_BINDING__OWNS = CGModelPackage.CG_VALUED_ELEMENT__OWNS;
 
 	/**
-	 * The feature id for the '<em><b>Value Or Values</b></em>' containment reference.
+	 * The feature id for the '<em><b>Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MAPPING_CALL_BINDING__VALUE_OR_VALUES = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Loop</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MAPPING_CALL_BINDING__LOOP = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
+	int CG_MAPPING_CALL_BINDING__VALUE = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>CG Mapping Call Binding</em>' class.
@@ -1382,7 +1364,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MAPPING_CALL_BINDING_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
+	int CG_MAPPING_CALL_BINDING_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingExpImpl <em>CG Mapping Exp</em>}' class.
@@ -1467,22 +1449,13 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_MAPPING_EXP__MAPPING = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Mapping Calls</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CG_MAPPING_EXP__MAPPING_CALLS = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>Predicates</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MAPPING_EXP__PREDICATES = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
+	int CG_MAPPING_EXP__PREDICATES = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Realized Variables</b></em>' containment reference list.
@@ -1491,7 +1464,16 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CG_MAPPING_EXP__REALIZED_VARIABLES = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 4;
+	int CG_MAPPING_EXP__REALIZED_VARIABLES = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MAPPING_EXP__BODY = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>CG Mapping Exp</em>' class.
@@ -1503,6 +1485,133 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_MAPPING_EXP_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingLoopImpl <em>CG Mapping Loop</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingLoopImpl
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMappingLoop()
+	 * @generated
+	 */
+	int CG_MAPPING_LOOP = 10;
+
+	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MAPPING_LOOP__AST = CGModelPackage.CG_ITERATION_CALL_EXP__AST;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MAPPING_LOOP__NAME = CGModelPackage.CG_ITERATION_CALL_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type Id</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MAPPING_LOOP__TYPE_ID = CGModelPackage.CG_ITERATION_CALL_EXP__TYPE_ID;
+
+	/**
+	 * The feature id for the '<em><b>Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MAPPING_LOOP__REQUIRED = CGModelPackage.CG_ITERATION_CALL_EXP__REQUIRED;
+
+	/**
+	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MAPPING_LOOP__DEPENDS_ON = CGModelPackage.CG_ITERATION_CALL_EXP__DEPENDS_ON;
+
+	/**
+	 * The feature id for the '<em><b>Owns</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MAPPING_LOOP__OWNS = CGModelPackage.CG_ITERATION_CALL_EXP__OWNS;
+
+	/**
+	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MAPPING_LOOP__INVALIDATING = CGModelPackage.CG_ITERATION_CALL_EXP__INVALIDATING;
+
+	/**
+	 * The feature id for the '<em><b>Validating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MAPPING_LOOP__VALIDATING = CGModelPackage.CG_ITERATION_CALL_EXP__VALIDATING;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MAPPING_LOOP__SOURCE = CGModelPackage.CG_ITERATION_CALL_EXP__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Referred Iteration</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MAPPING_LOOP__REFERRED_ITERATION = CGModelPackage.CG_ITERATION_CALL_EXP__REFERRED_ITERATION;
+
+	/**
+	 * The feature id for the '<em><b>Iterators</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MAPPING_LOOP__ITERATORS = CGModelPackage.CG_ITERATION_CALL_EXP__ITERATORS;
+
+	/**
+	 * The feature id for the '<em><b>Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MAPPING_LOOP__BODY = CGModelPackage.CG_ITERATION_CALL_EXP__BODY;
+
+	/**
+	 * The number of structural features of the '<em>CG Mapping Loop</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_MAPPING_LOOP_FEATURE_COUNT = CGModelPackage.CG_ITERATION_CALL_EXP_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMiddlePropertyAssignmentImpl <em>CG Middle Property Assignment</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1510,7 +1619,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMiddlePropertyAssignment()
 	 * @generated
 	 */
-	int CG_MIDDLE_PROPERTY_ASSIGNMENT = 10;
+	int CG_MIDDLE_PROPERTY_ASSIGNMENT = 11;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -1637,7 +1746,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMiddlePropertyCallExp()
 	 * @generated
 	 */
-	int CG_MIDDLE_PROPERTY_CALL_EXP = 11;
+	int CG_MIDDLE_PROPERTY_CALL_EXP = 12;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -1829,6 +1938,88 @@ public interface QVTiCGModelPackage extends EPackage {
 	int CG_PREDICATE_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGSequenceImpl <em>CG Sequence</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.CGSequenceImpl
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGSequence()
+	 * @generated
+	 */
+	int CG_SEQUENCE = 16;
+
+	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_SEQUENCE__AST = CGModelPackage.CG_VALUED_ELEMENT__AST;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_SEQUENCE__NAME = CGModelPackage.CG_VALUED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type Id</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_SEQUENCE__TYPE_ID = CGModelPackage.CG_VALUED_ELEMENT__TYPE_ID;
+
+	/**
+	 * The feature id for the '<em><b>Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_SEQUENCE__REQUIRED = CGModelPackage.CG_VALUED_ELEMENT__REQUIRED;
+
+	/**
+	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_SEQUENCE__DEPENDS_ON = CGModelPackage.CG_VALUED_ELEMENT__DEPENDS_ON;
+
+	/**
+	 * The feature id for the '<em><b>Owns</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_SEQUENCE__OWNS = CGModelPackage.CG_VALUED_ELEMENT__OWNS;
+
+	/**
+	 * The feature id for the '<em><b>Statements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_SEQUENCE__STATEMENTS = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>CG Sequence</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_SEQUENCE_FEATURE_COUNT = CGModelPackage.CG_VALUED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1944,7 +2135,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGTypedModel()
 	 * @generated
 	 */
-	int CG_TYPED_MODEL = 16;
+	int CG_TYPED_MODEL = 18;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -1999,7 +2190,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGVariablePredicate()
 	 * @generated
 	 */
-	int CG_VARIABLE_PREDICATE = 17;
+	int CG_VARIABLE_PREDICATE = 19;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -2304,17 +2495,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	EClass getCGMappingCall();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall#getMappingExp <em>Mapping Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Mapping Exp</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall#getMappingExp()
-	 * @see #getCGMappingCall()
-	 * @generated
-	 */
-	EReference getCGMappingCall_MappingExp();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall#getMappingCallBindings <em>Mapping Call Bindings</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2336,26 +2516,15 @@ public interface QVTiCGModelPackage extends EPackage {
 	EClass getCGMappingCallBinding();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding#getValueOrValues <em>Value Or Values</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Value Or Values</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding#getValueOrValues()
+	 * @return the meta object for the containment reference '<em>Value</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding#getValue()
 	 * @see #getCGMappingCallBinding()
 	 * @generated
 	 */
-	EReference getCGMappingCallBinding_ValueOrValues();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding#isLoop <em>Loop</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Loop</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding#isLoop()
-	 * @see #getCGMappingCallBinding()
-	 * @generated
-	 */
-	EAttribute getCGMappingCallBinding_Loop();
+	EReference getCGMappingCallBinding_Value();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp <em>CG Mapping Exp</em>}'.
@@ -2390,17 +2559,6 @@ public interface QVTiCGModelPackage extends EPackage {
 	EReference getCGMappingExp_Mapping();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getMappingCalls <em>Mapping Calls</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Mapping Calls</em>'.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getMappingCalls()
-	 * @see #getCGMappingExp()
-	 * @generated
-	 */
-	EReference getCGMappingExp_MappingCalls();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getPredicates <em>Predicates</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2421,6 +2579,27 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCGMappingExp_RealizedVariables();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getBody <em>Body</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Body</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getBody()
+	 * @see #getCGMappingExp()
+	 * @generated
+	 */
+	EReference getCGMappingExp_Body();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop <em>CG Mapping Loop</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>CG Mapping Loop</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop
+	 * @generated
+	 */
+	EClass getCGMappingLoop();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment <em>CG Middle Property Assignment</em>}'.
@@ -2505,6 +2684,27 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCGRealizedVariable_TypedModel();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGSequence <em>CG Sequence</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>CG Sequence</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGSequence
+	 * @generated
+	 */
+	EClass getCGSequence();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGSequence#getStatements <em>Statements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Statements</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGSequence#getStatements()
+	 * @see #getCGSequence()
+	 * @generated
+	 */
+	EReference getCGSequence_Statements();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable#getExecutorType <em>Executor Type</em>}'.
@@ -2813,14 +3013,6 @@ public interface QVTiCGModelPackage extends EPackage {
 		EClass CG_MAPPING_CALL = eINSTANCE.getCGMappingCall();
 
 		/**
-		 * The meta object literal for the '<em><b>Mapping Exp</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_MAPPING_CALL__MAPPING_EXP = eINSTANCE.getCGMappingCall_MappingExp();
-
-		/**
 		 * The meta object literal for the '<em><b>Mapping Call Bindings</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2839,20 +3031,12 @@ public interface QVTiCGModelPackage extends EPackage {
 		EClass CG_MAPPING_CALL_BINDING = eINSTANCE.getCGMappingCallBinding();
 
 		/**
-		 * The meta object literal for the '<em><b>Value Or Values</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CG_MAPPING_CALL_BINDING__VALUE_OR_VALUES = eINSTANCE.getCGMappingCallBinding_ValueOrValues();
-
-		/**
-		 * The meta object literal for the '<em><b>Loop</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute CG_MAPPING_CALL_BINDING__LOOP = eINSTANCE.getCGMappingCallBinding_Loop();
+		EReference CG_MAPPING_CALL_BINDING__VALUE = eINSTANCE.getCGMappingCallBinding_Value();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingExpImpl <em>CG Mapping Exp</em>}' class.
@@ -2881,14 +3065,6 @@ public interface QVTiCGModelPackage extends EPackage {
 		EReference CG_MAPPING_EXP__MAPPING = eINSTANCE.getCGMappingExp_Mapping();
 
 		/**
-		 * The meta object literal for the '<em><b>Mapping Calls</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CG_MAPPING_EXP__MAPPING_CALLS = eINSTANCE.getCGMappingExp_MappingCalls();
-
-		/**
 		 * The meta object literal for the '<em><b>Predicates</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2903,6 +3079,24 @@ public interface QVTiCGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CG_MAPPING_EXP__REALIZED_VARIABLES = eINSTANCE.getCGMappingExp_RealizedVariables();
+
+		/**
+		 * The meta object literal for the '<em><b>Body</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_MAPPING_EXP__BODY = eINSTANCE.getCGMappingExp_Body();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingLoopImpl <em>CG Mapping Loop</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingLoopImpl
+		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMappingLoop()
+		 * @generated
+		 */
+		EClass CG_MAPPING_LOOP = eINSTANCE.getCGMappingLoop();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMiddlePropertyAssignmentImpl <em>CG Middle Property Assignment</em>}' class.
@@ -2975,6 +3169,24 @@ public interface QVTiCGModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference CG_REALIZED_VARIABLE__TYPED_MODEL = eINSTANCE.getCGRealizedVariable_TypedModel();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGSequenceImpl <em>CG Sequence</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.CGSequenceImpl
+		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGSequence()
+		 * @generated
+		 */
+		EClass CG_SEQUENCE = eINSTANCE.getCGSequence();
+
+		/**
+		 * The meta object literal for the '<em><b>Statements</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CG_SEQUENCE__STATEMENTS = eINSTANCE.getCGSequence_Statements();
 
 		/**
 		 * The meta object literal for the '<em><b>Executor Type</b></em>' reference feature.

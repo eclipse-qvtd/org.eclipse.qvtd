@@ -17,6 +17,9 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.pivot.PivotPackage;
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
@@ -31,6 +34,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.AssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.DomainCS;
@@ -39,6 +45,8 @@ import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallCS;
+import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingLoopCS;
+import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingSequenceCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.util.AbstractQVTimperativeCSContainmentVisitor;
 
@@ -83,7 +91,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 			}
 		}
 		context.refreshPivotList(CoreDomain.class, pivotElement.getDomain(), csElement.getDomains());
-		context.refreshPivotList(MappingCall.class, pivotElement.getMappingCall(), csElement.getMappingCalls());
+		pivotElement.setMappingStatements(PivotUtil.getPivot(MappingStatement.class, csElement.getMappingSequence()));
 		return null;
 	}
 
@@ -98,8 +106,28 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	@Override
 	public Continuation<?> visitMappingCallBindingCS(@NonNull MappingCallBindingCS csElement) {
 		@NonNull MappingCallBinding pivotElement = context.refreshModelElement(MappingCallBinding.class, QVTimperativePackage.Literals.MAPPING_CALL_BINDING, csElement);
-		pivotElement.setIsLoop(csElement.isIsLoop());
 		context.refreshComments(pivotElement, csElement);
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitMappingLoopCS(@NonNull MappingLoopCS csMappingLoop) {
+		@NonNull MappingLoop pivotElement = context.refreshModelElement(MappingLoop.class, QVTimperativePackage.Literals.MAPPING_LOOP, csMappingLoop);
+		@NonNull Variable iterator = refreshNamedElement(Variable.class, PivotPackage.Literals.VARIABLE, DomainUtil.nonNullState(csMappingLoop.getOwnedIterator()));
+		pivotElement.getIterator().clear();
+		pivotElement.getIterator().add(iterator);
+		pivotElement.setBody(PivotUtil.getPivot(MappingStatement.class, csMappingLoop.getMappingSequence()));
+//		CollectionType collectionType = metaModelManager.getCollectionType();
+//		DomainOperation forAllIteration = DomainUtil.getNamedElement(collectionType.getLocalOperations(), "forAll");
+//		pivotElement.setReferredIteration((Iteration) forAllIteration);
+		context.refreshComments(pivotElement, csMappingLoop);
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitMappingSequenceCS(@NonNull MappingSequenceCS csMappingSequence) {
+		@NonNull MappingSequence pivotElement = context.refreshModelElement(MappingSequence.class, QVTimperativePackage.Literals.MAPPING_SEQUENCE, csMappingSequence);
+		context.refreshPivotList(MappingStatement.class, pivotElement.getMappingStatements(), csMappingSequence.getMappingStatements());
 		return null;
 	}
 

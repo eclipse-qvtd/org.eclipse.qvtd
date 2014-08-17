@@ -15,11 +15,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Package;
+import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.Variable;
+import org.eclipse.ocl.examples.pivot.VoidType;
+import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CSConversion;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.VariableCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -30,6 +38,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
@@ -47,6 +58,9 @@ import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.UnrealizedVariableCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallCS;
+import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingLoopCS;
+import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingSequenceCS;
+import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.TopLevelCS;
 
@@ -148,12 +162,12 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		csMapping.setPivot(asMapping);
 		csMapping.setIn(asMapping.getTransformation());
 		context.refreshList(csMapping.getDomains(), context.visitDeclarations(DomainCS.class, asMapping.getDomain(), null));
-		context.refreshList(csMapping.getMappingCalls(), context.visitDeclarations(MappingCallCS.class, asMapping.getMappingCall(), null));
 		DomainCS csDomain = context.refreshElement(DomainCS.class, QVTcoreBaseCSPackage.Literals.DOMAIN_CS, asMapping);
 		csDomain.setPivot(null);		// stop comment duplication
 		csDomain.setBottomPattern(context.visitDeclaration(BottomPatternCS.class, asMapping.getBottomPattern()));
 		csDomain.setGuardPattern(context.visitDeclaration(GuardPatternCS.class, asMapping.getGuardPattern()));
 		csMapping.setMiddle(csDomain);
+		csMapping.setMappingSequence(context.visitDeclaration(MappingSequenceCS.class, asMapping.getMappingStatements()));
 		return csMapping;
 	}
 
@@ -168,10 +182,28 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 	public ElementCS visitMappingCallBinding(@NonNull MappingCallBinding asMappingCallBinding) {
 		MappingCallBindingCS csMappingCallBinding = context.refreshElement(MappingCallBindingCS.class, QVTimperativeCSPackage.Literals.MAPPING_CALL_BINDING_CS, asMappingCallBinding);
 		csMappingCallBinding.setPivot(asMappingCallBinding);
-		csMappingCallBinding.setIsLoop(asMappingCallBinding.isIsLoop());
 		csMappingCallBinding.setReferredVariable(asMappingCallBinding.getBoundVariable());
 		csMappingCallBinding.setValue(createExpCS(asMappingCallBinding.getValue()));
 		return csMappingCallBinding;
+	}
+
+	public ElementCS visitMappingLoop(@NonNull MappingLoop asMappingLoop) {
+		MappingLoopCS csMappingLoop = context.refreshElement(MappingLoopCS.class, QVTimperativeCSPackage.Literals.MAPPING_LOOP_CS, asMappingLoop);
+		csMappingLoop.setPivot(asMappingLoop);
+		csMappingLoop.setOwnedIterator(context.visitDeclaration(VariableCS.class, asMappingLoop.getIterator().get(0)));
+		csMappingLoop.setInExpression(createExpCS(asMappingLoop.getSource()));
+		csMappingLoop.setMappingSequence(context.visitDeclaration(MappingSequenceCS.class, asMappingLoop.getBody()));
+		return csMappingLoop;
+	}
+
+	public ElementCS visitMappingSequence(@NonNull MappingSequence pMappingSequence) {
+		MappingSequenceCS csMappingSequence = context.refreshElement(MappingSequenceCS.class, QVTimperativeCSPackage.Literals.MAPPING_SEQUENCE_CS, pMappingSequence);
+		context.refreshList(csMappingSequence.getMappingStatements(), context.visitDeclarations(MappingStatementCS.class, pMappingSequence.getMappingStatements(), null));
+		return csMappingSequence;
+	}
+
+	public ElementCS visitMappingStatement(@NonNull MappingStatement object) {
+		return visiting(object);
 	}
 
 	public ElementCS visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment asMiddlePropertyAssignment) {
@@ -180,6 +212,34 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 
 	public ElementCS visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp asMiddlePropertyCallExp) {
 		return visitOppositePropertyCallExp(asMiddlePropertyCallExp);
+	}
+
+	@Override
+	public ElementCS visitVariable(@NonNull Variable asVariable) {
+		if (asVariable.eContainer() instanceof MappingLoop) {
+			VariableCS csVariable = context.refreshNamedElement(VariableCS.class, EssentialOCLCSPackage.Literals.VARIABLE_CS, asVariable);
+			Type type = asVariable.getType();
+			if ((type instanceof CollectionType) && (type.getUnspecializedElement() != context.getMetaModelManager().getCollectionType())) {
+				PivotUtil.debugWellContainedness(type);
+				type = ((CollectionType)type).getElementType();
+			}
+			else if (type instanceof VoidType) {
+				type = null;
+			}
+			if (type != null) {
+				PivotUtil.debugWellContainedness(type);
+				TypedRefCS typeRef = context.visitReference(TypedRefCS.class, type, null);
+				csVariable.setOwnedType(typeRef);
+			}
+			else {
+				csVariable.setOwnedType(null);
+			}
+	//		refreshList(csElement.getOwnedConstraint(), visitDeclarations(ConstraintCS.class, object.getOwnedRule(), null));		
+			return csVariable;
+		}
+		else {
+			return super.visitVariable(asVariable);
+		}
 	}
 
 	public ElementCS visitVariablePredicate(@NonNull VariablePredicate asVariablePredicate) {

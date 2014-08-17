@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs;
 
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -166,13 +165,13 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int MAPPING_CS__MIDDLE = QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__MIDDLE;
 
 	/**
-	 * The feature id for the '<em><b>Mapping Calls</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Mapping Sequence</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__MAPPING_CALLS = QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS_FEATURE_COUNT + 0;
+	int MAPPING_CS__MAPPING_SEQUENCE = QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Mapping CS</em>' class.
@@ -284,22 +283,77 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int MAPPING_CALL_BINDING_CS__VALUE = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Is Loop</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CALL_BINDING_CS__IS_LOOP = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 3;
-
-	/**
 	 * The number of structural features of the '<em>Mapping Call Binding CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_BINDING_CS_FEATURE_COUNT = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 4;
+	int MAPPING_CALL_BINDING_CS_FEATURE_COUNT = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.MappingStatementCSImpl <em>Mapping Statement CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.MappingStatementCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingStatementCS()
+	 * @generated
+	 */
+	int MAPPING_STATEMENT_CS = 5;
+
+	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_STATEMENT_CS__LOGICAL_PARENT = BaseCSPackage.MODEL_ELEMENT_CS__LOGICAL_PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Pivot</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_STATEMENT_CS__PIVOT = BaseCSPackage.MODEL_ELEMENT_CS__PIVOT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_STATEMENT_CS__OWNED_ANNOTATION = BaseCSPackage.MODEL_ELEMENT_CS__OWNED_ANNOTATION;
+
+	/**
+	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_STATEMENT_CS__ORIGINAL_XMI_ID = BaseCSPackage.MODEL_ELEMENT_CS__ORIGINAL_XMI_ID;
+
+	/**
+	 * The feature id for the '<em><b>Csi</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_STATEMENT_CS__CSI = BaseCSPackage.MODEL_ELEMENT_CS__CSI;
+
+	/**
+	 * The number of structural features of the '<em>Mapping Statement CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_STATEMENT_CS_FEATURE_COUNT = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.MappingCallCSImpl <em>Mapping Call CS</em>}' class.
@@ -318,7 +372,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_CS__LOGICAL_PARENT = BaseCSPackage.MODEL_ELEMENT_CS__LOGICAL_PARENT;
+	int MAPPING_CALL_CS__LOGICAL_PARENT = MAPPING_STATEMENT_CS__LOGICAL_PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Pivot</b></em>' reference.
@@ -327,7 +381,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_CS__PIVOT = BaseCSPackage.MODEL_ELEMENT_CS__PIVOT;
+	int MAPPING_CALL_CS__PIVOT = MAPPING_STATEMENT_CS__PIVOT;
 
 	/**
 	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
@@ -336,7 +390,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_CS__OWNED_ANNOTATION = BaseCSPackage.MODEL_ELEMENT_CS__OWNED_ANNOTATION;
+	int MAPPING_CALL_CS__OWNED_ANNOTATION = MAPPING_STATEMENT_CS__OWNED_ANNOTATION;
 
 	/**
 	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
@@ -345,7 +399,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_CS__ORIGINAL_XMI_ID = BaseCSPackage.MODEL_ELEMENT_CS__ORIGINAL_XMI_ID;
+	int MAPPING_CALL_CS__ORIGINAL_XMI_ID = MAPPING_STATEMENT_CS__ORIGINAL_XMI_ID;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -354,7 +408,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_CS__CSI = BaseCSPackage.MODEL_ELEMENT_CS__CSI;
+	int MAPPING_CALL_CS__CSI = MAPPING_STATEMENT_CS__CSI;
 
 	/**
 	 * The feature id for the '<em><b>Referred Mapping</b></em>' reference.
@@ -363,7 +417,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_CS__REFERRED_MAPPING = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
+	int MAPPING_CALL_CS__REFERRED_MAPPING = MAPPING_STATEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
@@ -372,7 +426,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_CS__BINDINGS = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
+	int MAPPING_CALL_CS__BINDINGS = MAPPING_STATEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Mapping Call CS</em>' class.
@@ -381,7 +435,171 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_CS_FEATURE_COUNT = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 2;
+	int MAPPING_CALL_CS_FEATURE_COUNT = MAPPING_STATEMENT_CS_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.MappingSequenceCSImpl <em>Mapping Sequence CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.MappingSequenceCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingSequenceCS()
+	 * @generated
+	 */
+	int MAPPING_SEQUENCE_CS = 4;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.MappingLoopCSImpl <em>Mapping Loop CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.MappingLoopCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingLoopCS()
+	 * @generated
+	 */
+	int MAPPING_LOOP_CS = 3;
+
+	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_LOOP_CS__LOGICAL_PARENT = MAPPING_STATEMENT_CS__LOGICAL_PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Pivot</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_LOOP_CS__PIVOT = MAPPING_STATEMENT_CS__PIVOT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_LOOP_CS__OWNED_ANNOTATION = MAPPING_STATEMENT_CS__OWNED_ANNOTATION;
+
+	/**
+	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_LOOP_CS__ORIGINAL_XMI_ID = MAPPING_STATEMENT_CS__ORIGINAL_XMI_ID;
+
+	/**
+	 * The feature id for the '<em><b>Csi</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_LOOP_CS__CSI = MAPPING_STATEMENT_CS__CSI;
+
+	/**
+	 * The feature id for the '<em><b>Owned Iterator</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_LOOP_CS__OWNED_ITERATOR = MAPPING_STATEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>In Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_LOOP_CS__IN_EXPRESSION = MAPPING_STATEMENT_CS_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Mapping Sequence</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_LOOP_CS__MAPPING_SEQUENCE = MAPPING_STATEMENT_CS_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Mapping Loop CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_LOOP_CS_FEATURE_COUNT = MAPPING_STATEMENT_CS_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_SEQUENCE_CS__LOGICAL_PARENT = MAPPING_STATEMENT_CS__LOGICAL_PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Pivot</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_SEQUENCE_CS__PIVOT = MAPPING_STATEMENT_CS__PIVOT;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_SEQUENCE_CS__OWNED_ANNOTATION = MAPPING_STATEMENT_CS__OWNED_ANNOTATION;
+
+	/**
+	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_SEQUENCE_CS__ORIGINAL_XMI_ID = MAPPING_STATEMENT_CS__ORIGINAL_XMI_ID;
+
+	/**
+	 * The feature id for the '<em><b>Csi</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_SEQUENCE_CS__CSI = MAPPING_STATEMENT_CS__CSI;
+
+	/**
+	 * The feature id for the '<em><b>Mapping Statements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_SEQUENCE_CS__MAPPING_STATEMENTS = MAPPING_STATEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Mapping Sequence CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_SEQUENCE_CS_FEATURE_COUNT = MAPPING_STATEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.TopLevelCSImpl <em>Top Level CS</em>}' class.
@@ -391,7 +609,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getTopLevelCS()
 	 * @generated
 	 */
-	int TOP_LEVEL_CS = 3;
+	int TOP_LEVEL_CS = 6;
 
 	/**
 	 * The feature id for the '<em><b>Logical Parent</b></em>' reference.
@@ -512,15 +730,15 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EClass getMappingCS();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS#getMappingCalls <em>Mapping Calls</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS#getMappingSequence <em>Mapping Sequence</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Mapping Calls</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS#getMappingCalls()
+	 * @return the meta object for the containment reference '<em>Mapping Sequence</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS#getMappingSequence()
 	 * @see #getMappingCS()
 	 * @generated
 	 */
-	EReference getMappingCS_MappingCalls();
+	EReference getMappingCS_MappingSequence();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallBindingCS <em>Mapping Call Binding CS</em>}'.
@@ -566,17 +784,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EReference getMappingCallBindingCS_Value();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallBindingCS#isIsLoop <em>Is Loop</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Loop</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallBindingCS#isIsLoop()
-	 * @see #getMappingCallBindingCS()
-	 * @generated
-	 */
-	EAttribute getMappingCallBindingCS_IsLoop();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallCS <em>Mapping Call CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -607,6 +814,80 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMappingCallCS_Bindings();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingLoopCS <em>Mapping Loop CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Mapping Loop CS</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingLoopCS
+	 * @generated
+	 */
+	EClass getMappingLoopCS();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingLoopCS#getOwnedIterator <em>Owned Iterator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Owned Iterator</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingLoopCS#getOwnedIterator()
+	 * @see #getMappingLoopCS()
+	 * @generated
+	 */
+	EReference getMappingLoopCS_OwnedIterator();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingLoopCS#getInExpression <em>In Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>In Expression</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingLoopCS#getInExpression()
+	 * @see #getMappingLoopCS()
+	 * @generated
+	 */
+	EReference getMappingLoopCS_InExpression();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingLoopCS#getMappingSequence <em>Mapping Sequence</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Mapping Sequence</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingLoopCS#getMappingSequence()
+	 * @see #getMappingLoopCS()
+	 * @generated
+	 */
+	EReference getMappingLoopCS_MappingSequence();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingSequenceCS <em>Mapping Sequence CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Mapping Sequence CS</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingSequenceCS
+	 * @generated
+	 */
+	EClass getMappingSequenceCS();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingSequenceCS#getMappingStatements <em>Mapping Statements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Mapping Statements</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingSequenceCS#getMappingStatements()
+	 * @see #getMappingSequenceCS()
+	 * @generated
+	 */
+	EReference getMappingSequenceCS_MappingStatements();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingStatementCS <em>Mapping Statement CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Mapping Statement CS</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingStatementCS
+	 * @generated
+	 */
+	EClass getMappingStatementCS();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.TopLevelCS <em>Top Level CS</em>}'.
@@ -684,12 +965,12 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EClass MAPPING_CS = eINSTANCE.getMappingCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Mapping Calls</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Mapping Sequence</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MAPPING_CS__MAPPING_CALLS = eINSTANCE.getMappingCS_MappingCalls();
+		EReference MAPPING_CS__MAPPING_SEQUENCE = eINSTANCE.getMappingCS_MappingSequence();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.MappingCallBindingCSImpl <em>Mapping Call Binding CS</em>}' class.
@@ -726,14 +1007,6 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EReference MAPPING_CALL_BINDING_CS__VALUE = eINSTANCE.getMappingCallBindingCS_Value();
 
 		/**
-		 * The meta object literal for the '<em><b>Is Loop</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MAPPING_CALL_BINDING_CS__IS_LOOP = eINSTANCE.getMappingCallBindingCS_IsLoop();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.MappingCallCSImpl <em>Mapping Call CS</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -758,6 +1031,68 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MAPPING_CALL_CS__BINDINGS = eINSTANCE.getMappingCallCS_Bindings();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.MappingLoopCSImpl <em>Mapping Loop CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.MappingLoopCSImpl
+		 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingLoopCS()
+		 * @generated
+		 */
+		EClass MAPPING_LOOP_CS = eINSTANCE.getMappingLoopCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Iterator</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_LOOP_CS__OWNED_ITERATOR = eINSTANCE.getMappingLoopCS_OwnedIterator();
+
+		/**
+		 * The meta object literal for the '<em><b>In Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_LOOP_CS__IN_EXPRESSION = eINSTANCE.getMappingLoopCS_InExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Mapping Sequence</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_LOOP_CS__MAPPING_SEQUENCE = eINSTANCE.getMappingLoopCS_MappingSequence();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.MappingSequenceCSImpl <em>Mapping Sequence CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.MappingSequenceCSImpl
+		 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingSequenceCS()
+		 * @generated
+		 */
+		EClass MAPPING_SEQUENCE_CS = eINSTANCE.getMappingSequenceCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Mapping Statements</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_SEQUENCE_CS__MAPPING_STATEMENTS = eINSTANCE.getMappingSequenceCS_MappingStatements();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.MappingStatementCSImpl <em>Mapping Statement CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.MappingStatementCSImpl
+		 * @see org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.QVTimperativeCSPackageImpl#getMappingStatementCS()
+		 * @generated
+		 */
+		EClass MAPPING_STATEMENT_CS = eINSTANCE.getMappingStatementCS();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl.TopLevelCSImpl <em>Top Level CS</em>}' class.

@@ -52,11 +52,23 @@ public abstract class AbstractQVTimperativeAS2XMIidVisitor
 	}
 
 	public @Nullable Boolean visitMappingCall(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingCall object) {
-		return visitOCLExpression(object);
+		return visitMappingStatement(object);
 	}
 
 	public @Nullable Boolean visitMappingCallBinding(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding object) {
 		return visitElement(object);
+	}
+
+	public @Nullable Boolean visitMappingLoop(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingLoop object) {
+		return visitLoopExp(object);
+	}
+
+	public @Nullable Boolean visitMappingSequence(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingSequence object) {
+		return visitMappingStatement(object);
+	}
+
+	public @Nullable Boolean visitMappingStatement(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingStatement object) {
+		return visitOCLExpression(object);
 	}
 
 	public @Nullable Boolean visitMiddlePropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment object) {

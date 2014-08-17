@@ -80,6 +80,10 @@ public abstract class AbstractExtendingQVTiCGModelVisitor<R, C>
 		return visitCGValuedElement(object);
 	}
 
+	public @Nullable R visitCGMappingLoop(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop object) {
+		return visitCGIterationCallExp(object);
+	}
+
 	public @Nullable R visitCGMiddlePropertyAssignment(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment object) {
 		return visitCGEcorePropertyAssignment(object);
 	}
@@ -98,6 +102,10 @@ public abstract class AbstractExtendingQVTiCGModelVisitor<R, C>
 
 	public @Nullable R visitCGRealizedVariable(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable object) {
 		return visitCGVariable(object);
+	}
+
+	public @Nullable R visitCGSequence(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGSequence object) {
+		return visitCGValuedElement(object);
 	}
 
 	public @Nullable R visitCGTransformation(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation object) {

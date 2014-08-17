@@ -1,11 +1,11 @@
-/*
- * Â«codeGenHelper.getCopyright(' * ')Â»
- *************************************************************************
+/*******************************************************************************
+ * «codeGenHelper.getCopyright(' * ')»
+ *
  * This code is 100% auto-generated
  * using: org.eclipse.ocl.examples.codegen.java.JavaStream
  *
  * Do not edit it.
- */
+ ********************************************************************************/
 
 package cg;
 
@@ -45,9 +45,9 @@ import test.middle.HSV2HLS.HSVNode2HLSNode;
 @SuppressWarnings("nls")
 public class hsv2hls extends AbstractTransformation
 {
-    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HLSTree = IdManager.getNsURIPackageId("http://http://www.eclipse.org/qvt/examples/0.1/HLSTree", "hls", HLSTreePackage.eINSTANCE);
-    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVTree = IdManager.getNsURIPackageId("http://http://www.eclipse.org/qvt/examples/0.1/HSVTree", "hsv", HSVTreePackage.eINSTANCE);
-    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVtoHLS = IdManager.getNsURIPackageId("http://http://www.eclipse.org/qvt/examples/0.1/HSVtoHLS", "hsv2hls", HSV2HLSPackage.eINSTANCE);
+    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HLSTree = IdManager.getNsURIPackageId("http://http://www.eclipse.org/qvt/examples/0.1/HLSTree", null, HLSTreePackage.eINSTANCE);
+    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVTree = IdManager.getNsURIPackageId("http://http://www.eclipse.org/qvt/examples/0.1/HSVTree", null, HSVTreePackage.eINSTANCE);
+    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVtoHLS = IdManager.getNsURIPackageId("http://http://www.eclipse.org/qvt/examples/0.1/HSVtoHLS", null, HSV2HLSPackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_HLSNode = PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HLSTree.getClassId("HLSNode", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_HSVNode = PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVTree.getClassId("HSVNode", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_HSVNode2HLSNode = PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVtoHLS.getClassId("HSVNode2HLSNode", 0);
@@ -92,14 +92,14 @@ public class hsv2hls extends AbstractTransformation
     /**
      * 
      * map HSV2MiddleRoot in hsv2hls) {
-     * hsv (hsvRoot : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/HSV2HLS/HSVTree.ecore#/'::HSVNode;
+     * hsv (hsvRoot : HSVTree::HSVNode;
      *  |
      * )
      * { |
      * }
      * middle ( |
      * )
-     * {realize middleRoot : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/HSV2HLS/HSV2HLS.ecore#/'::HSVNode2HLSNode;
+     * {realize middleRoot : HSV2HLS::HSVNode2HLSNode;
      *  |
      * }
      * where ( |
@@ -109,10 +109,12 @@ public class hsv2hls extends AbstractTransformation
      * middleRoot = hsvRoot;
      * middleRoot = hsvRoot.name;
      * }
-     * map HSV2MiddleRecursion {
-     * hsvNode <= hsvRoot.children;
+     * for hsvChild : HSVTree::HSVNode in hsvRoot.children {
+     * 
+     *     map HSV2MiddleRecursion {
+     * hsvNode := hsvChild;
      * middleParent := middleRoot;
-     * }
+     * }}
      *   map Middle2HLSRoot {
      * middleNode := middleRoot;
      * }
@@ -134,13 +136,13 @@ public class hsv2hls extends AbstractTransformation
             middleRoot.setHsv(hsvRoot);
             final @Nullable /*@Thrown*/ String name = hsvRoot.getName();
             middleRoot.setName(name);
-            // mapping calls
+            // mapping statements
             final @Nullable /*@Thrown*/ List<HSVNode> children = hsvRoot.getChildren();
             assert children != null;
-            for (Object hsvNode_0 : children) {
-                if (hsvNode_0 != null) {
-                    HSV2MiddleRecursion((HSVNode)hsvNode_0, middleRoot);
-                }
+            ;
+            for (HSVNode hsvChild : children) {
+                final @NonNull /*@NonInvalid*/ HSVNode symbol_3 = (HSVNode)hsvChild;
+                HSV2MiddleRecursion(symbol_3, middleRoot);
             }
             Middle2HLSRoot(middleRoot);
             return true;
@@ -154,15 +156,15 @@ public class hsv2hls extends AbstractTransformation
      * 
      * map HSV2MiddleRecursion in hsv2hls) {
      * 
-     *   hsv (hsvNode : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/HSV2HLS/HSVTree.ecore#/'::HSVNode;
+     *   hsv (hsvNode : HSVTree::HSVNode;
      *  |
      * )
      * { |
      * }
-     * middle (middleParent : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/HSV2HLS/HSV2HLS.ecore#/'::HSVNode2HLSNode;
+     * middle (middleParent : HSV2HLS::HSVNode2HLSNode;
      *  |
      * )
-     * {realize middleNode : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/HSV2HLS/HSV2HLS.ecore#/'::HSVNode2HLSNode;
+     * {realize middleNode : HSV2HLS::HSVNode2HLSNode;
      *  |
      * }
      * where ( |
@@ -172,10 +174,12 @@ public class hsv2hls extends AbstractTransformation
      * middleNode = hsvNode;
      * middleNode = hsvNode.name;
      * }
-     * map HSV2MiddleRecursion {
-     * hsvNode <= hsvNode.children;
+     * for hsvChild : HSVTree::HSVNode in hsvNode.children {
+     * 
+     *     map HSV2MiddleRecursion {
+     * hsvNode := hsvChild;
      * middleParent := middleNode;
-     * }
+     * }}
      * }
      */
     protected boolean HSV2MiddleRecursion(final @NonNull /*@NonInvalid*/ HSVNode hsvNode, final @NonNull /*@NonInvalid*/ HSVNode2HLSNode middleParent) {
@@ -190,13 +194,13 @@ public class hsv2hls extends AbstractTransformation
             middleNode.setHsv(hsvNode);
             final @Nullable /*@Thrown*/ String name = hsvNode.getName();
             middleNode.setName(name);
-            // mapping calls
+            // mapping statements
             final @Nullable /*@Thrown*/ List<HSVNode> children = hsvNode.getChildren();
             assert children != null;
-            for (Object hsvNode_0 : children) {
-                if (hsvNode_0 != null) {
-                    HSV2MiddleRecursion((HSVNode)hsvNode_0, middleNode);
-                }
+            ;
+            for (HSVNode hsvChild : children) {
+                final @NonNull /*@NonInvalid*/ HSVNode symbol_4 = (HSVNode)hsvChild;
+                HSV2MiddleRecursion(symbol_4, middleNode);
             }
             return true;
         }
@@ -209,14 +213,14 @@ public class hsv2hls extends AbstractTransformation
      * 
      * map Middle2HLSRoot in hsv2hls) {
      * 
-     *   middle (middleNode : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/HSV2HLS/HSV2HLS.ecore#/'::HSVNode2HLSNode;
+     *   middle (middleNode : HSV2HLS::HSVNode2HLSNode;
      *  |
      * )
      * { |
      * }
      * hls ( |
      * )
-     * {realize hlsNode : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/HSV2HLS/HLSTree.ecore#/'::HLSNode;
+     * {realize hlsNode : HLSTree::HLSNode;
      *  |
      * }
      * where ( |
@@ -226,9 +230,11 @@ public class hsv2hls extends AbstractTransformation
      * middleNode = hlsNode;
      * hlsNode = middleNode.name;
      * }
-     * map Middle2HLSRecursion {
-     * middleNode <= middleNode.children;
-     * }
+     * for middleChild : HSV2HLS::HSVNode2HLSNode in middleNode.children {
+     * 
+     *     map Middle2HLSRecursion {
+     * middleNode := middleChild;
+     * }}
      * }
      */
     protected boolean Middle2HLSRoot(final @NonNull /*@NonInvalid*/ HSVNode2HLSNode middleNode) {
@@ -243,13 +249,13 @@ public class hsv2hls extends AbstractTransformation
             middleNode.setHls(hlsNode);
             final @Nullable /*@Thrown*/ String name = middleNode.getName();
             hlsNode.setName(name);
-            // mapping calls
+            // mapping statements
             final @Nullable /*@Thrown*/ List<HSVNode2HLSNode> children = middleNode.getChildren();
             assert children != null;
-            for (Object middleNode_1 : children) {
-                if (middleNode_1 != null) {
-                    Middle2HLSRecursion((HSVNode2HLSNode)middleNode_1);
-                }
+            ;
+            for (HSVNode2HLSNode middleChild : children) {
+                final @NonNull /*@NonInvalid*/ HSVNode2HLSNode symbol_4 = (HSVNode2HLSNode)middleChild;
+                Middle2HLSRecursion(symbol_4);
             }
             return true;
         }
@@ -262,14 +268,14 @@ public class hsv2hls extends AbstractTransformation
      * 
      * map Middle2HLSRecursion in hsv2hls) {
      * 
-     *   middle (middleNode : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/HSV2HLS/HSV2HLS.ecore#/'::HSVNode2HLSNode;
+     *   middle (middleNode : HSV2HLS::HSVNode2HLSNode;
      *  |
      * )
      * { |
      * }
      * hls ( |
      * )
-     * {realize hlsNode : _'file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/HSV2HLS/HLSTree.ecore#/'::HLSNode;
+     * {realize hlsNode : HLSTree::HLSNode;
      *  |
      * }
      * where ( |
@@ -279,9 +285,11 @@ public class hsv2hls extends AbstractTransformation
      * middleNode = hlsNode;
      * hlsNode = middleNode.name;
      * }
-     * map Middle2HLSRecursion {
-     * middleNode <= middleNode.children;
-     * }
+     * for middleChild : HSV2HLS::HSVNode2HLSNode in middleNode.children {
+     * 
+     *     map Middle2HLSRecursion {
+     * middleNode := middleChild;
+     * }}
      * }
      */
     protected boolean Middle2HLSRecursion(final @NonNull /*@NonInvalid*/ HSVNode2HLSNode middleNode_0) {
@@ -294,20 +302,20 @@ public class hsv2hls extends AbstractTransformation
             // assignments
             final @Nullable /*@Thrown*/ HSVNode2HLSNode parent = middleNode_0.getParent();
             if (parent == null) {
-                throw new InvalidValueException("Null source for \'HSV2HLS::HSVNode2HLSNode.hls\'");
+                throw new InvalidValueException("Null source for \'HSV2HLS::HSVNode2HLSNode::hls\'");
             }
             final @Nullable /*@Thrown*/ HLSNode hls = parent.getHls();
             hlsNode.setParent(hls);
             middleNode_0.setHls(hlsNode);
             final @Nullable /*@Thrown*/ String name = middleNode_0.getName();
             hlsNode.setName(name);
-            // mapping calls
+            // mapping statements
             final @Nullable /*@Thrown*/ List<HSVNode2HLSNode> children = middleNode_0.getChildren();
             assert children != null;
-            for (Object middleNode_1 : children) {
-                if (middleNode_1 != null) {
-                    Middle2HLSRecursion((HSVNode2HLSNode)middleNode_1);
-                }
+            ;
+            for (HSVNode2HLSNode middleChild : children) {
+                final @NonNull /*@NonInvalid*/ HSVNode2HLSNode symbol_4 = (HSVNode2HLSNode)middleChild;
+                Middle2HLSRecursion(symbol_4);
             }
             return true;
         }
