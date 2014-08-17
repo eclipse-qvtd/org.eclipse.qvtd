@@ -16,6 +16,11 @@ import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 public class MappingAttribution extends AbstractAttribution
 {
@@ -27,6 +32,25 @@ public class MappingAttribution extends AbstractAttribution
 			environmentView.addRootPackages();
 			return null;
 		}
-		return super.computeLookup(target, environmentView, scopeView);
+		Mapping mapping = (Mapping)target;
+		if (scopeView.getContainmentFeature() == QVTimperativePackage.Literals.MAPPING__MAPPING_STATEMENTS) {
+			QVTimperativeEnvironmentUtil.addMiddleGuardVariables(environmentView, mapping);
+			QVTimperativeEnvironmentUtil.addSideGuardVariables(environmentView, mapping, null);
+			QVTimperativeEnvironmentUtil.addMiddleBottomVariables(environmentView, mapping);
+			QVTimperativeEnvironmentUtil.addSideBottomVariables(environmentView, mapping, null);
+			Transformation transformation = QVTimperativeUtil.getContainingTransformation(mapping);
+			if (transformation != null) {
+				for (TypedModel typedModel : transformation.getModelParameter()) {
+					for (org.eclipse.ocl.examples.pivot.Package usedPackage : typedModel.getUsedPackage()) {
+						if (usedPackage != null) {
+							environmentView.addNamedElement(usedPackage);
+							environmentView.addAllTypes(usedPackage);
+						}
+					}
+				}
+			}
+			
+		}
+		return scopeView.getParent();
 	}
 }
