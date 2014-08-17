@@ -40,6 +40,9 @@ import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
@@ -271,7 +274,6 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	 */
 	@Override
 	public @Nullable Object visitMappingCall(@NonNull MappingCall mappingCall) {
-		
 		logger.info(getIndent() + "Visiting MappingCall, calling: " + mappingCall.getReferredMapping().getName());
 		indentLevel++;
 		Object result = delegate.visitMappingCall(mappingCall);
@@ -279,6 +281,25 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 		return result;
 	}
 
+	public @Nullable Object visitMappingLoop(@NonNull MappingLoop mappingLoop) {
+		logger.info(getIndent() + "Visiting MappingLoop, calling: " + mappingLoop.getIterator().get(0).getName());
+		indentLevel++;
+		Object result = delegate.visitMappingLoop(mappingLoop);
+		indentLevel--;
+		return result;
+	}
+
+	public @Nullable Object visitMappingSequence(@NonNull MappingSequence mappingSequence) {
+		logger.info(getIndent() + "Visiting MappingSequence");
+		indentLevel++;
+		Object result = delegate.visitMappingSequence(mappingSequence);
+		indentLevel--;
+		return result;
+	}
+
+	public @Nullable Object visitMappingStatement(@NonNull MappingStatement vappingStatement) {
+		return visiting(vappingStatement);
+	}
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitMiddlePropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment)

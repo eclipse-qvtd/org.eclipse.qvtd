@@ -66,6 +66,24 @@ public interface QVTimperativeFactory extends EFactory {
 	MappingCallBinding createMappingCallBinding();
 
 	/**
+	 * Returns a new object of class '<em>Mapping Loop</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Mapping Loop</em>'.
+	 * @generated
+	 */
+	MappingLoop createMappingLoop();
+
+	/**
+	 * Returns a new object of class '<em>Mapping Sequence</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Mapping Sequence</em>'.
+	 * @generated
+	 */
+	MappingSequence createMappingSequence();
+
+	/**
 	 * Returns a new object of class '<em>Middle Property Assignment</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

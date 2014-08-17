@@ -35,7 +35,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 
 /**
  * QVTimperativeEvaluationVisitor is the class for ...
@@ -192,44 +192,13 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
             	domain.accept(undecoratedVisitor);
            }
         }
-//    	if (gp != null) {
-//    		result = gp.accept(undecoratedVisitor);
-//    		if (result == Boolean.TRUE) {
-            	/*result =*/ mapping.getBottomPattern().accept(undecoratedVisitor);
-//            	if (result == Boolean.TRUE) {
-            		for (MappingCall mappingCall : mapping.getMappingCall()) {
-	            		QVTiEvaluationVisitor nv = ((QVTiEvaluationVisitor) undecoratedVisitor).createNestedEvaluator();
-	            		// The Undecorated visitor createNestedEvaluator should return the undecorated, so no need
-	            		// to call the getUndecoratedVisitor.
-	                	try {
-	                		mappingCall.accept(nv);
-	                	}
-	                	finally {
-	                		nv.dispose();
-	                	}
-	            	}
-//            	}
-//            }
+        /*result =*/ mapping.getBottomPattern().accept(undecoratedVisitor);
+//      if (result == Boolean.TRUE) {
+			MappingStatement mappingStatements = mapping.getMappingStatements();
+			if (mappingStatements != null) {
+				mappingStatements.accept(undecoratedVisitor);
+			}
 //    	}
-        // After the mapping has been visited, set all "initialised variables"
-		// values to null
-/*        if (gp != null) {
-			for (Variable v : gp.getVariable()) {
-				if (v.getInitExpression() != null) {
-					evaluationEnvironment.replace(v, null);
-				}
-			}
-        }
-		for (Domain domain : mapping.getDomain()) {
-			gp = ((CoreDomain)domain).getGuardPattern();
-			if (gp != null) {
-				for (Variable v : gp.getVariable()) {
-	    			if (v.getInitExpression() != null) {
-	    				evaluationEnvironment.replace(v, null);
-	    			}
-	    		}
-			}
-        } */
         return null;
     }
 

@@ -75,6 +75,39 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, D extends QVTim
 		}
 	}
 
+	public @Nullable R visitMappingLoop(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingLoop object) {
+		P prologue = preVisit(object);
+		try {
+			R result = delegate.visitMappingLoop(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	public @Nullable R visitMappingSequence(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingSequence object) {
+		P prologue = preVisit(object);
+		try {
+			R result = delegate.visitMappingSequence(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	public @Nullable R visitMappingStatement(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingStatement object) {
+		P prologue = preVisit(object);
+		try {
+			R result = delegate.visitMappingStatement(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
 	public @Nullable R visitMiddlePropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment object) {
 		P prologue = preVisit(object);
 		try {

@@ -16,11 +16,13 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.examples.pivot.scoping.Attribution;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.attributes.MappingCallBindingAttribution;
+import org.eclipse.qvtd.pivot.qvtimperative.attributes.MappingLoopAttribution;
 
 public class QVTimperativePivotScoping
 {	
 	public static void init() {
 		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
 		registry.put(QVTimperativePackage.Literals.MAPPING_CALL_BINDING, MappingCallBindingAttribution.INSTANCE);
+		registry.put(QVTimperativePackage.Literals.MAPPING_LOOP, MappingLoopAttribution.INSTANCE);
 	}
 }

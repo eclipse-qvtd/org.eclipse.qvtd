@@ -19,12 +19,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.internal.impl.OCLExpressionImpl;
 import org.eclipse.ocl.examples.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -41,13 +39,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl#getReferredMapping <em>Referred Mapping</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl#getBinding <em>Binding</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl#getContext <em>Context</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class MappingCallImpl extends OCLExpressionImpl implements MappingCall {
+public class MappingCallImpl extends MappingStatementImpl implements MappingCall {
 	/**
 	 * The cached value of the '{@link #getReferredMapping() <em>Referred Mapping</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -142,57 +139,12 @@ public class MappingCallImpl extends OCLExpressionImpl implements MappingCall {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Mapping getContext() {
-		if (eContainerFeatureID() != QVTimperativePackage.MAPPING_CALL__CONTEXT) return null;
-		return (Mapping)eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetContext(Mapping newContext, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newContext, QVTimperativePackage.MAPPING_CALL__CONTEXT, msgs);
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setContext(Mapping newContext) {
-		if (newContext != eInternalContainer() || (eContainerFeatureID() != QVTimperativePackage.MAPPING_CALL__CONTEXT && newContext != null)) {
-			if (EcoreUtil.isAncestor(this, newContext))
-				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-			NotificationChain msgs = null;
-			if (eInternalContainer() != null)
-				msgs = eBasicRemoveFromContainer(msgs);
-			if (newContext != null)
-				msgs = ((InternalEObject)newContext).eInverseAdd(this, QVTimperativePackage.MAPPING__MAPPING_CALL, Mapping.class, msgs);
-			msgs = basicSetContext(newContext, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING_CALL__CONTEXT, newContext, newContext));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTimperativePackage.MAPPING_CALL__BINDING:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getBinding()).basicAdd(otherEnd, msgs);
-			case QVTimperativePackage.MAPPING_CALL__CONTEXT:
-				if (eInternalContainer() != null)
-					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetContext((Mapping)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -207,24 +159,8 @@ public class MappingCallImpl extends OCLExpressionImpl implements MappingCall {
 		switch (featureID) {
 			case QVTimperativePackage.MAPPING_CALL__BINDING:
 				return ((InternalEList<?>)getBinding()).basicRemove(otherEnd, msgs);
-			case QVTimperativePackage.MAPPING_CALL__CONTEXT:
-				return basicSetContext(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
-		switch (eContainerFeatureID()) {
-			case QVTimperativePackage.MAPPING_CALL__CONTEXT:
-				return eInternalContainer().eInverseRemove(this, QVTimperativePackage.MAPPING__MAPPING_CALL, Mapping.class, msgs);
-		}
-		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -240,8 +176,6 @@ public class MappingCallImpl extends OCLExpressionImpl implements MappingCall {
 				return basicGetReferredMapping();
 			case QVTimperativePackage.MAPPING_CALL__BINDING:
 				return getBinding();
-			case QVTimperativePackage.MAPPING_CALL__CONTEXT:
-				return getContext();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -262,9 +196,6 @@ public class MappingCallImpl extends OCLExpressionImpl implements MappingCall {
 				getBinding().clear();
 				getBinding().addAll((Collection<? extends MappingCallBinding>)newValue);
 				return;
-			case QVTimperativePackage.MAPPING_CALL__CONTEXT:
-				setContext((Mapping)newValue);
-				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -283,9 +214,6 @@ public class MappingCallImpl extends OCLExpressionImpl implements MappingCall {
 			case QVTimperativePackage.MAPPING_CALL__BINDING:
 				getBinding().clear();
 				return;
-			case QVTimperativePackage.MAPPING_CALL__CONTEXT:
-				setContext((Mapping)null);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -302,8 +230,6 @@ public class MappingCallImpl extends OCLExpressionImpl implements MappingCall {
 				return referredMapping != null;
 			case QVTimperativePackage.MAPPING_CALL__BINDING:
 				return binding != null && !binding.isEmpty();
-			case QVTimperativePackage.MAPPING_CALL__CONTEXT:
-				return getContext() != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
-import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.BasicEList;
@@ -19,8 +17,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -32,7 +28,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
-import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
@@ -45,7 +41,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getGuardPattern <em>Guard Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getBottomPattern <em>Bottom Pattern</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getMappingCall <em>Mapping Call</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingImpl#getMappingStatements <em>Mapping Statements</em>}</li>
  * </ul>
  * </p>
  *
@@ -73,14 +69,14 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	protected BottomPattern bottomPattern;
 
 	/**
-	 * The cached value of the '{@link #getMappingCall() <em>Mapping Call</em>}' containment reference list.
+	 * The cached value of the '{@link #getMappingStatements() <em>Mapping Statements</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMappingCall()
+	 * @see #getMappingStatements()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<MappingCall> mappingCall;
+	protected MappingStatement mappingStatements;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -192,11 +188,43 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<MappingCall> getMappingCall() {
-		if (mappingCall == null) {
-			mappingCall = new EObjectContainmentWithInverseEList<MappingCall>(MappingCall.class, this, QVTimperativePackage.MAPPING__MAPPING_CALL, QVTimperativePackage.MAPPING_CALL__CONTEXT);
+	@SuppressWarnings("null")
+	public @NonNull MappingStatement getMappingStatements() {
+		return mappingStatements;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetMappingStatements(MappingStatement newMappingStatements, NotificationChain msgs) {
+		MappingStatement oldMappingStatements = mappingStatements;
+		mappingStatements = newMappingStatements;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING__MAPPING_STATEMENTS, oldMappingStatements, newMappingStatements);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
-		return mappingCall;
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setMappingStatements(MappingStatement newMappingStatements) {
+		if (newMappingStatements != mappingStatements) {
+			NotificationChain msgs = null;
+			if (mappingStatements != null)
+				msgs = ((InternalEObject)mappingStatements).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.MAPPING__MAPPING_STATEMENTS, null, msgs);
+			if (newMappingStatements != null)
+				msgs = ((InternalEObject)newMappingStatements).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.MAPPING__MAPPING_STATEMENTS, null, msgs);
+			msgs = basicSetMappingStatements(newMappingStatements, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING__MAPPING_STATEMENTS, newMappingStatements, newMappingStatements));
 	}
 
 	/**
@@ -226,7 +254,6 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -238,8 +265,6 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				if (bottomPattern != null)
 					msgs = ((InternalEObject)bottomPattern).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativePackage.MAPPING__BOTTOM_PATTERN, null, msgs);
 				return basicSetBottomPattern((BottomPattern)otherEnd, msgs);
-			case QVTimperativePackage.MAPPING__MAPPING_CALL:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getMappingCall()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -256,8 +281,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				return basicSetGuardPattern(null, msgs);
 			case QVTimperativePackage.MAPPING__BOTTOM_PATTERN:
 				return basicSetBottomPattern(null, msgs);
-			case QVTimperativePackage.MAPPING__MAPPING_CALL:
-				return ((InternalEList<?>)getMappingCall()).basicRemove(otherEnd, msgs);
+			case QVTimperativePackage.MAPPING__MAPPING_STATEMENTS:
+				return basicSetMappingStatements(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -274,8 +299,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				return getGuardPattern();
 			case QVTimperativePackage.MAPPING__BOTTOM_PATTERN:
 				return getBottomPattern();
-			case QVTimperativePackage.MAPPING__MAPPING_CALL:
-				return getMappingCall();
+			case QVTimperativePackage.MAPPING__MAPPING_STATEMENTS:
+				return getMappingStatements();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -285,7 +310,6 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -295,9 +319,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			case QVTimperativePackage.MAPPING__BOTTOM_PATTERN:
 				setBottomPattern((BottomPattern)newValue);
 				return;
-			case QVTimperativePackage.MAPPING__MAPPING_CALL:
-				getMappingCall().clear();
-				getMappingCall().addAll((Collection<? extends MappingCall>)newValue);
+			case QVTimperativePackage.MAPPING__MAPPING_STATEMENTS:
+				setMappingStatements((MappingStatement)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -317,8 +340,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 			case QVTimperativePackage.MAPPING__BOTTOM_PATTERN:
 				setBottomPattern((BottomPattern)null);
 				return;
-			case QVTimperativePackage.MAPPING__MAPPING_CALL:
-				getMappingCall().clear();
+			case QVTimperativePackage.MAPPING__MAPPING_STATEMENTS:
+				setMappingStatements((MappingStatement)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -336,8 +359,8 @@ public class MappingImpl extends RuleImpl implements Mapping {
 				return guardPattern != null;
 			case QVTimperativePackage.MAPPING__BOTTOM_PATTERN:
 				return bottomPattern != null;
-			case QVTimperativePackage.MAPPING__MAPPING_CALL:
-				return mappingCall != null && !mappingCall.isEmpty();
+			case QVTimperativePackage.MAPPING__MAPPING_STATEMENTS:
+				return mappingStatements != null;
 		}
 		return super.eIsSet(featureID);
 	}

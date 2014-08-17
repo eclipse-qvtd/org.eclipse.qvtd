@@ -28,6 +28,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
@@ -91,9 +94,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 		}
 		context.append("where");
 		doArea(pMapping);
-		for (MappingCall pMappingCall : pMapping.getMappingCall()) {
-			safeVisit(pMappingCall);
-		}
+		safeVisit(pMapping.getMappingStatements());
 		context.pop();
 		context.append("\n}");
 		return null;
@@ -112,12 +113,36 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 		return null;
 	}
 
-	public Object visitMappingCallBinding(@NonNull MappingCallBinding bMappingCallBinding) {
-		context.appendName(bMappingCallBinding.getBoundVariable());
-		context.append(bMappingCallBinding.isIsLoop() ? " <= " : " := ");
-		safeVisit(bMappingCallBinding.getValue());
+	public Object visitMappingCallBinding(@NonNull MappingCallBinding pMappingCallBinding) {
+		context.appendName(pMappingCallBinding.getBoundVariable());
+		context.append(" := ");
+		safeVisit(pMappingCallBinding.getValue());
 		context.append(";\n");
 		return null;
+	}
+
+	public Object visitMappingLoop(@NonNull MappingLoop pMappingLoop) {
+		context.append("for ");
+		context.appendElement(pMappingLoop.getIterator().get(0));
+		context.append(" in ");
+		context.appendElement(pMappingLoop.getSource());
+		context.append(" {\n");
+		context.push("", "");
+		safeVisit(pMappingLoop.getBody());
+		context.append("}");
+		context.pop();
+		return null;
+	}
+
+	public Object visitMappingSequence(@NonNull MappingSequence pMappingSequence) {
+		for (MappingStatement pMappingStatement : pMappingSequence.getMappingStatements()) {
+			safeVisit(pMappingStatement);
+		}
+		return null;
+	}
+
+	public Object visitMappingStatement(@NonNull MappingStatement object) {
+		return visiting(object);
 	}
 
 	public Object visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment object) {
@@ -152,8 +177,15 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 
 	@Override
 	public Object visitVariable(@NonNull Variable pVariable) {
-		super.visitVariable(pVariable);
-		context.append(";\n");
+		if (pVariable.eContainer() instanceof MappingLoop) {
+			context.appendName(pVariable);
+			context.append(" : ");
+			context.appendElement(pVariable.getType());
+		}
+		else {
+			super.visitVariable(pVariable);
+			context.append(";\n");
+		}
 		return null;
 	}
 

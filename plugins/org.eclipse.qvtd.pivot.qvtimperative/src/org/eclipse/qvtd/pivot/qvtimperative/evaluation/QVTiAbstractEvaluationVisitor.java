@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -50,6 +49,9 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
@@ -87,44 +89,6 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
     @Override
 	public abstract @NonNull QVTiEvaluationVisitor createNestedEvaluator();
 
-    /**
-     * Do mapping call recursion. Perform the recursion for the BoundVariable
-     * that loops over the Iterables at depth in the loopedVariables and 
-     * loopedValues. The recursion proceeds to greater depths and once all
-     * depths are exhausted invokes the mapping. 
-     *
-     * @param mapping the mapping
-     * @param loopedVariables the looped variables
-     * @param loopedValues the looped values
-     * @param depth the depth
-     */
-    private void doMappingCallRecursion(@NonNull Mapping mapping,
-    		@NonNull List<Variable> loopedVariables, @NonNull List<Iterable<?>> loopedValues, int depth) {
-		assert depth < loopedVariables.size();
-		//EvaluationEnvironment nestedEvaluationEnvironment = ((EvaluationVisitor) nestedEvaluator).getEvaluationEnvironment();
-		Variable boundVariable = loopedVariables.get(depth);
-		Type guardType = boundVariable.getType();
-		PivotIdResolver idResolver = metaModelManager.getIdResolver();
-		int nestedDepth = depth+1;
-		//Mapping invokeMapping = nestedDepth >= loopedVariables.size() ? mapping : null;
-//		Map.Entry<DomainTypedElement, Object> entry = nestedEvaluationEnvironment.getEntry(boundVariable);
-		for (Object value : loopedValues.get(depth)) {
-//			entry.setValue(value);
-			DomainType valueType = idResolver.getDynamicTypeOf(value);
-			if ((guardType != null) && valueType.conformsTo(metaModelManager, guardType)) {
-				//nestedEvaluationEnvironment.replace(boundVariable, value);
-				getEvaluationEnvironment().replace(boundVariable, value);
-				if (nestedDepth >= loopedVariables.size()) {
-					mapping.accept(undecoratedVisitor);
-					//nestedEvaluator.safeVisit(invokeMapping);
-				}
-				else {
-					doMappingCallRecursion(mapping, loopedVariables, loopedValues, nestedDepth);				
-				}
-			}
-		}
-	}
-
     @Override
 	public @NonNull QVTiEnvironment getEnvironment() {
 		return (QVTiEnvironment) super.getEnvironment();
@@ -149,7 +113,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
      *
      * @param mapping the mapping
      * @return true, if is m to r mapping
-     */
+     *
     protected boolean isMtoRMapping(@NonNull Mapping mapping) {
         if (mapping.getDomain().size() == 0) {
             return false;
@@ -160,20 +124,20 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
             }
         }
         return true;
-    }
+    } */
     
     /**
      * Checks if is middle to middle mapping.
      *
      * @param mapping the mapping
      * @return true, if is middle to middle mapping
-     */
+     *
     protected boolean isMtoMMapping(@NonNull Mapping mapping) {
         if (mapping.getDomain().size() == 0) {
             return true;
         }
         return false;
-    }
+    } */
 
     /**
      * Checks if the mapping is a left to middle mapping. Left to middle mappings
@@ -181,7 +145,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
      *
      * @param mapping the mapping
      * @return true, if is left to middle mapping
-     */
+     *
     protected boolean isLtoMMapping(@NonNull Mapping mapping) {
         if (mapping.getDomain().size() == 0) {
             return false;
@@ -192,7 +156,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
             }
         }
         return true;
-    }
+    } */
 
     /* (non-Javadoc)
      * @see org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor#visitAssignment(org.eclipse.qvtd.pivot.qvtcorebase.Assignment)
@@ -292,8 +256,8 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 		//	Initialise nested environment directly with the bound values for non-looped bindings,
 		//	and build matching lists of boundVariables and boundIterables for looped bindings. 
 		//
-		List<Variable> loopedVariables = null;
-		List<Iterable<?>> loopedValues = null;
+//		List<Variable> loopedVariables = null;
+//		List<Iterable<?>> loopedValues = null;
 		for (MappingCallBinding binding : mappingCall.getBinding()) {
 			Variable boundVariable = DomainUtil.nonNullModel(binding.getBoundVariable());
 			Object valueOrValues = null;
@@ -304,53 +268,16 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 				// evaluating the binding value
 				return null;
 			}
-			if (!binding.isIsLoop()) {
-				DomainType valueType = metaModelManager.getIdResolver().getDynamicTypeOf(valueOrValues);
-				Type varType = boundVariable.getType();
-				if ((varType != null) && valueType.conformsTo(metaModelManager, varType)) {
-					//nv.getEvaluationEnvironment().add(boundVariable, valueOrValues);
-					try {
-						evaluationEnvironment.add(boundVariable, valueOrValues);
-					} catch (IllegalArgumentException ex) {
-						evaluationEnvironment.replace(boundVariable, valueOrValues);
-					}
-				}
-				else {
-					return null;		
-				}
+			DomainType valueType = metaModelManager.getIdResolver().getDynamicTypeOf(valueOrValues);
+			Type varType = boundVariable.getType();
+			if ((varType != null) && valueType.conformsTo(metaModelManager, varType)) {
+				evaluationEnvironment.replace(boundVariable, valueOrValues);
 			}
-			else if (valueOrValues instanceof Iterable<?>) {
-				if (loopedVariables == null) {
-					loopedVariables = new ArrayList<Variable>();
-				}
-				if (loopedValues == null) {
-					loopedValues = new ArrayList<Iterable<?>>();
-				}
-				
-				
-				loopedVariables.add(boundVariable);
-				loopedValues.add((Iterable<?>)valueOrValues);
-				//nv.getEvaluationEnvironment().add(boundVariable, null);
-				try {
-					evaluationEnvironment.add(boundVariable, null);
-				} catch (IllegalArgumentException ex) {
-					evaluationEnvironment.replace(boundVariable, null);
-				}
-			} 
 			else {
-				// FIXME Error message;
+				return null;		
 			}
     	}
-		//
-		//	In the absence of any looped bindings invoke the nested mapping directly,
-		//	otherwise recurse over the boundVariables that need to loop.
-		//
-		if ((loopedValues == null) || (loopedVariables == null)) {
-			calledMapping.accept(undecoratedVisitor);
-		}
-		else {
-			doMappingCallRecursion(calledMapping, loopedVariables, loopedValues, 0);
-		}
+		calledMapping.accept(undecoratedVisitor);
     	return null;
     }
 
@@ -360,6 +287,43 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	public @Nullable Object visitMappingCallBinding(@NonNull MappingCallBinding object) {
 		return visiting(object);	// MappingCallBinding is serviced by the parent MappingCall
     }
+
+	public @Nullable Object visitMappingLoop(@NonNull MappingLoop mappingLoop) {
+		Object inValues = mappingLoop.getSource().accept(undecoratedVisitor);
+		if (inValues instanceof Iterable<?>) {
+			List<Variable> iterators = mappingLoop.getIterator();
+			if (iterators.size() > 0) {
+				Variable iterator = DomainUtil.nonNullState(iterators.get(0));
+				for (Object object : (Iterable<?>)inValues) {
+					getEvaluationEnvironment().replace(iterator, object);
+					mappingLoop.getBody().accept(undecoratedVisitor);
+				}
+			}
+		}
+		return true;
+	}
+
+	public @Nullable Object visitMappingSequence(@NonNull MappingSequence mappingSequence) {
+		for (MappingStatement mappingStatement : mappingSequence.getMappingStatements()) {
+			QVTiEvaluationVisitor nv = ((QVTiEvaluationVisitor) undecoratedVisitor).createNestedEvaluator();
+			// The Undecorated visitor createNestedEvaluator should return the undecorated, so no need
+			// to call the getUndecoratedVisitor.
+			try {
+				mappingStatement.accept(nv);
+			}
+			finally {
+				nv.dispose();
+			}
+		}
+		return true;
+	}
+
+	protected void doMappingStatements(@NonNull List<MappingStatement> mappingStatements) {
+	}
+
+	public @Nullable Object visitMappingStatement(@NonNull MappingStatement object) {
+		return visiting(object);	// MappingStatement is abstract
+	}
     
     /* (non-Javadoc)
      * @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitMiddlePropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment)

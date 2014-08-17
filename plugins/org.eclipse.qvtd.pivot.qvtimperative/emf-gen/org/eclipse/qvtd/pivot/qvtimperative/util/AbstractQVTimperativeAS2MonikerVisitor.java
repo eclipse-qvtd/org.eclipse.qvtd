@@ -52,11 +52,23 @@ public abstract class AbstractQVTimperativeAS2MonikerVisitor
 	}
 
 	public @Nullable Object visitMappingCall(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingCall object) {
-		return visitOCLExpression(object);
+		return visitMappingStatement(object);
 	}
 
 	public @Nullable Object visitMappingCallBinding(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding object) {
 		return visitElement(object);
+	}
+
+	public @Nullable Object visitMappingLoop(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingLoop object) {
+		return visitLoopExp(object);
+	}
+
+	public @Nullable Object visitMappingSequence(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingSequence object) {
+		return visitMappingStatement(object);
+	}
+
+	public @Nullable Object visitMappingStatement(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingStatement object) {
+		return visitOCLExpression(object);
 	}
 
 	public @Nullable Object visitMiddlePropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment object) {
