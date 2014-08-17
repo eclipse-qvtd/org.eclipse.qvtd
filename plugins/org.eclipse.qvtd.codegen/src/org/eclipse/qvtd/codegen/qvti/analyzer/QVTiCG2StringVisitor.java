@@ -26,11 +26,13 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate;
@@ -114,13 +116,17 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 
 	public @Nullable String visitCGMappingCallBinding(@NonNull CGMappingCallBinding cgMappingCallBinding) {
 		appendName(cgMappingCallBinding);
-		append(cgMappingCallBinding.isLoop() ? " <= " : " := ");
-		safeVisit(cgMappingCallBinding.getValueOrValues());
+		append(" := ");
+		safeVisit(cgMappingCallBinding.getValue());
 		return null;
 	}
 
 	public @Nullable String visitCGMappingExp(@NonNull CGMappingExp object) {
 		return visitCGValuedElement(object);
+	}
+
+	public @Nullable String visitCGMappingLoop(@NonNull CGMappingLoop object) {
+		return visitCGIterationCallExp(object);
 	}
 
 	public @Nullable String visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment object) {
@@ -149,6 +155,10 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 
 	public @Nullable String visitCGRealizedVariable(@NonNull CGRealizedVariable object) {
 		return visitCGVariable(object);
+	}
+
+	public @Nullable String visitCGSequence(@NonNull CGSequence object) {
+		return visitCGValuedElement(object);
 	}
 
 	public @Nullable String visitCGTransformation(@NonNull CGTransformation object) {

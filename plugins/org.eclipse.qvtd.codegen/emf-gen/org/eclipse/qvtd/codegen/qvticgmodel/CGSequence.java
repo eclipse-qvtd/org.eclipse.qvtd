@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 E.D.Willink and others.
+ * Copyright (c) 2014 E.D.Willink and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -16,35 +16,35 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>CG Mapping Call</b></em>'.
+ * A representation of the model object '<em><b>CG Sequence</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall#getMappingCallBindings <em>Mapping Call Bindings</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGSequence#getStatements <em>Statements</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMappingCall()
+ * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGSequence()
  * @model
  * @generated
  */
-public interface CGMappingCall extends CGValuedElement {
-
+public interface CGSequence extends CGValuedElement {
 	/**
-	 * Returns the value of the '<em><b>Mapping Call Bindings</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding}.
+	 * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Mapping Call Bindings</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Statements</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mapping Call Bindings</em>' containment reference list.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMappingCall_MappingCallBindings()
+	 * @return the value of the '<em>Statements</em>' containment reference list.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGSequence_Statements()
 	 * @model containment="true"
 	 * @generated
 	 */
-	List<CGMappingCallBinding> getMappingCallBindings();
-} // CGMappingCall
+	List<CGValuedElement> getStatements();
+
+} // CGSequence

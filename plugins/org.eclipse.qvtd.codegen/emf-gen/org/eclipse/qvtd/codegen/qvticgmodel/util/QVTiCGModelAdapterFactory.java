@@ -18,6 +18,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCallable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
@@ -142,6 +143,10 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGMappingExpAdapter();
 			}
 			@Override
+			public Adapter caseCGMappingLoop(CGMappingLoop object) {
+				return createCGMappingLoopAdapter();
+			}
+			@Override
 			public Adapter caseCGMiddlePropertyAssignment(CGMiddlePropertyAssignment object) {
 				return createCGMiddlePropertyAssignmentAdapter();
 			}
@@ -160,6 +165,10 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCGRealizedVariable(CGRealizedVariable object) {
 				return createCGRealizedVariableAdapter();
+			}
+			@Override
+			public Adapter caseCGSequence(CGSequence object) {
+				return createCGSequenceAdapter();
 			}
 			@Override
 			public Adapter caseCGTransformation(CGTransformation object) {
@@ -216,6 +225,10 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCGParameter(CGParameter object) {
 				return createCGParameterAdapter();
+			}
+			@Override
+			public Adapter caseCGIterationCallExp(CGIterationCallExp object) {
+				return createCGIterationCallExpAdapter();
 			}
 			@Override
 			public Adapter caseCGNavigationCallExp(CGNavigationCallExp object) {
@@ -446,6 +459,20 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop <em>CG Mapping Loop</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop
+	 * @generated
+	 */
+	public Adapter createCGMappingLoopAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment <em>CG Middle Property Assignment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -498,6 +525,20 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGRealizedVariableAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGSequence <em>CG Sequence</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGSequence
+	 * @generated
+	 */
+	public Adapter createCGSequenceAdapter() {
 		return null;
 	}
 
@@ -624,6 +665,20 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGParameterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp <em>CG Iteration Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp
+	 * @generated
+	 */
+	public Adapter createCGIterationCallExpAdapter() {
 		return null;
 	}
 

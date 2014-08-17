@@ -158,6 +158,15 @@ public interface QVTiCGModelFactory extends EFactory {
 	@NonNull CGMappingExp createCGMappingExp();
 
 	/**
+	 * Returns a new object of class '<em>CG Mapping Loop</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>CG Mapping Loop</em>'.
+	 * @generated
+	 */
+	CGMappingLoop createCGMappingLoop();
+
+	/**
 	 * Returns a new object of class '<em>CG Middle Property Assignment</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -192,6 +201,15 @@ public interface QVTiCGModelFactory extends EFactory {
 	 * @generated
 	 */
 	@NonNull CGRealizedVariable createCGRealizedVariable();
+
+	/**
+	 * Returns a new object of class '<em>CG Sequence</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>CG Sequence</em>'.
+	 * @generated
+	 */
+	CGSequence createCGSequence();
 
 	/**
 	 * Returns the package supported by this factory.

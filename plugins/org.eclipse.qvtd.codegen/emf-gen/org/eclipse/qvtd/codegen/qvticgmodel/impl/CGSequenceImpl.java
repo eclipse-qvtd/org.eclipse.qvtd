@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2013 E.D.Willink and others.
+ * Copyright (c) 2014 E.D.Willink and others.
  * All rights reserved.   This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,50 +10,63 @@
  *******************************************************************************/
 package org.eclipse.qvtd.codegen.qvticgmodel.impl;
 
-import org.eclipse.emf.common.notify.Notification;
+import java.util.Collection;
+import java.util.List;
+
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGValuedElementImpl;
+
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
+
+import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
+
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>CG Mapping Call Binding</b></em>'.
+ * An implementation of the model object '<em><b>CG Sequence</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingCallBindingImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGSequenceImpl#getStatements <em>Statements</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGMappingCallBinding {
+public class CGSequenceImpl extends CGValuedElementImpl implements CGSequence {
 	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
+	 * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getStatements()
 	 * @generated
 	 * @ordered
 	 */
-	protected CGValuedElement value;
+	protected EList<CGValuedElement> statements;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected CGMappingCallBindingImpl() {
+	protected CGSequenceImpl() {
 		super();
 	}
 
@@ -64,7 +77,7 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return QVTiCGModelPackage.Literals.CG_MAPPING_CALL_BINDING;
+		return QVTiCGModelPackage.Literals.CG_SEQUENCE;
 	}
 
 	/**
@@ -72,42 +85,11 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CGValuedElement getValue() {
-		return value;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetValue(CGValuedElement newValue, NotificationChain msgs) {
-		CGValuedElement oldValue = value;
-		value = newValue;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE, oldValue, newValue);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+	public List<CGValuedElement> getStatements() {
+		if (statements == null) {
+			statements = new EObjectContainmentEList<CGValuedElement>(CGValuedElement.class, this, QVTiCGModelPackage.CG_SEQUENCE__STATEMENTS);
 		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setValue(CGValuedElement newValue) {
-		if (newValue != value) {
-			NotificationChain msgs = null;
-			if (value != null)
-				msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE, null, msgs);
-			if (newValue != null)
-				msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE, null, msgs);
-			msgs = basicSetValue(newValue, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE, newValue, newValue));
+		return statements;
 	}
 
 	/**
@@ -118,8 +100,8 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE:
-				return basicSetValue(null, msgs);
+			case QVTiCGModelPackage.CG_SEQUENCE__STATEMENTS:
+				return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -132,8 +114,8 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE:
-				return getValue();
+			case QVTiCGModelPackage.CG_SEQUENCE__STATEMENTS:
+				return getStatements();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -143,11 +125,13 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE:
-				setValue((CGValuedElement)newValue);
+			case QVTiCGModelPackage.CG_SEQUENCE__STATEMENTS:
+				getStatements().clear();
+				getStatements().addAll((Collection<? extends CGValuedElement>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -161,8 +145,8 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE:
-				setValue((CGValuedElement)null);
+			case QVTiCGModelPackage.CG_SEQUENCE__STATEMENTS:
+				getStatements().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -176,8 +160,8 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTiCGModelPackage.CG_MAPPING_CALL_BINDING__VALUE:
-				return value != null;
+			case QVTiCGModelPackage.CG_SEQUENCE__STATEMENTS:
+				return statements != null && !statements.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -189,25 +173,7 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	@SuppressWarnings("unchecked")
 	@Override
 	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGMappingCallBinding(this);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isBoxed() {
-		return (value != null) && value.isBoxed();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isCommonable() {
-		return false;
+		return (R) ((QVTiCGModelVisitor<?>)visitor).visitCGSequence(this);
 	}
 
 	/**
@@ -223,22 +189,4 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isGlobal() {
-		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * @generated
-	 */
-	@Override
-	public boolean isUnboxed() {
-		return (value != null) && value.isUnboxed();
-	}
-
-} //CGMappingCallBindingImpl
+} //CGSequenceImpl

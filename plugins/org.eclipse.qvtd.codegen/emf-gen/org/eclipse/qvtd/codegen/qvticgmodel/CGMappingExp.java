@@ -24,9 +24,9 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getAssignments <em>Assignments</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getMapping <em>Mapping</em>}</li>
- *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getMappingCalls <em>Mapping Calls</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getPredicates <em>Predicates</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getRealizedVariables <em>Realized Variables</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getBody <em>Body</em>}</li>
  * </ul>
  * </p>
  *
@@ -80,24 +80,6 @@ public interface CGMappingExp extends CGValuedElement {
 	void setMapping(CGMapping value);
 
 	/**
-	 * Returns the value of the '<em><b>Mapping Calls</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall#getMappingExp <em>Mapping Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Mapping Calls</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mapping Calls</em>' containment reference list.
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMappingExp_MappingCalls()
-	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall#getMappingExp
-	 * @model opposite="mappingExp" containment="true"
-	 * @generated
-	 */
-	List<CGMappingCall> getMappingCalls();
-
-	/**
 	 * Returns the value of the '<em><b>Predicates</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate}.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate#getMappingExp <em>Mapping Exp</em>}'.
@@ -130,5 +112,31 @@ public interface CGMappingExp extends CGValuedElement {
 	 * @generated
 	 */
 	List<CGValuedElement> getRealizedVariables();
+
+	/**
+	 * Returns the value of the '<em><b>Body</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Body</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Body</em>' containment reference.
+	 * @see #setBody(CGValuedElement)
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMappingExp_Body()
+	 * @model containment="true"
+	 * @generated
+	 */
+	CGValuedElement getBody();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp#getBody <em>Body</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Body</em>' containment reference.
+	 * @see #getBody()
+	 * @generated
+	 */
+	void setBody(CGValuedElement value);
 
 } // CGMappingExp

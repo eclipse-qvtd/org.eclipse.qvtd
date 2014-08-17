@@ -17,6 +17,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGCallable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
@@ -220,6 +221,19 @@ public class QVTiCGModelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case QVTiCGModelPackage.CG_MAPPING_LOOP: {
+				CGMappingLoop cgMappingLoop = (CGMappingLoop)theEObject;
+				T result = caseCGMappingLoop(cgMappingLoop);
+				if (result == null) result = caseCGIterationCallExp(cgMappingLoop);
+				if (result == null) result = caseCGCallExp(cgMappingLoop);
+				if (result == null) result = caseCGValuedElement(cgMappingLoop);
+				if (result == null) result = caseCGTypedElement(cgMappingLoop);
+				if (result == null) result = caseCGNamedElement(cgMappingLoop);
+				if (result == null) result = caseCGElement(cgMappingLoop);
+				if (result == null) result = caseNameable(cgMappingLoop);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTiCGModelPackage.CG_MIDDLE_PROPERTY_ASSIGNMENT: {
 				CGMiddlePropertyAssignment cgMiddlePropertyAssignment = (CGMiddlePropertyAssignment)theEObject;
 				T result = caseCGMiddlePropertyAssignment(cgMiddlePropertyAssignment);
@@ -278,6 +292,17 @@ public class QVTiCGModelSwitch<T> extends Switch<T> {
 				if (result == null) result = caseCGNamedElement(cgRealizedVariable);
 				if (result == null) result = caseCGElement(cgRealizedVariable);
 				if (result == null) result = caseNameable(cgRealizedVariable);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTiCGModelPackage.CG_SEQUENCE: {
+				CGSequence cgSequence = (CGSequence)theEObject;
+				T result = caseCGSequence(cgSequence);
+				if (result == null) result = caseCGValuedElement(cgSequence);
+				if (result == null) result = caseCGTypedElement(cgSequence);
+				if (result == null) result = caseCGNamedElement(cgSequence);
+				if (result == null) result = caseCGElement(cgSequence);
+				if (result == null) result = caseNameable(cgSequence);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -527,6 +552,21 @@ public class QVTiCGModelSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Mapping Loop</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Mapping Loop</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGMappingLoop(CGMappingLoop object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>CG Middle Property Assignment</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -583,6 +623,21 @@ public class QVTiCGModelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCGRealizedVariable(CGRealizedVariable object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Sequence</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Sequence</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGSequence(CGSequence object) {
 		return null;
 	}
 
@@ -718,6 +773,21 @@ public class QVTiCGModelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCGParameter(CGParameter object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Iteration Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Iteration Call Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGIterationCallExp(CGIterationCallExp object) {
 		return null;
 	}
 
