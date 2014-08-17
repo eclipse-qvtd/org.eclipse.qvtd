@@ -1,5 +1,5 @@
 /*******************************************************************************
- * «codeGenHelper.getCopyright(' * ')»
+ * Â«codeGenHelper.getCopyright(' * ')Â»
  *
  * This code is 100% auto-generated
  * using: org.eclipse.ocl.examples.codegen.java.JavaStream
@@ -152,17 +152,17 @@ public class umlRdbms extends AbstractTransformation
         return true;
     }
     
-    protected @NonNull List<Class> getAllSupers(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator_0, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable /*@NonInvalid*/ Class cls) {
+    protected @NonNull List<Class> getAllSupers(final @Nullable /*@NonInvalid*/ Class cls) {
         @SuppressWarnings("null")@NonNull List<Class> emptyList = Collections.emptyList();
         return emptyList;
     }
     
-    protected @NonNull List<Attribute> getAllAttributes(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator_0, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable /*@NonInvalid*/ Class cls_0) {
+    protected @NonNull List<Attribute> getAllAttributes(final @Nullable /*@NonInvalid*/ Class cls_0) {
         @SuppressWarnings("null")@NonNull List<Attribute> emptyList = Collections.emptyList();
         return emptyList;
     }
     
-    protected @NonNull List<Association> getAllForwards(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator_0, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable /*@NonInvalid*/ Class cls_1) {
+    protected @NonNull List<Association> getAllForwards(final @Nullable /*@NonInvalid*/ Class cls_1) {
         @SuppressWarnings("null")@NonNull List<Association> emptyList = Collections.emptyList();
         return emptyList;
     }
@@ -1372,7 +1372,7 @@ public class umlRdbms extends AbstractTransformation
         try {
             // predicates
             final @Nullable /*@Thrown*/ ClassToTable ClassToTable = DomainUtil.nonNullState (OPPOSITE_OF_ClassToTable_table.get(dt));
-            final @Nullable /*@Thrown*/ ClassToTable dc2t = ClassToTable;
+            final @NonNull /*@NonInvalid*/ ClassToTable dc2t = ClassToTable;
             final @Nullable /*@Thrown*/ Schema schema = p2s_10.getSchema();
             final /*@Thrown*/ boolean eq = s_0.equals(schema);
             if (!eq) {
@@ -1384,14 +1384,14 @@ public class umlRdbms extends AbstractTransformation
                 return false;
             }
             final @Nullable /*@Thrown*/ ClassToTable ClassToTable_0 = DomainUtil.nonNullState (OPPOSITE_OF_ClassToTable_table.get(st));
-            final @Nullable /*@Thrown*/ ClassToTable sc2t = ClassToTable_0;
+            final @NonNull /*@NonInvalid*/ ClassToTable sc2t = ClassToTable_0;
             final @Nullable /*@Thrown*/ ClassToTable owner = a2f.getOwner();
-            final /*@Thrown*/ boolean eq_1 = (owner != null) ? owner.equals(sc2t) : (sc2t == null);
+            final /*@Thrown*/ boolean eq_1 = sc2t.equals(owner);
             if (!eq_1) {
                 return false;
             }
             final @Nullable /*@Thrown*/ ClassToTable referenced = a2f.getReferenced();
-            final /*@Thrown*/ boolean eq_2 = (referenced != null) ? referenced.equals(dc2t) : (dc2t == null);
+            final /*@Thrown*/ boolean eq_2 = dc2t.equals(referenced);
             if (!eq_2) {
                 return false;
             }

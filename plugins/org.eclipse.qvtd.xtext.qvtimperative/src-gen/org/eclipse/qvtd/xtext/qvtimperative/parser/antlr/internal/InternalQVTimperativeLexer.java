@@ -3115,8 +3115,7 @@ public class InternalQVTimperativeLexer extends Lexer {
             "\1\u0107",
             "\1\u0108",
             "",
-            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\22\71\1\u0109\7"+
-            "\71",
+            "\12\71\7\uffff\32\71\4\uffff\1\71\1\uffff\22\71\1\u0109\7\71",
             "\1\u010b",
             "\1\u010c",
             "",

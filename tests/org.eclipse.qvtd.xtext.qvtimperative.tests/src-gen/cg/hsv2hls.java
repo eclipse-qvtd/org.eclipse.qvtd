@@ -1,5 +1,5 @@
 /*******************************************************************************
- * «codeGenHelper.getCopyright(' * ')»
+ * Â«codeGenHelper.getCopyright(' * ')Â»
  *
  * This code is 100% auto-generated
  * using: org.eclipse.ocl.examples.codegen.java.JavaStream
@@ -73,19 +73,19 @@ public class hsv2hls extends AbstractTransformation
         return true;
     }
     
-    protected @NonNull String hls2rgb(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator_0, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable /*@NonInvalid*/ String color) {
+    protected @NonNull String hls2rgb(final @Nullable /*@NonInvalid*/ String color) {
         return "";
     }
     
-    protected @NonNull String hsv2rgb(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator_0, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable /*@NonInvalid*/ String color_0) {
+    protected @NonNull String hsv2rgb(final @Nullable /*@NonInvalid*/ String color_0) {
         return "";
     }
     
-    protected @NonNull String rgb2hls(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator_0, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable /*@NonInvalid*/ String color_1) {
+    protected @NonNull String rgb2hls(final @Nullable /*@NonInvalid*/ String color_1) {
         return "";
     }
     
-    protected @NonNull String rgb2hsv(final @NonNull /*@NonInvalid*/ DomainEvaluator evaluator_0, final @NonNull /*@NonInvalid*/ TypeId typeId, final @Nullable /*@NonInvalid*/ String color_2) {
+    protected @NonNull String rgb2hsv(final @Nullable /*@NonInvalid*/ String color_2) {
         return "";
     }
     

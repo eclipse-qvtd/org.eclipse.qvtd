@@ -16,20 +16,18 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
-import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.java.JavaConstants;
 import org.eclipse.ocl.examples.codegen.java.JavaGlobalContext;
-import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 import org.eclipse.ocl.examples.pivot.Property;
 
 /**
  * A QVTiGlobalContext maintains the Java-specific global context for generation of QVTi code.
  */
-public class QVTiGlobalContext extends JavaGlobalContext
+public class QVTiGlobalContext extends JavaGlobalContext<QVTiCodeGenerator>
 {
 	private /*@LazyNonNull*/ Map<Property, String> toMiddleProperties = null;
 
-	public QVTiGlobalContext(@NonNull JavaCodeGenerator codeGenerator) {
+	public QVTiGlobalContext(@NonNull QVTiCodeGenerator codeGenerator) {
 		super(codeGenerator);
 		nameManager.reserveName(JavaConstants.EVALUATOR_NAME, null);
 		nameManager.reserveName("modelObjects", null);
@@ -46,7 +44,7 @@ public class QVTiGlobalContext extends JavaGlobalContext
 	}
 	
 	@Override
-	protected @NonNull JavaLocalContext createNestedContext(@NonNull CGElement cgScope) {
+	protected @NonNull QVTiLocalContext createNestedContext(@NonNull CGElement cgScope) {
 		return new QVTiLocalContext(this, cgScope);
 	}
 
