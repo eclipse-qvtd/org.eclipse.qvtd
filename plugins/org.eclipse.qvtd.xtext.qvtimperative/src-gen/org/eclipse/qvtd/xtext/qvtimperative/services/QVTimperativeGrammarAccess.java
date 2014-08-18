@@ -293,7 +293,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MappingCallCS");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cMappingCallCSAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cMapKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cCallKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cReferredMappingAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final CrossReference cReferredMappingMappingCrossReference_2_0 = (CrossReference)cReferredMappingAssignment_2.eContents().get(0);
 		private final RuleCall cReferredMappingMappingUnrestrictedNameParserRuleCall_2_0_1 = (RuleCall)cReferredMappingMappingCrossReference_2_0.eContents().get(1);
@@ -303,18 +303,18 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//MappingCallCS:
-		//	{MappingCallCS} "map" referredMapping=[qvtimperative::Mapping|UnrestrictedName] "{" bindings+=MappingCallBindingCS*
+		//	{MappingCallCS} "call" referredMapping=[qvtimperative::Mapping|UnrestrictedName] "{" bindings+=MappingCallBindingCS*
 		//	"}";
 		public ParserRule getRule() { return rule; }
 
-		//{MappingCallCS} "map" referredMapping=[qvtimperative::Mapping|UnrestrictedName] "{" bindings+=MappingCallBindingCS* "}"
+		//{MappingCallCS} "call" referredMapping=[qvtimperative::Mapping|UnrestrictedName] "{" bindings+=MappingCallBindingCS* "}"
 		public Group getGroup() { return cGroup; }
 
 		//{MappingCallCS}
 		public Action getMappingCallCSAction_0() { return cMappingCallCSAction_0; }
 
-		//"map"
-		public Keyword getMapKeyword_1() { return cMapKeyword_1; }
+		//"call"
+		public Keyword getCallKeyword_1() { return cCallKeyword_1; }
 
 		//referredMapping=[qvtimperative::Mapping|UnrestrictedName]
 		public Assignment getReferredMappingAssignment_2() { return cReferredMappingAssignment_2; }
@@ -1001,7 +1001,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MappingCallCS:
-	//	{MappingCallCS} "map" referredMapping=[qvtimperative::Mapping|UnrestrictedName] "{" bindings+=MappingCallBindingCS*
+	//	{MappingCallCS} "call" referredMapping=[qvtimperative::Mapping|UnrestrictedName] "{" bindings+=MappingCallBindingCS*
 	//	"}";
 	public MappingCallCSElements getMappingCallCSAccess() {
 		return (pMappingCallCS != null) ? pMappingCallCS : (pMappingCallCS = new MappingCallCSElements());

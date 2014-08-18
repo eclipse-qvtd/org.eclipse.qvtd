@@ -4711,11 +4711,11 @@ rule__MappingCallCS__Group__1__Impl
     }
 :
 (
-{ before(grammarAccess.getMappingCallCSAccess().getMapKeyword_1()); }
+{ before(grammarAccess.getMappingCallCSAccess().getCallKeyword_1()); }
 
-	'map' 
+	'call' 
 
-{ after(grammarAccess.getMappingCallCSAccess().getMapKeyword_1()); }
+{ after(grammarAccess.getMappingCallCSAccess().getCallKeyword_1()); }
 )
 
 ;

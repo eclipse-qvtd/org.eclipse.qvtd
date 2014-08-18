@@ -500,9 +500,9 @@ ruleMappingCallCS returns [EObject current=null]
             grammarAccess.getMappingCallCSAccess().getMappingCallCSAction_0(),
             $current);
     }
-)	otherlv_1='map' 
+)	otherlv_1='call' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getMappingCallCSAccess().getMapKeyword_1());
+    	newLeafNode(otherlv_1, grammarAccess.getMappingCallCSAccess().getCallKeyword_1());
     }
 (
 (

@@ -23,29 +23,29 @@ map packageToSchemaLM in umlRdbms {
     
     -- PrimitiveDataType
     for child in p.elements {
-	    map integerToNumberLM {
+	    call integerToNumberLM {
 	        p := p;
 	        prim := child;
 	        p2s := p2s;
 	    }
-	    map booleanToBooleanLM {
+	    call booleanToBooleanLM {
 	        p := p;
 	        prim := child;
 	        p2s := p2s;
 	    }
-	    map stringToVarcharLM {
+	    call stringToVarcharLM {
 	        p := p;
 	        prim := child;
 	        p2s := p2s;
 	    }
 	    -- Class
-	    map classToTableLM {
+	    call classToTableLM {
 	        p := p;
 	        c := child;
 	        p2s := p2s;
 	    }
 	    -- Associations
-		    map associationToForeignKeyLM {
+		    call associationToForeignKeyLM {
 	        p := p;
 	        a := child;
 	        p2s := p2s;
@@ -56,7 +56,7 @@ map packageToSchemaLM in umlRdbms {
     
     
     /* M to R */
-    map packageToSchemaMR {
+    call packageToSchemaMR {
         p2s := p2s;
     }
     
@@ -70,26 +70,26 @@ map packageToSchemaMR in umlRdbms {
     where () {
         p2s.schema := s;
     }
-    map packageToSchemaMR_1 {
+    call packageToSchemaMR_1 {
         s_1 := s;
         p2s_1 := p2s;
     }
     for child in p2s.primitivesToNames {
-	    map integerToNumberMR {
+	    call integerToNumberMR {
 	        p2s := p2s;
 	        p2n := child;
 	    }
-	    map booleanToBooleanMR {
+	    call booleanToBooleanMR {
 	        p2s := p2s;
 	        p2n := child;
 	    }
-	    map stringToVarcharMR {
+	    call stringToVarcharMR {
 	        p2s := p2s;
 	        p2n := child;
 	    }
     }
     for child in p2s.classesToTables {
-	    map classToTableMR {
+	    call classToTableMR {
 	        p2s := p2s;
 	        c2t := child;
 	        s := s;
@@ -207,21 +207,21 @@ map classToTableLM in umlRdbms {
     }
     -- A Class has attributes
     for anAttribute in c.attributes {
-	    map classPrimitiveAttributesLM {
+	    call classPrimitiveAttributesLM {
 	        c := c;
 	        a := anAttribute;
 	        fao := c2t;
 	    }
-	    map classComplexAttributesLM {
+	    call classComplexAttributesLM {
 	        c := c;
 	        a := anAttribute;
 	        fao := c2t;
 	    }
-	    map complexAttributePrimitiveAttributesLM {
+	    call complexAttributePrimitiveAttributesLM {
 	        ca := anAttribute;
 	        c := anAttribute.type;
 	    }
-	    map complexAttributeComplexAttributesLM {
+	    call complexAttributeComplexAttributesLM {
 	        ca := anAttribute;
 	        c := anAttribute.type;
 	    }
@@ -239,16 +239,16 @@ map classToTableMR in umlRdbms {
         t.kind := 'base';
         t.schema := s;
     }
-    map classToTableMR_1 {
+    call classToTableMR_1 {
         c2t_1 := c2t;
         t_1 := t;
     }    
-    map classToTableMR_2 {
+    call classToTableMR_2 {
         t_2 := t;
         c2t_2 := c2t;
     }
-   for child in c2t.associationsToForeignKeys {
-	    map associationToForeignKeyMR {
+    for child in c2t.associationsToForeignKeys {
+	    call associationToForeignKeyMR {
 	        p2s := p2s;
 	        dt := t;
 	--        sc2t := c2t;
@@ -261,7 +261,7 @@ map classToTableMR in umlRdbms {
     }
     -- A Class has attributes
     for child in c2t.fromAttributes->union(c2t.fromAttributes->selectByKind(umltordbms::NonLeafAttribute).fromAttributes) {
-	    map attributeColumnsMR {
+	    call attributeColumnsMR {
 	        c2t := c2t;
 	        a2c := child;
 	        t := t;
@@ -291,12 +291,12 @@ map classToTableMR_2 in umlRdbms {
         pc.key := OrderedSet(Key){pk};
         pc.type := 'NUMBER';
     }
-    map classToTableMR_2_1 {
+    call classToTableMR_2_1 {
         c2t_2_1 := c2t_2;
         pk_2_1 := pk;
         pc_2_1 := pc; -- TODO Check this
     }
-    map classToTableMR_2_2 {
+    call classToTableMR_2_2 {
         pk_2_2 := pk;
         pc_2_2 := pc;
         t_2_2 := t_2;
@@ -378,13 +378,13 @@ map associationToForeignKeyMR in umlRdbms {
         fk.owner := st;
         fc.owner := st;
     }
-    map associationToForeignKeyMR_1 {
+    call associationToForeignKeyMR_1 {
         fk := fk;
         fc := fc;
         dt := a2f.referenced.table;
         rk := rk;
     }
-    map associationToForeignKeyMR_2 {
+    call associationToForeignKeyMR_2 {
         a2f_1 := a2f;
         fk_1 := fk;
         fc_1 := fc;
@@ -463,7 +463,7 @@ map complexAttributePrimitiveAttributesLM in umlRdbms {
         fao := ca.FromAttribute;
     ) {}
     for anAttribute in c.attributes {
-	    map complexAttributePrimitiveAttributesLM_1 {
+	    call complexAttributePrimitiveAttributesLM_1 {
 	        c_1 := c;
 	        ca_1 := ca;
 	        fao_1 := fao;
@@ -503,7 +503,7 @@ map complexAttributeComplexAttributesLM in umlRdbms {
         fao := ca.FromAttribute;
     ) {}
     for anAttribute in c.attributes {
-    	map complexAttributeComplexAttributesLM_1 {
+    	call complexAttributeComplexAttributesLM_1 {
 	        ca_1 := ca;
 	        a_1 := anAttribute;
 	        c_1 := c;
@@ -547,17 +547,17 @@ map attributeColumnsMR in umlRdbms {
     ) {
         c.owner := t;
     }
-    map attributeColumnsMR_1 {
+    call attributeColumnsMR_1 {
         a2c_1 := a2c;
         c_1 := c;
     }
-    map attributeColumnsMR_2 {
+    call attributeColumnsMR_2 {
      	a2c_2 := a2c;
     	c_2 := c;
         p2n_2 := p2n;
         ct_2 := ct;
     }
-    map attributeColumnsMR_3 {
+    call attributeColumnsMR_3 {
         c_3 := c;
         a2c_3 := a2c;
     }
@@ -579,7 +579,7 @@ map attributeColumnsMR_2 in umlRdbms {
     ) {
         c_2.type := ct_2;
     }
-    map attributeColumnsMR_2_1 {
+    call attributeColumnsMR_2_1 {
         p2n_2_1 := p2n_2;
         ct_2_1 := ct_2;
     }
