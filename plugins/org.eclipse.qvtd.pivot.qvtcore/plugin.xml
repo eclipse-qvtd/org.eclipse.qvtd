@@ -47,5 +47,8 @@
          </describer>
       </content-type>
    </extension>
+   <extension point="org.eclipse.team.core.fileTypes">
+      <fileTypes extension="qvtcas" type="text" />
+   </extension>
 
 </plugin>
