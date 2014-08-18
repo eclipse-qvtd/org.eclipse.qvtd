@@ -49,5 +49,8 @@
          </describer>
       </content-type>
    </extension>
+   <extension point="org.eclipse.team.core.fileTypes">
+      <fileTypes extension="qvtras" type="text" />
+   </extension>
 
 </plugin>

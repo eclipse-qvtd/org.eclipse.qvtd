@@ -43,4 +43,7 @@
             type="qvtrcs"
             class="org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.util.QVTrelationCSResourceFactoryImpl"/>
    </extension>
+   <extension point="org.eclipse.team.core.fileTypes">
+      <fileTypes extension="qvtr" type="text" />
+   </extension>
 </plugin>
