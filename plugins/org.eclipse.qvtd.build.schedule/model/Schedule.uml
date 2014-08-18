@@ -32,9 +32,6 @@
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bgPcUSLWEeSZzIjuVvvPYA" value="1"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bgPcUiLWEeSZzIjuVvvPYA" value="1"/>
     </ownedAttribute>
-    <ownedAttribute xmi:type="uml:Property" xmi:id="_VMRZQCOZEeSi0_hC2x_gdQ" name="isLoop">
-      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
-    </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_JgdkYCLTEeSZzIjuVvvPYA" name="A_abstractAction_abstractDatum_1" memberEnd="_JgeLcCLTEeSZzIjuVvvPYA _Jgc9UCLTEeSZzIjuVvvPYA" navigableOwnedEnd="_JgeLcCLTEeSZzIjuVvvPYA">
     <ownedEnd xmi:type="uml:Property" xmi:id="_JgeLcCLTEeSZzIjuVvvPYA" name="sources" type="_BdnIQCLTEeSZzIjuVvvPYA" association="_JgdkYCLTEeSZzIjuVvvPYA">
@@ -53,11 +50,11 @@
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_zLkwkCLTEeSZzIjuVvvPYA" name="DistinctData">
-    <ownedAttribute xmi:type="uml:Property" xmi:id="_JlJaoCLUEeSZzIjuVvvPYA" name="primaryArgument" type="_GAv8QCLTEeSZzIjuVvvPYA" association="_JlKBsCLUEeSZzIjuVvvPYA">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_JlJaoCLUEeSZzIjuVvvPYA" name="primaryArgument" type="_bOtL0CRUEeSbBI9cw7MTBw" association="_JlKBsCLUEeSZzIjuVvvPYA">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JlJaoSLUEeSZzIjuVvvPYA" value="1"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JlJaoiLUEeSZzIjuVvvPYA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JlJaoiLUEeSZzIjuVvvPYA" value="*"/>
     </ownedAttribute>
-    <ownedAttribute xmi:type="uml:Property" xmi:id="_MTepICLUEeSZzIjuVvvPYA" name="secondaryArguments" type="_GAv8QCLTEeSZzIjuVvvPYA" association="_MTkIsCLUEeSZzIjuVvvPYA">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_MTepICLUEeSZzIjuVvvPYA" name="secondaryArguments" type="_bOtL0CRUEeSbBI9cw7MTBw" association="_MTkIsCLUEeSZzIjuVvvPYA">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_MTepISLUEeSZzIjuVvvPYA"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MTepIiLUEeSZzIjuVvvPYA" value="*"/>
     </ownedAttribute>
@@ -116,7 +113,7 @@
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_IoxKkiLXEeSZzIjuVvvPYA" value="*"/>
     </ownedAttribute>
   </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="_bgQDYCLWEeSZzIjuVvvPYA" name="A_abstractDatum_abstractDatum_1" memberEnd="_bgQDYSLWEeSZzIjuVvvPYA _bgPcUCLWEeSZzIjuVvvPYA">
+  <packagedElement xmi:type="uml:Association" xmi:id="_bgQDYCLWEeSZzIjuVvvPYA" name="A_abstractDatum_abstractDatum_1" memberEnd="_bgQDYSLWEeSZzIjuVvvPYA _bgPcUCLWEeSZzIjuVvvPYA" navigableOwnedEnd="_bgQDYSLWEeSZzIjuVvvPYA">
     <ownedEnd xmi:type="uml:Property" xmi:id="_bgQDYSLWEeSZzIjuVvvPYA" name="children" type="_GAv8QCLTEeSZzIjuVvvPYA" association="_bgQDYCLWEeSZzIjuVvvPYA">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bgQDYiLWEeSZzIjuVvvPYA"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bgQDYyLWEeSZzIjuVvvPYA" value="*"/>
@@ -157,9 +154,24 @@
     </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_7PWc8CLXEeSZzIjuVvvPYA" name="A_classDatum_variable_1" memberEnd="_7PWc8SLXEeSZzIjuVvvPYA _7PV14CLXEeSZzIjuVvvPYA">
-    <ownedEnd xmi:type="uml:Property" xmi:id="_7PWc8SLXEeSZzIjuVvvPYA" name="classDatum" type="_GAv8QCLTEeSZzIjuVvvPYA" association="_7PWc8CLXEeSZzIjuVvvPYA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_7PWc8SLXEeSZzIjuVvvPYA" name="classDatum" type="_bOtL0CRUEeSbBI9cw7MTBw" association="_7PWc8CLXEeSZzIjuVvvPYA">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7PWc8iLXEeSZzIjuVvvPYA" value="1"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7PWc8yLXEeSZzIjuVvvPYA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_bOtL0CRUEeSbBI9cw7MTBw" name="DataParameter">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_fhLGkCRUEeSbBI9cw7MTBw" name="isLoop">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_lq8hMCRUEeSbBI9cw7MTBw" name="abstractDatum" type="_GAv8QCLTEeSZzIjuVvvPYA" association="_lq9vUCRUEeSbBI9cw7MTBw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lq8hMSRUEeSbBI9cw7MTBw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lq8hMiRUEeSbBI9cw7MTBw" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_lq9vUCRUEeSbBI9cw7MTBw" name="A_dataParameter_abstractDatum_1" memberEnd="_lq9vUSRUEeSbBI9cw7MTBw _lq8hMCRUEeSbBI9cw7MTBw" navigableOwnedEnd="_lq9vUSRUEeSbBI9cw7MTBw">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_lq9vUSRUEeSbBI9cw7MTBw" name="dataParameter" type="_bOtL0CRUEeSbBI9cw7MTBw" association="_lq9vUCRUEeSbBI9cw7MTBw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lq9vUiRUEeSbBI9cw7MTBw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lq9vUyRUEeSbBI9cw7MTBw" value="1"/>
     </ownedEnd>
   </packagedElement>
 </uml:Model>
