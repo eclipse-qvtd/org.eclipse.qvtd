@@ -15,15 +15,8 @@
         eType="#//AbstractAction" derived="true" eOpposite="#//AbstractAction/arguments"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="schedule" eType="#//Schedule"
         eOpposite="#//Schedule/datums"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DataParameter">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLoop" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
-        eType="ecore:EClass http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="secondaryDistinctData"
-        upperBound="-1" eType="#//DistinctData" eOpposite="#//DistinctData/secondaryArguments"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="primaryDistinctData" upperBound="-1"
-        eType="#//DistinctData" eOpposite="#//DistinctData/primaryArgument"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataParameter" upperBound="-1"
+        eType="#//DataParameter" eOpposite="#//DataParameter/datum"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractAction" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="results" upperBound="-1"
@@ -41,16 +34,24 @@
         eOpposite="#//Schedule/actions"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassDatum" eSuperTypes="#//AbstractDatum"/>
-  <eClassifiers xsi:type="ecore:EClass" name="PropertyDatum" eSuperTypes="#//AbstractDatum">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="property" eType="ecore:EClass http://www.eclipse.org/ocl/3.1.0/Pivot#//Property"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataParameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLoop" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="primaryDistinctData" eType="#//DistinctData"
+        eOpposite="#//DistinctData/primaryArgument"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="secondaryDistinctData"
+        eType="#//DistinctData" eOpposite="#//DistinctData/secondaryArguments"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="datum" lowerBound="1" eType="#//AbstractDatum"
+        eOpposite="#//AbstractDatum/dataParameter"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DistinctData">
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//AbstractAction"
         eOpposite="#//AbstractAction/distinctArguments"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="primaryArgument" lowerBound="1"
-        upperBound="-1" eType="#//DataParameter" eOpposite="#//DataParameter/primaryDistinctData"/>
+        upperBound="-1" eType="#//DataParameter" containment="true" eOpposite="#//DataParameter/primaryDistinctData"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="secondaryArguments" upperBound="-1"
-        eType="#//DataParameter" eOpposite="#//DataParameter/secondaryDistinctData"/>
+        eType="#//DataParameter" containment="true" eOpposite="#//DataParameter/secondaryDistinctData"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InputAction" eSuperTypes="#//AbstractAction"/>
   <eClassifiers xsi:type="ecore:EClass" name="MappingAction" eSuperTypes="#//AbstractAction">
@@ -58,6 +59,9 @@
         eType="ecore:EClass http://www.eclipse.org/qvt/0.9/QVTimperative#//Mapping"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OutputAction" eSuperTypes="#//AbstractAction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PropertyDatum" eSuperTypes="#//AbstractDatum">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="property" eType="ecore:EClass http://www.eclipse.org/ocl/3.1.0/Pivot#//Property"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Schedule">
     <eStructuralFeatures xsi:type="ecore:EReference" name="datums" upperBound="-1"
         eType="#//AbstractDatum" containment="true" eOpposite="#//AbstractDatum/schedule"/>

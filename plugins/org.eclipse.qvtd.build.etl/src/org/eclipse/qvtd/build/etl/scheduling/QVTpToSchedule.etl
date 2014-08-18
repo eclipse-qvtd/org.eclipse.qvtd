@@ -13,11 +13,15 @@ import "Scheduler.eol";
  
 /****t* /org.eclipse.qvtd.build.etl/scheduling/QVTpToSchedule
  * NAME
- *  QVTmToQVTiPartition -- Transform a QVTm transformation into its
- *  partioned equivalent.
+ *  QVTpToSchedule -- Craetes the base schedule from a partitioned (QVTp)
+  * transformation
  * FUNCTION
- *  Each transformation rule is broken into n rules, depending on the number
- *  of input domains.
+ *  Extract the basic Schedule information from the QVTp trnasformation. The QVTp
+ *  trasnformation must conform to QVTi. The basic schedule craetes the Class and
+ *  Parameter information but does not reduce the DistinctData information (i.e.
+ *  does not perform derivation analysis.
+ * SEE ALSO
+ *  /org.eclipse.qvtd.build.etl/scheduling/DerivationAnalysis
  *    
  */
 
@@ -42,7 +46,7 @@ rule TransformationToSchedule
  *  MappingToMappingAction - A mapping genereates a mapping action and its datums
  * FUNCTION
  *  Visit the mapping input/ouput variables and assignments/predicates to create
- *  the appropriate class and property datums.
+ *  the appropriate class and property datums and distinct data classes.
  * FROM
  *  QVTp!Mapping
  * TO
@@ -52,20 +56,18 @@ rule MappingToMappingAction
     transform m : QVTp!Mapping
     to ma : QVTs!MappingAction {
         
+        m.name.println();
         ma.schedule ::= m.transformation;
         ma.mapping = m;
-        ma.results.addAll(m.getOutputVariables().equivalent());
-        for (vA in m.getInputVariables()) {
-            var dd = new QVTs!DistinctData;
-            dd.primaryArgument ::= vA;
-            dd.secondaryArguments.addAll(vA.derivedVariables(m.getInputVariables().excluding(vA)).equivalent());
-            ma.distinctArguments.add(dd);
-        }
+        ma.results.addAll(m.getOutputVariables().collect(v | v.type).equivalent());
+        ma.distinctArguments.addAll(m.getInputVariables().equivalents().collect(e | e.first()));
+        
         var pTypeAsgmts = m.getPrimitiveDataTypeAssignemnts();
         ma.results.addAll(m.getAllAssignments().equivalent());
+        
         var pTypeAsgmtsTypes = pTypeAsgmts.collect(a | a.slotExpression.referredVariable.type);
         var pTypeAsgmtsProps = pTypeAsgmts.collect(a | a.targetProperty);       
-        // Primitive type arguments
+        //Primitive type arguments
         ma.distinctArguments.addAll(m.getAllPredicates().select(p |
 		        p.conditionExpression.isSimpleAttributeNavigation()
 		        and (pTypeAsgmtsTypes.includes(p.conditionExpression.source.source.type)
@@ -77,16 +79,38 @@ rule MappingToMappingAction
 // Greedy so we also transform RealizedVariables
 @lazy
 @greedy
-rule VariableToClassDatum
+rule VariableToDataParameter
     transform v : QVTp!Variable
+    to dd : QVTs!DistinctData, dp : QVTs!DataParameter {
+        
+        //v.name.println("v ");
+        dp.variable = v;
+        dp.datum ::= v.type;
+        dd.primaryArgument.add(dp);
+    }
+
+// Only types in the TypedModel pacakges and that are used by a variable
+@lazy
+@greedy
+rule TypeToDatum
+    transform t : QVTp!Type
     to d : QVTs!ClassDatum {
         
-        d.type = v.type;
-        d.domain = v.oppositePattern().area;    // QVTi, all variables should be in domains!
-        d.schedule ::= v.oppositePattern().area.`rule`.transformation;
-        d.super.addAll(QVTp!Variable.all.select(v1 | v1.oppositePattern().isDefined() and v.type.superClass.includes(v1.type)).equivalent());
-        d.variable = v;
+        guard : QVTp!Variable.all().exists(v | v.type == t)
+        
+        var domain = t.getVariableForType().oppositePattern().area; 
+        //t.name.println("TypeToDatum ");
+        d.type = t;
+        d.super.addAll(t.superClass.equivalent());
+        d.domain =  domain;
+        d.schedule ::= domain.`rule`.transformation;    
     }
+
+@cached
+operation QVTp!Type getVariableForType() : QVTp!Variable {
+    
+    return QVTp!Variable.all().selectOne(v | v.type == self or v.type.superClass.includes(self));
+}
 
 @greedy
 rule AssignmentToPropertyDatum
@@ -97,7 +121,6 @@ rule AssignmentToPropertyDatum
         
         d.type = a.slotExpression.referredVariable.type;    
         d.schedule ::= a.bottomPattern.area.transformation;
-	    d.variable = a.slotExpression.referredVariable;
 	    d.domain = a.slotExpression.referredVariable.oppositePattern().area; 
 	    d.property = a.targetProperty;
     }

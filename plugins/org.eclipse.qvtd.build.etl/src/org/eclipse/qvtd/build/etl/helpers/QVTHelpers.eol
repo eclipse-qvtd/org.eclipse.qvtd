@@ -824,7 +824,8 @@ operation QVT!Rule getInputVariables() : Sequence {
  *  getOutputVariables - Returns the output variables of the Mapping, excluding 
  *  DataType variables
  * FUNCTION
- *  It only works for QVTm/QVTi as is does not check for nested mappings
+ *  It only works for QVTm/QVTi as is does not check for nested mappings. Variables
+ *  of  PrimitiveTypes are ignored.
  * CONTEXT
  *  QVT!Rule  The mapping
  * ANNOTATIONS
