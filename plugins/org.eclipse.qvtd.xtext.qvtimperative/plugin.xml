@@ -45,4 +45,7 @@
             type="qvtics"
             class="org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.util.QVTimperativeCSResourceFactoryImpl"/>
    </extension>
+   <extension point="org.eclipse.team.core.fileTypes">
+      <fileTypes extension="qvti" type="text" />
+   </extension>
 </plugin>

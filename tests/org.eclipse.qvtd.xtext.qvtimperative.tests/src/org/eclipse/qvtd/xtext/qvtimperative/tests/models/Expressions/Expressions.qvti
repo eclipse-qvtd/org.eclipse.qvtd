@@ -10,7 +10,7 @@ map expressionsLM in Expressions {
 	check source(dummy:EPackage) {}
 	enforce middle() {}
     where () {}
-    map expressionsMR {
+    call expressionsMR {
     	binaryPrecedence := (1 + 2) * (3*5 + 4);
     	unaryPrecedence := -1 * - -1;
     }

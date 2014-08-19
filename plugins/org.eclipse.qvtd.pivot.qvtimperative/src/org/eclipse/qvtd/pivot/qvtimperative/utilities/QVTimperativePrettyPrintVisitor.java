@@ -94,7 +94,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 		}
 		context.append("where");
 		doArea(pMapping);
-		safeVisit(pMapping.getMappingStatements());
+		safeVisit(pMapping.getMappingStatement());
 		context.pop();
 		context.append("\n}");
 		return null;

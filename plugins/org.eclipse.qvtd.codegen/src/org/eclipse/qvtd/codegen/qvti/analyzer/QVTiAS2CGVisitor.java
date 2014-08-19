@@ -371,7 +371,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		cgMapping.setBody(cgMappingExp);
 		doGuards(pMapping, cgMapping, cgMappingExp);
 		doBottoms(pMapping, cgMappingExp);
-		MappingStatement mappingStatements = pMapping.getMappingStatements();
+		MappingStatement mappingStatements = pMapping.getMappingStatement();
 		if (mappingStatements != null) {
 			cgMappingExp.setBody(doVisit(CGValuedElement.class, mappingStatements));
 		}

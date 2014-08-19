@@ -32,12 +32,12 @@ map HSV2MiddleRoot in hsv2hls {	-- Mapping root nodes L to M
 		--middleRoot.rgb := hsv2rgb(hsvRoot.hsv);
 	}
 	for hsvChild in hsvRoot.children {		-- recursive call to visit children
-		map HSV2MiddleRecursion {
+		call HSV2MiddleRecursion {
 			hsvNode := hsvChild;
 			middleParent := middleRoot;
 		}
 	}
-	map Middle2HLSRoot {		-- invoke middle to output mapping
+	call Middle2HLSRoot {		-- invoke middle to output mapping
 		middleNode := middleRoot;
 	}
 }
@@ -54,7 +54,7 @@ map HSV2MiddleRecursion in hsv2hls { -- Mapping child nodes L to M
 		--middleNode.rgb := hsv2rgb(hsvNode.hsv);
 	}
 	for hsvChild in hsvNode.children {		-- recursive call to visit children
-		map HSV2MiddleRecursion {
+		call HSV2MiddleRecursion {
 			hsvNode := hsvChild;
 			middleParent := middleNode;
 		}
@@ -73,7 +73,7 @@ map Middle2HLSRoot in hsv2hls { -- Mapping root nodes M to R
 		--hlsNode.hls := rgb2hls(middleNode.rgb);
 	}
 	for middleChild in middleNode.children {		-- recursive call to visit children
-		map Middle2HLSRecursion {
+		call Middle2HLSRecursion {
 			middleNode := middleChild;
 		}
 	}
@@ -91,7 +91,7 @@ map Middle2HLSRecursion in hsv2hls { -- Mapping child nodes M to R
 		--hlsNode.hls := rgb2hls(middleNode.rgb);
 	}
 	for middleChild in middleNode.children {		-- recursive call to visit children
-		map Middle2HLSRecursion {
+		call Middle2HLSRecursion {
 			middleNode := middleChild;
 		}
 	}

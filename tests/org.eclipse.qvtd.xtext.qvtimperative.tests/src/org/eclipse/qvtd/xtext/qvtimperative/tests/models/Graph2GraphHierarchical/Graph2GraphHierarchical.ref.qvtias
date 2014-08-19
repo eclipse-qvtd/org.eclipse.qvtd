@@ -47,7 +47,7 @@
               referredVariable="#qV.CopyGraph.Graph2Middle.middle.bottom.middleG2G"/>
         </assignment>
       </bottomPattern>
-      <mappingStatements xsi:type="qvti:MappingSequence">
+      <mappingStatement xsi:type="qvti:MappingSequence">
         <mappingStatements xsi:type="qvti:MappingLoop">
           <source xsi:type="pivot:IteratorExp" type="#//@nestedPackage.1/@ownedType.0"
               referredIteration="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#i.ocl.OrderedSet.select..T">
@@ -59,7 +59,7 @@
             <body xsi:type="pivot:OperationCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
                 referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.oclIsTypeOf..$$.Metaclass">
               <source xsi:type="pivot:VariableExp" isRequired="false" type="../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element"
-                  referredVariable="#//@nestedPackage.0/@rule.0/@mappingStatements/@mappingStatements.0/@source/@iterator.0"/>
+                  referredVariable="#//@nestedPackage.0/@rule.0/@mappingStatement/@mappingStatements.0/@source/@iterator.0"/>
               <argument xsi:type="pivot:TypeExp" type="#//@nestedPackage.1/@ownedType.1"
                   referredType="../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
             </body>
@@ -86,7 +86,7 @@
                 referredVariable="#qV.CopyGraph.Graph2Middle.middle.bottom.middleG2G"/>
           </binding>
         </mappingStatements>
-      </mappingStatements>
+      </mappingStatement>
     </rule>
     <rule xsi:type="qvti:Mapping" xmi:id="m.CopyGraph.Node2Middle" name="Node2Middle">
       <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="false"
@@ -171,7 +171,7 @@
               referredVariable="#qV.CopyGraph.Middle2Graph.lowerGraph.bottom.g2"/>
         </assignment>
       </bottomPattern>
-      <mappingStatements xsi:type="qvti:MappingSequence">
+      <mappingStatement xsi:type="qvti:MappingSequence">
         <mappingStatements xsi:type="qvti:MappingLoop">
           <source xsi:type="pivot:IteratorExp" type="#//@nestedPackage.1/@ownedType.2"
               referredIteration="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#i.ocl.OrderedSet.select..T">
@@ -183,7 +183,7 @@
             <body xsi:type="pivot:OperationCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
                 referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.oclIsTypeOf..$$.Metaclass">
               <source xsi:type="pivot:VariableExp" isRequired="false" type="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"
-                  referredVariable="#//@nestedPackage.0/@rule.2/@mappingStatements/@mappingStatements.0/@source/@iterator.0"/>
+                  referredVariable="#//@nestedPackage.0/@rule.2/@mappingStatement/@mappingStatements.0/@source/@iterator.0"/>
               <argument xsi:type="pivot:TypeExp" type="#//@nestedPackage.1/@ownedType.3"
                   referredType="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"/>
             </body>
@@ -200,7 +200,7 @@
           </body>
           <iterator xmi:id="i.CopyGraph.Middle2Graph.0.0.child" name="child" type="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"/>
         </mappingStatements>
-      </mappingStatements>
+      </mappingStatement>
     </rule>
     <rule xsi:type="qvti:Mapping" xmi:id="m.CopyGraph.Middle2Node" name="Middle2Node">
       <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="false"

@@ -27,7 +27,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getMappingStatements <em>Mapping Statements</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getMappingStatement <em>Mapping Statement</em>}</li>
  * </ul>
  * </p>
  *
@@ -36,29 +36,29 @@ import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
  */
 public interface Mapping extends AbstractMapping {
 	/**
-	 * Returns the value of the '<em><b>Mapping Statements</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Mapping Statement</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Mapping Statements</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Mapping Statement</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mapping Statements</em>' containment reference.
-	 * @see #setMappingStatements(MappingStatement)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping_MappingStatements()
+	 * @return the value of the '<em>Mapping Statement</em>' containment reference.
+	 * @see #setMappingStatement(MappingStatement)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMapping_MappingStatement()
 	 * @generated
 	 */
-	MappingStatement getMappingStatements();
+	MappingStatement getMappingStatement();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getMappingStatements <em>Mapping Statements</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getMappingStatement <em>Mapping Statement</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Mapping Statements</em>' containment reference.
-	 * @see #getMappingStatements()
+	 * @param value the new value of the '<em>Mapping Statement</em>' containment reference.
+	 * @see #getMappingStatement()
 	 * @generated
 	 */
-	void setMappingStatements(MappingStatement value);
+	void setMappingStatement(MappingStatement value);
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * «codeGenHelper.getCopyright(' * ')»
+ * Â«codeGenHelper.getCopyright(' * ')Â»
  *
  * This code is 100% auto-generated
  * using: org.eclipse.ocl.examples.codegen.java.JavaStream

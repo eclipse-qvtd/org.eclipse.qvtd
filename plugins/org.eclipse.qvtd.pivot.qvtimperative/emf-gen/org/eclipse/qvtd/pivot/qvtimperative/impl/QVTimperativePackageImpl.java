@@ -195,7 +195,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getMapping_MappingStatements() {
+	public EReference getMapping_MappingStatement() {
 		return (EReference)mappingEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -383,7 +383,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		imperativeModelEClass = createEClass(IMPERATIVE_MODEL);
 
 		mappingEClass = createEClass(MAPPING);
-		createEReference(mappingEClass, MAPPING__MAPPING_STATEMENTS);
+		createEReference(mappingEClass, MAPPING__MAPPING_STATEMENT);
 
 		mappingCallEClass = createEClass(MAPPING_CALL);
 		createEReference(mappingCallEClass, MAPPING_CALL__REFERRED_MAPPING);
@@ -461,7 +461,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEClass(imperativeModelEClass, ImperativeModel.class, "ImperativeModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(mappingEClass, Mapping.class, "Mapping", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMapping_MappingStatements(), this.getMappingStatement(), null, "mappingStatements", null, 0, 1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMapping_MappingStatement(), this.getMappingStatement(), null, "mappingStatement", null, 0, 1, Mapping.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(mappingEClass, this.getMapping(), "getAllMappings", 0, -1, IS_UNIQUE, !IS_ORDERED);
 
