@@ -79,7 +79,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 /**
  * A QVTiCG2JavaVisitor supports generation of Java code from an optimized QVTi CG transformation tree.
  */
-public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVisitor<Boolean>
+public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implements QVTiCGModelVisitor<Boolean>
 {
 	protected final @NonNull QVTiAnalyzer analyzer;
 	protected final @NonNull CGPackage cgPackage;
@@ -367,7 +367,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 	}
 
 	public @NonNull Boolean visitCGFunction(@NonNull CGFunction cgFunction) {
-		JavaLocalContext localContext2 = globalContext.getLocalContext(cgFunction);
+		JavaLocalContext<?> localContext2 = globalContext.getLocalContext(cgFunction);
 		if (localContext2 != null) {
 			localContext = localContext2;
 			try {
@@ -500,7 +500,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor implements QVTiCGModelVis
 //		if ("associationToForeignKeyLM".equals(cgMapping.getName())) {
 //			System.out.println("Got it");
 //		}
-		JavaLocalContext localContext2 = globalContext.getLocalContext(cgMapping);
+		JavaLocalContext<?> localContext2 = globalContext.getLocalContext(cgMapping);
 		if (localContext2 != null) {
 			localContext = localContext2;
 			try {
