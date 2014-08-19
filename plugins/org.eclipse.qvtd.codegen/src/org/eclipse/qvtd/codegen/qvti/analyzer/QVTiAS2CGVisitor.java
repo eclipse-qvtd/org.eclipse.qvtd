@@ -205,7 +205,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 				CGFinalVariable cgBoundVariable = (CGFinalVariable) getVariable(pGuardVariable);
 				CGValuedElement cgInit = doVisit(CGValuedElement.class, initExpression);
 				cgBoundVariable.setInit(cgInit);
-				JavaLocalContext localContext = globalContext.getLocalContext(cgMapping);
+				JavaLocalContext<?> localContext = globalContext.getLocalContext(cgMapping);
 				if (localContext != null) {
 // FIXME					localContext.addLocalVariable(cgBoundVariable);
 				}
@@ -336,7 +336,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 				ExpressionInOCL query = metaModelManager.getQueryOrThrow(asFunction, specification);
 				Variable contextVariable = query.getContextVariable();
 				if (contextVariable != null) {
-					getSelfParameter(contextVariable);
+					getParameter(contextVariable);
 				}
 				for (@SuppressWarnings("null")@NonNull Variable parameterVariable : query.getParameterVariable()) {
 					getParameter(parameterVariable);

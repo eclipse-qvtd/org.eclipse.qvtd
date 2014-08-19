@@ -367,7 +367,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 	}
 
 	public @NonNull Boolean visitCGFunction(@NonNull CGFunction cgFunction) {
-		JavaLocalContext localContext2 = globalContext.getLocalContext(cgFunction);
+		JavaLocalContext<?> localContext2 = globalContext.getLocalContext(cgFunction);
 		if (localContext2 != null) {
 			localContext = localContext2;
 			try {
@@ -500,7 +500,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 //		if ("associationToForeignKeyLM".equals(cgMapping.getName())) {
 //			System.out.println("Got it");
 //		}
-		JavaLocalContext localContext2 = globalContext.getLocalContext(cgMapping);
+		JavaLocalContext<?> localContext2 = globalContext.getLocalContext(cgMapping);
 		if (localContext2 != null) {
 			localContext = localContext2;
 			try {
