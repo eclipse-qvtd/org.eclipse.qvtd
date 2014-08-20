@@ -39,17 +39,17 @@ map packageToSchemaLM in umlRdbms {
 	        p2s := p2s;
 	    }
 	}
-    for child2 in p.elements {
+    for child in p.elements {
 	    -- Class
 	    call classToTableLM {
 	        p := p;
-	        c := child2;
+	        c := child;
 	        p2s := p2s;
 	    }
 	    -- Associations
 		    call associationToForeignKeyLM {
 	        p := p;
-	        a := child2;
+	        a := child;
 	        p2s := p2s;
 	    }
 	}

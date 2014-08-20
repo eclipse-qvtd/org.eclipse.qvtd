@@ -205,16 +205,16 @@ public class umlRdbms extends AbstractTransformation
      * prim := child;
      * p2s := p2s;
      * }}
-     *   for child2 : simpleuml::PackageElement in p.elements {
+     *   for child : simpleuml::PackageElement in p.elements {
      * 
      *     map classToTableLM {
      * p := p;
-     * c := child2;
+     * c := child;
      * p2s := p2s;
      * }
      *     map associationToForeignKeyLM {
      * p := p;
-     * a := child2;
+     * a := child;
      * p2s := p2s;
      * }}
      *   map packageToSchemaMR {
@@ -250,8 +250,8 @@ public class umlRdbms extends AbstractTransformation
                 }
             }
             ;
-            for (PackageElement child2 : elements_0) {
-                final @NonNull /*@NonInvalid*/ PackageElement symbol_13 = (PackageElement)child2;
+            for (PackageElement child_0 : elements_0) {
+                final @NonNull /*@NonInvalid*/ PackageElement symbol_13 = (PackageElement)child_0;
                 if (symbol_13 instanceof Class) {
                     classToTableLM((Class)symbol_13, p, p2s);
                 }
