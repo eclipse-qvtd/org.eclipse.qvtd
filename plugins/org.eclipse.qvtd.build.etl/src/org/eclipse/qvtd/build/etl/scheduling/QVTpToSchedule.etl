@@ -61,18 +61,17 @@ rule MappingToMappingAction
         ma.mapping = m;
         ma.results.addAll(m.getOutputVariables().collect(v | v.type).equivalent());
         ma.distinctArguments.addAll(m.getInputVariables().equivalents().collect(e | e.first()));
-        
+        //Primitive type results
         var pTypeAsgmts = m.getPrimitiveDataTypeAssignemnts();
-        ma.results.addAll(m.getAllAssignments().equivalent());
+        ma.results.addAll(m.getAllAssignments()
+                .select(a | a.isPrimitivePropertyAssignemnt())
+                .collect(a | a.slotExpression.referredVariable.type).equivalent());
         
-        var pTypeAsgmtsTypes = pTypeAsgmts.collect(a | a.slotExpression.referredVariable.type);
-        var pTypeAsgmtsProps = pTypeAsgmts.collect(a | a.targetProperty);       
         //Primitive type arguments
-        ma.distinctArguments.addAll(m.getAllPredicates().select(p |
-		        p.conditionExpression.isSimpleAttributeNavigation()
-		        and (pTypeAsgmtsTypes.includes(p.conditionExpression.source.source.type)
-		             or pTypeAsgmtsTypes.exists(t | t.superClass.includes(p.conditionExpression.source.source.type)))
-		        and pTypeAsgmtsProps.includes(p.conditionExpression.source.referredProperty)).equivalent());
+        ma.distinctArguments.addAll(m.getAllPredicates()
+                .select(p | p.conditionExpression.isSimpleAttributeNavigation()
+                    and p.conditionExpression.argument.first().referredVariable.type.isTypeOf(QVT!PrimitiveType))
+                .collect(p | p.conditionExpression.source.referredProperty).equivalent());
     }
 
 // Lazy so we dont transformn variables from iterators
@@ -112,18 +111,18 @@ operation QVTp!Type getVariableForType() : QVTp!Variable {
     return QVTp!Variable.all().selectOne(v | v.type == self or v.type.superClass.includes(self));
 }
 
-@greedy
-rule AssignmentToPropertyDatum
-    transform a : QVTp!Assignment
+@lazy
+rule PropertyToDatum
+    transform p : QVTp!Property
     to d : QVTs!PropertyDatum {
         
-        guard : a.isPrimitivePropertyAssignemnt()
-        
-        d.type = a.slotExpression.referredVariable.type;    
-        d.schedule ::= a.bottomPattern.area.transformation;
-	    d.domain = a.slotExpression.referredVariable.oppositePattern().area; 
-	    d.property = a.targetProperty;
+        var domain = p.owningType.getVariableForType().oppositePattern().area;
+        d.property = p;
+        d.type = p.owningType;
+        d.domain =  domain;
+        d.schedule ::= domain.`rule`.transformation;    
     }
+
 
 @lazy    
 rule PredicateToDistinctData

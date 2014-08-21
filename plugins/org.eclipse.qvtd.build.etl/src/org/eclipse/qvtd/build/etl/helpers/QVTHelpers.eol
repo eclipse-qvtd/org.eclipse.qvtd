@@ -642,19 +642,7 @@ operation QVT!Property isContainer() : Boolean {
  *  cached
  */
 operation QVT!Property hasNavigableOpposite() : Boolean {
-    self.println("hasNavigableOpposite ");
-    if (self.getOpposite().isDefined()) {
-        self.getOpposite().println("oposite ");
-        self.getOpposite().getType().getUpperValue().println("uppervalue ");
-        if (self.getOpposite().getType().getUpperValue().isDefined()) {
-            // TODO Also check for numbers > 1
-             
-            return not (self.getOpposite().getType().getUpperValue().asString() == "*");
-        }
-        return true;
-    } else {
-        return false;
-    }
+    return self.opposite.isDefined() and not self.opposite.isMany(); 
 }
 
 /****o* QVTHelpers/getDataTypeUses
