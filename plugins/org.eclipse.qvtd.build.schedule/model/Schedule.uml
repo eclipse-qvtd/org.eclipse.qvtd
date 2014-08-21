@@ -72,13 +72,13 @@
     </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_JlKBsCLUEeSZzIjuVvvPYA" name="A_distinctData_abstractDatum_1" memberEnd="_JlKBsSLUEeSZzIjuVvvPYA _JlJaoCLUEeSZzIjuVvvPYA" navigableOwnedEnd="_JlKBsSLUEeSZzIjuVvvPYA">
-    <ownedEnd xmi:type="uml:Property" xmi:id="_JlKBsSLUEeSZzIjuVvvPYA" name="primaryDistinctData" type="_zLkwkCLTEeSZzIjuVvvPYA" association="_JlKBsCLUEeSZzIjuVvvPYA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_JlKBsSLUEeSZzIjuVvvPYA" name="primaryDistinctData" type="_shN3kCeYEeSEspNP6LpR-w" association="_JlKBsCLUEeSZzIjuVvvPYA">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JlKBsiLUEeSZzIjuVvvPYA" value="1"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JlKBsyLUEeSZzIjuVvvPYA" value="1"/>
     </ownedEnd>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_MTkIsCLUEeSZzIjuVvvPYA" name="A_distinctData_abstractDatum_2" memberEnd="_MTkIsSLUEeSZzIjuVvvPYA _MTepICLUEeSZzIjuVvvPYA" navigableOwnedEnd="_MTkIsSLUEeSZzIjuVvvPYA">
-    <ownedEnd xmi:type="uml:Property" xmi:id="_MTkIsSLUEeSZzIjuVvvPYA" name="secondaryDistinctData" type="_zLkwkCLTEeSZzIjuVvvPYA" association="_MTkIsCLUEeSZzIjuVvvPYA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_MTkIsSLUEeSZzIjuVvvPYA" name="secondaryDistinctData" type="_shN3kCeYEeSEspNP6LpR-w" association="_MTkIsCLUEeSZzIjuVvvPYA">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_MTkIsiLUEeSZzIjuVvvPYA" value="1"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MTkIsyLUEeSZzIjuVvvPYA" value="1"/>
     </ownedEnd>
@@ -141,12 +141,6 @@
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7PV14iLXEeSZzIjuVvvPYA" value="1"/>
     </ownedAttribute>
   </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_jvDbYCLXEeSZzIjuVvvPYA" name="PropertyDatum">
-    <generalization xmi:type="uml:Generalization" xmi:id="_l_Lq8CLXEeSZzIjuVvvPYA" general="_GAv8QCLTEeSZzIjuVvvPYA"/>
-    <ownedAttribute xmi:type="uml:Property" xmi:id="_qjSvUCLXEeSZzIjuVvvPYA" name="property">
-      <type xmi:type="uml:Class" href="../../org.eclipse.qvt/model/uml/EMOF.uml#Property"/>
-    </ownedAttribute>
-  </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_6u7QcCLXEeSZzIjuVvvPYA" name="A_classDatum_realizedVariable_1" memberEnd="_6u7QcSLXEeSZzIjuVvvPYA _6u6pYCLXEeSZzIjuVvvPYA">
     <ownedEnd xmi:type="uml:Property" xmi:id="_6u7QcSLXEeSZzIjuVvvPYA" name="classDatum" type="_hMjCYCLXEeSZzIjuVvvPYA" association="_6u7QcCLXEeSZzIjuVvvPYA">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_6u7QciLXEeSZzIjuVvvPYA" value="1"/>
@@ -163,7 +157,7 @@
     <ownedAttribute xmi:type="uml:Property" xmi:id="_fhLGkCRUEeSbBI9cw7MTBw" name="isLoop">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
     </ownedAttribute>
-    <ownedAttribute xmi:type="uml:Property" xmi:id="_lq8hMCRUEeSbBI9cw7MTBw" name="abstractDatum" type="_GAv8QCLTEeSZzIjuVvvPYA" association="_lq9vUCRUEeSbBI9cw7MTBw">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_lq8hMCRUEeSbBI9cw7MTBw" name="abstractDatum" type="_hMjCYCLXEeSZzIjuVvvPYA" association="_lq9vUCRUEeSbBI9cw7MTBw">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lq8hMSRUEeSbBI9cw7MTBw" value="1"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lq8hMiRUEeSbBI9cw7MTBw" value="1"/>
     </ownedAttribute>
@@ -173,5 +167,8 @@
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lq9vUiRUEeSbBI9cw7MTBw" value="1"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lq9vUyRUEeSbBI9cw7MTBw" value="1"/>
     </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_shN3kCeYEeSEspNP6LpR-w" name="ClassData">
+    <generalization xmi:type="uml:Generalization" xmi:id="_xKyDsCeYEeSEspNP6LpR-w" general="_zLkwkCLTEeSZzIjuVvvPYA"/>
   </packagedElement>
 </uml:Model>
