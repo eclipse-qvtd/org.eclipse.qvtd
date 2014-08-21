@@ -2,28 +2,13 @@
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvtschedule" nsURI="http://www.eclipse.org/qvt/0.1/QVTschedule/"
     nsPrefix="qvtschedule">
-  <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-    <details key="documentation" value="The Package for an Imperative QVT Schedule."/>
-  </eAnnotations>
-  <eAnnotations source="http://www.eclipse.org/OCL/Import">
-    <details key="ecore" value="http://www.eclipse.org/emf/2002/Ecore"/>
-    <details key="qvtcb" value="../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#/"/>
-    <details key="qvti" value="../../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore#/"/>
-  </eAnnotations>
-  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
-    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
-    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
-    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
-  </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractDatum" abstract="true">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="An AbstractDatum represents a the types consumed (target) or created (source)&#xA;by an AbstractAction."/>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="super" upperBound="-1"
         eType="#//AbstractDatum"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Type"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"
         derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="domain" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#//CoreDomain"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="domain" eType="ecore:EClass http://www.eclipse.org/qvt/0.9/QVTcoreBase#//CoreDomain"
+        derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sources" upperBound="-1"
         eType="#//AbstractAction" eOpposite="#//AbstractAction/results"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targets" upperBound="-1"
@@ -34,9 +19,6 @@
         eType="#//DataParameter" eOpposite="#//DataParameter/datum"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractAction" abstract="true">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="An AbstractAction represents an operation that consumes (arguments) or&#xA;creates (results) datums."/>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="results" upperBound="-1"
         eType="#//AbstractDatum" eOpposite="#//AbstractDatum/sources"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="distinctArguments" upperBound="-1"
@@ -47,51 +29,34 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//AbstractAction" eOpposite="#//AbstractAction/parent"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
-        eType="#//AbstractDatum" derived="true" eOpposite="#//AbstractDatum/targets">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="derivation" value="&#xA;            self.distinctArguments.primaryArguments->union(self.distinctArguments.secondaryArguments)->collect(datum)"/>
-      </eAnnotations>
-    </eStructuralFeatures>
+        eType="#//AbstractDatum" derived="true" eOpposite="#//AbstractDatum/targets"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="schedule" eType="#//Schedule"
         eOpposite="#//Schedule/actions"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ClassDatum" eSuperTypes="#//AbstractDatum">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A ClassDatum is?? NO LONGER NEEDED?."/>
-    </eAnnotations>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassDatum" eSuperTypes="#//AbstractDatum"/>
   <eClassifiers xsi:type="ecore:EClass" name="DataParameter">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A DataParameter represents an input parameter to an AbstractAction"/>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLoop" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Variable"/>
+        eType="ecore:EClass http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="primaryDistinctData" eType="#//DistinctData"
-        eOpposite="#//DistinctData/primaryArguments"/>
+        eOpposite="#//DistinctData/primaryArgument"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="secondaryDistinctData"
         eType="#//DistinctData" eOpposite="#//DistinctData/secondaryArguments"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="datum" lowerBound="1" eType="#//AbstractDatum"
         eOpposite="#//AbstractDatum/dataParameter"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DistinctData">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A DistinctData groups DataParameters in order to represent derivation&#xA;information. The secondaryArguments can be derived from the PrimaryArguments"/>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//AbstractAction"
         eOpposite="#//AbstractAction/distinctArguments"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="primaryArguments" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="primaryArgument" lowerBound="1"
         upperBound="-1" eType="#//DataParameter" containment="true" eOpposite="#//DataParameter/primaryDistinctData"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="secondaryArguments" upperBound="-1"
         eType="#//DataParameter" containment="true" eOpposite="#//DataParameter/secondaryDistinctData"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InputAction" eSuperTypes="#//AbstractAction"/>
   <eClassifiers xsi:type="ecore:EClass" name="MappingAction" eSuperTypes="#//AbstractAction">
-    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-      <details key="documentation" value="A MappingAction is an AbstractAction for a QVTi Mapping."/>
-    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="mapping" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore#//Mapping"/>
+        eType="ecore:EClass http://www.eclipse.org/qvt/0.9/QVTimperative#//Mapping"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OutputAction" eSuperTypes="#//AbstractAction"/>
   <eClassifiers xsi:type="ecore:EClass" name="Schedule">
