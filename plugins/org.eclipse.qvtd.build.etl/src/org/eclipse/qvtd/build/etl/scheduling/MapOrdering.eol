@@ -132,7 +132,7 @@ operation QVTs!MappingAction getPredecessors() : Set {
 @cahced
 operation QVTs!MappingAction getArguments() : Sequence {
 	
-	return self.distinctArguments.primaryArgument
+	return self.distinctArguments.primaryArguments
 			.includingAll(self.distinctArguments.secondaryArguments).flatten()
 			.collect(da | da.datum);
 }

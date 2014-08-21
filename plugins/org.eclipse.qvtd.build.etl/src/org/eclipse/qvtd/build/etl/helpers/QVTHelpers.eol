@@ -822,12 +822,11 @@ operation QVT!Rule getInputVariables() : Sequence {
  *  QVTHelpers/getInputVariables
  */
 @cached
-operation QVT!Rule getOutputVariables() : Sequence {
+operation QVT!Rule getOutputVariables() : Set {
     
-    var vars: Sequence;
+    var vars: Set;
     vars = self.bottomPattern.realizedVariable
-        .includingAll(self.domain.collect(d | d.bottomPattern).flatten().collect(gp | gp.realizedVariable).flatten()
-        .select(v | not v.type.isTypeOf(QVT!PrimitiveType))).asSequence();
+        .includingAll(self.domain.collect(d | d.bottomPattern).flatten().collect(gp | gp.realizedVariable).flatten());
     //for (l in self.local) {
     //    vars = vars.includingAll(l.getInputVars());
     //}
