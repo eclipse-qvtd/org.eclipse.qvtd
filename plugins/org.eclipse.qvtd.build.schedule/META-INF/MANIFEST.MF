@@ -7,6 +7,13 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: org.eclipse.qvtd.build.qvtschedule,
+ org.eclipse.qvtd.build.qvtschedule.impl,
+ org.eclipse.qvtd.build.qvtschedule.util
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore;visibility:=reexport
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.eclipse.ocl.examples.pivot;visibility:=reexport,
+ org.eclipse.qvtd.pivot.qvtbase;visibility:=reexport,
+ org.eclipse.qvtd.pivot.qvtcorebase;visibility:=reexport,
+ org.eclipse.qvtd.pivot.qvtimperative;visibility:=reexport
 Bundle-ActivationPolicy: lazy

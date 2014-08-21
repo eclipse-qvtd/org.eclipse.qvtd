@@ -1,0 +1,892 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvtd.build.schedule/emf-gen" modelPluginID="org.eclipse.qvtd.build.schedule"
+    modelName="QVTSchedule" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>QVTSchedule.ecore</foreignModel>
+  <genPackages prefix="qvtschedule" basePackage="org.eclipse.qvtd.build" disposableProviderFactory="true"
+      fileExtensions="qvts" ecorePackage="QVTSchedule.ecore#/">
+    <genClasses image="false" ecoreClass="QVTSchedule.ecore#//AbstractDatum">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractDatum/super"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractDatum/type"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractDatum/domain"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractDatum/sources"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractDatum/targets"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractDatum/schedule"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractDatum/dataParameter"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="QVTSchedule.ecore#//AbstractAction">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractAction/results"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractAction/distinctArguments"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTSchedule.ecore#//AbstractAction/order"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractAction/parent"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractAction/children"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractAction/arguments"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractAction/schedule"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTSchedule.ecore#//ClassDatum"/>
+    <genClasses ecoreClass="QVTSchedule.ecore#//DataParameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTSchedule.ecore#//DataParameter/isLoop"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//DataParameter/variable"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTSchedule.ecore#//DataParameter/primaryDistinctData"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTSchedule.ecore#//DataParameter/secondaryDistinctData"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//DataParameter/datum"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTSchedule.ecore#//DistinctData">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTSchedule.ecore#//DistinctData/target"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//DistinctData/primaryArgument"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//DistinctData/secondaryArguments"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTSchedule.ecore#//InputAction"/>
+    <genClasses ecoreClass="QVTSchedule.ecore#//MappingAction">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//MappingAction/mapping"/>
+    </genClasses>
+    <genClasses ecoreClass="QVTSchedule.ecore#//OutputAction"/>
+    <genClasses ecoreClass="QVTSchedule.ecore#//Schedule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//Schedule/datums"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//Schedule/actions"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Pivot" ecorePackage="http://www.eclipse.org/ocl/3.1.0/Pivot#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="http://www.eclipse.org/ocl/3.1.0/Pivot#//AssociativityKind">
+      <genEnumLiterals ecoreEnumLiteral="http://www.eclipse.org/ocl/3.1.0/Pivot#//AssociativityKind/Left"/>
+      <genEnumLiterals ecoreEnumLiteral="http://www.eclipse.org/ocl/3.1.0/Pivot#//AssociativityKind/Right"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionKind">
+      <genEnumLiterals ecoreEnumLiteral="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionKind/Collection"/>
+      <genEnumLiterals ecoreEnumLiteral="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionKind/Set"/>
+      <genEnumLiterals ecoreEnumLiteral="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionKind/OrderedSet"/>
+      <genEnumLiterals ecoreEnumLiteral="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionKind/Bag"/>
+      <genEnumLiterals ecoreEnumLiteral="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionKind/Sequence"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="http://www.eclipse.org/ocl/3.1.0/Pivot#//PseudostateKind">
+      <genEnumLiterals ecoreEnumLiteral="http://www.eclipse.org/ocl/3.1.0/Pivot#//PseudostateKind/initial"/>
+      <genEnumLiterals ecoreEnumLiteral="http://www.eclipse.org/ocl/3.1.0/Pivot#//PseudostateKind/deepHistory"/>
+      <genEnumLiterals ecoreEnumLiteral="http://www.eclipse.org/ocl/3.1.0/Pivot#//PseudostateKind/shallowHistory"/>
+      <genEnumLiterals ecoreEnumLiteral="http://www.eclipse.org/ocl/3.1.0/Pivot#//PseudostateKind/join"/>
+      <genEnumLiterals ecoreEnumLiteral="http://www.eclipse.org/ocl/3.1.0/Pivot#//PseudostateKind/fork"/>
+      <genEnumLiterals ecoreEnumLiteral="http://www.eclipse.org/ocl/3.1.0/Pivot#//PseudostateKind/junction"/>
+      <genEnumLiterals ecoreEnumLiteral="http://www.eclipse.org/ocl/3.1.0/Pivot#//PseudostateKind/choice"/>
+      <genEnumLiterals ecoreEnumLiteral="http://www.eclipse.org/ocl/3.1.0/Pivot#//PseudostateKind/entryPoint"/>
+      <genEnumLiterals ecoreEnumLiteral="http://www.eclipse.org/ocl/3.1.0/Pivot#//PseudostateKind/exitPoint"/>
+      <genEnumLiterals ecoreEnumLiteral="http://www.eclipse.org/ocl/3.1.0/Pivot#//PseudostateKind/terminate"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="http://www.eclipse.org/ocl/3.1.0/Pivot#//TransitionKind">
+      <genEnumLiterals ecoreEnumLiteral="http://www.eclipse.org/ocl/3.1.0/Pivot#//TransitionKind/internal"/>
+      <genEnumLiterals ecoreEnumLiteral="http://www.eclipse.org/ocl/3.1.0/Pivot#//TransitionKind/local"/>
+      <genEnumLiterals ecoreEnumLiteral="http://www.eclipse.org/ocl/3.1.0/Pivot#//TransitionKind/external"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="http://www.eclipse.org/ocl/3.1.0/Pivot#//Boolean"/>
+    <genDataTypes ecoreDataType="http://www.eclipse.org/ocl/3.1.0/Pivot#//Integer"/>
+    <genDataTypes ecoreDataType="http://www.eclipse.org/ocl/3.1.0/Pivot#//LibraryFeature"/>
+    <genDataTypes ecoreDataType="http://www.eclipse.org/ocl/3.1.0/Pivot#//Object"/>
+    <genDataTypes ecoreDataType="http://www.eclipse.org/ocl/3.1.0/Pivot#//Real"/>
+    <genDataTypes ecoreDataType="http://www.eclipse.org/ocl/3.1.0/Pivot#//String"/>
+    <genDataTypes ecoreDataType="http://www.eclipse.org/ocl/3.1.0/Pivot#//Throwable"/>
+    <genDataTypes ecoreDataType="http://www.eclipse.org/ocl/3.1.0/Pivot#//UnlimitedNatural"/>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Annotation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Annotation/ownedContent"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Annotation/ownedDetail"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Annotation/reference"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//AnyType"/>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//AssociationClass">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//AssociationClass/unownedAttribute"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//AssociationClassCallExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//AssociationClassCallExp/referredAssociationClass"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//BagType"/>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Behavior">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Behavior/transition"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//BooleanLiteralExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//BooleanLiteralExp/booleanSymbol"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//BooleanLiteralExp/validateTypeIsBoolean">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//BooleanLiteralExp/validateTypeIsBoolean/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//BooleanLiteralExp/validateTypeIsBoolean/context"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//CallExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//CallExp/implicit"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//CallExp/source"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//CallOperationAction">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//CallOperationAction/operation"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Class">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Class/isAbstract"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Class/isActive"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Class/isInterface"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Class/nestedType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Class/ownedBehavior"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionItem">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionItem/item"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionItem/validateTypeIsItemType">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionItem/validateTypeIsItemType/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionItem/validateTypeIsItemType/context"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionLiteralExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionLiteralExp/kind"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionLiteralExp/part"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionLiteralExp/validateBagKindIsBag">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionLiteralExp/validateBagKindIsBag/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionLiteralExp/validateBagKindIsBag/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionLiteralExp/validateCollectionKindIsConcrete">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionLiteralExp/validateCollectionKindIsConcrete/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionLiteralExp/validateCollectionKindIsConcrete/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionLiteralExp/validateOrderedSetKindIsOrderedSet">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionLiteralExp/validateOrderedSetKindIsOrderedSet/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionLiteralExp/validateOrderedSetKindIsOrderedSet/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionLiteralExp/validateSequenceKindIsSequence">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionLiteralExp/validateSequenceKindIsSequence/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionLiteralExp/validateSequenceKindIsSequence/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionLiteralExp/validateSetKindIsSet">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionLiteralExp/validateSetKindIsSet/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionLiteralExp/validateSetKindIsSet/context"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionLiteralPart"/>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionRange">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionRange/first"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionRange/last"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionType/elementType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionType/lower"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//CollectionType/upper"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Comment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Comment/annotatedElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Comment/body"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//ConnectionPointReference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//ConnectionPointReference/entry"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//ConnectionPointReference/exit"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//ConnectionPointReference/state"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Constraint">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Constraint/constrainedElement"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Constraint/context"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Constraint/isCallable"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Constraint/owningState"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Constraint/redefinedConstraint"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Constraint/specification"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Constraint/transition"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//Constraint/validateUniqueName">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//Constraint/validateUniqueName/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//Constraint/validateUniqueName/context"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//ConstructorExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//ConstructorExp/part"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//ConstructorExp/value"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//ConstructorPart">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//ConstructorPart/initExpression"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//ConstructorPart/referredProperty"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//DataType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//DataType/behavioralType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//DataType/isSerializable"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Detail">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Detail/value"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//DynamicElement">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//DynamicElement/metaType"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//DynamicProperty">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//DynamicProperty/default"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//DynamicProperty/referredProperty"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//DynamicType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//DynamicType/ownedProperty"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Element">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Element/extension"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Element/ownedAnnotation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Element/ownedComment"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//Element/allOwnedElements"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//Element/getValue">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//Element/getValue/stereotype"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//Element/getValue/propertyName"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//ElementExtension">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//ElementExtension/base"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//ElementExtension/isApplied"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//ElementExtension/isRequired"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//ElementExtension/stereotype"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//EnumLiteralExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//EnumLiteralExp/referredEnumLiteral"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//EnumLiteralExp/validateTypeIsEnumerationType">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//EnumLiteralExp/validateTypeIsEnumerationType/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//EnumLiteralExp/validateTypeIsEnumerationType/context"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Enumeration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Enumeration/ownedLiteral"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//EnumerationLiteral">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//EnumerationLiteral/enumeration"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//EnumerationLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL/bodyExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL/contextVariable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL/parameterVariable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//ExpressionInOCL/resultVariable"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Feature">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Feature/implementation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Feature/implementationClass"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//FeatureCallExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//FeatureCallExp/isPre"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//FinalState"/>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp/elseExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp/thenExpression"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp/validateConditionTypeIsBoolean">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp/validateConditionTypeIsBoolean/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IfExp/validateConditionTypeIsBoolean/context"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Import">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Import/importedNamespace"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//IntegerLiteralExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//IntegerLiteralExp/integerSymbol"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IntegerLiteralExp/validateTypeIsInteger">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IntegerLiteralExp/validateTypeIsInteger/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IntegerLiteralExp/validateTypeIsInteger/context"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//InvalidLiteralExp"/>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//InvalidType"/>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//IterateExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//IterateExp/result"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IterateExp/validateBodyTypeConformsToResultType">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IterateExp/validateBodyTypeConformsToResultType/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IterateExp/validateBodyTypeConformsToResultType/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IterateExp/validateOneInitializer">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IterateExp/validateOneInitializer/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IterateExp/validateOneInitializer/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IterateExp/validateTypeIsResultType">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IterateExp/validateTypeIsResultType/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IterateExp/validateTypeIsResultType/context"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Iteration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Iteration/ownedAccumulator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Iteration/ownedIterator"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp">
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateAnyBodyTypeIsBoolean">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateAnyBodyTypeIsBoolean/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateAnyBodyTypeIsBoolean/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateAnyHasOneIterator">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateAnyHasOneIterator/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateAnyHasOneIterator/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateAnyTypeIsSourceElementType">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateAnyTypeIsSourceElementType/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateAnyTypeIsSourceElementType/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateClosureBodyTypeIsConformanttoIteratorType">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateClosureBodyTypeIsConformanttoIteratorType/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateClosureBodyTypeIsConformanttoIteratorType/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateClosureElementTypeIsSourceElementType">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateClosureElementTypeIsSourceElementType/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateClosureElementTypeIsSourceElementType/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateClosureHasOneIterator">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateClosureHasOneIterator/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateClosureHasOneIterator/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateClosureSourceElementTypeIsBodyElementType">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateClosureSourceElementTypeIsBodyElementType/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateClosureSourceElementTypeIsBodyElementType/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateClosureTypeIsUniqueCollection">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateClosureTypeIsUniqueCollection/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateClosureTypeIsUniqueCollection/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateCollectElementTypeIsSourceElementType">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateCollectElementTypeIsSourceElementType/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateCollectElementTypeIsSourceElementType/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateCollectHasOneIterator">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateCollectHasOneIterator/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateCollectHasOneIterator/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateCollectNestedHasOneIterator">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateCollectNestedHasOneIterator/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateCollectNestedHasOneIterator/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateCollectNestedTypeIsBag">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateCollectNestedTypeIsBag/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateCollectNestedTypeIsBag/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateCollectNestedTypeIsBodyType">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateCollectNestedTypeIsBodyType/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateCollectNestedTypeIsBodyType/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateCollectTypeIsUnordered">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateCollectTypeIsUnordered/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateCollectTypeIsUnordered/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateExistsBodyTypeIsBoolean">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateExistsBodyTypeIsBoolean/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateExistsBodyTypeIsBoolean/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateExistsTypeIsBoolean">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateExistsTypeIsBoolean/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateExistsTypeIsBoolean/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateForAllBodyTypeIsBoolean">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateForAllBodyTypeIsBoolean/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateForAllBodyTypeIsBoolean/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateForAllTypeIsBoolean">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateForAllTypeIsBoolean/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateForAllTypeIsBoolean/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateIsUniqueHasOneIterator">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateIsUniqueHasOneIterator/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateIsUniqueHasOneIterator/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateIsUniqueTypeIsBoolean">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateIsUniqueTypeIsBoolean/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateIsUniqueTypeIsBoolean/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateIteratorTypeIsSourceElementType">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateIteratorTypeIsSourceElementType/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateIteratorTypeIsSourceElementType/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateOneBodyTypeIsBoolean">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateOneBodyTypeIsBoolean/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateOneBodyTypeIsBoolean/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateOneHasOneIterator">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateOneHasOneIterator/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateOneHasOneIterator/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateOneTypeIsBoolean">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateOneTypeIsBoolean/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateOneTypeIsBoolean/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateRejectOrSelectHasOneIterator">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateRejectOrSelectHasOneIterator/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateRejectOrSelectHasOneIterator/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateRejectOrSelectTypeIsBoolean">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateRejectOrSelectTypeIsBoolean/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateRejectOrSelectTypeIsBoolean/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateRejectOrSelectTypeIsSourceType">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateRejectOrSelectTypeIsSourceType/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateRejectOrSelectTypeIsSourceType/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateSortedByElementTypeIsSourceElementType">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateSortedByElementTypeIsSourceElementType/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateSortedByElementTypeIsSourceElementType/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateSortedByHasOneIterator">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateSortedByHasOneIterator/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateSortedByHasOneIterator/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateSortedByIsOrderedIfSourceIsOrdered">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateSortedByIsOrderedIfSourceIsOrdered/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateSortedByIsOrderedIfSourceIsOrdered/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateSortedByIteratorTypeIsComparable">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateSortedByIteratorTypeIsComparable/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//IteratorExp/validateSortedByIteratorTypeIsComparable/context"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//LambdaType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//LambdaType/contextType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//LambdaType/parameterType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//LambdaType/resultType"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//LetExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//LetExp/in"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//LetExp/variable"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//LetExp/validateTypeIsInType">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//LetExp/validateTypeIsInType/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//LetExp/validateTypeIsInType/context"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Library">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Library/ownedPrecedence"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//LiteralExp"/>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//LoopExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//LoopExp/body"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//LoopExp/iterator"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//LoopExp/referredIteration"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//LoopExp/validateNoInitializers">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//LoopExp/validateNoInitializers/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//LoopExp/validateNoInitializers/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//LoopExp/validateSourceIsCollection">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//LoopExp/validateSourceIsCollection/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//LoopExp/validateSourceIsCollection/context"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//MessageExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//MessageExp/argument"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//MessageExp/calledOperation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//MessageExp/sentSignal"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//MessageExp/target"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//MessageExp/validateOneCallOrOneSend">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//MessageExp/validateOneCallOrOneSend/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//MessageExp/validateOneCallOrOneSend/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//MessageExp/validateTargetIsNotACollection">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//MessageExp/validateTargetIsNotACollection/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//MessageExp/validateTargetIsNotACollection/context"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//MessageType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//MessageType/referredOperation"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//MessageType/referredSignal"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Metaclass">
+      <genTypeParameters ecoreTypeParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//Metaclass/T"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Metaclass/instanceType"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//MorePivotable"/>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Nameable"/>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//NamedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//NamedElement/isStatic"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//NamedElement/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Namespace">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Namespace/ownedRule"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//NavigationCallExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//NavigationCallExp/navigationSource"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//NavigationCallExp/qualifier"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//NullLiteralExp"/>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//NumericLiteralExp"/>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//OCLExpression"/>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//OpaqueExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//OpaqueExpression/body"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//OpaqueExpression/expressionInOCL"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//OpaqueExpression/language"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation/bodyExpression"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation/class"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation/isInvalidating"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation/isValidating"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation/ownedParameter"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation/owningType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation/postcondition"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation/precedence"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation/precondition"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation/raisedException"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation/redefinedOperation"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation/validateCompatibleReturn">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation/validateCompatibleReturn/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation/validateCompatibleReturn/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation/validateLoadableImplementation">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation/validateLoadableImplementation/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation/validateLoadableImplementation/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation/validateUniquePostconditionName">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation/validateUniquePostconditionName/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation/validateUniquePostconditionName/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation/validateUniquePreconditionName">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation/validateUniquePreconditionName/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//Operation/validateUniquePreconditionName/context"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp/argument"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp/referredOperation"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp/validateArgumentCount">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp/validateArgumentCount/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp/validateArgumentCount/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp/validateArgumentTypeIsConformant">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp/validateArgumentTypeIsConformant/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationCallExp/validateArgumentTypeIsConformant/context"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//OperationTemplateParameter"/>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//OppositePropertyCallExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//OppositePropertyCallExp/referredProperty"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//OrderedSetType"/>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Package">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Package/importedPackage"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Package/nestedPackage"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Package/nestingPackage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Package/nsPrefix"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Package/nsURI"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Package/ownedType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Package/profileApplication"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//PackageableElement"/>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Parameter">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Parameter/operation"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//ParameterableElement">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//ParameterableElement/owningTemplateParameter"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//ParameterableElement/templateParameter"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//ParameterableElement/isCompatibleWith">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//ParameterableElement/isCompatibleWith/p"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//ParameterableElement/isTemplateParameter"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Pivotable"/>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Precedence">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Precedence/associativity"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Precedence/order"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//PrimitiveLiteralExp"/>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//PrimitiveType"/>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Profile">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Profile/application"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//ProfileApplication">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//ProfileApplication/appliedProfile"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//ProfileApplication/applyingPackage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//ProfileApplication/isStrict"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Property">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Property/associationClass"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Property/class"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Property/default"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Property/defaultExpression"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Property/implicit"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Property/isComposite"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Property/isDerived"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Property/isID"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Property/isReadOnly"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Property/isResolveProxies"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Property/isTransient"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Property/isUnsettable"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Property/isVolatile"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Property/keys"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Property/opposite"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Property/owningType"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Property/redefinedProperty"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Property/referredProperty"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Property/subsettedProperty"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//Property/validateCompatibleDefaultExpression">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//Property/validateCompatibleDefaultExpression/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//Property/validateCompatibleDefaultExpression/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//Property/isAttribute">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//Property/isAttribute/p"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//PropertyCallExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//PropertyCallExp/referredProperty"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//PropertyCallExp/validateCompatibleResultType">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//PropertyCallExp/validateCompatibleResultType/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//PropertyCallExp/validateCompatibleResultType/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//PropertyCallExp/validateNonStaticSourceTypeIsConformant">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//PropertyCallExp/validateNonStaticSourceTypeIsConformant/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//PropertyCallExp/validateNonStaticSourceTypeIsConformant/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//PropertyCallExp/getSpecializedReferredPropertyOwningType"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//PropertyCallExp/getSpecializedReferredPropertyType"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Pseudostate">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Pseudostate/kind"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Pseudostate/state"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Pseudostate/stateMachine"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//RealLiteralExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//RealLiteralExp/realSymbol"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//ReferringElement">
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//ReferringElement/getReferredElement"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Region">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Region/extendedRegion"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Region/state"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Region/stateMachine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Region/subvertex"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Region/transition"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Root">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Root/externalURI"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Root/imports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Root/nestedPackage"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//SelfType">
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//SelfType/specializeIn">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//SelfType/specializeIn/expr"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//SelfType/specializeIn/selfType"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//SendSignalAction">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//SendSignalAction/signal"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//SequenceType"/>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//SetType"/>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Signal"/>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//State">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//State/connection"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//State/connectionPoint"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//State/deferrableTrigger"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//State/doActivity"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//State/entry"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//State/exit"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//State/isComposite"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//State/isOrthogonal"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//State/isSimple"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//State/isSubmachineState"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//State/redefinedState"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//State/region"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//State/stateInvariant"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//State/submachine"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//StateExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//StateExp/referredState"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//StateMachine">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//StateMachine/connectionPoint"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//StateMachine/extendedStateMachine"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//StateMachine/region"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//StateMachine/submachineState"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Stereotype">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Stereotype/extensionOfs"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//StringLiteralExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//StringLiteralExp/stringSymbol"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateBinding">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateBinding/boundElement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateBinding/parameterSubstitution"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateBinding/signature"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateParameter">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateParameter/default"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateParameter/ownedDefault"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateParameter/ownedParameteredElement"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateParameter/parameteredElement"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateParameter/signature"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateParameterSubstitution">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateParameterSubstitution/actual"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateParameterSubstitution/formal"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateParameterSubstitution/ownedActual"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateParameterSubstitution/templateBinding"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateParameterType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateParameterType/specification"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateSignature">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateSignature/ownedParameter"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateSignature/template"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateableElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateableElement/ownedTemplateSignature"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateableElement/templateBinding"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateableElement/unspecializedElement"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateableElement/isTemplate"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//TemplateableElement/parameterableElements"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Transition">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Transition/container"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Transition/effect"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Transition/guard"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Transition/kind"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Transition/source"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Transition/target"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Transition/trigger"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Trigger">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Trigger/state"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Trigger/transition"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//TupleLiteralExp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//TupleLiteralExp/part"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//TupleLiteralPart">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//TupleLiteralPart/initExpression"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//TupleType"/>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Type/extendedBys"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Type/instanceClassName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Type/ownedAttribute"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Type/ownedInvariant"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Type/ownedOperation"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Type/package"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Type/superClass"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type/validateUniqueInvariantName">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type/validateUniqueInvariantName/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type/validateUniqueInvariantName/context"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type/specializeIn">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type/specializeIn/expr"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//Type/specializeIn/selfType"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//TypeExp">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//TypeExp/referredType"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//TypeExtension">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//TypeExtension/isRequired"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//TypeExtension/stereotype"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//TypeExtension/type"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//TypeTemplateParameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//TypeTemplateParameter/allowSubstitutable"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//TypeTemplateParameter/constrainingType"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//TypedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//TypedElement/isRequired"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//TypedElement/type"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//TypedMultiplicityElement">
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//TypedMultiplicityElement/CompatibleBody">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//TypedMultiplicityElement/CompatibleBody/bodySpecification"/>
+      </genOperations>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//TypedMultiplicityElement/makeParameter"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//UnlimitedNaturalLiteralExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//UnlimitedNaturalLiteralExp/unlimitedNaturalSymbol"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//UnspecifiedType">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//UnspecifiedType/lowerBound"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//UnspecifiedType/upperBound"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//UnspecifiedValueExp"/>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//ValueSpecification">
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//ValueSpecification/booleanValue"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//ValueSpecification/integerValue"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//ValueSpecification/isComputable"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//ValueSpecification/isNull"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//ValueSpecification/stringValue"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//ValueSpecification/unlimitedValue"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable/implicit"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable/initExpression"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable/representedParameter"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable/validateCompatibleInitialiserType">
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable/validateCompatibleInitialiserType/diagnostics"/>
+        <genParameters ecoreParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable/validateCompatibleInitialiserType/context"/>
+      </genOperations>
+    </genClasses>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//VariableDeclaration"/>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//VariableExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/ocl/3.1.0/Pivot#//VariableExp/implicit"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//VariableExp/referredVariable"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Vertex">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Vertex/container"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Vertex/incoming"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/ocl/3.1.0/Pivot#//Vertex/outgoing"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Visitable"/>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//Visitor">
+      <genTypeParameters ecoreTypeParameter="http://www.eclipse.org/ocl/3.1.0/Pivot#//Visitor/R"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/ocl/3.1.0/Pivot#//VoidType"/>
+  </genPackages>
+  <genPackages prefix="Qvtcorebase" ecorePackage="http://www.eclipse.org/qvt/0.9/QVTcoreBase#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="http://www.eclipse.org/qvt/0.9/QVTcoreBase#//EnforcementMode">
+      <genEnumLiterals ecoreEnumLiteral="http://www.eclipse.org/qvt/0.9/QVTcoreBase#//EnforcementMode/Creation"/>
+      <genEnumLiterals ecoreEnumLiteral="http://www.eclipse.org/qvt/0.9/QVTcoreBase#//EnforcementMode/Deletion"/>
+    </genEnums>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/qvt/0.9/QVTcoreBase#//AbstractMapping">
+      <genOperations ecoreOperation="http://www.eclipse.org/qvt/0.9/QVTcoreBase#//AbstractMapping/getContext"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/qvt/0.9/QVTcoreBase#//AbstractMapping/getRefinement"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/qvt/0.9/QVTcoreBase#//Area">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/qvt/0.9/QVTcoreBase#//Area/guardPattern"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/qvt/0.9/QVTcoreBase#//Area/bottomPattern"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/qvt/0.9/QVTcoreBase#//Area/getAllVariables"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="http://www.eclipse.org/qvt/0.9/QVTcoreBase#//Assignment">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/qvt/0.9/QVTcoreBase#//Assignment/bottomPattern"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/qvt/0.9/QVTcoreBase#//Assignment/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/qvt/0.9/QVTcoreBase#//Assignment/isDefault"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/qvt/0.9/QVTcoreBase#//BottomPattern">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/qvt/0.9/QVTcoreBase#//BottomPattern/area"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/qvt/0.9/QVTcoreBase#//BottomPattern/assignment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/qvt/0.9/QVTcoreBase#//BottomPattern/enforcementOperation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/qvt/0.9/QVTcoreBase#//BottomPattern/realizedVariable"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/qvt/0.9/QVTcoreBase#//CoreDomain"/>
+    <genClasses ecoreClass="http://www.eclipse.org/qvt/0.9/QVTcoreBase#//CorePattern">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/qvt/0.9/QVTcoreBase#//CorePattern/variable"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/qvt/0.9/QVTcoreBase#//CorePattern/getAllVariables"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/qvt/0.9/QVTcoreBase#//CorePattern/getArea"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/qvt/0.9/QVTcoreBase#//EnforcementOperation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/qvt/0.9/QVTcoreBase#//EnforcementOperation/enforcementMode"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/qvt/0.9/QVTcoreBase#//EnforcementOperation/bottomPattern"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/qvt/0.9/QVTcoreBase#//EnforcementOperation/operationCallExp"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/qvt/0.9/QVTcoreBase#//GuardPattern">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/qvt/0.9/QVTcoreBase#//GuardPattern/area"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/qvt/0.9/QVTcoreBase#//PropertyAssignment">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/qvt/0.9/QVTcoreBase#//PropertyAssignment/slotExpression"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/qvt/0.9/QVTcoreBase#//PropertyAssignment/targetProperty"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/qvt/0.9/QVTcoreBase#//RealizedVariable"/>
+    <genClasses ecoreClass="http://www.eclipse.org/qvt/0.9/QVTcoreBase#//VariableAssignment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/qvt/0.9/QVTcoreBase#//VariableAssignment/targetVariable"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Qvtimperative" ecorePackage="http://www.eclipse.org/qvt/0.9/QVTimperative#/">
+    <genClasses ecoreClass="http://www.eclipse.org/qvt/0.9/QVTimperative#//ImperativeModel"/>
+    <genClasses ecoreClass="http://www.eclipse.org/qvt/0.9/QVTimperative#//Mapping">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/qvt/0.9/QVTimperative#//Mapping/mappingCall"/>
+      <genOperations ecoreOperation="http://www.eclipse.org/qvt/0.9/QVTimperative#//Mapping/getAllMappings"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/qvt/0.9/QVTimperative#//MappingCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/qvt/0.9/QVTimperative#//MappingCall/referredMapping"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/qvt/0.9/QVTimperative#//MappingCall/binding"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/qvt/0.9/QVTimperative#//MappingCall/context"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/qvt/0.9/QVTimperative#//MappingCallBinding">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference http://www.eclipse.org/qvt/0.9/QVTimperative#//MappingCallBinding/mappingCall"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/qvt/0.9/QVTimperative#//MappingCallBinding/boundVariable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference http://www.eclipse.org/qvt/0.9/QVTimperative#//MappingCallBinding/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/qvt/0.9/QVTimperative#//MappingCallBinding/isLoop"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/qvt/0.9/QVTimperative#//MiddlePropertyAssignment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/qvt/0.9/QVTimperative#//MiddlePropertyAssignment/cacheIndex"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/qvt/0.9/QVTimperative#//MiddlePropertyCallExp">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute http://www.eclipse.org/qvt/0.9/QVTimperative#//MiddlePropertyCallExp/cacheIndex"/>
+    </genClasses>
+    <genClasses ecoreClass="http://www.eclipse.org/qvt/0.9/QVTimperative#//VariablePredicate">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference http://www.eclipse.org/qvt/0.9/QVTimperative#//VariablePredicate/targetVariable"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
