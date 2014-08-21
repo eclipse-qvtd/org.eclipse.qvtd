@@ -19,7 +19,7 @@ import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 /**
  * A QVTiLocalContext maintains the Java-specific local context for generation of QVTi code.
  */
-public class QVTiLocalContext extends JavaLocalContext
+public class QVTiLocalContext extends JavaLocalContext<QVTiCodeGenerator>
 {
 	public QVTiLocalContext(@NonNull QVTiGlobalContext globalContext, @NonNull CGElement cgScope) {
 		super(globalContext, cgScope);
