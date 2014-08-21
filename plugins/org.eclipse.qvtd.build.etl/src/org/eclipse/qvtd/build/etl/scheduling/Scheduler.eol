@@ -27,6 +27,14 @@
 import "../helpers/QVTHelpers.eol";
 import "MapOrdering.eol";
 
+
+// Secondary Argument Derivations
+QVTs!Schedule.all.first().defineArgumentDerivation();
+// Delete all DistinctData with no arguments
+for (da in QVTs!DistinctData.all().select(dd | dd.primaryArgument.isEmpty())) {
+    delete da;
+}
+
 // Ordering
 QVTs!Schedule.all.first().findMapOrdering();
 
@@ -510,49 +518,18 @@ operation QVTs!MappingAction getAvailableVariables() : Sequence {
  *  rules   The transformation for which the schedule is being craeted (QVT!Rule)
  *  SEE ALSO
  */
-operation QVTs!Schedule createDependencyRelations(rules : Collection) {
-    for (r in rules) {
-        //r.println("r ");
-        var action = new QVTs!MappingAction;
-        action.schedule = self;
-        action.mapping = r;
-        var resultDatums = r.getOutputVariables().collect(v | v.getClassDatum());
-        self.datums.addAll(resultDatums);
-        action.results.addAll(resultDatums);
-
-        // Create distinc data sets for input variables
-        for (vA in r.getInputVariables()) {
-            //vA.name.println("  va ");
-            var dd = new QVTs!DistinctData;
-            var argDatum = vA.getClassDatum();
-            self.datums.add(argDatum);
-            //dd.primaryArguments.add(argDatum);
-            dd.primaryArgument = argDatum;
-            for (dv in vA.derivedVariables(r.getInputVariables().excluding(vA))) {
-                //dv.println("    derived ");
-                argDatum = dv.getClassDatum();
-                dd.secondaryArguments.add(argDatum);
-                self.datums.add(argDatum);
-            }
-            dd.target = action;
-        }
-        // Create result PropertyDatums for PrimitiveData types assigned to properties
-        resultDatums = r.getPrimitiveDataTypeAssignemnts().collect(a | a.getPropertyDatum());
-        self.datums.addAll(resultDatums);
-        action.results.addAll(resultDatums);
-    }
-    // Find uses of the PropertyDatum to create the arguments
-    for (d in self.datums.select(dt : QVTs!PropertyDatum | true)) {
-        for (r in QVT!Transformation.all().first().rule) {
-            for (p in r.getAllPredicates().select(p |
-                    p.conditionExpression.isSimpleAttributeNavigation()
-                    and (p.conditionExpression.source.source.type == d.type
-                         or d.type.superClass.includes(p.conditionExpression.source.source.type))
-                    and p.conditionExpression.source.referredProperty == d.property)) {
-                var dd = new QVTs!DistinctData;
-                //dd.primaryArguments.add(d);
-                dd.primaryArgument = d;
-                QVTs!MappingAction.all().selectOne(m | m.mapping == r).distinctArguments.add(dd);
+operation QVTs!Schedule defineArgumentDerivation() {
+    for (ma in self.actions) {
+        ma.mapping.name.println("m ");
+        // Find the best derivation alternatives
+        var inputVars = ma.distinctArguments.collect(da | da.primaryArgument.first().variable);
+        var derivees = ma.distinctArguments.collect(da | da.primaryArgument.first())
+                .aggregate(pa | pa, pa.variable.derivedVariables(inputVars));              
+        for (da in ma.distinctArguments.sortBy(da | derivees.get(da.primaryArgument.first()).size()).invert()) {
+            for (dv in derivees.get(da.primaryArgument.first())) {
+                if (ma.distinctArguments.exists(da | da.primaryArgument.exists(pa | pa.variable == dv))) {
+                    da.secondaryArguments.add(ma.distinctArguments.selectOne(da | da.primaryArgument.exists(pa | pa.variable == dv)).primaryArgument.first());
+                }
             }
         }
     }
@@ -578,11 +555,20 @@ operation QVTs!Schedule createDependencyRelations(rules : Collection) {
 operation QVT!Variable derivedVariables(vars : Sequence) : Set {
 
     var derived : Set;
-    for (vB in vars) {
-        if (not self.hasRelation(vB).isEmpty()) {
+    for (vB in vars.excluding(self)) {
+        for (rel in self.hasRelation(vB)) { //self.hasRelation(vB).sortBy(r | r.getCost()) // In the future cost can be used to select the less expensive navigation
             //vB.name.println(self.name + "    has relation to ");
             derived.add(vB);
-            derived.addAll(vB.derivedVariables(vars.excluding(vB)));
+            derived.addAll(vB.derivedVariables(vars.excluding(self)));
+            break;
+        }
+        // Can the opposite relation be used?
+        for (rel in vB.hasRelation(self)) { //self.hasRelation(vB).sortBy(r | r.getCost()) // In the future cost can be used to select the less expensive navigation
+            //vB.name.println(self.name + "    has relation to ");
+            if (rel.hasNavigableOpposite()) {
+                derived.add(vB);
+                derived.addAll(vB.derivedVariables(vars.excluding(self)));
+            }
         }
     }
     return derived;

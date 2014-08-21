@@ -45,8 +45,8 @@ rule TransformationToSchedule
  * NAME
  *  MappingToMappingAction - A mapping genereates a mapping action and its datums
  * FUNCTION
- *  Visit the mapping input/ouput variables and assignments/predicates to create
- *  the appropriate class and property datums and distinct data classes.
+ *  Visit the mapping input/ouput variables to create the appropriate results and
+ *  arguments.
  * FROM
  *  QVTp!Mapping
  * TO
@@ -61,21 +61,23 @@ rule MappingToMappingAction
         ma.mapping = m;
         ma.results.addAll(m.getOutputVariables().collect(v | v.type).equivalent());
         ma.distinctArguments.addAll(m.getInputVariables().equivalents().collect(e | e.first()));
-        //Primitive type results
-        var pTypeAsgmts = m.getPrimitiveDataTypeAssignemnts();
-        ma.results.addAll(m.getAllAssignments()
-                .select(a | a.isPrimitivePropertyAssignemnt())
-                .collect(a | a.slotExpression.referredVariable.type).equivalent());
-        
-        //Primitive type arguments
-        ma.distinctArguments.addAll(m.getAllPredicates()
-                .select(p | p.conditionExpression.isSimpleAttributeNavigation()
-                    and p.conditionExpression.argument.first().referredVariable.type.isTypeOf(QVT!PrimitiveType))
-                .collect(p | p.conditionExpression.source.referredProperty).equivalent());
     }
 
-// Lazy so we dont transformn variables from iterators
-// Greedy so we also transform RealizedVariables
+/****u* QVTpToSchedule/VariableToDataParameter
+ * NAME
+ *  VariableToDataParameter - Variables and RealizedVariables are transformed
+ *  into a DistinctData and a DataParameter.
+ * FUNCTION
+ *  All Variables are treated as initialy treated as primary arguments. Analysis
+ *  of derivation is done in a later stage.
+ * FROM
+ *  QVTp!Variable
+ * TO
+ *  QVTs!DistinctData, QVTs!DataParameter
+ * ANNOTATIONS
+ *  lazy        Lazy variables from iterators and not automatically transformed
+ *  greedy      Greedy so we also transform RealizedVariables
+ */
 @lazy
 @greedy
 rule VariableToDataParameter
@@ -85,7 +87,7 @@ rule VariableToDataParameter
         //v.name.println("v ");
         dp.variable = v;
         dp.datum ::= v.type;
-        dd.primaryArgument.add(dp);
+        dd.primaryArguments.add(dp);
     }
 
 // Only types in the TypedModel pacakges and that are used by a variable
@@ -111,27 +113,6 @@ operation QVTp!Type getVariableForType() : QVTp!Variable {
     return QVTp!Variable.all().selectOne(v | v.type == self or v.type.superClass.includes(self));
 }
 
-@lazy
-rule PropertyToDatum
-    transform p : QVTp!Property
-    to d : QVTs!PropertyDatum {
-        
-        var domain = p.owningType.getVariableForType().oppositePattern().area;
-        d.property = p;
-        d.type = p.owningType;
-        d.domain =  domain;
-        d.schedule ::= domain.`rule`.transformation;    
-    }
-
-
-@lazy    
-rule PredicateToDistinctData
-    transform p : QVTp!Predicate
-    to dd : QVTs!DistinctData {
-        
-        dd.primaryArgument ::= p.conditionExpression.source.source;
-    }    
-    
 post{
     "QVTpToSchedule Done".println();
 }    

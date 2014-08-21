@@ -83,7 +83,7 @@ operation QVTs!MappingAction getOrdering(visited) {
 		if (visited.excludes(ma))
 			ma.getOrdering(visited);
 	}
-	self.count = self.schedule.getMaxIndex() + 1;
+	self.order = self.schedule.getMaxIndex() + 1;
 }
 
 /****o* MapOrdering/getPredecessors
@@ -133,7 +133,8 @@ operation QVTs!MappingAction getPredecessors() : Set {
 operation QVTs!MappingAction getArguments() : Sequence {
 	
 	return self.distinctArguments.primaryArgument
-			.includingAll(self.distinctArguments.secondaryArguments).flatten();
+			.includingAll(self.distinctArguments.secondaryArguments).flatten()
+			.collect(da | da.datum);
 }
 
 /****o* MapOrdering/getMaxIndex
@@ -154,7 +155,7 @@ operation QVTs!MappingAction getArguments() : Sequence {
  *  SEE ALSO
  */		
 operation QVTs!Schedule getMaxIndex() : Integer {
-	return self.actions.sortBy(a | a.count).count.last();
+	return self.actions.sortBy(a | a.order).order.last();
 }
 
 /* =========================================== */

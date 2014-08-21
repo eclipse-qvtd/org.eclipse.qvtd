@@ -39,7 +39,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="primaryDistinctData" eType="#//DistinctData"
-        eOpposite="#//DistinctData/primaryArgument"/>
+        eOpposite="#//DistinctData/primaryArguments"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="secondaryDistinctData"
         eType="#//DistinctData" eOpposite="#//DistinctData/secondaryArguments"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="datum" lowerBound="1" eType="#//AbstractDatum"
@@ -48,7 +48,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="DistinctData">
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//AbstractAction"
         eOpposite="#//AbstractAction/distinctArguments"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="primaryArgument" lowerBound="1"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="primaryArguments" lowerBound="1"
         upperBound="-1" eType="#//DataParameter" containment="true" eOpposite="#//DataParameter/primaryDistinctData"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="secondaryArguments" upperBound="-1"
         eType="#//DataParameter" containment="true" eOpposite="#//DataParameter/secondaryDistinctData"/>
