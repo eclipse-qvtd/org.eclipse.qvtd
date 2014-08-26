@@ -18,7 +18,7 @@
  * @param name the name of the operation
  * @param owningType the type to which the operation belongs
  */
-operation oclStdLib!AnyType getOperationByName(name : String) : oclStdLib!Operation {
+operation oclStdLib!Class getOperationByName(name : String) : oclStdLib!Operation {
 	return self.ownedOperation.selectOne(o | o.name == name);
 }
 
@@ -27,5 +27,5 @@ operation getPrimitiveTypeByName(name : String) : oclStdLib!PrimitiveType {
 }
 
 operation getClassByName(name : String) : oclStdLib!Class {
-    return oclStdLib!Class.all().select(c | c.name == name);
+    return oclStdLib!Class.all().selectOne(c | c.name == name);
 } 

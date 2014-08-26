@@ -50,8 +50,8 @@ rule Transformations
 
 @abstract
 rule Rules
-    transform rIn : QVTp!Mapping
-    to rOut : QVTi!Mapping
+    transform rIn : QVTp!Rule
+    to rOut : QVTi!Rule
     extends NamedElements
     {
 
@@ -76,6 +76,18 @@ rule Mappings
     to mOut : QVTi!Mapping
     extends Rules, Areas
     {
+        
+        var ma = QVTs!MappingAction.all().selectOne(ma | ma.mapping.name == mIn.name); 
+        if (not ma.children.isEmpty()) {
+            mIn.name.println("Children ");
+            mOut.mappingStatement = new QVTi!MappingSequence;
+            // Add loops of mapping calls accordingly... hard!
+            if (ma.hasLoopVariable()) {
+                mOut.mappingStatement.mappingStatements.addAll(ma.children.collect(ma | ma.distinctArguments).flatten().equivalent());
+            } else {
+                mOut.mappingStatement.mappingStatements.addAll(ma.children.equivalent());
+            }
+        }
     }
 
 @abstract
@@ -208,38 +220,56 @@ rule MappingActions
     transform ma : QVTs!MappingAction
     to mc : QVTi!MappingCall
     {
+        guard : ma.parent.isDefined()
+        
         mc.referredMapping = ma.mapping;
         mc.binding.addAll(ma.distinctArguments.collect(da | da.primaryArguments.includingAll(da.secondaryArguments)).equivalent().select(e | e.isTypeOf(QVTi!MappingCallBinding)));
     }
 
-rule DataParameter
-    transform dp : QVTs!DataParameter
-    to loop : QVTi!MappingLoop, ms : QVTi!MappingCallBinding
+    
+rule DistinctData
+    transform dd : QVTs!DistinctData
+    to loop : QVTi!MappingLoop
     {
-        guard : not dp.primaryDistinctData.isEmpty()
         
-        loop.iterator = new QVTi!Variable;
-        loop.iterator.name = dp.variable.name;
-        loop.iterator.type = dp.variable.type;
+        var it = new QVTi!Variable;
+        it.name = dd.primaryArguments.first().variable.name;
+        it.type = dd.primaryArguments.first().variable.type;
+        loop.iterator.add(it);
         var exp = new QVTi!OperationCallExp;
-        exp.referredOperation = getClassByName("OCLElement").getOperationByName("allInstances");
+        exp.referredOperation = getClassByName("OclElement").getOperationByName("allInstances");
         exp.source = new QVTi!TypeExp;
-        exp.source.type = dp.variable.type;
+        exp.source.type = dd.primaryArguments.first().variable.type;
         loop.source = exp;
-        
-        ms.boundVariable = dp.variable;
-        ms.value = new QVTi!VariableExp;
-        ms.value.refferedVariable = loop.iterator;
-        ms.mappingCall ::= dp.primaryDistinctData.target;
+        // TODO what happens with multiple Distinct Datas?
+        loop.body ::= dd.target;
         
     }
+    
 
 rule DataParameter
     transform dp : QVTs!DataParameter
-    to ms : QVTi!MappingCallBinding
+    to cb : QVTi!MappingCallBinding
     {
-        guard : dp.primaryDistinctData.isEmpty()
+        
+        cb.boundVariable = dp.variable;
+        cb.value = new QVTi!VariableExp;
+        if (dp.primaryDistinctData.isDefined()) {
+            cb.value.referredVariable = dp.primaryDistinctData.equivalent().iterator.first();
+            cb.mappingCall ::= dp.primaryDistinctData.target;
+        } else {
+            cb.value.referredVariable = dp.secondaryDistinctData.equivalent().iterator.first();
+            cb.mappingCall ::= dp.secondaryDistinctData.target;
+        }
+        
     }
+
+operation QVTs!MappingAction hasLoopVariable() : Boolean {
+    
+    // This is the actual operation that finds the nesting
+    return true;
+}
+
 
 post {
     "QVTp+s to QVTi Done".println();

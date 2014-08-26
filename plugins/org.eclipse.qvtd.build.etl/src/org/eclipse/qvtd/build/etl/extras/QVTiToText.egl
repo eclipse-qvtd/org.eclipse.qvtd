@@ -95,17 +95,32 @@ map [%if (self.name.isDefined()){%][%=self.name%] in [%=t.name%][%}%] {
         [%=p.toString()%];[%
         }
     }%]}
-    [% for (mc in self.mappingCall) {
-    mc.call();
+    [% for (ms in self.mappingStatement) {
+    ms.call();
     }%]
 }
+[%
+}
     
-[%}
+
 operation MappingCall call() {%]
     map [%=self.referredMapping.name%](
     [% for (b in self.binding) {%]
-        [%=b.boundVariable.name%][%if(b.isLoop){%] <[%} else{%] :[%}%]= [%=b.value.toString()%]; 
+        [%=b.boundVariable.name%]:= [%=b.value.toString()%]; 
     [%}%]
     );
 [% }
-%]
+
+operation MappingSequence call() {
+    for (ms in self.mappingStatements) {
+        ms.call();
+    }
+}
+
+//=self.body.call()
+operation MappingLoop call() {%]
+   for [%=self.iterator.first().name%] in [%=self.source.toString()%] {
+        "Missing call here!"
+   }[%
+}%]
+

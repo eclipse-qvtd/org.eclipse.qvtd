@@ -48,14 +48,14 @@ QVTs!Schedule.all.first().flatNesting(QVTp!Transformation.all.first());
 
 operation QVTs!Schedule flatNesting(t : QVTp!Transformation) {
 
-    var bm = t.rule.selectOne(r | r.name + "__root__");
+    var bm = t.rule.selectOne(r | r.name == "__root__");
     var ma = new QVTs!MappingAction;
-    ma.mapping = bm;
     ma.order = 0;
+    ma.mapping = bm;
     for (na in self.actions.sortBy(a | a.order)) {
-        na.parent = ma;
+        na.parent = ma;     // All mappings invoked from the root.
     }
-    self.actions.add(ma);
+    ma.schedule = self;
 }
 
 operation QVTp!Transformation createBaseMapping() {
@@ -82,7 +82,8 @@ operation QVTp!Transformation createBaseMapping() {
  * ANNOTATIONS
  */
 operation QVTs!Schedule removeEmptyDistinctData() {
-    for (da in self.actions.distinctArguments.select(dd | dd.primaryArguments.isEmpty())) {
+    
+    for (da in self.actions.collect(a | a.distinctArguments).flatten().select(dd | dd.primaryArguments.isEmpty())) {
         delete da;
     }
 }

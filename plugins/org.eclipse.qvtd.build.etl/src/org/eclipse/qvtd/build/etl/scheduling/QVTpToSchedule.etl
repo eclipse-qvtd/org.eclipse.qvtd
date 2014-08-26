@@ -9,7 +9,7 @@
  *     Horacio Hoyos - initial implementation
  ******************************************************************************/
 import "../helpers/QVTHelpers.eol";
-import "Scheduler.eol";
+//import "Scheduler.eol";
  
 /****t* /org.eclipse.qvtd.build.etl/scheduling/QVTpToSchedule
  * NAME
