@@ -837,6 +837,10 @@ operation QVT!Rule getOutputVariables() : Set {
     return vars;
 }
 
+operation QVT!Rule getAllVariables() {
+    return self.getInputVariables().includingAll(self.getOutputVariables());
+}
+
 operation QVT!Transformation getAllVariables() {
 }
 

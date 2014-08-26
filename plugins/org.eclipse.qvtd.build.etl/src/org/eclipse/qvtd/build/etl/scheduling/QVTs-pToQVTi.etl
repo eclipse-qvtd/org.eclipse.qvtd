@@ -1,0 +1,246 @@
+/*******************************************************************************
+ * Copyright (c) 2014 The University of York and Willink Transformations.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
+import "../helpers/OclExpressionAnalysis.eol";
+import "../helpers/QVTHelpers.eol";
+
+pre {
+    var emfTool = new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
+}
+
+//=============== QVTp to QVTi (just copy)  ===============
+
+rule ImperativeModel
+    transform mIn : QVTp!ImperativeModel
+    to mOut : QVTi!ImperativeModel
+    {
+        
+        mOut.externalURI = mIn.externalURI.replace(".qvtp.qvti", ".qvti");
+        mOut.nestedPackage.addAll(mIn.nestedPackage.equivalent());
+        // Copy the OCL types package
+        mOut.nestedPackage.add(emfTool.getEcoreUtil().copy(mIn.nestedPackage.selectOne(p | p.isTypeOf(QVTp!Package))));
+    }
+
+@abstract
+rule NamedElements
+    transform eIn : QVTp!NamedElement
+    to eOut : QVTi!NamedElement
+    {
+        eOut.name = eIn.name;
+    }
+    
+rule Transformations
+    transform tIn : QVTp!Transformation
+    to tOut : QVTi!Transformation
+    extends NamedElements
+    {
+        
+        tOut.ownedTag = emfTool.getEcoreUtil().copyAll(tIn.ownedTag);
+        tOut.modelParameter = emfTool.getEcoreUtil().copyAll(tIn.modelParameter);
+        tOut.`rule`.addAll(tIn.`rule`.equivalent());
+        tOut.`extends` ::= tIn.`extends`;
+    }
+
+@abstract
+rule Rules
+    transform rIn : QVTp!Mapping
+    to rOut : QVTi!Mapping
+    extends NamedElements
+    {
+
+        rOut.domain.addAll(rIn.domain.equivalent());
+        rOut.overrides ::= rIn.overrides;
+        rOut.transformation ::= rIn.transformation;
+        rOut.overridden.addAll(rIn.overridden.equivalent());
+    }
+
+@abstract
+rule Areas
+    transform aIn : QVTp!Area
+    to aOut : QVTi!Area
+    {
+    
+        aOut.guardPattern ::= aIn.guardPattern;
+        aOut.bottomPattern ::= aIn.bottomPattern;
+    }
+
+rule Mappings
+    transform mIn : QVTp!Mapping
+    to mOut : QVTi!Mapping
+    extends Rules, Areas
+    {
+    }
+
+@abstract
+rule Domains
+    transform dIn : QVTp!Domain
+    to dOut : QVTi!Domain
+    {
+        dOut.isCheckable = dIn.isCheckable;
+        dOut.isEnforceable = dIn.isEnforceable;
+        dOut.`rule` ::= dIn.`rule`;
+        dOut.typedModel ::= dIn.typedModel; 
+    } 
+
+rule CodeDomains
+    transform cdIn : QVTp!CoreDomain
+    to cdOut : QVTp!CoreDomain
+    extends Domains, Areas
+    {
+        
+    }
+
+@abstract        
+rule Patterns
+    transform pIn : QVTp!Pattern
+    to pOut : QVTi!Pattern
+    {
+        pOut.predicate.addAll(pIn.predicate.equivalent());
+        pOut.bindsTo.addAll(pIn.bindsTo.equivalent());
+    }
+
+@abstract
+rule CorePatterns
+    transform cpIn : QVTp!CorePattern
+    to cpOut : QVTi!CorePattern
+    extends Patterns
+    {
+    
+        cpOut.variable.addAll(cpIn.variable.equivalent());
+    }        
+    
+rule BottomPatterns
+    transform bpIn : QVTp!BottomPattern
+    to bpOut : QVTi!BottomPattern
+    extends CorePatterns
+    {
+        bpOut.area ::= bpIn.area;
+        bpOut.assignment.addAll(bpIn.assignment.equivalent());
+        bpOut.enforcementOperation.addAll(bpIn.enforcementOperation.equivalent());
+        bpOut.variable.addAll(bpIn.variable.equivalent());
+        bpOut.realizedVariable.addAll(bpIn.realizedVariable.equivalent());
+    }
+
+rule GuardPatterns
+    transform gpIn : QVTp!GuardPattern
+    to gpOut : QVTi!GuardPattern
+    extends CorePatterns
+    {
+        gpOut.area ::= gpIn.area;
+    }
+
+@abstract
+rule Assignments
+    transform aIn : QVTp!Assignment
+    to aOut : QVTi!Assignemnt
+    {
+        aOut.bottomPattern ::= aIn.bottomPattern;
+        aOut.isDefault = aIn.isDefault;
+        aOut.value = emfTool.getEcoreUtil().copy(aIn.value);
+        var vars;
+        if (aIn.bottomPattern.area.isTypeOf(QVTi!CoreDomain)) {
+            vars = aIn.bottomPattern.area.`rule`.getAllVariables().equivalent();
+        } else {
+            vars = aIn.bottomPattern.area.getAllVariables().equivalent();
+        }
+        for (vFix in vars) {
+            aOut.value.fixVarReferences(vFix);
+        }
+    }
+
+rule PropertyAssignments
+    transform paIn : QVTp!PropertyAssignment
+    to paOut : QVTi!PropertyAssignment
+    extends Assignments
+    {
+        paOut.slotExpression = emfTool.getEcoreUtil().copy(paIn.slotExpression);
+        paOut.targetProperty = paIn.targetProperty;
+        var vars;
+        if (paIn.bottomPattern.area.isTypeOf(QVTi!CoreDomain)) {
+            vars = paIn.bottomPattern.area.`rule`.getAllVariables().equivalent();
+        } else {
+            vars = paIn.bottomPattern.area.getAllVariables().equivalent();
+        }
+        for (vFix in vars) {
+            paOut.slotExpression.fixVarReferences(vFix);
+        }
+    }
+
+rule VariableAssignments
+    transform vaIn : QVTp!VariableAssignment
+    to vaOut : QVTi!VariableAssignment
+    extends Assignments
+    {
+        vaOut.targetVariable ::= vaIn.targetVariable;
+    }
+     
+rule Variables
+    transform vIn : QVTp!Variable
+    to vOut : QVTi!Variable
+    extends NamedElements
+    {
+        // Not a loop variable
+        guard : not vIn.eContainer.isTypeOf(QVTp!IteratorExp)
+        
+        vOut.implicit = vIn.implicit;
+        vOut.type = vIn.type;
+    }
+    
+rule RealizedVariables
+    transform vIn : QVTp!RealizedVariable
+    to vOut : QVTi!RealizedVariable
+    extends NamedElements
+    {
+        vOut.implicit = vIn.implicit;
+        vOut.type = vIn.type;
+    }
+
+//=============== QVTs to QVTi (add mapping calls)  ===============
+
+rule MappingActions
+    transform ma : QVTs!MappingAction
+    to mc : QVTi!MappingCall
+    {
+        mc.referredMapping = ma.mapping;
+        mc.binding.addAll(ma.distinctArguments.collect(da | da.primaryArguments.includingAll(da.secondaryArguments)).equivalent().select(e | e.isTypeOf(QVTi!MappingCallBinding)));
+    }
+
+rule DataParameter
+    transform dp : QVTs!DataParameter
+    to loop : QVTi!MappingLoop, ms : QVTi!MappingCallBinding
+    {
+        guard : not dp.primaryDistinctData.isEmpty()
+        
+        loop.iterator = new QVTi!Variable;
+        loop.iterator.name = dp.variable.name;
+        loop.iterator.type = dp.variable.type;
+        var exp = new QVTi!OperationCallExp;
+        exp.referredOperation = getClassByName("OCLElement").getOperationByName("allInstances");
+        exp.source = new QVTi!TypeExp;
+        exp.source.type = dp.variable.type;
+        loop.source = exp;
+        
+        ms.boundVariable = dp.variable;
+        ms.value = new QVTi!VariableExp;
+        ms.value.refferedVariable = loop.iterator;
+        ms.mappingCall ::= dp.primaryDistinctData.target;
+        
+    }
+
+rule DataParameter
+    transform dp : QVTs!DataParameter
+    to ms : QVTi!MappingCallBinding
+    {
+        guard : dp.primaryDistinctData.isEmpty()
+    }
+
+post {
+    "QVTp+s to QVTi Done".println();
+}    

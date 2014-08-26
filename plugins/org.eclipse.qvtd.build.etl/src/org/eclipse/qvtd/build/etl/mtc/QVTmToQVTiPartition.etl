@@ -30,6 +30,7 @@ rule CoreModel
     to mOut:QVTi!ImperativeModel {
         mOut.name = mIn.name;
         mOut.nestedPackage ::= mIn.nestedPackage;
+        mOut.externalURI = mIn.externalURI.replace(".qvtm.qvtc", ".qvtp.qvti");
     }
 
 /****u* /org.eclipse.qvtd.build.etl/mtc/QVTmToQVTiPartition/Transformation
@@ -53,6 +54,7 @@ rule Transformation
         tOut.modelParameter ::= tIn.modelParameter;
         tOut.`rule`.addAll(tIn.`rule`.equivalents().flatten());
         // Fix references
+        // TODO emfTool.getEcoreUtil();
         for(r in tOut.`rule`) {
             r.guardPattern.fixPredicateVarReferences();
 	        r.bottomPattern.fixPredicateVarReferences();
@@ -161,6 +163,7 @@ rule Mapping
 		    // Create Middle domain
 		    var mM : QVTi!CoreDomain = new QVTi!CoreDomain;
 		    mM.isEnforceable = true;
+		    mM.isCheckable = false;
 		    mM.typedModel = m.getTransforamtion().getMiddleTypedModel().equivalent();
 		    mM.name = mM.typedModel.name; 
 		    mM.guardPattern = new QVTi!GuardPattern;
@@ -208,6 +211,7 @@ rule Mapping
 		    // Create Middle domain
 		    var mM : QVTi!CoreDomain = new QVTi!CoreDomain;
 		    mM.isCheckable = true;
+		    mM.isEnforceable = false;
 		    mM.typedModel = m.getTransforamtion().getMiddleTypedModel().equivalent();
 		    mM.name = mM.typedModel.name; 
 		    mM.guardPattern = new QVTi!GuardPattern;

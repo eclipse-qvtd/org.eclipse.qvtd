@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="ASCII"?>
 <qvtschedule:Schedule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvtschedule="http://www.eclipse.org/qvt/0.1/QVTschedule/">
-  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.0" dataParameter="//@actions.1/@distinctArguments.0/@primaryArguments.0 //@actions.2/@distinctArguments.0/@secondaryArguments.1 //@actions.3/@distinctArguments.0/@secondaryArguments.0 //@actions.4/@distinctArguments.0/@secondaryArguments.0 //@actions.5/@distinctArguments.0/@secondaryArguments.0 //@actions.6/@distinctArguments.0/@secondaryArguments.0 //@actions.7/@distinctArguments.0/@secondaryArguments.1 //@actions.8/@distinctArguments.0/@secondaryArguments.0 //@actions.9/@distinctArguments.0/@secondaryArguments.1 //@actions.10/@distinctArguments.0/@secondaryArguments.4 //@actions.11/@distinctArguments.0/@secondaryArguments.3">
+  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.0" dataParameter="//@actions.1/@distinctArguments.0/@primaryArguments.0 //@actions.2/@distinctArguments.0/@secondaryArguments.1 //@actions.3/@distinctArguments.0/@secondaryArguments.0 //@actions.4/@distinctArguments.0/@secondaryArguments.0 //@actions.5/@distinctArguments.1/@secondaryArguments.1 //@actions.6/@distinctArguments.0/@secondaryArguments.0 //@actions.7/@distinctArguments.1/@secondaryArguments.1 //@actions.8/@distinctArguments.1/@secondaryArguments.1 //@actions.9/@distinctArguments.2/@secondaryArguments.0 //@actions.10/@distinctArguments.6/@secondaryArguments.1 //@actions.11/@distinctArguments.0/@secondaryArguments.3">
     <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"/>
     <domain href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.0/@domain.1"/>
   </datums>
-  <datums xsi:type="qvtschedule:ClassDatum" dataParameter="//@actions.0/@distinctArguments.0/@primaryArguments.0 //@actions.2/@distinctArguments.0/@secondaryArguments.0 //@actions.5/@distinctArguments.0/@secondaryArguments.1 //@actions.7/@distinctArguments.0/@secondaryArguments.0 //@actions.8/@distinctArguments.0/@secondaryArguments.1 //@actions.11/@distinctArguments.0/@secondaryArguments.5">
+  <datums xsi:type="qvtschedule:ClassDatum" dataParameter="//@actions.0/@distinctArguments.0/@primaryArguments.0 //@actions.2/@distinctArguments.0/@secondaryArguments.0 //@actions.5/@distinctArguments.1/@secondaryArguments.0 //@actions.7/@distinctArguments.1/@secondaryArguments.0 //@actions.9/@distinctArguments.2/@secondaryArguments.1 //@actions.10/@distinctArguments.6/@secondaryArguments.5">
     <type href="SimpleUML.ecore.oclas#T.simpleuml.Package"/>
     <domain href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.0/@domain.0"/>
   </datums>
-  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.1" dataParameter="//@actions.9/@distinctArguments.0/@secondaryArguments.0 //@actions.10/@distinctArguments.0/@secondaryArguments.5">
+  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.1" dataParameter="//@actions.8/@distinctArguments.1/@secondaryArguments.0 //@actions.11/@distinctArguments.0/@secondaryArguments.0">
     <type href="SimpleRDBMS.ecore.oclas#T.simplerdbms.Schema"/>
     <domain href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.1/@domain.0"/>
   </datums>
-  <datums xsi:type="qvtschedule:ClassDatum" dataParameter="//@actions.12/@distinctArguments.0/@secondaryArguments.3 //@actions.14/@distinctArguments.0/@secondaryArguments.1 //@actions.16/@distinctArguments.0/@secondaryArguments.1">
+  <datums xsi:type="qvtschedule:ClassDatum" dataParameter="//@actions.12/@distinctArguments.3/@secondaryArguments.2 //@actions.14/@distinctArguments.0/@secondaryArguments.0 //@actions.16/@distinctArguments.2/@secondaryArguments.3">
     <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"/>
     <domain href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.2/@domain.1"/>
   </datums>
@@ -20,11 +20,11 @@
     <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.IntegerToNumber"/>
     <domain href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.2/@domain.1"/>
   </datums>
-  <datums xsi:type="qvtschedule:ClassDatum" dataParameter="//@actions.2/@distinctArguments.0/@primaryArguments.0 //@actions.5/@distinctArguments.0/@primaryArguments.0 //@actions.7/@distinctArguments.0/@primaryArguments.0 //@actions.12/@distinctArguments.0/@secondaryArguments.2 //@actions.14/@distinctArguments.0/@secondaryArguments.2">
+  <datums xsi:type="qvtschedule:ClassDatum" dataParameter="//@actions.2/@distinctArguments.0/@primaryArguments.0 //@actions.5/@distinctArguments.1/@primaryArguments.0 //@actions.7/@distinctArguments.1/@primaryArguments.0 //@actions.12/@distinctArguments.3/@secondaryArguments.0 //@actions.14/@distinctArguments.0/@secondaryArguments.1">
     <type href="SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"/>
     <domain href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.2/@domain.0"/>
   </datums>
-  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.3 //@actions.4 //@actions.6" dataParameter="//@actions.16/@distinctArguments.0/@secondaryArguments.2">
+  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.3 //@actions.4 //@actions.6" dataParameter="//@actions.16/@distinctArguments.2/@secondaryArguments.0">
     <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"/>
     <domain href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.3/@domain.0"/>
   </datums>
@@ -36,332 +36,376 @@
     <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.StringToVarchar"/>
     <domain href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.6/@domain.1"/>
   </datums>
-  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.8" dataParameter="//@actions.9/@distinctArguments.0/@primaryArguments.0 //@actions.10/@distinctArguments.0/@secondaryArguments.2 //@actions.10/@distinctArguments.0/@secondaryArguments.3 //@actions.11/@distinctArguments.0/@secondaryArguments.0 //@actions.11/@distinctArguments.0/@secondaryArguments.4 //@actions.12/@distinctArguments.0/@secondaryArguments.0 //@actions.13/@distinctArguments.0/@secondaryArguments.1 //@actions.16/@distinctArguments.0/@secondaryArguments.3">
+  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.8 //@actions.11 //@actions.16">
+    <type href="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"/>
+    <domain href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.8/@domain.0"/>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.8" dataParameter="//@actions.11/@distinctArguments.0/@secondaryArguments.4 //@actions.11/@distinctArguments.0/@secondaryArguments.2 //@actions.16/@distinctArguments.2/@secondaryArguments.2">
+    <type href="SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"/>
+    <domain href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.8/@domain.0"/>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.8" dataParameter="//@actions.11/@distinctArguments.7/@primaryArguments.0">
+    <type href="SimpleRDBMS.ecore.oclas#T.simplerdbms.Key"/>
+    <domain href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.8/@domain.0"/>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.9" dataParameter="//@actions.8/@distinctArguments.1/@primaryArguments.0 //@actions.10/@distinctArguments.6/@secondaryArguments.3 //@actions.10/@distinctArguments.6/@secondaryArguments.0 //@actions.11/@distinctArguments.0/@secondaryArguments.5 //@actions.11/@distinctArguments.0/@secondaryArguments.1 //@actions.12/@distinctArguments.3/@secondaryArguments.1 //@actions.13/@distinctArguments.1/@secondaryArguments.0 //@actions.16/@distinctArguments.2/@secondaryArguments.1">
     <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"/>
     <domain href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.8/@domain.1"/>
   </datums>
-  <datums xsi:type="qvtschedule:ClassDatum" dataParameter="//@actions.8/@distinctArguments.0/@primaryArguments.0 //@actions.11/@distinctArguments.0/@secondaryArguments.2 //@actions.11/@distinctArguments.0/@secondaryArguments.1 //@actions.12/@distinctArguments.0/@secondaryArguments.1 //@actions.13/@distinctArguments.0/@secondaryArguments.0 //@actions.13/@distinctArguments.0/@secondaryArguments.2 //@actions.14/@distinctArguments.0/@secondaryArguments.0 //@actions.15/@distinctArguments.1/@secondaryArguments.0 //@actions.15/@distinctArguments.0/@secondaryArguments.0">
+  <datums xsi:type="qvtschedule:ClassDatum" dataParameter="//@actions.9/@distinctArguments.2/@primaryArguments.0 //@actions.10/@distinctArguments.6/@secondaryArguments.2 //@actions.10/@distinctArguments.6/@secondaryArguments.4 //@actions.12/@distinctArguments.3/@secondaryArguments.3 //@actions.13/@distinctArguments.1/@secondaryArguments.2 //@actions.13/@distinctArguments.1/@secondaryArguments.1 //@actions.14/@distinctArguments.0/@secondaryArguments.2 //@actions.15/@distinctArguments.1/@secondaryArguments.0 //@actions.15/@distinctArguments.4/@secondaryArguments.1">
     <type href="SimpleUML.ecore.oclas#T.simpleuml.Class"/>
-    <domain href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.8/@domain.0"/>
-  </datums>
-  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.9 //@actions.10 //@actions.16">
-    <type href="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"/>
     <domain href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.9/@domain.0"/>
   </datums>
-  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.9" dataParameter="//@actions.10/@distinctArguments.1/@primaryArguments.0">
-    <type href="SimpleRDBMS.ecore.oclas#T.simplerdbms.Key"/>
-    <domain href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.9/@domain.0"/>
-  </datums>
-  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.9" dataParameter="//@actions.10/@distinctArguments.0/@secondaryArguments.1 //@actions.10/@distinctArguments.0/@secondaryArguments.0 //@actions.16/@distinctArguments.0/@secondaryArguments.0">
-    <type href="SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"/>
-    <domain href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.9/@domain.0"/>
-  </datums>
-  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.10">
-    <type href="SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey"/>
-    <domain href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.10/@domain.0"/>
-  </datums>
-  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.11" dataParameter="//@actions.10/@distinctArguments.0/@primaryArguments.0">
+  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.10" dataParameter="//@actions.11/@distinctArguments.0/@primaryArguments.0">
     <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.AssociationToForeignKey"/>
     <domain href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.10/@domain.1"/>
   </datums>
-  <datums xsi:type="qvtschedule:ClassDatum" dataParameter="//@actions.11/@distinctArguments.0/@primaryArguments.0">
+  <datums xsi:type="qvtschedule:ClassDatum" dataParameter="//@actions.10/@distinctArguments.6/@primaryArguments.0">
     <type href="SimpleUML.ecore.oclas#T.simpleuml.Association"/>
+    <domain href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.10/@domain.0"/>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.11">
+    <type href="SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey"/>
     <domain href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.11/@domain.0"/>
   </datums>
   <datums xsi:type="qvtschedule:ClassDatum">
     <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttribute"/>
     <domain href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.12/@domain.1"/>
   </datums>
-  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.17" sources="//@actions.12 //@actions.14" dataParameter="//@actions.16/@distinctArguments.0/@primaryArguments.0">
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.17" sources="//@actions.12 //@actions.14" dataParameter="//@actions.16/@distinctArguments.2/@primaryArguments.0">
     <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"/>
     <domain href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.12/@domain.1"/>
   </datums>
-  <datums xsi:type="qvtschedule:ClassDatum" dataParameter="//@actions.12/@distinctArguments.0/@primaryArguments.0 //@actions.13/@distinctArguments.0/@primaryArguments.0 //@actions.14/@distinctArguments.1/@secondaryArguments.0 //@actions.14/@distinctArguments.0/@primaryArguments.0 //@actions.15/@distinctArguments.0/@primaryArguments.0 //@actions.15/@distinctArguments.1/@primaryArguments.0">
+  <datums xsi:type="qvtschedule:ClassDatum" dataParameter="//@actions.12/@distinctArguments.3/@primaryArguments.0 //@actions.13/@distinctArguments.1/@primaryArguments.0 //@actions.14/@distinctArguments.0/@primaryArguments.0 //@actions.14/@distinctArguments.5/@secondaryArguments.0 //@actions.15/@distinctArguments.1/@primaryArguments.0 //@actions.15/@distinctArguments.4/@secondaryArguments.0">
     <type href="SimpleUML.ecore.oclas#T.simpleuml.Attribute"/>
     <domain href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.12/@domain.0"/>
   </datums>
-  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.17" sources="//@actions.13 //@actions.15" dataParameter="//@actions.14/@distinctArguments.1/@primaryArguments.0 //@actions.15/@distinctArguments.1/@secondaryArguments.1">
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.17" sources="//@actions.13 //@actions.15" dataParameter="//@actions.14/@distinctArguments.5/@primaryArguments.0 //@actions.15/@distinctArguments.4/@primaryArguments.0">
     <type href="UMLtoRDBMS.ecore.oclas#T.umltordbms.NonLeafAttribute"/>
     <domain href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.13/@domain.1"/>
   </datums>
-  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.0" order="1">
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.0" order="1" parent="//@actions.17">
     <distinctArguments>
       <primaryArguments datum="//@datums.1">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.0/@domain.0/@guardPattern/@variable.0"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.packageToSchema_LM.uml.guard.p"/>
       </primaryArguments>
     </distinctArguments>
     <mapping href="UmlToRdbms.qvtp.qvtias#m.umlRdbms.packageToSchema_LM"/>
   </actions>
-  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.2" order="2">
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.2" order="2" parent="//@actions.17">
     <distinctArguments>
       <primaryArguments datum="//@datums.0">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.1/@domain.1/@guardPattern/@variable.0"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.packageToSchema_MR.middle.guard.p2s"/>
       </primaryArguments>
     </distinctArguments>
     <mapping href="UmlToRdbms.qvtp.qvtias#m.umlRdbms.packageToSchema_MR"/>
   </actions>
-  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.4" order="9">
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.4" order="11" parent="//@actions.17">
     <distinctArguments>
       <primaryArguments datum="//@datums.5">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.2/@domain.0/@guardPattern/@variable.1"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.integerToNumber_LM.uml.guard.prim"/>
       </primaryArguments>
       <secondaryArguments datum="//@datums.1">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.2/@domain.0/@guardPattern/@variable.0"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.integerToNumber_LM.uml.guard.p"/>
       </secondaryArguments>
       <secondaryArguments datum="//@datums.0">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.2/@domain.1/@guardPattern/@variable.0"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.integerToNumber_LM.middle.guard.p2s"/>
       </secondaryArguments>
     </distinctArguments>
+    <distinctArguments/>
+    <distinctArguments/>
     <mapping href="UmlToRdbms.qvtp.qvtias#m.umlRdbms.integerToNumber_LM"/>
   </actions>
-  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.6" order="14">
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.6" order="16" parent="//@actions.17">
     <distinctArguments>
       <primaryArguments datum="//@datums.4">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.3/@domain.1/@guardPattern/@variable.1"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.integerToNumber_MR.middle.guard.p2n"/>
       </primaryArguments>
       <secondaryArguments datum="//@datums.0">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.3/@domain.1/@guardPattern/@variable.0"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.integerToNumber_MR.middle.guard.p2s"/>
       </secondaryArguments>
     </distinctArguments>
+    <distinctArguments/>
     <mapping href="UmlToRdbms.qvtp.qvtias#m.umlRdbms.integerToNumber_MR"/>
   </actions>
-  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.6" order="15">
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.6" order="9" parent="//@actions.17">
     <distinctArguments>
       <primaryArguments datum="//@datums.7">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.4/@domain.1/@guardPattern/@variable.1"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.booleanToBoolean_MR.middle.guard.p2n"/>
       </primaryArguments>
       <secondaryArguments datum="//@datums.0">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.4/@domain.1/@guardPattern/@variable.0"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.booleanToBoolean_MR.middle.guard.p2s"/>
       </secondaryArguments>
     </distinctArguments>
+    <distinctArguments/>
     <mapping href="UmlToRdbms.qvtp.qvtias#m.umlRdbms.booleanToBoolean_MR"/>
   </actions>
-  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.7" order="7">
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.7" order="7" parent="//@actions.17">
+    <distinctArguments/>
     <distinctArguments>
       <primaryArguments datum="//@datums.5">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.5/@domain.0/@guardPattern/@variable.1"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.booleanToBoolean_LM.uml.guard.prim"/>
       </primaryArguments>
-      <secondaryArguments datum="//@datums.0">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.5/@domain.1/@guardPattern/@variable.0"/>
-      </secondaryArguments>
       <secondaryArguments datum="//@datums.1">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.5/@domain.0/@guardPattern/@variable.0"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.booleanToBoolean_LM.uml.guard.p"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.0">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.booleanToBoolean_LM.middle.guard.p2s"/>
       </secondaryArguments>
     </distinctArguments>
+    <distinctArguments/>
     <mapping href="UmlToRdbms.qvtp.qvtias#m.umlRdbms.booleanToBoolean_LM"/>
   </actions>
-  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.6" order="13">
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.6" order="10" parent="//@actions.17">
     <distinctArguments>
       <primaryArguments datum="//@datums.8">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.6/@domain.1/@guardPattern/@variable.1"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.stringToVarchar_MR.middle.guard.p2n"/>
       </primaryArguments>
       <secondaryArguments datum="//@datums.0">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.6/@domain.1/@guardPattern/@variable.0"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.stringToVarchar_MR.middle.guard.p2s"/>
       </secondaryArguments>
     </distinctArguments>
+    <distinctArguments/>
     <mapping href="UmlToRdbms.qvtp.qvtias#m.umlRdbms.stringToVarchar_MR"/>
   </actions>
-  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.8" order="8">
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.8" order="8" parent="//@actions.17">
+    <distinctArguments/>
     <distinctArguments>
       <primaryArguments datum="//@datums.5">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.1"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.stringToVarchar_LM.uml.guard.prim"/>
       </primaryArguments>
       <secondaryArguments datum="//@datums.1">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.7/@domain.0/@guardPattern/@variable.0"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.stringToVarchar_LM.uml.guard.p"/>
       </secondaryArguments>
       <secondaryArguments datum="//@datums.0">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.7/@domain.1/@guardPattern/@variable.0"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.stringToVarchar_LM.middle.guard.p2s"/>
       </secondaryArguments>
     </distinctArguments>
+    <distinctArguments/>
     <mapping href="UmlToRdbms.qvtp.qvtias#m.umlRdbms.stringToVarchar_LM"/>
   </actions>
-  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.9" order="3">
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.9 //@datums.10 //@datums.11" order="4" parent="//@actions.17">
+    <distinctArguments/>
     <distinctArguments>
-      <primaryArguments datum="//@datums.10">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.8/@domain.0/@guardPattern/@variable.1"/>
+      <primaryArguments datum="//@datums.12">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.classToTable_MR.middle.guard.c2t"/>
+      </primaryArguments>
+      <secondaryArguments datum="//@datums.2">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.classToTable_MR.rdbms.guard.s"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.0">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.classToTable_MR.middle.guard.p2s"/>
+      </secondaryArguments>
+    </distinctArguments>
+    <distinctArguments/>
+    <mapping href="UmlToRdbms.qvtp.qvtias#m.umlRdbms.classToTable_MR"/>
+  </actions>
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.12" order="3" parent="//@actions.17">
+    <distinctArguments/>
+    <distinctArguments/>
+    <distinctArguments>
+      <primaryArguments datum="//@datums.13">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.classToTable_LM.uml.guard.c"/>
       </primaryArguments>
       <secondaryArguments datum="//@datums.0">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.8/@domain.1/@guardPattern/@variable.0"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.classToTable_LM.middle.guard.p2s"/>
       </secondaryArguments>
       <secondaryArguments datum="//@datums.1">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.8/@domain.0/@guardPattern/@variable.0"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.classToTable_LM.uml.guard.p"/>
       </secondaryArguments>
     </distinctArguments>
     <mapping href="UmlToRdbms.qvtp.qvtias#m.umlRdbms.classToTable_LM"/>
   </actions>
-  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.11 //@datums.12 //@datums.13" order="4">
-    <distinctArguments>
-      <primaryArguments datum="//@datums.9">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.9/@domain.1/@guardPattern/@variable.1"/>
-      </primaryArguments>
-      <secondaryArguments datum="//@datums.2">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.9/@domain.0/@guardPattern/@variable.0"/>
-      </secondaryArguments>
-      <secondaryArguments datum="//@datums.0">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.9/@domain.1/@guardPattern/@variable.0"/>
-      </secondaryArguments>
-    </distinctArguments>
-    <mapping href="UmlToRdbms.qvtp.qvtias#m.umlRdbms.classToTable_MR"/>
-  </actions>
-  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.11 //@datums.14" order="6">
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.14" order="5" parent="//@actions.17">
+    <distinctArguments/>
+    <distinctArguments/>
+    <distinctArguments/>
+    <distinctArguments/>
+    <distinctArguments/>
+    <distinctArguments/>
     <distinctArguments>
       <primaryArguments datum="//@datums.15">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.10/@domain.1/@guardPattern/@variable.3"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.associationToForeignKey_LM.uml.guard.a"/>
       </primaryArguments>
-      <secondaryArguments datum="//@datums.13">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.10/@domain.0/@guardPattern/@variable.1"/>
-      </secondaryArguments>
-      <secondaryArguments datum="//@datums.13">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.10/@domain.0/@guardPattern/@variable.2"/>
-      </secondaryArguments>
-      <secondaryArguments datum="//@datums.9">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.10/@domain.1/@guardPattern/@variable.2"/>
-      </secondaryArguments>
-      <secondaryArguments datum="//@datums.9">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.10/@domain.1/@guardPattern/@variable.1"/>
+      <secondaryArguments datum="//@datums.12">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.associationToForeignKey_LM.middle.guard.sc2t"/>
       </secondaryArguments>
       <secondaryArguments datum="//@datums.0">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.10/@domain.1/@guardPattern/@variable.0"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.associationToForeignKey_LM.middle.guard.p2s"/>
       </secondaryArguments>
-      <secondaryArguments datum="//@datums.2">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.10/@domain.0/@guardPattern/@variable.0"/>
+      <secondaryArguments datum="//@datums.13">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.associationToForeignKey_LM.uml.guard.dc"/>
       </secondaryArguments>
-    </distinctArguments>
-    <distinctArguments>
-      <primaryArguments datum="//@datums.12">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.10/@domain.0/@guardPattern/@variable.3"/>
-      </primaryArguments>
-    </distinctArguments>
-    <mapping href="UmlToRdbms.qvtp.qvtias#m.umlRdbms.associationToForeignKey_MR"/>
-  </actions>
-  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.15" order="5">
-    <distinctArguments>
-      <primaryArguments datum="//@datums.16">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.3"/>
-      </primaryArguments>
-      <secondaryArguments datum="//@datums.9">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.11/@domain.1/@guardPattern/@variable.1"/>
+      <secondaryArguments datum="//@datums.12">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.associationToForeignKey_LM.middle.guard.dc2t"/>
       </secondaryArguments>
-      <secondaryArguments datum="//@datums.10">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.1"/>
-      </secondaryArguments>
-      <secondaryArguments datum="//@datums.10">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.2"/>
-      </secondaryArguments>
-      <secondaryArguments datum="//@datums.0">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.11/@domain.1/@guardPattern/@variable.0"/>
-      </secondaryArguments>
-      <secondaryArguments datum="//@datums.9">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.11/@domain.1/@guardPattern/@variable.2"/>
+      <secondaryArguments datum="//@datums.13">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.associationToForeignKey_LM.uml.guard.sc"/>
       </secondaryArguments>
       <secondaryArguments datum="//@datums.1">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.11/@domain.0/@guardPattern/@variable.0"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.associationToForeignKey_LM.uml.guard.p"/>
       </secondaryArguments>
     </distinctArguments>
     <mapping href="UmlToRdbms.qvtp.qvtias#m.umlRdbms.associationToForeignKey_LM"/>
   </actions>
-  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.18" order="16">
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.16 //@datums.9" order="6" parent="//@actions.17">
     <distinctArguments>
-      <primaryArguments datum="//@datums.19">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.12/@domain.0/@guardPattern/@variable.2"/>
+      <primaryArguments datum="//@datums.14">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.associationToForeignKey_MR.middle.guard.a2f"/>
       </primaryArguments>
-      <secondaryArguments datum="//@datums.9">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.12/@domain.1/@guardPattern/@variable.0"/>
+      <secondaryArguments datum="//@datums.2">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.associationToForeignKey_MR.rdbms.guard.s"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.12">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.associationToForeignKey_MR.middle.guard.sc2t"/>
       </secondaryArguments>
       <secondaryArguments datum="//@datums.10">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.12/@domain.0/@guardPattern/@variable.1"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.associationToForeignKey_MR.rdbms.guard.st"/>
       </secondaryArguments>
-      <secondaryArguments datum="//@datums.5">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.12/@domain.0/@guardPattern/@variable.0"/>
+      <secondaryArguments datum="//@datums.0">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.associationToForeignKey_MR.middle.guard.p2s"/>
       </secondaryArguments>
-      <secondaryArguments datum="//@datums.3">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.12/@domain.1/@guardPattern/@variable.1"/>
+      <secondaryArguments datum="//@datums.10">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.associationToForeignKey_MR.rdbms.guard.dt"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.12">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.associationToForeignKey_MR.middle.guard.dc2t"/>
       </secondaryArguments>
     </distinctArguments>
+    <distinctArguments/>
+    <distinctArguments/>
+    <distinctArguments/>
+    <distinctArguments/>
+    <distinctArguments/>
+    <distinctArguments/>
+    <distinctArguments>
+      <primaryArguments datum="//@datums.11">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.associationToForeignKey_MR.rdbms.guard.rk"/>
+      </primaryArguments>
+    </distinctArguments>
+    <mapping href="UmlToRdbms.qvtp.qvtias#m.umlRdbms.associationToForeignKey_MR"/>
+  </actions>
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.18" order="12" parent="//@actions.17">
+    <distinctArguments/>
+    <distinctArguments/>
+    <distinctArguments/>
+    <distinctArguments>
+      <primaryArguments datum="//@datums.19">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.classPrimitiveAttributes_LM.uml.guard.a"/>
+      </primaryArguments>
+      <secondaryArguments datum="//@datums.5">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.classPrimitiveAttributes_LM.uml.guard.t"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.12">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.classPrimitiveAttributes_LM.middle.guard.fao"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.3">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.classPrimitiveAttributes_LM.middle.guard.p2n"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.13">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.classPrimitiveAttributes_LM.uml.guard.c"/>
+      </secondaryArguments>
+    </distinctArguments>
+    <distinctArguments/>
     <mapping href="UmlToRdbms.qvtp.qvtias#m.umlRdbms.classPrimitiveAttributes_LM"/>
   </actions>
-  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.20" order="10">
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.20" order="13" parent="//@actions.17">
+    <distinctArguments/>
     <distinctArguments>
       <primaryArguments datum="//@datums.19">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.13/@domain.0/@guardPattern/@variable.2"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.classComplexAttributes_LM.uml.guard.a"/>
       </primaryArguments>
-      <secondaryArguments datum="//@datums.10">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.13/@domain.0/@guardPattern/@variable.1"/>
+      <secondaryArguments datum="//@datums.12">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.classComplexAttributes_LM.middle.guard.fao"/>
       </secondaryArguments>
-      <secondaryArguments datum="//@datums.9">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.13/@domain.1/@guardPattern/@variable.0"/>
+      <secondaryArguments datum="//@datums.13">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.classComplexAttributes_LM.uml.guard.c"/>
       </secondaryArguments>
-      <secondaryArguments datum="//@datums.10">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.13/@domain.0/@guardPattern/@variable.0"/>
+      <secondaryArguments datum="//@datums.13">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.classComplexAttributes_LM.uml.guard.t"/>
       </secondaryArguments>
     </distinctArguments>
+    <distinctArguments/>
+    <distinctArguments/>
     <mapping href="UmlToRdbms.qvtp.qvtias#m.umlRdbms.classComplexAttributes_LM"/>
   </actions>
-  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.18" order="12">
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.18" order="15" parent="//@actions.17">
     <distinctArguments>
       <primaryArguments datum="//@datums.19">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.3"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.complexAttributePrimitiveAttributes_LM.uml.guard.a"/>
       </primaryArguments>
-      <secondaryArguments datum="//@datums.10">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.1"/>
-      </secondaryArguments>
       <secondaryArguments datum="//@datums.3">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.14/@domain.1/@guardPattern/@variable.1"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.complexAttributePrimitiveAttributes_LM.middle.guard.p2n"/>
       </secondaryArguments>
       <secondaryArguments datum="//@datums.5">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.2"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.complexAttributePrimitiveAttributes_LM.uml.guard.t"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.13">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.complexAttributePrimitiveAttributes_LM.uml.guard.c"/>
       </secondaryArguments>
     </distinctArguments>
+    <distinctArguments/>
+    <distinctArguments/>
+    <distinctArguments/>
+    <distinctArguments/>
     <distinctArguments>
       <primaryArguments datum="//@datums.20">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.14/@domain.1/@guardPattern/@variable.0"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.complexAttributePrimitiveAttributes_LM.middle.guard.fao"/>
       </primaryArguments>
       <secondaryArguments datum="//@datums.19">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.14/@domain.0/@guardPattern/@variable.0"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.complexAttributePrimitiveAttributes_LM.uml.guard.ca"/>
       </secondaryArguments>
     </distinctArguments>
     <mapping href="UmlToRdbms.qvtp.qvtias#m.umlRdbms.complexAttributePrimitiveAttributes_LM"/>
   </actions>
-  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.20" order="11">
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.20" order="14" parent="//@actions.17">
+    <distinctArguments/>
     <distinctArguments>
       <primaryArguments datum="//@datums.19">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.15/@domain.0/@guardPattern/@variable.3"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.complexAttributeComplexAttributes_LM.uml.guard.a"/>
       </primaryArguments>
-      <secondaryArguments datum="//@datums.10">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.15/@domain.0/@guardPattern/@variable.2"/>
+      <secondaryArguments datum="//@datums.13">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.complexAttributeComplexAttributes_LM.uml.guard.t"/>
       </secondaryArguments>
     </distinctArguments>
+    <distinctArguments/>
+    <distinctArguments/>
     <distinctArguments>
-      <primaryArguments datum="//@datums.19">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.15/@domain.0/@guardPattern/@variable.0"/>
+      <primaryArguments datum="//@datums.20">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.complexAttributeComplexAttributes_LM.middle.guard.fao"/>
       </primaryArguments>
-      <secondaryArguments datum="//@datums.10">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.15/@domain.0/@guardPattern/@variable.1"/>
+      <secondaryArguments datum="//@datums.19">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.complexAttributeComplexAttributes_LM.uml.guard.ca"/>
       </secondaryArguments>
-      <secondaryArguments datum="//@datums.20">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.15/@domain.1/@guardPattern/@variable.0"/>
+      <secondaryArguments datum="//@datums.13">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.complexAttributeComplexAttributes_LM.uml.guard.c"/>
       </secondaryArguments>
     </distinctArguments>
     <mapping href="UmlToRdbms.qvtp.qvtias#m.umlRdbms.complexAttributeComplexAttributes_LM"/>
   </actions>
-  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.11" order="17">
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.9" order="17" parent="//@actions.17">
+    <distinctArguments/>
+    <distinctArguments/>
     <distinctArguments>
       <primaryArguments datum="//@datums.18">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.16/@domain.1/@guardPattern/@variable.2"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.attributeColumns_MR.middle.guard.a2c"/>
       </primaryArguments>
-      <secondaryArguments datum="//@datums.13">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.16/@domain.0/@guardPattern/@variable.0"/>
+      <secondaryArguments datum="//@datums.6">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.attributeColumns_MR.rdbms.guard.ct"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.12">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.attributeColumns_MR.middle.guard.c2t"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.10">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.attributeColumns_MR.rdbms.guard.t"/>
       </secondaryArguments>
       <secondaryArguments datum="//@datums.3">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.16/@domain.1/@guardPattern/@variable.1"/>
-      </secondaryArguments>
-      <secondaryArguments datum="//@datums.6">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.16/@domain.0/@guardPattern/@variable.1"/>
-      </secondaryArguments>
-      <secondaryArguments datum="//@datums.9">
-        <variable href="UmlToRdbms.qvtp.qvtias#//@nestedPackage.0/@rule.16/@domain.1/@guardPattern/@variable.0"/>
+        <variable href="UmlToRdbms.qvtp.qvtias#qV.umlRdbms.attributeColumns_MR.middle.guard.p2n"/>
       </secondaryArguments>
     </distinctArguments>
+    <distinctArguments/>
+    <distinctArguments/>
     <mapping href="UmlToRdbms.qvtp.qvtias#m.umlRdbms.attributeColumns_MR"/>
   </actions>
+  <actions xsi:type="qvtschedule:MappingAction" children="//@actions.0 //@actions.1 //@actions.9 //@actions.8 //@actions.10 //@actions.11 //@actions.5 //@actions.7 //@actions.4 //@actions.6 //@actions.2 //@actions.12 //@actions.13 //@actions.15 //@actions.14 //@actions.3 //@actions.16"/>
 </qvtschedule:Schedule>

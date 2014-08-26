@@ -30,21 +30,66 @@ import "MapOrdering.eol";
 
 // Secondary Argument Derivations
 QVTs!Schedule.all.first().defineArgumentDerivation();
-// Delete all DistinctData with no arguments
-for (da in QVTs!DistinctData.all().select(dd | dd.primaryArguments.isEmpty())) {
-    delete da;
-}
+QVTs!Schedule.all.first().removeEmptyDistinctData();
 
 // Ordering
 QVTs!Schedule.all.first().findMapOrdering();
 
+// Create root mapping
+QVTp!Transformation.all.first().createBaseMapping();
+
+// Define nestings
+QVTs!Schedule.all.first().flatNesting(QVTp!Transformation.all.first());
+
 // Different Scheduleing Policies
 //QVT!Transformation.all.first().simpleSchedule(s);
 //QVT!Transformation.all.first().simpleNestedSchedule(s);
-
-//QVT!Transformation.all.first().rule = QVT!Transformation.all.first().rule.sortBy(r | r.name);
-
 "Done".println();
+
+operation QVTs!Schedule flatNesting(t : QVTp!Transformation) {
+
+    var bm = t.rule.selectOne(r | r.name + "__root__");
+    var ma = new QVTs!MappingAction;
+    ma.mapping = bm;
+    ma.order = 0;
+    for (na in self.actions.sortBy(a | a.order)) {
+        na.parent = ma;
+    }
+    self.actions.add(ma);
+}
+
+operation QVTp!Transformation createBaseMapping() {
+
+    if (QVTp!Mapping.all.exists(m | m.name == "__root__")) {
+        self.errln("__root__ mapping name duplicate. ");
+    } else {
+        var baseMapping = new QVTp!Mapping;
+        baseMapping.name = "__root__";
+        baseMapping.transformation = self;
+        baseMapping.guardPattern = new QVTp!GuardPattern;
+        baseMapping.bottomPattern = new QVTp!BottomPattern;
+        self.rule.add(baseMapping);
+        self.rule = self.rule.sortBy(r | r.name);
+    }
+}
+
+/****o* Scheduler/removeEmptyDistinctData
+ * NAME
+ *  removeEmptyDistinctData - Remove DistinctData elements that don't have a 
+ *  primary argument.
+ * CONTEXT
+ *  QVTs!Schedule  The Schdule
+ * ANNOTATIONS
+ */
+operation QVTs!Schedule removeEmptyDistinctData() {
+    for (da in self.actions.distinctArguments.select(dd | dd.primaryArguments.isEmpty())) {
+        delete da;
+    }
+}
+
+// ** =================================================== **
+
+
 
 /****o* Scheduler/simpleSchedule
  * NAME
@@ -65,7 +110,7 @@ QVTs!Schedule.all.first().findMapOrdering();
 operation QVT!Transformation simpleSchedule(schedule : QVTs!Schedule) {
 
     //var baseMapping = self.createBaseMapping();
-    //schedule.linearBindings(); // Move this to the Sched to QVTi part
+    schedule.linearBindings();
     /*
     for (ma in schedule.actions.sortBy(a | a.count)) {
         var mc = new QVT!MappingCall;
@@ -459,23 +504,7 @@ operation QVT!MappingCall hasLowerOrder(other : QVT!MappingCall) : Boolean {
 }
 
 
-operation QVT!Transformation createBaseMapping() : QVT!Mapping {
 
-    if (QVT!Mapping.all.exists(m | m.name == "__root__")) {
-        errln("root mapping should not exist");
-        return QVT!Mapping.all.selectOne(m | m.name == "__root__");
-    } else {
-        "Creating root mapping". println();
-        var baseMapping = new QVT!Mapping;
-        baseMapping.name = "__root__";
-        baseMapping.transformation = self;
-        baseMapping.guardPattern = new QVT!GuardPattern;
-        baseMapping.bottomPattern = new QVT!BottomPattern;
-        return baseMapping;
-    }
-
-
-}
 
 /****o* Scheduler/getAvailableVariables
  * NAME
@@ -520,7 +549,7 @@ operation QVTs!MappingAction getAvailableVariables() : Sequence {
  */
 operation QVTs!Schedule defineArgumentDerivation() {
     for (ma in self.actions) {
-        ma.mapping.name.println("m ");
+        //ma.mapping.name.println("m ");
         // Find the best derivation alternatives
         var inputVars = ma.distinctArguments.collect(da | da.primaryArguments.first().variable);
         var derivees = ma.distinctArguments.collect(da | da.primaryArguments.first())

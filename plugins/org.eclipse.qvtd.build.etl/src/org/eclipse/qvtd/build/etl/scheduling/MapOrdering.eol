@@ -49,7 +49,7 @@ operation QVTs!Schedule findMapOrdering()  {
 	    var n = queue.first();
 	    queue.remove(n);
 	    // Do stuff with n
-	    n.println("n ");
+	    //n.println("n ");
 	    //  Find all the mappings that have an output node if this type 
 	    // TODO The ECoreContainment tree should save the actual type so we dont compare names!
 	    for (ma in self.actions.select(aa | aa.results.exists(e | e.type.name = n.EClassName))) {
@@ -77,7 +77,7 @@ operation QVTs!Schedule findMapOrdering()  {
  */
 operation QVTs!MappingAction getOrdering(visited) {
 	
-	self.mapping.name.println("getOrdering ");
+	//self.mapping.name.println("getOrdering ");
 	visited.add(self);
 	for (ma in self.getPredecessors()) {
 		if (visited.excludes(ma))
@@ -102,13 +102,12 @@ operation QVTs!MappingAction getOrdering(visited) {
 @cached
 operation QVTs!MappingAction getPredecessors() : Set {
 
-    self.mapping.name.println("getPredecessors ");
+    //self.mapping.name.println("getPredecessors ");
 	var args = self.getArguments();	
 	var concreteSources =  args.collect(a | a.sources).flatten().asSet();
 	var abstractSources = self.schedule.datums.select(cd | 
             args.select(ad | ad.type.isAbstract).exists(ad | cd.super.includes(ad)))
         .collect(a | a.sources).flatten().asSet();
-    concreteSources.includingAll(abstractSources).println();
 	return concreteSources.includingAll(abstractSources);
 }
 

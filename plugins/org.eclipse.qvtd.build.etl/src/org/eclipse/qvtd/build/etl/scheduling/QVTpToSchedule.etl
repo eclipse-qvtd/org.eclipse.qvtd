@@ -56,7 +56,7 @@ rule MappingToMappingAction
     transform m : QVTp!Mapping
     to ma : QVTs!MappingAction {
         
-        m.name.println();
+        //m.name.println();
         ma.schedule ::= m.transformation;
         ma.mapping = m;
         ma.results.addAll(m.getOutputVariables().collect(v | v.type).equivalent());
