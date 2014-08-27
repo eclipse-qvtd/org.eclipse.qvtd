@@ -119,7 +119,7 @@ operation QVT!OCLExpression findReferencedVariables(ignore : Set) : Set {
         // Ignore iterator variables
         varRefs.addAll(self.body.findReferencedVariables(self.iterator));
         varRefs.addAll(self.source.findReferencedVariables());
-    } else if (self.isKindOf(QVT!LiteralExp)) {
+    } else if (self.isKindOf(QVT!LiteralExp) or self.isTypeOf(QVT!TypeExp)) {
       // Noting to add
     } else {
         self.println();

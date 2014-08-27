@@ -220,6 +220,7 @@ migrate CoreDomain
     when : original.isInputDomain() {
 	    
 	    migrated.isEnforceable = false;
+	    migrated.isCheckable = true;
     }
 
 /****m* QVTcToQVTu/CoreDomain

@@ -318,7 +318,7 @@ rule LMDomain
          
          od.name = id.name;
          od.isCheckable = id.isCheckable;
-         od.isEnforceable = od.isEnforceable;
+         od.isEnforceable = id.isEnforceable;
          od.typedModel ::= id.typedModel;
          od.guardPattern = new QVTi!GuardPattern;
          od.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.guardPattern.variable));

@@ -22,7 +22,6 @@ transformation umlRdbms {
 map packageToSchema in umlRdbms {
     uml () {
         p:Package |
-        p = Package.allInstances();
     }
     enforce rdbms () {
         realize s:Schema |
