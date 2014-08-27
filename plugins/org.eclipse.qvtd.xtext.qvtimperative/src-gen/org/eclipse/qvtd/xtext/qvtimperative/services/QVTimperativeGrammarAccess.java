@@ -203,26 +203,24 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cInTransformationUnrestrictedNameParserRuleCall_3_1_0_1 = (RuleCall)cInTransformationCrossReference_3_1_0.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		private final Assignment cDomainsAssignment_5 = (Assignment)cGroup.eContents().get(5);
-		private final RuleCall cDomainsSourceDomainCSParserRuleCall_5_0 = (RuleCall)cDomainsAssignment_5.eContents().get(0);
-		private final Assignment cDomainsAssignment_6 = (Assignment)cGroup.eContents().get(6);
-		private final RuleCall cDomainsTargetDomainCSParserRuleCall_6_0 = (RuleCall)cDomainsAssignment_6.eContents().get(0);
-		private final Group cGroup_7 = (Group)cGroup.eContents().get(7);
-		private final Keyword cWhereKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
-		private final Assignment cMiddleAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
-		private final RuleCall cMiddleMiddleDomainCSParserRuleCall_7_1_0 = (RuleCall)cMiddleAssignment_7_1.eContents().get(0);
-		private final Assignment cMappingSequenceAssignment_8 = (Assignment)cGroup.eContents().get(8);
-		private final RuleCall cMappingSequenceMappingSequenceCSParserRuleCall_8_0 = (RuleCall)cMappingSequenceAssignment_8.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_9 = (Keyword)cGroup.eContents().get(9);
+		private final Alternatives cDomainsAlternatives_5_0 = (Alternatives)cDomainsAssignment_5.eContents().get(0);
+		private final RuleCall cDomainsSourceDomainCSParserRuleCall_5_0_0 = (RuleCall)cDomainsAlternatives_5_0.eContents().get(0);
+		private final RuleCall cDomainsTargetDomainCSParserRuleCall_5_0_1 = (RuleCall)cDomainsAlternatives_5_0.eContents().get(1);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cWhereKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Assignment cMiddleAssignment_6_1 = (Assignment)cGroup_6.eContents().get(1);
+		private final RuleCall cMiddleMiddleDomainCSParserRuleCall_6_1_0 = (RuleCall)cMiddleAssignment_6_1.eContents().get(0);
+		private final Assignment cMappingSequenceAssignment_7 = (Assignment)cGroup.eContents().get(7);
+		private final RuleCall cMappingSequenceMappingSequenceCSParserRuleCall_7_0 = (RuleCall)cMappingSequenceAssignment_7.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_8 = (Keyword)cGroup.eContents().get(8);
 		
 		//MappingCS:
 		//	{MappingCS} "map" name=UnrestrictedName ("in" in=[qvtbase::Transformation|UnrestrictedName])? "{"
-		//	domains+=SourceDomainCS* domains+=TargetDomainCS* ("where" middle=MiddleDomainCS)? mappingSequence=MappingSequenceCS?
-		//	"}";
+		//	domains+=(SourceDomainCS | TargetDomainCS)* ("where" middle=MiddleDomainCS)? mappingSequence=MappingSequenceCS? "}";
 		public ParserRule getRule() { return rule; }
 
 		//{MappingCS} "map" name=UnrestrictedName ("in" in=[qvtbase::Transformation|UnrestrictedName])? "{"
-		//domains+=SourceDomainCS* domains+=TargetDomainCS* ("where" middle=MiddleDomainCS)? mappingSequence=MappingSequenceCS?
-		//"}"
+		//domains+=(SourceDomainCS | TargetDomainCS)* ("where" middle=MiddleDomainCS)? mappingSequence=MappingSequenceCS? "}"
 		public Group getGroup() { return cGroup; }
 
 		//{MappingCS}
@@ -255,38 +253,38 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_4() { return cLeftCurlyBracketKeyword_4; }
 
-		//domains+=SourceDomainCS*
+		//domains+=(SourceDomainCS | TargetDomainCS)*
 		public Assignment getDomainsAssignment_5() { return cDomainsAssignment_5; }
 
-		//SourceDomainCS
-		public RuleCall getDomainsSourceDomainCSParserRuleCall_5_0() { return cDomainsSourceDomainCSParserRuleCall_5_0; }
+		//SourceDomainCS | TargetDomainCS
+		public Alternatives getDomainsAlternatives_5_0() { return cDomainsAlternatives_5_0; }
 
-		//domains+=TargetDomainCS*
-		public Assignment getDomainsAssignment_6() { return cDomainsAssignment_6; }
+		//SourceDomainCS
+		public RuleCall getDomainsSourceDomainCSParserRuleCall_5_0_0() { return cDomainsSourceDomainCSParserRuleCall_5_0_0; }
 
 		//TargetDomainCS
-		public RuleCall getDomainsTargetDomainCSParserRuleCall_6_0() { return cDomainsTargetDomainCSParserRuleCall_6_0; }
+		public RuleCall getDomainsTargetDomainCSParserRuleCall_5_0_1() { return cDomainsTargetDomainCSParserRuleCall_5_0_1; }
 
 		//("where" middle=MiddleDomainCS)?
-		public Group getGroup_7() { return cGroup_7; }
+		public Group getGroup_6() { return cGroup_6; }
 
 		//"where"
-		public Keyword getWhereKeyword_7_0() { return cWhereKeyword_7_0; }
+		public Keyword getWhereKeyword_6_0() { return cWhereKeyword_6_0; }
 
 		//middle=MiddleDomainCS
-		public Assignment getMiddleAssignment_7_1() { return cMiddleAssignment_7_1; }
+		public Assignment getMiddleAssignment_6_1() { return cMiddleAssignment_6_1; }
 
 		//MiddleDomainCS
-		public RuleCall getMiddleMiddleDomainCSParserRuleCall_7_1_0() { return cMiddleMiddleDomainCSParserRuleCall_7_1_0; }
+		public RuleCall getMiddleMiddleDomainCSParserRuleCall_6_1_0() { return cMiddleMiddleDomainCSParserRuleCall_6_1_0; }
 
 		//mappingSequence=MappingSequenceCS?
-		public Assignment getMappingSequenceAssignment_8() { return cMappingSequenceAssignment_8; }
+		public Assignment getMappingSequenceAssignment_7() { return cMappingSequenceAssignment_7; }
 
 		//MappingSequenceCS
-		public RuleCall getMappingSequenceMappingSequenceCSParserRuleCall_8_0() { return cMappingSequenceMappingSequenceCSParserRuleCall_8_0; }
+		public RuleCall getMappingSequenceMappingSequenceCSParserRuleCall_7_0() { return cMappingSequenceMappingSequenceCSParserRuleCall_7_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_9() { return cRightCurlyBracketKeyword_9; }
+		public Keyword getRightCurlyBracketKeyword_8() { return cRightCurlyBracketKeyword_8; }
 	}
 
 	public class MappingCallCSElements extends AbstractParserRuleElementFinder {
@@ -990,8 +988,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 
 	//MappingCS:
 	//	{MappingCS} "map" name=UnrestrictedName ("in" in=[qvtbase::Transformation|UnrestrictedName])? "{"
-	//	domains+=SourceDomainCS* domains+=TargetDomainCS* ("where" middle=MiddleDomainCS)? mappingSequence=MappingSequenceCS?
-	//	"}";
+	//	domains+=(SourceDomainCS | TargetDomainCS)* ("where" middle=MiddleDomainCS)? mappingSequence=MappingSequenceCS? "}";
 	public MappingCSElements getMappingCSAccess() {
 		return (pMappingCS != null) ? pMappingCS : (pMappingCS = new MappingCSElements());
 	}
