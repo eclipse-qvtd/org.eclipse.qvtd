@@ -7,8 +7,7 @@
         eType="#//AbstractDatum"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"
         derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="domain" eType="ecore:EClass http://www.eclipse.org/qvt/0.9/QVTcoreBase#//CoreDomain"
-        derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="domain" eType="ecore:EClass http://www.eclipse.org/qvt/0.9/QVTcoreBase#//CoreDomain"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sources" upperBound="-1"
         eType="#//AbstractAction" eOpposite="#//AbstractAction/results"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targets" upperBound="-1"

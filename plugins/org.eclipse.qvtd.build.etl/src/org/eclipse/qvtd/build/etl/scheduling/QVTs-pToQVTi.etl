@@ -35,6 +35,16 @@ rule NamedElements
     {
         eOut.name = eIn.name;
     }
+
+rule TypedModels
+    transform tmIn : QVTp!TypedModel
+    to tmOut : QVTi!TypedModel
+    extends NamedElements
+    {
+        tmOut.transformation ::= tmIn.transformation;
+        tmOut.usedPackage = tmIn.usedPackage;
+        tmOut.dependsOn.addAll(tmIn.dependsOn.equivalent());    
+    }
     
 rule Transformations
     transform tIn : QVTp!Transformation
@@ -43,7 +53,7 @@ rule Transformations
     {
         
         tOut.ownedTag = emfTool.getEcoreUtil().copyAll(tIn.ownedTag);
-        tOut.modelParameter = emfTool.getEcoreUtil().copyAll(tIn.modelParameter);
+        tOut.modelParameter.addAll(tIn.modelParameter.equivalent());
         tOut.`rule`.addAll(tIn.`rule`.equivalent());
         tOut.`extends` ::= tIn.`extends`;
     }
@@ -79,7 +89,6 @@ rule Mappings
         
         var ma = QVTs!MappingAction.all().selectOne(ma | ma.mapping.name == mIn.name); 
         if (not ma.children.isEmpty()) {
-            mIn.name.println("Children ");
             mOut.mappingStatement = new QVTi!MappingSequence;
             // Add loops of mapping calls accordingly... hard!
             if (ma.hasLoopVariable()) {
@@ -94,11 +103,12 @@ rule Mappings
 rule Domains
     transform dIn : QVTp!Domain
     to dOut : QVTi!Domain
+    extends NamedElements
     {
         dOut.isCheckable = dIn.isCheckable;
         dOut.isEnforceable = dIn.isEnforceable;
         dOut.`rule` ::= dIn.`rule`;
-        dOut.typedModel ::= dIn.typedModel; 
+        dOut.typedModel ::= dIn.typedModel;
     } 
 
 rule CodeDomains
@@ -106,7 +116,6 @@ rule CodeDomains
     to cdOut : QVTp!CoreDomain
     extends Domains, Areas
     {
-        
     }
 
 @abstract        
@@ -222,7 +231,7 @@ rule MappingActions
     {
         guard : ma.parent.isDefined()
         
-        mc.referredMapping = ma.mapping;
+        mc.referredMapping ::= QVTp!Mapping.all().selectOne(m | ma.mapping.name == m.name);
         mc.binding.addAll(ma.distinctArguments.collect(da | da.primaryArguments.includingAll(da.secondaryArguments)).equivalent().select(e | e.isTypeOf(QVTi!MappingCallBinding)));
     }
 
@@ -239,7 +248,8 @@ rule DistinctData
         var exp = new QVTi!OperationCallExp;
         exp.referredOperation = getClassByName("OclElement").getOperationByName("allInstances");
         exp.source = new QVTi!TypeExp;
-        exp.source.type = dd.primaryArguments.first().variable.type;
+        exp.source.referredType = dd.primaryArguments.first().variable.type;
+        exp.type = exp.referredOperation.type;
         loop.source = exp;
         // TODO what happens with multiple Distinct Datas?
         loop.body ::= dd.target;
@@ -252,7 +262,8 @@ rule DataParameter
     to cb : QVTi!MappingCallBinding
     {
         
-        cb.boundVariable = dp.variable;
+        
+        cb.boundVariable ::= QVTp!Variable.all.selectOne(v | QVTp.getElementId(v) == QVTs.getElementId(dp.variable));
         cb.value = new QVTi!VariableExp;
         if (dp.primaryDistinctData.isDefined()) {
             cb.value.referredVariable = dp.primaryDistinctData.equivalent().iterator.first();

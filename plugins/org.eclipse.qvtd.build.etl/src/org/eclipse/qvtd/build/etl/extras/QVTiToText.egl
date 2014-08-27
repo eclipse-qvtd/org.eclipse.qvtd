@@ -1,126 +1,102 @@
-[% for (i in QVTi!TypedModel.all()) { %]
-    [% for (p in i.usedPackage) { %]
+[%
+for (i in QVTi!TypedModel.all()) {
+    for (p in i.usedPackage) { %]
 import [%=p.name.firstToUpperCase()%]: '[%=p.nsURI%]';
-    [% } %]
-[% } %]
-
-[% for (t in QVTi!Transformation.all()) { %]
-transformation [%=t.name %] {
-    [% for (mp in t.modelParameter) { %]
-    [%=mp.name%] imports [%=mp.usedPackage.collect(up | up.name.firstToUpperCase()).concat(",")%]; 
-    [% } %]
+[%
+    }
 }
+for (t in QVTi!Transformation.all()) {%]
 
-[% for (r in t.rule) { 
-r.declaration(t);
+transformation [%=t.name %] {
+[%  for (mp in t.modelParameter) { %]
+    [%=mp.name%] imports [%=mp.usedPackage.collect(up | up.name.firstToUpperCase()).concat(",")%]; 
+[%  }%]
+}
+[%
+    for (r in t.rule) { 
+        r.declaration(t);
+    }
 } 
-} %]
 
-[% operation Mapping declaration(t) { %]
-map [%if (self.name.isDefined()){%][%=self.name%] in [%=t.name%][%}%] {
-[% for (d in self.domain) {
-    var domainName = "";
-    if (d.isCheckable) { domainName = "check ";}
-    if(d.isEnforceable) { domainName = domainName + "enforce ";}
-    domainName = domainName + d.name;%]
-    [%=domainName%] ([%
-    if (not d.guardPattern.variable.isEmpty()) {
-        for (v in d.guardPattern.variable){%]
-[%=v.name+":"+v.type.name%][%if(hasMore){%],
-[%out.print("        ");}%]
-      [%}%] |[%
-    }  
-    if (not d.guardPattern.predicate.isEmpty()) {
-        for (p in d.guardPattern.predicate){%]
+operation Mapping declaration(t) {%]
+
+map [%if (self.name.isDefined()){%][%=self.name%] in [%=t.name%][%}%] {[%
+    for (d in self.domain) {
+        var domainName = "";
+        if (d.isCheckable) { domainName = "check ";}
+        if(d.isEnforceable) { domainName = domainName + "enforce ";}
+        domainName = domainName + d.name;%]
         
-        [%=p.toString()%];[%
-        }
-    }%]) {
-    [%
-    if (not d.bottomPattern.realizedVariable.includingAll(d.bottomPattern.variable).isEmpty()) {
-        for (v in d.bottomPattern.variable){%]
-        [%=v.name+":"+v.type.name%][%if(hasMore){%],
-        [%}
-        }
-        for (v in d.bottomPattern.realizedVariable){%]
-        [%="realize "+v.name+":"+v.type.name%][%if(hasMore){%],
-        [%}%]
-      [%}%] |[%
-    }
-    if (not d.bottomPattern.predicate.isEmpty()) {
-        for (p in d.bottomPattern.predicate){%]
-        
-        [%=p.toString()%];[%
-        }
-    }
-    if (not d.bottomPattern.assignment.isEmpty()) {
-        for (p in d.bottomPattern.assignment){%]
-        
-        [%=p.toString()%];[%
-        }
+    [%=domainName%][%=d.patterns()%][%
     }%]
-    }
-    [%
-}%]
-    where ([%
-    if (not self.guardPattern.variable.isEmpty()) {
-        for (v in self.guardPattern.variable){%]
-[%=v.name+":"+v.type.name%][%if(hasMore){%],
-[%out.print("        ");}%]
-      [%}%] |[%
-    }  
-    if (not self.guardPattern.predicate.isEmpty()) {
-        for (p in self.guardPattern.predicate){%]
-        
-        [%=p.toString()%];[%
-        }
-    }%]) {    [%
-    if (not self.bottomPattern.realizedVariable.includingAll(self.bottomPattern.variable).isEmpty()) {
-        for (v in self.bottomPattern.variable){%]
-        [%=v.name+":"+v.type.name%][%if(hasMore){%],[%}
-        }
-        for (v in self.bottomPattern.realizedVariable){%]
-        [%="realize "+v.name+":"+v.type.name%][%if(hasMore){%],[%}%]
-      [%}%] |[%
-    }
-    if (not self.bottomPattern.predicate.isEmpty()) {
-        for (p in self.bottomPattern.predicate){%]
-        
-        [%=p.toString()%];[%
-        }
-    }
-    if (not self.bottomPattern.assignment.isEmpty()) {
-        for (p in self.bottomPattern.assignment){%]
-        
-        [%=p.toString()%];[%
-        }
-    }%]}
-    [% for (ms in self.mappingStatement) {
-    ms.call();
-    }%]
+    
+    where[%=self.patterns()%]
+    [%if(self.mappingStatement.isDefined()) {%]
+[%=printMS(self.mappingStatement)%]
+    [%}%]
 }
 [%
 }
-    
 
-operation MappingCall call() {%]
-    map [%=self.referredMapping.name%](
-    [% for (b in self.binding) {%]
-        [%=b.boundVariable.name%]:= [%=b.value.toString()%]; 
+operation Area patterns() {%]
+ ([%
+        if (not self.guardPattern.variable.isEmpty()) {
+            for (v in self.guardPattern.variable){%]
+[%=v.name+":"+v.type.name%][%if(hasMore){%],
+[%out.print("        ");}%]
+[%          }
+        }  
+        if (not self.guardPattern.predicate.isEmpty()) {
+            for (p in self.guardPattern.predicate){%]
+        [%=p.toString()%];[%
+            }}%]
+) {
+[%
+        if (not self.bottomPattern.realizedVariable.includingAll(self.bottomPattern.variable).isEmpty()) {
+            for (v in self.bottomPattern.variable){%]
+        [%=v.name+":"+v.type.name%][%if(hasMore){%],
+        [%}
+            }
+            for (v in self.bottomPattern.realizedVariable){%]
+        [%="realize "+v.name+":"+v.type.name%][%if(hasMore){%],
+        [%}%]
+[%          }
+        }
+        if (not self.bottomPattern.predicate.isEmpty()) {
+            for (p in self.bottomPattern.predicate){%]
+        
+        [%=p.toString()%];[%
+            }
+        }
+        if (not self.bottomPattern.assignment.isEmpty()) {
+            for (p in self.bottomPattern.assignment){%]
+        
+        [%=p.toString()%];[%
+            }
+        }%]
+    }[%   
+}
+
+operation printMS(call : MappingCall) {%]
+call [%=call.referredMapping.name%] {
+    [% for (b in call.binding) {%]
+            [%=b.boundVariable.name%]:= [%=b.value.toString()%]; 
     [%}%]
-    );
-[% }
+        }
+[%}
 
-operation MappingSequence call() {
-    for (ms in self.mappingStatements) {
-        ms.call();
+operation printMS(seq : MappingSequence) {
+    for (ms in seq.mappingStatements) {
+        printMS(ms);
     }
 }
 
-//=self.body.call()
-operation MappingLoop call() {%]
-   for [%=self.iterator.first().name%] in [%=self.source.toString()%] {
-        "Missing call here!"
-   }[%
-}%]
+operation printMS(loop : MappingLoop) {%]
 
+   for [%=loop.iterator.first().name%] in [%=loop.source.toString()%] {
+        [%if(loop.body.isDefined()) {%]
+        [%=printMS(loop.body)%]
+        [%}%]
+   }
+   [%
+}%]

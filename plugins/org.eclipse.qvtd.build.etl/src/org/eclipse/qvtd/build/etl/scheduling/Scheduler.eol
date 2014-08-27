@@ -69,7 +69,7 @@ operation QVTp!Transformation createBaseMapping() {
         baseMapping.guardPattern = new QVTp!GuardPattern;
         baseMapping.bottomPattern = new QVTp!BottomPattern;
         self.rule.add(baseMapping);
-        self.rule = self.rule.sortBy(r | r.name);
+        //self.rule = self.rule.sortBy(r | r.name);
     }
 }
 
