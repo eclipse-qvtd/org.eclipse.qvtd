@@ -48,9 +48,11 @@ operation Area patterns() {%]
         }  
         if (not self.guardPattern.predicate.isEmpty()) {
             for (p in self.guardPattern.predicate){%]
-        [%=p.toString()%];[%
-            }}%]
-) {
+[%=p.toString()%];
+[%if(hasMore){%]
+[%out.print("        ");}%]
+[%}}%]
+    ) {
 [%
         if (not self.bottomPattern.realizedVariable.includingAll(self.bottomPattern.variable).isEmpty()) {
             for (v in self.bottomPattern.variable){%]
@@ -93,10 +95,10 @@ operation printMS(seq : MappingSequence) {
 
 operation printMS(loop : MappingLoop) {%]
 
-   for [%=loop.iterator.first().name%] in [%=loop.source.toString()%] {
+    for [%=loop.iterator.first().name%] in [%=loop.source.toString()%] {
         [%if(loop.body.isDefined()) {%]
         [%=printMS(loop.body)%]
         [%}%]
-   }
+    }
    [%
 }%]

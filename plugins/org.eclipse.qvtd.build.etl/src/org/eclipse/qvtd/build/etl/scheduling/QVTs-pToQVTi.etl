@@ -201,6 +201,24 @@ rule VariableAssignments
     {
         vaOut.targetVariable ::= vaIn.targetVariable;
     }
+
+rule Predicates
+    transform pIn : QVTp!Predicate
+    to pOut : QVTi!Predicate
+    {
+        pOut.pattern ::= pIn.pattern;
+        pOut.conditionExpression = emfTool.getEcoreUtil().copy(pIn.conditionExpression);
+        var vars;
+        if (pIn.pattern.area.isTypeOf(QVTi!CoreDomain)) {
+            vars = pIn.pattern.area.`rule`.getAllVariables().equivalent();
+        } else {
+            vars = pIn.pattern.area.getAllVariables().equivalent();
+        }
+        for (vFix in vars) {
+            pOut.conditionExpression.fixVarReferences(vFix);
+        }
+        
+    }
      
 rule Variables
     transform vIn : QVTp!Variable
@@ -257,23 +275,76 @@ rule DistinctData
     }
     
 
-rule DataParameter
+rule PrimaryDataParameter
     transform dp : QVTs!DataParameter
     to cb : QVTi!MappingCallBinding
     {
+        guard : dp.primaryDistinctData.isDefined()
         
-        
-        cb.boundVariable ::= QVTp!Variable.all.selectOne(v | QVTp.getElementId(v) == QVTs.getElementId(dp.variable));
+        cb.boundVariable ::= dp.variable.getSameVariable();
         cb.value = new QVTi!VariableExp;
-        if (dp.primaryDistinctData.isDefined()) {
-            cb.value.referredVariable = dp.primaryDistinctData.equivalent().iterator.first();
-            cb.mappingCall ::= dp.primaryDistinctData.target;
-        } else {
-            cb.value.referredVariable = dp.secondaryDistinctData.equivalent().iterator.first();
-            cb.mappingCall ::= dp.secondaryDistinctData.target;
-        }
-        
+        cb.value.referredVariable = dp.primaryDistinctData.equivalent().iterator.first();
+        cb.mappingCall ::= dp.primaryDistinctData.target;
     }
+    
+
+rule SecondaryDataParameter
+    transform dp : QVTs!DataParameter
+    to cb : QVTi!MappingCallBinding
+    {
+        guard {
+            if (not dp.secondaryDistinctData.isDefined()) {
+                return false;
+            }
+            var paramVar = dp.variable.getSameVariable();
+            var primaryVar = dp.secondaryDistinctData.primaryArguments.first().variable.getSameVariable();
+            return not primaryVar.hasRelation(paramVar).isEmpty();
+        }    
+        
+        var paramVar = dp.variable.getSameVariable();
+        var primaryVar = dp.secondaryDistinctData.primaryArguments.first().variable.getSameVariable();
+        cb.boundVariable ::= dp.variable.getSameVariable();
+        cb.value = new QVTi!PropertyCallExp;
+        cb.value.referredProperty = primaryVar.hasRelation(paramVar).first();
+        cb.value.source = new QVTi!VariableExp;        
+        cb.value.source.referredVariable ::= primaryVar;
+        cb.mappingCall ::= dp.secondaryDistinctData.target;
+    }
+
+rule SecondarySecondaryDataParameter
+    transform dp : QVTs!DataParameter
+    to cb : QVTi!MappingCallBinding
+    {
+        guard {
+            if (not dp.secondaryDistinctData.isDefined()) {
+                return false;
+            }
+            var paramVar = dp.variable.getSameVariable();
+            var primaryVar = dp.secondaryDistinctData.primaryArguments.first().variable.getSameVariable();
+            return primaryVar.hasRelation(paramVar).isEmpty();
+        }    
+        
+        var paramVar = dp.variable.getSameVariable();
+        cb.boundVariable ::= dp.variable.getSameVariable();
+        for (sa in dp.secondaryDistinctData.secondaryArguments.excluding(dp)) {
+            var secondaryVar = sa.variable.getSameVariable();
+            if (not secondaryVar.hasRelation(paramVar).isEmpty()) {
+                cb.value = new QVTi!PropertyCallExp;
+	            cb.value.referredProperty = secondaryVar.hasRelation(paramVar).first();
+	            cb.value.source = emfTool.getEcoreUtil().copy(sa.equivalent().value);
+	            cb.mappingCall ::= dp.secondaryDistinctData.target;
+	            break;
+            }
+        }
+    }
+
+
+
+@cached
+operation QVTs!Variable getSameVariable() : QVTp!Variable {
+    return QVTp!Variable.all.selectOne(v | QVTp.getElementId(v) == QVTs.getElementId(self));
+} 
+
 
 operation QVTs!MappingAction hasLoopVariable() : Boolean {
     
