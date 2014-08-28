@@ -92,7 +92,11 @@ rule Mappings
             mOut.mappingStatement = new QVTi!MappingSequence;
             // Add loops of mapping calls accordingly... hard!
             if (ma.hasLoopVariable()) {
-                mOut.mappingStatement.mappingStatements.addAll(ma.children.collect(ma | ma.distinctArguments).flatten().equivalent());
+                // Add only the loops of the PrimaryArguments with the most secondary arguments
+                // The other DistinctData loops will be nested inside these
+                mOut.mappingStatement.mappingStatements.addAll(ma.children
+                    .collect(ma | ma.distinctArguments.sortBy(dd | dd.secondaryArguments.size()).last())
+                    .flatten().equivalent());
             } else {
                 mOut.mappingStatement.mappingStatements.addAll(ma.children.equivalent());
             }
@@ -237,6 +241,7 @@ rule RealizedVariables
     to vOut : QVTi!RealizedVariable
     extends NamedElements
     {
+
         vOut.implicit = vIn.implicit;
         vOut.type = vIn.type;
     }
@@ -270,8 +275,9 @@ rule DistinctData
         exp.type = exp.referredOperation.type;
         loop.source = exp;
         // TODO what happens with multiple Distinct Datas?
-        loop.body ::= dd.target;
-        
+        loop.body = new QVTi!MappingSequence;
+        loop.body.mappingStatements.add(dd.target.equivalent());
+        loop.body.mappingStatements.addAll(dd.target.distinctArguments.excluding(dd).select(da | da.secondaryArguments.size() < dd.secondaryArguments.size()).equivalent());
     }
     
 
@@ -281,9 +287,11 @@ rule PrimaryDataParameter
     {
         guard : dp.primaryDistinctData.isDefined()
         
+        var it = dp.primaryDistinctData.equivalent().iterator.first();
         cb.boundVariable ::= dp.variable.getSameVariable();
         cb.value = new QVTi!VariableExp;
-        cb.value.referredVariable = dp.primaryDistinctData.equivalent().iterator.first();
+        cb.value.referredVariable = it;
+        cb.value.type = it.type;
         cb.mappingCall ::= dp.primaryDistinctData.target;
     }
     
@@ -303,14 +311,20 @@ rule SecondaryDataParameter
         
         var paramVar = dp.variable.getSameVariable();
         var primaryVar = dp.secondaryDistinctData.primaryArguments.first().variable.getSameVariable();
-        cb.boundVariable ::= dp.variable.getSameVariable();
+        var prop = primaryVar.hasRelation(paramVar).first();
+        var refVar = primaryVar.equivalent();
+        
+        cb.boundVariable ::= paramVar;
         cb.value = new QVTi!PropertyCallExp;
-        cb.value.referredProperty = primaryVar.hasRelation(paramVar).first();
-        cb.value.source = new QVTi!VariableExp;        
-        cb.value.source.referredVariable ::= primaryVar;
+        cb.value.referredProperty = prop;
+        cb.value.type = prop.type;
+        cb.value.source = new QVTi!VariableExp;
+        cb.value.source.referredVariable = refVar;
+        cb.value.source.type = refVar.type;   
         cb.mappingCall ::= dp.secondaryDistinctData.target;
     }
 
+// Derived from a derived
 rule SecondarySecondaryDataParameter
     transform dp : QVTs!DataParameter
     to cb : QVTi!MappingCallBinding
@@ -323,17 +337,26 @@ rule SecondarySecondaryDataParameter
             var primaryVar = dp.secondaryDistinctData.primaryArguments.first().variable.getSameVariable();
             return primaryVar.hasRelation(paramVar).isEmpty();
         }    
-        
+
         var paramVar = dp.variable.getSameVariable();
-        cb.boundVariable ::= dp.variable.getSameVariable();
+        cb.boundVariable ::= paramVar;
+        cb.value = new QVTi!PropertyCallExp;
+        cb.mappingCall ::= dp.secondaryDistinctData.target;
         for (sa in dp.secondaryDistinctData.secondaryArguments.excluding(dp)) {
             var secondaryVar = sa.variable.getSameVariable();
             if (not secondaryVar.hasRelation(paramVar).isEmpty()) {
-                cb.value = new QVTi!PropertyCallExp;
-	            cb.value.referredProperty = secondaryVar.hasRelation(paramVar).first();
+                var prop = secondaryVar.hasRelation(paramVar).first();
+                cb.value.referredProperty = prop;
+                cb.value.type = prop.type;
 	            cb.value.source = emfTool.getEcoreUtil().copy(sa.equivalent().value);
-	            cb.mappingCall ::= dp.secondaryDistinctData.target;
 	            break;
+            } else if (not paramVar.hasRelation(secondaryVar).isEmpty()) { // Can it be an opposite relation?
+                cb.boundVariable ::= paramVar;
+                var prop = paramVar.hasRelation(secondaryVar).first().opposite;
+                cb.value.referredProperty = prop;
+                cb.value.type = prop.type;
+                cb.value.source = emfTool.getEcoreUtil().copy(sa.equivalent().value);
+                break;
             }
         }
     }

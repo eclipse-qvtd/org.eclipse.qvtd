@@ -10,10 +10,6 @@
  ******************************************************************************/
 import "../helpers/QVTHelpers.eol";
 //import "Scheduler.eol";
-pre {
-    QVTs.getMetamodelUris().println();
-    QVTs.getMetamodelFiles().println();
-}
  
 /****t* /org.eclipse.qvtd.build.etl/scheduling/QVTpToSchedule
  * NAME

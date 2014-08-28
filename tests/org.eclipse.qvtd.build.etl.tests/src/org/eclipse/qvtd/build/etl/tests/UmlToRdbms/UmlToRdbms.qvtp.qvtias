@@ -2088,6 +2088,10 @@
         </assignment>
       </bottomPattern>
     </rule>
+    <rule xsi:type="qvti:Mapping" xmi:id="m.umlRdbms.__root__" name="__root__">
+      <guardPattern/>
+      <bottomPattern/>
+    </rule>
   </nestedPackage>
   <nestedPackage xmi:id="P.$$" name="$$" nsPrefix="orphanage" nsURI="http://www.eclipse.org/ocl/3.1.0/orphanage">
     <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.9"
