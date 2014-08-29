@@ -19,15 +19,15 @@
         imports="//@transformation/@import.2"/>
     <import
         name="SimpleUML"
-        metamodel="SimpleUML.ecore"
+        metamodelFile="platform:/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms/SimpleUML.ecore"
         package="simpleuml"/>
     <import
         name="SimpleRDBMS"
-        metamodel="SimpleRDBMS.ecore"
+        metamodelFile="platform:/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms/SimpleRDBMS.ecore"
         package="simplerdbms"/>
     <import
         name="UMLtoRDBMS"
-        metamodel="UMLtoRDBMS.ecore"
+        metamodelFile="platform:/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms/UMLtoRDBMS.ecore"
         package="umltordbms"/>
   </transformation>
 </qvtcconfig:Configuration>
