@@ -276,8 +276,9 @@ rule DistinctData
         loop.source = exp;
         // TODO what happens with multiple Distinct Datas?
         loop.body = new QVTi!MappingSequence;
-        loop.body.mappingStatements.add(dd.target.equivalent());
         loop.body.mappingStatements.addAll(dd.target.distinctArguments.excluding(dd).select(da | da.secondaryArguments.size() < dd.secondaryArguments.size()).equivalent());
+        loop.body.mappingStatements.add(dd.target.equivalent());
+        
     }
     
 
@@ -306,14 +307,17 @@ rule SecondaryDataParameter
             }
             var paramVar = dp.variable.getSameVariable();
             var primaryVar = dp.secondaryDistinctData.primaryArguments.first().variable.getSameVariable();
+            primaryVar.hasRelation(paramVar).isEmpty().println();
             return not primaryVar.hasRelation(paramVar).isEmpty();
         }    
-        
+        //dp.secondaryDistinctData.target.mapping.name.println("DistinctData ");
         var paramVar = dp.variable.getSameVariable();
         var primaryVar = dp.secondaryDistinctData.primaryArguments.first().variable.getSameVariable();
         var prop = primaryVar.hasRelation(paramVar).first();
         var refVar = primaryVar.equivalent();
-        
+        //paramVar.name.println("paramVar ");
+        //prop.name.println("prop ");
+        //refVar.name.println("refVar ");
         cb.boundVariable ::= paramVar;
         cb.value = new QVTi!PropertyCallExp;
         cb.value.referredProperty = prop;
@@ -351,7 +355,6 @@ rule SecondarySecondaryDataParameter
 	            cb.value.source = emfTool.getEcoreUtil().copy(sa.equivalent().value);
 	            break;
             } else if (not paramVar.hasRelation(secondaryVar).isEmpty()) { // Can it be an opposite relation?
-                cb.boundVariable ::= paramVar;
                 var prop = paramVar.hasRelation(secondaryVar).first().opposite;
                 cb.value.referredProperty = prop;
                 cb.value.type = prop.type;
@@ -360,8 +363,6 @@ rule SecondarySecondaryDataParameter
             }
         }
     }
-
-
 
 @cached
 operation QVTs!Variable getSameVariable() : QVTp!Variable {

@@ -530,23 +530,16 @@ operation QVTs!MappingAction getAvailableVariables() : Sequence {
     return result;
 }
 
-/****o* Scheduler/createDependencyRelations
+/****o* Scheduler/defineArgumentDerivation
  * NAME
- *  createDependencyRelations - Creates the datums and actions to model the
- *  dependency relations of the given transformation rules.
+ *  defineArgumentDerivation - Identifies what parameters can be derived from
+ *  others
  * FUNCTION
- *  The datums and actions represent the data dependency relations between
- *  mappings and data types. By accepting a set of rules as a parameter,
- *  the scheduling algorithm can pre-filter the rules on which the analysis
- *  is performed.
+ *  
  *
  * CONTEXT
  *  QVTs!Schedule  The Schdule
- * ANNOTATIONS
- *  cached
- * PARAMETERS
- *  rules   The transformation for which the schedule is being craeted (QVT!Rule)
- *  SEE ALSO
+ * SEE ALSO
  */
 operation QVTs!Schedule defineArgumentDerivation() {
     for (ma in self.actions) {
@@ -554,7 +547,7 @@ operation QVTs!Schedule defineArgumentDerivation() {
         // Find the best derivation alternatives
         var inputVars = ma.distinctArguments.collect(da | da.primaryArguments.first().variable);
         var derivees = ma.distinctArguments.collect(da | da.primaryArguments.first())
-                .aggregate(pa | pa, pa.variable.derivedVariables(inputVars));              
+                .aggregate(pa | pa, pa.variable.derivedVariables(inputVars));                    
         for (da in ma.distinctArguments.sortBy(da | derivees.get(da.primaryArguments.first()).size()).invert()) {
             for (dv in derivees.get(da.primaryArguments.first())) {
                 if (ma.distinctArguments.exists(da | da.primaryArguments.exists(pa | pa.variable == dv))) {
