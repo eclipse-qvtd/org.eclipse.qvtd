@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:eCoreContainemntTree="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree">
   <eCoreContainemntTree:Node EClassName="umltordbms" children="/1"/>
-  <eCoreContainemntTree:Node EClassName="PackageToSchema" parent="/0" children="/2 /3 /4 /5"/>
+  <eCoreContainemntTree:Node EClassName="PackageToSchema" parent="/0" children="/2 /3 /4 /5">
+    <superTypes>UmlToRdbmsModelElement</superTypes>
+  </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node EClassName="ClassToTable" parent="/1" children="/6 /7 /8">
     <superTypes>FromAttributeOwner</superTypes>
     <superTypes>ToColumn</superTypes>
+    <superTypes>UmlToRdbmsModelElement</superTypes>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node EClassName="BooleanToBoolean" parent="/1">
     <superTypes>PrimitiveToName</superTypes>
@@ -17,6 +20,7 @@
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node EClassName="AssociationToForeignKey" parent="/2">
     <superTypes>ToColumn</superTypes>
+    <superTypes>UmlToRdbmsModelElement</superTypes>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node EClassName="AttributeToColumn" parent="/2 /8">
     <superTypes>FromAttribute</superTypes>

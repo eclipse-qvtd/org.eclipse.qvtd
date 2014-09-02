@@ -16,12 +16,4 @@
           defaultName="PivotUtil">
         </tool>
    </extension>
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated QVTScheduling -->
-      <package
-            uri="http://www.eclipse.org/qvt/0.1/QVTscheduling/"
-            class="org.eclipse.qvtd.build.etl.qvtscheduling.QvtschedulingPackage"
-            genModel="model/QVTScheduling.genmodel"/>
-   </extension>
-
 </plugin>

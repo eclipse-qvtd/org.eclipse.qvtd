@@ -21,33 +21,37 @@
  ******
  */ 
 
-// TODO Should get all the models, multiple L models?
-operation getLeftModel() : String {
+operation getAllMetamodelFiles() {
     
-    return config!Configuration.all().first().inputDirection.`import`.metamodel;
+    return config!Direction.all().collect(id | id.imports).flatten().collect(i | i.metamodelFile);
 }
+
+operation getLeftModelMetamodelFiles() : Collection {
+    
+    return config!Configuration.all().first().inputDirection.imports.collect(i | i.metamodelFile).flatten();
+}
+
+operation getMiddleModelMetamodelFile() : String {
+
+    return config!Configuration.all().first().middle.imports.collect(i | i.metamodelFile).flatten();
+}
+
+operation getRightModelsMetamodelFile() : String {
+
+    return config!Configuration.all().first().outputDirection.collect(id | id.imports).collect(i | i.metamodelFile).flatten();
+}
+
+
 
 operation getLeftModelPackage() : String {
     
     return config!Configuration.all().first().inputDirection.`import`.package;
 }
 
-operation getMiddleModel() : String {
-
-    return config!Configuration.all().first().middle.`import`.metamodel;
-}
-
 operation getMiddleModelPackage() : String {
     
     return config!Configuration.all().first().middle.`import`.package;
 }
-
-// TODO Should get all the models, multiple R models?
-operation getRightModelModel() : String {
-
-    return config!Configuration.all().first().outputDirection.first().`import`.metamodel;
-}
-
 
 operation getRightModelPackage() : String {
     
