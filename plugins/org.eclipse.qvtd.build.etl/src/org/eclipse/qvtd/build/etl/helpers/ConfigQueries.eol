@@ -21,9 +21,9 @@
  ******
  */ 
 
-operation getAllMetamodelFiles() {
+operation getAllMetamodelFiles() :Set  {
     
-    return config!Direction.all().collect(id | id.imports).flatten().collect(i | i.metamodelFile);
+    return config!Direction.all().collect(id | id.imports).flatten().collect(i | i.metamodelFile).asSet();
 }
 
 operation getLeftModelMetamodelFiles() : Collection {
