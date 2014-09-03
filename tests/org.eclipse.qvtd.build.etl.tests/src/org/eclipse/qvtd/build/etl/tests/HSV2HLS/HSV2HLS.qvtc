@@ -1,7 +1,6 @@
--- modeltype HSVTree: '../../model/HSVTree.ecore'; -- modeltype instead of import to match QVTo
-import 'HSVTree.ecore'::HSVTree; -- modeltype instead of import to match QVTo
-import 'HLSTree.ecore'::HLSTree;  -- No name because we defined the package
-import 'HSV2HLS.ecore'::HSV2HLS; -- A name is useful to define an alias for the same metamodel
+import 'HSVTree.ecore'::HSVTree; 
+import 'HLSTree.ecore'::HLSTree;  
+import 'HSV2HLS.ecore'::HSV2HLS;
 
 transformation hsv2hls {
     hsv imports HSVTree;  -- Should specify the correct package
@@ -37,7 +36,6 @@ map HSV2HLSRoot in hsv2hls {
         }
     }
 }
-
 
 map HSV2HLSRecursion in hsv2hls {
     check enforce hsv(hsvParent : HSVNode | ) {
