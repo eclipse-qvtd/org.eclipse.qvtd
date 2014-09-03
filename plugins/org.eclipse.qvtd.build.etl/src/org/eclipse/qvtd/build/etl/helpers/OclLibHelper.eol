@@ -29,3 +29,12 @@ operation getPrimitiveTypeByName(name : String) : oclStdLib!PrimitiveType {
 operation getClassByName(name : String) : oclStdLib!Class {
     return oclStdLib!Class.all().selectOne(c | c.name == name);
 } 
+
+// HACK There must be a "correct" way to acces the OCL Std Library!
+@cached
+operation getOclAnyEqualsOp() : Any {
+    //oclStdLib.getElementById("T.ocl.OclAny").println("by id ");
+    //oclStdLib.getElementById("T.ocl.OclAny").ownedOperation.println();
+    //oclStdLib.getElementById("T.ocl.OclAny").ownedOperation.selectOne(op | op.name == "=").println();
+    return oclStdLib.getElementById("T.ocl.OclAny").ownedOperation.selectOne(op | op.name == "=");
+}

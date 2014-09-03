@@ -279,8 +279,8 @@ migrate BottomPattern
 }
 
 @cached
-operation getEqualsOperation() : QVT!Operation {
-    return QVTc!Predicate.all().first().conditionExpression.referredOperation;
+operation getEqualsOperation() : Any {
+    return  getOclAnyEqualsOp();
 }
 
 post {

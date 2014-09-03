@@ -21,7 +21,7 @@ var visited : Map;
 for (p in mm!EPackage.all().first()) {
     p.iterativeDFS();
 }
-"Done".println();
+"Ecore to ContainmentTree Done".println();
 
 /* ===========================================================================*/
 
@@ -40,12 +40,12 @@ operation mm!EPackage iterativeDFS() {
 	maxDepth = 1;
     
     while (iterate) {
-        maxDepth.println("IterativeDFS ");
+        //maxDepth.println("IterativeDFS ");
         change = false;
         for (c in self.eClassifiers.select(c | c.isKindOf(mm!EClass)
                 and not c.abstract
                 and not c.getEAllStructuralFeatures().exists(r : mm!EReference | r.container))) {
-            c.println();
+            //c.println();
             change = c.dfs(1, maxDepth, parentNode) or change;
         }
         if (not change) {
@@ -56,7 +56,7 @@ operation mm!EPackage iterativeDFS() {
 	    }
 	    maxDepth = maxDepth + 1;
 	    if(maxDepth > 10) {
-	       "Safe ending".errln();
+	       //"Safe ending".errln();
 	       iterate = false; // Safe ending
 	    }
 	       

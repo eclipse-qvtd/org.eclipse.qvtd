@@ -28,6 +28,4 @@ public class FlockTask extends EpsilonTask {
 		return new FlockModule();
 	}
 	
-	
-
 }
