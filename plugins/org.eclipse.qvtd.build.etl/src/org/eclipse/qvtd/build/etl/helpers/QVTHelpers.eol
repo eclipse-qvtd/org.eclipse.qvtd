@@ -81,13 +81,13 @@ operation QVT!Area isOutputDomain() : Boolean {
  * ANNOTATIONS
  *  cached
  * RESULT
- *  True if the condifuration mode is Mode#checking
+ *  True if the condifuration mode is Mode#check
  * SEE ALSO
  *  QVTHelpers/isEnforceMode
  */
 @chached 
 operation isCheckMode() : Boolean {
-    return config!Configuration.all.first().mode == config!Mode#checking;
+    return config!Configuration.all.first().mode == config!Mode#check;
 }
 
 
@@ -103,7 +103,7 @@ operation isCheckMode() : Boolean {
  */
 @chached
 operation isEnforceMode() : Boolean {
-    return config!Configuration.all.first().mode == config!Mode#enforcement;
+    return config!Configuration.all.first().mode == config!Mode#enforce;
 }
 
 
@@ -732,7 +732,7 @@ operation QVT!Variable hasRelation(other : QVT!Variable) : Bag {
  */ 
 operation getUnidirComment() : String {
     var comment : String = "/* ";
-    if (config!Configuration.all.first().mode == config!Mode#enforcement) {
+    if (config!Configuration.all.first().mode == config!Mode#enforce) {
         comment = comment + "Enforce ";
     } else {
         comment = comment + "Check ";
