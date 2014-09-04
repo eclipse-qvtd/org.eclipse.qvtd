@@ -84,6 +84,14 @@ public abstract class EpsilonTask {
 		this.models.add(model);
 	}
 	
+	public void removeModel(IModel model) {
+		this.models.remove(model);
+	}
+	
+	public void removeAllModels() {
+		this.models.clear();
+	}
+	
 	
 	/**
 	 * Gets the models loaded to the engine. The loaded models can be different
@@ -122,8 +130,11 @@ public abstract class EpsilonTask {
 	 * repository, invokes the {@link #preProcess()} method, executes the engine
 	 * and the invokes the {@link #postProcess()} method. The result of executing
 	 * the engine is saved in the {@see #result} field. Models are disposed (i.e.
-	 * un-loaded) after execution.
+	 * un-loaded) after execution. Models are removed from the context to provide
+	 * clean execution of next invocation.
 	 *
+	 * Different Epsilon modules may require to override this method to provide
+	 * specific functionality.
 	 * @throws EpsilonParseException If syntax errors were detected in the source file.
 	 *         Error details will be printed in the System.err stream.
 	 *         TODO Provide a better way of getting the errors, log4j or other
@@ -141,7 +152,7 @@ public abstract class EpsilonTask {
 		}
 		
 		/*catch (URISyntaxException e) {
-			throw new EpsilonStandaloneException("Error parsing source. " + e.getMessage());
+			throw new EpsilonStandalonevoidException("Error parsing source. " + e.getMessage());
 		} catch (Exception e) {
 			throw new EpsilonStandaloneException("Error parsing source. " + e.getMessage());
 		}*/
@@ -165,8 +176,9 @@ public abstract class EpsilonTask {
 			throw new EpsilonExecutionException(e.getMessage(),e.getCause());
 		}
 		postProcess();
-		
-		module.getContext().getModelRepository().dispose();
+		for (IModel model : getModels()) {
+			module.getContext().getModelRepository().removeModel(model);
+		}
 	}
 	
 	
@@ -183,19 +195,6 @@ public abstract class EpsilonTask {
 	protected Object execute(IEolExecutableModule module) throws EolRuntimeException {
 		return module.execute();
 	}
-	
-	/**
-	 * Dispose models removes the loaded modules in the {@link #module}. This
-	 * method should be used if the extending class has overridden {@link #execute()}
-	 * to provide a more fined grained control over the module execution.
-	 */
-	public void disposeModels() {
-		
-		module.getContext().getModelRepository().dispose();
-	}
-	
-	
-	
 	
 	/**
 	 * Gets the file, given the name. The file is searched by the class loader.

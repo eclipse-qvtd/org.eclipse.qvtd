@@ -3,12 +3,19 @@ package org.eclipse.qvtd.build.etl;
 import java.net.URI;
 import java.util.ArrayList;
 
+import org.eclipse.epsilon.common.parse.problem.ParseProblem;
 import org.eclipse.epsilon.eol.IEolExecutableModule;
+import org.eclipse.epsilon.eol.exceptions.EolRuntimeException;
 import org.eclipse.epsilon.eol.models.IModel;
 import org.eclipse.epsilon.flock.FlockModule;
+import org.eclipse.epsilon.flock.FlockResult;
+import org.eclipse.epsilon.flock.IFlockContext;
+import org.eclipse.epsilon.flock.execution.exceptions.FlockUnsupportedModelException;
 
 public class FlockTask extends EpsilonTask {
 	
+	private IModel originalModel;
+	private IModel migratedModel;
 	
 	public FlockTask(URI etlSourceURI) {
 		super();
@@ -26,6 +33,71 @@ public class FlockTask extends EpsilonTask {
 	public IEolExecutableModule createModule() {
 		// TODO Auto-generated method stub
 		return new FlockModule();
+	}
+
+	public IModel getOriginalModel() {
+		return originalModel;
+	}
+
+	public void setOriginalModel(IModel originalModel) {
+		this.originalModel = originalModel;
+		addModel(originalModel);
+	}
+
+	public IModel getMigratedModel() {
+		return migratedModel;
+	}
+
+	public void setMigratedModel(IModel migratedModel) {
+		this.migratedModel = migratedModel;
+		addModel(migratedModel);
+	}
+	
+	@Override
+	public void execute() throws EpsilonParseException, EpsilonSourceLoadException, EpsilonExecutionException {
+		
+		module = createModule();
+		try {
+			module.parse(sourceURI);
+		} catch (Exception e1) {
+			throw new EpsilonSourceLoadException("There was an error loading the source.", e1.getCause());
+		}
+		
+		/*catch (URISyntaxException e) {
+			throw new EpsilonStandalonevoidException("Error parsing source. " + e.getMessage());
+		} catch (Exception e) {
+			throw new EpsilonStandaloneException("Error parsing source. " + e.getMessage());
+		}*/
+		
+		if (module.getParseProblems().size() > 0) {
+			System.err.println("Parse errors occured...");
+			for (ParseProblem problem : module.getParseProblems()) {
+				System.err.println(problem.toString());
+			}
+			throw new EpsilonParseException("Parse errors occured. See stack trace for details.");
+		}
+		
+		for (IModel model : getModels()) {
+			module.getContext().getModelRepository().addModel(model);
+		}
+		
+		try {
+			((IFlockContext)module.getContext()).setOriginalModel(originalModel);
+			((IFlockContext)module.getContext()).setMigratedModel(migratedModel);
+		} catch (FlockUnsupportedModelException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		preProcess();
+		try {
+			result = module.execute();
+		} catch (EolRuntimeException e) {
+			throw new EpsilonExecutionException(e.getMessage(),e.getCause());
+		}
+		postProcess();
+		for (IModel model : getModels()) {
+			module.getContext().getModelRepository().removeModel(model);
+		}
 	}
 	
 }
