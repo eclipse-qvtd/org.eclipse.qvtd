@@ -18,12 +18,9 @@ import org.eclipse.emf.ecore.util.BasicExtendedMetaData;
 import org.eclipse.emf.ecore.util.ExtendedMetaData;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
-import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.epsilon.common.util.StringProperties;
 import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
-import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
-import org.eclipse.ocl.examples.pivot.internal.impl.PivotFactoryImpl;
 import org.eclipse.ocl.examples.pivot.resource.OCLASResourceFactory;
 
 public class MtcBroker {
@@ -51,8 +48,6 @@ public class MtcBroker {
 	private static final String QVTU_TO_QVTM_FLOCK = "mtc/QVTuToQVTm.mig";
 	
 	
-	
-	private String configResourcePath;
 	private String qvtcasUri;
 	private String qvtuUri;
 	private String qvtmUri;

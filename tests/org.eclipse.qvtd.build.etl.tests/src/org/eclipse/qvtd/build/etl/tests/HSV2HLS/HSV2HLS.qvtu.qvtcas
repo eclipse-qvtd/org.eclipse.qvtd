@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="ASCII"?>
+<qvtc:CoreModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/3.1.0/Pivot" xmlns:qvtb="http://www.eclipse.org/qvt/0.9/QVTbase" xmlns:qvtc="http://www.eclipse.org/qvt/0.9/QVTcore" xmlns:qvtcb="http://www.eclipse.org/qvt/0.9/QVTcoreBase" name="HSV2HLS.qvtu.qvtc" externalURI="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/HSV2HLS/HSV2HLS.qvtu.qvtc">
+  <nestedPackage xsi:type="qvtb:Transformation" xmi:id="T.hsv2hls" name="hsv2hls">
+    <ownedComment body="/* Enforce hsv to hls */"/>
+    <ownedOperation xsi:type="qvtb:Function" xmi:id="o.hsv2hls.hls2rgb..HLSTree.HLS" isStatic="true" name="hls2rgb">
+      <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.RGB"/>
+      <ownedParameter xsi:type="qvtb:FunctionParameter" xmi:id="p0o.hsv2hls.hls2rgb..HLSTree.HLS" name="color">
+        <type href="HLSTree.ecore.oclas#T.HLSTree.HLS"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtb:Function" xmi:id="o.hsv2hls.hsv2rgb..HSVTree.HSV" isStatic="true" name="hsv2rgb">
+      <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.RGB"/>
+      <ownedParameter xsi:type="qvtb:FunctionParameter" xmi:id="p0o.hsv2hls.hsv2rgb..HSVTree.HSV" name="color">
+        <type href="HSVTree.ecore.oclas#T.HSVTree.HSV"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtb:Function" xmi:id="o.hsv2hls.rgb2hls..HSV2HLS.RGB" isStatic="true" name="rgb2hls">
+      <type href="HLSTree.ecore.oclas#T.HLSTree.HLS"/>
+      <ownedParameter xsi:type="qvtb:FunctionParameter" xmi:id="p0o.hsv2hls.rgb2hls..HSV2HLS.RGB" name="color">
+        <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.RGB"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xsi:type="qvtb:Function" xmi:id="o.hsv2hls.rgb2hsv..HSV2HLS.RGB" isStatic="true" name="rgb2hsv">
+      <type href="HSVTree.ecore.oclas#T.HSVTree.HSV"/>
+      <ownedParameter xsi:type="qvtb:FunctionParameter" xmi:id="p0o.hsv2hls.rgb2hsv..HSV2HLS.RGB" name="color">
+        <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.RGB"/>
+      </ownedParameter>
+    </ownedOperation>
+    <superClass href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclElement"/>
+    <modelParameter xmi:id="qT.hsv2hls.hsv" name="hsv">
+      <usedPackage href="HSVTree.ecore.oclas#P.HSVTree"/>
+    </modelParameter>
+    <modelParameter xmi:id="qT.hsv2hls.hls" name="hls">
+      <usedPackage href="HLSTree.ecore.oclas#P.HLSTree"/>
+    </modelParameter>
+    <modelParameter>
+      <usedPackage href="HSV2HLS.ecore.oclas#P.HSV2HLS"/>
+    </modelParameter>
+    <rule xsi:type="qvtc:Mapping" name="HSV2HLSRoot">
+      <domain xsi:type="qvtcb:CoreDomain" name="hsv" isCheckable="true" isEnforceable="false" typedModel="qT.hsv2hls.hsv">
+        <guardPattern>
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=">
+              <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"/>
+              <source xsi:type="pivot:PropertyCallExp" isRequired="false">
+                <type href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+                <source xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRoot.hsv.guard.hsvRoot">
+                  <type href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+                </source>
+                <referredProperty href="HSVTree.ecore.oclas#p.HSVTree.HSVNode.parent"/>
+              </source>
+              <argument xsi:type="pivot:NullLiteralExp" isRequired="false">
+                <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclVoid"/>
+              </argument>
+              <referredOperation href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf"/>
+            </conditionExpression>
+          </predicate>
+          <variable xmi:id="qV.hsv2hls.HSV2HLSRoot.hsv.guard.hsvRoot" name="hsvRoot">
+            <type href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+          </variable>
+        </guardPattern>
+        <bottomPattern/>
+      </domain>
+      <domain xsi:type="qvtcb:CoreDomain" name="hls" isCheckable="false" isEnforceable="true" typedModel="qT.hsv2hls.hls">
+        <guardPattern/>
+        <bottomPattern>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false">
+            <value xsi:type="pivot:NullLiteralExp" isRequired="false">
+              <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclVoid"/>
+            </value>
+            <slotExpression xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRoot.hls.bottom.hlsNode">
+              <type href="HLSTree.ecore.oclas#T.HLSTree.HLSNode"/>
+            </slotExpression>
+            <targetProperty href="HLSTree.ecore.oclas#p.HLSTree.HLSNode.parent"/>
+          </assignment>
+          <realizedVariable xmi:id="qV.hsv2hls.HSV2HLSRoot.hls.bottom.hlsNode" name="hlsNode">
+            <type href="HLSTree.ecore.oclas#T.HLSTree.HLSNode"/>
+          </realizedVariable>
+        </bottomPattern>
+      </domain>
+      <guardPattern/>
+      <bottomPattern>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false">
+          <value xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRoot.hsv.guard.hsvRoot">
+            <type href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+          </value>
+          <slotExpression xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRoot.bottom.middleRoot">
+            <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+          </slotExpression>
+          <targetProperty href="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.hsv"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false">
+          <value xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRoot.hls.bottom.hlsNode">
+            <type href="HLSTree.ecore.oclas#T.HLSTree.HLSNode"/>
+          </value>
+          <slotExpression xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRoot.bottom.middleRoot">
+            <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+          </slotExpression>
+          <targetProperty href="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.hls"/>
+        </assignment>
+        <realizedVariable xmi:id="qV.hsv2hls.HSV2HLSRoot.bottom.middleRoot" name="middleRoot">
+          <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+        </realizedVariable>
+      </bottomPattern>
+      <local>
+        <guardPattern/>
+        <bottomPattern>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false">
+            <value xsi:type="pivot:PropertyCallExp" isRequired="false">
+              <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"/>
+              <source xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRoot.hsv.guard.hsvRoot">
+                <type href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+              </source>
+              <referredProperty href="HSVTree.ecore.oclas#p.HSVTree.HSVNode.name"/>
+            </value>
+            <slotExpression xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRoot.bottom.middleRoot">
+              <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+            </slotExpression>
+            <targetProperty href="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.name"/>
+          </assignment>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false">
+            <value xsi:type="pivot:PropertyCallExp" isRequired="false">
+              <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"/>
+              <source xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRoot.bottom.middleRoot">
+                <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+              </source>
+              <referredProperty href="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.name"/>
+            </value>
+            <slotExpression xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRoot.hls.bottom.hlsNode">
+              <type href="HLSTree.ecore.oclas#T.HLSTree.HLSNode"/>
+            </slotExpression>
+            <targetProperty href="HLSTree.ecore.oclas#p.HLSTree.HLSNode.name"/>
+          </assignment>
+        </bottomPattern>
+      </local>
+    </rule>
+    <rule xsi:type="qvtc:Mapping" name="HSV2HLSRecursion">
+      <domain xsi:type="qvtcb:CoreDomain" name="hsv" isCheckable="true" isEnforceable="false" typedModel="qT.hsv2hls.hsv">
+        <guardPattern>
+          <variable xmi:id="qV.hsv2hls.HSV2HLSRecursion.hsv.guard.hsvParent" name="hsvParent">
+            <type href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+          </variable>
+        </guardPattern>
+        <bottomPattern>
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=">
+              <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"/>
+              <source xsi:type="pivot:PropertyCallExp">
+                <type href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+                <source xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRecursion.hsv.bottom.hsvNode">
+                  <type href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+                </source>
+                <referredProperty href="HSVTree.ecore.oclas#p.HSVTree.HSVNode.parent"/>
+              </source>
+              <argument xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRecursion.hsv.guard.hsvParent">
+                <type href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+              </argument>
+              <referredOperation href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf"/>
+            </conditionExpression>
+          </predicate>
+          <variable xmi:id="qV.hsv2hls.HSV2HLSRecursion.hsv.bottom.hsvNode" name="hsvNode">
+            <type href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+          </variable>
+        </bottomPattern>
+      </domain>
+      <domain xsi:type="qvtcb:CoreDomain" name="hls" isCheckable="false" isEnforceable="true" typedModel="qT.hsv2hls.hls">
+        <guardPattern>
+          <variable xmi:id="qV.hsv2hls.HSV2HLSRecursion.hls.guard.hlsParent" name="hlsParent">
+            <type href="HLSTree.ecore.oclas#T.HLSTree.HLSNode"/>
+          </variable>
+        </guardPattern>
+        <bottomPattern>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false">
+            <value xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRecursion.hls.guard.hlsParent">
+              <type href="HLSTree.ecore.oclas#T.HLSTree.HLSNode"/>
+            </value>
+            <slotExpression xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRecursion.hls.bottom.hlsNode">
+              <type href="HLSTree.ecore.oclas#T.HLSTree.HLSNode"/>
+            </slotExpression>
+            <targetProperty href="HLSTree.ecore.oclas#p.HLSTree.HLSNode.parent"/>
+          </assignment>
+          <realizedVariable xmi:id="qV.hsv2hls.HSV2HLSRecursion.hls.bottom.hlsNode" name="hlsNode">
+            <type href="HLSTree.ecore.oclas#T.HLSTree.HLSNode"/>
+          </realizedVariable>
+        </bottomPattern>
+      </domain>
+      <guardPattern>
+        <predicate>
+          <conditionExpression xsi:type="pivot:OperationCallExp" name="=">
+            <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"/>
+            <source xsi:type="pivot:PropertyCallExp">
+              <type href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+              <source xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRecursion.guard.middleParent">
+                <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+              </source>
+              <referredProperty href="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.hsv"/>
+            </source>
+            <argument xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRecursion.hsv.guard.hsvParent">
+              <type href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+            </argument>
+            <referredOperation href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf"/>
+          </conditionExpression>
+        </predicate>
+        <predicate>
+          <conditionExpression xsi:type="pivot:OperationCallExp" name="=">
+            <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"/>
+            <source xsi:type="pivot:PropertyCallExp">
+              <type href="HLSTree.ecore.oclas#T.HLSTree.HLSNode"/>
+              <source xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRecursion.guard.middleParent">
+                <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+              </source>
+              <referredProperty href="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.hls"/>
+            </source>
+            <argument xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRecursion.hls.guard.hlsParent">
+              <type href="HLSTree.ecore.oclas#T.HLSTree.HLSNode"/>
+            </argument>
+            <referredOperation href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf"/>
+          </conditionExpression>
+        </predicate>
+        <variable xmi:id="qV.hsv2hls.HSV2HLSRecursion.guard.middleParent" name="middleParent">
+          <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+        </variable>
+      </guardPattern>
+      <bottomPattern>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false">
+          <value xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRecursion.guard.middleParent">
+            <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+          </value>
+          <slotExpression xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRecursion.bottom.middleNode">
+            <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+          </slotExpression>
+          <targetProperty href="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.parent"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false">
+          <value xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRecursion.hsv.bottom.hsvNode">
+            <type href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+          </value>
+          <slotExpression xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRecursion.bottom.middleNode">
+            <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+          </slotExpression>
+          <targetProperty href="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.hsv"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false">
+          <value xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRecursion.hls.bottom.hlsNode">
+            <type href="HLSTree.ecore.oclas#T.HLSTree.HLSNode"/>
+          </value>
+          <slotExpression xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRecursion.bottom.middleNode">
+            <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+          </slotExpression>
+          <targetProperty href="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.hls"/>
+        </assignment>
+        <realizedVariable xmi:id="qV.hsv2hls.HSV2HLSRecursion.bottom.middleNode" name="middleNode">
+          <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+        </realizedVariable>
+      </bottomPattern>
+      <local>
+        <guardPattern/>
+        <bottomPattern>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false">
+            <value xsi:type="pivot:PropertyCallExp" isRequired="false">
+              <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"/>
+              <source xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRecursion.hsv.bottom.hsvNode">
+                <type href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+              </source>
+              <referredProperty href="HSVTree.ecore.oclas#p.HSVTree.HSVNode.name"/>
+            </value>
+            <slotExpression xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRecursion.bottom.middleNode">
+              <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+            </slotExpression>
+            <targetProperty href="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.name"/>
+          </assignment>
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false">
+            <value xsi:type="pivot:PropertyCallExp" isRequired="false">
+              <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"/>
+              <source xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRecursion.bottom.middleNode">
+                <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+              </source>
+              <referredProperty href="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.name"/>
+            </value>
+            <slotExpression xsi:type="pivot:VariableExp" referredVariable="qV.hsv2hls.HSV2HLSRecursion.hls.bottom.hlsNode">
+              <type href="HLSTree.ecore.oclas#T.HLSTree.HLSNode"/>
+            </slotExpression>
+            <targetProperty href="HLSTree.ecore.oclas#p.HLSTree.HLSNode.name"/>
+          </assignment>
+        </bottomPattern>
+      </local>
+    </rule>
+  </nestedPackage>
+</qvtc:CoreModel>

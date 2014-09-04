@@ -121,7 +121,7 @@ map stringToVarchar in umlRdbms refines primitiveToName {
 -- utility functions for flattening   
 map flattening in umlRdbms {
 }
-
+/*
 query umlRdbms::getAllSupers(cls : SimpleUML::Class) : Set(SimpleUML::Class) {
     cls.general->collect(gen | getAllSupers(gen))->including(cls)->asSet()
 }
@@ -133,7 +133,8 @@ query umlRdbms::getAllAttributes(cls :  SimpleUML::Class) : Set( SimpleUML::Attr
 query umlRdbms::getAllForwards(cls :  SimpleUML::Class) : Set( SimpleUML::Association) {
     getAllSupers(cls)->collect(c | true)
 }
- 
+  */
+  
 /*  -- Class and Table mapping
     class ClassToTable extends FromAttributeOwner, ToColumn {
         owner : PackageToSchema opposites classesToTables;

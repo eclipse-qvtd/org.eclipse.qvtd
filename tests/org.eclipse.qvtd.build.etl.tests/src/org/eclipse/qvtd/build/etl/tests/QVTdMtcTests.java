@@ -5,7 +5,10 @@ import java.net.URL;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
+import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
+import org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLLinkingService;
+import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
 import org.eclipse.qvtd.build.etl.MtcBroker;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
@@ -27,6 +30,7 @@ public class QVTdMtcTests extends LoadTestCase {
 		super.setUp();
 		QVTcoreStandaloneSetup.doSetup();
 		QVTimperativeStandaloneSetup.doSetup();
+		OCLstdlib.install();
 		metaModelManager = new MetaModelManager();
         MetaModelManagerResourceSetAdapter.getAdapter(DomainUtil.nonNullState(resourceSet), metaModelManager);
     }
