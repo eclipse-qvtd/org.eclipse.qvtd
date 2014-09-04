@@ -177,6 +177,9 @@ public abstract class EpsilonTask {
 		}
 		postProcess();
 		for (IModel model : getModels()) {
+			if (model.isStoredOnDisposal()) {
+				model.store();
+			}
 			module.getContext().getModelRepository().removeModel(model);
 		}
 	}

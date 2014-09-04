@@ -24,6 +24,7 @@ import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
 import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.examples.pivot.internal.impl.PivotFactoryImpl;
+import org.eclipse.ocl.examples.pivot.resource.OCLASResourceFactory;
 
 public class MtcBroker {
 	
@@ -40,12 +41,14 @@ public class MtcBroker {
 	
 	private static final String OCL_STD_LIB_MODEL_NAME = "oclStdLib";
 	private static final String OCL_STD_LIB_MODEL = "/OCL-2.5.oclas";
+	private static final String OCL_STD_LIB_URI = "http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas";
 	
-	private static final String PIVOT_URI = "";
+	private static final String PIVOT_URI = "http://www.eclipse.org/ocl/3.1.0/Pivot";
 	
 	private static final String QVTC_URI = "http://www.eclipse.org/qvt/0.9/QVTcore";
 	
 	private static final String QVTC_TO_QVTU_FLOCK = "mtc/QVTcToQVTu.mig";
+	private static final String QVTU_TO_QVTM_FLOCK = "mtc/QVTuToQVTm.mig";
 	
 	
 	
@@ -68,14 +71,7 @@ public class MtcBroker {
 	
 	public MtcBroker(String qvtcasUri, Class owner) throws URISyntaxException {
 	
-		// 1. Derive all the required paths
-		// QVTu *.qvtu.qvtas
-		// QVTm *.qvtm.qvtas
-		// Partition *.qvtp.qvtias
-		// QVTi *.qvtias
-		// Config *Config.xmi
-		// Schedule *Schedule.xmi
-		
+		// Derive all the required paths		
 		this.qvtcasUri = qvtcasUri;
 		this.owner = owner;
 		System.out.println(qvtcasUri);
@@ -101,8 +97,9 @@ public class MtcBroker {
 		EmfModel cModel = createEmfModel(qvtcasUri, "QVTc", "QVT", QVTC_URI, true, false, true);
 		EmfModel uModel = qvtcToqvtu(cModel);
 		uModel.setCachingEnabled(true);
+		EmfModel mModel = qvtuToqvtm(uModel);
+		mModel.setCachingEnabled(true);
 	}
-	
 	
 
 	private EmfModel qvtcToqvtu(EmfModel cModel) {
@@ -122,8 +119,8 @@ public class MtcBroker {
 				e.printStackTrace();
 			} finally {
 				if (flock != null) {
-					flock.models.add(cModel);
-					flock.models.add(uModel);
+					flock.setOriginalModel(cModel);
+					flock.setMigratedModel(uModel);
 					flock.models.add(configModel);
 					flock.models.add(oclStdLibModel);
 					try {
@@ -142,6 +139,45 @@ public class MtcBroker {
 			}
 		}
 		return uModel;
+	}
+	
+	private EmfModel qvtuToqvtm(EmfModel uModel) {
+
+		EmfModel mModel = null;
+		try {
+			mModel = createEmfModel(qvtmUri, "QVTm", "QVT", QVTC_URI, false, true, false);
+		} catch (EolModelLoadingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} if (uModel != null && mModel != null  ) {
+			FlockTask flock = null;
+			try {
+				flock = new FlockTask(java.net.URI.create(getResourceURI(QVTU_TO_QVTM_FLOCK)));
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (flock != null) {
+					flock.setOriginalModel(uModel);
+					flock.setMigratedModel(mModel);
+					flock.models.add(configModel);
+					flock.models.add(oclStdLibModel);
+					try {
+						flock.execute();
+					} catch (EpsilonParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (EpsilonSourceLoadException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (EpsilonExecutionException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		return mModel;
 	}
 
 	private void createContainmentTrees() {
@@ -253,12 +289,12 @@ public class MtcBroker {
 	
 	private void loadOclStdLibModel() {
 		
-		try {
-			oclStdLibModel = createEmfModel(getResourceURI(OCL_STD_LIB_MODEL), OCL_STD_LIB_MODEL_NAME, "", PIVOT_URI, true, false, true);
+		//EPackage.Registry.INSTANCE.put(OCL_STD_LIB_URI, OCLstdlibPackage.eINSTANCE);
+        OCLASResourceFactory.INSTANCE.getClass();
+        Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap( ).put("oclas", OCLASResourceFactory.INSTANCE);
+	    try {
+	    	oclStdLibModel = createEmfModel(OCL_STD_LIB_URI, OCL_STD_LIB_MODEL_NAME, "", PIVOT_URI, true, false, true);
 		} catch (EolModelLoadingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -295,6 +331,7 @@ public class MtcBroker {
 		String path = null;
 		Resource r;
 		EObject eObject;
+		// Configuration Metamodel
 		try {
 			path = getResourceURI(CONFIG_MM);
 		} catch (URISyntaxException e) {
@@ -310,6 +347,7 @@ public class MtcBroker {
 				}
 			}
 		}
+		// Containment tree metamodel
 		try {
 			path = getResourceURI(ECORE_CONTAINMENT_MM);
 		} catch (URISyntaxException e) {
@@ -339,6 +377,20 @@ public class MtcBroker {
 	    }
 		return result;
 	}
+	
+	public static String changeModelResourceToSource(String resourcePath) {
+		
+		String result;
+		if (resourcePath.indexOf("/bin/") > -1) {
+	      result = resourcePath.replaceAll("/bin/", "/model/");
+	    }
+	    else {
+	      result= resourcePath;
+	    }
+		return result;
+	}
+	
+	
 	
 	/**
 	 * Return a java.net.URI for an specified filename  
