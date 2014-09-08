@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ASCII"?>
+<qvtschedule:Schedule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvtschedule="http://www.eclipse.org/qvt/0.1/QVTschedule/">
+  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.0 //@actions.2" dataParameter="//@actions.1/@distinctArguments.0/@primaryArguments.0 //@actions.2/@distinctArguments.1/@primaryArguments.0 //@actions.3/@distinctArguments.0/@primaryArguments.0 //@actions.3/@distinctArguments.1/@primaryArguments.0">
+    <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+    <domain href="HSV2HLS.qvtp.qvtias#//@nestedPackage.0/@rule.0/@domain.1"/>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" dataParameter="//@actions.0/@distinctArguments.0/@primaryArguments.0 //@actions.2/@distinctArguments.0/@primaryArguments.0 //@actions.2/@distinctArguments.2/@primaryArguments.0">
+    <type href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+    <domain href="HSV2HLS.qvtp.qvtias#//@nestedPackage.0/@rule.0/@domain.0"/>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.1 //@actions.3" dataParameter="//@actions.3/@distinctArguments.2/@primaryArguments.0">
+    <type href="HLSTree.ecore.oclas#T.HLSTree.HLSNode"/>
+    <domain href="HSV2HLS.qvtp.qvtias#//@nestedPackage.0/@rule.1/@domain.0"/>
+  </datums>
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.0">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.1">
+        <variable href="HSV2HLS.qvtp.qvtias#//@nestedPackage.0/@rule.0/@domain.0/@guardPattern/@variable.0"/>
+      </primaryArguments>
+    </distinctArguments>
+    <mapping href="HSV2HLS.qvtp.qvtias#//@nestedPackage.0/@rule.0"/>
+  </actions>
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.2">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.0">
+        <variable href="HSV2HLS.qvtp.qvtias#//@nestedPackage.0/@rule.1/@domain.1/@guardPattern/@variable.0"/>
+      </primaryArguments>
+    </distinctArguments>
+    <mapping href="HSV2HLS.qvtp.qvtias#//@nestedPackage.0/@rule.1"/>
+  </actions>
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.0">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.1">
+        <variable href="HSV2HLS.qvtp.qvtias#//@nestedPackage.0/@rule.2/@domain.0/@guardPattern/@variable.0"/>
+      </primaryArguments>
+    </distinctArguments>
+    <distinctArguments>
+      <primaryArguments datum="//@datums.0">
+        <variable href="HSV2HLS.qvtp.qvtias#//@nestedPackage.0/@rule.2/@domain.1/@guardPattern/@variable.0"/>
+      </primaryArguments>
+    </distinctArguments>
+    <distinctArguments>
+      <primaryArguments datum="//@datums.1">
+        <variable href="HSV2HLS.qvtp.qvtias#//@nestedPackage.0/@rule.2/@domain.0/@guardPattern/@variable.1"/>
+      </primaryArguments>
+    </distinctArguments>
+    <mapping href="HSV2HLS.qvtp.qvtias#//@nestedPackage.0/@rule.2"/>
+  </actions>
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.2">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.0">
+        <variable href="HSV2HLS.qvtp.qvtias#//@nestedPackage.0/@rule.3/@domain.1/@guardPattern/@variable.1"/>
+      </primaryArguments>
+    </distinctArguments>
+    <distinctArguments>
+      <primaryArguments datum="//@datums.0">
+        <variable href="HSV2HLS.qvtp.qvtias#//@nestedPackage.0/@rule.3/@domain.1/@guardPattern/@variable.0"/>
+      </primaryArguments>
+    </distinctArguments>
+    <distinctArguments>
+      <primaryArguments datum="//@datums.2">
+        <variable href="HSV2HLS.qvtp.qvtias#//@nestedPackage.0/@rule.3/@domain.0/@guardPattern/@variable.0"/>
+      </primaryArguments>
+    </distinctArguments>
+    <mapping href="HSV2HLS.qvtp.qvtias#//@nestedPackage.0/@rule.3"/>
+  </actions>
+</qvtschedule:Schedule>

@@ -177,7 +177,7 @@ migrate PropertyAssignment
  * ORIGINAL
  *  PropertyAssignment
  * FUNCTION
- *  Output domain PropertyAssignments should not he default is the operation
+ *  Output domain PropertyAssignments should not be default if the operation
  *  mode is Check.
  *    
  ******

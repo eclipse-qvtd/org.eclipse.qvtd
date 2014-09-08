@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <qvtc:CoreModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/3.1.0/Pivot" xmlns:qvtb="http://www.eclipse.org/qvt/0.9/QVTbase" xmlns:qvtc="http://www.eclipse.org/qvt/0.9/QVTcore" xmlns:qvtcb="http://www.eclipse.org/qvt/0.9/QVTcoreBase" name="UpperToLower.qvtm.qvtc" externalURI="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/etl/tests/UpperToLower/UpperToLower.qvtm.qvtc">
   <nestedPackage xsi:type="qvtb:Transformation" xmi:id="T.UpperToLower" name="UpperToLower">
+    <ownedComment body="/* Enforce upperGraph to lowerGraph */"/>
     <superClass href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclElement"/>
     <modelParameter name="upperGraph">
       <usedPackage href="SimpleGraph.ecore.oclas#P.simplegraph"/>

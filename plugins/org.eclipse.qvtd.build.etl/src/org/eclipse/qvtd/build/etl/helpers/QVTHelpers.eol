@@ -641,8 +641,8 @@ operation QVT!Property isContainer() : Boolean {
  * ANNOTATIONS
  *  cached
  */
-operation QVT!Property hasNavigableOpposite() : Boolean {
-    return self.opposite.isDefined() and not self.opposite.isMany(); 
+operation hasNavigableOpposite(prop) : Boolean {
+    return prop.opposite.isDefined() and not prop.opposite.isMany(); 
 }
 
 /****o* QVTHelpers/getDataTypeUses

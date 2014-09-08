@@ -31,12 +31,12 @@ import "../helpers/QVTHelpers.eol";
  * FUNCTION
  *  Just creates the place holder for datums and actions
  * FROM
- *  QVTp!Transformation
+ *  QVTi!Transformation
  * TO
  *  QVTs!Schedule
  */
 rule TransformationToSchedule
-    transform t : QVTp!Transformation
+    transform t : QVTi!Transformation
     to s : QVTs!Schedule {
         
     }
@@ -48,12 +48,12 @@ rule TransformationToSchedule
  *  Visit the mapping input/ouput variables to create the appropriate results and
  *  arguments.
  * FROM
- *  QVTp!Mapping
+ *  QVTi!Mapping
  * TO
  *  QVTs!MappingAction
  */
 rule MappingToMappingAction
-    transform m : QVTp!Mapping
+    transform m : QVTi!Mapping
     to ma : QVTs!MappingAction {
         
         //m.name.println();
@@ -71,7 +71,7 @@ rule MappingToMappingAction
  *  All Variables are treated as initialy treated as primary arguments. Analysis
  *  of derivation is done in a later stage.
  * FROM
- *  QVTp!Variable
+ *  QVTi!Variable
  * TO
  *  QVTs!DistinctData, QVTs!DataParameter
  * ANNOTATIONS
@@ -81,7 +81,7 @@ rule MappingToMappingAction
 @lazy
 @greedy
 rule VariableToDataParameter
-    transform v : QVTp!Variable
+    transform v : QVTi!Variable
     to dd : QVTs!DistinctData, dp : QVTs!DataParameter {
         
         //v.name.println("v ");
@@ -94,10 +94,10 @@ rule VariableToDataParameter
 @lazy
 @greedy
 rule TypeToDatum
-    transform t : QVTp!Type
+    transform t : QVTi!Type
     to d : QVTs!ClassDatum {
         
-        guard : QVTp!Variable.all().exists(v | v.type == t)
+        guard : QVTi!Variable.all().exists(v | v.type == t)
         
         var domain = t.getVariableForType().oppositePattern().area; 
         //t.name.println("TypeToDatum ");
@@ -108,9 +108,9 @@ rule TypeToDatum
     }
 
 @cached
-operation QVTp!Type getVariableForType() : QVTp!Variable {
+operation QVTi!Type getVariableForType() : QVTi!Variable {
     
-    return QVTp!Variable.all().selectOne(v | v.type == self or v.type.superClass.includes(self));
+    return QVTi!Variable.all().selectOne(v | v.type == self or v.type.superClass.includes(self));
 }
 
 post{

@@ -4,10 +4,7 @@ Bundle-Name: Tests
 Bundle-SymbolicName: org.eclipse.qvtd.build.etl.tests
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.eclipse.qvtd.build.etl.tests.Activator
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
- org.eclipse.epsilon.common.dt,
- org.eclipse.ocl.examples.pivot;bundle-version="3.4.0",
+Require-Bundle: org.eclipse.epsilon.common.dt,
  org.eclipse.qvtd.xtext.qvtbase.tests;bundle-version="0.12.0",
  org.eclipse.qvtd.xtext.qvtimperative,
  org.eclipse.qvtd.build.etl;bundle-version="1.0.0",

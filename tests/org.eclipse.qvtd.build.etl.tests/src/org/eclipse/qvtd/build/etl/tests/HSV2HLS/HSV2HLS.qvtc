@@ -1,5 +1,5 @@
-import 'HSVTree.ecore'::HSVTree; 
-import 'HLSTree.ecore'::HLSTree;  
+import 'HSVTree.ecore'::HSVTree;
+import 'HLSTree.ecore'::HLSTree;
 import 'HSV2HLS.ecore'::HSV2HLS;
 
 transformation hsv2hls {
@@ -25,7 +25,7 @@ map HSV2HLSRoot in hsv2hls {
         realize middleRoot : HSVNode2HLSNode |
         middleRoot.hsv := hsvRoot;
         middleRoot.hls := hlsNode;
-        
+
     }
     map {
         where() {
@@ -40,18 +40,17 @@ map HSV2HLSRoot in hsv2hls {
 map HSV2HLSRecursion in hsv2hls {
     check enforce hsv(hsvParent : HSVNode | ) {
         realize hsvNode : HSVNode |
-        hsvNode.parent := hsvParent; 
+        hsvNode.parent := hsvParent;
     }
     check enforce hls(hlsParent : HLSNode |) {
         realize hlsNode : HLSNode |
         hlsNode.parent := hlsParent;
     }
-    where(middleParent : HSVNode2HLSNode | 
+    where(middleParent : HSVNode2HLSNode |
         middleParent.hsv = hsvParent;
         middleParent.hls = hlsParent;
     ) {
         realize middleNode : HSVNode2HLSNode |
-        
         middleNode.parent := middleParent;
         middleNode.hsv := hsvNode;
         middleNode.hls := hlsNode;
@@ -60,8 +59,8 @@ map HSV2HLSRecursion in hsv2hls {
         where () {
             middleNode.name := hsvNode.name;
             middleNode.name := hlsNode.name;
-            hlsNode.name := middleNode.name;    
-            hsvNode.name := middleNode.name; 
+            hlsNode.name := middleNode.name;
+            hsvNode.name := middleNode.name;
         }
     }
 }

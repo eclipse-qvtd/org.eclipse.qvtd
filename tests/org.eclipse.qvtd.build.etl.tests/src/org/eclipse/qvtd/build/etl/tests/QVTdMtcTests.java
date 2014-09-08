@@ -10,6 +10,10 @@ import org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLLinkingService;
 import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
 import org.eclipse.qvtd.build.etl.MtcBroker;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
+import org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreToStringVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePivotStandaloneSetup;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeToStringVisitor;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
@@ -28,8 +32,8 @@ public class QVTdMtcTests extends LoadTestCase {
 	    
 		EssentialOCLLinkingService.DEBUG_RETRY = true;
 		super.setUp();
-		QVTcoreStandaloneSetup.doSetup();
-		QVTimperativeStandaloneSetup.doSetup();
+		QVTcorePivotStandaloneSetup.doSetup();
+		QVTimperativePivotStandaloneSetup.doSetup();
 		OCLstdlib.install();
 		metaModelManager = new MetaModelManager();
         MetaModelManagerResourceSetAdapter.getAdapter(DomainUtil.nonNullState(resourceSet), metaModelManager);
@@ -43,7 +47,7 @@ public class QVTdMtcTests extends LoadTestCase {
 		super.tearDown();
     }
     
-    
+    /*
     @Test
     public void testUmlToRdbms() throws Exception {
     	
@@ -61,7 +65,7 @@ public class QVTdMtcTests extends LoadTestCase {
     	MtcBroker mtc = new MtcBroker(qvtcasUri, this.getClass());
     	mtc.execute();
     }
-    
+    */
     @Test
     public void testHSVToHLS() throws Exception {
     	

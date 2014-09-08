@@ -165,7 +165,8 @@ rule Mapping
 		    mM.isEnforceable = true;
 		    mM.isCheckable = false;
 		    mM.typedModel = m.getTransforamtion().getMiddleTypedModel().equivalent();
-		    mM.name = mM.typedModel.name; 
+		    //mM.name = mM.typedModel.name; 
+		    mM.name = "middle";
 		    mM.guardPattern = new QVTi!GuardPattern;
 		    mM.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(m.guardPattern.variable));
 		    mM.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(m.bottomPattern.variable));
@@ -213,7 +214,8 @@ rule Mapping
 		    mM.isCheckable = true;
 		    mM.isEnforceable = false;
 		    mM.typedModel = m.getTransforamtion().getMiddleTypedModel().equivalent();
-		    mM.name = mM.typedModel.name; 
+		    //mM.name = mM.typedModel.name;
+		    mM.name = "middle";
 		    mM.guardPattern = new QVTi!GuardPattern;
 		    mM.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(m.guardPattern.variable));
 		    mM.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(m.bottomPattern.variable));
@@ -483,7 +485,7 @@ operation QVT!VariableAssignment toOCLExpression() : QVT!OperationCallExp {
 }
 
 @cahced
-operation getEqualsOperation() : QVT!Operation {
+operation getEqualsOperation() : Any {
 	return QVTm!Predicate.all().first().conditionExpression.referredOperation;
 }
 post {

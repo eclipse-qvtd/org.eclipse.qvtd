@@ -8,6 +8,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.qvtd.build.qvtschedule.Schedule;
+import org.eclipse.qvtd.build.qvtschedule.qvtscheduleFactory;
+import org.eclipse.qvtd.build.qvtschedule.impl.ScheduleImpl;
+import org.eclipse.qvtd.build.qvtschedule.impl.qvtscheduleFactoryImpl;
+import org.eclipse.qvtd.build.qvtschedule.impl.qvtschedulePackageImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -36,16 +41,22 @@ public class MtcBroker {
 	private static final String ECORE_CONTAINMENT_URI = "http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree";
 	private static final String ECORE_TO_TREE_EOL = "utils/EcoreToContainmentTree.eol";
 	
+	private static final String QVTS_MM = "/QVTSchedule.ecore";
+	private static final String QVTS_URI = "http://www.eclipse.org/qvt/0.1/QVTschedule/";
+	
 	private static final String OCL_STD_LIB_MODEL_NAME = "oclStdLib";
-	private static final String OCL_STD_LIB_MODEL = "/OCL-2.5.oclas";
 	private static final String OCL_STD_LIB_URI = "http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas";
 	
 	private static final String PIVOT_URI = "http://www.eclipse.org/ocl/3.1.0/Pivot";
 	
 	private static final String QVTC_URI = "http://www.eclipse.org/qvt/0.9/QVTcore";
+	private static final String QVTI_URI = "http://www.eclipse.org/qvt/0.9/QVTimperative";
 	
 	private static final String QVTC_TO_QVTU_FLOCK = "mtc/QVTcToQVTu.mig";
 	private static final String QVTU_TO_QVTM_FLOCK = "mtc/QVTuToQVTm.mig";
+	private static final String QVTM_TO_QVTP_ETL = "mtc/QVTmToQVTiPartition.etl";
+	private static final String QVTP_TO_QVTS_ETL = "scheduling/QVTpToSchedule.etl";
+	private static final String QVTP_SCHEDULE_EOL = "scheduling/Scheduler.eol";
 	
 	
 	private String qvtcasUri;
@@ -77,8 +88,6 @@ public class MtcBroker {
 		this.partitionUri = baseUri.appendFileExtension("qvtp.qvtias").toString();
 		this.qvtiUri = baseUri.appendFileExtension("qvtias").toString();
 		
-		
-		
 		this.configUri = URI.createURI(baseUri.toString() + "Config").appendFileExtension("xmi").toString();
 		this.scheduleUri = URI.createURI(baseUri.toString() + "Schdule").appendFileExtension("xmi").toString();
 		registerMetamodels();
@@ -86,18 +95,30 @@ public class MtcBroker {
 	
 	public void execute() throws EolModelLoadingException, EpsilonExecutionException, URISyntaxException, EpsilonSourceLoadException, EpsilonParseException {
 		
+		//EmfModel uModel = null;
 		loadConfigurationModel();
 		loadOclStdLibModel();
 		createContainmentTrees();
 		EmfModel cModel = createEmfModel(qvtcasUri, "QVTc", "QVT", QVTC_URI, true, false, true);
-		EmfModel uModel = qvtcToqvtu(cModel);
+		EmfModel uModel = qvtcToQvtu(cModel);
 		uModel.setCachingEnabled(true);
-		EmfModel mModel = qvtuToqvtm(uModel);
+		uModel.clearCache();
+		EmfModel mModel = qvtuToQvtm(uModel);
 		mModel.setCachingEnabled(true);
+		mModel.clearCache();
+		EmfModel pModel = qvtmToQvtp(mModel);
+		pModel.setCachingEnabled(true);
+		pModel.clearCache();
+		EmfModel sModel = qvtpToQvts(pModel);
+		sModel.setCachingEnabled(true);
+		sModel.clearCache();
+		
+		pModel.setStoredOnDisposal(true);
+		sModel.setStoredOnDisposal(true);
+		qvtpScheduling(pModel, sModel);
 	}
-	
 
-	private EmfModel qvtcToqvtu(EmfModel cModel) {
+	private EmfModel qvtcToQvtu(EmfModel cModel) {
 
 		EmfModel uModel = null;
 		try {
@@ -136,7 +157,7 @@ public class MtcBroker {
 		return uModel;
 	}
 	
-	private EmfModel qvtuToqvtm(EmfModel uModel) {
+	private EmfModel qvtuToQvtm(EmfModel uModel) {
 
 		EmfModel mModel = null;
 		try {
@@ -175,6 +196,118 @@ public class MtcBroker {
 		return mModel;
 	}
 
+	private EmfModel qvtmToQvtp(EmfModel mModel) {
+		
+		EmfModel pModel = null;
+		try {
+			pModel = createEmfModel(partitionUri, "QVTi", "QVT", QVTI_URI, false, true, false);
+		} catch (EolModelLoadingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} if (mModel != null && pModel != null  ) {
+			EtlTask etl = null;
+			try {
+				etl = new EtlTask(java.net.URI.create(getResourceURI(QVTM_TO_QVTP_ETL)));
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				if (etl != null) {
+					etl.models.add(mModel);
+					etl.models.add(pModel);
+					etl.models.add(configModel);
+					etl.models.add(oclStdLibModel);
+					try {
+						etl.execute();
+					} catch (EpsilonParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (EpsilonSourceLoadException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (EpsilonExecutionException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		return pModel;
+	}
+	
+	private EmfModel qvtpToQvts(EmfModel pModel) {
+		EmfModel sModel = null;
+		try {
+			sModel = createEmfModel(scheduleUri, "QVTs", "QVT", QVTS_URI, false, true, false);
+		} catch (EolModelLoadingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (pModel != null && sModel != null  ) {
+				EtlTask etl = null;
+				try {
+					etl = new EtlTask(java.net.URI.create(getResourceURI(QVTP_TO_QVTS_ETL)));
+				} catch (URISyntaxException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					if (etl != null) {
+						etl.models.add(pModel);
+						etl.models.add(sModel);
+						etl.models.add(configModel);
+						etl.models.add(oclStdLibModel);
+						try {
+							etl.execute();
+						} catch (EpsilonParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (EpsilonSourceLoadException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (EpsilonExecutionException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+		return sModel;
+	}
+	
+	private void qvtpScheduling(EmfModel pModel, EmfModel sModel) {
+		
+		if (pModel != null && sModel != null  ) {
+			EolTask eol = null;
+			try {
+				 eol = new EolTask(java.net.URI.create(getResourceURI(QVTP_SCHEDULE_EOL)));
+			} catch (URISyntaxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally  {
+				if (eol != null) {
+					eol.models.add(pModel);
+					eol.models.add(sModel);
+					eol.models.add(oclStdLibModel);
+					eol.models.add(configModel);
+					try {
+						eol.execute();
+					} catch (EpsilonParseException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (EpsilonSourceLoadException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (EpsilonExecutionException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+	}
+	
+	
 	private void createContainmentTrees() {
 		
 		List<String> mms = getCandidateMetamodels();
@@ -358,6 +491,23 @@ public class MtcBroker {
 				}
 			}
 			
+		}
+		// Schedule metamodel
+		try {
+			qvtscheduleFactory sf = new qvtscheduleFactoryImpl();
+			path = getResourceUriFromClass(sf.getClass(), QVTS_MM);
+		} catch (URISyntaxException e) {
+			// TODO Re-throw so test fails!
+			e.printStackTrace();
+		} finally {
+			if (path != null) {
+				r = rs.getResource(URI.createURI(path, false), true);
+				eObject = r.getContents().get(0);
+				if (eObject instanceof EPackage) {
+				    EPackage p = (EPackage)eObject;
+				    EPackage.Registry.INSTANCE.put(p.getNsURI(), p);
+				}
+			}
 		}
 	}
 	

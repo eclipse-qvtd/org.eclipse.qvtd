@@ -181,7 +181,7 @@ migrate Mapping
     when : not original.context.isDefined()
             and original.refinement.isEmpty()
     {
-        //original.println("ContextMapping ");
+        //original.name.println("ContextMapping ");
         original.flattenNestedMappings(migrated);
         migrated.fixReferences();
     }
@@ -204,7 +204,7 @@ migrate Mapping
     ignoring local
     when : not original.context.isDefined() and not original.refinement.isEmpty()  
     {
-        //original.println("RefinnedMapping ");
+        //original.name.println("RefinnedMapping ");
         original.flattenNestedMappings(migrated);
         
         //var olm = original.local.select(m | m.domain.isEmpty());
@@ -408,7 +408,6 @@ operation QVT!Mapping flattenNestedMappings(target : QVT!Mapping) {
 	        td.bottomPattern.assignment.addAll(emfTool.getECoreUtil().copyAll(d.bottomPattern.assignment));
 	        td.bottomPattern.enforcementOperation.addAll(emfTool.getECoreUtil().copyAll(d.bottomPattern.enforcementOperation));
 	    }
-        
     }
 }
 

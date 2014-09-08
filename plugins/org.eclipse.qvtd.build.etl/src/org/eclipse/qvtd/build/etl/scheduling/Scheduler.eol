@@ -44,7 +44,7 @@ QVTs!Schedule.all.first().flatNesting(QVTp!Transformation.all.first());
 // Different Scheduleing Policies
 //QVT!Transformation.all.first().simpleSchedule(s);
 //QVT!Transformation.all.first().simpleNestedSchedule(s);
-"Done".println();
+"Scheduling Done".println();
 
 operation QVTs!Schedule flatNesting(t : QVTp!Transformation) {
 
@@ -588,7 +588,7 @@ operation QVT!Variable derivedVariables(vars : Sequence) : Set {
         // Can the opposite relation be used?
         for (rel in vB.hasRelation(self)) { //self.hasRelation(vB).sortBy(r | r.getCost()) // In the future cost can be used to select the less expensive navigation
             //vB.name.println(self.name + "    has relation to ");
-            if (rel.hasNavigableOpposite()) {
+            if (hasNavigableOpposite(rel)) {
                 derived.add(vB);
                 derived.addAll(vB.derivedVariables(vars.excluding(self)));
             }
