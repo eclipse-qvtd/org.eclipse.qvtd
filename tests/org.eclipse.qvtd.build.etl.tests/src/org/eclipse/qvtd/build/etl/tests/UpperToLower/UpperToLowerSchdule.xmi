@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="ASCII"?>
+<qvtschedule:Schedule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvtschedule="http://www.eclipse.org/qvt/0.1/QVTschedule/">
+  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.0" dataParameter="//@actions.1/@distinctArguments.0/@primaryArguments.0 //@actions.2/@distinctArguments.0/@primaryArguments.0 //@actions.3/@distinctArguments.0/@secondaryArguments.0">
+    <type href="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"/>
+    <domain href="UpperToLower.qvtp.qvtias#//@nestedPackage.0/@rule.0/@domain.1"/>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.1" dataParameter="//@actions.0/@distinctArguments.0/@primaryArguments.0 //@actions.2/@distinctArguments.1/@secondaryArguments.0 //@actions.3/@distinctArguments.0/@secondaryArguments.1">
+    <type href="SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
+    <domain href="UpperToLower.qvtp.qvtias#//@nestedPackage.0/@rule.0/@domain.0"/>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.2" dataParameter="//@actions.3/@distinctArguments.0/@primaryArguments.0">
+    <type href="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"/>
+    <domain href="UpperToLower.qvtp.qvtias#//@nestedPackage.0/@rule.2/@domain.1"/>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.3" dataParameter="//@actions.2/@distinctArguments.1/@primaryArguments.0">
+    <type href="SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
+    <domain href="UpperToLower.qvtp.qvtias#//@nestedPackage.0/@rule.2/@domain.0"/>
+  </datums>
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.0" order="1" parent="//@actions.4">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.1">
+        <variable href="UpperToLower.qvtp.qvtias#//@nestedPackage.0/@rule.0/@domain.0/@guardPattern/@variable.0"/>
+      </primaryArguments>
+    </distinctArguments>
+    <mapping href="UpperToLower.qvtp.qvtias#//@nestedPackage.0/@rule.0"/>
+  </actions>
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.1" order="2" parent="//@actions.4">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.0">
+        <variable href="UpperToLower.qvtp.qvtias#//@nestedPackage.0/@rule.1/@domain.1/@guardPattern/@variable.0"/>
+      </primaryArguments>
+    </distinctArguments>
+    <mapping href="UpperToLower.qvtp.qvtias#//@nestedPackage.0/@rule.1"/>
+  </actions>
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.2" order="3" parent="//@actions.4">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.0">
+        <variable href="UpperToLower.qvtp.qvtias#//@nestedPackage.0/@rule.2/@domain.1/@guardPattern/@variable.0"/>
+      </primaryArguments>
+    </distinctArguments>
+    <distinctArguments>
+      <primaryArguments datum="//@datums.3">
+        <variable href="UpperToLower.qvtp.qvtias#//@nestedPackage.0/@rule.2/@domain.0/@guardPattern/@variable.1"/>
+      </primaryArguments>
+      <secondaryArguments datum="//@datums.1">
+        <variable href="UpperToLower.qvtp.qvtias#//@nestedPackage.0/@rule.2/@domain.0/@guardPattern/@variable.0"/>
+      </secondaryArguments>
+    </distinctArguments>
+    <mapping href="UpperToLower.qvtp.qvtias#//@nestedPackage.0/@rule.2"/>
+  </actions>
+  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.3" order="4" parent="//@actions.4">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.2">
+        <variable href="UpperToLower.qvtp.qvtias#//@nestedPackage.0/@rule.3/@domain.1/@guardPattern/@variable.1"/>
+      </primaryArguments>
+      <secondaryArguments datum="//@datums.0">
+        <variable href="UpperToLower.qvtp.qvtias#//@nestedPackage.0/@rule.3/@domain.1/@guardPattern/@variable.0"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.1">
+        <variable href="UpperToLower.qvtp.qvtias#//@nestedPackage.0/@rule.3/@domain.0/@guardPattern/@variable.0"/>
+      </secondaryArguments>
+    </distinctArguments>
+    <mapping href="UpperToLower.qvtp.qvtias#//@nestedPackage.0/@rule.3"/>
+  </actions>
+  <actions xsi:type="qvtschedule:MappingAction" children="//@actions.0 //@actions.1 //@actions.2 //@actions.3">
+    <mapping href="UpperToLower.qvtp.qvtias#//@nestedPackage.0/@rule.4"/>
+  </actions>
+</qvtschedule:Schedule>

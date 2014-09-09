@@ -47,7 +47,7 @@ public class QVTdMtcTests extends LoadTestCase {
 		super.tearDown();
     }
     
-    /*
+    
     @Test
     public void testUmlToRdbms() throws Exception {
     	
@@ -65,7 +65,7 @@ public class QVTdMtcTests extends LoadTestCase {
     	MtcBroker mtc = new MtcBroker(qvtcasUri, this.getClass());
     	mtc.execute();
     }
-    */
+    
     @Test
     public void testHSVToHLS() throws Exception {
     	

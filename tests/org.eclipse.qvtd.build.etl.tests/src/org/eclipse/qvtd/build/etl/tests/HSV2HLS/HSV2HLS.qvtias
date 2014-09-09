@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<qvti:ImperativeModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/3.1.0/Pivot" xmlns:qvtb="http://www.eclipse.org/qvt/0.9/QVTbase" xmlns:qvtcb="http://www.eclipse.org/qvt/0.9/QVTcoreBase" xmlns:qvti="http://www.eclipse.org/qvt/0.9/QVTimperative" name="HSV2HLS.qvtp.qvti" externalURI="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/HSV2HLS/HSV2HLS.qvtp.qvti">
+<qvti:ImperativeModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/3.1.0/Pivot" xmlns:qvtb="http://www.eclipse.org/qvt/0.9/QVTbase" xmlns:qvtcb="http://www.eclipse.org/qvt/0.9/QVTcoreBase" xmlns:qvti="http://www.eclipse.org/qvt/0.9/QVTimperative" name="HSV2HLS.qvti" externalURI="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/HSV2HLS/HSV2HLS.qvti">
   <nestedPackage xsi:type="qvtb:Transformation" name="hsv2hls">
     <modelParameter name="hsv">
       <usedPackage href="HSVTree.ecore.oclas#P.HSVTree"/>
@@ -309,6 +309,141 @@
     <rule xsi:type="qvti:Mapping" name="__root__">
       <guardPattern/>
       <bottomPattern/>
+      <mappingStatement xsi:type="qvti:MappingSequence">
+        <mappingStatements xsi:type="qvti:MappingLoop">
+          <source xsi:type="pivot:OperationCallExp">
+            <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#//@nestedPackage.0/@ownedType.98"/>
+            <source xsi:type="pivot:TypeExp">
+              <referredType href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+            </source>
+            <referredOperation href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclElement.allInstances"/>
+          </source>
+          <body xsi:type="qvti:MappingSequence">
+            <mappingStatements xsi:type="qvti:MappingCall" referredMapping="//@nestedPackage.0/@rule.0">
+              <binding boundVariable="//@nestedPackage.0/@rule.0/@domain.0/@guardPattern/@variable.0">
+                <value xsi:type="pivot:VariableExp" referredVariable="//@nestedPackage.0/@rule.4/@mappingStatement/@mappingStatements.0/@iterator.0">
+                  <type href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+                </value>
+              </binding>
+            </mappingStatements>
+          </body>
+          <iterator name="hsvRoot">
+            <type href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+          </iterator>
+        </mappingStatements>
+        <mappingStatements xsi:type="qvti:MappingLoop">
+          <source xsi:type="pivot:OperationCallExp">
+            <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#//@nestedPackage.0/@ownedType.98"/>
+            <source xsi:type="pivot:TypeExp">
+              <referredType href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+            </source>
+            <referredOperation href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclElement.allInstances"/>
+          </source>
+          <body xsi:type="qvti:MappingSequence">
+            <mappingStatements xsi:type="qvti:MappingCall" referredMapping="//@nestedPackage.0/@rule.1">
+              <binding boundVariable="//@nestedPackage.0/@rule.1/@domain.1/@guardPattern/@variable.0">
+                <value xsi:type="pivot:VariableExp" referredVariable="//@nestedPackage.0/@rule.4/@mappingStatement/@mappingStatements.1/@iterator.0">
+                  <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+                </value>
+              </binding>
+            </mappingStatements>
+          </body>
+          <iterator name="middleRoot">
+            <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+          </iterator>
+        </mappingStatements>
+        <mappingStatements xsi:type="qvti:MappingLoop">
+          <source xsi:type="pivot:OperationCallExp">
+            <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#//@nestedPackage.0/@ownedType.98"/>
+            <source xsi:type="pivot:TypeExp">
+              <referredType href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+            </source>
+            <referredOperation href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclElement.allInstances"/>
+          </source>
+          <body xsi:type="qvti:MappingSequence">
+            <mappingStatements xsi:type="qvti:MappingCall" referredMapping="//@nestedPackage.0/@rule.2">
+              <binding boundVariable="//@nestedPackage.0/@rule.2/@domain.1/@guardPattern/@variable.1">
+                <value xsi:type="pivot:VariableExp" referredVariable="//@nestedPackage.0/@rule.4/@mappingStatement/@mappingStatements.2/@iterator.0">
+                  <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+                </value>
+              </binding>
+              <binding boundVariable="//@nestedPackage.0/@rule.2/@domain.1/@guardPattern/@variable.0">
+                <value xsi:type="pivot:PropertyCallExp">
+                  <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+                  <source xsi:type="pivot:VariableExp" referredVariable="//@nestedPackage.0/@rule.2/@domain.1/@guardPattern/@variable.1">
+                    <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+                  </source>
+                  <referredProperty href="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.parent"/>
+                </value>
+              </binding>
+              <binding boundVariable="//@nestedPackage.0/@rule.2/@domain.0/@guardPattern/@variable.0">
+                <value xsi:type="pivot:PropertyCallExp">
+                  <type href="HLSTree.ecore.oclas#//@nestedPackage.0/@ownedType.1"/>
+                  <source xsi:type="pivot:PropertyCallExp">
+                    <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+                    <source xsi:type="pivot:VariableExp" referredVariable="//@nestedPackage.0/@rule.2/@domain.1/@guardPattern/@variable.1">
+                      <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+                    </source>
+                    <referredProperty href="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.parent"/>
+                  </source>
+                  <referredProperty href="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.hls"/>
+                </value>
+              </binding>
+            </mappingStatements>
+          </body>
+          <iterator name="middleNode">
+            <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+          </iterator>
+        </mappingStatements>
+        <mappingStatements xsi:type="qvti:MappingLoop">
+          <source xsi:type="pivot:OperationCallExp">
+            <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#//@nestedPackage.0/@ownedType.98"/>
+            <source xsi:type="pivot:TypeExp">
+              <referredType href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+            </source>
+            <referredOperation href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclElement.allInstances"/>
+          </source>
+          <body xsi:type="qvti:MappingSequence">
+            <mappingStatements xsi:type="qvti:MappingLoop">
+              <source xsi:type="pivot:OperationCallExp">
+                <type href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#//@nestedPackage.0/@ownedType.98"/>
+                <source xsi:type="pivot:TypeExp">
+                  <referredType href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+                </source>
+                <referredOperation href="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclElement.allInstances"/>
+              </source>
+              <body xsi:type="qvti:MappingSequence"/>
+              <iterator name="middleParent">
+                <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+              </iterator>
+            </mappingStatements>
+            <mappingStatements xsi:type="qvti:MappingCall" referredMapping="//@nestedPackage.0/@rule.3">
+              <binding boundVariable="//@nestedPackage.0/@rule.3/@domain.1/@guardPattern/@variable.0">
+                <value xsi:type="pivot:VariableExp" referredVariable="//@nestedPackage.0/@rule.4/@mappingStatement/@mappingStatements.3/@body/@mappingStatements.0/@iterator.0">
+                  <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+                </value>
+              </binding>
+              <binding boundVariable="//@nestedPackage.0/@rule.3/@domain.0/@guardPattern/@variable.1">
+                <value xsi:type="pivot:VariableExp" referredVariable="//@nestedPackage.0/@rule.4/@mappingStatement/@mappingStatements.3/@iterator.0">
+                  <type href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+                </value>
+              </binding>
+              <binding boundVariable="//@nestedPackage.0/@rule.3/@domain.0/@guardPattern/@variable.0">
+                <value xsi:type="pivot:PropertyCallExp">
+                  <type href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+                  <source xsi:type="pivot:VariableExp" referredVariable="//@nestedPackage.0/@rule.3/@domain.0/@guardPattern/@variable.1">
+                    <type href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+                  </source>
+                  <referredProperty href="HSVTree.ecore.oclas#p.HSVTree.HSVNode.parent"/>
+                </value>
+              </binding>
+            </mappingStatements>
+          </body>
+          <iterator name="hsvNode">
+            <type href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+          </iterator>
+        </mappingStatements>
+      </mappingStatement>
     </rule>
   </nestedPackage>
 </qvti:ImperativeModel>

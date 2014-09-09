@@ -16,4 +16,36 @@
   <eCoreContainemntTree:Node EClassName="ForeignKey" parent="/2">
     <superTypes>RModelElement</superTypes>
   </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassName="simplerdbms" children="/7"/>
+  <eCoreContainemntTree:Node EClassName="Schema" parent="/6" children="/8">
+    <superTypes>RModelElement</superTypes>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassName="Table" parent="/7" children="/9 /10 /11">
+    <superTypes>RModelElement</superTypes>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassName="Column" parent="/8">
+    <superTypes>RModelElement</superTypes>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassName="Key" parent="/8">
+    <superTypes>RModelElement</superTypes>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassName="ForeignKey" parent="/8">
+    <superTypes>RModelElement</superTypes>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassName="simplerdbms" children="/13"/>
+  <eCoreContainemntTree:Node EClassName="Schema" parent="/12" children="/14">
+    <superTypes>RModelElement</superTypes>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassName="Table" parent="/13" children="/15 /16 /17">
+    <superTypes>RModelElement</superTypes>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassName="Column" parent="/14">
+    <superTypes>RModelElement</superTypes>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassName="Key" parent="/14">
+    <superTypes>RModelElement</superTypes>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node EClassName="ForeignKey" parent="/14">
+    <superTypes>RModelElement</superTypes>
+  </eCoreContainemntTree:Node>
 </xmi:XMI>
