@@ -115,10 +115,15 @@ operation isEnforceMode() : Boolean {
  * RESULT
  *  A reference to the TypeModel of the middle domain.
  */
-@cachecd
+@cached
 operation QVT!Transformation getMiddleTypedModel() : QVT!TypedModel {
-
-    return self.modelParameter.selectOne(tm | tm.name = config!Configuration.all.first().middle.name);
+    
+    if (self.modelParameter.one(tm | not tm.name.isDefined())) {
+        return self.modelParameter.selectOne(tm | not tm.name.isDefined());
+    } else {
+        return self.modelParameter.selectOne(tm | tm.name = config!Configuration.all.first().middle.name);
+    }
+    
 }
 
 /****o* QVTHelpers/oppositePattern
@@ -512,7 +517,6 @@ operation QVT!BottomPattern fixOperationCallReferences() {
                 if (self.area.isTypeOf(QVT!CoreDomain)) {
                     // 1. Guard Pattern of the Domain
                     searchPatterns = self.area.rule.domain.collect(d | d.guardPattern).flatten();
-                    searchPatterns.println();
                     targetVar = v.findReferencesInPatterns(searchPatterns); 
                     // 2. Bottom Pattern of domains with depending typed models
                     if (targetVar == null) {

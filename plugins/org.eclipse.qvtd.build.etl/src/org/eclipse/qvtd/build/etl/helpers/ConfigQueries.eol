@@ -21,12 +21,34 @@
  ******
  */ 
 
-operation getAllMetamodelFiles() :Set  {
+/****o* ConfigQueries/getAllMetamodelFiles
+ * NAME
+ *  getAllMetamodelFiles - Returns a map of the metamodel files for the different
+ *  directions of the transformation.
+ * FUNCTION 
+ *  The map returned is of the form: <dir, List<String>> where dir can be one of:
+ *   "L", "M", "R".
+ * CONTEXT
+ *  QVT!Area  The are under test
+ * ANNOTATIONS
+ *  cached
+ * SEE ALSO
+ *  QVTHelpers/isMiddleDomain
+ *  QVTHelpers/isOutputDomain
+ */
+operation getAllMetamodelFiles() : Map  {
     
-    return config!Direction.all().collect(id | id.imports).flatten().collect(i | i.metamodelFile).asSet();
+    var files = new Map;
+    files.put("L",
+        config!Configuration.all().first().inputDirection.imports.collect(i | i.metamodelFile));
+    files.put("M",
+        config!Configuration.all().first().middle.imports.collect(i | i.metamodelFile));
+    files.put("R",
+        config!Configuration.all().first().outputDirection.collect(id | id.imports).collect(i | i.metamodelFile).flatten());
+    return files;
 }
 
-operation getLeftModelMetamodelFiles() : Collection {
+operation getLeftModelMetamodelFile() : String {
     
     return config!Configuration.all().first().inputDirection.imports.collect(i | i.metamodelFile).flatten();
 }
@@ -36,9 +58,10 @@ operation getMiddleModelMetamodelFile() : String {
     return config!Configuration.all().first().middle.imports.collect(i | i.metamodelFile).flatten();
 }
 
-operation getRightModelsMetamodelFile() : String {
+// TODO We can only handle 1 R model. This must be adjusted when we have many.
+operation getRightModelsMetamodelFiles() : String {
 
-    return config!Configuration.all().first().outputDirection.collect(id | id.imports).collect(i | i.metamodelFile).flatten();
+    return config!Configuration.all().first().outputDirection.collect(id | id.imports).collect(i | i.metamodelFile).flatten().first();
 }
 
 

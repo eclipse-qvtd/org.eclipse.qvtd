@@ -23,11 +23,11 @@ pre {
  * FROM
  *	QVTm!CoreModel
  * TO
- *	QVTi!ImperativeModel
+ *	QVTp!ImperativeModel
  */
 rule CoreModel
     transform mIn:QVTm!CoreModel
-    to mOut:QVTi!ImperativeModel {
+    to mOut:QVTp!ImperativeModel {
         mOut.name = mIn.name;
         mOut.nestedPackage ::= mIn.nestedPackage;
         mOut.externalURI = mIn.externalURI.replace(".qvtm.qvtc", ".qvtp.qvti");
@@ -44,11 +44,11 @@ rule CoreModel
  * FROM
  *  QVTm!Transformation
  * TO
- *  QVTi!Transformation
+ *  QVTp!Transformation
  */
 rule Transformation
     transform tIn:QVTm!Transformation
-    to tOut:QVTi!Transformation {
+    to tOut:QVTp!Transformation {
         
         tOut.name = tIn.name;
         tOut.modelParameter ::= tIn.modelParameter;
@@ -78,11 +78,11 @@ rule Transformation
  * FROM
  *  QVTm!TypedModel
  * TO
- *  QVTi!TypedModel
+ *  QVTp!TypedModel
  */
 rule TypedModel
     transform itm:QVTm!TypedModel
-    to otm:QVTi!TypedModel {
+    to otm:QVTp!TypedModel {
         
         if (itm.name.isDefined()) {
             otm.name = itm.name;
@@ -136,7 +136,7 @@ rule Mapping
         
         if (m.domain.one(d | d.isInputDomain())) {
             // Create LM mapping
-            var lmM = new QVTi!Mapping;
+            var lmM = new QVTp!Mapping;
             mappings.add(lmM);
             //m.println("LMMaping: ");
             lmM.~side = "l";
@@ -144,14 +144,14 @@ rule Mapping
 		        lmM.name = m.name + "_LM";
 		    }
 		    // We need the patterns to have a place to move variables and predicates from domains
-		    lmM.guardPattern = new QVTi!GuardPattern;
+		    lmM.guardPattern = new QVTp!GuardPattern;
             lmM.guardPattern.predicate.addAll(emfTool.getECoreUtil().copyAll(m.guardPattern.predicate.select(
                 p | not p.conditionExpression.findReferencedVariables().exists(v | v.oppositePattern().area.isOutputDomain())
                 )));
-            lmM.bottomPattern = new QVTi!BottomPattern;
+            lmM.bottomPattern = new QVTp!BottomPattern;
             lmM.bottomPattern.assignment.addAll(m.bottomPattern.assignment.select(
                 a | not a.findReferencedVariables().exists(v | v.oppositePattern().area.isOutputDomain())
-                ).equivalent().select(a | a.isKindOf(QVTi!Assignment)));
+                ).equivalent().select(a | a.isKindOf(QVTp!Assignment)));
             // Move predicates to guard pattern
             lmM.guardPattern.predicate.addAll(emfTool.getECoreUtil().copyAll(m.bottomPattern.predicate.select(
                 p | not p.conditionExpression.findReferencedVariables().exists(v | v.oppositePattern().area.isOutputDomain())
@@ -161,16 +161,16 @@ rule Mapping
 		    lmM.domain.add(m.domain.selectOne(d | d.isInputDomain()).equivalent());
 		    
 		    // Create Middle domain
-		    var mM : QVTi!CoreDomain = new QVTi!CoreDomain;
+		    var mM : QVTp!CoreDomain = new QVTp!CoreDomain;
+		    var tm = m.getTransforamtion().getMiddleTypedModel().equivalent();
 		    mM.isEnforceable = true;
 		    mM.isCheckable = false;
-		    mM.typedModel = m.getTransforamtion().getMiddleTypedModel().equivalent();
-		    //mM.name = mM.typedModel.name; 
-		    mM.name = "middle";
-		    mM.guardPattern = new QVTi!GuardPattern;
+		    mM.typedModel = tm;
+		    mM.name = tm.name; 
+		    mM.guardPattern = new QVTp!GuardPattern;
 		    mM.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(m.guardPattern.variable));
 		    mM.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(m.bottomPattern.variable));
-		    mM.bottomPattern = new QVTi!BottomPattern;
+		    mM.bottomPattern = new QVTp!BottomPattern;
 		    mM.bottomPattern.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(m.bottomPattern.realizedVariable));
 		    
 		    lmM.domain.add(mM);
@@ -178,18 +178,18 @@ rule Mapping
         }
         if (m.domain.exists(d | d.isOutputDomain())) {
             // Create MR mapping
-            var mrM = new QVTi!Mapping;
+            var mrM = new QVTp!Mapping;
 		    mappings.add(mrM);
 		    mrM.~side = "r";
             if (not m.context.isDefined()) {
 		        mrM.name = m.name + "_MR";
 		    }
 		    // We need guard patterns first to have a place to move variables and predicates from domains
-		    mrM.guardPattern = new QVTi!GuardPattern;
+		    mrM.guardPattern = new QVTp!GuardPattern;
             mrM.guardPattern.predicate.addAll(emfTool.getECoreUtil().copyAll(m.guardPattern.predicate.select(
                 p | not p.conditionExpression.findReferencedVariables().exists(v | v.oppositePattern().area.isInputDomain())
                 )));
-            mrM.bottomPattern = new QVTi!BottomPattern;
+            mrM.bottomPattern = new QVTp!BottomPattern;
             // Move assignments to bottom pattern
             mrM.bottomPattern.assignment.addAll(m.bottomPattern.assignment.select(
                 a | not a.findReferencedVariables().exists(v | v.oppositePattern().area.isInputDomain())
@@ -205,23 +205,23 @@ rule Mapping
             // MM assignements are transformed to predicates in the guard pattern
             mrM.guardPattern.predicate.addAll(m.bottomPattern.assignment.select(
                 a | a.findReferencedVariables().forAll(v | v.oppositePattern().area.isMiddleDomain())
-                ).equivalent().select(a | a.isKindOf(QVTi!Predicate)));
+                ).equivalent().select(a | a.isKindOf(QVTp!Predicate)));
             // Add output domains
 		    mrM.domain.addAll(m.domain.select(d | d.isOutputDomain()).equivalent());
 		    
 		    // Create Middle domain
-		    var mM : QVTi!CoreDomain = new QVTi!CoreDomain;
+		    var mM : QVTp!CoreDomain = new QVTp!CoreDomain;
+		    var tm = m.getTransforamtion().getMiddleTypedModel().equivalent();
 		    mM.isCheckable = true;
 		    mM.isEnforceable = false;
-		    mM.typedModel = m.getTransforamtion().getMiddleTypedModel().equivalent();
-		    //mM.name = mM.typedModel.name;
-		    mM.name = "middle";
-		    mM.guardPattern = new QVTi!GuardPattern;
+		    mM.typedModel = tm;
+            mM.name = tm.name; 
+		    mM.guardPattern = new QVTp!GuardPattern;
 		    mM.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(m.guardPattern.variable));
 		    mM.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(m.bottomPattern.variable));
 		    // RealizedVariables to Variables
 		    mM.guardPattern.variable.addAll(m.bottomPattern.realizedVariable.collect(rv | rv.copyToVariable()));
-		    mM.bottomPattern = new QVTi!BottomPattern;
+		    mM.bottomPattern = new QVTp!BottomPattern;
 		    mrM.domain.add(mM);
 		    //mrM.local.addAll(m.local.equivalent().select(m | m.~side = "r"));
         }
@@ -230,7 +230,7 @@ rule Mapping
 @abstract
 rule Assignment
     transform ia : QVTm!Assignment
-    to oa : QVTi!Assignment {
+    to oa : QVTp!Assignment {
         
         oa.isDefault = ia.isDefault;
         oa.value = emfTool.getECoreUtil().copy(ia.value);
@@ -239,7 +239,7 @@ rule Assignment
 @lazy    
 rule PropertyAssignment
     transform ia : QVTm!PropertyAssignment
-    to oa : QVTi!PropertyAssignment
+    to oa : QVTp!PropertyAssignment
     extends Assignment {
         
         guard : not ia.findReferencedVariables().forAll(v |v.oppositePattern().area.isMiddleDomain())
@@ -251,7 +251,7 @@ rule PropertyAssignment
 @lazy    
 rule VariableAssignment
     transform ia : QVTm!VariableAssignment
-    to oa : QVTi!VariableAssignment
+    to oa : QVTp!VariableAssignment
     extends Assignment {
     
         guard : not ia.findReferencedVariables().forAll(v | v.oppositePattern().area.isMiddleDomain())
@@ -270,14 +270,14 @@ rule MMPropertyAssignment
         
         guard : ia.findReferencedVariables().forAll(v | v.oppositePattern().area.isMiddleDomain())
         
-        var oa = new QVTi!PropertyAssignment;  
+        var oa = new QVTp!PropertyAssignment;  
         Assigdicate.add(oa);
         oa.isDefault = ia.isDefault;
         oa.value = emfTool.getECoreUtil().copy(ia.value);
         oa.slotExpression =  emfTool.getECoreUtil().copy(ia.slotExpression);
         oa.targetProperty =  ia.targetProperty;
         if (ia.bottomPattern.area.domain.exists(d | d.isOutputDomain())) {
-            var op = new QVTi!Predicate;
+            var op = new QVTp!Predicate;
             op.conditionExpression = ia.toOCLExpression();
             Assigdicate.add(op);
         }
@@ -291,13 +291,13 @@ rule MMVariableAssignment
         
         guard : ia.findReferencedVariables().forAll(v | v.oppositePattern().area.isMiddleDomain())
         
-        var oa = new QVTi!VariableAssignment;
+        var oa = new QVTp!VariableAssignment;
         Assigdicate.add(oa);
         oa.isDefault = ia.isDefault;
         oa.value = emfTool.getECoreUtil().copy(ia.value);       
         oa.targetVariable = ia.bottomPattern.equivalent().variable.select(v | v.name = ia.targetVariable.name);
         if (ia.bottomPattern.area.domain.exists(d | d.isOutputDomain())) {
-            var op = new QVTi!Predicate;
+            var op = new QVTp!Predicate;
             op.conditionExpression = ia.toOCLExpression();
             Assigdicate.add(op);
         }
@@ -306,7 +306,7 @@ rule MMVariableAssignment
 @lazy
 rule LMDomain
     transform id : QVTm!CoreDomain
-    to od : QVTi!CoreDomain {
+    to od : QVTp!CoreDomain {
          
          // Guarded input domains 
          guard : id.isInputDomain()
@@ -322,20 +322,20 @@ rule LMDomain
          od.isCheckable = id.isCheckable;
          od.isEnforceable = id.isEnforceable;
          od.typedModel ::= id.typedModel;
-         od.guardPattern = new QVTi!GuardPattern;
+         od.guardPattern = new QVTp!GuardPattern;
          od.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.guardPattern.variable));
          od.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.bottomPattern.variable));
          if(id.`rule`.equivalents().isDefined()) {
             id.`rule`.equivalents().flatten().selectOne(m | m.~side = "l").guardPattern.predicate.
                 addAll(emfTool.getECoreUtil().copyAll(id.guardPattern.predicate.includingAll(id.bottomPattern.predicate)));
          }
-         od.bottomPattern = new QVTi!BottomPattern;
+         od.bottomPattern = new QVTp!BottomPattern;
     }
 
 @lazy
 rule MRDomain
     transform id : QVTm!CoreDomain
-    to od : QVTi!CoreDomain {
+    to od : QVTp!CoreDomain {
          
          // Guarded input domains 
          guard : id.isOutputDomain()
@@ -351,10 +351,10 @@ rule MRDomain
          od.isCheckable = id.isCheckable;
          od.isEnforceable = id.isEnforceable;
          od.typedModel ::= id.typedModel;
-         od.guardPattern = new QVTi!GuardPattern;
+         od.guardPattern = new QVTp!GuardPattern;
          od.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.guardPattern.variable));
          
-         od.bottomPattern = new QVTi!BottomPattern;
+         od.bottomPattern = new QVTp!BottomPattern;
          od.bottomPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.bottomPattern.variable));
          od.bottomPattern.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(id.bottomPattern.realizedVariable));
          // Predicates and assignments are moved to the mapping patterns
@@ -368,8 +368,8 @@ rule MRDomain
          //od.bottomPattern.assignment.addAll();
     }
 
-operation  QVTi!RealizedVariable copyToVariable() : QVTi!Variable {
-    var v = new QVTi!Variable;
+operation  QVTp!RealizedVariable copyToVariable() : QVTp!Variable {
+    var v = new QVTp!Variable;
     // Var
     v.implicit = self.implicit;
     v.initExpression = emfTool.getECoreUtil().copy(self.initExpression);
@@ -428,7 +428,7 @@ operation QVT!Mapping promoteMappings() {
  * SEE ALSO
 */
 operation QVT!PropertyAssignment toOCLExpression() : QVT!OperationCallExp {
-    var exp = new QVTi!OperationCallExp;
+    var exp = new QVTp!OperationCallExp;
     // It's an '=' operation. TODO, how to get the correct type?
     // KLUDGE hhr 20140801 Getting '=' operation from predicate
     // The correct way would be to query the OCLStdLibrary
@@ -437,7 +437,7 @@ operation QVT!PropertyAssignment toOCLExpression() : QVT!OperationCallExp {
     // The type is boolean
     exp.type = exp.referredOperation.type;
     // The source is a PropertyCallExp
-    exp.source = new QVTi!PropertyCallExp;
+    exp.source = new QVTp!PropertyCallExp;
     // The property is the targetProperty
     exp.source.referredProperty = self.targetProperty;
     // The source of the PropertyCallExp is the slotExpression

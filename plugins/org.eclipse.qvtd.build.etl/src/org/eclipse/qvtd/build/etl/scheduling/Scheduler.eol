@@ -132,7 +132,7 @@ operation QVT!MappingCall createBindings(ma : QVTs!MappingAction) {
             mcb.boundVariable = v;
             mcb.isLoop = true;
             var value = new QVT!OperationCallExp;
-            value.referredOperation = oclStdLib!Class.all().selectOne(c | c.name == "OclElement").getOperationByName("allInstances");
+            value.referredOperation = getOclElementAllInstancesOp();
             value.source = new QVT!TypeExp;
             value.source.referredType = v.type;
             mcb.value = value;

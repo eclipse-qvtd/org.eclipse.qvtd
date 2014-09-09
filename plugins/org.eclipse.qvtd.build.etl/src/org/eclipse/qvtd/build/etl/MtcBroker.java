@@ -4,6 +4,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -57,6 +58,11 @@ public class MtcBroker {
 	private static final String QVTM_TO_QVTP_ETL = "mtc/QVTmToQVTiPartition.etl";
 	private static final String QVTP_TO_QVTS_ETL = "scheduling/QVTpToSchedule.etl";
 	private static final String QVTP_SCHEDULE_EOL = "scheduling/Scheduler.eol";
+	private static final String QVTPS_TO_QVTI_ETL = "scheduling/QVTs-pToQVTi.etl";
+	
+	private static final String LEFT_DIR_NAME = "L";
+	private static final String RIGHT_DIR_NAME = "R";
+	private static final String MIDDLE_DIR_NAME = "M";
 	
 	
 	private String qvtcasUri;
@@ -73,7 +79,12 @@ public class MtcBroker {
 	private EmfModel configModel;
 	private EmfModel oclStdLibModel;
 
+	private String rMetamodel;
+
+	private EmfModel rMetamodelModel;
 	
+	private Map<String, List<EmfModel>> candidateMetamodelContainmentTrees; 
+
 	
 	public MtcBroker(String qvtcasUri, Class owner) throws URISyntaxException {
 	
@@ -90,25 +101,29 @@ public class MtcBroker {
 		
 		this.configUri = URI.createURI(baseUri.toString() + "Config").appendFileExtension("xmi").toString();
 		this.scheduleUri = URI.createURI(baseUri.toString() + "Schdule").appendFileExtension("xmi").toString();
+		candidateMetamodelContainmentTrees = new HashMap<String, List<EmfModel>>();
 		registerMetamodels();
 	}
 	
 	public void execute() throws EolModelLoadingException, EpsilonExecutionException, URISyntaxException, EpsilonSourceLoadException, EpsilonParseException {
 		
-		//EmfModel uModel = null;
 		loadConfigurationModel();
 		loadOclStdLibModel();
 		createContainmentTrees();
 		EmfModel cModel = createEmfModel(qvtcasUri, "QVTc", "QVT", QVTC_URI, true, false, true);
+		
 		EmfModel uModel = qvtcToQvtu(cModel);
 		uModel.setCachingEnabled(true);
 		uModel.clearCache();
+		
 		EmfModel mModel = qvtuToQvtm(uModel);
 		mModel.setCachingEnabled(true);
 		mModel.clearCache();
+		
 		EmfModel pModel = qvtmToQvtp(mModel);
 		pModel.setCachingEnabled(true);
 		pModel.clearCache();
+		
 		EmfModel sModel = qvtpToQvts(pModel);
 		sModel.setCachingEnabled(true);
 		sModel.clearCache();
@@ -116,6 +131,9 @@ public class MtcBroker {
 		pModel.setStoredOnDisposal(true);
 		sModel.setStoredOnDisposal(true);
 		qvtpScheduling(pModel, sModel);
+		
+		EmfModel iModel = qvtpQvtsToQvti(pModel, sModel);
+		
 	}
 
 	private EmfModel qvtcToQvtu(EmfModel cModel) {
@@ -200,7 +218,7 @@ public class MtcBroker {
 		
 		EmfModel pModel = null;
 		try {
-			pModel = createEmfModel(partitionUri, "QVTi", "QVT", QVTI_URI, false, true, false);
+			pModel = createEmfModel(partitionUri, "QVTp", "QVT", QVTI_URI, false, true, false);
 		} catch (EolModelLoadingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -290,6 +308,8 @@ public class MtcBroker {
 					eol.models.add(sModel);
 					eol.models.add(oclStdLibModel);
 					eol.models.add(configModel);
+					// TODO HOw to deal with multiple candidate metamodels?
+					eol.models.add(candidateMetamodelContainmentTrees.get(RIGHT_DIR_NAME).get(0));
 					try {
 						eol.execute();
 					} catch (EpsilonParseException e) {
@@ -307,38 +327,51 @@ public class MtcBroker {
 		}
 	}
 	
+	private EmfModel qvtpQvtsToQvti(EmfModel pModel, EmfModel sModel) {
+		
+		EmfModel iModel = null;
+		try {
+			iModel = createEmfModel(qvtiUri, "QVTi", "QVT", QVTI_URI, false, true, false);
+		} catch (EolModelLoadingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (pModel != null && sModel != null && iModel != null  ) {
+				EtlTask etl = null;
+				try {
+					etl = new EtlTask(java.net.URI.create(getResourceURI(QVTPS_TO_QVTI_ETL)));
+				} catch (URISyntaxException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} finally {
+					if (etl != null) {
+						etl.models.add(pModel);
+						etl.models.add(sModel);
+						etl.models.add(iModel);
+						etl.models.add(configModel);
+						etl.models.add(oclStdLibModel);
+						try {
+							etl.execute();
+						} catch (EpsilonParseException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (EpsilonSourceLoadException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (EpsilonExecutionException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		}
+		return iModel;
+	}
+	
 	
 	private void createContainmentTrees() {
 		
-		List<String> mms = getCandidateMetamodels();
-		Map<EmfModel, EmfModel> emfModels = new HashMap<EmfModel, EmfModel>();
-		for (String mm : mms) {
-			//TODO Check if the containment Tree exist?
-			String modelUri = null;
-			try {
-				modelUri = getResourceUriFromClass(this.owner, mm);
-			} catch (URISyntaxException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} finally {
-				if (modelUri != null) {
-					EmfModel mmModel = null;
-					EmfModel cgModel = null;
-					try {
-						mmModel = createEmfModel(changeResourceToSource(modelUri), "mm", "", ECORE_URI, true, false, true);
-						String cgUri = mmModel.getModelFileUri().trimFileExtension().toString() + "ContainmentTree.xmi";
-						cgModel = createEmfModel(cgUri, "tree", "", ECORE_CONTAINMENT_URI, false, true, true);
-					} catch (EolModelLoadingException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} finally {
-						if (mmModel != null && cgModel != null  ) {
-							emfModels.put(mmModel, cgModel);
-						}
-					}
-				} 
-			}		
-		}
 		EolTask eol = null;
 		try {
 			eol = new EolTask(java.net.URI.create(getResourceURI(ECORE_TO_TREE_EOL)));
@@ -347,32 +380,64 @@ public class MtcBroker {
 			e.printStackTrace();
 		} finally  {
 			if (eol != null) {
-				for (EmfModel em : emfModels.keySet()) {
-					eol.models.add(em);
-					eol.models.add(emfModels.get(em));
-					try {
-						eol.execute();
-					} catch (EpsilonParseException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (EpsilonSourceLoadException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (EpsilonExecutionException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} finally {
-						eol.models.remove(em);
-						eol.models.remove(emfModels.get(em));
-					}
-				}
+				Map<String, List<String>> mms = getCandidateMetamodels();
+				Map<EmfModel, EmfModel> emfModels = new HashMap<EmfModel, EmfModel>();
+				Iterator<Map.Entry<String, List<String>>> it = mms.entrySet().iterator();
+			    while (it.hasNext()) {
+			        Map.Entry<String, List<String>> pairs = it.next();
+			        List<EmfModel> trees = new ArrayList<EmfModel>();
+			        for (String mm : pairs.getValue()) {
+			        	//TODO Check if the containment Tree exist (file)?
+			        	//TODO Check if the tree has been already generated
+		        		String modelUri = null;
+						try {
+							modelUri = getResourceUriFromClass(this.owner, mm);
+						} catch (URISyntaxException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} finally {
+							if (modelUri != null) {
+								EmfModel mmModel = null;
+								EmfModel treeModel = null;
+								try {
+									mmModel = createEmfModel(changeResourceToSource(modelUri), "mm", "", ECORE_URI, true, false, true);
+									String cgUri = mmModel.getModelFileUri().trimFileExtension().toString() + "ContainmentTree.xmi";
+									treeModel = createEmfModel(cgUri, "tree", pairs.getKey().toLowerCase()+"Tree", ECORE_CONTAINMENT_URI, false, true, true);
+								} catch (EolModelLoadingException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								} finally {
+									if (mmModel != null && treeModel != null  ) {
+										eol.models.add(mmModel);
+										eol.models.add(treeModel);
+										try {
+											eol.execute();
+										} catch (EpsilonParseException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										} catch (EpsilonSourceLoadException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										} catch (EpsilonExecutionException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										} finally {
+											trees.add(treeModel);
+										}
+									}
+								}
+							}
+			        	}
+			        }
+			        candidateMetamodelContainmentTrees.put(pairs.getKey(), trees);
+			    }
 			}
 		}
 	}
 
-	private List<String> getCandidateMetamodels() {
+	private Map<String, List<String>> getCandidateMetamodels() {
 		// 2. Run the EOL operations to get the candidate models and generate the Containment Tree
-		List<String> result = new ArrayList<String>();
+		Map<String, List<String>> result = new HashMap<String, List<String>>();
 		EolTask eol = null;
 		try {
 			eol = new EolTask(java.net.URI.create(getResourceURI(CONFIG_QUERIES_EOL)));
@@ -395,10 +460,12 @@ public class MtcBroker {
 					e.printStackTrace();
 				}
 				Object mmList = eol.getResult();
-				for (String mm : (Set<String>)mmList) {
-					result.add(mm);
-				}
-				
+				Iterator it = ((Map)mmList).entrySet().iterator();
+			    while (it.hasNext()) {
+			        Map.Entry pairs = (Map.Entry)it.next();
+			        System.out.println(pairs.getKey() + " = " + pairs.getValue());
+			        result.put((String)pairs.getKey(), (ArrayList)pairs.getValue());
+			    }
 			}
 		}
 		return result;

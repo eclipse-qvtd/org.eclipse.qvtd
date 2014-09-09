@@ -8,7 +8,6 @@
  * Contributors:
  *     Horacio Hoyos - initial implementation
  ******************************************************************************/
-import "../helpers/OclExpressionAnalysis.eol";
 import "../helpers/QVTHelpers.eol";
 
 pre {
@@ -25,7 +24,7 @@ rule ImperativeModel
         mOut.externalURI = mIn.externalURI.replace(".qvtp.qvti", ".qvti");
         mOut.nestedPackage.addAll(mIn.nestedPackage.equivalent());
         // Copy the OCL types package
-        mOut.nestedPackage.add(emfTool.getEcoreUtil().copy(mIn.nestedPackage.selectOne(p | p.isTypeOf(QVTp!Package))));
+        //mOut.nestedPackage.add(emfTool.getEcoreUtil().copy(mIn.nestedPackage.selectOne(p | p.isTypeOf(QVTp!Package))));
     }
 
 @abstract
@@ -269,7 +268,7 @@ rule DistinctData
         it.type = dd.primaryArguments.first().variable.type;
         loop.iterator.add(it);
         var exp = new QVTi!OperationCallExp;
-        exp.referredOperation = getClassByName("OclElement").getOperationByName("allInstances");
+        exp.referredOperation = getOclElementAllInstancesOp();
         exp.source = new QVTi!TypeExp;
         exp.source.referredType = dd.primaryArguments.first().variable.type;
         exp.type = exp.referredOperation.type;
@@ -307,7 +306,6 @@ rule SecondaryDataParameter
             }
             var paramVar = dp.variable.getSameVariable();
             var primaryVar = dp.secondaryDistinctData.primaryArguments.first().variable.getSameVariable();
-            primaryVar.hasRelation(paramVar).isEmpty().println();
             return not primaryVar.hasRelation(paramVar).isEmpty();
         }    
         //dp.secondaryDistinctData.target.mapping.name.println("DistinctData ");
