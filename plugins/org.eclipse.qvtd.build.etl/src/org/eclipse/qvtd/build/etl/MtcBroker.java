@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2013 The University of York, Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Horacio Hoyos - initial API and implementation
+ ******************************************************************************/
 package org.eclipse.qvtd.build.etl;
 
 import java.net.URISyntaxException;
@@ -27,6 +37,8 @@ import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.epsilon.common.util.StringProperties;
 import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.examples.pivot.resource.OCLASResourceFactory;
 
 public class MtcBroker {
@@ -81,13 +93,16 @@ public class MtcBroker {
 
 	private String rMetamodel;
 
-	private EmfModel rMetamodelModel;
+	private PivotModel rMetamodelModel;
 	
-	private Map<String, List<EmfModel>> candidateMetamodelContainmentTrees; 
+	private Map<String, List<PivotModel>> candidateMetamodelContainmentTrees; 
+	
+	private MetaModelManager metaModelManager;
 
 	
-	public MtcBroker(String qvtcasUri, Class owner) throws URISyntaxException {
-	
+	public MtcBroker(String qvtcasUri, Class owner, MetaModelManager metaModelManager) throws URISyntaxException {
+		
+		this.metaModelManager = metaModelManager;
 		// Derive all the required paths		
 		this.qvtcasUri = qvtcasUri;
 		this.owner = owner;
@@ -101,8 +116,8 @@ public class MtcBroker {
 		
 		this.configUri = URI.createURI(baseUri.toString() + "Config").appendFileExtension("xmi").toString();
 		this.scheduleUri = URI.createURI(baseUri.toString() + "Schdule").appendFileExtension("xmi").toString();
-		candidateMetamodelContainmentTrees = new HashMap<String, List<EmfModel>>();
-		registerMetamodels();
+		candidateMetamodelContainmentTrees = new HashMap<String, List<PivotModel>>();
+		registerMetamodels(metaModelManager);
 	}
 	
 	public void execute() throws EolModelLoadingException, EpsilonExecutionException, URISyntaxException, EpsilonSourceLoadException, EpsilonParseException {
@@ -110,16 +125,18 @@ public class MtcBroker {
 		loadConfigurationModel();
 		loadOclStdLibModel();
 		createContainmentTrees();
-		EmfModel cModel = createEmfModel(qvtcasUri, "QVTc", "QVT", QVTC_URI, true, false, true);
+		//EmfModel cModel = createEmfModel(qvtcasUri, "QVTc", "QVT", QVTC_URI, true, false, true);
 		
-		EmfModel uModel = qvtcToQvtu(cModel);
-		uModel.setCachingEnabled(true);
-		uModel.clearCache();
+		//EmfModel uModel = qvtcToQvtu(cModel);
+		//uModel.setCachingEnabled(true);
+		//uModel.clearCache();
+		//uModel.dispose();
 		
-		EmfModel mModel = qvtuToQvtm(uModel);
+		PivotModel uModel = createModel(qvtuUri, "QVTu", "QVT", QVTC_URI, true, false, true);
+		PivotModel mModel = qvtuToQvtm(uModel);
 		mModel.setCachingEnabled(true);
 		mModel.clearCache();
-		
+		/*
 		EmfModel pModel = qvtmToQvtp(mModel);
 		pModel.setCachingEnabled(true);
 		pModel.clearCache();
@@ -133,14 +150,14 @@ public class MtcBroker {
 		qvtpScheduling(pModel, sModel);
 		
 		EmfModel iModel = qvtpQvtsToQvti(pModel, sModel);
-		
+		*/
 	}
 
 	private EmfModel qvtcToQvtu(EmfModel cModel) {
 
 		EmfModel uModel = null;
 		try {
-			uModel = createEmfModel(qvtuUri, "QVTu", "QVT", QVTC_URI, false, true, false);
+			uModel = createModel(qvtuUri, "QVTu", "QVT", QVTC_URI, false, true, false);
 		} catch (EolModelLoadingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -175,11 +192,11 @@ public class MtcBroker {
 		return uModel;
 	}
 	
-	private EmfModel qvtuToQvtm(EmfModel uModel) {
+	private PivotModel qvtuToQvtm(EmfModel uModel) {
 
-		EmfModel mModel = null;
+		PivotModel mModel = null;
 		try {
-			mModel = createEmfModel(qvtmUri, "QVTm", "QVT", QVTC_URI, false, true, false);
+			mModel = createModel(qvtmUri, "QVTm", "QVT", QVTC_URI, false, true, false);
 		} catch (EolModelLoadingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -214,11 +231,11 @@ public class MtcBroker {
 		return mModel;
 	}
 
-	private EmfModel qvtmToQvtp(EmfModel mModel) {
+	private PivotModel qvtmToQvtp(EmfModel mModel) {
 		
-		EmfModel pModel = null;
+		PivotModel pModel = null;
 		try {
-			pModel = createEmfModel(partitionUri, "QVTp", "QVT", QVTI_URI, false, true, false);
+			pModel = createModel(partitionUri, "QVTp", "QVT", QVTI_URI, false, true, false);
 		} catch (EolModelLoadingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -253,10 +270,10 @@ public class MtcBroker {
 		return pModel;
 	}
 	
-	private EmfModel qvtpToQvts(EmfModel pModel) {
-		EmfModel sModel = null;
+	private PivotModel qvtpToQvts(EmfModel pModel) {
+		PivotModel sModel = null;
 		try {
-			sModel = createEmfModel(scheduleUri, "QVTs", "QVT", QVTS_URI, false, true, false);
+			sModel = createModel(scheduleUri, "QVTs", "QVT", QVTS_URI, false, true, false);
 		} catch (EolModelLoadingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -293,7 +310,7 @@ public class MtcBroker {
 		return sModel;
 	}
 	
-	private void qvtpScheduling(EmfModel pModel, EmfModel sModel) {
+	private void qvtpScheduling(PivotModel pModel, PivotModel sModel) {
 		
 		if (pModel != null && sModel != null  ) {
 			EolTask eol = null;
@@ -327,11 +344,11 @@ public class MtcBroker {
 		}
 	}
 	
-	private EmfModel qvtpQvtsToQvti(EmfModel pModel, EmfModel sModel) {
+	private PivotModel qvtpQvtsToQvti(PivotModel pModel, PivotModel sModel) {
 		
-		EmfModel iModel = null;
+		PivotModel iModel = null;
 		try {
-			iModel = createEmfModel(qvtiUri, "QVTi", "QVT", QVTI_URI, false, true, false);
+			iModel = createModel(qvtiUri, "QVTi", "QVT", QVTI_URI, false, true, false);
 		} catch (EolModelLoadingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -381,11 +398,11 @@ public class MtcBroker {
 		} finally  {
 			if (eol != null) {
 				Map<String, List<String>> mms = getCandidateMetamodels();
-				Map<EmfModel, EmfModel> emfModels = new HashMap<EmfModel, EmfModel>();
+				Map<PivotModel, PivotModel> emfModels = new HashMap<PivotModel, PivotModel>();
 				Iterator<Map.Entry<String, List<String>>> it = mms.entrySet().iterator();
 			    while (it.hasNext()) {
 			        Map.Entry<String, List<String>> pairs = it.next();
-			        List<EmfModel> trees = new ArrayList<EmfModel>();
+			        List<PivotModel> trees = new ArrayList<PivotModel>();
 			        for (String mm : pairs.getValue()) {
 			        	//TODO Check if the containment Tree exist (file)?
 			        	//TODO Check if the tree has been already generated
@@ -397,12 +414,12 @@ public class MtcBroker {
 							e.printStackTrace();
 						} finally {
 							if (modelUri != null) {
-								EmfModel mmModel = null;
-								EmfModel treeModel = null;
+								PivotModel mmModel = null;
+								PivotModel treeModel = null;
 								try {
-									mmModel = createEmfModel(changeResourceToSource(modelUri), "mm", "", ECORE_URI, true, false, true);
+									mmModel = createModel(changeResourceToSource(modelUri), "mm", "", ECORE_URI, true, false, true);
 									String cgUri = mmModel.getModelFileUri().trimFileExtension().toString() + "ContainmentTree.xmi";
-									treeModel = createEmfModel(cgUri, "tree", pairs.getKey().toLowerCase()+"Tree", ECORE_CONTAINMENT_URI, false, true, true);
+									treeModel = createModel(cgUri, "tree", pairs.getKey().toLowerCase()+"Tree", ECORE_CONTAINMENT_URI, false, true, true);
 								} catch (EolModelLoadingException e) {
 									// TODO Auto-generated catch block
 									e.printStackTrace();
@@ -474,7 +491,7 @@ public class MtcBroker {
 	private void loadConfigurationModel() {
 		
 		try {
-			configModel = createEmfModel(configUri, CONFIG_MODEL_NAME, "", CONFIG_URI, true, false, true);
+			configModel = createModel(configUri, CONFIG_MODEL_NAME, "", CONFIG_URI, true, false, true);
 		} catch (EolModelLoadingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -488,7 +505,7 @@ public class MtcBroker {
         OCLASResourceFactory.INSTANCE.getClass();
         Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap( ).put("oclas", OCLASResourceFactory.INSTANCE);
 	    try {
-	    	oclStdLibModel = createEmfModel(OCL_STD_LIB_URI, OCL_STD_LIB_MODEL_NAME, "", PIVOT_URI, true, false, true);
+	    	oclStdLibModel = createModel(OCL_STD_LIB_URI, OCL_STD_LIB_MODEL_NAME, "", PIVOT_URI, true, false, true);
 		} catch (EolModelLoadingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -496,10 +513,10 @@ public class MtcBroker {
 		
 	}
 	
-	private static EmfModel createEmfModel(String modeUri, String modelName, String modelAliases, String metamodelUri, boolean readOnLoad, boolean storeOnDispoal, boolean cached) 
+	private PivotModel createModel(String modeUri, String modelName, String modelAliases, String metamodelUri, boolean readOnLoad, boolean storeOnDispoal, boolean cached) 
 			throws EolModelLoadingException {
 	
-		EmfModel emfModel = new EmfModel();
+		PivotModel model = new PivotModel(metaModelManager);
 		StringProperties properties = new StringProperties();
 		properties.put(EmfModel.PROPERTY_NAME, modelName);
 		properties.put(EmfModel.PROPERTY_ALIASES, modelAliases);
@@ -508,20 +525,21 @@ public class MtcBroker {
 		properties.put(EmfModel.PROPERTY_READONLOAD, String.valueOf(readOnLoad));
 		properties.put(EmfModel.PROPERTY_STOREONDISPOSAL, String.valueOf(storeOnDispoal));
 		properties.put(EmfModel.PROPERTY_CACHED, String.valueOf(cached));
-		emfModel.load(properties, null);
-		return emfModel;
+		properties.put(EmfModel.PROPERTY_EXPAND, String.valueOf(false));
+		model.load(properties, null);
+		return model;
 	}
 	
-	private void registerMetamodels() {
+	private void registerMetamodels(MetaModelManager metaModelManager2) {
 		// register globally the Ecore Resource Factory to the ".ecore" extension
 		// weird that we need to do this, but well...
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 		    "ecore", new EcoreResourceFactoryImpl());
 		
-		ResourceSet rs = new ResourceSetImpl();
+		ResourceSet resourceSet = new ResourceSetImpl();
 		// Enable extended metadata
-		final ExtendedMetaData extendedMetaData = new BasicExtendedMetaData(rs.getPackageRegistry());
-		rs.getLoadOptions().put(XMLResource.OPTION_EXTENDED_META_DATA,
+		final ExtendedMetaData extendedMetaData = new BasicExtendedMetaData(resourceSet.getPackageRegistry());
+		resourceSet.getLoadOptions().put(XMLResource.OPTION_EXTENDED_META_DATA,
 		    extendedMetaData);
 		String path = null;
 		Resource r;
@@ -534,7 +552,7 @@ public class MtcBroker {
 			e.printStackTrace();
 		} finally {
 			if (path != null) {
-				r = rs.getResource(URI.createURI(path, false), true);
+				r = resourceSet.getResource(URI.createURI(path, false), true);
 				eObject = r.getContents().get(0);
 				if (eObject instanceof EPackage) {
 				    EPackage p = (EPackage)eObject;
@@ -550,7 +568,7 @@ public class MtcBroker {
 			e.printStackTrace();
 		} finally {
 			if (path != null) {
-				r = rs.getResource(URI.createURI(path, false), true);
+				r = resourceSet.getResource(URI.createURI(path, false), true);
 				eObject = r.getContents().get(0);
 				if (eObject instanceof EPackage) {
 				    EPackage p = (EPackage)eObject;
@@ -568,7 +586,7 @@ public class MtcBroker {
 			e.printStackTrace();
 		} finally {
 			if (path != null) {
-				r = rs.getResource(URI.createURI(path, false), true);
+				r = resourceSet.getResource(URI.createURI(path, false), true);
 				eObject = r.getContents().get(0);
 				if (eObject instanceof EPackage) {
 				    EPackage p = (EPackage)eObject;
@@ -576,6 +594,7 @@ public class MtcBroker {
 				}
 			}
 		}
+		MetaModelManagerResourceSetAdapter.getAdapter(resourceSet, metaModelManager);
 	}
 	
 	public static String changeResourceToSource(String resourcePath) {
