@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2013 The University of York, Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Horacio Hoyos - initial API and implementation
+ ******************************************************************************/
 package org.eclipse.qvtd.build.etl;
 
 import java.net.URI;
@@ -11,6 +21,7 @@ import org.eclipse.epsilon.flock.FlockModule;
 import org.eclipse.epsilon.flock.FlockResult;
 import org.eclipse.epsilon.flock.IFlockContext;
 import org.eclipse.epsilon.flock.execution.exceptions.FlockUnsupportedModelException;
+import org.eclipse.ocl.examples.pivot.IteratorExp;
 
 public class FlockTask extends EpsilonTask {
 	
@@ -91,13 +102,33 @@ public class FlockTask extends EpsilonTask {
 		preProcess();
 		try {
 			result = module.execute();
+			((FlockResult)result).printWarnings(System.out);
 		} catch (EolRuntimeException e) {
 			throw new EpsilonExecutionException(e.getMessage(),e.getCause());
 		}
 		postProcess();
 		for (IModel model : getModels()) {
 			if (model.isStoredOnDisposal()) {
+				try {
+				System.out.println("Storing " + model.getName());
+				ArrayList<Object> list = new ArrayList<Object>();
+				
+				for (Object ie : model.getAllOfType("IteratorExp")) {
+					System.out.println("eResource from Java: " + ((IteratorExp) ie).getType().eResource());
+				}
+				/*
+				list.addAll(model.getAllOfType("IteratorExp"));
+				//System.out.println("IteratorExp " + list.get(0));
+				IteratorExp exp = (IteratorExp) list.get(0);
+				
+				for (Object ie : model.getAllOfType("IteratorExp")) {
+					System.out.println(ie == exp);
+				}
+				
+				System.out.println("eResource from Java: " + exp.getType().eResource());*/
 				model.store();
+				}
+				catch (Exception ex) { ex.printStackTrace(); }
 			}
 			module.getContext().getModelRepository().removeModel(model);
 		}
