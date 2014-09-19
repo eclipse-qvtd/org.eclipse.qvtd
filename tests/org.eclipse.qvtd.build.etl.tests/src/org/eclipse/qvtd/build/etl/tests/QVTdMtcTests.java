@@ -53,7 +53,7 @@ public class QVTdMtcTests extends LoadTestCase {
     	
     	URL r = this.getClass().getResource("UmlToRdbms/UmlToRdbms.qvtcas");
 		String qvtcasUri = MtcBroker.changeResourceToSource(r.toURI().toString());
-    	MtcBroker mtc = new MtcBroker(qvtcasUri, this.getClass());
+    	MtcBroker mtc = new MtcBroker(qvtcasUri, this.getClass(), metaModelManager);
     	mtc.execute();
     }
     
@@ -62,7 +62,7 @@ public class QVTdMtcTests extends LoadTestCase {
     	
     	URL r = this.getClass().getResource("UpperToLower/UpperToLower.qvtcas");
 		String qvtcasUri = MtcBroker.changeResourceToSource(r.toURI().toString());
-    	MtcBroker mtc = new MtcBroker(qvtcasUri, this.getClass());
+    	MtcBroker mtc = new MtcBroker(qvtcasUri, this.getClass(), metaModelManager);
     	mtc.execute();
     }
     
@@ -71,7 +71,7 @@ public class QVTdMtcTests extends LoadTestCase {
     	
     	URL r = this.getClass().getResource("HSV2HLS/HSV2HLS.qvtcas");
 		String qvtcasUri = MtcBroker.changeResourceToSource(r.toURI().toString());
-    	MtcBroker mtc = new MtcBroker(qvtcasUri, this.getClass());
+    	MtcBroker mtc = new MtcBroker(qvtcasUri, this.getClass(), metaModelManager);
     	mtc.execute();
     }
 	

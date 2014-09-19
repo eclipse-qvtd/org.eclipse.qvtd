@@ -78,10 +78,10 @@
       </bottomPattern>
       <mappingStatement xsi:type="qvti:MappingSequence">
         <mappingStatements xsi:type="qvti:MappingLoop">
-          <source xsi:type="pivot:PropertyCallExp" type="#//@nestedPackage.1/@ownedType.0"
-              referredProperty="HSVTree.ecore.oclas#p.HSVTree.HSVNode.children">
-            <source xsi:type="pivot:VariableExp" type="HSVTree.ecore.oclas#T.HSVTree.HSVNode"
-                referredVariable="#qV.hsv2hls.HSV2MiddleRoot.hsv.guard.hsvRoot"/>
+          <source xsi:type="pivot:OperationCallExp" type="#//@nestedPackage.1/@ownedType.0"
+              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclElement.allInstances">
+            <source xsi:type="pivot:TypeExp" type="#//@nestedPackage.1/@ownedType.1"
+                referredType="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
           </source>
           <body xsi:type="qvti:MappingSequence">
             <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m.hsv2hls.HSV2MiddleRecursion">
@@ -152,7 +152,7 @@
       </bottomPattern>
       <mappingStatement xsi:type="qvti:MappingSequence">
         <mappingStatements xsi:type="qvti:MappingLoop">
-          <source xsi:type="pivot:PropertyCallExp" type="#//@nestedPackage.1/@ownedType.0"
+          <source xsi:type="pivot:PropertyCallExp" type="#//@nestedPackage.1/@ownedType.2"
               referredProperty="HSVTree.ecore.oclas#p.HSVTree.HSVNode.children">
             <source xsi:type="pivot:VariableExp" type="HSVTree.ecore.oclas#T.HSVTree.HSVNode"
                 referredVariable="#qV.hsv2hls.HSV2MiddleRecursion.hsv.guard.hsvNode"/>
@@ -216,7 +216,7 @@
       </bottomPattern>
       <mappingStatement xsi:type="qvti:MappingSequence">
         <mappingStatements xsi:type="qvti:MappingLoop">
-          <source xsi:type="pivot:PropertyCallExp" type="#//@nestedPackage.1/@ownedType.1"
+          <source xsi:type="pivot:PropertyCallExp" type="#//@nestedPackage.1/@ownedType.3"
               referredProperty="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.children">
             <source xsi:type="pivot:VariableExp" type="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"
                 referredVariable="#qV.hsv2hls.Middle2HLSRoot.middle.guard.middleNode"/>
@@ -283,7 +283,7 @@
       </bottomPattern>
       <mappingStatement xsi:type="qvti:MappingSequence">
         <mappingStatements xsi:type="qvti:MappingLoop">
-          <source xsi:type="pivot:PropertyCallExp" type="#//@nestedPackage.1/@ownedType.1"
+          <source xsi:type="pivot:PropertyCallExp" type="#//@nestedPackage.1/@ownedType.3"
               referredProperty="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.children">
             <source xsi:type="pivot:VariableExp" type="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"
                 referredVariable="#qV.hsv2hls.Middle2HLSRecursion.middle.guard.middleNode"/>
@@ -303,42 +303,56 @@
     </rule>
   </nestedPackage>
   <nestedPackage xmi:id="P.$$" name="$$" nsPrefix="orphanage" nsURI="http://www.eclipse.org/ocl/3.1.0/orphanage">
-    <ownedType xsi:type="pivot:OrderedSetType" name="OrderedSet" superClass="#//@nestedPackage.1/@ownedType.2 #//@nestedPackage.1/@ownedType.3"
+    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.4"
+        elementType="HSVTree.ecore.oclas#T.HSVTree.HSVNode">
+      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Set">
+        <parameterSubstitution actual="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"
+            formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..SetT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:Metaclass" name="Metaclass" superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.Class http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclType"
+        instanceType="HSVTree.ecore.oclas#T.HSVTree.HSVNode">
+      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Metaclass">
+        <parameterSubstitution actual="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"
+            formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..MetaclassT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:OrderedSetType" name="OrderedSet" superClass="#//@nestedPackage.1/@ownedType.5 #//@nestedPackage.1/@ownedType.4"
         elementType="HSVTree.ecore.oclas#T.HSVTree.HSVNode">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.OrderedSet">
         <parameterSubstitution actual="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..OrderedSetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:OrderedSetType" name="OrderedSet" superClass="#//@nestedPackage.1/@ownedType.4 #//@nestedPackage.1/@ownedType.5"
+    <ownedType xsi:type="pivot:OrderedSetType" name="OrderedSet" superClass="#//@nestedPackage.1/@ownedType.6 #//@nestedPackage.1/@ownedType.7"
         elementType="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.OrderedSet">
         <parameterSubstitution actual="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..OrderedSetT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="OrderedCollection" superClass="#//@nestedPackage.1/@ownedType.6"
-        elementType="HSVTree.ecore.oclas#T.HSVTree.HSVNode">
-      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.OrderedCollection">
-        <parameterSubstitution actual="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"
-            formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..OrderedCollectionT"/>
-      </templateBinding>
-    </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.6"
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.8"
         elementType="HSVTree.ecore.oclas#T.HSVTree.HSVNode">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.UniqueCollection">
         <parameterSubstitution actual="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..UniqueCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="OrderedCollection" superClass="#//@nestedPackage.1/@ownedType.7"
+    <ownedType xsi:type="pivot:CollectionType" name="OrderedCollection" superClass="#//@nestedPackage.1/@ownedType.8"
+        elementType="HSVTree.ecore.oclas#T.HSVTree.HSVNode">
+      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.OrderedCollection">
+        <parameterSubstitution actual="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"
+            formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..OrderedCollectionT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:CollectionType" name="OrderedCollection" superClass="#//@nestedPackage.1/@ownedType.9"
         elementType="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.OrderedCollection">
         <parameterSubstitution actual="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"
             formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..OrderedCollectionT"/>
       </templateBinding>
     </ownedType>
-    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.7"
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.9"
         elementType="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode">
       <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.UniqueCollection">
         <parameterSubstitution actual="pivot:Class HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"

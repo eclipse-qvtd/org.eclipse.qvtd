@@ -31,7 +31,7 @@ map HSV2MiddleRoot in hsv2hls {	-- Mapping root nodes L to M
 		middleRoot.name := hsvRoot.name;
 		--middleRoot.rgb := hsv2rgb(hsvRoot.hsv);
 	}
-	for hsvChild in hsvRoot.children {		-- recursive call to visit children
+	for hsvChild in HSVNode.allInstances() { --hsvRoot.children {		-- recursive call to visit children
 		call HSV2MiddleRecursion {
 			hsvNode := hsvChild;
 			middleParent := middleRoot;

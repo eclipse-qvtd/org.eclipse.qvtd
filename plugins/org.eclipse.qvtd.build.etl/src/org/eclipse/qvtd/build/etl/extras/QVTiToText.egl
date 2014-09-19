@@ -18,7 +18,7 @@ transformation [%=t.name %] {
     }
 } 
 
-operation Mapping declaration(t) {%]
+operation QVTi!Mapping declaration(t : QVTi!Transformation) {%]
 
 map [%if (self.name.isDefined()){%][%=self.name%] in [%=t.name%][%}%] {[%
     for (d in self.domain) {
@@ -38,7 +38,7 @@ map [%if (self.name.isDefined()){%][%=self.name%] in [%=t.name%][%}%] {[%
 [%
 }
 
-operation Area patterns() {%]
+operation QVTi!Area patterns() {%]
  ([%
         if (not self.guardPattern.variable.isEmpty()) {
             for (v in self.guardPattern.variable){%]
@@ -79,7 +79,7 @@ operation Area patterns() {%]
     }[%   
 }
 
-operation printMS(call : MappingCall) {%]
+operation printMS(call : QVTi!MappingCall) {%]
 call [%=call.referredMapping.name%] {
     [% for (b in call.binding) {%]
             [%=b.boundVariable.name%]:= [%=b.value.toString()%]; 
@@ -87,13 +87,13 @@ call [%=call.referredMapping.name%] {
         }
 [%}
 
-operation printMS(seq : MappingSequence) {
+operation printMS(seq : QVTi!MappingSequence) {
     for (ms in seq.mappingStatements) {
         printMS(ms);
     }
 }
 
-operation printMS(loop : MappingLoop) {%]
+operation printMS(loop : QVTi!MappingLoop) {%]
 
     for [%=loop.iterator.first().name%] in [%=loop.source.toString()%] {
         [%if(loop.body.isDefined()) {%]
