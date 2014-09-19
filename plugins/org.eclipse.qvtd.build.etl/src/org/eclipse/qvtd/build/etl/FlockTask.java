@@ -110,23 +110,7 @@ public class FlockTask extends EpsilonTask {
 		for (IModel model : getModels()) {
 			if (model.isStoredOnDisposal()) {
 				try {
-				System.out.println("Storing " + model.getName());
-				ArrayList<Object> list = new ArrayList<Object>();
-				
-				for (Object ie : model.getAllOfType("IteratorExp")) {
-					System.out.println("eResource from Java: " + ((IteratorExp) ie).getType().eResource());
-				}
-				/*
-				list.addAll(model.getAllOfType("IteratorExp"));
-				//System.out.println("IteratorExp " + list.get(0));
-				IteratorExp exp = (IteratorExp) list.get(0);
-				
-				for (Object ie : model.getAllOfType("IteratorExp")) {
-					System.out.println(ie == exp);
-				}
-				
-				System.out.println("eResource from Java: " + exp.getType().eResource());*/
-				model.store();
+					model.store();
 				}
 				catch (Exception ex) { ex.printStackTrace(); }
 			}
