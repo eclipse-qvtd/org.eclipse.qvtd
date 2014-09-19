@@ -204,20 +204,15 @@ migrate Mapping
     ignoring local
     when : not original.context.isDefined() and not original.refinement.isEmpty()  
     {
-        //original.name.println("RefinnedMapping ");
+        //original.println("RefinnedMapping ");
         original.flattenNestedMappings(migrated);
-        
-        //var olm = original.local.select(m | m.domain.isEmpty());
-        //if (olm.size() > 1) {
-        //    var lm = new QVTm!Mapping;
-        //    lm.guardPattern = new QVTm!GuardPattern;
-        //    lm.bottomPattern = new QVTm!BottomPattern;
-        //    lm.bottomPattern.assignment.addAll(emfTool.getECoreUtil().copyAll(olm.collect(l | l.bottomPattern).flatten().collect(gp | gp.assignment).flatten()));
-        //    lm.bottomPattern.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(olm.collect(l | l.bottomPattern).flatten().collect(gp | gp.realizedVariable).flatten()));
-        //    migrated.local.add(lm);
-        //}
         for (refined in original.refinement) {
             //refined.println("refined ");
+            // Copy the contents of the local mappings of the refined mapping
+            for (m in refined.collect(r | r.local).flatten()) {
+                m.flattenNestedMappings(migrated);
+            }
+            
             // For each domain in the refined mapping, if it doesn't exist, copy it. If it does exist, merge it.
             // Domains added first so nested mappings can find them
             for (d in refined.collect(r | r.domain).flatten()) {
@@ -235,11 +230,6 @@ migrate Mapping
             // Merge middle patterns
             migrated.guardPattern.mergeGuardPatterns(refined.equivalent().guardPattern);
             migrated.bottomPattern.mergeBottomPatterns(refined.equivalent().bottomPattern);
-            // Copy the contents of the local mappings of the refined mapping
-            for (m in refined.collect(r | r.local).flatten()) {
-                m.flattenNestedMappings(migrated);
-            }
-            
         }
         migrated.fixReferences();
     }
@@ -262,13 +252,8 @@ operation QVT!Mapping fixReferences() {
         d.bottomPattern.fixOperationCallReferences();
         d.bottomPattern.fixAssignmentVarReferences();
     }
-    for (m in self.local) {
-        m.guardPattern.fixPredicateVarReferences();
-        m.bottomPattern.fixPredicateVarReferences();
-        m.bottomPattern.fixOperationCallReferences();
-        m.bottomPattern.fixAssignmentVarReferences();
-    }
 }
+
 
 /****o* QVTuToQVTm/mergeGuardPatterns
  * NAME
@@ -321,13 +306,11 @@ operation QVT!BottomPattern mergeBottomPatterns(other : QVT!BottomPattern) {
         localVar.retypeVar(other);
     }
     
-    
     // Straight copy non-refined variables
     self.variable.addAll(emfTool.getECoreUtil().copyAll(other.variable.select(v | not localVarNames.includes(v.name))));
     
     // The same for realized variables
     var localRealizedVarNames = self.realizedVariable.collect(v | v.name);
-    
     for (localVar in self.realizedVariable) {
         localVar.retypeRealizedVar(other);
     }
@@ -411,7 +394,6 @@ operation QVT!Mapping flattenNestedMappings(target : QVT!Mapping) {
     }
 }
 
-
 /****o* QVTuToQVTm/moveMappingContents
  * NAME
  *  moveMappingContents -- Move all attributes and references from a this
@@ -449,7 +431,6 @@ operation QVT!Mapping moveMappingContents(target : QVT!Mapping) {
         td.bottomPattern.enforcementOperation.addAll(d.bottomPattern.enforcementOperation);
     }
 }
-
 
 post {
     "QVTuToQVTm Done!".println();
