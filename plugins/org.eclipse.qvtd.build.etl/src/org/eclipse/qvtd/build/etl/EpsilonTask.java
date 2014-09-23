@@ -19,8 +19,6 @@ import org.eclipse.epsilon.eol.IEolExecutableModule;
 import org.eclipse.epsilon.eol.exceptions.EolRuntimeException;
 import org.eclipse.epsilon.eol.models.IModel;
 
-
-
 /**
  * Provides the basic attributes and methods for the set of Epsilon standalone
  * engines. Specific implementations for each of the Epsilon languages (i.e., EOL,
@@ -139,36 +137,24 @@ public abstract class EpsilonTask {
 	 *
 	 * Different Epsilon modules may require to override this method to provide
 	 * specific functionality.
-	 * @throws EpsilonParseException If syntax errors were detected in the source file.
-	 *         Error details will be printed in the System.err stream.
-	 *         TODO Provide a better way of getting the errors, log4j or other
-	 *         method in case the host application has not console
-	 * @throws EpsilonSourceLoadException If there was an error loading the source file.
-	 * @throws EpsilonExecutionException If there was an error executing the source
+	 * @throws QvtMtcExecutionException If there was an error executing the
+	 * 	parsing or executing the script.
 	 */
-	public void execute() throws EpsilonParseException, EpsilonSourceLoadException, EpsilonExecutionException {
+	public void execute() throws QvtMtcExecutionException {
 		
 		module = createModule();
 		try {
 			module.parse(sourceURI);
-		} catch (Exception e1) {
-			throw new EpsilonSourceLoadException("There was an error loading the source.", e1.getCause());
-		}
-		
-		/*catch (URISyntaxException e) {
-			throw new EpsilonStandalonevoidException("Error parsing source. " + e.getMessage());
 		} catch (Exception e) {
-			throw new EpsilonStandaloneException("Error parsing source. " + e.getMessage());
-		}*/
-		
-		if (module.getParseProblems().size() > 0) {
-			System.err.println("Parse errors occured...");
-			for (ParseProblem problem : module.getParseProblems()) {
-				System.err.println(problem.toString());
-			}
-			throw new EpsilonParseException("Parse errors occured. See stack trace for details.");
+			throw new QvtMtcExecutionException("There was an error loading the source.", e.getCause());
 		}
-		
+		if (module.getParseProblems().size() > 0) {
+			StringBuilder sb = new StringBuilder();
+			for (ParseProblem problem : module.getParseProblems()) {
+				sb.append(problem.toString() + "\\n");
+			}
+			throw new QvtMtcExecutionException("Parse errors occured: " + sb.toString());
+		}
 		for (IModel model : getModels()) {
 			module.getContext().getModelRepository().addModel(model);
 		}
@@ -177,7 +163,7 @@ public abstract class EpsilonTask {
 		try {
 			result = execute(module);
 		} catch (EolRuntimeException e) {
-			throw new EpsilonExecutionException(e.getMessage(),e.getCause());
+			throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
 		}
 		postProcess();
 		for (IModel model : getModels()) {
@@ -203,29 +189,6 @@ public abstract class EpsilonTask {
 		return module.execute();
 	}
 	
-	/**
-	 * Gets the file, given the name. The file is searched by the class loader.
-	 *
-	 * @param fileName the file name
-	 * @return the file
-	 * @throws URISyntaxException the uRI syntax exception
-	 */
-	/*
-	protected File getFile(String fileName) throws URISyntaxException {
-		
-		URI binUri = EpsilonStandaloneEngine.class.getResource(fileName).toURI();
-		URI uri = null;
-		
-		if (binUri.toString().indexOf("bin") > -1) {
-			uri = new URI(binUri.toString().replaceAll("bin", "src"));
-		}
-		else {
-			uri = binUri;
-		}
-		
-		return new File(uri);
-	}
-	*/
 
 	/**
 	 * Gets the result.

@@ -21,73 +21,106 @@ import org.eclipse.epsilon.flock.FlockModule;
 import org.eclipse.epsilon.flock.FlockResult;
 import org.eclipse.epsilon.flock.IFlockContext;
 import org.eclipse.epsilon.flock.execution.exceptions.FlockUnsupportedModelException;
-import org.eclipse.ocl.examples.pivot.IteratorExp;
 
+/**
+ * The FlockTask is used to execute Epsilon Flock scripts in standalone mode.
+ */
 public class FlockTask extends EpsilonTask {
 	
+	/** The original model. */
 	private IModel originalModel;
+	
+	/** The migrated model. */
 	private IModel migratedModel;
 	
-	public FlockTask(URI etlSourceURI) {
+	/**
+	 * Instantiates a new flock task.
+	 *
+	 * @param flockSourceURI the etl source uri
+	 */
+	public FlockTask(URI flockSourceURI) {
 		super();
-		this.sourceURI = etlSourceURI;
+		this.sourceURI = flockSourceURI;
 		models = new ArrayList<IModel>();
 	}
 
-	public FlockTask(String etlSourcePath) {
+	/**
+	 * Instantiates a new flock task.
+	 *
+	 * @param flockSourcePath the etl source path
+	 */
+	public FlockTask(String flockSourcePath) {
 		super();
-		this.sourceURI = URI.create(etlSourcePath);
+		this.sourceURI = URI.create(flockSourcePath);
 		models = new ArrayList<IModel>();
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipse.qvtd.build.etl.EpsilonTask#createModule()
+	 */
 	@Override
 	public IEolExecutableModule createModule() {
-		// TODO Auto-generated method stub
+		
 		return new FlockModule();
 	}
 
+	/**
+	 * Gets the original model.
+	 *
+	 * @return the original model
+	 */
 	public IModel getOriginalModel() {
 		return originalModel;
 	}
 
+	/**
+	 * Sets the original model.
+	 *
+	 * @param originalModel the new original model
+	 */
 	public void setOriginalModel(IModel originalModel) {
 		this.originalModel = originalModel;
 		addModel(originalModel);
 	}
 
+	/**
+	 * Gets the migrated model.
+	 *
+	 * @return the migrated model
+	 */
 	public IModel getMigratedModel() {
 		return migratedModel;
 	}
 
+	/**
+	 * Sets the migrated model.
+	 *
+	 * @param migratedModel the new migrated model
+	 */
 	public void setMigratedModel(IModel migratedModel) {
 		this.migratedModel = migratedModel;
 		addModel(migratedModel);
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipse.qvtd.build.etl.EpsilonTask#execute()
+	 */
 	@Override
-	public void execute() throws EpsilonParseException, EpsilonSourceLoadException, EpsilonExecutionException {
+	public void execute() throws QvtMtcExecutionException {
 		
 		module = createModule();
 		try {
 			module.parse(sourceURI);
-		} catch (Exception e1) {
-			throw new EpsilonSourceLoadException("There was an error loading the source.", e1.getCause());
-		}
-		
-		/*catch (URISyntaxException e) {
-			throw new EpsilonStandalonevoidException("Error parsing source. " + e.getMessage());
 		} catch (Exception e) {
-			throw new EpsilonStandaloneException("Error parsing source. " + e.getMessage());
-		}*/
-		
-		if (module.getParseProblems().size() > 0) {
-			System.err.println("Parse errors occured...");
-			for (ParseProblem problem : module.getParseProblems()) {
-				System.err.println(problem.toString());
-			}
-			throw new EpsilonParseException("Parse errors occured. See stack trace for details.");
+			throw new QvtMtcExecutionException("There was an error loading the Flock script.", e.getCause());
 		}
-		
+		if (module.getParseProblems().size() > 0) {
+			StringBuilder sb = new StringBuilder();
+			for (ParseProblem problem : module.getParseProblems()) {
+				sb.append(problem.toString() + "\\n");
+			}
+			throw new QvtMtcExecutionException("Parse errors occured: " + sb.toString());
+		}
 		for (IModel model : getModels()) {
 			module.getContext().getModelRepository().addModel(model);
 		}
@@ -95,16 +128,15 @@ public class FlockTask extends EpsilonTask {
 		try {
 			((IFlockContext)module.getContext()).setOriginalModel(originalModel);
 			((IFlockContext)module.getContext()).setMigratedModel(migratedModel);
-		} catch (FlockUnsupportedModelException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		} catch (FlockUnsupportedModelException e) {
+			throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
 		}
 		preProcess();
 		try {
 			result = module.execute();
 			((FlockResult)result).printWarnings(System.out);
 		} catch (EolRuntimeException e) {
-			throw new EpsilonExecutionException(e.getMessage(),e.getCause());
+			throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
 		}
 		postProcess();
 		for (IModel model : getModels()) {
@@ -112,7 +144,9 @@ public class FlockTask extends EpsilonTask {
 				try {
 					model.store();
 				}
-				catch (Exception ex) { ex.printStackTrace(); }
+				catch (Exception e) {
+					throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
+				}
 			}
 			module.getContext().getModelRepository().removeModel(model);
 		}

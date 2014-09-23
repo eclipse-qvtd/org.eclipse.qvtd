@@ -19,21 +19,37 @@ import org.eclipse.epsilon.etl.EtlModule;
 import org.eclipse.epsilon.etl.execute.context.EtlContext;
 import org.eclipse.epsilon.etl.trace.TransformationTrace;
 
+/**
+ * The EtlTask is used to execute Epsilon Flock scripts in standalone mode.
+ */
 public class EtlTask extends EpsilonTask {
 
 	
+	/**
+	 * Instantiates a new ETL task.
+	 *
+	 * @param etlSourceURI the ETL source uri
+	 */
 	public EtlTask(URI etlSourceURI) {
 		super();
 		this.sourceURI = etlSourceURI;
 		models = new ArrayList<IModel>();
 	}
 
+	/**
+	 * Instantiates a new ETL task.
+	 *
+	 * @param etlSourcePath the ETL source path
+	 */
 	public EtlTask(String etlSourcePath) {
 		super();
 		this.sourceURI = URI.create(etlSourcePath);
 		models = new ArrayList<IModel>();
 	}
 
+	/* (non-Javadoc)
+	 * @see org.eclipse.qvtd.build.etl.EpsilonTask#createModule()
+	 */
 	@Override
 	public IEolExecutableModule createModule() {
 		
@@ -42,15 +58,16 @@ public class EtlTask extends EpsilonTask {
 	
 	/**
 	 * Gets the transformation trace. This method should be called after executing 
-	 * and getting its result.
+	 * the task.
 	 *
-	 * @throws ExecutorException if no previously execution.
+	 * @return the transformation trace
+	 * @throws QvtMtcExecutionException if the ETL module has not been initialised
 	 */
 	
-	public TransformationTrace getTransformationTrace() throws EpsilonExecutionException {
+	public TransformationTrace getTransformationTrace() throws QvtMtcExecutionException {
 		
 		if( module == null) {
-			throw new EpsilonExecutionException("Transformation not Executed. No context found.");
+			throw new QvtMtcExecutionException("The ETL module has not ben initialized and the transformation may not have executed yet.");
 		}
 		EtlContext context = (EtlContext) module.getContext();
 		return context.getTransformationTrace();

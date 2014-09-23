@@ -22,18 +22,17 @@ import org.eclipse.epsilon.eol.IEolExecutableModule;
 import org.eclipse.epsilon.eol.exceptions.EolRuntimeException;
 import org.eclipse.epsilon.eol.models.IModel;
 
+
 /**
- * The Class EolStandaloneEngine.
- * 
- * @author Horacio Hoyos
+ * The EolTask is used to execute Epsilon Flock scripts in standalone mode.
  */
 public class EolTask extends EpsilonTask {
 	
-	
+
 	/**
-	 * Instantiates a new EOL Standalone engine.
+	 * Instantiates a new eol task.
 	 *
-	 * @param eolSourceURI the EOL source URI
+	 * @param eolSourceURI the eol source uri
 	 */
 	public EolTask(URI eolSourceURI) {
 		super();
@@ -65,28 +64,24 @@ public class EolTask extends EpsilonTask {
 	 * method, a call to the {@link close()} method should be made when no
 	 * more operations are being executed.
 	 *
-	 * @throws EpsilonSourceLoadException If there was an error loading the source file
-	 * 		   or during initial source parsing.
-	 * @throws EpsilonParseException If syntax errors were detected in the source file.
-	 *         Error details will be printed in the System.err stream.
+	 * @throws QvtMtcExecutionException If there are errors parsing the source.
 	 */
-	public void prepare() throws EpsilonSourceLoadException, EpsilonParseException  {
+	public void prepare() throws QvtMtcExecutionException  {
 		
 		module = createModule();
 		try {
 			module.parse(sourceURI);
-		} catch (Exception e1) {
-			throw new EpsilonSourceLoadException("There was an error loading the source.", e1.getCause());
+		} catch (Exception e) {
+			throw new QvtMtcExecutionException("There was an error loading the source.", e.getCause());
 		}
 		
 		if (module.getParseProblems().size() > 0) {
-			System.err.println("Parse errors occured...");
+			StringBuilder sb = new StringBuilder();
 			for (ParseProblem problem : module.getParseProblems()) {
-				System.err.println(problem.toString());
+				sb.append(problem.toString() + "\\n");
 			}
-			throw new EpsilonParseException("Parse errors occured. See stack trace for details.");
+			throw new QvtMtcExecutionException("Parse errors occured: " + sb.toString());
 		}
-		
 		for (IModel model : getModels()) {
 			module.getContext().getModelRepository().addModel(model);
 		}
@@ -95,12 +90,24 @@ public class EolTask extends EpsilonTask {
 	
 	/**
 	 * When executing specific operations ({@link executeOperation(String)}) 
-	 * this method disposes the models. This method should be called
-	 * when no more operations are being executed.
+	 * this this method should be called when no more operations are going to
+	 * be invoked in order to store the models and remove them from the context.
+	 *
+	 * @throws QvtMtcExecutionException the qvt mtc execution exception
 	 */
-	public void close() {
+	public void close() throws QvtMtcExecutionException {
 		
-		module.getContext().getModelRepository().dispose();
+		for (IModel model : getModels()) {
+			if (model.isStoredOnDisposal()) {
+				try {
+					model.store();
+				}
+				catch (Exception e) {
+					throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
+				}
+			}
+			module.getContext().getModelRepository().removeModel(model);
+		}
 	}
 	
 	
@@ -111,11 +118,9 @@ public class EolTask extends EpsilonTask {
 	 * the operation in the loaded model(s) is stored in the {@see #result} field.
 	 * 	
 	 * @param operationName The name of the operation in the EOL source
-	 * @throws EpsilonExecutionException If there was an error executing the operation 
-	 * @throws EpsilonParseException 
-	 * @throws EpsilonSourceLoadException 
+	 * @throws QvtMtcExecutionException If there was an error executing the operation 
 	 */
-	public void executeOperation(String operationName) throws EpsilonExecutionException, EpsilonSourceLoadException, EpsilonParseException {
+	public void executeOperation(String operationName) throws QvtMtcExecutionException {
 		
 		prepare();
 		preProcess();
@@ -129,22 +134,29 @@ public class EolTask extends EpsilonTask {
 	 * operation use {@link #executeOperation(IEolExecutableModule, String)}.
 	 * The result of the operation will be stored in the result field.
 	 *
-	 * @throws EpsilonParseException If syntax errors were detected in the EOL source file.
-	 *         Error details will be printed in the System.err stream.
-	 * @throws EpsilonSourceLoadException If there was an error loading the EOL source.
-	 * @throws EpsilonExecutionException If there was an error executing the operation.
+	 * @throws QvtMtcExecutionException If there was an error executing the operation.
 	 */
-	public void executeFromFirstOperation() throws EpsilonParseException, EpsilonSourceLoadException, EpsilonExecutionException {
+	public void executeFromFirstOperation() throws QvtMtcExecutionException {
 		prepare();
 		EolOperation operation = module.getDeclaredOperations().get(0);
 		preProcess();
 		try {
 			result = operation.execute(null, Collections.EMPTY_LIST, module.getContext());
 		} catch (EolRuntimeException e) {
-			throw new EpsilonExecutionException(e.getMessage(),e.getCause());
+			throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
 		}
 		postProcess();
-		module.getContext().getModelRepository().dispose();
+		for (IModel model : getModels()) {
+			if (model.isStoredOnDisposal()) {
+				try {
+					model.store();
+				}
+				catch (Exception e) {
+					throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
+				}
+			}
+			module.getContext().getModelRepository().removeModel(model);
+		}
 	}
 	
 	/**
@@ -153,16 +165,16 @@ public class EolTask extends EpsilonTask {
 	 * @param module the module
 	 * @param operationName the operation name
 	 * @return the object
-	 * @throws EpsilonExecutionException the execution exception
+	 * @throws QvtMtcExecutionException the execution exception
 	 */
-	private Object executeOperation(IEolExecutableModule module, String operationName) throws EpsilonExecutionException {
+	private Object executeOperation(IEolExecutableModule module, String operationName) throws QvtMtcExecutionException {
 		EolOperation operation = module.getDeclaredOperations().getOperation(operationName);
 		if(operation != null) {
 			try {
 				return operation.execute(null, Collections.EMPTY_LIST, module.getContext());
 			} catch (EolRuntimeException e) {
 				e.printStackTrace();
-				throw new EpsilonExecutionException(e.getMessage());
+				throw new QvtMtcExecutionException(e.getMessage());
 			}
 		}
 		return null;

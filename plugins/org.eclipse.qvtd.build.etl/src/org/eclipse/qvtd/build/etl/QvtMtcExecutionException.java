@@ -11,9 +11,9 @@
 package org.eclipse.qvtd.build.etl;
 
 /**
- * The Class EpsilonStandaloneException.
+ * The Class QvtMtcExecutionException that wraps Epsilon execution exceptions.
  */
-public class EpsilonSourceLoadException extends Exception {
+public class QvtMtcExecutionException extends Exception {
 
 	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 4172842347806568754L;
@@ -23,7 +23,7 @@ public class EpsilonSourceLoadException extends Exception {
 	 *
 	 * @param msg the msg
 	 */
-	public EpsilonSourceLoadException(String msg){
+	public QvtMtcExecutionException(String msg){
 		super(msg);
 	}
 
@@ -33,7 +33,7 @@ public class EpsilonSourceLoadException extends Exception {
      * @param msg the msg
      * @param t the previous Throwable cause
      */
-    public EpsilonSourceLoadException(String msg, Throwable t){
+    public QvtMtcExecutionException(String msg, Throwable t){
     	super(msg,t);
     } 
 
