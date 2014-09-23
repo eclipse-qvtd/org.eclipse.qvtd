@@ -97,7 +97,6 @@ public class MtcBroker {
 	/** The Constant QVTS_FULL_NS. */
 	private static final String QVTS_FULL_NS = QVTS_URI + "," + QVTI_FULL_NS;
 	
-	
 	/** The Constant QVTC_TO_QVTU_FLOCK. */
 	private static final String QVTC_TO_QVTU_FLOCK = "mtc/QVTcToQVTu.mig";
 	
@@ -125,7 +124,6 @@ public class MtcBroker {
 	/** The Constant MIDDLE_DIR_NAME. */
 	private static final String MIDDLE_DIR_NAME = "M";
 	
-	
 	/** The qvtcas uri. */
 	private String qvtcasUri;
 	
@@ -147,15 +145,14 @@ public class MtcBroker {
 	/** The schedule uri. */
 	private String scheduleUri;
 	
-	
-	/** The owner. */
+	/** The owner clas of the MTC (used to find resources). */
 	private Class owner;
 	
 	/** The config model. */
-	private EmfModel configModel;
+	private PivotModel configModel;
 	
 	/** The ocl std lib model. */
-	private EmfModel oclStdLibModel;
+	private PivotModel oclStdLibModel;
 
 	/** The r metamodel. */
 	private String rMetamodel;
@@ -168,15 +165,22 @@ public class MtcBroker {
 	
 	/** The meta model manager. */
 	private MetaModelManager metaModelManager;
+	
+	private PivotModel cModel;
+	private PivotModel uModel;
+	private PivotModel mModel;
+	private PivotModel pModel;
+	private PivotModel sModel;
+	private PivotModel iModel;
 
 	
 	/**
-	 * Instantiates a new mtc broker.
+	 * Instantiates a new MTC broker.
 	 *
 	 * @param qvtcasUri the qvtcas uri
 	 * @param owner the owner
 	 * @param metaModelManager the meta model manager
-	 * @throws QvtMtcExecutionException the qvt mtc execution exception
+	 * @throws QvtMtcExecutionException If there is a problem registering the required metamodels.
 	 */
 	public MtcBroker(String qvtcasUri, Class owner, MetaModelManager metaModelManager) throws QvtMtcExecutionException {
 		
@@ -199,9 +203,54 @@ public class MtcBroker {
 	}
 	
 	/**
+	 * @return the cModel
+	 */
+	public PivotModel getcModel() {
+		return cModel;
+	}
+
+	/**
+	 * @return the uModel
+	 */
+	public PivotModel getuModel() {
+		return uModel;
+	}
+
+
+	/**
+	 * @return the mModel
+	 */
+	public PivotModel getmModel() {
+		return mModel;
+	}
+
+	/**
+	 * @return the pModel
+	 */
+	public PivotModel getpModel() {
+		return pModel;
+	}
+
+	/**
+	 * @return the sModel
+	 */
+	public PivotModel getsModel() {
+		return sModel;
+	}
+
+
+	/**
+	 * @return the iModel
+	 */
+	public PivotModel getiModel() {
+		return iModel;
+	}
+
+	/**
 	 * Execute.
 	 *
-	 * @throws QvtMtcExecutionException the qvt mtc execution exception
+	 * @throws QvtMtcExecutionException If there is an exception at any point in
+	 * 	the MTC execution.
 	 */
 	public void execute() throws QvtMtcExecutionException {
 		
@@ -209,35 +258,41 @@ public class MtcBroker {
 		loadOclStdLibModel();
 		// This could be run on editor saves by reading the imports!
 		createContainmentTrees();
-		PivotModel cModel = createModel(qvtcasUri, "QVTc", "QVT", QVTC_FULL_NS, true, false, true);
-		PivotModel uModel = qvtcToQvtu(cModel);
+		cModel = createModel(qvtcasUri, "QVTc", "QVT", QVTC_FULL_NS, true, false, true);
+		uModel = qvtcToQvtu(cModel);
 		uModel.setCachingEnabled(true);
 		uModel.clearCache();
-		PivotModel mModel = qvtuToQvtm(uModel);
+		mModel = qvtuToQvtm(uModel);
 		mModel.setCachingEnabled(true);
 		mModel.clearCache();
-		PivotModel pModel = qvtmToQvtp(mModel);
+		pModel = qvtmToQvtp(mModel);
 		pModel.setCachingEnabled(true);
 		pModel.clearCache();
-		
-		PivotModel sModel = qvtpToQvts(pModel);
+		sModel = qvtpToQvts(pModel);
 		sModel.setCachingEnabled(true);
 		sModel.clearCache();
-		
 		pModel.setStoredOnDisposal(true);
 		sModel.setStoredOnDisposal(true);
 		qvtpScheduling(pModel, sModel);
-		
-		EmfModel iModel = qvtpQvtsToQvti(pModel, sModel);
-		
+		iModel = qvtpQvtsToQvti(pModel, sModel);
+	}
+	
+	public void disposeModels() {
+		cModel.dispose();
+		uModel.dispose();
+		mModel.dispose();
+		pModel.dispose();
+		sModel.dispose();
+		iModel.dispose();
 	}
 
 	/**
-	 * Qvtc to qvtu.
+	 * QVTc to QVTu.
 	 *
-	 * @param cModel the c model
-	 * @return the pivot model
-	 * @throws QvtMtcExecutionException the qvt mtc execution exception
+	 * @param cModel the QVTc model
+	 * @return the QVTu model
+	 * @throws QvtMtcExecutionException If there is a problem loading the models or
+	 * 	executing the Flock script.
 	 */
 	private PivotModel qvtcToQvtu(EmfModel cModel) throws QvtMtcExecutionException {
 
@@ -263,11 +318,12 @@ public class MtcBroker {
 	}
 	
 	/**
-	 * Qvtu to qvtm.
+	 * QVTu to QVTm.
 	 *
-	 * @param uModel the u model
-	 * @return the pivot model
-	 * @throws QvtMtcExecutionException the qvt mtc execution exception
+	 * @param uModel the QVTu model
+	 * @return the QVTm model
+	 * @throws QvtMtcExecutionException If there is a problem loading the models or
+	 * 	executing the Flock script.
 	 */
 	private PivotModel qvtuToQvtm(PivotModel uModel) throws QvtMtcExecutionException {
 
@@ -293,11 +349,12 @@ public class MtcBroker {
 	}
 
 	/**
-	 * Qvtm to qvtp.
+	 * QVTm to QVTp.
 	 *
-	 * @param mModel the m model
-	 * @return the pivot model
-	 * @throws QvtMtcExecutionException the qvt mtc execution exception
+	 * @param mModel the QVTm model
+	 * @return the QVTp model
+	 * @throws QvtMtcExecutionException If there is a problem loading the models or
+	 * 	executing the ETL script.
 	 */
 	private PivotModel qvtmToQvtp(PivotModel mModel) throws QvtMtcExecutionException {
 		
@@ -323,11 +380,12 @@ public class MtcBroker {
 	}
 	
 	/**
-	 * Qvtp to qvts.
+	 * QVTp to QVTs.
 	 *
-	 * @param pModel the model
-	 * @return the pivot model
-	 * @throws QvtMtcExecutionException the qvt mtc execution exception
+	 * @param pModel the QVTp model
+	 * @return the QVTs model
+	 * @throws QvtMtcExecutionException If there is a problem loading the models or
+	 * 	executing the ETL script.
 	 */
 	private PivotModel qvtpToQvts(PivotModel pModel) throws QvtMtcExecutionException {
 		PivotModel sModel = null;
@@ -352,11 +410,12 @@ public class MtcBroker {
 	}
 	
 	/**
-	 * Qvtp scheduling.
+	 * QVTp scheduling.
 	 *
-	 * @param pModel the model
-	 * @param sModel the s model
-	 * @throws QvtMtcExecutionException the qvt mtc execution exception
+	 * @param pModel the QVTp model
+	 * @param sModel the QVTs s model
+	 * @throws QvtMtcExecutionException If there is a problem loading the models or
+	 * 	executing the EOL script.
 	 */
 	private void qvtpScheduling(PivotModel pModel, PivotModel sModel) throws QvtMtcExecutionException {
 		
@@ -380,12 +439,13 @@ public class MtcBroker {
 	}
 	
 	/**
-	 * Qvtp qvts to qvti.
+	 * QVTp and QVTs to QVTi.
 	 *
-	 * @param pModel the model
-	 * @param sModel the s model
-	 * @return the pivot model
-	 * @throws QvtMtcExecutionException the qvt mtc execution exception
+	 * @param pModel the QVTp model
+	 * @param sModel the QVTs model
+	 * @return the QVTi model
+	 * @throws QvtMtcExecutionException If there is a problem loading the models or
+	 * 	executing the ETL script.
 	 */
 	private PivotModel qvtpQvtsToQvti(PivotModel pModel, PivotModel sModel) throws QvtMtcExecutionException {
 		
@@ -414,7 +474,8 @@ public class MtcBroker {
 	/**
 	 * Creates the containment trees.
 	 *
-	 * @throws QvtMtcExecutionException the qvt mtc execution exception
+	 * @throws QvtMtcExecutionException If there is a problem loading the models or
+	 * 	executing the EOL script.
 	 */
 	private void createContainmentTrees() throws QvtMtcExecutionException  {
 		
@@ -465,7 +526,8 @@ public class MtcBroker {
 	 * Gets the candidate metamodels.
 	 *
 	 * @return the candidate metamodels
-	 * @throws QvtMtcExecutionException the qvt mtc execution exception
+	 * @throws QvtMtcExecutionException If there is a problem loading the models or
+	 * 	executing the EOL script.
 	 */
 	private Map<String, List<String>> getCandidateMetamodels() throws QvtMtcExecutionException {
 		// 2. Run the EOL operations to get the candidate models and generate the Containment Tree
@@ -493,7 +555,7 @@ public class MtcBroker {
 	/**
 	 * Load configuration model.
 	 *
-	 * @throws QvtMtcExecutionException the qvt mtc execution exception
+	 * @throws QvtMtcExecutionException If there is a problem loading the model.
 	 */
 	private void loadConfigurationModel() throws QvtMtcExecutionException {
 		
@@ -501,9 +563,9 @@ public class MtcBroker {
 	}
 	
 	/**
-	 * Load ocl std lib model.
+	 * Load OCLStdLib model.
 	 *
-	 * @throws QvtMtcExecutionException the qvt mtc execution exception
+	 * @throws QvtMtcExecutionException If there is a problem loading the model.
 	 */
 	private void loadOclStdLibModel() throws QvtMtcExecutionException {
 		
@@ -516,7 +578,7 @@ public class MtcBroker {
 	 * Register metamodels.
 	 *
 	 * @param metaModelManager the meta model manager
-	 * @throws QvtMtcExecutionException the qvt mtc execution exception
+	 * @throws QvtMtcExecutionException If there is a problem finding the metamodels
 	 */
 	private void registerMetamodels(MetaModelManager metaModelManager) throws QvtMtcExecutionException {
 		
@@ -575,17 +637,18 @@ public class MtcBroker {
 
 	
 	/**
-	 * Creates the model.
+	 * Creates a Pivot Model with the given attributes. The models are not expanded
+	 * by default.
 	 *
 	 * @param modeUri the mode uri
 	 * @param modelName the model name
-	 * @param modelAliases the model aliases
-	 * @param metamodelUris the metamodel uris
-	 * @param readOnLoad the read on load
-	 * @param storeOnDispoal the store on dispoal
-	 * @param cached the cached
+	 * @param modelAliases the model aliases (Comma separated string)
+	 * @param metamodelUris the metamodel URIs
+	 * @param readOnLoad read on load flag
+	 * @param storeOnDispoal store on disposal flag 
+	 * @param cached cached flag
 	 * @return the pivot model
-	 * @throws QvtMtcExecutionException the qvt mtc execution exception
+	 * @throws QvtMtcExecutionException There was an error loading the model
 	 */
 	private PivotModel createModel(String modeUri, String modelName, String modelAliases, String metamodelUris,
 				boolean readOnLoad, boolean storeOnDispoal, boolean cached) throws QvtMtcExecutionException {
@@ -608,11 +671,8 @@ public class MtcBroker {
 		return model;
 	}
 	
-	
-	
-	
 	/**
-	 * Change resource to source.
+	 * Change resource to source. 
 	 *
 	 * @param resourcePath the resource path
 	 * @return the string
