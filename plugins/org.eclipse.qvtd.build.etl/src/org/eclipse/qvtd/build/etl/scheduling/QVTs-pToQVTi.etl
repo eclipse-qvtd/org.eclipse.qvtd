@@ -275,8 +275,9 @@ rule DistinctData
         loop.source = exp;
         // TODO what happens with multiple Distinct Datas?
         loop.body = new QVTi!MappingSequence;
-        loop.body.mappingStatements.addAll(dd.target.distinctArguments.excluding(dd).select(da | da.secondaryArguments.size() < dd.secondaryArguments.size()).equivalent());
+        // Add the mapping call first, so it will remain in the deepest loop
         loop.body.mappingStatements.add(dd.target.equivalent());
+        loop.body.mappingStatements.addAll(dd.target.distinctArguments.excluding(dd).select(da | da.secondaryArguments.size() < dd.secondaryArguments.size()).equivalent());
         
     }
     
@@ -287,7 +288,9 @@ rule PrimaryDataParameter
     {
         guard : dp.primaryDistinctData.isDefined()
         
+        //dp.primaryDistinctData.target.mapping.name.println("PrimaryDataParameter ");
         var it = dp.primaryDistinctData.equivalent().iterator.first();
+        //it.name.println("primaryVar ");
         cb.boundVariable ::= dp.variable.getSameVariable();
         cb.value = new QVTi!VariableExp;
         cb.value.referredVariable = it;
@@ -308,11 +311,12 @@ rule SecondaryDataParameter
             var primaryVar = dp.secondaryDistinctData.primaryArguments.first().variable.getSameVariable();
             return not primaryVar.hasRelation(paramVar).isEmpty();
         }    
-        //dp.secondaryDistinctData.target.mapping.name.println("DistinctData ");
+        //dp.secondaryDistinctData.target.mapping.name.println("SecondaryDataParameter ");
         var paramVar = dp.variable.getSameVariable();
         var primaryVar = dp.secondaryDistinctData.primaryArguments.first().variable.getSameVariable();
         var prop = primaryVar.hasRelation(paramVar).first();
         var refVar = primaryVar.equivalent();
+        //primaryVar.name.println("primaryVar ");
         //paramVar.name.println("paramVar ");
         //prop.name.println("prop ");
         //refVar.name.println("refVar ");
@@ -339,27 +343,42 @@ rule SecondarySecondaryDataParameter
             var primaryVar = dp.secondaryDistinctData.primaryArguments.first().variable.getSameVariable();
             return primaryVar.hasRelation(paramVar).isEmpty();
         }    
-
+        
+        //dp.secondaryDistinctData.target.mapping.name.println("SecondaryDataParameter Derived ");
         var paramVar = dp.variable.getSameVariable();
         cb.boundVariable ::= paramVar;
+        //paramVar.name.println("paramVar ");
         cb.value = new QVTi!PropertyCallExp;
-        cb.mappingCall ::= dp.secondaryDistinctData.target;
         for (sa in dp.secondaryDistinctData.secondaryArguments.excluding(dp)) {
             var secondaryVar = sa.variable.getSameVariable();
+            //secondaryVar.name.println("secondaryVar ");
             if (not secondaryVar.hasRelation(paramVar).isEmpty()) {
+                //"Direct".println();
                 var prop = secondaryVar.hasRelation(paramVar).first();
-                cb.value.referredProperty = prop;
-                cb.value.type = prop.type;
-	            cb.value.source = emfTool.getEcoreUtil().copy(sa.equivalent().value);
-	            break;
-            } else if (not paramVar.hasRelation(secondaryVar).isEmpty()) { // Can it be an opposite relation?
-                var prop = paramVar.hasRelation(secondaryVar).first().opposite;
+                //prop.name.println("prop ");
                 cb.value.referredProperty = prop;
                 cb.value.type = prop.type;
                 cb.value.source = emfTool.getEcoreUtil().copy(sa.equivalent().value);
                 break;
+	        } 
+        }
+        // If we didn't find a direct, try an opposite
+        if (not cb.value.referredProperty.isDefined()) {
+            for (sa in dp.secondaryDistinctData.secondaryArguments.excluding(dp)) {
+                var secondaryVar = sa.variable.getSameVariable();
+                //secondaryVar.name.println("secondaryVar ");
+                if (not paramVar.hasRelation(secondaryVar).isEmpty() and hasNavigableOpposite( paramVar.hasRelation(secondaryVar).first())) { // Can it be an opposite relation?
+	                //"Opposite".println();
+	                var prop = paramVar.hasRelation(secondaryVar).first().opposite;
+	                //prop.name.println("prop ");
+	                cb.value.referredProperty = prop;
+	                cb.value.type = prop.type;
+	                cb.value.source = emfTool.getEcoreUtil().copy(sa.equivalent().value);
+	                break;
+               }
             }
         }
+        cb.mappingCall ::= dp.secondaryDistinctData.target;
     }
 
 @cached

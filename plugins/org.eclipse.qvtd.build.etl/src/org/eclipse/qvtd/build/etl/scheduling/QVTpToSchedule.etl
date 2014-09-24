@@ -103,7 +103,7 @@ rule TypeToDatum
         //t.name.println("TypeToDatum ");
         d.type = t;
         d.super.addAll(t.superClass.equivalent());
-        d.domain =  domain;
+        d.domain = domain;
         d.schedule ::= domain.`rule`.transformation;    
     }
 
