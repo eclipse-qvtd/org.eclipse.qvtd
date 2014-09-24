@@ -31,20 +31,32 @@ import org.eclipse.epsilon.eol.exceptions.models.EolModelElementTypeNotFoundExce
 import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
 import org.eclipse.epsilon.eol.exceptions.models.EolNotInstantiableModelElementTypeException;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Pivot Model extends the EmfModel to provide access to the utilities
- * provided by the OCL framework
+ * provided by the OCL framework.
  */
 public class PivotModel extends EmfModel {
 	
+	/** The meta model manager. */
 	private MetaModelManager metaModelManager;
 	
+	/**
+	 * Instantiates a new pivot model.
+	 *
+	 * @param metaModelManager the meta model manager
+	 */
 	public PivotModel(MetaModelManager metaModelManager) {
 		
 		this.metaModelManager = metaModelManager;
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipse.epsilon.emc.emf.EmfModel#loadModelFromUri()
+	 */
 	@Override
 	public void loadModelFromUri() throws EolModelLoadingException {
 		
@@ -62,6 +74,9 @@ public class PivotModel extends EmfModel {
 		modelImpl = model;
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipse.epsilon.emc.emf.AbstractEmfModel#createInstanceInModel(java.lang.String)
+	 */
 	protected EObject createInstanceInModel(String type) throws EolModelElementTypeNotFoundException, EolNotInstantiableModelElementTypeException {
 		
 		EClass eClass = classForName(type);
@@ -75,6 +90,9 @@ public class PivotModel extends EmfModel {
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipse.epsilon.emc.emf.AbstractEmfModel#classForName(java.lang.String, org.eclipse.emf.ecore.EPackage.Registry)
+	 */
 	@Override
 	protected EClass classForName(String name, Registry registry) {	
 		boolean absolute = name.indexOf("::") > -1;
@@ -88,6 +106,9 @@ public class PivotModel extends EmfModel {
 		return null;
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.eclipse.epsilon.emc.emf.AbstractEmfModel#getEnumerationValue(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public Object getEnumerationValue(String enumeration, String label) throws EolEnumerationValueNotFoundException {
 		
@@ -106,6 +127,9 @@ public class PivotModel extends EmfModel {
 	}
 	
 	
+	/* (non-Javadoc)
+	 * @see org.eclipse.epsilon.emc.emf.AbstractEmfModel#getAllTypeNamesOf(java.lang.Object)
+	 */
 	@Override
 	public Collection<String> getAllTypeNamesOf(Object instance) {
 		final Collection<String> allTypeNames = new ArrayList<String>();
@@ -124,6 +148,14 @@ public class PivotModel extends EmfModel {
 		return allTypeNames;
 	}
 	
+	/**
+	 * Class for name.
+	 *
+	 * @param name the name
+	 * @param absolute the absolute
+	 * @param pkg the pkg
+	 * @return the e class
+	 */
 	private EClass classForName(String name, boolean absolute, EPackage pkg) {
 		if (pkg != null) {
 			for (EClassifier eClassifier : EmfUtil.getAllEClassifiers(pkg)) {
@@ -144,7 +176,27 @@ public class PivotModel extends EmfModel {
 		}
 		return null;
 	}
-	
-	
 
+	/**
+	 * Gets the root eObject.
+	 *
+	 * @return the roote object
+	 */
+	public EObject getRooteObject() {
+		return modelImpl.getContents().get(0);
+	}
+	
+	public Transformation getTransformation() throws Exception {
+		for (EObject eContent : modelImpl.getContents()) {
+			if (eContent instanceof ImperativeModel) {
+	    		for (EObject eObject : ((ImperativeModel)eContent).getNestedPackage()) {
+	    			if (eObject instanceof Transformation) {
+	                    return (Transformation) eObject;
+	    			}
+	    		}
+			}
+		}
+		throw new Exception("The QVTi model does not have a Transformation element.");
+	}
+	
 }

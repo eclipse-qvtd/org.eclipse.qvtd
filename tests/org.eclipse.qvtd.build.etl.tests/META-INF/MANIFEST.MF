@@ -1,15 +1,19 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Tests
-Bundle-SymbolicName: org.eclipse.qvtd.build.etl.tests
+Bundle-SymbolicName: org.eclipse.qvtd.build.etl.tests;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.eclipse.qvtd.build.etl.tests.Activator
+Bundle-ClassPath: .
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.epsilon.common.dt,
  org.eclipse.qvtd.xtext.qvtbase.tests;bundle-version="0.12.0",
  org.eclipse.qvtd.xtext.qvtimperative,
  org.eclipse.qvtd.build.etl;bundle-version="1.0.0",
  org.eclipse.qvtd.xtext.qvtcore,
  org.eclipse.ocl.examples.xtext.oclstdlib;bundle-version="3.4.100",
- org.eclipse.ocl.examples.xtext.completeocl;bundle-version="3.5.0"
+ org.eclipse.ocl.examples.xtext.completeocl;bundle-version="3.5.0",
+ org.eclipse.jdt.annotation;bundle-version="[1.1.0,2.0.0)"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
+Export-Package: org.eclipse.qvtd.build.etl.tests

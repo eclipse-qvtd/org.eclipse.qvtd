@@ -197,7 +197,7 @@ public class MtcBroker {
 		this.qvtiUri = baseUri.appendFileExtension("qvtias").toString();
 		
 		this.configUri = URI.createURI(baseUri.toString() + "Config").appendFileExtension("xmi").toString();
-		this.scheduleUri = URI.createURI(baseUri.toString() + "Schdule").appendFileExtension("xmi").toString();
+		this.scheduleUri = URI.createURI(baseUri.toString() + "Schedule").appendFileExtension("xmi").toString();
 		candidateMetamodelContainmentTrees = new HashMap<String, List<PivotModel>>();
 		registerMetamodels(metaModelManager);
 	}
@@ -744,7 +744,6 @@ public class MtcBroker {
 		URL r = c.getResource(resource);
 		String uri = r.toURI().toString();
 	    return uri;
-	}
-	
+	}	
 
 }
