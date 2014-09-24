@@ -209,32 +209,14 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
 
 	@Override
     public @Nullable Object visitTransformation(@NonNull Transformation transformation) {
+		
+		// Find the __root__ mapping
     	for (Rule rule : transformation.getRule()) {
-    		QVTiEvaluationVisitor nv = ((QVTiEvaluationVisitor) undecoratedVisitor).createNestedEvaluator();
-    		try {
-	    		// Find bindings before invoking the mapping so all visitors are equal
-	    		Map<Variable, List<Object>>  mappingBindings = new HashMap<Variable, List<Object>>();
-	    		List<Variable> rootVariables = new ArrayList<Variable>();
-	    		List<List<Object>> rootBindings = new ArrayList<List<Object>>();
-	    		for (Domain domain : rule.getDomain()) {
-	                CoreDomain coreDomain = (CoreDomain)domain;
-	                TypedModel m = coreDomain.getTypedModel();
-					for (@SuppressWarnings("null")@NonNull Variable var : coreDomain.getGuardPattern().getVariable()) {
-	                	nv.getEvaluationEnvironment().add(var, null);
-	                	rootVariables.add(var);
-	                    Type varType = var.getType();
-						if (varType != null) {
-							List<Object> bindingValuesSet = ((QVTiModelManager)modelManager).getElementsByType(m, varType);
-		                	rootBindings.add(bindingValuesSet);
-		                    mappingBindings.put(var, bindingValuesSet);
-						}
-	                }
-	            }
-	    		doMappingCallRecursion(nv, rule, rootVariables, rootBindings, 0);
-	    		break;		// FIXME ?? multiple rules
-    		}
-    		finally {
+    		if (rule.getName().equals("__root__")) {
+    			QVTiEvaluationVisitor nv = ((QVTiEvaluationVisitor) undecoratedVisitor).createNestedEvaluator();
+    			rule.accept(nv);
     			nv.dispose();
+    			break;
     		}
     	}
         return true;
