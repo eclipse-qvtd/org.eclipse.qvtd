@@ -29,6 +29,8 @@ import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 
@@ -92,6 +94,22 @@ public class QVTiTransformationAnalysis
 						Type sourceType = source.getType();
 						if (sourceType != null) {
 							allInstancesTypes.add(sourceType);
+						}
+					}
+				}
+			}
+			else if (eObject instanceof MappingLoop) {
+				MappingLoop mappingLoop = (MappingLoop)eObject;
+				if (mappingLoop.getSource() instanceof OperationCallExp) {
+					OperationCallExp operationCallExp = (OperationCallExp) mappingLoop.getSource();
+					Operation referredOperation = operationCallExp.getReferredOperation();
+					if ((referredOperation != null) && (referredOperation.getOperationId() == allInstancesOperationId)) {
+						OCLExpression source = operationCallExp.getSource();
+						if (source != null) {
+							Type sourceType = source.getType();
+							if (sourceType != null) {
+								allInstancesTypes.add(sourceType);
+							}
 						}
 					}
 				}
