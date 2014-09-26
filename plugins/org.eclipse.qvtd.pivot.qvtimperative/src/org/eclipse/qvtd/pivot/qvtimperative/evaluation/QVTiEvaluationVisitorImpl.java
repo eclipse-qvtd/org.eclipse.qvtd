@@ -172,26 +172,31 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
      * @see uk.ac.york.qvtd.pivot.qvtimperative.evaluation.QVTimperativeAbstractEvaluationVisitorImpl#visitMapping(org.eclipse.qvtd.pivot.qvtimperative.Mapping)
      */
 	public @Nullable Object visitMapping(@NonNull Mapping mapping) {
-        GuardPattern gp = mapping.getGuardPattern();
+
+		
+		for (Domain domain : mapping.getDomain()) {
+            if (domain.isIsEnforceable()) {
+            	domain.accept(undecoratedVisitor);
+           }
+        }
+		/*
+		for (Domain domain : mapping.getDomain()) {
+        	if (domain.isIsCheckable()) {
+        		Object result = domain.accept(undecoratedVisitor);
+            	if (result != Boolean.TRUE) {
+            		return result;
+            	}
+       		}
+    	}
+    	*/		
+		GuardPattern gp = mapping.getGuardPattern();
         if (gp != null) {
         	Object result = gp.accept(undecoratedVisitor);
             if (result != Boolean.TRUE) {
             	return null;
             }
         }
-/*        for (Domain domain : mapping.getDomain()) {
-            if (domain.isIsCheckable()) {
-            	Object result = domain.accept(undecoratedVisitor);
-                if (result != Boolean.TRUE) {
-                	return result;
-                }
-           }
-        } */
-        for (Domain domain : mapping.getDomain()) {
-            if (domain.isIsEnforceable()) {
-            	domain.accept(undecoratedVisitor);
-           }
-        }
+
         /*result =*/ mapping.getBottomPattern().accept(undecoratedVisitor);
 //      if (result == Boolean.TRUE) {
 			MappingStatement mappingStatements = mapping.getMappingStatement();

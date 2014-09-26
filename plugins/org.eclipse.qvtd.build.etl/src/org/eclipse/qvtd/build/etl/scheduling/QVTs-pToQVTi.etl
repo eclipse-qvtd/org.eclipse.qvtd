@@ -271,6 +271,7 @@ rule DistinctData
         exp.referredOperation = getOclElementAllInstancesOp();
         exp.source = new QVTi!TypeExp;
         exp.source.referredType = dd.primaryArguments.first().variable.type;
+        exp.source.type = dd.primaryArguments.first().variable.type;
         exp.type = exp.referredOperation.type;
         loop.source = exp;
         // TODO what happens with multiple Distinct Datas?

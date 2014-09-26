@@ -69,6 +69,12 @@
       </domain>
       <guardPattern/>
       <bottomPattern>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph1">
+          <value xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
+              referredVariable="#qV.UpperToLower.graph2graph_LM.upperGraph.guard.g1"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
+              referredVariable="#qV.UpperToLower.graph2graph_LM.middle.bottom.g2g"/>
+        </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
           <value xsi:type="pivot:OperationCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.String.toLowerCase">
@@ -78,12 +84,6 @@
                   referredVariable="#qV.UpperToLower.graph2graph_LM.upperGraph.guard.g1"/>
             </source>
           </value>
-          <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-              referredVariable="#qV.UpperToLower.graph2graph_LM.middle.bottom.g2g"/>
-        </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph1">
-          <value xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
-              referredVariable="#qV.UpperToLower.graph2graph_LM.upperGraph.guard.g1"/>
           <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
               referredVariable="#qV.UpperToLower.graph2graph_LM.middle.bottom.g2g"/>
         </assignment>
@@ -144,12 +144,6 @@
           <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
               referredVariable="#qV.UpperToLower.node2node_LM.middle.bottom.n2n"/>
         </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Element2Element.owner">
-          <value xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
-              referredVariable="#qV.UpperToLower.node2node_LM.middle.guard.g2g"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-              referredVariable="#qV.UpperToLower.node2node_LM.middle.bottom.n2n"/>
-        </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label">
           <value xsi:type="pivot:OperationCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
               referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.String.toLowerCase">
@@ -159,6 +153,12 @@
                   referredVariable="#qV.UpperToLower.node2node_LM.upperGraph.guard.n1"/>
             </source>
           </value>
+          <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
+              referredVariable="#qV.UpperToLower.node2node_LM.middle.bottom.n2n"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Element2Element.owner">
+          <value xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
+              referredVariable="#qV.UpperToLower.node2node_LM.middle.guard.g2g"/>
           <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
               referredVariable="#qV.UpperToLower.node2node_LM.middle.bottom.n2n"/>
         </assignment>
@@ -213,6 +213,12 @@
         </predicate>
       </guardPattern>
       <bottomPattern>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.node2">
+          <value xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"
+              referredVariable="#qV.UpperToLower.node2node_MR.lowerGraph.bottom.n2"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
+              referredVariable="#qV.UpperToLower.node2node_MR.middle.guard.n2n"/>
+        </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Node.label">
           <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
               referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label">
@@ -221,12 +227,6 @@
           </value>
           <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"
               referredVariable="#qV.UpperToLower.node2node_MR.lowerGraph.bottom.n2"/>
-        </assignment>
-        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.node2">
-          <value xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Node"
-              referredVariable="#qV.UpperToLower.node2node_MR.lowerGraph.bottom.n2"/>
-          <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
-              referredVariable="#qV.UpperToLower.node2node_MR.middle.guard.n2n"/>
         </assignment>
         <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Element.graph">
           <value xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
