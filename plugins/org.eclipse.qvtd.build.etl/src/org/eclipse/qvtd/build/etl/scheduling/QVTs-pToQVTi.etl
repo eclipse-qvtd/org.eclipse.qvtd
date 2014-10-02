@@ -276,9 +276,14 @@ rule DistinctData
         loop.source = exp;
         // TODO what happens with multiple Distinct Datas?
         loop.body = new QVTi!MappingSequence;
-        // Add the mapping call first, so it will remain in the deepest loop
         loop.body.mappingStatements.add(dd.target.equivalent());
-        loop.body.mappingStatements.addAll(dd.target.distinctArguments.excluding(dd).select(da | da.secondaryArguments.size() < dd.secondaryArguments.size()).equivalent());
+        // To make loops nest, only one loop can be added. Which? The next one with the most secondary arguments
+        var nextDD = dd.target.distinctArguments.excluding(dd).select(da | da.secondaryArguments.size() < dd.secondaryArguments.size())
+                .sortBy(dd | dd.secondaryArguments.size()).last();
+        if (nextDD <> null) {
+            loop.body.mappingStatements.add(nextDD.equivalent());
+        }        
+        
         
     }
     
