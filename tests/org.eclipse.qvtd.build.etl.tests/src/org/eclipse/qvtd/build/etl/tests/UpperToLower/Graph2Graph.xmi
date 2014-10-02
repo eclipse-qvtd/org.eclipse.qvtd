@@ -3,49 +3,49 @@
   <simplegraph2graph:Graph2Graph name="graphone">
     <graph1 href="SimpleGraph.xmi#/"/>
     <graph2 href="SimpleGraphLower.xmi#/"/>
-    <element2Element xsi:type="simplegraph2graph:Node2Node" label="munich">
-      <node1 href="SimpleGraph.xmi#//@element.5"/>
-      <node2 href="SimpleGraphLower.xmi#//@element.4"/>
-    </element2Element>
-    <element2Element xsi:type="simplegraph2graph:Node2Node" label="stuttgart">
-      <node1 href="SimpleGraph.xmi#//@element.9"/>
-      <node2 href="SimpleGraphLower.xmi#//@element.3"/>
-    </element2Element>
-    <element2Element xsi:type="simplegraph2graph:Node2Node" label="york">
-      <node1 href="SimpleGraph.xmi#//@element.0"/>
-      <node2 href="SimpleGraphLower.xmi#//@element.2"/>
-    </element2Element>
-    <element2Element xsi:type="simplegraph2graph:Node2Node" label="innsbruck">
-      <node1 href="SimpleGraph.xmi#//@element.7"/>
-      <node2 href="SimpleGraphLower.xmi#//@element.0"/>
-    </element2Element>
     <element2Element xsi:type="simplegraph2graph:Node2Node" label="stansted">
       <node1 href="SimpleGraph.xmi#//@element.2"/>
       <node2 href="SimpleGraphLower.xmi#//@element.1"/>
     </element2Element>
-    <element2Element xsi:type="simplegraph2graph:Edge2Edge" target="/0/@element2Element.2" source="/0/@element2Element.4">
-      <edge1 href="SimpleGraph.xmi#//@element.3"/>
-      <edge2 href="SimpleGraphLower.xmi#//@element.9"/>
+    <element2Element xsi:type="simplegraph2graph:Node2Node" label="munich">
+      <node1 href="SimpleGraph.xmi#//@element.5"/>
+      <node2 href="SimpleGraphLower.xmi#//@element.0"/>
+    </element2Element>
+    <element2Element xsi:type="simplegraph2graph:Node2Node" label="stuttgart">
+      <node1 href="SimpleGraph.xmi#//@element.9"/>
+      <node2 href="SimpleGraphLower.xmi#//@element.2"/>
+    </element2Element>
+    <element2Element xsi:type="simplegraph2graph:Node2Node" label="innsbruck">
+      <node1 href="SimpleGraph.xmi#//@element.7"/>
+      <node2 href="SimpleGraphLower.xmi#//@element.3"/>
+    </element2Element>
+    <element2Element xsi:type="simplegraph2graph:Node2Node" label="york">
+      <node1 href="SimpleGraph.xmi#//@element.0"/>
+      <node2 href="SimpleGraphLower.xmi#//@element.4"/>
     </element2Element>
     <element2Element xsi:type="simplegraph2graph:Edge2Edge" target="/0/@element2Element.0" source="/0/@element2Element.4">
-      <edge1 href="SimpleGraph.xmi#//@element.4"/>
-      <edge2 href="SimpleGraphLower.xmi#//@element.6"/>
-    </element2Element>
-    <element2Element xsi:type="simplegraph2graph:Edge2Edge" target="/0/@element2Element.3" source="/0/@element2Element.0">
-      <edge1 href="SimpleGraph.xmi#//@element.6"/>
-      <edge2 href="SimpleGraphLower.xmi#//@element.8"/>
-    </element2Element>
-    <element2Element xsi:type="simplegraph2graph:Edge2Edge" target="/0/@element2Element.4" source="/0/@element2Element.1">
-      <edge1 href="SimpleGraph.xmi#//@element.10"/>
-      <edge2 href="SimpleGraphLower.xmi#//@element.10"/>
-    </element2Element>
-    <element2Element xsi:type="simplegraph2graph:Edge2Edge" target="/0/@element2Element.1" source="/0/@element2Element.3">
-      <edge1 href="SimpleGraph.xmi#//@element.8"/>
-      <edge2 href="SimpleGraphLower.xmi#//@element.7"/>
-    </element2Element>
-    <element2Element xsi:type="simplegraph2graph:Edge2Edge" target="/0/@element2Element.4" source="/0/@element2Element.2">
       <edge1 href="SimpleGraph.xmi#//@element.1"/>
       <edge2 href="SimpleGraphLower.xmi#//@element.5"/>
+    </element2Element>
+    <element2Element xsi:type="simplegraph2graph:Edge2Edge" target="/0/@element2Element.4" source="/0/@element2Element.0">
+      <edge1 href="SimpleGraph.xmi#//@element.3"/>
+      <edge2 href="SimpleGraphLower.xmi#//@element.6"/>
+    </element2Element>
+    <element2Element xsi:type="simplegraph2graph:Edge2Edge" target="/0/@element2Element.0" source="/0/@element2Element.2">
+      <edge1 href="SimpleGraph.xmi#//@element.10"/>
+      <edge2 href="SimpleGraphLower.xmi#//@element.8"/>
+    </element2Element>
+    <element2Element xsi:type="simplegraph2graph:Edge2Edge" target="/0/@element2Element.3" source="/0/@element2Element.1">
+      <edge1 href="SimpleGraph.xmi#//@element.6"/>
+      <edge2 href="SimpleGraphLower.xmi#//@element.10"/>
+    </element2Element>
+    <element2Element xsi:type="simplegraph2graph:Edge2Edge" target="/0/@element2Element.1" source="/0/@element2Element.0">
+      <edge1 href="SimpleGraph.xmi#//@element.4"/>
+      <edge2 href="SimpleGraphLower.xmi#//@element.9"/>
+    </element2Element>
+    <element2Element xsi:type="simplegraph2graph:Edge2Edge" target="/0/@element2Element.2" source="/0/@element2Element.3">
+      <edge1 href="SimpleGraph.xmi#//@element.8"/>
+      <edge2 href="SimpleGraphLower.xmi#//@element.7"/>
     </element2Element>
   </simplegraph2graph:Graph2Graph>
   <simplegraph2graph:Edge2Edge/>

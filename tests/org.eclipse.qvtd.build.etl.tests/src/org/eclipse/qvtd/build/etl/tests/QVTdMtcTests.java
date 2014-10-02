@@ -174,7 +174,7 @@ public class QVTdMtcTests extends LoadTestCase {
 		super.tearDown();
     }
     
-    /*
+    
     @Test
     public void testUmlToRdbms() throws Exception {
     	
@@ -196,9 +196,22 @@ public class QVTdMtcTests extends LoadTestCase {
         System.out.println(diagnostic.getSeverity());
         System.out.println(Diagnostic.ERROR);
         assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
+        
+        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(metaModelManager, "UmlToRdbms",mtc.getiModel().getTransformation());
+    	testEvaluator.saveTransformation(null);
+        testEvaluator.loadModel("uml", "SimpleUMLPeople.xmi");
+        testEvaluator.createModel("middle", "UML2RDBMS.xmi");
+        testEvaluator.createModel("rdbms", "SimpleRDBMSPeople.xmi");
+        //testEvaluator.loadReference("hls", "HLSNodeValidate.xmi");
+        System.out.println("Executing QVTi transformation on test models.");
+        testEvaluator.test();
+        testEvaluator.dispose();
+        
+        URI txURI = DomainUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
+        assertLoadable(txURI);
         mtc.disposeModels();
     }
-    */
+    
     @Test
     public void testUpperToLower() throws Exception {
     	
@@ -222,6 +235,7 @@ public class QVTdMtcTests extends LoadTestCase {
         testEvaluator.createModel("middle", "Graph2Graph.xmi");
         testEvaluator.createModel("lowerGraph", "SimpleGraphLower.xmi");
         testEvaluator.loadReference("lowerGraph", "SimpleGraphLowerValidate.xmi");
+        System.out.println("Executing QVTi transformation on test models.");
         testEvaluator.test();
         testEvaluator.dispose();
         
@@ -229,7 +243,7 @@ public class QVTdMtcTests extends LoadTestCase {
         assertLoadable(txURI);
         mtc.disposeModels();
     }
-    /*
+    
     @Test
     public void testHSVToHLS() throws Exception {
     	
@@ -247,9 +261,21 @@ public class QVTdMtcTests extends LoadTestCase {
         assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
         diagnostic = Diagnostician.INSTANCE.validate(mtc.getiModel().getRooteObject());
         assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
+        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(metaModelManager, "HSV2HLS",mtc.getiModel().getTransformation());
+    	testEvaluator.saveTransformation(null);
+        testEvaluator.loadModel("hsv", "HSVNode.xmi");
+        testEvaluator.createModel("middle", "HSV2HLS.xmi");
+        testEvaluator.createModel("hls", "HLSNode.xmi");
+        testEvaluator.loadReference("hls", "HLSNodeValidate.xmi");
+        System.out.println("Executing QVTi transformation on test models.");
+        testEvaluator.test();
+        testEvaluator.dispose();
+        
+        URI txURI = DomainUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
+        assertLoadable(txURI);
         mtc.disposeModels();
         
     }
-    */
+    
 	
 }

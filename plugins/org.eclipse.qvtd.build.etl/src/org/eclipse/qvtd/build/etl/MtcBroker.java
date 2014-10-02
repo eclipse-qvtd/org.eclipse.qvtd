@@ -186,7 +186,7 @@ public class MtcBroker {
 		// Derive all the required paths		
 		this.qvtcasUri = qvtcasUri;
 		this.owner = owner;
-		System.out.println(qvtcasUri);
+		System.out.println(URI.createURI(qvtcasUri).lastSegment());
 		
 		URI baseUri = URI.createURI(qvtcasUri).trimFileExtension();
 		this.qvtuUri = baseUri.appendFileExtension("qvtu.qvtcas").toString();
