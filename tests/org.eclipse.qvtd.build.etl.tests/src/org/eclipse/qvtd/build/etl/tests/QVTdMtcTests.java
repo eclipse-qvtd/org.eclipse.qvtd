@@ -40,7 +40,7 @@ public class QVTdMtcTests extends LoadTestCase {
 	{
 		public MyQVTiEnvironmentFactory(@Nullable EPackage.Registry reg, @NonNull MetaModelManager metaModelManager) {
 			super(reg, metaModelManager);
-	    	setEvaluationTracingEnabled(false);
+	    	setEvaluationTracingEnabled(true);
 		}
 	}
 	
@@ -79,7 +79,11 @@ public class QVTdMtcTests extends LoadTestCase {
 		 * @see #loadModel(String, String)
 		 */
 		public void createModel(@NonNull String typedModelName, @NonNull String modelFileName) {
-			createModel(typedModelName, getProjectFileURI(fileNamePrefix + modelFileName), null);
+			URI modelREsource = getProjectFileURI(fileNamePrefix + modelFileName);
+			if (modelREsource.segmentsList().contains("bin")) {
+				modelREsource = URI.createURI(modelREsource.toString().replaceAll("/bin/", "/src/"));
+			}
+			createModel(typedModelName, modelREsource, null);
 		}
 
 		/**
@@ -92,7 +96,11 @@ public class QVTdMtcTests extends LoadTestCase {
 		 * @see #createModel(String, String)
 		 */
 		public void loadModel(@NonNull String name, @NonNull String modelFileName) {
-			loadModel(name, getProjectFileURI(fileNamePrefix + modelFileName));
+			URI modelREsource = getProjectFileURI(fileNamePrefix + modelFileName);
+			if (modelREsource.segmentsList().contains("bin")) {
+				modelREsource = URI.createURI(modelREsource.toString().replaceAll("/bin/", "/src/"));
+			}
+			loadModel(name, modelREsource);
 		}
 
 		/**

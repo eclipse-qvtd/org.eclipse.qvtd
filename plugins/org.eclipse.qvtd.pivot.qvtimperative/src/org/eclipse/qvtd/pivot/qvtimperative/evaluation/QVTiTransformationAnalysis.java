@@ -97,7 +97,7 @@ public class QVTiTransformationAnalysis
 						}
 					}
 				}
-			}
+			}/* This should have been analised by the OperationCallExp search....
 			else if (eObject instanceof MappingLoop) {
 				MappingLoop mappingLoop = (MappingLoop)eObject;
 				if (mappingLoop.getSource() instanceof OperationCallExp) {
@@ -113,7 +113,7 @@ public class QVTiTransformationAnalysis
 						}
 					}
 				}
-			}
+			}*/
 		}
 		//
 		//	Second pass

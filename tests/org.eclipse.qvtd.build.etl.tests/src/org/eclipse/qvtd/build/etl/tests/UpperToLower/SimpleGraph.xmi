@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<simplegraph:Graph xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:simplegraph="http://cs.york.ac.uk/SimpleGraph/1.0" xsi:schemaLocation="http://cs.york.ac.uk/SimpleGraph/1.0 SimpleGraph.ecore" name="GraphOne">
+<simplegraph:Graph xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:simplegraph="http://www.eclipse.org/qvt/examples/0.1/SimpleGraph" xsi:schemaLocation="http://www.eclipse.org/qvt/examples/0.1/SimpleGraph SimpleGraph.ecore" name="GraphOne">
   <element xsi:type="simplegraph:Node" incoming="//@element.3" outgoing="//@element.1" label="York"/>
   <element xsi:type="simplegraph:Edge" target="//@element.2" source="//@element.0"/>
   <element xsi:type="simplegraph:Node" incoming="//@element.1 //@element.10" outgoing="//@element.4 //@element.3" label="Stansted"/>

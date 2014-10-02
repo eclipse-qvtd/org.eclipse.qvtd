@@ -16,12 +16,4 @@
   <eCoreContainemntTree:Node EClassName="Edge" parent="/5">
     <superTypes>Element</superTypes>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="simplegraph" children="/9"/>
-  <eCoreContainemntTree:Node EClassName="Graph" parent="/8" children="/10 /11"/>
-  <eCoreContainemntTree:Node EClassName="Node" parent="/9">
-    <superTypes>Element</superTypes>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="Edge" parent="/9">
-    <superTypes>Element</superTypes>
-  </eCoreContainemntTree:Node>
 </xmi:XMI>
