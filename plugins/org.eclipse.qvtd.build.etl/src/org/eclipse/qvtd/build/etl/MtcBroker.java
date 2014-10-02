@@ -22,8 +22,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.epsilon.common.util.StringProperties;
 import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
@@ -297,7 +295,7 @@ public class MtcBroker {
 	private PivotModel qvtcToQvtu(EmfModel cModel) throws QvtMtcExecutionException {
 
 		PivotModel uModel = null;
-		uModel = createModel(qvtuUri, "QVTu", "QVT", QVTC_FULL_NS, false, true, false);
+		uModel = createASModel(qvtuUri, "QVTu", "QVT", QVTC_FULL_NS, false, true, false);
 		if (cModel != null && uModel != null  ) {
 			FlockTask flock = null;
 			try {
@@ -328,7 +326,7 @@ public class MtcBroker {
 	private PivotModel qvtuToQvtm(PivotModel uModel) throws QvtMtcExecutionException {
 
 		PivotModel mModel = null;
-		mModel = createModel(qvtmUri, "QVTm", "QVT", QVTC_FULL_NS, false, true, false);
+		mModel = createASModel(qvtmUri, "QVTm", "QVT", QVTC_FULL_NS, false, true, false);
 		if (uModel != null && mModel != null  ) {
 			FlockTask flock = null;
 			try {
@@ -359,7 +357,7 @@ public class MtcBroker {
 	private PivotModel qvtmToQvtp(PivotModel mModel) throws QvtMtcExecutionException {
 		
 		PivotModel pModel = null;
-		pModel = createModel(partitionUri, "QVTp", "QVT", QVTI_FULL_NS, false, true, false);
+		pModel = createASModel(partitionUri, "QVTp", "QVT", QVTI_FULL_NS, false, true, false);
 		if (mModel != null && pModel != null  ) {
 			EtlTask etl = null;
 			try {
@@ -450,7 +448,7 @@ public class MtcBroker {
 	private PivotModel qvtpQvtsToQvti(PivotModel pModel, PivotModel sModel) throws QvtMtcExecutionException {
 		
 		PivotModel iModel = null;
-		iModel = createModel(qvtiUri, "QVTi", "QVT", QVTI_FULL_NS, false, true, false);
+		iModel = createASModel(qvtiUri, "QVTi", "QVT", QVTI_FULL_NS, false, true, false);
 		if (pModel != null && sModel != null && iModel != null  ) {
 			EtlTask etl = null;
 			try {
@@ -480,6 +478,7 @@ public class MtcBroker {
 	private void createContainmentTrees() throws QvtMtcExecutionException  {
 		
 		EolTask eol = null;
+		List<String> loadedUris = new ArrayList<String>();
 		try {
 			eol = new EolTask(java.net.URI.create(getResourceURI(ECORE_TO_TREE_EOL)));
 		} catch (URISyntaxException e) {
@@ -487,7 +486,7 @@ public class MtcBroker {
 		}
 		if (eol != null) {
 			Map<String, List<String>> mms = getCandidateMetamodels();
-			Map<PivotModel, PivotModel> emfModels = new HashMap<PivotModel, PivotModel>();
+			//Map<PivotModel, PivotModel> emfModels = new HashMap<PivotModel, PivotModel>();
 			Iterator<Map.Entry<String, List<String>>> it = mms.entrySet().iterator();
 		    while (it.hasNext()) {
 		        Map.Entry<String, List<String>> pairs = it.next();
@@ -502,7 +501,8 @@ public class MtcBroker {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} finally {
-						if (modelUri != null) {
+						if (modelUri != null && !loadedUris.contains(modelUri)) {
+							loadedUris.add(modelUri);
 							PivotModel mmModel = null;
 							PivotModel treeModel = null;
 							mmModel = createModel(changeResourceToSource(modelUri), "mm", "", ECORE_URI, true, false, true);
@@ -583,7 +583,6 @@ public class MtcBroker {
 	private void registerMetamodels(MetaModelManager metaModelManager) throws QvtMtcExecutionException {
 		
 		String path = null;
-		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource r;
 		EObject eObject;
 		// Configuration Metamodel
@@ -593,7 +592,7 @@ public class MtcBroker {
 			throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
 		} finally {
 			if (path != null) {
-				r = resourceSet.getResource(URI.createURI(path, false), true);
+				r = metaModelManager.getExternalResourceSet().getResource(URI.createURI(path, false), true);
 				eObject = r.getContents().get(0);
 				if (eObject instanceof EPackage) {
 				    EPackage p = (EPackage)eObject;
@@ -608,7 +607,7 @@ public class MtcBroker {
 			throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
 		} finally {
 			if (path != null) {
-				r = resourceSet.getResource(URI.createURI(path, false), true);
+				r = metaModelManager.getExternalResourceSet().getResource(URI.createURI(path, false), true);
 				eObject = r.getContents().get(0);
 				if (eObject instanceof EPackage) {
 				    EPackage p = (EPackage)eObject;
@@ -625,7 +624,7 @@ public class MtcBroker {
 			throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
 		} finally {
 			if (path != null) {
-				r = resourceSet.getResource(URI.createURI(path, false), true);
+				r = metaModelManager.getExternalResourceSet().getResource(URI.createURI(path, false), true);
 				eObject = r.getContents().get(0);
 				if (eObject instanceof EPackage) {
 				    EPackage p = (EPackage)eObject;
@@ -653,7 +652,7 @@ public class MtcBroker {
 	private PivotModel createModel(String modeUri, String modelName, String modelAliases, String metamodelUris,
 				boolean readOnLoad, boolean storeOnDispoal, boolean cached) throws QvtMtcExecutionException {
 	
-		PivotModel model = new PivotModel(metaModelManager);
+		PivotModel model = new PivotModel(metaModelManager, false);
 		StringProperties properties = new StringProperties();
 		properties.put(EmfModel.PROPERTY_NAME, modelName);
 		properties.put(EmfModel.PROPERTY_ALIASES, modelAliases);
@@ -664,12 +663,34 @@ public class MtcBroker {
 		properties.put(EmfModel.PROPERTY_CACHED, String.valueOf(cached));
 		properties.put(EmfModel.PROPERTY_EXPAND, String.valueOf(false));
 		try {
-			model.load(properties, null);
+			model.load(properties, "");
 		} catch (EolModelLoadingException e) {
 			throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
 		}
 		return model;
 	}
+	
+	
+	private PivotModel createASModel(String modeUri, String modelName, String modelAliases, String metamodelUris,
+			boolean readOnLoad, boolean storeOnDispoal, boolean cached) throws QvtMtcExecutionException {
+
+	PivotModel model = new PivotModel(metaModelManager, true);
+	StringProperties properties = new StringProperties();
+	properties.put(EmfModel.PROPERTY_NAME, modelName);
+	properties.put(EmfModel.PROPERTY_ALIASES, modelAliases);
+	properties.put(EmfModel.PROPERTY_METAMODEL_URI, metamodelUris);
+	properties.put(EmfModel.PROPERTY_MODEL_URI, modeUri);
+	properties.put(EmfModel.PROPERTY_READONLOAD, String.valueOf(readOnLoad));
+	properties.put(EmfModel.PROPERTY_STOREONDISPOSAL, String.valueOf(storeOnDispoal));
+	properties.put(EmfModel.PROPERTY_CACHED, String.valueOf(cached));
+	properties.put(EmfModel.PROPERTY_EXPAND, String.valueOf(false));
+	try {
+		model.load(properties, "");
+	} catch (EolModelLoadingException e) {
+		throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
+	}
+	return model;
+}
 	
 	/**
 	 * Change resource to source. 

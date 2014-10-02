@@ -44,13 +44,16 @@ public class PivotModel extends EmfModel {
 	/** The meta model manager. */
 	private MetaModelManager metaModelManager;
 	
+	private boolean isASResource;
+	
 	/**
 	 * Instantiates a new pivot model.
 	 *
 	 * @param metaModelManager the meta model manager
 	 */
-	public PivotModel(MetaModelManager metaModelManager) {
+	public PivotModel(MetaModelManager metaModelManager, boolean isASResource) {
 		
+		this.isASResource = isASResource;
 		this.metaModelManager = metaModelManager;
 	}
 	
@@ -60,7 +63,12 @@ public class PivotModel extends EmfModel {
 	@Override
 	public void loadModelFromUri() throws EolModelLoadingException {
 		
-		Resource model = metaModelManager.getExternalResourceSet().createResource(modelUri);// getResource(modelUri, false);
+		Resource model = null;
+		if (isASResource) {
+			model  = metaModelManager.getASResourceSet().createResource(modelUri);
+		} else {
+			model = metaModelManager.getExternalResourceSet().createResource(modelUri);
+		}
 		if (this.readOnLoad) {
 			try {
 				model.load(null);
