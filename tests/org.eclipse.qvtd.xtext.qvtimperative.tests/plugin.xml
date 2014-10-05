@@ -11,7 +11,7 @@
       <package
             uri="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS"
             class="test.umltordbms.UmltordbmsPackage"
-            genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.genmodel"/>
+            genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassToRDBMS/UMLtoRDBMS.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
@@ -26,7 +26,7 @@
       <package
             uri="http://http://www.eclipse.org/qvt/examples/0.1/simpleUML"
             class="test.simpleuml.SimpleumlPackage"
-            genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.genmodel"/>
+            genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassToRDBMS/UMLtoRDBMS.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
@@ -41,7 +41,7 @@
       <package
             uri="http://http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS"
             class="test.simplerdbms.SimplerdbmsPackage"
-            genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/models/ClassToRDBMS/UMLtoRDBMS.genmodel"/>
+            genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassToRDBMS/UMLtoRDBMS.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
