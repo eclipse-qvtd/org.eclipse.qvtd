@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qvti:ImperativeModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:pivot="http://www.eclipse.org/ocl/3.1.0/Pivot" xmlns:qvtb="http://www.eclipse.org/qvt/0.9/QVTbase"
+    xmlns:qvtcb="http://www.eclipse.org/qvt/0.9/QVTcoreBase" xmlns:qvti="http://www.eclipse.org/qvt/0.9/QVTimperative"
+    xsi:schemaLocation="http://www.eclipse.org/ocl/3.1.0/Pivot java://org.eclipse.ocl.examples.pivot.PivotPackage http://www.eclipse.org/qvt/0.9/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/0.9/QVTcoreBase java://org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage http://www.eclipse.org/qvt/0.9/QVTimperative java://org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
+    name="Expressions.qvti" externalURI="platform:/resource/org.eclipse.qvtd.xtext.qvtimperative.tests/src/org/eclipse/qvtd/xtext/qvtimperative/tests/Expressions/Expressions.qvti">
+  <nestedPackage xsi:type="qvtb:Transformation" xmi:id="T.Expressions" name="Expressions"
+      superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclElement">
+    <modelParameter xmi:id="qT.Expressions.source" name="source" usedPackage="http://www.eclipse.org/emf/2002/Ecore.oclas#P.ecore"/>
+    <modelParameter xmi:id="qT.Expressions.target" name="target" usedPackage="http://www.eclipse.org/emf/2002/Ecore.oclas#P.ecore"/>
+    <modelParameter xmi:id="qT.Expressions.middle" name="middle" usedPackage="http://www.eclipse.org/emf/2002/Ecore.oclas#P.ecore"/>
+    <rule xsi:type="qvti:Mapping" xmi:id="m.Expressions.expressionsLM" name="expressionsLM">
+      <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="false"
+          typedModel="#qT.Expressions.source">
+        <guardPattern>
+          <variable xmi:id="qV.Expressions.expressionsLM.source.guard.dummy" name="dummy"
+              type="http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EPackage"/>
+        </guardPattern>
+        <bottomPattern/>
+      </domain>
+      <domain xsi:type="qvtcb:CoreDomain" isCheckable="false" isEnforceable="true"
+          typedModel="#qT.Expressions.middle">
+        <guardPattern/>
+        <bottomPattern/>
+      </domain>
+      <guardPattern/>
+      <bottomPattern/>
+      <mappingStatement xsi:type="qvti:MappingSequence">
+        <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m.Expressions.expressionsMR">
+          <binding boundVariable="#qV.Expressions.expressionsMR.middle.guard.binaryPrecedence">
+            <value xsi:type="pivot:OperationCallExp" name="*" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Integer"
+                referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.Integer.%42%..ocl.OclSelf">
+              <source xsi:type="pivot:OperationCallExp" name="+" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Integer"
+                  referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.Integer.%43%..ocl.OclSelf">
+                <source xsi:type="pivot:UnlimitedNaturalLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#UnlimitedNatural"
+                    unlimitedNaturalSymbol="1"/>
+                <argument xsi:type="pivot:UnlimitedNaturalLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#UnlimitedNatural"
+                    unlimitedNaturalSymbol="2"/>
+              </source>
+              <argument xsi:type="pivot:OperationCallExp" name="+" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Integer"
+                  referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.Integer.%43%..ocl.OclSelf">
+                <source xsi:type="pivot:OperationCallExp" name="*" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Integer"
+                    referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.Integer.%42%..ocl.OclSelf">
+                  <source xsi:type="pivot:UnlimitedNaturalLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#UnlimitedNatural"
+                      unlimitedNaturalSymbol="3"/>
+                  <argument xsi:type="pivot:UnlimitedNaturalLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#UnlimitedNatural"
+                      unlimitedNaturalSymbol="5"/>
+                </source>
+                <argument xsi:type="pivot:UnlimitedNaturalLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#UnlimitedNatural"
+                    unlimitedNaturalSymbol="4"/>
+              </argument>
+            </value>
+          </binding>
+          <binding boundVariable="#qV.Expressions.expressionsMR.middle.guard.unaryPrecedence">
+            <value xsi:type="pivot:OperationCallExp" name="*" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Integer"
+                referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.Integer.%42%..ocl.OclSelf">
+              <source xsi:type="pivot:OperationCallExp" name="-" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Integer"
+                  referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.Integer.%45%">
+                <source xsi:type="pivot:UnlimitedNaturalLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#UnlimitedNatural"
+                    unlimitedNaturalSymbol="1"/>
+              </source>
+              <argument xsi:type="pivot:OperationCallExp" name="-" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Integer"
+                  referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.Integer.%45%">
+                <source xsi:type="pivot:OperationCallExp" name="-" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Integer"
+                    referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.Integer.%45%">
+                  <source xsi:type="pivot:UnlimitedNaturalLiteralExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#UnlimitedNatural"
+                      unlimitedNaturalSymbol="1"/>
+                </source>
+              </argument>
+            </value>
+          </binding>
+        </mappingStatements>
+      </mappingStatement>
+    </rule>
+    <rule xsi:type="qvti:Mapping" xmi:id="m.Expressions.expressionsMR" name="expressionsMR">
+      <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="false"
+          typedModel="#qT.Expressions.middle">
+        <guardPattern>
+          <variable xmi:id="qV.Expressions.expressionsMR.middle.guard.binaryPrecedence"
+              name="binaryPrecedence" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclAny"/>
+          <variable xmi:id="qV.Expressions.expressionsMR.middle.guard.unaryPrecedence"
+              name="unaryPrecedence" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclAny"/>
+        </guardPattern>
+        <bottomPattern/>
+      </domain>
+      <domain xsi:type="qvtcb:CoreDomain" isCheckable="false" isEnforceable="true"
+          typedModel="#qT.Expressions.target">
+        <guardPattern/>
+        <bottomPattern/>
+      </domain>
+      <guardPattern/>
+      <bottomPattern/>
+    </rule>
+  </nestedPackage>
+</qvti:ImperativeModel>

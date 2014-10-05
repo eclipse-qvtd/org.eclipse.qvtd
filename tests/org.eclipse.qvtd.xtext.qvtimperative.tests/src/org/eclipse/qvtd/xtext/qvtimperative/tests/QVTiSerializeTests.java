@@ -131,9 +131,9 @@ public class QVTiSerializeTests extends LoadTestCase
 		doSerializeRoundTrip("ClassToRDBMS/ClassToRDBMSSchedule");
 	}
 	
-//	public void testSerialize_Expressions() throws Exception {
-//		doSerializeRoundTrip("Expressions/Expressions");
-//	}
+	public void testSerialize_Expressions() throws Exception {
+		doSerializeRoundTrip("Expressions/Expressions");
+	}
 	
 	public void testSerialize_Graph2GraphHierarchical() throws Exception {
 		doSerializeRoundTrip("Graph2GraphHierarchical/Graph2GraphHierarchical");
@@ -146,7 +146,8 @@ public class QVTiSerializeTests extends LoadTestCase
 	public void testSerialize_HSV2HLS_qvti() throws Exception {
 		doSerializeRoundTrip("HSV2HLS/HSV2HLS");
 	}
-	
+
+	// Disabled since qvtias has bad (Middle)PropertyCallExp
 //	public void testSerialize_Uml2Rdbms_qvti() throws Exception {
 //		doSerializeRoundTrip("UML2RDBMS/UmlToRdbms");
 //	}

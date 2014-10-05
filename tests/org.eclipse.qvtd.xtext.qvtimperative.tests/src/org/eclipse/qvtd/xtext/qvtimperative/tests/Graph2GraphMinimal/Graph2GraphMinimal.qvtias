@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qvti:ImperativeModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:pivot="http://www.eclipse.org/ocl/3.1.0/Pivot" xmlns:qvtb="http://www.eclipse.org/qvt/0.9/QVTbase"
+    xmlns:qvtcb="http://www.eclipse.org/qvt/0.9/QVTcoreBase" xmlns:qvti="http://www.eclipse.org/qvt/0.9/QVTimperative"
+    xsi:schemaLocation="http://www.eclipse.org/ocl/3.1.0/Pivot java://org.eclipse.ocl.examples.pivot.PivotPackage http://www.eclipse.org/qvt/0.9/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/0.9/QVTcoreBase java://org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage http://www.eclipse.org/qvt/0.9/QVTimperative java://org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
+    name="Graph2GraphMinimal.qvti" externalURI="file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/Graph2GraphMinimal/Graph2GraphMinimal.qvti">
+  <nestedPackage xsi:type="qvtb:Transformation" xmi:id="T.CopyGraphMinimal" name="CopyGraphMinimal"
+      superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclElement">
+    <modelParameter xmi:id="qT.CopyGraphMinimal.upperGraph" name="upperGraph" usedPackage="SimpleGraph.ecore.oclas#P.simplegraph"/>
+    <modelParameter xmi:id="qT.CopyGraphMinimal.lowerGraph" name="lowerGraph" usedPackage="SimpleGraph.ecore.oclas#P.simplegraph"/>
+    <modelParameter xmi:id="qT.CopyGraphMinimal.middle" name="middle" usedPackage="SimpleGraph2Graph.ecore.oclas#P.simplegraph2graph"/>
+    <rule xsi:type="qvti:Mapping" xmi:id="m.CopyGraphMinimal.upper2lowerLM" name="upper2lowerLM">
+      <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="false"
+          typedModel="#qT.CopyGraphMinimal.upperGraph">
+        <guardPattern>
+          <variable xmi:id="qV.CopyGraphMinimal.upper2lowerLM.upperGraph.guard.g1"
+              name="g1" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
+        </guardPattern>
+        <bottomPattern/>
+      </domain>
+      <domain xsi:type="qvtcb:CoreDomain" isCheckable="false" isEnforceable="true"
+          typedModel="#qT.CopyGraphMinimal.middle">
+        <guardPattern/>
+        <bottomPattern>
+          <realizedVariable xmi:id="qV.CopyGraphMinimal.upper2lowerLM.middle.bottom.g2g"
+              name="g2g" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"/>
+        </bottomPattern>
+      </domain>
+      <guardPattern/>
+      <bottomPattern>
+        <assignment xsi:type="qvti:MiddlePropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph1">
+          <value xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
+              referredVariable="#qV.CopyGraphMinimal.upper2lowerLM.upperGraph.guard.g1"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
+              referredVariable="#qV.CopyGraphMinimal.upper2lowerLM.middle.bottom.g2g"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
+          <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+              referredProperty="SimpleGraph.ecore.oclas#p.simplegraph.Graph.name">
+            <source xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
+                referredVariable="#qV.CopyGraphMinimal.upper2lowerLM.upperGraph.guard.g1"/>
+          </value>
+          <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
+              referredVariable="#qV.CopyGraphMinimal.upper2lowerLM.middle.bottom.g2g"/>
+        </assignment>
+      </bottomPattern>
+      <mappingStatement xsi:type="qvti:MappingSequence">
+        <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m.CopyGraphMinimal.upper2lowerMR">
+          <binding boundVariable="#qV.CopyGraphMinimal.upper2lowerMR.middle.guard.g2gout">
+            <value xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
+                referredVariable="#qV.CopyGraphMinimal.upper2lowerLM.middle.bottom.g2g"/>
+          </binding>
+        </mappingStatements>
+      </mappingStatement>
+    </rule>
+    <rule xsi:type="qvti:Mapping" xmi:id="m.CopyGraphMinimal.upper2lowerMR" name="upper2lowerMR">
+      <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="false"
+          typedModel="#qT.CopyGraphMinimal.middle">
+        <guardPattern>
+          <variable xmi:id="qV.CopyGraphMinimal.upper2lowerMR.middle.guard.g2gout"
+              name="g2gout" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"/>
+        </guardPattern>
+        <bottomPattern/>
+      </domain>
+      <domain xsi:type="qvtcb:CoreDomain" isCheckable="false" isEnforceable="true"
+          typedModel="#qT.CopyGraphMinimal.lowerGraph">
+        <guardPattern/>
+        <bottomPattern>
+          <realizedVariable xmi:id="qV.CopyGraphMinimal.upper2lowerMR.lowerGraph.bottom.g2"
+              name="g2" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"/>
+        </bottomPattern>
+      </domain>
+      <guardPattern/>
+      <bottomPattern>
+        <assignment xsi:type="qvti:MiddlePropertyAssignment" isDefault="false" targetProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph2">
+          <value xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
+              referredVariable="#qV.CopyGraphMinimal.upper2lowerMR.lowerGraph.bottom.g2"/>
+          <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
+              referredVariable="#qV.CopyGraphMinimal.upper2lowerMR.middle.guard.g2gout"/>
+        </assignment>
+        <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="SimpleGraph.ecore.oclas#p.simplegraph.Graph.name">
+          <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+              referredProperty="SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
+            <source xsi:type="pivot:VariableExp" type="SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
+                referredVariable="#qV.CopyGraphMinimal.upper2lowerMR.middle.guard.g2gout"/>
+          </value>
+          <slotExpression xsi:type="pivot:VariableExp" type="SimpleGraph.ecore.oclas#T.simplegraph.Graph"
+              referredVariable="#qV.CopyGraphMinimal.upper2lowerMR.lowerGraph.bottom.g2"/>
+        </assignment>
+      </bottomPattern>
+    </rule>
+  </nestedPackage>
+</qvti:ImperativeModel>
