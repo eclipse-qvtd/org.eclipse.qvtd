@@ -1,0 +1,103 @@
+/*******************************************************************************
+ * Copyright (c) 2007,2008 Tata Consultancy Services and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     TCS - initial implementation for ModelMorf
+ *     E.D.Willink - alignment with evolved specification
+ *******************************************************************************/
+import UMLMM : 'ClassMM_IN.emof'::ClassMM;
+import ABS2CONC : 'ClassAbstractToConcrete.ecore'::abs2conc;
+
+transformation AbstractToConcrete {
+    uml1 imports UMLMM;
+    uml2 imports UMLMM;
+    imports ABS2CONC;
+}
+
+map AbstractClassToConcreteClass in AbstractToConcrete {
+    uml1 (cc1 : Class, ac : Class |
+        cc1.inheritsFrom = ac;
+        ac.isAbstract;)
+    {
+        
+    } 
+    enforce uml2 ()
+    {
+        realize cc2 : Class | 
+    }
+    where () {
+        realize p2c : ParentToChild |
+        p2c.parent := ac;
+        p2c.class2 := cc2;
+    }
+}
+
+map OperationToOperation in AbstractToConcrete {
+    uml1 (pc : Class, aco:Operation |
+        pc.isAbstract;
+        aco.class = pc;)
+    {
+        
+    } 
+    enforce uml2 (cc2 : Class | )
+    {
+        realize cco:Operation |
+        cco.class := cc2;
+    }
+    where (p2c : ParentToChild |
+        p2c.parent = pc;
+        p2c.class2 = cc2;)
+    {
+        realize o2o : OperationToOperation |
+        o2o.op1 := aco;
+        o2o.op2 := cco;
+        o2o.class := p2c;
+    }
+    map 
+    {
+        where() {
+            o2o.name := aco.name;
+            o2o.name := cco.name; 
+            aco.name := o2o.name;
+            cco.name := o2o.name;
+        }    
+    }
+}
+
+map ParameterToParameter in AbstractToConcrete {
+    uml1 (aco:Operation, acop:Parameter |)
+    {
+        acop.operation = aco;
+    }
+    uml2 (cco:Operation, ccop:Parameter |)
+    {
+        ccop.operation = cco;
+    }
+    where (o2o : OperationToOperation |
+        o2o.op1 = aco;
+        o2o.op2 = cco;)
+    {
+        realize p2p : ParameterToParameter |
+        p2p.param1 := acop;
+        p2p.param2 := ccop;
+        p2p.operation := o2o;        
+    }
+    map
+    {
+        where ()
+        {
+            p2p.name := acop.name;        
+            p2p.name := ccop.name;
+            acop.name := p2p.name;        
+            ccop.name := p2p.name;
+            p2p.type := acop.type;        
+            p2p.type := ccop.type;
+            acop.type := p2p.type;        
+            ccop.type := p2p.type;
+        }
+    }
+}

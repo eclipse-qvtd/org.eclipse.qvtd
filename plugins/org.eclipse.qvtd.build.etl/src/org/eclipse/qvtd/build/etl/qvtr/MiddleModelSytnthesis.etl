@@ -1,0 +1,21 @@
+
+rule RelationToEClass
+    transform r : QVTr!Relation
+    to ec : Ecore!EClass {
+        ec.name = "T" + r.name;
+        // One association per domain root varibale.
+        var exps = r.domain.collect(d | d.pattern.templateExpression);
+        ec.eRefernces.addAll(te.equiavlent());
+        // Can the recursion be done with a closure?
+        ec.eRefernces.addAll(exps.closure(te | te.part.collect(pt | c.value)).equivalent());
+    }
+
+rule DomainToRefernce
+    transform ote : QVTr!ObjectTemplateExp
+    to er : ECore!EReference {
+        
+        er.containment = false;
+        er.name = ote.bindsTo.name; 
+        eReferenceType = ote.bindsTo.type;
+        
+    }
