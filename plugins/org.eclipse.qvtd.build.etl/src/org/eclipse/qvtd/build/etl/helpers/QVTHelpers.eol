@@ -735,14 +735,14 @@ operation QVT!Variable hasRelation(other : QVT!Variable) : Bag {
  *  direction and mode in which the transformation was invoked
  */ 
 operation getUnidirComment() : String {
-    var comment : String = "/* ";
+    var comment : String = "";
     if (config!Configuration.all.first().mode == config!Mode#enforce) {
         comment = comment + "Enforce ";
     } else {
         comment = comment + "Check ";
     }
     comment = comment + config!Configuration.all.first().inputDirection.name + " to ";
-    comment = comment + config!Configuration.all.first().outputDirection.collect(d | d.name).concat(",") + " */";
+    comment = comment + config!Configuration.all.first().outputDirection.collect(d | d.name).concat(",") + "";
     return comment; 
 }
 

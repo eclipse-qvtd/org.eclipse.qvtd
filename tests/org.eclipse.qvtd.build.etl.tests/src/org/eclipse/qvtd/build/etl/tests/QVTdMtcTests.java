@@ -193,8 +193,6 @@ public class QVTdMtcTests extends LoadTestCase {
         diagnostic = Diagnostician.INSTANCE.validate(mtc.getsModel().getRooteObject());
         assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
         diagnostic = Diagnostician.INSTANCE.validate(mtc.getiModel().getRooteObject());
-        System.out.println(diagnostic.getSeverity());
-        System.out.println(Diagnostic.ERROR);
         assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
         
         MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(metaModelManager, "UmlToRdbms",mtc.getiModel().getTransformation());
@@ -211,7 +209,7 @@ public class QVTdMtcTests extends LoadTestCase {
         assertLoadable(txURI);
         mtc.disposeModels();
     }
-    
+    /*
     @Test
     public void testUpperToLower() throws Exception {
     	
@@ -276,6 +274,6 @@ public class QVTdMtcTests extends LoadTestCase {
         mtc.disposeModels();
         
     }
-    
+    */
 	
 }
