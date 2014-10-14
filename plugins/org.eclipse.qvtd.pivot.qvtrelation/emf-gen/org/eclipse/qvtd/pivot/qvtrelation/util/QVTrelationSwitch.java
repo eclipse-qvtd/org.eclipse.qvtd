@@ -14,15 +14,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
-import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.FeatureCallExp;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
-import org.eclipse.ocl.examples.pivot.NavigationCallExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.ParameterableElement;
-import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.ReferringElement;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
@@ -36,7 +32,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
-import org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
@@ -117,23 +112,6 @@ public class QVTrelationSwitch<T> extends Switch<T> {
 				T result = caseKey(key);
 				if (result == null) result = caseElement(key);
 				if (result == null) result = caseVisitable(key);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTrelationPackage.OPPOSITE_PROPERTY_CALL_EXP: {
-				OppositePropertyCallExp oppositePropertyCallExp = (OppositePropertyCallExp)theEObject;
-				T result = caseOppositePropertyCallExp(oppositePropertyCallExp);
-				if (result == null) result = casePropertyCallExp(oppositePropertyCallExp);
-				if (result == null) result = caseNavigationCallExp(oppositePropertyCallExp);
-				if (result == null) result = caseReferringElement(oppositePropertyCallExp);
-				if (result == null) result = caseFeatureCallExp(oppositePropertyCallExp);
-				if (result == null) result = caseCallExp(oppositePropertyCallExp);
-				if (result == null) result = caseOCLExpression(oppositePropertyCallExp);
-				if (result == null) result = caseTypedElement(oppositePropertyCallExp);
-				if (result == null) result = caseNamedElement(oppositePropertyCallExp);
-				if (result == null) result = caseElement(oppositePropertyCallExp);
-				if (result == null) result = caseNameable(oppositePropertyCallExp);
-				if (result == null) result = caseVisitable(oppositePropertyCallExp);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -249,21 +227,6 @@ public class QVTrelationSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseKey(Key object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Opposite Property Call Exp</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Opposite Property Call Exp</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseOppositePropertyCallExp(OppositePropertyCallExp object) {
 		return null;
 	}
 
@@ -478,51 +441,6 @@ public class QVTrelationSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Call Exp</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Call Exp</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCallExp(CallExp object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Feature Call Exp</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Feature Call Exp</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFeatureCallExp(FeatureCallExp object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Navigation Call Exp</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Navigation Call Exp</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNavigationCallExp(NavigationCallExp object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Referring Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -534,21 +452,6 @@ public class QVTrelationSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseReferringElement(ReferringElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Property Call Exp</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Property Call Exp</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePropertyCallExp(PropertyCallExp object) {
 		return null;
 	}
 

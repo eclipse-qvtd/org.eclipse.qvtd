@@ -82,9 +82,9 @@ public class QVTPivot2FlatQVTPivot
 				if (eObject instanceof EPackage) {
 					EPackage ePackage = (EPackage)eObject;
 					for (EClassifier eClassifier : new ArrayList<EClassifier>(ePackage.getEClassifiers()))
-						if (!"OppositePropertyCallExp".equals(eClassifier.getName()) || "pivot".equals(ePackage.getName())) {
+//						if (!"OppositePropertyCallExp".equals(eClassifier.getName()) || "pivot".equals(ePackage.getName())) {
 							flatPackage.getEClassifiers().add(eClassifier);
-						}
+//						}
 				}
 			}
 		}

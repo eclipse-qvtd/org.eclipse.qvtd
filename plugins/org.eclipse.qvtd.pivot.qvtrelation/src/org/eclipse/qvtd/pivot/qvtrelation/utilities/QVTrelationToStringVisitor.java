@@ -13,7 +13,6 @@ package org.eclipse.qvtd.pivot.qvtrelation.utilities;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
-import org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
@@ -40,11 +39,6 @@ public class QVTrelationToStringVisitor extends QVTtemplateToStringVisitor imple
 	}
 
 	public String visitKey(@NonNull Key object) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String visitOppositePropertyCallExp(@NonNull OppositePropertyCallExp object) {
 		// TODO Auto-generated method stub
 		return null;
 	}

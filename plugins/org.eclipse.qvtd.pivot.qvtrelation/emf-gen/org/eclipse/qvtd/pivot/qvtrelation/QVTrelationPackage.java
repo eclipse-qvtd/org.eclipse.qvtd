@@ -230,142 +230,6 @@ public interface QVTrelationPackage extends EPackage {
 	int KEY_FEATURE_COUNT = PivotPackage.ELEMENT_FEATURE_COUNT + 4;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.OppositePropertyCallExpImpl <em>Opposite Property Call Exp</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.pivot.qvtrelation.impl.OppositePropertyCallExpImpl
-	 * @see org.eclipse.qvtd.pivot.qvtrelation.impl.QVTrelationPackageImpl#getOppositePropertyCallExp()
-	 * @generated
-	 */
-	int OPPOSITE_PROPERTY_CALL_EXP = 2;
-
-	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPPOSITE_PROPERTY_CALL_EXP__EXTENSION = PivotPackage.PROPERTY_CALL_EXP__EXTENSION;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPPOSITE_PROPERTY_CALL_EXP__OWNED_ANNOTATION = PivotPackage.PROPERTY_CALL_EXP__OWNED_ANNOTATION;
-
-	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPPOSITE_PROPERTY_CALL_EXP__OWNED_COMMENT = PivotPackage.PROPERTY_CALL_EXP__OWNED_COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPPOSITE_PROPERTY_CALL_EXP__IS_STATIC = PivotPackage.PROPERTY_CALL_EXP__IS_STATIC;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPPOSITE_PROPERTY_CALL_EXP__NAME = PivotPackage.PROPERTY_CALL_EXP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPPOSITE_PROPERTY_CALL_EXP__IS_REQUIRED = PivotPackage.PROPERTY_CALL_EXP__IS_REQUIRED;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPPOSITE_PROPERTY_CALL_EXP__TYPE = PivotPackage.PROPERTY_CALL_EXP__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Implicit</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPPOSITE_PROPERTY_CALL_EXP__IMPLICIT = PivotPackage.PROPERTY_CALL_EXP__IMPLICIT;
-
-	/**
-	 * The feature id for the '<em><b>Source</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPPOSITE_PROPERTY_CALL_EXP__SOURCE = PivotPackage.PROPERTY_CALL_EXP__SOURCE;
-
-	/**
-	 * The feature id for the '<em><b>Is Pre</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPPOSITE_PROPERTY_CALL_EXP__IS_PRE = PivotPackage.PROPERTY_CALL_EXP__IS_PRE;
-
-	/**
-	 * The feature id for the '<em><b>Navigation Source</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPPOSITE_PROPERTY_CALL_EXP__NAVIGATION_SOURCE = PivotPackage.PROPERTY_CALL_EXP__NAVIGATION_SOURCE;
-
-	/**
-	 * The feature id for the '<em><b>Qualifier</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPPOSITE_PROPERTY_CALL_EXP__QUALIFIER = PivotPackage.PROPERTY_CALL_EXP__QUALIFIER;
-
-	/**
-	 * The feature id for the '<em><b>Referred Property</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPPOSITE_PROPERTY_CALL_EXP__REFERRED_PROPERTY = PivotPackage.PROPERTY_CALL_EXP__REFERRED_PROPERTY;
-
-	/**
-	 * The number of structural features of the '<em>Opposite Property Call Exp</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPPOSITE_PROPERTY_CALL_EXP_FEATURE_COUNT = PivotPackage.PROPERTY_CALL_EXP_FEATURE_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationImpl <em>Relation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -373,7 +237,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.impl.QVTrelationPackageImpl#getRelation()
 	 * @generated
 	 */
-	int RELATION = 3;
+	int RELATION = 2;
 
 	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
@@ -518,7 +382,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.impl.QVTrelationPackageImpl#getRelationCallExp()
 	 * @generated
 	 */
-	int RELATION_CALL_EXP = 4;
+	int RELATION_CALL_EXP = 3;
 
 	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
@@ -618,7 +482,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.impl.QVTrelationPackageImpl#getRelationDomain()
 	 * @generated
 	 */
-	int RELATION_DOMAIN = 5;
+	int RELATION_DOMAIN = 4;
 
 	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
@@ -745,7 +609,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.impl.QVTrelationPackageImpl#getRelationDomainAssignment()
 	 * @generated
 	 */
-	int RELATION_DOMAIN_ASSIGNMENT = 6;
+	int RELATION_DOMAIN_ASSIGNMENT = 5;
 
 	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
@@ -809,7 +673,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.impl.QVTrelationPackageImpl#getRelationModel()
 	 * @generated
 	 */
-	int RELATION_MODEL = 7;
+	int RELATION_MODEL = 6;
 
 	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
@@ -918,7 +782,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.impl.QVTrelationPackageImpl#getRelationImplementation()
 	 * @generated
 	 */
-	int RELATION_IMPLEMENTATION = 8;
+	int RELATION_IMPLEMENTATION = 7;
 
 	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
@@ -991,7 +855,7 @@ public interface QVTrelationPackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.impl.QVTrelationPackageImpl#getRelationalTransformation()
 	 * @generated
 	 */
-	int RELATIONAL_TRANSFORMATION = 9;
+	int RELATIONAL_TRANSFORMATION = 8;
 
 	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
@@ -1394,16 +1258,6 @@ public interface QVTrelationPackage extends EPackage {
 	EReference getKey_OppositePart();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp <em>Opposite Property Call Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Opposite Property Call Exp</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp
-	 * @generated
-	 */
-	EClass getOppositePropertyCallExp();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtrelation.Relation <em>Relation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1730,16 +1584,6 @@ public interface QVTrelationPackage extends EPackage {
 		 * @generated
 		 */
 		EReference KEY__OPPOSITE_PART = eINSTANCE.getKey_OppositePart();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.OppositePropertyCallExpImpl <em>Opposite Property Call Exp</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.pivot.qvtrelation.impl.OppositePropertyCallExpImpl
-		 * @see org.eclipse.qvtd.pivot.qvtrelation.impl.QVTrelationPackageImpl#getOppositePropertyCallExp()
-		 * @generated
-		 */
-		EClass OPPOSITE_PROPERTY_CALL_EXP = eINSTANCE.getOppositePropertyCallExp();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationImpl <em>Relation</em>}' class.

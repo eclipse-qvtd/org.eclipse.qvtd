@@ -23,7 +23,6 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OppositePropertyCallExp" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//PropertyCallExp"/>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.Relation" name="Relation"
       eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Rule">
     <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="QVTRelation.Relation.isTopLevel"

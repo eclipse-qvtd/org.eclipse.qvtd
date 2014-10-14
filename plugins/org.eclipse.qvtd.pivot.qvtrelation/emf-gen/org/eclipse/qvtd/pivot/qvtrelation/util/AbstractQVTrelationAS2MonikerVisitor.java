@@ -51,10 +51,6 @@ public abstract class AbstractQVTrelationAS2MonikerVisitor
 		return visitElement(object);
 	}
 
-	public @Nullable Object visitOppositePropertyCallExp(@NonNull org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp object) {
-		return visitPropertyCallExp(object);
-	}
-
 	public @Nullable Object visitRelation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.Relation object) {
 		return visitRule(object);
 	}
