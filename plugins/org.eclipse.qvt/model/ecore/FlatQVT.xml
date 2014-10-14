@@ -1,0 +1,1391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<emof:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:emof="http://schema.omg.org/spec/mof/2.0/emof.xmi"
+    xmi:id="FlatQVT" name="FlatQVT" uri="http://www.omg.org/spec/QVT/20140401/FlatQVT">
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.AltExp" name="AltExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.AltExp.body" name="body" isOrdered="true" type="FlatQVT.OclExpression"
+        isComposite="true" opposite="FlatQVT.OclExpression.altBodyOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.AltExp.condition" name="condition" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.altCondOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.AltExp.altOwner" name="altOwner" isOrdered="true"
+        type="FlatQVT.SwitchExp" opposite="FlatQVT.SwitchExp.alternativePart"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.AnyType" name="AnyType" superClass="FlatQVT.Type"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Area" name="Area" isAbstract="true">
+    <ownedAttribute xmi:id="FlatQVT.Area.bottomPattern" name="bottomPattern" isOrdered="true"
+        type="FlatQVT.BottomPattern" isComposite="true" opposite="FlatQVT.BottomPattern.area"/>
+    <ownedAttribute xmi:id="FlatQVT.Area.guardPattern" name="guardPattern" isOrdered="true"
+        type="FlatQVT.GuardPattern" isComposite="true" opposite="FlatQVT.GuardPattern.area"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.AssertExp" name="AssertExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.AssertExp.assertion" name="assertion" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.assertOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.AssertExp.log" name="log" isOrdered="true" lower="0"
+        type="FlatQVT.LogExp" isComposite="true" opposite="FlatQVT.LogExp.assertExp"/>
+    <ownedAttribute xmi:id="FlatQVT.AssertExp.severity" name="severity" isOrdered="true"
+        lower="0" type="FlatQVT.SeverityKind" default="error"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.AssignExp" name="AssignExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.AssignExp.defaultValue" name="defaultValue" isOrdered="true"
+        lower="0" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.defaultOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.AssignExp.isReset" name="isReset" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.AssignExp.left" name="left" isOrdered="true" type="FlatQVT.OclExpression"
+        isComposite="true" opposite="FlatQVT.OclExpression.leftOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.AssignExp.value" name="value" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.valueOwner"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Assignment" name="Assignment" isAbstract="true"
+      superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.Assignment.bottomPattern" name="bottomPattern"
+        isOrdered="true" type="FlatQVT.BottomPattern" opposite="FlatQVT.BottomPattern.assignment"/>
+    <ownedAttribute xmi:id="FlatQVT.Assignment.isDefault" name="isDefault" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Assignment.value" name="value" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.valueAssignment"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.BagType" name="BagType" superClass="FlatQVT.CollectionType"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.BlockExp" name="BlockExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.BlockExp.body" name="body" isOrdered="true" lower="0"
+        upper="*" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.blockOwner"/>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="FlatQVT.Boolean" name="Boolean"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.BooleanLiteralExp" name="BooleanLiteralExp"
+      superClass="FlatQVT.PrimitiveLiteralExp">
+    <ownedAttribute xmi:id="FlatQVT.BooleanLiteralExp.booleanSymbol" name="booleanSymbol"
+        isOrdered="true" lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.BottomPattern" name="BottomPattern"
+      superClass="FlatQVT.CorePattern">
+    <ownedAttribute xmi:id="FlatQVT.BottomPattern.area" name="area" isOrdered="true"
+        type="FlatQVT.Area" opposite="FlatQVT.Area.bottomPattern"/>
+    <ownedAttribute xmi:id="FlatQVT.BottomPattern.assignment" name="assignment" lower="0"
+        upper="*" type="FlatQVT.Assignment" isComposite="true" opposite="FlatQVT.Assignment.bottomPattern"/>
+    <ownedAttribute xmi:id="FlatQVT.BottomPattern.enforcementOperation" name="enforcementOperation"
+        lower="0" upper="*" type="FlatQVT.EnforcementOperation" isComposite="true"
+        opposite="FlatQVT.EnforcementOperation.bottomPattern"/>
+    <ownedAttribute xmi:id="FlatQVT.BottomPattern.realizedVariable" name="realizedVariable"
+        lower="0" upper="*" type="FlatQVT.RealizedVariable" isComposite="true" opposite="FlatQVT.RealizedVariable.bottomPattern">
+      <ownedComment body="bottomPattern">
+        <ownedComment body="http://schema.omg.org/spec/mof/2.0/emof.xmi#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.BreakExp" name="BreakExp" superClass="FlatQVT.ImperativeExpression"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.CallExp" name="CallExp" isAbstract="true"
+      superClass="FlatQVT.OclExpression">
+    <ownedAttribute xmi:id="FlatQVT.CallExp.source" name="source" isOrdered="true"
+        lower="0" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.appliedElement"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.CatchExp" name="CatchExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.CatchExp.body" name="body" isOrdered="true" lower="0"
+        upper="*" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.catchExp"/>
+    <ownedAttribute xmi:id="FlatQVT.CatchExp.exception" name="exception" isOrdered="true"
+        upper="*" type="FlatQVT.Type" opposite="FlatQVT.Type.catchExp"/>
+    <ownedAttribute xmi:id="FlatQVT.CatchExp.exceptionVariable" name="exceptionVariable"
+        isOrdered="true" lower="0" type="FlatQVT.Variable" isComposite="true" opposite="FlatQVT.Variable.catchExp"/>
+    <ownedAttribute xmi:id="FlatQVT.CatchExp.exceptOwner" name="exceptOwner" isOrdered="true"
+        type="FlatQVT.TryExp" opposite="FlatQVT.TryExp.exceptClause"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Class" name="Class" superClass="FlatQVT.Type">
+    <ownedAttribute xmi:id="FlatQVT.Class.isAbstract" name="isAbstract" isOrdered="true"
+        lower="0" default="false">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Class.ownedAttribute" name="ownedAttribute" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.Property" isComposite="true" opposite="FlatQVT.Property.class"/>
+    <ownedAttribute xmi:id="FlatQVT.Class.ownedOperation" name="ownedOperation" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.Operation" isComposite="true" opposite="FlatQVT.Operation.class"/>
+    <ownedAttribute xmi:id="FlatQVT.Class.superClass" name="superClass" lower="0"
+        upper="*" type="FlatQVT.Class" opposite="FlatQVT.Class.class"/>
+    <ownedAttribute xmi:id="FlatQVT.Class.class" name="class" isOrdered="true" type="FlatQVT.Class"
+        opposite="FlatQVT.Class.superClass"/>
+    <ownedAttribute xmi:id="FlatQVT.Class.contextualProperty" name="contextualProperty"
+        isOrdered="true" type="FlatQVT.ContextualProperty" opposite="FlatQVT.ContextualProperty.context"/>
+    <ownedAttribute xmi:id="FlatQVT.Class.instantiationExp" name="instantiationExp"
+        isOrdered="true" type="FlatQVT.InstantiationExp" opposite="FlatQVT.InstantiationExp.instantiatedClass"/>
+    <ownedAttribute xmi:id="FlatQVT.Class.key" name="key" isOrdered="true" type="FlatQVT.Key"
+        opposite="FlatQVT.Key.identifies"/>
+    <ownedAttribute xmi:id="FlatQVT.Class.objectTemplateExp" name="objectTemplateExp"
+        isOrdered="true" type="FlatQVT.ObjectTemplateExp" opposite="FlatQVT.ObjectTemplateExp.referredClass"/>
+    <ownedAttribute xmi:id="FlatQVT.Class.transfClient" name="transfClient" isOrdered="true"
+        type="FlatQVT.OperationalTransformation" opposite="FlatQVT.OperationalTransformation.intermediateClass"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.CollectionItem" name="CollectionItem"
+      superClass="FlatQVT.CollectionLiteralPart">
+    <ownedAttribute xmi:id="FlatQVT.CollectionItem.item" name="item" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.collectionItem"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Enumeration" xmi:id="FlatQVT.CollectionKind" name="CollectionKind">
+    <ownedLiteral xmi:id="FlatQVT.CollectionKind.Set" name="Set"/>
+    <ownedLiteral xmi:id="FlatQVT.CollectionKind.OrderedSet" name="OrderedSet"/>
+    <ownedLiteral xmi:id="FlatQVT.CollectionKind.Bag" name="Bag"/>
+    <ownedLiteral xmi:id="FlatQVT.CollectionKind.Sequence" name="Sequence"/>
+    <ownedLiteral xmi:id="FlatQVT.CollectionKind.Collection" name="Collection"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.CollectionLiteralExp" name="CollectionLiteralExp"
+      superClass="FlatQVT.LiteralExp">
+    <ownedAttribute xmi:id="FlatQVT.CollectionLiteralExp.kind" name="kind" isOrdered="true"
+        lower="0" type="FlatQVT.CollectionKind"/>
+    <ownedAttribute xmi:id="FlatQVT.CollectionLiteralExp.part" name="part" lower="0"
+        upper="*" type="FlatQVT.CollectionLiteralPart" isComposite="true" opposite="FlatQVT.CollectionLiteralPart.collectionLiteralExp"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.CollectionLiteralPart" name="CollectionLiteralPart"
+      isAbstract="true" superClass="FlatQVT.TypedElement">
+    <ownedAttribute xmi:id="FlatQVT.CollectionLiteralPart.collectionLiteralExp" name="collectionLiteralExp"
+        isOrdered="true" type="FlatQVT.CollectionLiteralExp" opposite="FlatQVT.CollectionLiteralExp.part"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.CollectionRange" name="CollectionRange"
+      superClass="FlatQVT.CollectionLiteralPart">
+    <ownedAttribute xmi:id="FlatQVT.CollectionRange.first" name="first" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.firstOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.CollectionRange.last" name="last" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.lastOwner"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.CollectionTemplateExp" name="CollectionTemplateExp"
+      superClass="FlatQVT.TemplateExp">
+    <ownedAttribute xmi:id="FlatQVT.CollectionTemplateExp.member" name="member" lower="0"
+        upper="*" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.listContainer"/>
+    <ownedAttribute xmi:id="FlatQVT.CollectionTemplateExp.referredCollectionType"
+        name="referredCollectionType" isOrdered="true" type="FlatQVT.CollectionType"
+        opposite="FlatQVT.CollectionType.collectionTemplateExp"/>
+    <ownedAttribute xmi:id="FlatQVT.CollectionTemplateExp.rest" name="rest" isOrdered="true"
+        lower="0" type="FlatQVT.Variable" opposite="FlatQVT.Variable.matchingExp"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.CollectionType" name="CollectionType"
+      superClass="FlatQVT.DataType">
+    <ownedAttribute xmi:id="FlatQVT.CollectionType.elementType" name="elementType"
+        isOrdered="true" type="FlatQVT.Type" opposite="FlatQVT.Type.collectionType"/>
+    <ownedAttribute xmi:id="FlatQVT.CollectionType.collectionTemplateExp" name="collectionTemplateExp"
+        isOrdered="true" type="FlatQVT.CollectionTemplateExp" opposite="FlatQVT.CollectionTemplateExp.referredCollectionType"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Comment" name="Comment" superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.Comment.annotatedElement" name="annotatedElement"
+        lower="0" upper="*" type="FlatQVT.NamedElement" opposite="FlatQVT.NamedElement.comment"/>
+    <ownedAttribute xmi:id="FlatQVT.Comment.body" name="body" isOrdered="true" lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Comment.owningElement" name="owningElement" isOrdered="true"
+        type="FlatQVT.Element" opposite="FlatQVT.Element.ownedComment"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ComputeExp" name="ComputeExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.ComputeExp.body" name="body" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.computeOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.ComputeExp.returnedElement" name="returnedElement"
+        isOrdered="true" type="FlatQVT.Variable" isComposite="true" opposite="FlatQVT.Variable.computeOwner"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Constructor" name="Constructor"
+      superClass="FlatQVT.ImperativeOperation"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ConstructorBody" name="ConstructorBody"
+      superClass="FlatQVT.OperationBody">
+    <ownedAttribute xmi:id="FlatQVT.ConstructorBody.objectExp" name="objectExp" isOrdered="true"
+        type="FlatQVT.ObjectExp" opposite="FlatQVT.ObjectExp.body"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ContextualProperty" name="ContextualProperty"
+      superClass="FlatQVT.Property">
+    <ownedAttribute xmi:id="FlatQVT.ContextualProperty.context" name="context" isOrdered="true"
+        type="FlatQVT.Class" opposite="FlatQVT.Class.contextualProperty"/>
+    <ownedAttribute xmi:id="FlatQVT.ContextualProperty.initExpression" name="initExpression"
+        isOrdered="true" lower="0" type="FlatQVT.OclExpression" isComposite="true"
+        opposite="FlatQVT.OclExpression.ownerProperty"/>
+    <ownedAttribute xmi:id="FlatQVT.ContextualProperty.overridden" name="overridden"
+        isOrdered="true" lower="0" type="FlatQVT.Property" opposite="FlatQVT.Property.overriding"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ContinueExp" name="ContinueExp"
+      superClass="FlatQVT.ImperativeExpression"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.CoreDomain" name="CoreDomain" superClass="FlatQVT.Domain FlatQVT.Area"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.CorePattern" name="CorePattern"
+      superClass="FlatQVT.Pattern">
+    <ownedAttribute xmi:id="FlatQVT.CorePattern.variable" name="variable" lower="0"
+        upper="*" type="FlatQVT.Variable" isComposite="true" opposite="FlatQVT.Variable.corePattern"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.DataType" name="DataType" superClass="FlatQVT.Type"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.DictLiteralExp" name="DictLiteralExp"
+      superClass="FlatQVT.LiteralExp">
+    <ownedAttribute xmi:id="FlatQVT.DictLiteralExp.part" name="part" lower="0" upper="*"
+        type="FlatQVT.DictLiteralPart" isComposite="true" opposite="FlatQVT.DictLiteralPart.partOwner"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.DictLiteralPart" name="DictLiteralPart"
+      superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.DictLiteralPart.key" name="key" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.keyOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.DictLiteralPart.value" name="value" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.valOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.DictLiteralPart.partOwner" name="partOwner" isOrdered="true"
+        type="FlatQVT.DictLiteralExp" opposite="FlatQVT.DictLiteralExp.part"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.DictionaryType" name="DictionaryType"
+      superClass="FlatQVT.CollectionType">
+    <ownedAttribute xmi:id="FlatQVT.DictionaryType.keyType" name="keyType" isOrdered="true"
+        lower="0" type="FlatQVT.Type" opposite="FlatQVT.Type.keyDict"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Enumeration" xmi:id="FlatQVT.DirectionKind" name="DirectionKind">
+    <ownedLiteral xmi:id="FlatQVT.DirectionKind.in" name="in"/>
+    <ownedLiteral xmi:id="FlatQVT.DirectionKind.inout" name="inout"/>
+    <ownedLiteral xmi:id="FlatQVT.DirectionKind.out" name="out"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Domain" name="Domain" isAbstract="true"
+      superClass="FlatQVT.NamedElement">
+    <ownedAttribute xmi:id="FlatQVT.Domain.isCheckable" name="isCheckable" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Domain.isEnforceable" name="isEnforceable" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Domain.rule" name="rule" isOrdered="true" type="FlatQVT.Rule"
+        opposite="FlatQVT.Rule.domain"/>
+    <ownedAttribute xmi:id="FlatQVT.Domain.typedModel" name="typedModel" isOrdered="true"
+        lower="0" type="FlatQVT.TypedModel" opposite="FlatQVT.TypedModel.domain"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.DomainPattern" name="DomainPattern"
+      superClass="FlatQVT.Pattern">
+    <ownedAttribute xmi:id="FlatQVT.DomainPattern.relationDomain" name="relationDomain"
+        isOrdered="true" type="FlatQVT.RelationDomain" opposite="FlatQVT.RelationDomain.pattern"/>
+    <ownedAttribute xmi:id="FlatQVT.DomainPattern.templateExpression" name="templateExpression"
+        isOrdered="true" lower="0" type="FlatQVT.TemplateExp" isComposite="true" opposite="FlatQVT.TemplateExp.domainPattern"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Element" name="Element" isAbstract="true"
+      superClass="FlatQVT.Object">
+    <ownedOperation xmi:id="FlatQVT.Element.container" name="container" isOrdered="true"
+        lower="0" type="FlatQVT.Element"/>
+    <ownedOperation xmi:id="FlatQVT.Element.equals" name="equals" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+      <ownedParameter xmi:id="FlatQVT.Element.equals.object" name="object" isOrdered="true"
+          lower="0" type="FlatQVT.Object"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.Element.get" name="get" isOrdered="true" lower="0"
+        type="FlatQVT.Object">
+      <ownedParameter xmi:id="FlatQVT.Element.get.property" name="property" isOrdered="true"
+          lower="0" type="FlatQVT.Property"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.Element.getMetaClass" name="getMetaClass" isOrdered="true"
+        lower="0" type="FlatQVT.Class"/>
+    <ownedOperation xmi:id="FlatQVT.Element.isSet" name="isSet" isOrdered="true" lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+      <ownedParameter xmi:id="FlatQVT.Element.isSet.property" name="property" isOrdered="true"
+          lower="0" type="FlatQVT.Property"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.Element.set" name="set" isOrdered="true" lower="0">
+      <ownedParameter xmi:id="FlatQVT.Element.set.property" name="property" isOrdered="true"
+          lower="0" type="FlatQVT.Property"/>
+      <ownedParameter xmi:id="FlatQVT.Element.set.object" name="object" isOrdered="true"
+          lower="0" type="FlatQVT.Object"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.Element.unset" name="unset" isOrdered="true" lower="0">
+      <ownedParameter xmi:id="FlatQVT.Element.unset.property" name="property" isOrdered="true"
+          lower="0" type="FlatQVT.Property"/>
+    </ownedOperation>
+    <ownedAttribute xmi:id="FlatQVT.Element.ownedComment" name="ownedComment" lower="0"
+        upper="*" type="FlatQVT.Comment" isComposite="true" opposite="FlatQVT.Comment.owningElement"/>
+    <ownedAttribute xmi:id="FlatQVT.Element.tag" name="tag" isOrdered="true" type="FlatQVT.Tag"
+        opposite="FlatQVT.Tag.element"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Enumeration" xmi:id="FlatQVT.EnforcementMode" name="EnforcementMode">
+    <ownedLiteral xmi:id="FlatQVT.EnforcementMode.Creation" name="Creation"/>
+    <ownedLiteral xmi:id="FlatQVT.EnforcementMode.Deletion" name="Deletion"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.EnforcementOperation" name="EnforcementOperation"
+      superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.EnforcementOperation.bottomPattern" name="bottomPattern"
+        isOrdered="true" type="FlatQVT.BottomPattern" opposite="FlatQVT.BottomPattern.enforcementOperation"/>
+    <ownedAttribute xmi:id="FlatQVT.EnforcementOperation.enforcementMode" name="enforcementMode"
+        isOrdered="true" lower="0" type="FlatQVT.EnforcementMode"/>
+    <ownedAttribute xmi:id="FlatQVT.EnforcementOperation.operationCallExp" name="operationCallExp"
+        isOrdered="true" type="FlatQVT.OperationCallExp" isComposite="true" opposite="FlatQVT.OperationCallExp.enforcementOperation"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.EntryOperation" name="EntryOperation"
+      superClass="FlatQVT.ImperativeOperation">
+    <ownedAttribute xmi:id="FlatQVT.EntryOperation.entryContext" name="entryContext"
+        isOrdered="true" type="FlatQVT.Module" opposite="FlatQVT.Module.entry"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.EnumLiteralExp" name="EnumLiteralExp"
+      superClass="FlatQVT.LiteralExp">
+    <ownedAttribute xmi:id="FlatQVT.EnumLiteralExp.referredEnumLiteral" name="referredEnumLiteral"
+        isOrdered="true" lower="0" type="FlatQVT.EnumerationLiteral" opposite="FlatQVT.EnumerationLiteral.literalExp"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Enumeration" name="Enumeration"
+      superClass="FlatQVT.DataType">
+    <ownedAttribute xmi:id="FlatQVT.Enumeration.ownedLiteral" name="ownedLiteral"
+        isOrdered="true" lower="0" upper="*" type="FlatQVT.EnumerationLiteral" isComposite="true"
+        opposite="FlatQVT.EnumerationLiteral.enumeration"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.EnumerationLiteral" name="EnumerationLiteral"
+      superClass="FlatQVT.NamedElement">
+    <ownedAttribute xmi:id="FlatQVT.EnumerationLiteral.enumeration" name="enumeration"
+        isOrdered="true" lower="0" type="FlatQVT.Enumeration" opposite="FlatQVT.Enumeration.ownedLiteral"/>
+    <ownedAttribute xmi:id="FlatQVT.EnumerationLiteral.literalExp" name="literalExp"
+        isOrdered="true" type="FlatQVT.EnumLiteralExp" opposite="FlatQVT.EnumLiteralExp.referredEnumLiteral"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ExpressionInOcl" name="ExpressionInOcl"
+      superClass="FlatQVT.TypedElement">
+    <ownedAttribute xmi:id="FlatQVT.ExpressionInOcl.bodyExpression" name="bodyExpression"
+        isOrdered="true" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.topExpression"/>
+    <ownedAttribute xmi:id="FlatQVT.ExpressionInOcl.contextVariable" name="contextVariable"
+        isOrdered="true" lower="0" type="FlatQVT.Variable" isComposite="true" opposite="FlatQVT.Variable.selfOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.ExpressionInOcl.generatedType" name="generatedType"
+        lower="0" upper="*" type="FlatQVT.Type" isComposite="true" opposite="FlatQVT.Type.owningExpression"/>
+    <ownedAttribute xmi:id="FlatQVT.ExpressionInOcl.parameterVariable" name="parameterVariable"
+        lower="0" upper="*" type="FlatQVT.Variable" isComposite="true" opposite="FlatQVT.Variable.varOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.ExpressionInOcl.resultVariable" name="resultVariable"
+        isOrdered="true" lower="0" type="FlatQVT.Variable" isComposite="true" opposite="FlatQVT.Variable.resultOwner"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Extent" name="Extent" superClass="FlatQVT.Object">
+    <ownedOperation xmi:id="FlatQVT.Extent.elements" name="elements" isOrdered="true"
+        lower="0" type="FlatQVT.ReflectiveSequence"/>
+    <ownedOperation xmi:id="FlatQVT.Extent.useContainment" name="useContainment" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Factory" name="Factory" superClass="FlatQVT.Element">
+    <ownedOperation xmi:id="FlatQVT.Factory.convertToString" name="convertToString"
+        isOrdered="true" lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#String"/>
+      <ownedParameter xmi:id="FlatQVT.Factory.convertToString.dataType" name="dataType"
+          isOrdered="true" lower="0" type="FlatQVT.DataType"/>
+      <ownedParameter xmi:id="FlatQVT.Factory.convertToString.object" name="object"
+          isOrdered="true" lower="0" type="FlatQVT.Object"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.Factory.create" name="create" isOrdered="true"
+        lower="0" type="FlatQVT.Element">
+      <ownedParameter xmi:id="FlatQVT.Factory.create.metaClass" name="metaClass" isOrdered="true"
+          lower="0" type="FlatQVT.Class"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.Factory.createFromString" name="createFromString"
+        isOrdered="true" lower="0" type="FlatQVT.Object">
+      <ownedParameter xmi:id="FlatQVT.Factory.createFromString.dataType" name="dataType"
+          isOrdered="true" lower="0" type="FlatQVT.DataType"/>
+      <ownedParameter xmi:id="FlatQVT.Factory.createFromString.string" name="string"
+          isOrdered="true" lower="0">
+        <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedAttribute xmi:id="FlatQVT.Factory.package" name="package" isOrdered="true"
+        type="FlatQVT.Package" opposite="FlatQVT.Package.factory"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.FeatureCallExp" name="FeatureCallExp"
+      isAbstract="true" superClass="FlatQVT.CallExp"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ForExp" name="ForExp" superClass="FlatQVT.ImperativeLoopExp"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Function" name="Function" superClass="FlatQVT.Operation">
+    <ownedAttribute xmi:id="FlatQVT.Function.queryExpression" name="queryExpression"
+        isOrdered="true" lower="0" type="FlatQVT.OclExpression" isComposite="true"
+        opposite="FlatQVT.OclExpression.function"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.FunctionParameter" name="FunctionParameter"
+      superClass="FlatQVT.Variable FlatQVT.Parameter"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.GuardPattern" name="GuardPattern"
+      superClass="FlatQVT.CorePattern">
+    <ownedAttribute xmi:id="FlatQVT.GuardPattern.area" name="area" isOrdered="true"
+        type="FlatQVT.Area" opposite="FlatQVT.Area.guardPattern"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Helper" name="Helper" superClass="FlatQVT.ImperativeOperation">
+    <ownedAttribute xmi:id="FlatQVT.Helper.isQuery" name="isQuery" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.IfExp" name="IfExp" superClass="FlatQVT.OclExpression">
+    <ownedAttribute xmi:id="FlatQVT.IfExp.condition" name="condition" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.ifOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.IfExp.elseExpression" name="elseExpression" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.elseOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.IfExp.thenExpression" name="thenExpression" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.thenOwner"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ImperativeCallExp" name="ImperativeCallExp"
+      superClass="FlatQVT.OperationCallExp FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.ImperativeCallExp.isVirtual" name="isVirtual"
+        isOrdered="true" lower="0" default="true">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ImperativeExpression" name="ImperativeExpression"
+      isAbstract="true" superClass="FlatQVT.OclExpression"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ImperativeIterateExp" name="ImperativeIterateExp"
+      superClass="FlatQVT.ImperativeLoopExp">
+    <ownedAttribute xmi:id="FlatQVT.ImperativeIterateExp.target" name="target" isOrdered="true"
+        lower="0" type="FlatQVT.Variable" isComposite="true" opposite="FlatQVT.Variable.tgtOwner"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ImperativeLoopExp" name="ImperativeLoopExp"
+      isAbstract="true" superClass="FlatQVT.LoopExp FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.ImperativeLoopExp.condition" name="condition"
+        isOrdered="true" lower="0" type="FlatQVT.OclExpression" isComposite="true"
+        opposite="FlatQVT.OclExpression.loopCondOwner"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ImperativeOperation" name="ImperativeOperation"
+      superClass="FlatQVT.Operation">
+    <ownedAttribute xmi:id="FlatQVT.ImperativeOperation.body" name="body" isOrdered="true"
+        lower="0" type="FlatQVT.OperationBody" isComposite="true" opposite="FlatQVT.OperationBody.operation"/>
+    <ownedAttribute xmi:id="FlatQVT.ImperativeOperation.context" name="context" isOrdered="true"
+        lower="0" type="FlatQVT.VarParameter" isComposite="true" opposite="FlatQVT.VarParameter.ctxOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.ImperativeOperation.isBlackbox" name="isBlackbox"
+        isOrdered="true" lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.ImperativeOperation.overridden" name="overridden"
+        isOrdered="true" lower="0" type="FlatQVT.ImperativeOperation" opposite="FlatQVT.ImperativeOperation.overriding"/>
+    <ownedAttribute xmi:id="FlatQVT.ImperativeOperation.result" name="result" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.VarParameter" isComposite="true" opposite="FlatQVT.VarParameter.resOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.ImperativeOperation.overriding" name="overriding"
+        isOrdered="true" type="FlatQVT.ImperativeOperation" opposite="FlatQVT.ImperativeOperation.overridden"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Enumeration" xmi:id="FlatQVT.ImportKind" name="ImportKind">
+    <ownedLiteral xmi:id="FlatQVT.ImportKind.extension" name="extension"/>
+    <ownedLiteral xmi:id="FlatQVT.ImportKind.access" name="access"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.InstantiationExp" name="InstantiationExp"
+      superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.InstantiationExp.argument" name="argument" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.argOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.InstantiationExp.extent" name="extent" isOrdered="true"
+        lower="0" type="FlatQVT.Variable" opposite="FlatQVT.Variable.instantiationExp"/>
+    <ownedAttribute xmi:id="FlatQVT.InstantiationExp.instantiatedClass" name="instantiatedClass"
+        isOrdered="true" type="FlatQVT.Class" opposite="FlatQVT.Class.instantiationExp"/>
+    <ownedAttribute xmi:id="FlatQVT.InstantiationExp.initializationOperation" name="initializationOperation"
+        isOrdered="true" lower="0" type="FlatQVT.Operation" opposite="FlatQVT.Operation.instantiationExp"/>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="FlatQVT.Integer" name="Integer"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.IntegerLiteralExp" name="IntegerLiteralExp"
+      superClass="FlatQVT.NumericLiteralExp">
+    <ownedAttribute xmi:id="FlatQVT.IntegerLiteralExp.integerSymbol" name="integerSymbol"
+        isOrdered="true" lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Integer"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.InvalidLiteralExp" name="InvalidLiteralExp"
+      superClass="FlatQVT.LiteralExp"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.InvalidType" name="InvalidType"
+      superClass="FlatQVT.Type"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.IterateExp" name="IterateExp" superClass="FlatQVT.LoopExp">
+    <ownedAttribute xmi:id="FlatQVT.IterateExp.result" name="result" isOrdered="true"
+        lower="0" type="FlatQVT.Variable" isComposite="true" opposite="FlatQVT.Variable.baseExp"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.IteratorExp" name="IteratorExp"
+      superClass="FlatQVT.LoopExp"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Key" name="Key" superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.Key.identifies" name="identifies" isOrdered="true"
+        type="FlatQVT.Class" opposite="FlatQVT.Class.key"/>
+    <ownedAttribute xmi:id="FlatQVT.Key.oppositePart" name="oppositePart" lower="0"
+        upper="*" type="FlatQVT.Property" opposite="FlatQVT.Property.oppKey"/>
+    <ownedAttribute xmi:id="FlatQVT.Key.part" name="part" lower="0" upper="*" type="FlatQVT.Property"
+        opposite="FlatQVT.Property.key"/>
+    <ownedAttribute xmi:id="FlatQVT.Key.transformation" name="transformation" isOrdered="true"
+        lower="0" type="FlatQVT.RelationalTransformation" opposite="FlatQVT.RelationalTransformation.ownedKey"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.LetExp" name="LetExp" superClass="FlatQVT.OclExpression">
+    <ownedAttribute xmi:id="FlatQVT.LetExp.in" name="in" isOrdered="true" type="FlatQVT.OclExpression"
+        isComposite="true" opposite="FlatQVT.OclExpression.letExp"/>
+    <ownedAttribute xmi:id="FlatQVT.LetExp.variable" name="variable" isOrdered="true"
+        type="FlatQVT.Variable" isComposite="true" opposite="FlatQVT.Variable.letExp"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Library" name="Library" superClass="FlatQVT.Module"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ListLiteralExp" name="ListLiteralExp"
+      superClass="FlatQVT.LiteralExp">
+    <ownedAttribute xmi:id="FlatQVT.ListLiteralExp.element" name="element" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.listLiteralExp"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ListType" name="ListType" superClass="FlatQVT.CollectionType"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.LiteralExp" name="LiteralExp" isAbstract="true"
+      superClass="FlatQVT.OclExpression"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.LogExp" name="LogExp" superClass="FlatQVT.OperationCallExp FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.LogExp.condition" name="condition" isOrdered="true"
+        lower="0" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.logOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.LogExp.assertExp" name="assertExp" isOrdered="true"
+        type="FlatQVT.AssertExp" opposite="FlatQVT.AssertExp.log"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.LoopExp" name="LoopExp" isAbstract="true"
+      superClass="FlatQVT.CallExp FlatQVT.OclExpression">
+    <ownedAttribute xmi:id="FlatQVT.LoopExp.body" name="body" isOrdered="true" type="FlatQVT.OclExpression"
+        isComposite="true" opposite="FlatQVT.OclExpression.loopBodyOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.LoopExp.iterator" name="iterator" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.Variable" isComposite="true" opposite="FlatQVT.Variable.loopExp"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Mapping" name="Mapping" superClass="FlatQVT.Rule FlatQVT.Area">
+    <ownedAttribute xmi:id="FlatQVT.Mapping.context" name="context" isOrdered="true"
+        lower="0" type="FlatQVT.Mapping" opposite="FlatQVT.Mapping.local"/>
+    <ownedAttribute xmi:id="FlatQVT.Mapping.local" name="local" lower="0" upper="*"
+        type="FlatQVT.Mapping" isComposite="true" opposite="FlatQVT.Mapping.context"/>
+    <ownedAttribute xmi:id="FlatQVT.Mapping.refinement" name="refinement" lower="0"
+        upper="*" type="FlatQVT.Mapping" opposite="FlatQVT.Mapping.specification"/>
+    <ownedAttribute xmi:id="FlatQVT.Mapping.specification" name="specification" lower="0"
+        upper="*" type="FlatQVT.Mapping" opposite="FlatQVT.Mapping.refinement"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.MappingBody" name="MappingBody"
+      superClass="FlatQVT.OperationBody">
+    <ownedAttribute xmi:id="FlatQVT.MappingBody.endSection" name="endSection" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.endOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.MappingBody.initSection" name="initSection" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.initOwner"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.MappingCallExp" name="MappingCallExp"
+      superClass="FlatQVT.ImperativeCallExp">
+    <ownedAttribute xmi:id="FlatQVT.MappingCallExp.isStrict" name="isStrict" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.MappingOperation" name="MappingOperation"
+      superClass="FlatQVT.ImperativeOperation">
+    <ownedAttribute xmi:id="FlatQVT.MappingOperation.disjunct" name="disjunct" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.MappingOperation" opposite="FlatQVT.MappingOperation.disjuncter"/>
+    <ownedAttribute xmi:id="FlatQVT.MappingOperation.inherited" name="inherited" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.MappingOperation" opposite="FlatQVT.MappingOperation.inheriting"/>
+    <ownedAttribute xmi:id="FlatQVT.MappingOperation.merged" name="merged" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.MappingOperation" opposite="FlatQVT.MappingOperation.merging"/>
+    <ownedAttribute xmi:id="FlatQVT.MappingOperation.refinedRelation" name="refinedRelation"
+        isOrdered="true" lower="0" type="FlatQVT.Relation" opposite="FlatQVT.Relation.refiningOperation"/>
+    <ownedAttribute xmi:id="FlatQVT.MappingOperation.when" name="when" isOrdered="true"
+        lower="0" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.whenOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.MappingOperation.where" name="where" isOrdered="true"
+        lower="0" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.whereOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.MappingOperation.disjuncter" name="disjuncter"
+        isOrdered="true" type="FlatQVT.MappingOperation" opposite="FlatQVT.MappingOperation.disjunct"/>
+    <ownedAttribute xmi:id="FlatQVT.MappingOperation.inheriting" name="inheriting"
+        isOrdered="true" type="FlatQVT.MappingOperation" opposite="FlatQVT.MappingOperation.inherited"/>
+    <ownedAttribute xmi:id="FlatQVT.MappingOperation.merging" name="merging" isOrdered="true"
+        type="FlatQVT.MappingOperation" opposite="FlatQVT.MappingOperation.merged"/>
+    <ownedAttribute xmi:id="FlatQVT.MappingOperation.resolveExpression" name="resolveExpression"
+        isOrdered="true" type="FlatQVT.ResolveInExp" opposite="FlatQVT.ResolveInExp.inMapping"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.MappingParameter" name="MappingParameter"
+      superClass="FlatQVT.VarParameter">
+    <ownedAttribute xmi:id="FlatQVT.MappingParameter.extent" name="extent" isOrdered="true"
+        lower="0" type="FlatQVT.ModelParameter" opposite="FlatQVT.ModelParameter.mappingParameter"/>
+    <ownedAttribute xmi:id="FlatQVT.MappingParameter.referredDomain" name="referredDomain"
+        isOrdered="true" lower="0" type="FlatQVT.RelationDomain" opposite="FlatQVT.RelationDomain.referringParameter"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ModelParameter" name="ModelParameter"
+      superClass="FlatQVT.VarParameter">
+    <ownedAttribute xmi:id="FlatQVT.ModelParameter.module" name="module" isOrdered="true"
+        type="FlatQVT.OperationalTransformation" opposite="FlatQVT.OperationalTransformation.modelParameter"/>
+    <ownedAttribute xmi:id="FlatQVT.ModelParameter.mappingParameter" name="mappingParameter"
+        isOrdered="true" type="FlatQVT.MappingParameter" opposite="FlatQVT.MappingParameter.extent"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ModelType" name="ModelType" superClass="FlatQVT.Class">
+    <ownedAttribute xmi:id="FlatQVT.ModelType.additionalCondition" name="additionalCondition"
+        isOrdered="true" lower="0" upper="*" type="FlatQVT.OclExpression" isComposite="true"
+        opposite="FlatQVT.OclExpression.condOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.ModelType.conformanceKind" name="conformanceKind"
+        isOrdered="true" lower="0" default="effective">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.ModelType.metamodel" name="metamodel" isOrdered="true"
+        upper="*" type="FlatQVT.Package" opposite="FlatQVT.Package.modelType"/>
+    <ownedAttribute xmi:id="FlatQVT.ModelType.module" name="module" isOrdered="true"
+        type="FlatQVT.Module" opposite="FlatQVT.Module.usedModelType"/>
+    <ownedAttribute xmi:id="FlatQVT.ModelType.moduleImport" name="moduleImport" isOrdered="true"
+        type="FlatQVT.ModuleImport" opposite="FlatQVT.ModuleImport.binding"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Module" name="Module" superClass="FlatQVT.Class FlatQVT.Package">
+    <ownedAttribute xmi:id="FlatQVT.Module.configProperty" name="configProperty" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.Property" opposite="FlatQVT.Property.module"/>
+    <ownedAttribute xmi:id="FlatQVT.Module.entry" name="entry" isOrdered="true" lower="0"
+        type="FlatQVT.EntryOperation" opposite="FlatQVT.EntryOperation.entryContext"/>
+    <ownedAttribute xmi:id="FlatQVT.Module.isBlackbox" name="isBlackbox" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Module.moduleImport" name="moduleImport" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.ModuleImport" isComposite="true" opposite="FlatQVT.ModuleImport.module"/>
+    <ownedAttribute xmi:id="FlatQVT.Module.ownedTag" name="ownedTag" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.Tag" isComposite="true" opposite="FlatQVT.Tag.owner"/>
+    <ownedAttribute xmi:id="FlatQVT.Module.ownedVariable" name="ownedVariable" lower="0"
+        upper="*" type="FlatQVT.Variable" isComposite="true" opposite="FlatQVT.Variable.variableOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.Module.usedModelType" name="usedModelType" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.ModelType" opposite="FlatQVT.ModelType.module"/>
+    <ownedAttribute xmi:id="FlatQVT.Module.importingElement" name="importingElement"
+        isOrdered="true" type="FlatQVT.ModuleImport" opposite="FlatQVT.ModuleImport.importedModule"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ModuleImport" name="ModuleImport"
+      superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.ModuleImport.binding" name="binding" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.ModelType" opposite="FlatQVT.ModelType.moduleImport"/>
+    <ownedAttribute xmi:id="FlatQVT.ModuleImport.importedModule" name="importedModule"
+        isOrdered="true" type="FlatQVT.Module" opposite="FlatQVT.Module.importingElement"/>
+    <ownedAttribute xmi:id="FlatQVT.ModuleImport.kind" name="kind" isOrdered="true"
+        lower="0" type="FlatQVT.ImportKind"/>
+    <ownedAttribute xmi:id="FlatQVT.ModuleImport.module" name="module" isOrdered="true"
+        lower="0" type="FlatQVT.Module" opposite="FlatQVT.Module.moduleImport"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.MultiplicityElement" name="MultiplicityElement"
+      isAbstract="true">
+    <ownedAttribute xmi:id="FlatQVT.MultiplicityElement.isOrdered" name="isOrdered"
+        isOrdered="true" lower="0" default="false">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.MultiplicityElement.isUnique" name="isUnique"
+        isOrdered="true" lower="0" default="true">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.MultiplicityElement.lower" name="lower" isOrdered="true"
+        lower="0" default="1">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.MultiplicityElement.upper" name="upper" isOrdered="true"
+        lower="0" type="FlatQVT.UnlimitedNatural" default="1"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.NamedElement" name="NamedElement"
+      isAbstract="true" superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.NamedElement.name" name="name" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.NamedElement.comment" name="comment" isOrdered="true"
+        type="FlatQVT.Comment" opposite="FlatQVT.Comment.annotatedElement"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.NavigationCallExp" name="NavigationCallExp"
+      superClass="FlatQVT.FeatureCallExp"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.NullLiteralExp" name="NullLiteralExp"
+      superClass="FlatQVT.LiteralExp"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.NumericLiteralExp" name="NumericLiteralExp"
+      isAbstract="true" superClass="FlatQVT.PrimitiveLiteralExp"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Object" name="Object"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ObjectExp" name="ObjectExp" superClass="FlatQVT.InstantiationExp">
+    <ownedAttribute xmi:id="FlatQVT.ObjectExp.body" name="body" isOrdered="true" type="FlatQVT.ConstructorBody"
+        isComposite="true" opposite="FlatQVT.ConstructorBody.objectExp"/>
+    <ownedAttribute xmi:id="FlatQVT.ObjectExp.referredObject" name="referredObject"
+        isOrdered="true" type="FlatQVT.Variable" opposite="FlatQVT.Variable.objectExpression"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ObjectTemplateExp" name="ObjectTemplateExp"
+      superClass="FlatQVT.TemplateExp">
+    <ownedAttribute xmi:id="FlatQVT.ObjectTemplateExp.part" name="part" lower="0"
+        upper="*" type="FlatQVT.PropertyTemplateItem" isComposite="true" opposite="FlatQVT.PropertyTemplateItem.objContainer"/>
+    <ownedAttribute xmi:id="FlatQVT.ObjectTemplateExp.referredClass" name="referredClass"
+        isOrdered="true" type="FlatQVT.Class" opposite="FlatQVT.Class.objectTemplateExp"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.OclExpression" name="OclExpression"
+      isAbstract="true" superClass="FlatQVT.TypedElement">
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.altBodyOwner" name="altBodyOwner"
+        isOrdered="true" type="FlatQVT.AltExp" opposite="FlatQVT.AltExp.body"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.altCondOwner" name="altCondOwner"
+        isOrdered="true" type="FlatQVT.AltExp" opposite="FlatQVT.AltExp.condition"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.assertOwner" name="assertOwner"
+        isOrdered="true" type="FlatQVT.AssertExp" opposite="FlatQVT.AssertExp.assertion"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.defaultOwner" name="defaultOwner"
+        isOrdered="true" type="FlatQVT.AssignExp" opposite="FlatQVT.AssignExp.defaultValue"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.leftOwner" name="leftOwner" isOrdered="true"
+        type="FlatQVT.AssignExp" opposite="FlatQVT.AssignExp.left"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.valueOwner" name="valueOwner" isOrdered="true"
+        type="FlatQVT.AssignExp" opposite="FlatQVT.AssignExp.value"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.valueAssignment" name="valueAssignment"
+        isOrdered="true" type="FlatQVT.Assignment" opposite="FlatQVT.Assignment.value"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.blockOwner" name="blockOwner" isOrdered="true"
+        type="FlatQVT.BlockExp" opposite="FlatQVT.BlockExp.body"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.appliedElement" name="appliedElement"
+        isOrdered="true" type="FlatQVT.CallExp" opposite="FlatQVT.CallExp.source"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.catchExp" name="catchExp" isOrdered="true"
+        type="FlatQVT.CatchExp" opposite="FlatQVT.CatchExp.body"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.collectionItem" name="collectionItem"
+        isOrdered="true" type="FlatQVT.CollectionItem" opposite="FlatQVT.CollectionItem.item"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.firstOwner" name="firstOwner" isOrdered="true"
+        type="FlatQVT.CollectionRange" opposite="FlatQVT.CollectionRange.first"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.lastOwner" name="lastOwner" isOrdered="true"
+        type="FlatQVT.CollectionRange" opposite="FlatQVT.CollectionRange.last"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.listContainer" name="listContainer"
+        isOrdered="true" type="FlatQVT.CollectionTemplateExp" opposite="FlatQVT.CollectionTemplateExp.member"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.computeOwner" name="computeOwner"
+        isOrdered="true" type="FlatQVT.ComputeExp" opposite="FlatQVT.ComputeExp.body"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.ownerProperty" name="ownerProperty"
+        isOrdered="true" type="FlatQVT.ContextualProperty" opposite="FlatQVT.ContextualProperty.initExpression"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.keyOwner" name="keyOwner" isOrdered="true"
+        type="FlatQVT.DictLiteralPart" opposite="FlatQVT.DictLiteralPart.key"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.valOwner" name="valOwner" isOrdered="true"
+        type="FlatQVT.DictLiteralPart" opposite="FlatQVT.DictLiteralPart.value"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.topExpression" name="topExpression"
+        isOrdered="true" type="FlatQVT.ExpressionInOcl" opposite="FlatQVT.ExpressionInOcl.bodyExpression"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.function" name="function" isOrdered="true"
+        type="FlatQVT.Function" opposite="FlatQVT.Function.queryExpression"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.ifOwner" name="ifOwner" isOrdered="true"
+        type="FlatQVT.IfExp" opposite="FlatQVT.IfExp.condition"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.elseOwner" name="elseOwner" isOrdered="true"
+        type="FlatQVT.IfExp" opposite="FlatQVT.IfExp.elseExpression"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.thenOwner" name="thenOwner" isOrdered="true"
+        type="FlatQVT.IfExp" opposite="FlatQVT.IfExp.thenExpression"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.loopCondOwner" name="loopCondOwner"
+        isOrdered="true" type="FlatQVT.ImperativeLoopExp" opposite="FlatQVT.ImperativeLoopExp.condition"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.argOwner" name="argOwner" isOrdered="true"
+        type="FlatQVT.InstantiationExp" opposite="FlatQVT.InstantiationExp.argument"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.letExp" name="letExp" isOrdered="true"
+        type="FlatQVT.LetExp" opposite="FlatQVT.LetExp.in"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.listLiteralExp" name="listLiteralExp"
+        isOrdered="true" type="FlatQVT.ListLiteralExp" opposite="FlatQVT.ListLiteralExp.element"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.logOwner" name="logOwner" isOrdered="true"
+        type="FlatQVT.LogExp" opposite="FlatQVT.LogExp.condition"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.loopBodyOwner" name="loopBodyOwner"
+        isOrdered="true" type="FlatQVT.LoopExp" opposite="FlatQVT.LoopExp.body"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.endOwner" name="endOwner" isOrdered="true"
+        type="FlatQVT.MappingBody" opposite="FlatQVT.MappingBody.endSection"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.initOwner" name="initOwner" isOrdered="true"
+        type="FlatQVT.MappingBody" opposite="FlatQVT.MappingBody.initSection"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.whenOwner" name="whenOwner" isOrdered="true"
+        type="FlatQVT.MappingOperation" opposite="FlatQVT.MappingOperation.when"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.whereOwner" name="whereOwner" isOrdered="true"
+        type="FlatQVT.MappingOperation" opposite="FlatQVT.MappingOperation.where"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.condOwner" name="condOwner" isOrdered="true"
+        type="FlatQVT.ModelType" opposite="FlatQVT.ModelType.additionalCondition"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.contentOwner" name="contentOwner"
+        isOrdered="true" type="FlatQVT.OperationBody" opposite="FlatQVT.OperationBody.content"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.parentCall" name="parentCall" isOrdered="true"
+        type="FlatQVT.OperationCallExp" opposite="FlatQVT.OperationCallExp.argument"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.predicate" name="predicate" isOrdered="true"
+        type="FlatQVT.Predicate" opposite="FlatQVT.Predicate.conditionExpression"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.slotAssignment" name="slotAssignment"
+        isOrdered="true" type="FlatQVT.PropertyAssignment" opposite="FlatQVT.PropertyAssignment.slotExpression"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.propertyItem" name="propertyItem"
+        isOrdered="true" type="FlatQVT.PropertyTemplateItem" opposite="FlatQVT.PropertyTemplateItem.value"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.raiseExp" name="raiseExp" isOrdered="true"
+        type="FlatQVT.RaiseExp" opposite="FlatQVT.RaiseExp.argument"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.relationCallExp" name="relationCallExp"
+        isOrdered="true" type="FlatQVT.RelationCallExp" opposite="FlatQVT.RelationCallExp.argument"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.domainAssignment" name="domainAssignment"
+        isOrdered="true" type="FlatQVT.RelationDomainAssignment" opposite="FlatQVT.RelationDomainAssignment.valueExp"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.resolveExp" name="resolveExp" isOrdered="true"
+        type="FlatQVT.ResolveExp" opposite="FlatQVT.ResolveExp.condition"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.returnExp" name="returnExp" isOrdered="true"
+        type="FlatQVT.ReturnExp" opposite="FlatQVT.ReturnExp.value"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.elsePartOwner" name="elsePartOwner"
+        isOrdered="true" type="FlatQVT.SwitchExp" opposite="FlatQVT.SwitchExp.elsePart"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.owner" name="owner" isOrdered="true"
+        type="FlatQVT.TemplateExp" opposite="FlatQVT.TemplateExp.where"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.tryBodyOwner" name="tryBodyOwner"
+        isOrdered="true" type="FlatQVT.TryExp" opposite="FlatQVT.TryExp.tryBody"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.tupleLiteralPart" name="tupleLiteralPart"
+        isOrdered="true" type="FlatQVT.TupleLiteralPart" opposite="FlatQVT.TupleLiteralPart.value"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.typedef" name="typedef" isOrdered="true"
+        type="FlatQVT.Typedef" opposite="FlatQVT.Typedef.condition"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.itemUnlink" name="itemUnlink" isOrdered="true"
+        type="FlatQVT.UnlinkExp" opposite="FlatQVT.UnlinkExp.item"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.tgtUnlink" name="tgtUnlink" isOrdered="true"
+        type="FlatQVT.UnlinkExp" opposite="FlatQVT.UnlinkExp.target"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.initializedElement" name="initializedElement"
+        isOrdered="true" type="FlatQVT.Variable" opposite="FlatQVT.Variable.initExpression"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.whileOwner" name="whileOwner" isOrdered="true"
+        type="FlatQVT.WhileExp" opposite="FlatQVT.WhileExp.body"/>
+    <ownedAttribute xmi:id="FlatQVT.OclExpression.whileExpression" name="whileExpression"
+        isOrdered="true" type="FlatQVT.WhileExp" opposite="FlatQVT.WhileExp.condition"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Operation" name="Operation" superClass="FlatQVT.TypedElement FlatQVT.MultiplicityElement">
+    <ownedAttribute xmi:id="FlatQVT.Operation.class" name="class" isOrdered="true"
+        lower="0" type="FlatQVT.Class" opposite="FlatQVT.Class.ownedOperation"/>
+    <ownedAttribute xmi:id="FlatQVT.Operation.ownedParameter" name="ownedParameter"
+        isOrdered="true" lower="0" upper="*" type="FlatQVT.Parameter" isComposite="true"
+        opposite="FlatQVT.Parameter.operation"/>
+    <ownedAttribute xmi:id="FlatQVT.Operation.raisedException" name="raisedException"
+        lower="0" upper="*" type="FlatQVT.Type" opposite="FlatQVT.Type.operation"/>
+    <ownedAttribute xmi:id="FlatQVT.Operation.instantiationExp" name="instantiationExp"
+        isOrdered="true" type="FlatQVT.InstantiationExp" opposite="FlatQVT.InstantiationExp.initializationOperation"/>
+    <ownedAttribute xmi:id="FlatQVT.Operation.referringExp" name="referringExp" isOrdered="true"
+        type="FlatQVT.OperationCallExp" opposite="FlatQVT.OperationCallExp.referredOperation"/>
+    <ownedAttribute xmi:id="FlatQVT.Operation.relationImplementation" name="relationImplementation"
+        isOrdered="true" type="FlatQVT.RelationImplementation" opposite="FlatQVT.RelationImplementation.impl"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.OperationBody" name="OperationBody"
+      superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.OperationBody.content" name="content" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.contentOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.OperationBody.operation" name="operation" isOrdered="true"
+        lower="0" type="FlatQVT.ImperativeOperation" opposite="FlatQVT.ImperativeOperation.body"/>
+    <ownedAttribute xmi:id="FlatQVT.OperationBody.variable" name="variable" lower="0"
+        upper="*" type="FlatQVT.Variable" isComposite="true" opposite="FlatQVT.Variable.opBody"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.OperationCallExp" name="OperationCallExp"
+      superClass="FlatQVT.FeatureCallExp">
+    <ownedAttribute xmi:id="FlatQVT.OperationCallExp.argument" name="argument" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.parentCall"/>
+    <ownedAttribute xmi:id="FlatQVT.OperationCallExp.referredOperation" name="referredOperation"
+        isOrdered="true" lower="0" type="FlatQVT.Operation" opposite="FlatQVT.Operation.referringExp"/>
+    <ownedAttribute xmi:id="FlatQVT.OperationCallExp.enforcementOperation" name="enforcementOperation"
+        isOrdered="true" type="FlatQVT.EnforcementOperation" opposite="FlatQVT.EnforcementOperation.operationCallExp"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.OperationalTransformation" name="OperationalTransformation"
+      superClass="FlatQVT.Module">
+    <ownedAttribute xmi:id="FlatQVT.OperationalTransformation.intermediateClass" name="intermediateClass"
+        isOrdered="true" lower="0" upper="*" type="FlatQVT.Class" opposite="FlatQVT.Class.transfClient"/>
+    <ownedAttribute xmi:id="FlatQVT.OperationalTransformation.intermediateProperty"
+        name="intermediateProperty" isOrdered="true" lower="0" upper="*" type="FlatQVT.Property"
+        opposite="FlatQVT.Property.transfClient"/>
+    <ownedAttribute xmi:id="FlatQVT.OperationalTransformation.modelParameter" name="modelParameter"
+        isOrdered="true" lower="0" upper="*" type="FlatQVT.ModelParameter" isComposite="true"
+        opposite="FlatQVT.ModelParameter.module"/>
+    <ownedAttribute xmi:id="FlatQVT.OperationalTransformation.refined" name="refined"
+        isOrdered="true" lower="0" type="FlatQVT.RelationalTransformation" opposite="FlatQVT.RelationalTransformation.refinement"/>
+    <ownedAttribute xmi:id="FlatQVT.OperationalTransformation.relation" name="relation"
+        isOrdered="true" lower="0" upper="*" type="FlatQVT.Relation" isComposite="true"
+        opposite="FlatQVT.Relation.owner"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.OppositePropertyCallExp" name="OppositePropertyCallExp"
+      superClass="FlatQVT.PropertyCallExp"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.OrderedSetType" name="OrderedSetType"
+      superClass="FlatQVT.CollectionType"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Package" name="Package" superClass="FlatQVT.NamedElement">
+    <ownedAttribute xmi:id="FlatQVT.Package.nestedPackage" name="nestedPackage" lower="0"
+        upper="*" type="FlatQVT.Package" isComposite="true" opposite="FlatQVT.Package.nestingPackage"/>
+    <ownedAttribute xmi:id="FlatQVT.Package.nestingPackage" name="nestingPackage"
+        isOrdered="true" lower="0" type="FlatQVT.Package" opposite="FlatQVT.Package.nestedPackage"/>
+    <ownedAttribute xmi:id="FlatQVT.Package.ownedType" name="ownedType" lower="0"
+        upper="*" type="FlatQVT.Type" isComposite="true" opposite="FlatQVT.Type.package"/>
+    <ownedAttribute xmi:id="FlatQVT.Package.uri" name="uri" isOrdered="true" lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Package.factory" name="factory" isOrdered="true"
+        type="FlatQVT.Factory" opposite="FlatQVT.Factory.package"/>
+    <ownedAttribute xmi:id="FlatQVT.Package.modelType" name="modelType" isOrdered="true"
+        type="FlatQVT.ModelType" opposite="FlatQVT.ModelType.metamodel"/>
+    <ownedAttribute xmi:id="FlatQVT.Package.typedModel" name="typedModel" isOrdered="true"
+        type="FlatQVT.TypedModel" opposite="FlatQVT.TypedModel.usedPackage"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Parameter" name="Parameter" superClass="FlatQVT.TypedElement FlatQVT.MultiplicityElement">
+    <ownedAttribute xmi:id="FlatQVT.Parameter.operation" name="operation" isOrdered="true"
+        lower="0" type="FlatQVT.Operation" opposite="FlatQVT.Operation.ownedParameter"/>
+    <ownedAttribute xmi:id="FlatQVT.Parameter.variable" name="variable" isOrdered="true"
+        type="FlatQVT.Variable" opposite="FlatQVT.Variable.representedParameter"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Pattern" name="Pattern" superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.Pattern.bindsTo" name="bindsTo" lower="0" upper="*"
+        type="FlatQVT.Variable" opposite="FlatQVT.Variable.pattern"/>
+    <ownedAttribute xmi:id="FlatQVT.Pattern.predicate" name="predicate" lower="0"
+        upper="*" type="FlatQVT.Predicate" isComposite="true" opposite="FlatQVT.Predicate.pattern"/>
+    <ownedAttribute xmi:id="FlatQVT.Pattern.whenOwner" name="whenOwner" isOrdered="true"
+        type="FlatQVT.Relation" opposite="FlatQVT.Relation.when"/>
+    <ownedAttribute xmi:id="FlatQVT.Pattern.whereOwner" name="whereOwner" isOrdered="true"
+        type="FlatQVT.Relation" opposite="FlatQVT.Relation.where"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Predicate" name="Predicate" superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.Predicate.conditionExpression" name="conditionExpression"
+        isOrdered="true" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.predicate"/>
+    <ownedAttribute xmi:id="FlatQVT.Predicate.pattern" name="pattern" isOrdered="true"
+        type="FlatQVT.Pattern" opposite="FlatQVT.Pattern.predicate"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.PrimitiveLiteralExp" name="PrimitiveLiteralExp"
+      isAbstract="true" superClass="FlatQVT.LiteralExp"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.PrimitiveType" name="PrimitiveType"
+      superClass="FlatQVT.DataType"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Property" name="Property" superClass="FlatQVT.TypedElement FlatQVT.MultiplicityElement">
+    <ownedAttribute xmi:id="FlatQVT.Property.class" name="class" isOrdered="true"
+        lower="0" type="FlatQVT.Class" opposite="FlatQVT.Class.ownedAttribute"/>
+    <ownedAttribute xmi:id="FlatQVT.Property.default" name="default" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Property.isComposite" name="isComposite" isOrdered="true"
+        lower="0" default="false">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Property.isDerived" name="isDerived" isOrdered="true"
+        lower="0" default="false">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Property.isID" name="isID" isOrdered="true" lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Property.isReadOnly" name="isReadOnly" isOrdered="true"
+        lower="0" default="false">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Property.opposite" name="opposite" isOrdered="true"
+        lower="0" type="FlatQVT.Property" opposite="FlatQVT.Property.property"/>
+    <ownedAttribute xmi:id="FlatQVT.Property.overriding" name="overriding" isOrdered="true"
+        type="FlatQVT.ContextualProperty" opposite="FlatQVT.ContextualProperty.overridden"/>
+    <ownedAttribute xmi:id="FlatQVT.Property.oppKey" name="oppKey" isOrdered="true"
+        type="FlatQVT.Key" opposite="FlatQVT.Key.oppositePart"/>
+    <ownedAttribute xmi:id="FlatQVT.Property.key" name="key" isOrdered="true" type="FlatQVT.Key"
+        opposite="FlatQVT.Key.part"/>
+    <ownedAttribute xmi:id="FlatQVT.Property.module" name="module" isOrdered="true"
+        type="FlatQVT.Module" opposite="FlatQVT.Module.configProperty"/>
+    <ownedAttribute xmi:id="FlatQVT.Property.transfClient" name="transfClient" isOrdered="true"
+        type="FlatQVT.OperationalTransformation" opposite="FlatQVT.OperationalTransformation.intermediateProperty"/>
+    <ownedAttribute xmi:id="FlatQVT.Property.property" name="property" isOrdered="true"
+        type="FlatQVT.Property" opposite="FlatQVT.Property.opposite"/>
+    <ownedAttribute xmi:id="FlatQVT.Property.assignment" name="assignment" isOrdered="true"
+        type="FlatQVT.PropertyAssignment" opposite="FlatQVT.PropertyAssignment.targetProperty"/>
+    <ownedAttribute xmi:id="FlatQVT.Property.referringExp" name="referringExp" isOrdered="true"
+        type="FlatQVT.PropertyCallExp" opposite="FlatQVT.PropertyCallExp.referredProperty"/>
+    <ownedAttribute xmi:id="FlatQVT.Property.propertyItem" name="propertyItem" isOrdered="true"
+        type="FlatQVT.PropertyTemplateItem" opposite="FlatQVT.PropertyTemplateItem.referredProperty"/>
+    <ownedAttribute xmi:id="FlatQVT.Property.tupleLiteralPart" name="tupleLiteralPart"
+        isOrdered="true" type="FlatQVT.TupleLiteralPart" opposite="FlatQVT.TupleLiteralPart.attribute"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.PropertyAssignment" name="PropertyAssignment"
+      superClass="FlatQVT.Assignment">
+    <ownedAttribute xmi:id="FlatQVT.PropertyAssignment.slotExpression" name="slotExpression"
+        isOrdered="true" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.slotAssignment"/>
+    <ownedAttribute xmi:id="FlatQVT.PropertyAssignment.targetProperty" name="targetProperty"
+        isOrdered="true" type="FlatQVT.Property" opposite="FlatQVT.Property.assignment"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.PropertyCallExp" name="PropertyCallExp"
+      superClass="FlatQVT.NavigationCallExp">
+    <ownedAttribute xmi:id="FlatQVT.PropertyCallExp.referredProperty" name="referredProperty"
+        isOrdered="true" lower="0" type="FlatQVT.Property" opposite="FlatQVT.Property.referringExp"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.PropertyTemplateItem" name="PropertyTemplateItem"
+      superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.PropertyTemplateItem.isOpposite" name="isOpposite"
+        isOrdered="true" lower="0" default="false">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.PropertyTemplateItem.objContainer" name="objContainer"
+        isOrdered="true" type="FlatQVT.ObjectTemplateExp" opposite="FlatQVT.ObjectTemplateExp.part"/>
+    <ownedAttribute xmi:id="FlatQVT.PropertyTemplateItem.referredProperty" name="referredProperty"
+        isOrdered="true" type="FlatQVT.Property" opposite="FlatQVT.Property.propertyItem"/>
+    <ownedAttribute xmi:id="FlatQVT.PropertyTemplateItem.value" name="value" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.propertyItem"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.RaiseExp" name="RaiseExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.RaiseExp.argument" name="argument" isOrdered="true"
+        lower="0" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.raiseExp"/>
+    <ownedAttribute xmi:id="FlatQVT.RaiseExp.exception" name="exception" isOrdered="true"
+        type="FlatQVT.Type" opposite="FlatQVT.Type.raiseExpression"/>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="FlatQVT.Real" name="Real"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.RealLiteralExp" name="RealLiteralExp"
+      superClass="FlatQVT.NumericLiteralExp">
+    <ownedAttribute xmi:id="FlatQVT.RealLiteralExp.realSymbol" name="realSymbol" isOrdered="true"
+        lower="0" type="FlatQVT.Real"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.RealizedVariable" name="RealizedVariable"
+      superClass="FlatQVT.Variable">
+    <ownedAttribute xmi:id="FlatQVT.RealizedVariable.bottomPattern" name="bottomPattern"
+        isOrdered="true" type="FlatQVT.BottomPattern" opposite="FlatQVT.BottomPattern.realizedVariable"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ReflectiveCollection" name="ReflectiveCollection"
+      superClass="FlatQVT.Object">
+    <ownedOperation xmi:id="FlatQVT.ReflectiveCollection.add" name="add" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+      <ownedParameter xmi:id="FlatQVT.ReflectiveCollection.add.object" name="object"
+          isOrdered="true" lower="0" type="FlatQVT.Object"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.ReflectiveCollection.addAll" name="addAll" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+      <ownedParameter xmi:id="FlatQVT.ReflectiveCollection.addAll.objects" name="objects"
+          isOrdered="true" lower="0" type="FlatQVT.ReflectiveSequence"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.ReflectiveCollection.clear" name="clear" isOrdered="true"
+        lower="0"/>
+    <ownedOperation xmi:id="FlatQVT.ReflectiveCollection.remove" name="remove" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+      <ownedParameter xmi:id="FlatQVT.ReflectiveCollection.remove.object" name="object"
+          isOrdered="true" lower="0" type="FlatQVT.Object"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.ReflectiveCollection.size" name="size" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Integer"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ReflectiveSequence" name="ReflectiveSequence"
+      superClass="FlatQVT.ReflectiveCollection">
+    <ownedOperation xmi:id="FlatQVT.ReflectiveSequence.add" name="add" isOrdered="true"
+        lower="0">
+      <ownedParameter xmi:id="FlatQVT.ReflectiveSequence.add.index" name="index" isOrdered="true"
+          lower="0">
+        <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="FlatQVT.ReflectiveSequence.add.object" name="object"
+          isOrdered="true" lower="0" type="FlatQVT.Object"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.ReflectiveSequence.get" name="get" isOrdered="true"
+        lower="0" type="FlatQVT.Object">
+      <ownedParameter xmi:id="FlatQVT.ReflectiveSequence.get.index" name="index" isOrdered="true"
+          lower="0">
+        <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.ReflectiveSequence.remove" name="remove" isOrdered="true"
+        lower="0" type="FlatQVT.Object">
+      <ownedParameter xmi:id="FlatQVT.ReflectiveSequence.remove.index" name="index"
+          isOrdered="true" lower="0">
+        <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.ReflectiveSequence.set" name="set" isOrdered="true"
+        lower="0" type="FlatQVT.Object">
+      <ownedParameter xmi:id="FlatQVT.ReflectiveSequence.set.index" name="index" isOrdered="true"
+          lower="0">
+        <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="FlatQVT.ReflectiveSequence.set.object" name="object"
+          isOrdered="true" lower="0" type="FlatQVT.Object"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Relation" name="Relation" superClass="FlatQVT.Rule">
+    <ownedAttribute xmi:id="FlatQVT.Relation.isTopLevel" name="isTopLevel" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Relation.operationalImpl" name="operationalImpl"
+        lower="0" upper="*" type="FlatQVT.RelationImplementation" isComposite="true"
+        opposite="FlatQVT.RelationImplementation.relation"/>
+    <ownedAttribute xmi:id="FlatQVT.Relation.variable" name="variable" lower="0" upper="*"
+        type="FlatQVT.Variable" isComposite="true" opposite="FlatQVT.Variable.relation"/>
+    <ownedAttribute xmi:id="FlatQVT.Relation.when" name="when" isOrdered="true" lower="0"
+        type="FlatQVT.Pattern" isComposite="true" opposite="FlatQVT.Pattern.whenOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.Relation.where" name="where" isOrdered="true"
+        lower="0" type="FlatQVT.Pattern" isComposite="true" opposite="FlatQVT.Pattern.whereOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.Relation.refiningOperation" name="refiningOperation"
+        isOrdered="true" type="FlatQVT.MappingOperation" opposite="FlatQVT.MappingOperation.refinedRelation"/>
+    <ownedAttribute xmi:id="FlatQVT.Relation.owner" name="owner" isOrdered="true"
+        type="FlatQVT.OperationalTransformation" opposite="FlatQVT.OperationalTransformation.relation"/>
+    <ownedAttribute xmi:id="FlatQVT.Relation.relationCallExp" name="relationCallExp"
+        isOrdered="true" type="FlatQVT.RelationCallExp" opposite="FlatQVT.RelationCallExp.referredRelation"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.RelationCallExp" name="RelationCallExp"
+      superClass="FlatQVT.OclExpression">
+    <ownedAttribute xmi:id="FlatQVT.RelationCallExp.argument" name="argument" isOrdered="true"
+        lower="2" upper="*" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.relationCallExp"/>
+    <ownedAttribute xmi:id="FlatQVT.RelationCallExp.referredRelation" name="referredRelation"
+        isOrdered="true" type="FlatQVT.Relation" opposite="FlatQVT.Relation.relationCallExp"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.RelationDomain" name="RelationDomain"
+      superClass="FlatQVT.Domain">
+    <ownedAttribute xmi:id="FlatQVT.RelationDomain.defaultAssignment" name="defaultAssignment"
+        lower="0" upper="*" type="FlatQVT.RelationDomainAssignment" isComposite="true"
+        opposite="FlatQVT.RelationDomainAssignment.owner"/>
+    <ownedAttribute xmi:id="FlatQVT.RelationDomain.pattern" name="pattern" isOrdered="true"
+        lower="0" type="FlatQVT.DomainPattern" isComposite="true" opposite="FlatQVT.DomainPattern.relationDomain"/>
+    <ownedAttribute xmi:id="FlatQVT.RelationDomain.rootVariable" name="rootVariable"
+        isOrdered="true" type="FlatQVT.Variable" opposite="FlatQVT.Variable.relationDomain"/>
+    <ownedAttribute xmi:id="FlatQVT.RelationDomain.referringParameter" name="referringParameter"
+        isOrdered="true" type="FlatQVT.MappingParameter" opposite="FlatQVT.MappingParameter.referredDomain"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.RelationDomainAssignment" name="RelationDomainAssignment"
+      superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.RelationDomainAssignment.owner" name="owner" isOrdered="true"
+        type="FlatQVT.RelationDomain" opposite="FlatQVT.RelationDomain.defaultAssignment"/>
+    <ownedAttribute xmi:id="FlatQVT.RelationDomainAssignment.valueExp" name="valueExp"
+        isOrdered="true" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.domainAssignment"/>
+    <ownedAttribute xmi:id="FlatQVT.RelationDomainAssignment.variable" name="variable"
+        isOrdered="true" type="FlatQVT.Variable" opposite="FlatQVT.Variable.domainAssignment"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.RelationImplementation" name="RelationImplementation"
+      superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.RelationImplementation.impl" name="impl" isOrdered="true"
+        type="FlatQVT.Operation" opposite="FlatQVT.Operation.relationImplementation"/>
+    <ownedAttribute xmi:id="FlatQVT.RelationImplementation.inDirectionOf" name="inDirectionOf"
+        isOrdered="true" type="FlatQVT.TypedModel" opposite="FlatQVT.TypedModel.relationImplementation"/>
+    <ownedAttribute xmi:id="FlatQVT.RelationImplementation.relation" name="relation"
+        isOrdered="true" type="FlatQVT.Relation" opposite="FlatQVT.Relation.operationalImpl"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.RelationalTransformation" name="RelationalTransformation"
+      superClass="FlatQVT.Transformation">
+    <ownedAttribute xmi:id="FlatQVT.RelationalTransformation.ownedKey" name="ownedKey"
+        lower="0" upper="*" type="FlatQVT.Key" isComposite="true" opposite="FlatQVT.Key.transformation"/>
+    <ownedAttribute xmi:id="FlatQVT.RelationalTransformation.refinement" name="refinement"
+        isOrdered="true" type="FlatQVT.OperationalTransformation" opposite="FlatQVT.OperationalTransformation.refined"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ResolveExp" name="ResolveExp" superClass="FlatQVT.CallExp FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.ResolveExp.condition" name="condition" isOrdered="true"
+        lower="0" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.resolveExp"/>
+    <ownedAttribute xmi:id="FlatQVT.ResolveExp.isDeferred" name="isDeferred" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.ResolveExp.isInverse" name="isInverse" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.ResolveExp.one" name="one" isOrdered="true" lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.ResolveExp.target" name="target" isOrdered="true"
+        lower="0" type="FlatQVT.Variable" isComposite="true" opposite="FlatQVT.Variable.resolveExp"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ResolveInExp" name="ResolveInExp"
+      superClass="FlatQVT.ResolveExp">
+    <ownedAttribute xmi:id="FlatQVT.ResolveInExp.inMapping" name="inMapping" isOrdered="true"
+        lower="0" type="FlatQVT.MappingOperation" opposite="FlatQVT.MappingOperation.resolveExpression"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.ReturnExp" name="ReturnExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.ReturnExp.value" name="value" isOrdered="true"
+        lower="0" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.returnExp"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Rule" name="Rule" isAbstract="true"
+      superClass="FlatQVT.NamedElement">
+    <ownedAttribute xmi:id="FlatQVT.Rule.domain" name="domain" isOrdered="true" lower="0"
+        upper="*" type="FlatQVT.Domain" isComposite="true" opposite="FlatQVT.Domain.rule"/>
+    <ownedAttribute xmi:id="FlatQVT.Rule.overrides" name="overrides" isOrdered="true"
+        lower="0" type="FlatQVT.Rule" opposite="FlatQVT.Rule.overridden"/>
+    <ownedAttribute xmi:id="FlatQVT.Rule.transformation" name="transformation" isOrdered="true"
+        lower="0" type="FlatQVT.Transformation" opposite="FlatQVT.Transformation.rule"/>
+    <ownedAttribute xmi:id="FlatQVT.Rule.overridden" name="overridden" isOrdered="true"
+        type="FlatQVT.Rule" opposite="FlatQVT.Rule.overrides"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.SequenceType" name="SequenceType"
+      superClass="FlatQVT.CollectionType"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.SetType" name="SetType" superClass="FlatQVT.CollectionType"/>
+  <ownedType xmi:type="emof:Enumeration" xmi:id="FlatQVT.SeverityKind" name="SeverityKind">
+    <ownedLiteral xmi:id="FlatQVT.SeverityKind.error" name="error"/>
+    <ownedLiteral xmi:id="FlatQVT.SeverityKind.warning" name="warning"/>
+    <ownedLiteral xmi:id="FlatQVT.SeverityKind.fatal" name="fatal"/>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="FlatQVT.String" name="String"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.StringLiteralExp" name="StringLiteralExp"
+      superClass="FlatQVT.PrimitiveLiteralExp">
+    <ownedAttribute xmi:id="FlatQVT.StringLiteralExp.stringSymbol" name="stringSymbol"
+        isOrdered="true" lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#String"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.SwitchExp" name="SwitchExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.SwitchExp.alternativePart" name="alternativePart"
+        isOrdered="true" lower="0" upper="*" type="FlatQVT.AltExp" isComposite="true"
+        opposite="FlatQVT.AltExp.altOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.SwitchExp.elsePart" name="elsePart" isOrdered="true"
+        lower="0" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.elsePartOwner"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Tag" name="Tag" superClass="FlatQVT.Element">
+    <ownedAttribute xmi:id="FlatQVT.Tag.element" name="element" lower="0" upper="*"
+        type="FlatQVT.Element" opposite="FlatQVT.Element.tag"/>
+    <ownedAttribute xmi:id="FlatQVT.Tag.name" name="name" isOrdered="true" lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Tag.value" name="value" isOrdered="true" lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Tag.owner" name="owner" isOrdered="true" type="FlatQVT.Module"
+        opposite="FlatQVT.Module.ownedTag"/>
+    <ownedAttribute xmi:id="FlatQVT.Tag.transformation" name="transformation" isOrdered="true"
+        type="FlatQVT.Transformation" opposite="FlatQVT.Transformation.ownedTag"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.TemplateExp" name="TemplateExp"
+      isAbstract="true" superClass="FlatQVT.LiteralExp">
+    <ownedAttribute xmi:id="FlatQVT.TemplateExp.bindsTo" name="bindsTo" isOrdered="true"
+        lower="0" type="FlatQVT.Variable" opposite="FlatQVT.Variable.templateExp"/>
+    <ownedAttribute xmi:id="FlatQVT.TemplateExp.where" name="where" isOrdered="true"
+        lower="0" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.owner"/>
+    <ownedAttribute xmi:id="FlatQVT.TemplateExp.domainPattern" name="domainPattern"
+        isOrdered="true" type="FlatQVT.DomainPattern" opposite="FlatQVT.DomainPattern.templateExpression"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.TemplateParameterType" name="TemplateParameterType"
+      superClass="FlatQVT.Type">
+    <ownedAttribute xmi:id="FlatQVT.TemplateParameterType.specification" name="specification"
+        isOrdered="true" lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#String"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Transformation" name="Transformation"
+      superClass="FlatQVT.Class FlatQVT.Package">
+    <ownedAttribute xmi:id="FlatQVT.Transformation.extends" name="extends" isOrdered="true"
+        lower="0" type="FlatQVT.Transformation" opposite="FlatQVT.Transformation.extendedBy"/>
+    <ownedAttribute xmi:id="FlatQVT.Transformation.modelParameter" name="modelParameter"
+        lower="0" upper="*" type="FlatQVT.TypedModel" isComposite="true" opposite="FlatQVT.TypedModel.transformation">
+      <ownedComment body="transformation">
+        <ownedComment body="http://schema.omg.org/spec/mof/2.0/emof.xmi#Property.oppositeRoleName"/>
+      </ownedComment>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="FlatQVT.Transformation.ownedTag" name="ownedTag" lower="0"
+        upper="*" type="FlatQVT.Tag" isComposite="true" opposite="FlatQVT.Tag.transformation"/>
+    <ownedAttribute xmi:id="FlatQVT.Transformation.rule" name="rule" lower="0" upper="*"
+        type="FlatQVT.Rule" isComposite="true" opposite="FlatQVT.Rule.transformation"/>
+    <ownedAttribute xmi:id="FlatQVT.Transformation.extendedBy" name="extendedBy" isOrdered="true"
+        type="FlatQVT.Transformation" opposite="FlatQVT.Transformation.extends"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.TryExp" name="TryExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.TryExp.exceptClause" name="exceptClause" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.CatchExp" isComposite="true" opposite="FlatQVT.CatchExp.exceptOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.TryExp.tryBody" name="tryBody" isOrdered="true"
+        lower="0" upper="*" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.tryBodyOwner"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.TupleLiteralExp" name="TupleLiteralExp"
+      superClass="FlatQVT.LiteralExp">
+    <ownedAttribute xmi:id="FlatQVT.TupleLiteralExp.part" name="part" lower="0" upper="*"
+        type="FlatQVT.TupleLiteralPart" isComposite="true" opposite="FlatQVT.TupleLiteralPart.tupleLiteralExp"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.TupleLiteralPart" name="TupleLiteralPart"
+      superClass="FlatQVT.TypedElement">
+    <ownedAttribute xmi:id="FlatQVT.TupleLiteralPart.attribute" name="attribute" isOrdered="true"
+        lower="0" type="FlatQVT.Property" opposite="FlatQVT.Property.tupleLiteralPart"/>
+    <ownedAttribute xmi:id="FlatQVT.TupleLiteralPart.tupleLiteralExp" name="tupleLiteralExp"
+        isOrdered="true" lower="0" type="FlatQVT.TupleLiteralExp" opposite="FlatQVT.TupleLiteralExp.part"/>
+    <ownedAttribute xmi:id="FlatQVT.TupleLiteralPart.value" name="value" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.tupleLiteralPart"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.TupleType" name="TupleType" superClass="FlatQVT.Class FlatQVT.DataType"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Type" name="Type" isAbstract="true"
+      superClass="FlatQVT.NamedElement">
+    <ownedOperation xmi:id="FlatQVT.Type.isInstance" name="isInstance" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+      <ownedParameter xmi:id="FlatQVT.Type.isInstance.object" name="object" isOrdered="true"
+          lower="0" type="FlatQVT.Object"/>
+    </ownedOperation>
+    <ownedAttribute xmi:id="FlatQVT.Type.package" name="package" isOrdered="true"
+        lower="0" type="FlatQVT.Package" opposite="FlatQVT.Package.ownedType"/>
+    <ownedAttribute xmi:id="FlatQVT.Type.catchExp" name="catchExp" isOrdered="true"
+        type="FlatQVT.CatchExp" opposite="FlatQVT.CatchExp.exception"/>
+    <ownedAttribute xmi:id="FlatQVT.Type.collectionType" name="collectionType" isOrdered="true"
+        type="FlatQVT.CollectionType" opposite="FlatQVT.CollectionType.elementType"/>
+    <ownedAttribute xmi:id="FlatQVT.Type.keyDict" name="keyDict" isOrdered="true"
+        type="FlatQVT.DictionaryType" opposite="FlatQVT.DictionaryType.keyType"/>
+    <ownedAttribute xmi:id="FlatQVT.Type.owningExpression" name="owningExpression"
+        isOrdered="true" type="FlatQVT.ExpressionInOcl" opposite="FlatQVT.ExpressionInOcl.generatedType"/>
+    <ownedAttribute xmi:id="FlatQVT.Type.operation" name="operation" isOrdered="true"
+        type="FlatQVT.Operation" opposite="FlatQVT.Operation.raisedException"/>
+    <ownedAttribute xmi:id="FlatQVT.Type.raiseExpression" name="raiseExpression" isOrdered="true"
+        type="FlatQVT.RaiseExp" opposite="FlatQVT.RaiseExp.exception"/>
+    <ownedAttribute xmi:id="FlatQVT.Type.typeExp" name="typeExp" isOrdered="true"
+        type="FlatQVT.TypeExp" opposite="FlatQVT.TypeExp.referredType"/>
+    <ownedAttribute xmi:id="FlatQVT.Type.typedElement" name="typedElement" isOrdered="true"
+        type="FlatQVT.TypedElement" opposite="FlatQVT.TypedElement.type"/>
+    <ownedAttribute xmi:id="FlatQVT.Type.typedef" name="typedef" isOrdered="true"
+        type="FlatQVT.Typedef" opposite="FlatQVT.Typedef.base"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.TypeExp" name="TypeExp" superClass="FlatQVT.OclExpression">
+    <ownedAttribute xmi:id="FlatQVT.TypeExp.referredType" name="referredType" isOrdered="true"
+        lower="0" type="FlatQVT.Type" opposite="FlatQVT.Type.typeExp"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.TypedElement" name="TypedElement"
+      isAbstract="true" superClass="FlatQVT.NamedElement">
+    <ownedAttribute xmi:id="FlatQVT.TypedElement.type" name="type" isOrdered="true"
+        lower="0" type="FlatQVT.Type" opposite="FlatQVT.Type.typedElement"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.TypedModel" name="TypedModel" superClass="FlatQVT.NamedElement">
+    <ownedAttribute xmi:id="FlatQVT.TypedModel.dependsOn" name="dependsOn" lower="0"
+        upper="*" type="FlatQVT.TypedModel" opposite="FlatQVT.TypedModel.dependent"/>
+    <ownedAttribute xmi:id="FlatQVT.TypedModel.transformation" name="transformation"
+        isOrdered="true" type="FlatQVT.Transformation" opposite="FlatQVT.Transformation.modelParameter"/>
+    <ownedAttribute xmi:id="FlatQVT.TypedModel.usedPackage" name="usedPackage" upper="*"
+        type="FlatQVT.Package" opposite="FlatQVT.Package.typedModel"/>
+    <ownedAttribute xmi:id="FlatQVT.TypedModel.domain" name="domain" isOrdered="true"
+        type="FlatQVT.Domain" opposite="FlatQVT.Domain.typedModel"/>
+    <ownedAttribute xmi:id="FlatQVT.TypedModel.relationImplementation" name="relationImplementation"
+        isOrdered="true" type="FlatQVT.RelationImplementation" opposite="FlatQVT.RelationImplementation.inDirectionOf"/>
+    <ownedAttribute xmi:id="FlatQVT.TypedModel.dependent" name="dependent" isOrdered="true"
+        type="FlatQVT.TypedModel" opposite="FlatQVT.TypedModel.dependsOn"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Typedef" name="Typedef" superClass="FlatQVT.Class">
+    <ownedAttribute xmi:id="FlatQVT.Typedef.base" name="base" isOrdered="true" type="FlatQVT.Type"
+        opposite="FlatQVT.Type.typedef"/>
+    <ownedAttribute xmi:id="FlatQVT.Typedef.condition" name="condition" isOrdered="true"
+        lower="0" type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.typedef"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.URIExtent" name="URIExtent" superClass="FlatQVT.Extent">
+    <ownedOperation xmi:id="FlatQVT.URIExtent.contextURI" name="contextURI" isOrdered="true"
+        lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#String"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.URIExtent.element" name="element" isOrdered="true"
+        lower="0" type="FlatQVT.Element">
+      <ownedParameter xmi:id="FlatQVT.URIExtent.element.uri" name="uri" isOrdered="true"
+          lower="0">
+        <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#String"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="FlatQVT.URIExtent.uri" name="uri" isOrdered="true" lower="0">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#String"/>
+      <ownedParameter xmi:id="FlatQVT.URIExtent.uri.element" name="element" isOrdered="true"
+          lower="0" type="FlatQVT.Element"/>
+    </ownedOperation>
+  </ownedType>
+  <ownedType xmi:type="emof:PrimitiveType" xmi:id="FlatQVT.UnlimitedNatural" name="UnlimitedNatural"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.UnlimitedNaturalExp" name="UnlimitedNaturalExp"
+      superClass="FlatQVT.NumericLiteralExp">
+    <ownedAttribute xmi:id="FlatQVT.UnlimitedNaturalExp.symbol" name="symbol" isOrdered="true"
+        lower="0" type="FlatQVT.UnlimitedNatural"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.UnlinkExp" name="UnlinkExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.UnlinkExp.item" name="item" isOrdered="true" type="FlatQVT.OclExpression"
+        isComposite="true" opposite="FlatQVT.OclExpression.itemUnlink"/>
+    <ownedAttribute xmi:id="FlatQVT.UnlinkExp.target" name="target" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.tgtUnlink"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.VarParameter" name="VarParameter"
+      superClass="FlatQVT.Variable FlatQVT.Parameter">
+    <ownedAttribute xmi:id="FlatQVT.VarParameter.ctxOwner" name="ctxOwner" isOrdered="true"
+        lower="0" type="FlatQVT.ImperativeOperation" opposite="FlatQVT.ImperativeOperation.context"/>
+    <ownedAttribute xmi:id="FlatQVT.VarParameter.kind" name="kind" isOrdered="true"
+        lower="0" type="FlatQVT.DirectionKind"/>
+    <ownedAttribute xmi:id="FlatQVT.VarParameter.resOwner" name="resOwner" isOrdered="true"
+        lower="0" type="FlatQVT.ImperativeOperation" opposite="FlatQVT.ImperativeOperation.result"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.Variable" name="Variable" superClass="FlatQVT.TypedElement">
+    <ownedAttribute xmi:id="FlatQVT.Variable.initExpression" name="initExpression"
+        isOrdered="true" lower="0" type="FlatQVT.OclExpression" isComposite="true"
+        opposite="FlatQVT.OclExpression.initializedElement"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.letExp" name="letExp" isOrdered="true"
+        lower="0" type="FlatQVT.LetExp" opposite="FlatQVT.LetExp.variable"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.representedParameter" name="representedParameter"
+        isOrdered="true" lower="0" type="FlatQVT.Parameter" opposite="FlatQVT.Parameter.variable"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.catchExp" name="catchExp" isOrdered="true"
+        type="FlatQVT.CatchExp" opposite="FlatQVT.CatchExp.exceptionVariable"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.matchingExp" name="matchingExp" isOrdered="true"
+        type="FlatQVT.CollectionTemplateExp" opposite="FlatQVT.CollectionTemplateExp.rest"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.computeOwner" name="computeOwner" isOrdered="true"
+        type="FlatQVT.ComputeExp" opposite="FlatQVT.ComputeExp.returnedElement"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.corePattern" name="corePattern" isOrdered="true"
+        type="FlatQVT.CorePattern" opposite="FlatQVT.CorePattern.variable"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.selfOwner" name="selfOwner" isOrdered="true"
+        type="FlatQVT.ExpressionInOcl" opposite="FlatQVT.ExpressionInOcl.contextVariable"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.varOwner" name="varOwner" isOrdered="true"
+        type="FlatQVT.ExpressionInOcl" opposite="FlatQVT.ExpressionInOcl.parameterVariable"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.resultOwner" name="resultOwner" isOrdered="true"
+        type="FlatQVT.ExpressionInOcl" opposite="FlatQVT.ExpressionInOcl.resultVariable"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.tgtOwner" name="tgtOwner" isOrdered="true"
+        type="FlatQVT.ImperativeIterateExp" opposite="FlatQVT.ImperativeIterateExp.target"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.instantiationExp" name="instantiationExp"
+        isOrdered="true" type="FlatQVT.InstantiationExp" opposite="FlatQVT.InstantiationExp.extent"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.baseExp" name="baseExp" isOrdered="true"
+        type="FlatQVT.IterateExp" opposite="FlatQVT.IterateExp.result"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.loopExp" name="loopExp" isOrdered="true"
+        type="FlatQVT.LoopExp" opposite="FlatQVT.LoopExp.iterator"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.variableOwner" name="variableOwner" isOrdered="true"
+        type="FlatQVT.Module" opposite="FlatQVT.Module.ownedVariable"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.objectExpression" name="objectExpression"
+        isOrdered="true" type="FlatQVT.ObjectExp" opposite="FlatQVT.ObjectExp.referredObject"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.opBody" name="opBody" isOrdered="true"
+        type="FlatQVT.OperationBody" opposite="FlatQVT.OperationBody.variable"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.pattern" name="pattern" isOrdered="true"
+        type="FlatQVT.Pattern" opposite="FlatQVT.Pattern.bindsTo"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.relation" name="relation" isOrdered="true"
+        type="FlatQVT.Relation" opposite="FlatQVT.Relation.variable"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.relationDomain" name="relationDomain"
+        isOrdered="true" type="FlatQVT.RelationDomain" opposite="FlatQVT.RelationDomain.rootVariable"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.domainAssignment" name="domainAssignment"
+        isOrdered="true" type="FlatQVT.RelationDomainAssignment" opposite="FlatQVT.RelationDomainAssignment.variable"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.resolveExp" name="resolveExp" isOrdered="true"
+        type="FlatQVT.ResolveExp" opposite="FlatQVT.ResolveExp.target"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.templateExp" name="templateExp" isOrdered="true"
+        type="FlatQVT.TemplateExp" opposite="FlatQVT.TemplateExp.bindsTo"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.assignment" name="assignment" isOrdered="true"
+        type="FlatQVT.VariableAssignment" opposite="FlatQVT.VariableAssignment.targetVariable"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.referringExp" name="referringExp" isOrdered="true"
+        type="FlatQVT.VariableExp" opposite="FlatQVT.VariableExp.referredVariable"/>
+    <ownedAttribute xmi:id="FlatQVT.Variable.declaration" name="declaration" isOrdered="true"
+        type="FlatQVT.VariableInitExp" opposite="FlatQVT.VariableInitExp.referredVariable"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.VariableAssignment" name="VariableAssignment"
+      superClass="FlatQVT.Assignment">
+    <ownedAttribute xmi:id="FlatQVT.VariableAssignment.targetVariable" name="targetVariable"
+        isOrdered="true" type="FlatQVT.Variable" opposite="FlatQVT.Variable.assignment"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.VariableExp" name="VariableExp"
+      superClass="FlatQVT.OclExpression">
+    <ownedAttribute xmi:id="FlatQVT.VariableExp.referredVariable" name="referredVariable"
+        isOrdered="true" lower="0" type="FlatQVT.Variable" opposite="FlatQVT.Variable.referringExp"/>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.VariableInitExp" name="VariableInitExp"
+      superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.VariableInitExp.referredVariable" name="referredVariable"
+        isOrdered="true" type="FlatQVT.Variable" isComposite="true" opposite="FlatQVT.Variable.declaration"/>
+    <ownedAttribute xmi:id="FlatQVT.VariableInitExp.withResult" name="withResult"
+        isOrdered="true" lower="0" default="false">
+      <type xmi:type="emof:PrimitiveType" href="http://schema.omg.org/spec/mof/2.0/emof.xmi#Boolean"/>
+    </ownedAttribute>
+  </ownedType>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.VoidType" name="VoidType" superClass="FlatQVT.Type"/>
+  <ownedType xmi:type="emof:Class" xmi:id="FlatQVT.WhileExp" name="WhileExp" superClass="FlatQVT.ImperativeExpression">
+    <ownedAttribute xmi:id="FlatQVT.WhileExp.body" name="body" isOrdered="true" type="FlatQVT.OclExpression"
+        isComposite="true" opposite="FlatQVT.OclExpression.whileOwner"/>
+    <ownedAttribute xmi:id="FlatQVT.WhileExp.condition" name="condition" isOrdered="true"
+        type="FlatQVT.OclExpression" isComposite="true" opposite="FlatQVT.OclExpression.whileExpression"/>
+  </ownedType>
+</emof:Package>
