@@ -237,10 +237,29 @@
         </markerResolutionGenerator>
     </extension>
 
+	<extension point="org.eclipse.ui.commands">
+	  <command id="org.eclipse.qvtd.xtext.qvtrelation.ui.SaveModelMorfASCommand"
+	    name="%MF_Save_ModelMorf_AS_Command" description="%MF_Save_ModelMorf_AS_Description"/>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	  <handler commandId="org.eclipse.qvtd.xtext.qvtrelation.ui.SaveModelMorfASCommand"
+	    class="org.eclipse.qvtd.xtext.qvtrelation.ui.commands.SaveModelMorfASHandler"/>
+	</extension>
+
 	<extension point="org.eclipse.ui.menus">
 	  <menuContribution locationURI="popup:org.eclipse.ocl.examples.xtext.base.ui.Save?after=additions">
 	    <command commandId="org.eclipse.ocl.examples.xtext.base.ui.SaveASCommand"
 	      label="%MF_Save_AS">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.Editor.opened">
+                </reference>
+            </visibleWhen>
+	    </command>
+	  </menuContribution>
+	  <menuContribution locationURI="popup:org.eclipse.ocl.examples.xtext.base.ui.Save?after=additions">
+	    <command commandId="org.eclipse.qvtd.xtext.qvtrelation.ui.SaveModelMorfASCommand"
+	      label="%MF_Save_ModelMorf_AS">
             <visibleWhen checkEnabled="false">
                 <reference
                     definitionId="org.eclipse.qvtd.xtext.qvtrelation.QVTrelation.Editor.opened">
