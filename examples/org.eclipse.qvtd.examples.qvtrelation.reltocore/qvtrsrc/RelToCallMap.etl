@@ -1,0 +1,147 @@
+rule RelationModelToRoot 
+    transform rm : qvtr!RelationModel
+    to root : gml!DocumentRoot, graphml : gml!GraphmlType {
+        
+        root.xMLNSPrefixMap.put("", "http://graphml.graphdrawing.org/xmlns");
+        root.xMLNSPrefixMap.put("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+        root.xMLNSPrefixMap.put("y", "http://www.yworks.com/xml/graphml");
+        root.xMLNSPrefixMap.put("yed", "http://www.yworks.com/xml/yed/3");
+        root.xSISchemaLocation.put("http://graphml.graphdrawing.org/xmlns", "http://graphml.graphdrawing.org/xmlns/1.1/graphml.xsd");
+        root.graphml = graphml;
+        // Yed Node attributes
+        // <key attr.name="description" attr.type="string" for="node" id="d5"/>
+        var key5 : new gml!KeyType;
+        key5.attrName = "description";
+        key5.attrType = gml!KeyTypeType#string;
+        key5.`for` = gml!KeyForType#node;
+        key5.id = "d5"; 
+        graphml.key.add(key5);
+        // <key for="node" id="d6" yfiles.type="nodegraphics"/>
+        var key6 : new gml!KeyType;
+        key6.`for` = gml!KeyForType#node;
+        key6.id = "d6";
+        key6.yfilesType="nodegraphics";
+        graphml.key.add(key6);
+        
+        //<key attr.name="description" attr.type="string" for="edge" id="d8"/>
+        var key8 : new gml!KeyType;
+        key8.attrName = "description";
+        key8.attrType = gml!KeyTypeType#string;
+        key8.`for` = gml!KeyForType#edge;
+        key8.id = "d8"; 
+        graphml.key.add(key8);
+        //<key for="edge" id="d9" yfiles.type="edgegraphics"/>
+        var key9 : new gml!KeyType;
+        key9.`for` = gml!KeyForType#edge;
+        key9.id = "d9";
+        key9.yfilesType="edgegraphics";
+        graphml.key.add(key9);
+        
+        // Graph information
+        graphml.graph.addAll(rm.nestedPackage.select(np | np.isTypeOf(qvtr!RelationalTransformation)).equivalent());
+    }
+
+@lazy
+rule TransformationToGraph
+    transform t : qvtr!RelationalTransformation
+    to  g : gml!GraphType {
+       
+        g.edgedefault = gml!GraphEdgedefaultType#directed;
+		g.id = t.name;
+		t.`rule`.equivalent().size().println("rules ");
+        g.node.addAll(t.`rule`.equivalent());
+        g.edge.addAll(qvtr!RelationCallExp.all().equivalent().flatten());    
+    }
+
+
+rule RuleToNode
+    transform r : qvtr!Relation
+    to n : gml!NodeType {
+        var d5 : new gml!DataType;
+        var d6 : new gml!DataType;
+        var label : new gml!NodeLabelType;
+        var sNode : new gml!ShapeNodeType;
+        var shape : new gml!ShapeType1;
+        
+        n.id = gml!NodeType.all().size().asString();
+        d5.key = "d5";
+        d6.key = "d6";
+        label.value = n.id;
+        r.name.println(n.id + ": ");
+        sNode.nodeLabel.add(label);
+        shape.type = gml!ShapeTypeType#ellipse;
+        sNode.shape = shape;
+        d6.shapeNode = sNode;
+        n.data.add(d5);
+        n.data.add(d6);
+        //if (r.where.isDefined())
+        //    r.where.predicate.pattern.closure(p : | p.predicate.conditionExpression).println();
+    } 
+
+@abstract
+rule RelationCallToEdge
+    transform rc : qvtr!RelationCallExp
+    to e : gml!EdgeType {
+        
+        e.id = gml!EdgeType.all().size().asString();
+        /* Yed Information */
+		var d9 = new gml!DataType;
+		var plEdge = new gml!PolyLineEdgeType;
+        var arrow : new gml!ArrowsType;
+        var style : new gml!LineStyleType;
+        
+		d9.key = "d9";
+		arrow.target = gml!ArrowTypeType#standard;
+		arrow.source = gml!ArrowTypeType#none;
+		style.type = gml!LineTypeType#line;
+		plEdge.arrows= arrow;
+	    plEdge.lineStyle = style;
+	    d9.polyLineEdge = plEdge;
+	    e.data.add(d9);
+    }
+
+rule RelationCallToEdgeWhen
+    transform rc : qvtr!RelationCallExp
+    to e : gml!EdgeType
+    extends RelationCallToEdge {
+    
+    guard : rc.eContainer.getOwningRelation().when == rc.eContainer.getOwningPattern()
+    
+    "RelationCallToEdgeWhen".println();
+    rc.referredRelation.equivalent().id.println("referred ");
+    rc.eContainer.getOwningRelation().equivalent().id.println("owning ");
+    e.source = rc.referredRelation.equivalent().id;
+    e.target = rc.eContainer.getOwningRelation().equivalent().id; 
+}
+
+rule RelationCallToEdgeWhere
+    transform rc : qvtr!RelationCallExp
+    to e : gml!EdgeType
+    extends RelationCallToEdge {
+    
+    guard : rc.eContainer.getOwningRelation().where == rc.eContainer.getOwningPattern()
+    
+    "RelationCallToEdgeWhere".println();
+    rc.referredRelation.equivalent().id.println("referred ");
+    rc.eContainer.getOwningRelation().equivalent().id.println("owning ");
+    e.source = rc.eContainer.getOwningRelation().equivalent().id; 
+    e.target = rc.referredRelation.equivalent().id;
+    
+}
+
+operation qvtr!Element getOwningPattern() : qvtr!Pattern {
+    
+    if (self.eContainer.isTypeOf(qvtr!Pattern))
+        return self.eContainer;
+    return self.eContainer.getOwningPattern();
+        
+}
+
+operation qvtr!Element getOwningRelation() : qvtr!Relation{
+    
+    if (self.eContainer.isTypeOf(qvtr!Relation))
+        return self.eContainer;
+    return self.eContainer.getOwningRelation();
+        
+}
+
