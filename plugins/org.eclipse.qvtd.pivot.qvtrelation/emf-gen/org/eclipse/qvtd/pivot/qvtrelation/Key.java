@@ -47,6 +47,7 @@ public interface Key extends EObject, Element {
 	 * @see #setIdentifies(org.eclipse.ocl.examples.pivot.Class)
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getKey_Identifies()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='key'"
 	 * @generated
 	 */
 	org.eclipse.ocl.examples.pivot.Class getIdentifies();
@@ -73,6 +74,7 @@ public interface Key extends EObject, Element {
 	 * @return the value of the '<em>Part</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getKey_Part()
 	 * @model ordered="false"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='key'"
 	 * @generated
 	 */
 	EList<Property> getPart();
@@ -117,7 +119,7 @@ public interface Key extends EObject, Element {
 	 * @return the value of the '<em>Opposite Part</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getKey_OppositePart()
 	 * @model ordered="false"
-	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='oppositeKey'"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='oppKey'"
 	 * @generated
 	 */
 	EList<Property> getOppositePart();

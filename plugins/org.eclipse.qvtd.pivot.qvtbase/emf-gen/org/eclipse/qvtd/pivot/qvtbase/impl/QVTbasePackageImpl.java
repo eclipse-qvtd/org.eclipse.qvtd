@@ -642,6 +642,18 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	protected void createEmofAnnotations() {
 		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
 		addAnnotation
+		  (getPredicate_ConditionExpression(), 
+		   source, 
+		   new String[] {
+			 "body", "predicate"
+		   });	
+		addAnnotation
+		  (getPredicate_Pattern(), 
+		   source, 
+		   new String[] {
+			 "body", "predicate"
+		   });	
+		addAnnotation
 		  (getRule_Overridden(), 
 		   source, 
 		   new String[] {
