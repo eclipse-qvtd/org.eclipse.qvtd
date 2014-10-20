@@ -603,10 +603,22 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	protected void createEmofAnnotations() {
 		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
 		addAnnotation
+		  (getKey_Identifies(), 
+		   source, 
+		   new String[] {
+			 "body", "key"
+		   });	
+		addAnnotation
+		  (getKey_Part(), 
+		   source, 
+		   new String[] {
+			 "body", "key"
+		   });	
+		addAnnotation
 		  (getKey_OppositePart(), 
 		   source, 
 		   new String[] {
-			 "body", "oppositeKey"
+			 "body", "oppKey"
 		   });	
 		addAnnotation
 		  (getRelation_When(), 
@@ -619,6 +631,18 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		   source, 
 		   new String[] {
 			 "body", "whereOwner"
+		   });	
+		addAnnotation
+		  (getRelationCallExp_Argument(), 
+		   source, 
+		   new String[] {
+			 "body", "relationCallExp"
+		   });	
+		addAnnotation
+		  (getRelationCallExp_ReferredRelation(), 
+		   source, 
+		   new String[] {
+			 "body", "relationCallExp"
 		   });	
 		addAnnotation
 		  (getRelationDomain_DefaultAssignment(), 

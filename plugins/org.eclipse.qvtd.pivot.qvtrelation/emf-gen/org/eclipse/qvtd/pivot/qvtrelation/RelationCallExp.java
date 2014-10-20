@@ -44,6 +44,7 @@ public interface RelationCallExp extends EObject, OCLExpression {
 	 * @return the value of the '<em>Argument</em>' containment reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelationCallExp_Argument()
 	 * @model containment="true" lower="2"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='relationCallExp'"
 	 * @generated
 	 */
 	EList<OCLExpression> getArgument();
@@ -60,6 +61,7 @@ public interface RelationCallExp extends EObject, OCLExpression {
 	 * @see #setReferredRelation(Relation)
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelationCallExp_ReferredRelation()
 	 * @model required="true"
+	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='relationCallExp'"
 	 * @generated
 	 */
 	Relation getReferredRelation();

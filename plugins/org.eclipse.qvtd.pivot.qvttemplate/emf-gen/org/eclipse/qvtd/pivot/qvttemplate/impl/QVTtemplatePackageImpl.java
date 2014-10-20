@@ -402,6 +402,12 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 			 "body", "propertyItem"
 		   });	
 		addAnnotation
+		  (getTemplateExp_BindsTo(), 
+		   source, 
+		   new String[] {
+			 "body", "templateExp"
+		   });	
+		addAnnotation
 		  (getTemplateExp_Where(), 
 		   source, 
 		   new String[] {

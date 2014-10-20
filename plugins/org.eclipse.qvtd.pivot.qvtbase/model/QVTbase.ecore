@@ -28,9 +28,17 @@
   <eClassifiers xsi:type="ecore:EClass" name="Predicate" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Element">
     <eStructuralFeatures xsi:type="ecore:EReference" name="conditionExpression" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//OCLExpression"
-        containment="true"/>
+        containment="true">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="predicate"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" lowerBound="1"
-        eType="#//Pattern" transient="true" eOpposite="#//Pattern/predicate"/>
+        eType="#//Pattern" transient="true" eOpposite="#//Pattern/predicate">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="predicate"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Rule" abstract="true" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="domain" upperBound="-1"
