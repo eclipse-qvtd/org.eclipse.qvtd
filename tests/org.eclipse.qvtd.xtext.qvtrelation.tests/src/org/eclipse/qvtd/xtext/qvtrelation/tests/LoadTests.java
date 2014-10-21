@@ -11,12 +11,25 @@
 package org.eclipse.qvtd.xtext.qvtrelation.tests;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.XMIResource;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLLinkingService;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTflatCopier;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtrelation.QVTrelationStandaloneSetup;
 
@@ -28,12 +41,33 @@ public class LoadTests extends LoadTestCase
 	public void doLoad_ModelMorf(@NonNull String stem) throws IOException {
 		URI inputURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.modelmorf/qvtrsrc/" + stem + ".qvtr", true);
 		URI pivotURI = getProjectFileURI(stem + ".qvtras");
-		doLoad_Concrete(inputURI, pivotURI);
+		Resource flatResourceMM = resourceSet.getResource(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtbase/model-gen/FlatQVTpivot.ecore", true), true);
+		doLoad_Concrete(inputURI, pivotURI, flatResourceMM);
 	}
 
-	protected void doLoad_Concrete(URI inputURI, URI pivotURI) throws IOException {
+	protected void doLoad_Concrete(URI inputURI, URI pivotURI, @Nullable Resource flatResourceMM) throws IOException {
 		OCL ocl = OCL.newInstance();
-		doLoad_Concrete(ocl, inputURI, pivotURI);
+		Resource resource = doLoad_Concrete(ocl, inputURI, pivotURI);
+		if (flatResourceMM != null) {
+			Map<String, Object> saveOptions = new HashMap<String, Object>();
+			saveOptions.put(XMIResource.OPTION_USE_XMI_TYPE, Boolean.TRUE);
+			saveOptions.put(XMLResource.OPTION_LINE_WIDTH, 132);
+			saveOptions.put(XMLResource.OPTION_LINE_DELIMITER, "\n");
+			saveOptions.put(XMIResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
+			List<String> uris = new ArrayList<String>();
+			for (Resource flatResource : QVTflatCopier.createFlatResource(resource, inputURI.trimFileExtension().appendFileExtension("xml"), flatResourceMM)) {
+				flatResource.save(saveOptions);
+				uris.add(flatResource.getURI().toString());
+			}
+			Collections.sort(uris);
+			for (String uri : uris) {
+				ResourceSet resourceSet = new ResourceSetImpl();
+				Resource xmlResource = resourceSet.getResource(URI.createURI(uri, true), true);
+				EcoreUtil.resolveAll(resourceSet);
+				EcoreUtil.resolveAll(resourceSet);
+				assertNoValidationErrors("", xmlResource);
+			}
+		}
 		ocl.dispose();
 	}
 
@@ -82,10 +116,16 @@ public class LoadTests extends LoadTestCase
 	}	
 
 	public void testLoad_RelToCore_qvtr() throws IOException, InterruptedException {
-		ProjectMap.getAdapter(resourceSet);
-		URI inputURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.reltocore/qvtrsrc/RelToCore.qvtr", true);
-		URI pivotURI = getProjectFileURI("RelToCore.qvtras");
-		doLoad_Concrete(inputURI, pivotURI);
+//		ProjectMap.getAdapter(resourceSet);
+//		URI inputURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.reltocore/qvtrsrc/RelToCore.qvtr", true);
+//		URI pivotURI = getProjectFileURI("RelToCore.qvtras");
+//		doLoad_Concrete(inputURI, pivotURI);
+//		doLoad_ModelMorf("RelToCore/FlatRelToCore");
+		String stem = "RelToCore/FlatRelToCore";
+		URI inputURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.modelmorf/qvtrsrc/" + stem + ".qvtr", true);
+		URI pivotURI = getProjectFileURI(stem + ".qvtras");
+//		Resource flatResourceMM = resourceSet.getResource(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtbase/model-gen/FlatQVTpivot2.ecore", true), true);
+		doLoad_Concrete(inputURI, pivotURI, null);
 	}	
 
 	public void testLoad_SeqToStm_qvtr() throws IOException, InterruptedException {

@@ -11,7 +11,9 @@
 --	   E.D.Willink - adaptation to comply with QVT specification
 --	   E.D.Willink - adaptation to be useable with ModelMorf
 --------------------------------------------------------------------------------
-transformation relToCore(relations:QVTMM; core:QVTMM)
+import QVTMM : 'FlatQVTpivot.emof'::flatemofqvt;
+
+transformation relToCore(relations:QVTMM, core:QVTMM)
 {
 
 key QVTMM::Mapping{name, _transformation};
@@ -57,12 +59,12 @@ query getWhenVars(r:QVTMM::Relation):Set(QVTMM::Variable)
  
 -- Get variables occuring in an ocl expression
 -- Note: this function is not complete! It needs to be completed for other expressions
-query getVarsOfExp(e:QVTMM::OclExpression):Set(QVTMM::Variable)
+query getVarsOfExp(e:QVTMM::OCLExpression):Set(QVTMM::Variable)
 {
-   -- Walk the expr tree of the OclExpression and
+   -- Walk the expr tree of the OCLExpression and
    -- collect the variables used in those expressions
    let
-      vs:Set(QVTMM::Variable) = Set{}
+      vs:Set(QVTMM::VariableDeclaration) = Set{}
    in
    if (e.oclIsTypeOf(QVTMM::VariableExp))
    then
@@ -1062,7 +1064,7 @@ relation RSimplePatternToMPattern
 {
    domain relations rp:Pattern {
       predicate = pd:Predicate {
-         conditionExpression = re:OclExpression {}
+         conditionExpression = re:OCLExpression {}
       }
    }
    {
@@ -1070,7 +1072,7 @@ relation RSimplePatternToMPattern
    };
    enforce domain core mp:Pattern {
       predicate = mpd:Predicate{
-         conditionExpression = me:OclExpression {}
+         conditionExpression = me:OCLExpression {}
       }
    };
    where {
@@ -1353,13 +1355,13 @@ relation RPredicateSetToMBPredicateSet
 
    domain relations predSeq:Sequence(Predicate) {
       rp:Predicate {
-         conditionExpression = re:OclExpression {}
+         conditionExpression = re:OCLExpression {}
       }
       ++ rpRest
    };
    enforce domain core mb:BottomPattern {
       predicate = mp:Predicate {
-         conditionExpression = me:OclExpression {}
+         conditionExpression = me:OCLExpression {}
       }
    };
    where {
@@ -1378,7 +1380,7 @@ relation RDomainToMDBottomForEnforcementOfIdentityProp
          bindsTo = v:Variable {type=c:Class {}},
          part = pt:PropertyTemplateItem {
             referredProperty = pp:Property {},
-            value = e:OclExpression {}
+            value = e:OCLExpression {}
          }
       } {
          c._key.part->includes(pp)
@@ -1446,7 +1448,7 @@ relation RDomainPatternExprToMappingDomainAssignment
       _,
       v:Variable {},
       pp:Property {name = pn},
-      e:OclExpression {} {
+      e:OCLExpression {} {
          not e.oclIsTypeOf(VariableExp) and not e.oclIsTypeOf(ObjectTemplateExp)
       } ++ _
    };
@@ -1454,7 +1456,7 @@ relation RDomainPatternExprToMappingDomainAssignment
       assignment = a:PropertyAssignment {
          slotExpression = ve:VariableExp{referredVariable = mv},
          targetProperty = tp:Property{name = pn, class = mv.type.oclAsType(QVTMM::Class)},
-         value = me:OclExpression{}
+         value = me:OCLExpression{}
       }
    };
    where {
@@ -1573,7 +1575,7 @@ relation RDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive
          bindsTo = v:Variable {type = c:Class {}},
          part = pt:PropertyTemplateItem {
             referredProperty = pp:Property {name = pn},
-            value = e:OclExpression {}
+            value = e:OCLExpression {}
          }
       } {
          (not c._key.part->includes(pp)) and (not e.oclIsKindOf(TemplateExp))
@@ -1593,7 +1595,7 @@ relation RDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive
             assignment = a:PropertyAssignment {
                slotExpression = ve:VariableExp{referredVariable = mv},
                targetProperty = tp:Property{name = pn, class = mv.type.oclAsType(QVTMM::Class)},
-               value = me:OclExpression{}
+               value = me:OCLExpression{}
             }
          }
       }
@@ -1868,7 +1870,7 @@ relation RDomainPatternToMDBottomPatternSimpleNonVarExpr
          bindsTo = vte:Variable {},
          part = pt:PropertyTemplateItem {
             referredProperty = pp:Property {name = pn},
-            value = e:OclExpression {}
+            value = e:OCLExpression {}
          }
       } ++ _
    } {
@@ -1878,7 +1880,7 @@ relation RDomainPatternToMDBottomPatternSimpleNonVarExpr
       assignment = a:PropertyAssignment {
          slotExpression = ve:VariableExp{referredVariable = mvte},
          targetProperty = tp:Property{name = pn, class = mvte.type.oclAsType(QVTMM::Class)},
-         value = me:OclExpression{}
+         value = me:OCLExpression{}
       }
    };
    where {
@@ -2030,8 +2032,8 @@ relation RelationDomainToTraceClassVar
 -- For space reasons this relation is not expanded out here
 relation RExpToMExp
 {
-   domain relations re:OclExpression{};
-   enforce domain core me:OclExpression{} /*implementedby CopyOclExpession(re, me)*/;
+   domain relations re:OCLExpression{};
+   enforce domain core me:OCLExpression{} /*implementedby CopyOclExpession(re, me)*/;
 }
 
 }
