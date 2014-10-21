@@ -8,15 +8,15 @@
  * Contributors:
  *   E.D.Willink - Initial API and implementation
  *******************************************************************************/
-package	org.eclipse.qvtd.pivot.qvtcorebase.utilities;
+package	org.eclipse.qvtd.pivot.qvtcore.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.utilities.ASSaver;
-import org.eclipse.qvtd.pivot.qvtcorebase.util.AbstractQVTcoreBaseASSaverNormalizeVisitor;
+import org.eclipse.qvtd.pivot.qvtcore.util.AbstractQVTcoreASSaverNormalizeVisitor;
 
-public class QVTcoreBaseASSaverNormalizeVisitor extends AbstractQVTcoreBaseASSaverNormalizeVisitor
+public class QVTcoreASSaverNormalizeVisitor extends AbstractQVTcoreASSaverNormalizeVisitor
 {
-	public QVTcoreBaseASSaverNormalizeVisitor(@NonNull ASSaver context) {
+	public QVTcoreASSaverNormalizeVisitor(@NonNull ASSaver context) {
 		super(context);
 	}	
 }
