@@ -1,0 +1,491 @@
+<?xml version="1.0" encoding="ASCII"?>
+<flatemofqvt:Package xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:flatemofqvt="http://www.eclipse.org/qvt/0.9/FlatEmofQVT" xsi:schemaLocation="http://www.eclipse.org/qvt/0.9/FlatEmofQVT ../../../org.eclipse.qvtd.pivot.qvtbase/model-gen/FlatQVTpivot.ecore"
+    xmi:id="__jblNVoGEeS2WoXr83SnEA" name="$$" nsURI="http://www.eclipse.org/ocl/3.1.0/orphanage">
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jblNloGEeS2WoXr83SnEA" name="Collection">
+    <templateBinding xmi:id="__jblN1oGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblOFoGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jblz1oGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbiy1oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbiyloGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jbiyVoGEeS2WoXr83SnEA"/>
+    <superClass href="OCL.xml#__jbjeloGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jblz1oGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jblOVoGEeS2WoXr83SnEA" name="UniqueCollection" superClass="__jblNloGEeS2WoXr83SnEA">
+    <templateBinding xmi:id="__jblOloGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblO1oGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jblz1oGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jblGVoGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jblGFoGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jblF1oGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jblz1oGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:SetType" xmi:id="__jblPFoGEeS2WoXr83SnEA" name="Set" superClass="__jblOVoGEeS2WoXr83SnEA" lower="1">
+    <templateBinding xmi:id="__jblPVoGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblPloGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jblz1oGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbk01oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbk0loGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:SetType" href="OCL.xml#__jbk0VoGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jblz1oGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jblP1oGEeS2WoXr83SnEA" name="Collection">
+    <templateBinding xmi:id="__jblQFoGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblQVoGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jbluVoGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbiy1oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbiyloGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jbiyVoGEeS2WoXr83SnEA"/>
+    <superClass href="OCL.xml#__jbjeloGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jbluVoGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jblQloGEeS2WoXr83SnEA" name="UniqueCollection" superClass="__jblP1oGEeS2WoXr83SnEA">
+    <templateBinding xmi:id="__jblQ1oGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblRFoGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jbluVoGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jblGVoGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jblGFoGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jblF1oGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jbluVoGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:SetType" xmi:id="__jblRVoGEeS2WoXr83SnEA" name="Set" superClass="__jblQloGEeS2WoXr83SnEA" lower="1">
+    <templateBinding xmi:id="__jblRloGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblR1oGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jbluVoGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbk01oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbk0loGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:SetType" href="OCL.xml#__jbk0VoGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jbluVoGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jblSFoGEeS2WoXr83SnEA" name="Collection">
+    <templateBinding xmi:id="__jblSVoGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblSloGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jbl31oGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbiy1oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbiyloGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jbiyVoGEeS2WoXr83SnEA"/>
+    <superClass href="OCL.xml#__jbjeloGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jbl31oGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jblS1oGEeS2WoXr83SnEA" name="UniqueCollection" superClass="__jblSFoGEeS2WoXr83SnEA">
+    <templateBinding xmi:id="__jblTFoGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblTVoGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jbl31oGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jblGVoGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jblGFoGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jblF1oGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jbl31oGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:SetType" xmi:id="__jblTloGEeS2WoXr83SnEA" name="Set" superClass="__jblS1oGEeS2WoXr83SnEA" lower="1">
+    <templateBinding xmi:id="__jblT1oGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblUFoGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jbl31oGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbk01oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbk0loGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:SetType" href="OCL.xml#__jbk0VoGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jbl31oGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jblUVoGEeS2WoXr83SnEA" name="Collection">
+    <templateBinding xmi:id="__jblUloGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblU1oGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jblyFoGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbiy1oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbiyloGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jbiyVoGEeS2WoXr83SnEA"/>
+    <superClass href="OCL.xml#__jbjeloGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jblyFoGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jblVFoGEeS2WoXr83SnEA" name="UniqueCollection" superClass="__jblUVoGEeS2WoXr83SnEA">
+    <templateBinding xmi:id="__jblVVoGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblVloGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jblyFoGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jblGVoGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jblGFoGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jblF1oGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jblyFoGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:SetType" xmi:id="__jblV1oGEeS2WoXr83SnEA" name="Set" superClass="__jblVFoGEeS2WoXr83SnEA" lower="1">
+    <templateBinding xmi:id="__jblWFoGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblWVoGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jblyFoGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbk01oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbk0loGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:SetType" href="OCL.xml#__jbk0VoGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jblyFoGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jblWloGEeS2WoXr83SnEA" name="Collection">
+    <templateBinding xmi:id="__jblW1oGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblXFoGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jbl01oGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbiy1oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbiyloGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jbiyVoGEeS2WoXr83SnEA"/>
+    <superClass href="OCL.xml#__jbjeloGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jbl01oGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jblXVoGEeS2WoXr83SnEA" name="UniqueCollection" superClass="__jblWloGEeS2WoXr83SnEA">
+    <templateBinding xmi:id="__jblXloGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblX1oGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jbl01oGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jblGVoGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jblGFoGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jblF1oGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jbl01oGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:SetType" xmi:id="__jblYFoGEeS2WoXr83SnEA" name="Set" superClass="__jblXVoGEeS2WoXr83SnEA" lower="1">
+    <templateBinding xmi:id="__jblYVoGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblYloGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jbl01oGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbk01oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbk0loGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:SetType" href="OCL.xml#__jbk0VoGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jbl01oGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jblY1oGEeS2WoXr83SnEA" name="Collection">
+    <templateBinding xmi:id="__jblZFoGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblZVoGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jbl41oGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbiy1oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbiyloGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jbiyVoGEeS2WoXr83SnEA"/>
+    <superClass href="OCL.xml#__jbjeloGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jbl41oGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jblZloGEeS2WoXr83SnEA" name="UniqueCollection" superClass="__jblY1oGEeS2WoXr83SnEA">
+    <templateBinding xmi:id="__jblZ1oGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblaFoGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jbl41oGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jblGVoGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jblGFoGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jblF1oGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jbl41oGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:SetType" xmi:id="__jblaVoGEeS2WoXr83SnEA" name="Set" superClass="__jblZloGEeS2WoXr83SnEA" lower="1">
+    <templateBinding xmi:id="__jblaloGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jbla1oGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jbl41oGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbk01oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbk0loGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:SetType" href="OCL.xml#__jbk0VoGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jbl41oGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jblbFoGEeS2WoXr83SnEA" name="Collection">
+    <templateBinding xmi:id="__jblbVoGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblbloGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jblw1oGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbiy1oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbiyloGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jbiyVoGEeS2WoXr83SnEA"/>
+    <superClass href="OCL.xml#__jbjeloGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jblw1oGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jblb1oGEeS2WoXr83SnEA" name="UniqueCollection" superClass="__jblbFoGEeS2WoXr83SnEA">
+    <templateBinding xmi:id="__jblcFoGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblcVoGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jblw1oGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jblGVoGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jblGFoGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jblF1oGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jblw1oGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:SetType" xmi:id="__jblcloGEeS2WoXr83SnEA" name="Set" superClass="__jblb1oGEeS2WoXr83SnEA" lower="1">
+    <templateBinding xmi:id="__jblc1oGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jbldFoGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jblw1oGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbk01oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbk0loGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:SetType" href="OCL.xml#__jbk0VoGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jblw1oGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:BagType" xmi:id="__jbldVoGEeS2WoXr83SnEA" name="Bag" superClass="__jblWloGEeS2WoXr83SnEA">
+    <templateBinding xmi:id="__jbldloGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jbld1oGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jbl01oGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbiiVoGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbiiFoGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:BagType" href="OCL.xml#__jbih1oGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jbl01oGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:BagType" xmi:id="__jbleFoGEeS2WoXr83SnEA" name="Bag" superClass="__jblY1oGEeS2WoXr83SnEA">
+    <templateBinding xmi:id="__jbleVoGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jbleloGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jbl41oGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbiiVoGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbiiFoGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:BagType" href="OCL.xml#__jbih1oGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jbl41oGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:BagType" xmi:id="__jble1oGEeS2WoXr83SnEA" name="Bag" superClass="__jblUVoGEeS2WoXr83SnEA">
+    <templateBinding xmi:id="__jblfFoGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblfVoGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jblyFoGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbiiVoGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbiiFoGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:BagType" href="OCL.xml#__jbih1oGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jblyFoGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jblfloGEeS2WoXr83SnEA" name="Collection">
+    <templateBinding xmi:id="__jblf1oGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblgFoGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="StmcMM.xml#__jbfEVoGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbiy1oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbiyloGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jbiyVoGEeS2WoXr83SnEA"/>
+    <superClass href="OCL.xml#__jbjeloGEeS2WoXr83SnEA"/>
+    <elementType href="StmcMM.xml#__jbfEVoGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jblgVoGEeS2WoXr83SnEA" name="UniqueCollection" superClass="__jblfloGEeS2WoXr83SnEA">
+    <templateBinding xmi:id="__jblgloGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblg1oGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="StmcMM.xml#__jbfEVoGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jblGVoGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jblGFoGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jblF1oGEeS2WoXr83SnEA"/>
+    <elementType href="StmcMM.xml#__jbfEVoGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:SetType" xmi:id="__jblhFoGEeS2WoXr83SnEA" name="Set" superClass="__jblgVoGEeS2WoXr83SnEA" lower="1">
+    <templateBinding xmi:id="__jblhVoGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblhloGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="StmcMM.xml#__jbfEVoGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbk01oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbk0loGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:SetType" href="OCL.xml#__jbk0VoGEeS2WoXr83SnEA"/>
+    <elementType href="StmcMM.xml#__jbfEVoGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jblh1oGEeS2WoXr83SnEA" name="Collection">
+    <templateBinding xmi:id="__jbliFoGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jbliVoGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="StmcMM.xml#__jbfAFoGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbiy1oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbiyloGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jbiyVoGEeS2WoXr83SnEA"/>
+    <superClass href="OCL.xml#__jbjeloGEeS2WoXr83SnEA"/>
+    <elementType href="StmcMM.xml#__jbfAFoGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jbliloGEeS2WoXr83SnEA" name="UniqueCollection" superClass="__jblh1oGEeS2WoXr83SnEA">
+    <templateBinding xmi:id="__jbli1oGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jbljFoGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="StmcMM.xml#__jbfAFoGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jblGVoGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jblGFoGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jblF1oGEeS2WoXr83SnEA"/>
+    <elementType href="StmcMM.xml#__jbfAFoGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:SetType" xmi:id="__jbljVoGEeS2WoXr83SnEA" name="Set" superClass="__jbliloGEeS2WoXr83SnEA" lower="1">
+    <templateBinding xmi:id="__jbljloGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblj1oGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="StmcMM.xml#__jbfAFoGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbk01oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbk0loGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:SetType" href="OCL.xml#__jbk0VoGEeS2WoXr83SnEA"/>
+    <elementType href="StmcMM.xml#__jbfAFoGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jblkFoGEeS2WoXr83SnEA" name="Collection">
+    <templateBinding xmi:id="__jblkVoGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblkloGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="StmcMM.xml#__jbfC1oGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbiy1oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbiyloGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jbiyVoGEeS2WoXr83SnEA"/>
+    <superClass href="OCL.xml#__jbjeloGEeS2WoXr83SnEA"/>
+    <elementType href="StmcMM.xml#__jbfC1oGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jblk1oGEeS2WoXr83SnEA" name="UniqueCollection" superClass="__jblkFoGEeS2WoXr83SnEA">
+    <templateBinding xmi:id="__jbllFoGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jbllVoGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="StmcMM.xml#__jbfC1oGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jblGVoGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jblGFoGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jblF1oGEeS2WoXr83SnEA"/>
+    <elementType href="StmcMM.xml#__jbfC1oGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:SetType" xmi:id="__jbllloGEeS2WoXr83SnEA" name="Set" superClass="__jblk1oGEeS2WoXr83SnEA" lower="1">
+    <templateBinding xmi:id="__jbll1oGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblmFoGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="StmcMM.xml#__jbfC1oGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbk01oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbk0loGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:SetType" href="OCL.xml#__jbk0VoGEeS2WoXr83SnEA"/>
+    <elementType href="StmcMM.xml#__jbfC1oGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jblmVoGEeS2WoXr83SnEA" name="Collection">
+    <templateBinding xmi:id="__jblmloGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblm1oGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="StmcMM.xml#__jbe9VoGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbiy1oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbiyloGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jbiyVoGEeS2WoXr83SnEA"/>
+    <superClass href="OCL.xml#__jbjeloGEeS2WoXr83SnEA"/>
+    <elementType href="StmcMM.xml#__jbe9VoGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jblnFoGEeS2WoXr83SnEA" name="UniqueCollection" superClass="__jblmVoGEeS2WoXr83SnEA">
+    <templateBinding xmi:id="__jblnVoGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblnloGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="StmcMM.xml#__jbe9VoGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jblGVoGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jblGFoGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jblF1oGEeS2WoXr83SnEA"/>
+    <elementType href="StmcMM.xml#__jbe9VoGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:SetType" xmi:id="__jbln1oGEeS2WoXr83SnEA" name="Set" superClass="__jblnFoGEeS2WoXr83SnEA" lower="1">
+    <templateBinding xmi:id="__jbloFoGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jbloVoGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="StmcMM.xml#__jbe9VoGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbk01oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbk0loGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:SetType" href="OCL.xml#__jbk0VoGEeS2WoXr83SnEA"/>
+    <elementType href="StmcMM.xml#__jbe9VoGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jbloloGEeS2WoXr83SnEA" name="Collection">
+    <templateBinding xmi:id="__jblo1oGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblpFoGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="StmcMM.xml#__jbfBloGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbiy1oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbiyloGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jbiyVoGEeS2WoXr83SnEA"/>
+    <superClass href="OCL.xml#__jbjeloGEeS2WoXr83SnEA"/>
+    <elementType href="StmcMM.xml#__jbfBloGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jblpVoGEeS2WoXr83SnEA" name="UniqueCollection" superClass="__jbloloGEeS2WoXr83SnEA">
+    <templateBinding xmi:id="__jblploGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblp1oGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="StmcMM.xml#__jbfBloGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jblGVoGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jblGFoGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jblF1oGEeS2WoXr83SnEA"/>
+    <elementType href="StmcMM.xml#__jbfBloGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:SetType" xmi:id="__jblqFoGEeS2WoXr83SnEA" name="Set" superClass="__jblpVoGEeS2WoXr83SnEA" lower="1">
+    <templateBinding xmi:id="__jblqVoGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblqloGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="StmcMM.xml#__jbfBloGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbk01oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbk0loGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:SetType" href="OCL.xml#__jbk0VoGEeS2WoXr83SnEA"/>
+    <elementType href="StmcMM.xml#__jbfBloGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jblq1oGEeS2WoXr83SnEA" name="Collection">
+    <templateBinding xmi:id="__jblrFoGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblrVoGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="StmcMM.xml#__jbfBFoGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbiy1oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbiyloGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jbiyVoGEeS2WoXr83SnEA"/>
+    <superClass href="OCL.xml#__jbjeloGEeS2WoXr83SnEA"/>
+    <elementType href="StmcMM.xml#__jbfBFoGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:BagType" xmi:id="__jblrloGEeS2WoXr83SnEA" name="Bag" superClass="__jblq1oGEeS2WoXr83SnEA">
+    <templateBinding xmi:id="__jblr1oGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jblsFoGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="StmcMM.xml#__jbfBFoGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbiiVoGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbiiFoGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:BagType" href="OCL.xml#__jbih1oGEeS2WoXr83SnEA"/>
+    <elementType href="StmcMM.xml#__jbfBFoGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="__jblsVoGEeS2WoXr83SnEA" name="OrderedCollection" superClass="__jblWloGEeS2WoXr83SnEA">
+    <templateBinding xmi:id="__jblsloGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jbls1oGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jbl01oGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbkHFoGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbkG1oGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#__jbkGloGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jbl01oGEeS2WoXr83SnEA"/>
+  </ownedType>
+  <ownedType xmi:type="flatemofqvt:SequenceType" xmi:id="__jbltFoGEeS2WoXr83SnEA" name="Sequence" superClass="__jblsVoGEeS2WoXr83SnEA">
+    <templateBinding xmi:id="__jbltVoGEeS2WoXr83SnEA">
+      <parameterSubstitution xmi:id="__jbltloGEeS2WoXr83SnEA">
+        <actual xmi:type="flatemofqvt:Class" href="SeqMM.xml#__jbl01oGEeS2WoXr83SnEA"/>
+        <formal href="OCL.xml#__jbkf1oGEeS2WoXr83SnEA"/>
+      </parameterSubstitution>
+      <signature href="OCL.xml#__jbkfloGEeS2WoXr83SnEA"/>
+    </templateBinding>
+    <unspecializedElement xmi:type="flatemofqvt:SequenceType" href="OCL.xml#__jbkfVoGEeS2WoXr83SnEA"/>
+    <elementType href="SeqMM.xml#__jbl01oGEeS2WoXr83SnEA"/>
+  </ownedType>
+</flatemofqvt:Package>

@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="ASCII"?>
+<flatemofqvt:RelationModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:emof="http://www.eclipse.org/emf/2002/Ecore" xmlns:flatemofqvt="http://www.eclipse.org/qvt/0.9/FlatEmofQVT" xsi:schemaLocation="http://www.eclipse.org/qvt/0.9/FlatEmofQVT ../../../org.eclipse.qvtd.pivot.qvtbase/model-gen/FlatQVTpivot.ecore"
+    xmi:id="_ArQCoFoHEeS2WoXr83SnEA" name="mitosi.qvtr" externalURI="platform:/resource/org.eclipse.qvtd.examples.qvtrelation.modelmorf/qvtrsrc/MiToSi/mitosi.qvtr">
+  <ownedComment xmi:id="_ArQCoVoHEeS2WoXr83SnEA" body="*****************************************************************************&#xA;Copyright (c) 2007,2008 Tata Consultancy Services and others.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;TCS - initial implementation for ModelMorf&#xA;E.D.Willink - alignment with evolved specification&#xA;*****************************************************************************"/>
+  <nestedPackage xmi:type="flatemofqvt:RelationalTransformation" xmi:id="_ArQColoHEeS2WoXr83SnEA" name="MiToSi">
+    <superClass href="OCL.xml#_ArQHCFoHEeS2WoXr83SnEA"/>
+    <modelParameter xmi:id="_ArQCo1oHEeS2WoXr83SnEA" name="uml">
+      <usedPackage href="umlMM.xml#_ArQIhVoHEeS2WoXr83SnEA"/>
+    </modelParameter>
+    <modelParameter xmi:id="_ArQCpFoHEeS2WoXr83SnEA" name="java">
+      <usedPackage href="javaMM.xml#_ArQImVoHEeS2WoXr83SnEA"/>
+    </modelParameter>
+    <rule xmi:type="flatemofqvt:Relation" xmi:id="_ArQCpVoHEeS2WoXr83SnEA" name="RClassToClass" isTopLevel="true" relationCallExp="_ArQCzFoHEeS2WoXr83SnEA">
+      <domain xmi:type="flatemofqvt:RelationDomain" xmi:id="_ArQCploHEeS2WoXr83SnEA" isCheckable="true" isEnforceable="false" typedModel="_ArQCo1oHEeS2WoXr83SnEA"
+          rootVariable="_ArQCs1oHEeS2WoXr83SnEA">
+        <pattern xmi:id="_ArQCp1oHEeS2WoXr83SnEA">
+          <templateExpression xmi:type="flatemofqvt:ObjectTemplateExp" xmi:id="_ArQCqFoHEeS2WoXr83SnEA" bindsTo="_ArQCs1oHEeS2WoXr83SnEA">
+            <type href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+            <part xmi:id="_ArQCqVoHEeS2WoXr83SnEA">
+              <referredProperty href="umlMM.xml#_ArQIh1oHEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQCqloHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQCsloHEeS2WoXr83SnEA">
+                <type href="OCL.xml#_ArQFbVoHEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <part xmi:id="_ArQCq1oHEeS2WoXr83SnEA">
+              <referredProperty href="umlMM.xml#_ArQIiloHEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:StringLiteralExp" xmi:id="_ArQCrFoHEeS2WoXr83SnEA" stringSymbol="DomainRoot">
+                <type href="OCL.xml#_ArQFbVoHEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <referredClass href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <domain xmi:type="flatemofqvt:RelationDomain" xmi:id="_ArQCrVoHEeS2WoXr83SnEA" isCheckable="true" isEnforceable="true" typedModel="_ArQCpFoHEeS2WoXr83SnEA"
+          rootVariable="_ArQCtFoHEeS2WoXr83SnEA">
+        <pattern xmi:id="_ArQCrloHEeS2WoXr83SnEA">
+          <templateExpression xmi:type="flatemofqvt:ObjectTemplateExp" xmi:id="_ArQCr1oHEeS2WoXr83SnEA" bindsTo="_ArQCtFoHEeS2WoXr83SnEA">
+            <type href="javaMM.xml#_ArQImloHEeS2WoXr83SnEA"/>
+            <part xmi:id="_ArQCsFoHEeS2WoXr83SnEA">
+              <referredProperty href="javaMM.xml#_ArQInloHEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQCsVoHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQCsloHEeS2WoXr83SnEA">
+                <type href="OCL.xml#_ArQFbVoHEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <referredClass href="javaMM.xml#_ArQImloHEeS2WoXr83SnEA"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <variable xmi:id="_ArQCsloHEeS2WoXr83SnEA" name="n" isRequired="false">
+        <type href="OCL.xml#_ArQFbVoHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_ArQCs1oHEeS2WoXr83SnEA" name="c1" templateExp="_ArQCqFoHEeS2WoXr83SnEA">
+        <type href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_ArQCtFoHEeS2WoXr83SnEA" name="c2" templateExp="_ArQCr1oHEeS2WoXr83SnEA">
+        <type href="javaMM.xml#_ArQImloHEeS2WoXr83SnEA"/>
+      </variable>
+    </rule>
+    <rule xmi:type="flatemofqvt:Relation" xmi:id="_ArQCtVoHEeS2WoXr83SnEA" name="ClassToClass" isTopLevel="true" relationCallExp="_ArQCz1oHEeS2WoXr83SnEA _ArQDC1oHEeS2WoXr83SnEA _ArQDH1oHEeS2WoXr83SnEA">
+      <domain xmi:type="flatemofqvt:RelationDomain" xmi:id="_ArQCtloHEeS2WoXr83SnEA" isCheckable="true" isEnforceable="false" typedModel="_ArQCo1oHEeS2WoXr83SnEA"
+          rootVariable="_ArQCx1oHEeS2WoXr83SnEA">
+        <pattern xmi:id="_ArQCt1oHEeS2WoXr83SnEA">
+          <templateExpression xmi:type="flatemofqvt:ObjectTemplateExp" xmi:id="_ArQCuFoHEeS2WoXr83SnEA" bindsTo="_ArQCx1oHEeS2WoXr83SnEA">
+            <type href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+            <part xmi:id="_ArQCuVoHEeS2WoXr83SnEA">
+              <referredProperty href="umlMM.xml#_ArQIh1oHEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQCuloHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQCxFoHEeS2WoXr83SnEA">
+                <type href="OCL.xml#_ArQFbVoHEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <part xmi:id="_ArQCu1oHEeS2WoXr83SnEA">
+              <referredProperty href="umlMM.xml#_ArQIiVoHEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQCvFoHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQCxVoHEeS2WoXr83SnEA">
+                <type href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <referredClass href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <domain xmi:type="flatemofqvt:RelationDomain" xmi:id="_ArQCvVoHEeS2WoXr83SnEA" isCheckable="true" isEnforceable="true" typedModel="_ArQCpFoHEeS2WoXr83SnEA"
+          rootVariable="_ArQCyFoHEeS2WoXr83SnEA">
+        <pattern xmi:id="_ArQCvloHEeS2WoXr83SnEA">
+          <templateExpression xmi:type="flatemofqvt:ObjectTemplateExp" xmi:id="_ArQCv1oHEeS2WoXr83SnEA" bindsTo="_ArQCyFoHEeS2WoXr83SnEA">
+            <type href="javaMM.xml#_ArQImloHEeS2WoXr83SnEA"/>
+            <part xmi:id="_ArQCwFoHEeS2WoXr83SnEA">
+              <referredProperty href="javaMM.xml#_ArQInloHEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQCwVoHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQCxFoHEeS2WoXr83SnEA">
+                <type href="OCL.xml#_ArQFbVoHEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <part xmi:id="_ArQCwloHEeS2WoXr83SnEA">
+              <referredProperty href="javaMM.xml#_ArQIm1oHEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQCw1oHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQCxloHEeS2WoXr83SnEA">
+                <type href="javaMM.xml#_ArQImloHEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <referredClass href="javaMM.xml#_ArQImloHEeS2WoXr83SnEA"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <variable xmi:id="_ArQCxFoHEeS2WoXr83SnEA" name="n" isRequired="false">
+        <type href="OCL.xml#_ArQFbVoHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_ArQCxVoHEeS2WoXr83SnEA" name="c1sup" isRequired="false">
+        <type href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_ArQCxloHEeS2WoXr83SnEA" name="c2sup" isRequired="false">
+        <type href="javaMM.xml#_ArQImloHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_ArQCx1oHEeS2WoXr83SnEA" name="c1" templateExp="_ArQCuFoHEeS2WoXr83SnEA">
+        <type href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_ArQCyFoHEeS2WoXr83SnEA" name="c2" templateExp="_ArQCv1oHEeS2WoXr83SnEA">
+        <type href="javaMM.xml#_ArQImloHEeS2WoXr83SnEA"/>
+      </variable>
+      <when xmi:id="_ArQCyVoHEeS2WoXr83SnEA">
+        <predicate xmi:id="_ArQCyloHEeS2WoXr83SnEA">
+          <conditionExpression xmi:type="flatemofqvt:OperationCallExp" xmi:id="_ArQCy1oHEeS2WoXr83SnEA" name="or" isRequired="false">
+            <type href="OCL.xml#_ArQE-1oHEeS2WoXr83SnEA"/>
+            <source xmi:type="flatemofqvt:RelationCallExp" xmi:id="_ArQCzFoHEeS2WoXr83SnEA" referredRelation="_ArQCpVoHEeS2WoXr83SnEA">
+              <type href="OCL.xml#_ArQE-1oHEeS2WoXr83SnEA"/>
+              <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQCzVoHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQCxVoHEeS2WoXr83SnEA">
+                <type href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+              </argument>
+              <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQCzloHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQCxloHEeS2WoXr83SnEA">
+                <type href="javaMM.xml#_ArQImloHEeS2WoXr83SnEA"/>
+              </argument>
+            </source>
+            <argument xmi:type="flatemofqvt:RelationCallExp" xmi:id="_ArQCz1oHEeS2WoXr83SnEA" referredRelation="_ArQCtVoHEeS2WoXr83SnEA">
+              <type href="OCL.xml#_ArQE-1oHEeS2WoXr83SnEA"/>
+              <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQC0FoHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQCxVoHEeS2WoXr83SnEA">
+                <type href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+              </argument>
+              <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQC0VoHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQCxloHEeS2WoXr83SnEA">
+                <type href="javaMM.xml#_ArQImloHEeS2WoXr83SnEA"/>
+              </argument>
+            </argument>
+            <referredOperation href="OCL.xml#_ArQFD1oHEeS2WoXr83SnEA"/>
+          </conditionExpression>
+        </predicate>
+      </when>
+    </rule>
+    <rule xmi:type="flatemofqvt:Relation" xmi:id="_ArQC0loHEeS2WoXr83SnEA" name="RClassToInterface" isTopLevel="true" relationCallExp="_ArQDA1oHEeS2WoXr83SnEA">
+      <domain xmi:type="flatemofqvt:RelationDomain" xmi:id="_ArQC01oHEeS2WoXr83SnEA" isCheckable="true" isEnforceable="false" typedModel="_ArQCo1oHEeS2WoXr83SnEA"
+          rootVariable="_ArQC6FoHEeS2WoXr83SnEA">
+        <pattern xmi:id="_ArQC1FoHEeS2WoXr83SnEA">
+          <templateExpression xmi:type="flatemofqvt:ObjectTemplateExp" xmi:id="_ArQC1VoHEeS2WoXr83SnEA" bindsTo="_ArQC6FoHEeS2WoXr83SnEA">
+            <type href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+            <where xmi:type="flatemofqvt:OperationCallExp" xmi:id="_ArQC1loHEeS2WoXr83SnEA" name="and" isRequired="false">
+              <type href="OCL.xml#_ArQE-1oHEeS2WoXr83SnEA"/>
+              <source xmi:type="flatemofqvt:OperationCallExp" xmi:id="_ArQC11oHEeS2WoXr83SnEA">
+                <type href="OCL.xml#_ArQE-1oHEeS2WoXr83SnEA"/>
+                <source xmi:type="flatemofqvt:PropertyCallExp" xmi:id="_ArQC2FoHEeS2WoXr83SnEA" type="_ArQDLVoHEeS2WoXr83SnEA">
+                  <source xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQC2VoHEeS2WoXr83SnEA" referredVariable="_ArQC6FoHEeS2WoXr83SnEA">
+                    <type href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+                  </source>
+                  <referredProperty href="umlMM.xml#_ArQIiVoHEeS2WoXr83SnEA"/>
+                </source>
+                <referredOperation href="OCL.xml#_ArQGXVoHEeS2WoXr83SnEA"/>
+              </source>
+              <argument xmi:type="flatemofqvt:OperationCallExp" xmi:id="_ArQC2loHEeS2WoXr83SnEA" name="&lt;>">
+                <type href="OCL.xml#_ArQE-1oHEeS2WoXr83SnEA"/>
+                <source xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQC21oHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQC51oHEeS2WoXr83SnEA">
+                  <type href="OCL.xml#_ArQFbVoHEeS2WoXr83SnEA"/>
+                </source>
+                <argument xmi:type="flatemofqvt:StringLiteralExp" xmi:id="_ArQC3FoHEeS2WoXr83SnEA" stringSymbol="DomainRoot">
+                  <type href="OCL.xml#_ArQFbVoHEeS2WoXr83SnEA"/>
+                </argument>
+                <referredOperation href="OCL.xml#_ArQFd1oHEeS2WoXr83SnEA"/>
+              </argument>
+              <referredOperation href="OCL.xml#_ArQFBFoHEeS2WoXr83SnEA"/>
+            </where>
+            <part xmi:id="_ArQC3VoHEeS2WoXr83SnEA">
+              <referredProperty href="umlMM.xml#_ArQIh1oHEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQC3loHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQC5loHEeS2WoXr83SnEA">
+                <type href="OCL.xml#_ArQFbVoHEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <part xmi:id="_ArQC31oHEeS2WoXr83SnEA">
+              <referredProperty href="umlMM.xml#_ArQIiloHEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQC4FoHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQC51oHEeS2WoXr83SnEA">
+                <type href="OCL.xml#_ArQFbVoHEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <referredClass href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <domain xmi:type="flatemofqvt:RelationDomain" xmi:id="_ArQC4VoHEeS2WoXr83SnEA" isCheckable="true" isEnforceable="true" typedModel="_ArQCpFoHEeS2WoXr83SnEA"
+          rootVariable="_ArQC6VoHEeS2WoXr83SnEA">
+        <pattern xmi:id="_ArQC4loHEeS2WoXr83SnEA">
+          <templateExpression xmi:type="flatemofqvt:ObjectTemplateExp" xmi:id="_ArQC41oHEeS2WoXr83SnEA" bindsTo="_ArQC6VoHEeS2WoXr83SnEA">
+            <type href="javaMM.xml#_ArQIoFoHEeS2WoXr83SnEA"/>
+            <part xmi:id="_ArQC5FoHEeS2WoXr83SnEA">
+              <referredProperty href="javaMM.xml#_ArQIpFoHEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQC5VoHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQC5loHEeS2WoXr83SnEA">
+                <type href="OCL.xml#_ArQFbVoHEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <referredClass href="javaMM.xml#_ArQIoFoHEeS2WoXr83SnEA"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <variable xmi:id="_ArQC5loHEeS2WoXr83SnEA" name="n" isRequired="false">
+        <type href="OCL.xml#_ArQFbVoHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_ArQC51oHEeS2WoXr83SnEA" name="typ" isRequired="false">
+        <type href="OCL.xml#_ArQFbVoHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_ArQC6FoHEeS2WoXr83SnEA" name="c" templateExp="_ArQC1VoHEeS2WoXr83SnEA">
+        <type href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_ArQC6VoHEeS2WoXr83SnEA" name="i" templateExp="_ArQC41oHEeS2WoXr83SnEA">
+        <type href="javaMM.xml#_ArQIoFoHEeS2WoXr83SnEA"/>
+      </variable>
+    </rule>
+    <rule xmi:type="flatemofqvt:Relation" xmi:id="_ArQC6loHEeS2WoXr83SnEA" name="ClassToInterface" isTopLevel="true" relationCallExp="_ArQDBloHEeS2WoXr83SnEA _ArQDI1oHEeS2WoXr83SnEA">
+      <domain xmi:type="flatemofqvt:RelationDomain" xmi:id="_ArQC61oHEeS2WoXr83SnEA" isCheckable="true" isEnforceable="false" typedModel="_ArQCo1oHEeS2WoXr83SnEA"
+          rootVariable="_ArQC_loHEeS2WoXr83SnEA">
+        <pattern xmi:id="_ArQC7FoHEeS2WoXr83SnEA">
+          <templateExpression xmi:type="flatemofqvt:ObjectTemplateExp" xmi:id="_ArQC7VoHEeS2WoXr83SnEA" bindsTo="_ArQC_loHEeS2WoXr83SnEA">
+            <type href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+            <part xmi:id="_ArQC7loHEeS2WoXr83SnEA">
+              <referredProperty href="umlMM.xml#_ArQIh1oHEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQC71oHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQC-VoHEeS2WoXr83SnEA">
+                <type href="OCL.xml#_ArQFbVoHEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <part xmi:id="_ArQC8FoHEeS2WoXr83SnEA">
+              <referredProperty href="umlMM.xml#_ArQIiVoHEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQC8VoHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQC-loHEeS2WoXr83SnEA">
+                <type href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <referredClass href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <domain xmi:type="flatemofqvt:RelationDomain" xmi:id="_ArQC8loHEeS2WoXr83SnEA" isCheckable="true" isEnforceable="true" typedModel="_ArQCpFoHEeS2WoXr83SnEA"
+          rootVariable="_ArQC_1oHEeS2WoXr83SnEA">
+        <pattern xmi:id="_ArQC81oHEeS2WoXr83SnEA">
+          <templateExpression xmi:type="flatemofqvt:ObjectTemplateExp" xmi:id="_ArQC9FoHEeS2WoXr83SnEA" bindsTo="_ArQC_1oHEeS2WoXr83SnEA">
+            <type href="javaMM.xml#_ArQIoFoHEeS2WoXr83SnEA"/>
+            <part xmi:id="_ArQC9VoHEeS2WoXr83SnEA">
+              <referredProperty href="javaMM.xml#_ArQIpFoHEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQC9loHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQC-VoHEeS2WoXr83SnEA">
+                <type href="OCL.xml#_ArQFbVoHEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <part xmi:id="_ArQC91oHEeS2WoXr83SnEA">
+              <referredProperty href="javaMM.xml#_ArQIoVoHEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQC-FoHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQC-1oHEeS2WoXr83SnEA">
+                <type href="javaMM.xml#_ArQIoFoHEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <referredClass href="javaMM.xml#_ArQIoFoHEeS2WoXr83SnEA"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <variable xmi:id="_ArQC-VoHEeS2WoXr83SnEA" name="n" isRequired="false">
+        <type href="OCL.xml#_ArQFbVoHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_ArQC-loHEeS2WoXr83SnEA" name="csup" isRequired="false">
+        <type href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_ArQC-1oHEeS2WoXr83SnEA" name="isup" isRequired="false">
+        <type href="javaMM.xml#_ArQIoFoHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_ArQC_FoHEeS2WoXr83SnEA" name="someI" isRequired="false">
+        <type href="javaMM.xml#_ArQIoFoHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_ArQC_VoHEeS2WoXr83SnEA" name="z" isRequired="false">
+        <type href="javaMM.xml#_ArQIoFoHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_ArQC_loHEeS2WoXr83SnEA" name="c" templateExp="_ArQC7VoHEeS2WoXr83SnEA">
+        <type href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_ArQC_1oHEeS2WoXr83SnEA" name="i" templateExp="_ArQC9FoHEeS2WoXr83SnEA">
+        <type href="javaMM.xml#_ArQIoFoHEeS2WoXr83SnEA"/>
+      </variable>
+      <when xmi:id="_ArQDAFoHEeS2WoXr83SnEA">
+        <predicate xmi:id="_ArQDAVoHEeS2WoXr83SnEA">
+          <conditionExpression xmi:type="flatemofqvt:OperationCallExp" xmi:id="_ArQDAloHEeS2WoXr83SnEA" name="or" isRequired="false">
+            <type href="OCL.xml#_ArQE-1oHEeS2WoXr83SnEA"/>
+            <source xmi:type="flatemofqvt:RelationCallExp" xmi:id="_ArQDA1oHEeS2WoXr83SnEA" referredRelation="_ArQC0loHEeS2WoXr83SnEA">
+              <type href="OCL.xml#_ArQE-1oHEeS2WoXr83SnEA"/>
+              <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQDBFoHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQC-loHEeS2WoXr83SnEA">
+                <type href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+              </argument>
+              <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQDBVoHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQC-1oHEeS2WoXr83SnEA">
+                <type href="javaMM.xml#_ArQIoFoHEeS2WoXr83SnEA"/>
+              </argument>
+            </source>
+            <argument xmi:type="flatemofqvt:RelationCallExp" xmi:id="_ArQDBloHEeS2WoXr83SnEA" referredRelation="_ArQC6loHEeS2WoXr83SnEA">
+              <type href="OCL.xml#_ArQE-1oHEeS2WoXr83SnEA"/>
+              <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQDB1oHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQC-loHEeS2WoXr83SnEA">
+                <type href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+              </argument>
+              <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQDCFoHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQC-1oHEeS2WoXr83SnEA">
+                <type href="javaMM.xml#_ArQIoFoHEeS2WoXr83SnEA"/>
+              </argument>
+            </argument>
+            <referredOperation href="OCL.xml#_ArQFD1oHEeS2WoXr83SnEA"/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="_ArQDCVoHEeS2WoXr83SnEA">
+          <conditionExpression xmi:type="flatemofqvt:OperationCallExp" xmi:id="_ArQDCloHEeS2WoXr83SnEA" name="not" isRequired="false">
+            <type href="OCL.xml#_ArQE-1oHEeS2WoXr83SnEA"/>
+            <source xmi:type="flatemofqvt:RelationCallExp" xmi:id="_ArQDC1oHEeS2WoXr83SnEA" referredRelation="_ArQCtVoHEeS2WoXr83SnEA">
+              <type href="OCL.xml#_ArQE-1oHEeS2WoXr83SnEA"/>
+              <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQDDFoHEeS2WoXr83SnEA" referredVariable="_ArQC_loHEeS2WoXr83SnEA">
+                <type href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+              </argument>
+              <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQDDVoHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQC_VoHEeS2WoXr83SnEA">
+                <type href="javaMM.xml#_ArQIoFoHEeS2WoXr83SnEA"/>
+              </argument>
+            </source>
+            <referredOperation href="OCL.xml#_ArQFDFoHEeS2WoXr83SnEA"/>
+          </conditionExpression>
+        </predicate>
+      </when>
+    </rule>
+    <rule xmi:type="flatemofqvt:Relation" xmi:id="_ArQDDloHEeS2WoXr83SnEA" name="ClassSupersToClassImplements" isTopLevel="true">
+      <domain xmi:type="flatemofqvt:RelationDomain" xmi:id="_ArQDD1oHEeS2WoXr83SnEA" isCheckable="true" isEnforceable="false" typedModel="_ArQCo1oHEeS2WoXr83SnEA"
+          rootVariable="_ArQDG1oHEeS2WoXr83SnEA">
+        <pattern xmi:id="_ArQDEFoHEeS2WoXr83SnEA">
+          <templateExpression xmi:type="flatemofqvt:ObjectTemplateExp" xmi:id="_ArQDEVoHEeS2WoXr83SnEA" bindsTo="_ArQDG1oHEeS2WoXr83SnEA">
+            <type href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+            <part xmi:id="_ArQDEloHEeS2WoXr83SnEA">
+              <referredProperty href="umlMM.xml#_ArQIiVoHEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQDE1oHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQDGVoHEeS2WoXr83SnEA">
+                <type href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <referredClass href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <domain xmi:type="flatemofqvt:RelationDomain" xmi:id="_ArQDFFoHEeS2WoXr83SnEA" isCheckable="true" isEnforceable="true" typedModel="_ArQCpFoHEeS2WoXr83SnEA"
+          rootVariable="_ArQDHFoHEeS2WoXr83SnEA">
+        <pattern xmi:id="_ArQDFVoHEeS2WoXr83SnEA">
+          <templateExpression xmi:type="flatemofqvt:ObjectTemplateExp" xmi:id="_ArQDFloHEeS2WoXr83SnEA" bindsTo="_ArQDHFoHEeS2WoXr83SnEA">
+            <type href="javaMM.xml#_ArQImloHEeS2WoXr83SnEA"/>
+            <part xmi:id="_ArQDF1oHEeS2WoXr83SnEA">
+              <referredProperty href="javaMM.xml#_ArQInVoHEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQDGFoHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQDGloHEeS2WoXr83SnEA">
+                <type href="javaMM.xml#_ArQIoFoHEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <referredClass href="javaMM.xml#_ArQImloHEeS2WoXr83SnEA"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <variable xmi:id="_ArQDGVoHEeS2WoXr83SnEA" name="csup" isRequired="false">
+        <type href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_ArQDGloHEeS2WoXr83SnEA" name="isup" isRequired="false">
+        <type href="javaMM.xml#_ArQIoFoHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_ArQDG1oHEeS2WoXr83SnEA" name="c1" templateExp="_ArQDEVoHEeS2WoXr83SnEA">
+        <type href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_ArQDHFoHEeS2WoXr83SnEA" name="c2" templateExp="_ArQDFloHEeS2WoXr83SnEA">
+        <type href="javaMM.xml#_ArQImloHEeS2WoXr83SnEA"/>
+      </variable>
+      <when xmi:id="_ArQDHVoHEeS2WoXr83SnEA">
+        <predicate xmi:id="_ArQDHloHEeS2WoXr83SnEA">
+          <conditionExpression xmi:type="flatemofqvt:RelationCallExp" xmi:id="_ArQDH1oHEeS2WoXr83SnEA" referredRelation="_ArQCtVoHEeS2WoXr83SnEA">
+            <type href="OCL.xml#_ArQE-1oHEeS2WoXr83SnEA"/>
+            <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQDIFoHEeS2WoXr83SnEA" referredVariable="_ArQDG1oHEeS2WoXr83SnEA">
+              <type href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+            </argument>
+            <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQDIVoHEeS2WoXr83SnEA" referredVariable="_ArQDHFoHEeS2WoXr83SnEA">
+              <type href="javaMM.xml#_ArQImloHEeS2WoXr83SnEA"/>
+            </argument>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="_ArQDIloHEeS2WoXr83SnEA">
+          <conditionExpression xmi:type="flatemofqvt:RelationCallExp" xmi:id="_ArQDI1oHEeS2WoXr83SnEA" referredRelation="_ArQC6loHEeS2WoXr83SnEA">
+            <type href="OCL.xml#_ArQE-1oHEeS2WoXr83SnEA"/>
+            <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQDJFoHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQDGVoHEeS2WoXr83SnEA">
+              <type href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+            </argument>
+            <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_ArQDJVoHEeS2WoXr83SnEA" isRequired="false" referredVariable="_ArQDGloHEeS2WoXr83SnEA">
+              <type href="javaMM.xml#_ArQIoFoHEeS2WoXr83SnEA"/>
+            </argument>
+          </conditionExpression>
+        </predicate>
+      </when>
+    </rule>
+    <ownedKey xmi:id="_ArQDJloHEeS2WoXr83SnEA">
+      <identifies href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+      <part href="umlMM.xml#_ArQIh1oHEeS2WoXr83SnEA"/>
+    </ownedKey>
+    <ownedKey xmi:id="_ArQDJ1oHEeS2WoXr83SnEA">
+      <identifies href="javaMM.xml#_ArQImloHEeS2WoXr83SnEA"/>
+      <part href="javaMM.xml#_ArQInloHEeS2WoXr83SnEA"/>
+    </ownedKey>
+    <ownedKey xmi:id="_ArQDKFoHEeS2WoXr83SnEA">
+      <identifies href="javaMM.xml#_ArQIoFoHEeS2WoXr83SnEA"/>
+      <part href="javaMM.xml#_ArQIpFoHEeS2WoXr83SnEA"/>
+    </ownedKey>
+  </nestedPackage>
+  <nestedPackage xmi:id="_ArQDKVoHEeS2WoXr83SnEA" name="$$" nsPrefix="orphanage" nsURI="http://www.eclipse.org/ocl/3.1.0/orphanage">
+    <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="_ArQDKloHEeS2WoXr83SnEA" name="Collection">
+      <templateBinding xmi:id="_ArQDK1oHEeS2WoXr83SnEA">
+        <parameterSubstitution xmi:id="_ArQDLFoHEeS2WoXr83SnEA">
+          <actual xmi:type="flatemofqvt:Class" href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+          <formal href="OCL.xml#_ArQGGloHEeS2WoXr83SnEA"/>
+        </parameterSubstitution>
+        <signature href="OCL.xml#_ArQGGVoHEeS2WoXr83SnEA"/>
+      </templateBinding>
+      <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#_ArQGGFoHEeS2WoXr83SnEA"/>
+      <superClass href="OCL.xml#_ArQGyVoHEeS2WoXr83SnEA"/>
+      <elementType href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+    </ownedType>
+    <ownedType xmi:type="flatemofqvt:SetType" xmi:id="_ArQDLVoHEeS2WoXr83SnEA" name="Set" superClass="_ArQDMFoHEeS2WoXr83SnEA" typedElement="_ArQC2FoHEeS2WoXr83SnEA">
+      <templateBinding xmi:id="_ArQDLloHEeS2WoXr83SnEA">
+        <parameterSubstitution xmi:id="_ArQDL1oHEeS2WoXr83SnEA">
+          <actual xmi:type="flatemofqvt:Class" href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+          <formal href="OCL.xml#_ArQIIloHEeS2WoXr83SnEA"/>
+        </parameterSubstitution>
+        <signature href="OCL.xml#_ArQIIVoHEeS2WoXr83SnEA"/>
+      </templateBinding>
+      <unspecializedElement xmi:type="flatemofqvt:SetType" href="OCL.xml#_ArQIIFoHEeS2WoXr83SnEA"/>
+      <elementType href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+    </ownedType>
+    <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="_ArQDMFoHEeS2WoXr83SnEA" name="UniqueCollection" superClass="_ArQDKloHEeS2WoXr83SnEA">
+      <templateBinding xmi:id="_ArQDMVoHEeS2WoXr83SnEA">
+        <parameterSubstitution xmi:id="_ArQDMloHEeS2WoXr83SnEA">
+          <actual xmi:type="flatemofqvt:Class" href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+          <formal href="OCL.xml#_ArQIaFoHEeS2WoXr83SnEA"/>
+        </parameterSubstitution>
+        <signature href="OCL.xml#_ArQIZ1oHEeS2WoXr83SnEA"/>
+      </templateBinding>
+      <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#_ArQIZloHEeS2WoXr83SnEA"/>
+      <elementType href="umlMM.xml#_ArQIhloHEeS2WoXr83SnEA"/>
+    </ownedType>
+  </nestedPackage>
+  <unit xmi:id="_ArQDM1oHEeS2WoXr83SnEA" name="umlmmmi">
+    <ownedComment xmi:id="_ArQDNFoHEeS2WoXr83SnEA" body="*****************************************************************************&#xA;Copyright (c) 2007,2008 Tata Consultancy Services and others.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;TCS - initial implementation for ModelMorf&#xA;E.D.Willink - alignment with evolved specification&#xA;*****************************************************************************"/>
+    <usedPackage xmi:type="flatemofqvt:Package" href="umlMM.xml#_ArQIhVoHEeS2WoXr83SnEA"/>
+  </unit>
+  <unit xmi:id="_ArQDNVoHEeS2WoXr83SnEA" name="javammsi">
+    <usedPackage xmi:type="flatemofqvt:Package" href="javaMM.xml#_ArQImVoHEeS2WoXr83SnEA"/>
+  </unit>
+</flatemofqvt:RelationModel>

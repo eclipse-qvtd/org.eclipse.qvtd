@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="ASCII"?>
+<flatemofqvt:RelationModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:emof="http://www.eclipse.org/emf/2002/Ecore" xmlns:flatemofqvt="http://www.eclipse.org/qvt/0.9/FlatEmofQVT" xsi:schemaLocation="http://www.eclipse.org/qvt/0.9/FlatEmofQVT ../../../org.eclipse.qvtd.pivot.qvtbase/model-gen/FlatQVTpivot.ecore"
+    xmi:id="_AT27nloHEeS2WoXr83SnEA" name="hstmtostm.qvtr" externalURI="platform:/resource/org.eclipse.qvtd.examples.qvtrelation.modelmorf/qvtrsrc/HstmToStm/hstmtostm.qvtr">
+  <ownedComment xmi:id="_AT27n1oHEeS2WoXr83SnEA" body="*****************************************************************************&#xA;Copyright (c) 2007,2008 Tata Consultancy Services and others.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;TCS - initial implementation for ModelMorf&#xA;E.D.Willink - alignment with evolved specification&#xA;*****************************************************************************"/>
+  <nestedPackage xmi:type="flatemofqvt:RelationalTransformation" xmi:id="_AT27oFoHEeS2WoXr83SnEA" name="HstmToStm">
+    <ownedOperation xmi:type="flatemofqvt:Function" xmi:id="_AT27oVoHEeS2WoXr83SnEA" name="StateContainsState">
+      <type href="OCL.xml#_AT24FVoHEeS2WoXr83SnEA"/>
+      <ownedParameter xmi:id="_AT27oloHEeS2WoXr83SnEA" name="cState">
+        <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_AT27o1oHEeS2WoXr83SnEA" name="mState">
+        <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+      </ownedParameter>
+      <queryExpression xmi:type="flatemofqvt:IfExp" xmi:id="_AT27pFoHEeS2WoXr83SnEA">
+        <type href="OCL.xml#_AT24FVoHEeS2WoXr83SnEA"/>
+        <condition xmi:type="flatemofqvt:OperationCallExp" xmi:id="_AT27pVoHEeS2WoXr83SnEA">
+          <type href="OCL.xml#_AT24FVoHEeS2WoXr83SnEA"/>
+          <source xmi:type="flatemofqvt:OperationCallExp" xmi:id="_AT27ploHEeS2WoXr83SnEA" name="oclAsSet" type="_AT28BFoHEeS2WoXr83SnEA"
+              implicit="true">
+            <source xmi:type="flatemofqvt:PropertyCallExp" xmi:id="_AT27p1oHEeS2WoXr83SnEA">
+              <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+              <source xmi:type="flatemofqvt:VariableExp" xmi:id="_AT27qFoHEeS2WoXr83SnEA" referredVariable="_AT27o1oHEeS2WoXr83SnEA">
+                <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+              </source>
+              <referredProperty href="hstmMM.xml#_AT28EFoHEeS2WoXr83SnEA"/>
+            </source>
+            <referredOperation href="OCL.xml#_AT2561oHEeS2WoXr83SnEA"/>
+          </source>
+          <referredOperation href="OCL.xml#_AT25d1oHEeS2WoXr83SnEA"/>
+        </condition>
+        <elseExpression xmi:type="flatemofqvt:IfExp" xmi:id="_AT27qVoHEeS2WoXr83SnEA">
+          <type href="OCL.xml#_AT24FVoHEeS2WoXr83SnEA"/>
+          <condition xmi:type="flatemofqvt:OperationCallExp" xmi:id="_AT27qloHEeS2WoXr83SnEA" name="=">
+            <type href="OCL.xml#_AT24FVoHEeS2WoXr83SnEA"/>
+            <source xmi:type="flatemofqvt:PropertyCallExp" xmi:id="_AT27q1oHEeS2WoXr83SnEA">
+              <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+              <source xmi:type="flatemofqvt:VariableExp" xmi:id="_AT27rFoHEeS2WoXr83SnEA" referredVariable="_AT27o1oHEeS2WoXr83SnEA">
+                <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+              </source>
+              <referredProperty href="hstmMM.xml#_AT28EFoHEeS2WoXr83SnEA"/>
+            </source>
+            <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_AT27rVoHEeS2WoXr83SnEA" referredVariable="_AT27oloHEeS2WoXr83SnEA">
+              <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+            </argument>
+            <referredOperation href="OCL.xml#_AT256FoHEeS2WoXr83SnEA"/>
+          </condition>
+          <elseExpression xmi:type="flatemofqvt:OperationCallExp" xmi:id="_AT27rloHEeS2WoXr83SnEA" referredOperation="_AT27oVoHEeS2WoXr83SnEA">
+            <type href="OCL.xml#_AT24FVoHEeS2WoXr83SnEA"/>
+            <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_AT27r1oHEeS2WoXr83SnEA" referredVariable="_AT27oloHEeS2WoXr83SnEA">
+              <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+            </argument>
+            <argument xmi:type="flatemofqvt:PropertyCallExp" xmi:id="_AT27sFoHEeS2WoXr83SnEA">
+              <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+              <source xmi:type="flatemofqvt:VariableExp" xmi:id="_AT27sVoHEeS2WoXr83SnEA" referredVariable="_AT27o1oHEeS2WoXr83SnEA">
+                <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+              </source>
+              <referredProperty href="hstmMM.xml#_AT28EFoHEeS2WoXr83SnEA"/>
+            </argument>
+          </elseExpression>
+          <thenExpression xmi:type="flatemofqvt:BooleanLiteralExp" xmi:id="_AT27sloHEeS2WoXr83SnEA" booleanSymbol="true">
+            <type href="OCL.xml#_AT24FVoHEeS2WoXr83SnEA"/>
+          </thenExpression>
+        </elseExpression>
+        <thenExpression xmi:type="flatemofqvt:BooleanLiteralExp" xmi:id="_AT27s1oHEeS2WoXr83SnEA" booleanSymbol="false">
+          <type href="OCL.xml#_AT24FVoHEeS2WoXr83SnEA"/>
+        </thenExpression>
+      </queryExpression>
+    </ownedOperation>
+    <superClass href="OCL.xml#_AT26IloHEeS2WoXr83SnEA"/>
+    <modelParameter xmi:id="_AT27tFoHEeS2WoXr83SnEA" name="hstm">
+      <usedPackage href="hstmMM.xml#_AT28DloHEeS2WoXr83SnEA"/>
+    </modelParameter>
+    <modelParameter xmi:id="_AT27tVoHEeS2WoXr83SnEA" name="stm">
+      <usedPackage href="stmMM.xml#_AT28M1oHEeS2WoXr83SnEA"/>
+    </modelParameter>
+    <rule xmi:type="flatemofqvt:Relation" xmi:id="_AT27tloHEeS2WoXr83SnEA" name="LStateToState" isTopLevel="true" relationCallExp="_AT275VoHEeS2WoXr83SnEA _AT278VoHEeS2WoXr83SnEA">
+      <domain xmi:type="flatemofqvt:RelationDomain" xmi:id="_AT27t1oHEeS2WoXr83SnEA" isCheckable="true" isEnforceable="false" typedModel="_AT27tFoHEeS2WoXr83SnEA"
+          rootVariable="_AT27xVoHEeS2WoXr83SnEA">
+        <pattern xmi:id="_AT27uFoHEeS2WoXr83SnEA">
+          <templateExpression xmi:type="flatemofqvt:ObjectTemplateExp" xmi:id="_AT27uVoHEeS2WoXr83SnEA" bindsTo="_AT27xVoHEeS2WoXr83SnEA">
+            <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+            <where xmi:type="flatemofqvt:OperationCallExp" xmi:id="_AT27uloHEeS2WoXr83SnEA">
+              <type href="OCL.xml#_AT24FVoHEeS2WoXr83SnEA"/>
+              <source xmi:type="flatemofqvt:PropertyCallExp" xmi:id="_AT27u1oHEeS2WoXr83SnEA" type="_AT28BFoHEeS2WoXr83SnEA">
+                <source xmi:type="flatemofqvt:VariableExp" xmi:id="_AT27vFoHEeS2WoXr83SnEA" referredVariable="_AT27xVoHEeS2WoXr83SnEA">
+                  <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+                </source>
+                <referredProperty href="hstmMM.xml#_AT28EVoHEeS2WoXr83SnEA"/>
+              </source>
+              <referredOperation href="OCL.xml#_AT25d1oHEeS2WoXr83SnEA"/>
+            </where>
+            <part xmi:id="_AT27vVoHEeS2WoXr83SnEA">
+              <referredProperty href="hstmMM.xml#_AT28E1oHEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:VariableExp" xmi:id="_AT27vloHEeS2WoXr83SnEA" isRequired="false" referredVariable="_AT27xFoHEeS2WoXr83SnEA">
+                <type href="OCL.xml#_AT24h1oHEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <referredClass href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <domain xmi:type="flatemofqvt:RelationDomain" xmi:id="_AT27v1oHEeS2WoXr83SnEA" isCheckable="true" isEnforceable="true" typedModel="_AT27tVoHEeS2WoXr83SnEA"
+          rootVariable="_AT27xloHEeS2WoXr83SnEA">
+        <pattern xmi:id="_AT27wFoHEeS2WoXr83SnEA">
+          <templateExpression xmi:type="flatemofqvt:ObjectTemplateExp" xmi:id="_AT27wVoHEeS2WoXr83SnEA" bindsTo="_AT27xloHEeS2WoXr83SnEA">
+            <type href="stmMM.xml#_AT28NFoHEeS2WoXr83SnEA"/>
+            <part xmi:id="_AT27wloHEeS2WoXr83SnEA">
+              <referredProperty href="stmMM.xml#_AT28NloHEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:VariableExp" xmi:id="_AT27w1oHEeS2WoXr83SnEA" isRequired="false" referredVariable="_AT27xFoHEeS2WoXr83SnEA">
+                <type href="OCL.xml#_AT24h1oHEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <referredClass href="stmMM.xml#_AT28NFoHEeS2WoXr83SnEA"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <variable xmi:id="_AT27xFoHEeS2WoXr83SnEA" name="n" isRequired="false">
+        <type href="OCL.xml#_AT24h1oHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_AT27xVoHEeS2WoXr83SnEA" name="s1" templateExp="_AT27uVoHEeS2WoXr83SnEA">
+        <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_AT27xloHEeS2WoXr83SnEA" name="s2" templateExp="_AT27wVoHEeS2WoXr83SnEA">
+        <type href="stmMM.xml#_AT28NFoHEeS2WoXr83SnEA"/>
+      </variable>
+    </rule>
+    <rule xmi:type="flatemofqvt:Relation" xmi:id="_AT27x1oHEeS2WoXr83SnEA" name="CStateToState" isTopLevel="true">
+      <domain xmi:type="flatemofqvt:RelationDomain" xmi:id="_AT27yFoHEeS2WoXr83SnEA" isCheckable="true" isEnforceable="false" typedModel="_AT27tFoHEeS2WoXr83SnEA"
+          rootVariable="_AT2731oHEeS2WoXr83SnEA">
+        <pattern xmi:id="_AT27yVoHEeS2WoXr83SnEA">
+          <templateExpression xmi:type="flatemofqvt:ObjectTemplateExp" xmi:id="_AT27yloHEeS2WoXr83SnEA" bindsTo="_AT2731oHEeS2WoXr83SnEA">
+            <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+            <part xmi:id="_AT27y1oHEeS2WoXr83SnEA">
+              <referredProperty href="hstmMM.xml#_AT28FFoHEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:ObjectTemplateExp" xmi:id="_AT27zFoHEeS2WoXr83SnEA" bindsTo="_AT274FoHEeS2WoXr83SnEA">
+                <type href="hstmMM.xml#_AT28FloHEeS2WoXr83SnEA"/>
+                <part xmi:id="_AT27zVoHEeS2WoXr83SnEA">
+                  <referredProperty href="hstmMM.xml#_AT28GFoHEeS2WoXr83SnEA"/>
+                  <value xmi:type="flatemofqvt:VariableExp" xmi:id="_AT27zloHEeS2WoXr83SnEA" isRequired="false" referredVariable="_AT272loHEeS2WoXr83SnEA">
+                    <type href="OCL.xml#_AT24h1oHEeS2WoXr83SnEA"/>
+                  </value>
+                </part>
+                <part xmi:id="_AT27z1oHEeS2WoXr83SnEA">
+                  <referredProperty href="hstmMM.xml#_AT28GVoHEeS2WoXr83SnEA"/>
+                  <value xmi:type="flatemofqvt:VariableExp" xmi:id="_AT270FoHEeS2WoXr83SnEA" isRequired="false" referredVariable="_AT273VoHEeS2WoXr83SnEA">
+                    <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+                  </value>
+                </part>
+                <referredClass href="hstmMM.xml#_AT28FloHEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <referredClass href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <domain xmi:type="flatemofqvt:RelationDomain" xmi:id="_AT270VoHEeS2WoXr83SnEA" isCheckable="true" isEnforceable="true" typedModel="_AT27tVoHEeS2WoXr83SnEA"
+          rootVariable="_AT274VoHEeS2WoXr83SnEA">
+        <pattern xmi:id="_AT270loHEeS2WoXr83SnEA">
+          <templateExpression xmi:type="flatemofqvt:ObjectTemplateExp" xmi:id="_AT2701oHEeS2WoXr83SnEA" bindsTo="_AT274VoHEeS2WoXr83SnEA">
+            <type href="stmMM.xml#_AT28NFoHEeS2WoXr83SnEA"/>
+            <part xmi:id="_AT271FoHEeS2WoXr83SnEA">
+              <referredProperty href="stmMM.xml#_AT28N1oHEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:ObjectTemplateExp" xmi:id="_AT271VoHEeS2WoXr83SnEA" bindsTo="_AT274loHEeS2WoXr83SnEA">
+                <type href="stmMM.xml#_AT28OVoHEeS2WoXr83SnEA"/>
+                <part xmi:id="_AT271loHEeS2WoXr83SnEA">
+                  <referredProperty href="stmMM.xml#_AT28O1oHEeS2WoXr83SnEA"/>
+                  <value xmi:type="flatemofqvt:VariableExp" xmi:id="_AT2711oHEeS2WoXr83SnEA" isRequired="false" referredVariable="_AT272loHEeS2WoXr83SnEA">
+                    <type href="OCL.xml#_AT24h1oHEeS2WoXr83SnEA"/>
+                  </value>
+                </part>
+                <part xmi:id="_AT272FoHEeS2WoXr83SnEA">
+                  <referredProperty href="stmMM.xml#_AT28PFoHEeS2WoXr83SnEA"/>
+                  <value xmi:type="flatemofqvt:VariableExp" xmi:id="_AT272VoHEeS2WoXr83SnEA" isRequired="false" referredVariable="_AT273loHEeS2WoXr83SnEA">
+                    <type href="stmMM.xml#_AT28NFoHEeS2WoXr83SnEA"/>
+                  </value>
+                </part>
+                <referredClass href="stmMM.xml#_AT28OVoHEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <referredClass href="stmMM.xml#_AT28NFoHEeS2WoXr83SnEA"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <variable xmi:id="_AT272loHEeS2WoXr83SnEA" name="tn" isRequired="false">
+        <type href="OCL.xml#_AT24h1oHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_AT2721oHEeS2WoXr83SnEA" name="ms1" isRequired="false">
+        <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_AT273FoHEeS2WoXr83SnEA" name="ms2" isRequired="false">
+        <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_AT273VoHEeS2WoXr83SnEA" name="ts1" isRequired="false">
+        <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_AT273loHEeS2WoXr83SnEA" name="ts2" isRequired="false">
+        <type href="stmMM.xml#_AT28NFoHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_AT2731oHEeS2WoXr83SnEA" name="fs1" templateExp="_AT27yloHEeS2WoXr83SnEA">
+        <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_AT274FoHEeS2WoXr83SnEA" name="t1" templateExp="_AT27zFoHEeS2WoXr83SnEA">
+        <type href="hstmMM.xml#_AT28FloHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_AT274VoHEeS2WoXr83SnEA" name="fs2" templateExp="_AT2701oHEeS2WoXr83SnEA">
+        <type href="stmMM.xml#_AT28NFoHEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_AT274loHEeS2WoXr83SnEA" name="t2" templateExp="_AT271VoHEeS2WoXr83SnEA">
+        <type href="stmMM.xml#_AT28OVoHEeS2WoXr83SnEA"/>
+      </variable>
+      <when xmi:id="_AT2741oHEeS2WoXr83SnEA">
+        <predicate xmi:id="_AT275FoHEeS2WoXr83SnEA">
+          <conditionExpression xmi:type="flatemofqvt:RelationCallExp" xmi:id="_AT275VoHEeS2WoXr83SnEA" referredRelation="_AT27tloHEeS2WoXr83SnEA">
+            <type href="OCL.xml#_AT24FVoHEeS2WoXr83SnEA"/>
+            <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_AT275loHEeS2WoXr83SnEA" isRequired="false" referredVariable="_AT2721oHEeS2WoXr83SnEA">
+              <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+            </argument>
+            <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_AT2751oHEeS2WoXr83SnEA" referredVariable="_AT274VoHEeS2WoXr83SnEA">
+              <type href="stmMM.xml#_AT28NFoHEeS2WoXr83SnEA"/>
+            </argument>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="_AT276FoHEeS2WoXr83SnEA">
+          <conditionExpression xmi:type="flatemofqvt:OperationCallExp" xmi:id="_AT276VoHEeS2WoXr83SnEA" name="or" isRequired="false">
+            <type href="OCL.xml#_AT24FVoHEeS2WoXr83SnEA"/>
+            <source xmi:type="flatemofqvt:OperationCallExp" xmi:id="_AT276loHEeS2WoXr83SnEA" name="=">
+              <type href="OCL.xml#_AT24FVoHEeS2WoXr83SnEA"/>
+              <source xmi:type="flatemofqvt:VariableExp" xmi:id="_AT2761oHEeS2WoXr83SnEA" isRequired="false" referredVariable="_AT2721oHEeS2WoXr83SnEA">
+                <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+              </source>
+              <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_AT277FoHEeS2WoXr83SnEA" referredVariable="_AT2731oHEeS2WoXr83SnEA">
+                <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+              </argument>
+              <referredOperation href="OCL.xml#_AT256FoHEeS2WoXr83SnEA"/>
+            </source>
+            <argument xmi:type="flatemofqvt:OperationCallExp" xmi:id="_AT277VoHEeS2WoXr83SnEA" referredOperation="_AT27oVoHEeS2WoXr83SnEA">
+              <type href="OCL.xml#_AT24FVoHEeS2WoXr83SnEA"/>
+              <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_AT277loHEeS2WoXr83SnEA" referredVariable="_AT2731oHEeS2WoXr83SnEA">
+                <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+              </argument>
+              <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_AT2771oHEeS2WoXr83SnEA" isRequired="false" referredVariable="_AT2721oHEeS2WoXr83SnEA">
+                <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+              </argument>
+            </argument>
+            <referredOperation href="OCL.xml#_AT24KVoHEeS2WoXr83SnEA"/>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="_AT278FoHEeS2WoXr83SnEA">
+          <conditionExpression xmi:type="flatemofqvt:RelationCallExp" xmi:id="_AT278VoHEeS2WoXr83SnEA" referredRelation="_AT27tloHEeS2WoXr83SnEA">
+            <type href="OCL.xml#_AT24FVoHEeS2WoXr83SnEA"/>
+            <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_AT278loHEeS2WoXr83SnEA" isRequired="false" referredVariable="_AT273FoHEeS2WoXr83SnEA">
+              <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+            </argument>
+            <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_AT2781oHEeS2WoXr83SnEA" isRequired="false" referredVariable="_AT273loHEeS2WoXr83SnEA">
+              <type href="stmMM.xml#_AT28NFoHEeS2WoXr83SnEA"/>
+            </argument>
+          </conditionExpression>
+        </predicate>
+        <predicate xmi:id="_AT279FoHEeS2WoXr83SnEA">
+          <conditionExpression xmi:type="flatemofqvt:OperationCallExp" xmi:id="_AT279VoHEeS2WoXr83SnEA" name="or" isRequired="false">
+            <type href="OCL.xml#_AT24FVoHEeS2WoXr83SnEA"/>
+            <source xmi:type="flatemofqvt:OperationCallExp" xmi:id="_AT279loHEeS2WoXr83SnEA" name="=">
+              <type href="OCL.xml#_AT24FVoHEeS2WoXr83SnEA"/>
+              <source xmi:type="flatemofqvt:VariableExp" xmi:id="_AT2791oHEeS2WoXr83SnEA" isRequired="false" referredVariable="_AT273FoHEeS2WoXr83SnEA">
+                <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+              </source>
+              <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_AT27-FoHEeS2WoXr83SnEA" isRequired="false" referredVariable="_AT273VoHEeS2WoXr83SnEA">
+                <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+              </argument>
+              <referredOperation href="OCL.xml#_AT256FoHEeS2WoXr83SnEA"/>
+            </source>
+            <argument xmi:type="flatemofqvt:OperationCallExp" xmi:id="_AT27-VoHEeS2WoXr83SnEA" referredOperation="_AT27oVoHEeS2WoXr83SnEA">
+              <type href="OCL.xml#_AT24FVoHEeS2WoXr83SnEA"/>
+              <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_AT27-loHEeS2WoXr83SnEA" isRequired="false" referredVariable="_AT273VoHEeS2WoXr83SnEA">
+                <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+              </argument>
+              <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_AT27-1oHEeS2WoXr83SnEA" isRequired="false" referredVariable="_AT273FoHEeS2WoXr83SnEA">
+                <type href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+              </argument>
+            </argument>
+            <referredOperation href="OCL.xml#_AT24KVoHEeS2WoXr83SnEA"/>
+          </conditionExpression>
+        </predicate>
+      </when>
+    </rule>
+    <ownedKey xmi:id="_AT27_FoHEeS2WoXr83SnEA">
+      <identifies href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+      <part href="hstmMM.xml#_AT28E1oHEeS2WoXr83SnEA"/>
+    </ownedKey>
+    <ownedKey xmi:id="_AT27_VoHEeS2WoXr83SnEA">
+      <identifies href="hstmMM.xml#_AT28FloHEeS2WoXr83SnEA"/>
+      <part href="hstmMM.xml#_AT28GFoHEeS2WoXr83SnEA"/>
+      <part href="hstmMM.xml#_AT28F1oHEeS2WoXr83SnEA"/>
+      <part href="hstmMM.xml#_AT28GVoHEeS2WoXr83SnEA"/>
+    </ownedKey>
+    <ownedKey xmi:id="_AT27_loHEeS2WoXr83SnEA">
+      <identifies href="stmMM.xml#_AT28NFoHEeS2WoXr83SnEA"/>
+      <part href="stmMM.xml#_AT28NloHEeS2WoXr83SnEA"/>
+    </ownedKey>
+    <ownedKey xmi:id="_AT27_1oHEeS2WoXr83SnEA">
+      <identifies href="stmMM.xml#_AT28OVoHEeS2WoXr83SnEA"/>
+      <part href="stmMM.xml#_AT28O1oHEeS2WoXr83SnEA"/>
+      <part href="stmMM.xml#_AT28OloHEeS2WoXr83SnEA"/>
+      <part href="stmMM.xml#_AT28PFoHEeS2WoXr83SnEA"/>
+    </ownedKey>
+  </nestedPackage>
+  <nestedPackage xmi:id="_AT28AFoHEeS2WoXr83SnEA" name="$$" nsPrefix="orphanage" nsURI="http://www.eclipse.org/ocl/3.1.0/orphanage">
+    <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="_AT28AVoHEeS2WoXr83SnEA" name="Collection">
+      <templateBinding xmi:id="_AT28AloHEeS2WoXr83SnEA">
+        <parameterSubstitution xmi:id="_AT28A1oHEeS2WoXr83SnEA">
+          <actual xmi:type="flatemofqvt:Class" href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+          <formal href="OCL.xml#_AT25NFoHEeS2WoXr83SnEA"/>
+        </parameterSubstitution>
+        <signature href="OCL.xml#_AT25M1oHEeS2WoXr83SnEA"/>
+      </templateBinding>
+      <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#_AT25MloHEeS2WoXr83SnEA"/>
+      <superClass href="OCL.xml#_AT2541oHEeS2WoXr83SnEA"/>
+      <elementType href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+    </ownedType>
+    <ownedType xmi:type="flatemofqvt:SetType" xmi:id="_AT28BFoHEeS2WoXr83SnEA" name="Set" superClass="_AT28B1oHEeS2WoXr83SnEA" typedElement="_AT27ploHEeS2WoXr83SnEA _AT27u1oHEeS2WoXr83SnEA">
+      <templateBinding xmi:id="_AT28BVoHEeS2WoXr83SnEA">
+        <parameterSubstitution xmi:id="_AT28BloHEeS2WoXr83SnEA">
+          <actual xmi:type="flatemofqvt:Class" href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+          <formal href="OCL.xml#_AT27PFoHEeS2WoXr83SnEA"/>
+        </parameterSubstitution>
+        <signature href="OCL.xml#_AT27O1oHEeS2WoXr83SnEA"/>
+      </templateBinding>
+      <unspecializedElement xmi:type="flatemofqvt:SetType" href="OCL.xml#_AT27OloHEeS2WoXr83SnEA"/>
+      <elementType href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+    </ownedType>
+    <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="_AT28B1oHEeS2WoXr83SnEA" name="UniqueCollection" superClass="_AT28AVoHEeS2WoXr83SnEA">
+      <templateBinding xmi:id="_AT28CFoHEeS2WoXr83SnEA">
+        <parameterSubstitution xmi:id="_AT28CVoHEeS2WoXr83SnEA">
+          <actual xmi:type="flatemofqvt:Class" href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+          <formal href="OCL.xml#_AT27gloHEeS2WoXr83SnEA"/>
+        </parameterSubstitution>
+        <signature href="OCL.xml#_AT27gVoHEeS2WoXr83SnEA"/>
+      </templateBinding>
+      <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#_AT27gFoHEeS2WoXr83SnEA"/>
+      <elementType href="hstmMM.xml#_AT28D1oHEeS2WoXr83SnEA"/>
+    </ownedType>
+  </nestedPackage>
+  <unit xmi:id="_AT28CloHEeS2WoXr83SnEA" name="hstmMM_p">
+    <ownedComment xmi:id="_AT28C1oHEeS2WoXr83SnEA" body="*****************************************************************************&#xA;Copyright (c) 2007,2008 Tata Consultancy Services and others.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;TCS - initial implementation for ModelMorf&#xA;E.D.Willink - alignment with evolved specification&#xA;*****************************************************************************"/>
+    <usedPackage xmi:type="flatemofqvt:Package" href="hstmMM.xml#_AT28DloHEeS2WoXr83SnEA"/>
+  </unit>
+  <unit xmi:id="_AT28DFoHEeS2WoXr83SnEA" name="stmMM_p">
+    <usedPackage xmi:type="flatemofqvt:Package" href="stmMM.xml#_AT28M1oHEeS2WoXr83SnEA"/>
+  </unit>
+</flatemofqvt:RelationModel>

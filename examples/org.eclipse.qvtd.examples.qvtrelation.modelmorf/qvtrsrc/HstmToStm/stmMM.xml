@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="ASCII"?>
+<flatemofqvt:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:emof="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:flatemofqvt="http://www.eclipse.org/qvt/0.9/FlatEmofQVT" xsi:schemaLocation="http://www.eclipse.org/qvt/0.9/FlatEmofQVT ../../../org.eclipse.qvtd.pivot.qvtbase/model-gen/FlatQVTpivot.ecore"
+    xmi:id="_AT28MloHEeS2WoXr83SnEA" name="stmMM.emof" externalURI="platform:/resource/org.eclipse.qvtd.examples.qvtrelation.modelmorf/qvtrsrc/HstmToStm/stmMM.emof">
+  <nestedPackage xmi:id="_AT28M1oHEeS2WoXr83SnEA" name="stmMM_p" nsURI="stmMM_p">
+    <ownedType xmi:type="flatemofqvt:Class" xmi:id="_AT28NFoHEeS2WoXr83SnEA" name="State" templateParameterSubstitution="_AT28RVoHEeS2WoXr83SnEA _AT28S1oHEeS2WoXr83SnEA _AT28UVoHEeS2WoXr83SnEA">
+      <ownedAttribute xmi:id="_AT28NVoHEeS2WoXr83SnEA" name="inTrans" type="_AT28TFoHEeS2WoXr83SnEA" opposite="_AT28PFoHEeS2WoXr83SnEA"/>
+      <ownedAttribute xmi:id="_AT28NloHEeS2WoXr83SnEA" name="name">
+        <type href="OCL.xml#_AT24h1oHEeS2WoXr83SnEA"/>
+        <key href="hstmtostm.xml#_AT27_loHEeS2WoXr83SnEA"/>
+        <propertyItem href="hstmtostm.xml#_AT27wloHEeS2WoXr83SnEA"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_AT28N1oHEeS2WoXr83SnEA" name="outTrans" type="_AT28TFoHEeS2WoXr83SnEA" opposite="_AT28OloHEeS2WoXr83SnEA">
+        <propertyItem href="hstmtostm.xml#_AT271FoHEeS2WoXr83SnEA"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_AT28OFoHEeS2WoXr83SnEA" name="dummy" isRequired="false" type="_AT28PloHEeS2WoXr83SnEA" implicit="true"
+          opposite="_AT28P1oHEeS2WoXr83SnEA"/>
+      <superClass href="OCL.xml#_AT26IloHEeS2WoXr83SnEA"/>
+      <typedElement xmi:type="flatemofqvt:ObjectTemplateExp" href="hstmtostm.xml#_AT27wVoHEeS2WoXr83SnEA"/>
+      <typedElement xmi:type="flatemofqvt:Variable" href="hstmtostm.xml#_AT27xloHEeS2WoXr83SnEA"/>
+      <typedElement xmi:type="flatemofqvt:ObjectTemplateExp" href="hstmtostm.xml#_AT2701oHEeS2WoXr83SnEA"/>
+      <typedElement xmi:type="flatemofqvt:VariableExp" href="hstmtostm.xml#_AT272VoHEeS2WoXr83SnEA"/>
+      <typedElement xmi:type="flatemofqvt:Variable" href="hstmtostm.xml#_AT273loHEeS2WoXr83SnEA"/>
+      <typedElement xmi:type="flatemofqvt:Variable" href="hstmtostm.xml#_AT274VoHEeS2WoXr83SnEA"/>
+      <typedElement xmi:type="flatemofqvt:VariableExp" href="hstmtostm.xml#_AT2751oHEeS2WoXr83SnEA"/>
+      <typedElement xmi:type="flatemofqvt:VariableExp" href="hstmtostm.xml#_AT2781oHEeS2WoXr83SnEA"/>
+      <typedElement xmi:type="flatemofqvt:Property" href="#_AT28OloHEeS2WoXr83SnEA"/>
+      <typedElement xmi:type="flatemofqvt:Property" href="#_AT28PFoHEeS2WoXr83SnEA"/>
+      <key href="hstmtostm.xml#_AT27_loHEeS2WoXr83SnEA"/>
+    </ownedType>
+    <ownedType xmi:type="flatemofqvt:Class" xmi:id="_AT28OVoHEeS2WoXr83SnEA" name="Trans" templateParameterSubstitution="_AT28SFoHEeS2WoXr83SnEA _AT28TloHEeS2WoXr83SnEA _AT28VFoHEeS2WoXr83SnEA">
+      <ownedAttribute xmi:id="_AT28OloHEeS2WoXr83SnEA" name="fromState" type="_AT28NFoHEeS2WoXr83SnEA" opposite="_AT28N1oHEeS2WoXr83SnEA">
+        <key href="hstmtostm.xml#_AT27_1oHEeS2WoXr83SnEA"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_AT28O1oHEeS2WoXr83SnEA" name="name">
+        <type href="OCL.xml#_AT24h1oHEeS2WoXr83SnEA"/>
+        <key href="hstmtostm.xml#_AT27_1oHEeS2WoXr83SnEA"/>
+        <propertyItem href="hstmtostm.xml#_AT271loHEeS2WoXr83SnEA"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_AT28PFoHEeS2WoXr83SnEA" name="toState" type="_AT28NFoHEeS2WoXr83SnEA" opposite="_AT28NVoHEeS2WoXr83SnEA">
+        <key href="hstmtostm.xml#_AT27_1oHEeS2WoXr83SnEA"/>
+        <propertyItem href="hstmtostm.xml#_AT272FoHEeS2WoXr83SnEA"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_AT28PVoHEeS2WoXr83SnEA" name="dummy" isRequired="false" type="_AT28PloHEeS2WoXr83SnEA" implicit="true"
+          opposite="_AT28QFoHEeS2WoXr83SnEA"/>
+      <superClass href="OCL.xml#_AT26IloHEeS2WoXr83SnEA"/>
+      <typedElement xmi:type="flatemofqvt:ObjectTemplateExp" href="hstmtostm.xml#_AT271VoHEeS2WoXr83SnEA"/>
+      <typedElement xmi:type="flatemofqvt:Variable" href="hstmtostm.xml#_AT274loHEeS2WoXr83SnEA"/>
+      <key href="hstmtostm.xml#_AT27_1oHEeS2WoXr83SnEA"/>
+    </ownedType>
+    <ownedType xmi:type="flatemofqvt:Class" xmi:id="_AT28PloHEeS2WoXr83SnEA" name="dummy" typedElement="_AT28OFoHEeS2WoXr83SnEA _AT28PVoHEeS2WoXr83SnEA">
+      <ownedAttribute xmi:id="_AT28P1oHEeS2WoXr83SnEA" name="container_state" type="_AT28SVoHEeS2WoXr83SnEA" isComposite="true" opposite="_AT28OFoHEeS2WoXr83SnEA"/>
+      <ownedAttribute xmi:id="_AT28QFoHEeS2WoXr83SnEA" name="container_trans" type="_AT28TFoHEeS2WoXr83SnEA" isComposite="true" opposite="_AT28PVoHEeS2WoXr83SnEA"/>
+      <ownedAttribute xmi:id="_AT28QVoHEeS2WoXr83SnEA" name="name">
+        <type href="OCL.xml#_AT24h1oHEeS2WoXr83SnEA"/>
+      </ownedAttribute>
+      <superClass href="OCL.xml#_AT26IloHEeS2WoXr83SnEA"/>
+    </ownedType>
+  </nestedPackage>
+  <nestedPackage xmi:id="_AT28QloHEeS2WoXr83SnEA" name="$$" nsPrefix="orphanage" nsURI="http://www.eclipse.org/ocl/3.1.0/orphanage">
+    <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="_AT28Q1oHEeS2WoXr83SnEA" name="Collection" elementType="_AT28NFoHEeS2WoXr83SnEA">
+      <templateBinding xmi:id="_AT28RFoHEeS2WoXr83SnEA">
+        <parameterSubstitution xmi:id="_AT28RVoHEeS2WoXr83SnEA" actual="_AT28NFoHEeS2WoXr83SnEA">
+          <formal href="OCL.xml#_AT25NFoHEeS2WoXr83SnEA"/>
+        </parameterSubstitution>
+        <signature href="OCL.xml#_AT25M1oHEeS2WoXr83SnEA"/>
+      </templateBinding>
+      <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#_AT25MloHEeS2WoXr83SnEA"/>
+      <superClass href="OCL.xml#_AT2541oHEeS2WoXr83SnEA"/>
+    </ownedType>
+    <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="_AT28RloHEeS2WoXr83SnEA" name="Collection" elementType="_AT28OVoHEeS2WoXr83SnEA">
+      <templateBinding xmi:id="_AT28R1oHEeS2WoXr83SnEA">
+        <parameterSubstitution xmi:id="_AT28SFoHEeS2WoXr83SnEA" actual="_AT28OVoHEeS2WoXr83SnEA">
+          <formal href="OCL.xml#_AT25NFoHEeS2WoXr83SnEA"/>
+        </parameterSubstitution>
+        <signature href="OCL.xml#_AT25M1oHEeS2WoXr83SnEA"/>
+      </templateBinding>
+      <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#_AT25MloHEeS2WoXr83SnEA"/>
+      <superClass href="OCL.xml#_AT2541oHEeS2WoXr83SnEA"/>
+    </ownedType>
+    <ownedType xmi:type="flatemofqvt:SetType" xmi:id="_AT28SVoHEeS2WoXr83SnEA" name="Set" superClass="_AT28T1oHEeS2WoXr83SnEA" typedElement="_AT28P1oHEeS2WoXr83SnEA"
+        elementType="_AT28NFoHEeS2WoXr83SnEA" lower="1">
+      <templateBinding xmi:id="_AT28SloHEeS2WoXr83SnEA">
+        <parameterSubstitution xmi:id="_AT28S1oHEeS2WoXr83SnEA" actual="_AT28NFoHEeS2WoXr83SnEA">
+          <formal href="OCL.xml#_AT27PFoHEeS2WoXr83SnEA"/>
+        </parameterSubstitution>
+        <signature href="OCL.xml#_AT27O1oHEeS2WoXr83SnEA"/>
+      </templateBinding>
+      <unspecializedElement xmi:type="flatemofqvt:SetType" href="OCL.xml#_AT27OloHEeS2WoXr83SnEA"/>
+    </ownedType>
+    <ownedType xmi:type="flatemofqvt:SetType" xmi:id="_AT28TFoHEeS2WoXr83SnEA" name="Set" superClass="_AT28UloHEeS2WoXr83SnEA" typedElement="_AT28NVoHEeS2WoXr83SnEA _AT28N1oHEeS2WoXr83SnEA _AT28QFoHEeS2WoXr83SnEA"
+        elementType="_AT28OVoHEeS2WoXr83SnEA" lower="1">
+      <templateBinding xmi:id="_AT28TVoHEeS2WoXr83SnEA">
+        <parameterSubstitution xmi:id="_AT28TloHEeS2WoXr83SnEA" actual="_AT28OVoHEeS2WoXr83SnEA">
+          <formal href="OCL.xml#_AT27PFoHEeS2WoXr83SnEA"/>
+        </parameterSubstitution>
+        <signature href="OCL.xml#_AT27O1oHEeS2WoXr83SnEA"/>
+      </templateBinding>
+      <unspecializedElement xmi:type="flatemofqvt:SetType" href="OCL.xml#_AT27OloHEeS2WoXr83SnEA"/>
+    </ownedType>
+    <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="_AT28T1oHEeS2WoXr83SnEA" name="UniqueCollection" superClass="_AT28Q1oHEeS2WoXr83SnEA"
+        elementType="_AT28NFoHEeS2WoXr83SnEA">
+      <templateBinding xmi:id="_AT28UFoHEeS2WoXr83SnEA">
+        <parameterSubstitution xmi:id="_AT28UVoHEeS2WoXr83SnEA" actual="_AT28NFoHEeS2WoXr83SnEA">
+          <formal href="OCL.xml#_AT27gloHEeS2WoXr83SnEA"/>
+        </parameterSubstitution>
+        <signature href="OCL.xml#_AT27gVoHEeS2WoXr83SnEA"/>
+      </templateBinding>
+      <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#_AT27gFoHEeS2WoXr83SnEA"/>
+    </ownedType>
+    <ownedType xmi:type="flatemofqvt:CollectionType" xmi:id="_AT28UloHEeS2WoXr83SnEA" name="UniqueCollection" superClass="_AT28RloHEeS2WoXr83SnEA"
+        elementType="_AT28OVoHEeS2WoXr83SnEA">
+      <templateBinding xmi:id="_AT28U1oHEeS2WoXr83SnEA">
+        <parameterSubstitution xmi:id="_AT28VFoHEeS2WoXr83SnEA" actual="_AT28OVoHEeS2WoXr83SnEA">
+          <formal href="OCL.xml#_AT27gloHEeS2WoXr83SnEA"/>
+        </parameterSubstitution>
+        <signature href="OCL.xml#_AT27gVoHEeS2WoXr83SnEA"/>
+      </templateBinding>
+      <unspecializedElement xmi:type="flatemofqvt:CollectionType" href="OCL.xml#_AT27gFoHEeS2WoXr83SnEA"/>
+    </ownedType>
+  </nestedPackage>
+</flatemofqvt:Root>

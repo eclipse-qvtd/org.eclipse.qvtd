@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="ASCII"?>
+<flatemofqvt:RelationModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:emof="http://www.eclipse.org/emf/2002/Ecore" xmlns:flatemofqvt="http://www.eclipse.org/qvt/0.9/FlatEmofQVT" xsi:schemaLocation="http://www.eclipse.org/qvt/0.9/FlatEmofQVT ../../../org.eclipse.qvtd.pivot.qvtbase/model-gen/FlatQVTpivot.ecore"
+    xmi:id="_-scRn1oGEeS2WoXr83SnEA" name="UmlToRel.qvtr" externalURI="platform:/resource/org.eclipse.qvtd.examples.qvtrelation.modelmorf/qvtrsrc/UmlToRel/UmlToRel.qvtr">
+  <ownedComment xmi:id="_-scRoFoGEeS2WoXr83SnEA" body="*****************************************************************************&#xA;Copyright (c) 2007,2008 Tata Consultancy Services and others.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;TCS - initial implementation for ModelMorf&#xA;E.D.Willink - alignment with evolved specification&#xA;*****************************************************************************"/>
+  <nestedPackage xmi:type="flatemofqvt:RelationalTransformation" xmi:id="_-scRoVoGEeS2WoXr83SnEA" name="UmlToRel">
+    <ownedOperation xmi:type="flatemofqvt:Function" xmi:id="_-scRoloGEeS2WoXr83SnEA" name="UmlToSqlDataType">
+      <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+      <ownedParameter xmi:id="_-scRo1oGEeS2WoXr83SnEA" name="utyp">
+        <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+      </ownedParameter>
+      <queryExpression xmi:type="flatemofqvt:IfExp" xmi:id="_-scRpFoGEeS2WoXr83SnEA">
+        <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+        <condition xmi:type="flatemofqvt:OperationCallExp" xmi:id="_-scRpVoGEeS2WoXr83SnEA" name="=">
+          <type href="OCL.xml#_-scN91oGEeS2WoXr83SnEA"/>
+          <source xmi:type="flatemofqvt:VariableExp" xmi:id="_-scRploGEeS2WoXr83SnEA" referredVariable="_-scRo1oGEeS2WoXr83SnEA">
+            <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+          </source>
+          <argument xmi:type="flatemofqvt:StringLiteralExp" xmi:id="_-scRp1oGEeS2WoXr83SnEA" stringSymbol="Int">
+            <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+          </argument>
+          <referredOperation href="OCL.xml#_-scOdVoGEeS2WoXr83SnEA"/>
+        </condition>
+        <elseExpression xmi:type="flatemofqvt:IfExp" xmi:id="_-scRqFoGEeS2WoXr83SnEA">
+          <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+          <condition xmi:type="flatemofqvt:OperationCallExp" xmi:id="_-scRqVoGEeS2WoXr83SnEA" name="=">
+            <type href="OCL.xml#_-scN91oGEeS2WoXr83SnEA"/>
+            <source xmi:type="flatemofqvt:VariableExp" xmi:id="_-scRqloGEeS2WoXr83SnEA" referredVariable="_-scRo1oGEeS2WoXr83SnEA">
+              <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+            </source>
+            <argument xmi:type="flatemofqvt:StringLiteralExp" xmi:id="_-scRq1oGEeS2WoXr83SnEA" stringSymbol="Binary">
+              <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+            </argument>
+            <referredOperation href="OCL.xml#_-scOdVoGEeS2WoXr83SnEA"/>
+          </condition>
+          <elseExpression xmi:type="flatemofqvt:StringLiteralExp" xmi:id="_-scRrFoGEeS2WoXr83SnEA" stringSymbol="Varchar">
+            <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+          </elseExpression>
+          <thenExpression xmi:type="flatemofqvt:StringLiteralExp" xmi:id="_-scRrVoGEeS2WoXr83SnEA" stringSymbol="Raw">
+            <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+          </thenExpression>
+        </elseExpression>
+        <thenExpression xmi:type="flatemofqvt:StringLiteralExp" xmi:id="_-scRrloGEeS2WoXr83SnEA" stringSymbol="Number">
+          <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+        </thenExpression>
+      </queryExpression>
+    </ownedOperation>
+    <ownedOperation xmi:type="flatemofqvt:Function" xmi:id="_-scRr1oGEeS2WoXr83SnEA" name="SqlToUmlDataType">
+      <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+      <ownedParameter xmi:id="_-scRsFoGEeS2WoXr83SnEA" name="styp">
+        <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+      </ownedParameter>
+      <queryExpression xmi:type="flatemofqvt:IfExp" xmi:id="_-scRsVoGEeS2WoXr83SnEA">
+        <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+        <condition xmi:type="flatemofqvt:OperationCallExp" xmi:id="_-scRsloGEeS2WoXr83SnEA" name="=">
+          <type href="OCL.xml#_-scN91oGEeS2WoXr83SnEA"/>
+          <source xmi:type="flatemofqvt:VariableExp" xmi:id="_-scRs1oGEeS2WoXr83SnEA" referredVariable="_-scRsFoGEeS2WoXr83SnEA">
+            <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+          </source>
+          <argument xmi:type="flatemofqvt:StringLiteralExp" xmi:id="_-scRtFoGEeS2WoXr83SnEA" stringSymbol="Number">
+            <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+          </argument>
+          <referredOperation href="OCL.xml#_-scOdVoGEeS2WoXr83SnEA"/>
+        </condition>
+        <elseExpression xmi:type="flatemofqvt:IfExp" xmi:id="_-scRtVoGEeS2WoXr83SnEA">
+          <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+          <condition xmi:type="flatemofqvt:OperationCallExp" xmi:id="_-scRtloGEeS2WoXr83SnEA" name="=">
+            <type href="OCL.xml#_-scN91oGEeS2WoXr83SnEA"/>
+            <source xmi:type="flatemofqvt:VariableExp" xmi:id="_-scRt1oGEeS2WoXr83SnEA" referredVariable="_-scRsFoGEeS2WoXr83SnEA">
+              <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+            </source>
+            <argument xmi:type="flatemofqvt:StringLiteralExp" xmi:id="_-scRuFoGEeS2WoXr83SnEA" stringSymbol="Raw">
+              <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+            </argument>
+            <referredOperation href="OCL.xml#_-scOdVoGEeS2WoXr83SnEA"/>
+          </condition>
+          <elseExpression xmi:type="flatemofqvt:StringLiteralExp" xmi:id="_-scRuVoGEeS2WoXr83SnEA" stringSymbol="String">
+            <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+          </elseExpression>
+          <thenExpression xmi:type="flatemofqvt:StringLiteralExp" xmi:id="_-scRuloGEeS2WoXr83SnEA" stringSymbol="Binary">
+            <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+          </thenExpression>
+        </elseExpression>
+        <thenExpression xmi:type="flatemofqvt:StringLiteralExp" xmi:id="_-scRu1oGEeS2WoXr83SnEA" stringSymbol="Int">
+          <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+        </thenExpression>
+      </queryExpression>
+    </ownedOperation>
+    <superClass href="OCL.xml#_-scQBFoGEeS2WoXr83SnEA"/>
+    <modelParameter xmi:id="_-scRvFoGEeS2WoXr83SnEA" name="uml">
+      <usedPackage href="UmlMM.xml#_-sSbkVoGEeS2WoXr83SnEA"/>
+    </modelParameter>
+    <modelParameter xmi:id="_-scRvVoGEeS2WoXr83SnEA" name="rdbms">
+      <usedPackage href="RelMM.xml#_-scRgVoGEeS2WoXr83SnEA"/>
+    </modelParameter>
+    <rule xmi:type="flatemofqvt:Relation" xmi:id="_-scRvloGEeS2WoXr83SnEA" name="ClassToTable" isTopLevel="true" relationCallExp="_-scR61oGEeS2WoXr83SnEA">
+      <domain xmi:type="flatemofqvt:RelationDomain" xmi:id="_-scRv1oGEeS2WoXr83SnEA" isCheckable="true" isEnforceable="true" typedModel="_-scRvFoGEeS2WoXr83SnEA"
+          rootVariable="_-scRyloGEeS2WoXr83SnEA">
+        <pattern xmi:id="_-scRwFoGEeS2WoXr83SnEA">
+          <templateExpression xmi:type="flatemofqvt:ObjectTemplateExp" xmi:id="_-scRwVoGEeS2WoXr83SnEA" bindsTo="_-scRyloGEeS2WoXr83SnEA">
+            <type href="UmlMM.xml#_-sSblloGEeS2WoXr83SnEA"/>
+            <part xmi:id="_-scRwloGEeS2WoXr83SnEA">
+              <referredProperty href="UmlMM.xml#_-sSbmFoGEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:VariableExp" xmi:id="_-scRw1oGEeS2WoXr83SnEA" isRequired="false" referredVariable="_-scRyVoGEeS2WoXr83SnEA">
+                <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <referredClass href="UmlMM.xml#_-sSblloGEeS2WoXr83SnEA"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <domain xmi:type="flatemofqvt:RelationDomain" xmi:id="_-scRxFoGEeS2WoXr83SnEA" isCheckable="true" isEnforceable="true" typedModel="_-scRvVoGEeS2WoXr83SnEA"
+          rootVariable="_-scRy1oGEeS2WoXr83SnEA">
+        <pattern xmi:id="_-scRxVoGEeS2WoXr83SnEA">
+          <templateExpression xmi:type="flatemofqvt:ObjectTemplateExp" xmi:id="_-scRxloGEeS2WoXr83SnEA" bindsTo="_-scRy1oGEeS2WoXr83SnEA">
+            <type href="RelMM.xml#_-scRiFoGEeS2WoXr83SnEA"/>
+            <part xmi:id="_-scRx1oGEeS2WoXr83SnEA">
+              <referredProperty href="RelMM.xml#_-scRiloGEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:VariableExp" xmi:id="_-scRyFoGEeS2WoXr83SnEA" isRequired="false" referredVariable="_-scRyVoGEeS2WoXr83SnEA">
+                <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <referredClass href="RelMM.xml#_-scRiFoGEeS2WoXr83SnEA"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <variable xmi:id="_-scRyVoGEeS2WoXr83SnEA" name="n" isRequired="false">
+        <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_-scRyloGEeS2WoXr83SnEA" name="c" templateExp="_-scRwVoGEeS2WoXr83SnEA">
+        <type href="UmlMM.xml#_-sSblloGEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_-scRy1oGEeS2WoXr83SnEA" name="t" templateExp="_-scRxloGEeS2WoXr83SnEA">
+        <type href="RelMM.xml#_-scRiFoGEeS2WoXr83SnEA"/>
+      </variable>
+    </rule>
+    <rule xmi:type="flatemofqvt:Relation" xmi:id="_-scRzFoGEeS2WoXr83SnEA" name="AttributeToColumn" isTopLevel="true">
+      <domain xmi:type="flatemofqvt:RelationDomain" xmi:id="_-scRzVoGEeS2WoXr83SnEA" isCheckable="true" isEnforceable="true" typedModel="_-scRvFoGEeS2WoXr83SnEA"
+          rootVariable="_-scR5VoGEeS2WoXr83SnEA">
+        <defaultAssignment xmi:id="_-scRzloGEeS2WoXr83SnEA" variable="_-scR41oGEeS2WoXr83SnEA">
+          <valueExp xmi:type="flatemofqvt:OperationCallExp" xmi:id="_-scRz1oGEeS2WoXr83SnEA" referredOperation="_-scRr1oGEeS2WoXr83SnEA">
+            <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+            <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_-scR0FoGEeS2WoXr83SnEA" isRequired="false" referredVariable="_-scR5FoGEeS2WoXr83SnEA">
+              <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+            </argument>
+          </valueExp>
+        </defaultAssignment>
+        <pattern xmi:id="_-scR0VoGEeS2WoXr83SnEA">
+          <templateExpression xmi:type="flatemofqvt:ObjectTemplateExp" xmi:id="_-scR0loGEeS2WoXr83SnEA" bindsTo="_-scR5VoGEeS2WoXr83SnEA">
+            <type href="UmlMM.xml#_-sSbkloGEeS2WoXr83SnEA"/>
+            <part xmi:id="_-scR01oGEeS2WoXr83SnEA">
+              <referredProperty href="UmlMM.xml#_-sSbk1oGEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:VariableExp" xmi:id="_-scR1FoGEeS2WoXr83SnEA" isRequired="false" referredVariable="_-scR4loGEeS2WoXr83SnEA">
+                <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <part xmi:id="_-scR1VoGEeS2WoXr83SnEA">
+              <referredProperty href="UmlMM.xml#_-sSblFoGEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:VariableExp" xmi:id="_-scR1loGEeS2WoXr83SnEA" isRequired="false" referredVariable="_-scR41oGEeS2WoXr83SnEA">
+                <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <part xmi:id="_-scR11oGEeS2WoXr83SnEA">
+              <referredProperty href="UmlMM.xml#_-sSblVoGEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:ObjectTemplateExp" xmi:id="_-scR2FoGEeS2WoXr83SnEA" bindsTo="_-scR5loGEeS2WoXr83SnEA">
+                <type href="UmlMM.xml#_-sSblloGEeS2WoXr83SnEA"/>
+                <referredClass href="UmlMM.xml#_-sSblloGEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <referredClass href="UmlMM.xml#_-sSbkloGEeS2WoXr83SnEA"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <domain xmi:type="flatemofqvt:RelationDomain" xmi:id="_-scR2VoGEeS2WoXr83SnEA" isCheckable="true" isEnforceable="true" typedModel="_-scRvVoGEeS2WoXr83SnEA"
+          rootVariable="_-scR51oGEeS2WoXr83SnEA">
+        <pattern xmi:id="_-scR2loGEeS2WoXr83SnEA">
+          <templateExpression xmi:type="flatemofqvt:ObjectTemplateExp" xmi:id="_-scR21oGEeS2WoXr83SnEA" bindsTo="_-scR51oGEeS2WoXr83SnEA">
+            <type href="RelMM.xml#_-scRgloGEeS2WoXr83SnEA"/>
+            <part xmi:id="_-scR3FoGEeS2WoXr83SnEA">
+              <referredProperty href="RelMM.xml#_-scRg1oGEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:VariableExp" xmi:id="_-scR3VoGEeS2WoXr83SnEA" isRequired="false" referredVariable="_-scR4loGEeS2WoXr83SnEA">
+                <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <part xmi:id="_-scR3loGEeS2WoXr83SnEA">
+              <referredProperty href="RelMM.xml#_-scRhFoGEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:VariableExp" xmi:id="_-scR31oGEeS2WoXr83SnEA" isRequired="false" referredVariable="_-scR5FoGEeS2WoXr83SnEA">
+                <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <part xmi:id="_-scR4FoGEeS2WoXr83SnEA">
+              <referredProperty href="RelMM.xml#_-scRhVoGEeS2WoXr83SnEA"/>
+              <value xmi:type="flatemofqvt:ObjectTemplateExp" xmi:id="_-scR4VoGEeS2WoXr83SnEA" bindsTo="_-scR6FoGEeS2WoXr83SnEA">
+                <type href="RelMM.xml#_-scRiFoGEeS2WoXr83SnEA"/>
+                <referredClass href="RelMM.xml#_-scRiFoGEeS2WoXr83SnEA"/>
+              </value>
+            </part>
+            <referredClass href="RelMM.xml#_-scRgloGEeS2WoXr83SnEA"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <variable xmi:id="_-scR4loGEeS2WoXr83SnEA" name="n" isRequired="false">
+        <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_-scR41oGEeS2WoXr83SnEA" name="utyp" isRequired="false" domainAssignment="_-scRzloGEeS2WoXr83SnEA">
+        <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_-scR5FoGEeS2WoXr83SnEA" name="rtyp" isRequired="false">
+        <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_-scR5VoGEeS2WoXr83SnEA" name="a" templateExp="_-scR0loGEeS2WoXr83SnEA">
+        <type href="UmlMM.xml#_-sSbkloGEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_-scR5loGEeS2WoXr83SnEA" name="c" templateExp="_-scR2FoGEeS2WoXr83SnEA">
+        <type href="UmlMM.xml#_-sSblloGEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_-scR51oGEeS2WoXr83SnEA" name="cl" templateExp="_-scR21oGEeS2WoXr83SnEA">
+        <type href="RelMM.xml#_-scRgloGEeS2WoXr83SnEA"/>
+      </variable>
+      <variable xmi:id="_-scR6FoGEeS2WoXr83SnEA" name="t" templateExp="_-scR4VoGEeS2WoXr83SnEA">
+        <type href="RelMM.xml#_-scRiFoGEeS2WoXr83SnEA"/>
+      </variable>
+      <when xmi:id="_-scR6VoGEeS2WoXr83SnEA">
+        <predicate xmi:id="_-scR6loGEeS2WoXr83SnEA">
+          <conditionExpression xmi:type="flatemofqvt:RelationCallExp" xmi:id="_-scR61oGEeS2WoXr83SnEA" referredRelation="_-scRvloGEeS2WoXr83SnEA">
+            <type href="OCL.xml#_-scN91oGEeS2WoXr83SnEA"/>
+            <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_-scR7FoGEeS2WoXr83SnEA" referredVariable="_-scR5loGEeS2WoXr83SnEA">
+              <type href="UmlMM.xml#_-sSblloGEeS2WoXr83SnEA"/>
+            </argument>
+            <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_-scR7VoGEeS2WoXr83SnEA" referredVariable="_-scR6FoGEeS2WoXr83SnEA">
+              <type href="RelMM.xml#_-scRiFoGEeS2WoXr83SnEA"/>
+            </argument>
+          </conditionExpression>
+        </predicate>
+      </when>
+      <where xmi:id="_-scR7loGEeS2WoXr83SnEA">
+        <predicate xmi:id="_-scR71oGEeS2WoXr83SnEA">
+          <conditionExpression xmi:type="flatemofqvt:OperationCallExp" xmi:id="_-scR8FoGEeS2WoXr83SnEA" name="=">
+            <type href="OCL.xml#_-scN91oGEeS2WoXr83SnEA"/>
+            <source xmi:type="flatemofqvt:VariableExp" xmi:id="_-scR8VoGEeS2WoXr83SnEA" isRequired="false" referredVariable="_-scR5FoGEeS2WoXr83SnEA">
+              <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+            </source>
+            <argument xmi:type="flatemofqvt:OperationCallExp" xmi:id="_-scR8loGEeS2WoXr83SnEA" referredOperation="_-scRoloGEeS2WoXr83SnEA">
+              <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+              <argument xmi:type="flatemofqvt:VariableExp" xmi:id="_-scR81oGEeS2WoXr83SnEA" isRequired="false" referredVariable="_-scR41oGEeS2WoXr83SnEA">
+                <type href="OCL.xml#_-scOaVoGEeS2WoXr83SnEA"/>
+              </argument>
+            </argument>
+            <referredOperation href="OCL.xml#_-scOdVoGEeS2WoXr83SnEA"/>
+          </conditionExpression>
+        </predicate>
+      </where>
+    </rule>
+    <ownedKey xmi:id="_-scR9FoGEeS2WoXr83SnEA">
+      <identifies href="UmlMM.xml#_-sSblloGEeS2WoXr83SnEA"/>
+      <part href="UmlMM.xml#_-sSbmFoGEeS2WoXr83SnEA"/>
+    </ownedKey>
+    <ownedKey xmi:id="_-scR9VoGEeS2WoXr83SnEA">
+      <identifies href="UmlMM.xml#_-sSbkloGEeS2WoXr83SnEA"/>
+      <part href="UmlMM.xml#_-sSbk1oGEeS2WoXr83SnEA"/>
+      <part href="UmlMM.xml#_-sSblVoGEeS2WoXr83SnEA"/>
+    </ownedKey>
+    <ownedKey xmi:id="_-scR9loGEeS2WoXr83SnEA">
+      <identifies href="RelMM.xml#_-scRiFoGEeS2WoXr83SnEA"/>
+      <part href="RelMM.xml#_-scRiloGEeS2WoXr83SnEA"/>
+    </ownedKey>
+    <ownedKey xmi:id="_-scR91oGEeS2WoXr83SnEA">
+      <identifies href="RelMM.xml#_-scRgloGEeS2WoXr83SnEA"/>
+      <part href="RelMM.xml#_-scRg1oGEeS2WoXr83SnEA"/>
+      <part href="RelMM.xml#_-scRhVoGEeS2WoXr83SnEA"/>
+    </ownedKey>
+  </nestedPackage>
+  <unit xmi:id="_-scR-FoGEeS2WoXr83SnEA" name="umlmm">
+    <ownedComment xmi:id="_-scR-VoGEeS2WoXr83SnEA" body="*****************************************************************************&#xA;Copyright (c) 2007,2008 Tata Consultancy Services and others.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;TCS - initial implementation for ModelMorf&#xA;E.D.Willink - alignment with evolved specification&#xA;*****************************************************************************"/>
+    <usedPackage xmi:type="flatemofqvt:Package" href="UmlMM.xml#_-sSbkVoGEeS2WoXr83SnEA"/>
+  </unit>
+  <unit xmi:id="_-scR-loGEeS2WoXr83SnEA" name="relmm">
+    <usedPackage xmi:type="flatemofqvt:Package" href="RelMM.xml#_-scRgVoGEeS2WoXr83SnEA"/>
+  </unit>
+</flatemofqvt:RelationModel>
