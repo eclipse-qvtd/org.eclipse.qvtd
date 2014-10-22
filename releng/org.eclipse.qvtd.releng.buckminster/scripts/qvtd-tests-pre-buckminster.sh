@@ -54,7 +54,7 @@ COMPACT_BUILD_ID="${COMPACT_BUILD_ID:0:12}"
 	echo "eclipse.staging.area=/shared/download-staging.priv/qvtd"
 	echo "git.qvtd.local.repository.location=${WORKSPACE}/org.eclipse.qvtd.git"
 	echo "git.license.local.repository.location=${WORKSPACE}/org.eclipse.license.git"
-	echo "git.ocl.local.repository.location=${WORKSPACE}/org.eclipse.ocl.git"
+#	echo "git.ocl.local.repository.location=${WORKSPACE}/org.eclipse.ocl.git"
 
 	echo
 	echo "# Sign the jars (added by Hudson job definition)"
