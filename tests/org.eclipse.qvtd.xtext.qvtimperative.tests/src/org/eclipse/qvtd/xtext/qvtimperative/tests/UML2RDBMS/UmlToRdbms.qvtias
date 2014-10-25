@@ -2141,8 +2141,8 @@
                 </value>
               </binding>
               <binding boundVariable="#qV.umlRdbms.classToTable_LM.middle.guard.p2s">
-                <value xsi:type="pivot:PropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
-                    referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Package.middle">
+                <value xsi:type="qvti:MiddlePropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
+                    referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.umlPackage">
                   <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Package"
                       referredProperty="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace">
                     <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
@@ -2219,8 +2219,8 @@
                 </value>
               </binding>
               <binding boundVariable="#qV.umlRdbms.associationToForeignKey_LM.middle.guard.sc2t">
-                <value xsi:type="pivot:PropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
-                    referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Class.middle">
+                <value xsi:type="qvti:MiddlePropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
+                    referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.umlClass">
                   <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
                       referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Association.source">
                     <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Association"
@@ -2229,8 +2229,8 @@
                 </value>
               </binding>
               <binding boundVariable="#qV.umlRdbms.associationToForeignKey_LM.middle.guard.dc2t">
-                <value xsi:type="pivot:PropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
-                    referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Class.middle">
+                <value xsi:type="qvti:MiddlePropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
+                    referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.umlClass">
                   <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
                       referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Association.destination">
                     <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Association"
@@ -2241,8 +2241,8 @@
               <binding boundVariable="#qV.umlRdbms.associationToForeignKey_LM.middle.guard.p2s">
                 <value xsi:type="pivot:PropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
                     referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.owner">
-                  <source xsi:type="pivot:PropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
-                      referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Class.middle">
+                  <source xsi:type="qvti:MiddlePropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
+                      referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.umlClass">
                     <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
                         referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Association.source">
                       <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Association"
@@ -2359,8 +2359,8 @@
                 </value>
               </binding>
               <binding boundVariable="#qV.umlRdbms.stringToVarchar_LM.middle.guard.p2s">
-                <value xsi:type="pivot:PropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
-                    referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Package.middle">
+                <value xsi:type="qvti:MiddlePropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
+                    referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.umlPackage">
                   <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Package"
                       referredProperty="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace">
                     <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"
@@ -2413,8 +2413,8 @@
                 </value>
               </binding>
               <binding boundVariable="#qV.umlRdbms.integerToNumber_LM.middle.guard.p2s">
-                <value xsi:type="pivot:PropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
-                    referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Package.middle">
+                <value xsi:type="qvti:MiddlePropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
+                    referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.umlPackage">
                   <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Package"
                       referredProperty="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace">
                     <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"
@@ -2445,8 +2445,8 @@
                 </value>
               </binding>
               <binding boundVariable="#qV.umlRdbms.booleanToBoolean_LM.middle.guard.p2s">
-                <value xsi:type="pivot:PropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
-                    referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Package.middle">
+                <value xsi:type="qvti:MiddlePropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema"
+                    referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.umlPackage">
                   <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Package"
                       referredProperty="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace">
                     <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"
@@ -2484,8 +2484,8 @@
                 </value>
               </binding>
               <binding boundVariable="#qV.umlRdbms.classPrimitiveAttributes_LM.middle.guard.p2n">
-                <value xsi:type="pivot:PropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
-                    referredProperty="SimpleUML.ecore.oclas#p.simpleuml.PrimitiveDataType.middle">
+                <value xsi:type="qvti:MiddlePropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
+                    referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.primitive">
                   <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Classifier"
                       referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Attribute.type">
                     <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
@@ -2494,8 +2494,8 @@
                 </value>
               </binding>
               <binding boundVariable="#qV.umlRdbms.classPrimitiveAttributes_LM.middle.guard.fao">
-                <value xsi:type="pivot:PropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
-                    referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Class.middle">
+                <value xsi:type="qvti:MiddlePropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
+                    referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.umlClass">
                   <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
                       referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner">
                     <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
@@ -2577,8 +2577,8 @@
                 </value>
               </binding>
               <binding boundVariable="#qV.umlRdbms.classComplexAttributes_LM.middle.guard.fao">
-                <value xsi:type="pivot:PropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
-                    referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Class.middle">
+                <value xsi:type="qvti:MiddlePropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable"
+                    referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.umlClass">
                   <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Class"
                       referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner">
                     <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
@@ -2678,8 +2678,8 @@
                     </value>
                   </binding>
                   <binding boundVariable="#qV.umlRdbms.complexAttributePrimitiveAttributes_LM.middle.guard.p2n">
-                    <value xsi:type="pivot:PropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
-                        referredProperty="SimpleUML.ecore.oclas#p.simpleuml.PrimitiveDataType.middle">
+                    <value xsi:type="qvti:MiddlePropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
+                        referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.PrimitiveToName.primitive">
                       <source xsi:type="pivot:PropertyCallExp" type="SimpleUML.ecore.oclas#T.simpleuml.Classifier"
                           referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Attribute.type">
                         <source xsi:type="pivot:VariableExp" type="SimpleUML.ecore.oclas#T.simpleuml.Attribute"
@@ -2688,7 +2688,7 @@
                     </value>
                   </binding>
                   <binding boundVariable="#qV.umlRdbms.complexAttributePrimitiveAttributes_LM.middle.guard.fao">
-                    <value xsi:type="pivot:PropertyCallExp"/>
+                    <value xsi:type="pivot:NullLiteralExp"/>
                   </binding>
                 </mappingStatements>
               </body>
@@ -2723,14 +2723,7 @@
                 </value>
               </binding>
               <binding boundVariable="#qV.umlRdbms.attributeColumns_MR.rdbms.guard.t">
-                <value xsi:type="pivot:PropertyCallExp" type="SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"
-                    referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.table">
-                  <source xsi:type="pivot:PropertyCallExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttributeOwner"
-                      referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.owner">
-                    <source xsi:type="pivot:VariableExp" type="UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
-                        referredVariable="#qV.umlRdbms.attributeColumns_MR.middle.guard.a2c"/>
-                  </source>
-                </value>
+                <value xsi:type="pivot:NullLiteralExp"/>
               </binding>
               <binding boundVariable="#qV.umlRdbms.attributeColumns_MR.rdbms.guard.ct">
                 <value xsi:type="pivot:PropertyCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"

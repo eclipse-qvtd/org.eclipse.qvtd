@@ -1,0 +1,503 @@
+import simplerdbms : 'SimpleRDBMS.ecore#/';
+import simpleuml : 'SimpleUML.ecore#/';
+import umltordbms : 'UMLtoRDBMS.ecore#/';
+
+transformation umlRdbms
+{
+	uml imports simpleuml;
+	rdbms imports simplerdbms;
+	middle imports umltordbms;
+}
+
+map packageToSchema_LM in umlRdbms
+{
+	check uml(p : Package) {}
+	enforce middle() {
+		realize p2s : PackageToSchema
+	}
+	where () {
+		p2s.umlPackage := p;
+		p2s.name := p.name;
+	}
+}
+
+map packageToSchema_MR in umlRdbms
+{
+	enforce rdbms() {
+		realize s : Schema
+	}
+	check middle(p2s : PackageToSchema) {}
+	where () {
+		s.name := p2s.name;
+		p2s.schema := s;
+	}
+}
+
+map integerToNumber_LM in umlRdbms
+{
+	check uml(p : Package,
+		prim : PrimitiveDataType) {}
+	enforce middle(p2s : PackageToSchema) {
+		realize p2n : IntegerToNumber
+	}
+	where (p2s.umlPackage = p;
+		prim.namespace = p;
+		prim.name = 'Integer';) {
+		p2n.owner := p2s;
+		p2n.primitive := prim;
+		p2n.name := prim.name + '2' + 'NUMBER';
+	}
+}
+
+map integerToNumber_MR in umlRdbms
+{
+	enforce rdbms() {
+		realize sqlType : String
+	}
+	check middle(p2s : PackageToSchema,
+		p2n : IntegerToNumber) {}
+	where (p2n.owner = p2s;) {
+		p2n.typeName := sqlType;
+		sqlType := 'NUMBER';
+	}
+}
+
+map booleanToBoolean_MR in umlRdbms
+{
+	enforce rdbms() {
+		realize sqlType : String
+	}
+	check middle(p2s : PackageToSchema,
+		p2n : BooleanToBoolean) {}
+	where (p2n.owner = p2s;) {
+		p2n.typeName := sqlType;
+		sqlType := 'BOOLEAN';
+	}
+}
+
+map booleanToBoolean_LM in umlRdbms
+{
+	check uml(p : Package,
+		prim : PrimitiveDataType) {}
+	enforce middle(p2s : PackageToSchema) {
+		realize p2n : BooleanToBoolean
+	}
+	where (p2s.umlPackage = p;
+		prim.namespace = p;
+		prim.name = 'Boolean';) {
+		p2n.primitive := prim;
+		p2n.name := prim.name + '2' + 'BOOLEAN';
+		p2n.owner := p2s;
+	}
+}
+
+map stringToVarchar_MR in umlRdbms
+{
+	enforce rdbms() {
+		realize sqlType : String
+	}
+	check middle(p2s : PackageToSchema,
+		p2n : StringToVarchar) {}
+	where (p2n.owner = p2s;) {
+		p2n.typeName := sqlType;
+		sqlType := 'VARCHAR';
+	}
+}
+
+map stringToVarchar_LM in umlRdbms
+{
+	check uml(p : Package,
+		prim : PrimitiveDataType) {}
+	enforce middle(p2s : PackageToSchema) {
+		realize p2n : StringToVarchar
+	}
+	where (p2s.umlPackage = p;
+		prim.namespace = p;
+		prim.name = 'String';) {
+		p2n.name := prim.name + '2' + 'VARCHAR';
+		p2n.owner := p2s;
+		p2n.primitive := prim;
+	}
+}
+
+map classToTable_MR in umlRdbms
+{
+	enforce rdbms(s : Schema) {
+		realize t : Table,
+		realize pk : Key,
+		realize pc : Column
+	}
+	check middle(p2s : PackageToSchema,
+		c2t : ClassToTable) {}
+	where (p2s.schema = s;
+		c2t.owner = p2s;) {
+		c2t.table := t;
+		t.name := c2t.name;
+		c2t.primaryKey := pk;
+		c2t.column := pc;
+		default t.kind := 'base';
+		t.schema := s;
+		pk.owner := t;
+		pk.kind := 'primary';
+		pc.owner := t;
+		default pc.keys := Set(simplerdbms::Key){pk};
+		default pc.type := 'NUMBER';
+		pc.name := t.name + '_tid';
+		pk.name := t.name + '_pk';
+	}
+}
+
+map classToTable_LM in umlRdbms
+{
+	check uml(p : Package,
+		c : Class) {}
+	enforce middle(p2s : PackageToSchema) {
+		realize c2t : ClassToTable
+	}
+	where (p2s.umlPackage = p;
+		c.kind = 'persistent';
+		c.namespace = p;) {
+		c2t.owner := p2s;
+		c2t.name := c.name;
+		c2t.umlClass := c;
+	}
+}
+
+map associationToForeignKey_MR in umlRdbms
+{
+	enforce rdbms(s : Schema,
+		st : Table,
+		dt : Table,
+		rk : Key) {
+		realize fk : ForeignKey,
+		realize fc : Column
+	}
+	check middle(p2s : PackageToSchema,
+		sc2t : ClassToTable,
+		dc2t : ClassToTable,
+		a2f : AssociationToForeignKey) {}
+	where (dc2t.table = dt;
+		sc2t.owner = p2s;
+		p2s.schema = s;
+		sc2t.table = st;
+		a2f.referenced = dc2t;
+		a2f.owner = sc2t;
+		rk.kind = 'primary';
+		rk.owner = dt;
+		st.schema = s;) {
+		fk.name := a2f.name;
+		a2f.foreignKey := fk;
+		fc.type := rk.column
+		->first().type;
+		fc.name := a2f.name + '_tid';
+		a2f.column := fc;
+		fk.owner := st;
+		fc.owner := st;
+		fk.refersTo := rk;
+		default fc.foreignKeys := Set(simplerdbms::ForeignKey){fk};
+	}
+}
+
+map associationToForeignKey_LM in umlRdbms
+{
+	check uml(p : Package,
+		sc : Class,
+		dc : Class,
+		a : Association) {}
+	enforce middle(p2s : PackageToSchema,
+		sc2t : ClassToTable,
+		dc2t : ClassToTable) {
+		realize a2f : AssociationToForeignKey
+	}
+	where (sc2t.owner = p2s;
+		dc2t.umlClass = dc;
+		sc2t.umlClass = sc;
+		p2s.umlPackage = p;
+		a.namespace = p;
+		sc.namespace = p;
+		a.source = sc;
+		a.destination = dc;) {
+		a2f.association := a;
+		a2f.referenced := dc2t;
+		a2f.name := if a.destination = dc and a.source = sc
+		then a.name
+		else if a.destination <> dc and a.source = sc
+			then dc.name + '_' + a.name
+			else if a.destination = dc and a.source <> sc
+				then a.name + '_' + sc.name
+				else dc.name + '_' + a.name + '_' + sc.name
+				endif
+			endif
+		endif;
+		a2f.owner := sc2t;
+		a.name := if a.destination = dc and a.source = sc
+		then a2f.name
+		else a.name
+		endif;
+	}
+}
+
+map classPrimitiveAttributes_LM in umlRdbms
+{
+	check uml(t : PrimitiveDataType,
+		c : Class,
+		a : Attribute) {}
+	enforce middle(fao : ClassToTable,
+		p2n : PrimitiveToName) {
+		realize fa : AttributeToColumn
+	}
+	where (fao.umlClass = c;
+		p2n.primitive = t;
+		a.owner = c;
+		a.type = t;) {
+		fa.owner := fao;
+		fa.type := p2n;
+		fa.name := a.name;
+		fa.owner := fao;
+		fa.kind := a.kind;
+		fa.kind := a.kind;
+		fa.attribute := a;
+		fa.attribute := a;
+		fa.leafs := Set(umltordbms::AttributeToColumn){fa};
+	}
+}
+
+map classComplexAttributes_LM in umlRdbms
+{
+	check uml(t : Class,
+		c : Class,
+		a : Attribute) {}
+	enforce middle(fao : ClassToTable) {
+		realize fa : NonLeafAttribute
+	}
+	where (fao.umlClass = c;
+		a.owner = c;
+		a.type = t;) {
+		fa.attribute := a;
+		fa.attribute := a;
+		fa.kind := a.kind;
+		fa.owner := fao;
+		fa.owner := fao;
+		fa.name := a.name;
+		fa.leafs := fao.fromAttributes.leafs;
+		fa.kind := a.kind;
+	}
+}
+
+map complexAttributePrimitiveAttributes_LM in umlRdbms
+{
+	check uml(ca : Attribute,
+		c : Class,
+		t : PrimitiveDataType,
+		a : Attribute) {}
+	enforce middle(fao : NonLeafAttribute,
+		p2n : PrimitiveToName) {
+		realize fa : AttributeToColumn
+	}
+	where (fao.attribute = ca;
+		p2n.primitive = t;
+		a.owner = c;
+		a.type = t;
+		ca.type = c;
+		a.owner = c;) {
+		fa.owner := fao;
+		fa.attribute := a;
+		fa.kind := a.kind;
+		fa.type := p2n;
+		fa.leafs := Set(umltordbms::AttributeToColumn){fa};
+		fa.name := fao.name + '_' + a.name;
+		fa.kind := a.kind;
+		fa.attribute := a;
+		fa.owner := fao;
+	}
+}
+
+map complexAttributeComplexAttributes_LM in umlRdbms
+{
+	check uml(ca : Attribute,
+		c : Class,
+		t : Class,
+		a : Attribute) {}
+	enforce middle(fao : NonLeafAttribute) {
+		realize fa : NonLeafAttribute
+	}
+	where (fao.attribute = ca;
+		a.owner = c;
+		a.owner = c;
+		ca.type = c;
+		a.type = t;) {
+		fa.owner := fao;
+		fa.kind := a.kind;
+		fa.leafs := fao.fromAttributes.leafs;
+		fa.attribute := a;
+		fa.attribute := a;
+		fa.name := fao.name + '_' + a.name;
+		fa.kind := a.kind;
+		fa.owner := fao;
+	}
+}
+
+map attributeColumns_MR in umlRdbms
+{
+	enforce rdbms(t : Table,
+		ct : String) {
+		realize c : Column
+	}
+	check middle(c2t : ClassToTable,
+		p2n : PrimitiveToName,
+		a2c : AttributeToColumn) {}
+	where (c2t.table = t;
+		p2n.typeName = ct;
+		a2c.owner = c2t;
+		c2t.fromAttributes.leafs
+		->includes(a2c);
+		a2c.type = p2n;) {
+		c.name := a2c.name;
+		c.kind := a2c.kind;
+		a2c.column := c;
+		c.owner := t;
+		c.type := ct;
+	}
+}
+
+map __root__ in umlRdbms
+{
+	where () {}
+	for p : simpleuml::Package in simpleuml::Package.allInstances() {
+		call packageToSchema_LM {
+			p := p;
+		}
+	}
+	for p2s : umltordbms::PackageToSchema in umltordbms::PackageToSchema.allInstances() {
+		call packageToSchema_MR {
+			p2s := p2s;
+		}
+	}
+	for c : simpleuml::Class in simpleuml::Class.allInstances() {
+		call classToTable_LM {
+			c := c;
+			p := c.namespace;
+			p2s := c.namespace.middle;
+		}
+	}
+	for c2t : umltordbms::ClassToTable in umltordbms::ClassToTable.allInstances() {
+		call classToTable_MR {
+			c2t := c2t;
+			p2s := c2t.owner;
+			s := c2t.owner.schema;
+		}
+	}
+	for a : simpleuml::Association in simpleuml::Association.allInstances() {
+		call associationToForeignKey_LM {
+			a := a;
+			sc := a.source;
+			dc := a.destination;
+			p := a.namespace;
+			sc2t := a.source.middle;
+			dc2t := a.destination.middle;
+			p2s := a.source.middle.owner;
+		}
+	}
+	for a2f : umltordbms::AssociationToForeignKey in umltordbms::AssociationToForeignKey.allInstances() {
+		for rk : simplerdbms::Key in simplerdbms::Key.allInstances() {
+			call associationToForeignKey_MR {
+				a2f := a2f;
+				rk := rk;
+				dc2t := a2f.referenced;
+				sc2t := a2f.owner;
+				st := a2f.owner.table;
+				s := a2f.owner.table.schema;
+				dt := a2f.referenced.table;
+				p2s := a2f.owner.owner;
+			}
+		}
+	}
+	for prim : simpleuml::PrimitiveDataType in simpleuml::PrimitiveDataType.allInstances() {
+		call stringToVarchar_LM {
+			prim := prim;
+			p := prim.namespace;
+			p2s := prim.namespace.middle;
+		}
+	}
+	for p2n : umltordbms::StringToVarchar in umltordbms::StringToVarchar.allInstances() {
+		call stringToVarchar_MR {
+			p2n := p2n;
+			p2s := p2n.owner;
+		}
+	}
+	for prim : simpleuml::PrimitiveDataType in simpleuml::PrimitiveDataType.allInstances() {
+		call integerToNumber_LM {
+			prim := prim;
+			p := prim.namespace;
+			p2s := prim.namespace.middle;
+		}
+	}
+	for prim : simpleuml::PrimitiveDataType in simpleuml::PrimitiveDataType.allInstances() {
+		call booleanToBoolean_LM {
+			prim := prim;
+			p := prim.namespace;
+			p2s := prim.namespace.middle;
+		}
+	}
+	for a : simpleuml::Attribute in simpleuml::Attribute.allInstances() {
+		call classPrimitiveAttributes_LM {
+			a := a;
+			c := a.owner;
+			t := a.type;
+			p2n := null;
+			fao := a.owner.middle;
+		}
+	}
+	for p2n : umltordbms::IntegerToNumber in umltordbms::IntegerToNumber.allInstances() {
+		call integerToNumber_MR {
+			p2n := p2n;
+			p2s := p2n.owner;
+		}
+	}
+	for p2n : umltordbms::BooleanToBoolean in umltordbms::BooleanToBoolean.allInstances() {
+		call booleanToBoolean_MR {
+			p2n := p2n;
+			p2s := p2n.owner;
+		}
+	}
+	for a : simpleuml::Attribute in simpleuml::Attribute.allInstances() {
+		call classComplexAttributes_LM {
+			a := a;
+			t := a.type;
+			c := a.owner;
+			fao := a.owner.middle;
+		}
+	}
+	for fao : umltordbms::NonLeafAttribute in umltordbms::NonLeafAttribute.allInstances() {
+		for a : simpleuml::Attribute in simpleuml::Attribute.allInstances() {
+			call complexAttributeComplexAttributes_LM {
+				a := a;
+				fao := fao;
+				ca := fao.attribute;
+				t := a.type;
+				c := fao.attribute.type;
+			}
+		}
+	}
+	for a : simpleuml::Attribute in simpleuml::Attribute.allInstances() {
+		for ca : simpleuml::Attribute in simpleuml::Attribute.allInstances() {
+			call complexAttributePrimitiveAttributes_LM {
+				a := a;
+				ca := ca;
+				c := a.owner;
+				t := a.type;
+				p2n := null;
+				fao := null;
+			}
+		}
+	}
+	for a2c : umltordbms::AttributeToColumn in umltordbms::AttributeToColumn.allInstances() {
+		call attributeColumns_MR {
+			a2c := a2c;
+			p2n := a2c.type;
+			c2t := a2c.owner;
+			t := null;
+			ct := a2c.type.typeName;
+		}
+	}
+}

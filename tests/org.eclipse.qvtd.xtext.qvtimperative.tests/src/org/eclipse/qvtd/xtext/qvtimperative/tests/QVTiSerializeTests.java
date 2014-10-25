@@ -24,6 +24,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
+import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
@@ -41,13 +42,13 @@ public class QVTiSerializeTests extends LoadTestCase
 	protected void doSerializeRoundTrip(@NonNull String stem) throws Exception {
 		OCL ocl1 = OCL.newInstance();
 		OCL ocl2 = OCL.newInstance();
-//		Resource asResource1 = doLoad_Concrete(ocl1, stem + ".qvti", stem + ".qvtias");
+		Resource asResource1 = doLoad_Concrete(ocl1, stem + ".qvti", stem + ".qvtias");
 		URI inputURI = getProjectFileURI(stem + ".qvtias");
 		URI referenceURI = getProjectFileURI(stem + "ref..qvtias");
 		doSerialize(inputURI, stem, referenceURI, null, true, true);
 		Resource asResource3 = doLoad_Concrete(ocl2, stem + ".serialized.qvti", stem + ".serialized.qvtias");
-//		((Root)asResource3.getContents().get(0)).setExternalURI(((Root)asResource1.getContents().get(0)).getExternalURI());
-//		assertSameModel(asResource1, asResource3);
+		((Root)asResource3.getContents().get(0)).setExternalURI(((Root)asResource1.getContents().get(0)).getExternalURI());
+		assertSameModel(asResource1, asResource3);
 		ocl1.dispose();
 		ocl2.dispose();
 	}	
@@ -146,9 +147,14 @@ public class QVTiSerializeTests extends LoadTestCase
 	public void testSerialize_HSV2HLS_qvti() throws Exception {
 		doSerializeRoundTrip("HSV2HLS/HSV2HLS");
 	}
+	
+	public void testSerialize_Uml2Rdbms_qvti() throws Exception {
+		doSerializeRoundTrip("UML2RDBMS/UmlToRdbms");
+	}
+/*	protected void doSerialize(@NonNull String stem) throws Exception {
+		URI inputURI = getProjectFileURI(stem + ".qvtias");
+		URI referenceURI = getProjectFileURI(stem + "ref..qvtias");
+		doSerialize(inputURI, stem, referenceURI, null, true, true);
+	} */
 
-	// Disabled since qvtias has bad (Middle)PropertyCallExp
-//	public void testSerialize_Uml2Rdbms_qvti() throws Exception {
-//		doSerializeRoundTrip("UML2RDBMS/UmlToRdbms");
-//	}
 }
