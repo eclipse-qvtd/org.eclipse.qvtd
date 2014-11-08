@@ -2,12 +2,11 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.qvtd.build;singleton:=true
-Bundle-Version: 0.11.100.qualifier
+Bundle-Version: 0.12.0.qualifier
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.core.resources,
  org.eclipse.core.runtime,
- org.eclipse.jdt.annotation;bundle-version="[1.1.0,2.0.0)";resolution:=optional,
  org.eclipse.emf.mwe2.launch,
  org.eclipse.xtext.generator,
  org.eclipse.ocl.examples.build;bundle-version="[3.5.0,3.6.0)",
