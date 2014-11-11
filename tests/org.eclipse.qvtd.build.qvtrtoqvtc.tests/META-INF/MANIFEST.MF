@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Tests
+Bundle-SymbolicName: org.eclipse.qvtd.build.qvtrtoqvtc.tests
+Bundle-Version: 1.0.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.eclipse.qvtd.xtext.qvtbase.tests,
+ org.eclipse.qvtd.xtext.qvtrelation,
+ org.eclipse.qvtd.build.qvtrtoqvtc
+Import-Package: org.eclipse.qvtd.pivot.qvtimperative.evaluation
+Export-Package: org.eclipse.qvtd.build.qvtrtoqvtc.tests
