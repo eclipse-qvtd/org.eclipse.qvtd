@@ -20,10 +20,10 @@ public class RuleFactory {
 		List<ConstrainedRule> rules = new ArrayList<ConstrainedRule>();
 		ConstrainedRule rule1 = new RelationalTransformationToMappingTransformation();
 		ConstrainedRule rule2 = new RelationToTraceClass();
-		ConstrainedRule rule3 = new TopLevelRelationForMappingForEnforcement();
+		//ConstrainedRule rule3 = new TopLevelRelationForMappingForEnforcement();
 		rules.add(rule1);
 		rules.add(rule2);
-		rules.add(rule3);
+		//rules.add(rule3);
 		return rules;
 	}
 	

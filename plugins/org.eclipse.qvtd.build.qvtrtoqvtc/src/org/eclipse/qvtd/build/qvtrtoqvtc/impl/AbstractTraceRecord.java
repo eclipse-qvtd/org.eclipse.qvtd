@@ -1,16 +1,19 @@
 package org.eclipse.qvtd.build.qvtrtoqvtc.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.eclipse.qvtd.build.qvtrtoqvtc.Bindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.ConstrainedRule;
 import org.eclipse.qvtd.build.qvtrtoqvtc.TraceRecord;
 
-public abstract class AbstractTraceRecord implements TraceRecord {
+public class AbstractTraceRecord implements TraceRecord {
 	
-	boolean executed = false;
+	private boolean executed = false;
+	private Bindings bindings;
 	
 	
+	public AbstractTraceRecord(Bindings bindings) {
+		this.bindings = bindings;
+	}
+
 	@Override
 	public boolean wasExecuted() {
 		return executed;
@@ -23,9 +26,7 @@ public abstract class AbstractTraceRecord implements TraceRecord {
 		this.executed = executed;
 	}
 	
-	public boolean matches(ConstrainedRule rule, List<Object> inputElements) {
-		// TODO Auto-generated method stub
-		return false;
+	public Bindings getBindings() {
+		return bindings;
 	}
-	
 }

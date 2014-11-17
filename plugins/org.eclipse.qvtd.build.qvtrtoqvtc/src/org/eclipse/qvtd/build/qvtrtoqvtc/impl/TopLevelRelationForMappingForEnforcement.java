@@ -3,7 +3,9 @@ package org.eclipse.qvtd.build.qvtrtoqvtc.impl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -13,14 +15,17 @@ import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.qvtd.build.qvtrtoqvtc.ConstrainedRule;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.TraceRecord;
+import org.eclipse.qvtd.build.qvtrtoqvtc.impl.DomainVarsSharedWithWhenToDgVars.DomainVarsSharedWithWhenToDgVarsRecord;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RelationalTransformationToMappingTransformation.RelationalTransformationToMappingTransformationRecord;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationFactory;
@@ -102,10 +107,16 @@ public class TopLevelRelationForMappingForEnforcement extends AbstractRule
 	private RealizedVariable tcv;
 
 	private Variable mtev;
+
+	private GuardPattern dg;
+
+	private Set<Variable> domainVarsSharedWithWhen;
+
+	private EList<Variable> domainVars;
 	
 	
 	@Override
-	public TraceRecord creareTrace() {
+	public TraceRecord creareTraceRecord() {
 		record = new TopLevelRelationForMappingForEnforcementRecord();
 		return record;
 	}
@@ -128,10 +139,10 @@ public class TopLevelRelationForMappingForEnforcement extends AbstractRule
 			}
 		}
 		rt = (RelationalTransformation) r.getTransformation();
-		RelationalTransformationToMappingTransformation rule = new RelationalTransformationToMappingTransformation();
+		RelationalTransformationToMappingTransformation rtTomtRule = new RelationalTransformationToMappingTransformation();
 		List<Object> args = new ArrayList<Object>();
 		args.add(rt);
-		TraceRecord rtTomtRecord = transformation.executeRule(rule, args);
+		TraceRecord rtTomtRecord = transformation.executeRule(rtTomtRule, args);
 		mt = ((RelationalTransformationToMappingTransformationRecord)rtTomtRecord).getMt();
 		if (r != null && rd != null && r.getDomain().contains(rd)
 				&& r.getTransformation().equals(rt)
@@ -141,6 +152,7 @@ public class TopLevelRelationForMappingForEnforcement extends AbstractRule
 			rn  = r.getName();
 			dn = rd.getName();
 			tmn = rd.getTypedModel().getName();
+			domainVars = rd.getPattern().getBindsTo();
 			return true;
 		} else {
 			return false;
@@ -172,7 +184,8 @@ public class TopLevelRelationForMappingForEnforcement extends AbstractRule
 			// rule once dosen't guarantee that all the typed models have been 
 			// transformed?
 		}
-		md.setGuardPattern(QVTcoreBaseFactory.eINSTANCE.createGuardPattern());
+		dg = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
+		md.setGuardPattern(dg);
 		BottomPattern db = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
 		mtev = PivotFactory.eINSTANCE.createVariable();
 		db.getBindsTo().add(mtev);
@@ -192,10 +205,22 @@ public class TopLevelRelationForMappingForEnforcement extends AbstractRule
 	@Override
 	public void where(QvtrToQvtcTransformation transformation) {
 		
+		// T3
+		ConstrainedRule rule = new RWhenPatternToMGuardPattern();
+		RWhenPatternToMGuardPatternRecord rwpTomgpRecord = rule.creareTraceRecord();
+		
+		
+		
+		// T4
+		rule = new DomainVarsSharedWithWhenToDgVars();
+		DomainVarsSharedWithWhenToDgVarsRecord dvswwTodvRecord = (DomainVarsSharedWithWhenToDgVarsRecord) rule.creareTraceRecord();
+		dvswwTodvRecord.setDomainVarsSharedWithWhen(domainVarsSharedWithWhen);
+		dvswwTodvRecord.setDg(dg);
+		
 	}
 	
 	
-	public List<List<Object>> getLoopData(Resource inputModel) {
+	public List<List<Object>> findInputMatches(Resource inputModel) {
 		List<List<Object>> loopData = new ArrayList<List<Object>>();
 		EClass rEClass = QVTrelationFactory.eINSTANCE.createRelation().eClass();
 		TreeIterator<EObject> it = inputModel.getAllContents();
@@ -220,4 +245,6 @@ public class TopLevelRelationForMappingForEnforcement extends AbstractRule
 		return loopData;
 	}
 	
+	
+
 }

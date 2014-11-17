@@ -6,18 +6,20 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.qvtd.build.qvtrtoqvtc.Bindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.ConstrainedRule;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
+import org.eclipse.qvtd.build.qvtrtoqvtc.TraceRecord;
 
 public abstract class AbstractRule implements ConstrainedRule {
 	
-	
-	public List<List<Object>> getLoopData(Resource inputModel) {
-		return new ArrayList<List<Object>>();
+	public boolean matchBindings(TraceRecord tr, Bindings bindings) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
-	public boolean when(QvtrToQvtcTransformation transformation, List<Object> inputElements) {
-		return true;
+	public List<Bindings> findInputMatches(Resource inputModel) {
+		return new ArrayList<Bindings>();
 	}
 	
 	public boolean when(QvtrToQvtcTransformation transformation) {
@@ -29,6 +31,7 @@ public abstract class AbstractRule implements ConstrainedRule {
 	
 	public void setAttributes() { }
 	
+	
 	public List<EObject> instantiateOutputElements(Map<Class<? extends EObject>, List<EObject>> outputModelElements) {
 		return new ArrayList<EObject>();
 	}
@@ -36,8 +39,5 @@ public abstract class AbstractRule implements ConstrainedRule {
 	public List<EObject> instantiateMiddleElements(Map<Class<? extends EObject>, List<EObject>> qvtcMiddleElements) {
 		return new ArrayList<EObject>();
 	}
-	
-	
-	
 
 }

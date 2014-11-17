@@ -59,16 +59,16 @@ public class QvtrToQvtcTransformation {
 		// Only invoke "top" rules
 		for(ConstrainedRule rule: rules) {
 			// Top rules need binding of inputs from the resource
-			List<List<Object>> loopData = rule.getLoopData(qvtrModel);
+			List<Bindings> loopData = rule.findInputMatches(qvtrModel);
 			executeRuleInLoop(rule, loopData);
 		}
 		       
 	}
 	
 	private void executeRuleInLoop(ConstrainedRule rule,
-			List<List<Object>> loopData) {
-		for (List<Object> args : loopData) {
-			TraceRecord record = executeRule(rule, args);
+			List<Bindings> loopData) {
+		for (Bindings bindings : loopData) {
+			TraceRecord record = executeRule(rule, bindings);
 			if (!record.wasExecuted()) {
 				traceData.deleteRecord(record);
 				record = null;
@@ -84,10 +84,10 @@ public class QvtrToQvtcTransformation {
 	}
 	
 	
-	public TraceRecord executeRule(ConstrainedRule rule, List<Object> args) {
-		TraceRecord record = traceData.getRecord(rule, args);
-		if (rule.when(this, args)) {
-			if (!record.wasExecuted()) {
+	public TraceRecord executeRule(ConstrainedRule rule, Bindings bindings) {
+		TraceRecord record = traceData.getRecord(rule, bindings);
+		if (!record.wasExecuted()) {
+			if (rule.when(this)) {
 				for (EObject eo : rule.instantiateOutputElements(qvtcModelElements)) {
 					if (qvtcModelElements.containsKey(eo.getClass())) {
 						qvtcModelElements.get(eo.getClass()).add(eo);

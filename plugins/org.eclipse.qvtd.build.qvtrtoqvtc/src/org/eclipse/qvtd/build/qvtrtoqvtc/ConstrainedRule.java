@@ -12,22 +12,20 @@ import org.eclipse.emf.ecore.resource.Resource;
  */
 public interface ConstrainedRule {
 	
-	// Execution
+	/**
+	 * Match a Bindings to the types requried by the rule 
+	 * @param tr 
+	 * @param bindings
+	 * @return
+	 */
+	public boolean matchBindings(TraceRecord tr, Bindings bindings);
+	
 	/**
 	 * Creare trace.
 	 *
 	 * @return the trace record
 	 */
-	public TraceRecord creareTrace();
-	
-	/**
-	 * When.
-	 *
-	 * @param transformation the transformation
-	 * @param args the input elements
-	 * @return true, if successful
-	 */
-	public boolean when(QvtrToQvtcTransformation transformation, List<Object> args);
+	public TraceRecord creareTraceRecord(Bindings bindings);
 	
 	/**
 	 * When.
@@ -71,5 +69,5 @@ public interface ConstrainedRule {
 	 * @param inputModel the input model
 	 * @return the loop data
 	 */
-	public List<List<Object>> getLoopData(Resource inputModel);
+	public List<Bindings> findInputMatches(Resource inputModel);
 }

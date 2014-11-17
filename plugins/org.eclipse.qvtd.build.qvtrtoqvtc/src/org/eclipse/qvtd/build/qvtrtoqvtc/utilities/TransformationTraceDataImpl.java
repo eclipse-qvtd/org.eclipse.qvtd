@@ -3,6 +3,7 @@ package org.eclipse.qvtd.build.qvtrtoqvtc.utilities;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.qvtd.build.qvtrtoqvtc.Bindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.ConstrainedRule;
 import org.eclipse.qvtd.build.qvtrtoqvtc.TraceRecord;
 
@@ -20,16 +21,16 @@ public class TransformationTraceDataImpl implements TransformationTraceData {
 	}
 
 	@Override
-	public TraceRecord getRecord(ConstrainedRule rule, List<Object> inputElements) {
+	public TraceRecord getRecord(ConstrainedRule rule, Bindings bindings) {
 		TraceRecord record = null;
 		for (TraceRecord tr : traceRecords) {
-			if (tr.matches(rule, inputElements)) {
+			if (rule.matchBindings(tr, bindings)) {
 				record = tr;
 				break;
 			}
 		}
 		if (record == null) {
-			record = rule.creareTrace();
+			record = rule.creareTraceRecord(bindings);
 			traceRecords.add(record);
 		}
 		return record;
