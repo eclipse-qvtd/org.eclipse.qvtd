@@ -1,5 +1,7 @@
 package org.eclipse.qvtd.build.qvtrtoqvtc.impl;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -13,13 +15,44 @@ import org.eclipse.qvtd.build.qvtrtoqvtc.TraceRecord;
 
 public abstract class AbstractRule implements ConstrainedRule {
 	
+	protected TraceRecord record;
+	
 	public boolean matchBindings(TraceRecord tr, Bindings bindings) {
-		// TODO Auto-generated method stub
-		return false;
+			
+		boolean match = true;
+		boolean partial = false;
+		Field[] fields = this.getClass().getDeclaredFields();
+		for (Field f : fields) {
+			Class<?> t = f.getType();
+		    if (Modifier.isStatic(f.getModifiers()) && (t == BindingKey.class)) {
+		    	try {
+		    		Object key = f.get(this);
+					if (bindings.get(key) != null && tr.getBindings().get(key) != null) {
+						match &= (bindings.get(key).equals(tr.getBindings().get(key)));
+						partial = true;
+					} else {
+						match = false;
+					}
+				} catch (IllegalArgumentException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IllegalAccessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    } 
+		}
+		return match || partial;
 	}
 	
 	public List<Bindings> findInputMatches(Resource inputModel) {
 		return new ArrayList<Bindings>();
+	}
+	
+
+	public TraceRecord creareTraceRecord(Bindings bindings) {
+		record = new AbstractTraceRecord(bindings); 
+		return record;
 	}
 	
 	public boolean when(QvtrToQvtcTransformation transformation) {

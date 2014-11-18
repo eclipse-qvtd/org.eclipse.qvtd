@@ -12,10 +12,8 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.qvtd.build.qvtrtoqvtc.Bindings;
-import org.eclipse.qvtd.build.qvtrtoqvtc.ConstrainedRule;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.TraceRecord;
-import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 
@@ -33,14 +31,7 @@ public class SubTemplateToTraceClassProps extends AbstractRule {
 	public static final BindingKey<EClass> rc = new BindingKey<EClass>("rc");
 	public static final BindingKey<EReference> a = new BindingKey<EReference>("a");
 	
-	private TraceRecord  record;
 	private String vn;
-
-	@Override
-	public TraceRecord creareTraceRecord(Bindings bindings) {
-		record = new AbstractTraceRecord(bindings);
-		return record;
-	}
 	
 	@Override
 	public boolean when(QvtrToQvtcTransformation transformation) {
@@ -68,14 +59,14 @@ public class SubTemplateToTraceClassProps extends AbstractRule {
 		SubTemplateToTraceClassProps rule = new SubTemplateToTraceClassProps();
 		for (PropertyTemplateItem part : record.getBindings().get(SubTemplateToTraceClassProps.t).getPart()) {
 			if (part.getValue() instanceof ObjectTemplateExp) {
-				Bindings r = new Bindings();
-				// TODO add other bindings!
-				r.put(SubTemplateToTraceClassProps.t, part.getValue());
-				r.put(SubTemplateToTraceClassProps.tv, ((ObjectTemplateExp)part.getValue()).getBindsTo());
-				r.put(SubTemplateToTraceClassProps.c, ((ObjectTemplateExp)part.getValue()).getBindsTo().getType());
-				r.put(SubTemplateToTraceClassProps.rc, record.getBindings().get(rc));
-				
-				TraceRecord stTotcpRecord = rule.creareTraceRecord(r);
+				Bindings bindings = new Bindings();
+				bindings.put(SubTemplateToTraceClassProps.t, record.getBindings().get(SubTemplateToTraceClassProps.t));
+				bindings.put(SubTemplateToTraceClassProps.pt, part);
+				bindings.put(SubTemplateToTraceClassProps.tp, (ObjectTemplateExp)part.getValue());
+				bindings.put(SubTemplateToTraceClassProps.tv, ((ObjectTemplateExp)part.getValue()).getBindsTo());
+				bindings.put(SubTemplateToTraceClassProps.c, ((ObjectTemplateExp)part.getValue()).getBindsTo().getType());
+				bindings.put(SubTemplateToTraceClassProps.rc, record.getBindings().get(rc));
+				TraceRecord stTotcpRecord = rule.creareTraceRecord(bindings);
 				transformation.executeRule(rule, stTotcpRecord);
 			}
 		}

@@ -21,6 +21,7 @@ public interface TraceRecord {
 	 */
 	void wasExecuted(boolean executed);
 	
+	boolean isPartial();
 	
 	Bindings getBindings();
 }
