@@ -14,6 +14,7 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter
 import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLLinkingService;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
+import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtrelation.QVTrelationStandaloneSetup;
 import org.junit.After;
 import org.junit.Before;
@@ -32,6 +33,7 @@ public class QvtrToQvtcTests extends LoadTestCase {
 		EssentialOCLLinkingService.DEBUG_RETRY = true;
 		super.setUp();
 		QVTrelationStandaloneSetup.doSetup();
+		QVTcoreStandaloneSetup.doSetup();
 		metaModelManager = new MetaModelManager();
         MetaModelManagerResourceSetAdapter.getAdapter(DomainUtil.nonNullState(resourceSet), metaModelManager);
     }
