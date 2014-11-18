@@ -18,6 +18,7 @@ import org.eclipse.qvtd.build.qvtrtoqvtc.TraceRecord;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.impl.TypedModelImpl;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
@@ -71,26 +72,25 @@ public class TopLevelRelationForMappingForEnforcement extends AbstractRule {
 	
 	
 	@Override
-	public boolean when(QvtrToQvtcTransformation transformation) {
+	public boolean when(QvtrToQvtcTransformation transformation, Resource qvtrModel) {
 		Relation r = record.getBindings().get(TopLevelRelationForMappingForEnforcement.r);
 		if (r.isIsTopLevel()) {
 			rt = (RelationalTransformation) r.getTransformation();
 			RelationalTransformationToMappingTransformation rtTomtRule = new RelationalTransformationToMappingTransformation();
-			Bindings bindings = new Bindings();
-			// We ony care for mt, so we only need to have been executed once
-			bindings.put(RelationalTransformationToMappingTransformation.rt, rt);
-			bindings.put(RelationalTransformationToMappingTransformation.rtm, rt.getModelParameter().get(0));
-			TraceRecord rtTomtRecord = transformation.executeRule(rtTomtRule, bindings);
-			mt = rtTomtRecord.getBindings().get(RelationalTransformationToMappingTransformation.mt);
-			if (mt != null) {
-				rn = r.getName();
-				RelationDomain rd = record.getBindings().get(TopLevelRelationForMappingForEnforcement.rd);
-				dn = rd.getName();
-				tmn = record.getBindings().get(TopLevelRelationForMappingForEnforcement.dir).getName();
-				rOppositeDomains = new HashSet<RelationDomain>(record.getBindings().get(TopLevelRelationForMappingForEnforcement.rds));
-				rOppositeDomains.remove(rd);
-				return true;
+			List<Bindings> loopData = rtTomtRule.findInputMatches(qvtrModel);
+			for (TraceRecord rtTomtRecord : transformation.executeRuleInLoop(rtTomtRule, loopData)) {
+				if(rtTomtRecord.getBindings().get(RelationalTransformationToMappingTransformation.rt).equals(rt)) {
+					mt = rtTomtRecord.getBindings().get(RelationalTransformationToMappingTransformation.mt);
+					break;
+				}
 			}
+			rn = r.getName();
+			RelationDomain rd = record.getBindings().get(TopLevelRelationForMappingForEnforcement.rd);
+			dn = rd.getName();
+			tmn = record.getBindings().get(TopLevelRelationForMappingForEnforcement.dir).getName();
+			rOppositeDomains = new HashSet<RelationDomain>(record.getBindings().get(TopLevelRelationForMappingForEnforcement.rds));
+			rOppositeDomains.remove(rd);
+			return true;
 		}
 		return false;
 	}
@@ -116,11 +116,11 @@ public class TopLevelRelationForMappingForEnforcement extends AbstractRule {
 		CoreDomain md = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
 		results.add(md);
 		record.getBindings().put(TopLevelRelationForMappingForEnforcement.md, md);
-		if (outputModelElements.containsKey(TypedModel.class)) {
-			for (EObject mdir : outputModelElements.get(TypedModel.class)) {
+		if (outputModelElements.containsKey(TypedModelImpl.class)) {
+			for (EObject mdir : outputModelElements.get(TypedModelImpl.class)) {
 				if (((TypedModel)mdir).getName().equals(tmn)) {
 					md.setTypedModel((TypedModel) mdir);
-					record.getBindings().put(TopLevelRelationForMappingForEnforcement.mdir, mdir);
+					record.getBindings().put(TopLevelRelationForMappingForEnforcement.mdir, (TypedModel)mdir);
 					break;
 				}
 			}

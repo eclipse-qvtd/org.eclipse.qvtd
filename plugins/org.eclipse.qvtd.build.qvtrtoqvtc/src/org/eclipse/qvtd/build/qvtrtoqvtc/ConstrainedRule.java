@@ -33,7 +33,7 @@ public interface ConstrainedRule {
 	 * @param transformation the transformation
 	 * @return true, if successful
 	 */
-	public boolean when(QvtrToQvtcTransformation transformation);	
+	public boolean when(QvtrToQvtcTransformation transformation, Resource qvtrModel);	
 	
 	/**
 	 * Instantiate output elements.

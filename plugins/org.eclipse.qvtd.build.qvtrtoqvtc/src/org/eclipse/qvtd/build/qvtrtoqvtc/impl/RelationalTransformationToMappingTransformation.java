@@ -28,7 +28,8 @@ public class RelationalTransformationToMappingTransformation
 	public String rtn;
 	public String tmn;
 	
-	public boolean when(QvtrToQvtcTransformation transformation) {
+	@Override
+	public boolean when(QvtrToQvtcTransformation transformation, Resource qvtrModel) {
 		RelationalTransformation rt = record.getBindings().get(RelationalTransformationToMappingTransformation.rt);
 		TypedModel rtm = record.getBindings().get(RelationalTransformationToMappingTransformation.rtm);
 		if (rt != null && rtm != null

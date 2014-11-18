@@ -65,15 +65,18 @@ public class QvtrToQvtcTransformation {
 		       
 	}
 	
-	private void executeRuleInLoop(ConstrainedRule rule,
+	public List<TraceRecord> executeRuleInLoop(ConstrainedRule rule,
 			List<Bindings> loopData) {
+		List<TraceRecord> records = new ArrayList<TraceRecord>();
 		for (Bindings bindings : loopData) {
 			TraceRecord record = executeRule(rule, bindings);
+			records.add(record);
 			if (!record.wasExecuted()) {
 				traceData.deleteRecord(record);
 				record = null;
 			}
 		}
+		return records;
 	}
 
 
@@ -87,7 +90,7 @@ public class QvtrToQvtcTransformation {
 	public TraceRecord executeRule(ConstrainedRule rule, Bindings bindings) {
 		TraceRecord record = traceData.getRecord(rule, bindings);
 		if (!record.wasExecuted()) {
-			if (rule.when(this)) {
+			if (rule.when(this, qvtrModel)) {
 				for (EObject eo : rule.instantiateOutputElements(qvtcModelElements)) {
 					if (qvtcModelElements.containsKey(eo.getClass())) {
 						qvtcModelElements.get(eo.getClass()).add(eo);
@@ -117,7 +120,7 @@ public class QvtrToQvtcTransformation {
 	}
 	
 	public void executeRule(ConstrainedRule rule, TraceRecord record) {
-		if (rule.when(this)) {
+		if (rule.when(this, qvtrModel)) {
 			for (EObject eo : rule.instantiateOutputElements(qvtcModelElements)) {
 				if (qvtcModelElements.containsKey(eo.getClass())) {
 					qvtcModelElements.get(eo.getClass()).add(eo);

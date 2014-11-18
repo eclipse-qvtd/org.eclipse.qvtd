@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.qvtd.build.qvtrtoqvtc.Bindings;
@@ -34,7 +35,7 @@ public class SubTemplateToTraceClassProps extends AbstractRule {
 	private String vn;
 	
 	@Override
-	public boolean when(QvtrToQvtcTransformation transformation) {
+	public boolean when(QvtrToQvtcTransformation transformation,  Resource qvtrModel) {
 		vn = record.getBindings().get(tv).getName();
 		return true;
 	}

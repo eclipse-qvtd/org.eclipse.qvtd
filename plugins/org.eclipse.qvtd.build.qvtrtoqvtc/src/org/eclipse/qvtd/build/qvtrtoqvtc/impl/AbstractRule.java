@@ -17,21 +17,20 @@ public abstract class AbstractRule implements ConstrainedRule {
 	
 	protected TraceRecord record;
 	
+	// Does a partial matching, i.e. it only verifies that the trace record
+	// has the same values for the keys that the binding has (usually only
+	// the input model)
 	public boolean matchBindings(TraceRecord tr, Bindings bindings) {
 			
 		boolean match = true;
-		boolean partial = false;
 		Field[] fields = this.getClass().getDeclaredFields();
 		for (Field f : fields) {
 			Class<?> t = f.getType();
 		    if (Modifier.isStatic(f.getModifiers()) && (t == BindingKey.class)) {
 		    	try {
 		    		Object key = f.get(this);
-					if (bindings.get(key) != null && tr.getBindings().get(key) != null) {
+					if (bindings.get(key) != null) {
 						match &= (bindings.get(key).equals(tr.getBindings().get(key)));
-						partial = true;
-					} else {
-						match = false;
 					}
 				} catch (IllegalArgumentException e) {
 					// TODO Auto-generated catch block
@@ -42,7 +41,7 @@ public abstract class AbstractRule implements ConstrainedRule {
 				}
 		    } 
 		}
-		return match || partial;
+		return match;
 	}
 	
 	public List<Bindings> findInputMatches(Resource inputModel) {
@@ -55,7 +54,7 @@ public abstract class AbstractRule implements ConstrainedRule {
 		return record;
 	}
 	
-	public boolean when(QvtrToQvtcTransformation transformation) {
+	public boolean when(QvtrToQvtcTransformation transformation, Resource qvtrModel) {
 		return true;
 	}
 	

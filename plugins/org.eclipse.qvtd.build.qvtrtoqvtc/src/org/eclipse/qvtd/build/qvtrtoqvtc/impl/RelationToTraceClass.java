@@ -40,7 +40,7 @@ public class RelationToTraceClass extends AbstractRule {
 	private String rn, vn;
 	
 	@Override
-	public boolean when(QvtrToQvtcTransformation transformation) {
+	public boolean when(QvtrToQvtcTransformation transformation,  Resource qvtrModel) {
 		Relation r = record.getBindings().get(RelationToTraceClass.r);
 		RelationDomain rd = record.getBindings().get(RelationToTraceClass.rd);
 		DomainPattern rdp = record.getBindings().get(RelationToTraceClass.rdp);
