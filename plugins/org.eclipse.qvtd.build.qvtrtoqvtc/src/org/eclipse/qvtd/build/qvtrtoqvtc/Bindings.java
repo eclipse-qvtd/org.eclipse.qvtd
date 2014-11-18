@@ -5,103 +5,91 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.qvtd.build.qvtrtoqvtc.impl.BindingKey;
+import org.eclipse.jdt.annotation.NonNull;
 
-public class Bindings implements Map<Object, Object> {
-
-	private Map<Object, Object> delegate;
+public class Bindings
+{
+	public static class Key<T>
+	{
+		private final @NonNull String key;
+		
+		public Key(@NonNull String key) {
+			this.key = key;
+		}
 	
+		public @NonNull String getKey() {
+			return key;
+		}
 	
-	public Bindings() {
-		this.delegate = new HashMap<Object, Object>();
+		/*
+		 * The default per-object hashCode is suitable since Key<X>("x") is a different key to Key<Y)("x").
+		 * In the absence of run-time class information inadvertent declaration of a duplicate will create
+		 * two distinct keys.
+		 */
+		// public int hashCode() { return super.hashCode(); }
+	
+		/*
+		 * The default per-object equals is suitable since Key<X>("x") is a different key to Key<Y)("x").
+		 */
+		// public boolean equals(Object obj) {
+		
+		@Override
+	    public @NonNull String toString() {
+	        return key;
+	    }
 	}
 
-	public Bindings(Map<Object, Object> delegate) {
-		super();
-		this.delegate = delegate;
-	}
+	private final @NonNull Map<Key<?>, Object> delegate = new HashMap<Key<?>, Object>();
 	
-	@Override
-	public Object get(Object key) {
-		return delegate.get(key);
-	}
+	public Bindings() {}
 	
 	@SuppressWarnings("unchecked")
-	public <T> T get(BindingKey<T> key) {
+	public <T> T get(@NonNull Key<T> key) {
 		return (T) delegate.get(key);
 	}
 	
-	@Override
-	public Object remove(Object key) {
-		return delegate.remove(key);
-	}
-	
 	@SuppressWarnings("unchecked")
-	public <T> T remove(BindingKey<T> key) {
-		return (T) delegate.remove(key);
-	}
-	
-	@Override
-	public Object put(Object key, Object value) {
-		throw new UnsupportedOperationException("Put should be used using correct generic type information.");
-	}
-	
-	@SuppressWarnings("unchecked")
-	public <T> T  put(BindingKey<T> key, T value) {
+	public <T> T put(@NonNull Key<T> key, T value) {
 		return (T) delegate.put(key, value);
 	}
 	
-
-	@Override
-	public void putAll(Map<? extends Object, ? extends Object> arg0) {
-		delegate.putAll(arg0);
-		
+	@SuppressWarnings("unchecked")
+	public <T> T remove(@NonNull Key<T> key) {
+		return (T) delegate.remove(key);
 	}
 
-	// The rest can be delegated
-	
-
-	@Override
 	public void clear() {
 		delegate.clear();
 	}
 
-	@Override
-	public boolean containsKey(Object key) {
+	public boolean containsKey(@NonNull Key<?> key) {
 		return delegate.containsKey(key);
 	}
 
-	@Override
 	public boolean containsValue(Object value) {
 		return delegate.containsValue(value);
 	}
 
-	@Override
-	public Set<java.util.Map.Entry<Object, Object>> entrySet() {
+	@SuppressWarnings("null")
+	public @NonNull Set<Map.Entry<Key<?>, Object>> entrySet() {
 		return delegate.entrySet();
 	}
 
-	
-	@Override
 	public boolean isEmpty() {
 		return delegate.isEmpty();
 	}
 
-	@Override
-	public Set<Object> keySet() {		
+	@SuppressWarnings("null")
+	public @NonNull Set<Key<?>> keySet() {		
 		return delegate.keySet();
 	}	
 
-	@Override
 	public int size() {
 		return delegate.size();
 	}
 
-	@Override
-	public Collection<Object> values() {
+	@SuppressWarnings("null")
+	public @NonNull Collection<Object> values() {
 		return delegate.values();
 	}
-	
-	
-	
 }

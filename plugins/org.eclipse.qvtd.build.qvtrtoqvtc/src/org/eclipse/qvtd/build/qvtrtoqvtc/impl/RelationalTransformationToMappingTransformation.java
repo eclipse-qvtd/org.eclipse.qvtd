@@ -7,6 +7,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.build.qvtrtoqvtc.Bindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.TraceRecord;
@@ -19,12 +20,12 @@ public class RelationalTransformationToMappingTransformation
 		extends AbstractRule {
 	
 	// Relations
-	public final BindingKey<RelationalTransformation> rt = new BindingKey<RelationalTransformation>("rt");
-	public final BindingKey<TypedModel> rtm = new BindingKey<TypedModel>("rtm");
+	public static final @NonNull Bindings.Key<RelationalTransformation> rt = new Bindings.Key<RelationalTransformation>("rt");
+	public static final @NonNull Bindings.Key<TypedModel> rtm = new Bindings.Key<TypedModel>("rtm");
 	
 	// Core
-	public final BindingKey<Transformation> mt = new BindingKey<Transformation>("mt");
-	public final BindingKey<TypedModel> mtm = new BindingKey<TypedModel>("mtm");
+	public static final @NonNull Bindings.Key<Transformation> mt = new Bindings.Key<Transformation>("mt");
+	public static final @NonNull Bindings.Key<TypedModel> mtm = new Bindings.Key<TypedModel>("mtm");
 	
 	
 	private TraceRecord record;

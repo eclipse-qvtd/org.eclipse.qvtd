@@ -9,13 +9,12 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.qvtd.build.qvtrtoqvtc.Bindings;
-import org.eclipse.qvtd.build.qvtrtoqvtc.ConstrainedRule;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.TraceRecord;
-import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 
@@ -23,15 +22,15 @@ public class SubTemplateToTraceClassProps extends AbstractRule {
 	
 	
 	// Relations
-	public static final BindingKey<ObjectTemplateExp> t = new BindingKey<ObjectTemplateExp>("t");
-	public static final BindingKey<PropertyTemplateItem> pt = new BindingKey<PropertyTemplateItem>("pt");
-	public static final BindingKey<ObjectTemplateExp> tp = new BindingKey<ObjectTemplateExp>("pt");
-	public static final BindingKey<Variable> tv = new BindingKey<Variable>("tv");
-	public static final BindingKey<Type> c = new BindingKey<Type>("c");
+	public static final @NonNull Bindings.Key<ObjectTemplateExp> t = new Bindings.Key<ObjectTemplateExp>("t");
+	public static final @NonNull Bindings.Key<PropertyTemplateItem> pt = new Bindings.Key<PropertyTemplateItem>("pt");
+	public static final @NonNull Bindings.Key<ObjectTemplateExp> tp = new Bindings.Key<ObjectTemplateExp>("pt");
+	public static final @NonNull Bindings.Key<Variable> tv = new Bindings.Key<Variable>("tv");
+	public static final @NonNull Bindings.Key<Type> c = new Bindings.Key<Type>("c");
 		
 	// Core
-	public static final BindingKey<EClass> rc = new BindingKey<EClass>("rc");
-	public static final BindingKey<EReference> a = new BindingKey<EReference>("a");
+	public static final @NonNull Bindings.Key<EClass> rc = new Bindings.Key<EClass>("rc");
+	public static final @NonNull Bindings.Key<EReference> a = new Bindings.Key<EReference>("a");
 	
 	private TraceRecord  record;
 	private String vn;
@@ -70,9 +69,10 @@ public class SubTemplateToTraceClassProps extends AbstractRule {
 			if (part.getValue() instanceof ObjectTemplateExp) {
 				Bindings r = new Bindings();
 				// TODO add other bindings!
-				r.put(SubTemplateToTraceClassProps.t, part.getValue());
-				r.put(SubTemplateToTraceClassProps.tv, ((ObjectTemplateExp)part.getValue()).getBindsTo());
-				r.put(SubTemplateToTraceClassProps.c, ((ObjectTemplateExp)part.getValue()).getBindsTo().getType());
+				ObjectTemplateExp objectTemplateExp = (ObjectTemplateExp)part.getValue();
+				r.put(SubTemplateToTraceClassProps.t, objectTemplateExp);
+				r.put(SubTemplateToTraceClassProps.tv, objectTemplateExp.getBindsTo());
+				r.put(SubTemplateToTraceClassProps.c, objectTemplateExp.getBindsTo().getType());
 				r.put(SubTemplateToTraceClassProps.rc, record.getBindings().get(rc));
 				
 				TraceRecord stTotcpRecord = rule.creareTraceRecord(r);

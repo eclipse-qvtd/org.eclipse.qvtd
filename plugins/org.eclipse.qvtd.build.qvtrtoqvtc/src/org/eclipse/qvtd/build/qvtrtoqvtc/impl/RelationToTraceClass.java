@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.qvtd.build.qvtrtoqvtc.Bindings;
@@ -18,7 +19,6 @@ import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.TraceRecord;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
-import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
@@ -26,16 +26,16 @@ import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 public class RelationToTraceClass extends AbstractRule {
 	
 	// Relations
-	public final BindingKey<Relation> r = new BindingKey<Relation>("r");
-	public final BindingKey<RelationDomain> rd = new BindingKey<RelationDomain>("rd");
-	public final BindingKey<DomainPattern> rdp = new BindingKey<DomainPattern>("rdp");
-	public final BindingKey<ObjectTemplateExp> t = new BindingKey<ObjectTemplateExp>("t");
-	public final BindingKey<Variable> tv = new BindingKey<Variable>("tv");
-	public final BindingKey<Type> c = new BindingKey<Type>("c");
+	public static final @NonNull Bindings.Key<Relation> r = new Bindings.Key<Relation>("r");
+	public static final @NonNull Bindings.Key<RelationDomain> rd = new Bindings.Key<RelationDomain>("rd");
+	public static final @NonNull Bindings.Key<DomainPattern> rdp = new Bindings.Key<DomainPattern>("rdp");
+	public static final @NonNull Bindings.Key<ObjectTemplateExp> t = new Bindings.Key<ObjectTemplateExp>("t");
+	public static final @NonNull Bindings.Key<Variable> tv = new Bindings.Key<Variable>("tv");
+	public static final @NonNull Bindings.Key<Type> c = new Bindings.Key<Type>("c");
 	
 	// Core
-	public final BindingKey<EClass> rc = new BindingKey<EClass>("rc");
-	public final BindingKey<EReference> a = new BindingKey<EReference>("a");
+	public static final @NonNull Bindings.Key<EClass> rc = new Bindings.Key<EClass>("rc");
+	public static final @NonNull Bindings.Key<EReference> a = new Bindings.Key<EReference>("a");
 	
 	@Override
 	public boolean matchBindings(TraceRecord tr, Bindings bindings) {
@@ -160,9 +160,10 @@ public class RelationToTraceClass extends AbstractRule {
 			if (part.getValue() instanceof ObjectTemplateExp) {
 				Bindings r = new Bindings();
 				// TODO add other bindings!
-				r.put(SubTemplateToTraceClassProps.t, part.getValue());
-				r.put(SubTemplateToTraceClassProps.tv, ((ObjectTemplateExp)part.getValue()).getBindsTo());
-				r.put(SubTemplateToTraceClassProps.c, ((ObjectTemplateExp)part.getValue()).getBindsTo().getType());
+				ObjectTemplateExp objectTemplateExp = (ObjectTemplateExp)part.getValue();
+				r.put(SubTemplateToTraceClassProps.t, objectTemplateExp);
+				r.put(SubTemplateToTraceClassProps.tv, objectTemplateExp.getBindsTo());
+				r.put(SubTemplateToTraceClassProps.c, objectTemplateExp.getBindsTo().getType());
 				r.put(SubTemplateToTraceClassProps.rc, record.getBindings().get(rc));
 				
 				TraceRecord stTotcpRecord = rule.creareTraceRecord(r);

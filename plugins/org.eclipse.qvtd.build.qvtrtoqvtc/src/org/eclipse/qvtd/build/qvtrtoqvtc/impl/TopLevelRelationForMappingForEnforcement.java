@@ -139,6 +139,7 @@ public class TopLevelRelationForMappingForEnforcement extends AbstractRule
 				System.out.println("Wrong type for trace.");
 			}
 		}
+		assert r != null;
 		rt = (RelationalTransformation) r.getTransformation();
 		RelationalTransformationToMappingTransformation rtTomtRule = new RelationalTransformationToMappingTransformation();
 		List<Object> args = new ArrayList<Object>();
