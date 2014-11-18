@@ -155,14 +155,25 @@ public class TopLevelRelationForMappingForEnforcement extends AbstractRule {
 	
 	@Override
 	public void where(QvtrToQvtcTransformation transformation) {
+		
+		// RelationDomainToTraceClassVar
+		RelationDomainToTraceClassVar rule = new RelationDomainToTraceClassVar();
+		
+		// RWhenPatternToMGuardPattern
+		RWhenPatternToMGuardPattern rule = new RWhenPatternToMGuardPattern();
+		Bindings bindings = new Bindings();
+		bindings.put(RWhenPatternToMGuardPattern.r, record.getBindings().get(TopLevelRelationForMappingForEnforcement.r));
+		bindings.put(RWhenPatternToMGuardPattern.mg, record.getBindings().get(TopLevelRelationForMappingForEnforcement.mg));
+		TraceRecord rwpTomgpRecord = rule.creareTraceRecord(bindings);
+		transformation.executeRule(rule, rwpTomgpRecord);
+		
+		
 		/*
-		// T3
-		ConstrainedRule rule = new RWhenPatternToMGuardPattern();
-		RWhenPatternToMGuardPatternRecord rwpTomgpRecord = rule.creareTraceRecord();
 		
 		
 		
-		// T4
+		
+		
 		rule = new DomainVarsSharedWithWhenToDgVars();
 		DomainVarsSharedWithWhenToDgVarsRecord dvswwTodvRecord = (DomainVarsSharedWithWhenToDgVarsRecord) rule.creareTraceRecord();
 		dvswwTodvRecord.setDomainVarsSharedWithWhen(domainVarsSharedWithWhen);
