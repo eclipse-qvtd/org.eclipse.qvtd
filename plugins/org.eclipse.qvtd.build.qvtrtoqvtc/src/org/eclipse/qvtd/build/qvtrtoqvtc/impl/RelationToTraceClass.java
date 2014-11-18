@@ -10,6 +10,8 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.impl.EClassImpl;
+import org.eclipse.emf.ecore.impl.EReferenceImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
@@ -69,15 +71,15 @@ public class RelationToTraceClass extends AbstractRule {
 		EcoreFactory factory = EcoreFactory.eINSTANCE;
 		EClass rc = null;
 		EReference a = null;
-		if (qvtcMiddleElements.containsKey(EClass.class)) {
-			for (EObject e : qvtcMiddleElements.get(EClass.class)) {
+		if (qvtcMiddleElements.containsKey(EClassImpl.class)) {
+			for (EObject e : qvtcMiddleElements.get(EClassImpl.class)) {
 				if (((EClass) e).getName().equals("T" + rn)) {
 					rc = (EClass) e;
 				}
 			}
 			if (rc != null) {
-				if (qvtcMiddleElements.containsKey(EReference.class)) {
-					for (EObject e : qvtcMiddleElements.get(EReference.class)) {
+				if (qvtcMiddleElements.containsKey(EReferenceImpl.class)) {
+					for (EObject e : qvtcMiddleElements.get(EReferenceImpl.class)) {
 						if (((EReference) e).getClass().equals(rc)
 								&& ((EReference) e).getName().equals(vn)) {
 							a = (EReference) e;
@@ -88,12 +90,16 @@ public class RelationToTraceClass extends AbstractRule {
 		}
 		if (rc == null) {	
 			rc = factory.createEClass();
-			record.getBindings().put(RelationToTraceClass.rc, rc);
 			results.add(rc);
+			
+		}
+		if (a == null) {
 			a = factory.createEReference();
-			record.getBindings().put(RelationToTraceClass.a, a);
+			rc.getEStructuralFeatures().add(a);
 			results.add(a);
 		}
+		record.getBindings().put(RelationToTraceClass.rc, rc);
+		record.getBindings().put(RelationToTraceClass.a, a);
 		return results;
 	}
 
@@ -102,8 +108,7 @@ public class RelationToTraceClass extends AbstractRule {
 		
 		record.getBindings().get(rc).setName('T' + rn);
 		record.getBindings().get(a).setName(vn);
-		record.getBindings().get(a).setEType((EClassifier) record.getBindings().get(c));
-		record.getBindings().get(rc).getEStructuralFeatures().add(record.getBindings().get(a));
+		record.getBindings().get(a).setEType(record.getBindings().get(c).getETarget().eClass());
 	}
 	
 	@Override
@@ -141,6 +146,7 @@ public class RelationToTraceClass extends AbstractRule {
 						bindings.put(RelationToTraceClass.rdp, rd.getPattern());
 						bindings.put(RelationToTraceClass.t, (ObjectTemplateExp) rd.getPattern().getTemplateExpression());
 						bindings.put(RelationToTraceClass.tv, rd.getPattern().getTemplateExpression().getBindsTo());
+						bindings.put(RelationToTraceClass.c, rd.getPattern().getTemplateExpression().getBindsTo().getType());
 						matches.add(bindings);
 					}
 				}

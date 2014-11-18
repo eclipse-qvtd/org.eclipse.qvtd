@@ -51,17 +51,17 @@ public class SubTemplateToTraceClassProps extends AbstractRule {
 	
 	public void setAttributes() {
 		record.getBindings().get(a).setName(vn);
-		record.getBindings().get(a).setEType((EClassifier) record.getBindings().get(c));
+		record.getBindings().get(a).setEType(record.getBindings().get(c).getETarget().eClass());
 		record.getBindings().get(rc).getEStructuralFeatures().add(record.getBindings().get(a));
 	}
 	
 	@Override
 	public void where(QvtrToQvtcTransformation transformation) {
 		SubTemplateToTraceClassProps rule = new SubTemplateToTraceClassProps();
-		for (PropertyTemplateItem part : record.getBindings().get(SubTemplateToTraceClassProps.t).getPart()) {
+		for (PropertyTemplateItem part : record.getBindings().get(SubTemplateToTraceClassProps.tp).getPart()) {
 			if (part.getValue() instanceof ObjectTemplateExp) {
 				Bindings bindings = new Bindings();
-				bindings.put(SubTemplateToTraceClassProps.t, record.getBindings().get(SubTemplateToTraceClassProps.t));
+				bindings.put(SubTemplateToTraceClassProps.t, record.getBindings().get(SubTemplateToTraceClassProps.tp));
 				bindings.put(SubTemplateToTraceClassProps.pt, part);
 				bindings.put(SubTemplateToTraceClassProps.tp, (ObjectTemplateExp)part.getValue());
 				bindings.put(SubTemplateToTraceClassProps.tv, ((ObjectTemplateExp)part.getValue()).getBindsTo());

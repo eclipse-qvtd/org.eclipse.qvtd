@@ -10,9 +10,11 @@ import java.util.Set;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.qvtd.build.qvtrtoqvtc.Bindings;
+import org.eclipse.qvtd.build.qvtrtoqvtc.ConstrainedRule;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.TraceRecord;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -156,12 +158,23 @@ public class TopLevelRelationForMappingForEnforcement extends AbstractRule {
 	@Override
 	public void where(QvtrToQvtcTransformation transformation) {
 		
+		List<Element> rdSeq = new ArrayList<Element>();
+		rdSeq.add(record.getBindings().get(TopLevelRelationForMappingForEnforcement.r));
+		rdSeq.add(record.getBindings().get(TopLevelRelationForMappingForEnforcement.rd));
 		// RelationDomainToTraceClassVar
-		RelationDomainToTraceClassVar rule = new RelationDomainToTraceClassVar();
+		ConstrainedRule rule = new RelationDomainToTraceClassVar();
+		Bindings bindings = new Bindings();
+		bindings.put(RelationDomainToTraceClassVar.rdSeq, rdSeq);
+		bindings.put(RelationDomainToTraceClassVar.r, (Relation)rdSeq.get(0));
+		bindings.put(RelationDomainToTraceClassVar.d, (RelationDomain)rdSeq.get(1));
+		bindings.put(RelationDomainToTraceClassVar.tcv, record.getBindings().get(TopLevelRelationForMappingForEnforcement.tcv));
+		TraceRecord rdTotcvRecord = rule.creareTraceRecord(bindings);
+		transformation.executeRule(rule, rdTotcvRecord);
+		
 		
 		// RWhenPatternToMGuardPattern
-		RWhenPatternToMGuardPattern rule = new RWhenPatternToMGuardPattern();
-		Bindings bindings = new Bindings();
+		rule = new RWhenPatternToMGuardPattern();
+		bindings = new Bindings();
 		bindings.put(RWhenPatternToMGuardPattern.r, record.getBindings().get(TopLevelRelationForMappingForEnforcement.r));
 		bindings.put(RWhenPatternToMGuardPattern.mg, record.getBindings().get(TopLevelRelationForMappingForEnforcement.mg));
 		TraceRecord rwpTomgpRecord = rule.creareTraceRecord(bindings);
@@ -169,11 +182,6 @@ public class TopLevelRelationForMappingForEnforcement extends AbstractRule {
 		
 		
 		/*
-		
-		
-		
-		
-		
 		rule = new DomainVarsSharedWithWhenToDgVars();
 		DomainVarsSharedWithWhenToDgVarsRecord dvswwTodvRecord = (DomainVarsSharedWithWhenToDgVarsRecord) rule.creareTraceRecord();
 		dvswwTodvRecord.setDomainVarsSharedWithWhen(domainVarsSharedWithWhen);
