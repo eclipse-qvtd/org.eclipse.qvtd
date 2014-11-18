@@ -12,11 +12,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Variable;
+import org.eclipse.qvtd.build.qvtrtoqvtc.Bindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.ConstrainedRule;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.TraceRecord;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.DomainVarsSharedWithWhenToDgVars.DomainVarsSharedWithWhenToDgVarsRecord;
-import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RelationalTransformationToMappingTransformation.RelationalTransformationToMappingTransformationRecord;
+import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RWhenPatternToMGuardPattern.RWhenPatternToMGuardPatternRecord;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -121,7 +122,7 @@ public class TopLevelRelationForMappingForEnforcement extends AbstractRule
 		return record;
 	}
 	
-	@Override
+//	@Override
 	public boolean when(QvtrToQvtcTransformation transformation, List<Object> inputElements) {
 		RelationalTransformation rt;
 		Relation r = null;
@@ -142,7 +143,7 @@ public class TopLevelRelationForMappingForEnforcement extends AbstractRule
 		RelationalTransformationToMappingTransformation rtTomtRule = new RelationalTransformationToMappingTransformation();
 		List<Object> args = new ArrayList<Object>();
 		args.add(rt);
-		TraceRecord rtTomtRecord = transformation.executeRule(rtTomtRule, args);
+/*		TraceRecord rtTomtRecord = transformation.executeRule(rtTomtRule, args);
 		mt = ((RelationalTransformationToMappingTransformationRecord)rtTomtRecord).getMt();
 		if (r != null && rd != null && r.getDomain().contains(rd)
 				&& r.getTransformation().equals(rt)
@@ -152,11 +153,11 @@ public class TopLevelRelationForMappingForEnforcement extends AbstractRule
 			rn  = r.getName();
 			dn = rd.getName();
 			tmn = rd.getTypedModel().getName();
-			domainVars = rd.getPattern().getBindsTo();
+			domainVars = rd.getPattern().getBindsTo(); */
 			return true;
-		} else {
-			return false;
-		}
+//		} else {
+//			return false;
+//		}
 	}
 	
 	public List<EObject> instantiateOutputElements(Map<Class<? extends EObject>, List<EObject>> outputModelElements) {
@@ -207,20 +208,20 @@ public class TopLevelRelationForMappingForEnforcement extends AbstractRule
 		
 		// T3
 		ConstrainedRule rule = new RWhenPatternToMGuardPattern();
-		RWhenPatternToMGuardPatternRecord rwpTomgpRecord = rule.creareTraceRecord();
+		RWhenPatternToMGuardPatternRecord rwpTomgpRecord = (RWhenPatternToMGuardPatternRecord) rule.creareTraceRecord(null);
 		
 		
 		
 		// T4
 		rule = new DomainVarsSharedWithWhenToDgVars();
-		DomainVarsSharedWithWhenToDgVarsRecord dvswwTodvRecord = (DomainVarsSharedWithWhenToDgVarsRecord) rule.creareTraceRecord();
+		DomainVarsSharedWithWhenToDgVarsRecord dvswwTodvRecord = (DomainVarsSharedWithWhenToDgVarsRecord) rule.creareTraceRecord(null);
 		dvswwTodvRecord.setDomainVarsSharedWithWhen(domainVarsSharedWithWhen);
 		dvswwTodvRecord.setDg(dg);
 		
 	}
 	
 	
-	public List<List<Object>> findInputMatches(Resource inputModel) {
+	public List<Bindings> findInputMatches(Resource inputModel) {
 		List<List<Object>> loopData = new ArrayList<List<Object>>();
 		EClass rEClass = QVTrelationFactory.eINSTANCE.createRelation().eClass();
 		TreeIterator<EObject> it = inputModel.getAllContents();
@@ -242,7 +243,13 @@ public class TopLevelRelationForMappingForEnforcement extends AbstractRule
 			}
 			*/
 		}
-		return loopData;
+		return null;//loopData;
+	}
+
+	@Override
+	public TraceRecord creareTraceRecord(Bindings bindings) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

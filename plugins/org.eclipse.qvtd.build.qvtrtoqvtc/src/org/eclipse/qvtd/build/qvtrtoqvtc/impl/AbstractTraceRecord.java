@@ -10,6 +10,10 @@ public class AbstractTraceRecord implements TraceRecord {
 	private Bindings bindings;
 	
 	
+	public AbstractTraceRecord() {
+		throw new UnsupportedOperationException();
+	}
+	
 	public AbstractTraceRecord(Bindings bindings) {
 		this.bindings = bindings;
 	}

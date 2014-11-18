@@ -1,5 +1,6 @@
 package org.eclipse.qvtd.build.qvtrtoqvtc.impl;
 
+import org.eclipse.qvtd.build.qvtrtoqvtc.Bindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.ConstrainedRule;
 import org.eclipse.qvtd.build.qvtrtoqvtc.TraceRecord;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
@@ -54,6 +55,12 @@ public class RWhenPatternToMGuardPattern extends AbstractRule implements
 
 	@Override
 	public TraceRecord creareTraceRecord() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public TraceRecord creareTraceRecord(Bindings bindings) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -3,6 +3,7 @@ package org.eclipse.qvtd.build.qvtrtoqvtc.impl;
 import java.util.Set;
 
 import org.eclipse.ocl.examples.pivot.Variable;
+import org.eclipse.qvtd.build.qvtrtoqvtc.Bindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.ConstrainedRule;
 import org.eclipse.qvtd.build.qvtrtoqvtc.TraceRecord;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
@@ -12,7 +13,7 @@ public class DomainVarsSharedWithWhenToDgVars extends AbstractRule implements
 	
 	public class DomainVarsSharedWithWhenToDgVarsRecord
 			extends AbstractTraceRecord implements TraceRecord {
-		
+
 		// Relations
 		private Set<Variable> domainVarsSharedWithWhen;
 		
@@ -58,6 +59,12 @@ public class DomainVarsSharedWithWhenToDgVars extends AbstractRule implements
 		
 		record = new DomainVarsSharedWithWhenToDgVarsRecord();
 		return record;
+	}
+
+	@Override
+	public TraceRecord creareTraceRecord(Bindings bindings) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

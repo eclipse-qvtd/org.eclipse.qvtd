@@ -40,4 +40,8 @@ public abstract class AbstractRule implements ConstrainedRule {
 		return new ArrayList<EObject>();
 	}
 
+	public TraceRecord creareTraceRecord() {
+		throw new UnsupportedOperationException();
+	}
+
 }
