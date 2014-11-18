@@ -2,69 +2,32 @@ package org.eclipse.qvtd.build.qvtrtoqvtc.impl;
 
 import java.util.Set;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.qvtd.build.qvtrtoqvtc.Bindings;
-import org.eclipse.qvtd.build.qvtrtoqvtc.ConstrainedRule;
-import org.eclipse.qvtd.build.qvtrtoqvtc.TraceRecord;
+import org.eclipse.qvtd.build.qvtrtoqvtc.CoreBindings;
+import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
+import org.eclipse.qvtd.build.qvtrtoqvtc.RelationsBindings;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 
-public class DomainVarsSharedWithWhenToDgVars extends AbstractRule implements
-		ConstrainedRule {
+public class DomainVarsSharedWithWhenToDgVars extends AbstractRule
+{
+	// Relations
+	private static final @NonNull RelationsBindings.KeySet RELATIONS_BINDINGS = new RelationsBindings.KeySet();
+	public static final @NonNull RelationsBindings.Key<Set<Variable>> RELATIONS_domainVarsSharedWithWhen = RELATIONS_BINDINGS.create((Set<Variable>)null, "domainVarsSharedWithWhen");
 	
-	public class DomainVarsSharedWithWhenToDgVarsRecord
-			extends AbstractTraceRecord implements TraceRecord {
+	// Core
+	private static final @NonNull CoreBindings.KeySet CORE_BINDINGS = new CoreBindings.KeySet();
+	public static final @NonNull CoreBindings.Key<GuardPattern> CORE_dg = CORE_BINDINGS.create((GuardPattern)null, "dg");
 
-		// Relations
-		private Set<Variable> domainVarsSharedWithWhen;
-		
-		// Core
-		private GuardPattern dg;
-
-		/**
-		 * @return the domainVarsSharedWithWhen
-		 */
-		public Set<Variable> getDomainVarsSharedWithWhen() {
-			return domainVarsSharedWithWhen;
-		}
-
-		/**
-		 * @param domainVarsSharedWithWhen the domainVarsSharedWithWhen to set
-		 */
-		public void setDomainVarsSharedWithWhen(Set<Variable> domainVarsSharedWithWhen) {
-			this.domainVarsSharedWithWhen = domainVarsSharedWithWhen;
-		}
-
-		/**
-		 * @return the dg
-		 */
-		public GuardPattern getDg() {
-			return dg;
-		}
-
-		/**
-		 * @param dg the dg to set
-		 */
-		public void setDg(GuardPattern dg) {
-			this.dg = dg;
-		}
-		
-		
-		
+	public DomainVarsSharedWithWhenToDgVars(@NonNull QvtrToQvtcTransformation transformation) {
+		super(transformation);
 	}
 	
-	private DomainVarsSharedWithWhenToDgVarsRecord record;
-	
-	@Override
-	public TraceRecord creareTraceRecord() {
-		
-		record = new DomainVarsSharedWithWhenToDgVarsRecord();
-		return record;
+	public @NonNull CoreBindings.KeySet getCoreBindingsKeys() {
+		return CORE_BINDINGS;
 	}
 
-	@Override
-	public TraceRecord creareTraceRecord(Bindings bindings) {
-		// TODO Auto-generated method stub
-		return null;
+	public @NonNull RelationsBindings.KeySet getRelationsBindingsKeys() {
+		return RELATIONS_BINDINGS;
 	}
-
 }

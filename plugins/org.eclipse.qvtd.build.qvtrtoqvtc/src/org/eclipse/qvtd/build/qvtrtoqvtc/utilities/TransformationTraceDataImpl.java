@@ -3,37 +3,39 @@ package org.eclipse.qvtd.build.qvtrtoqvtc.utilities;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.qvtd.build.qvtrtoqvtc.Bindings;
-import org.eclipse.qvtd.build.qvtrtoqvtc.ConstrainedRule;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.build.qvtrtoqvtc.RelationsBindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.TraceRecord;
 
 
 
 /* Keeps  track of variable values, output model and traces needed for 
  * the transformation */
-public class TransformationTraceDataImpl implements TransformationTraceData {
+public class TransformationTraceDataImpl implements TransformationTraceData
+{
+//	private final @NonNull Map<AbstractBindings, List<TraceRecord>> bindings2traceRecords = new HashMap<AbstractBindings, List<TraceRecord>>();
+	private final @NonNull List<TraceRecord> traceRecords = new ArrayList<TraceRecord>();
 	
-	private List<TraceRecord> traceRecords;
-	
-	
-	public TransformationTraceDataImpl() {
-		traceRecords = new ArrayList<TraceRecord>();
-	}
+	public TransformationTraceDataImpl() {}
 
-	@Override
-	public TraceRecord getRecord(ConstrainedRule rule, Bindings bindings) {
-		TraceRecord record = null;
-		for (TraceRecord tr : traceRecords) {
-			if (rule.matchBindings(tr, bindings)) {
-				record = tr;
-				break;
+	public TraceRecord getRecord(@NonNull RelationsBindings bindings) {		// FIXME is this necessary?
+/*		ConstrainedRule rule = bindings.getRule();
+		List<TraceRecord> traceRecords = bindings2traceRecords.get(bindings);
+		if (traceRecords != null) {
+			for (TraceRecord tr : traceRecords) {
+				if ((tr != null) && rule.matchBindings(tr, bindings)) {
+					return tr;
+				}
 			}
 		}
-		if (record == null) {
-			record = rule.creareTraceRecord(bindings);
-			traceRecords.add(record);
-		}
+		else {
+			traceRecords = new ArrayList<TraceRecord>();
+			bindings2traceRecords.put(bindings, traceRecords);
+		} */
+		TraceRecord record = bindings.getTraceRecord();
+		traceRecords.add(record);
 		return record;
+		
 	}
 	/*
 	public List<EObject> getRootOutputELements() {
@@ -51,7 +53,15 @@ public class TransformationTraceDataImpl implements TransformationTraceData {
 	*/
 
 	@Override
-	public void deleteRecord(TraceRecord record) {
+	public void deleteRecord(@NonNull TraceRecord record) {
+/*		AbstractBindings bindings = record.getCoreBindings();
+		List<TraceRecord> traceRecords = bindings2traceRecords.get(bindings);
+		if (traceRecords != null) {
+			traceRecords.remove(record);
+			if (traceRecords.isEmpty()) {
+				bindings2traceRecords.remove(bindings);
+			}
+		} */
 		traceRecords.remove(record);
 	}
 

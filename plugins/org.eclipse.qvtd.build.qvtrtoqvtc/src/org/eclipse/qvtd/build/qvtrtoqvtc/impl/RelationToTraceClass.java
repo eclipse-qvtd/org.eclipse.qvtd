@@ -14,107 +14,91 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.qvtd.build.qvtrtoqvtc.Bindings;
+import org.eclipse.qvtd.build.qvtrtoqvtc.CoreBindings;
+import org.eclipse.qvtd.build.qvtrtoqvtc.PrimitivesBindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
-import org.eclipse.qvtd.build.qvtrtoqvtc.TraceRecord;
+import org.eclipse.qvtd.build.qvtrtoqvtc.RelationsBindings;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
-public class RelationToTraceClass extends AbstractRule {
-	
+
+public class RelationToTraceClass extends AbstractRule
+{
 	// Relations
-	public static final @NonNull Bindings.Key<Relation> r = new Bindings.Key<Relation>("r");
-	public static final @NonNull Bindings.Key<RelationDomain> rd = new Bindings.Key<RelationDomain>("rd");
-	public static final @NonNull Bindings.Key<DomainPattern> rdp = new Bindings.Key<DomainPattern>("rdp");
-	public static final @NonNull Bindings.Key<ObjectTemplateExp> t = new Bindings.Key<ObjectTemplateExp>("t");
-	public static final @NonNull Bindings.Key<Variable> tv = new Bindings.Key<Variable>("tv");
-	public static final @NonNull Bindings.Key<Type> c = new Bindings.Key<Type>("c");
-	
+	private static final @NonNull RelationsBindings.KeySet RELATIONS_BINDINGS = new RelationsBindings.KeySet();
+	public static final @NonNull RelationsBindings.Key<Relation> RELATIONS_r = RELATIONS_BINDINGS.create((Relation)null, "r");
+	public static final @NonNull RelationsBindings.Key<RelationDomain> RELATIONS_rd = RELATIONS_BINDINGS.create((RelationDomain)null, "rd");
+	public static final @NonNull RelationsBindings.Key<DomainPattern> RELATIONS_rdp = RELATIONS_BINDINGS.create((DomainPattern)null, "rdp");
+	public static final @NonNull RelationsBindings.Key<ObjectTemplateExp> RELATIONS_t = RELATIONS_BINDINGS.create((ObjectTemplateExp)null, "t");
+	public static final @NonNull RelationsBindings.Key<Variable> RELATIONS_tv = RELATIONS_BINDINGS.create((Variable)null, "tv");
+	public static final @NonNull RelationsBindings.Key<Type> RELATIONS_c = RELATIONS_BINDINGS.create((Type)null, "c");
 	// Core
-	public static final @NonNull Bindings.Key<EClass> rc = new Bindings.Key<EClass>("rc");
-	public static final @NonNull Bindings.Key<EReference> a = new Bindings.Key<EReference>("a");
+	private static final @NonNull CoreBindings.KeySet CORE_BINDINGS = new CoreBindings.KeySet();
+	public static final @NonNull CoreBindings.Key<EClass> CORE_rc = CORE_BINDINGS.create((EClass)null, "rc");
+	public static final @NonNull CoreBindings.Key<EReference> CORE_a = CORE_BINDINGS.create((EReference)null, "a");
+	// Primitives
+	private static final @NonNull PrimitivesBindings.KeySet PRIMITIVES_BINDINGS = new PrimitivesBindings.KeySet();
+	private static final @NonNull PrimitivesBindings.Key<String> PRIMITIVES_rn = PRIMITIVES_BINDINGS.create((String)null, "rn");
+	private static final @NonNull PrimitivesBindings.Key<String> PRIMITIVES_vn = PRIMITIVES_BINDINGS.create((String)null, "vn");
 	
-	@Override
-	public boolean matchBindings(TraceRecord tr, Bindings bindings) {
-		
-		boolean match = true;
-		if (bindings.get(c) != null && tr.getBindings().get(c) != null) {
-			match &= (bindings.get(c).equals(tr.getBindings().get(c)));
-		} else {
-			match = false;
-		}
-		if (bindings.get(tv) != null && tr.getBindings().get(tv) != null) {
-			match &= (bindings.get(tv).equals(tr.getBindings().get(tv)));
-		} else {
-			match = false;
-		}
-		if (bindings.get(t) != null && tr.getBindings().get(t) != null) {
-			match &= (bindings.get(t).equals(tr.getBindings().get(t)));
-		} else {
-			match = false;
-		}
-		if (bindings.get(rdp) != null && tr.getBindings().get(rdp) != null) {
-			match &= (bindings.get(rdp).equals(tr.getBindings().get(rdp)));
-		} else {
-			match = false;
-		}
-		if (bindings.get(rd) != null && tr.getBindings().get(rd) != null) {
-			match &= (bindings.get(rd).equals(tr.getBindings().get(rd)));
-		} else {
-			match = false;
-		}
-		if (bindings.get(r) != null && tr.getBindings().get(r) != null) {
-			match &= (bindings.get(r).equals(tr.getBindings().get(r)));
-		} else {
-			match = false;
-		}
-		return match;
+	public RelationToTraceClass(@NonNull QvtrToQvtcTransformation transformation) {
+		super(transformation);
 	}
 	
-	private TraceRecord record;
-	private String rn, vn;
-	
+	@Override
+	public @NonNull List<RelationsBindings> findInputMatches(@NonNull Resource inputModel) {
+		List<RelationsBindings> loopData = new ArrayList<RelationsBindings>();
+		TreeIterator<EObject> it = inputModel.getAllContents();
+		while(it.hasNext()) {
+			EObject eo = it.next();
+			if (eo instanceof Relation) {
+				Relation eo2 = (Relation) eo;
+				for (Domain d : eo2.getDomain()) {
+					RelationDomain rd = (RelationDomain) d;
+					if (rd.getPattern().getTemplateExpression() instanceof ObjectTemplateExp) {
+						RelationsBindings bindings = new RelationsBindings(this);
+						bindings.put(RELATIONS_r, eo2);
+						bindings.put(RELATIONS_rd, rd);
+						bindings.put(RELATIONS_rdp, rd.getPattern());
+						bindings.put(RELATIONS_t, (ObjectTemplateExp) rd.getPattern().getTemplateExpression());
+						bindings.put(RELATIONS_tv, rd.getPattern().getTemplateExpression().getBindsTo());
+						loopData.add(bindings);
+					}
+				}
+			} 
+			/*
+			else if(eo.eClass().getEAllSuperTypes().contains(rtEClass)) {
+			}
+			*/
+		}
+		return loopData;
+	}
 
-	@Override
-	public TraceRecord creareTraceRecord(Bindings bindings) {
-		
-		record = new AbstractTraceRecord(bindings); 
-		return record;
+	public @NonNull CoreBindings.KeySet getCoreBindingsKeys() {
+		return CORE_BINDINGS;
 	}
-	
-	@Override
-	public boolean when(QvtrToQvtcTransformation transformation) {
-		Relation r = record.getBindings().get(this.r);
-		RelationDomain rd = record.getBindings().get(this.rd);
-		DomainPattern rdp = record.getBindings().get(this.rdp);
-		ObjectTemplateExp t = record.getBindings().get(this.t);
-		Variable tv = record.getBindings().get(this.tv);
-		Type c = record.getBindings().get(this.c);
-		if (r != null && rd != null && rdp != null && t != null && tv != null && c != null
-				&& r.getDomain().contains(rd)
-				&& rd.getPattern().equals(rdp)
-				&& rdp.getTemplateExpression().equals(t)
-				&& t.getBindsTo().equals(tv)
-				&& tv.getType().equals(c)) {
-			rn = r.getName();
-			vn = tv.getName();
-			return true;
-		} else {
-			return false;
-		}
-		
+
+	public @NonNull PrimitivesBindings.KeySet getPrimitivesBindingsKeys() {
+		return PRIMITIVES_BINDINGS;
+	}
+
+	public @NonNull RelationsBindings.KeySet getRelationsBindingsKeys() {
+		return RELATIONS_BINDINGS;
 	}
 
 	@Override
-	public List<EObject> instantiateMiddleElements(Map<Class<? extends EObject>, List<EObject>> qvtcMiddleElements) {
+	public List<EObject> instantiateMiddleElements(Map<Class<? extends EObject>, List<EObject>> qvtcMiddleElements, @NonNull CoreBindings coreBindings) {
 		
 		List<EObject> results = new ArrayList<EObject>();
 		EcoreFactory factory = EcoreFactory.eINSTANCE;
 		EClass rc = null;
 		EReference a = null;
+		PrimitivesBindings primitivesBindings = coreBindings.getPrimitivesBindings();
+		String rn = primitivesBindings.get(PRIMITIVES_rn);
+		String vn = primitivesBindings.get(PRIMITIVES_vn);
 		if (qvtcMiddleElements.containsKey(EClass.class)) {
 			for (EObject e : qvtcMiddleElements.get(EClass.class)) {
 				if (((EClass) e).getName().equals("T" + rn)) {
@@ -134,70 +118,66 @@ public class RelationToTraceClass extends AbstractRule {
 		}
 		if (rc == null) {	
 			rc = factory.createEClass();
-			record.getBindings().put(this.rc, rc);
+			coreBindings.put(CORE_rc, rc);
 			results.add(rc);
 			a = factory.createEReference();
-			record.getBindings().put(this.a, a);
+			coreBindings.put(CORE_a, a);
 			results.add(a);
 		}
 		return results;
 	}
 
 	@Override
-	public void setAttributes() {
-		
-		record.getBindings().get(rc).setName('T' + rn);
-		record.getBindings().get(a).setName(vn);
-		record.getBindings().get(a).setEType((EClassifier) record.getBindings().get(c));
-		record.getBindings().get(rc).getEStructuralFeatures().add(record.getBindings().get(a));
+	public void setAttributes(@NonNull CoreBindings coreBindings) {
+		EClass rc = coreBindings.get(CORE_rc);
+		EReference a = coreBindings.get(CORE_a);
+		PrimitivesBindings primitivesBindings = coreBindings.getPrimitivesBindings();
+		String rn = primitivesBindings.get(PRIMITIVES_rn);
+		String vn = primitivesBindings.get(PRIMITIVES_vn);
+		rc.setName('T' + rn);
+		a.setName(vn);
+		a.setEType((EClassifier) primitivesBindings.getRelationsBindings().get(RELATIONS_c));			// FIXME Bad cast
+		rc.getEStructuralFeatures().add(a);
 	}
 	
 	@Override
-	public void where(QvtrToQvtcTransformation transformation) {
-		SubTemplateToTraceClassProps rule = new SubTemplateToTraceClassProps();
-		ObjectTemplateExp t = record.getBindings().get(this.t); 
+	public boolean when(@NonNull RelationsBindings relationsBindings) {
+		Relation r = relationsBindings.get(RELATIONS_r);
+		RelationDomain rd = relationsBindings.get(RELATIONS_rd);
+		DomainPattern rdp = relationsBindings.get(RELATIONS_rdp);
+		ObjectTemplateExp t = relationsBindings.get(RELATIONS_t);
+		Variable tv = relationsBindings.get(RELATIONS_tv);
+		Type c = relationsBindings.get(RELATIONS_c);
+		if (r != null && rd != null && rdp != null && t != null && tv != null && c != null
+				&& r.getDomain().contains(rd)
+				&& rd.getPattern().equals(rdp)
+				&& rdp.getTemplateExpression().equals(t)
+				&& t.getBindsTo().equals(tv)
+				&& tv.getType().equals(c)) {
+			PrimitivesBindings primitivesBindings = relationsBindings.getPrimitivesBindings();
+			primitivesBindings.put(PRIMITIVES_rn, r.getName());
+			primitivesBindings.put(PRIMITIVES_vn, tv.getName());
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	@Override
+	public void where(@NonNull CoreBindings bindings) {
+		ObjectTemplateExp t = bindings.getRelationsBindings().get(RELATIONS_t); 
 		for (PropertyTemplateItem part : t.getPart()) {
 			if (part.getValue() instanceof ObjectTemplateExp) {
-				Bindings r = new Bindings();
+				RelationsBindings innerRelationsBindings = new RelationsBindings(new SubTemplateToTraceClassProps(transformation));
+				CoreBindings innerCoreBindings = innerRelationsBindings.getCoreBindings();
 				// TODO add other bindings!
 				ObjectTemplateExp objectTemplateExp = (ObjectTemplateExp)part.getValue();
-				r.put(SubTemplateToTraceClassProps.t, objectTemplateExp);
-				r.put(SubTemplateToTraceClassProps.tv, objectTemplateExp.getBindsTo());
-				r.put(SubTemplateToTraceClassProps.c, objectTemplateExp.getBindsTo().getType());
-				r.put(SubTemplateToTraceClassProps.rc, record.getBindings().get(rc));
-				
-				TraceRecord stTotcpRecord = rule.creareTraceRecord(r);
-				transformation.executeRule(rule, stTotcpRecord);
+				innerRelationsBindings.put(SubTemplateToTraceClassProps.RELATIONS_t, objectTemplateExp);
+				innerRelationsBindings.put(SubTemplateToTraceClassProps.RELATIONS_tv, objectTemplateExp.getBindsTo());
+				innerRelationsBindings.put(SubTemplateToTraceClassProps.RELATIONS_c, objectTemplateExp.getBindsTo().getType());
+				innerCoreBindings.put(SubTemplateToTraceClassProps.CORE_rc, bindings.get(CORE_rc));
+				transformation.executeNestedRule(innerCoreBindings);
 			}
 		}
 	}
-
-	@Override
-	public List<Bindings> findInputMatches(Resource inputModel) {
-		List<Bindings> loopData = new ArrayList<Bindings>();
-		TreeIterator<EObject> it = inputModel.getAllContents();
-		while(it.hasNext()) {
-			EObject eo = it.next();
-			if (eo instanceof Relation) {
-				for (Domain d : ((Relation)eo).getDomain()) {
-					RelationDomain rd = (RelationDomain) d;
-					if (rd.getPattern().getTemplateExpression() instanceof ObjectTemplateExp) {
-						Bindings r = new Bindings();
-						r.put(this.r, (Relation) eo);
-						r.put(this.rd, rd);
-						r.put(this.rdp, rd.getPattern());
-						r.put(this.t, (ObjectTemplateExp) rd.getPattern().getTemplateExpression());
-						r.put(this.tv, rd.getPattern().getTemplateExpression().getBindsTo());
-						loopData.add(r);
-					}
-				}
-			} 
-			/*
-			else if(eo.eClass().getEAllSuperTypes().contains(rtEClass)) {
-			}
-			*/
-		}
-		return loopData;
-	}
-
 }

@@ -61,7 +61,7 @@ public class QvtrToQvtcTests extends LoadTestCase {
     	QvtrToQvtcTransformation t = new QvtrToQvtcTransformation(qvtrResource, qvtcResource, qvtcTraceResource);
 		t.prepare();
 		t.execute();
-		t.finalize();
+		t.dispose();
 		Map<Object, Object> options = new HashMap<Object, Object>();
         options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
         qvtcResource.save(options);

@@ -7,13 +7,18 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 
-public class Bindings
+/**
+ * AbstractBindings defines the interface for a typesafe heterogeneous Map<Key<T>,T> in which each entry may have a distinct T.
+ * <p>
+ * Derived classes provide further typesafety for keys of the distinct relations (input), core (output) and primitives (temporary) domains.
+ */
+public abstract class AbstractBindings
 {
-	public static class Key<T>
+	public static abstract class Key<T>
 	{
 		private final @NonNull String key;
 		
-		public Key(@NonNull String key) {
+		protected Key(@NonNull String key) {
 			this.key = key;
 		}
 	
@@ -39,31 +44,13 @@ public class Bindings
 	    }
 	}
 
-	private final @NonNull Map<Key<?>, Object> delegate = new HashMap<Key<?>, Object>();
+	protected final @NonNull Map<Key<?>, Object> delegate = new HashMap<Key<?>, Object>();
+//	private Integer hashCode = null;				// Non-nuyll once Bindings becomes readOnly.
 	
-	public Bindings() {}
+	protected AbstractBindings() {}
 	
-	@SuppressWarnings("unchecked")
-	public <T> T get(@NonNull Key<T> key) {
-		return (T) delegate.get(key);
-	}
-	
-	@SuppressWarnings("unchecked")
-	public <T> T put(@NonNull Key<T> key, T value) {
-		return (T) delegate.put(key, value);
-	}
-	
-	@SuppressWarnings("unchecked")
-	public <T> T remove(@NonNull Key<T> key) {
-		return (T) delegate.remove(key);
-	}
-
 	public void clear() {
 		delegate.clear();
-	}
-
-	public boolean containsKey(@NonNull Key<?> key) {
-		return delegate.containsKey(key);
 	}
 
 	public boolean containsValue(Object value) {
@@ -74,6 +61,35 @@ public class Bindings
 	public @NonNull Set<Map.Entry<Key<?>, Object>> entrySet() {
 		return delegate.entrySet();
 	}
+
+/*	@Override
+	public boolean equals(Object thatObject) {
+		if (this == thatObject) {
+			return true;
+		}
+		if (!(thatObject instanceof Bindings)) {
+			return false;
+		}
+		Bindings that = (Bindings)thatObject;
+		if (this.rule != that.rule) {
+			return false;
+		}
+		if (!this.delegate.equals(that.delegate)) {
+			return false;
+		}
+		return false;
+	} */
+	
+
+	public abstract @NonNull ConstrainedRule getRule();
+
+/*	@Override
+	public int hashCode() {
+		if (hashCode == null) {
+			hashCode = rule.hashCode() + delegate.hashCode();
+		}
+		return hashCode.intValue();
+	} */
 
 	public boolean isEmpty() {
 		return delegate.isEmpty();
@@ -86,6 +102,11 @@ public class Bindings
 
 	public int size() {
 		return delegate.size();
+	}
+
+	@Override
+	public String toString() {
+		return delegate.toString();
 	}
 
 	@SuppressWarnings("null")
