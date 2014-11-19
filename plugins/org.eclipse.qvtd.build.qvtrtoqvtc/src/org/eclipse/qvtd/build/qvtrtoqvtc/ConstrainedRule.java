@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -13,27 +14,27 @@ import org.eclipse.emf.ecore.resource.Resource;
 public interface ConstrainedRule {
 	
 	/**
-	 * Match a Bindings to the types requried by the rule 
-	 * @param tr 
-	 * @param bindings
-	 * @return
-	 */
-	public boolean matchBindings(TraceRecord tr, Bindings bindings);
-	
-	/**
-	 * Creare trace.
+	 * Gets the loop data.
 	 *
-	 * @return the trace record
+	 * @param inputModel the input model
+	 * @return the loop data
 	 */
-	public TraceRecord creareTraceRecord(Bindings bindings);
-	
+	public @NonNull List<RelationsBindings> findInputMatches(@NonNull Resource inputModel);
+
 	/**
-	 * When.
-	 *
-	 * @param transformation the transformation
-	 * @return true, if successful
+	 * Return the keys for all core bindings of this rule.
 	 */
-	public boolean when(QvtrToQvtcTransformation transformation, Resource qvtrModel);	
+	public @NonNull CoreBindings.KeySet getCoreBindingsKeys();
+
+	/**
+	 * Return the keys for all primitive bindings of this rule.
+	 */
+	public @NonNull PrimitivesBindings.KeySet getPrimitivesBindingsKeys();
+
+	/**
+	 * Return the keys for all relations bindings of this rule.
+	 */
+	public @NonNull RelationsBindings.KeySet getRelationsBindingsKeys();
 	
 	/**
 	 * Instantiate output elements.
@@ -41,7 +42,7 @@ public interface ConstrainedRule {
 	 * @param qvtcModelElements the qvtc model elements
 	 * @return the list
 	 */
-	public List<EObject> instantiateOutputElements(Map<Class<? extends EObject>, List<EObject>> qvtcModelElements);
+	public List<EObject> instantiateOutputElements(Map<Class<? extends EObject>, List<EObject>> qvtcModelElements, @NonNull CoreBindings coreBindings);
 	
 	/**
 	 * Instantiate middle elements.
@@ -49,25 +50,32 @@ public interface ConstrainedRule {
 	 * @param qvtcMiddleElements the qvtc middle elements
 	 * @return the list
 	 */
-	public List<EObject> instantiateMiddleElements(Map<Class<? extends EObject>, List<EObject>> qvtcMiddleElements);
+	public List<EObject> instantiateMiddleElements(Map<Class<? extends EObject>, List<EObject>> qvtcMiddleElements, @NonNull CoreBindings coreBindings);
+	
+	/**
+	 * Match a Bindings to the types requried by the rule 
+	 * @param tr 
+	 * @param bindings
+	 * @return
+	 */
+	public boolean matchBindings(@NonNull TraceRecord tr, @NonNull RelationsBindings relationsBindings);
 	
 	/**
 	 * Sets the attributes.
 	 */
-	public void setAttributes();
+	public void setAttributes(@NonNull CoreBindings coreBindings);
+	/**
+	 * When.
+	 *
+	 * @param transformation the transformation
+	 * @return true, if successful
+	 */
+	public boolean when(@NonNull RelationsBindings relationsBindings);	
 	
 	/**
 	 * Where.
 	 *
 	 * @param transformation the transformation
 	 */
-	public void where(QvtrToQvtcTransformation transformation);
-	
-	/**
-	 * Gets the loop data.
-	 *
-	 * @param inputModel the input model
-	 * @return the loop data
-	 */
-	public List<Bindings> findInputMatches(Resource inputModel);
+	public void where(@NonNull CoreBindings coreBindings);
 }

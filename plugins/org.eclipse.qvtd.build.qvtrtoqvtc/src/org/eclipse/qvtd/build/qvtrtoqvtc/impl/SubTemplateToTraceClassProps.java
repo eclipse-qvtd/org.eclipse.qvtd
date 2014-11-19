@@ -9,69 +9,95 @@ import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.qvtd.build.qvtrtoqvtc.Bindings;
+import org.eclipse.qvtd.build.qvtrtoqvtc.CoreBindings;
+import org.eclipse.qvtd.build.qvtrtoqvtc.PrimitivesBindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
-import org.eclipse.qvtd.build.qvtrtoqvtc.TraceRecord;
+import org.eclipse.qvtd.build.qvtrtoqvtc.RelationsBindings;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 
-public class SubTemplateToTraceClassProps extends AbstractRule {
-	
-	
+public class SubTemplateToTraceClassProps extends AbstractRule
+{
 	// Relations
-	public static final BindingKey<ObjectTemplateExp> t = new BindingKey<ObjectTemplateExp>("t");
-	public static final BindingKey<PropertyTemplateItem> pt = new BindingKey<PropertyTemplateItem>("pt");
-	public static final BindingKey<ObjectTemplateExp> tp = new BindingKey<ObjectTemplateExp>("pt");
-	public static final BindingKey<Variable> tv = new BindingKey<Variable>("tv");
-	public static final BindingKey<Type> c = new BindingKey<Type>("c");
-		
+	private static final @NonNull RelationsBindings.KeySet RELATIONS_BINDINGS = new RelationsBindings.KeySet();
+	public static final @NonNull RelationsBindings.Key<ObjectTemplateExp> RELATIONS_t = RELATIONS_BINDINGS.create((ObjectTemplateExp)null, "t");
+	public static final @NonNull RelationsBindings.Key<PropertyTemplateItem> RELATIONS_pt = RELATIONS_BINDINGS.create((PropertyTemplateItem)null, "pt");
+	public static final @NonNull RelationsBindings.Key<ObjectTemplateExp> RELATIONS_tp = RELATIONS_BINDINGS.create((ObjectTemplateExp)null, "tp");
+	public static final @NonNull RelationsBindings.Key<Variable> RELATIONS_tv = RELATIONS_BINDINGS.create((Variable)null, "tv");
+	public static final @NonNull RelationsBindings.Key<Type> RELATIONS_c = RELATIONS_BINDINGS.create((Type)null, "c");
+	
 	// Core
-	public static final BindingKey<EClass> rc = new BindingKey<EClass>("rc");
-	public static final BindingKey<EReference> a = new BindingKey<EReference>("a");
-	
-	private String vn;
-	
-	@Override
-	public boolean when(QvtrToQvtcTransformation transformation,  Resource qvtrModel) {
-		vn = record.getBindings().get(tv).getName();
-		return true;
+	private static final @NonNull CoreBindings.KeySet CORE_BINDINGS = new CoreBindings.KeySet();
+	public static final @NonNull CoreBindings.Key<EClass> CORE_rc = CORE_BINDINGS.create((EClass)null, "rc");
+	public static final @NonNull CoreBindings.Key<EReference> CORE_a = CORE_BINDINGS.create((EReference)null, "a");
+	// Primitives
+	private static final @NonNull PrimitivesBindings.KeySet PRIMITIVES_BINDINGS = new PrimitivesBindings.KeySet();
+	private static final @NonNull PrimitivesBindings.Key<String> PRIMITIVES_vn = PRIMITIVES_BINDINGS.create((String)null, "vn");
+
+	public SubTemplateToTraceClassProps(@NonNull QvtrToQvtcTransformation transformation) {
+		super(transformation);
 	}
 	
-	public List<EObject> instantiateOutputElements(Map<Class<? extends EObject>, List<EObject>> qvtcModelElements) {
-		
+	public @NonNull CoreBindings.KeySet getCoreBindingsKeys() {
+		return CORE_BINDINGS;
+	}
+
+	public @NonNull PrimitivesBindings.KeySet getPrimitivesBindingsKeys() {
+		return PRIMITIVES_BINDINGS;
+	}
+
+	public @NonNull RelationsBindings.KeySet getRelationsBindingsKeys() {
+		return RELATIONS_BINDINGS;
+	}
+	
+	public List<EObject> instantiateOutputElements(Map<Class<? extends EObject>, List<EObject>> qvtcModelElements, @NonNull CoreBindings coreBindings) {
 		List<EObject> result = new ArrayList<EObject>(); 
 		EReference a = EcoreFactory.eINSTANCE.createEReference();
-		record.getBindings().put(SubTemplateToTraceClassProps.a, a);
+		coreBindings.put(CORE_a, a);
 		result.add(a);
 		return result;
 	}
 	
-	public void setAttributes() {
-		record.getBindings().get(a).setName(vn);
-		record.getBindings().get(a).setEType(record.getBindings().get(c).getETarget().eClass());
-		record.getBindings().get(rc).getEStructuralFeatures().add(record.getBindings().get(a));
+	public void setAttributes(@NonNull CoreBindings coreBindings) {
+		PrimitivesBindings primitivesBindings = coreBindings.getPrimitivesBindings();
+		EReference a = coreBindings.get(CORE_a);
+		EClass rc = coreBindings.get(CORE_rc);
+		String vn = primitivesBindings.get(PRIMITIVES_vn);
+		a.setName(vn);
+		a.setEType((EClassifier) coreBindings.getRelationsBindings().get(RELATIONS_c));		// FIXME Bad cast
+		rc.getEStructuralFeatures().add(a);
 	}
 	
 	@Override
-	public void where(QvtrToQvtcTransformation transformation) {
-		SubTemplateToTraceClassProps rule = new SubTemplateToTraceClassProps();
-		for (PropertyTemplateItem part : record.getBindings().get(SubTemplateToTraceClassProps.tp).getPart()) {
-			if (part.getValue() instanceof ObjectTemplateExp) {
-				Bindings bindings = new Bindings();
-				bindings.put(SubTemplateToTraceClassProps.t, record.getBindings().get(SubTemplateToTraceClassProps.tp));
-				bindings.put(SubTemplateToTraceClassProps.pt, part);
-				bindings.put(SubTemplateToTraceClassProps.tp, (ObjectTemplateExp)part.getValue());
-				bindings.put(SubTemplateToTraceClassProps.tv, ((ObjectTemplateExp)part.getValue()).getBindsTo());
-				bindings.put(SubTemplateToTraceClassProps.c, ((ObjectTemplateExp)part.getValue()).getBindsTo().getType());
-				bindings.put(SubTemplateToTraceClassProps.rc, record.getBindings().get(rc));
-				TraceRecord stTotcpRecord = rule.creareTraceRecord(bindings);
-				transformation.executeRule(rule, stTotcpRecord);
+	public boolean when(@NonNull RelationsBindings relationsBindings) {
+		PrimitivesBindings primitivesBindings = relationsBindings.getPrimitivesBindings();
+		Variable tv = relationsBindings.get(RELATIONS_tv);
+		primitivesBindings.put(PRIMITIVES_vn, tv.getName());
+		return true;
+	}
+	
+	@Override
+	public void where(@NonNull CoreBindings coreBindings) {
+		EClass rc = coreBindings.get(CORE_rc);
+		ObjectTemplateExp t = coreBindings.getRelationsBindings().get(RELATIONS_t);
+		for (PropertyTemplateItem part : t.getPart()) {
+			OCLExpression value = part.getValue();
+			if (value instanceof ObjectTemplateExp) {
+				ObjectTemplateExp objectTemplateExp = (ObjectTemplateExp)value;
+				RelationsBindings innerRelationsBindings = new RelationsBindings(new SubTemplateToTraceClassProps(transformation));
+				CoreBindings innerCoreBindings = innerRelationsBindings.getCoreBindings();
+				// TODO add other bindings!
+				innerRelationsBindings.put(SubTemplateToTraceClassProps.RELATIONS_t, objectTemplateExp);
+				innerRelationsBindings.put(SubTemplateToTraceClassProps.RELATIONS_tv, objectTemplateExp.getBindsTo());
+				innerRelationsBindings.put(SubTemplateToTraceClassProps.RELATIONS_c, objectTemplateExp.getBindsTo().getType());
+				innerCoreBindings.put(SubTemplateToTraceClassProps.CORE_rc, rc);
+				transformation.executeNestedRule(innerCoreBindings);
 			}
 		}
-		
 	}
 
 }

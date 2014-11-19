@@ -7,80 +7,47 @@ import java.util.Map;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.qvtd.build.qvtrtoqvtc.Bindings;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.qvtd.build.qvtrtoqvtc.CoreBindings;
+import org.eclipse.qvtd.build.qvtrtoqvtc.PrimitivesBindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
+import org.eclipse.qvtd.build.qvtrtoqvtc.RelationsBindings;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 
-public class RelationalTransformationToMappingTransformation
-		extends AbstractRule {
-	
-	// Relations
-	public static final BindingKey<RelationalTransformation> rt = new BindingKey<RelationalTransformation>("rt");
-	public static final BindingKey<TypedModel> rtm = new BindingKey<TypedModel>("rtm");
-	
+public class RelationalTransformationToMappingTransformation extends AbstractRule
+{
+	private static final @NonNull RelationsBindings.KeySet RELATIONS_BINDINGS = new RelationsBindings.KeySet();
+	public static final @NonNull RelationsBindings.Key<RelationalTransformation> RELATIONS_rt = RELATIONS_BINDINGS.create((RelationalTransformation)null, "rt");
+	public static final @NonNull RelationsBindings.Key<TypedModel> RELATIONS_rtm = RELATIONS_BINDINGS.create((TypedModel)null, "rtm");
 	// Core
-	public static final BindingKey<Transformation> mt = new BindingKey<Transformation>("mt");
-	public static final BindingKey<TypedModel> mtm = new BindingKey<TypedModel>("mtm");
-	
-	public String rtn;
-	public String tmn;
-	
-	@Override
-	public boolean when(QvtrToQvtcTransformation transformation, Resource qvtrModel) {
-		RelationalTransformation rt = record.getBindings().get(RelationalTransformationToMappingTransformation.rt);
-		TypedModel rtm = record.getBindings().get(RelationalTransformationToMappingTransformation.rtm);
-		if (rt != null && rtm != null
-				&& rt.getModelParameter().contains(rtm)) {
-			rtn = rt.getName();
-			tmn = rtm.getName();
-			return true;
-		} else {
-			return false;
-		}
-	}
+	private static final @NonNull CoreBindings.KeySet CORE_BINDINGS = new CoreBindings.KeySet();
+	public static final @NonNull CoreBindings.Key<Transformation> CORE_MT = CORE_BINDINGS.create((Transformation)null, "mt");
+	public static final @NonNull CoreBindings.Key<TypedModel> CORE_MTM = CORE_BINDINGS.create((TypedModel)null, "mtm");
+	// Primitives
+	private static final @NonNull PrimitivesBindings.KeySet PRIMITIVES_BINDINGS = new PrimitivesBindings.KeySet();
+	private static final @NonNull PrimitivesBindings.Key<String> PRIMITIVES_rtn = PRIMITIVES_BINDINGS.create((String)null, "rtn");
+	private static final @NonNull PrimitivesBindings.Key<String> PRIMITIVES_tmn = PRIMITIVES_BINDINGS.create((String)null, "tmn");
 
 
-	@Override
-	public List<EObject> instantiateOutputElements(Map<Class<? extends EObject>, List<EObject>> outputModelElements) {
-		// Search the output model first!
-		List<EObject> results = new ArrayList<EObject>();
-		Transformation mt;
-		if (outputModelElements.containsKey(Transformation.class)) {
-			mt = (Transformation) outputModelElements.get(Transformation.class).get(0);
-		} else {	
-			mt = QVTbaseFactory.eINSTANCE.createTransformation();
-			results.add(mt);
-		}
-		record.getBindings().put(RelationalTransformationToMappingTransformation.mt, mt);
-		TypedModel mtm = QVTbaseFactory.eINSTANCE.createTypedModel();
-		results.add(mtm);
-		mt.getModelParameter().add(mtm);
-		record.getBindings().put(RelationalTransformationToMappingTransformation.mtm, mtm);
-		return results;
-	}
-
-	@Override
-	public void setAttributes() {
-		record.getBindings().get(RelationalTransformationToMappingTransformation.mt).setName(rtn);;
-		record.getBindings().get(RelationalTransformationToMappingTransformation.mtm).setName(tmn);
-		record.getBindings().get(RelationalTransformationToMappingTransformation.mt).getModelParameter().add(record.getBindings().get(RelationalTransformationToMappingTransformation.mtm));
-		record.getBindings().get(RelationalTransformationToMappingTransformation.mtm).getUsedPackage().addAll(record.getBindings().get(RelationalTransformationToMappingTransformation.rtm).getUsedPackage());
+	public RelationalTransformationToMappingTransformation(@NonNull QvtrToQvtcTransformation transformation) {
+		super(transformation);
 	}
 	
-	public List<Bindings> findInputMatches(Resource inputModel) {
-		List<Bindings> matches = new ArrayList<Bindings>();
+	public @NonNull List<RelationsBindings> findInputMatches(@NonNull Resource inputModel) {
+		List<RelationsBindings> matches = new ArrayList<RelationsBindings>();
 		TreeIterator<EObject> it = inputModel.getAllContents();
 		while(it.hasNext()) {
 			EObject eo = it.next();
 			if (eo instanceof RelationalTransformation) {
-				for (TypedModel rtm : ((RelationalTransformation)eo).getModelParameter()) {
-					Bindings bindingsr = new Bindings();
-					bindingsr.put(RelationalTransformationToMappingTransformation.rt, (RelationalTransformation)eo);
-					bindingsr.put(RelationalTransformationToMappingTransformation.rtm, rtm);
-					matches.add(bindingsr);
+				RelationalTransformation relationalTransformation = (RelationalTransformation)eo;
+				for (TypedModel rtm : relationalTransformation.getModelParameter()) {
+					RelationsBindings relationsBindings = new RelationsBindings(this);
+					relationsBindings.put(RELATIONS_rt, relationalTransformation);
+					relationsBindings.put(RELATIONS_rtm, rtm);
+					matches.add(relationsBindings);
 				}
 				
 			} 
@@ -91,7 +58,61 @@ public class RelationalTransformationToMappingTransformation
 		}
 		return matches;
 	}
-	
-	
 
+	public @NonNull CoreBindings.KeySet getCoreBindingsKeys() {
+		return CORE_BINDINGS;
+	}
+
+	public @NonNull PrimitivesBindings.KeySet getPrimitivesBindingsKeys() {
+		return PRIMITIVES_BINDINGS;
+	}
+
+	public @NonNull RelationsBindings.KeySet getRelationsBindingsKeys() {
+		return RELATIONS_BINDINGS;
+	}
+
+	@Override
+	public List<EObject> instantiateOutputElements(Map<Class<? extends EObject>, List<EObject>> outputModelElements, @NonNull CoreBindings bindings) {
+		// Search the output model first!
+		List<EObject> results = new ArrayList<EObject>();
+		Transformation mt;
+		if (outputModelElements.containsKey(Transformation.class)) {
+			mt = (Transformation) outputModelElements.get(Transformation.class).get(0);
+		} else {	
+			mt = QVTbaseFactory.eINSTANCE.createTransformation();
+			results.add(mt);
+		}
+		bindings.put(CORE_MT, mt);
+		TypedModel mtm = QVTbaseFactory.eINSTANCE.createTypedModel();
+		results.add(mtm);
+		bindings.put(CORE_MTM, mtm);
+		return results;
+	}
+
+	@Override
+	public void setAttributes(@NonNull CoreBindings coreBindings) {
+		PrimitivesBindings primitivesBindings = coreBindings.getPrimitivesBindings();
+		TypedModel rtm = primitivesBindings.getRelationsBindings().get(RELATIONS_rtm);
+		Transformation mt = coreBindings.get(CORE_MT);
+		TypedModel mtm = coreBindings.get(CORE_MTM);
+		String rtn = primitivesBindings.get(PRIMITIVES_rtn);
+		String tmn = primitivesBindings.get(PRIMITIVES_tmn);
+		mt.setName(rtn);;
+		mtm.setName(tmn);
+		mt.getModelParameter().add(mtm);
+		mtm.getUsedPackage().addAll(rtm.getUsedPackage());
+	}
+	
+	public boolean when(@NonNull QvtrToQvtcTransformation transformation, @NonNull RelationsBindings relationsBindings) {
+		RelationalTransformation rt = relationsBindings.get(RELATIONS_rt);
+		TypedModel rtm = relationsBindings.get(RELATIONS_rtm);
+		if (rt != null && rtm != null && rt.getModelParameter().contains(rtm)) {
+			PrimitivesBindings primitivesBindings = relationsBindings.getPrimitivesBindings();
+			primitivesBindings.put(PRIMITIVES_rtn, rt.getName());
+			primitivesBindings.put(PRIMITIVES_tmn, rtm.getName());
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

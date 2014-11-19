@@ -3,10 +3,11 @@ package org.eclipse.qvtd.build.qvtrtoqvtc.evaluation;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.build.qvtrtoqvtc.ConstrainedRule;
+import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RelationToTraceClass;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RelationalTransformationToMappingTransformation;
-import org.eclipse.qvtd.build.qvtrtoqvtc.impl.TopLevelRelationForMappingForEnforcement;
 
 
 public class RuleFactory {
@@ -16,14 +17,14 @@ public class RuleFactory {
 		
 	}
 
-	public List<ConstrainedRule> createTopRules() {
+	public List<ConstrainedRule> createTopRules(@NonNull QvtrToQvtcTransformation transformation) {
 		List<ConstrainedRule> rules = new ArrayList<ConstrainedRule>();
-		ConstrainedRule rule1 = new RelationalTransformationToMappingTransformation();
+		ConstrainedRule rule1 = new RelationalTransformationToMappingTransformation(transformation);
+		ConstrainedRule rule2 = new RelationToTraceClass(transformation);
 		rules.add(rule1);
-		ConstrainedRule rule2 = new RelationToTraceClass();
 		rules.add(rule2);
-		ConstrainedRule rule3 = new TopLevelRelationForMappingForEnforcement();
-		rules.add(rule3);
+		//ConstrainedRule rule3 = new TopLevelRelationForMappingForEnforcement(transformation);
+		//rules.add(rule3);
 		return rules;
 	}
 	
