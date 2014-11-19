@@ -62,6 +62,14 @@ public class SubTemplateToTraceClassProps extends AbstractRule
 		return RELATIONS_BINDINGS;
 	}
 	
+	@Override
+	public boolean when(@NonNull RelationsBindings relationsBindings) {
+		PrimitivesBindings primitivesBindings = relationsBindings.getPrimitivesBindings();
+		Variable tv = relationsBindings.get(RELATIONS_tv);
+		primitivesBindings.put(PRIMITIVES_vn, tv.getName());
+		return true;
+	}
+	
 	public List<EObject> instantiateOutputElements(Map<Class<? extends EObject>, List<EObject>> qvtcModelElements, @NonNull CoreBindings coreBindings) {
 		List<EObject> result = new ArrayList<EObject>(); 
 		Property a = PivotFactory.eINSTANCE.createProperty();
@@ -78,14 +86,6 @@ public class SubTemplateToTraceClassProps extends AbstractRule
 		a.setName(vn);
 		a.setType(rc);
 		rc.getOwnedAttribute().add(a);
-	}
-	
-	@Override
-	public boolean when(@NonNull RelationsBindings relationsBindings) {
-		PrimitivesBindings primitivesBindings = relationsBindings.getPrimitivesBindings();
-		Variable tv = relationsBindings.get(RELATIONS_tv);
-		primitivesBindings.put(PRIMITIVES_vn, tv.getName());
-		return true;
 	}
 	
 	@Override

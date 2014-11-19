@@ -97,6 +97,29 @@ public class RelationToTraceClass extends AbstractRule
 		}
 		return loopData;
 	}
+	
+	@Override
+	public boolean when(@NonNull RelationsBindings relationsBindings) {
+		Relation r = relationsBindings.get(RELATIONS_r);
+		RelationDomain rd = relationsBindings.get(RELATIONS_rd);
+		DomainPattern rdp = relationsBindings.get(RELATIONS_rdp);
+		ObjectTemplateExp t = relationsBindings.get(RELATIONS_t);
+		Variable tv = relationsBindings.get(RELATIONS_tv);
+		Type c = relationsBindings.get(RELATIONS_c);
+		if (r != null && rd != null && rdp != null && t != null && tv != null && c != null
+				&& r.getDomain().contains(rd)
+				&& rd.getPattern().equals(rdp)
+				&& rdp.getTemplateExpression().equals(t)
+				&& t.getBindsTo().equals(tv)
+				&& tv.getType().equals(c)) {
+			PrimitivesBindings primitivesBindings = relationsBindings.getPrimitivesBindings();
+			primitivesBindings.put(PRIMITIVES_rn, r.getName());
+			primitivesBindings.put(PRIMITIVES_vn, tv.getName());
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	@Override
 	public List<EObject> instantiateMiddleElements(Map<Class<? extends EObject>, List<EObject>> qvtcMiddleElements, @NonNull CoreBindings coreBindings) {
@@ -150,29 +173,6 @@ public class RelationToTraceClass extends AbstractRule
 		a.setName(vn);
 		a.setType(rc);
 		rc.getOwnedAttribute().add(a);
-	}
-	
-	@Override
-	public boolean when(@NonNull RelationsBindings relationsBindings) {
-		Relation r = relationsBindings.get(RELATIONS_r);
-		RelationDomain rd = relationsBindings.get(RELATIONS_rd);
-		DomainPattern rdp = relationsBindings.get(RELATIONS_rdp);
-		ObjectTemplateExp t = relationsBindings.get(RELATIONS_t);
-		Variable tv = relationsBindings.get(RELATIONS_tv);
-		Type c = relationsBindings.get(RELATIONS_c);
-		if (r != null && rd != null && rdp != null && t != null && tv != null && c != null
-				&& r.getDomain().contains(rd)
-				&& rd.getPattern().equals(rdp)
-				&& rdp.getTemplateExpression().equals(t)
-				&& t.getBindsTo().equals(tv)
-				&& tv.getType().equals(c)) {
-			PrimitivesBindings primitivesBindings = relationsBindings.getPrimitivesBindings();
-			primitivesBindings.put(PRIMITIVES_rn, r.getName());
-			primitivesBindings.put(PRIMITIVES_vn, tv.getName());
-			return true;
-		} else {
-			return false;
-		}
 	}
 	
 	@Override

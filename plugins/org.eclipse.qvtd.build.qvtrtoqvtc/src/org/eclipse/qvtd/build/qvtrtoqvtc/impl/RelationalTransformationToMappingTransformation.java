@@ -25,7 +25,6 @@ import org.eclipse.qvtd.build.qvtrtoqvtc.RelationsBindings;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 
 public class RelationalTransformationToMappingTransformation extends AbstractRule
@@ -115,7 +114,8 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 		mtm.getUsedPackage().addAll(rtm.getUsedPackage());
 	}
 	
-	public boolean when(@NonNull QvtrToQvtcTransformation transformation, @NonNull RelationsBindings relationsBindings) {
+	@Override
+	public boolean when(@NonNull RelationsBindings relationsBindings) {
 		RelationalTransformation rt = relationsBindings.get(RELATIONS_rt);
 		TypedModel rtm = relationsBindings.get(RELATIONS_rtm);
 		if (rt != null && rtm != null && rt.getModelParameter().contains(rtm)) {
