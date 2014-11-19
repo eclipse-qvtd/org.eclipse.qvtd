@@ -25,6 +25,7 @@ import org.eclipse.qvtd.build.qvtrtoqvtc.RelationsBindings;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 
 public class RelationalTransformationToMappingTransformation extends AbstractRule
@@ -87,6 +88,7 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 		List<EObject> results = new ArrayList<EObject>();
 		Transformation mt;
 		if (outputModelElements.containsKey(Transformation.class)) {
+			// There should be only 1 transformation
 			mt = (Transformation) outputModelElements.get(Transformation.class).get(0);
 		} else {	
 			mt = QVTbaseFactory.eINSTANCE.createTransformation();
