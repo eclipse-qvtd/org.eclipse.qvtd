@@ -15,15 +15,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.impl.EClassImpl;
-import org.eclipse.emf.ecore.impl.EReferenceImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.pivot.PivotFactory;
+import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.qvtd.build.qvtrtoqvtc.CoreBindings;
@@ -50,8 +46,8 @@ public class RelationToTraceClass extends AbstractRule
 
 	// Core
 	private static final @NonNull CoreBindings.KeySet CORE_BINDINGS = new CoreBindings.KeySet();
-	public static final @NonNull CoreBindings.Key<EClass> CORE_rc = CORE_BINDINGS.create((EClass)null, "rc");
-	public static final @NonNull CoreBindings.Key<EReference> CORE_a = CORE_BINDINGS.create((EReference)null, "a");
+	public static final @NonNull CoreBindings.Key<org.eclipse.ocl.examples.pivot.Class> CORE_rc = CORE_BINDINGS.create((org.eclipse.ocl.examples.pivot.Class)null, "rc");
+	public static final @NonNull CoreBindings.Key<Property> CORE_a = CORE_BINDINGS.create((Property)null, "a");
 	// Primitives
 	private static final @NonNull PrimitivesBindings.KeySet PRIMITIVES_BINDINGS = new PrimitivesBindings.KeySet();
 	private static final @NonNull PrimitivesBindings.Key<String> PRIMITIVES_rn = PRIMITIVES_BINDINGS.create((String)null, "rn");
@@ -106,36 +102,36 @@ public class RelationToTraceClass extends AbstractRule
 	public List<EObject> instantiateMiddleElements(Map<Class<? extends EObject>, List<EObject>> qvtcMiddleElements, @NonNull CoreBindings coreBindings) {
 		
 		List<EObject> results = new ArrayList<EObject>();
-		EcoreFactory factory = EcoreFactory.eINSTANCE;
-		EClass rc = null;
-		EReference a = null;
+		PivotFactory factory = PivotFactory.eINSTANCE;
+		org.eclipse.ocl.examples.pivot.Class rc = null;
+		Property a = null;
 		PrimitivesBindings primitivesBindings = coreBindings.getPrimitivesBindings();
 		String rn = primitivesBindings.get(PRIMITIVES_rn);
 		String vn = primitivesBindings.get(PRIMITIVES_vn);
-		if (qvtcMiddleElements.containsKey(EClass.class)) {
-			for (EObject e : qvtcMiddleElements.get(EClass.class)) {
-				if (((EClass) e).getName().equals("T" + rn)) {
-					rc = (EClass) e;
+		if (qvtcMiddleElements.containsKey(org.eclipse.ocl.examples.pivot.Class.class)) {
+			for (EObject e : qvtcMiddleElements.get(org.eclipse.ocl.examples.pivot.Class.class)) {
+				if (((org.eclipse.ocl.examples.pivot.Class) e).getName().equals("T" + rn)) {
+					rc = (org.eclipse.ocl.examples.pivot.Class) e;
 				}
 			}
 			if (rc != null) {
-				if (qvtcMiddleElements.containsKey(EReferenceImpl.class)) {
-					for (EObject e : qvtcMiddleElements.get(EReferenceImpl.class)) {
-						if (((EReference) e).getClass().equals(rc)
-								&& ((EReference) e).getName().equals(vn)) {
-							a = (EReference) e;
+				if (qvtcMiddleElements.containsKey(Property.class)) {
+					for (EObject e : qvtcMiddleElements.get(Property.class)) {
+						if (((Property) e).getClass().equals(rc)
+								&& ((Property) e).getName().equals(vn)) {
+							a = (Property) e;
 						}
 					}
 				}
 			}
 		}
 		if (rc == null) {	
-			rc = factory.createEClass();
+			rc = factory.createClass();
 			results.add(rc);
 			
 		}
 		if (a == null) {
-			a = factory.createEReference();
+			a = factory.createProperty();
 			results.add(a);
 		}
 		coreBindings.put(CORE_rc, rc);
@@ -145,15 +141,15 @@ public class RelationToTraceClass extends AbstractRule
 
 	@Override
 	public void setAttributes(@NonNull CoreBindings coreBindings) {
-		EClass rc = coreBindings.get(CORE_rc);
-		EReference a = coreBindings.get(CORE_a);
+		org.eclipse.ocl.examples.pivot.Class rc = coreBindings.get(CORE_rc);
+		Property a = coreBindings.get(CORE_a);
 		PrimitivesBindings primitivesBindings = coreBindings.getPrimitivesBindings();
 		String rn = primitivesBindings.get(PRIMITIVES_rn);
 		String vn = primitivesBindings.get(PRIMITIVES_vn);
 		rc.setName('T' + rn);
 		a.setName(vn);
-		a.setEType((EClassifier) primitivesBindings.getRelationsBindings().get(RELATIONS_c));			// FIXME Bad cast
-		rc.getEStructuralFeatures().add(a);
+		a.setType(rc);
+		rc.getOwnedAttribute().add(a);
 	}
 	
 	@Override

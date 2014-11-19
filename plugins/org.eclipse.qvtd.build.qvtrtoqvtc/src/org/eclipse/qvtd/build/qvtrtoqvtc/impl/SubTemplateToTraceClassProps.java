@@ -14,13 +14,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.ocl.examples.pivot.PivotFactory;
+import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.qvtd.build.qvtrtoqvtc.CoreBindings;
@@ -42,8 +40,8 @@ public class SubTemplateToTraceClassProps extends AbstractRule
 	
 	// Core
 	private static final @NonNull CoreBindings.KeySet CORE_BINDINGS = new CoreBindings.KeySet();
-	public static final @NonNull CoreBindings.Key<EClass> CORE_rc = CORE_BINDINGS.create((EClass)null, "rc");
-	public static final @NonNull CoreBindings.Key<EReference> CORE_a = CORE_BINDINGS.create((EReference)null, "a");
+	public static final @NonNull CoreBindings.Key<org.eclipse.ocl.examples.pivot.Class> CORE_rc = CORE_BINDINGS.create((org.eclipse.ocl.examples.pivot.Class)null, "rc");
+	public static final @NonNull CoreBindings.Key<Property> CORE_a = CORE_BINDINGS.create((Property)null, "a");
 	// Primitives
 	private static final @NonNull PrimitivesBindings.KeySet PRIMITIVES_BINDINGS = new PrimitivesBindings.KeySet();
 	private static final @NonNull PrimitivesBindings.Key<String> PRIMITIVES_vn = PRIMITIVES_BINDINGS.create((String)null, "vn");
@@ -66,7 +64,7 @@ public class SubTemplateToTraceClassProps extends AbstractRule
 	
 	public List<EObject> instantiateOutputElements(Map<Class<? extends EObject>, List<EObject>> qvtcModelElements, @NonNull CoreBindings coreBindings) {
 		List<EObject> result = new ArrayList<EObject>(); 
-		EReference a = EcoreFactory.eINSTANCE.createEReference();
+		Property a = PivotFactory.eINSTANCE.createProperty();
 		coreBindings.put(CORE_a, a);
 		result.add(a);
 		return result;
@@ -74,12 +72,12 @@ public class SubTemplateToTraceClassProps extends AbstractRule
 	
 	public void setAttributes(@NonNull CoreBindings coreBindings) {
 		PrimitivesBindings primitivesBindings = coreBindings.getPrimitivesBindings();
-		EReference a = coreBindings.get(CORE_a);
-		EClass rc = coreBindings.get(CORE_rc);
+		Property a = coreBindings.get(CORE_a);
+		org.eclipse.ocl.examples.pivot.Class rc = coreBindings.get(CORE_rc);
 		String vn = primitivesBindings.get(PRIMITIVES_vn);
 		a.setName(vn);
-		a.setEType((EClassifier) coreBindings.getRelationsBindings().get(RELATIONS_c));		// FIXME Bad cast
-		rc.getEStructuralFeatures().add(a);
+		a.setType(rc);
+		rc.getOwnedAttribute().add(a);
 	}
 	
 	@Override
@@ -92,7 +90,7 @@ public class SubTemplateToTraceClassProps extends AbstractRule
 	
 	@Override
 	public void where(@NonNull CoreBindings coreBindings) {
-		EClass rc = coreBindings.get(CORE_rc);
+		org.eclipse.ocl.examples.pivot.Class rc = coreBindings.get(CORE_rc);
 		ObjectTemplateExp t = coreBindings.getRelationsBindings().get(RELATIONS_t);
 		for (PropertyTemplateItem part : t.getPart()) {
 			OCLExpression value = part.getValue();
