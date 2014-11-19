@@ -1,11 +1,13 @@
 package org.eclipse.qvtd.build.qvtrtoqvtc.impl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -17,6 +19,7 @@ import org.eclipse.qvtd.build.qvtrtoqvtc.CoreBindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.PrimitivesBindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.RelationsBindings;
+import org.eclipse.qvtd.build.qvtrtoqvtc.RelationsBindings.Key;
 import org.eclipse.qvtd.build.qvtrtoqvtc.TraceRecord;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -34,65 +37,40 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
+import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 public class TopLevelRelationForMappingForEnforcement extends AbstractRule
 {
 	// Relations
 	private static final @NonNull RelationsBindings.KeySet RELATIONS_BINDINGS = new RelationsBindings.KeySet();
 	private static final @NonNull RelationsBindings.Key<Relation> RELATIONS_r = RELATIONS_BINDINGS.create((Relation)null, "r");
+	private static final @NonNull RelationsBindings.Key<Set<RelationDomain>> RELATIONS_rds = RELATIONS_BINDINGS.create((Set<RelationDomain>)null, "rds");
 	private static final @NonNull RelationsBindings.Key<RelationDomain> RELATIONS_rd = RELATIONS_BINDINGS.create((RelationDomain)null, "rd");
+	private static final @NonNull RelationsBindings.Key<TypedModel> RELATIONS_dir = RELATIONS_BINDINGS.create((TypedModel)null, "dir");;
+	private static final @NonNull RelationsBindings.Key<DomainPattern> RELATIONS_dp = RELATIONS_BINDINGS.create((DomainPattern)null, "dp");
+	private static final @NonNull RelationsBindings.Key<Set<Variable>> RELATIONS_domainVars = RELATIONS_BINDINGS.create((Set<Variable>)null, "domainVars");
+	private static final @NonNull RelationsBindings.Key<ObjectTemplateExp> RELATIONS_te = RELATIONS_BINDINGS.create((ObjectTemplateExp)null, "te");
+	private static final @NonNull RelationsBindings.Key<Variable> RELATIONS_tev = RELATIONS_BINDINGS.create((Variable)null, "tev");
+	
 	// Core
 	private static final @NonNull CoreBindings.KeySet CORE_BINDINGS = new CoreBindings.KeySet();
 	private static final @NonNull CoreBindings.Key<Mapping> CORE_m = CORE_BINDINGS.create((Mapping)null, "m");
 	private static final @NonNull CoreBindings.Key<CoreDomain> CORE_md = CORE_BINDINGS.create((CoreDomain)null, "md");
 	// Primitives
 	private static final @NonNull PrimitivesBindings.KeySet PRIMITIVES_BINDINGS = new PrimitivesBindings.KeySet();
+	private static final @NonNull PrimitivesBindings.Key<RelationalTransformation> PRIMITIVES_rt = PRIMITIVES_BINDINGS.create((RelationalTransformation)null, "rt");
 	private static final @NonNull PrimitivesBindings.Key<Transformation> PRIMITIVES_mt = PRIMITIVES_BINDINGS.create((Transformation)null, "mt");
 	private static final @NonNull PrimitivesBindings.Key<String> PRIMITIVES_rn = PRIMITIVES_BINDINGS.create((String)null, "rn");
 	private static final @NonNull PrimitivesBindings.Key<String> PRIMITIVES_dn = PRIMITIVES_BINDINGS.create((String)null, "dn");
 	private static final @NonNull PrimitivesBindings.Key<String> PRIMITIVES_tmn = PRIMITIVES_BINDINGS.create((String)null, "tmn");
-	private static final @NonNull PrimitivesBindings.Key<List<EObject>> PRIMITIVES_rOppositeDomains = PRIMITIVES_BINDINGS.create((List<EObject>)null, "rOppositeDomains");
+	private static final @NonNull PrimitivesBindings.Key<Set<RelationDomain>> PRIMITIVES_rOppositeDomains = PRIMITIVES_BINDINGS.create((Set<RelationDomain>)null, "rOppositeDomains");
 	private static final @NonNull PrimitivesBindings.Key<GuardPattern> PRIMITIVES_dg = PRIMITIVES_BINDINGS.create((GuardPattern)null, "dg");
-	private static final @NonNull PrimitivesBindings.Key<Set<Variable>> PRIMITIVES_domainVars = PRIMITIVES_BINDINGS.create((Set<Variable>)null, "domainVars");
+
 
 	public TopLevelRelationForMappingForEnforcement(@NonNull QvtrToQvtcTransformation transformation) {
 		super(transformation);
 	}
 	
-	public @NonNull List<RelationsBindings> findInputMatches(@NonNull Resource inputModel) {
-		List<RelationsBindings> loopData = new ArrayList<RelationsBindings>();
-		EClass rEClass = QVTrelationFactory.eINSTANCE.createRelation().eClass();
-		TreeIterator<EObject> it = inputModel.getAllContents();
-		while(it.hasNext()) {
-			EObject eo = it.next();
-			if (eo.eClass().equals(rEClass)) {
-				for (Domain rd : ((Relation)eo).getDomain()) {
-					RelationsBindings bindings = new RelationsBindings(this);
-					bindings.put(RELATIONS_rd, (RelationDomain)rd);
-					List<EObject> rOppositeDomains = new ArrayList<EObject>(((Relation)eo).getDomain());
-//					rOppositeDomains.remove(rd);
-//					args.add(rOppositeDomains);
-//					bindings.put(RELATIONS_xxx, rOppositeDomains);
-					loopData.add(bindings);
-				}
-			} 
-			/*
-			else if(eo.eClass().getEAllSuperTypes().contains(rtEClass)) {
-			}
-			rn = r.getName();
-			RelationDomain rd = record.getBindings().get(TopLevelRelationForMappingForEnforcement.rd);
-			dn = rd.getName();
-			tmn = record.getBindings().get(TopLevelRelationForMappingForEnforcement.dir).getName();
-			rOppositeDomains = new HashSet<RelationDomain>(record.getBindings().get(TopLevelRelationForMappingForEnforcement.rds));
-			rOppositeDomains.remove(rd);
-			return true;
-		}
-		return false;
-			*/
-		}
-		return loopData;
-	}
-
 	public @NonNull CoreBindings.KeySet getCoreBindingsKeys() {
 		return CORE_BINDINGS;
 	}
@@ -105,11 +83,88 @@ public class TopLevelRelationForMappingForEnforcement extends AbstractRule
 		return RELATIONS_BINDINGS;
 	}
 	
+	public @NonNull List<RelationsBindings> findInputMatches(@NonNull Resource inputModel) {
+		List<RelationsBindings> loopData = new ArrayList<RelationsBindings>();
+		TreeIterator<EObject> it = inputModel.getAllContents();
+		while(it.hasNext()) {
+			EObject eo = it.next();
+			if (eo instanceof Relation) {
+				Relation r = (Relation) eo;
+				for (Domain d : ((Relation)eo).getDomain()) {
+					RelationDomain rd = (RelationDomain) d;
+					if (rd.getPattern().getTemplateExpression() instanceof ObjectTemplateExp) {
+						RelationsBindings bindings = new RelationsBindings(this);
+						bindings.put(RELATIONS_r, r);
+						@SuppressWarnings("unchecked")
+						Set<RelationDomain> rds = new HashSet<RelationDomain>((Collection<? extends RelationDomain>) r.getDomain());
+						bindings.put(RELATIONS_rds, rds);
+						bindings.put(RELATIONS_rd, rd);
+						bindings.put(RELATIONS_dir, rd.getTypedModel());
+						bindings.put(RELATIONS_dp, rd.getPattern());
+						Set<Variable> domainVars = new HashSet<Variable>((Collection<Variable>) rd.getPattern().getBindsTo());
+						bindings.put(RELATIONS_domainVars, domainVars);
+						bindings.put(RELATIONS_te, (ObjectTemplateExp)rd.getPattern().getTemplateExpression());
+						bindings.put(RELATIONS_tev, rd.getPattern().getTemplateExpression().getBindsTo());
+						loopData.add(bindings);
+					}
+				}
+			} 
+		}
+		return loopData;
+	}
+	
+	@Override
+	public boolean when(@NonNull RelationsBindings relationsBindings) {
+		
+		Relation r = relationsBindings.get(RELATIONS_r);
+		RelationalTransformation rt = (RelationalTransformation) r.getTransformation();
+		RelationalTransformationToMappingTransformation rtTomtRule = new RelationalTransformationToMappingTransformation(transformation);
+		RelationsBindings innerRelationsBindings = new RelationsBindings(rtTomtRule);
+		innerRelationsBindings.put(RelationalTransformationToMappingTransformation.RELATIONS_rt, rt);
+		TraceRecord record = transformation.executeTopLevelRule(innerRelationsBindings);
+		
+		
+		PrimitivesBindings primitivesBindings = relationsBindings.getPrimitivesBindings();
+		
+		
+		RelationDomain rd = null;
+		
+		
+		
+		CoreBindings innerCoreBindings = innerRelationsBindings.getCoreBindings();
+		
+		
+
+		primitivesBindings.put(PRIMITIVES_mt, innerCoreBindings.get(RelationalTransformationToMappingTransformation.CORE_MT));
+		if (r != null && rd != null && r.getDomain().contains(rd)
+				&& r.getTransformation().equals(rt)
+				&& rd.getTypedModel().getTransformation().equals(rt)) {
+			relationsBindings.put(RELATIONS_r, r);
+			relationsBindings.put(RELATIONS_rd, rd);
+			primitivesBindings.put(PRIMITIVES_rn, r.getName());
+			primitivesBindings.put(PRIMITIVES_dn, rd.getName());
+			primitivesBindings.put(PRIMITIVES_tmn, rd.getTypedModel().getName());
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	
+	
 	public List<EObject> instantiateOutputElements(Map<Class<? extends EObject>, List<EObject>> outputModelElements, @NonNull CoreBindings coreBindings) {
 		PrimitivesBindings primitivesBindings = coreBindings.getPrimitivesBindings();
 		List<EObject> results = new ArrayList<EObject>();
-		// There should't be any other mapping with the same name!
-		Mapping m = QVTcoreFactory.eINSTANCE.createMapping();
+		Mapping m = null;
+		if (outputModelElements.containsKey(Mapping.class)) {
+			
+		}
+		if (m == null) {
+			m = QVTcoreFactory.eINSTANCE.createMapping();
+		}
+			
+		
+		
 		results.add(m);
 		coreBindings.put(CORE_m, m);
 		m.setGuardPattern(QVTcoreBaseFactory.eINSTANCE.createGuardPattern());
@@ -164,47 +219,8 @@ public class TopLevelRelationForMappingForEnforcement extends AbstractRule
 		coreDomain.setIsEnforceable(true);
 	}
 	
-//	@Override
-	public boolean when(List<Object> inputElements, @NonNull RelationsBindings relationsBindings) {
-		PrimitivesBindings primitivesBindings = relationsBindings.getPrimitivesBindings();
-		RelationalTransformation rt;
-		Relation r = null;
-		RelationDomain rd = null;
-		for (Object e : inputElements) {
-			if (e instanceof Relation) {
-				r = (Relation) e;
-			} else if (e instanceof RelationDomain) {
-				rd = (RelationDomain) e;
-			} else if (e instanceof List) {
-				@SuppressWarnings("unchecked") List<EObject> castE = (List<EObject>) e;
-				primitivesBindings.put(PRIMITIVES_rOppositeDomains, castE);
-			} else {
-				// Exception?
-				System.out.println("Wrong type for trace.");
-			}
-		}
-		assert r != null;
-		rt = (RelationalTransformation) r.getTransformation();
-		RelationalTransformationToMappingTransformation rtTomtRule = new RelationalTransformationToMappingTransformation(transformation);
-		RelationsBindings innerRelationsBindings = new RelationsBindings(rtTomtRule);
-		CoreBindings innerCoreBindings = innerRelationsBindings.getCoreBindings();
-		innerRelationsBindings.put(RelationalTransformationToMappingTransformation.RELATIONS_rt, rt);
-//		TraceRecord rtTomtRecord = transformation.executeTopLevelRule(innerRelationsBindings);
-		primitivesBindings.put(PRIMITIVES_mt, innerCoreBindings.get(RelationalTransformationToMappingTransformation.CORE_MT));
-		if (r != null && rd != null && r.getDomain().contains(rd)
-				&& r.getTransformation().equals(rt)
-				&& rd.getTypedModel().getTransformation().equals(rt)) {
-			relationsBindings.put(RELATIONS_r, r);
-			relationsBindings.put(RELATIONS_rd, rd);
-			primitivesBindings.put(PRIMITIVES_rn, r.getName());
-			primitivesBindings.put(PRIMITIVES_dn, rd.getName());
-			primitivesBindings.put(PRIMITIVES_tmn, rd.getTypedModel().getName());
-			primitivesBindings.put(PRIMITIVES_domainVars, new HashSet<Variable>(rd.getPattern().getBindsTo()));
-			return true;
-		} else {
-			return false;
-		}
-	}
+
+	
 	
 	@Override
 	public void where(@NonNull CoreBindings coreBindings) {

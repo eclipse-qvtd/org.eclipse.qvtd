@@ -46,6 +46,19 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 		super(transformation);
 	}
 	
+	
+	public @NonNull CoreBindings.KeySet getCoreBindingsKeys() {
+		return CORE_BINDINGS;
+	}
+
+	public @NonNull PrimitivesBindings.KeySet getPrimitivesBindingsKeys() {
+		return PRIMITIVES_BINDINGS;
+	}
+
+	public @NonNull RelationsBindings.KeySet getRelationsBindingsKeys() {
+		return RELATIONS_BINDINGS;
+	}
+	
 	public @NonNull List<RelationsBindings> findInputMatches(@NonNull Resource inputModel) {
 		List<RelationsBindings> matches = new ArrayList<RelationsBindings>();
 		TreeIterator<EObject> it = inputModel.getAllContents();
@@ -68,18 +81,21 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 		}
 		return matches;
 	}
-
-	public @NonNull CoreBindings.KeySet getCoreBindingsKeys() {
-		return CORE_BINDINGS;
+	
+	@Override
+	public boolean when(@NonNull RelationsBindings relationsBindings) {
+		RelationalTransformation rt = relationsBindings.get(RELATIONS_rt);
+		TypedModel rtm = relationsBindings.get(RELATIONS_rtm);
+		if (rt != null && rtm != null && rt.getModelParameter().contains(rtm)) {
+			PrimitivesBindings primitivesBindings = relationsBindings.getPrimitivesBindings();
+			primitivesBindings.put(PRIMITIVES_rtn, rt.getName());
+			primitivesBindings.put(PRIMITIVES_tmn, rtm.getName());
+			return true;
+		} else {
+			return false;
+		}
 	}
 
-	public @NonNull PrimitivesBindings.KeySet getPrimitivesBindingsKeys() {
-		return PRIMITIVES_BINDINGS;
-	}
-
-	public @NonNull RelationsBindings.KeySet getRelationsBindingsKeys() {
-		return RELATIONS_BINDINGS;
-	}
 
 	@Override
 	public List<EObject> instantiateOutputElements(Map<Class<? extends EObject>, List<EObject>> outputModelElements, @NonNull CoreBindings bindings) {
@@ -114,17 +130,5 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 		mtm.getUsedPackage().addAll(rtm.getUsedPackage());
 	}
 	
-	@Override
-	public boolean when(@NonNull RelationsBindings relationsBindings) {
-		RelationalTransformation rt = relationsBindings.get(RELATIONS_rt);
-		TypedModel rtm = relationsBindings.get(RELATIONS_rtm);
-		if (rt != null && rtm != null && rt.getModelParameter().contains(rtm)) {
-			PrimitivesBindings primitivesBindings = relationsBindings.getPrimitivesBindings();
-			primitivesBindings.put(PRIMITIVES_rtn, rt.getName());
-			primitivesBindings.put(PRIMITIVES_tmn, rtm.getName());
-			return true;
-		} else {
-			return false;
-		}
-	}
+	
 }
