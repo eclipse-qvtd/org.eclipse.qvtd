@@ -25,20 +25,31 @@ public class RelationsBindings extends AbstractBindings
 		}
 	}
 
-
 	public static class KeySet
 	{
 		protected final @NonNull List<Key<?>> keys = new ArrayList<Key<?>>();
+		protected final @NonNull List<Key<?>> rootKeys = new ArrayList<Key<?>>();
 		
 		public @NonNull <T> Key<T> create(@Nullable T keyClass, @NonNull String key) {
 			Key<T> theKey = new Key<T>(key);
 			keys.add(theKey);
 			return theKey;
 		}
+		
+		public @NonNull <T> Key<T> createRoot(@Nullable T keyClass, @NonNull String key) {
+			Key<T> rootKey = create(keyClass, key);
+			rootKeys.add(rootKey);
+			return (Key<T>) rootKey;
+		}
 
 		public @NonNull List<Key<?>> getKeys() {
 			return keys;
 		}
+		
+		public @NonNull List<Key<?>> getRootKeys() {
+			return rootKeys;
+		}
+		
 
 		@Override
 		public String toString() {
@@ -46,11 +57,8 @@ public class RelationsBindings extends AbstractBindings
 		}
 	}
 	
-	private final @NonNull ConstrainedRule rule;
-	private @Nullable PrimitivesBindings primitivesBindings = null;
-	
-	public RelationsBindings(@NonNull ConstrainedRule rule) {
-		this.rule = rule;
+	public RelationsBindings(Rule rule) {
+		super(rule);
 	}
 	
 	protected void checkKey(@NonNull AbstractBindings.Key<?> key) {
@@ -71,26 +79,12 @@ public class RelationsBindings extends AbstractBindings
 		return (T) delegate.get(key);
 	}
 
-	public @NonNull ConstrainedRule getRule() {
+	@Override
+	@NonNull
+	public Rule getRule() {
 		return rule;
 	}
 	
-	public @NonNull CoreBindings getCoreBindings() {
-		return getPrimitivesBindings().getCoreBindings();
-	}
-	
-	public @NonNull PrimitivesBindings getPrimitivesBindings() {
-		PrimitivesBindings primitivesBindings2 = primitivesBindings;
-		if (primitivesBindings2 == null) {
-			primitivesBindings = primitivesBindings2 = new PrimitivesBindings(this);
-		}
-		return primitivesBindings2;
-	}
-	
-	public @NonNull TraceRecord getTraceRecord() {
-		return getPrimitivesBindings().getTraceRecord();
-	}
-
 	public boolean matches(@NonNull KeySet allKeys, @NonNull RelationsBindings traceBindings) {
 		for (@SuppressWarnings("null")@NonNull Key<?> key : allKeys.getKeys()) {
 			Object boundValue = get(key);
@@ -117,9 +111,46 @@ public class RelationsBindings extends AbstractBindings
 	public <T> T put(@NonNull Key<T> key, T value) {
 		return (T) delegate.put(key, value);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public <T> T remove(@NonNull Key<T> key) {
 		return (T) delegate.remove(key);
 	}
+	
+	@Override
+	public boolean equals(Object o) {
+		if (o == null)
+		{
+			return false;
+		}
+
+		if (this.getClass() != o.getClass())
+		{
+			return false;
+		}
+		RelationsBindings rb = (RelationsBindings) o;
+		if (rule.getClass() != rb.getRule().getClass())
+			return false;
+		for (Key<?> key : rule.getRelationsBindingsKeys().getRootKeys()) {
+			Object thisValue = get(key);
+			Object thatValue = rb.get(key);
+			if (thisValue != thatValue)
+				return false;
+		}
+		return true;
+	}
+	
+	@Override
+	public int hashCode() {
+		int code = 0;
+		code += this.getClass().hashCode();
+		for (Key<?> key : rule.getRelationsBindingsKeys().getRootKeys()) {
+			code += get(key).hashCode();
+		}
+		return code;
+	}
+	
+	
+	
+	
 }

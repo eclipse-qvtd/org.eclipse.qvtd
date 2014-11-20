@@ -2,12 +2,14 @@ package org.eclipse.qvtd.build.qvtrtoqvtc.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.build.qvtrtoqvtc.RelationsBindings;
-import org.eclipse.qvtd.build.qvtrtoqvtc.TraceRecord;
+import org.eclipse.qvtd.build.qvtrtoqvtc.Rule;
 
 public interface TransformationTraceData {
 
-	public abstract TraceRecord getRecord(@NonNull RelationsBindings bindings);
+	public void addRecord(Rule rule);
 
-	public abstract void deleteRecord(@NonNull TraceRecord record);
+	public abstract void deleteRecord(@NonNull Rule rule);
+	
+	public abstract Rule getRecotd(@NonNull RelationsBindings relationsBindings);
 	
 }

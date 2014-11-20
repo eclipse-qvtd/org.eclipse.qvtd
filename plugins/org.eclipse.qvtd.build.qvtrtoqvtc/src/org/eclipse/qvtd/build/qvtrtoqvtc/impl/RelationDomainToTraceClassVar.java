@@ -9,7 +9,7 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.qvtd.build.qvtrtoqvtc.Bindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.ConstrainedRule;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
-import org.eclipse.qvtd.build.qvtrtoqvtc.TraceRecord;
+import org.eclipse.qvtd.build.qvtrtoqvtc.Rule;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
@@ -31,7 +31,7 @@ public class RelationDomainToTraceClassVar extends AbstractRule {
 	public boolean when(QvtrToQvtcTransformation transformation, Resource qvtrModel) {
 		ConstrainedRule rTotcRule = new RelationToTraceClass();
 		List<Bindings> loopData = rTotcRule.findInputMatches(qvtrModel);
-		for (TraceRecord rTotcRecord : transformation.executeRuleInLoop(rTotcRule, loopData)) {
+		for (Rule rTotcRecord : transformation.executeRuleInLoop(rTotcRule, loopData)) {
 			if(rTotcRecord.getBindings().get(RelationToTraceClass.r).equals(record.getBindings().get(RelationDomainToTraceClassVar.r))) {
 				tc = rTotcRecord.getBindings().get(RelationToTraceClass.rc);
 				rn = record.getBindings().get(RelationDomainToTraceClassVar.r).getName();

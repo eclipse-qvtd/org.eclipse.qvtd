@@ -20,7 +20,8 @@ import org.eclipse.qvtd.build.qvtrtoqvtc.PrimitivesBindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.RelationsBindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.RelationsBindings.Key;
-import org.eclipse.qvtd.build.qvtrtoqvtc.TraceRecord;
+import org.eclipse.qvtd.build.qvtrtoqvtc.utilities.TransformationTraceData;
+import org.eclipse.qvtd.build.qvtrtoqvtc.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -114,25 +115,18 @@ public class TopLevelRelationForMappingForEnforcement extends AbstractRule
 	}
 	
 	@Override
-	public boolean when(@NonNull RelationsBindings relationsBindings) {
+	public boolean when(@NonNull TransformationTraceData traceData) {
 		
 		Relation r = relationsBindings.get(RELATIONS_r);
 		RelationalTransformation rt = (RelationalTransformation) r.getTransformation();
-		RelationalTransformationToMappingTransformation rtTomtRule = new RelationalTransformationToMappingTransformation(transformation);
-		RelationsBindings innerRelationsBindings = new RelationsBindings(rtTomtRule);
-		innerRelationsBindings.put(RelationalTransformationToMappingTransformation.RELATIONS_rt, rt);
-		TraceRecord record = transformation.executeTopLevelRule(innerRelationsBindings);
+		RelationalTransformationToMappingTransformation rtTomtRule = new RelationalTransformationToMappingTransformation(transformation, rt);
+		Rule traceRule = traceData.getRecotd(rtTomtRule.getRelationsBindings());
+		if (traceRule == null)
+			return false;
 		
-		
-		PrimitivesBindings primitivesBindings = relationsBindings.getPrimitivesBindings();
-		
-		
-		RelationDomain rd = null;
-		
-		
-		
-		CoreBindings innerCoreBindings = innerRelationsBindings.getCoreBindings();
-		
+		mt = traceRule.getCoreRoot();
+		/*
+				
 		
 
 		primitivesBindings.put(PRIMITIVES_mt, innerCoreBindings.get(RelationalTransformationToMappingTransformation.CORE_MT));
@@ -148,6 +142,7 @@ public class TopLevelRelationForMappingForEnforcement extends AbstractRule
 		} else {
 			return false;
 		}
+		*/
 	}
 
 	
@@ -230,7 +225,7 @@ public class TopLevelRelationForMappingForEnforcement extends AbstractRule
 		
 		// T3
 		ConstrainedRule rule = new RWhenPatternToMGuardPattern(transformation);
-		TraceRecord rwpTomgpRecord = new RelationsBindings(rule).getTraceRecord();
+		Rule rwpTomgpRecord = new RelationsBindings(rule).getTraceRecord();
 		
 		
 		// RWhenPatternToMGuardPattern
@@ -238,13 +233,13 @@ public class TopLevelRelationForMappingForEnforcement extends AbstractRule
 		bindings = new Bindings();
 		bindings.put(RWhenPatternToMGuardPattern.r, record.getBindings().get(TopLevelRelationForMappingForEnforcement.r));
 		bindings.put(RWhenPatternToMGuardPattern.mg, record.getBindings().get(TopLevelRelationForMappingForEnforcement.mg));
-		TraceRecord rwpTomgpRecord = rule.creareTraceRecord(bindings);
+		Rule rwpTomgpRecord = rule.creareTraceRecord(bindings);
 		transformation.executeRule(rule, rwpTomgpRecord);
 		
 		// T4
 		rule = new DomainVarsSharedWithWhenToDgVars(transformation);
 		RelationsBindings innerRelationsBindings = new RelationsBindings(rule);
-		TraceRecord dvswwTodvRecord = innerRelationsBindings.getTraceRecord();
+		Rule dvswwTodvRecord = innerRelationsBindings.getTraceRecord();
 		CoreBindings innerCoreBindings = dvswwTodvRecord.getCoreBindings();
 		innerRelationsBindings.put(DomainVarsSharedWithWhenToDgVars.RELATIONS_domainVarsSharedWithWhen, domainVarsSharedWithWhen);
 		innerCoreBindings.put(DomainVarsSharedWithWhenToDgVars.CORE_dg, dg);

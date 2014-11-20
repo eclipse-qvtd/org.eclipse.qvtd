@@ -48,21 +48,18 @@ public class RelationToTraceClass extends AbstractRule
 	private static final @NonNull CoreBindings.KeySet CORE_BINDINGS = new CoreBindings.KeySet();
 	public static final @NonNull CoreBindings.Key<org.eclipse.ocl.examples.pivot.Class> CORE_rc = CORE_BINDINGS.create((org.eclipse.ocl.examples.pivot.Class)null, "rc");
 	public static final @NonNull CoreBindings.Key<Property> CORE_a = CORE_BINDINGS.create((Property)null, "a");
-	// Primitives
-	private static final @NonNull PrimitivesBindings.KeySet PRIMITIVES_BINDINGS = new PrimitivesBindings.KeySet();
-	private static final @NonNull PrimitivesBindings.Key<String> PRIMITIVES_rn = PRIMITIVES_BINDINGS.create((String)null, "rn");
-	private static final @NonNull PrimitivesBindings.Key<String> PRIMITIVES_vn = PRIMITIVES_BINDINGS.create((String)null, "vn");
 	
-	public RelationToTraceClass(@NonNull QvtrToQvtcTransformation transformation) {
+	// Primitives
+	//private static final @NonNull PrimitivesBindings.KeySet PRIMITIVES_BINDINGS = new PrimitivesBindings.KeySet();
+	//private static final @NonNull PrimitivesBindings.Key<String> PRIMITIVES_rn = PRIMITIVES_BINDINGS.create((String)null, "rn");
+	//private static final @NonNull PrimitivesBindings.Key<String> PRIMITIVES_vn = PRIMITIVES_BINDINGS.create((String)null, "vn");
+	
+	public RelationToTraceClass(@NonNull QvtrToQvtcTransformation transformation, @NonNull Relation r) {
 		super(transformation);
 	}
 	
 	public @NonNull CoreBindings.KeySet getCoreBindingsKeys() {
 		return CORE_BINDINGS;
-	}
-
-	public @NonNull PrimitivesBindings.KeySet getPrimitivesBindingsKeys() {
-		return PRIMITIVES_BINDINGS;
 	}
 
 	public @NonNull RelationsBindings.KeySet getRelationsBindingsKeys() {

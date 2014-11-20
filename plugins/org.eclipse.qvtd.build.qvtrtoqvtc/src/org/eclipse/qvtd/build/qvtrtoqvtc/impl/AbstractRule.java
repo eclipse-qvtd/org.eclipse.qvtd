@@ -14,51 +14,115 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.build.qvtrtoqvtc.ConstrainedRule;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.build.qvtrtoqvtc.CoreBindings;
-import org.eclipse.qvtd.build.qvtrtoqvtc.PrimitivesBindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.RelationsBindings;
-import org.eclipse.qvtd.build.qvtrtoqvtc.TraceRecord;
+import org.eclipse.qvtd.build.qvtrtoqvtc.RelationsBindings.KeySet;
+import org.eclipse.qvtd.build.qvtrtoqvtc.Rule;
+import org.eclipse.qvtd.build.qvtrtoqvtc.utilities.TransformationTraceData;
 
-public abstract class AbstractRule implements ConstrainedRule
+public class AbstractRule implements Rule
 {
-	private static final @NonNull PrimitivesBindings.KeySet EMPTY_PRIMITIVES_BINDINGS = new PrimitivesBindings.KeySet();
+	
+	public static abstract class Factory {
+		
+		public abstract @Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation,  @NonNull EObject eo);
+		
+		public @NonNull List<Rule> getRules(@NonNull QvtrToQvtcTransformation transformation, @NonNull Resource inputModel) {
+			List<Rule> rules = new ArrayList<Rule>();
+			TreeIterator<EObject> it = inputModel.getAllContents();
+			while(it.hasNext()) {
+				EObject eo = it.next();
+				Rule rule = createRule(transformation, eo);
+				if (rule != null) {
+					rules.add(rule);
+				}
+			}
+			return rules;
+		}
+	}
+	
 	protected final @NonNull QvtrToQvtcTransformation transformation;
+	private boolean executed = false;
+	protected RelationsBindings relationsBindings;
+	protected CoreBindings coreBindings;
+	
 
 	protected AbstractRule(@NonNull QvtrToQvtcTransformation transformation) {
 		this.transformation = transformation;
 	}
 	
-	public @NonNull List<RelationsBindings> findInputMatches(@NonNull Resource inputModel) {
-		return new ArrayList<RelationsBindings>();
+	
+	@Override
+	@NonNull
+	public RelationsBindings getRelationsBindings() {
+		
+		return relationsBindings;
+	}
+	
+	@Override
+	@NonNull
+	public CoreBindings getCoreBindings() {
+		
+		return coreBindings;
 	}
 
-	public @NonNull PrimitivesBindings.KeySet getPrimitivesBindingsKeys() {
-		return EMPTY_PRIMITIVES_BINDINGS;
+
+	@Override
+	@NonNull
+	public RelationsBindings.KeySet getRelationsBindingsKeys() {
+		return (RelationsBindings.KeySet) relationsBindings.keySet();
 	}
 	
-	public List<EObject> instantiateOutputElements(Map<Class<? extends EObject>, List<EObject>> outputModelElements, @NonNull CoreBindings coreBindings) {
-		return new ArrayList<EObject>();
+	@Override
+	@NonNull
+	public CoreBindings.KeySet getCoreBindingsKeys() {
+		return (CoreBindings.KeySet) coreBindings.keySet();
 	}
-	
-	public List<EObject> instantiateMiddleElements(Map<Class<? extends EObject>, List<EObject>> qvtcMiddleElements, @NonNull CoreBindings coreBindings) {
-		return new ArrayList<EObject>();
+
+
+	@Override
+	public boolean hasExecuted() {
+		// TODO Auto-generated method stub
+		return false;
 	}
-	
-	public boolean matchBindings(@NonNull TraceRecord tr, @NonNull RelationsBindings relationsBindings) {
-		RelationsBindings traceBindings = tr.getRelationsBindings();
-		return relationsBindings.matches(getRelationsBindingsKeys(), traceBindings);
+
+
+	@Override
+	public List<EObject> instantiateOutputElements(
+			Map<Class<? extends EObject>, List<EObject>> outputModelElements) {
+		throw new UnsupportedOperationException();
 	}
-	
-	public void setAttributes(@NonNull CoreBindings coreBindings) { }
-	
-	public boolean when(@NonNull RelationsBindings relationsBindings) {
-		return true;
+
+
+	@Override
+	public void setAttributes() {
+		// TODO Auto-generated method stub
+		
 	}
-	
-	public void where(@NonNull CoreBindings coreBindings) { }
+
+
+	@Override
+	public void setExecuted(boolean executed) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public boolean when(@NonNull TransformationTraceData traceData) {
+		
+		return false;
+	}
+
+
+	@Override
+	public void where() {
+		
+	}
 }

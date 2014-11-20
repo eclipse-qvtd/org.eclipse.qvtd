@@ -57,7 +57,11 @@ public abstract class AbstractBindings
 	protected final @NonNull Map<Key<?>, Object> delegate = new HashMap<Key<?>, Object>();
 //	private Integer hashCode = null;				// Non-nuyll once Bindings becomes readOnly.
 	
-	protected AbstractBindings() {}
+	protected final Rule rule;
+	
+	protected AbstractBindings(Rule rule) {
+		this.rule = rule;
+	}
 	
 	public void clear() {
 		delegate.clear();
@@ -91,7 +95,9 @@ public abstract class AbstractBindings
 	} */
 	
 
-	public abstract @NonNull ConstrainedRule getRule();
+	public @NonNull Rule getRule() {
+		return rule;
+	}
 
 /*	@Override
 	public int hashCode() {

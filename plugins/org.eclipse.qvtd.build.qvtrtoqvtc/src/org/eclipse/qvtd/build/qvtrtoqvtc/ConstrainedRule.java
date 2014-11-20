@@ -68,7 +68,7 @@ public interface ConstrainedRule {
 	 * @param bindings
 	 * @return
 	 */
-	public boolean matchBindings(@NonNull TraceRecord tr, @NonNull RelationsBindings relationsBindings);
+	public boolean matchBindings(@NonNull Rule tr, @NonNull RelationsBindings relationsBindings);
 	
 	/**
 	 * Sets the attributes.

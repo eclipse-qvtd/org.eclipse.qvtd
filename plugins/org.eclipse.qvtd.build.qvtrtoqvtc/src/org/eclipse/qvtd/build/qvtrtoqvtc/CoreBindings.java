@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.build.qvtrtoqvtc.RelationsBindings.Key;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.AbstractTraceRecord;
 
 public class CoreBindings extends AbstractBindings
@@ -46,15 +47,12 @@ public class CoreBindings extends AbstractBindings
 		}
 	}
 
-	private final @NonNull PrimitivesBindings primitivesBindings;
-	private @Nullable TraceRecord traceRecord = null;
-	
-	public CoreBindings(@NonNull PrimitivesBindings primitivesBindings) {
-		this.primitivesBindings = primitivesBindings;
+	public CoreBindings(Rule rule) {
+		super(rule);
 	}
-	
+	/*
 	protected void checkKey(@NonNull AbstractBindings.Key<?> key) {
-		ConstrainedRule rule = primitivesBindings.getRule();
+		
 		for (Key<?> relationsKey : rule.getCoreBindingsKeys().getKeys()) {
 			if (relationsKey == key) {
 				return;
@@ -62,6 +60,7 @@ public class CoreBindings extends AbstractBindings
 		}
 		throw new IllegalArgumentException("Incompatible core key " + key + " for " + rule);
 	}
+	*/
 
 	public boolean containsKey(@NonNull Key<?> key) {
 		return delegate.containsKey(key);
@@ -70,26 +69,6 @@ public class CoreBindings extends AbstractBindings
 	@SuppressWarnings("unchecked")
 	public <T> T get(@NonNull Key<T> key) {
 		return (T) delegate.get(key);
-	}
-
-	public @NonNull PrimitivesBindings getPrimitivesBindings() {
-		return primitivesBindings;
-	}
-
-	public @NonNull RelationsBindings getRelationsBindings() {
-		return primitivesBindings.getRelationsBindings();
-	}
-
-	public @NonNull ConstrainedRule getRule() {
-		return primitivesBindings.getRule();
-	}
-	
-	public @NonNull TraceRecord getTraceRecord() {
-		TraceRecord traceRecord2 = traceRecord ;
-		if (traceRecord2 == null) {
-			traceRecord = traceRecord2 = new AbstractTraceRecord(this);
-		}
-		return traceRecord2;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -101,4 +80,5 @@ public class CoreBindings extends AbstractBindings
 	public <T> T remove(@NonNull Key<T> key) {
 		return (T) delegate.remove(key);
 	}
+
 }

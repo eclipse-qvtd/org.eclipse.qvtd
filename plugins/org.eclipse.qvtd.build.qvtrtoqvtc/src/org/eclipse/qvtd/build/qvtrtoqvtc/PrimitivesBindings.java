@@ -83,7 +83,7 @@ public class PrimitivesBindings extends AbstractBindings
 		return relationsBindings;
 	}
 	
-	public @NonNull TraceRecord getTraceRecord() {
+	public @NonNull Rule getTraceRecord() {
 		return getCoreBindings().getTraceRecord();
 	}
 

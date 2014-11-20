@@ -14,12 +14,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.build.qvtrtoqvtc.CoreBindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.PrimitivesBindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.RelationsBindings;
-import org.eclipse.qvtd.build.qvtrtoqvtc.TraceRecord;
+import org.eclipse.qvtd.build.qvtrtoqvtc.Rule;
 
-public class AbstractTraceRecord implements TraceRecord {
+public class AbstractTraceRecord implements Rule {
 	
-	private boolean executed = false;
-	private final @NonNull CoreBindings coreBindings;
+	
 	
 	public AbstractTraceRecord(@NonNull CoreBindings coreBindings) {
 		this.coreBindings = coreBindings;
