@@ -12,7 +12,6 @@ package org.eclipse.qvtd.build.qvtrtoqvtc.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -22,15 +21,12 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.build.qvtrtoqvtc.CoreBindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.RelationsBindings;
-import org.eclipse.qvtd.build.qvtrtoqvtc.RelationsBindings.KeySet;
 import org.eclipse.qvtd.build.qvtrtoqvtc.Rule;
-import org.eclipse.qvtd.build.qvtrtoqvtc.utilities.TransformationTraceData;
 
-public class AbstractRule implements Rule
+public abstract class AbstractRule implements Rule
 {
-	
-	public static abstract class Factory {
-		
+	protected static abstract class Factory implements Rule.Factory
+	{
 		public abstract @Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation,  @NonNull EObject eo);
 		
 		public @NonNull List<Rule> getRules(@NonNull QvtrToQvtcTransformation transformation, @NonNull Resource inputModel) {
@@ -38,9 +34,11 @@ public class AbstractRule implements Rule
 			TreeIterator<EObject> it = inputModel.getAllContents();
 			while(it.hasNext()) {
 				EObject eo = it.next();
-				Rule rule = createRule(transformation, eo);
-				if (rule != null) {
-					rules.add(rule);
+				if (eo != null) {
+					Rule rule = createRule(transformation, eo);
+					if (rule != null) {
+						rules.add(rule);
+					}
 				}
 			}
 			return rules;
@@ -48,35 +46,25 @@ public class AbstractRule implements Rule
 	}
 	
 	protected final @NonNull QvtrToQvtcTransformation transformation;
+	protected final @NonNull RelationsBindings relationsBindings = new RelationsBindings(this);
+	protected final @NonNull CoreBindings coreBindings = new CoreBindings(this);	
 	private boolean executed = false;
-	protected RelationsBindings relationsBindings;
-	protected CoreBindings coreBindings;
-	
 
 	protected AbstractRule(@NonNull QvtrToQvtcTransformation transformation) {
 		this.transformation = transformation;
 	}
-	
-	
-	@Override
-	@NonNull
-	public RelationsBindings getRelationsBindings() {
-		
-		return relationsBindings;
+
+	public void check() {
+		throw new UnsupportedOperationException();
+	}
+
+	public void enforce() {
+		throw new UnsupportedOperationException();
 	}
 	
 	@Override
-	@NonNull
-	public CoreBindings getCoreBindings() {
-		
+	public @NonNull CoreBindings getCoreBindings() {
 		return coreBindings;
-	}
-
-
-	@Override
-	@NonNull
-	public RelationsBindings.KeySet getRelationsBindingsKeys() {
-		return (RelationsBindings.KeySet) relationsBindings.keySet();
 	}
 	
 	@Override
@@ -84,45 +72,41 @@ public class AbstractRule implements Rule
 	public CoreBindings.KeySet getCoreBindingsKeys() {
 		return (CoreBindings.KeySet) coreBindings.keySet();
 	}
+	
+	@Override
+	public @NonNull RelationsBindings getRelationsBindings() {
+		return relationsBindings;
+	}
 
+	@Override
+	@NonNull
+	public RelationsBindings.KeySet getRelationsBindingsKeys() {
+		return (RelationsBindings.KeySet) relationsBindings.keySet();
+	}
+
+//	public @NonNull List<? extends SubRecord> getSubRecords() {
+//		return EMPTY_SUBRECORDS;
+//	}
 
 	@Override
 	public boolean hasExecuted() {
-		// TODO Auto-generated method stub
-		return false;
+		return executed;
 	}
-
 
 	@Override
-	public List<EObject> instantiateOutputElements(
-			Map<Class<? extends EObject>, List<EObject>> outputModelElements) {
-		throw new UnsupportedOperationException();
-	}
-
-
-	@Override
-	public void setAttributes() {
-		// TODO Auto-generated method stub
-		
-	}
+	public void setAttributes() {}
 
 
 	@Override
 	public void setExecuted(boolean executed) {
-		// TODO Auto-generated method stub
-		
+		executed = true;
 	}
-
 
 	@Override
-	public boolean when(@NonNull TransformationTraceData traceData) {
-		
-		return false;
+	public boolean when() {
+		return true;
 	}
-
 
 	@Override
-	public void where() {
-		
-	}
+	public void where() {}
 }

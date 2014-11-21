@@ -48,8 +48,7 @@ public class QvtrToQvtcTests extends LoadTestCase {
     
     @Test
     public void testTransformation() throws Exception {
-    	
-    	System.out.println(getClass().getResource("."));
+//    	System.out.println(getClass().getResource("."));
     	URL projectURL = this.getClass().getResource("abstracttoconcrete/AbstractToConcrete.qvtras");
     	File f = new File(projectURL.getFile());
     	URI qvtrURI = URI.createFileURI(f.toString());
@@ -58,15 +57,17 @@ public class QvtrToQvtcTests extends LoadTestCase {
     	qvtcURI = qvtcURI.appendFileExtension("qvtcas");
     	Resource qvtcResource = metaModelManager.getExternalResourceSet().createResource(qvtcURI, null);
     	URI qvtcTraceURI = qvtrURI.trimFileExtension();
-    	qvtcTraceURI = qvtcTraceURI.appendFileExtension("ecore");
+    	qvtcTraceURI = qvtcTraceURI.appendFileExtension("ecore.oclas");
     	Resource qvtcTraceResource = metaModelManager.getExternalResourceSet().createResource(qvtcTraceURI, null);
     	QvtrToQvtcTransformation t = new QvtrToQvtcTransformation(qvtrResource, qvtcResource, qvtcTraceResource);
 		t.prepare();
 		t.execute();
-		t.dispose();
 		Map<Object, Object> options = new HashMap<Object, Object>();
         options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
+		qvtcResource.getContents().addAll(t.getCoreRoots());
         qvtcResource.save(options);
+		qvtcTraceResource.getContents().addAll(t.getTraceRoots());
+		qvtcTraceResource.save(options);
     }
 
 }

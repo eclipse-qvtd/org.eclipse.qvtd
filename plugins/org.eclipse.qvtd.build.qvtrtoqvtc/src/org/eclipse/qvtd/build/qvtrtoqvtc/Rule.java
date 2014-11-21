@@ -11,13 +11,11 @@
 package org.eclipse.qvtd.build.qvtrtoqvtc;
 
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.build.qvtrtoqvtc.utilities.TransformationTraceData;
 
 
 /**
@@ -29,8 +27,10 @@ public interface Rule {
 	public interface Factory {
 		
 		@Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation,  @NonNull EObject eo);
-		List<Rule> getRules(@NonNull Resource inputModel);
+		@NonNull List<Rule> getRules(@NonNull QvtrToQvtcTransformation transformation, @NonNull Resource inputModel);
 	}
+
+	public interface SubRecord {}
 
 	//@NonNull PrimitivesBindings getPrimitivesBindings();
 
@@ -53,6 +53,7 @@ public interface Rule {
 	@NonNull RelationsBindings.KeySet getRelationsBindingsKeys();
 	@NonNull CoreBindings.KeySet getCoreBindingsKeys();
 
+//	@NonNull List<? extends SubRecord> getSubRecords();
 	
 	/**
 	 * Was executed.
@@ -70,12 +71,17 @@ public interface Rule {
 	//public List<EObject> instantiateMiddleElements(Map<Class<? extends EObject>, List<EObject>> qvtcMiddleElements, @NonNull CoreBindings coreBindings);
 	
 	/**
+	 * Derive input elements.
+	 */
+	void check();
+	
+	/**
 	 * Instantiate output elements.
 	 *
 	 * @param qvtcModelElements the qvtc model elements
 	 * @return the list
 	 */
-	List<EObject> instantiateOutputElements(Map<Class<? extends EObject>, List<EObject>> outputModelElements);
+	void enforce();
 	
 	/**
 	 * Match a Bindings to the types requried by the rule 
@@ -107,7 +113,7 @@ public interface Rule {
 	 * @param transformation the transformation
 	 * @return true, if successful
 	 */
-	public boolean when(@NonNull TransformationTraceData traceData);
+	public boolean when();
 	
 	/**
 	 * Where.

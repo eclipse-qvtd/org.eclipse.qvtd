@@ -12,6 +12,7 @@ package org.eclipse.qvtd.build.qvtrtoqvtc;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,9 +22,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.build.qvtrtoqvtc.Rule.Factory;
-import org.eclipse.qvtd.build.qvtrtoqvtc.evaluation.RuleFactory;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RelationalTransformationToMappingTransformation;
+import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RelationalTransformationToTracePackage;
 import org.eclipse.qvtd.build.qvtrtoqvtc.utilities.TransformationTraceData;
 import org.eclipse.qvtd.build.qvtrtoqvtc.utilities.TransformationTraceDataImpl;
 
@@ -35,12 +35,13 @@ public class QvtrToQvtcTransformation
 	
 	@SuppressWarnings("unused")
 	private final @Nullable Resource qvtcTraceModel;
-	private Rule.Factory[] ruleFactories;
+//	private Rule.Factory[] ruleFactories;
 	
 	@SuppressWarnings("unused")
 	private Map<EClass, List<EObject>> allInstancesCache;
-	private final @NonNull Map<Class<? extends EObject>, List<EObject>> qvtcModelElements = new HashMap<Class<? extends EObject>, List<EObject>>();
-	private final @NonNull Map<Class<? extends EObject>, List<EObject>> qvtcMiddleElements = new HashMap<Class<? extends EObject>, List<EObject>>();
+	private final @NonNull List<EObject> potentialOrphans = new ArrayList<EObject>();
+	private final @NonNull List<EObject> traceRoots = new ArrayList<EObject>();
+	private final @NonNull List<EObject> coreRoots = new ArrayList<EObject>();
 
 	public QvtrToQvtcTransformation(@NonNull Resource qvtrModel, @NonNull Resource qvtcModel, @Nullable Resource qvtcTraceModel) {
 		this.qvtrModel = qvtrModel;		
@@ -48,6 +49,10 @@ public class QvtrToQvtcTransformation
 		this.qvtcTraceModel = qvtcTraceModel;
 		allInstancesCache = new HashMap<EClass, List<EObject>>();
 		traceData = new TransformationTraceDataImpl();
+	}
+
+	public void addOrphan(@NonNull EObject eObject) {
+		potentialOrphans.add(eObject);
 	}
 	
 	// Save the qvtc resource
@@ -57,27 +62,37 @@ public class QvtrToQvtcTransformation
 	}
 
 	public void execute() {
-		// Only invoke "top" rules
-		for (Rule.Factory factory: ruleFactories) {
-			if (factory != null) {
-				// Top rules need binding of inputs from the resource
-				for (Rule rule : factory.getRules(qvtrModel)) {
-					if (rule != null) {
-						executeTopLevelRule(rule);
-						if (rule.hasExecuted()) {
-							traceData.addRecord(rule);
-						}
-					}
+		executeFactory(RelationalTransformationToTracePackage.FACTORY);
+		for (EObject eObject : potentialOrphans) {
+			if (eObject.eContainer() == null) {
+				traceRoots.add(eObject);
+			}
+		}
+		potentialOrphans.clear();
+		executeFactory(RelationalTransformationToMappingTransformation.FACTORY);
+		for (EObject eObject : potentialOrphans) {
+			if (eObject.eContainer() == null) {
+				coreRoots.add(eObject);
+			}
+		}
+	}
+
+	public void executeFactory(@NonNull Rule.Factory factory) {
+		for (Rule rule : factory.getRules(this, qvtrModel)) {
+			if (rule != null) {
+				executeTopLevelRule(rule);
+				if (rule.hasExecuted()) {
+					traceData.addRecord(rule);
 				}
 			}
 		}
 	}
-	/*
-	public void executeNestedRule(@NonNull CoreBindings coreBindings) {
-		RelationsBindings relationsBindings = coreBindings.getRelationsBindings();
-		ConstrainedRule rule = relationsBindings.getRule();
-		if (rule.when(relationsBindings)) {
-			for (EObject eo : rule.instantiateOutputElements(qvtcModelElements, coreBindings)) {
+	
+	public void executeNestedRule(@NonNull Rule rule) {
+		rule.check();
+		if (rule.when()) {
+			rule.enforce();
+/*			for (EObject eo : rule.enforce(qvtcModelElements)) {
 				if (qvtcModelElements.containsKey(eo.getClass())) {
 					qvtcModelElements.get(eo.getClass()).add(eo);
 				} else {
@@ -85,18 +100,19 @@ public class QvtrToQvtcTransformation
 					temp.add(eo);
 					qvtcModelElements.put(eo.getClass(), temp);
 				}
-			}
-			coreBindings.getTraceRecord().setExecuted(true);
-			rule.setAttributes(coreBindings);
-			rule.where(coreBindings);
+			} */
+			rule.setExecuted(true);
+			rule.setAttributes();
+			rule.where();
 		}
 	}
-	*/
 	
 	public void executeTopLevelRule(@NonNull Rule rule) {
+		rule.check();
 		if (!rule.hasExecuted()) {
 			if (rule.when()) {
-				for (EObject eo : rule.instantiateOutputElements(qvtcModelElements)) {
+				rule.enforce();
+/*				for (EObject eo : rule.enforce(potentialOrphans)) {
 					if (qvtcModelElements.containsKey(eo.getClass())) {
 						qvtcModelElements.get(eo.getClass()).add(eo);
 					} else {
@@ -104,7 +120,7 @@ public class QvtrToQvtcTransformation
 						temp.add(eo);
 						qvtcModelElements.put(eo.getClass(), temp);
 					}
-				}
+				} */
 				/*
 				for (EObject eo : rule.instantiateMiddleElements(qvtcMiddleElements)) {
 					if (qvtcMiddleElements.containsKey(eo.getClass())) {
@@ -131,6 +147,18 @@ public class QvtrToQvtcTransformation
 	public Resource getQvtcSource() {
 		return qvtcModel;
 	}
+
+	public @Nullable Rule getRecord(@NonNull RelationsBindings relationsBindings) {
+		return traceData.getRecord(relationsBindings);
+	}
+
+	public @NonNull Collection<? extends EObject> getCoreRoots() {
+		return coreRoots;
+	}
+
+	public @NonNull Collection<? extends EObject> getTraceRoots() {
+		return traceRoots;
+	}
 	
 	// Create the top rules, and search the input model for the appropriate types, when possible?
 	public void prepare() {
@@ -141,13 +169,14 @@ public class QvtrToQvtcTransformation
 			e.printStackTrace();
 			// EXIT!
 		} finally {
-			if (qvtrModel.isLoaded()) {
+//			if (qvtrModel.isLoaded()) {
 				//RuleFactory factory = new RuleFactory();
 				//rules = factory.createTopRules(this);
-				ruleFactories = new Rule.Factory[] {
-						(Factory) RelationalTransformationToMappingTransformation.FACTORY
-				};
-			}
+//				ruleFactories = new Rule.Factory[] {
+//						RelationalTransformationToMappingTransformation.FACTORY,
+//						RelationToTraceClass.FACTORY
+//				};
+//			}
 		}
 	}
 

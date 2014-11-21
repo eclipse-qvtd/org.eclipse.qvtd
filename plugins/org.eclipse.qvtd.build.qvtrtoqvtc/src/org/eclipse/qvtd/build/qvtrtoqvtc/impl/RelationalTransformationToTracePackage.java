@@ -16,24 +16,22 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.Package;
+import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.qvtd.build.qvtrtoqvtc.CoreBindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.RelationsBindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.Rule;
-import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 
-public class RelationalTransformationToMappingTransformation extends AbstractRule
+public class RelationalTransformationToTracePackage extends AbstractRule
 {
 	private static class Factory extends AbstractRule.Factory
 	{
 		public @Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation, @NonNull EObject eo) {
 			Rule rule = null;
 			if (eo instanceof RelationalTransformation) {	
-				rule = new RelationalTransformationToMappingTransformation(transformation, (RelationalTransformation) eo);
+				rule = new RelationalTransformationToTracePackage(transformation, (RelationalTransformation) eo);
 			}
 			return rule;
 		}
@@ -41,14 +39,13 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 	
 	private static class SubRecord implements AbstractRule.SubRecord
 	{
-//		public final @NonNull TypedModel rtm;
-		public final @Nullable String tmn;
-		public final @NonNull List<org.eclipse.ocl.examples.pivot.Package> up;
+		public final @NonNull Relation r;
+		public final @Nullable String rn;
+		public org.eclipse.ocl.examples.pivot.Class c;
 	
-		public SubRecord(@NonNull TypedModel rtm, @Nullable String tmn, @NonNull List<org.eclipse.ocl.examples.pivot.Package> up) {
-//			this.rtm = rtm;
-			this.tmn = tmn;
-			this.up = up;
+		public SubRecord(@NonNull Relation r, @Nullable String rn) {
+			this.r = r;
+			this.rn = rn;
 		}
 	}
 
@@ -56,19 +53,17 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 	
 	private static final @NonNull RelationsBindings.KeySet RELATIONS_BINDINGS = new RelationsBindings.KeySet();
 	public static final @NonNull RelationsBindings.Key<RelationalTransformation> RELATIONS_rt = RELATIONS_BINDINGS.createRoot((RelationalTransformation)null, "rt");
-//	private static final @NonNull RelationsBindings.Key<TypedModel> RELATIONS_rtm = RELATIONS_BINDINGS.create((TypedModel)null, "rtm");
 	
 	// Core
 	private static final @NonNull CoreBindings.KeySet CORE_BINDINGS = new CoreBindings.KeySet();
-	public static final @NonNull CoreBindings.Key<Transformation> CORE_mt = CORE_BINDINGS.create((Transformation)null, "mt");
-//	public static final @NonNull CoreBindings.Key<TypedModel> CORE_MTM = CORE_BINDINGS.create((TypedModel)null, "mtm");
+	public static final @NonNull CoreBindings.Key<org.eclipse.ocl.examples.pivot.Package> CORE_p = CORE_BINDINGS.create((org.eclipse.ocl.examples.pivot.Package)null, "p");
 	
 	// Primitives
 	String rtn;
 
 	private final @NonNull List<SubRecord> subRecords = new ArrayList<SubRecord>();
 
-	public RelationalTransformationToMappingTransformation(@NonNull QvtrToQvtcTransformation transformation, @NonNull RelationalTransformation rt) {
+	public RelationalTransformationToTracePackage(@NonNull QvtrToQvtcTransformation transformation, @NonNull RelationalTransformation rt) {
 		super(transformation);
 		relationsBindings.put(RELATIONS_rt, rt);
 	}
@@ -77,27 +72,30 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 	public void check() {
 		RelationalTransformation rt = relationsBindings.get(RELATIONS_rt);
 		rtn = rt.getName();
-		Transformation mt = coreBindings.get(CORE_mt);
-		assert (rt != null) && (mt == null);
-		for (TypedModel rtm : rt.getModelParameter()) {
-			@SuppressWarnings("null")@NonNull List<Package> usedPackage = rtm.getUsedPackage();
-			subRecords.add(new SubRecord(rtm, rtm.getName(), usedPackage));
+		org.eclipse.ocl.examples.pivot.Package p = coreBindings.get(CORE_p);
+		assert (rt != null) && (p == null);
+		for (org.eclipse.qvtd.pivot.qvtbase.Rule br : rt.getRule()) {
+			if (br instanceof Relation) {
+				Relation r = (Relation)br;
+				subRecords.add(new SubRecord(r, r.getName()));
+			}
 		}
 	}
 	
 	@Override
 	public void enforce() {
-		Transformation mt = coreBindings.get(CORE_mt);
-		assert mt == null;
-		mt = QVTbaseFactory.eINSTANCE.createTransformation();
-		assert mt != null;
-		coreBindings.put(CORE_mt, mt);
-		transformation.addOrphan(mt);
+		org.eclipse.ocl.examples.pivot.Package p = coreBindings.get(CORE_p);
+		assert p == null;
+		p = PivotFactory.eINSTANCE.createPackage();
+		assert p != null;
+		p.setName("T" + rtn);
+		coreBindings.put(CORE_p, p);
+		transformation.addOrphan(p);
 		for (SubRecord subRecord : subRecords) {
-			TypedModel mtm = QVTbaseFactory.eINSTANCE.createTypedModel();
-			mtm.setName(subRecord.tmn);
-			mtm.getUsedPackage().addAll(subRecord.up);
-			mt.getModelParameter().add(mtm);
+			org.eclipse.ocl.examples.pivot.Class c = PivotFactory.eINSTANCE.createClass();
+			c.setName("T" + subRecord.rn);
+			p.getOwnedType().add(c);
+			subRecord.c = c;
 		}
 	}
 
@@ -107,5 +105,17 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 	
 	public @NonNull CoreBindings.KeySet getCoreBindingsKeys() {
 		return CORE_BINDINGS;
+	}
+	
+	@Override
+	public void where() {
+		for (SubRecord subRecord : subRecords) {
+			RelationToTraceClass innerRule = new RelationToTraceClass(transformation);
+			RelationsBindings innerRelationsBindings = innerRule.getRelationsBindings();
+			innerRelationsBindings.put(RelationToTraceClass.RELATIONS_r, subRecord.r);
+			CoreBindings innerCoreBindings = innerRule.getCoreBindings();
+			innerCoreBindings.put(RelationToTraceClass.CORE_rc, subRecord.c);
+			transformation.executeNestedRule(innerRule);
+		}
 	}
 }

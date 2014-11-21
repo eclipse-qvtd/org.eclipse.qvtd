@@ -24,12 +24,12 @@ public class TransformationTraceDataImpl implements TransformationTraceData
 	}
 
 	@Override
-	public void addRecord(Rule rule) {
+	public void addRecord(@NonNull Rule rule) {
 		traceRecords.put(rule.getRelationsBindings(), rule);
 	}
 
 	@Override
-	public Rule getRecotd(@NonNull RelationsBindings relationsBindings) {
+	public Rule getRecord(@NonNull RelationsBindings relationsBindings) {
 		return traceRecords.get(relationsBindings);
 	}
 	

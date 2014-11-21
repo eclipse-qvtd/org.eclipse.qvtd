@@ -12,18 +12,14 @@ package org.eclipse.qvtd.build.qvtrtoqvtc.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.qvtd.build.qvtrtoqvtc.CoreBindings;
-import org.eclipse.qvtd.build.qvtrtoqvtc.PrimitivesBindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.RelationsBindings;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -31,33 +27,79 @@ import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
-import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
+import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 public class RelationToTraceClass extends AbstractRule
 {
+	private static class SubRecord implements AbstractRule.SubRecord
+	{
+//		public final @NonNull RelationDomain rd;
+//		public final @NonNull DomainPattern rdp;
+		public final @NonNull ObjectTemplateExp t;
+//		public final @NonNull Variable tv;
+		public final @Nullable String vn;
+//		public final @NonNull Type c;
+		
+		public SubRecord(@NonNull RelationDomain rd, @NonNull DomainPattern rdp, @NonNull ObjectTemplateExp t, @NonNull Variable tv, @Nullable String vn, @NonNull Type c) {
+//			this.rd = rd;
+//			this.rdp = rdp;
+			this.t = t;
+//			this.tv = tv;
+			this.vn = vn;
+//			this.c = c;
+		}
+	}
+	
 	// Relations
 	private static final @NonNull RelationsBindings.KeySet RELATIONS_BINDINGS = new RelationsBindings.KeySet();
 	public static final @NonNull RelationsBindings.Key<Relation> RELATIONS_r = RELATIONS_BINDINGS.create((Relation)null, "r");
-	public static final @NonNull RelationsBindings.Key<RelationDomain> RELATIONS_rd = RELATIONS_BINDINGS.create((RelationDomain)null, "rd");
-	public static final @NonNull RelationsBindings.Key<DomainPattern> RELATIONS_rdp = RELATIONS_BINDINGS.create((DomainPattern)null, "rdp");
-	public static final @NonNull RelationsBindings.Key<ObjectTemplateExp> RELATIONS_t = RELATIONS_BINDINGS.create((ObjectTemplateExp)null, "t");
-	public static final @NonNull RelationsBindings.Key<Variable> RELATIONS_tv = RELATIONS_BINDINGS.create((Variable)null, "tv");
-	public static final @NonNull RelationsBindings.Key<Type> RELATIONS_c = RELATIONS_BINDINGS.create((Type)null, "c");
+//	public static final @NonNull RelationsBindings.Key<RelationDomain> RELATIONS_rd = RELATIONS_BINDINGS.create((RelationDomain)null, "rd");
+//	public static final @NonNull RelationsBindings.Key<DomainPattern> RELATIONS_rdp = RELATIONS_BINDINGS.create((DomainPattern)null, "rdp");
+//	public static final @NonNull RelationsBindings.Key<ObjectTemplateExp> RELATIONS_t = RELATIONS_BINDINGS.create((ObjectTemplateExp)null, "t");
+//	public static final @NonNull RelationsBindings.Key<Variable> RELATIONS_tv = RELATIONS_BINDINGS.create((Variable)null, "tv");
+//	public static final @NonNull RelationsBindings.Key<Type> RELATIONS_c = RELATIONS_BINDINGS.create((Type)null, "c");
 
 	// Core
 	private static final @NonNull CoreBindings.KeySet CORE_BINDINGS = new CoreBindings.KeySet();
 	public static final @NonNull CoreBindings.Key<org.eclipse.ocl.examples.pivot.Class> CORE_rc = CORE_BINDINGS.create((org.eclipse.ocl.examples.pivot.Class)null, "rc");
-	public static final @NonNull CoreBindings.Key<Property> CORE_a = CORE_BINDINGS.create((Property)null, "a");
+//	public static final @NonNull CoreBindings.Key<Property> CORE_a = CORE_BINDINGS.create((Property)null, "a");
 	
-	// Primitives
-	//private static final @NonNull PrimitivesBindings.KeySet PRIMITIVES_BINDINGS = new PrimitivesBindings.KeySet();
-	//private static final @NonNull PrimitivesBindings.Key<String> PRIMITIVES_rn = PRIMITIVES_BINDINGS.create((String)null, "rn");
-	//private static final @NonNull PrimitivesBindings.Key<String> PRIMITIVES_vn = PRIMITIVES_BINDINGS.create((String)null, "vn");
+	private final @NonNull List<SubRecord> subRecords = new ArrayList<SubRecord>();
 	
-	public RelationToTraceClass(@NonNull QvtrToQvtcTransformation transformation, @NonNull Relation r) {
+	public RelationToTraceClass(@NonNull QvtrToQvtcTransformation transformation) {
 		super(transformation);
 	}
-	
+
+	public void check() {
+		Relation r = relationsBindings.get(RELATIONS_r);
+		assert r != null;
+		for (Domain d : r.getDomain()) {
+			RelationDomain rd = (RelationDomain) d;
+			DomainPattern rdp = rd.getPattern();
+			TemplateExp templateExpression = rdp.getTemplateExpression();
+			if (templateExpression instanceof ObjectTemplateExp) {
+				ObjectTemplateExp t = (ObjectTemplateExp) templateExpression;
+				Variable tv = t.getBindsTo();
+				Type c = t.getType();
+				if ((tv != null) && (c != null)) {
+					subRecords.add(new SubRecord(rd, rdp, t, tv, tv.getName(), c));
+				}
+			}
+		}
+	}
+
+	@Override
+	public void enforce() {
+		org.eclipse.ocl.examples.pivot.Class rc = coreBindings.get(CORE_rc);
+		assert (rc != null);
+		rc = PivotFactory.eINSTANCE.createClass();
+		for (SubRecord subRecord : subRecords) {
+			Property a = PivotFactory.eINSTANCE.createProperty();
+			a.setName(subRecord.vn);
+			rc.getOwnedAttribute().add(a);
+		}
+	}
+
 	public @NonNull CoreBindings.KeySet getCoreBindingsKeys() {
 		return CORE_BINDINGS;
 	}
@@ -65,129 +107,21 @@ public class RelationToTraceClass extends AbstractRule
 	public @NonNull RelationsBindings.KeySet getRelationsBindingsKeys() {
 		return RELATIONS_BINDINGS;
 	}
-	
-	@Override
-	public @NonNull List<RelationsBindings> findInputMatches(@NonNull Resource inputModel) {
-		List<RelationsBindings> loopData = new ArrayList<RelationsBindings>();
-		TreeIterator<EObject> it = inputModel.getAllContents();
-		while(it.hasNext()) {
-			EObject eo = it.next();
-			if (eo instanceof Relation) {
-				Relation eo2 = (Relation) eo;
-				for (Domain d : eo2.getDomain()) {
-					RelationDomain rd = (RelationDomain) d;
-					if (rd.getPattern().getTemplateExpression() instanceof ObjectTemplateExp) {
-						RelationsBindings bindings = new RelationsBindings(this);
-						bindings.put(RELATIONS_r, eo2);
-						bindings.put(RELATIONS_rd, rd);
-						bindings.put(RELATIONS_rdp, rd.getPattern());
-						bindings.put(RELATIONS_t, (ObjectTemplateExp) rd.getPattern().getTemplateExpression());
-						bindings.put(RELATIONS_tv, rd.getPattern().getTemplateExpression().getBindsTo());
-						loopData.add(bindings);
-					}
-				}
-			} 
-			/*
-			else if(eo.eClass().getEAllSuperTypes().contains(rtEClass)) {
-			}
-			*/
-		}
-		return loopData;
+
+	public @NonNull List<SubRecord> getSubRecords() {
+		return subRecords;
 	}
 	
 	@Override
-	public boolean when(@NonNull RelationsBindings relationsBindings) {
-		Relation r = relationsBindings.get(RELATIONS_r);
-		RelationDomain rd = relationsBindings.get(RELATIONS_rd);
-		DomainPattern rdp = relationsBindings.get(RELATIONS_rdp);
-		ObjectTemplateExp t = relationsBindings.get(RELATIONS_t);
-		Variable tv = relationsBindings.get(RELATIONS_tv);
-		Type c = relationsBindings.get(RELATIONS_c);
-		if (r != null && rd != null && rdp != null && t != null && tv != null && c != null
-				&& r.getDomain().contains(rd)
-				&& rd.getPattern().equals(rdp)
-				&& rdp.getTemplateExpression().equals(t)
-				&& t.getBindsTo().equals(tv)
-				&& tv.getType().equals(c)) {
-			PrimitivesBindings primitivesBindings = relationsBindings.getPrimitivesBindings();
-			primitivesBindings.put(PRIMITIVES_rn, r.getName());
-			primitivesBindings.put(PRIMITIVES_vn, tv.getName());
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	@Override
-	public List<EObject> instantiateMiddleElements(Map<Class<? extends EObject>, List<EObject>> qvtcMiddleElements, @NonNull CoreBindings coreBindings) {
-		
-		List<EObject> results = new ArrayList<EObject>();
-		PivotFactory factory = PivotFactory.eINSTANCE;
-		org.eclipse.ocl.examples.pivot.Class rc = null;
-		Property a = null;
-		PrimitivesBindings primitivesBindings = coreBindings.getPrimitivesBindings();
-		String rn = primitivesBindings.get(PRIMITIVES_rn);
-		String vn = primitivesBindings.get(PRIMITIVES_vn);
-		if (qvtcMiddleElements.containsKey(org.eclipse.ocl.examples.pivot.Class.class)) {
-			for (EObject e : qvtcMiddleElements.get(org.eclipse.ocl.examples.pivot.Class.class)) {
-				if (((org.eclipse.ocl.examples.pivot.Class) e).getName().equals("T" + rn)) {
-					rc = (org.eclipse.ocl.examples.pivot.Class) e;
-				}
-			}
-			if (rc != null) {
-				if (qvtcMiddleElements.containsKey(Property.class)) {
-					for (EObject e : qvtcMiddleElements.get(Property.class)) {
-						if (((Property) e).getClass().equals(rc)
-								&& ((Property) e).getName().equals(vn)) {
-							a = (Property) e;
-						}
-					}
-				}
-			}
-		}
-		if (rc == null) {	
-			rc = factory.createClass();
-			results.add(rc);
-			
-		}
-		if (a == null) {
-			a = factory.createProperty();
-			results.add(a);
-		}
-		coreBindings.put(CORE_rc, rc);
-		coreBindings.put(CORE_a, a);
-		return results;
-	}
-
-	@Override
-	public void setAttributes(@NonNull CoreBindings coreBindings) {
+	public void where() {
 		org.eclipse.ocl.examples.pivot.Class rc = coreBindings.get(CORE_rc);
-		Property a = coreBindings.get(CORE_a);
-		PrimitivesBindings primitivesBindings = coreBindings.getPrimitivesBindings();
-		String rn = primitivesBindings.get(PRIMITIVES_rn);
-		String vn = primitivesBindings.get(PRIMITIVES_vn);
-		rc.setName('T' + rn);
-		a.setName(vn);
-		a.setType(rc);
-		rc.getOwnedAttribute().add(a);
-	}
-	
-	@Override
-	public void where(@NonNull CoreBindings bindings) {
-		ObjectTemplateExp t = bindings.getRelationsBindings().get(RELATIONS_t); 
-		for (PropertyTemplateItem part : t.getPart()) {
-			if (part.getValue() instanceof ObjectTemplateExp) {
-				RelationsBindings innerRelationsBindings = new RelationsBindings(new SubTemplateToTraceClassProps(transformation));
-				CoreBindings innerCoreBindings = innerRelationsBindings.getCoreBindings();
-				// TODO add other bindings!
-				ObjectTemplateExp objectTemplateExp = (ObjectTemplateExp)part.getValue();
-				innerRelationsBindings.put(SubTemplateToTraceClassProps.RELATIONS_t, objectTemplateExp);
-				innerRelationsBindings.put(SubTemplateToTraceClassProps.RELATIONS_tv, objectTemplateExp.getBindsTo());
-				innerRelationsBindings.put(SubTemplateToTraceClassProps.RELATIONS_c, objectTemplateExp.getBindsTo().getType());
-				innerCoreBindings.put(SubTemplateToTraceClassProps.CORE_rc, bindings.get(CORE_rc));
-				transformation.executeNestedRule(innerCoreBindings);
-			}
+		for (SubRecord subRecord : subRecords) {
+			SubTemplateToTraceClassProps innerRule = new SubTemplateToTraceClassProps(transformation);
+			RelationsBindings innerRelationsBindings = innerRule.getRelationsBindings();
+			innerRelationsBindings.put(SubTemplateToTraceClassProps.RELATIONS_t, subRecord.t);
+			CoreBindings innerCoreBindings = innerRule.getCoreBindings();
+			innerCoreBindings.put(SubTemplateToTraceClassProps.CORE_rc, rc);
+			transformation.executeNestedRule(innerRule);
 		}
 	}
-
 }

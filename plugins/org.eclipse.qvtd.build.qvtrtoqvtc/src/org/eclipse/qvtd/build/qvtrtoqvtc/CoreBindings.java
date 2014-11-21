@@ -15,8 +15,6 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.build.qvtrtoqvtc.RelationsBindings.Key;
-import org.eclipse.qvtd.build.qvtrtoqvtc.impl.AbstractTraceRecord;
 
 public class CoreBindings extends AbstractBindings
 {
