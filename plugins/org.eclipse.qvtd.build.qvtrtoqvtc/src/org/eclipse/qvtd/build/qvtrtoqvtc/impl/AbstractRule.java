@@ -18,24 +18,26 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.build.qvtrtoqvtc.CoreBindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
-import org.eclipse.qvtd.build.qvtrtoqvtc.RelationsBindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.Rule;
+import org.eclipse.qvtd.build.qvtrtoqvtc.RuleBindings;
+import org.eclipse.qvtd.build.qvtrtoqvtc.utilities.TransformationTraceData;
 
 public abstract class AbstractRule implements Rule
 {
 	protected static abstract class Factory implements Rule.Factory
 	{
-		public abstract @Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation,  @NonNull EObject eo);
+		public abstract @Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation,  @NonNull EObject eo,
+				@NonNull TransformationTraceData traceData);
 		
-		public @NonNull List<Rule> getRules(@NonNull QvtrToQvtcTransformation transformation, @NonNull Resource inputModel) {
+		public @NonNull List<Rule> getRules(@NonNull QvtrToQvtcTransformation transformation, @NonNull Resource inputModel,
+				@NonNull TransformationTraceData traceData) {
 			List<Rule> rules = new ArrayList<Rule>();
 			TreeIterator<EObject> it = inputModel.getAllContents();
 			while(it.hasNext()) {
 				EObject eo = it.next();
 				if (eo != null) {
-					Rule rule = createRule(transformation, eo);
+					Rule rule = createRule(transformation, eo, traceData);
 					if (rule != null) {
 						rules.add(rule);
 					}
@@ -45,9 +47,33 @@ public abstract class AbstractRule implements Rule
 		}
 	}
 	
+	
+	public abstract class AbstractSubRecord implements AbstractRule.SubRecord
+	{
+		protected final @NonNull RuleBindings ruleBindings;
+		
+		
+		protected AbstractSubRecord(@NonNull Rule rule) {
+			
+			ruleBindings = new RuleBindings(rule);
+		}
+		
+		@Override
+		public @NonNull RuleBindings getRuleBindings() {
+			return ruleBindings;
+		}
+
+		@Override
+		@NonNull
+		public RuleBindings.KeySet getRuleBindingsKeys() {
+			return (RuleBindings.KeySet) ruleBindings.keySet();
+		}
+	}
+	
 	protected final @NonNull QvtrToQvtcTransformation transformation;
-	protected final @NonNull RelationsBindings relationsBindings = new RelationsBindings(this);
-	protected final @NonNull CoreBindings coreBindings = new CoreBindings(this);	
+	protected final @NonNull RuleBindings ruleBindings = new RuleBindings(this);
+	protected final @NonNull List<SubRecord> subRecords = new ArrayList<SubRecord>();
+	
 	private boolean executed = false;
 
 	protected AbstractRule(@NonNull QvtrToQvtcTransformation transformation) {
@@ -58,35 +84,26 @@ public abstract class AbstractRule implements Rule
 		throw new UnsupportedOperationException();
 	}
 
-	public void enforce() {
+	public void instantiateOutput() {
 		throw new UnsupportedOperationException();
 	}
-	
-	@Override
-	public @NonNull CoreBindings getCoreBindings() {
-		return coreBindings;
-	}
-	
+
 	@Override
 	@NonNull
-	public CoreBindings.KeySet getCoreBindingsKeys() {
-		return (CoreBindings.KeySet) coreBindings.keySet();
-	}
-	
-	@Override
-	public @NonNull RelationsBindings getRelationsBindings() {
-		return relationsBindings;
+	public RuleBindings getRuleBindings() {
+		return ruleBindings;
 	}
 
 	@Override
 	@NonNull
-	public RelationsBindings.KeySet getRelationsBindingsKeys() {
-		return (RelationsBindings.KeySet) relationsBindings.keySet();
+	public RuleBindings.KeySet getRuleBindingsKeys() {
+		return (RuleBindings.KeySet) ruleBindings.keySet();
 	}
 
-//	public @NonNull List<? extends SubRecord> getSubRecords() {
-//		return EMPTY_SUBRECORDS;
-//	}
+	@NonNull
+	public List<? extends SubRecord> getSubRecords() {
+		return subRecords;
+	}
 
 	@Override
 	public boolean hasExecuted() {
@@ -99,14 +116,14 @@ public abstract class AbstractRule implements Rule
 
 	@Override
 	public void setExecuted(boolean executed) {
-		executed = true;
+		this.executed = executed;
 	}
 
 	@Override
-	public boolean when() {
+	public boolean when(@NonNull TransformationTraceData traceData) {
 		return true;
 	}
 
 	@Override
-	public void where() {}
+	public void where(@NonNull TransformationTraceData traceData) {}
 }

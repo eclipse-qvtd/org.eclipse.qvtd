@@ -16,7 +16,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 
-public class RelationsBindings extends AbstractBindings
+public class RuleBindings extends AbstractBindings
 {
 	public static class Key<T> extends AbstractBindings.Key<T>
 	{
@@ -57,12 +57,12 @@ public class RelationsBindings extends AbstractBindings
 		}
 	}
 	
-	public RelationsBindings(Rule rule) {
+	public RuleBindings(@NonNull Rule rule) {
 		super(rule);
 	}
 	
 	protected void checkKey(@NonNull AbstractBindings.Key<?> key) {
-		for (Key<?> relationsKey : rule.getRelationsBindingsKeys().getKeys()) {
+		for (Key<?> relationsKey : rule.getRuleBindingsKeys().getKeys()) {
 			if (relationsKey == key) {
 				return;
 			}
@@ -85,25 +85,25 @@ public class RelationsBindings extends AbstractBindings
 		return rule;
 	}
 	
-	public boolean matches(@NonNull KeySet allKeys, @NonNull RelationsBindings traceBindings) {
-		for (@SuppressWarnings("null")@NonNull Key<?> key : allKeys.getKeys()) {
-			Object boundValue = get(key);
-			if ((boundValue == null) && !containsKey(key)) {
-				return false;
-			}
-			Object traceValue = traceBindings.get(key);
-			if ((traceValue == null) && !traceBindings.containsKey(key)) {
-				return false;
-			}
-			if (traceValue == null) {
-				if (boundValue != null) {
-					return false;
-				}
-			}
-			else if (!(traceValue.equals(boundValue))) {
+	public boolean matches(@NonNull Key<?> rootKey, @NonNull RuleBindings traceBindings) {
+		
+		Object boundValue = get(rootKey);
+		if ((boundValue == null) && !containsKey(rootKey)) {
+			return false;
+		}
+		Object traceValue = traceBindings.get(rootKey);
+		if ((traceValue == null) && !traceBindings.containsKey(rootKey)) {
+			return false;
+		}
+		if (traceValue == null) {
+			if (boundValue != null) {
 				return false;
 			}
 		}
+		else if (!(traceValue.equals(boundValue))) {
+			return false;
+		}
+		
 		return true;
 	}
 	
@@ -128,10 +128,11 @@ public class RelationsBindings extends AbstractBindings
 		{
 			return false;
 		}
-		RelationsBindings rb = (RelationsBindings) o;
+		RuleBindings rb = (RuleBindings) o;
 		if (rule.getClass() != rb.getRule().getClass())
 			return false;
-		for (Key<?> key : rule.getRelationsBindingsKeys().getRootKeys()) {
+		for (Key<?> key : rule.getRuleBindingsKeys().getRootKeys()) {
+			assert key != null;
 			Object thisValue = get(key);
 			Object thatValue = rb.get(key);
 			if (thisValue != thatValue)
@@ -144,7 +145,8 @@ public class RelationsBindings extends AbstractBindings
 	public int hashCode() {
 		int code = 0;
 		code += this.getClass().hashCode();
-		for (Key<?> key : rule.getRelationsBindingsKeys().getRootKeys()) {
+		for (Key<?> key : rule.getRuleBindingsKeys().getRootKeys()) {
+			assert key != null;
 			code += get(key).hashCode();
 		}
 		return code;

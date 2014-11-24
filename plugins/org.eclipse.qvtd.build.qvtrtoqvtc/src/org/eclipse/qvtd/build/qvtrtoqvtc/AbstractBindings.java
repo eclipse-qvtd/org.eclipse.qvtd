@@ -57,9 +57,9 @@ public abstract class AbstractBindings
 	protected final @NonNull Map<Key<?>, Object> delegate = new HashMap<Key<?>, Object>();
 //	private Integer hashCode = null;				// Non-nuyll once Bindings becomes readOnly.
 	
-	protected final Rule rule;
+	protected @NonNull final Rule rule;
 	
-	protected AbstractBindings(Rule rule) {
+	protected AbstractBindings(@NonNull Rule rule) {
 		this.rule = rule;
 	}
 	
@@ -75,37 +75,12 @@ public abstract class AbstractBindings
 	public @NonNull Set<Map.Entry<Key<?>, Object>> entrySet() {
 		return delegate.entrySet();
 	}
-
-/*	@Override
-	public boolean equals(Object thatObject) {
-		if (this == thatObject) {
-			return true;
-		}
-		if (!(thatObject instanceof Bindings)) {
-			return false;
-		}
-		Bindings that = (Bindings)thatObject;
-		if (this.rule != that.rule) {
-			return false;
-		}
-		if (!this.delegate.equals(that.delegate)) {
-			return false;
-		}
-		return false;
-	} */
 	
 
 	public @NonNull Rule getRule() {
 		return rule;
 	}
 
-/*	@Override
-	public int hashCode() {
-		if (hashCode == null) {
-			hashCode = rule.hashCode() + delegate.hashCode();
-		}
-		return hashCode.intValue();
-	} */
 
 	public boolean isEmpty() {
 		return delegate.isEmpty();

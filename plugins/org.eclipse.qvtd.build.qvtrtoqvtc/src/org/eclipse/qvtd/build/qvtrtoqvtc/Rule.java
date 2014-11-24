@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.build.qvtrtoqvtc.utilities.TransformationTraceData;
 
 
 /**
@@ -26,49 +27,23 @@ public interface Rule {
 	
 	public interface Factory {
 		
-		@Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation,  @NonNull EObject eo);
-		@NonNull List<Rule> getRules(@NonNull QvtrToQvtcTransformation transformation, @NonNull Resource inputModel);
+		@Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation,
+				@NonNull EObject eo,
+				@NonNull TransformationTraceData traceData);
+		@NonNull List<Rule> getRules(@NonNull QvtrToQvtcTransformation transformation,
+				@NonNull Resource inputModelm,
+				@NonNull TransformationTraceData traceData);
 	}
 
-	public interface SubRecord {}
-
-	//@NonNull PrimitivesBindings getPrimitivesBindings();
-
-	//@NonNull CoreBindings getCoreBindings();
-	
-	//@NonNull C getCoreRoot();
-	
-	/**
-	 * Return the keys for all primitive bindings of this rule.
-	 */
-	//@NonNull PrimitivesBindings.KeySet getPrimitivesBindingsKeys();
-	
-	
-	@NonNull RelationsBindings getRelationsBindings();
-	@NonNull CoreBindings getCoreBindings();
-	
-	/**
-	 * Return the keys for all relations bindings of this rule.
-	 */
-	@NonNull RelationsBindings.KeySet getRelationsBindingsKeys();
-	@NonNull CoreBindings.KeySet getCoreBindingsKeys();
-
-//	@NonNull List<? extends SubRecord> getSubRecords();
-	
-	/**
-	 * Was executed.
-	 *
-	 * @return true, if successful
-	 */
-	boolean hasExecuted();
-	
-	/**
-	 * Instantiate middle elements.
-	 *
-	 * @param qvtcMiddleElements the qvtc middle elements
-	 * @return the list
-	 */
-	//public List<EObject> instantiateMiddleElements(Map<Class<? extends EObject>, List<EObject>> qvtcMiddleElements, @NonNull CoreBindings coreBindings);
+	public interface SubRecord {
+		
+		@NonNull RuleBindings getRuleBindings();
+		
+		/**
+		 * Return the keys for all relations bindings of this rule.
+		 */
+		@NonNull RuleBindings.KeySet getRuleBindingsKeys();
+	}
 	
 	/**
 	 * Derive input elements.
@@ -81,7 +56,33 @@ public interface Rule {
 	 * @param qvtcModelElements the qvtc model elements
 	 * @return the list
 	 */
-	void enforce();
+	void instantiateOutput();
+	
+	@NonNull Object getCoreResult();
+
+	@NonNull RuleBindings getRuleBindings();
+	
+	/**
+	 * Return the keys for all relations bindings of this rule.
+	 */
+	@NonNull RuleBindings.KeySet getRuleBindingsKeys();
+	
+	/**
+	 * Instantiate middle elements.
+	 *
+	 * @param qvtcMiddleElements the qvtc middle elements
+	 * @return the list
+	 */
+	//public List<EObject> instantiateMiddleElements(Map<Class<? extends EObject>, List<EObject>> qvtcMiddleElements, @NonNull CoreBindings coreBindings);
+	
+	@NonNull List<? extends SubRecord> getSubRecords();
+	
+	/**
+	 * Was executed.
+	 *
+	 * @return true, if successful
+	 */
+	boolean hasExecuted();
 	
 	/**
 	 * Match a Bindings to the types requried by the rule 
@@ -92,7 +93,8 @@ public interface Rule {
 	//public boolean matchBindings(@NonNull Rule tr, @NonNull RelationsBindings relationsBindings);
 	
 	/**
-	 * Does all the assignment operations of the rule
+	 * Assing values to output elements' attributes.
+	 *
 	 */
 	public void setAttributes();	
 	
@@ -113,13 +115,13 @@ public interface Rule {
 	 * @param transformation the transformation
 	 * @return true, if successful
 	 */
-	public boolean when();
+	public boolean when(@NonNull TransformationTraceData traceData);
 	
 	/**
 	 * Where.
 	 *
 	 * @param transformation the transformation
 	 */
-	public void where();
+	public void where(@NonNull TransformationTraceData traceData);
 	
 }

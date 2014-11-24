@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RelationToTraceClass;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RelationalTransformationToMappingTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RelationalTransformationToTracePackage;
 import org.eclipse.qvtd.build.qvtrtoqvtc.utilities.TransformationTraceData;
@@ -75,10 +76,17 @@ public class QvtrToQvtcTransformation
 				coreRoots.add(eObject);
 			}
 		}
+		potentialOrphans.clear();
+		executeFactory(RelationToTraceClass.FACTORY);
+		for (EObject eObject : potentialOrphans) {
+			if (eObject.eContainer() == null) {
+				coreRoots.add(eObject);
+			}
+		}
 	}
 
 	public void executeFactory(@NonNull Rule.Factory factory) {
-		for (Rule rule : factory.getRules(this, qvtrModel)) {
+		for (Rule rule : factory.getRules(this, qvtrModel, traceData)) {
 			if (rule != null) {
 				executeTopLevelRule(rule);
 				if (rule.hasExecuted()) {
@@ -89,30 +97,11 @@ public class QvtrToQvtcTransformation
 	}
 	
 	public void executeNestedRule(@NonNull Rule rule) {
-		rule.check();
-		if (rule.when()) {
-			rule.enforce();
-/*			for (EObject eo : rule.enforce(qvtcModelElements)) {
-				if (qvtcModelElements.containsKey(eo.getClass())) {
-					qvtcModelElements.get(eo.getClass()).add(eo);
-				} else {
-					List<EObject> temp = new ArrayList<EObject>();
-					temp.add(eo);
-					qvtcModelElements.put(eo.getClass(), temp);
-				}
-			} */
-			rule.setExecuted(true);
-			rule.setAttributes();
-			rule.where();
-		}
-	}
-	
-	public void executeTopLevelRule(@NonNull Rule rule) {
-		rule.check();
 		if (!rule.hasExecuted()) {
-			if (rule.when()) {
-				rule.enforce();
-/*				for (EObject eo : rule.enforce(potentialOrphans)) {
+			rule.check();
+			if (rule.when(traceData)) {
+				rule.instantiateOutput();
+	/*			for (EObject eo : rule.enforce(qvtcModelElements)) {
 					if (qvtcModelElements.containsKey(eo.getClass())) {
 						qvtcModelElements.get(eo.getClass()).add(eo);
 					} else {
@@ -121,22 +110,25 @@ public class QvtrToQvtcTransformation
 						qvtcModelElements.put(eo.getClass(), temp);
 					}
 				} */
-				/*
-				for (EObject eo : rule.instantiateMiddleElements(qvtcMiddleElements)) {
-					if (qvtcMiddleElements.containsKey(eo.getClass())) {
-						qvtcMiddleElements.get(eo.getClass()).add(eo);
-					} else {
-						List<EObject> temp = new ArrayList<EObject>();
-						temp.add(eo);
-						qvtcMiddleElements.put(eo.getClass(), temp);
-					}
-				}
-				*/
+				rule.setExecuted(true);
+				rule.where(traceData);
+				rule.setAttributes();
+				
+			}
+		}
+	}
+	
+	public void executeTopLevelRule(@NonNull Rule rule) {
+		if (!rule.hasExecuted()) {
+			rule.check();
+			if (rule.when(traceData)) {
+				rule.instantiateOutput();
 				// After output instantiation the record can be said to be executed
 				// so recursive/nested mappings can be invoked
 				rule.setExecuted(true);
+				rule.where(traceData);
 				rule.setAttributes();
-				rule.where();
+				
 			}
 		}
 	}
@@ -148,7 +140,7 @@ public class QvtrToQvtcTransformation
 		return qvtcModel;
 	}
 
-	public @Nullable Rule getRecord(@NonNull RelationsBindings relationsBindings) {
+	public @Nullable Rule getRecord(@NonNull RuleBindings relationsBindings) {
 		return traceData.getRecord(relationsBindings);
 	}
 
@@ -180,31 +172,5 @@ public class QvtrToQvtcTransformation
 		}
 	}
 
-	/*
-	private void findAndSetInputElements(ConstrainedRule rule,
-			Resource rt) {
-		
-		if (rule instanceof RelationalTransformationToMappingTransformation) {
-			// rt
-			if (allInstancesCache.containsKey(RelationalTransformation.class)) {
-				rule.setInputElements(allInstancesCache.get(ec));
-			} else {
-				EList<EObject> allInstances = new BasicEList<EObject>();
-				TreeIterator<EObject> it = qvtrSource.getAllContents();
-				while(it.hasNext()) {
-					EObject eo = it.next();
-					if (eo.eClass().equals(ec)) {
-						allInstances.add(eo);
-					} else if(eo.eClass().getEAllSuperTypes().contains(ec)) {
-						allInstances.add(eo);
-					}
-				}
-				allInstancesCache.put(ec, allInstances);
-				rule.setInputElements((EList<EObject>) allInstances);
-			}
-		}
-		
-	}
-	*/
 
 }
