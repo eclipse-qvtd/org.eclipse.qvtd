@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.build.qvtrtoqvtc.utilities.TransformationTraceData;
+import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RuleBindings;
 
 
 /**
@@ -28,11 +28,13 @@ public interface Rule {
 	public interface Factory {
 		
 		@Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation,
-				@NonNull EObject eo,
-				@NonNull TransformationTraceData traceData);
+				@NonNull EObject eo);
+		
+		@Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation,
+				@NonNull List<EObject> eos);
+		
 		@NonNull List<Rule> getRules(@NonNull QvtrToQvtcTransformation transformation,
-				@NonNull Resource inputModelm,
-				@NonNull TransformationTraceData traceData);
+				@NonNull Resource inputModelm);
 	}
 
 	public interface SubRecord {
@@ -66,16 +68,6 @@ public interface Rule {
 	 * Return the keys for all relations bindings of this rule.
 	 */
 	@NonNull RuleBindings.KeySet getRuleBindingsKeys();
-	
-	/**
-	 * Instantiate middle elements.
-	 *
-	 * @param qvtcMiddleElements the qvtc middle elements
-	 * @return the list
-	 */
-	//public List<EObject> instantiateMiddleElements(Map<Class<? extends EObject>, List<EObject>> qvtcMiddleElements, @NonNull CoreBindings coreBindings);
-	
-	@NonNull List<? extends SubRecord> getSubRecords();
 	
 	/**
 	 * Was executed.
@@ -115,13 +107,13 @@ public interface Rule {
 	 * @param transformation the transformation
 	 * @return true, if successful
 	 */
-	public boolean when(@NonNull TransformationTraceData traceData);
+	public boolean when();
 	
 	/**
 	 * Where.
 	 *
 	 * @param transformation the transformation
 	 */
-	public void where(@NonNull TransformationTraceData traceData);
+	public void where();
 	
 }

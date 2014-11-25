@@ -10,30 +10,37 @@
  ******************************************************************************/
 package org.eclipse.qvtd.build.qvtrtoqvtc.impl;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.Rule;
-import org.eclipse.qvtd.build.qvtrtoqvtc.RuleBindings;
-import org.eclipse.qvtd.build.qvtrtoqvtc.utilities.TransformationTraceData;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 
 public class RelationalTransformationToTracePackage extends AbstractRule
 {
 	private static class Factory extends AbstractRule.Factory
 	{
-		public @Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation, @NonNull EObject eo,
-				@NonNull TransformationTraceData traceData) {
+		public @Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation, @NonNull EObject eo) {
 			Rule rule = null;
 			if (eo instanceof RelationalTransformation) {	
 				rule = new RelationalTransformationToTracePackage(transformation, (RelationalTransformation) eo);
-				Rule tracedRule = traceData.getRecord(rule.getRuleBindings());
+				Rule tracedRule = transformation.getRecord(rule.getRuleBindings());
 				if (tracedRule != null)
 					rule = tracedRule;
 			}
 			return rule;
+		}
+
+		@Override
+		public @Nullable Rule createRule(
+				@NonNull QvtrToQvtcTransformation transformation,
+				@NonNull List<EObject> eos) {
+			// TODO Auto-generated method stub
+			return null;
 		}
 	}
 	
@@ -41,10 +48,10 @@ public class RelationalTransformationToTracePackage extends AbstractRule
 	public static final @NonNull Rule.Factory FACTORY = new Factory(); 
 	
 	private static final @NonNull RuleBindings.KeySet RULE_BINDINGS = new RuleBindings.KeySet();
-	public static final @NonNull RuleBindings.Key<RelationalTransformation> RELATIONS_rt = RULE_BINDINGS.createRoot((RelationalTransformation)null, "rt");
+	public static final @NonNull RuleBindings.RuleKey<RelationalTransformation> RELATIONS_rt = RULE_BINDINGS.createRoot((RelationalTransformation)null, "rt");
 	
 	// Core
-	public static final @NonNull RuleBindings.Key<org.eclipse.ocl.examples.pivot.Package> CORE_p = RULE_BINDINGS.create((org.eclipse.ocl.examples.pivot.Package)null, "p");
+	public static final @NonNull RuleBindings.RuleKey<org.eclipse.ocl.examples.pivot.Package> CORE_p = RULE_BINDINGS.create((org.eclipse.ocl.examples.pivot.Package)null, "p");
 	
 	// Primitives
 	String rtn;
@@ -94,20 +101,4 @@ public class RelationalTransformationToTracePackage extends AbstractRule
 		assert p != null;
 		p.setName("T" + rtn);
 	}
-	
-	
-	
-	/*
-	@Override
-	public void where() {
-		for (SubRecord subRecord : subRecords) {
-			RelationToTraceClass innerRule = new RelationToTraceClass(transformation);
-			RuleBindings innerRelationsBindings = innerRule.getRuleBindings();
-			innerRelationsBindings.put(RelationToTraceClass.RELATIONS_r, subRecord.r);
-			CoreBindings innerCoreBindings = innerRule.getCoreBindings();
-			innerCoreBindings.put(RelationToTraceClass.CORE_rc, subRecord.c);
-			transformation.executeNestedRule(innerRule);
-		}
-	}
-	*/
 }

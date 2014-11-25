@@ -13,20 +13,31 @@ package org.eclipse.qvtd.build.qvtrtoqvtc;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseBottomPatternKey;
+import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseCoreDomainKey;
+import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseGuardPatternKey;
+import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreMappingKey;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RelationToTraceClass;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RelationalTransformationToMappingTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RelationalTransformationToTracePackage;
+import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RuleBindings;
+import org.eclipse.qvtd.build.qvtrtoqvtc.impl.TopLevelRelationToMappingForEnforcement;
 import org.eclipse.qvtd.build.qvtrtoqvtc.utilities.TransformationTraceData;
 import org.eclipse.qvtd.build.qvtrtoqvtc.utilities.TransformationTraceDataImpl;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtcore.Mapping;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
+import org.eclipse.qvtd.pivot.qvtcorebase.Area;
+import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 
 public class QvtrToQvtcTransformation
 {
@@ -38,8 +49,6 @@ public class QvtrToQvtcTransformation
 	private final @Nullable Resource qvtcTraceModel;
 //	private Rule.Factory[] ruleFactories;
 	
-	@SuppressWarnings("unused")
-	private Map<EClass, List<EObject>> allInstancesCache;
 	private final @NonNull List<EObject> potentialOrphans = new ArrayList<EObject>();
 	private final @NonNull List<EObject> traceRoots = new ArrayList<EObject>();
 	private final @NonNull List<EObject> coreRoots = new ArrayList<EObject>();
@@ -48,7 +57,6 @@ public class QvtrToQvtcTransformation
 		this.qvtrModel = qvtrModel;		
 		this.qvtcModel = qvtcModel;
 		this.qvtcTraceModel = qvtcTraceModel;
-		allInstancesCache = new HashMap<EClass, List<EObject>>();
 		traceData = new TransformationTraceDataImpl();
 	}
 
@@ -83,10 +91,17 @@ public class QvtrToQvtcTransformation
 				coreRoots.add(eObject);
 			}
 		}
+		potentialOrphans.clear();
+		executeFactory(TopLevelRelationToMappingForEnforcement.FACTORY);
+		for (EObject eObject : potentialOrphans) {
+			if (eObject.eContainer() == null) {
+				coreRoots.add(eObject);
+			}
+		}
 	}
 
 	public void executeFactory(@NonNull Rule.Factory factory) {
-		for (Rule rule : factory.getRules(this, qvtrModel, traceData)) {
+		for (Rule rule : factory.getRules(this, qvtrModel)) {
 			if (rule != null) {
 				executeTopLevelRule(rule);
 				if (rule.hasExecuted()) {
@@ -99,7 +114,7 @@ public class QvtrToQvtcTransformation
 	public void executeNestedRule(@NonNull Rule rule) {
 		if (!rule.hasExecuted()) {
 			rule.check();
-			if (rule.when(traceData)) {
+			if (rule.when()) {
 				rule.instantiateOutput();
 	/*			for (EObject eo : rule.enforce(qvtcModelElements)) {
 					if (qvtcModelElements.containsKey(eo.getClass())) {
@@ -111,7 +126,7 @@ public class QvtrToQvtcTransformation
 					}
 				} */
 				rule.setExecuted(true);
-				rule.where(traceData);
+				rule.where();
 				rule.setAttributes();
 				
 			}
@@ -121,12 +136,12 @@ public class QvtrToQvtcTransformation
 	public void executeTopLevelRule(@NonNull Rule rule) {
 		if (!rule.hasExecuted()) {
 			rule.check();
-			if (rule.when(traceData)) {
+			if (rule.when()) {
 				rule.instantiateOutput();
 				// After output instantiation the record can be said to be executed
 				// so recursive/nested mappings can be invoked
 				rule.setExecuted(true);
-				rule.where(traceData);
+				rule.where();
 				rule.setAttributes();
 				
 			}
@@ -171,6 +186,62 @@ public class QvtrToQvtcTransformation
 //			}
 		}
 	}
+	
+	QVTcoreMappingKey mappings = new QVTcoreMappingKey();
+	
+	public @NonNull Mapping findMapping(@NonNull String mn, @NonNull Transformation mt) {
+		Mapping m = mappings.get(mn, mt);
+		if (m == null) {
+			m = QVTcoreFactory.eINSTANCE.createMapping();
+			m.setName(mn);
+			m.setTransformation(mt);
+			mappings.add(m);
+			addOrphan(m);
+		}
+		assert m!= null;
+		return m;
+	}
+	
+	QVTcoreBaseGuardPatternKey guardPatterns = new QVTcoreBaseGuardPatternKey();
 
+	public @NonNull GuardPattern findGuardPattern(@NonNull Area area) {
+		GuardPattern mg = guardPatterns.get(area);
+		if (mg == null) {
+			mg = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
+			mg.setArea(area);
+			addOrphan(mg);
+		}
+		assert mg!= null;
+		return mg;
+	}
+	
+	QVTcoreBaseBottomPatternKey botttomPatterns = new QVTcoreBaseBottomPatternKey();
+
+	public @NonNull BottomPattern findBottomPattern(@NonNull Area area) {
+		BottomPattern mb = botttomPatterns.get(area);
+		if (mb == null) {
+			mb = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
+			mb.setArea(area);
+			mb.getBindsTo();
+			addOrphan(mb);
+		}
+		assert mb!= null;
+		return mb;
+	}
+	
+	QVTcoreBaseCoreDomainKey coreDomains = new QVTcoreBaseCoreDomainKey();
+
+	public @NonNull CoreDomain findCoreDomain(String name, org.eclipse.qvtd.pivot.qvtbase.Rule rule) {
+		
+		CoreDomain md = coreDomains.get(name, rule);
+		if (md == null) {
+			md = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
+			md.setName(name);
+			md.setRule(rule);
+			addOrphan(md);
+		}
+		assert md!= null;
+		return md;
+	}
 
 }

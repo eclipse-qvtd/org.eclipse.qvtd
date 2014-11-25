@@ -8,57 +8,49 @@
  * Contributors:
  *     Horacio Hoyos - initial API and implementation
  ******************************************************************************/
-package org.eclipse.qvtd.build.qvtrtoqvtc;
+package org.eclipse.qvtd.build.qvtrtoqvtc.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.build.qvtrtoqvtc.Rule;
 
 public class RuleBindings extends AbstractBindings
 {
-	public static class Key<T> extends AbstractBindings.Key<T>
+	public static class RuleKey<T> extends AbstractBindings.Key<T>
 	{
-		private Key(@NonNull String key) {
+		private RuleKey(@NonNull String key) {
 			super(key);
 		}
 	}
 
-	public static class KeySet
+	public static class KeySet extends AbstractBindings.KeySet
 	{
-		protected final @NonNull List<Key<?>> keys = new ArrayList<Key<?>>();
 		protected final @NonNull List<Key<?>> rootKeys = new ArrayList<Key<?>>();
 		
-		public @NonNull <T> Key<T> create(@Nullable T keyClass, @NonNull String key) {
-			Key<T> theKey = new Key<T>(key);
+		public @NonNull <T> RuleKey<T> create(@Nullable T keyClass, @NonNull String key) {
+			RuleKey<T> theKey = new RuleKey<T>(key);
 			keys.add(theKey);
 			return theKey;
 		}
 		
-		public @NonNull <T> Key<T> createRoot(@Nullable T keyClass, @NonNull String key) {
-			Key<T> rootKey = create(keyClass, key);
+		public @NonNull <T> RuleKey<T> createRoot(@Nullable T keyClass, @NonNull String key) {
+			RuleKey<T> rootKey = create(keyClass, key);
 			rootKeys.add(rootKey);
-			return (Key<T>) rootKey;
-		}
-
-		public @NonNull List<Key<?>> getKeys() {
-			return keys;
+			return (RuleKey<T>) rootKey;
 		}
 		
 		public @NonNull List<Key<?>> getRootKeys() {
 			return rootKeys;
 		}
-		
-
-		@Override
-		public String toString() {
-			return keys.toString();
-		}
 	}
 	
+	protected @NonNull final Rule rule;
+	
 	public RuleBindings(@NonNull Rule rule) {
-		super(rule);
+		this.rule = rule;
 	}
 	
 	protected void checkKey(@NonNull AbstractBindings.Key<?> key) {
@@ -70,22 +62,20 @@ public class RuleBindings extends AbstractBindings
 		throw new IllegalArgumentException("Incompatible relations key " + key + " for " + rule);
 	}
 
-	public boolean containsKey(@NonNull Key<?> key) {
+	public boolean containsKey(@NonNull RuleKey<?> key) {
 		return delegate.containsKey(key);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public <T> T get(@NonNull Key<T> key) {
+	public <T> T get(@NonNull RuleKey<T> key) {
 		return (T) delegate.get(key);
 	}
 
-	@Override
-	@NonNull
-	public Rule getRule() {
+	public @NonNull Rule getRule() {
 		return rule;
 	}
 	
-	public boolean matches(@NonNull Key<?> rootKey, @NonNull RuleBindings traceBindings) {
+	public boolean matches(@NonNull RuleKey<?> rootKey, @NonNull RuleBindings traceBindings) {
 		
 		Object boundValue = get(rootKey);
 		if ((boundValue == null) && !containsKey(rootKey)) {
@@ -108,33 +98,28 @@ public class RuleBindings extends AbstractBindings
 	}
 	
 	@SuppressWarnings("unchecked")
-	public <T> T put(@NonNull Key<T> key, T value) {
+	public <T> T put(@NonNull RuleKey<T> key, T value) {
 		return (T) delegate.put(key, value);
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> T remove(@NonNull Key<T> key) {
+	public <T> T remove(@NonNull RuleKey<T> key) {
 		return (T) delegate.remove(key);
 	}
 	
 	@Override
 	public boolean equals(Object o) {
-		if (o == null)
-		{
+		if (o == this)
+			return true;
+		if (!(o instanceof RuleBindings))
 			return false;
-		}
-
-		if (this.getClass() != o.getClass())
-		{
-			return false;
-		}
 		RuleBindings rb = (RuleBindings) o;
 		if (rule.getClass() != rb.getRule().getClass())
 			return false;
 		for (Key<?> key : rule.getRuleBindingsKeys().getRootKeys()) {
 			assert key != null;
-			Object thisValue = get(key);
-			Object thatValue = rb.get(key);
+			Object thisValue = get((RuleKey<?>) key);
+			Object thatValue = rb.get((RuleKey<?>) key);
 			if (thisValue != thatValue)
 				return false;
 		}
@@ -147,12 +132,9 @@ public class RuleBindings extends AbstractBindings
 		code += this.getClass().hashCode();
 		for (Key<?> key : rule.getRuleBindingsKeys().getRootKeys()) {
 			assert key != null;
-			code += get(key).hashCode();
+			code += get((RuleKey<?>) key).hashCode();
 		}
 		return code;
 	}
-	
-	
-	
 	
 }

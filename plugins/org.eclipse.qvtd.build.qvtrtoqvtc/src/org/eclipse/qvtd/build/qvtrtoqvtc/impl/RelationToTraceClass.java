@@ -10,7 +10,8 @@
  ******************************************************************************/
 package org.eclipse.qvtd.build.qvtrtoqvtc.impl;
 
-import java.util.Iterator;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -22,12 +23,11 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.Rule;
-import org.eclipse.qvtd.build.qvtrtoqvtc.RuleBindings;
-import org.eclipse.qvtd.build.qvtrtoqvtc.utilities.TransformationTraceData;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
@@ -40,52 +40,69 @@ public class RelationToTraceClass extends AbstractRule
 		@Override
 		public @Nullable Rule createRule(
 				@NonNull QvtrToQvtcTransformation transformation,
-				@NonNull EObject eo, @NonNull TransformationTraceData traceData) {
+				@NonNull EObject eo) {
 			Rule rule = null;
 			if (eo instanceof Relation) {	
 				rule = new RelationToTraceClass(transformation, (Relation) eo);
-				Rule tracedRule = traceData.getRecord(rule.getRuleBindings());
+				Rule tracedRule = transformation.getRecord(rule.getRuleBindings());
 				if (tracedRule != null)
 					rule = tracedRule;
 			}
 			return rule;
 		}
+
+		@Override
+		public @Nullable Rule createRule(
+				@NonNull QvtrToQvtcTransformation transformation,
+				@NonNull List<EObject> eos) {
+			// TODO Auto-generated method stub
+			return null;
+		}
 		
 	}
 	
-	private class SubRecord extends AbstractRule.AbstractSubRecord
+	private class SubRecord 
 	{
-
-		protected SubRecord(@NonNull Rule rule, @NonNull RelationDomain rd, @NonNull DomainPattern rdp, @NonNull ObjectTemplateExp t, @NonNull Variable tv, @Nullable String vn, @NonNull Type c) {
-			super(rule);
-			ruleBindings.put(RELATIONS_t, t);
-			ruleBindings.put(SHARED_vn, vn);
-			ruleBindings.put(SHARED_c, c);
+		
+		// Relations
+		@NonNull private ObjectTemplateExp t;
+		@NonNull private String vn;
+		@NonNull private Type c;
+		
+		// Core
+		@Nullable private Property a;
+		
+		public SubRecord(@NonNull ObjectTemplateExp t, @NonNull String vn, @NonNull Type c) {
+			this.t = t;
+			this.vn = vn;
+			this.c = c;
+			
 		}
-
+		
 	}
 	
 	// Relations
 	private static final @NonNull RuleBindings.KeySet RULE_BINDINGS = new RuleBindings.KeySet();
-	public static final @NonNull RuleBindings.Key<Relation> RELATIONS_r = RULE_BINDINGS.createRoot((Relation)null, "r");
+	public static final @NonNull RuleBindings.RuleKey<Relation> RELATIONS_r = RULE_BINDINGS.createRoot((Relation)null, "r");
 //	public static final @NonNull RelationsBindings.Key<RelationDomain> RELATIONS_rd = RELATIONS_BINDINGS.create((RelationDomain)null, "rd");
 //	public static final @NonNull RelationsBindings.Key<DomainPattern> RELATIONS_rdp = RELATIONS_BINDINGS.create((DomainPattern)null, "rdp");
-	public static final @NonNull RuleBindings.Key<ObjectTemplateExp> RELATIONS_t = RULE_BINDINGS.create((ObjectTemplateExp)null, "t");
+//	public static final @NonNull RuleBindings.RuleKey<ObjectTemplateExp> RELATIONS_t = RULE_BINDINGS.create((ObjectTemplateExp)null, "t");
 //	public static final @NonNull RelationsBindings.Key<Variable> RELATIONS_tv = RELATIONS_BINDINGS.create((Variable)null, "tv");
 
 
 	// Core
-	public static final @NonNull RuleBindings.Key<org.eclipse.ocl.examples.pivot.Class> CORE_rc = RULE_BINDINGS.create((org.eclipse.ocl.examples.pivot.Class)null, "rc");
-	public static final @NonNull RuleBindings.Key<Property> CORE_a = RULE_BINDINGS.create((Property)null, "a");
+	public static final @NonNull RuleBindings.RuleKey<org.eclipse.ocl.examples.pivot.Class> CORE_rc = RULE_BINDINGS.create((org.eclipse.ocl.examples.pivot.Class)null, "rc");
+//	public static final @NonNull RuleBindings.RuleKey<Property> CORE_a = RULE_BINDINGS.create((Property)null, "a");
 	
 	// Shared
-	public static final @NonNull RuleBindings.Key<String> SHARED_vn = RULE_BINDINGS.create((String)null, "vn");
-	public static final @NonNull RuleBindings.Key<Type> SHARED_c = RULE_BINDINGS.create((Type)null, "c");
+//	public static final @NonNull RuleBindings.RuleKey<String> SHARED_vn = RULE_BINDINGS.create((String)null, "vn");
+//	public static final @NonNull RuleBindings.RuleKey<Type> SHARED_c = RULE_BINDINGS.create((Type)null, "c");
 	
 	public static final @NonNull Rule.Factory FACTORY = new Factory(); 
 	
 	private org.eclipse.ocl.examples.pivot.Package p;
 	
+	protected final @NonNull List<SubRecord> subRecords = new ArrayList<SubRecord>();
 	
 	public RelationToTraceClass(@NonNull QvtrToQvtcTransformation transformation, @NonNull Relation r) {
 		super(transformation);
@@ -104,7 +121,9 @@ public class RelationToTraceClass extends AbstractRule
 				Variable tv = t.getBindsTo();
 				Type c = t.getType();
 				if ((tv != null) && (c != null)) {
-					subRecords.add(new SubRecord(this, rd, rdp, t, tv, tv.getName(), c));
+					String vn = tv.getName();
+					assert vn != null;
+					subRecords.add(new SubRecord(t, vn, c));
 				}
 			}
 		}
@@ -130,9 +149,9 @@ public class RelationToTraceClass extends AbstractRule
 		assert rc != null;
 		ruleBindings.put(CORE_rc, rc);
 		transformation.addOrphan(rc);
-		for (org.eclipse.qvtd.build.qvtrtoqvtc.Rule.SubRecord subRecord : subRecords) {
+		for (SubRecord subRecord : subRecords) {
 			Property a = PivotFactory.eINSTANCE.createProperty();
-			subRecord.getRuleBindings().put(CORE_a, a);
+			subRecord.a = a;
 		}
 	}
 
@@ -144,21 +163,23 @@ public class RelationToTraceClass extends AbstractRule
 		org.eclipse.ocl.examples.pivot.Class rc = ruleBindings.get(CORE_rc);
 		assert rc != null;
 		rc.setPackage(p);
-		for (org.eclipse.qvtd.build.qvtrtoqvtc.Rule.SubRecord subRecord : subRecords) {
-			Property a = subRecord.getRuleBindings().get(CORE_a);
+		for (SubRecord subRecord : subRecords) {
+			Property a = subRecord.a;
 			assert a != null;
-			a.setName(subRecord.getRuleBindings().get(SHARED_vn));
-			a.setType(subRecord.getRuleBindings().get(SHARED_c));
+			a.setName(subRecord.vn);
+			a.setType(subRecord.c);
 			rc.getOwnedAttribute().add(a);
 		}
 	}
 
 	
 	@Override
-	public boolean when(@NonNull TransformationTraceData traceData) {
+	public boolean when() {
 		Relation r = ruleBindings.get(RELATIONS_r);
 		assert r != null;
-		Rule whenRule = RelationalTransformationToTracePackage.FACTORY.createRule(transformation, r.getTransformation(), traceData);
+		RelationalTransformation rt = (RelationalTransformation) r.getTransformation();
+		assert rt != null;
+		Rule whenRule = RelationalTransformationToTracePackage.FACTORY.createRule(transformation, rt);
 		if (whenRule != null && whenRule.hasExecuted()) {
 			p = (Package) whenRule.getCoreResult();
 			assert p != null;
@@ -168,10 +189,10 @@ public class RelationToTraceClass extends AbstractRule
 	}
 
 	@Override
-	public void where(@NonNull TransformationTraceData traceData) {
+	public void where() {
 		org.eclipse.ocl.examples.pivot.Class rc = ruleBindings.get(CORE_rc);
-		for (org.eclipse.qvtd.build.qvtrtoqvtc.Rule.SubRecord subRecord : subRecords) {
-			Rule innerRule = SubTemplateToTraceClassProps.FACTORY.createRule(transformation, subRecord.getRuleBindings().get(RELATIONS_t), traceData);
+		for (SubRecord subRecord : subRecords) {
+			Rule innerRule = SubTemplateToTraceClassProps.FACTORY.createRule(transformation, subRecord.t);
 			if (innerRule != null) {
 				assert !innerRule.hasExecuted();
 				RuleBindings innerRuleBindings = innerRule.getRuleBindings();

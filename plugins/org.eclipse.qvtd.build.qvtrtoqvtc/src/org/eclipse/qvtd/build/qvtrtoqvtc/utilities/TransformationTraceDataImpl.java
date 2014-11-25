@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.qvtd.build.qvtrtoqvtc.RuleBindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.Rule;
+import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RuleBindings;
 
 /* Keeps  track of variable values, output model and traces needed for 
  * the transformation */

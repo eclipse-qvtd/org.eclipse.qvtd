@@ -8,10 +8,12 @@
  * Contributors:
  *     Horacio Hoyos - initial API and implementation
  ******************************************************************************/
-package org.eclipse.qvtd.build.qvtrtoqvtc;
+package org.eclipse.qvtd.build.qvtrtoqvtc.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -53,15 +55,25 @@ public abstract class AbstractBindings
 	        return key;
 	    }
 	}
+	
+	public static abstract class KeySet
+	{
+		protected final @NonNull List<Key<?>> keys = new ArrayList<Key<?>>();
+		
+		
+		public @NonNull List<Key<?>> getKeys() {
+			return keys;
+		}
+
+		@Override
+		public String toString() {
+			return keys.toString();
+		}
+	}
 
 	protected final @NonNull Map<Key<?>, Object> delegate = new HashMap<Key<?>, Object>();
 //	private Integer hashCode = null;				// Non-nuyll once Bindings becomes readOnly.
-	
-	protected @NonNull final Rule rule;
-	
-	protected AbstractBindings(@NonNull Rule rule) {
-		this.rule = rule;
-	}
+
 	
 	public void clear() {
 		delegate.clear();
@@ -74,11 +86,6 @@ public abstract class AbstractBindings
 	@SuppressWarnings("null")
 	public @NonNull Set<Map.Entry<Key<?>, Object>> entrySet() {
 		return delegate.entrySet();
-	}
-	
-
-	public @NonNull Rule getRule() {
-		return rule;
 	}
 
 

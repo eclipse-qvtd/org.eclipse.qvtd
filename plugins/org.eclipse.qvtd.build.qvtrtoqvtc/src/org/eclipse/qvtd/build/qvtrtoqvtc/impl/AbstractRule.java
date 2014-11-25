@@ -20,24 +20,24 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.Rule;
-import org.eclipse.qvtd.build.qvtrtoqvtc.RuleBindings;
-import org.eclipse.qvtd.build.qvtrtoqvtc.utilities.TransformationTraceData;
 
 public abstract class AbstractRule implements Rule
 {
 	protected static abstract class Factory implements Rule.Factory
 	{
-		public abstract @Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation,  @NonNull EObject eo,
-				@NonNull TransformationTraceData traceData);
+		public abstract @Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation,
+				@NonNull EObject eo);
 		
-		public @NonNull List<Rule> getRules(@NonNull QvtrToQvtcTransformation transformation, @NonNull Resource inputModel,
-				@NonNull TransformationTraceData traceData) {
+		public abstract @Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation,
+				@NonNull List<EObject> eos);
+		
+		public @NonNull List<Rule> getRules(@NonNull QvtrToQvtcTransformation transformation, @NonNull Resource inputModel) {
 			List<Rule> rules = new ArrayList<Rule>();
 			TreeIterator<EObject> it = inputModel.getAllContents();
 			while(it.hasNext()) {
 				EObject eo = it.next();
 				if (eo != null) {
-					Rule rule = createRule(transformation, eo, traceData);
+					Rule rule = createRule(transformation, eo);
 					if (rule != null) {
 						rules.add(rule);
 					}
@@ -72,7 +72,6 @@ public abstract class AbstractRule implements Rule
 	
 	protected final @NonNull QvtrToQvtcTransformation transformation;
 	protected final @NonNull RuleBindings ruleBindings = new RuleBindings(this);
-	protected final @NonNull List<SubRecord> subRecords = new ArrayList<SubRecord>();
 	
 	private boolean executed = false;
 
@@ -100,11 +99,6 @@ public abstract class AbstractRule implements Rule
 		return (RuleBindings.KeySet) ruleBindings.keySet();
 	}
 
-	@NonNull
-	public List<? extends SubRecord> getSubRecords() {
-		return subRecords;
-	}
-
 	@Override
 	public boolean hasExecuted() {
 		return executed;
@@ -120,10 +114,10 @@ public abstract class AbstractRule implements Rule
 	}
 
 	@Override
-	public boolean when(@NonNull TransformationTraceData traceData) {
+	public boolean when() {
 		return true;
 	}
 
 	@Override
-	public void where(@NonNull TransformationTraceData traceData) {}
+	public void where() {}
 }
