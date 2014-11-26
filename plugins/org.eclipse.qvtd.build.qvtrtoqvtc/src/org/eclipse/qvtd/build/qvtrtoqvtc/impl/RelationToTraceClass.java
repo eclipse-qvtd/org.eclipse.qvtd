@@ -13,11 +13,9 @@ package org.eclipse.qvtd.build.qvtrtoqvtc.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -28,12 +26,11 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
-import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 
 public class RelationToTraceClass extends AbstractRule
 {
-	
+	/*
 	private static class Factory extends AbstractRule.Factory
 	{
 		@Override
@@ -59,7 +56,7 @@ public class RelationToTraceClass extends AbstractRule
 		}
 		
 	}
-	
+	*/
 	private class SubRecord 
 	{
 		// Relations
@@ -77,7 +74,7 @@ public class RelationToTraceClass extends AbstractRule
 		}
 	}
 	
-	public static final @NonNull Rule.Factory FACTORY = new Factory();
+	//public static final @NonNull Rule.Factory FACTORY = new Factory();
 	
 	// Relations
 	private static final @NonNull RuleBindings.KeySet RULE_BINDINGS = new RuleBindings.KeySet();
@@ -119,8 +116,7 @@ public class RelationToTraceClass extends AbstractRule
 		}
 	}
 
-	@Override
-	public @Nullable Object getCoreResult() {
+	public @Nullable org.eclipse.ocl.examples.pivot.Class getCore() {
 		return rc;
 	}
 
@@ -157,22 +153,30 @@ public class RelationToTraceClass extends AbstractRule
 			rc.getOwnedAttribute().add(a);
 		}
 	}
-
 	
+	public void setCore(@NonNull org.eclipse.ocl.examples.pivot.Class rc) {
+		this.rc = rc;
+	}
+
+	/*
 	@Override
 	public boolean when() {
 		Relation r = ruleBindings.get(RELATIONS_r);
 		assert r != null;
 		RelationalTransformation rt = (RelationalTransformation) r.getTransformation();
 		assert rt != null;
-		Rule whenRule = RelationalTransformationToTracePackage.FACTORY.createRule(transformation, rt);
+		// This is the same code the factory has, and IMHO its better encapsulated by the factory. The real issue is that the bindings need a rule
+		RuleBindings whenBindings = new RuleBindings(new RelationalTransformationToTracePackage(transformation, rt));
+		RelationalTransformationToTracePackage whenRule = (RelationalTransformationToTracePackage) transformation.getRecord(whenBindings);
+		//Rule whenRule = RelationalTransformationToTracePackage.FACTORY.createRule(transformation, rt);
 		if (whenRule != null && whenRule.hasExecuted()) {
-			p = (Package) whenRule.getCoreResult();
+			p = (Package) whenRule.getCore();
 			assert p != null;
 			return true;
 		}
 		return false;
 	}
+	*/
 
 	@Override
 	public void where() {

@@ -60,7 +60,6 @@ public interface Rule {
 	 */
 	void instantiateOutput();
 	
-	@Nullable Object getCoreResult();
 
 	@NonNull RuleBindings getRuleBindings();
 	

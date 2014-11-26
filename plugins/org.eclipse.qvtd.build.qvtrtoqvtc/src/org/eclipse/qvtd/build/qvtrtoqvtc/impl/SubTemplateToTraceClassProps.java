@@ -85,12 +85,6 @@ public class SubTemplateToTraceClassProps extends AbstractRule
 		}
 	}
 
-	@Override
-	@NonNull
-	public Object getCoreResult() {
-		throw new UnsupportedOperationException("This rule is 1 -> *, can't get single core result");
-	}
-
 	public @NonNull RuleBindings.KeySet getRuleBindingsKeys() {
 		return RULE_BINDINGS;
 	}

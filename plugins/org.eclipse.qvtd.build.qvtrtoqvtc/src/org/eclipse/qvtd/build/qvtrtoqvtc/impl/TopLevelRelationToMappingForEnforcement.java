@@ -152,12 +152,6 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 			}
 		}
 	}
-	
-	@Override
-	@NonNull
-	public Object getCoreResult() {
-		throw new UnsupportedOperationException("This rule is 1 -> *, can't get single core result");
-	}
 
 	public @NonNull RuleBindings.KeySet getRuleBindingsKeys() {
 		return RULE_BINDINGS;
@@ -239,9 +233,13 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 			if (isEnforcement) {
 				RelationalTransformation rt = (RelationalTransformation) r.getTransformation();
 				assert rt != null;
-				Rule whenRule = RelationalTransformationToMappingTransformation.FACTORY.createRule(transformation, rt);
+				// This is the same code the factory has, and IMHO its better encapsulated by the factory.
+				// The real issue is that the bindings needs a rule and to get a record (rule) we need a binding
+				RuleBindings whenBindings = new RuleBindings(new RelationalTransformationToTracePackage(transformation, rt));
+				RelationalTransformationToTracePackage whenRule = (RelationalTransformationToTracePackage) transformation.getRecord(whenBindings);
+				//Rule whenRule = RelationalTransformationToMappingTransformation.FACTORY.createRule(transformation, rt);
 				if (whenRule != null && whenRule.hasExecuted()) {
-					mt = (Transformation) whenRule.getCoreResult();
+					mt = (Transformation) whenRule.getCore();
 					assert mt != null;
 					return true;
 				}
@@ -253,6 +251,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 	@Override
 	public void where() {
 		// T6
+		/*
 		for (SubRecord subRecord : subRecords) {
 			Relation r = ruleBindings.get(RELATIONS_r);
 			assert (r != null);
@@ -261,12 +260,13 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 			if (innerRule != null) {
 				assert !innerRule.hasExecuted();
 				transformation.executeNestedRule(innerRule);
-				RealizedVariable tcv = (RealizedVariable) innerRule.getCoreResult();
+				RealizedVariable tcv = (RealizedVariable) innerRule.getCore();
 				assert tcv != null;
 				subRecord.tcv = tcv;
 			}
 			//innerRule = new RWhenPatternToMGuardPattern(transformation);
 		}
+		*/
 	}
 	
 }

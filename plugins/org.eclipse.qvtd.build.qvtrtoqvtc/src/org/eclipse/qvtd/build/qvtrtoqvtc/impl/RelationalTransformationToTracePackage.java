@@ -10,14 +10,17 @@
  ******************************************************************************/
 package org.eclipse.qvtd.build.qvtrtoqvtc.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.pivot.Class;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.Rule;
+import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 
 public class RelationalTransformationToTracePackage extends AbstractRule
@@ -44,6 +47,20 @@ public class RelationalTransformationToTracePackage extends AbstractRule
 		}
 	}
 	
+	private class SubRecord {
+		
+		// Relations
+		@NonNull private Relation r;
+		
+		// Core
+		@Nullable private Class rc;
+		
+		public SubRecord(@NonNull Relation r) {
+			this.r = r;
+		}
+		
+	}
+	
 
 	public static final @NonNull Rule.Factory FACTORY = new Factory(); 
 	
@@ -55,6 +72,8 @@ public class RelationalTransformationToTracePackage extends AbstractRule
 	
 	// Primitives
 	private String rtn;
+	
+	protected final @NonNull List<SubRecord> subRecords = new ArrayList<SubRecord>();
 
 	public RelationalTransformationToTracePackage(@NonNull QvtrToQvtcTransformation transformation, @NonNull RelationalTransformation rt) {
 		super(transformation);
@@ -66,11 +85,13 @@ public class RelationalTransformationToTracePackage extends AbstractRule
 		RelationalTransformation rt = ruleBindings.get(RELATIONS_rt);
 		assert rt != null;
 		rtn = rt.getName();
-		
+		for (org.eclipse.qvtd.pivot.qvtbase.Rule r : rt.getRule()) {
+			assert r!= null;
+			subRecords.add(new SubRecord((Relation) r));
+		}
 	}
 	
-	@Override
-	public @Nullable Object getCoreResult() {
+	public @Nullable org.eclipse.ocl.examples.pivot.Package getCore() {
 		return p;
 	}
 
@@ -82,7 +103,18 @@ public class RelationalTransformationToTracePackage extends AbstractRule
 	public void instantiateOutput() {
 		p = PivotFactory.eINSTANCE.createPackage();
 		assert p != null;
-		transformation.addOrphan(p);
+		final org.eclipse.ocl.examples.pivot.Package p2 = p;
+		if (p2 != null) {
+			transformation.addOrphan(p2);
+		} else {
+			// TODO handle null value
+		}
+		for (SubRecord subRecord : subRecords) {
+			org.eclipse.ocl.examples.pivot.Class rc = PivotFactory.eINSTANCE.createClass();
+			assert rc != null;
+			subRecord.rc = rc;
+			transformation.addOrphan(rc);
+		}
 	}
 
 	/* (non-Javadoc)
@@ -92,5 +124,19 @@ public class RelationalTransformationToTracePackage extends AbstractRule
 	public void setAttributes() {
 		
 		p.setName("P" + rtn);
+	}
+	
+	@Override
+	public void where() {
+		for (SubRecord subRecord : subRecords) {
+			RelationToTraceClass whenRule = new RelationToTraceClass(transformation, subRecord.r);
+			final Class rc2 = subRecord.rc;
+			if (rc2 != null) {
+				whenRule.setCore(rc2);
+				transformation.executeNestedRule(whenRule);
+			} else {
+				// TODO handle null value
+			}
+		}
 	}
 }

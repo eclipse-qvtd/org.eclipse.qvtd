@@ -9,7 +9,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.Rule;
-import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
@@ -82,12 +81,6 @@ public class RelationDomainToTraceClassVar extends AbstractRule implements Rule 
 		rn = ruleBindings.get(RELATIONS_r).getName();
 		dn = ruleBindings.get(RELATIONS_d).getName();
 	}
-
-	@Override
-	@Nullable
-	public Object getCoreResult() {
-		return tcv;
-	}
 	
 	public @NonNull RuleBindings.KeySet getRuleBindingsKeys() {
 		return RULE_BINDINGS;
@@ -105,9 +98,11 @@ public class RelationDomainToTraceClassVar extends AbstractRule implements Rule 
 		
 		Relation r = ruleBindings.get(RELATIONS_r);
 		assert r != null;
-		Rule whenRule = RelationToTraceClass.FACTORY.createRule(transformation, r);
+		RuleBindings whenBindings = new RuleBindings(new RelationToTraceClass(transformation, r));
+		RelationToTraceClass whenRule = (RelationToTraceClass) transformation.getRecord(whenBindings);
+		//Rule whenRule = RelationToTraceClass.FACTORY.createRule(transformation, r);
 		if (whenRule != null && whenRule.hasExecuted()) {
-			tc = (Type) whenRule.getCoreResult();
+			tc = (Type) whenRule.getCore();
 			assert tc != null;
 			return true;
 		}

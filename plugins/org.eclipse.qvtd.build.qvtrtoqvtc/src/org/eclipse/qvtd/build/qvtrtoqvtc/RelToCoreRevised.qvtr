@@ -158,22 +158,27 @@ top relation RelationalTransformationToMappingTransformation
 
 top relation RelationalTransformationToPackage
 {
-   rtn :String;
+   rtn, rn :String;
     
    domain relations rt:RelationalTransformation {
-      name = rtn
+      name = rtn,
+      rule = r:Relation {}
    }; 
 
    enforce domain core p:Package {
-      name = rtn
+      name = rtn,
+      ownedType = rc:Class {}
    }; 
+   where {
+	RelationToTraceClass(r, rc);
+   }
 }
 
 -- Rule 1: Corresponding to each relation there exists a trace class in core.
 -- The trace class contains a property corresponding to each object node in the
 -- pattern of each domain of the relation.
 --
-top relation RelationToTraceClass
+relation RelationToTraceClass
 {
    rt: qvtrelation::RelationalTransformation;
    p: emof::Package;
