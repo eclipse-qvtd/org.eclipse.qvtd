@@ -48,6 +48,7 @@ public class RuleBindings extends AbstractBindings
 	}
 	
 	protected @NonNull final Rule rule;
+	private Integer hashCode;
 	
 	public RuleBindings(@NonNull Rule rule) {
 		this.rule = rule;
@@ -128,6 +129,14 @@ public class RuleBindings extends AbstractBindings
 	
 	@Override
 	public int hashCode() {
+	    if (hashCode == null) {
+	        hashCode = getClass().hashCode() + delegate.hashCode();
+	    }
+	    return hashCode.intValue();
+	}
+	/*
+	@Override
+	public int hashCode() {
 		int code = 0;
 		code += this.getClass().hashCode();
 		for (Key<?> key : rule.getRuleBindingsKeys().getRootKeys()) {
@@ -136,5 +145,6 @@ public class RuleBindings extends AbstractBindings
 		}
 		return code;
 	}
+	*/
 	
 }
