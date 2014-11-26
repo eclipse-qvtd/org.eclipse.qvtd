@@ -7,9 +7,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Package;
-import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.Rule;
@@ -20,7 +18,6 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
-import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -82,9 +79,6 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 			this.dn = dn;
 			this.up = up;
 		}
-		
-		
-		
 		
 	}
 
@@ -225,9 +219,10 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 	
 	public void setAttributes() {
 		for (SubRecord subRecord : subRecords) {
-			BottomPattern mb2 = subRecord.mb;
-			assert mb2 != null;
-			mb2.getBindsTo().add(subRecord.tcv);
+			BottomPattern mb = subRecord.mb;
+			RealizedVariable tcv = subRecord.tcv;
+			assert (mb != null) && (tcv != null);
+			mb.getBindsTo().add(tcv);
 		}
 	}	
 	

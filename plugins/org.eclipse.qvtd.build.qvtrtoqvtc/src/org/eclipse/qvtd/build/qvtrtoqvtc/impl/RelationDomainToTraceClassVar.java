@@ -111,13 +111,13 @@ public class RelationDomainToTraceClassVar extends AbstractRule implements Rule 
 		
 		Relation r = ruleBindings.get(RELATIONS_r);
 		assert r != null;
-		Rule whenRule = RelationToTraceClass.FACTORY.createRule(transformation, r);
-		if (whenRule != null && whenRule.hasExecuted()) {
-			tc = (Type) whenRule.getCoreResult();
-			assert tc != null;
-			return true;
-		}
-		return false;
+		//Rule whenRule = RelationToTraceClass.FACTORY.createRule(transformation, r);
+		//if (whenRule != null && whenRule.hasExecuted()) {
+		//	tc = (Type) whenRule.getCoreResult();
+		//	assert tc != null;
+		//	return true;
+		//}
+		return true;
 	}
 	
 

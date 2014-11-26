@@ -16,6 +16,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Property;
@@ -100,6 +101,7 @@ public class RelationToTraceClass extends AbstractRule
 	
 	public static final @NonNull Rule.Factory FACTORY = new Factory(); 
 	
+	private String rn;
 	private org.eclipse.ocl.examples.pivot.Package p;
 	
 	protected final @NonNull List<SubRecord> subRecords = new ArrayList<SubRecord>();
@@ -112,18 +114,21 @@ public class RelationToTraceClass extends AbstractRule
 	public void check() {
 		Relation r = ruleBindings.get(RELATIONS_r);
 		assert r != null;
+		rn = r.getName();
 		for (Domain d : r.getDomain()) {
 			RelationDomain rd = (RelationDomain) d;
 			DomainPattern rdp = rd.getPattern();
-			TemplateExp templateExpression = rdp.getTemplateExpression();
+			OCLExpression templateExpression = rdp.getTemplateExpression();
 			if (templateExpression instanceof ObjectTemplateExp) {
 				ObjectTemplateExp t = (ObjectTemplateExp) templateExpression;
 				Variable tv = t.getBindsTo();
-				Type c = t.getType();
-				if ((tv != null) && (c != null)) {
-					String vn = tv.getName();
-					assert vn != null;
-					subRecords.add(new SubRecord(t, vn, c));
+				if (tv != null) {
+					Type c = tv.getType();
+					if (c != null) {
+						String vn = tv.getName();
+						assert vn != null;
+						subRecords.add(new SubRecord(t, vn, c));
+					}
 				}
 			}
 		}
@@ -151,6 +156,7 @@ public class RelationToTraceClass extends AbstractRule
 		transformation.addOrphan(rc);
 		for (SubRecord subRecord : subRecords) {
 			Property a = PivotFactory.eINSTANCE.createProperty();
+			transformation.addOrphan(a);
 			subRecord.a = a;
 		}
 	}
@@ -162,6 +168,7 @@ public class RelationToTraceClass extends AbstractRule
 	public void setAttributes() {
 		org.eclipse.ocl.examples.pivot.Class rc = ruleBindings.get(CORE_rc);
 		assert rc != null;
+		rc.setName("T"+rn);
 		rc.setPackage(p);
 		for (SubRecord subRecord : subRecords) {
 			Property a = subRecord.a;

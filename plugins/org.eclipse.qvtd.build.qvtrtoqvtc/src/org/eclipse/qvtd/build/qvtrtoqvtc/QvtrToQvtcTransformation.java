@@ -78,14 +78,14 @@ public class QvtrToQvtcTransformation
 			}
 		}
 		potentialOrphans.clear();
-		executeFactory(RelationalTransformationToMappingTransformation.FACTORY);
+		executeFactory(RelationToTraceClass.FACTORY);
 		for (EObject eObject : potentialOrphans) {
 			if (eObject.eContainer() == null) {
-				coreRoots.add(eObject);
+				traceRoots.add(eObject);
 			}
 		}
 		potentialOrphans.clear();
-		executeFactory(RelationToTraceClass.FACTORY);
+		executeFactory(RelationalTransformationToMappingTransformation.FACTORY);
 		for (EObject eObject : potentialOrphans) {
 			if (eObject.eContainer() == null) {
 				coreRoots.add(eObject);

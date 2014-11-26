@@ -108,12 +108,14 @@ public class SubTemplateToTraceClassProps extends AbstractRule
 			OCLExpression value = pt.getValue();
 			if (value instanceof ObjectTemplateExp) {
 				ObjectTemplateExp tp = (ObjectTemplateExp) value;
-				Variable tv = t.getBindsTo();
-				Type c = t.getType();
-				if ((tv != null) && (c != null)) {
-					String vn = tv.getName();
-					assert vn != null;
-					subRecords.add(new SubRecord(tp, vn, c));
+				Variable tv = tp.getBindsTo();
+				if (tv != null) {
+					Type c = tv.getType();
+					if (c != null) {
+						String vn = tv.getName();
+						assert vn != null;
+						subRecords.add(new SubRecord(tp, vn, c));
+					}
 				}
 			}
 		}

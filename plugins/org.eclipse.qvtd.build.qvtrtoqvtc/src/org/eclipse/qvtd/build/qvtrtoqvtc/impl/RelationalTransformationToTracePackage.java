@@ -99,6 +99,6 @@ public class RelationalTransformationToTracePackage extends AbstractRule
 		
 		org.eclipse.ocl.examples.pivot.Package p = ruleBindings.get(CORE_p);
 		assert p != null;
-		p.setName("T" + rtn);
+		p.setName("P" + rtn);
 	}
 }
