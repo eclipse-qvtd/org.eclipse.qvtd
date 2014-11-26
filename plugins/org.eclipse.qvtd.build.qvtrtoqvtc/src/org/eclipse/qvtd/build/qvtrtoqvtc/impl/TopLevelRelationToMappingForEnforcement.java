@@ -22,6 +22,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 
 public class TopLevelRelationToMappingForEnforcement extends AbstractRule
@@ -236,7 +237,9 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 				isEnforcement |= d.isIsEnforceable();
 			}
 			if (isEnforcement) {
-				Rule whenRule = RelationalTransformationToMappingTransformation.FACTORY.createRule(transformation, r.getTransformation());
+				RelationalTransformation rt = (RelationalTransformation) r.getTransformation();
+				assert rt != null;
+				Rule whenRule = RelationalTransformationToMappingTransformation.FACTORY.createRule(transformation, rt);
 				if (whenRule != null && whenRule.hasExecuted()) {
 					mt = (Transformation) whenRule.getCoreResult();
 					assert mt != null;
@@ -251,13 +254,10 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 	public void where() {
 		// T6
 		for (SubRecord subRecord : subRecords) {
-			List<EObject> rdSeq = new ArrayList<EObject>();
 			Relation r = ruleBindings.get(RELATIONS_r);
 			assert (r != null);
-			rdSeq.add(r);
-			rdSeq.add(subRecord.rd);
 			//RelationDomainToTraceClassVar(rdSeq, tcv);
-			Rule innerRule = RelationDomainToTraceClassVar.FACTORY.createRule(transformation, rdSeq);
+			Rule innerRule = new RelationDomainToTraceClassVar(transformation, r, subRecord.rd);
 			if (innerRule != null) {
 				assert !innerRule.hasExecuted();
 				transformation.executeNestedRule(innerRule);
@@ -265,6 +265,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 				assert tcv != null;
 				subRecord.tcv = tcv;
 			}
+			//innerRule = new RWhenPatternToMGuardPattern(transformation);
 		}
 	}
 	

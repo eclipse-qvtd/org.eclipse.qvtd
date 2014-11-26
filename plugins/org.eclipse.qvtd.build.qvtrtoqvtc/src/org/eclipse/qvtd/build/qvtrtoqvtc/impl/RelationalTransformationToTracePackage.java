@@ -51,10 +51,10 @@ public class RelationalTransformationToTracePackage extends AbstractRule
 	public static final @NonNull RuleBindings.RuleKey<RelationalTransformation> RELATIONS_rt = RULE_BINDINGS.createRoot((RelationalTransformation)null, "rt");
 	
 	// Core
-	public static final @NonNull RuleBindings.RuleKey<org.eclipse.ocl.examples.pivot.Package> CORE_p = RULE_BINDINGS.create((org.eclipse.ocl.examples.pivot.Package)null, "p");
+	private org.eclipse.ocl.examples.pivot.Package p = null;
 	
 	// Primitives
-	String rtn;
+	private String rtn;
 
 	public RelationalTransformationToTracePackage(@NonNull QvtrToQvtcTransformation transformation, @NonNull RelationalTransformation rt) {
 		super(transformation);
@@ -64,16 +64,13 @@ public class RelationalTransformationToTracePackage extends AbstractRule
 	@Override
 	public void check() {
 		RelationalTransformation rt = ruleBindings.get(RELATIONS_rt);
+		assert rt != null;
 		rtn = rt.getName();
-		org.eclipse.ocl.examples.pivot.Package p = ruleBindings.get(CORE_p);
-		assert (rt != null) && (p == null);
+		
 	}
 	
 	@Override
-	@NonNull
-	public Object getCoreResult() {
-		org.eclipse.ocl.examples.pivot.Package p = ruleBindings.get(CORE_p);
-		assert p != null;
+	public @Nullable Object getCoreResult() {
 		return p;
 	}
 
@@ -83,11 +80,8 @@ public class RelationalTransformationToTracePackage extends AbstractRule
 
 	@Override
 	public void instantiateOutput() {
-		org.eclipse.ocl.examples.pivot.Package p = ruleBindings.get(CORE_p);
-		assert p == null;
 		p = PivotFactory.eINSTANCE.createPackage();
 		assert p != null;
-		ruleBindings.put(CORE_p, p);
 		transformation.addOrphan(p);
 	}
 
@@ -97,8 +91,6 @@ public class RelationalTransformationToTracePackage extends AbstractRule
 	@Override
 	public void setAttributes() {
 		
-		org.eclipse.ocl.examples.pivot.Package p = ruleBindings.get(CORE_p);
-		assert p != null;
 		p.setName("P" + rtn);
 	}
 }

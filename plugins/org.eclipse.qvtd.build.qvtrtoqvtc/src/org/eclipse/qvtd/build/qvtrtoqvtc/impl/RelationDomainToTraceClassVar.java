@@ -52,14 +52,13 @@ public class RelationDomainToTraceClassVar extends AbstractRule implements Rule 
 		}
 	}
 	
-	
 	// Relations
 	private static final @NonNull RuleBindings.KeySet RULE_BINDINGS = new RuleBindings.KeySet();
 	private static final @NonNull RuleBindings.RuleKey<Relation> RELATIONS_r = RULE_BINDINGS.createRoot((Relation)null, "r");
 	private static final @NonNull RuleBindings.RuleKey<RelationDomain> RELATIONS_d = RULE_BINDINGS.createRoot((RelationDomain)null, "d");
 	
 	// Core
-	private static final @NonNull RuleBindings.RuleKey<RealizedVariable> CORE_tcv = RULE_BINDINGS.create((RealizedVariable)null, "tcv");
+	RealizedVariable tcv;
 	
 	private String rn, dn;
 	private Type tc;
@@ -85,10 +84,8 @@ public class RelationDomainToTraceClassVar extends AbstractRule implements Rule 
 	}
 
 	@Override
-	@NonNull
+	@Nullable
 	public Object getCoreResult() {
-		RealizedVariable tcv = ruleBindings.get(CORE_tcv);
-		assert tcv != null;
 		return tcv;
 	}
 	
@@ -100,10 +97,7 @@ public class RelationDomainToTraceClassVar extends AbstractRule implements Rule 
 	public void instantiateOutput() {
 		
 		// TODO change to global search since we have name and type!
-		RealizedVariable tcv = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
-		ruleBindings.put(CORE_tcv, tcv);
-		tcv.setName(rn+"_"+dn+"_V");
-		tcv.setType(tc);
+		tcv = transformation.findRealizedVariable(rn+"_"+dn+"_V", tc);
 	}
 	
 	@Override
@@ -111,12 +105,12 @@ public class RelationDomainToTraceClassVar extends AbstractRule implements Rule 
 		
 		Relation r = ruleBindings.get(RELATIONS_r);
 		assert r != null;
-		//Rule whenRule = RelationToTraceClass.FACTORY.createRule(transformation, r);
-		//if (whenRule != null && whenRule.hasExecuted()) {
-		//	tc = (Type) whenRule.getCoreResult();
-		//	assert tc != null;
-		//	return true;
-		//}
+		Rule whenRule = RelationToTraceClass.FACTORY.createRule(transformation, r);
+		if (whenRule != null && whenRule.hasExecuted()) {
+			tc = (Type) whenRule.getCoreResult();
+			assert tc != null;
+			return true;
+		}
 		return true;
 	}
 	

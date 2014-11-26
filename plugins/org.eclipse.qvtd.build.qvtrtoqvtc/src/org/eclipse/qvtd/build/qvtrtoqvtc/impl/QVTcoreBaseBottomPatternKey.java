@@ -18,10 +18,10 @@ public class QVTcoreBaseBottomPatternKey implements RelationKey {
 	private Map<KeyBindings, BottomPattern> bottomPatterns = new HashMap<KeyBindings, BottomPattern>();
 	
 		
-	public void add(BottomPattern guardPattern) {
+	public void add(BottomPattern bottomPattern) {
 		KeyBindings relationKeyBindings = new KeyBindings(this);
-		relationKeyBindings.put(AREA, guardPattern.getArea());
-		bottomPatterns.put(relationKeyBindings, guardPattern);
+		relationKeyBindings.put(AREA, bottomPattern.getArea());
+		bottomPatterns.put(relationKeyBindings, bottomPattern);
 	}
 	
 	public BottomPattern get(Area area) {

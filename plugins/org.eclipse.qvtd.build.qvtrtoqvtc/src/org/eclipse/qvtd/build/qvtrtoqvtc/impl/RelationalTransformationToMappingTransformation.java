@@ -76,15 +76,15 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 //	private static final @NonNull RuleBindings.RuleKey<TypedModel> RELATIONS_rtm = RULE_BINDINGS.create((TypedModel)null, "rtm");
 	
 	// Core
-	public static final @NonNull RuleBindings.RuleKey<Transformation> CORE_mt = RULE_BINDINGS.create((Transformation)null, "mt");
+	Transformation mt = null;
+	//public static final @NonNull RuleBindings.RuleKey<Transformation> CORE_mt = RULE_BINDINGS.create((Transformation)null, "mt");
 //	public static final @NonNull RuleBindings.RuleKey<TypedModel> CORE_mtm = RULE_BINDINGS.create((TypedModel)null, "mtm");
 	
 	// Shared
 //	public static final @NonNull RuleBindings.RuleKey<String> SHARED_tmn = RULE_BINDINGS.create((String)null, "tmn");
 //	public static final @NonNull RuleBindings.RuleKey<List<org.eclipse.ocl.examples.pivot.Package>> SHARED_up = RULE_BINDINGS.create((List<org.eclipse.ocl.examples.pivot.Package>)null, "up");
-	
-	// Primitives
 	String rtn;
+	 
 	
 	protected final @NonNull List<SubRecord> subRecords = new ArrayList<SubRecord>();
 	
@@ -97,7 +97,6 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 	public void check() {
 		RelationalTransformation rt = ruleBindings.get(RELATIONS_rt);
 		rtn = rt.getName();
-		Transformation mt = ruleBindings.get(CORE_mt);
 		assert (rt != null) && (mt == null);
 		for (TypedModel rtm : rt.getModelParameter()) {
 			@SuppressWarnings("null")@NonNull List<Package> usedPackage = rtm.getUsedPackage();
@@ -108,10 +107,7 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 	}
 	
 	@Override
-	@NonNull
-	public Object getCoreResult() {
-		Transformation mt = ruleBindings.get(CORE_mt);
-		assert mt != null;
+	public @Nullable Object getCoreResult() {
 		return mt;
 	}
 
@@ -121,11 +117,8 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 
 	@Override
 	public void instantiateOutput() {
-		Transformation mt = ruleBindings.get(CORE_mt);
-		assert mt == null;
 		mt = QVTbaseFactory.eINSTANCE.createTransformation();
 		assert mt != null;
-		ruleBindings.put(CORE_mt, mt);
 		transformation.addOrphan(mt);
 		for (SubRecord subRecord : subRecords) {
 			TypedModel mtm =  QVTbaseFactory.eINSTANCE.createTypedModel();
@@ -138,7 +131,6 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 	 */
 	@Override
 	public void setAttributes() {
-		Transformation mt = ruleBindings.get(CORE_mt);
 		assert mt != null;
 		for (SubRecord subRecord : subRecords) {
 			TypedModel mtm = subRecord.mtm;

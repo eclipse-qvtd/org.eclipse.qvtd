@@ -73,7 +73,7 @@ public abstract class AbstractRule implements Rule
 	protected final @NonNull QvtrToQvtcTransformation transformation;
 	protected final @NonNull RuleBindings ruleBindings = new RuleBindings(this);
 	
-	private boolean executed = false;
+	protected boolean executed = false;
 
 	protected AbstractRule(@NonNull QvtrToQvtcTransformation transformation) {
 		this.transformation = transformation;
@@ -82,10 +82,9 @@ public abstract class AbstractRule implements Rule
 	public void check() {
 		throw new UnsupportedOperationException();
 	}
-
-	public void instantiateOutput() {
-		throw new UnsupportedOperationException();
-	}
+	
+	// Some rules don't need to instantiate anything
+	public void instantiateOutput() { }
 
 	@Override
 	@NonNull

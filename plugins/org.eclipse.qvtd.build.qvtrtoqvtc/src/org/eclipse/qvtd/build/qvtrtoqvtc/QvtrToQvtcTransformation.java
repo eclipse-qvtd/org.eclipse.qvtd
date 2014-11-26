@@ -14,11 +14,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.pivot.PivotFactory;
+import org.eclipse.ocl.examples.pivot.Root;
+import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseBottomPatternKey;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseCoreDomainKey;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseGuardPatternKey;
@@ -38,6 +42,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
+import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 
 public class QvtrToQvtcTransformation
 {
@@ -77,7 +82,6 @@ public class QvtrToQvtcTransformation
 				traceRoots.add(eObject);
 			}
 		}
-		potentialOrphans.clear();
 		executeFactory(RelationToTraceClass.FACTORY);
 		for (EObject eObject : potentialOrphans) {
 			if (eObject.eContainer() == null) {
@@ -91,7 +95,6 @@ public class QvtrToQvtcTransformation
 				coreRoots.add(eObject);
 			}
 		}
-		potentialOrphans.clear();
 		executeFactory(TopLevelRelationToMappingForEnforcement.FACTORY);
 		for (EObject eObject : potentialOrphans) {
 			if (eObject.eContainer() == null) {
@@ -209,6 +212,7 @@ public class QvtrToQvtcTransformation
 		if (mg == null) {
 			mg = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
 			mg.setArea(area);
+			guardPatterns.add(mg);
 			addOrphan(mg);
 		}
 		assert mg!= null;
@@ -223,6 +227,7 @@ public class QvtrToQvtcTransformation
 			mb = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
 			mb.setArea(area);
 			mb.getBindsTo();
+			botttomPatterns.add(mb);
 			addOrphan(mb);
 		}
 		assert mb!= null;
@@ -238,10 +243,41 @@ public class QvtrToQvtcTransformation
 			md = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
 			md.setName(name);
 			md.setRule(rule);
+			coreDomains.add(md);
 			addOrphan(md);
 		}
 		assert md!= null;
 		return md;
+	}
+	
+	PivotVariableKey variables = new PivotVariableKey();
+	PivotVariableKey realizedVariables = new PivotVariableKey();
+	
+	public @NonNull RealizedVariable findRealizedVariable(String name, Type type) {
+		RealizedVariable rv = (RealizedVariable) realizedVariables.get(name, type);
+		if (rv == null) {
+			rv = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
+			rv.setName(name);
+			rv.setType(type);
+			realizedVariables.add(rv);
+			addOrphan(rv);
+		}
+		return rv;
+	}
+	
+	public void save(@NonNull Resource asResource, @NonNull Collection<? extends EObject> eObjects, @NonNull Map<Object, Object> options) throws IOException {
+        Root root = PivotFactory.eINSTANCE.createRoot();
+        root.setExternalURI(asResource.getURI().toString());
+        asResource.getContents().add(root);
+        for (EObject eObject : eObjects) {
+        	if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
+                root.getNestedPackage().add((org.eclipse.ocl.examples.pivot.Package)eObject);
+        	}
+        	else {
+        		asResource.getContents().add(eObject);
+        	}
+        }
+		asResource.save(options);
 	}
 
 }

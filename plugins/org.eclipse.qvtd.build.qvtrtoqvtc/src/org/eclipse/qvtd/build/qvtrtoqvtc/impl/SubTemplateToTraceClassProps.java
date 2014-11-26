@@ -13,7 +13,6 @@ package org.eclipse.qvtd.build.qvtrtoqvtc.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
@@ -29,32 +28,8 @@ import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 public class SubTemplateToTraceClassProps extends AbstractRule
 {	
 	
-	private static class Factory extends AbstractRule.Factory
-	{
-		public @Nullable Rule createRule(@NonNull QvtrToQvtcTransformation transformation,
-				@NonNull EObject eo) {
-			Rule rule = null;
-			if (eo instanceof ObjectTemplateExp) {	
-				rule = new SubTemplateToTraceClassProps(transformation, (ObjectTemplateExp) eo);
-				Rule tracedRule = transformation.getRecord(rule.getRuleBindings());
-				if (tracedRule != null)
-					rule = tracedRule;
-			}
-			return rule;
-		}
-
-		@Override
-		public @Nullable Rule createRule(
-				@NonNull QvtrToQvtcTransformation transformation,
-				@NonNull List<EObject> eos) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-	}
-	
 	private class SubRecord
 	{
-
 		// Relations
 		@NonNull private ObjectTemplateExp tp;
 		@NonNull private String vn;
@@ -62,7 +37,6 @@ public class SubTemplateToTraceClassProps extends AbstractRule
 		
 		// Core
 		@Nullable private Property a;
-		
 		
 		public SubRecord( @NonNull ObjectTemplateExp tp, @NonNull String vn, @NonNull Type c) {
 			
@@ -76,33 +50,23 @@ public class SubTemplateToTraceClassProps extends AbstractRule
 	// Relations
 	private static final @NonNull RuleBindings.KeySet RULE_BINDINGS = new RuleBindings.KeySet();
 	public static final @NonNull RuleBindings.RuleKey<ObjectTemplateExp> RELATIONS_t = RULE_BINDINGS.createRoot((ObjectTemplateExp)null, "t");
-//	public static final @NonNull RelationsBindings.Key<PropertyTemplateItem> RELATIONS_pt = RELATIONS_BINDINGS.create((PropertyTemplateItem)null, "pt");
 	public static final @NonNull RuleBindings.RuleKey<ObjectTemplateExp> RELATIONS_tp = RULE_BINDINGS.create((ObjectTemplateExp)null, "tp");
-//	public static final @NonNull RelationsBindings.Key<Variable> RELATIONS_tv = RELATIONS_BINDINGS.create((Variable)null, "tv");
-//	public static final @NonNull RelationsBindings.Key<Type> RELATIONS_c = RELATIONS_BINDINGS.create((Type)null, "c");
 	
 	// Core
-	public static final @NonNull RuleBindings.RuleKey<org.eclipse.ocl.examples.pivot.Class> CORE_rc = RULE_BINDINGS.create((org.eclipse.ocl.examples.pivot.Class)null, "rc");
-	public static final @NonNull RuleBindings.RuleKey<Property> CORE_a = RULE_BINDINGS.create((Property)null, "a");
-	
-	// Shared
-	public static final @NonNull RuleBindings.RuleKey<String> SHARED_vn = RULE_BINDINGS.create((String)null, "vn");
-	public static final @NonNull RuleBindings.RuleKey<Type> SHARED_c = RULE_BINDINGS.create((Type)null, "c");	
-	
-	
-	public static final @NonNull Rule.Factory FACTORY = new Factory(); 
+	@NonNull org.eclipse.ocl.examples.pivot.Class rc;
 	
 	protected final @NonNull List<SubRecord> subRecords = new ArrayList<SubRecord>();
 
-	public SubTemplateToTraceClassProps(@NonNull QvtrToQvtcTransformation transformation, @NonNull ObjectTemplateExp t) {
+	public SubTemplateToTraceClassProps(@NonNull QvtrToQvtcTransformation transformation,
+			@NonNull ObjectTemplateExp t,
+			@NonNull org.eclipse.ocl.examples.pivot.Class rc) {
 		super(transformation);
 		ruleBindings.put(RELATIONS_t, t);
+		this.rc = rc;
 	}
 
 	public void check() {
 		ObjectTemplateExp t = ruleBindings.get(RELATIONS_t);
-		assert t != null;
-		org.eclipse.ocl.examples.pivot.Class rc = ruleBindings.get(CORE_rc);
 		assert (t != null) && (rc != null);
 		for (PropertyTemplateItem pt : t.getPart()) {
 			OCLExpression value = pt.getValue();
@@ -132,7 +96,6 @@ public class SubTemplateToTraceClassProps extends AbstractRule
 	}
 	
 	
-	
 	@Override
 	public void instantiateOutput() {
 		for (SubRecord subRecord : subRecords) {
@@ -148,7 +111,6 @@ public class SubTemplateToTraceClassProps extends AbstractRule
 	 */
 	@Override
 	public void setAttributes() {
-		org.eclipse.ocl.examples.pivot.Class rc = ruleBindings.get(CORE_rc);
 		assert rc != null;
 		for (SubRecord subRecord : subRecords) {
 			Property a = subRecord.a;
@@ -162,13 +124,10 @@ public class SubTemplateToTraceClassProps extends AbstractRule
 
 	@Override
 	public void where() {
-		org.eclipse.ocl.examples.pivot.Class rc = ruleBindings.get(CORE_rc);
 		for (SubRecord subRecord : subRecords) {
-			Rule innerRule = SubTemplateToTraceClassProps.FACTORY.createRule(transformation, subRecord.tp);
+			Rule innerRule = new SubTemplateToTraceClassProps(transformation, subRecord.tp, rc);
 			if (innerRule != null) {
 				assert !innerRule.hasExecuted();
-				RuleBindings innerRuleBindings = innerRule.getRuleBindings();
-				innerRuleBindings.put(SubTemplateToTraceClassProps.CORE_rc, rc);
 				transformation.executeNestedRule(innerRule);
 			}
 			
