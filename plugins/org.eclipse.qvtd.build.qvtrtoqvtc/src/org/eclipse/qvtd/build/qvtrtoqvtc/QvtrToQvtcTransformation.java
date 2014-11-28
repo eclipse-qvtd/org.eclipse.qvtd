@@ -27,7 +27,6 @@ import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseBottomPatternKey;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseCoreDomainKey;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseGuardPatternKey;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreMappingKey;
-import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RelationToTraceClass;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RelationalTransformationToMappingTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RelationalTransformationToTracePackage;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RuleBindings;
@@ -82,19 +81,8 @@ public class QvtrToQvtcTransformation
 				traceRoots.add(eObject);
 			}
 		}
-		executeFactory(RelationToTraceClass.FACTORY);
-		for (EObject eObject : potentialOrphans) {
-			if (eObject.eContainer() == null) {
-				traceRoots.add(eObject);
-			}
-		}
 		potentialOrphans.clear();
 		executeFactory(RelationalTransformationToMappingTransformation.FACTORY);
-		for (EObject eObject : potentialOrphans) {
-			if (eObject.eContainer() == null) {
-				coreRoots.add(eObject);
-			}
-		}
 		executeFactory(TopLevelRelationToMappingForEnforcement.FACTORY);
 		for (EObject eObject : potentialOrphans) {
 			if (eObject.eContainer() == null) {
