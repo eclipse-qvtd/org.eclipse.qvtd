@@ -19,7 +19,6 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
-import org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -51,13 +50,6 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * @generated
 	 */
 	private EClass keyEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass oppositePropertyCallExpEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -234,15 +226,6 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 */
 	public EReference getKey_OppositePart() {
 		return (EReference)keyEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getOppositePropertyCallExp() {
-		return oppositePropertyCallExpEClass;
 	}
 
 	/**
@@ -489,8 +472,6 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		createEReference(keyEClass, KEY__TRANSFORMATION);
 		createEReference(keyEClass, KEY__OPPOSITE_PART);
 
-		oppositePropertyCallExpEClass = createEClass(OPPOSITE_PROPERTY_CALL_EXP);
-
 		relationEClass = createEClass(RELATION);
 		createEAttribute(relationEClass, RELATION__IS_TOP_LEVEL);
 		createEReference(relationEClass, RELATION__OPERATIONAL_IMPL);
@@ -557,7 +538,6 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		// Add supertypes to classes
 		domainPatternEClass.getESuperTypes().add(theQVTbasePackage.getPattern());
 		keyEClass.getESuperTypes().add(thePivotPackage.getElement());
-		oppositePropertyCallExpEClass.getESuperTypes().add(thePivotPackage.getPropertyCallExp());
 		relationEClass.getESuperTypes().add(theQVTbasePackage.getRule());
 		relationCallExpEClass.getESuperTypes().add(thePivotPackage.getOCLExpression());
 		relationDomainEClass.getESuperTypes().add(theQVTbasePackage.getDomain());
@@ -575,8 +555,6 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		initEReference(getKey_Part(), thePivotPackage.getProperty(), null, "part", null, 0, -1, Key.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getKey_Transformation(), this.getRelationalTransformation(), this.getRelationalTransformation_OwnedKey(), "transformation", null, 0, 1, Key.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKey_OppositePart(), thePivotPackage.getProperty(), null, "oppositePart", null, 0, -1, Key.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
-
-		initEClass(oppositePropertyCallExpEClass, OppositePropertyCallExp.class, "OppositePropertyCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(relationEClass, Relation.class, "Relation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getRelation_IsTopLevel(), thePivotPackage.getBoolean(), "isTopLevel", null, 0, 1, Relation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -625,10 +603,22 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	protected void createEmofAnnotations() {
 		String source = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";	
 		addAnnotation
+		  (getKey_Identifies(), 
+		   source, 
+		   new String[] {
+			 "body", "key"
+		   });	
+		addAnnotation
+		  (getKey_Part(), 
+		   source, 
+		   new String[] {
+			 "body", "key"
+		   });	
+		addAnnotation
 		  (getKey_OppositePart(), 
 		   source, 
 		   new String[] {
-			 "body", "oppositeKey"
+			 "body", "oppKey"
 		   });	
 		addAnnotation
 		  (getRelation_When(), 
@@ -641,6 +631,18 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 		   source, 
 		   new String[] {
 			 "body", "whereOwner"
+		   });	
+		addAnnotation
+		  (getRelationCallExp_Argument(), 
+		   source, 
+		   new String[] {
+			 "body", "relationCallExp"
+		   });	
+		addAnnotation
+		  (getRelationCallExp_ReferredRelation(), 
+		   source, 
+		   new String[] {
+			 "body", "relationCallExp"
 		   });	
 		addAnnotation
 		  (getRelationDomain_DefaultAssignment(), 

@@ -11,6 +11,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcorebase.as2cs;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.NamedElement;
@@ -64,8 +66,14 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 
 	protected @Nullable Package getScope(@NonNull Variable asVariable) {
 		TypedModel typedModel = QVTcoreBaseUtil.getTypedModel(QVTcoreBaseUtil.getContainingArea(asVariable));
-		Package scope = typedModel != null ? typedModel.getUsedPackage().get(0) : null;
-		return scope;
+		if (typedModel == null) {
+			return null;
+		}
+		List<Package> usedPackages = typedModel.getUsedPackage();
+		if (usedPackages.isEmpty()) {
+			return null;
+		}
+		return usedPackages.get(0);
 	}
 
 	protected void importPackage(@NonNull org.eclipse.ocl.examples.pivot.Package aPackage) {

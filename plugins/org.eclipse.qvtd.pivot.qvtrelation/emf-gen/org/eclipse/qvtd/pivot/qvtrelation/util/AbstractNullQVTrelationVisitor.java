@@ -44,10 +44,6 @@ public abstract class AbstractNullQVTrelationVisitor<R, C>
 		return null;
 	}
 
-	public @Nullable R visitOppositePropertyCallExp(@NonNull org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp object) {
-		return null;
-	}
-
 	public @Nullable R visitRelation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.Relation object) {
 		return null;
 	}

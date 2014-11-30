@@ -52,7 +52,11 @@
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTTemplate.TemplateExp" name="TemplateExp"
       abstract="true" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//LiteralExp">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTTemplate.TemplateExp.bindsTo"
-        name="bindsTo" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Variable"/>
+        name="bindsTo" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Variable">
+      <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
+        <details key="body" value="templateExp"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTTemplate.TemplateExp.where"
         name="where" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//OCLExpression"
         containment="true">

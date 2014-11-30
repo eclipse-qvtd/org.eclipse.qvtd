@@ -10,7 +10,11 @@
  ******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
@@ -21,6 +25,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
@@ -167,31 +172,26 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
      * @see uk.ac.york.qvtd.pivot.qvtimperative.evaluation.QVTimperativeAbstractEvaluationVisitorImpl#visitMapping(org.eclipse.qvtd.pivot.qvtimperative.Mapping)
      */
 	public @Nullable Object visitMapping(@NonNull Mapping mapping) {
-
-		
-		for (Domain domain : mapping.getDomain()) {
-            if (domain.isIsEnforceable()) {
-            	domain.accept(undecoratedVisitor);
-           }
-        }
-		/*
-		for (Domain domain : mapping.getDomain()) {
-        	if (domain.isIsCheckable()) {
-        		Object result = domain.accept(undecoratedVisitor);
-            	if (result != Boolean.TRUE) {
-            		return result;
-            	}
-       		}
-    	}
-    	*/		
-		GuardPattern gp = mapping.getGuardPattern();
+        GuardPattern gp = mapping.getGuardPattern();
         if (gp != null) {
         	Object result = gp.accept(undecoratedVisitor);
             if (result != Boolean.TRUE) {
             	return null;
             }
         }
-
+/*        for (Domain domain : mapping.getDomain()) {
+            if (domain.isIsCheckable()) {
+            	Object result = domain.accept(undecoratedVisitor);
+                if (result != Boolean.TRUE) {
+                	return result;
+                }
+           }
+        } */
+        for (Domain domain : mapping.getDomain()) {
+            if (domain.isIsEnforceable()) {
+            	domain.accept(undecoratedVisitor);
+           }
+        }
         /*result =*/ mapping.getBottomPattern().accept(undecoratedVisitor);
 //      if (result == Boolean.TRUE) {
 			MappingStatement mappingStatements = mapping.getMappingStatement();
@@ -209,14 +209,32 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
 
 	@Override
     public @Nullable Object visitTransformation(@NonNull Transformation transformation) {
-		
-		// Find the __root__ mapping
     	for (Rule rule : transformation.getRule()) {
-    		if (rule.getName().equals("__root__")) {
-    			QVTiEvaluationVisitor nv = ((QVTiEvaluationVisitor) undecoratedVisitor).createNestedEvaluator();
-    			rule.accept(nv);
+    		QVTiEvaluationVisitor nv = ((QVTiEvaluationVisitor) undecoratedVisitor).createNestedEvaluator();
+    		try {
+	    		// Find bindings before invoking the mapping so all visitors are equal
+	    		Map<Variable, List<Object>>  mappingBindings = new HashMap<Variable, List<Object>>();
+	    		List<Variable> rootVariables = new ArrayList<Variable>();
+	    		List<List<Object>> rootBindings = new ArrayList<List<Object>>();
+	    		for (Domain domain : rule.getDomain()) {
+	                CoreDomain coreDomain = (CoreDomain)domain;
+	                TypedModel m = coreDomain.getTypedModel();
+					for (@SuppressWarnings("null")@NonNull Variable var : coreDomain.getGuardPattern().getVariable()) {
+	                	nv.getEvaluationEnvironment().add(var, null);
+	                	rootVariables.add(var);
+	                    Type varType = var.getType();
+						if (varType != null) {
+							List<Object> bindingValuesSet = ((QVTiModelManager)modelManager).getElementsByType(m, varType);
+		                	rootBindings.add(bindingValuesSet);
+		                    mappingBindings.put(var, bindingValuesSet);
+						}
+	                }
+	            }
+	    		doMappingCallRecursion(nv, rule, rootVariables, rootBindings, 0);
+	    		break;		// FIXME ?? multiple rules
+    		}
+    		finally {
     			nv.dispose();
-    			break;
     		}
     	}
         return true;

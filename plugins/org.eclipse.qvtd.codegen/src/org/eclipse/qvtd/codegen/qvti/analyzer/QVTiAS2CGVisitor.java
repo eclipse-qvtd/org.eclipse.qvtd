@@ -106,6 +106,38 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisitor<CGNamedElement>
 {
+	public static class CGMappingCallBindingComparator implements Comparator<CGMappingCallBinding>
+	{
+		public static final @NonNull CGMappingCallBindingComparator INSTANCE = new CGMappingCallBindingComparator();
+
+		public int compare(CGMappingCallBinding o1, CGMappingCallBinding o2) {
+			MappingCallBinding b1 = (MappingCallBinding) o1.getAst();
+			MappingCallBinding b2 = (MappingCallBinding) o2.getAst();
+			Variable v1 = b1 != null ? b1.getBoundVariable() : null;
+			Variable v2 = b2 != null ? b2.getBoundVariable() : null;
+			String n1 = v1 != null ? v1.getName() : null;
+			String n2 = v2 != null ? v2.getName() : null;
+			if (n1 == null) n1 = "";
+			if (n2 == null) n2 = "";
+			return n1.compareTo(n2);
+		}
+	}
+
+	public static class CGVariableComparator implements Comparator<CGVariable>
+	{
+		public static final @NonNull CGVariableComparator INSTANCE = new CGVariableComparator();
+
+		public int compare(CGVariable o1, CGVariable o2) {
+			Variable v1 = (Variable) o1.getAst();
+			Variable v2 = (Variable) o2.getAst();
+			String n1 = v1 != null ? v1.getName() : null;
+			String n2 = v2 != null ? v2.getName() : null;
+			if (n1 == null) n1 = "";
+			if (n2 == null) n2 = "";
+			return n1.compareTo(n2);
+		}
+	}
+
 	protected final @NonNull QVTiAnalyzer analyzer;
 	protected final @NonNull QVTiGlobalContext globalContext;
 	
@@ -375,6 +407,11 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		if (mappingStatements != null) {
 			cgMappingExp.setBody(doVisit(CGValuedElement.class, mappingStatements));
 		}
+		List<CGGuardVariable> cgFreeVariables = cgMapping.getFreeVariables();
+		List<CGGuardVariable> sortedVariables = new ArrayList<CGGuardVariable>(cgFreeVariables);
+		Collections.sort(sortedVariables, CGVariableComparator.INSTANCE);
+		cgFreeVariables.clear();
+		cgFreeVariables.addAll(sortedVariables);
 		return cgMapping;
 	}
 
@@ -386,14 +423,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 			CGMappingCallBinding cgMappingCallBinding = doVisit(CGMappingCallBinding.class, asMappingCallBinding);
 			cgMappingCallBindings.add(cgMappingCallBinding);
 		}
-		Collections.sort(cgMappingCallBindings, new Comparator<CGMappingCallBinding>()
-		{
-			public int compare(CGMappingCallBinding o1, CGMappingCallBinding o2) {
-				String n1 = o1.getName();
-				String n2 = o2.getName();
-				return n1.compareTo(n2);
-			}
-		});
+		Collections.sort(cgMappingCallBindings, CGMappingCallBindingComparator.INSTANCE);
 		cgMappingCall.getMappingCallBindings().addAll(cgMappingCallBindings);
 		return cgMappingCall;
 	}

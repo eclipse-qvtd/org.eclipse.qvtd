@@ -31,13 +31,17 @@ import java.util.Set;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.ETypedElement;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.DynamicEObjectImpl;
@@ -50,6 +54,8 @@ import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.emf.ecore.xmi.XMLHelper;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.XMLSave;
+import org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData;
+import org.eclipse.emf.ecore.xmi.impl.EMOFResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
@@ -169,6 +175,7 @@ public class Ecore2UML {
 		ResourceSet ecoreResourceSet = new ResourceSetImpl();
 		projectMap.initializeResourceSet(ecoreResourceSet);
 		ecoreResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
+		ecoreResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("emof", new EMOFResourceFactoryImpl());
 		EcorePackage.eINSTANCE.getClass();
 		ecoreResourceSet.getResource(URI.createPlatformResourceURI("/org.eclipse.qvt/model/ecore/PrimitiveTypes.ecore", true), true);
 		ecoreResourceSet.getResource(URI.createPlatformResourceURI("/org.eclipse.qvt/model/ecore/EMOF.ecore", true), true);
@@ -298,7 +305,7 @@ public class Ecore2UML {
 			}
 		});
 		for (Resource xmiResource : xmiResourceSet.getResources()) {
-			// SAve intercepted to strip spurious post XMI 2.4 xmi:version
+			// Save intercepted to strip spurious post XMI 2.4 xmi:version
 			ByteArrayOutputStream s = new ByteArrayOutputStream();
 			xmiResource.save(s, xmiSaveOptions);
 			OutputStream os = xmiResourceSet.getURIConverter().createOutputStream(xmiResource.getURI());
@@ -349,6 +356,97 @@ public class Ecore2UML {
 		flatEPackage.getEClassifiers().addAll(flattenedObjects);
 		flatResource.getContents().add(flatEPackage);
 		flatResource.save(saveOptions);
+		//
+		//	Create ModelMorf compatible FlatQVT.xml
+		//
+		Resource emofResource = ecoreResourceSet.createResource(URI.createPlatformResourceURI("/org.eclipse.qvt/model/ecore/FlatQVT.emof", true));
+		emofResource.setURI(URI.createPlatformResourceURI("/org.eclipse.qvt/model/ecore/FlatQVT.xml", true));
+		emofResource.getContents().addAll(flatResource.getContents());
+		for (TreeIterator<EObject> tit = emofResource.getAllContents(); tit.hasNext(); ) {
+			EObject eObject = tit.next();
+			if (eObject instanceof EPackage) {
+				EPackage ePackage = (EPackage)eObject;
+				ePackage.setNsPrefix(null);
+			}
+			if (eObject instanceof ETypedElement) {
+				ETypedElement eTypedElement = (ETypedElement)eObject;
+				EClassifier eType = eTypedElement.getEType();
+				if (eType != null) {
+					if ("Boolean".equals(eType.getName())) {
+						eTypedElement.setEType(EcorePackage.Literals.EBOOLEAN);
+					}
+					else if ("Integer".equals(eType.getName())) {
+						eTypedElement.setEType(EcorePackage.Literals.EINT);
+					}
+//					else if ("Real".equals(eType.getName())) {
+//						eTypedElement.setEType(EcorePackage.Literals.EDOUBLE);
+//					}
+					else if ("String".equals(eType.getName())) {
+						eTypedElement.setEType(EcorePackage.Literals.ESTRING);
+					}
+					else if ("Unlimitednatural".equals(eType.getName())) {
+						eTypedElement.setEType(EcorePackage.Literals.EINT);
+					}
+				}
+			}
+			if (eObject instanceof EClassifier) {
+				EClassifier eClassifier = (EClassifier)eObject;
+				eClassifier.setInstanceClassName(null);
+			}
+			if (eObject instanceof EEnumLiteral) {
+				EEnumLiteral eEnumLiteral = (EEnumLiteral)eObject;
+				eEnumLiteral.eUnset(EcorePackage.Literals.EENUM_LITERAL__VALUE);
+			}
+			if (eObject instanceof EStructuralFeature) {
+				EStructuralFeature eStructuralFeature = (EStructuralFeature)eObject;
+				eStructuralFeature.setTransient(false);
+			}
+			if (eObject instanceof EReference) {
+				EReference eReference = (EReference)eObject;
+				eReference.setResolveProxies(true);
+				EReference eOpposite = eReference.getEOpposite();
+				if (eOpposite == null) {
+					EClass eOwningType = eReference.getEContainingClass();
+					EClass eReferencedType = eReference.getEReferenceType();
+					String oppositeRoleName = EcoreUtil.getAnnotation(eReference, EMOFExtendedMetaData.EMOF_PROPERTY_OPPOSITE_ROLE_NAME_ANNOTATION_SOURCE, "body");
+					if (oppositeRoleName == null) {
+						oppositeRoleName = eOwningType.getName();
+					}
+					else {
+						EAnnotation eAnnotation = eReference.getEAnnotation(EMOFExtendedMetaData.EMOF_PROPERTY_OPPOSITE_ROLE_NAME_ANNOTATION_SOURCE);
+						eReference.getEAnnotations().remove(eAnnotation);
+					}
+					eOpposite = EcoreFactory.eINSTANCE.createEReference();
+					eOpposite.setName(oppositeRoleName);
+					eOpposite.setEType(eOwningType);
+					eOpposite.setLowerBound(0);
+					eOpposite.setLowerBound(1);
+					eReferencedType.getEStructuralFeatures().add(eOpposite);
+					eReference.setEOpposite(eOpposite);
+					eOpposite.setEOpposite(eReference);
+				}
+			}
+		}
+//		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		emofResource.save(saveOptions);
+//		ByteArrayInputStream is = new ByteArrayInputStream(os.toByteArray());
+//		OutputStream s = URIConverter.WriteableOutputStream();
+		Map<String, Object> emofSaveOptions = new HashMap<String, Object>();
+		xmiSaveOptions.put(XMIResource.OPTION_USE_XMI_TYPE, Boolean.TRUE);
+		xmiSaveOptions.put(XMLResource.OPTION_LINE_WIDTH, 132);
+		xmiSaveOptions.put(XMLResource.OPTION_LINE_DELIMITER, "\n");
+		ByteArrayOutputStream s = new ByteArrayOutputStream();
+		emofResource.save(s, emofSaveOptions);
+		OutputStream os = ecoreResourceSet.getURIConverter().createOutputStream(emofResource.getURI());
+		Writer ow = new OutputStreamWriter(os);
+		ByteArrayInputStream is = new ByteArrayInputStream(s.toByteArray());
+		BufferedReader ir = new BufferedReader(new InputStreamReader(is));
+		for (String inLine = ir.readLine(); inLine != null; inLine = ir.readLine()) {
+			String outline = inLine.replace(EMOFExtendedMetaData.EMOF_PACKAGE_NS_URI_2_0, EMOFExtendedMetaData.EMOF_PACKAGE_NS_URI);
+			ow.append(outline + "\n");
+		}
+		ow.close();
+		os.close();
 		return;
 	}
 

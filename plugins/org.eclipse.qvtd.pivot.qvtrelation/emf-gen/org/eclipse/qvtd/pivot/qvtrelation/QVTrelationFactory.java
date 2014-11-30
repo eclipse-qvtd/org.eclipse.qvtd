@@ -48,15 +48,6 @@ public interface QVTrelationFactory extends EFactory {
 	Key createKey();
 
 	/**
-	 * Returns a new object of class '<em>Opposite Property Call Exp</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Opposite Property Call Exp</em>'.
-	 * @generated
-	 */
-	OppositePropertyCallExp createOppositePropertyCallExp();
-
-	/**
 	 * Returns a new object of class '<em>Relation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

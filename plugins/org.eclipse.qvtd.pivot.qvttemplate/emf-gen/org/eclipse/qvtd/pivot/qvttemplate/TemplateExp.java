@@ -44,7 +44,7 @@ public interface TemplateExp extends EObject, LiteralExp {
 	 * @return the value of the '<em>Binds To</em>' reference.
 	 * @see #setBindsTo(Variable)
 	 * @see org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage#getTemplateExp_BindsTo()
-	 * @model
+	 * @model annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='templateExp'"
 	 * @generated
 	 */
 	Variable getBindsTo();

@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
-import org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationFactory;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -74,7 +73,6 @@ public class QVTrelationFactoryImpl extends EFactoryImpl implements QVTrelationF
 		switch (eClass.getClassifierID()) {
 			case QVTrelationPackage.DOMAIN_PATTERN: return createDomainPattern();
 			case QVTrelationPackage.KEY: return createKey();
-			case QVTrelationPackage.OPPOSITE_PROPERTY_CALL_EXP: return createOppositePropertyCallExp();
 			case QVTrelationPackage.RELATION: return createRelation();
 			case QVTrelationPackage.RELATION_CALL_EXP: return createRelationCallExp();
 			case QVTrelationPackage.RELATION_DOMAIN: return createRelationDomain();
@@ -105,16 +103,6 @@ public class QVTrelationFactoryImpl extends EFactoryImpl implements QVTrelationF
 	public Key createKey() {
 		KeyImpl key = new KeyImpl();
 		return key;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public OppositePropertyCallExp createOppositePropertyCallExp() {
-		OppositePropertyCallExpImpl oppositePropertyCallExp = new OppositePropertyCallExpImpl();
-		return oppositePropertyCallExp;
 	}
 
 	/**

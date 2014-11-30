@@ -22,6 +22,7 @@ import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid;
 import org.eclipse.ocl.examples.pivot.utilities.AS2XMIidVisitor;
 import org.eclipse.ocl.examples.pivot.utilities.ASSaver;
 import org.eclipse.ocl.examples.pivot.utilities.ASSaverLocateVisitor;
+import org.eclipse.ocl.examples.pivot.utilities.ASSaverNormalizeVisitor;
 import org.eclipse.ocl.examples.pivot.utilities.ASSaverResolveVisitor;
 import org.eclipse.ocl.examples.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
@@ -62,6 +63,11 @@ public class QVTimperativeASResourceFactory extends AbstractASResourceFactory
 	@Override
 	public @NonNull ASSaverLocateVisitor createASSaverLocateVisitor(@NonNull ASSaver asSaver) {
 		return new QVTimperativeASSaverLocateVisitor(asSaver);
+	}
+
+	@Override
+	public @NonNull ASSaverNormalizeVisitor createASSaverNormalizeVisitor(@NonNull ASSaver saver) {
+		return new QVTimperativeASSaverNormalizeVisitor(saver);
 	}
 
 	@Override
