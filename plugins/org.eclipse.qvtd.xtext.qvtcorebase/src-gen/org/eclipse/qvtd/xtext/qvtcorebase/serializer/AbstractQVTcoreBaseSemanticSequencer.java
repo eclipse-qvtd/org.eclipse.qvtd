@@ -12,28 +12,36 @@ import org.eclipse.ocl.examples.xtext.base.basecs.PathElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathElementWithURICS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PrimitiveTypeRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TemplateBindingCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TemplateParameterSubstitutionCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TemplateSignatureCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TuplePartCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TupleTypeCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.BinaryOperatorCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypeParameterCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypedTypeRefCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.WildcardTypeRefCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.BooleanLiteralExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.CollectionLiteralExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.CollectionLiteralPartCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.CollectionPatternCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.CollectionTypeCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ConstructorPartCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ContextCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.CurlyBracketedClauseCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.IfExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.IfThenExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.InfixExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.InvalidLiteralExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.LambdaLiteralExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.LetExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.LetVariableCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NameExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NavigatingArgCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NavigationOperatorCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NestedExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NullLiteralExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NumberLiteralExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.PatternExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.PrefixExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.RoundBracketedClauseCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.SelfExpCS;
@@ -43,7 +51,6 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.TupleLiteralEx
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.TupleLiteralPartCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.TypeLiteralExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.TypeNameExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.UnaryOperatorCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.UnlimitedNaturalLiteralExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.serializer.EssentialOCLSemanticSequencer;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.AssignmentCS;
@@ -148,6 +155,24 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 					return; 
 				}
 				else break;
+			case BaseCSPackage.TEMPLATE_BINDING_CS:
+				if(context == grammarAccess.getTemplateBindingCSRule()) {
+					sequence_TemplateBindingCS(context, (TemplateBindingCS) semanticObject); 
+					return; 
+				}
+				else break;
+			case BaseCSPackage.TEMPLATE_PARAMETER_SUBSTITUTION_CS:
+				if(context == grammarAccess.getTemplateParameterSubstitutionCSRule()) {
+					sequence_TemplateParameterSubstitutionCS(context, (TemplateParameterSubstitutionCS) semanticObject); 
+					return; 
+				}
+				else break;
+			case BaseCSPackage.TEMPLATE_SIGNATURE_CS:
+				if(context == grammarAccess.getTemplateSignatureCSRule()) {
+					sequence_TemplateSignatureCS(context, (TemplateSignatureCS) semanticObject); 
+					return; 
+				}
+				else break;
 			case BaseCSPackage.TUPLE_PART_CS:
 				if(context == grammarAccess.getTuplePartCSRule()) {
 					sequence_TuplePartCS(context, (TuplePartCS) semanticObject); 
@@ -169,22 +194,35 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 					return; 
 				}
 				else break;
-			}
-		else if(semanticObject.eClass().getEPackage() == EssentialOCLCSPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
-			case EssentialOCLCSPackage.BINARY_OPERATOR_CS:
-				if(context == grammarAccess.getBinaryOperatorCSRule() ||
-				   context == grammarAccess.getEssentialOCLInfixOperatorCSRule() ||
-				   context == grammarAccess.getInfixOperatorCSRule()) {
-					sequence_EssentialOCLInfixOperatorCS(context, (BinaryOperatorCS) semanticObject); 
+			case BaseCSPackage.TYPE_PARAMETER_CS:
+				if(context == grammarAccess.getTypeParameterCSRule()) {
+					sequence_TypeParameterCS(context, (TypeParameterCS) semanticObject); 
 					return; 
 				}
 				else break;
+			case BaseCSPackage.TYPED_TYPE_REF_CS:
+				if(context == grammarAccess.getTypeRefCSRule() ||
+				   context == grammarAccess.getTypedRefCSRule() ||
+				   context == grammarAccess.getTypedTypeRefCSRule()) {
+					sequence_TypedTypeRefCS(context, (TypedTypeRefCS) semanticObject); 
+					return; 
+				}
+				else break;
+			case BaseCSPackage.WILDCARD_TYPE_REF_CS:
+				if(context == grammarAccess.getTypeRefCSRule() ||
+				   context == grammarAccess.getWildcardTypeRefCSRule()) {
+					sequence_WildcardTypeRefCS(context, (WildcardTypeRefCS) semanticObject); 
+					return; 
+				}
+				else break;
+			}
+		else if(semanticObject.eClass().getEPackage() == EssentialOCLCSPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case EssentialOCLCSPackage.BOOLEAN_LITERAL_EXP_CS:
 				if(context == grammarAccess.getBooleanLiteralExpCSRule() ||
 				   context == grammarAccess.getExpCSRule() ||
-				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedExpressionAction_0_1_0() ||
+				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedLeftAction_0_1_0() ||
 				   context == grammarAccess.getNavigatingArgExpCSRule() ||
-				   context == grammarAccess.getPrefixedExpCSRule() ||
+				   context == grammarAccess.getPrefixedPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimitiveLiteralExpCSRule()) {
 					sequence_BooleanLiteralExpCS(context, (BooleanLiteralExpCS) semanticObject); 
@@ -194,9 +232,9 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 			case EssentialOCLCSPackage.COLLECTION_LITERAL_EXP_CS:
 				if(context == grammarAccess.getCollectionLiteralExpCSRule() ||
 				   context == grammarAccess.getExpCSRule() ||
-				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedExpressionAction_0_1_0() ||
+				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedLeftAction_0_1_0() ||
 				   context == grammarAccess.getNavigatingArgExpCSRule() ||
-				   context == grammarAccess.getPrefixedExpCSRule() ||
+				   context == grammarAccess.getPrefixedPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimaryExpCSRule()) {
 					sequence_CollectionLiteralExpCS(context, (CollectionLiteralExpCS) semanticObject); 
 					return; 
@@ -205,6 +243,16 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 			case EssentialOCLCSPackage.COLLECTION_LITERAL_PART_CS:
 				if(context == grammarAccess.getCollectionLiteralPartCSRule()) {
 					sequence_CollectionLiteralPartCS(context, (CollectionLiteralPartCS) semanticObject); 
+					return; 
+				}
+				else break;
+			case EssentialOCLCSPackage.COLLECTION_PATTERN_CS:
+				if(context == grammarAccess.getCollectionPatternCSRule()) {
+					sequence_CollectionPatternCS(context, (CollectionPatternCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getTypeExpCSRule()) {
+					sequence_CollectionPatternCS_TypeExpCS(context, (CollectionPatternCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -243,12 +291,18 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 				else break;
 			case EssentialOCLCSPackage.IF_EXP_CS:
 				if(context == grammarAccess.getExpCSRule() ||
-				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedExpressionAction_0_1_0() ||
+				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedLeftAction_0_1_0() ||
 				   context == grammarAccess.getIfExpCSRule() ||
 				   context == grammarAccess.getNavigatingArgExpCSRule() ||
-				   context == grammarAccess.getPrefixedExpCSRule() ||
+				   context == grammarAccess.getPrefixedPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimaryExpCSRule()) {
 					sequence_IfExpCS(context, (IfExpCS) semanticObject); 
+					return; 
+				}
+				else break;
+			case EssentialOCLCSPackage.IF_THEN_EXP_CS:
+				if(context == grammarAccess.getElseIfThenExpCSRule()) {
+					sequence_ElseIfThenExpCS(context, (IfThenExpCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -261,20 +315,32 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 				else break;
 			case EssentialOCLCSPackage.INVALID_LITERAL_EXP_CS:
 				if(context == grammarAccess.getExpCSRule() ||
-				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedExpressionAction_0_1_0() ||
+				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedLeftAction_0_1_0() ||
 				   context == grammarAccess.getInvalidLiteralExpCSRule() ||
 				   context == grammarAccess.getNavigatingArgExpCSRule() ||
-				   context == grammarAccess.getPrefixedExpCSRule() ||
+				   context == grammarAccess.getPrefixedPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimitiveLiteralExpCSRule()) {
 					sequence_InvalidLiteralExpCS(context, (InvalidLiteralExpCS) semanticObject); 
 					return; 
 				}
 				else break;
+			case EssentialOCLCSPackage.LAMBDA_LITERAL_EXP_CS:
+				if(context == grammarAccess.getExpCSRule() ||
+				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedLeftAction_0_1_0() ||
+				   context == grammarAccess.getLambdaLiteralExpCSRule() ||
+				   context == grammarAccess.getNavigatingArgExpCSRule() ||
+				   context == grammarAccess.getPrefixedPrimaryExpCSRule() ||
+				   context == grammarAccess.getPrimaryExpCSRule()) {
+					sequence_LambdaLiteralExpCS(context, (LambdaLiteralExpCS) semanticObject); 
+					return; 
+				}
+				else break;
 			case EssentialOCLCSPackage.LET_EXP_CS:
 				if(context == grammarAccess.getExpCSRule() ||
 				   context == grammarAccess.getLetExpCSRule() ||
-				   context == grammarAccess.getNavigatingArgExpCSRule()) {
+				   context == grammarAccess.getNavigatingArgExpCSRule() ||
+				   context == grammarAccess.getPrefixedLetExpCSRule()) {
 					sequence_LetExpCS(context, (LetExpCS) semanticObject); 
 					return; 
 				}
@@ -287,10 +353,10 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 				else break;
 			case EssentialOCLCSPackage.NAME_EXP_CS:
 				if(context == grammarAccess.getExpCSRule() ||
-				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedExpressionAction_0_1_0() ||
+				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedLeftAction_0_1_0() ||
 				   context == grammarAccess.getNameExpCSRule() ||
 				   context == grammarAccess.getNavigatingArgExpCSRule() ||
-				   context == grammarAccess.getPrefixedExpCSRule() ||
+				   context == grammarAccess.getPrefixedPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimaryExpCSRule()) {
 					sequence_NameExpCS(context, (NameExpCS) semanticObject); 
 					return; 
@@ -314,20 +380,12 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 					return; 
 				}
 				else break;
-			case EssentialOCLCSPackage.NAVIGATION_OPERATOR_CS:
-				if(context == grammarAccess.getBinaryOperatorCSRule() ||
-				   context == grammarAccess.getEssentialOCLNavigationOperatorCSRule() ||
-				   context == grammarAccess.getNavigationOperatorCSRule()) {
-					sequence_EssentialOCLNavigationOperatorCS(context, (NavigationOperatorCS) semanticObject); 
-					return; 
-				}
-				else break;
 			case EssentialOCLCSPackage.NESTED_EXP_CS:
 				if(context == grammarAccess.getExpCSRule() ||
-				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedExpressionAction_0_1_0() ||
+				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedLeftAction_0_1_0() ||
 				   context == grammarAccess.getNavigatingArgExpCSRule() ||
 				   context == grammarAccess.getNestedExpCSRule() ||
-				   context == grammarAccess.getPrefixedExpCSRule() ||
+				   context == grammarAccess.getPrefixedPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimaryExpCSRule()) {
 					sequence_NestedExpCS(context, (NestedExpCS) semanticObject); 
 					return; 
@@ -335,10 +393,10 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 				else break;
 			case EssentialOCLCSPackage.NULL_LITERAL_EXP_CS:
 				if(context == grammarAccess.getExpCSRule() ||
-				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedExpressionAction_0_1_0() ||
+				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedLeftAction_0_1_0() ||
 				   context == grammarAccess.getNavigatingArgExpCSRule() ||
 				   context == grammarAccess.getNullLiteralExpCSRule() ||
-				   context == grammarAccess.getPrefixedExpCSRule() ||
+				   context == grammarAccess.getPrefixedPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimitiveLiteralExpCSRule()) {
 					sequence_NullLiteralExpCS(context, (NullLiteralExpCS) semanticObject); 
@@ -347,25 +405,35 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 				else break;
 			case EssentialOCLCSPackage.NUMBER_LITERAL_EXP_CS:
 				if(context == grammarAccess.getExpCSRule() ||
-				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedExpressionAction_0_1_0() ||
+				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedLeftAction_0_1_0() ||
 				   context == grammarAccess.getNavigatingArgExpCSRule() ||
 				   context == grammarAccess.getNumberLiteralExpCSRule() ||
-				   context == grammarAccess.getPrefixedExpCSRule() ||
+				   context == grammarAccess.getPrefixedPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimitiveLiteralExpCSRule()) {
 					sequence_NumberLiteralExpCS(context, (NumberLiteralExpCS) semanticObject); 
 					return; 
 				}
 				else break;
-			case EssentialOCLCSPackage.PREFIX_EXP_CS:
-				if(context == grammarAccess.getExpCSRule() ||
-				   context == grammarAccess.getNavigatingArgExpCSRule()) {
-					sequence_ExpCS_PrefixedExpCS(context, (PrefixExpCS) semanticObject); 
+			case EssentialOCLCSPackage.PATTERN_EXP_CS:
+				if(context == grammarAccess.getPatternExpCSRule()) {
+					sequence_PatternExpCS(context, (PatternExpCS) semanticObject); 
 					return; 
 				}
-				else if(context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedExpressionAction_0_1_0() ||
-				   context == grammarAccess.getPrefixedExpCSRule()) {
-					sequence_PrefixedExpCS(context, (PrefixExpCS) semanticObject); 
+				else break;
+			case EssentialOCLCSPackage.PREFIX_EXP_CS:
+				if(context == grammarAccess.getPrefixedLetExpCSRule()) {
+					sequence_PrefixedLetExpCS(context, (PrefixExpCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getExpCSRule() ||
+				   context == grammarAccess.getNavigatingArgExpCSRule()) {
+					sequence_PrefixedLetExpCS_PrefixedPrimaryExpCS(context, (PrefixExpCS) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedLeftAction_0_1_0() ||
+				   context == grammarAccess.getPrefixedPrimaryExpCSRule()) {
+					sequence_PrefixedPrimaryExpCS(context, (PrefixExpCS) semanticObject); 
 					return; 
 				}
 				else break;
@@ -377,9 +445,9 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 				else break;
 			case EssentialOCLCSPackage.SELF_EXP_CS:
 				if(context == grammarAccess.getExpCSRule() ||
-				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedExpressionAction_0_1_0() ||
+				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedLeftAction_0_1_0() ||
 				   context == grammarAccess.getNavigatingArgExpCSRule() ||
-				   context == grammarAccess.getPrefixedExpCSRule() ||
+				   context == grammarAccess.getPrefixedPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimaryExpCSRule() ||
 				   context == grammarAccess.getSelfExpCSRule()) {
 					sequence_SelfExpCS(context, (SelfExpCS) semanticObject); 
@@ -394,9 +462,9 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 				else break;
 			case EssentialOCLCSPackage.STRING_LITERAL_EXP_CS:
 				if(context == grammarAccess.getExpCSRule() ||
-				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedExpressionAction_0_1_0() ||
+				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedLeftAction_0_1_0() ||
 				   context == grammarAccess.getNavigatingArgExpCSRule() ||
-				   context == grammarAccess.getPrefixedExpCSRule() ||
+				   context == grammarAccess.getPrefixedPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimitiveLiteralExpCSRule() ||
 				   context == grammarAccess.getStringLiteralExpCSRule()) {
@@ -406,9 +474,9 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 				else break;
 			case EssentialOCLCSPackage.TUPLE_LITERAL_EXP_CS:
 				if(context == grammarAccess.getExpCSRule() ||
-				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedExpressionAction_0_1_0() ||
+				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedLeftAction_0_1_0() ||
 				   context == grammarAccess.getNavigatingArgExpCSRule() ||
-				   context == grammarAccess.getPrefixedExpCSRule() ||
+				   context == grammarAccess.getPrefixedPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimaryExpCSRule() ||
 				   context == grammarAccess.getTupleLiteralExpCSRule()) {
 					sequence_TupleLiteralExpCS(context, (TupleLiteralExpCS) semanticObject); 
@@ -423,9 +491,9 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 				else break;
 			case EssentialOCLCSPackage.TYPE_LITERAL_EXP_CS:
 				if(context == grammarAccess.getExpCSRule() ||
-				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedExpressionAction_0_1_0() ||
+				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedLeftAction_0_1_0() ||
 				   context == grammarAccess.getNavigatingArgExpCSRule() ||
-				   context == grammarAccess.getPrefixedExpCSRule() ||
+				   context == grammarAccess.getPrefixedPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimaryExpCSRule() ||
 				   context == grammarAccess.getTypeLiteralExpCSRule()) {
 					sequence_TypeLiteralExpCS(context, (TypeLiteralExpCS) semanticObject); 
@@ -442,18 +510,11 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 					return; 
 				}
 				else break;
-			case EssentialOCLCSPackage.UNARY_OPERATOR_CS:
-				if(context == grammarAccess.getEssentialOCLUnaryOperatorCSRule() ||
-				   context == grammarAccess.getUnaryOperatorCSRule()) {
-					sequence_EssentialOCLUnaryOperatorCS(context, (UnaryOperatorCS) semanticObject); 
-					return; 
-				}
-				else break;
 			case EssentialOCLCSPackage.UNLIMITED_NATURAL_LITERAL_EXP_CS:
 				if(context == grammarAccess.getExpCSRule() ||
-				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedExpressionAction_0_1_0() ||
+				   context == grammarAccess.getExpCSAccess().getInfixExpCSOwnedLeftAction_0_1_0() ||
 				   context == grammarAccess.getNavigatingArgExpCSRule() ||
-				   context == grammarAccess.getPrefixedExpCSRule() ||
+				   context == grammarAccess.getPrefixedPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimaryExpCSRule() ||
 				   context == grammarAccess.getPrimitiveLiteralExpCSRule() ||
 				   context == grammarAccess.getUnlimitedNaturalLiteralExpCSRule()) {
@@ -573,7 +634,7 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 	
 	/**
 	 * Constraint:
-	 *     (name=Identifier? pathName=URIPathNameCS all?='::'?)
+	 *     (name=Identifier? ownedPathName=URIPathNameCS isAll?='::'?)
 	 */
 	protected void sequence_ImportCS(EObject context, ImportCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -582,7 +643,7 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 	
 	/**
 	 * Constraint:
-	 *     package=[Package|URI]
+	 *     referredPackage=[Package|URI]
 	 */
 	protected void sequence_LibraryCS(EObject context, LibraryCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -633,7 +694,7 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 	
 	/**
 	 * Constraint:
-	 *     (path+=FirstPathElementCS path+=NextPathElementCS*)
+	 *     (ownedPathElements+=FirstPathElementCS ownedPathElements+=NextPathElementCS*)
 	 */
 	protected void sequence_ScopeNameCS(EObject context, PathNameCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

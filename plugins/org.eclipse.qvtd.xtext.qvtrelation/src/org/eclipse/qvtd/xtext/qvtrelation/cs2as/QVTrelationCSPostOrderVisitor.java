@@ -17,7 +17,7 @@ import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.base.cs2as.BasicContinuation;
-import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
+import org.eclipse.ocl.examples.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuations;
 import org.eclipse.ocl.examples.xtext.base.cs2as.SingleContinuation;
@@ -44,7 +44,7 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 {
 	public static class PredicateExpressionCompletion extends SingleContinuation<PredicateCS>
 	{
-		public PredicateExpressionCompletion(@NonNull CS2PivotConversion context, @NonNull PredicateCS csElement) {
+		public PredicateExpressionCompletion(@NonNull CS2ASConversion context, @NonNull PredicateCS csElement) {
 			super(context, null, null, csElement);
 		}
 
@@ -62,7 +62,7 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 	
 	public static class PropertyTemplateExpressionCompletion extends SingleContinuation<PropertyTemplateCS>
 	{
-		public PropertyTemplateExpressionCompletion(@NonNull CS2PivotConversion context, @NonNull PropertyTemplateCS csElement) {
+		public PropertyTemplateExpressionCompletion(@NonNull CS2ASConversion context, @NonNull PropertyTemplateCS csElement) {
 			super(context, null, null, csElement);
 		}
 
@@ -80,7 +80,7 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 	
 	public static class QueryExpressionCompletion extends SingleContinuation<QueryCS>
 	{
-		public QueryExpressionCompletion(@NonNull CS2PivotConversion context, @NonNull QueryCS csElement) {
+		public QueryExpressionCompletion(@NonNull CS2ASConversion context, @NonNull QueryCS csElement) {
 			super(context, null, null, csElement);
 		}
 
@@ -98,7 +98,7 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 
 	protected static class RelationDomainAssignmentContentContinuation extends SingleContinuation<DefaultValueCS>
 	{
-		private RelationDomainAssignmentContentContinuation(@NonNull CS2PivotConversion context, @NonNull DefaultValueCS csElement) {
+		private RelationDomainAssignmentContentContinuation(@NonNull CS2ASConversion context, @NonNull DefaultValueCS csElement) {
 			super(context, null, null, csElement);
 		}
 
@@ -116,7 +116,7 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 	
 	public static class TemplateExpressionCompletion extends SingleContinuation<TemplateCS>
 	{
-		public TemplateExpressionCompletion(@NonNull CS2PivotConversion context, @NonNull TemplateCS csElement) {
+		public TemplateExpressionCompletion(@NonNull CS2ASConversion context, @NonNull TemplateCS csElement) {
 			super(context, null, null, csElement);
 		}
 
@@ -132,7 +132,7 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 		}
 	}
 	
-	public QVTrelationCSPostOrderVisitor(@NonNull CS2PivotConversion context) {
+	public QVTrelationCSPostOrderVisitor(@NonNull CS2ASConversion context) {
 		super(context);
 	}
 

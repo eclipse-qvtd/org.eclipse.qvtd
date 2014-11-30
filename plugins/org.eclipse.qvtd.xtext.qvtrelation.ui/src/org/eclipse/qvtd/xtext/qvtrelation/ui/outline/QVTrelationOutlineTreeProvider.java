@@ -31,7 +31,7 @@ public class QVTrelationOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 	}
 
 	protected void _createNode(IOutlineNode parentNode, PathNameCS csPath) {
-		Element element = csPath.getElement();
+		Element element = csPath.getReferredElement();
 		if ((element != null) && !element.eIsProxy()) {
 			createNode(parentNode, element);
 		}

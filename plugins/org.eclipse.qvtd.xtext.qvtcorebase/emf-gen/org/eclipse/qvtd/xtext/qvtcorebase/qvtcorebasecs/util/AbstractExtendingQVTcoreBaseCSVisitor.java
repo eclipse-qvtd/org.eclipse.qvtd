@@ -93,7 +93,7 @@ public abstract class AbstractExtendingQVTcoreBaseCSVisitor<R, C>
 	}
 
 	public @Nullable R visitTransformationCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.TransformationCS object) {
-		return visitPackageCS(object);
+		return visitClassCS(object);
 	}
 
 	public @Nullable R visitUnrealizedVariableCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.UnrealizedVariableCS object) {

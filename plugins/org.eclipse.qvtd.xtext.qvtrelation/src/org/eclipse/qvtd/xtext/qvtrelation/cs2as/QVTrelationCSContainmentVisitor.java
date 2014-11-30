@@ -11,12 +11,16 @@
 package org.eclipse.qvtd.xtext.qvtrelation.cs2as;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -24,7 +28,6 @@ import org.eclipse.ocl.examples.pivot.Parameter;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
@@ -33,12 +36,13 @@ import org.eclipse.ocl.examples.xtext.base.basecs.ImportCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.LibraryCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.cs2as.BasicContinuation;
-import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
-import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
+import org.eclipse.ocl.examples.xtext.base.cs2as.CS2AS;
+import org.eclipse.ocl.examples.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.base.cs2as.SingleContinuation;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
+import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
@@ -90,7 +94,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 {
 	protected static class DomainContentContinuation extends SingleContinuation<DomainCS>
 	{
-		private DomainContentContinuation(@NonNull CS2PivotConversion context, @NonNull DomainCS csElement) {
+		private DomainContentContinuation(@NonNull CS2ASConversion context, @NonNull DomainCS csElement) {
 			super(context, null, null, csElement);
 		}
 
@@ -106,7 +110,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 
 	protected static class KeyDeclContentContinuation extends SingleContinuation<KeyDeclCS>
 	{
-		private KeyDeclContentContinuation(@NonNull CS2PivotConversion context, @NonNull KeyDeclCS csElement) {
+		private KeyDeclContentContinuation(@NonNull CS2ASConversion context, @NonNull KeyDeclCS csElement) {
 			super(context, null, null, csElement);
 		}
 
@@ -118,7 +122,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 				PivotUtil.refreshList(pKey.getPart(), csElement.getPropertyIds());
 				List<Property> oppositePart = new ArrayList<Property>();
 				for (PathNameCS oppositePropertyId : csElement.getOppositePropertyIds()) {
-					Element element = oppositePropertyId.getElement();
+					Element element = oppositePropertyId.getReferredElement();
 					if (element instanceof Property) {
 						oppositePart.add((Property) element);
 					}
@@ -131,7 +135,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 
 	protected static class ModelDeclContentContinuation extends SingleContinuation<ModelDeclCS>
 	{
-		private ModelDeclContentContinuation(@NonNull CS2PivotConversion context, @NonNull ModelDeclCS csElement) {
+		private ModelDeclContentContinuation(@NonNull CS2ASConversion context, @NonNull ModelDeclCS csElement) {
 			super(context, null, null, csElement);
 		}
 
@@ -141,8 +145,8 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 			if (pTypedModel != null) {
 				List<org.eclipse.ocl.examples.pivot.Package> newUsedPackage = new ArrayList<org.eclipse.ocl.examples.pivot.Package>();
 				for (Namespace metaModelId : csElement.getMetaModelIds()) {
-					if (metaModelId instanceof Root) {
-						newUsedPackage.addAll(((Root)metaModelId).getNestedPackage());
+					if (metaModelId instanceof Model) {
+						newUsedPackage.addAll(((Model)metaModelId).getOwnedPackages());
 					}
 					else if (metaModelId instanceof org.eclipse.ocl.examples.pivot.Package) {
 						newUsedPackage.add((org.eclipse.ocl.examples.pivot.Package)metaModelId);
@@ -154,7 +158,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		}
 	}
 
-	public QVTrelationCSContainmentVisitor(@NonNull CS2PivotConversion context) {
+	public QVTrelationCSContainmentVisitor(@NonNull CS2ASConversion context) {
 		super(context);
 	}
 
@@ -190,6 +194,65 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 				pivotVariables.add(rest);
 			}
 		}
+	}
+
+	protected @NonNull List<org.eclipse.ocl.examples.pivot.Package> resolveTransformations(@NonNull List<TransformationCS> csTransformations, @NonNull BaseModel asCoreModel) {
+		List<org.eclipse.ocl.examples.pivot.Package> asPackages = new ArrayList<org.eclipse.ocl.examples.pivot.Package>();
+		Map<org.eclipse.ocl.examples.pivot.Package, List<org.eclipse.ocl.examples.pivot.Package>> package2ownedPackages = new HashMap<org.eclipse.ocl.examples.pivot.Package, List<org.eclipse.ocl.examples.pivot.Package>>();
+		Map<org.eclipse.ocl.examples.pivot.Package, List<org.eclipse.ocl.examples.pivot.Class>> package2ownedClasses = new HashMap<org.eclipse.ocl.examples.pivot.Package, List<org.eclipse.ocl.examples.pivot.Class>>();
+		for (TransformationCS csTransformation : csTransformations) {
+			org.eclipse.ocl.examples.pivot.Package asParent = null;
+			Transformation asTransformation = PivotUtil.getPivot(Transformation.class, csTransformation);
+//			PathNameCS pathName = csTransformation.getPathName();
+//			List<PathElementCS> ownedPathElements = pathName != null ? pathName.getOwnedPathElements() : null;
+//			if ((ownedPathElements == null) || ownedPathElements.isEmpty()) {
+				asParent = DomainUtil.getNamedElement(asCoreModel.getOwnedPackages(), "");
+				if (asParent == null) {
+					asParent = context.refreshModelElement(org.eclipse.ocl.examples.pivot.Package.class, PivotPackage.Literals.PACKAGE, null);
+					asParent.setName("");
+				}
+				asPackages.add(asParent);
+/*			}
+			else {
+				for (PathElementCS pathElement : ownedPathElements) {
+					String name = pathElement.toString();
+					List<org.eclipse.ocl.examples.pivot.Package> asOldPackages;
+					List<org.eclipse.ocl.examples.pivot.Package> asNewPackages;
+					if (asParent == null) {
+						asOldPackages = asCoreModel.getOwnedPackages();
+						asNewPackages = asPackages;
+					}
+					else {
+						asOldPackages = asParent.getOwnedPackages();
+						asNewPackages = package2ownedPackages.get(asParent);
+						if (asNewPackages == null) {
+							asNewPackages = new ArrayList<org.eclipse.ocl.examples.pivot.Package>();
+							package2ownedPackages.put(asParent, asNewPackages);
+						}
+					}
+					org.eclipse.ocl.examples.pivot.Package asPackage = DomainUtil.getNamedElement(asOldPackages, name);
+					if (asPackage == null) {
+						asPackage = context.refreshModelElement(org.eclipse.ocl.examples.pivot.Package.class, PivotPackage.Literals.PACKAGE, null);
+						asPackage.setName(name);
+					}
+					asNewPackages.add(asPackage);
+					asParent = asPackage;
+				}
+			} */
+			List<org.eclipse.ocl.examples.pivot.Class> asNewTransformations = package2ownedClasses.get(asParent);
+			if (asNewTransformations == null) {
+				asNewTransformations = new ArrayList<org.eclipse.ocl.examples.pivot.Class>();
+				package2ownedClasses.put(asParent, asNewTransformations);
+			}
+			asNewTransformations.add(asTransformation);
+		}
+		for (org.eclipse.ocl.examples.pivot.Package asPackage : package2ownedPackages.keySet()) {
+			PivotUtil.refreshList(asPackage.getOwnedPackages(), package2ownedPackages.get(asPackage));
+		}
+		for (org.eclipse.ocl.examples.pivot.Package asPackage : package2ownedClasses.keySet()) {
+			PivotUtil.refreshList(asPackage.getOwnedClasses(), package2ownedClasses.get(asPackage));
+		}
+		return asPackages;
 	}
 
 	@Override
@@ -268,11 +331,11 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 
 	@Override
 	public Continuation<?> visitImportCS(@NonNull ImportCS csElement) {
-		PathNameCS csPathName = DomainUtil.nonNullState(csElement.getPathName());
-		CS2Pivot.setElementType(csPathName, PivotPackage.Literals.PACKAGE, csElement, null);
+		PathNameCS csPathName = DomainUtil.nonNullState(csElement.getOwnedPathName());
+		CS2AS.setElementType(csPathName, PivotPackage.Literals.PACKAGE, csElement, null);
 		super.visitImportCS(csElement);
 		@NonNull Unit pivotElement = refreshNamedElement(Unit.class, QVTbasePackage.Literals.UNIT, csElement);
-		Namespace namespace = csElement.getNamespace();
+		Namespace namespace = csElement.getReferredNamespace();
 		pivotElement.setUsedPackage(namespace);
 		return null;
 	}
@@ -280,10 +343,10 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 	@Override
 	public Continuation<?> visitKeyDeclCS(@NonNull KeyDeclCS csElement) {
 		PathNameCS csPathName = DomainUtil.nonNullState(csElement.getPathName());
-		CS2Pivot.setElementType(csPathName, PivotPackage.Literals.CLASS, csElement, null);
+		CS2AS.setElementType(csPathName, PivotPackage.Literals.CLASS, csElement, null);
 		for (PathNameCS csOppositePropertyId : csElement.getOppositePropertyIds()) {
 			if (csOppositePropertyId != null) {
-				CS2Pivot.setElementType(csOppositePropertyId, PivotPackage.Literals.PROPERTY, csElement, null);
+				CS2AS.setElementType(csOppositePropertyId, PivotPackage.Literals.PROPERTY, csElement, null);
 			}
 		}
 		@SuppressWarnings("unused")
@@ -293,7 +356,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 
 	@Override
 	public Continuation<?> visitLibraryCS(@NonNull LibraryCS csElement) {
-		csElement.getPackage();					// Resolve the proxy to perform the import.
+		csElement.getReferredPackage();					// Resolve the proxy to perform the import.
 		return null;
 	}
 
@@ -356,7 +419,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 	public Continuation<?> visitPropertyTemplateCS(@NonNull PropertyTemplateCS csElement) {
 		PathNameCS csOppositePropertyId = csElement.getOppositePropertyId();
 		if (csOppositePropertyId != null) {
-			CS2Pivot.setElementType(csOppositePropertyId, PivotPackage.Literals.PROPERTY, csElement, null);
+			CS2AS.setElementType(csOppositePropertyId, PivotPackage.Literals.PROPERTY, csElement, null);
 		}
 		@NonNull PropertyTemplateItem pivotElement = context.refreshModelElement(PropertyTemplateItem.class, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM, csElement);
 		ExpCS csExp = csElement.getExpression();
@@ -445,9 +508,12 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 	@Override
 	public Continuation<?> visitTopLevelCS(@NonNull TopLevelCS csElement) {
 //		importPackages(csElement);
-		RelationModel pivotElement = refreshRoot(RelationModel.class, QVTrelationPackage.Literals.RELATION_MODEL, csElement);
-		context.refreshPivotList(Transformation.class, pivotElement.getNestedPackage(), csElement.getTransformations());
-		context.refreshPivotList(Unit.class, pivotElement.getUnit(), csElement.getOwnedImport());
+		RelationModel asModel = refreshRoot(RelationModel.class, QVTrelationPackage.Literals.RELATION_MODEL, csElement);
+		List<TransformationCS> csTransformations = csElement.getTransformations();
+		List<org.eclipse.ocl.examples.pivot.Package> asPackages = resolveTransformations(csTransformations, asModel);
+		PivotUtil.refreshList(asModel.getOwnedPackages(), asPackages);
+//		context.refreshPivotList(Transformation.class, pivotElement.getOwnedTransformations(), csElement.getTransformations());
+		context.refreshPivotList(Unit.class, asModel.getUnit(), csElement.getOwnedImports());
 /*		List<TransformationCS> csTransformations = csElement.getTransformation();
 		List<Transformation> txList = new ArrayList<Transformation>(csTransformations.size());
 		Map<Transformation, List<Mapping>> tx2mappings = new HashMap<Transformation, List<Mapping>>();
@@ -474,11 +540,11 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		}
 //		context.refreshPivotList(Type.class, pivotElement.getOwnedType(), csElement.getOwnedType());
 //		context.refreshPivotList(org.eclipse.ocl.examples.pivot.Package.class, pivotElement.getNestedPackage(), csElement.getOwnedNestedPackage()); */
-		Resource asResource = pivotElement.eResource();
+		Resource asResource = asModel.eResource();
 		if (asResource == null) {
 			Resource csResource = csElement.eResource();
 			if (csResource instanceof BaseCSResource) {
-				context.installRootElement((BaseCSResource)csResource, pivotElement);
+				context.installRootElement((BaseCSResource)csResource, asModel);
 			}
 		}
 		return null;
@@ -486,11 +552,13 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 
 	@Override
 	public Continuation<?> visitTransformationCS(@NonNull TransformationCS csElement) {
-		RelationalTransformation pivotElement = refreshPackage(RelationalTransformation.class, QVTrelationPackage.Literals.RELATIONAL_TRANSFORMATION, csElement);
+		@SuppressWarnings("null") @NonNull EClass eClass = QVTrelationPackage.Literals.RELATIONAL_TRANSFORMATION;
+		RelationalTransformation pivotElement = refreshNamedElement(RelationalTransformation.class, eClass, csElement);
+		refreshClassifier(pivotElement, csElement);
 		context.refreshPivotList(Key.class, pivotElement.getOwnedKey(), csElement.getKeyDecls());
 		context.refreshPivotList(TypedModel.class, pivotElement.getModelParameter(), csElement.getModelDecls());
 		context.refreshPivotList(Relation.class, pivotElement.getRule(), csElement.getRelation());
-		context.refreshPivotList(Operation.class, pivotElement.getOwnedOperation(), csElement.getQueries());
+		context.refreshPivotList(Operation.class, pivotElement.getOwnedOperations(), csElement.getQueries());
 		return null;
 	}
 

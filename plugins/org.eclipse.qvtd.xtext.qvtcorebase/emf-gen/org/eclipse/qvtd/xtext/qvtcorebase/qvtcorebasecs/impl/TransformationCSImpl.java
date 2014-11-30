@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.impl.PackageCSImpl;
+import org.eclipse.ocl.examples.xtext.base.basecs.impl.ClassCSImpl;
 import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.QVTcoreBaseCSPackage;
@@ -45,7 +45,7 @@ import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.util.QVTcoreBaseCSVisito
  *
  * @generated
  */
-public class TransformationCSImpl extends PackageCSImpl implements TransformationCS {
+public class TransformationCSImpl extends ClassCSImpl implements TransformationCS {
 	/**
 	 * The cached value of the '{@link #getPathName() <em>Path Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -250,6 +250,6 @@ public class TransformationCSImpl extends PackageCSImpl implements Transformatio
 		if (pathName == null) {
 			return null;
 		}
-		return (org.eclipse.ocl.examples.pivot.Package) pathName.getElement();
+		return (org.eclipse.ocl.examples.pivot.Package) pathName.getReferredElement();
 	}
 } //TransformationCSImpl

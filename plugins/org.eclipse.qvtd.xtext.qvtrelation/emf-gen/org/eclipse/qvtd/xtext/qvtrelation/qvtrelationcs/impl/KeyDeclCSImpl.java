@@ -285,6 +285,6 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 		if (pathName == null) {
 			return null;
 		}
-		return (org.eclipse.ocl.examples.pivot.Class) pathName.getElement();
+		return (org.eclipse.ocl.examples.pivot.Class) pathName.getReferredElement();
 	}
 } //KeyDeclCSImpl

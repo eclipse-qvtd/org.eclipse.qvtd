@@ -19,7 +19,7 @@ package	org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
+import org.eclipse.ocl.examples.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.qvtd.xtext.qvtcorebase.cs2as.QVTcoreBaseCSContainmentVisitor;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 
@@ -39,7 +39,7 @@ public abstract class AbstractQVTimperativeCSContainmentVisitor
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractQVTimperativeCSContainmentVisitor(@NonNull CS2PivotConversion context) {
+	protected AbstractQVTimperativeCSContainmentVisitor(@NonNull CS2ASConversion context) {
 		super(context);
 	}
 

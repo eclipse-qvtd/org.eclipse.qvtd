@@ -19,7 +19,7 @@ import "http://www.eclipse.org/qvt/0.9/QVTrelation" as qvtrelation
 import "http://www.eclipse.org/qvt/0.9/QVTrelationCST"
 
 TopLevelCS:
-	(ownedImport+=UnitCS | /*ownedInclude+=IncludeCS |*/ ownedLibrary+=LibraryCS)*
+	(ownedImports+=UnitCS | /*ownedInclude+=IncludeCS |*/ ownedLibraries+=LibraryCS)*
 	transformations+=TransformationCS*	
 ;
 		
@@ -51,7 +51,7 @@ KeyDeclCS: 'key' pathName=PathNameCS '{'
 ;
 
 LibraryCS returns base::LibraryCS:
-	'library' package=[pivot::Package|URI] ';';
+	'library' referredPackage=[pivot::Package|URI] ';';
 	
 ModelDeclCS: name=UnrestrictedName ':' (metaModelIds+=[pivot::Namespace|UnrestrictedName]
 	| '{' metaModelIds+=[pivot::Namespace|UnrestrictedName] (',' metaModelIds+=[pivot::Namespace|UnrestrictedName])* '}')
@@ -93,7 +93,7 @@ TransformationCS: 'transformation' name=UnrestrictedName
 ;
 
 UnitCS returns base::ImportCS:
-	'import' (name=UnrestrictedName ':')? pathName=URIPathNameCS ('::' all?='*')? ';';
+	'import' (name=UnrestrictedName ':')? ownedPathName=URIPathNameCS ('::' isAll?='*')? ';';
 
 VarDeclarationCS: varDeclarationIds+=VarDeclarationIdCS (',' varDeclarationIds+=VarDeclarationIdCS)* ':' type=TypedRefCS ';';
 
@@ -114,7 +114,7 @@ WhereCS returns PatternCS: {PatternCS} 'where' '{' predicates+=PredicateCS* '}';
 
 ExpCSOrTemplateCS returns essentialocl::ExpCS: ExpCS | TemplateCS;
 
-TypedTypeRefCS returns base::TypedTypeRefCS: pathName=PathNameCS;
+TypedTypeRefCS returns base::TypedTypeRefCS: ownedPathName=PathNameCS;
 
 TypedRefCS returns base::TypedRefCS:
 	PrimitiveTypeCS

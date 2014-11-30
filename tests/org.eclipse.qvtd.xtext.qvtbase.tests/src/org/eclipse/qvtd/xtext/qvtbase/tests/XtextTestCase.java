@@ -47,26 +47,27 @@ import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.LambdaType;
 import org.eclipse.ocl.examples.pivot.LoopExp;
+import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
 import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.TupleType;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
-import org.eclipse.ocl.examples.pivot.ecore.Ecore2Pivot;
-import org.eclipse.ocl.examples.pivot.ecore.Pivot2Ecore;
+import org.eclipse.ocl.examples.pivot.ecore.AS2Ecore;
+import org.eclipse.ocl.examples.pivot.ecore.Ecore2AS;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.examples.pivot.manager.PivotStandardLibrary;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
+import org.eclipse.ocl.examples.xtext.base.utilities.CS2ASResourceAdapter;
 //import org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup;
 //import org.eclipse.ocl.examples.xtext.oclinecore.OCLinEcoreStandaloneSetup;
 //import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
@@ -231,7 +232,7 @@ public class XtextTestCase extends PivotTestCase
 				return false;
 			}
 		}
-		if ((pivotElement instanceof TemplateableElement) && (((TemplateableElement)pivotElement).getTemplateBinding().size() > 0)) {
+		if ((pivotElement instanceof TemplateableElement) && (((TemplateableElement)pivotElement).getOwnedTemplateBindings().size() > 0)) {
 			return false;
 		}
 		if (pivotElement instanceof LambdaType) {
@@ -300,7 +301,7 @@ public class XtextTestCase extends PivotTestCase
 		createOCLinEcoreFile(inputName, fileContent);
 		URI inputURI = getProjectFileURI(inputName);
 		URI ecoreURI = getProjectFileURI(fileName + ".ecore");
-		CS2PivotResourceAdapter adapter = null;
+		CS2ASResourceAdapter adapter = null;
 		try {
 			ResourceSet resourceSet2 = metaModelManager.getExternalResourceSet();
 			BaseCSResource xtextResource = (BaseCSResource) resourceSet2.getResource(inputURI, true);
@@ -309,7 +310,7 @@ public class XtextTestCase extends PivotTestCase
 			Resource pivotResource = adapter.getASResource(xtextResource);
 			assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
 			assertNoValidationErrors("Pivot validation errors", pivotResource.getContents().get(0));
-			Resource ecoreResource = Pivot2Ecore.createResource(metaModelManager, pivotResource, ecoreURI, null);
+			Resource ecoreResource = AS2Ecore.createResource(metaModelManager, pivotResource, ecoreURI, null);
 			assertNoResourceErrors("To Ecore errors", ecoreResource);
 			ecoreResource.save(null);
 		}
@@ -328,8 +329,8 @@ public class XtextTestCase extends PivotTestCase
 	}
 
 	protected Resource getPivotFromEcore(MetaModelManager metaModelManager, Resource ecoreResource) {
-		Ecore2Pivot ecore2Pivot = Ecore2Pivot.getAdapter(ecoreResource, metaModelManager);
-		Root pivotRoot = ecore2Pivot.getPivotRoot();
+		Ecore2AS ecore2Pivot = Ecore2AS.getAdapter(ecoreResource, metaModelManager);
+		Model pivotRoot = ecore2Pivot.getPivotModel();
 		Resource pivotResource = pivotRoot.eResource();
 		assertNoResourceErrors("Normalisation failed", pivotResource);
 		assertNoValidationErrors("Normalisation invalid", pivotResource);
@@ -419,7 +420,7 @@ public class XtextTestCase extends PivotTestCase
 //		URI projectURI = getProjectFileURI("dummy");
 //		URI projectOCLstdlibURI = URI.createURI("oclstdlib.oclstdlib").resolve(projectURI);
 //		uriMap.put(platformOCLstdlibURI, projectOCLstdlibURI);
-		StandardLibraryContribution.REGISTRY.put(MetaModelManager.DEFAULT_OCL_STDLIB_URI, new OCLstdlib.Loader());
+		StandardLibraryContribution.REGISTRY.put(PivotStandardLibrary.DEFAULT_OCL_STDLIB_URI, new OCLstdlib.Loader());
         OCLDelegateDomain.initialize(null);
 	}
 

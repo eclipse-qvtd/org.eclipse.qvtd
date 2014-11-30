@@ -45,13 +45,13 @@ GuardPatternCS:
 ;
 
 ImportCS returns base::ImportCS:
-	'import' (name=Identifier ':')? pathName=URIPathNameCS (all?='::' '*')? ';';
+	'import' (name=Identifier ':')? ownedPathName=URIPathNameCS (isAll?='::' '*')? ';';
 
 //IncludeCS returns IncludeCS:
 //	'include' namespace=[pivot::Namespace|URI] ';';
 
 LibraryCS returns base::LibraryCS:
-	'library' package=[pivot::Package|URI] ';';
+	'library' referredPackage=[pivot::Package|URI] ';';
 	
 NamedDomainCS returns DomainCS: check?='check'? enforce?='enforce'? direction=[qvtbase::TypedModel|UnrestrictedName]
 	guardPattern=GuardPatternCS bottomPattern=BottomPatternCS;
@@ -67,7 +67,7 @@ QueryCS: 'query' pathName=ScopeNameCS name=UnrestrictedName
 //            (';' | '{' <OCLExpressionCS> '}')
 
 ScopeNameCS returns base::PathNameCS:
-	path+=FirstPathElementCS '::' (path+=NextPathElementCS '::')*;
+	ownedPathElements+=FirstPathElementCS '::' (ownedPathElements+=NextPathElementCS '::')*;
 
 TransformationCS:
 	'transformation' pathName=ScopeNameCS? name=UnreservedName '{' (directions+=DirectionCS ';')* '}';

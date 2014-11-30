@@ -15,33 +15,33 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
-import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
+import org.eclipse.ocl.examples.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLCS2Pivot;
+import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLCS2AS;
 
-public class QVTrelationCS2Pivot extends EssentialOCLCS2Pivot
+public class QVTrelationCS2AS extends EssentialOCLCS2AS
 {	
-	public QVTrelationCS2Pivot(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap, @NonNull MetaModelManager metaModelManager) {
+	public QVTrelationCS2AS(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap, @NonNull MetaModelManager metaModelManager) {
 		super(cs2asResourceMap, metaModelManager);
 	}
 
 	@Override
-	protected @NonNull QVTrelationCSContainmentVisitor createContainmentVisitor(@NonNull CS2PivotConversion converter) {
+	protected @NonNull QVTrelationCSContainmentVisitor createContainmentVisitor(@NonNull CS2ASConversion converter) {
 		return new QVTrelationCSContainmentVisitor(converter);
 	}
 
 	@Override
-	protected @NonNull QVTrelationCSLeft2RightVisitor createLeft2RightVisitor(@NonNull CS2PivotConversion converter) {
+	protected @NonNull QVTrelationCSLeft2RightVisitor createLeft2RightVisitor(@NonNull CS2ASConversion converter) {
 		return new QVTrelationCSLeft2RightVisitor(converter);
 	}
 
 	@Override
-	protected @NonNull QVTrelationCSPostOrderVisitor createPostOrderVisitor(@NonNull CS2PivotConversion converter) {
+	protected @NonNull QVTrelationCSPostOrderVisitor createPostOrderVisitor(@NonNull CS2ASConversion converter) {
 		return new QVTrelationCSPostOrderVisitor(converter);
 	}
 
 	@Override
-	protected @NonNull QVTrelationCSPreOrderVisitor createPreOrderVisitor(@NonNull CS2PivotConversion converter) {
+	protected @NonNull QVTrelationCSPreOrderVisitor createPreOrderVisitor(@NonNull CS2ASConversion converter) {
 		return new QVTrelationCSPreOrderVisitor(converter);
 	}
 }

@@ -318,6 +318,6 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 		if (pathName == null) {
 			return null;
 		}
-		return (Transformation) pathName.getElement();
+		return (Transformation) pathName.getReferredElement();
 	}
 } //QueryCSImpl

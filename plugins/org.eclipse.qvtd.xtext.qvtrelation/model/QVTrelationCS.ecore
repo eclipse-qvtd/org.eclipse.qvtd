@@ -88,7 +88,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="where" eType="#//PatternCS"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TemplateCS" abstract="true" eSuperTypes="#//TemplateVariableCS ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS">
+  <eClassifiers xsi:type="ecore:EClass" name="TemplateCS" abstract="true" eSuperTypes="../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS #//TemplateVariableCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="guardExpression" eType="ecore:EClass ../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
         containment="true"/>
   </eClassifiers>
@@ -103,7 +103,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="transformations" upperBound="-1"
         eType="#//TransformationCS" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TransformationCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCS.ecore#//PackageCS">
+  <eClassifiers xsi:type="ecore:EClass" name="TransformationCS" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCS.ecore#//ClassCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="modelDecls" upperBound="-1"
         eType="#//ModelDeclCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="extends" upperBound="-1"

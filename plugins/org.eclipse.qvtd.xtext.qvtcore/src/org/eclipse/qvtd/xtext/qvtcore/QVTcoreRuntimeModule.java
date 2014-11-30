@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtcore;
 
 import org.antlr.runtime.TokenSource;
-import org.eclipse.ocl.examples.xtext.essentialocl.services.RetokenizingTokenSource;
+import org.eclipse.ocl.examples.xtext.base.services.RetokenizingTokenSource;
 import org.eclipse.qvtd.xtext.qvtcore.parser.antlr.QVTcoreParser;
 import org.eclipse.qvtd.xtext.qvtcore.scoping.QVTcoreScopeProvider;
 import org.eclipse.qvtd.xtext.qvtcore.utilities.QVTcoreCSResource;

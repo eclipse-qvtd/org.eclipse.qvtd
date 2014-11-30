@@ -16,23 +16,22 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
-import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
+import org.eclipse.ocl.examples.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
-import org.eclipse.qvtd.xtext.qvtcorebase.cs2as.QVTcoreBaseCS2Pivot;
+import org.eclipse.qvtd.xtext.qvtcorebase.cs2as.QVTcoreBaseCS2AS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS;
 
-public class QVTimperativeCS2Pivot extends QVTcoreBaseCS2Pivot
+public class QVTimperativeCS2AS extends QVTcoreBaseCS2AS
 {	
-    public static boolean isMiddle(@Nullable Type areaType, @NonNull ElementCS csElement) {
+    public static boolean isMiddle(@Nullable org.eclipse.ocl.examples.pivot.Class areaType, @NonNull ElementCS csElement) {
     	if (areaType != null) {
-    		org.eclipse.ocl.examples.pivot.Package areaPackage = areaType.getPackage();
+    		org.eclipse.ocl.examples.pivot.Package areaPackage = areaType.getOwningPackage();
     		for (EObject eObject = csElement; eObject != null; eObject = eObject.eContainer()) {
     			if (eObject instanceof MappingCS) {
     	    		Element mapping = ((MappingCS)eObject).getPivot();
@@ -49,27 +48,27 @@ public class QVTimperativeCS2Pivot extends QVTcoreBaseCS2Pivot
 		return false;
 	}
 
-    public QVTimperativeCS2Pivot(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap, @NonNull MetaModelManager metaModelManager) {
+    public QVTimperativeCS2AS(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap, @NonNull MetaModelManager metaModelManager) {
 		super(cs2asResourceMap, metaModelManager);
 	}
 
 	@Override
-	protected @NonNull QVTimperativeCSContainmentVisitor createContainmentVisitor(@NonNull CS2PivotConversion converter) {
+	protected @NonNull QVTimperativeCSContainmentVisitor createContainmentVisitor(@NonNull CS2ASConversion converter) {
 		return new QVTimperativeCSContainmentVisitor(converter);
 	}
 
 	@Override
-	protected @NonNull QVTimperativeCSLeft2RightVisitor createLeft2RightVisitor(@NonNull CS2PivotConversion converter) {
+	protected @NonNull QVTimperativeCSLeft2RightVisitor createLeft2RightVisitor(@NonNull CS2ASConversion converter) {
 		return new QVTimperativeCSLeft2RightVisitor(converter);
 	}
 
 	@Override
-	protected @NonNull QVTimperativeCSPostOrderVisitor createPostOrderVisitor(@NonNull CS2PivotConversion converter) {
+	protected @NonNull QVTimperativeCSPostOrderVisitor createPostOrderVisitor(@NonNull CS2ASConversion converter) {
 		return new QVTimperativeCSPostOrderVisitor(converter);
 	}
 
 	@Override
-	protected @NonNull QVTimperativeCSPreOrderVisitor createPreOrderVisitor(@NonNull CS2PivotConversion converter) {
+	protected @NonNull QVTimperativeCSPreOrderVisitor createPreOrderVisitor(@NonNull CS2ASConversion converter) {
 		return new QVTimperativeCSPreOrderVisitor(converter);
 	}
 }

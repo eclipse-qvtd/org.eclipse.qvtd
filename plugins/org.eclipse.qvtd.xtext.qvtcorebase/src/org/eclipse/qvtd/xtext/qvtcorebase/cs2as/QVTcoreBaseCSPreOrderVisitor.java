@@ -17,7 +17,7 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.cs2as.BasicContinuation;
-import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
+import org.eclipse.ocl.examples.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.base.cs2as.PivotDependency;
 import org.eclipse.ocl.examples.xtext.base.cs2as.SingleContinuation;
@@ -40,7 +40,7 @@ public class QVTcoreBaseCSPreOrderVisitor extends AbstractQVTcoreBaseCSPreOrderV
 {	
 	public static class ParamDeclarationCompletion extends SingleContinuation<ParamDeclarationCS>
 	{
-		public ParamDeclarationCompletion(@NonNull CS2PivotConversion context, @NonNull ParamDeclarationCS csElement) {
+		public ParamDeclarationCompletion(@NonNull CS2ASConversion context, @NonNull ParamDeclarationCS csElement) {
 			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
 		}
 
@@ -57,7 +57,7 @@ public class QVTcoreBaseCSPreOrderVisitor extends AbstractQVTcoreBaseCSPreOrderV
 
 	public static class QueryCompletion extends SingleContinuation<QueryCS>
 	{
-		public QueryCompletion(@NonNull CS2PivotConversion context, @NonNull QueryCS csElement) {
+		public QueryCompletion(@NonNull CS2ASConversion context, @NonNull QueryCS csElement) {
 			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
 		}
 
@@ -74,7 +74,7 @@ public class QVTcoreBaseCSPreOrderVisitor extends AbstractQVTcoreBaseCSPreOrderV
 
 	public static class RealizeableVariableCompletion extends SingleContinuation<RealizeableVariableCS>
 	{
-		public RealizeableVariableCompletion(@NonNull CS2PivotConversion context, @NonNull RealizeableVariableCS csElement) {
+		public RealizeableVariableCompletion(@NonNull CS2ASConversion context, @NonNull RealizeableVariableCS csElement) {
 			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
 		}
 
@@ -89,7 +89,7 @@ public class QVTcoreBaseCSPreOrderVisitor extends AbstractQVTcoreBaseCSPreOrderV
 		}
 	}
 
-	public QVTcoreBaseCSPreOrderVisitor(@NonNull CS2PivotConversion context) {
+	public QVTcoreBaseCSPreOrderVisitor(@NonNull CS2ASConversion context) {
 		super(context);
 	}
 
@@ -142,11 +142,11 @@ public class QVTcoreBaseCSPreOrderVisitor extends AbstractQVTcoreBaseCSPreOrderV
 	public Continuation<?> visitTransformationCS(@NonNull TransformationCS csElement) {
 		Transformation pivotElement = PivotUtil.getPivot(Transformation.class, csElement);
 		if (pivotElement != null) {
-			List<Type> superClasses = pivotElement.getSuperClass();
+			List<org.eclipse.ocl.examples.pivot.Class> superClasses = pivotElement.getSuperClasses();
 //			context.refreshList(Type.class, superClasses, csElement.getOwnedSuperType());
 			if (superClasses.isEmpty()) {
-				org.eclipse.ocl.examples.pivot.Class oclElementType = context.getMetaModelManager().getOclElementType();
-				pivotElement.getSuperClass().add(oclElementType);
+				org.eclipse.ocl.examples.pivot.Class oclElementType = context.getMetaModelManager().getStandardLibrary().getOclElementType();
+				pivotElement.getSuperClasses().add(oclElementType);
 			}
 		}
 		return null;

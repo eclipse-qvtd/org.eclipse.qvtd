@@ -717,7 +717,7 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 		queryCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		realizeableVariableCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		realizedVariableCSEClass.getESuperTypes().add(this.getRealizeableVariableCS());
-		transformationCSEClass.getESuperTypes().add(theBaseCSPackage.getPackageCS());
+		transformationCSEClass.getESuperTypes().add(theBaseCSPackage.getClassCS());
 		unrealizedVariableCSEClass.getESuperTypes().add(this.getRealizeableVariableCS());
 
 		// Initialize classes and features; add operations and parameters

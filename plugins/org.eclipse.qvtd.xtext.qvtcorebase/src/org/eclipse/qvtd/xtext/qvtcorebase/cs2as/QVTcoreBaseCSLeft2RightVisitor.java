@@ -10,9 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcorebase.cs2as;
 
-import java.util.Collections;
-import java.util.List;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -24,9 +21,9 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
-import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
+import org.eclipse.ocl.examples.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.ImplicitSourceTypeIterator;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NameExpCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.AbstractNameExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.RoundBracketedClauseCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -38,7 +35,7 @@ import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.util.AbstractQVTcoreBase
 
 public class QVTcoreBaseCSLeft2RightVisitor extends AbstractQVTcoreBaseCSLeft2RightVisitor
 {
-	public QVTcoreBaseCSLeft2RightVisitor(@NonNull CS2PivotConversion context) {
+	public QVTcoreBaseCSLeft2RightVisitor(@NonNull CS2ASConversion context) {
 		super(context);
 	}
 
@@ -75,7 +72,7 @@ public class QVTcoreBaseCSLeft2RightVisitor extends AbstractQVTcoreBaseCSLeft2Ri
 		};
 	}
 
-	private @Nullable Function getBestFunction(@NonNull List<NamedElement> invocations) {
+	private @Nullable Function getBestFunction(@NonNull Invocations invocations) {
 		for (NamedElement invocation : invocations) {
 			if (invocation instanceof Function) {
 				return (Function)invocation;
@@ -85,28 +82,28 @@ public class QVTcoreBaseCSLeft2RightVisitor extends AbstractQVTcoreBaseCSLeft2Ri
 	}
 
 	@Override
-	protected @Nullable List<NamedElement> getInvocations(@NonNull Type asType, @NonNull String name, int iteratorCount, int expressionCount) {
+	protected @Nullable Invocations getInvocations(@NonNull Type asType, @Nullable Type asTypeValue, @NonNull String name, int iteratorCount, int expressionCount) {
 		if (asType instanceof Transformation) {
-			Operation function = DomainUtil.getNamedElement(((Transformation)asType).getOwnedOperation(), name);
+			Operation function = DomainUtil.getNamedElement(((Transformation)asType).getOwnedOperations(), name);
 			if (function != null) {
-				return Collections.<NamedElement>singletonList(function);
+				return new ResolvedInvocation(function);
 			}
 			return null;
 		}
-		return super.getInvocations(asType, name, iteratorCount, expressionCount);
+		return super.getInvocations(asType, asTypeValue, name, iteratorCount, expressionCount);
 	}
 
 	@Override
-	protected OCLExpression resolveBestInvocation(@Nullable OCLExpression sourceExp, @NonNull RoundBracketedClauseCS csRoundBracketedClause, @NonNull List<NamedElement> invocations) {
+	protected OCLExpression resolveBestInvocation(@Nullable OCLExpression sourceExp, @NonNull RoundBracketedClauseCS csRoundBracketedClause, @NonNull Invocations invocations) {
 		if (sourceExp == null) {
 			Function function = getBestFunction(invocations);
 			if (function != null) {
-				NameExpCS csNameExp = csRoundBracketedClause.getNameExp();
+				AbstractNameExpCS csNameExp = csRoundBracketedClause.getOwningNameExp();
 //				Operation baseOperation = metaModelManager.resolveBaseOperation(function);
 				OperationCallExp operationCallExp = context.refreshModelElement(OperationCallExp.class, PivotPackage.Literals.OPERATION_CALL_EXP, csNameExp);
 				context.setReferredOperation(operationCallExp, function);
 				context.setType(operationCallExp, function.getType(), function.isRequired());
-				resolveOperationArgumentTypes(csRoundBracketedClause);
+				resolveOperationArgumentTypes(function.getOwnedParameter(), csRoundBracketedClause);
 				resolveOperationArguments(csRoundBracketedClause, function, operationCallExp);
 				return operationCallExp;
 			}

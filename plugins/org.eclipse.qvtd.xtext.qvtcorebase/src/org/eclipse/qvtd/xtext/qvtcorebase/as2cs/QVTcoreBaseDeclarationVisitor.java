@@ -31,6 +31,8 @@ import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.examples.xtext.base.as2cs.AS2CSConversion;
+import org.eclipse.ocl.examples.xtext.base.as2cs.AliasAnalysis;
 import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSFactory;
 import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
 import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
@@ -39,14 +41,11 @@ import org.eclipse.ocl.examples.xtext.base.basecs.PathElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathElementWithURICS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootPackageCS;
-import org.eclipse.ocl.examples.xtext.base.pivot2cs.AliasAnalysis;
-import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CSConversion;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
+import org.eclipse.ocl.examples.xtext.essentialocl.as2cs.EssentialOCLDeclarationVisitor;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.InfixExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NavigationOperatorCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.pivot2cs.EssentialOCLDeclarationVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -104,7 +103,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
  		}
 	}
 	
-	public QVTcoreBaseDeclarationVisitor(@NonNull Pivot2CSConversion context) {
+	public QVTcoreBaseDeclarationVisitor(@NonNull AS2CSConversion context) {
 		super(context);
 	}
 
@@ -125,7 +124,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		if (contents.size() > 0) {
 			EObject root = contents.get(0);
 			if (root instanceof RootPackageCS) {
-				for (ImportCS csImport : ((RootPackageCS)root).getOwnedImport()) {
+				for (ImportCS csImport : ((RootPackageCS)root).getOwnedImports()) {
 					Element pivot = csImport.getPivot();
 					if (pivot instanceof Unit) {
 						Unit asUnit = (Unit)pivot;
@@ -174,7 +173,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	public ElementCS visitFunction(@NonNull Function asFunction) {
 		QueryCS csQuery = context.refreshNamedElement(QueryCS.class, QVTcoreBaseCSPackage.Literals.QUERY_CS, asFunction);
 		csQuery.setPivot(asFunction);
-		csQuery.setPathName(createPathNameCS(asFunction.getOwningType()));
+		csQuery.setPathName(createPathNameCS(asFunction.getOwningClass()));
 		csQuery.setOwnedType(createTypeRefCS(asFunction.getType()));
 		context.refreshList(csQuery.getInputParamDeclaration(), context.visitDeclarations(ParamDeclarationCS.class, asFunction.getOwnedParameter(), null));
 		csQuery.setExpression(createExpCS(asFunction.getQueryExpression()));
@@ -208,11 +207,11 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		if (asSlotExpression instanceof VariableExp) {
 			asSlotExpression = ((VariableExp)asSlotExpression).getReferredVariable();
 		}
-		csTargetExp.getOwnedExpression().add(createNameExpCS(asSlotExpression));
-		csTargetExp.getOwnedExpression().add(createNameExpCS(asPropertyAssignment.getTargetProperty()));
-		NavigationOperatorCS csOperator = context.refreshElement(NavigationOperatorCS.class, EssentialOCLCSPackage.Literals.NAVIGATION_OPERATOR_CS, asPropertyAssignment);
-		csOperator.setName(".");
-		csTargetExp.getOwnedOperator().add(csOperator);
+		csTargetExp.setOwnedLeft(createNameExpCS(asSlotExpression));
+		csTargetExp.setOwnedRight(createNameExpCS(asPropertyAssignment.getTargetProperty()));
+//		NavigationOperatorCS csOperator = context.refreshElement(NavigationOperatorCS.class, EssentialOCLCSPackage.Literals.NAVIGATION_OPERATOR_CS, asPropertyAssignment);
+		csTargetExp.setName(".");
+//		csTargetExp.getOwnedOperator().add(csOperator);
 		csAssignment.setTarget(csTargetExp);
 		csAssignment.setInitialiser(createExpCS(asPropertyAssignment.getValue()));
 		csAssignment.setDefault(asPropertyAssignment.isIsDefault());
@@ -267,12 +266,12 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		csImport.setPivot(asUnit);
 		csImport.setName(asUnit.getName());
 		@SuppressWarnings("null") @NonNull PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
-		List<PathElementCS> csPath = csPathName.getPath();
+		List<PathElementCS> csPath = csPathName.getOwnedPathElements();
 		PathElementWithURICS csSimpleRef = BaseCSFactory.eINSTANCE.createPathElementWithURICS();
-		csSimpleRef.setElement(asNamespace);
+		csSimpleRef.setReferredElement(asNamespace);
 		csSimpleRef.setUri(importURI);
 		csPath.add(csSimpleRef);
-		csImport.setPathName(csPathName);
+		csImport.setOwnedPathName(csPathName);
 		return csImport;
 	}
 

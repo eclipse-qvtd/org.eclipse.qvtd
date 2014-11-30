@@ -12,7 +12,7 @@ package org.eclipse.qvtd.xtext.qvtimperative.cs2as;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
+import org.eclipse.ocl.examples.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
@@ -36,7 +36,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 			}
 		}
 
-		public MappingLoopIteratorCompletion(@NonNull CS2PivotConversion context, @NonNull MappingLoopCS csElement) {
+		public MappingLoopIteratorCompletion(@NonNull CS2ASConversion context, @NonNull MappingLoopCS csElement) {
 			super(context, null, null, csElement, computeDependencies(csElement));
 		}
 
@@ -54,7 +54,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 		}
 	} */
 
-	public QVTimperativeCSPreOrderVisitor(@NonNull CS2PivotConversion context) {
+	public QVTimperativeCSPreOrderVisitor(@NonNull CS2ASConversion context) {
 		super(context);
 	}
 

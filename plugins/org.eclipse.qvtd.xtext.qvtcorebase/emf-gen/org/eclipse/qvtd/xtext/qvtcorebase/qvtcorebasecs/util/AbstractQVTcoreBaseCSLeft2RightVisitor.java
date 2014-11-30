@@ -19,7 +19,7 @@ package	org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
+import org.eclipse.ocl.examples.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.examples.xtext.essentialocl.cs2as.EssentialOCLCSLeft2RightVisitor;
 import org.eclipse.ocl.examples.pivot.Element;
 
@@ -39,7 +39,7 @@ public abstract class AbstractQVTcoreBaseCSLeft2RightVisitor
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractQVTcoreBaseCSLeft2RightVisitor(@NonNull CS2PivotConversion context) {
+	protected AbstractQVTcoreBaseCSLeft2RightVisitor(@NonNull CS2ASConversion context) {
 		super(context);
 	}
 
@@ -96,7 +96,7 @@ public abstract class AbstractQVTcoreBaseCSLeft2RightVisitor
 	}
 
 	public @Nullable Element visitTransformationCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.TransformationCS csElement) {
-		return visitPackageCS(csElement);
+		return visitClassCS(csElement);
 	}
 
 	public @Nullable Element visitUnrealizedVariableCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.UnrealizedVariableCS csElement) {

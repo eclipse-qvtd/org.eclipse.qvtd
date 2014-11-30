@@ -15,11 +15,15 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
+import org.eclipse.ocl.examples.domain.elements.Nameable;
+import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
+import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypedRefCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.OperatorCS;
+import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.impl.ExpCSImpl;
 import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.QVTrelationCSPackage;
 import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.TemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.TemplateVariableCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,44 +32,44 @@ import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.TemplateCS;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.impl.TemplateCSImpl#getParent <em>Parent</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.impl.TemplateCSImpl#isHasError <em>Has Error</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.impl.TemplateCSImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.impl.TemplateCSImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.impl.TemplateCSImpl#getGuardExpression <em>Guard Expression</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class TemplateCSImpl extends TemplateVariableCSImpl implements TemplateCS {
+public abstract class TemplateCSImpl extends ExpCSImpl implements TemplateCS {
 	/**
-	 * The cached value of the '{@link #getParent() <em>Parent</em>}' reference.
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getParent()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected OperatorCS parent;
+	protected static final String NAME_EDEFAULT = null;
 
 	/**
-	 * The default value of the '{@link #isHasError() <em>Has Error</em>}' attribute.
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isHasError()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean HAS_ERROR_EDEFAULT = false;
+	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #isHasError() <em>Has Error</em>}' attribute.
+	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isHasError()
+	 * @see #getType()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean hasError = HAS_ERROR_EDEFAULT;
+	protected TypedRefCS type;
 
 	/**
 	 * The cached value of the '{@link #getGuardExpression() <em>Guard Expression</em>}' containment reference.
@@ -101,8 +105,8 @@ public abstract class TemplateCSImpl extends TemplateVariableCSImpl implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public OperatorCS getParent() {
-		return parent;
+	public String getName() {
+		return name;
 	}
 
 	/**
@@ -110,11 +114,11 @@ public abstract class TemplateCSImpl extends TemplateVariableCSImpl implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setParent(OperatorCS newParent) {
-		OperatorCS oldParent = parent;
-		parent = newParent;
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.TEMPLATE_CS__PARENT, oldParent, parent));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.TEMPLATE_CS__NAME, oldName, name));
 	}
 
 	/**
@@ -122,8 +126,8 @@ public abstract class TemplateCSImpl extends TemplateVariableCSImpl implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isHasError() {
-		return hasError;
+	public TypedRefCS getType() {
+		return type;
 	}
 
 	/**
@@ -131,11 +135,33 @@ public abstract class TemplateCSImpl extends TemplateVariableCSImpl implements T
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setHasError(boolean newHasError) {
-		boolean oldHasError = hasError;
-		hasError = newHasError;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.TEMPLATE_CS__HAS_ERROR, oldHasError, hasError));
+	public NotificationChain basicSetType(TypedRefCS newType, NotificationChain msgs) {
+		TypedRefCS oldType = type;
+		type = newType;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.TEMPLATE_CS__TYPE, oldType, newType);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(TypedRefCS newType) {
+		if (newType != type) {
+			NotificationChain msgs = null;
+			if (type != null)
+				msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.TEMPLATE_CS__TYPE, null, msgs);
+			if (newType != null)
+				msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.TEMPLATE_CS__TYPE, null, msgs);
+			msgs = basicSetType(newType, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.TEMPLATE_CS__TYPE, newType, newType));
 	}
 
 	/**
@@ -199,6 +225,8 @@ public abstract class TemplateCSImpl extends TemplateVariableCSImpl implements T
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+			case QVTrelationCSPackage.TEMPLATE_CS__TYPE:
+				return basicSetType(null, msgs);
 			case QVTrelationCSPackage.TEMPLATE_CS__GUARD_EXPRESSION:
 				return basicSetGuardExpression(null, msgs);
 		}
@@ -213,10 +241,10 @@ public abstract class TemplateCSImpl extends TemplateVariableCSImpl implements T
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TEMPLATE_CS__PARENT:
-				return getParent();
-			case QVTrelationCSPackage.TEMPLATE_CS__HAS_ERROR:
-				return isHasError();
+			case QVTrelationCSPackage.TEMPLATE_CS__NAME:
+				return getName();
+			case QVTrelationCSPackage.TEMPLATE_CS__TYPE:
+				return getType();
 			case QVTrelationCSPackage.TEMPLATE_CS__GUARD_EXPRESSION:
 				return getGuardExpression();
 		}
@@ -231,11 +259,11 @@ public abstract class TemplateCSImpl extends TemplateVariableCSImpl implements T
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TEMPLATE_CS__PARENT:
-				setParent((OperatorCS)newValue);
+			case QVTrelationCSPackage.TEMPLATE_CS__NAME:
+				setName((String)newValue);
 				return;
-			case QVTrelationCSPackage.TEMPLATE_CS__HAS_ERROR:
-				setHasError((Boolean)newValue);
+			case QVTrelationCSPackage.TEMPLATE_CS__TYPE:
+				setType((TypedRefCS)newValue);
 				return;
 			case QVTrelationCSPackage.TEMPLATE_CS__GUARD_EXPRESSION:
 				setGuardExpression((ExpCS)newValue);
@@ -252,11 +280,11 @@ public abstract class TemplateCSImpl extends TemplateVariableCSImpl implements T
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TEMPLATE_CS__PARENT:
-				setParent((OperatorCS)null);
+			case QVTrelationCSPackage.TEMPLATE_CS__NAME:
+				setName(NAME_EDEFAULT);
 				return;
-			case QVTrelationCSPackage.TEMPLATE_CS__HAS_ERROR:
-				setHasError(HAS_ERROR_EDEFAULT);
+			case QVTrelationCSPackage.TEMPLATE_CS__TYPE:
+				setType((TypedRefCS)null);
 				return;
 			case QVTrelationCSPackage.TEMPLATE_CS__GUARD_EXPRESSION:
 				setGuardExpression((ExpCS)null);
@@ -273,10 +301,10 @@ public abstract class TemplateCSImpl extends TemplateVariableCSImpl implements T
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TEMPLATE_CS__PARENT:
-				return parent != null;
-			case QVTrelationCSPackage.TEMPLATE_CS__HAS_ERROR:
-				return hasError != HAS_ERROR_EDEFAULT;
+			case QVTrelationCSPackage.TEMPLATE_CS__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case QVTrelationCSPackage.TEMPLATE_CS__TYPE:
+				return type != null;
 			case QVTrelationCSPackage.TEMPLATE_CS__GUARD_EXPRESSION:
 				return guardExpression != null;
 		}
@@ -290,10 +318,20 @@ public abstract class TemplateCSImpl extends TemplateVariableCSImpl implements T
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == ExpCS.class) {
+		if (baseClass == Nameable.class) {
 			switch (derivedFeatureID) {
-				case QVTrelationCSPackage.TEMPLATE_CS__PARENT: return EssentialOCLCSPackage.EXP_CS__PARENT;
-				case QVTrelationCSPackage.TEMPLATE_CS__HAS_ERROR: return EssentialOCLCSPackage.EXP_CS__HAS_ERROR;
+				default: return -1;
+			}
+		}
+		if (baseClass == NamedElementCS.class) {
+			switch (derivedFeatureID) {
+				case QVTrelationCSPackage.TEMPLATE_CS__NAME: return BaseCSPackage.NAMED_ELEMENT_CS__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == TemplateVariableCS.class) {
+			switch (derivedFeatureID) {
+				case QVTrelationCSPackage.TEMPLATE_CS__TYPE: return QVTrelationCSPackage.TEMPLATE_VARIABLE_CS__TYPE;
 				default: return -1;
 			}
 		}
@@ -307,10 +345,20 @@ public abstract class TemplateCSImpl extends TemplateVariableCSImpl implements T
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == ExpCS.class) {
+		if (baseClass == Nameable.class) {
 			switch (baseFeatureID) {
-				case EssentialOCLCSPackage.EXP_CS__PARENT: return QVTrelationCSPackage.TEMPLATE_CS__PARENT;
-				case EssentialOCLCSPackage.EXP_CS__HAS_ERROR: return QVTrelationCSPackage.TEMPLATE_CS__HAS_ERROR;
+				default: return -1;
+			}
+		}
+		if (baseClass == NamedElementCS.class) {
+			switch (baseFeatureID) {
+				case BaseCSPackage.NAMED_ELEMENT_CS__NAME: return QVTrelationCSPackage.TEMPLATE_CS__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == TemplateVariableCS.class) {
+			switch (baseFeatureID) {
+				case QVTrelationCSPackage.TEMPLATE_VARIABLE_CS__TYPE: return QVTrelationCSPackage.TEMPLATE_CS__TYPE;
 				default: return -1;
 			}
 		}

@@ -21,25 +21,25 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
-import org.eclipse.ocl.examples.xtext.base.pivot2cs.BaseDeclarationVisitor;
-import org.eclipse.ocl.examples.xtext.base.pivot2cs.BaseReferenceVisitor;
-import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CS;
-import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CSConversion;
+import org.eclipse.ocl.examples.xtext.base.as2cs.BaseDeclarationVisitor;
+import org.eclipse.ocl.examples.xtext.base.as2cs.BaseReferenceVisitor;
+import org.eclipse.ocl.examples.xtext.base.as2cs.AS2CS;
+import org.eclipse.ocl.examples.xtext.base.as2cs.AS2CSConversion;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.examples.xtext.essentialocl.pivot2cs.EssentialOCLPivot2CS;
-import org.eclipse.ocl.examples.xtext.essentialocl.pivot2cs.EssentialOCLReferenceVisitor;
+import org.eclipse.ocl.examples.xtext.essentialocl.as2cs.EssentialOCLAS2CS;
+import org.eclipse.ocl.examples.xtext.essentialocl.as2cs.EssentialOCLReferenceVisitor;
 
-public class QVTcoreAS2CS extends EssentialOCLPivot2CS
+public class QVTcoreAS2CS extends EssentialOCLAS2CS
 {	
-	private static final class Factory implements Pivot2CS.Factory
+	private static final class Factory implements AS2CS.Factory
 	{
-		private static @NonNull Pivot2CS.Factory INSTANCE = new Factory();
+		private static @NonNull AS2CS.Factory INSTANCE = new Factory();
 
-		public @NonNull QVTcoreDeclarationVisitor createDeclarationVisitor(@NonNull Pivot2CSConversion converter) {
+		public @NonNull QVTcoreDeclarationVisitor createDeclarationVisitor(@NonNull AS2CSConversion converter) {
 			return new QVTcoreDeclarationVisitor(converter);
 		}
 
-		public @NonNull BaseReferenceVisitor createReferenceVisitor(@NonNull Pivot2CSConversion converter, @Nullable Namespace scope) {
+		public @NonNull BaseReferenceVisitor createReferenceVisitor(@NonNull AS2CSConversion converter, @Nullable Namespace scope) {
 			return new EssentialOCLReferenceVisitor(converter, scope);
 		}
 
@@ -66,12 +66,12 @@ public class QVTcoreAS2CS extends EssentialOCLPivot2CS
 	}
 
 	@Override
-	public @NonNull BaseDeclarationVisitor createDefaultDeclarationVisitor(@NonNull Pivot2CSConversion converter) {
+	public @NonNull BaseDeclarationVisitor createDefaultDeclarationVisitor(@NonNull AS2CSConversion converter) {
 		return new QVTcoreDeclarationVisitor(converter);
 	}
 
 	@Override
-	public @NonNull BaseReferenceVisitor createDefaultReferenceVisitor(@NonNull Pivot2CSConversion converter) {
+	public @NonNull BaseReferenceVisitor createDefaultReferenceVisitor(@NonNull AS2CSConversion converter) {
 		return new EssentialOCLReferenceVisitor(converter, null);
 	}
 }

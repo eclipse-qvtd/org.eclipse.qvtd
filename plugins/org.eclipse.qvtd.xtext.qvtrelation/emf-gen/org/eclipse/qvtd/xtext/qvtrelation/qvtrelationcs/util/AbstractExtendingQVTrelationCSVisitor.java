@@ -105,7 +105,7 @@ public abstract class AbstractExtendingQVTrelationCSVisitor<R, C>
 	}
 
 	public @Nullable R visitTemplateCS(@NonNull org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.TemplateCS object) {
-		return visitTemplateVariableCS(object);
+		return visitExpCS(object);
 	}
 
 	public @Nullable R visitTemplateVariableCS(@NonNull org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.TemplateVariableCS object) {
@@ -117,7 +117,7 @@ public abstract class AbstractExtendingQVTrelationCSVisitor<R, C>
 	}
 
 	public @Nullable R visitTransformationCS(@NonNull org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.TransformationCS object) {
-		return visitPackageCS(object);
+		return visitClassCS(object);
 	}
 
 	public @Nullable R visitUnitCS(@NonNull org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.UnitCS object) {

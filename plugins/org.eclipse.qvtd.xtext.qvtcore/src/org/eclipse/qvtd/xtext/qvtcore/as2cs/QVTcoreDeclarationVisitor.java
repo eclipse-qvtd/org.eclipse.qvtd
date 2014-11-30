@@ -20,7 +20,7 @@ import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ImportCS;
-import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CSConversion;
+import org.eclipse.ocl.examples.xtext.base.as2cs.AS2CSConversion;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -45,7 +45,7 @@ import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.UnrealizedVariableCS;
 
 public class QVTcoreDeclarationVisitor extends QVTcoreBaseDeclarationVisitor implements QVTcoreVisitor<ElementCS>
 {
-	public QVTcoreDeclarationVisitor(@NonNull Pivot2CSConversion context) {
+	public QVTcoreDeclarationVisitor(@NonNull AS2CSConversion context) {
 		super(context);
 	}
 
@@ -64,32 +64,37 @@ public class QVTcoreDeclarationVisitor extends QVTcoreBaseDeclarationVisitor imp
 		assert asModel.eContainer() == null;
 		TopLevelCS csDocument = context.refreshElement(TopLevelCS.class, QVTcoreCSPackage.Literals.TOP_LEVEL_CS, asModel);
 		csDocument.setPivot(asModel);
-		context.refreshList(csDocument.getOwnedImport(), context.visitDeclarations(ImportCS.class, asModel.getUnit(), null));
+		context.refreshList(csDocument.getOwnedImports(), context.visitDeclarations(ImportCS.class, asModel.getUnit(), null));
 		List<Mapping> asMappings = null;
 		List<Function> asQueries = null;
 		List<Transformation> asTransformations = null;
-		for (org.eclipse.ocl.examples.pivot.Package asPackage : asModel.getNestedPackage()) {
-			if (asPackage instanceof Transformation) {
-				if (asTransformations == null) {
-					asTransformations = new ArrayList<Transformation>();
-				}
-				Transformation asTransformation = (Transformation) asPackage;
-				asTransformations.add(asTransformation);
-				for (Rule asRule : asTransformation.getRule()) {
-					if (asRule instanceof Mapping) {
-						if (asMappings == null) {
-							asMappings = new ArrayList<Mapping>();
+		for (org.eclipse.ocl.examples.pivot.Package asPackage : asModel.getOwnedPackages()) {
+			if ("".equals(asPackage.getName())) {
+				for (org.eclipse.ocl.examples.pivot.Class asClass : asPackage.getOwnedClasses()) {
+					if (asClass instanceof Transformation) {
+						if (asTransformations == null) {
+							asTransformations = new ArrayList<Transformation>();
 						}
-						asMappings.add((Mapping) asRule);
-					}
-				}
-				for (Operation asOperation : asTransformation.getOwnedOperation()) {
-					if (asOperation instanceof Function) {
-						if (asQueries == null) {
-							asQueries = new ArrayList<Function>();
+						Transformation asTransformation = (Transformation) asClass;
+						asTransformations.add(asTransformation);
+						for (Rule asRule : asTransformation.getRule()) {
+							if (asRule instanceof Mapping) {
+								if (asMappings == null) {
+									asMappings = new ArrayList<Mapping>();
+								}
+								asMappings.add((Mapping) asRule);
+							}
 						}
-						asQueries.add((Function) asOperation);
+						for (Operation asOperation : asTransformation.getOwnedOperations()) {
+							if (asOperation instanceof Function) {
+								if (asQueries == null) {
+									asQueries = new ArrayList<Function>();
+								}
+								asQueries.add((Function) asOperation);
+							}
+						}
 					}
+					// else other packages, orphanage
 				}
 			}
 			// else other packages, orphanage

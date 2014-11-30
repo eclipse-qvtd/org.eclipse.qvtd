@@ -1054,11 +1054,11 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		propertyTemplateCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
 		queryCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		relationCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
-		templateCSEClass.getESuperTypes().add(this.getTemplateVariableCS());
 		templateCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getExpCS());
+		templateCSEClass.getESuperTypes().add(this.getTemplateVariableCS());
 		templateVariableCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());
 		topLevelCSEClass.getESuperTypes().add(theBaseCSPackage.getRootPackageCS());
-		transformationCSEClass.getESuperTypes().add(theBaseCSPackage.getPackageCS());
+		transformationCSEClass.getESuperTypes().add(theBaseCSPackage.getClassCS());
 		unitCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
 		varDeclarationCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
 		varDeclarationIdCSEClass.getESuperTypes().add(theBaseCSPackage.getNamedElementCS());

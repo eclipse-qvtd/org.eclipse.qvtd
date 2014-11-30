@@ -20,8 +20,8 @@ import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
-import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
-import org.eclipse.ocl.examples.xtext.base.pivot2cs.Pivot2CS;
+import org.eclipse.ocl.examples.xtext.base.cs2as.CS2AS;
+import org.eclipse.ocl.examples.xtext.base.as2cs.AS2CS;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
@@ -30,19 +30,19 @@ import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.xtext.qvtimperative.as2cs.QVTimperativeAS2CS;
-import org.eclipse.qvtd.xtext.qvtimperative.cs2as.QVTimperativeCS2Pivot;
+import org.eclipse.qvtd.xtext.qvtimperative.cs2as.QVTimperativeCS2AS;
 
 public class QVTimperativeCSResource extends EssentialOCLCSResource
 {
 	@Override
-	public @NonNull CS2Pivot createCS2Pivot(
+	public @NonNull CS2AS createCS2AS(
 			@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap,
 			@NonNull MetaModelManager metaModelManager) {
-		return new QVTimperativeCS2Pivot(cs2asResourceMap, metaModelManager);
+		return new QVTimperativeCS2AS(cs2asResourceMap, metaModelManager);
 	}
 
 	@Override
-	public @NonNull Pivot2CS createPivot2CS(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap,
+	public @NonNull AS2CS createAS2CS(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap,
 			@NonNull MetaModelManager metaModelManager) {
 		return new QVTimperativeAS2CS(cs2asResourceMap, metaModelManager);
 	}

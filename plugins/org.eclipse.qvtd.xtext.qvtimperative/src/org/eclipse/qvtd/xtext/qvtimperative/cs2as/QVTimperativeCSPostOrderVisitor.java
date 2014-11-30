@@ -24,7 +24,7 @@ import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.cs2as.BasicContinuation;
-import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
+import org.eclipse.ocl.examples.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.base.cs2as.SingleContinuation;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
@@ -48,7 +48,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 {
 	protected static class MappingCallBindingCSCompletion extends SingleContinuation<MappingCallBindingCS>
 	{
-		public MappingCallBindingCSCompletion(@NonNull CS2PivotConversion context, @NonNull MappingCallBindingCS csElement) {
+		public MappingCallBindingCSCompletion(@NonNull CS2ASConversion context, @NonNull MappingCallBindingCS csElement) {
 			super(context, null, null, csElement);
 		}
 
@@ -66,7 +66,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 		}
 	}
 
-	public QVTimperativeCSPostOrderVisitor(@NonNull CS2PivotConversion context) {
+	public QVTimperativeCSPostOrderVisitor(@NonNull CS2ASConversion context) {
 		super(context);
 	}
 
@@ -75,7 +75,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 		@Nullable PropertyAssignment propertyAssignment;
 		Property referredProperty = propertyCallExp.getReferredProperty();
 		Property oppositeProperty = referredProperty.getOpposite();
-		if ((oppositeProperty != null) && oppositeProperty.isImplicit() && QVTimperativeCS2Pivot.isMiddle(referredProperty.getOwningType(), csConstraint)) {
+		if ((oppositeProperty != null) && oppositeProperty.isImplicit() && QVTimperativeCS2AS.isMiddle(referredProperty.getOwningClass(), csConstraint)) {
 			propertyAssignment = PivotUtil.getPivot(MiddlePropertyAssignment.class, csConstraint);
 		}
 		else {

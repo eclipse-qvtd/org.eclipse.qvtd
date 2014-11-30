@@ -27,8 +27,9 @@ import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
+import org.eclipse.ocl.examples.pivot.manager.PivotStandardLibrary;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
+import org.eclipse.ocl.examples.xtext.base.utilities.CS2ASResourceAdapter;
 
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
@@ -55,7 +56,7 @@ public class LoadTestCase extends XtextTestCase
 		URI cstURI = pivotURI.trimFileExtension().appendFileExtension("xmi");
 		BaseCSResource xtextResource = (BaseCSResource) ocl.getMetaModelManager().getExternalResourceSet().getResource(inputURI, true);
 		assertNoResourceErrors("Load failed", xtextResource);
-		CS2PivotResourceAdapter adapter = xtextResource.getCS2ASAdapter(null);
+		CS2ASResourceAdapter adapter = xtextResource.getCS2ASAdapter(null);
 		Resource pivotResource = adapter.getASResource(xtextResource);
 //		assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
 //		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
@@ -104,7 +105,7 @@ public class LoadTestCase extends XtextTestCase
 			metaModelManager.dispose();
 			metaModelManager = null;
 		}
-		StandardLibraryContribution.REGISTRY.remove(MetaModelManager.DEFAULT_OCL_STDLIB_URI);
+		StandardLibraryContribution.REGISTRY.remove(PivotStandardLibrary.DEFAULT_OCL_STDLIB_URI);
 		super.tearDown();
 	}
 }

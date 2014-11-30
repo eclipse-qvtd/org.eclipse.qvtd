@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtcore.qvtcorecs;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootPackageCS;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.TransformationCS;
@@ -48,7 +49,7 @@ public interface TopLevelCS extends RootPackageCS {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<TransformationCS> getTransformations();
+	@NonNull EList<TransformationCS> getTransformations();
 
 	/**
 	 * Returns the value of the '<em><b>Queries</b></em>' containment reference list.
@@ -64,7 +65,7 @@ public interface TopLevelCS extends RootPackageCS {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<QueryCS> getQueries();
+	@NonNull EList<QueryCS> getQueries();
 
 	/**
 	 * Returns the value of the '<em><b>Mappings</b></em>' containment reference list.
@@ -80,6 +81,6 @@ public interface TopLevelCS extends RootPackageCS {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<MappingCS> getMappings();
+	@NonNull EList<MappingCS> getMappings();
 
 } // TopLevelCS

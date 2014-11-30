@@ -15,13 +15,13 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
+import org.eclipse.ocl.examples.xtext.base.basecs.ClassCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.NamespaceCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.PackageCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.PackageOwnerCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PivotableElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TemplateableElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypeCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypedElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
@@ -270,13 +270,13 @@ public class QVTcoreBaseCSSwitch<T> extends Switch<T> {
 			case QVTcoreBaseCSPackage.TRANSFORMATION_CS: {
 				TransformationCS transformationCS = (TransformationCS)theEObject;
 				T result = caseTransformationCS(transformationCS);
-				if (result == null) result = casePackageCS(transformationCS);
-				if (result == null) result = casePackageOwnerCS(transformationCS);
-				if (result == null) result = caseNamespaceCS(transformationCS);
+				if (result == null) result = caseClassCS(transformationCS);
 				if (result == null) result = caseNamedElementCS(transformationCS);
+				if (result == null) result = caseTypeCS(transformationCS);
+				if (result == null) result = caseTemplateableElementCS(transformationCS);
 				if (result == null) result = caseModelElementCS(transformationCS);
-				if (result == null) result = casePivotableElementCS(transformationCS);
 				if (result == null) result = caseNameable(transformationCS);
+				if (result == null) result = casePivotableElementCS(transformationCS);
 				if (result == null) result = caseElementCS(transformationCS);
 				if (result == null) result = casePivotable(transformationCS);
 				if (result == null) result = caseVisitableCS(transformationCS);
@@ -663,47 +663,47 @@ public class QVTcoreBaseCSSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Package Owner CS</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Type CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Package Owner CS</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Type CS</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casePackageOwnerCS(PackageOwnerCS object) {
+	public T caseTypeCS(TypeCS object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Namespace CS</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Templateable Element CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Namespace CS</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Templateable Element CS</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNamespaceCS(NamespaceCS object) {
+	public T caseTemplateableElementCS(TemplateableElementCS object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Package CS</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Class CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Package CS</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Class CS</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casePackageCS(PackageCS object) {
+	public T caseClassCS(ClassCS object) {
 		return null;
 	}
 

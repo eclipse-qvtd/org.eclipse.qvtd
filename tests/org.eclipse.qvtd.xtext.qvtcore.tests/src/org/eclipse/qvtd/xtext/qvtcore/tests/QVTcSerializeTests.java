@@ -22,13 +22,13 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.OCL;
 import org.eclipse.ocl.examples.pivot.PivotConstants;
-import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.pivot.utilities.BaseResource;
-import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLLinkingService;
+import org.eclipse.ocl.examples.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.QVTcoreCSPackage;
@@ -47,7 +47,7 @@ public class QVTcSerializeTests extends LoadTestCase
 		URI referenceURI = getProjectFileURI(stem + "ref.qvtcas");
 		doSerialize(inputURI, stem, referenceURI, null, true, true);
 		Resource asResource3 = doLoad_Concrete(ocl2, stem + ".serialized.qvtc", stem + ".serialized.qvtcas");
-		((Root)asResource3.getContents().get(0)).setExternalURI(((Root)asResource1.getContents().get(0)).getExternalURI());
+		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
 		assertSameModel(asResource1, asResource3);
 		ocl1.dispose();
 		ocl2.dispose();
@@ -67,7 +67,7 @@ public class QVTcSerializeTests extends LoadTestCase
 
 	public static @NonNull XtextResource pivot2cs(@NonNull OCL ocl, @NonNull ResourceSet resourceSet, @NonNull ASResource asResource, @NonNull URI outputURI) throws IOException {
 		XtextResource xtextResource = DomainUtil.nonNullState((XtextResource) resourceSet.createResource(outputURI, QVTcoreCSPackage.eCONTENT_TYPE));
-		ocl.pivot2cs(asResource, (BaseResource) xtextResource);
+		ocl.as2cs(asResource, (BaseResource) xtextResource);
 		assertNoResourceErrors("Conversion failed", xtextResource);
 		//
 		//	CS save
@@ -122,7 +122,7 @@ public class QVTcSerializeTests extends LoadTestCase
 	
 	@Override
 	public void setUp() throws Exception {
-		EssentialOCLLinkingService.DEBUG_RETRY = true;
+		BaseLinkingService.DEBUG_RETRY = true;
 		super.setUp();
 		QVTcoreStandaloneSetup.doSetup();
 	}

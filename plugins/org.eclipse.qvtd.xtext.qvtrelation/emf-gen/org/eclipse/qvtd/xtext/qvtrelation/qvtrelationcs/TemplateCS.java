@@ -28,7 +28,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
  * @model abstract="true"
  * @generated
  */
-public interface TemplateCS extends TemplateVariableCS, ExpCS {
+public interface TemplateCS extends ExpCS, TemplateVariableCS {
 	/**
 	 * Returns the value of the '<em><b>Guard Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

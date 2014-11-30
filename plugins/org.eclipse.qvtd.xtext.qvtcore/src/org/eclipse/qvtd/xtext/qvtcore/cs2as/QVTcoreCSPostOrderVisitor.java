@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtcore.cs2as;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
+import org.eclipse.ocl.examples.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.TopLevelCS;
@@ -20,7 +20,7 @@ import org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.util.AbstractQVTcoreCSPostOrderV
 public class QVTcoreCSPostOrderVisitor extends AbstractQVTcoreCSPostOrderVisitor
 {
 
-	public QVTcoreCSPostOrderVisitor(@NonNull CS2PivotConversion context) {
+	public QVTcoreCSPostOrderVisitor(@NonNull CS2ASConversion context) {
 		super(context);
 	}
 

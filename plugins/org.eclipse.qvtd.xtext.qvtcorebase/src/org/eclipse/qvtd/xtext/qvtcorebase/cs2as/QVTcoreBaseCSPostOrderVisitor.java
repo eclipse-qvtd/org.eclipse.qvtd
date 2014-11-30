@@ -21,7 +21,7 @@ import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.basecs.ConstraintCS;
-import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
+import org.eclipse.ocl.examples.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -49,7 +49,7 @@ import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.util.AbstractQVTcoreBase
 
 public class QVTcoreBaseCSPostOrderVisitor extends AbstractQVTcoreBaseCSPostOrderVisitor
 {
-	public QVTcoreBaseCSPostOrderVisitor(@NonNull CS2PivotConversion context) {
+	public QVTcoreBaseCSPostOrderVisitor(@NonNull CS2ASConversion context) {
 		super(context);
 	}
 

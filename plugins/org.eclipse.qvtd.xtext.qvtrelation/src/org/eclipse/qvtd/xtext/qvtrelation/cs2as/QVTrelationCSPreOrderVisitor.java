@@ -21,7 +21,7 @@ import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
 import org.eclipse.ocl.examples.xtext.base.cs2as.BasicContinuation;
-import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
+import org.eclipse.ocl.examples.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.base.cs2as.PivotDependency;
 import org.eclipse.ocl.examples.xtext.base.cs2as.SingleContinuation;
@@ -41,7 +41,7 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 {	
 	public static class CollectionTemplateCompletion extends SingleContinuation<CollectionTemplateCS>
 	{
-		public CollectionTemplateCompletion(@NonNull CS2PivotConversion context, @NonNull CollectionTemplateCS csElement) {
+		public CollectionTemplateCompletion(@NonNull CS2ASConversion context, @NonNull CollectionTemplateCS csElement) {
 			super(context, null, null, csElement, new PivotDependency(csElement.getType()));
 		}
 
@@ -63,7 +63,7 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 
 	public static class ObjectTemplateCompletion extends SingleContinuation<ObjectTemplateCS>
 	{
-		public ObjectTemplateCompletion(@NonNull CS2PivotConversion context, @NonNull ObjectTemplateCS csElement) {
+		public ObjectTemplateCompletion(@NonNull CS2ASConversion context, @NonNull ObjectTemplateCS csElement) {
 			super(context, null, null, csElement, new PivotDependency(csElement.getType()));
 		}
 
@@ -85,7 +85,7 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 
 	public static class PropertyTemplateCompletion extends SingleContinuation<PropertyTemplateCS>
 	{
-		public PropertyTemplateCompletion(@NonNull CS2PivotConversion context, @NonNull PropertyTemplateCS csElement) {
+		public PropertyTemplateCompletion(@NonNull CS2ASConversion context, @NonNull PropertyTemplateCS csElement) {
 			super(context, null, null, csElement);
 		}
 
@@ -113,7 +113,7 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 				}
 				else {
 					PathNameCS oppositePropertyId = csElement.getOppositePropertyId();
-					Element element = oppositePropertyId.getElement();
+					Element element = oppositePropertyId.getReferredElement();
 					if (element instanceof Property) {
 						pivotElement.setReferredProperty((Property) element);
 						pivotElement.setIsOpposite(true);
@@ -124,7 +124,7 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 		}
 	}
 
-	public QVTrelationCSPreOrderVisitor(@NonNull CS2PivotConversion context) {
+	public QVTrelationCSPreOrderVisitor(@NonNull CS2ASConversion context) {
 		super(context);
 	}
 
@@ -156,11 +156,11 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 	public Continuation<?> visitTransformationCS(@NonNull TransformationCS csElement) {
 		Transformation pivotElement = PivotUtil.getPivot(Transformation.class, csElement);
 		if (pivotElement != null) {
-			List<Type> superClasses = pivotElement.getSuperClass();
+			List<org.eclipse.ocl.examples.pivot.Class> superClasses = pivotElement.getSuperClasses();
 //			context.refreshList(Type.class, superClasses, csElement.getOwnedSuperType());
 			if (superClasses.isEmpty()) {
-				org.eclipse.ocl.examples.pivot.Class oclElementType = context.getMetaModelManager().getOclElementType();
-				pivotElement.getSuperClass().add(oclElementType);
+				org.eclipse.ocl.examples.pivot.Class oclElementType = context.getMetaModelManager().getStandardLibrary().getOclElementType();
+				pivotElement.getSuperClasses().add(oclElementType);
 			}
 		}
 		return null;

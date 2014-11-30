@@ -16,15 +16,16 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
+import org.eclipse.ocl.examples.xtext.base.basecs.ClassCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.NamespaceCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.PackageCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PackageOwnerCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PivotableElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.RootPackageCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TemplateableElementCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.TypeCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.TypedElementCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
@@ -226,12 +227,12 @@ public class QVTrelationCSAdapterFactory extends AdapterFactoryImpl {
 				return createNameableAdapter();
 			}
 			@Override
-			public Adapter caseNamedElementCS(NamedElementCS object) {
-				return createNamedElementCSAdapter();
-			}
-			@Override
 			public Adapter caseExpCS(ExpCS object) {
 				return createExpCSAdapter();
+			}
+			@Override
+			public Adapter caseNamedElementCS(NamedElementCS object) {
+				return createNamedElementCSAdapter();
 			}
 			@Override
 			public Adapter caseTypedElementCS(TypedElementCS object) {
@@ -250,12 +251,16 @@ public class QVTrelationCSAdapterFactory extends AdapterFactoryImpl {
 				return createRootPackageCSAdapter();
 			}
 			@Override
-			public Adapter caseNamespaceCS(NamespaceCS object) {
-				return createNamespaceCSAdapter();
+			public Adapter caseTypeCS(TypeCS object) {
+				return createTypeCSAdapter();
 			}
 			@Override
-			public Adapter casePackageCS(PackageCS object) {
-				return createPackageCSAdapter();
+			public Adapter caseTemplateableElementCS(TemplateableElementCS object) {
+				return createTemplateableElementCSAdapter();
+			}
+			@Override
+			public Adapter caseClassCS(ClassCS object) {
+				return createClassCSAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -740,34 +745,6 @@ public class QVTrelationCSAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.basecs.NamespaceCS <em>Namespace CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.xtext.base.basecs.NamespaceCS
-	 * @generated
-	 */
-	public Adapter createNamespaceCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.basecs.PackageCS <em>Package CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.xtext.base.basecs.PackageCS
-	 * @generated
-	 */
-	public Adapter createPackageCSAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.basecs.RootCS <em>Root CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -792,6 +769,48 @@ public class QVTrelationCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRootPackageCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.basecs.TypeCS <em>Type CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.xtext.base.basecs.TypeCS
+	 * @generated
+	 */
+	public Adapter createTypeCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.basecs.TemplateableElementCS <em>Templateable Element CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.xtext.base.basecs.TemplateableElementCS
+	 * @generated
+	 */
+	public Adapter createTemplateableElementCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.xtext.base.basecs.ClassCS <em>Class CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.xtext.base.basecs.ClassCS
+	 * @generated
+	 */
+	public Adapter createClassCSAdapter() {
 		return null;
 	}
 

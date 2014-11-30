@@ -99,7 +99,8 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TransformationCS> getTransformations() {
+	@SuppressWarnings("null")
+	public @NonNull EList<TransformationCS> getTransformations() {
 		if (transformations == null) {
 			transformations = new EObjectContainmentEList<TransformationCS>(TransformationCS.class, this, QVTcoreCSPackage.TOP_LEVEL_CS__TRANSFORMATIONS);
 		}
@@ -111,7 +112,8 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<QueryCS> getQueries() {
+	@SuppressWarnings("null")
+	public @NonNull EList<QueryCS> getQueries() {
 		if (queries == null) {
 			queries = new EObjectContainmentEList<QueryCS>(QueryCS.class, this, QVTcoreCSPackage.TOP_LEVEL_CS__QUERIES);
 		}
@@ -123,7 +125,8 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<MappingCS> getMappings() {
+	@SuppressWarnings("null")
+	public @NonNull EList<MappingCS> getMappings() {
 		if (mappings == null) {
 			mappings = new EObjectContainmentEList<MappingCS>(MappingCS.class, this, QVTcoreCSPackage.TOP_LEVEL_CS__MAPPINGS);
 		}

@@ -22,7 +22,7 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
+import org.eclipse.ocl.examples.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
@@ -63,7 +63,7 @@ import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.util.AbstractQVTimpe
 
 public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSContainmentVisitor
 {
-	public QVTimperativeCSContainmentVisitor(@NonNull CS2PivotConversion context) {
+	public QVTimperativeCSContainmentVisitor(@NonNull CS2ASConversion context) {
 		super(context);
 	}	
 
@@ -167,24 +167,27 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	@Override
 	public Continuation<?> visitTopLevelCS(@NonNull TopLevelCS csElement) {
 		importPackages(csElement);
-		@NonNull ImperativeModel pivotElement = refreshRoot(ImperativeModel.class, QVTimperativePackage.Literals.IMPERATIVE_MODEL, csElement);
-		context.refreshPivotList(Unit.class, pivotElement.getUnit(), csElement.getOwnedImport());
+		@NonNull ImperativeModel asModel = refreshRoot(ImperativeModel.class, QVTimperativePackage.Literals.IMPERATIVE_MODEL, csElement);
+		context.refreshPivotList(Unit.class, asModel.getUnit(), csElement.getOwnedImports());
 		List<TransformationCS> csTransformations = csElement.getTransformations();
-		List<Transformation> txList = new ArrayList<Transformation>(csTransformations.size());
+//		List<Transformation> txList = new ArrayList<Transformation>(csTransformations.size());
 		Map<Transformation, List<Mapping>> tx2mappings = new HashMap<Transformation, List<Mapping>>();
 		for (TransformationCS csTransformation : csTransformations) {
 			Transformation pTransformation = PivotUtil.getPivot(Transformation.class, csTransformation);
 			tx2mappings.put(pTransformation, new ArrayList<Mapping>());
-			txList.add(pTransformation);
+//			txList.add(pTransformation);
 		}
-		ImperativeModel pPackage = PivotUtil.getPivot(ImperativeModel.class, csElement);
-		if (pPackage != null) {
-			PivotUtil.refreshList(pPackage.getNestedPackage(), txList);
-		}
+//		ImperativeModel asModel = PivotUtil.getPivot(ImperativeModel.class, csElement);
+//		if (asModel != null) {
+//			PivotUtil.refreshList(asModel.getOwnedTransformations(), txList);
+//		}
+//		List<TransformationCS> csTransformations = csElement.getTransformations();
+		List<org.eclipse.ocl.examples.pivot.Package> asPackages = resolveTransformations(csTransformations, asModel);
+		PivotUtil.refreshList(asModel.getOwnedPackages(), asPackages);
 		//
 		Resource eResource = csElement.eResource();
 		if (eResource instanceof BaseCSResource) {
-			context.installRootElement((BaseCSResource)eResource, pivotElement);		// Ensure containment viable for imported library type references
+			context.installRootElement((BaseCSResource)eResource, asModel);		// Ensure containment viable for imported library type references
 //			importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
 		}
 		//
@@ -213,10 +216,10 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 			PivotUtil.refreshList(pTransformation.getRule(), tx2mappings.get(pTransformation));
 			List<Function> newElements = tx2qMap.get(pTransformation);
 			if (newElements != null) {
-				PivotUtil.refreshList(pTransformation.getOwnedOperation(), newElements);
+				PivotUtil.refreshList(pTransformation.getOwnedOperations(), newElements);
 			}
 			else {
-				pTransformation.getOwnedOperation().clear();
+				pTransformation.getOwnedOperations().clear();
 			}
 		}
 //		context.refreshPivotList(Type.class, pivotElement.getOwnedType(), csElement.getOwnedType());

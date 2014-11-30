@@ -20,7 +20,7 @@ import "http://www.eclipse.org/qvt/0.9/QVTcore" as qvtcore
 import "http://www.eclipse.org/qvt/0.9/QVTcoreCST"
 
 TopLevelCS:
-	(ownedImport+=ImportCS | /*ownedInclude+=IncludeCS |*/ ownedLibrary+=LibraryCS)*
+	(ownedImports+=ImportCS | /*ownedInclude+=IncludeCS |*/ ownedLibraries+=LibraryCS)*
 	(mappings+=MappingCS | transformations+=TransformationCS | queries+=QueryCS)*
 ;
 	

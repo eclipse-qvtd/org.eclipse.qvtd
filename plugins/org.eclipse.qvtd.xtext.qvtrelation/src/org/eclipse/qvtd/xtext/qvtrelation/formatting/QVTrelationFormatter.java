@@ -51,7 +51,7 @@ public class QVTrelationFormatter extends AbstractEssentialOCLFormatter
 		configureCollectionLiteralExpCS(c, f.getCollectionLiteralExpCSAccess());
 		configureCollectionTypeCS(c, f.getCollectionTypeCSAccess());
 		configureCurlyBracketedClauseCS(c, f.getCurlyBracketedClauseCSAccess());
-	    configureEssentialOCLNavigationOperatorCS(c, f.getEssentialOCLNavigationOperatorCSAccess());
+	    configureEssentialOCLNavigationOperatorCS(c, f.getEssentialOCLNavigationOperatorNameAccess());
 		configureIfExpCS(c, f.getIfExpCSAccess());
 		configureLetExpCS(c, f.getLetExpCSAccess());
 		configureMultiplicityBoundsCS(c, f.getMultiplicityBoundsCSAccess());
@@ -169,7 +169,7 @@ public class QVTrelationFormatter extends AbstractEssentialOCLFormatter
 	    {
 	    	UnitCSElements a = f.getUnitCSAccess();
 			c.setNoSpace().around(a.getColonColonKeyword_3_0());	
-			c.setNoSpace().around(a.getAllAsteriskKeyword_3_1_0());	
+			c.setNoSpace().around(a.getIsAllAsteriskKeyword_3_1_0());	
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_4());
 	    }
 	    {

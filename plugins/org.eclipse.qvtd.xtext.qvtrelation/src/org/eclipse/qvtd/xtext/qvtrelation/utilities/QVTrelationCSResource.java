@@ -16,18 +16,18 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
-import org.eclipse.ocl.examples.xtext.base.cs2as.CS2Pivot;
+import org.eclipse.ocl.examples.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
-import org.eclipse.qvtd.xtext.qvtrelation.cs2as.QVTrelationCS2Pivot;
+import org.eclipse.qvtd.xtext.qvtrelation.cs2as.QVTrelationCS2AS;
 
 public class QVTrelationCSResource extends EssentialOCLCSResource
 {
 	@Override
-	public @NonNull CS2Pivot createCS2Pivot(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap,
+	public @NonNull CS2AS createCS2AS(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap,
 			@NonNull MetaModelManager metaModelManager) {
-		return new QVTrelationCS2Pivot(cs2asResourceMap, metaModelManager);
+		return new QVTrelationCS2AS(cs2asResourceMap, metaModelManager);
 	}
 
 	@Override

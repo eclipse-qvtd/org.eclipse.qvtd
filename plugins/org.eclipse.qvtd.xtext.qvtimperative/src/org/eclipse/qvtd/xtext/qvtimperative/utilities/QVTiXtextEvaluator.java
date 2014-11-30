@@ -18,7 +18,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.examples.xtext.base.utilities.CS2PivotResourceAdapter;
+import org.eclipse.ocl.examples.xtext.base.utilities.CS2ASResourceAdapter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -40,16 +40,18 @@ public class QVTiXtextEvaluator extends QVTiPivotEvaluator
         BaseCSResource xtextResource = null;
         xtextResource = (BaseCSResource) metaModelManager.getExternalResourceSet().getResource(transformationURI, true);
         if (xtextResource != null) {
-    		CS2PivotResourceAdapter adapter = null;
+    		CS2ASResourceAdapter adapter = null;
     		try {
     			adapter = xtextResource.getCS2ASAdapter(null);
     			asResource = adapter.getASResource(xtextResource);
     			for (EObject eContent : asResource.getContents()) {
     				if (eContent instanceof ImperativeModel) {
-    	    			for (EObject eObject : ((ImperativeModel)eContent).getNestedPackage()) {
-    	    				if (eObject instanceof Transformation) {
-    	    	                return (Transformation)eObject;
-    	    				}
+    	    			for (org.eclipse.ocl.examples.pivot.Package asPackage : ((ImperativeModel)eContent).getOwnedPackages()) {
+        	    			for (org.eclipse.ocl.examples.pivot.Class asClass : asPackage.getOwnedClasses()) {
+        	    				if (asClass instanceof Transformation) {
+        	    	                return (Transformation)asClass;
+        	    				}
+        	    			}
     	    			}
     				}
     			}

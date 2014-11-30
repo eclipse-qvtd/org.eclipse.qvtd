@@ -21,7 +21,7 @@ import "http://www.eclipse.org/qvt/0.9/QVTcoreBaseCST"
 import "http://www.eclipse.org/qvt/0.9/QVTimperativeCST"
 
 TopLevelCS:
-	(ownedImport+=ImportCS | /*ownedInclude+=IncludeCS |*/ ownedLibrary+=LibraryCS)*
+	(ownedImports+=ImportCS | /*ownedInclude+=IncludeCS |*/ ownedLibraries+=LibraryCS)*
 	(transformations+=TransformationCS | mappings+=MappingCS | queries+=QueryCS)*
 ;
 	

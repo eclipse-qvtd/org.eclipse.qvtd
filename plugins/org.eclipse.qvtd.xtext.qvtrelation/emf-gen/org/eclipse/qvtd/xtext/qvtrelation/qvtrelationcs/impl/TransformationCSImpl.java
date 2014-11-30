@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.xtext.base.basecs.impl.PackageCSImpl;
+import org.eclipse.ocl.examples.xtext.base.basecs.impl.ClassCSImpl;
 import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.KeyDeclCS;
@@ -49,7 +49,7 @@ import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.util.QVTrelationCSVisito
  *
  * @generated
  */
-public class TransformationCSImpl extends PackageCSImpl implements TransformationCS {
+public class TransformationCSImpl extends ClassCSImpl implements TransformationCS {
 	/**
 	 * The cached value of the '{@link #getModelDecls() <em>Model Decls</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

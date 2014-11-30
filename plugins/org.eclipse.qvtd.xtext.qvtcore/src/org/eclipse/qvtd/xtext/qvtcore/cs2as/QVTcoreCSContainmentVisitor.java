@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.cs2as.CS2PivotConversion;
+import org.eclipse.ocl.examples.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
@@ -51,7 +51,7 @@ import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.TransformationCS;
 
 public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVisitor
 {
-	public QVTcoreCSContainmentVisitor(@NonNull CS2PivotConversion context) {
+	public QVTcoreCSContainmentVisitor(@NonNull CS2ASConversion context) {
 		super(context);
 	}	
 
@@ -101,7 +101,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 		}
 		for (Transformation asTransformation : tx2qMap.keySet()) {
 			List<Function> asQueries = tx2qMap.get(asTransformation);
-			List<Operation> asOperations = asTransformation.getOwnedOperation();
+			List<Operation> asOperations = asTransformation.getOwnedOperations();
 			if (asQueries != null) {
 				PivotUtil.refreshList(asOperations, asQueries);
 			}
@@ -109,16 +109,6 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 				asOperations.clear();
 			}
 		}
-	}
-
-	protected @NonNull List<Transformation> resolveTransformations(@NonNull TopLevelCS csTopLevel) {
-		List<TransformationCS> csTransformations = csTopLevel.getTransformations();
-		List<Transformation> asTransformations = new ArrayList<Transformation>(csTransformations.size());
-		for (TransformationCS csTransformation : csTransformations) {
-			Transformation asTransformation = PivotUtil.getPivot(Transformation.class, csTransformation);
-			asTransformations.add(asTransformation);
-		}
-		return asTransformations;
 	}
 
 	@Override
@@ -184,15 +174,16 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 	public Continuation<?> visitTopLevelCS(@NonNull TopLevelCS csElement) {
 		importPackages(csElement);
 		@NonNull CoreModel asCoreModel = refreshRoot(CoreModel.class, QVTcorePackage.Literals.CORE_MODEL, csElement);
-		context.refreshPivotList(Unit.class, asCoreModel.getUnit(), csElement.getOwnedImport());
+		context.refreshPivotList(Unit.class, asCoreModel.getUnit(), csElement.getOwnedImports());
 		//
 		Resource eResource = csElement.eResource();
 		if (eResource instanceof BaseCSResource) {
 			context.installRootElement((BaseCSResource)eResource, asCoreModel);		// Ensure containment viable for imported library type references
 //			importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
 		}
-		List<Transformation> asTransformations = resolveTransformations(csElement);
-		PivotUtil.refreshList(asCoreModel.getNestedPackage(), asTransformations);
+		List<TransformationCS> csTransformations = csElement.getTransformations();
+		List<org.eclipse.ocl.examples.pivot.Package> asPackages = resolveTransformations(csTransformations, asCoreModel);
+		PivotUtil.refreshList(asCoreModel.getOwnedPackages(), asPackages);
 //		context.refreshPivotList(Type.class, pivotElement.getOwnedType(), csElement.getOwnedType());
 //		context.refreshPivotList(org.eclipse.ocl.examples.pivot.Package.class, pivotElement.getNestedPackage(), csElement.getOwnedNestedPackage());
 		resolveTransformationMappings(csElement);

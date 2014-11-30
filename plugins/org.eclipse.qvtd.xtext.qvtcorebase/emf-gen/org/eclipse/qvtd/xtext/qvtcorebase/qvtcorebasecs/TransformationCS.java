@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.examples.xtext.base.basecs.PackageCS;
+import org.eclipse.ocl.examples.xtext.base.basecs.ClassCS;
 import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
 
 /**
@@ -32,7 +32,7 @@ import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
  * @model
  * @generated
  */
-public interface TransformationCS extends PackageCS {
+public interface TransformationCS extends ClassCS {
 	/**
 	 * Returns the value of the '<em><b>Path Name</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

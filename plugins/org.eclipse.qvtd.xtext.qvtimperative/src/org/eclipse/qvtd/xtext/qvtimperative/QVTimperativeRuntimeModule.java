@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtimperative;
 
 import org.antlr.runtime.TokenSource;
-import org.eclipse.ocl.examples.xtext.essentialocl.services.RetokenizingTokenSource;
+import org.eclipse.ocl.examples.xtext.base.services.RetokenizingTokenSource;
 import org.eclipse.qvtd.xtext.qvtimperative.parser.antlr.QVTimperativeParser;
 import org.eclipse.qvtd.xtext.qvtimperative.scoping.QVTimperativeScopeProvider;
 import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTimperativeCSResource;
