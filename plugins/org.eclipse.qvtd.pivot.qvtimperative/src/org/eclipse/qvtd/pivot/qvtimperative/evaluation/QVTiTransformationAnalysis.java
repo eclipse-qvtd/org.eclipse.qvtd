@@ -95,7 +95,23 @@ public class QVTiTransformationAnalysis
 						}
 					}
 				}
-			}
+			}/* This should have been analised by the OperationCallExp search....
+			else if (eObject instanceof MappingLoop) {
+				MappingLoop mappingLoop = (MappingLoop)eObject;
+				if (mappingLoop.getSource() instanceof OperationCallExp) {
+					OperationCallExp operationCallExp = (OperationCallExp) mappingLoop.getSource();
+					Operation referredOperation = operationCallExp.getReferredOperation();
+					if ((referredOperation != null) && (referredOperation.getOperationId() == allInstancesOperationId)) {
+						OCLExpression source = operationCallExp.getSource();
+						if (source != null) {
+							Type sourceType = source.getType();
+							if (sourceType != null) {
+								allInstancesTypes.add(sourceType);
+							}
+						}
+					}
+				}
+			}*/
 		}
 		//
 		//	Second pass

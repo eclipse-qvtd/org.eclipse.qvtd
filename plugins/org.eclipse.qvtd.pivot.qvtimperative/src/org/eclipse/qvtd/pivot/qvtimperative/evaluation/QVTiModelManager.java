@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,9 +28,11 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.ocl.examples.pivot.ParserException;
 import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -57,7 +60,7 @@ public class QVTiModelManager implements DomainModelManager
 	private @NonNull Set<Type> allInstancesTypes;
 
 	/**
-	 * Array of caches for the unnavigable opposite of each used navigable middle to outer property. 
+	 * Array of caches for the un-navigable opposite of each used navigable middle to outer property. 
 	 * The array index is allocated by the QVTiTransformationAanaysis; it identifies the middle2outerProperty
 	 * of interest. Each cache is from outerObject to middleObject.
 	 */
@@ -119,7 +122,20 @@ public class QVTiModelManager implements DomainModelManager
 	}
 
 	public @NonNull Set<EObject> get(@NonNull DomainType type) {
-		throw new UnsupportedOperationException();
+		
+		Set<EObject> elements = new HashSet<EObject>();
+		// Find the typed model for the type
+		DomainPackage p = type.getPackage();
+		for (TypedModel d : modelResourceMap.keySet()) {
+			for (Package up : d.getUsedPackage()) {
+				if (up.equals(p)) {
+					for (Object o : getElementsByType(d, (Type) type)) {
+						elements.add((EObject) o);
+					}
+				}
+			}
+		}
+		return elements;
 	}
 
 	/**

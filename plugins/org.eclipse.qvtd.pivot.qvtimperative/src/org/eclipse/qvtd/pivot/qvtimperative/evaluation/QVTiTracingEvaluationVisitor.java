@@ -106,9 +106,11 @@ public class QVTiTracingEvaluationVisitor extends QVTiAbstractTracingEvaluationV
 				// Print the output model after each mapping
 				logger.info("==============================");
 				logger.info("Output Model");
-				TypedModel tm = ((Mapping)bottomPattern.getArea()).getDomain().get(0).getTypedModel();
-				for (EObject eo : ((QVTiModelManager)delegate.getModelManager()).getTypeModelEObjectList(tm)) {
-					logger.info(prettyPrintUnident(eo));
+				if (((Mapping)bottomPattern.getArea()).getDomain().size() > 0) {
+					TypedModel tm = ((Mapping)bottomPattern.getArea()).getDomain().get(0).getTypedModel();
+					for (EObject eo : ((QVTiModelManager)delegate.getModelManager()).getTypeModelEObjectList(tm)) {
+						logger.info(prettyPrintUnident(eo));
+					}
 				}
 				logger.info("==============================");
 			}
