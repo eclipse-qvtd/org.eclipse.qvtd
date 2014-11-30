@@ -33,7 +33,7 @@ DirectionCS: {DirectionCS} name=UnrestrictedName
 MappingCS: {MappingCS} 'map' name=UnrestrictedName ('in' in=[qvtbase::Transformation|UnrestrictedName])?
 	'{' domains+=SourceDomainCS* domains+=TargetDomainCS* ('where' middle=MiddleDomainCS)? mappingSequence=MappingSequenceCS? '}';
 	
-MappingCallCS: {MappingCallCS} 'map' referredMapping=[qvtimperative::Mapping|UnrestrictedName]
+MappingCallCS: {MappingCallCS} 'call' referredMapping=[qvtimperative::Mapping|UnrestrictedName]
 	'{' bindings+=MappingCallBindingCS* '}';
 
 MappingCallBindingCS: referredVariable=[pivot::Variable|UnrestrictedName] ':=' value=ExpCS ';';

@@ -91,7 +91,7 @@ public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 	    }
 	    {
 	    	MappingCallCSElements a = f.getMappingCallCSAccess();
-			c.setLinewrap(1).before(a.getMapKeyword_1());
+			c.setLinewrap(1).before(a.getCallKeyword_1());
 			setAppendedBraces(c, a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
 //		    c.setIndentation(a.getLeftCurlyBracketKeyword_3(), a.getRightCurlyBracketKeyword_5());
 	    }

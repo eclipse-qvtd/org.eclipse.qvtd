@@ -16,7 +16,7 @@ map upper2lowerLM in CopyGraphMinimal {
         g2g.graph1 := g1;
         g2g.name := g1.name;
     }
-    map upper2lowerMR {
+    call upper2lowerMR {
     	g2gout := g2g;
     }
 }
