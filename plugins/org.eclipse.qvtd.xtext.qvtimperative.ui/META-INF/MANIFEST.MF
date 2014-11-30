@@ -14,8 +14,8 @@ Export-Package: org.eclipse.qvtd.xtext.qvtimperative.ui,
  org.eclipse.qvtd.xtext.qvtimperative.ui.labeling,
  org.eclipse.qvtd.xtext.qvtimperative.ui.outline,
  org.eclipse.qvtd.xtext.qvtimperative.ui.quickfix
-Require-Bundle: org.eclipse.qvtd.xtext.qvtimperative;visibility:=reexport,
- org.eclipse.jdt.annotation;bundle-version="[1.1.0,2.0.0)";resolution:=optional,
+Require-Bundle: org.eclipse.xtext.builder;bundle-version="[2.5.0,3.0.0)",
+ org.eclipse.qvtd.xtext.qvtimperative;visibility:=reexport,
  org.eclipse.qvtd.xtext.qvtcorebase.ui;visibility:=reexport
 Import-Package: org.apache.log4j
 Bundle-Activator: org.eclipse.qvtd.xtext.qvtimperative.ui.internal.QVTimperativeActivator

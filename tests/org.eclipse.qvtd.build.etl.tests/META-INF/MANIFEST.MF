@@ -7,6 +7,6 @@ Bundle-Activator: org.eclipse.qvtd.etl.tests.Activator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.epsilon.common.dt,
- org.eclipse.ocl.examples.pivot;bundle-version="3.4.0"
+ org.eclipse.ocl.examples.pivot
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
