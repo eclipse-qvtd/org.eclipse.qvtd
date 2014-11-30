@@ -38,6 +38,8 @@ map packageToSchemaLM in umlRdbms {
 	        prim := child;
 	        p2s := p2s;
 	    }
+	}
+    for child in p.elements {
 	    -- Class
 	    call classToTableLM {
 	        p := p;
@@ -253,6 +255,8 @@ map classToTableMR in umlRdbms {
 	        dt := t;
 	--        sc2t := c2t;
 	--        dc2t <= c2t.associationsToForeignKeys.referenced;
+        sc2t := t.ClassToTable;
+        dc2t := t.ClassToTable;
 	        a2f := child;
 	        s := s;
 	        st := t;
@@ -366,8 +370,8 @@ map associationToForeignKeyMR in umlRdbms {
         p2s.schema = s;
         --sc2t.table = st;
         --dc2t.table = dt; 
-        sc2t := st.ClassToTable;
-        dc2t := dt.ClassToTable;
+--        sc2t := st.ClassToTable;
+--        dc2t := dt.ClassToTable;
         st.schema = s;
         -- rk.owner = dt;
         -- rk.kind = 'primary';

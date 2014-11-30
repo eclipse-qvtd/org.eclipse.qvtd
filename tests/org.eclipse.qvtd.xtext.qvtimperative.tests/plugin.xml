@@ -7,9 +7,13 @@
 <plugin>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated UMLtoRDBMS -->
-      <package
+      <!-- @generated UMLtoRDBMS NOT -->
+      <!--package
             uri="http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS"
+            class="test.umltordbms.UmltordbmsPackage"
+            genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassToRDBMS/UMLtoRDBMS.genmodel"/-->
+      <package
+            uri="dummy-protocol://dummy-nsuri/qvt/examples/0.1/UMLtoRDBMS"
             class="test.umltordbms.UmltordbmsPackage"
             genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassToRDBMS/UMLtoRDBMS.genmodel"/>
    </extension>
@@ -22,9 +26,13 @@
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated UMLtoRDBMS -->
+      <!-- @generated UMLtoRDBMS NOT -->
+      <!--package
+            uri="http://www.eclipse.org/qvt/examples/0.1/simpleUML"
+            class="test.simpleuml.SimpleumlPackage"
+            genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassToRDBMS/UMLtoRDBMS.genmodel"/-->
       <package
-            uri="http://http://www.eclipse.org/qvt/examples/0.1/simpleUML"
+            uri="dummy-protocol://dummy-nsuri/qvt/examples/0.1/simpleUML"
             class="test.simpleuml.SimpleumlPackage"
             genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassToRDBMS/UMLtoRDBMS.genmodel"/>
    </extension>
@@ -37,9 +45,13 @@
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated UMLtoRDBMS -->
+      <!-- @generated UMLtoRDBMS NOT -->
+      <!--package
+            uri="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS"
+            class="test.simplerdbms.SimplerdbmsPackage"
+            genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassToRDBMS/UMLtoRDBMS.genmodel"/-->
       <package
-            uri="http://http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS"
+            uri="dummy-protocol://dummy-nsuri/qvt/examples/0.1/SimpleRDBMS"
             class="test.simplerdbms.SimplerdbmsPackage"
             genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassToRDBMS/UMLtoRDBMS.genmodel"/>
    </extension>
@@ -50,5 +62,4 @@
             type="simplerdbms"
             class="test.simplerdbms.util.SimplerdbmsResourceFactoryImpl"/>
    </extension>
-
 </plugin>
