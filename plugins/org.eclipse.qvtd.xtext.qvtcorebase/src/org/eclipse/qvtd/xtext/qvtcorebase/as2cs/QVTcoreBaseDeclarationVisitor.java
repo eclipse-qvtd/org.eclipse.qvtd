@@ -102,15 +102,21 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 			super(resource, metaModelManager);
  		}
 	}
-	
+
 	public QVTcoreBaseDeclarationVisitor(@NonNull AS2CSConversion context) {
 		super(context);
 	}
 
 	protected @Nullable Package getScope(@NonNull Variable asVariable) {
 		TypedModel typedModel = QVTcoreBaseUtil.getTypedModel(QVTcoreBaseUtil.getContainingArea(asVariable));
-		Package scope = typedModel != null ? typedModel.getUsedPackage().get(0) : null;
-		return scope;
+		if (typedModel == null) {
+			return null;
+		}
+		List<Package> usedPackages = typedModel.getUsedPackage();
+		if (usedPackages.isEmpty()) {
+			return null;
+		}
+		return usedPackages.get(0);
 	}
 
 	/**
