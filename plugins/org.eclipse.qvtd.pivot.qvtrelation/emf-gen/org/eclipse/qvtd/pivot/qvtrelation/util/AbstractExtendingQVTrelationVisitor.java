@@ -48,10 +48,6 @@ public abstract class AbstractExtendingQVTrelationVisitor<R, C>
 		return visitElement(object);
 	}
 
-	public @Nullable R visitOppositePropertyCallExp(@NonNull org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp object) {
-		return visitPropertyCallExp(object);
-	}
-
 	public @Nullable R visitRelation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.Relation object) {
 		return visitRule(object);
 	}

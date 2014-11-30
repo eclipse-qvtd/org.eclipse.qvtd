@@ -26,7 +26,6 @@ public interface QVTrelationVisitor<R> extends org.eclipse.qvtd.pivot.qvttemplat
 {
 	@Nullable R visitDomainPattern(@NonNull org.eclipse.qvtd.pivot.qvtrelation.DomainPattern object);
 	@Nullable R visitKey(@NonNull org.eclipse.qvtd.pivot.qvtrelation.Key object);
-	@Nullable R visitOppositePropertyCallExp(@NonNull org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp object);
 	@Nullable R visitRelation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.Relation object);
 	@Nullable R visitRelationCallExp(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp object);
 	@Nullable R visitRelationDomain(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationDomain object);

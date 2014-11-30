@@ -17,7 +17,6 @@ import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
-import org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
@@ -43,11 +42,6 @@ public class QVTrelationPrettyPrintVisitor extends QVTtemplatePrettyPrintVisitor
 		if (identifies != null) {
 			context.appendQualifiedType(identifies);
 		}
-		return null;
-	}
-
-	public Object visitOppositePropertyCallExp(@NonNull OppositePropertyCallExp object) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

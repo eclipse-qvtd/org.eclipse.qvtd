@@ -53,17 +53,6 @@ public abstract class AbstractWrappingQVTrelationVisitor<R, C, D extends QVTrela
 		}
 	}
 
-	public @Nullable R visitOppositePropertyCallExp(@NonNull org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp object) {
-		P prologue = preVisit(object);
-		try {
-			R result = delegate.visitOppositePropertyCallExp(object);
-			return postVisit(object, prologue, result);
-		}
-		catch (Throwable e) {
-			return badVisit(object, prologue, e);
-		}
-	}
-
 	public @Nullable R visitRelation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.Relation object) {
 		P prologue = preVisit(object);
 		try {

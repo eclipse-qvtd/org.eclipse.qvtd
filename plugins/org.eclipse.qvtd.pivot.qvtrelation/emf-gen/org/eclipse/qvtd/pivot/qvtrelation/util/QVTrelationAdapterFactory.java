@@ -15,15 +15,11 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
-import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.FeatureCallExp;
 import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
-import org.eclipse.ocl.examples.pivot.NavigationCallExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.ReferringElement;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -36,7 +32,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
-import org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
@@ -111,10 +106,6 @@ public class QVTrelationAdapterFactory extends AdapterFactoryImpl {
 				return createKeyAdapter();
 			}
 			@Override
-			public Adapter caseOppositePropertyCallExp(OppositePropertyCallExp object) {
-				return createOppositePropertyCallExpAdapter();
-			}
-			@Override
 			public Adapter caseRelation(Relation object) {
 				return createRelationAdapter();
 			}
@@ -163,6 +154,10 @@ public class QVTrelationAdapterFactory extends AdapterFactoryImpl {
 				return createNamedElementAdapter();
 			}
 			@Override
+			public Adapter caseRule(Rule object) {
+				return createRuleAdapter();
+			}
+			@Override
 			public Adapter caseTypedElement(TypedElement object) {
 				return createTypedElementAdapter();
 			}
@@ -171,28 +166,8 @@ public class QVTrelationAdapterFactory extends AdapterFactoryImpl {
 				return createOCLExpressionAdapter();
 			}
 			@Override
-			public Adapter caseCallExp(CallExp object) {
-				return createCallExpAdapter();
-			}
-			@Override
-			public Adapter caseFeatureCallExp(FeatureCallExp object) {
-				return createFeatureCallExpAdapter();
-			}
-			@Override
-			public Adapter caseNavigationCallExp(NavigationCallExp object) {
-				return createNavigationCallExpAdapter();
-			}
-			@Override
 			public Adapter caseReferringElement(ReferringElement object) {
 				return createReferringElementAdapter();
-			}
-			@Override
-			public Adapter casePropertyCallExp(PropertyCallExp object) {
-				return createPropertyCallExpAdapter();
-			}
-			@Override
-			public Adapter caseRule(Rule object) {
-				return createRuleAdapter();
 			}
 			@Override
 			public Adapter caseDomain(Domain object) {
@@ -271,20 +246,6 @@ public class QVTrelationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createKeyAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp <em>Opposite Property Call Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp
-	 * @generated
-	 */
-	public Adapter createOppositePropertyCallExpAdapter() {
 		return null;
 	}
 
@@ -485,48 +446,6 @@ public class QVTrelationAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.CallExp <em>Call Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.CallExp
-	 * @generated
-	 */
-	public Adapter createCallExpAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.FeatureCallExp <em>Feature Call Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.FeatureCallExp
-	 * @generated
-	 */
-	public Adapter createFeatureCallExpAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.NavigationCallExp <em>Navigation Call Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.NavigationCallExp
-	 * @generated
-	 */
-	public Adapter createNavigationCallExpAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.ReferringElement <em>Referring Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -537,20 +456,6 @@ public class QVTrelationAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createReferringElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.pivot.PropertyCallExp <em>Property Call Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.examples.pivot.PropertyCallExp
-	 * @generated
-	 */
-	public Adapter createPropertyCallExpAdapter() {
 		return null;
 	}
 

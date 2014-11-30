@@ -17,7 +17,6 @@ import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
-import org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
@@ -61,9 +60,9 @@ public class QVTrelationLabelProvider extends QVTbaseLabelProvider {
 		return "ObjectTemplateExp.gif";
 	}
 
-	protected String image(OppositePropertyCallExp ele) {
-		return "OppositePropertyCallExp.gif";
-	}
+//	protected String image(OppositePropertyCallExp ele) {
+//		return "OppositePropertyCallExp.gif";
+//	}
 
 	protected String image(PropertyTemplateItem ele) {
 		return "PropertyTemplateItem.gif";

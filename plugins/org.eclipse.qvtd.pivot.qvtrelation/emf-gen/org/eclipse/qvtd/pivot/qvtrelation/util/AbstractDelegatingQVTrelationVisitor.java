@@ -44,10 +44,6 @@ public abstract class AbstractDelegatingQVTrelationVisitor<R, C, D extends QVTre
 		return delegate.visitKey(object);
 	}
 
-	public @Nullable R visitOppositePropertyCallExp(@NonNull org.eclipse.qvtd.pivot.qvtrelation.OppositePropertyCallExp object) {
-		return delegate.visitOppositePropertyCallExp(object);
-	}
-
 	public @Nullable R visitRelation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.Relation object) {
 		return delegate.visitRelation(object);
 	}
