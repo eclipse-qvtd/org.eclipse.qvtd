@@ -700,8 +700,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	 *     (
 	 *         name=UnrestrictedName 
 	 *         in=[Transformation|UnrestrictedName]? 
-	 *         domains+=SourceDomainCS* 
-	 *         domains+=TargetDomainCS* 
+	 *         (domains+=SourceDomainCS | domains+=TargetDomainCS)* 
 	 *         middle=MiddleDomainCS? 
 	 *         mappingSequence=MappingSequenceCS?
 	 *     )
