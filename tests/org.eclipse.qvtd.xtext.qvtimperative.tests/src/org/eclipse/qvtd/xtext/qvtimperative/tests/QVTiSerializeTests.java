@@ -147,7 +147,8 @@ public class QVTiSerializeTests extends LoadTestCase
 	public void testSerialize_HSV2HLS_qvti() throws Exception {
 		doSerializeRoundTrip("HSV2HLS/HSV2HLS");
 	}
-	
+
+	// Disabled since qvtias has bad (Middle)PropertyCallExp
 //	public void testSerialize_Uml2Rdbms_qvti() throws Exception {
 //		doSerializeRoundTrip("UML2RDBMS/UmlToRdbms");
 //	}

@@ -350,7 +350,7 @@ public class XtextTestCase extends PivotTestCase
 	}
 	
 	protected String getProjectName() {
-		return getClass().getPackage().getName().replace('.', '/') + "/models";
+		return getClass().getPackage().getName().replace('.', '/');
 	}
 
 	protected URL getTestResource(String resourceName) {
