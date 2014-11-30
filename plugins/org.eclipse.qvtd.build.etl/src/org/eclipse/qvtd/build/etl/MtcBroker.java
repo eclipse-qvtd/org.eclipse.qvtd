@@ -90,7 +90,7 @@ public class MtcBroker {
 	private static final String QVTC_FULL_NS = QVTC_URI + "," + QVTCB_URI + "," + QVTB_URI + "," + PIVOT_URI;
 	
 	/** The Constant QVTI_FULL_NS. */
-	private static final String QVTI_FULL_NS = QVTI_URI + "," + QVTCB_URI + "," +  QVTB_URI + "," +  PIVOT_URI;
+	protected static final String QVTI_FULL_NS = QVTI_URI + "," + QVTCB_URI + "," +  QVTB_URI + "," +  PIVOT_URI;
 	
 	/** The Constant QVTS_FULL_NS. */
 	private static final String QVTS_FULL_NS = QVTS_URI + "," + QVTI_FULL_NS;
@@ -132,16 +132,16 @@ public class MtcBroker {
 	private String qvtmUri;
 	
 	/** The partition uri. */
-	private String partitionUri;
+	protected String partitionUri;
 	
 	/** The qvti uri. */
-	private String qvtiUri;
+	protected String qvtiUri;
 	
 	/** The config uri. */
 	private String configUri;
 	
 	/** The schedule uri. */
-	private String scheduleUri;
+	protected String scheduleUri;
 	
 	/** The owner clas of the MTC (used to find resources). */
 	private Class owner;
@@ -150,7 +150,7 @@ public class MtcBroker {
 	private PivotModel configModel;
 	
 	/** The ocl std lib model. */
-	private PivotModel oclStdLibModel;
+	protected PivotModel oclStdLibModel;
 
 	/** The r metamodel. */
 	private String rMetamodel;
@@ -167,9 +167,9 @@ public class MtcBroker {
 	private PivotModel cModel;
 	private PivotModel uModel;
 	private PivotModel mModel;
-	private PivotModel pModel;
-	private PivotModel sModel;
-	private PivotModel iModel;
+	protected PivotModel pModel;
+	protected PivotModel sModel;
+	protected PivotModel iModel;
 
 	
 	/**
@@ -385,7 +385,7 @@ public class MtcBroker {
 	 * @throws QvtMtcExecutionException If there is a problem loading the models or
 	 * 	executing the ETL script.
 	 */
-	private PivotModel qvtpToQvts(PivotModel pModel) throws QvtMtcExecutionException {
+	protected PivotModel qvtpToQvts(PivotModel pModel) throws QvtMtcExecutionException {
 		PivotModel sModel = null;
 		sModel = createModel(scheduleUri, "QVTs", "", QVTS_FULL_NS, false, true, false);
 		if (pModel != null && sModel != null  ) {
@@ -415,7 +415,7 @@ public class MtcBroker {
 	 * @throws QvtMtcExecutionException If there is a problem loading the models or
 	 * 	executing the EOL script.
 	 */
-	private void qvtpScheduling(PivotModel pModel, PivotModel sModel) throws QvtMtcExecutionException {
+	protected void qvtpScheduling(PivotModel pModel, PivotModel sModel) throws QvtMtcExecutionException {
 		
 		if (pModel != null && sModel != null  ) {
 			EolTask eol = null;
@@ -445,7 +445,7 @@ public class MtcBroker {
 	 * @throws QvtMtcExecutionException If there is a problem loading the models or
 	 * 	executing the ETL script.
 	 */
-	private PivotModel qvtpQvtsToQvti(PivotModel pModel, PivotModel sModel) throws QvtMtcExecutionException {
+	protected PivotModel qvtpQvtsToQvti(PivotModel pModel, PivotModel sModel) throws QvtMtcExecutionException {
 		
 		PivotModel iModel = null;
 		iModel = createASModel(qvtiUri, "QVTi", "QVT", QVTI_FULL_NS, false, true, false);
@@ -475,7 +475,7 @@ public class MtcBroker {
 	 * @throws QvtMtcExecutionException If there is a problem loading the models or
 	 * 	executing the EOL script.
 	 */
-	private void createContainmentTrees() throws QvtMtcExecutionException  {
+	protected void createContainmentTrees() throws QvtMtcExecutionException  {
 		
 		EolTask eol = null;
 		List<String> loadedUris = new ArrayList<String>();
@@ -512,6 +512,7 @@ public class MtcBroker {
 								eol.models.add(mmModel);
 								eol.models.add(treeModel);
 								eol.execute();
+								eol.models.clear();
 								trees.add(treeModel);
 							}
 						}
@@ -557,7 +558,7 @@ public class MtcBroker {
 	 *
 	 * @throws QvtMtcExecutionException If there is a problem loading the model.
 	 */
-	private void loadConfigurationModel() throws QvtMtcExecutionException {
+	protected void loadConfigurationModel() throws QvtMtcExecutionException {
 		
 		configModel = createModel(configUri, CONFIG_MODEL_NAME, "", CONFIG_URI, true, false, true);
 	}
@@ -567,7 +568,7 @@ public class MtcBroker {
 	 *
 	 * @throws QvtMtcExecutionException If there is a problem loading the model.
 	 */
-	private void loadOclStdLibModel() throws QvtMtcExecutionException {
+	protected void loadOclStdLibModel() throws QvtMtcExecutionException {
 		
 		OCLASResourceFactory.INSTANCE.getClass();
         Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap( ).put("oclas", OCLASResourceFactory.INSTANCE);
@@ -649,7 +650,7 @@ public class MtcBroker {
 	 * @return the pivot model
 	 * @throws QvtMtcExecutionException There was an error loading the model
 	 */
-	private PivotModel createModel(String modeUri, String modelName, String modelAliases, String metamodelUris,
+	protected PivotModel createModel(String modeUri, String modelName, String modelAliases, String metamodelUris,
 				boolean readOnLoad, boolean storeOnDispoal, boolean cached) throws QvtMtcExecutionException {
 	
 		PivotModel model = new PivotModel(metaModelManager, false);
@@ -748,7 +749,7 @@ public class MtcBroker {
 	 * @throws URISyntaxException the URI syntax exception
 	 */
 	private String getResourceURI(String resource) throws URISyntaxException {
-		URL r = this.getClass().getResource(resource);
+		URL r = MtcBroker.class.getResource(resource);
 		String uri = r.toURI().toString();
 	    return uri;
 	}

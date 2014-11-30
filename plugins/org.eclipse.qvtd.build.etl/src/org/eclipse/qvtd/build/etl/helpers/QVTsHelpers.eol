@@ -1,0 +1,42 @@
+/*******************************************************************************
+ * Copyright (c) 2014 The University of York and Willink Transformations Ltd.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Adolfo Sanchez-Barbudo Herrera (University of York) - initial implementation
+ ******************************************************************************/
+
+--
+-- EOL Utils with helper functions for QVTs models
+--    Model Names/Aliases:
+--       QVTs : A QVTs model
+
+
+
+-- Helper function to obtaion the distinct data of a mapping
+-- with greater amount secondary argument 
+operation QVTs!MappingAction getMainDistinctData() : QVTs!DistinctData {
+	return self.getDistinctDataOrderedBySecondaryArgs().last();
+}
+
+-- Helper function to obtaion the distinct data of mapping
+-- with greater amount secondary arguments
+operation QVTs!MappingAction getDistinctDataOrderedBySecondaryArgs() : Sequence(QVTs!DistinctData) {
+	return self.distinctArguments.sortBy(dd | dd.secondaryArguments.size());
+}
+
+operation QVTs!DistinctData getNextDistinctData() : QVTs!DistinctData {
+	var orderedArgs = self.target.getDistinctDataOrderedBySecondaryArgs();
+	var pos = orderedArgs.indexOf(self);
+	if (pos == 0) {
+		return null;
+	} else {
+		return orderedArgs.at(pos-1);
+	}
+}
+
+
+   

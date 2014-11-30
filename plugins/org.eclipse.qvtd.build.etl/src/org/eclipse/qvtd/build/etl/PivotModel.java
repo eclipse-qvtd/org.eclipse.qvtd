@@ -10,7 +10,6 @@
  ******************************************************************************/
 package org.eclipse.qvtd.build.etl;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -21,7 +20,7 @@ import org.eclipse.emf.ecore.EEnumLiteral;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EPackage.Registry;
-import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.epsilon.emc.emf.ContainmentChangeAdapter;
 import org.eclipse.epsilon.emc.emf.EmfModel;
@@ -62,24 +61,20 @@ public class PivotModel extends EmfModel {
 	 */
 	@Override
 	public void loadModelFromUri() throws EolModelLoadingException {
-		
-		Resource model = null;
-		if (isASResource) {
-			model  = metaModelManager.getASResourceSet().createResource(modelUri);
-		} else {
-			model = metaModelManager.getExternalResourceSet().createResource(modelUri);
-		}
-		if (this.readOnLoad) {
-			try {
-				model.load(null);
+
+		ResourceSet rSet = isASResource ? metaModelManager.getASResourceSet() : metaModelManager.getExternalResourceSet();
+		try {
+			if (readOnLoad) {
+				modelImpl = rSet.getResource(modelUri, true);
 				if (expand) {
-					EcoreUtil.resolveAll(model);
+					EcoreUtil.resolveAll(modelImpl);
 				}
-			} catch (IOException e) {
-				throw new EolModelLoadingException(e, this);
+			} else {
+				modelImpl = rSet.createResource(modelUri);
 			}
+		} catch (RuntimeException e) {
+			throw new EolModelLoadingException(e, this);
 		}
-		modelImpl = model;
 	}
 	
 	/* (non-Javadoc)
@@ -194,6 +189,7 @@ public class PivotModel extends EmfModel {
 		return modelImpl.getContents().get(0);
 	}
 	
+	// FIXME this method is not suitable for a PivotModel
 	public Transformation getTransformation() throws Exception {
 		for (EObject eContent : modelImpl.getContents()) {
 			if (eContent instanceof ImperativeModel) {

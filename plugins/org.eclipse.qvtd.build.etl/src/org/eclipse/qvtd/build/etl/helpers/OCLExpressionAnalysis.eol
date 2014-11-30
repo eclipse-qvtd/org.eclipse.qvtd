@@ -38,7 +38,7 @@ operation QVT!OCLExpression fixVarReferences(v : QVT!Variable) {
         for (arg in self.argument) {
            arg.fixVarReferences(v);
         }
-    } else if (self.isTypeOf(QVT!PropertyCallExp)) {
+    } else if (self.isKindOf(QVT!NavigationCallExp)) {
         self.source.fixVarReferences(v);
     } else if (self.isTypeOf(QVT!IfExp)) {
         self.condition.fixVarReferences(v);

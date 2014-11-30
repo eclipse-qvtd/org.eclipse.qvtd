@@ -43,21 +43,23 @@ operation QVTs!Schedule findMapOrdering()  {
 	// Do a Depth first search of the containment tree of the output model
 	var queue = new Sequence();
 	// Marked visited mappings to avoid loops
-	var visited = new Sequence();
+	var visitedAct = new Sequence();
+	var visitedNodes = new Sequence();
 	queue.addAll(rTree!Node.all().select(n | n.parent.isEmpty()));
 	while (not queue.isEmpty()) {
 	    var n = queue.first();
 	    queue.remove(n);
+	    visitedNodes.add(n);
 	    // Do stuff with n
 	    //n.println("n ");
 	    //  Find all the mappings that have an output node if this type 
 	    // TODO The ECoreContainment tree should save the actual type so we dont compare names!
-	    for (ma in self.actions.select(aa | aa.results.exists(e | e.type.name = n.EClassName))) {
+	    for (ma in self.actions.select(aa | aa.results.exists(e | e.type.name = n.EClassName))) { // FIXME what about mappings which create any subtype?
 	        // Find the predecesors and linearize
-	        if (visited.excludes(ma))
-	        	ma.getOrdering(visited);
+	        if (visitedAct.excludes(ma))
+	        	ma.getOrdering(visitedAct);
 	    }
-	    queue.addAll(n.children);
+	    queue.addAll(n.children.excludingAll(visitedNodes));
 	}
 }
 
@@ -107,6 +109,7 @@ operation QVTs!MappingAction getPredecessors() : Set {
 	var concreteSources =  args.collect(a | a.sources).flatten().asSet();
 	var abstractSources = self.schedule.datums.select(cd | 
             args.select(ad | ad.type.isAbstract).exists(ad | cd.super.includes(ad)))
+            -- FIXME why does it need to be abstract? and why not super.super ?
         .collect(a | a.sources).flatten().asSet();
 	return concreteSources.includingAll(abstractSources);
 }

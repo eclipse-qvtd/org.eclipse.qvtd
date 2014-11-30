@@ -9,6 +9,7 @@
  *     Horacio Hoyos - initial implementation
  ******************************************************************************/
 import "../helpers/QVTHelpers.eol";
+import "../helpers/QVTsHelpers.eol";
 
 pre {
     var emfTool = new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
@@ -40,7 +41,6 @@ rule TypedModels
     to tmOut : QVTi!TypedModel
     extends NamedElements
     {
-        tmOut.transformation ::= tmIn.transformation;
         tmOut.usedPackage = tmIn.usedPackage;
         tmOut.dependsOn.addAll(tmIn.dependsOn.equivalent());    
     }
@@ -50,7 +50,6 @@ rule Transformations
     to tOut : QVTi!Transformation
     extends NamedElements
     {
-        
         tOut.ownedTag = emfTool.getEcoreUtil().copyAll(tIn.ownedTag);
         tOut.modelParameter.addAll(tIn.modelParameter.equivalent());
         tOut.`rule`.addAll(tIn.`rule`.equivalent());
@@ -63,10 +62,8 @@ rule Rules
     to rOut : QVTi!Rule
     extends NamedElements
     {
-
         rOut.domain.addAll(rIn.domain.equivalent());
         rOut.overrides ::= rIn.overrides;
-        rOut.transformation ::= rIn.transformation;
         rOut.overridden.addAll(rIn.overridden.equivalent());
     }
 
@@ -75,7 +72,6 @@ rule Areas
     transform aIn : QVTp!Area
     to aOut : QVTi!Area
     {
-    
         aOut.guardPattern ::= aIn.guardPattern;
         aOut.bottomPattern ::= aIn.bottomPattern;
     }
@@ -94,7 +90,7 @@ rule Mappings
                 // Add only the loops of the PrimaryArguments with the most secondary arguments
                 // The other DistinctData loops will be nested inside these
                 mOut.mappingStatement.mappingStatements.addAll(ma.children
-                    .collect(ma | ma.distinctArguments.sortBy(dd | dd.secondaryArguments.size()).last())
+                    .collect(ma | ma.getMainDistinctData())
                     .flatten().equivalent());
             } else {
                 mOut.mappingStatement.mappingStatements.addAll(ma.children.equivalent());
@@ -110,11 +106,10 @@ rule Domains
     {
         dOut.isCheckable = dIn.isCheckable;
         dOut.isEnforceable = dIn.isEnforceable;
-        dOut.`rule` ::= dIn.`rule`;
         dOut.typedModel ::= dIn.typedModel;
     } 
 
-rule CodeDomains
+rule CoreDomains
     transform cdIn : QVTp!CoreDomain
     to cdOut : QVTp!CoreDomain
     extends Domains, Areas
@@ -145,19 +140,18 @@ rule BottomPatterns
     to bpOut : QVTi!BottomPattern
     extends CorePatterns
     {
-        bpOut.area ::= bpIn.area;
         bpOut.assignment.addAll(bpIn.assignment.equivalent());
         bpOut.enforcementOperation.addAll(bpIn.enforcementOperation.equivalent());
         bpOut.variable.addAll(bpIn.variable.equivalent());
         bpOut.realizedVariable.addAll(bpIn.realizedVariable.equivalent());
     }
 
-rule GuardPatterns
+ rule GuardPatterns
     transform gpIn : QVTp!GuardPattern
     to gpOut : QVTi!GuardPattern
     extends CorePatterns
     {
-        gpOut.area ::= gpIn.area;
+        
     }
 
 @abstract
@@ -165,7 +159,6 @@ rule Assignments
     transform aIn : QVTp!Assignment
     to aOut : QVTi!Assignemnt
     {
-        aOut.bottomPattern ::= aIn.bottomPattern;
         aOut.isDefault = aIn.isDefault;
         aOut.value = emfTool.getEcoreUtil().copy(aIn.value);
         var vars;
@@ -197,6 +190,14 @@ rule PropertyAssignments
         }
     }
 
+rule MiddlePropertyAssignments 
+	transform mpaIn : QVTp!MiddlePropertyAssignment
+	to mpaOut : QVTi!MiddlePropertyAssignment
+	extends PropertyAssignments
+	{
+	
+	}
+
 rule VariableAssignments
     transform vaIn : QVTp!VariableAssignment
     to vaOut : QVTi!VariableAssignment
@@ -209,7 +210,6 @@ rule Predicates
     transform pIn : QVTp!Predicate
     to pOut : QVTi!Predicate
     {
-        pOut.pattern ::= pIn.pattern;
         pOut.conditionExpression = emfTool.getEcoreUtil().copy(pIn.conditionExpression);
         var vars;
         if (pIn.pattern.area.isTypeOf(QVTi!CoreDomain)) {
@@ -228,8 +228,15 @@ rule Variables
     to vOut : QVTi!Variable
     extends NamedElements
     {
-        // Not a loop variable
-        guard : not vIn.eContainer.isTypeOf(QVTp!IteratorExp)
+    	-- We want to prevent re-creation of variables which are cloned 
+    	-- from OCL expressions (via EcoreUtil). Let's excludes all those
+    	-- directly contained in an OCLExpression (IteratorExp, LetExp, etc.)
+    	-- ExpressionInOCL containers are also removed, in case the QVTp transformation
+    	-- redfers to other OCL resources 
+        guard { var varContainer = vIn.eContainer();
+        		return (not varContainer.isKindOf(QVTp!OCLExpression)) and
+        			   (not varContainer.isKindOf(QVTp!ExpressionInOCL));
+         }
         
         vOut.implicit = vIn.implicit;
         vOut.type = vIn.type;
@@ -278,13 +285,10 @@ rule DistinctData
         loop.body = new QVTi!MappingSequence;
         loop.body.mappingStatements.add(dd.target.equivalent());
         // To make loops nest, only one loop can be added. Which? The next one with the most secondary arguments
-        var nextDD = dd.target.distinctArguments.excluding(dd).select(da | da.secondaryArguments.size() < dd.secondaryArguments.size())
-                .sortBy(dd | dd.secondaryArguments.size()).last();
+        var nextDD = dd.getNextDistinctData();
         if (nextDD <> null) {
             loop.body.mappingStatements.add(nextDD.equivalent());
         }        
-        
-        
     }
     
 
