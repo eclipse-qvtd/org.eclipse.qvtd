@@ -3,8 +3,8 @@
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:pfx="http://http://www.eclipse.org/qvt/examples/0.1/HLSTree"
-    xsi:schemaLocation="http://http://www.eclipse.org/qvt/examples/0.1/HLSTree HLSTree.ecore"
+    xmlns:pfx="http://www.eclipse.org/qvt/examples/0.1/HLSTree"
+    xsi:schemaLocation="http://www.eclipse.org/qvt/examples/0.1/HLSTree HLSTree.ecore"
     name="n1">
   <children
       name="n1.1">

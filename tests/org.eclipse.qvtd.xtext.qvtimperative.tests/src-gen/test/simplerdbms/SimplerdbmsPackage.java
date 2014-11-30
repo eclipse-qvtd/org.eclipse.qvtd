@@ -48,7 +48,7 @@ public interface SimplerdbmsPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS";
+	String eNS_URI = "http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS";
 
 	/**
 	 * The package namespace name.

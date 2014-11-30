@@ -140,6 +140,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI genModelURI = getProjectFileURI("HSV2HLS/HSV2HLS.genmodel");
 		URI inputModelURI = getProjectFileURI("HSV2HLS/HSVNode.xmi");
 		URI outputModelURI = getProjectFileURI("HSV2HLS/HLSNode.xmi");
+		URI referenceModelURI = getProjectFileURI("HSV2HLS/HLSNodeValidate.xmi");
 		EPackage.Registry.INSTANCE.put(HSVTreePackage.eNS_URI, HSVTreePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(HSV2HLSPackage.eNS_URI, HSV2HLSPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(HLSTreePackage.eNS_URI, HLSTreePackage.eINSTANCE);
@@ -154,6 +155,9 @@ public class QVTiCompilerTests extends LoadTestCase
 		Resource outputResource = resourceSet.createResource(outputModelURI);
 		outputResource.getContents().addAll(tx.getRootObjects("hls"));
 		outputResource.save(null);
+		Resource referenceResource = resourceSet.getResource(referenceModelURI, true);
+		assert referenceResource != null;
+        assertSameModel(referenceResource, outputResource);
 	}
 
 	public void testCG_ClassToRDBMS_qvti() throws Exception {
@@ -161,13 +165,14 @@ public class QVTiCompilerTests extends LoadTestCase
 		URI genModelURI = getProjectFileURI("ClassToRDBMS/UMLtoRDBMS.genmodel");
 		URI inputModelURI = getProjectFileURI("ClassToRDBMS/SimpleUMLPeople.xmi");
 		URI outputModelURI = getProjectFileURI("ClassToRDBMS/SimpleRDBMSPeople.xmi");
+		URI referenceModelURI = getProjectFileURI("ClassToRDBMS/SimpleRDBMSPeopleValidate.xmi");
 		EPackage.Registry.INSTANCE.put(SimpleumlPackage.eNS_URI, SimpleumlPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(UmltordbmsPackage.eNS_URI, UmltordbmsPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(SimplerdbmsPackage.eNS_URI, SimplerdbmsPackage.eINSTANCE);
 		Class<? extends AbstractTransformation> txClass = generateCode(transformURI, genModelURI, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");
 		
 		Constructor<? extends AbstractTransformation> txConstructor = txClass.getConstructor(DomainEvaluator.class);
-		DomainEvaluator evaluator = new TxEvaluator(DomainUtil.nonNullState(metaModelManager));
+		DomainEvaluator evaluator = new TxEvaluator(DomainUtil.nonNullState(metaModelManager.getCompleteEnvironment()));
 		AbstractTransformation tx = txConstructor.newInstance(evaluator);
 		Resource inputResource = resourceSet.getResource(inputModelURI, true);
 		tx.addRootObjects("uml", DomainUtil.nonNullState(inputResource.getContents()));
@@ -175,6 +180,9 @@ public class QVTiCompilerTests extends LoadTestCase
 		Resource outputResource = resourceSet.createResource(outputModelURI);
 		outputResource.getContents().addAll(tx.getRootObjects("rdbms"));
 		outputResource.save(null);
+		Resource referenceResource = resourceSet.getResource(referenceModelURI, true);
+		assert referenceResource != null;
+        assertSameModel(referenceResource, outputResource);
 	}
 
 	protected Class<? extends AbstractTransformation> generateCode(@NonNull URI transformURI, @NonNull URI genModelURI, @Nullable String savePath) throws Exception {

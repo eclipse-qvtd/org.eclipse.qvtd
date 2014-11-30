@@ -17,14 +17,14 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
+import org.eclipse.ocl.examples.domain.elements.DomainClass;
 import org.eclipse.ocl.examples.domain.evaluation.AbstractTransformation;
 import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.examples.domain.ids.ClassId;
 import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
 import org.eclipse.ocl.examples.domain.ids.IdManager;
-import org.eclipse.ocl.examples.domain.ids.MetaclassId;
 import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
+import org.eclipse.ocl.examples.domain.ids.RootPackageId;
 import org.eclipse.ocl.examples.domain.ids.TypeId;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
@@ -77,7 +77,8 @@ import test.umltordbms.UmltordbmsPackage;
 @SuppressWarnings("nls")
 public class umlRdbms extends AbstractTransformation
 {
-    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_SimpleRDBMS = IdManager.getNsURIPackageId("http://http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS", null, SimplerdbmsPackage.eINSTANCE);
+    public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
+    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_SimpleRDBMS = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS", null, SimplerdbmsPackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_UMLtoRDBMS = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/UMLtoRDBMS", null, UmltordbmsPackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_simpleUML = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/simpleUML", null, SimpleumlPackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Association = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_simpleUML.getClassId("Association", 0);
@@ -86,19 +87,20 @@ public class umlRdbms extends AbstractTransformation
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_AttributeToColumn = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_UMLtoRDBMS.getClassId("AttributeToColumn", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Class = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_simpleUML.getClassId("Class", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_ClassToTable = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_UMLtoRDBMS.getClassId("ClassToTable", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Class_0 = PACKid_$metamodel$.getClassId("Class", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Classifier = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_simpleUML.getClassId("Classifier", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Column = PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_SimpleRDBMS.getClassId("Column", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_ForeignKey = PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_SimpleRDBMS.getClassId("ForeignKey", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Column = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_SimpleRDBMS.getClassId("Column", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_ForeignKey = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_SimpleRDBMS.getClassId("ForeignKey", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_FromAttribute = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_UMLtoRDBMS.getClassId("FromAttribute", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Key = PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_SimpleRDBMS.getClassId("Key", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Key = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_SimpleRDBMS.getClassId("Key", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_NonLeafAttribute = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_UMLtoRDBMS.getClassId("NonLeafAttribute", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Package = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_simpleUML.getClassId("Package", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_PackageElement = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_simpleUML.getClassId("PackageElement", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_PackageToSchema = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_UMLtoRDBMS.getClassId("PackageToSchema", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_PrimitiveDataType = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_simpleUML.getClassId("PrimitiveDataType", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_PrimitiveToName = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_UMLtoRDBMS.getClassId("PrimitiveToName", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Schema = PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_SimpleRDBMS.getClassId("Schema", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Table = PACKid_http_c_s_s_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_SimpleRDBMS.getClassId("Table", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Schema = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_SimpleRDBMS.getClassId("Schema", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Table = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_SimpleRDBMS.getClassId("Table", 0);
     public static final @NonNull /*@NonInvalid*/ String STR_2 = "2";
     public static final @NonNull /*@NonInvalid*/ String STR_BOOLEAN = "BOOLEAN";
     public static final @NonNull /*@NonInvalid*/ String STR_Boolean = "Boolean";
@@ -114,7 +116,6 @@ public class umlRdbms extends AbstractTransformation
     public static final @NonNull /*@NonInvalid*/ String STR_primary = "primary";
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_AttributeToColumn = TypeId.BAG.getSpecializedId(CLSSid_AttributeToColumn);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_FromAttribute = TypeId.BAG.getSpecializedId(CLSSid_FromAttribute);
-    public static final @NonNull /*@NonInvalid*/ MetaclassId METAid_Metaclass = TypeId.METACLASS.getSpecializedId(CLSSid_NonLeafAttribute);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_AssociationToForeignKey = TypeId.ORDERED_SET.getSpecializedId(CLSSid_AssociationToForeignKey);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Attribute = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Attribute);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Column = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Column);
@@ -203,15 +204,17 @@ public class umlRdbms extends AbstractTransformation
      * p := p;
      * prim := child;
      * p2s := p2s;
-     * }
+     * }}
+     *   for child2 : simpleuml::PackageElement in p.elements {
+     * 
      *     map classToTableLM {
      * p := p;
-     * c := child;
+     * c := child2;
      * p2s := p2s;
      * }
      *     map associationToForeignKeyLM {
      * p := p;
-     * a := child;
+     * a := child2;
      * p2s := p2s;
      * }}
      *   map packageToSchemaMR {
@@ -222,6 +225,8 @@ public class umlRdbms extends AbstractTransformation
     protected boolean packageToSchemaLM(final @NonNull /*@NonInvalid*/ Package p) {
         try {
             // predicates
+            final @Nullable /*@Thrown*/ List<PackageElement> elements_0 = p.getElements();
+            assert elements_0 != null;
             // creations
             final /*@Thrown*/ PackageToSchema p2s = UmltordbmsFactory.eINSTANCE.createPackageToSchema();
             assert p2s != null;
@@ -231,10 +236,8 @@ public class umlRdbms extends AbstractTransformation
             final @Nullable /*@Thrown*/ String name = p.getName();
             p2s.setName(name);
             // mapping statements
-            final @Nullable /*@Thrown*/ List<PackageElement> elements = p.getElements();
-            assert elements != null;
             ;
-            for (PackageElement child : elements) {
+            for (PackageElement child : elements_0) {
                 final @NonNull /*@NonInvalid*/ PackageElement symbol_5 = (PackageElement)child;
                 if (symbol_5 instanceof PrimitiveDataType) {
                     integerToNumberLM(p, p2s, (PrimitiveDataType)symbol_5);
@@ -245,11 +248,15 @@ public class umlRdbms extends AbstractTransformation
                 if (symbol_5 instanceof PrimitiveDataType) {
                     stringToVarcharLM(p, p2s, (PrimitiveDataType)symbol_5);
                 }
-                if (symbol_5 instanceof Class) {
-                    classToTableLM((Class)symbol_5, p, p2s);
+            }
+            ;
+            for (PackageElement child2 : elements_0) {
+                final @NonNull /*@NonInvalid*/ PackageElement symbol_13 = (PackageElement)child2;
+                if (symbol_13 instanceof Class) {
+                    classToTableLM((Class)symbol_13, p, p2s);
                 }
-                if (symbol_5 instanceof Association) {
-                    associationToForeignKeyLM((Association)symbol_5, p, p2s);
+                if (symbol_13 instanceof Association) {
+                    associationToForeignKeyLM((Association)symbol_13, p, p2s);
                 }
             }
             packageToSchemaMR(p2s);
@@ -831,6 +838,8 @@ public class umlRdbms extends AbstractTransformation
      *     map associationToForeignKeyMR {
      * p2s := p2s;
      * dt := t;
+     * sc2t := t.ClassToTable;
+     * dc2t := t.ClassToTable;
      * a2f := child;
      * s := s;
      * st := t;
@@ -855,7 +864,7 @@ public class umlRdbms extends AbstractTransformation
                 return false;
             }
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-            final @NonNull /*@NonInvalid*/ DomainType TYP_umltordbms_c_c_NonLeafAttribute_0 = idResolver.getType(CLSSid_NonLeafAttribute, null);
+            final @NonNull /*@NonInvalid*/ DomainClass TYP_umltordbms_c_c_NonLeafAttribute_0 = idResolver.getClass(CLSSid_NonLeafAttribute, null);
             final @Nullable /*@Thrown*/ List<FromAttribute> fromAttributes = c2t.getFromAttributes();
             assert fromAttributes != null;
             final @NonNull /*@Thrown*/ SetValue BOXED_fromAttributes = idResolver.createSetOfAll(SET_CLSSid_FromAttribute, fromAttributes);
@@ -873,12 +882,16 @@ public class umlRdbms extends AbstractTransformation
             assert associationsToForeignKeys != null;
             ;
             for (AssociationToForeignKey child : associationsToForeignKeys) {
+                final @Nullable /*@Thrown*/ ClassToTable ClassToTable_0 = DomainUtil.nonNullState (OPPOSITE_OF_ClassToTable_table.get(t));
+                if (ClassToTable_0 == null) {
+                    throw new InvalidValueException("Null binding for \'associationToForeignKeyMR::sc2t\'");
+                }
                 final @NonNull /*@NonInvalid*/ AssociationToForeignKey symbol_5 = (AssociationToForeignKey)child;
                 final @Nullable /*@Thrown*/ Key primaryKey = c2t.getPrimaryKey();
                 if (primaryKey == null) {
                     throw new InvalidValueException("Null binding for \'associationToForeignKeyMR::rk\'");
                 }
-                associationToForeignKeyMR(symbol_5, t, p2s_8, primaryKey, s, t);
+                associationToForeignKeyMR(symbol_5, ClassToTable_0, t, p2s_8, primaryKey, s, ClassToTable_0, t);
             }
             final @NonNull /*@Thrown*/ SetValue selectByKind = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(evaluator, BOXED_fromAttributes, TYP_umltordbms_c_c_NonLeafAttribute_0);
             @NonNull /*@Thrown*/ BagValue.Accumulator accumulator = ValuesUtil.createBagAccumulatorValue(BAG_CLSSid_FromAttribute);
@@ -1175,7 +1188,7 @@ public class umlRdbms extends AbstractTransformation
                 throw (InvalidValueException)dc;
             }
             final @Nullable /*@Thrown*/ ClassToTable ClassToTable = DomainUtil.nonNullState (OPPOSITE_OF_ClassToTable_umlClass.get(dc));
-            final @Nullable /*@Thrown*/ ClassToTable dc2t = ClassToTable;
+            final @Nullable /*@Thrown*/ ClassToTable dc2t_0 = ClassToTable;
             if (sc == null) {
                 throw new InvalidValueException("Null source for \'umltordbms::ClassToTable::umlClass\'");
             }
@@ -1188,7 +1201,7 @@ public class umlRdbms extends AbstractTransformation
                 return false;
             }
             final @Nullable /*@Thrown*/ ClassToTable ClassToTable_0 = DomainUtil.nonNullState (OPPOSITE_OF_ClassToTable_umlClass.get(sc));
-            final @Nullable /*@Thrown*/ ClassToTable sc2t = ClassToTable_0;
+            final @Nullable /*@Thrown*/ ClassToTable sc2t_0 = ClassToTable_0;
             final @Nullable /*@Thrown*/ String name = a.getName();
             @NonNull /*@Caught*/ Object CAUGHT_self_0;
             try {
@@ -1280,9 +1293,9 @@ public class umlRdbms extends AbstractTransformation
             assert a2f != null;
             modelObjects[2/*middle*/].add(a2f);
             // assignments
-            sc2t.setOwner(p2s_9);
-            a2f.setOwner(sc2t);
-            a2f.setReferenced(dc2t);
+            sc2t_0.setOwner(p2s_9);
+            a2f.setOwner(sc2t_0);
+            a2f.setReferenced(dc2t_0);
             a2f.setAssociation(a);
             @Nullable /*@Thrown*/ String symbol_33;
             if (symbol_12) {
@@ -1368,30 +1381,26 @@ public class umlRdbms extends AbstractTransformation
      * }
      * }
      */
-    protected boolean associationToForeignKeyMR(final @NonNull /*@NonInvalid*/ AssociationToForeignKey a2f, final @NonNull /*@NonInvalid*/ Table dt, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_10, final @NonNull /*@NonInvalid*/ Key rk, final @NonNull /*@NonInvalid*/ Schema s_0, final @NonNull /*@NonInvalid*/ Table st) {
+    protected boolean associationToForeignKeyMR(final @NonNull /*@NonInvalid*/ AssociationToForeignKey a2f, final @NonNull /*@NonInvalid*/ ClassToTable dc2t, final @NonNull /*@NonInvalid*/ Table dt, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_10, final @NonNull /*@NonInvalid*/ Key rk, final @NonNull /*@NonInvalid*/ Schema s_0, final @NonNull /*@NonInvalid*/ ClassToTable sc2t, final @NonNull /*@NonInvalid*/ Table st) {
         try {
             // predicates
-            final @Nullable /*@Thrown*/ ClassToTable ClassToTable = DomainUtil.nonNullState (OPPOSITE_OF_ClassToTable_table.get(dt));
-            final @NonNull /*@NonInvalid*/ ClassToTable dc2t = ClassToTable;
-            final @Nullable /*@Thrown*/ Schema schema = p2s_10.getSchema();
-            final /*@Thrown*/ boolean eq = s_0.equals(schema);
+            final @Nullable /*@Thrown*/ ClassToTable owner = a2f.getOwner();
+            final /*@Thrown*/ boolean eq = sc2t.equals(owner);
             if (!eq) {
                 return false;
             }
-            final @Nullable /*@Thrown*/ Schema schema_0 = st.getSchema();
-            final /*@Thrown*/ boolean eq_0 = s_0.equals(schema_0);
+            final @Nullable /*@Thrown*/ ClassToTable referenced = a2f.getReferenced();
+            final /*@Thrown*/ boolean eq_0 = dc2t.equals(referenced);
             if (!eq_0) {
                 return false;
             }
-            final @Nullable /*@Thrown*/ ClassToTable ClassToTable_0 = DomainUtil.nonNullState (OPPOSITE_OF_ClassToTable_table.get(st));
-            final @NonNull /*@NonInvalid*/ ClassToTable sc2t = ClassToTable_0;
-            final @Nullable /*@Thrown*/ ClassToTable owner = a2f.getOwner();
-            final /*@Thrown*/ boolean eq_1 = sc2t.equals(owner);
+            final @Nullable /*@Thrown*/ Schema schema = p2s_10.getSchema();
+            final /*@Thrown*/ boolean eq_1 = s_0.equals(schema);
             if (!eq_1) {
                 return false;
             }
-            final @Nullable /*@Thrown*/ ClassToTable referenced = a2f.getReferenced();
-            final /*@Thrown*/ boolean eq_2 = dc2t.equals(referenced);
+            final @Nullable /*@Thrown*/ Schema schema_0 = st.getSchema();
+            final /*@Thrown*/ boolean eq_2 = s_0.equals(schema_0);
             if (!eq_2) {
                 return false;
             }

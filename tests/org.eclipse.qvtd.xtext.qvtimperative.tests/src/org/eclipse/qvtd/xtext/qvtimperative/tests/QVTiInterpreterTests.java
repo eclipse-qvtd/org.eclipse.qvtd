@@ -283,7 +283,7 @@ public class QVTiInterpreterTests extends LoadTestCase
         testEvaluator.loadModel("uml", "SimpleUMLPeople.xmi");
         testEvaluator.createModel("middle", "UML2RDBMS.xmi");
         testEvaluator.createModel("rdbms", "SimpleRDBMSPeople.xmi");
-        //testEvaluator.loadReference("rdbms", "SimpleRDBMSPeopleValidate.xmi");
+//FIXME        testEvaluator.loadReference("rdbms", "SimpleRDBMSPeopleValidate.xmi");
         testEvaluator.test();
         testEvaluator.dispose();
         

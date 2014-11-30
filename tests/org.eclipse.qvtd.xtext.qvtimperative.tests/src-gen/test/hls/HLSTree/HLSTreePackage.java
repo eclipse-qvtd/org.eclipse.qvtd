@@ -49,7 +49,7 @@ public interface HLSTreePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://http://www.eclipse.org/qvt/examples/0.1/HLSTree";
+	String eNS_URI = "http://www.eclipse.org/qvt/examples/0.1/HLSTree";
 
 	/**
 	 * The package namespace name.

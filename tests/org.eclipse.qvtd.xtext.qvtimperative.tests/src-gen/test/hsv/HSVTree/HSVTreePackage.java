@@ -49,7 +49,7 @@ public interface HSVTreePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://http://www.eclipse.org/qvt/examples/0.1/HSVTree";
+	String eNS_URI = "http://www.eclipse.org/qvt/examples/0.1/HSVTree";
 
 	/**
 	 * The package namespace name.
