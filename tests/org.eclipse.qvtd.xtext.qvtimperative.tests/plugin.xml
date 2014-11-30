@@ -62,4 +62,40 @@
             type="simplerdbms"
             class="test.simplerdbms.util.SimplerdbmsResourceFactoryImpl"/>
    </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ClassesCS2AS NOT -->
+      <!--package
+            uri="http://tracesmodel/1.0/classescstraces"
+            class="classescstraces.ClassescstracesPackage"
+            genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassesCS2AS/ClassesCS2AS.genmodel"/-->
+      <package
+            uri="dummy-protocol://dummy-nsuri/qvt/tracesmodel/1.0/classescstraces"
+            class="classescstraces.ClassescstracesPackage"
+            genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassesCS2AS/ClassesCS2AS.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ClassesCS2AS NOT -->
+      <!--package
+            uri="http://ocldependencyanalysis/classescs/1.0"
+            class="classescs.ClassescsPackage"
+            genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassesCS2AS/ClassesCS2AS.genmodel"/-->
+      <package
+            uri="dummy-protocol://dummy-nsuri/qvt/ocldependencyanalysis/classescs/1.0"
+            class="classescs.ClassescsPackage"
+            genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassesCS2AS/ClassesCS2AS.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ClassesCS2AS NOT -->
+      <!--package
+            uri="http://ocldependencyanalysis/classes/1.0"
+            class="classes.ClassesPackage"
+            genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassesCS2AS/ClassesCS2AS.genmodel"/-->
+      <package
+            uri="dummy-protocol://dummy-nsuri/qvt/ocldependencyanalysis/classes/1.0"
+            class="classes.ClassesPackage"
+            genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassesCS2AS/ClassesCS2AS.genmodel"/>
+   </extension>
 </plugin>

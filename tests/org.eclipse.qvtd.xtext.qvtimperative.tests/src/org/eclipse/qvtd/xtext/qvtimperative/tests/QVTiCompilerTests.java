@@ -153,6 +153,12 @@ public class QVTiCompilerTests extends LoadTestCase
 		outputResource.getContents().addAll(tx.getRootObjects("hls"));
 		outputResource.save(null);
 	}
+	
+	public void testCG_ClassesCS2AS_qvti() throws Exception {
+		URI transformURI = getProjectFileURI("ClassesCS2AS/ClassesCS2AS.qvti");
+		URI genModelURI = getProjectFileURI("ClassesCS2AS/ClassesCS2AS.genmodel");
+		generateCode(transformURI, genModelURI, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");		
+	}
 
 	public void testCG_ClassToRDBMS_qvti() throws Exception {
 		URI transformURI = getProjectFileURI("ClassToRDBMS/ClassToRDBMSSchedule.qvti");
