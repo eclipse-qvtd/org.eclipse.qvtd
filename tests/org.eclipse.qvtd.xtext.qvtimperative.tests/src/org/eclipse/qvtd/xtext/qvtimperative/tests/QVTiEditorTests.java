@@ -30,6 +30,11 @@ public class QVTiEditorTests extends LoadTestCase
 	public void testLoad_HSV2HLS_qvti() throws IOException, InterruptedException {
 		doLoad_Concrete("HSV2HLS/HSV2HLS.qvti");
 	}	
+	
+	
+	public void testLoad_Classescs2Classes_qvti() throws IOException, InterruptedException {
+		doLoad_Concrete("ClassesCS2AS/ClassesCS2AS.qvti");
+	}
 
 //	public void testLoad_ClassToRDBMSSchedule_qvti() throws IOException, InterruptedException {
 //		doLoad_Concrete("ClassToRDBMSSchedule.qvti");

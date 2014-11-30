@@ -186,21 +186,21 @@ public class hsv2hls extends AbstractTransformation
         try {
             // predicates
             // creations
-            final /*@Thrown*/ HSVNode2HLSNode middleNode = HSV2HLSFactory.eINSTANCE.createHSVNode2HLSNode();
-            assert middleNode != null;
-            modelObjects[2/*middle*/].add(middleNode);
+            final /*@Thrown*/ HSVNode2HLSNode middleNode_1 = HSV2HLSFactory.eINSTANCE.createHSVNode2HLSNode();
+            assert middleNode_1 != null;
+            modelObjects[2/*middle*/].add(middleNode_1);
             // assignments
-            middleNode.setParent(middleParent);
-            middleNode.setHsv(hsvNode);
+            middleNode_1.setParent(middleParent);
+            middleNode_1.setHsv(hsvNode);
             final @Nullable /*@Thrown*/ String name = hsvNode.getName();
-            middleNode.setName(name);
+            middleNode_1.setName(name);
             // mapping statements
             final @Nullable /*@Thrown*/ List<HSVNode> children = hsvNode.getChildren();
             assert children != null;
             ;
             for (HSVNode hsvChild : children) {
                 final @NonNull /*@NonInvalid*/ HSVNode symbol_4 = (HSVNode)hsvChild;
-                HSV2MiddleRecursion(symbol_4, middleNode);
+                HSV2MiddleRecursion(symbol_4, middleNode_1);
             }
             return true;
         }
