@@ -194,7 +194,7 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
         }
         /*result =*/ mapping.getBottomPattern().accept(undecoratedVisitor);
 //      if (result == Boolean.TRUE) {
-			MappingStatement mappingStatements = mapping.getMappingStatements();
+			MappingStatement mappingStatements = mapping.getMappingStatement();
 			if (mappingStatements != null) {
 				mappingStatements.accept(undecoratedVisitor);
 			}

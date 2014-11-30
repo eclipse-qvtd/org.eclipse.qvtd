@@ -19,7 +19,7 @@
       <details key="documentation" value="An Imperative Mapping extends the abstract declarative mapping to support&#xA;explicit nested invocation of mappings with bindings for the invoked mapping's&#xA;bound variables."/>
     </eAnnotations>
     <eOperations name="getAllMappings" ordered="false" upperBound="-1" eType="#//Mapping"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingStatements" eType="#//MappingStatement"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mappingStatement" eType="#//MappingStatement"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingCall" eSuperTypes="#//MappingStatement ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//ReferringElement">

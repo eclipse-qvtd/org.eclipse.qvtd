@@ -168,7 +168,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		csDomain.setBottomPattern(context.visitDeclaration(BottomPatternCS.class, asMapping.getBottomPattern()));
 		csDomain.setGuardPattern(context.visitDeclaration(GuardPatternCS.class, asMapping.getGuardPattern()));
 		csMapping.setMiddle(csDomain);
-		csMapping.setMappingSequence(context.visitDeclaration(MappingSequenceCS.class, asMapping.getMappingStatements()));
+		csMapping.setMappingSequence(context.visitDeclaration(MappingSequenceCS.class, asMapping.getMappingStatement()));
 		return csMapping;
 	}
 

@@ -48,7 +48,7 @@
                 referredVariable="#qV..CopyGraph.Graph2Middle.middle.bottom.middleG2G"/>
           </assignment>
         </bottomPattern>
-        <mappingStatements xsi:type="qvti:MappingSequence">
+        <mappingStatement xsi:type="qvti:MappingSequence">
           <mappingStatements xsi:type="qvti:MappingLoop">
             <source xsi:type="pivot:IteratorExp" type="#//@ownedPackages.1/@ownedClasses.0"
                 referredIteration="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#i.ocl.OrderedSet.select..T">
@@ -60,7 +60,7 @@
               <body xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
                   referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.oclIsTypeOf..ocl.OclType">
                 <source xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element"
-                    referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.0/@mappingStatements/@mappingStatements.0/@source/@iterator.0"/>
+                    referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.0/@mappingStatement/@mappingStatements.0/@source/@iterator.0"/>
                 <argument xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.Class"
                     referredType="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
               </body>
@@ -87,7 +87,7 @@
                   referredVariable="#qV..CopyGraph.Graph2Middle.middle.bottom.middleG2G"/>
             </binding>
           </mappingStatements>
-        </mappingStatements>
+        </mappingStatement>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..CopyGraph.Node2Middle" name="Node2Middle">
         <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="false"
@@ -172,7 +172,7 @@
                 referredVariable="#qV..CopyGraph.Middle2Graph.lowerGraph.bottom.g2"/>
           </assignment>
         </bottomPattern>
-        <mappingStatements xsi:type="qvti:MappingSequence">
+        <mappingStatement xsi:type="qvti:MappingSequence">
           <mappingStatements xsi:type="qvti:MappingLoop">
             <source xsi:type="pivot:IteratorExp" type="#//@ownedPackages.1/@ownedClasses.1"
                 referredIteration="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#i.ocl.OrderedSet.select..T">
@@ -184,7 +184,7 @@
               <body xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
                   referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.oclIsTypeOf..ocl.OclType">
                 <source xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"
-                    referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@mappingStatements/@mappingStatements.0/@source/@iterator.0"/>
+                    referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@mappingStatement/@mappingStatements.0/@source/@iterator.0"/>
                 <argument xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.Class"
                     referredType="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"/>
               </body>
@@ -201,7 +201,7 @@
             </body>
             <iterator xmi:id="i..CopyGraph.Middle2Graph.0.0.child" name="child" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"/>
           </mappingStatements>
-        </mappingStatements>
+        </mappingStatement>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..CopyGraph.Middle2Node" name="Middle2Node">
         <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="false"

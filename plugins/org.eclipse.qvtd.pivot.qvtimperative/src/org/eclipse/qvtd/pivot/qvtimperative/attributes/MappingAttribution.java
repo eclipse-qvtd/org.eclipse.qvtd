@@ -33,7 +33,7 @@ public class MappingAttribution extends AbstractAttribution
 			return null;
 		}
 		Mapping mapping = (Mapping)target;
-		if (scopeView.getContainmentFeature() == QVTimperativePackage.Literals.MAPPING__MAPPING_STATEMENTS) {
+		if (scopeView.getContainmentFeature() == QVTimperativePackage.Literals.MAPPING__MAPPING_STATEMENT) {
 			QVTimperativeEnvironmentUtil.addMiddleGuardVariables(environmentView, mapping);
 			QVTimperativeEnvironmentUtil.addSideGuardVariables(environmentView, mapping, null);
 			QVTimperativeEnvironmentUtil.addMiddleBottomVariables(environmentView, mapping);

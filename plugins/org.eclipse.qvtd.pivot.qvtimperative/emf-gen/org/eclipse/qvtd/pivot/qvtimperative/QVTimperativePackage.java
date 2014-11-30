@@ -296,13 +296,13 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING__BOTTOM_PATTERN = QVTcoreBasePackage.ABSTRACT_MAPPING__BOTTOM_PATTERN;
 
 	/**
-	 * The feature id for the '<em><b>Mapping Statements</b></em>' containment reference.
+	 * The feature id for the '<em><b>Mapping Statement</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING__MAPPING_STATEMENTS = QVTcoreBasePackage.ABSTRACT_MAPPING_FEATURE_COUNT + 0;
+	int MAPPING__MAPPING_STATEMENT = QVTcoreBasePackage.ABSTRACT_MAPPING_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Mapping</em>' class.
@@ -1242,15 +1242,15 @@ public interface QVTimperativePackage extends EPackage {
 	EClass getMapping();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getMappingStatements <em>Mapping Statements</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.pivot.qvtimperative.Mapping#getMappingStatement <em>Mapping Statement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Mapping Statements</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.Mapping#getMappingStatements()
+	 * @return the meta object for the containment reference '<em>Mapping Statement</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.Mapping#getMappingStatement()
 	 * @see #getMapping()
 	 * @generated
 	 */
-	EReference getMapping_MappingStatements();
+	EReference getMapping_MappingStatement();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.MappingCall <em>Mapping Call</em>}'.
@@ -1474,12 +1474,12 @@ public interface QVTimperativePackage extends EPackage {
 		EClass MAPPING = eINSTANCE.getMapping();
 
 		/**
-		 * The meta object literal for the '<em><b>Mapping Statements</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Mapping Statement</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MAPPING__MAPPING_STATEMENTS = eINSTANCE.getMapping_MappingStatements();
+		EReference MAPPING__MAPPING_STATEMENT = eINSTANCE.getMapping_MappingStatement();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallImpl <em>Mapping Call</em>}' class.
