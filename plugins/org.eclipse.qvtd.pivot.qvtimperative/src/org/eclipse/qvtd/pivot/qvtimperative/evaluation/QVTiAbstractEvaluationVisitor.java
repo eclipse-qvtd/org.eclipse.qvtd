@@ -270,7 +270,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 			}
 			DomainType valueType = metaModelManager.getIdResolver().getDynamicTypeOf(valueOrValues);
 			Type varType = boundVariable.getType();
-			if ((varType != null) && valueType.conformsTo(metaModelManager, varType)) {
+			if ((varType != null) && valueType.conformsTo(metaModelManager.getStandardLibrary(), varType)) {
 				evaluationEnvironment.replace(boundVariable, valueOrValues);
 			}
 			else {
@@ -489,12 +489,15 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
         // and create elements in the target model. The realized variables
         // are being visited for each binding of variable in the mapping. 
         Area area = ((BottomPattern)realizedVariable.eContainer()).getArea();
-        Object element =  realizedVariable.getType().createInstance();
-        TypedModel tm = QVTcoreBaseUtil.getTypedModel(area);
-        assert tm != null;
-        ((QVTiModelManager)modelManager).addModelElement(tm, element);
-        // Add the realize variable binding to the environment
-        evaluationEnvironment.replace(realizedVariable, element);
+        Type type = realizedVariable.getType();
+		Object element = type instanceof org.eclipse.ocl.examples.pivot.Class ? ((org.eclipse.ocl.examples.pivot.Class)type).createInstance() : null;
+        if (element != null) {
+	        TypedModel tm = QVTcoreBaseUtil.getTypedModel(area);
+	        assert tm != null;
+	        ((QVTiModelManager)modelManager).addModelElement(tm, element);
+	        // Add the realize variable binding to the environment
+	        evaluationEnvironment.replace(realizedVariable, element);
+        }
         return element;
     }
 
@@ -547,7 +550,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
         Variable variable = variablePredicate.getTargetVariable();
 		Type guardType = variable.getType();
 		DomainType valueType = idResolver.getDynamicTypeOf(value);
-		if ((guardType != null) && valueType.conformsTo(metaModelManager, guardType)) {
+		if ((guardType != null) && valueType.conformsTo(metaModelManager.getStandardLibrary(), guardType)) {
 			evaluationEnvironment.replace(variable, value);
 		} else {
 			// The initialisation fails, the guard is not met

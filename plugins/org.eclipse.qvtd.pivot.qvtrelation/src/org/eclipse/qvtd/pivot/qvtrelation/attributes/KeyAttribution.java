@@ -15,7 +15,6 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.FeatureFilter;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
@@ -37,10 +36,9 @@ public class KeyAttribution extends AbstractAttribution
 				environmentView.addNamedElement(usedPackage);
 			}
 			if (!environmentView.hasFinalResult()) {
-				MetaModelManager metaModelManager = environmentView.getMetaModelManager();
 				for (org.eclipse.ocl.examples.pivot.Package usedPackage : allPackages) {
 					assert usedPackage != null;
-					environmentView.addNamedElements(metaModelManager.getLocalClasses(usedPackage));
+					environmentView.addAllTypes(usedPackage);
 				}
 			}
 		}

@@ -88,6 +88,15 @@ public interface QVTimperativePackage extends EPackage {
 	int IMPERATIVE_MODEL = 0;
 
 	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPERATIVE_MODEL__COMMENT = QVTbasePackage.BASE_MODEL__COMMENT;
+
+	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -113,15 +122,6 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int IMPERATIVE_MODEL__OWNED_COMMENT = QVTbasePackage.BASE_MODEL__OWNED_COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_MODEL__IS_STATIC = QVTbasePackage.BASE_MODEL__IS_STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -160,13 +160,13 @@ public interface QVTimperativePackage extends EPackage {
 	int IMPERATIVE_MODEL__IMPORTS = QVTbasePackage.BASE_MODEL__IMPORTS;
 
 	/**
-	 * The feature id for the '<em><b>Nested Package</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Packages</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPERATIVE_MODEL__NESTED_PACKAGE = QVTbasePackage.BASE_MODEL__NESTED_PACKAGE;
+	int IMPERATIVE_MODEL__OWNED_PACKAGES = QVTbasePackage.BASE_MODEL__OWNED_PACKAGES;
 
 	/**
 	 * The feature id for the '<em><b>Unit</b></em>' containment reference list.
@@ -197,6 +197,15 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING = 1;
 
 	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING__COMMENT = QVTcoreBasePackage.ABSTRACT_MAPPING__COMMENT;
+
+	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -222,15 +231,6 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING__OWNED_COMMENT = QVTcoreBasePackage.ABSTRACT_MAPPING__OWNED_COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING__IS_STATIC = QVTcoreBasePackage.ABSTRACT_MAPPING__IS_STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -324,6 +324,15 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_STATEMENT = 6;
 
 	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_STATEMENT__COMMENT = PivotPackage.OCL_EXPRESSION__COMMENT;
+
+	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -351,15 +360,6 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_STATEMENT__OWNED_COMMENT = PivotPackage.OCL_EXPRESSION__OWNED_COMMENT;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_STATEMENT__IS_STATIC = PivotPackage.OCL_EXPRESSION__IS_STATIC;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -367,6 +367,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_STATEMENT__NAME = PivotPackage.OCL_EXPRESSION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_STATEMENT__IS_MANY = PivotPackage.OCL_EXPRESSION__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -387,6 +396,15 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_STATEMENT__TYPE = PivotPackage.OCL_EXPRESSION__TYPE;
 
 	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_STATEMENT__TYPE_VALUE = PivotPackage.OCL_EXPRESSION__TYPE_VALUE;
+
+	/**
 	 * The number of structural features of the '<em>Mapping Statement</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -404,6 +422,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 */
 	int MAPPING_CALL = 2;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL__COMMENT = MAPPING_STATEMENT__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
@@ -433,15 +460,6 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_CALL__OWNED_COMMENT = MAPPING_STATEMENT__OWNED_COMMENT;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_CALL__IS_STATIC = MAPPING_STATEMENT__IS_STATIC;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -449,6 +467,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_CALL__NAME = MAPPING_STATEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL__IS_MANY = MAPPING_STATEMENT__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -467,6 +494,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_CALL__TYPE = MAPPING_STATEMENT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL__TYPE_VALUE = MAPPING_STATEMENT__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Referred Mapping</b></em>' reference.
@@ -504,6 +540,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 */
 	int MAPPING_CALL_BINDING = 3;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING__COMMENT = PivotPackage.ELEMENT__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
@@ -579,6 +624,15 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_LOOP = 4;
 
 	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_LOOP__COMMENT = PivotPackage.LOOP_EXP__COMMENT;
+
+	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -606,15 +660,6 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_LOOP__OWNED_COMMENT = PivotPackage.LOOP_EXP__OWNED_COMMENT;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_LOOP__IS_STATIC = PivotPackage.LOOP_EXP__IS_STATIC;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -622,6 +667,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_LOOP__NAME = PivotPackage.LOOP_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_LOOP__IS_MANY = PivotPackage.LOOP_EXP__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -640,6 +694,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_LOOP__TYPE = PivotPackage.LOOP_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_LOOP__TYPE_VALUE = PivotPackage.LOOP_EXP__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Implicit</b></em>' attribute.
@@ -706,6 +769,15 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_SEQUENCE = 5;
 
 	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_SEQUENCE__COMMENT = MAPPING_STATEMENT__COMMENT;
+
+	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -733,15 +805,6 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_SEQUENCE__OWNED_COMMENT = MAPPING_STATEMENT__OWNED_COMMENT;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_SEQUENCE__IS_STATIC = MAPPING_STATEMENT__IS_STATIC;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -749,6 +812,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_SEQUENCE__NAME = MAPPING_STATEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_SEQUENCE__IS_MANY = MAPPING_STATEMENT__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -767,6 +839,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING_SEQUENCE__TYPE = MAPPING_STATEMENT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_SEQUENCE__TYPE_VALUE = MAPPING_STATEMENT__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Mapping Statements</b></em>' containment reference list.
@@ -795,6 +876,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 */
 	int MIDDLE_PROPERTY_ASSIGNMENT = 7;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MIDDLE_PROPERTY_ASSIGNMENT__COMMENT = QVTcoreBasePackage.PROPERTY_ASSIGNMENT__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
@@ -897,6 +987,15 @@ public interface QVTimperativePackage extends EPackage {
 	int MIDDLE_PROPERTY_CALL_EXP = 8;
 
 	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MIDDLE_PROPERTY_CALL_EXP__COMMENT = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__COMMENT;
+
+	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -924,15 +1023,6 @@ public interface QVTimperativePackage extends EPackage {
 	int MIDDLE_PROPERTY_CALL_EXP__OWNED_COMMENT = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__OWNED_COMMENT;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MIDDLE_PROPERTY_CALL_EXP__IS_STATIC = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__IS_STATIC;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -940,6 +1030,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MIDDLE_PROPERTY_CALL_EXP__NAME = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MIDDLE_PROPERTY_CALL_EXP__IS_MANY = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -958,6 +1057,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MIDDLE_PROPERTY_CALL_EXP__TYPE = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MIDDLE_PROPERTY_CALL_EXP__TYPE_VALUE = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Implicit</b></em>' attribute.
@@ -1040,6 +1148,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @generated
 	 */
 	int VARIABLE_PREDICATE = 9;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_PREDICATE__COMMENT = QVTbasePackage.PREDICATE__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.

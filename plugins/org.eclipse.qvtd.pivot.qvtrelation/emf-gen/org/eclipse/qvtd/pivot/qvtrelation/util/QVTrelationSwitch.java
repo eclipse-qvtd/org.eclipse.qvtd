@@ -17,14 +17,13 @@ import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.CallExp;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.FeatureCallExp;
+import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.NavigationCallExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.ReferringElement;
-import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
@@ -184,7 +183,7 @@ public class QVTrelationSwitch<T> extends Switch<T> {
 				RelationModel relationModel = (RelationModel)theEObject;
 				T result = caseRelationModel(relationModel);
 				if (result == null) result = caseBaseModel(relationModel);
-				if (result == null) result = caseRoot(relationModel);
+				if (result == null) result = caseModel(relationModel);
 				if (result == null) result = caseNamespace(relationModel);
 				if (result == null) result = caseNamedElement(relationModel);
 				if (result == null) result = caseElement(relationModel);
@@ -206,12 +205,10 @@ public class QVTrelationSwitch<T> extends Switch<T> {
 				T result = caseRelationalTransformation(relationalTransformation);
 				if (result == null) result = caseTransformation(relationalTransformation);
 				if (result == null) result = caseClass(relationalTransformation);
-				if (result == null) result = casePackage(relationalTransformation);
 				if (result == null) result = caseType(relationalTransformation);
 				if (result == null) result = caseNamespace(relationalTransformation);
-				if (result == null) result = caseNamedElement(relationalTransformation);
 				if (result == null) result = caseTemplateableElement(relationalTransformation);
-				if (result == null) result = caseParameterableElement(relationalTransformation);
+				if (result == null) result = caseNamedElement(relationalTransformation);
 				if (result == null) result = caseElement(relationalTransformation);
 				if (result == null) result = caseNameable(relationalTransformation);
 				if (result == null) result = caseVisitable(relationalTransformation);
@@ -598,21 +595,6 @@ public class QVTrelationSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Parameterable Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Parameterable Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseParameterableElement(ParameterableElement object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -643,17 +625,17 @@ public class QVTrelationSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Root</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Root</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Model</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRoot(Root object) {
+	public T caseModel(Model object) {
 		return null;
 	}
 
@@ -669,21 +651,6 @@ public class QVTrelationSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseClass(org.eclipse.ocl.examples.pivot.Class object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Package</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Package</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePackage(org.eclipse.ocl.examples.pivot.Package object) {
 		return null;
 	}
 

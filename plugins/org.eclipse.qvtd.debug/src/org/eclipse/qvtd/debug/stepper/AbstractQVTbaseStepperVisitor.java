@@ -37,7 +37,7 @@ public abstract class AbstractQVTbaseStepperVisitor
 	}	
 
 	public @Nullable IStepper visitBaseModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.BaseModel object) {
-		return visitRoot(object);
+		return visitModel(object);
 	}
 
 	public @Nullable IStepper visitDomain(@NonNull org.eclipse.qvtd.pivot.qvtbase.Domain object) {

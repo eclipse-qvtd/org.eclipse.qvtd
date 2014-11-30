@@ -27,10 +27,10 @@ import org.eclipse.ocl.examples.debug.vm.launching.DebuggableRunner;
 import org.eclipse.ocl.examples.pivot.Constraint;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Feature;
+import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
-import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.debug.core.QVTiEvaluationContext;
@@ -41,7 +41,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 public class QVTiVMVirtualMachine extends VMVirtualMachine
 {
 	private static boolean appendElementSignature(@NonNull StringBuilder s, @Nullable EObject eObject) {
-        if (eObject instanceof Root) {
+        if (eObject instanceof Model) {
         	return false;
         }
         else if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {

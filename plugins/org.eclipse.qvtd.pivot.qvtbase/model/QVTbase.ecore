@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvtbase" nsURI="http://www.eclipse.org/qvt/0.9/QVTbase" nsPrefix="qvtb">
-  <eClassifiers xsi:type="ecore:EClass" name="BaseModel" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Root">
+  <eClassifiers xsi:type="ecore:EClass" name="BaseModel" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Model">
     <eStructuralFeatures xsi:type="ecore:EReference" name="unit" upperBound="-1" eType="#//Unit"
         containment="true"/>
   </eClassifiers>
@@ -46,7 +46,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Transformation" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Class ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Package">
+  <eClassifiers xsi:type="ecore:EClass" name="Transformation" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Class">
     <eOperations name="getFunction" lowerBound="1" eType="#//Function">
       <eParameters name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>

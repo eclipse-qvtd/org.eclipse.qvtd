@@ -39,7 +39,7 @@ public class QVTiGlobalContext extends JavaGlobalContext<QVTiCodeGenerator>
 			toMiddleProperties = new HashMap<Property, String>();
 		}
 		if (!toMiddleProperties.containsKey(pivotProperty)) {
-			toMiddleProperties.put(pivotProperty, nameManager.getGlobalSymbolName(null, "OPPOSITE_OF_" + pivotProperty.getOwningType().getName() + "_" + pivotProperty.getName()));
+			toMiddleProperties.put(pivotProperty, nameManager.getGlobalSymbolName(null, "OPPOSITE_OF_" + pivotProperty.getOwningClass().getName() + "_" + pivotProperty.getName()));
 		}
 	}
 	

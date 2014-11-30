@@ -15,9 +15,9 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
-import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -88,7 +88,7 @@ public class QVTcoreSwitch<T> extends Switch<T> {
 				CoreModel coreModel = (CoreModel)theEObject;
 				T result = caseCoreModel(coreModel);
 				if (result == null) result = caseBaseModel(coreModel);
-				if (result == null) result = caseRoot(coreModel);
+				if (result == null) result = caseModel(coreModel);
 				if (result == null) result = caseNamespace(coreModel);
 				if (result == null) result = caseNamedElement(coreModel);
 				if (result == null) result = caseElement(coreModel);
@@ -220,17 +220,17 @@ public class QVTcoreSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Root</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Root</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Model</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRoot(Root object) {
+	public T caseModel(Model object) {
 		return null;
 	}
 

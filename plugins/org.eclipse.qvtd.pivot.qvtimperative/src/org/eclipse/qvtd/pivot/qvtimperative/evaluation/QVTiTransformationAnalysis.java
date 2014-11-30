@@ -67,7 +67,7 @@ public class QVTiTransformationAnalysis
 		//  - identify all MiddlePropertyAssignments
 		//  - identify all MiddlePropertyCallExp and allocate a cacheIndex
 		//
-		Type oclElementType = metaModelManager.getOclElementType();
+		Type oclElementType = metaModelManager.getStandardLibrary().getOclElementType();
 		OperationId allInstancesOperationId = oclElementType.getTypeId().getOperationId(0, "allInstances", IdManager.getParametersId());
 		List<MiddlePropertyAssignment> middlePropertyAssignments = new ArrayList<MiddlePropertyAssignment>();
 		for (TreeIterator<EObject> tit = transformation.eAllContents(); tit.hasNext(); ) {

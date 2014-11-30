@@ -85,6 +85,15 @@ public interface QVTcoreBasePackage extends EPackage {
 	int ABSTRACT_MAPPING = 0;
 
 	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_MAPPING__COMMENT = QVTbasePackage.RULE__COMMENT;
+
+	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -110,15 +119,6 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @ordered
 	 */
 	int ABSTRACT_MAPPING__OWNED_COMMENT = QVTbasePackage.RULE__OWNED_COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_MAPPING__IS_STATIC = QVTbasePackage.RULE__IS_STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -203,6 +203,15 @@ public interface QVTcoreBasePackage extends EPackage {
 	int AREA = 1;
 
 	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int AREA__COMMENT = PivotPackage.ELEMENT__COMMENT;
+
+	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -265,6 +274,15 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @generated
 	 */
 	int ASSIGNMENT = 2;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ASSIGNMENT__COMMENT = PivotPackage.ELEMENT__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
@@ -340,6 +358,15 @@ public interface QVTcoreBasePackage extends EPackage {
 	int CORE_PATTERN = 5;
 
 	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_PATTERN__COMMENT = QVTbasePackage.PATTERN__COMMENT;
+
+	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -411,6 +438,15 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @generated
 	 */
 	int BOTTOM_PATTERN = 3;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOTTOM_PATTERN__COMMENT = CORE_PATTERN__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
@@ -522,6 +558,15 @@ public interface QVTcoreBasePackage extends EPackage {
 	int CORE_DOMAIN = 4;
 
 	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_DOMAIN__COMMENT = QVTbasePackage.DOMAIN__COMMENT;
+
+	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -547,15 +592,6 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @ordered
 	 */
 	int CORE_DOMAIN__OWNED_COMMENT = QVTbasePackage.DOMAIN__OWNED_COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CORE_DOMAIN__IS_STATIC = QVTbasePackage.DOMAIN__IS_STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -640,6 +676,15 @@ public interface QVTcoreBasePackage extends EPackage {
 	int ENFORCEMENT_OPERATION = 6;
 
 	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENFORCEMENT_OPERATION__COMMENT = PivotPackage.ELEMENT__COMMENT;
+
+	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -711,6 +756,15 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @generated
 	 */
 	int GUARD_PATTERN = 7;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_PATTERN__COMMENT = CORE_PATTERN__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
@@ -793,6 +847,15 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @generated
 	 */
 	int PROPERTY_ASSIGNMENT = 8;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_ASSIGNMENT__COMMENT = ASSIGNMENT__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
@@ -886,6 +949,15 @@ public interface QVTcoreBasePackage extends EPackage {
 	int REALIZED_VARIABLE = 9;
 
 	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REALIZED_VARIABLE__COMMENT = PivotPackage.VARIABLE__COMMENT;
+
+	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -913,15 +985,6 @@ public interface QVTcoreBasePackage extends EPackage {
 	int REALIZED_VARIABLE__OWNED_COMMENT = PivotPackage.VARIABLE__OWNED_COMMENT;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REALIZED_VARIABLE__IS_STATIC = PivotPackage.VARIABLE__IS_STATIC;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -929,6 +992,15 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @ordered
 	 */
 	int REALIZED_VARIABLE__NAME = PivotPackage.VARIABLE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REALIZED_VARIABLE__IS_MANY = PivotPackage.VARIABLE__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -947,6 +1019,15 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @ordered
 	 */
 	int REALIZED_VARIABLE__TYPE = PivotPackage.VARIABLE__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REALIZED_VARIABLE__TYPE_VALUE = PivotPackage.VARIABLE__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Implicit</b></em>' attribute.
@@ -993,6 +1074,15 @@ public interface QVTcoreBasePackage extends EPackage {
 	 * @generated
 	 */
 	int VARIABLE_ASSIGNMENT = 10;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VARIABLE_ASSIGNMENT__COMMENT = ASSIGNMENT__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.

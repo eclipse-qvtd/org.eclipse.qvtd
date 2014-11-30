@@ -84,6 +84,15 @@ public interface QVTcorePackage extends EPackage {
 	int CORE_MODEL = 0;
 
 	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CORE_MODEL__COMMENT = QVTbasePackage.BASE_MODEL__COMMENT;
+
+	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -109,15 +118,6 @@ public interface QVTcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int CORE_MODEL__OWNED_COMMENT = QVTbasePackage.BASE_MODEL__OWNED_COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CORE_MODEL__IS_STATIC = QVTbasePackage.BASE_MODEL__IS_STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -156,13 +156,13 @@ public interface QVTcorePackage extends EPackage {
 	int CORE_MODEL__IMPORTS = QVTbasePackage.BASE_MODEL__IMPORTS;
 
 	/**
-	 * The feature id for the '<em><b>Nested Package</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Packages</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CORE_MODEL__NESTED_PACKAGE = QVTbasePackage.BASE_MODEL__NESTED_PACKAGE;
+	int CORE_MODEL__OWNED_PACKAGES = QVTbasePackage.BASE_MODEL__OWNED_PACKAGES;
 
 	/**
 	 * The feature id for the '<em><b>Unit</b></em>' containment reference list.
@@ -193,6 +193,15 @@ public interface QVTcorePackage extends EPackage {
 	int MAPPING = 1;
 
 	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING__COMMENT = QVTcoreBasePackage.ABSTRACT_MAPPING__COMMENT;
+
+	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -218,15 +227,6 @@ public interface QVTcorePackage extends EPackage {
 	 * @ordered
 	 */
 	int MAPPING__OWNED_COMMENT = QVTcoreBasePackage.ABSTRACT_MAPPING__OWNED_COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING__IS_STATIC = QVTcoreBasePackage.ABSTRACT_MAPPING__IS_STATIC;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.

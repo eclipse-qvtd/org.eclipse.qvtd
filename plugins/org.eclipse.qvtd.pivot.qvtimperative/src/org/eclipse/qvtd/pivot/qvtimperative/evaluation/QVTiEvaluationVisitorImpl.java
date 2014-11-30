@@ -74,7 +74,7 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
 		PivotIdResolver idResolver = nv.getMetaModelManager().getIdResolver();
         for (Object binding : rootBindings.get(depth)) {
 			DomainType valueType = idResolver.getDynamicTypeOf(binding);
-			if ((guardType != null) && valueType.conformsTo(nv.getMetaModelManager(), guardType)) {
+			if ((guardType != null) && valueType.conformsTo(nv.getMetaModelManager().getStandardLibrary(), guardType)) {
 				nv.getEvaluationEnvironment().replace(var, binding);
 	        	if (nextDepth < maxDepth) {
 	        		doMappingCallRecursion(nv, rule, rootVariables, rootBindings, nextDepth);
@@ -162,7 +162,7 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
 
     @Override
     public @Nullable Object visitImperativeModel(@NonNull ImperativeModel imperativeModel) {
-    	for (org.eclipse.ocl.examples.pivot.Package pkge : imperativeModel.getNestedPackage()) {
+    	for (org.eclipse.ocl.examples.pivot.Package pkge : imperativeModel.getOwnedPackages()) {
     		pkge.accept(undecoratedVisitor);
     	}
         return true;

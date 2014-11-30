@@ -39,6 +39,7 @@ import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.pivot.CollectionType;
 import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
 import org.eclipse.ocl.examples.pivot.Iteration;
+import org.eclipse.ocl.examples.pivot.LanguageExpression;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -329,7 +330,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		for (Parameter pParameter : asFunction.getOwnedParameter()) {
 			cgFunction.getParameters().add(doVisit(CGParameter.class, pParameter));
 		}
-		ExpressionInOCL specification = asFunction.getBodyExpression();
+		LanguageExpression specification = asFunction.getBodyExpression();
 		if (specification != null) {
 			try {
 				ExpressionInOCL query = metaModelManager.getQueryOrThrow(asFunction, specification);
@@ -432,8 +433,8 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 //		cgIterator.setNonInvalid();
 //		cgIterator.setNonNull();
 		cgMappingLoop.setAst(asMappingLoop);
-		CollectionType collectionType = metaModelManager.getCollectionType();
-		DomainOperation forAllIteration = DomainUtil.getNamedElement(collectionType.getLocalOperations(), "forAll");
+		CollectionType collectionType = metaModelManager.getStandardLibrary().getCollectionType();
+		DomainOperation forAllIteration = DomainUtil.getNamedElement(collectionType.getOwnedOperations(), "forAll");
 		cgMappingLoop.setReferredIteration((Iteration) forAllIteration);
 		cgMappingLoop.setBody(doVisit(CGValuedElement.class, asMappingLoop.getBody()));
 		return cgMappingLoop;
@@ -589,7 +590,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 			CGMapping cgMapping = doVisit(CGMapping.class, asRule);
 			cgTransformation.getMappings().add(cgMapping);
 		}
-		for (Operation asOperation : asTransformation.getOwnedOperation()) {
+		for (Operation asOperation : asTransformation.getOwnedOperations()) {
 			CGOperation cgOperation = doVisit(CGOperation.class, asOperation);
 			cgTransformation.getOperations().add(cgOperation);
 		}

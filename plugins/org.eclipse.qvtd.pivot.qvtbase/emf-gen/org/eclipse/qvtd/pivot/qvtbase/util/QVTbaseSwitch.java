@@ -16,17 +16,15 @@ import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.Feature;
+import org.eclipse.ocl.examples.pivot.Model;
 import org.eclipse.ocl.examples.pivot.NamedElement;
 import org.eclipse.ocl.examples.pivot.Namespace;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.Parameter;
-import org.eclipse.ocl.examples.pivot.ParameterableElement;
 import org.eclipse.ocl.examples.pivot.ReferringElement;
-import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.TemplateableElement;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.TypedElement;
-import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.util.Visitable;
@@ -102,7 +100,7 @@ public class QVTbaseSwitch<T> extends Switch<T> {
 			case QVTbasePackage.BASE_MODEL: {
 				BaseModel baseModel = (BaseModel)theEObject;
 				T result = caseBaseModel(baseModel);
-				if (result == null) result = caseRoot(baseModel);
+				if (result == null) result = caseModel(baseModel);
 				if (result == null) result = caseNamespace(baseModel);
 				if (result == null) result = caseNamedElement(baseModel);
 				if (result == null) result = caseElement(baseModel);
@@ -129,8 +127,6 @@ public class QVTbaseSwitch<T> extends Switch<T> {
 				if (result == null) result = caseFeature(function);
 				if (result == null) result = caseNamespace(function);
 				if (result == null) result = caseTemplateableElement(function);
-				if (result == null) result = caseParameterableElement(function);
-				if (result == null) result = caseTypedMultiplicityElement(function);
 				if (result == null) result = caseTypedElement(function);
 				if (result == null) result = caseNamedElement(function);
 				if (result == null) result = caseElement(function);
@@ -144,7 +140,6 @@ public class QVTbaseSwitch<T> extends Switch<T> {
 				T result = caseFunctionParameter(functionParameter);
 				if (result == null) result = caseParameter(functionParameter);
 				if (result == null) result = caseVariable(functionParameter);
-				if (result == null) result = caseTypedMultiplicityElement(functionParameter);
 				if (result == null) result = caseVariableDeclaration(functionParameter);
 				if (result == null) result = caseTypedElement(functionParameter);
 				if (result == null) result = caseNamedElement(functionParameter);
@@ -184,12 +179,10 @@ public class QVTbaseSwitch<T> extends Switch<T> {
 				Transformation transformation = (Transformation)theEObject;
 				T result = caseTransformation(transformation);
 				if (result == null) result = caseClass(transformation);
-				if (result == null) result = casePackage(transformation);
 				if (result == null) result = caseType(transformation);
 				if (result == null) result = caseNamespace(transformation);
-				if (result == null) result = caseNamedElement(transformation);
 				if (result == null) result = caseTemplateableElement(transformation);
-				if (result == null) result = caseParameterableElement(transformation);
+				if (result == null) result = caseNamedElement(transformation);
 				if (result == null) result = caseElement(transformation);
 				if (result == null) result = caseNameable(transformation);
 				if (result == null) result = caseVisitable(transformation);
@@ -446,21 +439,6 @@ public class QVTbaseSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Typed Multiplicity Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Typed Multiplicity Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseTypedMultiplicityElement(TypedMultiplicityElement object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Feature</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -491,17 +469,17 @@ public class QVTbaseSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Root</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Root</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Model</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRoot(Root object) {
+	public T caseModel(Model object) {
 		return null;
 	}
 
@@ -532,21 +510,6 @@ public class QVTbaseSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTemplateableElement(TemplateableElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Parameterable Element</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Parameterable Element</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseParameterableElement(ParameterableElement object) {
 		return null;
 	}
 
@@ -637,21 +600,6 @@ public class QVTbaseSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseClass(org.eclipse.ocl.examples.pivot.Class object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Package</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Package</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePackage(org.eclipse.ocl.examples.pivot.Package object) {
 		return null;
 	}
 

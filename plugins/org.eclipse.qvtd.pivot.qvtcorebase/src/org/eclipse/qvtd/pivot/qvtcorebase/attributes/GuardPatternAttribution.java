@@ -37,7 +37,7 @@ public class GuardPatternAttribution extends AbstractAttribution
 				for (TypedModel typedModel : transformation.getModelParameter()) {
 					for (org.eclipse.ocl.examples.pivot.Package pPackage : typedModel.getUsedPackage()) {
 						environmentView.addNamedElement(pPackage);
-						environmentView.addNamedElements(pPackage.getOwnedType());
+						environmentView.addNamedElements(pPackage.getOwnedClasses());
 					}
 				}
 			}

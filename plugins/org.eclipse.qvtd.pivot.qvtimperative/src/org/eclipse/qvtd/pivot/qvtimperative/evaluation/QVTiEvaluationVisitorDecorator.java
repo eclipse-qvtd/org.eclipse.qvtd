@@ -13,9 +13,10 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainClass;
+import org.eclipse.ocl.examples.domain.elements.DomainEnvironment;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainLogger;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
 import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
@@ -87,6 +88,13 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
+	public @NonNull DomainEnvironment getCompleteEnvironment() {
+		return delegate.getCompleteEnvironment();
+	}
+
+	/**
+     * Delegates to my decorated visitor.
+     */
 	public @NonNull EvaluationVisitor getEvaluator() {
 		return delegate.getEvaluator();
 	}
@@ -129,7 +137,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
-	public @NonNull DomainType getStaticTypeOf(@Nullable Object value) {
+	public @NonNull DomainClass getStaticTypeOf(@Nullable Object value) {
 		
 		return delegate.getStaticTypeOf(value);
 	}
@@ -137,7 +145,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
-	public @NonNull DomainType getStaticTypeOf(@Nullable Object value,
+	public @NonNull DomainClass getStaticTypeOf(@Nullable Object value,
 			@NonNull Object... values) {
 		return delegate.getStaticTypeOf(value, values);
 	}
@@ -145,7 +153,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
-	public @NonNull DomainType getStaticTypeOf(@Nullable Object value,
+	public @NonNull DomainClass getStaticTypeOf(@Nullable Object value,
 			@NonNull Iterable<?> values) {
 		return delegate.getStaticTypeOf(value, values);
 	}

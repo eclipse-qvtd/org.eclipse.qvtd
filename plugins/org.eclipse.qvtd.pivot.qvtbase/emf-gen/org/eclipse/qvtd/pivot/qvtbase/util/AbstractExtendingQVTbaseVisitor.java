@@ -41,7 +41,7 @@ public abstract class AbstractExtendingQVTbaseVisitor<R, C>
 	}	
 
 	public @Nullable R visitBaseModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.BaseModel object) {
-		return visitRoot(object);
+		return visitModel(object);
 	}
 
 	public @Nullable R visitDomain(@NonNull org.eclipse.qvtd.pivot.qvtbase.Domain object) {

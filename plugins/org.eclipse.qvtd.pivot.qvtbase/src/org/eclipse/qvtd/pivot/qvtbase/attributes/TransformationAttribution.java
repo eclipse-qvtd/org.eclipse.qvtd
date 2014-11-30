@@ -12,13 +12,13 @@ package org.eclipse.qvtd.pivot.qvtbase.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.attributes.PackageAttribution;
+import org.eclipse.ocl.examples.pivot.attributes.ClassAttribution;
 import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 
-public class TransformationAttribution extends PackageAttribution
+public class TransformationAttribution extends ClassAttribution
 {
 	public static final TransformationAttribution INSTANCE = new TransformationAttribution();
 
@@ -26,7 +26,7 @@ public class TransformationAttribution extends PackageAttribution
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		Transformation transformation = (Transformation)target;
 		environmentView.addNamedElements(transformation.getModelParameter());
-		QVTbaseUtil.addAllNamedElements(environmentView, transformation.getOwnedOperation());
+		QVTbaseUtil.addAllNamedElements(environmentView, transformation.getOwnedOperations());
 		environmentView.addNamedElements(transformation.getRule());
 		return super.computeLookup(target, environmentView, scopeView);
 	}

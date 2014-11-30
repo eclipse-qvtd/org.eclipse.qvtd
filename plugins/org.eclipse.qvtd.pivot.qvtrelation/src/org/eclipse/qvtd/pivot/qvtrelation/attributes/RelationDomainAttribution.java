@@ -29,7 +29,7 @@ public class RelationDomainAttribution extends AbstractAttribution
 		if (typedModel != null) {
 			for (org.eclipse.ocl.examples.pivot.Package pPackage : typedModel.getUsedPackage()) {
 				environmentView.addNamedElement(pPackage);
-				environmentView.addNamedElements(pPackage.getOwnedType());
+				environmentView.addNamedElements(pPackage.getOwnedClasses());
 			}
 		}
 		return scopeView.getParent();

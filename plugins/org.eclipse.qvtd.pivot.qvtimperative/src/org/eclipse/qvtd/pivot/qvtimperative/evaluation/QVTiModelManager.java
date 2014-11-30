@@ -18,8 +18,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.BasicEList;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -51,7 +49,7 @@ public class QVTiModelManager implements DomainModelManager
 	/** Map a typed model to its resource (model). */
 	private @NonNull Map<TypedModel, Resource> modelResourceMap = new HashMap<TypedModel, Resource>();
 	
-	private @NonNull Map<TypedModel, EList<EObject>> modelElementsMap = new HashMap<TypedModel, EList<EObject>>();
+	private @NonNull Map<TypedModel, List<EObject>> modelElementsMap = new HashMap<TypedModel, List<EObject>>();
 
 	/**
 	 * The types upon which execution of the transformation may invoke allInstances().
@@ -100,14 +98,12 @@ public class QVTiModelManager implements DomainModelManager
 	 */
 	public void addModelElement(@NonNull TypedModel model, @NonNull Object element) {
 	    
-	    EList<EObject> elements = null;
-	    if (modelElementsMap.containsKey(model)) {
-	        elements = modelElementsMap.get(model);
-	    } else {
-	        elements = new BasicEList<EObject>(modelResourceMap.get(model).getContents());
+	    List<EObject> elements = modelElementsMap.get(model);
+	    if (elements == null) {
+	        elements = new ArrayList<EObject>(modelResourceMap.get(model).getContents());
+		    modelElementsMap.put(model, elements);
 	    }
 	    elements.add((EObject) element);
-	    modelElementsMap.put(model, elements);
 	}
 
 	/**
@@ -224,7 +220,7 @@ public class QVTiModelManager implements DomainModelManager
 //				}
 			}
 		}
-	    return (objectType != null) && objectType.conformsTo(metaModelManager, requiredType);
+	    return (objectType != null) && objectType.conformsTo(metaModelManager.getStandardLibrary(), requiredType);
 	}
 	
 	public List<EObject> getTypeModelEObjectList(TypedModel model) {

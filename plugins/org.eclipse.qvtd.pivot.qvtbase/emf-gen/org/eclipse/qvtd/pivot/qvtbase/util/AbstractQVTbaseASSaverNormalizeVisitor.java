@@ -1,4 +1,6 @@
 /*******************************************************************************
+ * <copyright>
+ * 
  * Copyright (c) 2013 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -21,17 +23,17 @@ import java.lang.Object;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.utilities.ASSaver;
-import org.eclipse.ocl.examples.pivot.utilities.ASSaverLocateVisitor;
+import org.eclipse.ocl.examples.pivot.utilities.ASSaverNormalizeVisitor;
 
 /**
- * An AbstractQVTbaseASSaverLocateVisitor provides a default implementation for each
+ * An AbstractQVTbaseASSaverNormalizeVisitor provides a default implementation for each
  * visitXxx method that delegates to the visitYyy method of the first
  * super class, (or transitively its first super class' first super class
  * until a non-interface super-class is found). In the absence of any
  * suitable first super class, the method delegates to visiting().
  */
-public abstract class AbstractQVTbaseASSaverLocateVisitor
-	extends ASSaverLocateVisitor
+public abstract class AbstractQVTbaseASSaverNormalizeVisitor
+	extends ASSaverNormalizeVisitor
 	implements QVTbaseVisitor<Object>
 {
 	/**
@@ -39,7 +41,7 @@ public abstract class AbstractQVTbaseASSaverLocateVisitor
 	 * 
 	 * @param context my initial result value
 	 */
-	protected AbstractQVTbaseASSaverLocateVisitor(@NonNull ASSaver context) {
+	protected AbstractQVTbaseASSaverNormalizeVisitor(@NonNull ASSaver context) {
 		super(context);
 	}	
 

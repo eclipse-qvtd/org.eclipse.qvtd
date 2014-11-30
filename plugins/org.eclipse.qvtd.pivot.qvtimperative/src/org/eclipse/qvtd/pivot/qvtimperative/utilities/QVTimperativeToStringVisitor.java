@@ -36,7 +36,7 @@ public class QVTimperativeToStringVisitor extends QVTcoreBaseToStringVisitor imp
 	}
 
 	public @Nullable String visitImperativeModel(@NonNull ImperativeModel object) {
-		return visitRoot(object);
+		return visitModel(object);
 	}
 
 	public @Nullable String visitMapping(@NonNull Mapping object) {

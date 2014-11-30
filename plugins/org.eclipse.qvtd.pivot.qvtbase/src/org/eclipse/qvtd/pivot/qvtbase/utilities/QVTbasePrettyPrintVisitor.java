@@ -32,7 +32,7 @@ public class QVTbasePrettyPrintVisitor extends EssentialOCLPrettyPrintVisitor im
 	}
 
 	public Object visitBaseModel(@NonNull BaseModel object) {
-		return super.visitRoot(object);
+		return super.visitModel(object);
 	}
 
 	public Object visitDomain(@NonNull Domain object) {
@@ -64,7 +64,7 @@ public class QVTbasePrettyPrintVisitor extends EssentialOCLPrettyPrintVisitor im
 	}
 
 	public Object visitTransformation(@NonNull Transformation object) {
-		return super.visitPackage(object);
+		return super.visitClass(object);
 	}
 
 	public Object visitTypedModel(@NonNull TypedModel object) {

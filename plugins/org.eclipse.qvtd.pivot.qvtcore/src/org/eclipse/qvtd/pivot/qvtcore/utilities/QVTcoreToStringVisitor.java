@@ -27,7 +27,7 @@ public class QVTcoreToStringVisitor extends QVTcoreBaseToStringVisitor implement
 	}
 
 	public String visitCoreModel(@NonNull CoreModel object) {
-		return visitRoot(object);
+		return visitModel(object);
 	}
 
 	public String visitMapping(@NonNull Mapping object) {

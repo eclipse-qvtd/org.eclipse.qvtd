@@ -168,7 +168,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 			Collections.sort(sortedKeys);
 			for (String key : sortedKeys) {
 				Property property = key2property.get(key);
-				TypeDescriptor outerTypeDescriptor = context.getBoxedDescriptor(property.getOwningType().getTypeId());
+				TypeDescriptor outerTypeDescriptor = context.getBoxedDescriptor(property.getOwningClass().getTypeId());
 				TypeDescriptor middleTypeDescriptor = context.getBoxedDescriptor(property.getType().getTypeId());
 				js.append("protected final ");
 				js.appendIsRequired(true);

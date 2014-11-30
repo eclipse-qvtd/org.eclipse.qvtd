@@ -31,14 +31,14 @@ public class CoreDomainAttribution extends AbstractAttribution
 		if (typedModel != null) {
 			for (org.eclipse.ocl.examples.pivot.Package pPackage : typedModel.getUsedPackage()) {
 				environmentView.addNamedElement(pPackage);
-				environmentView.addNamedElements(pPackage.getOwnedType());
+				environmentView.addNamedElements(pPackage.getOwnedClasses());
 			}
 		}
 		for (EObject eContainer = targetElement.eContainer(); eContainer != null; eContainer = eContainer.eContainer()) {
 			if (eContainer instanceof Transformation) {
 				Transformation transformation = (Transformation) eContainer;
 				environmentView.addNamedElements(transformation.getModelParameter());
-				QVTbaseUtil.addAllNamedElements(environmentView, transformation.getOwnedOperation());
+				QVTbaseUtil.addAllNamedElements(environmentView, transformation.getOwnedOperations());
 				break;
 			}
 		}

@@ -33,7 +33,7 @@ import org.eclipse.ocl.examples.pivot.Annotation;
  * @model
  * @generated
  */
-public interface Transformation extends EObject, org.eclipse.ocl.examples.pivot.Class, org.eclipse.ocl.examples.pivot.Package {
+public interface Transformation extends EObject, org.eclipse.ocl.examples.pivot.Class {
 	/**
 	 * Returns the value of the '<em><b>Owned Tag</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Annotation}.

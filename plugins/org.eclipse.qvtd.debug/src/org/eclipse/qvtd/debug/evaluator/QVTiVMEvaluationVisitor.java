@@ -19,9 +19,10 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.VMVirtualMachine;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationEnvironment;
 import org.eclipse.ocl.examples.debug.vm.utils.VMInterruptedExecutionException;
+import org.eclipse.ocl.examples.domain.elements.DomainClass;
+import org.eclipse.ocl.examples.domain.elements.DomainEnvironment;
 import org.eclipse.ocl.examples.domain.elements.DomainExpression;
 import org.eclipse.ocl.examples.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainLogger;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.examples.domain.types.IdResolver;
@@ -51,6 +52,10 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 	}
 
 	public abstract int getDepth();
+
+	public @NonNull DomainEnvironment getCompleteEnvironment() {
+		return delegate.getCompleteEnvironment();
+	}
 
 	public @NonNull QVTiEnvironment getEnvironment() {
 		return (QVTiEnvironment) delegate.getEnvironment();
@@ -243,17 +248,17 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 	public abstract @NonNull QVTiVMRootEvaluationVisitor getRootEvaluationVisitor();
 
 	@Override
-	public @NonNull DomainType getStaticTypeOf(@Nullable Object value) {
+	public @NonNull DomainClass getStaticTypeOf(@Nullable Object value) {
 		return delegate.getStaticTypeOf(value);
 	}
 
 	@Override
-	public @NonNull DomainType getStaticTypeOf(@Nullable Object value, @NonNull Object... values) {
+	public @NonNull DomainClass getStaticTypeOf(@Nullable Object value, @NonNull Object... values) {
 		return delegate.getStaticTypeOf(value, values);
 	}
 
 	@Override
-	public @NonNull DomainType getStaticTypeOf(@Nullable Object value, @NonNull Iterable<?> values) {
+	public @NonNull DomainClass getStaticTypeOf(@Nullable Object value, @NonNull Iterable<?> values) {
 		return delegate.getStaticTypeOf(value, values);
 	}
 

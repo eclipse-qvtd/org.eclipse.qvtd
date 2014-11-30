@@ -18,6 +18,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.core.VMDebugCore;
 import org.eclipse.ocl.examples.debug.vm.utils.Trace;
+import org.eclipse.ocl.examples.xtext.essentialocl.as2cs.EssentialOCLLocationInFileProvider;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 
 /**
@@ -39,6 +40,8 @@ public class QVTiDebugCore extends VMDebugCore
 	private static final @NonNull String METHODS_ENTERING = PLUGIN_ID + "/methods/entering"; //$NON-NLS-1$
 	private static final @NonNull String METHODS_EXITING = PLUGIN_ID + "/methods/exiting"; //$NON-NLS-1$
 	
+	private static final @NonNull EssentialOCLLocationInFileProvider locationInFileProvider = new EssentialOCLLocationInFileProvider();
+	
 	public static @NonNull Trace TRACE = new Trace(EXCEPTIONS_CATCHING, EXCEPTIONS_THROWING, METHODS_ENTERING, METHODS_EXITING);
 
 	private QVTiDebugCore() {}
@@ -53,6 +56,10 @@ public class QVTiDebugCore extends VMDebugCore
     
 	public @NonNull List<QVTiLineBreakpoint> getLineBreakpoints() {
 		return getOCLBreakpoints(QVTiLineBreakpoint.class);
+	}
+
+	public @NonNull EssentialOCLLocationInFileProvider getLocationInFileProvider() {
+		return locationInFileProvider;
 	}
 
     public @Nullable ILog getLog() {

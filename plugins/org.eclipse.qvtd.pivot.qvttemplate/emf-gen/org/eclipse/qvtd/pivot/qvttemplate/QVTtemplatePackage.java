@@ -83,6 +83,15 @@ public interface QVTtemplatePackage extends EPackage {
 	int TEMPLATE_EXP = 3;
 
 	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_EXP__COMMENT = PivotPackage.LITERAL_EXP__COMMENT;
+
+	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -110,15 +119,6 @@ public interface QVTtemplatePackage extends EPackage {
 	int TEMPLATE_EXP__OWNED_COMMENT = PivotPackage.LITERAL_EXP__OWNED_COMMENT;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TEMPLATE_EXP__IS_STATIC = PivotPackage.LITERAL_EXP__IS_STATIC;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -126,6 +126,15 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @ordered
 	 */
 	int TEMPLATE_EXP__NAME = PivotPackage.LITERAL_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_EXP__IS_MANY = PivotPackage.LITERAL_EXP__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -144,6 +153,15 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @ordered
 	 */
 	int TEMPLATE_EXP__TYPE = PivotPackage.LITERAL_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TEMPLATE_EXP__TYPE_VALUE = PivotPackage.LITERAL_EXP__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Binds To</b></em>' reference.
@@ -183,6 +201,15 @@ public interface QVTtemplatePackage extends EPackage {
 	int COLLECTION_TEMPLATE_EXP = 0;
 
 	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TEMPLATE_EXP__COMMENT = TEMPLATE_EXP__COMMENT;
+
+	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -210,15 +237,6 @@ public interface QVTtemplatePackage extends EPackage {
 	int COLLECTION_TEMPLATE_EXP__OWNED_COMMENT = TEMPLATE_EXP__OWNED_COMMENT;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COLLECTION_TEMPLATE_EXP__IS_STATIC = TEMPLATE_EXP__IS_STATIC;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -226,6 +244,15 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @ordered
 	 */
 	int COLLECTION_TEMPLATE_EXP__NAME = TEMPLATE_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TEMPLATE_EXP__IS_MANY = TEMPLATE_EXP__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -244,6 +271,15 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @ordered
 	 */
 	int COLLECTION_TEMPLATE_EXP__TYPE = TEMPLATE_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COLLECTION_TEMPLATE_EXP__TYPE_VALUE = TEMPLATE_EXP__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Binds To</b></em>' reference.
@@ -310,6 +346,15 @@ public interface QVTtemplatePackage extends EPackage {
 	int OBJECT_TEMPLATE_EXP = 1;
 
 	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TEMPLATE_EXP__COMMENT = TEMPLATE_EXP__COMMENT;
+
+	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -337,15 +382,6 @@ public interface QVTtemplatePackage extends EPackage {
 	int OBJECT_TEMPLATE_EXP__OWNED_COMMENT = TEMPLATE_EXP__OWNED_COMMENT;
 
 	/**
-	 * The feature id for the '<em><b>Is Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OBJECT_TEMPLATE_EXP__IS_STATIC = TEMPLATE_EXP__IS_STATIC;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -353,6 +389,15 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @ordered
 	 */
 	int OBJECT_TEMPLATE_EXP__NAME = TEMPLATE_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Is Many</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TEMPLATE_EXP__IS_MANY = TEMPLATE_EXP__IS_MANY;
 
 	/**
 	 * The feature id for the '<em><b>Is Required</b></em>' attribute.
@@ -371,6 +416,15 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @ordered
 	 */
 	int OBJECT_TEMPLATE_EXP__TYPE = TEMPLATE_EXP__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TEMPLATE_EXP__TYPE_VALUE = TEMPLATE_EXP__TYPE_VALUE;
 
 	/**
 	 * The feature id for the '<em><b>Binds To</b></em>' reference.
@@ -426,6 +480,15 @@ public interface QVTtemplatePackage extends EPackage {
 	 * @generated
 	 */
 	int PROPERTY_TEMPLATE_ITEM = 2;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_TEMPLATE_ITEM__COMMENT = PivotPackage.ELEMENT__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.

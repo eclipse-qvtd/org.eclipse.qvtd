@@ -44,7 +44,7 @@ public abstract class AbstractQVTbaseASSaverResolveVisitor
 	}	
 
 	public @Nullable Object visitBaseModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.BaseModel object) {
-		return visitRoot(object);
+		return visitModel(object);
 	}
 
 	public @Nullable Object visitDomain(@NonNull org.eclipse.qvtd.pivot.qvtbase.Domain object) {

@@ -563,7 +563,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		baseModelEClass.getESuperTypes().add(thePivotPackage.getRoot());
+		baseModelEClass.getESuperTypes().add(thePivotPackage.getModel());
 		domainEClass.getESuperTypes().add(thePivotPackage.getNamedElement());
 		domainEClass.getESuperTypes().add(thePivotPackage.getReferringElement());
 		functionEClass.getESuperTypes().add(thePivotPackage.getOperation());
@@ -573,7 +573,6 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 		predicateEClass.getESuperTypes().add(thePivotPackage.getElement());
 		ruleEClass.getESuperTypes().add(thePivotPackage.getNamedElement());
 		transformationEClass.getESuperTypes().add(thePivotPackage.getClass_());
-		transformationEClass.getESuperTypes().add(thePivotPackage.getPackage());
 		typedModelEClass.getESuperTypes().add(thePivotPackage.getNamedElement());
 		unitEClass.getESuperTypes().add(thePivotPackage.getNamedElement());
 

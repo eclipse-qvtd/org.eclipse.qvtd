@@ -53,7 +53,7 @@ public class PivotUtil {
         ClassImpl minType = null;
         for(int i = 1; i < vars.size(); ++i) {
             minType = (ClassImpl) min.eGet(typeFeat);
-            if (((ClassImpl)vars.get(i).eGet(typeFeat)).getSuperClass().contains(minType)) {
+            if (((ClassImpl)vars.get(i).eGet(typeFeat)).getSuperClasses().contains(minType)) {
                 min = vars.get(i);
             }
         }
@@ -61,7 +61,7 @@ public class PivotUtil {
         // in the hierarchy
         for (TypedElementImpl var : vars) {
             if (!var.equals(min)) {
-                if (!((ClassImpl)min.eGet(typeFeat)).getSuperClass().contains(var.eGet(typeFeat))) {
+                if (!((ClassImpl)min.eGet(typeFeat)).getSuperClasses().contains(var.eGet(typeFeat))) {
                     // Error
                     return null;
                 }
