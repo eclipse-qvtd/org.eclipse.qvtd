@@ -23,6 +23,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseBottomPatternKey;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseCoreDomainKey;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseGuardPatternKey;
@@ -240,6 +241,18 @@ public class QvtrToQvtcTransformation
 	
 	PivotVariableKey variables = new PivotVariableKey();
 	PivotVariableKey realizedVariables = new PivotVariableKey();
+	
+	public @NonNull Variable findVariable(String name, Type type) {
+		Variable rv = (Variable) variables.get(name, type);
+		if (rv == null) {
+			rv = PivotFactory.eINSTANCE.createVariable();
+			rv.setName(name);
+			rv.setType(type);
+			variables.add(rv);
+			addOrphan(rv);
+		}
+		return rv;
+	}
 	
 	public @NonNull RealizedVariable findRealizedVariable(String name, Type type) {
 		RealizedVariable rv = (RealizedVariable) realizedVariables.get(name, type);

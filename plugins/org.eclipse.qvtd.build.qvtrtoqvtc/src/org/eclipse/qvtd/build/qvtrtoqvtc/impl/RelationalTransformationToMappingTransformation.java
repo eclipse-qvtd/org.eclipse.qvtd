@@ -106,7 +106,7 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 		}
 	}
 	
-	public @Nullable Object getCore() {
+	public @Nullable Transformation getCore() {
 		return mt;
 	}
 

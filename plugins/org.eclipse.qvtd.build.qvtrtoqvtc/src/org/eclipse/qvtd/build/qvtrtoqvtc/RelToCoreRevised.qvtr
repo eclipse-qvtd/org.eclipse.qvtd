@@ -474,7 +474,6 @@ top relation TopLevelRelationToMappingForEnforcement
          area = m
       },
       bottomPattern = mb:BottomPattern {
-         area = m,
          bindsTo = vs:Set(Variable) {
             tcv:RealizedVariable {} ++ mbVars
          }
@@ -1623,6 +1622,7 @@ relation RDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive
          name = m.name+'_forNonIdentityProp',
          transformation = mt:Transformation{},
          bottomPattern = bp:BottomPattern {
+         	area = cm,
             assignment = a:PropertyAssignment {
                slotExpression = ve:VariableExp{referredVariable = mv},
                targetProperty = tp:Property{name = pn, class = mv.type.oclAsType(emof::Class)},

@@ -1,17 +1,22 @@
 package org.eclipse.qvtd.build.qvtrtoqvtc.impl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Package;
+import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
+import org.eclipse.qvtd.build.qvtrtoqvtc.QVTr2QVTcRelations;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
+import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
@@ -58,6 +63,10 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 		@NonNull private String tmn;
 		@NonNull private String dn;
 		@NonNull private List<Package> up;
+		@NonNull private ObjectTemplateExp te;
+		@NonNull private Variable tev;
+		@NonNull private List<RelationDomain> rOppositeDomains;
+		@NonNull private List<Variable> domainVars;
 		
 		// Core
 		@Nullable private Mapping m;
@@ -69,16 +78,25 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 		@Nullable private GuardPattern dg;
 		@Nullable private BottomPattern db;
 		@Nullable private Variable mtev;
+		public List<Variable> mbvars;
+		
+		
+		
+		
 		
 		
 		public SubRecord(@NonNull RelationDomain rd, @NonNull TypedModel dir,
 				@NonNull String tmn, @NonNull String dn,
-				@NonNull List<Package> up) {
+				@NonNull List<Package> up, List<Variable> domainVars, ObjectTemplateExp te, Variable tev, List<RelationDomain> rOppositeDomains) {
 			this.rd = rd;
 			this.dir = dir;
 			this.tmn = tmn;
 			this.dn = dn;
 			this.up = up;
+			this.te = te;
+			this.tev = tev;
+			this.domainVars = domainVars;
+			this.rOppositeDomains = rOppositeDomains;
 		}
 		
 	}
@@ -148,7 +166,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 					rOppositeDomains.add((RelationDomain) it.next());
 				}
 				rOppositeDomains.remove(rd);
-				subRecords.add(new SubRecord(rd, dir, tmn, dn, up));
+				subRecords.add(new SubRecord(rd, dir, tmn, dn, up, domainVars, te, tev, rOppositeDomains));
 			}
 		}
 	}
@@ -161,19 +179,12 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 		Relation r = ruleBindings.get(RELATIONS_r);
 		assert (r != null) && (mt != null);
 		for (SubRecord subRecord : subRecords) {
-			//Mapping m = ruleBindings.get(CORE_m);
-			//assert m == null;
-			//m =  QVTcoreFactory.eINSTANCE.createMapping();
-			//assert m != null;
 			Mapping m = transformation.findMapping(rn+'_'+subRecord.dn, mt);
 			assert m != null;
 			subRecord.m = m;
 			GuardPattern mg = transformation.findGuardPattern(m);
 			assert mg != null;
 			subRecord.mg = mg;
-			BottomPattern mb = transformation.findBottomPattern(m);
-			assert mb != null;
-			subRecord.mb = mb;
 			// TODO
 			/* The realized variable can't be found until we have a name and a type, 
 			   thus the search will return null. If we don't have the key attributes
@@ -250,6 +261,78 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 
 	@Override
 	public void where() {
+		QVTr2QVTcRelations relations = new QVTr2QVTcRelations(transformation);
+		Relation r = ruleBindings.get(RELATIONS_r);
+		assert r != null;
+		Set<Predicate> rpSet = new HashSet<Predicate>();
+		Set<Variable> whereVars = new HashSet<Variable>();
+		Set<Variable> whenVars = new HashSet<Variable>();
+		if (r.getWhen() != null) {
+			whenVars.addAll(r.getWhen().getBindsTo());
+		}
+		if (r.getWhere() != null) {
+			rpSet.addAll(relations.rejectRelationCallPredicates(r.getWhere().getPredicate()));
+			whereVars.addAll(r.getWhere().getBindsTo());
+		}
+		Set<Variable> allDomainVars = relations.getAllDomainVars(r);
+		Set<Variable> sharedDomainVars = relations.getSharedDomainVars(r);
+		Set<Variable> unsharedWhereVars = new HashSet<Variable>(whereVars);
+		unsharedWhereVars.removeAll(whenVars);
+		unsharedWhereVars.removeAll(allDomainVars);
+		unsharedWhereVars.addAll(sharedDomainVars);
+		Set<Variable> unsharedWhenVars = new HashSet<Variable>(whenVars);
+		unsharedWhenVars.removeAll(allDomainVars);
+		
+		RuleBindings whenBindings = new RuleBindings(new RelationToTraceClass(transformation, r));
+		RelationToTraceClass whenRule = (RelationToTraceClass) transformation.getRecord(whenBindings);
+		//Rule whenRule = RelationToTraceClass.FACTORY.createRule(transformation, r);
+		Type tc = null;
+		if (whenRule != null && whenRule.hasExecuted()) {
+			tc = (Type) whenRule.getCore();
+		}
+		for (SubRecord subRecord : subRecords) {
+			Set<Variable> oppositeDomainVars = new HashSet<Variable>();
+			//= rOppositeDomains->iterate(d; vars: Set(essentialocl::Variable) = Set{} |
+			// vars->union(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo));
+			for (Domain d : subRecord.rOppositeDomains) {
+				if (((RelationDomain)d).getPattern() != null) {
+					oppositeDomainVars.addAll(((RelationDomain)d).getPattern().getBindsTo());
+				}
+			}
+			Set<Variable> domainBottomUnSharedVars = new HashSet<Variable>(subRecord.domainVars);
+			domainBottomUnSharedVars.removeAll(whenVars);
+			domainBottomUnSharedVars.removeAll(sharedDomainVars);
+			Set<Predicate> predicatesWithVarBindings = relations.filterOutPredicatesThatReferToVars(rpSet, domainBottomUnSharedVars);
+			Set<Predicate> predicatesWithoutVarBindings = new HashSet<Predicate>(rpSet);
+			predicatesWithoutVarBindings.removeAll(predicatesWithVarBindings);
+			Set<Variable> domainVarsSharedWithWhen = new HashSet<Variable>(subRecord.domainVars);
+			domainVarsSharedWithWhen.retainAll(whenVars);
+			Set<Variable> unboundDomainVars;
+			
+			RealizedVariable mtev = relations.doRVarToMRealizedVar(subRecord.tev);
+			assert mtev != null;
+			subRecord.mtev = mtev;
+			assert tc != null;
+			RealizedVariable tcv = relations.doRelationDomainToTraceClassVar(r, subRecord.rd, tc);
+			assert tcv != null;
+			subRecord.tcv = tcv;
+			List<Variable> mbvars = relations.doRVarSetToMVarSet(new ArrayList<Variable>(unsharedWhereVars));
+			subRecord.mbvars = mbvars;
+			GuardPattern dg = subRecord.dg;
+			assert dg != null;
+			relations.doDomainVarsSharedWithWhenToDgVars(domainVarsSharedWithWhen, dg);
+			// TODO implement TROppositeDomainsToMappingForEnforcement
+			GuardPattern mg = subRecord.mg;
+			assert mg != null;
+			relations.doRWhenPatternToMGuardPattern(r, mg);
+			final BottomPattern db = subRecord.db;
+			assert db != null;
+			relations.doRDomainToMDBottomForEnforcement(r, subRecord.rd, subRecord.te, predicatesWithoutVarBindings, domainBottomUnSharedVars, db);
+			final BottomPattern mb = subRecord.mb;
+			assert mb != null;
+			relations.doRPredicateSetToMBPredicateSet(new ArrayList<Predicate>(predicatesWithVarBindings), mb);
+			
+		}
 		// T6
 		/*
 		for (SubRecord subRecord : subRecords) {
