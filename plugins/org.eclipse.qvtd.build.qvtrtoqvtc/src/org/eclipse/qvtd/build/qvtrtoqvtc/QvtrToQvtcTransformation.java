@@ -13,13 +13,16 @@ package org.eclipse.qvtd.build.qvtrtoqvtc;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.pivot.Element;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
@@ -43,6 +46,8 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtrelation.Key;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 
 public class QvtrToQvtcTransformation
 {
@@ -57,12 +62,24 @@ public class QvtrToQvtcTransformation
 	private final @NonNull List<EObject> potentialOrphans = new ArrayList<EObject>();
 	private final @NonNull List<EObject> traceRoots = new ArrayList<EObject>();
 	private final @NonNull List<EObject> coreRoots = new ArrayList<EObject>();
+	private Key keyforClass;;
 
 	public QvtrToQvtcTransformation(@NonNull Resource qvtrModel, @NonNull Resource qvtcModel, @Nullable Resource qvtcTraceModel) {
 		this.qvtrModel = qvtrModel;		
 		this.qvtcModel = qvtcModel;
 		this.qvtcTraceModel = qvtcTraceModel;
 		traceData = new TransformationTraceDataImpl();
+		// Create a cache of opposite relations
+		TreeIterator<EObject> it = qvtrModel.getAllContents();
+		while(it.hasNext()) {
+			EObject eo = it.next();
+			if (eo instanceof Key) {
+				if (((Key) eo).getIdentifies() instanceof org.eclipse.ocl.examples.pivot.Class) {
+					keyforClass = (Key) eo;
+					break;
+				}
+			}
+		}
 	}
 
 	public void addOrphan(@NonNull EObject eObject) {
@@ -140,6 +157,10 @@ public class QvtrToQvtcTransformation
 				
 			}
 		}
+	}
+	
+	public Key getKeyforClass() {
+		return keyforClass;
 	}
 
 	/**
