@@ -78,16 +78,14 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 		@Nullable private GuardPattern dg;
 		@Nullable private BottomPattern db;
 		@Nullable private Variable mtev;
-		public List<Variable> mbvars;
-		
-		
-		
-		
+		@Nullable public List<Variable> mbvars;
 		
 		
 		public SubRecord(@NonNull RelationDomain rd, @NonNull TypedModel dir,
 				@NonNull String tmn, @NonNull String dn,
-				@NonNull List<Package> up, List<Variable> domainVars, ObjectTemplateExp te, Variable tev, List<RelationDomain> rOppositeDomains) {
+				@NonNull List<Package> up,@NonNull List<Variable> domainVars,
+				@NonNull ObjectTemplateExp te, @NonNull Variable tev,
+				@NonNull List<RelationDomain> rOppositeDomains) {
 			this.rd = rd;
 			this.dir = dir;
 			this.tmn = tmn;
