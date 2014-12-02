@@ -117,6 +117,7 @@ public class RuleBindings extends AbstractBindings
 		RuleBindings rb = (RuleBindings) o;
 		if (rule.getClass() != rb.getRule().getClass())
 			return false;
+		/*
 		for (Key<?> key : rule.getRuleBindingsKeys().getRootKeys()) {
 			assert key != null;
 			Object thisValue = get((RuleKey<?>) key);
@@ -125,6 +126,8 @@ public class RuleBindings extends AbstractBindings
 				return false;
 		}
 		return true;
+		*/
+		return delegate.equals(rb.delegate);
 	}
 	
 	@Override

@@ -126,7 +126,9 @@ public class RelationToTraceClass extends AbstractRule
 	
 	@Override
 	public void instantiateOutput() {
-		rc = PivotFactory.eINSTANCE.createClass();
+		if (rc != null) {
+			rc = PivotFactory.eINSTANCE.createClass();
+		}
 		assert rc != null;
 		transformation.addOrphan(rc);
 		for (SubRecord subRecord : subRecords) {

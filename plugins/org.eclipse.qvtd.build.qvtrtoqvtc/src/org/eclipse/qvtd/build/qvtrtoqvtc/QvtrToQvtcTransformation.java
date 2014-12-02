@@ -120,8 +120,10 @@ public class QvtrToQvtcTransformation
 				rule.setExecuted(true);
 				rule.where();
 				rule.setAttributes();
-				
 			}
+		}
+		if (rule.hasExecuted()) {
+			traceData.addRecord(rule);
 		}
 	}
 	

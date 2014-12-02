@@ -353,11 +353,17 @@ public class QVTr2QVTcRelations {
 	// 30
 	public void doRPredicateSetToMBPredicateSet(@NonNull ArrayList<Predicate> predSeq, @NonNull BottomPattern mb) {
 		
-		Predicate rp = predSeq.remove(0); 
-		OCLExpression me = doRExpToMExp(rp.getConditionExpression());
-		Predicate mp = QVTbaseFactory.eINSTANCE.createPredicate();
-		mp.setConditionExpression(me);
-		mb.getPredicate().add(mp);
+		if(predSeq.isEmpty()) {
+			return;
+		}
+		Predicate rp = predSeq.remove(0);
+		OCLExpression re = rp.getConditionExpression();
+		if (re != null) {
+			OCLExpression me = doRExpToMExp(re);
+			Predicate mp = QVTbaseFactory.eINSTANCE.createPredicate();
+			mp.setConditionExpression(me);
+			mb.getPredicate().add(mp);
+		}
 		doRPredicateSetToMBPredicateSet(predSeq, mb);
 	}
 	

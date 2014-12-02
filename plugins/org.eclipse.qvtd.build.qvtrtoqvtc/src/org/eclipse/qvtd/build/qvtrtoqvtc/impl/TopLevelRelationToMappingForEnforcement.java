@@ -203,6 +203,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 				if (tm.getName() == subRecord.tmn) {
 					if (tm.getUsedPackage().equals(subRecord.up)) {
 						mdir = tm;
+						break;
 					}
 				}
 			}
@@ -225,10 +226,17 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 	
 	public void setAttributes() {
 		for (SubRecord subRecord : subRecords) {
+			CoreDomain md = subRecord.md;
+			assert (md != null);
+			md.setTypedModel(subRecord.mdir);
 			BottomPattern mb = subRecord.mb;
 			RealizedVariable tcv = subRecord.tcv;
 			assert (mb != null) && (tcv != null);
 			mb.getBindsTo().add(tcv);
+			BottomPattern db = subRecord.db;
+			Variable mtev = subRecord.mtev;
+			assert (db != null) && (tcv != null);
+			db.getBindsTo().add(mtev);
 		}
 	}	
 	
@@ -246,11 +254,12 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 				assert rt != null;
 				// This is the same code the factory has, and IMHO its better encapsulated by the factory.
 				// The real issue is that the bindings needs a rule and to get a record (rule) we need a binding
-				RuleBindings whenBindings = new RuleBindings(new RelationalTransformationToTracePackage(transformation, rt));
-				RelationalTransformationToTracePackage whenRule = (RelationalTransformationToTracePackage) transformation.getRecord(whenBindings);
 				//Rule whenRule = RelationalTransformationToMappingTransformation.FACTORY.createRule(transformation, rt);
-				if (whenRule != null && whenRule.hasExecuted()) {
-					mt = (Transformation) whenRule.getCore();
+				RelationalTransformationToMappingTransformation whenRule = new RelationalTransformationToMappingTransformation(transformation, rt); 
+				RuleBindings whenBindings = whenRule.getRuleBindings();
+				RelationalTransformationToMappingTransformation whenRuleRecord = (RelationalTransformationToMappingTransformation) transformation.getRecord(whenBindings);
+				if (whenRuleRecord != null && whenRuleRecord.hasExecuted()) {
+					mt = (Transformation) whenRuleRecord.getCore();
 					assert mt != null;
 					return true;
 				}
@@ -283,13 +292,15 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 		Set<Variable> unsharedWhenVars = new HashSet<Variable>(whenVars);
 		unsharedWhenVars.removeAll(allDomainVars);
 		
-		RuleBindings whenBindings = new RuleBindings(new RelationToTraceClass(transformation, r));
-		RelationToTraceClass whenRule = (RelationToTraceClass) transformation.getRecord(whenBindings);
+		RelationToTraceClass whenRule = new RelationToTraceClass(transformation, r);
+		RuleBindings whenBindings = whenRule.getRuleBindings();
+		RelationToTraceClass whenRuleRecord = (RelationToTraceClass) transformation.getRecord(whenBindings);
 		//Rule whenRule = RelationToTraceClass.FACTORY.createRule(transformation, r);
 		Type tc = null;
-		if (whenRule != null && whenRule.hasExecuted()) {
-			tc = (Type) whenRule.getCore();
+		if (whenRuleRecord != null && whenRuleRecord.hasExecuted()) {
+			tc = (Type) whenRuleRecord.getCore();
 		}
+		assert tc != null;
 		for (SubRecord subRecord : subRecords) {
 			Set<Variable> oppositeDomainVars = new HashSet<Variable>();
 			//= rOppositeDomains->iterate(d; vars: Set(essentialocl::Variable) = Set{} |
@@ -312,7 +323,6 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 			RealizedVariable mtev = relations.doRVarToMRealizedVar(subRecord.tev);
 			assert mtev != null;
 			subRecord.mtev = mtev;
-			assert tc != null;
 			RealizedVariable tcv = relations.doRelationDomainToTraceClassVar(r, subRecord.rd, tc);
 			assert tcv != null;
 			subRecord.tcv = tcv;
@@ -328,8 +338,11 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 			final BottomPattern db = subRecord.db;
 			assert db != null;
 			relations.doRDomainToMDBottomForEnforcement(r, subRecord.rd, subRecord.te, predicatesWithoutVarBindings, domainBottomUnSharedVars, db);
-			final BottomPattern mb = subRecord.mb;
+			Mapping m = subRecord.m;
+			assert m!= null;
+			final BottomPattern mb = m.getBottomPattern();
 			assert mb != null;
+			subRecord.mb = mb;
 			relations.doRPredicateSetToMBPredicateSet(new ArrayList<Predicate>(predicatesWithVarBindings), mb);
 			
 		}
