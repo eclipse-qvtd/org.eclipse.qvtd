@@ -43,7 +43,7 @@ g.edgedefault = gml!GraphEdgedefaultType#directed;
 g.id = "G";
 
 var nodeNodeMap : Map;
-for (rule in qvtrAST!Relation.all()) {
+for (rule in qvtrAST!Relation.all().sortBy(r | r.name)) {
     var n = new gml!NodeType;
     n.id = loopCount.toString();
     g.node.add(n);
