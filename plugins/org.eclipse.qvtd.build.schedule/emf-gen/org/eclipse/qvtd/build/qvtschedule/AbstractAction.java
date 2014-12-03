@@ -11,11 +11,6 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Abstract Action</b></em>'.
  * <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * An AbstractAction represents an operation that consumes (arguments) or
- * creates (results) datums.
- * <!-- end-model-doc -->
- *
  * <p>
  * The following features are supported:
  * <ul>
@@ -156,7 +151,6 @@ public interface AbstractAction extends EObject {
 	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractAction_Arguments()
 	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getTargets
 	 * @model opposite="targets" derived="true"
-	 *        annotation="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot derivation='\n            self.distinctArguments.primaryArguments->union(self.distinctArguments.secondaryArguments)->collect(datum)'"
 	 * @generated
 	 */
 	EList<AbstractDatum> getArguments();

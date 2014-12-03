@@ -3,24 +3,17 @@
 package org.eclipse.qvtd.build.qvtschedule.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.eclipse.qvtd.build.qvtschedule.AbstractAction;
 import org.eclipse.qvtd.build.qvtschedule.AbstractDatum;
 import org.eclipse.qvtd.build.qvtschedule.DistinctData;
@@ -108,14 +101,14 @@ public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container im
 	protected EList<AbstractAction> children;
 
 	/**
-	 * The cached setting delegate for the '{@link #getArguments() <em>Arguments</em>}' reference list.
+	 * The cached value of the '{@link #getArguments() <em>Arguments</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getArguments()
 	 * @generated
 	 * @ordered
 	 */
-	protected EStructuralFeature.Internal.SettingDelegate ARGUMENTS__ESETTING_DELEGATE = ((EStructuralFeature.Internal)qvtschedulePackage.Literals.ABSTRACT_ACTION__ARGUMENTS).getSettingDelegate();
+	protected EList<AbstractDatum> arguments;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -258,9 +251,11 @@ public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	public EList<AbstractDatum> getArguments() {
-		return (EList<AbstractDatum>)ARGUMENTS__ESETTING_DELEGATE.dynamicGet(this, null, 0, true, false);
+		if (arguments == null) {
+			arguments = new EObjectWithInverseResolvingEList.ManyInverse<AbstractDatum>(AbstractDatum.class, this, qvtschedulePackage.ABSTRACT_ACTION__ARGUMENTS, qvtschedulePackage.ABSTRACT_DATUM__TARGETS);
+		}
+		return arguments;
 	}
 
 	/**
@@ -488,7 +483,7 @@ public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container im
 			case qvtschedulePackage.ABSTRACT_ACTION__CHILDREN:
 				return children != null && !children.isEmpty();
 			case qvtschedulePackage.ABSTRACT_ACTION__ARGUMENTS:
-				return ARGUMENTS__ESETTING_DELEGATE.dynamicIsSet(this, null, 0);
+				return arguments != null && !arguments.isEmpty();
 			case qvtschedulePackage.ABSTRACT_ACTION__SCHEDULE:
 				return getSchedule() != null;
 		}

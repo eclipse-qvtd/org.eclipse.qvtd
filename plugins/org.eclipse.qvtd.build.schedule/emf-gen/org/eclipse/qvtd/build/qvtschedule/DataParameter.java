@@ -11,10 +11,6 @@ import org.eclipse.ocl.pivot.Variable;
  * A representation of the model object '<em><b>Data Parameter</b></em>'.
  * <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * A DataParameter represents an input parameter to an AbstractAction
- * <!-- end-model-doc -->
- *
  * <p>
  * The following features are supported:
  * <ul>
