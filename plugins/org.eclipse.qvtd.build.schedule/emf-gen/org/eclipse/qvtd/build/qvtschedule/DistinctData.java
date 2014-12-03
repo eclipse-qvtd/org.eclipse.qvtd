@@ -11,11 +11,6 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Distinct Data</b></em>'.
  * <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * A DistinctData groups DataParameters in order to represent derivation
- * information. The secondaryArguments can be derived from the PrimaryArguments
- * <!-- end-model-doc -->
- *
  * <p>
  * The following features are supported:
  * <ul>

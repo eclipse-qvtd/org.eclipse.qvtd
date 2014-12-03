@@ -9,6 +9,7 @@
  *     Horacio Hoyos - initial implementation
  ******************************************************************************/
 import "../helpers/QVTHelpers.eol";
+import "../helpers/QVTsHelpers.eol";
 //import "Scheduler.eol";
  
 /****t* /org.eclipse.qvtd.build.etl/scheduling/QVTpToSchedule
@@ -60,7 +61,10 @@ rule MappingToMappingAction
         ma.schedule ::= m.transformation;
         ma.mapping = m;
         ma.results.addAll(m.getOutputVariables().collect(v | v.type).equivalent());
+        ma.results.addAll(m.getPropertyAssignments().equivalent());
         ma.distinctArguments.addAll(m.getInputVariables().equivalents().collect(e | e.first()));
+		ma.arguments.addAll(ma.getDistinctDataClassDatums());
+		ma.arguments.addAll(m.getPropertyAccesses().equivalent());        
     }
 
 /****u* QVTpToSchedule/VariableToDataParameter
@@ -93,7 +97,7 @@ rule VariableToDataParameter
 // Only types in the TypedModel pacakges and that are used by a variable
 @lazy
 @greedy
-rule TypeToDatum
+rule TypeToClassDatum
     transform t : QVTp!Type
     to d : QVTs!ClassDatum {
         
@@ -107,10 +111,133 @@ rule TypeToDatum
         d.schedule ::= domain.`rule`.transformation;    
     }
 
+-- greedy to also consider MiddlePropertyCallExp
+@greedy 
+rule PropertyCallExpToPropertyDatum
+    transform pCallExp : QVTp!PropertyCallExp
+    to pDatum : QVTs!PropertyDatum{
+       
+		guard { 
+			var propContext = pCallExp.getContextType();
+			var refProperty = pCallExp.referredProperty;
+       		return refProperty.propertyDatumNotCreated(propContext);
+		}
+     	pDatum.updatePropertyDatum(null, 
+     		pCallExp.getContextType(), 
+     		pCallExp.referredProperty);     		
+    }
+
+
+-- greedy to also consider MiddlePropertyAssignment
+@greedy    
+rule PropertyAssignmentToPropertyDatum 
+    transform pAssign : QVTp!PropertyAssignment
+    to pDatum : QVTs!PropertyDatum {
+       
+		guard { 
+			var propContext = pAssign.getContextType();
+			var refProperty = pAssign.targetProperty;
+       		return refProperty.propertyDatumNotCreated(propContext);
+		}
+     	pDatum.updatePropertyDatum(null, 
+     		pAssign.getContextType(), 
+     		pAssign.targetProperty);
+     	     	
+	}
+
+operation QVTs!PropertyDatum updatePropertyDatum(domain : QVTp!Domain, context: QVTp!Type, prop : QVTp!Property ) {
+
+	self.domain = domain;
+	self.property = prop;
+    self.classDatum ::= context;
+    for (superClass in context.superClass) {
+    	if (prop.propertyDatumNotCreated(superClass)) {
+	    	var superPropDatum = new QVTs!PropertyDatum;
+	    	self.super.add(superPropDatum);    	    	
+	    	superPropDatum.updatePropertyDatum(domain, superClass, prop);
+    	}
+    }
+}
+
+operation QVTp!Property propertyDatumNotCreated(context : QVTp!Type) : Boolean {
+    var classDatum = context.equivalent();
+    if (classDatum.isUndefined()) {
+    	return false;
+    } else {
+    	return not classDatum.propertyDatums.exists(x | x.property = self);
+    }
+}
+
+/*
+operation QVTp!PropertyCallExp getCorrespondingDomain() : QVTp!Domain {
+	var source = self.source;
+	while (true) {
+		if (source.isKindOf(QVTp!VariableExp)) {
+			return source.referredVariable.getContainingDomain();
+		}
+		if (source.isKindOf(QVTp!CallExp)) {
+			source = source.source;
+		} else {
+			return null;
+		}
+	}
+} 
+ 
+ 
+operation QVTp!Element getContainingDomain() : QVTp!Domain {
+	var container = self.eContainer();
+	while (container.isDefined()) {
+		if (container.isKindOf(QVTp!Domain)) {
+			return container;
+		}
+		container = container.eContainer();
+	}
+	return null;
+}*/
+
 @cached
 operation QVTp!Type getVariableForType() : QVTp!Variable {
-    
-    return QVTp!Variable.all().selectOne(v | v.type == self or v.type.superClass.includes(self));
+    return QVTp!Variable.all().selectOne(v | v.type == self or v.type.superClass.includes(self)); -- FIXME what about superClasses of superClasses ?
+}
+
+@cached
+operation QVTp!OCLExpression getSourceVariable() : QVTp!Variable {
+    -- return self.asSequence().closure(x | if x.isKindOf(QVTp!CallExp) x.source else Collection{}).one(x | x.isKindOf(QVTp!VariableExp).variable;
+    var exp = self;
+	while (true) {
+		if (exp.isKindOf(QVTp!VariableExp)) {
+			return exp.referredVariable;
+		}
+		if (not exp.isKindOf(QVTp!CallExp)) {
+			return null;
+		}
+		exp = exp.source;
+	}
+}
+
+@cached
+operation QVTp!PropertyAssignment getSourceVariable() : QVTp!Variable { 
+	return self.slotExpression.getSourceVariable(); 
+}
+
+@cached
+operation QVTp!Mapping getPropertyAssignments() : Collection { 
+	return self.asSequence().closure(x | x.eContents()).select(x | x.isKindOf(QVTp!PropertyAssignment));
+}
+
+@cached
+operation QVTp!Mapping getPropertyAccesses() : Collection { 
+	return self.asSequence().closure(x | x.eContents()).select(x | x.isKindOf(QVTp!PropertyCallExp));
+}
+
+@cached
+operation QVTp!PropertyCallExp getContextType() : QVTp!Type {
+	return self.source.type;
+}
+
+@cached
+operation QVTp!PropertyAssignment getContextType() : QVTp!Type {
+	return self.slotExpression.type;
 }
 
 post{

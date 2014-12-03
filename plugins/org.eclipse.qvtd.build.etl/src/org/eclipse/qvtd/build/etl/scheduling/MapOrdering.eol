@@ -61,6 +61,10 @@ operation QVTs!Schedule findMapOrdering()  {
 	    }
 	    queue.addAll(n.children.excludingAll(visitedNodes));
 	}
+	// Finally we schedule the mapping actions pending to be scheduled
+	for (ma in self.actions.select(aa | aa.order = 0)) {
+		ma.getOrdering(visitedAct);
+	}
 }
 
 /****o* MapOrdering/getOrdering
@@ -105,38 +109,13 @@ operation QVTs!MappingAction getOrdering(visited) {
 operation QVTs!MappingAction getPredecessors() : Set {
 
     //self.mapping.name.println("getPredecessors ");
-	var args = self.getArguments();	
+	var args = self.arguments;	
 	var concreteSources =  args.collect(a | a.sources).flatten().asSet();
 	var abstractSources = self.schedule.datums.select(cd | 
             args.select(ad | ad.type.isAbstract).exists(ad | cd.super.includes(ad)))
             -- FIXME why does it need to be abstract? and why not super.super ?
         .collect(a | a.sources).flatten().asSet();
 	return concreteSources.includingAll(abstractSources);
-}
-
-/****o* MapOrdering/getArguments
- * NAME
- *  getArguments - Get the arguments of a mapping action
- * SYNOPSIS
- *    ma.getArguments();
- * FUNCTION
- *    Get the arguments of an mapping action.
- * TODO
- *  This should be implemented as the derivied property of the mapping.   
- * CONTEXT
- *  QVTs!MappingAction  The MappingAction
- * ANNOTATIONS
- *  cached
- * RETURNS
- *  QVTs!AbstractDatum	The ClassDatum for the variable's type
- *  SEE ALSO
- */	
-@cahced
-operation QVTs!MappingAction getArguments() : Sequence {
-	
-	return self.distinctArguments.primaryArguments
-			.includingAll(self.distinctArguments.secondaryArguments).flatten()
-			.collect(da | da.datum);
 }
 
 /****o* MapOrdering/getMaxIndex
