@@ -1,0 +1,87 @@
+package org.eclipse.qvtd.build.qvtrtoqvtc.impl;
+
+import org.eclipse.jdt.annotation.NonNull;
+[%for (ec in pivot!EClass.all().select(c | not (c.interface) )) {%]
+import org.eclipse.ocl.examples.pivot.[%=ec.name%];
+[%} %]
+import org.eclipse.ocl.examples.pivot.PivotFactory;
+import org.eclipse.ocl.examples.pivot.util.PivotSwitch;
+import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
+
+/**
+ * A set of operations to correctly copy an OCLExp
+ * @generated
+ */
+public class OCLExpCopy extends PivotSwitch<Element> {
+
+    @NonNull private QvtrToQvtcTransformation transformation;
+    
+    public OCLExpCopy(@NonNull QvtrToQvtcTransformation transformation) {
+        this.transformation = transformation;
+    }
+    
+[%for (ec in pivot!EClass.all().select(c | (not (c.abstract or c.interface)) and c.eTypeParameters.isEmpty())) {
+    if (ec.name <> "VariableExp") {%]    
+    /**
+     * @generated
+     */
+    @Override 
+	public Element case[%=ec.name%]([%=ec.name%] in) {
+	    [%ec.name.println();%]        
+	    final [%=ec.name%] out = PivotFactory.eINSTANCE.create[%=ec.name%]();
+	    assert out != null;
+	    [%for (a in ec.eAllAttributes.select(esf | esf.changeable and not (esf.many or esf.derived))) {%]
+	    out.set[%=a.getName().firstToUpperCase()%](in.[%=a.getAttributeGetMethod()%]());
+	    [%}%]
+	    [%for (a in ec.eAttributes.select(esf | esf.changeable and esf.many and not esf.derived)) {%]
+        out.get[%=a.getName().firstToUpperCase()%]().addAll(in.[%=a.getAttributeGetMethod()%]());
+        [%}%]
+        [%for (r in ec.eAllReferences.select(er | er.changeable and not (er.many or er.derived))) {%]
+        out.set[%=r.getName().firstToUpperCase()%](([%=r.eReferenceType.name%]) case[%=r.eReferenceType.name%](in.get[%=r.name.firstToUpperCase()%]()));
+        [%}%]
+	    return ([%=ec.name%]) out;
+	}
+  [%} else { %]
+    /**
+     * @generated
+     */
+    @Override 
+    public Element case[%=ec.name%]([%=ec.name%] in) {
+        [%ec.name.println();%]        
+        final [%=ec.name%] out = PivotFactory.eINSTANCE.create[%=ec.name%]();
+        assert out != null;
+        [%for (a in ec.eAllAttributes.select(esf | esf.changeable and not (esf.many or esf.derived))) {%]
+        out.set[%=a.getName().firstToUpperCase()%](in.[%=a.getAttributeGetMethod()%]());
+        [%}%]
+        [%for (a in ec.eAttributes.select(esf | esf.changeable and esf.many and not esf.derived)) {%]
+        out.get[%=a.getName().firstToUpperCase()%]().addAll(in.[%=a.getAttributeGetMethod()%]());
+        [%}%]
+        [%for (r in ec.eAllReferences.select(er | er.changeable and not (er.many or er.derived))) {
+            if (r.name <> "referredVariable") {%]
+        out.set[%=r.name.firstToUpperCase()%](([%=r.eReferenceType.name%]) case[%=r.eReferenceType.name%](in.get[%=r.name.firstToUpperCase()%]()));
+          [%} else {%]
+        out.setReferredVariable(transformation.getVariableTrace((Variable) in.getReferredVariable()));
+          [%}%]
+        [%}%]
+        return ([%=ec.name%]) out;
+    }
+[%} %]
+[%} %]
+}
+
+[%operation pivot!EAttribute getAttributeGetMethod() : String {
+   
+    if(self.eType.name == "Boolean") {
+        if (self.name.startsWith("is")) {
+            return self.name;
+        } else {
+            return "is"+self.name.firstToUpperCase();
+        }
+    } else { 
+        return "get"+self.name.firstToUpperCase();
+    } 
+    
+}%]
+
+[% %]
+
