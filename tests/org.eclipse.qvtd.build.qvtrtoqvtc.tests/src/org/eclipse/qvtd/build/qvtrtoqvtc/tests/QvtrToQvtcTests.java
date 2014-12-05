@@ -59,7 +59,7 @@ public class QvtrToQvtcTests extends LoadTestCase {
     	URI qvtcTraceURI = qvtrURI.trimFileExtension();
     	qvtcTraceURI = qvtcTraceURI.appendFileExtension("ecore.oclas");
     	Resource qvtcTraceResource = metaModelManager.getASResourceSet().createResource(qvtcTraceURI, null);
-    	QvtrToQvtcTransformation t = new QvtrToQvtcTransformation(qvtrResource, qvtcResource, qvtcTraceResource);
+    	QvtrToQvtcTransformation t = new QvtrToQvtcTransformation(metaModelManager, qvtrResource, qvtcResource, qvtcTraceResource);
 		t.prepare();
 		t.execute();
 		Map<Object, Object> options = new HashMap<Object, Object>();

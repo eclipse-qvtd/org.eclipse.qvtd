@@ -22,11 +22,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
+import org.eclipse.ocl.examples.pivot.Property;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
+import org.eclipse.ocl.examples.pivot.VariableDeclaration;
+import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseBottomPatternKey;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseCoreDomainKey;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseGuardPatternKey;
@@ -46,8 +49,11 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
-import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
+import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
+import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
+import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 
 public class QvtrToQvtcTransformation
 {
@@ -62,9 +68,29 @@ public class QvtrToQvtcTransformation
 	private final @NonNull List<EObject> potentialOrphans = new ArrayList<EObject>();
 	private final @NonNull List<EObject> traceRoots = new ArrayList<EObject>();
 	private final @NonNull List<EObject> coreRoots = new ArrayList<EObject>();
-	private Key keyforClass;;
+	private final @NonNull Map<Variable, Variable> variableTrace = new HashMap<Variable, Variable>();
+	
+	private Key keyforClass;
+	private boolean doGlobalSearch = true;
+	private final @NonNull MetaModelManager metaModelManager;
 
-	public QvtrToQvtcTransformation(@NonNull Resource qvtrModel, @NonNull Resource qvtcModel, @Nullable Resource qvtcTraceModel) {
+	private QVTcoreMappingKey mappings = new QVTcoreMappingKey();
+	
+	private QVTcoreBaseGuardPatternKey guardPatterns = new QVTcoreBaseGuardPatternKey();
+
+	private QVTcoreBaseBottomPatternKey botttomPatterns = new QVTcoreBaseBottomPatternKey();
+	
+	private QVTcoreBaseCoreDomainKey coreDomains = new QVTcoreBaseCoreDomainKey();
+
+	private PivotPropertyKey properties = new PivotPropertyKey();
+
+	private PivotVariableKey variables = new PivotVariableKey();
+	
+	private PivotVariableKey realizedVariables = new PivotVariableKey();
+	
+	public QvtrToQvtcTransformation(@NonNull MetaModelManager metaModelManager, @NonNull Resource qvtrModel, @NonNull Resource qvtcModel, @Nullable Resource qvtcTraceModel) {
+		
+		this.metaModelManager = metaModelManager;
 		this.qvtrModel = qvtrModel;		
 		this.qvtcModel = qvtcModel;
 		this.qvtcTraceModel = qvtcTraceModel;
@@ -79,18 +105,30 @@ public class QvtrToQvtcTransformation
 					break;
 				}
 			}
+			// Populate bindsTo of DomainPattern
+			if (eo instanceof DomainPattern) {
+				DomainPattern dp = (DomainPattern) eo;
+				TemplateExp te = dp.getTemplateExpression();
+				dp.getBindsTo().add(te.getBindsTo());
+				if (te instanceof ObjectTemplateExp) {
+					dp.getBindsTo().addAll(getNestedBindToVariable((ObjectTemplateExp) te));
+				}
+			}
 		}
 	}
-
+	
+	
 	public void addOrphan(@NonNull EObject eObject) {
 		potentialOrphans.add(eObject);
 	}
-	
+
+
 	// Save the qvtc resource
 	public void dispose() {
 		// What about the trace model? we need to separate them
 		//qvtcSource.getContents().addAll(traceData.getRootOutputELements());
 	}
+
 
 	public void execute() {
 		executeFactory(RelationalTransformationToTracePackage.FACTORY);
@@ -120,20 +158,12 @@ public class QvtrToQvtcTransformation
 		}
 	}
 	
+	
 	public void executeNestedRule(@NonNull Rule rule) {
 		if (!rule.hasExecuted()) {
 			rule.check();
 			if (rule.when()) {
 				rule.instantiateOutput();
-	/*			for (EObject eo : rule.enforce(qvtcModelElements)) {
-					if (qvtcModelElements.containsKey(eo.getClass())) {
-						qvtcModelElements.get(eo.getClass()).add(eo);
-					} else {
-						List<EObject> temp = new ArrayList<EObject>();
-						temp.add(eo);
-						qvtcModelElements.put(eo.getClass(), temp);
-					}
-				} */
 				rule.setExecuted(true);
 				rule.where();
 				rule.setAttributes();
@@ -143,7 +173,8 @@ public class QvtrToQvtcTransformation
 			traceData.addRecord(rule);
 		}
 	}
-	
+
+
 	public void executeTopLevelRule(@NonNull Rule rule) {
 		if (!rule.hasExecuted()) {
 			rule.check();
@@ -158,28 +189,179 @@ public class QvtrToQvtcTransformation
 			}
 		}
 	}
+
+	public @NonNull BottomPattern findBottomPattern(@NonNull Area area) {
+		BottomPattern mb = null;
+		if (doGlobalSearch) {
+			mb = botttomPatterns.get(area);
+		}
+		if (mb == null) {
+			mb = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
+			assert mb!= null;
+			mb.setArea(area);
+			mb.getBindsTo();
+			botttomPatterns.add(mb);
+			//addOrphan(mb);
+		}
+		return mb;
+	}
+
+	public @NonNull CoreDomain findCoreDomain(String name, org.eclipse.qvtd.pivot.qvtbase.Rule rule) {
+		
+		CoreDomain md = null;
+		if (doGlobalSearch) {
+			md = coreDomains.get(name, rule);
+		}
+		if (md == null) {
+			md = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
+			assert md!= null;
+			md.setName(name);
+			md.setRule(rule);
+			coreDomains.add(md);
+			//addOrphan(md);
+		}
+		return md;
+	}
 	
+	public @NonNull GuardPattern findGuardPattern(@NonNull Area area) {
+		
+		GuardPattern mg = null;
+		if (doGlobalSearch) {
+			 mg = guardPatterns.get(area);
+		}
+		if (mg == null) {
+			mg = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
+			assert mg!= null;
+			mg.setArea(area);
+			guardPatterns.add(mg);
+			//addOrphan(mg);
+		}
+		
+		return mg;
+	}
+	
+	public @NonNull Mapping findMapping(@NonNull String mn, @NonNull Transformation mt) {
+		
+		Mapping m = null;
+		if (doGlobalSearch) {
+			m = mappings.get(mn, mt);
+		}
+		if (m == null) {
+			m = QVTcoreFactory.eINSTANCE.createMapping();
+			assert m!= null;
+			m.setName(mn);
+			m.setTransformation(mt);
+			mappings.add(m);
+			//addOrphan(m);
+		}
+		return m;
+	}
+	
+	public Property findProperty(String name, Type owningType) {
+		
+		Property p = null;
+		if (doGlobalSearch) {
+			p = properties.get(name, owningType);
+		}
+		if (p == null) {
+			p = PivotFactory.eINSTANCE.createProperty();
+			assert p!= null;
+			p.setName(name);
+			p.setOwningType(owningType);
+			properties.add(p);
+			// addOrphan(p); properties are never orphans
+		}
+		return p;
+	}
+	
+	public @NonNull RealizedVariable findRealizedVariable(String name, Type type) {
+		
+		RealizedVariable rv = null;
+		if (doGlobalSearch) {
+			rv = (RealizedVariable) realizedVariables.get(name, type);
+		}
+		if (rv == null) {
+			rv = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
+			assert rv!= null;
+			rv.setName(name);
+			rv.setType(type);
+			realizedVariables.add(rv);
+			addOrphan(rv);
+		}
+		return rv;
+	}
+
+	public @NonNull Variable findVariable(String name, Type type) {
+		
+		Variable v = null;
+		if (doGlobalSearch) {
+			v = (Variable) variables.get(name, type);
+		}
+		if (v == null) {
+			v = PivotFactory.eINSTANCE.createVariable();
+			assert v!= null;
+			v.setName(name);
+			v.setType(type);
+			variables.add(v);
+			addOrphan(v);
+		}
+		return v;
+	}
+	
+	public @NonNull Collection<? extends EObject> getCoreRoots() {
+		return coreRoots;
+	}
+
 	public Key getKeyforClass() {
 		return keyforClass;
 	}
+	
+	/**
+	 * @return the metaModelManager
+	 */
+	public MetaModelManager getMetaModelManager() {
+		return metaModelManager;
+	}
 
+	private List<Variable> getNestedBindToVariable(ObjectTemplateExp ote) {
+		List<Variable> vars = new ArrayList<Variable>();
+		for (PropertyTemplateItem p : ote.getPart()) {
+			OCLExpression te = p.getValue();
+			if (te instanceof ObjectTemplateExp) {
+				vars.add(((ObjectTemplateExp)te).getBindsTo());
+				vars.addAll(getNestedBindToVariable((ObjectTemplateExp) te));
+			}
+		}
+		return vars;
+	}
+	
 	/**
 	 * @return the qvtcSource
 	 */
 	public Resource getQvtcSource() {
 		return qvtcModel;
 	}
-
+	
 	public @Nullable Rule getRecord(@NonNull RuleBindings relationsBindings) {
 		return traceData.getRecord(relationsBindings);
 	}
-
-	public @NonNull Collection<? extends EObject> getCoreRoots() {
-		return coreRoots;
-	}
-
+	
 	public @NonNull Collection<? extends EObject> getTraceRoots() {
 		return traceRoots;
+	}
+	
+	public @NonNull VariableDeclaration getVariableTrace(@NonNull Variable referredVariable) {
+		
+		Variable rf = variableTrace.get(referredVariable);
+		assert rf != null;
+		return rf;
+	}
+	
+	/**
+	 * @return the doGlobalSearch
+	 */
+	public boolean isDoGlobalSearch() {
+		return doGlobalSearch;
 	}
 	
 	// Create the top rules, and search the input model for the appropriate types, when possible?
@@ -202,93 +384,11 @@ public class QvtrToQvtcTransformation
 		}
 	}
 	
-	QVTcoreMappingKey mappings = new QVTcoreMappingKey();
-	
-	public @NonNull Mapping findMapping(@NonNull String mn, @NonNull Transformation mt) {
-		Mapping m = mappings.get(mn, mt);
-		if (m == null) {
-			m = QVTcoreFactory.eINSTANCE.createMapping();
-			m.setName(mn);
-			m.setTransformation(mt);
-			mappings.add(m);
-			addOrphan(m);
-		}
-		assert m!= null;
-		return m;
-	}
-	
-	QVTcoreBaseGuardPatternKey guardPatterns = new QVTcoreBaseGuardPatternKey();
-
-	public @NonNull GuardPattern findGuardPattern(@NonNull Area area) {
-		GuardPattern mg = guardPatterns.get(area);
-		if (mg == null) {
-			mg = QVTcoreBaseFactory.eINSTANCE.createGuardPattern();
-			mg.setArea(area);
-			guardPatterns.add(mg);
-			addOrphan(mg);
-		}
-		assert mg!= null;
-		return mg;
-	}
-	
-	QVTcoreBaseBottomPatternKey botttomPatterns = new QVTcoreBaseBottomPatternKey();
-
-	public @NonNull BottomPattern findBottomPattern(@NonNull Area area) {
-		BottomPattern mb = botttomPatterns.get(area);
-		if (mb == null) {
-			mb = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
-			mb.setArea(area);
-			mb.getBindsTo();
-			botttomPatterns.add(mb);
-			addOrphan(mb);
-		}
-		assert mb!= null;
-		return mb;
-	}
-	
-	QVTcoreBaseCoreDomainKey coreDomains = new QVTcoreBaseCoreDomainKey();
-
-	public @NonNull CoreDomain findCoreDomain(String name, org.eclipse.qvtd.pivot.qvtbase.Rule rule) {
+	public void putVariableTrace(@NonNull Variable rv, @NonNull Variable mv) {
 		
-		CoreDomain md = coreDomains.get(name, rule);
-		if (md == null) {
-			md = QVTcoreBaseFactory.eINSTANCE.createCoreDomain();
-			md.setName(name);
-			md.setRule(rule);
-			coreDomains.add(md);
-			addOrphan(md);
-		}
-		assert md!= null;
-		return md;
+		variableTrace.put(rv, mv);
 	}
-	
-	PivotVariableKey variables = new PivotVariableKey();
-	PivotVariableKey realizedVariables = new PivotVariableKey();
-	
-	public @NonNull Variable findVariable(String name, Type type) {
-		Variable rv = (Variable) variables.get(name, type);
-		if (rv == null) {
-			rv = PivotFactory.eINSTANCE.createVariable();
-			rv.setName(name);
-			rv.setType(type);
-			variables.add(rv);
-			addOrphan(rv);
-		}
-		return rv;
-	}
-	
-	public @NonNull RealizedVariable findRealizedVariable(String name, Type type) {
-		RealizedVariable rv = (RealizedVariable) realizedVariables.get(name, type);
-		if (rv == null) {
-			rv = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
-			rv.setName(name);
-			rv.setType(type);
-			realizedVariables.add(rv);
-			addOrphan(rv);
-		}
-		return rv;
-	}
-	
+
 	public void save(@NonNull Resource asResource, @NonNull Collection<? extends EObject> eObjects, @NonNull Map<Object, Object> options) throws IOException {
         Root root = PivotFactory.eINSTANCE.createRoot();
         root.setExternalURI(asResource.getURI().toString());
@@ -303,5 +403,14 @@ public class QvtrToQvtcTransformation
         }
 		asResource.save(options);
 	}
+
+	/**
+	 * @param doGlobalSearch the doGlobalSearch to set
+	 */
+	public void setDoGlobalSearch(boolean doGlobalSearch) {
+		this.doGlobalSearch = doGlobalSearch;
+	}
+
+	
 
 }

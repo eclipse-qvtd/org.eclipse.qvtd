@@ -50,7 +50,6 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 		public @Nullable Rule createRule(
 				@NonNull QvtrToQvtcTransformation transformation,
 				@NonNull List<EObject> eos) {
-			// TODO Auto-generated method stub
 			return null;
 		}
 	}
@@ -59,6 +58,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 	{
 		// Relations
 		@NonNull private RelationDomain rd;
+		@SuppressWarnings("unused")
 		@NonNull private TypedModel dir;
 		@NonNull private String tmn;
 		@NonNull private String dn;
@@ -78,6 +78,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 		@Nullable private GuardPattern dg;
 		@Nullable private BottomPattern db;
 		@Nullable private Variable mtev;
+		@SuppressWarnings("unused")
 		@Nullable public List<Variable> mbvars;
 		
 		
@@ -151,13 +152,17 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 			if (rd.getPattern().getTemplateExpression() instanceof ObjectTemplateExp) {
 				//Mapping m = QVTcoreFactory.eINSTANCE.createMapping();
 				String dn = rd.getName();
+				assert dn != null;
 				TypedModel dir = rd.getTypedModel();
 				String tmn = dir.getName();
+				assert tmn != null;
 				List<Package> up = dir.getUsedPackage();
+				assert up != null;
 				DomainPattern dp = rd.getPattern();
 				List<Variable> domainVars = dp.getBindsTo();
 				ObjectTemplateExp te = (ObjectTemplateExp) dp.getTemplateExpression();
 				Variable tev = te.getBindsTo();
+				assert tev != null;
 				List<RelationDomain> rOppositeDomains = new ArrayList<RelationDomain>();
 				Iterator<Domain> it = r.getDomain().iterator();
 				while (it.hasNext()) {
@@ -289,16 +294,6 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 		unsharedWhereVars.addAll(sharedDomainVars);
 		Set<Variable> unsharedWhenVars = new HashSet<Variable>(whenVars);
 		unsharedWhenVars.removeAll(allDomainVars);
-		
-		RelationToTraceClass whenRule = new RelationToTraceClass(transformation, r);
-		RuleBindings whenBindings = whenRule.getRuleBindings();
-		RelationToTraceClass whenRuleRecord = (RelationToTraceClass) transformation.getRecord(whenBindings);
-		//Rule whenRule = RelationToTraceClass.FACTORY.createRule(transformation, r);
-		Type tc = null;
-		if (whenRuleRecord != null && whenRuleRecord.hasExecuted()) {
-			tc = (Type) whenRuleRecord.getCore();
-		}
-		assert tc != null;
 		for (SubRecord subRecord : subRecords) {
 			Set<Variable> oppositeDomainVars = new HashSet<Variable>();
 			//= rOppositeDomains->iterate(d; vars: Set(essentialocl::Variable) = Set{} |
@@ -321,7 +316,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 			RealizedVariable mtev = relations.doRVarToMRealizedVar(subRecord.tev);
 			assert mtev != null;
 			subRecord.mtev = mtev;
-			RealizedVariable tcv = relations.doRelationDomainToTraceClassVar(r, subRecord.rd, tc);
+			RealizedVariable tcv = relations.doRelationDomainToTraceClassVar(r, subRecord.rd);
 			assert tcv != null;
 			subRecord.tcv = tcv;
 			List<Variable> mbvars = relations.doRVarSetToMVarSet(new ArrayList<Variable>(unsharedWhereVars));
@@ -342,25 +337,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 			assert mb != null;
 			subRecord.mb = mb;
 			relations.doRPredicateSetToMBPredicateSet(new ArrayList<Predicate>(predicatesWithVarBindings), mb);
-			
 		}
-		// T6
-		/*
-		for (SubRecord subRecord : subRecords) {
-			Relation r = ruleBindings.get(RELATIONS_r);
-			assert (r != null);
-			//RelationDomainToTraceClassVar(rdSeq, tcv);
-			Rule innerRule = new RelationDomainToTraceClassVar(transformation, r, subRecord.rd);
-			if (innerRule != null) {
-				assert !innerRule.hasExecuted();
-				transformation.executeNestedRule(innerRule);
-				RealizedVariable tcv = (RealizedVariable) innerRule.getCore();
-				assert tcv != null;
-				subRecord.tcv = tcv;
-			}
-			//innerRule = new RWhenPatternToMGuardPattern(transformation);
-		}
-		*/
 	}
 	
 }
