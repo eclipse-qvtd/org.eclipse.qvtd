@@ -93,7 +93,7 @@ public class SubTemplateToTraceClassProps extends AbstractRule
 	@Override
 	public void instantiateOutput() {
 		for (SubRecord subRecord : subRecords) {
-			Property a = PivotFactory.eINSTANCE.createProperty();
+			Property a = transformation.findProperty(subRecord.vn, rc);
 			assert a != null;
 			transformation.addOrphan(a);
 			subRecord.a = a;
@@ -109,9 +109,9 @@ public class SubTemplateToTraceClassProps extends AbstractRule
 		for (SubRecord subRecord : subRecords) {
 			Property a = subRecord.a;
 			assert a != null;
-			a.setName(subRecord.vn);
+			//a.setName(subRecord.vn);
 			a.setType(subRecord.c);
-			rc.getOwnedAttribute().add(a);
+			//rc.getOwnedAttribute().add(a);
 		}
 		
 	}

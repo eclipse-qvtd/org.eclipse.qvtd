@@ -126,15 +126,17 @@ public class RelationToTraceClass extends AbstractRule
 	
 	@Override
 	public void instantiateOutput() {
-		if (rc != null) {
-			rc = PivotFactory.eINSTANCE.createClass();
-		}
+		//if (rc != null) {
+		//	rc = PivotFactory.eINSTANCE.createClass();
+		//}
+		// HACK rc should be instantiated here, where a name and type are defined
+		// Since it was instantiated before, we need to set its name
 		assert rc != null;
-		transformation.addOrphan(rc);
+		rc.setName("T"+rn);
 		for (SubRecord subRecord : subRecords) {
-			Property a = PivotFactory.eINSTANCE.createProperty();
+			//Property a = PivotFactory.eINSTANCE.createProperty();
+			Property a = transformation.findProperty(subRecord.vn, rc);
 			assert a != null;
-			transformation.addOrphan(a);
 			subRecord.a = a;
 		}
 	}
@@ -145,14 +147,14 @@ public class RelationToTraceClass extends AbstractRule
 	@Override
 	public void setAttributes() {
 		assert rc != null;
-		rc.setName("T"+rn);
+		//rc.setName("T"+rn);
 		rc.setPackage(p);
 		for (SubRecord subRecord : subRecords) {
 			Property a = subRecord.a;
 			assert a != null;
-			a.setName(subRecord.vn);
+			//a.setName(subRecord.vn);
 			a.setType(subRecord.c);
-			rc.getOwnedAttribute().add(a);
+			//rc.getOwnedAttribute().add(a);
 		}
 	}
 	
