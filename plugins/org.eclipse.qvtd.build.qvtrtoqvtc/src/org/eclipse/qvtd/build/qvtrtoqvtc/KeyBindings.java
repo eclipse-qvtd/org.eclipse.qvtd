@@ -74,7 +74,7 @@ public class KeyBindings extends AbstractBindings {
 			assert key != null;
 			Object thisValue = get((KeyKey<?>) key);
 			Object thatValue = rb.get((KeyKey<?>) key);
-			if (thisValue != thatValue)
+			if (!thisValue.equals(thatValue))
 				return false;
 		}
 		return true;
