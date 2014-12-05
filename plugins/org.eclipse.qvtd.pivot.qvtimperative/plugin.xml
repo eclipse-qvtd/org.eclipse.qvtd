@@ -21,7 +21,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated QVTimperative -->
       <package
-            uri="http://www.eclipse.org/qvt/0.9/QVTimperative"
+            uri="http://www.eclipse.org/qvt/2015/QVTimperative"
             class="org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
             genModel="model/QVTimperative.genmodel"/>
    </extension>
@@ -42,7 +42,7 @@
             name="%_UI_QVTimperative_content_type"
             priority="normal">
          <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
-            <parameter name="namespace" value="http://www.eclipse.org/qvt/0.9/QVTimperative"/>
+            <parameter name="namespace" value="http://www.eclipse.org/qvt/2015/QVTimperative"/>
             <parameter name="kind" value="xmi"/>
          </describer>
       </content-type>

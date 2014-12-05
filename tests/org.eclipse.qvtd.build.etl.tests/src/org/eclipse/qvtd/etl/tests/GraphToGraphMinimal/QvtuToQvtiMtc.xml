@@ -29,21 +29,21 @@
             name = "QVTc"
             aliases ="QVT"
 		    modelFile = "${qvtcas}" 
-            metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
+            metamodelUri = "http://www.eclipse.org/qvt/2015/QVTcore"
             read="true" store="false"/>
     	<!-- QVTu -->
         <epsilon.emf.loadModel
             name = "QVTu"
         	aliases ="QVT"
             modelFile = "${qvtuas}" 
-            metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
+            metamodelUri = "http://www.eclipse.org/qvt/2015/QVTcore"
             read="false" store="true"/>
     	<!-- QVTm Flatten  -->
         <epsilon.emf.loadModel
         	name = "QVTmFlatten"
         	aliases ="QVT"
             modelFile = "${qvtmflattenas}" 
-            metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
+            metamodelUri = "http://www.eclipse.org/qvt/2015/QVTcore"
             read="false" store="true"/>
 	</target>
 	

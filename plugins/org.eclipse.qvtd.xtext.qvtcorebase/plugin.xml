@@ -10,7 +10,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated QVTcoreBaseCS -->
       <package
-            uri="http://www.eclipse.org/qvt/0.9/QVTcoreBaseCST"
+            uri="http://www.eclipse.org/qvt/2015/QVTcoreBaseCS"
             class="org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.QVTcoreBaseCSPackage"
             genModel="model/QVTcoreBaseCS.genmodel"/>
    </extension>

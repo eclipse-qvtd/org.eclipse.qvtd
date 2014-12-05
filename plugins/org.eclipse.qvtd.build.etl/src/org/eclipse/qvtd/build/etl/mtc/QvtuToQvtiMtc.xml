@@ -46,14 +46,14 @@
             name = "QVTc"
             aliases ="QVT"
             modelFile = "${qvtcas}" 
-            metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
+            metamodelUri = "http://www.eclipse.org/qvt/2015/QVTcore"
             read="true" store="false"/>
         <!-- QVTu -->
         <epsilon.emf.loadModel
             name = "QVTu"
             aliases ="QVT"
             modelFile = "${qvtuas}" 
-            metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
+            metamodelUri = "http://www.eclipse.org/qvt/2015/QVTcore"
             read="false" store="true"/>
 	    <epsilon.flock originalmodel="QVTc" migratedmodel="QVTu" uri="${QVTcToQVTu}">
 	        <model ref="QVTc"/>
@@ -71,14 +71,14 @@
             name = "QVTu"
             aliases ="QVT"
             modelFile = "${qvtuas}" 
-            metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
+            metamodelUri = "http://www.eclipse.org/qvt/2015/QVTcore"
             read="true" store="false"/>
 		<!-- QVTm Flatten  -->
         <epsilon.emf.loadModel
             name = "QVTmF"
             aliases ="QVT"
             modelFile = "${qvtmas}" 
-            metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
+            metamodelUri = "http://www.eclipse.org/qvt/2015/QVTcore"
             read="false" store="true"/>
         <epsilon.flock originalmodel="QVTu" migratedmodel="QVTmF" uri="${QVTuToQVTm}">
             <model ref="QVTu"/>
@@ -96,14 +96,14 @@
             name = "QVTmF"
             aliases ="QVT"
             modelFile = "${qvtmas}" 
-            metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
+            metamodelUri = "http://www.eclipse.org/qvt/2015/QVTcore"
             read="true" store="false"/>
 		<!-- QVTm Partition  -->
         <epsilon.emf.loadModel
             name = "QVTmP"
             aliases ="QVT"
             modelFile = "${qvtmpartitionas}" 
-            metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
+            metamodelUri = "http://www.eclipse.org/qvt/2015/QVTcore"
             read="false" store="true"/>
 		<epsilon.etl uri="${QVTuToQVTmPartitionLM}">
             <model ref="QVTmF"/>

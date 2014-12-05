@@ -21,7 +21,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated QVTrelation -->
       <package
-            uri="http://www.eclipse.org/qvt/0.9/QVTrelation"
+            uri="http://www.eclipse.org/qvt/2015/QVTrelation"
             class="org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage"
             genModel="model/QVTrelation.genmodel"/>
    </extension>
@@ -44,7 +44,7 @@
             name="%_UI_QVTrelation_content_type"
             priority="normal">
          <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
-            <parameter name="namespace" value="http://www.eclipse.org/qvt/0.9/QVTrelation"/>
+            <parameter name="namespace" value="http://www.eclipse.org/qvt/2015/QVTrelation"/>
             <parameter name="kind" value="xmi"/>
          </describer>
       </content-type>

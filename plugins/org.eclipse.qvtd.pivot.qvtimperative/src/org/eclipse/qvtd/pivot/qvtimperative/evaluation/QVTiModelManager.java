@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.domain.elements.DomainClass;
 import org.eclipse.ocl.examples.domain.elements.DomainPackage;
 import org.eclipse.ocl.examples.domain.elements.DomainType;
 import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
@@ -121,11 +122,11 @@ public class QVTiModelManager implements DomainModelManager
 		}
 	}
 
-	public @NonNull Set<EObject> get(@NonNull DomainType type) {
+	public @NonNull Set<EObject> get(@NonNull DomainClass type) {
 		
 		Set<EObject> elements = new HashSet<EObject>();
 		// Find the typed model for the type
-		DomainPackage p = type.getPackage();
+		DomainPackage p = type.getOwningPackage();
 		for (TypedModel d : modelResourceMap.keySet()) {
 			for (Package up : d.getUsedPackage()) {
 				if (up.equals(p)) {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvtrelationcs" nsURI="http://www.eclipse.org/qvt/0.9/QVTrelationCST"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvtrelationcs" nsURI="http://www.eclipse.org/qvt/2015/QVTrelationCS"
     nsPrefix="qvtrcs">
   <eClassifiers xsi:type="ecore:EClass" name="AbstractDomainCS" abstract="true" eSuperTypes="../../org.eclipse.ocl.examples.xtext.base/model/BaseCS.ecore#//ModelElementCS ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Nameable"/>
   <eClassifiers xsi:type="ecore:EClass" name="CollectionTemplateCS" eSuperTypes="#//TemplateCS">

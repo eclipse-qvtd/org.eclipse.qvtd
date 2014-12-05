@@ -8,7 +8,7 @@
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
-            uri="http://www.eclipse.org/qvt/0.9/QVTrelationCST"
+            uri="http://www.eclipse.org/qvt/2015/QVTrelationCS"
             class="org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.QVTrelationCSPackage"
             genModel="model/QVTrelationCS.genmodel"/>
    </extension>
@@ -29,7 +29,7 @@
             name="%_UI_QVTrelationCS_content_type"
             priority="normal">
          <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
-            <parameter name="namespace" value="http://www.eclipse.org/qvt/0.9/QVTrelationCST"/>
+            <parameter name="namespace" value="http://www.eclipse.org/qvt/2015/QVTrelationCS"/>
          </describer>
       </content-type>
    </extension>

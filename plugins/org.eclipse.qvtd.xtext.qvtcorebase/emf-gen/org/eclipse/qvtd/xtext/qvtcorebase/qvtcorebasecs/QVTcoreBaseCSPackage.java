@@ -48,7 +48,7 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.eclipse.org/qvt/0.9/QVTcoreBaseCST";
+	String eNS_URI = "http://www.eclipse.org/qvt/2015/QVTcoreBaseCS";
 
 	/**
 	 * The package namespace name.
