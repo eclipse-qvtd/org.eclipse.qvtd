@@ -24,7 +24,7 @@ import org.eclipse.jdt.annotation.NonNull;
  * but n implementations of the visitXXX methods..
  */
 public abstract class AbstractQVTbaseVisitor<R, C>
-	extends org.eclipse.ocl.examples.pivot.util.AbstractVisitor<R, C>
+	extends org.eclipse.ocl.pivot.util.AbstractVisitor<R, C>
 	implements QVTbaseVisitor<R>
 {
 	/**

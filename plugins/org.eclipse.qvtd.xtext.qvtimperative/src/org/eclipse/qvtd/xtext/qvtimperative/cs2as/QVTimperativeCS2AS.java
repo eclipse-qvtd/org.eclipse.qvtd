@@ -15,9 +15,9 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
@@ -29,9 +29,9 @@ import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS;
 
 public class QVTimperativeCS2AS extends QVTcoreBaseCS2AS
 {	
-    public static boolean isMiddle(@Nullable org.eclipse.ocl.examples.pivot.Class areaType, @NonNull ElementCS csElement) {
+    public static boolean isMiddle(@Nullable org.eclipse.ocl.pivot.Class areaType, @NonNull ElementCS csElement) {
     	if (areaType != null) {
-    		org.eclipse.ocl.examples.pivot.Package areaPackage = areaType.getOwningPackage();
+    		org.eclipse.ocl.pivot.Package areaPackage = areaType.getOwningPackage();
     		for (EObject eObject = csElement; eObject != null; eObject = eObject.eContainer()) {
     			if (eObject instanceof MappingCS) {
     	    		Element mapping = ((MappingCS)eObject).getPivot();

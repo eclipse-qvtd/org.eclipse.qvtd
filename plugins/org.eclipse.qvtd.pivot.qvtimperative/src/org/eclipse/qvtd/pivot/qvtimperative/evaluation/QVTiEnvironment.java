@@ -13,7 +13,7 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironment;
+import org.eclipse.ocl.pivot.utilities.PivotEnvironment;
 
 public class QVTiEnvironment extends PivotEnvironment
 {

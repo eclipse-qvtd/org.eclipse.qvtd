@@ -13,8 +13,8 @@ package org.eclipse.qvtd.pivot.qvtrelation.utilities;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -38,7 +38,7 @@ public class QVTrelationPrettyPrintVisitor extends QVTtemplatePrettyPrintVisitor
 	}
 
 	public Object visitKey(@NonNull Key object) {
-		org.eclipse.ocl.examples.pivot.Class identifies = object.getIdentifies();
+		org.eclipse.ocl.pivot.Class identifies = object.getIdentifies();
 		if (identifies != null) {
 			context.appendQualifiedType(identifies);
 		}

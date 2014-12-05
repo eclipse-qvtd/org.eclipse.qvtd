@@ -32,7 +32,7 @@ import org.eclipse.ocl.examples.debug.vm.utils.SafeRunner;
 import org.eclipse.ocl.examples.debug.vm.utils.ShallowProcess;
 import org.eclipse.ocl.examples.debug.vm.utils.StreamsProxy;
 import org.eclipse.ocl.examples.debug.vm.utils.VMRuntimeException;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.manager.MetaModelManager;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;

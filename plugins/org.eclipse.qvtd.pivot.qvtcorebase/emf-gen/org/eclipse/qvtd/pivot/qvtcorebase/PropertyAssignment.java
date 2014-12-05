@@ -10,8 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtcorebase;
 
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Property;
 
 /**
  * <!-- begin-user-doc -->

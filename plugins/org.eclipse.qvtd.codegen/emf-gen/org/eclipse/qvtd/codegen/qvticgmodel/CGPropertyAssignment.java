@@ -12,7 +12,7 @@ package org.eclipse.qvtd.codegen.qvticgmodel;
 
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
-import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.pivot.Property;
 
 /**
  * <!-- begin-user-doc -->

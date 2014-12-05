@@ -57,12 +57,12 @@ public interface ObjectTemplateExp extends TemplateExp {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Referred Class</em>' reference.
-	 * @see #setReferredClass(org.eclipse.ocl.examples.pivot.Class)
+	 * @see #setReferredClass(org.eclipse.ocl.pivot.Class)
 	 * @see org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage#getObjectTemplateExp_ReferredClass()
 	 * @model required="true"
 	 * @generated
 	 */
-	org.eclipse.ocl.examples.pivot.Class getReferredClass();
+	org.eclipse.ocl.pivot.Class getReferredClass();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp#getReferredClass <em>Referred Class</em>}' reference.
@@ -72,6 +72,6 @@ public interface ObjectTemplateExp extends TemplateExp {
 	 * @see #getReferredClass()
 	 * @generated
 	 */
-	void setReferredClass(org.eclipse.ocl.examples.pivot.Class value);
+	void setReferredClass(org.eclipse.ocl.pivot.Class value);
 
 } // ObjectTemplateExp

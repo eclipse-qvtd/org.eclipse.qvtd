@@ -12,7 +12,7 @@ package org.eclipse.qvtd.pivot.qvtbase;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.pivot.Model;
+import org.eclipse.ocl.pivot.Model;
 
 /**
  * <!-- begin-user-doc -->

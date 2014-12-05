@@ -17,10 +17,10 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.manager.PivotIdResolver;
+import org.eclipse.ocl.domain.elements.DomainType;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.manager.PivotIdResolver;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -162,7 +162,7 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
 
     @Override
     public @Nullable Object visitImperativeModel(@NonNull ImperativeModel imperativeModel) {
-    	for (org.eclipse.ocl.examples.pivot.Package pkge : imperativeModel.getOwnedPackages()) {
+    	for (org.eclipse.ocl.pivot.Package pkge : imperativeModel.getOwnedPackages()) {
     		pkge.accept(undecoratedVisitor);
     	}
         return true;
@@ -203,7 +203,7 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
     }
 
     @Override
-    public @Nullable Object visitPackage(@NonNull org.eclipse.ocl.examples.pivot.Package pkge) {
+    public @Nullable Object visitPackage(@NonNull org.eclipse.ocl.pivot.Package pkge) {
         return true;
     }
 

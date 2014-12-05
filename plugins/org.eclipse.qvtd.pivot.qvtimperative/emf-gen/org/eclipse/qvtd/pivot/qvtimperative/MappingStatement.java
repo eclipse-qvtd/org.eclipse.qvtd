@@ -11,8 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtimperative;
 
 import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->

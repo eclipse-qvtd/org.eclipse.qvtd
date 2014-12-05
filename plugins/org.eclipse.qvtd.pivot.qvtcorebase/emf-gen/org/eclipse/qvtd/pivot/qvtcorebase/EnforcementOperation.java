@@ -11,8 +11,8 @@
 package org.eclipse.qvtd.pivot.qvtcorebase;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.OperationCallExp;
 
 /**
  * <!-- begin-user-doc -->

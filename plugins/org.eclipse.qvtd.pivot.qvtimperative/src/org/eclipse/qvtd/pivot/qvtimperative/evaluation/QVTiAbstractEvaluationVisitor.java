@@ -14,16 +14,16 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainType;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.VariableExp;
-import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitorImpl;
-import org.eclipse.ocl.examples.pivot.manager.PivotIdResolver;
+import org.eclipse.ocl.domain.elements.DomainType;
+import org.eclipse.ocl.domain.utilities.DomainUtil;
+import org.eclipse.ocl.domain.values.impl.InvalidValueException;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.evaluation.EvaluationVisitorImpl;
+import org.eclipse.ocl.pivot.manager.PivotIdResolver;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -84,7 +84,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
     }
     
     /* (non-Javadoc)
-     * @see org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitorImpl#createNestedEvaluator()
+     * @see org.eclipse.ocl.pivot.evaluation.EvaluationVisitorImpl#createNestedEvaluator()
      */
     @Override
 	public abstract @NonNull QVTiEvaluationVisitor createNestedEvaluator();
@@ -100,7 +100,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	}
 
 	/* (non-Javadoc)
-     * @see org.eclipse.ocl.examples.pivot.evaluation.AbstractEvaluationVisitor#getModelManager()
+     * @see org.eclipse.ocl.pivot.evaluation.AbstractEvaluationVisitor#getModelManager()
      */
     @Override
 	public @NonNull QVTiModelManager getModelManager() {
@@ -490,7 +490,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
         // are being visited for each binding of variable in the mapping. 
         Area area = ((BottomPattern)realizedVariable.eContainer()).getArea();
         Type type = realizedVariable.getType();
-		Object element = type instanceof org.eclipse.ocl.examples.pivot.Class ? ((org.eclipse.ocl.examples.pivot.Class)type).createInstance() : null;
+		Object element = type instanceof org.eclipse.ocl.pivot.Class ? ((org.eclipse.ocl.pivot.Class)type).createInstance() : null;
         if (element != null) {
 	        TypedModel tm = QVTcoreBaseUtil.getTypedModel(area);
 	        assert tm != null;

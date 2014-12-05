@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.examples.pivot.Variable;
+import org.eclipse.ocl.pivot.Variable;
 
 /**
  * <!-- begin-user-doc -->

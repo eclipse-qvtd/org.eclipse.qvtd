@@ -14,7 +14,7 @@ package org.eclipse.qvtd.pivot.qvtbase;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.ocl.examples.pivot.PivotStandaloneSetup;
+import org.eclipse.ocl.pivot.PivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.scoping.QVTbasePivotScoping;
 

@@ -49,7 +49,7 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData;
 import org.eclipse.emf.ecore.xmi.impl.EMOFResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
-import org.eclipse.ocl.examples.domain.utilities.ProjectMap;
+import org.eclipse.ocl.domain.utilities.ProjectMap;
 
 /**
  * Merge the QVT Pivot files intp a single flat package for use by ModelMorf
@@ -65,7 +65,7 @@ public class QVTPivot2FlatQVTPivot
 		ecoreResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
 		ecoreResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("emof", new EMOFResourceFactoryImpl());
 		EcorePackage.eINSTANCE.getClass();
-		ecoreResourceSet.getResource(URI.createPlatformResourceURI("/org.eclipse.ocl.examples.pivot/model/Pivot.ecore", true), true);
+		ecoreResourceSet.getResource(URI.createPlatformResourceURI("/org.eclipse.ocl.pivot/model/Pivot.ecore", true), true);
 		ecoreResourceSet.getResource(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore", true), true);
 		ecoreResourceSet.getResource(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore", true), true);
 		ecoreResourceSet.getResource(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore", true), true);

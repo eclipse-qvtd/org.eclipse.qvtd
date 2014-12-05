@@ -11,7 +11,7 @@
 package	org.eclipse.qvtd.pivot.qvtcore.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.utilities.ASSaver;
+import org.eclipse.ocl.pivot.utilities.ASSaver;
 import org.eclipse.qvtd.pivot.qvtcore.util.AbstractQVTcoreASSaverResolveVisitor;
 
 public class QVTcoreASSaverResolveVisitor extends AbstractQVTcoreASSaverResolveVisitor

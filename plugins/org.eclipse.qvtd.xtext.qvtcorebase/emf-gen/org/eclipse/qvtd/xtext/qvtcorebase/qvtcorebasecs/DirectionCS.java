@@ -34,7 +34,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 public interface DirectionCS extends NamedElementCS {
 	/**
 	 * Returns the value of the '<em><b>Imports</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Package}.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.Package}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Imports</em>' reference list isn't clear,
@@ -46,7 +46,7 @@ public interface DirectionCS extends NamedElementCS {
 	 * @model
 	 * @generated
 	 */
-	EList<org.eclipse.ocl.examples.pivot.Package> getImports();
+	EList<org.eclipse.ocl.pivot.Package> getImports();
 
 	/**
 	 * Returns the value of the '<em><b>Uses</b></em>' reference list.

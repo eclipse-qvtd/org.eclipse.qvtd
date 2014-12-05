@@ -15,13 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.CollectionType;
-import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.VoidType;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VoidType;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.ImportCS;
@@ -107,9 +107,9 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		List<Mapping> asMappings = null;
 		List<Function> asQueries = null;
 		List<Transformation> asTransformations = null;
-		for (org.eclipse.ocl.examples.pivot.Package asPackage : asModel.getOwnedPackages()) {
+		for (org.eclipse.ocl.pivot.Package asPackage : asModel.getOwnedPackages()) {
 			if ("".equals(asPackage.getName())) {
-				for (org.eclipse.ocl.examples.pivot.Class asClass : asPackage.getOwnedClasses()) {
+				for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
 					if (asClass instanceof Transformation) {
 						if (asTransformations == null) {
 							asTransformations = new ArrayList<Transformation>();

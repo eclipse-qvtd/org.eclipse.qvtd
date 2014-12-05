@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.manager.MetaModelManager;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
 public class QVTiRootEvaluationEnvironment extends QVTiEvaluationEnvironment

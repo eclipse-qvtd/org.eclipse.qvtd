@@ -15,9 +15,9 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.scoping.Attribution;
-import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.scoping.Attribution;
+import org.eclipse.ocl.pivot.scoping.EnvironmentView;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcore.attributes.MappingAttribution;

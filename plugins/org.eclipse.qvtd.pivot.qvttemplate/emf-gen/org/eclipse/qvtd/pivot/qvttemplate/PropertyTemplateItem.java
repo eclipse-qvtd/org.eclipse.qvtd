@@ -11,9 +11,9 @@
 package org.eclipse.qvtd.pivot.qvttemplate;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Property;
 
 /**
  * <!-- begin-user-doc -->
@@ -129,7 +129,7 @@ public interface PropertyTemplateItem extends EObject, Element {
 	 * @return the value of the '<em>Is Opposite</em>' attribute.
 	 * @see #setIsOpposite(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage#getPropertyTemplateItem_IsOpposite()
-	 * @model default="false" dataType="org.eclipse.ocl.examples.pivot.Boolean"
+	 * @model default="false" dataType="org.eclipse.ocl.pivot.Boolean"
 	 * @generated
 	 */
 	boolean isIsOpposite();

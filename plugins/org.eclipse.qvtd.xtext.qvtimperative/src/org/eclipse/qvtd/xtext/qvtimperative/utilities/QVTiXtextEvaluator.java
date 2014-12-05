@@ -15,8 +15,8 @@ import java.io.IOException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.base.utilities.CS2ASResourceAdapter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -46,8 +46,8 @@ public class QVTiXtextEvaluator extends QVTiPivotEvaluator
     			asResource = adapter.getASResource(xtextResource);
     			for (EObject eContent : asResource.getContents()) {
     				if (eContent instanceof ImperativeModel) {
-    	    			for (org.eclipse.ocl.examples.pivot.Package asPackage : ((ImperativeModel)eContent).getOwnedPackages()) {
-        	    			for (org.eclipse.ocl.examples.pivot.Class asClass : asPackage.getOwnedClasses()) {
+    	    			for (org.eclipse.ocl.pivot.Package asPackage : ((ImperativeModel)eContent).getOwnedPackages()) {
+        	    			for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
         	    				if (asClass instanceof Transformation) {
         	    	                return (Transformation)asClass;
         	    				}

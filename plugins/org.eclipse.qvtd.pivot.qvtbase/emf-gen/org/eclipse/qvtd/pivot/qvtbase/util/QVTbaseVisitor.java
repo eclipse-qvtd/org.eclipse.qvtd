@@ -22,7 +22,7 @@ import org.eclipse.jdt.annotation.Nullable;
 
 /**
  */
-public interface QVTbaseVisitor<R> extends org.eclipse.ocl.examples.pivot.util.Visitor<R>
+public interface QVTbaseVisitor<R> extends org.eclipse.ocl.pivot.util.Visitor<R>
 {
 	@Nullable R visitBaseModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.BaseModel object);
 	@Nullable R visitDomain(@NonNull org.eclipse.qvtd.pivot.qvtbase.Domain object);

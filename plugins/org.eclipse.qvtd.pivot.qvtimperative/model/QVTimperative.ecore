@@ -22,7 +22,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="mappingStatement" eType="#//MappingStatement"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MappingCall" eSuperTypes="#//MappingStatement ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//ReferringElement">
+  <eClassifiers xsi:type="ecore:EClass" name="MappingCall" eSuperTypes="#//MappingStatement ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//ReferringElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A MappingCall specifies the invocation of a referredMapping with a set of bindings&#xA;of the bound variables of the referredMapping to values provided in the invocation.&#xA;Where Collections of values are provided for isLoop bindings, a distinct invocation&#xA;is performed for each distinct permutation of Collection elements."/>
     </eAnnotations>
@@ -39,7 +39,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MappingCallBinding" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Element">
+  <eClassifiers xsi:type="ecore:EClass" name="MappingCallBinding" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Element">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A MappingCallBinding specifies the binding of a single variable as part of&#xA;a MappingCall. A value is bound to the variable. OPtionally isLoop may be true&#xA;to indicate that the value is a collection of values, each of which is to&#xA;be used as part of a distinct invocation."/>
     </eAnnotations>
@@ -50,19 +50,19 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="boundVariable" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Variable">
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The variable with the mappingCall.referredMapping bound to the/a value"/>
       </eAnnotations>
     </eStructuralFeatures>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//OCLExpression"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
         containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The value or collection of values to bind to boundVariable"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MappingLoop" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//LoopExp #//MappingStatement">
+  <eClassifiers xsi:type="ecore:EClass" name="MappingLoop" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//LoopExp #//MappingStatement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An Imperative MappingLoop support an iterated nested mapping call."/>
     </eAnnotations>
@@ -74,7 +74,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="mappingStatements" upperBound="-1"
         eType="#//MappingStatement" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MappingStatement" abstract="true" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//OCLExpression">
+  <eClassifiers xsi:type="ecore:EClass" name="MappingStatement" abstract="true" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A MappingCall specifies the invocation of a referredMapping with a set of bindings&#xA;of the bound variables of the referredMapping to values provided in the invocation.&#xA;Where Collections of values are provided for isLoop bindings, a distinct invocation&#xA;is performed for each distinct permutation of Collection elements."/>
     </eAnnotations>
@@ -89,7 +89,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="MiddlePropertyCallExp" eSuperTypes="../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//OppositePropertyCallExp">
+  <eClassifiers xsi:type="ecore:EClass" name="MiddlePropertyCallExp" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OppositePropertyCallExp">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A MiddlePropertyCallExp identifies a property call from the middle model.&#xA;It adds an additional feature to facilitate efficient access to a cache of&#xA;non-navigable outer-to-middle opposites."/>
     </eAnnotations>
@@ -104,7 +104,7 @@
       <details key="documentation" value="A VariablePredicate validates the initialization of a guard pattern varaible."/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetVariable" lowerBound="1"
-        eType="ecore:EClass ../../org.eclipse.ocl.examples.pivot/model/Pivot.ecore#//Variable">
+        eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="predicate"/>
       </eAnnotations>

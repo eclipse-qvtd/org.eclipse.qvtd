@@ -24,7 +24,7 @@ import org.eclipse.jdt.annotation.Nullable;
  * An AbstractDelegatingQVTbaseVisitor delegates all visits.
  */
 public abstract class AbstractDelegatingQVTbaseVisitor<R, C, D extends QVTbaseVisitor<R>>
-	extends org.eclipse.ocl.examples.pivot.util.AbstractDelegatingVisitor<R, C, D>
+	extends org.eclipse.ocl.pivot.util.AbstractDelegatingVisitor<R, C, D>
 	implements QVTbaseVisitor<R>
 {
 	protected AbstractDelegatingQVTbaseVisitor(@NonNull D delegate, @NonNull C context) {
@@ -32,7 +32,7 @@ public abstract class AbstractDelegatingQVTbaseVisitor<R, C, D extends QVTbaseVi
 	}
 
 	@Override
-	public @Nullable R visiting(@NonNull org.eclipse.ocl.examples.pivot.util.Visitable visitable) {
+	public @Nullable R visiting(@NonNull org.eclipse.ocl.pivot.util.Visitable visitable) {
 		return delegate.visiting(visitable);
 	}
 

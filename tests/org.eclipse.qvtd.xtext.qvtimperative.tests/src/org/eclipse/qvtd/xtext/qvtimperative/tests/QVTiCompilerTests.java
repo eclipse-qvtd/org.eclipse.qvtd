@@ -25,19 +25,19 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
-import org.eclipse.ocl.examples.domain.elements.DomainEnvironment;
-import org.eclipse.ocl.examples.domain.evaluation.AbstractTransformation;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.evaluation.DomainModelManager;
-import org.eclipse.ocl.examples.domain.types.IdResolver;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
+import org.eclipse.ocl.domain.elements.DomainEnvironment;
+import org.eclipse.ocl.domain.evaluation.AbstractTransformation;
+import org.eclipse.ocl.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.domain.evaluation.DomainModelManager;
+import org.eclipse.ocl.domain.types.IdResolver;
+import org.eclipse.ocl.domain.utilities.DomainUtil;
 import org.eclipse.ocl.examples.emf.validation.validity.utilities.ComposedEValidator;
-import org.eclipse.ocl.examples.library.executor.ExecutorManager;
-import org.eclipse.ocl.examples.library.oclstdlib.OCLstdlibTables;
-import org.eclipse.ocl.examples.pivot.manager.CompleteEnvironment;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
-import org.eclipse.ocl.examples.pivot.validation.PivotEObjectValidator;
+import org.eclipse.ocl.library.executor.ExecutorManager;
+import org.eclipse.ocl.library.oclstdlib.OCLstdlibTables;
+import org.eclipse.ocl.pivot.manager.CompleteEnvironment;
+import org.eclipse.ocl.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.manager.MetaModelManagerResourceSetAdapter;
+import org.eclipse.ocl.pivot.validation.PivotEObjectValidator;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.base.utilities.CS2ASResourceAdapter;
@@ -206,8 +206,8 @@ public class QVTiCompilerTests extends LoadTestCase
 		Resource resource = doLoad_ConcreteWithOCL(transformURI);
 		for (EObject eObject : resource.getContents()) {
 			if (eObject instanceof ImperativeModel) {
-				for (org.eclipse.ocl.examples.pivot.Package asPackage : ((ImperativeModel)eObject).getOwnedPackages()) {
-					for (org.eclipse.ocl.examples.pivot.Class asClass : asPackage.getOwnedClasses()) {
+				for (org.eclipse.ocl.pivot.Package asPackage : ((ImperativeModel)eObject).getOwnedPackages()) {
+					for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
 						if (asClass instanceof Transformation) {
 							QVTiCodeGenerator cg = new QVTiCodeGenerator(DomainUtil.nonNullState(metaModelManager), (Transformation)asClass);
 							QVTiCodeGenOptions options = cg.getOptions();

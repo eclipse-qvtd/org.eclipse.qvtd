@@ -12,10 +12,10 @@ package org.eclipse.qvtd.pivot.qvtbase.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.pivot.attributes.ModelAttribution;
-import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
-import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
+import org.eclipse.ocl.domain.utilities.DomainUtil;
+import org.eclipse.ocl.pivot.attributes.ModelAttribution;
+import org.eclipse.ocl.pivot.scoping.EnvironmentView;
+import org.eclipse.ocl.pivot.scoping.ScopeView;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Unit;
 
@@ -26,7 +26,7 @@ public class BaseModelAttribution extends ModelAttribution
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		BaseModel targetElement = (BaseModel)target;
-		org.eclipse.ocl.examples.pivot.Package unnamedPackage = DomainUtil.getNamedElement(targetElement.getOwnedPackages(), "");
+		org.eclipse.ocl.pivot.Package unnamedPackage = DomainUtil.getNamedElement(targetElement.getOwnedPackages(), "");
 		if (unnamedPackage != null) {
 			environmentView.addAllTypes(unnamedPackage);
 		}

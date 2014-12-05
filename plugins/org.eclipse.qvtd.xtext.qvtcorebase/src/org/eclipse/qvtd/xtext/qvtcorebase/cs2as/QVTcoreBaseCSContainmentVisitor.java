@@ -18,11 +18,11 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.pivot.Namespace;
-import org.eclipse.ocl.examples.pivot.PivotPackage;
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.domain.utilities.DomainUtil;
+import org.eclipse.ocl.pivot.Namespace;
+import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
@@ -126,19 +126,19 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 		super(context);
 	}	
 
-	protected @NonNull List<org.eclipse.ocl.examples.pivot.Package> resolveTransformations(@NonNull List<TransformationCS> csTransformations, @NonNull BaseModel asCoreModel) {
-		List<org.eclipse.ocl.examples.pivot.Package> asPackages = new ArrayList<org.eclipse.ocl.examples.pivot.Package>();
-		Map<org.eclipse.ocl.examples.pivot.Package, List<org.eclipse.ocl.examples.pivot.Package>> package2ownedPackages = new HashMap<org.eclipse.ocl.examples.pivot.Package, List<org.eclipse.ocl.examples.pivot.Package>>();
-		Map<org.eclipse.ocl.examples.pivot.Package, List<org.eclipse.ocl.examples.pivot.Class>> package2ownedClasses = new HashMap<org.eclipse.ocl.examples.pivot.Package, List<org.eclipse.ocl.examples.pivot.Class>>();
+	protected @NonNull List<org.eclipse.ocl.pivot.Package> resolveTransformations(@NonNull List<TransformationCS> csTransformations, @NonNull BaseModel asCoreModel) {
+		List<org.eclipse.ocl.pivot.Package> asPackages = new ArrayList<org.eclipse.ocl.pivot.Package>();
+		Map<org.eclipse.ocl.pivot.Package, List<org.eclipse.ocl.pivot.Package>> package2ownedPackages = new HashMap<org.eclipse.ocl.pivot.Package, List<org.eclipse.ocl.pivot.Package>>();
+		Map<org.eclipse.ocl.pivot.Package, List<org.eclipse.ocl.pivot.Class>> package2ownedClasses = new HashMap<org.eclipse.ocl.pivot.Package, List<org.eclipse.ocl.pivot.Class>>();
 		for (TransformationCS csTransformation : csTransformations) {
-			org.eclipse.ocl.examples.pivot.Package asParent = null;
+			org.eclipse.ocl.pivot.Package asParent = null;
 			Transformation asTransformation = PivotUtil.getPivot(Transformation.class, csTransformation);
 			PathNameCS pathName = csTransformation.getPathName();
 			List<PathElementCS> ownedPathElements = pathName != null ? pathName.getOwnedPathElements() : null;
 			if ((ownedPathElements == null) || ownedPathElements.isEmpty()) {
 				asParent = DomainUtil.getNamedElement(asCoreModel.getOwnedPackages(), "");
 				if (asParent == null) {
-					asParent = context.refreshModelElement(org.eclipse.ocl.examples.pivot.Package.class, PivotPackage.Literals.PACKAGE, null);
+					asParent = context.refreshModelElement(org.eclipse.ocl.pivot.Package.class, PivotPackage.Literals.PACKAGE, null);
 					asParent.setName("");
 				}
 				asPackages.add(asParent);
@@ -146,8 +146,8 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 			else {
 				for (PathElementCS pathElement : ownedPathElements) {
 					String name = pathElement.toString();
-					List<org.eclipse.ocl.examples.pivot.Package> asOldPackages;
-					List<org.eclipse.ocl.examples.pivot.Package> asNewPackages;
+					List<org.eclipse.ocl.pivot.Package> asOldPackages;
+					List<org.eclipse.ocl.pivot.Package> asNewPackages;
 					if (asParent == null) {
 						asOldPackages = asCoreModel.getOwnedPackages();
 						asNewPackages = asPackages;
@@ -156,30 +156,30 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 						asOldPackages = asParent.getOwnedPackages();
 						asNewPackages = package2ownedPackages.get(asParent);
 						if (asNewPackages == null) {
-							asNewPackages = new ArrayList<org.eclipse.ocl.examples.pivot.Package>();
+							asNewPackages = new ArrayList<org.eclipse.ocl.pivot.Package>();
 							package2ownedPackages.put(asParent, asNewPackages);
 						}
 					}
-					org.eclipse.ocl.examples.pivot.Package asPackage = DomainUtil.getNamedElement(asOldPackages, name);
+					org.eclipse.ocl.pivot.Package asPackage = DomainUtil.getNamedElement(asOldPackages, name);
 					if (asPackage == null) {
-						asPackage = context.refreshModelElement(org.eclipse.ocl.examples.pivot.Package.class, PivotPackage.Literals.PACKAGE, null);
+						asPackage = context.refreshModelElement(org.eclipse.ocl.pivot.Package.class, PivotPackage.Literals.PACKAGE, null);
 						asPackage.setName(name);
 					}
 					asNewPackages.add(asPackage);
 					asParent = asPackage;
 				}
 			}
-			List<org.eclipse.ocl.examples.pivot.Class> asNewTransformations = package2ownedClasses.get(asParent);
+			List<org.eclipse.ocl.pivot.Class> asNewTransformations = package2ownedClasses.get(asParent);
 			if (asNewTransformations == null) {
-				asNewTransformations = new ArrayList<org.eclipse.ocl.examples.pivot.Class>();
+				asNewTransformations = new ArrayList<org.eclipse.ocl.pivot.Class>();
 				package2ownedClasses.put(asParent, asNewTransformations);
 			}
 			asNewTransformations.add(asTransformation);
 		}
-		for (org.eclipse.ocl.examples.pivot.Package asPackage : package2ownedPackages.keySet()) {
+		for (org.eclipse.ocl.pivot.Package asPackage : package2ownedPackages.keySet()) {
 			PivotUtil.refreshList(asPackage.getOwnedPackages(), package2ownedPackages.get(asPackage));
 		}
-		for (org.eclipse.ocl.examples.pivot.Package asPackage : package2ownedClasses.keySet()) {
+		for (org.eclipse.ocl.pivot.Package asPackage : package2ownedClasses.keySet()) {
 			PivotUtil.refreshList(asPackage.getOwnedClasses(), package2ownedClasses.get(asPackage));
 		}
 		return asPackages;
@@ -280,7 +280,7 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 //		Transformation pivotElement = refreshPackage(Transformation.class, QVTbasePackage.Literals.TRANSFORMATION, csElement);
 //		context.refreshPivotList(Mapping.class, pivotElement.getRule(), csElement.getMapping());
 		context.refreshPivotList(TypedModel.class, pivotElement.getModelParameter(), csElement.getDirections());
-//		context.refreshPivotList(org.eclipse.ocl.examples.pivot.Package.class, pivotElement.getNestedPackage(), csElement.getOwnedNestedPackage());
+//		context.refreshPivotList(org.eclipse.ocl.pivot.Package.class, pivotElement.getNestedPackage(), csElement.getOwnedNestedPackage());
 		return null;
 	}
 

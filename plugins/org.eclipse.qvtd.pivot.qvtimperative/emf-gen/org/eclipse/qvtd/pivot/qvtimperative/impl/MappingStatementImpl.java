@@ -11,8 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtimperative.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.ocl.examples.pivot.internal.impl.OCLExpressionImpl;
-
+import org.eclipse.ocl.pivot.internal.impl.OCLExpressionImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 

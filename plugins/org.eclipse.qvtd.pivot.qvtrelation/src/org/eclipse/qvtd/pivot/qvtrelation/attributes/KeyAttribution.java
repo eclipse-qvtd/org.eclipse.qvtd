@@ -14,10 +14,10 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.FeatureFilter;
-import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
-import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
-import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
+import org.eclipse.ocl.domain.elements.FeatureFilter;
+import org.eclipse.ocl.pivot.scoping.AbstractAttribution;
+import org.eclipse.ocl.pivot.scoping.EnvironmentView;
+import org.eclipse.ocl.pivot.scoping.ScopeView;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
@@ -31,18 +31,18 @@ public class KeyAttribution extends AbstractAttribution
 		Key targetElement = (Key)target;
 		RelationalTransformation transformation = targetElement.getTransformation();
 		if (transformation != null) {
-			Set<org.eclipse.ocl.examples.pivot.Package> allPackages = QVTbaseUtil.getAllUsedPackages(transformation);
-			for (org.eclipse.ocl.examples.pivot.Package usedPackage : allPackages) {
+			Set<org.eclipse.ocl.pivot.Package> allPackages = QVTbaseUtil.getAllUsedPackages(transformation);
+			for (org.eclipse.ocl.pivot.Package usedPackage : allPackages) {
 				environmentView.addNamedElement(usedPackage);
 			}
 			if (!environmentView.hasFinalResult()) {
-				for (org.eclipse.ocl.examples.pivot.Package usedPackage : allPackages) {
+				for (org.eclipse.ocl.pivot.Package usedPackage : allPackages) {
 					assert usedPackage != null;
 					environmentView.addAllTypes(usedPackage);
 				}
 			}
 		}
-		org.eclipse.ocl.examples.pivot.Class identifies = targetElement.getIdentifies();
+		org.eclipse.ocl.pivot.Class identifies = targetElement.getIdentifies();
 		if (identifies != null) {
 			environmentView.addAllProperties(identifies, FeatureFilter.SELECT_NON_STATIC);
 		}

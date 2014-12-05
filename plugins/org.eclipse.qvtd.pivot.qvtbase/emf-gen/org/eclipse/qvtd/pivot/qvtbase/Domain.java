@@ -11,8 +11,8 @@
 package org.eclipse.qvtd.pivot.qvtbase;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.pivot.NamedElement;
-import org.eclipse.ocl.examples.pivot.ReferringElement;
+import org.eclipse.ocl.pivot.NamedElement;
+import org.eclipse.ocl.pivot.ReferringElement;
 
 /**
  * <!-- begin-user-doc -->

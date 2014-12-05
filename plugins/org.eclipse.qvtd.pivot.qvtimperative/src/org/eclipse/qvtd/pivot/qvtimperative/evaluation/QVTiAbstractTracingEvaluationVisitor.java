@@ -24,12 +24,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
-import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.evaluation.EvaluationVisitorImpl;
-import org.eclipse.ocl.examples.pivot.prettyprint.PrettyPrinter;
+import org.eclipse.ocl.domain.values.impl.InvalidValueException;
+import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.evaluation.EvaluationVisitorImpl;
+import org.eclipse.ocl.pivot.prettyprint.PrettyPrinter;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
@@ -248,10 +248,10 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	}
 	
 	/* (non-Javadoc)
-	 * @see org.eclipse.ocl.examples.pivot.util.AbstractExtendingVisitor#visitIteratorExp(org.eclipse.ocl.examples.pivot.IteratorExp)
+	 * @see org.eclipse.ocl.pivot.util.AbstractExtendingVisitor#visitIteratorExp(org.eclipse.ocl.pivot.IteratorExp)
 	 */
 	@Override
-	public @Nullable Object visitIteratorExp(@NonNull org.eclipse.ocl.examples.pivot.IteratorExp object) {
+	public @Nullable Object visitIteratorExp(@NonNull org.eclipse.ocl.pivot.IteratorExp object) {
 		
 		return delegate.visitIteratorExp(object);
 	}

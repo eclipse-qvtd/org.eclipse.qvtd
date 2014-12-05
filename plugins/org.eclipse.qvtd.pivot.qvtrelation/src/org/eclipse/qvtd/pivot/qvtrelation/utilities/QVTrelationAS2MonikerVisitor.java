@@ -11,7 +11,7 @@
 package	org.eclipse.qvtd.pivot.qvtrelation.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.utilities.AS2Moniker;
+import org.eclipse.ocl.pivot.utilities.AS2Moniker;
 import org.eclipse.qvtd.pivot.qvtrelation.util.AbstractQVTrelationAS2MonikerVisitor;
 
 public class QVTrelationAS2MonikerVisitor extends AbstractQVTrelationAS2MonikerVisitor

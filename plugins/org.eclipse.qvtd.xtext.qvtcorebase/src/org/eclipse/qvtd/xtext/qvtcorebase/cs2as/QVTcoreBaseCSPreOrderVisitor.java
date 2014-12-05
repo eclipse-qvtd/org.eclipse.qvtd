@@ -13,9 +13,9 @@ package org.eclipse.qvtd.xtext.qvtcorebase.cs2as;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
@@ -142,10 +142,10 @@ public class QVTcoreBaseCSPreOrderVisitor extends AbstractQVTcoreBaseCSPreOrderV
 	public Continuation<?> visitTransformationCS(@NonNull TransformationCS csElement) {
 		Transformation pivotElement = PivotUtil.getPivot(Transformation.class, csElement);
 		if (pivotElement != null) {
-			List<org.eclipse.ocl.examples.pivot.Class> superClasses = pivotElement.getSuperClasses();
+			List<org.eclipse.ocl.pivot.Class> superClasses = pivotElement.getSuperClasses();
 //			context.refreshList(Type.class, superClasses, csElement.getOwnedSuperType());
 			if (superClasses.isEmpty()) {
-				org.eclipse.ocl.examples.pivot.Class oclElementType = context.getMetaModelManager().getStandardLibrary().getOclElementType();
+				org.eclipse.ocl.pivot.Class oclElementType = context.getMetaModelManager().getStandardLibrary().getOclElementType();
 				pivotElement.getSuperClasses().add(oclElementType);
 			}
 		}

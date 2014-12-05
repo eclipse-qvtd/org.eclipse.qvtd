@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtimperative;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.examples.pivot.ReferringElement;
+import org.eclipse.ocl.pivot.ReferringElement;
 
 /**
  * <!-- begin-user-doc -->

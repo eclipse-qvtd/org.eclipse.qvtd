@@ -12,9 +12,9 @@ package org.eclipse.qvtd.pivot.qvtimperative.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.scoping.AbstractAttribution;
-import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
-import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
+import org.eclipse.ocl.pivot.scoping.AbstractAttribution;
+import org.eclipse.ocl.pivot.scoping.EnvironmentView;
+import org.eclipse.ocl.pivot.scoping.ScopeView;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -41,7 +41,7 @@ public class MappingAttribution extends AbstractAttribution
 			Transformation transformation = QVTimperativeUtil.getContainingTransformation(mapping);
 			if (transformation != null) {
 				for (TypedModel typedModel : transformation.getModelParameter()) {
-					for (org.eclipse.ocl.examples.pivot.Package usedPackage : typedModel.getUsedPackage()) {
+					for (org.eclipse.ocl.pivot.Package usedPackage : typedModel.getUsedPackage()) {
 						if (usedPackage != null) {
 							environmentView.addNamedElement(usedPackage);
 							environmentView.addAllTypes(usedPackage);

@@ -10,8 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative;
 
-import org.eclipse.ocl.examples.pivot.Variable;
-
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 
 /**

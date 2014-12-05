@@ -16,8 +16,8 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.NamedElement;
-import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
+import org.eclipse.ocl.pivot.NamedElement;
+import org.eclipse.ocl.pivot.scoping.EnvironmentView;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -44,8 +44,8 @@ public class QVTbaseUtil
 		}
 	}
 
-	public static @NonNull Set<org.eclipse.ocl.examples.pivot.Package> getAllUsedPackages(@NonNull Transformation transformation) {
-		Set<org.eclipse.ocl.examples.pivot.Package> allPackages = new HashSet<org.eclipse.ocl.examples.pivot.Package>();
+	public static @NonNull Set<org.eclipse.ocl.pivot.Package> getAllUsedPackages(@NonNull Transformation transformation) {
+		Set<org.eclipse.ocl.pivot.Package> allPackages = new HashSet<org.eclipse.ocl.pivot.Package>();
 		for (TypedModel typedModel : transformation.getModelParameter()) {
 			allPackages.addAll(typedModel.getUsedPackage());
 		}

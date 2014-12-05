@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative;
 
-import org.eclipse.ocl.examples.pivot.LoopExp;
+import org.eclipse.ocl.pivot.LoopExp;
 
 /**
  * <!-- begin-user-doc -->

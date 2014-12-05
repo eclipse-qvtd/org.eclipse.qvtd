@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 
@@ -63,7 +63,7 @@ public interface KeyDeclCS extends ModelElementCS {
 
 	/**
 	 * Returns the value of the '<em><b>Property Ids</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Property}.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.Property}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Property Ids</em>' reference list isn't clear,
@@ -106,6 +106,6 @@ public interface KeyDeclCS extends ModelElementCS {
 	 * @model resolveProxies="false" transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
-	org.eclipse.ocl.examples.pivot.Class getClassId();
+	org.eclipse.ocl.pivot.Class getClassId();
 
 } // KeyDeclCS

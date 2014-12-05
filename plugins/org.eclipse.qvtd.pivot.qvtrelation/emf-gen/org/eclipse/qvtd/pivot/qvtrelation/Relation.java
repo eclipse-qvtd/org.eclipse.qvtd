@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtrelation;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.examples.pivot.Variable;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 
@@ -47,7 +47,7 @@ public interface Relation extends Rule {
 	 * @return the value of the '<em>Is Top Level</em>' attribute.
 	 * @see #setIsTopLevel(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelation_IsTopLevel()
-	 * @model dataType="org.eclipse.ocl.examples.pivot.Boolean"
+	 * @model dataType="org.eclipse.ocl.pivot.Boolean"
 	 * @generated
 	 */
 	boolean isIsTopLevel();
@@ -82,7 +82,7 @@ public interface Relation extends Rule {
 
 	/**
 	 * Returns the value of the '<em><b>Variable</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Variable}.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.Variable}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Variable</em>' containment reference list isn't clear,

@@ -11,10 +11,10 @@
 package org.eclipse.qvtd.xtext.qvtrelation.cs2as;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
@@ -165,7 +165,7 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 			if (pattern != null) {
 				TemplateExp template = pattern.getTemplateExpression();
 				if (template instanceof ObjectTemplateExp) {
-					((ObjectTemplateExp)template).setReferredClass((org.eclipse.ocl.examples.pivot.Class)type);
+					((ObjectTemplateExp)template).setReferredClass((org.eclipse.ocl.pivot.Class)type);
 				}
 			}
 		}

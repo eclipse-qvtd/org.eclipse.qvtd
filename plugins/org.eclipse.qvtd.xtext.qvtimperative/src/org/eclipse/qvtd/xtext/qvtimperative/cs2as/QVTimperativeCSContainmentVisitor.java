@@ -18,10 +18,10 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.pivot.PivotPackage;
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.domain.utilities.DomainUtil;
+import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
@@ -182,7 +182,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 //			PivotUtil.refreshList(asModel.getOwnedTransformations(), txList);
 //		}
 //		List<TransformationCS> csTransformations = csElement.getTransformations();
-		List<org.eclipse.ocl.examples.pivot.Package> asPackages = resolveTransformations(csTransformations, asModel);
+		List<org.eclipse.ocl.pivot.Package> asPackages = resolveTransformations(csTransformations, asModel);
 		PivotUtil.refreshList(asModel.getOwnedPackages(), asPackages);
 		//
 		Resource eResource = csElement.eResource();
@@ -223,7 +223,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 			}
 		}
 //		context.refreshPivotList(Type.class, pivotElement.getOwnedType(), csElement.getOwnedType());
-//		context.refreshPivotList(org.eclipse.ocl.examples.pivot.Package.class, pivotElement.getNestedPackage(), csElement.getOwnedNestedPackage());
+//		context.refreshPivotList(org.eclipse.ocl.pivot.Package.class, pivotElement.getNestedPackage(), csElement.getOwnedNestedPackage());
 		return null;
 	}
 

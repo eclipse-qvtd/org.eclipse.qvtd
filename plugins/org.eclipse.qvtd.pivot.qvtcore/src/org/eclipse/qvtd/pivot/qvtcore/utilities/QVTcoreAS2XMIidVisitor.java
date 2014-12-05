@@ -11,7 +11,7 @@
 package	org.eclipse.qvtd.pivot.qvtcore.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.utilities.AS2XMIid;
+import org.eclipse.ocl.pivot.utilities.AS2XMIid;
 import org.eclipse.qvtd.pivot.qvtcore.util.AbstractQVTcoreAS2XMIidVisitor;
 
 public class QVTcoreAS2XMIidVisitor extends AbstractQVTcoreAS2XMIidVisitor

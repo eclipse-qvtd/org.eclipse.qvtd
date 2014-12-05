@@ -72,7 +72,7 @@ public interface TransformationCS extends ClassCS {
 	 * @model resolveProxies="false" transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
-	org.eclipse.ocl.examples.pivot.Package getPackage();
+	org.eclipse.ocl.pivot.Package getPackage();
 
 	/**
 	 * Returns the value of the '<em><b>Directions</b></em>' containment reference list.

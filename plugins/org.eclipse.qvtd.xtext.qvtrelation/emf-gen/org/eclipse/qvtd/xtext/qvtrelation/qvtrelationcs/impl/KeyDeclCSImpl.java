@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
@@ -281,10 +281,10 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public org.eclipse.ocl.examples.pivot.Class getClassId() {
+	public org.eclipse.ocl.pivot.Class getClassId() {
 		if (pathName == null) {
 			return null;
 		}
-		return (org.eclipse.ocl.examples.pivot.Class) pathName.getReferredElement();
+		return (org.eclipse.ocl.pivot.Class) pathName.getReferredElement();
 	}
 } //KeyDeclCSImpl

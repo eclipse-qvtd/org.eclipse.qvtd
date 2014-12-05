@@ -47,7 +47,7 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<org.eclipse.ocl.examples.pivot.Package> imports;
+	protected EList<org.eclipse.ocl.pivot.Package> imports;
 
 	/**
 	 * The cached value of the '{@link #getUses() <em>Uses</em>}' reference list.
@@ -83,9 +83,9 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<org.eclipse.ocl.examples.pivot.Package> getImports() {
+	public EList<org.eclipse.ocl.pivot.Package> getImports() {
 		if (imports == null) {
-			imports = new EObjectResolvingEList<org.eclipse.ocl.examples.pivot.Package>(org.eclipse.ocl.examples.pivot.Package.class, this, QVTcoreBaseCSPackage.DIRECTION_CS__IMPORTS);
+			imports = new EObjectResolvingEList<org.eclipse.ocl.pivot.Package>(org.eclipse.ocl.pivot.Package.class, this, QVTcoreBaseCSPackage.DIRECTION_CS__IMPORTS);
 		}
 		return imports;
 	}
@@ -129,7 +129,7 @@ public class DirectionCSImpl extends NamedElementCSImpl implements DirectionCS {
 		switch (featureID) {
 			case QVTcoreBaseCSPackage.DIRECTION_CS__IMPORTS:
 				getImports().clear();
-				getImports().addAll((Collection<? extends org.eclipse.ocl.examples.pivot.Package>)newValue);
+				getImports().addAll((Collection<? extends org.eclipse.ocl.pivot.Package>)newValue);
 				return;
 			case QVTcoreBaseCSPackage.DIRECTION_CS__USES:
 				getUses().clear();

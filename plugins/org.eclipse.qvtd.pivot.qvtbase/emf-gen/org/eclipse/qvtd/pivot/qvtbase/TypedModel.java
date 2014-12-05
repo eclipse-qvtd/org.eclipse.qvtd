@@ -12,7 +12,7 @@ package org.eclipse.qvtd.pivot.qvtbase;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.pivot.NamedElement;
+import org.eclipse.ocl.pivot.NamedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -63,7 +63,7 @@ public interface TypedModel extends EObject, NamedElement {
 
 	/**
 	 * Returns the value of the '<em><b>Used Package</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Package}.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.Package}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Used Package</em>' reference list isn't clear,
@@ -75,7 +75,7 @@ public interface TypedModel extends EObject, NamedElement {
 	 * @model required="true" ordered="false"
 	 * @generated
 	 */
-	EList<org.eclipse.ocl.examples.pivot.Package> getUsedPackage();
+	EList<org.eclipse.ocl.pivot.Package> getUsedPackage();
 
 	/**
 	 * Returns the value of the '<em><b>Depends On</b></em>' reference list.

@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.ocl.examples.pivot.internal.impl.ClassImpl;
-import org.eclipse.ocl.examples.pivot.internal.impl.TypedElementImpl;
+import org.eclipse.ocl.pivot.internal.impl.ClassImpl;
+import org.eclipse.ocl.pivot.internal.impl.TypedElementImpl;
 
 
 /**

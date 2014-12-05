@@ -12,9 +12,9 @@ package org.eclipse.qvtd.pivot.qvttemplate.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.domain.elements.FeatureFilter;
-import org.eclipse.ocl.examples.pivot.scoping.EnvironmentView;
-import org.eclipse.ocl.examples.pivot.scoping.ScopeView;
+import org.eclipse.ocl.domain.elements.FeatureFilter;
+import org.eclipse.ocl.pivot.scoping.EnvironmentView;
+import org.eclipse.ocl.pivot.scoping.ScopeView;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 
 public class ObjectTemplateExpAttribution extends TemplateExpAttribution
@@ -24,7 +24,7 @@ public class ObjectTemplateExpAttribution extends TemplateExpAttribution
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		ObjectTemplateExp targetElement = (ObjectTemplateExp)target;
-		org.eclipse.ocl.examples.pivot.Class referredClass = targetElement.getReferredClass();
+		org.eclipse.ocl.pivot.Class referredClass = targetElement.getReferredClass();
 		if (referredClass != null) {
 			environmentView.addAllProperties(referredClass, FeatureFilter.SELECT_NON_STATIC);
 		}

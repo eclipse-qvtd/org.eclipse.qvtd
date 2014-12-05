@@ -13,7 +13,7 @@ package org.eclipse.qvtd.pivot.qvtimperative.scoping;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClassifier;
-import org.eclipse.ocl.examples.pivot.scoping.Attribution;
+import org.eclipse.ocl.pivot.scoping.Attribution;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.attributes.MappingAttribution;
 import org.eclipse.qvtd.pivot.qvtimperative.attributes.MappingCallBindingAttribution;

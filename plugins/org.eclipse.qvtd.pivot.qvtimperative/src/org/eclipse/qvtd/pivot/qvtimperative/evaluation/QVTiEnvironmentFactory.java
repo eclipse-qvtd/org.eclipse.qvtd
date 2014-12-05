@@ -13,12 +13,12 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.Environment;
-import org.eclipse.ocl.examples.pivot.NamedElement;
-import org.eclipse.ocl.examples.pivot.evaluation.EvaluationEnvironment;
-import org.eclipse.ocl.examples.pivot.evaluation.PivotEvaluationEnvironment;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.utilities.PivotEnvironmentFactory;
+import org.eclipse.ocl.pivot.Environment;
+import org.eclipse.ocl.pivot.NamedElement;
+import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
+import org.eclipse.ocl.pivot.evaluation.PivotEvaluationEnvironment;
+import org.eclipse.ocl.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.utilities.PivotEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
 public class QVTiEnvironmentFactory extends PivotEnvironmentFactory {

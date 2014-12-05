@@ -17,8 +17,8 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
@@ -182,10 +182,10 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 //			importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
 		}
 		List<TransformationCS> csTransformations = csElement.getTransformations();
-		List<org.eclipse.ocl.examples.pivot.Package> asPackages = resolveTransformations(csTransformations, asCoreModel);
+		List<org.eclipse.ocl.pivot.Package> asPackages = resolveTransformations(csTransformations, asCoreModel);
 		PivotUtil.refreshList(asCoreModel.getOwnedPackages(), asPackages);
 //		context.refreshPivotList(Type.class, pivotElement.getOwnedType(), csElement.getOwnedType());
-//		context.refreshPivotList(org.eclipse.ocl.examples.pivot.Package.class, pivotElement.getNestedPackage(), csElement.getOwnedNestedPackage());
+//		context.refreshPivotList(org.eclipse.ocl.pivot.Package.class, pivotElement.getNestedPackage(), csElement.getOwnedNestedPackage());
 		resolveTransformationMappings(csElement);
 		resolveTransformationQueries(csElement);
 		return null;

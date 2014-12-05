@@ -11,8 +11,8 @@
 package org.eclipse.qvtd.pivot.qvtcorebase;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.OCLExpression;
 
 /**
  * <!-- begin-user-doc -->
@@ -101,7 +101,7 @@ public interface Assignment extends EObject, Element {
 	 * @see #unsetIsDefault()
 	 * @see #setIsDefault(boolean)
 	 * @see org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage#getAssignment_IsDefault()
-	 * @model unsettable="true" dataType="org.eclipse.ocl.examples.pivot.Boolean"
+	 * @model unsettable="true" dataType="org.eclipse.ocl.pivot.Boolean"
 	 * @generated
 	 */
 	boolean isIsDefault();

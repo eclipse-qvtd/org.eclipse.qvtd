@@ -23,7 +23,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
@@ -62,7 +62,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	 * @generated
 	 * @ordered
 	 */
-	protected org.eclipse.ocl.examples.pivot.Class referredClass;
+	protected org.eclipse.ocl.pivot.Class referredClass;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -100,10 +100,10 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.ocl.examples.pivot.Class getReferredClass() {
+	public org.eclipse.ocl.pivot.Class getReferredClass() {
 		if (referredClass != null && ((EObject)referredClass).eIsProxy()) {
 			InternalEObject oldReferredClass = (InternalEObject)referredClass;
-			referredClass = (org.eclipse.ocl.examples.pivot.Class)eResolveProxy(oldReferredClass);
+			referredClass = (org.eclipse.ocl.pivot.Class)eResolveProxy(oldReferredClass);
 			if (referredClass != oldReferredClass) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTtemplatePackage.OBJECT_TEMPLATE_EXP__REFERRED_CLASS, oldReferredClass, referredClass));
@@ -117,7 +117,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.ocl.examples.pivot.Class basicGetReferredClass() {
+	public org.eclipse.ocl.pivot.Class basicGetReferredClass() {
 		return referredClass;
 	}
 
@@ -126,8 +126,8 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setReferredClass(org.eclipse.ocl.examples.pivot.Class newReferredClass) {
-		org.eclipse.ocl.examples.pivot.Class oldReferredClass = referredClass;
+	public void setReferredClass(org.eclipse.ocl.pivot.Class newReferredClass) {
+		org.eclipse.ocl.pivot.Class oldReferredClass = referredClass;
 		referredClass = newReferredClass;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTtemplatePackage.OBJECT_TEMPLATE_EXP__REFERRED_CLASS, oldReferredClass, referredClass));
@@ -193,7 +193,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 				getPart().addAll((Collection<? extends PropertyTemplateItem>)newValue);
 				return;
 			case QVTtemplatePackage.OBJECT_TEMPLATE_EXP__REFERRED_CLASS:
-				setReferredClass((org.eclipse.ocl.examples.pivot.Class)newValue);
+				setReferredClass((org.eclipse.ocl.pivot.Class)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -211,7 +211,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 				getPart().clear();
 				return;
 			case QVTtemplatePackage.OBJECT_TEMPLATE_EXP__REFERRED_CLASS:
-				setReferredClass((org.eclipse.ocl.examples.pivot.Class)null);
+				setReferredClass((org.eclipse.ocl.pivot.Class)null);
 				return;
 		}
 		super.eUnset(featureID);

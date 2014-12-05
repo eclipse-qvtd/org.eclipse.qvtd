@@ -35,7 +35,7 @@ Workflow {
     	projectName = "org.eclipse.qvtd.pivot.qvtbase"
     	modelName = "QVTbase"
     	projectPrefix = "QVTbase"
-    	superProjectName = "org.eclipse.ocl.examples.pivot"
+    	superProjectName = "org.eclipse.ocl.pivot"
     	superProjectPrefix = ""
     	modelPackageName = "org.eclipse.qvtd.pivot.qvtbase"
 //    	visitorPackageName = "org.eclipse.qvtd.pivot.qvtbase.util"

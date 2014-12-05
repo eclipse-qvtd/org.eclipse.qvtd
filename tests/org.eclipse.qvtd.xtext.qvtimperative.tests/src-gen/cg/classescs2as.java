@@ -23,31 +23,33 @@ import classescstraces.ClassescstracesFactory;
 import classescstraces.ClassescstracesPackage;
 import classescstraces.PackageCS2Package;
 import classescstraces.RootCS2Root;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainClass;
-import org.eclipse.ocl.examples.domain.evaluation.AbstractTransformation;
-import org.eclipse.ocl.examples.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.examples.domain.ids.ClassId;
-import org.eclipse.ocl.examples.domain.ids.CollectionTypeId;
-import org.eclipse.ocl.examples.domain.ids.IdManager;
-import org.eclipse.ocl.examples.domain.ids.NsURIPackageId;
-import org.eclipse.ocl.examples.domain.ids.RootPackageId;
-import org.eclipse.ocl.examples.domain.ids.TypeId;
-import org.eclipse.ocl.examples.domain.types.IdResolver;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.domain.values.OrderedSetValue;
-import org.eclipse.ocl.examples.domain.values.SequenceValue;
-import org.eclipse.ocl.examples.domain.values.SetValue;
-import org.eclipse.ocl.examples.domain.values.impl.InvalidValueException;
-import org.eclipse.ocl.examples.domain.values.util.ValuesUtil;
-import org.eclipse.ocl.examples.library.classifier.ClassifierAllInstancesOperation;
-import org.eclipse.ocl.examples.library.collection.CollectionAsOrderedSetOperation;
+import org.eclipse.ocl.domain.elements.DomainClass;
+import org.eclipse.ocl.domain.evaluation.AbstractTransformation;
+import org.eclipse.ocl.domain.evaluation.DomainEvaluator;
+import org.eclipse.ocl.domain.ids.ClassId;
+import org.eclipse.ocl.domain.ids.CollectionTypeId;
+import org.eclipse.ocl.domain.ids.IdManager;
+import org.eclipse.ocl.domain.ids.NsURIPackageId;
+import org.eclipse.ocl.domain.ids.RootPackageId;
+import org.eclipse.ocl.domain.ids.TypeId;
+import org.eclipse.ocl.domain.types.IdResolver;
+import org.eclipse.ocl.domain.utilities.DomainUtil;
+import org.eclipse.ocl.domain.values.OrderedSetValue;
+import org.eclipse.ocl.domain.values.SequenceValue;
+import org.eclipse.ocl.domain.values.SetValue;
+import org.eclipse.ocl.domain.values.impl.InvalidValueException;
+import org.eclipse.ocl.domain.values.util.ValuesUtil;
+import org.eclipse.ocl.library.classifier.ClassifierAllInstancesOperation;
+import org.eclipse.ocl.library.collection.CollectionAsOrderedSetOperation;
 
 /**
  * The classescs2as transformation:

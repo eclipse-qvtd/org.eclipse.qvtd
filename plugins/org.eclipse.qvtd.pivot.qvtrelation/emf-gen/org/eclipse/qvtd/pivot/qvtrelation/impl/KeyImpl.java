@@ -23,9 +23,9 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.internal.impl.ElementImpl;
-import org.eclipse.ocl.examples.pivot.util.Visitor;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.internal.impl.ElementImpl;
+import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
@@ -56,7 +56,7 @@ public class KeyImpl extends ElementImpl implements Key {
 	 * @generated
 	 * @ordered
 	 */
-	protected org.eclipse.ocl.examples.pivot.Class identifies;
+	protected org.eclipse.ocl.pivot.Class identifies;
 
 	/**
 	 * The cached value of the '{@link #getPart() <em>Part</em>}' reference list.
@@ -102,10 +102,10 @@ public class KeyImpl extends ElementImpl implements Key {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.ocl.examples.pivot.Class getIdentifies() {
+	public org.eclipse.ocl.pivot.Class getIdentifies() {
 		if (identifies != null && ((EObject)identifies).eIsProxy()) {
 			InternalEObject oldIdentifies = (InternalEObject)identifies;
-			identifies = (org.eclipse.ocl.examples.pivot.Class)eResolveProxy(oldIdentifies);
+			identifies = (org.eclipse.ocl.pivot.Class)eResolveProxy(oldIdentifies);
 			if (identifies != oldIdentifies) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTrelationPackage.KEY__IDENTIFIES, oldIdentifies, identifies));
@@ -119,7 +119,7 @@ public class KeyImpl extends ElementImpl implements Key {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.ocl.examples.pivot.Class basicGetIdentifies() {
+	public org.eclipse.ocl.pivot.Class basicGetIdentifies() {
 		return identifies;
 	}
 
@@ -128,8 +128,8 @@ public class KeyImpl extends ElementImpl implements Key {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIdentifies(org.eclipse.ocl.examples.pivot.Class newIdentifies) {
-		org.eclipse.ocl.examples.pivot.Class oldIdentifies = identifies;
+	public void setIdentifies(org.eclipse.ocl.pivot.Class newIdentifies) {
+		org.eclipse.ocl.pivot.Class oldIdentifies = identifies;
 		identifies = newIdentifies;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationPackage.KEY__IDENTIFIES, oldIdentifies, identifies));
@@ -275,7 +275,7 @@ public class KeyImpl extends ElementImpl implements Key {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case QVTrelationPackage.KEY__IDENTIFIES:
-				setIdentifies((org.eclipse.ocl.examples.pivot.Class)newValue);
+				setIdentifies((org.eclipse.ocl.pivot.Class)newValue);
 				return;
 			case QVTrelationPackage.KEY__PART:
 				getPart().clear();
@@ -301,7 +301,7 @@ public class KeyImpl extends ElementImpl implements Key {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case QVTrelationPackage.KEY__IDENTIFIES:
-				setIdentifies((org.eclipse.ocl.examples.pivot.Class)null);
+				setIdentifies((org.eclipse.ocl.pivot.Class)null);
 				return;
 			case QVTrelationPackage.KEY__PART:
 				getPart().clear();

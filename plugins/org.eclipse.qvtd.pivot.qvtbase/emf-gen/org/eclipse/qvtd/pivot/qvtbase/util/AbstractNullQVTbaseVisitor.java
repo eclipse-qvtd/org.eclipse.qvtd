@@ -25,7 +25,7 @@ import org.eclipse.jdt.annotation.Nullable;
  * visitXxx method that returns null.
  */
 public abstract class AbstractNullQVTbaseVisitor<R, C>
-	extends org.eclipse.ocl.examples.pivot.util.AbstractNullVisitor<R, C> implements QVTbaseVisitor<R>
+	extends org.eclipse.ocl.pivot.util.AbstractNullVisitor<R, C> implements QVTbaseVisitor<R>
 {
 	/**
 	 * Initializes me with an initial value for my result.

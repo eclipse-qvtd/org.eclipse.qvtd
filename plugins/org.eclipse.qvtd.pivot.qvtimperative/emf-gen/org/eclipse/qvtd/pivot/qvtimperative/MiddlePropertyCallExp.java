@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtimperative;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
+import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 
 /**
  * <!-- begin-user-doc -->

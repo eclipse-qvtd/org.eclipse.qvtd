@@ -12,8 +12,8 @@ package org.eclipse.qvtd.pivot.qvtrelation;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.Property;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,13 +44,13 @@ public interface Key extends EObject, Element {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Identifies</em>' reference.
-	 * @see #setIdentifies(org.eclipse.ocl.examples.pivot.Class)
+	 * @see #setIdentifies(org.eclipse.ocl.pivot.Class)
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getKey_Identifies()
 	 * @model required="true"
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='key'"
 	 * @generated
 	 */
-	org.eclipse.ocl.examples.pivot.Class getIdentifies();
+	org.eclipse.ocl.pivot.Class getIdentifies();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtrelation.Key#getIdentifies <em>Identifies</em>}' reference.
@@ -60,11 +60,11 @@ public interface Key extends EObject, Element {
 	 * @see #getIdentifies()
 	 * @generated
 	 */
-	void setIdentifies(org.eclipse.ocl.examples.pivot.Class value);
+	void setIdentifies(org.eclipse.ocl.pivot.Class value);
 
 	/**
 	 * Returns the value of the '<em><b>Part</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Property}.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.Property}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Part</em>' reference list isn't clear,
@@ -109,7 +109,7 @@ public interface Key extends EObject, Element {
 
 	/**
 	 * Returns the value of the '<em><b>Opposite Part</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Property}.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.Property}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Opposite Part</em>' reference list isn't clear,

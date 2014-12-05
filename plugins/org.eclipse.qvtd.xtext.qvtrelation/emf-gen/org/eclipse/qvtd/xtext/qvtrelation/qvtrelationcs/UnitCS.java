@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 
 /**
@@ -33,7 +33,7 @@ import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 public interface UnitCS extends ModelElementCS {
 	/**
 	 * Returns the value of the '<em><b>Identifier</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.pivot.Element}.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.Element}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Identifier</em>' reference list isn't clear,

@@ -246,10 +246,10 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
-	public org.eclipse.ocl.examples.pivot.Package getPackage() {
+	public org.eclipse.ocl.pivot.Package getPackage() {
 		if (pathName == null) {
 			return null;
 		}
-		return (org.eclipse.ocl.examples.pivot.Package) pathName.getReferredElement();
+		return (org.eclipse.ocl.pivot.Package) pathName.getReferredElement();
 	}
 } //TransformationCSImpl
