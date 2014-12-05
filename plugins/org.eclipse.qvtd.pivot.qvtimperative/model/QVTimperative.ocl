@@ -1,7 +1,7 @@
 import 'platform:/resource/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore'
 import 'platform:/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore'
 import 'platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore'
---import 'http://www.eclipse.org/ocl/3.1.0/Pivot'
+--import 'http://www.eclipse.org/ocl/2015/Pivot'
 
 package ocl
 context Element
