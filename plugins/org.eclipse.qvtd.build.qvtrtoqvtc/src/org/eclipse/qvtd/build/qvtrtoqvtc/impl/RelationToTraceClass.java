@@ -84,7 +84,6 @@ public class RelationToTraceClass extends AbstractRule
 	private org.eclipse.ocl.examples.pivot.Class rc;
 	
 	private String rn;
-	private org.eclipse.ocl.examples.pivot.Package p;
 	
 	protected final @NonNull List<SubRecord> subRecords = new ArrayList<SubRecord>();
 	
@@ -147,14 +146,10 @@ public class RelationToTraceClass extends AbstractRule
 	@Override
 	public void setAttributes() {
 		assert rc != null;
-		//rc.setName("T"+rn);
-		rc.setPackage(p);
 		for (SubRecord subRecord : subRecords) {
 			Property a = subRecord.a;
 			assert a != null;
-			//a.setName(subRecord.vn);
 			a.setType(subRecord.c);
-			//rc.getOwnedAttribute().add(a);
 		}
 	}
 	

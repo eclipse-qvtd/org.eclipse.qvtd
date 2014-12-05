@@ -104,16 +104,13 @@ public class RelationalTransformationToTracePackage extends AbstractRule
 		p = PivotFactory.eINSTANCE.createPackage();
 		assert p != null;
 		final org.eclipse.ocl.examples.pivot.Package p2 = p;
-		if (p2 != null) {
-			transformation.addOrphan(p2);
-		} else {
-			// TODO handle null value
-		}
+		assert p2 != null;
+		transformation.addOrphan(p2);
 		for (SubRecord subRecord : subRecords) {
 			org.eclipse.ocl.examples.pivot.Class rc = PivotFactory.eINSTANCE.createClass();
 			assert rc != null;
+			p.getOwnedType().add(rc);
 			subRecord.rc = rc;
-			transformation.addOrphan(rc);
 		}
 	}
 
