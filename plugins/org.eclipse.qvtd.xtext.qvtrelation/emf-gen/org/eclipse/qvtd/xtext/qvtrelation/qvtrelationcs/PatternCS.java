@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
+import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 
 /**
  * <!-- begin-user-doc -->

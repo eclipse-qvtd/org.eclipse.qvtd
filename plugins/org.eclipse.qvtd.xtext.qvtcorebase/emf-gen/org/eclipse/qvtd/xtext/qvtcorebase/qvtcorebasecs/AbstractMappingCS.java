@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
+import org.eclipse.ocl.xtext.basecs.NamedElementCS;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
 /**

@@ -12,8 +12,8 @@ package org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
+import org.eclipse.ocl.xtext.basecs.ModelElementCS;
+import org.eclipse.ocl.xtext.basecs.PathNameCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -79,7 +79,7 @@ public interface KeyDeclCS extends ModelElementCS {
 
 	/**
 	 * Returns the value of the '<em><b>Opposite Property Ids</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS}.
+	 * The list contents are of type {@link org.eclipse.ocl.xtext.basecs.PathNameCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Opposite Property Ids</em>' containment reference list isn't clear,

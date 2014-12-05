@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcorebase.ui.labeling;
 
-import org.eclipse.ocl.examples.xtext.essentialocl.ui.labeling.EssentialOCLDescriptionLabelProvider;
+import org.eclipse.ocl.xtext.essentialocl.ui.labeling.EssentialOCLDescriptionLabelProvider;
 
 /**
  * Provides labels for a IEObjectDescriptions and IResourceDescriptions.

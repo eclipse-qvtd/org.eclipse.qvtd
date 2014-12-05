@@ -12,7 +12,7 @@ package org.eclipse.qvtd.xtext.qvtimperative.tests;
 
 import java.io.IOException;
 
-import org.eclipse.ocl.examples.xtext.base.services.BaseLinkingService;
+import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 

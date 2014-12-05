@@ -55,7 +55,7 @@ public class QVTbasePivotStandaloneSetup //implements ISetup
 		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey(Resource.Factory.Registry.DEFAULT_EXTENSION))
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put(
 				Resource.Factory.Registry.DEFAULT_EXTENSION, new XMIResourceFactoryImpl());
-		return Guice.createInjector(/*new org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCLRuntimeModule()*/);
+		return Guice.createInjector(/*new org.eclipse.ocl.xtext.essentialocl.EssentialOCLRuntimeModule()*/);
 	}
 
 	public Injector createInjectorAndDoEMFRegistration() {

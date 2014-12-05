@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtrelation;
 
 import org.antlr.runtime.TokenSource;
-import org.eclipse.ocl.examples.xtext.base.services.RetokenizingTokenSource;
+import org.eclipse.ocl.xtext.base.services.RetokenizingTokenSource;
 import org.eclipse.qvtd.xtext.qvtrelation.parser.antlr.QVTrelationParser;
 import org.eclipse.qvtd.xtext.qvtrelation.utilities.QVTrelationCSResource;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;

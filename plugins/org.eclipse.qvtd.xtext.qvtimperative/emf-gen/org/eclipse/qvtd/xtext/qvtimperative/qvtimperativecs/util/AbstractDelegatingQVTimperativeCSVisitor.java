@@ -32,7 +32,7 @@ public abstract class AbstractDelegatingQVTimperativeCSVisitor<R, C, D extends Q
 	}
 
 	@Override
-	public @Nullable R visiting(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS visitable) {
+	public @Nullable R visiting(@NonNull org.eclipse.ocl.xtext.basecs.util.VisitableCS visitable) {
 		return delegate.visiting(visitable);
 	}
 

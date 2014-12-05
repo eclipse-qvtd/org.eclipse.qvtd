@@ -10,8 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs;
 
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.VariableCS;
+import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
 
 /**
  * <!-- begin-user-doc -->

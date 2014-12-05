@@ -12,24 +12,17 @@ package org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-
-import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
-
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.VariableCS;
-
+import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
+import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingLoopCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingSequenceCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.QVTimperativeCSPackage;
-
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.util.QVTimperativeCSVisitor;
 
 /**

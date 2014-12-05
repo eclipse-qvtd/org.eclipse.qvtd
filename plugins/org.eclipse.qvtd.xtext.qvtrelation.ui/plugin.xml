@@ -238,8 +238,8 @@
     </extension>
 
 	<extension point="org.eclipse.ui.menus">
-	  <menuContribution locationURI="popup:org.eclipse.ocl.examples.xtext.base.ui.Save?after=additions">
-	    <command commandId="org.eclipse.ocl.examples.xtext.base.ui.SaveASCommand"
+	  <menuContribution locationURI="popup:org.eclipse.ocl.xtext.base.ui.Save?after=additions">
+	    <command commandId="org.eclipse.ocl.xtext.base.ui.SaveASCommand"
 	      label="%MF_Save_AS">
             <visibleWhen checkEnabled="false">
                 <reference
@@ -248,8 +248,8 @@
             </visibleWhen>
 	    </command>
 	  </menuContribution>
-	  <menuContribution locationURI="popup:org.eclipse.ocl.examples.xtext.base.ui.Save?after=additions">
-	    <command commandId="org.eclipse.ocl.examples.xtext.base.ui.SaveCSCommand"
+	  <menuContribution locationURI="popup:org.eclipse.ocl.xtext.base.ui.Save?after=additions">
+	    <command commandId="org.eclipse.ocl.xtext.base.ui.SaveCSCommand"
 	      label="%MF_Save_CS">
             <visibleWhen checkEnabled="false">
                 <reference

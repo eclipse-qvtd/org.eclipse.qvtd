@@ -65,14 +65,9 @@ import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.PivotStandardLibrary;
 import org.eclipse.ocl.examples.pivot.model.OCLstdlib;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
-import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.examples.xtext.base.utilities.CS2ASResourceAdapter;
-//import org.eclipse.ocl.examples.xtext.completeocl.CompleteOCLStandaloneSetup;
-//import org.eclipse.ocl.examples.xtext.oclinecore.OCLinEcoreStandaloneSetup;
-//import org.eclipse.ocl.examples.xtext.oclinecore.oclinEcoreCST.OCLinEcoreCSTPackage;
-//import org.eclipse.ocl.examples.xtext.oclinecore.pivot2cs.OCLinEcorePivot2CS;
-//import org.eclipse.ocl.examples.xtext.oclstdlib.OCLstdlibStandaloneSetup;
+import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
+import org.eclipse.ocl.xtext.base.utilities.CS2ASResourceAdapter;
+import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 
 public class XtextTestCase extends PivotTestCase
 {	

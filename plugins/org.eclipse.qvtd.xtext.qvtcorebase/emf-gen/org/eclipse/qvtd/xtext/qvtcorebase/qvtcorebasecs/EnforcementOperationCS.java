@@ -10,8 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs;
 
-import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.NameExpCS;
+import org.eclipse.ocl.xtext.basecs.ModelElementCS;
+import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
 
 /**
  * <!-- begin-user-doc -->

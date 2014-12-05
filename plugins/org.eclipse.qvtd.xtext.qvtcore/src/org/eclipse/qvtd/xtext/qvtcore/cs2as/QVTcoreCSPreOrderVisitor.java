@@ -12,8 +12,8 @@ package org.eclipse.qvtd.xtext.qvtcore.cs2as;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.examples.xtext.base.cs2as.CS2ASConversion;
-import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
+import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
+import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.TopLevelCS;

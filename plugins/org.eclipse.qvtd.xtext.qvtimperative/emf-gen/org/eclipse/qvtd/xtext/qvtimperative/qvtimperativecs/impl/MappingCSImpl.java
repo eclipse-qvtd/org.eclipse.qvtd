@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor;
+import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.impl.AbstractMappingCSImpl;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingSequenceCS;

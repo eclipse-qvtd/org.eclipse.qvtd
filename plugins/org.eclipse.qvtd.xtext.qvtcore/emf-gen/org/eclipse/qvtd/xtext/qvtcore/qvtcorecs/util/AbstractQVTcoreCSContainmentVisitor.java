@@ -19,9 +19,9 @@ package	org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.qvtd.xtext.qvtcorebase.cs2as.QVTcoreBaseCSContainmentVisitor;
-import org.eclipse.ocl.examples.xtext.base.cs2as.Continuation;
+import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
+import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 
 /**
  * An AbstractQVTcoreCSContainmentVisitor provides a default implementation for each

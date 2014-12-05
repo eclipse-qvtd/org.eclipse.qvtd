@@ -25,7 +25,7 @@ import org.eclipse.jdt.annotation.Nullable;
  * visitXxx method that returns null.
  */
 public abstract class AbstractNullQVTrelationCSVisitor<R, C>
-	extends org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.AbstractNullEssentialOCLCSVisitor<R, C> implements QVTrelationCSVisitor<R>
+	extends org.eclipse.ocl.xtext.essentialoclcs.util.AbstractNullEssentialOCLCSVisitor<R, C> implements QVTrelationCSVisitor<R>
 {
 	/**
 	 * Initializes me with an initial value for my result.

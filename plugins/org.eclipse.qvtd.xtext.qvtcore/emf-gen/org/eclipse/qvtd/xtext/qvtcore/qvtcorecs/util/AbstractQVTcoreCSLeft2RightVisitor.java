@@ -19,9 +19,9 @@ package	org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.qvtd.xtext.qvtcorebase.cs2as.QVTcoreBaseCSLeft2RightVisitor;
 import org.eclipse.ocl.examples.pivot.Element;
+import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 
 /**
  * An AbstractQVTcoreCSLeft2RightVisitor provides a default implementation for each

@@ -21,7 +21,7 @@ import org.eclipse.jdt.annotation.NonNull;
 
 /**
  */
-public interface DecorableQVTrelationCSVisitor<R> extends QVTrelationCSVisitor<R>, org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.util.DecorableEssentialOCLCSVisitor<R>
+public interface DecorableQVTrelationCSVisitor<R> extends QVTrelationCSVisitor<R>, org.eclipse.ocl.xtext.essentialoclcs.util.DecorableEssentialOCLCSVisitor<R>
 {
-	void setUndecoratedVisitor(@NonNull org.eclipse.ocl.examples.xtext.base.basecs.util.BaseCSVisitor<R> visitor);
+	void setUndecoratedVisitor(@NonNull org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor<R> visitor);
 }

@@ -11,9 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.ocl.examples.xtext.base.basecs.impl.ModelElementCSImpl;
-
+import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingStatementCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.QVTimperativeCSPackage;
 

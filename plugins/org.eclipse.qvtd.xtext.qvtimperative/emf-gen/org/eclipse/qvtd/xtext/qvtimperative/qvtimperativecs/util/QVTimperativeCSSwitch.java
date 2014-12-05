@@ -15,21 +15,17 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.ocl.examples.domain.elements.Nameable;
 import org.eclipse.ocl.examples.pivot.util.Pivotable;
-import org.eclipse.ocl.examples.xtext.base.basecs.ElementCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.ModelElementCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.PackageOwnerCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.PivotableElementCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.RootCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.RootPackageCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.util.VisitableCS;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.ExpCS;
+import org.eclipse.ocl.xtext.basecs.ElementCS;
+import org.eclipse.ocl.xtext.basecs.ModelElementCS;
+import org.eclipse.ocl.xtext.basecs.NamedElementCS;
+import org.eclipse.ocl.xtext.basecs.PackageOwnerCS;
+import org.eclipse.ocl.xtext.basecs.PivotableElementCS;
+import org.eclipse.ocl.xtext.basecs.RootCS;
+import org.eclipse.ocl.xtext.basecs.RootPackageCS;
+import org.eclipse.ocl.xtext.basecs.util.VisitableCS;
+import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.AbstractMappingCS;
 import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.*;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallBindingCS;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallCS;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.TopLevelCS;
 
 /**
  * <!-- begin-user-doc -->

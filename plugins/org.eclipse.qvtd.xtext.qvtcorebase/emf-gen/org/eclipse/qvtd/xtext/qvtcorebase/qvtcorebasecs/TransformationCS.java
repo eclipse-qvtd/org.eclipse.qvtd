@@ -11,8 +11,8 @@
 package org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.examples.xtext.base.basecs.ClassCS;
-import org.eclipse.ocl.examples.xtext.base.basecs.PathNameCS;
+import org.eclipse.ocl.xtext.basecs.ClassCS;
+import org.eclipse.ocl.xtext.basecs.PathNameCS;
 
 /**
  * <!-- begin-user-doc -->

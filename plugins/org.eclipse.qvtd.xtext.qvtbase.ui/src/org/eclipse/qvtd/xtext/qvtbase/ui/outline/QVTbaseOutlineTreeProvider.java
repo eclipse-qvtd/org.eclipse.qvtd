@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtbase.ui.outline;
 
-import org.eclipse.ocl.examples.xtext.essentialocl.ui.outline.EssentialOCLOutlineTreeProvider;
+import org.eclipse.ocl.xtext.essentialocl.ui.outline.EssentialOCLOutlineTreeProvider;
 
 /**
  * customization of the default outline structure

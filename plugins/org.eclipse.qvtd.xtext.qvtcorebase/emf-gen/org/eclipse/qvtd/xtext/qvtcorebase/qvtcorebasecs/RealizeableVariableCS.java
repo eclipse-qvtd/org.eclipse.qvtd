@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs;
 
-import org.eclipse.ocl.examples.xtext.base.basecs.TypedElementCS;
+import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 
 /**
  * <!-- begin-user-doc -->

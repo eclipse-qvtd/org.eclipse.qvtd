@@ -21,13 +21,13 @@ import org.eclipse.ocl.examples.pivot.PivotPackage;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceAdapter;
 import org.eclipse.ocl.examples.pivot.resource.ASResource;
-import org.eclipse.ocl.examples.xtext.base.as2cs.BaseDeclarationVisitor;
-import org.eclipse.ocl.examples.xtext.base.as2cs.BaseReferenceVisitor;
-import org.eclipse.ocl.examples.xtext.base.as2cs.AS2CS;
-import org.eclipse.ocl.examples.xtext.base.as2cs.AS2CSConversion;
-import org.eclipse.ocl.examples.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.examples.xtext.essentialocl.as2cs.EssentialOCLAS2CS;
-import org.eclipse.ocl.examples.xtext.essentialocl.as2cs.EssentialOCLReferenceVisitor;
+import org.eclipse.ocl.xtext.base.as2cs.AS2CS;
+import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
+import org.eclipse.ocl.xtext.base.as2cs.BaseDeclarationVisitor;
+import org.eclipse.ocl.xtext.base.as2cs.BaseReferenceVisitor;
+import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
+import org.eclipse.ocl.xtext.essentialocl.as2cs.EssentialOCLAS2CS;
+import org.eclipse.ocl.xtext.essentialocl.as2cs.EssentialOCLReferenceVisitor;
 
 public class QVTimperativeAS2CS extends EssentialOCLAS2CS
 {	

@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtrelation.formatting;
 
-import org.eclipse.ocl.examples.xtext.essentialocl.formatting.AbstractEssentialOCLFormatter;
+import org.eclipse.ocl.xtext.essentialocl.formatting.AbstractEssentialOCLFormatter;
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess;
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.CollectionTemplateCSElements;
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.DefaultValueCSElements;

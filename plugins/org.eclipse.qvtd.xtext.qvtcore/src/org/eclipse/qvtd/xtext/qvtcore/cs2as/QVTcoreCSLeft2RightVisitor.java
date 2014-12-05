@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtcore.cs2as;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.xtext.base.cs2as.CS2ASConversion;
+import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.util.AbstractQVTcoreCSLeft2RightVisitor;
 
 public class QVTcoreCSLeft2RightVisitor extends AbstractQVTcoreCSLeft2RightVisitor

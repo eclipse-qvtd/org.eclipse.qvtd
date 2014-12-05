@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.ocl.examples.xtext.base.basecs.BaseCSPackage;
-import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCSPackage;
+import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
+import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +30,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.essentialoclcs.EssentialOCLCS
  * <!-- end-user-doc -->
  * @see org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.QVTcoreBaseCSFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/OCL/Import basecs='../../org.eclipse.ocl.examples.xtext.base/model/BaseCS.ecore#/' essentialoclcs='../../org.eclipse.ocl.examples.xtext.essentialocl/model/EssentialOCLCS.ecore#/' qvtb='../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/' qvtcb='../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#/'"
+ *        annotation="http://www.eclipse.org/OCL/Import basecs='../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#/' essentialoclcs='../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#/' qvtb='../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#/' qvtcb='../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#/'"
  * @generated
  */
 public interface QVTcoreBaseCSPackage extends EPackage {

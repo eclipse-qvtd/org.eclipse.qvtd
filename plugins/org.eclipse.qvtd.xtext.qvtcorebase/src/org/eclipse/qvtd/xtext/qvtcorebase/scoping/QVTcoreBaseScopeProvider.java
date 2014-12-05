@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcorebase.scoping;
 
-import org.eclipse.ocl.examples.xtext.essentialocl.scoping.EssentialOCLScopeProvider;
+import org.eclipse.ocl.xtext.essentialocl.scoping.EssentialOCLScopeProvider;
 
 /**
  * This class contains custom scoping description.

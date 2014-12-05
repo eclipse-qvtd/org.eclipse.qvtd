@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs;
 
-import org.eclipse.ocl.examples.xtext.base.basecs.NamedElementCS;
+import org.eclipse.ocl.xtext.basecs.NamedElementCS;
 
 /**
  * <!-- begin-user-doc -->
