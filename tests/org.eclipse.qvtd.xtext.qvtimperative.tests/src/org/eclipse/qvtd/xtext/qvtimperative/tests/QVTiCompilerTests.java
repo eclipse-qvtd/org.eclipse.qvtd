@@ -31,7 +31,7 @@ import org.eclipse.ocl.domain.evaluation.DomainEvaluator;
 import org.eclipse.ocl.domain.evaluation.DomainModelManager;
 import org.eclipse.ocl.domain.types.IdResolver;
 import org.eclipse.ocl.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.emf.validation.validity.utilities.ComposedEValidator;
+import org.eclipse.ocl.domain.validation.ComposedEValidator;
 import org.eclipse.ocl.library.executor.ExecutorManager;
 import org.eclipse.ocl.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.manager.CompleteEnvironment;
