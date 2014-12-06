@@ -18,6 +18,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.domain.elements.DomainProperty;
+import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
 import org.eclipse.ocl.examples.pivot.OperationCallExp;
@@ -49,6 +50,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
+import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
@@ -103,7 +105,23 @@ public class QVTr2QVTcRelations {
 			for (OCLExpression a : rc.getArgument()) {
 				vs.addAll(getVarsOfExp(a));
 			}
-		} else {
+		} else if (e instanceof EnumLiteralExp) {
+			
+		} 
+		else if (e instanceof ObjectTemplateExp) {
+			ObjectTemplateExp te = (ObjectTemplateExp) e;
+			vs.add(te.getBindsTo());
+			for (PropertyTemplateItem p : te.getPart()) {
+				vs.addAll(getVarsOfExp(p.getValue()));
+			}
+		} else if (e instanceof CollectionTemplateExp) {
+			CollectionTemplateExp cte = (CollectionTemplateExp) e;
+			if (cte.getRest() != null)
+				vs.add(cte.getRest());
+			for (OCLExpression m : cte.getMember())
+				vs.addAll(getVarsOfExp(m));
+		}
+		else {
 			assert false : "getVarsOfExp() missing case for " + e.eClass().getName();
 		}
 		return vs;
@@ -129,43 +147,36 @@ public class QVTr2QVTcRelations {
 	public void doRDomainToMDBottomForEnforcement(@NonNull Relation r, @NonNull RelationDomain rd, @NonNull ObjectTemplateExp te,
 			@NonNull Set<Predicate> predicatesWithoutVarBindings, @NonNull Set<Variable> unboundDomainVars, @NonNull BottomPattern db)
 	{
-		// NOT-USED   tcv, mv: essentialocl::Variable;
-		//
-		//	Check
-		//
+		// check
 		Variable v = te.getBindsTo();
-		//
-		//	Post-Check
-		//
 		Set<Variable> remainingUnBoundDomainVars = new HashSet<Variable>(unboundDomainVars);
 		remainingUnBoundDomainVars.remove(v);
-		//
 		Set<Predicate> predicatesWithVarBindings = filterOutPredicatesThatReferToVars(predicatesWithoutVarBindings, remainingUnBoundDomainVars);	
 		Set<Predicate> remainingPredicatesWithoutVarBindings = new HashSet<Predicate>(predicatesWithoutVarBindings);
 		remainingPredicatesWithoutVarBindings.removeAll(predicatesWithVarBindings);
-		//
-		//	Enforce-Check
-		//
 		Area area = db.getArea();
 		assert area instanceof CoreDomain : "Missing CoreDomain for RDomainToMDBottomForEnforcement";
 		CoreDomain cd = (CoreDomain) area;
 		Rule rule = cd.getRule();
 		assert rule instanceof Mapping : "Missing Mapping for RDomainToMDBottomForEnforcement";
 		Mapping m = (Mapping) rule;
-		//
-		//	Enforce-Create
-		//
-		//BottomPattern mb = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
+		// init
 		BottomPattern mb = transformation.findBottomPattern(m);
-		//
-		//	then-where
-		//
+		
+		//rtSeq = Sequence{r, te};
+	    //rtdSeq = Sequence{r, te, rd};
+	    //rdtVarsSeqRest = Sequence{rdtSet, remainingPredicatesWithoutVarBindings, remainingUnBoundDomainVars};
+		
+		// where
 		doRDomainToMDBottomForEnforcementOfIdentityProp(r, te, db);
+		//doRDomainToMDBottomForEnforcementOfNonIdentityPropObject(r, rd, te, remainingPredicatesWithoutVarBindings, remainingUnBoundDomainVars, m);		
+		doRDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive(r, te, rd, m);
+		
+		// This call is wrong as the trace variable is realized, it can't be guarded.
+		// This should only be done in a nested mapping or later mapping
+		//doRDomainToMBottomPredicateForEnforcement(r, rd, te, predicatesWithoutVarBindings, unboundDomainVars, mb);
 		
 		doRDomainVarToMDBottomAssignmnetForEnforcement(r, rd, te, predicatesWithoutVarBindings, unboundDomainVars, mb);
-		doRDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive(r, te, rd, m);
-		//doRDomainToMDBottomForEnforcementOfNonIdentityPropObject(r, rd, te, remainingPredicatesWithoutVarBindings, remainingUnBoundDomainVars, m);
-		doRDomainToMBottomPredicateForEnforcement(r, rd, te, predicatesWithoutVarBindings, unboundDomainVars, mb);
 	}
 		
 	// 38
@@ -179,9 +190,10 @@ public class QVTr2QVTcRelations {
 			Set<Variable> allDomainVars = getAllDomainVars(r);
 			Set<Variable> unsharedWhenVars = new HashSet<Variable>(whenVars);
 			unsharedWhenVars.removeAll(allDomainVars);
+			
 			doRWhenRelCallToMGuard(whenp, mg);
 			doRSimplePatternToMPattern(whenp, mg);
-			doUnsharedWhenVarsToMgVars(new ArrayList<Variable>(unsharedWhenVars), mg);
+			doUnsharedWhenVarsToMgVars(unsharedWhenVars, mg);
 		}
 	}
 	
@@ -192,7 +204,6 @@ public class QVTr2QVTcRelations {
 		
 		List<Variable> dbVars = doRVarSetToMVarSet(new ArrayList<Variable>(domainVarsSharedWithWhen));
 		dg.getBindsTo().addAll(dbVars);
-
 	}
 	
 	// 15
@@ -215,31 +226,29 @@ public class QVTr2QVTcRelations {
 		Set<Variable> remainingUnBoundDomainVars = new HashSet<Variable>(unboundDomainVars);
 		remainingUnBoundDomainVars.remove(v);
 		Set<Predicate> predicatesWithVarBindings = filterOutPredicatesThatReferToVars(predicatesWithoutVarBindings, remainingUnBoundDomainVars);
-		
 		doRPredicateSetToMBPredicateSet(new ArrayList<Predicate>(predicatesWithVarBindings), mb);
 		// assign
-		pd.setConditionExpression(ee);
-		ee.setSource(pe);
-		pe.setSource(pve);
 		pve.setReferredVariable(tcv);
 		pve.setType(tcv.getType());
-		Property pep = transformation.findProperty(v.getName(), tcv.getType());
+		pe.setSource(pve);
+		Property pep = getProperty(v.getName(), tcv.getType());
 		assert pep != null;
 		pe.setReferredProperty(pep);
 		pe.setType(pep.getType());
+		ee.setSource(pe);
 		ee.setReferredOperation(getEqualsOPeration());
 		ee.setType(transformation.getMetaModelManager().getBooleanType());
-		ee.getArgument().add(ave);
 		ave.setReferredVariable(mv);
 		ave.setType(mv.getType());
-		
-		mb.getBindsTo().add(tcv);
-		mb.getRealizedVariable().add(tcv);
-		mb.getBindsTo().add(mv);
+		ee.getArgument().add(ave);
+		pd.setConditionExpression(ee);
 		mb.getPredicate().add(pd);
 	}
 	
 	// 18
+	/*
+	 * Creates Assignments for each part of the ObjectTemplateExp
+	 */
 	public void doRDomainToMDBottomForEnforcementOfIdentityProp(@NonNull Relation r, @NonNull ObjectTemplateExp te, @NonNull BottomPattern db)
 	{
 		// check
@@ -264,7 +273,6 @@ public class QVTr2QVTcRelations {
 				doRDomainPatternExprToMappingDomainTemplateVarAssignment(r, v, pp, e, db);
 			    doRDomainPatternExprToMappingBottomVarAssignment(r, v, pp, e, mb);
 			}
-			
 		}
 	}
 	
@@ -324,10 +332,10 @@ public class QVTr2QVTcRelations {
 	}
 		
 	// 50
-	private void doUnsharedWhenVarsToMgVars(@NonNull ArrayList<Variable> unsharedWhenVars,
+	private void doUnsharedWhenVarsToMgVars(@NonNull Set<Variable> unsharedWhenVars,
 			@NonNull GuardPattern mg) {
 		
-		List<Variable> mgVars = doRVarSetToMVarSet(unsharedWhenVars);
+		List<Variable> mgVars = doRVarSetToMVarSet(new ArrayList<Variable>(unsharedWhenVars));
 		mg.getBindsTo().addAll(mgVars);
 	}
 	
@@ -344,32 +352,26 @@ public class QVTr2QVTcRelations {
 		// check
 		if ((e instanceof VariableExp) && sharedDomainVars.contains(((VariableExp)e).getReferredVariable()) ) {
 			String pn = pp.getName();
+			Variable rev = (Variable) ((VariableExp)e).getReferredVariable();
+			assert rev != null;
 			// init
 			PropertyAssignment a = QVTcoreBaseFactory.eINSTANCE.createPropertyAssignment();
 			VariableExp ve = PivotFactory.eINSTANCE.createVariableExp();
 			VariableExp me = PivotFactory.eINSTANCE.createVariableExp();
+			// where
 			RealizedVariable mv = doRVarToMRealizedVar(v);
-			Variable mev = doRVarToMVar(v);
+			Variable mev = doRVarToMVar(rev);
 			// assign
 			ve.setReferredVariable(mv);
 			ve.setType(mv.getType());
 			a.setSlotExpression(ve);
-			for (Property tp : mv.getType().getOwnedAttribute()) {
-				if (tp.getName() == pn) {
-					a.setTargetProperty(tp);
-					break;
-				}
-			}
+			Property tp = getProperty(pn, mv.getType());
+			a.setTargetProperty(tp);
 			me.setReferredVariable(mev);
 			me.setType(mev.getType());
 			a.setValue(me);
-			
-			mb.getBindsTo().add(mv);
-			mb.getRealizedVariable().add(mv);
-			mb.getBindsTo().add(mev);
 			mb.getAssignment().add(a);
 		}
-		
 	}
 	
 	// 7
@@ -383,21 +385,16 @@ public class QVTr2QVTcRelations {
 			// init
 			PropertyAssignment a = QVTcoreBaseFactory.eINSTANCE.createPropertyAssignment();
 			VariableExp ve = PivotFactory.eINSTANCE.createVariableExp();
+			// where
 			Variable mv = doRVarToMVar(v);
 			OCLExpression me = doRExpToMExp(e);
 			// assign
+			a.setSlotExpression(ve);
 			ve.setReferredVariable(mv);
 			ve.setType(mv.getType());
-			a.setSlotExpression(ve);
-			for (Property tp : mv.getType().getOwnedAttribute()) {
-				if (tp.getName() == pn) {
-					a.setTargetProperty(tp);
-					break;
-				}
-			}
+			Property tp = getProperty(pn, mv.getType()); 
+			a.setTargetProperty(tp);
 			a.setValue(me);
-			
-			db.getBindsTo().add(mv);
 			db.getAssignment().add(a);
 		}
 		
@@ -427,19 +424,12 @@ public class QVTr2QVTcRelations {
 				ve.setReferredVariable(mv);
 				ve.setType(mv.getType());
 				a.setSlotExpression(ve);
-				for (Property tp : mv.getType().getOwnedAttribute()) {
-					if (tp.getName() == pn) {
-						a.setTargetProperty(tp);
-						break;
-					}
-				}
+				Property tp = getProperty(pn, mv.getType());
+				a.setTargetProperty(tp);
 				me.setReferredVariable(mev);
 				me.setType(mev.getType());
 				a.setValue(me);
-				
-				db.getBindsTo().add(mv);
 				db.getRealizedVariable().add(mv);
-				db.getBindsTo().add(mv);
 				db.getAssignment().add(a);
 			}
 		}
@@ -453,31 +443,28 @@ public class QVTr2QVTcRelations {
 		// when
 		Set<Variable> sharedDomainVars = getSharedDomainVars(r);
 		// check
-		if ((e instanceof VariableExp) && sharedDomainVars.contains(((VariableExp)e).getReferredVariable()) ) {
+		if ((e instanceof VariableExp) && !sharedDomainVars.contains(((VariableExp)e).getReferredVariable()) ) {
 			String pn = pp.getName();
+			Variable rev = (Variable) ((VariableExp) e).getReferredVariable();
+			assert rev != null;
 			// init
 			PropertyAssignment a = QVTcoreBaseFactory.eINSTANCE.createPropertyAssignment();
 			VariableExp ve = PivotFactory.eINSTANCE.createVariableExp();
 			VariableExp me = PivotFactory.eINSTANCE.createVariableExp();
+			// where
 			RealizedVariable mv = doRVarToMRealizedVar(v);
-			Variable mev = doRVarToMVar(v);
+			Variable mev = doRVarToMVar(rev);
 			// assign
 			ve.setReferredVariable(mv);
 			ve.setType(mv.getType());
 			a.setSlotExpression(ve);
-			for (Property tp : mv.getType().getOwnedAttribute()) {
-				if (tp.getName() == pn) {
-					a.setTargetProperty(tp);
-					break;
-				}
-			}
+			Property tp = getProperty(pn, mv.getType());
+			a.setTargetProperty(tp);
 			me.setReferredVariable(mev);
 			me.setType(mev.getType());
 			a.setValue(me);
 			
-			db.getBindsTo().add(mv);
 			db.getRealizedVariable().add(mv);
-			db.getBindsTo().add(mev);
 			db.getAssignment().add(a);
 		}
 	}
@@ -494,7 +481,7 @@ public class QVTr2QVTcRelations {
 	public void doRDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive(@NonNull Relation r, @NonNull ObjectTemplateExp te, @NonNull RelationDomain rd,
 			@NonNull Mapping m)
 	{
-		// check
+		// when
 		RelationalTransformation rt = (RelationalTransformation) r.getTransformation();
 		assert rt != null;
 		RelationalTransformationToMappingTransformation whenRule = new RelationalTransformationToMappingTransformation(transformation, rt);
@@ -505,6 +492,7 @@ public class QVTr2QVTcRelations {
 			mt = whenRule.getCore();
 		}
 		assert mt != null;
+		// check
 		for (PropertyTemplateItem pt : te.getPart()) {
 			final OCLExpression e = pt.getValue();
 			Property pp = pt.getReferredProperty();
@@ -516,32 +504,30 @@ public class QVTr2QVTcRelations {
 				// init
 				Mapping cm = transformation.findMapping(m.getName()+"_forNonIdentityProp", mt);
 				BottomPattern bp = transformation.findBottomPattern(cm);
-				Variable mv = doRVarToMVar(v);
-				OCLExpression me = doRExpToMExp(e);
 				PropertyAssignment a = QVTcoreBaseFactory.eINSTANCE.createPropertyAssignment();
 				VariableExp ve = PivotFactory.eINSTANCE.createVariableExp();
+				// where
+				Variable mv = doRVarToMVar(v);
+				OCLExpression me = doRExpToMExp(e);
+				// where
+				doRDomainToMComposedMappingGuard(r, te, rd, e, cm);
 				// assign
 				ve.setReferredVariable(mv);
 				ve.setType(mv.getType());
 				a.setSlotExpression(ve);
-				for (Property tp : mv.getType().getOwnedAttribute()) {
-					if (tp.getName() == pn) {
-						a.setTargetProperty(tp);
-						break;
-					}
-				}
+				Property tp = getProperty(pn, mv.getType());
+				a.setTargetProperty(tp);
 				a.setValue(me);
 				
-				bp.getBindsTo().add(mv);
 				bp.getAssignment().add(a);
-				// where
-				doRDomainToMComposedMappingGuard(r, te, rd, e, cm);
-				// TODO finish?
 			}
 		}
 	}
 	
 	// 23
+	/*
+	 * Creates the assignment of the middle model to the L/R models
+	 */
 	public void doRDomainVarToMDBottomAssignmnetForEnforcement(@NonNull Relation r, @NonNull RelationDomain rd,
 			@NonNull ObjectTemplateExp te,
 			@NonNull Set<Predicate> predicatesWithoutVarBindings,
@@ -558,37 +544,38 @@ public class QVTr2QVTcRelations {
 		RealizedVariable tcv = doRelationDomainToTraceClassVar(r, rd);
 		Variable mv = doRVarToMVar(v);
 		// assign
-		a.setSlotExpression(ve1);
 		ve1.setReferredVariable(tcv);
 		ve1.setType(tcv.getType());
-		Property tp = transformation.findProperty(v.getName(), tcv.getType());
+		a.setSlotExpression(ve1);
+		Property tp = getProperty(v.getName(), tcv.getType());
 		assert tp != null;
 		a.setTargetProperty(tp);
-		a.setValue(ve2);
 		ve2.setReferredVariable(mv);
 		ve2.setType(mv.getType());
+		a.setValue(ve2);
 		
-		mb.getBindsTo().add(tcv);
 		mb.getRealizedVariable().add(tcv);
-		mb.getBindsTo().add(mv);
 		mb.getAssignment().add(a);
 	}
 	
 	// 29
 	public void doRPredicateSetToMBPredicateSet(@NonNull ArrayList<Predicate> predSeq, @NonNull BottomPattern mb) {
 		
+		// check
 		if(predSeq.isEmpty()) {
 			return;
 		}
 		Predicate rp = predSeq.remove(0);
 		OCLExpression re = rp.getConditionExpression();
-		if (re != null) {
-			OCLExpression me = doRExpToMExp(re);
-			Predicate mp = QVTbaseFactory.eINSTANCE.createPredicate();
-			mp.setConditionExpression(me);
-			mb.getPredicate().add(mp);
-		}
+		assert re != null;
+		// init
+		Predicate mp = QVTbaseFactory.eINSTANCE.createPredicate();
+		// when
+		OCLExpression me = doRExpToMExp(re);
 		doRPredicateSetToMBPredicateSet(predSeq, mb);
+		// assign
+		mp.setConditionExpression(me);
+		mb.getPredicate().add(mp);
 	}
 	
 	// 35
@@ -744,6 +731,15 @@ public class QVTr2QVTcRelations {
 			}
 		}
 		return referredOperation;
+	}
+	
+	private Property getProperty(String name, Type owningType) {
+		
+		for (Property p : owningType.getOwnedAttribute()) {
+			if (p.getName().equals(name))
+				return p;
+		}
+		return null;
 	}
 
 	

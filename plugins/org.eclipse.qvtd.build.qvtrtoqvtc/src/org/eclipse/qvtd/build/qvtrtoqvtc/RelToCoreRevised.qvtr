@@ -491,7 +491,8 @@ top relation TopLevelRelationToMappingForEnforcement
          },
          bottomPattern = db:BottomPattern {
             area = md,
-            bindsTo = mtev:Variable {}
+            bindsTo = mtev:Variable {},
+            realizedVariable = mtev         -- Define containment
          }
       }   --TODO: add var only if tev not in whenVars
    };
@@ -1304,7 +1305,7 @@ relation RDomainToMDBottomForEnforcement
 relation RDomainVarToMDBottomAssignmnetForEnforcement
 {
    rdSeq : Sequence(emof::Element);
-   tcv, mv: essentialocl::Variable;
+   mv: essentialocl::Variable;
  
    domain relations rdtVarsSeq:Sequence(Set(Element)) {
       rdtSet:Set(Element) {
@@ -1315,7 +1316,8 @@ relation RDomainVarToMDBottomAssignmnetForEnforcement
       }
       ++ _
    };
-   enforce domain core mb:BottomPattern {   -- domain bottom
+   enforce domain core mb:BottomPattern {   -- mapping bottom
+      realizedVariable = tcv:RealizedVariable {},   -- added this to correctly add the trace variable 
       assignment = a:PropertyAssignment {
          slotExpression = ve1:VariableExp{referredVariable = tcv},
          targetProperty = tp:Property{name = v.name, class = tcv.type.oclAsType(emof::Class)},
@@ -1562,7 +1564,7 @@ relation RDomainPatternExprToMappingDomainTemplateVarAssignment
 relation RDomainPatternExprToMappingBottomVarAssignment
 {
    sharedDomainVars: Set(essentialocl::Variable);
-   rev, mev : essentialocl::Variable;
+   rev, mev, mv : essentialocl::Variable;
    pn: String;
 
    domain relations seqForAssignment: Sequence(Element) {
@@ -1574,8 +1576,8 @@ relation RDomainPatternExprToMappingBottomVarAssignment
    } {
       sharedDomainVars->includes(e.referredVariable)
    };
-   enforce domain core mb:BottomPattern {
-      realizedVariable = mv:RealizedVariable {},
+   enforce domain core mb:BottomPattern {   -- mapping bottom
+      -- realizedVariable = mv:RealizedVariable {}, -- the RV belongs to the domain bottom!
       assignment = a:PropertyAssignment {
          slotExpression = ve:VariableExp{referredVariable = mv},
          targetProperty = tp:Property{name = pn, class = mv.type.oclAsType(emof::Class)},

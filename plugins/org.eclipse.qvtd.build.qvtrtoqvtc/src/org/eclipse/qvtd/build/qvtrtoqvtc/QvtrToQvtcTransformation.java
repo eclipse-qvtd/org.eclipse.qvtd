@@ -14,8 +14,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -296,6 +298,9 @@ public class QvtrToQvtcTransformation
 		Variable v = null;
 		if (doGlobalSearch) {
 			v = (Variable) variables.get(name, type);
+			if (v == null) {
+				v = (RealizedVariable) realizedVariables.get(name, type);
+			}
 		}
 		if (v == null) {
 			v = PivotFactory.eINSTANCE.createVariable();
@@ -323,18 +328,27 @@ public class QvtrToQvtcTransformation
 		return metaModelManager;
 	}
 
-	private List<Variable> getNestedBindToVariable(ObjectTemplateExp ote) {
-		List<Variable> vars = new ArrayList<Variable>();
+	private Set<Variable> getNestedBindToVariable(ObjectTemplateExp ote) {
+		Set<Variable> vars = new HashSet<Variable>();
 		for (PropertyTemplateItem p : ote.getPart()) {
-			OCLExpression te = p.getValue();
-			if (te instanceof ObjectTemplateExp) {
-				vars.add(((ObjectTemplateExp)te).getBindsTo());
-				vars.addAll(getNestedBindToVariable((ObjectTemplateExp) te));
+			OCLExpression e = p.getValue();
+			if (e instanceof ObjectTemplateExp) {
+				vars.add(((ObjectTemplateExp)e).getBindsTo());
+				vars.addAll(getNestedBindToVariable((ObjectTemplateExp) e));
+			} else {
+				vars.addAll(getVarsOfExp(e));
 			}
 		}
 		return vars;
 	}
 	
+	
+	private Set<Variable> getVarsOfExp(OCLExpression e) {
+		QVTr2QVTcRelations rels = new QVTr2QVTcRelations(this);
+		return rels.getVarsOfExp(e);
+	}
+
+
 	/**
 	 * @return the qvtcSource
 	 */
