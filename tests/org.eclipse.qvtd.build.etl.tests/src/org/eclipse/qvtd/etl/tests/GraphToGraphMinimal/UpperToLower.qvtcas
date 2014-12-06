@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2015/QVTcore java://org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage http://www.eclipse.org/qvt/2015/QVTcoreBase java://org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage"
     name="UpperToLower.qvtc" externalURI="platform:/resource/uk.ac.york.qvtd.tests.hhr/src/qvtc/UpperToLower.qvtc">
   <nestedPackage xsi:type="qvtb:Transformation" xmi:id="T.copyGraph" name="copyGraph"
-      superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclElement">
+      superClass="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
     <modelParameter xmi:id="_67pCwDWCEeOeEIRNR996xQ" name="upperGraph" usedPackage="../../model/SimpleGraph.ecore.oclas#P.simplegraph"/>
     <modelParameter xmi:id="_67pCwTWCEeOeEIRNR996xQ" name="lowerGraph" usedPackage="../../model/SimpleGraph.ecore.oclas#P.simplegraph"/>
     <modelParameter xmi:id="_67pCwjWCEeOeEIRNR996xQ" usedPackage="../../model/SimpleGraph2Graph.ecore.oclas#P.simplegraph2graph"/>
@@ -49,7 +49,7 @@
         <guardPattern/>
         <bottomPattern>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="../../model/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
-            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredProperty="../../model/SimpleGraph.ecore.oclas#p.simplegraph.Graph.name">
               <source xsi:type="pivot:VariableExp" type="../../model/SimpleGraph.ecore.oclas#T.simplegraph.Graph"
                   referredVariable="#_67pCxDWCEeOeEIRNR996xQ"/>
@@ -58,7 +58,7 @@
                 referredVariable="#_67pp0DWCEeOeEIRNR996xQ"/>
           </assignment>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="../../model/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
-            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredProperty="../../model/SimpleGraph.ecore.oclas#p.simplegraph.Graph.name">
               <source xsi:type="pivot:VariableExp" type="../../model/SimpleGraph.ecore.oclas#T.simplegraph.Graph"
                   referredVariable="#_67pCxTWCEeOeEIRNR996xQ"/>
@@ -67,7 +67,7 @@
                 referredVariable="#_67pp0DWCEeOeEIRNR996xQ"/>
           </assignment>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="../../model/SimpleGraph.ecore.oclas#p.simplegraph.Graph.name">
-            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredProperty="../../model/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
               <source xsi:type="pivot:VariableExp" type="../../model/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
                   referredVariable="#_67pp0DWCEeOeEIRNR996xQ"/>
@@ -76,7 +76,7 @@
                 referredVariable="#_67pCxDWCEeOeEIRNR996xQ"/>
           </assignment>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="../../model/SimpleGraph.ecore.oclas#p.simplegraph.Graph.name">
-            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredProperty="../../model/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
               <source xsi:type="pivot:VariableExp" type="../../model/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
                   referredVariable="#_67pp0DWCEeOeEIRNR996xQ"/>
@@ -95,8 +95,8 @@
         </guardPattern>
         <bottomPattern>
           <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
-                referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
               <source xsi:type="pivot:PropertyCallExp" type="../../model/SimpleGraph.ecore.oclas#T.simplegraph.Graph"
                   referredProperty="../../model/SimpleGraph.ecore.oclas#p.simplegraph.Element.graph">
                 <source xsi:type="pivot:VariableExp" type="../../model/SimpleGraph.ecore.oclas#T.simplegraph.Node"
@@ -126,8 +126,8 @@
       </domain>
       <guardPattern>
         <predicate>
-          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
-              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+              referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
             <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="../../model/SimpleGraph.ecore.oclas#T.simplegraph.Graph"
                 referredProperty="../../model/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph1">
               <source xsi:type="pivot:VariableExp" type="../../model/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
@@ -138,8 +138,8 @@
           </conditionExpression>
         </predicate>
         <predicate>
-          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
-              referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+          <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+              referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
             <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="../../model/SimpleGraph.ecore.oclas#T.simplegraph.Graph"
                 referredProperty="../../model/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph2">
               <source xsi:type="pivot:VariableExp" type="../../model/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
@@ -176,7 +176,7 @@
         <guardPattern/>
         <bottomPattern>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="../../model/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label">
-            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredProperty="../../model/SimpleGraph.ecore.oclas#p.simplegraph.Node.label">
               <source xsi:type="pivot:VariableExp" type="../../model/SimpleGraph.ecore.oclas#T.simplegraph.Node"
                   referredVariable="#_67pp1DWCEeOeEIRNR996xQ"/>
@@ -185,7 +185,7 @@
                 referredVariable="#_67pp2DWCEeOeEIRNR996xQ"/>
           </assignment>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="../../model/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label">
-            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredProperty="../../model/SimpleGraph.ecore.oclas#p.simplegraph.Node.label">
               <source xsi:type="pivot:VariableExp" type="../../model/SimpleGraph.ecore.oclas#T.simplegraph.Node"
                   referredVariable="#_67pp1jWCEeOeEIRNR996xQ"/>
@@ -194,7 +194,7 @@
                 referredVariable="#_67pp2DWCEeOeEIRNR996xQ"/>
           </assignment>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="../../model/SimpleGraph.ecore.oclas#p.simplegraph.Node.label">
-            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredProperty="../../model/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label">
               <source xsi:type="pivot:VariableExp" type="../../model/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
                   referredVariable="#_67pp2DWCEeOeEIRNR996xQ"/>
@@ -203,7 +203,7 @@
                 referredVariable="#_67pp1DWCEeOeEIRNR996xQ"/>
           </assignment>
           <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="../../model/SimpleGraph.ecore.oclas#p.simplegraph.Node.label">
-            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+            <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredProperty="../../model/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label">
               <source xsi:type="pivot:VariableExp" type="../../model/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
                   referredVariable="#_67pp2DWCEeOeEIRNR996xQ"/>
