@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qvtr:RelationModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:pivot="http://www.eclipse.org/ocl/3.1.0/Pivot" xmlns:qvtr="http://www.eclipse.org/qvt/0.9/QVTrelation"
+    xmlns:qvtt="http://www.eclipse.org/qvt/0.9/QVTtemplate" xsi:schemaLocation="http://www.eclipse.org/ocl/3.1.0/Pivot java://org.eclipse.ocl.examples.pivot.PivotPackage http://www.eclipse.org/qvt/0.9/QVTrelation java://org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage http://www.eclipse.org/qvt/0.9/QVTtemplate java://org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage"
+    name="SeqToStm.qvtr" externalURI="platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/src/org/eclipse/qvtd/build/qvtrtoqvtc/tests/seqtostm/SeqToStm.qvtr">
+  <ownedComment body="*****************************************************************************&#xA;Copyright (c) 2007,2008 Tata Consultancy Services and others.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;TCS - initial implementation for ModelMorf&#xA;E.D.Willink - alignment with evolved specification&#xA;*****************************************************************************"/>
+  <nestedPackage xsi:type="qvtr:RelationalTransformation" xmi:id="T.SeqToStm" name="SeqToStm"
+      superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclElement">
+    <modelParameter xmi:id="qT.SeqToStm.seqDgm" name="seqDgm" usedPackage="SeqMM.emof.oclas#P.SeqMM"/>
+    <modelParameter xmi:id="qT.SeqToStm.stm" name="stm" usedPackage="StmcMM.emof.oclas#P.StmcMM"/>
+    <rule xsi:type="qvtr:Relation" name="InteractionToStateMachine" isTopLevel="true">
+      <domain xsi:type="qvtr:RelationDomain" xmi:id="qD.SeqToStm.InteractionToStateMachine.seqDgm"
+          isCheckable="true" isEnforceable="false" typedModel="#qT.SeqToStm.seqDgm"
+          rootVariable="#//@nestedPackage.0/@rule.0/@variable.1">
+        <pattern>
+          <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="SeqMM.emof.oclas#T.SeqMM.Interaction"
+              bindsTo="#//@nestedPackage.0/@rule.0/@variable.1" referredClass="SeqMM.emof.oclas#T.SeqMM.Interaction">
+            <part referredProperty="SeqMM.emof.oclas#p.SeqMM.Interaction.name">
+              <value xsi:type="pivot:VariableExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                  referredVariable="#//@nestedPackage.0/@rule.0/@variable.0"/>
+            </part>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <domain xsi:type="qvtr:RelationDomain" xmi:id="qD.SeqToStm.InteractionToStateMachine.stm"
+          isCheckable="true" isEnforceable="true" typedModel="#qT.SeqToStm.stm" rootVariable="#//@nestedPackage.0/@rule.0/@variable.2">
+        <pattern>
+          <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="StmcMM.emof.oclas#T.StmcMM.StateMachine"
+              bindsTo="#//@nestedPackage.0/@rule.0/@variable.2" referredClass="StmcMM.emof.oclas#T.StmcMM.StateMachine">
+            <part referredProperty="StmcMM.emof.oclas#p.StmcMM.StateMachine.name">
+              <value xsi:type="pivot:VariableExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                  referredVariable="#//@nestedPackage.0/@rule.0/@variable.0"/>
+            </part>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <variable name="sn" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"/>
+      <variable name="i" type="SeqMM.emof.oclas#T.SeqMM.Interaction"/>
+      <variable name="s" type="StmcMM.emof.oclas#T.StmcMM.StateMachine"/>
+    </rule>
+    <ownedKey identifies="StmcMM.emof.oclas#T.StmcMM.StateMachine" part="StmcMM.emof.oclas#p.StmcMM.StateMachine.name"/>
+    <ownedKey identifies="StmcMM.emof.oclas#T.StmcMM.State" part="StmcMM.emof.oclas#p.StmcMM.State.name StmcMM.emof.oclas#p.StmcMM.State.owner"/>
+    <ownedKey identifies="StmcMM.emof.oclas#T.StmcMM.Transition" part="StmcMM.emof.oclas#p.StmcMM.Transition.name StmcMM.emof.oclas#p.StmcMM.Transition.owner StmcMM.emof.oclas#p.StmcMM.Transition.fromState StmcMM.emof.oclas#p.StmcMM.Transition.toState"/>
+    <ownedKey identifies="StmcMM.emof.oclas#T.StmcMM.SendMsg" part="StmcMM.emof.oclas#p.StmcMM.SendMsg.message"/>
+    <ownedKey identifies="StmcMM.emof.oclas#T.StmcMM.Message" part="StmcMM.emof.oclas#p.StmcMM.Message.messageId"/>
+  </nestedPackage>
+  <unit name="SeqMM" usedPackage="pivot:Package SeqMM.emof.oclas#P.SeqMM">
+    <ownedComment body="*****************************************************************************&#xA;Copyright (c) 2007,2008 Tata Consultancy Services and others.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;TCS - initial implementation for ModelMorf&#xA;E.D.Willink - alignment with evolved specification&#xA;*****************************************************************************"/>
+  </unit>
+  <unit name="StmcMM" usedPackage="pivot:Package StmcMM.emof.oclas#P.StmcMM"/>
+</qvtr:RelationModel>

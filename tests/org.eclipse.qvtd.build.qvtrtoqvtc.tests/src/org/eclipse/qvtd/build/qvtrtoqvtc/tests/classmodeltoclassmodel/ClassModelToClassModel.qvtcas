@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:pivot="http://www.eclipse.org/ocl/3.1.0/Pivot" xmlns:qvtb="http://www.eclipse.org/qvt/0.9/QVTbase"
+    xmlns:qvtc="http://www.eclipse.org/qvt/0.9/QVTcore" xmlns:qvtcb="http://www.eclipse.org/qvt/0.9/QVTcoreBase"
+    xsi:schemaLocation="http://www.eclipse.org/ocl/3.1.0/Pivot java://org.eclipse.ocl.examples.pivot.PivotPackage http://www.eclipse.org/qvt/0.9/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/0.9/QVTcore java://org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage http://www.eclipse.org/qvt/0.9/QVTcoreBase java://org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage">
+  <pivot:Root name="ClassModelToClassModel.qvtcas" externalURI="file:/C:/git/org.eclipse.qvtd/tests/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests/classmodeltoclassmodel/ClassModelToClassModel.qvtcas">
+    <nestedPackage xsi:type="qvtb:Transformation" xmi:id="T.-null-element-">
+      <modelParameter xmi:id="qT.null.uml1" name="uml1" usedPackage="ClassMM.emof.oclas#P.ClassMM"/>
+      <modelParameter xmi:id="qT.null.uml2" name="uml2" usedPackage="ClassMM.emof.oclas#P.ClassMM"/>
+      <rule xsi:type="qvtc:Mapping" name="classToClass_uml1">
+        <domain xsi:type="qvtcb:CoreDomain" name="uml1" isEnforceable="true" typedModel="#qT.null.uml1">
+          <guardPattern/>
+          <bottomPattern bindsTo="#qV.null.classToClass_uml1.bottom.c1"/>
+        </domain>
+        <guardPattern/>
+        <bottomPattern bindsTo="#/2 #qV.null.classToClass_uml1.bottom.classToClass_uml1_v #/1">
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <source xsi:type="pivot:PropertyCallExp" type="ClassMM.emof.oclas#T.ClassMM.Class"
+                  referredProperty="ClassModelToClassModel.ecore.oclas#p.PClassModelToClassModel.TclassToClass.c1">
+                <source xsi:type="pivot:VariableExp" type="ClassModelToClassModel.ecore.oclas#T.PClassModelToClassModel.TclassToClass"
+                    referredVariable="#qV.null.classToClass_uml1.bottom.classToClass_uml1_v"/>
+              </source>
+              <argument xsi:type="pivot:VariableExp" type="ClassMM.emof.oclas#T.ClassMM.Class"
+                  referredVariable="#/2"/>
+            </conditionExpression>
+          </predicate>
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="ClassMM.emof.oclas#p.ClassMM.Class.name">
+            <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                referredVariable="#/1"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="ClassMM.emof.oclas#T.ClassMM.Class"
+                referredVariable="#qV.null.classToClass_uml1.bottom.c1"/>
+          </assignment>
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="ClassModelToClassModel.ecore.oclas#p.PClassModelToClassModel.TclassToClass.c1">
+            <value xsi:type="pivot:VariableExp" type="ClassMM.emof.oclas#T.ClassMM.Class"
+                referredVariable="#/2"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="ClassModelToClassModel.ecore.oclas#T.PClassModelToClassModel.TclassToClass"
+                referredVariable="#qV.null.classToClass_uml1.bottom.classToClass_uml1_v"/>
+          </assignment>
+          <realizedVariable xmi:id="qV.null.classToClass_uml1.bottom.c1" name="c1"
+              type="ClassMM.emof.oclas#T.ClassMM.Class"/>
+          <realizedVariable xmi:id="qV.null.classToClass_uml1.bottom.classToClass_uml1_v"
+              name="classToClass_uml1_v" type="ClassModelToClassModel.ecore.oclas#T.PClassModelToClassModel.TclassToClass"/>
+        </bottomPattern>
+      </rule>
+      <rule xsi:type="qvtc:Mapping" name="classToClass_uml2">
+        <domain xsi:type="qvtcb:CoreDomain" name="uml2" isEnforceable="true" typedModel="#qT.null.uml2">
+          <guardPattern/>
+          <bottomPattern bindsTo="#qV.null.classToClass_uml2.bottom.c2"/>
+        </domain>
+        <guardPattern/>
+        <bottomPattern bindsTo="#/3 #qV.null.classToClass_uml2.bottom.classToClass_uml2_v #/1">
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <source xsi:type="pivot:PropertyCallExp" type="ClassMM.emof.oclas#T.ClassMM.Class"
+                  referredProperty="ClassModelToClassModel.ecore.oclas#p.PClassModelToClassModel.TclassToClass.c2">
+                <source xsi:type="pivot:VariableExp" type="ClassModelToClassModel.ecore.oclas#T.PClassModelToClassModel.TclassToClass"
+                    referredVariable="#qV.null.classToClass_uml2.bottom.classToClass_uml2_v"/>
+              </source>
+              <argument xsi:type="pivot:VariableExp" type="ClassMM.emof.oclas#T.ClassMM.Class"
+                  referredVariable="#/3"/>
+            </conditionExpression>
+          </predicate>
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="ClassMM.emof.oclas#p.ClassMM.Class.name">
+            <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                referredVariable="#/1"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="ClassMM.emof.oclas#T.ClassMM.Class"
+                referredVariable="#qV.null.classToClass_uml2.bottom.c2"/>
+          </assignment>
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="ClassModelToClassModel.ecore.oclas#p.PClassModelToClassModel.TclassToClass.c2">
+            <value xsi:type="pivot:VariableExp" type="ClassMM.emof.oclas#T.ClassMM.Class"
+                referredVariable="#/3"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="ClassModelToClassModel.ecore.oclas#T.PClassModelToClassModel.TclassToClass"
+                referredVariable="#qV.null.classToClass_uml2.bottom.classToClass_uml2_v"/>
+          </assignment>
+          <realizedVariable xmi:id="qV.null.classToClass_uml2.bottom.c2" name="c2"
+              type="ClassMM.emof.oclas#T.ClassMM.Class"/>
+          <realizedVariable xmi:id="qV.null.classToClass_uml2.bottom.classToClass_uml2_v"
+              name="classToClass_uml2_v" type="ClassModelToClassModel.ecore.oclas#T.PClassModelToClassModel.TclassToClass"/>
+        </bottomPattern>
+      </rule>
+      <rule xsi:type="qvtc:Mapping" name="classToClassHierarchy_uml1">
+        <domain xsi:type="qvtcb:CoreDomain" name="uml1" isEnforceable="true" typedModel="#qT.null.uml1">
+          <guardPattern/>
+          <bottomPattern bindsTo="#qV.null.classToClass_uml1.bottom.c1"/>
+        </domain>
+        <guardPattern bindsTo="#/4 #/2 #/3">
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <source xsi:type="pivot:PropertyCallExp">
+                <source xsi:type="pivot:VariableExp" type="ClassModelToClassModel.ecore.oclas#T.PClassModelToClassModel.TclassToClass"
+                    referredVariable="#/4"/>
+              </source>
+              <argument xsi:type="pivot:VariableExp" type="ClassMM.emof.oclas#T.ClassMM.Class"
+                  referredVariable="#/2"/>
+            </conditionExpression>
+          </predicate>
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <source xsi:type="pivot:PropertyCallExp">
+                <source xsi:type="pivot:VariableExp" type="ClassModelToClassModel.ecore.oclas#T.PClassModelToClassModel.TclassToClass"
+                    referredVariable="#/4"/>
+              </source>
+              <argument xsi:type="pivot:VariableExp" type="ClassMM.emof.oclas#T.ClassMM.Class"
+                  referredVariable="#/3"/>
+            </conditionExpression>
+          </predicate>
+        </guardPattern>
+        <bottomPattern bindsTo="#/2 #qV.null.classToClassHierarchy_uml1.bottom.classToClassHierarchy_uml1_v">
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <source xsi:type="pivot:PropertyCallExp" type="ClassMM.emof.oclas#T.ClassMM.Class"
+                  referredProperty="ClassModelToClassModel.ecore.oclas#p.PClassModelToClassModel.TclassToClassHierarchy.c1">
+                <source xsi:type="pivot:VariableExp" type="ClassModelToClassModel.ecore.oclas#T.PClassModelToClassModel.TclassToClassHierarchy"
+                    referredVariable="#qV.null.classToClassHierarchy_uml1.bottom.classToClassHierarchy_uml1_v"/>
+              </source>
+              <argument xsi:type="pivot:VariableExp" type="ClassMM.emof.oclas#T.ClassMM.Class"
+                  referredVariable="#/2"/>
+            </conditionExpression>
+          </predicate>
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="ClassModelToClassModel.ecore.oclas#p.PClassModelToClassModel.TclassToClassHierarchy.c1">
+            <value xsi:type="pivot:VariableExp" type="ClassMM.emof.oclas#T.ClassMM.Class"
+                referredVariable="#/2"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="ClassModelToClassModel.ecore.oclas#T.PClassModelToClassModel.TclassToClassHierarchy"
+                referredVariable="#qV.null.classToClassHierarchy_uml1.bottom.classToClassHierarchy_uml1_v"/>
+          </assignment>
+          <realizedVariable xmi:id="qV.null.classToClassHierarchy_uml1.bottom.classToClassHierarchy_uml1_v"
+              name="classToClassHierarchy_uml1_v" type="ClassModelToClassModel.ecore.oclas#T.PClassModelToClassModel.TclassToClassHierarchy"/>
+        </bottomPattern>
+      </rule>
+      <rule xsi:type="qvtc:Mapping" name="classToClassHierarchy_uml2">
+        <domain xsi:type="qvtcb:CoreDomain" name="uml2" isEnforceable="true" typedModel="#qT.null.uml2">
+          <guardPattern/>
+          <bottomPattern bindsTo="#qV.null.classToClass_uml2.bottom.c2"/>
+        </domain>
+        <guardPattern bindsTo="#/4 #/2 #/3">
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <source xsi:type="pivot:PropertyCallExp">
+                <source xsi:type="pivot:VariableExp" type="ClassModelToClassModel.ecore.oclas#T.PClassModelToClassModel.TclassToClass"
+                    referredVariable="#/4"/>
+              </source>
+              <argument xsi:type="pivot:VariableExp" type="ClassMM.emof.oclas#T.ClassMM.Class"
+                  referredVariable="#/2"/>
+            </conditionExpression>
+          </predicate>
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <source xsi:type="pivot:PropertyCallExp">
+                <source xsi:type="pivot:VariableExp" type="ClassModelToClassModel.ecore.oclas#T.PClassModelToClassModel.TclassToClass"
+                    referredVariable="#/4"/>
+              </source>
+              <argument xsi:type="pivot:VariableExp" type="ClassMM.emof.oclas#T.ClassMM.Class"
+                  referredVariable="#/3"/>
+            </conditionExpression>
+          </predicate>
+        </guardPattern>
+        <bottomPattern bindsTo="#/3 #qV.null.classToClassHierarchy_uml2.bottom.classToClassHierarchy_uml2_v">
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <source xsi:type="pivot:PropertyCallExp" type="ClassMM.emof.oclas#T.ClassMM.Class"
+                  referredProperty="ClassModelToClassModel.ecore.oclas#p.PClassModelToClassModel.TclassToClassHierarchy.c2">
+                <source xsi:type="pivot:VariableExp" type="ClassModelToClassModel.ecore.oclas#T.PClassModelToClassModel.TclassToClassHierarchy"
+                    referredVariable="#qV.null.classToClassHierarchy_uml2.bottom.classToClassHierarchy_uml2_v"/>
+              </source>
+              <argument xsi:type="pivot:VariableExp" type="ClassMM.emof.oclas#T.ClassMM.Class"
+                  referredVariable="#/3"/>
+            </conditionExpression>
+          </predicate>
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="ClassModelToClassModel.ecore.oclas#p.PClassModelToClassModel.TclassToClassHierarchy.c2">
+            <value xsi:type="pivot:VariableExp" type="ClassMM.emof.oclas#T.ClassMM.Class"
+                referredVariable="#/3"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="ClassModelToClassModel.ecore.oclas#T.PClassModelToClassModel.TclassToClassHierarchy"
+                referredVariable="#qV.null.classToClassHierarchy_uml2.bottom.classToClassHierarchy_uml2_v"/>
+          </assignment>
+          <realizedVariable xmi:id="qV.null.classToClassHierarchy_uml2.bottom.classToClassHierarchy_uml2_v"
+              name="classToClassHierarchy_uml2_v" type="ClassModelToClassModel.ecore.oclas#T.PClassModelToClassModel.TclassToClassHierarchy"/>
+        </bottomPattern>
+      </rule>
+    </nestedPackage>
+  </pivot:Root>
+  <pivot:Variable name="cn" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"/>
+  <pivot:Variable name="c1" type="ClassMM.emof.oclas#T.ClassMM.Class"/>
+  <pivot:Variable name="c2" type="ClassMM.emof.oclas#T.ClassMM.Class"/>
+  <pivot:Variable name="TclassToClass_v" type="ClassModelToClassModel.ecore.oclas#T.PClassModelToClassModel.TclassToClass"/>
+</xmi:XMI>

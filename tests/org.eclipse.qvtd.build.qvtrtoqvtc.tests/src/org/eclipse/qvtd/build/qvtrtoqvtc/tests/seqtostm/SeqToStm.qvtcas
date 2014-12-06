@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:pivot="http://www.eclipse.org/ocl/3.1.0/Pivot" xmlns:qvtb="http://www.eclipse.org/qvt/0.9/QVTbase"
+    xmlns:qvtc="http://www.eclipse.org/qvt/0.9/QVTcore" xmlns:qvtcb="http://www.eclipse.org/qvt/0.9/QVTcoreBase"
+    xsi:schemaLocation="http://www.eclipse.org/ocl/3.1.0/Pivot java://org.eclipse.ocl.examples.pivot.PivotPackage http://www.eclipse.org/qvt/0.9/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/0.9/QVTcore java://org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage http://www.eclipse.org/qvt/0.9/QVTcoreBase java://org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage">
+  <pivot:Root name="SeqToStm.qvtcas" externalURI="file:/C:/git/org.eclipse.qvtd/tests/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests/seqtostm/SeqToStm.qvtcas">
+    <nestedPackage xsi:type="qvtb:Transformation" xmi:id="T.-null-element-">
+      <modelParameter xmi:id="qT.null.seqDgm" name="seqDgm" usedPackage="SeqMM.emof.oclas#P.SeqMM"/>
+      <modelParameter xmi:id="qT.null.stm" name="stm" usedPackage="StmcMM.emof.oclas#P.StmcMM"/>
+      <rule xsi:type="qvtc:Mapping" name="InteractionToStateMachine_stm">
+        <domain xsi:type="qvtcb:CoreDomain" name="stm" isEnforceable="true" typedModel="#qT.null.stm">
+          <guardPattern/>
+          <bottomPattern bindsTo="#/1"/>
+        </domain>
+        <guardPattern/>
+        <bottomPattern bindsTo="#qV.null.InteractionToStateMachine_stm.bottom.InteractionToStateMachine_stm_v #/2">
+          <predicate>
+            <conditionExpression xsi:type="pivot:OperationCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+                referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <source xsi:type="pivot:PropertyCallExp" type="StmcMM.emof.oclas#T.StmcMM.StateMachine"
+                  referredProperty="SeqToStm.ecore.oclas#p.PSeqToStm.TInteractionToStateMachine.s">
+                <source xsi:type="pivot:VariableExp" type="SeqToStm.ecore.oclas#T.PSeqToStm.TInteractionToStateMachine"
+                    referredVariable="#qV.null.InteractionToStateMachine_stm.bottom.InteractionToStateMachine_stm_v"/>
+              </source>
+              <argument xsi:type="pivot:VariableExp" type="StmcMM.emof.oclas#T.StmcMM.StateMachine"
+                  referredVariable="#/1"/>
+            </conditionExpression>
+          </predicate>
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="StmcMM.emof.oclas#p.StmcMM.StateMachine.name">
+            <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                referredVariable="#/2"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="StmcMM.emof.oclas#T.StmcMM.StateMachine"
+                referredVariable="#/1"/>
+          </assignment>
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SeqToStm.ecore.oclas#p.PSeqToStm.TInteractionToStateMachine.s">
+            <value xsi:type="pivot:VariableExp" type="StmcMM.emof.oclas#T.StmcMM.StateMachine"
+                referredVariable="#/1"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="SeqToStm.ecore.oclas#T.PSeqToStm.TInteractionToStateMachine"
+                referredVariable="#qV.null.InteractionToStateMachine_stm.bottom.InteractionToStateMachine_stm_v"/>
+          </assignment>
+          <realizedVariable xmi:id="qV.null.InteractionToStateMachine_stm.bottom.InteractionToStateMachine_stm_v"
+              name="InteractionToStateMachine_stm_v" type="SeqToStm.ecore.oclas#T.PSeqToStm.TInteractionToStateMachine"/>
+        </bottomPattern>
+      </rule>
+    </nestedPackage>
+  </pivot:Root>
+  <qvtcb:RealizedVariable name="s" type="StmcMM.emof.oclas#T.StmcMM.StateMachine"/>
+  <pivot:Variable name="sn" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"/>
+</xmi:XMI>
