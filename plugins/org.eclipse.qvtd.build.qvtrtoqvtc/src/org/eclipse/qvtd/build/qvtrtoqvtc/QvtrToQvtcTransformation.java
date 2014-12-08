@@ -25,12 +25,15 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
+import org.eclipse.ocl.examples.pivot.OperationCallExp;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
 import org.eclipse.ocl.examples.pivot.Property;
+import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableDeclaration;
+import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseBottomPatternKey;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseCoreDomainKey;
@@ -42,6 +45,8 @@ import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RuleBindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.TopLevelRelationToMappingForEnforcement;
 import org.eclipse.qvtd.build.qvtrtoqvtc.utilities.TransformationTraceData;
 import org.eclipse.qvtd.build.qvtrtoqvtc.utilities.TransformationTraceDataImpl;
+import org.eclipse.qvtd.pivot.qvtbase.Predicate;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
@@ -49,6 +54,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
+import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
@@ -125,12 +131,49 @@ public class QvtrToQvtcTransformation
 	}
 
 
+	public @NonNull OperationCallExp createOperationCallExp() {
+		OperationCallExp oce = PivotFactory.eINSTANCE.createOperationCallExp();
+		assert oce != null;
+		addOrphan(oce);
+		return oce;
+	}
+
+
+	public @NonNull Predicate createPredicate() {
+		Predicate pd = QVTbaseFactory.eINSTANCE.createPredicate();
+		assert pd != null;
+		addOrphan(pd);
+		return pd;
+	}
+
+	public @NonNull PropertyAssignment createPropertyAssignment() {
+		PropertyAssignment a = QVTcoreBaseFactory.eINSTANCE.createPropertyAssignment();
+		assert a != null;
+		addOrphan(a);
+		return a;
+	}
+	
+	
+	public @NonNull PropertyCallExp createPropertyCallExp() {
+		PropertyCallExp pce = PivotFactory.eINSTANCE.createPropertyCallExp();
+		assert pce != null;
+		addOrphan(pce);
+		return pce;
+	}
+
+
+	public @NonNull VariableExp createVariableExp() {
+		VariableExp ve = PivotFactory.eINSTANCE.createVariableExp();
+		assert ve != null;
+		addOrphan(ve);
+		return ve;
+	}
+
 	// Save the qvtc resource
 	public void dispose() {
 		// What about the trace model? we need to separate them
 		//qvtcSource.getContents().addAll(traceData.getRootOutputELements());
 	}
-
 
 	public void execute() {
 		executeFactory(RelationalTransformationToTracePackage.FACTORY);
@@ -148,7 +191,7 @@ public class QvtrToQvtcTransformation
 			}
 		}
 	}
-
+	
 	public void executeFactory(@NonNull Rule.Factory factory) {
 		for (Rule rule : factory.getRules(this, qvtrModel)) {
 			if (rule != null) {
@@ -159,7 +202,6 @@ public class QvtrToQvtcTransformation
 			}
 		}
 	}
-	
 	
 	public void executeNestedRule(@NonNull Rule rule) {
 		if (!rule.hasExecuted()) {
@@ -175,8 +217,7 @@ public class QvtrToQvtcTransformation
 			traceData.addRecord(rule);
 		}
 	}
-
-
+	
 	public void executeTopLevelRule(@NonNull Rule rule) {
 		if (!rule.hasExecuted()) {
 			rule.check();
@@ -191,7 +232,7 @@ public class QvtrToQvtcTransformation
 			}
 		}
 	}
-
+	
 	public @NonNull BottomPattern findBottomPattern(@NonNull Area area) {
 		BottomPattern mb = null;
 		if (doGlobalSearch) {
@@ -241,7 +282,7 @@ public class QvtrToQvtcTransformation
 		
 		return mg;
 	}
-	
+
 	public @NonNull Mapping findMapping(@NonNull String mn, @NonNull Transformation mt) {
 		
 		Mapping m = null;
@@ -254,7 +295,6 @@ public class QvtrToQvtcTransformation
 			m.setName(mn);
 			m.setTransformation(mt);
 			mappings.add(m);
-			//addOrphan(m);
 		}
 		return m;
 	}
@@ -275,7 +315,7 @@ public class QvtrToQvtcTransformation
 		}
 		return p;
 	}
-	
+
 	public @NonNull RealizedVariable findRealizedVariable(String name, Type type) {
 		
 		RealizedVariable rv = null;
@@ -292,7 +332,8 @@ public class QvtrToQvtcTransformation
 		}
 		return rv;
 	}
-
+	
+	
 	public @NonNull Variable findVariable(String name, Type type) {
 		
 		Variable v = null;
@@ -312,11 +353,12 @@ public class QvtrToQvtcTransformation
 		}
 		return v;
 	}
-	
+
+
 	public @NonNull Collection<? extends EObject> getCoreRoots() {
 		return coreRoots;
 	}
-
+	
 	public Key getKeyforClass() {
 		return keyforClass;
 	}
@@ -327,7 +369,7 @@ public class QvtrToQvtcTransformation
 	public MetaModelManager getMetaModelManager() {
 		return metaModelManager;
 	}
-
+	
 	private Set<Variable> getNestedBindToVariable(ObjectTemplateExp ote) {
 		Set<Variable> vars = new HashSet<Variable>();
 		for (PropertyTemplateItem p : ote.getPart()) {
@@ -342,13 +384,6 @@ public class QvtrToQvtcTransformation
 		return vars;
 	}
 	
-	
-	private Set<Variable> getVarsOfExp(OCLExpression e) {
-		QVTr2QVTcRelations rels = new QVTr2QVTcRelations(this);
-		return rels.getVarsOfExp(e);
-	}
-
-
 	/**
 	 * @return the qvtcSource
 	 */
@@ -363,21 +398,28 @@ public class QvtrToQvtcTransformation
 	public @NonNull Collection<? extends EObject> getTraceRoots() {
 		return traceRoots;
 	}
-	
+
 	public @NonNull VariableDeclaration getVariableTrace(@NonNull Variable referredVariable) {
 		
 		Variable rf = variableTrace.get(referredVariable);
 		assert rf != null;
 		return rf;
 	}
-	
+
+	private Set<Variable> getVarsOfExp(OCLExpression e) {
+		QVTr2QVTcRelations rels = new QVTr2QVTcRelations(this);
+		return rels.getVarsOfExp(e);
+	}
+
+
 	/**
 	 * @return the doGlobalSearch
 	 */
 	public boolean isDoGlobalSearch() {
 		return doGlobalSearch;
 	}
-	
+
+
 	// Create the top rules, and search the input model for the appropriate types, when possible?
 	public void prepare() {
 		try {
@@ -397,11 +439,13 @@ public class QvtrToQvtcTransformation
 //			}
 		}
 	}
-	
+
+
 	public void putVariableTrace(@NonNull Variable rv, @NonNull Variable mv) {
 		
 		variableTrace.put(rv, mv);
 	}
+
 
 	public void save(@NonNull Resource asResource, @NonNull Collection<? extends EObject> eObjects, @NonNull Map<Object, Object> options) throws IOException {
         Root root = PivotFactory.eINSTANCE.createRoot();
@@ -418,13 +462,12 @@ public class QvtrToQvtcTransformation
 		asResource.save(options);
 	}
 
+
 	/**
 	 * @param doGlobalSearch the doGlobalSearch to set
 	 */
 	public void setDoGlobalSearch(boolean doGlobalSearch) {
 		this.doGlobalSearch = doGlobalSearch;
 	}
-
-	
 
 }

@@ -10,31 +10,31 @@
       <rule xsi:type="qvtc:Mapping" name="InteractionToStateMachine_stm">
         <domain xsi:type="qvtcb:CoreDomain" name="stm" isEnforceable="true" typedModel="#qT.null.stm">
           <guardPattern/>
-          <bottomPattern bindsTo="#/1"/>
+          <bottomPattern bindsTo="#qV.null.InteractionToStateMachine_stm.stm.bottom.s">
+            <realizedVariable xmi:id="qV.null.InteractionToStateMachine_stm.stm.bottom.s"
+                name="s" type="StmcMM.emof.oclas#T.StmcMM.StateMachine"/>
+          </bottomPattern>
+        </domain>
+        <domain xsi:type="qvtcb:CoreDomain" name="seqDgm" isCheckable="true" isEnforceable="false"
+            typedModel="#qT.null.seqDgm">
+          <guardPattern/>
+          <bottomPattern bindsTo="#/2"/>
         </domain>
         <guardPattern/>
-        <bottomPattern bindsTo="#qV.null.InteractionToStateMachine_stm.bottom.InteractionToStateMachine_stm_v #/2">
-          <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
-                referredOperation="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-              <source xsi:type="pivot:PropertyCallExp" type="StmcMM.emof.oclas#T.StmcMM.StateMachine"
-                  referredProperty="SeqToStm.ecore.oclas#p.PSeqToStm.TInteractionToStateMachine.s">
-                <source xsi:type="pivot:VariableExp" type="SeqToStm.ecore.oclas#T.PSeqToStm.TInteractionToStateMachine"
-                    referredVariable="#qV.null.InteractionToStateMachine_stm.bottom.InteractionToStateMachine_stm_v"/>
-              </source>
-              <argument xsi:type="pivot:VariableExp" type="StmcMM.emof.oclas#T.StmcMM.StateMachine"
-                  referredVariable="#/1"/>
-            </conditionExpression>
-          </predicate>
+        <bottomPattern bindsTo="#/1 #qV.null.InteractionToStateMachine_stm.bottom.InteractionToStateMachine_stm_v">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SeqMM.emof.oclas#p.SeqMM.Interaction.name">
+            <value xsi:type="pivot:VariableExp" referredVariable="#/1"/>
+            <slotExpression xsi:type="pivot:VariableExp" referredVariable="#/2"/>
+          </assignment>
           <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="StmcMM.emof.oclas#p.StmcMM.StateMachine.name">
             <value xsi:type="pivot:VariableExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
-                referredVariable="#/2"/>
-            <slotExpression xsi:type="pivot:VariableExp" type="StmcMM.emof.oclas#T.StmcMM.StateMachine"
                 referredVariable="#/1"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="StmcMM.emof.oclas#T.StmcMM.StateMachine"
+                referredVariable="#qV.null.InteractionToStateMachine_stm.stm.bottom.s"/>
           </assignment>
           <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SeqToStm.ecore.oclas#p.PSeqToStm.TInteractionToStateMachine.s">
             <value xsi:type="pivot:VariableExp" type="StmcMM.emof.oclas#T.StmcMM.StateMachine"
-                referredVariable="#/1"/>
+                referredVariable="#qV.null.InteractionToStateMachine_stm.stm.bottom.s"/>
             <slotExpression xsi:type="pivot:VariableExp" type="SeqToStm.ecore.oclas#T.PSeqToStm.TInteractionToStateMachine"
                 referredVariable="#qV.null.InteractionToStateMachine_stm.bottom.InteractionToStateMachine_stm_v"/>
           </assignment>
@@ -42,8 +42,49 @@
               name="InteractionToStateMachine_stm_v" type="SeqToStm.ecore.oclas#T.PSeqToStm.TInteractionToStateMachine"/>
         </bottomPattern>
       </rule>
+      <rule xsi:type="qvtc:Mapping" name="StateToState_stm">
+        <domain xsi:type="qvtcb:CoreDomain" name="stm" isEnforceable="true" typedModel="#qT.null.stm">
+          <guardPattern/>
+          <bottomPattern bindsTo="#qV.null.StateToState_stm.stm.bottom.st2">
+            <realizedVariable xmi:id="qV.null.StateToState_stm.stm.bottom.st2" name="st2"
+                type="StmcMM.emof.oclas#T.StmcMM.State"/>
+          </bottomPattern>
+        </domain>
+        <domain xsi:type="qvtcb:CoreDomain" name="seqDgm" isCheckable="true" isEnforceable="false"
+            typedModel="#qT.null.seqDgm">
+          <guardPattern/>
+          <bottomPattern bindsTo="#/3"/>
+        </domain>
+        <guardPattern/>
+        <bottomPattern bindsTo="#/1 #qV.null.StateToState_stm.bottom.StateToState_stm_v">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SeqMM.emof.oclas#p.SeqMM.State.name">
+            <value xsi:type="pivot:VariableExp" referredVariable="#/1"/>
+            <slotExpression xsi:type="pivot:VariableExp" referredVariable="#/3"/>
+          </assignment>
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SeqToStm.ecore.oclas#p.PSeqToStm.TStateToState.st2">
+            <value xsi:type="pivot:VariableExp" type="StmcMM.emof.oclas#T.StmcMM.State"
+                referredVariable="#qV.null.StateToState_stm.stm.bottom.st2"/>
+            <slotExpression xsi:type="pivot:VariableExp" type="SeqToStm.ecore.oclas#T.PSeqToStm.TStateToState"
+                referredVariable="#qV.null.StateToState_stm.bottom.StateToState_stm_v"/>
+          </assignment>
+          <realizedVariable xmi:id="qV.null.StateToState_stm.bottom.StateToState_stm_v"
+              name="StateToState_stm_v" type="SeqToStm.ecore.oclas#T.PSeqToStm.TStateToState"/>
+        </bottomPattern>
+        <local name="StateToState_stm_forNonIdentityProp">
+          <guardPattern/>
+          <bottomPattern>
+            <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="StmcMM.emof.oclas#p.StmcMM.State.name">
+              <value xsi:type="pivot:VariableExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                  referredVariable="#/1"/>
+              <slotExpression xsi:type="pivot:VariableExp" type="StmcMM.emof.oclas#T.StmcMM.State"
+                  referredVariable="#qV.null.StateToState_stm.stm.bottom.st2"/>
+            </assignment>
+          </bottomPattern>
+        </local>
+      </rule>
     </nestedPackage>
   </pivot:Root>
-  <qvtcb:RealizedVariable name="s" type="StmcMM.emof.oclas#T.StmcMM.StateMachine"/>
   <pivot:Variable name="sn" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"/>
+  <pivot:Variable name="i" type="SeqMM.emof.oclas#T.SeqMM.Interaction"/>
+  <pivot:Variable name="st1" type="SeqMM.emof.oclas#T.SeqMM.State"/>
 </xmi:XMI>

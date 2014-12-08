@@ -158,32 +158,37 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 		Relation r = ruleBindings.get(RELATIONS_r);
 		assert (r != null) && (mt != null);
 		for (SubRecord subRecord : subRecords) {
-			Mapping m = transformation.findMapping(rn+'_'+subRecord.dn, mt);
-			assert m != null;
-			subRecord.m = m;
-			GuardPattern mg = transformation.findGuardPattern(m);
-			assert mg != null;
-			subRecord.mg = mg;
-			CoreDomain md = transformation.findCoreDomain(subRecord.dn, m);
-			assert md != null;
-			subRecord.md = md;
-			TypedModel mdir = null;
-			for (TypedModel tm : mt.getModelParameter()) {
-				if (tm.getName() == subRecord.tmn) {
-					if (tm.getUsedPackage().equals(subRecord.up)) {
-						mdir = tm;
-						break;
+			final Transformation mt2 = mt;
+			if (mt2 != null) {
+				Mapping m = transformation.findMapping(rn+'_'+subRecord.dn, mt2);
+				assert m != null;
+				subRecord.m = m;
+				GuardPattern mg = transformation.findGuardPattern(m);
+				assert mg != null;
+				subRecord.mg = mg;
+				CoreDomain md = transformation.findCoreDomain(subRecord.dn, m);
+				assert md != null;
+				subRecord.md = md;
+				TypedModel mdir = null;
+				for (TypedModel tm : mt2.getModelParameter()) {
+					if (tm.getName() == subRecord.tmn) {
+						if (tm.getUsedPackage().equals(subRecord.up)) {
+							mdir = tm;
+							break;
+						}
 					}
 				}
+				assert mdir != null;
+				subRecord.mdir = mdir;
+				GuardPattern dg = transformation.findGuardPattern(md);
+				assert dg != null;
+				subRecord.dg = dg;
+				BottomPattern db = transformation.findBottomPattern(md);
+				assert db != null;
+				subRecord.db = db;
+			} else {
+				// TODO handle null value
 			}
-			assert mdir != null;
-			subRecord.mdir = mdir;
-			GuardPattern dg = transformation.findGuardPattern(md);
-			assert dg != null;
-			subRecord.dg = dg;
-			BottomPattern db = transformation.findBottomPattern(md);
-			assert db != null;
-			subRecord.db = db;
 		}
 	}
 
@@ -293,19 +298,19 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 			GuardPattern dg = subRecord.dg;
 			assert dg != null;
 			relations.doDomainVarsSharedWithWhenToDgVars(domainVarsSharedWithWhen, dg);
-			// TODO implement TROppositeDomainsToMappingForEnforcement
+			Mapping m = subRecord.m;
+			assert m!= null;
+			relations.doTROppositeDomainsToMappingForEnforcement(r, subRecord.rd, m);
 			GuardPattern mg = subRecord.mg;
 			assert mg != null;
 			relations.doRWhenPatternToMGuardPattern(r, mg);
 			final BottomPattern db = subRecord.db;
 			assert db != null;
 			relations.doRDomainToMDBottomForEnforcement(r, subRecord.rd, subRecord.te, predicatesWithoutVarBindings, domainBottomUnSharedVars, db);
-			Mapping m = subRecord.m;
-			assert m!= null;
 			final BottomPattern mb = m.getBottomPattern();
 			assert mb != null;
 			subRecord.mb = mb;
 			relations.doRPredicateSetToMBPredicateSet(new ArrayList<Predicate>(predicatesWithVarBindings), mb);
 		}
-	}
+	}	
 }

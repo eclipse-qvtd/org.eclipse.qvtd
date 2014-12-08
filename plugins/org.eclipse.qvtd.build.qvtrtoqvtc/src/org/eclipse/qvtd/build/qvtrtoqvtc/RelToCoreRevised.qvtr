@@ -1623,6 +1623,9 @@ relation RDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive
       local = cm:Mapping {
          name = m.name+'_forNonIdentityProp',
          transformation = mt:Transformation{},
+         guardPattern = gp:GuardPattern {
+             area = cm
+         },
          bottomPattern = bp:BottomPattern {
          	area = cm,
             assignment = a:PropertyAssignment {
@@ -1641,14 +1644,15 @@ relation RDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive
       RExpToMExp(e, me);
 
       rtdeSeq = Sequence{r, te, rd, e};
-
+        -- if this rule fails, the local mapping ends with no guard pattern, so
+        -- I added the gp to cm patterns..
       RDomainToMComposedMappingGuard(rtdeSeq, cm); 
    }
 }
 
 relation RDomainToMComposedMappingGuard
 {
-   pn, dn, tmn: String;
+   dn, tmn: String;
    tcv, mv: essentialocl::Variable;
    rdSeq: Sequence(emof::Element);
    mt: qvtbase::Transformation;

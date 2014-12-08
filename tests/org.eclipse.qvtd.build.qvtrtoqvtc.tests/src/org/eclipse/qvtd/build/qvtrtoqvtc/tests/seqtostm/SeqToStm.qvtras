@@ -38,6 +38,36 @@
       <variable name="i" type="SeqMM.emof.oclas#T.SeqMM.Interaction"/>
       <variable name="s" type="StmcMM.emof.oclas#T.StmcMM.StateMachine"/>
     </rule>
+    <rule xsi:type="qvtr:Relation" name="StateToState" isTopLevel="true">
+      <domain xsi:type="qvtr:RelationDomain" xmi:id="qD.SeqToStm.StateToState.seqDgm"
+          isCheckable="true" isEnforceable="false" typedModel="#qT.SeqToStm.seqDgm"
+          rootVariable="#//@nestedPackage.0/@rule.1/@variable.1">
+        <pattern>
+          <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="SeqMM.emof.oclas#T.SeqMM.State"
+              bindsTo="#//@nestedPackage.0/@rule.1/@variable.1" referredClass="SeqMM.emof.oclas#T.SeqMM.State">
+            <part referredProperty="SeqMM.emof.oclas#p.SeqMM.State.name">
+              <value xsi:type="pivot:VariableExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                  referredVariable="#//@nestedPackage.0/@rule.1/@variable.0"/>
+            </part>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <domain xsi:type="qvtr:RelationDomain" xmi:id="qD.SeqToStm.StateToState.stm"
+          isCheckable="true" isEnforceable="true" typedModel="#qT.SeqToStm.stm" rootVariable="#//@nestedPackage.0/@rule.1/@variable.2">
+        <pattern>
+          <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="StmcMM.emof.oclas#T.StmcMM.State"
+              bindsTo="#//@nestedPackage.0/@rule.1/@variable.2" referredClass="StmcMM.emof.oclas#T.StmcMM.State">
+            <part referredProperty="StmcMM.emof.oclas#p.StmcMM.State.name">
+              <value xsi:type="pivot:VariableExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                  referredVariable="#//@nestedPackage.0/@rule.1/@variable.0"/>
+            </part>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <variable name="sn" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"/>
+      <variable name="st1" type="SeqMM.emof.oclas#T.SeqMM.State"/>
+      <variable name="st2" type="StmcMM.emof.oclas#T.StmcMM.State"/>
+    </rule>
     <ownedKey identifies="StmcMM.emof.oclas#T.StmcMM.StateMachine" part="StmcMM.emof.oclas#p.StmcMM.StateMachine.name"/>
     <ownedKey identifies="StmcMM.emof.oclas#T.StmcMM.State" part="StmcMM.emof.oclas#p.StmcMM.State.name StmcMM.emof.oclas#p.StmcMM.State.owner"/>
     <ownedKey identifies="StmcMM.emof.oclas#T.StmcMM.Transition" part="StmcMM.emof.oclas#p.StmcMM.Transition.name StmcMM.emof.oclas#p.StmcMM.Transition.owner StmcMM.emof.oclas#p.StmcMM.Transition.fromState StmcMM.emof.oclas#p.StmcMM.Transition.toState"/>
