@@ -14,6 +14,7 @@ import org.eclipse.ocl.examples.pivot.Property;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.PropertyDatum#getProperty <em>Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.PropertyDatum#getClassDatum <em>Class Datum</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.build.qvtschedule.PropertyDatum#isIsOpposite <em>Is Opposite</em>}</li>
  * </ul>
  * </p>
  *
@@ -75,5 +76,32 @@ public interface PropertyDatum extends AbstractDatum {
 	 * @generated
 	 */
 	void setClassDatum(ClassDatum value);
+
+	/**
+	 * Returns the value of the '<em><b>Is Opposite</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Opposite</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Opposite</em>' attribute.
+	 * @see #setIsOpposite(boolean)
+	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getPropertyDatum_IsOpposite()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isIsOpposite();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.build.qvtschedule.PropertyDatum#isIsOpposite <em>Is Opposite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Opposite</em>' attribute.
+	 * @see #isIsOpposite()
+	 * @generated
+	 */
+	void setIsOpposite(boolean value);
 
 } // PropertyDatum

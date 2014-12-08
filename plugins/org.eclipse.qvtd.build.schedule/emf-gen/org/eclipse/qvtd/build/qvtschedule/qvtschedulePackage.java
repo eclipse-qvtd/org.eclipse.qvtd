@@ -822,13 +822,22 @@ public interface qvtschedulePackage extends EPackage {
 	int PROPERTY_DATUM__CLASS_DATUM = ABSTRACT_DATUM_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Is Opposite</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM__IS_OPPOSITE = ABSTRACT_DATUM_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Property Datum</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_DATUM_FEATURE_COUNT = ABSTRACT_DATUM_FEATURE_COUNT + 2;
+	int PROPERTY_DATUM_FEATURE_COUNT = ABSTRACT_DATUM_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Property Datum</em>' class.
@@ -1263,6 +1272,17 @@ public interface qvtschedulePackage extends EPackage {
 	EReference getPropertyDatum_ClassDatum();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.build.qvtschedule.PropertyDatum#isIsOpposite <em>Is Opposite</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Opposite</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.PropertyDatum#isIsOpposite()
+	 * @see #getPropertyDatum()
+	 * @generated
+	 */
+	EAttribute getPropertyDatum_IsOpposite();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.build.qvtschedule.Schedule <em>Schedule</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1614,6 +1634,14 @@ public interface qvtschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference PROPERTY_DATUM__CLASS_DATUM = eINSTANCE.getPropertyDatum_ClassDatum();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Opposite</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY_DATUM__IS_OPPOSITE = eINSTANCE.getPropertyDatum_IsOpposite();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.ScheduleImpl <em>Schedule</em>}' class.

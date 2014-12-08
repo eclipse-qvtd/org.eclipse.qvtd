@@ -28,6 +28,7 @@ import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.PropertyDatumImpl#getProperty <em>Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.PropertyDatumImpl#getClassDatum <em>Class Datum</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.PropertyDatumImpl#isIsOpposite <em>Is Opposite</em>}</li>
  * </ul>
  * </p>
  *
@@ -43,6 +44,25 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * @ordered
 	 */
 	protected Property property;
+
+	/**
+	 * The default value of the '{@link #isIsOpposite() <em>Is Opposite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsOpposite()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_OPPOSITE_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isIsOpposite() <em>Is Opposite</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsOpposite()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isOpposite = IS_OPPOSITE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -147,6 +167,27 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isIsOpposite() {
+		return isOpposite;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsOpposite(boolean newIsOpposite) {
+		boolean oldIsOpposite = isOpposite;
+		isOpposite = newIsOpposite;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, qvtschedulePackage.PROPERTY_DATUM__IS_OPPOSITE, oldIsOpposite, isOpposite));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -199,6 +240,8 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 				return basicGetProperty();
 			case qvtschedulePackage.PROPERTY_DATUM__CLASS_DATUM:
 				return getClassDatum();
+			case qvtschedulePackage.PROPERTY_DATUM__IS_OPPOSITE:
+				return isIsOpposite();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -216,6 +259,9 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 				return;
 			case qvtschedulePackage.PROPERTY_DATUM__CLASS_DATUM:
 				setClassDatum((ClassDatum)newValue);
+				return;
+			case qvtschedulePackage.PROPERTY_DATUM__IS_OPPOSITE:
+				setIsOpposite((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -235,6 +281,9 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 			case qvtschedulePackage.PROPERTY_DATUM__CLASS_DATUM:
 				setClassDatum((ClassDatum)null);
 				return;
+			case qvtschedulePackage.PROPERTY_DATUM__IS_OPPOSITE:
+				setIsOpposite(IS_OPPOSITE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -251,8 +300,26 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 				return property != null;
 			case qvtschedulePackage.PROPERTY_DATUM__CLASS_DATUM:
 				return getClassDatum() != null;
+			case qvtschedulePackage.PROPERTY_DATUM__IS_OPPOSITE:
+				return isOpposite != IS_OPPOSITE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (isOpposite: ");
+		result.append(isOpposite);
+		result.append(')');
+		return result.toString();
 	}
 
 } //PropertyDatumImpl

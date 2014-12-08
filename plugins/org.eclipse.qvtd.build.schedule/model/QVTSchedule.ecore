@@ -66,6 +66,7 @@
         eType="ecore:EClass http://www.eclipse.org/ocl/3.1.0/Pivot#//Property"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classDatum" lowerBound="1"
         eType="#//ClassDatum" eOpposite="#//ClassDatum/propertyDatums"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="opposite" eType="#//PropertyDatum"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Schedule">
     <eStructuralFeatures xsi:type="ecore:EReference" name="datums" upperBound="-1"
