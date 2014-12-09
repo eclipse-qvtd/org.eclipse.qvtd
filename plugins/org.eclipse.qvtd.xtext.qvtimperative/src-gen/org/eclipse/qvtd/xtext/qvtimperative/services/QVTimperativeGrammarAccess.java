@@ -11,9 +11,10 @@ import java.util.List;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.service.GrammarProvider;
 import org.eclipse.xtext.service.AbstractElementFinder.*;
+
 import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess;
-import org.eclipse.ocl.xtext.base.services.BaseGrammarAccess;
 import org.eclipse.ocl.xtext.essentialocl.services.EssentialOCLGrammarAccess;
+import org.eclipse.ocl.xtext.base.services.BaseGrammarAccess;
 
 @Singleton
 public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
@@ -1991,7 +1992,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NestedExpCS:
-	//	"(" source=ExpCS ")";
+	//	"(" ownedExpression=ExpCS ")";
 	public EssentialOCLGrammarAccess.NestedExpCSElements getNestedExpCSAccess() {
 		return gaQVTcoreBase.getNestedExpCSAccess();
 	}

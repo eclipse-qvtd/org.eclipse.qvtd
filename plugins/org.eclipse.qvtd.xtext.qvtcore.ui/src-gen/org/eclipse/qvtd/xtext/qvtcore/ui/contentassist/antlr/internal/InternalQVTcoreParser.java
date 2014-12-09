@@ -61,8 +61,8 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
     public static final int T__86=86;
     public static final int T__89=89;
     public static final int T__88=88;
-    public static final int RULE_ML_COMMENT=12;
     public static final int RULE_LETTER_CHARACTER=9;
+    public static final int RULE_ML_COMMENT=12;
     public static final int T__71=71;
     public static final int T__72=72;
     public static final int T__70=70;
@@ -40142,26 +40142,26 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__NestedExpCS__Group__1__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:13869:1: rule__NestedExpCS__Group__1__Impl : ( ( rule__NestedExpCS__SourceAssignment_1 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:13869:1: rule__NestedExpCS__Group__1__Impl : ( ( rule__NestedExpCS__OwnedExpressionAssignment_1 ) ) ;
     public final void rule__NestedExpCS__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:13873:1: ( ( ( rule__NestedExpCS__SourceAssignment_1 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:13874:1: ( ( rule__NestedExpCS__SourceAssignment_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:13873:1: ( ( ( rule__NestedExpCS__OwnedExpressionAssignment_1 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:13874:1: ( ( rule__NestedExpCS__OwnedExpressionAssignment_1 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:13874:1: ( ( rule__NestedExpCS__SourceAssignment_1 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:13875:1: ( rule__NestedExpCS__SourceAssignment_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:13874:1: ( ( rule__NestedExpCS__OwnedExpressionAssignment_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:13875:1: ( rule__NestedExpCS__OwnedExpressionAssignment_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getNestedExpCSAccess().getSourceAssignment_1()); 
+               before(grammarAccess.getNestedExpCSAccess().getOwnedExpressionAssignment_1()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:13876:1: ( rule__NestedExpCS__SourceAssignment_1 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:13876:2: rule__NestedExpCS__SourceAssignment_1
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:13876:1: ( rule__NestedExpCS__OwnedExpressionAssignment_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:13876:2: rule__NestedExpCS__OwnedExpressionAssignment_1
             {
-            pushFollow(FollowSets001.FOLLOW_rule__NestedExpCS__SourceAssignment_1_in_rule__NestedExpCS__Group__1__Impl28178);
-            rule__NestedExpCS__SourceAssignment_1();
+            pushFollow(FollowSets001.FOLLOW_rule__NestedExpCS__OwnedExpressionAssignment_1_in_rule__NestedExpCS__Group__1__Impl28178);
+            rule__NestedExpCS__OwnedExpressionAssignment_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -40169,7 +40169,7 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getNestedExpCSAccess().getSourceAssignment_1()); 
+               after(grammarAccess.getNestedExpCSAccess().getOwnedExpressionAssignment_1()); 
             }
 
             }
@@ -50501,9 +50501,9 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__LetVariableCS__OwnedInitExpressionAssignment_4"
 
 
-    // $ANTLR start "rule__NestedExpCS__SourceAssignment_1"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:17507:1: rule__NestedExpCS__SourceAssignment_1 : ( ruleExpCS ) ;
-    public final void rule__NestedExpCS__SourceAssignment_1() throws RecognitionException {
+    // $ANTLR start "rule__NestedExpCS__OwnedExpressionAssignment_1"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:17507:1: rule__NestedExpCS__OwnedExpressionAssignment_1 : ( ruleExpCS ) ;
+    public final void rule__NestedExpCS__OwnedExpressionAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -50515,15 +50515,15 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcore.ui/src-gen/org/eclipse/qvtd/xtext/qvtcore/ui/contentassist/antlr/internal/InternalQVTcore.g:17513:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getNestedExpCSAccess().getSourceExpCSParserRuleCall_1_0()); 
+               before(grammarAccess.getNestedExpCSAccess().getOwnedExpressionExpCSParserRuleCall_1_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleExpCS_in_rule__NestedExpCS__SourceAssignment_135519);
+            pushFollow(FollowSets001.FOLLOW_ruleExpCS_in_rule__NestedExpCS__OwnedExpressionAssignment_135519);
             ruleExpCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getNestedExpCSAccess().getSourceExpCSParserRuleCall_1_0()); 
+               after(grammarAccess.getNestedExpCSAccess().getOwnedExpressionExpCSParserRuleCall_1_0()); 
             }
 
             }
@@ -50543,7 +50543,7 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__NestedExpCS__SourceAssignment_1"
+    // $ANTLR end "rule__NestedExpCS__OwnedExpressionAssignment_1"
 
 
     // $ANTLR start "rule__MultiplicityBoundsCS__LowerBoundAssignment_0"
@@ -54164,7 +54164,7 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_69_in_rule__NestedExpCS__Group__0__Impl28117 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__NestedExpCS__Group__1__Impl_in_rule__NestedExpCS__Group__128148 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000040L});
         public static final BitSet FOLLOW_rule__NestedExpCS__Group__2_in_rule__NestedExpCS__Group__128151 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__NestedExpCS__SourceAssignment_1_in_rule__NestedExpCS__Group__1__Impl28178 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__NestedExpCS__OwnedExpressionAssignment_1_in_rule__NestedExpCS__Group__1__Impl28178 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__NestedExpCS__Group__2__Impl_in_rule__NestedExpCS__Group__228208 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_70_in_rule__NestedExpCS__Group__2__Impl28236 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__SelfExpCS__Group__0__Impl_in_rule__SelfExpCS__Group__028273 = new BitSet(new long[]{0x0000000000000000L,0x0000000000800000L});
@@ -54412,7 +54412,7 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
         public static final BitSet FOLLOW_ruleRoundBracketedClauseCS_in_rule__LetVariableCS__OwnedRoundBracketedClauseAssignment_135426 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTypeExpCS_in_rule__LetVariableCS__OwnedTypeAssignment_2_135457 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleExpCS_in_rule__LetVariableCS__OwnedInitExpressionAssignment_435488 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpCS_in_rule__NestedExpCS__SourceAssignment_135519 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpCS_in_rule__NestedExpCS__OwnedExpressionAssignment_135519 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleLOWER_in_rule__MultiplicityBoundsCS__LowerBoundAssignment_035550 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUPPER_in_rule__MultiplicityBoundsCS__UpperBoundAssignment_1_135581 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__MultiplicityStringCS__StringBoundsAlternatives_0_in_rule__MultiplicityStringCS__StringBoundsAssignment35612 = new BitSet(new long[]{0x0000000000000002L});
