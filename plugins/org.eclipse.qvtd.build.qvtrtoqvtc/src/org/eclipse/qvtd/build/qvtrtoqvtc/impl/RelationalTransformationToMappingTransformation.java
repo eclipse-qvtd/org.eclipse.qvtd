@@ -131,6 +131,7 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 	@Override
 	public void setAttributes() {
 		assert mt != null;
+		mt.setName(rtn);
 		for (SubRecord subRecord : subRecords) {
 			TypedModel mtm = subRecord.mtm;
 			assert mtm != null;
