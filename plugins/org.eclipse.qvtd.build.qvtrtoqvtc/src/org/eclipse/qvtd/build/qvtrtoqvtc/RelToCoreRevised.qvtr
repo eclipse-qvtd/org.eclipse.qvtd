@@ -7,36 +7,38 @@
 --
 -- Contributors:
 --     S.Reddy - Section 10.3 of the OMG MOF-QVT 1.0 specification
---	   E.D.Willink - contributions to drafts of the above
---	   E.D.Willink - adaptation to comply with QVT specification
+--     E.D.Willink - contributions to drafts of the above
+--     E.D.Willink - adaptation to comply with QVT specification
+--     H. Hoyos - adaptation to comply with QVT 1.2 and bug fixes 
 --------------------------------------------------------------------------------
-import emof : 'platform:/resource/org.eclipse.qvt/model/ecore/EMOF.ecore'::EMOF;
-import essentialocl : 'platform:/resource/org.eclipse.qvt/model/ecore/EssentialOCL.ecore'::EssentialOCL;
-import qvtbase : 'platform:/resource/org.eclipse.qvt/model/ecore/QVTBase.ecore'::QVTBase;
-import qvttemplate : 'platform:/resource/org.eclipse.qvt/model/ecore/QVTTemplate.ecore'::QVTTemplate;
-import qvtrelation : 'platform:/resource/org.eclipse.qvt/model/ecore/QVTRelation.ecore'::QVTRelation;
-import qvtcore : 'platform:/resource/org.eclipse.qvt/model/ecore/QVTCore.ecore'::QVTCore;
+import pivotocl     :   'platform:/resource/org.eclipse.ocl.examples.pivot/model/Pivot.ecore'::pivot;
+import qvtbase      :   'platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore'::qvtbase;
+import qvttemplate  :   'platform:/resource/org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore'::qvttemplate;
+import qvtrelation  :   'platform:/resource/org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore'::qvtrelation;
+import qvtcorebase  :   'platform:/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore'::qvtcorebase;
+import qvtcore      :   'platform:/resource/org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore'::qvtcore;
 
-transformation relToCore(relations:{qvtrelation,qvttemplate,qvtbase,essentialocl,emof}, core:{qvtcore,qvtbase,essentialocl,emof})
+
+transformation relToCore(relations:{qvtrelation,qvttemplate,qvtbase,pivotocl}, core:{qvtcore,qvtcorebase,qvtbase,pivotocl})
 {
 
-key qvtcore::Mapping{name, transformation};
-key qvtcore::GuardPattern{area};
-key qvtcore::BottomPattern{area};
-key essentialocl::Variable{name, type};
-key emof::Type{name};
-key emof::Class{name};
-key emof::Property{name, class};
-key qvtcore::CoreDomain{name, rule};
+key pivotocl::Type{name};
+key pivotocl::Class{name};
+key pivotocl::Property{name, class};
+key pivotocl::Package{name};
+key pivotocl::Operation{name};
+key pivotocl::Variable{name, type};
 key qvtbase::TypedModel{name, usedPackage, transformation};
-key emof::Package{name};
 key qvtbase::Transformation{name};
-key emof::Operation{name};
 key qvtbase::Predicate{pattern, conditionExpression};
+key qvtcorebase::GuardPattern{area};
+key qvtcorebase::BottomPattern{area};
+key qvtcorebase::CoreDomain{name, rule};
+key qvtcore::Mapping{name, transformation};
 
-query getSharedDomainVars(r:qvtrelation::Relation):Set(essentialocl::Variable)
+query getSharedDomainVars(r:qvtrelation::Relation):Set(pivotocl::Variable)
 {
-   r.domain->iterate(d; vars: Set(essentialocl::Variable) = Set{} |
+   r.domain->iterate(d; vars: Set(pivotocl::Variable) = Set{} |
       if (vars->isEmpty())
       then
          vars->union(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo)
@@ -46,12 +48,12 @@ query getSharedDomainVars(r:qvtrelation::Relation):Set(essentialocl::Variable)
    )
 }
 
-query getWhenVars(r:qvtrelation::Relation):Set(essentialocl::Variable)
+query getWhenVars(r:qvtrelation::Relation):Set(pivotocl::Variable)
 {
    let
-      vs:Set(essentialocl::Variable) = Set{}
+      vs:Set(pivotocl::Variable) = Set{}
    in
-   r.domain->iterate(d; vars: Set(essentialocl::Variable) = Set{} |
+   r.domain->iterate(d; vars: Set(pivotocl::Variable) = Set{} |
       if (vars->isEmpty())
       then
          vars->union(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo)
@@ -63,36 +65,36 @@ query getWhenVars(r:qvtrelation::Relation):Set(essentialocl::Variable)
  
 -- Get variables occuring in an ocl expression
 -- Note: this function is not complete! It needs to be completed for other expressions
-query getVarsOfExp(e:essentialocl::OclExpression):Set(essentialocl::Variable)
+query getVarsOfExp(e:pivotocl::OCLExpression):Set(pivotocl::Variable)
 {
-   -- Walk the expr tree of the OclExpression and
+   -- Walk the expr tree of the pivotocl::OCLExpression and
    -- collect the variables used in those expressions
    let
-      vs:Set(essentialocl::Variable) = Set{}
+      vs:Set(pivotocl::Variable) = Set{}
    in
-   if (e.oclIsTypeOf(essentialocl::VariableExp))
+   if (e.oclIsTypeOf(pivotocl::VariableExp))
    then
-      vs->including(e.oclAsType(essentialocl::VariableExp).referredVariable)
+      vs->including(e.oclAsType(pivotocl::VariableExp).referredVariable.oclAsType(pivotocl::Variable))
    else
-      if (e.oclIsTypeOf(essentialocl::OperationCallExp))
+      if (e.oclIsTypeOf(pivotocl::OperationCallExp))
       then
          let
-            oc:essentialocl::OperationCallExp = e.oclAsType(essentialocl::OperationCallExp)
+            oc:pivotocl::OperationCallExp = e.oclAsType(pivotocl::OperationCallExp)
          in
             vs->union(getVarsOfExp(oc.source))->union(
-               oc.argument->iterate(a; avs:Set(essentialocl::Variable)=Set{} | avs->union(getVarsOfExp(a)))
+               oc.argument->iterate(a; avs:Set(pivotocl::Variable)=Set{} | avs->union(getVarsOfExp(a)))
             )
       else
-         if (e.oclIsTypeOf(essentialocl::PropertyCallExp))
+         if (e.oclIsTypeOf(pivotocl::PropertyCallExp))
          then
-            vs->union(getVarsOfExp(e.oclAsType(essentialocl::PropertyCallExp).source))
+            vs->union(getVarsOfExp(e.oclAsType(pivotocl::PropertyCallExp).source))
          else
             if (e.oclIsTypeOf(qvtrelation::RelationCallExp))
             then
                let
                   rc:qvtrelation::RelationCallExp = e.oclAsType(qvtrelation::RelationCallExp)
                in
-                  vs->union(rc.argument->iterate(a; avs:Set(essentialocl::Variable)=Set{} |
+                  vs->union(rc.argument->iterate(a; avs:Set(pivotocl::Variable)=Set{} |
                      avs->union(getVarsOfExp(a)))
                   )
             else
@@ -104,7 +106,7 @@ query getVarsOfExp(e:essentialocl::OclExpression):Set(essentialocl::Variable)
 }
 
 query filterOutPredicatesThatReferToVars(rpSet:Set(qvtbase::Predicate),
-      ownrdVars:Set(essentialocl::Variable)) :Set(qvtbase::Predicate)
+      ownrdVars:Set(pivotocl::Variable)) :Set(qvtbase::Predicate)
 {
    rpSet->iterate(p:qvtbase::Predicate; fpSet:Set(qvtbase::Predicate) = Set{}|
       if (getVarsOfExp(p.conditionExpression)->intersection(ownrdVars)->isEmpty())
@@ -118,7 +120,7 @@ query filterOutPredicatesThatReferToVars(rpSet:Set(qvtbase::Predicate),
 
 --Check if the given variable is bound to any template other than the one to be skipped
 query isVarBoundToSomeOtherTemplate(rootTe:qvttemplate::ObjectTemplateExp,
-      skipTe:qvttemplate::ObjectTemplateExp, v:essentialocl::Variable):Boolean
+      skipTe:qvttemplate::ObjectTemplateExp, v:pivotocl::Variable):Boolean
 {
    if (rootTe = skipTe)
    then
@@ -143,7 +145,7 @@ top relation RelationalTransformationToMappingTransformation
       name = rtn,
       modelParameter = rtm:TypedModel {
          name = tmn, 
-         usedPackage = up:Package{}
+         usedPackage = up:pivotocl::Package{}
       }
    }; 
 
@@ -165,12 +167,12 @@ top relation RelationalTransformationToPackage
       rule = r:Relation {}
    }; 
 
-   enforce domain core p:Package {
+   enforce domain core p:pivotocl::Package {
       name = rtn,
       ownedType = rc:Class {}
    }; 
    where {
-	RelationToTraceClass(r, rc);
+    RelationToTraceClass(r, rc);
    }
 }
 
@@ -181,7 +183,7 @@ top relation RelationalTransformationToPackage
 relation RelationToTraceClass
 {
    rt: qvtrelation::RelationalTransformation;
-   p: emof::Package;
+   p: pivotocl::Package;
    rn, vn:String;
 
    domain relations r:Relation {
@@ -190,7 +192,7 @@ relation RelationToTraceClass
       domain = rd:RelationDomain {
          pattern = rdp:DomainPattern {
             templateExpression = t:ObjectTemplateExp {
-               bindsTo = tv:Variable {
+               bindsTo = tv:pivotocl::Variable {
                   name = vn,
                   type = c:Class {}
                }
@@ -201,7 +203,7 @@ relation RelationToTraceClass
    enforce domain core rc:Class {
       name = 'T'+rn,
       package = p,
-      ownedAttribute = a:Property {
+      ownedAttribute = a:pivotocl::Property {
          name = vn,
          type = c
       }
@@ -221,7 +223,7 @@ relation SubTemplateToTraceClassProps
    domain relations t:ObjectTemplateExp {
       part = pt:PropertyTemplateItem {
          value = tp:ObjectTemplateExp {
-            bindsTo = tv:Variable {
+            bindsTo = tv:pivotocl::Variable {
                name = vn,
                type = c:Class {}
             }
@@ -229,7 +231,7 @@ relation SubTemplateToTraceClassProps
       }
    };
    enforce domain core rc:Class {
-      ownedAttribute = a:Property {
+      ownedAttribute = a:pivotocl::Property {
          name=vn,
          type=c
       }
@@ -288,13 +290,13 @@ relation SubTemplateToTraceClassProps
 --
 top relation TopLevelRelationToMappingForChecking
 {
-   allDomainVars: Set(essentialocl::Variable);
-   sharedDomainVars: Set(essentialocl::Variable);
-   unsharedWhereVars: Set(essentialocl::Variable);
-   whenVars: Set(essentialocl::Variable);
-   whereVars: Set(essentialocl::Variable);
+   allDomainVars: Set(pivotocl::Variable);
+   sharedDomainVars: Set(pivotocl::Variable);
+   unsharedWhereVars: Set(pivotocl::Variable);
+   whenVars: Set(pivotocl::Variable);
+   whereVars: Set(pivotocl::Variable);
    rn: String;
-   mbVars:Set(essentialocl::Variable);
+   mbVars:Set(pivotocl::Variable);
    rt: qvtrelation::RelationalTransformation;
    mt: qvtbase::Transformation;
 
@@ -312,7 +314,7 @@ top relation TopLevelRelationToMappingForChecking
          area = m
       },
       bottomPattern = mb:BottomPattern {
-         bindsTo = vs:Set(Variable) {
+         variable = vs:Set(pivotocl::Variable) {
             tcv:RealizedVariable {} ++ mbVars
          }
       }
@@ -358,9 +360,9 @@ relation RWherePatternToMPattern
 
 relation UnsharedWhenVarsToMgVars
 {
-   domain relations unsharedWhenVars:Set(Variable) {_++_};
+   domain relations unsharedWhenVars:Set(pivotocl::Variable) {_++_};
    enforce domain core mg:GuardPattern {
-      bindsTo = mgVars:Set(Variable) {}
+      variable = mgVars:Set(pivotocl::Variable) {}
    };
    where {
       RVarSetToMVarSet(unsharedWhenVars->asSequence(), mgVars);
@@ -369,9 +371,9 @@ relation UnsharedWhenVarsToMgVars
 
 relation DomainVarsSharedWithWhenToDgVars
 {
-   domain relations domainVarsSharedWithWhen:Set(Variable) {_++_};
+   domain relations domainVarsSharedWithWhen:Set(pivotocl::Variable) {_++_};
    enforce domain core dg:GuardPattern {
-      bindsTo = dgVars:Set(Variable) {}
+      variable = dgVars:Set(pivotocl::Variable) {}
    };
    where {
       RVarSetToMVarSet(domainVarsSharedWithWhen->asSequence(), dgVars);
@@ -380,9 +382,9 @@ relation DomainVarsSharedWithWhenToDgVars
 
 relation DomainBottomUnSharedVarsToDbVars
 {
-   domain relations domainBottomUnSharedVars:Set(Variable) {_++_};
+   domain relations domainBottomUnSharedVars:Set(pivotocl::Variable) {_++_};
    enforce domain core db:BottomPattern {
-      bindsTo = dbVars:Set(Variable) {}
+      variable = dbVars:Set(pivotocl::Variable) {}
    };
    where {
       RVarSetToMVarSet(domainBottomUnSharedVars->asSequence(), dbVars);
@@ -421,26 +423,26 @@ relation DomainBottomUnSharedVarsToDbVars
 --
 top relation TopLevelRelationToMappingForEnforcement
 {
-   allDomainVars: Set(essentialocl::Variable);
-   oppositeDomainVars: Set(essentialocl::Variable);
-   sharedDomainVars: Set(essentialocl::Variable);
+   allDomainVars: Set(pivotocl::Variable);
+   oppositeDomainVars: Set(pivotocl::Variable);
+   sharedDomainVars: Set(pivotocl::Variable);
    predicatesWithVarBindings: Set(qvtbase::Predicate);
    predicatesWithoutVarBindings: Set(qvtbase::Predicate);
-   unsharedWhenVars: Set(essentialocl::Variable);
-   unsharedWhereVars: Set(essentialocl::Variable);
-   domainVarsSharedWithWhen: Set(essentialocl::Variable);
-   domainBottomUnSharedVars: Set(essentialocl::Variable);
-   rdSeq, rdtSeq, relImplSeq: Sequence(emof::Element);
-   rdSet: Set(emof::Element);
-   rdVarsSeq: Sequence(Set(emof::Element));
-   rdtSet: Set(emof::Element);
-   rdtVarsSeq: Sequence(Set(emof::Element));
+   unsharedWhenVars: Set(pivotocl::Variable);
+   unsharedWhereVars: Set(pivotocl::Variable);
+   domainVarsSharedWithWhen: Set(pivotocl::Variable);
+   domainBottomUnSharedVars: Set(pivotocl::Variable);
+   rdSeq, rdtSeq, relImplSeq: Sequence(pivotocl::Element);
+   rdSet: Set(pivotocl::Element);
+   rdVarsSeq: Sequence(Set(pivotocl::Element));
+   rdtSet: Set(pivotocl::Element);
+   rdtVarsSeq: Sequence(Set(pivotocl::Element));
    rn, dn, tmn: String;
    rOppositeDomains:Set(qvtrelation::RelationDomain);
-   oppDomainSeq:Sequence(emof::Element);
-   whenVars: Set(essentialocl::Variable);
-   whereVars: Set(essentialocl::Variable);
-   mbVars: Set(essentialocl::Variable);
+   oppDomainSeq:Sequence(pivotocl::Element);
+   whenVars: Set(pivotocl::Variable);
+   whereVars: Set(pivotocl::Variable);
+   mbVars: Set(pivotocl::Variable);
    rpSet: Set(qvtbase::Predicate);
    rt: qvtrelation::RelationalTransformation;
    mt: qvtbase::Transformation;
@@ -455,13 +457,13 @@ top relation TopLevelRelationToMappingForEnforcement
             name = dn,
             typedModel = dir:TypedModel {
                 name = tmn, 
-                usedPackage = up:Package{},
+                usedPackage = up:pivotocl::Package{},
                 transformation = rt
             },
             pattern = dp:DomainPattern {
-               bindsTo = domainVars:Set(Variable) {},
+               bindsTo = domainVars:Set(pivotocl::Variable) {},
                templateExpression = te:ObjectTemplateExp {
-                  bindsTo = tev:Variable {}
+                  bindsTo = tev:pivotocl::Variable {}
                }
             }
          } ++ rOppositeDomains
@@ -474,9 +476,8 @@ top relation TopLevelRelationToMappingForEnforcement
          area = m
       },
       bottomPattern = mb:BottomPattern {
-         bindsTo = vs:Set(Variable) {
-            tcv:RealizedVariable {} ++ mbVars
-         }
+         variable = mbVars,
+         realizedVariable = tcv:RealizedVariable {}
       },
       domain = md:CoreDomain {
          name = dn,
@@ -491,8 +492,7 @@ top relation TopLevelRelationToMappingForEnforcement
          },
          bottomPattern = db:BottomPattern {
             area = md,
-            bindsTo = mtev:Variable {},
-            realizedVariable = mtev         -- Define containment
+            realizedVariable = mtev:pivotocl::Variable {}
          }
       }   --TODO: add var only if tev not in whenVars
    };
@@ -511,7 +511,7 @@ top relation TopLevelRelationToMappingForEnforcement
       rpSet = r.where.predicate->reject(p |
                                  p.conditionExpression.oclIsTypeOf(qvtrelation::RelationCallExp));
 
-      oppositeDomainVars = rOppositeDomains->iterate(d; vars: Set(essentialocl::Variable) = Set{} |
+      oppositeDomainVars = rOppositeDomains->iterate(d; vars: Set(pivotocl::Variable) = Set{} |
          vars->union(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo));
       sharedDomainVars = getSharedDomainVars(r);
       domainBottomUnSharedVars = domainVars - whenVars - sharedDomainVars;
@@ -563,16 +563,16 @@ top relation TopLevelRelationToMappingForEnforcement
 --
 top relation InvokedRelationToMappingForChecking
 {
-   allDomainVars: Set(essentialocl::Variable);
-   sharedDomainVars: Set(essentialocl::Variable);
-   unsharedWhereVars: Set(essentialocl::Variable);
-   seqForInvoker: Sequence(emof::Element);
+   allDomainVars: Set(pivotocl::Variable);
+   sharedDomainVars: Set(pivotocl::Variable);
+   unsharedWhereVars: Set(pivotocl::Variable);
+   seqForInvoker: Sequence(pivotocl::Element);
    rn, irn: String;
-   mbVars:Set(essentialocl::Variable);
+   mbVars:Set(pivotocl::Variable);
    rt: qvtrelation::RelationalTransformation;
    mt: qvtbase::Transformation;
-   whenVars: Set(essentialocl::Variable);
-   whereVars: Set(essentialocl::Variable);
+   whenVars: Set(pivotocl::Variable);
+   whereVars: Set(pivotocl::Variable);
     
    domain relations r:Relation {
       transformation = rt,
@@ -595,9 +595,8 @@ top relation InvokedRelationToMappingForChecking
          area = m
       },
       bottomPattern = mb:BottomPattern {
-         bindsTo = vs:Set(Variable) {
-            tcv:RealizedVariable {} ++ mbVars
-         }
+         variable = mbVars,
+         realizedVariable = tcv:RealizedVariable {}
       }
    };
    when {
@@ -640,27 +639,27 @@ top relation InvokedRelationToMappingForChecking
 --
 top relation InvokedRelationToMappingForEnforcement
 {
-   allDomainVars: Set(essentialocl::Variable);
-   oppositeDomainVars: Set(essentialocl::Variable);
-   sharedDomainVars: Set(essentialocl::Variable);
+   allDomainVars: Set(pivotocl::Variable);
+   oppositeDomainVars: Set(pivotocl::Variable);
+   sharedDomainVars: Set(pivotocl::Variable);
    predicatesWithVarBindings: Set(qvtbase::Predicate);
    predicatesWithoutVarBindings: Set(qvtbase::Predicate);
-   unsharedWhenVars: Set(essentialocl::Variable);
-   unsharedWhereVars: Set(essentialocl::Variable);
-   domainTopVars: Set(essentialocl::Variable);
-   domainBottomUnSharedVars: Set(essentialocl::Variable);
-   rdSeq, relImplSeq: Sequence(emof::Element);
-   rdSet: Set(emof::Element);
-   rdVarsSeq: Sequence(Set(emof::Element));
-   rdtSet: Set(emof::Element);
-   rdtVarsSeq: Sequence(Set(emof::Element));
-   seqForInvoker: Sequence(emof::Element);
+   unsharedWhenVars: Set(pivotocl::Variable);
+   unsharedWhereVars: Set(pivotocl::Variable);
+   domainTopVars: Set(pivotocl::Variable);
+   domainBottomUnSharedVars: Set(pivotocl::Variable);
+   rdSeq, relImplSeq: Sequence(pivotocl::Element);
+   rdSet: Set(pivotocl::Element);
+   rdVarsSeq: Sequence(Set(pivotocl::Element));
+   rdtSet: Set(pivotocl::Element);
+   rdtVarsSeq: Sequence(Set(pivotocl::Element));
+   seqForInvoker: Sequence(pivotocl::Element);
    rn, irn, dn, tmn: String;
    rOppositeDomains:Set(qvtrelation::RelationDomain);
-   oppDomainSeq:Sequence(emof::Element);
-   whenVars: Set(essentialocl::Variable);
-   whereVars: Set(essentialocl::Variable);
-   mbVars: Set(essentialocl::Variable);
+   oppDomainSeq:Sequence(pivotocl::Element);
+   whenVars: Set(pivotocl::Variable);
+   whereVars: Set(pivotocl::Variable);
+   mbVars: Set(pivotocl::Variable);
    rpSet: Set(qvtbase::Predicate);
    rt: qvtrelation::RelationalTransformation;
    mt: qvtbase::Transformation;
@@ -682,13 +681,13 @@ top relation InvokedRelationToMappingForEnforcement
             name = dn,
             typedModel = dir:TypedModel {
                name = tmn, 
-               usedPackage = up:Package{},
+               usedPackage = up:pivotocl::Package{},
                transformation = rt
             },
             pattern = dp:DomainPattern {
-               bindsTo = domainVars:Set(Variable) {},
+               bindsTo = domainVars:Set(pivotocl::Variable) {},
                templateExpression = te:ObjectTemplateExp {
-                  bindsTo = tev:Variable {}
+                  bindsTo = tev:pivotocl::Variable {}
                }
             }
          } ++ rOppositeDomains
@@ -701,9 +700,8 @@ top relation InvokedRelationToMappingForEnforcement
          area = m
       },
       bottomPattern = mb:BottomPattern {
-         bindsTo = vs:Set(Variable) {
-            tcv:RealizedVariable {} ++ mbVars
-         }
+         variable = mbVars,
+         realizedVariable = tcv:RealizedVariable {}
       },
       domain = md:CoreDomain {
          name = dn,
@@ -714,7 +712,7 @@ top relation InvokedRelationToMappingForEnforcement
             transformation = mt
          },
          guardPattern = dg:GuardPattern {
-            bindsTo = dgVars:Set(Variable) {}
+            variable = dgVars:Set(pivotocl::Variable) {}
          },
          bottomPattern = db:BottomPattern {
             area = md
@@ -736,7 +734,7 @@ top relation InvokedRelationToMappingForEnforcement
       rpSet = r.where.predicate->reject(p |
                                  p.conditionExpression.oclIsTypeOf(qvtrelation::RelationCallExp));
 
-      oppositeDomainVars = rOppositeDomains->iterate(d; vars: Set(essentialocl::Variable) = Set{} |
+      oppositeDomainVars = rOppositeDomains->iterate(d; vars: Set(pivotocl::Variable) = Set{} |
          vars->union(d.pattern.bindsTo));
       sharedDomainVars = getSharedDomainVars(r);
       domainBottomUnSharedVars =
@@ -777,11 +775,11 @@ top relation InvokedRelationToMappingForEnforcement
 
 relation RDomainToMDomainForChecking
 {
-   sharedDomainVars: Set(essentialocl::Variable);
-   domainVarsSharedWithWhen: Set(essentialocl::Variable);
-   domainBottomUnSharedVars: Set(essentialocl::Variable);
-   seqForDomainPtrn: Sequence(emof::Element);
-   whenVars: Set(essentialocl::Variable);
+   sharedDomainVars: Set(pivotocl::Variable);
+   domainVarsSharedWithWhen: Set(pivotocl::Variable);
+   domainBottomUnSharedVars: Set(pivotocl::Variable);
+   seqForDomainPtrn: Sequence(pivotocl::Element);
+   whenVars: Set(pivotocl::Variable);
    dn, tmn: String;
    rt: qvtrelation::RelationalTransformation;
    mt: qvtbase::Transformation;
@@ -792,11 +790,11 @@ relation RDomainToMDomainForChecking
          isCheckable = true,
          typedModel = dir:TypedModel {
             name = tmn, 
-            usedPackage = up:Package{},
+            usedPackage = up:pivotocl::Package{},
             transformation = rt
          },
          pattern = dp:DomainPattern {
-            bindsTo = domainVars:Set(Variable){},
+            bindsTo = domainVars:Set(pivotocl::Variable){},
             templateExpression = te:ObjectTemplateExp {}
          }
       }
@@ -846,20 +844,20 @@ relation RDomainToMDomainForChecking
 --
 relation IROppositeDomainsToMappingForEnforcement
 {
-   sharedDomainVars:Set(essentialocl::Variable);
-   domainTopVars: Set(essentialocl::Variable);
-   domainBottomUnSharedVars: Set(essentialocl::Variable);
-   domainBottomSharedVars: Set(essentialocl::Variable);
-   seqForDomainPtrn: Sequence(emof::Element);
+   sharedDomainVars:Set(pivotocl::Variable);
+   domainTopVars: Set(pivotocl::Variable);
+   domainBottomUnSharedVars: Set(pivotocl::Variable);
+   domainBottomSharedVars: Set(pivotocl::Variable);
+   seqForDomainPtrn: Sequence(pivotocl::Element);
    dn, tmn: String;
    c: Boolean;
-   mbVars:Set(essentialocl::Variable);
-   whenVars:Set(essentialocl::Variable);
+   mbVars:Set(pivotocl::Variable);
+   whenVars:Set(pivotocl::Variable);
    rt: qvtrelation::RelationalTransformation;
    mt: qvtbase::Transformation;
-   up: emof::Package;
+   up: pivotocl::Package;
 
-   domain relations oppDomainSeq:Sequence(Element) {
+   domain relations oppDomainSeq:Sequence(pivotocl::Element) {
       r:Relation {
          domain = rds:Set(RelationDomain) {
             ord:RelationDomain {      -- opposite domain
@@ -871,9 +869,9 @@ relation IROppositeDomainsToMappingForEnforcement
                },
                isCheckable = c,
                pattern = dp:DomainPattern {
-                  bindsTo = domainVars:Set(Variable) {},
+                  bindsTo = domainVars:Set(pivotocl::Variable) {},
                   templateExpression = te:ObjectTemplateExp {
-                     bindsTo = tev:Variable {}
+                     bindsTo = tev:pivotocl::Variable {}
                   }
                }
             } ++ _
@@ -896,10 +894,10 @@ relation IROppositeDomainsToMappingForEnforcement
          isCheckable = c,
          isEnforceable = false,
          guardPattern = dg:GuardPattern {
-            bindsTo = dgVars:Set(Variable) {}
+            variable = dgVars:Set(pivotocl::Variable) {}
          },
          bottomPattern = db:BottomPattern {
-            bindsTo = dbVars:Set(Variable) {}
+            variable = dbVars:Set(pivotocl::Variable) {}
          }
       },
       bottomPattern = mb:BottomPattern {
@@ -930,20 +928,20 @@ relation IROppositeDomainsToMappingForEnforcement
 --
 relation TROppositeDomainsToMappingForEnforcement
 {
-   sharedDomainVars:Set(essentialocl::Variable);
-   domainTopVars: Set(essentialocl::Variable);
-   domainBottomUnSharedVars: Set(essentialocl::Variable);
-   domainBottomSharedVars: Set(essentialocl::Variable);
-   seqForDomainPtrn: Sequence(emof::Element);
+   sharedDomainVars:Set(pivotocl::Variable);
+   domainTopVars: Set(pivotocl::Variable);
+   domainBottomUnSharedVars: Set(pivotocl::Variable);
+   domainBottomSharedVars: Set(pivotocl::Variable);
+   seqForDomainPtrn: Sequence(pivotocl::Element);
    dn, tmn: String;
    c: Boolean;
-   mbVars:Set(essentialocl::Variable);
-   whenVars:Set(essentialocl::Variable);
+   mbVars:Set(pivotocl::Variable);
+   whenVars:Set(pivotocl::Variable);
    rt: qvtrelation::RelationalTransformation;
    mt: qvtbase::Transformation;
-   up: emof::Package;
+   up: pivotocl::Package;
 
-   domain relations oppDomainSeq:Sequence(Element) {
+   domain relations oppDomainSeq:Sequence(pivotocl::Element) {
       r:Relation {
          domain = rds:Set(RelationDomain) {
             ord:RelationDomain {
@@ -955,7 +953,7 @@ relation TROppositeDomainsToMappingForEnforcement
                },
                isCheckable = c,
                pattern = dp:DomainPattern {
-                  bindsTo = domainVars:Set(Variable) {},
+                  bindsTo = domainVars:Set(pivotocl::Variable) {},
                   templateExpression = te:ObjectTemplateExp {}
                }
             } ++ _
@@ -977,11 +975,11 @@ relation TROppositeDomainsToMappingForEnforcement
          isCheckable = c,
          isEnforceable = false,
          guardPattern = dg:GuardPattern {
-            bindsTo = dgVars:Set(Variable) {},
+            variable = dgVars:Set(pivotocl::Variable) {},
             area = cd
          },
          bottomPattern = db:BottomPattern {
-            bindsTo = dbVars:Set(Variable) {}
+            variable = dbVars:Set(pivotocl::Variable) {}
          }
       },
       bottomPattern = mb:BottomPattern {
@@ -1007,12 +1005,12 @@ relation TROppositeDomainsToMappingForEnforcement
 
 relation RWhenPatternToMGuardPattern
 {
-   allDomainVars: Set(essentialocl::Variable);
-   unsharedWhenVars: Set(essentialocl::Variable);
+   allDomainVars: Set(pivotocl::Variable);
+   unsharedWhenVars: Set(pivotocl::Variable);
 
    domain relations r:Relation{
       when = whenp:Pattern {
-         bindsTo = whenVars:Set(Variable) {}
+         bindsTo = whenVars:Set(pivotocl::Variable) {}
       }
    };
    enforce domain core mg:GuardPattern {};
@@ -1029,11 +1027,11 @@ relation RWhenPatternToMGuardPattern
 
 relation RVarSetToMVarSet
 {
-   rvRest: Sequence(essentialocl::Variable);
-   mvRest: Set(essentialocl::Variable);
+   rvRest: Sequence(pivotocl::Variable);
+   mvRest: Set(pivotocl::Variable);
 
-   domain relations rvSeq:Sequence(Variable) {rv:Variable {}++rvRest};
-   enforce domain core mvSet:Set(Variable) {mv:Variable {}++mvRest};
+   domain relations rvSeq:Sequence(pivotocl::Variable) {rv:pivotocl::Variable {}++rvRest};
+   enforce domain core mvSet:Set(pivotocl::Variable) {mv:pivotocl::Variable {}++mvRest};
    where {
       RVarToMVar(rv, mv);
       if (rvRest->isEmpty())
@@ -1047,12 +1045,12 @@ relation RVarSetToMVarSet
 
 relation RVarSetToMBVarSet
 {
-   rvRest: Sequence(essentialocl::Variable);
-   mvRest: Set(essentialocl::Variable);
+   rvRest: Sequence(pivotocl::Variable);
+   mvRest: Set(pivotocl::Variable);
 
-   domain relations rvSeq:Sequence(Variable) {rv:Variable {}++rvRest};
+   domain relations rvSeq:Sequence(pivotocl::Variable) {rv:pivotocl::Variable {}++rvRest};
    enforce domain core mb:BottomPattern {
-      bindsTo = mv:Variable {}
+      variable = mv:pivotocl::Variable {}
    };
    where {
       RVarToMVar(rv, mv);
@@ -1062,12 +1060,12 @@ relation RVarSetToMBVarSet
 
 relation RVarSetToDGVarSet
 {
-   rvRest: Sequence(essentialocl::Variable);
-   mvRest: Set(essentialocl::Variable);
+   rvRest: Sequence(pivotocl::Variable);
+   mvRest: Set(pivotocl::Variable);
 
-   domain relations rvSeq:Sequence(Variable) {rv:Variable {}++rvRest};
+   domain relations rvSeq:Sequence(pivotocl::Variable) {rv:pivotocl::Variable {}++rvRest};
    enforce domain core dg:GuardPattern {
-      bindsTo = mv:Variable {}
+      variable = mv:pivotocl::Variable {}
    };
    where {
       RVarToMVar(rv, mv);
@@ -1079,15 +1077,15 @@ relation RVarToMVar
 {
    n: String;
 
-   domain relations rv:Variable {name=n, type=t:Type {}};
-   enforce domain core mv:Variable {name=n, type=t};
+   domain relations rv:pivotocl::Variable {name=n, type=t:Type {}};
+   enforce domain core mv:pivotocl::Variable {name=n, type=t};
 }
 
 relation RVarToMRealizedVar
 {
    n: String;
 
-   domain relations rv:Variable {name=n, type=t:Type {}};
+   domain relations rv:pivotocl::Variable {name=n, type=t:Type {}};
    enforce domain core mv:RealizedVariable {name=n, type=t};
 }
 
@@ -1095,7 +1093,7 @@ relation RSimplePatternToMPattern
 {
    domain relations rp:Pattern {
       predicate = pd:Predicate {
-         conditionExpression = re:OclExpression {}
+         conditionExpression = re:pivotocl::OCLExpression {}
       }
    }
    {
@@ -1103,7 +1101,7 @@ relation RSimplePatternToMPattern
    };
    enforce domain core mp:Pattern {
       predicate = mpd:Predicate{
-         conditionExpression = me:OclExpression {}
+         conditionExpression = me:pivotocl::OCLExpression {}
       }
    };
    where {
@@ -1123,7 +1121,7 @@ relation RWhenRelCallToMGuard
             referredRelation = r:Relation {
                domain = dseq:Sequence(RelationDomain) {}
             },
-            argument = aseq:Sequence(VariableExp) {}
+            argument = aseq:Sequence(pivotocl::VariableExp) {}
          }
       }
    }; 
@@ -1136,33 +1134,33 @@ relation RWhenRelCallToMGuard
 
 relation RWhenRelCallArgToMGuardPredicate
 {
-   tc: emof::Class;
+   tc: pivotocl::Class;
    dvn: String;
-   mv:essentialocl::Variable;
+   mv:pivotocl::Variable;
 
-   domain relations daSeq:Sequence(Element) {
+   domain relations daSeq:Sequence(pivotocl::Element) {
       r:Relation{},
-      ve:VariableExp {
-         referredVariable = v:Variable {}
+      ve:pivotocl::VariableExp {
+         referredVariable = v:pivotocl::Variable {}
       }, 
       d:RelationDomain {
-         rootVariable = dv:Variable {name = dvn}
+         rootVariable = dv:pivotocl::Variable {name = dvn}
       }
       ++ _
    };
    enforce domain core mp:GuardPattern {
-      bindsTo = vd:Variable {
+      variable = vd:pivotocl::Variable {
          name = tc.name+'_v',
          type = tc
       },
       predicate = mpd:Predicate {
-         conditionExpression = ee:OperationCallExp {   -- vd.dvn = mv
-            source = pe:PropertyCallExp {
-               source = pve:VariableExp{referredVariable = vd},
-               referredProperty = pep:Property{name = dvn, class = vd.type.oclAsType(emof::Class)}
+         conditionExpression = ee:pivotocl::OperationCallExp {   -- vd.dvn = mv
+            source = pe:pivotocl::PropertyCallExp {
+               source = pve:pivotocl::VariableExp{referredVariable = vd},
+               referredProperty = pep:pivotocl::Property{name = dvn, class = vd.type.oclAsType(pivotocl::Class)}
             },
-            referredOperation = eo:Operation{name = '='},
-            argument = ave:VariableExp{referredVariable = mv}
+            referredOperation = eo:pivotocl::Operation{name = '='},
+            argument = ave:pivotocl::VariableExp{referredVariable = mv}
          }
       }
    };
@@ -1180,10 +1178,10 @@ relation RWhenRelCallArgToMGuardPredicate
 --
 relation RInvokerToMGuard
 {
-   domain relations seqForInvoker:Sequence(Element) {
+   domain relations seqForInvoker:Sequence(pivotocl::Element) {
       ir:Relation {},   -- invoking relation
       ri:RelationCallExp {
-         argument = aseq:Sequence(VariableExp) {}
+         argument = aseq:Sequence(pivotocl::VariableExp) {}
       },
       r:Relation {   -- invoked relation
          domain = dseq:Sequence(RelationDomain) {}
@@ -1199,28 +1197,28 @@ relation RInvokerToMGuard
 relation RInvokerToMGuardPredicate
 {
    vn: String;
-   tc: emof::Class;
-   mdv: essentialocl::Variable;
+   tc: pivotocl::Class;
+   mdv: pivotocl::Variable;
 
-   domain relations seqForInvoker:Sequence(Element) {
+   domain relations seqForInvoker:Sequence(pivotocl::Element) {
       ir:Relation {},   -- invoking relation
-      ve:VariableExp {referredVariable = v:Variable {name=vn}},
-      d:RelationDomain { rootVariable = dv:Variable {} }
+      ve:pivotocl::VariableExp {referredVariable = v:pivotocl::Variable {name=vn}},
+      d:RelationDomain { rootVariable = dv:pivotocl::Variable {} }
       ++ _
    };
    enforce domain core mg:GuardPattern {
-      bindsTo = vd:Variable {
+      variable = vd:pivotocl::Variable {
          name = tc.name+'_v',
          type = tc
       },
       predicate = pd:Predicate {
-         conditionExpression = ee:OperationCallExp {   -- vd.vn = mdv
-            source = pe:PropertyCallExp {
-               source = mve:VariableExp{referredVariable = vd},
-               referredProperty = pep:Property{name = vn, class = vd.type.oclAsType(emof::Class)}
+         conditionExpression = ee:pivotocl::OperationCallExp {   -- vd.vn = mdv
+            source = pe:pivotocl::PropertyCallExp {
+               source = mve:pivotocl::VariableExp{referredVariable = vd},
+               referredProperty = pep:pivotocl::Property{name = vn, class = vd.type.oclAsType(pivotocl::Class)}
             },
-            referredOperation = eo:Operation{name = '='},
-            argument = ave:VariableExp{referredVariable = mdv}
+            referredOperation = eo:pivotocl::Operation{name = '='},
+            argument = ave:pivotocl::VariableExp{referredVariable = mdv}
          }
       }
    };
@@ -1234,7 +1232,7 @@ relation RInvokerToMGuardPredicate
 
 relation RDomainPatternToMDBottomPattern
 {
-   domain relations seqForDomainPtrn:Sequence(Element) {};
+   domain relations seqForDomainPtrn:Sequence(pivotocl::Element) {};
    enforce domain core db:BottomPattern {
       area = cd:CoreDomain{
          rule = m:Mapping {
@@ -1252,20 +1250,20 @@ relation RDomainPatternToMDBottomPattern
 
 relation RDomainToMDBottomForEnforcement
 {
-   remainingUnBoundDomainVars: Set(essentialocl::Variable);
+   remainingUnBoundDomainVars: Set(pivotocl::Variable);
    predicatesWithVarBindings:Set(qvtbase::Predicate);
    remainingPredicatesWithoutVarBindings:Set(qvtbase::Predicate);
-   rdSeq, rtSeq, rtdSeq: Sequence(emof::Element);
-   rdtVarsSeqRest: Sequence(Set(emof::Element));
+   rdSeq, rtSeq, rtdSeq: Sequence(pivotocl::Element);
+   rdtVarsSeqRest: Sequence(Set(pivotocl::Element));
    predicatesWithoutVarBindings:Set(qvtbase::Predicate);
-   unboundDomainVars:Set(essentialocl::Variable);
-   tcv, mv: essentialocl::Variable;
+   unboundDomainVars:Set(pivotocl::Variable);
+   tcv, mv: pivotocl::Variable;
 
-   domain relations rdtVarsSeq:Sequence(Set(Element)) {
-      rdtSet:Set(Element) {
+   domain relations rdtVarsSeq:Sequence(Set(pivotocl::Element)) {
+      rdtSet:Set(pivotocl::Element) {
          r:Relation{},
          rd:RelationDomain{},
-         te:ObjectTemplateExp {bindsTo = v:Variable {}}
+         te:ObjectTemplateExp {bindsTo = v:pivotocl::Variable {}}
          ++ _
       }
       ++ _
@@ -1304,14 +1302,14 @@ relation RDomainToMDBottomForEnforcement
 
 relation RDomainVarToMDBottomAssignmnetForEnforcement
 {
-   rdSeq : Sequence(emof::Element);
-   mv: essentialocl::Variable;
+   rdSeq : Sequence(pivotocl::Element);
+   mv: pivotocl::Variable;
  
-   domain relations rdtVarsSeq:Sequence(Set(Element)) {
-      rdtSet:Set(Element) {
+   domain relations rdtVarsSeq:Sequence(Set(pivotocl::Element)) {
+      rdtSet:Set(pivotocl::Element) {
          r:Relation{},
          rd:RelationDomain{},
-         te:ObjectTemplateExp {bindsTo = v:Variable {}}
+         te:ObjectTemplateExp {bindsTo = v:pivotocl::Variable {}}
          ++ _
       }
       ++ _
@@ -1319,9 +1317,9 @@ relation RDomainVarToMDBottomAssignmnetForEnforcement
    enforce domain core mb:BottomPattern {   -- mapping bottom
       realizedVariable = tcv:RealizedVariable {},   -- added this to correctly add the trace variable 
       assignment = a:PropertyAssignment {
-         slotExpression = ve1:VariableExp{referredVariable = tcv},
-         targetProperty = tp:Property{name = v.name, class = tcv.type.oclAsType(emof::Class)},
-         value = ve2:VariableExp{referredVariable = mv}
+         slotExpression = ve1:pivotocl::VariableExp{referredVariable = tcv},
+         targetProperty = tp:pivotocl::Property{name = v.name, class = tcv.type.oclAsType(pivotocl::Class)},
+         value = ve2:pivotocl::VariableExp{referredVariable = mv}
       }
    };
    where {
@@ -1333,40 +1331,40 @@ relation RDomainVarToMDBottomAssignmnetForEnforcement
 
 relation RDomainToMBottomPredicateForEnforcement
 {
-   remainingUnBoundDomainVars: Set(essentialocl::Variable);
+   remainingUnBoundDomainVars: Set(pivotocl::Variable);
    predicatesWithVarBindings:Set(qvtbase::Predicate);
-   rdSeq: Sequence(emof::Element);
+   rdSeq: Sequence(pivotocl::Element);
    predicatesWithoutVarBindings:Set(qvtbase::Predicate);
-   unboundDomainVars:Set(essentialocl::Variable);
-   tcv, mv: essentialocl::Variable;
+   unboundDomainVars:Set(pivotocl::Variable);
+   tcv, mv: pivotocl::Variable;
  
-   domain relations rdtVarsSeq:Sequence(Set(Element)) {
-      rdtSet:Set(Element) {
+   domain relations rdtVarsSeq:Sequence(Set(pivotocl::Element)) {
+      rdtSet:Set(pivotocl::Element) {
          r:Relation{},
          rd:RelationDomain{},
-         te:ObjectTemplateExp {bindsTo = v:Variable {}}
+         te:ObjectTemplateExp {bindsTo = v:pivotocl::Variable {}}
          ++ _
       }
       ++ _
    };
    enforce domain core mb:BottomPattern {
       predicate = pd:Predicate {
-         conditionExpression = ee:OperationCallExp {   -- tcv.(v.name) = mv
-            source = pe:PropertyCallExp {
+         conditionExpression = ee:pivotocl::OperationCallExp {   -- tcv.(v.name) = mv
+            source = pe:pivotocl::PropertyCallExp {
                --source = tcv,
-               source = pve:VariableExp{referredVariable = tcv},
-               referredProperty = pep:Property{
+               source = pve:pivotocl::VariableExp{referredVariable = tcv},
+               referredProperty = pep:pivotocl::Property{
                   name = v.name,
-                  class = tcv.type.oclAsType(emof::Class)
+                  class = tcv.type.oclAsType(pivotocl::Class)
                }
             },
-            referredOperation = eo:Operation{name = '='},
-            argument = ave:VariableExp{referredVariable = mv}
+            referredOperation = eo:pivotocl::Operation{name = '='},
+            argument = ave:pivotocl::VariableExp{referredVariable = mv}
          }
       }
    };
    where {
-      rdSeq = let s : Sequence(emof::Element) = Sequence{} in s->append(r)->append(rd);
+      rdSeq = let s : Sequence(pivotocl::Element) = Sequence{} in s->append(r)->append(rd);
       RelationDomainToTraceClassVar(rdSeq, tcv);
       RVarToMVar(v, mv);
 
@@ -1387,13 +1385,13 @@ relation RPredicateSetToMBPredicateSet
 
    domain relations predSeq:Sequence(Predicate) {
       rp:Predicate {
-         conditionExpression = re:OclExpression {}
+         conditionExpression = re:pivotocl::OCLExpression {}
       }
       ++ rpRest
    };
    enforce domain core mb:BottomPattern {
       predicate = mp:Predicate {
-         conditionExpression = me:OclExpression {}
+         conditionExpression = me:pivotocl::OCLExpression {}
       }
    };
    where {
@@ -1404,15 +1402,15 @@ relation RPredicateSetToMBPredicateSet
 
 relation RDomainToMDBottomForEnforcementOfIdentityProp
 {
-   seqForAssignment: Sequence(emof::Element);
+   seqForAssignment: Sequence(pivotocl::Element);
 
-   domain relations rtSeq:Sequence(Element) {
+   domain relations rtSeq:Sequence(pivotocl::Element) {
       r:Relation{},
       te:ObjectTemplateExp {
-         bindsTo = v:Variable {type=c:Class {}},
+         bindsTo = v:pivotocl::Variable {type=c:Class {}},
          part = pt:PropertyTemplateItem {
-            referredProperty = pp:Property {},
-            value = e:OclExpression {}
+            referredProperty = pp:pivotocl::Property {},
+            value = e:pivotocl::OCLExpression {}
          }
       } {
          c.key.part->includes(pp)
@@ -1439,18 +1437,18 @@ relation RDomainToMDBottomForEnforcementOfIdentityProp
 
 relation RDomainToMDBottomForEnforcementOfIdentityPropObject
 {
-   seqForAssignment: Sequence(emof::Element);
-   mtv, tcv : essentialocl::Variable;
-   rdSeq : Sequence(emof::Element);
+   seqForAssignment: Sequence(pivotocl::Element);
+   mtv, tcv : pivotocl::Variable;
+   rdSeq : Sequence(pivotocl::Element);
 
-   domain relations rtSeq:Sequence(Element) {
+   domain relations rtSeq:Sequence(pivotocl::Element) {
       r:Relation{},
       rd:RelationDomain{},
       te:ObjectTemplateExp {
-         bindsTo = v:Variable {type=c:Class {}},
+         bindsTo = v:pivotocl::Variable {type=c:Class {}},
          part = pt:PropertyTemplateItem {
-            referredProperty = pp:Property {},
-            value = e:ObjectTemplateExp {bindsTo = tv:Variable{}}
+            referredProperty = pp:pivotocl::Property {},
+            value = e:ObjectTemplateExp {bindsTo = tv:pivotocl::Variable{}}
          }
       } {
          c.key.part->includes(pp)
@@ -1459,9 +1457,9 @@ relation RDomainToMDBottomForEnforcementOfIdentityPropObject
    };
    enforce domain core mb:BottomPattern {
       assignment = a:PropertyAssignment {
-         slotExpression = ve1:VariableExp{referredVariable = tcv},
-         targetProperty = tp:Property{name = tv.name, class = tcv.type.oclAsType(emof::Class)},
-         value = ve2:VariableExp{referredVariable = mtv}
+         slotExpression = ve1:pivotocl::VariableExp{referredVariable = tcv},
+         targetProperty = tp:pivotocl::Property{name = tv.name, class = tcv.type.oclAsType(pivotocl::Class)},
+         value = ve2:pivotocl::VariableExp{referredVariable = mtv}
       }
    };   -- domain bottom
    where {
@@ -1474,21 +1472,21 @@ relation RDomainToMDBottomForEnforcementOfIdentityPropObject
 relation RDomainPatternExprToMappingDomainAssignment
 {
    pn: String;
-   mv: essentialocl::Variable;
+   mv: pivotocl::Variable;
 
-   domain relations seqForAssignment: Sequence(Element) {
+   domain relations seqForAssignment: Sequence(pivotocl::Element) {
       _,
-      v:Variable {},
-      pp:Property {name = pn},
-      e:OclExpression {} {
-         not e.oclIsTypeOf(VariableExp) and not e.oclIsTypeOf(ObjectTemplateExp)
+      v:pivotocl::Variable {},
+      pp:pivotocl::Property {name = pn},
+      e:pivotocl::OCLExpression {} {
+         not e.oclIsTypeOf(pivotocl::VariableExp) and not e.oclIsTypeOf(ObjectTemplateExp)
       } ++ _
    };
    enforce domain core db:BottomPattern {
       assignment = a:PropertyAssignment {
-         slotExpression = ve:VariableExp{referredVariable = mv},
-         targetProperty = tp:Property{name = pn, class = mv.type.oclAsType(emof::Class)},
-         value = me:OclExpression{}
+         slotExpression = ve:pivotocl::VariableExp{referredVariable = mv},
+         targetProperty = tp:pivotocl::Property{name = pn, class = mv.type.oclAsType(pivotocl::Class)},
+         value = me:pivotocl::OCLExpression{}
       }
    };
    where {
@@ -1499,15 +1497,15 @@ relation RDomainPatternExprToMappingDomainAssignment
 
 relation RDomainPatternExprToMappingDomainVarAssignment
 {
-   sharedDomainVars: Set(essentialocl::Variable);
-   rev, mev : essentialocl::Variable;
+   sharedDomainVars: Set(pivotocl::Variable);
+   rev, mev : pivotocl::Variable;
    pn: String;
 
-   domain relations seqForAssignment: Sequence(Element) {
+   domain relations seqForAssignment: Sequence(pivotocl::Element) {
       r:Relation {},
-      v:Variable {},
-      pp:Property {name = pn},
-      e:VariableExp {referredVariable = rev}
+      v:pivotocl::Variable {},
+      pp:pivotocl::Property {name = pn},
+      e:pivotocl::VariableExp {referredVariable = rev}
       ++ _
    } {
       not sharedDomainVars->includes(e.referredVariable)
@@ -1515,9 +1513,9 @@ relation RDomainPatternExprToMappingDomainVarAssignment
    enforce domain core db:BottomPattern {
       realizedVariable = mv:RealizedVariable {},
       assignment = a:PropertyAssignment {
-         slotExpression = ve:VariableExp{referredVariable = mv},
-         targetProperty = tp:Property{name = pn, class = mv.type.oclAsType(emof::Class)},
-         value = me:VariableExp{referredVariable = mev}
+         slotExpression = ve:pivotocl::VariableExp{referredVariable = mv},
+         targetProperty = tp:pivotocl::Property{name = pn, class = mv.type.oclAsType(pivotocl::Class)},
+         value = me:pivotocl::VariableExp{referredVariable = mev}
       }
    };
    when {
@@ -1531,14 +1529,14 @@ relation RDomainPatternExprToMappingDomainVarAssignment
 
 relation RDomainPatternExprToMappingDomainTemplateVarAssignment
 {
-   sharedDomainVars: Set(essentialocl::Variable);
-   rev, mev: essentialocl::Variable;
+   sharedDomainVars: Set(pivotocl::Variable);
+   rev, mev: pivotocl::Variable;
    pn: String;
 
-   domain relations seqForAssignment: Sequence(Element) {
+   domain relations seqForAssignment: Sequence(pivotocl::Element) {
       r:Relation {},
-      v:Variable {},
-      pp:Property {name = pn},
+      v:pivotocl::Variable {},
+      pp:pivotocl::Property {name = pn},
       e:ObjectTemplateExp {bindsTo = rev}
       ++ _
    } {
@@ -1547,9 +1545,9 @@ relation RDomainPatternExprToMappingDomainTemplateVarAssignment
    enforce domain core db:BottomPattern {
       realizedVariable = mv:RealizedVariable {},
       assignment = a:PropertyAssignment {
-         slotExpression = ve:VariableExp{referredVariable = mv},
-         targetProperty = tp:Property{name = pn, class = mv.type.oclAsType(emof::Class)},
-         value = me:VariableExp{referredVariable = mev}
+         slotExpression = ve:pivotocl::VariableExp{referredVariable = mv},
+         targetProperty = tp:pivotocl::Property{name = pn, class = mv.type.oclAsType(pivotocl::Class)},
+         value = me:pivotocl::VariableExp{referredVariable = mev}
       }
    };
    when {
@@ -1563,15 +1561,15 @@ relation RDomainPatternExprToMappingDomainTemplateVarAssignment
 
 relation RDomainPatternExprToMappingBottomVarAssignment
 {
-   sharedDomainVars: Set(essentialocl::Variable);
-   rev, mev, mv : essentialocl::Variable;
+   sharedDomainVars: Set(pivotocl::Variable);
+   rev, mev, mv : pivotocl::Variable;
    pn: String;
 
-   domain relations seqForAssignment: Sequence(Element) {
+   domain relations seqForAssignment: Sequence(pivotocl::Element) {
       r:Relation {},
-      v:Variable {},
-      pp:Property {name = pn},
-      e:VariableExp {referredVariable = rev}
+      v:pivotocl::Variable {},
+      pp:pivotocl::Property {name = pn},
+      e:pivotocl::VariableExp {referredVariable = rev}
       ++ _
    } {
       sharedDomainVars->includes(e.referredVariable)
@@ -1579,9 +1577,9 @@ relation RDomainPatternExprToMappingBottomVarAssignment
    enforce domain core mb:BottomPattern {   -- mapping bottom
       -- realizedVariable = mv:RealizedVariable {}, -- the RV belongs to the domain bottom!
       assignment = a:PropertyAssignment {
-         slotExpression = ve:VariableExp{referredVariable = mv},
-         targetProperty = tp:Property{name = pn, class = mv.type.oclAsType(emof::Class)},
-         value = me:VariableExp{referredVariable = mev}
+         slotExpression = ve:pivotocl::VariableExp{referredVariable = mv},
+         targetProperty = tp:pivotocl::Property{name = pn, class = mv.type.oclAsType(pivotocl::Class)},
+         value = me:pivotocl::VariableExp{referredVariable = mev}
       }
    };
    when {
@@ -1596,18 +1594,18 @@ relation RDomainPatternExprToMappingBottomVarAssignment
 relation RDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive
 {
    pn: String;
-   mv: essentialocl::Variable;
-   rtdeSeq: Sequence(emof::Element);
+   mv: pivotocl::Variable;
+   rtdeSeq: Sequence(pivotocl::Element);
 
-   domain relations rtdSeq:Sequence(Element) {
+   domain relations rtdSeq:Sequence(pivotocl::Element) {
       r:Relation{
          transformation = rt:RelationalTransformation{}
       },
       te:ObjectTemplateExp {
-         bindsTo = v:Variable {type = c:Class {}},
+         bindsTo = v:pivotocl::Variable {type = c:Class {}},
          part = pt:PropertyTemplateItem {
-            referredProperty = pp:Property {name = pn},
-            value = e:OclExpression {}
+            referredProperty = pp:pivotocl::Property {name = pn},
+            value = e:pivotocl::OCLExpression {}
          }
       } {
          (not c.key.part->includes(pp)) and (not e.oclIsKindOf(TemplateExp))
@@ -1627,11 +1625,11 @@ relation RDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive
              area = cm
          },
          bottomPattern = bp:BottomPattern {
-         	area = cm,
+            area = cm,
             assignment = a:PropertyAssignment {
-               slotExpression = ve:VariableExp{referredVariable = mv},
-               targetProperty = tp:Property{name = pn, class = mv.type.oclAsType(emof::Class)},
-               value = me:OclExpression{}
+               slotExpression = ve:pivotocl::VariableExp{referredVariable = mv},
+               targetProperty = tp:pivotocl::Property{name = pn, class = mv.type.oclAsType(pivotocl::Class)},
+               value = me:pivotocl::OCLExpression{}
             }
          }
       }
@@ -1653,11 +1651,11 @@ relation RDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive
 relation RDomainToMComposedMappingGuard
 {
    dn, tmn: String;
-   tcv, mv: essentialocl::Variable;
-   rdSeq: Sequence(emof::Element);
+   tcv, mv: pivotocl::Variable;
+   rdSeq: Sequence(pivotocl::Element);
    mt: qvtbase::Transformation;
 
-   domain relations rtdSeq:Sequence(Element) {
+   domain relations rtdSeq:Sequence(pivotocl::Element) {
       r:Relation{
          transformation = rt:RelationalTransformation{}
       },
@@ -1666,14 +1664,14 @@ relation RDomainToMComposedMappingGuard
          name = dn,
          typedModel = dir:TypedModel {
              name = tmn, 
-             usedPackage = up:Package{},
+             usedPackage = up:pivotocl::Package{},
              transformation = rt
          },
          pattern = rdp:DomainPattern {
             templateExpression = rdt:ObjectTemplateExp {}
          }
       },
-      ve:VariableExp {referredVariable = v:Variable {}}
+      ve:pivotocl::VariableExp {referredVariable = v:pivotocl::Variable {}}
       ++ _
    } {
       isVarBoundToSomeOtherTemplate(rdt, te, v)
@@ -1681,16 +1679,16 @@ relation RDomainToMComposedMappingGuard
    enforce domain core cm:Mapping {
       guardPattern = mg:GuardPattern {
          predicate = pd:Predicate {
-            conditionExpression = ee:OperationCallExp {   -- vd.vn = mdv
-               source = pe:PropertyCallExp {
-                  source = ve1:VariableExp{referredVariable = tcv},
-                  referredProperty = tp:Property {
+            conditionExpression = ee:pivotocl::OperationCallExp {   -- vd.vn = mdv
+               source = pe:pivotocl::PropertyCallExp {
+                  source = ve1:pivotocl::VariableExp{referredVariable = tcv},
+                  referredProperty = tp:pivotocl::Property {
                      name = mv.name, 
-                     class = mv.type.oclAsType(emof::Class)
+                     class = mv.type.oclAsType(pivotocl::Class)
                   }
                },
-               referredOperation = eo:Operation{name = '='},
-               argument = ve2:VariableExp{referredVariable = mv}
+               referredOperation = eo:pivotocl::Operation{name = '='},
+               argument = ve2:pivotocl::VariableExp{referredVariable = mv}
             }
          }
       },
@@ -1702,7 +1700,7 @@ relation RDomainToMComposedMappingGuard
             transformation = mt
          },
          guardPattern = cmdg:GuardPattern {
-            bindsTo = mv
+            variable = mv
          }
       }
    };
@@ -1718,15 +1716,15 @@ relation RDomainToMComposedMappingGuard
 
 relation RDomainToMDBottomForEnforcementOfNonIdentityPropObject
 {
-   rdtSetNext: Set(emof::Element);
-   rdtVarsSeqRest: Sequence(Set(emof::Element));
+   rdtSetNext: Set(pivotocl::Element);
+   rdtVarsSeqRest: Sequence(Set(pivotocl::Element));
    predicatesWithoutVarBindings:Set(qvtbase::Predicate);
-   unboundDomainVars:Set(essentialocl::Variable);
+   unboundDomainVars:Set(pivotocl::Variable);
    dn, pn, tmn: String;
-   mv: essentialocl::Variable;
+   mv: pivotocl::Variable;
 
-   domain relations rdtVarsSeq:Sequence(Set(Element)) {
-      rdtSet:Set(Element) {
+   domain relations rdtVarsSeq:Sequence(Set(pivotocl::Element)) {
+      rdtSet:Set(pivotocl::Element) {
          r:Relation{
             transformation = rt:RelationalTransformation{}
          },
@@ -1734,15 +1732,15 @@ relation RDomainToMDBottomForEnforcementOfNonIdentityPropObject
             name = dn,
             typedModel = dir:TypedModel {
                 name = tmn, 
-                usedPackage = up:Package{},
+                usedPackage = up:pivotocl::Package{},
                 transformation = rt
             }
          },
          te:ObjectTemplateExp {
-            bindsTo = v:Variable {type = c:Class {}},
+            bindsTo = v:pivotocl::Variable {type = c:Class {}},
             part = pt:PropertyTemplateItem {
-               referredProperty = pp:Property {name = pn},
-               value = pte:ObjectTemplateExp {bindsTo = pv:Variable {}}
+               referredProperty = pp:pivotocl::Property {name = pn},
+               value = pte:ObjectTemplateExp {bindsTo = pv:pivotocl::Variable {}}
             }
          } {
             not c.key.part->includes(pp)
@@ -1766,9 +1764,9 @@ relation RDomainToMDBottomForEnforcementOfNonIdentityPropObject
             bottomPattern = cmdb:BottomPattern {
                realizedVariable = mpv:RealizedVariable {},
                assignment = a:PropertyAssignment {
-                  slotExpression = ve1:VariableExp{referredVariable = mv},
-                  targetProperty = tp:Property{name = pn, class = mv.type.oclAsType(emof::Class)},
-                  value = ve2:VariableExp{referredVariable = mpv}
+                  slotExpression = ve1:pivotocl::VariableExp{referredVariable = mv},
+                  targetProperty = tp:pivotocl::Property{name = pn, class = mv.type.oclAsType(pivotocl::Class)},
+                  value = ve2:pivotocl::VariableExp{referredVariable = mpv}
                }
             }
          },
@@ -1795,27 +1793,27 @@ relation RDomainToMDBottomForEnforcementOfNonIdentityPropObject
 
 relation RDomainPatternToMDBottomPatternComposite
 {
-   nextSeqForDomainPtrn: Sequence(emof::Element);
-   sharedDomainVars:Set(essentialocl::Variable);
+   nextSeqForDomainPtrn: Sequence(pivotocl::Element);
+   sharedDomainVars:Set(pivotocl::Variable);
    pn: String;
-   mvte, mvpte: essentialocl::Variable;
+   mvte, mvpte: pivotocl::Variable;
 
-   domain relations seqForDomainPtrn:Sequence(Element) {
+   domain relations seqForDomainPtrn:Sequence(pivotocl::Element) {
       r:Relation{},
       te:ObjectTemplateExp {
-         bindsTo = vte:Variable {},
+         bindsTo = vte:pivotocl::Variable {},
          part = pt:PropertyTemplateItem {
-            referredProperty = pp:Property {name = pn},
-            value = pte:ObjectTemplateExp {bindsTo = vpte:Variable {}}
+            referredProperty = pp:pivotocl::Property {name = pn},
+            value = pte:ObjectTemplateExp {bindsTo = vpte:pivotocl::Variable {}}
          }
       }
       ++ _
    };
    enforce domain core db:BottomPattern {
       assignment = a:PropertyAssignment {
-         slotExpression = ve1:VariableExp{referredVariable = mvte},
-         targetProperty = tp:Property{name = pn, class = mvte.type.oclAsType(emof::Class)},
-         value = ve2:VariableExp{referredVariable = mvpte}
+         slotExpression = ve1:pivotocl::VariableExp{referredVariable = mvte},
+         targetProperty = tp:pivotocl::Property{name = pn, class = mvte.type.oclAsType(pivotocl::Class)},
+         value = ve2:pivotocl::VariableExp{referredVariable = mvpte}
       }
    };
    where {
@@ -1828,17 +1826,17 @@ relation RDomainPatternToMDBottomPatternComposite
 
 relation RDomainPatternToMDBottomPatternSimpleUnSharedVarExpr
 {
-   sharedDomainVars: Set(essentialocl::Variable);
+   sharedDomainVars: Set(pivotocl::Variable);
    pn: String;
-   mvte, mvpte: essentialocl::Variable;
+   mvte, mvpte: pivotocl::Variable;
 
-   domain relations seqForDomainPtrn:Sequence(Element) {
+   domain relations seqForDomainPtrn:Sequence(pivotocl::Element) {
       r:Relation{},
       te:ObjectTemplateExp {
-         bindsTo = vte:Variable {},
+         bindsTo = vte:pivotocl::Variable {},
          part = pt:PropertyTemplateItem {
-            referredProperty = pp:Property {name = pn},
-            value = e:VariableExp {referredVariable = vpte:Variable {}}
+            referredProperty = pp:pivotocl::Property {name = pn},
+            value = e:pivotocl::VariableExp {referredVariable = vpte:pivotocl::Variable {}}
          }
       }
       ++ _
@@ -1847,9 +1845,9 @@ relation RDomainPatternToMDBottomPatternSimpleUnSharedVarExpr
    };
    enforce domain core db:BottomPattern {
       assignment = a:PropertyAssignment {
-         slotExpression = ve1:VariableExp{referredVariable = mvte},
-         targetProperty = tp:Property{name = pn, class = mvte.type.oclAsType(emof::Class)},
-         value = ve2:VariableExp{referredVariable = mvpte}
+         slotExpression = ve1:pivotocl::VariableExp{referredVariable = mvte},
+         targetProperty = tp:pivotocl::Property{name = pn, class = mvte.type.oclAsType(pivotocl::Class)},
+         value = ve2:pivotocl::VariableExp{referredVariable = mvpte}
       }
    };
    when {
@@ -1863,17 +1861,17 @@ relation RDomainPatternToMDBottomPatternSimpleUnSharedVarExpr
 
 relation RDomainPatternToMDBottomPatternSimpleSharedVarExpr
 {
-   sharedDomainVars: Set(essentialocl::Variable);
+   sharedDomainVars: Set(pivotocl::Variable);
    pn: String;
-   mvte, mvpte: essentialocl::Variable;
+   mvte, mvpte: pivotocl::Variable;
 
-   domain relations seqForDomainPtrn:Sequence(Element) {
+   domain relations seqForDomainPtrn:Sequence(pivotocl::Element) {
       r:Relation{},
       te:ObjectTemplateExp {
-         bindsTo = vte:Variable {},
+         bindsTo = vte:pivotocl::Variable {},
          part = pt:PropertyTemplateItem {
-            referredProperty = pp:Property {name = pn},
-            value = e:VariableExp {referredVariable=vpte:Variable {}}
+            referredProperty = pp:pivotocl::Property {name = pn},
+            value = e:pivotocl::VariableExp {referredVariable=vpte:pivotocl::Variable {}}
          }
       }
       ++ _
@@ -1882,9 +1880,9 @@ relation RDomainPatternToMDBottomPatternSimpleSharedVarExpr
    };
    enforce domain core mb:BottomPattern {
       assignment = a:PropertyAssignment {
-         slotExpression = ve1:VariableExp{referredVariable = mvte},
-         targetProperty = tp:Property{name = pn, class = mvte.type.oclAsType(emof::Class)},
-         value = ve2:VariableExp{referredVariable = mvpte}
+         slotExpression = ve1:pivotocl::VariableExp{referredVariable = mvte},
+         targetProperty = tp:pivotocl::Property{name = pn, class = mvte.type.oclAsType(pivotocl::Class)},
+         value = ve2:pivotocl::VariableExp{referredVariable = mvpte}
       }
    };
    when {
@@ -1899,25 +1897,25 @@ relation RDomainPatternToMDBottomPatternSimpleSharedVarExpr
 relation RDomainPatternToMDBottomPatternSimpleNonVarExpr
 {
    pn: String;
-   mvte: essentialocl::Variable;
+   mvte: pivotocl::Variable;
 
-   domain relations seqForDomainPtrn:Sequence(Element) {
+   domain relations seqForDomainPtrn:Sequence(pivotocl::Element) {
       _,
       te:ObjectTemplateExp {
-         bindsTo = vte:Variable {},
+         bindsTo = vte:pivotocl::Variable {},
          part = pt:PropertyTemplateItem {
-            referredProperty = pp:Property {name = pn},
-            value = e:OclExpression {}
+            referredProperty = pp:pivotocl::Property {name = pn},
+            value = e:pivotocl::OCLExpression {}
          }
       } ++ _
    } {
-      not e.oclIsKindOf(TemplateExp) and not e.oclIsTypeOf(VariableExp)
+      not e.oclIsKindOf(TemplateExp) and not e.oclIsTypeOf(pivotocl::VariableExp)
    };
    enforce domain core db:BottomPattern {
       assignment = a:PropertyAssignment {
-         slotExpression = ve:VariableExp{referredVariable = mvte},
-         targetProperty = tp:Property{name = pn, class = mvte.type.oclAsType(emof::Class)},
-         value = me:OclExpression{}
+         slotExpression = ve:pivotocl::VariableExp{referredVariable = mvte},
+         targetProperty = tp:pivotocl::Property{name = pn, class = mvte.type.oclAsType(pivotocl::Class)},
+         value = me:pivotocl::OCLExpression{}
       }
    };
    where {
@@ -1928,19 +1926,19 @@ relation RDomainPatternToMDBottomPatternSimpleNonVarExpr
 
 relation RDomainVarsToTraceClassProps
 {
-   tcv, mdv: essentialocl::Variable;
+   tcv, mdv: pivotocl::Variable;
 
    domain relations rd:RelationDomain {
       rule = r:Relation{},
       pattern = dp:DomainPattern {
-         bindsTo = domainVars:Set(Variable) {dv:Variable {templateExp = te: TemplateExp{}}++_}
+         bindsTo = domainVars:Set(pivotocl::Variable) {dv:pivotocl::Variable {templateExp = te: TemplateExp{}}++_}
       }
    };
    enforce domain core mb:BottomPattern {
       assignment = a:PropertyAssignment {
-         slotExpression = ve1:VariableExp{referredVariable = tcv},
-         targetProperty = tp:Property{name = dv.name, class = tcv.type.oclAsType(emof::Class)},
-         value = ve2:VariableExp{referredVariable = mdv}
+         slotExpression = ve1:pivotocl::VariableExp{referredVariable = tcv},
+         targetProperty = tp:pivotocl::Property{name = dv.name, class = tcv.type.oclAsType(pivotocl::Class)},
+         value = ve2:pivotocl::VariableExp{referredVariable = mdv}
       }
    };
    where {
@@ -1951,26 +1949,26 @@ relation RDomainVarsToTraceClassProps
 
 relation ROppositeDomainVarsToTraceClassProps
 {
-   rdSeq: Sequence(emof::Element);
-   tcv, mdv: essentialocl::Variable;
+   rdSeq: Sequence(pivotocl::Element);
+   tcv, mdv: pivotocl::Variable;
  
-   domain relations rdVarsSeq:Sequence(Set(Element)) {
-      rdSet: Set(Element) {
+   domain relations rdVarsSeq:Sequence(Set(pivotocl::Element)) {
+      rdSet: Set(pivotocl::Element) {
          r:Relation {},
          rd:RelationDomain {} ++ _
       },
-      domainVars:Set(Variable) {dv:Variable{templateExp = te:TemplateExp{}} ++ _}
+      domainVars:Set(pivotocl::Variable) {dv:pivotocl::Variable{templateExp = te:TemplateExp{}} ++ _}
       ++ _
    };
    enforce domain core mb:BottomPattern {
       assignment = a:PropertyAssignment {
-         slotExpression = ve1:VariableExp{referredVariable = tcv},
-         targetProperty = tp:Property{name = dv.name, class = tcv.type.oclAsType(emof::Class)},
-         value = ve2:VariableExp{referredVariable = mdv}
+         slotExpression = ve1:pivotocl::VariableExp{referredVariable = tcv},
+         targetProperty = tp:pivotocl::Property{name = dv.name, class = tcv.type.oclAsType(pivotocl::Class)},
+         value = ve2:pivotocl::VariableExp{referredVariable = mdv}
       }
    };
    where {
-      rdSeq = let s : Sequence(emof::Element) = Sequence{} in s->append(r)->append(rd);
+      rdSeq = let s : Sequence(pivotocl::Element) = Sequence{} in s->append(r)->append(rd);
       RelationDomainToTraceClassVar(rdSeq, tcv);
       RVarToMVar(dv, mdv);
    }
@@ -1978,13 +1976,13 @@ relation ROppositeDomainVarsToTraceClassProps
 
 relation RRelImplToMBottomEnforcementOperation
 {
-   emptySet:Set(qvtcore::EnforcementOperation);
+   emptySet:Set(qvtcorebase::EnforcementOperation);
 
-   domain relations repImplSeq:Sequence(Element) {
+   domain relations repImplSeq:Sequence(pivotocl::Element) {
       r:Relation {
          operationalImpl = ri:RelationImplementation {
             inDirectionOf = tm:TypedModel{},
-            impl = op:Operation{}
+            impl = op:pivotocl::Operation{}
          }
       },
       rd:RelationDomain {typedModel = tm:TypedModel{}}
@@ -1994,7 +1992,7 @@ relation RRelImplToMBottomEnforcementOperation
       enforcementOperation = eoSet:Set(EnforcementOperation) {
          eoc:EnforcementOperation {
             enforcementMode = EnforcementMode::Creation,
-            operationCallExp = oce:OperationCallExp {
+            operationCallExp = oce:pivotocl::OperationCallExp {
                referredOperation = op
             }
            },
@@ -2018,12 +2016,12 @@ relation RRelDomainsToMOpCallArg
 {
    domain relations r:Relation {
       domain = rd:RelationDomain {
-         pattern = p:DomainPattern{bindsTo = rv:Variable{}}
+         pattern = p:DomainPattern{bindsTo = rv:pivotocl::Variable{}}
       }
    };
-   enforce domain core oce:OperationCallExp {
-      argument = ar:VariableExp {
-         referredVariable = mv:Variable {}
+   enforce domain core oce:pivotocl::OperationCallExp {
+      argument = ar:pivotocl::VariableExp {
+         referredVariable = mv:pivotocl::Variable {}
       }
    };
    where {
@@ -2034,7 +2032,7 @@ relation RRelDomainsToMOpCallArg
 relation RelationToTraceClassVar
 {
    rn: String;
-   tc: emof::Class;
+   tc: pivotocl::Class;
 
    domain relations r:Relation {name = rn};
    enforce domain core tcv:RealizedVariable {
@@ -2049,9 +2047,9 @@ relation RelationToTraceClassVar
 relation RelationDomainToTraceClassVar
 {
    rn, dn: String;
-   tc: emof::Class;
+   tc: pivotocl::Class;
 
-   domain relations rdSeq:Sequence(Element) {
+   domain relations rdSeq:Sequence(pivotocl::Element) {
       r:Relation {name = rn},
       d:RelationDomain{name = dn}
       ++ _
@@ -2069,8 +2067,8 @@ relation RelationDomainToTraceClassVar
 -- For space reasons this relation is not expanded out here
 relation RExpToMExp
 {
-   domain relations re:OclExpression{};
-   enforce domain core me:OclExpression{} /*implementedby CopyOclExpession(re, me)*/;
+   domain relations re:pivotocl::OCLExpression{};
+   enforce domain core me:pivotocl::OCLExpression{} /*implementedby CopyOclExpession(re, me)*/;
 }
 
 }
