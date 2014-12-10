@@ -296,7 +296,6 @@ top relation TopLevelRelationToMappingForChecking
    whenVars: Set(pivotocl::Variable);
    whereVars: Set(pivotocl::Variable);
    rn: String;
-   mbVars:Set(pivotocl::Variable);
    rt: qvtrelation::RelationalTransformation;
    mt: qvtbase::Transformation;
 
@@ -314,9 +313,8 @@ top relation TopLevelRelationToMappingForChecking
          area = m
       },
       bottomPattern = mb:BottomPattern {
-         variable = vs:Set(pivotocl::Variable) {
-            tcv:RealizedVariable {} ++ mbVars
-         }
+         variable = mbVars:Set(pivotocl::Variable){},
+         realizedVariable = tcv:RealizedVariable{}
       }
    };
    when {
@@ -442,7 +440,6 @@ top relation TopLevelRelationToMappingForEnforcement
    oppDomainSeq:Sequence(pivotocl::Element);
    whenVars: Set(pivotocl::Variable);
    whereVars: Set(pivotocl::Variable);
-   mbVars: Set(pivotocl::Variable);
    rpSet: Set(qvtbase::Predicate);
    rt: qvtrelation::RelationalTransformation;
    mt: qvtbase::Transformation;
@@ -476,7 +473,7 @@ top relation TopLevelRelationToMappingForEnforcement
          area = m
       },
       bottomPattern = mb:BottomPattern {
-         variable = mbVars,
+         variable = mbVars:Set(pivotocl::Variable){},
          realizedVariable = tcv:RealizedVariable {}
       },
       domain = md:CoreDomain {
@@ -568,7 +565,6 @@ top relation InvokedRelationToMappingForChecking
    unsharedWhereVars: Set(pivotocl::Variable);
    seqForInvoker: Sequence(pivotocl::Element);
    rn, irn: String;
-   mbVars:Set(pivotocl::Variable);
    rt: qvtrelation::RelationalTransformation;
    mt: qvtbase::Transformation;
    whenVars: Set(pivotocl::Variable);
@@ -595,7 +591,7 @@ top relation InvokedRelationToMappingForChecking
          area = m
       },
       bottomPattern = mb:BottomPattern {
-         variable = mbVars,
+         variable = mbVars:Set(pivotocl::Variable){},
          realizedVariable = tcv:RealizedVariable {}
       }
    };
@@ -659,7 +655,6 @@ top relation InvokedRelationToMappingForEnforcement
    oppDomainSeq:Sequence(pivotocl::Element);
    whenVars: Set(pivotocl::Variable);
    whereVars: Set(pivotocl::Variable);
-   mbVars: Set(pivotocl::Variable);
    rpSet: Set(qvtbase::Predicate);
    rt: qvtrelation::RelationalTransformation;
    mt: qvtbase::Transformation;
@@ -700,7 +695,7 @@ top relation InvokedRelationToMappingForEnforcement
          area = m
       },
       bottomPattern = mb:BottomPattern {
-         variable = mbVars,
+         variable = mbVars:Set(pivotocl::Variable){},
          realizedVariable = tcv:RealizedVariable {}
       },
       domain = md:CoreDomain {
@@ -1148,12 +1143,12 @@ relation RWhenRelCallArgToMGuardPredicate
       }
       ++ _
    };
-   enforce domain core mp:GuardPattern {
+   enforce domain core mg:GuardPattern {
       variable = vd:pivotocl::Variable {
          name = tc.name+'_v',
          type = tc
       },
-      predicate = mpd:Predicate {
+      predicate = mgp:Predicate {
          conditionExpression = ee:pivotocl::OperationCallExp {   -- vd.dvn = mv
             source = pe:pivotocl::PropertyCallExp {
                source = pve:pivotocl::VariableExp{referredVariable = vd},
