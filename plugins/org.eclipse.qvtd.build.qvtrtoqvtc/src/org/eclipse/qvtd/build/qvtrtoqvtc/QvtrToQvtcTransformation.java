@@ -39,6 +39,7 @@ import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseBottomPatternKey;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseCoreDomainKey;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseGuardPatternKey;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreMappingKey;
+import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreVariableKey;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RelationalTransformationToMappingTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RelationalTransformationToTracePackage;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RuleBindings;
@@ -53,6 +54,7 @@ import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
@@ -92,9 +94,9 @@ public class QvtrToQvtcTransformation
 
 	private PivotPropertyKey properties = new PivotPropertyKey();
 
-	private PivotVariableKey variables = new PivotVariableKey();
+	private QVTcoreVariableKey variables = new QVTcoreVariableKey();
 	
-	private PivotVariableKey realizedVariables = new PivotVariableKey();
+	private QVTcoreVariableKey realizedVariables = new QVTcoreVariableKey();
 	
 	public QvtrToQvtcTransformation(@NonNull MetaModelManager metaModelManager, @NonNull Resource qvtrModel, @NonNull Resource qvtcModel, @Nullable Resource qvtcTraceModel) {
 		
@@ -231,6 +233,7 @@ public class QvtrToQvtcTransformation
 	}
 	
 	public @NonNull BottomPattern findBottomPattern(@NonNull Area area) {
+		
 		BottomPattern mb = null;
 		if (doGlobalSearch) {
 			mb = botttomPatterns.get(area);
@@ -246,7 +249,8 @@ public class QvtrToQvtcTransformation
 		return mb;
 	}
 
-	public @NonNull CoreDomain findCoreDomain(String name, org.eclipse.qvtd.pivot.qvtbase.Rule rule) {
+	public @NonNull CoreDomain findCoreDomain(@NonNull String name,
+			@NonNull org.eclipse.qvtd.pivot.qvtbase.Rule rule) {
 		
 		CoreDomain md = null;
 		if (doGlobalSearch) {
@@ -296,7 +300,7 @@ public class QvtrToQvtcTransformation
 		return m;
 	}
 	
-	public Property findProperty(String name, Type owningType) {
+	public Property findProperty(@NonNull String name, @NonNull Type owningType) {
 		
 		Property p = null;
 		if (doGlobalSearch) {
@@ -308,36 +312,38 @@ public class QvtrToQvtcTransformation
 			p.setName(name);
 			p.setOwningType(owningType);
 			properties.add(p);
-			// addOrphan(p); properties are never orphans
 		}
 		return p;
 	}
 
-	public @NonNull RealizedVariable findRealizedVariable(String name, Type type) {
+	public @NonNull RealizedVariable findRealizedVariable(@NonNull String name,
+			@NonNull Type type, @NonNull CorePattern pattern) {
 		
 		RealizedVariable rv = null;
 		if (doGlobalSearch) {
-			rv = (RealizedVariable) realizedVariables.get(name, type);
+			rv = (RealizedVariable) realizedVariables.get(name, type, pattern);
 		}
 		if (rv == null) {
 			rv = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
 			assert rv!= null;
 			rv.setName(name);
 			rv.setType(type);
-			realizedVariables.add(rv);
+			realizedVariables.add(rv, pattern);
 			addOrphan(rv);
 		}
 		return rv;
 	}
 	
 	
-	public @NonNull Variable findVariable(String name, Type type) {
+	public @NonNull Variable findVariable(@NonNull String name,
+			@NonNull Type type, @NonNull CorePattern pattern) {
 		
 		Variable v = null;
 		if (doGlobalSearch) {
-			v = (Variable) variables.get(name, type);
+			v = (Variable) variables.get(name, type, pattern);
+			// A variable search can also be for a realized variable
 			if (v == null) {
-				v = (RealizedVariable) realizedVariables.get(name, type);
+				v = (RealizedVariable) realizedVariables.get(name, type, pattern);
 			}
 		}
 		if (v == null) {
@@ -345,7 +351,7 @@ public class QvtrToQvtcTransformation
 			assert v!= null;
 			v.setName(name);
 			v.setType(type);
-			variables.add(v);
+			variables.add(v, pattern);
 			addOrphan(v);
 		}
 		return v;
@@ -461,7 +467,7 @@ public class QvtrToQvtcTransformation
 
 
 	/**
-	 * @param doGlobalSearch the doGlobalSearch to set
+	 * @param doGlobalSearch TRUE to enable global search, FALSE to disable it
 	 */
 	public void setDoGlobalSearch(boolean doGlobalSearch) {
 		this.doGlobalSearch = doGlobalSearch;
