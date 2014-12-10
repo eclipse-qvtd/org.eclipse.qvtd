@@ -78,7 +78,7 @@ public class QvtrToQvtcTransformation
 	private final @NonNull List<EObject> coreRoots = new ArrayList<EObject>();
 	private final @NonNull Map<Variable, Variable> variableTrace = new HashMap<Variable, Variable>();
 	
-	private Key keyforClass;
+	private Map<Type, Key> keysforTypes = new HashMap<Type, Key>();
 	private boolean doGlobalSearch = true;
 	private final @NonNull MetaModelManager metaModelManager;
 
@@ -108,10 +108,7 @@ public class QvtrToQvtcTransformation
 		while(it.hasNext()) {
 			EObject eo = it.next();
 			if (eo instanceof Key) {
-				if (((Key) eo).getIdentifies() instanceof org.eclipse.ocl.examples.pivot.Class) {
-					keyforClass = (Key) eo;
-					break;
-				}
+				keysforTypes.put(((Key)eo).getIdentifies(), (Key) eo);
 			}
 			// Populate bindsTo of DomainPattern
 			if (eo instanceof DomainPattern) {
@@ -359,8 +356,8 @@ public class QvtrToQvtcTransformation
 		return coreRoots;
 	}
 	
-	public Key getKeyforClass() {
-		return keyforClass;
+	public @Nullable Key getKeyforType(@NonNull Type type) {
+		return keysforTypes.get(type);
 	}
 	
 	/**

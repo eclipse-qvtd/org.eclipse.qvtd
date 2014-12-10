@@ -47,6 +47,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
+import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
@@ -292,8 +293,10 @@ public class QVTr2QVTcRelations {
 	public void doRDomainToMDBottomForEnforcementOfIdentityProp(@NonNull Relation r, @NonNull ObjectTemplateExp te, @NonNull BottomPattern db)
 	{
 		// check
-		final Variable v = te.getBindsTo();
+		Variable v = te.getBindsTo();
 		assert v != null;
+		Type c = v.getType();
+		assert c != null;
 		Area area = db.getArea();
 		assert area instanceof CoreDomain : "Missing CoreDomain for RDomainToMDBottomForEnforcement";
 		CoreDomain cd = (CoreDomain) area;
@@ -305,7 +308,9 @@ public class QVTr2QVTcRelations {
 		for (PropertyTemplateItem pt : te.getPart()) {
 			final Property pp = pt.getReferredProperty();
 			// check relations
-			if (transformation.getKeyforClass().getPart().contains(pp)) {
+			Key key = transformation.getKeyforType(c);
+			assert key != null;
+			if (key.getPart().contains(pp)) {
 				final OCLExpression e = pt.getValue();
 				assert (pp != null) && (e != null);
 				doRDomainPatternExprToMappingDomainAssignment(v, pp, e, db);
@@ -868,10 +873,14 @@ public class QVTr2QVTcRelations {
 			final OCLExpression e = pt.getValue();
 			Property pp = pt.getReferredProperty();
 			assert e != null;
-			if (!(transformation.getKeyforClass().getPart().contains(pp)) && !(e instanceof TemplateExp)) {
+			Variable v = te.getBindsTo();
+			assert v != null;
+			Type c = v.getType();
+			assert c != null;
+			Key key = transformation.getKeyforType(c);
+			assert key != null;
+			if (!(key.getPart().contains(pp)) && !(e instanceof TemplateExp)) {
 				String pn = pp.getName();
-				Variable v = te.getBindsTo();
-				assert v != null;
 				// init
 				Mapping cm = transformation.findMapping(m.getName()+"_forNonIdentityProp", mt);
 				BottomPattern bp = transformation.findBottomPattern(cm);
