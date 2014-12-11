@@ -36,21 +36,21 @@ transformation SeqToStm(seqDgm: SeqMM, stm: StmcMM)
           domain seqDgm 
           st1:State 
           {
-               name = sn--,
-               --lifeline = l:LifeLine{interaction = i:Interaction{}}
+               name = sn,
+               lifeline = l:LifeLine{interaction = i:Interaction{}}
           };
 
           enforce domain stm 
           st2:State 
           {
-               name = sn--,
-               --owner = s:StateMachine{}
+               name = sn,
+               owner = s:StateMachine{}
           };
 
-          --when
-          --{
-          --     InteractionToStateMachine(i, s);
-          --}
+          when
+          {
+               InteractionToStateMachine(i, s);
+          }
      }
 
 }

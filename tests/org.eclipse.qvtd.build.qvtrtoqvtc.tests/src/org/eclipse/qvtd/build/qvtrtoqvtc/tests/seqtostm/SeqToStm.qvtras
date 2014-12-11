@@ -49,24 +49,51 @@
               <value xsi:type="pivot:VariableExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                   referredVariable="#//@nestedPackage.0/@rule.1/@variable.0"/>
             </part>
+            <part referredProperty="SeqMM.emof.oclas#p.SeqMM.State.lifeline">
+              <value xsi:type="qvtt:ObjectTemplateExp" type="SeqMM.emof.oclas#T.SeqMM.LifeLine"
+                  bindsTo="#//@nestedPackage.0/@rule.1/@variable.2" referredClass="SeqMM.emof.oclas#T.SeqMM.LifeLine">
+                <part referredProperty="SeqMM.emof.oclas#p.SeqMM.LifeLine.interaction">
+                  <value xsi:type="qvtt:ObjectTemplateExp" type="SeqMM.emof.oclas#T.SeqMM.Interaction"
+                      bindsTo="#//@nestedPackage.0/@rule.1/@variable.3" referredClass="SeqMM.emof.oclas#T.SeqMM.Interaction"/>
+                </part>
+              </value>
+            </part>
           </templateExpression>
         </pattern>
       </domain>
       <domain xsi:type="qvtr:RelationDomain" xmi:id="qD.SeqToStm.StateToState.stm"
-          isCheckable="true" isEnforceable="true" typedModel="#qT.SeqToStm.stm" rootVariable="#//@nestedPackage.0/@rule.1/@variable.2">
+          isCheckable="true" isEnforceable="true" typedModel="#qT.SeqToStm.stm" rootVariable="#//@nestedPackage.0/@rule.1/@variable.4">
         <pattern>
           <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="StmcMM.emof.oclas#T.StmcMM.State"
-              bindsTo="#//@nestedPackage.0/@rule.1/@variable.2" referredClass="StmcMM.emof.oclas#T.StmcMM.State">
+              bindsTo="#//@nestedPackage.0/@rule.1/@variable.4" referredClass="StmcMM.emof.oclas#T.StmcMM.State">
             <part referredProperty="StmcMM.emof.oclas#p.StmcMM.State.name">
               <value xsi:type="pivot:VariableExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
                   referredVariable="#//@nestedPackage.0/@rule.1/@variable.0"/>
+            </part>
+            <part referredProperty="StmcMM.emof.oclas#p.StmcMM.State.owner">
+              <value xsi:type="qvtt:ObjectTemplateExp" type="StmcMM.emof.oclas#T.StmcMM.StateMachine"
+                  bindsTo="#//@nestedPackage.0/@rule.1/@variable.5" referredClass="StmcMM.emof.oclas#T.StmcMM.StateMachine"/>
             </part>
           </templateExpression>
         </pattern>
       </domain>
       <variable name="sn" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"/>
       <variable name="st1" type="SeqMM.emof.oclas#T.SeqMM.State"/>
+      <variable name="l" type="SeqMM.emof.oclas#T.SeqMM.LifeLine"/>
+      <variable name="i" type="SeqMM.emof.oclas#T.SeqMM.Interaction"/>
       <variable name="st2" type="StmcMM.emof.oclas#T.StmcMM.State"/>
+      <variable name="s" type="StmcMM.emof.oclas#T.StmcMM.StateMachine"/>
+      <when>
+        <predicate>
+          <conditionExpression xsi:type="qvtr:RelationCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+              referredRelation="#//@nestedPackage.0/@rule.0">
+            <argument xsi:type="pivot:VariableExp" type="SeqMM.emof.oclas#T.SeqMM.Interaction"
+                referredVariable="#//@nestedPackage.0/@rule.1/@variable.3"/>
+            <argument xsi:type="pivot:VariableExp" type="StmcMM.emof.oclas#T.StmcMM.StateMachine"
+                referredVariable="#//@nestedPackage.0/@rule.1/@variable.5"/>
+          </conditionExpression>
+        </predicate>
+      </when>
     </rule>
     <ownedKey identifies="StmcMM.emof.oclas#T.StmcMM.StateMachine" part="StmcMM.emof.oclas#p.StmcMM.StateMachine.name"/>
     <ownedKey identifies="StmcMM.emof.oclas#T.StmcMM.State" part="StmcMM.emof.oclas#p.StmcMM.State.name StmcMM.emof.oclas#p.StmcMM.State.owner"/>
