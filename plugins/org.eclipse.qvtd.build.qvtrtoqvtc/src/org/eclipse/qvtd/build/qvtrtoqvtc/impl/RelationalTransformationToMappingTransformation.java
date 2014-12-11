@@ -77,6 +77,8 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 	
 	// Core
 	Transformation mt = null;
+	org.eclipse.ocl.examples.pivot.Package p = null;
+	private TypedModel tmtm = null;
 	//public static final @NonNull RuleBindings.RuleKey<Transformation> CORE_mt = RULE_BINDINGS.create((Transformation)null, "mt");
 //	public static final @NonNull RuleBindings.RuleKey<TypedModel> CORE_mtm = RULE_BINDINGS.create((TypedModel)null, "mtm");
 	
@@ -87,6 +89,8 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 	 
 	
 	protected final @NonNull List<SubRecord> subRecords = new ArrayList<SubRecord>();
+
+	
 	
 	public RelationalTransformationToMappingTransformation(@NonNull QvtrToQvtcTransformation transformation, @NonNull RelationalTransformation rt) {
 		super(transformation);
@@ -119,10 +123,13 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 		mt = QVTbaseFactory.eINSTANCE.createTransformation();
 		assert mt != null;
 		transformation.addOrphan(mt);
+		// Middle model
+		tmtm =  QVTbaseFactory.eINSTANCE.createTypedModel();
 		for (SubRecord subRecord : subRecords) {
 			TypedModel mtm =  QVTbaseFactory.eINSTANCE.createTypedModel();
 			subRecord.mtm = mtm;
 		}
+		
 	}
 
 	/* (non-Javadoc)
@@ -132,6 +139,11 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 	public void setAttributes() {
 		assert mt != null;
 		mt.setName(rtn);
+		assert p != null;
+		assert tmtm != null;
+		tmtm.setName("");
+		tmtm.getUsedPackage().add(p);
+		mt.getModelParameter().add(tmtm);
 		for (SubRecord subRecord : subRecords) {
 			TypedModel mtm = subRecord.mtm;
 			assert mtm != null;
@@ -140,5 +152,25 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 			mt.getModelParameter().add(mtm);
 		}
 	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.qvtd.build.qvtrtoqvtc.impl.AbstractRule#when()
+	 */
+	@Override
+	public boolean when() {
+		RelationalTransformation rt = ruleBindings.get(RELATIONS_rt);
+		assert rt != null;
+		RelationalTransformationToTracePackage whenRule = new RelationalTransformationToTracePackage(transformation, rt); 
+		RuleBindings whenBindings = whenRule.getRuleBindings();
+		RelationalTransformationToTracePackage whenRuleRecord = (RelationalTransformationToTracePackage) transformation.getRecord(whenBindings);
+		if (whenRuleRecord != null && whenRuleRecord.hasExecuted()) {
+			p = (Package) whenRuleRecord.getCore();
+			assert p != null;
+			return true;
+		}
+		return false;
+	}
+	
+	
 	
 }
