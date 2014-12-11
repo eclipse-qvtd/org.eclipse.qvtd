@@ -50,6 +50,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcoreFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
@@ -460,7 +461,7 @@ public class QvtrToQvtcTransformation
 	}
 
 
-	public void save(@NonNull Resource asResource, @NonNull Collection<? extends EObject> eObjects, @NonNull Map<Object, Object> options) throws IOException {
+	public void saveTrace(@NonNull Resource asResource, @NonNull Collection<? extends EObject> eObjects, @NonNull Map<Object, Object> options) throws IOException {
         Root root = PivotFactory.eINSTANCE.createRoot();
         root.setExternalURI(asResource.getURI().toString());
         asResource.getContents().add(root);
@@ -474,7 +475,21 @@ public class QvtrToQvtcTransformation
         }
 		asResource.save(options);
 	}
-
+	
+	public void saveCore(@NonNull Resource asResource, @NonNull Collection<? extends EObject> eObjects, @NonNull Map<Object, Object> options) throws IOException {
+        CoreModel root = QVTcoreFactory.eINSTANCE.createCoreModel();
+        root.setExternalURI(asResource.getURI().toString());
+        asResource.getContents().add(root);
+        for (EObject eObject : eObjects) {
+        	if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
+                root.getNestedPackage().add((org.eclipse.ocl.examples.pivot.Package)eObject);
+        	}
+        	else {
+        		asResource.getContents().add(eObject);
+        	}
+        }
+		asResource.save(options);
+	}
 
 	/**
 	 * @param doGlobalSearch TRUE to enable global search, FALSE to disable it
