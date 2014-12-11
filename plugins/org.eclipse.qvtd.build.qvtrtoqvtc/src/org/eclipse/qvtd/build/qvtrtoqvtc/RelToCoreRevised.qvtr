@@ -473,6 +473,7 @@ top relation TopLevelRelationToMappingForEnforcement
          area = m
       },
       bottomPattern = mb:BottomPattern {
+         area = m, 
          variable = mbVars:Set(pivotocl::Variable){},
          realizedVariable = tcv:RealizedVariable {}
       },
@@ -531,13 +532,13 @@ top relation TopLevelRelationToMappingForEnforcement
 
       RelationDomainToTraceClassVar(rdSeq, tcv);
       RWhenPatternToMGuardPattern(r, mg);
-      DomainVarsSharedWithWhenToDgVars(domainVarsSharedWithWhen, dg);
+      RVarSetToDGVarSet(domainVarsSharedWithWhen, dg);
       RVarToMRealizedVar(tev, mtev);
       if (unsharedWhereVars->isEmpty())
       then
          mbVars = Set{}
       else
-         RVarSetToMVarSet(unsharedWhereVars->asSequence(), mbVars)
+         RVarSetToMBVarSet(unsharedWhereVars->asSequence(), mb)
       endif;
       RPredicateSetToMBPredicateSet(predicatesWithVarBindings->asSequence(), mb);
       RDomainToMDBottomForEnforcement(rdtVarsSeq, db);
@@ -695,6 +696,7 @@ top relation InvokedRelationToMappingForEnforcement
          area = m
       },
       bottomPattern = mb:BottomPattern {
+         area = m,
          variable = mbVars:Set(pivotocl::Variable){},
          realizedVariable = tcv:RealizedVariable {}
       },
@@ -991,8 +993,8 @@ relation TROppositeDomainsToMappingForEnforcement
       seqForDomainPtrn = Sequence{r, te};
 
       RelationalTransformationToMappingTransformation(rt, mt);
-      RVarSetToMVarSet(domainTopVars->asSequence(), dgVars);
-      RVarSetToMVarSet(domainBottomUnSharedVars->asSequence(), dbVars);
+      RVarSetToDGVarSet(domainTopVars->asSequence(), dg);
+      RVarSetToMBVarSet(domainBottomUnSharedVars->asSequence(), db);
       RVarSetToMBVarSet(domainBottomSharedVars->asSequence(), mb);
       RDomainPatternToMDBottomPattern(seqForDomainPtrn, db);
    }

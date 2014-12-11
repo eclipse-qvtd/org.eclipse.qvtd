@@ -329,7 +329,7 @@ public class QvtrToQvtcTransformation
 			rv.setName(name);
 			rv.setType(type);
 			realizedVariables.add(rv, pattern);
-			addOrphan(rv);
+			pattern.getVariable().add(rv);
 		}
 		return rv;
 	}
@@ -352,7 +352,7 @@ public class QvtrToQvtcTransformation
 			v.setName(name);
 			v.setType(type);
 			variables.add(v, pattern);
-			addOrphan(v);
+			pattern.getVariable().add(v);
 		}
 		return v;
 	}
@@ -402,11 +402,9 @@ public class QvtrToQvtcTransformation
 		return traceRoots;
 	}
 
-	public @NonNull VariableDeclaration getVariableTrace(@NonNull Variable referredVariable) {
+	public @Nullable Variable getVariableTrace(@NonNull Variable referredVariable) {
 		
-		Variable rf = variableTrace.get(referredVariable);
-		assert rf != null;
-		return rf;
+		return variableTrace.get(referredVariable);
 	}
 
 	private Set<Variable> getVarsOfExp(OCLExpression e) {

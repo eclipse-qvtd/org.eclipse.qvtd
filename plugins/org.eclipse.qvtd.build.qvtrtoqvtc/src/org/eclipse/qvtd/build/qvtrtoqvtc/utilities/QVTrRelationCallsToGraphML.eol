@@ -48,7 +48,6 @@ for (rule in qvtrAST!Relation.all().sortBy(r | r.name)) {
     var n = new gml!NodeType;
     n.id = "n" + (loopCount-1).toString();
     g.node.add(n);
-    rule.name.println(n.id + ": ");
     nodeNodeMap.put(rule, n.id);
     
     /* Yed Information */
@@ -65,6 +64,7 @@ for (rule in qvtrAST!Relation.all().sortBy(r | r.name)) {
     var fill = new gml!FillType;
     // Label
     label.value = ((n.id.substring(1)).asInteger() + 1).toString();
+    rule.name.println(label.value + ": ");
     sNode.nodeLabel.add(label);
     shape.type = gml!ShapeTypeType#ellipse;
     if (rule.isTopLevel) {

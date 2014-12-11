@@ -43,6 +43,7 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
@@ -185,7 +186,8 @@ public class QVTr2QVTcRelations {
 		assert rule instanceof Mapping : "Missing Mapping for RDomainToMDBottomForEnforcement";
 		Mapping m = (Mapping) rule;
 		// init
-		BottomPattern mb = transformation.findBottomPattern(m);
+		BottomPattern mb = m.getBottomPattern();
+		assert mb != null;
 		// where
 		doRDomainToMDBottomForEnforcementOfIdentityProp(r, te, db);
 		doRDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive(r, te, rd, m);
@@ -195,7 +197,16 @@ public class QVTr2QVTcRelations {
 		//doRDomainToMBottomPredicateForEnforcement(r, rd, te, predicatesWithoutVarBindings, unboundDomainVars, mb);		
 		doRDomainVarToMDBottomAssignmnetForEnforcement(r, rd, te, predicatesWithoutVarBindings, unboundDomainVars, mb);
 	}
+
+	// 31
+	public void doRRelImplToMBottomEnforcementOperation(Relation r,
+			RelationDomain rd, BottomPattern mb) {
 		
+		// TODO finish!
+		
+	}
+	
+	
 	// 38
 	public void doRWhenPatternToMGuardPattern(@NonNull Relation r, @NonNull GuardPattern mg) {
 		
@@ -209,18 +220,19 @@ public class QVTr2QVTcRelations {
 			unsharedWhenVars.removeAll(allDomainVars);
 			doRWhenRelCallToMGuard(whenp, mg);
 			doRSimplePatternToMPattern(whenp, mg);
-			doUnsharedWhenVarsToMgVars(unsharedWhenVars, mg);
+			//doUnsharedWhenVarsToMgVars(unsharedWhenVars, mg);
+			doRVarSetToDGVarSet(new ArrayList<Variable>(unsharedWhenVars), mg);
 		}
 	}
 	
 	/* =============  T4 ============= */
 	
 	// 2
-	public void doDomainVarsSharedWithWhenToDgVars (@NonNull Set<Variable> domainVarsSharedWithWhen, @NonNull GuardPattern dg) {
+	/*public void doDomainVarsSharedWithWhenToDgVars(@NonNull Set<Variable> domainVarsSharedWithWhen, @NonNull GuardPattern dg) {
 		
 		List<Variable> dbVars = doRVarSetToMVarSet(new ArrayList<Variable>(domainVarsSharedWithWhen));
 		dg.getBindsTo().addAll(dbVars);
-	}
+	}*/
 	
 	// 10
 	private void doRDomainPatternToMDBottomPattern(@NonNull Relation r,
@@ -230,7 +242,8 @@ public class QVTr2QVTcRelations {
 		assert cd != null;
 		Mapping m = (Mapping) cd.getRule();
 		assert m != null;
-		BottomPattern mb = transformation.findBottomPattern(m);
+		BottomPattern mb = m.getBottomPattern();
+		assert mb != null;
 		doRDomainPatternToMDBottomPatternComposite(r, te, db);
 		doRDomainPatternToMDBottomPatternSimpleNonVarExpr(te, db);
 	    doRDomainPatternToMDBottomPatternSimpleUnSharedVarExpr(r, te, db);
@@ -261,7 +274,7 @@ public class QVTr2QVTcRelations {
 		VariableExp pve = transformation.createVariableExp();
 		VariableExp ave = transformation.createVariableExp();
 		// where
-		RealizedVariable tcv = doRelationDomainToTraceClassVar(r, rd);
+		RealizedVariable tcv = doRelationDomainToTraceClassVar(r, rd, mb);
 		Variable mv = doRVarToMVar(v);
 		Set<Variable> remainingUnBoundDomainVars = new HashSet<Variable>(unboundDomainVars);
 		remainingUnBoundDomainVars.remove(v);
@@ -303,7 +316,7 @@ public class QVTr2QVTcRelations {
 		Rule rule = cd.getRule();
 		assert rule instanceof Mapping : "Missing Mapping for RDomainToMDBottomForEnforcement";
 		Mapping m = (Mapping) rule;
-		BottomPattern mb = transformation.findBottomPattern(m);
+		BottomPattern mb = m.getBottomPattern();
 		assert mb != null;
 		for (PropertyTemplateItem pt : te.getPart()) {
 			final Property pp = pt.getReferredProperty();
@@ -358,7 +371,7 @@ public class QVTr2QVTcRelations {
 	}
 	
 	// 34	
-	private void doRVarSetToMBVarSet(@NonNull ArrayList<Variable> rvSeq,
+	public void doRVarSetToMBVarSet(@NonNull ArrayList<Variable> rvSeq,
 			@NonNull BottomPattern mb) {
 		
 		if (!rvSeq.isEmpty()) {
@@ -366,9 +379,8 @@ public class QVTr2QVTcRelations {
 			Variable rv = rvSeq.remove(0);
 			assert rv != null;
 			// when
-			Variable mv = doRVarToMVar(rv);
+			Variable mv = doRVarToMVar(rv, mb);
 			assert mv != null;
-			mb.getBindsTo().add(mv);
 			doRVarSetToMBVarSet(rvSeq, mb);
 		}
 	}
@@ -407,8 +419,10 @@ public class QVTr2QVTcRelations {
 			DomainPattern dp = ord.getPattern();
 			if (dp.getTemplateExpression() instanceof ObjectTemplateExp) {
 				String dn = ord.getName();
+				assert dn != null;
 				TypedModel dir = ord.getTypedModel();
 				String tmn = dir.getName();
+				assert tmn != null;
 				RelationalTransformation rt = (RelationalTransformation) dir.getTransformation();
 				assert rt != null;
 				List<Package> up = dir.getUsedPackage();
@@ -443,8 +457,8 @@ public class QVTr2QVTcRelations {
 					mt = (Transformation) whenRuleRecord.getCore();
 				}
 				assert mt != null;
-				List<Variable> dgVars = doRVarSetToMVarSet(new ArrayList<Variable>(domainTopVars));
-				List<Variable> dbVars = doRVarSetToMVarSet(new ArrayList<Variable>(domainBottomUnSharedVars));
+				/*List<Variable> dgVars =*/ doRVarSetToDGVarSet(new ArrayList<Variable>(domainTopVars), dg);
+				/*List<Variable> dbVars =*/ doRVarSetToMBVarSet(new ArrayList<Variable>(domainBottomUnSharedVars), db);
 				doRVarSetToMBVarSet(new ArrayList<Variable>(domainBottomSharedVars), mb);
 				doRDomainPatternToMDBottomPattern(r, te, db);
 				// assign
@@ -460,21 +474,21 @@ public class QVTr2QVTcRelations {
 				cd.setTypedModel(mdir);
 				cd.setIsCheckable(c);
 				cd.setIsEnforceable(false);
-				dg.getBindsTo().addAll(dgVars);
 				cd.setGuardPattern(dg);
-				db.getBindsTo().addAll(dbVars);
 				m.setBottomPattern(mb);
 			}
 		}
 	}
 
 	// 50
+	/*
 	private void doUnsharedWhenVarsToMgVars(@NonNull Set<Variable> unsharedWhenVars,
 			@NonNull GuardPattern mg) {
 		
 		List<Variable> mgVars = doRVarSetToMVarSet(new ArrayList<Variable>(unsharedWhenVars));
 		mg.getBindsTo().addAll(mgVars);
 	}
+	*/
 	
 	
 	/* =============  T5 ============= */
@@ -503,6 +517,7 @@ public class QVTr2QVTcRelations {
 			ve.setType(mv.getType());
 			a.setSlotExpression(ve);
 			Property tp = getProperty(pn, mv.getType());
+			assert tp != null;
 			a.setTargetProperty(tp);
 			me.setReferredVariable(mev);
 			me.setType(mev.getType());
@@ -565,11 +580,11 @@ public class QVTr2QVTcRelations {
 				ve.setType(mv.getType());
 				a.setSlotExpression(ve);
 				Property tp = getProperty(pn, mv.getType());
+				assert tp != null;
 				a.setTargetProperty(tp);
 				me.setReferredVariable(mev);
 				me.setType(mev.getType());
 				a.setValue(me);
-				db.getRealizedVariable().add(mv);
 				db.getAssignment().add(a);
 			}
 		}
@@ -802,8 +817,10 @@ public class QVTr2QVTcRelations {
 			if (isVarBoundToSomeOtherTemplate((ObjectTemplateExp) rdt, te, v)) {
 				String dn, tmn;
 				dn = rd.getName();
+				assert dn != null;
 				TypedModel dir = rd.getTypedModel();
 				tmn = dir.getName();
+				assert tmn != null;
 				List<Package> up = dir.getUsedPackage();
 				if (rt != dir.getTransformation())
 					return;
@@ -817,7 +834,9 @@ public class QVTr2QVTcRelations {
 				CoreDomain cd = transformation.findCoreDomain(dn, cm);
 				GuardPattern cmdg = transformation.findGuardPattern(cd);
 				// where
-				RealizedVariable tcv = doRelationDomainToTraceClassVar(r, rd);
+				BottomPattern mb = cm.getBottomPattern();
+				assert mb != null;
+				RealizedVariable tcv = doRelationDomainToTraceClassVar(r, rd, mb);
 				assert tcv != null;
 				Variable mv = doRVarToMVar(v);
 				assert mv != null;
@@ -884,7 +903,7 @@ public class QVTr2QVTcRelations {
 				// init
 				Mapping cm = transformation.findMapping(m.getName()+"_forNonIdentityProp", mt);
 				BottomPattern bp = transformation.findBottomPattern(cm);
-				GuardPattern gp = transformation.findGuardPattern(cm);
+				transformation.findGuardPattern(cm);
 				PropertyAssignment a = transformation.createPropertyAssignment();
 				VariableExp ve = transformation.createVariableExp();
 				// where
@@ -898,6 +917,7 @@ public class QVTr2QVTcRelations {
 				ve.setType(mv.getType());
 				a.setSlotExpression(ve);
 				Property tp = getProperty(pn, mv.getType());
+				assert tp != null;
 				a.setTargetProperty(tp);
 				a.setValue(me);
 				bp.getAssignment().add(a);
@@ -923,7 +943,7 @@ public class QVTr2QVTcRelations {
 		VariableExp ve1 = transformation.createVariableExp();
 		VariableExp ve2 = transformation.createVariableExp();
 		// where
-		RealizedVariable tcv = doRelationDomainToTraceClassVar(r, rd);
+		RealizedVariable tcv = doRelationDomainToTraceClassVar(r, rd, mb);
 		Variable mv = doRVarToMVar(v);
 		// assign
 		ve1.setReferredVariable(tcv);
@@ -936,9 +956,24 @@ public class QVTr2QVTcRelations {
 		ve2.setType(mv.getType());
 		a.setValue(ve2);
 		
-		mb.getRealizedVariable().add(tcv);
+		//mb.getRealizedVariable().add(tcv);
 		mb.getAssignment().add(a);
 	}
+	
+	// 28
+	public void doROppositeDomainVarsToTraceClassProps(@NonNull Relation r,
+			@NonNull RelationDomain rd, @NonNull ObjectTemplateExp te,
+			@NonNull Set<Variable> domainVars,
+			@NonNull BottomPattern mb) {
+		
+		// check
+		/*for(Variable dv : domainVars) {
+			if (transformation.getTemplateExpression(dv) != null) {
+				PropertyAssignment a = transformation.createPropertyAssignment();
+			}
+		}*/
+		// TODO FINISH!
+	}	
 	
 	// 29
 	public void doRPredicateSetToMBPredicateSet(@NonNull ArrayList<Predicate> predSeq, @NonNull BottomPattern mb) {
@@ -962,8 +997,7 @@ public class QVTr2QVTcRelations {
 	}
 	
 	// 33
-	@SuppressWarnings("unused")
-	private void doRVarSetToDGVarSet(@NonNull ArrayList<Variable> rvSeq,
+	public void doRVarSetToDGVarSet(@NonNull ArrayList<Variable> rvSeq,
 			@NonNull GuardPattern dg) {
 		
 		if (!rvSeq.isEmpty()) {
@@ -971,16 +1005,15 @@ public class QVTr2QVTcRelations {
 			Variable rv = rvSeq.remove(0);
 			assert rv != null;
 			// when
-			Variable mv = doRVarToMVar(rv);
+			Variable mv = doRVarToMVar(rv, dg);
 			assert mv != null;
-			dg.getBindsTo().add(mv);
 			doRVarSetToDGVarSet(rvSeq, dg);
 		}
 		
 	}
 	
 	// 35
-	public @NonNull List<Variable> doRVarSetToMVarSet(@NonNull ArrayList<Variable> rvSeq) {
+	/*public @NonNull List<Variable> doRVarSetToMVarSet(@NonNull ArrayList<Variable> rvSeq) {
 		
 		List<Variable> mvSet = new ArrayList<Variable>();
 		if (!rvSeq.isEmpty()) {
@@ -991,7 +1024,7 @@ public class QVTr2QVTcRelations {
 			mvSet.addAll(doRVarSetToMVarSet(rvSeq));
 		}
 		return mvSet;
-	}
+	}*/
 	
 	// 39
 	private void doRWhenRelCallArgToMGuardPredicate(@NonNull Relation r, @NonNull VariableExp ve,
@@ -1009,8 +1042,8 @@ public class QVTr2QVTcRelations {
 		String dvn = d.getRootVariable().getName();
 		Variable v = (Variable) ve.getReferredVariable();
 		// init
-		Variable vd = transformation.findVariable(tc.getName()+"_v", tc);
-		Predicate mpd = transformation.createPredicate();
+		Variable vd = transformation.findVariable(tc.getName()+"_v", tc, mg);
+		Predicate mgp = transformation.createPredicate();
 		OperationCallExp ee = transformation.createOperationCallExp();
 		PropertyCallExp pe = transformation.createPropertyCallExp();
 		VariableExp pve = transformation.createVariableExp();
@@ -1019,26 +1052,22 @@ public class QVTr2QVTcRelations {
 		assert v != null;
 		Variable mv = doRVarToMVar(v);
 		// assign
-		mpd.setConditionExpression(ee);
+		mgp.setConditionExpression(ee);
 		ee.setSource(pe);
 		pe.setSource(pve);
 		pve.setReferredVariable(vd);
 		pve.setType(vd.getType());
-		for (DomainProperty pep : tc.getLocalProperties()) {
-			if ((pep.getName() == dvn) && (pep.getType() == vd.getType())) {
-				pe.setReferredProperty((Property) pep);
-				pe.setType(((Property) pep).getType());
-			}
-		}
+		Property pep = getProperty(dvn, vd.getType());
+		assert pep != null;
+		pe.setReferredProperty(pep);
+		pe.setType(pep.getType());
 		ee.setReferredOperation(getEqualsOPeration());
 		ee.setType(transformation.getMetaModelManager().getBooleanType());
 		ave.setReferredVariable(mv);
 		ave.setType(mv.getType());
 		ee.getArgument().add(ave);
 		
-		mg.getBindsTo().add(vd);
-		mg.getBindsTo().add(mv);
-		mg.getPredicate().add(mpd);
+		mg.getPredicate().add(mgp);
 		
 	}
 
@@ -1059,24 +1088,48 @@ public class QVTr2QVTcRelations {
 	}
 	
 	// 36
+	public @NonNull RealizedVariable doRVarToMRealizedVar(@NonNull Variable rv, 
+			@NonNull CorePattern pattern) {
+		
+		String n = rv.getName();
+		Type t = rv.getType();
+		assert (n != null) && (t != null);
+		RealizedVariable mv = transformation.findRealizedVariable(n, t, pattern);
+		assert mv != null;
+		transformation.putVariableTrace(rv, mv);
+		return mv;
+	}
+	
 	public @NonNull RealizedVariable doRVarToMRealizedVar(@NonNull Variable rv) {
 		
-		RealizedVariable mv = transformation.findRealizedVariable(rv.getName(), rv.getType());
-		transformation.putVariableTrace(rv, mv);
+		RealizedVariable mv = (RealizedVariable) transformation.getVariableTrace(rv);
+		assert mv != null;
 		return mv;
 	}
 		
 	// 37
+	public @NonNull Variable doRVarToMVar(@NonNull Variable rv, 
+			@NonNull CorePattern pattern) {
+
+		String n = rv.getName();
+		Type t = rv.getType();
+		assert (n != null) && (t != null);
+		Variable mv = transformation.findVariable(n, t, pattern);
+		assert mv != null;
+		transformation.putVariableTrace(rv, mv);
+		return mv;
+	}
+	
 	public @NonNull Variable doRVarToMVar(@NonNull Variable rv) {
 
-		Variable mv = transformation.findVariable(rv.getName(), rv.getType());
-		transformation.putVariableTrace(rv, mv);
+		Variable mv = transformation.getVariableTrace(rv);
+		assert mv != null;
 		return mv;
 	}
 	
 	// 42
 	public @NonNull RealizedVariable doRelationDomainToTraceClassVar(@NonNull Relation r,
-			@NonNull RelationDomain d) {
+			@NonNull RelationDomain d, @NonNull CorePattern p) {
 
 		// check
 		String rn = r.getName();
@@ -1092,7 +1145,7 @@ public class QVTr2QVTcRelations {
 			tc = (Type) whenRule.getCore();
 		}
 		assert tc != null;
-		RealizedVariable mv = transformation.findRealizedVariable(rn+"_"+dn+"_v", tc);
+		RealizedVariable mv = transformation.findRealizedVariable(rn+"_"+dn+"_v", tc, p);
 		return mv;
 	}
 	
