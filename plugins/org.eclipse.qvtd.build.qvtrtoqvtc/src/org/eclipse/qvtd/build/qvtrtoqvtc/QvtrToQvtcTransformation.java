@@ -82,6 +82,7 @@ public class QvtrToQvtcTransformation
 	private final @NonNull Map<Variable, Variable> variableTrace = new HashMap<Variable, Variable>();
 	
 	private Map<Type, Key> keysforTypes = new HashMap<Type, Key>();
+	private Map <Variable, TemplateExp> templateExpforVaraibless = new HashMap<Variable, TemplateExp>();
 	private boolean doGlobalSearch = true;
 	private final @NonNull MetaModelManager metaModelManager;
 
@@ -127,6 +128,10 @@ public class QvtrToQvtcTransformation
 						dp.getBindsTo().addAll(getNestedBindToVariable((ObjectTemplateExp) te));
 					}
 				}
+			}
+			if (eo instanceof TemplateExp) {
+				TemplateExp te = (TemplateExp) eo;
+				templateExpforVaraibless.put(te.getBindsTo(), te);
 			}
 		}
 	}
@@ -476,6 +481,12 @@ public class QvtrToQvtcTransformation
 	 */
 	public void setDoGlobalSearch(boolean doGlobalSearch) {
 		this.doGlobalSearch = doGlobalSearch;
+	}
+
+	
+	public TemplateExp getTemplateExpression(Variable dv) {
+		
+		return templateExpforVaraibless.get(dv);
 	}
 
 }
