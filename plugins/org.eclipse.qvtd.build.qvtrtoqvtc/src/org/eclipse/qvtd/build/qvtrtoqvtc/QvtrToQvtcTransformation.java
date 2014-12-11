@@ -46,6 +46,7 @@ import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RuleBindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.TopLevelRelationToMappingForEnforcement;
 import org.eclipse.qvtd.build.qvtrtoqvtc.utilities.TransformationTraceData;
 import org.eclipse.qvtd.build.qvtrtoqvtc.utilities.TransformationTraceDataImpl;
+import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -113,12 +114,18 @@ public class QvtrToQvtcTransformation
 				keysforTypes.put(((Key)eo).getIdentifies(), (Key) eo);
 			}
 			// Populate bindsTo of DomainPattern
-			if (eo instanceof DomainPattern) {
-				DomainPattern dp = (DomainPattern) eo;
-				TemplateExp te = dp.getTemplateExpression();
-				dp.getBindsTo().add(te.getBindsTo());
-				if (te instanceof ObjectTemplateExp) {
-					dp.getBindsTo().addAll(getNestedBindToVariable((ObjectTemplateExp) te));
+			if (eo instanceof Pattern) {
+				Pattern p = (Pattern) eo;
+				for (Predicate pred : p.getPredicate()) {
+					p.getBindsTo().addAll(getVarsOfExp(pred.getConditionExpression()));
+				}
+				if (eo instanceof DomainPattern) {
+					DomainPattern dp = (DomainPattern) eo;
+					TemplateExp te = dp.getTemplateExpression();
+					dp.getBindsTo().add(te.getBindsTo());
+					if (te instanceof ObjectTemplateExp) {
+						dp.getBindsTo().addAll(getNestedBindToVariable((ObjectTemplateExp) te));
+					}
 				}
 			}
 		}
