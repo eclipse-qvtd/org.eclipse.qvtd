@@ -289,6 +289,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 			GuardPattern dg = subRecord.dg;
 			assert dg != null;
 			relations.doRVarSetToDGVarSet(new ArrayList<Variable>(domainVarsSharedWithWhen), dg);
+			
 			//T4
 			/* List<Variable> mbvars =*/ relations.doRVarSetToMBVarSet(new ArrayList<Variable>(unsharedWhereVars), mb);
 			//subRecord.mbvars = mbvars;
@@ -296,6 +297,8 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 			Mapping m = subRecord.m;
 			assert m!= null;
 			relations.doTROppositeDomainsToMappingForEnforcement(r, subRecord.rd, m);
+			// Invoked here so the variables are instantiated
+			relations.doROppositeDomainVarsToTraceClassProps(r, subRecord.rd, subRecord.te, oppositeDomainVars, mb);
 			GuardPattern mg = subRecord.mg;
 			assert mg != null;
 			relations.doRWhenPatternToMGuardPattern(r, mg);

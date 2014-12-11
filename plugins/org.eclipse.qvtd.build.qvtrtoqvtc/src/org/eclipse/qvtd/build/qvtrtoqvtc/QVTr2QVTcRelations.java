@@ -202,7 +202,8 @@ public class QVTr2QVTcRelations {
 	public void doRRelImplToMBottomEnforcementOperation(Relation r,
 			RelationDomain rd, BottomPattern mb) {
 		
-		// TODO finish!
+		// TODO Only code this if we have rules with operational implementations.
+		// Which RelToCore does not have
 		
 	}
 	
@@ -956,7 +957,6 @@ public class QVTr2QVTcRelations {
 		ve2.setType(mv.getType());
 		a.setValue(ve2);
 		
-		//mb.getRealizedVariable().add(tcv);
 		mb.getAssignment().add(a);
 	}
 	
@@ -967,12 +967,30 @@ public class QVTr2QVTcRelations {
 			@NonNull BottomPattern mb) {
 		
 		// check
-		/*for(Variable dv : domainVars) {
+		for(Variable dv : domainVars) {
 			if (transformation.getTemplateExpression(dv) != null) {
+				// init
 				PropertyAssignment a = transformation.createPropertyAssignment();
+				VariableExp ve1 = transformation.createVariableExp();
+				VariableExp ve2 = transformation.createVariableExp();
+				// where
+				RealizedVariable tcv = doRelationDomainToTraceClassVar(r, rd, mb);
+				assert dv != null;
+				Variable mdv = doRVarToMVar(dv);
+				// assign
+				ve1.setReferredVariable(tcv);
+				ve1.setType(tcv.getType());
+				a.setSlotExpression(ve1);
+				Property tp = getProperty(dv.getName(), tcv.getType());
+				assert tp != null;
+				a.setTargetProperty(tp);
+				ve2.setReferredVariable(mdv);
+				ve2.setType(mdv.getType());
+				a.setValue(ve2);
+				mb.getAssignment().add(a);
 			}
-		}*/
-		// TODO FINISH!
+		}
+		
 	}	
 	
 	// 29
