@@ -32,7 +32,6 @@ import org.eclipse.ocl.examples.pivot.PropertyCallExp;
 import org.eclipse.ocl.examples.pivot.Root;
 import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.VariableDeclaration;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseBottomPatternKey;
@@ -63,6 +62,8 @@ import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
+import org.eclipse.qvtd.pivot.qvtrelation.Relation;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
@@ -82,8 +83,10 @@ public class QvtrToQvtcTransformation
 	private final @NonNull List<EObject> coreRoots = new ArrayList<EObject>();
 	private final @NonNull Map<Variable, Variable> variableTrace = new HashMap<Variable, Variable>();
 	
-	private Map<Type, Key> keysforTypes = new HashMap<Type, Key>();
-	private Map <Variable, TemplateExp> templateExpforVaraibless = new HashMap<Variable, TemplateExp>();
+	
+	private final Map<Type, Key> keysforTypes = new HashMap<Type, Key>();
+	private final Map <Variable, TemplateExp> templateExpforVaraibless = new HashMap<Variable, TemplateExp>();
+	private final Map<Relation, List<RelationCallExp>> relationCallExpforRelations = new HashMap<Relation, List<RelationCallExp>>();
 	private boolean doGlobalSearch = true;
 	private final @NonNull MetaModelManager metaModelManager;
 
@@ -133,6 +136,18 @@ public class QvtrToQvtcTransformation
 			if (eo instanceof TemplateExp) {
 				TemplateExp te = (TemplateExp) eo;
 				templateExpforVaraibless.put(te.getBindsTo(), te);
+			}
+			if (eo instanceof RelationCallExp) {
+				Relation r = ((RelationCallExp) eo).getReferredRelation();
+				assert r != null;
+				if (relationCallExpforRelations.get(r) != null) {
+					relationCallExpforRelations.get(r).add((RelationCallExp) eo);
+						
+				} else {
+					List<RelationCallExp> calls = new ArrayList<RelationCallExp>();
+					calls.add((RelationCallExp) eo);
+					relationCallExpforRelations.put(r, calls);
+				}
 			}
 		}
 	}
@@ -409,6 +424,11 @@ public class QvtrToQvtcTransformation
 	
 	public @Nullable Rule getRecord(@NonNull RuleBindings relationsBindings) {
 		return traceData.getRecord(relationsBindings);
+	}
+	
+	public @Nullable List<RelationCallExp> getRelationCallExpsForRelation(@NonNull Relation r) {
+		
+		return relationCallExpforRelations.get(r);
 	}
 	
 	public @NonNull Collection<? extends EObject> getTraceRoots() {
