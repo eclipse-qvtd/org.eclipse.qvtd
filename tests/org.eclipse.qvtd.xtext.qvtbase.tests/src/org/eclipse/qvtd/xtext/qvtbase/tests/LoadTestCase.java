@@ -24,10 +24,10 @@ import org.eclipse.emf.ecore.xmi.impl.EMOFResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.OCL;
+import org.eclipse.ocl.pivot.impl.StandardLibraryImpl;
 import org.eclipse.ocl.pivot.library.StandardLibraryContribution;
 import org.eclipse.ocl.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.pivot.manager.MetaModelManagerResourceSetAdapter;
-import org.eclipse.ocl.pivot.manager.PivotStandardLibrary;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.base.utilities.CS2ASResourceAdapter;
 
@@ -105,7 +105,7 @@ public class LoadTestCase extends XtextTestCase
 			metaModelManager.dispose();
 			metaModelManager = null;
 		}
-		StandardLibraryContribution.REGISTRY.remove(PivotStandardLibrary.DEFAULT_OCL_STDLIB_URI);
+		StandardLibraryContribution.REGISTRY.remove(StandardLibraryImpl.DEFAULT_OCL_STDLIB_URI);
 		super.tearDown();
 	}
 }

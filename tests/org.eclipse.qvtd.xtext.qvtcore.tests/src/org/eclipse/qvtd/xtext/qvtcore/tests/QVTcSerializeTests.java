@@ -21,17 +21,17 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.domain.utilities.DomainUtil;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.OCL;
 import org.eclipse.ocl.pivot.PivotConstants;
 import org.eclipse.ocl.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.BaseResource;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
-import org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.QVTcoreCSPackage;
+import org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage;
 import org.eclipse.xtext.resource.XtextResource;
 
 /**
@@ -66,13 +66,13 @@ public class QVTcSerializeTests extends LoadTestCase
 	}
 
 	public static @NonNull XtextResource pivot2cs(@NonNull OCL ocl, @NonNull ResourceSet resourceSet, @NonNull ASResource asResource, @NonNull URI outputURI) throws IOException {
-		XtextResource xtextResource = DomainUtil.nonNullState((XtextResource) resourceSet.createResource(outputURI, QVTcoreCSPackage.eCONTENT_TYPE));
+		XtextResource xtextResource = ClassUtil.nonNullState((XtextResource) resourceSet.createResource(outputURI, QVTcoreCSPackage.eCONTENT_TYPE));
 		ocl.as2cs(asResource, (BaseResource) xtextResource);
 		assertNoResourceErrors("Conversion failed", xtextResource);
 		//
 		//	CS save
 		//		
-		URI savedURI = DomainUtil.nonNullState(asResource.getURI());
+		URI savedURI = ClassUtil.nonNullState(asResource.getURI());
 		asResource.setURI(outputURI.trimFileExtension().trimFileExtension().appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
 		asResource.save(null);
 		asResource.setURI(savedURI);

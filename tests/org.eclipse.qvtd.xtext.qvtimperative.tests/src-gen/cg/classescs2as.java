@@ -9,7 +9,6 @@
 
 package cg;
 
-import classes.Class;
 import classes.ClassesFactory;
 import classes.ClassesPackage;
 import classes.Package;
@@ -23,33 +22,30 @@ import classescstraces.ClassescstracesFactory;
 import classescstraces.ClassescstracesPackage;
 import classescstraces.PackageCS2Package;
 import classescstraces.RootCS2Root;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.domain.elements.DomainClass;
-import org.eclipse.ocl.domain.evaluation.AbstractTransformation;
-import org.eclipse.ocl.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.domain.ids.ClassId;
-import org.eclipse.ocl.domain.ids.CollectionTypeId;
-import org.eclipse.ocl.domain.ids.IdManager;
-import org.eclipse.ocl.domain.ids.NsURIPackageId;
-import org.eclipse.ocl.domain.ids.RootPackageId;
-import org.eclipse.ocl.domain.ids.TypeId;
-import org.eclipse.ocl.domain.types.IdResolver;
-import org.eclipse.ocl.domain.utilities.DomainUtil;
-import org.eclipse.ocl.domain.values.OrderedSetValue;
-import org.eclipse.ocl.domain.values.SequenceValue;
-import org.eclipse.ocl.domain.values.SetValue;
-import org.eclipse.ocl.domain.values.impl.InvalidValueException;
-import org.eclipse.ocl.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.library.classifier.ClassifierAllInstancesOperation;
 import org.eclipse.ocl.library.collection.CollectionAsOrderedSetOperation;
+import org.eclipse.ocl.pivot.evaluation.AbstractTransformation;
+import org.eclipse.ocl.pivot.evaluation.DomainEvaluator;
+import org.eclipse.ocl.pivot.ids.ClassId;
+import org.eclipse.ocl.pivot.ids.CollectionTypeId;
+import org.eclipse.ocl.pivot.ids.IdManager;
+import org.eclipse.ocl.pivot.ids.IdResolver;
+import org.eclipse.ocl.pivot.ids.NsURIPackageId;
+import org.eclipse.ocl.pivot.ids.RootPackageId;
+import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.ocl.pivot.values.OrderedSetValue;
+import org.eclipse.ocl.pivot.values.SequenceValue;
+import org.eclipse.ocl.pivot.values.SetValue;
 
 /**
  * The classescs2as transformation:
@@ -260,7 +256,7 @@ public class classescs2as extends AbstractTransformation
         try {
             // predicates
             // creations
-            final /*@Thrown*/ Class symbol_3 = ClassesFactory.eINSTANCE.createClass();
+            final /*@Thrown*/ classes.Class symbol_3 = ClassesFactory.eINSTANCE.createClass();
             assert symbol_3 != null;
             modelObjects[1/*rightAS*/].add(symbol_3);
             // assignments
@@ -370,11 +366,11 @@ public class classescs2as extends AbstractTransformation
      * 
      * }
      */
-    protected boolean uClass_name(final @NonNull /*@NonInvalid*/ Class symbol_0, final @NonNull /*@NonInvalid*/ ClassCS classCS_0) {
+    protected boolean uClass_name(final @NonNull /*@NonInvalid*/ classes.Class symbol_0, final @NonNull /*@NonInvalid*/ ClassCS classCS_0) {
         try {
             // predicates
-            final @NonNull /*@Thrown*/ ClassCS2Class ClassCS2Class = DomainUtil.nonNullState (OPPOSITE_OF_ClassCS2Class_classCS.get(classCS_0));
-            final @Nullable /*@Thrown*/ Class symbol_3 = ClassCS2Class.getClass_();
+            final @NonNull /*@Thrown*/ ClassCS2Class ClassCS2Class = ClassUtil.nonNullState (OPPOSITE_OF_ClassCS2Class_classCS.get(classCS_0));
+            final @Nullable /*@Thrown*/ classes.Class symbol_3 = ClassCS2Class.getClass_();
             final /*@Thrown*/ boolean eq = symbol_0.equals(symbol_3);
             if (!eq) {
                 return false;
@@ -416,7 +412,7 @@ public class classescs2as extends AbstractTransformation
     protected boolean uRoot_ownedPackages(final @NonNull /*@NonInvalid*/ Root root, final @NonNull /*@NonInvalid*/ RootCS rootCS_0) {
         try {
             // predicates
-            final @NonNull /*@Thrown*/ RootCS2Root RootCS2Root = DomainUtil.nonNullState (OPPOSITE_OF_RootCS2Root_rootCS.get(rootCS_0));
+            final @NonNull /*@Thrown*/ RootCS2Root RootCS2Root = ClassUtil.nonNullState (OPPOSITE_OF_RootCS2Root_rootCS.get(rootCS_0));
             final @Nullable /*@Thrown*/ Root root_0 = RootCS2Root.getRoot();
             final /*@Thrown*/ boolean eq = root.equals(root_0);
             if (!eq) {
@@ -428,7 +424,7 @@ public class classescs2as extends AbstractTransformation
             final @Nullable /*@Thrown*/ List<PackageCS> ownedPackage = rootCS_0.getOwnedPackage();
             assert ownedPackage != null;
             final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedPackage = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, ownedPackage);
-            @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValuesUtil.createSequenceAccumulatorValue(SEQ_CLSSid_PackageCS2Package);
+            @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_PackageCS2Package);
             @Nullable Iterator<?> ITERATOR__1 = BOXED_ownedPackage.iterator();
             @NonNull /*@Thrown*/ SequenceValue collect_0;
             while (true) {
@@ -443,11 +439,11 @@ public class classescs2as extends AbstractTransformation
                 if (_1 == null) {
                     throw new InvalidValueException("Null source for \'classescstraces::PackageCS2Package::packageCS\'");
                 }
-                final @NonNull /*@Thrown*/ PackageCS2Package PackageCS2Package = DomainUtil.nonNullState (OPPOSITE_OF_PackageCS2Package_packageCS.get(_1));
+                final @NonNull /*@Thrown*/ PackageCS2Package PackageCS2Package = ClassUtil.nonNullState (OPPOSITE_OF_PackageCS2Package_packageCS.get(_1));
                 //
                 accumulator.add(PackageCS2Package);
             }
-            @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator_0 = ValuesUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Package);
+            @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Package);
             @Nullable Iterator<?> ITERATOR__1_0 = collect_0.iterator();
             @NonNull /*@Thrown*/ SequenceValue collect;
             while (true) {
@@ -502,7 +498,7 @@ public class classescs2as extends AbstractTransformation
     protected boolean uPackage_name(final @NonNull /*@NonInvalid*/ Package symbol_1, final @NonNull /*@NonInvalid*/ PackageCS packageCS_0) {
         try {
             // predicates
-            final @NonNull /*@Thrown*/ PackageCS2Package PackageCS2Package = DomainUtil.nonNullState (OPPOSITE_OF_PackageCS2Package_packageCS.get(packageCS_0));
+            final @NonNull /*@Thrown*/ PackageCS2Package PackageCS2Package = ClassUtil.nonNullState (OPPOSITE_OF_PackageCS2Package_packageCS.get(packageCS_0));
             final @Nullable /*@Thrown*/ Package symbol_3 = PackageCS2Package.getPackage();
             final /*@Thrown*/ boolean eq = symbol_1.equals(symbol_3);
             if (!eq) {
@@ -545,7 +541,7 @@ public class classescs2as extends AbstractTransformation
     protected boolean uPackage_ownedClasses(final @NonNull /*@NonInvalid*/ Package symbol_2, final @NonNull /*@NonInvalid*/ PackageCS packageCS_1) {
         try {
             // predicates
-            final @NonNull /*@Thrown*/ PackageCS2Package PackageCS2Package = DomainUtil.nonNullState (OPPOSITE_OF_PackageCS2Package_packageCS.get(packageCS_1));
+            final @NonNull /*@Thrown*/ PackageCS2Package PackageCS2Package = ClassUtil.nonNullState (OPPOSITE_OF_PackageCS2Package_packageCS.get(packageCS_1));
             final @Nullable /*@Thrown*/ Package symbol_3 = PackageCS2Package.getPackage();
             final /*@Thrown*/ boolean eq = symbol_2.equals(symbol_3);
             if (!eq) {
@@ -557,7 +553,7 @@ public class classescs2as extends AbstractTransformation
             final @Nullable /*@Thrown*/ List<ClassCS> ownedClasses = packageCS_1.getOwnedClasses();
             assert ownedClasses != null;
             final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedClasses = idResolver.createOrderedSetOfAll(ORD_CLSSid_ClassCS, ownedClasses);
-            @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValuesUtil.createSequenceAccumulatorValue(SEQ_CLSSid_ClassCS2Class);
+            @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_ClassCS2Class);
             @Nullable Iterator<?> ITERATOR__1 = BOXED_ownedClasses.iterator();
             @NonNull /*@Thrown*/ SequenceValue collect_0;
             while (true) {
@@ -572,11 +568,11 @@ public class classescs2as extends AbstractTransformation
                 if (_1 == null) {
                     throw new InvalidValueException("Null source for \'classescstraces::ClassCS2Class::classCS\'");
                 }
-                final @NonNull /*@Thrown*/ ClassCS2Class ClassCS2Class = DomainUtil.nonNullState (OPPOSITE_OF_ClassCS2Class_classCS.get(_1));
+                final @NonNull /*@Thrown*/ ClassCS2Class ClassCS2Class = ClassUtil.nonNullState (OPPOSITE_OF_ClassCS2Class_classCS.get(_1));
                 //
                 accumulator.add(ClassCS2Class);
             }
-            @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator_0 = ValuesUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Class);
+            @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Class);
             @Nullable Iterator<?> ITERATOR__1_0 = collect_0.iterator();
             @NonNull /*@Thrown*/ SequenceValue collect;
             while (true) {
@@ -591,12 +587,12 @@ public class classescs2as extends AbstractTransformation
                 if (_1_0 == null) {
                     throw new InvalidValueException("Null source for \'classescstraces::ClassCS2Class::class\'");
                 }
-                final @Nullable /*@Thrown*/ Class symbol_4 = _1_0.getClass_();
+                final @Nullable /*@Thrown*/ classes.Class symbol_4 = _1_0.getClass_();
                 //
                 accumulator_0.add(symbol_4);
             }
             final @NonNull /*@Thrown*/ OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect);
-            final List<Class> UNBOXED_asOrderedSet = asOrderedSet.asEcoreObjects(idResolver, Class.class);
+            final List<classes.Class> UNBOXED_asOrderedSet = asOrderedSet.asEcoreObjects(idResolver, classes.Class.class);
             assert UNBOXED_asOrderedSet != null;
             symbol_2.getOwnedClasses().addAll(UNBOXED_asOrderedSet);
             // mapping statements
@@ -688,13 +684,13 @@ public class classescs2as extends AbstractTransformation
         try {
             // predicates
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-            final @NonNull /*@NonInvalid*/ DomainClass TYP_classes_c_c_Package_1 = idResolver.getClass(CLSSid_Package, null);
-            final @NonNull /*@NonInvalid*/ DomainClass TYP_classescs_c_c_ClassCS_1 = idResolver.getClass(CLSSid_ClassCS, null);
-            final @NonNull /*@NonInvalid*/ DomainClass TYP_classescs_c_c_PackageCS_0 = idResolver.getClass(CLSSid_PackageCS, null);
-            final @NonNull /*@NonInvalid*/ DomainClass TYP_classescs_c_c_RootCS_1 = idResolver.getClass(CLSSid_RootCS, null);
-            final @NonNull /*@NonInvalid*/ DomainClass TYP_classescstraces_c_c_ClassCS2Class_0 = idResolver.getClass(CLSSid_ClassCS2Class, null);
-            final @NonNull /*@NonInvalid*/ DomainClass TYP_classescstraces_c_c_PackageCS2Package_0 = idResolver.getClass(CLSSid_PackageCS2Package, null);
-            final @NonNull /*@NonInvalid*/ DomainClass TYP_classescstraces_c_c_RootCS2Root_0 = idResolver.getClass(CLSSid_RootCS2Root, null);
+            final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Package_1 = idResolver.getClass(CLSSid_Package, null);
+            final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classescs_c_c_ClassCS_1 = idResolver.getClass(CLSSid_ClassCS, null);
+            final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classescs_c_c_PackageCS_0 = idResolver.getClass(CLSSid_PackageCS, null);
+            final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classescs_c_c_RootCS_1 = idResolver.getClass(CLSSid_RootCS, null);
+            final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classescstraces_c_c_ClassCS2Class_0 = idResolver.getClass(CLSSid_ClassCS2Class, null);
+            final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classescstraces_c_c_PackageCS2Package_0 = idResolver.getClass(CLSSid_PackageCS2Package, null);
+            final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classescstraces_c_c_RootCS2Root_0 = idResolver.getClass(CLSSid_RootCS2Root, null);
             final @NonNull /*@Thrown*/ SetValue allInstances_3 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Package, TYP_classes_c_c_Package_1);
             final @NonNull /*@Thrown*/ SetValue allInstances_7 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_ClassCS, TYP_classescs_c_c_ClassCS_1);
             final @NonNull /*@Thrown*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_0);
@@ -756,13 +752,13 @@ public class classescs2as extends AbstractTransformation
             }
             ;
             for (ClassCS classCS_4 : UNBOXED_allInstances_7) {
-                final @NonNull /*@NonInvalid*/ DomainClass TYP_classes_c_c_Class_0 = idResolver.getClass(CLSSid_Class, null);
+                final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Class_0 = idResolver.getClass(CLSSid_Class, null);
                 final @NonNull /*@Thrown*/ SetValue allInstances_8 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Class, TYP_classes_c_c_Class_0);
-                final List<Class> UNBOXED_allInstances_8 = allInstances_8.asEcoreObjects(idResolver, Class.class);
+                final List<classes.Class> UNBOXED_allInstances_8 = allInstances_8.asEcoreObjects(idResolver, classes.Class.class);
                 assert UNBOXED_allInstances_8 != null;
                 ;
-                for (Class symbol_44 : UNBOXED_allInstances_8) {
-                    final @NonNull /*@NonInvalid*/ Class symbol_40 = (Class)symbol_44;
+                for (classes.Class symbol_44 : UNBOXED_allInstances_8) {
+                    final @NonNull /*@NonInvalid*/ classes.Class symbol_40 = (classes.Class)symbol_44;
                     final @NonNull /*@NonInvalid*/ ClassCS symbol_41 = (ClassCS)classCS_4;
                     uClass_name(symbol_40, symbol_41);
                 }
@@ -782,7 +778,7 @@ public class classescs2as extends AbstractTransformation
             }
             ;
             for (RootCS rootCS_4 : UNBOXED_allInstances_11) {
-                final @NonNull /*@NonInvalid*/ DomainClass TYP_classes_c_c_Root_0 = idResolver.getClass(CLSSid_Root, null);
+                final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Root_0 = idResolver.getClass(CLSSid_Root, null);
                 final @NonNull /*@Thrown*/ SetValue allInstances_12 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Root, TYP_classes_c_c_Root_0);
                 final List<Root> UNBOXED_allInstances_12 = allInstances_12.asEcoreObjects(idResolver, Root.class);
                 assert UNBOXED_allInstances_12 != null;

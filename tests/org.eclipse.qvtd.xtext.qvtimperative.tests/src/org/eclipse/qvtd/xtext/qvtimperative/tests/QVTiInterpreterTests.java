@@ -25,10 +25,10 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.domain.utilities.DomainUtil;
 import org.eclipse.ocl.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
@@ -118,7 +118,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		 * @param modelFileName the model file name
 		 */
 		public void loadReference(@NonNull String name, @NonNull String modelFileName) {
-	        TypedModel typedModel = DomainUtil.getNamedElement(transformation.getModelParameter(), name);
+	        TypedModel typedModel = ClassUtil.getNamedElement(transformation.getModelParameter(), name);
 	        if (typedModel == null) {
 	        	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
 	        }
@@ -137,7 +137,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	        assertTrue(getClass().getSimpleName() + " should not return null.", result);
 	        saveModels(getProjectFileURI(fileNamePrefix + "middle.xmi"));
 	        for (Entry<TypedModel, Resource> entry : typedModelValidationResourceMap.entrySet()) { // Validate against reference models
-	        	TypedModel typedModel = DomainUtil.nonNullState(entry.getKey());
+	        	TypedModel typedModel = ClassUtil.nonNullState(entry.getKey());
 	        	Resource expectedModel = entry.getValue();
 	        	Resource actualModel = modelManager.getModel(typedModel);
 	            assertSameModel(expectedModel, actualModel);
@@ -181,7 +181,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		super.setUp();
 		QVTimperativeStandaloneSetup.doSetup();
 		metaModelManager = new MetaModelManager();
-        MetaModelManagerResourceSetAdapter.getAdapter(DomainUtil.nonNullState(resourceSet), metaModelManager);
+        MetaModelManagerResourceSetAdapter.getAdapter(ClassUtil.nonNullState(resourceSet), metaModelManager);
     }
  
     /* (non-Javadoc)
@@ -202,7 +202,7 @@ public class QVTiInterpreterTests extends LoadTestCase
      */
     @Test
     public void testGraph2GraphMinimal() throws Exception {
-    	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(DomainUtil.nonNullState(metaModelManager), "Graph2GraphMinimal", "Graph2GraphMinimal.qvti");
+    	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metaModelManager), "Graph2GraphMinimal", "Graph2GraphMinimal.qvti");
     	testEvaluator.saveTransformation(null);
         testEvaluator.loadModel("upperGraph", "SimpleGraph.xmi");
         testEvaluator.createModel("middle", "Graph2Graph.xmi");
@@ -211,7 +211,7 @@ public class QVTiInterpreterTests extends LoadTestCase
         testEvaluator.test();
         testEvaluator.dispose();
         
-        URI txURI = DomainUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
+        URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
         assertLoadable(txURI);
     }
 
@@ -225,7 +225,7 @@ public class QVTiInterpreterTests extends LoadTestCase
      */
     @Test
     public void testGraph2GraphHierarchical() throws Exception {
-    	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(DomainUtil.nonNullState(metaModelManager), "Graph2GraphHierarchical", "Graph2GraphHierarchical.qvti");
+    	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metaModelManager), "Graph2GraphHierarchical", "Graph2GraphHierarchical.qvti");
     	testEvaluator.saveTransformation(null);
     	testEvaluator.loadModel("upperGraph", "../Graph2GraphMinimal/SimpleGraph.xmi");
         testEvaluator.createModel("middle", "Graph2Graph.xmi");
@@ -234,7 +234,7 @@ public class QVTiInterpreterTests extends LoadTestCase
         testEvaluator.test();
         testEvaluator.dispose();
         
-        URI txURI = DomainUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
+        URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
         assertLoadable(txURI);
     }
     
@@ -251,7 +251,7 @@ public class QVTiInterpreterTests extends LoadTestCase
      */
     @Test
     public void testHSV2HLS() throws Exception {
-    	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(DomainUtil.nonNullState(metaModelManager), "HSV2HLS", "HSV2HLS.qvti");
+    	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metaModelManager), "HSV2HLS", "HSV2HLS.qvti");
     	testEvaluator.saveTransformation(null);
     	testEvaluator.loadModel("hsv", "HSVNode.xmi");
         testEvaluator.createModel("middle", "HLS2HLSNode.xmi");
@@ -260,7 +260,7 @@ public class QVTiInterpreterTests extends LoadTestCase
         testEvaluator.test();
         testEvaluator.dispose();
         
-        URI txURI = DomainUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
+        URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
         assertLoadable(txURI);
     }
     
@@ -272,12 +272,12 @@ public class QVTiInterpreterTests extends LoadTestCase
     @Test
     public void testClassToRDBMS() throws Exception {
         CompleteOCLStandaloneSetup.doSetup();
-        URI oclURI = DomainUtil.nonNullState(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true));
+        URI oclURI = ClassUtil.nonNullState(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true));
         //  CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metaModelManager);
         @SuppressWarnings("unused")
-		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(DomainUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, metaModelManager);
+		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, metaModelManager);
         
-        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(DomainUtil.nonNullState(metaModelManager), "ClassToRDBMS", "ClassToRDBMSSchedule.qvti");
+        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metaModelManager), "ClassToRDBMS", "ClassToRDBMSSchedule.qvti");
     	testEvaluator.saveTransformation(null);
         //assertNoValidationErrors("Pivot validation errors", testEvaluator.pivotResource.getContents().get(0));
         testEvaluator.loadModel("uml", "SimpleUMLPeople.xmi");
@@ -287,7 +287,7 @@ public class QVTiInterpreterTests extends LoadTestCase
         testEvaluator.test();
         testEvaluator.dispose();
         
-        URI txURI = DomainUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
+        URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
         assertLoadable(txURI);
     }
 }

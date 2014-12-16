@@ -14,32 +14,29 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.domain.elements.DomainClass;
-import org.eclipse.ocl.domain.evaluation.AbstractTransformation;
-import org.eclipse.ocl.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.domain.ids.ClassId;
-import org.eclipse.ocl.domain.ids.CollectionTypeId;
-import org.eclipse.ocl.domain.ids.IdManager;
-import org.eclipse.ocl.domain.ids.NsURIPackageId;
-import org.eclipse.ocl.domain.ids.RootPackageId;
-import org.eclipse.ocl.domain.ids.TypeId;
-import org.eclipse.ocl.domain.types.IdResolver;
-import org.eclipse.ocl.domain.utilities.DomainUtil;
-import org.eclipse.ocl.domain.values.BagValue;
-import org.eclipse.ocl.domain.values.OrderedSetValue;
-import org.eclipse.ocl.domain.values.SetValue;
-import org.eclipse.ocl.domain.values.impl.InvalidValueException;
-import org.eclipse.ocl.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.library.collection.CollectionAsSetOperation;
 import org.eclipse.ocl.library.collection.CollectionSelectByKindOperation;
 import org.eclipse.ocl.library.collection.CollectionUnionOperation;
 import org.eclipse.ocl.library.collection.OrderedCollectionFirstOperation;
 import org.eclipse.ocl.library.string.StringConcatOperation;
-
+import org.eclipse.ocl.pivot.evaluation.AbstractTransformation;
+import org.eclipse.ocl.pivot.evaluation.DomainEvaluator;
+import org.eclipse.ocl.pivot.ids.ClassId;
+import org.eclipse.ocl.pivot.ids.CollectionTypeId;
+import org.eclipse.ocl.pivot.ids.IdManager;
+import org.eclipse.ocl.pivot.ids.IdResolver;
+import org.eclipse.ocl.pivot.ids.NsURIPackageId;
+import org.eclipse.ocl.pivot.ids.RootPackageId;
+import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.BagValue;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.ocl.pivot.values.OrderedSetValue;
+import org.eclipse.ocl.pivot.values.SetValue;
 import test.simplerdbms.Column;
 import test.simplerdbms.ForeignKey;
 import test.simplerdbms.Key;
@@ -49,7 +46,6 @@ import test.simplerdbms.SimplerdbmsPackage;
 import test.simplerdbms.Table;
 import test.simpleuml.Association;
 import test.simpleuml.Attribute;
-import test.simpleuml.Class;
 import test.simpleuml.Classifier;
 import test.simpleuml.Package;
 import test.simpleuml.PackageElement;
@@ -135,7 +131,7 @@ public class umlRdbms extends AbstractTransformation
     
     /* Outer-to-Middle Property navigation caches */
     protected final @NonNull Map<Table,ClassToTable> OPPOSITE_OF_ClassToTable_table = new HashMap<Table,ClassToTable>();
-    protected final @NonNull Map<Class,ClassToTable> OPPOSITE_OF_ClassToTable_umlClass = new HashMap<Class,ClassToTable>();
+    protected final @NonNull Map<test.simpleuml.Class,ClassToTable> OPPOSITE_OF_ClassToTable_umlClass = new HashMap<test.simpleuml.Class,ClassToTable>();
     protected final @NonNull Map<Attribute,FromAttribute> OPPOSITE_OF_FromAttribute_attribute = new HashMap<Attribute,FromAttribute>();
     protected final @NonNull Map<PrimitiveDataType,PrimitiveToName> OPPOSITE_OF_PrimitiveToName_primitive = new HashMap<PrimitiveDataType,PrimitiveToName>();
     
@@ -155,17 +151,17 @@ public class umlRdbms extends AbstractTransformation
         return true;
     }
     
-    protected @NonNull List<Class> getAllSupers(final @Nullable /*@NonInvalid*/ Class cls) {
-        @SuppressWarnings("null")@NonNull List<Class> emptyList = Collections.emptyList();
+    protected @NonNull List<test.simpleuml.Class> getAllSupers(final @Nullable /*@NonInvalid*/ test.simpleuml.Class cls) {
+        @SuppressWarnings("null")@NonNull List<test.simpleuml.Class> emptyList = Collections.emptyList();
         return emptyList;
     }
     
-    protected @NonNull List<Attribute> getAllAttributes(final @Nullable /*@NonInvalid*/ Class cls_0) {
+    protected @NonNull List<Attribute> getAllAttributes(final @Nullable /*@NonInvalid*/ test.simpleuml.Class cls_0) {
         @SuppressWarnings("null")@NonNull List<Attribute> emptyList = Collections.emptyList();
         return emptyList;
     }
     
-    protected @NonNull List<Association> getAllForwards(final @Nullable /*@NonInvalid*/ Class cls_1) {
+    protected @NonNull List<Association> getAllForwards(final @Nullable /*@NonInvalid*/ test.simpleuml.Class cls_1) {
         @SuppressWarnings("null")@NonNull List<Association> emptyList = Collections.emptyList();
         return emptyList;
     }
@@ -254,8 +250,8 @@ public class umlRdbms extends AbstractTransformation
             ;
             for (PackageElement child_0 : elements_0) {
                 final @NonNull /*@NonInvalid*/ PackageElement symbol_13 = (PackageElement)child_0;
-                if (symbol_13 instanceof Class) {
-                    classToTableLM((Class)symbol_13, p, p2s_11);
+                if (symbol_13 instanceof test.simpleuml.Class) {
+                    classToTableLM((test.simpleuml.Class)symbol_13, p, p2s_11);
                 }
                 if (symbol_13 instanceof Association) {
                     associationToForeignKeyLM((Association)symbol_13, p, p2s_11);
@@ -751,7 +747,7 @@ public class umlRdbms extends AbstractTransformation
      * }}
      * }
      */
-    protected boolean classToTableLM(final @NonNull /*@NonInvalid*/ Class c, final @NonNull /*@NonInvalid*/ Package p_3, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_7) {
+    protected boolean classToTableLM(final @NonNull /*@NonInvalid*/ test.simpleuml.Class c, final @NonNull /*@NonInvalid*/ Package p_3, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_7) {
         try {
             // predicates
             final @Nullable /*@Thrown*/ String kind = c.getKind();
@@ -791,11 +787,11 @@ public class umlRdbms extends AbstractTransformation
                 }
                 classPrimitiveAttributesLM(symbol_6, c, c2t_3);
                 classComplexAttributesLM(symbol_6, c, c2t_3);
-                if (type_0 instanceof Class) {
-                    complexAttributePrimitiveAttributesLM((Class)type_0, symbol_6);
+                if (type_0 instanceof test.simpleuml.Class) {
+                    complexAttributePrimitiveAttributesLM((test.simpleuml.Class)type_0, symbol_6);
                 }
-                if (type_0 instanceof Class) {
-                    complexAttributeComplexAttributesLM((Class)type_0, symbol_6);
+                if (type_0 instanceof test.simpleuml.Class) {
+                    complexAttributeComplexAttributesLM((test.simpleuml.Class)type_0, symbol_6);
                 }
             }
             return true;
@@ -866,7 +862,7 @@ public class umlRdbms extends AbstractTransformation
                 return false;
             }
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-            final @NonNull /*@NonInvalid*/ DomainClass TYP_umltordbms_c_c_NonLeafAttribute_0 = idResolver.getClass(CLSSid_NonLeafAttribute, null);
+            final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_umltordbms_c_c_NonLeafAttribute_0 = idResolver.getClass(CLSSid_NonLeafAttribute, null);
             final @Nullable /*@Thrown*/ List<FromAttribute> fromAttributes = c2t.getFromAttributes();
             assert fromAttributes != null;
             final @NonNull /*@Thrown*/ SetValue BOXED_fromAttributes = idResolver.createSetOfAll(SET_CLSSid_FromAttribute, fromAttributes);
@@ -884,7 +880,7 @@ public class umlRdbms extends AbstractTransformation
             assert associationsToForeignKeys != null;
             ;
             for (AssociationToForeignKey child : associationsToForeignKeys) {
-                final @Nullable /*@Thrown*/ ClassToTable ClassToTable_0 = DomainUtil.nonNullState (OPPOSITE_OF_ClassToTable_table.get(t_0));
+                final @Nullable /*@Thrown*/ ClassToTable ClassToTable_0 = ClassUtil.nonNullState (OPPOSITE_OF_ClassToTable_table.get(t_0));
                 if (ClassToTable_0 == null) {
                     throw new InvalidValueException("Null binding for \'associationToForeignKeyMR::sc2t\'");
                 }
@@ -896,7 +892,7 @@ public class umlRdbms extends AbstractTransformation
                 associationToForeignKeyMR(symbol_5, ClassToTable_0, t_0, p2s_8, primaryKey, s, ClassToTable_0, t_0);
             }
             final @NonNull /*@Thrown*/ SetValue selectByKind = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(evaluator, BOXED_fromAttributes, TYP_umltordbms_c_c_NonLeafAttribute_0);
-            @NonNull /*@Thrown*/ BagValue.Accumulator accumulator = ValuesUtil.createBagAccumulatorValue(BAG_CLSSid_FromAttribute);
+            @NonNull /*@Thrown*/ BagValue.Accumulator accumulator = ValueUtil.createBagAccumulatorValue(BAG_CLSSid_FromAttribute);
             @Nullable Iterator<?> ITERATOR__1 = selectByKind.iterator();
             @NonNull /*@Thrown*/ BagValue collect;
             while (true) {
@@ -1029,7 +1025,7 @@ public class umlRdbms extends AbstractTransformation
             pk.setOwner(t_2);
             pk.setKind(STR_primary);
             pc.setOwner(t_2);
-            final @NonNull /*@Thrown*/ OrderedSetValue OrderedSet = ValuesUtil.createOrderedSetOfEach(ORD_CLSSid_Key, pk);
+            final @NonNull /*@Thrown*/ OrderedSetValue OrderedSet = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_Key, pk);
             final List<Key> UNBOXED_OrderedSet = OrderedSet.asEcoreObjects(idResolver, Key.class);
             assert UNBOXED_OrderedSet != null;
             pc.getKey().addAll(UNBOXED_OrderedSet);
@@ -1169,8 +1165,8 @@ public class umlRdbms extends AbstractTransformation
     protected boolean associationToForeignKeyLM(final @NonNull /*@NonInvalid*/ Association a, final @NonNull /*@NonInvalid*/ Package p_4, final @NonNull /*@NonInvalid*/ PackageToSchema p2s_9) {
         try {
             // predicates
-            final @Nullable /*@Thrown*/ Class destination = a.getDestination();
-            final @Nullable /*@Thrown*/ Class dc = destination;
+            final @Nullable /*@Thrown*/ test.simpleuml.Class destination = a.getDestination();
+            final @Nullable /*@Thrown*/ test.simpleuml.Class dc = destination;
             final @Nullable /*@Thrown*/ Package namespace = a.getNamespace();
             final /*@Thrown*/ boolean eq = p_4.equals(namespace);
             if (!eq) {
@@ -1181,15 +1177,15 @@ public class umlRdbms extends AbstractTransformation
             if (!eq_0) {
                 return false;
             }
-            final @Nullable /*@Thrown*/ Class source = a.getSource();
-            final @Nullable /*@Thrown*/ Class sc = source;
+            final @Nullable /*@Thrown*/ test.simpleuml.Class source = a.getSource();
+            final @Nullable /*@Thrown*/ test.simpleuml.Class sc = source;
             if (dc == null) {
                 throw new InvalidValueException("Null source for \'umltordbms::ClassToTable::umlClass\'");
             }
             if (dc instanceof InvalidValueException) {
                 throw (InvalidValueException)dc;
             }
-            final @Nullable /*@Thrown*/ ClassToTable ClassToTable = DomainUtil.nonNullState (OPPOSITE_OF_ClassToTable_umlClass.get(dc));
+            final @Nullable /*@Thrown*/ ClassToTable ClassToTable = ClassUtil.nonNullState (OPPOSITE_OF_ClassToTable_umlClass.get(dc));
             final @Nullable /*@Thrown*/ ClassToTable dc2t_0 = ClassToTable;
             if (sc == null) {
                 throw new InvalidValueException("Null source for \'umltordbms::ClassToTable::umlClass\'");
@@ -1202,7 +1198,7 @@ public class umlRdbms extends AbstractTransformation
             if (!eq_1) {
                 return false;
             }
-            final @Nullable /*@Thrown*/ ClassToTable ClassToTable_0 = DomainUtil.nonNullState (OPPOSITE_OF_ClassToTable_umlClass.get(sc));
+            final @Nullable /*@Thrown*/ ClassToTable ClassToTable_0 = ClassUtil.nonNullState (OPPOSITE_OF_ClassToTable_umlClass.get(sc));
             final @Nullable /*@Thrown*/ ClassToTable sc2t_0 = ClassToTable_0;
             final @Nullable /*@Thrown*/ String name = a.getName();
             @NonNull /*@Caught*/ Object CAUGHT_self_0;
@@ -1214,7 +1210,7 @@ public class umlRdbms extends AbstractTransformation
                 CAUGHT_self_0 = self_0;
             }
             catch (Exception e) {
-                CAUGHT_self_0 = ValuesUtil.createInvalidValue(e);
+                CAUGHT_self_0 = ValueUtil.createInvalidValue(e);
             }
             @NonNull /*@Caught*/ Object CAUGHT_b;
             try {
@@ -1225,7 +1221,7 @@ public class umlRdbms extends AbstractTransformation
                 CAUGHT_b = b;
             }
             catch (Exception e) {
-                CAUGHT_b = ValuesUtil.createInvalidValue(e);
+                CAUGHT_b = ValueUtil.createInvalidValue(e);
             }
             final /*@NonInvalid*/ boolean symbol_4 = CAUGHT_self_0 instanceof InvalidValueException;
             /*@Thrown*/ boolean symbol_12;
@@ -1245,7 +1241,7 @@ public class umlRdbms extends AbstractTransformation
                     final /*@Thrown*/ boolean eq_2 = CAUGHT_b == Boolean.FALSE;
                     /*@Thrown*/ boolean symbol_6;
                     if (eq_2) {
-                        symbol_6 = ValuesUtil.FALSE_VALUE;
+                        symbol_6 = ValueUtil.FALSE_VALUE;
                     }
                     else {
                         if (CAUGHT_self_0 instanceof InvalidValueException) {
@@ -1264,7 +1260,7 @@ public class umlRdbms extends AbstractTransformation
                 final /*@Thrown*/ boolean eq_3 = CAUGHT_self_0 == Boolean.FALSE;
                 /*@Thrown*/ boolean symbol_11;
                 if (eq_3) {
-                    symbol_11 = ValuesUtil.FALSE_VALUE;
+                    symbol_11 = ValueUtil.FALSE_VALUE;
                 }
                 else {
                     if (CAUGHT_b instanceof InvalidValueException) {
@@ -1279,10 +1275,10 @@ public class umlRdbms extends AbstractTransformation
                         final /*@Thrown*/ boolean eq_4 = CAUGHT_b == Boolean.FALSE;
                         /*@NonInvalid*/ boolean symbol_9;
                         if (eq_4) {
-                            symbol_9 = ValuesUtil.FALSE_VALUE;
+                            symbol_9 = ValueUtil.FALSE_VALUE;
                         }
                         else {
-                            symbol_9 = ValuesUtil.TRUE_VALUE;
+                            symbol_9 = ValueUtil.TRUE_VALUE;
                         }
                         symbol_10 = symbol_9;
                     }
@@ -1472,7 +1468,7 @@ public class umlRdbms extends AbstractTransformation
             // creations
             // assignments
             fk.setRefersTo(rk_0);
-            final @NonNull /*@NonInvalid*/ OrderedSetValue OrderedSet = ValuesUtil.createOrderedSetOfEach(ORD_CLSSid_ForeignKey, fk);
+            final @NonNull /*@NonInvalid*/ OrderedSetValue OrderedSet = ValueUtil.createOrderedSetOfEach(ORD_CLSSid_ForeignKey, fk);
             final List<ForeignKey> UNBOXED_OrderedSet = OrderedSet.asEcoreObjects(idResolver, ForeignKey.class);
             assert UNBOXED_OrderedSet != null;
             fc.getForeignKeys().addAll(UNBOXED_OrderedSet);
@@ -1563,15 +1559,15 @@ public class umlRdbms extends AbstractTransformation
      * 
      * }
      */
-    protected boolean classPrimitiveAttributesLM(final @NonNull /*@NonInvalid*/ Attribute a_0, final @NonNull /*@NonInvalid*/ Class c_0, final @NonNull /*@NonInvalid*/ ClassToTable fao) {
+    protected boolean classPrimitiveAttributesLM(final @NonNull /*@NonInvalid*/ Attribute a_0, final @NonNull /*@NonInvalid*/ test.simpleuml.Class c_0, final @NonNull /*@NonInvalid*/ ClassToTable fao) {
         try {
             // predicates
-            final @Nullable /*@Thrown*/ Class owner = a_0.getOwner();
+            final @Nullable /*@Thrown*/ test.simpleuml.Class owner = a_0.getOwner();
             final /*@Thrown*/ boolean eq = c_0.equals(owner);
             if (!eq) {
                 return false;
             }
-            final @Nullable /*@Thrown*/ Class umlClass = fao.getUmlClass();
+            final @Nullable /*@Thrown*/ test.simpleuml.Class umlClass = fao.getUmlClass();
             final /*@Thrown*/ boolean eq_0 = c_0.equals(umlClass);
             if (!eq_0) {
                 return false;
@@ -1584,7 +1580,7 @@ public class umlRdbms extends AbstractTransformation
             if (t_0 == null) {
                 throw new InvalidValueException("Null source for \'umltordbms::PrimitiveToName::primitive\'");
             }
-            final @NonNull /*@Thrown*/ PrimitiveToName PrimitiveToName = DomainUtil.nonNullState (OPPOSITE_OF_PrimitiveToName_primitive.get(t_0));
+            final @NonNull /*@Thrown*/ PrimitiveToName PrimitiveToName = ClassUtil.nonNullState (OPPOSITE_OF_PrimitiveToName_primitive.get(t_0));
             final @Nullable /*@Thrown*/ PrimitiveToName p2n_3 = PrimitiveToName;
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
             // creations
@@ -1600,7 +1596,7 @@ public class umlRdbms extends AbstractTransformation
             atc.setKind(kind);
             final @Nullable /*@Thrown*/ String name = a_0.getName();
             atc.setName(name);
-            final @NonNull /*@Thrown*/ SetValue Set = ValuesUtil.createSetOfEach(SET_CLSSid_AttributeToColumn, atc);
+            final @NonNull /*@Thrown*/ SetValue Set = ValueUtil.createSetOfEach(SET_CLSSid_AttributeToColumn, atc);
             final List<AttributeToColumn> UNBOXED_Set = Set.asEcoreObjects(idResolver, AttributeToColumn.class);
             assert UNBOXED_Set != null;
             atc.getLeafs().addAll(UNBOXED_Set);
@@ -1641,24 +1637,24 @@ public class umlRdbms extends AbstractTransformation
      * 
      * }
      */
-    protected boolean classComplexAttributesLM(final @NonNull /*@NonInvalid*/ Attribute a_1, final @NonNull /*@NonInvalid*/ Class c_1, final @NonNull /*@NonInvalid*/ ClassToTable fao_0) {
+    protected boolean classComplexAttributesLM(final @NonNull /*@NonInvalid*/ Attribute a_1, final @NonNull /*@NonInvalid*/ test.simpleuml.Class c_1, final @NonNull /*@NonInvalid*/ ClassToTable fao_0) {
         try {
             // predicates
-            final @Nullable /*@Thrown*/ Class owner = a_1.getOwner();
+            final @Nullable /*@Thrown*/ test.simpleuml.Class owner = a_1.getOwner();
             final /*@Thrown*/ boolean eq = c_1.equals(owner);
             if (!eq) {
                 return false;
             }
-            final @Nullable /*@Thrown*/ Class umlClass = fao_0.getUmlClass();
+            final @Nullable /*@Thrown*/ test.simpleuml.Class umlClass = fao_0.getUmlClass();
             final /*@Thrown*/ boolean eq_0 = c_1.equals(umlClass);
             if (!eq_0) {
                 return false;
             }
             final @Nullable /*@Thrown*/ Classifier type = a_1.getType();
-            if (!(type instanceof Class)) {
+            if (!(type instanceof test.simpleuml.Class)) {
                 return false;
             }
-            final @Nullable /*@Thrown*/ Class t_0 = (Class)type;
+            final @Nullable /*@Thrown*/ test.simpleuml.Class t_0 = (test.simpleuml.Class)type;
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
             // creations
             final /*@Thrown*/ NonLeafAttribute fa = UmltordbmsFactory.eINSTANCE.createNonLeafAttribute();
@@ -1675,7 +1671,7 @@ public class umlRdbms extends AbstractTransformation
             final @Nullable /*@Thrown*/ List<FromAttribute> fromAttributes = fao_0.getFromAttributes();
             assert fromAttributes != null;
             final @NonNull /*@Thrown*/ SetValue BOXED_fromAttributes = idResolver.createSetOfAll(SET_CLSSid_FromAttribute, fromAttributes);
-            @NonNull /*@Thrown*/ BagValue.Accumulator accumulator = ValuesUtil.createBagAccumulatorValue(BAG_CLSSid_AttributeToColumn);
+            @NonNull /*@Thrown*/ BagValue.Accumulator accumulator = ValueUtil.createBagAccumulatorValue(BAG_CLSSid_AttributeToColumn);
             @Nullable Iterator<?> ITERATOR__1 = BOXED_fromAttributes.iterator();
             @NonNull /*@Thrown*/ BagValue collect;
             while (true) {
@@ -1739,10 +1735,10 @@ public class umlRdbms extends AbstractTransformation
      * }}
      * }
      */
-    protected boolean complexAttributePrimitiveAttributesLM(final @NonNull /*@NonInvalid*/ Class c_2, final @NonNull /*@NonInvalid*/ Attribute ca) {
+    protected boolean complexAttributePrimitiveAttributesLM(final @NonNull /*@NonInvalid*/ test.simpleuml.Class c_2, final @NonNull /*@NonInvalid*/ Attribute ca) {
         try {
             // predicates
-            final @Nullable /*@Thrown*/ FromAttribute FromAttribute = DomainUtil.nonNullState (OPPOSITE_OF_FromAttribute_attribute.get(ca));
+            final @Nullable /*@Thrown*/ FromAttribute FromAttribute = ClassUtil.nonNullState (OPPOSITE_OF_FromAttribute_attribute.get(ca));
             if (!(FromAttribute instanceof NonLeafAttribute)) {
                 return false;
             }
@@ -1805,7 +1801,7 @@ public class umlRdbms extends AbstractTransformation
      * 
      * }
      */
-    protected boolean complexAttributePrimitiveAttributesLM_1(final @NonNull /*@NonInvalid*/ Attribute a_1_0, final @NonNull /*@NonInvalid*/ Class c_1_0, final @NonNull /*@NonInvalid*/ Attribute ca_1, final @NonNull /*@NonInvalid*/ NonLeafAttribute fao_1) {
+    protected boolean complexAttributePrimitiveAttributesLM_1(final @NonNull /*@NonInvalid*/ Attribute a_1_0, final @NonNull /*@NonInvalid*/ test.simpleuml.Class c_1_0, final @NonNull /*@NonInvalid*/ Attribute ca_1, final @NonNull /*@NonInvalid*/ NonLeafAttribute fao_1) {
         try {
             // predicates
             final @Nullable /*@Thrown*/ Classifier type = a_1_0.getType();
@@ -1816,7 +1812,7 @@ public class umlRdbms extends AbstractTransformation
             if (t_1_0 == null) {
                 throw new InvalidValueException("Null source for \'umltordbms::PrimitiveToName::primitive\'");
             }
-            final @NonNull /*@Thrown*/ PrimitiveToName PrimitiveToName = DomainUtil.nonNullState (OPPOSITE_OF_PrimitiveToName_primitive.get(t_1_0));
+            final @NonNull /*@Thrown*/ PrimitiveToName PrimitiveToName = ClassUtil.nonNullState (OPPOSITE_OF_PrimitiveToName_primitive.get(t_1_0));
             final @Nullable /*@Thrown*/ PrimitiveToName p2n_1_0 = PrimitiveToName;
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
             // creations
@@ -1825,7 +1821,7 @@ public class umlRdbms extends AbstractTransformation
             modelObjects[2/*middle*/].add(fa);
             // assignments
             fa.setOwner(fao_1);
-            final @NonNull /*@Thrown*/ SetValue Set = ValuesUtil.createSetOfEach(SET_CLSSid_AttributeToColumn, fa);
+            final @NonNull /*@Thrown*/ SetValue Set = ValueUtil.createSetOfEach(SET_CLSSid_AttributeToColumn, fa);
             final List<AttributeToColumn> UNBOXED_Set = Set.asEcoreObjects(idResolver, AttributeToColumn.class);
             assert UNBOXED_Set != null;
             fa.getLeafs().addAll(UNBOXED_Set);
@@ -1876,10 +1872,10 @@ public class umlRdbms extends AbstractTransformation
      * }}
      * }
      */
-    protected boolean complexAttributeComplexAttributesLM(final @NonNull /*@NonInvalid*/ Class c_3, final @NonNull /*@NonInvalid*/ Attribute ca_0) {
+    protected boolean complexAttributeComplexAttributesLM(final @NonNull /*@NonInvalid*/ test.simpleuml.Class c_3, final @NonNull /*@NonInvalid*/ Attribute ca_0) {
         try {
             // predicates
-            final @Nullable /*@Thrown*/ FromAttribute FromAttribute = DomainUtil.nonNullState (OPPOSITE_OF_FromAttribute_attribute.get(ca_0));
+            final @Nullable /*@Thrown*/ FromAttribute FromAttribute = ClassUtil.nonNullState (OPPOSITE_OF_FromAttribute_attribute.get(ca_0));
             if (!(FromAttribute instanceof NonLeafAttribute)) {
                 return false;
             }
@@ -1939,19 +1935,19 @@ public class umlRdbms extends AbstractTransformation
      * 
      * }
      */
-    protected boolean complexAttributeComplexAttributesLM_1(final @NonNull /*@NonInvalid*/ Attribute a_1_1, final @NonNull /*@NonInvalid*/ Class c_1_1, final @NonNull /*@NonInvalid*/ Attribute ca_1_0, final @NonNull /*@NonInvalid*/ NonLeafAttribute fao_1_0) {
+    protected boolean complexAttributeComplexAttributesLM_1(final @NonNull /*@NonInvalid*/ Attribute a_1_1, final @NonNull /*@NonInvalid*/ test.simpleuml.Class c_1_1, final @NonNull /*@NonInvalid*/ Attribute ca_1_0, final @NonNull /*@NonInvalid*/ NonLeafAttribute fao_1_0) {
         try {
             // predicates
-            final @Nullable /*@Thrown*/ Class owner = a_1_1.getOwner();
+            final @Nullable /*@Thrown*/ test.simpleuml.Class owner = a_1_1.getOwner();
             final /*@Thrown*/ boolean eq = c_1_1.equals(owner);
             if (!eq) {
                 return false;
             }
             final @Nullable /*@Thrown*/ Classifier type = a_1_1.getType();
-            if (!(type instanceof Class)) {
+            if (!(type instanceof test.simpleuml.Class)) {
                 return false;
             }
-            final @Nullable /*@Thrown*/ Class t_1_0 = (Class)type;
+            final @Nullable /*@Thrown*/ test.simpleuml.Class t_1_0 = (test.simpleuml.Class)type;
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
             // creations
             final /*@Thrown*/ NonLeafAttribute fa = UmltordbmsFactory.eINSTANCE.createNonLeafAttribute();
@@ -1962,7 +1958,7 @@ public class umlRdbms extends AbstractTransformation
             final @Nullable /*@Thrown*/ List<FromAttribute> fromAttributes = fao_1_0.getFromAttributes();
             assert fromAttributes != null;
             final @NonNull /*@Thrown*/ SetValue BOXED_fromAttributes = idResolver.createSetOfAll(SET_CLSSid_FromAttribute, fromAttributes);
-            @NonNull /*@Thrown*/ BagValue.Accumulator accumulator = ValuesUtil.createBagAccumulatorValue(BAG_CLSSid_AttributeToColumn);
+            @NonNull /*@Thrown*/ BagValue.Accumulator accumulator = ValueUtil.createBagAccumulatorValue(BAG_CLSSid_AttributeToColumn);
             @Nullable Iterator<?> ITERATOR__1 = BOXED_fromAttributes.iterator();
             @NonNull /*@Thrown*/ BagValue collect;
             while (true) {
