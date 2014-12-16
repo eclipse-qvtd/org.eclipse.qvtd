@@ -141,8 +141,10 @@ public class hsv2hls extends AbstractTransformation
             assert children != null;
             ;
             for (HSVNode hsvChild : children) {
-                final @NonNull /*@NonInvalid*/ HSVNode symbol_3 = (HSVNode)hsvChild;
-                HSV2MiddleRecursion(symbol_3, middleRoot);
+                if (hsvChild != null) {
+                    final @NonNull /*@NonInvalid*/ HSVNode symbol_3 = (HSVNode)hsvChild;
+                    HSV2MiddleRecursion(symbol_3, middleRoot);
+                }
             }
             Middle2HLSRoot(middleRoot);
             return true;
@@ -199,8 +201,10 @@ public class hsv2hls extends AbstractTransformation
             assert children != null;
             ;
             for (HSVNode hsvChild : children) {
-                final @NonNull /*@NonInvalid*/ HSVNode symbol_4 = (HSVNode)hsvChild;
-                HSV2MiddleRecursion(symbol_4, middleNode_1);
+                if (hsvChild != null) {
+                    final @NonNull /*@NonInvalid*/ HSVNode symbol_4 = (HSVNode)hsvChild;
+                    HSV2MiddleRecursion(symbol_4, middleNode_1);
+                }
             }
             return true;
         }
@@ -254,8 +258,10 @@ public class hsv2hls extends AbstractTransformation
             assert children != null;
             ;
             for (HSVNode2HLSNode middleChild : children) {
-                final @NonNull /*@NonInvalid*/ HSVNode2HLSNode symbol_4 = (HSVNode2HLSNode)middleChild;
-                Middle2HLSRecursion(symbol_4);
+                if (middleChild != null) {
+                    final @NonNull /*@NonInvalid*/ HSVNode2HLSNode symbol_4 = (HSVNode2HLSNode)middleChild;
+                    Middle2HLSRecursion(symbol_4);
+                }
             }
             return true;
         }
@@ -314,8 +320,10 @@ public class hsv2hls extends AbstractTransformation
             assert children != null;
             ;
             for (HSVNode2HLSNode middleChild : children) {
-                final @NonNull /*@NonInvalid*/ HSVNode2HLSNode symbol_4 = (HSVNode2HLSNode)middleChild;
-                Middle2HLSRecursion(symbol_4);
+                if (middleChild != null) {
+                    final @NonNull /*@NonInvalid*/ HSVNode2HLSNode symbol_4 = (HSVNode2HLSNode)middleChild;
+                    Middle2HLSRecursion(symbol_4);
+                }
             }
             return true;
         }

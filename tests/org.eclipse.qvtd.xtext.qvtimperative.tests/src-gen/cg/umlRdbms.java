@@ -236,25 +236,29 @@ public class umlRdbms extends AbstractTransformation
             // mapping statements
             ;
             for (PackageElement child : elements_0) {
-                final @NonNull /*@NonInvalid*/ PackageElement symbol_5 = (PackageElement)child;
-                if (symbol_5 instanceof PrimitiveDataType) {
-                    integerToNumberLM(p, p2s_11, (PrimitiveDataType)symbol_5);
-                }
-                if (symbol_5 instanceof PrimitiveDataType) {
-                    booleanToBooleanLM(p, p2s_11, (PrimitiveDataType)symbol_5);
-                }
-                if (symbol_5 instanceof PrimitiveDataType) {
-                    stringToVarcharLM(p, p2s_11, (PrimitiveDataType)symbol_5);
+                if (child != null) {
+                    final @NonNull /*@NonInvalid*/ PackageElement symbol_5 = (PackageElement)child;
+                    if (symbol_5 instanceof PrimitiveDataType) {
+                        integerToNumberLM(p, p2s_11, (PrimitiveDataType)symbol_5);
+                    }
+                    if (symbol_5 instanceof PrimitiveDataType) {
+                        booleanToBooleanLM(p, p2s_11, (PrimitiveDataType)symbol_5);
+                    }
+                    if (symbol_5 instanceof PrimitiveDataType) {
+                        stringToVarcharLM(p, p2s_11, (PrimitiveDataType)symbol_5);
+                    }
                 }
             }
             ;
             for (PackageElement child_0 : elements_0) {
-                final @NonNull /*@NonInvalid*/ PackageElement symbol_13 = (PackageElement)child_0;
-                if (symbol_13 instanceof test.simpleuml.Class) {
-                    classToTableLM((test.simpleuml.Class)symbol_13, p, p2s_11);
-                }
-                if (symbol_13 instanceof Association) {
-                    associationToForeignKeyLM((Association)symbol_13, p, p2s_11);
+                if (child_0 != null) {
+                    final @NonNull /*@NonInvalid*/ PackageElement symbol_13 = (PackageElement)child_0;
+                    if (symbol_13 instanceof test.simpleuml.Class) {
+                        classToTableLM((test.simpleuml.Class)symbol_13, p, p2s_11);
+                    }
+                    if (symbol_13 instanceof Association) {
+                        associationToForeignKeyLM((Association)symbol_13, p, p2s_11);
+                    }
                 }
             }
             packageToSchemaMR(p2s_11);
@@ -326,17 +330,21 @@ public class umlRdbms extends AbstractTransformation
             assert primitivesToNames != null;
             ;
             for (PrimitiveToName child : primitivesToNames) {
-                final @NonNull /*@NonInvalid*/ PrimitiveToName symbol_5 = (PrimitiveToName)child;
-                integerToNumberMR(symbol_5, p2s);
-                booleanToBooleanMR(symbol_5, p2s);
-                stringToVarcharMR(symbol_5, p2s);
+                if (child != null) {
+                    final @NonNull /*@NonInvalid*/ PrimitiveToName symbol_5 = (PrimitiveToName)child;
+                    integerToNumberMR(symbol_5, p2s);
+                    booleanToBooleanMR(symbol_5, p2s);
+                    stringToVarcharMR(symbol_5, p2s);
+                }
             }
             final @Nullable /*@Thrown*/ List<ClassToTable> classesToTables = p2s.getClassesToTables();
             assert classesToTables != null;
             ;
             for (ClassToTable child_0 : classesToTables) {
-                final @NonNull /*@NonInvalid*/ ClassToTable symbol_11 = (ClassToTable)child_0;
-                classToTableMR(symbol_11, p2s, s_2);
+                if (child_0 != null) {
+                    final @NonNull /*@NonInvalid*/ ClassToTable symbol_11 = (ClassToTable)child_0;
+                    classToTableMR(symbol_11, p2s, s_2);
+                }
             }
             return true;
         }
@@ -780,18 +788,20 @@ public class umlRdbms extends AbstractTransformation
             assert attributes != null;
             ;
             for (Attribute anAttribute : attributes) {
-                final @NonNull /*@NonInvalid*/ Attribute symbol_6 = (Attribute)anAttribute;
-                final @Nullable /*@Thrown*/ Classifier type_0 = symbol_6.getType();
-                if (type_0 == null) {
-                    throw new InvalidValueException("Null binding for \'complexAttributeComplexAttributesLM::c\'");
-                }
-                classPrimitiveAttributesLM(symbol_6, c, c2t_3);
-                classComplexAttributesLM(symbol_6, c, c2t_3);
-                if (type_0 instanceof test.simpleuml.Class) {
-                    complexAttributePrimitiveAttributesLM((test.simpleuml.Class)type_0, symbol_6);
-                }
-                if (type_0 instanceof test.simpleuml.Class) {
-                    complexAttributeComplexAttributesLM((test.simpleuml.Class)type_0, symbol_6);
+                if (anAttribute != null) {
+                    final @NonNull /*@NonInvalid*/ Attribute symbol_6 = (Attribute)anAttribute;
+                    final @Nullable /*@Thrown*/ Classifier type_0 = symbol_6.getType();
+                    if (type_0 == null) {
+                        throw new InvalidValueException("Null binding for \'complexAttributeComplexAttributesLM::c\'");
+                    }
+                    classPrimitiveAttributesLM(symbol_6, c, c2t_3);
+                    classComplexAttributesLM(symbol_6, c, c2t_3);
+                    if (type_0 instanceof test.simpleuml.Class) {
+                        complexAttributePrimitiveAttributesLM((test.simpleuml.Class)type_0, symbol_6);
+                    }
+                    if (type_0 instanceof test.simpleuml.Class) {
+                        complexAttributeComplexAttributesLM((test.simpleuml.Class)type_0, symbol_6);
+                    }
                 }
             }
             return true;
@@ -880,16 +890,18 @@ public class umlRdbms extends AbstractTransformation
             assert associationsToForeignKeys != null;
             ;
             for (AssociationToForeignKey child : associationsToForeignKeys) {
-                final @Nullable /*@Thrown*/ ClassToTable ClassToTable_0 = ClassUtil.nonNullState (OPPOSITE_OF_ClassToTable_table.get(t_0));
-                if (ClassToTable_0 == null) {
-                    throw new InvalidValueException("Null binding for \'associationToForeignKeyMR::sc2t\'");
+                if (child != null) {
+                    final @Nullable /*@Thrown*/ ClassToTable ClassToTable_0 = ClassUtil.nonNullState (OPPOSITE_OF_ClassToTable_table.get(t_0));
+                    if (ClassToTable_0 == null) {
+                        throw new InvalidValueException("Null binding for \'associationToForeignKeyMR::sc2t\'");
+                    }
+                    final @NonNull /*@NonInvalid*/ AssociationToForeignKey symbol_5 = (AssociationToForeignKey)child;
+                    final @Nullable /*@Thrown*/ Key primaryKey = c2t.getPrimaryKey();
+                    if (primaryKey == null) {
+                        throw new InvalidValueException("Null binding for \'associationToForeignKeyMR::rk\'");
+                    }
+                    associationToForeignKeyMR(symbol_5, ClassToTable_0, t_0, p2s_8, primaryKey, s, ClassToTable_0, t_0);
                 }
-                final @NonNull /*@NonInvalid*/ AssociationToForeignKey symbol_5 = (AssociationToForeignKey)child;
-                final @Nullable /*@Thrown*/ Key primaryKey = c2t.getPrimaryKey();
-                if (primaryKey == null) {
-                    throw new InvalidValueException("Null binding for \'associationToForeignKeyMR::rk\'");
-                }
-                associationToForeignKeyMR(symbol_5, ClassToTable_0, t_0, p2s_8, primaryKey, s, ClassToTable_0, t_0);
             }
             final @NonNull /*@Thrown*/ SetValue selectByKind = (SetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(evaluator, BOXED_fromAttributes, TYP_umltordbms_c_c_NonLeafAttribute_0);
             @NonNull /*@Thrown*/ BagValue.Accumulator accumulator = ValueUtil.createBagAccumulatorValue(BAG_CLSSid_FromAttribute);
@@ -920,9 +932,11 @@ public class umlRdbms extends AbstractTransformation
             assert UNBOXED_union != null;
             ;
             for (FromAttribute child_0 : UNBOXED_union) {
-                final @NonNull /*@NonInvalid*/ FromAttribute symbol_9 = (FromAttribute)child_0;
-                if (symbol_9 instanceof AttributeToColumn) {
-                    attributeColumnsMR((AttributeToColumn)symbol_9, c2t, t_0);
+                if (child_0 != null) {
+                    final @NonNull /*@NonInvalid*/ FromAttribute symbol_9 = (FromAttribute)child_0;
+                    if (symbol_9 instanceof AttributeToColumn) {
+                        attributeColumnsMR((AttributeToColumn)symbol_9, c2t, t_0);
+                    }
                 }
             }
             return true;
@@ -1755,11 +1769,13 @@ public class umlRdbms extends AbstractTransformation
             assert attributes != null;
             ;
             for (Attribute anAttribute : attributes) {
-                final @NonNull /*@NonInvalid*/ Attribute symbol_1 = (Attribute)anAttribute;
-                if (fao_2 == null) {
-                    throw new InvalidValueException("Null binding for \'complexAttributePrimitiveAttributesLM_1::fao_1\'");
+                if (anAttribute != null) {
+                    final @NonNull /*@NonInvalid*/ Attribute symbol_1 = (Attribute)anAttribute;
+                    if (fao_2 == null) {
+                        throw new InvalidValueException("Null binding for \'complexAttributePrimitiveAttributesLM_1::fao_1\'");
+                    }
+                    complexAttributePrimitiveAttributesLM_1(symbol_1, c_2, ca, fao_2);
                 }
-                complexAttributePrimitiveAttributesLM_1(symbol_1, c_2, ca, fao_2);
             }
             return true;
         }
@@ -1892,11 +1908,13 @@ public class umlRdbms extends AbstractTransformation
             assert attributes != null;
             ;
             for (Attribute anAttribute : attributes) {
-                final @NonNull /*@NonInvalid*/ Attribute symbol_1 = (Attribute)anAttribute;
-                if (fao_2 == null) {
-                    throw new InvalidValueException("Null binding for \'complexAttributeComplexAttributesLM_1::fao_1\'");
+                if (anAttribute != null) {
+                    final @NonNull /*@NonInvalid*/ Attribute symbol_1 = (Attribute)anAttribute;
+                    if (fao_2 == null) {
+                        throw new InvalidValueException("Null binding for \'complexAttributeComplexAttributesLM_1::fao_1\'");
+                    }
+                    complexAttributeComplexAttributesLM_1(symbol_1, c_3, ca_0, fao_2);
                 }
-                complexAttributeComplexAttributesLM_1(symbol_1, c_3, ca_0, fao_2);
             }
             return true;
         }

@@ -231,6 +231,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		}
 		for (CGGuardVariable cgFreeVariable : cgFreeVariables) {
 			js.append("for (");
+//			if (cgFreeVariable.isNonNull()) {
+//				js.append("@SuppressWarnings(\"null\")@NonNull ");
+//			}
 			js.appendClassReference(cgFreeVariable);
 			js.append(" ");
 			js.appendValueName(cgFreeVariable);
@@ -662,6 +665,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 //		js.appendValueName(iterator.getInit());
 		js.append(";\n");
 		js.append("for (");
+//		if (iterator.isNonNull()) {
+//			js.append("@SuppressWarnings(\"null\")@NonNull ");
+//		}
 		js.appendClassReference(iterator);
 		js.append(" ");
 		js.appendValueName(iterator);
@@ -669,7 +675,13 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		js.appendValueName(source);
 		js.append(") {\n");
 		js.pushIndentation(null);
+		js.append("if (");
+		js.appendValueName(iterator);
+		js.append(" != null) {\n");
+		js.pushIndentation(null);
 			cgMappingLoop.getBody().accept(this);
+		js.popIndentation();
+		js.append("}\n");
 		js.popIndentation();
 		js.append("}\n");
 		return true;
