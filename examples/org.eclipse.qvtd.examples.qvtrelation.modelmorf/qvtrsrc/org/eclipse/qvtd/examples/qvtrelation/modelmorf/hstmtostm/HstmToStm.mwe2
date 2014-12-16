@@ -1,0 +1,32 @@
+module org.eclipse.qvtd.examples.qvtrelation.modelmorf.hstmtostm.HstmToStm
+
+import java.util.*
+
+import org.eclipse.qvtd.examples.qvtrelation.modelmorf.ModelMorfComponent
+
+Workflow {
+	component = ModelMorfComponent {
+	    java15Path = "C:\\ModelMorf\\Java\\jdk1.5\\bin"
+	    modelMorfPath = "C:\\ModelMorf"
+	    metamodel = {
+	        alias = "hstmMM_p"
+	        file = "hstmMM.xml"
+	    }
+	    metamodel = {
+            alias = "stmMM_p"
+            file = "stmMM.xml"
+        }
+	    qvtSpecificationFile = "hstmtostm.qvt"
+	    model = {
+	       variable = "hstm"
+	       file = "hstmUM.xml"    
+	    }
+	    model = {
+           variable = "stm"
+           file = "stmUM.xml"    
+        }
+	    transformationName = "HstmToStm"
+	    directionDomain = "stm"
+	    domainQualifier = "enforce"
+	}
+}

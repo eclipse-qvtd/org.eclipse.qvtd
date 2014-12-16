@@ -1,0 +1,166 @@
+/*******************************************************************************
+ * Copyright (c) 2013 The University of York, Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
+
+/****l* /org.eclipse.qvtd.build.etl/dependence/scheduling/EcoreToContainmentGraph
+ * NAME
+ *  EcoreToContainmentGraph -- Craete the graph to hold candidate model containment
+ *  information
+ *
+ * MODELS
+ *  Required models to run the script:
+ *      - NAME     ALIASES METAMODEL               ROL SOD
+ *      - xxx      mm      Ecore                    X          The candidate model Ecore
+ *      - xxx      cGraph  QVTcDataDependencyGraph  X          The metamodel containment graph
+ * SEE ALSO
+ *
+ ******
+ */ 
+
+var visited : Map;
+var SEARCH_ITERATIONS : Integer = 3;
+
+//modelId.println("modelId ");
+for (p in mm!EPackage.all()) {
+    p.createContainmentGraph();
+}
+
+"Done".println();
+
+
+/****o* /org.eclipse.qvtd.build.etl/dependence/scheduling/EcoreToContainmentGraph/createContainmentGraph
+ * NAME
+ *  createContainmentGraph - Returns a set of elements (nodes and edges) representing
+ *  the containment relations in a package
+ *  
+ * FUNCTION
+ * We are only interested in containemnet relations, so we only need to search
+ * EClasses. The algorithm does an iterative depth first search of containment
+ * relations. The search is repeated until no more new nodes are created during 
+ * three iterations. 
+ * 
+ * Note: Ed Merks suggests there should only be one EPackage per metamodel, but
+ * since this is not a requirement, to be safe call this method on all packages 
+ * in the model.
+ *
+ * TODO: Metamodles should be loaded dynamically from the configuraion!
+ * TODO: Number of no changes should be configurable!
+ * 
+ * CONTEXT
+ *  mm!EPackage  The package
+ * 
+ * OUTPUT 
+ *  Set         A set of nodes and edges representing the containment relations
+ *
+ * SEE ALSO
+ */
+operation mm!EPackage createContainmentGraph() : Set {
+
+    var iterate = true;
+    var change = false;
+    var maxDepth : Integer;
+    var noChangeCount : Integer = 0;
+    var elements : Set;
+    
+    //var parentNode = new cg!ClassNode;
+    
+    //parentNode.label = self.name;
+    maxDepth = 1;
+    
+    while (iterate) {
+        //maxDepth.println("IterativeDFS ");
+        change = false;
+        // Only non abstract classes which are not contained in other clases
+        for (c in self.eClassifiers.select(c | c.isKindOf(mm!EClass)
+                and not c.abstract
+                and not c.getEAllStructuralFeatures().exists(r : mm!EReference | r.container))) {
+            change = c.dfs(1, maxDepth, null, null) or change;
+        }
+        if (not change) {
+           noChangeCount = noChangeCount + 1;
+           if (noChangeCount > SEARCH_ITERATIONS) {
+               iterate = false;
+           }
+        }
+        maxDepth = maxDepth + 1;
+        if(maxDepth > 10) {
+           "Safe ending".errln();
+           iterate = false; // Safe ending
+        }
+           
+    }
+    
+}
+
+// Returns true if added
+operation mm!EClass dfs(depth, maxDepth, parentNode, relation) : Boolean {
+    
+    var change = false;
+    //self.name.println("dfs ");
+    //"Max depth reached, do nothing".println(tabs);
+    if (depth <= maxDepth) {
+    	// If self is abstract, consider all subclasses at same depth (flattening)
+	    if (self.abstract) {
+	        //"Abstract, do inheritance".println(tabs);
+	        for (sc in mm!EClass.all().select(c | c.eSuperTypes.includes(self))) {
+	        	if (sc.name <> parentNode.label) {
+	        		sc.dfs(depth, maxDepth, parentNode, relation);
+	        	}
+	        }
+	    } else {
+	        // Add Node or get node
+	        var n;
+	        if (visited.containsKey(self)) {
+	            n = visited.get(self);
+	        } else { 
+	            n = new cg!ClassNode;
+	            n.label = self.name;
+                n.superTypes = self.eSuperTypes.select(st | st.abstract).collect(st | st.name).flatten();
+                n.`model` = getModel(modelId);
+                visited.put(self, n);
+	        }
+	        if (depth == maxDepth and parentNode <> null) {
+	            var e = new cg!ContainmentEdge;
+	            e.source = parentNode;
+	            e.target = n;
+	            e.referredProperty = relation;
+	            e.`model` = getModel(modelId);
+	            change = true;
+	        }
+        	// Navigate Containment, mine and inherited
+        	//self.eStructuralFeatures.select(sf : mm!EReference | sf.containment)
+            //		.includingAll(self.getAllSuperTypes().collect(st | st.eStructuralFeatures.select(sf : mm!EReference | sf.containment)).flatten()).println();
+            for (sf in self.eStructuralFeatures.select(sf : mm!EReference | sf.containment)
+            		.includingAll(self.getAllSuperTypes().collect(st | st.eStructuralFeatures.select(sf : mm!EReference | sf.containment))).flatten()) {
+				change = sf.eReferenceType.dfs(depth+1, maxDepth, n, sf) or change;
+            }
+	    }
+    }
+    return change;
+}
+
+@cached
+operation mm!EClass getAllSuperTypes() : Set {
+	
+	var retVal : Set;
+	retVal.addAll(self.eSuperTypes);
+	for (st in self.eSuperTypes) {
+		retVal.addAll(st.getAllSuperTypes());
+	}
+	return retVal;
+}
+
+operation getModel(id) {
+    switch (id) {
+        case "l" : return cg!Model#input;
+        case "r" : return cg!Model#output;
+        case "m" : return cg!Model#middle;
+    }
+} 

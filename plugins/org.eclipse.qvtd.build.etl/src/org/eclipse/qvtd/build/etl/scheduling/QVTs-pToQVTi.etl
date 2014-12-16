@@ -1,0 +1,409 @@
+/*******************************************************************************
+ * Copyright (c) 2014 The University of York and Willink Transformations.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
+import "../helpers/QVTHelpers.eol";
+import "../helpers/QVTsHelpers.eol";
+
+pre {
+    var emfTool = new Native("org.eclipse.epsilon.emc.emf.tools.EmfTool");
+}
+
+//=============== QVTp to QVTi (just copy)  ===============
+
+rule ImperativeModel
+    transform mIn : QVTp!ImperativeModel
+    to mOut : QVTi!ImperativeModel
+    {
+        
+        mOut.externalURI = mIn.externalURI.replace(".qvtp.qvti", ".qvti");
+        mOut.nestedPackage.addAll(mIn.nestedPackage.equivalent());
+        // Copy the OCL types package
+        //mOut.nestedPackage.add(emfTool.getEcoreUtil().copy(mIn.nestedPackage.selectOne(p | p.isTypeOf(QVTp!Package))));
+    }
+
+@abstract
+rule NamedElements
+    transform eIn : QVTp!NamedElement
+    to eOut : QVTi!NamedElement
+    {
+        eOut.name = eIn.name;
+    }
+
+rule TypedModels
+    transform tmIn : QVTp!TypedModel
+    to tmOut : QVTi!TypedModel
+    extends NamedElements
+    {
+        tmOut.usedPackage = tmIn.usedPackage;
+        tmOut.dependsOn.addAll(tmIn.dependsOn.equivalent());    
+    }
+    
+rule Transformations
+    transform tIn : QVTp!Transformation
+    to tOut : QVTi!Transformation
+    extends NamedElements
+    {
+        tOut.ownedTag = emfTool.getEcoreUtil().copyAll(tIn.ownedTag);
+        tOut.modelParameter.addAll(tIn.modelParameter.equivalent());
+        tOut.`rule`.addAll(tIn.`rule`.equivalent());
+        tOut.`extends` ::= tIn.`extends`;
+    }
+
+@abstract
+rule Rules
+    transform rIn : QVTp!Rule
+    to rOut : QVTi!Rule
+    extends NamedElements
+    {
+        rOut.domain.addAll(rIn.domain.equivalent());
+        rOut.overrides ::= rIn.overrides;
+        rOut.overridden.addAll(rIn.overridden.equivalent());
+    }
+
+@abstract
+rule Areas
+    transform aIn : QVTp!Area
+    to aOut : QVTi!Area
+    {
+        aOut.guardPattern ::= aIn.guardPattern;
+        aOut.bottomPattern ::= aIn.bottomPattern;
+    }
+
+rule Mappings
+    transform mIn : QVTp!Mapping
+    to mOut : QVTi!Mapping
+    extends Rules, Areas
+    {
+        
+        var ma = QVTs!MappingAction.all().selectOne(ma | ma.mapping.name == mIn.name); 
+        if (not ma.children.isEmpty()) {
+            mOut.mappingStatement = new QVTi!MappingSequence;
+            // Add loops of mapping calls accordingly... hard!
+            if (ma.hasLoopVariable()) {
+                // Add only the loops of the PrimaryArguments with the most secondary arguments
+                // The other DistinctData loops will be nested inside these
+                mOut.mappingStatement.mappingStatements.addAll(ma.children
+                    .collect(ma | ma.getMainDistinctData())
+                    .flatten().equivalent());
+            } else {
+                mOut.mappingStatement.mappingStatements.addAll(ma.children.equivalent());
+            }
+        }
+    }
+
+@abstract
+rule Domains
+    transform dIn : QVTp!Domain
+    to dOut : QVTi!Domain
+    extends NamedElements
+    {
+        dOut.isCheckable = dIn.isCheckable;
+        dOut.isEnforceable = dIn.isEnforceable;
+        dOut.typedModel ::= dIn.typedModel;
+    } 
+
+rule CoreDomains
+    transform cdIn : QVTp!CoreDomain
+    to cdOut : QVTp!CoreDomain
+    extends Domains, Areas
+    {
+    }
+
+@abstract        
+rule Patterns
+    transform pIn : QVTp!Pattern
+    to pOut : QVTi!Pattern
+    {
+        pOut.predicate.addAll(pIn.predicate.equivalent());
+        pOut.bindsTo.addAll(pIn.bindsTo.equivalent());
+    }
+
+@abstract
+rule CorePatterns
+    transform cpIn : QVTp!CorePattern
+    to cpOut : QVTi!CorePattern
+    extends Patterns
+    {
+    
+        cpOut.variable.addAll(cpIn.variable.equivalent());
+    }        
+    
+rule BottomPatterns
+    transform bpIn : QVTp!BottomPattern
+    to bpOut : QVTi!BottomPattern
+    extends CorePatterns
+    {
+        bpOut.assignment.addAll(bpIn.assignment.equivalent());
+        bpOut.enforcementOperation.addAll(bpIn.enforcementOperation.equivalent());
+        bpOut.variable.addAll(bpIn.variable.equivalent());
+        bpOut.realizedVariable.addAll(bpIn.realizedVariable.equivalent());
+    }
+
+ rule GuardPatterns
+    transform gpIn : QVTp!GuardPattern
+    to gpOut : QVTi!GuardPattern
+    extends CorePatterns
+    {
+        
+    }
+
+@abstract
+rule Assignments
+    transform aIn : QVTp!Assignment
+    to aOut : QVTi!Assignemnt
+    {
+        aOut.isDefault = aIn.isDefault;
+        aOut.value = emfTool.getEcoreUtil().copy(aIn.value);
+        var vars;
+        if (aIn.bottomPattern.area.isTypeOf(QVTi!CoreDomain)) {
+            vars = aIn.bottomPattern.area.`rule`.getAllVariables().equivalent();
+        } else {
+            vars = aIn.bottomPattern.area.getAllVariables().equivalent();
+        }
+        for (vFix in vars) {
+            aOut.value.fixVarReferences(vFix);
+        }
+    }
+
+rule PropertyAssignments
+    transform paIn : QVTp!PropertyAssignment
+    to paOut : QVTi!PropertyAssignment
+    extends Assignments
+    {
+        paOut.slotExpression = emfTool.getEcoreUtil().copy(paIn.slotExpression);
+        paOut.targetProperty = paIn.targetProperty;
+        var vars;
+        if (paIn.bottomPattern.area.isTypeOf(QVTi!CoreDomain)) {
+            vars = paIn.bottomPattern.area.`rule`.getAllVariables().equivalent();
+        } else {
+            vars = paIn.bottomPattern.area.getAllVariables().equivalent();
+        }
+        for (vFix in vars) {
+            paOut.slotExpression.fixVarReferences(vFix);
+        }
+    }
+
+rule MiddlePropertyAssignments 
+	transform mpaIn : QVTp!MiddlePropertyAssignment
+	to mpaOut : QVTi!MiddlePropertyAssignment
+	extends PropertyAssignments
+	{
+	
+	}
+
+rule VariableAssignments
+    transform vaIn : QVTp!VariableAssignment
+    to vaOut : QVTi!VariableAssignment
+    extends Assignments
+    {
+        vaOut.targetVariable ::= vaIn.targetVariable;
+    }
+
+rule Predicates
+    transform pIn : QVTp!Predicate
+    to pOut : QVTi!Predicate
+    {
+        pOut.conditionExpression = emfTool.getEcoreUtil().copy(pIn.conditionExpression);
+        var vars;
+        if (pIn.pattern.area.isTypeOf(QVTi!CoreDomain)) {
+            vars = pIn.pattern.area.`rule`.getAllVariables().equivalent();
+        } else {
+            vars = pIn.pattern.area.getAllVariables().equivalent();
+        }
+        for (vFix in vars) {
+            pOut.conditionExpression.fixVarReferences(vFix);
+        }
+        
+    }
+     
+rule Variables
+    transform vIn : QVTp!Variable
+    to vOut : QVTi!Variable
+    extends NamedElements
+    {
+    	-- We want to prevent re-creation of variables which are cloned 
+    	-- from OCL expressions (via EcoreUtil). Let's excludes all those
+    	-- directly contained in an OCLExpression (IteratorExp, LetExp, etc.)
+    	-- ExpressionInOCL containers are also removed, in case the QVTp transformation
+    	-- redfers to other OCL resources 
+        guard { var varContainer = vIn.eContainer();
+        		return (not varContainer.isKindOf(QVTp!OCLExpression)) and
+        			   (not varContainer.isKindOf(QVTp!ExpressionInOCL));
+         }
+        
+        vOut.implicit = vIn.implicit;
+        vOut.type = vIn.type;
+    }
+    
+rule RealizedVariables
+    transform vIn : QVTp!RealizedVariable
+    to vOut : QVTi!RealizedVariable
+    extends NamedElements
+    {
+
+        vOut.implicit = vIn.implicit;
+        vOut.type = vIn.type;
+    }
+
+//=============== QVTs to QVTi (add mapping calls)  ===============
+
+rule MappingActions
+    transform ma : QVTs!MappingAction
+    to mc : QVTi!MappingCall
+    {
+        guard : ma.parent.isDefined()
+        
+        mc.referredMapping ::= QVTp!Mapping.all().selectOne(m | ma.mapping.name == m.name);
+        mc.binding.addAll(ma.distinctArguments.collect(da | da.primaryArguments.includingAll(da.secondaryArguments)).equivalent().select(e | e.isTypeOf(QVTi!MappingCallBinding)));
+    }
+
+    
+rule DistinctData
+    transform dd : QVTs!DistinctData
+    to loop : QVTi!MappingLoop
+    {
+        
+        var it = new QVTi!Variable;
+        it.name = dd.primaryArguments.first().variable.name;
+        it.type = dd.primaryArguments.first().variable.type;
+        loop.iterator.add(it);
+        var exp = new QVTi!OperationCallExp;
+        exp.referredOperation = getOclElementAllInstancesOp();
+        exp.source = new QVTi!TypeExp;
+        exp.source.referredType = dd.primaryArguments.first().variable.type;
+        exp.source.type = dd.primaryArguments.first().variable.type;
+        exp.type = exp.referredOperation.type;
+        loop.source = exp;
+        // TODO what happens with multiple Distinct Datas?
+        loop.body = new QVTi!MappingSequence;
+        loop.body.mappingStatements.add(dd.target.equivalent());
+        // To make loops nest, only one loop can be added. Which? The next one with the most secondary arguments
+        var nextDD = dd.getNextDistinctData();
+        if (nextDD <> null) {
+            loop.body.mappingStatements.add(nextDD.equivalent());
+        }        
+    }
+    
+
+rule PrimaryDataParameter
+    transform dp : QVTs!DataParameter
+    to cb : QVTi!MappingCallBinding
+    {
+        guard : dp.primaryDistinctData.isDefined()
+        
+        //dp.primaryDistinctData.target.mapping.name.println("PrimaryDataParameter ");
+        var it = dp.primaryDistinctData.equivalent().iterator.first();
+        //it.name.println("primaryVar ");
+        cb.boundVariable ::= dp.variable.getSameVariable();
+        cb.value = new QVTi!VariableExp;
+        cb.value.referredVariable = it;
+        cb.value.type = it.type;
+        cb.mappingCall ::= dp.primaryDistinctData.target;
+    }
+    
+
+rule SecondaryDataParameter
+    transform dp : QVTs!DataParameter
+    to cb : QVTi!MappingCallBinding
+    {
+        guard {
+            if (not dp.secondaryDistinctData.isDefined()) {
+                return false;
+            }
+            var paramVar = dp.variable.getSameVariable();
+            var primaryVar = dp.secondaryDistinctData.primaryArguments.first().variable.getSameVariable();
+            return not primaryVar.hasRelation(paramVar).isEmpty();
+        }    
+        //dp.secondaryDistinctData.target.mapping.name.println("SecondaryDataParameter ");
+        var paramVar = dp.variable.getSameVariable();
+        var primaryVar = dp.secondaryDistinctData.primaryArguments.first().variable.getSameVariable();
+        var prop = primaryVar.hasRelation(paramVar).first();
+        var refVar = primaryVar.equivalent();
+        //primaryVar.name.println("primaryVar ");
+        //paramVar.name.println("paramVar ");
+        //prop.name.println("prop ");
+        //refVar.name.println("refVar ");
+        cb.boundVariable ::= paramVar;
+        cb.value = new QVTi!PropertyCallExp;
+        cb.value.referredProperty = prop;
+        cb.value.type = prop.type;
+        cb.value.source = new QVTi!VariableExp;
+        cb.value.source.referredVariable = refVar;
+        cb.value.source.type = refVar.type;   
+        cb.mappingCall ::= dp.secondaryDistinctData.target;
+    }
+
+// Derived from a derived
+rule SecondarySecondaryDataParameter
+    transform dp : QVTs!DataParameter
+    to cb : QVTi!MappingCallBinding
+    {
+        guard {
+            if (not dp.secondaryDistinctData.isDefined()) {
+                return false;
+            }
+            var paramVar = dp.variable.getSameVariable();
+            var primaryVar = dp.secondaryDistinctData.primaryArguments.first().variable.getSameVariable();
+            return primaryVar.hasRelation(paramVar).isEmpty();
+        }    
+        
+        //dp.secondaryDistinctData.target.mapping.name.println("SecondaryDataParameter Derived ");
+        var paramVar = dp.variable.getSameVariable();
+        cb.boundVariable ::= paramVar;
+        //paramVar.name.println("paramVar ");
+        cb.value = new QVTi!PropertyCallExp;
+        for (sa in dp.secondaryDistinctData.secondaryArguments.excluding(dp)) {
+            var secondaryVar = sa.variable.getSameVariable();
+            //secondaryVar.name.println("secondaryVar ");
+            if (not secondaryVar.hasRelation(paramVar).isEmpty()) {
+                //"Direct".println();
+                var prop = secondaryVar.hasRelation(paramVar).first();
+                //prop.name.println("prop ");
+                cb.value.referredProperty = prop;
+                cb.value.type = prop.type;
+                cb.value.source = emfTool.getEcoreUtil().copy(sa.equivalent().value);
+                break;
+	        } 
+        }
+        // If we didn't find a direct, try an opposite
+        if (not cb.value.referredProperty.isDefined()) {
+            for (sa in dp.secondaryDistinctData.secondaryArguments.excluding(dp)) {
+                var secondaryVar = sa.variable.getSameVariable();
+                //secondaryVar.name.println("secondaryVar ");
+                if (not paramVar.hasRelation(secondaryVar).isEmpty() and hasNavigableOpposite( paramVar.hasRelation(secondaryVar).first())) { // Can it be an opposite relation?
+	                //"Opposite".println();
+	                var prop = paramVar.hasRelation(secondaryVar).first().opposite;
+	                //prop.name.println("prop ");
+	                cb.value.referredProperty = prop;
+	                cb.value.type = prop.type;
+	                cb.value.source = emfTool.getEcoreUtil().copy(sa.equivalent().value);
+	                break;
+               }
+            }
+        }
+        cb.mappingCall ::= dp.secondaryDistinctData.target;
+    }
+
+@cached
+operation QVTs!Variable getSameVariable() : QVTp!Variable {
+    return QVTp!Variable.all.selectOne(v | QVTp.getElementId(v) == QVTs.getElementId(self));
+} 
+
+
+operation QVTs!MappingAction hasLoopVariable() : Boolean {
+    
+    // This is the actual operation that finds the nesting
+    return true;
+}
+
+
+post {
+    "QVTp+s to QVTi Done".println();
+}    

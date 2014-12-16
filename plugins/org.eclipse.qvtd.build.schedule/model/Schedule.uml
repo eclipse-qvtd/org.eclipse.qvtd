@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="__4_T0CLSEeSZzIjuVvvPYA" name="model">
+  <packagedElement xmi:type="uml:Class" xmi:id="_BdnIQCLTEeSZzIjuVvvPYA" name="AbstractAction" isAbstract="true">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_Jgc9UCLTEeSZzIjuVvvPYA" name="results" type="_GAv8QCLTEeSZzIjuVvvPYA" association="_JgdkYCLTEeSZzIjuVvvPYA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Jgc9USLTEeSZzIjuVvvPYA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Jgc9UiLTEeSZzIjuVvvPYA" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_PzBSICLUEeSZzIjuVvvPYA" name="distinctArguments" type="_zLkwkCLTEeSZzIjuVvvPYA" association="_PzB5MCLUEeSZzIjuVvvPYA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_PzBSISLUEeSZzIjuVvvPYA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_PzBSIiLUEeSZzIjuVvvPYA" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_daIBACLUEeSZzIjuVvvPYA" name="count">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_pkVUECLUEeSZzIjuVvvPYA" name="parent" type="_BdnIQCLTEeSZzIjuVvvPYA" association="_pkWiMCLUEeSZzIjuVvvPYA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_pkVUESLUEeSZzIjuVvvPYA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_pkVUEiLUEeSZzIjuVvvPYA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_17WUECLUEeSZzIjuVvvPYA" name="arguments" type="_GAv8QCLTEeSZzIjuVvvPYA" association="_17XiMCLUEeSZzIjuVvvPYA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_17WUESLUEeSZzIjuVvvPYA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_17WUEiLUEeSZzIjuVvvPYA" value="*"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_GAv8QCLTEeSZzIjuVvvPYA" name="AbstractDatum" isAbstract="true">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_k5NMQCLVEeSZzIjuVvvPYA" name="type" isDerived="true">
+      <type xmi:type="uml:Class" href="../../org.eclipse.qvt/model/uml/EMOF.uml#Type"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_4qOfsCLVEeSZzIjuVvvPYA" name="domain">
+      <type xmi:type="uml:Class" href="../../org.eclipse.qvt/model/uml/QVTCore.uml#CoreDomain"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_bgPcUCLWEeSZzIjuVvvPYA" name="parent" type="_GAv8QCLTEeSZzIjuVvvPYA" association="_bgQDYCLWEeSZzIjuVvvPYA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bgPcUSLWEeSZzIjuVvvPYA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bgPcUiLWEeSZzIjuVvvPYA" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_JgdkYCLTEeSZzIjuVvvPYA" name="A_abstractAction_abstractDatum_1" memberEnd="_JgeLcCLTEeSZzIjuVvvPYA _Jgc9UCLTEeSZzIjuVvvPYA" navigableOwnedEnd="_JgeLcCLTEeSZzIjuVvvPYA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_JgeLcCLTEeSZzIjuVvvPYA" name="sources" type="_BdnIQCLTEeSZzIjuVvvPYA" association="_JgdkYCLTEeSZzIjuVvvPYA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JgeLcSLTEeSZzIjuVvvPYA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JgeLciLTEeSZzIjuVvvPYA" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_Z4VKsCLTEeSZzIjuVvvPYA" name="Schedule">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_4VQnMCLTEeSZzIjuVvvPYA" name="actions" type="_BdnIQCLTEeSZzIjuVvvPYA" aggregation="composite" association="_4VROQCLTEeSZzIjuVvvPYA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4VQnMSLTEeSZzIjuVvvPYA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4VQnMiLTEeSZzIjuVvvPYA" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_8KArMCLTEeSZzIjuVvvPYA" name="datums" type="_GAv8QCLTEeSZzIjuVvvPYA" aggregation="composite" association="_8KGKwCLTEeSZzIjuVvvPYA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8KArMSLTEeSZzIjuVvvPYA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8KArMiLTEeSZzIjuVvvPYA" value="*"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_zLkwkCLTEeSZzIjuVvvPYA" name="DistinctData">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_JlJaoCLUEeSZzIjuVvvPYA" name="primaryArgument" type="_bOtL0CRUEeSbBI9cw7MTBw" association="_JlKBsCLUEeSZzIjuVvvPYA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JlJaoSLUEeSZzIjuVvvPYA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JlJaoiLUEeSZzIjuVvvPYA" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_MTepICLUEeSZzIjuVvvPYA" name="secondaryArguments" type="_bOtL0CRUEeSbBI9cw7MTBw" association="_MTkIsCLUEeSZzIjuVvvPYA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_MTepISLUEeSZzIjuVvvPYA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MTepIiLUEeSZzIjuVvvPYA" value="*"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_4VROQCLTEeSZzIjuVvvPYA" name="A_schedule_abstractAction_1" memberEnd="_4VROQSLTEeSZzIjuVvvPYA _4VQnMCLTEeSZzIjuVvvPYA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_4VROQSLTEeSZzIjuVvvPYA" name="schedule" type="_Z4VKsCLTEeSZzIjuVvvPYA" association="_4VROQCLTEeSZzIjuVvvPYA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4VROQiLTEeSZzIjuVvvPYA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4VROQyLTEeSZzIjuVvvPYA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_8KGKwCLTEeSZzIjuVvvPYA" name="A_schedule_abstractDatum_1" memberEnd="_8KGKwSLTEeSZzIjuVvvPYA _8KArMCLTEeSZzIjuVvvPYA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_8KGKwSLTEeSZzIjuVvvPYA" name="schedule" type="_Z4VKsCLTEeSZzIjuVvvPYA" association="_8KGKwCLTEeSZzIjuVvvPYA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8KGKwiLTEeSZzIjuVvvPYA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8KGKwyLTEeSZzIjuVvvPYA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_JlKBsCLUEeSZzIjuVvvPYA" name="A_distinctData_abstractDatum_1" memberEnd="_JlKBsSLUEeSZzIjuVvvPYA _JlJaoCLUEeSZzIjuVvvPYA" navigableOwnedEnd="_JlKBsSLUEeSZzIjuVvvPYA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_JlKBsSLUEeSZzIjuVvvPYA" name="primaryDistinctData" type="_shN3kCeYEeSEspNP6LpR-w" association="_JlKBsCLUEeSZzIjuVvvPYA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_JlKBsiLUEeSZzIjuVvvPYA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_JlKBsyLUEeSZzIjuVvvPYA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_MTkIsCLUEeSZzIjuVvvPYA" name="A_distinctData_abstractDatum_2" memberEnd="_MTkIsSLUEeSZzIjuVvvPYA _MTepICLUEeSZzIjuVvvPYA" navigableOwnedEnd="_MTkIsSLUEeSZzIjuVvvPYA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_MTkIsSLUEeSZzIjuVvvPYA" name="secondaryDistinctData" type="_shN3kCeYEeSEspNP6LpR-w" association="_MTkIsCLUEeSZzIjuVvvPYA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_MTkIsiLUEeSZzIjuVvvPYA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MTkIsyLUEeSZzIjuVvvPYA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_PzB5MCLUEeSZzIjuVvvPYA" name="A_abstractAction_distinctData_1" memberEnd="_PzB5MSLUEeSZzIjuVvvPYA _PzBSICLUEeSZzIjuVvvPYA" navigableOwnedEnd="_PzB5MSLUEeSZzIjuVvvPYA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_PzB5MSLUEeSZzIjuVvvPYA" name="target" type="_BdnIQCLTEeSZzIjuVvvPYA" association="_PzB5MCLUEeSZzIjuVvvPYA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_PzB5MiLUEeSZzIjuVvvPYA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_PzB5MyLUEeSZzIjuVvvPYA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_pkWiMCLUEeSZzIjuVvvPYA" name="A_abstractAction_abstractAction_1" memberEnd="_pkWiMSLUEeSZzIjuVvvPYA _pkVUECLUEeSZzIjuVvvPYA" navigableOwnedEnd="_pkWiMSLUEeSZzIjuVvvPYA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_pkWiMSLUEeSZzIjuVvvPYA" name="children" type="_BdnIQCLTEeSZzIjuVvvPYA" association="_pkWiMCLUEeSZzIjuVvvPYA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_pkWiMiLUEeSZzIjuVvvPYA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_pkWiMyLUEeSZzIjuVvvPYA" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_17XiMCLUEeSZzIjuVvvPYA" name="A_abstractAction_abstractDatum_2" isDerived="true" memberEnd="_17XiMSLUEeSZzIjuVvvPYA _17WUECLUEeSZzIjuVvvPYA" navigableOwnedEnd="_17XiMSLUEeSZzIjuVvvPYA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_17XiMSLUEeSZzIjuVvvPYA" name="targets" type="_BdnIQCLTEeSZzIjuVvvPYA" association="_17XiMCLUEeSZzIjuVvvPYA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_17XiMiLUEeSZzIjuVvvPYA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_17XiMyLUEeSZzIjuVvvPYA" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_CfLyoCLWEeSZzIjuVvvPYA" name="MappingAction">
+    <generalization xmi:type="uml:Generalization" xmi:id="_VDZUsCLWEeSZzIjuVvvPYA" general="_BdnIQCLTEeSZzIjuVvvPYA"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_w5EbECLWEeSZzIjuVvvPYA" name="mapping" association="_w5FCICLWEeSZzIjuVvvPYA">
+      <type xmi:type="uml:Class" href="../../org.eclipse.qvt/model/uml/QVTCore.uml#Mapping"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_w5EbESLWEeSZzIjuVvvPYA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_w5EbEiLWEeSZzIjuVvvPYA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_IoxKkCLXEeSZzIjuVvvPYA" name="mappingBindings">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_IoxKkSLXEeSZzIjuVvvPYA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_IoxKkiLXEeSZzIjuVvvPYA" value="*"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_bgQDYCLWEeSZzIjuVvvPYA" name="A_abstractDatum_abstractDatum_1" memberEnd="_bgQDYSLWEeSZzIjuVvvPYA _bgPcUCLWEeSZzIjuVvvPYA" navigableOwnedEnd="_bgQDYSLWEeSZzIjuVvvPYA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_bgQDYSLWEeSZzIjuVvvPYA" name="children" type="_GAv8QCLTEeSZzIjuVvvPYA" association="_bgQDYCLWEeSZzIjuVvvPYA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bgQDYiLWEeSZzIjuVvvPYA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bgQDYyLWEeSZzIjuVvvPYA" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_w5FCICLWEeSZzIjuVvvPYA" name="A_mappingAction_mapping_1" memberEnd="_w5FCISLWEeSZzIjuVvvPYA _w5EbECLWEeSZzIjuVvvPYA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_w5FCISLWEeSZzIjuVvvPYA" name="mappingAction" type="_CfLyoCLWEeSZzIjuVvvPYA" association="_w5FCICLWEeSZzIjuVvvPYA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_w5FCIiLWEeSZzIjuVvvPYA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_w5FCIyLWEeSZzIjuVvvPYA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_hMjCYCLXEeSZzIjuVvvPYA" name="ClassDatum">
+    <generalization xmi:type="uml:Generalization" xmi:id="_i-BAACLXEeSZzIjuVvvPYA" general="_GAv8QCLTEeSZzIjuVvvPYA"/>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_6u6pYCLXEeSZzIjuVvvPYA" name="realizedVariable" association="_6u7QcCLXEeSZzIjuVvvPYA">
+      <type xmi:type="uml:Class" href="../../org.eclipse.qvt/model/uml/QVTCore.uml#RealizedVariable"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_6u6pYSLXEeSZzIjuVvvPYA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_6u6pYiLXEeSZzIjuVvvPYA" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_SMY14CLXEeSZzIjuVvvPYA" name="isLoop">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_7PV14CLXEeSZzIjuVvvPYA" name="variable" association="_7PWc8CLXEeSZzIjuVvvPYA">
+      <type xmi:type="uml:Class" href="../../org.eclipse.qvt/model/uml/EssentialOCL.uml#Variable"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7PV14SLXEeSZzIjuVvvPYA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7PV14iLXEeSZzIjuVvvPYA" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_6u7QcCLXEeSZzIjuVvvPYA" name="A_classDatum_realizedVariable_1" memberEnd="_6u7QcSLXEeSZzIjuVvvPYA _6u6pYCLXEeSZzIjuVvvPYA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_6u7QcSLXEeSZzIjuVvvPYA" name="classDatum" type="_hMjCYCLXEeSZzIjuVvvPYA" association="_6u7QcCLXEeSZzIjuVvvPYA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_6u7QciLXEeSZzIjuVvvPYA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_6u7QcyLXEeSZzIjuVvvPYA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_7PWc8CLXEeSZzIjuVvvPYA" name="A_classDatum_variable_1" memberEnd="_7PWc8SLXEeSZzIjuVvvPYA _7PV14CLXEeSZzIjuVvvPYA">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_7PWc8SLXEeSZzIjuVvvPYA" name="classDatum" type="_bOtL0CRUEeSbBI9cw7MTBw" association="_7PWc8CLXEeSZzIjuVvvPYA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7PWc8iLXEeSZzIjuVvvPYA" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7PWc8yLXEeSZzIjuVvvPYA" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_bOtL0CRUEeSbBI9cw7MTBw" name="DataParameter">
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_fhLGkCRUEeSbBI9cw7MTBw" name="isLoop">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:type="uml:Property" xmi:id="_lq8hMCRUEeSbBI9cw7MTBw" name="abstractDatum" type="_hMjCYCLXEeSZzIjuVvvPYA" association="_lq9vUCRUEeSbBI9cw7MTBw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lq8hMSRUEeSbBI9cw7MTBw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lq8hMiRUEeSbBI9cw7MTBw" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_lq9vUCRUEeSbBI9cw7MTBw" name="A_dataParameter_abstractDatum_1" memberEnd="_lq9vUSRUEeSbBI9cw7MTBw _lq8hMCRUEeSbBI9cw7MTBw" navigableOwnedEnd="_lq9vUSRUEeSbBI9cw7MTBw">
+    <ownedEnd xmi:type="uml:Property" xmi:id="_lq9vUSRUEeSbBI9cw7MTBw" name="dataParameter" type="_bOtL0CRUEeSbBI9cw7MTBw" association="_lq9vUCRUEeSbBI9cw7MTBw">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lq9vUiRUEeSbBI9cw7MTBw" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lq9vUyRUEeSbBI9cw7MTBw" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_shN3kCeYEeSEspNP6LpR-w" name="ClassData">
+    <generalization xmi:type="uml:Generalization" xmi:id="_xKyDsCeYEeSEspNP6LpR-w" general="_zLkwkCLTEeSZzIjuVvvPYA"/>
+  </packagedElement>
+</uml:Model>

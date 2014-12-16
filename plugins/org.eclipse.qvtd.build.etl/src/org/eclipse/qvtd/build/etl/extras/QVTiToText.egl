@@ -1,0 +1,104 @@
+[%
+for (i in QVTi!TypedModel.all()) {
+    for (p in i.usedPackage) { %]
+import [%=p.name.firstToUpperCase()%]: '[%=p.nsURI%]';
+[%
+    }
+}
+for (t in QVTi!Transformation.all()) {%]
+
+transformation [%=t.name %] {
+[%  for (mp in t.modelParameter) { %]
+    [%=mp.name%] imports [%=mp.usedPackage.collect(up | up.name.firstToUpperCase()).concat(",")%]; 
+[%  }%]
+}
+[%
+    for (r in t.rule) { 
+        r.declaration(t);
+    }
+} 
+
+operation QVTi!Mapping declaration(t : QVTi!Transformation) {%]
+
+map [%if (self.name.isDefined()){%][%=self.name%] in [%=t.name%][%}%] {[%
+    for (d in self.domain) {
+        var domainName = "";
+        if (d.isCheckable) { domainName = "check ";}
+        if(d.isEnforceable) { domainName = domainName + "enforce ";}
+        domainName = domainName + d.name;%]
+        
+    [%=domainName%][%=d.patterns()%][%
+    }%]
+    
+    where[%=self.patterns()%]
+    [%if(self.mappingStatement.isDefined()) {%]
+[%=printMS(self.mappingStatement)%]
+    [%}%]
+}
+[%
+}
+
+operation QVTi!Area patterns() {%]
+ ([%
+        if (not self.guardPattern.variable.isEmpty()) {
+            for (v in self.guardPattern.variable){%]
+[%=v.name+":"+v.type.name%][%if(hasMore){%],
+[%out.print("        ");}%]
+[%          }
+        }  
+        if (not self.guardPattern.predicate.isEmpty()) {
+            for (p in self.guardPattern.predicate){%]
+[%=p.toString()%];
+[%if(hasMore){%]
+[%out.print("        ");}%]
+[%}}%]
+    ) {
+[%
+        if (not self.bottomPattern.realizedVariable.includingAll(self.bottomPattern.variable).isEmpty()) {
+            for (v in self.bottomPattern.variable){%]
+        [%=v.name+":"+v.type.name%][%if(hasMore){%],
+        [%}
+            }
+            for (v in self.bottomPattern.realizedVariable){%]
+        [%="realize "+v.name+":"+v.type.name%][%if(hasMore){%],
+        [%}%]
+[%          }
+        }
+        if (not self.bottomPattern.predicate.isEmpty()) {
+            for (p in self.bottomPattern.predicate){%]
+        
+        [%=p.toString()%];[%
+            }
+        }
+        if (not self.bottomPattern.assignment.isEmpty()) {
+            for (p in self.bottomPattern.assignment){%]
+        
+        [%=p.toString()%];[%
+            }
+        }%]
+    }[%   
+}
+
+operation printMS(call : QVTi!MappingCall) {%]
+call [%=call.referredMapping.name%] {
+    [% for (b in call.binding) {%]
+            [%=b.boundVariable.name%]:= [%=b.value.toString()%]; 
+    [%}%]
+        }
+[%}
+
+operation printMS(seq : QVTi!MappingSequence) {
+    for (ms in seq.mappingStatements) {
+        printMS(ms);
+    }
+}
+
+operation printMS(loop : QVTi!MappingLoop) {%]
+
+    for [%=loop.iterator.first().name%] in [%=loop.source.toString()%] {
+        [%if(loop.body.isDefined()) {%]
+        [%=printMS(loop.body)%]
+        [%}%]
+    }
+   [%
+}%]

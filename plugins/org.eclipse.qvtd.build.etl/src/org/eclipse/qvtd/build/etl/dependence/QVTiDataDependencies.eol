@@ -1,0 +1,497 @@
+/******************************************************************************
+ * Copyright (c) 2013 The University of York and Willink Transformations.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
+import "../helpers/DataDependenceGraphHelpers.eol";
+import "../helpers/Math.eol";
+
+/****l* /org.eclipse.qvtd.build.etl/dependence/QVTiDataDependencies
+ * NAME
+ *  QVTiDataDependencies.eol -- A set of EOL operations to perform mapping data
+ * dependence analysis for a QVTi transformation.
+ *
+ * SEE ALSO
+ *
+ ******
+ */
+
+/****o* org.eclipse.qvtd.build.etl/dependence/QVTiDataDependencies/mappingDataDependencies
+ * NAME
+ *  mappingDataDependencies - Analysis of the data dependencies of mappings.
+ * FUNCTION
+ *  Creates a scheduling model to store the data dependencies between mappings
+ *  in the transformation.
+ *
+ * CONTEXT
+ *  QVT!Transformation  The transformation being analyzed
+ * PARAMETERS
+ *  graph The graph to populate
+ *  inputVarMap   The map of mapings to input variables
+ *  outputVarMap  The map of mapings to output variables
+ * SEE ALSO
+ *
+ */
+operation QVT!Transformation mappingDataDependencies(graph : ddg!Graph, inputVarMap : Map, outputVarMap : Map, dataTypeAssignments : Map) {
+    var ruleMap : Map;      // Cache nodes for mappings nodes (AST, graph!Node)
+    var varMap : Map;       // Cache nodes for mappings nodes (AST, graph!Node)
+    var assgMap : Map;      // Cache nodes for DataType assignemnt nodes (Sequence, graph!Node)
+
+    for (r in self.rule.select(r | not r.context.isDefined())) {
+        var ruleNode = graph.getNodeForQvtAstNode(r, ruleMap).first();
+        varMap.clear();
+        assgMap.clear();
+        //r.println();
+	    // Input variables relations
+	    for (vA in inputVarMap.get(r)) {
+	        //vA.println("vA ");
+	        for (vaNode in  graph.getNodeForQvtAstNode(vA, varMap)) {
+	            var e = graph.owningModel().createInstance("DependencyEdge");
+	            //var vaNode = graph.getNodeForQvtAstNode(vA, varMap);
+	            e.source = vaNode;
+	            e.target = ruleNode;
+	            e.direction = ddg!DependencyDirection#input;
+	            graph.elements.add(e);
+	        }
+	        vA.variableRelations(graph, inputVarMap.get(r).excluding(vA), varMap);
+	    }
+	    // Output variables relations
+	    for (vA in outputVarMap.get(r)) {
+	        //vA.println("vA ");
+	        for (vaNode in  graph.getNodeForQvtAstNode(vA, varMap)) {
+		        //var vaNode = graph.getNodeForQvtAstNode(vA, varMap);
+		        var e = graph.owningModel().createInstance("DependencyEdge");
+		        e.source = ruleNode;
+		        e.target = vaNode;
+		        e.direction = ddg!DependencyDirection#output;
+		        graph.elements.add(e);
+
+		    }
+		    vA.variableRelations(graph, outputVarMap.get(r).excluding(vA), varMap);
+	    }
+        // Input to Output variable relations
+	    for (vIn in inputVarMap.get(r)) {
+	        vIn.variableRelations(graph, outputVarMap.get(r), varMap);
+	    }
+	    // DataType assignments treatd as outputs
+	    if (not dataTypeAssignments.get(r).isEmpty()) {
+            var dtNode = graph.getNodeForDataType(dataTypeAssignments.get(r), assgMap);
+	        var e = graph.owningModel().createInstance("DependencyEdge");
+            e.source = ruleNode;
+            e.target = dtNode;
+            e.direction = ddg!DependencyDirection#output;
+            graph.elements.add(e);
+	    }
+	    // Find DataType Uses, treated as inputs
+        for (r2 in self.rule.select(r | not r.context.isDefined()).excluding(r)) {
+            if (not dataTypeAssignments.get(r2).isEmpty()) {
+                var value = dataTypeAssignments.get(r2);
+                if (r.hasDataTypeUse(value)) {
+                    var dtNode = graph.getNodeForDataType(value, assgMap);
+                    if (not graph.elements.exists(e : ddg!DependencyEdge | e.source == dtNode and e.target==ruleNode)) {
+                        var e = graph.owningModel().createInstance("DependencyEdge");
+	                    e.source = dtNode;
+	                    e.target = ruleNode;
+	                    e.direction = ddg!DependencyDirection#input;
+	                    graph.elements.add(e);
+                    }
+                }
+	        }
+	    }
+	}
+}
+
+
+/****o* org.eclipse.qvtd.build.etl/dependence/QVTiDataDependencies/mergedMappingDataDependencies
+ * NAME
+ *  mergedMappingDataDependencies - Merge the data dependencies of mappings.
+ * FUNCTION
+ *  The merged dependencies merges all the dependencies contained in the data
+ *  dependencies graph. Reference edges are removed.
+ *
+ * CONTEXT
+ *  ddg!Graph  The data dependencies graph being merged
+ * PARAMETERS
+ *  mergeGraph The graph (merged) to populate
+ *  containmentTrees   The map of domains (metamodels) and their containment trees
+ * SEE ALSO
+ *  org.eclipse.qvtd.build.etl/dependence/QVTiDataDependencies/mappingDataDependencies
+ */
+operation ddg!Graph mergedMappingDataDependencies(mergeGraph : ddg!Graph, containmentTrees : Map) {
+
+    // Import the tree nodes to the merged graph
+    var mergeMap : Map;  // //!< Cache nodes for nodes (AST, graph!Node)(x, Node)
+    for(key in containmentTrees.keySet()) {
+        mergeGraph.importContainmentTree(containmentTrees.get(key), key, mergeMap);
+    }
+    for (m in self.elements.select(n: ddg!MappingNode | true).sortBy(n | n.incoming.size())) {
+	    var outputVarNodes = m.outgoing.collect(e | e.target).flatten();
+	    var inputVarNodes = m.incoming.collect(e | e.source).flatten();
+
+	    // For each variable, find the corresponding type in the domain containment tree
+	    // and make the connection. For input variables, if the type is abstrac (does
+	    //  not exist in the tree), connect it to all its subtypes.
+	    var mappingNode = mergeGraph.getNodeCopy(m, mergeMap);
+	    for (vN in inputVarNodes) {
+	        var sources = new Sequence;
+            // Search in containment tree
+            for(key in containmentTrees.keySet()) {
+                sources = containmentTrees.get(key).select(n | (n.EClassName == vN.label) or n.superTypes.includes(vN.label));
+                if (not sources.isEmpty()) {
+                    break;
+                }
+            }
+	        if (sources.isEmpty()) {
+                //vN.println("vN Empty ");
+	            if (vN.isTypeOf(ddg!DataTypeNode)) {
+	                var n = mergeGraph.elements.selectOne(n : ddg!DataTypeNode | n.label = vN.label and n.type = vN.type);
+	                if (n == null) {
+	                    n = mergeGraph.owningModel().createInstance("DataTypeNode");
+	                    n.label = vN.label;
+                        n.type = vN.type;
+                        n.attribute = vN.attribute;
+                        mergeGraph.element.add(n);
+	                }
+	                var e = mergeGraph.owningModel().createInstance("DependencyEdge");
+                    e.direction = ddg!DependencyDirection#input;
+                    e.source = n;
+                    e.target = mappingNode;
+                    mergeGraph.elements.add(e);
+                } else {
+                    vN.errln("mergedMappingDataDependencies Not valid type found for input: "); // Error. WE should never get here!
+                }
+	        } else {
+	            for (s in sources) {
+	                var e = mergeGraph.owningModel().createInstance("DependencyEdge");
+	                // If there is another edge to the input, is a double input
+	                e.multiple = mergeGraph.elements.exists(e : ddg!Edge| e.source == mergeMap.get(s) and e.target == mappingNode);
+	                e.direction = ddg!DependencyDirection#input;
+	                e.source = mergeMap.get(s);
+	                e.target = mappingNode;
+	                mergeGraph.elements.add(e);
+                }
+	        }
+	    }
+	    for (vN in outputVarNodes) {
+	        var targets = new Sequence;
+            for(key in containmentTrees.keySet()) {
+                targets = containmentTrees.get(key).select(n | (n.EClassName == vN.label));
+                if (not targets.isEmpty()) {
+                    break;
+                }
+            }
+	        if (targets.isEmpty()) {
+	            if (vN.isTypeOf(ddg!DataTypeNode)) {
+                    var n = mergeGraph.elements.selectOne(n : ddg!DataTypeNode | n.label = vN.label and n.type = vN.type);
+                    if (n == null) {
+                        n = mergeGraph.owningModel().createInstance("DataTypeNode");
+                        n.label = vN.label;
+                        n.type = vN.type;
+                        n.attribute = vN.attribute;
+                        mergeGraph.elements.add(n);
+                    }
+                    var e = mergeGraph.owningModel().createInstance("DependencyEdge");
+                    e.direction = ddg!DependencyDirection#output;
+                    e.source = mappingNode;
+                    e.target = n;
+                    mergeGraph.elements.add(e);
+                } else {
+                    vN.errln("mergedMappingDataDependencies Not valid type found for output: ");    // Error. WE should never get here!
+                }
+	        } else {
+	            for (t in targets) {
+	                var e = mergeGraph.owningModel().createInstance("DependencyEdge");
+	                e.source = mappingNode;
+	                e.target = mergeMap.get(t);
+	                e.direction = ddg!DependencyDirection#output;
+	                mergeGraph.elements.add(e);
+	            }
+	        }
+
+	    }
+	}
+}
+
+
+/****o* org.eclipse.qvtd.build.etl/dependence/QVTiDataDependencies/reducedMergedMappingDataDependencies
+ * NAME
+ *  reducedMergedMappingDataDependencies - Do a reduction of data dependencies
+ *  to identify derivable variables .
+ * FUNCTION
+ *  Reduced [merged] data dependencies of mappings. The reduced dependencies
+ *  takes the same considerations as the merged data dependencies and
+ *  additionally analyses the maping predicates to identfy variables that can
+ *  be derived from other variables.
+ *
+ *  All outgoing edges in the data dependence graph are navigable, hence all
+ *  targets of such edges are derivable. For incoming edges, it is necesary to
+ *  analyze the relation represented by the edge and identify navigable
+ *  opposites (upper bound = 1).
+ * CONTEXT
+ *  ddg!Graph   The data dependence graph
+ * PARAMETERS
+ *  reduceGraph The graph to populate
+ *  containmentTrees The containment trees of the candidate and middle meta-
+ *  models
+ * RESULT
+ *  A graph representing the reduced dependencies
+ * SEE ALSO
+ *
+ */
+operation ddg!Graph reducedMergedMappingDataDependencies(reduceGraph : ddg!Graph, containmentTrees : Map) {
+    // Import the tree nodes to the merged graph
+    var mergeMap : Map;  // //!< Cache nodes for nodes (AST, graph!Node)(x, Node)
+    for(key in containmentTrees.keySet()) {
+        reduceGraph.importContainmentTree(containmentTrees.get(key), key, mergeMap);
+    }
+    for (m in self.elements.select(n: ddg!MappingNode | true).sortBy(n | n.incoming.size())) {
+        //m.println("Map ");
+        var inputVarNodes = m.incoming.collect(e | e.source).flatten();
+        // For each input node, get the set of variables that can be derived from it.
+        var derivedVars = new Map;
+        for (vN in inputVarNodes) {
+            var derived = new Sequence;
+            // We have to save both the variable and the relation
+            derived.addAll(vN.outgoing.select(e | inputVarNodes.includes(e.target)).collect(e | e.target));
+
+            for (ie in vN.incoming) {
+                if (ie.referredProperty.getOpposite().isDefined() and not ie.referredProperty.getOpposite().isMany()) {
+                    derived.add(ie.source);
+                }
+            }
+            derivedVars.put(vN, derived);
+        }
+        // Now find the variable that provides the most derived variables = the union of
+        // its derived variables and the ones that can be derived from them.
+        var derivedVarsUnion = new Map;
+        for (key in derivedVars.keySet()) {
+            var derivedUnion = new Sequence;
+            derivedUnion.addAll(derivedVars.get(key));
+            for (d in derivedVars.get(key)) {
+                for (du in derivedVars.get(d)) {
+                    if (du <> key) {
+                        derivedUnion.add(du);
+                    }
+                }
+            }
+            derivedVarsUnion.put(key, derivedUnion);
+        }
+        // Get the set cover from the derived variables union. The reslut are the direct
+        // inputs and the respective derived variables, derived.
+        var mappingNode = reduceGraph.getNodeCopy(m, mergeMap);
+
+        //inputVarNodes.println();
+        var C = greedySetCover(inputVarNodes.clone(), derivedVarsUnion);
+
+        //C.collect(c | c.label).println("cover set ");
+        //inputVarNodes.println();
+        var sources : Sequence;
+        for (vN in inputVarNodes) {
+            for(key in containmentTrees.keySet()) {
+                sources = containmentTrees.get(key).select(n | (n.EClassName == vN.label) or n.superTypes.includes(vN.label));
+                if (not sources.isEmpty()) {
+                    break;
+                }
+            }
+            if (sources.isEmpty()) {
+               if (vN.isTypeOf(ddg!DataTypeNode)) {
+                    var n = reduceGraph.elements.selectOne(n : ddg!DataTypeNode | n.label = vN.label and n.type = vN.type);
+                    if (n == null) {
+                        n = reduceGraph.owningModel().createInstance("DataTypeNode");
+                        n.label = vN.label;
+                        n.type = vN.type;
+                        n.attribute = vN.attribute;
+                        reduceGraph.elements.add(n);
+                    }
+                    var e = reduceGraph.owningModel().createInstance("DependencyEdge");
+                    e.direction = ddg!DependencyDirection#input;
+                    e.source = n;
+                    e.target = mappingNode;
+                    reduceGraph.elements.add(e);
+                } else {
+                    vN.errln("reducedMergedMappingDataDependencies Not valid type found for input: "); // Error. WE should never get here!
+                }
+            } else {
+                for (s in sources) {
+                    var e = reduceGraph.owningModel().createInstance("DependencyEdge");
+                    // If there is another edge to the input, is a double input
+                    e.multiple = reduceGraph.elements.exists(e : ddg!Edge| e.source == mergeMap.get(s) and e.target == mappingNode);
+                    e.direction = ddg!DependencyDirection#input;
+                    e.derived = not C.exists(c | c == vN);
+                    e.source = mergeMap.get(s);
+                    e.target = mappingNode;
+                    reduceGraph.elements.add(e);
+                }
+            }
+
+        }
+        for (vN in m.outgoing.collect(e | e.target).flatten()) {
+            var targets : Collection;
+            for(key in containmentTrees.keySet()) {
+                targets = containmentTrees.get(key).select(n | (n.EClassName == vN.label));
+                if (not targets.isEmpty()) {
+                    break;
+                }
+            }
+            if (targets.isEmpty()) {
+                if (vN.isTypeOf(ddg!DataTypeNode)) {
+                    var n = reduceGraph.elements.selectOne(n : ddg!DataTypeNode | n.label = vN.label and n.type = vN.type);
+                    if (n == null) {
+                        n = reduceGraph.owningModel().createInstance("DataTypeNode");
+                        n.label = vN.label;
+                        n.type = vN.type;
+                        n.attribute = vN.attribute;
+                        reduceGraph.elements.add(n);
+                    }
+                    var e = reduceGraph.owningModel().createInstance("DependencyEdge");
+                    e.direction = ddg!DependencyDirection#output;
+                    e.source = mappingNode;
+                    e.target = n;
+                    reduceGraph.elements.add(e);
+                } else {
+                    vN.errln("reducedMergedMappingDataDependencies Not valid type found for output: ");    // Error. WE should never get here!
+                }
+            } else {
+                for (t in targets) {
+                    var e = reduceGraph.owningModel().createInstance("DependencyEdge");
+                    e.direction = ddg!DependencyDirection#output;
+                    e.source = mappingNode;
+                    e.target = mergeMap.get(t);
+                    reduceGraph.elements.add(e);
+                }
+            }
+        }
+    }
+}
+
+/****o* org.eclipse.qvtd.build.etl/dependence/QVTiDataDependencies/reducedMergedMappingDataDependencies
+ * NAME
+ *  reducedMergedMappingDataDependencies - Do a reduction of data dependencies
+ *  to identify derivable variables .
+ * FUNCTION
+ *  Reduced [merged] data dependencies of mappings. The reduced dependencies
+ *  takes the same considerations as the merged data dependencies and
+ *  additionally analyses the maping predicates to identfy variables that can
+ *  be derived from other variables.
+ *
+ *  All outgoing edges in the data dependence graph are navigable, hence all
+ *  targets of such edges are derivable. For incoming edges, it is necesary to
+ *  analyze the relation represented by the edge and identify navigable
+ *  opposites (upper bound = 1).
+ * CONTEXT
+ *  ddg!Graph   The data dependence graph
+ * PARAMETERS
+ *  reduceGraph The graph to populate
+ *  containmentTrees The containment trees of the candidate and middle meta-
+ *  models
+ * RESULT
+ *  A graph representing the reduced dependencies
+ * SEE ALSO
+ *
+ */
+operation ddg!Graph reducedMergedMappingDataDependencies_New() {
+
+    // Remove the duplicate Class Nodes and edges, and fix edges to mappings and other Class Nodes
+    // Merge candidate model domain Class Nodes
+    var models = Sequence {ddg!Model#input, ddg!Model#middle, ddg!Model#output};
+    for (m in models) {
+        var classNames = self.elements.select(n : ddg!ClassNode | n.`model` == m).collect(n | n.label).asSet();
+        // For each class, merge the nodes
+	    for (name in classNames) {
+	        var nodesToMerge = self.elements.select(n : ddg!ClassNode | n.`model` == m and n.label = name);
+	        //nodesToMerge.println();
+	        var nodeToKeep = nodesToMerge.first();
+	        // Redirect all Edges and delete Node
+	        for (removeNode in nodesToMerge.excluding(nodeToKeep)) {
+	            for (i in removeNode.incoming.clone()) {
+	                i.target = nodeToKeep;
+	            }
+	            for (o in removeNode.outgoing.clone()) {
+	                o.source = nodeToKeep;
+	            }
+	            self.elements.remove(removeNode);
+	        }
+	    }
+
+    }
+    // Merge DataType nodes
+    var predicates = self.elements.select(n : ddg!DataTypeNode | true).collect(n | n.label).asSet();
+    // For each class, merge the nodes
+    for (name in predicates) {
+        var nodesToMerge = self.elements.select(n : ddg!DataTypeNode | n.label = name);
+        var nodeToKeep = nodesToMerge.first();
+        // Redirect all Edges and delete Node
+        for (removeNode in nodesToMerge.excluding(nodeToKeep)) {
+            for (i in removeNode.incoming.clone()) {
+                i.target = nodeToKeep;
+            }
+            for (o in removeNode.outgoing.clone()) {
+                o.source = nodeToKeep;
+            }
+            delete removeNode;
+        }
+    }
+
+    // Delete duplicate incoming edges to Class Nodes
+    for (e in self.elements.collect(cn : ddg!ClassNode | cn.incoming.select(e : ddg!ContainmentEdge | cn.incoming.excluding(e).exists(e2 : ddg!ContainmentEdge | e.source == e2.source)))
+        .collect(s | s.collect(e | e.source).asSet().collect(l | s.select(e | e.source == l)).collect(s | s.asSet().excluding(s.asSet().first()))).flatten()) {
+
+        delete e;
+    }
+    for (e in self.elements.collect(cn : ddg!ClassNode | cn.incoming.select(e : ddg!ReferenceEdge | cn.incoming.excluding(e).exists(e2 : ddg!ReferenceEdge | e.source == e2.source)))
+        .collect(s | s.collect(e | e.source).asSet().collect(l | s.select(e | e.source == l)).collect(s | s.asSet().excluding(s.asSet().first()))).flatten()) {
+
+        delete e;
+    }
+
+    // Primary, derived and duplicate dependencies
+    for (m in self.elements.select(n: ddg!MappingNode | true).sortBy(n | n.incoming.size())) {
+        //m.println("Map ");
+        var inputVarNodes = m.incoming.collect(e | e.source).flatten();
+        // For each input node, get the set of variables that can be derived from it.
+        var derivedVars = new Map;
+        for (vN in inputVarNodes) {
+            //vN.println("vn ");
+            var derived : Sequence = vN.outgoing.select(e | not e.target.isTypeOf(ddg!MappingNode)).collect(e | e.target);
+            for (ie in vN.incoming.select(i | not i.source.isTypeOf(ddg!MappingNode))) {
+                if (ie.referredProperty.getOpposite().isDefined() and not ie.referredProperty.getOpposite().isMany()) {
+                    derived.add(ie.source);
+                }
+            }
+            //derived.collect(v | v.label).println(vN.label + ": ");
+            derivedVars.put(vN, derived);
+        }
+
+        // Now find the variable that provides the most derived variables = the union of
+        // its derived variables and the ones that can be derived from them.
+        var derivedVarsUnion = new Map;
+        for (key in derivedVars.keySet()) {
+            var derivedUnion = new Sequence;
+            derivedUnion.addAll(derivedVars.get(key));
+            for (d in derivedVars.get(key)) {
+                for (du in derivedVars.get(d)) {
+                    if (du <> key) {
+                        derivedUnion.add(du);
+                    }
+                }
+            }
+            derivedVarsUnion.put(key, derivedUnion);
+        }
+        // Get the set cover from the derived variables union. The reslut are the direct
+        // inputs and the respective derived variables, derived.
+        // TODO This might in fact not be required for scheduling.
+        var coverSet = greedySetCover(inputVarNodes.clone(), derivedVarsUnion);
+        for (e in m.incoming) {
+            // If there is another edge to the input, is a double input
+            e.multiple = m.incoming.excluding(e).exists(i | e.source == i.source and not i.multiple) ;
+            e.derived = not coverSet.exists(c | c == e.source);
+        }
+    }
+
+
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ASCII"?>
+<qvtschedule:Schedule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvtschedule="http://www.eclipse.org/qvt/0.1/QVTschedule/">
+  <actions xsi:type="qvtschedule:MappingAction" parent="//@actions.4">
+    <distinctArguments>
+      <primaryArguments>
+        <variable href="HSV2HLS.qvtp.qvtias#qV.hsv2hls.HSV2HLSRoot_MR.middle.guard.middleRoot"/>
+      </primaryArguments>
+    </distinctArguments>
+    <mapping href="HSV2HLS.qvtp.qvtias#m.hsv2hls.HSV2HLSRoot_MR"/>
+  </actions>
+  <actions xsi:type="qvtschedule:MappingAction" parent="//@actions.4">
+    <distinctArguments>
+      <primaryArguments>
+        <variable href="HSV2HLS.qvtp.qvtias#qV.hsv2hls.HSV2HLSRoot_LM.hsv.guard.hsvRoot"/>
+      </primaryArguments>
+    </distinctArguments>
+    <mapping href="HSV2HLS.qvtp.qvtias#m.hsv2hls.HSV2HLSRoot_LM"/>
+  </actions>
+  <actions xsi:type="qvtschedule:MappingAction" parent="//@actions.4">
+    <distinctArguments>
+      <primaryArguments>
+        <variable href="HSV2HLS.qvtp.qvtias#qV.hsv2hls.HSV2HLSRecursion_MR.middle.guard.middleNode"/>
+      </primaryArguments>
+      <secondaryArguments>
+        <variable href="HSV2HLS.qvtp.qvtias#qV.hsv2hls.HSV2HLSRecursion_MR.middle.guard.middleParent"/>
+      </secondaryArguments>
+      <secondaryArguments>
+        <variable href="HSV2HLS.qvtp.qvtias#qV.hsv2hls.HSV2HLSRecursion_MR.hls.guard.hlsParent"/>
+      </secondaryArguments>
+    </distinctArguments>
+    <mapping href="HSV2HLS.qvtp.qvtias#m.hsv2hls.HSV2HLSRecursion_MR"/>
+  </actions>
+  <actions xsi:type="qvtschedule:MappingAction" parent="//@actions.4">
+    <distinctArguments>
+      <primaryArguments>
+        <variable href="HSV2HLS.qvtp.qvtias#qV.hsv2hls.HSV2HLSRecursion_LM.middle.guard.middleParent"/>
+      </primaryArguments>
+    </distinctArguments>
+    <distinctArguments>
+      <primaryArguments>
+        <variable href="HSV2HLS.qvtp.qvtias#qV.hsv2hls.HSV2HLSRecursion_LM.hsv.guard.hsvNode"/>
+      </primaryArguments>
+      <secondaryArguments>
+        <variable href="HSV2HLS.qvtp.qvtias#qV.hsv2hls.HSV2HLSRecursion_LM.hsv.guard.hsvParent"/>
+      </secondaryArguments>
+    </distinctArguments>
+    <mapping href="HSV2HLS.qvtp.qvtias#m.hsv2hls.HSV2HLSRecursion_LM"/>
+  </actions>
+  <actions xsi:type="qvtschedule:MappingAction" children="//@actions.0 //@actions.1 //@actions.2 //@actions.3">
+    <mapping href="HSV2HLS.qvtp.qvtias#m.hsv2hls.__root__"/>
+  </actions>
+</qvtschedule:Schedule>

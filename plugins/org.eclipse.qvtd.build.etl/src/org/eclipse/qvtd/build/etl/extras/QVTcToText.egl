@@ -1,0 +1,96 @@
+[% for (i in qvtm!TypedModel.all()) { %]
+    [% for (p in i.usedPackage) { %]
+import [%=p.name.firstToUpperCase()%]: '[%=p.nsURI%]';
+    [% } %]
+[% } %]
+
+[% for (t in qvtm!Transformation.all()) { %]
+transformation [%=t.name %] {
+    [% for (mp in t.modelParameter) { %]
+    [%=mp.name%] imports [%=mp.usedPackage.collect(up | up.name.firstToUpperCase()).concat(",")%]; 
+    [%}%]
+}
+[% for (r in t.rule) { 
+r.declaration(t); 
+}
+}%]
+
+[% operation Mapping declaration(t) { %]
+map [%if (self.name.isDefined()){%][%=self.name%] in [%=t.name%][%}%] {
+[% for (d in self.domain) {
+    var domainName = "";
+    if (d.isCheckable) { domainName = "check ";}
+    if(d.isEnforceable) { domainName = domainName + "enforce ";}
+    domainName = domainName + d.name;%]
+    [%=domainName%] ([%
+    if (not d.guardPattern.variable.isEmpty()) {
+        for (v in d.guardPattern.variable){%]
+[%=v.name+":"+v.type.name%][%if(hasMore){%],
+[%out.print("        ");}%]
+      [%}%] |[%
+    }  
+    if (not d.guardPattern.predicate.isEmpty()) {
+        for (p in d.guardPattern.predicate){%]
+        
+        [%=p.toString()%];[%
+        }
+    }%]) {
+    [%
+    if (not d.bottomPattern.realizedVariable.includingAll(d.bottomPattern.variable).isEmpty()) {
+        for (v in d.bottomPattern.variable){%]
+        [%=v.name+":"+v.type.name%][%if(hasMore){%],[%}
+        }
+        for (v in d.bottomPattern.realizedVariable){%]
+        [%="realize "+v.name+":"+v.type.name%][%if(hasMore){%],[%}%]
+      [%}%] |[%
+    }
+    if (not d.bottomPattern.predicate.isEmpty()) {
+        for (p in d.bottomPattern.predicate){%]
+        
+        [%=p.toString()%];[%
+        }
+    }
+    if (not d.bottomPattern.assignment.isEmpty()) {
+        for (p in d.bottomPattern.assignment){%]
+        
+        [%=p.toString()%];[%
+        }
+    }%]
+    }
+    [%
+}%]
+    where ([%
+    if (not self.guardPattern.variable.isEmpty()) {
+        for (v in self.guardPattern.variable){%]
+[%=v.name+":"+v.type.name%][%if(hasMore){%],
+[%out.print("        ");}%]
+      [%}%] |[%
+    }  
+    if (not self.guardPattern.predicate.isEmpty()) {
+        for (p in self.guardPattern.predicate){%]
+        
+        [%=p.toString()%];[%
+        }
+    }%]) {
+    [%
+    for (v in self.bottomPattern.variable){%]
+        [%=v.name+":"+v.type.name%][%if(hasMore){%],[%}
+    }
+    for (v in self.bottomPattern.realizedVariable){%]
+        [%="realize "+v.name+":"+v.type.name%][%if(hasMore){%],[%}%]
+    [%}%]   |[%
+    if (not self.bottomPattern.predicate.isEmpty()) {
+        for (p in self.bottomPattern.predicate){%]
+        
+        [%=p.toString()%];[%
+        }
+    }
+    if (not self.bottomPattern.assignment.isEmpty()) {
+        for (p in self.bottomPattern.assignment){%]
+        
+        [%=p.toString()%];[%
+        }
+    }%]}
+}
+    
+[%}%]

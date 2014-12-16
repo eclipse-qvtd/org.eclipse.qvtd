@@ -1,0 +1,109 @@
+/** 
+ * Returns the tranformation of a mapping. Does a bottom up recursive search
+ */
+operation QVT!Mapping getTransforamtion() : QVT!Transformation {
+    if (self.transformation.isDefined()) {
+        return self.transformation;
+    } else if (self.context.isDefined()) {
+        return self.context.getTransforamtion();
+    } else {
+        self.err("Cotextless mapping ");
+    }
+}
+ /* this can be getAllPatterns, see how is is called for all atributes with super classes */
+@cached
+operation QVT!Area getContextMappingPatterns() : Sequence {
+
+    var mapping;
+    if (self.isTypeOf(QVT!CoreDomain)) {
+        mapping = self.rule;
+    } else if (self.isTypeOf(QVT!Mapping)) {
+        mapping = self;
+    }
+    var searchPatterns = new Sequence;
+    if (mapping.context.isDefined()) {
+        searchPatterns.addAll(mapping.context.domain.collect(d | d.guardPattern).flatten());
+        searchPatterns.addAll(mapping.context.domain.collect(d | d.bottomPattern).flatten());
+        searchPatterns.add(mapping.context.guardPattern);
+        searchPatterns.add(mapping.context.bottomPattern);
+        searchPatterns.addAll(mapping.context.getContextMappingPatterns());
+    }
+    return searchPatterns;
+
+}
+
+/****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/getInputVars
+ * NAME
+ *  getInputVars - Returns the input variables of the Mapping, excluding DataType
+ *  variables
+ *
+ * CONTEXT
+ *  QVT!Rule  The mapping
+ * ANNOTATIONS
+ *  cached
+ * SEE ALSO
+ *  /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/getOutputVars
+ */
+@cached
+operation QVT!Rule getInputVars() : Sequence {
+    
+    var vars: Sequence;
+    vars = self.guardPattern.variable
+        .includingAll(self.domain.collect(d | d.guardPattern).flatten().collect(gp | gp.variable).flatten()
+        .select(v | not v.type.isTypeOf(QVT!PrimitiveType))).asSequence();
+    //for (l in self.local) {
+    //    vars = vars.includingAll(l.getInputVars());
+    //}
+    // QVTc, QVTu, QVTm: Do the same for all refined rules
+    //for (r in self.refinement) {
+    //    vars = vars.includingAll(r.getInputVars());
+    //}
+    return vars;
+}
+
+@cached
+operation QVT!Rule getOutputVars() : Sequence {
+    
+    var vars: Sequence;
+    vars = self.bottomPattern.realizedVariable
+        .includingAll(self.domain.collect(d | d.bottomPattern).flatten().collect(gp | gp.realizedVariable).flatten()
+        .select(v | not v.type.isTypeOf(QVT!PrimitiveType))).asSequence();
+    //for (l in self.local) {
+    //    vars = vars.includingAll(l.getInputVars());
+    //}
+    // QVTc, QVTu, QVTm: Do the same for all refined rules
+    //for (r in self.refinement) {
+    //    vars = vars.includingAll(r.getInputVars());
+    //}
+    return vars;
+}
+
+ /* Added the commented code to add it to QVTc model */
+@cached
+operation QVT!Mapping getAllAssignments() : Sequence {
+    var asgs : Sequence;
+    asgs.addAll(self.bottomPattern.assignment);
+    for (d in self.domain) {
+        asgs.addAll(d.bottomPattern.assignment);
+    }
+    //for (l in self.local) {
+    //    asgs.addAll(l.getAllAssignments());
+    //}
+    return asgs;
+}
+
+/* Added the commented code to add it to QVTc model */
+@cached
+operation QVT!Mapping getAllPredicates() : Sequence {
+    var pdcts : Sequence;
+    pdcts.addAll(self.bottomPattern.predicate);
+    pdcts.addAll(self.guardPattern.predicate);
+    for (d in self.domain) {
+        pdcts.addAll(d.bottomPattern.predicate);
+        pdcts.addAll(d.guardPattern.predicate);
+    }
+    //for (l in self.local) {
+    //    pdcts.addAll(l.getAllPredicates());
+    //}
+    return pdcts;
+}

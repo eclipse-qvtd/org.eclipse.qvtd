@@ -1,0 +1,44 @@
+/*******************************************************************************
+ * Copyright (c) 2013 The University of York and Willink Transformations.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
+// =========  OCL Lib queries ================
+
+/**
+ * Returns the operation of the given name that belongs to the given type. 
+ * <p>
+ * The operation is @chached to improve performance.
+ *
+ * @param name the name of the operation
+ * @param owningType the type to which the operation belongs
+ */
+operation oclStdLib!Class getOperationByName(name : String) : oclStdLib!Operation {
+	return self.ownedOperation.selectOne(o | o.name == name);
+}
+
+operation getPrimitiveTypeByName(name : String) : oclStdLib!PrimitiveType {
+    return oclStdLib!PrimitiveType.all.selectOne(t | t.name == name);
+}
+
+operation getClassByName(name : String) : oclStdLib!Class {
+    return oclStdLib!Class.all().selectOne(c | c.name == name);
+} 
+
+// HACK There must be a "correct" way to acces the OCL Std Library!
+@cached
+operation getOclAnyEqualsOp() : Any {
+    return oclStdLib.getElementById("T.ocl.OclAny").ownedOperation.selectOne(op | op.name == "=");
+}
+
+// HACK There must be a "correct" way to acces the OCL Std Library!
+@cached
+operation getOclElementAllInstancesOp() : Any {
+    return oclStdLib.getElementById("T.ocl.OclElement").ownedOperation.selectOne(op | op.name == "allInstances");
+}
+

@@ -15,9 +15,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.ocl.pivot.internal.impl.ClassImpl;
-import org.eclipse.ocl.pivot.internal.impl.TypedElementImpl;
-
+import org.eclipse.ocl.pivot.TypedElement;
+//import org.eclipse.ocl.pivot.impl.ClassImpl;
 
 /**
 * The Class PivotUtil. Provides helper methods for analysing pivot model elements
@@ -33,9 +32,9 @@ public class PivotUtil {
     * @param vars the variables
     * @return The lowest ranking variable
     */
-    public TypedElementImpl getLowestRankVariable(Set<TypedElementImpl> vars) {
+    public TypedElement getLowestRankVariable(Set<TypedElement> vars) {
 
-        return getLowestRankVariable(new ArrayList<TypedElementImpl>(vars));
+        return getLowestRankVariable(new ArrayList<TypedElement>(vars));
     }
 
     
@@ -46,28 +45,40 @@ public class PivotUtil {
      * @param vars the variables
      * @return The lowest rank variable
      */
-    public TypedElementImpl getLowestRankVariable(List<TypedElementImpl> vars) {
+    public TypedElement getLowestRankVariable(List<TypedElement> vars) {
 
-        TypedElementImpl min = vars.get(0);
-        EStructuralFeature typeFeat = min.eClass().getEStructuralFeature("type");
-        ClassImpl minType = null;
+        TypedElement min = vars.get(0);
+    	EStructuralFeature typeFeat = min.eClass().getEStructuralFeature("type");
+        org.eclipse.ocl.pivot.Class minType = null;
         for(int i = 1; i < vars.size(); ++i) {
-            minType = (ClassImpl) min.eGet(typeFeat);
-            if (((ClassImpl)vars.get(i).eGet(typeFeat)).getSuperClasses().contains(minType)) {
+            minType = (org.eclipse.ocl.pivot.Class) min.eGet(typeFeat);
+            if (((org.eclipse.ocl.pivot.Class)vars.get(i).eGet(typeFeat)).getSuperClasses().contains(minType)) {
                 min = vars.get(i);
             }
         }
         // Verify that the min is actually the min, i.e. all the other variables are superiors
         // in the hierarchy
-        for (TypedElementImpl var : vars) {
+        /*for (TypedElement var : vars) {
             if (!var.equals(min)) {
+<<<<<<< HEAD
                 if (!((ClassImpl)min.eGet(typeFeat)).getSuperClasses().contains(var.eGet(typeFeat))) {
                     // Error
+=======
+                if (!((ClassImpl)min.eGet(typeFeat)).getSuperClass().contains(var.eGet(typeFeat))) {
+                	System.out.println("min is not min");
+>>>>>>> refs/remotes/origin/hhoyos/qvtr
                     return null;
                 }
             }
-        }
+        }*/
         return min;
     }
+    
+    // typeA is either equal to typeB or a subclass
+/*    public Boolean isKindOf(Type typeA, Type typeB) {
+    	//System.out.println("TypeA" + typeA);
+    	//System.out.println("TypeB" + typeB);
+    	return typeA.equals(typeB) || typeA.getSuperClass().contains(typeB);
+    } */
 
 }

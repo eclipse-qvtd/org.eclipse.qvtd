@@ -1,0 +1,118 @@
+/*******************************************************************************
+ * Copyright (c) 2014 The University of York and Willink Transformations.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
+import "../helpers/QVTHelpers.eol";
+//import "Scheduler.eol";
+ 
+/****t* /org.eclipse.qvtd.build.etl/scheduling/QVTpToSchedule
+ * NAME
+ *  QVTpToSchedule -- Craetes the base schedule from a partitioned (QVTp)
+  * transformation
+ * FUNCTION
+ *  Extract the basic Schedule information from the QVTp trnasformation. The QVTp
+ *  trasnformation must conform to QVTi. The basic schedule craetes the Class and
+ *  Parameter information but does not reduce the DistinctData information (i.e.
+ *  does not perform derivation analysis.
+ * SEE ALSO
+ *  /org.eclipse.qvtd.build.etl/scheduling/DerivationAnalysis
+ *    
+ */
+
+/****u* QVTpToSchedule/TransformationToSchedule
+ * NAME
+ *  TransformationToSchedule - Transform the trnsformation
+ * FUNCTION
+ *  Just creates the place holder for datums and actions
+ * FROM
+ *  QVTp!Transformation
+ * TO
+ *  QVTs!Schedule
+ */
+rule TransformationToSchedule
+    transform t : QVTp!Transformation
+    to s : QVTs!Schedule {
+        
+    }
+
+/****u* QVTpToSchedule/MappingToMappingAction
+ * NAME
+ *  MappingToMappingAction - A mapping genereates a mapping action and its datums
+ * FUNCTION
+ *  Visit the mapping input/ouput variables to create the appropriate results and
+ *  arguments.
+ * FROM
+ *  QVTp!Mapping
+ * TO
+ *  QVTs!MappingAction
+ */
+rule MappingToMappingAction
+    transform m : QVTp!Mapping
+    to ma : QVTs!MappingAction {
+        
+        //m.name.println();
+        ma.schedule ::= m.transformation;
+        ma.mapping = m;
+        ma.results.addAll(m.getOutputVariables().collect(v | v.type).equivalent());
+        ma.distinctArguments.addAll(m.getInputVariables().equivalents().collect(e | e.first()));
+    }
+
+/****u* QVTpToSchedule/VariableToDataParameter
+ * NAME
+ *  VariableToDataParameter - Variables and RealizedVariables are transformed
+ *  into a DistinctData and a DataParameter.
+ * FUNCTION
+ *  All Variables are treated as initialy treated as primary arguments. Analysis
+ *  of derivation is done in a later stage.
+ * FROM
+ *  QVTp!Variable
+ * TO
+ *  QVTs!DistinctData, QVTs!DataParameter
+ * ANNOTATIONS
+ *  lazy        Lazy variables from iterators and not automatically transformed
+ *  greedy      Greedy so we also transform RealizedVariables
+ */
+@lazy
+@greedy
+rule VariableToDataParameter
+    transform v : QVTp!Variable
+    to dd : QVTs!DistinctData, dp : QVTs!DataParameter {
+        
+        //v.name.println("v ");
+        dp.variable = v;
+        dp.datum ::= v.type;
+        dd.primaryArguments.add(dp);
+    }
+
+// Only types in the TypedModel pacakges and that are used by a variable
+@lazy
+@greedy
+rule TypeToDatum
+    transform t : QVTp!Type
+    to d : QVTs!ClassDatum {
+        
+        guard : QVTp!Variable.all().exists(v | v.type == t)
+        
+        var domain = t.getVariableForType().oppositePattern().area; 
+        //t.name.println("TypeToDatum ");
+        d.type = t;
+        d.super.addAll(t.superClass.equivalent());
+        d.domain = domain;
+        d.schedule ::= domain.`rule`.transformation;    
+    }
+
+@cached
+operation QVTp!Type getVariableForType() : QVTp!Variable {
+    
+    return QVTp!Variable.all().selectOne(v | v.type == self or v.type.superClass.includes(self));
+}
+
+post{
+    "QVTpToSchedule Done".println();
+}    

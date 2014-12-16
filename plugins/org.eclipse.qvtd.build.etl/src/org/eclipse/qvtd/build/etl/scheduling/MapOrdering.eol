@@ -1,0 +1,164 @@
+/*******************************************************************************
+ * Copyright (c) 2013 The University of York and Willink Transformations.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
+import "../helpers/OCLExpressionAnalysis.eol";
+
+/****l* /org.eclipse.qvtd.build.etl.scheduling/MapOrdering
+ * NAME
+ *  MapOrdering -- A set of EOL operations to perform scheduling analysys from
+ *  data dependencies
+ *
+ * MODELS
+ *  Required models to run the script:
+ *      - NAME      ALIASES METAMODEL               ROL SOD
+ *      - qvti      QVT     QVTCore                  X          The QVTi (partitioned) AST
+ *      - rTree     tree    ECoreContainmentTree     X          The right metamodel containment tree
+ *      - qvts              QVTSchedule                  X      The QVT schedule model
+ * SEE ALSO
+ *
+ ******
+ */
+
+
+/****o* MapOrdering/findMapOrdering
+ * NAME
+ *  findMapOrdering - Assings an index to all MappingActions to reflect the
+ *  ordering of the mappings based on the R type containment tree and the
+ *  type dependencies.
+ *
+ * CONTEXT
+ *  QVTs!Schedule  The schedule to be indexed
+ * ANNOTATIONS
+ *  cached
+ *  SEE ALSO
+ */
+operation QVTs!Schedule findMapOrdering()  {
+	// Do a Depth first search of the containment tree of the output model
+	var queue = new Sequence();
+	// Marked visited mappings to avoid loops
+	var visitedAct = new Sequence();
+	var visitedNodes = new Sequence();
+	queue.addAll(rTree!Node.all().select(n | n.parent.isEmpty()));
+	while (not queue.isEmpty()) {
+	    var n = queue.first();
+	    queue.remove(n);
+	    visitedNodes.add(n);
+	    // Do stuff with n
+	    //n.println("n ");
+	    //  Find all the mappings that have an output node if this type 
+	    // TODO The ECoreContainment tree should save the actual type so we dont compare names!
+	    for (ma in self.actions.select(aa | aa.results.exists(e | e.type.name = n.EClassName))) { // FIXME what about mappings which create any subtype?
+	        // Find the predecesors and linearize
+	        if (visitedAct.excludes(ma))
+	        	ma.getOrdering(visitedAct);
+	    }
+	    queue.addAll(n.children.excludingAll(visitedNodes));
+	}
+}
+
+/****o* MapOrdering/getOrdering
+ * NAME
+ *  getOrdering - Assing an index to a mapping action based on its predecesors.
+ *  SYNOPSIS
+ *    ma.getOrdering();
+ *  FUNCTION
+ *    Assings an index to all the predecessors of the mapping action and then 
+ *   assings an index to itself. This is a recursive function.
+ * CONTEXT
+ *  QVTs!MappingAction  The MappingAction
+ * RETURNS
+ *  QVTs!AbstractDatum	The ClassDatum for the variable's type
+ *  SEE ALSO
+ */
+operation QVTs!MappingAction getOrdering(visited) {
+	
+	//self.mapping.name.println("getOrdering ");
+	visited.add(self);
+	for (ma in self.getPredecessors()) {
+		if (visited.excludes(ma))
+			ma.getOrdering(visited);
+	}
+	self.order = self.schedule.getMaxIndex() + 1;
+}
+
+/****o* MapOrdering/getPredecessors
+ * NAME
+ *  getPredecessors - Get the predecessors of a mapping action
+ * FUNCTION
+ *  The predecessors of a mapping action are calculating by following the 
+ *  mapping arguments' sources. This method could be invoked recursively
+ *  to do a graph search iif a mechanism is added to prevent loops. 
+ * CONTEXT
+ *  QVTs!MappingAction  The MappingAction
+ * RETURNS
+ *  Sequence	The sequence of mapping predecesors. 
+ *  SEE ALSO
+ */
+@cached
+operation QVTs!MappingAction getPredecessors() : Set {
+
+    //self.mapping.name.println("getPredecessors ");
+	var args = self.getArguments();	
+	var concreteSources =  args.collect(a | a.sources).flatten().asSet();
+	var abstractSources = self.schedule.datums.select(cd | 
+            args.select(ad | ad.type.isAbstract).exists(ad | cd.super.includes(ad)))
+            -- FIXME why does it need to be abstract? and why not super.super ?
+        .collect(a | a.sources).flatten().asSet();
+	return concreteSources.includingAll(abstractSources);
+}
+
+/****o* MapOrdering/getArguments
+ * NAME
+ *  getArguments - Get the arguments of a mapping action
+ * SYNOPSIS
+ *    ma.getArguments();
+ * FUNCTION
+ *    Get the arguments of an mapping action.
+ * TODO
+ *  This should be implemented as the derivied property of the mapping.   
+ * CONTEXT
+ *  QVTs!MappingAction  The MappingAction
+ * ANNOTATIONS
+ *  cached
+ * RETURNS
+ *  QVTs!AbstractDatum	The ClassDatum for the variable's type
+ *  SEE ALSO
+ */	
+@cahced
+operation QVTs!MappingAction getArguments() : Sequence {
+	
+	return self.distinctArguments.primaryArguments
+			.includingAll(self.distinctArguments.secondaryArguments).flatten()
+			.collect(da | da.datum);
+}
+
+/****o* MapOrdering/getMaxIndex
+ * NAME
+ *  getMaxIndex - Get the arguments of a mapping action
+ * SYNOPSIS
+ *    s.getMaxIndex();
+ * FUNCTION
+ *    Get the arguments of an mapping action.
+ * TODO
+ *  This should be implemented as the derivied property of the mapping.   
+ * CONTEXT
+ *  QVTs!Schedule  The Schedule
+ * ANNOTATIONS
+ *  cached
+ * RETURNS
+ *  QVTs!AbstractDatum	The ClassDatum for the variable's type
+ *  SEE ALSO
+ */		
+operation QVTs!Schedule getMaxIndex() : Integer {
+	return self.actions.sortBy(a | a.order).order.last();
+}
+
+/* =========================================== */
+

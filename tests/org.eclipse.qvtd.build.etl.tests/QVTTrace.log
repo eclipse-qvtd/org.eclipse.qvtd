@@ -1,0 +1,17 @@
+---- Transformation umlRdbms ----
+Mapping __root__
+  Visiting Mapping GuardPattern
+    GuardPattern has no predicates.
+  Visiting Mapping BottomPattern
+==============================
+Output Model
+==============================
+  Visiting MappingSequence
+Visiting MappingLoop, calling: p
+  Visiting MappingSequence
+Visiting MappingCall, calling: packageToSchema_LM
+  Mapping packageToSchema_LM
+    CoreDomain middle
+      Visiting CoreDomain GuardPattern
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern

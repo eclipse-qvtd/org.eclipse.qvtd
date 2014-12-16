@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!--
+/*******************************************************************************
+ * Copyright (c) 2013 The University of York and Willink Transformations.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Horacio Hoyos - initial script
+ ******************************************************************************/
+-->
+<project default="ContainmentGraphs">
+	
+	<target name="ContainmentGraphs">
+        <!-- Left -->
+        <epsilon.emf.loadModel
+            name = "lmm"
+            aliases ="mm"
+            modelFile = "SimpleUML.ecore"
+            metamodelUri = "http://www.eclipse.org/emf/2002/Ecore"
+            read="true" store="false"/>
+		<epsilon.emf.loadModel
+            name = "lcg"
+            aliases ="cg"
+            modelFile = "SimpleUmlContainment.xmi"
+            metamodelUri = "http://www.eclipse.org/qvt/examples/0.2/QVTcDataDependencyGraph"
+            read="false" store="true"/>
+		<epsilon.emf.loadModel
+            name = "mmm"
+            aliases ="mm"
+            modelFile = "UMLtoRDBMS.ecore"
+            metamodelUri = "http://www.eclipse.org/emf/2002/Ecore"
+            read="true" store="false"/>
+        <epsilon.emf.loadModel
+            name = "mcg"
+            aliases ="cg"
+            modelFile = "UmlToRdbmsContainment.xmi"
+            metamodelUri = "http://www.eclipse.org/qvt/examples/0.2/QVTcDataDependencyGraph"
+            read="false" store="true"/>
+        <epsilon.emf.loadModel
+            name = "rmm"
+            aliases ="mm"
+            modelFile = "SimpleRDBMS.ecore"
+            metamodelUri = "http://www.eclipse.org/emf/2002/Ecore"
+            read="true" store="false"/>
+        <epsilon.emf.loadModel
+            name = "rcg"
+            aliases ="cg"
+            modelFile = "SimpleRdbmsContainment.xmi"
+            metamodelUri = "http://www.eclipse.org/qvt/examples/0.2/QVTcDataDependencyGraph"
+            read="false" store="true"/>		
+		
+		<epsilon.eol uri="platform:/resource//org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/scheduling/EcoreToContainmentGraph.eol">
+            <parameter name="modelId" value="l"/>
+            <model ref="lmm"/>
+            <model ref="lcg"/>
+        </epsilon.eol>
+		<epsilon.eol uri="platform:/resource//org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/scheduling/EcoreToContainmentGraph.eol">
+            <parameter name="modelId" value="l"/>
+            <model ref="mmm"/>
+            <model ref="mcg"/>
+        </epsilon.eol>
+		<epsilon.eol uri="platform:/resource//org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/scheduling/EcoreToContainmentGraph.eol">
+            <parameter name="modelId" value="l"/>
+            <model ref="rmm"/>
+            <model ref="rcg"/>
+        </epsilon.eol>
+    </target>	
+</project>

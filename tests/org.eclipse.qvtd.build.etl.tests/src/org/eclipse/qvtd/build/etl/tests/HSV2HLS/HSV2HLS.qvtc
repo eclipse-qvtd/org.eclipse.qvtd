@@ -1,0 +1,66 @@
+import 'HSVTree.ecore'::HSVTree;
+import 'HLSTree.ecore'::HLSTree;
+import 'HSV2HLS.ecore'::HSV2HLS;
+
+transformation hsv2hls {
+    hsv imports HSVTree;  -- Should specify the correct package
+    hls imports HLSTree;  --
+    imports HSV2HLS;
+}
+
+query hsv2hls::hls2rgb(color : HLSTree::HLS) : HSV2HLS::RGB;
+query hsv2hls::hsv2rgb(color : HSVTree::HSV) : HSV2HLS::RGB;
+query hsv2hls::rgb2hls(color : HSV2HLS::RGB) : HLSTree::HLS;
+query hsv2hls::rgb2hsv(color : HSV2HLS::RGB) : HSVTree::HSV;
+
+
+map HSV2HLSRoot in hsv2hls {
+    check hsv(hsvRoot : HSVNode |
+        hsvRoot.parent = null;) { }
+    check enforce hls() {
+        realize hlsNode : HLSNode |
+        hlsNode.parent := null;
+    }
+    where( ) {
+        realize middleRoot : HSVNode2HLSNode |
+        middleRoot.hsv := hsvRoot;
+        middleRoot.hls := hlsNode;
+
+    }
+    map {
+        where() {
+            middleRoot.name := hsvRoot.name;
+            middleRoot.name := hlsNode.name;
+            hsvRoot.name := middleRoot.name;
+            hlsNode.name := middleRoot.name;
+        }
+    }
+}
+
+map HSV2HLSRecursion in hsv2hls {
+    check enforce hsv(hsvParent : HSVNode | ) {
+        realize hsvNode : HSVNode |
+        hsvNode.parent := hsvParent;
+    }
+    check enforce hls(hlsParent : HLSNode |) {
+        realize hlsNode : HLSNode |
+        hlsNode.parent := hlsParent;
+    }
+    where(middleParent : HSVNode2HLSNode |
+        middleParent.hsv = hsvParent;
+        middleParent.hls = hlsParent;
+    ) {
+        realize middleNode : HSVNode2HLSNode |
+        middleNode.parent := middleParent;
+        middleNode.hsv := hsvNode;
+        middleNode.hls := hlsNode;
+        }
+    map {
+        where () {
+            middleNode.name := hsvNode.name;
+            middleNode.name := hlsNode.name;
+            hlsNode.name := middleNode.name;
+            hsvNode.name := middleNode.name;
+        }
+    }
+}

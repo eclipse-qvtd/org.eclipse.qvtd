@@ -1,0 +1,117 @@
+/*******************************************************************************
+ * Copyright (c) 2013 The University of York, Willink Transformations and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
+
+/**
+ * We are only interested in containemnet relations, so we only need to search
+ * EPackages and EClasses, all other nodes in the root can be safely ignored. 
+ * Note: Ed Merks suggests there should only be one EPackage per metamodel, but
+ * since this is not a requirement, we need to be safe
+ */
+
+var visited : Map;
+
+for (p in mm!EPackage.all().first()) {
+    p.iterativeDFS();
+}
+"Ecore to ContainmentTree Done".println();
+
+/* ===========================================================================*/
+
+// Iterative Depth First Search of containment relations
+// Serch till no more elements are visited during three increments
+operation mm!EPackage iterativeDFS() {
+
+	var iterate = true;
+	var change = false;
+	var maxDepth : Integer;
+	var noChangeCount : Integer = 0;
+	
+	var parentNode = new tree!Node;
+    
+    parentNode.EClassName = self.name;
+	maxDepth = 1;
+    
+    while (iterate) {
+        //maxDepth.println("IterativeDFS ");
+        change = false;
+        for (c in self.eClassifiers.select(c | c.isKindOf(mm!EClass)
+                and not c.abstract
+                and not c.getEAllStructuralFeatures().exists(r : mm!EReference | r.container))) {
+            //c.println();
+            change = c.dfs(1, maxDepth, parentNode) or change;
+        }
+        if (not change) {
+	       noChangeCount = noChangeCount + 1;
+	       if (noChangeCount > 3) {
+	           iterate = false;
+	       }
+	    }
+	    maxDepth = maxDepth + 1;
+	    if(maxDepth > 10) {
+	       //"Safe ending".errln();
+	       iterate = false; // Safe ending
+	    }
+	       
+    }
+}
+
+// Returns true if added
+operation mm!EClass dfs(depth, maxDepth, parentNode) : Boolean {
+    
+    var change = false;
+    //"Max depth reached, do nothing".println(tabs);
+    if (depth <= maxDepth) {
+    	// If self is abstract, consider all subclasses at same depth (flattening)
+	    if (self.abstract) {
+	        //"Abstract, do inheritance".println(tabs);
+	        for (sc in mm!EClass.all().select(c | c.eSuperTypes.includes(self))) {
+	        	if (sc.name <> parentNode.type) {
+	        		sc.dfs(depth, maxDepth, parentNode);
+	        	}
+	        }
+	    } else {
+	        // Add Node or get node
+	        var n;
+	        if (visited.containsKey(self)) {
+	            n = visited.get(self);
+	        } else { 
+	            n = new tree!Node;
+	            //n.data.println();
+	            n.EClassName = self.name;
+	            n.superTypes = self.eSuperTypes.select(st | st.abstract).collect(st | st.name).flatten();
+	            visited.put(self, n);
+	        }
+	        if (depth == maxDepth) {
+	            n.parent.add(parentNode);
+	            change = true;
+	        }
+        	// Navigate Containment, mine and inherited
+        	//self.eStructuralFeatures.select(sf : mm!EReference | sf.containment)
+            //		.includingAll(self.getAllSuperTypes().collect(st | st.eStructuralFeatures.select(sf : mm!EReference | sf.containment)).flatten()).println();
+            for (sf in self.eStructuralFeatures.select(sf : mm!EReference | sf.containment)
+            		.includingAll(self.getAllSuperTypes().collect(st | st.eStructuralFeatures.select(sf : mm!EReference | sf.containment))).flatten()) {
+				change = sf.eReferenceType.dfs(depth+1, maxDepth, n) or change;
+            }
+	    }
+    }
+    return change;
+}
+
+@cached
+operation mm!EClass getAllSuperTypes() : Set {
+	
+	var retVal : Set;
+	retVal.addAll(self.eSuperTypes);
+	for (st in self.eSuperTypes) {
+		retVal.addAll(st.getAllSuperTypes());
+	}
+	return retVal;
+}

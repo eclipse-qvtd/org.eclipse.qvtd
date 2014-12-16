@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<qvtcconfig:Configuration xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:qvtcconfig="http://www.eclipse.org/qvt/examples/0.1/QVTcConfig" inputDirection="//@transformation/@direction.0" outputDirection="//@transformation/@direction.1" mode="enforce" middle="//@transformation/@direction.2">
+  <transformation name="hsv2hls">
+    <direction name="hsv" imports="//@transformation/@import.0"/>
+    <direction name="hls" imports="//@transformation/@import.2"/>
+    <direction imports="//@transformation/@import.1"/>
+    <import name="HSVTree" metamodelFile="HSV2HLS/HSVTree.ecore" package="HSVTree"/>
+    <import name="HSV2HLS" metamodelFile="HSV2HLS/HSV2HLS.ecore" package="HSV2HLS"/>
+    <import name="HLSTree" metamodelFile="HSV2HLS/HLSTree.ecore" package="HLSTree"/>
+  </transformation>
+</qvtcconfig:Configuration>

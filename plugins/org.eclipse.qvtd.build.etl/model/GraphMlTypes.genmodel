@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvtd.build.etl/src-gen" editDirectory="/org.eclipse.qvtd.build.etl.edit/src-gen"
+    editorDirectory="/org.eclipse.qvtd.build.etl.editor/src-gen" modelPluginID="org.eclipse.qvtd.build.etl"
+    modelName="GraphMlTypes" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
+    usedGenPackages="Graph.genmodel#//graph" operationReflection="true" importOrganizing="true">
+  <foreignModel>GraphMlTypes.ecore</foreignModel>
+  <genPackages prefix="Graphmltypes" basePackage="org.eclipse.qvtd.build.etl" disposableProviderFactory="true"
+      ecorePackage="GraphMlTypes.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="GraphMlTypes.ecore#//EdgeEndStyle">
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//EdgeEndStyle/standard"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//EdgeEndStyle/delta"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//EdgeEndStyle/diamond"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//EdgeEndStyle/whiteDiamond"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//EdgeEndStyle/whiteDelta"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//EdgeEndStyle/none"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//EdgeEndStyle/plain"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//EdgeEndStyle/concave"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//EdgeEndStyle/convex"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//EdgeEndStyle/circle"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//EdgeEndStyle/dash"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//EdgeEndStyle/transparentCircle"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//EdgeEndStyle/skewedDash"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//EdgeEndStyle/tShape"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="GraphMlTypes.ecore#//EdgeLineStyle">
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//EdgeLineStyle/line"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//EdgeLineStyle/dashed"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//EdgeLineStyle/dotted"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="GraphMlTypes.ecore#//ShapeType">
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//ShapeType/rectangle"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//ShapeType/roundrectangle"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//ShapeType/ellipse"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//ShapeType/parallelogram"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//ShapeType/hexagon"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//ShapeType/octagon"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//ShapeType/diamond"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//ShapeType/triangle"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//ShapeType/trapezoid"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//ShapeType/trapezoid2"/>
+      <genEnumLiterals ecoreEnumLiteral="GraphMlTypes.ecore#//ShapeType/rectangle3d"/>
+    </genEnums>
+    <genClasses ecoreClass="GraphMlTypes.ecore#//GraphMLNodeType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GraphMlTypes.ecore#//GraphMLNodeType/colour"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GraphMlTypes.ecore#//GraphMLNodeType/shape"/>
+    </genClasses>
+    <genClasses ecoreClass="GraphMlTypes.ecore#//GraphMLEdgeType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GraphMlTypes.ecore#//GraphMLEdgeType/color"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GraphMlTypes.ecore#//GraphMLEdgeType/lineStyle"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GraphMlTypes.ecore#//GraphMLEdgeType/fromStyle"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute GraphMlTypes.ecore#//GraphMLEdgeType/toStyle"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qvtr:RelationModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:pivot="http://www.eclipse.org/ocl/3.1.0/Pivot" xmlns:qvtr="http://www.eclipse.org/qvt/0.9/QVTrelation"
+    xmlns:qvtt="http://www.eclipse.org/qvt/0.9/QVTtemplate" xsi:schemaLocation="http://www.eclipse.org/ocl/3.1.0/Pivot java://org.eclipse.ocl.examples.pivot.PivotPackage http://www.eclipse.org/qvt/0.9/QVTrelation java://org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage http://www.eclipse.org/qvt/0.9/QVTtemplate java://org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage"
+    name="ClassModelToClassModel.qvtr" externalURI="platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/src/org/eclipse/qvtd/build/qvtrtoqvtc/tests/classmodeltoclassmodel/ClassModelToClassModel.qvtr">
+  <ownedComment body="*****************************************************************************&#xA;Copyright (c) 2007,2008 Tata Consultancy Services and others.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;TCS - initial implementation for ModelMorf&#xA;E.D.Willink - alignment with evolved specification&#xA;*****************************************************************************"/>
+  <nestedPackage xsi:type="qvtr:RelationalTransformation" xmi:id="T.ClassModelToClassModel"
+      name="ClassModelToClassModel" superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclElement">
+    <modelParameter xmi:id="qT.ClassModelToClassModel.uml1" name="uml1" usedPackage="ClassMM.emof.oclas#P.ClassMM"/>
+    <modelParameter xmi:id="qT.ClassModelToClassModel.uml2" name="uml2" usedPackage="ClassMM.emof.oclas#P.ClassMM"/>
+    <rule xsi:type="qvtr:Relation" name="classToClass" isTopLevel="true">
+      <domain xsi:type="qvtr:RelationDomain" xmi:id="qD.ClassModelToClassModel.classToClass.uml1"
+          isCheckable="true" isEnforceable="true" typedModel="#qT.ClassModelToClassModel.uml1"
+          rootVariable="#//@nestedPackage.0/@rule.0/@variable.1">
+        <pattern>
+          <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="ClassMM.emof.oclas#T.ClassMM.Class"
+              bindsTo="#//@nestedPackage.0/@rule.0/@variable.1" referredClass="ClassMM.emof.oclas#T.ClassMM.Class">
+            <part referredProperty="ClassMM.emof.oclas#p.ClassMM.Class.name">
+              <value xsi:type="pivot:VariableExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                  referredVariable="#//@nestedPackage.0/@rule.0/@variable.0"/>
+            </part>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <domain xsi:type="qvtr:RelationDomain" xmi:id="qD.ClassModelToClassModel.classToClass.uml2"
+          isCheckable="true" isEnforceable="true" typedModel="#qT.ClassModelToClassModel.uml2"
+          rootVariable="#//@nestedPackage.0/@rule.0/@variable.2">
+        <pattern>
+          <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="ClassMM.emof.oclas#T.ClassMM.Class"
+              bindsTo="#//@nestedPackage.0/@rule.0/@variable.2" referredClass="ClassMM.emof.oclas#T.ClassMM.Class">
+            <part referredProperty="ClassMM.emof.oclas#p.ClassMM.Class.name">
+              <value xsi:type="pivot:VariableExp" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"
+                  referredVariable="#//@nestedPackage.0/@rule.0/@variable.0"/>
+            </part>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <variable name="cn" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"/>
+      <variable name="c1" type="ClassMM.emof.oclas#T.ClassMM.Class"/>
+      <variable name="c2" type="ClassMM.emof.oclas#T.ClassMM.Class"/>
+    </rule>
+    <rule xsi:type="qvtr:Relation" name="classToClassHierarchy" isTopLevel="true">
+      <domain xsi:type="qvtr:RelationDomain" xmi:id="qD.ClassModelToClassModel.classToClassHierarchy.uml1"
+          isCheckable="true" isEnforceable="true" typedModel="#qT.ClassModelToClassModel.uml1"
+          rootVariable="#//@nestedPackage.0/@rule.1/@variable.1">
+        <pattern>
+          <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="ClassMM.emof.oclas#T.ClassMM.Class"
+              bindsTo="#//@nestedPackage.0/@rule.1/@variable.1" referredClass="ClassMM.emof.oclas#T.ClassMM.Class">
+            <part referredProperty="ClassMM.emof.oclas#p.ClassMM.Class.supers">
+              <value xsi:type="qvtt:CollectionTemplateExp" type="#//@nestedPackage.1/@ownedType.0"
+                  bindsTo="#//@nestedPackage.0/@rule.1/@variable.2" referredCollectionType="http://www.eclipse.org/ocl/3.1.0/orphanage#//@ownedType.3"
+                  rest="#//@nestedPackage.0/@rule.1/@variable.3"/>
+            </part>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <domain xsi:type="qvtr:RelationDomain" xmi:id="qD.ClassModelToClassModel.classToClassHierarchy.uml2"
+          isCheckable="true" isEnforceable="true" typedModel="#qT.ClassModelToClassModel.uml2"
+          rootVariable="#//@nestedPackage.0/@rule.1/@variable.4">
+        <pattern>
+          <templateExpression xsi:type="qvtt:ObjectTemplateExp" type="ClassMM.emof.oclas#T.ClassMM.Class"
+              bindsTo="#//@nestedPackage.0/@rule.1/@variable.4" referredClass="ClassMM.emof.oclas#T.ClassMM.Class">
+            <part referredProperty="ClassMM.emof.oclas#p.ClassMM.Class.supers">
+              <value xsi:type="qvtt:CollectionTemplateExp" type="#//@nestedPackage.1/@ownedType.0"
+                  bindsTo="#//@nestedPackage.0/@rule.1/@variable.5" referredCollectionType="http://www.eclipse.org/ocl/3.1.0/orphanage#//@ownedType.3"
+                  rest="#//@nestedPackage.0/@rule.1/@variable.6"/>
+            </part>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <variable name="cn" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"/>
+      <variable name="c1" type="ClassMM.emof.oclas#T.ClassMM.Class"/>
+      <variable name="c1s" type="#//@nestedPackage.1/@ownedType.0"/>
+      <variable implicit="true"/>
+      <variable name="c2" type="ClassMM.emof.oclas#T.ClassMM.Class"/>
+      <variable name="c2s" type="#//@nestedPackage.1/@ownedType.0"/>
+      <variable implicit="true"/>
+      <when>
+        <predicate>
+          <conditionExpression xsi:type="qvtr:RelationCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+              referredRelation="#//@nestedPackage.0/@rule.0">
+            <argument xsi:type="pivot:VariableExp" type="ClassMM.emof.oclas#T.ClassMM.Class"
+                referredVariable="#//@nestedPackage.0/@rule.1/@variable.1"/>
+            <argument xsi:type="pivot:VariableExp" type="ClassMM.emof.oclas#T.ClassMM.Class"
+                referredVariable="#//@nestedPackage.0/@rule.1/@variable.4"/>
+          </conditionExpression>
+        </predicate>
+      </when>
+      <where>
+        <predicate>
+          <conditionExpression xsi:type="qvtr:RelationCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+              referredRelation="#//@nestedPackage.0/@rule.2">
+            <argument xsi:type="pivot:VariableExp" type="#//@nestedPackage.1/@ownedType.0"
+                referredVariable="#//@nestedPackage.0/@rule.1/@variable.2"/>
+            <argument xsi:type="pivot:VariableExp" type="#//@nestedPackage.1/@ownedType.0"
+                referredVariable="#//@nestedPackage.0/@rule.1/@variable.5"/>
+          </conditionExpression>
+        </predicate>
+      </where>
+    </rule>
+    <rule xsi:type="qvtr:Relation" name="classSupersToClassSupers">
+      <domain xsi:type="qvtr:RelationDomain" xmi:id="qD.ClassModelToClassModel.classSupersToClassSupers.uml1"
+          isCheckable="true" isEnforceable="true" typedModel="#qT.ClassModelToClassModel.uml1"
+          rootVariable="#//@nestedPackage.0/@rule.2/@variable.5">
+        <defaultAssignment variable="#//@nestedPackage.0/@rule.2/@variable.3">
+          <valueExp xsi:type="pivot:CollectionLiteralExp" type="#//@nestedPackage.1/@ownedType.1"
+              kind="Set"/>
+        </defaultAssignment>
+        <pattern>
+          <templateExpression xsi:type="qvtt:CollectionTemplateExp" type="#//@nestedPackage.1/@ownedType.0"
+              bindsTo="#//@nestedPackage.0/@rule.2/@variable.5" referredCollectionType="http://www.eclipse.org/ocl/3.1.0/orphanage#//@ownedType.3">
+            <member xsi:type="pivot:VariableExp" referredVariable="#//@nestedPackage.0/@rule.2/@variable.6"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <domain xsi:type="qvtr:RelationDomain" xmi:id="qD.ClassModelToClassModel.classSupersToClassSupers.uml2"
+          isCheckable="true" isEnforceable="true" typedModel="#qT.ClassModelToClassModel.uml2"
+          rootVariable="#//@nestedPackage.0/@rule.2/@variable.7">
+        <defaultAssignment variable="#//@nestedPackage.0/@rule.2/@variable.4">
+          <valueExp xsi:type="pivot:CollectionLiteralExp" type="#//@nestedPackage.1/@ownedType.1"
+              kind="Set"/>
+        </defaultAssignment>
+        <pattern>
+          <templateExpression xsi:type="qvtt:CollectionTemplateExp" type="#//@nestedPackage.1/@ownedType.0"
+              bindsTo="#//@nestedPackage.0/@rule.2/@variable.7" referredCollectionType="http://www.eclipse.org/ocl/3.1.0/orphanage#//@ownedType.3">
+            <member xsi:type="pivot:VariableExp" referredVariable="#//@nestedPackage.0/@rule.2/@variable.8"/>
+          </templateExpression>
+        </pattern>
+      </domain>
+      <variable name="cn" isRequired="false" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#String"/>
+      <variable name="c1" isRequired="false" type="ClassMM.emof.oclas#T.ClassMM.Class"/>
+      <variable name="c2" isRequired="false" type="ClassMM.emof.oclas#T.ClassMM.Class"/>
+      <variable name="restC1s" isRequired="false" type="#//@nestedPackage.1/@ownedType.0"/>
+      <variable name="restC2s" isRequired="false" type="#//@nestedPackage.1/@ownedType.0"/>
+      <variable name="c1s" type="#//@nestedPackage.1/@ownedType.0"/>
+      <variable name="c1"/>
+      <variable name="c2s" type="#//@nestedPackage.1/@ownedType.0"/>
+      <variable name="c2"/>
+      <where>
+        <predicate>
+          <conditionExpression xsi:type="qvtr:RelationCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+              referredRelation="#//@nestedPackage.0/@rule.0">
+            <argument xsi:type="pivot:VariableExp" isRequired="false" type="ClassMM.emof.oclas#T.ClassMM.Class"
+                referredVariable="#//@nestedPackage.0/@rule.2/@variable.1"/>
+            <argument xsi:type="pivot:VariableExp" isRequired="false" type="ClassMM.emof.oclas#T.ClassMM.Class"
+                referredVariable="#//@nestedPackage.0/@rule.2/@variable.2"/>
+          </conditionExpression>
+        </predicate>
+        <predicate>
+          <conditionExpression xsi:type="qvtr:RelationCallExp" type="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#Boolean"
+              referredRelation="#//@nestedPackage.0/@rule.2">
+            <argument xsi:type="pivot:VariableExp" isRequired="false" type="#//@nestedPackage.1/@ownedType.0"
+                referredVariable="#//@nestedPackage.0/@rule.2/@variable.3"/>
+            <argument xsi:type="pivot:VariableExp" isRequired="false" type="#//@nestedPackage.1/@ownedType.0"
+                referredVariable="#//@nestedPackage.0/@rule.2/@variable.4"/>
+          </conditionExpression>
+        </predicate>
+      </where>
+    </rule>
+    <ownedKey identifies="ClassMM.emof.oclas#T.ClassMM.Class" part="ClassMM.emof.oclas#p.ClassMM.Class.name"/>
+  </nestedPackage>
+  <nestedPackage xmi:id="P.$$" name="$$" nsPrefix="orphanage" nsURI="http://www.eclipse.org/ocl/3.1.0/orphanage">
+    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.2"
+        elementType="ClassMM.emof.oclas#T.ClassMM.Class">
+      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Set">
+        <parameterSubstitution actual="pivot:Class ClassMM.emof.oclas#T.ClassMM.Class"
+            formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..SetT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:SetType" name="Set" superClass="#//@nestedPackage.1/@ownedType.3"
+        elementType="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclAny">
+      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Set">
+        <parameterSubstitution actual="pivot:AnyType http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclAny"
+            formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..SetT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.4"
+        elementType="ClassMM.emof.oclas#T.ClassMM.Class">
+      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.UniqueCollection">
+        <parameterSubstitution actual="pivot:Class ClassMM.emof.oclas#T.ClassMM.Class"
+            formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..UniqueCollectionT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:CollectionType" name="UniqueCollection" superClass="#//@nestedPackage.1/@ownedType.5"
+        elementType="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclAny">
+      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.UniqueCollection">
+        <parameterSubstitution actual="pivot:AnyType http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclAny"
+            formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..UniqueCollectionT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:CollectionType" name="Collection" superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclAny"
+        elementType="ClassMM.emof.oclas#T.ClassMM.Class">
+      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Collection">
+        <parameterSubstitution actual="pivot:Class ClassMM.emof.oclas#T.ClassMM.Class"
+            formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..CollectionT"/>
+      </templateBinding>
+    </ownedType>
+    <ownedType xsi:type="pivot:CollectionType" name="Collection" superClass="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclAny"
+        elementType="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclAny">
+      <templateBinding signature="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#s.Collection">
+        <parameterSubstitution actual="pivot:AnyType http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#T.ocl.OclAny"
+            formal="http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas#t.ocl..CollectionT"/>
+      </templateBinding>
+    </ownedType>
+  </nestedPackage>
+  <unit name="umlMM" usedPackage="pivot:Package ClassMM.emof.oclas#P.ClassMM">
+    <ownedComment body="*****************************************************************************&#xA;Copyright (c) 2007,2008 Tata Consultancy Services and others.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;TCS - initial implementation for ModelMorf&#xA;E.D.Willink - alignment with evolved specification&#xA;*****************************************************************************"/>
+  </unit>
+</qvtr:RelationModel>

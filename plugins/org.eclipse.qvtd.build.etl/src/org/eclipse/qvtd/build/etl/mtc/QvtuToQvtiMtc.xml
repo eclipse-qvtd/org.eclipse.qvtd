@@ -1,30 +1,28 @@
 <?xml version="1.0"?>
 <!--
 /*******************************************************************************
- * Copyright (c) 2013 The University of York, Willink Transformations and others.
+ * Copyright (c) 2013 The University of York and Willink Transformations.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Horacio Hoyos - initial script
  ******************************************************************************/
 -->
-<project default="QvtuToQvtm">
+<project default="QvtmToQvtiPartition">
 	<!-- Default Properties -->
 	<property name="OclLibURI" value="http://www.eclipse.org/ocl/2015/Library.oclas"/>
 	<property name="QVTcToQVTu" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTcToQVTu.mig"/>
 	<property name="QVTuToQVTm" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTuToQVTm.mig"/>
-	
-	<!-- Create for each example/test -->
-	<property file="build.properties"/>
-	
+	<property name="QVTmToQVTiPartition" value="platform:/resource/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTmToQVTiPartition.etl"/>
+
 	<target name="PivotSetup">
 		   <PivotSetup/>
 	</target>
-	
-	<target name="loadModels" depends="PivotSetup">
+
+	<target name="loadModels" > <!-- depends="PivotSetup"> -->
         <!-- OCL Library -->
         <epsilon.emf.loadModel
             name = "oclStdLib"
@@ -35,25 +33,35 @@
         <!-- Configuration -->
         <epsilon.emf.loadModel
             name = "config"
-            modelFile = "${configuration}" 
+            modelFile = "${name}Config.xmi"
             metamodelUri = "http://www.eclipse.org/qvt/examples/0.1/QVTcConfig"
             read="true" store="false"/>
     </target>
-	
+
 	<target name="QvtcToQvtu" depends="loadModels">
 		<!-- QVTc -->
         <epsilon.emf.loadModel
             name = "QVTc"
             aliases ="QVT"
+<<<<<<< HEAD
             modelFile = "${qvtcas}" 
             metamodelUri = "http://www.eclipse.org/qvt/2015/QVTcore"
+=======
+            modelFile = "${name}.qvtcas"
+            metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
+>>>>>>> refs/remotes/origin/hhoyos/qvtr
             read="true" store="false"/>
         <!-- QVTu -->
         <epsilon.emf.loadModel
             name = "QVTu"
             aliases ="QVT"
+<<<<<<< HEAD
             modelFile = "${qvtuas}" 
             metamodelUri = "http://www.eclipse.org/qvt/2015/QVTcore"
+=======
+            modelFile = "${name}.qvtu.qvtcas"
+            metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
+>>>>>>> refs/remotes/origin/hhoyos/qvtr
             read="false" store="true"/>
 	    <epsilon.flock originalmodel="QVTc" migratedmodel="QVTu" uri="${QVTcToQVTu}">
 	        <model ref="QVTc"/>
@@ -64,54 +72,74 @@
 		<epsilon.disposeModel model="QVTc"/>
 		<epsilon.disposeModel model="QVTu"/>
 	</target>
-	
+
 	<target name="QvtuToQvtm" depends="QvtcToQvtu">
 		 <!-- QVTu -->
         <epsilon.emf.loadModel
             name = "QVTu"
             aliases ="QVT"
+<<<<<<< HEAD
             modelFile = "${qvtuas}" 
             metamodelUri = "http://www.eclipse.org/qvt/2015/QVTcore"
+=======
+            modelFile = "${name}.qvtu.qvtcas"
+            metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
+>>>>>>> refs/remotes/origin/hhoyos/qvtr
             read="true" store="false"/>
 		<!-- QVTm Flatten  -->
         <epsilon.emf.loadModel
-            name = "QVTmF"
+            name = "QVTm"
             aliases ="QVT"
+<<<<<<< HEAD
             modelFile = "${qvtmas}" 
             metamodelUri = "http://www.eclipse.org/qvt/2015/QVTcore"
+=======
+            modelFile = "${name}.qvtm.qvtcas"
+            metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
+>>>>>>> refs/remotes/origin/hhoyos/qvtr
             read="false" store="true"/>
-        <epsilon.flock originalmodel="QVTu" migratedmodel="QVTmF" uri="${QVTuToQVTm}">
+        <epsilon.flock originalmodel="QVTu" migratedmodel="QVTm" uri="${QVTuToQVTm}">
             <model ref="QVTu"/>
-            <model ref="QVTmF"/>
+            <model ref="QVTm"/>
         	<model ref="config"/>
             <model ref="oclStdLib"/>
         </epsilon.flock>
 		<epsilon.disposeModel model="QVTu"/>
-		<epsilon.disposeModel model="QVTmF"/>
+		<epsilon.disposeModel model="QVTm"/>
     </target>
-	
-	<target name="QvtuToQvtmPartition" depends="QvtuToQvtm">
+
+	<target name="QvtmToQvtiPartition" depends="loadModels">
 		<!-- QVTm Flatten  -->
         <epsilon.emf.loadModel
-            name = "QVTmF"
+            name = "QVTm"
             aliases ="QVT"
+<<<<<<< HEAD
             modelFile = "${qvtmas}" 
             metamodelUri = "http://www.eclipse.org/qvt/2015/QVTcore"
+=======
+            modelFile = "${name}.qvtm.qvtcas"
+            metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTcore"
+>>>>>>> refs/remotes/origin/hhoyos/qvtr
             read="true" store="false"/>
 		<!-- QVTm Partition  -->
         <epsilon.emf.loadModel
-            name = "QVTmP"
+            name = "QVTi"
             aliases ="QVT"
+<<<<<<< HEAD
             modelFile = "${qvtmpartitionas}" 
             metamodelUri = "http://www.eclipse.org/qvt/2015/QVTcore"
+=======
+            modelFile = "${name}.qvtias"
+            metamodelUri = "http://www.eclipse.org/qvt/0.9/QVTimperative"
+>>>>>>> refs/remotes/origin/hhoyos/qvtr
             read="false" store="true"/>
-		<epsilon.etl uri="${QVTuToQVTmPartitionLM}">
-            <model ref="QVTmF"/>
-            <model ref="QVTmP"/>
+		<epsilon.etl uri="${QVTmToQVTiPartition}">
+            <model ref="QVTm"/>
+            <model ref="QVTi"/>
             <model ref="config"/>
             <model ref="oclStdLib"/>
 	    </epsilon.etl>
-		<epsilon.disposeModel model="QVTmF"/>
-		<epsilon.disposeModel model="QVTmP"/>
-    </target>       
+		<epsilon.disposeModel model="QVTm"/>
+		<epsilon.disposeModel model="QVTi"/>
+    </target>
 </project>

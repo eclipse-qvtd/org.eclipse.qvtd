@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:qVTcDataDependencyGraph="http://www.eclipse.org/qvt/examples/0.2/QVTcDataDependencyGraph">
+  <qVTcDataDependencyGraph:ClassNode outgoing="/2 /4 /6" label="Package" model="input">
+    <superTypes>UMLModelElement</superTypes>
+  </qVTcDataDependencyGraph:ClassNode>
+  <qVTcDataDependencyGraph:ClassNode incoming="/2" label="Association" model="input">
+    <superTypes>PackageElement</superTypes>
+  </qVTcDataDependencyGraph:ClassNode>
+  <qVTcDataDependencyGraph:ContainmentEdge target="/1" source="/0" model="input">
+    <referredProperty href="SimpleUML.ecore#//Package/elements"/>
+  </qVTcDataDependencyGraph:ContainmentEdge>
+  <qVTcDataDependencyGraph:ClassNode incoming="/4" outgoing="/8" label="Class" model="input">
+    <superTypes>Classifier</superTypes>
+  </qVTcDataDependencyGraph:ClassNode>
+  <qVTcDataDependencyGraph:ContainmentEdge target="/3" source="/0" model="input">
+    <referredProperty href="SimpleUML.ecore#//Package/elements"/>
+  </qVTcDataDependencyGraph:ContainmentEdge>
+  <qVTcDataDependencyGraph:ClassNode incoming="/6" label="PrimitiveDataType" model="input">
+    <superTypes>Classifier</superTypes>
+  </qVTcDataDependencyGraph:ClassNode>
+  <qVTcDataDependencyGraph:ContainmentEdge target="/5" source="/0" model="input">
+    <referredProperty href="SimpleUML.ecore#//Package/elements"/>
+  </qVTcDataDependencyGraph:ContainmentEdge>
+  <qVTcDataDependencyGraph:ClassNode incoming="/8" label="Attribute" model="input">
+    <superTypes>UMLModelElement</superTypes>
+  </qVTcDataDependencyGraph:ClassNode>
+  <qVTcDataDependencyGraph:ContainmentEdge target="/7" source="/3" model="input">
+    <referredProperty href="SimpleUML.ecore#//Class/attributes"/>
+  </qVTcDataDependencyGraph:ContainmentEdge>
+</xmi:XMI>
