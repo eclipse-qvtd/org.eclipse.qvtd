@@ -12,11 +12,9 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.domain.elements.DomainType;
-import org.eclipse.ocl.domain.utilities.DomainUtil;
-import org.eclipse.ocl.domain.values.impl.InvalidValueException;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
@@ -24,6 +22,8 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitorImpl;
 import org.eclipse.ocl.pivot.manager.PivotIdResolver;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -251,7 +251,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitMappingCall(org.eclipse.qvtd.pivot.qvtimperative.MappingCall)
 	 */
 	public @Nullable Object visitMappingCall(@NonNull MappingCall mappingCall) {
-    	Mapping calledMapping = DomainUtil.nonNullModel(mappingCall.getReferredMapping());
+    	Mapping calledMapping = ClassUtil.nonNullModel(mappingCall.getReferredMapping());
 		//
 		//	Initialise nested environment directly with the bound values for non-looped bindings,
 		//	and build matching lists of boundVariables and boundIterables for looped bindings. 
@@ -259,7 +259,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 //		List<Variable> loopedVariables = null;
 //		List<Iterable<?>> loopedValues = null;
 		for (MappingCallBinding binding : mappingCall.getBinding()) {
-			Variable boundVariable = DomainUtil.nonNullModel(binding.getBoundVariable());
+			Variable boundVariable = ClassUtil.nonNullModel(binding.getBoundVariable());
 			Object valueOrValues = null;
 			try {
 				valueOrValues = ((QVTiEvaluationVisitor)undecoratedVisitor).safeVisit(binding.getValue());
@@ -268,7 +268,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 				// evaluating the binding value
 				return null;
 			}
-			DomainType valueType = metaModelManager.getIdResolver().getDynamicTypeOf(valueOrValues);
+			Type valueType = metaModelManager.getIdResolver().getDynamicTypeOf(valueOrValues);
 			Type varType = boundVariable.getType();
 			if ((varType != null) && valueType.conformsTo(metaModelManager.getStandardLibrary(), varType)) {
 				evaluationEnvironment.replace(boundVariable, valueOrValues);
@@ -293,7 +293,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 		if (inValues instanceof Iterable<?>) {
 			List<Variable> iterators = mappingLoop.getIterator();
 			if (iterators.size() > 0) {
-				Variable iterator = DomainUtil.nonNullState(iterators.get(0));
+				Variable iterator = ClassUtil.nonNullState(iterators.get(0));
 				for (Object object : (Iterable<?>)inValues) {
 					getEvaluationEnvironment().replace(iterator, object);
 					mappingLoop.getBody().accept(undecoratedVisitor);
@@ -342,7 +342,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
                 Variable slotVar = (Variable) ((VariableExp)slotExp).getReferredVariable();
                 if(slotVar != null) {
                     Object slotBinding = evaluationEnvironment.getValueOf(slotVar);
-                    if(slotBinding != null) {
+                    if(slotBinding instanceof EObject) {
                     	//  TODO define if keep the try catch for safety
                     	Object value = null;
                     	try {
@@ -357,7 +357,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
             					// Unbox to assign to ecore type
                         		Object unboxedValue = metaModelManager.getIdResolver().unboxedValueOf(value);
                         		Property p = propertyAssignment.getTargetProperty();
-                                p.initValue(slotBinding, unboxedValue);
+                                p.initValue((EObject) slotBinding, unboxedValue);
         						Integer cacheIndex = propertyAssignment.getCacheIndex();
         						if (cacheIndex != null) {
         							getModelManager().setMiddleOpposite(cacheIndex, slotBinding, unboxedValue);
@@ -390,9 +390,9 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 		OCLExpression source = pPropertyCallExp.getSource();
 		Object sourceValue = source != null ? undecoratedVisitor.evaluate(source) : null;
 		if (sourceValue != null) {
-			Integer cacheIndex = DomainUtil.nonNullState(pPropertyCallExp.getCacheIndex());
+			Integer cacheIndex = ClassUtil.nonNullState(pPropertyCallExp.getCacheIndex());
 			Object middleOpposite = getModelManager().getMiddleOpposite(cacheIndex, sourceValue);
-			return DomainUtil.nonNullState(middleOpposite);
+			return ClassUtil.nonNullState(middleOpposite);
 		}
 		throw new InvalidValueException("Failed to evaluate '" + pPropertyCallExp.getReferredProperty() + "'", sourceValue, pPropertyCallExp);
 	}
@@ -433,12 +433,12 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
                 Variable slotVar = (Variable) ((VariableExp)slotExp).getReferredVariable();
                 if(slotVar != null) {
                     Object slotBinding = evaluationEnvironment.getValueOf(slotVar);
-                    if(slotBinding != null) {
+                    if(slotBinding instanceof EObject) {
                     	Object value = safeVisit(propertyAssignment.getValue());
                     	// Unbox to assign to ecore type
                         value = metaModelManager.getIdResolver().unboxedValueOf(value);
                         Property p = propertyAssignment.getTargetProperty();
-                        p.initValue(slotBinding, value);
+                        p.initValue((EObject) slotBinding, value);
                         /* TODO define if keep the try catch for safety
                         Object value = null;
                     	try {
@@ -549,7 +549,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 		Object value = ((QVTiEvaluationVisitor)undecoratedVisitor).safeVisit(exp);
         Variable variable = variablePredicate.getTargetVariable();
 		Type guardType = variable.getType();
-		DomainType valueType = idResolver.getDynamicTypeOf(value);
+		Type valueType = idResolver.getDynamicTypeOf(value);
 		if ((guardType != null) && valueType.conformsTo(metaModelManager.getStandardLibrary(), guardType)) {
 			evaluationEnvironment.replace(variable, value);
 		} else {

@@ -18,9 +18,9 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.domain.utilities.DomainUtil;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
@@ -146,12 +146,12 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	@Override
 	public Continuation<?> visitMappingLoopCS(@NonNull MappingLoopCS csMappingLoop) {
 		@NonNull MappingLoop pivotElement = context.refreshModelElement(MappingLoop.class, QVTimperativePackage.Literals.MAPPING_LOOP, csMappingLoop);
-		@NonNull Variable iterator = refreshNamedElement(Variable.class, PivotPackage.Literals.VARIABLE, DomainUtil.nonNullState(csMappingLoop.getOwnedIterator()));
+		@NonNull Variable iterator = refreshNamedElement(Variable.class, PivotPackage.Literals.VARIABLE, ClassUtil.nonNullState(csMappingLoop.getOwnedIterator()));
 		pivotElement.getIterator().clear();
 		pivotElement.getIterator().add(iterator);
 		pivotElement.setBody(PivotUtil.getPivot(MappingStatement.class, csMappingLoop.getMappingSequence()));
 //		CollectionType collectionType = metaModelManager.getCollectionType();
-//		DomainOperation forAllIteration = DomainUtil.getNamedElement(collectionType.getLocalOperations(), "forAll");
+//		DomainOperation forAllIteration = ClassUtil.getNamedElement(collectionType.getLocalOperations(), "forAll");
 //		pivotElement.setReferredIteration((Iteration) forAllIteration);
 		context.refreshComments(pivotElement, csMappingLoop);
 		return null;

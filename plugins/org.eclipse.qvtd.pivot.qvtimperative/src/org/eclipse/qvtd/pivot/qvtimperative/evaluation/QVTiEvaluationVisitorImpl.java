@@ -17,7 +17,6 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.domain.elements.DomainType;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.manager.PivotIdResolver;
@@ -73,7 +72,7 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
 		Type guardType = var.getType();
 		PivotIdResolver idResolver = nv.getMetaModelManager().getIdResolver();
         for (Object binding : rootBindings.get(depth)) {
-			DomainType valueType = idResolver.getDynamicTypeOf(binding);
+			Type valueType = idResolver.getDynamicTypeOf(binding);
 			if ((guardType != null) && valueType.conformsTo(nv.getMetaModelManager().getStandardLibrary(), guardType)) {
 				nv.getEvaluationEnvironment().replace(var, binding);
 	        	if (nextDepth < maxDepth) {

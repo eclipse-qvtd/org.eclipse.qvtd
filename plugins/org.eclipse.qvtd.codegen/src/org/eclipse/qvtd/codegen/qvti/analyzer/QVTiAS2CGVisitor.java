@@ -32,10 +32,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.generator.GenModelException;
 import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
-import org.eclipse.ocl.domain.elements.DomainOperation;
-import org.eclipse.ocl.domain.ids.TypeId;
-import org.eclipse.ocl.domain.library.LibraryProperty;
-import org.eclipse.ocl.domain.utilities.DomainUtil;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Iteration;
@@ -49,6 +45,9 @@ import org.eclipse.ocl.pivot.ParserException;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.library.LibraryProperty;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiGlobalContext;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
@@ -297,7 +296,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		Variables variablesStack = getVariablesStack();
 		CGRealizedVariable cgVariable = (CGRealizedVariable) variablesStack.getVariable(pRealizedVariable);
 		if (cgVariable == null) {
-			Type pivotType = DomainUtil.nonNullModel(pRealizedVariable.getType());
+			Type pivotType = ClassUtil.nonNullModel(pRealizedVariable.getType());
 			EClassifier eClassifier = (EClassifier) pivotType.getETarget();
 			if (eClassifier != null) {
 				CGEcoreRealizedVariable cgEcoreRealizedVariable = QVTiCGModelFactory.eINSTANCE.createCGEcoreRealizedVariable();
@@ -315,16 +314,16 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 	}
 
 	protected @NonNull CGTypedModel getTypedModel(@NonNull Variable pVariable) {
-		Area pArea = DomainUtil.nonNullState(QVTcoreBaseUtil.getContainingArea(pVariable));
+		Area pArea = ClassUtil.nonNullState(QVTcoreBaseUtil.getContainingArea(pVariable));
 		TypedModel asTypedModel = null;
 		if (pArea instanceof Domain) {
-			asTypedModel = DomainUtil.nonNullState(((Domain)pArea).getTypedModel());
+			asTypedModel = ClassUtil.nonNullState(((Domain)pArea).getTypedModel());
 		}
 		else {
 			Transformation pTransformation = ((Mapping)pArea).getTransformation();
-			asTypedModel = DomainUtil.nonNullState(pTransformation.getModelParameter(null));
+			asTypedModel = ClassUtil.nonNullState(pTransformation.getModelParameter(null));
 		}
-		return DomainUtil.nonNullState(analyzer.getTypedModel(asTypedModel));
+		return ClassUtil.nonNullState(analyzer.getTypedModel(asTypedModel));
 	}
 
 	public @Nullable CGNamedElement visitAssignment(@NonNull Assignment object) {
@@ -464,7 +463,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 //		cgIterator.setNonNull();
 		cgMappingLoop.setAst(asMappingLoop);
 		CollectionType collectionType = metaModelManager.getStandardLibrary().getCollectionType();
-		DomainOperation forAllIteration = DomainUtil.getNamedElement(collectionType.getOwnedOperations(), "forAll");
+		Operation forAllIteration = ClassUtil.getNamedElement(collectionType.getOwnedOperations(), "forAll");
 		cgMappingLoop.setReferredIteration((Iteration) forAllIteration);
 		cgMappingLoop.setBody(doVisit(CGValuedElement.class, asMappingLoop.getBody()));
 		return cgMappingLoop;
@@ -485,7 +484,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 	}
 
 	public @Nullable CGNamedElement visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment asPropertyAssignment) {
-//		Property asProperty = DomainUtil.nonNullModel(asPropertyAssignment.getTargetProperty());
+//		Property asProperty = ClassUtil.nonNullModel(asPropertyAssignment.getTargetProperty());
 		CGMiddlePropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyAssignment();
 //		setPivot(cgPropertyAssignment, asPredicate);
 		cgPropertyAssignment.setSlotValue(doVisit(CGValuedElement.class, asPropertyAssignment.getSlotExpression()));
@@ -507,8 +506,8 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 	}
 
 	public @Nullable CGNamedElement visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp asMiddlePropertyCallExp) {
-		Property asOppositeProperty = DomainUtil.nonNullModel(asMiddlePropertyCallExp.getReferredProperty());
-		Property asProperty = DomainUtil.nonNullModel(asOppositeProperty.getOpposite());
+		Property asOppositeProperty = ClassUtil.nonNullModel(asMiddlePropertyCallExp.getReferredProperty());
+		Property asProperty = ClassUtil.nonNullModel(asOppositeProperty.getOpposite());
 		globalContext.addToMiddleProperty(asOppositeProperty);
 //		LibraryProperty libraryProperty = metaModelManager.getImplementation(asProperty);
 		CGMiddlePropertyCallExp cgPropertyCallExp = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyCallExp();					
@@ -560,7 +559,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 	}
 
 	public @Nullable CGNamedElement visitPropertyAssignment(@NonNull PropertyAssignment asPropertyAssignment) {
-		Property asTargetProperty = DomainUtil.nonNullModel(asPropertyAssignment.getTargetProperty());
+		Property asTargetProperty = ClassUtil.nonNullModel(asPropertyAssignment.getTargetProperty());
 		LibraryProperty libraryProperty = metaModelManager.getImplementation(null, asTargetProperty);
 		CGPropertyAssignment cgPropertyAssignment = null;
 		if (isEcoreProperty(libraryProperty)) {

@@ -17,10 +17,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.domain.elements.DomainInheritance;
-import org.eclipse.ocl.domain.elements.DomainStandardLibrary;
+import org.eclipse.ocl.pivot.CompleteInheritance;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.internal.impl.OperationImpl;
+import org.eclipse.ocl.pivot.StandardLibrary;
+import org.eclipse.ocl.pivot.impl.OperationImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
@@ -196,7 +196,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 	}
 
 	@Override
-	public @Nullable DomainInheritance getInheritance(@NonNull DomainStandardLibrary standardLibrary) {
+	public @Nullable CompleteInheritance getInheritance(@NonNull StandardLibrary standardLibrary) {
 		return null;
 	}
 } //FunctionImpl

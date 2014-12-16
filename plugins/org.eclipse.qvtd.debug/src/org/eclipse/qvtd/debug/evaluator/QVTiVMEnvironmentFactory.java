@@ -16,11 +16,11 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.IVMDebuggerShell;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEnvironmentFactory;
-import org.eclipse.ocl.domain.utilities.DomainUtil;
 import org.eclipse.ocl.pivot.Environment;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.IQVTiEvaluationEnvironment;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -68,7 +68,7 @@ public class QVTiVMEnvironmentFactory extends QVTiEnvironmentFactory implements 
 	}
 
 	public @NonNull QVTiVMRootEvaluationVisitor createEvaluationVisitor(@NonNull QVTiVMEnvironment env, @NonNull IQVTiEvaluationEnvironment evalEnv) {
-		return new QVTiVMRootEvaluationVisitor(env, (IQVTiVMEvaluationEnvironment) evalEnv, DomainUtil.nonNullState(shell));
+		return new QVTiVMRootEvaluationVisitor(env, (IQVTiVMEvaluationEnvironment) evalEnv, ClassUtil.nonNullState(shell));
 	}
 
 	@Override

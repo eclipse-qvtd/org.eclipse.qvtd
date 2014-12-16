@@ -28,23 +28,8 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
-import org.eclipse.ocl.domain.elements.Nameable;
+import org.eclipse.ocl.pivot.Nameable;
 import org.eclipse.qvtd.codegen.qvticgmodel.*;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMapping;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
-import org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel;
-import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 
 /**
  * <!-- begin-user-doc -->

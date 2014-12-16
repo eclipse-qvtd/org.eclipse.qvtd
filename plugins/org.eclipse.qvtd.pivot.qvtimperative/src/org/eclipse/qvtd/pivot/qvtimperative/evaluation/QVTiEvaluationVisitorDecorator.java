@@ -13,19 +13,17 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.domain.elements.DomainClass;
-import org.eclipse.ocl.domain.elements.DomainEnvironment;
-import org.eclipse.ocl.domain.elements.DomainExpression;
-import org.eclipse.ocl.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.domain.evaluation.DomainLogger;
-import org.eclipse.ocl.domain.types.IdResolver;
-import org.eclipse.ocl.domain.values.impl.InvalidValueException;
-import org.eclipse.ocl.domain.values.util.ValuesUtil;
-import org.eclipse.ocl.pivot.ExpressionInOCL;
+import org.eclipse.ocl.pivot.CompleteEnvironment;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.evaluation.AbstractEvaluationVisitorDecorator;
+import org.eclipse.ocl.pivot.evaluation.DomainLogger;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.pivot.util.Visitable;
+import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -74,21 +72,21 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
-	public @Nullable Object evaluate(@NonNull DomainExpression body) {
+	public @Nullable Object evaluate(@NonNull OCLExpression body) {
 		return delegate.evaluate(body);
 	}
 
 	/**
      * Delegates to my decorated visitor.
      */
-	public @Nullable Object evaluate(@NonNull ExpressionInOCL expressionInOCL) {
-		return delegate.evaluate(expressionInOCL);
-	}
+//	public @Nullable Object evaluate(@NonNull ExpressionInOCL expressionInOCL) {
+//		return delegate.evaluate(expressionInOCL);
+//	}
 
 	/**
      * Delegates to my decorated visitor.
      */
-	public @NonNull DomainEnvironment getCompleteEnvironment() {
+	public @NonNull CompleteEnvironment getCompleteEnvironment() {
 		return delegate.getCompleteEnvironment();
 	}
 
@@ -130,14 +128,14 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
-	public @NonNull DomainStandardLibrary getStandardLibrary() {
+	public @NonNull StandardLibrary getStandardLibrary() {
 		return delegate.getStandardLibrary();
 	}
 
 	/**
      * Delegates to my decorated visitor.
      */
-	public @NonNull DomainClass getStaticTypeOf(@Nullable Object value) {
+	public @NonNull org.eclipse.ocl.pivot.Class getStaticTypeOf(@Nullable Object value) {
 		
 		return delegate.getStaticTypeOf(value);
 	}
@@ -145,7 +143,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
-	public @NonNull DomainClass getStaticTypeOf(@Nullable Object value,
+	public @NonNull org.eclipse.ocl.pivot.Class getStaticTypeOf(@Nullable Object value,
 			@NonNull Object... values) {
 		return delegate.getStaticTypeOf(value, values);
 	}
@@ -153,7 +151,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
-	public @NonNull DomainClass getStaticTypeOf(@Nullable Object value,
+	public @NonNull org.eclipse.ocl.pivot.Class getStaticTypeOf(@Nullable Object value,
 			@NonNull Iterable<?> values) {
 		return delegate.getStaticTypeOf(value, values);
 	}
@@ -193,7 +191,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 		}
 		try {
 			Object result = v.accept(delegate);
-			assert ValuesUtil.isBoxed(result);	// Make sure Integer/Real are boxed, invalid is an exception, null is null
+			assert ValueUtil.isBoxed(result);	// Make sure Integer/Real are boxed, invalid is an exception, null is null
 			return result;
 		} catch (InvalidValueException e) {
 			throw e;

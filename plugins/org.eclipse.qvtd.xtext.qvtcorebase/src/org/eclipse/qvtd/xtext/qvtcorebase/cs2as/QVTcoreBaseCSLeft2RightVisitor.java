@@ -12,13 +12,13 @@ package org.eclipse.qvtd.xtext.qvtcorebase.cs2as;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.domain.utilities.DomainUtil;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
@@ -84,7 +84,7 @@ public class QVTcoreBaseCSLeft2RightVisitor extends AbstractQVTcoreBaseCSLeft2Ri
 	@Override
 	protected @Nullable Invocations getInvocations(@NonNull Type asType, @Nullable Type asTypeValue, @NonNull String name, int iteratorCount, int expressionCount) {
 		if (asType instanceof Transformation) {
-			Operation function = DomainUtil.getNamedElement(((Transformation)asType).getOwnedOperations(), name);
+			Operation function = ClassUtil.getNamedElement(((Transformation)asType).getOwnedOperations(), name);
 			if (function != null) {
 				return new ResolvedInvocation(function);
 			}

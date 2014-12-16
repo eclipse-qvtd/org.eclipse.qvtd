@@ -19,18 +19,17 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.VMVirtualMachine;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationEnvironment;
 import org.eclipse.ocl.examples.debug.vm.utils.VMInterruptedExecutionException;
-import org.eclipse.ocl.domain.elements.DomainClass;
-import org.eclipse.ocl.domain.elements.DomainEnvironment;
-import org.eclipse.ocl.domain.elements.DomainExpression;
-import org.eclipse.ocl.domain.elements.DomainStandardLibrary;
-import org.eclipse.ocl.domain.evaluation.DomainLogger;
-import org.eclipse.ocl.domain.evaluation.DomainModelManager;
-import org.eclipse.ocl.domain.types.IdResolver;
+import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.evaluation.DomainLogger;
+import org.eclipse.ocl.pivot.evaluation.DomainModelManager;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
@@ -53,7 +52,7 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 
 	public abstract int getDepth();
 
-	public @NonNull DomainEnvironment getCompleteEnvironment() {
+	public @NonNull CompleteEnvironment getCompleteEnvironment() {
 		return delegate.getCompleteEnvironment();
 	}
 
@@ -192,7 +191,7 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 	}
 
 	@Override
-	public @Nullable Object evaluate(@NonNull DomainExpression body) {
+	public @Nullable Object evaluate(@NonNull OCLExpression body) {
 		return delegate.evaluate(body);
 	}
 
@@ -217,7 +216,7 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 	}
 
 	@Override
-	public @NonNull DomainStandardLibrary getStandardLibrary() {
+	public @NonNull StandardLibrary getStandardLibrary() {
 		return delegate.getStandardLibrary();
 	}
 
@@ -248,17 +247,17 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 	public abstract @NonNull QVTiVMRootEvaluationVisitor getRootEvaluationVisitor();
 
 	@Override
-	public @NonNull DomainClass getStaticTypeOf(@Nullable Object value) {
+	public @NonNull org.eclipse.ocl.pivot.Class getStaticTypeOf(@Nullable Object value) {
 		return delegate.getStaticTypeOf(value);
 	}
 
 	@Override
-	public @NonNull DomainClass getStaticTypeOf(@Nullable Object value, @NonNull Object... values) {
+	public @NonNull org.eclipse.ocl.pivot.Class getStaticTypeOf(@Nullable Object value, @NonNull Object... values) {
 		return delegate.getStaticTypeOf(value, values);
 	}
 
 	@Override
-	public @NonNull DomainClass getStaticTypeOf(@Nullable Object value, @NonNull Iterable<?> values) {
+	public @NonNull org.eclipse.ocl.pivot.Class getStaticTypeOf(@Nullable Object value, @NonNull Iterable<?> values) {
 		return delegate.getStaticTypeOf(value, values);
 	}
 

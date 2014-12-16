@@ -18,7 +18,6 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.domain.utilities.DomainUtil;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.Namespace;
@@ -31,6 +30,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
@@ -206,7 +206,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 //			PathNameCS pathName = csTransformation.getPathName();
 //			List<PathElementCS> ownedPathElements = pathName != null ? pathName.getOwnedPathElements() : null;
 //			if ((ownedPathElements == null) || ownedPathElements.isEmpty()) {
-				asParent = DomainUtil.getNamedElement(asCoreModel.getOwnedPackages(), "");
+				asParent = ClassUtil.getNamedElement(asCoreModel.getOwnedPackages(), "");
 				if (asParent == null) {
 					asParent = context.refreshModelElement(org.eclipse.ocl.pivot.Package.class, PivotPackage.Literals.PACKAGE, null);
 					asParent.setName("");
@@ -230,7 +230,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 							package2ownedPackages.put(asParent, asNewPackages);
 						}
 					}
-					org.eclipse.ocl.pivot.Package asPackage = DomainUtil.getNamedElement(asOldPackages, name);
+					org.eclipse.ocl.pivot.Package asPackage = ClassUtil.getNamedElement(asOldPackages, name);
 					if (asPackage == null) {
 						asPackage = context.refreshModelElement(org.eclipse.ocl.pivot.Package.class, PivotPackage.Literals.PACKAGE, null);
 						asPackage.setName(name);
@@ -265,7 +265,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		@NonNull CollectionTemplateExp pivotElement = context.refreshModelElement(CollectionTemplateExp.class, QVTtemplatePackage.Literals.COLLECTION_TEMPLATE_EXP, csElement);
 		Variable variable = pivotElement.getBindsTo();
 		if (variable == null) {
-			variable = DomainUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
+			variable = ClassUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
 			pivotElement.setBindsTo(variable);
 		}
 		context.refreshName(variable, csElement.getName());
@@ -322,7 +322,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		@NonNull VariableExp pivotElement = context.refreshModelElement(VariableExp.class, PivotPackage.Literals.VARIABLE_EXP, csElement);
 		VariableDeclaration variable = pivotElement.getReferredVariable();
 		if (variable == null) {
-			variable = DomainUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
+			variable = ClassUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
 			pivotElement.setReferredVariable(variable);
 		}
 		context.refreshName(variable, csElement.getName());
@@ -331,7 +331,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 
 	@Override
 	public Continuation<?> visitImportCS(@NonNull ImportCS csElement) {
-		PathNameCS csPathName = DomainUtil.nonNullState(csElement.getOwnedPathName());
+		PathNameCS csPathName = ClassUtil.nonNullState(csElement.getOwnedPathName());
 		CS2AS.setElementType(csPathName, PivotPackage.Literals.PACKAGE, csElement, null);
 		super.visitImportCS(csElement);
 		@NonNull Unit pivotElement = refreshNamedElement(Unit.class, QVTbasePackage.Literals.UNIT, csElement);
@@ -342,7 +342,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 
 	@Override
 	public Continuation<?> visitKeyDeclCS(@NonNull KeyDeclCS csElement) {
-		PathNameCS csPathName = DomainUtil.nonNullState(csElement.getPathName());
+		PathNameCS csPathName = ClassUtil.nonNullState(csElement.getPathName());
 		CS2AS.setElementType(csPathName, PivotPackage.Literals.CLASS, csElement, null);
 		for (PathNameCS csOppositePropertyId : csElement.getOppositePropertyIds()) {
 			if (csOppositePropertyId != null) {
@@ -372,7 +372,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		@NonNull ObjectTemplateExp pivotElement = context.refreshModelElement(ObjectTemplateExp.class, QVTtemplatePackage.Literals.OBJECT_TEMPLATE_EXP, csElement);
 		Variable variable = pivotElement.getBindsTo();
 		if (variable == null) {
-			variable = DomainUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
+			variable = ClassUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
 			pivotElement.setBindsTo(variable);
 		}
 		context.refreshName(variable, csElement.getName());

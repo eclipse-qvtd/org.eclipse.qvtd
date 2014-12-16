@@ -25,13 +25,13 @@ import org.eclipse.ocl.examples.debug.vm.evaluator.IVMRootEvaluationEnvironment;
 import org.eclipse.ocl.examples.debug.vm.utils.ASTBindingHelper;
 import org.eclipse.ocl.examples.debug.vm.utils.VMRuntimeException;
 import org.eclipse.ocl.examples.debug.vm.utils.VMStackTraceBuilder;
-import org.eclipse.ocl.domain.utilities.DomainUtil;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -56,9 +56,9 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 		super(metaModelManager, modelManager, transformation);
 		myCurrentIP = transformation;
 		this.id = id;
-		pcVariable = DomainUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
+		pcVariable = ClassUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
 		pcVariable.setName("$pc");
-		String typeName = DomainUtil.nonNullEMF(PivotPackage.Literals.OCL_EXPRESSION.getName());
+		String typeName = ClassUtil.nonNullEMF(PivotPackage.Literals.OCL_EXPRESSION.getName());
 		pcVariable.setType(metaModelManager.getPivotType(typeName));
 	}
 

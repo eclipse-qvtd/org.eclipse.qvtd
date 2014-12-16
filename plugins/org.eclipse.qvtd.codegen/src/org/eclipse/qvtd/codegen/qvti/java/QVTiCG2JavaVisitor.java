@@ -35,16 +35,16 @@ import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaVisitor;
 import org.eclipse.ocl.examples.codegen.java.JavaConstants;
 import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
-import org.eclipse.ocl.domain.evaluation.AbstractTransformation;
-import org.eclipse.ocl.domain.evaluation.DomainEvaluator;
-import org.eclipse.ocl.domain.ids.CollectionTypeId;
-import org.eclipse.ocl.domain.ids.ElementId;
-import org.eclipse.ocl.domain.ids.TypeId;
-import org.eclipse.ocl.domain.utilities.DomainUtil;
-import org.eclipse.ocl.domain.values.util.ValuesUtil;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.evaluation.AbstractTransformation;
+import org.eclipse.ocl.pivot.evaluation.DomainEvaluator;
+import org.eclipse.ocl.pivot.ids.CollectionTypeId;
+import org.eclipse.ocl.pivot.ids.ElementId;
+import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
@@ -199,7 +199,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		js.pushIndentation(null);
 		for (@NonNull CGGuardVariable cgFreeVariable : cgFreeVariables) {
 			TypeDescriptor typeDescriptor = context.getTypeDescriptor(cgFreeVariable);
-			EClassifier eClassifier = DomainUtil.nonNullState(typeDescriptor.getEClassifier());
+			EClassifier eClassifier = ClassUtil.nonNullState(typeDescriptor.getEClassifier());
 			String qualifiedPackageInterfaceName = genModelHelper.getQualifiedPackageInterfaceName(eClassifier.getEPackage());
 			String classifierLiteralName = genModelHelper.getLiteralName(eClassifier);
 			String nameHint = "ECLASS_" + cgFreeVariable.getValueName();
@@ -276,7 +276,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		if (pivotTypeId instanceof CollectionTypeId) {
 			pivotTypeId = ((CollectionTypeId)pivotTypeId).getElementTypeId();
 		}
-		TypeDescriptor iteratorTypeDescriptor = context.getBoxedDescriptor(DomainUtil.nonNullState(pivotTypeId));
+		TypeDescriptor iteratorTypeDescriptor = context.getBoxedDescriptor(ClassUtil.nonNullState(pivotTypeId));
 		if (argumentTypeDescriptor.isAssignableFrom(iteratorTypeDescriptor)) {
 			return null;
 		}
@@ -289,7 +289,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 //		Property pivotProperty = cgPropertyCallExp.getReferredProperty();
 //		CGTypeId cgTypeId = analyzer.getTypeId(pivotProperty.getOwningType().getTypeId());
 //		JavaTypeDescriptor requiredTypeDescriptor = context.getJavaTypeDescriptor(cgTypeId, false);
-		EStructuralFeature eStructuralFeature = DomainUtil.nonNullModel(cgPropertyAssignment.getEStructuralFeature());
+		EStructuralFeature eStructuralFeature = ClassUtil.nonNullModel(cgPropertyAssignment.getEStructuralFeature());
 		CGValuedElement cgSlot = getExpression(cgPropertyAssignment.getSlotValue());
 		CGValuedElement cgInit = getExpression(cgPropertyAssignment.getInitValue());
 //		Class<?> requiredJavaClass = requiredTypeDescriptor.getJavaClass();
@@ -666,7 +666,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 
 	public @NonNull Boolean visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment cgMiddlePropertyAssignment) {
 		visitCGEcorePropertyAssignment(cgMiddlePropertyAssignment);
-		Property pReferredProperty = DomainUtil.nonNullModel(cgMiddlePropertyAssignment.getReferredProperty());
+		Property pReferredProperty = ClassUtil.nonNullModel(cgMiddlePropertyAssignment.getReferredProperty());
 		assert !pReferredProperty.isImplicit();
 		CGValuedElement slotValue = cgMiddlePropertyAssignment.getSlotValue();
 		CGValuedElement initValue = cgMiddlePropertyAssignment.getInitValue();
@@ -702,7 +702,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		if (toMiddleProperties != null) {
 			String cacheName = toMiddleProperties.get(pivotProperty);
 			if (cacheName != null) {
-				js.appendClassReference(DomainUtil.class);
+				js.appendClassReference(ClassUtil.class);
 				js.append(".nonNullState (");
 				js.append(cacheName);
 				js.append(".get(");
@@ -731,7 +731,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		else {
 			js.appendValueName(cgConditionExpression);
 			js.append(" != ");
-			js.appendClassReference(ValuesUtil.class);
+			js.appendClassReference(ValueUtil.class);
 			js.append(".TRUE_VALUE");
 		}
 		js.append(") {\n");
@@ -832,8 +832,8 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 	}
 
 	public @NonNull Boolean visitCGVariablePredicate(@NonNull CGVariablePredicate cgVariablePredicate) {
-		CGValuedElement cgConditionExpression = DomainUtil.nonNullState(cgVariablePredicate.getConditionExpression());
-		CGVariable cgPredicateVariable = DomainUtil.nonNullState(cgVariablePredicate.getPredicateVariable());
+		CGValuedElement cgConditionExpression = ClassUtil.nonNullState(cgVariablePredicate.getConditionExpression());
+		CGVariable cgPredicateVariable = ClassUtil.nonNullState(cgVariablePredicate.getPredicateVariable());
 		TypeDescriptor sourceTypeDescriptor = context.getTypeDescriptor(cgConditionExpression);
 		TypeDescriptor targetTypeDescriptor = context.getTypeDescriptor(cgPredicateVariable);
 		if (!js.appendLocalStatements(cgConditionExpression)) {

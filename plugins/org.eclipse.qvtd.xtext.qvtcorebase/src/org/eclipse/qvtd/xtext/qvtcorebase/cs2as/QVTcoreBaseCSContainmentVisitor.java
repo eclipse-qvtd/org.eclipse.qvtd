@@ -18,10 +18,10 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.domain.utilities.DomainUtil;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
@@ -136,7 +136,7 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 			PathNameCS pathName = csTransformation.getPathName();
 			List<PathElementCS> ownedPathElements = pathName != null ? pathName.getOwnedPathElements() : null;
 			if ((ownedPathElements == null) || ownedPathElements.isEmpty()) {
-				asParent = DomainUtil.getNamedElement(asCoreModel.getOwnedPackages(), "");
+				asParent = ClassUtil.getNamedElement(asCoreModel.getOwnedPackages(), "");
 				if (asParent == null) {
 					asParent = context.refreshModelElement(org.eclipse.ocl.pivot.Package.class, PivotPackage.Literals.PACKAGE, null);
 					asParent.setName("");
@@ -160,7 +160,7 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 							package2ownedPackages.put(asParent, asNewPackages);
 						}
 					}
-					org.eclipse.ocl.pivot.Package asPackage = DomainUtil.getNamedElement(asOldPackages, name);
+					org.eclipse.ocl.pivot.Package asPackage = ClassUtil.getNamedElement(asOldPackages, name);
 					if (asPackage == null) {
 						asPackage = context.refreshModelElement(org.eclipse.ocl.pivot.Package.class, PivotPackage.Literals.PACKAGE, null);
 						asPackage.setName(name);
@@ -235,7 +235,7 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 
 	@Override
 	public Continuation<?> visitImportCS(@NonNull ImportCS csElement) {
-		PathNameCS csPathName = DomainUtil.nonNullState(csElement.getOwnedPathName());
+		PathNameCS csPathName = ClassUtil.nonNullState(csElement.getOwnedPathName());
 		CS2AS.setElementType(csPathName, PivotPackage.Literals.PACKAGE, csElement, null);
 		super.visitImportCS(csElement);
 		@NonNull Unit pivotElement = refreshNamedElement(Unit.class, QVTbasePackage.Literals.UNIT, csElement);

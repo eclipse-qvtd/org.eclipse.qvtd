@@ -54,7 +54,7 @@ public class QVTimperativeAS2XMIidVisitor extends AbstractQVTimperativeAS2XMIidV
 	@Override
 	public @Nullable Boolean visitMapping(@NonNull Mapping object) {
 		s.append(MAPPING_PREFIX);
-		appendParent((EObject)object);
+		appendParent(object);
 		appendName(object.getName());
 		return true;
 	}

@@ -71,7 +71,7 @@ public class MainTab extends AbstractMainTab implements QVTiLaunchConstants
 				List<String> elements = new ArrayList<String>();
 				for (TreeIterator<EObject> tit = resource.getAllContents(); tit.hasNext(); ) {
 					EObject eObject = tit.next();
-					String displayString = DomainUtil.getLabel(eObject);
+					String displayString = ClassUtil.getLabel(eObject);
 					URI uri = EcoreUtil.getURI(eObject);
 					elements.add(displayString);
 					element2uri.put(displayString, uri);

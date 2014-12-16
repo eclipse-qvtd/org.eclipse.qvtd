@@ -16,8 +16,6 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.domain.utilities.DomainUtil;
-import org.eclipse.ocl.domain.utilities.SingletonIterator;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
@@ -29,7 +27,9 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.messages.OCLMessages;
 import org.eclipse.ocl.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.pivot.scoping.ScopeFilter;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.SingletonIterator;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
@@ -82,7 +82,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 		}
 		
 		public @NonNull Type getSourceType() {
-			return DomainUtil.nonNullState(invocation.getTransformation());
+			return ClassUtil.nonNullState(invocation.getTransformation());
 		}
 
 		public Iterator<NamedElement> iterator() {
@@ -135,11 +135,11 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 	@Override
 	protected @Nullable Invocations getInvocations(@NonNull Type asType, @Nullable Type asTypeValue, @NonNull String name, int iteratorCount, int expressionCount) {
 		if (asType instanceof Transformation) {
-			Rule rule = DomainUtil.getNamedElement(((Transformation)asType).getRule(), name);
+			Rule rule = ClassUtil.getNamedElement(((Transformation)asType).getRule(), name);
 			if (rule != null) {
 				return new ResolvedRuleInvocation(rule);
 			}
-			Operation function = DomainUtil.getNamedElement(((Transformation)asType).getOwnedOperations(), name);
+			Operation function = ClassUtil.getNamedElement(((Transformation)asType).getOwnedOperations(), name);
 			if (function != null) {
 				return new ResolvedInvocation(function);
 			}
@@ -213,7 +213,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 			}
 		}
 		if ((csArgumentCount != domainsCount) && (relation != metaModelManager.getStandardLibrary().getOclInvalidOperation())) {
-			String boundMessage = DomainUtil.bind(OCLMessages.MismatchedArgumentCount_ERROR_, csArgumentCount, domainsCount);
+			String boundMessage = ClassUtil.bind(OCLMessages.MismatchedArgumentCount_ERROR_, csArgumentCount, domainsCount);
 			context.addDiagnostic(csNameExp, boundMessage);			
 		}
 		context.refreshList(relationCallExp.getArgument(), pivotArguments);
@@ -240,7 +240,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 								isType = true;
 								NameExpCS csNameExp = (NameExpCS)csName;
 								PathNameCS csPathName = csNameExp.getOwnedPathName();
-								Type type = context.getConverter().lookupType(csNameExp, DomainUtil.nonNullState(csPathName));
+								Type type = context.getConverter().lookupType(csNameExp, ClassUtil.nonNullState(csPathName));
 								if (type != null) {
 									arg = resolveTypeExp(csNameExp, type);
 								}

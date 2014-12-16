@@ -28,16 +28,13 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.domain.elements.DomainClass;
-import org.eclipse.ocl.domain.elements.DomainPackage;
-import org.eclipse.ocl.domain.elements.DomainType;
-import org.eclipse.ocl.domain.evaluation.DomainModelManager;
-import org.eclipse.ocl.domain.utilities.DomainUtil;
 import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.ParserException;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.evaluation.DomainModelManager;
 import org.eclipse.ocl.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 /**
@@ -122,15 +119,15 @@ public class QVTiModelManager implements DomainModelManager
 		}
 	}
 
-	public @NonNull Set<EObject> get(@NonNull DomainClass type) {
+	public @NonNull Set<EObject> get(@NonNull org.eclipse.ocl.pivot.Class type) {
 		
 		Set<EObject> elements = new HashSet<EObject>();
 		// Find the typed model for the type
-		DomainPackage p = type.getOwningPackage();
+		org.eclipse.ocl.pivot.Package p = type.getOwningPackage();
 		for (TypedModel d : modelResourceMap.keySet()) {
 			for (Package up : d.getUsedPackage()) {
 				if (up.equals(p)) {
-					for (Object o : getElementsByType(d, (Type) type)) {
+					for (Object o : getElementsByType(d, type)) {
 						elements.add((EObject) o);
 					}
 				}
@@ -219,12 +216,12 @@ public class QVTiModelManager implements DomainModelManager
 	 * @return <code>true</code> if this element is an instance of the given
 	 * class; <code>false</code> otherwise
 	 */
-	protected boolean isInstance(@NonNull DomainType requiredType, @NonNull EObject eObject) {
+	protected boolean isInstance(@NonNull Type requiredType, @NonNull EObject eObject) {
 		EClass eClass = eObject.eClass();
 		EPackage ePackage = eClass.getEPackage();
 		Type objectType = null;
 		if (ePackage == PivotPackage.eINSTANCE) {
-			String name = DomainUtil.nonNullEMF(eClass.getName());
+			String name = ClassUtil.nonNullEMF(eClass.getName());
 			objectType = metaModelManager.getPivotType(name);
 		}
 		else {

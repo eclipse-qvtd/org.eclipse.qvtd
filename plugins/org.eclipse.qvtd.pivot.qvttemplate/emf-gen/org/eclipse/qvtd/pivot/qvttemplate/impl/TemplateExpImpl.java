@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.internal.impl.LiteralExpImpl;
+import org.eclipse.ocl.pivot.impl.LiteralExpImpl;
 import org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
 

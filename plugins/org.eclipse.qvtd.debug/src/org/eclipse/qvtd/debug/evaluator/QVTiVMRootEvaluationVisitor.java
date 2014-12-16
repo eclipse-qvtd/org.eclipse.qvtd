@@ -45,15 +45,15 @@ import org.eclipse.ocl.examples.debug.vm.utils.ASTBindingHelper;
 import org.eclipse.ocl.examples.debug.vm.utils.CompiledUnit;
 import org.eclipse.ocl.examples.debug.vm.utils.DebugOptions;
 import org.eclipse.ocl.examples.debug.vm.utils.VMInterruptedExecutionException;
-import org.eclipse.ocl.domain.elements.DomainTypedElement;
-import org.eclipse.ocl.domain.utilities.DomainUtil;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.LoopExp;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.PivotPackage;
+import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.debug.stepper.QVTiStepperVisitor;
 import org.eclipse.qvtd.debug.vm.QVTiVMVirtualMachine;
@@ -79,9 +79,9 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		fCurrentStepMode = VMSuspension.UNSPECIFIED;
 		pushVisitor(this);
 		fCurrentLocation = getCurrentLocation();
-		invalidVariable = DomainUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
+		invalidVariable = ClassUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
 		invalidVariable.setName("$invalid");
-		String typeName = DomainUtil.nonNullEMF(PivotPackage.Literals.OCL_EXPRESSION.getName());
+		String typeName = ClassUtil.nonNullEMF(PivotPackage.Literals.OCL_EXPRESSION.getName());
 		invalidVariable.setType(env.getMetaModelManager().getPivotType(typeName));
 	}
 
@@ -177,7 +177,7 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		if (name == null) {
 			return "<null>"; //$NON-NLS-1$
 		}
-		return DomainUtil.nonNullState(name);
+		return ClassUtil.nonNullState(name);
 	}
 
 	public @NonNull QVTiVMRootEvaluationVisitor getRootEvaluationVisitor() {
@@ -334,7 +334,7 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		if (!stepperStack.isEmpty()) {
 			IVMEvaluationEnvironment.StepperEntry parentStepperEntry = stepperStack.peek();
 			if (element instanceof OCLExpression) { // NB not Variable
-				parentStepperEntry.pushTo(evalEnv, (DomainTypedElement) element, result);
+				parentStepperEntry.pushTo(evalEnv, (TypedElement) element, result);
 			}
 			parentStepper = parentStepperEntry.stepper;
 		}

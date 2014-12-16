@@ -31,8 +31,8 @@ import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.ImportUtils;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
-import org.eclipse.ocl.domain.utilities.DomainUtil;
 import org.eclipse.ocl.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalysisVisitor;
@@ -85,7 +85,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		cgPackage.setName(packagePrefix);
 		QVTiAS2CGVisitor pivot2CGVisitor = new QVTiAS2CGVisitor(cgAnalyzer,
 			getGlobalContext());
-		CGTransformation cgTransformation = (CGTransformation) DomainUtil
+		CGTransformation cgTransformation = (CGTransformation) ClassUtil
 			.nonNullState(transformation.accept(pivot2CGVisitor));
 		cgPackage.getClasses().add(cgTransformation);
 		return cgPackage;
@@ -147,7 +147,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	}
 
 	public @NonNull String getQualifiedName() {
-		String className = DomainUtil.nonNullState(transformation.getName());
+		String className = ClassUtil.nonNullState(transformation.getName());
 		String packagePrefix = getOptions().getPackagePrefix();
 		if (packagePrefix != null) {
 			return packagePrefix + "." + className;

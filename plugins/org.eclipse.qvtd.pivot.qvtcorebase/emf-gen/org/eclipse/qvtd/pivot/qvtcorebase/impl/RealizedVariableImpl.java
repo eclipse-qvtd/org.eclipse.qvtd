@@ -13,7 +13,7 @@ package org.eclipse.qvtd.pivot.qvtcorebase.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.internal.impl.VariableImpl;
+import org.eclipse.ocl.pivot.impl.VariableImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
