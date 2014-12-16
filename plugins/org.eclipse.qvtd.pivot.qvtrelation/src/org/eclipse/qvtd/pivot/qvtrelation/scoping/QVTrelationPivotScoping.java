@@ -28,6 +28,7 @@ public class QVTrelationPivotScoping
 {	
 	private static final class FunctionDisambiguator implements Comparator<Function>
 	{
+		@Override
 		@SuppressWarnings("null")
 		public int compare(Function match1, Function match2) {
 			if (isDefinitionOf(match1, match2)) {

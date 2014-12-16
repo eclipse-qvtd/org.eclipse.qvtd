@@ -29,9 +29,9 @@ import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.AbstractMappingCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.QueryCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.util.AbstractQVTcoreBaseCSLeft2RightVisitor;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.util.AbstractQVTcoreBaseCSLeft2RightVisitor;
 
 public class QVTcoreBaseCSLeft2RightVisitor extends AbstractQVTcoreBaseCSLeft2RightVisitor
 {

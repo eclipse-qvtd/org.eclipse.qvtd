@@ -127,6 +127,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCollectionTemplateExp() {
 		return collectionTemplateExpEClass;
 	}
@@ -136,6 +137,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCollectionTemplateExp_Member() {
 		return (EReference)collectionTemplateExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -145,6 +147,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCollectionTemplateExp_ReferredCollectionType() {
 		return (EReference)collectionTemplateExpEClass.getEStructuralFeatures().get(1);
 	}
@@ -154,6 +157,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCollectionTemplateExp_Rest() {
 		return (EReference)collectionTemplateExpEClass.getEStructuralFeatures().get(2);
 	}
@@ -163,6 +167,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getObjectTemplateExp() {
 		return objectTemplateExpEClass;
 	}
@@ -172,6 +177,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getObjectTemplateExp_Part() {
 		return (EReference)objectTemplateExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -181,6 +187,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getObjectTemplateExp_ReferredClass() {
 		return (EReference)objectTemplateExpEClass.getEStructuralFeatures().get(1);
 	}
@@ -190,6 +197,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPropertyTemplateItem() {
 		return propertyTemplateItemEClass;
 	}
@@ -199,6 +207,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPropertyTemplateItem_ObjContainer() {
 		return (EReference)propertyTemplateItemEClass.getEStructuralFeatures().get(0);
 	}
@@ -208,6 +217,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPropertyTemplateItem_ReferredProperty() {
 		return (EReference)propertyTemplateItemEClass.getEStructuralFeatures().get(1);
 	}
@@ -217,6 +227,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPropertyTemplateItem_Value() {
 		return (EReference)propertyTemplateItemEClass.getEStructuralFeatures().get(2);
 	}
@@ -226,6 +237,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getPropertyTemplateItem_IsOpposite() {
 		return (EAttribute)propertyTemplateItemEClass.getEStructuralFeatures().get(3);
 	}
@@ -235,6 +247,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTemplateExp() {
 		return templateExpEClass;
 	}
@@ -244,6 +257,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTemplateExp_BindsTo() {
 		return (EReference)templateExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -253,6 +267,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTemplateExp_Where() {
 		return (EReference)templateExpEClass.getEStructuralFeatures().get(1);
 	}
@@ -262,6 +277,7 @@ public class QVTtemplatePackageImpl extends EPackageImpl implements QVTtemplateP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public QVTtemplateFactory getQVTtemplateFactory() {
 		return (QVTtemplateFactory)getEFactoryInstance();
 	}

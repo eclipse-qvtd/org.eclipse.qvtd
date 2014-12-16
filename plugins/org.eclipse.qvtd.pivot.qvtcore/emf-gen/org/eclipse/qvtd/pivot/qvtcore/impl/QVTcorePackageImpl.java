@@ -110,6 +110,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCoreModel() {
 		return coreModelEClass;
 	}
@@ -119,6 +120,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMapping() {
 		return mappingEClass;
 	}
@@ -128,6 +130,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMapping_Context() {
 		return (EReference)mappingEClass.getEStructuralFeatures().get(0);
 	}
@@ -137,6 +140,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMapping_Specification() {
 		return (EReference)mappingEClass.getEStructuralFeatures().get(3);
 	}
@@ -146,6 +150,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMapping_Local() {
 		return (EReference)mappingEClass.getEStructuralFeatures().get(1);
 	}
@@ -155,6 +160,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMapping_Refinement() {
 		return (EReference)mappingEClass.getEStructuralFeatures().get(2);
 	}
@@ -164,6 +170,7 @@ public class QVTcorePackageImpl extends EPackageImpl implements QVTcorePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public QVTcoreFactory getQVTcoreFactory() {
 		return (QVTcoreFactory)getEFactoryInstance();
 	}

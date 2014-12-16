@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtcore;
 
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
-import org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.QVTcoreCSPackage;
+import org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage;
 
 import com.google.inject.Injector;
 

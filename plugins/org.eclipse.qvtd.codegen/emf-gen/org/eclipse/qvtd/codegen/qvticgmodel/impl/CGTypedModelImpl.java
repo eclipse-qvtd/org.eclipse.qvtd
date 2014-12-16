@@ -84,6 +84,7 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGTransformation getTransformation() {
 		if (eContainerFeatureID() != QVTiCGModelPackage.CG_TYPED_MODEL__TRANSFORMATION) return null;
 		return (CGTransformation)eInternalContainer();
@@ -104,6 +105,7 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTransformation(CGTransformation newTransformation) {
 		if (newTransformation != eInternalContainer() || (eContainerFeatureID() != QVTiCGModelPackage.CG_TYPED_MODEL__TRANSFORMATION && newTransformation != null)) {
 			if (EcoreUtil.isAncestor(this, newTransformation))
@@ -125,6 +127,7 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public int getModelIndex() {
 		return modelIndex;
 	}
@@ -134,6 +137,7 @@ public class CGTypedModelImpl extends CGNamedElementImpl implements CGTypedModel
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setModelIndex(int newModelIndex) {
 		int oldModelIndex = modelIndex;
 		modelIndex = newModelIndex;

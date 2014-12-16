@@ -49,6 +49,7 @@ public interface Mapping extends AbstractMapping {
 	 * @model opposite="local" transient="false" ordered="false"
 	 * @generated
 	 */
+	@Override
 	Mapping getContext();
 
 	/**
@@ -113,6 +114,7 @@ public interface Mapping extends AbstractMapping {
 	 * @model opposite="specification" ordered="false"
 	 * @generated NOT
 	 */
+	@Override
 	EList<Mapping> getRefinement();
 
 	/**

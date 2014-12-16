@@ -102,6 +102,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public GuardPattern getGuardPattern() {
 		return guardPattern;
 	}
@@ -126,6 +127,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGuardPattern(GuardPattern newGuardPattern) {
 		if (newGuardPattern != guardPattern) {
 			NotificationChain msgs = null;
@@ -145,6 +147,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BottomPattern getBottomPattern() {
 		return bottomPattern;
 	}
@@ -169,6 +172,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBottomPattern(BottomPattern newBottomPattern) {
 		if (newBottomPattern != bottomPattern) {
 			NotificationChain msgs = null;
@@ -188,6 +192,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MappingStatement getMappingStatement() {
 		return mappingStatement;
 	}
@@ -212,6 +217,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMappingStatement(MappingStatement newMappingStatement) {
 		if (newMappingStatement != mappingStatement) {
 			NotificationChain msgs = null;
@@ -231,6 +237,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Mapping> getAllMappings() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -242,6 +249,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Variable> getAllVariables() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -414,6 +422,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public AbstractMapping getContext() {
 		return null;
 	}
@@ -430,6 +439,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public EList<AbstractMapping> getRefinement() {
 		return NO_MAPPINGS;
 	}

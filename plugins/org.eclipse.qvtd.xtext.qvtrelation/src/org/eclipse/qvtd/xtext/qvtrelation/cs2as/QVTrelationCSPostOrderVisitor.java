@@ -30,15 +30,15 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
-import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.DefaultValueCS;
-import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.PredicateCS;
-import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.PrimitiveTypeDomainCS;
-import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.PropertyTemplateCS;
-import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.QueryCS;
-import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.TemplateCS;
-import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.VarDeclarationCS;
-import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.VarDeclarationIdCS;
-import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.util.AbstractQVTrelationCSPostOrderVisitor;
+import org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.PredicateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.TemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationIdCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.util.AbstractQVTrelationCSPostOrderVisitor;
 
 public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrderVisitor
 {

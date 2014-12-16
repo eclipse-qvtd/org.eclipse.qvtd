@@ -35,21 +35,25 @@ public class QVTimperativeToStringVisitor extends QVTcoreBaseToStringVisitor imp
 		super(s);
 	}
 
+	@Override
 	public @Nullable String visitImperativeModel(@NonNull ImperativeModel object) {
 		return visitModel(object);
 	}
 
+	@Override
 	public @Nullable String visitMapping(@NonNull Mapping object) {
 		appendQualifiedName(object);
 		return null;
 	}
 
+	@Override
 	public @Nullable String visitMappingCall(@NonNull MappingCall object) {
 		append("mappingCall ");
 		appendQualifiedName(object.getReferredMapping());
 		return null;
 	}
 
+	@Override
 	public @Nullable String visitMappingCallBinding(@NonNull MappingCallBinding object) {
 		appendName(object.getBoundVariable());
 		append(" := ");
@@ -57,28 +61,34 @@ public class QVTimperativeToStringVisitor extends QVTcoreBaseToStringVisitor imp
 		return null;
 	}
 
+	@Override
 	public @Nullable String visitMappingLoop(@NonNull MappingLoop object) {
 		append("mappingLoop ");
 		appendQualifiedName(object.getIterator().get(0));
 		return null;
 	}
 
+	@Override
 	public @Nullable String visitMappingSequence(@NonNull MappingSequence object) {
 		return null;
 	}
 
+	@Override
 	public @Nullable String visitMappingStatement(@NonNull MappingStatement object) {
 		return null;
 	}
 
+	@Override
 	public @Nullable String visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment object) {
 		return visitPropertyAssignment(object);
 	}
 
+	@Override
 	public @Nullable String visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp object) {
 		return visitOppositePropertyCallExp(object);
 	}
 
+	@Override
 	public @Nullable String visitVariablePredicate(@NonNull VariablePredicate variablePredicate) {
 		appendName(variablePredicate.getTargetVariable());
 		append(" := ");

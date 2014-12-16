@@ -26,10 +26,12 @@ public class QVTcoreToStringVisitor extends QVTcoreBaseToStringVisitor implement
 		super(s);
 	}
 
+	@Override
 	public String visitCoreModel(@NonNull CoreModel object) {
 		return visitModel(object);
 	}
 
+	@Override
 	public String visitMapping(@NonNull Mapping object) {
 		append("mapping ");
 		appendName(object);

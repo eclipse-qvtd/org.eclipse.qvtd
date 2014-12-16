@@ -72,6 +72,7 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGValuedElement getValue() {
 		return value;
 	}
@@ -96,6 +97,7 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(CGValuedElement newValue) {
 		if (newValue != value) {
 			NotificationChain msgs = null;
@@ -214,6 +216,7 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		if (this == thatValue) {
 			return Boolean.TRUE;

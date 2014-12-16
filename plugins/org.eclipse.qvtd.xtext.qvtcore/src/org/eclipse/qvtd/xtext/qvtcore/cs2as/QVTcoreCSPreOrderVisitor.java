@@ -15,9 +15,9 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
-import org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.MappingCS;
-import org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.TopLevelCS;
-import org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.util.AbstractQVTcoreCSPreOrderVisitor;
+import org.eclipse.qvtd.xtext.qvtcorecs.MappingCS;
+import org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS;
+import org.eclipse.qvtd.xtext.qvtcorecs.util.AbstractQVTcoreCSPreOrderVisitor;
 
 public class QVTcoreCSPreOrderVisitor extends AbstractQVTcoreCSPreOrderVisitor
 {	

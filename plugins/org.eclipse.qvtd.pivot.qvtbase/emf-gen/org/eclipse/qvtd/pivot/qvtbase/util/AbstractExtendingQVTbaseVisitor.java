@@ -40,42 +40,52 @@ public abstract class AbstractExtendingQVTbaseVisitor<R, C>
 		super(context);
 	}	
 
+	@Override
 	public @Nullable R visitBaseModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.BaseModel object) {
 		return visitModel(object);
 	}
 
+	@Override
 	public @Nullable R visitDomain(@NonNull org.eclipse.qvtd.pivot.qvtbase.Domain object) {
 		return visitNamedElement(object);
 	}
 
+	@Override
 	public @Nullable R visitFunction(@NonNull org.eclipse.qvtd.pivot.qvtbase.Function object) {
 		return visitOperation(object);
 	}
 
+	@Override
 	public @Nullable R visitFunctionParameter(@NonNull org.eclipse.qvtd.pivot.qvtbase.FunctionParameter object) {
 		return visitParameter(object);
 	}
 
+	@Override
 	public @Nullable R visitPattern(@NonNull org.eclipse.qvtd.pivot.qvtbase.Pattern object) {
 		return visitElement(object);
 	}
 
+	@Override
 	public @Nullable R visitPredicate(@NonNull org.eclipse.qvtd.pivot.qvtbase.Predicate object) {
 		return visitElement(object);
 	}
 
+	@Override
 	public @Nullable R visitRule(@NonNull org.eclipse.qvtd.pivot.qvtbase.Rule object) {
 		return visitNamedElement(object);
 	}
 
+	@Override
 	public @Nullable R visitTransformation(@NonNull org.eclipse.qvtd.pivot.qvtbase.Transformation object) {
 		return visitClass(object);
 	}
 
+	@Override
 	public @Nullable R visitTypedModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.TypedModel object) {
 		return visitNamedElement(object);
 	}
 
+	@Override
 	public @Nullable R visitUnit(@NonNull org.eclipse.qvtd.pivot.qvtbase.Unit object) {
 		return visitNamedElement(object);
 	}

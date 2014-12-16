@@ -130,8 +130,8 @@ public class QVTiVMVirtualMachine extends VMVirtualMachine
 				result.add(createStackFrame(location, i++ == 0));
 			}
 		}
-
-		return result.toArray(new VMStackFrameData[result.size()]);
+		@SuppressWarnings("null")@NonNull VMStackFrameData[] varsArray = result.toArray(new VMStackFrameData[result.size()]);
+		return varsArray;
 	}
 	
 	public VMStackFrameData createStackFrame(@NonNull UnitLocation location) {
@@ -141,16 +141,18 @@ public class QVTiVMVirtualMachine extends VMVirtualMachine
 	private static @NonNull VMStackFrameData createStackFrame(@NonNull UnitLocation location, boolean includeVars) {
 		IVMEvaluationEnvironment<?> evalEnv = location.getEvalEnv();
 		NamedElement module = location.getModule();
-		String moduleName = (module != null) ? module.getName() : "<null>"; //$NON-NLS-1$
-		
+		String moduleName = (module != null) ? module.getName() : null;
+		if (moduleName == null) moduleName = "<null>"; //$NON-NLS-1$
 		Element element = location.getElement();
 		StringBuilder s = new StringBuilder();
 		appendElementSignature(s, element);
 		String operSignature = s.toString(); //MessageFormat.format("<{0}>", moduleName); //$NON-NLS-1$
 		
 		List<VMVariableData> vars = VariableFinder.getVariables(evalEnv);
-		VMStackFrameData vmStackFrame = new VMStackFrameData(evalEnv.getID(), location.getURI().toString(), moduleName, 
-					operSignature, location.getLineNum(), location.getStartPosition(), location.getEndPosition(), vars.toArray(new VMVariableData[vars.size()]));
+		@SuppressWarnings("null")@NonNull String locationString = location.getURI().toString();
+		@SuppressWarnings("null")@NonNull VMVariableData[] varsArray = vars.toArray(new VMVariableData[vars.size()]);
+		VMStackFrameData vmStackFrame = new VMStackFrameData(evalEnv.getID(), locationString, moduleName, 
+					operSignature, location.getLineNum(), location.getStartPosition(), location.getEndPosition(), varsArray);
 		return vmStackFrame;
 	}
 	

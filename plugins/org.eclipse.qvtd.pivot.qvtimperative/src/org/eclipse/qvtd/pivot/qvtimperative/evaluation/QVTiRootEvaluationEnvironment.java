@@ -23,10 +23,12 @@ public class QVTiRootEvaluationEnvironment extends QVTiEvaluationEnvironment
 		this.transformation = transformation;
 	}
 
+	@Override
 	public @NonNull QVTiRootEvaluationEnvironment getRootEvaluationEnvironment() {
 		return this;
 	}
 
+	@Override
 	public @NonNull Transformation getTransformation() {
 		return transformation;
 	}

@@ -12,7 +12,6 @@ package org.eclipse.qvtd.pivot.qvtbase.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
@@ -72,8 +71,9 @@ public class UnitImpl extends NamedElementImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Namespace getUsedPackage() {
-		if (usedPackage != null && ((EObject)usedPackage).eIsProxy()) {
+		if (usedPackage != null && usedPackage.eIsProxy()) {
 			InternalEObject oldUsedPackage = (InternalEObject)usedPackage;
 			usedPackage = (Namespace)eResolveProxy(oldUsedPackage);
 			if (usedPackage != oldUsedPackage) {
@@ -98,6 +98,7 @@ public class UnitImpl extends NamedElementImpl implements Unit {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setUsedPackage(Namespace newUsedPackage) {
 		Namespace oldUsedPackage = usedPackage;
 		usedPackage = newUsedPackage;

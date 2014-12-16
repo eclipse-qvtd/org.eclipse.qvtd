@@ -36,18 +36,22 @@ public abstract class AbstractNullQVTtemplateVisitor<R, C>
 		super(context);
 	}	
 
+	@Override
 	public @Nullable R visitCollectionTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp object) {
 		return null;
 	}
 
+	@Override
 	public @Nullable R visitObjectTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp object) {
 		return null;
 	}
 
+	@Override
 	public @Nullable R visitPropertyTemplateItem(@NonNull org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem object) {
 		return null;
 	}
 
+	@Override
 	public @Nullable R visitTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.TemplateExp object) {
 		return null;
 	}

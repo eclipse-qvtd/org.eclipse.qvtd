@@ -16,7 +16,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
@@ -102,8 +101,9 @@ public class KeyImpl extends ElementImpl implements Key {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public org.eclipse.ocl.pivot.Class getIdentifies() {
-		if (identifies != null && ((EObject)identifies).eIsProxy()) {
+		if (identifies != null && identifies.eIsProxy()) {
 			InternalEObject oldIdentifies = (InternalEObject)identifies;
 			identifies = (org.eclipse.ocl.pivot.Class)eResolveProxy(oldIdentifies);
 			if (identifies != oldIdentifies) {
@@ -128,6 +128,7 @@ public class KeyImpl extends ElementImpl implements Key {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIdentifies(org.eclipse.ocl.pivot.Class newIdentifies) {
 		org.eclipse.ocl.pivot.Class oldIdentifies = identifies;
 		identifies = newIdentifies;
@@ -140,6 +141,7 @@ public class KeyImpl extends ElementImpl implements Key {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Property> getPart() {
 		if (part == null) {
 			part = new EObjectResolvingEList<Property>(Property.class, this, QVTrelationPackage.KEY__PART);
@@ -152,6 +154,7 @@ public class KeyImpl extends ElementImpl implements Key {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RelationalTransformation getTransformation() {
 		if (eContainerFeatureID() != QVTrelationPackage.KEY__TRANSFORMATION) return null;
 		return (RelationalTransformation)eInternalContainer();
@@ -172,6 +175,7 @@ public class KeyImpl extends ElementImpl implements Key {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTransformation(RelationalTransformation newTransformation) {
 		if (newTransformation != eInternalContainer() || (eContainerFeatureID() != QVTrelationPackage.KEY__TRANSFORMATION && newTransformation != null)) {
 			if (EcoreUtil.isAncestor(this, newTransformation))
@@ -193,6 +197,7 @@ public class KeyImpl extends ElementImpl implements Key {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Property> getOppositePart() {
 		if (oppositePart == null) {
 			oppositePart = new EObjectResolvingEList<Property>(Property.class, this, QVTrelationPackage.KEY__OPPOSITE_PART);

@@ -18,7 +18,6 @@
 package	org.eclipse.qvtd.pivot.qvtcorebase.util;
 
 import java.lang.Object;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.AS2Moniker;
@@ -44,38 +43,47 @@ public abstract class AbstractQVTcoreBaseAS2MonikerVisitor
 		super(context);
 	}	
 
+	@Override
 	public @Nullable Object visitAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.Assignment object) {
 		return visitElement(object);
 	}
 
+	@Override
 	public @Nullable Object visitBottomPattern(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern object) {
 		return visitCorePattern(object);
 	}
 
+	@Override
 	public @Nullable Object visitCoreDomain(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain object) {
 		return visitDomain(object);
 	}
 
+	@Override
 	public @Nullable Object visitCorePattern(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.CorePattern object) {
 		return visitPattern(object);
 	}
 
+	@Override
 	public @Nullable Object visitEnforcementOperation(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation object) {
 		return visitElement(object);
 	}
 
+	@Override
 	public @Nullable Object visitGuardPattern(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern object) {
 		return visitCorePattern(object);
 	}
 
+	@Override
 	public @Nullable Object visitPropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment object) {
 		return visitAssignment(object);
 	}
 
+	@Override
 	public @Nullable Object visitRealizedVariable(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable object) {
 		return visitVariable(object);
 	}
 
+	@Override
 	public @Nullable Object visitVariableAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment object) {
 		return visitAssignment(object);
 	}

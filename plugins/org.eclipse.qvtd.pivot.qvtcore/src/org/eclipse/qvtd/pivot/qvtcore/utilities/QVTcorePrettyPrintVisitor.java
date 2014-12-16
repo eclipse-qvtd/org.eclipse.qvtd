@@ -23,11 +23,13 @@ public class QVTcorePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisitor imp
 		super(context);
 	}
 
+	@Override
 	public Object visitCoreModel(@NonNull CoreModel object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public Object visitMapping(@NonNull Mapping object) {
 		// TODO Auto-generated method stub
 		return null;

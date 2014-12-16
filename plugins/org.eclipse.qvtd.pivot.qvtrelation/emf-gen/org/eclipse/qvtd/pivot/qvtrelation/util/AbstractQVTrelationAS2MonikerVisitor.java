@@ -18,7 +18,6 @@
 package	org.eclipse.qvtd.pivot.qvtrelation.util;
 
 import java.lang.Object;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.AS2Moniker;
@@ -44,38 +43,47 @@ public abstract class AbstractQVTrelationAS2MonikerVisitor
 		super(context);
 	}	
 
+	@Override
 	public @Nullable Object visitDomainPattern(@NonNull org.eclipse.qvtd.pivot.qvtrelation.DomainPattern object) {
 		return visitPattern(object);
 	}
 
+	@Override
 	public @Nullable Object visitKey(@NonNull org.eclipse.qvtd.pivot.qvtrelation.Key object) {
 		return visitElement(object);
 	}
 
+	@Override
 	public @Nullable Object visitRelation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.Relation object) {
 		return visitRule(object);
 	}
 
+	@Override
 	public @Nullable Object visitRelationCallExp(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp object) {
 		return visitOCLExpression(object);
 	}
 
+	@Override
 	public @Nullable Object visitRelationDomain(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationDomain object) {
 		return visitDomain(object);
 	}
 
+	@Override
 	public @Nullable Object visitRelationDomainAssignment(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment object) {
 		return visitElement(object);
 	}
 
+	@Override
 	public @Nullable Object visitRelationImplementation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation object) {
 		return visitElement(object);
 	}
 
+	@Override
 	public @Nullable Object visitRelationModel(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationModel object) {
 		return visitBaseModel(object);
 	}
 
+	@Override
 	public @Nullable Object visitRelationalTransformation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation object) {
 		return visitTransformation(object);
 	}

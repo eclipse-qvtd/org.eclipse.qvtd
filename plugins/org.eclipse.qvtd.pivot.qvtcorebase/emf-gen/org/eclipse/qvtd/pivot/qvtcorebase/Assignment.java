@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtcorebase;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OCLExpression;
 
@@ -32,7 +31,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
  * @model abstract="true"
  * @generated
  */
-public interface Assignment extends EObject, Element {
+public interface Assignment extends Element {
 	/**
 	 * Returns the value of the '<em><b>Bottom Pattern</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern#getAssignment <em>Assignment</em>}'.

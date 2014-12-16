@@ -36,18 +36,22 @@ public abstract class AbstractDelegatingQVTtemplateVisitor<R, C, D extends QVTte
 		return delegate.visiting(visitable);
 	}
 
+	@Override
 	public @Nullable R visitCollectionTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp object) {
 		return delegate.visitCollectionTemplateExp(object);
 	}
 
+	@Override
 	public @Nullable R visitObjectTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp object) {
 		return delegate.visitObjectTemplateExp(object);
 	}
 
+	@Override
 	public @Nullable R visitPropertyTemplateItem(@NonNull org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem object) {
 		return delegate.visitPropertyTemplateItem(object);
 	}
 
+	@Override
 	public @Nullable R visitTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.TemplateExp object) {
 		return delegate.visitTemplateExp(object);
 	}

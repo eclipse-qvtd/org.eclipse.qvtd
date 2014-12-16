@@ -97,6 +97,7 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGValuedElement getBody() {
 		return body;
 	}
@@ -121,6 +122,7 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBody(CGValuedElement newBody) {
 		if (newBody != body) {
 			NotificationChain msgs = null;
@@ -140,6 +142,7 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<CGGuardVariable> getFreeVariables() {
 		if (freeVariables == null) {
 			freeVariables = new EObjectContainmentWithInverseEList<CGGuardVariable>(CGGuardVariable.class, this, QVTiCGModelPackage.CG_MAPPING__FREE_VARIABLES, QVTiCGModelPackage.CG_GUARD_VARIABLE__MAPPING);
@@ -152,6 +155,7 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGTransformation getTransformation() {
 		if (eContainerFeatureID() != QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION) return null;
 		return (CGTransformation)eInternalContainer();
@@ -172,6 +176,7 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTransformation(CGTransformation newTransformation) {
 		if (newTransformation != eInternalContainer() || (eContainerFeatureID() != QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION && newTransformation != null)) {
 			if (EcoreUtil.isAncestor(this, newTransformation))

@@ -30,7 +30,7 @@ Workflow {
     bean = StandaloneSetup {
 		platformUri = "${QVTimperativeRuntimeProject}/.."
    		scanClassPath = true
-		registerGeneratedEPackage = "org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.QVTimperativeCSPackage"
+		registerGeneratedEPackage = "org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage"
 		registerGenModelFile = "platform:/resource/org.eclipse.qvtd.xtext.qvtimperative/model/QVTimperativeCS.genmodel"
 	}
 	

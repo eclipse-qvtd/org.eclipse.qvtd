@@ -29,6 +29,7 @@ public abstract class QVTiEvaluationEnvironment extends PivotEvaluationEnvironme
 		this.modelManager = evaluationEnvironment.getModelManager();
 	}
 
+	@Override
 	public @NonNull QVTiModelManager getModelManager() {
 		return modelManager;
 	}

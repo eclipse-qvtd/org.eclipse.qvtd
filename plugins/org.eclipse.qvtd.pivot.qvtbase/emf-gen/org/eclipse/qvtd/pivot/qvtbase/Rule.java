@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.pivot.qvtbase;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.pivot.NamedElement;
 
 /**
@@ -33,7 +32,7 @@ import org.eclipse.ocl.pivot.NamedElement;
  * @model abstract="true"
  * @generated
  */
-public interface Rule extends EObject, NamedElement {
+public interface Rule extends NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Domain</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtbase.Domain}.

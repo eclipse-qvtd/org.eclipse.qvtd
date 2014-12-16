@@ -146,6 +146,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 		return string;
 	}
 	
+	@Override
 	public @NonNull Pattern getRegexPattern(@NonNull String regex) {
 		return delegate.getRegexPattern(regex);
 	}
@@ -281,6 +282,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 		return result;
 	}
 
+	@Override
 	public @Nullable Object visitMappingLoop(@NonNull MappingLoop mappingLoop) {
 		logger.info(getIndent() + "Visiting MappingLoop, calling: " + mappingLoop.getIterator().get(0).getName());
 		indentLevel++;
@@ -289,6 +291,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 		return result;
 	}
 
+	@Override
 	public @Nullable Object visitMappingSequence(@NonNull MappingSequence mappingSequence) {
 		logger.info(getIndent() + "Visiting MappingSequence");
 		indentLevel++;
@@ -297,6 +300,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 		return result;
 	}
 
+	@Override
 	public @Nullable Object visitMappingStatement(@NonNull MappingStatement vappingStatement) {
 		return visiting(vappingStatement);
 	}
@@ -304,6 +308,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitMiddlePropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment)
 	 */
+	@Override
 	public Object visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment propertyAssignment) {
 		
 		indentLevel++;
@@ -325,6 +330,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitMiddlePropertyCallExp(org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp)
 	 */
+	@Override
 	public Object visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp callExp) {
         return delegate.visitMiddlePropertyCallExp(callExp);
 	}
@@ -392,6 +398,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	}
 	
 
+	@Override
 	public @Nullable Object visitVariablePredicate(@NonNull VariablePredicate variablePredicate) {
 		Variable v = variablePredicate.getTargetVariable();
 		logger.info(getIndent() + "VisitVariablePredicate " + v

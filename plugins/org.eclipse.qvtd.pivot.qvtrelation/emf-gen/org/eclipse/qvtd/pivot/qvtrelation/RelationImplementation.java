@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtrelation;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -33,7 +32,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * @model
  * @generated
  */
-public interface RelationImplementation extends EObject, Element {
+public interface RelationImplementation extends Element {
 	/**
 	 * Returns the value of the '<em><b>Impl</b></em>' reference.
 	 * <!-- begin-user-doc -->

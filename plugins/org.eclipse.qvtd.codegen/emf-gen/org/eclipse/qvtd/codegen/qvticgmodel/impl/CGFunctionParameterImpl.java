@@ -70,6 +70,7 @@ public class CGFunctionParameterImpl extends CGParameterImpl implements CGFuncti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGFunction getFunction() {
 		return function;
 	}
@@ -79,6 +80,7 @@ public class CGFunctionParameterImpl extends CGParameterImpl implements CGFuncti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFunction(CGFunction newFunction) {
 		CGFunction oldFunction = function;
 		function = newFunction;

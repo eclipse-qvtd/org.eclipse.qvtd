@@ -11,7 +11,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.eclipse.org/qvt/2015/QVTimperativeCS"
-            class="org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.QVTimperativeCSPackage"
+            class="org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage"
             genModel="model/QVTimperativeCS.genmodel"/>
    </extension>
 
@@ -19,7 +19,7 @@
       <!-- @generated QVTimperativeCS -->
       <parser
             contentTypeIdentifier="org.eclipse.qvtd.xtext.qvtimperative"
-            class="org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.util.QVTimperativeCSResourceFactoryImpl"/>
+            class="org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSResourceFactoryImpl"/>
    </extension>
 
    <extension point="org.eclipse.core.contenttype.contentTypes">
@@ -43,7 +43,7 @@
             class="org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.util.QVTimperativeCSResourceFactoryImpl"/-->
       <parser
             type="qvtics"
-            class="org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.util.QVTimperativeCSResourceFactoryImpl"/>
+            class="org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSResourceFactoryImpl"/>
    </extension>
    <extension point="org.eclipse.team.core.fileTypes">
       <fileTypes extension="qvti" type="text" />

@@ -9,7 +9,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.eclipse.org/qvt/2015/QVTrelationCS"
-            class="org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.QVTrelationCSPackage"
+            class="org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage"
             genModel="model/QVTrelationCS.genmodel"/>
    </extension>
 
@@ -17,7 +17,7 @@
       <!-- @generated QVTrelationCS -->
       <parser
             contentTypeIdentifier="org.eclipse.qvtd.xtext.qvtrelation"
-            class="org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.util.QVTrelationCSResourceFactoryImpl"/>
+            class="org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSResourceFactoryImpl"/>
    </extension>
 
    <extension point="org.eclipse.core.contenttype.contentTypes">
@@ -41,7 +41,7 @@
             class="org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.util.QVTrelationCSResourceFactoryImpl"/-->
       <parser
             type="qvtrcs"
-            class="org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.util.QVTrelationCSResourceFactoryImpl"/>
+            class="org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSResourceFactoryImpl"/>
    </extension>
    <extension point="org.eclipse.team.core.fileTypes">
       <fileTypes extension="qvtr" type="text" />

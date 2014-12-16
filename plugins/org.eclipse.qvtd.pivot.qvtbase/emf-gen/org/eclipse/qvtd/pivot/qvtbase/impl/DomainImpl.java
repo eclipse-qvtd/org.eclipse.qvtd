@@ -132,6 +132,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isIsCheckable() {
 		return isCheckable;
 	}
@@ -141,6 +142,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIsCheckable(boolean newIsCheckable) {
 		boolean oldIsCheckable = isCheckable;
 		isCheckable = newIsCheckable;
@@ -155,6 +157,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void unsetIsCheckable() {
 		boolean oldIsCheckable = isCheckable;
 		boolean oldIsCheckableESet = isCheckableESet;
@@ -169,6 +172,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isSetIsCheckable() {
 		return isCheckableESet;
 	}
@@ -178,6 +182,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isIsEnforceable() {
 		return isEnforceable;
 	}
@@ -187,6 +192,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIsEnforceable(boolean newIsEnforceable) {
 		boolean oldIsEnforceable = isEnforceable;
 		isEnforceable = newIsEnforceable;
@@ -201,6 +207,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void unsetIsEnforceable() {
 		boolean oldIsEnforceable = isEnforceable;
 		boolean oldIsEnforceableESet = isEnforceableESet;
@@ -215,6 +222,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isSetIsEnforceable() {
 		return isEnforceableESet;
 	}
@@ -224,6 +232,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Rule getRule() {
 		if (eContainerFeatureID() != QVTbasePackage.DOMAIN__RULE) return null;
 		return (Rule)eInternalContainer();
@@ -244,6 +253,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRule(Rule newRule) {
 		if (newRule != eInternalContainer() || (eContainerFeatureID() != QVTbasePackage.DOMAIN__RULE && newRule != null)) {
 			if (EcoreUtil.isAncestor(this, newRule))
@@ -265,6 +275,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypedModel getTypedModel() {
 		if (typedModel != null && typedModel.eIsProxy()) {
 			InternalEObject oldTypedModel = (InternalEObject)typedModel;
@@ -291,6 +302,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTypedModel(TypedModel newTypedModel) {
 		TypedModel oldTypedModel = typedModel;
 		typedModel = newTypedModel;
@@ -459,6 +471,7 @@ public abstract class DomainImpl extends NamedElementImpl implements Domain {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public Element getReferredElement() {
 		return getTypedModel();
 	}

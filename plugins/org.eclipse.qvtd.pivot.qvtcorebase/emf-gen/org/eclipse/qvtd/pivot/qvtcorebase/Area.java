@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.pivot.qvtcorebase;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Variable;
 
@@ -32,7 +31,7 @@ import org.eclipse.ocl.pivot.Variable;
  * @model interface="true" abstract="true"
  * @generated
  */
-public interface Area extends EObject, Element {
+public interface Area extends Element {
 	/**
 	 * Returns the value of the '<em><b>Guard Pattern</b></em>' containment reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern#getArea <em>Area</em>}'.

@@ -34,51 +34,61 @@ public class QVTbaseToStringVisitor extends ToStringVisitor implements QVTbaseVi
 		super(s);
 	}
 
+	@Override
 	public String visitBaseModel(@NonNull BaseModel object) {
 		append("base model ");
 		return null;
 	}
 
+	@Override
 	public String visitDomain(@NonNull Domain object) {
 		appendQualifiedName(object);
 		return null;
 	}
 
+	@Override
 	public String visitFunction(@NonNull Function object) {
 		return visitOperation(object);
 	}
 
+	@Override
 	public String visitFunctionParameter(@NonNull FunctionParameter object) {
 		return visitParameter(object);
 	}
 
+	@Override
 	public String visitPattern(@NonNull Pattern object) {
 		append("pattern ");
 //		appendName(object);
 		return null;
 	}
 
+	@Override
 	public String visitPredicate(@NonNull Predicate object) {
 		safeVisit(object.getConditionExpression());
 		return null;
 	}
 
+	@Override
 	public String visitRule(@NonNull Rule object) {
 		appendQualifiedName(object);
 		return null;
 	}
 
+	@Override
 	public String visitTransformation(@NonNull Transformation object) {
 		appendQualifiedName(object);
 		return null;
 	}
 
+	@Override
 	public String visitTypedModel(@NonNull TypedModel object) {
 		append("typed model ");
 		appendName(object);
 		return null;
 	}
 
+	@Override
 	public String visitUnit(@NonNull Unit object) {
 		append("unit ");
 		appendName(object);

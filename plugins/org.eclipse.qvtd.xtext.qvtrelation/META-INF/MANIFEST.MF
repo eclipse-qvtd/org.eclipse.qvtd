@@ -6,7 +6,7 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.qvtd.xtext.qvtrelation.utilities.QVTrelationPlugin$Implementation
 Export-Package: org.eclipse.qvtd.xtext.qvtrelation,
@@ -14,14 +14,14 @@ Export-Package: org.eclipse.qvtd.xtext.qvtrelation,
  org.eclipse.qvtd.xtext.qvtrelation.formatting,
  org.eclipse.qvtd.xtext.qvtrelation.parser.antlr,
  org.eclipse.qvtd.xtext.qvtrelation.parser.antlr.internal,
- org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs,
- org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.impl,
- org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.util,
  org.eclipse.qvtd.xtext.qvtrelation.scoping,
  org.eclipse.qvtd.xtext.qvtrelation.serializer,
  org.eclipse.qvtd.xtext.qvtrelation.services,
  org.eclipse.qvtd.xtext.qvtrelation.utilities,
- org.eclipse.qvtd.xtext.qvtrelation.validation
+ org.eclipse.qvtd.xtext.qvtrelation.validation,
+ org.eclipse.qvtd.xtext.qvtrelationcs,
+ org.eclipse.qvtd.xtext.qvtrelationcs.impl,
+ org.eclipse.qvtd.xtext.qvtrelationcs.util
 Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.ocl.xtext.essentialocl;bundle-version="[1.0.0,2.0.0)";visibility:=reexport,
  org.eclipse.qvtd.pivot.qvtrelation;visibility:=reexport

@@ -115,6 +115,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	@SuppressWarnings("null")
 	public @NonNull EList<Annotation> getOwnedTag() {
 		if (ownedTag == null) {
@@ -128,6 +129,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	@SuppressWarnings("null")
 	public @NonNull EList<TypedModel> getModelParameter() {
 		if (modelParameter == null) {
@@ -141,6 +143,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	@SuppressWarnings("null")
 	public @NonNull EList<Rule> getRule() {
 		if (rule == null) {
@@ -154,6 +157,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Transformation getExtends() {
 		if (extends_ != null && extends_.eIsProxy()) {
 			InternalEObject oldExtends = (InternalEObject)extends_;
@@ -180,6 +184,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExtends(Transformation newExtends) {
 		Transformation oldExtends = extends_;
 		extends_ = newExtends;
@@ -192,6 +197,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Function getFunction(String name) {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -342,6 +348,7 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public TypedModel getModelParameter(String name) {
 		return ClassUtil.getNamedElement(getModelParameter(), name);
 	}

@@ -118,6 +118,7 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<CGPropertyAssignment> getAssignments() {
 		if (assignments == null) {
 			assignments = new EObjectContainmentWithInverseEList<CGPropertyAssignment>(CGPropertyAssignment.class, this, QVTiCGModelPackage.CG_MAPPING_EXP__ASSIGNMENTS, QVTiCGModelPackage.CG_PROPERTY_ASSIGNMENT__MAPPING_EXP);
@@ -130,6 +131,7 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGMapping getMapping() {
 		// TODO: implement this method to return the 'Mapping' reference
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -141,6 +143,7 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMapping(CGMapping newMapping) {
 		// TODO: implement this method to set the 'Mapping' reference
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -152,6 +155,7 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<CGPredicate> getPredicates() {
 		if (predicates == null) {
 			predicates = new EObjectContainmentWithInverseEList<CGPredicate>(CGPredicate.class, this, QVTiCGModelPackage.CG_MAPPING_EXP__PREDICATES, QVTiCGModelPackage.CG_PREDICATE__MAPPING_EXP);
@@ -164,6 +168,7 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<CGValuedElement> getRealizedVariables() {
 		if (realizedVariables == null) {
 			realizedVariables = new EObjectContainmentEList<CGValuedElement>(CGValuedElement.class, this, QVTiCGModelPackage.CG_MAPPING_EXP__REALIZED_VARIABLES);
@@ -176,6 +181,7 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGValuedElement getBody() {
 		return body;
 	}
@@ -200,6 +206,7 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBody(CGValuedElement newBody) {
 		if (newBody != body) {
 			NotificationChain msgs = null;
@@ -385,6 +392,7 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		return (getClass() == thatValue.getClass()) ? QVTiEquivalenceUtils.isEquivalent(this, (CGMappingExp)thatValue) : null;
 	}

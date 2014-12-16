@@ -89,6 +89,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<OCLExpression> getArgument() {
 		if (argument == null) {
 			argument = new EObjectContainmentEList<OCLExpression>(OCLExpression.class, this, QVTrelationPackage.RELATION_CALL_EXP__ARGUMENT);
@@ -101,6 +102,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Relation getReferredRelation() {
 		if (referredRelation != null && referredRelation.eIsProxy()) {
 			InternalEObject oldReferredRelation = (InternalEObject)referredRelation;
@@ -127,6 +129,7 @@ public class RelationCallExpImpl extends OCLExpressionImpl implements RelationCa
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReferredRelation(Relation newReferredRelation) {
 		Relation oldReferredRelation = referredRelation;
 		referredRelation = newReferredRelation;

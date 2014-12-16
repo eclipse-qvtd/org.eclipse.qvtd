@@ -44,18 +44,22 @@ public class QVTiAnalysisVisitor extends AnalysisVisitor implements QVTiCGModelV
 		super(analyzer);
 	}
 
+	@Override
 	public Object visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment object) {
 		return visitCGPropertyAssignment(object);
 	}
 
+	@Override
 	public Object visitCGEcoreRealizedVariable(@NonNull CGEcoreRealizedVariable object) {
 		return visitCGRealizedVariable(object);
 	}
 
+	@Override
 	public Object visitCGFunction(@NonNull CGFunction object) {
 		return visitCGOperation(object);
 	}
 
+	@Override
 	public Object visitCGFunctionCallExp(@NonNull CGFunctionCallExp cgFunctionCallExp) {
 		Function pFunction = (Function) ((OperationCallExp)cgFunctionCallExp.getAst()).getReferredOperation();
 		if (pFunction != null) {
@@ -65,22 +69,27 @@ public class QVTiAnalysisVisitor extends AnalysisVisitor implements QVTiCGModelV
 		return visitCGOperationCallExp(cgFunctionCallExp);
 	}
 
+	@Override
 	public Object visitCGFunctionParameter(@NonNull CGFunctionParameter object) {
 		return visitCGParameter(object);
 	}
 
+	@Override
 	public Object visitCGGuardVariable(@NonNull CGGuardVariable object) {
 		return visitCGParameter(object);
 	}
 
+	@Override
 	public Object visitCGMapping(@NonNull CGMapping object) {
 		return visitCGNamedElement(object);
 	}
 
+	@Override
 	public Object visitCGMappingCall(@NonNull CGMappingCall object) {
 		return visitCGValuedElement(object);
 	}
 
+	@Override
 	public Object visitCGMappingCallBinding(@NonNull CGMappingCallBinding cgMappingCallBinding) {
 		visitCGValuedElement(cgMappingCallBinding);
 		GlobalContext globalContext = context.getCodeGenerator().getGlobalContext();
@@ -91,30 +100,37 @@ public class QVTiAnalysisVisitor extends AnalysisVisitor implements QVTiCGModelV
 		return null;
 	}
 
+	@Override
 	public Object visitCGMappingExp(@NonNull CGMappingExp object) {
 		return visitCGValuedElement(object);
 	}
 
+	@Override
 	public Object visitCGMappingLoop(@NonNull CGMappingLoop object) {
 		return visitCGIterationCallExp(object);
 	}
 
+	@Override
 	public Object visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment object) {
 		return visitCGPropertyAssignment(object);
 	}
 
+	@Override
 	public Object visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp object) {
 		return visitCGOppositePropertyCallExp(object);
 	}
 
+	@Override
 	public Object visitCGPredicate(@NonNull CGPredicate object) {
 		return visitCGValuedElement(object);
 	}
 
+	@Override
 	public Object visitCGPropertyAssignment(@NonNull CGPropertyAssignment object) {
 		return visitCGValuedElement(object);
 	}
 
+	@Override
 	public Object visitCGRealizedVariable(@NonNull CGRealizedVariable cgRealizedVariable) {
 		visitCGVariable(cgRealizedVariable);
 		GlobalContext globalContext = context.getCodeGenerator().getGlobalContext();
@@ -125,18 +141,22 @@ public class QVTiAnalysisVisitor extends AnalysisVisitor implements QVTiCGModelV
 		return null;
 	}
 
+	@Override
 	public Object visitCGSequence(@NonNull CGSequence object) {
 		return visitCGValuedElement(object);
 	}
 
+	@Override
 	public Object visitCGTransformation(@NonNull CGTransformation object) {
 		return visitCGClass(object);
 	}
 
+	@Override
 	public Object visitCGTypedModel(@NonNull CGTypedModel object) {
 		return visitCGNamedElement(object);
 	}
 
+	@Override
 	public Object visitCGVariablePredicate(@NonNull CGVariablePredicate object) {
 		return visitCGPredicate(object);
 	}

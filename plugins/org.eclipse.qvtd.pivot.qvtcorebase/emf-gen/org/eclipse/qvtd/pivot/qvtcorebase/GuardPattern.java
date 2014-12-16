@@ -44,6 +44,7 @@ public interface GuardPattern extends CorePattern {
 	 * @model opposite="guardPattern" required="true"
 	 * @generated
 	 */
+	@Override
 	Area getArea();
 
 	/**

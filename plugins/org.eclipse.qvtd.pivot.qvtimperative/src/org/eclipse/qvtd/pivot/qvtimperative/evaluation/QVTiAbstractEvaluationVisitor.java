@@ -79,7 +79,8 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
     /* (non-Javadoc)
      * @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitImperativeModel(org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel)
      */
-    public @Nullable Object visitImperativeModel(@NonNull ImperativeModel object) {
+    @Override
+	public @Nullable Object visitImperativeModel(@NonNull ImperativeModel object) {
 		return visiting(object);
     }
     
@@ -161,13 +162,15 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
     /* (non-Javadoc)
      * @see org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor#visitAssignment(org.eclipse.qvtd.pivot.qvtcorebase.Assignment)
      */
-    public @Nullable Object visitAssignment(@NonNull Assignment object) {
+    @Override
+	public @Nullable Object visitAssignment(@NonNull Assignment object) {
 		return visiting(object);
     }
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor#visitBaseModel(org.eclipse.qvtd.pivot.qvtbase.BaseModel)
 	 */
+	@Override
 	public @Nullable Object visitBaseModel(@NonNull BaseModel object) {
 		return visiting(object);
 	}
@@ -175,20 +178,23 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
     /* (non-Javadoc)
      * @see org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor#visitBottomPattern(org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern)
      */
-    public @Nullable Object visitBottomPattern(@NonNull BottomPattern object) {
+    @Override
+	public @Nullable Object visitBottomPattern(@NonNull BottomPattern object) {
 		return visiting(object);
     }
 
     /* (non-Javadoc)
      * @see org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor#visitCoreDomain(org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain)
      */
-    public @Nullable Object visitCoreDomain(@NonNull CoreDomain object) {
+    @Override
+	public @Nullable Object visitCoreDomain(@NonNull CoreDomain object) {
 		return visiting(object);
     }
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor#visitDomain(org.eclipse.qvtd.pivot.qvtbase.Domain)
 	 */
+	@Override
 	public @Nullable Object visitDomain(@NonNull Domain object) {
 		return visiting(object);
 	}
@@ -196,20 +202,23 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
     /* (non-Javadoc)
      * @see org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor#visitCorePattern(org.eclipse.qvtd.pivot.qvtcorebase.CorePattern)
      */
-    public @Nullable Object visitCorePattern(@NonNull CorePattern object) {
+    @Override
+	public @Nullable Object visitCorePattern(@NonNull CorePattern object) {
 		return visiting(object);
     }
 
     /* (non-Javadoc)
      * @see org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor#visitEnforcementOperation(org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation)
      */
-    public @Nullable Object visitEnforcementOperation(@NonNull EnforcementOperation object) {
+    @Override
+	public @Nullable Object visitEnforcementOperation(@NonNull EnforcementOperation object) {
 		return visiting(object);
     }
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor#visitFunction(org.eclipse.qvtd.pivot.qvtbase.Function)
 	 */
+	@Override
 	public @Nullable Object visitFunction(@NonNull Function object) {
 		return visiting(object);
 	}
@@ -217,6 +226,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor#visitFunctionParameter(org.eclipse.qvtd.pivot.qvtbase.FunctionParameter)
 	 */
+	@Override
 	public @Nullable Object visitFunctionParameter(@NonNull FunctionParameter object) {
 		return visiting(object);
 	}
@@ -228,6 +238,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
      * org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor#visitGuardPattern(
      * org.eclipse.qvtd.pivot.qvtcore.GuardPattern)
      */
+	@Override
 	public @Nullable Object visitGuardPattern(@NonNull GuardPattern guardPattern) {
         for (Predicate predicate : guardPattern.getPredicate()) {
             // If the predicate is not true, the binding is not valid
@@ -250,6 +261,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitMappingCall(org.eclipse.qvtd.pivot.qvtimperative.MappingCall)
 	 */
+	@Override
 	public @Nullable Object visitMappingCall(@NonNull MappingCall mappingCall) {
     	Mapping calledMapping = ClassUtil.nonNullModel(mappingCall.getReferredMapping());
 		//
@@ -284,10 +296,12 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitMappingCallBinding(org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding)
 	 */
+	@Override
 	public @Nullable Object visitMappingCallBinding(@NonNull MappingCallBinding object) {
 		return visiting(object);	// MappingCallBinding is serviced by the parent MappingCall
     }
 
+	@Override
 	public @Nullable Object visitMappingLoop(@NonNull MappingLoop mappingLoop) {
 		Object inValues = mappingLoop.getSource().accept(undecoratedVisitor);
 		if (inValues instanceof Iterable<?>) {
@@ -303,6 +317,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 		return true;
 	}
 
+	@Override
 	public @Nullable Object visitMappingSequence(@NonNull MappingSequence mappingSequence) {
 		for (MappingStatement mappingStatement : mappingSequence.getMappingStatements()) {
 			QVTiEvaluationVisitor nv = ((QVTiEvaluationVisitor) undecoratedVisitor).createNestedEvaluator();
@@ -321,6 +336,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	protected void doMappingStatements(@NonNull List<MappingStatement> mappingStatements) {
 	}
 
+	@Override
 	public @Nullable Object visitMappingStatement(@NonNull MappingStatement object) {
 		return visiting(object);	// MappingStatement is abstract
 	}
@@ -328,7 +344,8 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
     /* (non-Javadoc)
      * @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitMiddlePropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment)
      */
-    public @Nullable Object visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment propertyAssignment) {
+    @Override
+	public @Nullable Object visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment propertyAssignment) {
         
         OCLExpression slotExp = propertyAssignment.getSlotExpression(); 
         Area area = ((BottomPattern)propertyAssignment.eContainer()).getArea();
@@ -386,6 +403,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitMiddlePropertyCallExp(org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp)
 	 */
+	@Override
 	public @Nullable Object visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp pPropertyCallExp) {
 		OCLExpression source = pPropertyCallExp.getSource();
 		Object sourceValue = source != null ? undecoratedVisitor.evaluate(source) : null;
@@ -400,6 +418,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor#visitPattern(org.eclipse.qvtd.pivot.qvtbase.Pattern)
 	 */
+	@Override
 	public @Nullable Object visitPattern(@NonNull Pattern object) {
 		return visiting(object);
 	}
@@ -407,6 +426,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor#visitPredicate(org.eclipse.qvtd.pivot.qvtbase.Predicate)
 	 */
+	@Override
 	public @Nullable Object visitPredicate(@NonNull Predicate predicate) {
         
         // Each predicate has a conditionExpression that is an OCLExpression
@@ -419,7 +439,8 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
     /* (non-Javadoc)
      * @see org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor#visitPropertyAssignment(org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment)
      */
-    public @Nullable Object visitPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
+    @Override
+	public @Nullable Object visitPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
         
         OCLExpression slotExp = propertyAssignment.getSlotExpression(); 
 //        Area area = ((BottomPattern)propertyAssignment.eContainer()).getArea();
@@ -483,7 +504,8 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
      * org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor#visitRealizedVariable
      * (org.eclipse.qvtd.pivot.qvtcore.RealizedVariable)
      */
-    public @Nullable Object visitRealizedVariable(@NonNull RealizedVariable realizedVariable) {
+    @Override
+	public @Nullable Object visitRealizedVariable(@NonNull RealizedVariable realizedVariable) {
         
         // Realized variables are in the mapping's target bottom pattern
         // and create elements in the target model. The realized variables
@@ -504,6 +526,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor#visitRule(org.eclipse.qvtd.pivot.qvtbase.Rule)
 	 */
+	@Override
 	public @Nullable Object visitRule(@NonNull Rule object) {
 		return visiting(object);
 	}
@@ -511,6 +534,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor#visitTransformation(org.eclipse.qvtd.pivot.qvtbase.Transformation)
 	 */
+	@Override
 	public @Nullable Object visitTransformation(@NonNull Transformation object) {
 		return visiting(object);
 	}
@@ -518,6 +542,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor#visitTypedModel(org.eclipse.qvtd.pivot.qvtbase.TypedModel)
 	 */
+	@Override
 	public @Nullable Object visitTypedModel(@NonNull TypedModel object) {
 		return visiting(object);
 	}
@@ -525,6 +550,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor#visitUnit(org.eclipse.qvtd.pivot.qvtbase.Unit)
 	 */
+	@Override
 	public @Nullable Object visitUnit(@NonNull Unit object) {
 		return visiting(object);
 	}
@@ -532,7 +558,8 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
     /* (non-Javadoc)
      * @see org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor#visitVariableAssignment(org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment)
      */
-    public @Nullable Object visitVariableAssignment(@NonNull VariableAssignment variableAssignment) {
+    @Override
+	public @Nullable Object visitVariableAssignment(@NonNull VariableAssignment variableAssignment) {
     	Variable targetVariable = variableAssignment.getTargetVariable() ;
 		Object value = ((QVTiEvaluationVisitor)undecoratedVisitor).safeVisit(variableAssignment.getValue());
 		// The variable had been added to the environment before the mapping call
@@ -542,6 +569,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 		return null;
     }
 
+	@Override
 	public @Nullable Object visitVariablePredicate(@NonNull VariablePredicate variablePredicate) {     
         PivotIdResolver idResolver = metaModelManager.getIdResolver();
         // Each predicate has a conditionExpression that is an OCLExpression

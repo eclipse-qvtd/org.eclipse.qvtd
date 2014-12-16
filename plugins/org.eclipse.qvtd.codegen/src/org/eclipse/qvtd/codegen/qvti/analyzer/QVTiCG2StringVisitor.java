@@ -48,10 +48,12 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 			CG2StringVisitor.addFactory(this);
 		}
 
+		@Override
 		public @NonNull CG2StringVisitor createToStringVisitor() {
 			return new QVTiCG2StringVisitor();
 		}
 
+		@Override
 		public @NonNull EPackage getEPackage() {
 			QVTiCGModelPackage eInstance = QVTiCGModelPackage.eINSTANCE;
 			assert eInstance != null;
@@ -63,31 +65,38 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 
 	public QVTiCG2StringVisitor() {}
 
+	@Override
 	@Nullable
 	public String visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment object) {
 		return visitCGPropertyAssignment(object);
 	}
 
+	@Override
 	public @Nullable String visitCGEcoreRealizedVariable(@NonNull CGEcoreRealizedVariable object) {
 		return visitCGRealizedVariable(object);
 	}
 
+	@Override
 	public @Nullable String visitCGFunction(@NonNull CGFunction object) {
 		return visitCGOperation(object);
 	}
 
+	@Override
 	public @Nullable String visitCGFunctionCallExp(@NonNull CGFunctionCallExp object) {
 		return visitCGOperationCallExp(object);
 	}
 
+	@Override
 	public @Nullable String visitCGFunctionParameter(@NonNull CGFunctionParameter object) {
 		return visitCGParameter(object);
 	}
 
+	@Override
 	public @Nullable String visitCGGuardVariable(@NonNull CGGuardVariable object) {
 		return visitCGParameter(object);
 	}
 
+	@Override
 	public @Nullable String visitCGMapping(@NonNull CGMapping cgMapping) {
 		appendQualifiedName(cgMapping.getTransformation(), ".", cgMapping);
 		append("(");
@@ -103,6 +112,7 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 		return null;
 	}
 
+	@Override
 	public @Nullable String visitCGMappingCall(@NonNull CGMappingCall cgMappingCall) {
 		appendName(((MappingCall)cgMappingCall.getAst()).getReferredMapping());
 		append("(");
@@ -114,6 +124,7 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 		return null;
 	}
 
+	@Override
 	public @Nullable String visitCGMappingCallBinding(@NonNull CGMappingCallBinding cgMappingCallBinding) {
 		appendName(cgMappingCallBinding);
 		append(" := ");
@@ -121,22 +132,27 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 		return null;
 	}
 
+	@Override
 	public @Nullable String visitCGMappingExp(@NonNull CGMappingExp object) {
 		return visitCGValuedElement(object);
 	}
 
+	@Override
 	public @Nullable String visitCGMappingLoop(@NonNull CGMappingLoop object) {
 		return visitCGIterationCallExp(object);
 	}
 
+	@Override
 	public @Nullable String visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment object) {
 		return visitCGPropertyAssignment(object);
 	}
 
+	@Override
 	public @Nullable String visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp object) {
 		return visitCGOppositePropertyCallExp(object);
 	}
 
+	@Override
 	public @Nullable String visitCGPredicate(@NonNull CGPredicate cgPredicate) {
 		safeVisit(cgPredicate.getConditionExpression());
 		append(", ");
@@ -144,6 +160,7 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 		return null;
 	}
 
+	@Override
 	public @Nullable String visitCGPropertyAssignment(@NonNull CGPropertyAssignment cgPropertyAssignment) {
 		safeVisit(cgPropertyAssignment.getSlotValue());
 		append(".");
@@ -153,18 +170,22 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 		return null;
 	}
 
+	@Override
 	public @Nullable String visitCGRealizedVariable(@NonNull CGRealizedVariable object) {
 		return visitCGVariable(object);
 	}
 
+	@Override
 	public @Nullable String visitCGSequence(@NonNull CGSequence object) {
 		return visitCGValuedElement(object);
 	}
 
+	@Override
 	public @Nullable String visitCGTransformation(@NonNull CGTransformation object) {
 		return visitCGClass(object);
 	}
 
+	@Override
 	public @Nullable String visitCGTypedModel(@NonNull CGTypedModel object) {
 		return visitCGNamedElement(object);
 	}
@@ -175,6 +196,7 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 		return null;
 	}
 
+	@Override
 	public @Nullable String visitCGVariablePredicate(@NonNull CGVariablePredicate cgVariablePredicate) {
 		appendName(cgVariablePredicate.getPredicateVariable());
 		append(" := ");

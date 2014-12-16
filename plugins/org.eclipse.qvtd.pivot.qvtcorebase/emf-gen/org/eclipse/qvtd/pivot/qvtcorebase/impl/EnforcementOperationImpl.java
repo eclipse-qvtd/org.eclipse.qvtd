@@ -97,6 +97,7 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EnforcementMode getEnforcementMode() {
 		return enforcementMode;
 	}
@@ -106,6 +107,7 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEnforcementMode(EnforcementMode newEnforcementMode) {
 		EnforcementMode oldEnforcementMode = enforcementMode;
 		enforcementMode = newEnforcementMode == null ? ENFORCEMENT_MODE_EDEFAULT : newEnforcementMode;
@@ -118,6 +120,7 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BottomPattern getBottomPattern() {
 		if (eContainerFeatureID() != QVTcoreBasePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN) return null;
 		return (BottomPattern)eInternalContainer();
@@ -138,6 +141,7 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBottomPattern(BottomPattern newBottomPattern) {
 		if (newBottomPattern != eInternalContainer() || (eContainerFeatureID() != QVTcoreBasePackage.ENFORCEMENT_OPERATION__BOTTOM_PATTERN && newBottomPattern != null)) {
 			if (EcoreUtil.isAncestor(this, newBottomPattern))
@@ -159,6 +163,7 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OperationCallExp getOperationCallExp() {
 		return operationCallExp;
 	}
@@ -183,6 +188,7 @@ public class EnforcementOperationImpl extends ElementImpl implements Enforcement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOperationCallExp(OperationCallExp newOperationCallExp) {
 		if (newOperationCallExp != operationCallExp) {
 			NotificationChain msgs = null;

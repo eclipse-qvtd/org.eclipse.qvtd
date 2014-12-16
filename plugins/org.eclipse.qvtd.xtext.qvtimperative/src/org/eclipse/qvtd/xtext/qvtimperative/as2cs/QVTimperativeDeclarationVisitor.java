@@ -46,23 +46,23 @@ import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 import org.eclipse.qvtd.xtext.qvtcorebase.as2cs.QVTcoreBaseDeclarationVisitor;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.AssignmentCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.BottomPatternCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.DomainCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.GuardPatternCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.QVTcoreBaseCSPackage;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.QueryCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.RealizedVariableCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.TransformationCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.UnrealizedVariableCS;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallBindingCS;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallCS;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingLoopCS;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingSequenceCS;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingStatementCS;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.QVTimperativeCSPackage;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.TopLevelCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingSequenceCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingStatementCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
+import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 
 public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisitor implements QVTimperativeVisitor<ElementCS>
 {
@@ -70,6 +70,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		super(context);
 	}
 
+	@Override
 	public ElementCS visitBottomPattern(@NonNull BottomPattern asBottomPattern) {
 		Area asArea = asBottomPattern.getArea();
 		BottomPatternCS csBottomPattern = context.refreshElement(BottomPatternCS.class, QVTcoreBaseCSPackage.Literals.BOTTOM_PATTERN_CS, asBottomPattern);
@@ -86,6 +87,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		return csBottomPattern;
 	}
 
+	@Override
 	public ElementCS visitGuardPattern(@NonNull GuardPattern asGuardPattern) {
 		Area asArea = asGuardPattern.getArea();
 		GuardPatternCS csGuardPattern = context.refreshElement(GuardPatternCS.class, QVTcoreBaseCSPackage.Literals.GUARD_PATTERN_CS, asGuardPattern);
@@ -99,6 +101,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		return csGuardPattern;
 	}
 
+	@Override
 	public ElementCS visitImperativeModel(@NonNull ImperativeModel asModel) {
 		assert asModel.eContainer() == null;
 		TopLevelCS csDocument = context.refreshElement(TopLevelCS.class, QVTimperativeCSPackage.Literals.TOP_LEVEL_CS, asModel);
@@ -158,6 +161,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		return csDocument;
 	}
 
+	@Override
 	public ElementCS visitMapping(@NonNull Mapping asMapping) {
 		MappingCS csMapping = context.refreshNamedElement(MappingCS.class, QVTimperativeCSPackage.Literals.MAPPING_CS, asMapping);
 		csMapping.setPivot(asMapping);
@@ -172,6 +176,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		return csMapping;
 	}
 
+	@Override
 	public ElementCS visitMappingCall(@NonNull MappingCall asMappingCall) {
 		MappingCallCS csMappingCall = context.refreshElement(MappingCallCS.class, QVTimperativeCSPackage.Literals.MAPPING_CALL_CS, asMappingCall);
 		csMappingCall.setPivot(asMappingCall);
@@ -180,6 +185,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		return csMappingCall;
 	}
 
+	@Override
 	public ElementCS visitMappingCallBinding(@NonNull MappingCallBinding asMappingCallBinding) {
 		MappingCallBindingCS csMappingCallBinding = context.refreshElement(MappingCallBindingCS.class, QVTimperativeCSPackage.Literals.MAPPING_CALL_BINDING_CS, asMappingCallBinding);
 		csMappingCallBinding.setPivot(asMappingCallBinding);
@@ -188,6 +194,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		return csMappingCallBinding;
 	}
 
+	@Override
 	public ElementCS visitMappingLoop(@NonNull MappingLoop asMappingLoop) {
 		MappingLoopCS csMappingLoop = context.refreshElement(MappingLoopCS.class, QVTimperativeCSPackage.Literals.MAPPING_LOOP_CS, asMappingLoop);
 		csMappingLoop.setPivot(asMappingLoop);
@@ -197,20 +204,24 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		return csMappingLoop;
 	}
 
+	@Override
 	public ElementCS visitMappingSequence(@NonNull MappingSequence pMappingSequence) {
 		MappingSequenceCS csMappingSequence = context.refreshElement(MappingSequenceCS.class, QVTimperativeCSPackage.Literals.MAPPING_SEQUENCE_CS, pMappingSequence);
 		context.refreshList(csMappingSequence.getMappingStatements(), context.visitDeclarations(MappingStatementCS.class, pMappingSequence.getMappingStatements(), null));
 		return csMappingSequence;
 	}
 
+	@Override
 	public ElementCS visitMappingStatement(@NonNull MappingStatement object) {
 		return visiting(object);
 	}
 
+	@Override
 	public ElementCS visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment asMiddlePropertyAssignment) {
 		return visitPropertyAssignment(asMiddlePropertyAssignment);
 	}
 
+	@Override
 	public ElementCS visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp asMiddlePropertyCallExp) {
 		return visitOppositePropertyCallExp(asMiddlePropertyCallExp);
 	}
@@ -243,6 +254,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		}
 	}
 
+	@Override
 	public ElementCS visitVariablePredicate(@NonNull VariablePredicate asVariablePredicate) {
 		AssignmentCS csPredicate = context.refreshElement(AssignmentCS.class, QVTcoreBaseCSPackage.Literals.ASSIGNMENT_CS, asVariablePredicate);
 		csPredicate.setPivot(asVariablePredicate);

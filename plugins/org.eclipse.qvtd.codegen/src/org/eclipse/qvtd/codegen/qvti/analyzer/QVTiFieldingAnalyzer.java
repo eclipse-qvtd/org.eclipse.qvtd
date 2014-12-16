@@ -47,82 +47,102 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 			super(context);
 		}
 
+		@Override
 		public @Nullable Set<CGVariable> visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment object) {
 			return visitCGPropertyAssignment(object);
 		}
 
+		@Override
 		public @Nullable Set<CGVariable> visitCGEcoreRealizedVariable(@NonNull CGEcoreRealizedVariable object) {
 			return visitCGRealizedVariable(object);
 		}
 
+		@Override
 		public @Nullable Set<CGVariable> visitCGFunction(@NonNull CGFunction object) {
 			return visitCGOperation(object);
 		}
 
+		@Override
 		public @Nullable Set<CGVariable> visitCGFunctionCallExp(@NonNull CGFunctionCallExp object) {
 			return visitCGOperationCallExp(object);
 		}
 
+		@Override
 		public @Nullable Set<CGVariable> visitCGFunctionParameter(@NonNull CGFunctionParameter object) {
 			return visitCGParameter(object);
 		}
 
+		@Override
 		public @Nullable Set<CGVariable> visitCGGuardVariable(@NonNull CGGuardVariable object) {
 			return visitCGParameter(object);
 		}
 
+		@Override
 		public @Nullable Set<CGVariable> visitCGMapping(@NonNull CGMapping object) {
 			return visitCGNamedElement(object);
 		}
 
+		@Override
 		public @Nullable Set<CGVariable> visitCGMappingCall(@NonNull CGMappingCall object) {
 			return visitCGValuedElement(object);
 		}
 
+		@Override
 		public @Nullable Set<CGVariable> visitCGMappingCallBinding(@NonNull CGMappingCallBinding object) {
 			return visitCGValuedElement(object);
 		}
 
+		@Override
 		public @Nullable Set<CGVariable> visitCGMappingExp(@NonNull CGMappingExp object) {
 			return visitCGValuedElement(object);
 		}
 
+		@Override
 		public @Nullable Set<CGVariable> visitCGMappingLoop(@NonNull CGMappingLoop object) {
 			return visitCGIterationCallExp(object);
 		}
 
+		@Override
 		public @Nullable Set<CGVariable> visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment object) {
 			return visitCGPropertyAssignment(object);
 		}
 
+		@Override
 		public @Nullable Set<CGVariable> visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp object) {
 			return visitCGOppositePropertyCallExp(object);
 		}
 
+		@Override
 		public @Nullable Set<CGVariable> visitCGPredicate(@NonNull CGPredicate object) {
 			return visitCGValuedElement(object);
 		}
 
+		@Override
 		public @Nullable Set<CGVariable> visitCGPropertyAssignment(@NonNull CGPropertyAssignment object) {
 			return visitCGValuedElement(object);
 		}
 
+		@Override
 		public @Nullable Set<CGVariable> visitCGRealizedVariable(@NonNull CGRealizedVariable object) {
 			return visitCGVariable(object);
 		}
 
+		@Override
 		public @Nullable Set<CGVariable> visitCGSequence(@NonNull CGSequence object) {
 			return visitCGValuedElement(object);
 		}
 
+		@Override
 		public @Nullable Set<CGVariable> visitCGTransformation(@NonNull CGTransformation object) {
 			return visitCGClass(object);
 		}
 
+		@Override
 		public @Nullable Set<CGVariable> visitCGTypedModel(@NonNull CGTypedModel object) {
 			return visitCGNamedElement(object);
 		}
 
+		@Override
 		public @Nullable Set<CGVariable> visitCGVariablePredicate(@NonNull CGVariablePredicate object) {
 			return visitCGPredicate(object);
 		}
@@ -134,46 +154,57 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 			super(context, caughtVariables);
 		}
 
+		@Override
 		public Boolean visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment object) {
 			return visitCGPropertyAssignment(object);
 		}
 
+		@Override
 		public Boolean visitCGEcoreRealizedVariable(@NonNull CGEcoreRealizedVariable object) {
 			return visitCGRealizedVariable(object);
 		}
 
+		@Override
 		public Boolean visitCGFunction(@NonNull CGFunction object) {
 			return visitCGOperation(object);
 		}
 
+		@Override
 		public Boolean visitCGFunctionCallExp(@NonNull CGFunctionCallExp object) {
 			return visitCGOperationCallExp(object);
 		}
 
+		@Override
 		public Boolean visitCGFunctionParameter(@NonNull CGFunctionParameter object) {
 			return visitCGParameter(object);
 		}
 
+		@Override
 		public Boolean visitCGGuardVariable(@NonNull CGGuardVariable object) {
 			return visitCGParameter(object);
 		}
 
+		@Override
 		public Boolean visitCGMapping(@NonNull CGMapping object) {
 			return visitCGNamedElement(object);
 		}
 
+		@Override
 		public Boolean visitCGMappingCall(@NonNull CGMappingCall object) {
 			return visitCGValuedElement(object);
 		}
 
+		@Override
 		public Boolean visitCGMappingCallBinding(@NonNull CGMappingCallBinding object) {
 			return visitCGValuedElement(object);
 		}
 
+		@Override
 		public Boolean visitCGMappingExp(@NonNull CGMappingExp object) {
 			return visitCGValuedElement(object);
 		}
 
+		@Override
 		public Boolean visitCGMappingLoop(@NonNull CGMappingLoop cgElement) {
 //			return visitCGIterationCallExp(object);
 			rewriteAsThrown(cgElement.getSource());
@@ -190,38 +221,47 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 			return false;
 		}
 
+		@Override
 		public Boolean visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment object) {
 			return visitCGPropertyAssignment(object);
 		}
 
+		@Override
 		public Boolean visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp object) {
 			return visitCGOppositePropertyCallExp(object);
 		}
 
+		@Override
 		public Boolean visitCGPredicate(@NonNull CGPredicate object) {
 			return visitCGValuedElement(object);
 		}
 
+		@Override
 		public Boolean visitCGPropertyAssignment(@NonNull CGPropertyAssignment object) {
 			return visitCGValuedElement(object);
 		}
 
+		@Override
 		public Boolean visitCGRealizedVariable(@NonNull CGRealizedVariable object) {
 			return visitCGVariable(object);
 		}
 
+		@Override
 		public Boolean visitCGSequence(@NonNull CGSequence object) {
 			return visitCGValuedElement(object);
 		}
 
+		@Override
 		public Boolean visitCGTransformation(@NonNull CGTransformation object) {
 			return visitCGClass(object);
 		}
 
+		@Override
 		public Boolean visitCGTypedModel(@NonNull CGTypedModel object) {
 			return visitCGNamedElement(object);
 		}
 
+		@Override
 		public Boolean visitCGVariablePredicate(@NonNull CGVariablePredicate object) {
 			return visitCGPredicate(object);
 		}

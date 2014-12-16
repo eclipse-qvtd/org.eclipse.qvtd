@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtbase;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Namespace;
 
@@ -30,7 +29,7 @@ import org.eclipse.ocl.pivot.Namespace;
  * @model
  * @generated
  */
-public interface Unit extends EObject, NamedElement {
+public interface Unit extends NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Used Package</b></em>' reference.
 	 * <!-- begin-user-doc -->

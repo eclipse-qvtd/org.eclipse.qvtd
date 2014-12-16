@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.pivot.qvtrelation;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Property;
 
@@ -34,7 +33,7 @@ import org.eclipse.ocl.pivot.Property;
  * @model
  * @generated
  */
-public interface Key extends EObject, Element {
+public interface Key extends Element {
 	/**
 	 * Returns the value of the '<em><b>Identifies</b></em>' reference.
 	 * <!-- begin-user-doc -->

@@ -77,6 +77,7 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<CGMappingCallBinding> getMappingCallBindings() {
 		if (mappingCallBindings == null) {
 			mappingCallBindings = new EObjectContainmentEList<CGMappingCallBinding>(CGMappingCallBinding.class, this, QVTiCGModelPackage.CG_MAPPING_CALL__MAPPING_CALL_BINDINGS);
@@ -181,6 +182,7 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		if (this == thatValue) {
 			return Boolean.TRUE;

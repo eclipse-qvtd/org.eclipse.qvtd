@@ -25,7 +25,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 import org.eclipse.qvtd.xtext.qvtcorebase.cs2as.QVTcoreBaseCS2AS;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 
 public class QVTimperativeCS2AS extends QVTcoreBaseCS2AS
 {	

@@ -13,7 +13,7 @@ package org.eclipse.qvtd.xtext.qvtimperative.ui.model;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.base.ui.model.BaseDocumentProvider;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.QVTimperativeCSPackage;
+import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 
 /**
  * QVTimperativeDocumentProvider orchestrates the load and saving of optional XMI content

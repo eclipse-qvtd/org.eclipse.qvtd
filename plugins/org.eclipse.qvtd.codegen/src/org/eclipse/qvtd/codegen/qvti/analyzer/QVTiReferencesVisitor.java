@@ -35,82 +35,102 @@ public class QVTiReferencesVisitor extends ReferencesVisitor implements QVTiCGMo
 		super(context);
 	}
 
+	@Override
 	public @Nullable List<Object> visitCGEcorePropertyAssignment(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment object) {
 		return visitCGPropertyAssignment(object);
 	}
 
+	@Override
 	public @Nullable List<Object> visitCGEcoreRealizedVariable(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable object) {
 		return visitCGRealizedVariable(object);
 	}
 
+	@Override
 	public @Nullable List<Object> visitCGFunction(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGFunction object) {
 		return visitCGOperation(object);
 	}
 
+	@Override
 	public @Nullable List<Object> visitCGFunctionCallExp(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp object) {
 		return visitCGOperationCallExp(object);
 	}
 
+	@Override
 	public @Nullable List<Object> visitCGFunctionParameter(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionParameter object) {
 		return visitCGParameter(object);
 	}
 
+	@Override
 	public @Nullable List<Object> visitCGGuardVariable(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGGuardVariable object) {
 		return visitCGParameter(object);
 	}
 
+	@Override
 	public @Nullable List<Object> visitCGMapping(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGMapping object) {
 		return visitCGNamedElement(object);
 	}
 
+	@Override
 	public @Nullable List<Object> visitCGMappingCall(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCall cgMappingCall) {
 		return append(visitCGValuedElement(cgMappingCall), ((MappingCall)cgMappingCall.getAst()).getReferredMapping());
 	}
 
+	@Override
 	public @Nullable List<Object> visitCGMappingCallBinding(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding object) {
 		return visitCGValuedElement(object);
 	}
 
+	@Override
 	public @Nullable List<Object> visitCGMappingExp(@NonNull CGMappingExp object) {
 		return visitCGValuedElement(object);
 	}
 
+	@Override
 	public @Nullable List<Object> visitCGMappingLoop(@NonNull CGMappingLoop object) {
 		return visitCGIterationCallExp(object);
 	}
 
+	@Override
 	public @Nullable List<Object> visitCGMiddlePropertyAssignment(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyAssignment object) {
 		return visitCGEcorePropertyAssignment(object);
 	}
 
+	@Override
 	public @Nullable List<Object> visitCGMiddlePropertyCallExp(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGMiddlePropertyCallExp object) {
 		return visitCGOppositePropertyCallExp(object);
 	}
 
+	@Override
 	public @Nullable List<Object> visitCGPredicate(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate object) {
 		return visitCGValuedElement(object);
 	}
 
+	@Override
 	public @Nullable List<Object> visitCGPropertyAssignment(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment object) {
 		return visitCGValuedElement(object);
 	}
 
+	@Override
 	public @Nullable List<Object> visitCGRealizedVariable(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable object) {
 		return visitCGVariable(object);
 	}
 
+	@Override
 	public @Nullable List<Object> visitCGSequence(@NonNull CGSequence object) {
 		return visitCGValuedElement(object);
 	}
 
+	@Override
 	public @Nullable List<Object> visitCGTransformation(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation object) {
 		return visitCGClass(object);
 	}
 
+	@Override
 	public @Nullable List<Object> visitCGTypedModel(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGTypedModel object) {
 		return visitCGNamedElement(object);
 	}
 
+	@Override
 	public @Nullable List<Object> visitCGVariablePredicate(@NonNull CGVariablePredicate object) {
 		return visitCGPredicate(object);
 	}

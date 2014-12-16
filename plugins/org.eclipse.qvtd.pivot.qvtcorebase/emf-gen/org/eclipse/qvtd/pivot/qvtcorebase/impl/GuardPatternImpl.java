@@ -83,6 +83,7 @@ public class GuardPatternImpl extends CorePatternImpl implements GuardPattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setArea(Area newArea) {
 		if (newArea != eInternalContainer() || (eContainerFeatureID() != QVTcoreBasePackage.GUARD_PATTERN__AREA && newArea != null)) {
 			if (EcoreUtil.isAncestor(this, newArea))

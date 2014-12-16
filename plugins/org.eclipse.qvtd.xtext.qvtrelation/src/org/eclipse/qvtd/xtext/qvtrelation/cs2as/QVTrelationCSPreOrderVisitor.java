@@ -30,12 +30,12 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
-import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.CollectionTemplateCS;
-import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.DefaultValueCS;
-import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.ObjectTemplateCS;
-import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.PropertyTemplateCS;
-import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.TransformationCS;
-import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.util.AbstractQVTrelationCSPreOrderVisitor;
+import org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.ObjectTemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.util.AbstractQVTrelationCSPreOrderVisitor;
 
 public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderVisitor
 {	

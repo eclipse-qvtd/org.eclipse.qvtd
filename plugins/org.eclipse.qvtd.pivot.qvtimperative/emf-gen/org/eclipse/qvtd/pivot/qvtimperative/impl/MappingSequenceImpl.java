@@ -74,6 +74,7 @@ public class MappingSequenceImpl extends MappingStatementImpl implements Mapping
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<MappingStatement> getMappingStatements() {
 		if (mappingStatements == null) {
 			mappingStatements = new EObjectContainmentEList<MappingStatement>(MappingStatement.class, this, QVTimperativePackage.MAPPING_SEQUENCE__MAPPING_STATEMENTS);

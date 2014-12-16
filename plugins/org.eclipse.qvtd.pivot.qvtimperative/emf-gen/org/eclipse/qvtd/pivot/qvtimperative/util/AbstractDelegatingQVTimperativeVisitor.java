@@ -36,42 +36,52 @@ public abstract class AbstractDelegatingQVTimperativeVisitor<R, C, D extends QVT
 		return delegate.visiting(visitable);
 	}
 
+	@Override
 	public @Nullable R visitImperativeModel(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel object) {
 		return delegate.visitImperativeModel(object);
 	}
 
+	@Override
 	public @Nullable R visitMapping(@NonNull org.eclipse.qvtd.pivot.qvtimperative.Mapping object) {
 		return delegate.visitMapping(object);
 	}
 
+	@Override
 	public @Nullable R visitMappingCall(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingCall object) {
 		return delegate.visitMappingCall(object);
 	}
 
+	@Override
 	public @Nullable R visitMappingCallBinding(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding object) {
 		return delegate.visitMappingCallBinding(object);
 	}
 
+	@Override
 	public @Nullable R visitMappingLoop(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingLoop object) {
 		return delegate.visitMappingLoop(object);
 	}
 
+	@Override
 	public @Nullable R visitMappingSequence(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingSequence object) {
 		return delegate.visitMappingSequence(object);
 	}
 
+	@Override
 	public @Nullable R visitMappingStatement(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingStatement object) {
 		return delegate.visitMappingStatement(object);
 	}
 
+	@Override
 	public @Nullable R visitMiddlePropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment object) {
 		return delegate.visitMiddlePropertyAssignment(object);
 	}
 
+	@Override
 	public @Nullable R visitMiddlePropertyCallExp(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp object) {
 		return delegate.visitMiddlePropertyCallExp(object);
 	}
 
+	@Override
 	public @Nullable R visitVariablePredicate(@NonNull org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate object) {
 		return delegate.visitVariablePredicate(object);
 	}

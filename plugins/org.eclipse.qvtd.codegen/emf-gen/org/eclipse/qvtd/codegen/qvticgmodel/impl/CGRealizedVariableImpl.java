@@ -82,6 +82,7 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGTypedModel getTypedModel() {
 		return typedModel;
 	}
@@ -91,6 +92,7 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTypedModel(CGTypedModel newTypedModel) {
 		CGTypedModel oldTypedModel = typedModel;
 		typedModel = newTypedModel;
@@ -103,6 +105,7 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGExecutorType getExecutorType() {
 		return executorType;
 	}
@@ -112,6 +115,7 @@ public class CGRealizedVariableImpl extends CGVariableImpl implements CGRealized
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExecutorType(CGExecutorType newExecutorType) {
 		CGExecutorType oldExecutorType = executorType;
 		executorType = newExecutorType;

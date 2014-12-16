@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtbase;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.ReferringElement;
 
@@ -33,7 +32,7 @@ import org.eclipse.ocl.pivot.ReferringElement;
  * @model abstract="true"
  * @generated
  */
-public interface Domain extends EObject, NamedElement, ReferringElement {
+public interface Domain extends NamedElement, ReferringElement {
 	/**
 	 * Returns the value of the '<em><b>Is Checkable</b></em>' attribute.
 	 * <!-- begin-user-doc -->

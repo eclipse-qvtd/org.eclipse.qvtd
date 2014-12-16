@@ -65,6 +65,7 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
 		modelManager.addModel(typedModel, resource);
 	}
 
+	@Override
 	public void cancel() {
 		if (monitor != null) {
 			monitor.cancel();
@@ -129,6 +130,7 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
 		return transformation;
 	}
 
+	@Override
 	public boolean isCanceled() {
 		return canceled || ((monitor != null) && monitor.isCanceled());
 	}

@@ -11,7 +11,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.eclipse.org/qvt/2015/QVTcoreCS"
-            class="org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.QVTcoreCSPackage"
+            class="org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage"
             genModel="model/QVTcoreCS.genmodel"/>
    </extension>
 
@@ -19,7 +19,7 @@
       <!-- @generated QVTcoreCS -->
       <parser
             contentTypeIdentifier="org.eclipse.qvtd.xtext.qvtcore"
-            class="org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.util.QVTcoreCSResourceFactoryImpl"/>
+            class="org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSResourceFactoryImpl"/>
    </extension>
 
    <extension point="org.eclipse.core.contenttype.contentTypes">
@@ -43,7 +43,7 @@
             class="org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.util.QVTcoreCSResourceFactoryImpl"/-->
       <parser
             type="qvtccs"
-            class="org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.util.QVTcoreCSResourceFactoryImpl"/>
+            class="org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSResourceFactoryImpl"/>
    </extension>
    <extension point="org.eclipse.team.core.fileTypes">
       <fileTypes extension="qvtc" type="text" />

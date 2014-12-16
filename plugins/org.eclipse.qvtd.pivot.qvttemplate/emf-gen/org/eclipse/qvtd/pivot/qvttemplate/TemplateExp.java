@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvttemplate;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.pivot.LiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Variable;
@@ -32,7 +31,7 @@ import org.eclipse.ocl.pivot.Variable;
  * @model abstract="true"
  * @generated
  */
-public interface TemplateExp extends EObject, LiteralExp {
+public interface TemplateExp extends LiteralExp {
 	/**
 	 * Returns the value of the '<em><b>Binds To</b></em>' reference.
 	 * <!-- begin-user-doc -->

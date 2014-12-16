@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtcorebase;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OperationCallExp;
 
@@ -32,7 +31,7 @@ import org.eclipse.ocl.pivot.OperationCallExp;
  * @model
  * @generated
  */
-public interface EnforcementOperation extends EObject, Element {
+public interface EnforcementOperation extends Element {
 	/**
 	 * Returns the value of the '<em><b>Enforcement Mode</b></em>' attribute.
 	 * The literals are from the enumeration {@link org.eclipse.qvtd.pivot.qvtcorebase.EnforcementMode}.

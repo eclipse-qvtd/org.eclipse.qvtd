@@ -88,6 +88,7 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BaseModel createBaseModel() {
 		BaseModelImpl baseModel = new BaseModelImpl();
 		return baseModel;
@@ -98,6 +99,7 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Function createFunction() {
 		FunctionImpl function = new FunctionImpl();
 		return function;
@@ -108,6 +110,7 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public FunctionParameter createFunctionParameter() {
 		FunctionParameterImpl functionParameter = new FunctionParameterImpl();
 		return functionParameter;
@@ -118,6 +121,7 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Pattern createPattern() {
 		PatternImpl pattern = new PatternImpl();
 		return pattern;
@@ -128,6 +132,7 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Predicate createPredicate() {
 		PredicateImpl predicate = new PredicateImpl();
 		return predicate;
@@ -138,6 +143,7 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Transformation createTransformation() {
 		TransformationImpl transformation = new TransformationImpl();
 		return transformation;
@@ -148,6 +154,7 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypedModel createTypedModel() {
 		TypedModelImpl typedModel = new TypedModelImpl();
 		return typedModel;
@@ -158,6 +165,7 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Unit createUnit() {
 		UnitImpl unit = new UnitImpl();
 		return unit;
@@ -168,6 +176,7 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public QVTbasePackage getQVTbasePackage() {
 		return (QVTbasePackage)getEPackage();
 	}

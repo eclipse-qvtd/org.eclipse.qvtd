@@ -13,7 +13,6 @@ package org.eclipse.qvtd.pivot.qvttemplate.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.ocl.pivot.OCLExpression;
@@ -81,8 +80,9 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Variable getBindsTo() {
-		if (bindsTo != null && ((EObject)bindsTo).eIsProxy()) {
+		if (bindsTo != null && bindsTo.eIsProxy()) {
 			InternalEObject oldBindsTo = (InternalEObject)bindsTo;
 			bindsTo = (Variable)eResolveProxy(oldBindsTo);
 			if (bindsTo != oldBindsTo) {
@@ -107,6 +107,7 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBindsTo(Variable newBindsTo) {
 		Variable oldBindsTo = bindsTo;
 		bindsTo = newBindsTo;
@@ -119,6 +120,7 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OCLExpression getWhere() {
 		return where;
 	}
@@ -143,6 +145,7 @@ public abstract class TemplateExpImpl extends LiteralExpImpl implements Template
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWhere(OCLExpression newWhere) {
 		if (newWhere != where) {
 			NotificationChain msgs = null;

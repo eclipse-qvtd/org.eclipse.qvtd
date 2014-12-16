@@ -31,6 +31,7 @@ public abstract class AbstractWrappingQVTrelationVisitor<R, C, D extends QVTrela
 		super(delegate, context);
 	}
 
+	@Override
 	public @Nullable R visitDomainPattern(@NonNull org.eclipse.qvtd.pivot.qvtrelation.DomainPattern object) {
 		P prologue = preVisit(object);
 		try {
@@ -42,6 +43,7 @@ public abstract class AbstractWrappingQVTrelationVisitor<R, C, D extends QVTrela
 		}
 	}
 
+	@Override
 	public @Nullable R visitKey(@NonNull org.eclipse.qvtd.pivot.qvtrelation.Key object) {
 		P prologue = preVisit(object);
 		try {
@@ -53,6 +55,7 @@ public abstract class AbstractWrappingQVTrelationVisitor<R, C, D extends QVTrela
 		}
 	}
 
+	@Override
 	public @Nullable R visitRelation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.Relation object) {
 		P prologue = preVisit(object);
 		try {
@@ -64,6 +67,7 @@ public abstract class AbstractWrappingQVTrelationVisitor<R, C, D extends QVTrela
 		}
 	}
 
+	@Override
 	public @Nullable R visitRelationCallExp(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp object) {
 		P prologue = preVisit(object);
 		try {
@@ -75,6 +79,7 @@ public abstract class AbstractWrappingQVTrelationVisitor<R, C, D extends QVTrela
 		}
 	}
 
+	@Override
 	public @Nullable R visitRelationDomain(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationDomain object) {
 		P prologue = preVisit(object);
 		try {
@@ -86,6 +91,7 @@ public abstract class AbstractWrappingQVTrelationVisitor<R, C, D extends QVTrela
 		}
 	}
 
+	@Override
 	public @Nullable R visitRelationDomainAssignment(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment object) {
 		P prologue = preVisit(object);
 		try {
@@ -97,6 +103,7 @@ public abstract class AbstractWrappingQVTrelationVisitor<R, C, D extends QVTrela
 		}
 	}
 
+	@Override
 	public @Nullable R visitRelationImplementation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation object) {
 		P prologue = preVisit(object);
 		try {
@@ -108,6 +115,7 @@ public abstract class AbstractWrappingQVTrelationVisitor<R, C, D extends QVTrela
 		}
 	}
 
+	@Override
 	public @Nullable R visitRelationModel(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationModel object) {
 		P prologue = preVisit(object);
 		try {
@@ -119,6 +127,7 @@ public abstract class AbstractWrappingQVTrelationVisitor<R, C, D extends QVTrela
 		}
 	}
 
+	@Override
 	public @Nullable R visitRelationalTransformation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation object) {
 		P prologue = preVisit(object);
 		try {

@@ -285,6 +285,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		}
 	}
 
+	@Override
 	public @NonNull Boolean visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment cgPropertyAssignment) {
 //		Property pivotProperty = cgPropertyCallExp.getReferredProperty();
 //		CGTypeId cgTypeId = analyzer.getTypeId(pivotProperty.getOwningType().getTypeId());
@@ -326,6 +327,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		return true;
 	}
 
+	@Override
 	public @NonNull Boolean visitCGEcoreRealizedVariable(@NonNull CGEcoreRealizedVariable cgRealizedVariable) {
 		EClassifier eClassifier = cgRealizedVariable.getEClassifier();
 		EPackage ePackage = eClassifier.getEPackage();			
@@ -366,6 +368,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		return true;
 	}
 
+	@Override
 	public @NonNull Boolean visitCGFunction(@NonNull CGFunction cgFunction) {
 		JavaLocalContext<?> localContext2 = globalContext.getLocalContext(cgFunction);
 		if (localContext2 != null) {
@@ -456,6 +459,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		return true;
 	}
 
+	@Override
 	public @NonNull Boolean visitCGFunctionCallExp(@NonNull CGFunctionCallExp cgFunctionCallExp) {
 		Operation pOperation = cgFunctionCallExp.getReferredOperation();
 		List<CGValuedElement> cgArguments = cgFunctionCallExp.getArguments();
@@ -488,14 +492,17 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		return true;
 	}
 
+	@Override
 	public @NonNull Boolean visitCGFunctionParameter(@NonNull CGFunctionParameter object) {
 		return visitCGParameter(object);
 	}
 
+	@Override
 	public @NonNull Boolean visitCGGuardVariable(@NonNull CGGuardVariable object) {
 		return visitCGParameter(object);
 	}
 
+	@Override
 	public @NonNull Boolean visitCGMapping(@NonNull CGMapping cgMapping) {
 //		if ("associationToForeignKeyLM".equals(cgMapping.getName())) {
 //			System.out.println("Got it");
@@ -551,6 +558,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		return true;
 	}
 
+	@Override
 	public @NonNull Boolean visitCGMappingCall(@NonNull CGMappingCall cgMappingCall) {
 		MappingCall pMappingCall = (MappingCall) cgMappingCall.getAst();
 		Mapping pReferredMapping = pMappingCall.getReferredMapping();
@@ -616,10 +624,12 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		return true;
 	}
 
+	@Override
 	public @NonNull Boolean visitCGMappingCallBinding(@NonNull CGMappingCallBinding object) {
 		return true;
 	}
 
+	@Override
 	public @NonNull Boolean visitCGMappingExp(@NonNull CGMappingExp cgMappingExp) {
 		assert cgMappingExp.getPredicates().isEmpty();		// Get rewritten during JavaPre pass
 		js.append("// creations\n");
@@ -638,6 +648,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		return true;
 	}
 
+	@Override
 	public @NonNull Boolean visitCGMappingLoop(@NonNull CGMappingLoop cgMappingLoop) {
 		CGValuedElement source = getExpression(cgMappingLoop.getSource());
 		CGIterator iterator = cgMappingLoop.getIterators().get(0);
@@ -664,6 +675,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		return true;
 	}
 
+	@Override
 	public @NonNull Boolean visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment cgMiddlePropertyAssignment) {
 		visitCGEcorePropertyAssignment(cgMiddlePropertyAssignment);
 		Property pReferredProperty = ClassUtil.nonNullModel(cgMiddlePropertyAssignment.getReferredProperty());
@@ -687,6 +699,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		return true;
 	}
 
+	@Override
 	public @NonNull Boolean visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp cgPropertyCallExp) {
 		Property pivotProperty = cgPropertyCallExp.getReferredProperty();
 		assert !pivotProperty.isImplicit();
@@ -714,6 +727,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		return true;
 	}
 
+	@Override
 	public @NonNull Boolean visitCGPredicate(@NonNull CGPredicate cgPredicate) {
 		boolean booleanCondition = false;
 		CGValuedElement cgConditionExpression = cgPredicate.getConditionExpression();
@@ -743,6 +757,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		return true;
 	}
 
+	@Override
 	public @NonNull Boolean visitCGPropertyAssignment(@NonNull CGPropertyAssignment cgPropertyAssignment) {
 		CGExecutorProperty cgExecutorProperty = cgPropertyAssignment.getExecutorProperty();
 		CGValuedElement slotValue = cgPropertyAssignment.getSlotValue();
@@ -764,6 +779,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		return true;
 	}
 
+	@Override
 	public @NonNull Boolean visitCGRealizedVariable(@NonNull CGRealizedVariable cgRealizedVariable) {
 		TypeId typeId = cgRealizedVariable.getASTypeId();
 		if (typeId != null) {
@@ -777,6 +793,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		return true;
 	}
 
+	@Override
 	public @Nullable Boolean visitCGSequence(@NonNull CGSequence cgSequence) {
 		for (CGValuedElement cgStatement : cgSequence.getStatements()) {
 			cgStatement.accept(this);
@@ -784,6 +801,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		return true;
 	}
 
+	@Override
 	public @NonNull Boolean visitCGTransformation(@NonNull CGTransformation cgTransformation) {		
 		String className = cgTransformation.getName();
 		js.append("/**\n");
@@ -827,10 +845,12 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		return true;
 	}
 
+	@Override
 	public @NonNull Boolean visitCGTypedModel(@NonNull CGTypedModel object) {
 		return true;
 	}
 
+	@Override
 	public @NonNull Boolean visitCGVariablePredicate(@NonNull CGVariablePredicate cgVariablePredicate) {
 		CGValuedElement cgConditionExpression = ClassUtil.nonNullState(cgVariablePredicate.getConditionExpression());
 		CGVariable cgPredicateVariable = ClassUtil.nonNullState(cgVariablePredicate.getPredicateVariable());

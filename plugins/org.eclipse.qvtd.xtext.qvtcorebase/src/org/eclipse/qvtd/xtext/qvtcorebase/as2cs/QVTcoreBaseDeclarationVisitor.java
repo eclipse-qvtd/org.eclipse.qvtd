@@ -65,17 +65,17 @@ import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.AssignmentCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.BottomPatternCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.DirectionCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.DomainCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.GuardPatternCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.ParamDeclarationCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.QVTcoreBaseCSPackage;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.QueryCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.RealizedVariableCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.TransformationCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.UnrealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.ParamDeclarationCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS;
 
 public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarationVisitor implements QVTcoreBaseVisitor<ElementCS>
 {
@@ -145,14 +145,17 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		}
 	}
 
+	@Override
 	public ElementCS visitAssignment(@NonNull Assignment object) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public ElementCS visitBaseModel(@NonNull BaseModel object) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public ElementCS visitCoreDomain(@NonNull CoreDomain asCoreDomain) {
 		DomainCS csDomain = context.refreshElement(DomainCS.class, QVTcoreBaseCSPackage.Literals.DOMAIN_CS, asCoreDomain);
 		csDomain.setPivot(asCoreDomain);
@@ -164,18 +167,22 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		return csDomain;
 	}
 
+	@Override
 	public ElementCS visitCorePattern(@NonNull CorePattern object) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public ElementCS visitDomain(@NonNull Domain object) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public ElementCS visitEnforcementOperation(@NonNull EnforcementOperation object) {
 		throw new UnsupportedOperationException();			// FIXME
 	}
 
+	@Override
 	public ElementCS visitFunction(@NonNull Function asFunction) {
 		QueryCS csQuery = context.refreshNamedElement(QueryCS.class, QVTcoreBaseCSPackage.Literals.QUERY_CS, asFunction);
 		csQuery.setPivot(asFunction);
@@ -186,6 +193,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		return csQuery;
 	}
 
+	@Override
 	public ElementCS visitFunctionParameter(@NonNull FunctionParameter asFunctionParameter) {
 		ParamDeclarationCS csParamDeclaration = context.refreshNamedElement(ParamDeclarationCS.class, QVTcoreBaseCSPackage.Literals.PARAM_DECLARATION_CS, asFunctionParameter);
 		csParamDeclaration.setPivot(asFunctionParameter);
@@ -193,10 +201,12 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		return csParamDeclaration;
 	}
 
+	@Override
 	public ElementCS visitPattern(@NonNull Pattern object) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public ElementCS visitPredicate(@NonNull Predicate asPredicate) {
 		AssignmentCS csPredicate = context.refreshElement(AssignmentCS.class, QVTcoreBaseCSPackage.Literals.ASSIGNMENT_CS, asPredicate);
 		csPredicate.setPivot(asPredicate);
@@ -204,6 +214,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		return csPredicate;
 	}
 
+	@Override
 	@Nullable
 	public ElementCS visitPropertyAssignment(@NonNull PropertyAssignment asPropertyAssignment) {
 		AssignmentCS csAssignment = context.refreshElement(AssignmentCS.class, QVTcoreBaseCSPackage.Literals.ASSIGNMENT_CS, asPropertyAssignment);
@@ -224,6 +235,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		return csAssignment;
 	}
 
+	@Override
 	public ElementCS visitRealizedVariable(@NonNull RealizedVariable asRealizedVariable) {
 		RealizedVariableCS csRealizedVariable = context.refreshNamedElement(RealizedVariableCS.class, QVTcoreBaseCSPackage.Literals.REALIZED_VARIABLE_CS, asRealizedVariable);
 		csRealizedVariable.setPivot(asRealizedVariable);
@@ -231,10 +243,12 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		return csRealizedVariable;
 	}
 
+	@Override
 	public ElementCS visitRule(@NonNull Rule object) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public ElementCS visitTransformation(@NonNull Transformation asTransformation) {
 		TransformationCS csTransformation = context.refreshNamedElement(TransformationCS.class, QVTcoreBaseCSPackage.Literals.TRANSFORMATION_CS, asTransformation);
 		csTransformation.setPivot(asTransformation);
@@ -242,6 +256,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		return csTransformation;
 	}
 
+	@Override
 	public ElementCS visitTypedModel(@NonNull TypedModel asTypedModel) {
 		DirectionCS csDirection = context.refreshNamedElement(DirectionCS.class, QVTcoreBaseCSPackage.Literals.DIRECTION_CS, asTypedModel);
 		csDirection.setPivot(asTypedModel);
@@ -250,6 +265,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		return csDirection;
 	}
 
+	@Override
 	public @Nullable ElementCS visitUnit(@NonNull Unit asUnit) {
 		BaseCSResource csResource = context.getCSResource();
 		Namespace asNamespace = asUnit.getUsedPackage();
@@ -294,6 +310,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		}
 	}
 
+	@Override
 	@Nullable
 	public ElementCS visitVariableAssignment(@NonNull VariableAssignment asVariableAssignment) {
 		AssignmentCS csAssignment = context.refreshElement(AssignmentCS.class, QVTcoreBaseCSPackage.Literals.ASSIGNMENT_CS, asVariableAssignment);

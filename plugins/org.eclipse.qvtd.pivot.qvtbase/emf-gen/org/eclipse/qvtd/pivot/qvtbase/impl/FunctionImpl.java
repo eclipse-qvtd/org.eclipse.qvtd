@@ -74,6 +74,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OCLExpression getQueryExpression() {
 		return queryExpression;
 	}
@@ -98,6 +99,7 @@ public class FunctionImpl extends OperationImpl implements Function {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setQueryExpression(OCLExpression newQueryExpression) {
 		if (newQueryExpression != queryExpression) {
 			NotificationChain msgs = null;

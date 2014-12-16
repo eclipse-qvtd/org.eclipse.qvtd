@@ -177,6 +177,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getImperativeModel() {
 		return imperativeModelEClass;
 	}
@@ -186,6 +187,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMapping() {
 		return mappingEClass;
 	}
@@ -195,6 +197,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMapping_MappingStatement() {
 		return (EReference)mappingEClass.getEStructuralFeatures().get(0);
 	}
@@ -204,6 +207,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMappingCall() {
 		return mappingCallEClass;
 	}
@@ -213,6 +217,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMappingCall_ReferredMapping() {
 		return (EReference)mappingCallEClass.getEStructuralFeatures().get(0);
 	}
@@ -222,6 +227,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMappingCall_Binding() {
 		return (EReference)mappingCallEClass.getEStructuralFeatures().get(1);
 	}
@@ -231,6 +237,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMappingCallBinding() {
 		return mappingCallBindingEClass;
 	}
@@ -240,6 +247,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMappingCallBinding_MappingCall() {
 		return (EReference)mappingCallBindingEClass.getEStructuralFeatures().get(0);
 	}
@@ -249,6 +257,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMappingCallBinding_BoundVariable() {
 		return (EReference)mappingCallBindingEClass.getEStructuralFeatures().get(1);
 	}
@@ -258,6 +267,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMappingCallBinding_Value() {
 		return (EReference)mappingCallBindingEClass.getEStructuralFeatures().get(2);
 	}
@@ -267,6 +277,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMappingLoop() {
 		return mappingLoopEClass;
 	}
@@ -276,6 +287,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMappingSequence() {
 		return mappingSequenceEClass;
 	}
@@ -285,6 +297,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getMappingSequence_MappingStatements() {
 		return (EReference)mappingSequenceEClass.getEStructuralFeatures().get(0);
 	}
@@ -294,6 +307,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMappingStatement() {
 		return mappingStatementEClass;
 	}
@@ -303,6 +317,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMiddlePropertyAssignment() {
 		return middlePropertyAssignmentEClass;
 	}
@@ -312,6 +327,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getMiddlePropertyAssignment_CacheIndex() {
 		return (EAttribute)middlePropertyAssignmentEClass.getEStructuralFeatures().get(0);
 	}
@@ -321,6 +337,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getMiddlePropertyCallExp() {
 		return middlePropertyCallExpEClass;
 	}
@@ -330,6 +347,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getMiddlePropertyCallExp_CacheIndex() {
 		return (EAttribute)middlePropertyCallExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -339,6 +357,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getVariablePredicate() {
 		return variablePredicateEClass;
 	}
@@ -348,6 +367,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getVariablePredicate_TargetVariable() {
 		return (EReference)variablePredicateEClass.getEStructuralFeatures().get(0);
 	}
@@ -357,6 +377,7 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public QVTimperativeFactory getQVTimperativeFactory() {
 		return (QVTimperativeFactory)getEFactoryInstance();
 	}

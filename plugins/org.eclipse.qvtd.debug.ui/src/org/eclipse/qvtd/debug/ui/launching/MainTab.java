@@ -28,6 +28,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.debug.vm.ui.launching.LaunchingUtils;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.debug.launching.QVTiLaunchConstants;
 import org.eclipse.qvtd.debug.ui.QVTdDebugUIPlugin;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -233,10 +234,10 @@ public class MainTab extends AbstractMainTab implements QVTiLaunchConstants
 			Map<String, String> inMap = configuration.getAttribute(IN_KEY, EMPTY_MAP);
 			Map<String, String> outMap = configuration.getAttribute(OUT_KEY, EMPTY_MAP);
 			if (inMap != null) {
-				refreshParametersGroup(inputsGroup, SWT.NONE, inMap);
+				refreshParametersGroup(ClassUtil.nonNullState(inputsGroup), SWT.NONE, inMap);
 			}
 			if (outMap != null) {
-				refreshParametersGroup(outputsGroup, SWT.SAVE, outMap);
+				refreshParametersGroup(ClassUtil.nonNullState(outputsGroup), SWT.SAVE, outMap);
 			}
 		} catch (CoreException e) {
 			//Ignore

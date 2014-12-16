@@ -18,7 +18,6 @@
 package	org.eclipse.qvtd.pivot.qvtbase.util;
 
 import java.lang.Boolean;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.AS2XMIid;
@@ -44,42 +43,52 @@ public abstract class AbstractQVTbaseAS2XMIidVisitor
 		super(context);
 	}	
 
+	@Override
 	public @Nullable Boolean visitBaseModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.BaseModel object) {
 		return visitModel(object);
 	}
 
+	@Override
 	public @Nullable Boolean visitDomain(@NonNull org.eclipse.qvtd.pivot.qvtbase.Domain object) {
 		return visitNamedElement(object);
 	}
 
+	@Override
 	public @Nullable Boolean visitFunction(@NonNull org.eclipse.qvtd.pivot.qvtbase.Function object) {
 		return visitOperation(object);
 	}
 
+	@Override
 	public @Nullable Boolean visitFunctionParameter(@NonNull org.eclipse.qvtd.pivot.qvtbase.FunctionParameter object) {
 		return visitParameter(object);
 	}
 
+	@Override
 	public @Nullable Boolean visitPattern(@NonNull org.eclipse.qvtd.pivot.qvtbase.Pattern object) {
 		return visitElement(object);
 	}
 
+	@Override
 	public @Nullable Boolean visitPredicate(@NonNull org.eclipse.qvtd.pivot.qvtbase.Predicate object) {
 		return visitElement(object);
 	}
 
+	@Override
 	public @Nullable Boolean visitRule(@NonNull org.eclipse.qvtd.pivot.qvtbase.Rule object) {
 		return visitNamedElement(object);
 	}
 
+	@Override
 	public @Nullable Boolean visitTransformation(@NonNull org.eclipse.qvtd.pivot.qvtbase.Transformation object) {
 		return visitClass(object);
 	}
 
+	@Override
 	public @Nullable Boolean visitTypedModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.TypedModel object) {
 		return visitNamedElement(object);
 	}
 
+	@Override
 	public @Nullable Boolean visitUnit(@NonNull org.eclipse.qvtd.pivot.qvtbase.Unit object) {
 		return visitNamedElement(object);
 	}

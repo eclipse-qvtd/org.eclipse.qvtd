@@ -40,14 +40,14 @@ import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
-import org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.MappingCS;
-import org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.TopLevelCS;
-import org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.util.AbstractQVTcoreCSContainmentVisitor;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.AssignmentCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.DomainCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.GuardPatternCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.QueryCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.TransformationCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
+import org.eclipse.qvtd.xtext.qvtcorecs.MappingCS;
+import org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS;
+import org.eclipse.qvtd.xtext.qvtcorecs.util.AbstractQVTcoreCSContainmentVisitor;
 
 public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVisitor
 {

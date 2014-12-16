@@ -34,41 +34,48 @@ public class QVTcoreBaseToStringVisitor extends QVTbaseToStringVisitor implement
 		super(s);
 	}
 
+	@Override
 	public String visitAssignment(@NonNull Assignment object) {
 		append("Assignment ");
 //		appendName(object);
 		return null;
 	}
 
+	@Override
 	public String visitBottomPattern(@NonNull BottomPattern object) {
 		appendQualifiedName((NamedElement)object.getArea());
 		append("$Bottom");
 		return null;
 	}
 
+	@Override
 	public String visitCoreDomain(@NonNull CoreDomain object) {
 		appendQualifiedName(object);
 		return null;
 	}
 
+	@Override
 	public String visitCorePattern(@NonNull CorePattern object) {
 		append("CorePattern ");
 //		appendName(object);
 		return null;
 	}
 
+	@Override
 	public String visitEnforcementOperation(@NonNull EnforcementOperation object) {
 		append("EnforcementOperation ");
 //		appendName(object);
 		return null;
 	}
 
+	@Override
 	public String visitGuardPattern(@NonNull GuardPattern object) {
 		appendQualifiedName((NamedElement)object.getArea());
 		append("$Guard");
 		return null;
 	}
 
+	@Override
 	public String visitPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
 		safeVisit(propertyAssignment.getSlotExpression());
 		append(".");
@@ -78,12 +85,14 @@ public class QVTcoreBaseToStringVisitor extends QVTbaseToStringVisitor implement
 		return null;
 	}
 
+	@Override
 	public String visitRealizedVariable(@NonNull RealizedVariable variable) {
 		append("realized ");
 		visitVariable(variable);
 		return null;
 	}
 
+	@Override
 	public String visitVariableAssignment(@NonNull VariableAssignment variableAssignment) {
 		appendName(variableAssignment.getTargetVariable());
 		append(" := ");

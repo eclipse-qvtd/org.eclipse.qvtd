@@ -47,19 +47,19 @@ import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.AbstractMappingCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.AssignmentCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.BottomPatternCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.DirectionCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.DomainCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.EnforcementOperationCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.GuardPatternCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.ParamDeclarationCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.QueryCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.RealizedVariableCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.TransformationCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.UnrealizedVariableCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.util.AbstractQVTcoreBaseCSContainmentVisitor;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.ParamDeclarationCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.util.AbstractQVTcoreBaseCSContainmentVisitor;
 
 import com.google.common.collect.Iterables;
 
@@ -69,6 +69,7 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 	{
 		public final static @NonNull IsAssignmentPredicate INSTANCE = new IsAssignmentPredicate();
 		
+		@Override
 		public boolean apply(AssignmentCS csAssignment) {
 			return csAssignment.getInitialiser() != null;
 		}
@@ -78,6 +79,7 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 	{
 		public final static @NonNull IsPredicatePredicate INSTANCE = new IsPredicatePredicate();
 		
+		@Override
 		public boolean apply(AssignmentCS csAssignment) {
 			return csAssignment.getInitialiser() == null;
 		}

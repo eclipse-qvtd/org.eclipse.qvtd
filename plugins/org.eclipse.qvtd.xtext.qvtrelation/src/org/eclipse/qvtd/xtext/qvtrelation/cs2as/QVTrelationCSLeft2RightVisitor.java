@@ -52,11 +52,11 @@ import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
-import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.CollectionTemplateCS;
-import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.DefaultValueCS;
-import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.ObjectTemplateCS;
-import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.TransformationCS;
-import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.util.AbstractQVTrelationCSLeft2RightVisitor;
+import org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.ObjectTemplateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.util.AbstractQVTrelationCSLeft2RightVisitor;
 
 public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2RightVisitor
 {
@@ -64,6 +64,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 	{
 		public static OperationOrRuleFilter INSTANCE = new OperationOrRuleFilter();
 
+		@Override
 		public boolean matches(@NonNull EnvironmentView environmentView, @NonNull Object object) {
 			return (object instanceof Operation) || (object instanceof Rule);
 		}
@@ -77,14 +78,17 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 			this.invocation = invocation;
 		}
 
+		@Override
 		public @NonNull NamedElement getSingleResult() {
 			return invocation;
 		}
 		
+		@Override
 		public @NonNull Type getSourceType() {
 			return ClassUtil.nonNullState(invocation.getTransformation());
 		}
 
+		@Override
 		public Iterator<NamedElement> iterator() {
 			return new SingletonIterator<NamedElement>(invocation);
 		}

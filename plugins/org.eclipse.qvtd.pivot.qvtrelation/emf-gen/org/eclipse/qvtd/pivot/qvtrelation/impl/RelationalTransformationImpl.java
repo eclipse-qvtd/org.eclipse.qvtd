@@ -75,6 +75,7 @@ public class RelationalTransformationImpl extends TransformationImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Key> getOwnedKey() {
 		if (ownedKey == null) {
 			ownedKey = new EObjectContainmentWithInverseEList<Key>(Key.class, this, QVTrelationPackage.RELATIONAL_TRANSFORMATION__OWNED_KEY, QVTrelationPackage.KEY__TRANSFORMATION);

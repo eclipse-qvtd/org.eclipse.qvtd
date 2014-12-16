@@ -13,7 +13,6 @@ package org.eclipse.qvtd.pivot.qvtrelation.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
@@ -85,6 +84,7 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OCLExpression getValueExp() {
 		return valueExp;
 	}
@@ -109,6 +109,7 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValueExp(OCLExpression newValueExp) {
 		if (newValueExp != valueExp) {
 			NotificationChain msgs = null;
@@ -128,8 +129,9 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Variable getVariable() {
-		if (variable != null && ((EObject)variable).eIsProxy()) {
+		if (variable != null && variable.eIsProxy()) {
 			InternalEObject oldVariable = (InternalEObject)variable;
 			variable = (Variable)eResolveProxy(oldVariable);
 			if (variable != oldVariable) {
@@ -154,6 +156,7 @@ public class RelationDomainAssignmentImpl extends ElementImpl implements Relatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setVariable(Variable newVariable) {
 		Variable oldVariable = variable;
 		variable = newVariable;

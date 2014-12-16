@@ -88,6 +88,7 @@ public class PatternImpl extends ElementImpl implements Pattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	@SuppressWarnings("null")
 	public @NonNull EList<Predicate> getPredicate() {
 		if (predicate == null) {
@@ -101,6 +102,7 @@ public class PatternImpl extends ElementImpl implements Pattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	@SuppressWarnings("null")
 	public @NonNull EList<Variable> getBindsTo() {
 		if (bindsTo == null) {

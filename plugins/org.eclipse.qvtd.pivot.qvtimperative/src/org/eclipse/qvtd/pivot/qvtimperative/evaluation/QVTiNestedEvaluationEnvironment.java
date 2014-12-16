@@ -22,10 +22,12 @@ public class QVTiNestedEvaluationEnvironment extends QVTiEvaluationEnvironment
 		rootEvaluationEnvironment = evaluationEnvironment.getRootEvaluationEnvironment();
 	}
 
+	@Override
 	public @NonNull Transformation getTransformation() {
 		return rootEvaluationEnvironment.getTransformation();
 	}
 
+	@Override
 	public @NonNull QVTiRootEvaluationEnvironment getRootEvaluationEnvironment() {
 		return rootEvaluationEnvironment;
 	}

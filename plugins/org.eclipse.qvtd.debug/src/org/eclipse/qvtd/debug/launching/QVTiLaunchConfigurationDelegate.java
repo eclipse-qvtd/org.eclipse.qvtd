@@ -50,7 +50,7 @@ public class QVTiLaunchConfigurationDelegate extends LaunchConfigurationDelegate
 			String txName = configuration.getAttribute(TX_KEY, "");
 			final Map<String, String> inMap = configuration.getAttribute(IN_KEY, EMPTY_MAP);
 			final Map<String, String> outMap = configuration.getAttribute(OUT_KEY, EMPTY_MAP);
-			final URI txURI = URI.createURI(txName, true);
+			final @SuppressWarnings("null")@NonNull URI txURI = URI.createURI(txName, true);
 //            final QvtTransformation qvtTransformation = new QvtInterpretedTransformation(getQvtModule(configuration));
             final Monitor execMonitor = new BasicMonitor();
                                     
@@ -62,12 +62,12 @@ public class QVTiLaunchConfigurationDelegate extends LaunchConfigurationDelegate
         			MetaModelManager metaModelManager = new MetaModelManager();
         			QVTiEnvironmentFactory envFactory = new QVTiEnvironmentFactory(null, metaModelManager);
         			QVTiXtextEvaluator xtextEvaluator = new QVTiXtextEvaluator(envFactory, txURI);
-        			for (String inName : inMap.keySet()) {
-        				URI inURI = URI.createURI(inMap.get(inName), true);
+        			for (@SuppressWarnings("null")@NonNull String inName : inMap.keySet()) {
+        				@SuppressWarnings("null")@NonNull URI inURI = URI.createURI(inMap.get(inName), true);
         				xtextEvaluator.loadModel(inName, inURI, null);
         			}
-        			for (String outName : outMap.keySet()) {
-        				URI outURI = URI.createURI(outMap.get(outName), true);
+        			for (@SuppressWarnings("null")@NonNull String outName : outMap.keySet()) {
+        				@SuppressWarnings("null")@NonNull URI outURI = URI.createURI(outMap.get(outName), true);
         				xtextEvaluator.createModel(outName, outURI, null);
         			}
         			xtextEvaluator.execute();

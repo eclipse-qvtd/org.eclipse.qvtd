@@ -11,8 +11,8 @@
 package org.eclipse.qvtd.xtext.qvtcorebase.ui.outline;
 
 import org.eclipse.qvtd.xtext.qvtbase.ui.outline.QVTbaseOutlineTreeProvider;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.AssignmentCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.QueryCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 
 /**

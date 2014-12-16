@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.pivot.qvtrelation;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.pivot.OCLExpression;
 
 /**
@@ -31,7 +30,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
  * @model
  * @generated
  */
-public interface RelationCallExp extends EObject, OCLExpression {
+public interface RelationCallExp extends OCLExpression {
 	/**
 	 * Returns the value of the '<em><b>Argument</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.pivot.OCLExpression}.

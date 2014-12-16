@@ -89,6 +89,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Transformation getTransformation() {
 		if (eContainerFeatureID() != QVTbasePackage.TYPED_MODEL__TRANSFORMATION) return null;
 		return (Transformation)eInternalContainer();
@@ -109,6 +110,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTransformation(Transformation newTransformation) {
 		if (newTransformation != eInternalContainer() || (eContainerFeatureID() != QVTbasePackage.TYPED_MODEL__TRANSFORMATION && newTransformation != null)) {
 			if (EcoreUtil.isAncestor(this, newTransformation))
@@ -130,6 +132,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<org.eclipse.ocl.pivot.Package> getUsedPackage() {
 		if (usedPackage == null) {
 			usedPackage = new EObjectResolvingEList<org.eclipse.ocl.pivot.Package>(org.eclipse.ocl.pivot.Package.class, this, QVTbasePackage.TYPED_MODEL__USED_PACKAGE);
@@ -142,6 +145,7 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<TypedModel> getDependsOn() {
 		if (dependsOn == null) {
 			dependsOn = new EObjectResolvingEList<TypedModel>(TypedModel.class, this, QVTbasePackage.TYPED_MODEL__DEPENDS_ON);

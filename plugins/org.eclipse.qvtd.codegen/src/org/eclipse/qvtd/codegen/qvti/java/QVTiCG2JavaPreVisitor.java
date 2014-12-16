@@ -47,30 +47,37 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 		super(javaContext);
 	}
 
+	@Override
 	public Object visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment object) {
 		return visitCGPropertyAssignment(object);
 	}
 
+	@Override
 	public Object visitCGEcoreRealizedVariable(@NonNull CGEcoreRealizedVariable object) {
 		return visitCGRealizedVariable(object);
 	}
 
+	@Override
 	public Object visitCGFunction(@NonNull CGFunction object) {
 		return visitCGOperation(object);
 	}
 
+	@Override
 	public Object visitCGFunctionCallExp(@NonNull CGFunctionCallExp object) {
 		return visitCGOperationCallExp(object);
 	}
 
+	@Override
 	public Object visitCGFunctionParameter(@NonNull CGFunctionParameter object) {
 		return visitCGParameter(object);
 	}
 
+	@Override
 	public Object visitCGGuardVariable(@NonNull CGGuardVariable object) {
 		return visitCGParameter(object);
 	}
 
+	@Override
 	public @Nullable Object visitCGMapping(@NonNull CGMapping cgMapping) {
 		localContext = context.getLocalContext(cgMapping);
 		try {
@@ -81,14 +88,17 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 		}
 	}
 
+	@Override
 	public Object visitCGMappingCall(@NonNull CGMappingCall object) {
 		return visitCGValuedElement(object);
 	}
 
+	@Override
 	public Object visitCGMappingCallBinding(@NonNull CGMappingCallBinding object) {
 		return visitCGValuedElement(object);
 	}
 
+	@Override
 	public Object visitCGMappingExp(@NonNull CGMappingExp cgMappingExp) {
 		List<CGPredicate> cgPredicates = cgMappingExp.getPredicates();
 		if (cgPredicates.size() > 0) {
@@ -122,22 +132,27 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 		}
 	}
 
+	@Override
 	public Object visitCGMappingLoop(@NonNull CGMappingLoop object) {
 		return visitCGIterationCallExp(object);
 	}
 
+	@Override
 	public Object visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment object) {
 		return visitCGPropertyAssignment(object);
 	}
 
+	@Override
 	public Object visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp object) {
 		return visitCGOppositePropertyCallExp(object);
 	}
 
+	@Override
 	public Object visitCGPredicate(@NonNull CGPredicate object) {
 		return visitCGValuedElement(object);
 	}
 
+	@Override
 	public Object visitCGPropertyAssignment(@NonNull CGPropertyAssignment cgPropertyAssignment) {
 //		Property pReferredProperty = cgPropertyAssignment.getReferredProperty();
 //		if (pReferredProperty != null) {
@@ -146,6 +161,7 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 		return visitCGValuedElement(cgPropertyAssignment);
 	}
 
+	@Override
 	public Object visitCGRealizedVariable(@NonNull CGRealizedVariable cgRealizedVariable) {
 //		Type pType = ((RealizedVariable)cgRealizedVariable.getPivot()).getType();
 //		if (pType != null) {
@@ -154,18 +170,22 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 		return visitCGVariable(cgRealizedVariable);
 	}
 
+	@Override
 	public Object visitCGSequence(@NonNull CGSequence object) {
 		return visitCGValuedElement(object);
 	}
 
+	@Override
 	public Object visitCGTransformation(@NonNull CGTransformation object) {
 		return visitCGClass(object);
 	}
 
+	@Override
 	public Object visitCGTypedModel(@NonNull CGTypedModel object) {
 		return visitCGNamedElement(object);
 	}
 
+	@Override
 	public Object visitCGVariablePredicate(@NonNull CGVariablePredicate object) {
 		return visitCGPredicate(object);
 	}

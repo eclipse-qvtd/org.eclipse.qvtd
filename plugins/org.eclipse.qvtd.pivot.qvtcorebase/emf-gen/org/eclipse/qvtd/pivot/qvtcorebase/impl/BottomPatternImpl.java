@@ -125,6 +125,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setArea(Area newArea) {
 		if (newArea != eInternalContainer() || (eContainerFeatureID() != QVTcoreBasePackage.BOTTOM_PATTERN__AREA && newArea != null)) {
 			if (EcoreUtil.isAncestor(this, newArea))
@@ -146,6 +147,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	@SuppressWarnings("null")
 	public @NonNull EList<Assignment> getAssignment() {
 		if (assignment == null) {
@@ -159,6 +161,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	@SuppressWarnings("null")
 	public @NonNull EList<EnforcementOperation> getEnforcementOperation() {
 		if (enforcementOperation == null) {
@@ -172,6 +175,7 @@ public class BottomPatternImpl extends CorePatternImpl implements BottomPattern 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	@SuppressWarnings("null")
 	public @NonNull EList<RealizedVariable> getRealizedVariable() {
 		if (realizedVariable == null) {

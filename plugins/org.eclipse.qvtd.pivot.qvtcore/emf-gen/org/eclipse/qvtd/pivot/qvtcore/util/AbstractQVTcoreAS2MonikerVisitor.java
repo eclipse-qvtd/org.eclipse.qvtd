@@ -18,7 +18,6 @@
 package	org.eclipse.qvtd.pivot.qvtcore.util;
 
 import java.lang.Object;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.AS2Moniker;
@@ -44,10 +43,12 @@ public abstract class AbstractQVTcoreAS2MonikerVisitor
 		super(context);
 	}	
 
+	@Override
 	public @Nullable Object visitCoreModel(@NonNull org.eclipse.qvtd.pivot.qvtcore.CoreModel object) {
 		return visitBaseModel(object);
 	}
 
+	@Override
 	public @Nullable Object visitMapping(@NonNull org.eclipse.qvtd.pivot.qvtcore.Mapping object) {
 		return visitRule(object);
 	}

@@ -31,21 +31,21 @@ import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.AreaCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.AssignmentCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.BottomPatternCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.DirectionCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.DomainCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.EnforcementOperationCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.GuardPatternCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.ParamDeclarationCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.PatternCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.QueryCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.RealizeableVariableCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.RealizedVariableCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.TransformationCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.UnrealizedVariableCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.util.AbstractQVTcoreBaseCSPostOrderVisitor;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.ParamDeclarationCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PatternCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizeableVariableCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.util.AbstractQVTcoreBaseCSPostOrderVisitor;
 
 public class QVTcoreBaseCSPostOrderVisitor extends AbstractQVTcoreBaseCSPostOrderVisitor
 {

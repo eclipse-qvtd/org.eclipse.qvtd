@@ -12,7 +12,6 @@ package org.eclipse.qvtd.pivot.qvtcorebase.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
@@ -71,8 +70,9 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Variable getTargetVariable() {
-		if (targetVariable != null && ((EObject)targetVariable).eIsProxy()) {
+		if (targetVariable != null && targetVariable.eIsProxy()) {
 			InternalEObject oldTargetVariable = (InternalEObject)targetVariable;
 			targetVariable = (Variable)eResolveProxy(oldTargetVariable);
 			if (targetVariable != oldTargetVariable) {
@@ -97,6 +97,7 @@ public class VariableAssignmentImpl extends AssignmentImpl implements VariableAs
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTargetVariable(Variable newTargetVariable) {
 		Variable oldTargetVariable = targetVariable;
 		targetVariable = newTargetVariable;

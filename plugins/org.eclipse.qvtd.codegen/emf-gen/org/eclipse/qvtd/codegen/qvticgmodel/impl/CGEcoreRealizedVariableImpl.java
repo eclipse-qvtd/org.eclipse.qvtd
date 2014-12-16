@@ -69,6 +69,7 @@ public class CGEcoreRealizedVariableImpl extends CGRealizedVariableImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClassifier getEClassifier() {
 		return eClassifier;
 	}
@@ -78,6 +79,7 @@ public class CGEcoreRealizedVariableImpl extends CGRealizedVariableImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setEClassifier(EClassifier newEClassifier) {
 		EClassifier oldEClassifier = eClassifier;
 		eClassifier = newEClassifier;

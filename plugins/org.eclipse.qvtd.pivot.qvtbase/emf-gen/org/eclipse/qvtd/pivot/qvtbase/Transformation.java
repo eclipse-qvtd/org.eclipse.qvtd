@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.pivot.qvtbase;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.pivot.Annotation;
 
 /**
@@ -33,7 +32,7 @@ import org.eclipse.ocl.pivot.Annotation;
  * @model
  * @generated
  */
-public interface Transformation extends EObject, org.eclipse.ocl.pivot.Class {
+public interface Transformation extends org.eclipse.ocl.pivot.Class {
 	/**
 	 * Returns the value of the '<em><b>Owned Tag</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.pivot.Annotation}.

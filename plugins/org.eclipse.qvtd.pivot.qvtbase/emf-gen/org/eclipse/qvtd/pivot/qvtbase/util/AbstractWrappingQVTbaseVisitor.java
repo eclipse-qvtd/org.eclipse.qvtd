@@ -31,6 +31,7 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, D extends QVTbaseVisi
 		super(delegate, context);
 	}
 
+	@Override
 	public @Nullable R visitBaseModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.BaseModel object) {
 		P prologue = preVisit(object);
 		try {
@@ -42,6 +43,7 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, D extends QVTbaseVisi
 		}
 	}
 
+	@Override
 	public @Nullable R visitDomain(@NonNull org.eclipse.qvtd.pivot.qvtbase.Domain object) {
 		P prologue = preVisit(object);
 		try {
@@ -53,6 +55,7 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, D extends QVTbaseVisi
 		}
 	}
 
+	@Override
 	public @Nullable R visitFunction(@NonNull org.eclipse.qvtd.pivot.qvtbase.Function object) {
 		P prologue = preVisit(object);
 		try {
@@ -64,6 +67,7 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, D extends QVTbaseVisi
 		}
 	}
 
+	@Override
 	public @Nullable R visitFunctionParameter(@NonNull org.eclipse.qvtd.pivot.qvtbase.FunctionParameter object) {
 		P prologue = preVisit(object);
 		try {
@@ -75,6 +79,7 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, D extends QVTbaseVisi
 		}
 	}
 
+	@Override
 	public @Nullable R visitPattern(@NonNull org.eclipse.qvtd.pivot.qvtbase.Pattern object) {
 		P prologue = preVisit(object);
 		try {
@@ -86,6 +91,7 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, D extends QVTbaseVisi
 		}
 	}
 
+	@Override
 	public @Nullable R visitPredicate(@NonNull org.eclipse.qvtd.pivot.qvtbase.Predicate object) {
 		P prologue = preVisit(object);
 		try {
@@ -97,6 +103,7 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, D extends QVTbaseVisi
 		}
 	}
 
+	@Override
 	public @Nullable R visitRule(@NonNull org.eclipse.qvtd.pivot.qvtbase.Rule object) {
 		P prologue = preVisit(object);
 		try {
@@ -108,6 +115,7 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, D extends QVTbaseVisi
 		}
 	}
 
+	@Override
 	public @Nullable R visitTransformation(@NonNull org.eclipse.qvtd.pivot.qvtbase.Transformation object) {
 		P prologue = preVisit(object);
 		try {
@@ -119,6 +127,7 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, D extends QVTbaseVisi
 		}
 	}
 
+	@Override
 	public @Nullable R visitTypedModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.TypedModel object) {
 		P prologue = preVisit(object);
 		try {
@@ -130,6 +139,7 @@ public abstract class AbstractWrappingQVTbaseVisitor<R, C, D extends QVTbaseVisi
 		}
 	}
 
+	@Override
 	public @Nullable R visitUnit(@NonNull org.eclipse.qvtd.pivot.qvtbase.Unit object) {
 		P prologue = preVisit(object);
 		try {

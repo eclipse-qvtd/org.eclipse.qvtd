@@ -78,6 +78,7 @@ public class QVTtemplateFactoryImpl extends EFactoryImpl implements QVTtemplateF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CollectionTemplateExp createCollectionTemplateExp() {
 		CollectionTemplateExpImpl collectionTemplateExp = new CollectionTemplateExpImpl();
 		return collectionTemplateExp;
@@ -88,6 +89,7 @@ public class QVTtemplateFactoryImpl extends EFactoryImpl implements QVTtemplateF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ObjectTemplateExp createObjectTemplateExp() {
 		ObjectTemplateExpImpl objectTemplateExp = new ObjectTemplateExpImpl();
 		return objectTemplateExp;
@@ -98,6 +100,7 @@ public class QVTtemplateFactoryImpl extends EFactoryImpl implements QVTtemplateF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PropertyTemplateItem createPropertyTemplateItem() {
 		PropertyTemplateItemImpl propertyTemplateItem = new PropertyTemplateItemImpl();
 		return propertyTemplateItem;
@@ -108,6 +111,7 @@ public class QVTtemplateFactoryImpl extends EFactoryImpl implements QVTtemplateF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public QVTtemplatePackage getQVTtemplatePackage() {
 		return (QVTtemplatePackage)getEPackage();
 	}

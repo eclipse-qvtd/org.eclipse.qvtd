@@ -30,7 +30,7 @@ Workflow {
     bean = StandaloneSetup {
 		platformUri = "${QVTcoreBaseRuntimeProject}/.."
    		scanClassPath = true
-		registerGeneratedEPackage = "org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.QVTcoreBaseCSPackage"
+		registerGeneratedEPackage = "org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage"
 		registerGenModelFile = "platform:/resource/org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCS.genmodel"
 	}
 	

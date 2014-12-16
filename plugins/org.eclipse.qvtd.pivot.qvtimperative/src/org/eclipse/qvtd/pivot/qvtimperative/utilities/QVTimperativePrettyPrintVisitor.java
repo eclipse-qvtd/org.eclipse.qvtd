@@ -74,11 +74,13 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 		return null;
 	}
 
+	@Override
 	public Object visitImperativeModel(@NonNull ImperativeModel object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public Object visitMapping(@NonNull Mapping pMapping) {
 		context.append("map ");
 		context.appendName(pMapping);
@@ -100,6 +102,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 		return null;
 	}
 
+	@Override
 	public Object visitMappingCall(@NonNull MappingCall pMappingCall) {
 		context.append("map ");
 		context.appendName(pMappingCall.getReferredMapping());
@@ -113,6 +116,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 		return null;
 	}
 
+	@Override
 	public Object visitMappingCallBinding(@NonNull MappingCallBinding pMappingCallBinding) {
 		context.appendName(pMappingCallBinding.getBoundVariable());
 		context.append(" := ");
@@ -121,6 +125,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 		return null;
 	}
 
+	@Override
 	public Object visitMappingLoop(@NonNull MappingLoop pMappingLoop) {
 		context.append("for ");
 		context.appendElement(pMappingLoop.getIterator().get(0));
@@ -134,6 +139,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 		return null;
 	}
 
+	@Override
 	public Object visitMappingSequence(@NonNull MappingSequence pMappingSequence) {
 		for (MappingStatement pMappingStatement : pMappingSequence.getMappingStatements()) {
 			safeVisit(pMappingStatement);
@@ -141,14 +147,17 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 		return null;
 	}
 
+	@Override
 	public Object visitMappingStatement(@NonNull MappingStatement object) {
 		return visiting(object);
 	}
 
+	@Override
 	public Object visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment object) {
 		return visitPropertyAssignment(object);
 	}
 
+	@Override
 	public Object visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp object) {
 		return visitOppositePropertyCallExp(object);
 	}
@@ -189,6 +198,7 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 		return null;
 	}
 
+	@Override
 	public @Nullable Object visitVariablePredicate(@NonNull VariablePredicate object) {
 		// TODO Auto-generated method stub
 		return null;

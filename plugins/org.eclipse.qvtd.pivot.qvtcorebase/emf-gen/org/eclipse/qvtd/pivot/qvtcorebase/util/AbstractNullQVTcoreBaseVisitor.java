@@ -36,38 +36,47 @@ public abstract class AbstractNullQVTcoreBaseVisitor<R, C>
 		super(context);
 	}	
 
+	@Override
 	public @Nullable R visitAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.Assignment object) {
 		return null;
 	}
 
+	@Override
 	public @Nullable R visitBottomPattern(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern object) {
 		return null;
 	}
 
+	@Override
 	public @Nullable R visitCoreDomain(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain object) {
 		return null;
 	}
 
+	@Override
 	public @Nullable R visitCorePattern(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.CorePattern object) {
 		return null;
 	}
 
+	@Override
 	public @Nullable R visitEnforcementOperation(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation object) {
 		return null;
 	}
 
+	@Override
 	public @Nullable R visitGuardPattern(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern object) {
 		return null;
 	}
 
+	@Override
 	public @Nullable R visitPropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment object) {
 		return null;
 	}
 
+	@Override
 	public @Nullable R visitRealizedVariable(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable object) {
 		return null;
 	}
 
+	@Override
 	public @Nullable R visitVariableAssignment(@NonNull org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment object) {
 		return null;
 	}

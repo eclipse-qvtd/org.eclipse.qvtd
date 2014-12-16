@@ -16,7 +16,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -102,6 +101,7 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<RelationDomainAssignment> getDefaultAssignment() {
 		if (defaultAssignment == null) {
 			defaultAssignment = new EObjectContainmentEList<RelationDomainAssignment>(RelationDomainAssignment.class, this, QVTrelationPackage.RELATION_DOMAIN__DEFAULT_ASSIGNMENT);
@@ -114,6 +114,7 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public DomainPattern getPattern() {
 		return pattern;
 	}
@@ -138,6 +139,7 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPattern(DomainPattern newPattern) {
 		if (newPattern != pattern) {
 			NotificationChain msgs = null;
@@ -157,8 +159,9 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Variable getRootVariable() {
-		if (rootVariable != null && ((EObject)rootVariable).eIsProxy()) {
+		if (rootVariable != null && rootVariable.eIsProxy()) {
 			InternalEObject oldRootVariable = (InternalEObject)rootVariable;
 			rootVariable = (Variable)eResolveProxy(oldRootVariable);
 			if (rootVariable != oldRootVariable) {
@@ -183,6 +186,7 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRootVariable(Variable newRootVariable) {
 		Variable oldRootVariable = rootVariable;
 		rootVariable = newRootVariable;

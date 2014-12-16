@@ -13,7 +13,6 @@ package org.eclipse.qvtd.pivot.qvtimperative.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -88,6 +87,7 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MappingCall getMappingCall() {
 		if (eContainerFeatureID() != QVTimperativePackage.MAPPING_CALL_BINDING__MAPPING_CALL) return null;
 		return (MappingCall)eInternalContainer();
@@ -108,6 +108,7 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMappingCall(MappingCall newMappingCall) {
 		if (newMappingCall != eInternalContainer() || (eContainerFeatureID() != QVTimperativePackage.MAPPING_CALL_BINDING__MAPPING_CALL && newMappingCall != null)) {
 			if (EcoreUtil.isAncestor(this, newMappingCall))
@@ -129,8 +130,9 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Variable getBoundVariable() {
-		if (boundVariable != null && ((EObject)boundVariable).eIsProxy()) {
+		if (boundVariable != null && boundVariable.eIsProxy()) {
 			InternalEObject oldBoundVariable = (InternalEObject)boundVariable;
 			boundVariable = (Variable)eResolveProxy(oldBoundVariable);
 			if (boundVariable != oldBoundVariable) {
@@ -155,6 +157,7 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBoundVariable(Variable newBoundVariable) {
 		Variable oldBoundVariable = boundVariable;
 		boundVariable = newBoundVariable;
@@ -167,6 +170,7 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OCLExpression getValue() {
 		return value;
 	}
@@ -191,6 +195,7 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(OCLExpression newValue) {
 		if (newValue != value) {
 			NotificationChain msgs = null;

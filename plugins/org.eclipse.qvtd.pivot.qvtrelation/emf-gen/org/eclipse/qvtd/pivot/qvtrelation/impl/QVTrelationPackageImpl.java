@@ -170,6 +170,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDomainPattern() {
 		return domainPatternEClass;
 	}
@@ -179,6 +180,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDomainPattern_TemplateExpression() {
 		return (EReference)domainPatternEClass.getEStructuralFeatures().get(0);
 	}
@@ -188,6 +190,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getKey() {
 		return keyEClass;
 	}
@@ -197,6 +200,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getKey_Identifies() {
 		return (EReference)keyEClass.getEStructuralFeatures().get(0);
 	}
@@ -206,6 +210,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getKey_Part() {
 		return (EReference)keyEClass.getEStructuralFeatures().get(1);
 	}
@@ -215,6 +220,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getKey_Transformation() {
 		return (EReference)keyEClass.getEStructuralFeatures().get(2);
 	}
@@ -224,6 +230,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getKey_OppositePart() {
 		return (EReference)keyEClass.getEStructuralFeatures().get(3);
 	}
@@ -233,6 +240,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRelation() {
 		return relationEClass;
 	}
@@ -242,6 +250,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getRelation_IsTopLevel() {
 		return (EAttribute)relationEClass.getEStructuralFeatures().get(0);
 	}
@@ -251,6 +260,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRelation_OperationalImpl() {
 		return (EReference)relationEClass.getEStructuralFeatures().get(1);
 	}
@@ -260,6 +270,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRelation_Variable() {
 		return (EReference)relationEClass.getEStructuralFeatures().get(2);
 	}
@@ -269,6 +280,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRelation_When() {
 		return (EReference)relationEClass.getEStructuralFeatures().get(3);
 	}
@@ -278,6 +290,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRelation_Where() {
 		return (EReference)relationEClass.getEStructuralFeatures().get(4);
 	}
@@ -287,6 +300,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRelationCallExp() {
 		return relationCallExpEClass;
 	}
@@ -296,6 +310,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRelationCallExp_Argument() {
 		return (EReference)relationCallExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -305,6 +320,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRelationCallExp_ReferredRelation() {
 		return (EReference)relationCallExpEClass.getEStructuralFeatures().get(1);
 	}
@@ -314,6 +330,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRelationDomain() {
 		return relationDomainEClass;
 	}
@@ -323,6 +340,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRelationDomain_DefaultAssignment() {
 		return (EReference)relationDomainEClass.getEStructuralFeatures().get(0);
 	}
@@ -332,6 +350,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRelationDomain_Pattern() {
 		return (EReference)relationDomainEClass.getEStructuralFeatures().get(1);
 	}
@@ -341,6 +360,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRelationDomain_RootVariable() {
 		return (EReference)relationDomainEClass.getEStructuralFeatures().get(2);
 	}
@@ -350,6 +370,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRelationDomainAssignment() {
 		return relationDomainAssignmentEClass;
 	}
@@ -359,6 +380,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRelationDomainAssignment_ValueExp() {
 		return (EReference)relationDomainAssignmentEClass.getEStructuralFeatures().get(0);
 	}
@@ -368,6 +390,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRelationDomainAssignment_Variable() {
 		return (EReference)relationDomainAssignmentEClass.getEStructuralFeatures().get(1);
 	}
@@ -377,6 +400,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRelationModel() {
 		return relationModelEClass;
 	}
@@ -386,6 +410,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRelationImplementation() {
 		return relationImplementationEClass;
 	}
@@ -395,6 +420,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRelationImplementation_Impl() {
 		return (EReference)relationImplementationEClass.getEStructuralFeatures().get(0);
 	}
@@ -404,6 +430,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRelationImplementation_InDirectionOf() {
 		return (EReference)relationImplementationEClass.getEStructuralFeatures().get(1);
 	}
@@ -413,6 +440,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRelationImplementation_Relation() {
 		return (EReference)relationImplementationEClass.getEStructuralFeatures().get(2);
 	}
@@ -422,6 +450,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRelationalTransformation() {
 		return relationalTransformationEClass;
 	}
@@ -431,6 +460,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRelationalTransformation_OwnedKey() {
 		return (EReference)relationalTransformationEClass.getEStructuralFeatures().get(0);
 	}
@@ -440,6 +470,7 @@ public class QVTrelationPackageImpl extends EPackageImpl implements QVTrelationP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public QVTrelationFactory getQVTrelationFactory() {
 		return (QVTrelationFactory)getEFactoryInstance();
 	}

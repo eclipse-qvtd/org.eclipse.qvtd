@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.pivot.qvtbase;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Variable;
@@ -33,7 +32,7 @@ import org.eclipse.ocl.pivot.Variable;
  * @model
  * @generated
  */
-public interface Pattern extends EObject, Element {
+public interface Pattern extends Element {
 	/**
 	 * Returns the value of the '<em><b>Predicate</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtbase.Predicate}.

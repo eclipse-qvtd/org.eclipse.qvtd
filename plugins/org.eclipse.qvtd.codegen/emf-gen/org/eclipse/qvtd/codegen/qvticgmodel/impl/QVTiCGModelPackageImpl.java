@@ -255,6 +255,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGEcorePropertyAssignment() {
 		return cgEcorePropertyAssignmentEClass;
 	}
@@ -264,6 +265,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGEcorePropertyAssignment_EStructuralFeature() {
 		return (EReference)cgEcorePropertyAssignmentEClass.getEStructuralFeatures().get(0);
 	}
@@ -273,6 +275,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGEcoreRealizedVariable() {
 		return cgEcoreRealizedVariableEClass;
 	}
@@ -282,6 +285,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGEcoreRealizedVariable_EClassifier() {
 		return (EReference)cgEcoreRealizedVariableEClass.getEStructuralFeatures().get(0);
 	}
@@ -291,6 +295,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGFunction() {
 		return cgFunctionEClass;
 	}
@@ -300,6 +305,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGFunctionCallExp() {
 		return cgFunctionCallExpEClass;
 	}
@@ -309,6 +315,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGFunctionCallExp_Function() {
 		return (EReference)cgFunctionCallExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -318,6 +325,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGFunctionParameter() {
 		return cgFunctionParameterEClass;
 	}
@@ -327,6 +335,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGFunctionParameter_Function() {
 		return (EReference)cgFunctionParameterEClass.getEStructuralFeatures().get(0);
 	}
@@ -336,6 +345,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGGuardVariable() {
 		return cgGuardVariableEClass;
 	}
@@ -345,6 +355,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGGuardVariable_Mapping() {
 		return (EReference)cgGuardVariableEClass.getEStructuralFeatures().get(0);
 	}
@@ -354,6 +365,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGGuardVariable_TypedModel() {
 		return (EReference)cgGuardVariableEClass.getEStructuralFeatures().get(1);
 	}
@@ -363,6 +375,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGMapping() {
 		return cgMappingEClass;
 	}
@@ -372,6 +385,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGMapping_Body() {
 		return (EReference)cgMappingEClass.getEStructuralFeatures().get(0);
 	}
@@ -381,6 +395,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGMapping_FreeVariables() {
 		return (EReference)cgMappingEClass.getEStructuralFeatures().get(1);
 	}
@@ -390,6 +405,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGMapping_Transformation() {
 		return (EReference)cgMappingEClass.getEStructuralFeatures().get(2);
 	}
@@ -399,6 +415,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGMappingCall() {
 		return cgMappingCallEClass;
 	}
@@ -408,6 +425,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGMappingCall_MappingCallBindings() {
 		return (EReference)cgMappingCallEClass.getEStructuralFeatures().get(0);
 	}
@@ -417,6 +435,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGMappingCallBinding() {
 		return cgMappingCallBindingEClass;
 	}
@@ -426,6 +445,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGMappingCallBinding_Value() {
 		return (EReference)cgMappingCallBindingEClass.getEStructuralFeatures().get(0);
 	}
@@ -435,6 +455,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGMappingExp() {
 		return cgMappingExpEClass;
 	}
@@ -444,6 +465,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGMappingExp_Assignments() {
 		return (EReference)cgMappingExpEClass.getEStructuralFeatures().get(0);
 	}
@@ -453,6 +475,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGMappingExp_Mapping() {
 		return (EReference)cgMappingExpEClass.getEStructuralFeatures().get(1);
 	}
@@ -462,6 +485,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGMappingExp_Predicates() {
 		return (EReference)cgMappingExpEClass.getEStructuralFeatures().get(2);
 	}
@@ -471,6 +495,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGMappingExp_RealizedVariables() {
 		return (EReference)cgMappingExpEClass.getEStructuralFeatures().get(3);
 	}
@@ -480,6 +505,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGMappingExp_Body() {
 		return (EReference)cgMappingExpEClass.getEStructuralFeatures().get(4);
 	}
@@ -489,6 +515,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGMappingLoop() {
 		return cgMappingLoopEClass;
 	}
@@ -498,6 +525,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGMiddlePropertyAssignment() {
 		return cgMiddlePropertyAssignmentEClass;
 	}
@@ -507,6 +535,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGMiddlePropertyCallExp() {
 		return cgMiddlePropertyCallExpEClass;
 	}
@@ -516,6 +545,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGPredicate() {
 		return cgPredicateEClass;
 	}
@@ -525,6 +555,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGPredicate_ConditionExpression() {
 		return (EReference)cgPredicateEClass.getEStructuralFeatures().get(0);
 	}
@@ -534,6 +565,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGPredicate_MappingExp() {
 		return (EReference)cgPredicateEClass.getEStructuralFeatures().get(1);
 	}
@@ -543,6 +575,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGPredicate_ThenExpression() {
 		return (EReference)cgPredicateEClass.getEStructuralFeatures().get(2);
 	}
@@ -552,6 +585,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGPropertyAssignment() {
 		return cgPropertyAssignmentEClass;
 	}
@@ -561,6 +595,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGPropertyAssignment_MappingExp() {
 		return (EReference)cgPropertyAssignmentEClass.getEStructuralFeatures().get(0);
 	}
@@ -570,6 +605,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGPropertyAssignment_SlotValue() {
 		return (EReference)cgPropertyAssignmentEClass.getEStructuralFeatures().get(1);
 	}
@@ -579,6 +615,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGPropertyAssignment_ReferredProperty() {
 		return (EAttribute)cgPropertyAssignmentEClass.getEStructuralFeatures().get(2);
 	}
@@ -588,6 +625,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGPropertyAssignment_InitValue() {
 		return (EReference)cgPropertyAssignmentEClass.getEStructuralFeatures().get(3);
 	}
@@ -597,6 +635,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGPropertyAssignment_ExecutorProperty() {
 		return (EReference)cgPropertyAssignmentEClass.getEStructuralFeatures().get(4);
 	}
@@ -606,6 +645,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGRealizedVariable() {
 		return cgRealizedVariableEClass;
 	}
@@ -615,6 +655,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGRealizedVariable_TypedModel() {
 		return (EReference)cgRealizedVariableEClass.getEStructuralFeatures().get(1);
 	}
@@ -624,6 +665,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGSequence() {
 		return cgSequenceEClass;
 	}
@@ -633,6 +675,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGSequence_Statements() {
 		return (EReference)cgSequenceEClass.getEStructuralFeatures().get(0);
 	}
@@ -642,6 +685,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGRealizedVariable_ExecutorType() {
 		return (EReference)cgRealizedVariableEClass.getEStructuralFeatures().get(0);
 	}
@@ -651,6 +695,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGTransformation() {
 		return cgTransformationEClass;
 	}
@@ -660,6 +705,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGTransformation_Mappings() {
 		return (EReference)cgTransformationEClass.getEStructuralFeatures().get(0);
 	}
@@ -669,6 +715,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGTransformation_TypedModels() {
 		return (EReference)cgTransformationEClass.getEStructuralFeatures().get(1);
 	}
@@ -678,6 +725,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGTypedModel() {
 		return cgTypedModelEClass;
 	}
@@ -687,6 +735,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGTypedModel_Transformation() {
 		return (EReference)cgTypedModelEClass.getEStructuralFeatures().get(0);
 	}
@@ -696,6 +745,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getCGTypedModel_ModelIndex() {
 		return (EAttribute)cgTypedModelEClass.getEStructuralFeatures().get(1);
 	}
@@ -705,6 +755,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCGVariablePredicate() {
 		return cgVariablePredicateEClass;
 	}
@@ -714,6 +765,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCGVariablePredicate_PredicateVariable() {
 		return (EReference)cgVariablePredicateEClass.getEStructuralFeatures().get(0);
 	}
@@ -723,6 +775,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public QVTiCGModelFactory getQVTiCGModelFactory() {
 		return (QVTiCGModelFactory)getEFactoryInstance();
 	}

@@ -32,6 +32,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//TopLevelCS:
 		//	(ownedImports+=UnitCS | / *ownedInclude+=IncludeCS |* / ownedLibraries+=LibraryCS)* transformations+=TransformationCS*;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//(ownedImports+=UnitCS | / *ownedInclude+=IncludeCS |* / ownedLibraries+=LibraryCS)* transformations+=TransformationCS*
@@ -88,11 +89,11 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		////UnitCS: identifier+=[pivot::Element|UnrestrictedName] ('.' identifier+=[pivot::Element|UnrestrictedName])*;
-		//
 		//CollectionTemplateCS:
 		//	name=UnrestrictedName? ":" type=CollectionTypeCS "{" (memberIdentifiers+=(TemplateCS | ElementTemplateCS) (","
-		//	memberIdentifiers+=(TemplateCS | ElementTemplateCS))* "++" (restIdentifier=[pivot::Variable|UnrestrictedName] |
-		//	"_"))? "}";
+		//	memberIdentifiers+=(TemplateCS | ElementTemplateCS))* "++" (restIdentifier=[pivot::Variable|UnrestrictedName] | "_"))?
+		//	"}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=UnrestrictedName? ":" type=CollectionTypeCS "{" (memberIdentifiers+=(TemplateCS | ElementTemplateCS) (","
@@ -187,6 +188,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//DefaultValueCS:
 		//	propertyId=[pivot::Variable|UnrestrictedName] "=" initialiser=ExpCS ";";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//propertyId=[pivot::Variable|UnrestrictedName] "=" initialiser=ExpCS ";"
@@ -245,6 +247,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//	(checkonly?="checkonly" | enforce?="enforce" | "replace")? "domain" modelId=[qvtbase::TypedModel|UnrestrictedName]
 		//	pattern=DomainPatternCS ("implementedby" implementedBy=ExpCS)? ("default_values" "{" defaultValues+=DefaultValueCS+
 		//	"}")? ";";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//(checkonly?="checkonly" | enforce?="enforce" | "replace")? "domain" modelId=[qvtbase::TypedModel|UnrestrictedName]
@@ -329,6 +332,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//DomainPatternCS:
 		//	template=TemplateCS;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//template=TemplateCS
@@ -349,6 +353,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//ElementTemplateCS:
 		//	name=UnrestrictedName | {ElementTemplateCS} "_";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=UnrestrictedName | {ElementTemplateCS} "_"
@@ -406,6 +411,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//	"key" pathName=PathNameCS "{" (propertyIds+=[pivot::Property|UnrestrictedName] | "opposite" "("
 		//	oppositePropertyIds+=PathNameCS ")") ("," (propertyIds+=[pivot::Property|UnrestrictedName] | "opposite" "("
 		//	oppositePropertyIds+=PathNameCS ")"))* "}" ";";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"key" pathName=PathNameCS "{" (propertyIds+=[pivot::Property|UnrestrictedName] | "opposite" "("
@@ -509,6 +515,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//LibraryCS returns base::LibraryCS:
 		//	"library" referredPackage=[pivot::Package|URI] ";";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"library" referredPackage=[pivot::Package|URI] ";"
@@ -555,6 +562,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//ModelDeclCS:
 		//	name=UnrestrictedName ":" (metaModelIds+=[pivot::Namespace|UnrestrictedName] | "{"
 		//	metaModelIds+=[pivot::Namespace|UnrestrictedName] ("," metaModelIds+=[pivot::Namespace|UnrestrictedName])* "}");
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=UnrestrictedName ":" (metaModelIds+=[pivot::Namespace|UnrestrictedName] | "{"
@@ -638,6 +646,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//ObjectTemplateCS:
 		//	name=UnrestrictedName? ":" type=TypedRefCS "{" (propertyTemplates+=PropertyTemplateCS (","
 		//	propertyTemplates+=PropertyTemplateCS)*)? "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=UnrestrictedName? ":" type=TypedRefCS "{" (propertyTemplates+=PropertyTemplateCS (","
@@ -698,6 +707,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//ParamDeclarationCS:
 		//	name=UnrestrictedName ":" ownedType=TypedRefCS;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=UnrestrictedName ":" ownedType=TypedRefCS
@@ -728,6 +738,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//PredicateCS:
 		//	expr=ExpCS ";";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//expr=ExpCS ";"
@@ -757,6 +768,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//PrimitiveTypeDomainCS:
 		//	"primitive" "domain" name=UnrestrictedName ":" type=TypedRefCS ";";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"primitive" "domain" name=UnrestrictedName ":" type=TypedRefCS ";"
@@ -807,6 +819,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//PropertyTemplateCS:
 		//	(propertyId=[pivot::Property|UnrestrictedName] | "opposite" "(" oppositePropertyId=PathNameCS ")") "="
 		//	expression=ExpCSOrTemplateCS;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//(propertyId=[pivot::Property|UnrestrictedName] | "opposite" "(" oppositePropertyId=PathNameCS ")") "="
@@ -882,6 +895,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//QueryCS:
 		//	"query" name=UnrestrictedName "(" (inputParamDeclarations+=ParamDeclarationCS (","
 		//	inputParamDeclarations+=ParamDeclarationCS)*)? ")" ":" ownedType=TypedRefCS (";" | "{" expression=ExpCS "}");
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"query" name=UnrestrictedName "(" (inputParamDeclarations+=ParamDeclarationCS (","
@@ -986,6 +1000,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//	top?="top"? "relation" name=UnrestrictedName ("overrides" overrides=[qvtrelation::Relation|UnrestrictedName])? "{"
 		//	varDeclarations+=VarDeclarationCS* (domains+=DomainCS | domains+=PrimitiveTypeDomainCS)+ when=WhenCS? where=WhereCS?
 		//	"}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//top?="top"? "relation" name=UnrestrictedName ("overrides" overrides=[qvtrelation::Relation|UnrestrictedName])? "{"
@@ -1077,6 +1092,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//TemplateCS:
 		//	(CollectionTemplateCS | ObjectTemplateCS) ("{" guardExpression=ExpCS "}")?;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//(CollectionTemplateCS | ObjectTemplateCS) ("{" guardExpression=ExpCS "}")?
@@ -1145,6 +1161,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//	"transformation" name=UnrestrictedName "(" modelDecls+=ModelDeclCS ("," modelDecls+=ModelDeclCS)* ")" ("extends"
 		//	extends+=[qvtbase::Transformation|UnrestrictedName] ("," extends+=[qvtbase::Transformation|UnrestrictedName])*)? "{"
 		//	keyDecls+=KeyDeclCS* (relation+=RelationCS | queries+=QueryCS)* "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"transformation" name=UnrestrictedName "(" modelDecls+=ModelDeclCS ("," modelDecls+=ModelDeclCS)* ")" ("extends"
@@ -1262,6 +1279,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//UnitCS returns base::ImportCS:
 		//	"import" (name=UnrestrictedName ":")? ownedPathName=URIPathNameCS ("::" isAll?="*")? ";";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//"import" (name=UnrestrictedName ":")? ownedPathName=URIPathNameCS ("::" isAll?="*")? ";"
@@ -1320,6 +1338,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//VarDeclarationCS:
 		//	varDeclarationIds+=VarDeclarationIdCS ("," varDeclarationIds+=VarDeclarationIdCS)* ":" type=TypedRefCS ";";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//varDeclarationIds+=VarDeclarationIdCS ("," varDeclarationIds+=VarDeclarationIdCS)* ":" type=TypedRefCS ";"
@@ -1363,6 +1382,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//VarDeclarationIdCS:
 		//	name=UnrestrictedName;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//name=UnrestrictedName
@@ -1384,6 +1404,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//WhenCS returns PatternCS:
 		//	{PatternCS} "when" "{" predicates+=PredicateCS* "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{PatternCS} "when" "{" predicates+=PredicateCS* "}"
@@ -1420,6 +1441,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//WhereCS returns PatternCS:
 		//	{PatternCS} "where" "{" predicates+=PredicateCS* "}";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//{PatternCS} "where" "{" predicates+=PredicateCS* "}"
@@ -1451,18 +1473,16 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTemplateCSParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		////<OCLExpressionCS> ::= <PropertyCallExpCS> 
-		// //                    | <VariableExpCS>
-		//
+		////                    | <VariableExpCS>
 		////                    | <LiteralExpCS>
-		// //                    | <LetExpCS>
-		// //                    | <IfExpCS>
-		//
+		////                    | <LetExpCS>
+		////                    | <IfExpCS>
 		////                    | '(' <OCLExpressionCS> ')'
-		// //                    | <template>  
-		//
+		////                    | <template>  
 		////	notNameExpressionCS -> templateCS
-		// ExpCSOrTemplateCS returns essentialocl::ExpCS:
+		//ExpCSOrTemplateCS returns essentialocl::ExpCS:
 		//	ExpCS | TemplateCS;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ExpCS | TemplateCS
@@ -1482,6 +1502,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//TypedTypeRefCS returns base::TypedTypeRefCS:
 		//	ownedPathName=PathNameCS;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//ownedPathName=PathNameCS
@@ -1500,6 +1521,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//TypedRefCS returns base::TypedRefCS:
 		//	PrimitiveTypeCS | CollectionTypeCS | TypedTypeRefCS;
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//PrimitiveTypeCS | CollectionTypeCS | TypedTypeRefCS
@@ -1540,21 +1562,20 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cWhereKeyword_19 = (Keyword)cAlternatives.eContents().get(19);
 		
 		////ExpCS returns essentialocl::ExpCS:
-		// //	InfixedExpCS
-		// //|	TemplateCS;
-		// //--	relationIdentifier -> '_'	
-		//
+		////	InfixedExpCS
+		////|	TemplateCS;
+		////--	relationIdentifier -> '_'	
 		//UnrestrictedName returns ecore::EString:
 		//	EssentialOCLUnrestrictedName //|   '_'
-		// | "checkonly" | "default_values" | "domain" | "enforce" | "extends" |
-		//	"implementedby" | "import" | "library" | "key" | "opposite" | "overrides" | "primitive" | "query" | "relation" |
-		//	"replace" | "top" | "transformation" | "when" | "where";
+		//	| "checkonly" | "default_values" | "domain" | "enforce" | "extends" | "implementedby" | "import" | "library" | "key" |
+		//	"opposite" | "overrides" | "primitive" | "query" | "relation" | "replace" | "top" | "transformation" | "when" |
+		//	"where";
+		@Override
 		public ParserRule getRule() { return rule; }
 
 		//EssentialOCLUnrestrictedName //|   '_'
-		// | "checkonly" | "default_values" | "domain" | "enforce" | "extends" |
-		//"implementedby" | "import" | "library" | "key" | "opposite" | "overrides" | "primitive" | "query" | "relation" |
-		//"replace" | "top" | "transformation" | "when" | "where"
+		//| "checkonly" | "default_values" | "domain" | "enforce" | "extends" | "implementedby" | "import" | "library" | "key" |
+		//"opposite" | "overrides" | "primitive" | "query" | "relation" | "replace" | "top" | "transformation" | "when" | "where"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//EssentialOCLUnrestrictedName
@@ -1702,6 +1723,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
+	@Override
 	public Grammar getGrammar() {
 		return grammar;
 	}
@@ -1723,11 +1745,10 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////UnitCS: identifier+=[pivot::Element|UnrestrictedName] ('.' identifier+=[pivot::Element|UnrestrictedName])*;
-	//
 	//CollectionTemplateCS:
 	//	name=UnrestrictedName? ":" type=CollectionTypeCS "{" (memberIdentifiers+=(TemplateCS | ElementTemplateCS) (","
-	//	memberIdentifiers+=(TemplateCS | ElementTemplateCS))* "++" (restIdentifier=[pivot::Variable|UnrestrictedName] |
-	//	"_"))? "}";
+	//	memberIdentifiers+=(TemplateCS | ElementTemplateCS))* "++" (restIdentifier=[pivot::Variable|UnrestrictedName] | "_"))?
+	//	"}";
 	public CollectionTemplateCSElements getCollectionTemplateCSAccess() {
 		return pCollectionTemplateCS;
 	}
@@ -1959,17 +1980,14 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////<OCLExpressionCS> ::= <PropertyCallExpCS> 
-	// //                    | <VariableExpCS>
-	//
+	////                    | <VariableExpCS>
 	////                    | <LiteralExpCS>
-	// //                    | <LetExpCS>
-	// //                    | <IfExpCS>
-	//
+	////                    | <LetExpCS>
+	////                    | <IfExpCS>
 	////                    | '(' <OCLExpressionCS> ')'
-	// //                    | <template>  
-	//
+	////                    | <template>  
 	////	notNameExpressionCS -> templateCS
-	// ExpCSOrTemplateCS returns essentialocl::ExpCS:
+	//ExpCSOrTemplateCS returns essentialocl::ExpCS:
 	//	ExpCS | TemplateCS;
 	public ExpCSOrTemplateCSElements getExpCSOrTemplateCSAccess() {
 		return pExpCSOrTemplateCS;
@@ -2000,15 +2018,14 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////ExpCS returns essentialocl::ExpCS:
-	// //	InfixedExpCS
-	// //|	TemplateCS;
-	// //--	relationIdentifier -> '_'	
-	//
+	////	InfixedExpCS
+	////|	TemplateCS;
+	////--	relationIdentifier -> '_'	
 	//UnrestrictedName returns ecore::EString:
 	//	EssentialOCLUnrestrictedName //|   '_'
-	// | "checkonly" | "default_values" | "domain" | "enforce" | "extends" |
-	//	"implementedby" | "import" | "library" | "key" | "opposite" | "overrides" | "primitive" | "query" | "relation" |
-	//	"replace" | "top" | "transformation" | "when" | "where";
+	//	| "checkonly" | "default_values" | "domain" | "enforce" | "extends" | "implementedby" | "import" | "library" | "key" |
+	//	"opposite" | "overrides" | "primitive" | "query" | "relation" | "replace" | "top" | "transformation" | "when" |
+	//	"where";
 	public UnrestrictedNameElements getUnrestrictedNameAccess() {
 		return pUnrestrictedName;
 	}
@@ -2018,7 +2035,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////generate essentialOCLCST "http://www.eclipse.org/ocl/3.0.0/EssentialOCLCST"
-	// Model returns ContextCS:
+	//Model returns ContextCS:
 	//	ownedExpression=ExpCS;
 	public EssentialOCLGrammarAccess.ModelElements getModelAccess() {
 		return gaEssentialOCL.getModelAccess();
@@ -2083,7 +2100,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// Intended to be overrideable
-	// InfixOperatorName:
+	//InfixOperatorName:
 	//	EssentialOCLInfixOperatorName;
 	public EssentialOCLGrammarAccess.InfixOperatorNameElements getInfixOperatorNameAccess() {
 		return gaEssentialOCL.getInfixOperatorNameAccess();
@@ -2094,7 +2111,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// Intended to be overrideable
-	// NavigationOperatorName:
+	//NavigationOperatorName:
 	//	EssentialOCLNavigationOperatorName;
 	public EssentialOCLGrammarAccess.NavigationOperatorNameElements getNavigationOperatorNameAccess() {
 		return gaEssentialOCL.getNavigationOperatorNameAccess();
@@ -2105,7 +2122,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// Intended to be overrideable
-	// UnaryOperatorName:
+	//UnaryOperatorName:
 	//	EssentialOCLUnaryOperatorName;
 	public EssentialOCLGrammarAccess.UnaryOperatorNameElements getUnaryOperatorNameAccess() {
 		return gaEssentialOCL.getUnaryOperatorNameAccess();
@@ -2116,10 +2133,8 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////---------------------------------------------------------------------
-	// //  Names
-	//
+	////  Names
 	////---------------------------------------------------------------------
-	//
 	/// ** <<<This is a join point for derived grammars - replace with a more disciplined grammar extensibility>>> * /
 	//EssentialOCLUnrestrictedName returns ecore::EString:
 	//	Identifier;
@@ -2143,7 +2158,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// Intended to be overridden
-	// UnreservedName returns ecore::EString:
+	//UnreservedName returns ecore::EString:
 	//	EssentialOCLUnreservedName;
 	public EssentialOCLGrammarAccess.UnreservedNameElements getUnreservedNameAccess() {
 		return gaEssentialOCL.getUnreservedNameAccess();
@@ -2175,10 +2190,9 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////---------------------------------------------------------------------
-	// //  Types
-	//
+	////  Types
 	////---------------------------------------------------------------------
-	// PrimitiveTypeIdentifier:
+	//PrimitiveTypeIdentifier:
 	//	"Boolean" | "Integer" | "Real" | "String" | "UnlimitedNatural" | "OclAny" | "OclInvalid" | "OclVoid";
 	public EssentialOCLGrammarAccess.PrimitiveTypeIdentifierElements getPrimitiveTypeIdentifierAccess() {
 		return gaEssentialOCL.getPrimitiveTypeIdentifierAccess();
@@ -2239,10 +2253,9 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////---------------------------------------------------------------------
-	// //  Literals
-	//
+	////  Literals
 	////---------------------------------------------------------------------
-	// CollectionLiteralExpCS:
+	//CollectionLiteralExpCS:
 	//	ownedType=CollectionTypeCS "{" (ownedParts+=CollectionLiteralPartCS ("," ownedParts+=CollectionLiteralPartCS)*)? "}";
 	public EssentialOCLGrammarAccess.CollectionLiteralExpCSElements getCollectionLiteralExpCSAccess() {
 		return gaEssentialOCL.getCollectionLiteralExpCSAccess();
@@ -2274,7 +2287,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// PatternPartCS
-	// ConstructorPartCS:
+	//ConstructorPartCS:
 	//	referredProperty=[pivot::Property|UnrestrictedName] "=" ownedInitExpression=(ExpCS | PatternExpCS);
 	public EssentialOCLGrammarAccess.ConstructorPartCSElements getConstructorPartCSAccess() {
 		return gaEssentialOCL.getConstructorPartCSAccess();
@@ -2446,28 +2459,19 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////---------------------------------------------------------------------
-	// //  Expressions
-	//
+	////  Expressions
 	////---------------------------------------------------------------------
-	//
 	//// An ExpCS permits a LetExpCS only in the final term to ensure
-	//
 	////  that let is right associative, whereas infix operators are left associative.
-	//
 	////   a = 64 / 16 / let b : Integer in 8 / let c : Integer in 4 
-	// // is
-	//
+	//// is
 	////   a = (64 / 16) / (let b : Integer in 8 / (let c : Integer in 4 ))
-	//
 	/// * An expression elaborates a prefixed expression with zero or more binary operator and expression suffixes.
-	// * An optionally prefixed let expression is permitted except when suffixed with further expressions.* /
-	//ExpCS:
-	//	PrefixedPrimaryExpCS ({InfixExpCS.ownedLeft=current} name=BinaryOperatorName ownedRight=ExpCS)?
-	//	//	({InfixExpCS} ownedSource=PrefixedExpCS name=BinaryOperatorName ownedArgument=ExpCS)
-	// //| 	PrefixedExpCS
-	//
+	// * An optionally prefixed let expression is permitted except when suffixed with further expressions.* / ExpCS:
+	//	PrefixedPrimaryExpCS ({InfixExpCS.ownedLeft=current} name=BinaryOperatorName ownedRight=ExpCS)? //	({InfixExpCS} ownedSource=PrefixedExpCS name=BinaryOperatorName ownedArgument=ExpCS)
+	//	//| 	PrefixedExpCS
 	//	// the above takes exponential or worse time for backtracking, below is fast
-	// | PrefixedLetExpCS;
+	//	| PrefixedLetExpCS;
 	public EssentialOCLGrammarAccess.ExpCSElements getExpCSAccess() {
 		return gaEssentialOCL.getExpCSAccess();
 	}
@@ -2511,8 +2515,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	/// * A name expression is a generalised rule for expressions that start with a name and which may be followed by square, round or
-	// * curly bracket clauses and optionally an @pre as well.* /
-	//NameExpCS:
+	// * curly bracket clauses and optionally an @pre as well.* / NameExpCS:
 	//	ownedPathName=PathNameCS ownedSquareBracketedClauses+=SquareBracketedClauseCS*
 	//	ownedRoundBracketedClause=RoundBracketedClauseCS? ownedCurlyBracketedClause=CurlyBracketedClauseCS? (isPre?="@"
 	//	"pre")?;
@@ -2560,9 +2563,8 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	/// * A navigating argument is a generalized rule for the first argument in a round bracket clause. This is typically the first operation
-	// * parameter or an iterator. * /
-	//// Type-less init is an illegal infix expression
-	// NavigatingArgCS:
+	// * parameter or an iterator. * / // Type-less init is an illegal infix expression
+	//NavigatingArgCS:
 	//	ownedNameExpression=NavigatingArgExpCS (":" ownedType=TypeExpCS ("=" ownedInitExpression=ExpCS)? | "in"
 	//	ownedInitExpression=ExpCS)? | ":" ownedType=TypeExpCS;
 	public EssentialOCLGrammarAccess.NavigatingArgCSElements getNavigatingArgCSAccess() {
@@ -2573,9 +2575,8 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		return getNavigatingArgCSAccess().getRule();
 	}
 
-	/// * A navigating bar argument is a generalized rule for a bar-prefixed argument in a round bracket clause. This is typically the body of an iteration. * /
-	//// Type-less init is an illegal infix expression
-	// NavigatingBarArgCS returns NavigatingArgCS:
+	/// * A navigating bar argument is a generalized rule for a bar-prefixed argument in a round bracket clause. This is typically the body of an iteration. * / // Type-less init is an illegal infix expression
+	//NavigatingBarArgCS returns NavigatingArgCS:
 	//	prefix="|" ownedNameExpression=NavigatingArgExpCS (":" ownedType=TypeExpCS ("=" ownedInitExpression=ExpCS)?)?;
 	public EssentialOCLGrammarAccess.NavigatingBarArgCSElements getNavigatingBarArgCSAccess() {
 		return gaEssentialOCL.getNavigatingBarArgCSAccess();
@@ -2586,9 +2587,8 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	/// * A navigating comma argument is a generalized rule for non-first argument in a round bracket clause. These are typically non-first operation
-	// * parameters or a second iterator. * /
-	//// Type-less init is an illegal infix expression
-	// NavigatingCommaArgCS returns NavigatingArgCS:
+	// * parameters or a second iterator. * / // Type-less init is an illegal infix expression
+	//NavigatingCommaArgCS returns NavigatingArgCS:
 	//	prefix="," ownedNameExpression=NavigatingArgExpCS (":" ownedType=TypeExpCS ("=" ownedInitExpression=ExpCS)? | "in"
 	//	ownedInitExpression=ExpCS)?;
 	public EssentialOCLGrammarAccess.NavigatingCommaArgCSElements getNavigatingCommaArgCSAccess() {
@@ -2599,9 +2599,8 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		return getNavigatingCommaArgCSAccess().getRule();
 	}
 
-	/// * A navigating semi argument is a generalized rule for a semicolon prefixed argument in a round bracket clause. This is typically an iterate accumulator. * /
-	//// Type-less init is an illegal infix expression
-	// NavigatingSemiArgCS returns NavigatingArgCS:
+	/// * A navigating semi argument is a generalized rule for a semicolon prefixed argument in a round bracket clause. This is typically an iterate accumulator. * / // Type-less init is an illegal infix expression
+	//NavigatingSemiArgCS returns NavigatingArgCS:
 	//	prefix=";" ownedNameExpression=NavigatingArgExpCS (":" ownedType=TypeExpCS ("=" ownedInitExpression=ExpCS)?)?;
 	public EssentialOCLGrammarAccess.NavigatingSemiArgCSElements getNavigatingSemiArgCSAccess() {
 		return gaEssentialOCL.getNavigatingSemiArgCSAccess();
@@ -2612,8 +2611,8 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// Intended to be overridden
-	// //	'?'	-- defined by Complete OCL
-	// NavigatingArgExpCS returns ExpCS:
+	////	'?'	-- defined by Complete OCL
+	//NavigatingArgExpCS returns ExpCS:
 	//	ExpCS;
 	public EssentialOCLGrammarAccess.NavigatingArgExpCSElements getNavigatingArgExpCSAccess() {
 		return gaEssentialOCL.getNavigatingArgExpCSAccess();
@@ -2625,7 +2624,6 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 
 	//IfExpCS:
 	//	"if" ownedCondition=(ExpCS | PatternExpCS) "then" ownedThenExpression=ExpCS //	ifThenExpressions+=IfThenExpCS
-	//
 	//	ownedIfThenExpressions+=ElseIfThenExpCS* "else" ownedElseExpression=ExpCS "endif";
 	public EssentialOCLGrammarAccess.IfExpCSElements getIfExpCSAccess() {
 		return gaEssentialOCL.getIfExpCSAccess();
@@ -2636,11 +2634,10 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////IfThenExpCS returns IfThenExpCS:
-	// //	'if' condition=ExpCS
-	// //	'then' thenExpression=ExpCS
-	// //;
-	// ElseIfThenExpCS
-	//returns IfThenExpCS:
+	////	'if' condition=ExpCS
+	////	'then' thenExpression=ExpCS
+	////;
+	//ElseIfThenExpCS returns IfThenExpCS:
 	//	"elseif" ownedCondition=ExpCS "then" ownedThenExpression=ExpCS;
 	public EssentialOCLGrammarAccess.ElseIfThenExpCSElements getElseIfThenExpCSAccess() {
 		return gaEssentialOCL.getElseIfThenExpCSAccess();
@@ -2848,12 +2845,9 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	// * lookahead conflicts in simple lexers between a dot within a floating point number and the dot-dot in a CollectionLiteralPartCS. A
 	// * practical implementation should give high priority to a successful parse of INT ('.' INT)? (('e' | 'E') ('+' | '-')? INT)? than
 	// * to the unsuccessful partial parse of INT '..'. The type of the INT terminal is String to allow the floating point syntax to be used.
-	// * /
-	//// Not terminal to allow parser backtracking to sort out "5..7"
-	//
+	// * / // Not terminal to allow parser backtracking to sort out "5..7"
 	//// EssentialOCLTokenSource pieces this together ('.' INT)? (('e' | 'E') ('+' | '-')? INT)?;
-	// NUMBER_LITERAL returns
-	//BigNumber:
+	//NUMBER_LITERAL returns BigNumber:
 	//	INT;
 	public BaseGrammarAccess.NUMBER_LITERALElements getNUMBER_LITERALAccess() {
 		return gaEssentialOCL.getNUMBER_LITERALAccess();
@@ -2937,8 +2931,8 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//// String to allow diverse re-use
-	// // multiple leading zeroes occur as floating point fractional part
-	// terminal INT:
+	//// multiple leading zeroes occur as floating point fractional part
+	//terminal INT:
 	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaEssentialOCL.getINTRule();

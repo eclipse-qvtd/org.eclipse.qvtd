@@ -75,6 +75,7 @@ public class BaseModelImpl extends ModelImpl implements BaseModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Unit> getUnit() {
 		if (unit == null) {
 			unit = new EObjectContainmentEList<Unit>(Unit.class, this, QVTbasePackage.BASE_MODEL__UNIT);

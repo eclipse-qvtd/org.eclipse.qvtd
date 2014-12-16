@@ -119,6 +119,7 @@ public class QVTiModelManager implements DomainModelManager
 		}
 	}
 
+	@Override
 	public @NonNull Set<EObject> get(@NonNull org.eclipse.ocl.pivot.Class type) {
 		
 		Set<EObject> elements = new HashSet<EObject>();

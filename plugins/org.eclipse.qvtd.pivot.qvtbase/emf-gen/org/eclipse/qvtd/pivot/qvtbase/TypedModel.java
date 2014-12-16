@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.pivot.qvtbase;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.pivot.NamedElement;
 
 /**
@@ -32,7 +31,7 @@ import org.eclipse.ocl.pivot.NamedElement;
  * @model
  * @generated
  */
-public interface TypedModel extends EObject, NamedElement {
+public interface TypedModel extends NamedElement {
 	/**
 	 * Returns the value of the '<em><b>Transformation</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvtbase.Transformation#getModelParameter <em>Model Parameter</em>}'.

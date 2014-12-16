@@ -87,6 +87,7 @@ public class CoreDomainImpl extends DomainImpl implements CoreDomain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public GuardPattern getGuardPattern() {
 		return guardPattern;
 	}
@@ -111,6 +112,7 @@ public class CoreDomainImpl extends DomainImpl implements CoreDomain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGuardPattern(GuardPattern newGuardPattern) {
 		if (newGuardPattern != guardPattern) {
 			NotificationChain msgs = null;
@@ -130,6 +132,7 @@ public class CoreDomainImpl extends DomainImpl implements CoreDomain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BottomPattern getBottomPattern() {
 		return bottomPattern;
 	}
@@ -154,6 +157,7 @@ public class CoreDomainImpl extends DomainImpl implements CoreDomain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBottomPattern(BottomPattern newBottomPattern) {
 		if (newBottomPattern != bottomPattern) {
 			NotificationChain msgs = null;
@@ -173,6 +177,7 @@ public class CoreDomainImpl extends DomainImpl implements CoreDomain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Variable> getAllVariables() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT

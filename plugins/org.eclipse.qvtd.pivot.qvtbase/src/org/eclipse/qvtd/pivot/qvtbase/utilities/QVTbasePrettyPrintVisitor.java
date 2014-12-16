@@ -31,47 +31,57 @@ public class QVTbasePrettyPrintVisitor extends EssentialOCLPrettyPrintVisitor im
 		super(context);
 	}
 
+	@Override
 	public Object visitBaseModel(@NonNull BaseModel object) {
 		return super.visitModel(object);
 	}
 
+	@Override
 	public Object visitDomain(@NonNull Domain object) {
 		context.appendName(object.getTypedModel());
 		return null;
 	}
 
+	@Override
 	public Object visitFunction(@NonNull Function object) {
 		return super.visitOperation(object);
 	}
 
+	@Override
 	public Object visitFunctionParameter(@NonNull FunctionParameter object) {
 		return super.visitParameter(object);
 	}
 
+	@Override
 	public Object visitPattern(@NonNull Pattern object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public Object visitPredicate(@NonNull Predicate object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public Object visitRule(@NonNull Rule object) {
 		context.appendName(object);
 		return null;
 	}
 
+	@Override
 	public Object visitTransformation(@NonNull Transformation object) {
 		return super.visitClass(object);
 	}
 
+	@Override
 	public Object visitTypedModel(@NonNull TypedModel object) {
 		context.appendName(object);
 		return null;
 	}
 
+	@Override
 	public Object visitUnit(@NonNull Unit object) {
 		context.appendName(object);
 		return null;

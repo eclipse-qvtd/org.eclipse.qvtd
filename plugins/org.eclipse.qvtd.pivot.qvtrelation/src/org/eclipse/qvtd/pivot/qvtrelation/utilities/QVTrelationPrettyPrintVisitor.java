@@ -33,10 +33,12 @@ public class QVTrelationPrettyPrintVisitor extends QVTtemplatePrettyPrintVisitor
 		super(context);
 	}
 
+	@Override
 	public Object visitDomainPattern(@NonNull DomainPattern object) {
 		return super.visitPattern(object);
 	}
 
+	@Override
 	public Object visitKey(@NonNull Key object) {
 		org.eclipse.ocl.pivot.Class identifies = object.getIdentifies();
 		if (identifies != null) {
@@ -45,10 +47,12 @@ public class QVTrelationPrettyPrintVisitor extends QVTtemplatePrettyPrintVisitor
 		return null;
 	}
 
+	@Override
 	public Object visitRelation(@NonNull Relation object) {
 		return super.visitRule(object);
 	}
 
+	@Override
 	public Object visitRelationCallExp(@NonNull RelationCallExp object) {
 		List<OCLExpression> arguments = object.getArgument();
 		Relation referredRelation = object.getReferredRelation();
@@ -67,24 +71,29 @@ public class QVTrelationPrettyPrintVisitor extends QVTtemplatePrettyPrintVisitor
 		return null;
 	}
 
+	@Override
 	public Object visitRelationDomain(@NonNull RelationDomain object) {
 		return super.visitDomain(object);
 	}
 
+	@Override
 	public Object visitRelationDomainAssignment(@NonNull RelationDomainAssignment object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public Object visitRelationImplementation(@NonNull RelationImplementation object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public Object visitRelationModel(@NonNull RelationModel object) {
 		return super.visitBaseModel(object);
 	}
 
+	@Override
 	public Object visitRelationalTransformation(@NonNull RelationalTransformation object) {
 		return super.visitTransformation(object);
 	}

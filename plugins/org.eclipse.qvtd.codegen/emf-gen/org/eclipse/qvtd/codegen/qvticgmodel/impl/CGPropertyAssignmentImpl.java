@@ -121,6 +121,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGMappingExp getMappingExp() {
 		if (eContainerFeatureID() != QVTiCGModelPackage.CG_PROPERTY_ASSIGNMENT__MAPPING_EXP) return null;
 		return (CGMappingExp)eInternalContainer();
@@ -141,6 +142,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMappingExp(CGMappingExp newMappingExp) {
 		if (newMappingExp != eInternalContainer() || (eContainerFeatureID() != QVTiCGModelPackage.CG_PROPERTY_ASSIGNMENT__MAPPING_EXP && newMappingExp != null)) {
 			if (EcoreUtil.isAncestor(this, newMappingExp))
@@ -162,6 +164,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGValuedElement getSlotValue() {
 		return slotValue;
 	}
@@ -186,6 +189,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSlotValue(CGValuedElement newSlotValue) {
 		if (newSlotValue != slotValue) {
 			NotificationChain msgs = null;
@@ -205,6 +209,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Property getReferredProperty() {
 		return referredProperty;
 	}
@@ -214,6 +219,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReferredProperty(Property newReferredProperty) {
 		Property oldReferredProperty = referredProperty;
 		referredProperty = newReferredProperty;
@@ -226,6 +232,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGValuedElement getInitValue() {
 		return initValue;
 	}
@@ -250,6 +257,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInitValue(CGValuedElement newInitValue) {
 		if (newInitValue != initValue) {
 			NotificationChain msgs = null;
@@ -269,6 +277,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGExecutorProperty getExecutorProperty() {
 		return executorProperty;
 	}
@@ -278,6 +287,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setExecutorProperty(CGExecutorProperty newExecutorProperty) {
 		CGExecutorProperty oldExecutorProperty = executorProperty;
 		executorProperty = newExecutorProperty;
@@ -464,6 +474,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		return (getClass() == thatValue.getClass()) ? QVTiEquivalenceUtils.isEquivalent(this, (CGPropertyAssignment)thatValue) : null;
 	}

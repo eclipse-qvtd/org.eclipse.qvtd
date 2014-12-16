@@ -178,6 +178,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getBaseModel() {
 		return baseModelEClass;
 	}
@@ -187,6 +188,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getBaseModel_Unit() {
 		return (EReference)baseModelEClass.getEStructuralFeatures().get(0);
 	}
@@ -196,6 +198,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getDomain() {
 		return domainEClass;
 	}
@@ -205,6 +208,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDomain_IsCheckable() {
 		return (EAttribute)domainEClass.getEStructuralFeatures().get(0);
 	}
@@ -214,6 +218,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getDomain_IsEnforceable() {
 		return (EAttribute)domainEClass.getEStructuralFeatures().get(1);
 	}
@@ -223,6 +228,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDomain_Rule() {
 		return (EReference)domainEClass.getEStructuralFeatures().get(2);
 	}
@@ -232,6 +238,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getDomain_TypedModel() {
 		return (EReference)domainEClass.getEStructuralFeatures().get(3);
 	}
@@ -241,6 +248,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFunction() {
 		return functionEClass;
 	}
@@ -250,6 +258,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getFunction_QueryExpression() {
 		return (EReference)functionEClass.getEStructuralFeatures().get(0);
 	}
@@ -259,6 +268,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getFunctionParameter() {
 		return functionParameterEClass;
 	}
@@ -268,6 +278,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPattern() {
 		return patternEClass;
 	}
@@ -277,6 +288,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPattern_Predicate() {
 		return (EReference)patternEClass.getEStructuralFeatures().get(0);
 	}
@@ -286,6 +298,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPattern_BindsTo() {
 		return (EReference)patternEClass.getEStructuralFeatures().get(1);
 	}
@@ -295,6 +308,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPredicate() {
 		return predicateEClass;
 	}
@@ -304,6 +318,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPredicate_ConditionExpression() {
 		return (EReference)predicateEClass.getEStructuralFeatures().get(0);
 	}
@@ -313,6 +328,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPredicate_Pattern() {
 		return (EReference)predicateEClass.getEStructuralFeatures().get(1);
 	}
@@ -322,6 +338,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRule() {
 		return ruleEClass;
 	}
@@ -331,6 +348,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRule_Domain() {
 		return (EReference)ruleEClass.getEStructuralFeatures().get(0);
 	}
@@ -340,6 +358,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRule_Overrides() {
 		return (EReference)ruleEClass.getEStructuralFeatures().get(1);
 	}
@@ -349,6 +368,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRule_Transformation() {
 		return (EReference)ruleEClass.getEStructuralFeatures().get(2);
 	}
@@ -358,6 +378,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getRule_Overridden() {
 		return (EReference)ruleEClass.getEStructuralFeatures().get(3);
 	}
@@ -367,6 +388,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTransformation() {
 		return transformationEClass;
 	}
@@ -376,6 +398,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTransformation_OwnedTag() {
 		return (EReference)transformationEClass.getEStructuralFeatures().get(0);
 	}
@@ -385,6 +408,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTransformation_ModelParameter() {
 		return (EReference)transformationEClass.getEStructuralFeatures().get(1);
 	}
@@ -394,6 +418,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTransformation_Rule() {
 		return (EReference)transformationEClass.getEStructuralFeatures().get(2);
 	}
@@ -403,6 +428,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTransformation_Extends() {
 		return (EReference)transformationEClass.getEStructuralFeatures().get(3);
 	}
@@ -412,6 +438,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getTypedModel() {
 		return typedModelEClass;
 	}
@@ -421,6 +448,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTypedModel_Transformation() {
 		return (EReference)typedModelEClass.getEStructuralFeatures().get(0);
 	}
@@ -430,6 +458,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTypedModel_UsedPackage() {
 		return (EReference)typedModelEClass.getEStructuralFeatures().get(1);
 	}
@@ -439,6 +468,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getTypedModel_DependsOn() {
 		return (EReference)typedModelEClass.getEStructuralFeatures().get(2);
 	}
@@ -448,6 +478,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getUnit() {
 		return unitEClass;
 	}
@@ -457,6 +488,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getUnit_UsedPackage() {
 		return (EReference)unitEClass.getEStructuralFeatures().get(0);
 	}
@@ -466,6 +498,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public QVTbaseFactory getQVTbaseFactory() {
 		return (QVTbaseFactory)getEFactoryInstance();
 	}

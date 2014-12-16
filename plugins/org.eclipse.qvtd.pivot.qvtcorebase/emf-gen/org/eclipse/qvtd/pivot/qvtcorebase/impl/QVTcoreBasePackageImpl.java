@@ -193,6 +193,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAbstractMapping() {
 		return abstractMappingEClass;
 	}
@@ -202,6 +203,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getArea() {
 		return areaEClass;
 	}
@@ -211,6 +213,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getArea_GuardPattern() {
 		return (EReference)areaEClass.getEStructuralFeatures().get(0);
 	}
@@ -220,6 +223,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getArea_BottomPattern() {
 		return (EReference)areaEClass.getEStructuralFeatures().get(1);
 	}
@@ -229,6 +233,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getAssignment() {
 		return assignmentEClass;
 	}
@@ -238,6 +243,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAssignment_BottomPattern() {
 		return (EReference)assignmentEClass.getEStructuralFeatures().get(0);
 	}
@@ -247,6 +253,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getAssignment_Value() {
 		return (EReference)assignmentEClass.getEStructuralFeatures().get(1);
 	}
@@ -256,6 +263,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getAssignment_IsDefault() {
 		return (EAttribute)assignmentEClass.getEStructuralFeatures().get(2);
 	}
@@ -265,6 +273,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getBottomPattern() {
 		return bottomPatternEClass;
 	}
@@ -274,6 +283,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getBottomPattern_Area() {
 		return (EReference)bottomPatternEClass.getEStructuralFeatures().get(0);
 	}
@@ -283,6 +293,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getBottomPattern_Assignment() {
 		return (EReference)bottomPatternEClass.getEStructuralFeatures().get(1);
 	}
@@ -292,6 +303,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getBottomPattern_EnforcementOperation() {
 		return (EReference)bottomPatternEClass.getEStructuralFeatures().get(2);
 	}
@@ -301,6 +313,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getBottomPattern_RealizedVariable() {
 		return (EReference)bottomPatternEClass.getEStructuralFeatures().get(3);
 	}
@@ -310,6 +323,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCoreDomain() {
 		return coreDomainEClass;
 	}
@@ -319,6 +333,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getCorePattern() {
 		return corePatternEClass;
 	}
@@ -328,6 +343,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getCorePattern_Variable() {
 		return (EReference)corePatternEClass.getEStructuralFeatures().get(0);
 	}
@@ -337,6 +353,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getEnforcementOperation() {
 		return enforcementOperationEClass;
 	}
@@ -346,6 +363,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EAttribute getEnforcementOperation_EnforcementMode() {
 		return (EAttribute)enforcementOperationEClass.getEStructuralFeatures().get(0);
 	}
@@ -355,6 +373,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEnforcementOperation_BottomPattern() {
 		return (EReference)enforcementOperationEClass.getEStructuralFeatures().get(1);
 	}
@@ -364,6 +383,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getEnforcementOperation_OperationCallExp() {
 		return (EReference)enforcementOperationEClass.getEStructuralFeatures().get(2);
 	}
@@ -373,6 +393,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getGuardPattern() {
 		return guardPatternEClass;
 	}
@@ -382,6 +403,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getGuardPattern_Area() {
 		return (EReference)guardPatternEClass.getEStructuralFeatures().get(0);
 	}
@@ -391,6 +413,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getPropertyAssignment() {
 		return propertyAssignmentEClass;
 	}
@@ -400,6 +423,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPropertyAssignment_SlotExpression() {
 		return (EReference)propertyAssignmentEClass.getEStructuralFeatures().get(0);
 	}
@@ -409,6 +433,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getPropertyAssignment_TargetProperty() {
 		return (EReference)propertyAssignmentEClass.getEStructuralFeatures().get(1);
 	}
@@ -418,6 +443,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getRealizedVariable() {
 		return realizedVariableEClass;
 	}
@@ -427,6 +453,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EClass getVariableAssignment() {
 		return variableAssignmentEClass;
 	}
@@ -436,6 +463,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EReference getVariableAssignment_TargetVariable() {
 		return (EReference)variableAssignmentEClass.getEStructuralFeatures().get(0);
 	}
@@ -445,6 +473,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EEnum getEnforcementMode() {
 		return enforcementModeEEnum;
 	}
@@ -454,6 +483,7 @@ public class QVTcoreBasePackageImpl extends EPackageImpl implements QVTcoreBaseP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public QVTcoreBaseFactory getQVTcoreBaseFactory() {
 		return (QVTcoreBaseFactory)getEFactoryInstance();
 	}

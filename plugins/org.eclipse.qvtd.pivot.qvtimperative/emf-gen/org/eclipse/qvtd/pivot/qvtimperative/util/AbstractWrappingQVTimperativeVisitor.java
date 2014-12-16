@@ -31,6 +31,7 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, D extends QVTim
 		super(delegate, context);
 	}
 
+	@Override
 	public @Nullable R visitImperativeModel(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel object) {
 		P prologue = preVisit(object);
 		try {
@@ -42,6 +43,7 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, D extends QVTim
 		}
 	}
 
+	@Override
 	public @Nullable R visitMapping(@NonNull org.eclipse.qvtd.pivot.qvtimperative.Mapping object) {
 		P prologue = preVisit(object);
 		try {
@@ -53,6 +55,7 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, D extends QVTim
 		}
 	}
 
+	@Override
 	public @Nullable R visitMappingCall(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingCall object) {
 		P prologue = preVisit(object);
 		try {
@@ -64,6 +67,7 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, D extends QVTim
 		}
 	}
 
+	@Override
 	public @Nullable R visitMappingCallBinding(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding object) {
 		P prologue = preVisit(object);
 		try {
@@ -75,6 +79,7 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, D extends QVTim
 		}
 	}
 
+	@Override
 	public @Nullable R visitMappingLoop(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingLoop object) {
 		P prologue = preVisit(object);
 		try {
@@ -86,6 +91,7 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, D extends QVTim
 		}
 	}
 
+	@Override
 	public @Nullable R visitMappingSequence(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingSequence object) {
 		P prologue = preVisit(object);
 		try {
@@ -97,6 +103,7 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, D extends QVTim
 		}
 	}
 
+	@Override
 	public @Nullable R visitMappingStatement(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingStatement object) {
 		P prologue = preVisit(object);
 		try {
@@ -108,6 +115,7 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, D extends QVTim
 		}
 	}
 
+	@Override
 	public @Nullable R visitMiddlePropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment object) {
 		P prologue = preVisit(object);
 		try {
@@ -119,6 +127,7 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, D extends QVTim
 		}
 	}
 
+	@Override
 	public @Nullable R visitMiddlePropertyCallExp(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp object) {
 		P prologue = preVisit(object);
 		try {
@@ -130,6 +139,7 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, D extends QVTim
 		}
 	}
 
+	@Override
 	public @Nullable R visitVariablePredicate(@NonNull org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate object) {
 		P prologue = preVisit(object);
 		try {

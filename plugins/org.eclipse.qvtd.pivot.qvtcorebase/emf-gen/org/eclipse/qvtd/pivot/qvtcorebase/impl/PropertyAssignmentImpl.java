@@ -13,7 +13,6 @@ package org.eclipse.qvtd.pivot.qvtcorebase.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
@@ -84,6 +83,7 @@ public class PropertyAssignmentImpl extends AssignmentImpl implements PropertyAs
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OCLExpression getSlotExpression() {
 		return slotExpression;
 	}
@@ -108,6 +108,7 @@ public class PropertyAssignmentImpl extends AssignmentImpl implements PropertyAs
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setSlotExpression(OCLExpression newSlotExpression) {
 		if (newSlotExpression != slotExpression) {
 			NotificationChain msgs = null;
@@ -127,8 +128,9 @@ public class PropertyAssignmentImpl extends AssignmentImpl implements PropertyAs
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Property getTargetProperty() {
-		if (targetProperty != null && ((EObject)targetProperty).eIsProxy()) {
+		if (targetProperty != null && targetProperty.eIsProxy()) {
 			InternalEObject oldTargetProperty = (InternalEObject)targetProperty;
 			targetProperty = (Property)eResolveProxy(oldTargetProperty);
 			if (targetProperty != oldTargetProperty) {
@@ -153,6 +155,7 @@ public class PropertyAssignmentImpl extends AssignmentImpl implements PropertyAs
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTargetProperty(Property newTargetProperty) {
 		Property oldTargetProperty = targetProperty;
 		targetProperty = newTargetProperty;

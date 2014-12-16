@@ -13,7 +13,6 @@ package org.eclipse.qvtd.pivot.qvtrelation.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -88,8 +87,9 @@ public class RelationImplementationImpl extends ElementImpl implements RelationI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Operation getImpl() {
-		if (impl != null && ((EObject)impl).eIsProxy()) {
+		if (impl != null && impl.eIsProxy()) {
 			InternalEObject oldImpl = (InternalEObject)impl;
 			impl = (Operation)eResolveProxy(oldImpl);
 			if (impl != oldImpl) {
@@ -114,6 +114,7 @@ public class RelationImplementationImpl extends ElementImpl implements RelationI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setImpl(Operation newImpl) {
 		Operation oldImpl = impl;
 		impl = newImpl;
@@ -126,6 +127,7 @@ public class RelationImplementationImpl extends ElementImpl implements RelationI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TypedModel getInDirectionOf() {
 		if (inDirectionOf != null && inDirectionOf.eIsProxy()) {
 			InternalEObject oldInDirectionOf = (InternalEObject)inDirectionOf;
@@ -152,6 +154,7 @@ public class RelationImplementationImpl extends ElementImpl implements RelationI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInDirectionOf(TypedModel newInDirectionOf) {
 		TypedModel oldInDirectionOf = inDirectionOf;
 		inDirectionOf = newInDirectionOf;
@@ -164,6 +167,7 @@ public class RelationImplementationImpl extends ElementImpl implements RelationI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Relation getRelation() {
 		if (eContainerFeatureID() != QVTrelationPackage.RELATION_IMPLEMENTATION__RELATION) return null;
 		return (Relation)eInternalContainer();
@@ -184,6 +188,7 @@ public class RelationImplementationImpl extends ElementImpl implements RelationI
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRelation(Relation newRelation) {
 		if (newRelation != eInternalContainer() || (eContainerFeatureID() != QVTrelationPackage.RELATION_IMPLEMENTATION__RELATION && newRelation != null)) {
 			if (EcoreUtil.isAncestor(this, newRelation))

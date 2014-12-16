@@ -134,6 +134,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isIsTopLevel() {
 		return isTopLevel;
 	}
@@ -143,6 +144,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIsTopLevel(boolean newIsTopLevel) {
 		boolean oldIsTopLevel = isTopLevel;
 		isTopLevel = newIsTopLevel;
@@ -155,6 +157,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<RelationImplementation> getOperationalImpl() {
 		if (operationalImpl == null) {
 			operationalImpl = new EObjectContainmentWithInverseEList<RelationImplementation>(RelationImplementation.class, this, QVTrelationPackage.RELATION__OPERATIONAL_IMPL, QVTrelationPackage.RELATION_IMPLEMENTATION__RELATION);
@@ -167,6 +170,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Variable> getVariable() {
 		if (variable == null) {
 			variable = new EObjectContainmentEList<Variable>(Variable.class, this, QVTrelationPackage.RELATION__VARIABLE);
@@ -179,6 +183,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Pattern getWhen() {
 		return when;
 	}
@@ -203,6 +208,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWhen(Pattern newWhen) {
 		if (newWhen != when) {
 			NotificationChain msgs = null;
@@ -222,6 +228,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Pattern getWhere() {
 		return where;
 	}
@@ -246,6 +253,7 @@ public class RelationImpl extends RuleImpl implements Relation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setWhere(Pattern newWhere) {
 		if (newWhere != where) {
 			NotificationChain msgs = null;

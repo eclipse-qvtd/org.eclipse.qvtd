@@ -16,7 +16,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
@@ -88,6 +87,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<PropertyTemplateItem> getPart() {
 		if (part == null) {
 			part = new EObjectContainmentWithInverseEList<PropertyTemplateItem>(PropertyTemplateItem.class, this, QVTtemplatePackage.OBJECT_TEMPLATE_EXP__PART, QVTtemplatePackage.PROPERTY_TEMPLATE_ITEM__OBJ_CONTAINER);
@@ -100,8 +100,9 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public org.eclipse.ocl.pivot.Class getReferredClass() {
-		if (referredClass != null && ((EObject)referredClass).eIsProxy()) {
+		if (referredClass != null && referredClass.eIsProxy()) {
 			InternalEObject oldReferredClass = (InternalEObject)referredClass;
 			referredClass = (org.eclipse.ocl.pivot.Class)eResolveProxy(oldReferredClass);
 			if (referredClass != oldReferredClass) {
@@ -126,6 +127,7 @@ public class ObjectTemplateExpImpl extends TemplateExpImpl implements ObjectTemp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReferredClass(org.eclipse.ocl.pivot.Class newReferredClass) {
 		org.eclipse.ocl.pivot.Class oldReferredClass = referredClass;
 		referredClass = newReferredClass;

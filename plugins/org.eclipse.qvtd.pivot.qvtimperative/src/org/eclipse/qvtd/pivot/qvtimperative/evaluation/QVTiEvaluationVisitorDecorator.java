@@ -67,11 +67,13 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
         return delegate.createNestedEvaluator();
 	}
 
+	@Override
 	public void dispose() {}
 	
 	/**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public @Nullable Object evaluate(@NonNull OCLExpression body) {
 		return delegate.evaluate(body);
 	}
@@ -86,6 +88,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public @NonNull CompleteEnvironment getCompleteEnvironment() {
 		return delegate.getCompleteEnvironment();
 	}
@@ -93,6 +96,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public @NonNull EvaluationVisitor getEvaluator() {
 		return delegate.getEvaluator();
 	}
@@ -100,6 +104,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public @NonNull IdResolver getIdResolver() {
 		return delegate.getIdResolver();
 	}
@@ -107,6 +112,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public @Nullable DomainLogger getLogger() {
 		return delegate.getLogger();
 	}
@@ -114,6 +120,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public @NonNull MetaModelManager getMetaModelManager() {
 		return delegate.getMetaModelManager();
 	}
@@ -121,6 +128,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public @Nullable Monitor getMonitor() {
 		return delegate.getMonitor();
 	}
@@ -128,6 +136,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public @NonNull StandardLibrary getStandardLibrary() {
 		return delegate.getStandardLibrary();
 	}
@@ -135,6 +144,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public @NonNull org.eclipse.ocl.pivot.Class getStaticTypeOf(@Nullable Object value) {
 		
 		return delegate.getStaticTypeOf(value);
@@ -143,6 +153,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public @NonNull org.eclipse.ocl.pivot.Class getStaticTypeOf(@Nullable Object value,
 			@NonNull Object... values) {
 		return delegate.getStaticTypeOf(value, values);
@@ -151,6 +162,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public @NonNull org.eclipse.ocl.pivot.Class getStaticTypeOf(@Nullable Object value,
 			@NonNull Iterable<?> values) {
 		return delegate.getStaticTypeOf(value, values);
@@ -159,6 +171,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public boolean isCanceled() {
 		return delegate.isCanceled();
 	}
@@ -166,6 +179,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public void setCanceled(boolean isCanceled) {
 		delegate.setCanceled(isCanceled);
 	}
@@ -173,6 +187,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public void setLogger(@Nullable DomainLogger logger) {
 		delegate.setLogger(logger);
 	}
@@ -180,6 +195,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public void setMonitor(@Nullable Monitor monitor) {
 		delegate.setMonitor(monitor);
 	}
@@ -203,13 +219,15 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
-    public @Nullable Object visitAssignment(@NonNull Assignment assignment) {
+    @Override
+	public @Nullable Object visitAssignment(@NonNull Assignment assignment) {
 		return delegate.visitAssignment(assignment);
     }
 	
     /**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public @Nullable Object visitBaseModel(@NonNull BaseModel baseModel) {
 		return delegate.visitBaseModel(baseModel);
 	}
@@ -217,20 +235,23 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
-    public @Nullable Object visitBottomPattern(@NonNull BottomPattern bottomPattern) {
+    @Override
+	public @Nullable Object visitBottomPattern(@NonNull BottomPattern bottomPattern) {
     	return delegate.visitBottomPattern(bottomPattern);
     }
     
     /**
      * Delegates to my decorated visitor.
      */
-    public @Nullable Object visitCoreDomain(@NonNull CoreDomain coreDomain) {
+    @Override
+	public @Nullable Object visitCoreDomain(@NonNull CoreDomain coreDomain) {
     	return delegate.visitCoreDomain(coreDomain);
     }
 
     /**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public @Nullable Object visitDomain(@NonNull Domain domain) {
 		return delegate.visitDomain(domain);
 	}
@@ -238,20 +259,23 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
-    public @Nullable Object visitCorePattern(@NonNull CorePattern corePattern) {
+    @Override
+	public @Nullable Object visitCorePattern(@NonNull CorePattern corePattern) {
     	return delegate.visitCorePattern(corePattern);
     }
 
     /**
      * Delegates to my decorated visitor.
      */
-    public @Nullable Object visitEnforcementOperation(@NonNull EnforcementOperation enforcementOperation) {
+    @Override
+	public @Nullable Object visitEnforcementOperation(@NonNull EnforcementOperation enforcementOperation) {
     	return delegate.visitEnforcementOperation(enforcementOperation);
     }
 
     /**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public @Nullable Object visitFunction(@NonNull Function function) {
 		return delegate.visitFunction(function);
 	}
@@ -259,6 +283,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public @Nullable Object visitFunctionParameter(@NonNull FunctionParameter functionParameter) {
 		return delegate.visitFunctionParameter(functionParameter);
 	}
@@ -266,13 +291,15 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
-    public @Nullable Object visitGuardPattern(@NonNull GuardPattern guardPattern) {
+    @Override
+	public @Nullable Object visitGuardPattern(@NonNull GuardPattern guardPattern) {
     	return delegate.visitGuardPattern(guardPattern);
     }
     
     /**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public @Nullable Object visitPattern(@NonNull Pattern pattern) {
 		return delegate.visitPattern(pattern);
 	}
@@ -280,6 +307,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public @Nullable Object visitPredicate(@NonNull Predicate predicate) {
 		return delegate.visitPredicate(predicate);
 	}
@@ -287,20 +315,23 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
-    public @Nullable Object visitPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
+    @Override
+	public @Nullable Object visitPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
     	return delegate.visitPropertyAssignment(propertyAssignment);
     }
 
     /**
      * Delegates to my decorated visitor.
      */
-    public @Nullable Object visitRealizedVariable(@NonNull RealizedVariable realizedVariable) {
+    @Override
+	public @Nullable Object visitRealizedVariable(@NonNull RealizedVariable realizedVariable) {
     	return delegate.visitRealizedVariable(realizedVariable);
     }
 
     /**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public @Nullable Object visitRule(@NonNull Rule rule) {
 		return delegate.visitRule(rule);
 	}
@@ -308,6 +339,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public @Nullable Object visitTransformation(@NonNull Transformation transformation) {
 		return delegate.visitTransformation(transformation);
 	}
@@ -315,6 +347,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public @Nullable Object visitTypedModel(@NonNull TypedModel typedModel) {
 		return delegate.visitTypedModel(typedModel);
 	}
@@ -322,6 +355,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
+	@Override
 	public @Nullable Object visitUnit(@NonNull Unit unit) {
 		return delegate.visitUnit(unit);
 	}
@@ -329,35 +363,40 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
 	/**
      * Delegates to my decorated visitor.
      */
-    public @Nullable Object visitVariableAssignment(@NonNull VariableAssignment variableAssignment) {
+    @Override
+	public @Nullable Object visitVariableAssignment(@NonNull VariableAssignment variableAssignment) {
     	return delegate.visitVariableAssignment(variableAssignment);
     }
 
     /**
      * Delegates to my decorated visitor.
      */
-    public @Nullable Object visitImperativeModel(@NonNull ImperativeModel imperativeModel) {
+    @Override
+	public @Nullable Object visitImperativeModel(@NonNull ImperativeModel imperativeModel) {
     	return delegate.visitImperativeModel(imperativeModel);
 	}
 
 	/**
      * Delegates to my decorated visitor.
      */
-    public @Nullable Object visitMapping(@NonNull Mapping mapping) {
+    @Override
+	public @Nullable Object visitMapping(@NonNull Mapping mapping) {
     	return delegate.visitMapping(mapping);
 	}
 
 	/**
      * Delegates to my decorated visitor.
      */
-    public @Nullable Object visitMappingCall(@NonNull MappingCall mappingCall) {
+    @Override
+	public @Nullable Object visitMappingCall(@NonNull MappingCall mappingCall) {
     	return delegate.visitMappingCall(mappingCall);
 	}
 
 	/**
      * Delegates to my decorated visitor.
      */
-    public @Nullable Object visitMappingCallBinding(@NonNull MappingCallBinding mappingCallBinding) {
+    @Override
+	public @Nullable Object visitMappingCallBinding(@NonNull MappingCallBinding mappingCallBinding) {
     	return delegate.visitMappingCallBinding(mappingCallBinding);
 	}
 

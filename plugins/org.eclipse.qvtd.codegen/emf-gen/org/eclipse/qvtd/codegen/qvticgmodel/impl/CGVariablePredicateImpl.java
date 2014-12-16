@@ -71,6 +71,7 @@ public class CGVariablePredicateImpl extends CGPredicateImpl implements CGVariab
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGVariable getPredicateVariable() {
 		return predicateVariable;
 	}
@@ -95,6 +96,7 @@ public class CGVariablePredicateImpl extends CGPredicateImpl implements CGVariab
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPredicateVariable(CGVariable newPredicateVariable) {
 		if (newPredicateVariable != predicateVariable) {
 			NotificationChain msgs = null;

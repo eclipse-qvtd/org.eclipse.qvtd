@@ -16,7 +16,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -101,6 +100,7 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<OCLExpression> getMember() {
 		if (member == null) {
 			member = new EObjectContainmentEList<OCLExpression>(OCLExpression.class, this, QVTtemplatePackage.COLLECTION_TEMPLATE_EXP__MEMBER);
@@ -113,8 +113,9 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CollectionType getReferredCollectionType() {
-		if (referredCollectionType != null && ((EObject)referredCollectionType).eIsProxy()) {
+		if (referredCollectionType != null && referredCollectionType.eIsProxy()) {
 			InternalEObject oldReferredCollectionType = (InternalEObject)referredCollectionType;
 			referredCollectionType = (CollectionType)eResolveProxy(oldReferredCollectionType);
 			if (referredCollectionType != oldReferredCollectionType) {
@@ -139,6 +140,7 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReferredCollectionType(CollectionType newReferredCollectionType) {
 		CollectionType oldReferredCollectionType = referredCollectionType;
 		referredCollectionType = newReferredCollectionType;
@@ -151,8 +153,9 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Variable getRest() {
-		if (rest != null && ((EObject)rest).eIsProxy()) {
+		if (rest != null && rest.eIsProxy()) {
 			InternalEObject oldRest = (InternalEObject)rest;
 			rest = (Variable)eResolveProxy(oldRest);
 			if (rest != oldRest) {
@@ -177,6 +180,7 @@ public class CollectionTemplateExpImpl extends TemplateExpImpl implements Collec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRest(Variable newRest) {
 		Variable oldRest = rest;
 		rest = newRest;

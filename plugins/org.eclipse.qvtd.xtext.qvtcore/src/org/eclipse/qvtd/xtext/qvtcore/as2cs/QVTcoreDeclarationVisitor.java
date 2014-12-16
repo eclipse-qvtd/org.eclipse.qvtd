@@ -29,19 +29,19 @@ import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
-import org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.MappingCS;
-import org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.QVTcoreCSPackage;
-import org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtcorebase.as2cs.QVTcoreBaseDeclarationVisitor;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.AssignmentCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.BottomPatternCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.DomainCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.GuardPatternCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.QVTcoreBaseCSPackage;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.QueryCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.RealizedVariableCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.TransformationCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.UnrealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS;
+import org.eclipse.qvtd.xtext.qvtcorecs.MappingCS;
+import org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage;
+import org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS;
 
 public class QVTcoreDeclarationVisitor extends QVTcoreBaseDeclarationVisitor implements QVTcoreVisitor<ElementCS>
 {
@@ -49,6 +49,7 @@ public class QVTcoreDeclarationVisitor extends QVTcoreBaseDeclarationVisitor imp
 		super(context);
 	}
 
+	@Override
 	public ElementCS visitBottomPattern(@NonNull BottomPattern asBottomPattern) {
 		BottomPatternCS csBottomPattern = context.refreshElement(BottomPatternCS.class, QVTcoreBaseCSPackage.Literals.BOTTOM_PATTERN_CS, asBottomPattern);
 		csBottomPattern.setPivot(asBottomPattern);
@@ -60,6 +61,7 @@ public class QVTcoreDeclarationVisitor extends QVTcoreBaseDeclarationVisitor imp
 		return csBottomPattern;
 	}
 
+	@Override
 	public ElementCS visitCoreModel(@NonNull CoreModel asModel) {
 		assert asModel.eContainer() == null;
 		TopLevelCS csDocument = context.refreshElement(TopLevelCS.class, QVTcoreCSPackage.Literals.TOP_LEVEL_CS, asModel);
@@ -120,6 +122,7 @@ public class QVTcoreDeclarationVisitor extends QVTcoreBaseDeclarationVisitor imp
 		return csDocument;
 	}
 
+	@Override
 	public ElementCS visitGuardPattern(@NonNull GuardPattern asGuardPattern) {
 		GuardPatternCS csGuardPattern = context.refreshElement(GuardPatternCS.class, QVTcoreBaseCSPackage.Literals.GUARD_PATTERN_CS, asGuardPattern);
 		csGuardPattern.setPivot(asGuardPattern);
@@ -128,6 +131,7 @@ public class QVTcoreDeclarationVisitor extends QVTcoreBaseDeclarationVisitor imp
 		return csGuardPattern;
 	}
 
+	@Override
 	public ElementCS visitMapping(@NonNull Mapping asMapping) {
 		MappingCS csMapping = context.refreshNamedElement(MappingCS.class, QVTcoreCSPackage.Literals.MAPPING_CS, asMapping);
 		csMapping.setPivot(asMapping);

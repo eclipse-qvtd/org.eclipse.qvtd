@@ -31,6 +31,7 @@ public abstract class AbstractWrappingQVTcoreVisitor<R, C, D extends QVTcoreVisi
 		super(delegate, context);
 	}
 
+	@Override
 	public @Nullable R visitCoreModel(@NonNull org.eclipse.qvtd.pivot.qvtcore.CoreModel object) {
 		P prologue = preVisit(object);
 		try {
@@ -42,6 +43,7 @@ public abstract class AbstractWrappingQVTcoreVisitor<R, C, D extends QVTcoreVisi
 		}
 	}
 
+	@Override
 	public @Nullable R visitMapping(@NonNull org.eclipse.qvtd.pivot.qvtcore.Mapping object) {
 		P prologue = preVisit(object);
 		try {

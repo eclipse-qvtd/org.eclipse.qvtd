@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.pivot.OCLExpression;
 
 /**
@@ -29,6 +28,6 @@ import org.eclipse.ocl.pivot.OCLExpression;
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMappingStatement()
  * @generated
  */
-public interface MappingStatement extends EObject, OCLExpression {
+public interface MappingStatement extends OCLExpression {
 
 } // MappingStatement

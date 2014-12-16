@@ -18,7 +18,6 @@
 package	org.eclipse.qvtd.pivot.qvtimperative.util;
 
 import java.lang.Boolean;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.AS2XMIid;
@@ -44,42 +43,52 @@ public abstract class AbstractQVTimperativeAS2XMIidVisitor
 		super(context);
 	}	
 
+	@Override
 	public @Nullable Boolean visitImperativeModel(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel object) {
 		return visitBaseModel(object);
 	}
 
+	@Override
 	public @Nullable Boolean visitMapping(@NonNull org.eclipse.qvtd.pivot.qvtimperative.Mapping object) {
 		return visitRule(object);
 	}
 
+	@Override
 	public @Nullable Boolean visitMappingCall(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingCall object) {
 		return visitMappingStatement(object);
 	}
 
+	@Override
 	public @Nullable Boolean visitMappingCallBinding(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding object) {
 		return visitElement(object);
 	}
 
+	@Override
 	public @Nullable Boolean visitMappingLoop(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingLoop object) {
 		return visitLoopExp(object);
 	}
 
+	@Override
 	public @Nullable Boolean visitMappingSequence(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingSequence object) {
 		return visitMappingStatement(object);
 	}
 
+	@Override
 	public @Nullable Boolean visitMappingStatement(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingStatement object) {
 		return visitOCLExpression(object);
 	}
 
+	@Override
 	public @Nullable Boolean visitMiddlePropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment object) {
 		return visitPropertyAssignment(object);
 	}
 
+	@Override
 	public @Nullable Boolean visitMiddlePropertyCallExp(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp object) {
 		return visitOppositePropertyCallExp(object);
 	}
 
+	@Override
 	public @Nullable Boolean visitVariablePredicate(@NonNull org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate object) {
 		return visitPredicate(object);
 	}

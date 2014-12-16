@@ -112,6 +112,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull CGEcorePropertyAssignment createCGEcorePropertyAssignment() {
 		CGEcorePropertyAssignmentImpl cgEcorePropertyAssignment = new CGEcorePropertyAssignmentImpl();
 		return cgEcorePropertyAssignment;
@@ -122,6 +123,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull CGEcoreRealizedVariable createCGEcoreRealizedVariable() {
 		CGEcoreRealizedVariableImpl cgEcoreRealizedVariable = new CGEcoreRealizedVariableImpl();
 		return cgEcoreRealizedVariable;
@@ -132,6 +134,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull CGFunction createCGFunction() {
 		CGFunctionImpl cgFunction = new CGFunctionImpl();
 		return cgFunction;
@@ -142,6 +145,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull CGFunctionCallExp createCGFunctionCallExp() {
 		CGFunctionCallExpImpl cgFunctionCallExp = new CGFunctionCallExpImpl();
 		return cgFunctionCallExp;
@@ -152,6 +156,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull CGFunctionParameter createCGFunctionParameter() {
 		CGFunctionParameterImpl cgFunctionParameter = new CGFunctionParameterImpl();
 		return cgFunctionParameter;
@@ -162,6 +167,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull CGGuardVariable createCGGuardVariable() {
 		CGGuardVariableImpl cgGuardVariable = new CGGuardVariableImpl();
 		return cgGuardVariable;
@@ -172,6 +178,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull CGMapping createCGMapping() {
 		CGMappingImpl cgMapping = new CGMappingImpl();
 		return cgMapping;
@@ -182,6 +189,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull CGMappingCall createCGMappingCall() {
 		CGMappingCallImpl cgMappingCall = new CGMappingCallImpl();
 		return cgMappingCall;
@@ -192,6 +200,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull CGMappingCallBinding createCGMappingCallBinding() {
 		CGMappingCallBindingImpl cgMappingCallBinding = new CGMappingCallBindingImpl();
 		return cgMappingCallBinding;
@@ -202,6 +211,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull CGMappingExp createCGMappingExp() {
 		CGMappingExpImpl cgMappingExp = new CGMappingExpImpl();
 		return cgMappingExp;
@@ -212,6 +222,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGMappingLoop createCGMappingLoop() {
 		CGMappingLoopImpl cgMappingLoop = new CGMappingLoopImpl();
 		return cgMappingLoop;
@@ -222,6 +233,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull CGMiddlePropertyAssignment createCGMiddlePropertyAssignment() {
 		CGMiddlePropertyAssignmentImpl cgMiddlePropertyAssignment = new CGMiddlePropertyAssignmentImpl();
 		return cgMiddlePropertyAssignment;
@@ -232,6 +244,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull CGMiddlePropertyCallExp createCGMiddlePropertyCallExp() {
 		CGMiddlePropertyCallExpImpl cgMiddlePropertyCallExp = new CGMiddlePropertyCallExpImpl();
 		return cgMiddlePropertyCallExp;
@@ -242,6 +255,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull CGPredicate createCGPredicate() {
 		CGPredicateImpl cgPredicate = new CGPredicateImpl();
 		return cgPredicate;
@@ -252,6 +266,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull CGPropertyAssignment createCGPropertyAssignment() {
 		CGPropertyAssignmentImpl cgPropertyAssignment = new CGPropertyAssignmentImpl();
 		return cgPropertyAssignment;
@@ -262,6 +277,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull CGRealizedVariable createCGRealizedVariable() {
 		CGRealizedVariableImpl cgRealizedVariable = new CGRealizedVariableImpl();
 		return cgRealizedVariable;
@@ -272,6 +288,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGSequence createCGSequence() {
 		CGSequenceImpl cgSequence = new CGSequenceImpl();
 		return cgSequence;
@@ -282,6 +299,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull CGTransformation createCGTransformation() {
 		CGTransformationImpl cgTransformation = new CGTransformationImpl();
 		return cgTransformation;
@@ -292,6 +310,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull CGTypedModel createCGTypedModel() {
 		CGTypedModelImpl cgTypedModel = new CGTypedModelImpl();
 		return cgTypedModel;
@@ -302,6 +321,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGVariablePredicate createCGVariablePredicate() {
 		CGVariablePredicateImpl cgVariablePredicate = new CGVariablePredicateImpl();
 		return cgVariablePredicate;
@@ -312,6 +332,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	@SuppressWarnings("null")
 	public @NonNull QVTiCGModelPackage getQVTiCGModelPackage() {
 		return (QVTiCGModelPackage)getEPackage();

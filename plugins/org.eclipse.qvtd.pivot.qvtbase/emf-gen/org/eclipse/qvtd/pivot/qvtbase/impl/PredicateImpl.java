@@ -75,6 +75,7 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OCLExpression getConditionExpression() {
 		return conditionExpression;
 	}
@@ -99,6 +100,7 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setConditionExpression(OCLExpression newConditionExpression) {
 		if (newConditionExpression != conditionExpression) {
 			NotificationChain msgs = null;
@@ -118,6 +120,7 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Pattern getPattern() {
 		if (eContainerFeatureID() != QVTbasePackage.PREDICATE__PATTERN) return null;
 		return (Pattern)eInternalContainer();
@@ -138,6 +141,7 @@ public class PredicateImpl extends ElementImpl implements Predicate {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setPattern(Pattern newPattern) {
 		if (newPattern != eInternalContainer() || (eContainerFeatureID() != QVTbasePackage.PREDICATE__PATTERN && newPattern != null)) {
 			if (EcoreUtil.isAncestor(this, newPattern))

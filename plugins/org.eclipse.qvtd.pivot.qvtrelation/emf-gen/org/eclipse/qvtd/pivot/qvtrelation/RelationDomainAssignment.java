@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtrelation;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Variable;
@@ -32,7 +31,7 @@ import org.eclipse.ocl.pivot.Variable;
  * @model
  * @generated
  */
-public interface RelationDomainAssignment extends EObject, Element {
+public interface RelationDomainAssignment extends Element {
 	/**
 	 * Returns the value of the '<em><b>Value Exp</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

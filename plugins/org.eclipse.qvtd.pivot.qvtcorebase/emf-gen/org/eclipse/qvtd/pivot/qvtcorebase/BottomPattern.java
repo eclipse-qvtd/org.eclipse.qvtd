@@ -49,6 +49,7 @@ public interface BottomPattern extends CorePattern {
 	 * @model opposite="bottomPattern" required="true"
 	 * @generated
 	 */
+	@Override
 	Area getArea();
 
 	/**

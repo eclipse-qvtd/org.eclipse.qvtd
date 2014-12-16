@@ -89,6 +89,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Mapping getReferredMapping() {
 		if (referredMapping != null && referredMapping.eIsProxy()) {
 			InternalEObject oldReferredMapping = (InternalEObject)referredMapping;
@@ -115,6 +116,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReferredMapping(Mapping newReferredMapping) {
 		Mapping oldReferredMapping = referredMapping;
 		referredMapping = newReferredMapping;
@@ -127,6 +129,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<MappingCallBinding> getBinding() {
 		if (binding == null) {
 			binding = new EObjectContainmentWithInverseEList<MappingCallBinding>(MappingCallBinding.class, this, QVTimperativePackage.MAPPING_CALL__BINDING, QVTimperativePackage.MAPPING_CALL_BINDING__MAPPING_CALL);
@@ -250,6 +253,7 @@ public class MappingCallImpl extends MappingStatementImpl implements MappingCall
 	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
+	@Override
 	public Element getReferredElement() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT

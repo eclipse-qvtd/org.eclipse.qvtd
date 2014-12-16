@@ -27,6 +27,7 @@ public class QVTcorePivotScoping
 {	
 	private static final class GuardVariableDisambiguator implements Comparator<Variable>
 	{
+		@Override
 		public int compare(Variable match1, Variable match2) {
 			Mapping mapping1 = QVTcoreUtil.getContainingMapping(match1);
 			if (mapping1 == null) {

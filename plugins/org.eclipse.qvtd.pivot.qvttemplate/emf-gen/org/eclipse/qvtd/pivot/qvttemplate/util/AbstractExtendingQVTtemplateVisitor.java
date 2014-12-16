@@ -40,18 +40,22 @@ public abstract class AbstractExtendingQVTtemplateVisitor<R, C>
 		super(context);
 	}	
 
+	@Override
 	public @Nullable R visitCollectionTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp object) {
 		return visitTemplateExp(object);
 	}
 
+	@Override
 	public @Nullable R visitObjectTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp object) {
 		return visitTemplateExp(object);
 	}
 
+	@Override
 	public @Nullable R visitPropertyTemplateItem(@NonNull org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem object) {
 		return visitElement(object);
 	}
 
+	@Override
 	public @Nullable R visitTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.TemplateExp object) {
 		return visitLiteralExp(object);
 	}

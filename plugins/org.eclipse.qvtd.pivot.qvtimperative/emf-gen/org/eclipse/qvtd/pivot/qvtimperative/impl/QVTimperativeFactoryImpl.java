@@ -88,6 +88,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ImperativeModel createImperativeModel() {
 		ImperativeModelImpl imperativeModel = new ImperativeModelImpl();
 		return imperativeModel;
@@ -98,6 +99,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Mapping createMapping() {
 		MappingImpl mapping = new MappingImpl();
 		return mapping;
@@ -108,6 +110,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MappingCall createMappingCall() {
 		MappingCallImpl mappingCall = new MappingCallImpl();
 		return mappingCall;
@@ -118,6 +121,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MappingCallBinding createMappingCallBinding() {
 		MappingCallBindingImpl mappingCallBinding = new MappingCallBindingImpl();
 		return mappingCallBinding;
@@ -128,6 +132,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MappingLoop createMappingLoop() {
 		MappingLoopImpl mappingLoop = new MappingLoopImpl();
 		return mappingLoop;
@@ -138,6 +143,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MappingSequence createMappingSequence() {
 		MappingSequenceImpl mappingSequence = new MappingSequenceImpl();
 		return mappingSequence;
@@ -148,6 +154,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MiddlePropertyAssignment createMiddlePropertyAssignment() {
 		MiddlePropertyAssignmentImpl middlePropertyAssignment = new MiddlePropertyAssignmentImpl();
 		return middlePropertyAssignment;
@@ -158,6 +165,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public MiddlePropertyCallExp createMiddlePropertyCallExp() {
 		MiddlePropertyCallExpImpl middlePropertyCallExp = new MiddlePropertyCallExpImpl();
 		return middlePropertyCallExp;
@@ -168,6 +176,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public VariablePredicate createVariablePredicate() {
 		VariablePredicateImpl variablePredicate = new VariablePredicateImpl();
 		return variablePredicate;
@@ -178,6 +187,7 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public QVTimperativePackage getQVTimperativePackage() {
 		return (QVTimperativePackage)getEPackage();
 	}

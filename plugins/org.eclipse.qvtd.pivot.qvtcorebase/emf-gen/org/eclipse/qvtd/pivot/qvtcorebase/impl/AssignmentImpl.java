@@ -101,6 +101,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BottomPattern getBottomPattern() {
 		if (eContainerFeatureID() != QVTcoreBasePackage.ASSIGNMENT__BOTTOM_PATTERN) return null;
 		return (BottomPattern)eInternalContainer();
@@ -121,6 +122,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBottomPattern(BottomPattern newBottomPattern) {
 		if (newBottomPattern != eInternalContainer() || (eContainerFeatureID() != QVTcoreBasePackage.ASSIGNMENT__BOTTOM_PATTERN && newBottomPattern != null)) {
 			if (EcoreUtil.isAncestor(this, newBottomPattern))
@@ -142,6 +144,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OCLExpression getValue() {
 		return value;
 	}
@@ -166,6 +169,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(OCLExpression newValue) {
 		if (newValue != value) {
 			NotificationChain msgs = null;
@@ -185,6 +189,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isIsDefault() {
 		return isDefault;
 	}
@@ -194,6 +199,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIsDefault(boolean newIsDefault) {
 		boolean oldIsDefault = isDefault;
 		isDefault = newIsDefault;
@@ -208,6 +214,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void unsetIsDefault() {
 		boolean oldIsDefault = isDefault;
 		boolean oldIsDefaultESet = isDefaultESet;
@@ -222,6 +229,7 @@ public abstract class AssignmentImpl extends ElementImpl implements Assignment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isSetIsDefault() {
 		return isDefaultESet;
 	}

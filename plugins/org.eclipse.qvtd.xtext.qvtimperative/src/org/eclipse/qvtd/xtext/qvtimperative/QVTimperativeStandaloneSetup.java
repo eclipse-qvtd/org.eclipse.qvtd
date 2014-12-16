@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtimperative;
 
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePivotStandaloneSetup;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.QVTimperativeCSPackage;
+import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 
 import com.google.inject.Injector;
 

@@ -109,6 +109,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 	{
 		public static final @NonNull CGMappingCallBindingComparator INSTANCE = new CGMappingCallBindingComparator();
 
+		@Override
 		public int compare(CGMappingCallBinding o1, CGMappingCallBinding o2) {
 			MappingCallBinding b1 = (MappingCallBinding) o1.getAst();
 			MappingCallBinding b2 = (MappingCallBinding) o2.getAst();
@@ -126,6 +127,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 	{
 		public static final @NonNull CGVariableComparator INSTANCE = new CGVariableComparator();
 
+		@Override
 		public int compare(CGVariable o1, CGVariable o2) {
 			Variable v1 = (Variable) o1.getAst();
 			Variable v2 = (Variable) o2.getAst();
@@ -168,6 +170,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		}
 		Collections.sort(pRealizedVariables, new Comparator<NamedElement>()
 			{
+				@Override
 				public int compare(NamedElement o1, NamedElement o2) {
 					return o1.getName().compareTo(o2.getName());
 				}		
@@ -220,6 +223,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		}
 		Collections.sort(pGuardVariables, new Comparator<NamedElement>()
 			{
+				@Override
 				public int compare(NamedElement o1, NamedElement o2) {
 					return o1.getName().compareTo(o2.getName());
 				}		
@@ -245,6 +249,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		}
 		Collections.sort(cgFreeVariables, new Comparator<CGGuardVariable>()
 		{
+			@Override
 			public int compare(CGGuardVariable o1, CGGuardVariable o2) {
 				String n1 = o1.getName();
 				String n2 = o2.getName();
@@ -253,6 +258,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		});
 		Collections.sort(cgBoundVariables, new Comparator<CGFinalVariable>()
 		{
+			@Override
 			public int compare(CGFinalVariable o1, CGFinalVariable o2) {
 				String n1 = o1.getName();
 				String n2 = o2.getName();
@@ -326,34 +332,42 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		return ClassUtil.nonNullState(analyzer.getTypedModel(asTypedModel));
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitAssignment(@NonNull Assignment object) {
 		return visiting(object);
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitBaseModel(@NonNull BaseModel object) {
 		return visiting(object);
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitBottomPattern(@NonNull BottomPattern object) {
 		return visiting(object);
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitCoreDomain(@NonNull CoreDomain object) {
 		return visiting(object);
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitCorePattern(@NonNull CorePattern object) {
 		return visiting(object);
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitDomain(@NonNull Domain object) {
 		return visiting(object);
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitEnforcementOperation(@NonNull EnforcementOperation object) {
 		return visiting(object);
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitFunction(@NonNull Function asFunction) {
 		CGFunction cgFunction = QVTiCGModelFactory.eINSTANCE.createCGFunction();
 		setAst(cgFunction, asFunction);
@@ -382,18 +396,22 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		return cgFunction;
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitFunctionParameter(@NonNull FunctionParameter asFunctionParameter) {
 		return getFunctionParameter(asFunctionParameter);
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitGuardPattern(@NonNull GuardPattern object) {
 		return visiting(object);
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitImperativeModel(@NonNull ImperativeModel object) {
 		return visiting(object);
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitMapping(@NonNull Mapping pMapping) {
 		CGMapping cgMapping = QVTiCGModelFactory.eINSTANCE.createCGMapping();
 		setAst(cgMapping, pMapping);
@@ -417,6 +435,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		return cgMapping;
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitMappingCall(@NonNull MappingCall asMappingCall) {
 		CGMappingCall cgMappingCall = QVTiCGModelFactory.eINSTANCE.createCGMappingCall();
 		setAst(cgMappingCall, asMappingCall);
@@ -430,6 +449,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		return cgMappingCall;
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitMappingCallBinding(@NonNull MappingCallBinding asMappingCallBinding) {
 		Variable asBoundVariable = asMappingCallBinding.getBoundVariable();
 		CGMappingCallBinding cgMappingCallBinding = QVTiCGModelFactory.eINSTANCE.createCGMappingCallBinding();
@@ -443,6 +463,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		return cgMappingCallBinding;
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitMappingLoop(@NonNull MappingLoop asMappingLoop) {
 		CGMappingLoop cgMappingLoop = QVTiCGModelFactory.eINSTANCE.createCGMappingLoop();
 		List<Variable> asIterators = asMappingLoop.getIterator();
@@ -469,6 +490,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		return cgMappingLoop;
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitMappingSequence(@NonNull MappingSequence asMappingSequence) {
 		CGSequence cgSequence = QVTiCGModelFactory.eINSTANCE.createCGSequence();
 		List<CGValuedElement> cgMappingStatements = cgSequence.getStatements();
@@ -479,10 +501,12 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		return cgSequence;
 	}
 	
+	@Override
 	public @Nullable CGNamedElement visitMappingStatement(@NonNull MappingStatement object) {
 		return visiting(object);
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment asPropertyAssignment) {
 //		Property asProperty = ClassUtil.nonNullModel(asPropertyAssignment.getTargetProperty());
 		CGMiddlePropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyAssignment();
@@ -505,6 +529,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		return cgPropertyAssignment;
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp asMiddlePropertyCallExp) {
 		Property asOppositeProperty = ClassUtil.nonNullModel(asMiddlePropertyCallExp.getReferredProperty());
 		Property asProperty = ClassUtil.nonNullModel(asOppositeProperty.getOpposite());
@@ -544,10 +569,12 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		}
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitPattern(@NonNull Pattern object) {
 		return visiting(object);
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitPredicate(@NonNull Predicate asPredicate) {
 		CGPredicate cgPredicate = QVTiCGModelFactory.eINSTANCE.createCGPredicate();
 //		setPivot(cgPredicate, asPredicate);
@@ -558,6 +585,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		return cgPredicate;
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitPropertyAssignment(@NonNull PropertyAssignment asPropertyAssignment) {
 		Property asTargetProperty = ClassUtil.nonNullModel(asPropertyAssignment.getTargetProperty());
 		LibraryProperty libraryProperty = metaModelManager.getImplementation(null, asTargetProperty);
@@ -592,20 +620,24 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		return cgPropertyAssignment;
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitRealizedVariable(@NonNull RealizedVariable object) {
 //		CGExecutorType cgExecutorType = context.createExecutorType(pTypeExp.getReferredType());
 //		cgTypeExp.setExecutorType(cgExecutorType);
 		return visiting(object);
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitRule(@NonNull Rule object) {
 		return visiting(object);
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitVariableAssignment(@NonNull VariableAssignment object) {
 		return visiting(object);
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitTransformation(@NonNull Transformation asTransformation) {
 		CGTransformation cgTransformation = QVTiCGModelFactory.eINSTANCE.createCGTransformation();
 		setAst(cgTransformation, asTransformation);
@@ -626,6 +658,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		return cgTransformation;
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitTypedModel(@NonNull TypedModel asTypedModel) {
 		CGTypedModel cgTypedModel = QVTiCGModelFactory.eINSTANCE.createCGTypedModel();
 		setAst(cgTypedModel, asTypedModel);
@@ -633,10 +666,12 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		return cgTypedModel;
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitUnit(@NonNull Unit object) {
 		return visiting(object);
 	}
 
+	@Override
 	public @Nullable CGNamedElement visitVariablePredicate(@NonNull VariablePredicate asPredicate) {
 		CGVariablePredicate cgPredicate = QVTiCGModelFactory.eINSTANCE.createCGVariablePredicate();
 //		setPivot(cgPredicate, asPredicate);

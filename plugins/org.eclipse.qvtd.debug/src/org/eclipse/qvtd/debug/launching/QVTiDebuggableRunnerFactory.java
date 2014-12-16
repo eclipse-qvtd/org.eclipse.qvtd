@@ -40,9 +40,8 @@ public class QVTiDebuggableRunnerFactory extends DebuggableRunnerFactory
 
 	public @NonNull DebuggableRunner createRunner(@NonNull EvaluationContext evaluationContext) throws DiagnosticException {
 		QVTiEvaluationContext qvtiEvaluationContext = (QVTiEvaluationContext)evaluationContext;
-		BasicDiagnostic diagnostic = createDiagnostic("Transformation runner problems");
-		
-		URI uri = null;
+		@SuppressWarnings("unused") BasicDiagnostic diagnostic = createDiagnostic("Transformation runner problems");
+		@SuppressWarnings("unused") URI uri = null;
 //		try {
 			uri = qvtiEvaluationContext.getTransformationURI(); //toURI(this.transformationURI, "transformation");
 //		} catch(DiagnosticException e) {

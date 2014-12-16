@@ -13,7 +13,6 @@ package org.eclipse.qvtd.pivot.qvttemplate.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -109,6 +108,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public ObjectTemplateExp getObjContainer() {
 		if (eContainerFeatureID() != QVTtemplatePackage.PROPERTY_TEMPLATE_ITEM__OBJ_CONTAINER) return null;
 		return (ObjectTemplateExp)eInternalContainer();
@@ -129,6 +129,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setObjContainer(ObjectTemplateExp newObjContainer) {
 		if (newObjContainer != eInternalContainer() || (eContainerFeatureID() != QVTtemplatePackage.PROPERTY_TEMPLATE_ITEM__OBJ_CONTAINER && newObjContainer != null)) {
 			if (EcoreUtil.isAncestor(this, newObjContainer))
@@ -150,8 +151,9 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Property getReferredProperty() {
-		if (referredProperty != null && ((EObject)referredProperty).eIsProxy()) {
+		if (referredProperty != null && referredProperty.eIsProxy()) {
 			InternalEObject oldReferredProperty = (InternalEObject)referredProperty;
 			referredProperty = (Property)eResolveProxy(oldReferredProperty);
 			if (referredProperty != oldReferredProperty) {
@@ -176,6 +178,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setReferredProperty(Property newReferredProperty) {
 		Property oldReferredProperty = referredProperty;
 		referredProperty = newReferredProperty;
@@ -188,6 +191,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OCLExpression getValue() {
 		return value;
 	}
@@ -212,6 +216,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setValue(OCLExpression newValue) {
 		if (newValue != value) {
 			NotificationChain msgs = null;
@@ -231,6 +236,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isIsOpposite() {
 		return isOpposite;
 	}
@@ -240,6 +246,7 @@ public class PropertyTemplateItemImpl extends ElementImpl implements PropertyTem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setIsOpposite(boolean newIsOpposite) {
 		boolean oldIsOpposite = isOpposite;
 		isOpposite = newIsOpposite;

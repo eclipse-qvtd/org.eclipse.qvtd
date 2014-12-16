@@ -70,6 +70,7 @@ public class CGFunctionCallExpImpl extends CGOperationCallExpImpl implements CGF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGFunction getFunction() {
 		return function;
 	}
@@ -79,6 +80,7 @@ public class CGFunctionCallExpImpl extends CGOperationCallExpImpl implements CGF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setFunction(CGFunction newFunction) {
 		CGFunction oldFunction = function;
 		function = newFunction;

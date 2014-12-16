@@ -36,10 +36,12 @@ public abstract class AbstractDelegatingQVTcoreVisitor<R, C, D extends QVTcoreVi
 		return delegate.visiting(visitable);
 	}
 
+	@Override
 	public @Nullable R visitCoreModel(@NonNull org.eclipse.qvtd.pivot.qvtcore.CoreModel object) {
 		return delegate.visitCoreModel(object);
 	}
 
+	@Override
 	public @Nullable R visitMapping(@NonNull org.eclipse.qvtd.pivot.qvtcore.Mapping object) {
 		return delegate.visitMapping(object);
 	}

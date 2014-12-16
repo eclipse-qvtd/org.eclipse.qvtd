@@ -28,21 +28,25 @@ public class QVTtemplateToStringVisitor extends QVTbaseToStringVisitor implement
 		super(s);
 	}
 
+	@Override
 	public String visitCollectionTemplateExp(@NonNull CollectionTemplateExp object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public String visitObjectTemplateExp(@NonNull ObjectTemplateExp object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public String visitPropertyTemplateItem(@NonNull PropertyTemplateItem object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public String visitTemplateExp(@NonNull TemplateExp object) {
 		// TODO Auto-generated method stub
 		return null;

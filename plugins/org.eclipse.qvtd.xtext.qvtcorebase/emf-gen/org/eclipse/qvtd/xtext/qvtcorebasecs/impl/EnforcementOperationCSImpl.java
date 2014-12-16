@@ -1,0 +1,261 @@
+/*******************************************************************************
+ * Copyright (c) 2012 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial API and implementation
+ *******************************************************************************/
+package org.eclipse.qvtd.xtext.qvtcorebasecs.impl;
+
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.xtext.basecs.impl.ModelElementCSImpl;
+import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
+import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.util.QVTcoreBaseCSVisitor;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>Enforcement Operation CS</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.EnforcementOperationCSImpl#isDeletion <em>Deletion</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.EnforcementOperationCSImpl#getOperationCall <em>Operation Call</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @generated
+ */
+public class EnforcementOperationCSImpl extends ModelElementCSImpl implements EnforcementOperationCS {
+	/**
+	 * The default value of the '{@link #isDeletion() <em>Deletion</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDeletion()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean DELETION_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isDeletion() <em>Deletion</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDeletion()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean deletion = DELETION_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getOperationCall() <em>Operation Call</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOperationCall()
+	 * @generated
+	 * @ordered
+	 */
+	protected NameExpCS operationCall;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EnforcementOperationCSImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return QVTcoreBaseCSPackage.Literals.ENFORCEMENT_OPERATION_CS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isDeletion() {
+		return deletion;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setDeletion(boolean newDeletion) {
+		boolean oldDeletion = deletion;
+		deletion = newDeletion;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__DELETION, oldDeletion, deletion));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NameExpCS getOperationCall() {
+		return operationCall;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOperationCall(NameExpCS newOperationCall, NotificationChain msgs) {
+		NameExpCS oldOperationCall = operationCall;
+		operationCall = newOperationCall;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OPERATION_CALL, oldOperationCall, newOperationCall);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOperationCall(NameExpCS newOperationCall) {
+		if (newOperationCall != operationCall) {
+			NotificationChain msgs = null;
+			if (operationCall != null)
+				msgs = ((InternalEObject)operationCall).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OPERATION_CALL, null, msgs);
+			if (newOperationCall != null)
+				msgs = ((InternalEObject)newOperationCall).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OPERATION_CALL, null, msgs);
+			msgs = basicSetOperationCall(newOperationCall, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OPERATION_CALL, newOperationCall, newOperationCall));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OPERATION_CALL:
+				return basicSetOperationCall(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID) {
+			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__DELETION:
+				return isDeletion();
+			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OPERATION_CALL:
+				return getOperationCall();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID) {
+			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__DELETION:
+				setDeletion((Boolean)newValue);
+				return;
+			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OPERATION_CALL:
+				setOperationCall((NameExpCS)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID) {
+			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__DELETION:
+				setDeletion(DELETION_EDEFAULT);
+				return;
+			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OPERATION_CALL:
+				setOperationCall((NameExpCS)null);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID) {
+			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__DELETION:
+				return deletion != DELETION_EDEFAULT;
+			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OPERATION_CALL:
+				return operationCall != null;
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public @Nullable <R> R accept(@NonNull BaseCSVisitor<R> visitor) {
+		return (R) ((QVTcoreBaseCSVisitor<?>)visitor).visitEnforcementOperationCS(this);
+	}
+} //EnforcementOperationCSImpl

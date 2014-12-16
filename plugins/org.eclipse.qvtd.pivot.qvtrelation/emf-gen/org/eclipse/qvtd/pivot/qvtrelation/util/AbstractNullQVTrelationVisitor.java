@@ -36,38 +36,47 @@ public abstract class AbstractNullQVTrelationVisitor<R, C>
 		super(context);
 	}	
 
+	@Override
 	public @Nullable R visitDomainPattern(@NonNull org.eclipse.qvtd.pivot.qvtrelation.DomainPattern object) {
 		return null;
 	}
 
+	@Override
 	public @Nullable R visitKey(@NonNull org.eclipse.qvtd.pivot.qvtrelation.Key object) {
 		return null;
 	}
 
+	@Override
 	public @Nullable R visitRelation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.Relation object) {
 		return null;
 	}
 
+	@Override
 	public @Nullable R visitRelationCallExp(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp object) {
 		return null;
 	}
 
+	@Override
 	public @Nullable R visitRelationDomain(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationDomain object) {
 		return null;
 	}
 
+	@Override
 	public @Nullable R visitRelationDomainAssignment(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment object) {
 		return null;
 	}
 
+	@Override
 	public @Nullable R visitRelationImplementation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation object) {
 		return null;
 	}
 
+	@Override
 	public @Nullable R visitRelationModel(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationModel object) {
 		return null;
 	}
 
+	@Override
 	public @Nullable R visitRelationalTransformation(@NonNull org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation object) {
 		return null;
 	}

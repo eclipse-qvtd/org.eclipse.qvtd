@@ -31,6 +31,7 @@ public abstract class AbstractWrappingQVTtemplateVisitor<R, C, D extends QVTtemp
 		super(delegate, context);
 	}
 
+	@Override
 	public @Nullable R visitCollectionTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp object) {
 		P prologue = preVisit(object);
 		try {
@@ -42,6 +43,7 @@ public abstract class AbstractWrappingQVTtemplateVisitor<R, C, D extends QVTtemp
 		}
 	}
 
+	@Override
 	public @Nullable R visitObjectTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp object) {
 		P prologue = preVisit(object);
 		try {
@@ -53,6 +55,7 @@ public abstract class AbstractWrappingQVTtemplateVisitor<R, C, D extends QVTtemp
 		}
 	}
 
+	@Override
 	public @Nullable R visitPropertyTemplateItem(@NonNull org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem object) {
 		P prologue = preVisit(object);
 		try {
@@ -64,6 +67,7 @@ public abstract class AbstractWrappingQVTtemplateVisitor<R, C, D extends QVTtemp
 		}
 	}
 
+	@Override
 	public @Nullable R visitTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.TemplateExp object) {
 		P prologue = preVisit(object);
 		try {

@@ -36,10 +36,12 @@ public abstract class AbstractNullQVTcoreVisitor<R, C>
 		super(context);
 	}	
 
+	@Override
 	public @Nullable R visitCoreModel(@NonNull org.eclipse.qvtd.pivot.qvtcore.CoreModel object) {
 		return null;
 	}
 
+	@Override
 	public @Nullable R visitMapping(@NonNull org.eclipse.qvtd.pivot.qvtcore.Mapping object) {
 		return null;
 	}

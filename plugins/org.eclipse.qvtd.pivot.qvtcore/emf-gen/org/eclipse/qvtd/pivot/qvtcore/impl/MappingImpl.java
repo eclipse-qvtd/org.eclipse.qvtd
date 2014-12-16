@@ -128,6 +128,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public GuardPattern getGuardPattern() {
 		return guardPattern;
 	}
@@ -152,6 +153,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setGuardPattern(GuardPattern newGuardPattern) {
 		if (newGuardPattern != guardPattern) {
 			NotificationChain msgs = null;
@@ -171,6 +173,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BottomPattern getBottomPattern() {
 		return bottomPattern;
 	}
@@ -195,6 +198,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setBottomPattern(BottomPattern newBottomPattern) {
 		if (newBottomPattern != bottomPattern) {
 			NotificationChain msgs = null;
@@ -214,6 +218,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Mapping> getSpecification() {
 		if (specification == null) {
 			specification = new EObjectWithInverseResolvingEList.ManyInverse<Mapping>(Mapping.class, this, QVTcorePackage.MAPPING__SPECIFICATION, QVTcorePackage.MAPPING__REFINEMENT);
@@ -226,6 +231,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Mapping> getLocal() {
 		if (local == null) {
 			local = new EObjectContainmentWithInverseEList<Mapping>(Mapping.class, this, QVTcorePackage.MAPPING__LOCAL, QVTcorePackage.MAPPING__CONTEXT);
@@ -238,6 +244,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Mapping getContext() {
 		if (eContainerFeatureID() != QVTcorePackage.MAPPING__CONTEXT) return null;
 		return (Mapping)eInternalContainer();
@@ -258,6 +265,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setContext(Mapping newContext) {
 		if (newContext != eInternalContainer() || (eContainerFeatureID() != QVTcorePackage.MAPPING__CONTEXT && newContext != null)) {
 			if (EcoreUtil.isAncestor(this, newContext))
@@ -279,6 +287,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Mapping> getRefinement() {
 		if (refinement == null) {
 			refinement = new EObjectWithInverseResolvingEList.ManyInverse<Mapping>(Mapping.class, this, QVTcorePackage.MAPPING__REFINEMENT, QVTcorePackage.MAPPING__SPECIFICATION);
@@ -291,6 +300,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Mapping> getAllMappings() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -302,6 +312,7 @@ public class MappingImpl extends RuleImpl implements Mapping {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Variable> getAllVariables() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT

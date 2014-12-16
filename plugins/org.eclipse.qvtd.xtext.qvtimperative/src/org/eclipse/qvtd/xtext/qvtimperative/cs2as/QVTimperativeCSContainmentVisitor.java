@@ -48,18 +48,18 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.AssignmentCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.DomainCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.GuardPatternCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.QueryCS;
-import org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.TransformationCS;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallBindingCS;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallCS;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingLoopCS;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingSequenceCS;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.TopLevelCS;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.util.AbstractQVTimperativeCSContainmentVisitor;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingSequenceCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.util.AbstractQVTimperativeCSContainmentVisitor;
 
 public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSContainmentVisitor
 {

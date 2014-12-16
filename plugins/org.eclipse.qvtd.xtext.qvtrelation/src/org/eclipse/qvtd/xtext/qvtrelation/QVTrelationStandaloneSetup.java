@@ -12,7 +12,7 @@
 package org.eclipse.qvtd.xtext.qvtrelation;
 
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPivotStandaloneSetup;
-import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.QVTrelationCSPackage;
+import org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage;
 
 import com.google.inject.Injector;
 

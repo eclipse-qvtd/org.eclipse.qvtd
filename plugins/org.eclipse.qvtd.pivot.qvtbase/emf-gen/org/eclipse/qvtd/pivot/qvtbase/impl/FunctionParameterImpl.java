@@ -17,7 +17,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNull;
@@ -113,6 +112,7 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public OCLExpression getInitExpression() {
 		return initExpression;
 	}
@@ -137,6 +137,7 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setInitExpression(OCLExpression newInitExpression) {
 		if (newInitExpression != initExpression) {
 			NotificationChain msgs = null;
@@ -156,8 +157,9 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Parameter getRepresentedParameter() {
-		if (representedParameter != null && ((EObject)representedParameter).eIsProxy()) {
+		if (representedParameter != null && representedParameter.eIsProxy()) {
 			InternalEObject oldRepresentedParameter = (InternalEObject)representedParameter;
 			representedParameter = (Parameter)eResolveProxy(oldRepresentedParameter);
 			if (representedParameter != oldRepresentedParameter) {
@@ -182,6 +184,7 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setRepresentedParameter(Parameter newRepresentedParameter) {
 		Parameter oldRepresentedParameter = representedParameter;
 		representedParameter = newRepresentedParameter;
@@ -194,6 +197,7 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean isImplicit() {
 		return implicit;
 	}
@@ -203,6 +207,7 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setImplicit(boolean newImplicit) {
 		boolean oldImplicit = implicit;
 		implicit = newImplicit;
@@ -237,6 +242,7 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public boolean validateCompatibleInitialiserType(DiagnosticChain diagnostics, Map<Object, Object> context) {
 		return
 			PivotValidator.validate

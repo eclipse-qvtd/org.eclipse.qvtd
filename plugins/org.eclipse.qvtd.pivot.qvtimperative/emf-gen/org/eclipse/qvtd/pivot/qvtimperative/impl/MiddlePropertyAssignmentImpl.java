@@ -79,6 +79,7 @@ public class MiddlePropertyAssignmentImpl extends PropertyAssignmentImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Integer getCacheIndex() {
 		return cacheIndex;
 	}
@@ -88,6 +89,7 @@ public class MiddlePropertyAssignmentImpl extends PropertyAssignmentImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setCacheIndex(Integer newCacheIndex) {
 		Integer oldCacheIndex = cacheIndex;
 		cacheIndex = newCacheIndex;

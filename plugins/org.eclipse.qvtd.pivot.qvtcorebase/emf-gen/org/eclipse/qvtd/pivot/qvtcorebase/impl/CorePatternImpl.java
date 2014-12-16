@@ -76,6 +76,7 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	@SuppressWarnings("null")
 	public @NonNull EList<Variable> getVariable() {
 		if (variable == null) {
@@ -89,6 +90,7 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public @NonNull EList<Variable> getAllVariables() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -100,6 +102,7 @@ public class CorePatternImpl extends PatternImpl implements CorePattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Area getArea() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT

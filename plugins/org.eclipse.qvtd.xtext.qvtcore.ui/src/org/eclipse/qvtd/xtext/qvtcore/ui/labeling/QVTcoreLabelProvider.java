@@ -13,8 +13,8 @@ package org.eclipse.qvtd.xtext.qvtcore.ui.labeling;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
-import org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtcorebase.ui.labeling.QVTcoreBaseLabelProvider;
+import org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS;
 
 import com.google.inject.Inject;
 

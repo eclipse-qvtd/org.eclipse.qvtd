@@ -14,9 +14,9 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.xtext.qvtbase.ui.outline.QVTbaseOutlineTreeProvider;
-import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.PredicateCS;
-import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.VarDeclarationCS;
-import org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.VarDeclarationIdCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.PredicateCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS;
+import org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationIdCS;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 
 /**

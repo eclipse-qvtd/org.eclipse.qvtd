@@ -30,45 +30,54 @@ public class QVTcoreBasePrettyPrintVisitor extends QVTbasePrettyPrintVisitor imp
 		super(context);
 	}
 
+	@Override
 	public Object visitAssignment(@NonNull Assignment object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public Object visitBottomPattern(@NonNull BottomPattern object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public Object visitCoreDomain(@NonNull CoreDomain object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public Object visitCorePattern(@NonNull CorePattern object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public Object visitEnforcementOperation(@NonNull EnforcementOperation object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public Object visitGuardPattern(@NonNull GuardPattern object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public Object visitPropertyAssignment(@NonNull PropertyAssignment object) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public Object visitRealizedVariable(@NonNull RealizedVariable object) {
 		return visitVariable(object);
 	}
 
+	@Override
 	public Object visitVariableAssignment(@NonNull VariableAssignment object) {
 		// TODO Auto-generated method stub
 		return null;

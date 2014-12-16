@@ -72,6 +72,7 @@ public class DomainPatternImpl extends PatternImpl implements DomainPattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public TemplateExp getTemplateExpression() {
 		return templateExpression;
 	}
@@ -96,6 +97,7 @@ public class DomainPatternImpl extends PatternImpl implements DomainPattern {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTemplateExpression(TemplateExp newTemplateExpression) {
 		if (newTemplateExpression != templateExpression) {
 			NotificationChain msgs = null;

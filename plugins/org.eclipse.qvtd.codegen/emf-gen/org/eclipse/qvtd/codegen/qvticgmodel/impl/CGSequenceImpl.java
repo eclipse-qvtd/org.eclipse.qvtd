@@ -85,6 +85,7 @@ public class CGSequenceImpl extends CGValuedElementImpl implements CGSequence {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<CGValuedElement> getStatements() {
 		if (statements == null) {
 			statements = new EObjectContainmentEList<CGValuedElement>(CGValuedElement.class, this, QVTiCGModelPackage.CG_SEQUENCE__STATEMENTS);
@@ -180,6 +181,7 @@ public class CGSequenceImpl extends CGValuedElementImpl implements CGSequence {
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		if (this == thatValue) {
 			return Boolean.TRUE;

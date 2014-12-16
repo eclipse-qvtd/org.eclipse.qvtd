@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtbase;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 
@@ -30,7 +29,7 @@ import org.eclipse.ocl.pivot.Operation;
  * @model
  * @generated
  */
-public interface Function extends EObject, Operation {
+public interface Function extends Operation {
 	/**
 	 * Returns the value of the '<em><b>Query Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

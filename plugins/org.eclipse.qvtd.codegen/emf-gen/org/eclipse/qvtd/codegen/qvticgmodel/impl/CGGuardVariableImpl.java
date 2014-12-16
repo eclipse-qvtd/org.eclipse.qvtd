@@ -75,6 +75,7 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGMapping getMapping() {
 		if (eContainerFeatureID() != QVTiCGModelPackage.CG_GUARD_VARIABLE__MAPPING) return null;
 		return (CGMapping)eInternalContainer();
@@ -95,6 +96,7 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMapping(CGMapping newMapping) {
 		if (newMapping != eInternalContainer() || (eContainerFeatureID() != QVTiCGModelPackage.CG_GUARD_VARIABLE__MAPPING && newMapping != null)) {
 			if (EcoreUtil.isAncestor(this, newMapping))
@@ -116,6 +118,7 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGTypedModel getTypedModel() {
 		return typedModel;
 	}
@@ -125,6 +128,7 @@ public class CGGuardVariableImpl extends CGParameterImpl implements CGGuardVaria
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTypedModel(CGTypedModel newTypedModel) {
 		CGTypedModel oldTypedModel = typedModel;
 		typedModel = newTypedModel;

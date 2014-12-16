@@ -93,6 +93,7 @@ public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGValuedElement getConditionExpression() {
 		return conditionExpression;
 	}
@@ -117,6 +118,7 @@ public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setConditionExpression(CGValuedElement newConditionExpression) {
 		if (newConditionExpression != conditionExpression) {
 			NotificationChain msgs = null;
@@ -136,6 +138,7 @@ public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGMappingExp getMappingExp() {
 		if (eContainerFeatureID() != QVTiCGModelPackage.CG_PREDICATE__MAPPING_EXP) return null;
 		return (CGMappingExp)eInternalContainer();
@@ -156,6 +159,7 @@ public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setMappingExp(CGMappingExp newMappingExp) {
 		if (newMappingExp != eInternalContainer() || (eContainerFeatureID() != QVTiCGModelPackage.CG_PREDICATE__MAPPING_EXP && newMappingExp != null)) {
 			if (EcoreUtil.isAncestor(this, newMappingExp))
@@ -177,6 +181,7 @@ public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CGValuedElement getThenExpression() {
 		return thenExpression;
 	}
@@ -201,6 +206,7 @@ public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setThenExpression(CGValuedElement newThenExpression) {
 		if (newThenExpression != thenExpression) {
 			NotificationChain msgs = null;
@@ -395,6 +401,7 @@ public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate 
 	 * {@inheritDoc}
 	 * @generated
 	 */
+	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
 		if (this == thatValue) {
 			return Boolean.TRUE;

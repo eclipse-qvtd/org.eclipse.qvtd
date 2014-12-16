@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvttemplate;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
@@ -34,7 +33,7 @@ import org.eclipse.ocl.pivot.Property;
  * @model
  * @generated
  */
-public interface PropertyTemplateItem extends EObject, Element {
+public interface PropertyTemplateItem extends Element {
 	/**
 	 * Returns the value of the '<em><b>Obj Container</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp#getPart <em>Part</em>}'.

@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtbase;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OCLExpression;
 
@@ -31,7 +30,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
  * @model
  * @generated
  */
-public interface Predicate extends EObject, Element {
+public interface Predicate extends Element {
 	/**
 	 * Returns the value of the '<em><b>Condition Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

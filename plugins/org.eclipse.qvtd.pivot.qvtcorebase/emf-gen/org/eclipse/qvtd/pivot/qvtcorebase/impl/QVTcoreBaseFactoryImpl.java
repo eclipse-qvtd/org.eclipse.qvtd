@@ -120,6 +120,7 @@ public class QVTcoreBaseFactoryImpl extends EFactoryImpl implements QVTcoreBaseF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public BottomPattern createBottomPattern() {
 		BottomPatternImpl bottomPattern = new BottomPatternImpl();
 		return bottomPattern;
@@ -130,6 +131,7 @@ public class QVTcoreBaseFactoryImpl extends EFactoryImpl implements QVTcoreBaseF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CoreDomain createCoreDomain() {
 		CoreDomainImpl coreDomain = new CoreDomainImpl();
 		return coreDomain;
@@ -140,6 +142,7 @@ public class QVTcoreBaseFactoryImpl extends EFactoryImpl implements QVTcoreBaseF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CorePattern createCorePattern() {
 		CorePatternImpl corePattern = new CorePatternImpl();
 		return corePattern;
@@ -150,6 +153,7 @@ public class QVTcoreBaseFactoryImpl extends EFactoryImpl implements QVTcoreBaseF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EnforcementOperation createEnforcementOperation() {
 		EnforcementOperationImpl enforcementOperation = new EnforcementOperationImpl();
 		return enforcementOperation;
@@ -160,6 +164,7 @@ public class QVTcoreBaseFactoryImpl extends EFactoryImpl implements QVTcoreBaseF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public GuardPattern createGuardPattern() {
 		GuardPatternImpl guardPattern = new GuardPatternImpl();
 		return guardPattern;
@@ -170,6 +175,7 @@ public class QVTcoreBaseFactoryImpl extends EFactoryImpl implements QVTcoreBaseF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public PropertyAssignment createPropertyAssignment() {
 		PropertyAssignmentImpl propertyAssignment = new PropertyAssignmentImpl();
 		return propertyAssignment;
@@ -180,6 +186,7 @@ public class QVTcoreBaseFactoryImpl extends EFactoryImpl implements QVTcoreBaseF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public RealizedVariable createRealizedVariable() {
 		RealizedVariableImpl realizedVariable = new RealizedVariableImpl();
 		return realizedVariable;
@@ -190,6 +197,7 @@ public class QVTcoreBaseFactoryImpl extends EFactoryImpl implements QVTcoreBaseF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public VariableAssignment createVariableAssignment() {
 		VariableAssignmentImpl variableAssignment = new VariableAssignmentImpl();
 		return variableAssignment;
@@ -220,6 +228,7 @@ public class QVTcoreBaseFactoryImpl extends EFactoryImpl implements QVTcoreBaseF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public QVTcoreBasePackage getQVTcoreBasePackage() {
 		return (QVTcoreBasePackage)getEPackage();
 	}

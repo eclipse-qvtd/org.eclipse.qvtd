@@ -99,6 +99,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Domain> getDomain() {
 		if (domain == null) {
 			domain = new EObjectContainmentWithInverseEList<Domain>(Domain.class, this, QVTbasePackage.RULE__DOMAIN, QVTbasePackage.DOMAIN__RULE);
@@ -111,6 +112,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Rule getOverrides() {
 		if (overrides != null && overrides.eIsProxy()) {
 			InternalEObject oldOverrides = (InternalEObject)overrides;
@@ -152,6 +154,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setOverrides(Rule newOverrides) {
 		if (newOverrides != overrides) {
 			NotificationChain msgs = null;
@@ -171,6 +174,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Transformation getTransformation() {
 		if (eContainerFeatureID() != QVTbasePackage.RULE__TRANSFORMATION) return null;
 		return (Transformation)eInternalContainer();
@@ -191,6 +195,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public void setTransformation(Transformation newTransformation) {
 		if (newTransformation != eInternalContainer() || (eContainerFeatureID() != QVTbasePackage.RULE__TRANSFORMATION && newTransformation != null)) {
 			if (EcoreUtil.isAncestor(this, newTransformation))
@@ -212,6 +217,7 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public EList<Rule> getOverridden() {
 		if (overridden == null) {
 			overridden = new EObjectWithInverseResolvingEList<Rule>(Rule.class, this, QVTbasePackage.RULE__OVERRIDDEN, QVTbasePackage.RULE__OVERRIDES);

@@ -16,12 +16,12 @@ import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCS;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallBindingCS;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingCallCS;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.MappingLoopCS;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.TopLevelCS;
-import org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.util.AbstractQVTimperativeCSPreOrderVisitor;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
+import org.eclipse.qvtd.xtext.qvtimperativecs.util.AbstractQVTimperativeCSPreOrderVisitor;
 
 public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOrderVisitor
 {	

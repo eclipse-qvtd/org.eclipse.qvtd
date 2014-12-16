@@ -88,6 +88,7 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<CGMapping> getMappings() {
 		if (mappings == null) {
 			mappings = new EObjectContainmentWithInverseEList<CGMapping>(CGMapping.class, this, QVTiCGModelPackage.CG_TRANSFORMATION__MAPPINGS, QVTiCGModelPackage.CG_MAPPING__TRANSFORMATION);
@@ -100,6 +101,7 @@ public class CGTransformationImpl extends CGClassImpl implements CGTransformatio
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public List<CGTypedModel> getTypedModels() {
 		if (typedModels == null) {
 			typedModels = new EObjectContainmentWithInverseEList<CGTypedModel>(CGTypedModel.class, this, QVTiCGModelPackage.CG_TRANSFORMATION__TYPED_MODELS, QVTiCGModelPackage.CG_TYPED_MODEL__TRANSFORMATION);

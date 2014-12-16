@@ -170,6 +170,7 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
     /* (non-Javadoc)
      * @see uk.ac.york.qvtd.pivot.qvtimperative.evaluation.QVTimperativeAbstractEvaluationVisitorImpl#visitMapping(org.eclipse.qvtd.pivot.qvtimperative.Mapping)
      */
+	@Override
 	public @Nullable Object visitMapping(@NonNull Mapping mapping) {
         GuardPattern gp = mapping.getGuardPattern();
         if (gp != null) {

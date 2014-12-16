@@ -20,7 +20,6 @@
 package	org.eclipse.qvtd.pivot.qvttemplate.util;
 
 import java.lang.Object;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.ASSaver;
@@ -46,18 +45,22 @@ public abstract class AbstractQVTtemplateASSaverNormalizeVisitor
 		super(context);
 	}	
 
+	@Override
 	public @Nullable Object visitCollectionTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp object) {
 		return visitTemplateExp(object);
 	}
 
+	@Override
 	public @Nullable Object visitObjectTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp object) {
 		return visitTemplateExp(object);
 	}
 
+	@Override
 	public @Nullable Object visitPropertyTemplateItem(@NonNull org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem object) {
 		return visitElement(object);
 	}
 
+	@Override
 	public @Nullable Object visitTemplateExp(@NonNull org.eclipse.qvtd.pivot.qvttemplate.TemplateExp object) {
 		return visitLiteralExp(object);
 	}

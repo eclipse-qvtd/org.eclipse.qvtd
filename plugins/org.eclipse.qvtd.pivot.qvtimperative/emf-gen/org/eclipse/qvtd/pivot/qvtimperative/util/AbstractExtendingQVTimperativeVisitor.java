@@ -40,42 +40,52 @@ public abstract class AbstractExtendingQVTimperativeVisitor<R, C>
 		super(context);
 	}	
 
+	@Override
 	public @Nullable R visitImperativeModel(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel object) {
 		return visitBaseModel(object);
 	}
 
+	@Override
 	public @Nullable R visitMapping(@NonNull org.eclipse.qvtd.pivot.qvtimperative.Mapping object) {
 		return visitRule(object);
 	}
 
+	@Override
 	public @Nullable R visitMappingCall(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingCall object) {
 		return visitMappingStatement(object);
 	}
 
+	@Override
 	public @Nullable R visitMappingCallBinding(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding object) {
 		return visitElement(object);
 	}
 
+	@Override
 	public @Nullable R visitMappingLoop(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingLoop object) {
 		return visitLoopExp(object);
 	}
 
+	@Override
 	public @Nullable R visitMappingSequence(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingSequence object) {
 		return visitMappingStatement(object);
 	}
 
+	@Override
 	public @Nullable R visitMappingStatement(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MappingStatement object) {
 		return visitOCLExpression(object);
 	}
 
+	@Override
 	public @Nullable R visitMiddlePropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment object) {
 		return visitPropertyAssignment(object);
 	}
 
+	@Override
 	public @Nullable R visitMiddlePropertyCallExp(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp object) {
 		return visitOppositePropertyCallExp(object);
 	}
 
+	@Override
 	public @Nullable R visitVariablePredicate(@NonNull org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate object) {
 		return visitPredicate(object);
 	}

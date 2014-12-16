@@ -76,6 +76,7 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public CoreModel createCoreModel() {
 		CoreModelImpl coreModel = new CoreModelImpl();
 		return coreModel;
@@ -86,6 +87,7 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public Mapping createMapping() {
 		MappingImpl mapping = new MappingImpl();
 		return mapping;
@@ -96,6 +98,7 @@ public class QVTcoreFactoryImpl extends EFactoryImpl implements QVTcoreFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
 	public QVTcorePackage getQVTcorePackage() {
 		return (QVTcorePackage)getEPackage();
 	}
