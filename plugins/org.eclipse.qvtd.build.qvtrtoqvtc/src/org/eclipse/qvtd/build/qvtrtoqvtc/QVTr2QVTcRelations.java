@@ -18,7 +18,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.domain.elements.DomainProperty;
+import org.eclipse.ocl.examples.pivot.Class;
 import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
 import org.eclipse.ocl.examples.pivot.OCLExpression;
 import org.eclipse.ocl.examples.pivot.Operation;
@@ -30,7 +30,6 @@ import org.eclipse.ocl.examples.pivot.Type;
 import org.eclipse.ocl.examples.pivot.Variable;
 import org.eclipse.ocl.examples.pivot.VariableExp;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.OCLExpCopy;
-import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RelationToTraceClass;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RelationalTransformationToMappingTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RuleBindings;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -119,8 +118,6 @@ public class QVTr2QVTcRelations {
 			}
 		} else if (e instanceof CollectionTemplateExp) {
 			CollectionTemplateExp cte = (CollectionTemplateExp) e;
-			if (cte.getRest() != null)
-				vs.add(cte.getRest());
 			for (OCLExpression m : cte.getMember())
 				vs.addAll(getVarsOfExp(m));
 		}
@@ -199,11 +196,17 @@ public class QVTr2QVTcRelations {
 	}
 
 	// 31
+	/**
+	 * Transform a rule implemented by a black box into an enforcement operation
+	 *
+	 * @param r the r
+	 * @param rd the rd
+	 * @param mb the mb
+	 */
 	public void doRRelImplToMBottomEnforcementOperation(Relation r,
 			RelationDomain rd, BottomPattern mb) {
 		
-		// TODO Only code this if we have rules with operational implementations.
-		// Which RelToCore does not have
+		// TODO Code this when testing transformations with operational implementations.
 		
 	}
 	
@@ -406,6 +409,85 @@ public class QVTr2QVTcRelations {
 		}
 	}
 	
+	public void doRelationToTraceClass(@NonNull Relation r, @NonNull Class rc) {
+		
+		transformation.putRelationTrace(r, rc);
+		// check
+		String rn = r.getName();
+		assert rn != null;
+		rc.setName("T"+rn);
+		for (Domain d : r.getDomain()) {
+			RelationDomain rd = (RelationDomain) d;
+			DomainPattern rdp = rd.getPattern();
+			assert rdp != null;
+			TemplateExp t = rdp.getTemplateExpression();
+			assert t != null;
+			doSubObjectTemplateToTraceClassProps(t, rc);
+		    doSubCollectionTemplateToTraceClassProps(t, rc);
+		}
+	}
+	
+	private void doSubObjectTemplateToTraceClassProps(@NonNull TemplateExp t, 
+			@NonNull Class rc) {
+		
+		// check
+		if (t instanceof ObjectTemplateExp) {
+			doObjectTemplateToTraceClassProps((ObjectTemplateExp) t, rc);
+		}
+		
+	}
+	
+	private void doObjectTemplateToTraceClassProps(@NonNull ObjectTemplateExp t,
+			@NonNull Class rc) {
+		
+		// check
+		Variable tv = t.getBindsTo();
+		assert tv != null;
+		Type c = tv.getType();
+		assert c != null;
+		String vn = tv.getName();
+		assert vn != null;
+		// init
+		Property a = transformation.findProperty(vn, rc);
+		assert a != null;
+		// where
+		for (PropertyTemplateItem pt : t.getPart()) {
+			OCLExpression value = pt.getValue();
+			assert value != null;
+			if (value instanceof TemplateExp) {
+				TemplateExp tp = (TemplateExp) value;
+				doSubObjectTemplateToTraceClassProps(tp, rc);
+			    doSubCollectionTemplateToTraceClassProps(tp, rc);
+			}
+		}
+	    // assign
+	    a.setType(c);
+	}
+
+	private void doSubCollectionTemplateToTraceClassProps(@NonNull TemplateExp t,
+			@NonNull Class rc) {
+		
+		// check
+		if (t instanceof CollectionTemplateExp) {
+			doCollectionTemplateToTraceClassProps((CollectionTemplateExp) t, rc);
+		}
+	}
+
+
+	private void doCollectionTemplateToTraceClassProps(@NonNull CollectionTemplateExp t,
+			@NonNull Class rc) {
+		
+		// check
+		for (OCLExpression m : t.getMember()) {
+			if (m instanceof TemplateExp) {
+				TemplateExp tp = (TemplateExp) m; 
+				// Dont add trace attributes for collections, just for the members
+				doSubObjectTemplateToTraceClassProps(tp, rc);
+			    doSubCollectionTemplateToTraceClassProps(tp, rc);
+			}
+		}
+	}
+
 	// 47
 	public void doTROppositeDomainsToMappingForEnforcement(@NonNull Relation r,
 			@NonNull RelationDomain rd, @NonNull Mapping m) {
@@ -431,6 +513,16 @@ public class QVTr2QVTcRelations {
 				List<Variable> domainVars = dp.getBindsTo();
 				ObjectTemplateExp te = (ObjectTemplateExp) dp.getTemplateExpression();
 				assert te != null;
+				// when
+				RelationalTransformationToMappingTransformation whenRule = 
+						new RelationalTransformationToMappingTransformation(transformation, rt); 
+				RuleBindings whenBindings = whenRule.getRuleBindings();
+				RelationalTransformationToMappingTransformation whenRuleRecord = (RelationalTransformationToMappingTransformation) transformation.getRecord(whenBindings);
+				Transformation mt = null;
+				if (whenRuleRecord != null && whenRuleRecord.hasExecuted()) {
+					mt = (Transformation) whenRuleRecord.getCore();
+				}
+				assert mt != null;
 				// init
 				CoreDomain cd = transformation.findCoreDomain(dn, m);
 				GuardPattern dg = transformation.findGuardPattern(cd);
@@ -449,15 +541,7 @@ public class QVTr2QVTcRelations {
 				Set<Variable> domainBottomSharedVars = new HashSet<Variable>(domainVars);
 				domainBottomSharedVars.removeAll(whenVars);
 				domainBottomSharedVars.retainAll(sharedDomainVars);
-				RelationalTransformationToMappingTransformation whenRule = 
-						new RelationalTransformationToMappingTransformation(transformation, rt); 
-				RuleBindings whenBindings = whenRule.getRuleBindings();
-				RelationalTransformationToMappingTransformation whenRuleRecord = (RelationalTransformationToMappingTransformation) transformation.getRecord(whenBindings);
-				Transformation mt = null;
-				if (whenRuleRecord != null && whenRuleRecord.hasExecuted()) {
-					mt = (Transformation) whenRuleRecord.getCore();
-				}
-				assert mt != null;
+				
 				/*List<Variable> dgVars =*/ doRVarSetToDGVarSet(new ArrayList<Variable>(domainTopVars), dg);
 				/*List<Variable> dbVars =*/ doRVarSetToMBVarSet(new ArrayList<Variable>(domainBottomUnSharedVars), db);
 				doRVarSetToMBVarSet(new ArrayList<Variable>(domainBottomSharedVars), mb);
@@ -982,7 +1066,7 @@ public class QVTr2QVTcRelations {
 				ve1.setType(tcv.getType());
 				a.setSlotExpression(ve1);
 				Property tp = getProperty(dv.getName(), tcv.getType());
-				assert tp != null;
+				assert tp != null : "Property " + dv.getName() + ". not found in trace class " + tcv.getType().getName();
 				a.setTargetProperty(tp);
 				ve2.setReferredVariable(mdv);
 				ve2.setType(mdv.getType());
@@ -1047,18 +1131,14 @@ public class QVTr2QVTcRelations {
 	// 39
 	private void doRWhenRelCallArgToMGuardPredicate(@NonNull Relation r, @NonNull VariableExp ve,
 			@NonNull RelationDomain d, @NonNull GuardPattern mg) {
-		// When
-		RelationToTraceClass whenRule = new RelationToTraceClass(transformation, r);
-		RuleBindings whenBindings = whenRule.getRuleBindings();
-		whenRule = (RelationToTraceClass) transformation.getRecord(whenBindings);
-		Type tc = null;
-		if (whenRule != null && whenRule.hasExecuted()) {
-			tc = (Type) whenRule.getCore();
-		}
+		// when
+		Type tc = transformation.getRelationTrace(r);
 		assert tc != null;
 		// check
 		String dvn = d.getRootVariable().getName();
+		assert dvn != null;
 		Variable v = (Variable) ve.getReferredVariable();
+		assert v != null;
 		// init
 		Variable vd = transformation.findVariable(tc.getName()+"_v", tc, mg);
 		Predicate mgp = transformation.createPredicate();
@@ -1067,7 +1147,6 @@ public class QVTr2QVTcRelations {
 		VariableExp pve = transformation.createVariableExp();
 		VariableExp ave = transformation.createVariableExp();
 		// where
-		assert v != null;
 		Variable mv = doRVarToMVar(v);
 		// assign
 		mgp.setConditionExpression(ee);
@@ -1131,7 +1210,8 @@ public class QVTr2QVTcRelations {
 
 		String n = rv.getName();
 		Type t = rv.getType();
-		assert (n != null) && (t != null);
+		assert (n != null);
+		assert (t != null);
 		Variable mv = transformation.findVariable(n, t, pattern);
 		assert mv != null;
 		transformation.putVariableTrace(rv, mv);
@@ -1155,20 +1235,151 @@ public class QVTr2QVTcRelations {
 		String dn = d.getName();
 		assert dn != null;
 		// when
-		RelationToTraceClass whenRule = new RelationToTraceClass(transformation, r);
-		RuleBindings whenBindings = whenRule.getRuleBindings();
-		whenRule = (RelationToTraceClass) transformation.getRecord(whenBindings);
-		Type tc = null;
-		if (whenRule != null && whenRule.hasExecuted()) {
-			tc = (Type) whenRule.getCore();
-		}
+		Type tc = transformation.getRelationTrace(r);
 		assert tc != null;
 		RealizedVariable mv = transformation.findRealizedVariable(rn+"_"+dn+"_v", tc, p);
 		return mv;
 	}
 	
-	
+	public void doIROppositeDomainsToMappingForEnforcement(@NonNull Relation r,
+			@NonNull Relation ir, @NonNull RelationDomain rd, 
+			@NonNull Mapping m) {
+		
+		Set<RelationDomain> rds = new HashSet<RelationDomain>();
+		for (Domain d : r.getDomain()) {
+			rds.add((RelationDomain) d);
+		}
+		rds.remove(rd); // guard
+		for (RelationDomain ord : rds) {
+			// check
+			DomainPattern dp = ord.getPattern();
+			if (dp.getTemplateExpression() instanceof ObjectTemplateExp) {
+				String dn = ord.getName();
+				assert dn != null;
+				TypedModel dir = ord.getTypedModel();
+				String tmn = dir.getName();
+				assert tmn != null;
+				RelationalTransformation rt = (RelationalTransformation) dir.getTransformation();
+				assert rt != null;
+				List<Package> up = dir.getUsedPackage();
+				boolean c = ord.isIsCheckable();
+				List<Variable> domainVars = dp.getBindsTo();
+				ObjectTemplateExp te = (ObjectTemplateExp) dp.getTemplateExpression();
+				assert te != null;
+				Variable tev = te.getBindsTo();
+				// when
+				RelationalTransformationToMappingTransformation whenRule = 
+						new RelationalTransformationToMappingTransformation(transformation, rt); 
+				RuleBindings whenBindings = whenRule.getRuleBindings();
+				RelationalTransformationToMappingTransformation whenRuleRecord = (RelationalTransformationToMappingTransformation) transformation.getRecord(whenBindings);
+				Transformation mt = null;
+				if (whenRuleRecord != null && whenRuleRecord.hasExecuted()) {
+					mt = (Transformation) whenRuleRecord.getCore();
+				}
+				assert mt != null;
+				// init
+				CoreDomain cd = transformation.findCoreDomain(dn, m);
+				GuardPattern dg = transformation.findGuardPattern(cd);
+				BottomPattern db = transformation.findBottomPattern(cd);
+				BottomPattern mb = transformation.findBottomPattern(m);
+				// where
+				Set<Variable> whenVars = new HashSet<Variable>();
+				if (r.getWhen() != null)
+					whenVars.addAll(r.getWhen().getBindsTo());
+				Set<Variable> domainTopVars = new HashSet<Variable>(domainVars);
+				domainTopVars.retainAll(whenVars);
+				domainTopVars.add(tev);
+				Set<Variable> sharedDomainVars = getSharedDomainVars(r);
+				Set<Variable> domainBottomUnSharedVars = new HashSet<Variable>(domainVars);
+				domainBottomUnSharedVars.removeAll(whenVars);
+				domainBottomUnSharedVars.removeAll(sharedDomainVars);
+				domainBottomUnSharedVars.remove(tev);
+				Set<Variable> domainBottomSharedVars = new HashSet<Variable>(domainVars);
+				domainBottomSharedVars.removeAll(whenVars);
+				domainBottomSharedVars.retainAll(sharedDomainVars);
+				domainBottomSharedVars.remove(tev);
+				
+				doRVarSetToDGVarSet(new ArrayList<Variable>(domainTopVars), dg);
+				doRVarSetToMBVarSet(new ArrayList<Variable>(domainBottomUnSharedVars), db);
+				doRVarSetToMBVarSet(new ArrayList<Variable>(domainBottomSharedVars), mb);
+				doRDomainPatternToMDBottomPattern(r, te, db);
+				// assign
+				TypedModel mdir = null;
+				for (TypedModel tm : mt.getModelParameter()) {
+					if (tm.getName().equals(tmn)) {
+						if (tm.getUsedPackage().equals(up)) {
+							mdir = tm;
+							break;
+						}
+					}
+				}
+				cd.setTypedModel(mdir);
+				cd.setIsCheckable(c);
+				cd.setIsEnforceable(false);
+				cd.setGuardPattern(dg);
+				m.setBottomPattern(mb);
+			}
+		}
+		
+	}
 
+	// ?
+	public void doRInvokerToMGuard(@NonNull Relation ir,
+			@NonNull RelationCallExp ri, @NonNull Relation r,
+			@NonNull GuardPattern mg) {
+		
+		// where
+		List<Domain> dseq = new ArrayList<Domain>(r.getDomain());
+		for (OCLExpression arg : ri.getArgument()) {
+			VariableExp a = (VariableExp) arg;
+			RelationDomain rd = (RelationDomain) dseq.get(ri.getArgument().indexOf(a));
+			assert (a != null) && (rd != null);
+			doRInvokerToMGuardPredicate(ir, a, rd, mg);
+		}
+	}
+
+	private void doRInvokerToMGuardPredicate(@NonNull Relation ir, 
+			@NonNull VariableExp ve, @NonNull RelationDomain rd,
+			@NonNull GuardPattern mg) {
+		
+		// when
+		Type tc = transformation.getRelationTrace(ir);
+		assert tc != null;
+		// check
+		Variable v = (Variable) ve.getReferredVariable();
+		assert v != null;
+		String vn = v.getName();
+		assert vn != null;
+		Variable dv = rd.getRootVariable();
+		assert dv != null;
+		// init
+		Variable vd = transformation.findVariable(tc.getName()+"_v", tc, mg);
+		Predicate pd = transformation.createPredicate();
+		OperationCallExp ee = transformation.createOperationCallExp();
+		PropertyCallExp pe = transformation.createPropertyCallExp();
+		VariableExp mve = transformation.createVariableExp();
+		VariableExp ave = transformation.createVariableExp();
+		// where
+		Variable mdv = doRVarToMVar(dv);
+		// assign
+		pd.setConditionExpression(ee);
+		ee.setSource(pe);
+		pe.setSource(mve);
+		mve.setReferredVariable(vd);
+		mve.setType(vd.getType());
+		Property pep = getProperty(vn, vd.getType());
+		assert pep != null;
+		pe.setReferredProperty(pep);
+		pe.setType(pep.getType());
+		ee.setReferredOperation(getEqualsOPeration());
+		ee.setType(transformation.getMetaModelManager().getBooleanType());
+		ave.setReferredVariable(mdv);
+		ave.setType(mdv.getType());
+		ee.getArgument().add(ave);
+		
+		mg.getPredicate().add(pd);
+	}
+	
 	/* =============  Helpers ============= */
 
 	public Set<Predicate> rejectRelationCallPredicates(
@@ -1213,7 +1424,4 @@ public class QVTr2QVTcRelations {
 		}
 		return null;
 	}
-
-	
-
 }
