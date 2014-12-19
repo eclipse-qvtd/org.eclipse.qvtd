@@ -18,6 +18,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.pivot.Class;
 import org.eclipse.ocl.examples.pivot.PivotFactory;
+import org.eclipse.qvtd.build.qvtrtoqvtc.QVTr2QVTcRelations;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.Rule;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
@@ -42,7 +43,6 @@ public class RelationalTransformationToTracePackage extends AbstractRule
 		public @Nullable Rule createRule(
 				@NonNull QvtrToQvtcTransformation transformation,
 				@NonNull List<EObject> eos) {
-			// TODO Auto-generated method stub
 			return null;
 		}
 	}
@@ -51,9 +51,7 @@ public class RelationalTransformationToTracePackage extends AbstractRule
 		
 		// Relations
 		@NonNull private Relation r;
-		
-		// Core
-		@Nullable private Class rc;
+		public Class rc;
 		
 		public SubRecord(@NonNull Relation r) {
 			this.r = r;
@@ -68,7 +66,7 @@ public class RelationalTransformationToTracePackage extends AbstractRule
 	public static final @NonNull RuleBindings.RuleKey<RelationalTransformation> RELATIONS_rt = RULE_BINDINGS.createRoot((RelationalTransformation)null, "rt");
 	
 	// Core
-	private org.eclipse.ocl.examples.pivot.Package p = null;
+	private org.eclipse.ocl.examples.pivot.Package p;
 	
 	// Primitives
 	private String rtn;
@@ -103,9 +101,7 @@ public class RelationalTransformationToTracePackage extends AbstractRule
 	public void instantiateOutput() {
 		p = PivotFactory.eINSTANCE.createPackage();
 		assert p != null;
-		final org.eclipse.ocl.examples.pivot.Package p2 = p;
-		assert p2 != null;
-		transformation.addOrphan(p2);
+		transformation.addOrphan(p);
 		for (SubRecord subRecord : subRecords) {
 			org.eclipse.ocl.examples.pivot.Class rc = PivotFactory.eINSTANCE.createClass();
 			assert rc != null;
@@ -125,15 +121,11 @@ public class RelationalTransformationToTracePackage extends AbstractRule
 	
 	@Override
 	public void where() {
+		QVTr2QVTcRelations relations = new QVTr2QVTcRelations(transformation);
 		for (SubRecord subRecord : subRecords) {
-			RelationToTraceClass whenRule = new RelationToTraceClass(transformation, subRecord.r);
 			final Class rc2 = subRecord.rc;
-			if (rc2 != null) {
-				whenRule.setCore(rc2);
-				transformation.executeNestedRule(whenRule);
-			} else {
-				// TODO handle null value
-			}
+			assert (rc2 != null);
+			relations.doRelationToTraceClass(subRecord.r, rc2);
 		}
 	}
 }
