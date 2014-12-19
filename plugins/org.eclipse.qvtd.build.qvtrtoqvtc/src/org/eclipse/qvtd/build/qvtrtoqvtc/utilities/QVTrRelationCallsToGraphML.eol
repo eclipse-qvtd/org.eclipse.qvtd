@@ -53,7 +53,8 @@ for (rule in qvtrAST!Relation.all().sortBy(r | r.name)) {
     /* Yed Information */
     var d5 : new gml!DataType;
     d5.key = key5.id;
-    
+    // event.getAny().add(XyzPackage.Literals.DOCUMENT_ROOT__ABC, <value-of-ABC-type>)     
+    //d5.mixed.add("description", rule.name);
     n.data.add(d5);
     
     var d6 : new gml!DataType;
