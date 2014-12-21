@@ -260,7 +260,7 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 		}
 		@NonNull Function pivotElement = refreshNamedElement(Function.class, QVTbasePackage.Literals.FUNCTION, csElement);
 		pivotElement.setIsStatic(true);
-		context.refreshPivotList(FunctionParameter.class, pivotElement.getOwnedParameter(), csElement.getInputParamDeclaration());
+		context.refreshPivotList(FunctionParameter.class, pivotElement.getOwnedParameters(), csElement.getInputParamDeclaration());
 		return null;
 	}
 

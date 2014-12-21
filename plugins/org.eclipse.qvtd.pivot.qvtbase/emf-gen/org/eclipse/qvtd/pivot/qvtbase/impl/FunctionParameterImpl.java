@@ -39,8 +39,8 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.FunctionParameterImpl#isImplicit <em>Implicit</em>}</li>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.FunctionParameterImpl#getInitExpression <em>Init Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.FunctionParameterImpl#isImplicit <em>Is Implicit</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.FunctionParameterImpl#getOwnedInit <em>Owned Init</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.FunctionParameterImpl#getRepresentedParameter <em>Represented Parameter</em>}</li>
  * </ul>
  * </p>
@@ -49,34 +49,34 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  */
 public class FunctionParameterImpl extends ParameterImpl implements FunctionParameter {
 	/**
-	 * The default value of the '{@link #isImplicit() <em>Implicit</em>}' attribute.
+	 * The default value of the '{@link #isImplicit() <em>Is Implicit</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #isImplicit()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IMPLICIT_EDEFAULT = false;
+	protected static final boolean IS_IMPLICIT_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isImplicit() <em>Implicit</em>}' attribute.
+	 * The cached value of the '{@link #isImplicit() <em>Is Implicit</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #isImplicit()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean implicit = IMPLICIT_EDEFAULT;
+	protected boolean isImplicit = IS_IMPLICIT_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getInitExpression() <em>Init Expression</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedInit() <em>Owned Init</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInitExpression()
+	 * @see #getOwnedInit()
 	 * @generated
 	 * @ordered
 	 */
-	protected OCLExpression initExpression;
+	protected OCLExpression ownedInit;
 
 	/**
 	 * The cached value of the '{@link #getRepresentedParameter() <em>Represented Parameter</em>}' reference.
@@ -105,51 +105,6 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	@Override
 	protected EClass eStaticClass() {
 		return QVTbasePackage.Literals.FUNCTION_PARAMETER;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public OCLExpression getInitExpression() {
-		return initExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetInitExpression(OCLExpression newInitExpression, NotificationChain msgs) {
-		OCLExpression oldInitExpression = initExpression;
-		initExpression = newInitExpression;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTbasePackage.FUNCTION_PARAMETER__INIT_EXPRESSION, oldInitExpression, newInitExpression);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setInitExpression(OCLExpression newInitExpression) {
-		if (newInitExpression != initExpression) {
-			NotificationChain msgs = null;
-			if (initExpression != null)
-				msgs = ((InternalEObject)initExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTbasePackage.FUNCTION_PARAMETER__INIT_EXPRESSION, null, msgs);
-			if (newInitExpression != null)
-				msgs = ((InternalEObject)newInitExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTbasePackage.FUNCTION_PARAMETER__INIT_EXPRESSION, null, msgs);
-			msgs = basicSetInitExpression(newInitExpression, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.FUNCTION_PARAMETER__INIT_EXPRESSION, newInitExpression, newInitExpression));
 	}
 
 	/**
@@ -199,7 +154,7 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	 */
 	@Override
 	public boolean isImplicit() {
-		return implicit;
+		return isImplicit;
 	}
 
 	/**
@@ -208,11 +163,56 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	 * @generated
 	 */
 	@Override
-	public void setImplicit(boolean newImplicit) {
-		boolean oldImplicit = implicit;
-		implicit = newImplicit;
+	public void setIsImplicit(boolean newIsImplicit) {
+		boolean oldIsImplicit = isImplicit;
+		isImplicit = newIsImplicit;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.FUNCTION_PARAMETER__IMPLICIT, oldImplicit, implicit));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.FUNCTION_PARAMETER__IS_IMPLICIT, oldIsImplicit, isImplicit));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public OCLExpression getOwnedInit() {
+		return ownedInit;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwnedInit(OCLExpression newOwnedInit, NotificationChain msgs) {
+		OCLExpression oldOwnedInit = ownedInit;
+		ownedInit = newOwnedInit;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTbasePackage.FUNCTION_PARAMETER__OWNED_INIT, oldOwnedInit, newOwnedInit);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOwnedInit(OCLExpression newOwnedInit) {
+		if (newOwnedInit != ownedInit) {
+			NotificationChain msgs = null;
+			if (ownedInit != null)
+				msgs = ((InternalEObject)ownedInit).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTbasePackage.FUNCTION_PARAMETER__OWNED_INIT, null, msgs);
+			if (newOwnedInit != null)
+				msgs = ((InternalEObject)newOwnedInit).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTbasePackage.FUNCTION_PARAMETER__OWNED_INIT, null, msgs);
+			msgs = basicSetOwnedInit(newOwnedInit, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.FUNCTION_PARAMETER__OWNED_INIT, newOwnedInit, newOwnedInit));
 	}
 
 	/**
@@ -233,7 +233,7 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String VALIDATE_COMPATIBLE_INITIALISER_TYPE_DIAGNOSTIC_CHAIN_MAP__EEXPRESSION = "initExpression <> null implies initExpression.type.conformsTo(type)\n" + //$NON-NLS-1$
+	protected static final String VALIDATE_COMPATIBLE_INITIALISER_TYPE_DIAGNOSTIC_CHAIN_MAP__EEXPRESSION = "ownedInit <> null implies ownedInit.type.conformsTo(type)\n" + //$NON-NLS-1$
 		"\n" + //$NON-NLS-1$
 		"";
 
@@ -266,8 +266,8 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTbasePackage.FUNCTION_PARAMETER__INIT_EXPRESSION:
-				return basicSetInitExpression(null, msgs);
+			case QVTbasePackage.FUNCTION_PARAMETER__OWNED_INIT:
+				return basicSetOwnedInit(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -280,10 +280,10 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTbasePackage.FUNCTION_PARAMETER__IMPLICIT:
+			case QVTbasePackage.FUNCTION_PARAMETER__IS_IMPLICIT:
 				return isImplicit();
-			case QVTbasePackage.FUNCTION_PARAMETER__INIT_EXPRESSION:
-				return getInitExpression();
+			case QVTbasePackage.FUNCTION_PARAMETER__OWNED_INIT:
+				return getOwnedInit();
 			case QVTbasePackage.FUNCTION_PARAMETER__REPRESENTED_PARAMETER:
 				if (resolve) return getRepresentedParameter();
 				return basicGetRepresentedParameter();
@@ -299,11 +299,11 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTbasePackage.FUNCTION_PARAMETER__IMPLICIT:
-				setImplicit((Boolean)newValue);
+			case QVTbasePackage.FUNCTION_PARAMETER__IS_IMPLICIT:
+				setIsImplicit((Boolean)newValue);
 				return;
-			case QVTbasePackage.FUNCTION_PARAMETER__INIT_EXPRESSION:
-				setInitExpression((OCLExpression)newValue);
+			case QVTbasePackage.FUNCTION_PARAMETER__OWNED_INIT:
+				setOwnedInit((OCLExpression)newValue);
 				return;
 			case QVTbasePackage.FUNCTION_PARAMETER__REPRESENTED_PARAMETER:
 				setRepresentedParameter((Parameter)newValue);
@@ -320,11 +320,11 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTbasePackage.FUNCTION_PARAMETER__IMPLICIT:
-				setImplicit(IMPLICIT_EDEFAULT);
+			case QVTbasePackage.FUNCTION_PARAMETER__IS_IMPLICIT:
+				setIsImplicit(IS_IMPLICIT_EDEFAULT);
 				return;
-			case QVTbasePackage.FUNCTION_PARAMETER__INIT_EXPRESSION:
-				setInitExpression((OCLExpression)null);
+			case QVTbasePackage.FUNCTION_PARAMETER__OWNED_INIT:
+				setOwnedInit((OCLExpression)null);
 				return;
 			case QVTbasePackage.FUNCTION_PARAMETER__REPRESENTED_PARAMETER:
 				setRepresentedParameter((Parameter)null);
@@ -341,10 +341,10 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTbasePackage.FUNCTION_PARAMETER__IMPLICIT:
-				return implicit != IMPLICIT_EDEFAULT;
-			case QVTbasePackage.FUNCTION_PARAMETER__INIT_EXPRESSION:
-				return initExpression != null;
+			case QVTbasePackage.FUNCTION_PARAMETER__IS_IMPLICIT:
+				return isImplicit != IS_IMPLICIT_EDEFAULT;
+			case QVTbasePackage.FUNCTION_PARAMETER__OWNED_INIT:
+				return ownedInit != null;
 			case QVTbasePackage.FUNCTION_PARAMETER__REPRESENTED_PARAMETER:
 				return representedParameter != null;
 		}
@@ -360,8 +360,8 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == Variable.class) {
 			switch (derivedFeatureID) {
-				case QVTbasePackage.FUNCTION_PARAMETER__IMPLICIT: return PivotPackage.VARIABLE__IMPLICIT;
-				case QVTbasePackage.FUNCTION_PARAMETER__INIT_EXPRESSION: return PivotPackage.VARIABLE__INIT_EXPRESSION;
+				case QVTbasePackage.FUNCTION_PARAMETER__IS_IMPLICIT: return PivotPackage.VARIABLE__IS_IMPLICIT;
+				case QVTbasePackage.FUNCTION_PARAMETER__OWNED_INIT: return PivotPackage.VARIABLE__OWNED_INIT;
 				case QVTbasePackage.FUNCTION_PARAMETER__REPRESENTED_PARAMETER: return PivotPackage.VARIABLE__REPRESENTED_PARAMETER;
 				default: return -1;
 			}
@@ -378,8 +378,8 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == Variable.class) {
 			switch (baseFeatureID) {
-				case PivotPackage.VARIABLE__IMPLICIT: return QVTbasePackage.FUNCTION_PARAMETER__IMPLICIT;
-				case PivotPackage.VARIABLE__INIT_EXPRESSION: return QVTbasePackage.FUNCTION_PARAMETER__INIT_EXPRESSION;
+				case PivotPackage.VARIABLE__IS_IMPLICIT: return QVTbasePackage.FUNCTION_PARAMETER__IS_IMPLICIT;
+				case PivotPackage.VARIABLE__OWNED_INIT: return QVTbasePackage.FUNCTION_PARAMETER__OWNED_INIT;
 				case PivotPackage.VARIABLE__REPRESENTED_PARAMETER: return QVTbasePackage.FUNCTION_PARAMETER__REPRESENTED_PARAMETER;
 				default: return -1;
 			}

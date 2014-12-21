@@ -198,9 +198,9 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 	public ElementCS visitMappingLoop(@NonNull MappingLoop asMappingLoop) {
 		MappingLoopCS csMappingLoop = context.refreshElement(MappingLoopCS.class, QVTimperativeCSPackage.Literals.MAPPING_LOOP_CS, asMappingLoop);
 		csMappingLoop.setPivot(asMappingLoop);
-		csMappingLoop.setOwnedIterator(context.visitDeclaration(VariableCS.class, asMappingLoop.getIterator().get(0)));
-		csMappingLoop.setInExpression(createExpCS(asMappingLoop.getSource()));
-		csMappingLoop.setMappingSequence(context.visitDeclaration(MappingSequenceCS.class, asMappingLoop.getBody()));
+		csMappingLoop.setOwnedIterator(context.visitDeclaration(VariableCS.class, asMappingLoop.getOwnedIterators().get(0)));
+		csMappingLoop.setInExpression(createExpCS(asMappingLoop.getOwnedSource()));
+		csMappingLoop.setMappingSequence(context.visitDeclaration(MappingSequenceCS.class, asMappingLoop.getOwnedBody()));
 		return csMappingLoop;
 	}
 

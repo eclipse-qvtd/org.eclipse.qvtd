@@ -466,7 +466,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 	public @NonNull Boolean visitCGFunctionCallExp(@NonNull CGFunctionCallExp cgFunctionCallExp) {
 		Operation pOperation = cgFunctionCallExp.getReferredOperation();
 		List<CGValuedElement> cgArguments = cgFunctionCallExp.getArguments();
-		List<Parameter> pParameters = pOperation.getOwnedParameter();
+		List<Parameter> pParameters = pOperation.getOwnedParameters();
 		//
 		for (@SuppressWarnings("null")@NonNull CGValuedElement cgArgument : cgArguments) {
 			CGValuedElement argument = getExpression(cgArgument);

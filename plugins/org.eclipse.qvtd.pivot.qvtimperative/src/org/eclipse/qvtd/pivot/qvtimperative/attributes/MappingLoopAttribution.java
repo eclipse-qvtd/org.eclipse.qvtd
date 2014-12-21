@@ -24,7 +24,7 @@ public class MappingLoopAttribution extends EmptyAttribution
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		MappingLoop mappingLoop = (MappingLoop)target;
-		environmentView.addNamedElements(mappingLoop.getIterator());
+		environmentView.addNamedElements(mappingLoop.getOwnedIterators());
 		return scopeView.getParent();
 	}
 }

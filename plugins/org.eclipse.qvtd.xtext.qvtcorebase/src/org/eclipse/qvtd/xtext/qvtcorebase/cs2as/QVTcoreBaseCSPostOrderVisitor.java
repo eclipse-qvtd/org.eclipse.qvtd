@@ -56,7 +56,7 @@ public class QVTcoreBaseCSPostOrderVisitor extends AbstractQVTcoreBaseCSPostOrde
 	protected @Nullable Assignment refreshPropertyAssignment(@NonNull PropertyCallExp propertyCallExp, @NonNull AssignmentCS csConstraint) {
 		PropertyAssignment propertyAssignment = PivotUtil.getPivot(PropertyAssignment.class, csConstraint);
 		if (propertyAssignment != null) {
-			propertyAssignment.setSlotExpression(propertyCallExp.getSource());
+			propertyAssignment.setSlotExpression(propertyCallExp.getOwnedSource());
 			propertyAssignment.setTargetProperty(propertyCallExp.getReferredProperty());
 		}
 		return propertyAssignment;
@@ -159,7 +159,7 @@ public class QVTcoreBaseCSPostOrderVisitor extends AbstractQVTcoreBaseCSPostOrde
 					if (target instanceof VariableExp) {
 						Variable variable = (Variable) ((VariableExp)target).getReferredVariable();
 						OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
-						variable.setInitExpression(initialiser);
+						variable.setOwnedInit(initialiser);
 					}
 					else if (target != null) {
 						context.addDiagnostic(csElement, "unrecognised Guard Constraint target " + target.eClass().getName());

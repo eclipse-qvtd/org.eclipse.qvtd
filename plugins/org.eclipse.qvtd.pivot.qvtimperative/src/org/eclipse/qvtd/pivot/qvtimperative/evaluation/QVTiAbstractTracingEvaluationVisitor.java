@@ -214,7 +214,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 		for (@SuppressWarnings("null")@NonNull Variable v : guardPattern.getVariable()) {
 			if (delegate.getEvaluationEnvironment().getValueOf(v) == null) {
 				nullVars.add(v);
-				OCLExpression initExp = v.getInitExpression();
+				OCLExpression initExp = v.getOwnedInit();
 				if (initExp != null) {
 					indentLevel++;
 					logger.info(getIndent()  + "Variable " + v.getName() + " init value:" + safePrint(initExp));
@@ -284,7 +284,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 
 	@Override
 	public @Nullable Object visitMappingLoop(@NonNull MappingLoop mappingLoop) {
-		logger.info(getIndent() + "Visiting MappingLoop, calling: " + mappingLoop.getIterator().get(0).getName());
+		logger.info(getIndent() + "Visiting MappingLoop, calling: " + mappingLoop.getOwnedIterators().get(0).getName());
 		indentLevel++;
 		Object result = delegate.visitMappingLoop(mappingLoop);
 		indentLevel--;

@@ -128,12 +128,12 @@ public class QVTimperativePrettyPrintVisitor extends QVTcoreBasePrettyPrintVisit
 	@Override
 	public Object visitMappingLoop(@NonNull MappingLoop pMappingLoop) {
 		context.append("for ");
-		context.appendElement(pMappingLoop.getIterator().get(0));
+		context.appendElement(pMappingLoop.getOwnedIterators().get(0));
 		context.append(" in ");
-		context.appendElement(pMappingLoop.getSource());
+		context.appendElement(pMappingLoop.getOwnedSource());
 		context.append(" {\n");
 		context.push("", "");
-		safeVisit(pMappingLoop.getBody());
+		safeVisit(pMappingLoop.getOwnedBody());
 		context.append("}");
 		context.pop();
 		return null;

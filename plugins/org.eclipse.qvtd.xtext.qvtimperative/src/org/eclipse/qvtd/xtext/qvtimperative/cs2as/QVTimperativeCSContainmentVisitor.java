@@ -147,9 +147,9 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	public Continuation<?> visitMappingLoopCS(@NonNull MappingLoopCS csMappingLoop) {
 		@NonNull MappingLoop pivotElement = context.refreshModelElement(MappingLoop.class, QVTimperativePackage.Literals.MAPPING_LOOP, csMappingLoop);
 		@NonNull Variable iterator = refreshNamedElement(Variable.class, PivotPackage.Literals.VARIABLE, ClassUtil.nonNullState(csMappingLoop.getOwnedIterator()));
-		pivotElement.getIterator().clear();
-		pivotElement.getIterator().add(iterator);
-		pivotElement.setBody(PivotUtil.getPivot(MappingStatement.class, csMappingLoop.getMappingSequence()));
+		pivotElement.getOwnedIterators().clear();
+		pivotElement.getOwnedIterators().add(iterator);
+		pivotElement.setOwnedBody(PivotUtil.getPivot(MappingStatement.class, csMappingLoop.getMappingSequence()));
 //		CollectionType collectionType = metaModelManager.getCollectionType();
 //		DomainOperation forAllIteration = ClassUtil.getNamedElement(collectionType.getLocalOperations(), "forAll");
 //		pivotElement.setReferredIteration((Iteration) forAllIteration);

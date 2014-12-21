@@ -231,7 +231,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		List<CGGuardVariable> cgFreeVariables = new ArrayList<CGGuardVariable>();
 		List<CGFinalVariable> cgBoundVariables = new ArrayList<CGFinalVariable>();
 		for (@SuppressWarnings("null")@NonNull Variable pGuardVariable : pGuardVariables) {
-			OCLExpression initExpression = pGuardVariable.getInitExpression();
+			OCLExpression initExpression = pGuardVariable.getOwnedInit();
 			if (initExpression == null) {
 				CGGuardVariable cgUnboundVariable = getGuardVariable(pGuardVariable);
 				cgFreeVariables.add(cgUnboundVariable);
@@ -372,21 +372,21 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		CGFunction cgFunction = QVTiCGModelFactory.eINSTANCE.createCGFunction();
 		setAst(cgFunction, asFunction);
 		cgFunction.setRequired(asFunction.isRequired());
-		for (Parameter pParameter : asFunction.getOwnedParameter()) {
+		for (Parameter pParameter : asFunction.getOwnedParameters()) {
 			cgFunction.getParameters().add(doVisit(CGParameter.class, pParameter));
 		}
 		LanguageExpression specification = asFunction.getBodyExpression();
 		if (specification != null) {
 			try {
 				ExpressionInOCL query = metaModelManager.getQueryOrThrow(asFunction, specification);
-				Variable contextVariable = query.getContextVariable();
+				Variable contextVariable = query.getOwnedContext();
 				if (contextVariable != null) {
 					getParameter(contextVariable);
 				}
-				for (@SuppressWarnings("null")@NonNull Variable parameterVariable : query.getParameterVariable()) {
+				for (@SuppressWarnings("null")@NonNull Variable parameterVariable : query.getOwnedParameters()) {
 					getParameter(parameterVariable);
 				}
-				cgFunction.setBody(doVisit(CGValuedElement.class, query.getBodyExpression()));
+				cgFunction.setBody(doVisit(CGValuedElement.class, query.getOwnedBody()));
 			} catch (ParserException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -466,7 +466,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 	@Override
 	public @Nullable CGNamedElement visitMappingLoop(@NonNull MappingLoop asMappingLoop) {
 		CGMappingLoop cgMappingLoop = QVTiCGModelFactory.eINSTANCE.createCGMappingLoop();
-		List<Variable> asIterators = asMappingLoop.getIterator();
+		List<Variable> asIterators = asMappingLoop.getOwnedIterators();
 		if (asIterators.size() > 0) {
 			Variable asIterator = asIterators.get(0);
 			if (asIterator != null) {
@@ -479,14 +479,14 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 				cgMappingLoop.getIterators().add(cgIterator);
 			}
 		}
-		cgMappingLoop.setSource(doVisit(CGValuedElement.class, asMappingLoop.getSource()));
+		cgMappingLoop.setSource(doVisit(CGValuedElement.class, asMappingLoop.getOwnedSource()));
 //		cgIterator.setNonInvalid();
 //		cgIterator.setNonNull();
 		cgMappingLoop.setAst(asMappingLoop);
 		CollectionType collectionType = metaModelManager.getStandardLibrary().getCollectionType();
 		Operation forAllIteration = ClassUtil.getNamedElement(collectionType.getOwnedOperations(), "forAll");
 		cgMappingLoop.setReferredIteration((Iteration) forAllIteration);
-		cgMappingLoop.setBody(doVisit(CGValuedElement.class, asMappingLoop.getBody()));
+		cgMappingLoop.setBody(doVisit(CGValuedElement.class, asMappingLoop.getOwnedBody()));
 		return cgMappingLoop;
 	}
 
@@ -543,7 +543,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		cgPropertyCallExp.setReferredProperty(asOppositeProperty);
 		setAst(cgPropertyCallExp, asMiddlePropertyCallExp);
 		cgPropertyCallExp.setRequired(asProperty.isRequired());
-		CGValuedElement cgSource = doVisit(CGValuedElement.class, asMiddlePropertyCallExp.getSource());
+		CGValuedElement cgSource = doVisit(CGValuedElement.class, asMiddlePropertyCallExp.getOwnedSource());
 		cgPropertyCallExp.setSource(cgSource);
 		return cgPropertyCallExp;
 	}
@@ -557,7 +557,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 			cgFunctionCallExp.setReferredOperation(pOperation);
 			setAst(cgFunctionCallExp, asOperationCallExp);
 			cgFunctionCallExp.setRequired(pOperation.isRequired());
-			for (OCLExpression pArgument : asOperationCallExp.getArgument()) {
+			for (OCLExpression pArgument : asOperationCallExp.getOwnedArguments()) {
 				CGValuedElement cgArgument = doVisit(CGValuedElement.class, pArgument);
 				cgFunctionCallExp.getArguments().add(cgArgument);
 			}

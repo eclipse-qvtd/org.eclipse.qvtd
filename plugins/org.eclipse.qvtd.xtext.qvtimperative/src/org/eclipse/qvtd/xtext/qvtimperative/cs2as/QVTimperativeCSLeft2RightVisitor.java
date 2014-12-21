@@ -44,7 +44,7 @@ public class QVTimperativeCSLeft2RightVisitor extends AbstractQVTimperativeCSLef
 		Property oppositeProperty = property.getOpposite();
 		if (QVTimperativeCS2AS.isMiddle(oppositeProperty.getOwningClass(), csNameExp)) {
 			MiddlePropertyCallExp callExp = context.refreshModelElement(MiddlePropertyCallExp.class, QVTimperativePackage.Literals.MIDDLE_PROPERTY_CALL_EXP, csNameExp);
-			callExp.setSource(sourceExp);			
+			callExp.setOwnedSource(sourceExp);			
 			callExp.setReferredProperty(property.getOpposite());
 			return callExp;
 		}

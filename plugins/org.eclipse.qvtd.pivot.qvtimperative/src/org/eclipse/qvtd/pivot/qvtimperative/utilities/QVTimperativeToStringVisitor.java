@@ -64,7 +64,7 @@ public class QVTimperativeToStringVisitor extends QVTcoreBaseToStringVisitor imp
 	@Override
 	public @Nullable String visitMappingLoop(@NonNull MappingLoop object) {
 		append("mappingLoop ");
-		appendQualifiedName(object.getIterator().get(0));
+		appendQualifiedName(object.getOwnedIterators().get(0));
 		return null;
 	}
 

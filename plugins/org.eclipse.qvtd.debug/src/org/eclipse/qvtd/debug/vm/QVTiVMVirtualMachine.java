@@ -87,7 +87,7 @@ public class QVTiVMVirtualMachine extends VMVirtualMachine
 			s.append(operation.getName());        
 	        s.append("(");        
 	        boolean isFirst = true;;
-	        for (Parameter param : operation.getOwnedParameter()) {
+	        for (Parameter param : operation.getOwnedParameters()) {
 	            if (!isFirst) {
 	                s.append(", ");
 	            }

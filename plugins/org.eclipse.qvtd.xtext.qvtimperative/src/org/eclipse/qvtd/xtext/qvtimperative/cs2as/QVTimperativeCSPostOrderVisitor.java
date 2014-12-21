@@ -82,7 +82,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 			propertyAssignment = PivotUtil.getPivot(PropertyAssignment.class, csConstraint);
 		}
 		if (propertyAssignment != null) {
-			propertyAssignment.setSlotExpression(propertyCallExp.getSource());
+			propertyAssignment.setSlotExpression(propertyCallExp.getOwnedSource());
 			propertyAssignment.setTargetProperty(propertyCallExp.getReferredProperty());
 		}
 		return propertyAssignment;
@@ -145,8 +145,8 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 			ExpCS expression = csElement.getInExpression();
 			if (expression != null) {
 				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
-				pMappingLoop.setSource(target);
-				List<Variable> iterators = pMappingLoop.getIterator();
+				pMappingLoop.setOwnedSource(target);
+				List<Variable> iterators = pMappingLoop.getOwnedIterators();
 				if (iterators.size() > 0) {
 					Variable iterator = iterators.get(0);
 					if (iterator.getType() == null) {

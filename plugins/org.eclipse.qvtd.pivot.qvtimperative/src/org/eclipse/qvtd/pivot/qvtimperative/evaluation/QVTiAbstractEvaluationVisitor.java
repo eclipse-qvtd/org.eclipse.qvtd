@@ -303,14 +303,14 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 
 	@Override
 	public @Nullable Object visitMappingLoop(@NonNull MappingLoop mappingLoop) {
-		Object inValues = mappingLoop.getSource().accept(undecoratedVisitor);
+		Object inValues = mappingLoop.getOwnedSource().accept(undecoratedVisitor);
 		if (inValues instanceof Iterable<?>) {
-			List<Variable> iterators = mappingLoop.getIterator();
+			List<Variable> iterators = mappingLoop.getOwnedIterators();
 			if (iterators.size() > 0) {
 				Variable iterator = ClassUtil.nonNullState(iterators.get(0));
 				for (Object object : (Iterable<?>)inValues) {
 					getEvaluationEnvironment().replace(iterator, object);
-					mappingLoop.getBody().accept(undecoratedVisitor);
+					mappingLoop.getOwnedBody().accept(undecoratedVisitor);
 				}
 			}
 		}
@@ -405,7 +405,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	 */
 	@Override
 	public @Nullable Object visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp pPropertyCallExp) {
-		OCLExpression source = pPropertyCallExp.getSource();
+		OCLExpression source = pPropertyCallExp.getOwnedSource();
 		Object sourceValue = source != null ? undecoratedVisitor.evaluate(source) : null;
 		if (sourceValue != null) {
 			Integer cacheIndex = ClassUtil.nonNullState(pPropertyCallExp.getCacheIndex());

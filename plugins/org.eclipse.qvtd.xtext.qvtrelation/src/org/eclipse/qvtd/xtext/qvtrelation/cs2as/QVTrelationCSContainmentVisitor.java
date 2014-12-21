@@ -275,7 +275,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 				variable = PivotFactory.eINSTANCE.createVariable();
 				pivotElement.setRest(variable);
 			}
-			variable.setImplicit(true);
+			variable.setIsImplicit(true);
 		}
 //		variable = pivotElement.getRest();
 //		if (variable == null) {
@@ -432,7 +432,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 	@Override
 	public Continuation<?> visitQueryCS(@NonNull QueryCS csElement) {
 		@NonNull Function pivotElement = refreshNamedElement(Function.class, QVTbasePackage.Literals.FUNCTION, csElement);
-		context.refreshPivotList(Parameter.class, pivotElement.getOwnedParameter(), csElement.getInputParamDeclarations());
+		context.refreshPivotList(Parameter.class, pivotElement.getOwnedParameters(), csElement.getInputParamDeclarations());
 		return null;
 	}
 

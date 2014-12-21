@@ -84,40 +84,40 @@ public interface QVTcorePackage extends EPackage {
 	int CORE_MODEL = 0;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CORE_MODEL__COMMENT = QVTbasePackage.BASE_MODEL__COMMENT;
+	int CORE_MODEL__ANNOTATING_COMMENTS = QVTbasePackage.BASE_MODEL__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CORE_MODEL__EXTENSION = QVTbasePackage.BASE_MODEL__EXTENSION;
+	int CORE_MODEL__OWNED_ANNOTATIONS = QVTbasePackage.BASE_MODEL__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CORE_MODEL__OWNED_ANNOTATION = QVTbasePackage.BASE_MODEL__OWNED_ANNOTATION;
+	int CORE_MODEL__OWNED_COMMENTS = QVTbasePackage.BASE_MODEL__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CORE_MODEL__OWNED_COMMENT = QVTbasePackage.BASE_MODEL__OWNED_COMMENT;
+	int CORE_MODEL__OWNED_EXTENSIONS = QVTbasePackage.BASE_MODEL__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -129,13 +129,13 @@ public interface QVTcorePackage extends EPackage {
 	int CORE_MODEL__NAME = QVTbasePackage.BASE_MODEL__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CORE_MODEL__OWNED_RULE = QVTbasePackage.BASE_MODEL__OWNED_RULE;
+	int CORE_MODEL__OWNED_CONSTRAINTS = QVTbasePackage.BASE_MODEL__OWNED_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>External URI</b></em>' attribute.
@@ -147,13 +147,13 @@ public interface QVTcorePackage extends EPackage {
 	int CORE_MODEL__EXTERNAL_URI = QVTbasePackage.BASE_MODEL__EXTERNAL_URI;
 
 	/**
-	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Imports</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CORE_MODEL__IMPORTS = QVTbasePackage.BASE_MODEL__IMPORTS;
+	int CORE_MODEL__OWNED_IMPORTS = QVTbasePackage.BASE_MODEL__OWNED_IMPORTS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Packages</b></em>' containment reference list.
@@ -193,40 +193,40 @@ public interface QVTcorePackage extends EPackage {
 	int MAPPING = 1;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING__COMMENT = QVTcoreBasePackage.ABSTRACT_MAPPING__COMMENT;
+	int MAPPING__ANNOTATING_COMMENTS = QVTcoreBasePackage.ABSTRACT_MAPPING__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING__EXTENSION = QVTcoreBasePackage.ABSTRACT_MAPPING__EXTENSION;
+	int MAPPING__OWNED_ANNOTATIONS = QVTcoreBasePackage.ABSTRACT_MAPPING__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING__OWNED_ANNOTATION = QVTcoreBasePackage.ABSTRACT_MAPPING__OWNED_ANNOTATION;
+	int MAPPING__OWNED_COMMENTS = QVTcoreBasePackage.ABSTRACT_MAPPING__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING__OWNED_COMMENT = QVTcoreBasePackage.ABSTRACT_MAPPING__OWNED_COMMENT;
+	int MAPPING__OWNED_EXTENSIONS = QVTcoreBasePackage.ABSTRACT_MAPPING__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.

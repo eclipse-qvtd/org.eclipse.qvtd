@@ -3,7 +3,7 @@
     xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot" xmlns:qvtb="http://www.eclipse.org/qvt/2015/QVTbase"
     xmlns:qvtcb="http://www.eclipse.org/qvt/2015/QVTcoreBase" xmlns:qvti="http://www.eclipse.org/qvt/2015/QVTimperative"
     xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2015/QVTcoreBase java://org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage http://www.eclipse.org/qvt/2015/QVTimperative java://org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
-    name="Graph2GraphHierarchical.qvti" externalURI="file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/models/Graph2GraphHierarchical/Graph2GraphHierarchical.qvti">
+    name="Graph2GraphHierarchical.qvti" externalURI="file:/C:/GIT/org.eclipse.qvtd/tests/org.eclipse.qvtd.xtext.qvtimperative.tests/bin/org/eclipse/qvtd/xtext/qvtimperative/tests/Graph2GraphHierarchical/Graph2GraphHierarchical.qvti">
   <ownedPackages xmi:id="P." name="">
     <ownedClasses xsi:type="qvtb:Transformation" xmi:id="T..CopyGraph" name="CopyGraph"
         superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
@@ -38,11 +38,11 @@
           <assignment xsi:type="qvti:MiddlePropertyAssignment" isDefault="false" targetProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
             <value xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.toLowerCase">
-              <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+              <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                   referredProperty="../Graph2GraphMinimal/SimpleGraph.ecore.oclas#p.simplegraph.Graph.name">
-                <source xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph"
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph"
                     referredVariable="#qV..CopyGraph.Graph2Middle.upperGraph.guard.g1"/>
-              </source>
+              </ownedSource>
             </value>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
                 referredVariable="#qV..CopyGraph.Graph2Middle.middle.bottom.middleG2G"/>
@@ -50,24 +50,24 @@
         </bottomPattern>
         <mappingStatement xsi:type="qvti:MappingSequence">
           <mappingStatements xsi:type="qvti:MappingLoop">
-            <source xsi:type="pivot:IteratorExp" type="#//@ownedPackages.1/@ownedClasses.0"
+            <ownedSource xsi:type="pivot:IteratorExp" type="#//@ownedPackages.1/@ownedClasses.0"
                 referredIteration="http://www.eclipse.org/ocl/2015/Library.oclas#i.ocl.OrderedSet.select..T">
-              <source xsi:type="pivot:PropertyCallExp" type="#//@ownedPackages.1/@ownedClasses.0"
+              <ownedSource xsi:type="pivot:PropertyCallExp" type="#//@ownedPackages.1/@ownedClasses.0"
                   referredProperty="../Graph2GraphMinimal/SimpleGraph.ecore.oclas#p.simplegraph.Graph.element">
-                <source xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph"
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph"
                     referredVariable="#qV..CopyGraph.Graph2Middle.upperGraph.guard.g1"/>
-              </source>
-              <body xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+              </ownedSource>
+              <ownedBody xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                   referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclIsTypeOf..ocl.OclType">
-                <source xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element"
-                    referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.0/@mappingStatement/@mappingStatements.0/@source/@iterator.0"/>
-                <argument xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
+                <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element"
+                    referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.0/@mappingStatement/@mappingStatements.0/@ownedSource/@ownedIterators.0"/>
+                <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
                     referredType="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Node"/>
-              </body>
-              <iterator name="e" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element"
+              </ownedBody>
+              <ownedIterators name="e" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element"
                   representedParameter="http://www.eclipse.org/ocl/2015/Library.oclas#i0i.ocl.OrderedSet.select..T"/>
-            </source>
-            <body xsi:type="qvti:MappingSequence">
+            </ownedSource>
+            <ownedBody xsi:type="qvti:MappingSequence">
               <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..CopyGraph.Node2Middle">
                 <binding boundVariable="#qV..CopyGraph.Node2Middle.upperGraph.guard.n1">
                   <value xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element"
@@ -78,8 +78,9 @@
                       referredVariable="#qV..CopyGraph.Graph2Middle.middle.bottom.middleG2G"/>
                 </binding>
               </mappingStatements>
-            </body>
-            <iterator xmi:id="i..CopyGraph.Graph2Middle.0.0.child" name="child" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element"/>
+            </ownedBody>
+            <ownedIterators xmi:id="i..CopyGraph.Graph2Middle.0.0.child" name="child"
+                type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..CopyGraph.Middle2Graph">
             <binding boundVariable="#qV..CopyGraph.Middle2Graph.middle.guard.g2Gmiddle">
@@ -126,11 +127,11 @@
           <assignment xsi:type="qvti:MiddlePropertyAssignment" isDefault="false" targetProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label">
             <value xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.String.toLowerCase">
-              <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+              <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                   referredProperty="../Graph2GraphMinimal/SimpleGraph.ecore.oclas#p.simplegraph.Node.label">
-                <source xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Node"
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Node"
                     referredVariable="#qV..CopyGraph.Node2Middle.upperGraph.guard.n1"/>
-              </source>
+              </ownedSource>
             </value>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
                 referredVariable="#qV..CopyGraph.Node2Middle.middle.bottom.n2n"/>
@@ -165,7 +166,7 @@
           <assignment xsi:type="qvti:MiddlePropertyAssignment" isDefault="false" targetProperty="../Graph2GraphMinimal/SimpleGraph.ecore.oclas#p.simplegraph.Graph.name">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.name">
-              <source xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
                   referredVariable="#qV..CopyGraph.Middle2Graph.middle.guard.g2Gmiddle"/>
             </value>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph"
@@ -174,32 +175,33 @@
         </bottomPattern>
         <mappingStatement xsi:type="qvti:MappingSequence">
           <mappingStatements xsi:type="qvti:MappingLoop">
-            <source xsi:type="pivot:IteratorExp" type="#//@ownedPackages.1/@ownedClasses.1"
+            <ownedSource xsi:type="pivot:IteratorExp" type="#//@ownedPackages.1/@ownedClasses.1"
                 referredIteration="http://www.eclipse.org/ocl/2015/Library.oclas#i.ocl.OrderedSet.select..T">
-              <source xsi:type="pivot:PropertyCallExp" type="#//@ownedPackages.1/@ownedClasses.1"
+              <ownedSource xsi:type="pivot:PropertyCallExp" type="#//@ownedPackages.1/@ownedClasses.1"
                   referredProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.element2Element">
-                <source xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
                     referredVariable="#qV..CopyGraph.Middle2Graph.middle.guard.g2Gmiddle"/>
-              </source>
-              <body xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+              </ownedSource>
+              <ownedBody xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                   referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclIsTypeOf..ocl.OclType">
-                <source xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"
-                    referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@mappingStatement/@mappingStatements.0/@source/@iterator.0"/>
-                <argument xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
+                <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"
+                    referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.2/@mappingStatement/@mappingStatements.0/@ownedSource/@ownedIterators.0"/>
+                <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
                     referredType="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"/>
-              </body>
-              <iterator name="e2e" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"
+              </ownedBody>
+              <ownedIterators name="e2e" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"
                   representedParameter="http://www.eclipse.org/ocl/2015/Library.oclas#i0i.ocl.OrderedSet.select..T"/>
-            </source>
-            <body xsi:type="qvti:MappingSequence">
+            </ownedSource>
+            <ownedBody xsi:type="qvti:MappingSequence">
               <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..CopyGraph.Middle2Node">
                 <binding boundVariable="#qV..CopyGraph.Middle2Node.middle.guard.n2n">
                   <value xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"
                       referredVariable="#i..CopyGraph.Middle2Graph.0.0.child"/>
                 </binding>
               </mappingStatements>
-            </body>
-            <iterator xmi:id="i..CopyGraph.Middle2Graph.0.0.child" name="child" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"/>
+            </ownedBody>
+            <ownedIterators xmi:id="i..CopyGraph.Middle2Graph.0.0.child" name="child"
+                type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"/>
           </mappingStatements>
         </mappingStatement>
       </rule>
@@ -231,11 +233,11 @@
           <assignment xsi:type="qvti:MiddlePropertyAssignment" isDefault="false" targetProperty="../Graph2GraphMinimal/SimpleGraph.ecore.oclas#p.simplegraph.Element.graph">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Graph"
                 referredProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Graph2Graph.graph2">
-              <source xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
+              <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Graph2Graph"
                   referredProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Element2Element.owner">
-                <source xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
                     referredVariable="#qV..CopyGraph.Middle2Node.middle.guard.n2n"/>
-              </source>
+              </ownedSource>
             </value>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Node"
                 referredVariable="#qV..CopyGraph.Middle2Node.lowerGraph.bottom.n2"/>
@@ -243,7 +245,7 @@
           <assignment xsi:type="qvti:MiddlePropertyAssignment" isDefault="false" targetProperty="../Graph2GraphMinimal/SimpleGraph.ecore.oclas#p.simplegraph.Node.label">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredProperty="../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#p.simplegraph2graph.Node2Node.label">
-              <source xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
+              <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Node2Node"
                   referredVariable="#qV..CopyGraph.Middle2Node.middle.guard.n2n"/>
             </value>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Node"
@@ -257,59 +259,59 @@
       nsPrefix="orphanage">
     <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.2 #//@ownedPackages.1/@ownedClasses.3"
         elementType="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element">
-      <ownedTemplateBindings>
-        <ownedTemplateParameterSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element"
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedSetT"/>
-      </ownedTemplateBindings>
+      </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.4 #//@ownedPackages.1/@ownedClasses.5"
         elementType="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element">
-      <ownedTemplateBindings>
-        <ownedTemplateParameterSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedSetT"/>
-      </ownedTemplateBindings>
+      </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.6"
         elementType="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element">
-      <ownedTemplateBindings>
-        <ownedTemplateParameterSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element"
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
-      </ownedTemplateBindings>
+      </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.6"
         elementType="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element">
-      <ownedTemplateBindings>
-        <ownedTemplateParameterSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element"
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
-      </ownedTemplateBindings>
+      </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.7"
         elementType="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element">
-      <ownedTemplateBindings>
-        <ownedTemplateParameterSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
-      </ownedTemplateBindings>
+      </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.7"
         elementType="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element">
-      <ownedTemplateBindings>
-        <ownedTemplateParameterSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
-      </ownedTemplateBindings>
+      </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
         elementType="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element">
-      <ownedTemplateBindings>
-        <ownedTemplateParameterSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element"
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#T.simplegraph.Element"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
-      </ownedTemplateBindings>
+      </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
         elementType="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element">
-      <ownedTemplateBindings>
-        <ownedTemplateParameterSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ../Graph2GraphMinimal/SimpleGraph2Graph.ecore.oclas#T.simplegraph2graph.Element2Element"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
-      </ownedTemplateBindings>
+      </ownedBindings>
     </ownedClasses>
   </ownedPackages>
   <unit name="SimpleGraph" usedPackage="pivot:Package ../Graph2GraphMinimal/SimpleGraph.ecore.oclas#P.simplegraph"/>

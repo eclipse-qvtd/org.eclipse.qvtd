@@ -83,40 +83,40 @@ public interface QVTtemplatePackage extends EPackage {
 	int TEMPLATE_EXP = 3;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEMPLATE_EXP__COMMENT = PivotPackage.LITERAL_EXP__COMMENT;
+	int TEMPLATE_EXP__ANNOTATING_COMMENTS = PivotPackage.LITERAL_EXP__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEMPLATE_EXP__EXTENSION = PivotPackage.LITERAL_EXP__EXTENSION;
+	int TEMPLATE_EXP__OWNED_ANNOTATIONS = PivotPackage.LITERAL_EXP__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEMPLATE_EXP__OWNED_ANNOTATION = PivotPackage.LITERAL_EXP__OWNED_ANNOTATION;
+	int TEMPLATE_EXP__OWNED_COMMENTS = PivotPackage.LITERAL_EXP__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEMPLATE_EXP__OWNED_COMMENT = PivotPackage.LITERAL_EXP__OWNED_COMMENT;
+	int TEMPLATE_EXP__OWNED_EXTENSIONS = PivotPackage.LITERAL_EXP__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -201,40 +201,40 @@ public interface QVTtemplatePackage extends EPackage {
 	int COLLECTION_TEMPLATE_EXP = 0;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_TEMPLATE_EXP__COMMENT = TEMPLATE_EXP__COMMENT;
+	int COLLECTION_TEMPLATE_EXP__ANNOTATING_COMMENTS = TEMPLATE_EXP__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_TEMPLATE_EXP__EXTENSION = TEMPLATE_EXP__EXTENSION;
+	int COLLECTION_TEMPLATE_EXP__OWNED_ANNOTATIONS = TEMPLATE_EXP__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_TEMPLATE_EXP__OWNED_ANNOTATION = TEMPLATE_EXP__OWNED_ANNOTATION;
+	int COLLECTION_TEMPLATE_EXP__OWNED_COMMENTS = TEMPLATE_EXP__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_TEMPLATE_EXP__OWNED_COMMENT = TEMPLATE_EXP__OWNED_COMMENT;
+	int COLLECTION_TEMPLATE_EXP__OWNED_EXTENSIONS = TEMPLATE_EXP__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -346,40 +346,40 @@ public interface QVTtemplatePackage extends EPackage {
 	int OBJECT_TEMPLATE_EXP = 1;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT_TEMPLATE_EXP__COMMENT = TEMPLATE_EXP__COMMENT;
+	int OBJECT_TEMPLATE_EXP__ANNOTATING_COMMENTS = TEMPLATE_EXP__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT_TEMPLATE_EXP__EXTENSION = TEMPLATE_EXP__EXTENSION;
+	int OBJECT_TEMPLATE_EXP__OWNED_ANNOTATIONS = TEMPLATE_EXP__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT_TEMPLATE_EXP__OWNED_ANNOTATION = TEMPLATE_EXP__OWNED_ANNOTATION;
+	int OBJECT_TEMPLATE_EXP__OWNED_COMMENTS = TEMPLATE_EXP__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT_TEMPLATE_EXP__OWNED_COMMENT = TEMPLATE_EXP__OWNED_COMMENT;
+	int OBJECT_TEMPLATE_EXP__OWNED_EXTENSIONS = TEMPLATE_EXP__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -482,40 +482,40 @@ public interface QVTtemplatePackage extends EPackage {
 	int PROPERTY_TEMPLATE_ITEM = 2;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_TEMPLATE_ITEM__COMMENT = PivotPackage.ELEMENT__COMMENT;
+	int PROPERTY_TEMPLATE_ITEM__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_TEMPLATE_ITEM__EXTENSION = PivotPackage.ELEMENT__EXTENSION;
+	int PROPERTY_TEMPLATE_ITEM__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_TEMPLATE_ITEM__OWNED_ANNOTATION = PivotPackage.ELEMENT__OWNED_ANNOTATION;
+	int PROPERTY_TEMPLATE_ITEM__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_TEMPLATE_ITEM__OWNED_COMMENT = PivotPackage.ELEMENT__OWNED_COMMENT;
+	int PROPERTY_TEMPLATE_ITEM__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Obj Container</b></em>' container reference.

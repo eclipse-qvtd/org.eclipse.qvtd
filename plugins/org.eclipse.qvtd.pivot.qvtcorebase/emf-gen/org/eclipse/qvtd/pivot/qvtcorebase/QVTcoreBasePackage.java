@@ -85,40 +85,40 @@ public interface QVTcoreBasePackage extends EPackage {
 	int ABSTRACT_MAPPING = 0;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_MAPPING__COMMENT = QVTbasePackage.RULE__COMMENT;
+	int ABSTRACT_MAPPING__ANNOTATING_COMMENTS = QVTbasePackage.RULE__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_MAPPING__EXTENSION = QVTbasePackage.RULE__EXTENSION;
+	int ABSTRACT_MAPPING__OWNED_ANNOTATIONS = QVTbasePackage.RULE__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_MAPPING__OWNED_ANNOTATION = QVTbasePackage.RULE__OWNED_ANNOTATION;
+	int ABSTRACT_MAPPING__OWNED_COMMENTS = QVTbasePackage.RULE__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_MAPPING__OWNED_COMMENT = QVTbasePackage.RULE__OWNED_COMMENT;
+	int ABSTRACT_MAPPING__OWNED_EXTENSIONS = QVTbasePackage.RULE__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -203,40 +203,40 @@ public interface QVTcoreBasePackage extends EPackage {
 	int AREA = 1;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AREA__COMMENT = PivotPackage.ELEMENT__COMMENT;
+	int AREA__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AREA__EXTENSION = PivotPackage.ELEMENT__EXTENSION;
+	int AREA__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AREA__OWNED_ANNOTATION = PivotPackage.ELEMENT__OWNED_ANNOTATION;
+	int AREA__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AREA__OWNED_COMMENT = PivotPackage.ELEMENT__OWNED_COMMENT;
+	int AREA__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Guard Pattern</b></em>' containment reference.
@@ -276,40 +276,40 @@ public interface QVTcoreBasePackage extends EPackage {
 	int ASSIGNMENT = 2;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT__COMMENT = PivotPackage.ELEMENT__COMMENT;
+	int ASSIGNMENT__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT__EXTENSION = PivotPackage.ELEMENT__EXTENSION;
+	int ASSIGNMENT__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT__OWNED_ANNOTATION = PivotPackage.ELEMENT__OWNED_ANNOTATION;
+	int ASSIGNMENT__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT__OWNED_COMMENT = PivotPackage.ELEMENT__OWNED_COMMENT;
+	int ASSIGNMENT__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Bottom Pattern</b></em>' container reference.
@@ -358,40 +358,40 @@ public interface QVTcoreBasePackage extends EPackage {
 	int CORE_PATTERN = 5;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CORE_PATTERN__COMMENT = QVTbasePackage.PATTERN__COMMENT;
+	int CORE_PATTERN__ANNOTATING_COMMENTS = QVTbasePackage.PATTERN__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CORE_PATTERN__EXTENSION = QVTbasePackage.PATTERN__EXTENSION;
+	int CORE_PATTERN__OWNED_ANNOTATIONS = QVTbasePackage.PATTERN__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CORE_PATTERN__OWNED_ANNOTATION = QVTbasePackage.PATTERN__OWNED_ANNOTATION;
+	int CORE_PATTERN__OWNED_COMMENTS = QVTbasePackage.PATTERN__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CORE_PATTERN__OWNED_COMMENT = QVTbasePackage.PATTERN__OWNED_COMMENT;
+	int CORE_PATTERN__OWNED_EXTENSIONS = QVTbasePackage.PATTERN__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Predicate</b></em>' containment reference list.
@@ -440,40 +440,40 @@ public interface QVTcoreBasePackage extends EPackage {
 	int BOTTOM_PATTERN = 3;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOTTOM_PATTERN__COMMENT = CORE_PATTERN__COMMENT;
+	int BOTTOM_PATTERN__ANNOTATING_COMMENTS = CORE_PATTERN__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOTTOM_PATTERN__EXTENSION = CORE_PATTERN__EXTENSION;
+	int BOTTOM_PATTERN__OWNED_ANNOTATIONS = CORE_PATTERN__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOTTOM_PATTERN__OWNED_ANNOTATION = CORE_PATTERN__OWNED_ANNOTATION;
+	int BOTTOM_PATTERN__OWNED_COMMENTS = CORE_PATTERN__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOTTOM_PATTERN__OWNED_COMMENT = CORE_PATTERN__OWNED_COMMENT;
+	int BOTTOM_PATTERN__OWNED_EXTENSIONS = CORE_PATTERN__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Predicate</b></em>' containment reference list.
@@ -558,40 +558,40 @@ public interface QVTcoreBasePackage extends EPackage {
 	int CORE_DOMAIN = 4;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CORE_DOMAIN__COMMENT = QVTbasePackage.DOMAIN__COMMENT;
+	int CORE_DOMAIN__ANNOTATING_COMMENTS = QVTbasePackage.DOMAIN__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CORE_DOMAIN__EXTENSION = QVTbasePackage.DOMAIN__EXTENSION;
+	int CORE_DOMAIN__OWNED_ANNOTATIONS = QVTbasePackage.DOMAIN__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CORE_DOMAIN__OWNED_ANNOTATION = QVTbasePackage.DOMAIN__OWNED_ANNOTATION;
+	int CORE_DOMAIN__OWNED_COMMENTS = QVTbasePackage.DOMAIN__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CORE_DOMAIN__OWNED_COMMENT = QVTbasePackage.DOMAIN__OWNED_COMMENT;
+	int CORE_DOMAIN__OWNED_EXTENSIONS = QVTbasePackage.DOMAIN__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -676,40 +676,40 @@ public interface QVTcoreBasePackage extends EPackage {
 	int ENFORCEMENT_OPERATION = 6;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENFORCEMENT_OPERATION__COMMENT = PivotPackage.ELEMENT__COMMENT;
+	int ENFORCEMENT_OPERATION__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENFORCEMENT_OPERATION__EXTENSION = PivotPackage.ELEMENT__EXTENSION;
+	int ENFORCEMENT_OPERATION__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENFORCEMENT_OPERATION__OWNED_ANNOTATION = PivotPackage.ELEMENT__OWNED_ANNOTATION;
+	int ENFORCEMENT_OPERATION__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENFORCEMENT_OPERATION__OWNED_COMMENT = PivotPackage.ELEMENT__OWNED_COMMENT;
+	int ENFORCEMENT_OPERATION__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Enforcement Mode</b></em>' attribute.
@@ -758,40 +758,40 @@ public interface QVTcoreBasePackage extends EPackage {
 	int GUARD_PATTERN = 7;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GUARD_PATTERN__COMMENT = CORE_PATTERN__COMMENT;
+	int GUARD_PATTERN__ANNOTATING_COMMENTS = CORE_PATTERN__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GUARD_PATTERN__EXTENSION = CORE_PATTERN__EXTENSION;
+	int GUARD_PATTERN__OWNED_ANNOTATIONS = CORE_PATTERN__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GUARD_PATTERN__OWNED_ANNOTATION = CORE_PATTERN__OWNED_ANNOTATION;
+	int GUARD_PATTERN__OWNED_COMMENTS = CORE_PATTERN__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GUARD_PATTERN__OWNED_COMMENT = CORE_PATTERN__OWNED_COMMENT;
+	int GUARD_PATTERN__OWNED_EXTENSIONS = CORE_PATTERN__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Predicate</b></em>' containment reference list.
@@ -849,40 +849,40 @@ public interface QVTcoreBasePackage extends EPackage {
 	int PROPERTY_ASSIGNMENT = 8;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_ASSIGNMENT__COMMENT = ASSIGNMENT__COMMENT;
+	int PROPERTY_ASSIGNMENT__ANNOTATING_COMMENTS = ASSIGNMENT__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_ASSIGNMENT__EXTENSION = ASSIGNMENT__EXTENSION;
+	int PROPERTY_ASSIGNMENT__OWNED_ANNOTATIONS = ASSIGNMENT__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_ASSIGNMENT__OWNED_ANNOTATION = ASSIGNMENT__OWNED_ANNOTATION;
+	int PROPERTY_ASSIGNMENT__OWNED_COMMENTS = ASSIGNMENT__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_ASSIGNMENT__OWNED_COMMENT = ASSIGNMENT__OWNED_COMMENT;
+	int PROPERTY_ASSIGNMENT__OWNED_EXTENSIONS = ASSIGNMENT__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Bottom Pattern</b></em>' container reference.
@@ -949,40 +949,40 @@ public interface QVTcoreBasePackage extends EPackage {
 	int REALIZED_VARIABLE = 9;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZED_VARIABLE__COMMENT = PivotPackage.VARIABLE__COMMENT;
+	int REALIZED_VARIABLE__ANNOTATING_COMMENTS = PivotPackage.VARIABLE__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZED_VARIABLE__EXTENSION = PivotPackage.VARIABLE__EXTENSION;
+	int REALIZED_VARIABLE__OWNED_ANNOTATIONS = PivotPackage.VARIABLE__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZED_VARIABLE__OWNED_ANNOTATION = PivotPackage.VARIABLE__OWNED_ANNOTATION;
+	int REALIZED_VARIABLE__OWNED_COMMENTS = PivotPackage.VARIABLE__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZED_VARIABLE__OWNED_COMMENT = PivotPackage.VARIABLE__OWNED_COMMENT;
+	int REALIZED_VARIABLE__OWNED_EXTENSIONS = PivotPackage.VARIABLE__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1030,22 +1030,22 @@ public interface QVTcoreBasePackage extends EPackage {
 	int REALIZED_VARIABLE__TYPE_VALUE = PivotPackage.VARIABLE__TYPE_VALUE;
 
 	/**
-	 * The feature id for the '<em><b>Implicit</b></em>' attribute.
+	 * The feature id for the '<em><b>Is Implicit</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZED_VARIABLE__IMPLICIT = PivotPackage.VARIABLE__IMPLICIT;
+	int REALIZED_VARIABLE__IS_IMPLICIT = PivotPackage.VARIABLE__IS_IMPLICIT;
 
 	/**
-	 * The feature id for the '<em><b>Init Expression</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Init</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REALIZED_VARIABLE__INIT_EXPRESSION = PivotPackage.VARIABLE__INIT_EXPRESSION;
+	int REALIZED_VARIABLE__OWNED_INIT = PivotPackage.VARIABLE__OWNED_INIT;
 
 	/**
 	 * The feature id for the '<em><b>Represented Parameter</b></em>' reference.
@@ -1076,40 +1076,40 @@ public interface QVTcoreBasePackage extends EPackage {
 	int VARIABLE_ASSIGNMENT = 10;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_ASSIGNMENT__COMMENT = ASSIGNMENT__COMMENT;
+	int VARIABLE_ASSIGNMENT__ANNOTATING_COMMENTS = ASSIGNMENT__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_ASSIGNMENT__EXTENSION = ASSIGNMENT__EXTENSION;
+	int VARIABLE_ASSIGNMENT__OWNED_ANNOTATIONS = ASSIGNMENT__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_ASSIGNMENT__OWNED_ANNOTATION = ASSIGNMENT__OWNED_ANNOTATION;
+	int VARIABLE_ASSIGNMENT__OWNED_COMMENTS = ASSIGNMENT__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_ASSIGNMENT__OWNED_COMMENT = ASSIGNMENT__OWNED_COMMENT;
+	int VARIABLE_ASSIGNMENT__OWNED_EXTENSIONS = ASSIGNMENT__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Bottom Pattern</b></em>' container reference.

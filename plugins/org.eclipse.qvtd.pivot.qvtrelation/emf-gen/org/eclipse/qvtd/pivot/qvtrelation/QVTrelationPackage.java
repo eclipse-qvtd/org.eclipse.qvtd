@@ -85,40 +85,40 @@ public interface QVTrelationPackage extends EPackage {
 	int DOMAIN_PATTERN = 0;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_PATTERN__COMMENT = QVTbasePackage.PATTERN__COMMENT;
+	int DOMAIN_PATTERN__ANNOTATING_COMMENTS = QVTbasePackage.PATTERN__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_PATTERN__EXTENSION = QVTbasePackage.PATTERN__EXTENSION;
+	int DOMAIN_PATTERN__OWNED_ANNOTATIONS = QVTbasePackage.PATTERN__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_PATTERN__OWNED_ANNOTATION = QVTbasePackage.PATTERN__OWNED_ANNOTATION;
+	int DOMAIN_PATTERN__OWNED_COMMENTS = QVTbasePackage.PATTERN__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_PATTERN__OWNED_COMMENT = QVTbasePackage.PATTERN__OWNED_COMMENT;
+	int DOMAIN_PATTERN__OWNED_EXTENSIONS = QVTbasePackage.PATTERN__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Predicate</b></em>' containment reference list.
@@ -167,40 +167,40 @@ public interface QVTrelationPackage extends EPackage {
 	int KEY = 1;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KEY__COMMENT = PivotPackage.ELEMENT__COMMENT;
+	int KEY__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KEY__EXTENSION = PivotPackage.ELEMENT__EXTENSION;
+	int KEY__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KEY__OWNED_ANNOTATION = PivotPackage.ELEMENT__OWNED_ANNOTATION;
+	int KEY__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KEY__OWNED_COMMENT = PivotPackage.ELEMENT__OWNED_COMMENT;
+	int KEY__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Identifies</b></em>' reference.
@@ -258,40 +258,40 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION = 2;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION__COMMENT = QVTbasePackage.RULE__COMMENT;
+	int RELATION__ANNOTATING_COMMENTS = QVTbasePackage.RULE__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION__EXTENSION = QVTbasePackage.RULE__EXTENSION;
+	int RELATION__OWNED_ANNOTATIONS = QVTbasePackage.RULE__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION__OWNED_ANNOTATION = QVTbasePackage.RULE__OWNED_ANNOTATION;
+	int RELATION__OWNED_COMMENTS = QVTbasePackage.RULE__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION__OWNED_COMMENT = QVTbasePackage.RULE__OWNED_COMMENT;
+	int RELATION__OWNED_EXTENSIONS = QVTbasePackage.RULE__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -403,40 +403,40 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION_CALL_EXP = 3;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_CALL_EXP__COMMENT = PivotPackage.OCL_EXPRESSION__COMMENT;
+	int RELATION_CALL_EXP__ANNOTATING_COMMENTS = PivotPackage.OCL_EXPRESSION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_CALL_EXP__EXTENSION = PivotPackage.OCL_EXPRESSION__EXTENSION;
+	int RELATION_CALL_EXP__OWNED_ANNOTATIONS = PivotPackage.OCL_EXPRESSION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_CALL_EXP__OWNED_ANNOTATION = PivotPackage.OCL_EXPRESSION__OWNED_ANNOTATION;
+	int RELATION_CALL_EXP__OWNED_COMMENTS = PivotPackage.OCL_EXPRESSION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_CALL_EXP__OWNED_COMMENT = PivotPackage.OCL_EXPRESSION__OWNED_COMMENT;
+	int RELATION_CALL_EXP__OWNED_EXTENSIONS = PivotPackage.OCL_EXPRESSION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -521,40 +521,40 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION_DOMAIN = 4;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_DOMAIN__COMMENT = QVTbasePackage.DOMAIN__COMMENT;
+	int RELATION_DOMAIN__ANNOTATING_COMMENTS = QVTbasePackage.DOMAIN__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_DOMAIN__EXTENSION = QVTbasePackage.DOMAIN__EXTENSION;
+	int RELATION_DOMAIN__OWNED_ANNOTATIONS = QVTbasePackage.DOMAIN__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_DOMAIN__OWNED_ANNOTATION = QVTbasePackage.DOMAIN__OWNED_ANNOTATION;
+	int RELATION_DOMAIN__OWNED_COMMENTS = QVTbasePackage.DOMAIN__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_DOMAIN__OWNED_COMMENT = QVTbasePackage.DOMAIN__OWNED_COMMENT;
+	int RELATION_DOMAIN__OWNED_EXTENSIONS = QVTbasePackage.DOMAIN__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -648,40 +648,40 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION_DOMAIN_ASSIGNMENT = 5;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_DOMAIN_ASSIGNMENT__COMMENT = PivotPackage.ELEMENT__COMMENT;
+	int RELATION_DOMAIN_ASSIGNMENT__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_DOMAIN_ASSIGNMENT__EXTENSION = PivotPackage.ELEMENT__EXTENSION;
+	int RELATION_DOMAIN_ASSIGNMENT__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_DOMAIN_ASSIGNMENT__OWNED_ANNOTATION = PivotPackage.ELEMENT__OWNED_ANNOTATION;
+	int RELATION_DOMAIN_ASSIGNMENT__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_DOMAIN_ASSIGNMENT__OWNED_COMMENT = PivotPackage.ELEMENT__OWNED_COMMENT;
+	int RELATION_DOMAIN_ASSIGNMENT__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Value Exp</b></em>' containment reference.
@@ -721,40 +721,40 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION_MODEL = 6;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_MODEL__COMMENT = QVTbasePackage.BASE_MODEL__COMMENT;
+	int RELATION_MODEL__ANNOTATING_COMMENTS = QVTbasePackage.BASE_MODEL__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_MODEL__EXTENSION = QVTbasePackage.BASE_MODEL__EXTENSION;
+	int RELATION_MODEL__OWNED_ANNOTATIONS = QVTbasePackage.BASE_MODEL__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_MODEL__OWNED_ANNOTATION = QVTbasePackage.BASE_MODEL__OWNED_ANNOTATION;
+	int RELATION_MODEL__OWNED_COMMENTS = QVTbasePackage.BASE_MODEL__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_MODEL__OWNED_COMMENT = QVTbasePackage.BASE_MODEL__OWNED_COMMENT;
+	int RELATION_MODEL__OWNED_EXTENSIONS = QVTbasePackage.BASE_MODEL__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -766,13 +766,13 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION_MODEL__NAME = QVTbasePackage.BASE_MODEL__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_MODEL__OWNED_RULE = QVTbasePackage.BASE_MODEL__OWNED_RULE;
+	int RELATION_MODEL__OWNED_CONSTRAINTS = QVTbasePackage.BASE_MODEL__OWNED_CONSTRAINTS;
 
 	/**
 	 * The feature id for the '<em><b>External URI</b></em>' attribute.
@@ -784,13 +784,13 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION_MODEL__EXTERNAL_URI = QVTbasePackage.BASE_MODEL__EXTERNAL_URI;
 
 	/**
-	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Imports</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_MODEL__IMPORTS = QVTbasePackage.BASE_MODEL__IMPORTS;
+	int RELATION_MODEL__OWNED_IMPORTS = QVTbasePackage.BASE_MODEL__OWNED_IMPORTS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Packages</b></em>' containment reference list.
@@ -830,40 +830,40 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION_IMPLEMENTATION = 7;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_IMPLEMENTATION__COMMENT = PivotPackage.ELEMENT__COMMENT;
+	int RELATION_IMPLEMENTATION__ANNOTATING_COMMENTS = PivotPackage.ELEMENT__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_IMPLEMENTATION__EXTENSION = PivotPackage.ELEMENT__EXTENSION;
+	int RELATION_IMPLEMENTATION__OWNED_ANNOTATIONS = PivotPackage.ELEMENT__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_IMPLEMENTATION__OWNED_ANNOTATION = PivotPackage.ELEMENT__OWNED_ANNOTATION;
+	int RELATION_IMPLEMENTATION__OWNED_COMMENTS = PivotPackage.ELEMENT__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_IMPLEMENTATION__OWNED_COMMENT = PivotPackage.ELEMENT__OWNED_COMMENT;
+	int RELATION_IMPLEMENTATION__OWNED_EXTENSIONS = PivotPackage.ELEMENT__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Impl</b></em>' reference.
@@ -912,40 +912,40 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATIONAL_TRANSFORMATION = 8;
 
 	/**
-	 * The feature id for the '<em><b>Comment</b></em>' reference list.
+	 * The feature id for the '<em><b>Annotating Comments</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATIONAL_TRANSFORMATION__COMMENT = QVTbasePackage.TRANSFORMATION__COMMENT;
+	int RELATIONAL_TRANSFORMATION__ANNOTATING_COMMENTS = QVTbasePackage.TRANSFORMATION__ANNOTATING_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Extension</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATIONAL_TRANSFORMATION__EXTENSION = QVTbasePackage.TRANSFORMATION__EXTENSION;
+	int RELATIONAL_TRANSFORMATION__OWNED_ANNOTATIONS = QVTbasePackage.TRANSFORMATION__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Annotation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Comments</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATIONAL_TRANSFORMATION__OWNED_ANNOTATION = QVTbasePackage.TRANSFORMATION__OWNED_ANNOTATION;
+	int RELATIONAL_TRANSFORMATION__OWNED_COMMENTS = QVTbasePackage.TRANSFORMATION__OWNED_COMMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Comment</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Extensions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATIONAL_TRANSFORMATION__OWNED_COMMENT = QVTbasePackage.TRANSFORMATION__OWNED_COMMENT;
+	int RELATIONAL_TRANSFORMATION__OWNED_EXTENSIONS = QVTbasePackage.TRANSFORMATION__OWNED_EXTENSIONS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -957,40 +957,31 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATIONAL_TRANSFORMATION__NAME = QVTbasePackage.TRANSFORMATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Extended Bys</b></em>' reference list.
+	 * The feature id for the '<em><b>Owned Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATIONAL_TRANSFORMATION__EXTENDED_BYS = QVTbasePackage.TRANSFORMATION__EXTENDED_BYS;
+	int RELATIONAL_TRANSFORMATION__OWNED_CONSTRAINTS = QVTbasePackage.TRANSFORMATION__OWNED_CONSTRAINTS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Rule</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATIONAL_TRANSFORMATION__OWNED_RULE = QVTbasePackage.TRANSFORMATION__OWNED_RULE;
+	int RELATIONAL_TRANSFORMATION__OWNED_BINDINGS = QVTbasePackage.TRANSFORMATION__OWNED_BINDINGS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Template Bindings</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Signature</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATIONAL_TRANSFORMATION__OWNED_TEMPLATE_BINDINGS = QVTbasePackage.TRANSFORMATION__OWNED_TEMPLATE_BINDINGS;
-
-	/**
-	 * The feature id for the '<em><b>Owned Template Signature</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RELATIONAL_TRANSFORMATION__OWNED_TEMPLATE_SIGNATURE = QVTbasePackage.TRANSFORMATION__OWNED_TEMPLATE_SIGNATURE;
+	int RELATIONAL_TRANSFORMATION__OWNED_SIGNATURE = QVTbasePackage.TRANSFORMATION__OWNED_SIGNATURE;
 
 	/**
 	 * The feature id for the '<em><b>Unspecialized Element</b></em>' reference.
@@ -1000,6 +991,15 @@ public interface QVTrelationPackage extends EPackage {
 	 * @ordered
 	 */
 	int RELATIONAL_TRANSFORMATION__UNSPECIALIZED_ELEMENT = QVTbasePackage.TRANSFORMATION__UNSPECIALIZED_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Extenders</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATIONAL_TRANSFORMATION__EXTENDERS = QVTbasePackage.TRANSFORMATION__EXTENDERS;
 
 	/**
 	 * The feature id for the '<em><b>Instance Class Name</b></em>' attribute.
@@ -1038,13 +1038,13 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATIONAL_TRANSFORMATION__IS_INTERFACE = QVTbasePackage.TRANSFORMATION__IS_INTERFACE;
 
 	/**
-	 * The feature id for the '<em><b>Owned Behavior</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Behaviors</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATIONAL_TRANSFORMATION__OWNED_BEHAVIOR = QVTbasePackage.TRANSFORMATION__OWNED_BEHAVIOR;
+	int RELATIONAL_TRANSFORMATION__OWNED_BEHAVIORS = QVTbasePackage.TRANSFORMATION__OWNED_BEHAVIORS;
 
 	/**
 	 * The feature id for the '<em><b>Owned Invariants</b></em>' containment reference list.

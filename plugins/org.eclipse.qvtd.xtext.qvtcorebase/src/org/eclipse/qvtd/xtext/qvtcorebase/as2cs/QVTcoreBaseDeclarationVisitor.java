@@ -188,7 +188,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		csQuery.setPivot(asFunction);
 		csQuery.setPathName(createPathNameCS(asFunction.getOwningClass()));
 		csQuery.setOwnedType(createTypeRefCS(asFunction.getType()));
-		context.refreshList(csQuery.getInputParamDeclaration(), context.visitDeclarations(ParamDeclarationCS.class, asFunction.getOwnedParameter(), null));
+		context.refreshList(csQuery.getInputParamDeclaration(), context.visitDeclarations(ParamDeclarationCS.class, asFunction.getOwnedParameters(), null));
 		csQuery.setExpression(createExpCS(asFunction.getQueryExpression()));
 		return csQuery;
 	}

@@ -87,7 +87,7 @@ public class QVTiTransformationAnalysis
 				OperationCallExp operationCallExp = (OperationCallExp)eObject;
 				Operation referredOperation = operationCallExp.getReferredOperation();
 				if ((referredOperation != null) && (referredOperation.getOperationId() == allInstancesOperationId)) {
-					OCLExpression source = operationCallExp.getSource();
+					OCLExpression source = operationCallExp.getOwnedSource();
 					if (source != null) {
 						Type sourceType = source.getType();
 						if (sourceType != null) {
