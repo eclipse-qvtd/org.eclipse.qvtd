@@ -1,3 +1,6 @@
+[%
+
+%]
 package org.eclipse.qvtd.build.qvtrtoqvtc.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
@@ -28,7 +31,6 @@ public class OCLExpCopy extends PivotSwitch<Element> {
      */
     @Override 
     public Element case[%=ec.name%]([%=ec.name%] in) {
-  [%ec.name.println();%]
   [%switch (ec.name) {
         case "VariableExp" :%]
         final [%=ec.name%] out = PivotFactory.eINSTANCE.create[%=ec.name%]();
@@ -57,9 +59,12 @@ public class OCLExpCopy extends PivotSwitch<Element> {
         }
         [%}%]
         return out;
-    [%  case "PrimitiveType" :%]
+    [%  case "PrimitiveType" : continue; 
+        case "Enumeration" : continue; 
+        case "EnumerationLiteral" : ec.name.println("Return Same: "); %]
         return in;
-    [%  default :%]
+    [%  break;
+        case "EnumLiteralExp" : ec.name.println("Full Copy: "); %]
 	    final [%=ec.name%] out = PivotFactory.eINSTANCE.create[%=ec.name%]();
 	    assert out != null;
 	    transformation.addOrphan(out);
@@ -79,7 +84,10 @@ public class OCLExpCopy extends PivotSwitch<Element> {
             out.get[%=r.getName().firstToUpperCase()%]().add(([%=r.eReferenceType.name%]) doSwitch(_[%=r.getName()%]));
         }
         [%}%]
-	    return out;    
+	    return out;
+	[%  break;
+	    default : %]
+	    throw new UnsupportedOperationException("Not implememnted yet");
   [%} %]
     }
     

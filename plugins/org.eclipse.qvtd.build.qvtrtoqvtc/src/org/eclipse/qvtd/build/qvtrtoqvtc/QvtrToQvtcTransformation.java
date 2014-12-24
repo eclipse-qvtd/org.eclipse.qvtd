@@ -356,7 +356,29 @@ public class QvtrToQvtcTransformation
 		return p;
 	}
 
-	public @NonNull RealizedVariable findRealizedVariable(@NonNull String name,
+	public @NonNull RealizedVariable findRealizedVariable(@NonNull Variable sv,
+			@NonNull CorePattern pattern) {
+		
+		RealizedVariable rv = null;
+		String name = sv.getName();
+		Type type = sv.getType();
+		assert (name != null) && (type != null);
+		if (doGlobalSearch) {
+			rv = (RealizedVariable) realizedVariables.get(name, type, pattern);
+		}
+		if (rv == null) {
+			rv = QVTcoreBaseFactory.eINSTANCE.createRealizedVariable();
+			assert rv!= null;
+			rv.setName(name);
+			rv.setType(type);
+			realizedVariables.add(rv, pattern);
+			pattern.getVariable().add(rv);
+			putVariableTrace(sv, rv);
+		}
+		return rv;
+	}
+	
+	public @NonNull RealizedVariable findTraceRealizedVariable(@NonNull String name,
 			@NonNull Type type, @NonNull CorePattern pattern) {
 		
 		RealizedVariable rv = null;
@@ -374,6 +396,27 @@ public class QvtrToQvtcTransformation
 		return rv;
 	}
 	
+	public @NonNull Variable findVariable(@NonNull Variable sv,
+			@NonNull CorePattern pattern) {
+		
+		Variable v = null;
+		String name = sv.getName();
+		Type type = sv.getType();
+		assert (name != null) && (type != null);
+		if (doGlobalSearch) {
+			v = (Variable) variables.get(name, type, pattern);
+		}
+		if (v == null) {
+			v = PivotFactory.eINSTANCE.createVariable();
+			assert v!= null;
+			v.setName(name);
+			v.setType(type);
+			variables.add(v, pattern);
+			pattern.getVariable().add(v);
+			putVariableTrace(sv, v);
+		}
+		return v;
+	}
 	
 	public @NonNull Variable findVariable(@NonNull String name,
 			@NonNull Type type, @NonNull CorePattern pattern) {

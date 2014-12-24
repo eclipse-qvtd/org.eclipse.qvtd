@@ -15,6 +15,7 @@ import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLLinkingS
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
+import org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBaseStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtrelation.QVTrelationStandaloneSetup;
 import org.junit.After;
 import org.junit.Before;
@@ -34,6 +35,7 @@ public class QvtrToQvtcTests extends LoadTestCase {
 		super.setUp();
 		QVTrelationStandaloneSetup.doSetup();
 		QVTcoreStandaloneSetup.doSetup();
+		QVTcoreBaseStandaloneSetup.doSetup();
 		metaModelManager = new MetaModelManager();
         MetaModelManagerResourceSetAdapter.getAdapter(DomainUtil.nonNullState(resourceSet), metaModelManager);
     }
@@ -111,9 +113,9 @@ public class QvtrToQvtcTests extends LoadTestCase {
 		t.execute();
 		Map<Object, Object> options = new HashMap<Object, Object>();
         options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
-        t.save(qvtcTraceResource, t.getTraceRoots(), options);
+        t.saveTrace(qvtcTraceResource, t.getTraceRoots(), options);
         assertNoResourceErrors("Trace save", qvtcTraceResource);
-        t.save(qvtcResource, t.getCoreRoots(), options);
+        t.saveCore(qvtcResource, t.getCoreRoots(), options);
         assertNoResourceErrors("Core save", qvtcResource);
 		
     }
