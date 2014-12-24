@@ -52,5 +52,66 @@ transformation SeqToStm(seqDgm: SeqMM, stm: StmcMM)
                InteractionToStateMachine(i, s);
           }
      }
+     
+     top relation MessageToTransition
+     {
+          mid: String;
+
+          domain seqDgm 
+          m1:Message 
+          {
+               messageId = mid,
+--               event = send:MessageEvent {type = MessageEventType::Send, state = ist1:State{}},
+--               event = receive:MessageEvent {type = MessageEventType::Receive, state = ist2:State{}},
+               event = eSet:Set(MessageEvent) {
+                   send:MessageEvent {type = MessageEventType::Send, state = ist1:State{}},
+                   receive:MessageEvent {type = MessageEventType::Receive, state = ist2:State{}}
+                   ++ _
+               },
+               interaction = i:Interaction{}
+          };
+
+          enforce domain stm 
+          tr:Transition
+          {
+               name = mid,
+               fromState = fst:State{},
+               toState = tst:State{},
+               action = sm:SendMsg {message = m2:Message{messageId = mid}},
+               owner = s:StateMachine{}
+          };
+
+          when
+          {
+               InteractionToStateMachine(i, s);
+               StateToState(ist1, fst);
+               StateToState(ist2, tst);
+          }
+     }
+     
+     top relation MessageSequenceToTransitionSequence
+     {
+          domain seqDgm 
+          ev1:MessageEvent 
+          {
+               type = MessageEventType::Receive,
+               message = m1:Message{},
+               state = est:State{},
+               next = ev2:MessageEvent{type=MessageEventType::Send, message=m2:Message{}}
+          };
+
+          enforce domain stm 
+          tr1:Transition
+          {
+               toState = tst:State{outTransition = tr2:Transition{}}
+          };
+
+          when
+          {
+               StateToState(est, tst);  -- Added to get the correct tst:State
+               MessageToTransition(m1, tr1);
+               MessageToTransition(m2, tr2);
+          }
+     }
 
 }
