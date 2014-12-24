@@ -20,7 +20,7 @@ import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RuleBindings;
 
 
 /**
- * The Interface Rule.
+ * The Rule interface.
  */
 public interface Rule {
 	
@@ -54,9 +54,6 @@ public interface Rule {
 	
 	/**
 	 * Instantiate output elements.
-	 *
-	 * @param qvtcModelElements the qvtc model elements
-	 * @return the list
 	 */
 	void instantiateOutput();
 	
@@ -76,14 +73,6 @@ public interface Rule {
 	boolean hasExecuted();
 	
 	/**
-	 * Match a Bindings to the types requried by the rule 
-	 * @param tr 
-	 * @param bindings
-	 * @return
-	 */
-	//public boolean matchBindings(@NonNull Rule tr, @NonNull RelationsBindings relationsBindings);
-	
-	/**
 	 * Assing values to output elements' attributes.
 	 *
 	 */
@@ -96,14 +85,9 @@ public interface Rule {
 	 */
 	void setExecuted(boolean executed);
 	
-	
-	//void setRelationsRoot(R root);
-	
-	
 	/**
 	 * When.
 	 *
-	 * @param transformation the transformation
 	 * @return true, if successful
 	 */
 	public boolean when();
