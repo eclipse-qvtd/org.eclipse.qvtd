@@ -168,9 +168,7 @@ top relation RelationalTransformationToPackage
 
     enforce domain core p:pivotocl::Package {
         name = rtn,
-        ownedType = rc:Class {
-        
-        }
+        ownedType = rc:Class {}
     };
     where {
     RelationToTraceClass(r, rc);
@@ -523,7 +521,7 @@ top relation TopLevelRelationToMappingForEnforcement
     }
     where {
         allDomainVars = r.domain->iterate(md; acc:Set(qvtrelation::RelationDomain)=Set{} |
-        acc->including(md.oclAsType(qvtrelation::RelationDomain))).pattern.bindsTo->asSet();
+            acc->including(md.oclAsType(qvtrelation::RelationDomain))).pattern.bindsTo->asSet();
         whenVars = r.when.bindsTo;
         whereVars = r.where.bindsTo;
 
@@ -531,21 +529,21 @@ top relation TopLevelRelationToMappingForEnforcement
         -- The predicate corresponding to a where clause relation call is included not in this
         -- mapping but in the one corresponding to the invoked relation (refer to rule 2.6.1)
         rpSet = r.where.predicate->reject(p |
-        p.conditionExpression.oclIsTypeOf(qvtrelation::RelationCallExp));
+            p.conditionExpression.oclIsTypeOf(qvtrelation::RelationCallExp));
 
         oppositeDomainVars = rOppositeDomains->iterate(d; vars: Set(pivotocl::Variable) = Set{} |
-        vars->union(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo));
+            vars->union(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo));
         sharedDomainVars = getSharedDomainVars(r);
         domainBottomUnSharedVars = domainVars - whenVars - sharedDomainVars;
 
         unsharedWhereVars =
-        (whereVars - whenVars - allDomainVars)->union(sharedDomainVars);
+            (whereVars - whenVars - allDomainVars)->union(sharedDomainVars);
 
         predicatesWithVarBindings =
-        filterOutPredicatesThatReferToVars(rpSet, domainBottomUnSharedVars);
+            filterOutPredicatesThatReferToVars(rpSet, domainBottomUnSharedVars);
         predicatesWithoutVarBindings = rpSet - predicatesWithVarBindings;
         unsharedWhenVars = whenVars - allDomainVars;
-        domainVarsSharedWithWhen = domainVars->intersection(whenVars);
+        domainVarsSharedWithWhen = domainVars->intersection(whenVars)->excluding(tev);
         rdSeq = Sequence{r, rd};
         rdSet = Set{r, rd};
         rdVarsSeq = Sequence{rdSet, oppositeDomainVars};
