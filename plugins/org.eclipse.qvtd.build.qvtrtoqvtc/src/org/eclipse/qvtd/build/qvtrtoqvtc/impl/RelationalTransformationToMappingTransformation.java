@@ -124,7 +124,7 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 		assert mt != null;
 		transformation.addOrphan(mt);
 		// Middle model
-		tmtm =  QVTbaseFactory.eINSTANCE.createTypedModel();
+		//tmtm =  QVTbaseFactory.eINSTANCE.createTypedModel();
 		for (SubRecord subRecord : subRecords) {
 			TypedModel mtm =  QVTbaseFactory.eINSTANCE.createTypedModel();
 			subRecord.mtm = mtm;
@@ -140,10 +140,10 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 		assert mt != null;
 		mt.setName(rtn);
 		assert p != null;
-		assert tmtm != null;
-		tmtm.setName("");
-		tmtm.getUsedPackage().add(p);
-		mt.getModelParameter().add(tmtm);
+		//assert tmtm != null;
+		//tmtm.setName("");
+		//tmtm.getUsedPackage().add(p);
+		//mt.getModelParameter().add(tmtm);
 		for (SubRecord subRecord : subRecords) {
 			TypedModel mtm = subRecord.mtm;
 			assert mtm != null;

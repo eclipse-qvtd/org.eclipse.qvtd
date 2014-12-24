@@ -192,7 +192,7 @@ public class QVTr2QVTcRelations {
 		// This call is wrong as the trace variable is realized, it can't be guarded.
 		// This should only be done in a nested mapping or later mapping
 		//doRDomainToMBottomPredicateForEnforcement(r, rd, te, predicatesWithoutVarBindings, unboundDomainVars, mb);		
-		doRDomainVarToMDBottomAssignmnetForEnforcement(r, rd, te, predicatesWithoutVarBindings, unboundDomainVars, mb);
+		doRDomainVarToMDBottomAssignmnetForEnforcement(r, rd, te, mb);
 	}
 
 	// 31
@@ -1016,9 +1016,7 @@ public class QVTr2QVTcRelations {
 	 * Creates the assignment of the middle model to the L/R models
 	 */
 	public void doRDomainVarToMDBottomAssignmnetForEnforcement(@NonNull Relation r, @NonNull RelationDomain rd,
-			@NonNull ObjectTemplateExp te,
-			@NonNull Set<Predicate> predicatesWithoutVarBindings,
-			@NonNull Set<Variable> unboundDomainVars, @NonNull BottomPattern mb)
+			@NonNull ObjectTemplateExp te, @NonNull BottomPattern mb)
 	{
 		// check
 		Variable v = te.getBindsTo();
@@ -1188,12 +1186,7 @@ public class QVTr2QVTcRelations {
 	public @NonNull RealizedVariable doRVarToMRealizedVar(@NonNull Variable rv, 
 			@NonNull CorePattern pattern) {
 		
-		String n = rv.getName();
-		Type t = rv.getType();
-		assert (n != null) && (t != null);
-		RealizedVariable mv = transformation.findRealizedVariable(n, t, pattern);
-		assert mv != null;
-		transformation.putVariableTrace(rv, mv);
+		RealizedVariable mv = transformation.findRealizedVariable(rv, pattern);
 		return mv;
 	}
 	
@@ -1208,20 +1201,14 @@ public class QVTr2QVTcRelations {
 	public @NonNull Variable doRVarToMVar(@NonNull Variable rv, 
 			@NonNull CorePattern pattern) {
 
-		String n = rv.getName();
-		Type t = rv.getType();
-		assert (n != null);
-		assert (t != null);
-		Variable mv = transformation.findVariable(n, t, pattern);
-		assert mv != null;
-		transformation.putVariableTrace(rv, mv);
+		Variable mv = transformation.findVariable(rv, pattern);
 		return mv;
 	}
 	
 	public @NonNull Variable doRVarToMVar(@NonNull Variable rv) {
 
 		Variable mv = transformation.getVariableTrace(rv);
-		assert mv != null;
+		assert mv != null : "No variable trace found for " + rv.getName() + ". Probable cause is a missing where/when statement to bind the variable.";
 		return mv;
 	}
 	
@@ -1237,7 +1224,7 @@ public class QVTr2QVTcRelations {
 		// when
 		Type tc = transformation.getRelationTrace(r);
 		assert tc != null;
-		RealizedVariable mv = transformation.findRealizedVariable(rn+"_"+dn+"_v", tc, p);
+		RealizedVariable mv = transformation.findTraceRealizedVariable(rn+"_"+dn+"_v", tc, p);
 		return mv;
 	}
 	
