@@ -17,8 +17,8 @@ import java.util.List;
 
 import org.eclipse.epsilon.common.parse.problem.ParseProblem;
 import org.eclipse.epsilon.eol.EolModule;
-import org.eclipse.epsilon.eol.EolOperation;
 import org.eclipse.epsilon.eol.IEolExecutableModule;
+import org.eclipse.epsilon.eol.dom.Operation;
 import org.eclipse.epsilon.eol.exceptions.EolRuntimeException;
 import org.eclipse.epsilon.eol.models.IModel;
 
@@ -138,7 +138,7 @@ public class EolTask extends EpsilonTask {
 	 */
 	public void executeFromFirstOperation() throws QvtMtcExecutionException {
 		prepare();
-		EolOperation operation = module.getDeclaredOperations().get(0);
+		Operation operation = module.getDeclaredOperations().get(0);
 		preProcess();
 		try {
 			result = operation.execute(null, Collections.EMPTY_LIST, module.getContext());
@@ -168,7 +168,7 @@ public class EolTask extends EpsilonTask {
 	 * @throws QvtMtcExecutionException the execution exception
 	 */
 	private Object executeOperation(IEolExecutableModule module, String operationName) throws QvtMtcExecutionException {
-		EolOperation operation = module.getDeclaredOperations().getOperation(operationName);
+		Operation operation = module.getDeclaredOperations().getOperation(operationName);
 		if(operation != null) {
 			try {
 				return operation.execute(null, Collections.EMPTY_LIST, module.getContext());
