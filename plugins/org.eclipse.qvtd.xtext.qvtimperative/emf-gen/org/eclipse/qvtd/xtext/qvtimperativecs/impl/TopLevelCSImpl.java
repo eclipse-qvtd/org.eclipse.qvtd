@@ -34,13 +34,14 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * An implementation of the model object '<em><b>Top Level CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.TopLevelCSImpl#getTransformations <em>Transformations</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.TopLevelCSImpl#getQueries <em>Queries</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.TopLevelCSImpl#getMappings <em>Mappings</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

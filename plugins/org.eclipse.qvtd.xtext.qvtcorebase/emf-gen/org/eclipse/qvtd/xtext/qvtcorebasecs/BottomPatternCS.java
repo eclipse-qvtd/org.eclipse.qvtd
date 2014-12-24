@@ -19,11 +19,11 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getEnforcementOperations <em>Enforcement Operations</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getRealizedVariables <em>Realized Variables</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getBottomPatternCS()
  * @model

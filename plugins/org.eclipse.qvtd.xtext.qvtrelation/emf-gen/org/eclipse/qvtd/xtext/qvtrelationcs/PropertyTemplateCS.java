@@ -22,13 +22,13 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getObjectTemplate <em>Object Template</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getPropertyId <em>Property Id</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getOppositePropertyId <em>Opposite Property Id</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getExpression <em>Expression</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getPropertyTemplateCS()
  * @model

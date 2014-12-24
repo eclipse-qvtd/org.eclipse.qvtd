@@ -20,7 +20,6 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage;
  * An implementation of the model object '<em><b>Abstract Domain CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

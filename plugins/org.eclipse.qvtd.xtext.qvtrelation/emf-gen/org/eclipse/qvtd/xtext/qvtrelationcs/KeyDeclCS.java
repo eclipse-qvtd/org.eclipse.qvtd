@@ -22,13 +22,13 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS#getPathName <em>Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS#getPropertyIds <em>Property Ids</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS#getOppositePropertyIds <em>Opposite Property Ids</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS#getClassId <em>Class Id</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getKeyDeclCS()
  * @model

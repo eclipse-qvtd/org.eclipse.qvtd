@@ -21,11 +21,11 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS#getImports <em>Imports</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS#getUses <em>Uses</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getDirectionCS()
  * @model

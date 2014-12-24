@@ -19,10 +19,10 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getMappingSequence <em>Mapping Sequence</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCS()
  * @model

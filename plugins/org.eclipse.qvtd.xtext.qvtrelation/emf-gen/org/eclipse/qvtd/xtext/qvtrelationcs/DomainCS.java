@@ -21,6 +21,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isCheckonly <em>Checkonly</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isEnforce <em>Enforce</em>}</li>
@@ -30,7 +31,6 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getDefaultValues <em>Default Values</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getImplementedBy <em>Implemented By</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDomainCS()
  * @model

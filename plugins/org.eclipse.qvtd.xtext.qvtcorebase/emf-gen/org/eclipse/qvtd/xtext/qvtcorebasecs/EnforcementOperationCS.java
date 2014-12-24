@@ -20,11 +20,11 @@ import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS#isDeletion <em>Deletion</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS#getOperationCall <em>Operation Call</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getEnforcementOperationCS()
  * @model

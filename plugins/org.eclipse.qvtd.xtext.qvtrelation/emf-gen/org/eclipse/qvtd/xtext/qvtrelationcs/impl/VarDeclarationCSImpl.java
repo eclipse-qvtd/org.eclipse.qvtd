@@ -35,12 +35,13 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * An implementation of the model object '<em><b>Var Declaration CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.VarDeclarationCSImpl#getVarDeclarationIds <em>Var Declaration Ids</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.VarDeclarationCSImpl#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

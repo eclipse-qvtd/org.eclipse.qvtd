@@ -21,10 +21,10 @@ import org.eclipse.ocl.xtext.basecs.NamedElementCS;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.ModelDeclCS#getMetaModelIds <em>Meta Model Ids</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getModelDeclCS()
  * @model

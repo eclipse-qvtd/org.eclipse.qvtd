@@ -21,10 +21,10 @@ import org.eclipse.ocl.xtext.basecs.ModelElementCS;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.UnitCS#getIdentifier <em>Identifier</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getUnitCS()
  * @model

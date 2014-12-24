@@ -20,10 +20,10 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.PredicateCS#getExpr <em>Expr</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getPredicateCS()
  * @model

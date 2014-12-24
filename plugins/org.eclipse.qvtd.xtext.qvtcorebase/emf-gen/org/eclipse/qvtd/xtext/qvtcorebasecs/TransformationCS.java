@@ -21,12 +21,12 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS#getPathName <em>Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS#getPackage <em>Package</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS#getDirections <em>Directions</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getTransformationCS()
  * @model

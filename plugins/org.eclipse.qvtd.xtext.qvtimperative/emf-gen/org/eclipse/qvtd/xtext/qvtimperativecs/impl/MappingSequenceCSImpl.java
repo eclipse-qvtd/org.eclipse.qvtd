@@ -31,11 +31,12 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * An implementation of the model object '<em><b>Mapping Sequence CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingSequenceCSImpl#getMappingStatements <em>Mapping Statements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

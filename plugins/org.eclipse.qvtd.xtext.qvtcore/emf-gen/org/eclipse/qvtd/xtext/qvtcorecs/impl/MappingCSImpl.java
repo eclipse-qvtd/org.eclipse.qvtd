@@ -33,12 +33,13 @@ import org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSVisitor;
  * An implementation of the model object '<em><b>Mapping CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.MappingCSImpl#getComposedMappings <em>Composed Mappings</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.MappingCSImpl#getRefines <em>Refines</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

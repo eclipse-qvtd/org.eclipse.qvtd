@@ -19,10 +19,10 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TemplateCS#getGuardExpression <em>Guard Expression</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getTemplateCS()
  * @model abstract="true"

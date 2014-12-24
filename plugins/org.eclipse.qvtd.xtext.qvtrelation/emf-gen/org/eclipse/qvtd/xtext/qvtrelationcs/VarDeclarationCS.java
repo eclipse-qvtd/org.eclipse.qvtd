@@ -21,11 +21,11 @@ import org.eclipse.ocl.xtext.basecs.TypedRefCS;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS#getVarDeclarationIds <em>Var Declaration Ids</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getVarDeclarationCS()
  * @model

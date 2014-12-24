@@ -21,11 +21,11 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getComposedMappings <em>Composed Mappings</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getRefines <em>Refines</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage#getMappingCS()
  * @model

@@ -21,6 +21,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isTop <em>Top</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOverrides <em>Overrides</em>}</li>
@@ -29,7 +30,6 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getWhen <em>When</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getWhere <em>Where</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getRelationCS()
  * @model

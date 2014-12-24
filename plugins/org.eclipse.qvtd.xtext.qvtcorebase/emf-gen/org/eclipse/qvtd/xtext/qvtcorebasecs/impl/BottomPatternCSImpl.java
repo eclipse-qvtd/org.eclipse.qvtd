@@ -32,12 +32,13 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.util.QVTcoreBaseCSVisitor;
  * An implementation of the model object '<em><b>Bottom Pattern CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.BottomPatternCSImpl#getEnforcementOperations <em>Enforcement Operations</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.BottomPatternCSImpl#getRealizedVariables <em>Realized Variables</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

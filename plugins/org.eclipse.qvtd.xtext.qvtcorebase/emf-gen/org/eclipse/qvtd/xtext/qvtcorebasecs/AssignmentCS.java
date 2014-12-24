@@ -19,12 +19,12 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#isDefault <em>Default</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getTarget <em>Target</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getInitialiser <em>Initialiser</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAssignmentCS()
  * @model

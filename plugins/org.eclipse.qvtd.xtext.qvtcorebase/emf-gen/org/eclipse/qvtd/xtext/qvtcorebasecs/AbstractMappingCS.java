@@ -21,12 +21,12 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getDomains <em>Domains</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getIn <em>In</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getMiddle <em>Middle</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAbstractMappingCS()
  * @model abstract="true"

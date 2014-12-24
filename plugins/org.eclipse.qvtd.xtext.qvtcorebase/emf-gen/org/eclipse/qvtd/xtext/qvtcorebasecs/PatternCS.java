@@ -20,11 +20,11 @@ import org.eclipse.ocl.xtext.basecs.ModelElementCS;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.PatternCS#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.PatternCS#getUnrealizedVariables <em>Unrealized Variables</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getPatternCS()
  * @model abstract="true"

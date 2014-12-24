@@ -26,12 +26,13 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
  * An implementation of the model object '<em><b>Area CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AreaCSImpl#getGuardPattern <em>Guard Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AreaCSImpl#getBottomPattern <em>Bottom Pattern</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

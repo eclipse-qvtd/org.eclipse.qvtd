@@ -37,7 +37,9 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * An implementation of the model object '<em><b>Transformation CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl#getModelDecls <em>Model Decls</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl#getExtends <em>Extends</em>}</li>
@@ -45,7 +47,6 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl#getQueries <em>Queries</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl#getRelation <em>Relation</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

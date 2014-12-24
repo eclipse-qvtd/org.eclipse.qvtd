@@ -19,11 +19,11 @@ import org.eclipse.ocl.xtext.basecs.NamedElementCS;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS#getGuardPattern <em>Guard Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS#getBottomPattern <em>Bottom Pattern</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAreaCS()
  * @model abstract="true"

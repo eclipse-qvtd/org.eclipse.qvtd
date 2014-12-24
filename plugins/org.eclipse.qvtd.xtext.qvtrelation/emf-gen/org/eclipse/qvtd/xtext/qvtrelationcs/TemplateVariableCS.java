@@ -20,10 +20,10 @@ import org.eclipse.ocl.xtext.basecs.TypedRefCS;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TemplateVariableCS#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getTemplateVariableCS()
  * @model abstract="true"

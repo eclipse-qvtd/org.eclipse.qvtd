@@ -21,11 +21,11 @@ import org.eclipse.ocl.xtext.basecs.RootPackageCS;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS#getImportClauses <em>Import Clauses</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS#getTransformations <em>Transformations</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getTopLevelCS()
  * @model

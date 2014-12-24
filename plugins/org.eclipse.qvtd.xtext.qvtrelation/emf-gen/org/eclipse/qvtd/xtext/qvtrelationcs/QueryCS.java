@@ -21,11 +21,11 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS#getInputParamDeclarations <em>Input Param Declarations</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS#getExpression <em>Expression</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getQueryCS()
  * @model

@@ -35,13 +35,14 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.util.QVTcoreBaseCSVisitor;
  * An implementation of the model object '<em><b>Transformation CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.TransformationCSImpl#getPathName <em>Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.TransformationCSImpl#getPackage <em>Package</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.TransformationCSImpl#getDirections <em>Directions</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

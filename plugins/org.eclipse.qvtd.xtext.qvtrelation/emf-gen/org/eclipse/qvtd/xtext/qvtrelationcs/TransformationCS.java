@@ -21,6 +21,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getModelDecls <em>Model Decls</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getExtends <em>Extends</em>}</li>
@@ -28,7 +29,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getQueries <em>Queries</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getRelation <em>Relation</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getTransformationCS()
  * @model

@@ -29,13 +29,14 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.util.QVTcoreBaseCSVisitor;
  * An implementation of the model object '<em><b>Assignment CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AssignmentCSImpl#isDefault <em>Default</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AssignmentCSImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AssignmentCSImpl#getInitialiser <em>Initialiser</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

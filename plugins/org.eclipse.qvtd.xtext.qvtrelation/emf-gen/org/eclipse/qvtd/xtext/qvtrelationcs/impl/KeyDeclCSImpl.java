@@ -36,14 +36,15 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * An implementation of the model object '<em><b>Key Decl CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.KeyDeclCSImpl#getPathName <em>Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.KeyDeclCSImpl#getPropertyIds <em>Property Ids</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.KeyDeclCSImpl#getOppositePropertyIds <em>Opposite Property Ids</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.KeyDeclCSImpl#getClassId <em>Class Id</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

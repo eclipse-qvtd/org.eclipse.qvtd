@@ -20,12 +20,12 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS#isCheck <em>Check</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS#isEnforce <em>Enforce</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS#getDirection <em>Direction</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getDomainCS()
  * @model

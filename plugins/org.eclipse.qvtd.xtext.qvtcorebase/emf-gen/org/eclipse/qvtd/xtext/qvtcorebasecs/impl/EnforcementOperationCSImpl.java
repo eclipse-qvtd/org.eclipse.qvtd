@@ -29,12 +29,13 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.util.QVTcoreBaseCSVisitor;
  * An implementation of the model object '<em><b>Enforcement Operation CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.EnforcementOperationCSImpl#isDeletion <em>Deletion</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.EnforcementOperationCSImpl#getOperationCall <em>Operation Call</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

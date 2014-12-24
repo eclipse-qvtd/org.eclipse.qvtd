@@ -23,13 +23,13 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getPathName <em>Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getTransformation <em>Transformation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getInputParamDeclaration <em>Input Param Declaration</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getExpression <em>Expression</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getQueryCS()
  * @model

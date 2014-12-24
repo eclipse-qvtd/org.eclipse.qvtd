@@ -20,11 +20,11 @@ import org.eclipse.ocl.pivot.Variable;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS#getMemberIdentifiers <em>Member Identifiers</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS#getRestIdentifier <em>Rest Identifier</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getCollectionTemplateCS()
  * @model

@@ -29,12 +29,13 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS;
  * An implementation of the model object '<em><b>Pattern CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.PatternCSImpl#getConstraints <em>Constraints</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.PatternCSImpl#getUnrealizedVariables <em>Unrealized Variables</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

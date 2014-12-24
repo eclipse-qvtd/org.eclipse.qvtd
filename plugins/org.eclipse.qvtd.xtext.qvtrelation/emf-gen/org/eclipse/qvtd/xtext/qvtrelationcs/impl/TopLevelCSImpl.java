@@ -33,12 +33,13 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * An implementation of the model object '<em><b>Top Level CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TopLevelCSImpl#getImportClauses <em>Import Clauses</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TopLevelCSImpl#getTransformations <em>Transformations</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

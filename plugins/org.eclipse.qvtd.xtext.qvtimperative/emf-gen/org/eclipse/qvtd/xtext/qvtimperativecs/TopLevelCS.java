@@ -22,12 +22,12 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getTransformations <em>Transformations</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getQueries <em>Queries</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getMappings <em>Mappings</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getTopLevelCS()
  * @model

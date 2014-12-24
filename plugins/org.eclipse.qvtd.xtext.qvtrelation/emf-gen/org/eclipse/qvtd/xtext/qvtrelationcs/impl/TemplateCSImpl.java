@@ -30,13 +30,14 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.TemplateVariableCS;
  * An implementation of the model object '<em><b>Template CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TemplateCSImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TemplateCSImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TemplateCSImpl#getGuardExpression <em>Guard Expression</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
