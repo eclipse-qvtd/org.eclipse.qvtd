@@ -24,7 +24,6 @@ import org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor;
  * An implementation of the model object '<em><b>Realized Variable</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

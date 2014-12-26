@@ -20,13 +20,13 @@ import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.Mapping#getContext <em>Context</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.Mapping#getLocal <em>Local</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.Mapping#getRefinement <em>Refinement</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.Mapping#getSpecification <em>Specification</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage#getMapping()
  * @model

@@ -40,7 +40,7 @@
       <!-- @generated QVTcoreCS NOT-->
       <!--parser
             type="qvtc"
-            class="org.eclipse.qvtd.xtext.qvtcore.qvtcorecs.util.QVTcoreCSResourceFactoryImpl"/-->
+            class="org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSResourceFactoryImpl"/-->
       <parser
             type="qvtccs"
             class="org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSResourceFactoryImpl"/>

@@ -19,10 +19,10 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGMappingCallBinding#getValue <em>Value</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGMappingCallBinding()
  * @model

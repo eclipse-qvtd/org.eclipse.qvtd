@@ -20,13 +20,13 @@ import org.eclipse.jdt.annotation.NonNull;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern#getArea <em>Area</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern#getAssignment <em>Assignment</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern#getEnforcementOperation <em>Enforcement Operation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern#getRealizedVariable <em>Realized Variable</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage#getBottomPattern()
  * @model

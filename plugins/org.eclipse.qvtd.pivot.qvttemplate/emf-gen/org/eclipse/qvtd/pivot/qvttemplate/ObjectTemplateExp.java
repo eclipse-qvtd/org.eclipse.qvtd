@@ -19,11 +19,11 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp#getPart <em>Part</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp#getReferredClass <em>Referred Class</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage#getObjectTemplateExp()
  * @model

@@ -22,6 +22,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#isIsTopLevel <em>Is Top Level</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#getOperationalImpl <em>Operational Impl</em>}</li>
@@ -29,7 +30,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Rule;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#getWhen <em>When</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.Relation#getWhere <em>Where</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelation()
  * @model

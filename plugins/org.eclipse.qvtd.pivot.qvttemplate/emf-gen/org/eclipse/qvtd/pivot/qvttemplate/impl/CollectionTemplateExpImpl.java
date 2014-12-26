@@ -35,13 +35,14 @@ import org.eclipse.qvtd.pivot.qvttemplate.util.QVTtemplateVisitor;
  * An implementation of the model object '<em><b>Collection Template Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvttemplate.impl.CollectionTemplateExpImpl#getMember <em>Member</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvttemplate.impl.CollectionTemplateExpImpl#getReferredCollectionType <em>Referred Collection Type</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvttemplate.impl.CollectionTemplateExpImpl#getRest <em>Rest</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

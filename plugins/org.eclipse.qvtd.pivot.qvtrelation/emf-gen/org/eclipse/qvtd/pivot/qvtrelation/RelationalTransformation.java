@@ -20,10 +20,10 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation#getOwnedKey <em>Owned Key</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelationalTransformation()
  * @model

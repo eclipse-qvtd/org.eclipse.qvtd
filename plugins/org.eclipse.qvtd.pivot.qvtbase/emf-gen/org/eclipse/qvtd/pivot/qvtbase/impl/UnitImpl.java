@@ -28,11 +28,12 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  * An implementation of the model object '<em><b>Unit</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.UnitImpl#getUsedPackage <em>Used Package</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

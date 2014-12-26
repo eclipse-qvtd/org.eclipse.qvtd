@@ -28,14 +28,15 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * An implementation of the model object '<em><b>Domain</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.DomainImpl#isIsCheckable <em>Is Checkable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.DomainImpl#isIsEnforceable <em>Is Enforceable</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.DomainImpl#getRule <em>Rule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.DomainImpl#getTypedModel <em>Typed Model</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

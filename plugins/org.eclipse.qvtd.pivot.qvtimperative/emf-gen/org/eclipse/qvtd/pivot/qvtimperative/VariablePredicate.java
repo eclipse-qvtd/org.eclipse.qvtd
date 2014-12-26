@@ -24,10 +24,10 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate#getTargetVariable <em>Target Variable</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getVariablePredicate()
  * @generated

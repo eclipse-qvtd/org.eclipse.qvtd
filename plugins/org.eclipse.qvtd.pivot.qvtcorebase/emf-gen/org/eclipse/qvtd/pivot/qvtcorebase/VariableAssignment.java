@@ -19,10 +19,10 @@ import org.eclipse.ocl.pivot.Variable;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment#getTargetVariable <em>Target Variable</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage#getVariableAssignment()
  * @model

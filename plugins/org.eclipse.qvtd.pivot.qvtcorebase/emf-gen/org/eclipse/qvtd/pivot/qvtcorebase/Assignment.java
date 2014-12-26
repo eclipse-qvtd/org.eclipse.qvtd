@@ -20,12 +20,12 @@ import org.eclipse.ocl.pivot.OCLExpression;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.Assignment#getBottomPattern <em>Bottom Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.Assignment#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.Assignment#isIsDefault <em>Is Default</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage#getAssignment()
  * @model abstract="true"

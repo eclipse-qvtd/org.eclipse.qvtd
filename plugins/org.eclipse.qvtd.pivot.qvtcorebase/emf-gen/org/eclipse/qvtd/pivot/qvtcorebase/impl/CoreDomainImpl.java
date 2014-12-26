@@ -33,12 +33,13 @@ import org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor;
  * An implementation of the model object '<em><b>Core Domain</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.CoreDomainImpl#getGuardPattern <em>Guard Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.CoreDomainImpl#getBottomPattern <em>Bottom Pattern</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -9,8 +9,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.Package;
-import org.eclipse.ocl.examples.pivot.Variable;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QVTr2QVTcRelations;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.Rule;
@@ -61,7 +60,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 		@NonNull private TypedModel dir;
 		@NonNull private String tmn;
 		@NonNull private String dn;
-		@NonNull private List<Package> up;
+		@NonNull private List<org.eclipse.ocl.pivot.Package> up;
 		@NonNull private ObjectTemplateExp te;
 		@NonNull private Variable tev;
 		@NonNull private List<RelationDomain> rOppositeDomains;
@@ -82,7 +81,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 		
 		public SubRecord(@NonNull RelationDomain rd, @NonNull TypedModel dir,
 				@NonNull String tmn, @NonNull String dn,
-				@NonNull List<Package> up,@NonNull List<Variable> domainVars,
+				@NonNull List<org.eclipse.ocl.pivot.Package> up,@NonNull List<Variable> domainVars,
 				@NonNull ObjectTemplateExp te, @NonNull Variable tev,
 				@NonNull List<RelationDomain> rOppositeDomains) {
 			this.rd = rd;
@@ -131,7 +130,7 @@ public class TopLevelRelationToMappingForEnforcement extends AbstractRule
 					TypedModel dir = rd.getTypedModel();
 					String tmn = dir.getName();
 					assert tmn != null;
-					List<Package> up = dir.getUsedPackage();
+					List<org.eclipse.ocl.pivot.Package> up = dir.getUsedPackage();
 					assert up != null;
 					DomainPattern dp = rd.getPattern();
 					List<Variable> domainVars = dp.getBindsTo();

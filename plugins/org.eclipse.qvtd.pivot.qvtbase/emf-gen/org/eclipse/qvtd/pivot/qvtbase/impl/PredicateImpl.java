@@ -31,12 +31,13 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  * An implementation of the model object '<em><b>Predicate</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.PredicateImpl#getConditionExpression <em>Condition Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.PredicateImpl#getPattern <em>Pattern</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

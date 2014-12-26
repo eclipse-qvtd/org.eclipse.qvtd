@@ -21,12 +21,12 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation#getImpl <em>Impl</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation#getInDirectionOf <em>In Direction Of</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.RelationImplementation#getRelation <em>Relation</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelationImplementation()
  * @model

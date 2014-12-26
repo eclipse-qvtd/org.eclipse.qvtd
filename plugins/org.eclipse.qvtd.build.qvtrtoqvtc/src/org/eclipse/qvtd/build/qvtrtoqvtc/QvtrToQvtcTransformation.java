@@ -24,16 +24,16 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.OperationCallExp;
-import org.eclipse.ocl.examples.pivot.PivotFactory;
-import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.PropertyCallExp;
-import org.eclipse.ocl.examples.pivot.Root;
-import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.VariableExp;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.Model;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.PivotFactory;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.PropertyCallExp;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.manager.MetaModelManager;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.InvokedRelationToMappingForEnforcement;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseBottomPatternKey;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseCoreDomainKey;
@@ -83,7 +83,7 @@ public class QvtrToQvtcTransformation
 	private final @NonNull List<EObject> traceRoots = new ArrayList<EObject>();
 	private final @NonNull List<EObject> coreRoots = new ArrayList<EObject>();
 	private final @NonNull Map<Variable, Variable> variableTrace = new HashMap<Variable, Variable>();
-	private final @NonNull Map<Relation, org.eclipse.ocl.examples.pivot.Class> relationToTraceClass = new HashMap<Relation, org.eclipse.ocl.examples.pivot.Class>();	
+	private final @NonNull Map<Relation, org.eclipse.ocl.pivot.Class> relationToTraceClass = new HashMap<Relation, org.eclipse.ocl.pivot.Class>();	
 	// Un-navigable opposites
 	private final Map<Type, Key> keyForType = new HashMap<Type, Key>();
 	private final Map <Variable, TemplateExp> templateExpForVaraible = new HashMap<Variable, TemplateExp>();
@@ -340,7 +340,7 @@ public class QvtrToQvtcTransformation
 		return m;
 	}
 	
-	public Property findProperty(@NonNull String name, @NonNull Type owningType) {
+	public Property findProperty(@NonNull String name, @NonNull org.eclipse.ocl.pivot.Class owningType) {
 		
 		Property p = null;
 		if (doGlobalSearch) {
@@ -350,7 +350,7 @@ public class QvtrToQvtcTransformation
 			p = PivotFactory.eINSTANCE.createProperty();
 			assert p!= null;
 			p.setName(name);
-			p.setOwningType(owningType);
+			p.setOwningClass(owningType);
 			properties.add(p);
 		}
 		return p;
@@ -491,7 +491,7 @@ public class QvtrToQvtcTransformation
 		return traceRoots;
 	}
 	
-	public @Nullable org.eclipse.ocl.examples.pivot.Class getRelationTrace(@NonNull Relation relation) {
+	public @Nullable org.eclipse.ocl.pivot.Class getRelationTrace(@NonNull Relation relation) {
 		
 		return relationToTraceClass.get(relation);
 	}
@@ -536,7 +536,7 @@ public class QvtrToQvtcTransformation
 		}
 	}
 
-	public void putRelationTrace(@NonNull Relation r, @NonNull org.eclipse.ocl.examples.pivot.Class rc) {
+	public void putRelationTrace(@NonNull Relation r, @NonNull org.eclipse.ocl.pivot.Class rc) {
 		
 		relationToTraceClass.put(r, rc);
 	}
@@ -552,12 +552,12 @@ public class QvtrToQvtcTransformation
 
 
 	public void saveTrace(@NonNull Resource asResource, @NonNull Collection<? extends EObject> eObjects, @NonNull Map<Object, Object> options) throws IOException {
-        Root root = PivotFactory.eINSTANCE.createRoot();
+        Model root = PivotFactory.eINSTANCE.createModel();
         root.setExternalURI(asResource.getURI().toString());
         asResource.getContents().add(root);
         for (EObject eObject : eObjects) {
-        	if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
-                root.getNestedPackage().add((org.eclipse.ocl.examples.pivot.Package)eObject);
+        	if (eObject instanceof org.eclipse.ocl.pivot.Package) {
+                root.getOwnedPackages().add((org.eclipse.ocl.pivot.Package)eObject);
         	}
         	else {
         		asResource.getContents().add(eObject);
@@ -571,8 +571,8 @@ public class QvtrToQvtcTransformation
         root.setExternalURI(asResource.getURI().toString());
         asResource.getContents().add(root);
         for (EObject eObject : eObjects) {
-        	if (eObject instanceof org.eclipse.ocl.examples.pivot.Package) {
-                root.getNestedPackage().add((org.eclipse.ocl.examples.pivot.Package)eObject);
+        	if (eObject instanceof org.eclipse.ocl.pivot.Package) {
+                root.getOwnedPackages().add((org.eclipse.ocl.pivot.Package)eObject);
         	}
         	else {
         		asResource.getContents().add(eObject);

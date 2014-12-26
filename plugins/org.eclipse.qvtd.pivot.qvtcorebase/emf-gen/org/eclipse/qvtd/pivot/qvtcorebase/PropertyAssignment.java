@@ -20,11 +20,11 @@ import org.eclipse.ocl.pivot.Property;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment#getSlotExpression <em>Slot Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment#getTargetProperty <em>Target Property</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage#getPropertyAssignment()
  * @model

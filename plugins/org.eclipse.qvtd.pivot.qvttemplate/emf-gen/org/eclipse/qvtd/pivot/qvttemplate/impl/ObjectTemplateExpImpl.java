@@ -33,12 +33,13 @@ import org.eclipse.qvtd.pivot.qvttemplate.util.QVTtemplateVisitor;
  * An implementation of the model object '<em><b>Object Template Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvttemplate.impl.ObjectTemplateExpImpl#getPart <em>Part</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvttemplate.impl.ObjectTemplateExpImpl#getReferredClass <em>Referred Class</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

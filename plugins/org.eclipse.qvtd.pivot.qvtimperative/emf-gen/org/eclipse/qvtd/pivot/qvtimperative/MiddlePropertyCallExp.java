@@ -25,10 +25,10 @@ import org.eclipse.ocl.pivot.OppositePropertyCallExp;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp#getCacheIndex <em>Cache Index</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMiddlePropertyCallExp()
  * @generated

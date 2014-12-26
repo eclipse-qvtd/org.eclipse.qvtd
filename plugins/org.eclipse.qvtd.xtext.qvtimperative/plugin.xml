@@ -40,7 +40,7 @@
       <!-- @generated QVTimperativeCS NOT-->
       <!--parser
             type="qvti"
-            class="org.eclipse.qvtd.xtext.qvtimperative.qvtimperativecs.util.QVTimperativeCSResourceFactoryImpl"/-->
+            class="org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSResourceFactoryImpl"/-->
       <parser
             type="qvtics"
             class="org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSResourceFactoryImpl"/>

@@ -18,10 +18,10 @@ package org.eclipse.qvtd.pivot.qvtcorebase;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern#getArea <em>Area</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage#getGuardPattern()
  * @model

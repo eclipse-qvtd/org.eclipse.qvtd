@@ -26,12 +26,13 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
  * An implementation of the model object '<em><b>Template Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvttemplate.impl.TemplateExpImpl#getBindsTo <em>Binds To</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvttemplate.impl.TemplateExpImpl#getWhere <em>Where</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -157,7 +157,7 @@ public class QVTdMtcTests extends LoadTestCase {
 	@Before
     public void setUp() throws Exception {
 	    
-		BaseLinkingService.DEBUG_RETRY = true;
+		BaseLinkingService.DEBUG_RETRY.setState(true);
 		super.setUp();
 		QVTcorePivotStandaloneSetup.doSetup();
 		QVTimperativePivotStandaloneSetup.doSetup();

@@ -2137,15 +2137,6 @@ public interface QVTrelationCSPackage extends EPackage {
 	int TRANSFORMATION_CS__OWNING_PACKAGE = BaseCSPackage.CLASS_CS__OWNING_PACKAGE;
 
 	/**
-	 * The feature id for the '<em><b>Qualifiers</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSFORMATION_CS__QUALIFIERS = BaseCSPackage.CLASS_CS__QUALIFIERS;
-
-	/**
 	 * The feature id for the '<em><b>Model Decls</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

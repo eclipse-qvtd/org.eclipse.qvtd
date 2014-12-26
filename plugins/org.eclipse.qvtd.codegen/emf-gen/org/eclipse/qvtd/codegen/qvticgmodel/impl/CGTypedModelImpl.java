@@ -30,12 +30,13 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  * An implementation of the model object '<em><b>CG Typed Model</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGTypedModelImpl#getTransformation <em>Transformation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGTypedModelImpl#getModelIndex <em>Model Index</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

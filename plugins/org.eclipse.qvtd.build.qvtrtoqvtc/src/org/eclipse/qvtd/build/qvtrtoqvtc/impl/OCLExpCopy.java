@@ -1,122 +1,95 @@
 package org.eclipse.qvtd.build.qvtrtoqvtc.impl;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.Annotation;
-import org.eclipse.ocl.examples.pivot.AnyType;
-import org.eclipse.ocl.examples.pivot.AssociationClass;
-import org.eclipse.ocl.examples.pivot.AssociationClassCallExp;
-import org.eclipse.ocl.examples.pivot.BagType;
-import org.eclipse.ocl.examples.pivot.Behavior;
-import org.eclipse.ocl.examples.pivot.BooleanLiteralExp;
-import org.eclipse.ocl.examples.pivot.CallExp;
-import org.eclipse.ocl.examples.pivot.CallOperationAction;
-import org.eclipse.ocl.examples.pivot.Class;
-import org.eclipse.ocl.examples.pivot.CollectionItem;
-import org.eclipse.ocl.examples.pivot.CollectionLiteralExp;
-import org.eclipse.ocl.examples.pivot.CollectionLiteralPart;
-import org.eclipse.ocl.examples.pivot.CollectionRange;
-import org.eclipse.ocl.examples.pivot.CollectionType;
-import org.eclipse.ocl.examples.pivot.Comment;
-import org.eclipse.ocl.examples.pivot.ConnectionPointReference;
-import org.eclipse.ocl.examples.pivot.Constraint;
-import org.eclipse.ocl.examples.pivot.ConstructorExp;
-import org.eclipse.ocl.examples.pivot.ConstructorPart;
-import org.eclipse.ocl.examples.pivot.DataType;
-import org.eclipse.ocl.examples.pivot.Detail;
-import org.eclipse.ocl.examples.pivot.DynamicBehavior;
-import org.eclipse.ocl.examples.pivot.DynamicElement;
-import org.eclipse.ocl.examples.pivot.DynamicProperty;
-import org.eclipse.ocl.examples.pivot.DynamicType;
-import org.eclipse.ocl.examples.pivot.Element;
-import org.eclipse.ocl.examples.pivot.ElementExtension;
-import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
-import org.eclipse.ocl.examples.pivot.Enumeration;
-import org.eclipse.ocl.examples.pivot.EnumerationLiteral;
-import org.eclipse.ocl.examples.pivot.ExpressionInOCL;
-import org.eclipse.ocl.examples.pivot.Feature;
-import org.eclipse.ocl.examples.pivot.FeatureCallExp;
-import org.eclipse.ocl.examples.pivot.FinalState;
-import org.eclipse.ocl.examples.pivot.IfExp;
-import org.eclipse.ocl.examples.pivot.Import;
-import org.eclipse.ocl.examples.pivot.IntegerLiteralExp;
-import org.eclipse.ocl.examples.pivot.InvalidLiteralExp;
-import org.eclipse.ocl.examples.pivot.InvalidType;
-import org.eclipse.ocl.examples.pivot.IterateExp;
-import org.eclipse.ocl.examples.pivot.Iteration;
-import org.eclipse.ocl.examples.pivot.IteratorExp;
-import org.eclipse.ocl.examples.pivot.LambdaType;
-import org.eclipse.ocl.examples.pivot.LetExp;
-import org.eclipse.ocl.examples.pivot.Library;
-import org.eclipse.ocl.examples.pivot.LiteralExp;
-import org.eclipse.ocl.examples.pivot.LoopExp;
-import org.eclipse.ocl.examples.pivot.MessageExp;
-import org.eclipse.ocl.examples.pivot.MessageType;
-import org.eclipse.ocl.examples.pivot.Metaclass;
-import org.eclipse.ocl.examples.pivot.NamedElement;
-import org.eclipse.ocl.examples.pivot.Namespace;
-import org.eclipse.ocl.examples.pivot.NavigationCallExp;
-import org.eclipse.ocl.examples.pivot.NullLiteralExp;
-import org.eclipse.ocl.examples.pivot.NumericLiteralExp;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.OpaqueExpression;
-import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.OperationCallExp;
-import org.eclipse.ocl.examples.pivot.OperationTemplateParameter;
-import org.eclipse.ocl.examples.pivot.OppositePropertyCallExp;
-import org.eclipse.ocl.examples.pivot.OrderedSetType;
-import org.eclipse.ocl.examples.pivot.Package;
-import org.eclipse.ocl.examples.pivot.PackageableElement;
-import org.eclipse.ocl.examples.pivot.Parameter;
-import org.eclipse.ocl.examples.pivot.ParameterableElement;
-import org.eclipse.ocl.examples.pivot.Precedence;
-import org.eclipse.ocl.examples.pivot.PrimitiveLiteralExp;
-import org.eclipse.ocl.examples.pivot.PrimitiveType;
-import org.eclipse.ocl.examples.pivot.Profile;
-import org.eclipse.ocl.examples.pivot.ProfileApplication;
-import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.PropertyCallExp;
-import org.eclipse.ocl.examples.pivot.Pseudostate;
-import org.eclipse.ocl.examples.pivot.RealLiteralExp;
-import org.eclipse.ocl.examples.pivot.Region;
-import org.eclipse.ocl.examples.pivot.Root;
-import org.eclipse.ocl.examples.pivot.SelfType;
-import org.eclipse.ocl.examples.pivot.SendSignalAction;
-import org.eclipse.ocl.examples.pivot.SequenceType;
-import org.eclipse.ocl.examples.pivot.SetType;
-import org.eclipse.ocl.examples.pivot.Signal;
-import org.eclipse.ocl.examples.pivot.State;
-import org.eclipse.ocl.examples.pivot.StateExp;
-import org.eclipse.ocl.examples.pivot.StateMachine;
-import org.eclipse.ocl.examples.pivot.Stereotype;
-import org.eclipse.ocl.examples.pivot.StringLiteralExp;
-import org.eclipse.ocl.examples.pivot.TemplateBinding;
-import org.eclipse.ocl.examples.pivot.TemplateParameter;
-import org.eclipse.ocl.examples.pivot.TemplateParameterSubstitution;
-import org.eclipse.ocl.examples.pivot.TemplateParameterType;
-import org.eclipse.ocl.examples.pivot.TemplateSignature;
-import org.eclipse.ocl.examples.pivot.TemplateableElement;
-import org.eclipse.ocl.examples.pivot.Transition;
-import org.eclipse.ocl.examples.pivot.Trigger;
-import org.eclipse.ocl.examples.pivot.TupleLiteralExp;
-import org.eclipse.ocl.examples.pivot.TupleLiteralPart;
-import org.eclipse.ocl.examples.pivot.TupleType;
-import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.TypeExp;
-import org.eclipse.ocl.examples.pivot.TypeExtension;
-import org.eclipse.ocl.examples.pivot.TypeTemplateParameter;
-import org.eclipse.ocl.examples.pivot.TypedElement;
-import org.eclipse.ocl.examples.pivot.TypedMultiplicityElement;
-import org.eclipse.ocl.examples.pivot.UnlimitedNaturalLiteralExp;
-import org.eclipse.ocl.examples.pivot.UnspecifiedType;
-import org.eclipse.ocl.examples.pivot.UnspecifiedValueExp;
-import org.eclipse.ocl.examples.pivot.ValueSpecification;
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.VariableDeclaration;
-import org.eclipse.ocl.examples.pivot.VariableExp;
-import org.eclipse.ocl.examples.pivot.Vertex;
-import org.eclipse.ocl.examples.pivot.VoidType;
-import org.eclipse.ocl.examples.pivot.PivotFactory;
-import org.eclipse.ocl.examples.pivot.util.PivotSwitch;
+import org.eclipse.ocl.pivot.Annotation;
+import org.eclipse.ocl.pivot.AnyType;
+import org.eclipse.ocl.pivot.AssociationClass;
+import org.eclipse.ocl.pivot.AssociationClassCallExp;
+import org.eclipse.ocl.pivot.BagType;
+import org.eclipse.ocl.pivot.BooleanLiteralExp;
+import org.eclipse.ocl.pivot.CallOperationAction;
+import org.eclipse.ocl.pivot.Class;
+import org.eclipse.ocl.pivot.CollectionItem;
+import org.eclipse.ocl.pivot.CollectionLiteralExp;
+import org.eclipse.ocl.pivot.CollectionRange;
+import org.eclipse.ocl.pivot.CollectionType;
+import org.eclipse.ocl.pivot.Comment;
+import org.eclipse.ocl.pivot.ConnectionPointReference;
+import org.eclipse.ocl.pivot.Constraint;
+import org.eclipse.ocl.pivot.ConstructorExp;
+import org.eclipse.ocl.pivot.ConstructorPart;
+import org.eclipse.ocl.pivot.DataType;
+import org.eclipse.ocl.pivot.Detail;
+import org.eclipse.ocl.pivot.DynamicBehavior;
+import org.eclipse.ocl.pivot.DynamicElement;
+import org.eclipse.ocl.pivot.DynamicProperty;
+import org.eclipse.ocl.pivot.DynamicType;
+import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.ElementExtension;
+import org.eclipse.ocl.pivot.EnumLiteralExp;
+import org.eclipse.ocl.pivot.Enumeration;
+import org.eclipse.ocl.pivot.EnumerationLiteral;
+import org.eclipse.ocl.pivot.ExpressionInOCL;
+import org.eclipse.ocl.pivot.FinalState;
+import org.eclipse.ocl.pivot.IfExp;
+import org.eclipse.ocl.pivot.Import;
+import org.eclipse.ocl.pivot.IntegerLiteralExp;
+import org.eclipse.ocl.pivot.InvalidLiteralExp;
+import org.eclipse.ocl.pivot.InvalidType;
+import org.eclipse.ocl.pivot.IterateExp;
+import org.eclipse.ocl.pivot.Iteration;
+import org.eclipse.ocl.pivot.IteratorExp;
+import org.eclipse.ocl.pivot.LambdaType;
+import org.eclipse.ocl.pivot.LetExp;
+import org.eclipse.ocl.pivot.Library;
+import org.eclipse.ocl.pivot.MessageExp;
+import org.eclipse.ocl.pivot.MessageType;
+import org.eclipse.ocl.pivot.Model;
+import org.eclipse.ocl.pivot.NullLiteralExp;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.OppositePropertyCallExp;
+import org.eclipse.ocl.pivot.OrderedSetType;
+import org.eclipse.ocl.pivot.Package;
+import org.eclipse.ocl.pivot.Parameter;
+import org.eclipse.ocl.pivot.PivotFactory;
+import org.eclipse.ocl.pivot.Precedence;
+import org.eclipse.ocl.pivot.PrimitiveType;
+import org.eclipse.ocl.pivot.Profile;
+import org.eclipse.ocl.pivot.ProfileApplication;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.PropertyCallExp;
+import org.eclipse.ocl.pivot.Pseudostate;
+import org.eclipse.ocl.pivot.RealLiteralExp;
+import org.eclipse.ocl.pivot.Region;
+import org.eclipse.ocl.pivot.SelfType;
+import org.eclipse.ocl.pivot.SendSignalAction;
+import org.eclipse.ocl.pivot.SequenceType;
+import org.eclipse.ocl.pivot.SetType;
+import org.eclipse.ocl.pivot.Signal;
+import org.eclipse.ocl.pivot.State;
+import org.eclipse.ocl.pivot.StateExp;
+import org.eclipse.ocl.pivot.StateMachine;
+import org.eclipse.ocl.pivot.Stereotype;
+import org.eclipse.ocl.pivot.StereotypeExtender;
+import org.eclipse.ocl.pivot.StringLiteralExp;
+import org.eclipse.ocl.pivot.TemplateBinding;
+import org.eclipse.ocl.pivot.TemplateParameter;
+import org.eclipse.ocl.pivot.TemplateParameterSubstitution;
+import org.eclipse.ocl.pivot.TemplateSignature;
+import org.eclipse.ocl.pivot.Transition;
+import org.eclipse.ocl.pivot.Trigger;
+import org.eclipse.ocl.pivot.TupleLiteralExp;
+import org.eclipse.ocl.pivot.TupleLiteralPart;
+import org.eclipse.ocl.pivot.TupleType;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.TypeExp;
+import org.eclipse.ocl.pivot.UnlimitedNaturalLiteralExp;
+import org.eclipse.ocl.pivot.UnspecifiedValueExp;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.VoidType;
+import org.eclipse.ocl.pivot.util.PivotSwitch;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 
 /**
@@ -331,23 +304,23 @@ public class OCLExpCopy extends PivotSwitch<Element> {
 	    final EnumLiteralExp out = PivotFactory.eINSTANCE.createEnumLiteralExp();
 	    assert out != null;
 	    transformation.addOrphan(out);
-	    out.setIsStatic(in.isStatic());
+//	    out.setIsStatic(in.isStatic());
 	    out.setName(in.getName());
 	    out.setIsRequired(in.isRequired());
         Type _type = in.getType();
         if (_type != null)
             out.setType((Type) doSwitch(_type));
-        EnumerationLiteral _referredEnumLiteral = in.getReferredEnumLiteral();
+        EnumerationLiteral _referredEnumLiteral = in.getReferredLiteral();
         if (_referredEnumLiteral != null)
-            out.setReferredEnumLiteral((EnumerationLiteral) doSwitch(_referredEnumLiteral));
-        for (ElementExtension _extension : in.getExtension()) {
-            out.getExtension().add((ElementExtension) doSwitch(_extension));
+            out.setReferredLiteral((EnumerationLiteral) doSwitch(_referredEnumLiteral));
+        for (ElementExtension _extension : in.getOwnedExtensions()) {
+            out.getOwnedExtensions().add((ElementExtension) doSwitch(_extension));
         }
-        for (Element _ownedAnnotation : in.getOwnedAnnotation()) {
-            out.getOwnedAnnotation().add((Element) doSwitch(_ownedAnnotation));
+        for (Element _ownedAnnotation : in.getOwnedAnnotations()) {
+            out.getOwnedAnnotations().add((Element) doSwitch(_ownedAnnotation));
         }
-        for (Comment _ownedComment : in.getOwnedComment()) {
-            out.getOwnedComment().add((Comment) doSwitch(_ownedComment));
+        for (Comment _ownedComment : in.getOwnedComments()) {
+            out.getOwnedComments().add((Comment) doSwitch(_ownedComment));
         }
 	    return out;
     }
@@ -492,7 +465,7 @@ public class OCLExpCopy extends PivotSwitch<Element> {
      * @generated
      */
     @Override 
-    public Element caseNullLiteralExp(NullLiteralExp in) {
+    public Element caseModel(Model in) {
 	    throw new UnsupportedOperationException("Not implememnted yet");
     }
     
@@ -500,7 +473,7 @@ public class OCLExpCopy extends PivotSwitch<Element> {
      * @generated
      */
     @Override 
-    public Element caseOpaqueExpression(OpaqueExpression in) {
+    public Element caseNullLiteralExp(NullLiteralExp in) {
 	    throw new UnsupportedOperationException("Not implememnted yet");
     }
     
@@ -517,14 +490,6 @@ public class OCLExpCopy extends PivotSwitch<Element> {
      */
     @Override 
     public Element caseOperationCallExp(OperationCallExp in) {
-	    throw new UnsupportedOperationException("Not implememnted yet");
-    }
-    
-    /**
-     * @generated
-     */
-    @Override 
-    public Element caseOperationTemplateParameter(OperationTemplateParameter in) {
 	    throw new UnsupportedOperationException("Not implememnted yet");
     }
     
@@ -636,14 +601,6 @@ public class OCLExpCopy extends PivotSwitch<Element> {
      * @generated
      */
     @Override 
-    public Element caseRoot(Root in) {
-	    throw new UnsupportedOperationException("Not implememnted yet");
-    }
-    
-    /**
-     * @generated
-     */
-    @Override 
     public Element caseSelfType(SelfType in) {
 	    throw new UnsupportedOperationException("Not implememnted yet");
     }
@@ -716,6 +673,14 @@ public class OCLExpCopy extends PivotSwitch<Element> {
      * @generated
      */
     @Override 
+    public Element caseStereotypeExtender(StereotypeExtender in) {
+	    throw new UnsupportedOperationException("Not implememnted yet");
+    }
+    
+    /**
+     * @generated
+     */
+    @Override 
     public Element caseStringLiteralExp(StringLiteralExp in) {
 	    throw new UnsupportedOperationException("Not implememnted yet");
     }
@@ -741,14 +706,6 @@ public class OCLExpCopy extends PivotSwitch<Element> {
      */
     @Override 
     public Element caseTemplateParameterSubstitution(TemplateParameterSubstitution in) {
-	    throw new UnsupportedOperationException("Not implememnted yet");
-    }
-    
-    /**
-     * @generated
-     */
-    @Override 
-    public Element caseTemplateParameterType(TemplateParameterType in) {
 	    throw new UnsupportedOperationException("Not implememnted yet");
     }
     
@@ -820,31 +777,7 @@ public class OCLExpCopy extends PivotSwitch<Element> {
      * @generated
      */
     @Override 
-    public Element caseTypeExtension(TypeExtension in) {
-	    throw new UnsupportedOperationException("Not implememnted yet");
-    }
-    
-    /**
-     * @generated
-     */
-    @Override 
-    public Element caseTypeTemplateParameter(TypeTemplateParameter in) {
-	    throw new UnsupportedOperationException("Not implememnted yet");
-    }
-    
-    /**
-     * @generated
-     */
-    @Override 
     public Element caseUnlimitedNaturalLiteralExp(UnlimitedNaturalLiteralExp in) {
-	    throw new UnsupportedOperationException("Not implememnted yet");
-    }
-    
-    /**
-     * @generated
-     */
-    @Override 
-    public Element caseUnspecifiedType(UnspecifiedType in) {
 	    throw new UnsupportedOperationException("Not implememnted yet");
     }
     
@@ -872,24 +805,24 @@ public class OCLExpCopy extends PivotSwitch<Element> {
         final VariableExp out = PivotFactory.eINSTANCE.createVariableExp();
         assert out != null;
         transformation.addOrphan(out);
-        out.setIsStatic(in.isStatic());
+//        out.setIsStatic(in.isStatic());
         out.setName(in.getName());
         out.setIsRequired(in.isRequired());
-        out.setImplicit(in.isImplicit());
+        out.setIsImplicit(in.isImplicit());
         Type _type = in.getType();
         if (_type != null)
             out.setType((Type) doSwitch(_type));            
         Variable v = (Variable) in.getReferredVariable();
         assert v != null;
         out.setReferredVariable(transformation.getVariableTrace(v));
-        for (ElementExtension _extension : in.getExtension()) {
-            out.getExtension().add((ElementExtension) doSwitch(_extension));
+        for (ElementExtension _extension : in.getOwnedExtensions()) {
+            out.getOwnedExtensions().add((ElementExtension) doSwitch(_extension));
         }
-        for (Element _ownedAnnotation : in.getOwnedAnnotation()) {
-            out.getOwnedAnnotation().add((Element) doSwitch(_ownedAnnotation));
+        for (Element _ownedAnnotation : in.getOwnedAnnotations()) {
+            out.getOwnedAnnotations().add((Element) doSwitch(_ownedAnnotation));
         }
-        for (Comment _ownedComment : in.getOwnedComment()) {
-            out.getOwnedComment().add((Comment) doSwitch(_ownedComment));
+        for (Comment _ownedComment : in.getOwnedComments()) {
+            out.getOwnedComments().add((Comment) doSwitch(_ownedComment));
         }
         return out;
     }

@@ -38,14 +38,15 @@ import org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor;
  * An implementation of the model object '<em><b>Bottom Pattern</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.BottomPatternImpl#getArea <em>Area</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.BottomPatternImpl#getAssignment <em>Assignment</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.BottomPatternImpl#getEnforcementOperation <em>Enforcement Operation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.BottomPatternImpl#getRealizedVariable <em>Realized Variable</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

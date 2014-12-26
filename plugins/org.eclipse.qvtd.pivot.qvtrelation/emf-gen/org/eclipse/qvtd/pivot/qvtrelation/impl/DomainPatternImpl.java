@@ -29,11 +29,12 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
  * An implementation of the model object '<em><b>Domain Pattern</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.DomainPatternImpl#getTemplateExpression <em>Template Expression</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

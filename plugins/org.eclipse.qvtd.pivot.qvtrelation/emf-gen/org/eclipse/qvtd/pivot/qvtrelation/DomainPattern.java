@@ -20,10 +20,10 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.DomainPattern#getTemplateExpression <em>Template Expression</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getDomainPattern()
  * @model

@@ -39,7 +39,7 @@ public class LoadTests extends LoadTestCase
 
 	@Override
 	protected void setUp() throws Exception {
-		BaseLinkingService.DEBUG_RETRY = true;
+		BaseLinkingService.DEBUG_RETRY.setState(true);
 		super.setUp();
 		QVTrelationStandaloneSetup.doSetup();
 		ProjectMap.getAdapter(resourceSet);

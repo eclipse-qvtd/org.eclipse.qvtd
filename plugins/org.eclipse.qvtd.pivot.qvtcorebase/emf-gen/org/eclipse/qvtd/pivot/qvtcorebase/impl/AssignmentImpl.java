@@ -27,13 +27,14 @@ import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
  * An implementation of the model object '<em><b>Assignment</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.AssignmentImpl#getBottomPattern <em>Bottom Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.AssignmentImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.impl.AssignmentImpl#isIsDefault <em>Is Default</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

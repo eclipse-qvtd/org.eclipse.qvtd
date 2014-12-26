@@ -21,13 +21,13 @@ import org.eclipse.ocl.pivot.Property;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.Key#getIdentifies <em>Identifies</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.Key#getPart <em>Part</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.Key#getTransformation <em>Transformation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.Key#getOppositePart <em>Opposite Part</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getKey()
  * @model

@@ -35,12 +35,13 @@ import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
  * An implementation of the model object '<em><b>Relation Call Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationCallExpImpl#getArgument <em>Argument</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationCallExpImpl#getReferredRelation <em>Referred Relation</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

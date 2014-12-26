@@ -37,7 +37,9 @@ import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
  * An implementation of the model object '<em><b>Relation</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationImpl#isIsTopLevel <em>Is Top Level</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationImpl#getOperationalImpl <em>Operational Impl</em>}</li>
@@ -45,7 +47,6 @@ import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationImpl#getWhen <em>When</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationImpl#getWhere <em>Where</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

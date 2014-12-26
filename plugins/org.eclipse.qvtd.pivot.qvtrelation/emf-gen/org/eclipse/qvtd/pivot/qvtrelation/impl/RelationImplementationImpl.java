@@ -32,13 +32,14 @@ import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
  * An implementation of the model object '<em><b>Relation Implementation</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationImplementationImpl#getImpl <em>Impl</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationImplementationImpl#getInDirectionOf <em>In Direction Of</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtrelation.impl.RelationImplementationImpl#getRelation <em>Relation</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

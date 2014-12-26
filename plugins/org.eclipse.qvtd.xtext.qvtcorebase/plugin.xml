@@ -16,17 +16,10 @@
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
-      <!-- @generated QVTcoreBaseCS -->
-      <parser
-            type="qvtcb"
-            class="org.eclipse.qvtd.xtext.qvtcorebasecs.util.QVTcoreBaseCSResourceFactoryImpl"/>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.extension_parser">
       <!-- @generated QVTcoreBaseCS NOT-->
       <!--parser
             type="qvtcb"
-            class="org.eclipse.qvtd.xtext.qvtcorebase.qvtcorebasecs.util.QVTcoreBaseCSResourceFactoryImpl"/-->
+            class="org.eclipse.qvtd.xtext.qvtcorebasecs.util.QVTcoreBaseCSResourceFactoryImpl"/-->
       <parser
             type="qvtcbcs"
             class="org.eclipse.qvtd.xtext.qvtcorebasecs.util.QVTcoreBaseCSResourceFactoryImpl"/>

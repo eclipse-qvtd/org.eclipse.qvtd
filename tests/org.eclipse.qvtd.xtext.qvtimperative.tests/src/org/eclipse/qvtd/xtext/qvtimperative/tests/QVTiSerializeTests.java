@@ -123,7 +123,7 @@ public class QVTiSerializeTests extends LoadTestCase
 	
 	@Override
 	public void setUp() throws Exception {
-		BaseLinkingService.DEBUG_RETRY = true;
+		BaseLinkingService.DEBUG_RETRY.setState(true);
 		super.setUp();
 		QVTimperativeStandaloneSetup.doSetup();
 	}

@@ -40,7 +40,9 @@ import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
  * An implementation of the model object '<em><b>Mapping</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.impl.MappingImpl#getGuardPattern <em>Guard Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.impl.MappingImpl#getBottomPattern <em>Bottom Pattern</em>}</li>
@@ -49,7 +51,6 @@ import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.impl.MappingImpl#getRefinement <em>Refinement</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcore.impl.MappingImpl#getSpecification <em>Specification</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

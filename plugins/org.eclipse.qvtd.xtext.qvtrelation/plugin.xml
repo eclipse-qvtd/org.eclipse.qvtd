@@ -38,7 +38,7 @@
       <!-- @generated QVTrelationCS NOT-->
       <!--parser
             type="qvtr"
-            class="org.eclipse.qvtd.xtext.qvtrelation.qvtrelationcs.util.QVTrelationCSResourceFactoryImpl"/-->
+            class="org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSResourceFactoryImpl"/-->
       <parser
             type="qvtrcs"
             class="org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSResourceFactoryImpl"/>

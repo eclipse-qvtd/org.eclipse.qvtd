@@ -90,7 +90,7 @@ public class QVTiCompilerTests extends LoadTestCase
 
 	@Override
 	protected void setUp() throws Exception {
-		BaseLinkingService.DEBUG_RETRY = true;
+		BaseLinkingService.DEBUG_RETRY.setState(true);
 		super.setUp();
 		QVTimperativeStandaloneSetup.doSetup();
 	}

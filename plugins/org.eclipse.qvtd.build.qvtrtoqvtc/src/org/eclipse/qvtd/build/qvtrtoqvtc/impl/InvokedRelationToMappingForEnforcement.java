@@ -9,8 +9,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.Package;
-import org.eclipse.ocl.examples.pivot.Variable;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QVTr2QVTcRelations;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.Rule;
@@ -60,7 +59,7 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 		@NonNull private RelationDomain rd;
 		@NonNull private TypedModel dir;
 		@NonNull private String tmn;
-		@NonNull private List<Package> up;
+		@NonNull private List<org.eclipse.ocl.pivot.Package> up;
 		@NonNull private String dn;
 		@NonNull private List<Variable> domainVars;
 		@NonNull private ObjectTemplateExp te;
@@ -83,7 +82,7 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 		public SubRecord(@NonNull RelationCallExp ri, @NonNull Relation ir,
 				@NonNull String irn, @NonNull RelationDomain rd,
 				@NonNull TypedModel dir, @NonNull String tmn,
-				@NonNull String dn, @NonNull List<Package> up, 
+				@NonNull String dn, @NonNull List<org.eclipse.ocl.pivot.Package> up, 
 				@NonNull List<Variable> domainVars,
 				@NonNull ObjectTemplateExp te, @NonNull Variable tev,
 				@NonNull List<RelationDomain> rOppositeDomains) {
@@ -150,7 +149,7 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 							TypedModel dir = rd.getTypedModel();
 							String tmn = dir.getName();
 							assert tmn != null;
-							List<Package> up = dir.getUsedPackage();
+							List<org.eclipse.ocl.pivot.Package> up = dir.getUsedPackage();
 							assert up != null;
 							List<Variable> domainVars = dp.getBindsTo();
 							ObjectTemplateExp te = (ObjectTemplateExp) dp.getTemplateExpression();

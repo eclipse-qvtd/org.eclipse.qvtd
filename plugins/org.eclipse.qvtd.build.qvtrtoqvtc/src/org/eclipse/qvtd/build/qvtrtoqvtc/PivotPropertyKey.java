@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.Type;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.Type;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.AbstractBindings.KeySet;
 
 public class PivotPropertyKey implements RelationKey {
@@ -19,7 +19,7 @@ public class PivotPropertyKey implements RelationKey {
 	public void add(Property property) {
 		KeyBindings relationKeyBindings = new KeyBindings(this);
 		relationKeyBindings.put(NAME, property.getName());
-		relationKeyBindings.put(OWNING_TYPE, property.getOwningType());
+		relationKeyBindings.put(OWNING_TYPE, property.getOwningClass());
 		properties.put(relationKeyBindings, property);
 	}
 	

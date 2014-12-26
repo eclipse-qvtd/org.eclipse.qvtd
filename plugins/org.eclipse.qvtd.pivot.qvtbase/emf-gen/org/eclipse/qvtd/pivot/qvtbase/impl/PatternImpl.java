@@ -34,12 +34,13 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  * An implementation of the model object '<em><b>Pattern</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.PatternImpl#getPredicate <em>Predicate</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.PatternImpl#getBindsTo <em>Binds To</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

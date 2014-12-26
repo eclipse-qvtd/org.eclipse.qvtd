@@ -19,10 +19,10 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.codegen.qvticgmodel.CGVariablePredicate#getPredicateVariable <em>Predicate Variable</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage#getCGVariablePredicate()
  * @model

@@ -18,17 +18,15 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.Class;
-import org.eclipse.ocl.examples.pivot.EnumLiteralExp;
-import org.eclipse.ocl.examples.pivot.OCLExpression;
-import org.eclipse.ocl.examples.pivot.Operation;
-import org.eclipse.ocl.examples.pivot.OperationCallExp;
-import org.eclipse.ocl.examples.pivot.Package;
-import org.eclipse.ocl.examples.pivot.Property;
-import org.eclipse.ocl.examples.pivot.PropertyCallExp;
-import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.Variable;
-import org.eclipse.ocl.examples.pivot.VariableExp;
+import org.eclipse.ocl.pivot.EnumLiteralExp;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.Property;
+import org.eclipse.ocl.pivot.PropertyCallExp;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.OCLExpCopy;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RelationalTransformationToMappingTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.RuleBindings;
@@ -96,12 +94,12 @@ public class QVTr2QVTcRelations {
 			vs.add((Variable) ((VariableExp) e).getReferredVariable());
 		} else if (e instanceof OperationCallExp) {
 			OperationCallExp oc = (OperationCallExp) e;
-			vs.addAll(getVarsOfExp(oc.getSource()));
-			for (OCLExpression a : oc.getArgument()) {
+			vs.addAll(getVarsOfExp(oc.getOwnedSource()));
+			for (OCLExpression a : oc.getOwnedArguments()) {
 				vs.addAll(getVarsOfExp(a));
 			}
 		} else if (e instanceof PropertyCallExp) {
-			vs.addAll(getVarsOfExp( ((PropertyCallExp) e).getSource()));
+			vs.addAll(getVarsOfExp( ((PropertyCallExp) e).getOwnedSource()));
 		} else if (e instanceof RelationCallExp) {
 			RelationCallExp rc = (RelationCallExp) e;
 			for (OCLExpression a : rc.getArgument()) {
@@ -288,17 +286,17 @@ public class QVTr2QVTcRelations {
 		// assign
 		pve.setReferredVariable(tcv);
 		pve.setType(tcv.getType());
-		pe.setSource(pve);
+		pe.setOwnedSource(pve);
 		Property pep = getProperty(v.getName(), tcv.getType());
 		assert pep != null;
 		pe.setReferredProperty(pep);
 		pe.setType(pep.getType());
-		ee.setSource(pe);
+		ee.setOwnedSource(pe);
 		ee.setReferredOperation(getEqualsOPeration());
-		ee.setType(transformation.getMetaModelManager().getBooleanType());
+		ee.setType(transformation.getMetaModelManager().getStandardLibrary().getBooleanType());
 		ave.setReferredVariable(mv);
 		ave.setType(mv.getType());
-		ee.getArgument().add(ave);
+		ee.getOwnedArguments().add(ave);
 		pd.setConditionExpression(ee);
 		mb.getPredicate().add(pd);
 	}
@@ -409,7 +407,7 @@ public class QVTr2QVTcRelations {
 		}
 	}
 	
-	public void doRelationToTraceClass(@NonNull Relation r, @NonNull Class rc) {
+	public void doRelationToTraceClass(@NonNull Relation r, @NonNull org.eclipse.ocl.pivot.Class rc) {
 		
 		transformation.putRelationTrace(r, rc);
 		// check
@@ -428,7 +426,7 @@ public class QVTr2QVTcRelations {
 	}
 	
 	private void doSubObjectTemplateToTraceClassProps(@NonNull TemplateExp t, 
-			@NonNull Class rc) {
+			@NonNull org.eclipse.ocl.pivot.Class rc) {
 		
 		// check
 		if (t instanceof ObjectTemplateExp) {
@@ -438,7 +436,7 @@ public class QVTr2QVTcRelations {
 	}
 	
 	private void doObjectTemplateToTraceClassProps(@NonNull ObjectTemplateExp t,
-			@NonNull Class rc) {
+			@NonNull org.eclipse.ocl.pivot.Class rc) {
 		
 		// check
 		Variable tv = t.getBindsTo();
@@ -465,7 +463,7 @@ public class QVTr2QVTcRelations {
 	}
 
 	private void doSubCollectionTemplateToTraceClassProps(@NonNull TemplateExp t,
-			@NonNull Class rc) {
+			@NonNull org.eclipse.ocl.pivot.Class rc) {
 		
 		// check
 		if (t instanceof CollectionTemplateExp) {
@@ -475,7 +473,7 @@ public class QVTr2QVTcRelations {
 
 
 	private void doCollectionTemplateToTraceClassProps(@NonNull CollectionTemplateExp t,
-			@NonNull Class rc) {
+			@NonNull org.eclipse.ocl.pivot.Class rc) {
 		
 		// check
 		for (OCLExpression m : t.getMember()) {
@@ -508,7 +506,7 @@ public class QVTr2QVTcRelations {
 				assert tmn != null;
 				RelationalTransformation rt = (RelationalTransformation) dir.getTransformation();
 				assert rt != null;
-				List<Package> up = dir.getUsedPackage();
+				List<org.eclipse.ocl.pivot.Package> up = dir.getUsedPackage();
 				boolean c = ord.isIsCheckable();
 				List<Variable> domainVars = dp.getBindsTo();
 				ObjectTemplateExp te = (ObjectTemplateExp) dp.getTemplateExpression();
@@ -906,7 +904,7 @@ public class QVTr2QVTcRelations {
 				TypedModel dir = rd.getTypedModel();
 				tmn = dir.getName();
 				assert tmn != null;
-				List<Package> up = dir.getUsedPackage();
+				List<org.eclipse.ocl.pivot.Package> up = dir.getUsedPackage();
 				if (rt != dir.getTransformation())
 					return;
 				// init
@@ -929,15 +927,15 @@ public class QVTr2QVTcRelations {
 				ve1.setReferredVariable(tcv);
 				ve1.setType(tcv.getType());
 				Property tp = getProperty(mv.getName(), mv.getType());
-				pe.setSource(ve1);
+				pe.setOwnedSource(ve1);
 				pe.setReferredProperty(tp);
 				pe.setType(tp.getType());
-				ee.setSource(pe);
+				ee.setOwnedSource(pe);
 				ee.setReferredOperation(getEqualsOPeration());
-				ee.setType(transformation.getMetaModelManager().getBooleanType());
+				ee.setType(transformation.getMetaModelManager().getStandardLibrary().getBooleanType());
 				ve2.setReferredVariable(mv);
 				ve2.setType(mv.getType());
-				ee.getArgument().add(ve2);
+				ee.getOwnedArguments().add(ve2);
 				pd.setConditionExpression(ee);
 				mg.getPredicate().add(pd);
 				TypedModel mdir = null;
@@ -1148,8 +1146,8 @@ public class QVTr2QVTcRelations {
 		Variable mv = doRVarToMVar(v);
 		// assign
 		mgp.setConditionExpression(ee);
-		ee.setSource(pe);
-		pe.setSource(pve);
+		ee.setOwnedSource(pe);
+		pe.setOwnedSource(pve);
 		pve.setReferredVariable(vd);
 		pve.setType(vd.getType());
 		Property pep = getProperty(dvn, vd.getType());
@@ -1157,10 +1155,10 @@ public class QVTr2QVTcRelations {
 		pe.setReferredProperty(pep);
 		pe.setType(pep.getType());
 		ee.setReferredOperation(getEqualsOPeration());
-		ee.setType(transformation.getMetaModelManager().getBooleanType());
+		ee.setType(transformation.getMetaModelManager().getStandardLibrary().getBooleanType());
 		ave.setReferredVariable(mv);
 		ave.setType(mv.getType());
-		ee.getArgument().add(ave);
+		ee.getOwnedArguments().add(ave);
 		
 		mg.getPredicate().add(mgp);
 		
@@ -1248,7 +1246,7 @@ public class QVTr2QVTcRelations {
 				assert tmn != null;
 				RelationalTransformation rt = (RelationalTransformation) dir.getTransformation();
 				assert rt != null;
-				List<Package> up = dir.getUsedPackage();
+				List<org.eclipse.ocl.pivot.Package> up = dir.getUsedPackage();
 				boolean c = ord.isIsCheckable();
 				List<Variable> domainVars = dp.getBindsTo();
 				ObjectTemplateExp te = (ObjectTemplateExp) dp.getTemplateExpression();
@@ -1350,8 +1348,8 @@ public class QVTr2QVTcRelations {
 		Variable mdv = doRVarToMVar(dv);
 		// assign
 		pd.setConditionExpression(ee);
-		ee.setSource(pe);
-		pe.setSource(mve);
+		ee.setOwnedSource(pe);
+		pe.setOwnedSource(mve);
 		mve.setReferredVariable(vd);
 		mve.setType(vd.getType());
 		Property pep = getProperty(vn, vd.getType());
@@ -1359,10 +1357,10 @@ public class QVTr2QVTcRelations {
 		pe.setReferredProperty(pep);
 		pe.setType(pep.getType());
 		ee.setReferredOperation(getEqualsOPeration());
-		ee.setType(transformation.getMetaModelManager().getBooleanType());
+		ee.setType(transformation.getMetaModelManager().getStandardLibrary().getBooleanType());
 		ave.setReferredVariable(mdv);
 		ave.setType(mdv.getType());
-		ee.getArgument().add(ave);
+		ee.getOwnedArguments().add(ave);
 		
 		mg.getPredicate().add(pd);
 	}
@@ -1394,7 +1392,7 @@ public class QVTr2QVTcRelations {
 	
 	private Operation getEqualsOPeration() {
 		Operation referredOperation = null;
-		for (Operation o : transformation.getMetaModelManager().getOclAnyType().getOwnedOperation()) {
+		for (Operation o : transformation.getMetaModelManager().getStandardLibrary().getOclAnyType().getOwnedOperations()) {
 			if (o.getName().equals("=")) {
 				referredOperation = o;
 				break;
@@ -1405,9 +1403,11 @@ public class QVTr2QVTcRelations {
 	
 	private Property getProperty(String name, Type owningType) {
 		
-		for (Property p : owningType.getOwnedAttribute()) {
-			if (p.getName().equals(name))
-				return p;
+		if (owningType instanceof org.eclipse.ocl.pivot.Class) {
+			for (Property p : ((org.eclipse.ocl.pivot.Class)owningType).getOwnedProperties()) {
+				if (p.getName().equals(name))
+					return p;
+			}
 		}
 		return null;
 	}

@@ -176,8 +176,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	 */
 	@Before
     public void setUp() throws Exception {
-	    
-		BaseLinkingService.DEBUG_RETRY = true;
+		BaseLinkingService.DEBUG_RETRY.setState(true);
 		super.setUp();
 		QVTimperativeStandaloneSetup.doSetup();
 		metaModelManager = new MetaModelManager();

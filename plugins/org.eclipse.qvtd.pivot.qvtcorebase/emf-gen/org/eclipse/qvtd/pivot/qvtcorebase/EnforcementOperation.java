@@ -20,12 +20,12 @@ import org.eclipse.ocl.pivot.OperationCallExp;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation#getEnforcementMode <em>Enforcement Mode</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation#getBottomPattern <em>Bottom Pattern</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation#getOperationCallExp <em>Operation Call Exp</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage#getEnforcementOperation()
  * @model

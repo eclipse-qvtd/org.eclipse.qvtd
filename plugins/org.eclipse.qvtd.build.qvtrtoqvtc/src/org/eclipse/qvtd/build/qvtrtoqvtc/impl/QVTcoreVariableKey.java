@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.examples.pivot.Type;
-import org.eclipse.ocl.examples.pivot.Variable;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvtd.build.qvtrtoqvtc.KeyBindings;
 import org.eclipse.qvtd.build.qvtrtoqvtc.KeyBindings.KeySet;
 import org.eclipse.qvtd.build.qvtrtoqvtc.RelationKey;

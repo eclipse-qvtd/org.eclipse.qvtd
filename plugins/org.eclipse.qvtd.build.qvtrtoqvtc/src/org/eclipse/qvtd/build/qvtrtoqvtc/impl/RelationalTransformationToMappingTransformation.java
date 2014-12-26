@@ -16,7 +16,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.pivot.Package;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.build.qvtrtoqvtc.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
@@ -54,12 +53,12 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 		// Relations
 		@NonNull public TypedModel rtm;
 		@NonNull public String tmn;
-		@NonNull public List<Package> up;
+		@NonNull public List<org.eclipse.ocl.pivot.Package> up;
 		
 		// Core
 		@Nullable public TypedModel mtm;
 		
-		public SubRecord(@NonNull TypedModel rtm, @NonNull String tmn, @NonNull List<Package> up) {
+		public SubRecord(@NonNull TypedModel rtm, @NonNull String tmn, @NonNull List<org.eclipse.ocl.pivot.Package> up) {
 			this.rtm = rtm;
 			this.tmn = tmn;
 			this.up = up;
@@ -77,7 +76,7 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 	
 	// Core
 	Transformation mt = null;
-	org.eclipse.ocl.examples.pivot.Package p = null;
+	org.eclipse.ocl.pivot.Package p = null;
 	private TypedModel tmtm = null;
 	//public static final @NonNull RuleBindings.RuleKey<Transformation> CORE_mt = RULE_BINDINGS.create((Transformation)null, "mt");
 //	public static final @NonNull RuleBindings.RuleKey<TypedModel> CORE_mtm = RULE_BINDINGS.create((TypedModel)null, "mtm");
@@ -103,7 +102,7 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 		rtn = rt.getName();
 		assert (rt != null) && (mt == null);
 		for (TypedModel rtm : rt.getModelParameter()) {
-			@SuppressWarnings("null")@NonNull List<Package> usedPackage = rtm.getUsedPackage();
+			@SuppressWarnings("null")@NonNull List<org.eclipse.ocl.pivot.Package> usedPackage = rtm.getUsedPackage();
 			String tmn = rtm.getName();
 			assert tmn != null;
 			subRecords.add(new SubRecord(rtm, tmn, usedPackage));
@@ -164,7 +163,7 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 		RuleBindings whenBindings = whenRule.getRuleBindings();
 		RelationalTransformationToTracePackage whenRuleRecord = (RelationalTransformationToTracePackage) transformation.getRecord(whenBindings);
 		if (whenRuleRecord != null && whenRuleRecord.hasExecuted()) {
-			p = (Package) whenRuleRecord.getCore();
+			p = (org.eclipse.ocl.pivot.Package) whenRuleRecord.getCore();
 			assert p != null;
 			return true;
 		}
