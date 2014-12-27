@@ -17,7 +17,7 @@ import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.evaluation.AbstractEvaluationVisitorDecorator;
-import org.eclipse.ocl.pivot.evaluation.DomainLogger;
+import org.eclipse.ocl.pivot.evaluation.EvaluationLogger;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.manager.MetaModelManager;
@@ -113,7 +113,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
      * Delegates to my decorated visitor.
      */
 	@Override
-	public @Nullable DomainLogger getLogger() {
+	public @Nullable EvaluationLogger getLogger() {
 		return delegate.getLogger();
 	}
 
@@ -188,7 +188,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
      * Delegates to my decorated visitor.
      */
 	@Override
-	public void setLogger(@Nullable DomainLogger logger) {
+	public void setLogger(@Nullable EvaluationLogger logger) {
 		delegate.setLogger(logger);
 	}
 
