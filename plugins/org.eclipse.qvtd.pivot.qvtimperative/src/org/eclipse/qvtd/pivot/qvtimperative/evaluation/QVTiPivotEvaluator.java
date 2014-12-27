@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
@@ -83,7 +83,7 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
         createModel(name, modelURI, null);
     }
 	public void createModel(@NonNull String name, @NonNull URI modelURI, String contentType) {
-        TypedModel typedModel = ClassUtil.getNamedElement(transformation.getModelParameter(), name);
+        TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
         if (typedModel == null) {
         	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
         }
@@ -139,7 +139,7 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
 	 * Loads the modelURI and binds it to the named TypedModel.
 	 */
 	public void loadModel(@NonNull String name, @NonNull URI modelURI) {
-        TypedModel typedModel = ClassUtil.getNamedElement(transformation.getModelParameter(), name);
+        TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
         if (typedModel == null) {
         	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
         }
@@ -149,7 +149,7 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
         }
     }
 	public void loadModel(@NonNull String name, @NonNull URI modelURI, String contentType) {
-        TypedModel typedModel = ClassUtil.getNamedElement(transformation.getModelParameter(), name);
+        TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
         if (typedModel == null) {
         	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
         }

@@ -48,6 +48,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiGlobalContext;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
@@ -484,7 +485,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 //		cgIterator.setNonNull();
 		cgMappingLoop.setAst(asMappingLoop);
 		CollectionType collectionType = metaModelManager.getStandardLibrary().getCollectionType();
-		Operation forAllIteration = ClassUtil.getNamedElement(collectionType.getOwnedOperations(), "forAll");
+		Operation forAllIteration = NameUtil.getNameable(collectionType.getOwnedOperations(), "forAll");
 		cgMappingLoop.setReferredIteration((Iteration) forAllIteration);
 		cgMappingLoop.setBody(doVisit(CGValuedElement.class, asMappingLoop.getOwnedBody()));
 		return cgMappingLoop;

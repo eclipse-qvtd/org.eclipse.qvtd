@@ -31,6 +31,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableDeclaration;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
@@ -206,7 +207,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 //			PathNameCS pathName = csTransformation.getPathName();
 //			List<PathElementCS> ownedPathElements = pathName != null ? pathName.getOwnedPathElements() : null;
 //			if ((ownedPathElements == null) || ownedPathElements.isEmpty()) {
-				asParent = ClassUtil.getNamedElement(asCoreModel.getOwnedPackages(), "");
+				asParent = NameUtil.getNameable(asCoreModel.getOwnedPackages(), "");
 				if (asParent == null) {
 					asParent = context.refreshModelElement(org.eclipse.ocl.pivot.Package.class, PivotPackage.Literals.PACKAGE, null);
 					asParent.setName("");

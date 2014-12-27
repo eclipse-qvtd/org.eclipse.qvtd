@@ -19,7 +19,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluator;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMModelManager;
 import org.eclipse.ocl.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
@@ -92,7 +92,7 @@ public class QVTiVMEvaluator implements IVMEvaluator
 //    	this.context = context;
 //    }
 	public void createModel(@NonNull String name, @NonNull URI modelURI, String contentType) {
-        TypedModel typedModel = ClassUtil.getNamedElement(transformation.getModelParameter(), name);
+        TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
         if (typedModel == null) {
         	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
         }
@@ -143,7 +143,7 @@ public class QVTiVMEvaluator implements IVMEvaluator
 		return transformation;
 	}
 	public void loadModel(@NonNull String name, @NonNull URI modelURI, String contentType) {
-        TypedModel typedModel = ClassUtil.getNamedElement(transformation.getModelParameter(), name);
+        TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
         if (typedModel == null) {
         	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
         }

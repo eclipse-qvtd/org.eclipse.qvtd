@@ -33,12 +33,12 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil.UnresolvedProxyCrossReferencer;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.ecore.AS2Ecore;
-import org.eclipse.ocl.pivot.evaluation.DomainException;
+import org.eclipse.ocl.pivot.evaluation.EvaluationException;
 import org.eclipse.ocl.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.pivot.manager.MetaModelManagerResourceAdapter;
+import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.ProjectMap;
-import org.eclipse.ocl.pivot.validation.DomainSubstitutionLabelProvider;
 import org.eclipse.ocl.pivot.values.Value;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.base.utilities.CS2ASResourceAdapter;
@@ -105,7 +105,7 @@ public class PivotTestCase extends TestCase
 	}
 
 	public static void assertNoValidationErrors(String string, EObject eObject) {
-		Map<Object, Object> validationContext = DomainSubstitutionLabelProvider.createDefaultContext(Diagnostician.INSTANCE);
+		Map<Object, Object> validationContext = LabelUtil.createDefaultContext(Diagnostician.INSTANCE);
 		Diagnostic diagnostic = Diagnostician.INSTANCE.validate(eObject, validationContext);
 		List<Diagnostic> children = diagnostic.getChildren();
 		if (children.size() <= 0) {
@@ -191,14 +191,14 @@ public class PivotTestCase extends TestCase
 	}
 
 	protected static Value failOn(String expression, Throwable e) {
-		if (e instanceof DomainException) {
+		if (e instanceof EvaluationException) {
 			Throwable eCause = e.getCause();
 			if (eCause != null) {
 				return failOn(expression, eCause);
 			}
 			throw new Error("Failed to evaluate \"" + expression + "\"", e);
 		}
-		else if (e instanceof DomainException) {
+		else if (e instanceof EvaluationException) {
 			throw new Error("Failed to parse or evaluate \"" + expression + "\"", e);
 		}
 		else {

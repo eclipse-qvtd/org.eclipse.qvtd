@@ -29,6 +29,7 @@ import org.eclipse.ocl.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.pivot.manager.MetaModelManagerResourceSetAdapter;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
@@ -118,7 +119,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		 * @param modelFileName the model file name
 		 */
 		public void loadReference(@NonNull String name, @NonNull String modelFileName) {
-	        TypedModel typedModel = ClassUtil.getNamedElement(transformation.getModelParameter(), name);
+	        TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
 	        if (typedModel == null) {
 	        	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
 	        }

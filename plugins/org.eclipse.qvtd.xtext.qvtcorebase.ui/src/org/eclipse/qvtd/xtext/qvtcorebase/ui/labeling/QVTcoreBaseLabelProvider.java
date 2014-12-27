@@ -15,7 +15,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.prettyprint.PrettyPrinter;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
@@ -95,7 +95,7 @@ public class QVTcoreBaseLabelProvider extends QVTbaseLabelProvider
 	}
 
 	protected String text(DomainCS ele) {
-		return ClassUtil.getSafeName(ele);
+		return NameUtil.getSafeName(ele);
 	}
 
 	protected String text(GuardPattern ele) {
@@ -113,7 +113,7 @@ public class QVTcoreBaseLabelProvider extends QVTbaseLabelProvider
 		Property targetProperty = ele.getTargetProperty();
 		s.append(".");
 		if (targetProperty != null) {
-			s.append(ClassUtil.getSafeName(targetProperty));
+			s.append(NameUtil.getSafeName(targetProperty));
 		}
 		s.append(" : ");
 		if (targetProperty != null) {
