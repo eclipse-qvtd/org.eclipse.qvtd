@@ -23,7 +23,7 @@ import org.eclipse.ocl.library.collection.CollectionUnionOperation;
 import org.eclipse.ocl.library.collection.OrderedCollectionFirstOperation;
 import org.eclipse.ocl.library.string.StringConcatOperation;
 import org.eclipse.ocl.pivot.evaluation.AbstractTransformation;
-import org.eclipse.ocl.pivot.evaluation.DomainEvaluator;
+import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
@@ -135,7 +135,7 @@ public class umlRdbms extends AbstractTransformation
     protected final @NonNull Map<Attribute,FromAttribute> OPPOSITE_OF_FromAttribute_attribute = new HashMap<Attribute,FromAttribute>();
     protected final @NonNull Map<PrimitiveDataType,PrimitiveToName> OPPOSITE_OF_PrimitiveToName_primitive = new HashMap<PrimitiveDataType,PrimitiveToName>();
     
-    public umlRdbms(final @NonNull DomainEvaluator evaluator) {
+    public umlRdbms(final @NonNull Evaluator evaluator) {
         super(evaluator, new String[] {"uml", "rdbms", "middle"});
     }
     

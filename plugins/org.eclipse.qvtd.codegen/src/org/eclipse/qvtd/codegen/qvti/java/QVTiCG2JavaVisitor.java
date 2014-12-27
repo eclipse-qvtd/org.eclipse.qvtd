@@ -39,7 +39,7 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.evaluation.AbstractTransformation;
-import org.eclipse.ocl.pivot.evaluation.DomainEvaluator;
+import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.ElementId;
 import org.eclipse.ocl.pivot.ids.TypeId;
@@ -138,7 +138,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		js.append("public " + className + "(final ");
 		js.appendIsRequired(true);
 		js.append(" ");
-		js.appendClassReference(DomainEvaluator.class);
+		js.appendClassReference(Evaluator.class);
 		js.append(" " + evaluatorName + ") {\n");
 		js.pushIndentation(null);		
 		js.append("super(" + evaluatorName + ", new String[] {");

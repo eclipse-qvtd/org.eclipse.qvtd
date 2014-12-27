@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.AbstractTransformation;
-import org.eclipse.ocl.pivot.evaluation.DomainEvaluator;
+import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.DataTypeId;
@@ -57,7 +57,7 @@ public class hsv2hls extends AbstractTransformation
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_HSVNode = TypeId.ORDERED_SET.getSpecializedId(CLSSid_HSVNode);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_HSVNode2HLSNode = TypeId.ORDERED_SET.getSpecializedId(CLSSid_HSVNode2HLSNode);
     
-    public hsv2hls(final @NonNull DomainEvaluator evaluator) {
+    public hsv2hls(final @NonNull Evaluator evaluator) {
         super(evaluator, new String[] {"hsv", "hls", "middle"});
     }
     

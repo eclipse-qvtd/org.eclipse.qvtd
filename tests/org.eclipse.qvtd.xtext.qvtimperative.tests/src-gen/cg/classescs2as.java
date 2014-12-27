@@ -32,7 +32,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.library.classifier.ClassifierAllInstancesOperation;
 import org.eclipse.ocl.library.collection.CollectionAsOrderedSetOperation;
 import org.eclipse.ocl.pivot.evaluation.AbstractTransformation;
-import org.eclipse.ocl.pivot.evaluation.DomainEvaluator;
+import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
@@ -98,7 +98,7 @@ public class classescs2as extends AbstractTransformation
     protected final @NonNull Map<PackageCS,PackageCS2Package> OPPOSITE_OF_PackageCS2Package_packageCS = new HashMap<PackageCS,PackageCS2Package>();
     protected final @NonNull Map<RootCS,RootCS2Root> OPPOSITE_OF_RootCS2Root_rootCS = new HashMap<RootCS,RootCS2Root>();
     
-    public classescs2as(final @NonNull DomainEvaluator evaluator) {
+    public classescs2as(final @NonNull Evaluator evaluator) {
         super(evaluator, new String[] {"leftCS", "rightAS", "middle"});
     }
     

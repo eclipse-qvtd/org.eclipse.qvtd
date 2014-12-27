@@ -30,7 +30,7 @@ import org.eclipse.ocl.library.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.complete.CompleteEnvironmentInternal;
 import org.eclipse.ocl.pivot.evaluation.AbstractTransformation;
-import org.eclipse.ocl.pivot.evaluation.DomainEvaluator;
+import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.evaluation.DomainModelManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.manager.MetaModelManager;
@@ -73,7 +73,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		}
 
 		@NonNull
-		public DomainEvaluator createNestedEvaluator() {
+		public Evaluator createNestedEvaluator() {
 			throw new UnsupportedOperationException();
 		}
 
@@ -146,8 +146,8 @@ public class QVTiCompilerTests extends LoadTestCase
 		EPackage.Registry.INSTANCE.put(HLSTreePackage.eNS_URI, HLSTreePackage.eINSTANCE);
 		Class<? extends AbstractTransformation> txClass = generateCode(transformURI, genModelURI, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");
 		
-		Constructor<? extends AbstractTransformation> txConstructor = txClass.getConstructor(DomainEvaluator.class);
-		DomainEvaluator evaluator = new TxEvaluator(ClassUtil.nonNullState(metaModelManager.getCompleteEnvironment()));
+		Constructor<? extends AbstractTransformation> txConstructor = txClass.getConstructor(Evaluator.class);
+		Evaluator evaluator = new TxEvaluator(ClassUtil.nonNullState(metaModelManager.getCompleteEnvironment()));
 		AbstractTransformation tx = txConstructor.newInstance(evaluator);
 		Resource inputResource = resourceSet.getResource(inputModelURI, true);
 		tx.addRootObjects("hsv", ClassUtil.nonNullState(inputResource.getContents()));
@@ -177,8 +177,8 @@ public class QVTiCompilerTests extends LoadTestCase
 		EPackage.Registry.INSTANCE.put(SimplerdbmsPackage.eNS_URI, SimplerdbmsPackage.eINSTANCE);
 		Class<? extends AbstractTransformation> txClass = generateCode(transformURI, genModelURI, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");
 		
-		Constructor<? extends AbstractTransformation> txConstructor = txClass.getConstructor(DomainEvaluator.class);
-		DomainEvaluator evaluator = new TxEvaluator(ClassUtil.nonNullState(metaModelManager.getCompleteEnvironment()));
+		Constructor<? extends AbstractTransformation> txConstructor = txClass.getConstructor(Evaluator.class);
+		Evaluator evaluator = new TxEvaluator(ClassUtil.nonNullState(metaModelManager.getCompleteEnvironment()));
 		AbstractTransformation tx = txConstructor.newInstance(evaluator);
 		Resource inputResource = resourceSet.getResource(inputModelURI, true);
 		tx.addRootObjects("uml", ClassUtil.nonNullState(inputResource.getContents()));
