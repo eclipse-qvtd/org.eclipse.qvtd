@@ -32,7 +32,7 @@ import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.ParserException;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.evaluation.DomainModelManager;
+import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -43,7 +43,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * A QVTc Domain Manager object encapsulates the domain information need to 
  * modify the domains's models. 
  */
-public class QVTiModelManager implements DomainModelManager
+public class QVTiModelManager implements ModelManager
 {
 	protected final @NonNull MetaModelManager metaModelManager;
 	// TODO how to manage aliases?

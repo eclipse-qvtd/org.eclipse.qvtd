@@ -31,7 +31,7 @@ import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.complete.CompleteEnvironmentInternal;
 import org.eclipse.ocl.pivot.evaluation.AbstractTransformation;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
-import org.eclipse.ocl.pivot.evaluation.DomainModelManager;
+import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.pivot.manager.MetaModelManagerResourceSetAdapter;
@@ -83,7 +83,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		}
 
 		@NonNull
-		public DomainModelManager getModelManager() {
+		public ModelManager getModelManager() {
 			throw new UnsupportedOperationException();
 		}
 	}
