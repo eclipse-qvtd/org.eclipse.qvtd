@@ -23,7 +23,7 @@ import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtilInternal;
 import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
@@ -94,9 +94,9 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 
 		@Override
 		public BasicContinuation<?> execute() {
-			TypedModel pTypedModel = PivotUtil.getPivot(TypedModel.class, csElement);
+			TypedModel pTypedModel = PivotUtilInternal.getPivot(TypedModel.class, csElement);
 			if (pTypedModel != null) {
-				PivotUtil.refreshList(pTypedModel.getUsedPackage(), csElement.getImports());
+				PivotUtilInternal.refreshList(pTypedModel.getUsedPackage(), csElement.getImports());
 			}
 			return null;
 		}
@@ -110,7 +110,7 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 
 		@Override
 		public BasicContinuation<?> execute() {
-			CoreDomain pDomain = PivotUtil.getPivot(CoreDomain.class, csElement);
+			CoreDomain pDomain = PivotUtilInternal.getPivot(CoreDomain.class, csElement);
 			if (pDomain != null) {
 				TypedModel direction = csElement.getDirection();
 				if (direction == null) {
@@ -135,7 +135,7 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 		Map<org.eclipse.ocl.pivot.Package, List<org.eclipse.ocl.pivot.Class>> package2ownedClasses = new HashMap<org.eclipse.ocl.pivot.Package, List<org.eclipse.ocl.pivot.Class>>();
 		for (TransformationCS csTransformation : csTransformations) {
 			org.eclipse.ocl.pivot.Package asParent = null;
-			Transformation asTransformation = PivotUtil.getPivot(Transformation.class, csTransformation);
+			Transformation asTransformation = PivotUtilInternal.getPivot(Transformation.class, csTransformation);
 			PathNameCS pathName = csTransformation.getPathName();
 			List<PathElementCS> ownedPathElements = pathName != null ? pathName.getOwnedPathElements() : null;
 			if ((ownedPathElements == null) || ownedPathElements.isEmpty()) {
@@ -180,10 +180,10 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 			asNewTransformations.add(asTransformation);
 		}
 		for (org.eclipse.ocl.pivot.Package asPackage : package2ownedPackages.keySet()) {
-			PivotUtil.refreshList(asPackage.getOwnedPackages(), package2ownedPackages.get(asPackage));
+			PivotUtilInternal.refreshList(asPackage.getOwnedPackages(), package2ownedPackages.get(asPackage));
 		}
 		for (org.eclipse.ocl.pivot.Package asPackage : package2ownedClasses.keySet()) {
-			PivotUtil.refreshList(asPackage.getOwnedClasses(), package2ownedClasses.get(asPackage));
+			PivotUtilInternal.refreshList(asPackage.getOwnedClasses(), package2ownedClasses.get(asPackage));
 		}
 		return asPackages;
 	}
@@ -215,8 +215,8 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 		@NonNull CoreDomain pivotElement = context.refreshModelElement(CoreDomain.class, QVTcoreBasePackage.Literals.CORE_DOMAIN, csElement);
 		pivotElement.setIsCheckable(csElement.isCheck());
 		pivotElement.setIsEnforceable(csElement.isEnforce());
-		pivotElement.setBottomPattern(PivotUtil.getPivot(BottomPattern.class, csElement.getBottomPattern()));
-		pivotElement.setGuardPattern(PivotUtil.getPivot(GuardPattern.class, csElement.getGuardPattern()));
+		pivotElement.setBottomPattern(PivotUtilInternal.getPivot(BottomPattern.class, csElement.getBottomPattern()));
+		pivotElement.setGuardPattern(PivotUtilInternal.getPivot(GuardPattern.class, csElement.getGuardPattern()));
 		context.refreshComments(pivotElement, csElement);
 		return new DomainContentContinuation(context, csElement);
 	}

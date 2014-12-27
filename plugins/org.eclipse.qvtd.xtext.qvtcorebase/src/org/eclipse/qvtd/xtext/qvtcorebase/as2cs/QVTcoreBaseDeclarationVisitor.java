@@ -30,7 +30,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtilInternal;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
 import org.eclipse.ocl.xtext.base.as2cs.AliasAnalysis;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
@@ -260,7 +260,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	public ElementCS visitTypedModel(@NonNull TypedModel asTypedModel) {
 		DirectionCS csDirection = context.refreshNamedElement(DirectionCS.class, QVTcoreBaseCSPackage.Literals.DIRECTION_CS, asTypedModel);
 		csDirection.setPivot(asTypedModel);
-		PivotUtil.refreshList(csDirection.getImports(), asTypedModel.getUsedPackage());
+		PivotUtilInternal.refreshList(csDirection.getImports(), asTypedModel.getUsedPackage());
 //		PivotUtil.refreshList(csDirection.getUses(), asTypedModel.getDependsOn());
 		return csDirection;
 	}

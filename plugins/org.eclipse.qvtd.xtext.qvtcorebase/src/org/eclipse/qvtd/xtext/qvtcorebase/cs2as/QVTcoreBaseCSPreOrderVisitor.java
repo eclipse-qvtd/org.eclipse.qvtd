@@ -15,7 +15,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtilInternal;
 import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
@@ -46,9 +46,9 @@ public class QVTcoreBaseCSPreOrderVisitor extends AbstractQVTcoreBaseCSPreOrderV
 
 		@Override
 		public BasicContinuation<?> execute() {
-			FunctionParameter pivotElement = PivotUtil.getPivot(FunctionParameter.class, csElement);
+			FunctionParameter pivotElement = PivotUtilInternal.getPivot(FunctionParameter.class, csElement);
 			if (pivotElement != null) {
-				Type type = PivotUtil.getPivot(Type.class, csElement.getOwnedType());
+				Type type = PivotUtilInternal.getPivot(Type.class, csElement.getOwnedType());
 				pivotElement.setType(type);
 			}
 			return null;
@@ -63,9 +63,9 @@ public class QVTcoreBaseCSPreOrderVisitor extends AbstractQVTcoreBaseCSPreOrderV
 
 		@Override
 		public BasicContinuation<?> execute() {
-			Function pivotElement = PivotUtil.getPivot(Function.class, csElement);
+			Function pivotElement = PivotUtilInternal.getPivot(Function.class, csElement);
 			if (pivotElement != null) {
-				Type type = PivotUtil.getPivot(Type.class, csElement.getOwnedType());
+				Type type = PivotUtilInternal.getPivot(Type.class, csElement.getOwnedType());
 				pivotElement.setType(type);
 			}
 			return null;
@@ -80,9 +80,9 @@ public class QVTcoreBaseCSPreOrderVisitor extends AbstractQVTcoreBaseCSPreOrderV
 
 		@Override
 		public BasicContinuation<?> execute() {
-			Variable pivotElement = PivotUtil.getPivot(Variable.class, csElement);
+			Variable pivotElement = PivotUtilInternal.getPivot(Variable.class, csElement);
 			if (pivotElement != null) {
-				Type type = PivotUtil.getPivot(Type.class, csElement.getOwnedType());
+				Type type = PivotUtilInternal.getPivot(Type.class, csElement.getOwnedType());
 				pivotElement.setType(type);
 			}
 			return null;
@@ -140,7 +140,7 @@ public class QVTcoreBaseCSPreOrderVisitor extends AbstractQVTcoreBaseCSPreOrderV
 
 	@Override
 	public Continuation<?> visitTransformationCS(@NonNull TransformationCS csElement) {
-		Transformation pivotElement = PivotUtil.getPivot(Transformation.class, csElement);
+		Transformation pivotElement = PivotUtilInternal.getPivot(Transformation.class, csElement);
 		if (pivotElement != null) {
 			List<org.eclipse.ocl.pivot.Class> superClasses = pivotElement.getSuperClasses();
 //			context.refreshList(Type.class, superClasses, csElement.getOwnedSuperType());

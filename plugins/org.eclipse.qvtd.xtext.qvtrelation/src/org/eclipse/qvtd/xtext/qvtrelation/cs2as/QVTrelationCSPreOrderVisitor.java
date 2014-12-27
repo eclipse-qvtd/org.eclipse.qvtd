@@ -18,7 +18,7 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtilInternal;
 import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
@@ -47,9 +47,9 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 
 		@Override
 		public BasicContinuation<?> execute() {
-			CollectionTemplateExp pivotElement = PivotUtil.getPivot(CollectionTemplateExp.class, csElement);
+			CollectionTemplateExp pivotElement = PivotUtilInternal.getPivot(CollectionTemplateExp.class, csElement);
 			if (pivotElement != null) {
-				CollectionType type = PivotUtil.getPivot(CollectionType.class, csElement.getType());
+				CollectionType type = PivotUtilInternal.getPivot(CollectionType.class, csElement.getType());
 				pivotElement.setReferredCollectionType(type);
 				pivotElement.setType(type);
 				Variable variable = pivotElement.getBindsTo();
@@ -69,9 +69,9 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 
 		@Override
 		public BasicContinuation<?> execute() {
-			ObjectTemplateExp pivotElement = PivotUtil.getPivot(ObjectTemplateExp.class, csElement);
+			ObjectTemplateExp pivotElement = PivotUtilInternal.getPivot(ObjectTemplateExp.class, csElement);
 			if (pivotElement != null) {
-				org.eclipse.ocl.pivot.Class type = PivotUtil.getPivot(org.eclipse.ocl.pivot.Class.class, csElement.getType());
+				org.eclipse.ocl.pivot.Class type = PivotUtilInternal.getPivot(org.eclipse.ocl.pivot.Class.class, csElement.getType());
 				pivotElement.setReferredClass(type);
 				pivotElement.setType(type);
 				Variable variable = pivotElement.getBindsTo();
@@ -94,7 +94,7 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 			if (!super.canExecute()) {
 				return false;
 			}
-			ObjectTemplateExp pivotElement = PivotUtil.getPivot(ObjectTemplateExp.class, csElement.getObjectTemplate());
+			ObjectTemplateExp pivotElement = PivotUtilInternal.getPivot(ObjectTemplateExp.class, csElement.getObjectTemplate());
 			if (pivotElement == null) {
 				return false;
 			}
@@ -104,7 +104,7 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 
 		@Override
 		public BasicContinuation<?> execute() {
-			PropertyTemplateItem pivotElement = PivotUtil.getPivot(PropertyTemplateItem.class, csElement);
+			PropertyTemplateItem pivotElement = PivotUtilInternal.getPivot(PropertyTemplateItem.class, csElement);
 			if (pivotElement != null) {
 				Property propertyId = csElement.getPropertyId();
 				if (propertyId != null) {
@@ -135,7 +135,7 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 
 	@Override
 	public Continuation<?> visitDefaultValueCS(@NonNull DefaultValueCS csElement) {
-		RelationDomainAssignment pivotElement = PivotUtil.getPivot(RelationDomainAssignment.class, csElement);
+		RelationDomainAssignment pivotElement = PivotUtilInternal.getPivot(RelationDomainAssignment.class, csElement);
 		if (pivotElement != null) {
 			pivotElement.setVariable(csElement.getPropertyId());
 		}
@@ -154,7 +154,7 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 
 	@Override
 	public Continuation<?> visitTransformationCS(@NonNull TransformationCS csElement) {
-		Transformation pivotElement = PivotUtil.getPivot(Transformation.class, csElement);
+		Transformation pivotElement = PivotUtilInternal.getPivot(Transformation.class, csElement);
 		if (pivotElement != null) {
 			List<org.eclipse.ocl.pivot.Class> superClasses = pivotElement.getSuperClasses();
 //			context.refreshList(Type.class, superClasses, csElement.getOwnedSuperType());

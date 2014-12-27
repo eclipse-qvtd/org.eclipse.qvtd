@@ -21,7 +21,7 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VoidType;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtilInternal;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.ImportCS;
@@ -232,14 +232,14 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 			VariableCS csVariable = context.refreshNamedElement(VariableCS.class, EssentialOCLCSPackage.Literals.VARIABLE_CS, asVariable);
 			Type type = asVariable.getType();
 			if ((type instanceof CollectionType) && (((CollectionType)type).getUnspecializedElement() != context.getMetaModelManager().getStandardLibrary().getCollectionType())) {
-				PivotUtil.debugWellContainedness(type);
+				PivotUtilInternal.debugWellContainedness(type);
 				type = ((CollectionType)type).getElementType();
 			}
 			else if (type instanceof VoidType) {
 				type = null;
 			}
 			if (type != null) {
-				PivotUtil.debugWellContainedness(type);
+				PivotUtilInternal.debugWellContainedness(type);
 				TypedRefCS typeRef = context.visitReference(TypedRefCS.class, type, null);
 				csVariable.setOwnedType(typeRef);
 			}

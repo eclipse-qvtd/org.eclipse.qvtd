@@ -21,7 +21,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtilInternal;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
@@ -99,8 +99,8 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		@NonNull Mapping pivotElement = refreshNamedElement(Mapping.class, QVTimperativePackage.Literals.MAPPING, csElement);
 		DomainCS csMiddle = csElement.getMiddle();
 		if (csMiddle != null) {
-			pivotElement.setBottomPattern(PivotUtil.getPivot(BottomPattern.class, csMiddle.getBottomPattern()));
-			pivotElement.setGuardPattern(PivotUtil.getPivot(GuardPattern.class, csMiddle.getGuardPattern()));
+			pivotElement.setBottomPattern(PivotUtilInternal.getPivot(BottomPattern.class, csMiddle.getBottomPattern()));
+			pivotElement.setGuardPattern(PivotUtilInternal.getPivot(GuardPattern.class, csMiddle.getGuardPattern()));
 		}
 		else {
 			BottomPattern bottomPattern = pivotElement.getBottomPattern();
@@ -124,7 +124,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 			}
 		}
 		context.refreshPivotList(CoreDomain.class, pivotElement.getDomain(), csElement.getDomains());
-		pivotElement.setMappingStatement(PivotUtil.getPivot(MappingStatement.class, csElement.getMappingSequence()));
+		pivotElement.setMappingStatement(PivotUtilInternal.getPivot(MappingStatement.class, csElement.getMappingSequence()));
 		return null;
 	}
 
@@ -149,7 +149,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		@NonNull Variable iterator = refreshNamedElement(Variable.class, PivotPackage.Literals.VARIABLE, ClassUtil.nonNullState(csMappingLoop.getOwnedIterator()));
 		pivotElement.getOwnedIterators().clear();
 		pivotElement.getOwnedIterators().add(iterator);
-		pivotElement.setOwnedBody(PivotUtil.getPivot(MappingStatement.class, csMappingLoop.getMappingSequence()));
+		pivotElement.setOwnedBody(PivotUtilInternal.getPivot(MappingStatement.class, csMappingLoop.getMappingSequence()));
 //		CollectionType collectionType = metaModelManager.getCollectionType();
 //		DomainOperation forAllIteration = ClassUtil.getNamedElement(collectionType.getLocalOperations(), "forAll");
 //		pivotElement.setReferredIteration((Iteration) forAllIteration);
@@ -173,7 +173,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 //		List<Transformation> txList = new ArrayList<Transformation>(csTransformations.size());
 		Map<Transformation, List<Mapping>> tx2mappings = new HashMap<Transformation, List<Mapping>>();
 		for (TransformationCS csTransformation : csTransformations) {
-			Transformation pTransformation = PivotUtil.getPivot(Transformation.class, csTransformation);
+			Transformation pTransformation = PivotUtilInternal.getPivot(Transformation.class, csTransformation);
 			tx2mappings.put(pTransformation, new ArrayList<Mapping>());
 //			txList.add(pTransformation);
 		}
@@ -183,7 +183,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 //		}
 //		List<TransformationCS> csTransformations = csElement.getTransformations();
 		List<org.eclipse.ocl.pivot.Package> asPackages = resolveTransformations(csTransformations, asModel);
-		PivotUtil.refreshList(asModel.getOwnedPackages(), asPackages);
+		PivotUtilInternal.refreshList(asModel.getOwnedPackages(), asPackages);
 		//
 		Resource eResource = csElement.eResource();
 		if (eResource instanceof BaseCSResource) {
@@ -195,7 +195,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 			Transformation inTransformation = csMapping.getIn();
 			List<Mapping> mappings = tx2mappings.get(inTransformation);
 			if (mappings != null) {
-				Mapping pMapping = PivotUtil.getPivot(Mapping.class, csMapping);
+				Mapping pMapping = PivotUtilInternal.getPivot(Mapping.class, csMapping);
 				if (pMapping != null) {
 					mappings.add(pMapping);
 				}
@@ -204,7 +204,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		Map<Transformation, List<Function>> tx2qMap = new HashMap<Transformation, List<Function>>();
 		for (QueryCS csQuery : csElement.getQueries()) {
 			Transformation transformation = csQuery.getTransformation();
-			Function query = PivotUtil.getPivot(Function.class,  csQuery);
+			Function query = PivotUtilInternal.getPivot(Function.class,  csQuery);
 			List<Function> queries = tx2qMap.get(transformation);
 			if (queries == null) {
 				queries = new ArrayList<Function>();
@@ -213,10 +213,10 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 			queries.add(query);
 		}
 		for (Transformation pTransformation : tx2mappings.keySet()) {
-			PivotUtil.refreshList(pTransformation.getRule(), tx2mappings.get(pTransformation));
+			PivotUtilInternal.refreshList(pTransformation.getRule(), tx2mappings.get(pTransformation));
 			List<Function> newElements = tx2qMap.get(pTransformation);
 			if (newElements != null) {
-				PivotUtil.refreshList(pTransformation.getOwnedOperations(), newElements);
+				PivotUtilInternal.refreshList(pTransformation.getOwnedOperations(), newElements);
 			}
 			else {
 				pTransformation.getOwnedOperations().clear();

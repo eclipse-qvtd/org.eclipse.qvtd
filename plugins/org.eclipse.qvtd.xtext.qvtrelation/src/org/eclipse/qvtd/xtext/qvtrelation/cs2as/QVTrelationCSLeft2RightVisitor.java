@@ -29,7 +29,7 @@ import org.eclipse.ocl.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.pivot.scoping.ScopeFilter;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.SingletonIterator;
 import org.eclipse.ocl.pivot.utilities.StringUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
@@ -107,7 +107,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 			@Override
 			protected boolean doNext(@NonNull ElementCS csParent, @NonNull ElementCS csChild) {
 				if (csParent instanceof TransformationCS) {
-					Transformation asContext = PivotUtil.getPivot(Transformation.class, (TransformationCS)csParent);
+					Transformation asContext = PivotUtilInternal.getPivot(Transformation.class, (TransformationCS)csParent);
 					if (asContext != null) {
 						next = asContext;
 					}
@@ -267,17 +267,17 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 
 	@Override
 	public Element visitCollectionTemplateCS(@NonNull CollectionTemplateCS csElement) {
-		return PivotUtil.getPivot(CollectionTemplateExp.class, csElement);
+		return PivotUtilInternal.getPivot(CollectionTemplateExp.class, csElement);
 	}
 
 	@Override
 	public Element visitDefaultValueCS(@NonNull DefaultValueCS csElement) {
-		RelationDomainAssignment pivotElement = PivotUtil.getPivot(RelationDomainAssignment.class, csElement);
+		RelationDomainAssignment pivotElement = PivotUtilInternal.getPivot(RelationDomainAssignment.class, csElement);
 		return pivotElement;
 	}
 
 	@Override
 	public Element visitObjectTemplateCS(@NonNull ObjectTemplateCS csElement) {
-		return PivotUtil.getPivot(ObjectTemplateExp.class, csElement);
+		return PivotUtilInternal.getPivot(ObjectTemplateExp.class, csElement);
 	}
 }
