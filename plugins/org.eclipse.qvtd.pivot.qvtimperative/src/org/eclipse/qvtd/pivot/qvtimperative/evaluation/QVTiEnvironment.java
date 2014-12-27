@@ -26,7 +26,7 @@ public class QVTiEnvironment extends PivotEnvironment
 	}
 
 	@Override
-	public @NonNull QVTiEnvironmentFactory getFactory() {
-		return (QVTiEnvironmentFactory) super.getFactory();
+	public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
+		return (QVTiEnvironmentFactory) super.getEnvironmentFactory();
 	}
 }

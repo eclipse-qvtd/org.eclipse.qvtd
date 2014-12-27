@@ -27,7 +27,7 @@ public class QVTiVMEnvironment extends QVTiEnvironment
 	}
 
 	@Override
-	public @NonNull QVTiVMEnvironmentFactory getFactory() {
-		return (QVTiVMEnvironmentFactory) super.getFactory();
+	public @NonNull QVTiVMEnvironmentFactory getEnvironmentFactory() {
+		return (QVTiVMEnvironmentFactory) super.getEnvironmentFactory();
 	}
 }

@@ -41,7 +41,7 @@ public class QVTiVMEvaluationVisitorImpl extends QVTiEvaluationVisitorImpl imple
     @Override
     public @NonNull IQVTiVMEvaluationVisitor createNestedEvaluator() {
     	QVTiVMEnvironment vmEnvironment = getEnvironment();
-		QVTiVMEnvironmentFactory factory = vmEnvironment.getFactory();
+		QVTiVMEnvironmentFactory factory = vmEnvironment.getEnvironmentFactory();
 		IQVTiVMEvaluationEnvironment nestedEvalEnv = factory.createEvaluationEnvironment(evaluationEnvironment);
         QVTiVMEvaluationVisitorImpl ne = new QVTiVMEvaluationVisitorImpl(vmEnvironment, nestedEvalEnv);
         return ne;

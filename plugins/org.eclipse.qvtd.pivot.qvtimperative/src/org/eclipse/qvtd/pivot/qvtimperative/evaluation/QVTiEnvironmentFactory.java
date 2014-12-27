@@ -51,7 +51,7 @@ public class QVTiEnvironmentFactory extends PivotEnvironmentFactory {
 	}
 
 	public @NonNull IQVTiEvaluationEnvironment createEvaluationEnvironment(@NonNull QVTiModelManager modelManager, @NonNull Transformation transformation) {
-		return new QVTiRootEvaluationEnvironment(getMetaModelManager(), modelManager, transformation);
+		return new QVTiRootEvaluationEnvironment(this, modelManager, transformation);
 	}
 
 	public @NonNull IQVTiEvaluationEnvironment createEvaluationEnvironment(@NonNull IQVTiEvaluationEnvironment parent, @NonNull NamedElement operation) {

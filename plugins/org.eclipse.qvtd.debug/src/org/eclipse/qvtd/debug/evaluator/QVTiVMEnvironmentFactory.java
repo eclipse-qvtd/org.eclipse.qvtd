@@ -54,7 +54,7 @@ public class QVTiVMEnvironmentFactory extends QVTiEnvironmentFactory implements 
 	}
 
 	public @NonNull IQVTiVMEvaluationEnvironment createEvaluationEnvironment(@NonNull QVTiModelManager modelManager, @NonNull Transformation transformation) {
-		return new QVTiVMRootEvaluationEnvironment(getMetaModelManager(), modelManager, transformation, ++envId);
+		return new QVTiVMRootEvaluationEnvironment(this, modelManager, transformation, ++envId);
 	}
 
 	@Override
