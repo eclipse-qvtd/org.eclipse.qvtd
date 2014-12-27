@@ -27,6 +27,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
@@ -569,10 +570,12 @@ public class QvtrToQvtcTransformation
 	public void saveCore(@NonNull Resource asResource, @NonNull Collection<? extends EObject> eObjects, @NonNull Map<Object, Object> options) throws IOException {
         CoreModel root = QVTcoreFactory.eINSTANCE.createCoreModel();
         root.setExternalURI(asResource.getURI().toString());
+        Package capsule = PivotFactory.eINSTANCE.createPackage();
+        root.getOwnedPackages().add(capsule);
         asResource.getContents().add(root);
         for (EObject eObject : eObjects) {
-        	if (eObject instanceof org.eclipse.ocl.pivot.Package) {
-                root.getOwnedPackages().add((org.eclipse.ocl.pivot.Package)eObject);
+        	if (eObject instanceof org.eclipse.qvtd.pivot.qvtbase.Transformation) {
+                capsule.getOwnedClasses().add((org.eclipse.qvtd.pivot.qvtbase.Transformation) eObject);
         	}
         	else {
         		asResource.getContents().add(eObject);

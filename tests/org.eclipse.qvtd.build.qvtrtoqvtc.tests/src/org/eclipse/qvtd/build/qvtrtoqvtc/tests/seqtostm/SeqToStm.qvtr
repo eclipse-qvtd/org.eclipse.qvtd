@@ -20,7 +20,6 @@ transformation SeqToStm(seqDgm: SeqMM, stm: StmcMM)
      key StmcMM::SendMsg{message};
      key StmcMM::Message{messageId};
 
-
      top relation InteractionToStateMachine
      {
           sn: String;

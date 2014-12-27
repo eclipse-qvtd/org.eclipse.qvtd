@@ -7,6 +7,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.qvtd.xtext.qvtbase.tests,
  org.eclipse.qvtd.xtext.qvtrelation,
  org.eclipse.qvtd.build.qvtrtoqvtc,
- org.eclipse.qvtd.xtext.qvtcore
+ org.eclipse.qvtd.xtext.qvtcore,
+ org.eclipse.ocl.pivot.internal
 Import-Package: org.eclipse.qvtd.pivot.qvtimperative.evaluation
 Export-Package: org.eclipse.qvtd.build.qvtrtoqvtc.tests

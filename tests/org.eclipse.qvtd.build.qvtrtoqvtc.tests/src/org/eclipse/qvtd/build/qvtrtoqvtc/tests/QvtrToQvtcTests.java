@@ -8,10 +8,10 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.ocl.examples.domain.utilities.DomainUtil;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.examples.pivot.manager.MetaModelManagerResourceSetAdapter;
-import org.eclipse.ocl.examples.xtext.essentialocl.services.EssentialOCLLinkingService;
+import org.eclipse.ocl.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.manager.MetaModelManagerResourceSetAdapter;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
@@ -31,13 +31,13 @@ public class QvtrToQvtcTests extends LoadTestCase {
 	@Before
     public void setUp() throws Exception {
 	    
-		EssentialOCLLinkingService.DEBUG_RETRY = true;
+		BaseLinkingService.DEBUG_RETRY.setState(true);
 		super.setUp();
 		QVTrelationStandaloneSetup.doSetup();
 		QVTcoreStandaloneSetup.doSetup();
 		QVTcoreBaseStandaloneSetup.doSetup();
 		metaModelManager = new MetaModelManager();
-        MetaModelManagerResourceSetAdapter.getAdapter(DomainUtil.nonNullState(resourceSet), metaModelManager);
+        MetaModelManagerResourceSetAdapter.getAdapter(ClassUtil.nonNullState(resourceSet), metaModelManager);
     }
  
     /* (non-Javadoc)
