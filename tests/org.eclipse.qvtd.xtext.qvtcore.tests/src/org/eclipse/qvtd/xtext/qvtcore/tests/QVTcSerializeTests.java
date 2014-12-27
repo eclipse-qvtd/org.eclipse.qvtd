@@ -23,7 +23,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.OCL;
-import org.eclipse.ocl.pivot.PivotConstants;
+import org.eclipse.ocl.pivot.PivotConstantsInternal;
 import org.eclipse.ocl.pivot.manager.MetaModelManager;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.utilities.BaseResource;
@@ -73,7 +73,7 @@ public class QVTcSerializeTests extends LoadTestCase
 		//	CS save
 		//		
 		URI savedURI = ClassUtil.nonNullState(asResource.getURI());
-		asResource.setURI(outputURI.trimFileExtension().trimFileExtension().appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
+		asResource.setURI(outputURI.trimFileExtension().trimFileExtension().appendFileExtension(PivotConstantsInternal.OCL_AS_FILE_EXTENSION));
 		asResource.save(null);
 		asResource.setURI(savedURI);
 		

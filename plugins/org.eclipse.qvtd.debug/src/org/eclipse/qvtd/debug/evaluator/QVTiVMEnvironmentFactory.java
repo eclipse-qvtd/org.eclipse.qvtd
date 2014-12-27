@@ -38,7 +38,7 @@ public class QVTiVMEnvironmentFactory extends QVTiEnvironmentFactory implements 
 
 	@Override
 	public @NonNull QVTiVMEnvironment createEnvironment() {
-		QVTiVMEnvironment result = new QVTiVMEnvironment(this, null);
+		QVTiVMEnvironment result = new QVTiVMEnvironment(this);
 		return result;
 	}
 

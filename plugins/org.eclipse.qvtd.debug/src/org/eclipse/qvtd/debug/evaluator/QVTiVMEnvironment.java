@@ -11,15 +11,13 @@
  *******************************************************************************/
 package org.eclipse.qvtd.debug.evaluator;
 
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironment;
 
 public class QVTiVMEnvironment extends QVTiEnvironment
 {
-	public QVTiVMEnvironment(@NonNull QVTiVMEnvironmentFactory factory, @Nullable Resource resource) {
-		super(factory, resource);
+	public QVTiVMEnvironment(@NonNull QVTiVMEnvironmentFactory factory) {
+		super(factory);
 	}
 
 	public QVTiVMEnvironment(@NonNull QVTiVMEnvironment parent) {

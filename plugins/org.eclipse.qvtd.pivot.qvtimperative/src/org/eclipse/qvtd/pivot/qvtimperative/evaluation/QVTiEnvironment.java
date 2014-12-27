@@ -10,15 +10,13 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.PivotEnvironment;
 
 public class QVTiEnvironment extends PivotEnvironment
 {
-	public QVTiEnvironment(@NonNull QVTiEnvironmentFactory factory, @Nullable Resource resource) {
-		super(factory, resource);
+	public QVTiEnvironment(@NonNull QVTiEnvironmentFactory factory) {
+		super(factory);
 	}
 
 	public QVTiEnvironment(@NonNull QVTiEnvironment parent) {

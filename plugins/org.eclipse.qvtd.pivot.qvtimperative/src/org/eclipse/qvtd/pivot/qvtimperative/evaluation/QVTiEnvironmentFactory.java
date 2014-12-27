@@ -29,7 +29,7 @@ public class QVTiEnvironmentFactory extends PivotEnvironmentFactory {
 
 	@Override
 	public @NonNull QVTiEnvironment createEnvironment() {
-		return new QVTiEnvironment(this, null);
+		return new QVTiEnvironment(this);
 	}
 
 	@Override
