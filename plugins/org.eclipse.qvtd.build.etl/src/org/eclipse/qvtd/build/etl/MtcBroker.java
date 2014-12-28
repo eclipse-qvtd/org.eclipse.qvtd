@@ -25,8 +25,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.epsilon.common.util.StringProperties;
 import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
-import org.eclipse.ocl.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.pivot.resource.OCLASResourceFactory;
+import org.eclipse.ocl.pivot.internal.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.internal.resource.OCLASResourceFactory;
 import org.eclipse.qvtd.build.qvtschedule.qvtscheduleFactory;
 import org.eclipse.qvtd.build.qvtschedule.impl.qvtscheduleFactoryImpl;
 

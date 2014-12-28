@@ -22,12 +22,10 @@ import classescstraces.ClassescstracesFactory;
 import classescstraces.ClassescstracesPackage;
 import classescstraces.PackageCS2Package;
 import classescstraces.RootCS2Root;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;

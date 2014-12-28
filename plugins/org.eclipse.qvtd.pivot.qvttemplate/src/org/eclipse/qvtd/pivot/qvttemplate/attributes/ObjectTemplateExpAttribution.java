@@ -13,8 +13,8 @@ package org.eclipse.qvtd.pivot.qvttemplate.attributes;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.FeatureFilter;
-import org.eclipse.ocl.pivot.scoping.EnvironmentView;
-import org.eclipse.ocl.pivot.scoping.ScopeView;
+import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
+import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 
 public class ObjectTemplateExpAttribution extends TemplateExpAttribution

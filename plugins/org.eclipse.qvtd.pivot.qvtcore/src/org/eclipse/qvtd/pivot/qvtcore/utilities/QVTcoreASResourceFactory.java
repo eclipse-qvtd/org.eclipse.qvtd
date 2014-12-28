@@ -13,6 +13,9 @@ package org.eclipse.qvtd.pivot.qvtcore.utilities;
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrintVisitor;
+import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
+import org.eclipse.ocl.pivot.internal.resource.AbstractASResourceFactory;
 import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
 import org.eclipse.ocl.pivot.internal.utilities.AS2MonikerVisitor;
 import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
@@ -22,9 +25,6 @@ import org.eclipse.ocl.pivot.internal.utilities.ASSaverLocateVisitor;
 import org.eclipse.ocl.pivot.internal.utilities.ASSaverNormalizeVisitor;
 import org.eclipse.ocl.pivot.internal.utilities.ASSaverResolveVisitor;
 import org.eclipse.ocl.pivot.internal.utilities.ToStringVisitor;
-import org.eclipse.ocl.pivot.prettyprint.PrettyPrintVisitor;
-import org.eclipse.ocl.pivot.prettyprint.PrettyPrinter;
-import org.eclipse.ocl.pivot.resource.AbstractASResourceFactory;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 
 /**

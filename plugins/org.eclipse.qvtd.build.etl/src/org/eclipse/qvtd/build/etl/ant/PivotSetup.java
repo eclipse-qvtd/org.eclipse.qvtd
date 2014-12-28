@@ -13,7 +13,7 @@ package org.eclipse.qvtd.build.etl.ant;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.ocl.pivot.PivotStandaloneSetup;
+import org.eclipse.ocl.pivot.internal.PivotStandaloneSetup;
 
 /**
  * The Class PivotSetup.

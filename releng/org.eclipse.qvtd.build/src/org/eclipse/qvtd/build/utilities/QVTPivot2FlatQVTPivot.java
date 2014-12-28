@@ -65,7 +65,7 @@ public class QVTPivot2FlatQVTPivot
 		ecoreResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new EcoreResourceFactoryImpl());
 		ecoreResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("emof", new EMOFResourceFactoryImpl());
 		EcorePackage.eINSTANCE.getClass();
-		ecoreResourceSet.getResource(URI.createPlatformResourceURI("/org.eclipse.ocl.pivot.internal/model/Pivot.ecore", true), true);
+		ecoreResourceSet.getResource(URI.createPlatformResourceURI("/org.eclipse.ocl.pivot/model/Pivot.ecore", true), true);
 		ecoreResourceSet.getResource(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore", true), true);
 		ecoreResourceSet.getResource(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore", true), true);
 		ecoreResourceSet.getResource(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore", true), true);
