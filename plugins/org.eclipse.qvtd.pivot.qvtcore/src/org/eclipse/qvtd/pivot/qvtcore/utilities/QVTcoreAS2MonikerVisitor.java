@@ -11,7 +11,7 @@
 package	org.eclipse.qvtd.pivot.qvtcore.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.utilities.AS2Moniker;
+import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
 import org.eclipse.qvtd.pivot.qvtcore.util.AbstractQVTcoreAS2MonikerVisitor;
 
 public class QVTcoreAS2MonikerVisitor extends AbstractQVTcoreAS2MonikerVisitor

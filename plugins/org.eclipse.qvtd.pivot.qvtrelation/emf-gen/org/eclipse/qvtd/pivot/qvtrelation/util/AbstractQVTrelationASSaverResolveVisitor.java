@@ -18,9 +18,10 @@
 package	org.eclipse.qvtd.pivot.qvtrelation.util;
 
 import java.lang.Object;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.utilities.ASSaver;
+import org.eclipse.ocl.pivot.internal.utilities.ASSaver;
 import org.eclipse.qvtd.pivot.qvttemplate.utilities.QVTtemplateASSaverResolveVisitor;
 
 /**

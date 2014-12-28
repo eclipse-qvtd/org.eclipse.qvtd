@@ -24,12 +24,12 @@ import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.messages.OCLMessages;
+import org.eclipse.ocl.pivot.internal.messages.PivotMessagesInternal;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.scoping.EnvironmentView;
 import org.eclipse.ocl.pivot.scoping.ScopeFilter;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
-import org.eclipse.ocl.pivot.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.SingletonIterator;
 import org.eclipse.ocl.pivot.utilities.StringUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
@@ -219,7 +219,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 			}
 		}
 		if ((csArgumentCount != domainsCount) && (relation != metaModelManager.getStandardLibrary().getOclInvalidOperation())) {
-			String boundMessage = StringUtil.bind(OCLMessages.MismatchedArgumentCount_ERROR_, csArgumentCount, domainsCount);
+			String boundMessage = StringUtil.bind(PivotMessagesInternal.MismatchedArgumentCount_ERROR_, csArgumentCount, domainsCount);
 			context.addDiagnostic(csNameExp, boundMessage);			
 		}
 		context.refreshList(relationCallExp.getArgument(), pivotArguments);

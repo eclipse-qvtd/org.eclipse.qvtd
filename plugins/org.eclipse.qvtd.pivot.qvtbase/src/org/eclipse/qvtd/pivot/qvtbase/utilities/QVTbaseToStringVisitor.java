@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtbase.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
+import org.eclipse.ocl.pivot.internal.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;

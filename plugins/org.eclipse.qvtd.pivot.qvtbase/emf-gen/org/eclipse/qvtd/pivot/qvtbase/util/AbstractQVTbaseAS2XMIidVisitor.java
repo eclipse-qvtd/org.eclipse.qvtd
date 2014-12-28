@@ -18,10 +18,11 @@
 package	org.eclipse.qvtd.pivot.qvtbase.util;
 
 import java.lang.Boolean;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.utilities.AS2XMIid;
-import org.eclipse.ocl.pivot.utilities.AS2XMIidVisitor;
+import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
+import org.eclipse.ocl.pivot.internal.utilities.AS2XMIidVisitor;
 
 /**
  * An AbstractQVTbaseAS2XMIidVisitor provides a default implementation for each

@@ -18,10 +18,11 @@
 package	org.eclipse.qvtd.pivot.qvtbase.util;
 
 import java.lang.Object;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.utilities.AS2Moniker;
-import org.eclipse.ocl.pivot.utilities.AS2MonikerVisitor;
+import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
+import org.eclipse.ocl.pivot.internal.utilities.AS2MonikerVisitor;
 
 /**
  * An AbstractQVTbaseAS2MonikerVisitor provides a default implementation for each

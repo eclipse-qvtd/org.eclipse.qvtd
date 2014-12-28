@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.utilities.PivotEnvironment;
+import org.eclipse.ocl.pivot.internal.utilities.PivotEnvironment;
 
 public class QVTiEnvironment extends PivotEnvironment
 {

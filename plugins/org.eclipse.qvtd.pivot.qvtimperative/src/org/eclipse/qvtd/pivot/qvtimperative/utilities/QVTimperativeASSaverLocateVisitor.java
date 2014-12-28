@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.utilities.ASSaver;
+import org.eclipse.ocl.pivot.internal.utilities.ASSaver;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractQVTimperativeASSaverLocateVisitor;
 
 public class QVTimperativeASSaverLocateVisitor extends AbstractQVTimperativeASSaverLocateVisitor
