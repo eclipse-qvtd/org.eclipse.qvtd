@@ -379,7 +379,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		LanguageExpression specification = asFunction.getBodyExpression();
 		if (specification != null) {
 			try {
-				ExpressionInOCL query = metaModelManager.getQueryOrThrow(asFunction, specification);
+				ExpressionInOCL query = metamodelManager.getQueryOrThrow(asFunction, specification);
 				Variable contextVariable = query.getOwnedContext();
 				if (contextVariable != null) {
 					getParameter(contextVariable);
@@ -484,7 +484,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 //		cgIterator.setNonInvalid();
 //		cgIterator.setNonNull();
 		cgMappingLoop.setAst(asMappingLoop);
-		CollectionType collectionType = metaModelManager.getStandardLibrary().getCollectionType();
+		CollectionType collectionType = metamodelManager.getStandardLibrary().getCollectionType();
 		Operation forAllIteration = NameUtil.getNameable(collectionType.getOwnedOperations(), "forAll");
 		cgMappingLoop.setReferredIteration((Iteration) forAllIteration);
 		cgMappingLoop.setBody(doVisit(CGValuedElement.class, asMappingLoop.getOwnedBody()));
@@ -535,7 +535,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		Property asOppositeProperty = ClassUtil.nonNullModel(asMiddlePropertyCallExp.getReferredProperty());
 		Property asProperty = ClassUtil.nonNullModel(asOppositeProperty.getOpposite());
 		globalContext.addToMiddleProperty(asOppositeProperty);
-//		LibraryProperty libraryProperty = metaModelManager.getImplementation(asProperty);
+//		LibraryProperty libraryProperty = metamodelManager.getImplementation(asProperty);
 		CGMiddlePropertyCallExp cgPropertyCallExp = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyCallExp();					
 //		CGExecutorProperty cgExecutorProperty = context.getExecutorProperty(asProperty);
 //		cgExecutorPropertyCallExp.setExecutorProperty(cgExecutorProperty);
@@ -589,7 +589,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 	@Override
 	public @Nullable CGNamedElement visitPropertyAssignment(@NonNull PropertyAssignment asPropertyAssignment) {
 		Property asTargetProperty = ClassUtil.nonNullModel(asPropertyAssignment.getTargetProperty());
-		LibraryProperty libraryProperty = metaModelManager.getImplementation(null, asTargetProperty);
+		LibraryProperty libraryProperty = metamodelManager.getImplementation(null, asTargetProperty);
 		CGPropertyAssignment cgPropertyAssignment = null;
 		if (isEcoreProperty(libraryProperty)) {
 			EStructuralFeature eStructuralFeature = (EStructuralFeature) asTargetProperty.getETarget();

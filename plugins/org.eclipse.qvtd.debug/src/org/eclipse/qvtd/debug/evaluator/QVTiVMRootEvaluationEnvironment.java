@@ -59,7 +59,7 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 		pcVariable = ClassUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
 		pcVariable.setName("$pc");
 		String typeName = ClassUtil.nonNullEMF(PivotPackage.Literals.OCL_EXPRESSION.getName());
-		pcVariable.setType(environmentFactory.getMetaModelManager().getPivotType(typeName));
+		pcVariable.setType(environmentFactory.getMetamodelManager().getPivotType(typeName));
 	}
 
 	@Override

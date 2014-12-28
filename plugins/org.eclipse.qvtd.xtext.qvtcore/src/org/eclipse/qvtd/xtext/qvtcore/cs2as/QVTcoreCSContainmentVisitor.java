@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
@@ -60,7 +61,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 		for (MappingCS csMapping : csTopLevel.getMappings()) {
 			Transformation asTransformation = csMapping.getIn();
 			if (asTransformation != null) {
-				Mapping asMapping = PivotUtilInternal.getPivot(Mapping.class, csMapping);
+				Mapping asMapping = PivotUtil.getPivot(Mapping.class, csMapping);
 				if (asMapping != null) {
 					List<Mapping> asMappings = tx2mappings.get(asTransformation);
 					if (asMappings == null) {
@@ -88,7 +89,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 		for (QueryCS csQuery : csTopLevel.getQueries()) {
 			Transformation asTransformation = csQuery.getTransformation();
 			if (asTransformation != null) {
-				Function asQuery = PivotUtilInternal.getPivot(Function.class,  csQuery);
+				Function asQuery = PivotUtil.getPivot(Function.class,  csQuery);
 				if (asQuery != null) {
 					List<Function> asQueries = tx2qMap.get(asTransformation);
 					if (asQueries == null) {
@@ -141,8 +142,8 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 		@NonNull Mapping pivotElement = refreshNamedElement(Mapping.class, QVTcorePackage.Literals.MAPPING, csElement);
 		DomainCS csMiddle = csElement.getMiddle();
 		if (csMiddle != null) {
-			pivotElement.setBottomPattern(PivotUtilInternal.getPivot(BottomPattern.class, csMiddle.getBottomPattern()));
-			pivotElement.setGuardPattern(PivotUtilInternal.getPivot(GuardPattern.class, csMiddle.getGuardPattern()));
+			pivotElement.setBottomPattern(PivotUtil.getPivot(BottomPattern.class, csMiddle.getBottomPattern()));
+			pivotElement.setGuardPattern(PivotUtil.getPivot(GuardPattern.class, csMiddle.getGuardPattern()));
 		}
 		else {
 			BottomPattern bottomPattern = pivotElement.getBottomPattern();

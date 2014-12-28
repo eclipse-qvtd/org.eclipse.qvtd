@@ -33,7 +33,7 @@ import org.eclipse.ocl.pivot.ParserException;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
-import org.eclipse.ocl.pivot.internal.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
@@ -45,7 +45,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  */
 public class QVTiModelManager implements ModelManager
 {
-	protected final @NonNull MetaModelManager metaModelManager;
+	protected final @NonNull MetamodelManager metamodelManager;
 	// TODO how to manage aliases?
 	/** Map a typed model to its resource (model). */
 	private @NonNull Map<TypedModel, Resource> modelResourceMap = new HashMap<TypedModel, Resource>();
@@ -69,7 +69,7 @@ public class QVTiModelManager implements ModelManager
 	 * instances of the middle model and the middle model EFactory.
 	 */
 	public QVTiModelManager(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
-	    this.metaModelManager = transformationAnalysis.getMetaModelManager();
+	    this.metamodelManager = transformationAnalysis.getMetamodelManager();
 	    this.allInstancesTypes = transformationAnalysis.getAllInstancesTypes();
 	    int cacheIndexes = transformationAnalysis.getCacheIndexes();
 		this.middleOpposites = new Map<?, ?>[cacheIndexes];
@@ -223,11 +223,11 @@ public class QVTiModelManager implements ModelManager
 		Type objectType = null;
 		if (ePackage == PivotPackage.eINSTANCE) {
 			String name = ClassUtil.nonNullEMF(eClass.getName());
-			objectType = metaModelManager.getPivotType(name);
+			objectType = metamodelManager.getPivotType(name);
 		}
 		else {
 			try {
-				objectType = metaModelManager.getPivotOf(Type.class,  eClass);
+				objectType = metamodelManager.getPivotOf(Type.class,  eClass);
 			} catch (ParserException e) {
 // FIXME				if (!generatedErrorMessage) {
 //					generatedErrorMessage = true;
@@ -235,7 +235,7 @@ public class QVTiModelManager implements ModelManager
 //				}
 			}
 		}
-	    return (objectType != null) && objectType.conformsTo(metaModelManager.getStandardLibrary(), requiredType);
+	    return (objectType != null) && objectType.conformsTo(metamodelManager.getStandardLibrary(), requiredType);
 	}
 	
 	public List<EObject> getTypeModelEObjectList(TypedModel model) {
@@ -280,7 +280,7 @@ public class QVTiModelManager implements ModelManager
     }
 
     public void saveMiddleModel(@NonNull URI uri) {
-/*        Resource r = metaModelManager.getExternalResourceSet().createResource(uri);
+/*        Resource r = metamodelManager.getExternalResourceSet().createResource(uri);
         for (EObject e : modelElementsMap.get(MIDDLE_MODEL)) {
             if (e.eContainer() == null) {
                 r.getContents().add(e);

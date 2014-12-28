@@ -17,14 +17,14 @@ import org.eclipse.ocl.pivot.Environment;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.internal.evaluation.PivotEvaluationEnvironment;
-import org.eclipse.ocl.pivot.internal.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.internal.utilities.PivotEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
 public class QVTiEnvironmentFactory extends PivotEnvironmentFactory {
 
-	public QVTiEnvironmentFactory(@Nullable EPackage.Registry reg, @NonNull MetaModelManager metaModelManager) {
-		super(reg, metaModelManager);
+	public QVTiEnvironmentFactory(@Nullable EPackage.Registry reg, @NonNull MetamodelManager metamodelManager) {
+		super(reg, metamodelManager);
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class QVTiEnvironmentFactory extends PivotEnvironmentFactory {
 	}
 
 	public @NonNull QVTiTransformationAnalysis createTransformationAnalysis() {
-		return new QVTiTransformationAnalysis(metaModelManager);
+		return new QVTiTransformationAnalysis(metamodelManager);
 	}
 
 	public boolean keepDebug() {

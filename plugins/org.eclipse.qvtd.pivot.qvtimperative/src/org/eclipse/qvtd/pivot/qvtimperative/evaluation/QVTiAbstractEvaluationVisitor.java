@@ -280,9 +280,9 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 				// evaluating the binding value
 				return null;
 			}
-			Type valueType = metaModelManager.getIdResolver().getDynamicTypeOf(valueOrValues);
+			Type valueType = metamodelManager.getIdResolver().getDynamicTypeOf(valueOrValues);
 			Type varType = boundVariable.getType();
-			if ((varType != null) && valueType.conformsTo(metaModelManager.getStandardLibrary(), varType)) {
+			if ((varType != null) && valueType.conformsTo(metamodelManager.getStandardLibrary(), varType)) {
 				evaluationEnvironment.replace(boundVariable, valueOrValues);
 			}
 			else {
@@ -372,7 +372,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
             			} finally {
             				if (value != null) {
             					// Unbox to assign to ecore type
-                        		Object unboxedValue = metaModelManager.getIdResolver().unboxedValueOf(value);
+                        		Object unboxedValue = metamodelManager.getIdResolver().unboxedValueOf(value);
                         		Property p = propertyAssignment.getTargetProperty();
                                 p.initValue((EObject) slotBinding, unboxedValue);
         						Integer cacheIndex = propertyAssignment.getCacheIndex();
@@ -457,7 +457,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
                     if(slotBinding instanceof EObject) {
                     	Object value = safeVisit(propertyAssignment.getValue());
                     	// Unbox to assign to ecore type
-                        value = metaModelManager.getIdResolver().unboxedValueOf(value);
+                        value = metamodelManager.getIdResolver().unboxedValueOf(value);
                         Property p = propertyAssignment.getTargetProperty();
                         p.initValue((EObject) slotBinding, value);
                         /* TODO define if keep the try catch for safety
@@ -472,7 +472,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
             			} finally {
             				if (value != null) {
             					// Unbox to assign to ecore type
-                        		Object unboxedValue = metaModelManager.getIdResolver().unboxedValueOf(value);
+                        		Object unboxedValue = metamodelManager.getIdResolver().unboxedValueOf(value);
                         		Property p = propertyAssignment.getTargetProperty();
                                 p.initValue(slotBinding, unboxedValue);
             				}
@@ -571,14 +571,14 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 
 	@Override
 	public @Nullable Object visitVariablePredicate(@NonNull VariablePredicate variablePredicate) {     
-        PivotIdResolver idResolver = metaModelManager.getIdResolver();
+        PivotIdResolver idResolver = metamodelManager.getIdResolver();
         // Each predicate has a conditionExpression that is an OCLExpression
         OCLExpression exp = variablePredicate.getConditionExpression();
 		Object value = ((QVTiEvaluationVisitor)undecoratedVisitor).safeVisit(exp);
         Variable variable = variablePredicate.getTargetVariable();
 		Type guardType = variable.getType();
 		Type valueType = idResolver.getDynamicTypeOf(value);
-		if ((guardType != null) && valueType.conformsTo(metaModelManager.getStandardLibrary(), guardType)) {
+		if ((guardType != null) && valueType.conformsTo(metamodelManager.getStandardLibrary(), guardType)) {
 			evaluationEnvironment.replace(variable, value);
 		} else {
 			// The initialisation fails, the guard is not met

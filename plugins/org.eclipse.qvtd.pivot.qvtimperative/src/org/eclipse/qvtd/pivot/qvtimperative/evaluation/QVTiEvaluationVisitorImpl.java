@@ -70,10 +70,10 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
 		int maxDepth = rootVariables.size();
 		Variable var = rootVariables.get(depth);
 		Type guardType = var.getType();
-		PivotIdResolver idResolver = nv.getMetaModelManager().getIdResolver();
+		PivotIdResolver idResolver = nv.getMetamodelManager().getIdResolver();
         for (Object binding : rootBindings.get(depth)) {
 			Type valueType = idResolver.getDynamicTypeOf(binding);
-			if ((guardType != null) && valueType.conformsTo(nv.getMetaModelManager().getStandardLibrary(), guardType)) {
+			if ((guardType != null) && valueType.conformsTo(nv.getMetamodelManager().getStandardLibrary(), guardType)) {
 				nv.getEvaluationEnvironment().replace(var, binding);
 	        	if (nextDepth < maxDepth) {
 	        		doMappingCallRecursion(nv, rule, rootVariables, rootBindings, nextDepth);

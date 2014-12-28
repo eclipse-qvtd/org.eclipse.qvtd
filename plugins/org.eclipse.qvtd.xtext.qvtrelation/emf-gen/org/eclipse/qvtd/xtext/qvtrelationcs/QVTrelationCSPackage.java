@@ -2675,15 +2675,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getModelDeclCS();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.ModelDeclCS#getMetaModelIds <em>Meta Model Ids</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.ModelDeclCS#getMetamodelIds <em>Meta Model Ids</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference list '<em>Meta Model Ids</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.ModelDeclCS#getMetaModelIds()
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.ModelDeclCS#getMetamodelIds()
 	 * @see #getModelDeclCS()
 	 * @generated
 	 */
-	EReference getModelDeclCS_MetaModelIds();
+	EReference getModelDeclCS_MetamodelIds();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.ObjectTemplateCS <em>Object Template CS</em>}'.
@@ -3368,7 +3368,7 @@ public interface QVTrelationCSPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MODEL_DECL_CS__META_MODEL_IDS = eINSTANCE.getModelDeclCS_MetaModelIds();
+		EReference MODEL_DECL_CS__META_MODEL_IDS = eINSTANCE.getModelDeclCS_MetamodelIds();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.ObjectTemplateCSImpl <em>Object Template CS</em>}' class.

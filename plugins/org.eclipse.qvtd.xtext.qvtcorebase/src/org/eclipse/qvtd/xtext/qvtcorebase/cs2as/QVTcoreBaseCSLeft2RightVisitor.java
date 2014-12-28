@@ -18,8 +18,8 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.essentialocl.cs2as.ImplicitSourceTypeIterator;
@@ -46,7 +46,7 @@ public class QVTcoreBaseCSLeft2RightVisitor extends AbstractQVTcoreBaseCSLeft2Ri
 			@Override
 			protected boolean doNext(@NonNull ElementCS csParent, @NonNull ElementCS csChild) {
 				if (csParent instanceof AbstractMappingCS) {
-					AbstractMapping asMapping = PivotUtilInternal.getPivot(AbstractMapping.class, (AbstractMappingCS)csParent);
+					AbstractMapping asMapping = PivotUtil.getPivot(AbstractMapping.class, (AbstractMappingCS)csParent);
 					if (asMapping != null) {
 						Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asMapping);
 						if (asTransformation != null) {
@@ -56,7 +56,7 @@ public class QVTcoreBaseCSLeft2RightVisitor extends AbstractQVTcoreBaseCSLeft2Ri
 					return DONE; // no more parents
 				}
 				else if (csParent instanceof QueryCS) {
-					Function asFunction = PivotUtilInternal.getPivot(Function.class, (QueryCS)csParent);
+					Function asFunction = PivotUtil.getPivot(Function.class, (QueryCS)csParent);
 					if (asFunction != null) {
 						Transformation asTransformation = QVTbaseUtil.getContainingTransformation(asFunction);;
 						if (asTransformation != null) {
@@ -99,7 +99,7 @@ public class QVTcoreBaseCSLeft2RightVisitor extends AbstractQVTcoreBaseCSLeft2Ri
 			Function function = getBestFunction(invocations);
 			if (function != null) {
 				AbstractNameExpCS csNameExp = csRoundBracketedClause.getOwningNameExp();
-//				Operation baseOperation = metaModelManager.resolveBaseOperation(function);
+//				Operation baseOperation = metamodelManager.resolveBaseOperation(function);
 				OperationCallExp operationCallExp = context.refreshModelElement(OperationCallExp.class, PivotPackage.Literals.OPERATION_CALL_EXP, csNameExp);
 				context.setReferredOperation(operationCallExp, function);
 				context.setType(operationCallExp, function.getType(), function.isRequired());

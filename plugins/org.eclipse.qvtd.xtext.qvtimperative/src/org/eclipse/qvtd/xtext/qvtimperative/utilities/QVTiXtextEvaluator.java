@@ -15,7 +15,7 @@ import java.io.IOException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.internal.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.internal.resource.ASResource;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.base.utilities.CS2ASResourceAdapter;
@@ -34,11 +34,11 @@ public class QVTiXtextEvaluator extends QVTiPivotEvaluator
 {
 	public static ASResource asResource;
 	
-    public static @NonNull Transformation loadTransformation(@NonNull MetaModelManager metaModelManager, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
+    public static @NonNull Transformation loadTransformation(@NonNull MetamodelManager metamodelManager, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
 		
 		// Load the transformation resource
         BaseCSResource xtextResource = null;
-        xtextResource = (BaseCSResource) metaModelManager.getExternalResourceSet().getResource(transformationURI, true);
+        xtextResource = (BaseCSResource) metamodelManager.getExternalResourceSet().getResource(transformationURI, true);
         if (xtextResource != null) {
     		CS2ASResourceAdapter adapter = null;
     		try {
@@ -68,10 +68,10 @@ public class QVTiXtextEvaluator extends QVTiPivotEvaluator
 	}
     
     public QVTiXtextEvaluator(@NonNull QVTiEnvironmentFactory envFactory, @NonNull URI transformationURI) throws IOException {
-    	super(envFactory, loadTransformation(envFactory.getMetaModelManager(), transformationURI, envFactory.keepDebug()));
+    	super(envFactory, loadTransformation(envFactory.getMetamodelManager(), transformationURI, envFactory.keepDebug()));
     }
     
-    public QVTiXtextEvaluator(@NonNull MetaModelManager metaModelManager, @NonNull URI transformationURI) throws IOException {
-    	super(metaModelManager, loadTransformation(metaModelManager, transformationURI, false));
+    public QVTiXtextEvaluator(@NonNull MetamodelManager metamodelManager, @NonNull URI transformationURI) throws IOException {
+    	super(metamodelManager, loadTransformation(metamodelManager, transformationURI, false));
     }
 }

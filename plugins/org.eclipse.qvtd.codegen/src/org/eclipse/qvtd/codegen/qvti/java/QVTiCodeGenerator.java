@@ -31,7 +31,7 @@ import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.examples.codegen.java.ImportUtils;
 import org.eclipse.ocl.examples.codegen.java.JavaCodeGenerator;
 import org.eclipse.ocl.examples.codegen.utilities.CGModelResourceFactory;
-import org.eclipse.ocl.pivot.internal.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
@@ -57,8 +57,8 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 	private/* @LazyNonNull */String javaSourceCode = null;
 	protected final @NonNull QVTiGlobalContext globalContext = new QVTiGlobalContext(this);
 
-	public QVTiCodeGenerator(@NonNull MetaModelManager metaModelManager, @NonNull Transformation transformation) {
-		super(metaModelManager);
+	public QVTiCodeGenerator(@NonNull MetamodelManager metamodelManager, @NonNull Transformation transformation) {
+		super(metamodelManager);
 		QVTiCG2StringVisitor.FACTORY.getClass();
 		cgAnalyzer = new QVTiAnalyzer(this);
 		this.transformation = transformation;

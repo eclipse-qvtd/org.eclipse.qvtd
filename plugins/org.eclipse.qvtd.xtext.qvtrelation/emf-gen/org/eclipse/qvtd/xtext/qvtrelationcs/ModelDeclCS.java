@@ -23,7 +23,7 @@ import org.eclipse.ocl.xtext.basecs.NamedElementCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.ModelDeclCS#getMetaModelIds <em>Meta Model Ids</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.ModelDeclCS#getMetamodelIds <em>Meta Model Ids</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getModelDeclCS()
@@ -41,10 +41,10 @@ public interface ModelDeclCS extends NamedElementCS {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Meta Model Ids</em>' reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getModelDeclCS_MetaModelIds()
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getModelDeclCS_MetamodelIds()
 	 * @model
 	 * @generated
 	 */
-	EList<Namespace> getMetaModelIds();
+	EList<Namespace> getMetamodelIds();
 
 } // ModelDeclCS

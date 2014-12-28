@@ -27,7 +27,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.OperationId;
-import org.eclipse.ocl.pivot.internal.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
@@ -44,7 +44,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
  */
 public class QVTiTransformationAnalysis
 {
-	protected final @NonNull MetaModelManager metaModelManager;
+	protected final @NonNull MetamodelManager metamodelManager;
 
 	/**
 	 *  Set of all types for which allInstances() is invoked.
@@ -56,8 +56,8 @@ public class QVTiTransformationAnalysis
 	 */
 	private @NonNull Map<Property, Integer> property2cacheIndex = new HashMap<Property, Integer>();
 
-	public QVTiTransformationAnalysis(@NonNull MetaModelManager metaModelManager) {
-	    this.metaModelManager = metaModelManager;
+	public QVTiTransformationAnalysis(@NonNull MetamodelManager metamodelManager) {
+	    this.metamodelManager = metamodelManager;
 	}
 
 	public void analyzeTransformation(@NonNull Transformation transformation) {
@@ -67,7 +67,7 @@ public class QVTiTransformationAnalysis
 		//  - identify all MiddlePropertyAssignments
 		//  - identify all MiddlePropertyCallExp and allocate a cacheIndex
 		//
-		Type oclElementType = metaModelManager.getStandardLibrary().getOclElementType();
+		Type oclElementType = metamodelManager.getStandardLibrary().getOclElementType();
 		OperationId allInstancesOperationId = oclElementType.getTypeId().getOperationId(0, "allInstances", IdManager.getParametersId());
 		List<MiddlePropertyAssignment> middlePropertyAssignments = new ArrayList<MiddlePropertyAssignment>();
 		for (TreeIterator<EObject> tit = transformation.eAllContents(); tit.hasNext(); ) {
@@ -145,7 +145,7 @@ public class QVTiTransformationAnalysis
 		return property2cacheIndex.size();
 	}
 
-	public @NonNull MetaModelManager getMetaModelManager() {
-		return metaModelManager;
+	public @NonNull MetamodelManager getMetamodelManager() {
+		return metamodelManager;
 	}
 }

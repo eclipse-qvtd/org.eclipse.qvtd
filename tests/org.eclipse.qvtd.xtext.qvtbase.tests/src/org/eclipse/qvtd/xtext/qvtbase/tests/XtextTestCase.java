@@ -60,7 +60,7 @@ import org.eclipse.ocl.pivot.internal.delegate.OCLDelegateDomain;
 import org.eclipse.ocl.pivot.internal.ecore.AS2Ecore;
 import org.eclipse.ocl.pivot.internal.ecore.Ecore2AS;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
-import org.eclipse.ocl.pivot.internal.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.utilities.ProjectMap;
@@ -255,7 +255,7 @@ public class XtextTestCase extends PivotTestCase
 	
 	protected ResourceSet resourceSet;
 
-/*	protected XtextResource savePivotAsCS(MetaModelManager metaModelManager, Resource pivotResource, URI outputURI) throws IOException {
+/*	protected XtextResource savePivotAsCS(MetamodelManager metamodelManager, Resource pivotResource, URI outputURI) throws IOException {
 //		ResourceSet csResourceSet = resourceSet; //new ResourceSetImpl();
 //		csResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("cs", new EcoreResourceFactoryImpl());
 //		csResourceSet.getPackageRegistry().put(PivotPackage.eNS_URI, PivotPackage.eINSTANCE);
@@ -264,7 +264,7 @@ public class XtextTestCase extends PivotTestCase
 		XtextResource xtextResource = (XtextResource) resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
 		Map<Resource, Resource> cs2PivotResourceMap = new HashMap<Resource, Resource>();
 		cs2PivotResourceMap.put(xtextResource, pivotResource);
-		Pivot2CS pivot2cs = new OCLinEcorePivot2CS(cs2PivotResourceMap, metaModelManager);
+		Pivot2CS pivot2cs = new OCLinEcorePivot2CS(cs2PivotResourceMap, metamodelManager);
 		pivot2cs.update();
 		assertNoResourceErrors("Conversion failed", xtextResource);
 //		csResource.save(null);
@@ -291,21 +291,21 @@ public class XtextTestCase extends PivotTestCase
 		return xtextResource;
 	} */
 	
-	public void createEcoreFile(MetaModelManager metaModelManager, String fileName, String fileContent) throws IOException {
+	public void createEcoreFile(MetamodelManager metamodelManager, String fileName, String fileContent) throws IOException {
 		String inputName = fileName + ".oclinecore";
 		createOCLinEcoreFile(inputName, fileContent);
 		URI inputURI = getProjectFileURI(inputName);
 		URI ecoreURI = getProjectFileURI(fileName + ".ecore");
 		CS2ASResourceAdapter adapter = null;
 		try {
-			ResourceSet resourceSet2 = metaModelManager.getExternalResourceSet();
+			ResourceSet resourceSet2 = metamodelManager.getExternalResourceSet();
 			BaseCSResource xtextResource = (BaseCSResource) resourceSet2.getResource(inputURI, true);
 			assertNoResourceErrors("Load failed", xtextResource);
 			adapter = xtextResource.getCS2ASAdapter(null);
 			Resource pivotResource = adapter.getASResource(xtextResource);
 			assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
 			assertNoValidationErrors("Pivot validation errors", pivotResource.getContents().get(0));
-			Resource ecoreResource = AS2Ecore.createResource(metaModelManager, pivotResource, ecoreURI, null);
+			Resource ecoreResource = AS2Ecore.createResource(metamodelManager, pivotResource, ecoreURI, null);
 			assertNoResourceErrors("To Ecore errors", ecoreResource);
 			ecoreResource.save(null);
 		}
@@ -323,8 +323,8 @@ public class XtextTestCase extends PivotTestCase
 		writer.close();
 	}
 
-	protected Resource getPivotFromEcore(MetaModelManager metaModelManager, Resource ecoreResource) {
-		Ecore2AS ecore2Pivot = Ecore2AS.getAdapter(ecoreResource, metaModelManager);
+	protected Resource getPivotFromEcore(MetamodelManager metamodelManager, Resource ecoreResource) {
+		Ecore2AS ecore2Pivot = Ecore2AS.getAdapter(ecoreResource, metamodelManager);
 		Model pivotRoot = ecore2Pivot.getPivotModel();
 		Resource pivotResource = pivotRoot.eResource();
 		assertNoResourceErrors("Normalisation failed", pivotResource);

@@ -25,8 +25,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.internal.manager.MetaModelManager;
-import org.eclipse.ocl.pivot.internal.manager.MetaModelManagerResourceSetAdapter;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerResourceSetAdapter;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -53,8 +53,8 @@ public class QVTiInterpreterTests extends LoadTestCase
 {
 	private final class MyQVTiEnvironmentFactory extends QVTiEnvironmentFactory
 	{
-		public MyQVTiEnvironmentFactory(@Nullable EPackage.Registry reg, @NonNull MetaModelManager metaModelManager) {
-			super(reg, metaModelManager);
+		public MyQVTiEnvironmentFactory(@Nullable EPackage.Registry reg, @NonNull MetamodelManager metamodelManager) {
+			super(reg, metamodelManager);
 	    	setEvaluationTracingEnabled(true);
 		}
 	}
@@ -74,13 +74,13 @@ public class QVTiInterpreterTests extends LoadTestCase
 		/**
 		 * Instantiates a new my Qvti evaluator.
 		 *
-		 * @param metaModelManager the meta model manager
+		 * @param metamodelManager the meta model manager
 		 * @param fileNamePrefix the file name prefix
 		 * @param transformationFileName the transformation file name
 		 * @throws IOException Signals that an I/O exception has occurred.
 		 */
-		public MyQvtiEvaluator(@NonNull MetaModelManager metaModelManager, @NonNull String fileNamePrefix, @NonNull String transformationFileName) throws IOException {
-			super(new MyQVTiEnvironmentFactory(null, metaModelManager), getProjectFileURI(fileNamePrefix + "/"  + transformationFileName));
+		public MyQvtiEvaluator(@NonNull MetamodelManager metamodelManager, @NonNull String fileNamePrefix, @NonNull String transformationFileName) throws IOException {
+			super(new MyQVTiEnvironmentFactory(null, metamodelManager), getProjectFileURI(fileNamePrefix + "/"  + transformationFileName));
 			this.fileNamePrefix = fileNamePrefix + "/";
 		}
 		
@@ -124,7 +124,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	        	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
 	        }
 			URI modelURI = getProjectFileURI(fileNamePrefix + modelFileName);
-	        Resource resource = metaModelManager.getExternalResourceSet().getResource(modelURI, true);
+	        Resource resource = metamodelManager.getExternalResourceSet().getResource(modelURI, true);
 	        typedModelValidationResourceMap.put(typedModel, resource);
 		}
 
@@ -164,7 +164,7 @@ public class QVTiInterpreterTests extends LoadTestCase
         ResourceSet asResourceSet = new ResourceSetImpl();
         if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			OCLstdlib.install();
-	        MetaModelManager.initializeASResourceSet(asResourceSet);
+	        MetamodelManager.initializeASResourceSet(asResourceSet);
         }
         Resource resource = asResourceSet.getResource(asURI, true);
         EcoreUtil.resolveAll(resource);
@@ -180,8 +180,8 @@ public class QVTiInterpreterTests extends LoadTestCase
 		BaseLinkingService.DEBUG_RETRY.setState(true);
 		super.setUp();
 		QVTimperativeStandaloneSetup.doSetup();
-		metaModelManager = new MetaModelManager();
-        MetaModelManagerResourceSetAdapter.getAdapter(ClassUtil.nonNullState(resourceSet), metaModelManager);
+		metamodelManager = new MetamodelManager();
+        MetamodelManagerResourceSetAdapter.getAdapter(ClassUtil.nonNullState(resourceSet), metamodelManager);
     }
  
     /* (non-Javadoc)
@@ -202,7 +202,7 @@ public class QVTiInterpreterTests extends LoadTestCase
      */
     @Test
     public void testGraph2GraphMinimal() throws Exception {
-    	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metaModelManager), "Graph2GraphMinimal", "Graph2GraphMinimal.qvti");
+    	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metamodelManager), "Graph2GraphMinimal", "Graph2GraphMinimal.qvti");
     	testEvaluator.saveTransformation(null);
         testEvaluator.loadModel("upperGraph", "SimpleGraph.xmi");
         testEvaluator.createModel("middle", "Graph2Graph.xmi");
@@ -225,7 +225,7 @@ public class QVTiInterpreterTests extends LoadTestCase
      */
     @Test
     public void testGraph2GraphHierarchical() throws Exception {
-    	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metaModelManager), "Graph2GraphHierarchical", "Graph2GraphHierarchical.qvti");
+    	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metamodelManager), "Graph2GraphHierarchical", "Graph2GraphHierarchical.qvti");
     	testEvaluator.saveTransformation(null);
     	testEvaluator.loadModel("upperGraph", "../Graph2GraphMinimal/SimpleGraph.xmi");
         testEvaluator.createModel("middle", "Graph2Graph.xmi");
@@ -251,7 +251,7 @@ public class QVTiInterpreterTests extends LoadTestCase
      */
     @Test
     public void testHSV2HLS() throws Exception {
-    	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metaModelManager), "HSV2HLS", "HSV2HLS.qvti");
+    	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metamodelManager), "HSV2HLS", "HSV2HLS.qvti");
     	testEvaluator.saveTransformation(null);
     	testEvaluator.loadModel("hsv", "HSVNode.xmi");
         testEvaluator.createModel("middle", "HLS2HLSNode.xmi");
@@ -273,11 +273,11 @@ public class QVTiInterpreterTests extends LoadTestCase
     public void testClassToRDBMS() throws Exception {
         CompleteOCLStandaloneSetup.doSetup();
         URI oclURI = ClassUtil.nonNullState(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true));
-        //  CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metaModelManager);
+        //  CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metamodelManager);
         @SuppressWarnings("unused")
-		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, metaModelManager);
+		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, metamodelManager);
         
-        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metaModelManager), "ClassToRDBMS", "ClassToRDBMSSchedule.qvti");
+        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metamodelManager), "ClassToRDBMS", "ClassToRDBMSSchedule.qvti");
     	testEvaluator.saveTransformation(null);
         //assertNoValidationErrors("Pivot validation errors", testEvaluator.pivotResource.getContents().get(0));
         testEvaluator.loadModel("uml", "SimpleUMLPeople.xmi");

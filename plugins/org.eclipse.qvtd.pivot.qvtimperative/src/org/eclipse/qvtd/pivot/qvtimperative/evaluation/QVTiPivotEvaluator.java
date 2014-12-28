@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.internal.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -30,7 +30,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  */
 public class QVTiPivotEvaluator implements EvaluationMonitor
 {
-	protected final @NonNull MetaModelManager metaModelManager;
+	protected final @NonNull MetamodelManager metamodelManager;
 	protected final @NonNull Transformation transformation;
 	protected final @NonNull QVTiEnvironmentFactory envFactory;
 	protected final @NonNull QVTiEnvironment env;
@@ -40,7 +40,7 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
 
     public QVTiPivotEvaluator(@NonNull QVTiEnvironmentFactory envFactory, @NonNull Transformation transformation) {
     	this.envFactory = envFactory;
-    	this.metaModelManager = envFactory.getMetaModelManager();
+    	this.metamodelManager = envFactory.getMetamodelManager();
     	this.transformation = transformation;
     	this.env = envFactory.createEnvironment();
     	QVTiTransformationAnalysis transformationAnalysis = envFactory.createTransformationAnalysis();
@@ -48,10 +48,10 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
     	this.modelManager = envFactory.createModelManager(transformationAnalysis);
     }
 
-    public QVTiPivotEvaluator(@NonNull MetaModelManager metaModelManager, @NonNull Transformation transformation) {
-    	this.metaModelManager = metaModelManager;
+    public QVTiPivotEvaluator(@NonNull MetamodelManager metamodelManager, @NonNull Transformation transformation) {
+    	this.metamodelManager = metamodelManager;
     	this.transformation = transformation;
-    	this.envFactory = new QVTiEnvironmentFactory(null, metaModelManager);
+    	this.envFactory = new QVTiEnvironmentFactory(null, metamodelManager);
     	this.env = envFactory.createEnvironment();
     	QVTiTransformationAnalysis transformationAnalysis = envFactory.createTransformationAnalysis();
     	transformationAnalysis.analyzeTransformation(transformation);
@@ -87,7 +87,7 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
         if (typedModel == null) {
         	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
         }
-        Resource resource = metaModelManager.getExternalResourceSet().createResource(modelURI, contentType);
+        Resource resource = metamodelManager.getExternalResourceSet().createResource(modelURI, contentType);
         if (resource != null) {
         	modelManager.addModel(typedModel, resource);
         }
@@ -118,8 +118,8 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
 		return envFactory;
 	}
 
-	public final @NonNull MetaModelManager getMetaModelManager() {
-		return metaModelManager;
+	public final @NonNull MetamodelManager getMetamodelManager() {
+		return metamodelManager;
 	}
 	
 	public final @NonNull QVTiModelManager getModelManager() {
@@ -143,7 +143,7 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
         if (typedModel == null) {
         	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
         }
-        Resource resource = metaModelManager.getExternalResourceSet().getResource(modelURI, true);
+        Resource resource = metamodelManager.getExternalResourceSet().getResource(modelURI, true);
         if (resource != null) {
         	modelManager.addModel(typedModel, resource);
         }
@@ -155,10 +155,10 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
         }
         Resource resource;
         if (contentType == null) {
-        	resource = metaModelManager.getExternalResourceSet().getResource(modelURI, true);
+        	resource = metamodelManager.getExternalResourceSet().getResource(modelURI, true);
         }
         else {
-        	resource = metaModelManager.getExternalResourceSet().createResource(modelURI, contentType);
+        	resource = metamodelManager.getExternalResourceSet().createResource(modelURI, contentType);
         	try {
 				resource.load(null);
 			} catch (IOException e) {

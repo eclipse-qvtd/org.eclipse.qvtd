@@ -31,8 +31,8 @@ import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.complete.CompleteEnvironmentInternal;
-import org.eclipse.ocl.pivot.internal.manager.MetaModelManager;
-import org.eclipse.ocl.pivot.internal.manager.MetaModelManagerResourceSetAdapter;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerResourceSetAdapter;
 import org.eclipse.ocl.pivot.internal.validation.PivotEObjectValidator;
 import org.eclipse.ocl.pivot.library.executor.ExecutorManager;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
@@ -79,7 +79,7 @@ public class QVTiCompilerTests extends LoadTestCase
 
 		@NonNull
 		public IdResolver getIdResolver() {
-			return ((CompleteEnvironmentInternal)environment).getMetaModelManager().getIdResolver();
+			return ((CompleteEnvironmentInternal)environment).getMetamodelManager().getIdResolver();
 		}
 
 		@NonNull
@@ -116,13 +116,13 @@ public class QVTiCompilerTests extends LoadTestCase
 	    
 	    CompleteOCLStandaloneSetup.doSetup();
 	    URI oclURI = ClassUtil.nonNullState(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true));
-//		CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metaModelManager);
-		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, metaModelManager);
-//		CompleteOCLEObjectValidator completeOCLEObjectValidator3 = new CompleteOCLEObjectValidator(QVTbasePackage.eINSTANCE, oclURI, metaModelManager);
+//		CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metamodelManager);
+		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, metamodelManager);
+//		CompleteOCLEObjectValidator completeOCLEObjectValidator3 = new CompleteOCLEObjectValidator(QVTbasePackage.eINSTANCE, oclURI, metamodelManager);
 //		completeOCLEObjectValidator1.initialize();
 		completeOCLEObjectValidator2.initialize();
 //		completeOCLEObjectValidator3.initialize();
-		PivotEObjectValidator.install(ClassUtil.nonNullState(pivotResource.getResourceSet()), ClassUtil.nonNullState(metaModelManager));
+		PivotEObjectValidator.install(ClassUtil.nonNullState(pivotResource.getResourceSet()), ClassUtil.nonNullState(metamodelManager));
 		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTbasePackage.eINSTANCE));
 		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE));
 		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE));
@@ -147,7 +147,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		Class<? extends AbstractTransformation> txClass = generateCode(transformURI, genModelURI, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");
 		
 		Constructor<? extends AbstractTransformation> txConstructor = txClass.getConstructor(Evaluator.class);
-		Evaluator evaluator = new TxEvaluator(ClassUtil.nonNullState(metaModelManager.getCompleteEnvironment()));
+		Evaluator evaluator = new TxEvaluator(ClassUtil.nonNullState(metamodelManager.getCompleteEnvironment()));
 		AbstractTransformation tx = txConstructor.newInstance(evaluator);
 		Resource inputResource = resourceSet.getResource(inputModelURI, true);
 		tx.addRootObjects("hsv", ClassUtil.nonNullState(inputResource.getContents()));
@@ -178,7 +178,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		Class<? extends AbstractTransformation> txClass = generateCode(transformURI, genModelURI, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");
 		
 		Constructor<? extends AbstractTransformation> txConstructor = txClass.getConstructor(Evaluator.class);
-		Evaluator evaluator = new TxEvaluator(ClassUtil.nonNullState(metaModelManager.getCompleteEnvironment()));
+		Evaluator evaluator = new TxEvaluator(ClassUtil.nonNullState(metamodelManager.getCompleteEnvironment()));
 		AbstractTransformation tx = txConstructor.newInstance(evaluator);
 		Resource inputResource = resourceSet.getResource(inputModelURI, true);
 		tx.addRootObjects("uml", ClassUtil.nonNullState(inputResource.getContents()));
@@ -193,23 +193,23 @@ public class QVTiCompilerTests extends LoadTestCase
 
 	protected Class<? extends AbstractTransformation> generateCode(@NonNull URI transformURI, @NonNull URI genModelURI, @Nullable String savePath) throws Exception {
 		OCLstdlibTables.LIBRARY.getClass();		// Ensure coherent initialization
-		metaModelManager = new MetaModelManager();
+		metamodelManager = new MetamodelManager();
 		resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
-		metaModelManager.configureLoadFirstStrategy();
+		metamodelManager.configureLoadFirstStrategy();
 		Resource genResource = resourceSet.getResource(genModelURI, true);
 		for (EObject eObject : genResource.getContents()) {
 			if (eObject instanceof GenModel) {
-				metaModelManager.addGenModel((GenModel)eObject);
+				metamodelManager.addGenModel((GenModel)eObject);
 			}
 		}
-		MetaModelManagerResourceSetAdapter.getAdapter(ClassUtil.nonNullState(resourceSet), metaModelManager);
+		MetamodelManagerResourceSetAdapter.getAdapter(ClassUtil.nonNullState(resourceSet), metamodelManager);
 		Resource resource = doLoad_ConcreteWithOCL(transformURI);
 		for (EObject eObject : resource.getContents()) {
 			if (eObject instanceof ImperativeModel) {
 				for (org.eclipse.ocl.pivot.Package asPackage : ((ImperativeModel)eObject).getOwnedPackages()) {
 					for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
 						if (asClass instanceof Transformation) {
-							QVTiCodeGenerator cg = new QVTiCodeGenerator(ClassUtil.nonNullState(metaModelManager), (Transformation)asClass);
+							QVTiCodeGenerator cg = new QVTiCodeGenerator(ClassUtil.nonNullState(metamodelManager), (Transformation)asClass);
 							QVTiCodeGenOptions options = cg.getOptions();
 							options.setUseNullAnnotations(true);
 							options.setPackagePrefix("cg");

@@ -23,6 +23,7 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
@@ -54,7 +55,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 		@Override
 		public BasicContinuation<?> execute() {
-			MappingCallBinding pBinding = PivotUtilInternal.getPivot(MappingCallBinding.class, csElement);
+			MappingCallBinding pBinding = PivotUtil.getPivot(MappingCallBinding.class, csElement);
 			if (pBinding != null) {
 				ExpCS expression = csElement.getValue();
 				if (expression != null) {
@@ -76,10 +77,10 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 		Property referredProperty = propertyCallExp.getReferredProperty();
 		Property oppositeProperty = referredProperty.getOpposite();
 		if ((oppositeProperty != null) && oppositeProperty.isImplicit() && QVTimperativeCS2AS.isMiddle(referredProperty.getOwningClass(), csConstraint)) {
-			propertyAssignment = PivotUtilInternal.getPivot(MiddlePropertyAssignment.class, csConstraint);
+			propertyAssignment = PivotUtil.getPivot(MiddlePropertyAssignment.class, csConstraint);
 		}
 		else {
-			propertyAssignment = PivotUtilInternal.getPivot(PropertyAssignment.class, csConstraint);
+			propertyAssignment = PivotUtil.getPivot(PropertyAssignment.class, csConstraint);
 		}
 		if (propertyAssignment != null) {
 			propertyAssignment.setSlotExpression(propertyCallExp.getOwnedSource());
@@ -90,7 +91,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 	@Override
 	public Continuation<?> visitGuardPatternCS(@NonNull GuardPatternCS csElement) {
-		GuardPattern pGuardPattern = PivotUtilInternal.getPivot(GuardPattern.class, csElement);
+		GuardPattern pGuardPattern = PivotUtil.getPivot(GuardPattern.class, csElement);
 		if (pGuardPattern != null) {
 			List<Predicate> pPredicates = new ArrayList<Predicate>(); 
 			for (AssignmentCS csConstraint : csElement.getConstraints()) {
@@ -99,7 +100,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 				OCLExpression target = csTarget != null ? context.visitLeft2Right(OCLExpression.class, csTarget) : null;
 				if (csInitialiser != null) {
 					if (target instanceof VariableExp) {
-						VariablePredicate predicate = PivotUtilInternal.getPivot(VariablePredicate.class, csConstraint);
+						VariablePredicate predicate = PivotUtil.getPivot(VariablePredicate.class, csConstraint);
 						if (predicate != null) {
 							Variable variable = (Variable) ((VariableExp)target).getReferredVariable();
 							OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
@@ -113,7 +114,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 					}
 				}
 				else {
-					Predicate predicate = PivotUtilInternal.getPivot(Predicate.class, csConstraint);
+					Predicate predicate = PivotUtil.getPivot(Predicate.class, csConstraint);
 					if (predicate != null) {
 						predicate.setConditionExpression(target);
 						pPredicates.add(predicate);
@@ -140,7 +141,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 
 	@Override
 	public Continuation<?> visitMappingLoopCS(@NonNull MappingLoopCS csElement) {
-		MappingLoop pMappingLoop = PivotUtilInternal.getPivot(MappingLoop.class, csElement);
+		MappingLoop pMappingLoop = PivotUtil.getPivot(MappingLoop.class, csElement);
 		if (pMappingLoop != null) {
 			ExpCS expression = csElement.getInExpression();
 			if (expression != null) {

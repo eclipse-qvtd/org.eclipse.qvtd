@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtimperative.cs2as;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -65,7 +65,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 	@Override
 	public Continuation<?> visitMappingCallBindingCS(@NonNull MappingCallBindingCS csElement) {
-		MappingCallBinding pivotElement = PivotUtilInternal.getPivot(MappingCallBinding.class, csElement);
+		MappingCallBinding pivotElement = PivotUtil.getPivot(MappingCallBinding.class, csElement);
 		if (pivotElement != null) {
 			pivotElement.setBoundVariable(csElement.getReferredVariable());
 		}
@@ -74,7 +74,7 @@ public class QVTimperativeCSPreOrderVisitor extends AbstractQVTimperativeCSPreOr
 
 	@Override
 	public Continuation<?> visitMappingCallCS(@NonNull MappingCallCS csElement) {
-		MappingCall pivotElement = PivotUtilInternal.getPivot(MappingCall.class, csElement);
+		MappingCall pivotElement = PivotUtil.getPivot(MappingCall.class, csElement);
 		if (pivotElement != null) {
 			pivotElement.setReferredMapping(csElement.getReferredMapping());
 		}

@@ -17,8 +17,8 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.internal.manager.MetaModelManager;
-import org.eclipse.ocl.pivot.internal.manager.MetaModelManagerResourceSetAdapter;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerResourceSetAdapter;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
@@ -38,8 +38,8 @@ public class QVTdMtcTests extends LoadTestCase {
 	
 	private final class MyQVTiEnvironmentFactory extends QVTiEnvironmentFactory
 	{
-		public MyQVTiEnvironmentFactory(@Nullable EPackage.Registry reg, @NonNull MetaModelManager metaModelManager) {
-			super(reg, metaModelManager);
+		public MyQVTiEnvironmentFactory(@Nullable EPackage.Registry reg, @NonNull MetamodelManager metamodelManager) {
+			super(reg, metamodelManager);
 	    	setEvaluationTracingEnabled(true);
 		}
 	}
@@ -59,13 +59,13 @@ public class QVTdMtcTests extends LoadTestCase {
 		/**
 		 * Instantiates a new my Qvti evaluator.
 		 *
-		 * @param metaModelManager the meta model manager
+		 * @param metamodelManager the meta model manager
 		 * @param fileNamePrefix the file name prefix
 		 * @param transformationFileName the transformation file name
 		 * @throws IOException Signals that an I/O exception has occurred.
 		 */
-		public MyQvtiEvaluator(@NonNull MetaModelManager metaModelManager, @NonNull String fileNamePrefix, @NonNull Transformation transformation) throws IOException {
-			super(new MyQVTiEnvironmentFactory(null, metaModelManager), transformation);
+		public MyQvtiEvaluator(@NonNull MetamodelManager metamodelManager, @NonNull String fileNamePrefix, @NonNull Transformation transformation) throws IOException {
+			super(new MyQVTiEnvironmentFactory(null, metamodelManager), transformation);
 			this.fileNamePrefix = fileNamePrefix + "/";
 		}
 		
@@ -117,7 +117,7 @@ public class QVTdMtcTests extends LoadTestCase {
 	        	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
 	        }
 			URI modelURI = getProjectFileURI(fileNamePrefix + modelFileName);
-	        Resource resource = metaModelManager.getExternalResourceSet().getResource(modelURI, true);
+	        Resource resource = metamodelManager.getExternalResourceSet().getResource(modelURI, true);
 	        typedModelValidationResourceMap.put(typedModel, resource);
 		}*/
 
@@ -143,7 +143,7 @@ public class QVTdMtcTests extends LoadTestCase {
         ResourceSet asResourceSet = new ResourceSetImpl();
         if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			OCLstdlib.install();
-	        MetaModelManager.initializeASResourceSet(asResourceSet);
+	        MetamodelManager.initializeASResourceSet(asResourceSet);
         }
         Resource resource = asResourceSet.getResource(asURI, true);
         EcoreUtil.resolveAll(resource);
@@ -162,8 +162,8 @@ public class QVTdMtcTests extends LoadTestCase {
 		QVTcorePivotStandaloneSetup.doSetup();
 		QVTimperativePivotStandaloneSetup.doSetup();
 		OCLstdlib.install();
-		metaModelManager = new MetaModelManager();
-        MetaModelManagerResourceSetAdapter.getAdapter(ClassUtil.nonNullState(resourceSet), metaModelManager);
+		metamodelManager = new MetamodelManager();
+        MetamodelManagerResourceSetAdapter.getAdapter(ClassUtil.nonNullState(resourceSet), metamodelManager);
     }
 	
 	 /* (non-Javadoc)
@@ -180,7 +180,7 @@ public class QVTdMtcTests extends LoadTestCase {
     	
     	URL r = this.getClass().getResource("UmlToRdbms/UmlToRdbms.qvtcas");
 		String qvtcasUri = MtcBroker.changeResourceToSource(r.toURI().toString());
-    	MtcBroker mtc = new MtcBroker(qvtcasUri, this.getClass(), metaModelManager);
+    	MtcBroker mtc = new MtcBroker(qvtcasUri, this.getClass(), metamodelManager);
     	mtc.execute();
     	Diagnostic diagnostic = Diagnostician.INSTANCE.validate(mtc.getuModel().getRooteObject());
     	// TODO do we want perfect or can we tolerate info and warnings?
@@ -195,7 +195,7 @@ public class QVTdMtcTests extends LoadTestCase {
         diagnostic = Diagnostician.INSTANCE.validate(mtc.getiModel().getRooteObject());
         assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
         
-        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(metaModelManager, "UmlToRdbms",mtc.getiModel().getTransformation());
+        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(metamodelManager, "UmlToRdbms",mtc.getiModel().getTransformation());
     	testEvaluator.saveTransformation(null);
         testEvaluator.loadModel("uml", "SimpleUMLPeople.xmi");
         testEvaluator.createModel("middle", "UML2RDBMS.xmi");
@@ -215,7 +215,7 @@ public class QVTdMtcTests extends LoadTestCase {
     	
     	URL r = this.getClass().getResource("UpperToLower/UpperToLower.qvtcas");
 		String qvtcasUri = MtcBroker.changeResourceToSource(r.toURI().toString());
-    	MtcBroker mtc = new MtcBroker(qvtcasUri, this.getClass(), metaModelManager);
+    	MtcBroker mtc = new MtcBroker(qvtcasUri, this.getClass(), metamodelManager);
     	mtc.execute();
     	Diagnostic diagnostic = Diagnostician.INSTANCE.validate(mtc.getuModel().getRooteObject());
     	assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
@@ -227,7 +227,7 @@ public class QVTdMtcTests extends LoadTestCase {
         assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
         diagnostic = Diagnostician.INSTANCE.validate(mtc.getiModel().getRooteObject());
         assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
-        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(metaModelManager, "UpperToLower",mtc.getiModel().getTransformation());
+        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(metamodelManager, "UpperToLower",mtc.getiModel().getTransformation());
     	testEvaluator.saveTransformation(null);
         testEvaluator.loadModel("upperGraph", "SimpleGraph.xmi");
         testEvaluator.createModel("middle", "Graph2Graph.xmi");
@@ -247,7 +247,7 @@ public class QVTdMtcTests extends LoadTestCase {
     	
     	URL r = this.getClass().getResource("HSV2HLS/HSV2HLS.qvtcas");
 		String qvtcasUri = MtcBroker.changeResourceToSource(r.toURI().toString());
-    	MtcBroker mtc = new MtcBroker(qvtcasUri, this.getClass(), metaModelManager);
+    	MtcBroker mtc = new MtcBroker(qvtcasUri, this.getClass(), metamodelManager);
     	mtc.execute();
     	Diagnostic diagnostic = Diagnostician.INSTANCE.validate(mtc.getuModel().getRooteObject());
     	assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
@@ -259,7 +259,7 @@ public class QVTdMtcTests extends LoadTestCase {
         assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
         diagnostic = Diagnostician.INSTANCE.validate(mtc.getiModel().getRooteObject());
         assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
-        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(metaModelManager, "HSV2HLS",mtc.getiModel().getTransformation());
+        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(metamodelManager, "HSV2HLS",mtc.getiModel().getTransformation());
     	testEvaluator.saveTransformation(null);
         testEvaluator.loadModel("hsv", "HSVNode.xmi");
         testEvaluator.createModel("middle", "HSV2HLS.xmi");
