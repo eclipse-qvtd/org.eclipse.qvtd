@@ -21,8 +21,8 @@ import java.lang.Object;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.internal.utilities.ASSaver;
-import org.eclipse.ocl.pivot.internal.utilities.ASSaverResolveVisitor;
+import org.eclipse.ocl.pivot.internal.resource.ASSaver;
+import org.eclipse.ocl.pivot.internal.resource.ASSaverResolveVisitor;
 
 /**
  * An AbstractQVTbaseASSaverResolveVisitor provides a default implementation for each

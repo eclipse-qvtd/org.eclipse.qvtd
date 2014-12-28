@@ -15,16 +15,16 @@ import org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrintVisitor;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
+import org.eclipse.ocl.pivot.internal.resource.ASSaver;
+import org.eclipse.ocl.pivot.internal.resource.ASSaverLocateVisitor;
+import org.eclipse.ocl.pivot.internal.resource.ASSaverNormalizeVisitor;
+import org.eclipse.ocl.pivot.internal.resource.ASSaverResolveVisitor;
 import org.eclipse.ocl.pivot.internal.resource.AbstractASResourceFactory;
 import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
 import org.eclipse.ocl.pivot.internal.utilities.AS2MonikerVisitor;
 import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
 import org.eclipse.ocl.pivot.internal.utilities.AS2XMIidVisitor;
-import org.eclipse.ocl.pivot.internal.utilities.ASSaver;
-import org.eclipse.ocl.pivot.internal.utilities.ASSaverLocateVisitor;
-import org.eclipse.ocl.pivot.internal.utilities.ASSaverNormalizeVisitor;
-import org.eclipse.ocl.pivot.internal.utilities.ASSaverResolveVisitor;
-import org.eclipse.ocl.pivot.internal.utilities.ToStringVisitor;
+import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 
 /**

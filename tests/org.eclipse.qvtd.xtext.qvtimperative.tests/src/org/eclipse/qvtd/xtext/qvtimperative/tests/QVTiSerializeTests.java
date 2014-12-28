@@ -25,8 +25,8 @@ import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.internal.OCL;
 import org.eclipse.ocl.pivot.internal.PivotConstantsInternal;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
-import org.eclipse.ocl.pivot.internal.resource.ASResource;
-import org.eclipse.ocl.pivot.internal.utilities.BaseResource;
+import org.eclipse.ocl.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -67,7 +67,7 @@ public class QVTiSerializeTests extends LoadTestCase
 
 	public static @NonNull XtextResource pivot2cs(@NonNull OCL ocl, @NonNull ResourceSet resourceSet, @NonNull ASResource asResource, @NonNull URI outputURI) throws IOException {
 		XtextResource xtextResource = ClassUtil.nonNullState((XtextResource) resourceSet.createResource(outputURI, QVTimperativeCSPackage.eCONTENT_TYPE));
-		ocl.as2cs(asResource, (BaseResource) xtextResource);
+		ocl.as2cs(asResource, (CSResource) xtextResource);
 		assertNoResourceErrors("Conversion failed", xtextResource);
 		//
 		//	CS save

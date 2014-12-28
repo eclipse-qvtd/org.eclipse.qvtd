@@ -11,7 +11,7 @@
 package	org.eclipse.qvtd.pivot.qvtbase.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.internal.utilities.ASSaver;
+import org.eclipse.ocl.pivot.internal.resource.ASSaver;
 import org.eclipse.qvtd.pivot.qvtbase.util.AbstractQVTbaseASSaverNormalizeVisitor;
 
 public class QVTbaseASSaverNormalizeVisitor extends AbstractQVTbaseASSaverNormalizeVisitor
