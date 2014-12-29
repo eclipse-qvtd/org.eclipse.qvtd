@@ -27,7 +27,6 @@
 import "../helpers/QVTHelpers.eol";
 import "MapOrdering.eol";
 
-
 // Secondary Argument Derivations
 QVTs!Schedule.all.first().defineArgumentDerivation();
 QVTs!Schedule.all.first().removeEmptyDistinctData();
