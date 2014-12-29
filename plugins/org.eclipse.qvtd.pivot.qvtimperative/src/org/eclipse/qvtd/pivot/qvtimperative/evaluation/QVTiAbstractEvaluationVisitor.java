@@ -20,8 +20,8 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.evaluation.EvaluationVisitorImpl;
-import org.eclipse.ocl.pivot.internal.manager.PivotIdResolver;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
@@ -571,7 +571,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 
 	@Override
 	public @Nullable Object visitVariablePredicate(@NonNull VariablePredicate variablePredicate) {     
-        PivotIdResolver idResolver = metamodelManager.getIdResolver();
+        IdResolver idResolver = metamodelManager.getIdResolver();
         // Each predicate has a conditionExpression that is an OCLExpression
         OCLExpression exp = variablePredicate.getConditionExpression();
 		Object value = ((QVTiEvaluationVisitor)undecoratedVisitor).safeVisit(exp);

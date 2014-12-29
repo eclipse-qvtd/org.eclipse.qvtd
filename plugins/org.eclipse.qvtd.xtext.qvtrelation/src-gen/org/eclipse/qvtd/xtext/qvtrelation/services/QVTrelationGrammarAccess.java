@@ -560,13 +560,13 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_2_1_3 = (Keyword)cGroup_2_1.eContents().get(3);
 		
 		//ModelDeclCS:
-		//	name=UnrestrictedName ":" (metaModelIds+=[pivot::Namespace|UnrestrictedName] | "{"
-		//	metaModelIds+=[pivot::Namespace|UnrestrictedName] ("," metaModelIds+=[pivot::Namespace|UnrestrictedName])* "}");
+		//	name=UnrestrictedName ":" (metamodelIds+=[pivot::Namespace|UnrestrictedName] | "{"
+		//	metamodelIds+=[pivot::Namespace|UnrestrictedName] ("," metamodelIds+=[pivot::Namespace|UnrestrictedName])* "}");
 		@Override
 		public ParserRule getRule() { return rule; }
 
-		//name=UnrestrictedName ":" (metaModelIds+=[pivot::Namespace|UnrestrictedName] | "{"
-		//metaModelIds+=[pivot::Namespace|UnrestrictedName] ("," metaModelIds+=[pivot::Namespace|UnrestrictedName])* "}")
+		//name=UnrestrictedName ":" (metamodelIds+=[pivot::Namespace|UnrestrictedName] | "{"
+		//metamodelIds+=[pivot::Namespace|UnrestrictedName] ("," metamodelIds+=[pivot::Namespace|UnrestrictedName])* "}")
 		public Group getGroup() { return cGroup; }
 
 		//name=UnrestrictedName
@@ -578,11 +578,11 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//":"
 		public Keyword getColonKeyword_1() { return cColonKeyword_1; }
 
-		//metaModelIds+=[pivot::Namespace|UnrestrictedName] | "{" metaModelIds+=[pivot::Namespace|UnrestrictedName] (","
-		//metaModelIds+=[pivot::Namespace|UnrestrictedName])* "}"
+		//metamodelIds+=[pivot::Namespace|UnrestrictedName] | "{" metamodelIds+=[pivot::Namespace|UnrestrictedName] (","
+		//metamodelIds+=[pivot::Namespace|UnrestrictedName])* "}"
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
-		//metaModelIds+=[pivot::Namespace|UnrestrictedName]
+		//metamodelIds+=[pivot::Namespace|UnrestrictedName]
 		public Assignment getMetamodelIdsAssignment_2_0() { return cMetamodelIdsAssignment_2_0; }
 
 		//[pivot::Namespace|UnrestrictedName]
@@ -591,13 +591,13 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//UnrestrictedName
 		public RuleCall getMetamodelIdsNamespaceUnrestrictedNameParserRuleCall_2_0_0_1() { return cMetamodelIdsNamespaceUnrestrictedNameParserRuleCall_2_0_0_1; }
 
-		//"{" metaModelIds+=[pivot::Namespace|UnrestrictedName] ("," metaModelIds+=[pivot::Namespace|UnrestrictedName])* "}"
+		//"{" metamodelIds+=[pivot::Namespace|UnrestrictedName] ("," metamodelIds+=[pivot::Namespace|UnrestrictedName])* "}"
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2_1_0() { return cLeftCurlyBracketKeyword_2_1_0; }
 
-		//metaModelIds+=[pivot::Namespace|UnrestrictedName]
+		//metamodelIds+=[pivot::Namespace|UnrestrictedName]
 		public Assignment getMetamodelIdsAssignment_2_1_1() { return cMetamodelIdsAssignment_2_1_1; }
 
 		//[pivot::Namespace|UnrestrictedName]
@@ -606,13 +606,13 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//UnrestrictedName
 		public RuleCall getMetamodelIdsNamespaceUnrestrictedNameParserRuleCall_2_1_1_0_1() { return cMetamodelIdsNamespaceUnrestrictedNameParserRuleCall_2_1_1_0_1; }
 
-		//("," metaModelIds+=[pivot::Namespace|UnrestrictedName])*
+		//("," metamodelIds+=[pivot::Namespace|UnrestrictedName])*
 		public Group getGroup_2_1_2() { return cGroup_2_1_2; }
 
 		//","
 		public Keyword getCommaKeyword_2_1_2_0() { return cCommaKeyword_2_1_2_0; }
 
-		//metaModelIds+=[pivot::Namespace|UnrestrictedName]
+		//metamodelIds+=[pivot::Namespace|UnrestrictedName]
 		public Assignment getMetamodelIdsAssignment_2_1_2_1() { return cMetamodelIdsAssignment_2_1_2_1; }
 
 		//[pivot::Namespace|UnrestrictedName]
@@ -1822,8 +1822,8 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ModelDeclCS:
-	//	name=UnrestrictedName ":" (metaModelIds+=[pivot::Namespace|UnrestrictedName] | "{"
-	//	metaModelIds+=[pivot::Namespace|UnrestrictedName] ("," metaModelIds+=[pivot::Namespace|UnrestrictedName])* "}");
+	//	name=UnrestrictedName ":" (metamodelIds+=[pivot::Namespace|UnrestrictedName] | "{"
+	//	metamodelIds+=[pivot::Namespace|UnrestrictedName] ("," metamodelIds+=[pivot::Namespace|UnrestrictedName])* "}");
 	public ModelDeclCSElements getModelDeclCSAccess() {
 		return pModelDeclCS;
 	}

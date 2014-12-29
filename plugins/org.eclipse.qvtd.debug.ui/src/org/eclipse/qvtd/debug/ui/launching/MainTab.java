@@ -94,7 +94,7 @@ public class MainTab extends AbstractMainTab implements QVTiLaunchConstants
 			try {
 				@SuppressWarnings("null")@NonNull Group inputsGroup2 = inputsGroup;
 				@SuppressWarnings("null")@NonNull Group outputsGroup2 = outputsGroup;
-				QVTiEnvironmentFactory envFactory = new QVTiEnvironmentFactory(null, getMetamodelManager());
+				QVTiEnvironmentFactory envFactory = (QVTiEnvironmentFactory) getMetamodelManager().getEnvironmentFactory();
 				QVTiXtextEvaluator xtextEvaluator = new QVTiXtextEvaluator(envFactory, txURI);
 				Transformation transformation = xtextEvaluator.getTransformation();
 				Set<TypedModel> inputs = new HashSet<TypedModel>();

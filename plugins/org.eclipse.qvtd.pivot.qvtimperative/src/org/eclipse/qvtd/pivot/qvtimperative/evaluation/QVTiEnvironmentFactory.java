@@ -10,21 +10,21 @@
  ******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Environment;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
+import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.internal.evaluation.PivotEvaluationEnvironment;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.internal.utilities.PivotEnvironmentFactory;
+import org.eclipse.ocl.pivot.resource.StandaloneProjectMap;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
 public class QVTiEnvironmentFactory extends PivotEnvironmentFactory {
 
-	public QVTiEnvironmentFactory(@Nullable EPackage.Registry reg, @NonNull MetamodelManager metamodelManager) {
-		super(reg, metamodelManager);
+	public QVTiEnvironmentFactory(@Nullable StandaloneProjectMap projectMap, @Nullable ModelManager modelManager) {
+		super(projectMap, modelManager);
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class QVTiEnvironmentFactory extends PivotEnvironmentFactory {
 	}
 
 	public @NonNull QVTiTransformationAnalysis createTransformationAnalysis() {
-		return new QVTiTransformationAnalysis(metamodelManager);
+		return new QVTiTransformationAnalysis(getMetamodelManager());
 	}
 
 	public boolean keepDebug() {

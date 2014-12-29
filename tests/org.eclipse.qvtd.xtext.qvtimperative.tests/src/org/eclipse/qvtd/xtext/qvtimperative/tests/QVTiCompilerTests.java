@@ -31,8 +31,8 @@ import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.complete.CompleteEnvironmentInternal;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerResourceSetAdapter;
+import org.eclipse.ocl.pivot.internal.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.pivot.internal.validation.PivotEObjectValidator;
 import org.eclipse.ocl.pivot.library.executor.ExecutorManager;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
@@ -193,7 +193,7 @@ public class QVTiCompilerTests extends LoadTestCase
 
 	protected Class<? extends AbstractTransformation> generateCode(@NonNull URI transformURI, @NonNull URI genModelURI, @Nullable String savePath) throws Exception {
 		OCLstdlibTables.LIBRARY.getClass();		// Ensure coherent initialization
-		metamodelManager = new MetamodelManager();
+		metamodelManager = new PivotEnvironmentFactory(null, null).getMetamodelManager();
 		resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
 		metamodelManager.configureLoadFirstStrategy();
 		Resource genResource = resourceSet.getResource(genModelURI, true);

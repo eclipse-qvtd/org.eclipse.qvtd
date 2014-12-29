@@ -65,7 +65,7 @@ public class QVTiDebuggableRunnerFactory extends DebuggableRunnerFactory
 			throw new DiagnosticException(diagnostic);
 		} */
 		MetamodelManager metamodelManager = evaluationContext.getMetamodelManager();
-		QVTiVMEnvironmentFactory environmentFactory = new QVTiVMEnvironmentFactory(packageRegistry, metamodelManager);
+		QVTiVMEnvironmentFactory environmentFactory = (QVTiVMEnvironmentFactory) metamodelManager.getEnvironmentFactory();
 		DebuggableRunner runner = new DebuggableRunner(this, qvtiEvaluationContext.getTransformationURI(), new QVTiInternalDebuggableExecutor(qvtiEvaluationContext, environmentFactory));
 		
 /*		if(traceFileURI != null) {

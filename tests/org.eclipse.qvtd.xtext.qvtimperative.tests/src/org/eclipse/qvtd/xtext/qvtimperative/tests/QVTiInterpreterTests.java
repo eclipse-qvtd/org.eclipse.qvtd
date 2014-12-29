@@ -18,16 +18,17 @@ import java.util.Map.Entry;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerResourceSetAdapter;
+import org.eclipse.ocl.pivot.internal.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
+import org.eclipse.ocl.pivot.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
@@ -53,8 +54,8 @@ public class QVTiInterpreterTests extends LoadTestCase
 {
 	private final class MyQVTiEnvironmentFactory extends QVTiEnvironmentFactory
 	{
-		public MyQVTiEnvironmentFactory(@Nullable EPackage.Registry reg, @NonNull MetamodelManager metamodelManager) {
-			super(reg, metamodelManager);
+		public MyQVTiEnvironmentFactory(@Nullable StandaloneProjectMap projectMap, @Nullable ModelManager modelManager) {
+			super(projectMap, modelManager);
 	    	setEvaluationTracingEnabled(true);
 		}
 	}
@@ -80,7 +81,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		 * @throws IOException Signals that an I/O exception has occurred.
 		 */
 		public MyQvtiEvaluator(@NonNull MetamodelManager metamodelManager, @NonNull String fileNamePrefix, @NonNull String transformationFileName) throws IOException {
-			super(new MyQVTiEnvironmentFactory(null, metamodelManager), getProjectFileURI(fileNamePrefix + "/"  + transformationFileName));
+			super((QVTiEnvironmentFactory) metamodelManager.getEnvironmentFactory(), getProjectFileURI(fileNamePrefix + "/"  + transformationFileName));
 			this.fileNamePrefix = fileNamePrefix + "/";
 		}
 		
@@ -161,10 +162,10 @@ public class QVTiInterpreterTests extends LoadTestCase
 	}
 
 	protected static void assertLoadable(@NonNull URI asURI) {
-        ResourceSet asResourceSet = new ResourceSetImpl();
+        ResourceSet asResourceSet = new PivotEnvironmentFactory(null, null).getMetamodelManager().getASResourceSet();
         if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			OCLstdlib.install();
-	        MetamodelManager.initializeASResourceSet(asResourceSet);
+//	        MetamodelManager.initializeASResourceSet(asResourceSet);
         }
         Resource resource = asResourceSet.getResource(asURI, true);
         EcoreUtil.resolveAll(resource);
@@ -180,7 +181,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		BaseLinkingService.DEBUG_RETRY.setState(true);
 		super.setUp();
 		QVTimperativeStandaloneSetup.doSetup();
-		metamodelManager = new MetamodelManager();
+		metamodelManager = new MyQVTiEnvironmentFactory(null, null).getMetamodelManager();
         MetamodelManagerResourceSetAdapter.getAdapter(ClassUtil.nonNullState(resourceSet), metamodelManager);
     }
  

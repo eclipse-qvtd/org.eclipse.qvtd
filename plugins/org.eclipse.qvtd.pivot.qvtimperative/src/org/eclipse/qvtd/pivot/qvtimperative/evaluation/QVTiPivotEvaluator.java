@@ -51,7 +51,7 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
     public QVTiPivotEvaluator(@NonNull MetamodelManager metamodelManager, @NonNull Transformation transformation) {
     	this.metamodelManager = metamodelManager;
     	this.transformation = transformation;
-    	this.envFactory = new QVTiEnvironmentFactory(null, metamodelManager);
+    	this.envFactory = (QVTiEnvironmentFactory) metamodelManager.getEnvironmentFactory();
     	this.env = envFactory.createEnvironment();
     	QVTiTransformationAnalysis transformationAnalysis = envFactory.createTransformationAnalysis();
     	transformationAnalysis.analyzeTransformation(transformation);

@@ -32,7 +32,6 @@ import org.eclipse.ocl.examples.debug.vm.utils.SafeRunner;
 import org.eclipse.ocl.examples.debug.vm.utils.ShallowProcess;
 import org.eclipse.ocl.examples.debug.vm.utils.StreamsProxy;
 import org.eclipse.ocl.examples.debug.vm.utils.VMRuntimeException;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
 import org.eclipse.qvtd.debug.core.QVTiDebugCore;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -59,8 +58,7 @@ public class QVTiLaunchConfigurationDelegate extends LaunchConfigurationDelegate
             ShallowProcess.IRunnable r = new ShallowProcess.IRunnable() {
                 
                 public void run() throws Exception { 
-        			MetamodelManager metamodelManager = new MetamodelManager();
-        			QVTiEnvironmentFactory envFactory = new QVTiEnvironmentFactory(null, metamodelManager);
+        			QVTiEnvironmentFactory envFactory = new QVTiEnvironmentFactory(null, null);
         			QVTiXtextEvaluator xtextEvaluator = new QVTiXtextEvaluator(envFactory, txURI);
         			for (@SuppressWarnings("null")@NonNull String inName : inMap.keySet()) {
         				@SuppressWarnings("null")@NonNull URI inURI = URI.createURI(inMap.get(inName), true);
