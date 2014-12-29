@@ -11,7 +11,7 @@
 --     E.D.Willink - adaptation to comply with QVT specification
 --     H. Hoyos - adaptation to comply with QVT 1.2 and bug fixes
 --------------------------------------------------------------------------------
-import pivotocl     :   'platform:/resource/org.eclipse.ocl.examples.pivot/model/Pivot.ecore'::pivot;
+import pivotocl     :   'platform:/resource/org.eclipse.ocl.pivot.internal/model/Pivot.ecore'::pivot;
 import qvtbase      :   'platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore'::qvtbase;
 import qvttemplate  :   'platform:/resource/org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore'::qvttemplate;
 import qvtrelation  :   'platform:/resource/org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore'::qvtrelation;
@@ -19,12 +19,13 @@ import qvtcorebase  :   'platform:/resource/org.eclipse.qvtd.pivot.qvtcorebase/m
 import qvtcore      :   'platform:/resource/org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore'::qvtcore;
 
 
+
 transformation relToCore(relations:{qvtrelation,qvttemplate,qvtbase,pivotocl}, core:{qvtcore,qvtcorebase,qvtbase,pivotocl})
 {
 
 key pivotocl::Type{name};
 key pivotocl::Class{name};
-key pivotocl::Property{name, class};
+key pivotocl::Property{name, owningClass};
 key pivotocl::Package{name};
 key pivotocl::Operation{name};
 key pivotocl::Variable{name, type};
@@ -81,13 +82,13 @@ query getVarsOfExp(e:pivotocl::OCLExpression):Set(pivotocl::Variable)
             let
                 oc:pivotocl::OperationCallExp = e.oclAsType(pivotocl::OperationCallExp)
             in
-            vs->union(getVarsOfExp(oc.source))->union(
-                oc.argument->iterate(a; avs:Set(pivotocl::Variable)=Set{} | avs->union(getVarsOfExp(a)))
+            vs->union(getVarsOfExp(oc.ownedSource))->union(
+                oc.ownedArguments->iterate(a; avs:Set(pivotocl::Variable)=Set{} | avs->union(getVarsOfExp(a)))
             )
         else
             if (e.oclIsTypeOf(pivotocl::PropertyCallExp))
             then
-                vs->union(getVarsOfExp(e.oclAsType(pivotocl::PropertyCallExp).source))
+                vs->union(getVarsOfExp(e.oclAsType(pivotocl::PropertyCallExp).ownedSource))
             else
                 if (e.oclIsTypeOf(qvtrelation::RelationCallExp))
                 then
@@ -168,7 +169,7 @@ top relation RelationalTransformationToPackage
 
     enforce domain core p:pivotocl::Package {
         name = rtn,
-        ownedType = rc:Class {}
+        ownedClasses = rc:Class {}
     };
     where {
     RelationToTraceClass(r, rc);
@@ -226,7 +227,7 @@ relation ObjectTemplateToTraceClassProps
         }
     };
     enforce domain core rc:Class {
-        ownedAttribute = a:pivotocl::Property {
+        ownedProperties = a:pivotocl::Property {
             name=vn,
             type=c
         }
@@ -1201,19 +1202,19 @@ relation RWhenRelCallArgToMGuardPredicate
         },
         predicate = mgp:Predicate {
             conditionExpression = ee:pivotocl::OperationCallExp {   -- vd.dvn = mv
-                source = pe:pivotocl::PropertyCallExp {
-                    source = pve:pivotocl::VariableExp{
+                ownedSource = pe:pivotocl::PropertyCallExp {
+                    ownedSource = pve:pivotocl::VariableExp {
                         referredVariable = vd
                     },
-                    referredProperty = pep:pivotocl::Property{
+                    referredProperty = pep:pivotocl::Property {
                         name = dvn,
-                        class = vd.type.oclAsType(pivotocl::Class)
+                        owningClass = vd.type.oclAsType(pivotocl::Class)
                     }
                 },
-                referredOperation = eo:pivotocl::Operation{
+                referredOperation = eo:pivotocl::Operation {
                     name = '='
                 },
-                argument = ave:pivotocl::VariableExp{
+                ownedArguments = ave:pivotocl::VariableExp {
                     referredVariable = mv
                 }
             }
@@ -1274,19 +1275,19 @@ relation RInvokerToMGuardPredicate
         },
         predicate = pd:Predicate {
             conditionExpression = ee:pivotocl::OperationCallExp {   -- vd.vn = mdv
-                source = pe:pivotocl::PropertyCallExp {
-                    source = mve:pivotocl::VariableExp {
+                ownedSource = pe:pivotocl::PropertyCallExp {
+                    ownedSource = mve:pivotocl::VariableExp {
                         referredVariable = vd
                     },
-                    referredProperty = pep:pivotocl::Property{
+                    referredProperty = pep:pivotocl::Property {
                         name = vn,
-                        class = vd.type.oclAsType(pivotocl::Class)
+                        owningClass = vd.type.oclAsType(pivotocl::Class)
                     }
                 },
-                referredOperation = eo:pivotocl::Operation{
+                referredOperation = eo:pivotocl::Operation {
                     name = '='
                 },
-                argument = ave:pivotocl::VariableExp{
+                ownedArguments = ave:pivotocl::VariableExp {
                     referredVariable = mdv
                 }
             }
@@ -1306,7 +1307,7 @@ relation RDomainPatternToMDBottomPattern
     enforce domain core db:BottomPattern {
         area = cd:CoreDomain {
             rule = m:Mapping {
-                bottomPattern = mb:BottomPattern{
+                bottomPattern = mb:BottomPattern {
                     area = m
                 }
             }
@@ -1393,14 +1394,14 @@ relation RDomainVarToMDBottomAssignmnetForEnforcement
     enforce domain core mb:BottomPattern {   -- mapping bottom
         realizedVariable = tcv:RealizedVariable {},   -- added this to correctly add the trace variable
         assignment = a:PropertyAssignment {
-            slotExpression = ve1:pivotocl::VariableExp{
+            slotExpression = ve1:pivotocl::VariableExp {
                 referredVariable = tcv
             },
-            targetProperty = tp:pivotocl::Property{
+            targetProperty = tp:pivotocl::Property {
                 name = v.name,
-                class = tcv.type.oclAsType(pivotocl::Class)
+                owningClass = tcv.type.oclAsType(pivotocl::Class)
             },
-            value = ve2:pivotocl::VariableExp{
+            value = ve2:pivotocl::VariableExp {
                 referredVariable = mv
             }
         }
@@ -1423,8 +1424,8 @@ relation RDomainToMBottomPredicateForEnforcement
 
     domain relations rdtVarsSeq:Sequence(Set(pivotocl::Element)) {
         rdtSet:Set(pivotocl::Element) {
-            r:Relation{},
-            rd:RelationDomain{},
+            r:Relation {},
+            rd:RelationDomain {},
             te:ObjectTemplateExp {
                 bindsTo = v:pivotocl::Variable {}
             }
@@ -1435,20 +1436,20 @@ relation RDomainToMBottomPredicateForEnforcement
     enforce domain core mb:BottomPattern {
         predicate = pd:Predicate {
             conditionExpression = ee:pivotocl::OperationCallExp {   -- tcv.(v.name) = mv
-                source = pe:pivotocl::PropertyCallExp {
+                ownedSource = pe:pivotocl::PropertyCallExp {
                     --source = tcv,
-                    source = pve:pivotocl::VariableExp{
+                    ownedSource = pve:pivotocl::VariableExp {
                         referredVariable = tcv
                     },
-                    referredProperty = pep:pivotocl::Property{
+                    referredProperty = pep:pivotocl::Property {
                         name = v.name,
-                        class = tcv.type.oclAsType(pivotocl::Class)
+                        owningClass = tcv.type.oclAsType(pivotocl::Class)
                     }
                 },
-                referredOperation = eo:pivotocl::Operation{
+                referredOperation = eo:pivotocl::Operation {
                     name = '='
                 },
-                argument = ave:pivotocl::VariableExp{
+                ownedArguments = ave:pivotocl::VariableExp {
                     referredVariable = mv
                 }
             }
@@ -1496,7 +1497,7 @@ relation RDomainToMDBottomForEnforcementOfIdentityProp
     seqForAssignment: Sequence(pivotocl::Element);
 
     domain relations rtSeq:Sequence(pivotocl::Element) {
-        r:Relation{},
+        r:Relation {},
         te:ObjectTemplateExp {
             bindsTo = v:pivotocl::Variable {
                 type=c:Class {}
@@ -1537,7 +1538,7 @@ relation RDomainToMDBottomForEnforcementOfIdentityPropObject
     rdSeq : Sequence(pivotocl::Element);
 
     domain relations rtSeq:Sequence(pivotocl::Element) {
-        r:Relation{},
+        r:Relation {},
         rd:RelationDomain{},
         te:ObjectTemplateExp {
             bindsTo = v:pivotocl::Variable {
@@ -1546,7 +1547,7 @@ relation RDomainToMDBottomForEnforcementOfIdentityPropObject
             part = pt:PropertyTemplateItem {
                 referredProperty = pp:pivotocl::Property {},
                 value = e:ObjectTemplateExp {
-                    bindsTo = tv:pivotocl::Variable{}
+                    bindsTo = tv:pivotocl::Variable {}
                 }
             }
         }
@@ -1557,14 +1558,14 @@ relation RDomainToMDBottomForEnforcementOfIdentityPropObject
     };
     enforce domain core mb:BottomPattern {
         assignment = a:PropertyAssignment {
-            slotExpression = ve1:pivotocl::VariableExp{
+            slotExpression = ve1:pivotocl::VariableExp {
                 referredVariable = tcv
             },
             targetProperty = tp:pivotocl::Property {
                 name = tv.name,
-                class = tcv.type.oclAsType(pivotocl::Class)
+                owningClass = tcv.type.oclAsType(pivotocl::Class)
             },
-            value = ve2:pivotocl::VariableExp{
+            value = ve2:pivotocl::VariableExp {
                 referredVariable = mtv
             }
         }
@@ -1600,9 +1601,9 @@ relation RDomainPatternExprToMappingDomainAssignment
             },
             targetProperty = tp:pivotocl::Property {
                 name = pn,
-                class = mv.type.oclAsType(pivotocl::Class)
+                owningClass = mv.type.oclAsType(pivotocl::Class)
             },
-            value = me:pivotocl::OCLExpression{}
+            value = me:pivotocl::OCLExpression {}
         }
     };
     where {
@@ -1639,7 +1640,7 @@ relation RDomainPatternExprToMappingDomainVarAssignment
             },
             targetProperty = tp:pivotocl::Property {
                 name = pn,
-                class = mv.type.oclAsType(pivotocl::Class)
+                owningClass = mv.type.oclAsType(pivotocl::Class)
             },
             value = me:pivotocl::VariableExp {
                 referredVariable = mev
@@ -1683,7 +1684,7 @@ relation RDomainPatternExprToMappingDomainTemplateVarAssignment
             },
             targetProperty = tp:pivotocl::Property {
                 name = pn,
-                class = mv.type.oclAsType(pivotocl::Class)
+                owningClass = mv.type.oclAsType(pivotocl::Class)
             },
             value = me:pivotocl::VariableExp {
                 referredVariable = mev }
@@ -1726,9 +1727,9 @@ relation RDomainPatternExprToMappingBottomVarAssignment
             },
             targetProperty = tp:pivotocl::Property {
                 name = pn,
-                class = mv.type.oclAsType(pivotocl::Class)
+                owningClass = mv.type.oclAsType(pivotocl::Class)
             },
-            value = me:pivotocl::VariableExp{
+            value = me:pivotocl::VariableExp {
                 referredVariable = mev
             }
         }
@@ -1749,14 +1750,14 @@ relation RDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive
     rtdeSeq: Sequence(pivotocl::Element);
 
     domain relations rtdSeq:Sequence(pivotocl::Element) {
-        r:Relation{
-            transformation = rt:RelationalTransformation{}
+        r:Relation {
+            transformation = rt:RelationalTransformation {}
         },
         te:ObjectTemplateExp {
             bindsTo = v:pivotocl::Variable {type = c:Class {}},
             part = pt:PropertyTemplateItem {
-            referredProperty = pp:pivotocl::Property {name = pn},
-            value = e:pivotocl::OCLExpression {}
+            	referredProperty = pp:pivotocl::Property {name = pn},
+            	value = e:pivotocl::OCLExpression {}
             }
         }
         {
@@ -1784,7 +1785,7 @@ relation RDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive
                     },
                     targetProperty = tp:pivotocl::Property {
                         name = pn,
-                        class = mv.type.oclAsType(pivotocl::Class)
+                        owningClass = mv.type.oclAsType(pivotocl::Class)
                     },
                     value = me:pivotocl::OCLExpression {}
                 }
@@ -1840,19 +1841,19 @@ relation RDomainToMComposedMappingGuard
         guardPattern = mg:GuardPattern {
             predicate = pd:Predicate {
                 conditionExpression = ee:pivotocl::OperationCallExp {   -- vd.vn = mdv
-                    source = pe:pivotocl::PropertyCallExp {
-                        source = ve1:pivotocl::VariableExp {
+                    ownedSource = pe:pivotocl::PropertyCallExp {
+                        ownedSource = ve1:pivotocl::VariableExp {
                             referredVariable = tcv
                         },
                         referredProperty = tp:pivotocl::Property {
                             name = mv.name,
-                            class = mv.type.oclAsType(pivotocl::Class)
+                            owningClass = mv.type.oclAsType(pivotocl::Class)
                         }
                     },
                     referredOperation = eo:pivotocl::Operation {
                         name = '='
                     },
-                    argument = ve2:pivotocl::VariableExp {
+                    ownedArguments = ve2:pivotocl::VariableExp {
                         referredVariable = mv
                     }
                 }
@@ -1943,7 +1944,7 @@ relation RDomainToMDBottomForEnforcementOfNonIdentityPropObject
                         },
                         targetProperty = tp:pivotocl::Property {
                             name = pn,
-                            class = mv.type.oclAsType(pivotocl::Class)
+                            owningClass = mv.type.oclAsType(pivotocl::Class)
                         },
                         value = ve2:pivotocl::VariableExp {
                             referredVariable = mpv
@@ -1980,7 +1981,7 @@ relation RDomainPatternToMDBottomPatternComposite
     mvte, mvpte: pivotocl::Variable;
 
     domain relations seqForDomainPtrn:Sequence(pivotocl::Element) {
-        r:Relation{},
+        r:Relation {},
         te:ObjectTemplateExp {
             bindsTo = vte:pivotocl::Variable {},
             part = pt:PropertyTemplateItem {
@@ -2001,7 +2002,7 @@ relation RDomainPatternToMDBottomPatternComposite
             },
             targetProperty = tp:pivotocl::Property {
                 name = pn,
-                class = mvte.type.oclAsType(pivotocl::Class)
+                owningClass = mvte.type.oclAsType(pivotocl::Class)
             },
             value = ve2:pivotocl::VariableExp {
                 referredVariable = mvpte
@@ -2048,7 +2049,7 @@ relation RDomainPatternToMDBottomPatternSimpleUnSharedVarExpr
             },
             targetProperty = tp:pivotocl::Property{
                 name = pn,
-                class = mvte.type.oclAsType(pivotocl::Class)
+                owningClass = mvte.type.oclAsType(pivotocl::Class)
             },
             value = ve2:pivotocl::VariableExp {
                 referredVariable = mvpte
@@ -2095,7 +2096,7 @@ relation RDomainPatternToMDBottomPatternSimpleSharedVarExpr
             },
             targetProperty = tp:pivotocl::Property {
                 name = pn,
-                class = mvte.type.oclAsType(pivotocl::Class)
+                owningClass = mvte.type.oclAsType(pivotocl::Class)
             },
             value = ve2:pivotocl::VariableExp{
                 referredVariable = mvpte
@@ -2139,7 +2140,7 @@ relation RDomainPatternToMDBottomPatternSimpleNonVarExpr
             },
             targetProperty = tp:pivotocl::Property {
                 name = pn,
-                class = mvte.type.oclAsType(pivotocl::Class)
+                owningClass = mvte.type.oclAsType(pivotocl::Class)
             },
             value = me:pivotocl::OCLExpression {}
         }
@@ -2172,7 +2173,7 @@ relation RDomainVarsToTraceClassProps
             },
             targetProperty = tp:pivotocl::Property {
                 name = dv.name,
-                class = tcv.type.oclAsType(pivotocl::Class)
+                owningClass = tcv.type.oclAsType(pivotocl::Class)
             },
             value = ve2:pivotocl::VariableExp {
                 referredVariable = mdv
@@ -2211,7 +2212,7 @@ relation ROppositeDomainVarsToTraceClassProps
             },
             targetProperty = tp:pivotocl::Property {
                 name = dv.name,
-                class = tcv.type.oclAsType(pivotocl::Class)
+                owningClass = tcv.type.oclAsType(pivotocl::Class)
             },
             value = ve2:pivotocl::VariableExp {
                 referredVariable = mdv
@@ -2272,7 +2273,7 @@ relation RRelDomainsToMOpCallArg
         }
     };
     enforce domain core oce:pivotocl::OperationCallExp {
-        argument = ar:pivotocl::VariableExp {
+        ownedArguments = ar:pivotocl::VariableExp {
             referredVariable = mv:pivotocl::Variable {}
         }
     };
