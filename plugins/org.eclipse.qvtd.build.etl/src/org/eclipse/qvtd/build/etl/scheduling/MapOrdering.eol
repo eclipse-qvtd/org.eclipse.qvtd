@@ -54,7 +54,7 @@ operation QVTs!Schedule findMapOrdering()  {
 	    // n.println("n ");
 	    // Find all the mappings that have an output node if this type
 	    // TODO The ECoreContainment tree should save the actual type so we dont compare names!	    
-	    var baseDatum = self.datums.selectOne(x | x.type.name = n.name)); // FIXME what about mappings which create any subtype?
+	    var baseDatum = self.datums.selectOne(x | x.type.name = n.name); // FIXME what about mappings which create any subtype?
 	    
 	    if (baseDatum.isDefined()) {
 		    for (ma in self.actions.select(aa | aa.results.exists(e | e = baseDatum))) { 
