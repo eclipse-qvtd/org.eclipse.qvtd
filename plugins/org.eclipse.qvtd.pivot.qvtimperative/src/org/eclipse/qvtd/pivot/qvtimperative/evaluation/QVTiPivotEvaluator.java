@@ -32,30 +32,27 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
 {
 	protected final @NonNull MetamodelManager metamodelManager;
 	protected final @NonNull Transformation transformation;
-	protected final @NonNull QVTiEnvironmentFactory envFactory;
-	protected final @NonNull QVTiEnvironment env;
+	protected final @NonNull QVTiEnvironmentFactory environmentFactory;
 	protected final @NonNull QVTiModelManager modelManager;
     private EvaluationMonitor monitor = null;
     private boolean canceled = false;
 
-    public QVTiPivotEvaluator(@NonNull QVTiEnvironmentFactory envFactory, @NonNull Transformation transformation) {
-    	this.envFactory = envFactory;
-    	this.metamodelManager = envFactory.getMetamodelManager();
+    public QVTiPivotEvaluator(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
+    	this.environmentFactory = environmentFactory;
+    	this.metamodelManager = environmentFactory.getMetamodelManager();
     	this.transformation = transformation;
-    	this.env = envFactory.createEnvironment();
-    	QVTiTransformationAnalysis transformationAnalysis = envFactory.createTransformationAnalysis();
+    	QVTiTransformationAnalysis transformationAnalysis = environmentFactory.createTransformationAnalysis();
     	transformationAnalysis.analyzeTransformation(transformation);
-    	this.modelManager = envFactory.createModelManager(transformationAnalysis);
+    	this.modelManager = environmentFactory.createModelManager(transformationAnalysis);
     }
 
     public QVTiPivotEvaluator(@NonNull MetamodelManager metamodelManager, @NonNull Transformation transformation) {
     	this.metamodelManager = metamodelManager;
     	this.transformation = transformation;
-    	this.envFactory = (QVTiEnvironmentFactory) metamodelManager.getEnvironmentFactory();
-    	this.env = envFactory.createEnvironment();
-    	QVTiTransformationAnalysis transformationAnalysis = envFactory.createTransformationAnalysis();
+    	this.environmentFactory = (QVTiEnvironmentFactory) metamodelManager.getEnvironmentFactory();
+     	QVTiTransformationAnalysis transformationAnalysis = environmentFactory.createTransformationAnalysis();
     	transformationAnalysis.analyzeTransformation(transformation);
-    	this.modelManager = envFactory.createModelManager(transformationAnalysis);
+    	this.modelManager = environmentFactory.createModelManager(transformationAnalysis);
     }
 
 	/**
@@ -98,8 +95,8 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
 	}
 
 	public Boolean execute() {
-        IQVTiEvaluationEnvironment evalEnv = envFactory.createEvaluationEnvironment(modelManager, transformation);
-        QVTiEvaluationVisitor visitor = envFactory.createEvaluationVisitor(env, evalEnv);
+        IQVTiEvaluationEnvironment evalEnv = environmentFactory.createEvaluationEnvironment(modelManager, transformation);
+        QVTiEvaluationVisitor visitor = environmentFactory.createEvaluationVisitor(evalEnv);
         return (Boolean) transformation.accept(visitor);
 	}
 
@@ -110,12 +107,8 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
         return monitor != null ? monitor : this;
     }
 
-	public final @NonNull QVTiEnvironment getEnvironment() {
-		return env;
-	}
-
 	public final @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
-		return envFactory;
+		return environmentFactory;
 	}
 
 	public final @NonNull MetamodelManager getMetamodelManager() {

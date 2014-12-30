@@ -34,16 +34,14 @@ public class QVTiVMEvaluationVisitorImpl extends QVTiEvaluationVisitorImpl imple
      * @param evalEnv
      *            the eval env
      */
-    public QVTiVMEvaluationVisitorImpl(@NonNull QVTiVMEnvironment env, @NonNull IQVTiVMEvaluationEnvironment evalEnv) {
-        super(env, evalEnv);
+    public QVTiVMEvaluationVisitorImpl(@NonNull IQVTiVMEvaluationEnvironment evalEnv) {
+        super(evalEnv);
     }
 
     @Override
     public @NonNull IQVTiVMEvaluationVisitor createNestedEvaluator() {
-    	QVTiVMEnvironment vmEnvironment = getEnvironment();
-		QVTiVMEnvironmentFactory factory = vmEnvironment.getEnvironmentFactory();
-		IQVTiVMEvaluationEnvironment nestedEvalEnv = factory.createEvaluationEnvironment(evaluationEnvironment);
-        QVTiVMEvaluationVisitorImpl ne = new QVTiVMEvaluationVisitorImpl(vmEnvironment, nestedEvalEnv);
+		IQVTiVMEvaluationEnvironment nestedEvalEnv = getEnvironmentFactory().createEvaluationEnvironment(evaluationEnvironment);
+        QVTiVMEvaluationVisitorImpl ne = new QVTiVMEvaluationVisitorImpl(nestedEvalEnv);
         return ne;
     }
 
@@ -64,12 +62,12 @@ public class QVTiVMEvaluationVisitorImpl extends QVTiEvaluationVisitorImpl imple
 	public @NonNull IVMEvaluationVisitor<Transformation> getClonedEvaluator() {
 		IQVTiVMEvaluationEnvironment oldEvaluationEnvironment = getEvaluationEnvironment();
 		IQVTiVMEvaluationEnvironment clonedEvaluationEnvironment = oldEvaluationEnvironment.createClonedEvaluationEnvironment();
-		return new QVTiVMEvaluationVisitorImpl(getEnvironment(), clonedEvaluationEnvironment);
+		return new QVTiVMEvaluationVisitorImpl(clonedEvaluationEnvironment);
 	}
 
     @Override
-	public @NonNull QVTiVMEnvironment getEnvironment() {
-		return (QVTiVMEnvironment) super.getEnvironment();
+	public @NonNull QVTiVMEnvironmentFactory getEnvironmentFactory() {
+		return (QVTiVMEnvironmentFactory) environmentFactory;
 	}
 
 	@Override

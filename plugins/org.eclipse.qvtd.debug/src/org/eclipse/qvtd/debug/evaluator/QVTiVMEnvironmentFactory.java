@@ -15,7 +15,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.IVMDebuggerShell;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEnvironmentFactory;
-import org.eclipse.ocl.pivot.Environment;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
@@ -36,23 +35,6 @@ public class QVTiVMEnvironmentFactory extends QVTiEnvironmentFactory implements 
 		super(projectMap, modelManager);
 	}
 
-	@Override
-	public @NonNull QVTiVMEnvironment createEnvironment() {
-		QVTiVMEnvironment result = new QVTiVMEnvironment(this);
-		return result;
-	}
-
-	@Override
-	public @NonNull QVTiVMEnvironment createEnvironment(@NonNull Environment parent) {
-		if (!(parent instanceof QVTiVMEnvironment)) {
-			throw new IllegalArgumentException(
-				"Parent environment must be an OCLVM environment: " + parent); //$NON-NLS-1$
-		}
-		
-		QVTiVMEnvironment result = new QVTiVMEnvironment((QVTiVMEnvironment) parent);
-		return result;
-	}
-
 	public @NonNull IQVTiVMEvaluationEnvironment createEvaluationEnvironment(@NonNull QVTiModelManager modelManager, @NonNull Transformation transformation) {
 		return new QVTiVMRootEvaluationEnvironment(this, modelManager, transformation, ++envId);
 	}
@@ -67,8 +49,8 @@ public class QVTiVMEnvironmentFactory extends QVTiEnvironmentFactory implements 
 		return new QVTiVMNestedEvaluationEnvironment((IQVTiVMEvaluationEnvironment) parent, ++envId, ((IQVTiVMEvaluationEnvironment)parent).getOperation());
 	}
 
-	public @NonNull QVTiVMRootEvaluationVisitor createEvaluationVisitor(@NonNull QVTiVMEnvironment env, @NonNull IQVTiEvaluationEnvironment evalEnv) {
-		return new QVTiVMRootEvaluationVisitor(env, (IQVTiVMEvaluationEnvironment) evalEnv, ClassUtil.nonNullState(shell));
+	public @NonNull QVTiVMRootEvaluationVisitor createEvaluationVisitor(@NonNull IQVTiEvaluationEnvironment evalEnv) {
+		return new QVTiVMRootEvaluationVisitor((IQVTiVMEvaluationEnvironment) evalEnv, ClassUtil.nonNullState(shell));
 	}
 
 	@Override

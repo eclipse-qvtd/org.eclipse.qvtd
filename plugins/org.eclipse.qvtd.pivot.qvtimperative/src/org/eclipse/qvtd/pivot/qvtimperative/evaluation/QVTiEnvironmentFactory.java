@@ -12,7 +12,6 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Environment;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
@@ -25,19 +24,6 @@ public class QVTiEnvironmentFactory extends PivotEnvironmentFactory {
 
 	public QVTiEnvironmentFactory(@Nullable StandaloneProjectMap projectMap, @Nullable ModelManager modelManager) {
 		super(projectMap, modelManager);
-	}
-
-	@Override
-	public @NonNull QVTiEnvironment createEnvironment() {
-		return new QVTiEnvironment(this);
-	}
-
-	@Override
-	public @NonNull QVTiEnvironment createEnvironment(@NonNull Environment parent) {
-		if (!(parent instanceof QVTiEnvironment)) {
-			throw new IllegalArgumentException("Parent environment must be a QVTi environment: " + parent); //$NON-NLS-1$
-		}
-		return new QVTiEnvironment((QVTiEnvironment) parent);
 	}
 
 	@Override
@@ -58,8 +44,8 @@ public class QVTiEnvironmentFactory extends PivotEnvironmentFactory {
 		return new QVTiNestedEvaluationEnvironment(parent);
 	}
 
-	public @NonNull QVTiEvaluationVisitor createEvaluationVisitor(@NonNull QVTiEnvironment env, @NonNull IQVTiEvaluationEnvironment evalEnv) {
-		QVTiEvaluationVisitor visitor = new QVTiEvaluationVisitorImpl(env, evalEnv);
+	public @NonNull QVTiEvaluationVisitor createEvaluationVisitor(@NonNull IQVTiEvaluationEnvironment evalEnv) {
+		QVTiEvaluationVisitor visitor = new QVTiEvaluationVisitorImpl(evalEnv);
         if (isEvaluationTracingEnabled()) {
             // decorate the evaluation visitor with tracing support
         	visitor = new QVTiTracingEvaluationVisitor(visitor);

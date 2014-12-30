@@ -25,15 +25,15 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.EvaluationLogger;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
-import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.qvtd.debug.QVTiDebugPlugin;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironment;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitorImpl;
 import org.eclipse.qvtd.pivot.qvtimperative.util.AbstractWrappingQVTimperativeVisitor;
 
@@ -47,7 +47,7 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 	public @NonNull EvaluationVisitor getClonedEvaluator() {
 		IQVTiVMEvaluationEnvironment oldEvaluationEnvironment = getEvaluationEnvironment();
 		IQVTiVMEvaluationEnvironment clonedEvaluationEnvironment = oldEvaluationEnvironment.createClonedEvaluationEnvironment();
-		return new QVTiEvaluationVisitorImpl(getEnvironment(), clonedEvaluationEnvironment);
+		return new QVTiEvaluationVisitorImpl(clonedEvaluationEnvironment);
 	}
 
 	public abstract int getDepth();
@@ -56,8 +56,8 @@ public abstract class QVTiVMEvaluationVisitor extends AbstractWrappingQVTimperat
 		return delegate.getCompleteEnvironment();
 	}
 
-	public @NonNull QVTiEnvironment getEnvironment() {
-		return (QVTiEnvironment) delegate.getEnvironment();
+	public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
+		return (QVTiEnvironmentFactory) delegate.getEnvironmentFactory();
 	}
 
 	public @NonNull IQVTiVMEvaluationEnvironment getEvaluationEnvironment() {

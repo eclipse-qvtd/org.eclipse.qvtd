@@ -72,8 +72,8 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
      * @param env The environment
      * @param evalEnv The evaluation environment
      */
-    public QVTiAbstractEvaluationVisitor(@NonNull QVTiEnvironment env, @NonNull IQVTiEvaluationEnvironment evalEnv) {
-        super(env, evalEnv, evalEnv.getModelManager());
+    public QVTiAbstractEvaluationVisitor(@NonNull IQVTiEvaluationEnvironment evalEnv) {
+        super(evalEnv, evalEnv.getModelManager());
     }
 
     /* (non-Javadoc)
@@ -91,8 +91,8 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	public abstract @NonNull QVTiEvaluationVisitor createNestedEvaluator();
 
     @Override
-	public @NonNull QVTiEnvironment getEnvironment() {
-		return (QVTiEnvironment) super.getEnvironment();
+	public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
+		return (QVTiEnvironmentFactory) environmentFactory;
 	}
 
 	@Override
