@@ -69,22 +69,22 @@ public class MtcBroker {
 	private static final String OCL_STD_LIB_MODEL_NAME = "oclStdLib";
 	
 	/** The Constant OCL_STD_LIB_URI. */
-	private static final String OCL_STD_LIB_URI = "http://www.eclipse.org/ocl/3.1.0/OCL.oclstdlib.oclas";
+	private static final String OCL_STD_LIB_URI = "http://www.eclipse.org/ocl/2015/Library.oclas";
 	
 	/** The Constant PIVOT_URI. */
-	private static final String PIVOT_URI = "http://www.eclipse.org/ocl/3.1.0/Pivot";
+	private static final String PIVOT_URI = "http://www.eclipse.org/ocl/2015/Pivot";
 	
 	/** The Constant QVTB_URI. */
-	private static final String QVTB_URI ="http://www.eclipse.org/qvt/0.9/QVTbase";
+	private static final String QVTB_URI ="http://www.eclipse.org/qvt/2015/QVTbase";
 	
 	/** The Constant QVTCB_URI. */
-	private static final String QVTCB_URI = "http://www.eclipse.org/qvt/0.9/QVTcoreBase";
+	private static final String QVTCB_URI = "http://www.eclipse.org/qvt/2015/QVTcoreBase";
 	
 	/** The Constant QVTC_URI. */
-	private static final String QVTC_URI = "http://www.eclipse.org/qvt/0.9/QVTcore";
+	private static final String QVTC_URI = "http://www.eclipse.org/qvt/2015/QVTcore";
 	
 	/** The Constant QVTI_URI. */
-	private static final String QVTI_URI = "http://www.eclipse.org/qvt/0.9/QVTimperative";
+	private static final String QVTI_URI = "http://www.eclipse.org/qvt/2015/QVTimperative";
 	
 	/** The Constant QVTC_FULL_NS. */
 	private static final String QVTC_FULL_NS = QVTC_URI + "," + QVTCB_URI + "," + QVTB_URI + "," + PIVOT_URI;
@@ -260,7 +260,7 @@ public class MtcBroker {
 		loadOclStdLibModel();
 		// This could be run on editor saves by reading the imports!
 		createContainmentTrees();
-		cModel = createModel(qvtcasUri, "QVTc", "QVT", QVTC_FULL_NS, true, false, true);
+		cModel = createModel(qvtcasUri, "QVTc", "QVT", QVTC_FULL_NS, true, false, true, false);
 		uModel = qvtcToQvtu(cModel);
 		uModel.setCachingEnabled(true);
 		uModel.clearCache();
@@ -391,7 +391,7 @@ public class MtcBroker {
 	 */
 	protected PivotModel qvtpToQvts(PivotModel pModel) throws QvtMtcExecutionException {
 		PivotModel sModel = null;
-		sModel = createModel(scheduleUri, "QVTs", "", QVTS_FULL_NS, false, true, false);
+		sModel = createModel(scheduleUri, "QVTs", "", QVTS_FULL_NS, false, true, false, false);
 		if (pModel != null && sModel != null  ) {
 			EtlTask etl = null;
 			try {
@@ -509,9 +509,9 @@ public class MtcBroker {
 							loadedUris.add(modelUri);
 							PivotModel mmModel = null;
 							PivotModel treeModel = null;
-							mmModel = createModel(changeResourceToSource(modelUri), "mm", "", ECORE_URI, true, false, true);
+							mmModel = createModel(changeResourceToSource(modelUri), "mm", "", ECORE_URI, true, false, true, false);
 							String cgUri = mmModel.getModelFileUri().trimFileExtension().toString() + "ContainmentTree.xmi";
-							treeModel = createModel(cgUri, "tree", pairs.getKey().toLowerCase()+"Tree", ECORE_CONTAINMENT_URI, false, true, true);
+							treeModel = createModel(cgUri, "tree", pairs.getKey().toLowerCase()+"Tree", ECORE_CONTAINMENT_URI, false, true, true, false);
 							if (mmModel != null && treeModel != null  ) {
 								eol.models.add(mmModel);
 								eol.models.add(treeModel);
@@ -565,7 +565,7 @@ public class MtcBroker {
 	 */
 	protected void loadConfigurationModel() throws QvtMtcExecutionException {
 		
-		configModel = createModel(configUri, CONFIG_MODEL_NAME, "", CONFIG_URI, true, false, true);
+		configModel = createModel(configUri, CONFIG_MODEL_NAME, "", CONFIG_URI, true, false, true, false);
 	}
 	
 	/**
@@ -577,7 +577,7 @@ public class MtcBroker {
 		
 		OCLASResourceFactory.getInstance();
 //        Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap( ).put("oclas", OCLASResourceFactory.getInstance());
-	    oclStdLibModel = createModel(OCL_STD_LIB_URI, OCL_STD_LIB_MODEL_NAME, "", PIVOT_URI, true, false, true);
+		oclStdLibModel = createModel(OCL_STD_LIB_URI, OCL_STD_LIB_MODEL_NAME, "", PIVOT_URI, true, false, true, false);
 	}
 	
 	/**
@@ -656,7 +656,7 @@ public class MtcBroker {
 	 * @throws QvtMtcExecutionException There was an error loading the model
 	 */
 	protected PivotModel createModel(String modeUri, String modelName, String modelAliases, String metamodelUris,
-				boolean readOnLoad, boolean storeOnDispoal, boolean cached) throws QvtMtcExecutionException {
+				boolean readOnLoad, boolean storeOnDispoal, boolean cached, boolean expand) throws QvtMtcExecutionException {
 	
 		PivotModel model = new PivotModel(metamodelManager, false);
 		StringProperties properties = new StringProperties();
@@ -667,7 +667,7 @@ public class MtcBroker {
 		properties.put(EmfModel.PROPERTY_READONLOAD, String.valueOf(readOnLoad));
 		properties.put(EmfModel.PROPERTY_STOREONDISPOSAL, String.valueOf(storeOnDispoal));
 		properties.put(EmfModel.PROPERTY_CACHED, String.valueOf(cached));
-		properties.put(EmfModel.PROPERTY_EXPAND, String.valueOf(false));
+		properties.put(EmfModel.PROPERTY_EXPAND, String.valueOf(expand));
 		try {
 			model.load(properties, "");
 		} catch (EolModelLoadingException e) {
