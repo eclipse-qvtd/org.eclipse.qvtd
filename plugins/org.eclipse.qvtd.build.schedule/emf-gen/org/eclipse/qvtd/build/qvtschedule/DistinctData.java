@@ -13,12 +13,12 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.DistinctData#getTarget <em>Target</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.DistinctData#getPrimaryArguments <em>Primary Arguments</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.DistinctData#getSecondaryArguments <em>Secondary Arguments</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getDistinctData()
  * @model

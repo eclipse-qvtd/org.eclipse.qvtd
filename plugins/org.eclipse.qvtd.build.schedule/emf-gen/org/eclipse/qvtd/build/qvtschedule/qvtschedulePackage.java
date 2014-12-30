@@ -822,13 +822,13 @@ public interface qvtschedulePackage extends EPackage {
 	int PROPERTY_DATUM__CLASS_DATUM = ABSTRACT_DATUM_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Is Opposite</b></em>' attribute.
+	 * The feature id for the '<em><b>Opposite</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_DATUM__IS_OPPOSITE = ABSTRACT_DATUM_FEATURE_COUNT + 2;
+	int PROPERTY_DATUM__OPPOSITE = ABSTRACT_DATUM_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Property Datum</em>' class.
@@ -1272,15 +1272,15 @@ public interface qvtschedulePackage extends EPackage {
 	EReference getPropertyDatum_ClassDatum();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.build.qvtschedule.PropertyDatum#isIsOpposite <em>Is Opposite</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.build.qvtschedule.PropertyDatum#getOpposite <em>Opposite</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Opposite</em>'.
-	 * @see org.eclipse.qvtd.build.qvtschedule.PropertyDatum#isIsOpposite()
+	 * @return the meta object for the reference '<em>Opposite</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.PropertyDatum#getOpposite()
 	 * @see #getPropertyDatum()
 	 * @generated
 	 */
-	EAttribute getPropertyDatum_IsOpposite();
+	EReference getPropertyDatum_Opposite();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.build.qvtschedule.Schedule <em>Schedule</em>}'.
@@ -1636,12 +1636,12 @@ public interface qvtschedulePackage extends EPackage {
 		EReference PROPERTY_DATUM__CLASS_DATUM = eINSTANCE.getPropertyDatum_ClassDatum();
 
 		/**
-		 * The meta object literal for the '<em><b>Is Opposite</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Opposite</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute PROPERTY_DATUM__IS_OPPOSITE = eINSTANCE.getPropertyDatum_IsOpposite();
+		EReference PROPERTY_DATUM__OPPOSITE = eINSTANCE.getPropertyDatum_Opposite();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.ScheduleImpl <em>Schedule</em>}' class.

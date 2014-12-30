@@ -11,10 +11,10 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.MappingAction#getMapping <em>Mapping</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getMappingAction()
  * @model

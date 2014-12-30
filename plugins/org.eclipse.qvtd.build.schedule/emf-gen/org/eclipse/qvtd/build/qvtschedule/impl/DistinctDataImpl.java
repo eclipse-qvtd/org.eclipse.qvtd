@@ -29,13 +29,14 @@ import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
  * An implementation of the model object '<em><b>Distinct Data</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.DistinctDataImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.DistinctDataImpl#getPrimaryArguments <em>Primary Arguments</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.DistinctDataImpl#getSecondaryArguments <em>Secondary Arguments</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

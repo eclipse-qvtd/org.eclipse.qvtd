@@ -4,18 +4,12 @@ package org.eclipse.qvtd.build.qvtschedule.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EcoreUtil;
-
 import org.eclipse.ocl.pivot.Variable;
-
 import org.eclipse.qvtd.build.qvtschedule.AbstractDatum;
 import org.eclipse.qvtd.build.qvtschedule.DataParameter;
 import org.eclipse.qvtd.build.qvtschedule.DistinctData;
@@ -26,7 +20,9 @@ import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
  * An implementation of the model object '<em><b>Data Parameter</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.DataParameterImpl#isIsLoop <em>Is Loop</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.DataParameterImpl#getVariable <em>Variable</em>}</li>
@@ -34,7 +30,6 @@ import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.DataParameterImpl#getSecondaryDistinctData <em>Secondary Distinct Data</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.DataParameterImpl#getDatum <em>Datum</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -125,7 +120,7 @@ public class DataParameterImpl extends MinimalEObjectImpl.Container implements D
 	 * @generated
 	 */
 	public Variable getVariable() {
-		if (variable != null && ((EObject)variable).eIsProxy()) {
+		if (variable != null && variable.eIsProxy()) {
 			InternalEObject oldVariable = (InternalEObject)variable;
 			variable = (Variable)eResolveProxy(oldVariable);
 			if (variable != oldVariable) {
