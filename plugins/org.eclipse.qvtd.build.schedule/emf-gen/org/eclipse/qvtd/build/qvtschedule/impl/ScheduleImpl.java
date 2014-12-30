@@ -26,12 +26,13 @@ import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
  * An implementation of the model object '<em><b>Schedule</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.ScheduleImpl#getDatums <em>Datums</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.ScheduleImpl#getActions <em>Actions</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

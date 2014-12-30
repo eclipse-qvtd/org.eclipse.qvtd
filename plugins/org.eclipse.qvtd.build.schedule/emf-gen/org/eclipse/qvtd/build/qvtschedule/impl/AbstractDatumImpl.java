@@ -26,7 +26,9 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
  * An implementation of the model object '<em><b>Abstract Datum</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractDatumImpl#getSuper <em>Super</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractDatumImpl#getDomain <em>Domain</em>}</li>
@@ -35,7 +37,6 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractDatumImpl#getSchedule <em>Schedule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractDatumImpl#getDataParameter <em>Data Parameter</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

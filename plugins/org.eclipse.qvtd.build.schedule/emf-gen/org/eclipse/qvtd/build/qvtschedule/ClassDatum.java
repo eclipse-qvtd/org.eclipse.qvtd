@@ -3,7 +3,6 @@
 package org.eclipse.qvtd.build.qvtschedule;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.ocl.examples.pivot.Type;
 
 
 /**
@@ -13,11 +12,11 @@ import org.eclipse.ocl.examples.pivot.Type;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.ClassDatum#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.ClassDatum#getPropertyDatums <em>Property Datums</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getClassDatum()
  * @model
@@ -34,12 +33,12 @@ public interface ClassDatum extends AbstractDatum {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' reference.
-	 * @see #setType(Type)
+	 * @see #setType(org.eclipse.ocl.pivot.Class)
 	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getClassDatum_Type()
 	 * @model required="true" derived="true"
 	 * @generated
 	 */
-	Type getType();
+	org.eclipse.ocl.pivot.Class getType();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.build.qvtschedule.ClassDatum#getType <em>Type</em>}' reference.
@@ -49,7 +48,7 @@ public interface ClassDatum extends AbstractDatum {
 	 * @see #getType()
 	 * @generated
 	 */
-	void setType(Type value);
+	void setType(org.eclipse.ocl.pivot.Class value);
 
 	/**
 	 * Returns the value of the '<em><b>Property Datums</b></em>' containment reference list.

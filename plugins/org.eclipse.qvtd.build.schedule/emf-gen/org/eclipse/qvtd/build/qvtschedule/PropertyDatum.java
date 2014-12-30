@@ -2,7 +2,6 @@
  */
 package org.eclipse.qvtd.build.qvtschedule;
 
-import org.eclipse.ocl.examples.pivot.Property;
 
 /**
  * <!-- begin-user-doc -->
@@ -11,12 +10,12 @@ import org.eclipse.ocl.examples.pivot.Property;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.PropertyDatum#getProperty <em>Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.PropertyDatum#getClassDatum <em>Class Datum</em>}</li>
- *   <li>{@link org.eclipse.qvtd.build.qvtschedule.PropertyDatum#isIsOpposite <em>Is Opposite</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.build.qvtschedule.PropertyDatum#getOpposite <em>Opposite</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getPropertyDatum()
  * @model
@@ -32,12 +31,12 @@ public interface PropertyDatum extends AbstractDatum {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Property</em>' reference.
-	 * @see #setProperty(Property)
+	 * @see #setProperty(org.eclipse.ocl.pivot.Property)
 	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getPropertyDatum_Property()
 	 * @model required="true"
 	 * @generated
 	 */
-	Property getProperty();
+	org.eclipse.ocl.pivot.Property getProperty();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.build.qvtschedule.PropertyDatum#getProperty <em>Property</em>}' reference.
@@ -47,7 +46,7 @@ public interface PropertyDatum extends AbstractDatum {
 	 * @see #getProperty()
 	 * @generated
 	 */
-	void setProperty(Property value);
+	void setProperty(org.eclipse.ocl.pivot.Property value);
 
 	/**
 	 * Returns the value of the '<em><b>Class Datum</b></em>' container reference.
@@ -78,30 +77,29 @@ public interface PropertyDatum extends AbstractDatum {
 	void setClassDatum(ClassDatum value);
 
 	/**
-	 * Returns the value of the '<em><b>Is Opposite</b></em>' attribute.
-	 * The default value is <code>"false"</code>.
+	 * Returns the value of the '<em><b>Opposite</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Is Opposite</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Opposite</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Is Opposite</em>' attribute.
-	 * @see #setIsOpposite(boolean)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getPropertyDatum_IsOpposite()
-	 * @model default="false"
+	 * @return the value of the '<em>Opposite</em>' reference.
+	 * @see #setOpposite(PropertyDatum)
+	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getPropertyDatum_Opposite()
+	 * @model
 	 * @generated
 	 */
-	boolean isIsOpposite();
+	PropertyDatum getOpposite();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.build.qvtschedule.PropertyDatum#isIsOpposite <em>Is Opposite</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.build.qvtschedule.PropertyDatum#getOpposite <em>Opposite</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Is Opposite</em>' attribute.
-	 * @see #isIsOpposite()
+	 * @param value the new value of the '<em>Opposite</em>' reference.
+	 * @see #getOpposite()
 	 * @generated
 	 */
-	void setIsOpposite(boolean value);
+	void setOpposite(PropertyDatum value);
 
 } // PropertyDatum

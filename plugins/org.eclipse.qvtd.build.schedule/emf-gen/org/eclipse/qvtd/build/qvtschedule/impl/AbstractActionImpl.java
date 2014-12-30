@@ -25,7 +25,9 @@ import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
  * An implementation of the model object '<em><b>Abstract Action</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractActionImpl#getResults <em>Results</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractActionImpl#getDistinctArguments <em>Distinct Arguments</em>}</li>
@@ -35,7 +37,6 @@ import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractActionImpl#getArguments <em>Arguments</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractActionImpl#getSchedule <em>Schedule</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

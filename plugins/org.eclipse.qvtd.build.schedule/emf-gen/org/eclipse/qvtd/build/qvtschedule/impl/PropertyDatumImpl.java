@@ -4,17 +4,10 @@ package org.eclipse.qvtd.build.qvtschedule.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EcoreUtil;
-
-import org.eclipse.ocl.examples.pivot.Property;
-
 import org.eclipse.qvtd.build.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.build.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
@@ -24,13 +17,14 @@ import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
  * An implementation of the model object '<em><b>Property Datum</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.PropertyDatumImpl#getProperty <em>Property</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.PropertyDatumImpl#getClassDatum <em>Class Datum</em>}</li>
- *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.PropertyDatumImpl#isIsOpposite <em>Is Opposite</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.PropertyDatumImpl#getOpposite <em>Opposite</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -43,26 +37,17 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * @generated
 	 * @ordered
 	 */
-	protected Property property;
+	protected org.eclipse.ocl.pivot.Property property;
 
 	/**
-	 * The default value of the '{@link #isIsOpposite() <em>Is Opposite</em>}' attribute.
+	 * The cached value of the '{@link #getOpposite() <em>Opposite</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isIsOpposite()
+	 * @see #getOpposite()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean IS_OPPOSITE_EDEFAULT = false;
-	/**
-	 * The cached value of the '{@link #isIsOpposite() <em>Is Opposite</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isIsOpposite()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean isOpposite = IS_OPPOSITE_EDEFAULT;
+	protected PropertyDatum opposite;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -88,10 +73,10 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Property getProperty() {
-		if (property != null && ((EObject)property).eIsProxy()) {
+	public org.eclipse.ocl.pivot.Property getProperty() {
+		if (property != null && property.eIsProxy()) {
 			InternalEObject oldProperty = (InternalEObject)property;
-			property = (Property)eResolveProxy(oldProperty);
+			property = (org.eclipse.ocl.pivot.Property)eResolveProxy(oldProperty);
 			if (property != oldProperty) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, qvtschedulePackage.PROPERTY_DATUM__PROPERTY, oldProperty, property));
@@ -105,7 +90,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Property basicGetProperty() {
+	public org.eclipse.ocl.pivot.Property basicGetProperty() {
 		return property;
 	}
 
@@ -114,8 +99,8 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setProperty(Property newProperty) {
-		Property oldProperty = property;
+	public void setProperty(org.eclipse.ocl.pivot.Property newProperty) {
+		org.eclipse.ocl.pivot.Property oldProperty = property;
 		property = newProperty;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, qvtschedulePackage.PROPERTY_DATUM__PROPERTY, oldProperty, property));
@@ -167,8 +152,16 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isIsOpposite() {
-		return isOpposite;
+	public PropertyDatum getOpposite() {
+		if (opposite != null && opposite.eIsProxy()) {
+			InternalEObject oldOpposite = (InternalEObject)opposite;
+			opposite = (PropertyDatum)eResolveProxy(oldOpposite);
+			if (opposite != oldOpposite) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, qvtschedulePackage.PROPERTY_DATUM__OPPOSITE, oldOpposite, opposite));
+			}
+		}
+		return opposite;
 	}
 
 	/**
@@ -176,11 +169,20 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setIsOpposite(boolean newIsOpposite) {
-		boolean oldIsOpposite = isOpposite;
-		isOpposite = newIsOpposite;
+	public PropertyDatum basicGetOpposite() {
+		return opposite;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOpposite(PropertyDatum newOpposite) {
+		PropertyDatum oldOpposite = opposite;
+		opposite = newOpposite;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, qvtschedulePackage.PROPERTY_DATUM__IS_OPPOSITE, oldIsOpposite, isOpposite));
+			eNotify(new ENotificationImpl(this, Notification.SET, qvtschedulePackage.PROPERTY_DATUM__OPPOSITE, oldOpposite, opposite));
 	}
 
 	/**
@@ -240,8 +242,9 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 				return basicGetProperty();
 			case qvtschedulePackage.PROPERTY_DATUM__CLASS_DATUM:
 				return getClassDatum();
-			case qvtschedulePackage.PROPERTY_DATUM__IS_OPPOSITE:
-				return isIsOpposite();
+			case qvtschedulePackage.PROPERTY_DATUM__OPPOSITE:
+				if (resolve) return getOpposite();
+				return basicGetOpposite();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -255,13 +258,13 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case qvtschedulePackage.PROPERTY_DATUM__PROPERTY:
-				setProperty((Property)newValue);
+				setProperty((org.eclipse.ocl.pivot.Property)newValue);
 				return;
 			case qvtschedulePackage.PROPERTY_DATUM__CLASS_DATUM:
 				setClassDatum((ClassDatum)newValue);
 				return;
-			case qvtschedulePackage.PROPERTY_DATUM__IS_OPPOSITE:
-				setIsOpposite((Boolean)newValue);
+			case qvtschedulePackage.PROPERTY_DATUM__OPPOSITE:
+				setOpposite((PropertyDatum)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -276,13 +279,13 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case qvtschedulePackage.PROPERTY_DATUM__PROPERTY:
-				setProperty((Property)null);
+				setProperty((org.eclipse.ocl.pivot.Property)null);
 				return;
 			case qvtschedulePackage.PROPERTY_DATUM__CLASS_DATUM:
 				setClassDatum((ClassDatum)null);
 				return;
-			case qvtschedulePackage.PROPERTY_DATUM__IS_OPPOSITE:
-				setIsOpposite(IS_OPPOSITE_EDEFAULT);
+			case qvtschedulePackage.PROPERTY_DATUM__OPPOSITE:
+				setOpposite((PropertyDatum)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -300,26 +303,10 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 				return property != null;
 			case qvtschedulePackage.PROPERTY_DATUM__CLASS_DATUM:
 				return getClassDatum() != null;
-			case qvtschedulePackage.PROPERTY_DATUM__IS_OPPOSITE:
-				return isOpposite != IS_OPPOSITE_EDEFAULT;
+			case qvtschedulePackage.PROPERTY_DATUM__OPPOSITE:
+				return opposite != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (isOpposite: ");
-		result.append(isOpposite);
-		result.append(')');
-		return result.toString();
 	}
 
 } //PropertyDatumImpl

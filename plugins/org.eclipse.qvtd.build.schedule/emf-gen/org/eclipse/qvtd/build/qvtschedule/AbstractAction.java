@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getResults <em>Results</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getDistinctArguments <em>Distinct Arguments</em>}</li>
@@ -22,7 +23,6 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getArguments <em>Arguments</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getSchedule <em>Schedule</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractAction()
  * @model abstract="true"
