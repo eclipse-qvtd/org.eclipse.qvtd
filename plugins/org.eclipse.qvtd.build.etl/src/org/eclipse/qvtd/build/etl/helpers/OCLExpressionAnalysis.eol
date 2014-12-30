@@ -54,10 +54,12 @@ operation QVT!OCLExpression fixVarReferences(v : QVT!Variable) {
             } 
         } 
     } else if (self.isKindOf(QVT!LiteralExp)) {
-      // Noting to fix
+		// Nothing to fix
     } else if (self.isKindOf(QVT!IteratorExp)) {
         self.ownedBody.fixVarReferences(v);
         self.ownedSource.fixVarReferences(v);
+    } else if (self.isKindOf(QVT!TypeExp)) {
+    	// Nothing to fix	
     } else {
         self.println();
         throw "Error! Add fixVarReference() for " + self.type();
