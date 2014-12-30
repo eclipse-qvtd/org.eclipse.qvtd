@@ -137,7 +137,7 @@ operation QVT!Transformation getMiddleTypedModel() : QVT!TypedModel {
 @cached
 operation QVT!Variable oppositePattern() : QVT!CorePattern  {
     
-    return self.owningModel().getAllOfKind("CorePattern").selectOne(p | p.variable.includes(self));
+    return self.owningModel().getAllOfType("GuardPattern").selectOne(p | p.variable.includes(self));
 }
 
 @cached

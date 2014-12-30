@@ -87,7 +87,6 @@ rule VariableToDataParameter
     transform v : QVTp!Variable
     to dd : QVTs!DistinctData, dp : QVTs!DataParameter {
         
-        //v.name.println("v ");
         dp.variable = v;
         dp.datum ::= v.type;
         dd.primaryArguments.add(dp);
@@ -100,12 +99,12 @@ rule TypeToClassDatum
     transform t : QVTp!Type
     to d : QVTs!ClassDatum {
                          
-        guard : QVTp!Variable.all().exists(v | v.type == t)
+        guard : t.existsCorePatternVariable()
         
-        var domain = t.getVariableForType().oppositePattern().area; 
+        var domain = t.getCorePatternVariable().oppositePattern().area; 
         //t.name.println("TypeToDatum ");
         d.type = t;
-        d.super.addAll(t.superClass.equivalent());
+        d.super.addAll(t.superClasses.equivalent());
         d.domain = domain;
         d.schedule ::= domain.`rule`.transformation;    
     }
@@ -170,8 +169,8 @@ operation QVTs!PropertyDatum updatePropertyDatum(domain : QVTp!Domain, context: 
 		self.property = prop;
 	    self.classDatum = classDatum;
 	    if (self.classDatum.isDefined() and
-	    	context <> prop.owningType) { // Propagate to supertypes as long as the context is not the property owner
-		    for (superClass in context.superClass) {
+	    	context <> prop.owningClass) { // Propagate to supertypes as long as the context is not the property owner
+		    for (superClass in context.superClasses) {
 		    	if (prop.propertyDatumNotCreated(superClass)) {
 			    	var superPropDatum = new QVTs!PropertyDatum;
 			    	self.super.add(superPropDatum);    	    	
@@ -190,11 +189,11 @@ operation QVTs!PropertyDatum updatePropertyDatum(domain : QVTp!Domain, context: 
 operation QVTs!PropertyDatum createOppositePropDatum(isAssignment : Boolean) {
 	var oppProp = self.property.opposite;
     if (oppProp.isDefined()) {
-    	var oppositePropDatum = oppProp.getPropertyDatum(oppProp.owningType);
+    	var oppositePropDatum = oppProp.getPropertyDatum(oppProp.owningClass);
     	if (oppositePropDatum.isUndefined()) {
     		oppositePropDatum = new QVTs!PropertyDatum;
 	    	oppositePropDatum.updatePropertyDatum(null, 
-    		oppProp.owningType, 
+    		oppProp.owningClass, 
     		oppProp);
     	}
     	if (isAssignment) {
@@ -219,11 +218,11 @@ operation QVTp!Property getPropertyDatum(context : QVTp!Type) {
 }
 
 operation QVTp!PropertyCallExp getPropertyDatum() : QVTs!PropertyDatum {
-	return self.referredProperty.getPropertyDatum(self.source.type);
+	return self.referredProperty.getPropertyDatum(self.ownedSource.type);
 } 
 
 operation QVTp!OppositePropertyCallExp getPropertyDatum() : QVTs!PropertyDatum {
-	return self.referredProperty.opposite.getPropertyDatum(self.source.type);
+	return self.referredProperty.opposite.getPropertyDatum(self.ownedSource.type);
 }
 
 operation QVTp!PropertyAssignment getPropertyDatum() : QVTs!PropertyDatum {
@@ -231,13 +230,18 @@ operation QVTp!PropertyAssignment getPropertyDatum() : QVTs!PropertyDatum {
 }
 
 @cached
-operation QVTp!Type getVariableForType() : QVTp!Variable {
-    return QVTp!Variable.all().selectOne(v | v.type == self or v.type.superClass.includes(self)); -- FIXME what about superClasses of superClasses ?
+operation QVTp!Type existsCorePatternVariable() : Boolean {
+	return self.getCorePatternVariable().isDefined();
+}
+
+@cached
+operation QVTp!Type getCorePatternVariable() : QVTp!Variable {
+    return QVTp!Variable.all().selectOne(v | v.eContainer().isKindOf(QVTp!CorePattern) and v.type.asSequence().closure(x | x.superClasses).including(v.type).includes(self));
 }
 
 @cached
 operation QVTp!OCLExpression getSourceVariable() : QVTp!Variable {
-    -- return self.asSequence().closure(x | if x.isKindOf(QVTp!CallExp) x.source else Collection{}).one(x | x.isKindOf(QVTp!VariableExp).variable;
+    -- return self.asSequence().closure(x | if x.isKindOf(QVTp!CallExp) x.ownedSource else Collection{}).one(x | x.isKindOf(QVTp!VariableExp).variable;
     var exp = self;
 	while (true) {
 		if (exp.isKindOf(QVTp!VariableExp)) {
@@ -246,7 +250,7 @@ operation QVTp!OCLExpression getSourceVariable() : QVTp!Variable {
 		if (not exp.isKindOf(QVTp!CallExp)) {
 			return null;
 		}
-		exp = exp.source;
+		exp = exp.ownedSource;
 	}
 }
 
@@ -267,7 +271,7 @@ operation QVTp!Mapping getPropertyAccesses() : Collection {
 
 @cached
 operation QVTp!CallExp getContextType() : QVTp!Type {
-	return self.source.type;
+	return self.ownedSource.type;
 }
 
 @cached

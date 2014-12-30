@@ -23,10 +23,24 @@ rule ImperativeModel
     {
         
         mOut.externalURI = mIn.externalURI.replace(".qvtp.qvti", ".qvti");
-        mOut.nestedPackage.addAll(mIn.nestedPackage.equivalent());
+        mOut.ownedPackages.addAll(mIn.ownedPackages.equivalent());
         // Copy the OCL types package
-        //mOut.nestedPackage.add(emfTool.getEcoreUtil().copy(mIn.nestedPackage.selectOne(p | p.isTypeOf(QVTp!Package))));
+        //mOut.ownedPackages.add(emfTool.getEcoreUtil().copy(mIn.ownedPackages.selectOne(p | p.isTypeOf(QVTp!Package))));
     }
+
+rule Packages 
+	transform s : QVTp!Package
+	to t : QVTi!Package 
+	extends NamedElements
+	{
+	
+	-- We only want to copy the package containing the transformation
+	guard : s.ownedClasses.exists(x | x.isKindOf(QVTp!Transformation))
+	 
+	t.nsPrefix = s.nsPrefix;
+	t.URI = s.URI;
+	t.ownedClasses ::= s.ownedClasses;
+}
 
 @abstract
 rule NamedElements
@@ -238,7 +252,7 @@ rule Variables
         			   (not varContainer.isKindOf(QVTp!ExpressionInOCL));
          }
         
-        vOut.implicit = vIn.implicit;
+        vOut.isImplicit = vIn.isImplicit;
         vOut.type = vIn.type;
     }
     
@@ -248,7 +262,7 @@ rule RealizedVariables
     extends NamedElements
     {
 
-        vOut.implicit = vIn.implicit;
+        vOut.isImplicit = vIn.isImplicit;
         vOut.type = vIn.type;
     }
 
@@ -273,21 +287,21 @@ rule DistinctData
         var it = new QVTi!Variable;
         it.name = dd.primaryArguments.first().variable.name;
         it.type = dd.primaryArguments.first().variable.type;
-        loop.iterator.add(it);
+        loop.ownedIterators.add(it);
         var exp = new QVTi!OperationCallExp;
         exp.referredOperation = getOclElementAllInstancesOp();
-        exp.source = new QVTi!TypeExp;
-        exp.source.referredType = dd.primaryArguments.first().variable.type;
-        exp.source.type = dd.primaryArguments.first().variable.type;
+        exp.ownedSource = new QVTi!TypeExp;
+        exp.ownedSource.referredType = dd.primaryArguments.first().variable.type;
+        exp.ownedSource.type = dd.primaryArguments.first().variable.type;
         exp.type = exp.referredOperation.type;
-        loop.source = exp;
+        loop.ownedSource = exp;
         // TODO what happens with multiple Distinct Datas?
-        loop.body = new QVTi!MappingSequence;
-        loop.body.mappingStatements.add(dd.target.equivalent());
+        loop.ownedBody = new QVTi!MappingSequence;
+        loop.ownedBody.mappingStatements.add(dd.target.equivalent());
         // To make loops nest, only one loop can be added. Which? The next one with the most secondary arguments
         var nextDD = dd.getNextDistinctData();
         if (nextDD <> null) {
-            loop.body.mappingStatements.add(nextDD.equivalent());
+            loop.ownedBody.mappingStatements.add(nextDD.equivalent());
         }        
     }
     
@@ -299,7 +313,7 @@ rule PrimaryDataParameter
         guard : dp.primaryDistinctData.isDefined()
         
         //dp.primaryDistinctData.target.mapping.name.println("PrimaryDataParameter ");
-        var it = dp.primaryDistinctData.equivalent().iterator.first();
+        var it = dp.primaryDistinctData.equivalent().ownedIterators.first();
         //it.name.println("primaryVar ");
         cb.boundVariable ::= dp.variable.getSameVariable();
         cb.value = new QVTi!VariableExp;
@@ -334,9 +348,9 @@ rule SecondaryDataParameter
         cb.value = new QVTi!PropertyCallExp;
         cb.value.referredProperty = prop;
         cb.value.type = prop.type;
-        cb.value.source = new QVTi!VariableExp;
-        cb.value.source.referredVariable = refVar;
-        cb.value.source.type = refVar.type;   
+        cb.value.ownedSource = new QVTi!VariableExp;
+        cb.value.ownedSource.referredVariable = refVar;
+        cb.value.ownedSource.type = refVar.type;   
         cb.mappingCall ::= dp.secondaryDistinctData.target;
     }
 
@@ -368,7 +382,7 @@ rule SecondarySecondaryDataParameter
                 //prop.name.println("prop ");
                 cb.value.referredProperty = prop;
                 cb.value.type = prop.type;
-                cb.value.source = emfTool.getEcoreUtil().copy(sa.equivalent().value);
+                cb.value.ownedSource = emfTool.getEcoreUtil().copy(sa.equivalent().value);
                 break;
 	        } 
         }
@@ -383,7 +397,7 @@ rule SecondarySecondaryDataParameter
 	                //prop.name.println("prop ");
 	                cb.value.referredProperty = prop;
 	                cb.value.type = prop.type;
-	                cb.value.source = emfTool.getEcoreUtil().copy(sa.equivalent().value);
+	                cb.value.ownedSource = emfTool.getEcoreUtil().copy(sa.equivalent().value);
 	                break;
                }
             }
