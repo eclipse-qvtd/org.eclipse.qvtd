@@ -8,6 +8,7 @@
  * Contributors:
  *   E.D.Willink - initial API and implementation
  * 	 E.D.Willink (Obeo) - Bug 416287 - tuple-valued constraints
+ *   Adolfo Sanchez-Barbudo Herrera (University of York) - Bug 456371
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcorebase.as2cs;
 
@@ -42,7 +43,6 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.RootPackageCS;
 import org.eclipse.ocl.xtext.essentialocl.as2cs.EssentialOCLDeclarationVisitor;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
-import org.eclipse.ocl.xtext.essentialoclcs.InfixExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -219,8 +219,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		csAssignment.setPivot(asPropertyAssignment);
 		ExpCS csSlotExp = createExpCS(asPropertyAssignment.getSlotExpression());
 		NameExpCS csPropName = createNameExpCS(asPropertyAssignment.getTargetProperty());
-		InfixExpCS csTargetExp =  createInfixExpCS(csSlotExp, ".", csPropName);
-		csAssignment.setTarget(csTargetExp);
+		csAssignment.setTarget(createInfixExpCS(csSlotExp, ".", csPropName));
 		csAssignment.setInitialiser(createExpCS(asPropertyAssignment.getValue()));
 		csAssignment.setDefault(asPropertyAssignment.isIsDefault());
 		return csAssignment;
