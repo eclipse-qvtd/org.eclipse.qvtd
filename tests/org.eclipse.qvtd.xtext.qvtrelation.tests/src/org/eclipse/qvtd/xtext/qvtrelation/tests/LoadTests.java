@@ -14,8 +14,8 @@ import java.io.IOException;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.internal.OCL;
 import org.eclipse.ocl.pivot.resource.ProjectMap;
+import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtrelation.QVTrelationStandaloneSetup;

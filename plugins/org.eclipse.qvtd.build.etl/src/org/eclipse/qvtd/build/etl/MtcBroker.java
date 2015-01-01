@@ -575,8 +575,8 @@ public class MtcBroker {
 	 */
 	protected void loadOclStdLibModel() throws QvtMtcExecutionException {
 		
-		OCLASResourceFactory.INSTANCE.getClass();
-        Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap( ).put("oclas", OCLASResourceFactory.INSTANCE);
+		OCLASResourceFactory.getInstance();
+//        Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap( ).put("oclas", OCLASResourceFactory.getInstance());
 	    oclStdLibModel = createModel(OCL_STD_LIB_URI, OCL_STD_LIB_MODEL_NAME, "", PIVOT_URI, true, false, true);
 	}
 	

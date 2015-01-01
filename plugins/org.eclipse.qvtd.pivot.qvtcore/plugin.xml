@@ -47,6 +47,12 @@
          </describer>
       </content-type>
    </extension>
+
+  <extension point="org.eclipse.ocl.pivot.as_resource_factory">
+     <factory class="org.eclipse.qvtd.pivot.qvtcore.utilities.QVTcoreASResourceFactory"
+     	extension="qvtcore" contentType="org.eclipse.qvtd.qvtcore"/>
+  </extension>
+
    <extension point="org.eclipse.team.core.fileTypes">
       <fileTypes extension="qvtcas" type="text" />
    </extension>

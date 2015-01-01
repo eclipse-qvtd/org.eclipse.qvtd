@@ -38,7 +38,7 @@ public class QVTrelationPivotStandaloneSetup //implements ISetup
 	public static void init() {
 		QVTtemplatePivotStandaloneSetup.doSetup();
 		QVTrelationPivotScoping.init();
-		QVTrelationASResourceFactory.INSTANCE.getClass();
+		QVTrelationASResourceFactory.getInstance();
 		QVTrelationToStringVisitor.FACTORY.getClass();
 	}
 	

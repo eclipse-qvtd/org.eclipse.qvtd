@@ -8,11 +8,6 @@
 
 <plugin>
 
-  <extension point="org.eclipse.team.core.fileTypes">
-    <!-- @generated QVTrelation NOT -->
-    <fileTypes extension="qvtras" type="text" />
-  </extension>
-
    <extension point="org.eclipse.emf.ecore.extension_parser">
       <parser type="qvtras"
             class="org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationASResourceFactory"/>
@@ -49,6 +44,12 @@
          </describer>
       </content-type>
    </extension>
+
+  <extension point="org.eclipse.ocl.pivot.as_resource_factory">
+     <factory class="org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationASResourceFactory"
+     	extension="qvtrelation" contentType="org.eclipse.qvtd.qvtrelation"/>
+  </extension>
+
    <extension point="org.eclipse.team.core.fileTypes">
       <fileTypes extension="qvtras" type="text" />
    </extension>

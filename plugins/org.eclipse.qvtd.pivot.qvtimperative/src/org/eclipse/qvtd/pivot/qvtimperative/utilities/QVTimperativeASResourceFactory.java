@@ -10,11 +10,17 @@
  */
 package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
+import java.util.Map;
+
 import org.eclipse.emf.ecore.resource.ContentHandler;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrintVisitor;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
+import org.eclipse.ocl.pivot.internal.resource.ASResourceFactory;
 import org.eclipse.ocl.pivot.internal.resource.ASSaver;
 import org.eclipse.ocl.pivot.internal.resource.AbstractASResourceFactory;
 import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
@@ -33,7 +39,25 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 public class QVTimperativeASResourceFactory extends AbstractASResourceFactory
 {
 	public static final @NonNull String FILE_EXTENSION = "qvtias";
-	public static final @NonNull QVTimperativeASResourceFactory INSTANCE = new QVTimperativeASResourceFactory();
+
+	private static @Nullable QVTimperativeASResourceFactory INSTANCE = null;
+
+	public static synchronized @NonNull QVTimperativeASResourceFactory getInstance() {
+		if (INSTANCE == null) {
+			Map<String, Object> extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
+			Object object = extensionToFactoryMap.get(FILE_EXTENSION);
+			if (object instanceof Resource.Factory.Descriptor) {
+				INSTANCE = (QVTimperativeASResourceFactory) ((Resource.Factory.Descriptor)object).createFactory();	// Create the registered singleton
+			}
+			else {
+				INSTANCE = new QVTimperativeASResourceFactory();													// Create our own singleton
+			}
+			assert INSTANCE != null;
+			INSTANCE.install(null,  null);
+		}
+		assert INSTANCE != null;
+		return INSTANCE;
+	}
 
 	private static final @NonNull ContentHandler CONTENT_HANDLER = new RootXMLContentHandlerImpl(
 		QVTimperativePackage.eCONTENT_TYPE, new String[]{FILE_EXTENSION},
@@ -47,7 +71,13 @@ public class QVTimperativeASResourceFactory extends AbstractASResourceFactory
 	 * Creates an instance of the resource factory.
 	 */
 	public QVTimperativeASResourceFactory() {
-		super(QVTimperativePackage.eCONTENT_TYPE, FILE_EXTENSION);
+		super(QVTimperativePackage.eCONTENT_TYPE);
+	}
+
+	@Override
+	public void configure(@NonNull ResourceSet resourceSet) {
+		Resource.Factory.Registry resourceFactoryRegistry = resourceSet.getResourceFactoryRegistry();
+		resourceFactoryRegistry.getExtensionToFactoryMap().put(FILE_EXTENSION, this);
 	}
 
 	@Override
@@ -83,5 +113,10 @@ public class QVTimperativeASResourceFactory extends AbstractASResourceFactory
 	@Override
 	public @NonNull ToStringVisitor createToStringVisitor(@NonNull StringBuilder s) {
 		return new QVTimperativeToStringVisitor(s);
+	}
+
+	@Override
+	public @NonNull ASResourceFactory getASResourceFactory() {
+		return getInstance();
 	}
 }

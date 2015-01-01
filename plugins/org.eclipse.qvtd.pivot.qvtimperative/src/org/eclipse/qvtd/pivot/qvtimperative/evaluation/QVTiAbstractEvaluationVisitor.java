@@ -12,7 +12,9 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.OCLExpression;
@@ -372,12 +374,21 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
             			} finally {
             				if (value != null) {
             					// Unbox to assign to ecore type
-                        		Object unboxedValue = metamodelManager.getIdResolver().unboxedValueOf(value);
-                        		Property p = propertyAssignment.getTargetProperty();
-                                p.initValue((EObject) slotBinding, unboxedValue);
+            					Class<?> instanceClass = null;
+            					Property targetProperty = propertyAssignment.getTargetProperty();
+        						EObject eTarget = targetProperty.getETarget();
+        						if (eTarget instanceof EStructuralFeature) {
+                					EClassifier eType = ((EStructuralFeature)eTarget).getEType();
+									if (eType != null) {
+										instanceClass = eType.getInstanceClass();
+									}
+        						}
+                        		Object ecoreValue = metamodelManager.getIdResolver().ecoreValueOf(instanceClass, value);
+                        		Property p = targetProperty;
+                                p.initValue((EObject) slotBinding, ecoreValue);
         						Integer cacheIndex = propertyAssignment.getCacheIndex();
         						if (cacheIndex != null) {
-        							getModelManager().setMiddleOpposite(cacheIndex, slotBinding, unboxedValue);
+        							getModelManager().setMiddleOpposite(cacheIndex, slotBinding, ecoreValue);
         						}
             				}
             			}

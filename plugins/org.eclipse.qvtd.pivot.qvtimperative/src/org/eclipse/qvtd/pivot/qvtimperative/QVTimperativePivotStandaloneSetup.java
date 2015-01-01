@@ -40,7 +40,7 @@ public class QVTimperativePivotStandaloneSetup
 	public static void init() {
 		QVTcoreBasePivotStandaloneSetup.doSetup();
 		QVTimperativePivotScoping.init();
-		QVTimperativeASResourceFactory.INSTANCE.getClass();
+		QVTimperativeASResourceFactory.getInstance();
 		QVTimperativeToStringVisitor.FACTORY.getClass();
 	}
 	

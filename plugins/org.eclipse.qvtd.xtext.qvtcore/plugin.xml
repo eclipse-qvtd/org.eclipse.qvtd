@@ -45,6 +45,7 @@
             type="qvtccs"
             class="org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSResourceFactoryImpl"/>
    </extension>
+
    <extension point="org.eclipse.team.core.fileTypes">
       <fileTypes extension="qvtc" type="text" />
    </extension>

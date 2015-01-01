@@ -37,7 +37,7 @@ public class QVTcorePivotStandaloneSetup //implements ISetup
 
 	public static void init() {
 		QVTcoreBasePivotStandaloneSetup.doSetup();
-		QVTcoreASResourceFactory.INSTANCE.getClass();
+		QVTcoreASResourceFactory.getInstance();
 		QVTcorePivotScoping.init();
 		QVTcoreToStringVisitor.FACTORY.getClass();
 	}

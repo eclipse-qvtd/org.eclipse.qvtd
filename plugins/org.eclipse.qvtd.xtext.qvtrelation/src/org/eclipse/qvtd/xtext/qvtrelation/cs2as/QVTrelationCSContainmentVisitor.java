@@ -146,12 +146,12 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 			TypedModel pTypedModel = PivotUtil.getPivot(TypedModel.class, csElement);
 			if (pTypedModel != null) {
 				List<org.eclipse.ocl.pivot.Package> newUsedPackage = new ArrayList<org.eclipse.ocl.pivot.Package>();
-				for (Namespace metaModelId : csElement.getMetamodelIds()) {
-					if (metaModelId instanceof Model) {
-						newUsedPackage.addAll(((Model)metaModelId).getOwnedPackages());
+				for (Namespace metamodelId : csElement.getMetamodelIds()) {
+					if (metamodelId instanceof Model) {
+						newUsedPackage.addAll(((Model)metamodelId).getOwnedPackages());
 					}
-					else if (metaModelId instanceof org.eclipse.ocl.pivot.Package) {
-						newUsedPackage.add((org.eclipse.ocl.pivot.Package)metaModelId);
+					else if (metamodelId instanceof org.eclipse.ocl.pivot.Package) {
+						newUsedPackage.add((org.eclipse.ocl.pivot.Package)metamodelId);
 					}
 				}
 				PivotUtilInternal.refreshList(pTypedModel.getUsedPackage(), newUsedPackage);

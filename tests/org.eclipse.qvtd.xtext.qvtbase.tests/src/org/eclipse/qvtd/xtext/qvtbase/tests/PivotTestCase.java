@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil.UnresolvedProxyCrossReferencer;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.evaluation.EvaluationException;
-import org.eclipse.ocl.pivot.internal.ecore.AS2Ecore;
+import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerResourceAdapter;
 import org.eclipse.ocl.pivot.resource.ProjectMap;

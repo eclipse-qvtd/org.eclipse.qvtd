@@ -10,11 +10,17 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtrelation.utilities;
 
+import java.util.Map;
+
 import org.eclipse.emf.ecore.resource.ContentHandler;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrintVisitor;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
+import org.eclipse.ocl.pivot.internal.resource.ASResourceFactory;
 import org.eclipse.ocl.pivot.internal.resource.ASSaver;
 import org.eclipse.ocl.pivot.internal.resource.AbstractASResourceFactory;
 import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
@@ -33,7 +39,25 @@ import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 public class QVTrelationASResourceFactory extends AbstractASResourceFactory
 {
 	public static final @NonNull String FILE_EXTENSION = "qvtras";
-	public static final @NonNull QVTrelationASResourceFactory INSTANCE = new QVTrelationASResourceFactory();
+
+	private static @Nullable QVTrelationASResourceFactory INSTANCE = null;
+
+	public static synchronized @NonNull QVTrelationASResourceFactory getInstance() {
+		if (INSTANCE == null) {
+			Map<String, Object> extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
+			Object object = extensionToFactoryMap.get(FILE_EXTENSION);
+			if (object instanceof Resource.Factory.Descriptor) {
+				INSTANCE = (QVTrelationASResourceFactory) ((Resource.Factory.Descriptor)object).createFactory();	// Create the registered singleton
+			}
+			else {
+				INSTANCE = new QVTrelationASResourceFactory();														// Create our own singleton
+			}
+			assert INSTANCE != null;
+			INSTANCE.install(null, null);
+		}
+		assert INSTANCE != null;
+		return INSTANCE;
+	}
 
 	private static final @NonNull ContentHandler CONTENT_HANDLER = new RootXMLContentHandlerImpl(
 		QVTrelationPackage.eCONTENT_TYPE, new String[]{FILE_EXTENSION},
@@ -47,7 +71,13 @@ public class QVTrelationASResourceFactory extends AbstractASResourceFactory
 	 * Creates an instance of the resource factory.
 	 */
 	public QVTrelationASResourceFactory() {
-		super(QVTrelationPackage.eCONTENT_TYPE, FILE_EXTENSION);
+		super(QVTrelationPackage.eCONTENT_TYPE);
+	}
+
+	@Override
+	public void configure(@NonNull ResourceSet resourceSet) {
+		Resource.Factory.Registry resourceFactoryRegistry = resourceSet.getResourceFactoryRegistry();
+		resourceFactoryRegistry.getExtensionToFactoryMap().put(FILE_EXTENSION, this);
 	}
 
 	@Override
@@ -83,5 +113,10 @@ public class QVTrelationASResourceFactory extends AbstractASResourceFactory
 	@Override
 	public @NonNull ToStringVisitor createToStringVisitor(@NonNull StringBuilder s) {
 		return new QVTrelationToStringVisitor(s);
+	}
+
+	@Override
+	public @NonNull ASResourceFactory getASResourceFactory() {
+		return getInstance();
 	}
 }

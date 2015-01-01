@@ -33,7 +33,7 @@ import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
-import org.eclipse.ocl.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.InvokedRelationToMappingForEnforcement;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseBottomPatternKey;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseCoreDomainKey;
@@ -91,7 +91,7 @@ public class QvtrToQvtcTransformation
 	private final Map<RelationCallExp, Relation> invokingRelationsForRelationCallExp = new HashMap<RelationCallExp, Relation>();
 	
 	private boolean doGlobalSearch = true;
-	private final @NonNull MetaModelManager metaModelManager;
+	private final @NonNull MetamodelManager metamodelManager;
 
 	private QVTcoreMappingKey mappings = new QVTcoreMappingKey();
 	
@@ -107,9 +107,9 @@ public class QvtrToQvtcTransformation
 	
 	private QVTcoreVariableKey realizedVariables = new QVTcoreVariableKey();
 	
-	public QvtrToQvtcTransformation(@NonNull MetaModelManager metaModelManager, @NonNull Resource qvtrModel, @NonNull Resource qvtcModel, @Nullable Resource qvtcTraceModel) {
+	public QvtrToQvtcTransformation(@NonNull MetamodelManager metamodelManager, @NonNull Resource qvtrModel, @NonNull Resource qvtcModel, @Nullable Resource qvtcTraceModel) {
 		
-		this.metaModelManager = metaModelManager;
+		this.metamodelManager = metamodelManager;
 		this.qvtrModel = qvtrModel;		
 		this.qvtcModel = qvtcModel;
 		this.qvtcTraceModel = qvtcTraceModel;
@@ -446,10 +446,10 @@ public class QvtrToQvtcTransformation
 	}
 	
 	/**
-	 * @return the metaModelManager
+	 * @return the metamodelManager
 	 */
-	public MetaModelManager getMetaModelManager() {
-		return metaModelManager;
+	public MetamodelManager getMetamodelManager() {
+		return metamodelManager;
 	}
 	
 	private Set<Variable> getNestedBindToVariable(ObjectTemplateExp ote) {
