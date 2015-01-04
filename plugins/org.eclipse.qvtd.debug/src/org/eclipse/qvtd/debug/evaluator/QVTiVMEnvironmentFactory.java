@@ -17,7 +17,6 @@ import org.eclipse.ocl.examples.debug.vm.IVMDebuggerShell;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEnvironmentFactory;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
-import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -31,8 +30,8 @@ public class QVTiVMEnvironmentFactory extends QVTiEnvironmentFactory implements 
 	private @Nullable IVMDebuggerShell shell;
 	private long envId = 0;
 	
-	public QVTiVMEnvironmentFactory(@Nullable StandaloneProjectMap projectMap, @Nullable ModelManager modelManager) {
-		super(projectMap, modelManager);
+	public QVTiVMEnvironmentFactory(@Nullable StandaloneProjectMap projectMap) {
+		super(projectMap);
 	}
 
 	public @NonNull IQVTiVMEvaluationEnvironment createEvaluationEnvironment(@NonNull QVTiModelManager modelManager, @NonNull Transformation transformation) {

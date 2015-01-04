@@ -31,10 +31,10 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerResourceSetAdapter;
-import org.eclipse.ocl.pivot.internal.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.pivot.internal.validation.PivotEObjectValidator;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.validation.ComposedEValidator;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
@@ -225,7 +225,7 @@ public class QVTiCompilerTests extends LoadTestCase
 
 	protected Transformation loadTransformation(@NonNull URI transformURI, @NonNull URI genModelURI) throws Exception {
 		OCLstdlibTables.LIBRARY.getClass();		// Ensure coherent initialization
-		metamodelManager = new PivotEnvironmentFactory(null, null).getMetamodelManager();
+		metamodelManager = OCL.createEnvironmentFactory(null).getMetamodelManager();
 		resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
 		metamodelManager.configureLoadFirstStrategy();
 		Resource genResource = resourceSet.getResource(genModelURI, true);

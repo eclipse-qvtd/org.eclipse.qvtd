@@ -15,13 +15,12 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerResourceSetAdapter;
-import org.eclipse.ocl.pivot.internal.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.build.etl.MtcBroker;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -39,8 +38,8 @@ public class QVTdMtcTests extends LoadTestCase {
 	
 	private final class MyQVTiEnvironmentFactory extends QVTiEnvironmentFactory
 	{
-		public MyQVTiEnvironmentFactory(@Nullable StandaloneProjectMap projectMap, @Nullable ModelManager modelManager) {
-			super(projectMap, modelManager);
+		public MyQVTiEnvironmentFactory(@Nullable StandaloneProjectMap projectMap) {
+			super(projectMap);
 	    	setEvaluationTracingEnabled(true);
 		}
 	}
@@ -141,7 +140,7 @@ public class QVTdMtcTests extends LoadTestCase {
 	}
 	
 	protected static void assertLoadable(@NonNull URI asURI) {
-        ResourceSet asResourceSet = new PivotEnvironmentFactory(null, null).getMetamodelManager().getASResourceSet();
+        ResourceSet asResourceSet = OCL.createEnvironmentFactory(null).getMetamodelManager().getASResourceSet();
         if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			OCLstdlib.install();
 //	        MetamodelManager.initializeASResourceSet(asResourceSet);
@@ -163,7 +162,7 @@ public class QVTdMtcTests extends LoadTestCase {
 		QVTcorePivotStandaloneSetup.doSetup();
 		QVTimperativePivotStandaloneSetup.doSetup();
 		OCLstdlib.install();
-		metamodelManager = new MyQVTiEnvironmentFactory(null, null).getMetamodelManager();
+		metamodelManager = new MyQVTiEnvironmentFactory(null).getMetamodelManager();
         MetamodelManagerResourceSetAdapter.getAdapter(ClassUtil.nonNullState(resourceSet), metamodelManager);
     }
 	

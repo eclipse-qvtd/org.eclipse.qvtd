@@ -14,7 +14,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
-import org.eclipse.ocl.pivot.evaluation.ModelManager;
 import org.eclipse.ocl.pivot.internal.evaluation.PivotEvaluationEnvironment;
 import org.eclipse.ocl.pivot.internal.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.pivot.resource.StandaloneProjectMap;
@@ -22,8 +21,8 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
 public class QVTiEnvironmentFactory extends PivotEnvironmentFactory {
 
-	public QVTiEnvironmentFactory(@Nullable StandaloneProjectMap projectMap, @Nullable ModelManager modelManager) {
-		super(projectMap, modelManager);
+	public QVTiEnvironmentFactory(@Nullable StandaloneProjectMap projectMap) {
+		super(projectMap);
 	}
 
 	@Override

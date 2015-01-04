@@ -58,7 +58,7 @@ public class QVTiLaunchConfigurationDelegate extends LaunchConfigurationDelegate
             ShallowProcess.IRunnable r = new ShallowProcess.IRunnable() {
                 
                 public void run() throws Exception { 
-        			QVTiEnvironmentFactory envFactory = new QVTiEnvironmentFactory(null, null);
+        			QVTiEnvironmentFactory envFactory = new QVTiEnvironmentFactory(null);
         			QVTiXtextEvaluator xtextEvaluator = new QVTiXtextEvaluator(envFactory, txURI);
         			for (@SuppressWarnings("null")@NonNull String inName : inMap.keySet()) {
         				@SuppressWarnings("null")@NonNull URI inURI = URI.createURI(inMap.get(inName), true);

@@ -56,7 +56,7 @@ public abstract class AbstractMainTab extends AbstractLaunchConfigurationTab
 	protected @NonNull MetamodelManager getMetamodelManager() {
 		MetamodelManager metamodelManager2 = metamodelManager;
 		if (metamodelManager2 == null) {
-			metamodelManager = metamodelManager2 = new QVTiEnvironmentFactory(null, null).getMetamodelManager();
+			metamodelManager = metamodelManager2 = new QVTiEnvironmentFactory(null).getMetamodelManager();
 		}
 		return metamodelManager2;
 	}
