@@ -48,7 +48,7 @@ public class QVTiTracingEvaluationVisitor extends QVTiAbstractTracingEvaluationV
 	 *
 	 * @param decorated the decorated
 	 */
-	public QVTiTracingEvaluationVisitor(@NonNull QVTiEvaluationVisitor decorated) {
+	public QVTiTracingEvaluationVisitor(@NonNull IQVTiEvaluationVisitor decorated) {
 		
 		this(decorated, 0);
 	}
@@ -59,7 +59,7 @@ public class QVTiTracingEvaluationVisitor extends QVTiAbstractTracingEvaluationV
 	 * @param decorated the decorated
 	 * @param indentLevel the indent level
 	 */
-	protected QVTiTracingEvaluationVisitor(@NonNull QVTiEvaluationVisitor decorated, int indentLevel) {
+	protected QVTiTracingEvaluationVisitor(@NonNull IQVTiEvaluationVisitor decorated, int indentLevel) {
 		
 		super(decorated);
 		this.indentLevel = indentLevel;
@@ -69,7 +69,7 @@ public class QVTiTracingEvaluationVisitor extends QVTiAbstractTracingEvaluationV
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEvaluationVisitorDecorator#createNestedEvaluator()
 	 */
 	@Override
-	public @NonNull QVTiEvaluationVisitor createNestedEvaluator() {
+	public @NonNull IQVTiEvaluationVisitor createNestedEvaluator() {
 		
 		return new QVTiTracingEvaluationVisitor(super.createNestedEvaluator(), indentLevel);
 	}

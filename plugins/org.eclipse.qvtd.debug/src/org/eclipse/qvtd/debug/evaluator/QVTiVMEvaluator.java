@@ -95,7 +95,7 @@ public class QVTiVMEvaluator implements IVMEvaluator
 
 	public Boolean execute() {
 		Transformation transformation = getTransformation();
-		IQVTiVMEvaluationEnvironment evalEnv = envFactory.createEvaluationEnvironment(modelManager, transformation);
+		IQVTiVMEvaluationEnvironment evalEnv = envFactory.createEvaluationEnvironment(transformation, modelManager);
         QVTiVMRootEvaluationVisitor visitor = envFactory.createEvaluationVisitor(evalEnv);
         visitor.start(suspendOnStartup);
         return (Boolean) transformation.accept(visitor);

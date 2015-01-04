@@ -20,7 +20,6 @@ import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.IQVTiEvaluationEnvironment;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiModelManager;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
@@ -34,21 +33,17 @@ public class QVTiVMEnvironmentFactory extends QVTiEnvironmentFactory implements 
 		super(projectMap);
 	}
 
-	public @NonNull IQVTiVMEvaluationEnvironment createEvaluationEnvironment(@NonNull QVTiModelManager modelManager, @NonNull Transformation transformation) {
-		return new QVTiVMRootEvaluationEnvironment(this, modelManager, transformation, ++envId);
+	public @NonNull IQVTiVMEvaluationEnvironment createEvaluationEnvironment(@NonNull Transformation transformation, @NonNull QVTiModelManager modelManager) {
+		return new QVTiVMRootEvaluationEnvironment(this, transformation, modelManager, ++envId);
 	}
 
 	@Override
-	public @NonNull IQVTiVMEvaluationEnvironment createEvaluationEnvironment(@NonNull IQVTiEvaluationEnvironment parent, @NonNull NamedElement operation) {
-		return new QVTiVMNestedEvaluationEnvironment((IQVTiVMEvaluationEnvironment) parent, ++envId, operation);
-	}
-	
-	@Override
-	public @NonNull IQVTiVMEvaluationEnvironment createEvaluationEnvironment(@NonNull EvaluationEnvironment parent) {
-		return new QVTiVMNestedEvaluationEnvironment((IQVTiVMEvaluationEnvironment) parent, ++envId, ((IQVTiVMEvaluationEnvironment)parent).getOperation());
+	public @NonNull IQVTiVMEvaluationEnvironment createEvaluationEnvironment(@NonNull EvaluationEnvironment parent, @NonNull NamedElement operation) {
+		return new QVTiVMNestedEvaluationEnvironment((IQVTiVMEvaluationEnvironment) parent, operation, ++envId);
 	}
 
-	public @NonNull QVTiVMRootEvaluationVisitor createEvaluationVisitor(@NonNull IQVTiEvaluationEnvironment evalEnv) {
+	@Override
+	public @NonNull QVTiVMRootEvaluationVisitor createEvaluationVisitor(@NonNull EvaluationEnvironment evalEnv) {
 		return new QVTiVMRootEvaluationVisitor((IQVTiVMEvaluationEnvironment) evalEnv, ClassUtil.nonNullState(shell));
 	}
 

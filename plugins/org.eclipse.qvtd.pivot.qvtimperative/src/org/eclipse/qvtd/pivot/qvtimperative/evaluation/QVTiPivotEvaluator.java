@@ -95,8 +95,8 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
 	}
 
 	public Boolean execute() {
-        IQVTiEvaluationEnvironment evalEnv = environmentFactory.createEvaluationEnvironment(modelManager, transformation);
-        QVTiEvaluationVisitor visitor = environmentFactory.createEvaluationVisitor(evalEnv);
+        IQVTiEvaluationEnvironment evalEnv = environmentFactory.createEvaluationEnvironment(transformation, modelManager);
+        IQVTiEvaluationVisitor visitor = environmentFactory.createEvaluationVisitor(evalEnv);
         return (Boolean) transformation.accept(visitor);
 	}
 

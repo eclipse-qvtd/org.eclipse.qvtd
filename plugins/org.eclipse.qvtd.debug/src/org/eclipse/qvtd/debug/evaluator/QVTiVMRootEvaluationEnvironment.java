@@ -52,9 +52,9 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 	private final @NonNull Variable pcVariable;
 	private final @NonNull Stack<StepperEntry> stepperStack = new Stack<StepperEntry>();
 
-    public QVTiVMRootEvaluationEnvironment(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull QVTiModelManager modelManager, @NonNull Transformation transformation, long id) {
-		super(environmentFactory, modelManager, transformation);
-		myCurrentIP = transformation;
+    public QVTiVMRootEvaluationEnvironment(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull Transformation executableObject, @NonNull QVTiModelManager modelManager, long id) {
+		super(environmentFactory, executableObject, modelManager);
+		myCurrentIP = executableObject;
 		this.id = id;
 		pcVariable = ClassUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
 		pcVariable.setName("$pc");
@@ -94,7 +94,7 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 
 	@Override
 	public @NonNull Transformation getDebuggableElement() {
-		return transformation;
+		return getTransformation();
 	}
 
 	@Override
@@ -145,7 +145,7 @@ public class QVTiVMRootEvaluationEnvironment extends QVTiRootEvaluationEnvironme
 
 	@Override
 	public @NonNull NamedElement getOperation() {
-		return transformation;
+		return getTransformation();
 	}
 
 	@Override

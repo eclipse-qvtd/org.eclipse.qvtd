@@ -27,7 +27,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.internal.evaluation.EvaluationVisitorImpl;
+import org.eclipse.ocl.pivot.internal.evaluation.OCLEvaluationVisitor;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -82,7 +82,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	 *
 	 * @param decorated the decorated
 	 */
-	public QVTiAbstractTracingEvaluationVisitor(@NonNull QVTiEvaluationVisitor decorated) {
+	public QVTiAbstractTracingEvaluationVisitor(@NonNull IQVTiEvaluationVisitor decorated) {
 		
 		this(decorated, 0);
 		if (logger.getAppender("QVTTrace") == null) {
@@ -105,7 +105,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	 * @param decorated the decorated
 	 * @param indentLevel the indent level
 	 */
-	protected QVTiAbstractTracingEvaluationVisitor(@NonNull QVTiEvaluationVisitor decorated, int indentLevel) {
+	protected QVTiAbstractTracingEvaluationVisitor(@NonNull IQVTiEvaluationVisitor decorated, int indentLevel) {
 		
 		super(decorated);
 		this.indentLevel = indentLevel;
@@ -390,7 +390,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	public @Nullable Object visitVariableAssignment(@NonNull VariableAssignment variableAssignment) {
 		Variable v = variableAssignment.getTargetVariable();
 		logger.info(getIndent() + "VisitVariableAssignment " + v
-				+ ": " + ((EvaluationVisitorImpl)delegate).safeVisit(variableAssignment.getValue()));
+				+ ": " + ((OCLEvaluationVisitor)delegate).safeVisit(variableAssignment.getValue()));
 		indentLevel++;
 		Object result = delegate.visitVariableAssignment(variableAssignment);
 		indentLevel--;
@@ -402,7 +402,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	public @Nullable Object visitVariablePredicate(@NonNull VariablePredicate variablePredicate) {
 		Variable v = variablePredicate.getTargetVariable();
 		logger.info(getIndent() + "VisitVariablePredicate " + v
-				+ ": " + ((EvaluationVisitorImpl)delegate).safeVisit(variablePredicate.getConditionExpression()));
+				+ ": " + ((OCLEvaluationVisitor)delegate).safeVisit(variablePredicate.getConditionExpression()));
 		indentLevel++;
 		Object result = delegate.visitVariablePredicate(variablePredicate);
 		indentLevel--;

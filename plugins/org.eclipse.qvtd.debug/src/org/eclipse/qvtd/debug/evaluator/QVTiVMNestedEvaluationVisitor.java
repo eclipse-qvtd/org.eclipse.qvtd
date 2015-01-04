@@ -16,13 +16,13 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluationEnvironment;
 import org.eclipse.ocl.pivot.Element;
 
-public class QVTiVMNestedEvaluationVisitor extends QVTiVMEvaluationVisitor
+public class QVTiVMNestedEvaluationVisitor extends AbstractQVTiVMEvaluationVisitor
 {
 	protected final @NonNull QVTiVMRootEvaluationVisitor root;
-	protected final @NonNull QVTiVMEvaluationVisitor parent;
+	protected final @NonNull AbstractQVTiVMEvaluationVisitor parent;
 	protected final int depth;
 	
-	protected QVTiVMNestedEvaluationVisitor(@NonNull QVTiVMEvaluationVisitor parent, @NonNull IQVTiVMEvaluationVisitor nestedEvaluationVisitor) {
+	protected QVTiVMNestedEvaluationVisitor(@NonNull AbstractQVTiVMEvaluationVisitor parent, @NonNull IQVTiVMEvaluationVisitor nestedEvaluationVisitor) {
 		super(nestedEvaluationVisitor);
 		this.root = parent.getRootEvaluationVisitor();
 		this.parent = parent;
