@@ -15,13 +15,13 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.ModelManager;
-import org.eclipse.ocl.pivot.resource.StandaloneProjectMap;
+import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.AbstractEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
 public class QVTiEnvironmentFactory extends AbstractEnvironmentFactory {
 
-	public QVTiEnvironmentFactory(@Nullable StandaloneProjectMap projectMap) {
+	public QVTiEnvironmentFactory(@Nullable ProjectManager projectMap) {
 		super(projectMap);
 	}
 

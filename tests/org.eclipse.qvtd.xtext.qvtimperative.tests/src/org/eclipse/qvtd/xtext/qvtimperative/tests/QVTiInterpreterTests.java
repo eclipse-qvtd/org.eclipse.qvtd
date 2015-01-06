@@ -26,7 +26,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerResourceSetAdapter;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
-import org.eclipse.ocl.pivot.resource.StandaloneProjectMap;
+import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
@@ -53,7 +53,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 {
 	private final class MyQVTiEnvironmentFactory extends QVTiEnvironmentFactory
 	{
-		public MyQVTiEnvironmentFactory(@Nullable StandaloneProjectMap projectMap) {
+		public MyQVTiEnvironmentFactory(@Nullable ProjectManager projectMap) {
 			super(projectMap);
 	    	setEvaluationTracingEnabled(true);
 		}
