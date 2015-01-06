@@ -269,14 +269,14 @@ public class QVTiInterpreterTests extends LoadTestCase
      * @throws Exception the exception
      */
     @Test
-    public void testClassToRDBMS() throws Exception {
+    public void testUMLToRDBMS() throws Exception {
         CompleteOCLStandaloneSetup.doSetup();
         URI oclURI = ClassUtil.nonNullState(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true));
         //  CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metaModelManager);
         @SuppressWarnings("unused")
 		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, metaModelManager);
         
-        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metaModelManager), "ClassToRDBMS", "ClassToRDBMSSchedule.qvti");
+        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metaModelManager), "UMLToRDBMS", "UMLToRDBMS.qvti");
     	testEvaluator.saveTransformation(null);
         //assertNoValidationErrors("Pivot validation errors", testEvaluator.pivotResource.getContents().get(0));
         testEvaluator.loadModel("uml", "SimpleUMLPeople.xmi");
