@@ -100,6 +100,10 @@ public class qvtscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createOutputActionAdapter();
 			}
 			@Override
+			public Adapter casePropertyDatum(PropertyDatum object) {
+				return createPropertyDatumAdapter();
+			}
+			@Override
 			public Adapter caseSchedule(Schedule object) {
 				return createScheduleAdapter();
 			}
@@ -232,6 +236,20 @@ public class qvtscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOutputActionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.build.qvtschedule.PropertyDatum <em>Property Datum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.build.qvtschedule.PropertyDatum
+	 * @generated
+	 */
+	public Adapter createPropertyDatumAdapter() {
 		return null;
 	}
 

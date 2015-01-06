@@ -11,12 +11,9 @@ import org.eclipse.ocl.pivot.Variable;
  * A representation of the model object '<em><b>Data Parameter</b></em>'.
  * <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * A DataParameter represents an input parameter to an AbstractAction
- * <!-- end-model-doc -->
- *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.DataParameter#isIsLoop <em>Is Loop</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.DataParameter#getVariable <em>Variable</em>}</li>
@@ -24,7 +21,6 @@ import org.eclipse.ocl.pivot.Variable;
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.DataParameter#getSecondaryDistinctData <em>Secondary Distinct Data</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.DataParameter#getDatum <em>Datum</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getDataParameter()
  * @model

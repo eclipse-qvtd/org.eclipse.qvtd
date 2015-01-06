@@ -3,11 +3,7 @@
 package org.eclipse.qvtd.build.qvtschedule;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
-
-import org.eclipse.ocl.pivot.Type;
-
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 
 /**
@@ -15,23 +11,17 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
  * A representation of the model object '<em><b>Abstract Datum</b></em>'.
  * <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * An AbstractDatum represents a the types consumed (target) or created (source)
- * by an AbstractAction.
- * <!-- end-model-doc -->
- *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getSuper <em>Super</em>}</li>
- *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getDomain <em>Domain</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getSources <em>Sources</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getTargets <em>Targets</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getSchedule <em>Schedule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getDataParameter <em>Data Parameter</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractDatum()
  * @model abstract="true"
@@ -53,32 +43,6 @@ public interface AbstractDatum extends EObject {
 	 * @generated
 	 */
 	EList<AbstractDatum> getSuper();
-
-	/**
-	 * Returns the value of the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Type</em>' reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' reference.
-	 * @see #setType(Type)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractDatum_Type()
-	 * @model required="true" derived="true"
-	 * @generated
-	 */
-	Type getType();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getType <em>Type</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' reference.
-	 * @see #getType()
-	 * @generated
-	 */
-	void setType(Type value);
 
 	/**
 	 * Returns the value of the '<em><b>Domain</b></em>' reference.

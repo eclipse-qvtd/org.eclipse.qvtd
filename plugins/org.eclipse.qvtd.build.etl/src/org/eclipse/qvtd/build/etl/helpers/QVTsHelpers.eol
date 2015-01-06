@@ -14,8 +14,12 @@
 --    Model Names/Aliases:
 --       QVTs : A QVTs model
 
-
-
+operation QVTs!MappingAction getDistinctDataClassDatums() : Sequence {
+	
+	return self.distinctArguments.primaryArguments
+			.includingAll(self.distinctArguments.secondaryArguments).flatten()
+			.collect(da | da.datum);
+}
 -- Helper function to obtaion the distinct data of a mapping
 -- with greater amount secondary argument 
 operation QVTs!MappingAction getMainDistinctData() : QVTs!DistinctData {

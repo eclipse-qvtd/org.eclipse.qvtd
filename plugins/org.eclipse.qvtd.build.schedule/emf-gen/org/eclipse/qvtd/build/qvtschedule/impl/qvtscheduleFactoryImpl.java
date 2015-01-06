@@ -62,6 +62,7 @@ public class qvtscheduleFactoryImpl extends EFactoryImpl implements qvtscheduleF
 			case qvtschedulePackage.INPUT_ACTION: return createInputAction();
 			case qvtschedulePackage.MAPPING_ACTION: return createMappingAction();
 			case qvtschedulePackage.OUTPUT_ACTION: return createOutputAction();
+			case qvtschedulePackage.PROPERTY_DATUM: return createPropertyDatum();
 			case qvtschedulePackage.SCHEDULE: return createSchedule();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -126,6 +127,16 @@ public class qvtscheduleFactoryImpl extends EFactoryImpl implements qvtscheduleF
 	public OutputAction createOutputAction() {
 		OutputActionImpl outputAction = new OutputActionImpl();
 		return outputAction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PropertyDatum createPropertyDatum() {
+		PropertyDatumImpl propertyDatum = new PropertyDatumImpl();
+		return propertyDatum;
 	}
 
 	/**

@@ -76,6 +76,15 @@ public interface qvtscheduleFactory extends EFactory {
 	OutputAction createOutputAction();
 
 	/**
+	 * Returns a new object of class '<em>Property Datum</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Property Datum</em>'.
+	 * @generated
+	 */
+	PropertyDatum createPropertyDatum();
+
+	/**
 	 * Returns a new object of class '<em>Schedule</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -19,11 +19,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
  * An implementation of the model object '<em><b>Mapping Action</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.MappingActionImpl#getMapping <em>Mapping</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

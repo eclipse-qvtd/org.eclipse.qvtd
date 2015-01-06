@@ -34,30 +34,32 @@ operation QVT!OCLExpression fixVarReferences(v : QVT!Variable) {
             self.referredVariable = v;
         }
     } else if (self.isTypeOf(QVT!OperationCallExp)) {
-        self.source.fixVarReferences(v);
-        for (arg in self.argument) {
+        self.ownedSource.fixVarReferences(v);
+        for (arg in self.ownedArguments) {
            arg.fixVarReferences(v);
         }
     } else if (self.isKindOf(QVT!NavigationCallExp)) {
-        self.source.fixVarReferences(v);
+        self.ownedSource.fixVarReferences(v);
     } else if (self.isTypeOf(QVT!IfExp)) {
-        self.condition.fixVarReferences(v);
-        self.elseExpression.fixVarReferences(v);
-        self.thenExpression.fixVarReferences(v);
+        self.ownedCondition.fixVarReferences(v);
+        self.owendElse.fixVarReferences(v);
+        self.ownedThen.fixVarReferences(v);
     } else if (self.isTypeOf(QVT!CollectionLiteralExp)) {
         for (p in self.part) {
             if (p.isTypeOf(QVT!CollectionItem)) {
-                p.item.fixVarReferences(v);
+                p.ownedItem.fixVarReferences(v);
             } else if (p.isTypeOf(QVT!CollectionRange)) {
-                p.first.fixVarReferences(v);
-                p.last.fixVarReferences(v);
+                p.ownedFirst.fixVarReferences(v);
+                p.ownedLast.fixVarReferences(v);
             } 
         } 
     } else if (self.isKindOf(QVT!LiteralExp)) {
-      // Noting to fix
+		// Nothing to fix
     } else if (self.isKindOf(QVT!IteratorExp)) {
-        self.body.fixVarReferences(v);
-        self.source.fixVarReferences(v);
+        self.ownedBody.fixVarReferences(v);
+        self.ownedSource.fixVarReferences(v);
+    } else if (self.isKindOf(QVT!TypeExp)) {
+    	// Nothing to fix	
     } else {
         self.println();
         throw "Error! Add fixVarReference() for " + self.type();
@@ -91,12 +93,12 @@ operation QVT!OCLExpression findReferencedVariables(ignore : Set) : Set {
     if (self.isTypeOf(QVT!VariableExp)) {
         varRefs.add(self.referredVariable);
     } else if (self.isTypeOf(QVT!OperationCallExp)) {
-        varRefs.addAll(self.source.findReferencedVariables());
-        for (arg in self.argument) {
+        varRefs.addAll(self.ownedSource.findReferencedVariables());
+        for (arg in self.ownedArguments) {
             varRefs.addAll(arg.findReferencedVariables());
         }
     } else if (self.isTypeOf(QVT!PropertyCallExp)) {
-        varRefs.addAll(self.source.findReferencedVariables());
+        varRefs.addAll(self.ownedSource.findReferencedVariables());
     } else if (self.isTypeOf(QVT!IfExp)) {
         varRefs.addAll(self.condition.findReferencedVariables());
         varRefs.addAll(self.elseExpression.findReferencedVariables());
@@ -118,7 +120,7 @@ operation QVT!OCLExpression findReferencedVariables(ignore : Set) : Set {
     } else if (self.isKindOf(QVT!IteratorExp)) {
         // Ignore iterator variables
         varRefs.addAll(self.body.findReferencedVariables(self.iterator));
-        varRefs.addAll(self.source.findReferencedVariables());
+        varRefs.addAll(self.ownedSource.findReferencedVariables());
     } else if (self.isKindOf(QVT!LiteralExp) or self.isTypeOf(QVT!TypeExp)) {
       // Noting to add
     } else {
@@ -138,11 +140,11 @@ operation QVT!OCLExpression isSimpleAttributeNavigation() : Boolean {
         //if (self.referredOperation == self.referredOperation.owningType.getOperationByName("=")) {
         if (self.referredOperation.name == "=") {
             // The arguments must be 1: VariableExp
-            if ( (self.argument.size() == 1) and self.argument.first().isTypeOf(QVT!VariableExp)) {
+            if ( (self.ownedArguments.size() == 1) and self.ownedArguments.first().isTypeOf(QVT!VariableExp)) {
                 // The source must be a  PropertyCallExp
-                if (self.source.isTypeOf(QVT!PropertyCallExp)) {
+                if (self.ownedSource.isTypeOf(QVT!PropertyCallExp)) {
                     // the source's source must be a VariableExp
-                    if (self.source.source.isTypeOf(QVT!VariableExp)) {
+                    if (self.ownedSource.ownedSource.isTypeOf(QVT!VariableExp)) {
                         return true;
                     }
                 }
@@ -155,8 +157,8 @@ operation QVT!OCLExpression isSimpleAttributeNavigation() : Boolean {
 // Only call if isSimpleAttributeNavigation returns true
 // We are only interested in domains
 operation QVT!OCLExpression isSingleDomained() : Boolean {
-    return self.argument.first().referredVariable.oppositePattern().area.isTypeOf(QVT!CoreDomain)
-        and self.argument.first().referredVariable.oppositePattern().area == self.source.source.referredVariable.oppositePattern().area;
+    return self.ownedArguments.first().referredVariable.oppositePattern().area.isTypeOf(QVT!CoreDomain)
+        and self.ownedArguments.first().referredVariable.oppositePattern().area == self.ownedSource.ownedSource.referredVariable.oppositePattern().area;
 }
 
 // Only call if isSimpleAttributeNavigation returns true
@@ -170,22 +172,22 @@ operation QVT!PropertyAssignment isSingleDomained() : Boolean {
 // TODO If isSimpleAttributeNavigation is a requirement, the if statement should
 // not exist!
 operation QVT!OCLExpression getNavigatedProperty() : QVT!Property {
-    if (self.source.isTypeOf(QVT!PropertyCallExp)) {
-        return self.source.referredProperty;
+    if (self.ownedSource.isTypeOf(QVT!PropertyCallExp)) {
+        return self.ownedSource.referredProperty;
     }
 } 
 
 // 
 // Only call if isSimpleAttributeNavigation returns true
 operation QVT!OCLExpression isArgumentVariable(v : QVT!Variable) : Boolean {
-    if (self.argument.first().isTypeOf(QVT!VariableExp) and self.argument.first().referredVariable == v) {
+    if (self.ownedArguments.first().isTypeOf(QVT!VariableExp) and self.ownedArguments.first().referredVariable == v) {
         return true;
     }
     return false;
 }  
 
 operation QVT!OCLExpression isSourceVariable(v : QVT!Variable) : Boolean {
-    if (self.source.source.isTypeOf(QVT!VariableExp) and self.source.source.referredVariable == v) {
+    if (self.ownedSource.ownedSource.isTypeOf(QVT!VariableExp) and self.ownedSource.ownedSource.referredVariable == v) {
         return true;
     }
     return false;
@@ -198,5 +200,5 @@ operation OCLExpression containmentPredicate() : Boolean {
 // Only invoke if ocl expression is simple attribute navigation
 operation QVT!OCLExpression getReferredProperty() : Any {
     
-    return self.source.referredProperty;
+    return self.ownedSource.referredProperty;
  }

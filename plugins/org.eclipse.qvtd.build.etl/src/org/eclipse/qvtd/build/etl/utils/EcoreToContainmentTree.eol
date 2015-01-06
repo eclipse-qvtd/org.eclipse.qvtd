@@ -34,9 +34,9 @@ operation mm!EPackage iterativeDFS() {
 	var maxDepth : Integer;
 	var noChangeCount : Integer = 0;
 	
-	var parentNode = new tree!Node;
+	var packageNode = new tree!Node;
     
-    parentNode.EClassName = self.name;
+    packageNode.name = self.name;
 	maxDepth = 1;
     
     while (iterate) {
@@ -46,7 +46,7 @@ operation mm!EPackage iterativeDFS() {
                 and not c.abstract
                 and not c.getEAllStructuralFeatures().exists(r : mm!EReference | r.container))) {
             //c.println();
-            change = c.dfs(1, maxDepth, parentNode) or change;
+            change = c.dfs(1, maxDepth, packageNode) or change;
         }
         if (not change) {
 	       noChangeCount = noChangeCount + 1;
@@ -59,8 +59,17 @@ operation mm!EPackage iterativeDFS() {
 	       //"Safe ending".errln();
 	       iterate = false; // Safe ending
 	    }
-	       
     }
+    
+    // We will only consider as children of the package node, those classes which can't
+    // be contained somewhere else. Normally, root nodes
+    var toRemove = Sequence{};
+    for (child in packageNode.children) {
+    	if (child.parent.size() > 1) {
+    		toRemove.add(child);
+    	}
+    }
+  	packageNode.children.removeAll(toRemove);
 }
 
 // Returns true if added
@@ -85,7 +94,7 @@ operation mm!EClass dfs(depth, maxDepth, parentNode) : Boolean {
 	        } else { 
 	            n = new tree!Node;
 	            //n.data.println();
-	            n.EClassName = self.name;
+	            n.name = self.name;
 	            n.superTypes = self.eSuperTypes.select(st | st.abstract).collect(st | st.name).flatten();
 	            visited.put(self, n);
 	        }
@@ -108,10 +117,5 @@ operation mm!EClass dfs(depth, maxDepth, parentNode) : Boolean {
 @cached
 operation mm!EClass getAllSuperTypes() : Set {
 	
-	var retVal : Set;
-	retVal.addAll(self.eSuperTypes);
-	for (st in self.eSuperTypes) {
-		retVal.addAll(st.getAllSuperTypes());
-	}
-	return retVal;
+	return self.asSequence().closure(x | x.eSuperTypes).asSet();
 }

@@ -141,7 +141,7 @@ operation ddg!Graph mergedMappingDataDependencies(mergeGraph : ddg!Graph, contai
 	        var sources = new Sequence;
             // Search in containment tree
             for(key in containmentTrees.keySet()) {
-                sources = containmentTrees.get(key).select(n | (n.EClassName == vN.label) or n.superTypes.includes(vN.label));
+                sources = containmentTrees.get(key).select(n | (n.name == vN.label) or n.superTypes.includes(vN.label));
                 if (not sources.isEmpty()) {
                     break;
                 }
@@ -180,7 +180,7 @@ operation ddg!Graph mergedMappingDataDependencies(mergeGraph : ddg!Graph, contai
 	    for (vN in outputVarNodes) {
 	        var targets = new Sequence;
             for(key in containmentTrees.keySet()) {
-                targets = containmentTrees.get(key).select(n | (n.EClassName == vN.label));
+                targets = containmentTrees.get(key).select(n | (n.name == vN.label));
                 if (not targets.isEmpty()) {
                     break;
                 }
@@ -293,7 +293,7 @@ operation ddg!Graph reducedMergedMappingDataDependencies(reduceGraph : ddg!Graph
         var sources : Sequence;
         for (vN in inputVarNodes) {
             for(key in containmentTrees.keySet()) {
-                sources = containmentTrees.get(key).select(n | (n.EClassName == vN.label) or n.superTypes.includes(vN.label));
+                sources = containmentTrees.get(key).select(n | (n.name == vN.label) or n.superTypes.includes(vN.label));
                 if (not sources.isEmpty()) {
                     break;
                 }
@@ -333,7 +333,7 @@ operation ddg!Graph reducedMergedMappingDataDependencies(reduceGraph : ddg!Graph
         for (vN in m.outgoing.collect(e | e.target).flatten()) {
             var targets : Collection;
             for(key in containmentTrees.keySet()) {
-                targets = containmentTrees.get(key).select(n | (n.EClassName == vN.label));
+                targets = containmentTrees.get(key).select(n | (n.name == vN.label));
                 if (not targets.isEmpty()) {
                     break;
                 }

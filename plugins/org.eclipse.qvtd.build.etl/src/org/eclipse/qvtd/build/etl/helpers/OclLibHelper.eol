@@ -19,7 +19,7 @@
  * @param owningType the type to which the operation belongs
  */
 operation oclStdLib!Class getOperationByName(name : String) : oclStdLib!Operation {
-	return self.ownedOperation.selectOne(o | o.name == name);
+	return self.ownedOperations.selectOne(o | o.name == name);
 }
 
 operation getPrimitiveTypeByName(name : String) : oclStdLib!PrimitiveType {
@@ -33,12 +33,12 @@ operation getClassByName(name : String) : oclStdLib!Class {
 // HACK There must be a "correct" way to acces the OCL Std Library!
 @cached
 operation getOclAnyEqualsOp() : Any {
-    return oclStdLib.getElementById("T.ocl.OclAny").ownedOperation.selectOne(op | op.name == "=");
+    return oclStdLib.getElementById("T.ocl.OclAny").ownedOperations.selectOne(op | op.name == "=");
 }
 
 // HACK There must be a "correct" way to acces the OCL Std Library!
 @cached
 operation getOclElementAllInstancesOp() : Any {
-    return oclStdLib.getElementById("T.ocl.OclElement").ownedOperation.selectOne(op | op.name == "allInstances");
+    return oclStdLib.getElementById("T.ocl.OclElement").ownedOperations.selectOne(op | op.name == "allInstances");
 }
 

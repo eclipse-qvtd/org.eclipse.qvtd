@@ -3,32 +3,22 @@
 package org.eclipse.qvtd.build.qvtschedule.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-
-import org.eclipse.ocl.pivot.Type;
-
 import org.eclipse.qvtd.build.qvtschedule.AbstractAction;
 import org.eclipse.qvtd.build.qvtschedule.AbstractDatum;
 import org.eclipse.qvtd.build.qvtschedule.DataParameter;
 import org.eclipse.qvtd.build.qvtschedule.Schedule;
 import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
-
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 
 /**
@@ -36,17 +26,17 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
  * An implementation of the model object '<em><b>Abstract Datum</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractDatumImpl#getSuper <em>Super</em>}</li>
- *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractDatumImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractDatumImpl#getDomain <em>Domain</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractDatumImpl#getSources <em>Sources</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractDatumImpl#getTargets <em>Targets</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractDatumImpl#getSchedule <em>Schedule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractDatumImpl#getDataParameter <em>Data Parameter</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -60,16 +50,6 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 	 * @ordered
 	 */
 	protected EList<AbstractDatum> super_;
-
-	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
-	protected Type type;
 
 	/**
 	 * The cached value of the '{@link #getDomain() <em>Domain</em>}' reference.
@@ -140,44 +120,6 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 			super_ = new EObjectResolvingEList<AbstractDatum>(AbstractDatum.class, this, qvtschedulePackage.ABSTRACT_DATUM__SUPER);
 		}
 		return super_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Type getType() {
-		if (type != null && ((EObject)type).eIsProxy()) {
-			InternalEObject oldType = (InternalEObject)type;
-			type = (Type)eResolveProxy(oldType);
-			if (type != oldType) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, qvtschedulePackage.ABSTRACT_DATUM__TYPE, oldType, type));
-			}
-		}
-		return type;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Type basicGetType() {
-		return type;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setType(Type newType) {
-		Type oldType = type;
-		type = newType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, qvtschedulePackage.ABSTRACT_DATUM__TYPE, oldType, type));
 	}
 
 	/**
@@ -362,9 +304,6 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 		switch (featureID) {
 			case qvtschedulePackage.ABSTRACT_DATUM__SUPER:
 				return getSuper();
-			case qvtschedulePackage.ABSTRACT_DATUM__TYPE:
-				if (resolve) return getType();
-				return basicGetType();
 			case qvtschedulePackage.ABSTRACT_DATUM__DOMAIN:
 				if (resolve) return getDomain();
 				return basicGetDomain();
@@ -392,9 +331,6 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 			case qvtschedulePackage.ABSTRACT_DATUM__SUPER:
 				getSuper().clear();
 				getSuper().addAll((Collection<? extends AbstractDatum>)newValue);
-				return;
-			case qvtschedulePackage.ABSTRACT_DATUM__TYPE:
-				setType((Type)newValue);
 				return;
 			case qvtschedulePackage.ABSTRACT_DATUM__DOMAIN:
 				setDomain((CoreDomain)newValue);
@@ -429,9 +365,6 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 			case qvtschedulePackage.ABSTRACT_DATUM__SUPER:
 				getSuper().clear();
 				return;
-			case qvtschedulePackage.ABSTRACT_DATUM__TYPE:
-				setType((Type)null);
-				return;
 			case qvtschedulePackage.ABSTRACT_DATUM__DOMAIN:
 				setDomain((CoreDomain)null);
 				return;
@@ -461,8 +394,6 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 		switch (featureID) {
 			case qvtschedulePackage.ABSTRACT_DATUM__SUPER:
 				return super_ != null && !super_.isEmpty();
-			case qvtschedulePackage.ABSTRACT_DATUM__TYPE:
-				return type != null;
 			case qvtschedulePackage.ABSTRACT_DATUM__DOMAIN:
 				return domain != null;
 			case qvtschedulePackage.ABSTRACT_DATUM__SOURCES:

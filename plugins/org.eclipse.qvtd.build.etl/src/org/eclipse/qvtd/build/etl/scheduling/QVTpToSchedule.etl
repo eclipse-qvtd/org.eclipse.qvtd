@@ -9,6 +9,7 @@
  *     Horacio Hoyos - initial implementation
  ******************************************************************************/
 import "../helpers/QVTHelpers.eol";
+import "../helpers/QVTsHelpers.eol";
 //import "Scheduler.eol";
  
 /****t* /org.eclipse.qvtd.build.etl/scheduling/QVTpToSchedule
@@ -61,6 +62,8 @@ rule MappingToMappingAction
         ma.mapping = m;
         ma.results.addAll(m.getOutputVariables().collect(v | v.type).equivalent());
         ma.distinctArguments.addAll(m.getInputVariables().equivalents().collect(e | e.first()));
+		ma.arguments.addAll(ma.getDistinctDataClassDatums());
+		        
     }
 
 /****u* QVTpToSchedule/VariableToDataParameter
@@ -84,7 +87,6 @@ rule VariableToDataParameter
     transform v : QVTp!Variable
     to dd : QVTs!DistinctData, dp : QVTs!DataParameter {
         
-        //v.name.println("v ");
         dp.variable = v;
         dp.datum ::= v.type;
         dd.primaryArguments.add(dp);
@@ -93,26 +95,197 @@ rule VariableToDataParameter
 // Only types in the TypedModel pacakges and that are used by a variable
 @lazy
 @greedy
-rule TypeToDatum
+rule TypeToClassDatum
     transform t : QVTp!Type
     to d : QVTs!ClassDatum {
+                         
+        guard : t.existsCorePatternVariable()
         
-        guard : QVTp!Variable.all().exists(v | v.type == t)
-        
-        var domain = t.getVariableForType().oppositePattern().area; 
+        var domain = t.getCorePatternVariable().oppositePattern().area; 
         //t.name.println("TypeToDatum ");
         d.type = t;
-        d.super.addAll(t.superClass.equivalent());
+        d.super.addAll(t.superClasses.equivalent());
         d.domain = domain;
         d.schedule ::= domain.`rule`.transformation;    
     }
 
+@greedy 
+rule PropertyCallExpToPropertyDatum
+    transform pCallExp : QVTp!PropertyCallExp
+    to pDatum : QVTs!PropertyDatum{
+       
+		guard { 
+			var propContext = pCallExp.getContextType();
+			var refProperty = pCallExp.referredProperty;
+       		return refProperty.propertyDatumNotCreated(propContext);
+		}
+		var propContext = pCallExp.getContextType();
+		var refProperty = pCallExp.referredProperty;
+     	pDatum.updatePropertyDatum(null,propContext,refProperty);
+     	//pDatum.createOppositePropDatum();
+    }
+
+-- greedy to also consider MiddlePropertyCallExp
+@greedy
+rule OppositePropertyCallExpToPropertyDatum
+    transform oPropCallExp : QVTp!OppositePropertyCallExp
+    to pDatum : QVTs!PropertyDatum{
+       
+		guard { 
+			var propContext = oPropCallExp.getContextType();
+			var refProperty = oPropCallExp.referredProperty.opposite;
+       		return refProperty.propertyDatumNotCreated(propContext);
+		}
+		var propContext = oPropCallExp.getContextType();
+		var refProperty = oPropCallExp.referredProperty.opposite;	
+     	pDatum.updatePropertyDatum(null,propContext,refProperty);
+		//pDatum.createOppositePropDatum();
+    }
+
+
+-- greedy to also consider MiddlePropertyAssignment
+@greedy    
+rule PropertyAssignmentToPropertyDatum 
+    transform pAssign : QVTp!PropertyAssignment
+    to pDatum : QVTs!PropertyDatum {
+       
+		guard { 
+			var propContext = pAssign.getContextType();
+			var refProperty = pAssign.targetProperty;
+			var isOpposite = pAssign.isKindOf(QVTp!MiddlePropertyAssignment);
+       		return refProperty.propertyDatumNotCreated(propContext);
+		}
+     	var propContext = pAssign.getContextType();
+		var refProperty = pAssign.targetProperty;
+     	pDatum.updatePropertyDatum(null, propContext, refProperty);
+		pDatum.createOppositePropDatum(true);
+	}
+
+operation QVTs!PropertyDatum updatePropertyDatum(domain : QVTp!Domain, context: QVTp!Type, prop : QVTp!Property) {
+
+	var classDatum ::= context;
+	if (classDatum.isDefined()) {
+		self.domain = domain;
+		self.property = prop;
+	    self.classDatum = classDatum;
+	    if (self.classDatum.isDefined() and
+	    	context <> prop.owningClass) { // Propagate to supertypes as long as the context is not the property owner
+		    for (superClass in context.superClasses) {
+		    	if (prop.propertyDatumNotCreated(superClass)) {
+			    	var superPropDatum = new QVTs!PropertyDatum;
+			    	self.super.add(superPropDatum);    	    	
+			    	superPropDatum.updatePropertyDatum(domain, superClass, prop);
+		    	}
+		    }
+	    }
+	} else {	// Navigating properties of super types might be unnecessary, so we will delete the propertyDatums in such 
+				// a case. This is a shortcut, a post processing of the QVTs model should be more convenient 
+		// FIXME we will probably have navigation of properties which involve abstract types which are
+		// not associated with Variables, then no ClassDatum . This will need rework. 
+		delete self;	
+	}
+}
+
+operation QVTs!PropertyDatum createOppositePropDatum(isAssignment : Boolean) {
+	var oppProp = self.property.opposite;
+    if (oppProp.isDefined()) {
+    	var oppositePropDatum = oppProp.getPropertyDatum(oppProp.owningClass);
+    	if (oppositePropDatum.isUndefined()) {
+    		oppositePropDatum = new QVTs!PropertyDatum;
+	    	oppositePropDatum.updatePropertyDatum(null, 
+    		oppProp.owningClass, 
+    		oppProp);
+    	}
+    	if (isAssignment) {
+    		self.opposite = oppositePropDatum;
+    	} else {
+    		oppositePropDatum.opposite = self;
+    	}
+    }
+}
+
+operation QVTp!Property propertyDatumNotCreated(context : QVTp!Type) : Boolean {
+    return self.getPropertyDatum(context).isUndefined();
+}
+
+operation QVTp!Property getPropertyDatum(context : QVTp!Type) {
+	var classDatum = context.equivalent();
+    if (classDatum.isUndefined()) {
+    	return null;
+    } else {
+    	return classDatum.propertyDatums.selectOne(x | x.property = self);
+    }
+}
+
+operation QVTp!PropertyCallExp getPropertyDatum() : QVTs!PropertyDatum {
+	return self.referredProperty.getPropertyDatum(self.ownedSource.type);
+} 
+
+operation QVTp!OppositePropertyCallExp getPropertyDatum() : QVTs!PropertyDatum {
+	return self.referredProperty.opposite.getPropertyDatum(self.ownedSource.type);
+}
+
+operation QVTp!PropertyAssignment getPropertyDatum() : QVTs!PropertyDatum {
+	return self.targetProperty.getPropertyDatum(self.slotExpression.type);
+}
+
 @cached
-operation QVTp!Type getVariableForType() : QVTp!Variable {
-    
-    return QVTp!Variable.all().selectOne(v | v.type == self or v.type.superClass.includes(self));
+operation QVTp!Type existsCorePatternVariable() : Boolean {
+	return self.getCorePatternVariable().isDefined();
+}
+
+@cached
+operation QVTp!Type getCorePatternVariable() : QVTp!Variable {
+    return QVTp!Variable.all().selectOne(v | v.eContainer().isKindOf(QVTp!CorePattern) and v.type.asSequence().closure(x | x.superClasses).including(v.type).includes(self));
+}
+
+@cached
+operation QVTp!OCLExpression getSourceVariable() : QVTp!Variable {
+    -- return self.asSequence().closure(x | if x.isKindOf(QVTp!CallExp) x.ownedSource else Collection{}).one(x | x.isKindOf(QVTp!VariableExp).variable;
+    var exp = self;
+	while (true) {
+		if (exp.isKindOf(QVTp!VariableExp)) {
+			return exp.referredVariable;
+		}
+		if (not exp.isKindOf(QVTp!CallExp)) {
+			return null;
+		}
+		exp = exp.ownedSource;
+	}
+}
+
+@cached
+operation QVTp!PropertyAssignment getSourceVariable() : QVTp!Variable { 
+	return self.slotExpression.getSourceVariable(); 
+}
+
+@cached
+operation QVTp!Mapping getPropertyAssignments() : Collection { 
+	return self.asSequence().closure(x | x.eContents()).select(x | x.isKindOf(QVTp!PropertyAssignment));
+}
+
+@cached
+operation QVTp!Mapping getPropertyAccesses() : Collection { 
+	return self.asSequence().closure(x | x.eContents()).select(x | x.isKindOf(QVTp!PropertyCallExp) or x.isKindOf(QVTp!OppositePropertyCallExp));
+}
+
+@cached
+operation QVTp!CallExp getContextType() : QVTp!Type {
+	return self.ownedSource.type;
+}
+
+@cached
+operation QVTp!PropertyAssignment getContextType() : QVTp!Type {
+	return self.slotExpression.type;
 }
 
 post{
+	// Traces can't be used because only one pDatum access/assignment is associated with the pDatum via traces
+	// Therefore, update the arguments/results at the end
+	for (ma in  QVTs!MappingAction) {
+		var m = ma.mapping;
+		ma.results.addAll(m.getPropertyAssignments().collect(x | x.getPropertyDatum()));
+		ma.arguments.addAll(m.getPropertyAccesses().collect(x | x.getPropertyDatum()));
+	} 
     "QVTpToSchedule Done".println();
 }    
