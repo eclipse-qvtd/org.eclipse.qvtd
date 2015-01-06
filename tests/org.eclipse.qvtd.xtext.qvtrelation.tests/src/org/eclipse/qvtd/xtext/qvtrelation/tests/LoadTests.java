@@ -14,7 +14,6 @@ import java.io.IOException;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.resource.ProjectMap;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -32,7 +31,7 @@ public class LoadTests extends LoadTestCase
 	}
 
 	protected void doLoad_Concrete(URI inputURI, URI pivotURI) throws IOException {
-		OCL ocl = OCL.newInstance();
+		OCL ocl = OCL.newInstance(getProjectMap());
 		doLoad_Concrete(ocl, inputURI, pivotURI);
 		ocl.dispose();
 	}
@@ -42,7 +41,8 @@ public class LoadTests extends LoadTestCase
 		BaseLinkingService.DEBUG_RETRY.setState(true);
 		super.setUp();
 		QVTrelationStandaloneSetup.doSetup();
-		ProjectMap.getAdapter(resourceSet);
+//		getProjectMap().
+//		ProjectMap.getAdapter(resourceSet);
 	}
 
 	public void testLoad_AbstractToConcrete_qvtr() throws IOException, InterruptedException {
@@ -82,7 +82,7 @@ public class LoadTests extends LoadTestCase
 	}	
 
 	public void testLoad_RelToCore_qvtr() throws IOException, InterruptedException {
-		ProjectMap.getAdapter(resourceSet);
+//		ProjectMap.getAdapter(resourceSet);
 		URI inputURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.reltocore/qvtrsrc/RelToCore.qvtr", true);
 		URI pivotURI = getProjectFileURI("RelToCore.qvtras");
 		doLoad_Concrete(inputURI, pivotURI);

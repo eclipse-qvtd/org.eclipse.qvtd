@@ -161,7 +161,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	}
 
 	protected static void assertLoadable(@NonNull URI asURI) {
-        ResourceSet asResourceSet = OCL.createEnvironmentFactory(null).getMetamodelManager().getASResourceSet();
+        ResourceSet asResourceSet = OCL.createEnvironmentFactory(getProjectMap()).getMetamodelManager().getASResourceSet();
         if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			OCLstdlib.install();
 //	        MetamodelManager.initializeASResourceSet(asResourceSet);
@@ -180,7 +180,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 		BaseLinkingService.DEBUG_RETRY.setState(true);
 		super.setUp();
 		QVTimperativeStandaloneSetup.doSetup();
-		metamodelManager = new MyQVTiEnvironmentFactory(null).getMetamodelManager();
+		metamodelManager = new MyQVTiEnvironmentFactory(getProjectMap()).getMetamodelManager();
         MetamodelManagerResourceSetAdapter.getAdapter(ClassUtil.nonNullState(resourceSet), metamodelManager);
     }
  

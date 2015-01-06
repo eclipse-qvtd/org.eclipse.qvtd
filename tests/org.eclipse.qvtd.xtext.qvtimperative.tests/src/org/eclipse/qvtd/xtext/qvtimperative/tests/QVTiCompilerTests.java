@@ -225,7 +225,7 @@ public class QVTiCompilerTests extends LoadTestCase
 
 	protected Transformation loadTransformation(@NonNull URI transformURI, @NonNull URI genModelURI) throws Exception {
 		OCLstdlibTables.LIBRARY.getClass();		// Ensure coherent initialization
-		metamodelManager = OCL.createEnvironmentFactory(null).getMetamodelManager();
+		metamodelManager = OCL.createEnvironmentFactory(getProjectMap()).getMetamodelManager();
 		resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
 		metamodelManager.configureLoadFirstStrategy();
 		Resource genResource = resourceSet.getResource(genModelURI, true);

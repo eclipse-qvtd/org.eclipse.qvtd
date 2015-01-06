@@ -40,8 +40,8 @@ import org.eclipse.xtext.resource.XtextResource;
 public class QVTcSerializeTests extends LoadTestCase
 {
 	protected void doSerializeRoundTrip(@NonNull String stem) throws Exception {
-		OCL ocl1 = OCL.newInstance();
-		OCL ocl2 = OCL.newInstance();
+		OCL ocl1 = OCL.newInstance(getProjectMap());
+		OCL ocl2 = OCL.newInstance(getProjectMap());
 		Resource asResource1 = doLoad_Concrete(ocl1, stem + ".qvtc", stem + ".qvtcas");
 		URI inputURI = getProjectFileURI(stem + ".qvtcas");
 		URI referenceURI = getProjectFileURI(stem + "ref.qvtcas");
@@ -102,7 +102,7 @@ public class QVTcSerializeTests extends LoadTestCase
 		//
 		//	Load QVTiAS
 		//		
-		OCL ocl = OCL.newInstance();
+		OCL ocl = OCL.newInstance(getProjectMap());
 		try {
 			ASResource asResource = loadQVTiAS(ocl.getMetamodelManager(), inputURI);
 			assertNoResourceErrors("Normalisation failed", asResource);

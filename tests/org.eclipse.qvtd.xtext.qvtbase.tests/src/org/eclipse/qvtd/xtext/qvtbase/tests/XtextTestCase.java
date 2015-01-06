@@ -32,6 +32,7 @@ import org.apache.log4j.spi.LoggingEvent;
 import org.apache.log4j.spi.ThrowableInformation;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -56,7 +57,6 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.PivotConstantsInternal;
 import org.eclipse.ocl.pivot.internal.StandardLibraryImpl;
-import org.eclipse.ocl.pivot.internal.delegate.OCLDelegateDomain;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
 import org.eclipse.ocl.pivot.internal.ecore.es2as.Ecore2AS;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
@@ -64,6 +64,8 @@ import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectMap;
+import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
 import org.eclipse.ocl.pivot.values.Bag;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.base.utilities.CS2ASResourceAdapter;
@@ -106,6 +108,7 @@ public class XtextTestCase extends PivotTestCase
 		}
 	}
 	
+	private static ProjectMap projectMap = null;
 	public static TestCaseAppender testCaseAppender = new TestCaseAppender();
 
 	protected void assertPivotIsValid(URI pivotURI) {
@@ -175,6 +178,14 @@ public class XtextTestCase extends PivotTestCase
 			}
 		}
 		return s != null ? s.toString() : null;
+	}
+
+	public static @NonNull ProjectMap getProjectMap() {
+		ProjectMap projectMap2 = projectMap;
+		if (projectMap2 == null) {
+			projectMap = projectMap2 = new ProjectMap();
+		}
+		return projectMap2;
 	}
 
 	protected static boolean hasCorrespondingCS(Element pivotElement) {
@@ -399,11 +410,15 @@ public class XtextTestCase extends PivotTestCase
 	
 	@Override
 	protected void setUp() throws Exception {
-    	testCaseAppender.install();
+		super.setUp();
+		testCaseAppender.install();
+    	if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+    		OCL.initialize(null);
+    	}
+		PivotStandaloneSetup.doSetup();
 //		CompleteOCLStandaloneSetup.doSetup();
 //		OCLinEcoreStandaloneSetup.doSetup();
 //		OCLstdlibStandaloneSetup.doSetup();
-		super.setUp();
 		resourceSet = new ResourceSetImpl();
 		ProjectMap.initializeURIResourceMap(resourceSet);
 		Map<URI, URI> uriMap = resourceSet.getURIConverter().getURIMap();
@@ -416,7 +431,7 @@ public class XtextTestCase extends PivotTestCase
 //		URI projectOCLstdlibURI = URI.createURI("oclstdlib.oclstdlib").resolve(projectURI);
 //		uriMap.put(platformOCLstdlibURI, projectOCLstdlibURI);
 		StandardLibraryContribution.REGISTRY.put(StandardLibraryImpl.DEFAULT_OCL_STDLIB_URI, new OCLstdlib.Loader());
-        OCLDelegateDomain.initialize(null);
+//        OCLDelegateDomain.initialize(null);
 	}
 
 	@Override

@@ -39,7 +39,7 @@ public class LoadTestCase extends XtextTestCase
 	protected MetamodelManager metamodelManager = null;
 
 	public void doLoad_Concrete(@NonNull String inputName) throws IOException {
-		OCL ocl = OCL.newInstance();
+		OCL ocl = OCL.newInstance(getProjectMap());
 		URI inputURI = getProjectFileURI(inputName);
 		URI pivotURI = inputURI.trimFileExtension().appendFileExtension("qvtias");
 		doLoad_Concrete(ocl, inputURI, pivotURI);
