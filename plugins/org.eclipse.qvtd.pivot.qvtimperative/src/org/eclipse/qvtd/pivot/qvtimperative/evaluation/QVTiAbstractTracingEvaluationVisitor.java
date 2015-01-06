@@ -284,7 +284,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 
 	@Override
 	public @Nullable Object visitMappingLoop(@NonNull MappingLoop mappingLoop) {
-		logger.info(getIndent() + "Visiting MappingLoop, calling: " + mappingLoop.getOwnedIterators().get(0).getName());
+		logger.info(getIndent() + "Visiting MappingLoop, binding: " + mappingLoop.getOwnedIterators().get(0).getName());
 		indentLevel++;
 		Object result = delegate.visitMappingLoop(mappingLoop);
 		indentLevel--;
@@ -293,10 +293,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 
 	@Override
 	public @Nullable Object visitMappingSequence(@NonNull MappingSequence mappingSequence) {
-		logger.info(getIndent() + "Visiting MappingSequence");
-		indentLevel++;
 		Object result = delegate.visitMappingSequence(mappingSequence);
-		indentLevel--;
 		return result;
 	}
 
@@ -378,7 +375,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 		
 		OCLExpression exp = predicate.getConditionExpression();
 		Object value = safeVisit(exp);
-		logger.info(getIndent() + "Predicate " + safePrint(exp) + "->" + String.valueOf(value));
+		logger.info(getIndent() + "Predicate " + safePrint(exp) + " is " + String.valueOf(value));
 		return delegate.visitPredicate(predicate);
 		
 	}
