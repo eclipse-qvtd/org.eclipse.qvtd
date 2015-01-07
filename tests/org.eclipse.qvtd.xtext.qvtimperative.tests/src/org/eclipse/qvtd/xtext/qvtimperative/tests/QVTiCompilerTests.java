@@ -158,9 +158,25 @@ public class QVTiCompilerTests extends LoadTestCase
 	public void testCG_ClassesCS2AS_qvti() throws Exception {
 		URI transformURI = getProjectFileURI("ClassesCS2AS/ClassesCS2AS.qvti");
 		URI genModelURI = getProjectFileURI("ClassesCS2AS/ClassesCS2AS.genmodel");
+		URI inputModelURI = getProjectFileURI("ClassesCS2AS/ClassesCS_input.xmi");
+		URI outputModelURI = getProjectFileURI("ClassesCS2AS/ClassesAS_output.xmi");
+		URI referenceModelURI = getProjectFileURI("ClassesCS2AS/ClassesAS_output_ref.xmi");
 		Transformation asTransformation = loadTransformation(transformURI, genModelURI);
 		assert asTransformation != null;
-		generateCode(asTransformation, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");
+		Class<? extends TransformationExecutor> txClass = generateCode(asTransformation, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");
+		
+		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
+		TransformationEvaluator evaluator = new MyTransformationEvaluator(txConstructor);
+		TransformationExecutor tx = evaluator.getExecutor();
+		Resource inputResource = resourceSet.getResource(inputModelURI, true);
+		tx.addRootObjects("leftCS", ClassUtil.nonNullState(inputResource.getContents()));
+		assertTrue(tx.run());
+		Resource outputResource = resourceSet.createResource(outputModelURI);
+		outputResource.getContents().addAll(tx.getRootObjects("rightAS"));
+		outputResource.save(null);
+		Resource referenceResource = resourceSet.getResource(referenceModelURI, true);
+		assert referenceResource != null;
+        assertSameModel(referenceResource, outputResource);
 	}
 
 	public void testCG_ClassToRDBMS_qvti() throws Exception {

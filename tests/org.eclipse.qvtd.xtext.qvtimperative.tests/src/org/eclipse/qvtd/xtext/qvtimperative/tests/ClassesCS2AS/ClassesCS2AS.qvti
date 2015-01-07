@@ -132,14 +132,7 @@ map __root__ in classescs2as
 			}
 		}
 	}
-	for package : classes::Package in classes::Package.allInstances() {
-		for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
-			call uPackage_ownedClasses {
-				packageCS := packageCS;
-				package := package;
-			}
-		}
-	}
+	
 	for classCS : classescs::ClassCS in classescs::ClassCS.allInstances() {
 		call mClassCS2Class_LM {
 			classCS := classCS;
@@ -150,6 +143,16 @@ map __root__ in classescs2as
 			c2c := c2c;
 		}
 	}
+	
+	for package : classes::Package in classes::Package.allInstances() {
+		for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
+			call uPackage_ownedClasses {
+				packageCS := packageCS;
+				package := package;
+			}
+		}
+	}
+
 	for classCS : classescs::ClassCS in classescs::ClassCS.allInstances() {
 		for class : classes::Class in classes::Class.allInstances() {
 			call uClass_name {
