@@ -18,6 +18,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
+import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -95,8 +97,8 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
 	}
 
 	public Boolean execute() {
-        IQVTiEvaluationEnvironment evalEnv = environmentFactory.createEvaluationEnvironment(transformation, modelManager);
-        IQVTiEvaluationVisitor visitor = environmentFactory.createEvaluationVisitor(evalEnv);
+        EvaluationEnvironment evalEnv = environmentFactory.createEvaluationEnvironment(transformation, modelManager);
+        EvaluationVisitor visitor = environmentFactory.createEvaluationVisitor(evalEnv);
         return (Boolean) transformation.accept(visitor);
 	}
 

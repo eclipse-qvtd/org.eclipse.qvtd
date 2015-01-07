@@ -50,7 +50,7 @@ public class QVTiEvaluationVisitor extends QVTiAbstractEvaluationVisitor {
     @Override
     public @NonNull IQVTiEvaluationVisitor createNestedEvaluator() {
         QVTiEnvironmentFactory environmentFactory = getEnvironmentFactory();
-		IQVTiEvaluationEnvironment nestedEvalEnv = environmentFactory.createEvaluationEnvironment(evaluationEnvironment, evaluationEnvironment.getExecutableObject());
+		IQVTiEvaluationEnvironment nestedEvalEnv = (IQVTiEvaluationEnvironment) environmentFactory.createEvaluationEnvironment(evaluationEnvironment, evaluationEnvironment.getExecutableObject());
         QVTiEvaluationVisitor nestedEvaluationVisitor = new QVTiEvaluationVisitor(nestedEvalEnv);
         nestedEvaluationVisitor.setMonitor(getMonitor());
         return nestedEvaluationVisitor;

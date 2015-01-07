@@ -23,8 +23,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerResourceSetAdapter;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -40,7 +38,6 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
 import org.eclipse.xtext.util.EmfFormatter;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -51,7 +48,23 @@ import org.junit.Test;
  */
 public class QVTiInterpreterTests extends LoadTestCase
 {
-	private final class MyQVTiEnvironmentFactory extends QVTiEnvironmentFactory
+	protected class MyQVT extends OCL
+	{
+		public MyQVT(@NonNull QVTiEnvironmentFactory environmentFactory) {
+			super(environmentFactory);
+		}
+
+		public @NonNull MyQvtiEvaluator createEvaluator(@NonNull String fileNamePrefix, @NonNull String transformationFileName) throws IOException {
+			return new MyQvtiEvaluator(getEnvironmentFactory(), fileNamePrefix, transformationFileName);
+		}
+
+		@Override
+		public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
+			return (QVTiEnvironmentFactory) super.getEnvironmentFactory();
+		}
+	}
+	
+	protected static class MyQVTiEnvironmentFactory extends QVTiEnvironmentFactory
 	{
 		public MyQVTiEnvironmentFactory(@Nullable ProjectManager projectMap) {
 			super(projectMap);
@@ -62,7 +75,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	/**
 	 * The Class MyQvtiEvaluator provides helper methods for loading and creating models used in the test
 	 */
-	private final class MyQvtiEvaluator extends QVTiXtextEvaluator
+	private class MyQvtiEvaluator extends QVTiXtextEvaluator
 	{
 		
 		/** The typed model validation resource map. */
@@ -79,8 +92,8 @@ public class QVTiInterpreterTests extends LoadTestCase
 		 * @param transformationFileName the transformation file name
 		 * @throws IOException Signals that an I/O exception has occurred.
 		 */
-		public MyQvtiEvaluator(@NonNull MetamodelManager metamodelManager, @NonNull String fileNamePrefix, @NonNull String transformationFileName) throws IOException {
-			super((QVTiEnvironmentFactory) metamodelManager.getEnvironmentFactory(), getProjectFileURI(fileNamePrefix + "/"  + transformationFileName));
+		public MyQvtiEvaluator(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull String fileNamePrefix, @NonNull String transformationFileName) throws IOException {
+			super(environmentFactory, getProjectFileURI(fileNamePrefix + "/"  + transformationFileName));
 			this.fileNamePrefix = fileNamePrefix + "/";
 		}
 		
@@ -171,6 +184,10 @@ public class QVTiInterpreterTests extends LoadTestCase
         assertNoUnresolvedProxies("Loading", resource);
         assertNoResourceErrors("Loading", resource);
 	}
+
+	protected @NonNull MyQVT createQVT() {
+		return new MyQVT(new MyQVTiEnvironmentFactory(getProjectMap()));
+	}
 	
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase#setUp()
@@ -180,16 +197,6 @@ public class QVTiInterpreterTests extends LoadTestCase
 		BaseLinkingService.DEBUG_RETRY.setState(true);
 		super.setUp();
 		QVTimperativeStandaloneSetup.doSetup();
-		metamodelManager = new MyQVTiEnvironmentFactory(getProjectMap()).getMetamodelManager();
-        MetamodelManagerResourceSetAdapter.getAdapter(ClassUtil.nonNullState(resourceSet), metamodelManager);
-    }
- 
-    /* (non-Javadoc)
-     * @see org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase#tearDown()
-     */
-    @After
-    public void tearDown() throws Exception {
-		super.tearDown();
     }
     
     /*
@@ -202,7 +209,8 @@ public class QVTiInterpreterTests extends LoadTestCase
      */
     @Test
     public void testGraph2GraphMinimal() throws Exception {
-    	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metamodelManager), "Graph2GraphMinimal", "Graph2GraphMinimal.qvti");
+    	MyQVT myQVT = createQVT();
+    	MyQvtiEvaluator testEvaluator = myQVT.createEvaluator("Graph2GraphMinimal", "Graph2GraphMinimal.qvti");
     	testEvaluator.saveTransformation(null);
         testEvaluator.loadModel("upperGraph", "SimpleGraph.xmi");
         testEvaluator.createModel("middle", "Graph2Graph.xmi");
@@ -213,6 +221,7 @@ public class QVTiInterpreterTests extends LoadTestCase
         
         URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
         assertLoadable(txURI);
+        myQVT.dispose();
     }
 
     /*
@@ -225,7 +234,8 @@ public class QVTiInterpreterTests extends LoadTestCase
      */
     @Test
     public void testGraph2GraphHierarchical() throws Exception {
-    	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metamodelManager), "Graph2GraphHierarchical", "Graph2GraphHierarchical.qvti");
+    	MyQVT myQVT = createQVT();
+    	MyQvtiEvaluator testEvaluator = myQVT.createEvaluator("Graph2GraphHierarchical", "Graph2GraphHierarchical.qvti");
     	testEvaluator.saveTransformation(null);
     	testEvaluator.loadModel("upperGraph", "../Graph2GraphMinimal/SimpleGraph.xmi");
         testEvaluator.createModel("middle", "Graph2Graph.xmi");
@@ -236,6 +246,7 @@ public class QVTiInterpreterTests extends LoadTestCase
         
         URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
         assertLoadable(txURI);
+        myQVT.dispose();
     }
     
     @Test
@@ -251,7 +262,8 @@ public class QVTiInterpreterTests extends LoadTestCase
      */
     @Test
     public void testHSV2HLS() throws Exception {
-    	MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metamodelManager), "HSV2HLS", "HSV2HLS.qvti");
+    	MyQVT myQVT = createQVT();
+    	MyQvtiEvaluator testEvaluator = myQVT.createEvaluator("HSV2HLS", "HSV2HLS.qvti");
     	testEvaluator.saveTransformation(null);
     	testEvaluator.loadModel("hsv", "HSVNode.xmi");
         testEvaluator.createModel("middle", "HLS2HLSNode.xmi");
@@ -262,6 +274,7 @@ public class QVTiInterpreterTests extends LoadTestCase
         
         URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
         assertLoadable(txURI);
+        myQVT.dispose();
     }
     
     /**
@@ -271,13 +284,14 @@ public class QVTiInterpreterTests extends LoadTestCase
      */
     @Test
     public void testClassToRDBMS() throws Exception {
+    	MyQVT myQVT = createQVT();
         CompleteOCLStandaloneSetup.doSetup();
         URI oclURI = ClassUtil.nonNullState(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true));
         //  CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metamodelManager);
         @SuppressWarnings("unused")
-		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, metamodelManager);
+		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, myQVT.getEnvironmentFactory());
         
-        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metamodelManager), "ClassToRDBMS", "ClassToRDBMSSchedule.qvti");
+        MyQvtiEvaluator testEvaluator = myQVT.createEvaluator("ClassToRDBMS", "ClassToRDBMSSchedule.qvti");
     	testEvaluator.saveTransformation(null);
         //assertNoValidationErrors("Pivot validation errors", testEvaluator.pivotResource.getContents().get(0));
         testEvaluator.loadModel("uml", "SimpleUMLPeople.xmi");
@@ -289,6 +303,7 @@ public class QVTiInterpreterTests extends LoadTestCase
         
         URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
         assertLoadable(txURI);
+        myQVT.dispose();
     }
     
     /**
@@ -298,13 +313,15 @@ public class QVTiInterpreterTests extends LoadTestCase
      */
     @Test
     public void testUMLToRDBMS() throws Exception {
+    	MyQVT myQVT = createQVT();
         CompleteOCLStandaloneSetup.doSetup();
         URI oclURI = ClassUtil.nonNullState(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true));
-        //  CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metaModelManager);
+        QVTiEnvironmentFactory environmentFactory = myQVT.getEnvironmentFactory();
+		//  CompleteOCLEObjectValidator completeOCLEObjectValidator1 = new CompleteOCLEObjectValidator(QVTimperativePackage.eINSTANCE, oclURI, metaModelManager);
         @SuppressWarnings("unused")
-		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, metamodelManager);
+		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, environmentFactory);
         
-        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metamodelManager), "UMLToRDBMS", "UmlToRdbms.qvti");
+        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(environmentFactory, "UMLToRDBMS", "UmlToRdbms.qvti");
     	testEvaluator.saveTransformation(null);
         //assertNoValidationErrors("Pivot validation errors", testEvaluator.pivotResource.getContents().get(0));
         testEvaluator.loadModel("uml", "SimpleUMLPeople.xmi");
@@ -316,13 +333,15 @@ public class QVTiInterpreterTests extends LoadTestCase
         
         URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
         assertLoadable(txURI);
+        myQVT.dispose();
     }
     
     
     @Test
     public void testClassesCS2AS_bug456900() throws Exception {
-        
-        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metamodelManager), "ClassesCS2AS/bug456900", "ClassesCS2AS.qvti");
+    	MyQVT myQVT = createQVT();
+        QVTiEnvironmentFactory environmentFactory = myQVT.getEnvironmentFactory();
+        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(environmentFactory, "ClassesCS2AS/bug456900", "ClassesCS2AS.qvti");
     	testEvaluator.saveTransformation(null);
         testEvaluator.loadModel("leftCS", "example_input.xmi");
         testEvaluator.createModel("rightAS", "example_output.xmi");
@@ -332,6 +351,7 @@ public class QVTiInterpreterTests extends LoadTestCase
         
         URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
         assertLoadable(txURI);
+        myQVT.dispose();
     }
     
 }

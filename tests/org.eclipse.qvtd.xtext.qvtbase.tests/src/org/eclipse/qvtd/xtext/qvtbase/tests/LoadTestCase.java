@@ -26,7 +26,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.StandardLibraryImpl;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerResourceSetAdapter;
+import org.eclipse.ocl.pivot.internal.manager.EnvironmentFactoryResourceSetAdapter;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.base.utilities.CS2ASResourceAdapter;
@@ -36,8 +36,6 @@ import org.eclipse.ocl.xtext.base.utilities.CS2ASResourceAdapter;
  */
 public class LoadTestCase extends XtextTestCase
 {	
-	protected MetamodelManager metamodelManager = null;
-
 	public void doLoad_Concrete(@NonNull String inputName) throws IOException {
 		OCL ocl = OCL.newInstance(getProjectMap());
 		URI inputURI = getProjectFileURI(inputName);
@@ -94,16 +92,12 @@ public class LoadTestCase extends XtextTestCase
 
 	@Override
 	protected void tearDown() throws Exception {
-		MetamodelManagerResourceSetAdapter adapter = MetamodelManagerResourceSetAdapter.findAdapter(resourceSet);
+		EnvironmentFactoryResourceSetAdapter adapter = EnvironmentFactoryResourceSetAdapter.findAdapter(resourceSet);
 		if (adapter != null) {
-			MetamodelManager metamodelManager = adapter.getMetamodelManager();
+			MetamodelManager metamodelManager = adapter.getMetamodelManager();		// FIXME obsolete
 			if (metamodelManager != null) {
 				metamodelManager.dispose();
 			}
-		}
-		if (metamodelManager != null) {
-			metamodelManager.dispose();
-			metamodelManager = null;
 		}
 		StandardLibraryContribution.REGISTRY.remove(StandardLibraryImpl.DEFAULT_OCL_STDLIB_URI);
 		super.tearDown();
