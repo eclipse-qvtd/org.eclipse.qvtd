@@ -172,7 +172,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 		try {
 			Object value = safeVisit(assignment.getValue());
 			// Unbox to asign to ecore type
-	        value = delegate.getMetamodelManager().getIdResolver().unboxedValueOf(value);
+	        value = delegate.getEnvironmentFactory().getIdResolver().unboxedValueOf(value);
 	        logger.info(getIndent() + "VisitAssignment " + prettyPrint(assignment.getETarget())
 	        		+ " := " + prettyPrint(value));
 		} catch (InvalidValueException ex) {
@@ -315,7 +315,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 		try {
 			Object value = safeVisit(propertyAssignment.getValue());
 			// Unbox to asign to ecore type
-	        value = delegate.getMetamodelManager().getIdResolver().unboxedValueOf(value);
+	        value = delegate.getEnvironmentFactory().getIdResolver().unboxedValueOf(value);
 	        logger.info(getIndent() + "VisitMiddlePropertyAssignment " + propertyAssignment.getSlotExpression()
 	        		+ "." + propertyAssignment.getTargetProperty().getName() + " = " + prettyPrint(value));
 		} catch (InvalidValueException ex) {
@@ -344,7 +344,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 		try {
 			Object value = safeVisit(propertyAssignment.getValue());
 	        // Unbox to asign to ecore type
-	        value = delegate.getMetamodelManager().getIdResolver().unboxedValueOf(value);
+	        value = delegate.getEnvironmentFactory().getIdResolver().unboxedValueOf(value);
 	        logger.info(getIndent() + "VisitPropertyAssignment " + propertyAssignment.getSlotExpression()
         		+ "." + propertyAssignment.getTargetProperty().getName() + " = " + prettyPrint(value));
 		} catch (InvalidValueException ex) {

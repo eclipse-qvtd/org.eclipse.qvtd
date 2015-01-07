@@ -33,7 +33,7 @@ public abstract class AbstractTransformationEvaluator extends ExecutorManager im
 
 	@Override
 	public @NonNull IdResolver getIdResolver() {
-		return ((CompleteEnvironmentInternal)environment).getMetamodelManager().getIdResolver();
+		return ((CompleteEnvironmentInternal)environment).getEnvironmentFactory().getIdResolver();
 	}
 
 	@Override

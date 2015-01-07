@@ -101,7 +101,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends OCLEvaluationVisitor
 						instanceClass = eType.getInstanceClass();
 					}
 				}
-				Object ecoreValue = metamodelManager.getIdResolver().ecoreValueOf(instanceClass, boxedValue);
+				Object ecoreValue = environmentFactory.getIdResolver().ecoreValueOf(instanceClass, boxedValue);
 				targetProperty.initValue((EObject) slotExpValue, ecoreValue);
 				if (cacheIndex != null) {
 					getModelManager().setMiddleOpposite(cacheIndex, slotExpValue, ecoreValue);
@@ -324,7 +324,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends OCLEvaluationVisitor
 				// evaluating the binding value
 				return null;
 			}
-			Type valueType = metamodelManager.getIdResolver().getDynamicTypeOf(valueOrValues);
+			Type valueType = environmentFactory.getIdResolver().getDynamicTypeOf(valueOrValues);
 			Type varType = boundVariable.getType();
 			if ((varType != null) && valueType.conformsTo(metamodelManager.getStandardLibrary(), varType)) {
 				evaluationEnvironment.replace(boundVariable, valueOrValues);
@@ -507,7 +507,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends OCLEvaluationVisitor
 
 	@Override
 	public @Nullable Object visitVariablePredicate(@NonNull VariablePredicate variablePredicate) {     
-        IdResolver idResolver = metamodelManager.getIdResolver();
+        IdResolver idResolver = environmentFactory.getIdResolver();
         // Each predicate has a conditionExpression that is an OCLExpression
         OCLExpression exp = variablePredicate.getConditionExpression();
 		Object value = ((IQVTiEvaluationVisitor)undecoratedVisitor).safeVisit(exp);

@@ -316,7 +316,7 @@ public class XtextTestCase extends PivotTestCase
 			Resource pivotResource = adapter.getASResource(xtextResource);
 			assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
 			assertNoValidationErrors("Pivot validation errors", pivotResource.getContents().get(0));
-			Resource ecoreResource = AS2Ecore.createResource(metamodelManager, pivotResource, ecoreURI, null);
+			Resource ecoreResource = AS2Ecore.createResource(metamodelManager.getEnvironmentFactory(), pivotResource, ecoreURI, null);
 			assertNoResourceErrors("To Ecore errors", ecoreResource);
 			ecoreResource.save(null);
 		}

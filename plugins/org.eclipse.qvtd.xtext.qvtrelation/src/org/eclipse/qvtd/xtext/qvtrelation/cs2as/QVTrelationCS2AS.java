@@ -13,7 +13,7 @@ package org.eclipse.qvtd.xtext.qvtrelation.cs2as;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
+import org.eclipse.ocl.pivot.internal.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
@@ -21,8 +21,8 @@ import org.eclipse.ocl.xtext.essentialocl.cs2as.EssentialOCLCS2AS;
 
 public class QVTrelationCS2AS extends EssentialOCLCS2AS
 {	
-	public QVTrelationCS2AS(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap, @NonNull MetamodelManager metamodelManager) {
-		super(cs2asResourceMap, metamodelManager);
+	public QVTrelationCS2AS(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap, @NonNull EnvironmentFactoryInternal environmentFactory) {
+		super(cs2asResourceMap, environmentFactory);
 	}
 
 	@Override

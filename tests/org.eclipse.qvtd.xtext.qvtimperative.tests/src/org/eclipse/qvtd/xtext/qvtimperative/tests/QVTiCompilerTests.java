@@ -30,9 +30,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
-import org.eclipse.ocl.pivot.evaluation.ModelManager;
-import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.internal.complete.CompleteEnvironmentInternal;
 import org.eclipse.ocl.pivot.internal.manager.EnvironmentFactoryResourceSetAdapter;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.internal.validation.PivotEObjectValidator;
@@ -101,21 +98,6 @@ public class QVTiCompilerTests extends LoadTestCase
 	protected static class TxEvaluator extends AbstractTransformationEvaluator {
 		private TxEvaluator(@NonNull CompleteEnvironment environment, Constructor<? extends TransformationExecutor> txConstructor) throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
 			super(environment, txConstructor);
-		}
-
-		@NonNull
-		public Evaluator createNestedEvaluator() {
-			throw new UnsupportedOperationException();
-		}
-
-		@NonNull
-		public IdResolver getIdResolver() {
-			return ((CompleteEnvironmentInternal)environment).getMetamodelManager().getIdResolver();
-		}
-
-		@NonNull
-		public ModelManager getModelManager() {
-			throw new UnsupportedOperationException();
 		}
 	}
 
@@ -263,7 +245,7 @@ public class QVTiCompilerTests extends LoadTestCase
 	}
 
 	protected Class<? extends TransformationExecutor> generateCode(@NonNull MyQVT myQVT, @NonNull Transformation asTransformation, @Nullable String savePath) throws Exception {
-		QVTiCodeGenerator cg = new QVTiCodeGenerator(myQVT.getMetamodelManager(), asTransformation);
+		QVTiCodeGenerator cg = new QVTiCodeGenerator(myQVT.getEnvironmentFactory(), asTransformation);
 		QVTiCodeGenOptions options = cg.getOptions();
 		options.setUseNullAnnotations(true);
 		options.setPackagePrefix("cg");
@@ -295,20 +277,7 @@ public class QVTiCompilerTests extends LoadTestCase
 				for (org.eclipse.ocl.pivot.Package asPackage : ((ImperativeModel)eObject).getOwnedPackages()) {
 					for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
 						if (asClass instanceof Transformation) {
-<<<<<<< Upstream, based on origin/master
 							return (Transformation)asClass;
-=======
-							QVTiCodeGenerator cg = new QVTiCodeGenerator(myQVT.getEnvironmentFactory(), (Transformation)asClass);
-							QVTiCodeGenOptions options = cg.getOptions();
-							options.setUseNullAnnotations(true);
-							options.setPackagePrefix("cg");
-							cg.generateClassFile();
-							if (savePath != null) {
-								cg.saveSourceFile(savePath);
-							}
-							Class<? extends AbstractTransformation> txClass = compileTransformation(cg);
-							return txClass;
->>>>>>> 7f90a78 [ocl25] Use EnvironmentFactory for CG
 						}
 					}
 				}

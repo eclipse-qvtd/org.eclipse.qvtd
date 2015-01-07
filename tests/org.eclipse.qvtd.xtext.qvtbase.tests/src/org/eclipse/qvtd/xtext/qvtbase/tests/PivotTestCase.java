@@ -233,7 +233,7 @@ public class PivotTestCase extends TestCase
 	}
 	public static Resource savePivotAsEcore(MetamodelManager metamodelManager, Resource pivotResource, URI ecoreURI, Map<String,Object> options, boolean validateSaved) throws IOException {
 		URI uri = ecoreURI != null ? ecoreURI : URI.createURI("test.ecore");
-		Resource ecoreResource = AS2Ecore.createResource(metamodelManager, pivotResource, uri, null);
+		Resource ecoreResource = AS2Ecore.createResource(metamodelManager.getEnvironmentFactory(), pivotResource, uri, null);
 		assertNoResourceErrors("Ecore2Pivot failed", ecoreResource);
 		if (ecoreURI != null) {
 			ecoreResource.save(null);
