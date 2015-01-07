@@ -1,0 +1,75 @@
+import classes : '../Classes.ecore#/';
+import classescs : '../ClassesCS.ecore#/';
+
+transformation classescs2as
+{
+	leftCS imports classescs;
+	rightAS imports classes;
+}
+
+map mCreationRootCS2Root in classescs2as
+{
+	check leftCS(rootCS : RootCS) {}
+	enforce rightAS() {
+		realize root : Root
+	}
+	where () {
+		rootCS.ast := root;
+	}
+}
+
+map mCreationPackageCS2Package in classescs2as
+{
+	check leftCS(packageCS : PackageCS) {}
+	enforce rightAS() {
+		realize package : Package
+	}
+	where () {
+		packageCS.ast := package;
+	}
+}
+
+
+map uPackage_name in classescs2as
+{
+	check leftCS(packageCS : PackageCS) {}
+	enforce rightAS() {}
+	where () {
+		packageCS.ast.oclAsType(classes::Package).name := packageCS.name;
+	}
+}
+
+map uRoot_ownedPackages in classescs2as
+{
+	check leftCS(rootCS : RootCS) {}
+	enforce rightAS() {}
+	where () {
+		rootCS.ast.oclAsType(classes::Root).ownedPackages :=
+		rootCS.ownedPackages.ast.oclAsType(classes::Package)->asOrderedSet();
+	}
+}
+map __root__ in classescs2as
+{
+	where () {}
+	for rootCS : classescs::RootCS in classescs::RootCS.allInstances() {
+		call mCreationRootCS2Root {
+			rootCS := rootCS;
+		}
+	}
+	for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
+		call mCreationPackageCS2Package {
+			packageCS := packageCS;
+		}
+	}
+	
+	for rootCS : classescs::RootCS in classescs::RootCS.allInstances() {
+		call uRoot_ownedPackages {
+			rootCS := rootCS;
+		}
+	}
+	for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
+		call uPackage_name {
+			packageCS := packageCS;
+		}
+	}
+}

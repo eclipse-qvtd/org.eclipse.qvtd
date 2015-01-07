@@ -318,4 +318,21 @@ public class QVTiInterpreterTests extends LoadTestCase
         URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
         assertLoadable(txURI);
     }
+    
+    
+    @Test
+    public void testClassesCS2AS_bug456900() throws Exception {
+        
+        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metamodelManager), "ClassesCS2AS/bug456900", "ClassesCS2AS.qvti");
+    	testEvaluator.saveTransformation(null);
+        testEvaluator.loadModel("leftCS", "example_input.xmi");
+        testEvaluator.createModel("rightAS", "example_output.xmi");
+        testEvaluator.loadReference("rightAS", "example_output_ref.xmi");
+        testEvaluator.test();
+        testEvaluator.dispose();
+        
+        URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
+        assertLoadable(txURI);
+    }
+    
 }
