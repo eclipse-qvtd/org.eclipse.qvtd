@@ -157,7 +157,7 @@ public class QVTiCompilerTests extends LoadTestCase
 //		completeOCLEObjectValidator1.initialize();
 		completeOCLEObjectValidator2.initialize();
 //		completeOCLEObjectValidator3.initialize();
-		PivotEObjectValidator.install(ClassUtil.nonNullState(pivotResource.getResourceSet()), myQVT.getMetamodelManager());
+		PivotEObjectValidator.install(ClassUtil.nonNullState(pivotResource.getResourceSet()), myQVT.getEnvironmentFactory());
 		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTbasePackage.eINSTANCE));
 		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE));
 		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE));
@@ -277,7 +277,6 @@ public class QVTiCompilerTests extends LoadTestCase
 
 	protected Transformation loadTransformation(@NonNull MyQVT myQVT, @NonNull URI transformURI, @NonNull URI genModelURI) throws Exception {
 		OCLstdlibTables.LIBRARY.getClass();		// Ensure coherent initialization
-//		metamodelManager = OCL.createEnvironmentFactory(getProjectMap()).getMetamodelManager();
 		resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
 		MetamodelManager metamodelManager = myQVT.getMetamodelManager();
 		metamodelManager.configureLoadFirstStrategy();
@@ -296,7 +295,20 @@ public class QVTiCompilerTests extends LoadTestCase
 				for (org.eclipse.ocl.pivot.Package asPackage : ((ImperativeModel)eObject).getOwnedPackages()) {
 					for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
 						if (asClass instanceof Transformation) {
+<<<<<<< Upstream, based on origin/master
 							return (Transformation)asClass;
+=======
+							QVTiCodeGenerator cg = new QVTiCodeGenerator(myQVT.getEnvironmentFactory(), (Transformation)asClass);
+							QVTiCodeGenOptions options = cg.getOptions();
+							options.setUseNullAnnotations(true);
+							options.setPackagePrefix("cg");
+							cg.generateClassFile();
+							if (savePath != null) {
+								cg.saveSourceFile(savePath);
+							}
+							Class<? extends AbstractTransformation> txClass = compileTransformation(cg);
+							return txClass;
+>>>>>>> 7f90a78 [ocl25] Use EnvironmentFactory for CG
 						}
 					}
 				}
