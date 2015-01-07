@@ -7,6 +7,7 @@
  * 
  * Contributors:
  *     Horacio Hoyos - initial API and implementation
+ *     Adolfo Sanchez-Barbudo Herrera (University of York) - Bug 456900
  ******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
@@ -22,7 +23,6 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.evaluation.EvaluationVisitorImpl;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -342,71 +342,51 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	public @Nullable Object visitMappingStatement(@NonNull MappingStatement object) {
 		return visiting(object);	// MappingStatement is abstract
 	}
-    
-    /* (non-Javadoc)
-     * @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitMiddlePropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment)
-     */
-    @Override
+	
+	/* (non-Javadoc)
+	* @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitMiddlePropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment)
+	*/
+	@Override
 	public @Nullable Object visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment propertyAssignment) {
-        
-        OCLExpression slotExp = propertyAssignment.getSlotExpression(); 
-        Area area = ((BottomPattern)propertyAssignment.eContainer()).getArea();
-        if (area instanceof Mapping) {
-        	// TODO Check this approach
-        	//if (!(exp instanceof VariableExp)) {
-        	//    return modelManager.illFormedModelClass(VariableExp.class, exp, "visitPropertyAssignment");
-        	//}
-        	//VariableExp variableExp = (VariableExp)exp;
-            if (slotExp instanceof VariableExp ) {      // What other type of expressions are there?
-                Variable slotVar = (Variable) ((VariableExp)slotExp).getReferredVariable();
-                if(slotVar != null) {
-                    Object slotBinding = evaluationEnvironment.getValueOf(slotVar);
-                    if(slotBinding instanceof EObject) {
-                    	//  TODO define if keep the try catch for safety
-                    	Object value = null;
-                    	try {
-                    		value = safeVisit(propertyAssignment.getValue());
-            			} catch (InvalidValueException ex) {
-            				// There was an OCLVoid value being navigated or any other/similar OCL error
-            				// evaluating the binding value
-            				// TODO, is this an error?
-            				System.out.println("visitMiddlePropertyAssignment InvalidValueException");
-            			} finally {
-            				if (value != null) {
-            					// Unbox to assign to ecore type
-            					Class<?> instanceClass = null;
-            					Property targetProperty = propertyAssignment.getTargetProperty();
-        						EObject eTarget = targetProperty.getETarget();
-        						if (eTarget instanceof EStructuralFeature) {
-                					EClassifier eType = ((EStructuralFeature)eTarget).getEType();
-									if (eType != null) {
-										instanceClass = eType.getInstanceClass();
-									}
-        						}
-                        		Object ecoreValue = metamodelManager.getIdResolver().ecoreValueOf(instanceClass, value);
-                        		Property p = targetProperty;
-                                p.initValue((EObject) slotBinding, ecoreValue);
-        						Integer cacheIndex = propertyAssignment.getCacheIndex();
-        						if (cacheIndex != null) {
-        							getModelManager().setMiddleOpposite(cacheIndex, slotBinding, ecoreValue);
-        						}
-            				}
-            			}
-                    } else {
-                        throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
-                                + " specification. The assigment refers to a variable not defined in the" +
-                                " current environment");
-                    } 
-                } else {
-                    throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
-                            + " specification. The referred variable of the slot expression (" + slotExp.getType().getName() 
-                            + ") was not found.");
-                }
-            } else {
-                throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
-                        + " specification. The slot expression type (" + slotExp.getType().getName() 
-                        + ") is not supported yet.");
-            }
+		
+		OCLExpression slotExp = propertyAssignment.getSlotExpression(); 
+		Area area = ((BottomPattern)propertyAssignment.eContainer()).getArea();
+		if (area instanceof Mapping) {
+			// TODO Check this approach
+			try {
+				Object slotExpValue = safeVisit(slotExp);
+				if(slotExpValue instanceof EObject) {
+					Object value = safeVisit(propertyAssignment.getValue());
+					if (value != null) {
+						// Unbox to assign to ecore type
+						Class<?> instanceClass = null;
+						Property targetProperty = propertyAssignment.getTargetProperty();
+						EObject eTarget = targetProperty.getETarget();
+						if (eTarget instanceof EStructuralFeature) {
+							EClassifier eType = ((EStructuralFeature)eTarget).getEType();
+							if (eType != null) {
+								instanceClass = eType.getInstanceClass();
+							}
+						}
+						Object ecoreValue = metamodelManager.getIdResolver().ecoreValueOf(instanceClass, value);
+						Property p = targetProperty;
+						p.initValue((EObject) slotExpValue, ecoreValue);
+						Integer cacheIndex = propertyAssignment.getCacheIndex();
+						if (cacheIndex != null) {
+							getModelManager().setMiddleOpposite(cacheIndex, slotExpValue, ecoreValue);
+						}
+					}
+				} else {
+					throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
+						+ " specification. The assigment slot expression evaluates to non-ecore value");
+
+				} 
+			} catch (InvalidValueException ex) {
+				// There was an OCLVoid value being navigated or any other/similar OCL error
+				// evaluating the slot or value expression
+				// TODO, is this an error?
+				System.out.println("visitMiddlePropertyAssignment InvalidValueException");
+			}
         }
         return true;
     }
@@ -452,60 +432,26 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
      */
     @Override
 	public @Nullable Object visitPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
-        
-        OCLExpression slotExp = propertyAssignment.getSlotExpression(); 
-//        Area area = ((BottomPattern)propertyAssignment.eContainer()).getArea();
-        //if (area instanceof Mapping) {
-        	// TODO Check this approach
-        	//if (!(exp instanceof VariableExp)) {
-        	//    return modelManager.illFormedModelClass(VariableExp.class, exp, "visitPropertyAssignment");
-        	//}
-        	//VariableExp variableExp = (VariableExp)exp;
-            if (slotExp instanceof VariableExp ) {      // What other type of expressions are there?
-                Variable slotVar = (Variable) ((VariableExp)slotExp).getReferredVariable();
-                if(slotVar != null) {
-                    Object slotBinding = evaluationEnvironment.getValueOf(slotVar);
-                    if(slotBinding instanceof EObject) {
-                    	Object value = safeVisit(propertyAssignment.getValue());
-                    	// Unbox to assign to ecore type
-                        value = metamodelManager.getIdResolver().unboxedValueOf(value);
-                        Property p = propertyAssignment.getTargetProperty();
-                        p.initValue((EObject) slotBinding, value);
-                        /* TODO define if keep the try catch for safety
-                        Object value = null;
-                    	try {
-                    		value = safeVisit(propertyAssignment.getValue());
-            			} catch (InvalidValueException ex) {
-            				// There was an OCLVoid value being navigated or any other/similar OCL error
-            				// evaluating the binding value
-            				// TODO, is this an error?
-            				System.out.println("visitMiddlePropertyAssignment InvalidValueException");
-            			} finally {
-            				if (value != null) {
-            					// Unbox to assign to ecore type
-                        		Object unboxedValue = metamodelManager.getIdResolver().unboxedValueOf(value);
-                        		Property p = propertyAssignment.getTargetProperty();
-                                p.initValue(slotBinding, unboxedValue);
-            				}
-            			}
-            			*/
-                    } else {
-                        throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
-                                + " specification. The assigment refers to a variable not defined in the" +
-                                " current environment");
-                    } 
-                } else {
-                    throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
-                            + " specification. The referred variable of the slot expression (" + slotExp.getType().getName() 
-                            + ") was not found.");
-                }
-            } else {
-                throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
-                        + " specification. The slot expression type (" + slotExp.getType().getName() 
-                        + ") is not supported yet.");
-            }
-        //}
-        return true;
+    	
+		try {
+			Object slotExpValue = safeVisit(propertyAssignment.getSlotExpression());
+			if(slotExpValue instanceof EObject) {
+				Object value = safeVisit(propertyAssignment.getValue());
+				// Unbox to assign to ecore type
+                value = metamodelManager.getIdResolver().unboxedValueOf(value);
+                Property p = propertyAssignment.getTargetProperty();
+                p.initValue((EObject) slotExpValue, value);
+			} else {
+				throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
+					+ " specification. The assigment slot expression evaluates to non-ecore value");
+			}
+		} catch (InvalidValueException ex) {
+				// There was an OCLVoid value being navigated or any other/similar OCL error
+				// evaluating the slot or value expression
+				// TODO, is this an error?
+				System.out.println("visitPropertyAssignment InvalidValueException");
+		}
+		return true;
     }
 
 	/*
