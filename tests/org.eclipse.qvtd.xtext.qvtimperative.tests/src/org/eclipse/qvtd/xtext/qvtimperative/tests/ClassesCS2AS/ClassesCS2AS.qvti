@@ -89,7 +89,7 @@ map uRoot_ownedPackages in classescs2as
 	check rightAS(root : Root) {}
 	check leftCS(rootCS : RootCS) {}
 	where (rootCS.RootCS2Root.root = root;) {
-		root.ownedPackages := rootCS.ownedPackage.PackageCS2Package.package->asOrderedSet();
+		root.ownedPackages := rootCS.ownedPackages.PackageCS2Package.package->asOrderedSet();
 	}
 }
 
