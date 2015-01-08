@@ -17,6 +17,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -30,7 +31,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.Unit;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
@@ -175,7 +175,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 	public Continuation<?> visitTopLevelCS(@NonNull TopLevelCS csElement) {
 		importPackages(csElement);
 		@NonNull CoreModel asCoreModel = refreshRoot(CoreModel.class, QVTcorePackage.Literals.CORE_MODEL, csElement);
-		context.refreshPivotList(Unit.class, asCoreModel.getUnit(), csElement.getOwnedImports());
+		context.refreshPivotList(Import.class, asCoreModel.getOwnedImports(), csElement.getOwnedImports());
 		//
 		Resource eResource = csElement.eResource();
 		if (eResource instanceof BaseCSResource) {

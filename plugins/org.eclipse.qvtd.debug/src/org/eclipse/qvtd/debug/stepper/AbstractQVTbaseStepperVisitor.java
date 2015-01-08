@@ -71,8 +71,4 @@ public abstract class AbstractQVTbaseStepperVisitor
 	public @Nullable IStepper visitTypedModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.TypedModel object) {
 		return visitNamedElement(object);
 	}
-
-	public @Nullable IStepper visitUnit(@NonNull org.eclipse.qvtd.pivot.qvtbase.Unit object) {
-		return visitNamedElement(object);
-	}
 }

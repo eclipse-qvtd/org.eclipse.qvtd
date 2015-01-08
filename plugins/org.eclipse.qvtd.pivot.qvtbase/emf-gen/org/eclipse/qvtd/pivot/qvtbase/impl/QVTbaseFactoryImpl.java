@@ -24,7 +24,6 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbaseFactory;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.Unit;
 
 /**
  * <!-- begin-user-doc -->
@@ -77,7 +76,6 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 			case QVTbasePackage.PREDICATE: return createPredicate();
 			case QVTbasePackage.TRANSFORMATION: return createTransformation();
 			case QVTbasePackage.TYPED_MODEL: return createTypedModel();
-			case QVTbasePackage.UNIT: return createUnit();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -158,17 +156,6 @@ public class QVTbaseFactoryImpl extends EFactoryImpl implements QVTbaseFactory {
 	public TypedModel createTypedModel() {
 		TypedModelImpl typedModel = new TypedModelImpl();
 		return typedModel;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Unit createUnit() {
-		UnitImpl unit = new UnitImpl();
-		return unit;
 	}
 
 	/**

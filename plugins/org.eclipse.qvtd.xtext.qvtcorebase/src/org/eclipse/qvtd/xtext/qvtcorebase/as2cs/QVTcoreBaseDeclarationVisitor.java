@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.Variable;
@@ -53,7 +54,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.Unit;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
@@ -130,10 +130,10 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 			if (root instanceof RootPackageCS) {
 				for (ImportCS csImport : ((RootPackageCS)root).getOwnedImports()) {
 					Element pivot = csImport.getPivot();
-					if (pivot instanceof Unit) {
-						Unit asUnit = (Unit)pivot;
-						String alias = asUnit.getName();
-						Namespace asNamespace = asUnit.getUsedPackage();
+					if (pivot instanceof Import) {
+						Import asImport = (Import)pivot;
+						String alias = asImport.getName();
+						Namespace asNamespace = asImport.getImportedNamespace();
 						if ((asNamespace != null) && (alias != null)) {
 							aliasAdapter.getAlias(asNamespace, alias);
 						}
@@ -256,9 +256,9 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	}
 
 	@Override
-	public @Nullable ElementCS visitUnit(@NonNull Unit asUnit) {
+	public @Nullable ElementCS visitImport(@NonNull Import asUnit) {
 		BaseCSResource csResource = context.getCSResource();
-		Namespace asNamespace = asUnit.getUsedPackage();
+		Namespace asNamespace = asUnit.getImportedNamespace();
 		EObject eObject = asNamespace.getETarget();
 		String importURI = null;
 		if (eObject instanceof EPackage) {

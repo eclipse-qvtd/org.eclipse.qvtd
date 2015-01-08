@@ -87,9 +87,4 @@ public abstract class AbstractQVTbaseAS2XMIidVisitor
 	public @Nullable Boolean visitTypedModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.TypedModel object) {
 		return visitNamedElement(object);
 	}
-
-	@Override
-	public @Nullable Boolean visitUnit(@NonNull org.eclipse.qvtd.pivot.qvtbase.Unit object) {
-		return visitNamedElement(object);
-	}
 }

@@ -10,7 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtbase;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.pivot.Model;
 
 /**
@@ -18,32 +17,11 @@ import org.eclipse.ocl.pivot.Model;
  * A representation of the model object '<em><b>Base Model</b></em>'.
  * <!-- end-user-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.BaseModel#getUnit <em>Unit</em>}</li>
- * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getBaseModel()
  * @model
  * @generated
  */
 public interface BaseModel extends Model {
-	/**
-	 * Returns the value of the '<em><b>Unit</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtbase.Unit}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Unit</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Unit</em>' containment reference list.
-	 * @see org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage#getBaseModel_Unit()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Unit> getUnit();
 
 } // BaseModel

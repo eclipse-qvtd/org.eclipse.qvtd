@@ -18,6 +18,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
@@ -32,7 +33,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.Unit;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
@@ -169,7 +169,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	public Continuation<?> visitTopLevelCS(@NonNull TopLevelCS csElement) {
 		importPackages(csElement);
 		@NonNull ImperativeModel asModel = refreshRoot(ImperativeModel.class, QVTimperativePackage.Literals.IMPERATIVE_MODEL, csElement);
-		context.refreshPivotList(Unit.class, asModel.getUnit(), csElement.getOwnedImports());
+		context.refreshPivotList(Import.class, asModel.getOwnedImports(), csElement.getOwnedImports());
 		List<TransformationCS> csTransformations = csElement.getTransformations();
 //		List<Transformation> txList = new ArrayList<Transformation>(csTransformations.size());
 		Map<Transformation, List<Mapping>> tx2mappings = new HashMap<Transformation, List<Mapping>>();

@@ -80,9 +80,4 @@ public abstract class AbstractDelegatingQVTbaseVisitor<R, C, D extends QVTbaseVi
 	public @Nullable R visitTypedModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.TypedModel object) {
 		return delegate.visitTypedModel(object);
 	}
-
-	@Override
-	public @Nullable R visitUnit(@NonNull org.eclipse.qvtd.pivot.qvtbase.Unit object) {
-		return delegate.visitUnit(object);
-	}
 }

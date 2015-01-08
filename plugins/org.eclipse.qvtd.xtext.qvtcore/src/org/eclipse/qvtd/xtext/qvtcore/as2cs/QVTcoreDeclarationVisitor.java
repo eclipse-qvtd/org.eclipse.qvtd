@@ -66,7 +66,7 @@ public class QVTcoreDeclarationVisitor extends QVTcoreBaseDeclarationVisitor imp
 		assert asModel.eContainer() == null;
 		TopLevelCS csDocument = context.refreshElement(TopLevelCS.class, QVTcoreCSPackage.Literals.TOP_LEVEL_CS, asModel);
 		csDocument.setPivot(asModel);
-		context.refreshList(csDocument.getOwnedImports(), context.visitDeclarations(ImportCS.class, asModel.getUnit(), null));
+		context.refreshList(csDocument.getOwnedImports(), context.visitDeclarations(ImportCS.class, asModel.getOwnedImports(), null));
 		List<Mapping> asMappings = null;
 		List<Function> asQueries = null;
 		List<Transformation> asTransformations = null;

@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtbase.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -21,7 +22,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.Unit;
 import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
 
 /**
@@ -89,8 +89,8 @@ public class QVTbaseToStringVisitor extends ToStringVisitor implements QVTbaseVi
 	}
 
 	@Override
-	public String visitUnit(@NonNull Unit object) {
-		append("unit ");
+	public String visitImport(@NonNull Import object) {
+		append("import ");
 		appendName(object);
 		return null;
 	}

@@ -34,6 +34,7 @@ import org.eclipse.ocl.examples.codegen.generator.GenModelException;
 import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
+import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Iteration;
 import org.eclipse.ocl.pivot.LanguageExpression;
 import org.eclipse.ocl.pivot.NamedElement;
@@ -80,7 +81,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.Unit;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
@@ -668,7 +668,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 	}
 
 	@Override
-	public @Nullable CGNamedElement visitUnit(@NonNull Unit object) {
+	public @Nullable CGNamedElement visitImport(@NonNull Import object) {
 		return visiting(object);
 	}
 

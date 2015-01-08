@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteEnvironment;
+import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.evaluation.EvaluationLogger;
@@ -33,7 +34,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.Unit;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
@@ -356,8 +356,8 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
      * Delegates to my decorated visitor.
      */
 	@Override
-	public @Nullable Object visitUnit(@NonNull Unit unit) {
-		return delegate.visitUnit(unit);
+	public @Nullable Object visitImport(@NonNull Import _import) {
+		return delegate.visitImport(_import);
 	}
 
 	/**

@@ -12,10 +12,10 @@ package org.eclipse.qvtd.pivot.qvtrelation.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.internal.attributes.ModelAttribution;
 import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
 import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
-import org.eclipse.qvtd.pivot.qvtbase.Unit;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationModel;
 
 public class RelationModelAttribution extends ModelAttribution
@@ -26,8 +26,8 @@ public class RelationModelAttribution extends ModelAttribution
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		super.computeLookup(target, environmentView, scopeView);
 		RelationModel targetElement = (RelationModel)target;
-		for (Unit unit : targetElement.getUnit()) {
-			environmentView.addElement(unit.getName(), unit.getUsedPackage());
+		for (Import _import : targetElement.getOwnedImports()) {
+			environmentView.addElement(_import.getName(), _import.getImportedNamespace());
 		}
 		return scopeView.getParent();
 	}

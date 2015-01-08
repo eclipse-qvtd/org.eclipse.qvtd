@@ -89,9 +89,4 @@ public abstract class AbstractQVTbaseASSaverNormalizeVisitor
 	public @Nullable Object visitTypedModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.TypedModel object) {
 		return visitNamedElement(object);
 	}
-
-	@Override
-	public @Nullable Object visitUnit(@NonNull org.eclipse.qvtd.pivot.qvtbase.Unit object) {
-		return visitNamedElement(object);
-	}
 }
