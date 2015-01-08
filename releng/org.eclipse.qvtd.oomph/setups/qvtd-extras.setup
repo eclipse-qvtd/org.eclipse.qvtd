@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup:Project
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
+    xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
+    name="qvtd"
+    label="QVTd">
+  <project name="extras"
+      label="Extras"
+      logicalProjectContainer="/">
+    <setupTask
+        xsi:type="setup:CompoundTask"
+        name="Epsilon">
+      <setupTask
+          xsi:type="setup.p2:P2Task"
+          label="Epsilon Tools">
+        <requirement
+            name="org.eclipse.epsilon.core.feature.feature.group"/>
+        <requirement
+            name="org.eclipse.epsilon.core.dt.feature.feature.group"/>
+        <requirement
+            name="org.eclipse.epsilon.emf.feature.feature.group"/>
+        <requirement
+            name="org.eclipse.epsilon.emf.dt.feature.feature.group"/>
+        <requirement
+            name="org.eclipse.epsilon.emc.graphml.feature.feature.group"/>
+        <repository
+            url="http://download.eclipse.org/epsilon/interim/"/>
+        <repository
+            url="http://download.eclipse.org/epsilon/updates/"/>
+      </setupTask>
+      <description>Epsilon related configuration tasks</description>
+    </setupTask>
+    <stream
+        name="master"
+        label="Master (Mars)"/>
+    <description>Another project with extras for the IDE to work on QVTd</description>
+  </project>
+  <logicalProjectContainer
+      xsi:type="setup:Project"
+      href="index:/org.eclipse.setup#//@projectCatalogs[name='org.eclipse']/@projects[name='user.project']/@projects[name='qvtd']"/>
+  <description>The development environment for QVTd</description>
+</setup:Project>
