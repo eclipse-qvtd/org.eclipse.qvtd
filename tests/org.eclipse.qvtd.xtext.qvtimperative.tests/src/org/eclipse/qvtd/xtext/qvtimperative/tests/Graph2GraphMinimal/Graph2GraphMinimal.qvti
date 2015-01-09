@@ -7,7 +7,7 @@ transformation CopyGraphMinimal {
 	middle imports SimpleGraph2Graph;
 }
 
-map upper2lowerLM in CopyGraphMinimal {
+map graph2graphLM in CopyGraphMinimal {
 	check upperGraph(g1:Graph) {}
 	enforce middle() {
 		realize g2g:Graph2Graph
@@ -16,12 +16,12 @@ map upper2lowerLM in CopyGraphMinimal {
         g2g.graph1 := g1;
         g2g.name := g1.name;
     }
-    call upper2lowerMR {
+    call graph2graphMR {
     	g2gout := g2g;
     }
 }
 
-map upper2lowerMR in CopyGraphMinimal {
+map graph2graphMR in CopyGraphMinimal {
 	check middle(g2gout:Graph2Graph) { }
     enforce lowerGraph() {
         realize g2:Graph
@@ -29,5 +29,15 @@ map upper2lowerMR in CopyGraphMinimal {
     where () {		-- M to R for G
 		g2gout.graph2 := g2;
         g2.name := g2gout.name;
+    }
+}
+
+map __root__ in CopyGraphMinimal {
+    
+    where () {}
+    for g1 : SimpleGraph::Graph in SimpleGraph::Graph.allInstances() {
+        call graph2graphLM {
+            g1 := g1;
+        }
     }
 }

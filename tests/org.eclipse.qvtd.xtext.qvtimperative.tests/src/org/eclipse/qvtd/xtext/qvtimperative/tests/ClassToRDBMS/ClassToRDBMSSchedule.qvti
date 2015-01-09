@@ -8,6 +8,16 @@ transformation umlRdbms {
     middle imports UMLtoRDBMS;
 }
 
+map __root__ in umlRdbms {
+    
+    where () {}
+    for p1 : SimpleUML::Package in SimpleUML::Package.allInstances() {
+        call packageToSchemaLM {
+            p := p1;
+        }
+    }
+}
+
 map packageToSchemaLM in umlRdbms {
     check uml (p:Package) { }
     enforce middle () {

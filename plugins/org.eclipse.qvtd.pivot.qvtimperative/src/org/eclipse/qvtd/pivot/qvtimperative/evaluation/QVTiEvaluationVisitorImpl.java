@@ -10,21 +10,12 @@
  ******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
@@ -39,9 +30,11 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 /**
  * QVTimperativeEvaluationVisitor is the class for ...
  */
-public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
+public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor
+{
+    /** The name of the root mapping */
+    private static final String ROOT_MAPPING_NAME = "__root__";
 
-        
     /**
      * Instantiates a new qV tcore evaluation visitor impl.
      * 
@@ -62,27 +55,6 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
         nestedEvaluationVisitor.setMonitor(getMonitor());
         return nestedEvaluationVisitor;
     }
-
-	private static void doMappingCallRecursion(@NonNull QVTiEvaluationVisitor nv, @NonNull Rule rule, @NonNull List<Variable> rootVariables,
-			@NonNull List<List<Object>> rootBindings, int depth) {
-		int nextDepth = depth+1;
-		int maxDepth = rootVariables.size();
-		Variable var = rootVariables.get(depth);
-		Type guardType = var.getType();
-		IdResolver idResolver = nv.getMetamodelManager().getIdResolver();
-        for (Object binding : rootBindings.get(depth)) {
-			Type valueType = idResolver.getDynamicTypeOf(binding);
-			if ((guardType != null) && valueType.conformsTo(nv.getMetamodelManager().getStandardLibrary(), guardType)) {
-				nv.getEvaluationEnvironment().replace(var, binding);
-	        	if (nextDepth < maxDepth) {
-	        		doMappingCallRecursion(nv, rule, rootVariables, rootBindings, nextDepth);
-	        	}
-	        	else {
-    	            rule.accept(nv);
-	        	}
-			}
-        }
-	}
 
     /* (non-Javadoc)
      * @see uk.ac.york.qvtd.pivot.qvtcorebase.evaluation.QVTcoreBaseEvaluationVisitorImpl#visitBottomPattern(org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern)
@@ -193,9 +165,9 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
         }
         /*result =*/ mapping.getBottomPattern().accept(undecoratedVisitor);
 //      if (result == Boolean.TRUE) {
-			MappingStatement mappingStatements = mapping.getMappingStatement();
-			if (mappingStatements != null) {
-				mappingStatements.accept(undecoratedVisitor);
+			MappingStatement mappingStatement = mapping.getMappingStatement();
+			if (mappingStatement != null) {
+				mappingStatement.accept(undecoratedVisitor);
 			}
 //    	}
         return null;
@@ -208,7 +180,7 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
 
 	@Override
     public @Nullable Object visitTransformation(@NonNull Transformation transformation) {
-    	for (Rule rule : transformation.getRule()) {
+/*    	for (Rule rule : transformation.getRule()) {
     		QVTiEvaluationVisitor nv = ((QVTiEvaluationVisitor) undecoratedVisitor).createNestedEvaluator();
     		try {
 	    		// Find bindings before invoking the mapping so all visitors are equal
@@ -236,6 +208,19 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
     			nv.dispose();
     		}
     	}
+        return true; */
+    	
+    	QVTiEvaluationVisitor nv = null;
+        for (Rule rule : transformation.getRule()) {
+            if (rule.getName().equals(ROOT_MAPPING_NAME)) {
+                nv = ((QVTiEvaluationVisitor) undecoratedVisitor).createNestedEvaluator();
+                rule.accept(nv);
+                break;
+            }
+        }
+        if (nv == null) {
+        	throw new IllegalStateException("Transformation " + transformation.getName() + " has no root mapping");
+        }
         return true;
     }
 }

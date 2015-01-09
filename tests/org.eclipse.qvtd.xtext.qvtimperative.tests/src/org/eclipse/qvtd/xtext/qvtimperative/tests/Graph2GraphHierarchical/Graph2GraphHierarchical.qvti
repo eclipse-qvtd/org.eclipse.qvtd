@@ -7,6 +7,16 @@ transformation CopyGraph {
 	middle imports SimpleGraph2Graph;
 }
 
+map __root__ in CopyGraph {
+    
+    where () {}
+    for g1 : SimpleGraph::Graph in SimpleGraph::Graph.allInstances() {
+        call Graph2Middle {
+            g1 := g1;
+        }
+    }
+}
+
 map Graph2Middle in CopyGraph {	        					-- L to M for G
     check upperGraph(g1:Graph) {}
     enforce middle() {

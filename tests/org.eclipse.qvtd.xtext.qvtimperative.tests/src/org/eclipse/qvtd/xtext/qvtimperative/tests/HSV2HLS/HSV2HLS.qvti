@@ -18,6 +18,13 @@ query hsv2hls::hsv2rgb(color : HSVTree::HSV) : HSV2HLS::RGB;
 query hsv2hls::rgb2hls(color : HSV2HLS::RGB) : HLSTree::HLS;
 query hsv2hls::rgb2hsv(color : HSV2HLS::RGB) : HSVTree::HSV;
 
+map __root__ in hsv2hls {
+    for hsvRoot : HSVTree::HSVNode in HSVTree::HSVNode.allInstances() {
+        call HSV2MiddleRoot {
+            hsvRoot := hsvRoot;
+        } 
+    } 
+}
 
 map HSV2MiddleRoot in hsv2hls {	-- Mapping root nodes L to M
 	check hsv(hsvRoot : HSVNode) { } 
