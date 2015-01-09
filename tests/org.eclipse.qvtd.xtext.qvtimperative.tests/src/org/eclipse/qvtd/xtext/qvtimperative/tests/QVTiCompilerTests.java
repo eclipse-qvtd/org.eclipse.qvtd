@@ -12,6 +12,7 @@ package org.eclipse.qvtd.xtext.qvtimperative.tests;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,16 +26,10 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
-import org.eclipse.ocl.pivot.CompleteEnvironment;
-import org.eclipse.ocl.pivot.evaluation.AbstractTransformation;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
-import org.eclipse.ocl.pivot.evaluation.ModelManager;
-import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.internal.complete.CompleteEnvironmentInternal;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerResourceSetAdapter;
 import org.eclipse.ocl.pivot.internal.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.pivot.internal.validation.PivotEObjectValidator;
-import org.eclipse.ocl.pivot.library.executor.ExecutorManager;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.validation.ComposedEValidator;
@@ -47,6 +42,9 @@ import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationEvaluator;
+import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationEvaluator;
+import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
@@ -66,28 +64,15 @@ import test.umltordbms.UmltordbmsPackage;
 public class QVTiCompilerTests extends LoadTestCase
 {
 	@SuppressWarnings("unused")private static ComposedEValidator makeSureRequiredBundleIsLoaded = null;
-	
-	private static final class TxEvaluator extends ExecutorManager {
-		private TxEvaluator(@NonNull CompleteEnvironment environment) {
-			super(environment);
-		}
 
-		@NonNull
-		public Evaluator createNestedEvaluator() {
-			throw new UnsupportedOperationException();
-		}
-
-		@NonNull
-		public IdResolver getIdResolver() {
-			return ((CompleteEnvironmentInternal)environment).getMetamodelManager().getIdResolver();
-		}
-
-		@NonNull
-		public ModelManager getModelManager() {
-			throw new UnsupportedOperationException();
+	public class MyTransformationEvaluator extends AbstractTransformationEvaluator
+	{
+		public MyTransformationEvaluator(@NonNull Constructor<? extends TransformationExecutor> txConstructor)
+				throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
+			super(ClassUtil.nonNullState(metamodelManager.getCompleteEnvironment()), txConstructor);
 		}
 	}
-
+	
 	@Override
 	protected void setUp() throws Exception {
 		BaseLinkingService.DEBUG_RETRY.setState(true);
@@ -144,11 +129,12 @@ public class QVTiCompilerTests extends LoadTestCase
 		EPackage.Registry.INSTANCE.put(HSVTreePackage.eNS_URI, HSVTreePackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(HSV2HLSPackage.eNS_URI, HSV2HLSPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(HLSTreePackage.eNS_URI, HLSTreePackage.eINSTANCE);
-		Class<? extends AbstractTransformation> txClass = generateCode(transformURI, genModelURI, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");
-		
-		Constructor<? extends AbstractTransformation> txConstructor = txClass.getConstructor(Evaluator.class);
-		Evaluator evaluator = new TxEvaluator(ClassUtil.nonNullState(metamodelManager.getCompleteEnvironment()));
-		AbstractTransformation tx = txConstructor.newInstance(evaluator);
+		Transformation asTransformation = loadTransformation(transformURI, genModelURI);
+		assert asTransformation != null;
+		Class<? extends TransformationExecutor> txClass = generateCode(asTransformation, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");
+		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
+		TransformationEvaluator evaluator = new MyTransformationEvaluator(txConstructor);
+		TransformationExecutor tx = evaluator.getExecutor();
 		Resource inputResource = resourceSet.getResource(inputModelURI, true);
 		tx.addRootObjects("hsv", ClassUtil.nonNullState(inputResource.getContents()));
 		tx.run();
@@ -163,7 +149,9 @@ public class QVTiCompilerTests extends LoadTestCase
 	public void testCG_ClassesCS2AS_qvti() throws Exception {
 		URI transformURI = getProjectFileURI("ClassesCS2AS/ClassesCS2AS.qvti");
 		URI genModelURI = getProjectFileURI("ClassesCS2AS/ClassesCS2AS.genmodel");
-		generateCode(transformURI, genModelURI, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");		
+		Transformation asTransformation = loadTransformation(transformURI, genModelURI);
+		assert asTransformation != null;
+		generateCode(asTransformation, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");
 	}
 
 	public void testCG_ClassToRDBMS_qvti() throws Exception {
@@ -175,11 +163,12 @@ public class QVTiCompilerTests extends LoadTestCase
 		EPackage.Registry.INSTANCE.put(SimpleumlPackage.eNS_URI, SimpleumlPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(UmltordbmsPackage.eNS_URI, UmltordbmsPackage.eINSTANCE);
 		EPackage.Registry.INSTANCE.put(SimplerdbmsPackage.eNS_URI, SimplerdbmsPackage.eINSTANCE);
-		Class<? extends AbstractTransformation> txClass = generateCode(transformURI, genModelURI, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");
-		
-		Constructor<? extends AbstractTransformation> txConstructor = txClass.getConstructor(Evaluator.class);
-		Evaluator evaluator = new TxEvaluator(ClassUtil.nonNullState(metamodelManager.getCompleteEnvironment()));
-		AbstractTransformation tx = txConstructor.newInstance(evaluator);
+		Transformation asTransformation = loadTransformation(transformURI, genModelURI);
+		assert asTransformation != null;
+		Class<? extends TransformationExecutor> txClass = generateCode(asTransformation, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");
+		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
+		TransformationEvaluator evaluator = new MyTransformationEvaluator(txConstructor);
+		TransformationExecutor tx = evaluator.getExecutor();
 		Resource inputResource = resourceSet.getResource(inputModelURI, true);
 		tx.addRootObjects("uml", ClassUtil.nonNullState(inputResource.getContents()));
 		tx.run();
@@ -191,7 +180,34 @@ public class QVTiCompilerTests extends LoadTestCase
         assertSameModel(referenceResource, outputResource);
 	}
 
-	protected Class<? extends AbstractTransformation> generateCode(@NonNull URI transformURI, @NonNull URI genModelURI, @Nullable String savePath) throws Exception {
+	protected Class<? extends TransformationExecutor> generateCode(@NonNull Transformation asTransformation, @Nullable String savePath) throws Exception {
+		QVTiCodeGenerator cg = new QVTiCodeGenerator(ClassUtil.nonNullState(metamodelManager), asTransformation);
+		QVTiCodeGenOptions options = cg.getOptions();
+		options.setUseNullAnnotations(true);
+		options.setPackagePrefix("cg");
+		cg.generateClassFile();
+		if (savePath != null) {
+			cg.saveSourceFile(savePath);
+		}
+		Class<? extends TransformationExecutor> txClass = compileTransformation(cg);
+		return txClass;
+	}
+
+	@SuppressWarnings("unchecked")
+	public Class<? extends TransformationExecutor> compileTransformation(@NonNull QVTiCodeGenerator cg) throws Exception {
+		String qualifiedName = cg.getQualifiedName();
+		String javaCodeSource = cg.generateClassFile();
+		try {
+			Class<?> txClass = OCL2JavaFileObject.loadClass(qualifiedName, javaCodeSource);
+			return (Class<? extends TransformationExecutor>) txClass;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+	protected Transformation loadTransformation(@NonNull URI transformURI, @NonNull URI genModelURI) throws Exception {
 		OCLstdlibTables.LIBRARY.getClass();		// Ensure coherent initialization
 		metamodelManager = new PivotEnvironmentFactory(null, null).getMetamodelManager();
 		resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
@@ -209,35 +225,12 @@ public class QVTiCompilerTests extends LoadTestCase
 				for (org.eclipse.ocl.pivot.Package asPackage : ((ImperativeModel)eObject).getOwnedPackages()) {
 					for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
 						if (asClass instanceof Transformation) {
-							QVTiCodeGenerator cg = new QVTiCodeGenerator(ClassUtil.nonNullState(metamodelManager), (Transformation)asClass);
-							QVTiCodeGenOptions options = cg.getOptions();
-							options.setUseNullAnnotations(true);
-							options.setPackagePrefix("cg");
-							cg.generateClassFile();
-							if (savePath != null) {
-								cg.saveSourceFile(savePath);
-							}
-							Class<? extends AbstractTransformation> txClass = compileTransformation(cg);
-							return txClass;
+							return (Transformation)asClass;
 						}
 					}
 				}
 			}
 		}
 		return null;
-	}
-
-	@SuppressWarnings("unchecked")
-	public Class<? extends AbstractTransformation> compileTransformation(@NonNull QVTiCodeGenerator cg) throws Exception {
-		String qualifiedName = cg.getQualifiedName();
-		String javaCodeSource = cg.generateClassFile();
-		try {
-			Class<?> txClass = OCL2JavaFileObject.loadClass(qualifiedName, javaCodeSource);
-			return (Class<? extends AbstractTransformation>) txClass;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw e;
-		}
 	}
 }

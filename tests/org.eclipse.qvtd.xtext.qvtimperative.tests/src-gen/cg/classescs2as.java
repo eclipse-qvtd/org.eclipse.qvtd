@@ -26,10 +26,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.AbstractTransformation;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
@@ -46,6 +44,7 @@ import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.pivot.values.SetValue;
+import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
 
 /**
  * The classescs2as transformation:
@@ -59,7 +58,7 @@ import org.eclipse.ocl.pivot.values.SetValue;
  * Extract each output model with {@link getRootObjects(String)}
  */
 @SuppressWarnings("nls")
-public class classescs2as extends AbstractTransformation
+public class classescs2as extends AbstractTransformationExecutor
 {
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_ocldependencyanalysis_s_classes_s_1_0 = IdManager.getNsURIPackageId("http://ocldependencyanalysis/classes/1.0", null, ClassesPackage.eINSTANCE);
@@ -98,19 +97,44 @@ public class classescs2as extends AbstractTransformation
     protected final @NonNull Map<PackageCS,PackageCS2Package> OPPOSITE_OF_PackageCS2Package_packageCS = new HashMap<PackageCS,PackageCS2Package>();
     protected final @NonNull Map<RootCS,RootCS2Root> OPPOSITE_OF_RootCS2Root_rootCS = new HashMap<RootCS,RootCS2Root>();
     
+    /*
+     * Array of the ClassIds of each class for which allInstances() may be invoked. Array index is the ClassIndex.
+     */
+    private static final @NonNull ClassId[] classIndex2classId = new ClassId[]{
+        CLSSid_Class,		// 0 => Class
+        CLSSid_ClassCS,		// 1 => ClassCS
+        CLSSid_ClassCS2Class,		// 2 => ClassCS2Class
+        CLSSid_Package,		// 3 => Package
+        CLSSid_PackageCS,		// 4 => PackageCS
+        CLSSid_PackageCS2Package,		// 5 => PackageCS2Package
+        CLSSid_Root,		// 6 => Root
+        CLSSid_RootCS,		// 7 => RootCS
+        CLSSid_RootCS2Root		// 8 => RootCS2Root
+    };
+    /*
+     * Mapping from each ClassIndex to all the ClassIndexes to which an object of the outer index
+     * may contribute results to an allInstances() invocation.
+     * Non trivial inner arrays arise when one ClassId is a derivation of another and so an
+     * instance of the derived classId contributes to derived and inherited ClassIndexes.
+     */
+    private final static @NonNull int[][] classIndex2allClassIndexes = new int[][] {
+        {0},		// 0 : Class -> {Class}
+        {1},		// 1 : ClassCS -> {ClassCS}
+        {2},		// 2 : ClassCS2Class -> {ClassCS2Class}
+        {3},		// 3 : Package -> {Package}
+        {4},		// 4 : PackageCS -> {PackageCS}
+        {5},		// 5 : PackageCS2Package -> {PackageCS2Package}
+        {6},		// 6 : Root -> {Root}
+        {7},		// 7 : RootCS -> {RootCS}
+        {8}		// 8 : RootCS2Root -> {RootCS2Root}
+    };
+    
     public classescs2as(final @NonNull Evaluator evaluator) {
-        super(evaluator, new String[] {"leftCS", "rightAS", "middle"});
+        super(evaluator, new String[] {"leftCS", "rightAS", "middle"}, classIndex2classId, classIndex2allClassIndexes);
     }
     
     public boolean run() {
-        final EClass ECLASS_classCS = ClassescsPackage.Literals.CLASS_CS;
-        assert ECLASS_classCS != null;
-        List<? extends ClassCS> LIST_classCS = getObjectsByType(ClassCS.class, 0/*leftCS*/, ECLASS_classCS);
-        for (ClassCS classCS : LIST_classCS) {
-            if (classCS != null) {
-                mClassCS2Class_LM(classCS);
-            }
-        }
+        __root__();
         return true;
     }
     

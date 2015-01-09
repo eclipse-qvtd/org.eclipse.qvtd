@@ -14,10 +14,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.AbstractTransformation;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
@@ -26,6 +24,7 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.NsURIPackageId;
 import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.library.classifier.ClassifierAllInstancesOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionAsSetOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionSelectByKindOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionUnionOperation;
@@ -37,6 +36,7 @@ import org.eclipse.ocl.pivot.values.BagValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SetValue;
+import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
 import test.simplerdbms.Column;
 import test.simplerdbms.ForeignKey;
 import test.simplerdbms.Key;
@@ -73,7 +73,7 @@ import test.umltordbms.UmltordbmsPackage;
  * Extract each output model with {@link getRootObjects(String)}
  */
 @SuppressWarnings("nls")
-public class umlRdbms extends AbstractTransformation
+public class umlRdbms extends AbstractTransformationExecutor
 {
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_SimpleRDBMS = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS", null, SimplerdbmsPackage.eINSTANCE);
@@ -127,6 +127,7 @@ public class umlRdbms extends AbstractTransformation
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_ClassToTable = TypeId.SET.getSpecializedId(CLSSid_ClassToTable);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_FromAttribute = TypeId.SET.getSpecializedId(CLSSid_FromAttribute);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_NonLeafAttribute = TypeId.SET.getSpecializedId(CLSSid_NonLeafAttribute);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Package = TypeId.SET.getSpecializedId(CLSSid_Package);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_PrimitiveToName = TypeId.SET.getSpecializedId(CLSSid_PrimitiveToName);
     
     /* Outer-to-Middle Property navigation caches */
@@ -135,19 +136,28 @@ public class umlRdbms extends AbstractTransformation
     protected final @NonNull Map<Attribute,FromAttribute> OPPOSITE_OF_FromAttribute_attribute = new HashMap<Attribute,FromAttribute>();
     protected final @NonNull Map<PrimitiveDataType,PrimitiveToName> OPPOSITE_OF_PrimitiveToName_primitive = new HashMap<PrimitiveDataType,PrimitiveToName>();
     
+    /*
+     * Array of the ClassIds of each class for which allInstances() may be invoked. Array index is the ClassIndex.
+     */
+    private static final @NonNull ClassId[] classIndex2classId = new ClassId[]{
+        CLSSid_Package		// 0 => Package
+    };
+    /*
+     * Mapping from each ClassIndex to all the ClassIndexes to which an object of the outer index
+     * may contribute results to an allInstances() invocation.
+     * Non trivial inner arrays arise when one ClassId is a derivation of another and so an
+     * instance of the derived classId contributes to derived and inherited ClassIndexes.
+     */
+    private final static @NonNull int[][] classIndex2allClassIndexes = new int[][] {
+        {0}		// 0 : Package -> {Package}
+    };
+    
     public umlRdbms(final @NonNull Evaluator evaluator) {
-        super(evaluator, new String[] {"uml", "rdbms", "middle"});
+        super(evaluator, new String[] {"uml", "rdbms", "middle"}, classIndex2classId, classIndex2allClassIndexes);
     }
     
     public boolean run() {
-        final EClass ECLASS_p = SimpleumlPackage.Literals.PACKAGE;
-        assert ECLASS_p != null;
-        List<? extends Package> LIST_p = getObjectsByType(Package.class, 0/*uml*/, ECLASS_p);
-        for (Package p : LIST_p) {
-            if (p != null) {
-                packageToSchemaLM(p);
-            }
-        }
+        __root__();
         return true;
     }
     
@@ -164,6 +174,46 @@ public class umlRdbms extends AbstractTransformation
     protected @NonNull List<Association> getAllForwards(final @Nullable /*@NonInvalid*/ test.simpleuml.Class cls_1) {
         @SuppressWarnings("null")@NonNull List<Association> emptyList = Collections.emptyList();
         return emptyList;
+    }
+    
+    /**
+     * 
+     * map __root__ in umlRdbms) {
+     * 
+     *   where ( |
+     * )
+     * { |
+     * }
+     * for p1 : simpleuml::Package in simpleuml::Package.allInstances()
+     *    {
+     * map packageToSchemaLM {
+     * p := p1;
+     * }}
+     * }
+     */
+    protected boolean __root__() {
+        try {
+            // predicates
+            final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+            final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_simpleuml_c_c_Package_0 = idResolver.getClass(CLSSid_Package, null);
+            // creations
+            // assignments
+            // mapping statements
+            final @NonNull /*@Thrown*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Package, TYP_simpleuml_c_c_Package_0);
+            final List<Package> UNBOXED_allInstances = allInstances.asEcoreObjects(idResolver, Package.class);
+            assert UNBOXED_allInstances != null;
+            ;
+            for (Package p1 : UNBOXED_allInstances) {
+                if (p1 != null) {
+                    final @NonNull /*@NonInvalid*/ Package symbol_1 = (Package)p1;
+                    packageToSchemaLM(symbol_1);
+                }
+            }
+            return true;
+        }
+        catch (Exception e) {
+            return false;
+        }
     }
     
     /**

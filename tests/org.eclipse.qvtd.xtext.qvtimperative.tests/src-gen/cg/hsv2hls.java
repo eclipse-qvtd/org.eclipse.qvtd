@@ -10,18 +10,22 @@
 package cg;
 
 import java.util.List;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.AbstractTransformation;
+import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.DataTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
+import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.NsURIPackageId;
+import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.library.classifier.ClassifierAllInstancesOperation;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
+import org.eclipse.ocl.pivot.values.SetValue;
+import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
 import test.hls.HLSTree.HLSNode;
 import test.hls.HLSTree.HLSTreeFactory;
 import test.hls.HLSTree.HLSTreePackage;
@@ -43,11 +47,13 @@ import test.middle.HSV2HLS.HSVNode2HLSNode;
  * Extract each output model with {@link getRootObjects(String)}
  */
 @SuppressWarnings("nls")
-public class hsv2hls extends AbstractTransformation
+public class hsv2hls extends AbstractTransformationExecutor
 {
+    public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HLSTree = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/HLSTree", null, HLSTreePackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVTree = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/HSVTree", null, HSVTreePackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVtoHLS = IdManager.getNsURIPackageId("http://www.eclipse.org/qvt/examples/0.1/HSVtoHLS", null, HSV2HLSPackage.eINSTANCE);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Class = PACKid_$metamodel$.getClassId("Class", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_HLSNode = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HLSTree.getClassId("HLSNode", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_HSVNode = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVTree.getClassId("HSVNode", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_HSVNode2HLSNode = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVtoHLS.getClassId("HSVNode2HLSNode", 0);
@@ -56,20 +62,30 @@ public class hsv2hls extends AbstractTransformation
     public static final @NonNull /*@NonInvalid*/ DataTypeId DATAid_RGB = PACKid_http_c_s_s_www_eclipse_org_s_qvt_s_examples_s_0_1_s_HSVtoHLS.getDataTypeId("RGB", 0);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_HSVNode = TypeId.ORDERED_SET.getSpecializedId(CLSSid_HSVNode);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_HSVNode2HLSNode = TypeId.ORDERED_SET.getSpecializedId(CLSSid_HSVNode2HLSNode);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_HSVNode = TypeId.SET.getSpecializedId(CLSSid_HSVNode);
+    
+    /*
+     * Array of the ClassIds of each class for which allInstances() may be invoked. Array index is the ClassIndex.
+     */
+    private static final @NonNull ClassId[] classIndex2classId = new ClassId[]{
+        CLSSid_HSVNode		// 0 => HSVNode
+    };
+    /*
+     * Mapping from each ClassIndex to all the ClassIndexes to which an object of the outer index
+     * may contribute results to an allInstances() invocation.
+     * Non trivial inner arrays arise when one ClassId is a derivation of another and so an
+     * instance of the derived classId contributes to derived and inherited ClassIndexes.
+     */
+    private final static @NonNull int[][] classIndex2allClassIndexes = new int[][] {
+        {0}		// 0 : HSVNode -> {HSVNode}
+    };
     
     public hsv2hls(final @NonNull Evaluator evaluator) {
-        super(evaluator, new String[] {"hsv", "hls", "middle"});
+        super(evaluator, new String[] {"hsv", "hls", "middle"}, classIndex2classId, classIndex2allClassIndexes);
     }
     
     public boolean run() {
-        final EClass ECLASS_hsvRoot = HSVTreePackage.Literals.HSV_NODE;
-        assert ECLASS_hsvRoot != null;
-        List<? extends HSVNode> LIST_hsvRoot = getObjectsByType(HSVNode.class, 0/*hsv*/, ECLASS_hsvRoot);
-        for (HSVNode hsvRoot : LIST_hsvRoot) {
-            if (hsvRoot != null) {
-                HSV2MiddleRoot(hsvRoot);
-            }
-        }
+        __root__();
         return true;
     }
     
@@ -87,6 +103,46 @@ public class hsv2hls extends AbstractTransformation
     
     protected @NonNull String rgb2hsv(final @Nullable /*@NonInvalid*/ String color_2) {
         return "";
+    }
+    
+    /**
+     * 
+     * map __root__ in hsv2hls) {
+     * 
+     *   where ( |
+     * )
+     * { |
+     * }
+     * for hsvRoot : HSVTree::HSVNode in HSVTree::HSVNode.allInstances()
+     *    {
+     * map HSV2MiddleRoot {
+     * hsvRoot := hsvRoot;
+     * }}
+     * }
+     */
+    protected boolean __root__() {
+        try {
+            // predicates
+            final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+            final @NonNull /*@NonInvalid*/ Class TYP_HSVTree_c_c_HSVNode_0 = idResolver.getClass(CLSSid_HSVNode, null);
+            // creations
+            // assignments
+            // mapping statements
+            final @NonNull /*@Thrown*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_HSVNode, TYP_HSVTree_c_c_HSVNode_0);
+            final List<HSVNode> UNBOXED_allInstances = allInstances.asEcoreObjects(idResolver, HSVNode.class);
+            assert UNBOXED_allInstances != null;
+            ;
+            for (HSVNode hsvRoot_1 : UNBOXED_allInstances) {
+                if (hsvRoot_1 != null) {
+                    final @NonNull /*@NonInvalid*/ HSVNode symbol_1 = (HSVNode)hsvRoot_1;
+                    HSV2MiddleRoot(symbol_1);
+                }
+            }
+            return true;
+        }
+        catch (Exception e) {
+            return false;
+        }
     }
     
     /**

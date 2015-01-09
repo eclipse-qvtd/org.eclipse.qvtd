@@ -55,7 +55,7 @@ public class QVTiModelManager implements ModelManager
 	/**
 	 * The types upon which execution of the transformation may invoke allInstances().
 	 */
-	private @NonNull Set<Type> allInstancesTypes;
+	private @NonNull Set<org.eclipse.ocl.pivot.Class> allInstancesClasses;
 
 	/**
 	 * Array of caches for the un-navigable opposite of each used navigable middle to outer property. 
@@ -70,7 +70,7 @@ public class QVTiModelManager implements ModelManager
 	 */
 	public QVTiModelManager(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
 	    this.metamodelManager = transformationAnalysis.getMetamodelManager();
-	    this.allInstancesTypes = transformationAnalysis.getAllInstancesTypes();
+	    this.allInstancesClasses = transformationAnalysis.getAllInstancesClasses();
 	    int cacheIndexes = transformationAnalysis.getCacheIndexes();
 		this.middleOpposites = new Map<?, ?>[cacheIndexes];
 		for (int i = 0; i < cacheIndexes; i++) {
@@ -113,7 +113,7 @@ public class QVTiModelManager implements ModelManager
 	public void dispose() {
 		modelElementsMap.clear();
 		modelResourceMap.clear();
-		allInstancesTypes.clear();
+		allInstancesClasses.clear();
 		for (Map<?, ?> middleOpposite : middleOpposites) {
 			middleOpposite.clear();
 		}
