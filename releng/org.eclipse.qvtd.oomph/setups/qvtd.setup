@@ -235,7 +235,7 @@
             pattern="org.eclipse.qvtd.pivot.*"/>
         <predicate
             xsi:type="predicates:NamePredicate"
-            pattern="org.eclipse.qvtd.all.tests"/>
+            pattern="org.eclipse.qvtd.*.tests"/>
       </workingSet>
       <workingSet
           name="QVTd Examples">
