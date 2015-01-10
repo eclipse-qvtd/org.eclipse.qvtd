@@ -148,8 +148,8 @@ public class QVTiSerializeTests extends LoadTestCase
 		doSerializeRoundTrip("HSV2HLS/HSV2HLS");
 	}
 	
-	public void testSerialize_Uml2Rdbms_qvti() throws Exception {
-		doSerializeRoundTrip("UML2RDBMS/UmlToRdbms");
+	public void testSerialize_UmlToRdbms_qvti() throws Exception {
+		doSerializeRoundTrip("UMLToRDBMS/UmlToRdbms");
 	}
 /*	protected void doSerialize(@NonNull String stem) throws Exception {
 		URI inputURI = getProjectFileURI(stem + ".qvtias");

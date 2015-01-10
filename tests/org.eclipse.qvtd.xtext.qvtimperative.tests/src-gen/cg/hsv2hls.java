@@ -86,8 +86,7 @@ public class hsv2hls extends AbstractTransformationExecutor
     }
     
     public boolean run() {
-        __root__();
-        return true;
+        return __root__();
     }
     
     protected @NonNull String hls2rgb(final @Nullable /*@NonInvalid*/ String color) {

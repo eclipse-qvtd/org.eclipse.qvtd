@@ -158,8 +158,7 @@ public class umlRdbms extends AbstractTransformationExecutor
     }
     
     public boolean run() {
-        __root__();
-        return true;
+        return __root__();
     }
     
     protected @NonNull List<test.simpleuml.Class> getAllSupers(final @Nullable /*@NonInvalid*/ test.simpleuml.Class cls) {

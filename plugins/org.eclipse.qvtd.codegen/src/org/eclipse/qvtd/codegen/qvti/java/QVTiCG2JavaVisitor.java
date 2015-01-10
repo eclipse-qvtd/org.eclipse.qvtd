@@ -18,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -348,24 +347,23 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		return oppositeIndex2propertyIdName;
     }
 
-	@SuppressWarnings("null")
 	protected void doRun(@NonNull CGTransformation cgTransformation) {
 		CGMapping cgRootMapping = NameUtil.getNameable(cgTransformation.getMappings(), QVTimperativeUtil.ROOT_MAPPING_NAME);
 		if (cgRootMapping == null) {
         	throw new IllegalStateException("Transformation " + cgTransformation.getName() + " has no root mapping");
 		}
-		List<CGGuardVariable> cgFreeVariables = cgRootMapping.getFreeVariables();
+/*		List<CGGuardVariable> cgFreeVariables = cgRootMapping.getFreeVariables();
 		NameManager nameManager = globalContext.getNameManager();
 		Map<CGParameter, String> listNames = new HashMap<CGParameter, String>();
 		for (CGGuardVariable cgFreeVariable : cgFreeVariables) {
 			String nameHint = "LIST_" + cgFreeVariable.getValueName();
 			String listName = nameManager.getGlobalSymbolName(null, nameHint);
 			listNames.put(cgFreeVariable, listName);
-		}
+		} */
 		//
 		js.append("public boolean run() {\n");
 		js.pushIndentation(null);
-		for (@NonNull CGGuardVariable cgFreeVariable : cgFreeVariables) {
+/*		for (@NonNull CGGuardVariable cgFreeVariable : cgFreeVariables) {
 			TypeDescriptor typeDescriptor = context.getTypeDescriptor(cgFreeVariable);
 			EClassifier eClassifier = ClassUtil.nonNullState(typeDescriptor.getEClassifier());
 			String qualifiedPackageInterfaceName = genModelHelper.getQualifiedPackageInterfaceName(eClassifier.getEPackage());
@@ -413,25 +411,26 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 			js.appendValueName(cgFreeVariable);
 			js.append(" != null) {\n");
 			js.pushIndentation(null);
-		}
+		} */
+		js.append("return ");
 		js.append(cgRootMapping.getName());
 		js.append("(");
-		boolean isFirst = true;
+/*		boolean isFirst = true;
 		for (CGGuardVariable cgFreeVariable : cgFreeVariables) {
 			if (!isFirst) {
 				js.append(", ");
 			}
 			js.appendValueName(cgFreeVariable);
 			isFirst = false;
-		}
+		} */
 		js.append(");\n");
-		for (@SuppressWarnings("unused") CGGuardVariable cgFreeVariable : cgFreeVariables) {
+/*		for (@SuppressWarnings("unused") CGGuardVariable cgFreeVariable : cgFreeVariables) {
 			js.popIndentation();
 			js.append("}\n");
 			js.popIndentation();
 			js.append("}\n");
-		}
-		js.append("return true;\n");
+		} */
+//		js.append("return true;\n");
 		js.popIndentation();		
 		js.append("}\n");
 	}

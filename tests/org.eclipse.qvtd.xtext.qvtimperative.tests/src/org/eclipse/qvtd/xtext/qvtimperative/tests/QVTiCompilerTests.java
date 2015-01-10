@@ -120,6 +120,15 @@ public class QVTiCompilerTests extends LoadTestCase
 		return pivotResource;
 	}
 
+	protected @NonNull Map<Object, Object> getSaveOptions() {
+		Map<Object, Object> saveOptions = new HashMap<Object, Object>();
+        saveOptions.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
+        saveOptions.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
+        saveOptions.put(XMLResource.OPTION_LINE_WIDTH, Integer.valueOf(132));
+        saveOptions.put(XMLResource.OPTION_LINE_DELIMITER, "\n");
+		return saveOptions;
+	}
+
 	public void testCG_HSV2HLS_qvti() throws Exception {
 		URI transformURI = getProjectFileURI("HSV2HLS/HSV2HLS.qvti");
 		URI genModelURI = getProjectFileURI("HSV2HLS/HSV2HLS.genmodel");
@@ -140,7 +149,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		tx.run();
 		Resource outputResource = resourceSet.createResource(outputModelURI);
 		outputResource.getContents().addAll(tx.getRootObjects("hls"));
-		outputResource.save(null);
+		outputResource.save(getSaveOptions());
 		Resource referenceResource = resourceSet.getResource(referenceModelURI, true);
 		assert referenceResource != null;
         assertSameModel(referenceResource, outputResource);
@@ -174,7 +183,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		tx.run();
 		Resource outputResource = resourceSet.createResource(outputModelURI);
 		outputResource.getContents().addAll(tx.getRootObjects("rdbms"));
-		outputResource.save(null);
+		outputResource.save(getSaveOptions());
 		Resource referenceResource = resourceSet.getResource(referenceModelURI, true);
 		assert referenceResource != null;
         assertSameModel(referenceResource, outputResource);

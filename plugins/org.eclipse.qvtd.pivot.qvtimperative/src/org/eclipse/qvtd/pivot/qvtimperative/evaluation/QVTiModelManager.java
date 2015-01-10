@@ -271,6 +271,8 @@ public class QVTiModelManager implements ModelManager
                 try{
                     Map<Object, Object> options = new HashMap<Object, Object>();
                     options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
+                    options.put(XMLResource.OPTION_LINE_WIDTH, Integer.valueOf(132));
+            		options.put(XMLResource.OPTION_LINE_DELIMITER, "\n");
                     model.save(options);
                    } catch (IOException e) {
                       e.printStackTrace();

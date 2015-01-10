@@ -135,8 +135,7 @@ public class classescs2as extends AbstractTransformationExecutor
     }
     
     public boolean run() {
-        __root__();
-        return true;
+        return __root__();
     }
     
     /**
