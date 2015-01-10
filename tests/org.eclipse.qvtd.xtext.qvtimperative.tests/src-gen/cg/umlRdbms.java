@@ -136,6 +136,7 @@ public class umlRdbms extends AbstractTransformationExecutor
     protected final @NonNull Map<Attribute,FromAttribute> OPPOSITE_OF_FromAttribute_attribute = new HashMap<Attribute,FromAttribute>();
     protected final @NonNull Map<PrimitiveDataType,PrimitiveToName> OPPOSITE_OF_PrimitiveToName_primitive = new HashMap<PrimitiveDataType,PrimitiveToName>();
     
+    
     /*
      * Array of the ClassIds of each class for which allInstances() may be invoked. Array index is the ClassIndex.
      */
@@ -153,7 +154,7 @@ public class umlRdbms extends AbstractTransformationExecutor
     };
     
     public umlRdbms(final @NonNull Evaluator evaluator) {
-        super(evaluator, new String[] {"uml", "rdbms", "middle"}, classIndex2classId, classIndex2allClassIndexes);
+        super(evaluator, new String[] {"uml", "rdbms", "middle"}, null, classIndex2classId, classIndex2allClassIndexes);
     }
     
     public boolean run() {

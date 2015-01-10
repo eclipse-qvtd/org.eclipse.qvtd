@@ -24,6 +24,7 @@ import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.IdManager;
@@ -56,6 +57,11 @@ public class QVTiTransformationAnalysis
 	 *  Map from navigable property to sequential index.
 	 */
 	private @NonNull Map<Property, Integer> property2cacheIndex = new HashMap<Property, Integer>();
+
+	/**
+	 *  Map from opposite property to sequential index.
+	 */
+	private @NonNull Map<Property, Integer> opposite2cacheIndex = new HashMap<Property, Integer>();
 
 	public QVTiTransformationAnalysis(@NonNull MetamodelManager metamodelManager) {
 	    this.metamodelManager = metamodelManager;
@@ -96,23 +102,14 @@ public class QVTiTransformationAnalysis
 						}
 					}
 				}
-			}/* This should have been analised by the OperationCallExp search....
-			else if (eObject instanceof MappingLoop) {
-				MappingLoop mappingLoop = (MappingLoop)eObject;
-				if (mappingLoop.getSource() instanceof OperationCallExp) {
-					OperationCallExp operationCallExp = (OperationCallExp) mappingLoop.getSource();
-					Operation referredOperation = operationCallExp.getReferredOperation();
-					if ((referredOperation != null) && (referredOperation.getOperationId() == allInstancesOperationId)) {
-						OCLExpression source = operationCallExp.getSource();
-						if (source != null) {
-							Type sourceType = source.getType();
-							if (sourceType != null) {
-								allInstancesTypes.add(sourceType);
-							}
-						}
-					}
+			}
+			else if (eObject instanceof OppositePropertyCallExp) {
+				OppositePropertyCallExp oppositePropertyCallExp = (OppositePropertyCallExp)eObject;
+				Property referredProperty = oppositePropertyCallExp.getReferredProperty();
+				if (referredProperty != null) {
+					getOppositeCacheIndex(referredProperty);
 				}
-			}*/
+			}
 		}
 		//
 		//	Second pass
@@ -170,35 +167,24 @@ public class QVTiTransformationAnalysis
 		return instancesClassAnalysis;
 	}
 
-/*	public List<org.eclipse.ocl.pivot.Class> getDepthSortedInstancesClasses(@NonNull Set<org.eclipse.ocl.pivot.Class> instancesClasses) {
-		List<org.eclipse.ocl.pivot.Class> sortedInstanceClasses = new ArrayList<org.eclipse.ocl.pivot.Class>(instancesClasses);
-		int size = sortedInstanceClasses.size();
-		if (size > 1) {
-			Collections.sort(sortedInstanceClasses, new Comparator<org.eclipse.ocl.pivot.Class>()
-			{
-				@Override
-				public int compare(org.eclipse.ocl.pivot.Class o1, org.eclipse.ocl.pivot.Class o2) {
-					assert o1 != null;
-					assert o2 != null;
-					CompleteInheritance i1 = metamodelManager.getInheritance(o1);
-					CompleteInheritance i2 = metamodelManager.getInheritance(o2);
-					int d1 = i1.getDepth();
-					int d2 = i2.getDepth();
-					if (d1 != d2) {
-						return d2 - d1;
-					}
-					String n1 = o2.getName();
-					String n2 = o2.getName();
-					if (n1 == null) n1 = "";
-					if (n2 == null) n2 = "";
-					return n1.compareTo(n2);
-				}
-			});
-		}
-		return sortedInstanceClasses;
-	} */
-
 	public @NonNull MetamodelManager getMetamodelManager() {
 		return metamodelManager;
+	}
+	
+	protected int getOppositeCacheIndex(@NonNull Property oppositeProperty) {
+		Integer cacheIndex = opposite2cacheIndex.get(oppositeProperty);
+		if (cacheIndex == null) { 
+			cacheIndex = opposite2cacheIndex.size();
+			opposite2cacheIndex.put(oppositeProperty, cacheIndex);
+		}
+		return cacheIndex;
+	}
+
+	public int getOppositeCacheIndexes() {
+		return opposite2cacheIndex.size();
+	}
+
+	public @NonNull Map<Property, Integer> getOpposites() {
+		return opposite2cacheIndex;
 	}
 }

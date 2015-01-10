@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.NameManager;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGElementId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGExecutorProperty;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
@@ -44,6 +45,7 @@ import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.ElementId;
+import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
@@ -235,7 +237,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		return null;
     }
 
-	protected void doConstructor(@NonNull CGTransformation cgTransformation, @Nullable String[] allInstancesNames) {
+	protected void doConstructor(@NonNull CGTransformation cgTransformation, @Nullable String oppositeName, @Nullable String[] allInstancesNames) {
 //		String evaluatorName = ((QVTiGlobalContext)globalContext).getEvaluatorParameter().getName();
 		String evaluatorName = JavaConstants.EVALUATOR_NAME;
 		String className = cgTransformation.getName();
@@ -257,6 +259,13 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 			isFirst = false;
 		}
 		js.append("}");
+		if (oppositeName != null) {
+			js.append(", ");
+			js.append(oppositeName);
+		}
+		else {
+			js.append(", null");
+		}
 		if (allInstancesNames != null) {
 			js.append(", ");
 			js.append(allInstancesNames[0]);
@@ -296,6 +305,47 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 				js.append("();\n");
 			}
 		}
+    }
+    
+	protected @Nullable String doOppositeCaches(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
+		Map<Property, Integer> opposites = transformationAnalysis.getOpposites();
+		if (opposites.size() <= 0) {
+			return null;
+		}
+		NameManager nameManager = getGlobalContext().getNameManager();
+		List<Property> sortedList = new ArrayList<Property>();
+		for (Map.Entry<Property, Integer> entry : opposites.entrySet()) {
+			sortedList.set(entry.getValue().intValue(), entry.getKey());
+		}
+		//
+		//	Emit the ClassId array
+		//
+		js.append("/*\n");
+		js.append(" * Array of the PropertyIds of each Property for which unnavigable opposite property navigation may occur.\n");
+		js.append(" */\n");
+		String oppositeIndex2propertyIdName = nameManager.getGlobalSymbolName(null, "oppositeIndex2propertyId");
+		js.append("private static final ");
+		js.appendIsRequired(true);
+		js.append(" ");
+		js.appendClassReference(PropertyId.class);
+		js.append("[] ");
+		js.append(oppositeIndex2propertyIdName);
+		js.append(" = new ");
+		js.appendClassReference(ClassId.class);
+		js.append("[]{\n");
+		js.pushIndentation(null);
+		for (int i = 0; i < sortedList.size(); i++) {
+			Property property = sortedList.get(i);
+			CGElementId cgPropertyId = getCodeGenerator().getAnalyzer().getElementId(property.getPropertyId());
+			js.appendValueName(cgPropertyId);
+			if ((i+1) < sortedList.size()) {
+				js.append(",");
+			}
+			js.append("\t\t// " + i + " => " + property.getName() + "\n");
+		}
+		js.popIndentation();
+		js.append("};\n");
+		return oppositeIndex2propertyIdName;
     }
 
 	@SuppressWarnings("null")
@@ -962,9 +1012,11 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		}
 		doMiddleOppositeCaches();
 		js.append("\n");
+		String oppositeName = doOppositeCaches(transformationAnalysis);
+		js.append("\n");
 		String[] allInstancesNames = doAllInstances(transformationAnalysis);
 		js.append("\n");
-		doConstructor(cgTransformation, allInstancesNames);
+		doConstructor(cgTransformation, oppositeName, allInstancesNames);
 		js.append("\n");
 		doRun(cgTransformation);
 		for (CGOperation cgOperation : cgTransformation.getOperations()) {

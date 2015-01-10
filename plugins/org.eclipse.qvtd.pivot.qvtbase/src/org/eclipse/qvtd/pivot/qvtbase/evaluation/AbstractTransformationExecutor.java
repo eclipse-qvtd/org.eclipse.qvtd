@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtbase.evaluation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -21,6 +22,8 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
@@ -28,14 +31,38 @@ import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.PackageId;
+import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 
 public abstract class AbstractTransformationExecutor implements TransformationExecutor
 {	
+	private static final @SuppressWarnings("null")@NonNull List<Integer> EMPTY_INDEX_LIST = Collections.emptyList();
+	
 	protected final @NonNull Evaluator evaluator;
 	protected final @NonNull IdResolver idResolver;
 	protected final @NonNull List<EObject>[] modelObjects;
 	protected final @NonNull Map<String, Integer> modelIndexes = new HashMap<String, Integer>();
+
+	/**
+	 * Unchanging configured list PropertyId for which unnavigable opposite navigation may occur indexed by the PropertyIndex for that PropertyId.
+	 */
+	private final @Nullable PropertyId[] propertyIndex2propertyId;
+
+	/**
+	 * Unchanging configured map from the PropertyId for which unnavigable opposite navigation may occur to the PropertyIndex for that PropertyId.
+	 */
+	private final @Nullable Map<PropertyId, Integer> propertyId2propertyIndex;
+
+	/**
+	 * Unchanging configured map from the PropertyIndex to the EReference for the opposite property navigation.
+	 */
+	private final @Nullable EReference[] propertyIndex2eReference;
+
+	/**
+	 * Unchanging maps from an EObject to its opposite using the Property whose PropertyIndex indexes the map.
+	 */
+	private final @Nullable Map<EObject, EObject>[] object2oppositeObject;
 
 	/**
 	 * Unchanging configured map from the ClassId for which allInstances() may be invoked to the ClassIndex for that ClassId.
@@ -56,7 +83,7 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 	private final @Nullable Set<EObject>[] classIndex2objects;
 	
 	protected AbstractTransformationExecutor(@NonNull Evaluator evaluator, @NonNull String[] modelNames,
-			@Nullable ClassId[] classIndex2classId, @Nullable int[][] classIndex2allClassIndexes) {
+			@Nullable PropertyId[] propertyIndex2propertyId, @Nullable ClassId[] classIndex2classId, @Nullable int[][] classIndex2allClassIndexes) {
 		this.evaluator = evaluator;
 		this.idResolver = evaluator.getIdResolver();
 		@SuppressWarnings("unchecked")List<EObject>[] modelObjects = (List<EObject>[]) new List<?>[modelNames.length];
@@ -65,11 +92,39 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 			modelObjects[i] = new ArrayList<EObject>();
 			modelIndexes.put(modelNames[i],  i);
 		}
+		//
+		//	Prepare the unnavigable opposite property fields
+		//
+		if (propertyIndex2propertyId != null) {
+	    	int propertyIds = propertyIndex2propertyId.length;
+	    	this.propertyIndex2propertyId = propertyIndex2propertyId;
+			this.propertyId2propertyIndex = new HashMap<PropertyId, Integer>(propertyIds);
+			this.propertyIndex2eReference = new EReference[propertyIds];
+			for (int propertyIndex = 0; propertyIndex < propertyIds; propertyIndex++) {
+				PropertyId propertyId = propertyIndex2propertyId[propertyIndex];
+				propertyId2propertyIndex.put(propertyId, propertyIndex);
+			}
+			@SuppressWarnings("unchecked")Map<EObject,EObject>[] object2oppositeObject = (Map<EObject,EObject>[]) new HashMap<?,?>[propertyIds];
+			this.object2oppositeObject = object2oppositeObject;
+	        for (int i = 0; i < propertyIds; i++) {
+	        	object2oppositeObject[i] = new HashMap<EObject, EObject>();
+	        }
+		}
+		else {
+	    	this.propertyIndex2propertyId = null;
+	    	this.propertyId2propertyIndex = null;
+	    	this.propertyIndex2eReference = null;
+	    	this.object2oppositeObject = null;
+		}
+		//
+		//	Prepare the allInstances() fields
+		//
 		if (classIndex2classId != null) {
 	    	assert classIndex2allClassIndexes != null;
-	    	this.classId2classIndex = new HashMap<ClassId, Integer>();
-	    	this.classId2classIndexes = new HashMap<ClassId, Set<Integer>>(classIndex2classId.length);
-			for (int classIndex = 0; classIndex < classIndex2classId.length; classIndex++) {
+	    	int classIds = classIndex2classId.length;
+			this.classId2classIndex = new HashMap<ClassId, Integer>(classIds);
+	    	this.classId2classIndexes = new HashMap<ClassId, Set<Integer>>(classIds);
+			for (int classIndex = 0; classIndex < classIds; classIndex++) {
 				ClassId classId = classIndex2classId[classIndex];
 				classId2classIndex.put(classId, classIndex);
 				Set<Integer> superClassIndexes = new HashSet<Integer>();
@@ -78,9 +133,9 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 				}
 				classId2classIndexes.put(classId, superClassIndexes);
 			}
-			@SuppressWarnings("unchecked")Set<EObject>[] classIndex2objects = (Set<EObject>[]) new HashSet<?>[classIndex2classId.length];
+			@SuppressWarnings("unchecked")Set<EObject>[] classIndex2objects = (Set<EObject>[]) new HashSet<?>[classIds];
 			this.classIndex2objects = classIndex2objects;
-	        for (int i = 0; i < classIndex2classId.length; i++) {
+	        for (int i = 0; i < classIds; i++) {
 	        	classIndex2objects[i] = new HashSet<EObject>();
 	        }
 		}
@@ -91,16 +146,48 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 		}
 	}
 
-    private void accumulateAllInstancesEObject(@NonNull Map<EClass, Set<Integer>> eClass2superClassIndexes, @NonNull EObject eObject) {
+	/**
+	 * Add eObject to the caches.
+	 * <p>
+	 * If eClass2allClassIndexes is non-null, eObject is added to the allInstances() caches potentially updating eClass2allClassIndexes with
+	 * the state of a new EClass.
+	 * <p>
+	 * If eClass2allPropertyIndexes is non-null, eObject is added to the unnavigable opposites caches potentially updating eClass2allPropertyIndexes with
+	 * the state of a new EClass.
+	 */
+    private void accumulateEObject(@Nullable Map<EClass, Set<Integer>> eClass2allClassIndexes,
+    		@Nullable Map<EClass, List<Integer>> eClass2allPropertyIndexes, @Nullable Map<EReference, Integer> eReference2propertyIndex,
+    		@NonNull EObject eObject) {
 		EClass eClass = ClassUtil.nonNullEMF(eObject.eClass());
-		Set<Integer> superClassIndexes = eClass2superClassIndexes.get(eClass);
-		if (superClassIndexes == null) {
-			superClassIndexes = getClassIndexes(eClass);
-			eClass2superClassIndexes.put(eClass, superClassIndexes);
+		if (eClass2allClassIndexes != null) {
+			Set<Integer> allClassIndexes = eClass2allClassIndexes.get(eClass);
+			if (allClassIndexes == null) {
+				allClassIndexes = getClassIndexes(eClass);
+				eClass2allClassIndexes.put(eClass, allClassIndexes);
+			}
+			for (Integer classIndex : allClassIndexes) {
+				assert classIndex2objects != null;
+				classIndex2objects[classIndex].add(eObject);
+			}
 		}
-		for (Integer classIndex : superClassIndexes) {
-			assert classIndex2objects != null;
-			classIndex2objects[classIndex].add(eObject);
+		if (eClass2allPropertyIndexes != null) {
+			assert eReference2propertyIndex != null;
+			List<Integer> allPropertyIndexes = eClass2allPropertyIndexes.get(eClass);
+			if (allPropertyIndexes == null) {
+				allPropertyIndexes = getOppositePropertyIndexes(eReference2propertyIndex, eClass);
+				eClass2allPropertyIndexes.put(eClass, allPropertyIndexes);
+			}
+			for (Integer propertyIndex : allPropertyIndexes) {
+				assert propertyIndex2eReference != null;
+				EReference eReference = propertyIndex2eReference[propertyIndex];
+				if (eReference == null) {
+					assert propertyIndex2propertyId != null;
+					PropertyId propertyId = propertyIndex2propertyId[propertyIndex];
+					eReference = (EReference) NameUtil.getENamedElement(eClass.getEAllStructuralFeatures(), propertyId.getName());
+				}
+				assert object2oppositeObject != null;
+				object2oppositeObject[propertyIndex].put((EObject)eObject.eGet(eReference), eObject);
+			}
 		}
 	}
 
@@ -114,7 +201,16 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
     		throw new IllegalStateException("Unknown model name '" + modelName + "'");
     	}
     	List<EObject> eObjects = modelObjects[modelIndex];
-    	Map<EClass, Set<Integer>> eClass2superClassIndexes = new HashMap<EClass, Set<Integer>>();
+    	Map<EClass, Set<Integer>> eClass2allClassIndexes = null;
+		Map<EClass, List<Integer>> eClass2allPropertyIndexes = null;
+		Map<EReference, Integer> eReference2propertyIndex = null;
+		if ((classId2classIndexes != null) && (classIndex2objects != null)) {
+			eClass2allClassIndexes = new HashMap<EClass, Set<Integer>>();
+		}
+		if (propertyIndex2propertyId != null) {
+			eClass2allPropertyIndexes = new HashMap<EClass, List<Integer>>();
+			eReference2propertyIndex = new HashMap<EReference, Integer>();
+		}
     	for (EObject eRootObject : eRootObjects) {
     		if (eRootObject != null) {
 				//
@@ -124,12 +220,12 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 				//
 				//	Accumulate the root object and all its child objects in the allInstances() returns
 				//
-				if ((classId2classIndexes != null) && (classIndex2objects != null)) {
-					accumulateAllInstancesEObject(eClass2superClassIndexes, eRootObject);
+				if ((eClass2allClassIndexes != null) || (eClass2allPropertyIndexes != null)) {
+					accumulateEObject(eClass2allClassIndexes, eClass2allPropertyIndexes, eReference2propertyIndex, eRootObject);
 					for (TreeIterator<EObject> tit = eRootObject.eAllContents(); tit.hasNext(); ) {
 						EObject eObject = tit.next();
 						if (eObject != null) {
-							accumulateAllInstancesEObject(eClass2superClassIndexes, eObject);
+							accumulateEObject(eClass2allClassIndexes, eClass2allPropertyIndexes, eReference2propertyIndex, eObject);
 						}
 					}
 				}
@@ -160,7 +256,7 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 	//	ClassId classId = IdManager.getClassId(eClass);
 		EPackage ePackage = ClassUtil.nonNullEMF(eClass.getEPackage());
 		PackageId packageId = IdManager.getPackageId(ePackage);
-		String className = ClassUtil.nonNullEMF(eClass.getName());
+		String className = ClassUtil.nonNullEMF(eClass.getName());		// FIXME Original name
 		ClassId classId = packageId.getClassId(className, eClass.getETypeParameters().size());
 		assert classId2classIndexes != null;
 		Set<Integer> classIndexes = classId2classIndexes.get(classId);
@@ -199,7 +295,47 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 		return eObjects;
 	}
 
-    /**
+	/**
+	 * Return the List of all PropertyIndexes for which an EClass instance could be the unnavigable opposite.
+	 * eReference2propertyIndex contains known equivalences and may be updated if more are discovered
+	 * using -1 as a propertyIndex for#which no unnavigable opposite is appropriate.
+	 */
+    private @NonNull List<Integer> getOppositePropertyIndexes(@NonNull Map<EReference, Integer> eReference2propertyIndex, @NonNull EClass eClass) {
+    	List<Integer> propertyIndexes = null;
+    	for (EStructuralFeature eStructuralFeature : eClass.getEAllStructuralFeatures()) {
+    		if (eStructuralFeature instanceof EReference) {
+    			EReference eReference = (EReference)eStructuralFeature;
+				Integer propertyIndex = eReference2propertyIndex.get(eReference);
+				if (propertyIndex == null) {
+	    			if ((eReference.getEOpposite() == null) && !eReference.isDerived() && !eReference.isTransient() && !eReference.isVolatile()) {
+	    				//	PropertyId propertyId = IdManager.getPropertyId(eReference);
+	    				EClass eContainingClass = eReference.getEContainingClass();
+	    				EPackage ePackage = ClassUtil.nonNullEMF(eContainingClass.getEPackage());
+	    				PackageId packageId = IdManager.getPackageId(ePackage);
+	    				String className = ClassUtil.nonNullEMF(eContainingClass.getName());				// FIXME Original name
+	    				ClassId classId = packageId.getClassId(className, eContainingClass.getETypeParameters().size());
+	    				String propertyName = ClassUtil.nonNullEMF(eReference.getName());		// FIXME Original name
+	    				PropertyId propertyId = classId.getPropertyId(propertyName);
+	    				assert propertyId2propertyIndex != null;
+	    				propertyIndex = propertyId2propertyIndex.get(propertyId);
+	    			}
+	    			if (propertyIndex == null) {
+	    				propertyIndex = -1;
+	    			}
+					eReference2propertyIndex.put(eReference, propertyIndex);
+				}
+				if (propertyIndex >= 0) {
+					if (propertyIndexes == null) {
+						propertyIndexes = new ArrayList<Integer>();
+					}
+					propertyIndexes.add(propertyIndex);
+				}
+    		}
+    	}
+		return propertyIndexes != null ? propertyIndexes : EMPTY_INDEX_LIST;
+	}
+
+	/**
      * Return all the containerless objects in the modelName model.
      */
     @Override

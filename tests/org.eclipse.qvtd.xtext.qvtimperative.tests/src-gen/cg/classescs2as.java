@@ -97,6 +97,7 @@ public class classescs2as extends AbstractTransformationExecutor
     protected final @NonNull Map<PackageCS,PackageCS2Package> OPPOSITE_OF_PackageCS2Package_packageCS = new HashMap<PackageCS,PackageCS2Package>();
     protected final @NonNull Map<RootCS,RootCS2Root> OPPOSITE_OF_RootCS2Root_rootCS = new HashMap<RootCS,RootCS2Root>();
     
+    
     /*
      * Array of the ClassIds of each class for which allInstances() may be invoked. Array index is the ClassIndex.
      */
@@ -130,7 +131,7 @@ public class classescs2as extends AbstractTransformationExecutor
     };
     
     public classescs2as(final @NonNull Evaluator evaluator) {
-        super(evaluator, new String[] {"leftCS", "rightAS", "middle"}, classIndex2classId, classIndex2allClassIndexes);
+        super(evaluator, new String[] {"leftCS", "rightAS", "middle"}, null, classIndex2classId, classIndex2allClassIndexes);
     }
     
     public boolean run() {

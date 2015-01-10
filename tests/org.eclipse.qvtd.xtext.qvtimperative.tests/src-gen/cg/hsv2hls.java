@@ -64,6 +64,7 @@ public class hsv2hls extends AbstractTransformationExecutor
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_HSVNode2HLSNode = TypeId.ORDERED_SET.getSpecializedId(CLSSid_HSVNode2HLSNode);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_HSVNode = TypeId.SET.getSpecializedId(CLSSid_HSVNode);
     
+    
     /*
      * Array of the ClassIds of each class for which allInstances() may be invoked. Array index is the ClassIndex.
      */
@@ -81,7 +82,7 @@ public class hsv2hls extends AbstractTransformationExecutor
     };
     
     public hsv2hls(final @NonNull Evaluator evaluator) {
-        super(evaluator, new String[] {"hsv", "hls", "middle"}, classIndex2classId, classIndex2allClassIndexes);
+        super(evaluator, new String[] {"hsv", "hls", "middle"}, null, classIndex2classId, classIndex2allClassIndexes);
     }
     
     public boolean run() {
