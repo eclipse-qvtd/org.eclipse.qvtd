@@ -52,7 +52,7 @@ map integerToNumber_LM in umlRdbms
 map integerToNumber_MR in umlRdbms
 {
 	enforce rdbms() {
-		realize sqlType : String
+		sqlType : String
 	}
 	check middle(p2s : PackageToSchema,
 		p2n : IntegerToNumber) {}
@@ -65,7 +65,7 @@ map integerToNumber_MR in umlRdbms
 map booleanToBoolean_MR in umlRdbms
 {
 	enforce rdbms() {
-		realize sqlType : String
+		sqlType : String
 	}
 	check middle(p2s : PackageToSchema,
 		p2n : BooleanToBoolean) {}
@@ -94,7 +94,7 @@ map booleanToBoolean_LM in umlRdbms
 map stringToVarchar_MR in umlRdbms
 {
 	enforce rdbms() {
-		realize sqlType : String
+	   sqlType : String
 	}
 	check middle(p2s : PackageToSchema,
 		p2n : StringToVarchar) {}
@@ -187,8 +187,7 @@ map associationToForeignKey_MR in umlRdbms
 		st.schema = s;) {
 		fk.name := a2f.name;
 		a2f.foreignKey := fk;
-		fc.type := rk.column
-		->first().type;
+		fc.type := rk.column->first().type;
 		fc.name := a2f.name + '_tid';
 		a2f.column := fc;
 		fk.owner := st;
@@ -220,20 +219,20 @@ map associationToForeignKey_LM in umlRdbms
 		a2f.association := a;
 		a2f.referenced := dc2t;
 		a2f.name := if a.destination = dc and a.source = sc
-		then a.name
-		else if a.destination <> dc and a.source = sc
-			then dc.name + '_' + a.name
-			else if a.destination = dc and a.source <> sc
-				then a.name + '_' + sc.name
-				else dc.name + '_' + a.name + '_' + sc.name
-				endif
-			endif
-		endif;
+                		then a.name
+                		else if a.destination <> dc and a.source = sc
+                			then dc.name + '_' + a.name
+                			else if a.destination = dc and a.source <> sc
+                				then a.name + '_' + sc.name
+                				else dc.name + '_' + a.name + '_' + sc.name
+                				endif
+                			endif
+                		endif;
 		a2f.owner := sc2t;
 		a.name := if a.destination = dc and a.source = sc
-		then a2f.name
-		else a.name
-		endif;
+            		then a2f.name
+            		else a.name
+            		endif;
 	}
 }
 
@@ -273,7 +272,6 @@ map classComplexAttributes_LM in umlRdbms
 	where (fao.umlClass = c;
 		a.owner = c;
 		a.type = t;) {
-		fa.attribute := a;
 		fa.attribute := a;
 		fa.kind := a.kind;
 		fa.owner := fao;
@@ -349,8 +347,7 @@ map attributeColumns_MR in umlRdbms
 	where (c2t.table = t;
 		p2n.typeName = ct;
 		a2c.owner = c2t;
-		c2t.fromAttributes.leafs
-		->includes(a2c);
+		c2t.fromAttributes.leafs->includes(a2c);
 		a2c.type = p2n;) {
 		c.name := a2c.name;
 		c.kind := a2c.kind;
@@ -419,12 +416,6 @@ map __root__ in umlRdbms
 			p2s := prim.namespace.middle;
 		}
 	}
-	for p2n : umltordbms::StringToVarchar in umltordbms::StringToVarchar.allInstances() {
-		call stringToVarchar_MR {
-			p2n := p2n;
-			p2s := p2n.owner;
-		}
-	}
 	for prim : simpleuml::PrimitiveDataType in simpleuml::PrimitiveDataType.allInstances() {
 		call integerToNumber_LM {
 			prim := prim;
@@ -444,7 +435,7 @@ map __root__ in umlRdbms
 			a := a;
 			c := a.owner;
 			t := a.type;
-			p2n := null;
+			p2n := a.type.oclAsType(PrimitiveDataType).middle;
 			fao := a.owner.middle;
 		}
 	}
@@ -456,6 +447,12 @@ map __root__ in umlRdbms
 	}
 	for p2n : umltordbms::BooleanToBoolean in umltordbms::BooleanToBoolean.allInstances() {
 		call booleanToBoolean_MR {
+			p2n := p2n;
+			p2s := p2n.owner;
+		}
+	}
+    for p2n : umltordbms::StringToVarchar in umltordbms::StringToVarchar.allInstances() {
+		call stringToVarchar_MR {
 			p2n := p2n;
 			p2s := p2n.owner;
 		}
@@ -486,8 +483,8 @@ map __root__ in umlRdbms
 				ca := ca;
 				c := a.owner;
 				t := a.type;
-				p2n := null;
-				fao := null;
+				p2n := a.type.oclAsType(PrimitiveDataType).middle;
+				fao := ca.middle;
 			}
 		}
 	}
@@ -496,7 +493,7 @@ map __root__ in umlRdbms
 			a2c := a2c;
 			p2n := a2c.type;
 			c2t := a2c.owner;
-			t := null;
+			t := a2c.owner.oclAsType(umltordbms::ClassToTable).table;
 			ct := a2c.type.typeName;
 		}
 	}
