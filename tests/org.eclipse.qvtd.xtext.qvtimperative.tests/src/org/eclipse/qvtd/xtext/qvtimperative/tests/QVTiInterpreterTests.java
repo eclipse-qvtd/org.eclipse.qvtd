@@ -305,7 +305,7 @@ public class QVTiInterpreterTests extends LoadTestCase
         @SuppressWarnings("unused")
 		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, metamodelManager);
         
-        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metamodelManager), "UMLToRDBMS", "UMLToRDBMS.qvti");
+        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metamodelManager), "UMLToRDBMS", "UmlToRdbms.qvti");
     	testEvaluator.saveTransformation(null);
         //assertNoValidationErrors("Pivot validation errors", testEvaluator.pivotResource.getContents().get(0));
         testEvaluator.loadModel("uml", "SimpleUMLPeople.xmi");
