@@ -28,12 +28,13 @@ import test.simpleuml.SimpleumlPackage;
  * An implementation of the model object '<em><b>Association</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link test.simpleuml.impl.AssociationImpl#getSource <em>Source</em>}</li>
  *   <li>{@link test.simpleuml.impl.AssociationImpl#getDestination <em>Destination</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

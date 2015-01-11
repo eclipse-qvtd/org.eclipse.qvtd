@@ -14,17 +14,12 @@ package test.umltordbms.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EcoreUtil;
-
 import test.simpleuml.PrimitiveDataType;
-
 import test.umltordbms.PackageToSchema;
 import test.umltordbms.PrimitiveToName;
 import test.umltordbms.UmltordbmsPackage;
@@ -34,14 +29,15 @@ import test.umltordbms.UmltordbmsPackage;
  * An implementation of the model object '<em><b>Primitive To Name</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link test.umltordbms.impl.PrimitiveToNameImpl#getOwner <em>Owner</em>}</li>
  *   <li>{@link test.umltordbms.impl.PrimitiveToNameImpl#getName <em>Name</em>}</li>
  *   <li>{@link test.umltordbms.impl.PrimitiveToNameImpl#getPrimitive <em>Primitive</em>}</li>
  *   <li>{@link test.umltordbms.impl.PrimitiveToNameImpl#getTypeName <em>Type Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

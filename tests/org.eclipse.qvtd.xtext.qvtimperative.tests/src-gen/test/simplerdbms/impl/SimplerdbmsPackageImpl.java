@@ -16,9 +16,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import test.simplerdbms.Column;
 import test.simplerdbms.ForeignKey;
 import test.simplerdbms.Key;
@@ -27,13 +25,9 @@ import test.simplerdbms.Schema;
 import test.simplerdbms.SimplerdbmsFactory;
 import test.simplerdbms.SimplerdbmsPackage;
 import test.simplerdbms.Table;
-
 import test.simpleuml.SimpleumlPackage;
-
 import test.simpleuml.impl.SimpleumlPackageImpl;
-
 import test.umltordbms.UmltordbmsPackage;
-
 import test.umltordbms.impl.UmltordbmsPackageImpl;
 
 /**

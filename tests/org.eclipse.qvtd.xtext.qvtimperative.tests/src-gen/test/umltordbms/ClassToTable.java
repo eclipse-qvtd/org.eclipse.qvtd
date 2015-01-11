@@ -24,6 +24,7 @@ import test.simplerdbms.Table;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link test.umltordbms.ClassToTable#getOwner <em>Owner</em>}</li>
  *   <li>{@link test.umltordbms.ClassToTable#getAssociationsToForeignKeys <em>Associations To Foreign Keys</em>}</li>
@@ -32,7 +33,6 @@ import test.simplerdbms.Table;
  *   <li>{@link test.umltordbms.ClassToTable#getTable <em>Table</em>}</li>
  *   <li>{@link test.umltordbms.ClassToTable#getPrimaryKey <em>Primary Key</em>}</li>
  * </ul>
- * </p>
  *
  * @see test.umltordbms.UmltordbmsPackage#getClassToTable()
  * @model

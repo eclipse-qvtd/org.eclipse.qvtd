@@ -22,11 +22,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * An implementation of the model object '<em><b>Root</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link classes.impl.RootImpl#getOwnedPackages <em>Owned Packages</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

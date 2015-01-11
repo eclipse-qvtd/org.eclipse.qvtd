@@ -29,11 +29,12 @@ import test.umltordbms.UmltordbmsPackage;
  * An implementation of the model object '<em><b>From Attribute Owner</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link test.umltordbms.impl.FromAttributeOwnerImpl#getFromAttributes <em>From Attributes</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

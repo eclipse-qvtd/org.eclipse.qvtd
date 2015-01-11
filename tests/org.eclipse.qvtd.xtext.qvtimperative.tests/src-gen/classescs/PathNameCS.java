@@ -11,10 +11,10 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link classescs.PathNameCS#getPath <em>Path</em>}</li>
  * </ul>
- * </p>
  *
  * @see classescs.ClassescsPackage#getPathNameCS()
  * @model

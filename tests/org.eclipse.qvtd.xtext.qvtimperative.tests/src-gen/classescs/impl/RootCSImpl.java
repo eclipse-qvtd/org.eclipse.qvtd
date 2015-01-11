@@ -23,25 +23,25 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * An implementation of the model object '<em><b>Root CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
- * <ul>
- *   <li>{@link classescs.impl.RootCSImpl#getOwnedPackage <em>Owned Package</em>}</li>
- * </ul>
  * </p>
+ * <ul>
+ *   <li>{@link classescs.impl.RootCSImpl#getOwnedPackages <em>Owned Packages</em>}</li>
+ * </ul>
  *
  * @generated
  */
 public class RootCSImpl extends ElementCSImpl implements RootCS {
 	/**
-	 * The cached value of the '{@link #getOwnedPackage() <em>Owned Package</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedPackages() <em>Owned Packages</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOwnedPackage()
+	 * @see #getOwnedPackages()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<PackageCS> ownedPackage;
-
+	protected EList<PackageCS> ownedPackages;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -66,11 +66,11 @@ public class RootCSImpl extends ElementCSImpl implements RootCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<PackageCS> getOwnedPackage() {
-		if (ownedPackage == null) {
-			ownedPackage = new EObjectContainmentEList<PackageCS>(PackageCS.class, this, ClassescsPackage.ROOT_CS__OWNED_PACKAGE);
+	public EList<PackageCS> getOwnedPackages() {
+		if (ownedPackages == null) {
+			ownedPackages = new EObjectContainmentEList<PackageCS>(PackageCS.class, this, ClassescsPackage.ROOT_CS__OWNED_PACKAGES);
 		}
-		return ownedPackage;
+		return ownedPackages;
 	}
 
 	/**
@@ -81,8 +81,8 @@ public class RootCSImpl extends ElementCSImpl implements RootCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case ClassescsPackage.ROOT_CS__OWNED_PACKAGE:
-				return ((InternalEList<?>)getOwnedPackage()).basicRemove(otherEnd, msgs);
+			case ClassescsPackage.ROOT_CS__OWNED_PACKAGES:
+				return ((InternalEList<?>)getOwnedPackages()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -95,8 +95,8 @@ public class RootCSImpl extends ElementCSImpl implements RootCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case ClassescsPackage.ROOT_CS__OWNED_PACKAGE:
-				return getOwnedPackage();
+			case ClassescsPackage.ROOT_CS__OWNED_PACKAGES:
+				return getOwnedPackages();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -110,9 +110,9 @@ public class RootCSImpl extends ElementCSImpl implements RootCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case ClassescsPackage.ROOT_CS__OWNED_PACKAGE:
-				getOwnedPackage().clear();
-				getOwnedPackage().addAll((Collection<? extends PackageCS>)newValue);
+			case ClassescsPackage.ROOT_CS__OWNED_PACKAGES:
+				getOwnedPackages().clear();
+				getOwnedPackages().addAll((Collection<? extends PackageCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -126,8 +126,8 @@ public class RootCSImpl extends ElementCSImpl implements RootCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case ClassescsPackage.ROOT_CS__OWNED_PACKAGE:
-				getOwnedPackage().clear();
+			case ClassescsPackage.ROOT_CS__OWNED_PACKAGES:
+				getOwnedPackages().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -141,8 +141,8 @@ public class RootCSImpl extends ElementCSImpl implements RootCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case ClassescsPackage.ROOT_CS__OWNED_PACKAGE:
-				return ownedPackage != null && !ownedPackage.isEmpty();
+			case ClassescsPackage.ROOT_CS__OWNED_PACKAGES:
+				return ownedPackages != null && !ownedPackages.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

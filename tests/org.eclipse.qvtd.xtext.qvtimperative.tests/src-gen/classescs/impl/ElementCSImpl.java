@@ -20,11 +20,12 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * An implementation of the model object '<em><b>Element CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link classescs.impl.ElementCSImpl#getAst <em>Ast</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

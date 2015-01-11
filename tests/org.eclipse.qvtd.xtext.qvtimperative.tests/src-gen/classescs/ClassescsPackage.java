@@ -361,13 +361,13 @@ public interface ClassescsPackage extends EPackage {
 	int ROOT_CS__AST = ELEMENT_CS__AST;
 
 	/**
-	 * The feature id for the '<em><b>Owned Package</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Packages</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROOT_CS__OWNED_PACKAGE = ELEMENT_CS_FEATURE_COUNT + 0;
+	int ROOT_CS__OWNED_PACKAGES = ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Root CS</em>' class.
@@ -514,15 +514,15 @@ public interface ClassescsPackage extends EPackage {
 	EClass getRootCS();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link classescs.RootCS#getOwnedPackage <em>Owned Package</em>}'.
+	 * Returns the meta object for the containment reference list '{@link classescs.RootCS#getOwnedPackages <em>Owned Packages</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Owned Package</em>'.
-	 * @see classescs.RootCS#getOwnedPackage()
+	 * @return the meta object for the containment reference list '<em>Owned Packages</em>'.
+	 * @see classescs.RootCS#getOwnedPackages()
 	 * @see #getRootCS()
 	 * @generated
 	 */
-	EReference getRootCS_OwnedPackage();
+	EReference getRootCS_OwnedPackages();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -658,12 +658,12 @@ public interface ClassescsPackage extends EPackage {
 		EClass ROOT_CS = eINSTANCE.getRootCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Package</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Packages</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ROOT_CS__OWNED_PACKAGE = eINSTANCE.getRootCS_OwnedPackage();
+		EReference ROOT_CS__OWNED_PACKAGES = eINSTANCE.getRootCS_OwnedPackages();
 
 	}
 

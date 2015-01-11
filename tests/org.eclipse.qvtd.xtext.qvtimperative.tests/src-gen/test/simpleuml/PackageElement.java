@@ -20,10 +20,10 @@ package test.simpleuml;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link test.simpleuml.PackageElement#getNamespace <em>Namespace</em>}</li>
  * </ul>
- * </p>
  *
  * @see test.simpleuml.SimpleumlPackage#getPackageElement()
  * @model abstract="true"

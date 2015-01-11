@@ -16,11 +16,12 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * An implementation of the model object '<em><b>Class</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link classes.impl.ClassImpl#getSuperClass <em>Super Class</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

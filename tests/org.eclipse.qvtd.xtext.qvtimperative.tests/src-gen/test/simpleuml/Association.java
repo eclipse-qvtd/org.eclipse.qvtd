@@ -20,11 +20,11 @@ package test.simpleuml;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link test.simpleuml.Association#getSource <em>Source</em>}</li>
  *   <li>{@link test.simpleuml.Association#getDestination <em>Destination</em>}</li>
  * </ul>
- * </p>
  *
  * @see test.simpleuml.SimpleumlPackage#getAssociation()
  * @model

@@ -13,23 +13,16 @@
 package test.umltordbms.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import test.simplerdbms.Schema;
-
 import test.umltordbms.ClassToTable;
 import test.umltordbms.PackageToSchema;
 import test.umltordbms.PrimitiveToName;
@@ -40,7 +33,9 @@ import test.umltordbms.UmltordbmsPackage;
  * An implementation of the model object '<em><b>Package To Schema</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link test.umltordbms.impl.PackageToSchemaImpl#getClassesToTables <em>Classes To Tables</em>}</li>
  *   <li>{@link test.umltordbms.impl.PackageToSchemaImpl#getPrimitivesToNames <em>Primitives To Names</em>}</li>
@@ -48,7 +43,6 @@ import test.umltordbms.UmltordbmsPackage;
  *   <li>{@link test.umltordbms.impl.PackageToSchemaImpl#getUmlPackage <em>Uml Package</em>}</li>
  *   <li>{@link test.umltordbms.impl.PackageToSchemaImpl#getSchema <em>Schema</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

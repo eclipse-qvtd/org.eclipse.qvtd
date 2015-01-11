@@ -13,19 +13,14 @@
 package test.simpleuml.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import test.simpleuml.Association;
 import test.simpleuml.Attribute;
 import test.simpleuml.SimpleumlPackage;
@@ -35,7 +30,9 @@ import test.simpleuml.SimpleumlPackage;
  * An implementation of the model object '<em><b>Class</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link test.simpleuml.impl.ClassImpl#getGeneral <em>General</em>}</li>
  *   <li>{@link test.simpleuml.impl.ClassImpl#getForward <em>Forward</em>}</li>
@@ -43,7 +40,6 @@ import test.simpleuml.SimpleumlPackage;
  *   <li>{@link test.simpleuml.impl.ClassImpl#getReverse <em>Reverse</em>}</li>
  *   <li>{@link test.simpleuml.impl.ClassImpl#getGeneralOpposite <em>General Opposite</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

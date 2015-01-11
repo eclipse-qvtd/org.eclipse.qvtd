@@ -13,9 +13,7 @@
 package test.umltordbms;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
-
 import test.simplerdbms.Schema;
 
 /**
@@ -25,6 +23,7 @@ import test.simplerdbms.Schema;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link test.umltordbms.PackageToSchema#getClassesToTables <em>Classes To Tables</em>}</li>
  *   <li>{@link test.umltordbms.PackageToSchema#getPrimitivesToNames <em>Primitives To Names</em>}</li>
@@ -32,7 +31,6 @@ import test.simplerdbms.Schema;
  *   <li>{@link test.umltordbms.PackageToSchema#getUmlPackage <em>Uml Package</em>}</li>
  *   <li>{@link test.umltordbms.PackageToSchema#getSchema <em>Schema</em>}</li>
  * </ul>
- * </p>
  *
  * @see test.umltordbms.UmltordbmsPackage#getPackageToSchema()
  * @model

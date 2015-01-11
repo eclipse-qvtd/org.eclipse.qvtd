@@ -39,14 +39,15 @@ import test.simplerdbms.Table;
  * An implementation of the model object '<em><b>Column</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link test.simplerdbms.impl.ColumnImpl#getOwner <em>Owner</em>}</li>
  *   <li>{@link test.simplerdbms.impl.ColumnImpl#getType <em>Type</em>}</li>
  *   <li>{@link test.simplerdbms.impl.ColumnImpl#getForeignKeys <em>Foreign Keys</em>}</li>
  *   <li>{@link test.simplerdbms.impl.ColumnImpl#getKey <em>Key</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

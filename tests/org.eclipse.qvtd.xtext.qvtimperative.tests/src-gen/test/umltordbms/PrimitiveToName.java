@@ -13,7 +13,6 @@
 package test.umltordbms;
 
 import org.eclipse.emf.ecore.EObject;
-
 import test.simpleuml.PrimitiveDataType;
 
 /**
@@ -23,13 +22,13 @@ import test.simpleuml.PrimitiveDataType;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link test.umltordbms.PrimitiveToName#getOwner <em>Owner</em>}</li>
  *   <li>{@link test.umltordbms.PrimitiveToName#getName <em>Name</em>}</li>
  *   <li>{@link test.umltordbms.PrimitiveToName#getPrimitive <em>Primitive</em>}</li>
  *   <li>{@link test.umltordbms.PrimitiveToName#getTypeName <em>Type Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see test.umltordbms.UmltordbmsPackage#getPrimitiveToName()
  * @model

@@ -32,11 +32,12 @@ import test.simpleuml.SimpleumlPackage;
  * An implementation of the model object '<em><b>Package</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link test.simpleuml.impl.PackageImpl#getElements <em>Elements</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

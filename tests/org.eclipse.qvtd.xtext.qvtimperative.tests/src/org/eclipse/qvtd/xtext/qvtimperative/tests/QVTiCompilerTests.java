@@ -21,7 +21,10 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -130,14 +133,16 @@ public class QVTiCompilerTests extends LoadTestCase
 	}
 
 	public void testCG_HSV2HLS_qvti() throws Exception {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		Registry packageRegistry = resourceSet.getPackageRegistry();
+		packageRegistry.put(HSVTreePackage.eNS_URI, HSVTreePackage.eINSTANCE);
+		packageRegistry.put(HSV2HLSPackage.eNS_URI, HSV2HLSPackage.eINSTANCE);
+		packageRegistry.put(HLSTreePackage.eNS_URI, HLSTreePackage.eINSTANCE);
 		URI transformURI = getProjectFileURI("HSV2HLS/HSV2HLS.qvti");
 		URI genModelURI = getProjectFileURI("HSV2HLS/HSV2HLS.genmodel");
 		URI inputModelURI = getProjectFileURI("HSV2HLS/HSVNode.xmi");
 		URI outputModelURI = getProjectFileURI("HSV2HLS/HLSNode.xmi");
 		URI referenceModelURI = getProjectFileURI("HSV2HLS/HLSNodeValidate.xmi");
-		EPackage.Registry.INSTANCE.put(HSVTreePackage.eNS_URI, HSVTreePackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(HSV2HLSPackage.eNS_URI, HSV2HLSPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(HLSTreePackage.eNS_URI, HLSTreePackage.eINSTANCE);
 		Transformation asTransformation = loadTransformation(transformURI, genModelURI);
 		assert asTransformation != null;
 		Class<? extends TransformationExecutor> txClass = generateCode(asTransformation, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");
@@ -164,14 +169,16 @@ public class QVTiCompilerTests extends LoadTestCase
 	}
 
 	public void testCG_ClassToRDBMS_qvti() throws Exception {
+		ResourceSet resourceSet = new ResourceSetImpl();
+		Registry packageRegistry = resourceSet.getPackageRegistry();
+		packageRegistry.put(SimpleumlPackage.eNS_URI, SimpleumlPackage.eINSTANCE);
+		packageRegistry.put(UmltordbmsPackage.eNS_URI, UmltordbmsPackage.eINSTANCE);
+		packageRegistry.put(SimplerdbmsPackage.eNS_URI, SimplerdbmsPackage.eINSTANCE);
 		URI transformURI = getProjectFileURI("ClassToRDBMS/ClassToRDBMSSchedule.qvti");
 		URI genModelURI = getProjectFileURI("ClassToRDBMS/UMLtoRDBMS.genmodel");
 		URI inputModelURI = getProjectFileURI("ClassToRDBMS/SimpleUMLPeople.xmi");
 		URI outputModelURI = getProjectFileURI("ClassToRDBMS/SimpleRDBMSPeople.xmi");
 		URI referenceModelURI = getProjectFileURI("ClassToRDBMS/SimpleRDBMSPeopleValidate.xmi");
-		EPackage.Registry.INSTANCE.put(SimpleumlPackage.eNS_URI, SimpleumlPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(UmltordbmsPackage.eNS_URI, UmltordbmsPackage.eINSTANCE);
-		EPackage.Registry.INSTANCE.put(SimplerdbmsPackage.eNS_URI, SimplerdbmsPackage.eINSTANCE);
 		Transformation asTransformation = loadTransformation(transformURI, genModelURI);
 		assert asTransformation != null;
 		Class<? extends TransformationExecutor> txClass = generateCode(asTransformation, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");

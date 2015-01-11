@@ -30,11 +30,12 @@ import test.umltordbms.UmltordbmsPackage;
  * An implementation of the model object '<em><b>To Column</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link test.umltordbms.impl.ToColumnImpl#getColumn <em>Column</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

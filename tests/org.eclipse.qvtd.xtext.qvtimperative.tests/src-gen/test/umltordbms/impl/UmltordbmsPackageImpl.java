@@ -16,17 +16,11 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import test.simplerdbms.SimplerdbmsPackage;
-
 import test.simplerdbms.impl.SimplerdbmsPackageImpl;
-
 import test.simpleuml.SimpleumlPackage;
-
 import test.simpleuml.impl.SimpleumlPackageImpl;
-
 import test.umltordbms.AssociationToForeignKey;
 import test.umltordbms.AttributeToColumn;
 import test.umltordbms.ClassToTable;

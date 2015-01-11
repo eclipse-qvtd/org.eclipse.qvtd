@@ -13,25 +13,18 @@
 package test.umltordbms.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import test.simplerdbms.Column;
 import test.simplerdbms.Key;
 import test.simplerdbms.Table;
-
 import test.umltordbms.AssociationToForeignKey;
 import test.umltordbms.ClassToTable;
 import test.umltordbms.PackageToSchema;
@@ -43,7 +36,9 @@ import test.umltordbms.UmltordbmsPackage;
  * An implementation of the model object '<em><b>Class To Table</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link test.umltordbms.impl.ClassToTableImpl#getColumn <em>Column</em>}</li>
  *   <li>{@link test.umltordbms.impl.ClassToTableImpl#getOwner <em>Owner</em>}</li>
@@ -53,7 +48,6 @@ import test.umltordbms.UmltordbmsPackage;
  *   <li>{@link test.umltordbms.impl.ClassToTableImpl#getTable <em>Table</em>}</li>
  *   <li>{@link test.umltordbms.impl.ClassToTableImpl#getPrimaryKey <em>Primary Key</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

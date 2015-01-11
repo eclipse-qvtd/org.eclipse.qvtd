@@ -20,12 +20,13 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * An implementation of the model object '<em><b>Class CS2 Class</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link classescstraces.impl.ClassCS2ClassImpl#getClassCS <em>Class CS</em>}</li>
  *   <li>{@link classescstraces.impl.ClassCS2ClassImpl#getClass_ <em>Class</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -10,10 +10,10 @@ package classescs;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link classescs.NamedElementCS#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see classescs.ClassescsPackage#getNamedElementCS()
  * @model abstract="true"

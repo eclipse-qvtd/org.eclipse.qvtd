@@ -11,10 +11,10 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link classes.Root#getOwnedPackages <em>Owned Packages</em>}</li>
  * </ul>
- * </p>
  *
  * @see classes.ClassesPackage#getRoot()
  * @model

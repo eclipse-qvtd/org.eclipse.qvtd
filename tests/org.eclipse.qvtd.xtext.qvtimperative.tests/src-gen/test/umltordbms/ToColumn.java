@@ -23,10 +23,10 @@ import test.simplerdbms.Column;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link test.umltordbms.ToColumn#getColumn <em>Column</em>}</li>
  * </ul>
- * </p>
  *
  * @see test.umltordbms.UmltordbmsPackage#getToColumn()
  * @model

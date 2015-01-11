@@ -14,18 +14,12 @@ package test.umltordbms.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EcoreUtil;
-
 import test.simplerdbms.ForeignKey;
-
 import test.simpleuml.Association;
-
 import test.umltordbms.AssociationToForeignKey;
 import test.umltordbms.ClassToTable;
 import test.umltordbms.UmltordbmsPackage;
@@ -35,7 +29,9 @@ import test.umltordbms.UmltordbmsPackage;
  * An implementation of the model object '<em><b>Association To Foreign Key</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link test.umltordbms.impl.AssociationToForeignKeyImpl#getReferenced <em>Referenced</em>}</li>
  *   <li>{@link test.umltordbms.impl.AssociationToForeignKeyImpl#getOwner <em>Owner</em>}</li>
@@ -43,7 +39,6 @@ import test.umltordbms.UmltordbmsPackage;
  *   <li>{@link test.umltordbms.impl.AssociationToForeignKeyImpl#getAssociation <em>Association</em>}</li>
  *   <li>{@link test.umltordbms.impl.AssociationToForeignKeyImpl#getForeignKey <em>Foreign Key</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

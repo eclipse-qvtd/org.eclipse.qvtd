@@ -20,10 +20,10 @@ package test.umltordbms;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link test.umltordbms.AttributeToColumn#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @see test.umltordbms.UmltordbmsPackage#getAttributeToColumn()
  * @model

@@ -27,12 +27,13 @@ import test.simplerdbms.SimplerdbmsPackage;
  * An implementation of the model object '<em><b>RModel Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link test.simplerdbms.impl.RModelElementImpl#getName <em>Name</em>}</li>
  *   <li>{@link test.simplerdbms.impl.RModelElementImpl#getKind <em>Kind</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

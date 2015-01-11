@@ -31,12 +31,13 @@ import test.simpleuml.SimpleumlPackage;
  * An implementation of the model object '<em><b>Attribute</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link test.simpleuml.impl.AttributeImpl#getType <em>Type</em>}</li>
  *   <li>{@link test.simpleuml.impl.AttributeImpl#getOwner <em>Owner</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

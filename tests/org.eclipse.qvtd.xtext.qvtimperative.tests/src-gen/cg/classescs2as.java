@@ -445,7 +445,8 @@ public class classescs2as extends AbstractTransformationExecutor
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
             // creations
             // assignments
-            final @NonNull /*@Thrown*/ List<PackageCS> ownedPackages = rootCS_0.getOwnedPackages();
+            final @Nullable /*@Thrown*/ List<PackageCS> ownedPackages = rootCS_0.getOwnedPackages();
+            assert ownedPackages != null;
             final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedPackages = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, ownedPackages);
             @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_PackageCS2Package);
             @Nullable Iterator<?> ITERATOR__1 = BOXED_ownedPackages.iterator();

@@ -21,11 +21,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link test.simpleuml.UMLModelElement#getKind <em>Kind</em>}</li>
  *   <li>{@link test.simpleuml.UMLModelElement#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see test.simpleuml.SimpleumlPackage#getUMLModelElement()
  * @model abstract="true"

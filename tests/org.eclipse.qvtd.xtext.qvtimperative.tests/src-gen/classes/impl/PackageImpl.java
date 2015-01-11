@@ -21,12 +21,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * An implementation of the model object '<em><b>Package</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link classes.impl.PackageImpl#getOwnedClasses <em>Owned Classes</em>}</li>
  *   <li>{@link classes.impl.PackageImpl#getOwnedPackages <em>Owned Packages</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

@@ -10,10 +10,10 @@ package classes;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link classes.NamedElement#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @see classes.ClassesPackage#getNamedElement()
  * @model abstract="true"
