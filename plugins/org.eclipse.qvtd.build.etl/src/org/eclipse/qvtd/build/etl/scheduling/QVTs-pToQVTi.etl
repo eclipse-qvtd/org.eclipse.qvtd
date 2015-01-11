@@ -23,10 +23,20 @@ rule ImperativeModel
     {
         
         mOut.externalURI = mIn.externalURI.replace(".qvtp.qvti", ".qvti");
+        mOut.ownedImports ::= mIn.ownedImports;
         mOut.ownedPackages.addAll(mIn.ownedPackages.equivalent());
         // Copy the OCL types package
         //mOut.ownedPackages.add(emfTool.getEcoreUtil().copy(mIn.ownedPackages.selectOne(p | p.isTypeOf(QVTp!Package))));
     }
+
+rule Imports
+	transform s : QVTp!Import
+	to t : QVTi!Import
+	extends NamedElements
+	{
+	
+	t.importedNamespace = s.importedNamespace;
+}
 
 rule Packages 
 	transform s : QVTp!Package
@@ -419,5 +429,8 @@ operation QVTs!MappingAction hasLoopVariable() : Boolean {
 
 
 post {
+	-- FIXME By some reason making the rule Imports be lazy, makes the transformation strangely behave. Investigate
+	-- For the time being, I don't make the rule lazy and I remove the orphane elements at the end'
+	delete QVTi!Import.all.select(x | x.eContainer().isUndefined());
     "QVTp+s to QVTi Done".println();
 }    
