@@ -85,6 +85,133 @@ public interface QVTiCGModelPackage extends EPackage {
 	@NonNull QVTiCGModelPackage eINSTANCE = org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl.init();
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGAllInstancesOperationCallExpImpl <em>CG All Instances Operation Call Exp</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.CGAllInstancesOperationCallExpImpl
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGAllInstancesOperationCallExp()
+	 * @generated
+	 */
+	int CG_ALL_INSTANCES_OPERATION_CALL_EXP = 0;
+
+	/**
+	 * The feature id for the '<em><b>Ast</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ALL_INSTANCES_OPERATION_CALL_EXP__AST = CGModelPackage.CG_LIBRARY_OPERATION_CALL_EXP__AST;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ALL_INSTANCES_OPERATION_CALL_EXP__NAME = CGModelPackage.CG_LIBRARY_OPERATION_CALL_EXP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type Id</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ALL_INSTANCES_OPERATION_CALL_EXP__TYPE_ID = CGModelPackage.CG_LIBRARY_OPERATION_CALL_EXP__TYPE_ID;
+
+	/**
+	 * The feature id for the '<em><b>Required</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ALL_INSTANCES_OPERATION_CALL_EXP__REQUIRED = CGModelPackage.CG_LIBRARY_OPERATION_CALL_EXP__REQUIRED;
+
+	/**
+	 * The feature id for the '<em><b>Depends On</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ALL_INSTANCES_OPERATION_CALL_EXP__DEPENDS_ON = CGModelPackage.CG_LIBRARY_OPERATION_CALL_EXP__DEPENDS_ON;
+
+	/**
+	 * The feature id for the '<em><b>Owns</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ALL_INSTANCES_OPERATION_CALL_EXP__OWNS = CGModelPackage.CG_LIBRARY_OPERATION_CALL_EXP__OWNS;
+
+	/**
+	 * The feature id for the '<em><b>Invalidating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ALL_INSTANCES_OPERATION_CALL_EXP__INVALIDATING = CGModelPackage.CG_LIBRARY_OPERATION_CALL_EXP__INVALIDATING;
+
+	/**
+	 * The feature id for the '<em><b>Validating</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ALL_INSTANCES_OPERATION_CALL_EXP__VALIDATING = CGModelPackage.CG_LIBRARY_OPERATION_CALL_EXP__VALIDATING;
+
+	/**
+	 * The feature id for the '<em><b>Source</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ALL_INSTANCES_OPERATION_CALL_EXP__SOURCE = CGModelPackage.CG_LIBRARY_OPERATION_CALL_EXP__SOURCE;
+
+	/**
+	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ALL_INSTANCES_OPERATION_CALL_EXP__ARGUMENTS = CGModelPackage.CG_LIBRARY_OPERATION_CALL_EXP__ARGUMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Referred Operation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ALL_INSTANCES_OPERATION_CALL_EXP__REFERRED_OPERATION = CGModelPackage.CG_LIBRARY_OPERATION_CALL_EXP__REFERRED_OPERATION;
+
+	/**
+	 * The feature id for the '<em><b>Library Operation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ALL_INSTANCES_OPERATION_CALL_EXP__LIBRARY_OPERATION = CGModelPackage.CG_LIBRARY_OPERATION_CALL_EXP__LIBRARY_OPERATION;
+
+	/**
+	 * The number of structural features of the '<em>CG All Instances Operation Call Exp</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CG_ALL_INSTANCES_OPERATION_CALL_EXP_FEATURE_COUNT = CGModelPackage.CG_LIBRARY_OPERATION_CALL_EXP_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGPropertyAssignmentImpl <em>CG Property Assignment</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -92,7 +219,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGPropertyAssignment()
 	 * @generated
 	 */
-	int CG_PROPERTY_ASSIGNMENT = 14;
+	int CG_PROPERTY_ASSIGNMENT = 15;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -210,7 +337,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGEcorePropertyAssignment()
 	 * @generated
 	 */
-	int CG_ECORE_PROPERTY_ASSIGNMENT = 0;
+	int CG_ECORE_PROPERTY_ASSIGNMENT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -337,7 +464,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMapping()
 	 * @generated
 	 */
-	int CG_MAPPING = 6;
+	int CG_MAPPING = 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGTransformationImpl <em>CG Transformation</em>}' class.
@@ -347,7 +474,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGTransformation()
 	 * @generated
 	 */
-	int CG_TRANSFORMATION = 17;
+	int CG_TRANSFORMATION = 18;
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment <em>CG Ecore Property Assignment</em>}'.
@@ -483,7 +610,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMappingCall()
 	 * @generated
 	 */
-	int CG_MAPPING_CALL = 7;
+	int CG_MAPPING_CALL = 8;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGMappingCallBindingImpl <em>CG Mapping Call Binding</em>}' class.
@@ -493,7 +620,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMappingCallBinding()
 	 * @generated
 	 */
-	int CG_MAPPING_CALL_BINDING = 8;
+	int CG_MAPPING_CALL_BINDING = 9;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGPredicateImpl <em>CG Predicate</em>}' class.
@@ -503,7 +630,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGPredicate()
 	 * @generated
 	 */
-	int CG_PREDICATE = 13;
+	int CG_PREDICATE = 14;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGRealizedVariableImpl <em>CG Realized Variable</em>}' class.
@@ -513,7 +640,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGRealizedVariable()
 	 * @generated
 	 */
-	int CG_REALIZED_VARIABLE = 15;
+	int CG_REALIZED_VARIABLE = 16;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -613,7 +740,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGEcoreRealizedVariable()
 	 * @generated
 	 */
-	int CG_ECORE_REALIZED_VARIABLE = 1;
+	int CG_ECORE_REALIZED_VARIABLE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -722,7 +849,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGFunction()
 	 * @generated
 	 */
-	int CG_FUNCTION = 2;
+	int CG_FUNCTION = 3;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -840,7 +967,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGFunctionCallExp()
 	 * @generated
 	 */
-	int CG_FUNCTION_CALL_EXP = 3;
+	int CG_FUNCTION_CALL_EXP = 4;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -967,7 +1094,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGFunctionParameter()
 	 * @generated
 	 */
-	int CG_FUNCTION_PARAMETER = 4;
+	int CG_FUNCTION_PARAMETER = 5;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -1067,7 +1194,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGGuardVariable()
 	 * @generated
 	 */
-	int CG_GUARD_VARIABLE = 5;
+	int CG_GUARD_VARIABLE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -1374,7 +1501,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMappingExp()
 	 * @generated
 	 */
-	int CG_MAPPING_EXP = 9;
+	int CG_MAPPING_EXP = 10;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -1492,7 +1619,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMappingLoop()
 	 * @generated
 	 */
-	int CG_MAPPING_LOOP = 10;
+	int CG_MAPPING_LOOP = 11;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -1619,7 +1746,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMiddlePropertyAssignment()
 	 * @generated
 	 */
-	int CG_MIDDLE_PROPERTY_ASSIGNMENT = 11;
+	int CG_MIDDLE_PROPERTY_ASSIGNMENT = 12;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -1746,7 +1873,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGMiddlePropertyCallExp()
 	 * @generated
 	 */
-	int CG_MIDDLE_PROPERTY_CALL_EXP = 12;
+	int CG_MIDDLE_PROPERTY_CALL_EXP = 13;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -1945,7 +2072,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGSequence()
 	 * @generated
 	 */
-	int CG_SEQUENCE = 16;
+	int CG_SEQUENCE = 17;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -2135,7 +2262,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGTypedModel()
 	 * @generated
 	 */
-	int CG_TYPED_MODEL = 18;
+	int CG_TYPED_MODEL = 19;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -2190,7 +2317,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGVariablePredicate()
 	 * @generated
 	 */
-	int CG_VARIABLE_PREDICATE = 19;
+	int CG_VARIABLE_PREDICATE = 20;
 
 	/**
 	 * The feature id for the '<em><b>Ast</b></em>' attribute.
@@ -2290,6 +2417,16 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int CG_VARIABLE_PREDICATE_FEATURE_COUNT = CG_PREDICATE_FEATURE_COUNT + 1;
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGAllInstancesOperationCallExp <em>CG All Instances Operation Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>CG All Instances Operation Call Exp</em>'.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGAllInstancesOperationCallExp
+	 * @generated
+	 */
+	EClass getCGAllInstancesOperationCallExp();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment <em>CG Property Assignment</em>}'.
@@ -2740,6 +2877,16 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * @generated
 	 */
 	interface Literals {
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGAllInstancesOperationCallExpImpl <em>CG All Instances Operation Call Exp</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.CGAllInstancesOperationCallExpImpl
+		 * @see org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelPackageImpl#getCGAllInstancesOperationCallExp()
+		 * @generated
+		 */
+		EClass CG_ALL_INSTANCES_OPERATION_CALL_EXP = eINSTANCE.getCGAllInstancesOperationCallExp();
+
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.codegen.qvticgmodel.impl.CGEcorePropertyAssignmentImpl <em>CG Ecore Property Assignment</em>}' class.
 		 * <!-- begin-user-doc -->

@@ -199,7 +199,7 @@ public class umlRdbms extends AbstractTransformationExecutor
             // creations
             // assignments
             // mapping statements
-            final @NonNull /*@Thrown*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Package, TYP_simpleuml_c_c_Package_0);
+            final @Nullable /*@Thrown*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Package, TYP_simpleuml_c_c_Package_0);
             final List<Package> UNBOXED_allInstances = allInstances.asEcoreObjects(idResolver, Package.class);
             assert UNBOXED_allInstances != null;
             ;

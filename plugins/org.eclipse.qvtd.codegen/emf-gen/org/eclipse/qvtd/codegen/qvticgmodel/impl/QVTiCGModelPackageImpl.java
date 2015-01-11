@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGModelPackage;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGAllInstancesOperationCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
@@ -46,6 +47,13 @@ import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
  * @generated
  */
 public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelPackage {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass cgAllInstancesOperationCallExpEClass = null;
+
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -248,6 +256,16 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(QVTiCGModelPackage.eNS_URI, theQVTiCGModelPackage);
 		return theQVTiCGModelPackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getCGAllInstancesOperationCallExp() {
+		return cgAllInstancesOperationCallExpEClass;
 	}
 
 	/**
@@ -799,6 +817,8 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		isCreated = true;
 
 		// Create classes and their features
+		cgAllInstancesOperationCallExpEClass = createEClass(CG_ALL_INSTANCES_OPERATION_CALL_EXP);
+
 		cgEcorePropertyAssignmentEClass = createEClass(CG_ECORE_PROPERTY_ASSIGNMENT);
 		createEReference(cgEcorePropertyAssignmentEClass, CG_ECORE_PROPERTY_ASSIGNMENT__ESTRUCTURAL_FEATURE);
 
@@ -903,6 +923,7 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		cgAllInstancesOperationCallExpEClass.getESuperTypes().add(theCGModelPackage.getCGLibraryOperationCallExp());
 		cgEcorePropertyAssignmentEClass.getESuperTypes().add(this.getCGPropertyAssignment());
 		cgEcoreRealizedVariableEClass.getESuperTypes().add(this.getCGRealizedVariable());
 		cgFunctionEClass.getESuperTypes().add(theCGModelPackage.getCGOperation());
@@ -925,6 +946,8 @@ public class QVTiCGModelPackageImpl extends EPackageImpl implements QVTiCGModelP
 		cgVariablePredicateEClass.getESuperTypes().add(this.getCGPredicate());
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(cgAllInstancesOperationCallExpEClass, CGAllInstancesOperationCallExp.class, "CGAllInstancesOperationCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
 		initEClass(cgEcorePropertyAssignmentEClass, CGEcorePropertyAssignment.class, "CGEcorePropertyAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCGEcorePropertyAssignment_EStructuralFeature(), ecorePackage.getEStructuralFeature(), null, "eStructuralFeature", null, 1, 1, CGEcorePropertyAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

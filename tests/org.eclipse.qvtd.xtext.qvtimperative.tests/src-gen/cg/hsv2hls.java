@@ -128,7 +128,7 @@ public class hsv2hls extends AbstractTransformationExecutor
             // creations
             // assignments
             // mapping statements
-            final @NonNull /*@Thrown*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_HSVNode, TYP_HSVTree_c_c_HSVNode_0);
+            final @Nullable /*@Thrown*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_HSVNode, TYP_HSVTree_c_c_HSVNode_0);
             final List<HSVNode> UNBOXED_allInstances = allInstances.asEcoreObjects(idResolver, HSVNode.class);
             assert UNBOXED_allInstances != null;
             ;

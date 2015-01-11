@@ -15,6 +15,7 @@ import org.eclipse.ocl.examples.codegen.analyzer.AnalysisVisitor;
 import org.eclipse.ocl.examples.codegen.generator.GlobalContext;
 import org.eclipse.ocl.examples.codegen.generator.LocalContext;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGAllInstancesOperationCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
@@ -42,6 +43,11 @@ public class QVTiAnalysisVisitor extends AnalysisVisitor implements QVTiCGModelV
 {
 	public QVTiAnalysisVisitor(@NonNull QVTiAnalyzer analyzer) {
 		super(analyzer);
+	}
+
+	@Override
+	public Object visitCGAllInstancesOperationCallExp(@NonNull CGAllInstancesOperationCallExp object) {
+		return visitCGLibraryOperationCallExp(object);
 	}
 
 	@Override

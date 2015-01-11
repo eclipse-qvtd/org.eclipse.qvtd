@@ -16,6 +16,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.CG2StringVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGAllInstancesOperationCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
@@ -66,8 +67,12 @@ public class QVTiCG2StringVisitor extends CG2StringVisitor implements QVTiCGMode
 	public QVTiCG2StringVisitor() {}
 
 	@Override
-	@Nullable
-	public String visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment object) {
+	public @Nullable String visitCGAllInstancesOperationCallExp(@NonNull CGAllInstancesOperationCallExp object) {
+		return visitCGLibraryOperationCallExp(object);
+	}
+
+	@Override
+	public @Nullable String visitCGEcorePropertyAssignment(@NonNull CGEcorePropertyAssignment object) {
 		return visitCGPropertyAssignment(object);
 	}
 

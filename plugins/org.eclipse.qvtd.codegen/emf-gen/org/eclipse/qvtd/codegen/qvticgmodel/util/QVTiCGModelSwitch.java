@@ -18,6 +18,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGCallable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
@@ -87,6 +88,20 @@ public class QVTiCGModelSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+			case QVTiCGModelPackage.CG_ALL_INSTANCES_OPERATION_CALL_EXP: {
+				CGAllInstancesOperationCallExp cgAllInstancesOperationCallExp = (CGAllInstancesOperationCallExp)theEObject;
+				T result = caseCGAllInstancesOperationCallExp(cgAllInstancesOperationCallExp);
+				if (result == null) result = caseCGLibraryOperationCallExp(cgAllInstancesOperationCallExp);
+				if (result == null) result = caseCGOperationCallExp(cgAllInstancesOperationCallExp);
+				if (result == null) result = caseCGCallExp(cgAllInstancesOperationCallExp);
+				if (result == null) result = caseCGValuedElement(cgAllInstancesOperationCallExp);
+				if (result == null) result = caseCGTypedElement(cgAllInstancesOperationCallExp);
+				if (result == null) result = caseCGNamedElement(cgAllInstancesOperationCallExp);
+				if (result == null) result = caseCGElement(cgAllInstancesOperationCallExp);
+				if (result == null) result = caseNameable(cgAllInstancesOperationCallExp);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case QVTiCGModelPackage.CG_ECORE_PROPERTY_ASSIGNMENT: {
 				CGEcorePropertyAssignment cgEcorePropertyAssignment = (CGEcorePropertyAssignment)theEObject;
 				T result = caseCGEcorePropertyAssignment(cgEcorePropertyAssignment);
@@ -324,6 +339,21 @@ public class QVTiCGModelSwitch<T> extends Switch<T> {
 			}
 			default: return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG All Instances Operation Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG All Instances Operation Call Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGAllInstancesOperationCallExp(CGAllInstancesOperationCallExp object) {
+		return null;
 	}
 
 	/**
@@ -743,6 +773,21 @@ public class QVTiCGModelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCGOperationCallExp(CGOperationCallExp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>CG Library Operation Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>CG Library Operation Call Exp</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCGLibraryOperationCallExp(CGLibraryOperationCallExp object) {
 		return null;
 	}
 

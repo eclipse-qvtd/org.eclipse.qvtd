@@ -19,6 +19,7 @@ import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGAllInstancesOperationCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
@@ -45,6 +46,11 @@ public class QVTiCG2JavaPreVisitor extends CG2JavaPreVisitor implements QVTiCGMo
 {
 	public QVTiCG2JavaPreVisitor(@NonNull QVTiGlobalContext javaContext) {
 		super(javaContext);
+	}
+
+	@Override
+	public Object visitCGAllInstancesOperationCallExp(@NonNull CGAllInstancesOperationCallExp object) {
+		return visitCGLibraryOperationCallExp(object);
 	}
 
 	@Override

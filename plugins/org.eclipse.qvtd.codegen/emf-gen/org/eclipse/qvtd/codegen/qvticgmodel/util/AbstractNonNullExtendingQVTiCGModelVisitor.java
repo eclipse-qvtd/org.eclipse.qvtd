@@ -41,6 +41,11 @@ public abstract class AbstractNonNullExtendingQVTiCGModelVisitor<R, C>
 	}	
 
 	@Override
+	public @NonNull R visitCGAllInstancesOperationCallExp(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGAllInstancesOperationCallExp object) {
+		return visitCGLibraryOperationCallExp(object);
+	}
+
+	@Override
 	public @NonNull R visitCGEcorePropertyAssignment(@NonNull org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment object) {
 		return visitCGPropertyAssignment(object);
 	}

@@ -17,6 +17,7 @@ import org.eclipse.ocl.examples.build.modelspecs.CGValuedElementModelSpec;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGInvalid;
 import org.eclipse.ocl.examples.codegen.java.ImportUtils;
 import org.eclipse.qvtd.codegen.qvti.cse.PredicatePlaces;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGAllInstancesOperationCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunctionCallExp;
@@ -86,6 +87,8 @@ public class QVTdCGValuedElementModelSpec extends CGValuedElementModelSpec
 		new QVTdCGValuedElementModelSpec(CGGuardVariable.class, null,					Box.FALSE, null     , null     , Nul.NEVER, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 		new QVTdCGValuedElementModelSpec(CGRealizedVariable.class, null,				Box.FALSE, null     , null     , Nul.NEVER, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 		new QVTdCGValuedElementModelSpec(CGEcoreRealizedVariable.class, null,			null     , null     , null     , Nul.ASSRT, null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
+
+		new QVTdCGValuedElementModelSpec(CGAllInstancesOperationCallExp.class, null,	null,      null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , null    );
 
 		new QVTdCGValuedElementModelSpec(CGFunctionCallExp.class, null,					Box.FALSE, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 		new QVTdCGValuedElementModelSpec(CGFunctionParameter.class, null,				Box.FALSE, null     , null     , null     , null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );

@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterator;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGAllInstancesOperationCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
@@ -45,6 +46,11 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 	{
 		public QVTiAnalysisVisitor(@NonNull QVTiFieldingAnalyzer context) {
 			super(context);
+		}
+
+		@Override
+		public @Nullable Set<CGVariable> visitCGAllInstancesOperationCallExp(@NonNull CGAllInstancesOperationCallExp object) {
+			return visitCGLibraryOperationCallExp(object);
 		}
 
 		@Override
@@ -152,6 +158,11 @@ public class QVTiFieldingAnalyzer extends FieldingAnalyzer
 	{
 		public QVTiRewriteVisitor(@NonNull QVTiAnalyzer context, @NonNull Set<CGVariable> caughtVariables) {
 			super(context, caughtVariables);
+		}
+
+		@Override
+		public Boolean visitCGAllInstancesOperationCallExp(@NonNull CGAllInstancesOperationCallExp object) {
+			return visitCGLibraryOperationCallExp(object);
 		}
 
 		@Override

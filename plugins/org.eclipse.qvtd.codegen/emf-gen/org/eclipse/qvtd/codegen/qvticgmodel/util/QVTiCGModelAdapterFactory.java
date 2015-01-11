@@ -19,6 +19,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGCallable;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGClass;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGIterationCallExp;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNamedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGNavigationCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
@@ -87,6 +88,10 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 	 */
 	protected QVTiCGModelSwitch<Adapter> modelSwitch =
 		new QVTiCGModelSwitch<Adapter>() {
+			@Override
+			public Adapter caseCGAllInstancesOperationCallExp(CGAllInstancesOperationCallExp object) {
+				return createCGAllInstancesOperationCallExpAdapter();
+			}
 			@Override
 			public Adapter caseCGEcorePropertyAssignment(CGEcorePropertyAssignment object) {
 				return createCGEcorePropertyAssignmentAdapter();
@@ -188,6 +193,18 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 				return createCGValuedElementAdapter();
 			}
 			@Override
+			public Adapter caseCGCallExp(CGCallExp object) {
+				return createCGCallExpAdapter();
+			}
+			@Override
+			public Adapter caseCGOperationCallExp(CGOperationCallExp object) {
+				return createCGOperationCallExpAdapter();
+			}
+			@Override
+			public Adapter caseCGLibraryOperationCallExp(CGLibraryOperationCallExp object) {
+				return createCGLibraryOperationCallExpAdapter();
+			}
+			@Override
 			public Adapter caseCGVariable(CGVariable object) {
 				return createCGVariableAdapter();
 			}
@@ -198,14 +215,6 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseCGOperation(CGOperation object) {
 				return createCGOperationAdapter();
-			}
-			@Override
-			public Adapter caseCGCallExp(CGCallExp object) {
-				return createCGCallExpAdapter();
-			}
-			@Override
-			public Adapter caseCGOperationCallExp(CGOperationCallExp object) {
-				return createCGOperationCallExpAdapter();
 			}
 			@Override
 			public Adapter caseCGParameter(CGParameter object) {
@@ -246,6 +255,20 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 		return modelSwitch.doSwitch((EObject)target);
 	}
 
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGAllInstancesOperationCallExp <em>CG All Instances Operation Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.codegen.qvticgmodel.CGAllInstancesOperationCallExp
+	 * @generated
+	 */
+	public Adapter createCGAllInstancesOperationCallExpAdapter() {
+		return null;
+	}
 
 	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment <em>CG Ecore Property Assignment</em>}'.
@@ -636,6 +659,20 @@ public class QVTiCGModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCGOperationCallExpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperationCallExp <em>CG Library Operation Call Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.examples.codegen.cgmodel.CGLibraryOperationCallExp
+	 * @generated
+	 */
+	public Adapter createCGLibraryOperationCallExpAdapter() {
 		return null;
 	}
 

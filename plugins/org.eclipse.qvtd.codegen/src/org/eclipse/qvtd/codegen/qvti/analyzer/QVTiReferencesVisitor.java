@@ -15,6 +15,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGAllInstancesOperationCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingLoop;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
@@ -33,6 +34,11 @@ public class QVTiReferencesVisitor extends ReferencesVisitor implements QVTiCGMo
 	
 	protected QVTiReferencesVisitor(@NonNull Object context) {
 		super(context);
+	}
+
+	@Override
+	public @Nullable List<Object> visitCGAllInstancesOperationCallExp(@NonNull CGAllInstancesOperationCallExp object) {
+		return visitCGLibraryOperationCallExp(object);
 	}
 
 	@Override

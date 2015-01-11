@@ -32,6 +32,7 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
 import org.eclipse.ocl.examples.codegen.generator.GenModelException;
 import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
+import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.Import;
@@ -46,11 +47,16 @@ import org.eclipse.ocl.pivot.ParserException;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.ids.IdManager;
+import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.ids.TypeId;
+import org.eclipse.ocl.pivot.library.LibraryFeature;
+import org.eclipse.ocl.pivot.library.LibraryOperation;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiGlobalContext;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGAllInstancesOperationCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
@@ -142,11 +148,14 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 
 	protected final @NonNull QVTiAnalyzer analyzer;
 	protected final @NonNull QVTiGlobalContext globalContext;
+	protected final @NonNull OperationId allInstancesOperationId;
 	
 	public QVTiAS2CGVisitor(@NonNull QVTiAnalyzer analyzer, @NonNull QVTiGlobalContext globalContext) {
 		super(analyzer);
 		this.analyzer = analyzer;
 		this.globalContext = globalContext;
+		Class oclElementType = metamodelManager.getStandardLibrary().getOclElementType();
+		this.allInstancesOperationId = oclElementType.getTypeId().getOperationId(0, "allInstances", IdManager.getParametersId());
 	}
 
 	protected void doBottoms(@NonNull Mapping pMapping, @NonNull CGMappingExp cgMappingExp) {
@@ -552,18 +561,28 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 	@Override
 	public @NonNull
 	CGValuedElement visitOperationCallExp(@NonNull OperationCallExp asOperationCallExp) {
-		Operation pOperation = asOperationCallExp.getReferredOperation();
-		if (pOperation instanceof Function) {
+		Operation asOperation = asOperationCallExp.getReferredOperation();
+		if (asOperation instanceof Function) {
 			CGFunctionCallExp cgFunctionCallExp = QVTiCGModelFactory.eINSTANCE.createCGFunctionCallExp();
-			cgFunctionCallExp.setReferredOperation(pOperation);
+			cgFunctionCallExp.setReferredOperation(asOperation);
 			setAst(cgFunctionCallExp, asOperationCallExp);
-			cgFunctionCallExp.setRequired(pOperation.isRequired());
+			cgFunctionCallExp.setRequired(asOperation.isRequired());
 			for (OCLExpression pArgument : asOperationCallExp.getOwnedArguments()) {
 				CGValuedElement cgArgument = doVisit(CGValuedElement.class, pArgument);
 				cgFunctionCallExp.getArguments().add(cgArgument);
 			}
 //			cgOperationCallExp.setOperation(getOperation(asOperationCallExp.getReferredOperation()));
 			return cgFunctionCallExp;
+		}
+		else if (asOperation.getOperationId() == allInstancesOperationId) {
+			OCLExpression pSource = asOperationCallExp.getOwnedSource();
+			CGValuedElement cgSource = pSource != null ? doVisit(CGValuedElement.class, pSource) : null;
+			LibraryFeature libraryOperation = metamodelManager.getImplementation(asOperation);
+			CGAllInstancesOperationCallExp cgAllInstancesOperationCallExp = QVTiCGModelFactory.eINSTANCE.createCGAllInstancesOperationCallExp();
+			cgAllInstancesOperationCallExp.setSource(cgSource);
+			cgAllInstancesOperationCallExp.setLibraryOperation((LibraryOperation) libraryOperation);
+			setAst(cgAllInstancesOperationCallExp, asOperationCallExp);
+			return cgAllInstancesOperationCallExp;
 		}
 		else {
 			return super.visitOperationCallExp(asOperationCallExp);

@@ -14,6 +14,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.codegen.cse.GlobalPlace;
 import org.eclipse.ocl.examples.codegen.java.JavaDependencyVisitor;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiGlobalContext;
+import org.eclipse.qvtd.codegen.qvticgmodel.CGAllInstancesOperationCallExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGFunction;
@@ -40,6 +41,11 @@ public class QVTiDependencyVisitor extends JavaDependencyVisitor implements QVTi
 {	
 	public QVTiDependencyVisitor(@NonNull QVTiAnalyzer analyzer, @NonNull QVTiGlobalContext globalContext, @NonNull GlobalPlace globalPlace) {
 		super(analyzer, globalContext, globalPlace);
+	}
+
+	@Override
+	public Object visitCGAllInstancesOperationCallExp(@NonNull CGAllInstancesOperationCallExp object) {
+		return visitCGLibraryOperationCallExp(object);
 	}
 
 	@Override

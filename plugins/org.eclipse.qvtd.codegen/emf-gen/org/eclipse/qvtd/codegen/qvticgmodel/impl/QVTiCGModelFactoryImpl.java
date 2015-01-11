@@ -82,6 +82,7 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case QVTiCGModelPackage.CG_ALL_INSTANCES_OPERATION_CALL_EXP: return createCGAllInstancesOperationCallExp();
 			case QVTiCGModelPackage.CG_ECORE_PROPERTY_ASSIGNMENT: return createCGEcorePropertyAssignment();
 			case QVTiCGModelPackage.CG_ECORE_REALIZED_VARIABLE: return createCGEcoreRealizedVariable();
 			case QVTiCGModelPackage.CG_FUNCTION: return createCGFunction();
@@ -105,6 +106,17 @@ public class QVTiCGModelFactoryImpl extends EFactoryImpl implements QVTiCGModelF
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public CGAllInstancesOperationCallExp createCGAllInstancesOperationCallExp() {
+		CGAllInstancesOperationCallExpImpl cgAllInstancesOperationCallExp = new CGAllInstancesOperationCallExpImpl();
+		return cgAllInstancesOperationCallExp;
 	}
 
 	/**

@@ -32,6 +32,15 @@ public interface QVTiCGModelFactory extends EFactory {
 	@NonNull QVTiCGModelFactory eINSTANCE = org.eclipse.qvtd.codegen.qvticgmodel.impl.QVTiCGModelFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>CG All Instances Operation Call Exp</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>CG All Instances Operation Call Exp</em>'.
+	 * @generated
+	 */
+	CGAllInstancesOperationCallExp createCGAllInstancesOperationCallExp();
+
+	/**
 	 * Returns a new object of class '<em>CG Ecore Property Assignment</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
