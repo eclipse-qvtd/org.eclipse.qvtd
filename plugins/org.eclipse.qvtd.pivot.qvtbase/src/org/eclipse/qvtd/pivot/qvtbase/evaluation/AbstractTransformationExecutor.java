@@ -43,6 +43,10 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 	protected final @NonNull IdResolver idResolver;
 	protected final @NonNull List<EObject>[] modelObjects;
 	protected final @NonNull Map<String, Integer> modelIndexes = new HashMap<String, Integer>();
+	/**
+	 * All possible allInstances() returns indexed by the ClassIndex of the ClassId for which allInstances() may be invoked.
+	 */
+	protected final @NonNull Set<EObject>[] classIndex2objects;
 
 	/**
 	 * Unchanging configured list PropertyId for which unnavigable opposite navigation may occur indexed by the PropertyIndex for that PropertyId.
@@ -77,10 +81,6 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 	 */
 	private final @Nullable Map<ClassId, Set<Integer>> classId2classIndexes;
 
-	/**
-	 * All possible allInstances() returns indexed by the ClassIndex of the ClassId for which allInstances() may be invoked.
-	 */
-	private final @Nullable Set<EObject>[] classIndex2objects;
 	
 	protected AbstractTransformationExecutor(@NonNull Evaluator evaluator, @NonNull String[] modelNames,
 			@Nullable PropertyId[] propertyIndex2propertyId, @Nullable ClassId[] classIndex2classId, @Nullable int[][] classIndex2allClassIndexes) {
@@ -142,7 +142,8 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 		else {
 	    	this.classId2classIndex = null;
 	    	this.classId2classIndexes = null;
-	    	this.classIndex2objects = null;
+			@SuppressWarnings("unchecked")Set<EObject>[] classIndex2objects = (Set<EObject>[]) new HashSet<?>[0];
+			this.classIndex2objects = classIndex2objects;
 		}
 	}
 
@@ -204,7 +205,7 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
     	Map<EClass, Set<Integer>> eClass2allClassIndexes = null;
 		Map<EClass, List<Integer>> eClass2allPropertyIndexes = null;
 		Map<EReference, Integer> eReference2propertyIndex = null;
-		if ((classId2classIndexes != null) && (classIndex2objects != null)) {
+		if (classId2classIndexes != null) {
 			eClass2allClassIndexes = new HashMap<EClass, Set<Integer>>();
 		}
 		if (propertyIndex2propertyId != null) {
@@ -237,7 +238,7 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 	public @NonNull Set<EObject> get(@NonNull org.eclipse.ocl.pivot.Class type) {
 		Map<ClassId, Integer> classId2classIndex2 = classId2classIndex;
 		Set<EObject>[] classIndex2objects2 = classIndex2objects;
-		if ((classId2classIndex2 == null) || (classIndex2objects2 == null)) {
+		if (classId2classIndex2 == null) {
 			throw new IllegalArgumentException("No allInstances() support");
 		}
 		ClassId classId = IdManager.getClassId(type);

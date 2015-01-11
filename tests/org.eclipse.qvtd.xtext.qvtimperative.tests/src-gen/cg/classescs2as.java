@@ -166,6 +166,7 @@ public class classescs2as extends AbstractTransformationExecutor
             final /*@Thrown*/ ClassCS2Class c2c_0 = ClassescstracesFactory.eINSTANCE.createClassCS2Class();
             assert c2c_0 != null;
             modelObjects[2/*middle*/].add(c2c_0);
+            classIndex2objects[2/*ClassCS2Class*/].add(c2c_0);
             // assignments
             c2c_0.setClassCS(classCS);
             OPPOSITE_OF_ClassCS2Class_classCS.put(classCS, c2c_0);
@@ -205,6 +206,7 @@ public class classescs2as extends AbstractTransformationExecutor
             final /*@Thrown*/ RootCS2Root r2r_0 = ClassescstracesFactory.eINSTANCE.createRootCS2Root();
             assert r2r_0 != null;
             modelObjects[2/*middle*/].add(r2r_0);
+            classIndex2objects[8/*RootCS2Root*/].add(r2r_0);
             // assignments
             r2r_0.setRootCS(rootCS);
             OPPOSITE_OF_RootCS2Root_rootCS.put(rootCS, r2r_0);
@@ -244,6 +246,7 @@ public class classescs2as extends AbstractTransformationExecutor
             final /*@Thrown*/ PackageCS2Package p2p_0 = ClassescstracesFactory.eINSTANCE.createPackageCS2Package();
             assert p2p_0 != null;
             modelObjects[2/*middle*/].add(p2p_0);
+            classIndex2objects[5/*PackageCS2Package*/].add(p2p_0);
             // assignments
             p2p_0.setPackageCS(packageCS);
             OPPOSITE_OF_PackageCS2Package_packageCS.put(packageCS, p2p_0);
@@ -283,6 +286,7 @@ public class classescs2as extends AbstractTransformationExecutor
             final /*@Thrown*/ classes.Class symbol_3 = ClassesFactory.eINSTANCE.createClass();
             assert symbol_3 != null;
             modelObjects[1/*rightAS*/].add(symbol_3);
+            classIndex2objects[0/*Class*/].add(symbol_3);
             // assignments
             c2c.setClass(symbol_3);
             // mapping statements
@@ -321,6 +325,7 @@ public class classescs2as extends AbstractTransformationExecutor
             final /*@Thrown*/ Root root_0 = ClassesFactory.eINSTANCE.createRoot();
             assert root_0 != null;
             modelObjects[1/*rightAS*/].add(root_0);
+            classIndex2objects[6/*Root*/].add(root_0);
             // assignments
             r2r.setRoot(root_0);
             // mapping statements
@@ -359,6 +364,7 @@ public class classescs2as extends AbstractTransformationExecutor
             final /*@Thrown*/ Package symbol_3 = ClassesFactory.eINSTANCE.createPackage();
             assert symbol_3 != null;
             modelObjects[1/*rightAS*/].add(symbol_3);
+            classIndex2objects[3/*Package*/].add(symbol_3);
             // assignments
             p2p.setPackage(symbol_3);
             // mapping statements

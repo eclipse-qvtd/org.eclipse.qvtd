@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
@@ -27,8 +29,11 @@ import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.ids.ClassId;
+import org.eclipse.ocl.pivot.ids.ElementId;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.OperationId;
+import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
@@ -52,6 +57,11 @@ public class QVTiTransformationAnalysis
 	 *  Set of all types for which allInstances() is invoked.
 	 */
 	private @NonNull Set<org.eclipse.ocl.pivot.Class> allInstancesClasses = new HashSet<org.eclipse.ocl.pivot.Class>();
+
+	/**
+	 *  Mapping from all the ClassIds of all types for which allInstnaces() may be invoked to a distinct class-index.
+	 */
+	private @Nullable Map<ClassId, Integer> allInstancesClassId2classIndex = null;
 
 	/**
 	 *  Map from navigable property to sequential index.
@@ -130,6 +140,29 @@ public class QVTiTransformationAnalysis
 		return allInstancesClasses;
 	}
 	
+	public @NonNull Map<ClassId, Integer> getAllInstancesClassId2classIndex() {
+		Map<ClassId, Integer> allInstancesClassId2classIndex2 = allInstancesClassId2classIndex;
+		if (allInstancesClassId2classIndex2 == null) {
+			allInstancesClassId2classIndex = allInstancesClassId2classIndex2 = new HashMap<ClassId, Integer>();
+			List<ClassId> classIds = new ArrayList<ClassId>();
+			for (org.eclipse.ocl.pivot.Class asClass : getAllInstancesClasses()) {
+				TypeId typeId = asClass.getTypeId();
+				if (typeId instanceof ClassId) {
+					classIds.add((ClassId) typeId);
+				}
+			}
+			Collections.sort(classIds, ElementId.ElementIdComparator.INSTANCE);
+			for (int i = 0; i < classIds.size(); i++) {
+				allInstancesClassId2classIndex2.put(classIds.get(i),  i);
+			}
+		}
+		return allInstancesClassId2classIndex2;
+	}
+	
+	public @Nullable Integer getAllInstancesClassIndex(@NonNull ClassId classId) {
+		return getAllInstancesClassId2classIndex().get(classId);
+	}
+	
 	protected int getCacheIndex(@NonNull Property navigableProperty) {
 		Integer cacheIndex = property2cacheIndex.get(navigableProperty);
 		if (cacheIndex == null) { 
@@ -146,22 +179,23 @@ public class QVTiTransformationAnalysis
 	/**
 	 * Return a Map from each instanceClasses to the subset of instanceClasses that are transitive superClasses of the particular instanceClass.
 	 */
-	public @NonNull Map<org.eclipse.ocl.pivot.Class, List<org.eclipse.ocl.pivot.Class>> getInstancesClassAnalysis(@NonNull Iterable<org.eclipse.ocl.pivot.Class> instanceClasses) {
-		Map<org.eclipse.ocl.pivot.Class, List<org.eclipse.ocl.pivot.Class>> instancesClassAnalysis = new HashMap<org.eclipse.ocl.pivot.Class, List<org.eclipse.ocl.pivot.Class>>();
+	public @NonNull Map<ClassId, List<ClassId>> getInstancesClassAnalysis(@NonNull Iterable<org.eclipse.ocl.pivot.Class> instanceClasses) {
+		Map<ClassId, List<ClassId>> instancesClassAnalysis = new HashMap<ClassId, List<ClassId>>();
 		for (@SuppressWarnings("null")@NonNull org.eclipse.ocl.pivot.Class instanceClass : instanceClasses) {
 			CompleteClass completeInstanceClass = metamodelManager.getCompleteClass(instanceClass);
-			instancesClassAnalysis.put(completeInstanceClass.getPivotClass(),  null);
+			instancesClassAnalysis.put((ClassId) completeInstanceClass.getPivotClass().getTypeId(),  null);
 		}
-		for (@SuppressWarnings("null")@NonNull org.eclipse.ocl.pivot.Class instanceClass : instancesClassAnalysis.keySet()) {
-			List<org.eclipse.ocl.pivot.Class> superInstanceClasses = new ArrayList<org.eclipse.ocl.pivot.Class>();
-			superInstanceClasses.add(instanceClass);
+		for (@SuppressWarnings("null")@NonNull org.eclipse.ocl.pivot.Class instanceClass : instanceClasses) {
+			List<ClassId> superInstanceClassIds = new ArrayList<ClassId>();
+			ClassId instanceClassId = (ClassId)instanceClass.getTypeId();
+			superInstanceClassIds.add(instanceClassId);
 			CompleteClass completeClass = metamodelManager.getCompleteClass(instanceClass);
 			for (CompleteClass superCompleteClass : completeClass.getProperSuperCompleteClasses()) {
 				org.eclipse.ocl.pivot.Class superClass = superCompleteClass.getPivotClass();
 				if (instancesClassAnalysis.containsKey(superClass)) {
-					superInstanceClasses.add(superClass);
+					superInstanceClassIds.add((ClassId) superClass.getTypeId());
 				}
-				instancesClassAnalysis.put(instanceClass, superInstanceClasses);
+				instancesClassAnalysis.put(instanceClassId, superInstanceClassIds);
 			}
 		}
 		return instancesClassAnalysis;
