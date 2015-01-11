@@ -224,7 +224,9 @@ public class QVTiCompilerTests extends LoadTestCase
 		Resource genResource = resourceSet.getResource(genModelURI, true);
 		for (EObject eObject : genResource.getContents()) {
 			if (eObject instanceof GenModel) {
-				metamodelManager.addGenModel((GenModel)eObject);
+				GenModel genModel = (GenModel)eObject;
+				genModel.reconcile();
+				metamodelManager.addGenModel(genModel);
 			}
 		}
 		MetamodelManagerResourceSetAdapter.getAdapter(ClassUtil.nonNullState(resourceSet), metamodelManager);

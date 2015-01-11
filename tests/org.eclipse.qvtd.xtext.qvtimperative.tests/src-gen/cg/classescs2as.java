@@ -428,7 +428,7 @@ public class classescs2as extends AbstractTransformationExecutor
      * rootCS.RootCS2Root.root =
      *   root)
      * { |
-     * root = rootCS.ownedPackage.PackageCS2Package.package->asOrderedSet();
+     * root = rootCS.ownedPackages.PackageCS2Package.package->asOrderedSet();
      * }
      * 
      * }
@@ -445,11 +445,10 @@ public class classescs2as extends AbstractTransformationExecutor
             final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
             // creations
             // assignments
-            final @Nullable /*@Thrown*/ List<PackageCS> ownedPackage = rootCS_0.getOwnedPackage();
-            assert ownedPackage != null;
-            final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedPackage = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, ownedPackage);
+            final @NonNull /*@Thrown*/ List<PackageCS> ownedPackages = rootCS_0.getOwnedPackages();
+            final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedPackages = idResolver.createOrderedSetOfAll(ORD_CLSSid_PackageCS, ownedPackages);
             @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_PackageCS2Package);
-            @Nullable Iterator<?> ITERATOR__1 = BOXED_ownedPackage.iterator();
+            @Nullable Iterator<?> ITERATOR__1 = BOXED_ownedPackages.iterator();
             @NonNull /*@Thrown*/ SequenceValue collect_0;
             while (true) {
                 if (!ITERATOR__1.hasNext()) {
