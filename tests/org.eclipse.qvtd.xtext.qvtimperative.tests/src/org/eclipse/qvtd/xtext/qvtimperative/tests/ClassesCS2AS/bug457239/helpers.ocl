@@ -4,6 +4,6 @@ package classescs
 
 context PackageCS
 def : hasName() : Boolean =
-	name.oclIsUndefined() or name = ''
+	not name.oclIsUndefined() and name <> ''
 
 endpackage
