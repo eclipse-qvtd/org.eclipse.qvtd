@@ -1,0 +1,36 @@
+import classes : '../Classes.ecore#/';
+import classescs : '../ClassesCS.ecore#/';
+-- NOTE !! If you comment the ocl document import, the test case passes !!!
+import 'helpers.ocl';
+
+transformation classescs2as
+{
+	leftCS imports classescs;
+	rightAS imports classes;
+}
+
+map createPackage in classescs2as
+{
+	check leftCS(packageCS : PackageCS) {}
+	enforce rightAS() {
+		realize package : Package
+	}
+	where () {
+		package.name := -- if packageCS.hasName()
+						if not packageCS.name.oclIsUndefined()
+						then packageCS.name
+						else 'unnamed'
+						endif;
+	}
+}
+
+map __root__ in classescs2as
+{
+	where () {}
+
+	for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
+		call createPackage {
+			packageCS := packageCS;
+		}
+	}
+}

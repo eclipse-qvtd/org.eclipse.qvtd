@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2014 The University of York, Willink Transformations and others.
+ * Copyright (c) 2012, 2015 The University of York, Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,6 +7,7 @@
  * 
  * Contributors:
  *     Horacio Hoyos - initial API and implementation
+ *     Adolfo Sanchez-Barbudo Herrera - Bug 456900, 457239 
  ******************************************************************************/
 
 package org.eclipse.qvtd.xtext.qvtimperative.tests;
@@ -357,4 +358,18 @@ public class QVTiInterpreterTests extends LoadTestCase
         myQVT.dispose();
     }
     
+    @Test
+    public void testClassesCS2AS_bug457239() throws Exception {
+        
+        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metamodelManager), "ClassesCS2AS/bug457239", "ClassesCS2AS.qvti");
+    	testEvaluator.saveTransformation(null);
+        
+        testEvaluator.loadModel("leftCS", "example_input.xmi");
+        testEvaluator.createModel("rightAS", "example_output.xmi");
+        testEvaluator.loadReference("rightAS", "example_output_ref.xmi");
+        testEvaluator.test();
+        testEvaluator.dispose();
+    	URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
+        assertLoadable(txURI);
+    }
 }

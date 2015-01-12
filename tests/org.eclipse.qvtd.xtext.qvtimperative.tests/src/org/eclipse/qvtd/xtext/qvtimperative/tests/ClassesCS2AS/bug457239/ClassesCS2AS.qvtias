@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<qvti:ImperativeModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot" xmlns:qvtb="http://www.eclipse.org/qvt/2015/QVTbase"
+    xmlns:qvtcb="http://www.eclipse.org/qvt/2015/QVTcoreBase" xmlns:qvti="http://www.eclipse.org/qvt/2015/QVTimperative"
+    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2015/QVTcoreBase java://org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage http://www.eclipse.org/qvt/2015/QVTimperative java://org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
+    name="ClassesCS2AS.qvti" externalURI="platform:/resource/org.eclipse.qvtd.xtext.qvtimperative.tests/src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassesCS2AS/bug457239/ClassesCS2AS.qvti">
+  <ownedImports name="classes" importedNamespace="pivot:Package ../Classes.ecore.oclas#P.classes"/>
+  <ownedImports name="classescs" importedNamespace="pivot:Package ../ClassesCS.ecore.oclas#P.classescs"/>
+  <ownedImports importedNamespace="pivot:Model helpers.ocl.oclas#/"/>
+  <ownedPackages xmi:id="P." name="">
+    <ownedClasses xsi:type="qvtb:Transformation" xmi:id="T..classescs2as" name="classescs2as"
+        superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
+      <modelParameter xmi:id="qT..classescs2as.leftCS" name="leftCS" usedPackage="../ClassesCS.ecore.oclas#P.classescs"/>
+      <modelParameter xmi:id="qT..classescs2as.rightAS" name="rightAS" usedPackage="../Classes.ecore.oclas#P.classes"/>
+      <rule xsi:type="qvti:Mapping" xmi:id="m..classescs2as.createPackage" name="createPackage">
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" isEnforceable="false"
+            typedModel="#qT..classescs2as.leftCS">
+          <guardPattern>
+            <variable xmi:id="qV..classescs2as.createPackage.leftCS.guard.packageCS"
+                name="packageCS" type="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"/>
+          </guardPattern>
+          <bottomPattern/>
+        </domain>
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="false" isEnforceable="true"
+            typedModel="#qT..classescs2as.rightAS">
+          <guardPattern/>
+          <bottomPattern>
+            <realizedVariable xmi:id="qV..classescs2as.createPackage.rightAS.bottom.package"
+                name="package" type="pivot:Class ../Classes.ecore.oclas#T.classes.Package"/>
+          </bottomPattern>
+        </domain>
+        <guardPattern/>
+        <bottomPattern>
+          <assignment xsi:type="qvti:MiddlePropertyAssignment" isDefault="false" targetProperty="../Classes.ecore.oclas#p.classes.NamedElement.name">
+            <value xsi:type="pivot:IfExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String">
+              <ownedCondition xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                  referredOperation="helpers.ocl.oclas#o.classescs.PackageCS.hasName">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"
+                    referredVariable="#qV..classescs2as.createPackage.leftCS.guard.packageCS"/>
+              </ownedCondition>
+              <ownedElse xsi:type="pivot:StringLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  stringSymbol="unnamed"/>
+              <ownedThen xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
+                  referredProperty="../ClassesCS.ecore.oclas#p.classescs.NamedElementCS.name">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"
+                    referredVariable="#qV..classescs2as.createPackage.leftCS.guard.packageCS"/>
+              </ownedThen>
+            </value>
+            <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class ../Classes.ecore.oclas#T.classes.Package"
+                referredVariable="#qV..classescs2as.createPackage.rightAS.bottom.package"/>
+          </assignment>
+        </bottomPattern>
+      </rule>
+      <rule xsi:type="qvti:Mapping" xmi:id="m..classescs2as.__root__" name="__root__">
+        <guardPattern/>
+        <bottomPattern/>
+        <mappingStatement xsi:type="qvti:MappingSequence">
+          <mappingStatements xsi:type="qvti:MappingLoop">
+            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0"
+                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
+              <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
+                  referredType="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"/>
+            </ownedSource>
+            <ownedBody xsi:type="qvti:MappingSequence">
+              <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..classescs2as.createPackage">
+                <binding boundVariable="#qV..classescs2as.createPackage.leftCS.guard.packageCS">
+                  <value xsi:type="pivot:VariableExp" type="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"
+                      referredVariable="#i..classescs2as.__root__.0.0.packageCS"/>
+                </binding>
+              </mappingStatements>
+            </ownedBody>
+            <ownedIterators xmi:id="i..classescs2as.__root__.0.0.packageCS" name="packageCS"
+                type="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"/>
+          </mappingStatements>
+        </mappingStatement>
+      </rule>
+    </ownedClasses>
+  </ownedPackages>
+  <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage"
+      nsPrefix="orphanage">
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.1"
+        elementType="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.2"
+        elementType="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
+        elementType="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ../ClassesCS.ecore.oclas#T.classescs.PackageCS"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+  </ownedPackages>
+</qvti:ImperativeModel>
