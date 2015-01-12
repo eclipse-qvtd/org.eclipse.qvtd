@@ -24,11 +24,11 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.ocl.pivot.EnvironmentFactory;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
@@ -83,21 +83,21 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	 */
 	public static class QVTcoreBaseAliasAnalysis extends AliasAnalysis
 	{
-		public static @NonNull QVTcoreBaseAliasAnalysis getAdapter(@NonNull Resource resource, @NonNull MetamodelManager metamodelManager) {
+		public static @NonNull QVTcoreBaseAliasAnalysis getAdapter(@NonNull Resource resource, @NonNull EnvironmentFactory environmentFactory) {
 			List<Adapter> eAdapters = resource.eAdapters();
 			for (Adapter adapter : eAdapters) {
 				if (adapter instanceof QVTcoreBaseAliasAnalysis) {
 					QVTcoreBaseAliasAnalysis aliasAnalysis = (QVTcoreBaseAliasAnalysis)adapter;
-					if (aliasAnalysis.metamodelManager == metamodelManager) {
+					if (aliasAnalysis.environmentFactory == environmentFactory) {
 						return aliasAnalysis;
 					}
 				}
 			}
-			return new QVTcoreBaseAliasAnalysis(resource, metamodelManager);
+			return new QVTcoreBaseAliasAnalysis(resource, environmentFactory);
 		}
 
-		public QVTcoreBaseAliasAnalysis(@NonNull Resource resource, @NonNull MetamodelManager metamodelManager) {
-			super(resource, metamodelManager);
+		public QVTcoreBaseAliasAnalysis(@NonNull Resource resource, @NonNull EnvironmentFactory environmentFactory) {
+			super(resource, environmentFactory);
  		}
 	}
 
@@ -123,7 +123,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	@Override
 	public void postProcess(@NonNull BaseCSResource csResource, @NonNull Map<Namespace, List<String>> importedNamespaces) {
 		AliasAnalysis.dispose(csResource);
-		QVTcoreBaseAliasAnalysis aliasAdapter = QVTcoreBaseAliasAnalysis.getAdapter(csResource, context.getMetamodelManager());
+		QVTcoreBaseAliasAnalysis aliasAdapter = QVTcoreBaseAliasAnalysis.getAdapter(csResource, context.getEnvironmentFactory());
 		List<EObject> contents = csResource.getContents();
 		if (contents.size() > 0) {
 			EObject root = contents.get(0);

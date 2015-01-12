@@ -46,7 +46,6 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.LambdaType;
 import org.eclipse.ocl.pivot.LoopExp;
-import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
@@ -58,7 +57,6 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.PivotConstantsInternal;
 import org.eclipse.ocl.pivot.internal.StandardLibraryImpl;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
-import org.eclipse.ocl.pivot.internal.ecore.es2as.Ecore2AS;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
@@ -334,14 +332,14 @@ public class XtextTestCase extends PivotTestCase
 		writer.close();
 	}
 
-	protected Resource getPivotFromEcore(MetamodelManager metamodelManager, Resource ecoreResource) {
-		Ecore2AS ecore2Pivot = Ecore2AS.getAdapter(ecoreResource, metamodelManager);
+/*	protected Resource getPivotFromEcore(@NonNull EnvironmentFactoryInternal environmentFactory, Resource ecoreResource) {
+		Ecore2AS ecore2Pivot = Ecore2AS.getAdapter(ecoreResource, environmentFactory);
 		Model pivotRoot = ecore2Pivot.getPivotModel();
 		Resource pivotResource = pivotRoot.eResource();
 		assertNoResourceErrors("Normalisation failed", pivotResource);
 		assertNoValidationErrors("Normalisation invalid", pivotResource);
 		return pivotResource;
-	}
+	} */
 
 	protected File getProjectFile() {
 		String projectName = getProjectName();
