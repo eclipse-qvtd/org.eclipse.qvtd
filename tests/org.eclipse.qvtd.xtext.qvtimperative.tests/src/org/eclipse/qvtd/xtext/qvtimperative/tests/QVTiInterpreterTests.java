@@ -360,7 +360,7 @@ public class QVTiInterpreterTests extends LoadTestCase
     
     @Test
     public void testClassesCS2AS_bug457239() throws Exception {
-        
+    	CompleteOCLStandaloneSetup.doSetup();
         MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metamodelManager), "ClassesCS2AS/bug457239", "ClassesCS2AS.qvti");
     	testEvaluator.saveTransformation(null);
         

@@ -1,5 +1,5 @@
-import classes : '../Classes.ecore#/';
-import classescs : '../ClassesCS.ecore#/';
+import classes : '../Classes.ecore';
+import classescs : '../ClassesCS.ecore';
 -- NOTE !! If you comment the ocl document import, the test case passes !!!
 import 'helpers.ocl';
 
