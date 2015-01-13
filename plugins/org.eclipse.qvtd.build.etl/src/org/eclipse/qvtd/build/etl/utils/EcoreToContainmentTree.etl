@@ -1,0 +1,35 @@
+rule EPackage2Node 
+	transform s : mm!EPackage
+	to t : tree!Node {
+
+	t.element = s;
+	t.name = s.name;
+	// The children of the package node, will be the orphan children
+	// the instantiable nodes without parents (normally the root class nodes)
+	var orphanClassifiers =  s.eClassifiers.select(c | 
+				c.isKindOf(mm!EClass) and 
+				not c.isAbstract() and 
+				c.equivalent().parent.isEmpty());
+	t.children ::= orphanClassifiers;
+}
+
+
+rule EClass2Node
+	transform s : mm!EClass
+	to t : tree!Node {
+	
+	t.element = s;
+	t.name = s.name;
+	// Hierarchy relationships
+	t.superTypes ::= s.getAllSuperTypes();
+	// Containment relationships
+	var containmentFeatures = mm!EStructuralFeature.all.select(ef | 
+				ef.containment and 
+				s.getAllSuperTypes().including(s).includes(ef.eType));
+	t.parent ::= containmentFeatures.eContainingClass;
+}
+
+@cached
+operation mm!EClass getAllSuperTypes() : Set {
+	return self.asSequence().closure(x | x.eSuperTypes).asSet();
+}

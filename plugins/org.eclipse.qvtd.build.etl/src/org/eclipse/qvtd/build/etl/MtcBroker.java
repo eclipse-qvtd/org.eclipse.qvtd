@@ -57,7 +57,7 @@ public class MtcBroker {
 	private static final String ECORE_CONTAINMENT_URI = "http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree";
 	
 	/** The Constant ECORE_TO_TREE_EOL. */
-	private static final String ECORE_TO_TREE_EOL = "utils/EcoreToContainmentTree.eol";
+	private static final String ECORE_TO_TREE_EOL = "utils/EcoreToContainmentTree.etl";
 	
 	/** The Constant QVTS_MM. */
 	private static final String QVTS_MM = "/QVTSchedule.ecore";
@@ -481,10 +481,10 @@ public class MtcBroker {
 	 */
 	protected void createContainmentTrees() throws QvtMtcExecutionException  {
 		
-		EolTask eol = null;
+		EtlTask eol = null;
 		List<String> loadedUris = new ArrayList<String>();
 		try {
-			eol = new EolTask(java.net.URI.create(getResourceURI(ECORE_TO_TREE_EOL)));
+			eol = new EtlTask(java.net.URI.create(getResourceURI(ECORE_TO_TREE_EOL)));
 		} catch (URISyntaxException e) {
 			throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
 		}

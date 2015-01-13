@@ -9,6 +9,8 @@
  *     Horacio Hoyos - initial implementation
  ******************************************************************************/
 
+// DEPRECATED. Replaced by the much simpler EcoreToContainmentTree.etl transformation
+
 /**
  * We are only interested in containemnet relations, so we only need to search
  * EPackages and EClasses, all other nodes in the root can be safely ignored. 
