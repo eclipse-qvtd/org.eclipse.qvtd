@@ -22,12 +22,12 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Model;
-import org.eclipse.ocl.pivot.OCL;
-import org.eclipse.ocl.pivot.PivotConstants;
-import org.eclipse.ocl.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.internal.PivotConstantsInternal;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.resource.ASResource;
-import org.eclipse.ocl.pivot.utilities.BaseResource;
+import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
@@ -53,8 +53,8 @@ public class QVTcSerializeTests extends LoadTestCase
 		ocl2.dispose();
 	}	
 
-	protected ASResource loadQVTiAS(@NonNull MetaModelManager MetaModelManager, @NonNull URI inputURI) {
-		Resource asResource = MetaModelManager.getExternalResourceSet().getResource(inputURI, true);
+	protected ASResource loadQVTiAS(@NonNull MetamodelManager MetamodelManager, @NonNull URI inputURI) {
+		Resource asResource = MetamodelManager.getExternalResourceSet().getResource(inputURI, true);
 //		List<String> conversionErrors = new ArrayList<String>();
 //		RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, null, ecoreResource);
 //		Resource eResource = documentCS.eResource();
@@ -67,13 +67,13 @@ public class QVTcSerializeTests extends LoadTestCase
 
 	public static @NonNull XtextResource pivot2cs(@NonNull OCL ocl, @NonNull ResourceSet resourceSet, @NonNull ASResource asResource, @NonNull URI outputURI) throws IOException {
 		XtextResource xtextResource = ClassUtil.nonNullState((XtextResource) resourceSet.createResource(outputURI, QVTcoreCSPackage.eCONTENT_TYPE));
-		ocl.as2cs(asResource, (BaseResource) xtextResource);
+		ocl.as2cs(asResource, (CSResource) xtextResource);
 		assertNoResourceErrors("Conversion failed", xtextResource);
 		//
 		//	CS save
 		//		
 		URI savedURI = ClassUtil.nonNullState(asResource.getURI());
-		asResource.setURI(outputURI.trimFileExtension().trimFileExtension().appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
+		asResource.setURI(outputURI.trimFileExtension().trimFileExtension().appendFileExtension(PivotConstantsInternal.OCL_AS_FILE_EXTENSION));
 		asResource.save(null);
 		asResource.setURI(savedURI);
 		
@@ -104,7 +104,7 @@ public class QVTcSerializeTests extends LoadTestCase
 		//		
 		OCL ocl = OCL.newInstance();
 		try {
-			ASResource asResource = loadQVTiAS(ocl.getMetaModelManager(), inputURI);
+			ASResource asResource = loadQVTiAS(ocl.getMetamodelManager(), inputURI);
 			assertNoResourceErrors("Normalisation failed", asResource);
 			assertNoValidationErrors("Normalisation invalid", asResource);
 			//

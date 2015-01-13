@@ -33,21 +33,21 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.ModelDeclCSImpl#getMetaModelIds <em>Meta Model Ids</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.ModelDeclCSImpl#getMetamodelIds <em>Metamodel Ids</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	/**
-	 * The cached value of the '{@link #getMetaModelIds() <em>Meta Model Ids</em>}' reference list.
+	 * The cached value of the '{@link #getMetamodelIds() <em>Metamodel Ids</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMetaModelIds()
+	 * @see #getMetamodelIds()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Namespace> metaModelIds;
+	protected EList<Namespace> metamodelIds;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -73,11 +73,11 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	 * @generated
 	 */
 	@Override
-	public EList<Namespace> getMetaModelIds() {
-		if (metaModelIds == null) {
-			metaModelIds = new EObjectResolvingEList<Namespace>(Namespace.class, this, QVTrelationCSPackage.MODEL_DECL_CS__META_MODEL_IDS);
+	public EList<Namespace> getMetamodelIds() {
+		if (metamodelIds == null) {
+			metamodelIds = new EObjectResolvingEList<Namespace>(Namespace.class, this, QVTrelationCSPackage.MODEL_DECL_CS__METAMODEL_IDS);
 		}
-		return metaModelIds;
+		return metamodelIds;
 	}
 
 	/**
@@ -88,8 +88,8 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.MODEL_DECL_CS__META_MODEL_IDS:
-				return getMetaModelIds();
+			case QVTrelationCSPackage.MODEL_DECL_CS__METAMODEL_IDS:
+				return getMetamodelIds();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -103,9 +103,9 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.MODEL_DECL_CS__META_MODEL_IDS:
-				getMetaModelIds().clear();
-				getMetaModelIds().addAll((Collection<? extends Namespace>)newValue);
+			case QVTrelationCSPackage.MODEL_DECL_CS__METAMODEL_IDS:
+				getMetamodelIds().clear();
+				getMetamodelIds().addAll((Collection<? extends Namespace>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -119,8 +119,8 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.MODEL_DECL_CS__META_MODEL_IDS:
-				getMetaModelIds().clear();
+			case QVTrelationCSPackage.MODEL_DECL_CS__METAMODEL_IDS:
+				getMetamodelIds().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -134,8 +134,8 @@ public class ModelDeclCSImpl extends NamedElementCSImpl implements ModelDeclCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.MODEL_DECL_CS__META_MODEL_IDS:
-				return metaModelIds != null && !metaModelIds.isEmpty();
+			case QVTrelationCSPackage.MODEL_DECL_CS__METAMODEL_IDS:
+				return metamodelIds != null && !metamodelIds.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

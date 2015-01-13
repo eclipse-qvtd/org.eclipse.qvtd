@@ -38,12 +38,13 @@ import test.simplerdbms.Table;
  * An implementation of the model object '<em><b>Key</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link test.simplerdbms.impl.KeyImpl#getOwner <em>Owner</em>}</li>
  *   <li>{@link test.simplerdbms.impl.KeyImpl#getColumn <em>Column</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

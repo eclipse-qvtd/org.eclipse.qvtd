@@ -13,11 +13,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link classescstraces.PackageCS2Package#getPackageCS <em>Package CS</em>}</li>
  *   <li>{@link classescstraces.PackageCS2Package#getPackage <em>Package</em>}</li>
  * </ul>
- * </p>
  *
  * @see classescstraces.ClassescstracesPackage#getPackageCS2Package()
  * @model

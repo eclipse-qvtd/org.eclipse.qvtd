@@ -8,6 +8,7 @@
  * Contributors:
  *   E.D.Willink - initial API and implementation
  * 	 E.D.Willink (Obeo) - Bug 416287 - tuple-valued constraints
+ *   Adolfo Sanchez-Barbudo Herrera (University of York) - Bug 456371
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcorebase.as2cs;
 
@@ -23,14 +24,13 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.ocl.pivot.NamedElement;
+import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.VariableExp;
-import org.eclipse.ocl.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
 import org.eclipse.ocl.xtext.base.as2cs.AliasAnalysis;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
@@ -43,9 +43,8 @@ import org.eclipse.ocl.xtext.basecs.PathElementWithURICS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.RootPackageCS;
 import org.eclipse.ocl.xtext.essentialocl.as2cs.EssentialOCLDeclarationVisitor;
-import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
-import org.eclipse.ocl.xtext.essentialoclcs.InfixExpCS;
+import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -55,7 +54,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.Unit;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
@@ -85,21 +83,21 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	 */
 	public static class QVTcoreBaseAliasAnalysis extends AliasAnalysis
 	{
-		public static @NonNull QVTcoreBaseAliasAnalysis getAdapter(@NonNull Resource resource, @NonNull MetaModelManager metaModelManager) {
+		public static @NonNull QVTcoreBaseAliasAnalysis getAdapter(@NonNull Resource resource, @NonNull MetamodelManager metamodelManager) {
 			List<Adapter> eAdapters = resource.eAdapters();
 			for (Adapter adapter : eAdapters) {
 				if (adapter instanceof QVTcoreBaseAliasAnalysis) {
 					QVTcoreBaseAliasAnalysis aliasAnalysis = (QVTcoreBaseAliasAnalysis)adapter;
-					if (aliasAnalysis.metaModelManager == metaModelManager) {
+					if (aliasAnalysis.metamodelManager == metamodelManager) {
 						return aliasAnalysis;
 					}
 				}
 			}
-			return new QVTcoreBaseAliasAnalysis(resource, metaModelManager);
+			return new QVTcoreBaseAliasAnalysis(resource, metamodelManager);
 		}
 
-		public QVTcoreBaseAliasAnalysis(@NonNull Resource resource, @NonNull MetaModelManager metaModelManager) {
-			super(resource, metaModelManager);
+		public QVTcoreBaseAliasAnalysis(@NonNull Resource resource, @NonNull MetamodelManager metamodelManager) {
+			super(resource, metamodelManager);
  		}
 	}
 
@@ -125,17 +123,17 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	@Override
 	public void postProcess(@NonNull BaseCSResource csResource, @NonNull Map<Namespace, List<String>> importedNamespaces) {
 		AliasAnalysis.dispose(csResource);
-		QVTcoreBaseAliasAnalysis aliasAdapter = QVTcoreBaseAliasAnalysis.getAdapter(csResource, context.getMetaModelManager());
+		QVTcoreBaseAliasAnalysis aliasAdapter = QVTcoreBaseAliasAnalysis.getAdapter(csResource, context.getMetamodelManager());
 		List<EObject> contents = csResource.getContents();
 		if (contents.size() > 0) {
 			EObject root = contents.get(0);
 			if (root instanceof RootPackageCS) {
 				for (ImportCS csImport : ((RootPackageCS)root).getOwnedImports()) {
 					Element pivot = csImport.getPivot();
-					if (pivot instanceof Unit) {
-						Unit asUnit = (Unit)pivot;
-						String alias = asUnit.getName();
-						Namespace asNamespace = asUnit.getUsedPackage();
+					if (pivot instanceof Import) {
+						Import asImport = (Import)pivot;
+						String alias = asImport.getName();
+						Namespace asNamespace = asImport.getImportedNamespace();
 						if ((asNamespace != null) && (alias != null)) {
 							aliasAdapter.getAlias(asNamespace, alias);
 						}
@@ -219,17 +217,9 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	public ElementCS visitPropertyAssignment(@NonNull PropertyAssignment asPropertyAssignment) {
 		AssignmentCS csAssignment = context.refreshElement(AssignmentCS.class, QVTcoreBaseCSPackage.Literals.ASSIGNMENT_CS, asPropertyAssignment);
 		csAssignment.setPivot(asPropertyAssignment);
-		InfixExpCS csTargetExp = context.refreshElement(InfixExpCS.class, EssentialOCLCSPackage.Literals.INFIX_EXP_CS, asPropertyAssignment);
-		NamedElement asSlotExpression = asPropertyAssignment.getSlotExpression();
-		if (asSlotExpression instanceof VariableExp) {
-			asSlotExpression = ((VariableExp)asSlotExpression).getReferredVariable();
-		}
-		csTargetExp.setOwnedLeft(createNameExpCS(asSlotExpression));
-		csTargetExp.setOwnedRight(createNameExpCS(asPropertyAssignment.getTargetProperty()));
-//		NavigationOperatorCS csOperator = context.refreshElement(NavigationOperatorCS.class, EssentialOCLCSPackage.Literals.NAVIGATION_OPERATOR_CS, asPropertyAssignment);
-		csTargetExp.setName(".");
-//		csTargetExp.getOwnedOperator().add(csOperator);
-		csAssignment.setTarget(csTargetExp);
+		ExpCS csSlotExp = createExpCS(asPropertyAssignment.getSlotExpression());
+		NameExpCS csPropName = createNameExpCS(asPropertyAssignment.getTargetProperty());
+		csAssignment.setTarget(createInfixExpCS(csSlotExp, ".", csPropName));
 		csAssignment.setInitialiser(createExpCS(asPropertyAssignment.getValue()));
 		csAssignment.setDefault(asPropertyAssignment.isIsDefault());
 		return csAssignment;
@@ -260,15 +250,15 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	public ElementCS visitTypedModel(@NonNull TypedModel asTypedModel) {
 		DirectionCS csDirection = context.refreshNamedElement(DirectionCS.class, QVTcoreBaseCSPackage.Literals.DIRECTION_CS, asTypedModel);
 		csDirection.setPivot(asTypedModel);
-		PivotUtil.refreshList(csDirection.getImports(), asTypedModel.getUsedPackage());
+		PivotUtilInternal.refreshList(csDirection.getImports(), asTypedModel.getUsedPackage());
 //		PivotUtil.refreshList(csDirection.getUses(), asTypedModel.getDependsOn());
 		return csDirection;
 	}
 
 	@Override
-	public @Nullable ElementCS visitUnit(@NonNull Unit asUnit) {
+	public @Nullable ElementCS visitImport(@NonNull Import asUnit) {
 		BaseCSResource csResource = context.getCSResource();
-		Namespace asNamespace = asUnit.getUsedPackage();
+		Namespace asNamespace = asUnit.getImportedNamespace();
 		EObject eObject = asNamespace.getETarget();
 		String importURI = null;
 		if (eObject instanceof EPackage) {

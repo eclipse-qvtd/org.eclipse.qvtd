@@ -38,7 +38,6 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.Unit;
 
 /**
  * <!-- begin-user-doc -->
@@ -199,16 +198,6 @@ public class QVTbaseSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case QVTbasePackage.UNIT: {
-				Unit unit = (Unit)theEObject;
-				T result = caseUnit(unit);
-				if (result == null) result = caseNamedElement(unit);
-				if (result == null) result = caseElement(unit);
-				if (result == null) result = caseNameable(unit);
-				if (result == null) result = caseVisitable(unit);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -345,21 +334,6 @@ public class QVTbaseSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseTypedModel(TypedModel object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Unit</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Unit</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseUnit(Unit object) {
 		return null;
 	}
 

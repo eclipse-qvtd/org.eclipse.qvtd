@@ -24,12 +24,14 @@ import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.messages.OCLMessages;
-import org.eclipse.ocl.pivot.scoping.EnvironmentView;
-import org.eclipse.ocl.pivot.scoping.ScopeFilter;
+import org.eclipse.ocl.pivot.internal.messages.PivotMessagesInternal;
+import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
+import org.eclipse.ocl.pivot.internal.scoping.ScopeFilter;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.utilities.SingletonIterator;
+import org.eclipse.ocl.pivot.utilities.StringUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
@@ -139,11 +141,11 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 	@Override
 	protected @Nullable Invocations getInvocations(@NonNull Type asType, @Nullable Type asTypeValue, @NonNull String name, int iteratorCount, int expressionCount) {
 		if (asType instanceof Transformation) {
-			Rule rule = ClassUtil.getNamedElement(((Transformation)asType).getRule(), name);
+			Rule rule = NameUtil.getNameable(((Transformation)asType).getRule(), name);
 			if (rule != null) {
 				return new ResolvedRuleInvocation(rule);
 			}
-			Operation function = ClassUtil.getNamedElement(((Transformation)asType).getOwnedOperations(), name);
+			Operation function = NameUtil.getNameable(((Transformation)asType).getOwnedOperations(), name);
 			if (function != null) {
 				return new ResolvedInvocation(function);
 			}
@@ -160,7 +162,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 			if (relation != null) {
 				@NonNull RelationCallExp relationCallExp = context.refreshModelElement(RelationCallExp.class, QVTrelationPackage.Literals.RELATION_CALL_EXP, csNameExp);
 				relationCallExp.setReferredRelation(relation);
-				context.setType(relationCallExp, metaModelManager.getStandardLibrary().getBooleanType(), true);
+				context.setType(relationCallExp, metamodelManager.getStandardLibrary().getBooleanType(), true);
 				List<Variable> rootVariables = QVTrelationUtil.getRootVariables(relation);
 				resolveRelationArgumentTypes(rootVariables, csRoundBracketedClause);
 				resolveRelationArguments(csRoundBracketedClause, null, relation, relationCallExp);
@@ -168,7 +170,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 			}
 			Function function = getBestFunction(invocations);
 			if (function != null) {
-//				Operation baseOperation = metaModelManager.resolveBaseOperation(function);
+//				Operation baseOperation = metamodelManager.resolveBaseOperation(function);
 				OperationCallExp operationCallExp = context.refreshModelElement(OperationCallExp.class, PivotPackage.Literals.OPERATION_CALL_EXP, csNameExp);
 				context.setReferredOperation(operationCallExp, function);
 				context.setType(operationCallExp, function.getType(), function.isRequired());
@@ -216,8 +218,8 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 				}
 			}
 		}
-		if ((csArgumentCount != domainsCount) && (relation != metaModelManager.getStandardLibrary().getOclInvalidOperation())) {
-			String boundMessage = ClassUtil.bind(OCLMessages.MismatchedArgumentCount_ERROR_, csArgumentCount, domainsCount);
+		if ((csArgumentCount != domainsCount) && (relation != metamodelManager.getStandardLibrary().getOclInvalidOperation())) {
+			String boundMessage = StringUtil.bind(PivotMessagesInternal.MismatchedArgumentCount_ERROR_, csArgumentCount, domainsCount);
 			context.addDiagnostic(csNameExp, boundMessage);			
 		}
 		context.refreshList(relationCallExp.getArgument(), pivotArguments);

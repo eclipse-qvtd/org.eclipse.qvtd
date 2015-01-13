@@ -22,6 +22,7 @@ import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.BasicContinuation;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
@@ -123,7 +124,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 					context.addDiagnostic(csElement, "misplaced default ignored");
 				}
 			}
-			PivotUtil.refreshList(pGuardPattern.getPredicate(), pPredicates);
+			PivotUtilInternal.refreshList(pGuardPattern.getPredicate(), pPredicates);
 		}
 		return null;
 	}

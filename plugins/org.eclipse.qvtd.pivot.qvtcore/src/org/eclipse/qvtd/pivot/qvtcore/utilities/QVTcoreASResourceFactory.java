@@ -10,17 +10,23 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtcore.utilities;
 
+import java.util.Map;
+
 import org.eclipse.emf.ecore.resource.ContentHandler;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.prettyprint.PrettyPrintVisitor;
-import org.eclipse.ocl.pivot.prettyprint.PrettyPrinter;
-import org.eclipse.ocl.pivot.resource.AbstractASResourceFactory;
-import org.eclipse.ocl.pivot.utilities.AS2Moniker;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrintVisitor;
+import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
+import org.eclipse.ocl.pivot.internal.resource.ASResourceFactory;
+import org.eclipse.ocl.pivot.internal.resource.ASSaver;
+import org.eclipse.ocl.pivot.internal.resource.AbstractASResourceFactory;
+import org.eclipse.ocl.pivot.internal.utilities.AS2Moniker;
+import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
 import org.eclipse.ocl.pivot.utilities.AS2MonikerVisitor;
-import org.eclipse.ocl.pivot.utilities.AS2XMIid;
 import org.eclipse.ocl.pivot.utilities.AS2XMIidVisitor;
-import org.eclipse.ocl.pivot.utilities.ASSaver;
 import org.eclipse.ocl.pivot.utilities.ASSaverLocateVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverNormalizeVisitor;
 import org.eclipse.ocl.pivot.utilities.ASSaverResolveVisitor;
@@ -33,7 +39,25 @@ import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 public class QVTcoreASResourceFactory extends AbstractASResourceFactory
 {
 	public static final @NonNull String FILE_EXTENSION = "qvtcas";
-	public static final @NonNull QVTcoreASResourceFactory INSTANCE = new QVTcoreASResourceFactory();
+
+	private static @Nullable QVTcoreASResourceFactory INSTANCE = null;
+
+	public static synchronized @NonNull QVTcoreASResourceFactory getInstance() {
+		if (INSTANCE == null) {
+			Map<String, Object> extensionToFactoryMap = Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap();
+			Object object = extensionToFactoryMap.get(FILE_EXTENSION);
+			if (object instanceof Resource.Factory.Descriptor) {
+				INSTANCE = (QVTcoreASResourceFactory) ((Resource.Factory.Descriptor)object).createFactory();	// Create the registered singleton
+			}
+			else {
+				INSTANCE = new QVTcoreASResourceFactory();														// Create our own singleton
+			}
+			assert INSTANCE != null;
+			INSTANCE.install(null,  null);
+		}
+		assert INSTANCE != null;
+		return INSTANCE;
+	}
 
 	private static final @NonNull ContentHandler CONTENT_HANDLER = new RootXMLContentHandlerImpl(
 		QVTcorePackage.eCONTENT_TYPE, new String[]{FILE_EXTENSION},
@@ -47,7 +71,13 @@ public class QVTcoreASResourceFactory extends AbstractASResourceFactory
 	 * Creates an instance of the resource factory.
 	 */
 	public QVTcoreASResourceFactory() {
-		super(QVTcorePackage.eCONTENT_TYPE, FILE_EXTENSION);
+		super(QVTcorePackage.eCONTENT_TYPE);
+	}
+
+	@Override
+	public void configure(@NonNull ResourceSet resourceSet) {
+		Resource.Factory.Registry resourceFactoryRegistry = resourceSet.getResourceFactoryRegistry();
+		resourceFactoryRegistry.getExtensionToFactoryMap().put(FILE_EXTENSION, this);
 	}
 
 	@Override
@@ -83,5 +113,10 @@ public class QVTcoreASResourceFactory extends AbstractASResourceFactory
 	@Override
 	public @NonNull ToStringVisitor createToStringVisitor(@NonNull StringBuilder s) {
 		return new QVTcoreToStringVisitor(s);
+	}
+
+	@Override
+	public @NonNull ASResourceFactory getASResourceFactory() {
+		return getInstance();
 	}
 }

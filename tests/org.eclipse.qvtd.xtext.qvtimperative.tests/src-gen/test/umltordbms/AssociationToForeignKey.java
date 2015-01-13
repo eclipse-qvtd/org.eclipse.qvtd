@@ -23,6 +23,7 @@ import test.simpleuml.Association;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link test.umltordbms.AssociationToForeignKey#getReferenced <em>Referenced</em>}</li>
  *   <li>{@link test.umltordbms.AssociationToForeignKey#getOwner <em>Owner</em>}</li>
@@ -30,7 +31,6 @@ import test.simpleuml.Association;
  *   <li>{@link test.umltordbms.AssociationToForeignKey#getAssociation <em>Association</em>}</li>
  *   <li>{@link test.umltordbms.AssociationToForeignKey#getForeignKey <em>Foreign Key</em>}</li>
  * </ul>
- * </p>
  *
  * @see test.umltordbms.UmltordbmsPackage#getAssociationToForeignKey()
  * @model

@@ -13,9 +13,7 @@
 package test.umltordbms;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
-
 import test.simpleuml.Attribute;
 
 /**
@@ -25,6 +23,7 @@ import test.simpleuml.Attribute;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link test.umltordbms.FromAttribute#getName <em>Name</em>}</li>
  *   <li>{@link test.umltordbms.FromAttribute#getKind <em>Kind</em>}</li>
@@ -32,7 +31,6 @@ import test.simpleuml.Attribute;
  *   <li>{@link test.umltordbms.FromAttribute#getLeafs <em>Leafs</em>}</li>
  *   <li>{@link test.umltordbms.FromAttribute#getAttribute <em>Attribute</em>}</li>
  * </ul>
- * </p>
  *
  * @see test.umltordbms.UmltordbmsPackage#getFromAttribute()
  * @model abstract="true"

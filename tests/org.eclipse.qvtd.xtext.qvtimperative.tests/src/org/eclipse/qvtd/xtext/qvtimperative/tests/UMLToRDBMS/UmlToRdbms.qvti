@@ -435,7 +435,7 @@ map __root__ in umlRdbms
 			a := a;
 			c := a.owner;
 			t := a.type;
-			p2n := a.type.middle;
+			p2n := a.type.oclAsType(PrimitiveDataType).middle;
 			fao := a.owner.middle;
 		}
 	}
@@ -483,7 +483,7 @@ map __root__ in umlRdbms
 				ca := ca;
 				c := a.owner;
 				t := a.type;
-				p2n := a.type.middle;
+				p2n := a.type.oclAsType(PrimitiveDataType).middle;
 				fao := ca.middle;
 			}
 		}

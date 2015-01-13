@@ -32,8 +32,8 @@ import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.ParserException;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.evaluation.DomainModelManager;
-import org.eclipse.ocl.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.evaluation.ModelManager;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
@@ -43,9 +43,9 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * A QVTc Domain Manager object encapsulates the domain information need to 
  * modify the domains's models. 
  */
-public class QVTiModelManager implements DomainModelManager
+public class QVTiModelManager implements ModelManager
 {
-	protected final @NonNull MetaModelManager metaModelManager;
+	protected final @NonNull MetamodelManager metamodelManager;
 	// TODO how to manage aliases?
 	/** Map a typed model to its resource (model). */
 	private @NonNull Map<TypedModel, Resource> modelResourceMap = new HashMap<TypedModel, Resource>();
@@ -55,7 +55,7 @@ public class QVTiModelManager implements DomainModelManager
 	/**
 	 * The types upon which execution of the transformation may invoke allInstances().
 	 */
-	private @NonNull Set<Type> allInstancesTypes;
+	private @NonNull Set<org.eclipse.ocl.pivot.Class> allInstancesClasses;
 
 	/**
 	 * Array of caches for the un-navigable opposite of each used navigable middle to outer property. 
@@ -69,8 +69,8 @@ public class QVTiModelManager implements DomainModelManager
 	 * instances of the middle model and the middle model EFactory.
 	 */
 	public QVTiModelManager(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
-	    this.metaModelManager = transformationAnalysis.getMetaModelManager();
-	    this.allInstancesTypes = transformationAnalysis.getAllInstancesTypes();
+	    this.metamodelManager = transformationAnalysis.getMetamodelManager();
+	    this.allInstancesClasses = transformationAnalysis.getAllInstancesClasses();
 	    int cacheIndexes = transformationAnalysis.getCacheIndexes();
 		this.middleOpposites = new Map<?, ?>[cacheIndexes];
 		for (int i = 0; i < cacheIndexes; i++) {
@@ -113,7 +113,7 @@ public class QVTiModelManager implements DomainModelManager
 	public void dispose() {
 		modelElementsMap.clear();
 		modelResourceMap.clear();
-		allInstancesTypes.clear();
+		allInstancesClasses.clear();
 		for (Map<?, ?> middleOpposite : middleOpposites) {
 			middleOpposite.clear();
 		}
@@ -223,11 +223,11 @@ public class QVTiModelManager implements DomainModelManager
 		Type objectType = null;
 		if (ePackage == PivotPackage.eINSTANCE) {
 			String name = ClassUtil.nonNullEMF(eClass.getName());
-			objectType = metaModelManager.getPivotType(name);
+			objectType = metamodelManager.getPivotType(name);
 		}
 		else {
 			try {
-				objectType = metaModelManager.getPivotOf(Type.class,  eClass);
+				objectType = metamodelManager.getPivotOf(Type.class,  eClass);
 			} catch (ParserException e) {
 // FIXME				if (!generatedErrorMessage) {
 //					generatedErrorMessage = true;
@@ -235,7 +235,7 @@ public class QVTiModelManager implements DomainModelManager
 //				}
 			}
 		}
-	    return (objectType != null) && objectType.conformsTo(metaModelManager.getStandardLibrary(), requiredType);
+	    return (objectType != null) && objectType.conformsTo(metamodelManager.getStandardLibrary(), requiredType);
 	}
 	
 	public List<EObject> getTypeModelEObjectList(TypedModel model) {
@@ -271,6 +271,8 @@ public class QVTiModelManager implements DomainModelManager
                 try{
                     Map<Object, Object> options = new HashMap<Object, Object>();
                     options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
+                    options.put(XMLResource.OPTION_LINE_WIDTH, Integer.valueOf(132));
+            		options.put(XMLResource.OPTION_LINE_DELIMITER, "\n");
                     model.save(options);
                    } catch (IOException e) {
                       e.printStackTrace();
@@ -280,7 +282,7 @@ public class QVTiModelManager implements DomainModelManager
     }
 
     public void saveMiddleModel(@NonNull URI uri) {
-/*        Resource r = metaModelManager.getExternalResourceSet().createResource(uri);
+/*        Resource r = metamodelManager.getExternalResourceSet().createResource(uri);
         for (EObject e : modelElementsMap.get(MIDDLE_MODEL)) {
             if (e.eContainer() == null) {
                 r.getContents().add(e);

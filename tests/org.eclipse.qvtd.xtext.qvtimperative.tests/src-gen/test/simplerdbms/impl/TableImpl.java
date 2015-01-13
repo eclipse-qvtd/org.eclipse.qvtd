@@ -34,7 +34,9 @@ import test.simplerdbms.Table;
  * An implementation of the model object '<em><b>Table</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link test.simplerdbms.impl.TableImpl#getColumn <em>Column</em>}</li>
  *   <li>{@link test.simplerdbms.impl.TableImpl#getSchema <em>Schema</em>}</li>
@@ -42,7 +44,6 @@ import test.simplerdbms.Table;
  *   <li>{@link test.simplerdbms.impl.TableImpl#getKey <em>Key</em>}</li>
  *   <li>{@link test.simplerdbms.impl.TableImpl#getForeignKey <em>Foreign Key</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

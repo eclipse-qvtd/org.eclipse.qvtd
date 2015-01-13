@@ -11,12 +11,16 @@
 package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
 public class QVTimperativeUtil extends QVTcoreBaseUtil
 {
+    /** The name of the root mapping */
+	public static final @NonNull String ROOT_MAPPING_NAME = "__root__";
+
 	public static @Nullable Mapping getContainingMapping(@Nullable EObject eObject) {
 		for ( ; eObject != null; eObject = eObject.eContainer()) {
 			if (eObject instanceof Mapping) {

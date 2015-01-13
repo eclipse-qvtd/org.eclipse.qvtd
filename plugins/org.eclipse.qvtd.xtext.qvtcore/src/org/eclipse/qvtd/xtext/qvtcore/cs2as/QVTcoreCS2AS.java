@@ -13,7 +13,7 @@ package org.eclipse.qvtd.xtext.qvtcore.cs2as;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
@@ -21,8 +21,8 @@ import org.eclipse.qvtd.xtext.qvtcorebase.cs2as.QVTcoreBaseCS2AS;
 
 public class QVTcoreCS2AS extends QVTcoreBaseCS2AS
 {	
-	public QVTcoreCS2AS(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap, @NonNull MetaModelManager metaModelManager) {
-		super(cs2asResourceMap, metaModelManager);
+	public QVTcoreCS2AS(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap, @NonNull MetamodelManager metamodelManager) {
+		super(cs2asResourceMap, metamodelManager);
 	}
 
 	@Override

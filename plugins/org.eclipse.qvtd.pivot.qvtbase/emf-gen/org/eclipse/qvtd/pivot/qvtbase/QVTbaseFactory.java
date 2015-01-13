@@ -93,15 +93,6 @@ public interface QVTbaseFactory extends EFactory {
 	TypedModel createTypedModel();
 
 	/**
-	 * Returns a new object of class '<em>Unit</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Unit</em>'.
-	 * @generated
-	 */
-	Unit createUnit();
-
-	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

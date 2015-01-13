@@ -14,13 +14,14 @@ import org.eclipse.emf.common.util.Monitor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteEnvironment;
+import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.StandardLibrary;
-import org.eclipse.ocl.pivot.evaluation.AbstractEvaluationVisitorDecorator;
-import org.eclipse.ocl.pivot.evaluation.DomainLogger;
-import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
+import org.eclipse.ocl.pivot.evaluation.EvaluationLogger;
 import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.internal.evaluation.AbstractEvaluationVisitorDecorator;
+import org.eclipse.ocl.pivot.internal.evaluation.EvaluationVisitor;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.util.Visitable;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
@@ -33,7 +34,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.Unit;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
@@ -113,7 +113,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
      * Delegates to my decorated visitor.
      */
 	@Override
-	public @Nullable DomainLogger getLogger() {
+	public @Nullable EvaluationLogger getLogger() {
 		return delegate.getLogger();
 	}
 
@@ -121,8 +121,8 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
      * Delegates to my decorated visitor.
      */
 	@Override
-	public @NonNull MetaModelManager getMetaModelManager() {
-		return delegate.getMetaModelManager();
+	public @NonNull MetamodelManager getMetamodelManager() {
+		return delegate.getMetamodelManager();
 	}
 
 	/**
@@ -188,7 +188,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
      * Delegates to my decorated visitor.
      */
 	@Override
-	public void setLogger(@Nullable DomainLogger logger) {
+	public void setLogger(@Nullable EvaluationLogger logger) {
 		delegate.setLogger(logger);
 	}
 
@@ -356,8 +356,8 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
      * Delegates to my decorated visitor.
      */
 	@Override
-	public @Nullable Object visitUnit(@NonNull Unit unit) {
-		return delegate.visitUnit(unit);
+	public @Nullable Object visitImport(@NonNull Import _import) {
+		return delegate.visitImport(_import);
 	}
 
 	/**

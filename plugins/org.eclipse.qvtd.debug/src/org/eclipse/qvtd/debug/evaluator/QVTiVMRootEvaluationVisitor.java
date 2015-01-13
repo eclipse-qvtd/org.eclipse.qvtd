@@ -70,8 +70,8 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 	private @NonNull Stack<QVTiVMEvaluationVisitor> visitorStack = new Stack<QVTiVMEvaluationVisitor>();
 	private final @NonNull Variable invalidVariable;
 
-	public QVTiVMRootEvaluationVisitor(@NonNull QVTiVMEnvironment env, @NonNull IQVTiVMEvaluationEnvironment evalEnv, @NonNull IVMDebuggerShell shell) {
-		super(new QVTiVMEvaluationVisitorImpl(env, evalEnv));
+	public QVTiVMRootEvaluationVisitor(@NonNull IQVTiVMEvaluationEnvironment evalEnv, @NonNull IVMDebuggerShell shell) {
+		super(new QVTiVMEvaluationVisitorImpl(evalEnv));
 		fDebugShell = shell;
 		fBPM = shell.getBreakPointManager();
 		fIterateBPHelper = new IterateBreakpointHelper(fBPM);
@@ -82,7 +82,7 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		invalidVariable = ClassUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
 		invalidVariable.setName("$invalid");
 		String typeName = ClassUtil.nonNullEMF(PivotPackage.Literals.OCL_EXPRESSION.getName());
-		invalidVariable.setType(env.getMetaModelManager().getPivotType(typeName));
+		invalidVariable.setType(getEnvironmentFactory().getMetamodelManager().getPivotType(typeName));
 	}
 
 	@Override

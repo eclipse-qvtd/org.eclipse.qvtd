@@ -23,7 +23,7 @@ import org.eclipse.ocl.xtext.basecs.NamedElementCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.ModelDeclCS#getMetaModelIds <em>Meta Model Ids</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.ModelDeclCS#getMetamodelIds <em>Metamodel Ids</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getModelDeclCS()
@@ -32,7 +32,7 @@ import org.eclipse.ocl.xtext.basecs.NamedElementCS;
  */
 public interface ModelDeclCS extends NamedElementCS {
 	/**
-	 * Returns the value of the '<em><b>Meta Model Ids</b></em>' reference list.
+	 * Returns the value of the '<em><b>Metamodel Ids</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.pivot.Namespace}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -40,11 +40,11 @@ public interface ModelDeclCS extends NamedElementCS {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Meta Model Ids</em>' reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getModelDeclCS_MetaModelIds()
+	 * @return the value of the '<em>Metamodel Ids</em>' reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getModelDeclCS_MetamodelIds()
 	 * @model
 	 * @generated
 	 */
-	EList<Namespace> getMetaModelIds();
+	EList<Namespace> getMetamodelIds();
 
 } // ModelDeclCS

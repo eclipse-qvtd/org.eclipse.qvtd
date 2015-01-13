@@ -18,8 +18,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
@@ -30,32 +30,29 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  */
 public class QVTiPivotEvaluator implements EvaluationMonitor
 {
-	protected final @NonNull MetaModelManager metaModelManager;
+	protected final @NonNull MetamodelManager metamodelManager;
 	protected final @NonNull Transformation transformation;
-	protected final @NonNull QVTiEnvironmentFactory envFactory;
-	protected final @NonNull QVTiEnvironment env;
+	protected final @NonNull QVTiEnvironmentFactory environmentFactory;
 	protected final @NonNull QVTiModelManager modelManager;
     private EvaluationMonitor monitor = null;
     private boolean canceled = false;
 
-    public QVTiPivotEvaluator(@NonNull QVTiEnvironmentFactory envFactory, @NonNull Transformation transformation) {
-    	this.envFactory = envFactory;
-    	this.metaModelManager = envFactory.getMetaModelManager();
+    public QVTiPivotEvaluator(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
+    	this.environmentFactory = environmentFactory;
+    	this.metamodelManager = environmentFactory.getMetamodelManager();
     	this.transformation = transformation;
-    	this.env = envFactory.createEnvironment();
-    	QVTiTransformationAnalysis transformationAnalysis = envFactory.createTransformationAnalysis();
+    	QVTiTransformationAnalysis transformationAnalysis = environmentFactory.createTransformationAnalysis();
     	transformationAnalysis.analyzeTransformation(transformation);
-    	this.modelManager = envFactory.createModelManager(transformationAnalysis);
+    	this.modelManager = environmentFactory.createModelManager(transformationAnalysis);
     }
 
-    public QVTiPivotEvaluator(@NonNull MetaModelManager metaModelManager, @NonNull Transformation transformation) {
-    	this.metaModelManager = metaModelManager;
+    public QVTiPivotEvaluator(@NonNull MetamodelManager metamodelManager, @NonNull Transformation transformation) {
+    	this.metamodelManager = metamodelManager;
     	this.transformation = transformation;
-    	this.envFactory = new QVTiEnvironmentFactory(null, metaModelManager);
-    	this.env = envFactory.createEnvironment();
-    	QVTiTransformationAnalysis transformationAnalysis = envFactory.createTransformationAnalysis();
+    	this.environmentFactory = (QVTiEnvironmentFactory) metamodelManager.getEnvironmentFactory();
+     	QVTiTransformationAnalysis transformationAnalysis = environmentFactory.createTransformationAnalysis();
     	transformationAnalysis.analyzeTransformation(transformation);
-    	this.modelManager = envFactory.createModelManager(transformationAnalysis);
+    	this.modelManager = environmentFactory.createModelManager(transformationAnalysis);
     }
 
 	/**
@@ -83,11 +80,11 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
         createModel(name, modelURI, null);
     }
 	public void createModel(@NonNull String name, @NonNull URI modelURI, String contentType) {
-        TypedModel typedModel = ClassUtil.getNamedElement(transformation.getModelParameter(), name);
+        TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
         if (typedModel == null) {
         	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
         }
-        Resource resource = metaModelManager.getExternalResourceSet().createResource(modelURI, contentType);
+        Resource resource = metamodelManager.getExternalResourceSet().createResource(modelURI, contentType);
         if (resource != null) {
         	modelManager.addModel(typedModel, resource);
         }
@@ -98,8 +95,8 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
 	}
 
 	public Boolean execute() {
-        IQVTiEvaluationEnvironment evalEnv = envFactory.createEvaluationEnvironment(modelManager, transformation);
-        QVTiEvaluationVisitor visitor = envFactory.createEvaluationVisitor(env, evalEnv);
+        IQVTiEvaluationEnvironment evalEnv = environmentFactory.createEvaluationEnvironment(modelManager, transformation);
+        QVTiEvaluationVisitor visitor = environmentFactory.createEvaluationVisitor(evalEnv);
         return (Boolean) transformation.accept(visitor);
 	}
 
@@ -110,16 +107,12 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
         return monitor != null ? monitor : this;
     }
 
-	public final @NonNull QVTiEnvironment getEnvironment() {
-		return env;
-	}
-
 	public final @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
-		return envFactory;
+		return environmentFactory;
 	}
 
-	public final @NonNull MetaModelManager getMetaModelManager() {
-		return metaModelManager;
+	public final @NonNull MetamodelManager getMetamodelManager() {
+		return metamodelManager;
 	}
 	
 	public final @NonNull QVTiModelManager getModelManager() {
@@ -139,26 +132,26 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
 	 * Loads the modelURI and binds it to the named TypedModel.
 	 */
 	public void loadModel(@NonNull String name, @NonNull URI modelURI) {
-        TypedModel typedModel = ClassUtil.getNamedElement(transformation.getModelParameter(), name);
+        TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
         if (typedModel == null) {
         	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
         }
-        Resource resource = metaModelManager.getExternalResourceSet().getResource(modelURI, true);
+        Resource resource = metamodelManager.getExternalResourceSet().getResource(modelURI, true);
         if (resource != null) {
         	modelManager.addModel(typedModel, resource);
         }
     }
 	public void loadModel(@NonNull String name, @NonNull URI modelURI, String contentType) {
-        TypedModel typedModel = ClassUtil.getNamedElement(transformation.getModelParameter(), name);
+        TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
         if (typedModel == null) {
         	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
         }
         Resource resource;
         if (contentType == null) {
-        	resource = metaModelManager.getExternalResourceSet().getResource(modelURI, true);
+        	resource = metamodelManager.getExternalResourceSet().getResource(modelURI, true);
         }
         else {
-        	resource = metaModelManager.getExternalResourceSet().createResource(modelURI, contentType);
+        	resource = metamodelManager.getExternalResourceSet().createResource(modelURI, contentType);
         	try {
 				resource.load(null);
 			} catch (IOException e) {

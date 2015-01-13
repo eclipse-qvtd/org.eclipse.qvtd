@@ -20,12 +20,13 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * An implementation of the model object '<em><b>Package CS2 Package</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link classescstraces.impl.PackageCS2PackageImpl#getPackageCS <em>Package CS</em>}</li>
  *   <li>{@link classescstraces.impl.PackageCS2PackageImpl#getPackage <em>Package</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

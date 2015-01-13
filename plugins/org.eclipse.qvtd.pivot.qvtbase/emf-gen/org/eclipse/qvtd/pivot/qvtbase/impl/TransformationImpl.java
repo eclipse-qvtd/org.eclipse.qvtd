@@ -24,9 +24,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Annotation;
-import org.eclipse.ocl.pivot.impl.ClassImpl;
+import org.eclipse.ocl.pivot.internal.ClassImpl;
 import org.eclipse.ocl.pivot.util.Visitor;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -351,6 +351,6 @@ public class TransformationImpl extends ClassImpl implements Transformation {
 	 */
 	@Override
 	public TypedModel getModelParameter(String name) {
-		return ClassUtil.getNamedElement(getModelParameter(), name);
+		return NameUtil.getNameable(getModelParameter(), name);
 	}
 } //TransformationImpl

@@ -525,7 +525,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getModelDeclCS_MetaModelIds() {
+	public EReference getModelDeclCS_MetamodelIds() {
 		return (EReference)modelDeclCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1009,7 +1009,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		createEReference(keyDeclCSEClass, KEY_DECL_CS__CLASS_ID);
 
 		modelDeclCSEClass = createEClass(MODEL_DECL_CS);
-		createEReference(modelDeclCSEClass, MODEL_DECL_CS__META_MODEL_IDS);
+		createEReference(modelDeclCSEClass, MODEL_DECL_CS__METAMODEL_IDS);
 
 		objectTemplateCSEClass = createEClass(OBJECT_TEMPLATE_CS);
 		createEReference(objectTemplateCSEClass, OBJECT_TEMPLATE_CS__PROPERTY_TEMPLATES);
@@ -1163,7 +1163,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		initEReference(getKeyDeclCS_ClassId(), thePivotPackage.getClass_(), null, "classId", null, 0, 1, KeyDeclCS.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(modelDeclCSEClass, ModelDeclCS.class, "ModelDeclCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getModelDeclCS_MetaModelIds(), thePivotPackage.getNamespace(), null, "metaModelIds", null, 0, -1, ModelDeclCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getModelDeclCS_MetamodelIds(), thePivotPackage.getNamespace(), null, "metamodelIds", null, 0, -1, ModelDeclCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(objectTemplateCSEClass, ObjectTemplateCS.class, "ObjectTemplateCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getObjectTemplateCS_PropertyTemplates(), this.getPropertyTemplateCS(), this.getPropertyTemplateCS_ObjectTemplate(), "propertyTemplates", null, 0, -1, ObjectTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link test.simpleuml.Class#getGeneral <em>General</em>}</li>
  *   <li>{@link test.simpleuml.Class#getForward <em>Forward</em>}</li>
@@ -28,7 +29,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link test.simpleuml.Class#getReverse <em>Reverse</em>}</li>
  *   <li>{@link test.simpleuml.Class#getGeneralOpposite <em>General Opposite</em>}</li>
  * </ul>
- * </p>
  *
  * @see test.simpleuml.SimpleumlPackage#getClass_()
  * @model

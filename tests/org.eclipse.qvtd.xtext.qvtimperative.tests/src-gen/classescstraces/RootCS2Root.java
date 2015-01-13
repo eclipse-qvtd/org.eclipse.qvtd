@@ -15,11 +15,11 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link classescstraces.RootCS2Root#getRootCS <em>Root CS</em>}</li>
  *   <li>{@link classescstraces.RootCS2Root#getRoot <em>Root</em>}</li>
  * </ul>
- * </p>
  *
  * @see classescstraces.ClassescstracesPackage#getRootCS2Root()
  * @model

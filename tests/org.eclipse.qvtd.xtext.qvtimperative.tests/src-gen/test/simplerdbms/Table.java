@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link test.simplerdbms.Table#getColumn <em>Column</em>}</li>
  *   <li>{@link test.simplerdbms.Table#getSchema <em>Schema</em>}</li>
@@ -28,7 +29,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link test.simplerdbms.Table#getKey <em>Key</em>}</li>
  *   <li>{@link test.simplerdbms.Table#getForeignKey <em>Foreign Key</em>}</li>
  * </ul>
- * </p>
  *
  * @see test.simplerdbms.SimplerdbmsPackage#getTable()
  * @model
@@ -41,7 +41,7 @@ public interface Table extends RModelElement {
 	 * It is bidirectional and its opposite is '{@link test.simplerdbms.Column#getOwner <em>Owner</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Column</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Column</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
@@ -85,7 +85,7 @@ public interface Table extends RModelElement {
 	 * Returns the value of the '<em><b>The Key</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>The Key</em>' reference list isn't clear,
+	 * If the meaning of the '<em>The Key</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->

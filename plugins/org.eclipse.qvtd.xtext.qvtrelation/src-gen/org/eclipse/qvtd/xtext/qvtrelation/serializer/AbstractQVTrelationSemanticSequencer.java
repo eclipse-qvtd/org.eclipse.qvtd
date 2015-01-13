@@ -785,7 +785,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends EssentialOCLS
 	 * Constraint:
 	 *     (
 	 *         name=UnrestrictedName 
-	 *         (metaModelIds+=[Namespace|UnrestrictedName] | (metaModelIds+=[Namespace|UnrestrictedName] metaModelIds+=[Namespace|UnrestrictedName]*))
+	 *         (metamodelIds+=[Namespace|UnrestrictedName] | (metamodelIds+=[Namespace|UnrestrictedName] metamodelIds+=[Namespace|UnrestrictedName]*))
 	 *     )
 	 */
 	protected void sequence_ModelDeclCS(EObject context, ModelDeclCS semanticObject) {

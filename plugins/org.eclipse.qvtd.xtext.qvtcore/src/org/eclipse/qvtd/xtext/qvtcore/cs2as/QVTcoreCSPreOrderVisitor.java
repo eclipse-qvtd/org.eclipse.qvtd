@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtcore.cs2as;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
@@ -29,7 +30,7 @@ public class QVTcoreCSPreOrderVisitor extends AbstractQVTcoreCSPreOrderVisitor
 	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
 		Mapping pMapping = PivotUtil.getPivot(Mapping.class, csElement);
 		if (pMapping != null) {
-			PivotUtil.refreshList(pMapping.getRefinement(), csElement.getRefines());
+			PivotUtilInternal.refreshList(pMapping.getRefinement(), csElement.getRefines());
 		}
 		return null;
 	}

@@ -169,15 +169,6 @@ public interface QVTimperativePackage extends EPackage {
 	int IMPERATIVE_MODEL__OWNED_PACKAGES = QVTbasePackage.BASE_MODEL__OWNED_PACKAGES;
 
 	/**
-	 * The feature id for the '<em><b>Unit</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IMPERATIVE_MODEL__UNIT = QVTbasePackage.BASE_MODEL__UNIT;
-
-	/**
 	 * The number of structural features of the '<em>Imperative Model</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

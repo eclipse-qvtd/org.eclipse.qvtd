@@ -80,9 +80,4 @@ public abstract class AbstractNullQVTbaseVisitor<R, C>
 	public @Nullable R visitTypedModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.TypedModel object) {
 		return null;
 	}
-
-	@Override
-	public @Nullable R visitUnit(@NonNull org.eclipse.qvtd.pivot.qvtbase.Unit object) {
-		return null;
-	}
 }

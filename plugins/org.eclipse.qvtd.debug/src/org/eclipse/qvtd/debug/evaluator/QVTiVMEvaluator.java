@@ -18,8 +18,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMEvaluator;
 import org.eclipse.ocl.examples.debug.vm.evaluator.IVMModelManager;
-import org.eclipse.ocl.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
@@ -27,16 +27,16 @@ import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
 
 public class QVTiVMEvaluator implements IVMEvaluator
 {
-/*    public static @NonNull EObject loadContext(@NonNull MetaModelManager metaModelManager, @NonNull URI contextURI) throws IOException {
-        EObject eObject = metaModelManager.getExternalResourceSet().getEObject(contextURI, true);
+/*    public static @NonNull EObject loadContext(@NonNull MetamodelManager metamodelManager, @NonNull URI contextURI) throws IOException {
+        EObject eObject = metamodelManager.getExternalResourceSet().getEObject(contextURI, true);
         if (eObject == null) {
             throw new IOException("Nothing loadable as '" + contextURI + "'");
         }
         return eObject;
 	}
     
-    public static @NonNull ExpressionInOCL loadExpression(@NonNull MetaModelManager metaModelManager, @NonNull URI constraintURI, boolean keepDebug) throws IOException {
-        EObject eObject = metaModelManager.getASResourceSet().getEObject(constraintURI, true);
+    public static @NonNull ExpressionInOCL loadExpression(@NonNull MetamodelManager metamodelManager, @NonNull URI constraintURI, boolean keepDebug) throws IOException {
+        EObject eObject = metamodelManager.getASResourceSet().getEObject(constraintURI, true);
         return loadExpression(eObject, constraintURI);
 	}
 
@@ -58,45 +58,32 @@ public class QVTiVMEvaluator implements IVMEvaluator
         throw new IOException("Missing OCL expression " + eObject.eClass().getName() + " expected as '" + constraintURI + "'");
 	} */
     
-	protected final @NonNull MetaModelManager metaModelManager;
+	protected final @NonNull MetamodelManager metamodelManager;
 	protected final @NonNull Transformation transformation;
 	protected final @NonNull QVTiVMEnvironmentFactory envFactory;
-	protected final @NonNull QVTiVMEnvironment env;
 	protected final @NonNull QVTiVMModelManager modelManager;
-//	private @Nullable EObject context;
 	private boolean suspendOnStartup = false;
-
-//	public QVTiVMEvaluator(@NonNull QVTiEnvironmentFactory envFactory, @NonNull URI transformationURI) throws IOException {
-//		super(envFactory, transformationURI);
-//	}
-	
 
     private QVTiVMEvaluator(@NonNull QVTiVMEnvironmentFactory envFactory, @NonNull Transformation transformation) {
     	this.envFactory = envFactory;
-    	this.metaModelManager = envFactory.getMetaModelManager();
+    	this.metamodelManager = envFactory.getMetamodelManager();
     	this.transformation = transformation;
-    	this.env = envFactory.createEnvironment();
     	QVTiTransformationAnalysis transformationAnalysis = envFactory.createTransformationAnalysis();
     	transformationAnalysis.analyzeTransformation(transformation);
     	this.modelManager = envFactory.createModelManager(transformationAnalysis);
-//    	this.modelManager = envFactory.createModelManager(metaModelManager);
+//    	this.modelManager = envFactory.createModelManager(metamodelManager);
     }
 
     public QVTiVMEvaluator(@NonNull QVTiVMEnvironmentFactory envFactory, @NonNull URI transformationURI) throws IOException {
-    	this(envFactory, QVTiXtextEvaluator.loadTransformation(envFactory.getMetaModelManager(), transformationURI, envFactory.keepDebug()));
-//    	context = loadContext(envFactory.getMetaModelManager(), contextURI);
+    	this(envFactory, QVTiXtextEvaluator.loadTransformation(envFactory.getMetamodelManager(), transformationURI, envFactory.keepDebug()));
     }
-    
-//    public QVTiVMEvaluator(@NonNull QVTiVMEnvironmentFactory envFactory, @NonNull Constraint constraint, @NonNull EObject context) throws IOException {
-//    	this(envFactory, loadExpression(constraint, EcoreUtil.getURI(constraint)));
-//    	this.context = context;
-//    }
-	public void createModel(@NonNull String name, @NonNull URI modelURI, String contentType) {
-        TypedModel typedModel = ClassUtil.getNamedElement(transformation.getModelParameter(), name);
+
+    public void createModel(@NonNull String name, @NonNull URI modelURI, String contentType) {
+        TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
         if (typedModel == null) {
         	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
         }
-        Resource resource = metaModelManager.getExternalResourceSet().createResource(modelURI, contentType);
+        Resource resource = metamodelManager.getExternalResourceSet().createResource(modelURI, contentType);
         if (resource != null) {
         	modelManager.addModel(typedModel, resource);
         }
@@ -109,11 +96,7 @@ public class QVTiVMEvaluator implements IVMEvaluator
 	public Boolean execute() {
 		Transformation transformation = getTransformation();
 		IQVTiVMEvaluationEnvironment evalEnv = envFactory.createEvaluationEnvironment(modelManager, transformation);
-//		Variable contextVariable = expressionInOCL.getContextVariable();
-//		if (contextVariable != null) {
-//			evalEnv.add(contextVariable, context);
-//		}
-        QVTiVMRootEvaluationVisitor visitor = envFactory.createEvaluationVisitor(env, evalEnv);
+        QVTiVMRootEvaluationVisitor visitor = envFactory.createEvaluationVisitor(evalEnv);
         visitor.start(suspendOnStartup);
         return (Boolean) transformation.accept(visitor);
 	}
@@ -123,16 +106,12 @@ public class QVTiVMEvaluator implements IVMEvaluator
 		return getTransformation();
 	}
 
-	public final @NonNull QVTiVMEnvironment getEnvironment() {
-		return env;
-	}
-
 	public final @NonNull QVTiVMEnvironmentFactory getEnvironmentFactory() {
 		return envFactory;
 	}
 
-	public final @NonNull MetaModelManager getMetaModelManager() {
-		return metaModelManager;
+	public final @NonNull MetamodelManager getMetamodelManager() {
+		return metamodelManager;
 	}
 	
 	public final @NonNull IVMModelManager getModelManager() {
@@ -143,16 +122,16 @@ public class QVTiVMEvaluator implements IVMEvaluator
 		return transformation;
 	}
 	public void loadModel(@NonNull String name, @NonNull URI modelURI, String contentType) {
-        TypedModel typedModel = ClassUtil.getNamedElement(transformation.getModelParameter(), name);
+        TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
         if (typedModel == null) {
         	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
         }
         Resource resource;
         if (contentType == null) {
-        	resource = metaModelManager.getExternalResourceSet().getResource(modelURI, true);
+        	resource = metamodelManager.getExternalResourceSet().getResource(modelURI, true);
         }
         else {
-        	resource = metaModelManager.getExternalResourceSet().createResource(modelURI, contentType);
+        	resource = metamodelManager.getExternalResourceSet().createResource(modelURI, contentType);
         	try {
 				resource.load(null);
 			} catch (IOException e) {

@@ -20,7 +20,7 @@ package	org.eclipse.qvtd.pivot.qvtbase.util;
 import java.lang.Object;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.utilities.ASSaver;
+import org.eclipse.ocl.pivot.internal.resource.ASSaver;
 import org.eclipse.ocl.pivot.utilities.ASSaverResolveVisitor;
 
 /**
@@ -85,11 +85,6 @@ public abstract class AbstractQVTbaseASSaverResolveVisitor
 
 	@Override
 	public @Nullable Object visitTypedModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.TypedModel object) {
-		return visitNamedElement(object);
-	}
-
-	@Override
-	public @Nullable Object visitUnit(@NonNull org.eclipse.qvtd.pivot.qvtbase.Unit object) {
 		return visitNamedElement(object);
 	}
 }

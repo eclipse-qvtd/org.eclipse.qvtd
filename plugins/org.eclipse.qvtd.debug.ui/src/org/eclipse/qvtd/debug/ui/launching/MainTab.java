@@ -65,7 +65,7 @@ public class MainTab extends AbstractMainTab implements QVTiLaunchConstants
 			@SuppressWarnings("null")@NonNull URI contextURI = URI.createURI(modelName, true);
 			URI elementsURI = contextURI.trimFragment();
 			try {
-				Resource resource = getMetaModelManager().getExternalResourceSet().getResource(elementsURI, true);
+				Resource resource = getMetamodelManager().getExternalResourceSet().getResource(elementsURI, true);
 		        if (resource == null) {
 		        	throw new IOException("There was an error loading the model file. ");
 		        }
@@ -94,7 +94,7 @@ public class MainTab extends AbstractMainTab implements QVTiLaunchConstants
 			try {
 				@SuppressWarnings("null")@NonNull Group inputsGroup2 = inputsGroup;
 				@SuppressWarnings("null")@NonNull Group outputsGroup2 = outputsGroup;
-				QVTiEnvironmentFactory envFactory = new QVTiEnvironmentFactory(null, getMetaModelManager());
+				QVTiEnvironmentFactory envFactory = (QVTiEnvironmentFactory) getMetamodelManager().getEnvironmentFactory();
 				QVTiXtextEvaluator xtextEvaluator = new QVTiXtextEvaluator(envFactory, txURI);
 				Transformation transformation = xtextEvaluator.getTransformation();
 				Set<TypedModel> inputs = new HashSet<TypedModel>();
@@ -146,7 +146,7 @@ public class MainTab extends AbstractMainTab implements QVTiLaunchConstants
 	@Override
 	public boolean canSave() {
 		assert !initializing;
-		ResourceSet resourceSet = getMetaModelManager().getExternalResourceSet();
+		ResourceSet resourceSet = getMetamodelManager().getExternalResourceSet();
 		URIConverter uriConverter = resourceSet.getURIConverter();
 		String txName = txPath.getText();
 		URI txURI = URI.createURI(txName, true);

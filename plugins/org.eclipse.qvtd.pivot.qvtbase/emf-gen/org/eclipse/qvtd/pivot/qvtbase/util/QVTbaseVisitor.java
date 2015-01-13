@@ -33,5 +33,4 @@ public interface QVTbaseVisitor<R> extends org.eclipse.ocl.pivot.util.Visitor<R>
 	@Nullable R visitRule(@NonNull org.eclipse.qvtd.pivot.qvtbase.Rule object);
 	@Nullable R visitTransformation(@NonNull org.eclipse.qvtd.pivot.qvtbase.Transformation object);
 	@Nullable R visitTypedModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.TypedModel object);
-	@Nullable R visitUnit(@NonNull org.eclipse.qvtd.pivot.qvtbase.Unit object);
 }

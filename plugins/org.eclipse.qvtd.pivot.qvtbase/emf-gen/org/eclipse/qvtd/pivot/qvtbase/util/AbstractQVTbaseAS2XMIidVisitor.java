@@ -20,7 +20,7 @@ package	org.eclipse.qvtd.pivot.qvtbase.util;
 import java.lang.Boolean;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.utilities.AS2XMIid;
+import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
 import org.eclipse.ocl.pivot.utilities.AS2XMIidVisitor;
 
 /**
@@ -85,11 +85,6 @@ public abstract class AbstractQVTbaseAS2XMIidVisitor
 
 	@Override
 	public @Nullable Boolean visitTypedModel(@NonNull org.eclipse.qvtd.pivot.qvtbase.TypedModel object) {
-		return visitNamedElement(object);
-	}
-
-	@Override
-	public @Nullable Boolean visitUnit(@NonNull org.eclipse.qvtd.pivot.qvtbase.Unit object) {
 		return visitNamedElement(object);
 	}
 }

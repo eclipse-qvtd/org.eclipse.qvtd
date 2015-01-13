@@ -27,12 +27,13 @@ import test.simpleuml.UMLModelElement;
  * An implementation of the model object '<em><b>UML Model Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link test.simpleuml.impl.UMLModelElementImpl#getKind <em>Kind</em>}</li>
  *   <li>{@link test.simpleuml.impl.UMLModelElementImpl#getName <em>Name</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

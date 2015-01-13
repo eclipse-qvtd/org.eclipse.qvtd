@@ -31,12 +31,13 @@ import test.umltordbms.UmltordbmsPackage;
  * An implementation of the model object '<em><b>Attribute To Column</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link test.umltordbms.impl.AttributeToColumnImpl#getColumn <em>Column</em>}</li>
  *   <li>{@link test.umltordbms.impl.AttributeToColumnImpl#getType <em>Type</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

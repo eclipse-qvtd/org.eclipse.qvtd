@@ -34,6 +34,7 @@ import org.eclipse.ocl.examples.codegen.generator.GenModelException;
 import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
+import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Iteration;
 import org.eclipse.ocl.pivot.LanguageExpression;
 import org.eclipse.ocl.pivot.NamedElement;
@@ -48,6 +49,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.library.LibraryProperty;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiGlobalContext;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcorePropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGEcoreRealizedVariable;
@@ -79,7 +81,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.Unit;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
@@ -378,7 +379,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		LanguageExpression specification = asFunction.getBodyExpression();
 		if (specification != null) {
 			try {
-				ExpressionInOCL query = metaModelManager.getQueryOrThrow(asFunction, specification);
+				ExpressionInOCL query = metamodelManager.getQueryOrThrow(asFunction, specification);
 				Variable contextVariable = query.getOwnedContext();
 				if (contextVariable != null) {
 					getParameter(contextVariable);
@@ -483,8 +484,8 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 //		cgIterator.setNonInvalid();
 //		cgIterator.setNonNull();
 		cgMappingLoop.setAst(asMappingLoop);
-		CollectionType collectionType = metaModelManager.getStandardLibrary().getCollectionType();
-		Operation forAllIteration = ClassUtil.getNamedElement(collectionType.getOwnedOperations(), "forAll");
+		CollectionType collectionType = metamodelManager.getStandardLibrary().getCollectionType();
+		Operation forAllIteration = NameUtil.getNameable(collectionType.getOwnedOperations(), "forAll");
 		cgMappingLoop.setReferredIteration((Iteration) forAllIteration);
 		cgMappingLoop.setBody(doVisit(CGValuedElement.class, asMappingLoop.getOwnedBody()));
 		return cgMappingLoop;
@@ -534,7 +535,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		Property asOppositeProperty = ClassUtil.nonNullModel(asMiddlePropertyCallExp.getReferredProperty());
 		Property asProperty = ClassUtil.nonNullModel(asOppositeProperty.getOpposite());
 		globalContext.addToMiddleProperty(asOppositeProperty);
-//		LibraryProperty libraryProperty = metaModelManager.getImplementation(asProperty);
+//		LibraryProperty libraryProperty = metamodelManager.getImplementation(asProperty);
 		CGMiddlePropertyCallExp cgPropertyCallExp = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyCallExp();					
 //		CGExecutorProperty cgExecutorProperty = context.getExecutorProperty(asProperty);
 //		cgExecutorPropertyCallExp.setExecutorProperty(cgExecutorProperty);
@@ -588,7 +589,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 	@Override
 	public @Nullable CGNamedElement visitPropertyAssignment(@NonNull PropertyAssignment asPropertyAssignment) {
 		Property asTargetProperty = ClassUtil.nonNullModel(asPropertyAssignment.getTargetProperty());
-		LibraryProperty libraryProperty = metaModelManager.getImplementation(null, asTargetProperty);
+		LibraryProperty libraryProperty = metamodelManager.getImplementation(null, asTargetProperty);
 		CGPropertyAssignment cgPropertyAssignment = null;
 		if (isEcoreProperty(libraryProperty)) {
 			EStructuralFeature eStructuralFeature = (EStructuralFeature) asTargetProperty.getETarget();
@@ -667,7 +668,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 	}
 
 	@Override
-	public @Nullable CGNamedElement visitUnit(@NonNull Unit object) {
+	public @Nullable CGNamedElement visitImport(@NonNull Import object) {
 		return visiting(object);
 	}
 

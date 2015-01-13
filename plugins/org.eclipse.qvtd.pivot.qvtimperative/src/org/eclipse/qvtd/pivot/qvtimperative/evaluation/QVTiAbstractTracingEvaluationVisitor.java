@@ -27,8 +27,8 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.evaluation.EvaluationVisitorImpl;
-import org.eclipse.ocl.pivot.prettyprint.PrettyPrinter;
+import org.eclipse.ocl.pivot.internal.evaluation.EvaluationVisitorImpl;
+import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -172,7 +172,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 		try {
 			Object value = safeVisit(assignment.getValue());
 			// Unbox to asign to ecore type
-	        value = delegate.getMetaModelManager().getIdResolver().unboxedValueOf(value);
+	        value = delegate.getMetamodelManager().getIdResolver().unboxedValueOf(value);
 	        logger.info(getIndent() + "VisitAssignment " + prettyPrint(assignment.getETarget())
 	        		+ " := " + prettyPrint(value));
 		} catch (InvalidValueException ex) {
@@ -312,7 +312,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 		try {
 			Object value = safeVisit(propertyAssignment.getValue());
 			// Unbox to asign to ecore type
-	        value = delegate.getMetaModelManager().getIdResolver().unboxedValueOf(value);
+	        value = delegate.getMetamodelManager().getIdResolver().unboxedValueOf(value);
 	        logger.info(getIndent() + "VisitMiddlePropertyAssignment " + propertyAssignment.getSlotExpression()
 	        		+ "." + propertyAssignment.getTargetProperty().getName() + " = " + prettyPrint(value));
 		} catch (InvalidValueException ex) {
@@ -341,7 +341,7 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 		try {
 			Object value = safeVisit(propertyAssignment.getValue());
 	        // Unbox to asign to ecore type
-	        value = delegate.getMetaModelManager().getIdResolver().unboxedValueOf(value);
+	        value = delegate.getMetamodelManager().getIdResolver().unboxedValueOf(value);
 	        logger.info(getIndent() + "VisitPropertyAssignment " + propertyAssignment.getSlotExpression()
         		+ "." + propertyAssignment.getTargetProperty().getName() + " = " + prettyPrint(value));
 		} catch (InvalidValueException ex) {

@@ -53,8 +53,8 @@ KeyDeclCS: 'key' pathName=PathNameCS '{'
 LibraryCS returns base::LibraryCS:
 	'library' referredPackage=[pivot::Package|URI] ';';
 	
-ModelDeclCS: name=UnrestrictedName ':' (metaModelIds+=[pivot::Namespace|UnrestrictedName]
-	| '{' metaModelIds+=[pivot::Namespace|UnrestrictedName] (',' metaModelIds+=[pivot::Namespace|UnrestrictedName])* '}')
+ModelDeclCS: name=UnrestrictedName ':' (metamodelIds+=[pivot::Namespace|UnrestrictedName]
+	| '{' metamodelIds+=[pivot::Namespace|UnrestrictedName] (',' metamodelIds+=[pivot::Namespace|UnrestrictedName])* '}')
 ;
 	
 ObjectTemplateCS: name=UnrestrictedName? ':' type=TypedRefCS

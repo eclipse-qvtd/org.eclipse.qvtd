@@ -52,6 +52,7 @@ public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 		configureCollectionTypeCS(c, f.getCollectionTypeCSAccess());
 		configureCurlyBracketedClauseCS(c, f.getCurlyBracketedClauseCSAccess());
 	    configureEssentialOCLNavigationOperatorCS(c, f.getEssentialOCLNavigationOperatorNameAccess());
+		configureExpCS(c, f.getExpCSAccess());
 		configureIfExpCS(c, f.getIfExpCSAccess());
 		configureLetExpCS(c, f.getLetExpCSAccess());
 		configureMultiplicityBoundsCS(c, f.getMultiplicityBoundsCSAccess());

@@ -18,7 +18,7 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Type;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
@@ -84,7 +84,7 @@ public class QVTcoreBaseCSLeft2RightVisitor extends AbstractQVTcoreBaseCSLeft2Ri
 	@Override
 	protected @Nullable Invocations getInvocations(@NonNull Type asType, @Nullable Type asTypeValue, @NonNull String name, int iteratorCount, int expressionCount) {
 		if (asType instanceof Transformation) {
-			Operation function = ClassUtil.getNamedElement(((Transformation)asType).getOwnedOperations(), name);
+			Operation function = NameUtil.getNameable(((Transformation)asType).getOwnedOperations(), name);
 			if (function != null) {
 				return new ResolvedInvocation(function);
 			}
@@ -99,7 +99,7 @@ public class QVTcoreBaseCSLeft2RightVisitor extends AbstractQVTcoreBaseCSLeft2Ri
 			Function function = getBestFunction(invocations);
 			if (function != null) {
 				AbstractNameExpCS csNameExp = csRoundBracketedClause.getOwningNameExp();
-//				Operation baseOperation = metaModelManager.resolveBaseOperation(function);
+//				Operation baseOperation = metamodelManager.resolveBaseOperation(function);
 				OperationCallExp operationCallExp = context.refreshModelElement(OperationCallExp.class, PivotPackage.Literals.OPERATION_CALL_EXP, csNameExp);
 				context.setReferredOperation(operationCallExp, function);
 				context.setType(operationCallExp, function.getType(), function.isRequired());

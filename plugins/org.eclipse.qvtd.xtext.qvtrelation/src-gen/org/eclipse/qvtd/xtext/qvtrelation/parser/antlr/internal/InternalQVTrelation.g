@@ -878,7 +878,7 @@ ruleModelDeclCS returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getMetaModelIdsNamespaceCrossReference_2_0_0()); 
+	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getMetamodelIdsNamespaceCrossReference_2_0_0()); 
 	    }
 		ruleUnrestrictedName		{ 
 	        afterParserOrEnumRuleCall();
@@ -901,7 +901,7 @@ ruleModelDeclCS returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getMetaModelIdsNamespaceCrossReference_2_1_1_0()); 
+	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getMetamodelIdsNamespaceCrossReference_2_1_1_0()); 
 	    }
 		ruleUnrestrictedName		{ 
 	        afterParserOrEnumRuleCall();
@@ -923,7 +923,7 @@ ruleModelDeclCS returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getMetaModelIdsNamespaceCrossReference_2_1_2_1_0()); 
+	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getMetamodelIdsNamespaceCrossReference_2_1_2_1_0()); 
 	    }
 		ruleUnrestrictedName		{ 
 	        afterParserOrEnumRuleCall();

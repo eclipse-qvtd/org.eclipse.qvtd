@@ -19,6 +19,7 @@ import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
@@ -120,8 +121,8 @@ public class QVTcoreBaseCSPostOrderVisitor extends AbstractQVTcoreBaseCSPostOrde
 					}
 				}
 			}
-			PivotUtil.refreshList(pBottomPattern.getAssignment(), pAssignments);
-			PivotUtil.refreshList(pBottomPattern.getPredicate(), pPredicates);
+			PivotUtilInternal.refreshList(pBottomPattern.getAssignment(), pAssignments);
+			PivotUtilInternal.refreshList(pBottomPattern.getPredicate(), pPredicates);
 		}
 		return null;
 	}
@@ -176,7 +177,7 @@ public class QVTcoreBaseCSPostOrderVisitor extends AbstractQVTcoreBaseCSPostOrde
 					context.addDiagnostic(csElement, "misplaced default ignored");
 				}
 			}
-			PivotUtil.refreshList(pGuardPattern.getPredicate(), pPredicates);
+			PivotUtilInternal.refreshList(pGuardPattern.getPredicate(), pPredicates);
 		}
 		return null;
 	}

@@ -12,15 +12,15 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.evaluation.PivotEvaluationEnvironment;
-import org.eclipse.ocl.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.internal.EnvironmentFactoryInternal;
+import org.eclipse.ocl.pivot.internal.evaluation.PivotEvaluationEnvironment;
 
 public abstract class QVTiEvaluationEnvironment extends PivotEvaluationEnvironment implements IQVTiEvaluationEnvironment
 {
 	protected final @NonNull QVTiModelManager modelManager;
 	
-	protected QVTiEvaluationEnvironment(@NonNull MetaModelManager metaModelManager, @NonNull QVTiModelManager modelManager) {
-		super(metaModelManager);
+	protected QVTiEvaluationEnvironment(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull QVTiModelManager modelManager) {
+		super(environmentFactory);
 		this.modelManager = modelManager;
 	}
 

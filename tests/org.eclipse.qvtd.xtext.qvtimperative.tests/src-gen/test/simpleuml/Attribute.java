@@ -20,11 +20,11 @@ package test.simpleuml;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link test.simpleuml.Attribute#getType <em>Type</em>}</li>
  *   <li>{@link test.simpleuml.Attribute#getOwner <em>Owner</em>}</li>
  * </ul>
- * </p>
  *
  * @see test.simpleuml.SimpleumlPackage#getAttribute()
  * @model

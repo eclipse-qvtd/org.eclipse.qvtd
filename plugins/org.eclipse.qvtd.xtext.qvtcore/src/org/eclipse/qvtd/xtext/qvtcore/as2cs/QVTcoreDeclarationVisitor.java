@@ -17,7 +17,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.Operation;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
 import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.ImportCS;
@@ -66,7 +66,7 @@ public class QVTcoreDeclarationVisitor extends QVTcoreBaseDeclarationVisitor imp
 		assert asModel.eContainer() == null;
 		TopLevelCS csDocument = context.refreshElement(TopLevelCS.class, QVTcoreCSPackage.Literals.TOP_LEVEL_CS, asModel);
 		csDocument.setPivot(asModel);
-		context.refreshList(csDocument.getOwnedImports(), context.visitDeclarations(ImportCS.class, asModel.getUnit(), null));
+		context.refreshList(csDocument.getOwnedImports(), context.visitDeclarations(ImportCS.class, asModel.getOwnedImports(), null));
 		List<Mapping> asMappings = null;
 		List<Function> asQueries = null;
 		List<Transformation> asTransformations = null;
@@ -143,7 +143,7 @@ public class QVTcoreDeclarationVisitor extends QVTcoreBaseDeclarationVisitor imp
 		csDomain.setGuardPattern(context.visitDeclaration(GuardPatternCS.class, asMapping.getGuardPattern()));
 		csMapping.setMiddle(csDomain);
 		context.refreshList(csMapping.getComposedMappings(), context.visitDeclarations(MappingCS.class, asMapping.getLocal(), null));
-		PivotUtil.refreshList(csMapping.getRefines(), asMapping.getRefinement());
+		PivotUtilInternal.refreshList(csMapping.getRefines(), asMapping.getRefinement());
 		return csMapping;
 	}
 }

@@ -22,12 +22,13 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * An implementation of the model object '<em><b>Root CS2 Root</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link classescstraces.impl.RootCS2RootImpl#getRootCS <em>Root CS</em>}</li>
  *   <li>{@link classescstraces.impl.RootCS2RootImpl#getRoot <em>Root</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

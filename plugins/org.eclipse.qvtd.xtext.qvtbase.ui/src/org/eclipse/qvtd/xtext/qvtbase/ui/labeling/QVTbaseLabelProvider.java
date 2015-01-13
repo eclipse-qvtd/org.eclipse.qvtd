@@ -13,7 +13,7 @@ package org.eclipse.qvtd.xtext.qvtbase.ui.labeling;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.NamedElement;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.xtext.essentialocl.ui.labeling.EssentialOCLLabelProvider;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -73,19 +73,19 @@ public class QVTbaseLabelProvider extends EssentialOCLLabelProvider
 	}
 
 	protected String text(Domain ele) {
-		return ClassUtil.getSafeName(ele);
+		return NameUtil.getSafeName(ele);
 	}
 
 	protected String text(FunctionParameter ele) {
-		return ClassUtil.getSafeName(ele);
+		return NameUtil.getSafeName(ele);
 	}
 
 	protected String text(Rule ele) {
-		return ClassUtil.getSafeName(ele);
+		return NameUtil.getSafeName(ele);
 	}
 
 	protected String text(Transformation ele) {
-		return ClassUtil.getSafeName(ele);
+		return NameUtil.getSafeName(ele);
 	}
 
 	protected String text(TypedModel ele) {

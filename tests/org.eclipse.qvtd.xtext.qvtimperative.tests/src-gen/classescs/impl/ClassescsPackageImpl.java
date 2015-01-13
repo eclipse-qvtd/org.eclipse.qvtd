@@ -265,7 +265,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getRootCS_OwnedPackage() {
+	public EReference getRootCS_OwnedPackages() {
 		return (EReference)rootCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -315,7 +315,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 		pathElementCSEClass = createEClass(PATH_ELEMENT_CS);
 
 		rootCSEClass = createEClass(ROOT_CS);
-		createEReference(rootCSEClass, ROOT_CS__OWNED_PACKAGE);
+		createEReference(rootCSEClass, ROOT_CS__OWNED_PACKAGES);
 	}
 
 	/**
@@ -375,7 +375,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 		initEClass(pathElementCSEClass, PathElementCS.class, "PathElementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(rootCSEClass, RootCS.class, "RootCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getRootCS_OwnedPackage(), this.getPackageCS(), null, "ownedPackage", null, 0, -1, RootCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRootCS_OwnedPackages(), this.getPackageCS(), null, "ownedPackages", null, 0, -1, RootCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

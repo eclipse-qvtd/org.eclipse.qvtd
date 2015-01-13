@@ -21,10 +21,10 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link test.simpleuml.Classifier#getTypeOpposite <em>Type Opposite</em>}</li>
  * </ul>
- * </p>
  *
  * @see test.simpleuml.SimpleumlPackage#getClassifier()
  * @model abstract="true"

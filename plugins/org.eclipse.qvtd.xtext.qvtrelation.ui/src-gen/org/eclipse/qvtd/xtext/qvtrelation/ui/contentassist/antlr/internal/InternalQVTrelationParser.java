@@ -9505,13 +9505,13 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ModelDeclCS__Alternatives_2"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3090:1: rule__ModelDeclCS__Alternatives_2 : ( ( ( rule__ModelDeclCS__MetaModelIdsAssignment_2_0 ) ) | ( ( rule__ModelDeclCS__Group_2_1__0 ) ) );
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3090:1: rule__ModelDeclCS__Alternatives_2 : ( ( ( rule__ModelDeclCS__MetamodelIdsAssignment_2_0 ) ) | ( ( rule__ModelDeclCS__Group_2_1__0 ) ) );
     public final void rule__ModelDeclCS__Alternatives_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3094:1: ( ( ( rule__ModelDeclCS__MetaModelIdsAssignment_2_0 ) ) | ( ( rule__ModelDeclCS__Group_2_1__0 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3094:1: ( ( ( rule__ModelDeclCS__MetamodelIdsAssignment_2_0 ) ) | ( ( rule__ModelDeclCS__Group_2_1__0 ) ) )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -9530,19 +9530,19 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
             switch (alt10) {
                 case 1 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3095:1: ( ( rule__ModelDeclCS__MetaModelIdsAssignment_2_0 ) )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3095:1: ( ( rule__ModelDeclCS__MetamodelIdsAssignment_2_0 ) )
                     {
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3095:1: ( ( rule__ModelDeclCS__MetaModelIdsAssignment_2_0 ) )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3096:1: ( rule__ModelDeclCS__MetaModelIdsAssignment_2_0 )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3095:1: ( ( rule__ModelDeclCS__MetamodelIdsAssignment_2_0 ) )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3096:1: ( rule__ModelDeclCS__MetamodelIdsAssignment_2_0 )
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getModelDeclCSAccess().getMetaModelIdsAssignment_2_0()); 
+                       before(grammarAccess.getModelDeclCSAccess().getMetamodelIdsAssignment_2_0()); 
                     }
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3097:1: ( rule__ModelDeclCS__MetaModelIdsAssignment_2_0 )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3097:2: rule__ModelDeclCS__MetaModelIdsAssignment_2_0
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3097:1: ( rule__ModelDeclCS__MetamodelIdsAssignment_2_0 )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3097:2: rule__ModelDeclCS__MetamodelIdsAssignment_2_0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__ModelDeclCS__MetaModelIdsAssignment_2_0_in_rule__ModelDeclCS__Alternatives_26576);
-                    rule__ModelDeclCS__MetaModelIdsAssignment_2_0();
+                    pushFollow(FollowSets000.FOLLOW_rule__ModelDeclCS__MetamodelIdsAssignment_2_0_in_rule__ModelDeclCS__Alternatives_26576);
+                    rule__ModelDeclCS__MetamodelIdsAssignment_2_0();
 
                     state._fsp--;
                     if (state.failed) return ;
@@ -9550,7 +9550,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     }
 
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getModelDeclCSAccess().getMetaModelIdsAssignment_2_0()); 
+                       after(grammarAccess.getModelDeclCSAccess().getMetamodelIdsAssignment_2_0()); 
                     }
 
                     }
@@ -19395,26 +19395,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ModelDeclCS__Group_2_1__1__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6244:1: rule__ModelDeclCS__Group_2_1__1__Impl : ( ( rule__ModelDeclCS__MetaModelIdsAssignment_2_1_1 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6244:1: rule__ModelDeclCS__Group_2_1__1__Impl : ( ( rule__ModelDeclCS__MetamodelIdsAssignment_2_1_1 ) ) ;
     public final void rule__ModelDeclCS__Group_2_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6248:1: ( ( ( rule__ModelDeclCS__MetaModelIdsAssignment_2_1_1 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6249:1: ( ( rule__ModelDeclCS__MetaModelIdsAssignment_2_1_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6248:1: ( ( ( rule__ModelDeclCS__MetamodelIdsAssignment_2_1_1 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6249:1: ( ( rule__ModelDeclCS__MetamodelIdsAssignment_2_1_1 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6249:1: ( ( rule__ModelDeclCS__MetaModelIdsAssignment_2_1_1 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6250:1: ( rule__ModelDeclCS__MetaModelIdsAssignment_2_1_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6249:1: ( ( rule__ModelDeclCS__MetamodelIdsAssignment_2_1_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6250:1: ( rule__ModelDeclCS__MetamodelIdsAssignment_2_1_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getModelDeclCSAccess().getMetaModelIdsAssignment_2_1_1()); 
+               before(grammarAccess.getModelDeclCSAccess().getMetamodelIdsAssignment_2_1_1()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6251:1: ( rule__ModelDeclCS__MetaModelIdsAssignment_2_1_1 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6251:2: rule__ModelDeclCS__MetaModelIdsAssignment_2_1_1
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6251:1: ( rule__ModelDeclCS__MetamodelIdsAssignment_2_1_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6251:2: rule__ModelDeclCS__MetamodelIdsAssignment_2_1_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__ModelDeclCS__MetaModelIdsAssignment_2_1_1_in_rule__ModelDeclCS__Group_2_1__1__Impl13279);
-            rule__ModelDeclCS__MetaModelIdsAssignment_2_1_1();
+            pushFollow(FollowSets000.FOLLOW_rule__ModelDeclCS__MetamodelIdsAssignment_2_1_1_in_rule__ModelDeclCS__Group_2_1__1__Impl13279);
+            rule__ModelDeclCS__MetamodelIdsAssignment_2_1_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -19422,7 +19422,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getModelDeclCSAccess().getMetaModelIdsAssignment_2_1_1()); 
+               after(grammarAccess.getModelDeclCSAccess().getMetamodelIdsAssignment_2_1_1()); 
             }
 
             }
@@ -19739,26 +19739,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ModelDeclCS__Group_2_1_2__1__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6370:1: rule__ModelDeclCS__Group_2_1_2__1__Impl : ( ( rule__ModelDeclCS__MetaModelIdsAssignment_2_1_2_1 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6370:1: rule__ModelDeclCS__Group_2_1_2__1__Impl : ( ( rule__ModelDeclCS__MetamodelIdsAssignment_2_1_2_1 ) ) ;
     public final void rule__ModelDeclCS__Group_2_1_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6374:1: ( ( ( rule__ModelDeclCS__MetaModelIdsAssignment_2_1_2_1 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6375:1: ( ( rule__ModelDeclCS__MetaModelIdsAssignment_2_1_2_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6374:1: ( ( ( rule__ModelDeclCS__MetamodelIdsAssignment_2_1_2_1 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6375:1: ( ( rule__ModelDeclCS__MetamodelIdsAssignment_2_1_2_1 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6375:1: ( ( rule__ModelDeclCS__MetaModelIdsAssignment_2_1_2_1 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6376:1: ( rule__ModelDeclCS__MetaModelIdsAssignment_2_1_2_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6375:1: ( ( rule__ModelDeclCS__MetamodelIdsAssignment_2_1_2_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6376:1: ( rule__ModelDeclCS__MetamodelIdsAssignment_2_1_2_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getModelDeclCSAccess().getMetaModelIdsAssignment_2_1_2_1()); 
+               before(grammarAccess.getModelDeclCSAccess().getMetamodelIdsAssignment_2_1_2_1()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6377:1: ( rule__ModelDeclCS__MetaModelIdsAssignment_2_1_2_1 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6377:2: rule__ModelDeclCS__MetaModelIdsAssignment_2_1_2_1
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6377:1: ( rule__ModelDeclCS__MetamodelIdsAssignment_2_1_2_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6377:2: rule__ModelDeclCS__MetamodelIdsAssignment_2_1_2_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__ModelDeclCS__MetaModelIdsAssignment_2_1_2_1_in_rule__ModelDeclCS__Group_2_1_2__1__Impl13526);
-            rule__ModelDeclCS__MetaModelIdsAssignment_2_1_2_1();
+            pushFollow(FollowSets000.FOLLOW_rule__ModelDeclCS__MetamodelIdsAssignment_2_1_2_1_in_rule__ModelDeclCS__Group_2_1_2__1__Impl13526);
+            rule__ModelDeclCS__MetamodelIdsAssignment_2_1_2_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -19766,7 +19766,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getModelDeclCSAccess().getMetaModelIdsAssignment_2_1_2_1()); 
+               after(grammarAccess.getModelDeclCSAccess().getMetamodelIdsAssignment_2_1_2_1()); 
             }
 
             }
@@ -49419,9 +49419,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__ModelDeclCS__NameAssignment_0"
 
 
-    // $ANTLR start "rule__ModelDeclCS__MetaModelIdsAssignment_2_0"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17180:1: rule__ModelDeclCS__MetaModelIdsAssignment_2_0 : ( ( ruleUnrestrictedName ) ) ;
-    public final void rule__ModelDeclCS__MetaModelIdsAssignment_2_0() throws RecognitionException {
+    // $ANTLR start "rule__ModelDeclCS__MetamodelIdsAssignment_2_0"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17180:1: rule__ModelDeclCS__MetamodelIdsAssignment_2_0 : ( ( ruleUnrestrictedName ) ) ;
+    public final void rule__ModelDeclCS__MetamodelIdsAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -49433,27 +49433,27 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17186:1: ( ruleUnrestrictedName )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getModelDeclCSAccess().getMetaModelIdsNamespaceCrossReference_2_0_0()); 
+               before(grammarAccess.getModelDeclCSAccess().getMetamodelIdsNamespaceCrossReference_2_0_0()); 
             }
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17187:1: ( ruleUnrestrictedName )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17188:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getModelDeclCSAccess().getMetaModelIdsNamespaceUnrestrictedNameParserRuleCall_2_0_0_1()); 
+               before(grammarAccess.getModelDeclCSAccess().getMetamodelIdsNamespaceUnrestrictedNameParserRuleCall_2_0_0_1()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleUnrestrictedName_in_rule__ModelDeclCS__MetaModelIdsAssignment_2_034833);
+            pushFollow(FollowSets001.FOLLOW_ruleUnrestrictedName_in_rule__ModelDeclCS__MetamodelIdsAssignment_2_034833);
             ruleUnrestrictedName();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getModelDeclCSAccess().getMetaModelIdsNamespaceUnrestrictedNameParserRuleCall_2_0_0_1()); 
+               after(grammarAccess.getModelDeclCSAccess().getMetamodelIdsNamespaceUnrestrictedNameParserRuleCall_2_0_0_1()); 
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getModelDeclCSAccess().getMetaModelIdsNamespaceCrossReference_2_0_0()); 
+               after(grammarAccess.getModelDeclCSAccess().getMetamodelIdsNamespaceCrossReference_2_0_0()); 
             }
 
             }
@@ -49473,12 +49473,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__ModelDeclCS__MetaModelIdsAssignment_2_0"
+    // $ANTLR end "rule__ModelDeclCS__MetamodelIdsAssignment_2_0"
 
 
-    // $ANTLR start "rule__ModelDeclCS__MetaModelIdsAssignment_2_1_1"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17199:1: rule__ModelDeclCS__MetaModelIdsAssignment_2_1_1 : ( ( ruleUnrestrictedName ) ) ;
-    public final void rule__ModelDeclCS__MetaModelIdsAssignment_2_1_1() throws RecognitionException {
+    // $ANTLR start "rule__ModelDeclCS__MetamodelIdsAssignment_2_1_1"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17199:1: rule__ModelDeclCS__MetamodelIdsAssignment_2_1_1 : ( ( ruleUnrestrictedName ) ) ;
+    public final void rule__ModelDeclCS__MetamodelIdsAssignment_2_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -49490,27 +49490,27 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17205:1: ( ruleUnrestrictedName )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getModelDeclCSAccess().getMetaModelIdsNamespaceCrossReference_2_1_1_0()); 
+               before(grammarAccess.getModelDeclCSAccess().getMetamodelIdsNamespaceCrossReference_2_1_1_0()); 
             }
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17206:1: ( ruleUnrestrictedName )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17207:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getModelDeclCSAccess().getMetaModelIdsNamespaceUnrestrictedNameParserRuleCall_2_1_1_0_1()); 
+               before(grammarAccess.getModelDeclCSAccess().getMetamodelIdsNamespaceUnrestrictedNameParserRuleCall_2_1_1_0_1()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleUnrestrictedName_in_rule__ModelDeclCS__MetaModelIdsAssignment_2_1_134872);
+            pushFollow(FollowSets001.FOLLOW_ruleUnrestrictedName_in_rule__ModelDeclCS__MetamodelIdsAssignment_2_1_134872);
             ruleUnrestrictedName();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getModelDeclCSAccess().getMetaModelIdsNamespaceUnrestrictedNameParserRuleCall_2_1_1_0_1()); 
+               after(grammarAccess.getModelDeclCSAccess().getMetamodelIdsNamespaceUnrestrictedNameParserRuleCall_2_1_1_0_1()); 
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getModelDeclCSAccess().getMetaModelIdsNamespaceCrossReference_2_1_1_0()); 
+               after(grammarAccess.getModelDeclCSAccess().getMetamodelIdsNamespaceCrossReference_2_1_1_0()); 
             }
 
             }
@@ -49530,12 +49530,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__ModelDeclCS__MetaModelIdsAssignment_2_1_1"
+    // $ANTLR end "rule__ModelDeclCS__MetamodelIdsAssignment_2_1_1"
 
 
-    // $ANTLR start "rule__ModelDeclCS__MetaModelIdsAssignment_2_1_2_1"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17218:1: rule__ModelDeclCS__MetaModelIdsAssignment_2_1_2_1 : ( ( ruleUnrestrictedName ) ) ;
-    public final void rule__ModelDeclCS__MetaModelIdsAssignment_2_1_2_1() throws RecognitionException {
+    // $ANTLR start "rule__ModelDeclCS__MetamodelIdsAssignment_2_1_2_1"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17218:1: rule__ModelDeclCS__MetamodelIdsAssignment_2_1_2_1 : ( ( ruleUnrestrictedName ) ) ;
+    public final void rule__ModelDeclCS__MetamodelIdsAssignment_2_1_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -49547,27 +49547,27 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17224:1: ( ruleUnrestrictedName )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getModelDeclCSAccess().getMetaModelIdsNamespaceCrossReference_2_1_2_1_0()); 
+               before(grammarAccess.getModelDeclCSAccess().getMetamodelIdsNamespaceCrossReference_2_1_2_1_0()); 
             }
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17225:1: ( ruleUnrestrictedName )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17226:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getModelDeclCSAccess().getMetaModelIdsNamespaceUnrestrictedNameParserRuleCall_2_1_2_1_0_1()); 
+               before(grammarAccess.getModelDeclCSAccess().getMetamodelIdsNamespaceUnrestrictedNameParserRuleCall_2_1_2_1_0_1()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleUnrestrictedName_in_rule__ModelDeclCS__MetaModelIdsAssignment_2_1_2_134911);
+            pushFollow(FollowSets001.FOLLOW_ruleUnrestrictedName_in_rule__ModelDeclCS__MetamodelIdsAssignment_2_1_2_134911);
             ruleUnrestrictedName();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getModelDeclCSAccess().getMetaModelIdsNamespaceUnrestrictedNameParserRuleCall_2_1_2_1_0_1()); 
+               after(grammarAccess.getModelDeclCSAccess().getMetamodelIdsNamespaceUnrestrictedNameParserRuleCall_2_1_2_1_0_1()); 
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getModelDeclCSAccess().getMetaModelIdsNamespaceCrossReference_2_1_2_1_0()); 
+               after(grammarAccess.getModelDeclCSAccess().getMetamodelIdsNamespaceCrossReference_2_1_2_1_0()); 
             }
 
             }
@@ -49587,7 +49587,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__ModelDeclCS__MetaModelIdsAssignment_2_1_2_1"
+    // $ANTLR end "rule__ModelDeclCS__MetamodelIdsAssignment_2_1_2_1"
 
 
     // $ANTLR start "rule__ObjectTemplateCS__NameAssignment_0"
@@ -58717,7 +58717,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_rule__KeyDeclCS__Group_3_1__0_in_rule__KeyDeclCS__Alternatives_36492 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__KeyDeclCS__PropertyIdsAssignment_4_1_0_in_rule__KeyDeclCS__Alternatives_4_16525 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__KeyDeclCS__Group_4_1_1__0_in_rule__KeyDeclCS__Alternatives_4_16543 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ModelDeclCS__MetaModelIdsAssignment_2_0_in_rule__ModelDeclCS__Alternatives_26576 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ModelDeclCS__MetamodelIdsAssignment_2_0_in_rule__ModelDeclCS__Alternatives_26576 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ModelDeclCS__Group_2_1__0_in_rule__ModelDeclCS__Alternatives_26594 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__PropertyTemplateCS__PropertyIdAssignment_0_0_in_rule__PropertyTemplateCS__Alternatives_06627 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__PropertyTemplateCS__Group_0_1__0_in_rule__PropertyTemplateCS__Alternatives_06645 = new BitSet(new long[]{0x0000000000000002L});
@@ -59011,7 +59011,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_72_in_rule__ModelDeclCS__Group_2_1__0__Impl13218 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ModelDeclCS__Group_2_1__1__Impl_in_rule__ModelDeclCS__Group_2_1__113249 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000A00L});
         public static final BitSet FOLLOW_rule__ModelDeclCS__Group_2_1__2_in_rule__ModelDeclCS__Group_2_1__113252 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ModelDeclCS__MetaModelIdsAssignment_2_1_1_in_rule__ModelDeclCS__Group_2_1__1__Impl13279 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ModelDeclCS__MetamodelIdsAssignment_2_1_1_in_rule__ModelDeclCS__Group_2_1__1__Impl13279 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ModelDeclCS__Group_2_1__2__Impl_in_rule__ModelDeclCS__Group_2_1__213309 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000A00L});
         public static final BitSet FOLLOW_rule__ModelDeclCS__Group_2_1__3_in_rule__ModelDeclCS__Group_2_1__213312 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ModelDeclCS__Group_2_1_2__0_in_rule__ModelDeclCS__Group_2_1__2__Impl13339 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000800L});
@@ -59021,7 +59021,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_rule__ModelDeclCS__Group_2_1_2__1_in_rule__ModelDeclCS__Group_2_1_2__013440 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_75_in_rule__ModelDeclCS__Group_2_1_2__0__Impl13468 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ModelDeclCS__Group_2_1_2__1__Impl_in_rule__ModelDeclCS__Group_2_1_2__113499 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ModelDeclCS__MetaModelIdsAssignment_2_1_2_1_in_rule__ModelDeclCS__Group_2_1_2__1__Impl13526 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ModelDeclCS__MetamodelIdsAssignment_2_1_2_1_in_rule__ModelDeclCS__Group_2_1_2__1__Impl13526 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ObjectTemplateCS__Group__0__Impl_in_rule__ObjectTemplateCS__Group__013560 = new BitSet(new long[]{0x0000001FFFFA00C0L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__ObjectTemplateCS__Group__1_in_rule__ObjectTemplateCS__Group__013563 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ObjectTemplateCS__NameAssignment_0_in_rule__ObjectTemplateCS__Group__0__Impl13590 = new BitSet(new long[]{0x0000000000000002L});
@@ -59914,9 +59914,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_rulePathNameCS_in_rule__KeyDeclCS__OppositePropertyIdsAssignment_4_1_1_234728 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleURI_in_rule__LibraryCS__ReferredPackageAssignment_134763 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__ModelDeclCS__NameAssignment_034798 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__ModelDeclCS__MetaModelIdsAssignment_2_034833 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__ModelDeclCS__MetaModelIdsAssignment_2_1_134872 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__ModelDeclCS__MetaModelIdsAssignment_2_1_2_134911 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__ModelDeclCS__MetamodelIdsAssignment_2_034833 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__ModelDeclCS__MetamodelIdsAssignment_2_1_134872 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__ModelDeclCS__MetamodelIdsAssignment_2_1_2_134911 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__ObjectTemplateCS__NameAssignment_034946 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTypedRefCS_in_rule__ObjectTemplateCS__TypeAssignment_234977 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rulePropertyTemplateCS_in_rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_035008 = new BitSet(new long[]{0x0000000000000002L});

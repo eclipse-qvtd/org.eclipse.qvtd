@@ -12,12 +12,12 @@ package org.eclipse.qvtd.pivot.qvtbase.attributes;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.scoping.AbstractAttribution;
-import org.eclipse.ocl.pivot.scoping.EnvironmentView;
-import org.eclipse.ocl.pivot.scoping.ScopeView;
+import org.eclipse.ocl.pivot.Import;
+import org.eclipse.ocl.pivot.internal.scoping.AbstractAttribution;
+import org.eclipse.ocl.pivot.internal.scoping.EnvironmentView;
+import org.eclipse.ocl.pivot.internal.scoping.ScopeView;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.Unit;
 import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 
 public class TypedModelAttribution extends AbstractAttribution
@@ -29,8 +29,8 @@ public class TypedModelAttribution extends AbstractAttribution
 		TypedModel typedModel = (TypedModel)target;
 		BaseModel model = QVTbaseUtil.getContainingModel(typedModel);
 		if (model != null) {
-			for (Unit unit : model.getUnit()) {
-				environmentView.addElement(unit.getName(), unit.getUsedPackage());
+			for (Import _import : model.getOwnedImports()) {
+				environmentView.addElement(_import.getName(), _import.getImportedNamespace());
 			}
 		}
 		return scopeView.getParent();

@@ -23,11 +23,11 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EMOFResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.OCL;
-import org.eclipse.ocl.pivot.impl.StandardLibraryImpl;
-import org.eclipse.ocl.pivot.library.StandardLibraryContribution;
-import org.eclipse.ocl.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.pivot.manager.MetaModelManagerResourceSetAdapter;
+import org.eclipse.ocl.pivot.internal.StandardLibraryImpl;
+import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerResourceSetAdapter;
+import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.base.utilities.CS2ASResourceAdapter;
 
@@ -36,7 +36,7 @@ import org.eclipse.ocl.xtext.base.utilities.CS2ASResourceAdapter;
  */
 public class LoadTestCase extends XtextTestCase
 {	
-	protected MetaModelManager metaModelManager = null;
+	protected MetamodelManager metamodelManager = null;
 
 	public void doLoad_Concrete(@NonNull String inputName) throws IOException {
 		OCL ocl = OCL.newInstance();
@@ -54,7 +54,7 @@ public class LoadTestCase extends XtextTestCase
 
 	protected Resource doLoad_Concrete(@NonNull OCL ocl, @NonNull URI inputURI, @NonNull URI pivotURI) throws IOException {
 		URI cstURI = pivotURI.trimFileExtension().appendFileExtension("xmi");
-		BaseCSResource xtextResource = (BaseCSResource) ocl.getMetaModelManager().getExternalResourceSet().getResource(inputURI, true);
+		BaseCSResource xtextResource = (BaseCSResource) ocl.getMetamodelManager().getExternalResourceSet().getResource(inputURI, true);
 		assertNoResourceErrors("Load failed", xtextResource);
 		CS2ASResourceAdapter adapter = xtextResource.getCS2ASAdapter(null);
 		Resource pivotResource = adapter.getASResource(xtextResource);
@@ -94,16 +94,16 @@ public class LoadTestCase extends XtextTestCase
 
 	@Override
 	protected void tearDown() throws Exception {
-		MetaModelManagerResourceSetAdapter adapter = MetaModelManagerResourceSetAdapter.findAdapter(resourceSet);
+		MetamodelManagerResourceSetAdapter adapter = MetamodelManagerResourceSetAdapter.findAdapter(resourceSet);
 		if (adapter != null) {
-			MetaModelManager metaModelManager = adapter.getMetaModelManager();
-			if (metaModelManager != null) {
-				metaModelManager.dispose();
+			MetamodelManager metamodelManager = adapter.getMetamodelManager();
+			if (metamodelManager != null) {
+				metamodelManager.dispose();
 			}
 		}
-		if (metaModelManager != null) {
-			metaModelManager.dispose();
-			metaModelManager = null;
+		if (metamodelManager != null) {
+			metamodelManager.dispose();
+			metamodelManager = null;
 		}
 		StandardLibraryContribution.REGISTRY.remove(StandardLibraryImpl.DEFAULT_OCL_STDLIB_URI);
 		super.tearDown();

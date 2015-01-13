@@ -12,6 +12,7 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
@@ -26,6 +27,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeUtil;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -33,10 +35,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
  */
 public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
 
-
-    /** The name of the root mapping */
-    private static final String ROOT_MAPPING_NAME = "__root__";
-
+        
     /**
      * Instantiates a new QVTcore evaluation visitor.
      *
@@ -45,8 +44,8 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
      * @param evalEnv
      *            the evaluation environment
      */
-    public QVTiEvaluationVisitorImpl(@NonNull QVTiEnvironment env, @NonNull IQVTiEvaluationEnvironment evalEnv) {
-        super(env, evalEnv);
+    public QVTiEvaluationVisitorImpl(@NonNull IQVTiEvaluationEnvironment evalEnv) {
+        super(evalEnv);
     }
 
     /* (non-Javadoc)
@@ -54,13 +53,12 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
      */
     @Override
     public @NonNull QVTiEvaluationVisitor createNestedEvaluator() {
-        QVTiEnvironment qvtEnvironment = getEnvironment();
-        QVTiEnvironmentFactory factory = qvtEnvironment.getFactory();
+    	QVTiEnvironment qvtEnvironment = getEnvironment();
+		QVTiEnvironmentFactory factory = qvtEnvironment.getFactory();
         IQVTiEvaluationEnvironment nestedEvalEnv = factory.createEvaluationEnvironment(evaluationEnvironment);
         QVTiEvaluationVisitorImpl nestedEvaluationVisitor = new QVTiEvaluationVisitorImpl(qvtEnvironment, nestedEvalEnv);
         nestedEvaluationVisitor.setMonitor(getMonitor());
         return nestedEvaluationVisitor;
-    
     }
 
     /* (non-Javadoc)
@@ -175,11 +173,11 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
         }
         /*result =*/ mapping.getBottomPattern().accept(undecoratedVisitor);
 //      if (result == Boolean.TRUE) {
-            MappingStatement mappingStatement = mapping.getMappingStatement();
-            if (mappingStatement != null) {
-                mappingStatement.accept(undecoratedVisitor);
-            }
-//      }
+			MappingStatement mappingStatements = mapping.getMappingStatement();
+			if (mappingStatements != null) {
+				mappingStatements.accept(undecoratedVisitor);
+			}
+//    	}
         return null;
     }
 
@@ -196,18 +194,12 @@ public class QVTiEvaluationVisitorImpl extends QVTiAbstractEvaluationVisitor {
      */
     @Override
     public @Nullable Object visitTransformation(@NonNull Transformation transformation) {
-    	
-    	QVTiEvaluationVisitor nv = null;
-        for (Rule rule : transformation.getRule()) {
-            if (rule.getName().equals(ROOT_MAPPING_NAME)) {
-                nv = ((QVTiEvaluationVisitor) undecoratedVisitor).createNestedEvaluator();
-                rule.accept(nv);
-                break;
-            }
+        Rule rule = NameUtil.getNameable(transformation.getRule(), QVTimperativeUtil.ROOT_MAPPING_NAME);
+        if (rule == null) {
+        	throw new IllegalStateException("Transformation " + transformation.getName() + " has no root mapping");
         }
-        if (nv == null) {
-        	System.out.println("Transformation " + transformation.getName() + " has no root mapping");
-        }
+    	QVTiEvaluationVisitor nv = ((QVTiEvaluationVisitor) undecoratedVisitor).createNestedEvaluator();
+        rule.accept(nv);
         return true;
     }
 }

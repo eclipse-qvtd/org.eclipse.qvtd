@@ -21,12 +21,12 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link test.simplerdbms.ForeignKey#getRefersTo <em>Refers To</em>}</li>
  *   <li>{@link test.simplerdbms.ForeignKey#getColumn <em>Column</em>}</li>
  *   <li>{@link test.simplerdbms.ForeignKey#getOwner <em>Owner</em>}</li>
  * </ul>
- * </p>
  *
  * @see test.simplerdbms.SimplerdbmsPackage#getForeignKey()
  * @model

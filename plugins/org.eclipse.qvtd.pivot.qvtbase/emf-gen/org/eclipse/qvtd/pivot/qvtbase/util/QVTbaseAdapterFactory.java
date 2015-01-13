@@ -39,7 +39,6 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.Unit;
 
 /**
  * <!-- begin-user-doc -->
@@ -132,10 +131,6 @@ public class QVTbaseAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTypedModel(TypedModel object) {
 				return createTypedModelAdapter();
-			}
-			@Override
-			public Adapter caseUnit(Unit object) {
-				return createUnitAdapter();
 			}
 			@Override
 			public Adapter caseVisitable(Visitable object) {
@@ -344,20 +339,6 @@ public class QVTbaseAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTypedModelAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtbase.Unit <em>Unit</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtbase.Unit
-	 * @generated
-	 */
-	public Adapter createUnitAdapter() {
 		return null;
 	}
 

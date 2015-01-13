@@ -48,22 +48,22 @@ import org.eclipse.ocl.pivot.LoopExp;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OperationCallExp;
-import org.eclipse.ocl.pivot.PivotConstants;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.TemplateableElement;
 import org.eclipse.ocl.pivot.TupleType;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
-import org.eclipse.ocl.pivot.delegate.OCLDelegateDomain;
-import org.eclipse.ocl.pivot.ecore.AS2Ecore;
-import org.eclipse.ocl.pivot.ecore.Ecore2AS;
-import org.eclipse.ocl.pivot.impl.StandardLibraryImpl;
-import org.eclipse.ocl.pivot.library.StandardLibraryContribution;
-import org.eclipse.ocl.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.internal.PivotConstantsInternal;
+import org.eclipse.ocl.pivot.internal.StandardLibraryImpl;
+import org.eclipse.ocl.pivot.internal.delegate.OCLDelegateDomain;
+import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
+import org.eclipse.ocl.pivot.internal.ecore.es2as.Ecore2AS;
+import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
+import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
-import org.eclipse.ocl.pivot.utilities.PivotUtil;
-import org.eclipse.ocl.pivot.utilities.ProjectMap;
+import org.eclipse.ocl.pivot.resource.ProjectMap;
 import org.eclipse.ocl.pivot.values.Bag;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.base.utilities.CS2ASResourceAdapter;
@@ -223,7 +223,7 @@ public class XtextTestCase extends PivotTestCase
 	
 	protected static boolean isValidPivot(Element pivotElement) {
 		if (pivotElement instanceof org.eclipse.ocl.pivot.Package) {
-			if ((pivotElement.eContainer() == null) && PivotConstants.ORPHANAGE_NAME.equals(((NamedElement) pivotElement).getName())) {
+			if ((pivotElement.eContainer() == null) && PivotConstantsInternal.ORPHANAGE_NAME.equals(((NamedElement) pivotElement).getName())) {
 				return false;
 			}
 		}
@@ -234,13 +234,13 @@ public class XtextTestCase extends PivotTestCase
 			return false;
 		}
 		if (pivotElement instanceof TupleType) {
-			return PivotUtil.isLibraryType((TupleType)pivotElement);
+			return PivotUtilInternal.isLibraryType((TupleType)pivotElement);
 		}
 		if (pivotElement instanceof Type) {
 			EObject eContainer = pivotElement.eContainer();
 			if ((eContainer instanceof org.eclipse.ocl.pivot.Package) && (eContainer.eContainer() == null)
-					&& PivotConstants.ORPHANAGE_NAME.equals(((NamedElement) pivotElement).getName())
-					&& PivotConstants.ORPHANAGE_NAME.equals(((NamedElement) eContainer).getName())) {
+					&& PivotConstantsInternal.ORPHANAGE_NAME.equals(((NamedElement) pivotElement).getName())
+					&& PivotConstantsInternal.ORPHANAGE_NAME.equals(((NamedElement) eContainer).getName())) {
 				return false;
 			}
 		}
@@ -255,7 +255,7 @@ public class XtextTestCase extends PivotTestCase
 	
 	protected ResourceSet resourceSet;
 
-/*	protected XtextResource savePivotAsCS(MetaModelManager metaModelManager, Resource pivotResource, URI outputURI) throws IOException {
+/*	protected XtextResource savePivotAsCS(MetamodelManager metamodelManager, Resource pivotResource, URI outputURI) throws IOException {
 //		ResourceSet csResourceSet = resourceSet; //new ResourceSetImpl();
 //		csResourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("cs", new EcoreResourceFactoryImpl());
 //		csResourceSet.getPackageRegistry().put(PivotPackage.eNS_URI, PivotPackage.eINSTANCE);
@@ -264,7 +264,7 @@ public class XtextTestCase extends PivotTestCase
 		XtextResource xtextResource = (XtextResource) resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
 		Map<Resource, Resource> cs2PivotResourceMap = new HashMap<Resource, Resource>();
 		cs2PivotResourceMap.put(xtextResource, pivotResource);
-		Pivot2CS pivot2cs = new OCLinEcorePivot2CS(cs2PivotResourceMap, metaModelManager);
+		Pivot2CS pivot2cs = new OCLinEcorePivot2CS(cs2PivotResourceMap, metamodelManager);
 		pivot2cs.update();
 		assertNoResourceErrors("Conversion failed", xtextResource);
 //		csResource.save(null);
@@ -291,21 +291,21 @@ public class XtextTestCase extends PivotTestCase
 		return xtextResource;
 	} */
 	
-	public void createEcoreFile(MetaModelManager metaModelManager, String fileName, String fileContent) throws IOException {
+	public void createEcoreFile(MetamodelManager metamodelManager, String fileName, String fileContent) throws IOException {
 		String inputName = fileName + ".oclinecore";
 		createOCLinEcoreFile(inputName, fileContent);
 		URI inputURI = getProjectFileURI(inputName);
 		URI ecoreURI = getProjectFileURI(fileName + ".ecore");
 		CS2ASResourceAdapter adapter = null;
 		try {
-			ResourceSet resourceSet2 = metaModelManager.getExternalResourceSet();
+			ResourceSet resourceSet2 = metamodelManager.getExternalResourceSet();
 			BaseCSResource xtextResource = (BaseCSResource) resourceSet2.getResource(inputURI, true);
 			assertNoResourceErrors("Load failed", xtextResource);
 			adapter = xtextResource.getCS2ASAdapter(null);
 			Resource pivotResource = adapter.getASResource(xtextResource);
 			assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
 			assertNoValidationErrors("Pivot validation errors", pivotResource.getContents().get(0));
-			Resource ecoreResource = AS2Ecore.createResource(metaModelManager, pivotResource, ecoreURI, null);
+			Resource ecoreResource = AS2Ecore.createResource(metamodelManager, pivotResource, ecoreURI, null);
 			assertNoResourceErrors("To Ecore errors", ecoreResource);
 			ecoreResource.save(null);
 		}
@@ -323,8 +323,8 @@ public class XtextTestCase extends PivotTestCase
 		writer.close();
 	}
 
-	protected Resource getPivotFromEcore(MetaModelManager metaModelManager, Resource ecoreResource) {
-		Ecore2AS ecore2Pivot = Ecore2AS.getAdapter(ecoreResource, metaModelManager);
+	protected Resource getPivotFromEcore(MetamodelManager metamodelManager, Resource ecoreResource) {
+		Ecore2AS ecore2Pivot = Ecore2AS.getAdapter(ecoreResource, metamodelManager);
 		Model pivotRoot = ecore2Pivot.getPivotModel();
 		Resource pivotResource = pivotRoot.eResource();
 		assertNoResourceErrors("Normalisation failed", pivotResource);

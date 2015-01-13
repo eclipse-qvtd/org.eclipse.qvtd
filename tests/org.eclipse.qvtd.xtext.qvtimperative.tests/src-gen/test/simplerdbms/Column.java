@@ -21,13 +21,13 @@ import org.eclipse.emf.common.util.EList;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link test.simplerdbms.Column#getOwner <em>Owner</em>}</li>
  *   <li>{@link test.simplerdbms.Column#getType <em>Type</em>}</li>
  *   <li>{@link test.simplerdbms.Column#getForeignKeys <em>Foreign Keys</em>}</li>
  *   <li>{@link test.simplerdbms.Column#getKey <em>Key</em>}</li>
  * </ul>
- * </p>
  *
  * @see test.simplerdbms.SimplerdbmsPackage#getColumn()
  * @model

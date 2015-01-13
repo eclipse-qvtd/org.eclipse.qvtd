@@ -20,7 +20,7 @@ package	org.eclipse.qvtd.pivot.qvtcore.util;
 import java.lang.Boolean;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.utilities.AS2XMIid;
+import org.eclipse.ocl.pivot.internal.utilities.AS2XMIid;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseAS2XMIidVisitor;
 
 /**

@@ -106,7 +106,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		assert asModel.eContainer() == null;
 		TopLevelCS csDocument = context.refreshElement(TopLevelCS.class, QVTimperativeCSPackage.Literals.TOP_LEVEL_CS, asModel);
 		csDocument.setPivot(asModel);
-		context.refreshList(csDocument.getOwnedImports(), context.visitDeclarations(ImportCS.class, asModel.getUnit(), null));
+		context.refreshList(csDocument.getOwnedImports(), context.visitDeclarations(ImportCS.class, asModel.getOwnedImports(), null));
 		List<Mapping> asMappings = null;
 		List<Function> asQueries = null;
 		List<Transformation> asTransformations = null;
@@ -231,7 +231,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		if (asVariable.eContainer() instanceof MappingLoop) {
 			VariableCS csVariable = context.refreshNamedElement(VariableCS.class, EssentialOCLCSPackage.Literals.VARIABLE_CS, asVariable);
 			Type type = asVariable.getType();
-			if ((type instanceof CollectionType) && (((CollectionType)type).getUnspecializedElement() != context.getMetaModelManager().getStandardLibrary().getCollectionType())) {
+			if ((type instanceof CollectionType) && (((CollectionType)type).getUnspecializedElement() != context.getMetamodelManager().getStandardLibrary().getCollectionType())) {
 				PivotUtil.debugWellContainedness(type);
 				type = ((CollectionType)type).getElementType();
 			}

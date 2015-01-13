@@ -11,15 +11,15 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.manager.MetaModelManager;
+import org.eclipse.ocl.pivot.internal.EnvironmentFactoryInternal;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
 public class QVTiRootEvaluationEnvironment extends QVTiEvaluationEnvironment
 {
     protected final @NonNull Transformation transformation;
 
-    public QVTiRootEvaluationEnvironment(@NonNull MetaModelManager metaModelManager, @NonNull QVTiModelManager modelManager, @NonNull Transformation transformation) {
-		super(metaModelManager, modelManager);
+    public QVTiRootEvaluationEnvironment(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull QVTiModelManager modelManager, @NonNull Transformation transformation) {
+		super(environmentFactory, modelManager);
 		this.transformation = transformation;
 	}
 

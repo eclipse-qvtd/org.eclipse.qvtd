@@ -22,7 +22,6 @@ import test.simpleuml.SimpleumlPackage;
  * An implementation of the model object '<em><b>Primitive Data Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * </p>
  *
  * @generated
  */

@@ -10,10 +10,10 @@ package classes;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link classes.Class#getSuperClass <em>Super Class</em>}</li>
  * </ul>
- * </p>
  *
  * @see classes.ClassesPackage#getClass_()
  * @model

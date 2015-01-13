@@ -8,15 +8,15 @@
         name="templateExpression" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore#QVTTemplate.TemplateExp"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.Key" name="Key" eSuperTypes="../../org.eclipse.ocl.pivot.internal/model/Pivot.ecore#//Element">
+  <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.Key" name="Key" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Element">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Key.identifies"
-        name="identifies" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot.internal/model/Pivot.ecore#//Class">
+        name="identifies" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Class">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="key"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Key.part"
-        name="part" ordered="false" upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot.internal/model/Pivot.ecore#//Property">
+        name="part" ordered="false" upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Property">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="key"/>
       </eAnnotations>
@@ -25,7 +25,7 @@
         name="transformation" eType="#QVTRelation.RelationalTransformation" transient="true"
         eOpposite="#QVTRelation.RelationalTransformation.ownedKey"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="oppositePart" ordered="false"
-        upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot.internal/model/Pivot.ecore#//Property">
+        upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Property">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="oppKey"/>
       </eAnnotations>
@@ -34,12 +34,12 @@
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.Relation" name="Relation"
       eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Rule">
     <eStructuralFeatures xsi:type="ecore:EAttribute" xmi:id="QVTRelation.Relation.isTopLevel"
-        name="isTopLevel" eType="ecore:EDataType ../../org.eclipse.ocl.pivot.internal/model/Pivot.ecore#//Boolean"/>
+        name="isTopLevel" eType="ecore:EDataType ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Boolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Relation.operationalImpl"
         name="operationalImpl" ordered="false" upperBound="-1" eType="#QVTRelation.RelationImplementation"
         containment="true" eOpposite="#QVTRelation.RelationImplementation.relation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Relation.variable"
-        name="variable" ordered="false" upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot.internal/model/Pivot.ecore#//Variable"
+        name="variable" ordered="false" upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.Relation.when"
         name="when" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Pattern"
@@ -57,9 +57,9 @@
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.RelationCallExp" name="RelationCallExp"
-      eSuperTypes="../../org.eclipse.ocl.pivot.internal/model/Pivot.ecore#//OCLExpression">
+      eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationCallExp.argument"
-        name="argument" lowerBound="2" upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot.internal/model/Pivot.ecore#//OCLExpression"
+        name="argument" lowerBound="2" upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
         containment="true">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="relationCallExp"/>
@@ -84,19 +84,19 @@
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationDomain.pattern"
         name="pattern" eType="#QVTRelation.DomainPattern" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationDomain.rootVariable"
-        name="rootVariable" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot.internal/model/Pivot.ecore#//Variable"/>
+        name="rootVariable" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.RelationDomainAssignment"
-      name="RelationDomainAssignment" eSuperTypes="../../org.eclipse.ocl.pivot.internal/model/Pivot.ecore#//Element">
+      name="RelationDomainAssignment" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Element">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationDomainAssignment.valueExp"
-        name="valueExp" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot.internal/model/Pivot.ecore#//OCLExpression"
+        name="valueExp" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OCLExpression"
         containment="true">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="domainAssignment"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationDomainAssignment.variable"
-        name="variable" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot.internal/model/Pivot.ecore#//Variable">
+        name="variable" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable">
       <eAnnotations source="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName">
         <details key="body" value="domainAssignment"/>
       </eAnnotations>
@@ -104,9 +104,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RelationModel" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//BaseModel"/>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.RelationImplementation"
-      name="RelationImplementation" eSuperTypes="../../org.eclipse.ocl.pivot.internal/model/Pivot.ecore#//Element">
+      name="RelationImplementation" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Element">
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationImplementation.impl"
-        name="impl" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot.internal/model/Pivot.ecore#//Operation"/>
+        name="impl" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Operation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationImplementation.inDirectionOf"
         name="inDirectionOf" lowerBound="1" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//TypedModel"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationImplementation.relation"

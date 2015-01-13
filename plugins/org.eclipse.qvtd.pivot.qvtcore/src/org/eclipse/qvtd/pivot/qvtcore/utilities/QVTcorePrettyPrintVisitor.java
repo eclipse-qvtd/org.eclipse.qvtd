@@ -11,7 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtcore.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.prettyprint.PrettyPrinter;
+import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;

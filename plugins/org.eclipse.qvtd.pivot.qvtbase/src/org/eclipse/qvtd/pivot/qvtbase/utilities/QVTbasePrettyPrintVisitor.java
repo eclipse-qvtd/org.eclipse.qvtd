@@ -11,8 +11,9 @@
 package org.eclipse.qvtd.pivot.qvtbase.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.prettyprint.EssentialOCLPrettyPrintVisitor;
-import org.eclipse.ocl.pivot.prettyprint.PrettyPrinter;
+import org.eclipse.ocl.pivot.Import;
+import org.eclipse.ocl.pivot.internal.prettyprint.EssentialOCLPrettyPrintVisitor;
+import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -22,7 +23,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.Unit;
 import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
 
 public class QVTbasePrettyPrintVisitor extends EssentialOCLPrettyPrintVisitor implements QVTbaseVisitor<Object>
@@ -82,7 +82,7 @@ public class QVTbasePrettyPrintVisitor extends EssentialOCLPrettyPrintVisitor im
 	}
 
 	@Override
-	public Object visitUnit(@NonNull Unit object) {
+	public Object visitImport(@NonNull Import object) {
 		context.appendName(object);
 		return null;
 	}

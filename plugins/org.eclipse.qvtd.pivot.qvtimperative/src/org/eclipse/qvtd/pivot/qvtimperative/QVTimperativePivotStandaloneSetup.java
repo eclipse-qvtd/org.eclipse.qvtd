@@ -40,7 +40,7 @@ public class QVTimperativePivotStandaloneSetup
 	public static void init() {
 		QVTcoreBasePivotStandaloneSetup.doSetup();
 		QVTimperativePivotScoping.init();
-		QVTimperativeASResourceFactory.INSTANCE.getClass();
+		QVTimperativeASResourceFactory.getInstance();
 		QVTimperativeToStringVisitor.FACTORY.getClass();
 	}
 	
@@ -66,7 +66,7 @@ public class QVTimperativePivotStandaloneSetup
 //		Map<String, Object> extensionToFactoryMap = resourceFactoryRegistry.getExtensionToFactoryMap();
 //		if (!extensionToFactoryMap.containsKey("qvtixmi"))
 //			extensionToFactoryMap.put("qvtixmi", QVTimperativeResourceFactoryImpl.INSTANCE);
-		MetaModelManager.installContentHandler(ContentHandler.Registry.NORMAL_PRIORITY, QVTI_CONTENT_HANDLER);
+		MetamodelManager.installContentHandler(ContentHandler.Registry.NORMAL_PRIORITY, QVTI_CONTENT_HANDLER);
 	} */
 
 	public Injector createInjector() {

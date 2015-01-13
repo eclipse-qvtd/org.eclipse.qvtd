@@ -10,10 +10,10 @@ package classescs;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link classescs.ClassCS#getExtends <em>Extends</em>}</li>
  * </ul>
- * </p>
  *
  * @see classescs.ClassescsPackage#getClassCS()
  * @model

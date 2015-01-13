@@ -2506,7 +2506,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     }
                     if ( state.backtracking==0 ) {
                        
-                      	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getMetaModelIdsNamespaceCrossReference_2_0_0()); 
+                      	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getMetamodelIdsNamespaceCrossReference_2_0_0()); 
                       	    
                     }
                     pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleModelDeclCS1789);
@@ -2560,7 +2560,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     }
                     if ( state.backtracking==0 ) {
                        
-                      	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getMetaModelIdsNamespaceCrossReference_2_1_1_0()); 
+                      	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getMetamodelIdsNamespaceCrossReference_2_1_1_0()); 
                       	    
                     }
                     pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleModelDeclCS1835);
@@ -2620,7 +2620,7 @@ public class InternalQVTrelationParser extends AbstractInternalAntlrParser {
                     	    }
                     	    if ( state.backtracking==0 ) {
                     	       
-                    	      	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getMetaModelIdsNamespaceCrossReference_2_1_2_1_0()); 
+                    	      	        newCompositeNode(grammarAccess.getModelDeclCSAccess().getMetamodelIdsNamespaceCrossReference_2_1_2_1_0()); 
                     	      	    
                     	    }
                     	    pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleModelDeclCS1875);

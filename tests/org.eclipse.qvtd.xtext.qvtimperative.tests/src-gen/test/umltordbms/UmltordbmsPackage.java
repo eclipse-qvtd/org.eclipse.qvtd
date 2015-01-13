@@ -360,6 +360,46 @@ public interface UmltordbmsPackage extends EPackage {
 	int FROM_ATTRIBUTE_OWNER = 4;
 
 	/**
+	 * The meta object id for the '{@link test.umltordbms.impl.ClassToTableImpl <em>Class To Table</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see test.umltordbms.impl.ClassToTableImpl
+	 * @see test.umltordbms.impl.UmltordbmsPackageImpl#getClassToTable()
+	 * @generated
+	 */
+	int CLASS_TO_TABLE = 2;
+
+	/**
+	 * The meta object id for the '{@link test.umltordbms.impl.NonLeafAttributeImpl <em>Non Leaf Attribute</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see test.umltordbms.impl.NonLeafAttributeImpl
+	 * @see test.umltordbms.impl.UmltordbmsPackageImpl#getNonLeafAttribute()
+	 * @generated
+	 */
+	int NON_LEAF_ATTRIBUTE = 5;
+
+	/**
+	 * The meta object id for the '{@link test.umltordbms.impl.PackageToSchemaImpl <em>Package To Schema</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see test.umltordbms.impl.PackageToSchemaImpl
+	 * @see test.umltordbms.impl.UmltordbmsPackageImpl#getPackageToSchema()
+	 * @generated
+	 */
+	int PACKAGE_TO_SCHEMA = 6;
+
+	/**
+	 * The meta object id for the '{@link test.umltordbms.impl.PrimitiveToNameImpl <em>Primitive To Name</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see test.umltordbms.impl.PrimitiveToNameImpl
+	 * @see test.umltordbms.impl.UmltordbmsPackageImpl#getPrimitiveToName()
+	 * @generated
+	 */
+	int PRIMITIVE_TO_NAME = 7;
+
+	/**
 	 * The feature id for the '<em><b>From Attributes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -385,16 +425,6 @@ public interface UmltordbmsPackage extends EPackage {
 	 * @ordered
 	 */
 	int FROM_ATTRIBUTE_OWNER_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link test.umltordbms.impl.ClassToTableImpl <em>Class To Table</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see test.umltordbms.impl.ClassToTableImpl
-	 * @see test.umltordbms.impl.UmltordbmsPackageImpl#getClassToTable()
-	 * @generated
-	 */
-	int CLASS_TO_TABLE = 2;
 
 	/**
 	 * The feature id for the '<em><b>From Attributes</b></em>' containment reference list.
@@ -487,16 +517,6 @@ public interface UmltordbmsPackage extends EPackage {
 	int CLASS_TO_TABLE_OPERATION_COUNT = FROM_ATTRIBUTE_OWNER_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link test.umltordbms.impl.NonLeafAttributeImpl <em>Non Leaf Attribute</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see test.umltordbms.impl.NonLeafAttributeImpl
-	 * @see test.umltordbms.impl.UmltordbmsPackageImpl#getNonLeafAttribute()
-	 * @generated
-	 */
-	int NON_LEAF_ATTRIBUTE = 5;
-
-	/**
 	 * The feature id for the '<em><b>From Attributes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -569,16 +589,6 @@ public interface UmltordbmsPackage extends EPackage {
 	int NON_LEAF_ATTRIBUTE_OPERATION_COUNT = FROM_ATTRIBUTE_OWNER_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link test.umltordbms.impl.PackageToSchemaImpl <em>Package To Schema</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see test.umltordbms.impl.PackageToSchemaImpl
-	 * @see test.umltordbms.impl.UmltordbmsPackageImpl#getPackageToSchema()
-	 * @generated
-	 */
-	int PACKAGE_TO_SCHEMA = 6;
-
-	/**
 	 * The feature id for the '<em><b>Classes To Tables</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -642,16 +652,6 @@ public interface UmltordbmsPackage extends EPackage {
 	int PACKAGE_TO_SCHEMA_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link test.umltordbms.impl.PrimitiveToNameImpl <em>Primitive To Name</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see test.umltordbms.impl.PrimitiveToNameImpl
-	 * @see test.umltordbms.impl.UmltordbmsPackageImpl#getPrimitiveToName()
-	 * @generated
-	 */
-	int PRIMITIVE_TO_NAME = 7;
-
-	/**
 	 * The feature id for the '<em><b>Owner</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -704,7 +704,6 @@ public interface UmltordbmsPackage extends EPackage {
 	 * @ordered
 	 */
 	int PRIMITIVE_TO_NAME_OPERATION_COUNT = 0;
-
 
 	/**
 	 * Returns the meta object for class '{@link test.umltordbms.AttributeToColumn <em>Attribute To Column</em>}'.

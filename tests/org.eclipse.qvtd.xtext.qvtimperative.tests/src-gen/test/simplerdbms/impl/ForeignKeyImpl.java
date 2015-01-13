@@ -33,13 +33,14 @@ import test.simplerdbms.Table;
  * An implementation of the model object '<em><b>Foreign Key</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link test.simplerdbms.impl.ForeignKeyImpl#getRefersTo <em>Refers To</em>}</li>
  *   <li>{@link test.simplerdbms.impl.ForeignKeyImpl#getColumn <em>Column</em>}</li>
  *   <li>{@link test.simplerdbms.impl.ForeignKeyImpl#getOwner <em>Owner</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */

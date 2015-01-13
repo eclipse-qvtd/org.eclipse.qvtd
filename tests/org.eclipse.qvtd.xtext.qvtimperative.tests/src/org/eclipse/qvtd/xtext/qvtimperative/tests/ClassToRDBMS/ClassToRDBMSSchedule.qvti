@@ -1,0 +1,617 @@
+import SimpleUML: 'SimpleUML.ecore'::simpleuml;
+import SimpleRDBMS: 'SimpleRDBMS.ecore'::simplerdbms;
+import UMLtoRDBMS: 'UMLtoRDBMS.ecore'::umltordbms;
+
+transformation umlRdbms {
+    uml imports SimpleUML;
+    rdbms imports SimpleRDBMS;
+    middle imports UMLtoRDBMS;
+}
+
+map __root__ in umlRdbms {
+    
+    where () {}
+    for p1 : SimpleUML::Package in SimpleUML::Package.allInstances() {
+        call packageToSchemaLM {
+            p := p1;
+        }
+    }
+}
+
+map packageToSchemaLM in umlRdbms {
+    check uml (p:Package) { }
+    enforce middle () {
+        realize p2s:PackageToSchema
+    }
+    where () {
+        p2s.umlPackage := p;
+        p2s.name := p.name;
+    }
+    /* L to M */
+    -- A package has elements, elements can be Classifiers or Associations. A
+    -- classifier can be a Class or a PrimitiveDataType
+    
+    -- PrimitiveDataType
+    for child in p.elements {
+	    call integerToNumberLM {
+	        p := p;
+	        prim := child;
+	        p2s := p2s;
+	    }
+	    call booleanToBooleanLM {
+	        p := p;
+	        prim := child;
+	        p2s := p2s;
+	    }
+	    call stringToVarcharLM {
+	        p := p;
+	        prim := child;
+	        p2s := p2s;
+	    }
+	}
+    for child in p.elements {
+	    -- Class
+	    call classToTableLM {
+	        p := p;
+	        c := child;
+	        p2s := p2s;
+	    }
+	    -- Associations
+		    call associationToForeignKeyLM {
+	        p := p;
+	        a := child;
+	        p2s := p2s;
+	    }
+	}
+    
+    /* M to M */
+    
+    
+    /* M to R */
+    call packageToSchemaMR {
+        p2s := p2s;
+    }
+    
+}
+
+map packageToSchemaMR in umlRdbms {
+    check middle (p2s:PackageToSchema) {}
+    enforce rdbms () {
+        realize s:Schema
+    }
+    where () {
+        p2s.schema := s;
+    }
+    call packageToSchemaMR_1 {
+        s_1 := s;
+        p2s_1 := p2s;
+    }
+    for child in p2s.primitivesToNames {
+	    call integerToNumberMR {
+	        p2s := p2s;
+	        p2n := child;
+	    }
+	    call booleanToBooleanMR {
+	        p2s := p2s;
+	        p2n := child;
+	    }
+	    call stringToVarcharMR {
+	        p2s := p2s;
+	        p2n := child;
+	    }
+    }
+    for child in p2s.classesToTables {
+	    call classToTableMR {
+	        p2s := p2s;
+	        c2t := child;
+	        s := s;
+	    }
+	}
+}
+
+map packageToSchemaMR_1 in umlRdbms {
+    check middle (p2s_1:PackageToSchema) {}
+    enforce rdbms (s_1:Schema) {}
+    where () {
+        s_1.name := p2s_1.name;
+    }
+}
+
+map integerToNumberLM in umlRdbms {
+    check uml (p:Package, prim:PrimitiveDataType) {}
+    enforce middle (p2s:PackageToSchema) {
+    	realize p2n:PrimitiveToName
+    }
+    where (prim.namespace = p;
+        prim.name = 'Integer';
+        p2s.umlPackage=p;
+    ) {
+        p2n.owner := p2s;
+        p2n.primitive := prim;
+        p2n.name := prim.name + '2' + 'NUMBER';     
+    }
+}
+
+map integerToNumberMR in umlRdbms {
+    check middle (p2s:PackageToSchema, p2n:PrimitiveToName) {}
+    enforce rdbms () {}
+    where (
+    	p2n.owner = p2s;
+        p2n.name = 'Integer' + '2' + 'NUMBER';
+    ) {}
+}
+
+map booleanToBooleanLM in umlRdbms {
+    check uml (p:Package, prim:PrimitiveDataType) { }
+    enforce middle (p2s:PackageToSchema) {
+    	realize p2n:PrimitiveToName
+    }
+    where (
+        prim.namespace = p;
+        prim.name = 'Boolean';
+        p2s.umlPackage=p;
+    ) {
+        p2n.owner := p2s;
+        p2n.primitive := prim;
+        p2n.name := prim.name + '2' + 'BOOLEAN';
+    }
+}
+
+map booleanToBooleanMR in umlRdbms {
+    check middle (p2s:PackageToSchema, p2n:PrimitiveToName) {}
+    enforce rdbms () {}
+    where (
+        p2n.owner = p2s;
+        p2n.name = 'Boolean' + '2' + 'BOOLEAN';
+    ) {}
+}
+
+map stringToVarcharLM in umlRdbms {
+    check uml (p:Package, prim:PrimitiveDataType) { }
+    enforce middle (p2s:PackageToSchema) {
+    	realize p2n:PrimitiveToName
+    }
+    where (
+        prim.namespace = p;
+        prim.name = 'String';
+        p2s.umlPackage=p;
+    ) {
+        p2n.owner := p2s;
+        p2n.primitive := prim;
+        p2n.name := prim.name + '2' + 'VARCHAR';
+    }
+}
+
+map stringToVarcharMR in umlRdbms {
+    check middle (p2s:PackageToSchema, p2n:PrimitiveToName) {}
+    enforce rdbms () {}
+    where (
+        p2n.owner = p2s;
+        p2n.name = 'String' + '2' + 'VARCHAR';
+    ) {}
+}
+
+query umlRdbms::getAllSupers(cls : SimpleUML::Class) : Set(SimpleUML::Class) {
+    cls.general->collect(gen | getAllSupers(gen))->including(cls)->asSet()
+}
+
+query umlRdbms::getAllAttributes(cls :  SimpleUML::Class) : Set( SimpleUML::Attribute) {
+    getAllSupers(cls).attributes -- ->collect(c | c.attribute)
+}
+    
+query umlRdbms::getAllForwards(cls :  SimpleUML::Class) : Set( SimpleUML::Association) {
+    getAllSupers(cls).forward
+}
+
+map classToTableLM in umlRdbms {
+    check uml (p:Package, c:Class) { }
+    enforce middle (p2s:PackageToSchema) {
+    	realize c2t:ClassToTable
+    }
+    where (
+        c.kind = 'persistent';
+        c.namespace = p;
+        p2s.umlPackage=p;
+    ) {
+        c2t.owner := p2s;
+        c2t.umlClass := c;
+        c2t.name := c.name;
+    }
+    -- A Class has attributes
+    for anAttribute in c.attributes {
+	    call classPrimitiveAttributesLM {
+	        c := c;
+	        a := anAttribute;
+	        fao := c2t;
+	    }
+	    call classComplexAttributesLM {
+	        c := c;
+	        a := anAttribute;
+	        fao := c2t;
+	    }
+	    call complexAttributePrimitiveAttributesLM {
+	        ca := anAttribute;
+	        c := anAttribute.type;
+	    }
+	    call complexAttributeComplexAttributesLM {
+	        ca := anAttribute;
+	        c := anAttribute.type;
+	    }
+    }
+}
+
+map classToTableMR in umlRdbms {
+    check middle (p2s:PackageToSchema, c2t:ClassToTable) {}
+    enforce rdbms (s:Schema) {
+        realize t:Table
+    }
+    where (
+        c2t.owner = p2s;
+    ) {
+        t.kind := 'base';
+        t.schema := s;
+    }
+    call classToTableMR_1 {
+        c2t_1 := c2t;
+        t_1 := t;
+    }    
+    call classToTableMR_2 {
+        t_2 := t;
+        c2t_2 := c2t;
+    }
+    for child in c2t.associationsToForeignKeys {
+	    call associationToForeignKeyMR {
+	        p2s := p2s;
+	        dt := t;
+	--        sc2t := c2t;
+	--        dc2t <= c2t.associationsToForeignKeys.referenced;
+        sc2t := t.ClassToTable;
+        dc2t := t.ClassToTable;
+	        a2f := child;
+	        s := s;
+	        st := t;
+	        rk := c2t.primaryKey;
+	    }
+    }
+    -- A Class has attributes
+    for child in c2t.fromAttributes->union(c2t.fromAttributes->selectByKind(umltordbms::NonLeafAttribute).fromAttributes) {
+	    call attributeColumnsMR {
+	        c2t := c2t;
+	        a2c := child;
+	        t := t;
+	    }
+    }
+}
+
+map classToTableMR_1 in umlRdbms {
+    check middle (c2t_1:ClassToTable) {}
+    enforce rdbms (t_1:Table) { }
+    where () {
+        c2t_1.table := t_1;
+        t_1.name := c2t_1.name;
+    }
+}
+
+map classToTableMR_2 in umlRdbms {
+    check middle (c2t_2:ClassToTable) {}
+    enforce rdbms (t_2:Table) {
+        realize pk:Key,
+        realize pc:Column
+    }
+    where () {
+        pk.owner := t_2;
+        pk.kind := 'primary';
+        pc.owner := t_2;
+        pc.key := OrderedSet(Key){pk};
+        pc.type := 'NUMBER';
+    }
+    call classToTableMR_2_1 {
+        c2t_2_1 := c2t_2;
+        pk_2_1 := pk;
+        pc_2_1 := pc; -- TODO Check this
+    }
+    call classToTableMR_2_2 {
+        pk_2_2 := pk;
+        pc_2_2 := pc;
+        t_2_2 := t_2;
+    }
+}
+
+map classToTableMR_2_1 in umlRdbms {
+    check middle (c2t_2_1:ClassToTable) {}
+	enforce rdbms (pk_2_1:Key, pc_2_1:Column) {}
+    where () {
+        c2t_2_1.primaryKey := pk_2_1;
+        c2t_2_1.column := pc_2_1;
+    }
+}
+        
+map classToTableMR_2_2 in umlRdbms {
+    check middle () {}
+    enforce rdbms (pk_2_2:Key, pc_2_2:Column, t_2_2:Table) {}
+    where () {
+        pc_2_2.name := t_2_2.name+'_tid';
+        pk_2_2.name := t_2_2.name+'_pk';
+    }
+}
+
+map associationToForeignKeyLM in umlRdbms {
+    check uml (p:Package, sc:Class, dc:Class, a:Association) {
+--            sc.namespace = p;
+        }
+    enforce middle (p2s:PackageToSchema, sc2t:ClassToTable, dc2t:ClassToTable) {
+	     realize a2f:AssociationToForeignKey
+	}
+    where (
+        a.namespace = p;
+        sc := a.source;
+        dc := a.destination;
+        sc.namespace = p;
+        -- getAllForwards(sc)->includes(a);
+        -- getAllSupers(dc)->includes(a.destination);
+        p2s.umlPackage = p;
+        sc2t := sc.ClassToTable;
+        dc2t := dc.ClassToTable;
+    ) {
+        sc2t.owner := p2s;
+        a2f.owner := sc2t;
+        a2f.referenced := dc2t;
+        a2f.association := a;
+        a2f.name := if a.destination=dc and a.source=sc
+                        then a.name
+                        else if a.destination<>dc and a.source=sc
+                        then dc.name+'_'+a.name
+                        else if a.destination=dc and a.source<>sc
+                        then a.name+'_'+sc.name
+                        else dc.name+'_'+a.name+'_'+sc.name
+                        endif endif endif;
+    }
+}
+
+map associationToForeignKeyMR in umlRdbms {
+    check middle (p2s:PackageToSchema, sc2t:ClassToTable, dc2t:ClassToTable, a2f:AssociationToForeignKey) {}
+    enforce rdbms (s:Schema, st:Table, dt:Table, rk:Key) {
+        realize fk:ForeignKey,
+        realize fc:Column
+    }
+    where (
+        a2f.owner = sc2t;
+        a2f.referenced = dc2t;
+        p2s.schema = s;
+        --sc2t.table = st;
+        --dc2t.table = dt; 
+--        sc2t := st.ClassToTable;
+--        dc2t := dt.ClassToTable;
+        st.schema = s;
+        -- rk.owner = dt;
+        -- rk.kind = 'primary';
+    ) {
+        sc2t.owner = p2s;
+        fk.name := a2f.name;
+        fc.name := a2f.name +'_tid';
+        fk.owner := st;
+        fc.owner := st;
+    }
+    call associationToForeignKeyMR_1 {
+        fk := fk;
+        fc := fc;
+        dt := a2f.referenced.table;
+        rk := rk;
+    }
+    call associationToForeignKeyMR_2 {
+        a2f_1 := a2f;
+        fk_1 := fk;
+        fc_1 := fc;
+    }
+}
+
+map associationToForeignKeyMR_1 in umlRdbms {
+    check middle () {}
+    enforce rdbms (fk:ForeignKey, fc:Column, dt:Table, rk:Key) {}
+    where () {
+        fk.refersTo := rk;
+        fc.foreignKeys := OrderedSet(ForeignKey){fk};
+        fc.type := rk.column->first().type;
+    }
+}
+
+map associationToForeignKeyMR_2 in umlRdbms {
+    check middle (a2f_1:AssociationToForeignKey) {}
+    enforce rdbms (fk_1:ForeignKey, fc_1:Column) {}   
+    where () {
+        a2f_1.foreignKey := fk_1;
+        a2f_1.column := fc_1;
+    }
+}
+
+map classPrimitiveAttributesLM in umlRdbms {
+    check uml (c:Class, t:PrimitiveDataType, a:Attribute) {
+        }
+    enforce middle (fao:ClassToTable, p2n:PrimitiveToName) {
+    	realize atc:AttributeToColumn
+    }
+    where (
+        a.owner = c;
+        --getAllAttributes(c)->includes(a);
+        t := a.type;
+    	fao.umlClass = c;
+        p2n := t.PrimitiveToName;
+    
+    ) {
+        atc.attribute := a;
+        atc.owner := fao;
+        atc.type := p2n;
+        atc.kind := a.kind;
+        atc.name := a.name;
+        atc.leafs := Set(AttributeToColumn) {atc};
+    }
+}
+
+map classComplexAttributesLM in umlRdbms {
+    check uml (c:Class, t:Class, a:Attribute) { 
+        }
+    enforce middle (fao:ClassToTable) {
+    	realize fa:NonLeafAttribute
+    }
+    where (
+        a.owner = c;
+        --getAllAttributes(c)->includes(a);
+        t := a.type;
+        fao.umlClass=c;
+    ) {
+        fa.attribute := a;
+        fa.owner := fao;
+        fa.kind := a.kind;
+        fa.name := a.name;
+        fa.leafs := fao.fromAttributes.leafs->asSet();
+    }
+}
+
+map complexAttributePrimitiveAttributesLM in umlRdbms {
+    check uml (c:Class, ca:Attribute) {
+        }
+    enforce middle (fao:NonLeafAttribute) {}
+    where (
+        ca.type = c;
+        -- getAllAttributes(c)->includes(a);
+        fao := ca.FromAttribute;
+    ) {}
+    for anAttribute in c.attributes {
+	    call complexAttributePrimitiveAttributesLM_1 {
+	        c_1 := c;
+	        ca_1 := ca;
+	        fao_1 := fao;
+	        a_1 := anAttribute;
+	    }
+	}
+}
+
+map complexAttributePrimitiveAttributesLM_1 in umlRdbms {
+    check uml (c_1:Class, t_1:PrimitiveDataType, a_1:Attribute, ca_1:Attribute) {
+        }
+    enforce middle (fao_1:NonLeafAttribute, p2n_1:PrimitiveToName)
+    {
+        realize fa:AttributeToColumn
+    }
+    where (
+        t_1 := a_1.type;
+        --getAllAttributes(c)->includes(a);
+        p2n_1 := t_1.PrimitiveToName;
+    ) {
+        fa.owner := fao_1;    
+        fa.leafs := Set(AttributeToColumn) {fa};
+        fa.attribute := a_1;
+        fa.type := p2n_1;
+        fa.kind := a_1.kind;
+        fa.name := ca_1.name + '_' + a_1.name;
+    }
+}
+
+map complexAttributeComplexAttributesLM in umlRdbms {
+    check uml (c:Class, ca:Attribute) {
+        }
+    enforce middle (fao:NonLeafAttribute) {}
+    where (
+        ca.type = c;
+        --getAllAttributes(c)->includes(a);
+        fao := ca.FromAttribute;
+    ) {}
+    for anAttribute in c.attributes {
+    	call complexAttributeComplexAttributesLM_1 {
+	        ca_1 := ca;
+	        a_1 := anAttribute;
+	        c_1 := c;
+	        fao_1 := fao;
+	    }
+	}
+}
+
+map complexAttributeComplexAttributesLM_1 in umlRdbms {
+    check uml (c_1:Class, ca_1:Attribute, t_1:Class, a_1:Attribute) {
+        }
+    enforce middle (fao_1:NonLeafAttribute) {
+    	realize fa:NonLeafAttribute
+    }
+    where (
+        a_1.owner = c_1;
+        --getAllAttributes(c)->includes(a);
+        t_1 := a_1.type;
+    ) {
+        fa.owner := fao_1;    
+        fa.leafs := fao_1.fromAttributes.leafs->asSet(); 
+        fa.attribute := a_1;
+        fa.kind := a_1.kind;
+        fa.name := ca_1.name + '_' + a_1.name;
+--        fa.attribute := t_1;
+    }
+}
+
+
+map attributeColumnsMR in umlRdbms {
+    check middle (c2t:ClassToTable, a2c:AttributeToColumn, p2n:PrimitiveToName) {}
+    enforce rdbms (t:Table, ct:String) {
+        realize c:Column
+    }
+    where (
+        -- c2t.fromAttributes.leafs->includes(a2c); -- need to go deeper in the recursion
+        -- a2c.owner = c2t;   NOT ALL a2c are owned by c2t (complex attributes) 
+        c2t.table = t;
+        p2n := a2c.type;
+        ct := p2n.typeName;
+    ) {
+        c.owner := t;
+    }
+    call attributeColumnsMR_1 {
+        a2c_1 := a2c;
+        c_1 := c;
+    }
+    call attributeColumnsMR_2 {
+     	a2c_2 := a2c;
+    	c_2 := c;
+        p2n_2 := p2n;
+        ct_2 := ct;
+    }
+    call attributeColumnsMR_3 {
+        c_3 := c;
+        a2c_3 := a2c;
+    }
+}
+
+map attributeColumnsMR_1 in umlRdbms {
+    check middle (a2c_1:AttributeToColumn) {}
+    enforce rdbms (c_1:Column) {}
+    where () {
+        a2c_1.column := c_1;
+    }
+}
+
+map attributeColumnsMR_2 in umlRdbms {
+    check middle (p2n_2:PrimitiveToName, a2c_2:AttributeToColumn) {}
+    enforce rdbms (c_2:Column, ct_2:String) {}
+    where (
+        a2c_2.type = p2n_2;
+    ) {
+        c_2.type := ct_2;
+    }
+    call attributeColumnsMR_2_1 {
+        p2n_2_1 := p2n_2;
+        ct_2_1 := ct_2;
+    }
+}
+
+map attributeColumnsMR_2_1 in umlRdbms {
+    check middle (p2n_2_1:PrimitiveToName) {}
+    enforce rdbms (ct_2_1:String) {}
+    where () {
+        p2n_2_1.typeName := ct_2_1;
+    }
+}
+
+map attributeColumnsMR_3 in umlRdbms {
+    check middle (a2c_3:AttributeToColumn) {}
+    enforce rdbms (c_3:Column) { }
+    where () {
+        c_3.name := a2c_3.name;
+        c_3.kind := a2c_3.kind;
+    }
+}

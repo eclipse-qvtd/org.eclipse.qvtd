@@ -1074,13 +1074,13 @@ public interface QVTrelationCSPackage extends EPackage {
 	int MODEL_DECL_CS__NAME = BaseCSPackage.NAMED_ELEMENT_CS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Meta Model Ids</b></em>' reference list.
+	 * The feature id for the '<em><b>Metamodel Ids</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MODEL_DECL_CS__META_MODEL_IDS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int MODEL_DECL_CS__METAMODEL_IDS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Model Decl CS</em>' class.
@@ -2675,15 +2675,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getModelDeclCS();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.ModelDeclCS#getMetaModelIds <em>Meta Model Ids</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.ModelDeclCS#getMetamodelIds <em>Metamodel Ids</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Meta Model Ids</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.ModelDeclCS#getMetaModelIds()
+	 * @return the meta object for the reference list '<em>Metamodel Ids</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.ModelDeclCS#getMetamodelIds()
 	 * @see #getModelDeclCS()
 	 * @generated
 	 */
-	EReference getModelDeclCS_MetaModelIds();
+	EReference getModelDeclCS_MetamodelIds();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.ObjectTemplateCS <em>Object Template CS</em>}'.
@@ -3363,12 +3363,12 @@ public interface QVTrelationCSPackage extends EPackage {
 		EClass MODEL_DECL_CS = eINSTANCE.getModelDeclCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Meta Model Ids</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Metamodel Ids</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MODEL_DECL_CS__META_MODEL_IDS = eINSTANCE.getModelDeclCS_MetaModelIds();
+		EReference MODEL_DECL_CS__METAMODEL_IDS = eINSTANCE.getModelDeclCS_MetamodelIds();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.ObjectTemplateCSImpl <em>Object Template CS</em>}' class.

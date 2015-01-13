@@ -13,10 +13,10 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link classescs.ElementCS#getAst <em>Ast</em>}</li>
  * </ul>
- * </p>
  *
  * @see classescs.ClassescsPackage#getElementCS()
  * @model abstract="true"

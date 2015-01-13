@@ -7,21 +7,24 @@
  * 
  * Contributors:
  *     Horacio Hoyos - initial API and implementation
+ *     Adolfo Sanchez-Barbudo Herrera (University of York) - Bug 456900
  ******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
-import org.eclipse.ocl.pivot.VariableExp;
-import org.eclipse.ocl.pivot.evaluation.EvaluationVisitorImpl;
-import org.eclipse.ocl.pivot.manager.PivotIdResolver;
+import org.eclipse.ocl.pivot.ids.IdResolver;
+import org.eclipse.ocl.pivot.internal.evaluation.EvaluationVisitorImpl;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
@@ -33,7 +36,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtbase.Unit;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
@@ -72,27 +74,53 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
      * @param env The environment
      * @param evalEnv The evaluation environment
      */
-    public QVTiAbstractEvaluationVisitor(@NonNull QVTiEnvironment env, @NonNull IQVTiEvaluationEnvironment evalEnv) {
-        super(env, evalEnv, evalEnv.getModelManager());
+    public QVTiAbstractEvaluationVisitor(@NonNull IQVTiEvaluationEnvironment evalEnv) {
+        super(evalEnv, evalEnv.getModelManager());
     }
 
-    /* (non-Javadoc)
-     * @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitImperativeModel(org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel)
-     */
-    @Override
-	public @Nullable Object visitImperativeModel(@NonNull ImperativeModel object) {
-		return visiting(object);
-    }
-    
     /* (non-Javadoc)
      * @see org.eclipse.ocl.pivot.evaluation.EvaluationVisitorImpl#createNestedEvaluator()
      */
     @Override
 	public abstract @NonNull QVTiEvaluationVisitor createNestedEvaluator();
 
-    @Override
-	public @NonNull QVTiEnvironment getEnvironment() {
-		return (QVTiEnvironment) super.getEnvironment();
+	protected void doMappingStatements(@NonNull List<MappingStatement> mappingStatements) {
+	}
+
+    protected void doPropertyAssignment(@NonNull PropertyAssignment propertyAssignment, @Nullable Integer cacheIndex) {
+		try {
+			Object slotExpValue = safeVisit(propertyAssignment.getSlotExpression());
+			if (slotExpValue instanceof EObject) {
+				Object boxedValue = safeVisit(propertyAssignment.getValue());
+				Property targetProperty = propertyAssignment.getTargetProperty();
+				Class<?> instanceClass = null;
+				EObject eTarget = targetProperty.getETarget();
+				if (eTarget instanceof EStructuralFeature) {
+					EClassifier eType = ((EStructuralFeature)eTarget).getEType();
+					if (eType != null) {
+						instanceClass = eType.getInstanceClass();
+					}
+				}
+				Object ecoreValue = metamodelManager.getIdResolver().ecoreValueOf(instanceClass, boxedValue);
+				targetProperty.initValue((EObject) slotExpValue, ecoreValue);
+				if (cacheIndex != null) {
+					getModelManager().setMiddleOpposite(cacheIndex, slotExpValue, ecoreValue);
+				}
+			} else {
+				throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
+					+ " specification. The assigment slot expression evaluates to non-ecore value");
+			}
+		} catch (InvalidValueException ex) {
+			// There was an OCLVoid value being navigated or any other/similar OCL error
+			// evaluating the slot or value expression
+			// TODO, is this an error?
+			System.out.println("visitPropertyAssignment InvalidValueException");
+		}
+	}
+
+	@Override
+	public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
+		return (QVTiEnvironmentFactory) environmentFactory;
 	}
 
 	@Override
@@ -259,6 +287,22 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
     }
 
 	/* (non-Javadoc)
+	 * @see org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor#visitUnit(org.eclipse.qvtd.pivot.qvtbase.Unit)
+	 */
+	@Override
+	public @Nullable Object visitImport(@NonNull Import object) {
+		return visiting(object);
+	}
+
+	/* (non-Javadoc)
+	 * @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitImperativeModel(org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel)
+	 */
+	@Override
+	public @Nullable Object visitImperativeModel(@NonNull ImperativeModel object) {
+		return visiting(object);
+	}
+
+	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitMappingCall(org.eclipse.qvtd.pivot.qvtimperative.MappingCall)
 	 */
 	@Override
@@ -280,9 +324,9 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 				// evaluating the binding value
 				return null;
 			}
-			Type valueType = metaModelManager.getIdResolver().getDynamicTypeOf(valueOrValues);
+			Type valueType = metamodelManager.getIdResolver().getDynamicTypeOf(valueOrValues);
 			Type varType = boundVariable.getType();
-			if ((varType != null) && valueType.conformsTo(metaModelManager.getStandardLibrary(), varType)) {
+			if ((varType != null) && valueType.conformsTo(metamodelManager.getStandardLibrary(), varType)) {
 				evaluationEnvironment.replace(boundVariable, valueOrValues);
 			}
 			else {
@@ -333,69 +377,21 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 		return true;
 	}
 
-	protected void doMappingStatements(@NonNull List<MappingStatement> mappingStatements) {
-	}
-
 	@Override
 	public @Nullable Object visitMappingStatement(@NonNull MappingStatement object) {
 		return visiting(object);	// MappingStatement is abstract
 	}
-    
-    /* (non-Javadoc)
-     * @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitMiddlePropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment)
-     */
-    @Override
+	
+	/* (non-Javadoc)
+	* @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitMiddlePropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment)
+	*/
+	@Override
 	public @Nullable Object visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment propertyAssignment) {
-        
-        OCLExpression slotExp = propertyAssignment.getSlotExpression(); 
-        Area area = ((BottomPattern)propertyAssignment.eContainer()).getArea();
-        if (area instanceof Mapping) {
-        	// TODO Check this approach
-        	//if (!(exp instanceof VariableExp)) {
-        	//    return modelManager.illFormedModelClass(VariableExp.class, exp, "visitPropertyAssignment");
-        	//}
-        	//VariableExp variableExp = (VariableExp)exp;
-            if (slotExp instanceof VariableExp ) {      // What other type of expressions are there?
-                Variable slotVar = (Variable) ((VariableExp)slotExp).getReferredVariable();
-                if(slotVar != null) {
-                    Object slotBinding = evaluationEnvironment.getValueOf(slotVar);
-                    if(slotBinding instanceof EObject) {
-                    	//  TODO define if keep the try catch for safety
-                    	Object value = null;
-                    	try {
-                    		value = safeVisit(propertyAssignment.getValue());
-            			} catch (InvalidValueException ex) {
-            				// There was an OCLVoid value being navigated or any other/similar OCL error
-            				// evaluating the binding value
-            				// TODO, is this an error?
-            				System.out.println("visitMiddlePropertyAssignment InvalidValueException");
-            			} finally {
-            				if (value != null) {
-            					// Unbox to assign to ecore type
-                        		Object unboxedValue = metaModelManager.getIdResolver().unboxedValueOf(value);
-                        		Property p = propertyAssignment.getTargetProperty();
-                                p.initValue((EObject) slotBinding, unboxedValue);
-        						Integer cacheIndex = propertyAssignment.getCacheIndex();
-        						if (cacheIndex != null) {
-        							getModelManager().setMiddleOpposite(cacheIndex, slotBinding, unboxedValue);
-        						}
-            				}
-            			}
-                    } else {
-                        throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
-                                + " specification. The assigment refers to a variable not defined in the" +
-                                " current environment");
-                    } 
-                } else {
-                    throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
-                            + " specification. The referred variable of the slot expression (" + slotExp.getType().getName() 
-                            + ") was not found.");
-                }
-            } else {
-                throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
-                        + " specification. The slot expression type (" + slotExp.getType().getName() 
-                        + ") is not supported yet.");
-            }
+		
+		Area area = ((BottomPattern)propertyAssignment.eContainer()).getArea();
+		if (area instanceof Mapping) {
+			// TODO Check this approach
+			doPropertyAssignment(propertyAssignment, propertyAssignment.getCacheIndex());
         }
         return true;
     }
@@ -441,60 +437,8 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
      */
     @Override
 	public @Nullable Object visitPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
-        
-        OCLExpression slotExp = propertyAssignment.getSlotExpression(); 
-//        Area area = ((BottomPattern)propertyAssignment.eContainer()).getArea();
-        //if (area instanceof Mapping) {
-        	// TODO Check this approach
-        	//if (!(exp instanceof VariableExp)) {
-        	//    return modelManager.illFormedModelClass(VariableExp.class, exp, "visitPropertyAssignment");
-        	//}
-        	//VariableExp variableExp = (VariableExp)exp;
-            if (slotExp instanceof VariableExp ) {      // What other type of expressions are there?
-                Variable slotVar = (Variable) ((VariableExp)slotExp).getReferredVariable();
-                if(slotVar != null) {
-                    Object slotBinding = evaluationEnvironment.getValueOf(slotVar);
-                    if(slotBinding instanceof EObject) {
-                    	Object value = safeVisit(propertyAssignment.getValue());
-                    	// Unbox to assign to ecore type
-                        value = metaModelManager.getIdResolver().unboxedValueOf(value);
-                        Property p = propertyAssignment.getTargetProperty();
-                        p.initValue((EObject) slotBinding, value);
-                        /* TODO define if keep the try catch for safety
-                        Object value = null;
-                    	try {
-                    		value = safeVisit(propertyAssignment.getValue());
-            			} catch (InvalidValueException ex) {
-            				// There was an OCLVoid value being navigated or any other/similar OCL error
-            				// evaluating the binding value
-            				// TODO, is this an error?
-            				System.out.println("visitMiddlePropertyAssignment InvalidValueException");
-            			} finally {
-            				if (value != null) {
-            					// Unbox to assign to ecore type
-                        		Object unboxedValue = metaModelManager.getIdResolver().unboxedValueOf(value);
-                        		Property p = propertyAssignment.getTargetProperty();
-                                p.initValue(slotBinding, unboxedValue);
-            				}
-            			}
-            			*/
-                    } else {
-                        throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
-                                + " specification. The assigment refers to a variable not defined in the" +
-                                " current environment");
-                    } 
-                } else {
-                    throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
-                            + " specification. The referred variable of the slot expression (" + slotExp.getType().getName() 
-                            + ") was not found.");
-                }
-            } else {
-                throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
-                        + " specification. The slot expression type (" + slotExp.getType().getName() 
-                        + ") is not supported yet.");
-            }
-        //}
-        return true;
+		doPropertyAssignment(propertyAssignment, null);
+		return true;
     }
 
 	/*
@@ -548,14 +492,6 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	}
 
 	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor#visitUnit(org.eclipse.qvtd.pivot.qvtbase.Unit)
-	 */
-	@Override
-	public @Nullable Object visitUnit(@NonNull Unit object) {
-		return visiting(object);
-	}
-
-    /* (non-Javadoc)
      * @see org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor#visitVariableAssignment(org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment)
      */
     @Override
@@ -571,14 +507,14 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 
 	@Override
 	public @Nullable Object visitVariablePredicate(@NonNull VariablePredicate variablePredicate) {     
-        PivotIdResolver idResolver = metaModelManager.getIdResolver();
+        IdResolver idResolver = metamodelManager.getIdResolver();
         // Each predicate has a conditionExpression that is an OCLExpression
         OCLExpression exp = variablePredicate.getConditionExpression();
 		Object value = ((QVTiEvaluationVisitor)undecoratedVisitor).safeVisit(exp);
         Variable variable = variablePredicate.getTargetVariable();
 		Type guardType = variable.getType();
 		Type valueType = idResolver.getDynamicTypeOf(value);
-		if ((guardType != null) && valueType.conformsTo(metaModelManager.getStandardLibrary(), guardType)) {
+		if ((guardType != null) && valueType.conformsTo(metamodelManager.getStandardLibrary(), guardType)) {
 			evaluationEnvironment.replace(variable, value);
 		} else {
 			// The initialisation fails, the guard is not met

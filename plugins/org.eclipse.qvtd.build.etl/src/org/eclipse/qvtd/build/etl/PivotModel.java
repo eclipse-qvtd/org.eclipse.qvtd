@@ -29,7 +29,6 @@ import org.eclipse.epsilon.eol.exceptions.models.EolEnumerationValueNotFoundExce
 import org.eclipse.epsilon.eol.exceptions.models.EolModelElementTypeNotFoundException;
 import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
 import org.eclipse.epsilon.eol.exceptions.models.EolNotInstantiableModelElementTypeException;
-import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.manager.MetaModelManager;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
@@ -42,19 +41,19 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 public class PivotModel extends EmfModel {
 	
 	/** The meta model manager. */
-	private MetaModelManager metaModelManager;
+	private MetamodelManager metamodelManager;
 	
 	private boolean isASResource;
 	
 	/**
 	 * Instantiates a new pivot model.
 	 *
-	 * @param metaModelManager the meta model manager
+	 * @param metamodelManager the meta model manager
 	 */
-	public PivotModel(MetaModelManager metaModelManager, boolean isASResource) {
+	public PivotModel(MetamodelManager metamodelManager, boolean isASResource) {
 		
 		this.isASResource = isASResource;
-		this.metaModelManager = metaModelManager;
+		this.metamodelManager = metamodelManager;
 	}
 	
 	/* (non-Javadoc)
@@ -63,7 +62,7 @@ public class PivotModel extends EmfModel {
 	@Override
 	public void loadModelFromUri() throws EolModelLoadingException {
 
-		ResourceSet rSet = isASResource ? metaModelManager.getASResourceSet() : metaModelManager.getExternalResourceSet();
+		ResourceSet rSet = isASResource ? metamodelManager.getASResourceSet() : metamodelManager.getExternalResourceSet();
 		try {
 			if (readOnLoad) {
 				modelImpl = rSet.getResource(modelUri, true);
@@ -194,11 +193,9 @@ public class PivotModel extends EmfModel {
 	public Transformation getTransformation() throws Exception {
 		for (EObject eContent : modelImpl.getContents()) {
 			if (eContent instanceof ImperativeModel) {
-	    		for (org.eclipse.ocl.pivot.Package aPackage : ((ImperativeModel)eContent).getOwnedPackages()) {
-	    			for (Class aClass : aPackage.getOwnedClasses()) {
-	    				if (aClass instanceof Transformation) {
-		                    return (Transformation) aClass;
-		    			}	
+	    		for (EObject eObject : ((ImperativeModel)eContent).getOwnedPackages()) {
+	    			if (eObject instanceof Transformation) {
+	                    return (Transformation) eObject;
 	    			}
 	    		}
 			}
