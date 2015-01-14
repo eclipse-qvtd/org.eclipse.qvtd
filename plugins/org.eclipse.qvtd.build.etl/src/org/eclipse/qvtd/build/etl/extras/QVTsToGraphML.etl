@@ -34,13 +34,19 @@ rule Schedule2DocumentRoot
 	graphml.graph.add(g);
 }
 
-
 rule ClassDatum2Node 
 	transform s : QVTs!ClassDatum
 	to t : GML!NodeType {
 	
 	t.id = s.type.name;
-		
+	
+	// Super dependencies (FIXME Refactor)
+	for (superDatum in s.super) {
+		var e = new GML!EdgeType;
+		e.source = t.id;
+ 		e.target = superDatum.equivalent().id;
+	}
+ 	
 	// style	
 	t.stilishNode(GML!ShapeTypeType#rectangle);
 }
@@ -58,6 +64,14 @@ rule PropertyDatum2Node
         e.source = t.id;
         e.target = s.opposite.equivalent().id;
 	}
+
+	// Super dependencies (FIXME Refactor)
+	for (superDatum in s.super) {
+		var e = new GML!EdgeType;
+		e.source = t.id;
+ 		e.target = superDatum.equivalent().id;
+	}
+	
 	
 	// Style	
 	t.stilishNode(GML!ShapeTypeType#rectangle);

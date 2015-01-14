@@ -45,19 +45,18 @@ operation QVTs!Schedule findMapOrdering()  {
 	// Marked visited mappings to avoid loops
 	var visitedAct = new Sequence();
 	var visitedNodes = new Sequence();
-	queue.addAll(rTree!Node.all().select(n | n.parent.isEmpty()));
+	queue.addAll(rTree!Node.all().select(n | n.isRootElementCandidate()));
 	while (not queue.isEmpty()) {
 	    var n = queue.first();
 	    queue.remove(n);
 	    visitedNodes.add(n);
 	    // Do stuff with n
 	    // n.println("n ");
-	    // Find all the mappings that have an output node if this type
-	    // TODO The ECoreContainment tree should save the actual type so we dont compare names!	    
-	    var baseDatum = self.datums.selectOne(x | x.type.name = n.name); // FIXME what about mappings which create any subtype?
-	    
+	    // Find all the mappings that have an output type (or subtype)
+	    // corresponding to the type of the target node
+		var baseDatum = self.datums.selectOne(x | x.correspondsWith(n));
 	    if (baseDatum.isDefined()) {
-		    for (ma in self.actions.select(aa | aa.results.exists(e | e = baseDatum))) { 
+		    for (ma in self.actions.select(aa | aa.results.exists(e | e.isDatumOrSubdatum(baseDatum)))) { 
 		        // Find the predecesors and linearize
 		        if (visitedAct.excludes(ma))
 		        	ma.getOrdering(visitedAct);
@@ -122,12 +121,10 @@ operation QVTs!MappingAction getPredecessors() : Set {
 
     //self.mapping.name.println("getPredecessors ");
 	var args = self.arguments;
-	var concreteSources =  args.collect(a | a.sources).flatten().asSet();
-	var abstractSources = self.schedule.datums.select(cd | 
-            args.select(ad | ad.type.isAbstract).exists(ad | cd.super.includes(ad)))
-            -- FIXME why does it need to be abstract? and why not super.super ?
-        .collect(a | a.sources).flatten().asSet();
-	return concreteSources.includingAll(abstractSources);
+	var subArgs = self.schedule.getAllDatums().select(subD | 
+		args.exists(datum | subD.getAllSuperDatums().includes(datum)));
+	return args.includingAll(subArgs)
+			.collect(a | a.sources).flatten().asSet();
 }
 
 /****o* MapOrdering/getMaxIndex
@@ -138,7 +135,7 @@ operation QVTs!MappingAction getPredecessors() : Set {
  * FUNCTION
  *    Get the arguments of an mapping action.
  * TODO
- *  This should be implemented as the derivied property of the mapping.   
+ *  This should be implemented as the derivied property of the mapping.
  * CONTEXT
  *  QVTs!Schedule  The Schedule
  * ANNOTATIONS
@@ -146,10 +143,43 @@ operation QVTs!MappingAction getPredecessors() : Set {
  * RETURNS
  *  QVTs!AbstractDatum	The ClassDatum for the variable's type
  *  SEE ALSO
- */		
+ */
 operation QVTs!Schedule getMaxIndex() : Integer {
 	return self.actions.sortBy(a | a.order).order.last();
 }
 
+@cached
+operation rTree!Node isRootElementCandidate() : Boolean {
+	return self.parent.isEmpty() and not self.element.isAbstract;
+}
+@cached
+operation QVTs!ClassDatum correspondsWith(node : rTree!Node) : Boolean {
+	return self.type.getETarget() = node.element;
+}
+
+@cached
+operation QVTs!AbstractDatum isDatumOrSubdatum(datum : QVTs!ClassDatum) : Boolean {
+	if (self = datum) {
+		return true;
+	} else if (datum.isKindOf(QVTs!ClassDatum)) {
+		// FIXME Rethink this
+		// With respect to PropertyDatums we will never be interested in this
+		return self.getAllSuperDatums().includes(datum);
+	} else {
+		return false;
+	}
+}
+
+@cached 
+operation QVTs!AbstractDatum getAllSuperDatums() : Sequence(QVTs!AbstractDatum) {
+	return self.asSequence().closure(x | x.super);
+}
+
+@cached
+operation QVTs!Schedule getAllDatums() : OrderedSet(QVTs!AbstractDatum) {
+	var classDatums = self.datums;
+	return classDatums.includingAll(classDatums.propertyDatums.flatten());
+}
+ 
 /* =========================================== */
 
