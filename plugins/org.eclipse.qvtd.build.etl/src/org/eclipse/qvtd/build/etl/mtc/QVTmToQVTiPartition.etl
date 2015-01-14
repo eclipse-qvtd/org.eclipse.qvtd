@@ -29,9 +29,20 @@ rule CoreModel
     transform mIn:QVTm!CoreModel
     to mOut:QVTp!ImperativeModel {
         mOut.name = mIn.name;
-        mOut.nestedPackage ::= mIn.nestedPackage;
+        mOut.ownedImports.addAll(emfTool.getECoreUtil().copyAll(mIn.ownedImports));
+        mOut.ownedPackages.addAll(mIn.ownedPackages.equivalent());
         mOut.externalURI = mIn.externalURI.replace(".qvtm.qvtc", ".qvtp.qvti");
     }
+
+rule Pacakge
+	transform pIn:QVTm!Package
+	to pOut:QVTp!Package {
+	
+		guard : pIn.name <> "$$"
+		
+		pOut.name = pIn.name;
+		pOut.ownedClasses.addAll(pIn.ownedClasses.equivalent());
+	}
 
 /****u* /org.eclipse.qvtd.build.etl/mtc/QVTmToQVTiPartition/Transformation
  * NAME
@@ -371,18 +382,17 @@ rule MRDomain
 operation  QVTp!RealizedVariable copyToVariable() : QVTp!Variable {
     var v = new QVTp!Variable;
     // Var
-    v.implicit = self.implicit;
-    v.initExpression = emfTool.getECoreUtil().copy(self.initExpression);
+    v.isImplicit = self.isImplicit;
+    v.ownedInit = emfTool.getECoreUtil().copy(self.ownedInit);
     v.representedParameter = self.representedParameter;
     // Typed Element
     v.isRequired = self.isRequired;
     v.Type = self.Type;
     // Named Element
-    v.isStatic = self.isStatic;
     v.name = self.name;
-    v.ownedAnnotation = emfTool.getECoreUtil().copyAll(self.ownedAnnotation);
+    v.ownedAnnotations = emfTool.getECoreUtil().copyAll(self.ownedAnnotations);
     // Element
-    v.extension = emfTool.getECoreUtil().copyAll(self.extension);
+    v.ownedExtensions = emfTool.getECoreUtil().copyAll(self.ownedExtensions);
     v.ownedComments = emfTool.getECoreUtil().copyAll(self.ownedComments);
     return v;
 }

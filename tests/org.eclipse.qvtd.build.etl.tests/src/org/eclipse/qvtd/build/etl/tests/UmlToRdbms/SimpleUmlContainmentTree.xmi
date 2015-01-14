@@ -1,2 +1,30 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI"/>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:eCoreContainemntTree="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree">
+  <eCoreContainemntTree:Node name="simpleuml" children="/5">
+    <element href="SimpleUML.ecore#/"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="Attribute" parent="/3" superTypes="/8">
+    <element href="SimpleUML.ecore#//Attribute"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="Association" parent="/5" superTypes="/8 /6">
+    <element href="SimpleUML.ecore#//Association"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="Class" parent="/5" children="/1" superTypes="/8 /4 /6">
+    <element href="SimpleUML.ecore#//Class"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="Classifier" parent="/5" subTypes="/3 /7" superTypes="/8 /6">
+    <element href="SimpleUML.ecore#//Classifier"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="Package" parent="/0" children="/6 /4 /3 /2 /7" superTypes="/8">
+    <element href="SimpleUML.ecore#//Package"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="PackageElement" parent="/5" subTypes="/4 /3 /2 /7" superTypes="/8">
+    <element href="SimpleUML.ecore#//PackageElement"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="PrimitiveDataType" parent="/5" superTypes="/8 /4 /6">
+    <element href="SimpleUML.ecore#//PrimitiveDataType"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="UMLModelElement" subTypes="/1 /6 /5 /4 /3 /2 /7">
+    <element href="SimpleUML.ecore#//UMLModelElement"/>
+  </eCoreContainemntTree:Node>
+</xmi:XMI>

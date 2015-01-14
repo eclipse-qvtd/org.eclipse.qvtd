@@ -1,51 +1,24 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:eCoreContainemntTree="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree">
-  <eCoreContainemntTree:Node EClassName="simplerdbms" children="/1"/>
-  <eCoreContainemntTree:Node EClassName="Schema" parent="/0" children="/2">
-    <superTypes>RModelElement</superTypes>
+  <eCoreContainemntTree:Node name="simplerdbms" children="/5">
+    <element href="SimpleRDBMS.ecore#/"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="Table" parent="/1" children="/3 /4 /5">
-    <superTypes>RModelElement</superTypes>
+  <eCoreContainemntTree:Node name="Column" parent="/6" superTypes="/4">
+    <element href="SimpleRDBMS.ecore#//Column"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="Column" parent="/2">
-    <superTypes>RModelElement</superTypes>
+  <eCoreContainemntTree:Node name="ForeignKey" parent="/6" superTypes="/4">
+    <element href="SimpleRDBMS.ecore#//ForeignKey"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="Key" parent="/2">
-    <superTypes>RModelElement</superTypes>
+  <eCoreContainemntTree:Node name="Key" parent="/6" superTypes="/4">
+    <element href="SimpleRDBMS.ecore#//Key"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="ForeignKey" parent="/2">
-    <superTypes>RModelElement</superTypes>
+  <eCoreContainemntTree:Node name="RModelElement" subTypes="/1 /6 /5 /2 /3">
+    <element href="SimpleRDBMS.ecore#//RModelElement"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="simplerdbms" children="/7"/>
-  <eCoreContainemntTree:Node EClassName="Schema" parent="/6" children="/8">
-    <superTypes>RModelElement</superTypes>
+  <eCoreContainemntTree:Node name="Schema" parent="/0" children="/6" superTypes="/4">
+    <element href="SimpleRDBMS.ecore#//Schema"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="Table" parent="/7" children="/9 /10 /11">
-    <superTypes>RModelElement</superTypes>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="Column" parent="/8">
-    <superTypes>RModelElement</superTypes>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="Key" parent="/8">
-    <superTypes>RModelElement</superTypes>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="ForeignKey" parent="/8">
-    <superTypes>RModelElement</superTypes>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="simplerdbms" children="/13"/>
-  <eCoreContainemntTree:Node EClassName="Schema" parent="/12" children="/14">
-    <superTypes>RModelElement</superTypes>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="Table" parent="/13" children="/15 /16 /17">
-    <superTypes>RModelElement</superTypes>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="Column" parent="/14">
-    <superTypes>RModelElement</superTypes>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="Key" parent="/14">
-    <superTypes>RModelElement</superTypes>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="ForeignKey" parent="/14">
-    <superTypes>RModelElement</superTypes>
+  <eCoreContainemntTree:Node name="Table" parent="/5" children="/1 /2 /3" superTypes="/4">
+    <element href="SimpleRDBMS.ecore#//Table"/>
   </eCoreContainemntTree:Node>
 </xmi:XMI>

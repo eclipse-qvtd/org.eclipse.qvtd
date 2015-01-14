@@ -264,12 +264,15 @@ public class MtcBroker {
 		uModel = qvtcToQvtu(cModel);
 		uModel.setCachingEnabled(true);
 		uModel.clearCache();
+		uModel.setStoredOnDisposal(false);
 		mModel = qvtuToQvtm(uModel);
 		mModel.setCachingEnabled(true);
 		mModel.clearCache();
+		mModel.setStoredOnDisposal(false);
 		pModel = qvtmToQvtp(mModel);
 		pModel.setCachingEnabled(true);
 		pModel.clearCache();
+		pModel.setStoredOnDisposal(false);
 		sModel = qvtpToQvts(pModel);
 		sModel.setCachingEnabled(true);
 		sModel.clearCache();
