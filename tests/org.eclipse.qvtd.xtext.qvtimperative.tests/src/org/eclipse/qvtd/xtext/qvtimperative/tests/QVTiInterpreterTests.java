@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -32,9 +33,12 @@ import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
@@ -372,4 +376,44 @@ public class QVTiInterpreterTests extends LoadTestCase
     	URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
         assertLoadable(txURI);
     }
+    
+    @Test
+    public void testClassesCS2AS_bug457239b() throws Exception {
+    	CompleteOCLStandaloneSetup.doSetup();
+    	
+    	URI baseURI = URI.createURI("platform:/resource/org.eclipse.qvtd.xtext.qvtimperative.tests/src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassesCS2AS/bug457239");
+    	URI txURI = baseURI.appendSegment("ClassesCS2ASv2_AS.qvtias"); 
+    	assertLoadable(ClassUtil.nonNullState(txURI));
+     
+    	QVTiPivotEvaluator testEvaluator =  new QVTiPivotEvaluator(ClassUtil.nonNullState(metamodelManager),
+    				ClassUtil.nonNullState(loadTransformation(metamodelManager, txURI)));
+    	    	
+    	URI csModelURI = baseURI.appendSegment("example_input.xmi");
+    	URI asModelURI = baseURI.appendSegment("example_output.xmi");
+    	URI refAsModelURI = baseURI.appendSegment("exampleV2_output_ref.xmi");
+    	
+        testEvaluator.loadModel("leftCS", ClassUtil.nonNullState(csModelURI));
+        testEvaluator.createModel("rightAS", ClassUtil.nonNullState(asModelURI), null);
+        testEvaluator.execute();
+        testEvaluator.saveModels();
+        testEvaluator.dispose();
+        
+        ResourceSet rSet = metamodelManager.getExternalResourceSet();        
+        assertSameModel(rSet.getResource(refAsModelURI, true), 
+        				rSet.getResource(asModelURI, true));
+    }
+    
+   static  protected Transformation loadTransformation(MetamodelManager metamodelManager, URI txURI) {
+    	Resource txResource = metamodelManager.getASResourceSet().getResource(txURI, true);
+    	ImperativeModel iModel = (ImperativeModel) txResource.getContents().get(0);
+    	for (org.eclipse.ocl.pivot.Package p : iModel.getOwnedPackages()) {
+    		for (org.eclipse.ocl.pivot.Class c : p.getOwnedClasses()) {
+    			if (c instanceof Transformation){
+    				return (Transformation) c;
+    			}
+    		}
+    	}
+    	return null;
+    }
+	
 }

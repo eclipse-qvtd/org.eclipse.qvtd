@@ -15,9 +15,10 @@ map createPackage in classescs2as
 		realize package : Package
 	}
 	where () {
-		package.name := if packageCS.hasName()
-						then packageCS.name
-						else 'unnamed'
+		package.name := if packageCS.aBooleanElementOp()
+						--if not packageCS.name.oclIsUndefined()
+						then 'transformation worked'
+						else 'unexpected'
 						endif;
 	}
 }
