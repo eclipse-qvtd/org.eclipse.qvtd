@@ -100,7 +100,7 @@ operation QVT!OCLExpression findReferencedVariables(ignore : Set) : Set {
     } else if (self.isTypeOf(QVT!PropertyCallExp)) {
         varRefs.addAll(self.ownedSource.findReferencedVariables());
     } else if (self.isTypeOf(QVT!IfExp)) {
-        varRefs.addAll(self.condition.findReferencedVariables());
+        varRefs.addAll(self.ownedCondition.findReferencedVariables());
         varRefs.addAll(self.elseExpression.findReferencedVariables());
         varRefs.addAll(self.thenExpression.findReferencedVariables());
     } else if (self.isTypeOf(QVT!CollectionLiteralExp)) {
@@ -119,7 +119,7 @@ operation QVT!OCLExpression findReferencedVariables(ignore : Set) : Set {
         }
     } else if (self.isKindOf(QVT!IteratorExp)) {
         // Ignore iterator variables
-        varRefs.addAll(self.body.findReferencedVariables(self.iterator));
+        varRefs.addAll(self.ownedBody.findReferencedVariables(self.ownedIterators));
         varRefs.addAll(self.ownedSource.findReferencedVariables());
     } else if (self.isKindOf(QVT!LiteralExp) or self.isTypeOf(QVT!TypeExp)) {
       // Noting to add

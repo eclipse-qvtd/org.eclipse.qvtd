@@ -383,7 +383,7 @@ operation  QVTp!RealizedVariable copyToVariable() : QVTp!Variable {
     v.ownedAnnotation = emfTool.getECoreUtil().copyAll(self.ownedAnnotation);
     // Element
     v.extension = emfTool.getECoreUtil().copyAll(self.extension);
-    v.ownedComment = emfTool.getECoreUtil().copyAll(self.ownedComment);
+    v.ownedComments = emfTool.getECoreUtil().copyAll(self.ownedComments);
     return v;
 }
    
@@ -437,16 +437,16 @@ operation QVT!PropertyAssignment toOCLExpression() : QVT!OperationCallExp {
     // The type is boolean
     exp.type = exp.referredOperation.type;
     // The source is a PropertyCallExp
-    exp.source = new QVTp!PropertyCallExp;
+    exp.ownedSource = new QVTp!PropertyCallExp;
     // The property is the targetProperty
-    exp.source.referredProperty = self.targetProperty;
+    exp.ownedSource.referredProperty = self.targetProperty;
     // The source of the PropertyCallExp is the slotExpression
-    exp.source.source = emfTool.getECoreUtil().copy(self.slotExpression);
-    exp.source.type = self.targetProperty.type;
+    exp.ownedSource.ownedSource = emfTool.getECoreUtil().copy(self.slotExpression);
+    exp.ownedSource.type = self.targetProperty.type;
     // The argument is the value
     var args : Set;
     args.add(emfTool.getECoreUtil().copy(self.value));
-    exp.argument = args;
+    exp.ownedArguments = args;
     return exp;
 }
 
@@ -468,19 +468,19 @@ operation QVT!VariableAssignment toOCLExpression() : QVT!OperationCallExp {
     // The type is boolean
     exp.type = exp.referredOperation.type;
     // The source is a PropertyCallExp
-    exp.source = new QVTc!PropertyCallExp;
+    exp.ownedSource = new QVTc!PropertyCallExp;
     // The property is the targetProperty
-    exp.source.referredProperty = self.targetProperty;
+    exp.ownedSource.referredProperty = self.targetProperty;
     // The source of the PropertyCallExp is the slotExpression
     exp.source.source = emfTool.getECoreUtil().copy(self.slotExpression);
-    exp.source.type = self.targetProperty.type;
+    exp.ownedSource.type = self.targetProperty.type;
     // The argument is the value
     var args : Set;
     var varExp = new QVT!VariableExpression;
     varExp.implict = false;
     varExp.referredVariable = self.bottomPattern.equivalent().variable.select(v | v.name = ia.targetVariable.name);
     args.add(emfTool.getECoreUtil().copy(self.value));
-    exp.argument = args;
+    exp.ownedArguments = args;
     return exp;
 }
 
