@@ -137,16 +137,18 @@ operation QVT!Transformation getMiddleTypedModel() : QVT!TypedModel {
 @cached
 operation QVT!Variable oppositePattern() : QVT!CorePattern  {
     
-   //return self.owningModel().getAllOfType("GuardPattern").selectOne(p | p.variable.includes(self));
-   return self.eContainer();
+   	//return self.owningModel().getAllOfType("GuardPattern").selectOne(p | p.variable.includes(self));
+	if (self.eContainer().isKindOf(QVT!CorePattern))
+   		return self.eContainer();
+	return null;
 }
 
-@cached
-operation QVT!RealizedVariable oppositePattern() : QVT!CorePattern  {
+//@cached
+//operation QVT!RealizedVariable oppositePattern() : QVT!CorePattern  {
     
     //return self.owningModel().getAllOfType("BottomPattern").selectOne(p | p.realizedVariable.includes(self));
-    return self.eContainer();
-}
+//    return self.eContainer();
+//}
 
 
 /****o* QVTHelpers/getArea
@@ -278,7 +280,7 @@ operation getLowestRankVariable(vars : Collection) {
         var min = vars.first();
         for(v in vars.excluding(min)) {
             //minType = (ClassImpl) min.eGet(typeFeat);
-            if (v.type.superClass.includes(min.type)) {
+            if (v.type.superClasses.includes(min.type)) {
                 min = v;    
             }
         }
