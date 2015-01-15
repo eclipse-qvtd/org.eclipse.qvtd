@@ -14,6 +14,6 @@ rule EClass2Node
 }
 
 @cached
-operation mm!EClass getAllSuperTypes() : Set {
-	return self.asSequence().closure(x | x.eSuperTypes).asSet();
+operation mm!EClass getAllSuperTypes() : OrderedSet{
+	return self.asSequence().closure(x | x.eSuperTypes).asOrderedSet(); -- To remove duplicates
 }
