@@ -435,7 +435,6 @@ public class MtcBroker {
 				eol.models.add(pModel);
 				eol.models.add(sModel);
 				eol.models.add(oclStdLibModel);
-				eol.models.add(configModel);
 				// TODO HOw to deal with multiple candidate metamodels?
 				eol.models.add(candidateMetamodelContainmentTrees.get(RIGHT_DIR_NAME).get(0));
 				eol.execute();
@@ -467,7 +466,6 @@ public class MtcBroker {
 					etl.models.add(pModel);
 					etl.models.add(sModel);
 					etl.models.add(iModel);
-					etl.models.add(configModel);
 					etl.models.add(oclStdLibModel);
 					etl.execute();
 				}
