@@ -3,8 +3,13 @@ pre {
 	// Key types shared across the transformation.
 	var nTypeKey : new GML!KeyType;
 	nTypeKey.`for` = GML!KeyForType#node;
-	nTypeKey.id = "nodeTypeId";
+	nTypeKey.id = "d6";
 	nTypeKey.yfilesType="nodegraphics";
+	
+	var eTypeKey : new GML!KeyType;	
+	eTypeKey.`for` = GML!KeyForType#edge;
+	eTypeKey.id = "d9";
+	eTypeKey.yfilesType="edgegraphics";
 }
 
 rule Schedule2DocumentRoot 
@@ -45,6 +50,7 @@ rule ClassDatum2Node
 		var e = new GML!EdgeType;
 		e.source = t.id;
  		e.target = superDatum.equivalent().id;
+ 		e.stilishEdge(GML!LineTypeType#dotted);
 	}
  	
 	// style	
@@ -61,15 +67,16 @@ rule PropertyDatum2Node
 	// Opposite
 	if (s.opposite.isDefined()) {
 		var e = new GML!EdgeType;
-        e.source = t.id;
-        e.target = s.opposite.equivalent().id;
+		e.source = t.id;
+		e.target = s.opposite.equivalent().id;
 	}
 
 	// Super dependencies (FIXME Refactor)
 	for (superDatum in s.super) {
 		var e = new GML!EdgeType;
 		e.source = t.id;
- 		e.target = superDatum.equivalent().id;
+		e.target = superDatum.equivalent().id;
+		e.stilishEdge(GML!LineTypeType#dotted);
 	}
 	
 	
@@ -114,9 +121,25 @@ operation GML!NodeType stilishNode(shapeType) {
 	self.data.add(nType);
 }
 
+operation GML!EdgeType stilishEdge(lineType) {
+
+ 	var eType = new GML!DataType;
+    var ePolyLine = new GML!PolyLineEdgeType;
+    var eArrow : new GML!ArrowsType;
+	var eStyle : new GML!LineStyleType;
+    
+    eStyle.type = lineType;
+    eArrow.target = GML!ArrowTypeType#standard;
+    eArrow.source = GML!ArrowTypeType#none;    
+    ePolyLine.arrows= eArrow;
+    ePolyLine.lineStyle = eStyle;
+    eType.key = eTypeKey.id;
+    eType.polyLineEdge = ePolyLine;
+    self.data.add(eType);
+    
+}
 post {
 	// Edges are not created via rules. Add them at the end
 	GML!GraphType.all.first().edge.addAll(GML!EdgeType.all());
-	
 	"QVTs 2 GraphML Done".println();
 }
