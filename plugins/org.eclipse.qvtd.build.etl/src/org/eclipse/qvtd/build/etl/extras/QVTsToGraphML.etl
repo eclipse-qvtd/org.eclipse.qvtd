@@ -1,5 +1,9 @@
 pre {
 
+	QVTs!AbstractDatum.all.size().println("Number of Datums: ");
+	pruneQVTsModel();
+	QVTs!AbstractDatum.all.size().println("Number of Datums: ");
+	
 	// Key types shared across the transformation.
 	var nTypeKey : new GML!KeyType;
 	nTypeKey.`for` = GML!KeyForType#node;
@@ -43,6 +47,7 @@ rule ClassDatum2Node
 	transform s : QVTs!ClassDatum
 	to t : GML!NodeType {
 	
+	
 	t.id = s.type.name;
 	
 	// Super dependencies (FIXME Refactor)
@@ -63,7 +68,7 @@ rule PropertyDatum2Node
 	to t : GML!NodeType {
 	
 	t.id = s.classDatum.type.name + "::" + s.property.name;
-		
+	
 	// Opposite
 	if (s.opposite.isDefined()) {
 		var e = new GML!EdgeType;
@@ -137,6 +142,38 @@ operation GML!EdgeType stilishEdge(lineType) {
     eType.polyLineEdge = ePolyLine;
     self.data.add(eType);
     
+}
+
+-- Function which cleans the QVTs input model to generates a cleaner Graphml representation
+operation pruneQVTsModel() {
+
+	var graphChanged = true;
+	while (graphChanged) {
+		var pDatumsToRemove = OrderedSet{};
+		// We remove all the PropertyDatum which don't are not produced/consumed by an action and doesn't have any super
+		for (pDatum in QVTs!PropertyDatum.all()) {
+			if(pDatum.sources.isEmpty() and
+				pDatum.super.isEmpty() and
+				pDatum.targets.isEmpty()) {
+				pDatumsToRemove.add(pDatum);
+			}
+		}
+		
+		var cDatumsToRemove = OrderedSet{};
+		// We will remove all the ClassDatum which are not consumed, and doesn't have any PropertyDatum
+		for (cDatum in QVTs!ClassDatum.all()) {
+			if(cDatum.sources.isEmpty() and 
+				(cDatum.propertyDatums.isEmpty() 
+					or cDatum.propertyDatums.forAll(x | pDatumsToRemove.contains(x)))) {
+				cDatumsToRemove.add(cDatum);
+			}
+		}
+		
+		for  (datum in pDatumsToRemove.including(cDatumsToRemove)) {
+			delete datum;
+		}
+		graphChanged = pDatumsToRemove.size() > 0;
+	}
 }
 post {
 	// Edges are not created via rules. Add them at the end
