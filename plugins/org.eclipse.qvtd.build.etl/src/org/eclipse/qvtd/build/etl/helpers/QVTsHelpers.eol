@@ -16,6 +16,11 @@
 
 operation QVTs!MappingAction getDistinctDataClassDatums() : Sequence {
 	
+	self.distinctArguments.primaryArguments.println("prim ");
+	self.distinctArguments.primaryArguments.collect(da | da.datum).println("prim.datum ");
+	self.distinctArguments.secondaryArguments.println("sec ");
+	self.distinctArguments.secondaryArguments.collect(da | da.datum).println("sec.datum ");
+	
 	return self.distinctArguments.primaryArguments
 			.includingAll(self.distinctArguments.secondaryArguments).flatten()
 			.collect(da | da.datum);

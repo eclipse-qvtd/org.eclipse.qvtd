@@ -57,11 +57,14 @@ rule MappingToMappingAction
     transform m : QVTp!Mapping
     to ma : QVTs!MappingAction {
         
-        //m.name.println();
+        m.name.println();
         ma.schedule ::= m.transformation;
         ma.mapping = m;
         ma.results.addAll(m.getOutputVariables().collect(v | v.type).equivalent());
         ma.distinctArguments.addAll(m.getInputVariables().equivalents().collect(e | e.first()));
+        m.getInputVariables().equivalents().println("ma.vars.eq ");
+        ma.getDistinctDataClassDatums().println("ma.disdinct ");
+        
 		ma.arguments.addAll(ma.getDistinctDataClassDatums());
 		        
     }
@@ -87,6 +90,8 @@ rule VariableToDataParameter
     transform v : QVTp!Variable
     to dd : QVTs!DistinctData, dp : QVTs!DataParameter {
         
+        v.name.println("var ");
+        v.type.equivalent().println("var type datum ");
         dp.variable = v;
         dp.datum ::= v.type;
         dd.primaryArguments.add(dp);
@@ -102,7 +107,7 @@ rule TypeToClassDatum
         guard : t.existsCorePatternVariable()
         
         var domain = t.getCorePatternVariable().oppositePattern().area; 
-        //t.name.println("TypeToDatum ");
+        t.name.println("TypeToDatum ");
         d.type = t;
         d.super.addAll(t.superClasses.equivalent());
         d.domain = domain;
@@ -236,6 +241,7 @@ operation QVTp!Type existsCorePatternVariable() : Boolean {
 
 @cached
 operation QVTp!Type getCorePatternVariable() : QVTp!Variable {
+    
     return QVTp!Variable.all().selectOne(v | v.eContainer().isKindOf(QVTp!CorePattern) and v.type.asSequence().closure(x | x.superClasses).including(v.type).includes(self));
 }
 
