@@ -513,9 +513,9 @@ public class MtcBroker {
 							loadedUris.add(modelUri);
 							PivotModel mmModel = null;
 							PivotModel treeModel = null;
-							mmModel = createModel(changeResourceToSource(modelUri), "mm", "", ECORE_URI, true, false, true, true);
+							mmModel = createModel(changeResourceToSource(modelUri), "mm", "", ECORE_URI, true, false, true, false);
 							String cgUri = mmModel.getModelFileUri().trimFileExtension().toString() + "ContainmentTree.xmi";
-							treeModel = createModel(cgUri, "tree", pairs.getKey().toLowerCase()+"Tree", ECORE_CONTAINMENT_URI, false, true, true, true);
+							treeModel = createModel(cgUri, "tree", pairs.getKey().toLowerCase()+"Tree", ECORE_CONTAINMENT_URI, false, true, true, false);
 							if (mmModel != null && treeModel != null  ) {
 								eol.models.add(mmModel);
 								eol.models.add(treeModel);
