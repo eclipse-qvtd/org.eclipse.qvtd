@@ -1,2 +1,150 @@
 <?xml version="1.0" encoding="ASCII"?>
-<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI"/>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:eCoreContainemntTree="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree">
+  <eCoreContainemntTree:Node name="QVTcConfig" children="/6">
+    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.etl/bin/QVTcConfig.ecore#/"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="eCoreContainemntTree" children="/11">
+    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.etl/bin/ECoreContainmentTree.ecore#/"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="qvtschedule" children="/21">
+    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.schedule/bin/QVTSchedule.ecore#/"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="simplerdbms" children="/26">
+    <element href="SimpleRDBMS.ecore#/"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="simpleuml" children="/32">
+    <element href="SimpleUML.ecore#/"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="umltordbms" children="/44">
+    <element href="UMLtoRDBMS.ecore#/"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="Configuration" parent="/0" children="/10">
+    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.etl/bin/QVTcConfig.ecore#//Configuration"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="Direction" parent="/10" superTypes="/8">
+    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.etl/bin/QVTcConfig.ecore#//Direction"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="NamedElement" subTypes="/7 /10 /9">
+    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.etl/bin/QVTcConfig.ecore#//NamedElement"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="Import" parent="/10" superTypes="/8">
+    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.etl/bin/QVTcConfig.ecore#//Import"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="Transformation" parent="/6" children="/7 /9" superTypes="/8">
+    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.etl/bin/QVTcConfig.ecore#//Transformation"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="Node" parent="/1">
+    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.etl/bin/ECoreContainmentTree.ecore#//Node"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="AbstractDatum" parent="/21" subTypes="/14 /20">
+    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.schedule/bin/QVTSchedule.ecore#//AbstractDatum"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="AbstractAction" parent="/21" children="/16" subTypes="/17 /18 /19">
+    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.schedule/bin/QVTSchedule.ecore#//AbstractAction"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="ClassDatum" parent="/21" children="/20" superTypes="/12">
+    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.schedule/bin/QVTSchedule.ecore#//ClassDatum"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="DataParameter" parent="/16">
+    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.schedule/bin/QVTSchedule.ecore#//DataParameter"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="DistinctData" parent="/13" children="/15">
+    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.schedule/bin/QVTSchedule.ecore#//DistinctData"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="InputAction" parent="/21" superTypes="/13">
+    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.schedule/bin/QVTSchedule.ecore#//InputAction"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="MappingAction" parent="/21" superTypes="/13">
+    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.schedule/bin/QVTSchedule.ecore#//MappingAction"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="OutputAction" parent="/21" superTypes="/13">
+    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.schedule/bin/QVTSchedule.ecore#//OutputAction"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="PropertyDatum" parent="/14 /21" superTypes="/12">
+    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.schedule/bin/QVTSchedule.ecore#//PropertyDatum"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="Schedule" parent="/2" children="/12 /14 /13 /17 /18 /19 /20">
+    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.schedule/bin/QVTSchedule.ecore#//Schedule"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="Column" parent="/27" superTypes="/25">
+    <element href="SimpleRDBMS.ecore#//Column"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="ForeignKey" parent="/27" superTypes="/25">
+    <element href="SimpleRDBMS.ecore#//ForeignKey"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="Key" parent="/27" superTypes="/25">
+    <element href="SimpleRDBMS.ecore#//Key"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="RModelElement" subTypes="/22 /27 /26 /23 /24">
+    <element href="SimpleRDBMS.ecore#//RModelElement"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="Schema" parent="/3" children="/27" superTypes="/25">
+    <element href="SimpleRDBMS.ecore#//Schema"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="Table" parent="/26" children="/22 /23 /24" superTypes="/25">
+    <element href="SimpleRDBMS.ecore#//Table"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="Attribute" parent="/30" superTypes="/35">
+    <element href="SimpleUML.ecore#//Attribute"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="Association" parent="/32" superTypes="/35 /33">
+    <element href="SimpleUML.ecore#//Association"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="Class" parent="/32" children="/28" superTypes="/31 /35 /33">
+    <element href="SimpleUML.ecore#//Class"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="Classifier" parent="/32" subTypes="/30 /34" superTypes="/35 /33">
+    <element href="SimpleUML.ecore#//Classifier"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="Package" parent="/4" children="/33 /31 /30 /29 /34" superTypes="/35">
+    <element href="SimpleUML.ecore#//Package"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="PackageElement" parent="/32" subTypes="/31 /30 /29 /34" superTypes="/35">
+    <element href="SimpleUML.ecore#//PackageElement"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="PrimitiveDataType" parent="/32" superTypes="/31 /35 /33">
+    <element href="SimpleUML.ecore#//PrimitiveDataType"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="UMLModelElement" subTypes="/28 /33 /32 /31 /30 /29 /34">
+    <element href="SimpleUML.ecore#//UMLModelElement"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="AttributeToColumn" parent="/41" superTypes="/48 /47 /40">
+    <element href="UMLtoRDBMS.ecore#//AttributeToColumn"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="AssociationToForeignKey" parent="/39" superTypes="/48 /47">
+    <element href="UMLtoRDBMS.ecore#//AssociationToForeignKey"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="BooleanToBoolean" parent="/44" superTypes="/48 /45">
+    <element href="UMLtoRDBMS.ecore#//BooleanToBoolean"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="ClassToTable" parent="/44" children="/37" superTypes="/48 /41 /47">
+    <element href="UMLtoRDBMS.ecore#//ClassToTable"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="FromAttribute" parent="/41" subTypes="/36 /43" superTypes="/48">
+    <element href="UMLtoRDBMS.ecore#//FromAttribute"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="FromAttributeOwner" children="/40 /36 /43" subTypes="/39 /43">
+    <element href="UMLtoRDBMS.ecore#//FromAttributeOwner"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="IntegerToNumber" parent="/44" superTypes="/48 /45">
+    <element href="UMLtoRDBMS.ecore#//IntegerToNumber"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="NonLeafAttribute" parent="/41" superTypes="/48 /41 /40">
+    <element href="UMLtoRDBMS.ecore#//NonLeafAttribute"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="PackageToSchema" parent="/5" children="/39 /45 /38 /42 /46" superTypes="/48">
+    <element href="UMLtoRDBMS.ecore#//PackageToSchema"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="PrimitiveToName" parent="/44" subTypes="/38 /42 /46" superTypes="/48">
+    <element href="UMLtoRDBMS.ecore#//PrimitiveToName"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="StringToVarchar" parent="/44" superTypes="/48 /45">
+    <element href="UMLtoRDBMS.ecore#//StringToVarchar"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="ToColumn" subTypes="/36 /37 /39">
+    <element href="UMLtoRDBMS.ecore#//ToColumn"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="UmlToRdbmsModelElement" subTypes="/40 /36 /37 /39 /44 /45 /38 /42 /43 /46">
+    <element href="UMLtoRDBMS.ecore#//UmlToRdbmsModelElement"/>
+  </eCoreContainemntTree:Node>
+</xmi:XMI>

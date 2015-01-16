@@ -94,7 +94,7 @@ rule MappingAction2Node
 	to t : GML!NodeType {
 	
 	t.id = s.mapping.name + " (" + s.order + ")";
-	for (datum in s.arguments) {
+	for (datum in s.ownedArgumentss) {
      	var e = new GML!EdgeType;
         e.source = datum.equivalent().id;
         e.target = t.id;

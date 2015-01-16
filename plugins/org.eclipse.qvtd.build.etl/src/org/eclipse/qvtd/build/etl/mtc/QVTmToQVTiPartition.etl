@@ -29,9 +29,20 @@ rule CoreModel
     transform mIn:QVTm!CoreModel
     to mOut:QVTp!ImperativeModel {
         mOut.name = mIn.name;
-        mOut.nestedPackage ::= mIn.nestedPackage;
+        mOut.ownedImports.addAll(emfTool.getECoreUtil().copyAll(mIn.ownedImports));
+        mOut.ownedPackages.addAll(mIn.ownedPackages.equivalent());
         mOut.externalURI = mIn.externalURI.replace(".qvtm.qvtc", ".qvtp.qvti");
     }
+rule Pacakge
+	transform pIn:QVTm!Package
+	to pOut:QVTp!Package {
+	
+		guard : pIn.ownedClasses.exists(c | c.isTypeOf(QVTm!Transformation))
+		
+		pOut.name = pIn.name;
+		pOut.ownedClasses.addAll(pIn.ownedClasses.equivalent());
+	}
+
 
 /****u* /org.eclipse.qvtd.build.etl/mtc/QVTmToQVTiPartition/Transformation
  * NAME
@@ -371,19 +382,18 @@ rule MRDomain
 operation  QVTp!RealizedVariable copyToVariable() : QVTp!Variable {
     var v = new QVTp!Variable;
     // Var
-    v.implicit = self.implicit;
-    v.initExpression = emfTool.getECoreUtil().copy(self.initExpression);
+    v.isImplicit = self.isImplicit;
+    v.ownedInit = emfTool.getECoreUtil().copy(self.ownedInit);
     v.representedParameter = self.representedParameter;
     // Typed Element
     v.isRequired = self.isRequired;
     v.Type = self.Type;
     // Named Element
-    v.isStatic = self.isStatic;
     v.name = self.name;
-    v.ownedAnnotation = emfTool.getECoreUtil().copyAll(self.ownedAnnotation);
+    v.ownedAnnotations = emfTool.getECoreUtil().copyAll(self.ownedAnnotations);
     // Element
-    v.extension = emfTool.getECoreUtil().copyAll(self.extension);
-    v.ownedComment = emfTool.getECoreUtil().copyAll(self.ownedComment);
+    v.ownedExtensions = emfTool.getECoreUtil().copyAll(self.ownedExtensions);
+    v.ownedComments = emfTool.getECoreUtil().copyAll(self.ownedComments);
     return v;
 }
    
@@ -437,16 +447,16 @@ operation QVT!PropertyAssignment toOCLExpression() : QVT!OperationCallExp {
     // The type is boolean
     exp.type = exp.referredOperation.type;
     // The source is a PropertyCallExp
-    exp.source = new QVTp!PropertyCallExp;
+    exp.ownedSource = new QVTp!PropertyCallExp;
     // The property is the targetProperty
-    exp.source.referredProperty = self.targetProperty;
+    exp.ownedSource.referredProperty = self.targetProperty;
     // The source of the PropertyCallExp is the slotExpression
-    exp.source.source = emfTool.getECoreUtil().copy(self.slotExpression);
-    exp.source.type = self.targetProperty.type;
+    exp.ownedSource.ownedSource = emfTool.getECoreUtil().copy(self.slotExpression);
+    exp.ownedSource.type = self.targetProperty.type;
     // The argument is the value
     var args : Set;
     args.add(emfTool.getECoreUtil().copy(self.value));
-    exp.argument = args;
+    exp.ownedArguments = args;
     return exp;
 }
 
@@ -468,19 +478,19 @@ operation QVT!VariableAssignment toOCLExpression() : QVT!OperationCallExp {
     // The type is boolean
     exp.type = exp.referredOperation.type;
     // The source is a PropertyCallExp
-    exp.source = new QVTc!PropertyCallExp;
+    exp.ownedSource = new QVTc!PropertyCallExp;
     // The property is the targetProperty
-    exp.source.referredProperty = self.targetProperty;
+    exp.ownedSource.referredProperty = self.targetProperty;
     // The source of the PropertyCallExp is the slotExpression
     exp.source.source = emfTool.getECoreUtil().copy(self.slotExpression);
-    exp.source.type = self.targetProperty.type;
+    exp.ownedSource.type = self.targetProperty.type;
     // The argument is the value
     var args : Set;
     var varExp = new QVT!VariableExpression;
     varExp.implict = false;
     varExp.referredVariable = self.bottomPattern.equivalent().variable.select(v | v.name = ia.targetVariable.name);
     args.add(emfTool.getECoreUtil().copy(self.value));
-    exp.argument = args;
+    exp.ownedArguments = args;
     return exp;
 }
 

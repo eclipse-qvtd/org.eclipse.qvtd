@@ -42,10 +42,10 @@ operation QVT!OCLExpression fixVarReferences(v : QVT!Variable) {
         self.ownedSource.fixVarReferences(v);
     } else if (self.isTypeOf(QVT!IfExp)) {
         self.ownedCondition.fixVarReferences(v);
-        self.owendElse.fixVarReferences(v);
+        self.ownedElse.fixVarReferences(v);
         self.ownedThen.fixVarReferences(v);
     } else if (self.isTypeOf(QVT!CollectionLiteralExp)) {
-        for (p in self.part) {
+        for (p in self.ownedParts) {
             if (p.isTypeOf(QVT!CollectionItem)) {
                 p.ownedItem.fixVarReferences(v);
             } else if (p.isTypeOf(QVT!CollectionRange)) {
@@ -100,18 +100,18 @@ operation QVT!OCLExpression findReferencedVariables(ignore : Set) : Set {
     } else if (self.isTypeOf(QVT!PropertyCallExp)) {
         varRefs.addAll(self.ownedSource.findReferencedVariables());
     } else if (self.isTypeOf(QVT!IfExp)) {
-        varRefs.addAll(self.condition.findReferencedVariables());
-        varRefs.addAll(self.elseExpression.findReferencedVariables());
-        varRefs.addAll(self.thenExpression.findReferencedVariables());
+        varRefs.addAll(self.ownedCondition.findReferencedVariables());
+        varRefs.addAll(self.ownedElse.findReferencedVariables());
+        varRefs.addAll(self.ownedThen.findReferencedVariables());
     } else if (self.isTypeOf(QVT!CollectionLiteralExp)) {
         // TODO Check that it is a collection of variables. 
         // TODO what if it is a collection of collections or other OCL types?
-        for (p in self.part) {
+        for (p in self.ownedParts) {
             if (p.isTypeOf(QVT!CollectionItem)) {
-                varRefs.addAll(p.item.findReferencedVariables());
+                varRefs.addAll(p.ownedItem.findReferencedVariables());
             } else if (p.isTypeOf(QVT!CollectionRange)) {
-                varRefs.addAll(p.first);
-                varRefs.addAll(p.last);
+                varRefs.addAll(p.ownedFirst);
+                varRefs.addAll(p.ownedLast);
             } else {
                 self.println();
                 throw "Error! Add findReferencedVariables() for " + p.type() + " in collections";
@@ -119,7 +119,7 @@ operation QVT!OCLExpression findReferencedVariables(ignore : Set) : Set {
         }
     } else if (self.isKindOf(QVT!IteratorExp)) {
         // Ignore iterator variables
-        varRefs.addAll(self.body.findReferencedVariables(self.iterator));
+        varRefs.addAll(self.ownedBody.findReferencedVariables(self.ownedIterators));
         varRefs.addAll(self.ownedSource.findReferencedVariables());
     } else if (self.isKindOf(QVT!LiteralExp) or self.isTypeOf(QVT!TypeExp)) {
       // Noting to add

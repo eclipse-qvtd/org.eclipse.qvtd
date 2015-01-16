@@ -57,13 +57,12 @@ rule MappingToMappingAction
     transform m : QVTp!Mapping
     to ma : QVTs!MappingAction {
         
-        //m.name.println();
+        --m.name.println();
         ma.schedule ::= m.transformation;
         ma.mapping = m;
         ma.results.addAll(m.getOutputVariables().collect(v | v.type).equivalent());
         ma.distinctArguments.addAll(m.getInputVariables().equivalents().collect(e | e.first()));
-		ma.arguments.addAll(ma.getDistinctDataClassDatums());
-		        
+        ma.arguments.addAll(ma.getDistinctDataClassDatums());
     }
 
 /****u* QVTpToSchedule/VariableToDataParameter
@@ -87,9 +86,13 @@ rule VariableToDataParameter
     transform v : QVTp!Variable
     to dd : QVTs!DistinctData, dp : QVTs!DataParameter {
         
+        --v.name.println("var ");
         dp.variable = v;
         dp.datum ::= v.type;
+        dp.datum.domain = v.eContainer().area;
+        dp.datum.schedule ::= v.eContainer().area.`rule`.transformation;
         dd.primaryArguments.add(dp);
+            
     }
 
 // Only types in the TypedModel pacakges and that are used by a variable
@@ -101,12 +104,13 @@ rule TypeToClassDatum
                          
         guard : t.existsCorePatternVariable()
         
-        var domain = t.getCorePatternVariable().oppositePattern().area; 
-        //t.name.println("TypeToDatum ");
+        --var domain = t.getCorePatternVariable().oppositePattern().area; 
+        --t.name.println("TypeToDatum ");
         d.type = t;
         d.super.addAll(t.superClasses.equivalent());
-        d.domain = domain;
-        d.schedule ::= domain.`rule`.transformation;    
+        -- Do this in the VariableToDataParameter to get the correct domain
+        --d.domain = domain;
+        --d.schedule ::= domain.`rule`.transformation;    
     }
 
 @greedy 
@@ -187,6 +191,8 @@ operation QVTs!PropertyDatum updatePropertyDatum(domain : QVTp!Domain, context: 
 }
 
 operation QVTs!PropertyDatum createOppositePropDatum(isAssignment : Boolean) {
+	self.println("createOppositePropDatum ");
+	self.eStructuralFeatures.println();
 	var oppProp = self.property.opposite;
     if (oppProp.isDefined()) {
     	var oppositePropDatum = oppProp.getPropertyDatum(oppProp.owningClass);
@@ -231,13 +237,29 @@ operation QVTp!PropertyAssignment getPropertyDatum() : QVTs!PropertyDatum {
 
 @cached
 operation QVTp!Type existsCorePatternVariable() : Boolean {
-	return self.getCorePatternVariable().isDefined();
+	
+	if (self.getCorePatternVariable().isDefined()) {
+		return true;
+	} else {
+		var supers = self.getAllSuperTypes();
+		return supers.exists(t | t.existsCorePatternVariable());
+	}
+	
+	return false;
+}
+
+@cached
+operation QVTp!Type getAllSuperTypes() : Sequence {
+	return self.asSequence().closure(x | x.superClasses);
 }
 
 @cached
 operation QVTp!Type getCorePatternVariable() : QVTp!Variable {
-    return QVTp!Variable.all().selectOne(v | v.eContainer().isKindOf(QVTp!CorePattern) and v.type.asSequence().closure(x | x.superClasses).including(v.type).includes(self));
+    
+    return QVTp!Variable.all().selectOne(v | v.eContainer().isKindOf(QVTp!CorePattern) and v.type == self);
 }
+
+
 
 @cached
 operation QVTp!OCLExpression getSourceVariable() : QVTp!Variable {

@@ -22,6 +22,7 @@ import org.eclipse.ocl.pivot.internal.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.build.etl.MtcBroker;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -112,15 +113,16 @@ public class QVTdMtcTests extends LoadTestCase {
 		 * @param name the name
 		 * @param modelFileName the model file name
 		 *
+		 */
 		public void loadReference(@NonNull String name, @NonNull String modelFileName) {
-	        TypedModel typedModel = ClassUtil.getNamedElement(transformation.getModelParameter(), name);
+	        TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
 	        if (typedModel == null) {
 	        	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
 	        }
 			URI modelURI = getProjectFileURI(fileNamePrefix + modelFileName);
 	        Resource resource = metamodelManager.getExternalResourceSet().getResource(modelURI, true);
 	        typedModelValidationResourceMap.put(typedModel, resource);
-		}*/
+		}
 
 		/**
 		 * Test.
@@ -201,7 +203,8 @@ public class QVTdMtcTests extends LoadTestCase {
         testEvaluator.loadModel("uml", "SimpleUMLPeople.xmi");
         testEvaluator.createModel("middle", "UML2RDBMS.xmi");
         testEvaluator.createModel("rdbms", "SimpleRDBMSPeople.xmi");
-        //testEvaluator.loadReference("hls", "HLSNodeValidate.xmi");
+        // TODO create validation model 
+        //testEvaluator.loadReference("rdbms", "SimpleRDBMSPeopleValidate.xmi");
         System.out.println("Executing QVTi transformation on test models.");
         testEvaluator.test();
         testEvaluator.dispose();
@@ -210,7 +213,7 @@ public class QVTdMtcTests extends LoadTestCase {
         assertLoadable(txURI);
         mtc.disposeModels();
     }
-    /*
+    
     @Test
     public void testUpperToLower() throws Exception {
     	
@@ -238,7 +241,7 @@ public class QVTdMtcTests extends LoadTestCase {
         testEvaluator.test();
         testEvaluator.dispose();
         
-        URI txURI = DomainUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
+        URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
         assertLoadable(txURI);
         mtc.disposeModels();
     }
@@ -270,11 +273,11 @@ public class QVTdMtcTests extends LoadTestCase {
         testEvaluator.test();
         testEvaluator.dispose();
         
-        URI txURI = DomainUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
+        URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
         assertLoadable(txURI);
         mtc.disposeModels();
         
     }
-    */
+    
 	
 }

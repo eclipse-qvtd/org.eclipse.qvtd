@@ -260,16 +260,19 @@ public class MtcBroker {
 		loadOclStdLibModel();
 		// This could be run on editor saves by reading the imports!
 		createContainmentTrees();
-		cModel = createModel(qvtcasUri, "QVTc", "QVT", QVTC_FULL_NS, true, false, true, false);
+		cModel = createASModel(qvtcasUri, "QVTc", "QVT", QVTC_FULL_NS, true, false, true, false);
 		uModel = qvtcToQvtu(cModel);
 		uModel.setCachingEnabled(true);
 		uModel.clearCache();
+		uModel.setStoredOnDisposal(false);
 		mModel = qvtuToQvtm(uModel);
 		mModel.setCachingEnabled(true);
 		mModel.clearCache();
+		mModel.setStoredOnDisposal(false);
 		pModel = qvtmToQvtp(mModel);
 		pModel.setCachingEnabled(true);
 		pModel.clearCache();
+		pModel.setStoredOnDisposal(false);
 		sModel = qvtpToQvts(pModel);
 		sModel.setCachingEnabled(true);
 		sModel.clearCache();
@@ -299,7 +302,7 @@ public class MtcBroker {
 	private PivotModel qvtcToQvtu(EmfModel cModel) throws QvtMtcExecutionException {
 
 		PivotModel uModel = null;
-		uModel = createASModel(qvtuUri, "QVTu", "QVT", QVTC_FULL_NS, false, true, false);
+		uModel = createASModel(qvtuUri, "QVTu", "QVT", QVTC_FULL_NS, false, true, false, false);
 		if (cModel != null && uModel != null  ) {
 			FlockTask flock = null;
 			try {
@@ -330,7 +333,7 @@ public class MtcBroker {
 	private PivotModel qvtuToQvtm(PivotModel uModel) throws QvtMtcExecutionException {
 
 		PivotModel mModel = null;
-		mModel = createASModel(qvtmUri, "QVTm", "QVT", QVTC_FULL_NS, false, true, false);
+		mModel = createASModel(qvtmUri, "QVTm", "QVT", QVTC_FULL_NS, false, true, false, false);
 		if (uModel != null && mModel != null  ) {
 			FlockTask flock = null;
 			try {
@@ -361,7 +364,9 @@ public class MtcBroker {
 	private PivotModel qvtmToQvtp(PivotModel mModel) throws QvtMtcExecutionException {
 		
 		PivotModel pModel = null;
-		pModel = createASModel(partitionUri, "QVTp", "QVT", QVTI_FULL_NS, false, true, false);
+		// The QVTp model needs to resolve external references so the typedModel types are correctly
+		// transformed. 
+		pModel = createASModel(partitionUri, "QVTp", "QVT", QVTI_FULL_NS, false, true, false, true);
 		if (mModel != null && pModel != null  ) {
 			EtlTask etl = null;
 			try {
@@ -391,8 +396,8 @@ public class MtcBroker {
 	 */
 	protected PivotModel qvtpToQvts(PivotModel pModel) throws QvtMtcExecutionException {
 		PivotModel sModel = null;
-		sModel = createModel(scheduleUri, "QVTs", "", QVTS_FULL_NS, false, true, false, false);
-		if (pModel != null && sModel != null  ) {
+		sModel = createModel(scheduleUri, "QVTs", "", QVTS_FULL_NS, false, true, false, true);
+		if (pModel != null && sModel != null) {
 			EtlTask etl = null;
 			try {
 				etl = new EtlTask(java.net.URI.create(getResourceURI(QVTP_TO_QVTS_ETL)));
@@ -452,7 +457,7 @@ public class MtcBroker {
 	protected PivotModel qvtpQvtsToQvti(PivotModel pModel, PivotModel sModel) throws QvtMtcExecutionException {
 		
 		PivotModel iModel = null;
-		iModel = createASModel(qvtiUri, "QVTi", "QVT", QVTI_FULL_NS, false, true, false);
+		iModel = createASModel(qvtiUri, "QVTi", "QVT", QVTI_FULL_NS, false, true, false, true);
 		if (pModel != null && sModel != null && iModel != null  ) {
 			EtlTask etl = null;
 			try {
@@ -464,7 +469,6 @@ public class MtcBroker {
 					etl.models.add(pModel);
 					etl.models.add(sModel);
 					etl.models.add(iModel);
-					etl.models.add(configModel);
 					etl.models.add(oclStdLibModel);
 					etl.execute();
 				}
@@ -509,9 +513,9 @@ public class MtcBroker {
 							loadedUris.add(modelUri);
 							PivotModel mmModel = null;
 							PivotModel treeModel = null;
-							mmModel = createModel(changeResourceToSource(modelUri), "mm", "", ECORE_URI, true, false, true, false);
+							mmModel = createModel(changeResourceToSource(modelUri), "mm", "", ECORE_URI, true, false, true, true);
 							String cgUri = mmModel.getModelFileUri().trimFileExtension().toString() + "ContainmentTree.xmi";
-							treeModel = createModel(cgUri, "tree", pairs.getKey().toLowerCase()+"Tree", ECORE_CONTAINMENT_URI, false, true, true, false);
+							treeModel = createModel(cgUri, "tree", pairs.getKey().toLowerCase()+"Tree", ECORE_CONTAINMENT_URI, false, true, true, true);
 							if (mmModel != null && treeModel != null  ) {
 								eol.models.add(mmModel);
 								eol.models.add(treeModel);
@@ -642,8 +646,9 @@ public class MtcBroker {
 
 	
 	/**
-	 * Creates a Pivot Model with the given attributes. The models are not expanded
-	 * by default.
+	 * Creates a Pivot Model with the given attributes. This models is loaded by the metamodel manager
+	 * as external resources. Use this method for creating models that are not AS of any of the
+	 * QVTd languages.
 	 *
 	 * @param modeUri the mode uri
 	 * @param modelName the model name
@@ -678,7 +683,7 @@ public class MtcBroker {
 	
 	
 	private PivotModel createASModel(String modeUri, String modelName, String modelAliases, String metamodelUris,
-			boolean readOnLoad, boolean storeOnDispoal, boolean cached) throws QvtMtcExecutionException {
+			boolean readOnLoad, boolean storeOnDispoal, boolean cached, boolean expand) throws QvtMtcExecutionException {
 
 	PivotModel model = new PivotModel(metamodelManager, true);
 	StringProperties properties = new StringProperties();
@@ -689,7 +694,7 @@ public class MtcBroker {
 	properties.put(EmfModel.PROPERTY_READONLOAD, String.valueOf(readOnLoad));
 	properties.put(EmfModel.PROPERTY_STOREONDISPOSAL, String.valueOf(storeOnDispoal));
 	properties.put(EmfModel.PROPERTY_CACHED, String.valueOf(cached));
-	properties.put(EmfModel.PROPERTY_EXPAND, String.valueOf(false));
+	properties.put(EmfModel.PROPERTY_EXPAND, String.valueOf(expand));
 	try {
 		model.load(properties, "");
 	} catch (EolModelLoadingException e) {
