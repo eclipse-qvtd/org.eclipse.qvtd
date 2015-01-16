@@ -260,7 +260,7 @@ public class MtcBroker {
 		loadOclStdLibModel();
 		// This could be run on editor saves by reading the imports!
 		createContainmentTrees();
-		cModel = createASModel(qvtcasUri, "QVTc", "QVT", QVTC_FULL_NS, true, false, true, true);
+		cModel = createASModel(qvtcasUri, "QVTc", "QVT", QVTC_FULL_NS, true, false, true, false);
 		uModel = qvtcToQvtu(cModel);
 		uModel.setCachingEnabled(true);
 		uModel.clearCache();

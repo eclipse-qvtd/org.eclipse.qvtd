@@ -191,6 +191,8 @@ operation QVTs!PropertyDatum updatePropertyDatum(domain : QVTp!Domain, context: 
 }
 
 operation QVTs!PropertyDatum createOppositePropDatum(isAssignment : Boolean) {
+	self.println("createOppositePropDatum ");
+	self.eStructuralFeatures.println();
 	var oppProp = self.property.opposite;
     if (oppProp.isDefined()) {
     	var oppositePropDatum = oppProp.getPropertyDatum(oppProp.owningClass);

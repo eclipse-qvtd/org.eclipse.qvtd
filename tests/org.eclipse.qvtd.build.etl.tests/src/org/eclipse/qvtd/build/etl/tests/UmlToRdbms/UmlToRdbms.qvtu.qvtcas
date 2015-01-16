@@ -337,8 +337,8 @@
           </guardPattern>
           <bottomPattern>
             <predicate>
-              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
-                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType ../../../../../../../../../org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas#Boolean"
+                  referredOperation="../../../../../../../../../org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
                 <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                     referredProperty="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind">
                   <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class"
@@ -349,8 +349,8 @@
               </conditionExpression>
             </predicate>
             <predicate>
-              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
-                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType ../../../../../../../../../org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas#Boolean"
+                  referredOperation="../../../../../../../../../org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
                 <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Package"
                     referredProperty="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace">
                   <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class"
@@ -586,8 +586,8 @@
           </guardPattern>
           <bottomPattern>
             <predicate>
-              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
-                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType ../../../../../../../../../org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas#Boolean"
+                  referredOperation="../../../../../../../../../org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
                 <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class"
                     referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Association.source">
                   <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Association"
@@ -598,8 +598,8 @@
               </conditionExpression>
             </predicate>
             <predicate>
-              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
-                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType ../../../../../../../../../org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas#Boolean"
+                  referredOperation="../../../../../../../../../org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
                 <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class"
                     referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Association.destination">
                   <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Association"
@@ -610,8 +610,8 @@
               </conditionExpression>
             </predicate>
             <predicate>
-              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
-                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType ../../../../../../../../../org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas#Boolean"
+                  referredOperation="../../../../../../../../../org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
                 <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Package"
                     referredProperty="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace">
                   <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Association"
@@ -1098,8 +1098,8 @@
           </guardPattern>
           <bottomPattern>
             <predicate>
-              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
-                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType ../../../../../../../../../org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas#Boolean"
+                  referredOperation="../../../../../../../../../org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
                 <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Class"
                     referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner">
                   <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Attribute"
@@ -1188,8 +1188,8 @@
           </guardPattern>
           <bottomPattern>
             <predicate>
-              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
-                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType ../../../../../../../../../org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas#Boolean"
+                  referredOperation="../../../../../../../../../org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
                 <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Classifier"
                     referredProperty="SimpleUML.ecore.oclas#p.simpleuml.Attribute.type">
                   <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUML.ecore.oclas#T.simpleuml.Attribute"
@@ -1440,8 +1440,8 @@
             </conditionExpression>
           </predicate>
           <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
-                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType ../../../../../../../../../org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas#Boolean"
+                referredOperation="../../../../../../../../../org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
               <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttributeOwner"
                   referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.owner">
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
@@ -1491,8 +1491,8 @@
           </guardPattern>
           <bottomPattern>
             <predicate>
-              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
-                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType ../../../../../../../../../org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas#Boolean"
+                  referredOperation="../../../../../../../../../org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
                 <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
                     referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.AttributeToColumn.type">
                   <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"

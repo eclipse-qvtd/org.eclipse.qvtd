@@ -90,7 +90,7 @@
   <eCoreContainemntTree:Node name="Association" parent="/32" superTypes="/35 /33">
     <element href="SimpleUML.ecore#//Association"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="Class" parent="/32" children="/28" superTypes="/35 /31 /33">
+  <eCoreContainemntTree:Node name="Class" parent="/32" children="/28" superTypes="/31 /35 /33">
     <element href="SimpleUML.ecore#//Class"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="Classifier" parent="/32" subTypes="/30 /34" superTypes="/35 /33">
@@ -102,22 +102,22 @@
   <eCoreContainemntTree:Node name="PackageElement" parent="/32" subTypes="/31 /30 /29 /34" superTypes="/35">
     <element href="SimpleUML.ecore#//PackageElement"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="PrimitiveDataType" parent="/32" superTypes="/35 /31 /33">
+  <eCoreContainemntTree:Node name="PrimitiveDataType" parent="/32" superTypes="/31 /35 /33">
     <element href="SimpleUML.ecore#//PrimitiveDataType"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="UMLModelElement" subTypes="/28 /33 /32 /31 /30 /29 /34">
     <element href="SimpleUML.ecore#//UMLModelElement"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="AttributeToColumn" parent="/41" superTypes="/40 /47 /48">
+  <eCoreContainemntTree:Node name="AttributeToColumn" parent="/41" superTypes="/48 /47 /40">
     <element href="UMLtoRDBMS.ecore#//AttributeToColumn"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="AssociationToForeignKey" parent="/39" superTypes="/48 /47">
     <element href="UMLtoRDBMS.ecore#//AssociationToForeignKey"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="BooleanToBoolean" parent="/44" superTypes="/45 /48">
+  <eCoreContainemntTree:Node name="BooleanToBoolean" parent="/44" superTypes="/48 /45">
     <element href="UMLtoRDBMS.ecore#//BooleanToBoolean"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="ClassToTable" parent="/44" children="/37" superTypes="/41 /48 /47">
+  <eCoreContainemntTree:Node name="ClassToTable" parent="/44" children="/37" superTypes="/48 /41 /47">
     <element href="UMLtoRDBMS.ecore#//ClassToTable"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="FromAttribute" parent="/41" subTypes="/36 /43" superTypes="/48">
@@ -126,10 +126,10 @@
   <eCoreContainemntTree:Node name="FromAttributeOwner" children="/40 /36 /43" subTypes="/39 /43">
     <element href="UMLtoRDBMS.ecore#//FromAttributeOwner"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="IntegerToNumber" parent="/44" superTypes="/45 /48">
+  <eCoreContainemntTree:Node name="IntegerToNumber" parent="/44" superTypes="/48 /45">
     <element href="UMLtoRDBMS.ecore#//IntegerToNumber"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="NonLeafAttribute" parent="/41" superTypes="/41 /40 /48">
+  <eCoreContainemntTree:Node name="NonLeafAttribute" parent="/41" superTypes="/48 /41 /40">
     <element href="UMLtoRDBMS.ecore#//NonLeafAttribute"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="PackageToSchema" parent="/5" children="/39 /45 /38 /42 /46" superTypes="/48">
@@ -138,7 +138,7 @@
   <eCoreContainemntTree:Node name="PrimitiveToName" parent="/44" subTypes="/38 /42 /46" superTypes="/48">
     <element href="UMLtoRDBMS.ecore#//PrimitiveToName"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="StringToVarchar" parent="/44" superTypes="/45 /48">
+  <eCoreContainemntTree:Node name="StringToVarchar" parent="/44" superTypes="/48 /45">
     <element href="UMLtoRDBMS.ecore#//StringToVarchar"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="ToColumn" subTypes="/36 /37 /39">

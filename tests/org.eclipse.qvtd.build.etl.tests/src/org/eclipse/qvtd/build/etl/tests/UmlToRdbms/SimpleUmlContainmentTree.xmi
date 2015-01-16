@@ -87,7 +87,7 @@
   <eCoreContainemntTree:Node name="Association" parent="/31" superTypes="/34 /32">
     <element href="SimpleUML.ecore#//Association"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="Class" parent="/31" children="/27" superTypes="/34 /30 /32">
+  <eCoreContainemntTree:Node name="Class" parent="/31" children="/27" superTypes="/30 /34 /32">
     <element href="SimpleUML.ecore#//Class"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="Classifier" parent="/31" subTypes="/29 /33" superTypes="/34 /32">
@@ -99,7 +99,7 @@
   <eCoreContainemntTree:Node name="PackageElement" parent="/31" subTypes="/30 /29 /28 /33" superTypes="/34">
     <element href="SimpleUML.ecore#//PackageElement"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="PrimitiveDataType" parent="/31" superTypes="/34 /30 /32">
+  <eCoreContainemntTree:Node name="PrimitiveDataType" parent="/31" superTypes="/30 /34 /32">
     <element href="SimpleUML.ecore#//PrimitiveDataType"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="UMLModelElement" subTypes="/27 /32 /31 /30 /29 /28 /33">
