@@ -302,7 +302,7 @@ public class MtcBroker {
 	private PivotModel qvtcToQvtu(EmfModel cModel) throws QvtMtcExecutionException {
 
 		PivotModel uModel = null;
-		uModel = createASModel(qvtuUri, "QVTu", "QVT", QVTC_FULL_NS, false, true, false, true);
+		uModel = createASModel(qvtuUri, "QVTu", "QVT", QVTC_FULL_NS, false, true, false, false);
 		if (cModel != null && uModel != null  ) {
 			FlockTask flock = null;
 			try {
@@ -333,7 +333,7 @@ public class MtcBroker {
 	private PivotModel qvtuToQvtm(PivotModel uModel) throws QvtMtcExecutionException {
 
 		PivotModel mModel = null;
-		mModel = createASModel(qvtmUri, "QVTm", "QVT", QVTC_FULL_NS, false, true, false, true);
+		mModel = createASModel(qvtmUri, "QVTm", "QVT", QVTC_FULL_NS, false, true, false, false);
 		if (uModel != null && mModel != null  ) {
 			FlockTask flock = null;
 			try {
@@ -364,6 +364,8 @@ public class MtcBroker {
 	private PivotModel qvtmToQvtp(PivotModel mModel) throws QvtMtcExecutionException {
 		
 		PivotModel pModel = null;
+		// The QVTp model needs to resolve external references so the typedModel types are correctly
+		// transformed. 
 		pModel = createASModel(partitionUri, "QVTp", "QVT", QVTI_FULL_NS, false, true, false, true);
 		if (mModel != null && pModel != null  ) {
 			EtlTask etl = null;
@@ -435,6 +437,7 @@ public class MtcBroker {
 				eol.models.add(pModel);
 				eol.models.add(sModel);
 				eol.models.add(oclStdLibModel);
+				eol.models.add(configModel);
 				// TODO HOw to deal with multiple candidate metamodels?
 				eol.models.add(candidateMetamodelContainmentTrees.get(RIGHT_DIR_NAME).get(0));
 				eol.execute();
@@ -691,7 +694,7 @@ public class MtcBroker {
 	properties.put(EmfModel.PROPERTY_READONLOAD, String.valueOf(readOnLoad));
 	properties.put(EmfModel.PROPERTY_STOREONDISPOSAL, String.valueOf(storeOnDispoal));
 	properties.put(EmfModel.PROPERTY_CACHED, String.valueOf(cached));
-	properties.put(EmfModel.PROPERTY_EXPAND, String.valueOf(false));
+	properties.put(EmfModel.PROPERTY_EXPAND, String.valueOf(expand));
 	try {
 		model.load(properties, "");
 	} catch (EolModelLoadingException e) {
