@@ -13,7 +13,6 @@ package org.eclipse.qvtd.xtext.qvtimperative.as2cs;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Namespace;
@@ -62,7 +61,7 @@ public class QVTimperativeAS2CS extends EssentialOCLAS2CS
 	public QVTimperativeAS2CS(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap, @NonNull EnvironmentFactoryInternal environmentFactory) {
 		super(cs2asResourceMap, environmentFactory);
 		addFactory(Factory.INSTANCE);
-		for (Resource csResource : cs2asResourceMap.keySet()) {
+		for (BaseCSResource csResource : cs2asResourceMap.keySet()) {
 			assert csResource != null;
 			MetamodelManagerResourceAdapter.getAdapter(csResource, metamodelManager);
 		}

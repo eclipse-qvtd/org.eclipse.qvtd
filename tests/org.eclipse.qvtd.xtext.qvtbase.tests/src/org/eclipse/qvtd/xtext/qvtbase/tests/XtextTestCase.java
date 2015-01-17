@@ -11,9 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtbase.tests;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.HashMap;
@@ -56,17 +54,14 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.PivotConstantsInternal;
 import org.eclipse.ocl.pivot.internal.StandardLibraryImpl;
-import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
+import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
 import org.eclipse.ocl.pivot.values.Bag;
-import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.xtext.base.utilities.CS2ASResourceAdapter;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 
 public class XtextTestCase extends PivotTestCase
@@ -106,7 +101,7 @@ public class XtextTestCase extends PivotTestCase
 		}
 	}
 	
-	private static ProjectMap projectMap = null;
+	private static StandaloneProjectMap projectMap = null;
 	public static TestCaseAppender testCaseAppender = new TestCaseAppender();
 
 	protected void assertPivotIsValid(URI pivotURI) {
@@ -178,10 +173,10 @@ public class XtextTestCase extends PivotTestCase
 		return s != null ? s.toString() : null;
 	}
 
-	public static @NonNull ProjectMap getProjectMap() {
-		ProjectMap projectMap2 = projectMap;
+	public static @NonNull StandaloneProjectMap getProjectMap() {
+		StandaloneProjectMap projectMap2 = projectMap;
 		if (projectMap2 == null) {
-			projectMap = projectMap2 = new ProjectMap();
+			projectMap = projectMap2 = new StandaloneProjectMap();
 		}
 		return projectMap2;
 	}
@@ -299,38 +294,6 @@ public class XtextTestCase extends PivotTestCase
 		}
 		return xtextResource;
 	} */
-	
-	public void createEcoreFile(MetamodelManager metamodelManager, String fileName, String fileContent) throws IOException {
-		String inputName = fileName + ".oclinecore";
-		createOCLinEcoreFile(inputName, fileContent);
-		URI inputURI = getProjectFileURI(inputName);
-		URI ecoreURI = getProjectFileURI(fileName + ".ecore");
-		CS2ASResourceAdapter adapter = null;
-		try {
-			ResourceSet resourceSet2 = metamodelManager.getExternalResourceSet();
-			BaseCSResource xtextResource = (BaseCSResource) resourceSet2.getResource(inputURI, true);
-			assertNoResourceErrors("Load failed", xtextResource);
-			adapter = xtextResource.getCS2ASAdapter(null);
-			Resource pivotResource = adapter.getASResource(xtextResource);
-			assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
-			assertNoValidationErrors("Pivot validation errors", pivotResource.getContents().get(0));
-			Resource ecoreResource = AS2Ecore.createResource(metamodelManager.getEnvironmentFactory(), pivotResource, ecoreURI, null);
-			assertNoResourceErrors("To Ecore errors", ecoreResource);
-			ecoreResource.save(null);
-		}
-		finally {
-			if (adapter != null) {
-				adapter.dispose();
-			}
-		}
-	}
-	
-	public void createOCLinEcoreFile(String fileName, String fileContent) throws IOException {
-		File file = new File(getProjectFile(), fileName);
-		Writer writer = new FileWriter(file);
-		writer.append(fileContent);
-		writer.close();
-	}
 
 /*	protected Resource getPivotFromEcore(@NonNull EnvironmentFactoryInternal environmentFactory, Resource ecoreResource) {
 		Ecore2AS ecore2Pivot = Ecore2AS.getAdapter(ecoreResource, environmentFactory);
