@@ -18,7 +18,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.EnvironmentFactoryInternal;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerResourceAdapter;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CS;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
@@ -63,7 +62,7 @@ public class QVTimperativeAS2CS extends EssentialOCLAS2CS
 		addFactory(Factory.INSTANCE);
 		for (BaseCSResource csResource : cs2asResourceMap.keySet()) {
 			assert csResource != null;
-			MetamodelManagerResourceAdapter.getAdapter(csResource, metamodelManager);
+			environmentFactory.adapt(csResource);
 		}
 	}
 

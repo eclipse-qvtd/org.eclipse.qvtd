@@ -15,10 +15,9 @@ import java.io.IOException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
+import org.eclipse.ocl.pivot.EnvironmentFactory;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.xtext.base.utilities.CS2ASResourceAdapter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -34,16 +33,14 @@ public class QVTiXtextEvaluator extends QVTiPivotEvaluator
 {
 	public static ASResource asResource;
 	
-    public static @NonNull Transformation loadTransformation(@NonNull MetamodelManager metamodelManager, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
+    public static @NonNull Transformation loadTransformation(@NonNull EnvironmentFactory environmentFactory, @NonNull URI transformationURI, boolean keepDebug) throws IOException {
 		
 		// Load the transformation resource
         BaseCSResource xtextResource = null;
-        xtextResource = (BaseCSResource) metamodelManager.getExternalResourceSet().getResource(transformationURI, true);
+        xtextResource = (BaseCSResource) environmentFactory.getMetamodelManager().getExternalResourceSet().getResource(transformationURI, true);
         if (xtextResource != null) {
-    		CS2ASResourceAdapter adapter = null;
     		try {
-    			adapter = xtextResource.getCS2ASAdapter(null);
-    			asResource = adapter.getASResource(xtextResource);
+    			asResource = xtextResource.getASResource();
     			for (EObject eContent : asResource.getContents()) {
     				if (eContent instanceof ImperativeModel) {
     	    			for (org.eclipse.ocl.pivot.Package asPackage : ((ImperativeModel)eContent).getOwnedPackages()) {
@@ -56,8 +53,8 @@ public class QVTiXtextEvaluator extends QVTiPivotEvaluator
     				}
     			}
     		} finally {
-    			if (!keepDebug && (adapter != null)) {
-    				adapter.dispose();
+    			if (!keepDebug) {
+    				xtextResource.dispose();
     			}
     		}
         } else {
@@ -68,10 +65,6 @@ public class QVTiXtextEvaluator extends QVTiPivotEvaluator
 	}
     
     public QVTiXtextEvaluator(@NonNull QVTiEnvironmentFactory envFactory, @NonNull URI transformationURI) throws IOException {
-    	super(envFactory, loadTransformation(envFactory.getMetamodelManager(), transformationURI, envFactory.keepDebug()));
-    }
-    
-    public QVTiXtextEvaluator(@NonNull MetamodelManager metamodelManager, @NonNull URI transformationURI) throws IOException {
-    	super(metamodelManager, loadTransformation(metamodelManager, transformationURI, false));
+    	super(envFactory, loadTransformation(envFactory, transformationURI, envFactory.keepDebug()));
     }
 }

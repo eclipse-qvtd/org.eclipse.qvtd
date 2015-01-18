@@ -25,11 +25,10 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.StandardLibraryImpl;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
+import org.eclipse.ocl.pivot.internal.manager.EnvironmentFactoryAdapter;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
-import org.eclipse.ocl.pivot.internal.manager.EnvironmentFactoryResourceSetAdapter;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.xtext.base.utilities.CS2ASResourceAdapter;
 
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
@@ -54,8 +53,7 @@ public class LoadTestCase extends XtextTestCase
 		URI cstURI = pivotURI.trimFileExtension().appendFileExtension("xmi");
 		BaseCSResource xtextResource = (BaseCSResource) ocl.getMetamodelManager().getExternalResourceSet().getResource(inputURI, true);
 		assertNoResourceErrors("Load failed", xtextResource);
-		CS2ASResourceAdapter adapter = xtextResource.getCS2ASAdapter(null);
-		Resource pivotResource = adapter.getASResource(xtextResource);
+		Resource pivotResource = xtextResource.getASResource();
 //		assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
 //		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
 		assertNoValidationErrors("Validation errors", xtextResource.getContents().get(0));
@@ -92,7 +90,7 @@ public class LoadTestCase extends XtextTestCase
 
 	@Override
 	protected void tearDown() throws Exception {
-		EnvironmentFactoryResourceSetAdapter adapter = EnvironmentFactoryResourceSetAdapter.findAdapter(resourceSet);
+		EnvironmentFactoryAdapter adapter = OCL.find(resourceSet);
 		if (adapter != null) {
 			MetamodelManager metamodelManager = adapter.getMetamodelManager();		// FIXME obsolete
 			if (metamodelManager != null) {

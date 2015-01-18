@@ -10,14 +10,11 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtrelation.utilities;
 
-import java.util.Map;
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
-import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.essentialocl.utilities.EssentialOCLCSResource;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.xtext.qvtrelation.cs2as.QVTrelationCS2AS;
@@ -25,9 +22,8 @@ import org.eclipse.qvtd.xtext.qvtrelation.cs2as.QVTrelationCS2AS;
 public class QVTrelationCSResource extends EssentialOCLCSResource
 {
 	@Override
-	public @NonNull CS2AS createCS2AS(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap,
-			@NonNull EnvironmentFactoryInternal environmentFactory) {
-		return new QVTrelationCS2AS(cs2asResourceMap, environmentFactory);
+	public @NonNull CS2AS createCS2AS(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull ASResource asResource) {
+		return new QVTrelationCS2AS(environmentFactory, this, asResource);
 	}
 
 	@Override

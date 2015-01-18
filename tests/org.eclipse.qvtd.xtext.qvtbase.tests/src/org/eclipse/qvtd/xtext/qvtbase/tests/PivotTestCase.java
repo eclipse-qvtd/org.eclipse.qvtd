@@ -36,14 +36,12 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.evaluation.EvaluationException;
 import org.eclipse.ocl.pivot.internal.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerResourceAdapter;
 import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 import org.eclipse.ocl.pivot.utilities.LabelUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.values.Value;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.xtext.base.utilities.CS2ASResourceAdapter;
 import org.eclipse.ocl.xtext.base.utilities.ElementUtil;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 import org.eclipse.ocl.xtext.essentialocl.utilities.EssentialOCLCSResource;
@@ -213,7 +211,7 @@ public class PivotTestCase extends TestCase
 		URI xtextURI = URI.createURI("test.oclinecore");
 		ResourceSet resourceSet = new ResourceSetImpl();
 		EssentialOCLCSResource xtextResource = (EssentialOCLCSResource) resourceSet.createResource(xtextURI, null);
-		MetamodelManagerResourceAdapter.getAdapter(xtextResource, ocl.getMetamodelManager());
+		ocl.getEnvironmentFactory().adapt(xtextResource);
 		xtextResource.load(inputStream, null);
 		assertNoResourceErrors("Loading Xtext", xtextResource);
 		Resource pivotResource = savePivotFromCS(ocl, xtextResource, null);
@@ -247,8 +245,7 @@ public class PivotTestCase extends TestCase
 	}
 
 	public static Resource savePivotFromCS(@NonNull OCL ocl, BaseCSResource xtextResource, URI pivotURI) throws IOException {
-		CS2ASResourceAdapter adapter = xtextResource.getCS2ASAdapter(ocl.getMetamodelManager());
-		Resource pivotResource = adapter.getASResource(xtextResource);
+		Resource pivotResource = xtextResource.getASResource();
 		assertNoUnresolvedProxies("Unresolved proxies", pivotResource);
 		if (pivotURI != null) {
 			pivotResource.setURI(pivotURI);

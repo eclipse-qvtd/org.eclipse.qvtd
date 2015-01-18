@@ -75,7 +75,7 @@ public class QVTiVMEvaluator implements IVMEvaluator
     }
 
     public QVTiVMEvaluator(@NonNull QVTiVMEnvironmentFactory envFactory, @NonNull URI transformationURI) throws IOException {
-    	this(envFactory, QVTiXtextEvaluator.loadTransformation(envFactory.getMetamodelManager(), transformationURI, envFactory.keepDebug()));
+    	this(envFactory, QVTiXtextEvaluator.loadTransformation(envFactory, transformationURI, envFactory.keepDebug()));
     }
 
     public void createModel(@NonNull String name, @NonNull URI modelURI, String contentType) {

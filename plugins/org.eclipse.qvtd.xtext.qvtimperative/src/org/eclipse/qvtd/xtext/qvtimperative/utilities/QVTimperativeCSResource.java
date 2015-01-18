@@ -35,16 +35,14 @@ import org.eclipse.qvtd.xtext.qvtimperative.cs2as.QVTimperativeCS2AS;
 public class QVTimperativeCSResource extends EssentialOCLCSResource
 {
 	@Override
-	public @NonNull CS2AS createCS2AS(
-			@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap,
-			@NonNull EnvironmentFactoryInternal environmentFactory) {
-		return new QVTimperativeCS2AS(cs2asResourceMap, environmentFactory);
-	}
-
-	@Override
 	public @NonNull AS2CS createAS2CS(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap,
 			@NonNull EnvironmentFactoryInternal environmentFactory) {
 		return new QVTimperativeAS2CS(cs2asResourceMap, environmentFactory);
+	}
+
+	@Override
+	public @NonNull CS2AS createCS2AS(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull ASResource asResource) {
+		return new QVTimperativeCS2AS(environmentFactory, this, asResource);
 	}
 
 	@Override

@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcore.cs2as;
 
-import java.util.Map;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
@@ -21,8 +19,8 @@ import org.eclipse.qvtd.xtext.qvtcorebase.cs2as.QVTcoreBaseCS2AS;
 
 public class QVTcoreCS2AS extends QVTcoreBaseCS2AS
 {	
-	public QVTcoreCS2AS(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap, @NonNull EnvironmentFactoryInternal environmentFactory) {
-		super(cs2asResourceMap, environmentFactory);
+	public QVTcoreCS2AS(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull BaseCSResource csResource, @NonNull ASResource asResource) {
+		super(environmentFactory, csResource, asResource);
 	}
 
 	@Override

@@ -10,8 +10,6 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.cs2as;
 
-import java.util.Map;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -48,8 +46,8 @@ public class QVTimperativeCS2AS extends QVTcoreBaseCS2AS
 		return false;
 	}
 
-    public QVTimperativeCS2AS(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap, @NonNull EnvironmentFactoryInternal environmentFactory) {
-		super(cs2asResourceMap, environmentFactory);
+    public QVTimperativeCS2AS(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull BaseCSResource csResource, @NonNull ASResource asResource) {
+		super(environmentFactory, csResource, asResource);
 	}
 
 	@Override

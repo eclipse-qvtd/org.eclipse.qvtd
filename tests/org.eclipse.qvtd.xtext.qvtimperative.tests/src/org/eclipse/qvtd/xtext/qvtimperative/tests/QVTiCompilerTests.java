@@ -30,17 +30,16 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
-import org.eclipse.ocl.pivot.internal.manager.EnvironmentFactoryResourceSetAdapter;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.internal.validation.PivotEObjectValidator;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
+import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.validation.ComposedEValidator;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.xtext.base.utilities.CS2ASResourceAdapter;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
@@ -118,18 +117,16 @@ public class QVTiCompilerTests extends LoadTestCase
 		String pivotName = inputName + ".pivot";
 		URI cstURI = getProjectFileURI(cstName);
 		URI pivotURI = getProjectFileURI(pivotName);
-		CS2ASResourceAdapter adapter = null;
 		BaseCSResource xtextResource = (BaseCSResource) resourceSet.getResource(inputURI, true);
 		assert xtextResource != null;
 		assertNoResourceErrors("Load failed", xtextResource);
-		adapter = xtextResource.getCS2ASAdapter(null);
-		Resource pivotResource = adapter.getASResource(xtextResource);
+		ASResource asResource = xtextResource.getASResource();
 //		assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
 //		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
 		assertNoValidationErrors("Validation errors", xtextResource.getContents().get(0));
 //		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validated()");
 		saveAsXMI(xtextResource, cstURI);
-		pivotResource.setURI(pivotURI);
+		asResource.setURI(pivotURI);
 	    
 	    CompleteOCLStandaloneSetup.doSetup();
 	    URI oclURI = ClassUtil.nonNullState(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true));
@@ -139,16 +136,16 @@ public class QVTiCompilerTests extends LoadTestCase
 //		completeOCLEObjectValidator1.initialize();
 		completeOCLEObjectValidator2.initialize();
 //		completeOCLEObjectValidator3.initialize();
-		PivotEObjectValidator.install(ClassUtil.nonNullState(pivotResource.getResourceSet()), myQVT.getEnvironmentFactory());
+		PivotEObjectValidator.install(ClassUtil.nonNullState(asResource.getResourceSet()), myQVT.getEnvironmentFactory());
 		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTbasePackage.eINSTANCE));
 		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE));
 		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE));
 	    
-		assertNoValidationErrors("Pivot validation errors", pivotResource.getContents().get(0));
+		assertNoValidationErrors("Pivot validation errors", asResource.getContents().get(0));
 		Map<String, Object> options = new HashMap<String, Object>();
 		options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
-	    pivotResource.save(options);
-		return pivotResource;
+		asResource.save(options);
+		return asResource;
 	}
 
 	protected @NonNull Map<Object, Object> getSaveOptions() {
@@ -270,7 +267,7 @@ public class QVTiCompilerTests extends LoadTestCase
 				metamodelManager.addGenModel(genModel);
 			}
 		}
-		EnvironmentFactoryResourceSetAdapter.getAdapter(ClassUtil.nonNullState(resourceSet), myQVT.getEnvironmentFactory());
+		myQVT.getEnvironmentFactory().adapt(ClassUtil.nonNullState(resourceSet));
 		Resource resource = doLoad_ConcreteWithOCL(myQVT, transformURI);
 		for (EObject eObject : resource.getContents()) {
 			if (eObject instanceof ImperativeModel) {

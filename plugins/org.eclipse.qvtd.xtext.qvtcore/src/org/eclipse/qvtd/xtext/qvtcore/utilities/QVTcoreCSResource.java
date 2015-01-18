@@ -34,10 +34,8 @@ import org.eclipse.qvtd.xtext.qvtcore.cs2as.QVTcoreCS2AS;
 public class QVTcoreCSResource extends EssentialOCLCSResource
 {
 	@Override
-	public @NonNull CS2AS createCS2AS(
-			@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap,
-			@NonNull EnvironmentFactoryInternal environmentFactory) {
-		return new QVTcoreCS2AS(cs2asResourceMap, environmentFactory);
+	public @NonNull CS2AS createCS2AS(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull ASResource asResource) {
+		return new QVTcoreCS2AS(environmentFactory, this, asResource);
 	}
 
 	@Override

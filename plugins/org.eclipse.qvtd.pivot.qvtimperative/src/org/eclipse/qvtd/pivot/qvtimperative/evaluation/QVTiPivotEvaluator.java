@@ -32,27 +32,18 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  */
 public class QVTiPivotEvaluator implements EvaluationMonitor
 {
-	protected final @NonNull MetamodelManager metamodelManager;
-	protected final @NonNull Transformation transformation;
 	protected final @NonNull QVTiEnvironmentFactory environmentFactory;
+	protected final @NonNull Transformation transformation;
+	protected final @NonNull MetamodelManager metamodelManager;
 	protected final @NonNull QVTiModelManager modelManager;
     private EvaluationMonitor monitor = null;
     private boolean canceled = false;
 
     public QVTiPivotEvaluator(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
     	this.environmentFactory = environmentFactory;
+    	this.transformation = transformation;
     	this.metamodelManager = environmentFactory.getMetamodelManager();
-    	this.transformation = transformation;
     	QVTiTransformationAnalysis transformationAnalysis = environmentFactory.createTransformationAnalysis();
-    	transformationAnalysis.analyzeTransformation(transformation);
-    	this.modelManager = environmentFactory.createModelManager(transformationAnalysis);
-    }
-
-    public QVTiPivotEvaluator(@NonNull MetamodelManager metamodelManager, @NonNull Transformation transformation) {
-    	this.metamodelManager = metamodelManager;
-    	this.transformation = transformation;
-    	this.environmentFactory = (QVTiEnvironmentFactory) metamodelManager.getEnvironmentFactory();
-     	QVTiTransformationAnalysis transformationAnalysis = environmentFactory.createTransformationAnalysis();
     	transformationAnalysis.analyzeTransformation(transformation);
     	this.modelManager = environmentFactory.createModelManager(transformationAnalysis);
     }
