@@ -113,7 +113,6 @@ rule TypeToClassDatum
         --t.name.println("TypeToDatum ");
         d.type = t;
         d.super.addAll(t.superClasses.equivalent());
-        -- Do this in the VariableToDataParameter to get the correct domain
  		d.domain = domain;
  		d.schedule ::= QVTp!Transformation.all.first();
     }
@@ -126,11 +125,11 @@ rule PropertyCallExpToPropertyDatum
 		guard { 
 			var propContext = pCallExp.getContextType();
 			var refProperty = pCallExp.referredProperty;
-			return refProperty.propertyDatumNotCreated(propContext);
+			return pCallExp.isContainedInAnArea() and refProperty.propertyDatumNotCreated(propContext);
 		}
 		var propContext = pCallExp.getContextType();
 		var refProperty = pCallExp.referredProperty;
-		pDatum.updatePropertyDatum(null,propContext,refProperty);
+		pDatum.updatePropertyDatum(propContext,refProperty);
 		pDatum.createOppositePropDatum(false);
 	}
 
@@ -143,11 +142,11 @@ rule OppositePropertyCallExpToPropertyDatum
 		guard { 
 			var propContext = oPropCallExp.getContextType();
 			var refProperty = oPropCallExp.referredProperty.opposite;
-       		return refProperty.propertyDatumNotCreated(propContext);
+       		return pCallExp.isContainedInAnArea() and refProperty.propertyDatumNotCreated(propContext);
 		}
 		var propContext = oPropCallExp.getContextType();
 		var refProperty = oPropCallExp.referredProperty.opposite;
-		pDatum.updatePropertyDatum(null,propContext,refProperty);
+		pDatum.updatePropertyDatum(propContext,refProperty);
 		// With OppositePropertyCallExps we don't need to create oppositePropDatum
 		// because there is no opposite property 
 	}
@@ -167,15 +166,82 @@ rule PropertyAssignmentToPropertyDatum
 		}
      	var propContext = pAssign.getContextType();
 		var refProperty = pAssign.targetProperty;
-     	pDatum.updatePropertyDatum(null, propContext, refProperty);
+     	pDatum.updatePropertyDatum(propContext, refProperty);
 		pDatum.createOppositePropDatum(true);
 	}
 
-operation QVTs!PropertyDatum updatePropertyDatum(domain : QVTp!Domain, context: QVTp!Type, prop : QVTp!Property) {
+--
+-- Since operations might have other PropertyCallExp and OperationCallExp of interest, they have
+-- to be individually analyzed. We will start the analysis from OperationCallExps which are used
+-- from expression which belong to the mapping (or any of their CorePatterns)
+--
+-- Note that the original context type on which the operation is called, needs to be carried on
+-- through the anlysis, so the proper PropertyDatums are accordingly created
+--
+rule OperationCallExpToPropertyDatums
+	transform opCall : QVTp!OperationCallExp
+	to pDatums : OrderedSet(QVTs!PropertyDatum) {
+
+	// We are only interested in operation call expressions made from expressions
+	// belonging to the mappings (or any of their CorePatterns)
+	guard : opCall.isContainedInAnArea()
+	
+	var context = opCall.getContextType();
+	pDatums.addAll(opCall.analyseOCLExpression(context, Map{}).println("Analysis result: "));
+}
+
+operation QVTp!OperationCallExp analyseOCLExpression(context : QVTp!Type, type2VisitedOperations : Map) : OrderedSet(QVTp!PropertyDatum) {
+		
+	var visitedOps = type2VisitedOperations.get(context);
+	if (visitedOps = null) {
+		visitedOps = Set{};
+		type2VisitedOperations.put(context, visitedOps);
+	}
+	
+	var result = OrderedSet{};
+	var op = self.referredOperation;
+	
+	if (not visitedOps.contains(op)) {
+		context.name.print("Op analised: ");
+		op.name.println("::");
+		visitedOps.add(op);
+		// If is oclContainer() 		
+		var expInOCL = op.getBodyExpression();
+		if (expInOCL <> null) {
+			var oclExp = expInOCL.getOwnedBody();
+			for (eObject in oclExp.getAllContentsIncludingSelf()) {
+				if (eObject.isKindOf(QVTp!PropertyCallExp) or eObject.isKindOf(QVTp!OperationCallExp)) { // Fixme Opposite ? 
+					result.addAll(eObject.analyseOCLExpression(eObject.getContextType(context), type2VisitedOperations));
+				}
+			}
+		}
+	}
+	return result;
+}
+
+
+operation QVTp!PropertyCallExp analyseOCLExpression(context : QVTp!Type, type2VisitedOperations) : OrderedSet(QVTp!PropertyDatum) {
+
+	var refProperty = self.referredProperty;
+	if (refProperty.propertyDatumNotCreated(context)) {
+		var pDatum = new QVTs!PropertyDatum;
+		pDatum.updatePropertyDatum(context,refProperty);
+		pDatum.createOppositePropDatum(false);
+		return pDatum.asOrderedSet();
+	} else {
+		return OrderedSet{};
+	}
+}
+
+--
+-- PropertyDatums can be created either via an ETL rule or 'new' statment. Whereas PropertyDatums can 
+-- be differently created, this common subroutine will accordignly update the properties of those PropertyDatums.
+--
+operation QVTs!PropertyDatum updatePropertyDatum(context: QVTp!Type, prop : QVTp!Property) {
 
 	var classDatum ::= context;
-	context.name.print("Updating property for ");
-	prop.name.println("::");
+	--context.name.print("Updating property for ");
+	--prop.name.println("::");
 	self.domain = classDatum.domain;
 	self.property = prop;
     self.classDatum = classDatum;
@@ -184,7 +250,7 @@ operation QVTs!PropertyDatum updatePropertyDatum(domain : QVTp!Domain, context: 
 	    	if (superClass.producesDatums() and prop.propertyDatumNotCreated(superClass)) {
 		    	var superPropDatum = new QVTs!PropertyDatum;
 		    	self.super.add(superPropDatum);    	    	
-		    	superPropDatum.updatePropertyDatum(domain, superClass, prop);
+		    	superPropDatum.updatePropertyDatum(superClass, prop);
 	    	}
 	    }
     }
@@ -198,9 +264,7 @@ operation QVTs!PropertyDatum createOppositePropDatum(relationToOpposite : Boolea
 	    	var oppositePropDatum = oppProp.getPropertyDatum(oppPropContext);
 	    	if (oppositePropDatum.isUndefined()) {
 	    		oppositePropDatum = new QVTs!PropertyDatum;
-		    	oppositePropDatum.updatePropertyDatum(null, 
-	    		oppPropContext, 
-	    		oppProp);
+		    	oppositePropDatum.updatePropertyDatum(oppPropContext, oppProp);
 	    	}
 	    	if (relationToOpposite) {
 	    		self.opposite = oppositePropDatum;
@@ -300,12 +364,12 @@ operation QVTp!PropertyAssignment getSourceVariable() : QVTp!Variable {
 }
 
 @cached
-operation QVTp!Mapping getPropertyAssignments() : Collection { 
+operation QVTp!Mapping getPropertyAssignments() : Sequence { 
 	return self.asSequence().closure(x | x.eContents()).select(x | x.isKindOf(QVTp!PropertyAssignment));
 }
 
 @cached
-operation QVTp!Mapping getPropertyAccesses() : Collection { 
+operation QVTp!Mapping getPropertyAccesses() : Sequence { 
 	return self.asSequence().closure(x | x.eContents()).select(x | x.isKindOf(QVTp!PropertyCallExp) or x.isKindOf(QVTp!OppositePropertyCallExp));
 }
 
@@ -314,9 +378,46 @@ operation QVTp!CallExp getContextType() : QVTp!Type {
 	return self.ownedSource.type;
 }
 
+
+-- This is needed when analysing Property/Operation call exps so that they exploit the statically computed context 
+-- carried on through the analysis. When ever self variable is referred, the provided context will be the returned
+-- context type 
+@cached
+operation QVTp!CallExp getContextType(context : QVTp!Type) : QVTp!Type {
+	var source = self.ownedSource;
+	if (source.isTypeOf(QVTp!VariableExp) and source.referredVariable.name = "self") {
+		return context;
+	} else {
+		return source.type;
+	}
+}
+
 @cached
 operation QVTp!PropertyAssignment getContextType() : QVTp!Type {
 	return self.slotExpression.type;
+}
+
+@cached 
+operation QVTp!OCLExpression isContainedInAnArea() : Boolean {
+
+	var container = self.eContainer();
+	while (container <> null) {
+		if (container.isKindOf(QVTp!Area)) {
+			return true;
+		}
+		container = container.eContainer();
+	}
+	return false;
+}
+
+@cached 
+operation QVTp!OCLExpression getAllContents() : Sequence {
+	return self.asSequence().closure(x | x.eContents());
+}
+
+operation QVTp!OCLExpression getAllContentsIncludingSelf() : Sequence {
+	var initSeq = self.asSequence(); 
+	return initSeq.includingAll(initSeq.closure(x | x.eContents()));
 }
 
 post{

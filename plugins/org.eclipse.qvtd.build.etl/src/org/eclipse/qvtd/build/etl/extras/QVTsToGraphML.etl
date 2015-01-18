@@ -1,8 +1,8 @@
 pre {
 
 	QVTs!AbstractDatum.all.size().println("Number of Datums: ");
-	pruneQVTsModel();
-	QVTs!AbstractDatum.all.size().println("Number of Datums: ");
+/*	pruneQVTsModel();
+	QVTs!AbstractDatum.all.size().println("Number of Datums: ");*/
 	
 	// Key types shared across the transformation.
 	var nTypeKey : new GML!KeyType;
@@ -74,6 +74,7 @@ rule PropertyDatum2Node
 		var e = new GML!EdgeType;
 		e.source = t.id;
 		e.target = s.opposite.equivalent().id;
+		e.stilishEdge(GML!LineTypeType#dashed);
 	}
 
 	// Super dependencies (FIXME Refactor)
