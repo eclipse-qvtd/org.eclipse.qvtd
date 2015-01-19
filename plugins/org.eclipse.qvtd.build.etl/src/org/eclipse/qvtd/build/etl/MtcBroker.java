@@ -409,6 +409,9 @@ public class MtcBroker {
 					etl.models.add(sModel);
 					etl.models.add(configModel);
 					etl.models.add(oclStdLibModel);
+					// TODO How to deal with multiple candidate metamodels?
+					// TODO Include middle and/or inputs
+					etl.models.add(candidateMetamodelContainmentTrees.get(RIGHT_DIR_NAME).get(0));
 					etl.execute();
 				}
 			}
