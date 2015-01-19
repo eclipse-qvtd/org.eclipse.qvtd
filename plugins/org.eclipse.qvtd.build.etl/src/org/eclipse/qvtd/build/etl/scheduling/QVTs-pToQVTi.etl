@@ -106,6 +106,7 @@ rule Mappings
     extends Rules, Areas
     {
         
+        mIn.name.println("Mappings " );
         var ma = QVTs!MappingAction.all().selectOne(ma | ma.mapping.name == mIn.name); 
         if (not ma.children.isEmpty()) {
             mOut.mappingStatement = new QVTi!MappingSequence;

@@ -10,6 +10,7 @@
  ******************************************************************************/
 import "../helpers/OCLExpressionAnalysis.eol";
 import "../helpers/QVTHelpers.eol";
+import "../helpers/QVTsHelpers.eol";
 
 /****l* /org.eclipse.qvtd.build.etl.scheduling/MapOrdering
  * NAME
@@ -154,32 +155,6 @@ operation QVTs!MappingAction getOrdering(visited) {
 	self.order = self.schedule.getMaxIndex() + 1;
 }
 
-/****o* MapOrdering/getPredecessors
- * NAME
- *  getPredecessors - Get the predecessors of a mapping action
- * FUNCTION
- *  The predecessors of a mapping action are calculating by following the 
- *  mapping arguments' sources. This method could be invoked recursively
- *  to do a graph search iif a mechanism is added to prevent loops. 
- * CONTEXT
- *  QVTs!MappingAction  The MappingAction
- * RETURNS
- *  Sequence	The sequence of mapping predecesors. 
- *  SEE ALSO
- */
-@cached
-operation QVTs!MappingAction getPredecessors() : Set {
-
-    //self.mapping.name.println("getPredecessors ");
-	var args = self.arguments;
-	var subArgs = self.schedule.getAllDatums().select(subD | 
-		args.exists(datum | subD.getAllSuperDatums().includes(datum)));
-	// TODO excluding(self) was added as PropertyDatums may generate
-	// cyclic predecessors with the above search. Can remove it
-	// after arguemnts proeprty has been properly defined. 
-	return args.includingAll(subArgs)
-			.collect(a | a.sources).flatten().asSet().excluding(self);
-}
 
 /****o* Scheduler/derivedVariables
  * NAME
@@ -250,29 +225,7 @@ operation QVTs!ClassDatum correspondsWith(node : rTree!Node) : Boolean {
 	return self.type.getETarget() = node.element;
 }
 
-@cached
-operation QVTs!AbstractDatum isDatumOrSubdatum(datum : QVTs!ClassDatum) : Boolean {
-	if (self = datum) {
-		return true;
-	} else if (datum.isKindOf(QVTs!ClassDatum)) {
-		// FIXME Rethink this
-		// With respect to PropertyDatums we will never be interested in this
-		return self.getAllSuperDatums().includes(datum);
-	} else {
-		return false;
-	}
-}
 
-@cached 
-operation QVTs!AbstractDatum getAllSuperDatums() : Sequence(QVTs!AbstractDatum) {
-	return self.asSequence().closure(x | x.super);
-}
-
-@cached
-operation QVTs!Schedule getAllDatums() : OrderedSet(QVTs!AbstractDatum) {
-	var classDatums = self.datums;
-	return classDatums.includingAll(classDatums.propertyDatums.flatten());
-}
  
 /* =========================================== */
 

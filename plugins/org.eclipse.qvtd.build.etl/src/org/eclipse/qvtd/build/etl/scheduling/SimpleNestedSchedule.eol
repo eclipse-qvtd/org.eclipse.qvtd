@@ -9,6 +9,7 @@
  *     Horacio Hoyos - initial implementation
  ******************************************************************************/
 import "../helpers/QVTHelpers.eol";
+import "../helpers/QVTsHelpers.eol";
 import "RootMapping.eol";
 
  /****l* /org.eclipse.qvtd.build.etl.scheduling/SimpleNestedSchedule
@@ -46,9 +47,17 @@ var bm = t.getRootMapping();
 
 var s = QVTs!Schedule.all.first();
 s.simpleNest();
-QVTi.setCachingEnabled(false);
-s.forceOrder();
-QVTi.setCachingEnabled(true);
+//QVTp.setCachingEnabled(false);
+//t.forceOrder();
+//QVTp.setCachingEnabled(true);
+var ma = new QVTs!MappingAction;
+ma.order = 0;
+// Parentless mapping actions to the root.
+for (na in s.actions.select(ma | not ma.parent.isDefined()).sortBy(a | a.order)) {
+    na.parent = ma;     // All mappings invoked from the root in order
+}
+ma.schedule = s;
+ma.mapping = bm;
         
 "Nested Scheduling Done".println();
 
@@ -293,7 +302,7 @@ operation QVT!Variable canBeDerived(matched : Sequence) : Boolean {
  * CONTEXT
  *  QVTs!Transformation  The transformation
  */
-operation QVTs!Transformation forceOrder() {
+operation QVTp!Transformation forceOrder() {
 
     for (m in self.rule) {
         //m.name.println("m ");
