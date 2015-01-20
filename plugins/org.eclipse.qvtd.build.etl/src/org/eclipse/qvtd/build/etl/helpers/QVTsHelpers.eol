@@ -58,15 +58,12 @@ operation QVTs!DistinctData getNextDistinctData() : QVTs!DistinctData {
 @cached
 operation QVTs!MappingAction getPredecessors() : Set {
 
-    //self.mapping.name.println("getPredecessors ");
-	var args = self.arguments;
-	var subArgs = self.schedule.getAllDatums().select(subD | 
-		args.exists(datum | subD.getAllSuperDatums().includes(datum)));
-	// TODO excluding(self) was added as PropertyDatums may generate
-	// cyclic predecessors with the above search. Can remove it
-	// after arguemnts proeprty has been properly defined. 
-	return args.includingAll(subArgs)
-			.collect(a | a.sources).flatten().asSet().excluding(self);
+	//self.mapping.name.println("getPredecessors ");
+	var reqs = self.requisites;
+	var subReqs = self.schedule.getAllDatums().select(subD | 
+		reqs.exists(datum | subD.getAllSuperDatums().includes(datum)));
+	return reqs.includingAll(subReqs)
+			.collect(req| req.producedBy).flatten().asSet();
 }
 
 @cached
@@ -83,8 +80,8 @@ operation QVTs!AbstractDatum isDatumOrSubdatum(datum : QVTs!ClassDatum) : Boolea
 }
 
 @cached 
-operation QVTs!AbstractDatum getAllSuperDatums() : Sequence(QVTs!AbstractDatum) {
-	return self.asSequence().closure(x | x.super);
+operation QVTs!AbstractDatum getAllSuperDatums() : OrderedSet(QVTs!AbstractDatum) {
+	return self.asSequence().closure(x | x.super).asOrderedSet();
 }
 
 @cached
@@ -92,7 +89,3 @@ operation QVTs!Schedule getAllDatums() : OrderedSet(QVTs!AbstractDatum) {
 	var classDatums = self.datums;
 	return classDatums.includingAll(classDatums.propertyDatums.flatten());
 }
-
-
-
-   

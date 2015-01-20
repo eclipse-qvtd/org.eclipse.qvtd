@@ -1,8 +1,15 @@
-pre {
+// Transformation to produce a graphml file from a QVTs model 
+// Additional parameters:
+//    pruneModel: to prune the QVTs model prior to do the transformation. default = true
+//
 
+pre {
+	
+	if (pruneModel) {
+		QVTs!AbstractDatum.all.size().println("Number of Datums prior pruning: ");
+		pruneQVTsModel();
+	}
 	QVTs!AbstractDatum.all.size().println("Number of Datums: ");
-/*	pruneQVTsModel();
-	QVTs!AbstractDatum.all.size().println("Number of Datums: ");*/
 	
 	// Key types shared across the transformation.
 	var nTypeKey : new GML!KeyType;
@@ -95,13 +102,13 @@ rule MappingAction2Node
 	to t : GML!NodeType {
 	
 	t.id = s.mapping.name + " (" + s.order + ")";
-	for (datum in s.arguments) {
+	for (datum in s.requisites) {
      	var e = new GML!EdgeType;
         e.source = datum.equivalent().id;
         e.target = t.id;
 	}
 	
-	for (datum in s.results) {
+	for (datum in s.productions) {
      	var e = new GML!EdgeType;
         e.source = t.id;
         e.target = datum.equivalent().id;
@@ -151,19 +158,19 @@ operation pruneQVTsModel() {
 	var graphChanged = true;
 	while (graphChanged) {
 		var pDatumsToRemove = OrderedSet{};
-		// We remove all the PropertyDatum which don't are not produced/consumed by an action and doesn't have any super
+		// We remove all the PropertyDatum which don't are not produced/required by an action and doesn't have any super
 		for (pDatum in QVTs!PropertyDatum.all()) {
-			if(pDatum.sources.isEmpty() and
-				pDatum.super.isEmpty() and
-				pDatum.targets.isEmpty()) {
+			if(pDatum.producedBy.isEmpty() and
+				pDatum.requiredBy.isEmpty()and
+				pDatum.super.isEmpty()) {
 				pDatumsToRemove.add(pDatum);
 			}
 		}
 		
 		var cDatumsToRemove = OrderedSet{};
-		// We will remove all the ClassDatum which are not consumed, and doesn't have any PropertyDatum
+		// We will remove all the ClassDatum which are not required by an action, and doesn't have any PropertyDatum
 		for (cDatum in QVTs!ClassDatum.all()) {
-			if(cDatum.sources.isEmpty() and 
+			if(cDatum.requiredBy.isEmpty() and 
 				(cDatum.propertyDatums.isEmpty() 
 					or cDatum.propertyDatums.forAll(x | pDatumsToRemove.contains(x)))) {
 				cDatumsToRemove.add(cDatum);

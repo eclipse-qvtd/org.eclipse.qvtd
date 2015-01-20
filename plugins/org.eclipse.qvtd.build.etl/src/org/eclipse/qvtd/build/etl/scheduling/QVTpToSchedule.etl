@@ -60,9 +60,10 @@ rule MappingToMappingAction
         m.name.println("mapping ");
         ma.schedule ::= m.transformation;
         ma.mapping = m;
-        ma.results.addAll(m.getOutputVariables().collect(v | v.type).equivalent());
         ma.distinctArguments.addAll(m.getInputVariables().equivalents().collect(e | e.first()));
-        ma.arguments.addAll(ma.getDistinctDataClassDatums());
+        ma.arguments.addAll(ma.getDistinctDataClassDatums()); -- FIXME arguments should be derived.
+        ma.requisites.addAll(ma.getDistinctDataClassDatums());
+        ma.productions.addAll(m.getOutputVariables().collect(v | v.type).equivalent());
     }
 
 /****u* QVTpToSchedule/VariableToDataParameter
@@ -567,8 +568,8 @@ post{
 		consumedPDatums.addAll(m.getOperationCallExps().collect(x | x.getPropertyDatums()).flatten());
 		var producedPDatums = m.getPropertyAssignments().collect(x | x.getPropertyDatum()).asOrderedSet();
 		producedPDatums.addAll(producedPDatums.opposite.select(x | x.isDefined())); // We want all the opposite produced by them
-		ma.results.addAll(producedPDatums);
-		ma.arguments.addAll(consumedPDatums);
+		ma.productions.addAll(producedPDatums);
+		ma.requisites.addAll(consumedPDatums);
 	} 
 	
 	"QVTpToSchedule Done".println();

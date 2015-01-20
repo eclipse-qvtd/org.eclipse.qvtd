@@ -2,6 +2,8 @@
  */
 package org.eclipse.qvtd.build.qvtschedule;
 
+import org.eclipse.ocl.pivot.Property;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -31,12 +33,12 @@ public interface PropertyDatum extends AbstractDatum {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Property</em>' reference.
-	 * @see #setProperty(org.eclipse.ocl.pivot.Property)
+	 * @see #setProperty(Property)
 	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getPropertyDatum_Property()
 	 * @model required="true"
 	 * @generated
 	 */
-	org.eclipse.ocl.pivot.Property getProperty();
+	Property getProperty();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.qvtd.build.qvtschedule.PropertyDatum#getProperty <em>Property</em>}' reference.
@@ -46,7 +48,7 @@ public interface PropertyDatum extends AbstractDatum {
 	 * @see #getProperty()
 	 * @generated
 	 */
-	void setProperty(org.eclipse.ocl.pivot.Property value);
+	void setProperty(Property value);
 
 	/**
 	 * Returns the value of the '<em><b>Class Datum</b></em>' container reference.

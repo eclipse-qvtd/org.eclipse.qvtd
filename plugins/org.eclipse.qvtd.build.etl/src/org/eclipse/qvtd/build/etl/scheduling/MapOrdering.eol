@@ -110,12 +110,12 @@ operation QVTs!Schedule findMapOrdering()  {
 	    // corresponding to the type of the target node
 		var baseDatum = self.datums.selectOne(x | x.correspondsWith(n));
 	    if (baseDatum.isDefined()) {
-		    for (ma in self.actions.select(aa | aa.results.exists(e | e.isDatumOrSubdatum(baseDatum)))) { 
+		    for (ma in self.actions.select(aa | aa.productions.exists(e | e.isDatumOrSubdatum(baseDatum)))) { 
 		        // Find the predecesors and linearize
 		        if (visitedAct.excludes(ma))
 		        	ma.getOrdering(visitedAct);
 		        for (pDatum in baseDatum.propertyDatums) {
-		        	for (ma in self.actions.select(aa | aa.results.exists(e | e = pDatum))) {
+		        	for (ma in self.actions.select(aa | aa.productions.exists(e | e = pDatum))) {
 		        		if (visitedAct.excludes(ma))
 		        			ma.getOrdering(visitedAct);
 		        	}
