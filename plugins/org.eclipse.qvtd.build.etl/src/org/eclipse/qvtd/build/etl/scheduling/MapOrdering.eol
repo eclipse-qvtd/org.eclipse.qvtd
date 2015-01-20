@@ -9,22 +9,74 @@
  *     Horacio Hoyos - initial implementation
  ******************************************************************************/
 import "../helpers/OCLExpressionAnalysis.eol";
+import "../helpers/QVTHelpers.eol";
+import "../helpers/QVTsHelpers.eol";
 
 /****l* /org.eclipse.qvtd.build.etl.scheduling/MapOrdering
  * NAME
- *  MapOrdering -- A set of EOL operations to perform scheduling analysys from
- *  data dependencies
+ *  MapOrdering -- A EOL script to derive primary and secondary arguments and 
+ * find the map ordering based on data dependencies. Invoke this script before
+ * invoking any of the scheduling scripts.
  *
  * MODELS
  *  Required models to run the script:
  *      - NAME      ALIASES METAMODEL               ROL SOD
- *      - qvti      QVT     QVTCore                  X          The QVTi (partitioned) AST
- *      - rTree     tree    ECoreContainmentTree     X          The right metamodel containment tree
- *      - qvts              QVTSchedule                  X      The QVT schedule model
+ *      - QVTs      QVT       QVTSchedule              X   X      The QVT schedule model
  * SEE ALSO
- *
+ *	FlatSchedule.eol
+ *  SimpleNestedSchedule.eol
  ******
  */
+var s = QVTs!Schedule.all.first();
+
+// Secondary Argument Derivations
+s.defineArgumentDerivation();
+s.removeEmptyDistinctData();
+
+// Ordering
+s.findMapOrdering();
+"Map Ordering Done!".println();
+
+/****o* Scheduler/defineArgumentDerivation
+ * NAME
+ *  defineArgumentDerivation - Identifies what parameters can be derived from
+ *  others
+ * FUNCTION
+ *  
+ * CONTEXT
+ *  QVTs!Schedule  The Schdule
+ * SEE ALSO
+ */
+operation QVTs!Schedule defineArgumentDerivation() {
+    for (ma in self.actions) {
+        //ma.mapping.name.println("m ");
+        // Find the best derivation alternatives
+        var inputVars = ma.distinctArguments.collect(da | da.primaryArguments.first().variable);
+        var derivees = ma.distinctArguments.collect(da | da.primaryArguments.first())
+                .aggregate(pa | pa, pa.variable.derivedVariables(inputVars));                    
+        for (da in ma.distinctArguments.sortBy(da | derivees.get(da.primaryArguments.first()).size()).invert()) {
+            for (dv in derivees.get(da.primaryArguments.first())) {
+                if (ma.distinctArguments.exists(da | da.primaryArguments.exists(pa | pa.variable == dv))) {
+                    da.secondaryArguments.add(ma.distinctArguments.selectOne(da | da.primaryArguments.exists(pa | pa.variable == dv)).primaryArguments.first());
+                }
+            }
+        }
+    }
+}
+
+/****o* Scheduler/removeEmptyDistinctData
+ * NAME
+ *  removeEmptyDistinctData - Remove DistinctData elements that don't have a 
+ *  primary argument.
+ * CONTEXT
+ *  QVTs!Schedule  The Schdule
+ */
+operation QVTs!Schedule removeEmptyDistinctData() {
+    
+    for (da in self.actions.collect(a | a.distinctArguments).flatten().select(dd | dd.primaryArguments.isEmpty())) {
+        delete da;
+    }
+}
 
 
 /****o* MapOrdering/findMapOrdering
@@ -103,28 +155,44 @@ operation QVTs!MappingAction getOrdering(visited) {
 	self.order = self.schedule.getMaxIndex() + 1;
 }
 
-/****o* MapOrdering/getPredecessors
- * NAME
- *  getPredecessors - Get the predecessors of a mapping action
- * FUNCTION
- *  The predecessors of a mapping action are calculating by following the 
- *  mapping arguments' sources. This method could be invoked recursively
- *  to do a graph search iif a mechanism is added to prevent loops. 
- * CONTEXT
- *  QVTs!MappingAction  The MappingAction
- * RETURNS
- *  Sequence	The sequence of mapping predecesors. 
- *  SEE ALSO
- */
-@cached
-operation QVTs!MappingAction getPredecessors() : Set {
 
-    //self.mapping.name.println("getPredecessors ");
-	var args = self.arguments;
-	var subArgs = self.schedule.getAllDatums().select(subD | 
-		args.exists(datum | subD.getAllSuperDatums().includes(datum)));
-	return args.includingAll(subArgs)
-			.collect(a | a.sources).flatten().asSet();
+/****o* Scheduler/derivedVariables
+ * NAME
+ *  derivedVariables - Analysis of variable relations to find derivable ones
+ * FUNCTION
+ *  Returns a list of variables that can be derived from the context variable.
+ *  The function performs a full depth search looking for variables that can be
+ *  derived from the derived ones too.
+ *
+ * CONTEXT
+ *  QVT!Variable  The variable being analyzed
+ * PARAMETERS
+ *  vars The variables to look for relations
+ * RESULT
+ *  A
+ * SEE ALSO
+ *
+ */
+operation QVT!Variable derivedVariables(vars : Sequence) : Set {
+
+    var derived : Set;
+    for (vB in vars.excluding(self)) {
+        for (rel in self.hasRelation(vB)) { //self.hasRelation(vB).sortBy(r | r.getCost()) // In the future cost can be used to select the less expensive navigation
+            //vB.name.println(self.name + "    has relation to ");
+            derived.add(vB);
+            derived.addAll(vB.derivedVariables(vars.excluding(self)));
+            break;
+        }
+        // Can the opposite relation be used?
+        for (rel in vB.hasRelation(self)) { //self.hasRelation(vB).sortBy(r | r.getCost()) // In the future cost can be used to select the less expensive navigation
+            //vB.name.println(self.name + "    has relation to ");
+            if (hasNavigableOpposite(rel)) {
+                derived.add(vB);
+                derived.addAll(vB.derivedVariables(vars.excluding(self)));
+            }
+        }
+    }
+    return derived;
 }
 
 /****o* MapOrdering/getMaxIndex
@@ -157,29 +225,7 @@ operation QVTs!ClassDatum correspondsWith(node : rTree!Node) : Boolean {
 	return self.type.getETarget() = node.element;
 }
 
-@cached
-operation QVTs!AbstractDatum isDatumOrSubdatum(datum : QVTs!ClassDatum) : Boolean {
-	if (self = datum) {
-		return true;
-	} else if (datum.isKindOf(QVTs!ClassDatum)) {
-		// FIXME Rethink this
-		// With respect to PropertyDatums we will never be interested in this
-		return self.getAllSuperDatums().includes(datum);
-	} else {
-		return false;
-	}
-}
 
-@cached 
-operation QVTs!AbstractDatum getAllSuperDatums() : Sequence(QVTs!AbstractDatum) {
-	return self.asSequence().closure(x | x.super);
-}
-
-@cached
-operation QVTs!Schedule getAllDatums() : OrderedSet(QVTs!AbstractDatum) {
-	var classDatums = self.datums;
-	return classDatums.includingAll(classDatums.propertyDatums.flatten());
-}
  
 /* =========================================== */
 

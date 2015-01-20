@@ -1,0 +1,43 @@
+/*******************************************************************************
+ * Copyright (c) 2013 The University of York and Willink Transformations.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
+import "RootMapping.eol";
+
+ /****l* /org.eclipse.qvtd.build.etl.scheduling/FlatSchedule
+ * NAME
+ *  FlatSchedule -- Use the Schedule model to find a mapping ordering and then
+ *  invoke the mappings in that order without any nesting. 
+ *
+ * MODELS
+ *  Required models to run the script:
+ *      - NAME      ALIASES METAMODEL               ROL SOD
+ *      - QVTp      QVT     QVTi                     X   -        The QVTi (partitioned) AST
+ *      - QVTs              QVTScheduling            -   X        The scheduling model
+ * TRHOWS
+ *  Exception if a mapping with name "__root__" already exists. 
+ * SEE ALSO
+ *  MapOrdering.eol
+ *  RootMapping.eol
+ *  SimpleNestedSchedule.eol
+ ******
+ */
+ 
+var s = QVTs!Schedule.all.first();
+var ma = new QVTs!MappingAction;
+ma.order = 0;
+// Define nestings
+for (na in s.actions.sortBy(a | a.order)) {
+    na.parent = ma;     // All mappings invoked from the root in order
+}
+ma.schedule = s;
+var t = QVTp!Transformation.all.first(); 
+var bm = t.getRootMapping();
+ma.mapping = bm;
+"Flat Scheduling Done".println();

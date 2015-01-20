@@ -57,7 +57,7 @@ rule MappingToMappingAction
     transform m : QVTp!Mapping
     to ma : QVTs!MappingAction {
         
-        --m.name.println();
+        m.name.println("mapping ");
         ma.schedule ::= m.transformation;
         ma.mapping = m;
         ma.results.addAll(m.getOutputVariables().collect(v | v.type).equivalent());
@@ -105,12 +105,18 @@ rule TypeToClassDatum
         var domain;
         if (t.existsCorePatternVariable()) {
         	// FIXME What if we have different variables belonging to different domains ?
-        	domain = t.getCorePatternVariables().first().oppositePattern().area;
+        	var area = t.getCorePatternVariables().first().oppositePattern().area;
+        	area.println("area: "); 
+        	if (area.isKindOf(QVTp!Domain)) {
+        		domain = area;
+        	} else {
+        		domain = null;
+        	}
         } else {
         	domain = null; 
         }
          
-        --t.name.println("TypeToDatum ");
+        t.name.println("TypeToDatum ");
         d.type = t;
         d.super.addAll(t.superClasses.equivalent());
  		d.domain = domain;
