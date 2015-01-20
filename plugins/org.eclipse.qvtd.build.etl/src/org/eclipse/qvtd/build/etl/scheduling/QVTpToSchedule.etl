@@ -223,20 +223,21 @@ operation QVTp!OperationCallExp analyseOCLExpression(context : QVTp!Type, type2V
 			} 
 		} else {
 			var expInOCL = op.getBodyExpression();
-			if (expInOCL <> null) {
-				variable2BoundContext.put(expInOCL.ownedContext, context);
-				
+			if (expInOCL.isKindOf(QVTp!ExpressionInOCL)) {
 				var oclExp = expInOCL.getOwnedBody();
-				for (eObject in oclExp.getAllContentsIncludingSelf()) {
-					if (eObject.isKindOf(QVTp!LetExp)) {
-						eObject.updateVariableBindings(variable2BoundContext);
-					} else if (eObject.isKindOf(QVTp!PropertyCallExp)) { // FIXME OppositeCallExp ?
-						for (newContext in eObject.getComputedContexts(variable2BoundContext)) {
-							result.add(eObject.analyseOCLExpression(newContext));
-						}
-					} else if (eObject.isKindOf(QVTp!OperationCallExp)) {
-						for (newContext in eObject.getComputedContexts(variable2BoundContext)) {
-							result.addAll(eObject.analyseOCLExpression(newContext, type2VisitedOperations, type2VariableBindings));
+				if (oclExp <> null) {
+					variable2BoundContext.put(expInOCL.ownedContext, context);
+					for (eObject in oclExp.getAllContentsIncludingSelf()) {
+						if (eObject.isKindOf(QVTp!LetExp)) {
+							eObject.updateVariableBindings(variable2BoundContext);
+						} else if (eObject.isKindOf(QVTp!PropertyCallExp)) { // FIXME OppositeCallExp ?
+							for (newContext in eObject.getComputedContexts(variable2BoundContext)) {
+								result.add(eObject.analyseOCLExpression(newContext));
+							}
+						} else if (eObject.isKindOf(QVTp!OperationCallExp)) {
+							for (newContext in eObject.getComputedContexts(variable2BoundContext)) {
+								result.addAll(eObject.analyseOCLExpression(newContext, type2VisitedOperations, type2VariableBindings));
+							}
 						}
 					}
 				}

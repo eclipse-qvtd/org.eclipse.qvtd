@@ -11,6 +11,7 @@
 import "../helpers/QVTHelpers.eol";
 import "../helpers/QVTsHelpers.eol";
 import "RootMapping.eol";
+import "MapOrdering.eol";
 
  /****l* /org.eclipse.qvtd.build.etl.scheduling/SimpleNestedSchedule
  * NAME
@@ -41,11 +42,15 @@ import "RootMapping.eol";
  ******
  */
 
+var s = QVTs!Schedule.all.first();
+// Map Ordering
+s.doMapOrdering();
+
 // Create root mapping
 var t = QVTp!Transformation.all.first(); 
 var bm = t.getRootMapping();
 
-var s = QVTs!Schedule.all.first();
+// Schedule
 s.simpleNest();
 //QVTp.setCachingEnabled(false);
 //t.forceOrder();

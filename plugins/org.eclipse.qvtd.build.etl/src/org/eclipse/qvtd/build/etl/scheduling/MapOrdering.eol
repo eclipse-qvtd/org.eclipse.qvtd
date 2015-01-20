@@ -15,8 +15,9 @@ import "../helpers/QVTsHelpers.eol";
 /****l* /org.eclipse.qvtd.build.etl.scheduling/MapOrdering
  * NAME
  *  MapOrdering -- A EOL script to derive primary and secondary arguments and 
- * find the map ordering based on data dependencies. Invoke this script before
- * invoking any of the scheduling scripts.
+ * find the map ordering based on data dependencies.
+ *
+ * Invoke QVTs!Schedule::doMapOrdering();  
  *
  * MODELS
  *  Required models to run the script:
@@ -27,15 +28,16 @@ import "../helpers/QVTsHelpers.eol";
  *  SimpleNestedSchedule.eol
  ******
  */
-var s = QVTs!Schedule.all.first();
 
-// Secondary Argument Derivations
-s.defineArgumentDerivation();
-s.removeEmptyDistinctData();
+operation QVTs!Schedule doMapOrdering() {
 
-// Ordering
-s.findMapOrdering();
-"Map Ordering Done!".println();
+	// Secondary Argument Derivations
+	self.defineArgumentDerivation();
+	self.removeEmptyDistinctData();
+	
+	// Ordering
+	self.findMapOrdering();
+}
 
 /****o* Scheduler/defineArgumentDerivation
  * NAME

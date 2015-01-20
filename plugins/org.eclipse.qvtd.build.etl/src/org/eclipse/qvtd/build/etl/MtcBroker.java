@@ -107,8 +107,11 @@ public class MtcBroker {
 	/** The Constant QVTP_TO_QVTS_ETL. */
 	private static final String QVTP_TO_QVTS_ETL = "scheduling/QVTpToSchedule.etl";
 	
-	/** The Constant QVTP_SCHEDULE_EOL. */
-	private static final String QVTP_SCHEDULE_EOL = "scheduling/Scheduler.eol";
+	/** The Constant QVTP_FLAT_SCHEDULE_EOL. */
+	private static final String QVTP_FLAT_SCHEDULE_EOL = "scheduling/FlatSchedule.eol";
+	
+	/** The Constant QVTP_SIMPLE_NESTING_SCHEDULE_EOL. */
+	private static final String QVTP_SIMPLE_NESTING_SCHEDULE_EOL = "scheduling/SimpleNestedSchedule.eol";
 	
 	/** The Constant QVTPS_TO_QVTI_ETL. */
 	private static final String QVTPS_TO_QVTI_ETL = "scheduling/QVTs-pToQVTi.etl";
@@ -429,10 +432,20 @@ public class MtcBroker {
 	 */
 	protected void qvtpScheduling(PivotModel pModel, PivotModel sModel) throws QvtMtcExecutionException {
 		
+		qvtpScheduling(pModel, sModel, QVTP_FLAT_SCHEDULE_EOL);
+	}
+	
+	protected void qvtpSimpleNestingScheduling(PivotModel pModel, PivotModel sModel) throws QvtMtcExecutionException {
+		
+		qvtpScheduling(pModel, sModel, QVTP_SIMPLE_NESTING_SCHEDULE_EOL);
+	}
+	
+	protected void qvtpScheduling(PivotModel pModel, PivotModel sModel, String schedulingTxURI) throws QvtMtcExecutionException {
+		
 		if (pModel != null && sModel != null  ) {
 			EolTask eol = null;
 			try {
-				eol = new EolTask(java.net.URI.create(getResourceURI(QVTP_SCHEDULE_EOL)));
+				eol = new EolTask(java.net.URI.create(getResourceURI(schedulingTxURI)));
 			} catch (URISyntaxException e) {
 				throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
 			}

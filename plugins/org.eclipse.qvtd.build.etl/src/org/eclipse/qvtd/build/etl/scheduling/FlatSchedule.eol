@@ -9,6 +9,7 @@
  *     Horacio Hoyos - initial implementation
  ******************************************************************************/
 import "RootMapping.eol";
+import "MapOrdering.eol";
 
  /****l* /org.eclipse.qvtd.build.etl.scheduling/FlatSchedule
  * NAME
@@ -28,8 +29,12 @@ import "RootMapping.eol";
  *  SimpleNestedSchedule.eol
  ******
  */
- 
+
 var s = QVTs!Schedule.all.first();
+// Map Ordering
+s.doMapOrdering();
+
+// Schedule
 var ma = new QVTs!MappingAction;
 ma.order = 0;
 // Define nestings
