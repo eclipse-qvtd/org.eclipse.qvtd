@@ -137,7 +137,6 @@ rule PropertyCallExpToPropertyDatum
 		var propContext = pCallExp.getContextType();
 		var refProperty = pCallExp.referredProperty;
 		pDatum.updatePropertyDatum(propContext,refProperty);
-		pDatum.createOppositePropDatum(false);
 	}
 
 -- greedy to also consider MiddlePropertyCallExp
@@ -154,12 +153,11 @@ rule OppositePropertyCallExpToPropertyDatum
 		var propContext = oPropCallExp.getContextType();
 		var refProperty = oPropCallExp.referredProperty.opposite;
 		pDatum.updatePropertyDatum(propContext,refProperty);
-		// With OppositePropertyCallExps we don't need to create oppositePropDatum
-		// because there is no opposite property 
 	}
 
 
 -- greedy to also consider MiddlePropertyAssignment
+// FIXME opposites (nonNavigable) will need different treat. See Bug 454555
 @greedy    
 rule PropertyAssignmentToPropertyDatum 
     transform pAssign : QVTp!PropertyAssignment
@@ -174,7 +172,7 @@ rule PropertyAssignmentToPropertyDatum
      	var propContext = pAssign.getContextType();
 		var refProperty = pAssign.targetProperty;
      	pDatum.updatePropertyDatum(propContext, refProperty);
-		pDatum.createOppositePropDatum(true);
+		pDatum.createOppositePropDatum();
 	}
 
 --
@@ -299,7 +297,7 @@ operation QVTs!PropertyDatum updatePropertyDatum(context: QVTp!Type, prop : QVTp
     }
 }
 
-operation QVTs!PropertyDatum createOppositePropDatum(relationToOpposite : Boolean) {
+operation QVTs!PropertyDatum createOppositePropDatum() {
 	var oppProp = self.property.opposite;
     if (oppProp.isDefined()) {
     	var oppPropContext = oppProp.owningClass;
@@ -309,11 +307,7 @@ operation QVTs!PropertyDatum createOppositePropDatum(relationToOpposite : Boolea
 	    		oppositePropDatum = new QVTs!PropertyDatum;
 		    	oppositePropDatum.updatePropertyDatum(oppPropContext, oppProp);
 	    	}
-	    	if (relationToOpposite) {
-	    		self.opposite = oppositePropDatum;
-	    	} else {
-	    		oppositePropDatum.opposite = self;
-	    	}
+	    	self.opposite = oppositePropDatum;
     	}
     }
 }
@@ -327,7 +321,6 @@ operation QVTp!Property getOrCreateAccessedPropertyDatum(context : QVTp!Type) : 
 	if (self.propertyDatumNotCreated(context)) {
 		var pDatum = new QVTs!PropertyDatum;
 		pDatum.updatePropertyDatum(context,self);
-		pDatum.createOppositePropDatum(false);
 		return pDatum;
 	} else {
 		return self.getPropertyDatum(context);

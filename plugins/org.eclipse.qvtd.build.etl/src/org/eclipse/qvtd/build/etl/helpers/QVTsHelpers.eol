@@ -56,14 +56,16 @@ operation QVTs!DistinctData getNextDistinctData() : QVTs!DistinctData {
  *  SEE ALSO
  */
 @cached
-operation QVTs!MappingAction getPredecessors() : Set {
+operation QVTs!MappingAction getPredecessors() : OrderedSet {
 
 	//self.mapping.name.println("getPredecessors ");
 	var reqs = self.requisites;
 	var subReqs = self.schedule.getAllDatums().select(subD | 
 		reqs.exists(datum | subD.getAllSuperDatums().includes(datum)));
 	return reqs.includingAll(subReqs)
-			.collect(req| req.producedBy).flatten().asSet();
+			.collect(req| req.producedBy).flatten()
+			.sortBy(a | a.mapping.name) // To ensure determinism
+			.asOrderedSet();
 }
 
 @cached
