@@ -36,7 +36,7 @@ import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 public class LoadTestCase extends XtextTestCase
 {	
 	public void doLoad_Concrete(@NonNull String inputName) throws IOException {
-		OCL ocl = OCL.newInstance(getProjectMap());
+		OCL ocl = OCL.newInstance(OCL.NO_PROJECTS);
 		URI inputURI = getProjectFileURI(inputName);
 		URI pivotURI = inputURI.trimFileExtension().appendFileExtension("qvtias");
 		doLoad_Concrete(ocl, inputURI, pivotURI);
