@@ -20,13 +20,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.emf.ecore.xmi.impl.EMOFResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.StandardLibraryImpl;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
-import org.eclipse.ocl.pivot.internal.manager.EnvironmentFactoryAdapter;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 
@@ -51,7 +48,7 @@ public class LoadTestCase extends XtextTestCase
 
 	protected Resource doLoad_Concrete(@NonNull OCL ocl, @NonNull URI inputURI, @NonNull URI pivotURI) throws IOException {
 		URI cstURI = pivotURI.trimFileExtension().appendFileExtension("xmi");
-		BaseCSResource xtextResource = (BaseCSResource) ocl.getMetamodelManager().getExternalResourceSet().getResource(inputURI, true);
+		BaseCSResource xtextResource = (BaseCSResource) ocl.getResourceSet().getResource(inputURI, true);
 		assertNoResourceErrors("Load failed", xtextResource);
 		Resource pivotResource = xtextResource.getASResource();
 //		assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
@@ -84,19 +81,12 @@ public class LoadTestCase extends XtextTestCase
 		super.setUp();
 		configurePlatformResources();
 		EcorePackage.eINSTANCE.getClass();						// Workaround Bug 425841
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("emof", new EMOFResourceFactoryImpl()); //$NON-NLS-1$
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("pivot", new XMIResourceFactoryImpl()); //$NON-NLS-1$
+//		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("emof", new EMOFResourceFactoryImpl()); //$NON-NLS-1$
+//		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("pivot", new XMIResourceFactoryImpl()); //$NON-NLS-1$
 	}
 
 	@Override
 	protected void tearDown() throws Exception {
-		EnvironmentFactoryAdapter adapter = OCL.find(resourceSet);
-		if (adapter != null) {
-			MetamodelManager metamodelManager = adapter.getMetamodelManager();		// FIXME obsolete
-			if (metamodelManager != null) {
-				metamodelManager.dispose();
-			}
-		}
 		StandardLibraryContribution.REGISTRY.remove(StandardLibraryImpl.DEFAULT_OCL_STDLIB_URI);
 		super.tearDown();
 	}

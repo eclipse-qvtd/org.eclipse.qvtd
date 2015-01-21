@@ -37,7 +37,7 @@ public class QVTiXtextEvaluator extends QVTiPivotEvaluator
 		
 		// Load the transformation resource
         BaseCSResource xtextResource = null;
-        xtextResource = (BaseCSResource) environmentFactory.getMetamodelManager().getExternalResourceSet().getResource(transformationURI, true);
+        xtextResource = (BaseCSResource) environmentFactory.getResourceSet().getResource(transformationURI, true);
         if (xtextResource != null) {
     		try {
     			asResource = xtextResource.getASResource();

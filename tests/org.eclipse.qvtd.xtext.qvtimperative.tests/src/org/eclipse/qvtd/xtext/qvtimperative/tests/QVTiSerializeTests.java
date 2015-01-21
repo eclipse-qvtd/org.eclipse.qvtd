@@ -23,7 +23,6 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.internal.PivotConstantsInternal;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
@@ -53,8 +52,8 @@ public class QVTiSerializeTests extends LoadTestCase
 		ocl2.dispose();
 	}	
 
-	protected ASResource loadQVTiAS(@NonNull MetamodelManager MetamodelManager, @NonNull URI inputURI) {
-		Resource asResource = MetamodelManager.getExternalResourceSet().getResource(inputURI, true);
+	protected ASResource loadQVTiAS(@NonNull OCL ocl, @NonNull URI inputURI) {
+		Resource asResource = ocl.getResourceSet().getResource(inputURI, true);
 //		List<String> conversionErrors = new ArrayList<String>();
 //		RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, null, ecoreResource);
 //		Resource eResource = documentCS.eResource();
@@ -105,7 +104,7 @@ public class QVTiSerializeTests extends LoadTestCase
 		//		
 		OCL ocl = OCL.newInstance(OCL.NO_PROJECTS);
 		try {
-			ASResource asResource = loadQVTiAS(ocl.getMetamodelManager(), inputURI);
+			ASResource asResource = loadQVTiAS(ocl, inputURI);
 			assertNoResourceErrors("Normalisation failed", asResource);
 			assertNoValidationErrors("Normalisation invalid", asResource);
 			//

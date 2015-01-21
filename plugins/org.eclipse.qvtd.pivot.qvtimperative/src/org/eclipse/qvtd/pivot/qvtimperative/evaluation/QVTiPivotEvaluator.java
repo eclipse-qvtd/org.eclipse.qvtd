@@ -20,7 +20,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
 import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
+import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -34,7 +34,7 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
 {
 	protected final @NonNull QVTiEnvironmentFactory environmentFactory;
 	protected final @NonNull Transformation transformation;
-	protected final @NonNull MetamodelManager metamodelManager;
+	protected final @NonNull PivotMetamodelManager metamodelManager;
 	protected final @NonNull QVTiModelManager modelManager;
     private EvaluationMonitor monitor = null;
     private boolean canceled = false;
@@ -104,7 +104,7 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
 		return environmentFactory;
 	}
 
-	public final @NonNull MetamodelManager getMetamodelManager() {
+	public final @NonNull PivotMetamodelManager getMetamodelManager() {
 		return metamodelManager;
 	}
 	

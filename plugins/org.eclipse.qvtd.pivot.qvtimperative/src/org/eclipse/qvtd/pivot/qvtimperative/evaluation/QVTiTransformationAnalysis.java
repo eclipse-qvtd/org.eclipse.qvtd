@@ -29,7 +29,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.OperationId;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
+import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
@@ -46,7 +46,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
  */
 public class QVTiTransformationAnalysis
 {
-	protected final @NonNull MetamodelManager metamodelManager;
+	protected final @NonNull PivotMetamodelManager metamodelManager;
 
 	/**
 	 *  Set of all types for which allInstances() is invoked.
@@ -63,7 +63,7 @@ public class QVTiTransformationAnalysis
 	 */
 	private @NonNull Map<Property, Integer> opposite2cacheIndex = new HashMap<Property, Integer>();
 
-	public QVTiTransformationAnalysis(@NonNull MetamodelManager metamodelManager) {
+	public QVTiTransformationAnalysis(@NonNull PivotMetamodelManager metamodelManager) {
 	    this.metamodelManager = metamodelManager;
 	}
 
@@ -150,14 +150,14 @@ public class QVTiTransformationAnalysis
 		Map<org.eclipse.ocl.pivot.Class, List<org.eclipse.ocl.pivot.Class>> instancesClassAnalysis = new HashMap<org.eclipse.ocl.pivot.Class, List<org.eclipse.ocl.pivot.Class>>();
 		for (@SuppressWarnings("null")@NonNull org.eclipse.ocl.pivot.Class instanceClass : instanceClasses) {
 			CompleteClass completeInstanceClass = metamodelManager.getCompleteClass(instanceClass);
-			instancesClassAnalysis.put(completeInstanceClass.getPivotClass(),  null);
+			instancesClassAnalysis.put(completeInstanceClass.getPrimaryClass(),  null);
 		}
 		for (@SuppressWarnings("null")@NonNull org.eclipse.ocl.pivot.Class instanceClass : instancesClassAnalysis.keySet()) {
 			List<org.eclipse.ocl.pivot.Class> superInstanceClasses = new ArrayList<org.eclipse.ocl.pivot.Class>();
 			superInstanceClasses.add(instanceClass);
 			CompleteClass completeClass = metamodelManager.getCompleteClass(instanceClass);
 			for (CompleteClass superCompleteClass : completeClass.getProperSuperCompleteClasses()) {
-				org.eclipse.ocl.pivot.Class superClass = superCompleteClass.getPivotClass();
+				org.eclipse.ocl.pivot.Class superClass = superCompleteClass.getPrimaryClass();
 				if (instancesClassAnalysis.containsKey(superClass)) {
 					superInstanceClasses.add(superClass);
 				}
@@ -167,7 +167,7 @@ public class QVTiTransformationAnalysis
 		return instancesClassAnalysis;
 	}
 
-	public @NonNull MetamodelManager getMetamodelManager() {
+	public @NonNull PivotMetamodelManager getMetamodelManager() {
 		return metamodelManager;
 	}
 	

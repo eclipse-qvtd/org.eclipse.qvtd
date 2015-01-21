@@ -30,12 +30,12 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.internal.validation.PivotEObjectValidator;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.validation.ComposedEValidator;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
@@ -70,7 +70,7 @@ public class QVTiCompilerTests extends LoadTestCase
 {
 	@SuppressWarnings("unused")private static ComposedEValidator makeSureRequiredBundleIsLoaded = null;
 	
-	protected static class MyQVT extends OCL
+	protected static class MyQVT extends OCL.Internal
 	{
 		public MyQVT(@NonNull QVTiEnvironmentFactory environmentFactory) {
 			super(environmentFactory);
@@ -117,7 +117,7 @@ public class QVTiCompilerTests extends LoadTestCase
 		String pivotName = inputName + ".pivot";
 		URI cstURI = getProjectFileURI(cstName);
 		URI pivotURI = getProjectFileURI(pivotName);
-		BaseCSResource xtextResource = (BaseCSResource) resourceSet.getResource(inputURI, true);
+		BaseCSResource xtextResource = (BaseCSResource) myQVT.getResourceSet().getResource(inputURI, true);
 		assert xtextResource != null;
 		assertNoResourceErrors("Load failed", xtextResource);
 		ASResource asResource = xtextResource.getASResource();
@@ -256,8 +256,9 @@ public class QVTiCompilerTests extends LoadTestCase
 
 	protected Transformation loadTransformation(@NonNull MyQVT myQVT, @NonNull URI transformURI, @NonNull URI genModelURI) throws Exception {
 		OCLstdlibTables.LIBRARY.getClass();		// Ensure coherent initialization
+		ResourceSet resourceSet = myQVT.getResourceSet();
 		resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
-		MetamodelManager metamodelManager = myQVT.getMetamodelManager();
+		MetamodelManager.Internal metamodelManager = myQVT.getMetamodelManager();
 		metamodelManager.configureLoadFirstStrategy();
 		Resource genResource = resourceSet.getResource(genModelURI, true);
 		for (EObject eObject : genResource.getContents()) {
@@ -267,7 +268,6 @@ public class QVTiCompilerTests extends LoadTestCase
 				metamodelManager.addGenModel(genModel);
 			}
 		}
-		myQVT.getEnvironmentFactory().adapt(ClassUtil.nonNullState(resourceSet));
 		Resource resource = doLoad_ConcreteWithOCL(myQVT, transformURI);
 		for (EObject eObject : resource.getContents()) {
 			if (eObject instanceof ImperativeModel) {

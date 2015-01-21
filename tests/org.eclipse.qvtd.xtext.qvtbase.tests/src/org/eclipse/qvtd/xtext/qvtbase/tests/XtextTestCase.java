@@ -14,10 +14,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import junit.framework.TestCase;
@@ -33,7 +30,6 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -55,7 +51,6 @@ import org.eclipse.ocl.pivot.VariableExp;
 import org.eclipse.ocl.pivot.internal.PivotConstantsInternal;
 import org.eclipse.ocl.pivot.internal.StandardLibraryImpl;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
-import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
@@ -256,8 +251,6 @@ public class XtextTestCase extends PivotTestCase
 		}
 		return true;
 	}
-	
-	protected ResourceSet resourceSet;
 
 /*	protected XtextResource savePivotAsCS(MetamodelManager metamodelManager, Resource pivotResource, URI outputURI) throws IOException {
 //		ResourceSet csResourceSet = resourceSet; //new ResourceSetImpl();
@@ -332,42 +325,6 @@ public class XtextTestCase extends PivotTestCase
 		}
 		return projectURL;
 	}
-
-	protected Resource loadEcore(URI inputURI) {
-		Resource ecoreResource = resourceSet.getResource(inputURI, true);
-		mapOwnURI(ecoreResource);
-//		List<String> conversionErrors = new ArrayList<String>();
-//		RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, null, ecoreResource);
-//		Resource eResource = documentCS.eResource();
-		assertNoResourceErrors("Load failed", ecoreResource);
-//		Resource xtextResource = resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
-//		XtextResource xtextResource = (XtextResource) resourceSet.createResource(outputURI);
-//		xtextResource.getContents().add(documentCS);
-		return ecoreResource;
-	}
-
-	/**
-	 * Some example files have inconsistent self references so map the URI back to
-	 * the resource.
-	 */
-	protected void mapOwnURI(Resource resource) {
-		List<EObject> contents = resource.getContents();
-		if (contents.size() == 1) {
-			EObject root = contents.get(0);
-			if (root instanceof EPackage) {
-				EPackage rootPackage = (EPackage) root;
-				String nsURI = rootPackage.getNsURI();
-				if (nsURI != null) {
-					Map<URI, Resource> uriResourceMap = ((ResourceSetImpl)resourceSet).getURIResourceMap();
-					if (uriResourceMap == null) {
-						uriResourceMap = new HashMap<URI, Resource>();
-						((ResourceSetImpl)resourceSet).setURIResourceMap(uriResourceMap);
-					}
-					uriResourceMap.put(URI.createURI(nsURI), resource);
-				}
-			}
-		}
-	}
 	
 	@Override
 	protected void setUp() throws Exception {
@@ -380,10 +337,10 @@ public class XtextTestCase extends PivotTestCase
 //		CompleteOCLStandaloneSetup.doSetup();
 //		OCLinEcoreStandaloneSetup.doSetup();
 //		OCLstdlibStandaloneSetup.doSetup();
-		resourceSet = new ResourceSetImpl();
-		ProjectMap.initializeURIResourceMap(resourceSet);
-		Map<URI, URI> uriMap = resourceSet.getURIConverter().getURIMap();
-		uriMap.putAll(EcorePlugin.computePlatformURIMap(false));
+//		resourceSet = new ResourceSetImpl();
+//		ProjectMap.initializeURIResourceMap(resourceSet);
+//		Map<URI, URI> uriMap = resourceSet.getURIConverter().getURIMap();
+//		uriMap.putAll(EcorePlugin.computePlatformURIMap(false));
 //		for (Map.Entry<URI,URI> entry : uriMap.entrySet()) {
 //			System.out.println(entry.getKey() + " => " + entry.getValue());
 //		}
@@ -397,13 +354,6 @@ public class XtextTestCase extends PivotTestCase
 
 	@Override
 	protected void tearDown() throws Exception {
-		if (resourceSet != null) {
-			for (Resource resource : resourceSet.getResources()) {
-				resource.unload();
-			}
-			resourceSet.getResources().clear();
-			resourceSet = null;
-		}
 		super.tearDown();
 	}
 }
