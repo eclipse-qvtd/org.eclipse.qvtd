@@ -6,18 +6,20 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="super" upperBound="-1"
         eType="#//AbstractDatum"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="domain" eType="ecore:EClass http://www.eclipse.org/qvt/2015/QVTcoreBase#//CoreDomain"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sources" upperBound="-1"
-        eType="#//AbstractAction" eOpposite="#//AbstractAction/results"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="targets" upperBound="-1"
-        eType="#//AbstractAction" derived="true" eOpposite="#//AbstractAction/arguments"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="producedBy" upperBound="-1"
+        eType="#//AbstractAction" eOpposite="#//AbstractAction/productions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requiredBy" upperBound="-1"
+        eType="#//AbstractAction" derived="true" eOpposite="#//AbstractAction/requisites"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="schedule" eType="#//Schedule"
         eOpposite="#//Schedule/datums"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataParameter" upperBound="-1"
         eType="#//DataParameter" eOpposite="#//DataParameter/datum"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractAction" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="results" upperBound="-1"
-        eType="#//AbstractDatum" eOpposite="#//AbstractDatum/sources"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="productions" upperBound="-1"
+        eType="#//AbstractDatum" eOpposite="#//AbstractDatum/producedBy"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requisites" upperBound="-1"
+        eType="#//AbstractDatum" eOpposite="#//AbstractDatum/requiredBy"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="distinctArguments" upperBound="-1"
         eType="#//DistinctData" containment="true" eOpposite="#//DistinctData/target"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="order" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
@@ -26,7 +28,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//AbstractAction" eOpposite="#//AbstractAction/parent"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
-        eType="#//AbstractDatum" derived="true" eOpposite="#//AbstractDatum/targets"/>
+        eType="#//AbstractDatum" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="schedule" eType="#//Schedule"
         eOpposite="#//Schedule/actions"/>
   </eClassifiers>

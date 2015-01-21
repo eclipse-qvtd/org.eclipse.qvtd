@@ -33,16 +33,16 @@ rule CoreModel
         mOut.ownedPackages.addAll(mIn.ownedPackages.equivalent());
         mOut.externalURI = mIn.externalURI.replace(".qvtm.qvtc", ".qvtp.qvti");
     }
-
 rule Pacakge
 	transform pIn:QVTm!Package
 	to pOut:QVTp!Package {
 	
-		guard : pIn.name <> "$$"
+		guard : pIn.ownedClasses.exists(c | c.isTypeOf(QVTm!Transformation))
 		
 		pOut.name = pIn.name;
 		pOut.ownedClasses.addAll(pIn.ownedClasses.equivalent());
 	}
+
 
 /****u* /org.eclipse.qvtd.build.etl/mtc/QVTmToQVTiPartition/Transformation
  * NAME

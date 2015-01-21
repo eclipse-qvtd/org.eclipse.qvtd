@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pivot:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot" xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage"
+    name="SimpleRDBMS.ecore.oclas" externalURI="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms/SimpleRDBMS.ecore.oclas">
+  <ownedPackages xmi:id="P.simplerdbms" name="simplerdbms" URI="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS"
+      nsPrefix="simplerdbms">
+    <ownedClasses xmi:id="T.simplerdbms.Column" name="Column" superClasses="#T.simplerdbms.RModelElement">
+      <ownedProperties xmi:id="p.simplerdbms.Column.type" name="type" isRequired="false"
+          type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
+      <ownedProperties xmi:id="p.simplerdbms.Column.owner" name="owner" type="#T.simplerdbms.Table"
+          opposite="#p.simplerdbms.Table.columns"/>
+      <ownedProperties xmi:id="p.simplerdbms.Column.foreignKeys" name="foreignKeys"
+          type="#//@ownedPackages.1/@ownedClasses.0" opposite="#p.simplerdbms.ForeignKey.columns"/>
+      <ownedProperties xmi:id="p.simplerdbms.Column.keys" name="keys" type="#//@ownedPackages.1/@ownedClasses.1"
+          opposite="#p.simplerdbms.Key.column"/>
+      <ownedProperties xmi:id="p.simplerdbms.Column.middle" name="middle" isRequired="false"
+          type="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.ToColumn" isImplicit="true"
+          opposite="UMLtoRDBMS.ecore.oclas#p.umltordbms.ToColumn.column"/>
+    </ownedClasses>
+    <ownedClasses xmi:id="T.simplerdbms.ForeignKey" name="ForeignKey" superClasses="#T.simplerdbms.RModelElement">
+      <ownedProperties xmi:id="p.simplerdbms.ForeignKey.refersTo" name="refersTo"
+          type="#T.simplerdbms.Key" opposite="#p.simplerdbms.Key.ForeignKey"/>
+      <ownedProperties xmi:id="p.simplerdbms.ForeignKey.columns" name="columns" type="#//@ownedPackages.1/@ownedClasses.2"
+          opposite="#p.simplerdbms.Column.foreignKeys"/>
+      <ownedProperties xmi:id="p.simplerdbms.ForeignKey.owner" name="owner" type="#T.simplerdbms.Table"
+          opposite="#p.simplerdbms.Table.foreignKeys"/>
+      <ownedProperties xmi:id="p.simplerdbms.ForeignKey.middle" name="middle" isRequired="false"
+          type="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.AssociationToForeignKey"
+          isImplicit="true" opposite="UMLtoRDBMS.ecore.oclas#p.umltordbms.AssociationToForeignKey.foreignKey"/>
+    </ownedClasses>
+    <ownedClasses xmi:id="T.simplerdbms.Key" name="Key" superClasses="#T.simplerdbms.RModelElement">
+      <ownedProperties xmi:id="p.simplerdbms.Key.owner" name="owner" type="#T.simplerdbms.Table"
+          opposite="#p.simplerdbms.Table.keys"/>
+      <ownedProperties xmi:id="p.simplerdbms.Key.column" name="column" type="#//@ownedPackages.1/@ownedClasses.2"
+          opposite="#p.simplerdbms.Column.keys"/>
+      <ownedProperties xmi:id="p.simplerdbms.Key.ForeignKey" name="ForeignKey" type="#//@ownedPackages.1/@ownedClasses.3"
+          isImplicit="true" opposite="#p.simplerdbms.ForeignKey.refersTo"/>
+      <ownedProperties xmi:id="p.simplerdbms.Key.middle" name="middle" isRequired="false"
+          type="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable" isImplicit="true"
+          opposite="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.primaryKey"/>
+    </ownedClasses>
+    <ownedClasses xmi:id="T.simplerdbms.RModelElement" name="RModelElement" isAbstract="true"
+        superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
+      <ownedProperties xmi:id="p.simplerdbms.RModelElement.name" name="name" isRequired="false"
+          type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
+      <ownedProperties xmi:id="p.simplerdbms.RModelElement.kind" name="kind" isRequired="false"
+          type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
+    </ownedClasses>
+    <ownedClasses xmi:id="T.simplerdbms.Schema" name="Schema" superClasses="#T.simplerdbms.RModelElement">
+      <ownedProperties xmi:id="p.simplerdbms.Schema.tables" name="tables" type="#//@ownedPackages.1/@ownedClasses.4"
+          isComposite="true" opposite="#p.simplerdbms.Table.schema"/>
+      <ownedProperties xmi:id="p.simplerdbms.Schema.middle" name="middle" isRequired="false"
+          type="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.PackageToSchema" isImplicit="true"
+          opposite="UMLtoRDBMS.ecore.oclas#p.umltordbms.PackageToSchema.schema"/>
+    </ownedClasses>
+    <ownedClasses xmi:id="T.simplerdbms.Table" name="Table" superClasses="#T.simplerdbms.RModelElement">
+      <ownedProperties xmi:id="p.simplerdbms.Table.columns" name="columns" type="#//@ownedPackages.1/@ownedClasses.2"
+          isComposite="true" opposite="#p.simplerdbms.Column.owner"/>
+      <ownedProperties xmi:id="p.simplerdbms.Table.schema" name="schema" type="#T.simplerdbms.Schema"
+          opposite="#p.simplerdbms.Schema.tables"/>
+      <ownedProperties xmi:id="p.simplerdbms.Table.keys" name="keys" type="#//@ownedPackages.1/@ownedClasses.1"
+          isComposite="true" opposite="#p.simplerdbms.Key.owner"/>
+      <ownedProperties xmi:id="p.simplerdbms.Table.foreignKeys" name="foreignKeys"
+          type="#//@ownedPackages.1/@ownedClasses.0" isComposite="true" opposite="#p.simplerdbms.ForeignKey.owner"/>
+      <ownedProperties xmi:id="p.simplerdbms.Table.middle" name="middle" isRequired="false"
+          type="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.ClassToTable" isImplicit="true"
+          opposite="UMLtoRDBMS.ecore.oclas#p.umltordbms.ClassToTable.table"/>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:DataType" xmi:id="T.simplerdbms.String" name="String"
+        superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"/>
+  </ownedPackages>
+  <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage"
+      nsPrefix="orphanage">
+    <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.5 #//@ownedPackages.1/@ownedClasses.6"
+        elementType="#T.simplerdbms.ForeignKey">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.simplerdbms.ForeignKey" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedSetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.7 #//@ownedPackages.1/@ownedClasses.8"
+        elementType="#T.simplerdbms.Key">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.simplerdbms.Key" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedSetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.9 #//@ownedPackages.1/@ownedClasses.10"
+        elementType="#T.simplerdbms.Column">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.simplerdbms.Column" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedSetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:BagType" name="Bag" superClasses="#//@ownedPackages.1/@ownedClasses.11"
+        elementType="#T.simplerdbms.ForeignKey">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.simplerdbms.ForeignKey" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..BagT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.12 #//@ownedPackages.1/@ownedClasses.13"
+        elementType="#T.simplerdbms.Table">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.simplerdbms.Table" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedSetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.11"
+        elementType="#T.simplerdbms.ForeignKey">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.simplerdbms.ForeignKey" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.11"
+        elementType="#T.simplerdbms.ForeignKey">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.simplerdbms.ForeignKey" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.14"
+        elementType="#T.simplerdbms.Key">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.simplerdbms.Key" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.14"
+        elementType="#T.simplerdbms.Key">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.simplerdbms.Key" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.15"
+        elementType="#T.simplerdbms.Column">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.simplerdbms.Column" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.15"
+        elementType="#T.simplerdbms.Column">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.simplerdbms.Column" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
+        elementType="#T.simplerdbms.ForeignKey">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.simplerdbms.ForeignKey" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.16"
+        elementType="#T.simplerdbms.Table">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.simplerdbms.Table" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.16"
+        elementType="#T.simplerdbms.Table">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.simplerdbms.Table" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
+        elementType="#T.simplerdbms.Key">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.simplerdbms.Key" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
+        elementType="#T.simplerdbms.Column">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.simplerdbms.Column" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
+        elementType="#T.simplerdbms.Table">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.simplerdbms.Table" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+  </ownedPackages>
+</pivot:Model>

@@ -11,13 +11,14 @@
     <genClasses image="false" ecoreClass="QVTSchedule.ecore#//AbstractDatum">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractDatum/super"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractDatum/domain"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractDatum/sources"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractDatum/targets"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractDatum/producedBy"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractDatum/requiredBy"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractDatum/schedule"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractDatum/dataParameter"/>
     </genClasses>
     <genClasses image="false" ecoreClass="QVTSchedule.ecore#//AbstractAction">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractAction/results"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractAction/productions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractAction/requisites"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractAction/distinctArguments"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTSchedule.ecore#//AbstractAction/order"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractAction/parent"/>

@@ -8,6 +8,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.build.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.build.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
@@ -37,7 +38,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * @generated
 	 * @ordered
 	 */
-	protected org.eclipse.ocl.pivot.Property property;
+	protected Property property;
 
 	/**
 	 * The cached value of the '{@link #getOpposite() <em>Opposite</em>}' reference.
@@ -73,10 +74,10 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.ocl.pivot.Property getProperty() {
+	public Property getProperty() {
 		if (property != null && property.eIsProxy()) {
 			InternalEObject oldProperty = (InternalEObject)property;
-			property = (org.eclipse.ocl.pivot.Property)eResolveProxy(oldProperty);
+			property = (Property)eResolveProxy(oldProperty);
 			if (property != oldProperty) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, qvtschedulePackage.PROPERTY_DATUM__PROPERTY, oldProperty, property));
@@ -90,7 +91,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.ocl.pivot.Property basicGetProperty() {
+	public Property basicGetProperty() {
 		return property;
 	}
 
@@ -99,8 +100,8 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setProperty(org.eclipse.ocl.pivot.Property newProperty) {
-		org.eclipse.ocl.pivot.Property oldProperty = property;
+	public void setProperty(Property newProperty) {
+		Property oldProperty = property;
 		property = newProperty;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, qvtschedulePackage.PROPERTY_DATUM__PROPERTY, oldProperty, property));
@@ -258,7 +259,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case qvtschedulePackage.PROPERTY_DATUM__PROPERTY:
-				setProperty((org.eclipse.ocl.pivot.Property)newValue);
+				setProperty((Property)newValue);
 				return;
 			case qvtschedulePackage.PROPERTY_DATUM__CLASS_DATUM:
 				setClassDatum((ClassDatum)newValue);
@@ -279,7 +280,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case qvtschedulePackage.PROPERTY_DATUM__PROPERTY:
-				setProperty((org.eclipse.ocl.pivot.Property)null);
+				setProperty((Property)null);
 				return;
 			case qvtschedulePackage.PROPERTY_DATUM__CLASS_DATUM:
 				setClassDatum((ClassDatum)null);

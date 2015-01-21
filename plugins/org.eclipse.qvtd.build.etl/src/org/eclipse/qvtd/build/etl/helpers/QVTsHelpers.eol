@@ -16,11 +16,6 @@
 
 operation QVTs!MappingAction getDistinctDataClassDatums() : Sequence {
 	
-	self.distinctArguments.primaryArguments.println("prim ");
-	self.distinctArguments.primaryArguments.collect(da | da.datum).println("prim.datum ");
-	self.distinctArguments.secondaryArguments.println("sec ");
-	self.distinctArguments.secondaryArguments.collect(da | da.datum).println("sec.datum ");
-	
 	return self.distinctArguments.primaryArguments
 			.includingAll(self.distinctArguments.secondaryArguments).flatten()
 			.collect(da | da.datum);
@@ -47,5 +42,52 @@ operation QVTs!DistinctData getNextDistinctData() : QVTs!DistinctData {
 	}
 }
 
+/****o* QVTsHelpers/getPredecessors
+ * NAME
+ *  getPredecessors - Get the predecessors of a mapping action
+ * FUNCTION
+ *  The predecessors of a mapping action are calculating by following the 
+ *  mapping arguments' sources. This method could be invoked recursively
+ *  to do a graph search iif a mechanism is added to prevent loops. 
+ * CONTEXT
+ *  QVTs!MappingAction  The MappingAction
+ * RETURNS
+ *  Sequence	The sequence of mapping predecesors. 
+ *  SEE ALSO
+ */
+@cached
+operation QVTs!MappingAction getPredecessors() : OrderedSet {
 
-   
+	//self.mapping.name.println("getPredecessors ");
+	var reqs = self.requisites;
+	var subReqs = self.schedule.getAllDatums().select(subD | 
+		reqs.exists(datum | subD.getAllSuperDatums().includes(datum)));
+	return reqs.includingAll(subReqs)
+			.collect(req| req.producedBy).flatten()
+			.sortBy(a | a.mapping.name) // To ensure determinism
+			.asOrderedSet();
+}
+
+@cached
+operation QVTs!AbstractDatum isDatumOrSubdatum(datum : QVTs!ClassDatum) : Boolean {
+	if (self = datum) {
+		return true;
+	} else if (datum.isKindOf(QVTs!ClassDatum)) {
+		// FIXME Rethink this
+		// With respect to PropertyDatums we will never be interested in this
+		return self.getAllSuperDatums().includes(datum);
+	} else {
+		return false;
+	}
+}
+
+@cached 
+operation QVTs!AbstractDatum getAllSuperDatums() : OrderedSet(QVTs!AbstractDatum) {
+	return self.asSequence().closure(x | x.super).asOrderedSet();
+}
+
+@cached
+operation QVTs!Schedule getAllDatums() : OrderedSet(QVTs!AbstractDatum) {
+	var classDatums = self.datums;
+	return classDatums.includingAll(classDatums.propertyDatums.flatten());
+}

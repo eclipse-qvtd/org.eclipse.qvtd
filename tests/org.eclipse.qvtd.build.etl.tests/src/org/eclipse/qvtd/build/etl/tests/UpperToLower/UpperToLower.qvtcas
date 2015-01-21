@@ -422,6 +422,6 @@
       </rule>
     </ownedClasses>
   </ownedPackages>
-  <unit name="SimpleGraph" usedPackage="pivot:Package SimpleGraph.ecore.oclas#P.simplegraph"/>
-  <unit name="SimpleGraph2Graph" usedPackage="pivot:Package SimpleGraph2Graph.ecore.oclas#P.simplegraph2graph"/>
+  <ownedImports name="SimpleGraph" importedNamespace="pivot:Package SimpleGraph.ecore.oclas#P.simplegraph"/>
+  <ownedImports name="SimpleGraph2Graph" importedNamespace="pivot:Package SimpleGraph2Graph.ecore.oclas#P.simplegraph2graph"/>
 </qvtc:CoreModel>

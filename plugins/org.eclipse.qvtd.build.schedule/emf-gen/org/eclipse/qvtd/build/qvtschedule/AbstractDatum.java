@@ -17,8 +17,8 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getSuper <em>Super</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getDomain <em>Domain</em>}</li>
- *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getSources <em>Sources</em>}</li>
- *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getTargets <em>Targets</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getProducedBy <em>Produced By</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getRequiredBy <em>Required By</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getSchedule <em>Schedule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getDataParameter <em>Data Parameter</em>}</li>
  * </ul>
@@ -71,40 +71,40 @@ public interface AbstractDatum extends EObject {
 	void setDomain(CoreDomain value);
 
 	/**
-	 * Returns the value of the '<em><b>Sources</b></em>' reference list.
+	 * Returns the value of the '<em><b>Produced By</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.build.qvtschedule.AbstractAction}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getResults <em>Results</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getProductions <em>Productions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Sources</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Produced By</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Sources</em>' reference list.
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractDatum_Sources()
-	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractAction#getResults
-	 * @model opposite="results"
+	 * @return the value of the '<em>Produced By</em>' reference list.
+	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractDatum_ProducedBy()
+	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractAction#getProductions
+	 * @model opposite="productions"
 	 * @generated
 	 */
-	EList<AbstractAction> getSources();
+	EList<AbstractAction> getProducedBy();
 
 	/**
-	 * Returns the value of the '<em><b>Targets</b></em>' reference list.
+	 * Returns the value of the '<em><b>Required By</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.build.qvtschedule.AbstractAction}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getArguments <em>Arguments</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getRequisites <em>Requisites</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Targets</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Required By</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Targets</em>' reference list.
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractDatum_Targets()
-	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractAction#getArguments
-	 * @model opposite="arguments" derived="true"
+	 * @return the value of the '<em>Required By</em>' reference list.
+	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractDatum_RequiredBy()
+	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractAction#getRequisites
+	 * @model opposite="requisites" derived="true"
 	 * @generated
 	 */
-	EList<AbstractAction> getTargets();
+	EList<AbstractAction> getRequiredBy();
 
 	/**
 	 * Returns the value of the '<em><b>Schedule</b></em>' container reference.

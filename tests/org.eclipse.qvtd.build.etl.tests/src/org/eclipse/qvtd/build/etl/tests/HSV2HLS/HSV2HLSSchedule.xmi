@@ -1,64 +1,109 @@
 <?xml version="1.0" encoding="ASCII"?>
-<qvtschedule:Schedule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvtschedule="http://www.eclipse.org/qvt/0.1/QVTschedule/">
-  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.0 //@actions.3" dataParameter="//@actions.3/@distinctArguments.0/@secondaryArguments.1">
-    <type href="HLSTree.ecore.oclas#T.HLSTree.HLSNode"/>
-    <domain href="HSV2HLS.qvtp.qvtias#//@nestedPackage.0/@rule.0/@domain.0"/>
-  </datums>
-  <datums xsi:type="qvtschedule:ClassDatum" sources="//@actions.1 //@actions.2" dataParameter="//@actions.0/@distinctArguments.0/@primaryArguments.0 //@actions.2/@distinctArguments.0/@primaryArguments.0 //@actions.3/@distinctArguments.0/@primaryArguments.0 //@actions.3/@distinctArguments.0/@secondaryArguments.0">
-    <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
-    <domain href="HSV2HLS.qvtp.qvtias#//@nestedPackage.0/@rule.0/@domain.1"/>
-  </datums>
-  <datums xsi:type="qvtschedule:ClassDatum" dataParameter="//@actions.1/@distinctArguments.0/@primaryArguments.0 //@actions.2/@distinctArguments.1/@primaryArguments.0 //@actions.2/@distinctArguments.1/@secondaryArguments.0">
-    <type href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
-    <domain href="HSV2HLS.qvtp.qvtias#//@nestedPackage.0/@rule.1/@domain.0"/>
-  </datums>
-  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.0" parent="//@actions.4">
-    <distinctArguments>
-      <primaryArguments datum="//@datums.1">
-        <variable href="HSV2HLS.qvtp.qvtias#qV.hsv2hls.HSV2HLSRoot_MR.middle.guard.middleRoot"/>
-      </primaryArguments>
-    </distinctArguments>
-    <mapping href="HSV2HLS.qvtp.qvtias#m.hsv2hls.HSV2HLSRoot_MR"/>
-  </actions>
-  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.1" parent="//@actions.4">
-    <distinctArguments>
-      <primaryArguments datum="//@datums.2">
-        <variable href="HSV2HLS.qvtp.qvtias#qV.hsv2hls.HSV2HLSRoot_LM.hsv.guard.hsvRoot"/>
-      </primaryArguments>
-    </distinctArguments>
-    <mapping href="HSV2HLS.qvtp.qvtias#m.hsv2hls.HSV2HLSRoot_LM"/>
-  </actions>
-  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.1" parent="//@actions.4">
-    <distinctArguments>
-      <primaryArguments datum="//@datums.1">
-        <variable href="HSV2HLS.qvtp.qvtias#qV.hsv2hls.HSV2HLSRecursion_LM.middle.guard.middleParent"/>
-      </primaryArguments>
-    </distinctArguments>
-    <distinctArguments>
-      <primaryArguments datum="//@datums.2">
-        <variable href="HSV2HLS.qvtp.qvtias#qV.hsv2hls.HSV2HLSRecursion_LM.hsv.guard.hsvNode"/>
-      </primaryArguments>
-      <secondaryArguments datum="//@datums.2">
-        <variable href="HSV2HLS.qvtp.qvtias#qV.hsv2hls.HSV2HLSRecursion_LM.hsv.guard.hsvParent"/>
-      </secondaryArguments>
-    </distinctArguments>
-    <mapping href="HSV2HLS.qvtp.qvtias#m.hsv2hls.HSV2HLSRecursion_LM"/>
-  </actions>
-  <actions xsi:type="qvtschedule:MappingAction" results="//@datums.0" parent="//@actions.4">
-    <distinctArguments>
-      <primaryArguments datum="//@datums.1">
-        <variable href="HSV2HLS.qvtp.qvtias#qV.hsv2hls.HSV2HLSRecursion_MR.middle.guard.middleNode"/>
-      </primaryArguments>
-      <secondaryArguments datum="//@datums.1">
-        <variable href="HSV2HLS.qvtp.qvtias#qV.hsv2hls.HSV2HLSRecursion_MR.middle.guard.middleParent"/>
-      </secondaryArguments>
-      <secondaryArguments datum="//@datums.0">
-        <variable href="HSV2HLS.qvtp.qvtias#qV.hsv2hls.HSV2HLSRecursion_MR.hls.guard.hlsParent"/>
-      </secondaryArguments>
-    </distinctArguments>
-    <mapping href="HSV2HLS.qvtp.qvtias#m.hsv2hls.HSV2HLSRecursion_MR"/>
-  </actions>
-  <actions xsi:type="qvtschedule:MappingAction" children="//@actions.0 //@actions.1 //@actions.2 //@actions.3">
-    <mapping href="HSV2HLS.qvtp.qvtias#m.hsv2hls.__root__"/>
-  </actions>
-</qvtschedule:Schedule>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvtschedule="http://www.eclipse.org/qvt/0.1/QVTschedule/">
+  <qvtschedule:Schedule>
+    <datums xsi:type="qvtschedule:ClassDatum" sources="/3/@actions.0 /3/@actions.2" targets="/3/@actions.2" dataParameter="/3/@actions.2/@distinctArguments.2/@primaryArguments.0">
+      <type href="HLSTree.ecore.oclas#T.HLSTree.HLSNode"/>
+      <propertyDatums sources="/3/@actions.0 /3/@actions.2">
+        <property href="HLSTree.ecore.oclas#p.HLSTree.HLSNode.name"/>
+      </propertyDatums>
+      <propertyDatums opposite="/0/@datums.1/@propertyDatums.2">
+        <property href="HLSTree.ecore.oclas#p.HLSTree.HLSNode.HSVNode2HLSNode"/>
+      </propertyDatums>
+      <propertyDatums sources="/3/@actions.0 /3/@actions.2" opposite="/0/@datums.0/@propertyDatums.3">
+        <property href="HLSTree.ecore.oclas#p.HLSTree.HLSNode.parent"/>
+      </propertyDatums>
+      <propertyDatums sources="/3/@actions.0 /3/@actions.2">
+        <property href="HLSTree.ecore.oclas#p.HLSTree.HLSNode.children"/>
+      </propertyDatums>
+    </datums>
+    <datums xsi:type="qvtschedule:ClassDatum" sources="/3/@actions.1 /3/@actions.3" targets="/3/@actions.0 /3/@actions.2 /3/@actions.3" dataParameter="/3/@actions.0/@distinctArguments.0/@primaryArguments.0 /3/@actions.2/@distinctArguments.0/@primaryArguments.0 /3/@actions.2/@distinctArguments.1/@primaryArguments.0 /3/@actions.3/@distinctArguments.1/@primaryArguments.0">
+      <type href="HSV2HLS.ecore.oclas#T.HSV2HLS.HSVNode2HLSNode"/>
+      <propertyDatums sources="/3/@actions.1 /3/@actions.3" targets="/3/@actions.0 /3/@actions.2">
+        <property href="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.name"/>
+      </propertyDatums>
+      <propertyDatums sources="/3/@actions.1 /3/@actions.3" targets="/3/@actions.3">
+        <property href="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.hsv"/>
+      </propertyDatums>
+      <propertyDatums sources="/3/@actions.0 /3/@actions.2" targets="/3/@actions.2">
+        <property href="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.hls"/>
+      </propertyDatums>
+      <propertyDatums sources="/3/@actions.3" targets="/3/@actions.2">
+        <property href="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.parent"/>
+      </propertyDatums>
+      <propertyDatums opposite="/0/@datums.1/@propertyDatums.3">
+        <property href="HSV2HLS.ecore.oclas#p.HSV2HLS.HSVNode2HLSNode.children"/>
+      </propertyDatums>
+    </datums>
+    <datums xsi:type="qvtschedule:ClassDatum" targets="/3/@actions.1 /3/@actions.3" dataParameter="/3/@actions.1/@distinctArguments.0/@primaryArguments.0 /3/@actions.3/@distinctArguments.0/@primaryArguments.0 /3/@actions.3/@distinctArguments.2/@primaryArguments.0">
+      <type href="HSVTree.ecore.oclas#T.HSVTree.HSVNode"/>
+      <propertyDatums targets="/3/@actions.1 /3/@actions.3">
+        <property href="HSVTree.ecore.oclas#p.HSVTree.HSVNode.parent"/>
+      </propertyDatums>
+      <propertyDatums opposite="/0/@datums.2/@propertyDatums.0">
+        <property href="HSVTree.ecore.oclas#p.HSVTree.HSVNode.children"/>
+      </propertyDatums>
+      <propertyDatums targets="/3/@actions.1 /3/@actions.3">
+        <property href="HSVTree.ecore.oclas#p.HSVTree.HSVNode.name"/>
+      </propertyDatums>
+      <propertyDatums opposite="/0/@datums.1/@propertyDatums.1">
+        <property href="HSVTree.ecore.oclas#p.HSVTree.HSVNode.HSVNode2HLSNode"/>
+      </propertyDatums>
+    </datums>
+  </qvtschedule:Schedule>
+  <qvtschedule:Schedule/>
+  <qvtschedule:Schedule/>
+  <qvtschedule:Schedule>
+    <actions xsi:type="qvtschedule:MappingAction" results="/0/@datums.0 /0/@datums.0/@propertyDatums.0 /0/@datums.1/@propertyDatums.2 /0/@datums.0/@propertyDatums.2 /0/@datums.0/@propertyDatums.3" arguments="/0/@datums.1 /0/@datums.1/@propertyDatums.0">
+      <distinctArguments>
+        <primaryArguments datum="/0/@datums.1">
+          <variable href="HSV2HLS.qvtp.qvtias#qV..hsv2hls.HSV2HLSRoot_MR.middle.guard.middleRoot"/>
+        </primaryArguments>
+      </distinctArguments>
+      <mapping href="HSV2HLS.qvtp.qvtias#m..hsv2hls.HSV2HLSRoot_MR"/>
+    </actions>
+    <actions xsi:type="qvtschedule:MappingAction" results="/0/@datums.1 /0/@datums.1/@propertyDatums.0 /0/@datums.1/@propertyDatums.1" arguments="/0/@datums.2 /0/@datums.2/@propertyDatums.0 /0/@datums.2/@propertyDatums.2">
+      <distinctArguments>
+        <primaryArguments datum="/0/@datums.2">
+          <variable href="HSV2HLS.qvtp.qvtias#qV..hsv2hls.HSV2HLSRoot_LM.hsv.guard.hsvRoot"/>
+        </primaryArguments>
+      </distinctArguments>
+      <mapping href="HSV2HLS.qvtp.qvtias#m..hsv2hls.HSV2HLSRoot_LM"/>
+    </actions>
+    <actions xsi:type="qvtschedule:MappingAction" results="/0/@datums.0 /0/@datums.0/@propertyDatums.0 /0/@datums.1/@propertyDatums.2 /0/@datums.0/@propertyDatums.2 /0/@datums.0/@propertyDatums.3" arguments="/0/@datums.1 /0/@datums.0 /0/@datums.1/@propertyDatums.2 /0/@datums.1/@propertyDatums.3 /0/@datums.1/@propertyDatums.0">
+      <distinctArguments>
+        <primaryArguments datum="/0/@datums.1">
+          <variable href="HSV2HLS.qvtp.qvtias#qV..hsv2hls.HSV2HLSRecursion_MR.middle.guard.middleParent"/>
+        </primaryArguments>
+      </distinctArguments>
+      <distinctArguments>
+        <primaryArguments datum="/0/@datums.1">
+          <variable href="HSV2HLS.qvtp.qvtias#qV..hsv2hls.HSV2HLSRecursion_MR.middle.guard.middleNode"/>
+        </primaryArguments>
+      </distinctArguments>
+      <distinctArguments>
+        <primaryArguments datum="/0/@datums.0">
+          <variable href="HSV2HLS.qvtp.qvtias#qV..hsv2hls.HSV2HLSRecursion_MR.hls.guard.hlsParent"/>
+        </primaryArguments>
+      </distinctArguments>
+      <mapping href="HSV2HLS.qvtp.qvtias#m..hsv2hls.HSV2HLSRecursion_MR"/>
+    </actions>
+    <actions xsi:type="qvtschedule:MappingAction" results="/0/@datums.1 /0/@datums.1/@propertyDatums.0 /0/@datums.1/@propertyDatums.1 /0/@datums.1/@propertyDatums.3" arguments="/0/@datums.2 /0/@datums.1 /0/@datums.1/@propertyDatums.1 /0/@datums.2/@propertyDatums.0 /0/@datums.2/@propertyDatums.2">
+      <distinctArguments>
+        <primaryArguments datum="/0/@datums.2">
+          <variable href="HSV2HLS.qvtp.qvtias#qV..hsv2hls.HSV2HLSRecursion_LM.hsv.guard.hsvNode"/>
+        </primaryArguments>
+      </distinctArguments>
+      <distinctArguments>
+        <primaryArguments datum="/0/@datums.1">
+          <variable href="HSV2HLS.qvtp.qvtias#qV..hsv2hls.HSV2HLSRecursion_LM.middle.guard.middleParent"/>
+        </primaryArguments>
+      </distinctArguments>
+      <distinctArguments>
+        <primaryArguments datum="/0/@datums.2">
+          <variable href="HSV2HLS.qvtp.qvtias#qV..hsv2hls.HSV2HLSRecursion_LM.hsv.guard.hsvParent"/>
+        </primaryArguments>
+      </distinctArguments>
+      <mapping href="HSV2HLS.qvtp.qvtias#m..hsv2hls.HSV2HLSRecursion_LM"/>
+    </actions>
+  </qvtschedule:Schedule>
+</xmi:XMI>

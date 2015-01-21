@@ -4,6 +4,9 @@
     xmlns:qvtc="http://www.eclipse.org/qvt/2015/QVTcore" xmlns:qvtcb="http://www.eclipse.org/qvt/2015/QVTcoreBase"
     xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2015/QVTcore java://org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage http://www.eclipse.org/qvt/2015/QVTcoreBase java://org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage"
     name="HSV2HLS.qvtm.qvtc" externalURI="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/HSV2HLS/HSV2HLS.qvtm.qvtc">
+  <ownedImports importedNamespace="pivot:Package HSVTree.ecore.oclas#P.HSVTree"/>
+  <ownedImports importedNamespace="pivot:Package HLSTree.ecore.oclas#P.HLSTree"/>
+  <ownedImports importedNamespace="pivot:Package HSV2HLS.ecore.oclas#P.HSV2HLS"/>
   <ownedPackages xmi:id="P." name="">
     <ownedClasses xsi:type="qvtb:Transformation" xmi:id="T..hsv2hls" name="hsv2hls"
         superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
@@ -110,8 +113,8 @@
           </guardPattern>
           <bottomPattern>
             <predicate>
-              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType ../../../../../../../../../org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas#Boolean"
-                  referredOperation="../../../../../../../../../org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
                 <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"
                     referredProperty="HSVTree.ecore.oclas#p.HSVTree.HSVNode.parent">
                   <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class HSVTree.ecore.oclas#T.HSVTree.HSVNode"
@@ -213,7 +216,4 @@
       </rule>
     </ownedClasses>
   </ownedPackages>
-  <unit usedPackage="pivot:Package HSVTree.ecore.oclas#P.HSVTree"/>
-  <unit usedPackage="pivot:Package HLSTree.ecore.oclas#P.HLSTree"/>
-  <unit usedPackage="pivot:Package HSV2HLS.ecore.oclas#P.HSV2HLS"/>
 </qvtc:CoreModel>
