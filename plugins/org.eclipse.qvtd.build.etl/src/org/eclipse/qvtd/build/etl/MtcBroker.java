@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -265,17 +266,10 @@ public class MtcBroker {
 		createContainmentTrees();
 		cModel = createASModel(qvtcasUri, "QVTc", "QVT", QVTC_FULL_NS, true, false, true, false);
 		uModel = qvtcToQvtu(cModel);
-		uModel.setCachingEnabled(true);
-		uModel.clearCache();
-		uModel.setStoredOnDisposal(false);
+		
 		mModel = qvtuToQvtm(uModel);
-		mModel.setCachingEnabled(true);
-		mModel.clearCache();
-		mModel.setStoredOnDisposal(false);
+		
 		pModel = qvtmToQvtp(mModel);
-		pModel.setCachingEnabled(true);
-		pModel.clearCache();
-		pModel.setStoredOnDisposal(false);
 		sModel = qvtpToQvts(pModel);
 		sModel.setCachingEnabled(true);
 		sModel.clearCache();
@@ -338,6 +332,9 @@ public class MtcBroker {
 		PivotModel mModel = null;
 		mModel = createASModel(qvtmUri, "QVTm", "QVT", QVTC_FULL_NS, false, true, false, false);
 		if (uModel != null && mModel != null  ) {
+			uModel.setCachingEnabled(true);
+			uModel.clearCache();
+			uModel.setStoredOnDisposal(false);
 			FlockTask flock = null;
 			try {
 				flock = new FlockTask(java.net.URI.create(getResourceURI(QVTU_TO_QVTM_FLOCK)));
@@ -369,8 +366,12 @@ public class MtcBroker {
 		PivotModel pModel = null;
 		// The QVTp model needs to resolve external references so the typedModel types are correctly
 		// transformed. 
-		pModel = createASModel(partitionUri, "QVTp", "QVT", QVTI_FULL_NS, false, true, false, true);
+		pModel = createASModel(partitionUri, "QVTp", "QVTp,QVT", QVTI_FULL_NS, false, true, false, false);
+		//pModel2 = createASModel(partitionUri, "QVTp2", "QVTp,QVT", QVTI_FULL_NS, false, true, false, false);
 		if (mModel != null && pModel != null  ) {
+			mModel.setCachingEnabled(true);
+			mModel.clearCache();
+			mModel.setStoredOnDisposal(false);
 			EtlTask etl = null;
 			try {
 				etl = new EtlTask(java.net.URI.create(getResourceURI(QVTM_TO_QVTP_ETL)));
@@ -380,6 +381,7 @@ public class MtcBroker {
 				if (etl != null) {
 					etl.models.add(mModel);
 					etl.models.add(pModel);
+					//etl.models.add(pModel2);
 					etl.models.add(configModel);
 					etl.models.add(oclStdLibModel);
 					etl.execute();
@@ -400,6 +402,12 @@ public class MtcBroker {
 	protected PivotModel qvtpToQvts(PivotModel pModel) throws QvtMtcExecutionException {
 		PivotModel sModel = null;
 		sModel = createModel(scheduleUri, "QVTs", "", QVTS_FULL_NS, false, true, false, true);
+		EList<Resource> resources = pModel.getResource().getResourceSet().getResources();
+		ArrayList<Resource> retain = new ArrayList<Resource>();
+		retain.add(pModel.getResource());
+		resources.retainAll(retain);
+		pModel.setExpand(true);
+		oclStdLibModel = createASModel(OCL_STD_LIB_URI, OCL_STD_LIB_MODEL_NAME, "", PIVOT_URI, true, false, true, false);
 		if (pModel != null && sModel != null) {
 			EtlTask etl = null;
 			try {
@@ -456,6 +464,23 @@ public class MtcBroker {
 				eol.models.add(configModel);
 				// TODO HOw to deal with multiple candidate metamodels?
 				eol.models.add(candidateMetamodelContainmentTrees.get(RIGHT_DIR_NAME).get(0));
+				eol.execute();
+			}
+		}
+	}
+	
+	protected void test(PivotModel pModel, PivotModel pModel2) throws QvtMtcExecutionException {
+		
+		if (pModel != null) {
+			EolTask eol = null;
+			try {
+				eol = new EolTask(java.net.URI.create(getResourceURI("scheduling/test.eol")));
+			} catch (URISyntaxException e) {
+				throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
+			}
+			if (eol != null) {
+				eol.models.add(pModel);
+				eol.models.add(pModel2);
 				eol.execute();
 			}
 		}

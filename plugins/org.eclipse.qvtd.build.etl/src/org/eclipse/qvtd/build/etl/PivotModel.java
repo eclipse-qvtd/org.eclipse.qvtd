@@ -12,7 +12,9 @@ package org.eclipse.qvtd.build.etl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnum;
@@ -57,6 +59,16 @@ public class PivotModel extends EmfModel {
 		this.metamodelManager = metamodelManager;
 	}
 	
+	public PivotModel(PivotModel pModel) {
+		this.aliases = pModel.aliases;
+		this.cachingEnabled = pModel.cachingEnabled;
+		this.expand = pModel.expand;
+		this.modelImpl = pModel.modelImpl;
+		this.readOnLoad = pModel.readOnLoad;
+		this.registry = pModel.registry;
+		this.metamodelUris = pModel.metamodelUris;
+	}
+
 	/* (non-Javadoc)
 	 * @see org.eclipse.epsilon.emc.emf.EmfModel#loadModelFromUri()
 	 */
@@ -110,6 +122,7 @@ public class PivotModel extends EmfModel {
 		return null;
 	}
 	
+	
 	/* (non-Javadoc)
 	 * @see org.eclipse.epsilon.emc.emf.AbstractEmfModel#getEnumerationValue(java.lang.String, java.lang.String)
 	 */
@@ -152,6 +165,17 @@ public class PivotModel extends EmfModel {
 		return allTypeNames;
 	}
 	
+	@Override
+	protected Collection<EObject> allContentsFromModel(){
+		final List<EObject> allInstances = new ArrayList<EObject>();
+		TreeIterator<Object> it = EcoreUtil.getAllContents(modelImpl, expand);
+		while(it.hasNext()) {
+			allInstances.add((EObject) it.next());
+		}
+		return allInstances;
+	}
+	
+	
 	/**
 	 * Class for name.
 	 *
@@ -180,6 +204,7 @@ public class PivotModel extends EmfModel {
 		}
 		return null;
 	}
+	
 
 	/**
 	 * Gets the root eObject.

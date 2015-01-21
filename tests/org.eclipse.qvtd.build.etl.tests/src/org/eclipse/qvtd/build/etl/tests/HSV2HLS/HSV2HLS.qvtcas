@@ -252,7 +252,7 @@
       </rule>
     </ownedClasses>
   </ownedPackages>
-  <unit usedPackage="pivot:Package HSVTree.ecore.oclas#P.HSVTree"/>
-  <unit usedPackage="pivot:Package HLSTree.ecore.oclas#P.HLSTree"/>
-  <unit usedPackage="pivot:Package HSV2HLS.ecore.oclas#P.HSV2HLS"/>
+  <ownedImports importedNamespace="pivot:Package HSVTree.ecore.oclas#P.HSVTree"/>
+  <ownedImports importedNamespace="pivot:Package HLSTree.ecore.oclas#P.HLSTree"/>
+  <ownedImports importedNamespace="pivot:Package HSV2HLS.ecore.oclas#P.HSV2HLS"/>
 </qvtc:CoreModel>

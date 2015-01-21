@@ -25,6 +25,9 @@ import "../helpers/QVTsHelpers.eol";
  *  /org.eclipse.qvtd.build.etl/scheduling/DerivationAnalysis
  *    
  */
+ pre {
+ 	QVTp!Type.all().size().println("all ");
+ }
 
 /****u* QVTpToSchedule/TransformationToSchedule
  * NAME
@@ -57,13 +60,14 @@ rule MappingToMappingAction
     transform m : QVTp!Mapping
     to ma : QVTs!MappingAction {
         
-        // m.name.println("mapping ");
+        m.name.println("mapping ");
         ma.schedule ::= m.transformation;
         ma.mapping = m;
         ma.distinctArguments.addAll(m.getInputVariables().equivalents().collect(e | e.first()));
+        ma.productions.addAll(m.getOutputVariables().collect(v | v.type).equivalent());
         ma.arguments.addAll(ma.getDistinctDataClassDatums()); -- FIXME arguments should be derived.
         ma.requisites.addAll(ma.getDistinctDataClassDatums());
-        ma.productions.addAll(m.getOutputVariables().collect(v | v.type).equivalent());
+        
     }
 
 /****u* QVTpToSchedule/VariableToDataParameter
@@ -87,15 +91,20 @@ rule VariableToDataParameter
     transform v : QVTp!Variable
     to dd : QVTs!DistinctData, dp : QVTs!DataParameter {
         
-        --v.name.println("var ");
+        v.name.println("VariableToDataParameter ");
+        v.type.name.println("v.type.name ");
+        v.type.producesDatums().println("v.type producesDatums ");
+        v.type.equivalent().println("v.type equivalent");
+        v.type.owningModel().println("v.type model ");
         dp.variable = v;
-        dp.datum ::= v.type;       
+        dp.datum ::= v.type;    
+        dp.datum = v.type.equivalent();
         dd.primaryArguments.add(dp);
             
     }
 
 // Only types in the TypedModel pacakges and that are used by a variable
-@lazy
+//@lazy
 @greedy
 rule TypeToClassDatum
     transform t : QVTp!Type
@@ -110,8 +119,7 @@ rule TypeToClassDatum
         } else {
         	domain = null; 
         }
-         
-        // t.name.println("TypeToDatum ");
+        t.name.println("TypeToClassDatum ");
         d.type = t;
         d.super.addAll(t.superClasses.equivalent());
  		d.domain = domain;

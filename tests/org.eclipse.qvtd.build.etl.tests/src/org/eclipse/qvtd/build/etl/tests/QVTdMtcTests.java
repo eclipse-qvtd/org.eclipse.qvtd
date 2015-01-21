@@ -213,7 +213,7 @@ public class QVTdMtcTests extends LoadTestCase {
         assertLoadable(txURI);
         mtc.disposeModels();
     }
-    
+    /*
     @Test
     public void testUpperToLower() throws Exception {
     	
@@ -278,6 +278,6 @@ public class QVTdMtcTests extends LoadTestCase {
         mtc.disposeModels();
         
     }
-    
+    */
 	
 }
