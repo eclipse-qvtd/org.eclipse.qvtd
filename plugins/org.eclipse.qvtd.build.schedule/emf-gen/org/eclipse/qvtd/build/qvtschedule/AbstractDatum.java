@@ -16,6 +16,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getSuper <em>Super</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getSub <em>Sub</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getDomain <em>Domain</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getProducedBy <em>Produced By</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getRequiredBy <em>Required By</em>}</li>
@@ -31,6 +32,7 @@ public interface AbstractDatum extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Super</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getSub <em>Sub</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Super</em>' reference list isn't clear,
@@ -39,10 +41,29 @@ public interface AbstractDatum extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Super</em>' reference list.
 	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractDatum_Super()
-	 * @model
+	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getSub
+	 * @model opposite="sub"
 	 * @generated
 	 */
 	EList<AbstractDatum> getSuper();
+
+	/**
+	 * Returns the value of the '<em><b>Sub</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getSuper <em>Super</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Sub</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Sub</em>' reference list.
+	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractDatum_Sub()
+	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getSuper
+	 * @model opposite="super"
+	 * @generated
+	 */
+	EList<AbstractDatum> getSub();
 
 	/**
 	 * Returns the value of the '<em><b>Domain</b></em>' reference.
