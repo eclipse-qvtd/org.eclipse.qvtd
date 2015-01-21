@@ -287,10 +287,9 @@ operation QVTs!PropertyDatum updatePropertyDatum(context: QVTp!Type, prop : QVTp
     self.classDatum = classDatum;
     if (context <> prop.owningClass) { // Propagate to supertypes as long as the context is not the property owner
 	    for (superClass in context.superClasses) {
-	    	if (superClass.producesDatums() and prop.propertyDatumNotCreated(superClass)) {
-		    	var superPropDatum = new QVTs!PropertyDatum;
-		    	self.super.add(superPropDatum);    	    	
-		    	superPropDatum.updatePropertyDatum(superClass, prop);
+	    	if (superClass.producesDatums()) {
+		    	var superPropDatum = prop.getOrCreateAccessedPropertyDatum(superClass);
+		    	self.super.add(superPropDatum);
 	    	}
 	    }
     }

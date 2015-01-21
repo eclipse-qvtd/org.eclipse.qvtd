@@ -192,7 +192,7 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractDatum_Domain() {
+	public EReference getAbstractDatum_Sub() {
 		return (EReference)abstractDatumEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -201,7 +201,7 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractDatum_ProducedBy() {
+	public EReference getAbstractDatum_Domain() {
 		return (EReference)abstractDatumEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -210,7 +210,7 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractDatum_RequiredBy() {
+	public EReference getAbstractDatum_ProducedBy() {
 		return (EReference)abstractDatumEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -219,7 +219,7 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractDatum_Schedule() {
+	public EReference getAbstractDatum_RequiredBy() {
 		return (EReference)abstractDatumEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -228,8 +228,17 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractDatum_DataParameter() {
+	public EReference getAbstractDatum_Schedule() {
 		return (EReference)abstractDatumEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractDatum_DataParameter() {
+		return (EReference)abstractDatumEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -559,6 +568,7 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 		// Create classes and their features
 		abstractDatumEClass = createEClass(ABSTRACT_DATUM);
 		createEReference(abstractDatumEClass, ABSTRACT_DATUM__SUPER);
+		createEReference(abstractDatumEClass, ABSTRACT_DATUM__SUB);
 		createEReference(abstractDatumEClass, ABSTRACT_DATUM__DOMAIN);
 		createEReference(abstractDatumEClass, ABSTRACT_DATUM__PRODUCED_BY);
 		createEReference(abstractDatumEClass, ABSTRACT_DATUM__REQUIRED_BY);
@@ -649,7 +659,8 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(abstractDatumEClass, AbstractDatum.class, "AbstractDatum", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAbstractDatum_Super(), this.getAbstractDatum(), null, "super", null, 0, -1, AbstractDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractDatum_Super(), this.getAbstractDatum(), this.getAbstractDatum_Sub(), "super", null, 0, -1, AbstractDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractDatum_Sub(), this.getAbstractDatum(), this.getAbstractDatum_Super(), "sub", null, 0, -1, AbstractDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractDatum_Domain(), theQVTcoreBasePackage.getCoreDomain(), null, "domain", null, 0, 1, AbstractDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractDatum_ProducedBy(), this.getAbstractAction(), this.getAbstractAction_Productions(), "producedBy", null, 0, -1, AbstractDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractDatum_RequiredBy(), this.getAbstractAction(), this.getAbstractAction_Requisites(), "requiredBy", null, 0, -1, AbstractDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
