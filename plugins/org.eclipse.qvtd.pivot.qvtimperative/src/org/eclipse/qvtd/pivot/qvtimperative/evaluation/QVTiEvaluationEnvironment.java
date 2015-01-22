@@ -13,8 +13,8 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.NamedElement;
-import org.eclipse.ocl.pivot.internal.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.evaluation.AbstractEvaluationEnvironment;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 
 public abstract class QVTiEvaluationEnvironment extends AbstractEvaluationEnvironment implements IQVTiEvaluationEnvironment
 {
