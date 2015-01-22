@@ -19,13 +19,8 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * <!-- begin-model-doc -->
- * The Package for an Imperative QVT Schedule.
- * <!-- end-model-doc -->
  * @see org.eclipse.qvtd.build.qvtschedule.qvtscheduleFactory
  * @model kind="package"
- *        annotation="http://www.eclipse.org/OCL/Import ecore='http://www.eclipse.org/emf/2002/Ecore' qvtcb='../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#/' qvti='../../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore#/'"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore invocationDelegates='http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot' settingDelegates='http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot' validationDelegates='http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot'"
  * @generated
  */
 public interface qvtschedulePackage extends EPackage {
@@ -81,40 +76,31 @@ public interface qvtschedulePackage extends EPackage {
 	int ABSTRACT_DATUM__SUPER = 0;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ABSTRACT_DATUM__TYPE = 1;
-
-	/**
 	 * The feature id for the '<em><b>Domain</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATUM__DOMAIN = 2;
+	int ABSTRACT_DATUM__DOMAIN = 1;
 
 	/**
-	 * The feature id for the '<em><b>Sources</b></em>' reference list.
+	 * The feature id for the '<em><b>Produced By</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATUM__SOURCES = 3;
+	int ABSTRACT_DATUM__PRODUCED_BY = 2;
 
 	/**
-	 * The feature id for the '<em><b>Targets</b></em>' reference list.
+	 * The feature id for the '<em><b>Required By</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATUM__TARGETS = 4;
+	int ABSTRACT_DATUM__REQUIRED_BY = 3;
 
 	/**
 	 * The feature id for the '<em><b>Schedule</b></em>' container reference.
@@ -123,7 +109,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATUM__SCHEDULE = 5;
+	int ABSTRACT_DATUM__SCHEDULE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Data Parameter</b></em>' reference list.
@@ -132,7 +118,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATUM__DATA_PARAMETER = 6;
+	int ABSTRACT_DATUM__DATA_PARAMETER = 5;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Datum</em>' class.
@@ -141,7 +127,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATUM_FEATURE_COUNT = 7;
+	int ABSTRACT_DATUM_FEATURE_COUNT = 6;
 
 	/**
 	 * The number of operations of the '<em>Abstract Datum</em>' class.
@@ -163,13 +149,22 @@ public interface qvtschedulePackage extends EPackage {
 	int ABSTRACT_ACTION = 1;
 
 	/**
-	 * The feature id for the '<em><b>Results</b></em>' reference list.
+	 * The feature id for the '<em><b>Productions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ACTION__RESULTS = 0;
+	int ABSTRACT_ACTION__PRODUCTIONS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Requisites</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_ACTION__REQUISITES = 1;
 
 	/**
 	 * The feature id for the '<em><b>Distinct Arguments</b></em>' containment reference list.
@@ -178,7 +173,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ACTION__DISTINCT_ARGUMENTS = 1;
+	int ABSTRACT_ACTION__DISTINCT_ARGUMENTS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Order</b></em>' attribute.
@@ -187,7 +182,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ACTION__ORDER = 2;
+	int ABSTRACT_ACTION__ORDER = 3;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -196,7 +191,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ACTION__PARENT = 3;
+	int ABSTRACT_ACTION__PARENT = 4;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' reference list.
@@ -205,7 +200,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ACTION__CHILDREN = 4;
+	int ABSTRACT_ACTION__CHILDREN = 5;
 
 	/**
 	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
@@ -214,7 +209,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ACTION__ARGUMENTS = 5;
+	int ABSTRACT_ACTION__ARGUMENTS = 6;
 
 	/**
 	 * The feature id for the '<em><b>Schedule</b></em>' container reference.
@@ -223,7 +218,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ACTION__SCHEDULE = 6;
+	int ABSTRACT_ACTION__SCHEDULE = 7;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Action</em>' class.
@@ -232,7 +227,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ACTION_FEATURE_COUNT = 7;
+	int ABSTRACT_ACTION_FEATURE_COUNT = 8;
 
 	/**
 	 * The number of operations of the '<em>Abstract Action</em>' class.
@@ -263,15 +258,6 @@ public interface qvtschedulePackage extends EPackage {
 	int CLASS_DATUM__SUPER = ABSTRACT_DATUM__SUPER;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CLASS_DATUM__TYPE = ABSTRACT_DATUM__TYPE;
-
-	/**
 	 * The feature id for the '<em><b>Domain</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -281,22 +267,22 @@ public interface qvtschedulePackage extends EPackage {
 	int CLASS_DATUM__DOMAIN = ABSTRACT_DATUM__DOMAIN;
 
 	/**
-	 * The feature id for the '<em><b>Sources</b></em>' reference list.
+	 * The feature id for the '<em><b>Produced By</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DATUM__SOURCES = ABSTRACT_DATUM__SOURCES;
+	int CLASS_DATUM__PRODUCED_BY = ABSTRACT_DATUM__PRODUCED_BY;
 
 	/**
-	 * The feature id for the '<em><b>Targets</b></em>' reference list.
+	 * The feature id for the '<em><b>Required By</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DATUM__TARGETS = ABSTRACT_DATUM__TARGETS;
+	int CLASS_DATUM__REQUIRED_BY = ABSTRACT_DATUM__REQUIRED_BY;
 
 	/**
 	 * The feature id for the '<em><b>Schedule</b></em>' container reference.
@@ -317,13 +303,31 @@ public interface qvtschedulePackage extends EPackage {
 	int CLASS_DATUM__DATA_PARAMETER = ABSTRACT_DATUM__DATA_PARAMETER;
 
 	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DATUM__TYPE = ABSTRACT_DATUM_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Property Datums</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DATUM__PROPERTY_DATUMS = ABSTRACT_DATUM_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Class Datum</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CLASS_DATUM_FEATURE_COUNT = ABSTRACT_DATUM_FEATURE_COUNT + 0;
+	int CLASS_DATUM_FEATURE_COUNT = ABSTRACT_DATUM_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Class Datum</em>' class.
@@ -473,13 +477,22 @@ public interface qvtschedulePackage extends EPackage {
 	int INPUT_ACTION = 5;
 
 	/**
-	 * The feature id for the '<em><b>Results</b></em>' reference list.
+	 * The feature id for the '<em><b>Productions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INPUT_ACTION__RESULTS = ABSTRACT_ACTION__RESULTS;
+	int INPUT_ACTION__PRODUCTIONS = ABSTRACT_ACTION__PRODUCTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Requisites</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_ACTION__REQUISITES = ABSTRACT_ACTION__REQUISITES;
 
 	/**
 	 * The feature id for the '<em><b>Distinct Arguments</b></em>' containment reference list.
@@ -564,13 +577,22 @@ public interface qvtschedulePackage extends EPackage {
 	int MAPPING_ACTION = 6;
 
 	/**
-	 * The feature id for the '<em><b>Results</b></em>' reference list.
+	 * The feature id for the '<em><b>Productions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_ACTION__RESULTS = ABSTRACT_ACTION__RESULTS;
+	int MAPPING_ACTION__PRODUCTIONS = ABSTRACT_ACTION__PRODUCTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Requisites</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_ACTION__REQUISITES = ABSTRACT_ACTION__REQUISITES;
 
 	/**
 	 * The feature id for the '<em><b>Distinct Arguments</b></em>' containment reference list.
@@ -664,13 +686,22 @@ public interface qvtschedulePackage extends EPackage {
 	int OUTPUT_ACTION = 7;
 
 	/**
-	 * The feature id for the '<em><b>Results</b></em>' reference list.
+	 * The feature id for the '<em><b>Productions</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OUTPUT_ACTION__RESULTS = ABSTRACT_ACTION__RESULTS;
+	int OUTPUT_ACTION__PRODUCTIONS = ABSTRACT_ACTION__PRODUCTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Requisites</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT_ACTION__REQUISITES = ABSTRACT_ACTION__REQUISITES;
 
 	/**
 	 * The feature id for the '<em><b>Distinct Arguments</b></em>' containment reference list.
@@ -745,6 +776,115 @@ public interface qvtschedulePackage extends EPackage {
 	int OUTPUT_ACTION_OPERATION_COUNT = ABSTRACT_ACTION_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.PropertyDatumImpl <em>Property Datum</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.build.qvtschedule.impl.PropertyDatumImpl
+	 * @see org.eclipse.qvtd.build.qvtschedule.impl.qvtschedulePackageImpl#getPropertyDatum()
+	 * @generated
+	 */
+	int PROPERTY_DATUM = 8;
+
+	/**
+	 * The feature id for the '<em><b>Super</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM__SUPER = ABSTRACT_DATUM__SUPER;
+
+	/**
+	 * The feature id for the '<em><b>Domain</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM__DOMAIN = ABSTRACT_DATUM__DOMAIN;
+
+	/**
+	 * The feature id for the '<em><b>Produced By</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM__PRODUCED_BY = ABSTRACT_DATUM__PRODUCED_BY;
+
+	/**
+	 * The feature id for the '<em><b>Required By</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM__REQUIRED_BY = ABSTRACT_DATUM__REQUIRED_BY;
+
+	/**
+	 * The feature id for the '<em><b>Schedule</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM__SCHEDULE = ABSTRACT_DATUM__SCHEDULE;
+
+	/**
+	 * The feature id for the '<em><b>Data Parameter</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM__DATA_PARAMETER = ABSTRACT_DATUM__DATA_PARAMETER;
+
+	/**
+	 * The feature id for the '<em><b>Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM__PROPERTY = ABSTRACT_DATUM_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Class Datum</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM__CLASS_DATUM = ABSTRACT_DATUM_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Opposite</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM__OPPOSITE = ABSTRACT_DATUM_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Property Datum</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM_FEATURE_COUNT = ABSTRACT_DATUM_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Property Datum</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM_OPERATION_COUNT = ABSTRACT_DATUM_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.ScheduleImpl <em>Schedule</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -752,7 +892,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.build.qvtschedule.impl.qvtschedulePackageImpl#getSchedule()
 	 * @generated
 	 */
-	int SCHEDULE = 8;
+	int SCHEDULE = 9;
 
 	/**
 	 * The feature id for the '<em><b>Datums</b></em>' containment reference list.
@@ -813,17 +953,6 @@ public interface qvtschedulePackage extends EPackage {
 	EReference getAbstractDatum_Super();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Type</em>'.
-	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getType()
-	 * @see #getAbstractDatum()
-	 * @generated
-	 */
-	EReference getAbstractDatum_Type();
-
-	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getDomain <em>Domain</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -835,26 +964,26 @@ public interface qvtschedulePackage extends EPackage {
 	EReference getAbstractDatum_Domain();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getSources <em>Sources</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getProducedBy <em>Produced By</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Sources</em>'.
-	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getSources()
+	 * @return the meta object for the reference list '<em>Produced By</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getProducedBy()
 	 * @see #getAbstractDatum()
 	 * @generated
 	 */
-	EReference getAbstractDatum_Sources();
+	EReference getAbstractDatum_ProducedBy();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getTargets <em>Targets</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getRequiredBy <em>Required By</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Targets</em>'.
-	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getTargets()
+	 * @return the meta object for the reference list '<em>Required By</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getRequiredBy()
 	 * @see #getAbstractDatum()
 	 * @generated
 	 */
-	EReference getAbstractDatum_Targets();
+	EReference getAbstractDatum_RequiredBy();
 
 	/**
 	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getSchedule <em>Schedule</em>}'.
@@ -889,15 +1018,26 @@ public interface qvtschedulePackage extends EPackage {
 	EClass getAbstractAction();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getResults <em>Results</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getProductions <em>Productions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Results</em>'.
-	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractAction#getResults()
+	 * @return the meta object for the reference list '<em>Productions</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractAction#getProductions()
 	 * @see #getAbstractAction()
 	 * @generated
 	 */
-	EReference getAbstractAction_Results();
+	EReference getAbstractAction_Productions();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getRequisites <em>Requisites</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Requisites</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractAction#getRequisites()
+	 * @see #getAbstractAction()
+	 * @generated
+	 */
+	EReference getAbstractAction_Requisites();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getDistinctArguments <em>Distinct Arguments</em>}'.
@@ -974,6 +1114,28 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getClassDatum();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.build.qvtschedule.ClassDatum#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.ClassDatum#getType()
+	 * @see #getClassDatum()
+	 * @generated
+	 */
+	EReference getClassDatum_Type();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.build.qvtschedule.ClassDatum#getPropertyDatums <em>Property Datums</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Property Datums</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.ClassDatum#getPropertyDatums()
+	 * @see #getClassDatum()
+	 * @generated
+	 */
+	EReference getClassDatum_PropertyDatums();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.build.qvtschedule.DataParameter <em>Data Parameter</em>}'.
@@ -1125,6 +1287,49 @@ public interface qvtschedulePackage extends EPackage {
 	EClass getOutputAction();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.build.qvtschedule.PropertyDatum <em>Property Datum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Property Datum</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.PropertyDatum
+	 * @generated
+	 */
+	EClass getPropertyDatum();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.build.qvtschedule.PropertyDatum#getProperty <em>Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Property</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.PropertyDatum#getProperty()
+	 * @see #getPropertyDatum()
+	 * @generated
+	 */
+	EReference getPropertyDatum_Property();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.build.qvtschedule.PropertyDatum#getClassDatum <em>Class Datum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Class Datum</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.PropertyDatum#getClassDatum()
+	 * @see #getPropertyDatum()
+	 * @generated
+	 */
+	EReference getPropertyDatum_ClassDatum();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.build.qvtschedule.PropertyDatum#getOpposite <em>Opposite</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Opposite</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.PropertyDatum#getOpposite()
+	 * @see #getPropertyDatum()
+	 * @generated
+	 */
+	EReference getPropertyDatum_Opposite();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.build.qvtschedule.Schedule <em>Schedule</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1198,14 +1403,6 @@ public interface qvtschedulePackage extends EPackage {
 		EReference ABSTRACT_DATUM__SUPER = eINSTANCE.getAbstractDatum_Super();
 
 		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ABSTRACT_DATUM__TYPE = eINSTANCE.getAbstractDatum_Type();
-
-		/**
 		 * The meta object literal for the '<em><b>Domain</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1214,20 +1411,20 @@ public interface qvtschedulePackage extends EPackage {
 		EReference ABSTRACT_DATUM__DOMAIN = eINSTANCE.getAbstractDatum_Domain();
 
 		/**
-		 * The meta object literal for the '<em><b>Sources</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Produced By</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ABSTRACT_DATUM__SOURCES = eINSTANCE.getAbstractDatum_Sources();
+		EReference ABSTRACT_DATUM__PRODUCED_BY = eINSTANCE.getAbstractDatum_ProducedBy();
 
 		/**
-		 * The meta object literal for the '<em><b>Targets</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Required By</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ABSTRACT_DATUM__TARGETS = eINSTANCE.getAbstractDatum_Targets();
+		EReference ABSTRACT_DATUM__REQUIRED_BY = eINSTANCE.getAbstractDatum_RequiredBy();
 
 		/**
 		 * The meta object literal for the '<em><b>Schedule</b></em>' container reference feature.
@@ -1256,12 +1453,20 @@ public interface qvtschedulePackage extends EPackage {
 		EClass ABSTRACT_ACTION = eINSTANCE.getAbstractAction();
 
 		/**
-		 * The meta object literal for the '<em><b>Results</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Productions</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ABSTRACT_ACTION__RESULTS = eINSTANCE.getAbstractAction_Results();
+		EReference ABSTRACT_ACTION__PRODUCTIONS = eINSTANCE.getAbstractAction_Productions();
+
+		/**
+		 * The meta object literal for the '<em><b>Requisites</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_ACTION__REQUISITES = eINSTANCE.getAbstractAction_Requisites();
 
 		/**
 		 * The meta object literal for the '<em><b>Distinct Arguments</b></em>' containment reference list feature.
@@ -1320,6 +1525,22 @@ public interface qvtschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EClass CLASS_DATUM = eINSTANCE.getClassDatum();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_DATUM__TYPE = eINSTANCE.getClassDatum_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Property Datums</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference CLASS_DATUM__PROPERTY_DATUMS = eINSTANCE.getClassDatum_PropertyDatums();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.DataParameterImpl <em>Data Parameter</em>}' class.
@@ -1442,6 +1663,40 @@ public interface qvtschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EClass OUTPUT_ACTION = eINSTANCE.getOutputAction();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.PropertyDatumImpl <em>Property Datum</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.build.qvtschedule.impl.PropertyDatumImpl
+		 * @see org.eclipse.qvtd.build.qvtschedule.impl.qvtschedulePackageImpl#getPropertyDatum()
+		 * @generated
+		 */
+		EClass PROPERTY_DATUM = eINSTANCE.getPropertyDatum();
+
+		/**
+		 * The meta object literal for the '<em><b>Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY_DATUM__PROPERTY = eINSTANCE.getPropertyDatum_Property();
+
+		/**
+		 * The meta object literal for the '<em><b>Class Datum</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY_DATUM__CLASS_DATUM = eINSTANCE.getPropertyDatum_ClassDatum();
+
+		/**
+		 * The meta object literal for the '<em><b>Opposite</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PROPERTY_DATUM__OPPOSITE = eINSTANCE.getPropertyDatum_Opposite();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.ScheduleImpl <em>Schedule</em>}' class.

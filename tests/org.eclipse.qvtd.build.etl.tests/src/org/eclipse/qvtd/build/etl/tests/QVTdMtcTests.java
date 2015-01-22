@@ -15,10 +15,14 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.evaluation.ModelManager;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerResourceSetAdapter;
+import org.eclipse.ocl.pivot.internal.utilities.PivotEnvironmentFactory;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
-import org.eclipse.ocl.pivot.resource.ProjectManager;
+import org.eclipse.ocl.pivot.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.build.etl.MtcBroker;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -32,28 +36,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public class QVTdMtcTests extends LoadTestCase
-{
-	protected class MyQVT extends OCL
-	{
-		public MyQVT(@NonNull QVTiEnvironmentFactory environmentFactory) {
-			super(environmentFactory);
-		}
-
-		public @NonNull MyQvtiEvaluator createEvaluator(@NonNull String fileNamePrefix, @NonNull Transformation transformation) throws IOException {
-			return new MyQvtiEvaluator(getEnvironmentFactory(), fileNamePrefix, transformation);
-		}
-
-		@Override
-		public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
-			return (QVTiEnvironmentFactory) super.getEnvironmentFactory();
-		}
-	}
+public class QVTdMtcTests extends LoadTestCase {
 	
-	protected static class MyQVTiEnvironmentFactory extends QVTiEnvironmentFactory
+	private final class MyQVTiEnvironmentFactory extends QVTiEnvironmentFactory
 	{
-		public MyQVTiEnvironmentFactory(@Nullable ProjectManager projectMap) {
-			super(projectMap);
+		public MyQVTiEnvironmentFactory(@Nullable StandaloneProjectMap projectMap, @Nullable ModelManager modelManager) {
+			super(projectMap, modelManager);
 	    	setEvaluationTracingEnabled(true);
 		}
 	}
@@ -61,7 +49,7 @@ public class QVTdMtcTests extends LoadTestCase
 	/**
 	 * The Class MyQvtiEvaluator provides helper methods for loading and creating models used in the test
 	 */
-	private class MyQvtiEvaluator extends QVTiPivotEvaluator
+	private final class MyQvtiEvaluator extends QVTiPivotEvaluator
 	{
 		
 		/** The typed model validation resource map. */
@@ -78,8 +66,8 @@ public class QVTdMtcTests extends LoadTestCase
 		 * @param transformationFileName the transformation file name
 		 * @throws IOException Signals that an I/O exception has occurred.
 		 */
-		public MyQvtiEvaluator(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull String fileNamePrefix, @NonNull Transformation transformation) throws IOException {
-			super(environmentFactory, transformation);
+		public MyQvtiEvaluator(@NonNull MetamodelManager metamodelManager, @NonNull String fileNamePrefix, @NonNull Transformation transformation) throws IOException {
+			super((QVTiEnvironmentFactory) metamodelManager.getEnvironmentFactory(), transformation);
 			this.fileNamePrefix = fileNamePrefix + "/";
 		}
 		
@@ -125,15 +113,16 @@ public class QVTdMtcTests extends LoadTestCase
 		 * @param name the name
 		 * @param modelFileName the model file name
 		 *
+		 */
 		public void loadReference(@NonNull String name, @NonNull String modelFileName) {
-	        TypedModel typedModel = ClassUtil.getNamedElement(transformation.getModelParameter(), name);
+	        TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
 	        if (typedModel == null) {
 	        	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
 	        }
 			URI modelURI = getProjectFileURI(fileNamePrefix + modelFileName);
 	        Resource resource = metamodelManager.getExternalResourceSet().getResource(modelURI, true);
 	        typedModelValidationResourceMap.put(typedModel, resource);
-		}*/
+		}
 
 		/**
 		 * Test.
@@ -154,7 +143,7 @@ public class QVTdMtcTests extends LoadTestCase
 	}
 	
 	protected static void assertLoadable(@NonNull URI asURI) {
-        ResourceSet asResourceSet = OCL.createEnvironmentFactory(null).getMetamodelManager().getASResourceSet();
+        ResourceSet asResourceSet = new PivotEnvironmentFactory(null, null).getMetamodelManager().getASResourceSet();
         if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			OCLstdlib.install();
 //	        MetamodelManager.initializeASResourceSet(asResourceSet);
@@ -163,10 +152,6 @@ public class QVTdMtcTests extends LoadTestCase
         EcoreUtil.resolveAll(resource);
         assertNoUnresolvedProxies("Loading", resource);
         assertNoResourceErrors("Loading", resource);
-	}
-
-	protected @NonNull MyQVT createQVT() {
-		return new MyQVT(new MyQVTiEnvironmentFactory(getProjectMap()));
 	}
 	
 	/* (non-Javadoc)
@@ -180,8 +165,8 @@ public class QVTdMtcTests extends LoadTestCase
 		QVTcorePivotStandaloneSetup.doSetup();
 		QVTimperativePivotStandaloneSetup.doSetup();
 		OCLstdlib.install();
-//		metamodelManager = new MyQVTiEnvironmentFactory(null).getMetamodelManager();
-//        EnvironmentFactoryResourceSetAdapter.getAdapter(ClassUtil.nonNullState(resourceSet), metamodelManager.getEnvironmentFactory());
+		metamodelManager = new MyQVTiEnvironmentFactory(null, null).getMetamodelManager();
+        MetamodelManagerResourceSetAdapter.getAdapter(ClassUtil.nonNullState(resourceSet), metamodelManager);
     }
 	
 	 /* (non-Javadoc)
@@ -195,10 +180,10 @@ public class QVTdMtcTests extends LoadTestCase
     
     @Test
     public void testUmlToRdbms() throws Exception {
-    	MyQVT myQVT = createQVT();
+    	
     	URL r = this.getClass().getResource("UmlToRdbms/UmlToRdbms.qvtcas");
 		String qvtcasUri = MtcBroker.changeResourceToSource(r.toURI().toString());
-    	MtcBroker mtc = new MtcBroker(qvtcasUri, this.getClass(), myQVT.getMetamodelManager());
+    	MtcBroker mtc = new MtcBroker(qvtcasUri, this.getClass(), metamodelManager);
     	mtc.execute();
     	Diagnostic diagnostic = Diagnostician.INSTANCE.validate(mtc.getuModel().getRooteObject());
     	// TODO do we want perfect or can we tolerate info and warnings?
@@ -213,12 +198,13 @@ public class QVTdMtcTests extends LoadTestCase
         diagnostic = Diagnostician.INSTANCE.validate(mtc.getiModel().getRooteObject());
         assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
         
-        MyQvtiEvaluator testEvaluator = myQVT.createEvaluator("UmlToRdbms",mtc.getiModel().getTransformation());
+        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(metamodelManager, "UmlToRdbms",mtc.getiModel().getTransformation());
     	testEvaluator.saveTransformation(null);
         testEvaluator.loadModel("uml", "SimpleUMLPeople.xmi");
         testEvaluator.createModel("middle", "UML2RDBMS.xmi");
         testEvaluator.createModel("rdbms", "SimpleRDBMSPeople.xmi");
-        //testEvaluator.loadReference("hls", "HLSNodeValidate.xmi");
+        // TODO create validation model 
+        //testEvaluator.loadReference("rdbms", "SimpleRDBMSPeopleValidate.xmi");
         System.out.println("Executing QVTi transformation on test models.");
         testEvaluator.test();
         testEvaluator.dispose();
@@ -226,7 +212,6 @@ public class QVTdMtcTests extends LoadTestCase
         URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
         assertLoadable(txURI);
         mtc.disposeModels();
-        myQVT.dispose();
     }
     /*
     @Test
@@ -256,7 +241,7 @@ public class QVTdMtcTests extends LoadTestCase
         testEvaluator.test();
         testEvaluator.dispose();
         
-        URI txURI = DomainUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
+        URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
         assertLoadable(txURI);
         mtc.disposeModels();
     }
@@ -288,7 +273,7 @@ public class QVTdMtcTests extends LoadTestCase
         testEvaluator.test();
         testEvaluator.dispose();
         
-        URI txURI = DomainUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
+        URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
         assertLoadable(txURI);
         mtc.disposeModels();
         

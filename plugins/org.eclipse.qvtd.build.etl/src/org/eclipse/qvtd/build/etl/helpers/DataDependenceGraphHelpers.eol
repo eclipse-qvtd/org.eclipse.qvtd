@@ -148,7 +148,7 @@ operation ddg!Graph getNodeForTreeNode(treeNode : tree!Node, nodeMap : Map) : dd
         n = nodeMap.get(treeNode);
     } else {
         n = self.owningModel().createInstance("ClassNode");
-        n.label = treeNode.EClassName;
+        n.label = treeNode.name;
         nodeMap.put(treeNode, n);
         self.elements.add(n);
     }

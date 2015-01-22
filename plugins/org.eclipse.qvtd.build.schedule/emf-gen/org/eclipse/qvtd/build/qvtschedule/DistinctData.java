@@ -11,19 +11,14 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Distinct Data</b></em>'.
  * <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * A DistinctData groups DataParameters in order to represent derivation
- * information. The secondaryArguments can be derived from the PrimaryArguments
- * <!-- end-model-doc -->
- *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.DistinctData#getTarget <em>Target</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.DistinctData#getPrimaryArguments <em>Primary Arguments</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.DistinctData#getSecondaryArguments <em>Secondary Arguments</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getDistinctData()
  * @model

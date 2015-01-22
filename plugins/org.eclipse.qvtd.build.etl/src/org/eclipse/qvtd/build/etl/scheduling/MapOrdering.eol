@@ -9,22 +9,76 @@
  *     Horacio Hoyos - initial implementation
  ******************************************************************************/
 import "../helpers/OCLExpressionAnalysis.eol";
+import "../helpers/QVTHelpers.eol";
+import "../helpers/QVTsHelpers.eol";
 
 /****l* /org.eclipse.qvtd.build.etl.scheduling/MapOrdering
  * NAME
- *  MapOrdering -- A set of EOL operations to perform scheduling analysys from
- *  data dependencies
+ *  MapOrdering -- A EOL script to derive primary and secondary arguments and 
+ * find the map ordering based on data dependencies.
+ *
+ * Invoke QVTs!Schedule::doMapOrdering();  
  *
  * MODELS
  *  Required models to run the script:
  *      - NAME      ALIASES METAMODEL               ROL SOD
- *      - qvti      QVT     QVTCore                  X          The QVTi (partitioned) AST
- *      - rTree     tree    ECoreContainmentTree     X          The right metamodel containment tree
- *      - qvts              QVTSchedule                  X      The QVT schedule model
+ *      - QVTs      QVT       QVTSchedule              X   X      The QVT schedule model
  * SEE ALSO
- *
+ *	FlatSchedule.eol
+ *  SimpleNestedSchedule.eol
  ******
  */
+
+operation QVTs!Schedule doMapOrdering() {
+
+	// Secondary Argument Derivations
+	self.defineArgumentDerivation();
+	self.removeEmptyDistinctData();
+	
+	// Ordering
+	self.findMapOrdering();
+}
+
+/****o* Scheduler/defineArgumentDerivation
+ * NAME
+ *  defineArgumentDerivation - Identifies what parameters can be derived from
+ *  others
+ * FUNCTION
+ *  
+ * CONTEXT
+ *  QVTs!Schedule  The Schdule
+ * SEE ALSO
+ */
+operation QVTs!Schedule defineArgumentDerivation() {
+    for (ma in self.actions) {
+        //ma.mapping.name.println("m ");
+        // Find the best derivation alternatives
+        var inputVars = ma.distinctArguments.collect(da | da.primaryArguments.first().variable);
+        var derivees = ma.distinctArguments.collect(da | da.primaryArguments.first())
+                .aggregate(pa | pa, pa.variable.derivedVariables(inputVars));                    
+        for (da in ma.distinctArguments.sortBy(da | derivees.get(da.primaryArguments.first()).size()).invert()) {
+            for (dv in derivees.get(da.primaryArguments.first())) {
+                if (ma.distinctArguments.exists(da | da.primaryArguments.exists(pa | pa.variable == dv))) {
+                    da.secondaryArguments.add(ma.distinctArguments.selectOne(da | da.primaryArguments.exists(pa | pa.variable == dv)).primaryArguments.first());
+                }
+            }
+        }
+    }
+}
+
+/****o* Scheduler/removeEmptyDistinctData
+ * NAME
+ *  removeEmptyDistinctData - Remove DistinctData elements that don't have a 
+ *  primary argument.
+ * CONTEXT
+ *  QVTs!Schedule  The Schdule
+ */
+operation QVTs!Schedule removeEmptyDistinctData() {
+    
+    for (da in self.actions.collect(a | a.distinctArguments).flatten().select(dd | dd.primaryArguments.isEmpty())) {
+        delete da;
+    }
+}
 
 
 /****o* MapOrdering/findMapOrdering
@@ -45,21 +99,36 @@ operation QVTs!Schedule findMapOrdering()  {
 	// Marked visited mappings to avoid loops
 	var visitedAct = new Sequence();
 	var visitedNodes = new Sequence();
-	queue.addAll(rTree!Node.all().select(n | n.parent.isEmpty()));
+	queue.addAll(rTree!Node.all().select(n | n.isRootElementCandidate()));
 	while (not queue.isEmpty()) {
 	    var n = queue.first();
 	    queue.remove(n);
 	    visitedNodes.add(n);
 	    // Do stuff with n
-	    //n.println("n ");
-	    //  Find all the mappings that have an output node if this type 
-	    // TODO The ECoreContainment tree should save the actual type so we dont compare names!
-	    for (ma in self.actions.select(aa | aa.results.exists(e | e.type.name = n.EClassName))) { // FIXME what about mappings which create any subtype?
-	        // Find the predecesors and linearize
-	        if (visitedAct.excludes(ma))
-	        	ma.getOrdering(visitedAct);
+	    // n.println("n ");
+	    // Find all the mappings that have an output type (or subtype)
+	    // corresponding to the type of the target node
+		var baseDatum = self.datums.selectOne(x | x.correspondsWith(n));
+	    if (baseDatum.isDefined()) {
+		    for (ma in self.actions.select(aa | aa.productions.exists(e | e.isDatumOrSubdatum(baseDatum)))) { 
+		        // Find the predecesors and linearize
+		        if (visitedAct.excludes(ma))
+		        	ma.getOrdering(visitedAct);
+		        for (pDatum in baseDatum.propertyDatums) {
+		        	for (ma in self.actions.select(aa | aa.productions.exists(e | e = pDatum))) {
+		        		if (visitedAct.excludes(ma))
+		        			ma.getOrdering(visitedAct);
+		        	}
+		        }
+		    }
 	    }
+	    
 	    queue.addAll(n.children.excludingAll(visitedNodes));
+	}
+	// Finally we schedule the mapping actions pending to be scheduled
+	// These mapping invocations will produce root elements
+	for (ma in self.actions.select(aa | aa.order = 0)) {
+		ma.getOrdering(visitedAct);
 	}
 }
 
@@ -88,55 +157,44 @@ operation QVTs!MappingAction getOrdering(visited) {
 	self.order = self.schedule.getMaxIndex() + 1;
 }
 
-/****o* MapOrdering/getPredecessors
+
+/****o* Scheduler/derivedVariables
  * NAME
- *  getPredecessors - Get the predecessors of a mapping action
+ *  derivedVariables - Analysis of variable relations to find derivable ones
  * FUNCTION
- *  The predecessors of a mapping action are calculating by following the 
- *  mapping arguments' sources. This method could be invoked recursively
- *  to do a graph search iif a mechanism is added to prevent loops. 
+ *  Returns a list of variables that can be derived from the context variable.
+ *  The function performs a full depth search looking for variables that can be
+ *  derived from the derived ones too.
+ *
  * CONTEXT
- *  QVTs!MappingAction  The MappingAction
- * RETURNS
- *  Sequence	The sequence of mapping predecesors. 
- *  SEE ALSO
+ *  QVT!Variable  The variable being analyzed
+ * PARAMETERS
+ *  vars The variables to look for relations
+ * RESULT
+ *  A
+ * SEE ALSO
+ *
  */
-@cached
-operation QVTs!MappingAction getPredecessors() : Set {
+operation QVT!Variable derivedVariables(vars : Sequence) : Set {
 
-    //self.mapping.name.println("getPredecessors ");
-	var args = self.getArguments();	
-	var concreteSources =  args.collect(a | a.sources).flatten().asSet();
-	var abstractSources = self.schedule.datums.select(cd | 
-            args.select(ad | ad.type.isAbstract).exists(ad | cd.super.includes(ad)))
-            -- FIXME why does it need to be abstract? and why not super.super ?
-        .collect(a | a.sources).flatten().asSet();
-	return concreteSources.includingAll(abstractSources);
-}
-
-/****o* MapOrdering/getArguments
- * NAME
- *  getArguments - Get the arguments of a mapping action
- * SYNOPSIS
- *    ma.getArguments();
- * FUNCTION
- *    Get the arguments of an mapping action.
- * TODO
- *  This should be implemented as the derivied property of the mapping.   
- * CONTEXT
- *  QVTs!MappingAction  The MappingAction
- * ANNOTATIONS
- *  cached
- * RETURNS
- *  QVTs!AbstractDatum	The ClassDatum for the variable's type
- *  SEE ALSO
- */	
-@cahced
-operation QVTs!MappingAction getArguments() : Sequence {
-	
-	return self.distinctArguments.primaryArguments
-			.includingAll(self.distinctArguments.secondaryArguments).flatten()
-			.collect(da | da.datum);
+    var derived : Set;
+    for (vB in vars.excluding(self)) {
+        for (rel in self.hasRelation(vB)) { //self.hasRelation(vB).sortBy(r | r.getCost()) // In the future cost can be used to select the less expensive navigation
+            //vB.name.println(self.name + "    has relation to ");
+            derived.add(vB);
+            derived.addAll(vB.derivedVariables(vars.excluding(self)));
+            break;
+        }
+        // Can the opposite relation be used?
+        for (rel in vB.hasRelation(self)) { //self.hasRelation(vB).sortBy(r | r.getCost()) // In the future cost can be used to select the less expensive navigation
+            //vB.name.println(self.name + "    has relation to ");
+            if (hasNavigableOpposite(rel)) {
+                derived.add(vB);
+                derived.addAll(vB.derivedVariables(vars.excluding(self)));
+            }
+        }
+    }
+    return derived;
 }
 
 /****o* MapOrdering/getMaxIndex
@@ -147,7 +205,7 @@ operation QVTs!MappingAction getArguments() : Sequence {
  * FUNCTION
  *    Get the arguments of an mapping action.
  * TODO
- *  This should be implemented as the derivied property of the mapping.   
+ *  This should be implemented as the derivied property of the mapping.
  * CONTEXT
  *  QVTs!Schedule  The Schedule
  * ANNOTATIONS
@@ -155,10 +213,21 @@ operation QVTs!MappingAction getArguments() : Sequence {
  * RETURNS
  *  QVTs!AbstractDatum	The ClassDatum for the variable's type
  *  SEE ALSO
- */		
+ */
 operation QVTs!Schedule getMaxIndex() : Integer {
 	return self.actions.sortBy(a | a.order).order.last();
 }
 
+@cached
+operation rTree!Node isRootElementCandidate() : Boolean {
+	return self.parent.isEmpty() and not self.element.isAbstract;
+}
+@cached
+operation QVTs!ClassDatum correspondsWith(node : rTree!Node) : Boolean {
+	return self.type.getETarget() = node.element;
+}
+
+
+ 
 /* =========================================== */
 

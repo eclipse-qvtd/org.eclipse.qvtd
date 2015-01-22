@@ -3,32 +3,22 @@
 package org.eclipse.qvtd.build.qvtschedule.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-
-import org.eclipse.ocl.pivot.Type;
-
 import org.eclipse.qvtd.build.qvtschedule.AbstractAction;
 import org.eclipse.qvtd.build.qvtschedule.AbstractDatum;
 import org.eclipse.qvtd.build.qvtschedule.DataParameter;
 import org.eclipse.qvtd.build.qvtschedule.Schedule;
 import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
-
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 
 /**
@@ -36,17 +26,17 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
  * An implementation of the model object '<em><b>Abstract Datum</b></em>'.
  * <!-- end-user-doc -->
  * <p>
+ * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractDatumImpl#getSuper <em>Super</em>}</li>
- *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractDatumImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractDatumImpl#getDomain <em>Domain</em>}</li>
- *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractDatumImpl#getSources <em>Sources</em>}</li>
- *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractDatumImpl#getTargets <em>Targets</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractDatumImpl#getProducedBy <em>Produced By</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractDatumImpl#getRequiredBy <em>Required By</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractDatumImpl#getSchedule <em>Schedule</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractDatumImpl#getDataParameter <em>Data Parameter</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -62,16 +52,6 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 	protected EList<AbstractDatum> super_;
 
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
-	protected Type type;
-
-	/**
 	 * The cached value of the '{@link #getDomain() <em>Domain</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -82,24 +62,24 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 	protected CoreDomain domain;
 
 	/**
-	 * The cached value of the '{@link #getSources() <em>Sources</em>}' reference list.
+	 * The cached value of the '{@link #getProducedBy() <em>Produced By</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSources()
+	 * @see #getProducedBy()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AbstractAction> sources;
+	protected EList<AbstractAction> producedBy;
 
 	/**
-	 * The cached value of the '{@link #getTargets() <em>Targets</em>}' reference list.
+	 * The cached value of the '{@link #getRequiredBy() <em>Required By</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTargets()
+	 * @see #getRequiredBy()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AbstractAction> targets;
+	protected EList<AbstractAction> requiredBy;
 
 	/**
 	 * The cached value of the '{@link #getDataParameter() <em>Data Parameter</em>}' reference list.
@@ -147,44 +127,6 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Type getType() {
-		if (type != null && ((EObject)type).eIsProxy()) {
-			InternalEObject oldType = (InternalEObject)type;
-			type = (Type)eResolveProxy(oldType);
-			if (type != oldType) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, qvtschedulePackage.ABSTRACT_DATUM__TYPE, oldType, type));
-			}
-		}
-		return type;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Type basicGetType() {
-		return type;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setType(Type newType) {
-		Type oldType = type;
-		type = newType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, qvtschedulePackage.ABSTRACT_DATUM__TYPE, oldType, type));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public CoreDomain getDomain() {
 		if (domain != null && domain.eIsProxy()) {
 			InternalEObject oldDomain = (InternalEObject)domain;
@@ -223,11 +165,11 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<AbstractAction> getSources() {
-		if (sources == null) {
-			sources = new EObjectWithInverseResolvingEList.ManyInverse<AbstractAction>(AbstractAction.class, this, qvtschedulePackage.ABSTRACT_DATUM__SOURCES, qvtschedulePackage.ABSTRACT_ACTION__RESULTS);
+	public EList<AbstractAction> getProducedBy() {
+		if (producedBy == null) {
+			producedBy = new EObjectWithInverseResolvingEList.ManyInverse<AbstractAction>(AbstractAction.class, this, qvtschedulePackage.ABSTRACT_DATUM__PRODUCED_BY, qvtschedulePackage.ABSTRACT_ACTION__PRODUCTIONS);
 		}
-		return sources;
+		return producedBy;
 	}
 
 	/**
@@ -235,11 +177,11 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<AbstractAction> getTargets() {
-		if (targets == null) {
-			targets = new EObjectWithInverseResolvingEList.ManyInverse<AbstractAction>(AbstractAction.class, this, qvtschedulePackage.ABSTRACT_DATUM__TARGETS, qvtschedulePackage.ABSTRACT_ACTION__ARGUMENTS);
+	public EList<AbstractAction> getRequiredBy() {
+		if (requiredBy == null) {
+			requiredBy = new EObjectWithInverseResolvingEList.ManyInverse<AbstractAction>(AbstractAction.class, this, qvtschedulePackage.ABSTRACT_DATUM__REQUIRED_BY, qvtschedulePackage.ABSTRACT_ACTION__REQUISITES);
 		}
-		return targets;
+		return requiredBy;
 	}
 
 	/**
@@ -304,10 +246,10 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case qvtschedulePackage.ABSTRACT_DATUM__SOURCES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSources()).basicAdd(otherEnd, msgs);
-			case qvtschedulePackage.ABSTRACT_DATUM__TARGETS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getTargets()).basicAdd(otherEnd, msgs);
+			case qvtschedulePackage.ABSTRACT_DATUM__PRODUCED_BY:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getProducedBy()).basicAdd(otherEnd, msgs);
+			case qvtschedulePackage.ABSTRACT_DATUM__REQUIRED_BY:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getRequiredBy()).basicAdd(otherEnd, msgs);
 			case qvtschedulePackage.ABSTRACT_DATUM__SCHEDULE:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
@@ -326,10 +268,10 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case qvtschedulePackage.ABSTRACT_DATUM__SOURCES:
-				return ((InternalEList<?>)getSources()).basicRemove(otherEnd, msgs);
-			case qvtschedulePackage.ABSTRACT_DATUM__TARGETS:
-				return ((InternalEList<?>)getTargets()).basicRemove(otherEnd, msgs);
+			case qvtschedulePackage.ABSTRACT_DATUM__PRODUCED_BY:
+				return ((InternalEList<?>)getProducedBy()).basicRemove(otherEnd, msgs);
+			case qvtschedulePackage.ABSTRACT_DATUM__REQUIRED_BY:
+				return ((InternalEList<?>)getRequiredBy()).basicRemove(otherEnd, msgs);
 			case qvtschedulePackage.ABSTRACT_DATUM__SCHEDULE:
 				return basicSetSchedule(null, msgs);
 			case qvtschedulePackage.ABSTRACT_DATUM__DATA_PARAMETER:
@@ -362,16 +304,13 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 		switch (featureID) {
 			case qvtschedulePackage.ABSTRACT_DATUM__SUPER:
 				return getSuper();
-			case qvtschedulePackage.ABSTRACT_DATUM__TYPE:
-				if (resolve) return getType();
-				return basicGetType();
 			case qvtschedulePackage.ABSTRACT_DATUM__DOMAIN:
 				if (resolve) return getDomain();
 				return basicGetDomain();
-			case qvtschedulePackage.ABSTRACT_DATUM__SOURCES:
-				return getSources();
-			case qvtschedulePackage.ABSTRACT_DATUM__TARGETS:
-				return getTargets();
+			case qvtschedulePackage.ABSTRACT_DATUM__PRODUCED_BY:
+				return getProducedBy();
+			case qvtschedulePackage.ABSTRACT_DATUM__REQUIRED_BY:
+				return getRequiredBy();
 			case qvtschedulePackage.ABSTRACT_DATUM__SCHEDULE:
 				return getSchedule();
 			case qvtschedulePackage.ABSTRACT_DATUM__DATA_PARAMETER:
@@ -393,19 +332,16 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 				getSuper().clear();
 				getSuper().addAll((Collection<? extends AbstractDatum>)newValue);
 				return;
-			case qvtschedulePackage.ABSTRACT_DATUM__TYPE:
-				setType((Type)newValue);
-				return;
 			case qvtschedulePackage.ABSTRACT_DATUM__DOMAIN:
 				setDomain((CoreDomain)newValue);
 				return;
-			case qvtschedulePackage.ABSTRACT_DATUM__SOURCES:
-				getSources().clear();
-				getSources().addAll((Collection<? extends AbstractAction>)newValue);
+			case qvtschedulePackage.ABSTRACT_DATUM__PRODUCED_BY:
+				getProducedBy().clear();
+				getProducedBy().addAll((Collection<? extends AbstractAction>)newValue);
 				return;
-			case qvtschedulePackage.ABSTRACT_DATUM__TARGETS:
-				getTargets().clear();
-				getTargets().addAll((Collection<? extends AbstractAction>)newValue);
+			case qvtschedulePackage.ABSTRACT_DATUM__REQUIRED_BY:
+				getRequiredBy().clear();
+				getRequiredBy().addAll((Collection<? extends AbstractAction>)newValue);
 				return;
 			case qvtschedulePackage.ABSTRACT_DATUM__SCHEDULE:
 				setSchedule((Schedule)newValue);
@@ -429,17 +365,14 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 			case qvtschedulePackage.ABSTRACT_DATUM__SUPER:
 				getSuper().clear();
 				return;
-			case qvtschedulePackage.ABSTRACT_DATUM__TYPE:
-				setType((Type)null);
-				return;
 			case qvtschedulePackage.ABSTRACT_DATUM__DOMAIN:
 				setDomain((CoreDomain)null);
 				return;
-			case qvtschedulePackage.ABSTRACT_DATUM__SOURCES:
-				getSources().clear();
+			case qvtschedulePackage.ABSTRACT_DATUM__PRODUCED_BY:
+				getProducedBy().clear();
 				return;
-			case qvtschedulePackage.ABSTRACT_DATUM__TARGETS:
-				getTargets().clear();
+			case qvtschedulePackage.ABSTRACT_DATUM__REQUIRED_BY:
+				getRequiredBy().clear();
 				return;
 			case qvtschedulePackage.ABSTRACT_DATUM__SCHEDULE:
 				setSchedule((Schedule)null);
@@ -461,14 +394,12 @@ public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container imp
 		switch (featureID) {
 			case qvtschedulePackage.ABSTRACT_DATUM__SUPER:
 				return super_ != null && !super_.isEmpty();
-			case qvtschedulePackage.ABSTRACT_DATUM__TYPE:
-				return type != null;
 			case qvtschedulePackage.ABSTRACT_DATUM__DOMAIN:
 				return domain != null;
-			case qvtschedulePackage.ABSTRACT_DATUM__SOURCES:
-				return sources != null && !sources.isEmpty();
-			case qvtschedulePackage.ABSTRACT_DATUM__TARGETS:
-				return targets != null && !targets.isEmpty();
+			case qvtschedulePackage.ABSTRACT_DATUM__PRODUCED_BY:
+				return producedBy != null && !producedBy.isEmpty();
+			case qvtschedulePackage.ABSTRACT_DATUM__REQUIRED_BY:
+				return requiredBy != null && !requiredBy.isEmpty();
 			case qvtschedulePackage.ABSTRACT_DATUM__SCHEDULE:
 				return getSchedule() != null;
 			case qvtschedulePackage.ABSTRACT_DATUM__DATA_PARAMETER:

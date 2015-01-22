@@ -9,16 +9,12 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
  * A representation of the model object '<em><b>Mapping Action</b></em>'.
  * <!-- end-user-doc -->
  *
- * <!-- begin-model-doc -->
- * A MappingAction is an AbstractAction for a QVTi Mapping.
- * <!-- end-model-doc -->
- *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.MappingAction#getMapping <em>Mapping</em>}</li>
  * </ul>
- * </p>
  *
  * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getMappingAction()
  * @model

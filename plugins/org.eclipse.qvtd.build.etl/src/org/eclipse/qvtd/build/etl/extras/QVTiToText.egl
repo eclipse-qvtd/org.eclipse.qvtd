@@ -1,7 +1,7 @@
 [%
 for (i in QVTi!TypedModel.all()) {
     for (p in i.usedPackage) { %]
-import [%=p.name.firstToUpperCase()%]: '[%=p.nsURI%]';
+import [%=p.name.firstToUpperCase()%]: '[%=p.URI%]';
 [%
     }
 }
@@ -95,9 +95,9 @@ operation printMS(seq : QVTi!MappingSequence) {
 
 operation printMS(loop : QVTi!MappingLoop) {%]
 
-    for [%=loop.iterator.first().name%] in [%=loop.source.toString()%] {
-        [%if(loop.body.isDefined()) {%]
-        [%=printMS(loop.body)%]
+    for [%=loop.ownedIterators.first().name%] in [%=loop.ownedSource.toString()%] {
+        [%if(loop.ownedBody.isDefined()) {%]
+        [%=printMS(loop.ownedBody)%]
         [%}%]
     }
    [%
