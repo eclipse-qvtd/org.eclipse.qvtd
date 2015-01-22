@@ -379,7 +379,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		LanguageExpression specification = asFunction.getBodyExpression();
 		if (specification != null) {
 			try {
-				ExpressionInOCL query = metamodelManager.getQueryOrThrow(asFunction, specification);
+				ExpressionInOCL query = metamodelManager.parseSpecification(asFunction, specification);
 				Variable contextVariable = query.getOwnedContext();
 				if (contextVariable != null) {
 					getParameter(contextVariable);
