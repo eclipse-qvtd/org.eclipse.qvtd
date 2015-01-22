@@ -174,7 +174,6 @@ rule PropertyAssignmentToPropertyDatum
      	var propContext = pAssign.getContextType();
 		var refProperty = pAssign.targetProperty;
      	pDatum.updatePropertyDatum(propContext, refProperty);
-		pDatum.createOppositePropDatum();
 	}
 
 --
@@ -260,7 +259,13 @@ operation QVTp!Type analyseOclContainerCall() : OrderedSet(QVTp!PropertyDatum) {
 	for (parentClass in self.getContainingTypes()) {
 		for (prop in parentClass.ownedProperties.select(x | x.composite)) {
 			if (self.getAllSuperClassesIncludingSelf().includes(prop.getElementType())) {
-				// FIXME use the opposite ?
+				// FIXME I'm getting non-deterministic QVTs 2 Graphml transformations
+				// when there are references to non-navigable (inexistent) properties
+				// in .oclas. Example3: Kiama
+				// For the time being, let's create the dependency on the forward
+				// containment property
+				--var opposite = prop.opposite;
+				--result.add(opposite.getOrCreateAccessedPropertyDatum(self));
 				result.add(prop.getOrCreateAccessedPropertyDatum(parentClass));
 			}
 		}
@@ -298,19 +303,21 @@ operation QVTs!PropertyDatum updatePropertyDatum(context: QVTp!Type, prop : QVTp
     }
 }
 
-operation QVTs!PropertyDatum createOppositePropDatum() {
-	var oppProp = self.property.opposite;
-    if (oppProp.isDefined()) {
-    	var oppPropContext = oppProp.owningClass;
-    	if (oppPropContext.producesDatums()) {
-	    	var oppositePropDatum = oppProp.getPropertyDatum(oppPropContext);
-	    	if (oppositePropDatum.isUndefined()) {
-	    		oppositePropDatum = new QVTs!PropertyDatum;
-		    	oppositePropDatum.updatePropertyDatum(oppPropContext, oppProp);
-	    	}
-	    	self.opposite = oppositePropDatum;
-    	}
-    }
+operation QVTs!PropertyDatum getOrCreateOppositePropDatum() : QVTs!PropertyDatum {
+	if (self.opposite.isDefined()) { // The opposite was already created
+		return self;
+	} else {
+		var oppProp = self.property.opposite;
+		if (oppProp.isDefined()) {
+			var oppPropContext = oppProp.owningClass;
+			if (oppPropContext.producesDatums()) {
+				var oppositePropDatum = oppProp.getOrCreateAccessedPropertyDatum(oppPropContext);
+				self.opposite = oppositePropDatum;
+				return oppositePropDatum;
+			}
+		}
+		return null;	
+	}
 }
 
 operation QVTp!Property propertyDatumNotCreated(context : QVTp!Type) : Boolean {
@@ -379,6 +386,15 @@ operation QVTp!Type getAllSuperClassesIncludingSelf() : OrderedSet {
 	return self.getAllSuperClasses().including(self);
 }
 
+@cached
+operation QVTp!Type getAllSubClasses() : OrderedSet {
+	return QVTp!Class.all().select(x | x.getAllSuperClasses().includes(self)).asOrderedSet();
+}
+
+@cached
+operation QVTp!Type getAllSubClassesIncludingSelf() : OrderedSet {
+	return self.getAllSubClasses().including(self);
+}
 
 @cached
 operation QVTp!Type hasUsedProperties() : Boolean {
@@ -387,19 +403,50 @@ operation QVTp!Type hasUsedProperties() : Boolean {
 
 @cached 
 operation QVTp!Type getUsedProperties() : OrderedSet(QVTp!Property) {
-	var allSuperTypes = self.asSequence().closure(x | x.superClasses).asOrderedSet();
+	var allSuperTypes = self.getAllSuperClasses();
+	
+	var allUsedForwardProps = getAllUsedForwardProps();
+	var allUsedOppositeProps = getAllUsedOppositeProps();
+	// FIXME Since oclContainerOpCalls are dependending on the forward containment reference
+	// of the possible object parent types. This allUsedContainerProps is not needed, for the time being
+	// See comment in analyseOclContainerCall();
+	
+	//var allUsedContainerProps = getAllUsedContainerProps();
+	
+	return
+		allUsedForwardProps.select(x | allSuperTypes.including(self).includes(x.owningClass)).includingAll(
+		allUsedOppositeProps.select(x | self = x.type));/*.includingAll(
+		allUsedContainerProps.select(x | allSuperTypes.including(self).includes(x.owningClass)));*/
+}
+
+@cached
+operation getAllUsedForwardProps() : OrderedSet(QVTp!Property) {
 	// TODO Using all() ->  might bring properties from PropCallExp unused operation. Improve analysis
 	var allForwardPropCalls = QVTp!PropertyCallExp.all();
 	var allForwardPropAssigns = QVTp!PropertyAssignment.all();
 	var allUsedForwardProps = allForwardPropCalls.collect(x | x.referredProperty).asOrderedSet();
 	allUsedForwardProps.addAll(allForwardPropAssigns.collect(x | x.targetProperty));
-	
+	return allUsedForwardProps;
+}
+
+@cached
+operation getAllUsedOppositeProps() : OrderedSet(QVTp!Property) {
+	// TODO Using all() ->  might bring properties from OppositeCallExp unused operation. Improve analysis
 	var allOppositePropCalls = QVTp!OppositePropertyCallExp.all();
-	var allUsedOppositeProps = allOppositePropCalls.collect(x | x.referredProperty).asOrderedSet();
-	
-	return
-		allUsedForwardProps.select(x | allSuperTypes.including(self).includes(x.owningClass)).includingAll(
-		allUsedOppositeProps.select(x | self = x.type));
+	return allOppositePropCalls.collect(x | x.referredProperty).asOrderedSet();
+}
+
+@cached
+operation getAllUsedContainerProps() : OrderedSet(QVTp!Property) {
+	// TODO Using all() ->  might bring properties from OppositeCallExp unused operation. Improve analysis
+	var allUsedContainerOpCalls = QVTp!OperationCallExp.all().select(x | x.referredOperation.isOclContainerOp());
+	var allUsedContainerOpCallCtxs = allUsedContainerOpCalls.collect(x | x.ownedSource.type).asOrderedSet();
+	var allUsedContainerOpCallCtxsWithSubs = allUsedContainerOpCallCtxs.collect(x | x.getAllSubClassesIncludingSelf()).flatten();
+	var allContainmentProperties = QVTp!Property.all().select(x | x.composite);
+
+	var allUsedContainmentProperties = allContainmentProperties.select(x | allUsedContainerOpCallCtxsWithSubs.includes(x.getElementType()));
+
+	return allUsedContainmentProperties.collect(x | x.opposite).excluding(null).asOrderedSet();
 }
 
 @cached
@@ -561,7 +608,12 @@ post{
 		var consumedPDatums = m.getPropertyAccesses().collect(x | x.getPropertyDatum()).asOrderedSet();
 		consumedPDatums.addAll(m.getOperationCallExps().collect(x | x.getPropertyDatums()).flatten());
 		var producedPDatums = m.getPropertyAssignments().collect(x | x.getPropertyDatum()).asOrderedSet();
-		producedPDatums.addAll(producedPDatums.opposite.select(x | x.isDefined())); // We want all the opposite produced by them
+		for (pDatum in producedPDatums) { // We want all the opposite produced by them
+			var oppositePDatum = pDatum.getOrCreateOppositePropDatum();
+			if (oppositePDatum.isDefined()) {
+				producedPDatums.add(oppositePDatum);
+			}
+		}
 		ma.productions.addAll(producedPDatums);
 		ma.requisites.addAll(consumedPDatums);
 	} 
