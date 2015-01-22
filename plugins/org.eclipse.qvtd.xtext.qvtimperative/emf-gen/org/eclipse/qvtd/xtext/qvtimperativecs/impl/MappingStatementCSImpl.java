@@ -19,7 +19,6 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Mapping Statement CS</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

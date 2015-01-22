@@ -22,7 +22,6 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.util.QVTcoreBaseCSVisitor;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Unrealized Variable CS</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

@@ -23,7 +23,6 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>CG Middle Property Call Exp</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

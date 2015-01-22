@@ -27,7 +27,6 @@ import org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor;
  * An implementation of the model object '<em><b>Variable Assignment</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

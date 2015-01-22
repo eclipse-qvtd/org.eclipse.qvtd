@@ -26,7 +26,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
  * An implementation of the model object '<em><b>Template Exp</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

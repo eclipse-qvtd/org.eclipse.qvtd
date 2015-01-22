@@ -30,7 +30,6 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.TemplateVariableCS;
  * An implementation of the model object '<em><b>Template CS</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

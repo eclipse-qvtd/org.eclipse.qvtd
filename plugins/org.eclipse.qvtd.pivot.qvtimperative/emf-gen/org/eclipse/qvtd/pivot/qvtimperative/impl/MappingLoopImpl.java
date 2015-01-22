@@ -23,7 +23,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Mapping Loop</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

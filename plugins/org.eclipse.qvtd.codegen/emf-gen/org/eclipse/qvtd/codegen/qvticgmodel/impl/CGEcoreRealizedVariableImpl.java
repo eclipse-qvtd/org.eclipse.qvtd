@@ -26,7 +26,6 @@ import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
  * An implementation of the model object '<em><b>CG Ecore Realized Variable</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

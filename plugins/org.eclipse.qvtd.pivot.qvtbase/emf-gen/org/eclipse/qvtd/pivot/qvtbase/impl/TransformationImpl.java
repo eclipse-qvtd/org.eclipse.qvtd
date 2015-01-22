@@ -39,7 +39,6 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  * An implementation of the model object '<em><b>Transformation</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

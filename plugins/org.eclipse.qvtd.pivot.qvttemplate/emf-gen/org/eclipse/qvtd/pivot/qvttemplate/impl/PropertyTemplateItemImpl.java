@@ -32,7 +32,6 @@ import org.eclipse.qvtd.pivot.qvttemplate.util.QVTtemplateVisitor;
  * An implementation of the model object '<em><b>Property Template Item</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>
