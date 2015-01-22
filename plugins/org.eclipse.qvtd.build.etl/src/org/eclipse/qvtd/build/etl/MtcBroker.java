@@ -194,7 +194,7 @@ public class MtcBroker {
 		// Derive all the required paths		
 		this.qvtcasUri = qvtcasUri;
 		this.owner = owner;
-		System.out.println(URI.createURI(qvtcasUri).lastSegment());
+		System.out.println("Executing the QVTc to QVTi MTC for " + URI.createURI(qvtcasUri).lastSegment());
 		
 		URI baseUri = URI.createURI(qvtcasUri).trimFileExtension();
 		this.qvtuUri = baseUri.appendFileExtension("qvtu.qvtcas").toString();
@@ -270,12 +270,10 @@ public class MtcBroker {
 		mModel = qvtuToQvtm(uModel);
 		
 		pModel = qvtmToQvtp(mModel);
+		
 		sModel = qvtpToQvts(pModel);
-		sModel.setCachingEnabled(true);
-		sModel.clearCache();
-		pModel.setStoredOnDisposal(true);
-		sModel.setStoredOnDisposal(true);
-		qvtpScheduling(pModel, sModel);
+		
+		qvtpFlatScheduling(pModel, sModel);
 		iModel = qvtpQvtsToQvti(pModel, sModel);
 	}
 	
@@ -316,6 +314,7 @@ public class MtcBroker {
 				}
 			}
 		}
+		metamodelManager.getASResourceSet().getResources().remove(cModel.getResource());
 		return uModel;
 	}
 	
@@ -350,6 +349,7 @@ public class MtcBroker {
 				}
 			}
 		}
+		metamodelManager.getASResourceSet().getResources().remove(uModel.getResource());
 		return mModel;
 	}
 
@@ -364,10 +364,7 @@ public class MtcBroker {
 	private PivotModel qvtmToQvtp(PivotModel mModel) throws QvtMtcExecutionException {
 		
 		PivotModel pModel = null;
-		// The QVTp model needs to resolve external references so the typedModel types are correctly
-		// transformed. 
-		pModel = createASModel(partitionUri, "QVTp", "QVTp,QVT", QVTI_FULL_NS, false, true, false, false);
-		//pModel2 = createASModel(partitionUri, "QVTp2", "QVTp,QVT", QVTI_FULL_NS, false, true, false, false);
+		pModel = createASModel(partitionUri, "QVTp", "QVTp,QVT", QVTI_FULL_NS, false, true, false, true);
 		if (mModel != null && pModel != null  ) {
 			mModel.setCachingEnabled(true);
 			mModel.clearCache();
@@ -381,13 +378,13 @@ public class MtcBroker {
 				if (etl != null) {
 					etl.models.add(mModel);
 					etl.models.add(pModel);
-					//etl.models.add(pModel2);
 					etl.models.add(configModel);
 					etl.models.add(oclStdLibModel);
 					etl.execute();
 				}
 			}
 		}
+		metamodelManager.getASResourceSet().getResources().remove(mModel.getResource());
 		return pModel;
 	}
 	
@@ -402,12 +399,9 @@ public class MtcBroker {
 	protected PivotModel qvtpToQvts(PivotModel pModel) throws QvtMtcExecutionException {
 		PivotModel sModel = null;
 		sModel = createModel(scheduleUri, "QVTs", "", QVTS_FULL_NS, false, true, false, true);
-		EList<Resource> resources = pModel.getResource().getResourceSet().getResources();
-		ArrayList<Resource> retain = new ArrayList<Resource>();
-		retain.add(pModel.getResource());
-		resources.retainAll(retain);
-		pModel.setExpand(true);
-		oclStdLibModel = createASModel(OCL_STD_LIB_URI, OCL_STD_LIB_MODEL_NAME, "", PIVOT_URI, true, false, true, false);
+		pModel.setCachingEnabled(true);
+		pModel.clearCache();
+		pModel.setStoredOnDisposal(false);
 		if (pModel != null && sModel != null) {
 			EtlTask etl = null;
 			try {
@@ -430,27 +424,47 @@ public class MtcBroker {
 		return sModel;
 	}
 	
+
 	/**
-	 * QVTp scheduling.
+	 * Qvtp flat scheduling.
 	 *
-	 * @param pModel the QVTp model
-	 * @param sModel the QVTs s model
-	 * @throws QvtMtcExecutionException If there is a problem loading the models or
-	 * 	executing the EOL script.
+	 * @param pModel the model
+	 * @param sModel the s model
+	 * @throws QvtMtcExecutionException If there was an error loading the script
 	 */
-	protected void qvtpScheduling(PivotModel pModel, PivotModel sModel) throws QvtMtcExecutionException {
+	protected void qvtpFlatScheduling(PivotModel pModel, PivotModel sModel) throws QvtMtcExecutionException {
 		
 		qvtpScheduling(pModel, sModel, QVTP_FLAT_SCHEDULE_EOL);
 	}
 	
+	/**
+	 * Qvtp simple nesting scheduling.
+	 *
+	 * @param pModel the model
+	 * @param sModel the s model
+	 * @throws QvtMtcExecutionException If there was an error loading the script
+	 */
 	protected void qvtpSimpleNestingScheduling(PivotModel pModel, PivotModel sModel) throws QvtMtcExecutionException {
 		
 		qvtpScheduling(pModel, sModel, QVTP_SIMPLE_NESTING_SCHEDULE_EOL);
 	}
 	
+	/**
+	 * Qvtp scheduling. By supplying an additional scheduling script URI different scheduling strategies can be
+	 * invoked. 
+	 *
+	 * @param pModel the model
+	 * @param sModel the s model
+	 * @param schedulingTxURI The URI to the scheduling script to run
+	 * @throws QvtMtcExecutionException If there was an error loading the script
+	 */
 	protected void qvtpScheduling(PivotModel pModel, PivotModel sModel, String schedulingTxURI) throws QvtMtcExecutionException {
 		
 		if (pModel != null && sModel != null  ) {
+			sModel.setCachingEnabled(true);
+			sModel.clearCache();
+			pModel.setStoredOnDisposal(true);
+			sModel.setStoredOnDisposal(true);
 			EolTask eol = null;
 			try {
 				eol = new EolTask(java.net.URI.create(getResourceURI(schedulingTxURI)));
@@ -464,23 +478,6 @@ public class MtcBroker {
 				eol.models.add(configModel);
 				// TODO HOw to deal with multiple candidate metamodels?
 				eol.models.add(candidateMetamodelContainmentTrees.get(RIGHT_DIR_NAME).get(0));
-				eol.execute();
-			}
-		}
-	}
-	
-	protected void test(PivotModel pModel, PivotModel pModel2) throws QvtMtcExecutionException {
-		
-		if (pModel != null) {
-			EolTask eol = null;
-			try {
-				eol = new EolTask(java.net.URI.create(getResourceURI("scheduling/test.eol")));
-			} catch (URISyntaxException e) {
-				throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
-			}
-			if (eol != null) {
-				eol.models.add(pModel);
-				eol.models.add(pModel2);
 				eol.execute();
 			}
 		}
@@ -622,7 +619,7 @@ public class MtcBroker {
 		
 		OCLASResourceFactory.getInstance();
 //        Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap( ).put("oclas", OCLASResourceFactory.getInstance());
-		oclStdLibModel = createModel(OCL_STD_LIB_URI, OCL_STD_LIB_MODEL_NAME, "", PIVOT_URI, true, false, true, false);
+		oclStdLibModel = createASModel(OCL_STD_LIB_URI, OCL_STD_LIB_MODEL_NAME, "", PIVOT_URI, true, false, true, false);
 	}
 	
 	/**
@@ -725,24 +722,24 @@ public class MtcBroker {
 	
 	private PivotModel createASModel(String modeUri, String modelName, String modelAliases, String metamodelUris,
 			boolean readOnLoad, boolean storeOnDispoal, boolean cached, boolean expand) throws QvtMtcExecutionException {
-
-	PivotModel model = new PivotModel(metamodelManager, true);
-	StringProperties properties = new StringProperties();
-	properties.put(EmfModel.PROPERTY_NAME, modelName);
-	properties.put(EmfModel.PROPERTY_ALIASES, modelAliases);
-	properties.put(EmfModel.PROPERTY_METAMODEL_URI, metamodelUris);
-	properties.put(EmfModel.PROPERTY_MODEL_URI, modeUri);
-	properties.put(EmfModel.PROPERTY_READONLOAD, String.valueOf(readOnLoad));
-	properties.put(EmfModel.PROPERTY_STOREONDISPOSAL, String.valueOf(storeOnDispoal));
-	properties.put(EmfModel.PROPERTY_CACHED, String.valueOf(cached));
-	properties.put(EmfModel.PROPERTY_EXPAND, String.valueOf(expand));
-	try {
-		model.load(properties, "");
-	} catch (EolModelLoadingException e) {
-		throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
+	
+		PivotModel model = new PivotModel(metamodelManager, true);
+		StringProperties properties = new StringProperties();
+		properties.put(EmfModel.PROPERTY_NAME, modelName);
+		properties.put(EmfModel.PROPERTY_ALIASES, modelAliases);
+		properties.put(EmfModel.PROPERTY_METAMODEL_URI, metamodelUris);
+		properties.put(EmfModel.PROPERTY_MODEL_URI, modeUri);
+		properties.put(EmfModel.PROPERTY_READONLOAD, String.valueOf(readOnLoad));
+		properties.put(EmfModel.PROPERTY_STOREONDISPOSAL, String.valueOf(storeOnDispoal));
+		properties.put(EmfModel.PROPERTY_CACHED, String.valueOf(cached));
+		properties.put(EmfModel.PROPERTY_EXPAND, String.valueOf(expand));
+		try {
+			model.load(properties, "");
+		} catch (EolModelLoadingException e) {
+			throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
+		}
+		return model;
 	}
-	return model;
-}
 	
 	/**
 	 * Change resource to source. 
