@@ -16,13 +16,16 @@ import "MapOrdering.eol";
  /****l* /org.eclipse.qvtd.build.etl.scheduling/SimpleNestedSchedule
  * NAME
  *  SimpleNestedSchedule -- Creates a simple nested schedule, solely based on the
- *  map ordering and nesting based on context reuse (i.e. share bound vaiables).
+ *  map ordering and nesting based on containment trees (i.e. mappings are nested
+ *  in mappings that 
  *
  * MODELS
  *  Required models to run the script:
  *      - NAME      ALIASES METAMODEL               ROL SOD
  *      - QVTp      QVT     QVTi                     X   -        The QVTi (partitioned) AST
  *      - rTree     tree    ECoreContainmentTree     X   -        The right metamodel containment tree
+ *      - mTree     tree    ECoreContainmentTree     X   -        The middle metamodel containment tree
+ *      - lTree     tree    ECoreContainmentTree     X   -        The left metamodel containment tree
  *      - QVTs              QVTScheduling            -   X        The scheduling model
  *
  * FUNCTION
@@ -65,6 +68,52 @@ ma.schedule = s;
 ma.mapping = bm;
         
 "Nested Scheduling Done".println();
+
+// Use input containment to drive nesting
+operation QVTs!Schedule containmentNest() {
+    // Do a Depth first search of the containment tree of the input model
+    var queue = new Sequence();
+    // Marked visited mappings to avoid loops
+    var visitedAct = new Sequence();
+    var visitedNodes = new Sequence();
+    queue.addAll(lTree!Node.all().select(n | n.isRootElementCandidate()));
+    while (not queue.isEmpty()) {
+        var n = queue.first();
+        queue.remove(n);
+        visitedNodes.add(n);
+        // Do stuff with n
+        // n.println("n ");
+        // Visit all the children recursively to find nestings
+        for (child in n.children) {
+            nestMappings(child);
+            // TODO FINISH THIS!
+        }
+        
+        // Find all the mappings that have primary argument that has a class datum
+        // that corresponds to the  (or subtype)
+        // corresponding to the type of the target node
+        
+        // Find all the mappings that have an output type (or subtype)
+        // corresponding to the type of the target node
+        var baseDatum = self.datums.selectOne(x | x.correspondsWith(n));
+        if (baseDatum.isDefined()) {
+            for (ma in self.actions.select(aa | aa.productions.exists(e | e.isDatumOrSubdatum(baseDatum)))) { 
+                // Find the predecesors and linearize
+                if (visitedAct.excludes(ma))
+                    ma.getOrdering(visitedAct);
+                for (pDatum in baseDatum.propertyDatums) {
+                    for (ma in self.actions.select(aa | aa.productions.exists(e | e = pDatum))) {
+                        if (visitedAct.excludes(ma))
+                            ma.getOrdering(visitedAct);
+                    }
+                }
+            }
+        }
+        
+        queue.addAll(n.children.excludingAll(visitedNodes));
+    }
+
+}
 
 /****o* Scheduler/simpleNest
  * NAME

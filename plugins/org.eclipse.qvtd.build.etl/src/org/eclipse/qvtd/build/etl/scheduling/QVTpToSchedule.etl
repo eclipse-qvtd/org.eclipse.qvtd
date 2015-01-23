@@ -25,9 +25,6 @@ import "../helpers/QVTsHelpers.eol";
  *  /org.eclipse.qvtd.build.etl/scheduling/DerivationAnalysis
  *    
  */
- pre {
- 	QVTp!Type.all().size().println("all ");
- }
 
 /****u* QVTpToSchedule/TransformationToSchedule
  * NAME
@@ -92,10 +89,6 @@ rule VariableToDataParameter
     to dd : QVTs!DistinctData, dp : QVTs!DataParameter {
         
         v.name.println("VariableToDataParameter ");
-        v.type.name.println("v.type.name ");
-        v.type.producesDatums().println("v.type producesDatums ");
-        v.type.equivalent().println("v.type equivalent");
-        v.type.owningModel().println("v.type model ");
         dp.variable = v;
         dp.datum ::= v.type;    
         dp.datum = v.type.equivalent();
@@ -372,7 +365,9 @@ operation QVTp!Type getCorePatternVariables() : OrderedSet(QVTp!Variable) {
 
 @cached
 operation QVTp!Type getAllSuperClasses() : OrderedSet {
-	return self.asSequence().closure(x | x.superClasses).asOrderedSet();
+    if (self.isClass().isDefined())
+	   return self.asSequence().closure(x | x.superClasses).asOrderedSet();
+	return new OrderedSet();
 }
 
 @cached 
@@ -388,7 +383,7 @@ operation QVTp!Type hasUsedProperties() : Boolean {
 
 @cached 
 operation QVTp!Type getUsedProperties() : OrderedSet(QVTp!Property) {
-	var allSuperTypes = self.asSequence().closure(x | x.superClasses).asOrderedSet();
+	var allSuperTypes = self.getAllSuperClasses();
 	// TODO Using all() ->  might bring properties from PropCallExp unused operation. Improve analysis
 	var allForwardPropCalls = QVTp!PropertyCallExp.all();
 	var allForwardPropAssigns = QVTp!PropertyAssignment.all();
