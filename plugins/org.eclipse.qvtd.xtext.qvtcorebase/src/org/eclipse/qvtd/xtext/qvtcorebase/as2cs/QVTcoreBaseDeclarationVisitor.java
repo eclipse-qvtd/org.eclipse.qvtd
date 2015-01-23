@@ -28,9 +28,9 @@ import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
 import org.eclipse.ocl.xtext.base.as2cs.AliasAnalysis;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
@@ -83,7 +83,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	 */
 	public static class QVTcoreBaseAliasAnalysis extends AliasAnalysis
 	{
-		public static @NonNull QVTcoreBaseAliasAnalysis getAdapter(@NonNull Resource resource, @NonNull EnvironmentFactory environmentFactory) {
+		public static @NonNull QVTcoreBaseAliasAnalysis getAdapter(@NonNull Resource resource, @NonNull EnvironmentFactoryInternal environmentFactory) {
 			List<Adapter> eAdapters = resource.eAdapters();
 			for (Adapter adapter : eAdapters) {
 				if (adapter instanceof QVTcoreBaseAliasAnalysis) {
@@ -96,7 +96,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 			return new QVTcoreBaseAliasAnalysis(resource, environmentFactory);
 		}
 
-		public QVTcoreBaseAliasAnalysis(@NonNull Resource resource, @NonNull EnvironmentFactory environmentFactory) {
+		public QVTcoreBaseAliasAnalysis(@NonNull Resource resource, @NonNull EnvironmentFactoryInternal environmentFactory) {
 			super(resource, environmentFactory);
  		}
 	}

@@ -589,7 +589,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 	@Override
 	public @Nullable CGNamedElement visitPropertyAssignment(@NonNull PropertyAssignment asPropertyAssignment) {
 		Property asTargetProperty = ClassUtil.nonNullModel(asPropertyAssignment.getTargetProperty());
-		LibraryProperty libraryProperty = metamodelManager.getImplementation(null, asTargetProperty);
+		LibraryProperty libraryProperty = metamodelManager.getImplementation(asPropertyAssignment, null, asTargetProperty);
 		CGPropertyAssignment cgPropertyAssignment = null;
 		if (isEcoreProperty(libraryProperty)) {
 			EStructuralFeature eStructuralFeature = (EStructuralFeature) asTargetProperty.getETarget();

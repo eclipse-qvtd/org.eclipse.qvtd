@@ -30,13 +30,13 @@ public class QVTiInternalDebuggableExecutor extends InternalDebuggableExecutor
 {
 	protected final @NonNull QVTiEvaluationContext evaluationContext;
 	
-	public QVTiInternalDebuggableExecutor(@NonNull QVTiEvaluationContext evaluationContext, @NonNull QVTiVMEnvironmentFactory envFactory) {
-		super(envFactory, evaluationContext.getTransformationURI());
+	public QVTiInternalDebuggableExecutor(@NonNull QVTiEvaluationContext evaluationContext, @NonNull QVTiVMEnvironmentFactory environmentFactory) {
+		super(environmentFactory, evaluationContext.getTransformationURI());
 		this.evaluationContext = evaluationContext;
 	}
 
 	protected @NonNull QVTiVMEvaluator createEvaluator() throws IOException {
-		QVTiVMEvaluator evaluator = new QVTiVMEvaluator((QVTiVMEnvironmentFactory) envFactory, evaluationContext.getTransformationURI());
+		QVTiVMEvaluator evaluator = new QVTiVMEvaluator((QVTiVMEnvironmentFactory) environmentFactory, evaluationContext.getTransformationURI());
 		for (Map.Entry<String, URI> inEntry : evaluationContext.getInputURIs().entrySet()) {
 			@SuppressWarnings("null")@NonNull String inKey = inEntry.getKey();
 			@SuppressWarnings("null")@NonNull URI inURI = inEntry.getValue();
