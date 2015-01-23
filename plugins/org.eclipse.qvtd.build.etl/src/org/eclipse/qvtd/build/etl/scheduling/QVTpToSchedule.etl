@@ -25,9 +25,6 @@ import "../helpers/QVTsHelpers.eol";
  *  /org.eclipse.qvtd.build.etl/scheduling/DerivationAnalysis
  *    
  */
- pre {
- 	QVTp!Type.all().size().println("all ");
- }
 
 /****u* QVTpToSchedule/TransformationToSchedule
  * NAME
@@ -104,10 +101,10 @@ rule VariableToDataParameter
     }
 
 // Only types in the TypedModel pacakges and that are used by a variable
-//@lazy
+@lazy
 @greedy
-rule TypeToClassDatum
-    transform t : QVTp!Type
+rule ClassToClassDatum
+    transform t : QVTp!Class
     to d : QVTs!ClassDatum {
                          
         guard : t.producesDatums()
