@@ -18,6 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -26,8 +27,9 @@ import org.eclipse.epsilon.common.util.StringProperties;
 import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
 import org.eclipse.ocl.pivot.internal.resource.OCLASResourceFactory;
-import org.eclipse.ocl.pivot.resource.ASResource;
-import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.MetamodelManager;
+import org.eclipse.qvtd.build.qvtschedule.qvtscheduleFactory;
+import org.eclipse.qvtd.build.qvtschedule.impl.qvtscheduleFactoryImpl;
 
 /**
  * The Class MtcBroker.
@@ -41,7 +43,7 @@ public class MtcBroker {
 	private static final String CONFIG_MODEL_NAME = "config";
 	
 	/** The Constant CONFIG_MM. */
-	private static final String CONFIG_MM = "platform:/resource/org.eclipse.qvtd.build.etl/model/QVTcConfig.ecore";
+	private static final String CONFIG_MM = "/QVTcConfig.ecore";
 	
 	/** The Constant CONFIG_URI. */
 	private static final String CONFIG_URI = "http://www.eclipse.org/qvt/examples/0.1/QVTcConfig";
@@ -50,7 +52,7 @@ public class MtcBroker {
 	private static final String CONFIG_QUERIES_EOL = "helpers/ConfigQueries.eol";
 	
 	/** The Constant ECORE_CONTAINMENT_MM. */
-	private static final String ECORE_CONTAINMENT_MM = "platform:/resource/org.eclipse.qvtd.build.etl/model/ECoreContainmentTree.ecore";
+	private static final String ECORE_CONTAINMENT_MM = "/ECoreContainmentTree.ecore";
 	
 	/** The Constant ECORE_CONTAINMENT_URI. */
 	private static final String ECORE_CONTAINMENT_URI = "http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree";
@@ -59,7 +61,7 @@ public class MtcBroker {
 	private static final String ECORE_TO_TREE_EOL = "utils/EcoreToContainmentTree.etl";
 	
 	/** The Constant QVTS_MM. */
-	private static final String QVTS_MM = "platform:/resource/org.eclipse.qvtd.build.schedule/model/QVTSchedule.ecore";
+	private static final String QVTS_MM = "/QVTSchedule.ecore";
 	
 	/** The Constant QVTS_URI. */
 	private static final String QVTS_URI = "http://www.eclipse.org/qvt/0.1/QVTschedule/";
@@ -148,7 +150,7 @@ public class MtcBroker {
 	protected String scheduleUri;
 	
 	/** The owner clas of the MTC (used to find resources). */
-	//private Class<?> owner;
+	private Class<?> owner;
 	
 	/** The config model. */
 	private PivotModel configModel;
@@ -168,7 +170,7 @@ public class MtcBroker {
 	private Map<String, List<PivotModel>> candidateMetamodelContainmentTrees; 
 	
 	/** The meta model manager. */
-	private OCL qvtUtility;
+	private MetamodelManager metamodelManager;
 	
 	private PivotModel cModel;
 	private PivotModel uModel;
@@ -177,35 +179,35 @@ public class MtcBroker {
 	protected PivotModel sModel;
 	protected PivotModel iModel;
 
-	private URI baseUri;
-
-	private ASResource qvtcAS;
-
 	
-	public MtcBroker(URI baseURI, String qvtcSource, OCL myQVT) throws Exception {
+	/**
+	 * Instantiates a new MTC broker.
+	 *
+	 * @param qvtcasUri the qvtcas uri
+	 * @param owner the owner
+	 * @param metamodelManager the meta model manager
+	 * @throws QvtMtcExecutionException If there is a problem registering the required metamodels.
+	 */
+	public MtcBroker(String qvtcasUri, Class<?> owner, MetamodelManager metamodelManager) throws QvtMtcExecutionException {
 		
-		this.baseUri = baseURI;
-		this.qvtUtility = myQVT;
-		System.out.println("Executing the QVTc to QVTi MTC for " + qvtcSource);
-		URI qvtcURI = baseURI.appendSegment(qvtcSource);
-		//CSResource qvtcCS = myQVT.getCSResource(qvtcURI);
-    	//this.qvtcAS = myQVT.cs2as(qvtcCS);
-		this.qvtcasUri = qvtcURI.toString();
-    	URI modelsBaseUri = qvtcURI.trimFileExtension();
-    	this.qvtuUri = modelsBaseUri.appendFileExtension("qvtu.qvtcas").toString();
-		this.qvtmUri = modelsBaseUri.appendFileExtension("qvtm.qvtcas").toString();
-		this.partitionUri = modelsBaseUri.appendFileExtension("qvtp.qvtias").toString();
-		this.qvtiUri = modelsBaseUri.appendFileExtension("qvtias").toString();
+		this.metamodelManager = metamodelManager;
+		// Derive all the required paths		
+		this.qvtcasUri = qvtcasUri;
+		this.owner = owner;
+		System.out.println("Executing the QVTc to QVTi MTC for " + URI.createURI(qvtcasUri).lastSegment());
 		
-		this.configUri = URI.createURI(modelsBaseUri.toString() + "Config").appendFileExtension("xmi").toString();
-		this.scheduleUri = URI.createURI(modelsBaseUri.toString() + "Schedule").appendFileExtension("xmi").toString();
+		URI baseUri = URI.createURI(qvtcasUri).trimFileExtension();
+		this.qvtuUri = baseUri.appendFileExtension("qvtu.qvtcas").toString();
+		this.qvtmUri = baseUri.appendFileExtension("qvtm.qvtcas").toString();
+		this.partitionUri = baseUri.appendFileExtension("qvtp.qvtias").toString();
+		this.qvtiUri = baseUri.appendFileExtension("qvtias").toString();
+		
+		this.configUri = URI.createURI(baseUri.toString() + "Config").appendFileExtension("xmi").toString();
+		this.scheduleUri = URI.createURI(baseUri.toString() + "Schedule").appendFileExtension("xmi").toString();
 		candidateMetamodelContainmentTrees = new HashMap<String, List<PivotModel>>();
-		registerMetamodels(myQVT);
-    	
-		
-
+		registerMetamodels(metamodelManager);
 	}
-
+	
 	/**
 	 * @return the cModel
 	 */
@@ -312,7 +314,7 @@ public class MtcBroker {
 				}
 			}
 		}
-		qvtUtility.getMetamodelManager().getASResourceSet().getResources().remove(cModel.getResource());
+		metamodelManager.getASResourceSet().getResources().remove(cModel.getResource());
 		return uModel;
 	}
 	
@@ -347,7 +349,7 @@ public class MtcBroker {
 				}
 			}
 		}
-		qvtUtility.getMetamodelManager().getASResourceSet().getResources().remove(uModel.getResource());
+		metamodelManager.getASResourceSet().getResources().remove(uModel.getResource());
 		return mModel;
 	}
 
@@ -382,7 +384,7 @@ public class MtcBroker {
 				}
 			}
 		}
-		qvtUtility.getMetamodelManager().getASResourceSet().getResources().remove(mModel.getResource());
+		metamodelManager.getASResourceSet().getResources().remove(mModel.getResource());
 		return pModel;
 	}
 	
@@ -522,11 +524,11 @@ public class MtcBroker {
 	protected void createContainmentTrees() throws QvtMtcExecutionException  {
 		
 		EtlTask eol = null;
-		List<URI> loadedUris = new ArrayList<URI>();
+		List<String> loadedUris = new ArrayList<String>();
 		try {
 			eol = new EtlTask(java.net.URI.create(getResourceURI(ECORE_TO_TREE_EOL)));
 		} catch (URISyntaxException e) {
-			throw new QvtMtcExecutionException(e.getMessage(), e.getCause());
+			throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
 		}
 		if (eol != null) {
 			Map<String, List<String>> mms = getCandidateMetamodels();
@@ -538,17 +540,18 @@ public class MtcBroker {
 		        for (String mm : pairs.getValue()) {
 		        	//TODO Check if the containment Tree exist (file)?
 		        	//TODO Check if the tree has been already generated
-	        		URI modelUri = null;
+	        		String modelUri = null;
 					try {
-						modelUri = baseUri.appendSegment(mm);	
-					} catch (IllegalArgumentException e) {
-						throw new QvtMtcExecutionException(e.getMessage(), e.getCause());
+						modelUri = getResourceUriFromClass(this.owner, mm);
+					} catch (URISyntaxException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					} finally {
 						if (modelUri != null && !loadedUris.contains(modelUri)) {
 							loadedUris.add(modelUri);
 							PivotModel mmModel = null;
 							PivotModel treeModel = null;
-							mmModel = createModel(modelUri.toString(), "mm", "", ECORE_URI, true, false, true, false);
+							mmModel = createModel(changeResourceToSource(modelUri), "mm", "", ECORE_URI, true, false, true, false);
 							String cgUri = mmModel.getModelFileUri().trimFileExtension().toString() + "ContainmentTree.xmi";
 							treeModel = createModel(cgUri, "tree", pairs.getKey().toLowerCase()+"Tree", ECORE_CONTAINMENT_URI, false, true, true, false);
 							if (mmModel != null && treeModel != null  ) {
@@ -622,58 +625,59 @@ public class MtcBroker {
 	/**
 	 * Register metamodels.
 	 *
-	 * @param myQVT the meta model manager
+	 * @param metamodelManager the meta model manager
 	 * @throws QvtMtcExecutionException If there is a problem finding the metamodels
 	 */
-	private void registerMetamodels(OCL myQVT) throws QvtMtcExecutionException {
+	private void registerMetamodels(MetamodelManager metamodelManager) throws QvtMtcExecutionException {
 		
-		URI mmURI = null;
+		String path = null;
+		Resource r;
+		EObject eObject;
 		// Configuration Metamodel
 		try {
-			mmURI = URI.createURI(CONFIG_MM);
-		} catch (IllegalArgumentException e) {
-			throw new QvtMtcExecutionException(e.getMessage(), e.getCause());
+			path = getResourceURI(CONFIG_MM);
+		} catch (URISyntaxException e) {
+			throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
 		} finally {
-			if (mmURI != null) {
-				registerPackages(myQVT, mmURI);
+			if (path != null) {
+				r = metamodelManager.getExternalResourceSet().getResource(URI.createURI(path, false), true);
+				eObject = r.getContents().get(0);
+				if (eObject instanceof EPackage) {
+				    EPackage p = (EPackage)eObject;
+				    metamodelManager.getExternalResourceSet().getPackageRegistry().put(p.getNsURI(), p);
+				}
 			}
 		}
 		// Containment tree metamodel
-		mmURI = null;
 		try {
-			mmURI = URI.createURI(ECORE_CONTAINMENT_MM);
-		} catch (IllegalArgumentException e) {
-			throw new QvtMtcExecutionException(e.getMessage(), e.getCause());
+			path = getResourceURI(ECORE_CONTAINMENT_MM);
+		} catch (URISyntaxException e) {
+			throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
 		} finally {
-			if (mmURI != null) {
-				registerPackages(myQVT, mmURI);
+			if (path != null) {
+				r = metamodelManager.getExternalResourceSet().getResource(URI.createURI(path, false), true);
+				eObject = r.getContents().get(0);
+				if (eObject instanceof EPackage) {
+				    EPackage p = (EPackage)eObject;
+				    metamodelManager.getExternalResourceSet().getPackageRegistry().put(p.getNsURI(), p);
+				}
 			}
 			
 		}
 		// Schedule metamodel
-		mmURI = null;
 		try {
-			mmURI =  URI.createURI(QVTS_MM);
-		} catch (IllegalArgumentException e) {
-			throw new QvtMtcExecutionException(e.getMessage(), e.getCause());
+			qvtscheduleFactory sf = new qvtscheduleFactoryImpl();
+			path = getResourceUriFromClass(sf.getClass(), QVTS_MM);
+		} catch (URISyntaxException e) {
+			throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
 		} finally {
-			if (mmURI != null) {
-				registerPackages(myQVT, mmURI);
-			}
-		}
-	}
-
-	/**
-	 * @param myQVT
-	 * @param mmURI
-	 */
-	private void registerPackages(OCL myQVT, URI mmURI) {
-		Resource r;
-		r = myQVT.getResourceSet().getResource(mmURI, true);
-		for (EObject eObject : r.getContents()) {
-			if (eObject instanceof EPackage) {
-			    EPackage p = (EPackage)eObject;
-			    myQVT.getResourceSet().getPackageRegistry().put(p.getNsURI(), p);
+			if (path != null) {
+				r = metamodelManager.getExternalResourceSet().getResource(URI.createURI(path, false), true);
+				eObject = r.getContents().get(0);
+				if (eObject instanceof EPackage) {
+				    EPackage p = (EPackage)eObject;
+				    metamodelManager.getExternalResourceSet().getPackageRegistry().put(p.getNsURI(), p);
+				}
 			}
 		}
 	}
@@ -697,7 +701,7 @@ public class MtcBroker {
 	protected PivotModel createModel(String modeUri, String modelName, String modelAliases, String metamodelUris,
 				boolean readOnLoad, boolean storeOnDispoal, boolean cached, boolean expand) throws QvtMtcExecutionException {
 	
-		PivotModel model = new PivotModel(qvtUtility, false);
+		PivotModel model = new PivotModel(metamodelManager, false);
 		StringProperties properties = new StringProperties();
 		properties.put(EmfModel.PROPERTY_NAME, modelName);
 		properties.put(EmfModel.PROPERTY_ALIASES, modelAliases);
@@ -719,7 +723,7 @@ public class MtcBroker {
 	private PivotModel createASModel(String modeUri, String modelName, String modelAliases, String metamodelUris,
 			boolean readOnLoad, boolean storeOnDispoal, boolean cached, boolean expand) throws QvtMtcExecutionException {
 	
-		PivotModel model = new PivotModel(qvtUtility, true);
+		PivotModel model = new PivotModel(metamodelManager, true);
 		StringProperties properties = new StringProperties();
 		properties.put(EmfModel.PROPERTY_NAME, modelName);
 		properties.put(EmfModel.PROPERTY_ALIASES, modelAliases);
@@ -806,10 +810,10 @@ public class MtcBroker {
 	 * @return the resource uri from class
 	 * @throws URISyntaxException the URI syntax exception
 	 */
-	/*private String getResourceUriFromClass(Class<?> c, String resource) throws URISyntaxException {
+	private String getResourceUriFromClass(Class<?> c, String resource) throws URISyntaxException {
 		URL r = c.getResource(resource);
 		String uri = r.toURI().toString();
 	    return uri;
-	}	*/
+	}	
 
 }

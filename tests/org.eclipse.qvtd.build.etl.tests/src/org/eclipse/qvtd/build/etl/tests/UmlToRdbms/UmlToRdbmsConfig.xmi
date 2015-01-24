@@ -4,13 +4,13 @@
     <direction name="uml" imports="//@transformation/@import.0"/>
     <direction name="rdbms" imports="//@transformation/@import.1"/>
     <direction imports="//@transformation/@import.2"/>
-    <import name="SimpleUML" metamodelFile="SimpleUML.ecore">
+    <import name="SimpleUML" metamodelFile="UmlToRdbms/SimpleUML.ecore">
       <package>simpleuml</package>
     </import>
-    <import name="SimpleRDBMS" metamodelFile="SimpleRDBMS.ecore">
+    <import name="SimpleRDBMS" metamodelFile="UmlToRdbms/SimpleRDBMS.ecore">
       <package>simplerdbms</package>
     </import>
-    <import name="SimpleUMLtoRDBMS" metamodelFile="SimpleUMLtoRDBMS.ecore">
+    <import name="SimpleUMLtoRDBMS" metamodelFile="UmlToRdbms/SimpleUMLtoRDBMS.ecore">
       <package>simpleumltordbms</package>
     </import>
   </transformation>
