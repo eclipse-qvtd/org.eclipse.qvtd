@@ -51,13 +51,16 @@ operation QVTs!Schedule doMapOrdering() {
  */
 operation QVTs!Schedule defineArgumentDerivation() {
     for (ma in self.actions) {
-        //ma.mapping.name.println("m ");
+        ma.mapping.name.println("m ");
         // Find all the derivation alternatives. The scheduler will pick the one that works best
         var inputVars = ma.distinctArguments.collect(da | da.primaryArguments.first().variable);
         var derivees = ma.distinctArguments.collect(da | da.primaryArguments.first())
                 .aggregate(pa | pa, pa.variable.derivedVariables(inputVars));
-                
-                                  
+        
+        for (key in derivees.keySet()) {
+            derivees.get(key).println("  " + key + ": " );
+        }
+
         for (da in ma.distinctArguments.sortBy(da | derivees.get(da.primaryArguments.first()).size()).invert()) {
             for (dv in derivees.get(da.primaryArguments.first())) {
                 if (ma.distinctArguments.exists(da | da.primaryArguments.exists(pa | pa.variable == dv))) {

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:eCoreContainemntTree="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree">
+  <eCoreContainemntTree:Node name="AttributeToColumn" parent="/5" superTypes="/4 /12 /11">
+    <element href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//SimpleUMLtoRDBMS.ecore#//AttributeToColumn"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="AssociationToForeignKey" parent="/3" superTypes="/11 /12">
+    <element href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//SimpleUMLtoRDBMS.ecore#//AssociationToForeignKey"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="BooleanToBoolean" parent="/8" superTypes="/9 /12">
+    <element href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//SimpleUMLtoRDBMS.ecore#//BooleanToBoolean"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="ClassToTable" parent="/8" children="/1" superTypes="/5 /11 /12">
+    <element href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//SimpleUMLtoRDBMS.ecore#//ClassToTable"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="FromAttribute" parent="/5" subTypes="/0 /7" superTypes="/12">
+    <element href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//SimpleUMLtoRDBMS.ecore#//FromAttribute"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="FromAttributeOwner" children="/4 /0 /7" subTypes="/3 /7">
+    <element href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//SimpleUMLtoRDBMS.ecore#//FromAttributeOwner"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="IntegerToNumber" parent="/8" superTypes="/9 /12">
+    <element href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//SimpleUMLtoRDBMS.ecore#//IntegerToNumber"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="NonLeafAttribute" parent="/5" superTypes="/5 /12 /4">
+    <element href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//SimpleUMLtoRDBMS.ecore#//NonLeafAttribute"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="PackageToSchema" children="/3 /9 /2 /6 /10" superTypes="/12">
+    <element href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//SimpleUMLtoRDBMS.ecore#//PackageToSchema"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="PrimitiveToName" parent="/8" subTypes="/2 /6 /10" superTypes="/12">
+    <element href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//SimpleUMLtoRDBMS.ecore#//PrimitiveToName"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="StringToVarchar" parent="/8" superTypes="/9 /12">
+    <element href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//SimpleUMLtoRDBMS.ecore#//StringToVarchar"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="ToColumn" subTypes="/0 /1 /3">
+    <element href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//SimpleUMLtoRDBMS.ecore#//ToColumn"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="UmlToRdbmsModelElement" subTypes="/4 /0 /1 /3 /8 /9 /2 /6 /7 /10">
+    <element href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//SimpleUMLtoRDBMS.ecore#//UmlToRdbmsModelElement"/>
+  </eCoreContainemntTree:Node>
+</xmi:XMI>

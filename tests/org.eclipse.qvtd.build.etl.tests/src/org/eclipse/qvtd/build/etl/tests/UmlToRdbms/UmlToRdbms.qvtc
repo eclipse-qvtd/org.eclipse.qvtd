@@ -1,11 +1,11 @@
 import SimpleUML: 'SimpleUML.ecore'::simpleuml;
 import SimpleRDBMS: 'SimpleRDBMS.ecore'::simplerdbms;
-import SimpleUMLtoRDBMS: 'SimpleUMLtoRDBMS.ecore'::simpleumltordbms;
+import UMLtoRDBMS: 'SimpleUMLtoRDBMS.ecore'::simpleumltordbms;
 
 transformation umlRdbms {
     uml imports SimpleUML;
     rdbms imports SimpleRDBMS;
-    imports SimpleUMLtoRDBMS;
+    imports UMLtoRDBMS;
 }
 
 /*    -- Package and Schema mapping

@@ -57,7 +57,7 @@ rule MappingToMappingAction
     transform m : QVTp!Mapping
     to ma : QVTs!MappingAction {
         
-        m.name.println("mapping ");
+        //m.name.println("mapping ");
         ma.schedule ::= m.transformation;
         ma.mapping = m;
         ma.distinctArguments.addAll(m.getInputVariables().equivalents().collect(e | e.first()));
@@ -88,7 +88,7 @@ rule VariableToDataParameter
     transform v : QVTp!Variable
     to dd : QVTs!DistinctData, dp : QVTs!DataParameter {
         
-        v.name.println("VariableToDataParameter ");
+        //v.name.println("VariableToDataParameter ");
         dp.variable = v;
         dp.datum ::= v.type;    
         dp.datum = v.type.equivalent();
@@ -97,10 +97,10 @@ rule VariableToDataParameter
     }
 
 // Only types in the TypedModel pacakges and that are used by a variable
-//@lazy
+@lazy
 @greedy
-rule TypeToClassDatum
-    transform t : QVTp!Type
+rule ClassToClassDatum
+    transform t : QVTp!Class
     to d : QVTs!ClassDatum {
                          
         guard : t.producesDatums()
