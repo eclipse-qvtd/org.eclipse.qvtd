@@ -1,0 +1,7 @@
+"Test".println();
+for (m in QVT.getModels()) {
+	m.name.println();
+	m.isExpand().println("Is Expand: ");
+	m!Type.all().size().println("No expand type count: ");	
+}
+

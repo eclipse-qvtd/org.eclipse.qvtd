@@ -31,7 +31,7 @@ import org.eclipse.epsilon.emc.emf.EmfUtil;
 import org.eclipse.epsilon.eol.exceptions.models.EolEnumerationValueNotFoundException;
 import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
 import org.eclipse.ocl.pivot.Class;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
+import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 
@@ -43,19 +43,19 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 public class PivotModel extends EmfModel {
 	
 	/** The meta model manager. */
-	private MetamodelManager metamodelManager;
+	private OCL qvtUtility;
 	
 	private boolean isASResource;
 	
 	/**
 	 * Instantiates a new pivot model.
 	 *
-	 * @param metamodelManager the meta model manager
+	 * @param qvtUtility the meta model manager
 	 */
-	public PivotModel(MetamodelManager metamodelManager, boolean isASResource) {
+	public PivotModel(OCL qvtUtility, boolean isASResource) {
 		
 		this.isASResource = isASResource;
-		this.metamodelManager = metamodelManager;
+		this.qvtUtility = qvtUtility;
 	}
 	
 	public PivotModel(PivotModel pModel) {
@@ -74,7 +74,7 @@ public class PivotModel extends EmfModel {
 	@Override
 	public void loadModelFromUri() throws EolModelLoadingException {
 
-		ResourceSet resourceSet = isASResource ? metamodelManager.getASResourceSet() : metamodelManager.getExternalResourceSet();
+		ResourceSet resourceSet = isASResource ? qvtUtility.getMetamodelManager().getASResourceSet() : qvtUtility.getMetamodelManager().getExternalResourceSet();
 		determinePackagesFrom(resourceSet);
 		try {
 			if (readOnLoad) {
