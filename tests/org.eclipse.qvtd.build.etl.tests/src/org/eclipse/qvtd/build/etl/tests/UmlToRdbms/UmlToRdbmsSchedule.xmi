@@ -9,11 +9,23 @@
       <property href="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind"/>
     </propertyDatums>
   </datums>
+<<<<<<< Updated upstream
   <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.0" requiredBy="//@actions.0 //@actions.3 //@actions.5 //@actions.6 //@actions.9 //@actions.11" dataParameter="//@actions.0/@distinctArguments.0/@primaryArguments.0 //@actions.3/@distinctArguments.0/@secondaryArguments.1 //@actions.5/@distinctArguments.0/@secondaryArguments.0 //@actions.6/@distinctArguments.0/@secondaryArguments.1 //@actions.9/@distinctArguments.0/@secondaryArguments.1 //@actions.11/@distinctArguments.0/@secondaryArguments.0">
+=======
+<<<<<<< HEAD
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.0" requiredBy="//@actions.0 //@actions.2 //@actions.4 //@actions.7 //@actions.8 //@actions.10" dataParameter="//@actions.0/@distinctArguments.0/@primaryArguments.0 //@actions.2/@distinctArguments.0/@primaryArguments.0 //@actions.4/@distinctArguments.1/@primaryArguments.0 //@actions.7/@distinctArguments.2/@primaryArguments.0 //@actions.8/@distinctArguments.1/@primaryArguments.0 //@actions.10/@distinctArguments.3/@primaryArguments.0">
+>>>>>>> Stashed changes
     <domain href="UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.0"/>
     <type href="SimpleUML.ecore.oclas#T.simpleuml.Package"/>
     <propertyDatums super="//@datums.0/@propertyDatums.0" requiredBy="//@actions.0">
       <domain href="UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.0"/>
+=======
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.0" requiredBy="//@actions.0 //@actions.3 //@actions.4 //@actions.7 //@actions.9 //@actions.10" dataParameter="//@actions.0/@distinctArguments.0/@primaryArguments.0 //@actions.3/@distinctArguments.0/@secondaryArguments.0 //@actions.4/@distinctArguments.0/@secondaryArguments.0 //@actions.7/@distinctArguments.0/@secondaryArguments.1 //@actions.9/@distinctArguments.0/@secondaryArguments.1 //@actions.10/@distinctArguments.0/@secondaryArguments.4">
+    <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.0"/>
+    <type href="SimpleUML.ecore.oclas#T.simpleuml.Package"/>
+    <propertyDatums super="//@datums.0/@propertyDatums.0" requiredBy="//@actions.0">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.0"/>
+>>>>>>> hhoyos/mtc
       <property href="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name"/>
     </propertyDatums>
   </datums>
@@ -29,7 +41,12 @@
       <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.ToColumn.column"/>
     </propertyDatums>
   </datums>
+<<<<<<< Updated upstream
   <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.2" producedBy="//@actions.0" requiredBy="//@actions.1 //@actions.2 //@actions.3 //@actions.4 //@actions.5 //@actions.6 //@actions.7 //@actions.8 //@actions.9 //@actions.10 //@actions.11" dataParameter="//@actions.1/@distinctArguments.0/@primaryArguments.0 //@actions.2/@distinctArguments.0/@secondaryArguments.0 //@actions.3/@distinctArguments.0/@secondaryArguments.0 //@actions.4/@distinctArguments.0/@secondaryArguments.0 //@actions.5/@distinctArguments.0/@secondaryArguments.1 //@actions.6/@distinctArguments.0/@secondaryArguments.0 //@actions.7/@distinctArguments.0/@secondaryArguments.0 //@actions.8/@distinctArguments.0/@secondaryArguments.1 //@actions.9/@distinctArguments.0/@secondaryArguments.0 //@actions.10/@distinctArguments.0/@secondaryArguments.1 //@actions.11/@distinctArguments.0/@secondaryArguments.2">
+=======
+<<<<<<< HEAD
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.2" producedBy="//@actions.0" requiredBy="//@actions.1 //@actions.2 //@actions.3 //@actions.4 //@actions.5 //@actions.6 //@actions.7 //@actions.8 //@actions.9 //@actions.10 //@actions.11" dataParameter="//@actions.1/@distinctArguments.0/@primaryArguments.0 //@actions.2/@distinctArguments.2/@primaryArguments.0 //@actions.3/@distinctArguments.1/@primaryArguments.0 //@actions.4/@distinctArguments.2/@primaryArguments.0 //@actions.5/@distinctArguments.1/@primaryArguments.0 //@actions.6/@distinctArguments.1/@primaryArguments.0 //@actions.7/@distinctArguments.1/@primaryArguments.0 //@actions.8/@distinctArguments.0/@primaryArguments.0 //@actions.9/@distinctArguments.1/@primaryArguments.0 //@actions.10/@distinctArguments.4/@primaryArguments.0 //@actions.11/@distinctArguments.1/@primaryArguments.0">
+>>>>>>> Stashed changes
     <domain href="UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.1"/>
     <type href="SimpleUMLtoRDBMS.ecore.oclas#T.simpleumltordbms.PackageToSchema"/>
     <propertyDatums super="//@datums.2/@propertyDatums.0" producedBy="//@actions.0" requiredBy="//@actions.1">
@@ -42,6 +59,21 @@
     </propertyDatums>
     <propertyDatums producedBy="//@actions.1" requiredBy="//@actions.8 //@actions.10">
       <domain href="UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.1"/>
+=======
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.2" producedBy="//@actions.0" requiredBy="//@actions.1 //@actions.2 //@actions.3 //@actions.4 //@actions.5 //@actions.6 //@actions.7 //@actions.8 //@actions.9 //@actions.10 //@actions.11" dataParameter="//@actions.1/@distinctArguments.0/@primaryArguments.0 //@actions.2/@distinctArguments.0/@secondaryArguments.0 //@actions.3/@distinctArguments.0/@secondaryArguments.1 //@actions.4/@distinctArguments.0/@secondaryArguments.1 //@actions.5/@distinctArguments.0/@secondaryArguments.0 //@actions.6/@distinctArguments.0/@secondaryArguments.0 //@actions.7/@distinctArguments.0/@secondaryArguments.0 //@actions.8/@distinctArguments.0/@secondaryArguments.1 //@actions.9/@distinctArguments.0/@secondaryArguments.0 //@actions.10/@distinctArguments.0/@secondaryArguments.0 //@actions.11/@distinctArguments.0/@secondaryArguments.3">
+    <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.1"/>
+    <type href="SimpleUMLtoRDBMS.ecore.oclas#T.simpleumltordbms.PackageToSchema"/>
+    <propertyDatums super="//@datums.2/@propertyDatums.0" producedBy="//@actions.0" requiredBy="//@actions.1">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.UmlToRdbmsModelElement.name"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.0" requiredBy="//@actions.3 //@actions.4 //@actions.7 //@actions.9 //@actions.10">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.PackageToSchema.umlPackage"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.1" requiredBy="//@actions.8 //@actions.11">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.1"/>
+>>>>>>> hhoyos/mtc
       <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.PackageToSchema.schema"/>
     </propertyDatums>
   </datums>
@@ -54,7 +86,12 @@
       <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.kind"/>
     </propertyDatums>
   </datums>
+<<<<<<< Updated upstream
   <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.4" producedBy="//@actions.1" requiredBy="//@actions.8 //@actions.10" dataParameter="//@actions.8/@distinctArguments.0/@secondaryArguments.0 //@actions.10/@distinctArguments.0/@secondaryArguments.5">
+=======
+<<<<<<< HEAD
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.4" producedBy="//@actions.1" requiredBy="//@actions.9 //@actions.11" dataParameter="//@actions.9/@distinctArguments.2/@primaryArguments.0 //@actions.11/@distinctArguments.0/@primaryArguments.0">
+>>>>>>> Stashed changes
     <domain href="UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0"/>
     <type href="SimpleRDBMS.ecore.oclas#T.simplerdbms.Schema"/>
     <propertyDatums producedBy="//@actions.1">
@@ -146,6 +183,118 @@
       <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.UmlToRdbmsModelElement.name"/>
     </propertyDatums>
   </datums>
+<<<<<<< Updated upstream
+=======
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.7" requiredBy="//@actions.8 //@actions.10 //@actions.12 //@actions.13 //@actions.14 //@actions.15" dataParameter="//@actions.8/@distinctArguments.2/@primaryArguments.0 //@actions.10/@distinctArguments.0/@primaryArguments.0 //@actions.10/@distinctArguments.2/@primaryArguments.0 //@actions.12/@distinctArguments.2/@primaryArguments.0 //@actions.13/@distinctArguments.1/@primaryArguments.0 //@actions.13/@distinctArguments.3/@primaryArguments.0 //@actions.14/@distinctArguments.3/@primaryArguments.0 //@actions.15/@distinctArguments.0/@primaryArguments.0 //@actions.15/@distinctArguments.2/@primaryArguments.0">
+    <domain href="UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+    <type href="SimpleUML.ecore.oclas#T.simpleuml.Class"/>
+    <propertyDatums requiredBy="//@actions.8 //@actions.10">
+      <domain href="UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+      <property href="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace"/>
+    </propertyDatums>
+    <propertyDatums super="//@datums.7/@propertyDatums.2" requiredBy="//@actions.8">
+      <domain href="UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+      <property href="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind"/>
+    </propertyDatums>
+    <propertyDatums requiredBy="//@actions.8 //@actions.10">
+      <domain href="UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+      <property href="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name"/>
+    </propertyDatums>
+=======
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.4" producedBy="//@actions.1" requiredBy="//@actions.8 //@actions.11" dataParameter="//@actions.8/@distinctArguments.0/@secondaryArguments.0 //@actions.11/@distinctArguments.0/@secondaryArguments.0">
+    <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0"/>
+    <type href="SimpleRDBMS.ecore.oclas#T.simplerdbms.Schema"/>
+    <propertyDatums producedBy="//@actions.1">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0"/>
+      <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.2" requiredBy="//@actions.12 //@actions.14 //@actions.16" dataParameter="//@actions.12/@distinctArguments.0/@secondaryArguments.3 //@actions.14/@distinctArguments.1/@secondaryArguments.1 //@actions.16/@distinctArguments.0/@secondaryArguments.2">
+    <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.12/@domain.1"/>
+    <type href="SimpleUMLtoRDBMS.ecore.oclas#T.simpleumltordbms.PrimitiveToName"/>
+    <propertyDatums producedBy="//@actions.3 //@actions.4 //@actions.7" requiredBy="//@actions.2 //@actions.5 //@actions.6">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.12/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.PrimitiveToName.owner"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.3 //@actions.4 //@actions.7" requiredBy="//@actions.12 //@actions.14">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.12/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.PrimitiveToName.primitive"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.2 //@actions.5 //@actions.6" requiredBy="//@actions.16">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.12/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.PrimitiveToName.typeName"/>
+    </propertyDatums>
+    <propertyDatums>
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.12/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.UmlToRdbmsModelElement.name"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.6" producedBy="//@actions.3" requiredBy="//@actions.2" dataParameter="//@actions.2/@distinctArguments.0/@primaryArguments.0">
+    <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.1"/>
+    <type href="SimpleUMLtoRDBMS.ecore.oclas#T.simpleumltordbms.IntegerToNumber"/>
+    <propertyDatums super="//@datums.6/@propertyDatums.3" producedBy="//@actions.3">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.UmlToRdbmsModelElement.name"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" producedBy="//@actions.2 //@actions.5 //@actions.6" requiredBy="//@actions.16" dataParameter="//@actions.16/@distinctArguments.0/@secondaryArguments.1">
+    <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0"/>
+    <type href="http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.0">
+    <type href="SimpleUML.ecore.oclas#T.simpleuml.PackageElement"/>
+    <propertyDatums>
+      <property href="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace"/>
+    </propertyDatums>
+    <propertyDatums>
+      <property href="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name"/>
+    </propertyDatums>
+    <propertyDatums super="//@datums.0/@propertyDatums.1">
+      <property href="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.9">
+    <type href="SimpleUML.ecore.oclas#T.simpleuml.Classifier"/>
+    <propertyDatums super="//@datums.9/@propertyDatums.0">
+      <property href="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace"/>
+    </propertyDatums>
+    <propertyDatums super="//@datums.9/@propertyDatums.1">
+      <property href="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name"/>
+    </propertyDatums>
+    <propertyDatums super="//@datums.9/@propertyDatums.2">
+      <property href="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.10" requiredBy="//@actions.3 //@actions.4 //@actions.7 //@actions.12 //@actions.14" dataParameter="//@actions.3/@distinctArguments.0/@primaryArguments.0 //@actions.4/@distinctArguments.0/@primaryArguments.0 //@actions.7/@distinctArguments.0/@primaryArguments.0 //@actions.12/@distinctArguments.0/@secondaryArguments.1 //@actions.14/@distinctArguments.1/@secondaryArguments.2">
+    <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.3/@domain.0"/>
+    <type href="SimpleUML.ecore.oclas#T.simpleuml.PrimitiveDataType"/>
+    <propertyDatums super="//@datums.10/@propertyDatums.0" requiredBy="//@actions.3 //@actions.4 //@actions.7">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.3/@domain.0"/>
+      <property href="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace"/>
+    </propertyDatums>
+    <propertyDatums super="//@datums.10/@propertyDatums.1" requiredBy="//@actions.3 //@actions.4 //@actions.7">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.3/@domain.0"/>
+      <property href="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.6" producedBy="//@actions.4" requiredBy="//@actions.5" dataParameter="//@actions.5/@distinctArguments.0/@primaryArguments.0">
+    <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.4/@domain.1"/>
+    <type href="SimpleUMLtoRDBMS.ecore.oclas#T.simpleumltordbms.BooleanToBoolean"/>
+    <propertyDatums producedBy="//@actions.4">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.4/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.UmlToRdbmsModelElement.name"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.6" producedBy="//@actions.7" requiredBy="//@actions.6" dataParameter="//@actions.6/@distinctArguments.0/@primaryArguments.0">
+    <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.6/@domain.1"/>
+    <type href="SimpleUMLtoRDBMS.ecore.oclas#T.simpleumltordbms.StringToVarchar"/>
+    <propertyDatums producedBy="//@actions.7">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.6/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.UmlToRdbmsModelElement.name"/>
+    </propertyDatums>
+>>>>>>> hhoyos/mtc
+  </datums>
+>>>>>>> Stashed changes
   <datums xsi:type="qvtschedule:ClassDatum">
     <type href="SimpleUMLtoRDBMS.ecore.oclas#T.simpleumltordbms.FromAttributeOwner"/>
     <propertyDatums>
@@ -184,6 +333,7 @@
     <propertyDatums>
       <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.FromAttribute.leafs"/>
     </propertyDatums>
+<<<<<<< HEAD
   </datums>
   <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.14 //@datums.15 //@datums.2" producedBy="//@actions.9" requiredBy="//@actions.8 //@actions.10 //@actions.11 //@actions.12 //@actions.13 //@actions.16" dataParameter="//@actions.8/@distinctArguments.0/@primaryArguments.0 //@actions.10/@distinctArguments.0/@secondaryArguments.0 //@actions.10/@distinctArguments.0/@secondaryArguments.3 //@actions.11/@distinctArguments.0/@secondaryArguments.1 //@actions.11/@distinctArguments.0/@secondaryArguments.5 //@actions.12/@distinctArguments.0/@secondaryArguments.3 //@actions.13/@distinctArguments.0/@secondaryArguments.1 //@actions.16/@distinctArguments.0/@secondaryArguments.0">
     <domain href="UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.1"/>
@@ -342,11 +492,204 @@
     </propertyDatums>
     <propertyDatums producedBy="//@actions.11" opposite="//@datums.23/@propertyDatums.4">
       <domain href="UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.10/@domain.1"/>
+<<<<<<< Updated upstream
       <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.AssociationToForeignKey.association"/>
     </propertyDatums>
   </datums>
   <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.4" producedBy="//@actions.10">
     <domain href="UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.10/@domain.0"/>
+=======
+=======
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.14 //@datums.15 //@datums.2" producedBy="//@actions.9" requiredBy="//@actions.8 //@actions.10 //@actions.11 //@actions.12 //@actions.13 //@actions.16" dataParameter="//@actions.8/@distinctArguments.0/@primaryArguments.0 //@actions.10/@distinctArguments.0/@secondaryArguments.1 //@actions.10/@distinctArguments.0/@secondaryArguments.5 //@actions.11/@distinctArguments.0/@secondaryArguments.1 //@actions.11/@distinctArguments.0/@secondaryArguments.2 //@actions.12/@distinctArguments.0/@secondaryArguments.2 //@actions.13/@distinctArguments.0/@secondaryArguments.1 //@actions.16/@distinctArguments.0/@secondaryArguments.0">
+    <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.1"/>
+    <type href="SimpleUMLtoRDBMS.ecore.oclas#T.simpleumltordbms.ClassToTable"/>
+    <propertyDatums producedBy="//@actions.9" requiredBy="//@actions.8 //@actions.10 //@actions.11">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.ClassToTable.owner"/>
+    </propertyDatums>
+    <propertyDatums super="//@datums.14/@propertyDatums.0 //@datums.15/@propertyDatums.0" producedBy="//@actions.9" requiredBy="//@actions.8">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.UmlToRdbmsModelElement.name"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.9" requiredBy="//@actions.10 //@actions.12 //@actions.13">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.ClassToTable.umlClass"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.8" requiredBy="//@actions.11 //@actions.16">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.ClassToTable.table"/>
+    </propertyDatums>
+    <propertyDatums super="//@datums.15/@propertyDatums.2 //@datums.2/@propertyDatums.1" requiredBy="//@actions.16">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.FromAttributeOwner.fromAttributes"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.8" opposite="//@datums.18/@propertyDatums.3">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.ClassToTable.primaryKey"/>
+    </propertyDatums>
+    <propertyDatums super="//@datums.14/@propertyDatums.3 //@datums.15/@propertyDatums.4 //@datums.2/@propertyDatums.2" producedBy="//@actions.8" opposite="//@datums.17/@propertyDatums.1">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.ToColumn.column"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.4" producedBy="//@actions.8 //@actions.11 //@actions.16">
+    <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+    <type href="SimpleRDBMS.ecore.oclas#T.simplerdbms.Column"/>
+    <propertyDatums producedBy="//@actions.8 //@actions.11 //@actions.16" requiredBy="//@actions.11">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+      <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.type"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.8 //@actions.11 //@actions.16">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+      <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.middle"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.8 //@actions.11 //@actions.16" opposite="//@datums.19/@propertyDatums.3">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+      <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.owner"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.8" opposite="//@datums.18/@propertyDatums.2">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+      <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.keys"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.8 //@actions.11 //@actions.16">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+      <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.11" opposite="//@datums.23/@propertyDatums.4">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+      <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.Column.foreignKeys"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.16">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+      <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.kind"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.4" producedBy="//@actions.8" requiredBy="//@actions.11" dataParameter="//@actions.11/@distinctArguments.1/@primaryArguments.0">
+    <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+    <type href="SimpleRDBMS.ecore.oclas#T.simplerdbms.Key"/>
+    <propertyDatums producedBy="//@actions.8" requiredBy="//@actions.11">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+      <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.Key.owner"/>
+    </propertyDatums>
+    <propertyDatums super="//@datums.4/@propertyDatums.1" producedBy="//@actions.8" requiredBy="//@actions.11">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+      <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.kind"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.8" requiredBy="//@actions.11">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+      <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.Key.column"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.8">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+      <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.Key.middle"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.8">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+      <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.11">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+      <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.Key.ForeignKey"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.4" producedBy="//@actions.8" requiredBy="//@actions.11 //@actions.16" dataParameter="//@actions.11/@distinctArguments.0/@secondaryArguments.4 //@actions.11/@distinctArguments.0/@secondaryArguments.5 //@actions.16/@distinctArguments.0/@secondaryArguments.3">
+    <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+    <type href="SimpleRDBMS.ecore.oclas#T.simplerdbms.Table"/>
+    <propertyDatums super="//@datums.4/@propertyDatums.0" producedBy="//@actions.8" requiredBy="//@actions.8">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+      <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.8" requiredBy="//@actions.11">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+      <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.Table.schema"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.8">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+      <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.kind"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.8 //@actions.11 //@actions.16">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+      <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.Table.columns"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.11">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.8/@domain.0"/>
+      <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.Table.foreignKeys"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.10" requiredBy="//@actions.9 //@actions.10 //@actions.12 //@actions.13 //@actions.14 //@actions.15" dataParameter="//@actions.9/@distinctArguments.0/@primaryArguments.0 //@actions.10/@distinctArguments.0/@secondaryArguments.2 //@actions.10/@distinctArguments.0/@secondaryArguments.3 //@actions.12/@distinctArguments.0/@secondaryArguments.0 //@actions.13/@distinctArguments.0/@secondaryArguments.0 //@actions.13/@distinctArguments.0/@secondaryArguments.2 //@actions.14/@distinctArguments.1/@secondaryArguments.0 //@actions.15/@distinctArguments.1/@secondaryArguments.0 //@actions.15/@distinctArguments.0/@secondaryArguments.0">
+    <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.9/@domain.0"/>
+    <type href="SimpleUML.ecore.oclas#T.simpleuml.Class"/>
+    <propertyDatums super="//@datums.10/@propertyDatums.2" requiredBy="//@actions.9">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.9/@domain.0"/>
+      <property href="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind"/>
+    </propertyDatums>
+    <propertyDatums requiredBy="//@actions.9 //@actions.10">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.9/@domain.0"/>
+      <property href="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace"/>
+    </propertyDatums>
+    <propertyDatums requiredBy="//@actions.9 //@actions.10">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.9/@domain.0"/>
+      <property href="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.9" requiredBy="//@actions.10" dataParameter="//@actions.10/@distinctArguments.0/@primaryArguments.0">
+    <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.10/@domain.0"/>
+    <type href="SimpleUML.ecore.oclas#T.simpleuml.Association"/>
+    <propertyDatums requiredBy="//@actions.10">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.10/@domain.0"/>
+      <property href="SimpleUML.ecore.oclas#p.simpleuml.Association.destination"/>
+    </propertyDatums>
+    <propertyDatums requiredBy="//@actions.10">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.10/@domain.0"/>
+      <property href="SimpleUML.ecore.oclas#p.simpleuml.Association.source"/>
+    </propertyDatums>
+    <propertyDatums requiredBy="//@actions.10">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.10/@domain.0"/>
+      <property href="SimpleUML.ecore.oclas#p.simpleuml.PackageElement.namespace"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.10" requiredBy="//@actions.10">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.10/@domain.0"/>
+      <property href="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.10">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.10/@domain.0"/>
+      <property href="SimpleUML.ecore.oclas#p.simpleuml.Association.middle"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.15 //@datums.2" producedBy="//@actions.10" requiredBy="//@actions.11" dataParameter="//@actions.11/@distinctArguments.0/@primaryArguments.0">
+    <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.10/@domain.1"/>
+    <type href="SimpleUMLtoRDBMS.ecore.oclas#T.simpleumltordbms.AssociationToForeignKey"/>
+    <propertyDatums producedBy="//@actions.10" requiredBy="//@actions.10 //@actions.11">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.10/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.UmlToRdbmsModelElement.name"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.10" requiredBy="//@actions.11">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.10/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.AssociationToForeignKey.referenced"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.10" requiredBy="//@actions.11">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.10/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.AssociationToForeignKey.owner"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.10" opposite="//@datums.21/@propertyDatums.4">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.10/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.AssociationToForeignKey.association"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.11" opposite="//@datums.17/@propertyDatums.1">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.10/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.ToColumn.column"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.11" opposite="//@datums.23/@propertyDatums.1">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.10/@domain.1"/>
+>>>>>>> hhoyos/mtc
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.AssociationToForeignKey.foreignKey"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.4" producedBy="//@actions.11">
+<<<<<<< HEAD
+    <domain href="UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.11/@domain.0"/>
+>>>>>>> Stashed changes
     <type href="SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey"/>
     <propertyDatums producedBy="//@actions.10">
       <domain href="UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.10/@domain.0"/>
@@ -410,7 +753,54 @@
     </propertyDatums>
     <propertyDatums requiredBy="//@actions.12 //@actions.13 //@actions.14 //@actions.15">
       <domain href="UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.12/@domain.0"/>
+<<<<<<< Updated upstream
       <property href="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind"/>
+=======
+      <property href="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name"/>
+=======
+    <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.11/@domain.0"/>
+    <type href="SimpleRDBMS.ecore.oclas#T.simplerdbms.ForeignKey"/>
+    <propertyDatums producedBy="//@actions.11">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.11/@domain.0"/>
+      <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.RModelElement.name"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.11">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.11/@domain.0"/>
+      <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.ForeignKey.middle"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.11" opposite="//@datums.19/@propertyDatums.4">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.11/@domain.0"/>
+      <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.ForeignKey.owner"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.11" opposite="//@datums.18/@propertyDatums.5">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.11/@domain.0"/>
+      <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.ForeignKey.refersTo"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.11">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.11/@domain.0"/>
+      <property href="SimpleRDBMS.ecore.oclas#p.simplerdbms.ForeignKey.columns"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.0" requiredBy="//@actions.12 //@actions.13 //@actions.14 //@actions.15" dataParameter="//@actions.12/@distinctArguments.0/@primaryArguments.0 //@actions.13/@distinctArguments.0/@primaryArguments.0 //@actions.14/@distinctArguments.0/@primaryArguments.0 //@actions.14/@distinctArguments.1/@primaryArguments.0 //@actions.15/@distinctArguments.1/@secondaryArguments.1 //@actions.15/@distinctArguments.0/@primaryArguments.0">
+    <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.12/@domain.0"/>
+    <type href="SimpleUML.ecore.oclas#T.simpleuml.Attribute"/>
+    <propertyDatums requiredBy="//@actions.12 //@actions.13 //@actions.14 //@actions.15">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.12/@domain.0"/>
+      <property href="SimpleUML.ecore.oclas#p.simpleuml.Attribute.type"/>
+    </propertyDatums>
+    <propertyDatums requiredBy="//@actions.12 //@actions.13 //@actions.14 //@actions.15">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.12/@domain.0"/>
+      <property href="SimpleUML.ecore.oclas#p.simpleuml.Attribute.owner"/>
+    </propertyDatums>
+    <propertyDatums requiredBy="//@actions.12 //@actions.13 //@actions.14 //@actions.15">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.12/@domain.0"/>
+      <property href="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.name"/>
+    </propertyDatums>
+    <propertyDatums requiredBy="//@actions.12 //@actions.13 //@actions.14 //@actions.15">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.12/@domain.0"/>
+      <property href="SimpleUML.ecore.oclas#p.simpleuml.UMLModelElement.kind"/>
+>>>>>>> hhoyos/mtc
+>>>>>>> Stashed changes
     </propertyDatums>
   </datums>
   <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.2">
@@ -434,7 +824,12 @@
       <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.ToColumn.column"/>
     </propertyDatums>
   </datums>
+<<<<<<< Updated upstream
   <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.25 //@datums.15" producedBy="//@actions.12 //@actions.14" requiredBy="//@actions.16" dataParameter="//@actions.16/@distinctArguments.0/@primaryArguments.0">
+=======
+<<<<<<< HEAD
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.25 //@datums.16" producedBy="//@actions.12 //@actions.14" requiredBy="//@actions.16" dataParameter="//@actions.16/@distinctArguments.1/@primaryArguments.0">
+>>>>>>> Stashed changes
     <domain href="UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.12/@domain.1"/>
     <type href="SimpleUMLtoRDBMS.ecore.oclas#T.simpleumltordbms.AttributeToColumn"/>
     <propertyDatums producedBy="//@actions.12 //@actions.14" requiredBy="//@actions.16">
@@ -486,19 +881,119 @@
     <distinctArguments>
       <primaryArguments datum="//@datums.1">
         <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.packageToSchema_LM.uml.guard.p"/>
+=======
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.25 //@datums.15" producedBy="//@actions.12 //@actions.14" requiredBy="//@actions.16" dataParameter="//@actions.16/@distinctArguments.0/@primaryArguments.0">
+    <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.12/@domain.1"/>
+    <type href="SimpleUMLtoRDBMS.ecore.oclas#T.simpleumltordbms.AttributeToColumn"/>
+    <propertyDatums super="//@datums.25/@propertyDatums.3 //@datums.15/@propertyDatums.1" requiredBy="//@actions.16">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.12/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.FromAttribute.owner"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.12 //@actions.14" requiredBy="//@actions.16">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.12/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.AttributeToColumn.type"/>
+    </propertyDatums>
+    <propertyDatums requiredBy="//@actions.16">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.12/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.UmlToRdbmsModelElement.name"/>
+    </propertyDatums>
+    <propertyDatums super="//@datums.25/@propertyDatums.4 //@datums.15/@propertyDatums.3" requiredBy="//@actions.16">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.12/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.FromAttribute.kind"/>
+    </propertyDatums>
+    <propertyDatums super="//@datums.15/@propertyDatums.5" producedBy="//@actions.12 //@actions.14" opposite="//@datums.26/@propertyDatums.5">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.12/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.FromAttribute.leafs"/>
+    </propertyDatums>
+    <propertyDatums producedBy="//@actions.12 //@actions.13 //@actions.14 //@actions.15">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.12/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.AttributeToColumn.FromAttribute"/>
+    </propertyDatums>
+    <propertyDatums super="//@datums.25/@propertyDatums.5" producedBy="//@actions.16" opposite="//@datums.17/@propertyDatums.1">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.12/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.ToColumn.column"/>
+    </propertyDatums>
+  </datums>
+  <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.14 //@datums.25" producedBy="//@actions.13 //@actions.15" requiredBy="//@actions.14 //@actions.15" dataParameter="//@actions.14/@distinctArguments.0/@secondaryArguments.0 //@actions.15/@distinctArguments.1/@primaryArguments.0">
+    <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.13/@domain.1"/>
+    <type href="SimpleUMLtoRDBMS.ecore.oclas#T.simpleumltordbms.NonLeafAttribute"/>
+    <propertyDatums super="//@datums.14/@propertyDatums.2 //@datums.25/@propertyDatums.1" requiredBy="//@actions.14 //@actions.15">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.13/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.FromAttribute.attribute"/>
+    </propertyDatums>
+    <propertyDatums super="//@datums.25/@propertyDatums.2" requiredBy="//@actions.14 //@actions.15">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.13/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.UmlToRdbmsModelElement.name"/>
+    </propertyDatums>
+    <propertyDatums super="//@datums.14/@propertyDatums.4" producedBy="//@actions.13 //@actions.15" opposite="//@datums.26/@propertyDatums.5">
+      <domain href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.13/@domain.1"/>
+      <property href="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.FromAttribute.leafs"/>
+    </propertyDatums>
+  </datums>
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.3 //@datums.3/@propertyDatums.1 //@datums.3/@propertyDatums.0" requisites="//@datums.1 //@datums.1/@propertyDatums.0" order="1" parent="//@actions.17" arguments="//@datums.1">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.1">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.packageToSchema_LM.uml.guard.p"/>
       </primaryArguments>
     </distinctArguments>
-    <mapping href="UmlToRdbms.qvtp.qvtias#m..umlRdbms.packageToSchema_LM"/>
+    <mapping href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#m..umlRdbms.packageToSchema_LM"/>
   </actions>
   <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.5 //@datums.3/@propertyDatums.2 //@datums.5/@propertyDatums.0" requisites="//@datums.3 //@datums.3/@propertyDatums.0" order="2" parent="//@actions.17" arguments="//@datums.3">
+<<<<<<< Updated upstream
+=======
+    <distinctArguments>
+      <primaryArguments datum="//@datums.3">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.packageToSchema_MR.middle.guard.p2s"/>
+>>>>>>> hhoyos/mtc
+      </primaryArguments>
+    </distinctArguments>
+    <mapping href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#m..umlRdbms.packageToSchema_MR"/>
+  </actions>
+<<<<<<< HEAD
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.5 //@datums.5/@propertyDatums.0 //@datums.3/@propertyDatums.2" requisites="//@datums.3 //@datums.3/@propertyDatums.0" arguments="//@datums.3">
+>>>>>>> Stashed changes
     <distinctArguments>
       <primaryArguments datum="//@datums.3">
         <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.packageToSchema_MR.middle.guard.p2s"/>
+=======
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.8 //@datums.6/@propertyDatums.2" requisites="//@datums.7 //@datums.3 //@datums.6/@propertyDatums.0" order="6" parent="//@actions.17" arguments="//@datums.7 //@datums.3">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.7">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.integerToNumber_MR.middle.guard.p2n"/>
+>>>>>>> hhoyos/mtc
       </primaryArguments>
+      <secondaryArguments datum="//@datums.3">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.integerToNumber_MR.middle.guard.p2s"/>
+      </secondaryArguments>
     </distinctArguments>
+<<<<<<< HEAD
     <mapping href="UmlToRdbms.qvtp.qvtias#m..umlRdbms.packageToSchema_MR"/>
   </actions>
+<<<<<<< Updated upstream
   <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.8 //@datums.6/@propertyDatums.2" requisites="//@datums.7 //@datums.3 //@datums.6/@propertyDatums.0" order="14" parent="//@actions.17" arguments="//@datums.7 //@datums.3">
+=======
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.10 //@datums.9/@propertyDatums.0 //@datums.9/@propertyDatums.1 //@datums.10/@propertyDatums.0" requisites="//@datums.1 //@datums.8 //@datums.3 //@datums.3/@propertyDatums.1 //@datums.8/@propertyDatums.0 //@datums.8/@propertyDatums.1" arguments="//@datums.1 //@datums.8 //@datums.3">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.1">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.integerToNumber_LM.uml.guard.p"/>
+=======
+    <mapping href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#m..umlRdbms.integerToNumber_MR"/>
+  </actions>
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.7 //@datums.6/@propertyDatums.1 //@datums.6/@propertyDatums.0 //@datums.7/@propertyDatums.0" requisites="//@datums.11 //@datums.1 //@datums.3 //@datums.3/@propertyDatums.1 //@datums.11/@propertyDatums.0 //@datums.11/@propertyDatums.1" order="7" parent="//@actions.17" arguments="//@datums.11 //@datums.1 //@datums.3">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.11">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.integerToNumber_LM.uml.guard.prim"/>
+>>>>>>> hhoyos/mtc
+      </primaryArguments>
+      <secondaryArguments datum="//@datums.1">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.integerToNumber_LM.uml.guard.p"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.3">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.integerToNumber_LM.middle.guard.p2s"/>
+      </secondaryArguments>
+    </distinctArguments>
+<<<<<<< HEAD
+>>>>>>> Stashed changes
     <distinctArguments>
       <primaryArguments datum="//@datums.7">
         <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.integerToNumber_MR.middle.guard.p2n"/>
@@ -511,8 +1006,38 @@
   </actions>
   <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.7 //@datums.6/@propertyDatums.1 //@datums.7/@propertyDatums.0 //@datums.6/@propertyDatums.0" requisites="//@datums.3 //@datums.1 //@datums.11 //@datums.3/@propertyDatums.1 //@datums.11/@propertyDatums.0 //@datums.11/@propertyDatums.1" order="7" parent="//@actions.17" arguments="//@datums.3 //@datums.1 //@datums.11">
     <distinctArguments>
+<<<<<<< Updated upstream
       <primaryArguments datum="//@datums.11">
         <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.integerToNumber_LM.uml.guard.prim"/>
+=======
+      <primaryArguments datum="//@datums.8">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.booleanToBoolean_LM.uml.guard.prim"/>
+=======
+    <mapping href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#m..umlRdbms.integerToNumber_LM"/>
+  </actions>
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.12 //@datums.6/@propertyDatums.1 //@datums.12/@propertyDatums.0 //@datums.6/@propertyDatums.0" requisites="//@datums.11 //@datums.1 //@datums.3 //@datums.3/@propertyDatums.1 //@datums.11/@propertyDatums.1 //@datums.11/@propertyDatums.0" order="8" parent="//@actions.17" arguments="//@datums.11 //@datums.1 //@datums.3">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.11">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.booleanToBoolean_LM.uml.guard.prim"/>
+>>>>>>> hhoyos/mtc
+      </primaryArguments>
+      <secondaryArguments datum="//@datums.1">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.booleanToBoolean_LM.uml.guard.p"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.3">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.booleanToBoolean_LM.middle.guard.p2s"/>
+      </secondaryArguments>
+    </distinctArguments>
+<<<<<<< HEAD
+    <distinctArguments>
+      <primaryArguments datum="//@datums.1">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.booleanToBoolean_LM.uml.guard.p"/>
+      </primaryArguments>
+    </distinctArguments>
+    <distinctArguments>
+      <primaryArguments datum="//@datums.3">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.booleanToBoolean_LM.middle.guard.p2s"/>
+>>>>>>> Stashed changes
       </primaryArguments>
       <secondaryArguments datum="//@datums.3">
         <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.integerToNumber_LM.middle.guard.p2s"/>
@@ -527,14 +1052,46 @@
     <distinctArguments>
       <primaryArguments datum="//@datums.12">
         <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.booleanToBoolean_MR.middle.guard.p2n"/>
+=======
+    <mapping href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#m..umlRdbms.booleanToBoolean_LM"/>
+  </actions>
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.8 //@datums.6/@propertyDatums.2" requisites="//@datums.12 //@datums.3 //@datums.6/@propertyDatums.0" order="9" parent="//@actions.17" arguments="//@datums.12 //@datums.3">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.12">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.booleanToBoolean_MR.middle.guard.p2n"/>
+>>>>>>> hhoyos/mtc
       </primaryArguments>
       <secondaryArguments datum="//@datums.3">
+<<<<<<< Updated upstream
+=======
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.booleanToBoolean_MR.middle.guard.p2s"/>
+      </secondaryArguments>
+    </distinctArguments>
+    <mapping href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#m..umlRdbms.booleanToBoolean_MR"/>
+  </actions>
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.8 //@datums.6/@propertyDatums.2" requisites="//@datums.13 //@datums.3 //@datums.6/@propertyDatums.0" order="10" parent="//@actions.17" arguments="//@datums.13 //@datums.3">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.3">
+>>>>>>> Stashed changes
         <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.booleanToBoolean_MR.middle.guard.p2s"/>
       </secondaryArguments>
     </distinctArguments>
     <mapping href="UmlToRdbms.qvtp.qvtias#m..umlRdbms.booleanToBoolean_MR"/>
   </actions>
+<<<<<<< Updated upstream
   <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.12 //@datums.6/@propertyDatums.1 //@datums.6/@propertyDatums.0 //@datums.12/@propertyDatums.0" requisites="//@datums.1 //@datums.11 //@datums.3 //@datums.3/@propertyDatums.1 //@datums.11/@propertyDatums.0 //@datums.11/@propertyDatums.1" order="6" parent="//@actions.17" arguments="//@datums.1 //@datums.11 //@datums.3">
+=======
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.11 //@datums.9/@propertyDatums.2" requisites="//@datums.13 //@datums.3 //@datums.9/@propertyDatums.0" arguments="//@datums.13 //@datums.3">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.13">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.stringToVarchar_MR.middle.guard.p2n"/>
+      </primaryArguments>
+      <secondaryArguments datum="//@datums.3">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.stringToVarchar_MR.middle.guard.p2s"/>
+      </secondaryArguments>
+    </distinctArguments>
+<<<<<<< HEAD
+>>>>>>> Stashed changes
     <distinctArguments>
       <primaryArguments datum="//@datums.11">
         <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.booleanToBoolean_LM.uml.guard.prim"/>
@@ -558,10 +1115,28 @@
       </secondaryArguments>
       <secondaryArguments datum="//@datums.1">
         <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.stringToVarchar_LM.uml.guard.p"/>
+<<<<<<< Updated upstream
+=======
+=======
+    <mapping href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#m..umlRdbms.stringToVarchar_MR"/>
+  </actions>
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.13 //@datums.6/@propertyDatums.0 //@datums.13/@propertyDatums.0 //@datums.6/@propertyDatums.1" requisites="//@datums.3 //@datums.11 //@datums.1 //@datums.3/@propertyDatums.1 //@datums.11/@propertyDatums.0 //@datums.11/@propertyDatums.1" order="11" parent="//@actions.17" arguments="//@datums.3 //@datums.11 //@datums.1">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.11">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.stringToVarchar_LM.uml.guard.prim"/>
+>>>>>>> hhoyos/mtc
+      </primaryArguments>
+      <secondaryArguments datum="//@datums.3">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.stringToVarchar_LM.middle.guard.p2s"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.1">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.stringToVarchar_LM.uml.guard.p"/>
+>>>>>>> Stashed changes
       </secondaryArguments>
     </distinctArguments>
-    <mapping href="UmlToRdbms.qvtp.qvtias#m..umlRdbms.stringToVarchar_LM"/>
+    <mapping href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#m..umlRdbms.stringToVarchar_LM"/>
   </actions>
+<<<<<<< Updated upstream
   <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.8 //@datums.6/@propertyDatums.2" requisites="//@datums.13 //@datums.3 //@datums.6/@propertyDatums.0" order="15" parent="//@actions.17" arguments="//@datums.13 //@datums.3">
     <distinctArguments>
       <primaryArguments datum="//@datums.13">
@@ -574,20 +1149,77 @@
     <mapping href="UmlToRdbms.qvtp.qvtias#m..umlRdbms.stringToVarchar_MR"/>
   </actions>
   <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.17 //@datums.18 //@datums.19 //@datums.16/@propertyDatums.2 //@datums.17/@propertyDatums.0 //@datums.16/@propertyDatums.5 //@datums.16/@propertyDatums.6 //@datums.17/@propertyDatums.2 //@datums.17/@propertyDatums.1 //@datums.18/@propertyDatums.1 //@datums.18/@propertyDatums.0 //@datums.19/@propertyDatums.2 //@datums.19/@propertyDatums.3 //@datums.19/@propertyDatums.0 //@datums.19/@propertyDatums.4 //@datums.18/@propertyDatums.4 //@datums.19/@propertyDatums.1 //@datums.18/@propertyDatums.3 //@datums.17/@propertyDatums.3 //@datums.18/@propertyDatums.2" requisites="//@datums.16 //@datums.5 //@datums.3 //@datums.3/@propertyDatums.2 //@datums.16/@propertyDatums.0 //@datums.16/@propertyDatums.1 //@datums.17/@propertyDatums.0" order="4" parent="//@actions.17" arguments="//@datums.16 //@datums.5 //@datums.3">
+=======
+<<<<<<< HEAD
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.17 //@datums.17/@propertyDatums.2 //@datums.17/@propertyDatums.0 //@datums.17/@propertyDatums.1" requisites="//@datums.3 //@datums.1 //@datums.14 //@datums.3/@propertyDatums.1 //@datums.14/@propertyDatums.0 //@datums.14/@propertyDatums.1 //@datums.14/@propertyDatums.2" arguments="//@datums.3 //@datums.1 //@datums.14">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.3">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.classToTable_LM.middle.guard.p2s"/>
+      </primaryArguments>
+    </distinctArguments>
+    <distinctArguments>
+      <primaryArguments datum="//@datums.1">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.classToTable_LM.uml.guard.p"/>
+      </primaryArguments>
+    </distinctArguments>
+=======
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.17 //@datums.18 //@datums.19 //@datums.19/@propertyDatums.0 //@datums.16/@propertyDatums.3 //@datums.16/@propertyDatums.5 //@datums.16/@propertyDatums.6 //@datums.19/@propertyDatums.2 //@datums.19/@propertyDatums.1 //@datums.18/@propertyDatums.0 //@datums.18/@propertyDatums.1 //@datums.17/@propertyDatums.2 //@datums.17/@propertyDatums.3 //@datums.17/@propertyDatums.0 //@datums.17/@propertyDatums.4 //@datums.18/@propertyDatums.4 //@datums.18/@propertyDatums.3 //@datums.17/@propertyDatums.1 //@datums.19/@propertyDatums.3 //@datums.18/@propertyDatums.2" requisites="//@datums.5 //@datums.16 //@datums.3 //@datums.3/@propertyDatums.2 //@datums.16/@propertyDatums.0 //@datums.16/@propertyDatums.1 //@datums.19/@propertyDatums.0" order="13" parent="//@actions.17" arguments="//@datums.5 //@datums.16 //@datums.3">
+>>>>>>> hhoyos/mtc
+    <distinctArguments>
+      <primaryArguments datum="//@datums.16">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.classToTable_MR.middle.guard.c2t"/>
+      </primaryArguments>
+      <secondaryArguments datum="//@datums.5">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.classToTable_MR.rdbms.guard.s"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.3">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.classToTable_MR.middle.guard.p2s"/>
+      </secondaryArguments>
+    </distinctArguments>
+    <mapping href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#m..umlRdbms.classToTable_MR"/>
+  </actions>
+<<<<<<< HEAD
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.18 //@datums.19 //@datums.20 //@datums.17/@propertyDatums.3 //@datums.17/@propertyDatums.5 //@datums.17/@propertyDatums.6 //@datums.19/@propertyDatums.0 //@datums.19/@propertyDatums.2 //@datums.19/@propertyDatums.1 //@datums.18/@propertyDatums.0 //@datums.18/@propertyDatums.1 //@datums.20/@propertyDatums.2 //@datums.20/@propertyDatums.3 //@datums.20/@propertyDatums.0 //@datums.20/@propertyDatums.4 //@datums.18/@propertyDatums.4 //@datums.20/@propertyDatums.1 //@datums.18/@propertyDatums.3 //@datums.19/@propertyDatums.3 //@datums.18/@propertyDatums.2" requisites="//@datums.17 //@datums.3 //@datums.5 //@datums.3/@propertyDatums.2 //@datums.17/@propertyDatums.0 //@datums.17/@propertyDatums.1 //@datums.19/@propertyDatums.0" arguments="//@datums.17 //@datums.3 //@datums.5">
+>>>>>>> Stashed changes
     <distinctArguments>
       <primaryArguments datum="//@datums.16">
         <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.classToTable_MR.middle.guard.c2t"/>
       </primaryArguments>
       <secondaryArguments datum="//@datums.5">
         <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.classToTable_MR.rdbms.guard.s"/>
+<<<<<<< Updated upstream
       </secondaryArguments>
       <secondaryArguments datum="//@datums.3">
         <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.classToTable_MR.middle.guard.p2s"/>
+=======
+=======
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.16 //@datums.16/@propertyDatums.0 //@datums.16/@propertyDatums.2 //@datums.16/@propertyDatums.1" requisites="//@datums.3 //@datums.20 //@datums.1 //@datums.3/@propertyDatums.1 //@datums.20/@propertyDatums.0 //@datums.20/@propertyDatums.1 //@datums.20/@propertyDatums.2" order="14" parent="//@actions.17" arguments="//@datums.3 //@datums.20 //@datums.1">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.20">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.classToTable_LM.uml.guard.c"/>
+>>>>>>> hhoyos/mtc
+      </primaryArguments>
+      <secondaryArguments datum="//@datums.3">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.classToTable_LM.middle.guard.p2s"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.1">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.classToTable_LM.uml.guard.p"/>
+>>>>>>> Stashed changes
       </secondaryArguments>
     </distinctArguments>
-    <mapping href="UmlToRdbms.qvtp.qvtias#m..umlRdbms.classToTable_MR"/>
+    <mapping href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#m..umlRdbms.classToTable_LM"/>
   </actions>
+<<<<<<< Updated upstream
   <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.16 //@datums.16/@propertyDatums.3 //@datums.16/@propertyDatums.1 //@datums.16/@propertyDatums.0" requisites="//@datums.20 //@datums.3 //@datums.1 //@datums.3/@propertyDatums.1 //@datums.20/@propertyDatums.0 //@datums.20/@propertyDatums.1 //@datums.20/@propertyDatums.2" order="3" parent="//@actions.17" arguments="//@datums.20 //@datums.3 //@datums.1">
+=======
+<<<<<<< HEAD
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.22 //@datums.22/@propertyDatums.0 //@datums.22/@propertyDatums.1 //@datums.22/@propertyDatums.2 //@datums.21/@propertyDatums.3 //@datums.22/@propertyDatums.3 //@datums.21/@propertyDatums.4" requisites="//@datums.14 //@datums.17 //@datums.1 //@datums.3 //@datums.21 //@datums.17/@propertyDatums.2 //@datums.3/@propertyDatums.1 //@datums.17/@propertyDatums.0 //@datums.14/@propertyDatums.0 //@datums.21/@propertyDatums.0 //@datums.21/@propertyDatums.1 //@datums.21/@propertyDatums.2 //@datums.14/@propertyDatums.2 //@datums.21/@propertyDatums.3 //@datums.22/@propertyDatums.0" arguments="//@datums.14 //@datums.17 //@datums.1 //@datums.3 //@datums.21">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.14">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.associationToForeignKey_LM.uml.guard.sc"/>
+      </primaryArguments>
+    </distinctArguments>
+>>>>>>> Stashed changes
     <distinctArguments>
       <primaryArguments datum="//@datums.20">
         <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.classToTable_LM.uml.guard.c"/>
@@ -630,9 +1262,76 @@
         <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.associationToForeignKey_MR.rdbms.guard.rk"/>
       </primaryArguments>
     </distinctArguments>
+<<<<<<< Updated upstream
     <mapping href="UmlToRdbms.qvtp.qvtias#m..umlRdbms.associationToForeignKey_MR"/>
   </actions>
   <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.21 //@datums.23/@propertyDatums.3 //@datums.21/@propertyDatums.0 //@datums.21/@propertyDatums.1 //@datums.21/@propertyDatums.5 //@datums.21/@propertyDatums.2 //@datums.23/@propertyDatums.4" requisites="//@datums.1 //@datums.23 //@datums.16 //@datums.3 //@datums.20 //@datums.3/@propertyDatums.1 //@datums.16/@propertyDatums.0 //@datums.16/@propertyDatums.3 //@datums.23/@propertyDatums.0 //@datums.23/@propertyDatums.1 //@datums.23/@propertyDatums.2 //@datums.20/@propertyDatums.0 //@datums.23/@propertyDatums.3 //@datums.21/@propertyDatums.2 //@datums.20/@propertyDatums.2" order="5" parent="//@actions.17" arguments="//@datums.1 //@datums.23 //@datums.16 //@datums.3 //@datums.20">
+=======
+    <distinctArguments>
+      <primaryArguments datum="//@datums.22">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.associationToForeignKey_MR.middle.guard.a2f"/>
+=======
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.22 //@datums.22/@propertyDatums.0 //@datums.22/@propertyDatums.3 //@datums.22/@propertyDatums.1 //@datums.22/@propertyDatums.2 //@datums.21/@propertyDatums.3 //@datums.21/@propertyDatums.4" requisites="//@datums.3 //@datums.16 //@datums.20 //@datums.1 //@datums.21 //@datums.16/@propertyDatums.2 //@datums.3/@propertyDatums.1 //@datums.16/@propertyDatums.0 //@datums.21/@propertyDatums.0 //@datums.21/@propertyDatums.1 //@datums.20/@propertyDatums.1 //@datums.21/@propertyDatums.2 //@datums.20/@propertyDatums.2 //@datums.21/@propertyDatums.3 //@datums.22/@propertyDatums.0" order="15" parent="//@actions.17" arguments="//@datums.3 //@datums.16 //@datums.20 //@datums.1 //@datums.21">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.21">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.associationToForeignKey_LM.uml.guard.a"/>
+      </primaryArguments>
+      <secondaryArguments datum="//@datums.3">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.associationToForeignKey_LM.middle.guard.p2s"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.16">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.associationToForeignKey_LM.middle.guard.dc2t"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.20">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.associationToForeignKey_LM.uml.guard.dc"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.20">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.associationToForeignKey_LM.uml.guard.sc"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.1">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.associationToForeignKey_LM.uml.guard.p"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.16">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.associationToForeignKey_LM.middle.guard.sc2t"/>
+      </secondaryArguments>
+    </distinctArguments>
+    <mapping href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#m..umlRdbms.associationToForeignKey_LM"/>
+  </actions>
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.17 //@datums.23 //@datums.17/@propertyDatums.0 //@datums.22/@propertyDatums.4 //@datums.23/@propertyDatums.0 //@datums.17/@propertyDatums.4 //@datums.22/@propertyDatums.5 //@datums.23/@propertyDatums.2 //@datums.17/@propertyDatums.2 //@datums.23/@propertyDatums.3 //@datums.17/@propertyDatums.5 //@datums.17/@propertyDatums.1 //@datums.23/@propertyDatums.1 //@datums.19/@propertyDatums.4 //@datums.19/@propertyDatums.3 //@datums.18/@propertyDatums.5 //@datums.23/@propertyDatums.4" requisites="//@datums.22 //@datums.5 //@datums.16 //@datums.18 //@datums.3 //@datums.19 //@datums.16/@propertyDatums.3 //@datums.16/@propertyDatums.0 //@datums.3/@propertyDatums.2 //@datums.22/@propertyDatums.1 //@datums.22/@propertyDatums.2 //@datums.18/@propertyDatums.0 //@datums.19/@propertyDatums.1 //@datums.18/@propertyDatums.1 //@datums.17/@propertyDatums.0 //@datums.18/@propertyDatums.2 //@datums.22/@propertyDatums.0" order="21" parent="//@actions.17" arguments="//@datums.22 //@datums.5 //@datums.16 //@datums.18 //@datums.3 //@datums.19">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.22">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.associationToForeignKey_MR.middle.guard.a2f"/>
+      </primaryArguments>
+      <secondaryArguments datum="//@datums.5">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.associationToForeignKey_MR.rdbms.guard.s"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.16">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.associationToForeignKey_MR.middle.guard.sc2t"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.16">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.associationToForeignKey_MR.middle.guard.dc2t"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.3">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.associationToForeignKey_MR.middle.guard.p2s"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.19">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.associationToForeignKey_MR.rdbms.guard.st"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.19">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.associationToForeignKey_MR.rdbms.guard.dt"/>
+      </secondaryArguments>
+    </distinctArguments>
+    <distinctArguments>
+      <primaryArguments datum="//@datums.18">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.associationToForeignKey_MR.rdbms.guard.rk"/>
+>>>>>>> hhoyos/mtc
+      </primaryArguments>
+    </distinctArguments>
+    <mapping href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#m..umlRdbms.associationToForeignKey_MR"/>
+  </actions>
+<<<<<<< HEAD
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.26 //@datums.25/@propertyDatums.3 //@datums.25/@propertyDatums.4 //@datums.25/@propertyDatums.2 //@datums.25/@propertyDatums.1 //@datums.26/@propertyDatums.4 //@datums.26/@propertyDatums.0 //@datums.26/@propertyDatums.5" requisites="//@datums.17 //@datums.24 //@datums.14 //@datums.8 //@datums.9 //@datums.9/@propertyDatums.1 //@datums.17/@propertyDatums.2 //@datums.24/@propertyDatums.0 //@datums.24/@propertyDatums.1 //@datums.24/@propertyDatums.2 //@datums.24/@propertyDatums.3" arguments="//@datums.17 //@datums.24 //@datums.14 //@datums.8 //@datums.9">
+>>>>>>> Stashed changes
     <distinctArguments>
       <primaryArguments datum="//@datums.23">
         <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.associationToForeignKey_LM.uml.guard.a"/>
@@ -714,9 +1413,74 @@
       <primaryArguments datum="//@datums.27">
         <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.complexAttributePrimitiveAttributes_LM.middle.guard.fao"/>
       </primaryArguments>
+<<<<<<< Updated upstream
       <secondaryArguments datum="//@datums.24">
         <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.complexAttributePrimitiveAttributes_LM.uml.guard.ca"/>
       </secondaryArguments>
+=======
+    </distinctArguments>
+    <distinctArguments>
+      <primaryArguments datum="//@datums.14">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.complexAttributePrimitiveAttributes_LM.uml.guard.c"/>
+=======
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.26 //@datums.25/@propertyDatums.3 //@datums.25/@propertyDatums.1 //@datums.25/@propertyDatums.2 //@datums.25/@propertyDatums.4 //@datums.26/@propertyDatums.1 //@datums.26/@propertyDatums.4 //@datums.26/@propertyDatums.5" requisites="//@datums.24 //@datums.20 //@datums.11 //@datums.16 //@datums.6 //@datums.16/@propertyDatums.2 //@datums.6/@propertyDatums.1 //@datums.24/@propertyDatums.0 //@datums.24/@propertyDatums.1 //@datums.24/@propertyDatums.2 //@datums.24/@propertyDatums.3" order="22" parent="//@actions.17" arguments="//@datums.24 //@datums.20 //@datums.11 //@datums.16 //@datums.6">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.24">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.classPrimitiveAttributes_LM.uml.guard.a"/>
+      </primaryArguments>
+      <secondaryArguments datum="//@datums.20">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.classPrimitiveAttributes_LM.uml.guard.c"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.11">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.classPrimitiveAttributes_LM.uml.guard.t"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.16">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.classPrimitiveAttributes_LM.middle.guard.fao"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.6">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.classPrimitiveAttributes_LM.middle.guard.p2n"/>
+      </secondaryArguments>
+    </distinctArguments>
+    <mapping href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#m..umlRdbms.classPrimitiveAttributes_LM"/>
+  </actions>
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.27 //@datums.25/@propertyDatums.3 //@datums.25/@propertyDatums.1 //@datums.25/@propertyDatums.4 //@datums.27/@propertyDatums.2 //@datums.25/@propertyDatums.2 //@datums.26/@propertyDatums.5" requisites="//@datums.20 //@datums.24 //@datums.16 //@datums.16/@propertyDatums.2 //@datums.24/@propertyDatums.0 //@datums.24/@propertyDatums.1 //@datums.24/@propertyDatums.3 //@datums.14/@propertyDatums.1 //@datums.25/@propertyDatums.0 //@datums.24/@propertyDatums.2" order="23" parent="//@actions.17" arguments="//@datums.20 //@datums.24 //@datums.16">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.24">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.classComplexAttributes_LM.uml.guard.a"/>
+      </primaryArguments>
+      <secondaryArguments datum="//@datums.20">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.classComplexAttributes_LM.uml.guard.t"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.16">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.classComplexAttributes_LM.middle.guard.fao"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.20">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.classComplexAttributes_LM.uml.guard.c"/>
+      </secondaryArguments>
+    </distinctArguments>
+    <mapping href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#m..umlRdbms.classComplexAttributes_LM"/>
+  </actions>
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.26 //@datums.25/@propertyDatums.4 //@datums.25/@propertyDatums.3 //@datums.25/@propertyDatums.1 //@datums.26/@propertyDatums.4 //@datums.25/@propertyDatums.2 //@datums.26/@propertyDatums.1 //@datums.26/@propertyDatums.5" requisites="//@datums.27 //@datums.20 //@datums.24 //@datums.6 //@datums.11 //@datums.27/@propertyDatums.0 //@datums.6/@propertyDatums.1 //@datums.24/@propertyDatums.1 //@datums.24/@propertyDatums.0 //@datums.24/@propertyDatums.3 //@datums.27/@propertyDatums.1 //@datums.24/@propertyDatums.2" order="24" parent="//@actions.17" arguments="//@datums.27 //@datums.20 //@datums.24 //@datums.6 //@datums.11">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.24">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.complexAttributePrimitiveAttributes_LM.uml.guard.ca"/>
+>>>>>>> hhoyos/mtc
+      </primaryArguments>
+      <secondaryArguments datum="//@datums.27">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.complexAttributePrimitiveAttributes_LM.middle.guard.fao"/>
+      </secondaryArguments>
+    </distinctArguments>
+    <distinctArguments>
+      <primaryArguments datum="//@datums.24">
+<<<<<<< HEAD
+        <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.complexAttributePrimitiveAttributes_LM.uml.guard.a"/>
+      </primaryArguments>
+    </distinctArguments>
+    <distinctArguments>
+      <primaryArguments datum="//@datums.9">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.complexAttributePrimitiveAttributes_LM.middle.guard.p2n"/>
+      </primaryArguments>
+>>>>>>> Stashed changes
     </distinctArguments>
     <mapping href="UmlToRdbms.qvtp.qvtias#m..umlRdbms.complexAttributePrimitiveAttributes_LM"/>
   </actions>
@@ -732,17 +1496,67 @@
     <distinctArguments>
       <primaryArguments datum="//@datums.24">
         <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.complexAttributeComplexAttributes_LM.uml.guard.ca"/>
+=======
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.complexAttributePrimitiveAttributes_LM.uml.guard.a"/>
       </primaryArguments>
+<<<<<<< Updated upstream
       <secondaryArguments datum="//@datums.27">
         <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.complexAttributeComplexAttributes_LM.middle.guard.fao"/>
       </secondaryArguments>
       <secondaryArguments datum="//@datums.20">
         <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.complexAttributeComplexAttributes_LM.uml.guard.c"/>
+=======
+      <secondaryArguments datum="//@datums.20">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.complexAttributePrimitiveAttributes_LM.uml.guard.c"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.6">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.complexAttributePrimitiveAttributes_LM.middle.guard.p2n"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.11">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.complexAttributePrimitiveAttributes_LM.uml.guard.t"/>
       </secondaryArguments>
     </distinctArguments>
-    <mapping href="UmlToRdbms.qvtp.qvtias#m..umlRdbms.complexAttributeComplexAttributes_LM"/>
+    <mapping href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#m..umlRdbms.complexAttributePrimitiveAttributes_LM"/>
   </actions>
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.27 //@datums.25/@propertyDatums.3 //@datums.25/@propertyDatums.4 //@datums.27/@propertyDatums.2 //@datums.25/@propertyDatums.1 //@datums.25/@propertyDatums.2 //@datums.26/@propertyDatums.5" requisites="//@datums.20 //@datums.24 //@datums.27 //@datums.27/@propertyDatums.0 //@datums.24/@propertyDatums.1 //@datums.24/@propertyDatums.0 //@datums.24/@propertyDatums.3 //@datums.14/@propertyDatums.1 //@datums.25/@propertyDatums.0 //@datums.27/@propertyDatums.1 //@datums.24/@propertyDatums.2" order="25" parent="//@actions.17" arguments="//@datums.20 //@datums.24 //@datums.27">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.24">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.complexAttributeComplexAttributes_LM.uml.guard.a"/>
+>>>>>>> hhoyos/mtc
+      </primaryArguments>
+      <secondaryArguments datum="//@datums.20">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.complexAttributeComplexAttributes_LM.uml.guard.t"/>
+      </secondaryArguments>
+    </distinctArguments>
+    <distinctArguments>
+      <primaryArguments datum="//@datums.27">
+<<<<<<< HEAD
+        <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.complexAttributeComplexAttributes_LM.middle.guard.fao"/>
+=======
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.complexAttributeComplexAttributes_LM.middle.guard.fao"/>
+>>>>>>> hhoyos/mtc
+      </primaryArguments>
+      <secondaryArguments datum="//@datums.20">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.complexAttributeComplexAttributes_LM.uml.guard.c"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.24">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.complexAttributeComplexAttributes_LM.uml.guard.ca"/>
+>>>>>>> Stashed changes
+      </secondaryArguments>
+    </distinctArguments>
+    <mapping href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#m..umlRdbms.complexAttributeComplexAttributes_LM"/>
+  </actions>
+<<<<<<< Updated upstream
   <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.19 //@datums.19/@propertyDatums.4 //@datums.26/@propertyDatums.6 //@datums.19/@propertyDatums.6 //@datums.19/@propertyDatums.2 //@datums.19/@propertyDatums.0 //@datums.19/@propertyDatums.1 //@datums.17/@propertyDatums.3" requisites="//@datums.16 //@datums.8 //@datums.17 //@datums.26 //@datums.6 //@datums.16/@propertyDatums.2 //@datums.6/@propertyDatums.2 //@datums.26/@propertyDatums.0 //@datums.16/@propertyDatums.4 //@datums.25/@propertyDatums.0 //@datums.26/@propertyDatums.1 //@datums.26/@propertyDatums.2 //@datums.26/@propertyDatums.3" order="16" parent="//@actions.17" arguments="//@datums.16 //@datums.8 //@datums.17 //@datums.26 //@datums.6">
+=======
+<<<<<<< HEAD
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.20 //@datums.26/@propertyDatums.6 //@datums.20/@propertyDatums.6 //@datums.20/@propertyDatums.4 //@datums.20/@propertyDatums.2 //@datums.20/@propertyDatums.0 //@datums.20/@propertyDatums.1 //@datums.19/@propertyDatums.3" requisites="//@datums.9 //@datums.26 //@datums.19 //@datums.17 //@datums.11 //@datums.9/@propertyDatums.2 //@datums.17/@propertyDatums.3 //@datums.26/@propertyDatums.0 //@datums.26/@propertyDatums.1 //@datums.17/@propertyDatums.4 //@datums.25/@propertyDatums.0 //@datums.26/@propertyDatums.2 //@datums.26/@propertyDatums.3" arguments="//@datums.9 //@datums.26 //@datums.19 //@datums.17 //@datums.11">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.9">
+        <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.attributeColumns_MR.middle.guard.p2n"/>
+      </primaryArguments>
+    </distinctArguments>
+>>>>>>> Stashed changes
     <distinctArguments>
       <primaryArguments datum="//@datums.26">
         <variable href="UmlToRdbms.qvtp.qvtias#qV..umlRdbms.attributeColumns_MR.middle.guard.a2c"/>
@@ -761,6 +1575,30 @@
       </secondaryArguments>
     </distinctArguments>
     <mapping href="UmlToRdbms.qvtp.qvtias#m..umlRdbms.attributeColumns_MR"/>
+=======
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.17 //@datums.17/@propertyDatums.4 //@datums.26/@propertyDatums.6 //@datums.17/@propertyDatums.6 //@datums.17/@propertyDatums.2 //@datums.17/@propertyDatums.0 //@datums.17/@propertyDatums.1 //@datums.19/@propertyDatums.3" requisites="//@datums.16 //@datums.8 //@datums.6 //@datums.19 //@datums.26 //@datums.16/@propertyDatums.3 //@datums.6/@propertyDatums.2 //@datums.26/@propertyDatums.0 //@datums.26/@propertyDatums.1 //@datums.16/@propertyDatums.4 //@datums.25/@propertyDatums.0 //@datums.26/@propertyDatums.2 //@datums.26/@propertyDatums.3" order="26" parent="//@actions.17" arguments="//@datums.16 //@datums.8 //@datums.6 //@datums.19 //@datums.26">
+    <distinctArguments>
+      <primaryArguments datum="//@datums.26">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.attributeColumns_MR.middle.guard.a2c"/>
+      </primaryArguments>
+      <secondaryArguments datum="//@datums.16">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.attributeColumns_MR.middle.guard.c2t"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.8">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.attributeColumns_MR.rdbms.guard.ct"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.6">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.attributeColumns_MR.middle.guard.p2n"/>
+      </secondaryArguments>
+      <secondaryArguments datum="//@datums.19">
+        <variable href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#qV..umlRdbms.attributeColumns_MR.rdbms.guard.t"/>
+      </secondaryArguments>
+    </distinctArguments>
+    <mapping href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#m..umlRdbms.attributeColumns_MR"/>
+  </actions>
+  <actions xsi:type="qvtschedule:MappingAction" children="//@actions.0 //@actions.1 //@actions.2 //@actions.3 //@actions.4 //@actions.5 //@actions.6 //@actions.7 //@actions.8 //@actions.9 //@actions.10 //@actions.11 //@actions.12 //@actions.13 //@actions.14 //@actions.15 //@actions.16">
+    <mapping href="platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms//UmlToRdbms.qvtp.qvtias#m..umlRdbms.__root__"/>
+>>>>>>> hhoyos/mtc
   </actions>
   <actions xsi:type="qvtschedule:MappingAction" children="//@actions.0 //@actions.1 //@actions.9 //@actions.8 //@actions.11 //@actions.5 //@actions.3 //@actions.6 //@actions.4 //@actions.12 //@actions.13 //@actions.15 //@actions.14 //@actions.2 //@actions.7 //@actions.16 //@actions.10">
     <mapping href="UmlToRdbms.qvtp.qvtias#m..umlRdbms.__root__"/>
