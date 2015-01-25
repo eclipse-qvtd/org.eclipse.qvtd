@@ -12,6 +12,7 @@ import "../helpers/QVTHelpers.eol";
 import "../helpers/QVTsHelpers.eol";
 import "RootMapping.eol";
 import "MapOrdering.eol";
+import "ArgumentDerivation.eol";
 
  /****l* /org.eclipse.qvtd.build.etl.scheduling/SimpleNestedSchedule
  * NAME
@@ -49,71 +50,29 @@ var s = QVTs!Schedule.all.first();
 // Map Ordering
 s.doMapOrdering();
 
-// Create root mapping
-var t = QVTp!Transformation.all.first(); 
-var bm = t.getRootMapping();
-
 // Schedule
 s.simpleNest();
+
+
 //QVTp.setCachingEnabled(false);
 //t.forceOrder();
 //QVTp.setCachingEnabled(true);
-var ma = new QVTs!MappingAction;
-ma.order = 0;
+
+// Create root mapping
+//var t = QVTp!Transformation.all.first(); 
+//var bm = t.getRootMapping();
+
+
+///var ma = new QVTs!MappingAction;
+//ma.order = 0;
 // Parentless mapping actions to the root.
-for (na in s.actions.select(ma | not ma.parent.isDefined()).sortBy(a | a.order)) {
-    na.parent = ma;     // All mappings invoked from the root in order
-}
-ma.schedule = s;
-ma.mapping = bm;
-        
+//for (na in s.actions.select(ma | not ma.parent.isDefined()).sortBy(a | a.order)) {
+//    na.parent = ma;     // All mappings invoked from the root in order
+//}
+//ma.schedule = s;
+//ma.mapping = bm;
 "Nested Scheduling Done".println();
 
-// Use input containment to drive nesting
-operation QVTs!Schedule containmentNest() {
-    // Do a Depth first search of the containment tree of the input model
-    var queue = new Sequence();
-    // Marked visited mappings to avoid loops
-    var visitedAct = new Sequence();
-    var visitedNodes = new Sequence();
-    queue.addAll(lTree!Node.all().select(n | n.isRootElementCandidate()));
-    while (not queue.isEmpty()) {
-        var n = queue.first();
-        queue.remove(n);
-        visitedNodes.add(n);
-        // Do stuff with n
-        // n.println("n ");
-        // Visit all the children recursively to find nestings
-        for (child in n.children) {
-            nestMappings(child);
-            // TODO FINISH THIS!
-        }
-        
-        // Find all the mappings that have primary argument that has a class datum
-        // that corresponds to the  (or subtype)
-        // corresponding to the type of the target node
-        
-        // Find all the mappings that have an output type (or subtype)
-        // corresponding to the type of the target node
-        var baseDatum = self.datums.selectOne(x | x.correspondsWith(n));
-        if (baseDatum.isDefined()) {
-            for (ma in self.actions.select(aa | aa.productions.exists(e | e.isDatumOrSubdatum(baseDatum)))) { 
-                // Find the predecesors and linearize
-                if (visitedAct.excludes(ma))
-                    ma.getOrdering(visitedAct);
-                for (pDatum in baseDatum.propertyDatums) {
-                    for (ma in self.actions.select(aa | aa.productions.exists(e | e = pDatum))) {
-                        if (visitedAct.excludes(ma))
-                            ma.getOrdering(visitedAct);
-                    }
-                }
-            }
-        }
-        
-        queue.addAll(n.children.excludingAll(visitedNodes));
-    }
-
-}
 
 /****o* Scheduler/simpleNest
  * NAME
@@ -127,65 +86,132 @@ operation QVTs!Schedule containmentNest() {
  *  QVTs!Schedule   The schedule
  */
 operation QVTs!Schedule simpleNest() {
-    for (ma in self.actions.sortBy(a | a.order)) {
-        ma.mapping.name.println("ma ");
-        var qin = ma.mapping.getInputVariables();
-        // If the mapping has two variables of the same type, try to nest, else put in the root
-        if (ma.mapping.getInputVariables().collect(v | v.type).size() == ma.mapping.getInputVariables().collect(v | v.type).asSet().size()) {
-            // Visit the predecesor mappings in "clossest" order, i.e. higher to lower index
-            for (pma in ma.getPredecessors().sortBy(aa | aa.order).invert()) {
-                pma.mapping.println("    pma: ");
-                var nav = pma.getAvailableVariables();
-                if (nav.collect(v | v.type).includesAll(qin.collect(v | v.type))) {
-                    ma.parent = pma;
-                    break;              // As low as possible
-                } else {
-                    var matched = qin.select(v | nav.collect(v | v.type).includes(v.type));
-                    var missing = qin.select(v | not nav.collect(v | v.type).includes(v.type));
-                    // We are missing some types, can we derive them?
-                    derivedMissing(matched, missing);
-                    if (missing.isEmpty()) {
-                        ma.parent = pma;
-                        break;              // As low as possible
-                    } else {
-                        // One of the still missing variables can be used as a loop variable
-                        var loopV = null;
-                        for (m in missing) {
-                            for (mv in matched) {
-                                var relations = m.hasRelation(mv);
-                                if (not relations.isEmpty()
-                                        and relations.first().opposite.isDefined()
-                                        and relations.first().opposite.isComposite) {
-                                    loopV = m;
-                                    break;
-                                }
-                            }
-                            if (loopV <> null) {
-                                break;
-                            }
-                        }
-                        if (loopV <> null) {
-                            missing.remove(loopV);
-                            matched.add(loopV);
-                            // Try to derive more variables from the loop
-                            // We are missing some types, can we derive them?
-                            derivedMissing(matched, missing);
-
-                            // Once we have a loop varaible, we dont need a perfect
-                            // match, the mising varaibles would just have to be
-                            // global searched. Another option is to look
-                            // for another nesting position. However, since
-                            // we are matching against the whole predecesor
-                            // available variables, there is no way we can
-                            // find better matches higher in the tree.
-                            ma.parent = pma;
-                            break;              // As low as possible
-                        }
-                    }
+    // Input containment nesting
+    var maDerivations = s.defineArgumentDerivation();
+    var rootNodes = lTree!Node.all().select(n | n.parent.isEmpty());
+    // All mappings that have a requirement of a root type, in principle need to be
+    // invoked from the root mapping
+    for (ma in QVTs!MappingAction.all()
+            .select(ma | ma.requisites.exists(r : QVTs!ClassDatum |
+                    rootNodes.collect(n | n.element.name).includes(r.type.name)))) {
+        ma.mapping.println("    ma: ");
+        // Select the best DataParameter combination and save its cost for later comparision.
+        var bestCost = ma.arguments.size() +1 ;
+        var bestCombination = 0;
+        maDerivations.containsKey(ma).println();
+        for (comb in maDerivations.get(ma)) {
+            comb.println("comb ");
+            comb.keySet().size().println();
+            for (i in 1.to(comb.keySet().size())) {
+                var currentComb = comb.get(comb.keySet().at(i-1));
+                currentComb.println();
+                var combCost = cost(currentComb);
+                if ((currentComb.first().size() + currentComb.last().size()) < ma.arguments.size()) {
+                    "Missing bindings".println();
+                    // Serach for other combinations that complete the bindings, adjust cost accordingly;
+                    
+                }
+                if (combCost < bestCost) {
+                    i.println("found best ");
+                    bestCost = combCost;
+                    bestCombination = i;
                 }
             }
         }
+        bestCombination.println("best ");
     }
+}
+
+operation cost(dataParameters : Sequence) {
+    dataParameters.println("cost ");
+    /*  A MappingAction can have
+            [ma, [DataParameter, {{loopDataParameters}, {directDataParameters}}]]
+        For the same mapping we preffer no loop variables, i.e. probably a previous mapping is already doing the loop so why repeat it?
+            cost = 2*#loopDataParameters + #directDataParameters
+        However, not all DataParameter combinations are complete, in the sense that we can bind all of the input variables of the mapping.
+        Hence, the above equation will give lower (best) values to incomplete combinations. Missing bindings will need to be derived from
+        another DataParameter combination, we will add the cost # of all the combinations required to complete the bindings (if theere
+        are different combinations that complete the bindings, we will chose the cheapest.
+            cost = 2*#loopDataParameters + #directDataParameters + cost(missingBindings)
+        Invoking a mapping from the root is very expensive as each DataParameter must be bound using a global search. If the DataParameter
+        exists in the context of the caller the cost is 1, if we have to do a global search the cost is 10.
+            cost = 2*#loopDataParameters + #directDataParameters + cost(missingBindings) + (DataParameter isBound ? 10 : 1)
+    */
+    return 2*dataParameters.first().size() + dataParameters.last().size();
+}
+
+operation lTree!Node findNesting(maDerivations : Map) {
+    self.element.name.println("node type ");
+    // TODO Classes should be matched using MetamodelManager.getEcoreOfPivot because the Node element is an EClass and the 
+    // ClassDatum.class is a class (pivot class).
+    
+    
+        
+    
+    /*
+        for (ma in self.actions.sortBy(a | a.order)) {
+	        ma.mapping.name.println("ma ");
+	        var qin = ma.mapping.getInputVariables();
+	        // If the mapping has two variables of the same type, try to nest, else put in the root
+	        if (ma.mapping.getInputVariables().collect(v | v.type).size() == ma.mapping.getInputVariables().collect(v | v.type).asSet().size()) {
+	            // Visit the predecesor mappings in "clossest" order, i.e. higher to lower index
+	            for (pma in ma.getPredecessors().sortBy(aa | aa.order).invert()) {
+	                pma.mapping.println("    pma: ");
+	                var nav = pma.getAvailableVariables();
+	                if (nav.collect(v | v.type).includesAll(qin.collect(v | v.type))) {
+	                    ma.parent = pma;
+	                    break;              // As low as possible
+	                } else {
+	                    var matched = qin.select(v | nav.collect(v | v.type).includes(v.type));
+	                    var missing = qin.select(v | not nav.collect(v | v.type).includes(v.type));
+	                    // We are missing some types, can we derive them?
+	                    derivedMissing(matched, missing);
+	                    if (missing.isEmpty()) {
+	                        ma.parent = pma;
+	                        break;              // As low as possible
+	                    } else {
+	                        // One of the still missing variables can be used as a loop variable
+	                        var loopV = null;
+	                        for (m in missing) {
+	                            for (mv in matched) {
+	                                var relations = m.hasRelation(mv);
+	                                if (not relations.isEmpty()
+	                                        and relations.first().opposite.isDefined()
+	                                        and relations.first().opposite.isComposite) {
+	                                    loopV = m;
+	                                    break;
+	                                }
+	                            }
+	                            if (loopV <> null) {
+	                                break;
+	                            }
+	                        }
+	                        if (loopV <> null) {
+	                            missing.remove(loopV);
+	                            matched.add(loopV);
+	                            // Try to derive more variables from the loop
+	                            // We are missing some types, can we derive them?
+	                            derivedMissing(matched, missing);
+	
+	                            // Once we have a loop varaible, we dont need a perfect
+	                            // match, the mising varaibles would just have to be
+	                            // global searched. Another option is to look
+	                            // for another nesting position. However, since
+	                            // we are matching against the whole predecesor
+	                            // available variables, there is no way we can
+	                            // find better matches higher in the tree.
+	                            ma.parent = pma;
+	                            break;              // As low as possible
+	                        }
+	                    }
+	                }
+	            }
+	        }
+	    }
+        
+        */
+       
+    
 }
 
 // ** =================================================== **

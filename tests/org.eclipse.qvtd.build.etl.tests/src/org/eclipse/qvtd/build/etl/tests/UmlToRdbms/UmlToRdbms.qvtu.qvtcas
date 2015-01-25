@@ -1440,11 +1440,11 @@
             </conditionExpression>
           </predicate>
           <predicate>
-            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
-                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.FromAttributeOwner"
-                  referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.FromAttribute.owner">
-                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
+            <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType ../../../../../../../../../org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas#Boolean"
+                referredOperation="../../../../../../../../../org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUMLtoRDBMS.ecore.oclas#T.simpleumltordbms.FromAttributeOwner"
+                  referredProperty="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.FromAttribute.owner">
+                <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUMLtoRDBMS.ecore.oclas#T.simpleumltordbms.AttributeToColumn"
                     referredVariable="#qV..umlRdbms.attributeColumns.bottom.a2c"/>
               </ownedSource>
               <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleUMLtoRDBMS.ecore.oclas#T.simpleumltordbms.ClassToTable"
@@ -1491,11 +1491,11 @@
           </guardPattern>
           <bottomPattern>
             <predicate>
-              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
-                  referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-                <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.PrimitiveToName"
-                    referredProperty="UMLtoRDBMS.ecore.oclas#p.umltordbms.AttributeToColumn.type">
-                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class UMLtoRDBMS.ecore.oclas#T.umltordbms.AttributeToColumn"
+              <conditionExpression xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType ../../../../../../../../../org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas#Boolean"
+                  referredOperation="../../../../../../../../../org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+                <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimpleUMLtoRDBMS.ecore.oclas#T.simpleumltordbms.PrimitiveToName"
+                    referredProperty="SimpleUMLtoRDBMS.ecore.oclas#p.simpleumltordbms.AttributeToColumn.type">
+                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimpleUMLtoRDBMS.ecore.oclas#T.simpleumltordbms.AttributeToColumn"
                       referredVariable="#qV..umlRdbms.attributeColumns.bottom.a2c"/>
                 </ownedSource>
                 <ownedArguments xsi:type="pivot:VariableExp" type="pivot:Class SimpleUMLtoRDBMS.ecore.oclas#T.simpleumltordbms.PrimitiveToName"
