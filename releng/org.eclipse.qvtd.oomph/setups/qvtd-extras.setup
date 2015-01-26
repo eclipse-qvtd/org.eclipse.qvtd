@@ -5,6 +5,8 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:setup="http://www.eclipse.org/oomph/setup/1.0"
     xmlns:setup.p2="http://www.eclipse.org/oomph/setup/p2/1.0"
+    xmlns:setup.targlets="http://www.eclipse.org/oomph/setup/targlets/1.0"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/targlets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupTarglets.ecore"
     name="extras"
     label="Extras">
   <setupTask
@@ -27,6 +29,22 @@
           url="http://download.eclipse.org/epsilon/interim/"/>
       <repository
           url="http://download.eclipse.org/epsilon/updates/"/>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.targlets:TargletTask">
+      <targlet
+          name="Epsilon Requirements"
+          activeRepositoryList="${eclipse.target.platform}">
+        <requirement
+            name="org.eclipse.epsilon.emf.feature.feature.group"/>
+        <requirement
+            name="org.eclipse.epsilon.core.feature.feature.group"/>
+        <repositoryList
+            name="Mars">
+          <repository
+              url="http://download.eclipse.org/epsilon/interim/"/>
+        </repositoryList>
+      </targlet>
     </setupTask>
     <description>Epsilon related configuration tasks</description>
   </setupTask>
