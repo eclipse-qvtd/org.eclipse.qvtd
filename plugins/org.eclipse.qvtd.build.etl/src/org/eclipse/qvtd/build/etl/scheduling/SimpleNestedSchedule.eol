@@ -78,15 +78,72 @@ s.simpleNest();
  * NAME
  *  simpleNest - Define the mapping action nesting.
  * FUNCTION
- *  Places a mapping action by searching up the the mapping dependencies to
- *  locate the mapping for which the context variables result in the maximum
- *  reuse of work already done. This is, the context that offers the biggest
- *  number of already assigned variables.
+ *  Constructs the schedule tree by finding the best place for each
+ *  node (MappingAction).
  * CONTEXT
  *  QVTs!Schedule   The schedule
  */
 operation QVTs!Schedule simpleNest() {
-    // Input containment nesting
+	var rootMA = new QVTs!MappingAction;
+	rootMA.children = new Sequence();
+	for (ma in QVTs!MappingAction.all().sortBy(ma | ma.order).excluding(rootMA)) {
+		for (rma in rootMA.children) {
+			if (rma.placeAtNode(ma)) {
+				break;
+			}
+		}
+		if (not ma.parent.isDefined()) {
+			rootMA.children.add(ma);
+			rootMA.defineBindings(ma);
+		}
+	}
+}
+
+operation QVTs!MappingAction placeAtNode(newMA : QVTs!MappingAction) {
+	for (ch in self.children) {
+		ch.placeAtNode(newMA);
+	}
+	if (not newMA.parent.isDefined() and self.meetRequirements(newMA)) {
+		self.childre.add(newMA);
+		self.defineBindings(newMA);
+	}
+}
+
+operation QVTs!MappingAction meetRequirements(newMA : QVTs!MappingAction) : Boolean {
+	
+	// All predecesors exist to my left
+	if (self.predecessorsToLeft(newMA)) {
+		// I can bind all variables
+		var maDerivations = newMA.defineArgumentDerivation();
+		for(pa in maDerivations.keySet().sortBy(k | cost(maDerivations.get(key)))) {
+			var nav = self.getAvailableVariables();
+			// I can bind the PrimaryArgument
+            if (nav.collect(v | v.type).includes(pa.type)) {
+				// Are all varaibles covered?
+				if (not (ma.arguments.size() == maDerivations.get(pa).last().size() + maDerivations.get(pa).first().size() + 1)) {
+					"missing bidnings! Complete this!".println();
+					return false;
+				} else {
+					return true;
+				}
+            }
+        }
+	}
+	return false;
+}
+
+operation QVTs!MappingAction predecessorsToLeft(newMA : QVTs!MappingAction) : Boolean {
+	
+	var required = 1.to(newMA.order);
+	required = required.excludingAll(self.closure(ma | ma.parent).includingAll(self.closure(ma | ma.children)));
+	return required.isEmpty();
+	
+}
+
+operation QVTs!MappingAction defineBindings(newMA : QVTs!MappingAction) {
+}
+
+/*    // Input containment nesting
     var maDerivations = s.defineArgumentDerivation();
     var rootNodes = lTree!Node.all().select(n | n.parent.isEmpty());
     // All mappings that have a requirement of a root type, in principle need to be
@@ -94,33 +151,31 @@ operation QVTs!Schedule simpleNest() {
     for (ma in QVTs!MappingAction.all()
             .select(ma | ma.requisites.exists(r : QVTs!ClassDatum |
                     rootNodes.collect(n | n.element.name).includes(r.type.name)))) {
-        ma.mapping.println("    ma: ");
+        ma.mapping.println("ma: ");
         // Select the best DataParameter combination and save its cost for later comparision.
-        var bestCost = ma.arguments.size() +1 ;
+        var bestCost = ma.arguments.size()*2 + 1; 		// Worst case we need loops on all arguments 
+        bestCost.println("worstCost ");
         var bestCombination = 0;
         maDerivations.containsKey(ma).println();
         for (comb in maDerivations.get(ma)) {
-            comb.println("comb ");
-            comb.keySet().size().println();
             for (i in 1.to(comb.keySet().size())) {
                 var currentComb = comb.get(comb.keySet().at(i-1));
-                currentComb.println();
                 var combCost = cost(currentComb);
-                if ((currentComb.first().size() + currentComb.last().size()) < ma.arguments.size()) {
-                    "Missing bindings".println();
+                combCost.println("        cost: ");
+                if ((currentComb.first().size() + currentComb.last().size()) + 1 < ma.arguments.size()) { // +1 to take into consideration de key (DataParameter))
+                    "          Missing bindings".println();
                     // Serach for other combinations that complete the bindings, adjust cost accordingly;
                     
                 }
                 if (combCost < bestCost) {
-                    i.println("found best ");
                     bestCost = combCost;
                     bestCombination = i;
                 }
             }
         }
         bestCombination.println("best ");
-    }
-}
+    }*/
+
 
 operation cost(dataParameters : Sequence) {
     dataParameters.println("cost ");
@@ -137,6 +192,8 @@ operation cost(dataParameters : Sequence) {
         exists in the context of the caller the cost is 1, if we have to do a global search the cost is 10.
             cost = 2*#loopDataParameters + #directDataParameters + cost(missingBindings) + (DataParameter isBound ? 10 : 1)
     */
+    (2*dataParameters.first().size()).println("loop cost ");
+    dataParameters.last().size().println("direct cost ");
     return 2*dataParameters.first().size() + dataParameters.last().size();
 }
 
