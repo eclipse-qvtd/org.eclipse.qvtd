@@ -25,6 +25,8 @@
           name="org.eclipse.epsilon.emf.dt.feature.feature.group"/>
       <requirement
           name="org.eclipse.epsilon.emc.graphml.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.xsd.sdk.feature.group"/>
       <repository
           url="http://download.eclipse.org/epsilon/interim/"/>
       <repository
@@ -33,14 +35,18 @@
     <setupTask
         xsi:type="setup.targlets:TargletTask">
       <targlet
-          name="Epsilon Requirements"
+          name="MTC Requirements"
           activeRepositoryList="${eclipse.target.platform}">
         <requirement
             name="org.eclipse.epsilon.emf.feature.feature.group"/>
         <requirement
             name="org.eclipse.epsilon.core.feature.feature.group"/>
+        <requirement
+            name="org.eclipse.xsd.sdk.feature.group"/>
         <repositoryList
             name="Mars">
+          <repository
+              url="http://download.eclipse.org/releases/mars"/>
           <repository
               url="http://download.eclipse.org/epsilon/interim/"/>
         </repositoryList>
