@@ -4,7 +4,6 @@ package org.eclipse.qvtd.build.qvtschedule;
 
 import org.eclipse.ocl.pivot.Property;
 
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Property Datum</b></em>'.

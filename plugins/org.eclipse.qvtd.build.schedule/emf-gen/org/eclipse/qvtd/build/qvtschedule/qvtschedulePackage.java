@@ -38,7 +38,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://www.eclipse.org/qvt/0.1/QVTschedule/";
+	String eNS_URI = "http://www.eclipse.org/qvt/0.2/QVTschedule/";
 
 	/**
 	 * The package namespace name.
@@ -212,13 +212,22 @@ public interface qvtschedulePackage extends EPackage {
 	int ABSTRACT_ACTION__CHILDREN = 5;
 
 	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
+	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ACTION__ARGUMENTS = 6;
+	int ABSTRACT_ACTION__PARAMETERS = 6;
+
+	/**
+	 * The feature id for the '<em><b>Results</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_ACTION__RESULTS = 7;
 
 	/**
 	 * The feature id for the '<em><b>Schedule</b></em>' container reference.
@@ -227,7 +236,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ACTION__SCHEDULE = 7;
+	int ABSTRACT_ACTION__SCHEDULE = 8;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Action</em>' class.
@@ -236,7 +245,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ACTION_FEATURE_COUNT = 8;
+	int ABSTRACT_ACTION_FEATURE_COUNT = 9;
 
 	/**
 	 * The number of operations of the '<em>Abstract Action</em>' class.
@@ -549,13 +558,22 @@ public interface qvtschedulePackage extends EPackage {
 	int INPUT_ACTION__CHILDREN = ABSTRACT_ACTION__CHILDREN;
 
 	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
+	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INPUT_ACTION__ARGUMENTS = ABSTRACT_ACTION__ARGUMENTS;
+	int INPUT_ACTION__PARAMETERS = ABSTRACT_ACTION__PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Results</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INPUT_ACTION__RESULTS = ABSTRACT_ACTION__RESULTS;
 
 	/**
 	 * The feature id for the '<em><b>Schedule</b></em>' container reference.
@@ -649,13 +667,22 @@ public interface qvtschedulePackage extends EPackage {
 	int MAPPING_ACTION__CHILDREN = ABSTRACT_ACTION__CHILDREN;
 
 	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
+	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_ACTION__ARGUMENTS = ABSTRACT_ACTION__ARGUMENTS;
+	int MAPPING_ACTION__PARAMETERS = ABSTRACT_ACTION__PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Results</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_ACTION__RESULTS = ABSTRACT_ACTION__RESULTS;
 
 	/**
 	 * The feature id for the '<em><b>Schedule</b></em>' container reference.
@@ -676,13 +703,22 @@ public interface qvtschedulePackage extends EPackage {
 	int MAPPING_ACTION__MAPPING = ABSTRACT_ACTION_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Data Bindings</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_ACTION__DATA_BINDINGS = ABSTRACT_ACTION_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Mapping Action</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_ACTION_FEATURE_COUNT = ABSTRACT_ACTION_FEATURE_COUNT + 1;
+	int MAPPING_ACTION_FEATURE_COUNT = ABSTRACT_ACTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Mapping Action</em>' class.
@@ -694,6 +730,52 @@ public interface qvtschedulePackage extends EPackage {
 	int MAPPING_ACTION_OPERATION_COUNT = ABSTRACT_ACTION_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.DataBindingImpl <em>Data Binding</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.build.qvtschedule.impl.DataBindingImpl
+	 * @see org.eclipse.qvtd.build.qvtschedule.impl.qvtschedulePackageImpl#getDataBinding()
+	 * @generated
+	 */
+	int DATA_BINDING = 7;
+
+	/**
+	 * The feature id for the '<em><b>Source Exp</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_BINDING__SOURCE_EXP = 0;
+
+	/**
+	 * The feature id for the '<em><b>Target Data Parameter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_BINDING__TARGET_DATA_PARAMETER = 1;
+
+	/**
+	 * The number of structural features of the '<em>Data Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_BINDING_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>Data Binding</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DATA_BINDING_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.OutputActionImpl <em>Output Action</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -701,7 +783,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.build.qvtschedule.impl.qvtschedulePackageImpl#getOutputAction()
 	 * @generated
 	 */
-	int OUTPUT_ACTION = 7;
+	int OUTPUT_ACTION = 8;
 
 	/**
 	 * The feature id for the '<em><b>Productions</b></em>' reference list.
@@ -758,13 +840,22 @@ public interface qvtschedulePackage extends EPackage {
 	int OUTPUT_ACTION__CHILDREN = ABSTRACT_ACTION__CHILDREN;
 
 	/**
-	 * The feature id for the '<em><b>Arguments</b></em>' reference list.
+	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OUTPUT_ACTION__ARGUMENTS = ABSTRACT_ACTION__ARGUMENTS;
+	int OUTPUT_ACTION__PARAMETERS = ABSTRACT_ACTION__PARAMETERS;
+
+	/**
+	 * The feature id for the '<em><b>Results</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OUTPUT_ACTION__RESULTS = ABSTRACT_ACTION__RESULTS;
 
 	/**
 	 * The feature id for the '<em><b>Schedule</b></em>' container reference.
@@ -801,7 +892,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.build.qvtschedule.impl.qvtschedulePackageImpl#getPropertyDatum()
 	 * @generated
 	 */
-	int PROPERTY_DATUM = 8;
+	int PROPERTY_DATUM = 9;
 
 	/**
 	 * The feature id for the '<em><b>Super</b></em>' reference list.
@@ -919,7 +1010,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.build.qvtschedule.impl.qvtschedulePackageImpl#getSchedule()
 	 * @generated
 	 */
-	int SCHEDULE = 9;
+	int SCHEDULE = 10;
 
 	/**
 	 * The feature id for the '<em><b>Datums</b></em>' containment reference list.
@@ -1122,15 +1213,26 @@ public interface qvtschedulePackage extends EPackage {
 	EReference getAbstractAction_Children();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getArguments <em>Arguments</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getParameters <em>Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Arguments</em>'.
-	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractAction#getArguments()
+	 * @return the meta object for the reference list '<em>Parameters</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractAction#getParameters()
 	 * @see #getAbstractAction()
 	 * @generated
 	 */
-	EReference getAbstractAction_Arguments();
+	EReference getAbstractAction_Parameters();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getResults <em>Results</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Results</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractAction#getResults()
+	 * @see #getAbstractAction()
+	 * @generated
+	 */
+	EReference getAbstractAction_Results();
 
 	/**
 	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getSchedule <em>Schedule</em>}'.
@@ -1313,6 +1415,49 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMappingAction_Mapping();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.build.qvtschedule.MappingAction#getDataBindings <em>Data Bindings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Data Bindings</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.MappingAction#getDataBindings()
+	 * @see #getMappingAction()
+	 * @generated
+	 */
+	EReference getMappingAction_DataBindings();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.build.qvtschedule.DataBinding <em>Data Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Data Binding</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.DataBinding
+	 * @generated
+	 */
+	EClass getDataBinding();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.build.qvtschedule.DataBinding#getSourceExp <em>Source Exp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Source Exp</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.DataBinding#getSourceExp()
+	 * @see #getDataBinding()
+	 * @generated
+	 */
+	EReference getDataBinding_SourceExp();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.build.qvtschedule.DataBinding#getTargetDataParameter <em>Target Data Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Target Data Parameter</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.DataBinding#getTargetDataParameter()
+	 * @see #getDataBinding()
+	 * @generated
+	 */
+	EReference getDataBinding_TargetDataParameter();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.build.qvtschedule.OutputAction <em>Output Action</em>}'.
@@ -1547,12 +1692,20 @@ public interface qvtschedulePackage extends EPackage {
 		EReference ABSTRACT_ACTION__CHILDREN = eINSTANCE.getAbstractAction_Children();
 
 		/**
-		 * The meta object literal for the '<em><b>Arguments</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Parameters</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ABSTRACT_ACTION__ARGUMENTS = eINSTANCE.getAbstractAction_Arguments();
+		EReference ABSTRACT_ACTION__PARAMETERS = eINSTANCE.getAbstractAction_Parameters();
+
+		/**
+		 * The meta object literal for the '<em><b>Results</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_ACTION__RESULTS = eINSTANCE.getAbstractAction_Results();
 
 		/**
 		 * The meta object literal for the '<em><b>Schedule</b></em>' container reference feature.
@@ -1699,6 +1852,40 @@ public interface qvtschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference MAPPING_ACTION__MAPPING = eINSTANCE.getMappingAction_Mapping();
+
+		/**
+		 * The meta object literal for the '<em><b>Data Bindings</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MAPPING_ACTION__DATA_BINDINGS = eINSTANCE.getMappingAction_DataBindings();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.DataBindingImpl <em>Data Binding</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.build.qvtschedule.impl.DataBindingImpl
+		 * @see org.eclipse.qvtd.build.qvtschedule.impl.qvtschedulePackageImpl#getDataBinding()
+		 * @generated
+		 */
+		EClass DATA_BINDING = eINSTANCE.getDataBinding();
+
+		/**
+		 * The meta object literal for the '<em><b>Source Exp</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DATA_BINDING__SOURCE_EXP = eINSTANCE.getDataBinding_SourceExp();
+
+		/**
+		 * The meta object literal for the '<em><b>Target Data Parameter</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DATA_BINDING__TARGET_DATA_PARAMETER = eINSTANCE.getDataBinding_TargetDataParameter();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.OutputActionImpl <em>Output Action</em>}' class.

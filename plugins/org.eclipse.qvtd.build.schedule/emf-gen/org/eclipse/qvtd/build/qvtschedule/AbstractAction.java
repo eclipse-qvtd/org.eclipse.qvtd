@@ -21,7 +21,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getOrder <em>Order</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getParent <em>Parent</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getChildren <em>Children</em>}</li>
- *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getArguments <em>Arguments</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getResults <em>Results</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getSchedule <em>Schedule</em>}</li>
  * </ul>
  *
@@ -157,20 +158,36 @@ public interface AbstractAction extends EObject {
 	EList<AbstractAction> getChildren();
 
 	/**
-	 * Returns the value of the '<em><b>Arguments</b></em>' reference list.
+	 * Returns the value of the '<em><b>Parameters</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Arguments</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Parameters</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Arguments</em>' reference list.
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractAction_Arguments()
-	 * @model derived="true"
+	 * @return the value of the '<em>Parameters</em>' reference list.
+	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractAction_Parameters()
+	 * @model
 	 * @generated
 	 */
-	EList<AbstractDatum> getArguments();
+	EList<AbstractDatum> getParameters();
+
+	/**
+	 * Returns the value of the '<em><b>Results</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.build.qvtschedule.DataParameter}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Results</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Results</em>' reference list.
+	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractAction_Results()
+	 * @model
+	 * @generated
+	 */
+	EList<DataParameter> getResults();
 
 	/**
 	 * Returns the value of the '<em><b>Schedule</b></em>' container reference.

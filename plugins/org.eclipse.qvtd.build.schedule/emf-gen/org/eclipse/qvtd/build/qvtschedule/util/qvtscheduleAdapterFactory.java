@@ -96,6 +96,10 @@ public class qvtscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createMappingActionAdapter();
 			}
 			@Override
+			public Adapter caseDataBinding(DataBinding object) {
+				return createDataBindingAdapter();
+			}
+			@Override
 			public Adapter caseOutputAction(OutputAction object) {
 				return createOutputActionAdapter();
 			}
@@ -222,6 +226,20 @@ public class qvtscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMappingActionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.build.qvtschedule.DataBinding <em>Data Binding</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.build.qvtschedule.DataBinding
+	 * @generated
+	 */
+	public Adapter createDataBindingAdapter() {
 		return null;
 	}
 

@@ -53,6 +53,7 @@ rule TransformationToSchedule
  * TO
  *  QVTs!MappingAction
  */
+ 
 rule MappingToMappingAction
     transform m : QVTp!Mapping
     to ma : QVTs!MappingAction {
@@ -60,24 +61,21 @@ rule MappingToMappingAction
         //m.name.println("mapping ");
         ma.schedule ::= m.transformation;
         ma.mapping = m;
-        ma.distinctArguments.addAll(m.getInputVariables().equivalents().collect(e | e.first()));
-        ma.productions.addAll(m.getOutputVariables().collect(v | v.type).equivalent());
-        ma.arguments.addAll(ma.getDistinctDataClassDatums()); -- FIXME arguments should be derived.
-        ma.requisites.addAll(ma.getDistinctDataClassDatums());
-        
+        ma.parameters.addAll(m.getInputVariables().equivalent());
+        ma.requisites.addAll(m.getInputVariables().collect(v | v.type.equivalent()));
+        ma.results.addAll(m.getOutputVariables().equivalent());
+        ma.productions.addAll(m.getOutputVariables().collect(v | v.type.equivalent()));
     }
+
 
 /****u* QVTpToSchedule/VariableToDataParameter
  * NAME
  *  VariableToDataParameter - Variables and RealizedVariables are transformed
- *  into a DistinctData and a DataParameter.
- * FUNCTION
- *  All Variables are treated as initialy treated as primary arguments. Analysis
- *  of derivation is done in a later stage.
+ *  into DataParameter.
  * FROM
  *  QVTp!Variable
  * TO
- *  QVTs!DistinctData, QVTs!DataParameter
+ *  QVTs!DataParameter
  * ANNOTATIONS
  *  lazy        Lazy variables from iterators and not automatically transformed
  *  greedy      Greedy so we also transform RealizedVariables
@@ -86,17 +84,26 @@ rule MappingToMappingAction
 @greedy
 rule VariableToDataParameter
     transform v : QVTp!Variable
-    to dd : QVTs!DistinctData, dp : QVTs!DataParameter {
+    to dp : QVTs!DataParameter {
         
         //v.name.println("VariableToDataParameter ");
         dp.variable = v;
-        dp.datum ::= v.type;    
-        dp.datum = v.type.equivalent();
-        dd.primaryArguments.add(dp);
-            
+        dp.datum ::= v.type;            
     }
 
-// Only types in the TypedModel pacakges and that are used by a variable
+/****u* QVTpToSchedule/ClassToClassDatum
+ * NAME
+ *  ClassToClassDatum - Transform the types of variables into
+ *  ClassDatums. All types must be classes. It also transforms the 
+ *  Class super types. 
+ * FROM
+ *  QVTp!Class
+ * TO
+ *  QVTs!ClassDatum
+ * ANNOTATIONS
+ *  lazy        Lazy variables from iterators and not automatically transformed
+ *  greedy      Greedy so we also transform super types of the class
+ */
 @lazy
 @greedy
 rule ClassToClassDatum
@@ -119,10 +126,11 @@ rule ClassToClassDatum
  		d.schedule ::= QVTp!Transformation.all.first();
     }
 
+
 @greedy 
 rule PropertyCallExpToPropertyDatum
     transform pCallExp : QVTp!PropertyCallExp
-    to pDatum : QVTs!PropertyDatum{
+    to pDatum : QVTs!PropertyDatum {
        
 		guard { 
 			var propContext = pCallExp.getContextType();
@@ -138,7 +146,7 @@ rule PropertyCallExpToPropertyDatum
 @greedy
 rule OppositePropertyCallExpToPropertyDatum
     transform oPropCallExp : QVTp!OppositePropertyCallExp
-    to pDatum : QVTs!PropertyDatum{
+    to pDatum : QVTs!PropertyDatum {
        
 		guard { 
 			var propContext = oPropCallExp.getContextType();
@@ -164,7 +172,7 @@ rule PropertyAssignmentToPropertyDatum
 			var isOpposite = pAssign.isKindOf(QVTp!MiddlePropertyAssignment);
        		return refProperty.propertyDatumNotCreated(propContext);
 		}
-     	var propContext = pAssign.getContextType();
+		var propContext = pAssign.getContextType();
 		var refProperty = pAssign.targetProperty;
      	pDatum.updatePropertyDatum(propContext, refProperty);
 	}
@@ -207,8 +215,8 @@ operation QVTp!OperationCallExp analyseOCLExpression(context : QVTp!Type, type2V
 	var op = self.referredOperation;
 	
 	if (not visitedOps.contains(op)) {
-		/*context.name.print("Op analised: ");
-		op.name.println("::");*/
+		//context.name.print("Op analised: ");
+		//op.name.println("::");
 		visitedOps.add(op);
 		if (op.isOclContainerOp()) {
 			for (newContext in self.getComputedContexts(variable2BoundContext)) {
@@ -410,8 +418,8 @@ operation QVTp!Type getUsedProperties() : OrderedSet(QVTp!Property) {
 	
 	return
 		allUsedForwardProps.select(x | allSuperTypes.including(self).includes(x.owningClass)).includingAll(
-		allUsedOppositeProps.select(x | self = x.type));/*.includingAll(
-		allUsedContainerProps.select(x | allSuperTypes.including(self).includes(x.owningClass)));*/
+		allUsedOppositeProps.select(x | self = x.type));//.includingAll(
+		//allUsedContainerProps.select(x | allSuperTypes.including(self).includes(x.owningClass)));
 }
 
 @cached
@@ -465,7 +473,7 @@ operation QVTp!PropertyAssignment getSourceVariable() : QVTp!Variable {
 }
 
 @cached 
-operation QVT!Mapping getAllContents() : Sequence {
+operation QVTp!Mapping getAllContents() : Sequence {
 	return self.asSequence().closure(x | x.eContents());
 }
 
@@ -603,7 +611,7 @@ post{
 		var consumedPDatums = m.getPropertyAccesses().collect(x | x.getPropertyDatum()).asOrderedSet();
 		consumedPDatums.addAll(m.getOperationCallExps().collect(x | x.getPropertyDatums()).flatten());
 		var producedPDatums = m.getPropertyAssignments().collect(x | x.getPropertyDatum()).asOrderedSet();
-		for (pDatum in producedPDatums) { // We want all the opposite produced by them
+		for (pDatum in producedPDatums.clone()) { // We want all the opposite produced by them
 			var oppositePDatum = pDatum.getOrCreateOppositePropDatum();
 			if (oppositePDatum.isDefined()) {
 				producedPDatums.add(oppositePDatum);

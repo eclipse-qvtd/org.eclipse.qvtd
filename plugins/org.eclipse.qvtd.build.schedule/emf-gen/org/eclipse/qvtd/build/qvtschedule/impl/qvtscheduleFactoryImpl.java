@@ -61,6 +61,7 @@ public class qvtscheduleFactoryImpl extends EFactoryImpl implements qvtscheduleF
 			case qvtschedulePackage.DISTINCT_DATA: return createDistinctData();
 			case qvtschedulePackage.INPUT_ACTION: return createInputAction();
 			case qvtschedulePackage.MAPPING_ACTION: return createMappingAction();
+			case qvtschedulePackage.DATA_BINDING: return createDataBinding();
 			case qvtschedulePackage.OUTPUT_ACTION: return createOutputAction();
 			case qvtschedulePackage.PROPERTY_DATUM: return createPropertyDatum();
 			case qvtschedulePackage.SCHEDULE: return createSchedule();
@@ -117,6 +118,16 @@ public class qvtscheduleFactoryImpl extends EFactoryImpl implements qvtscheduleF
 	public MappingAction createMappingAction() {
 		MappingActionImpl mappingAction = new MappingActionImpl();
 		return mappingAction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DataBinding createDataBinding() {
+		DataBindingImpl dataBinding = new DataBindingImpl();
+		return dataBinding;
 	}
 
 	/**
