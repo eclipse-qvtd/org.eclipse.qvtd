@@ -60,12 +60,11 @@ operation QVTs!MappingAction getPredecessors() : OrderedSet {
 
 	//self.mapping.name.println("getPredecessors ");
 	var reqs = self.requisites;
-	var subReqs = self.schedule.getAllDatums().select(subD | 
-		reqs.exists(datum | subD.getAllSuperDatums().includes(datum)));
+	var subReqs = reqs.closure(x | x.sub);
 	return reqs.includingAll(subReqs)
 			.collect(req| req.producedBy).flatten()
 			.sortBy(a | a.mapping.name) // To ensure determinism
-			.asOrderedSet();
+			.asOrderedSet(); // Remove duplicates
 }
 
 @cached

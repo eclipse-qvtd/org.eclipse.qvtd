@@ -7,6 +7,7 @@
  * 
  * Contributors:
  *     Horacio Hoyos - initial implementation
+ *     Adolfo Sanchez-Barbudo Herrera - Various fixes
  ******************************************************************************/
 import "../helpers/OclLibHelper.eol";
 
@@ -29,41 +30,13 @@ import "../helpers/OclLibHelper.eol";
  *  v The variable to fix
  */
 operation QVT!OCLExpression fixVarReferences(v : QVT!Variable) {
-    if (self.isTypeOf(QVT!VariableExp)) {
-        if (self.referredVariable.name = v.name) {
-            self.referredVariable = v;
-        }
-    } else if (self.isTypeOf(QVT!OperationCallExp)) {
-        self.ownedSource.fixVarReferences(v);
-        for (arg in self.ownedArguments) {
-           arg.fixVarReferences(v);
-        }
-    } else if (self.isKindOf(QVT!NavigationCallExp)) {
-        self.ownedSource.fixVarReferences(v);
-    } else if (self.isTypeOf(QVT!IfExp)) {
-        self.ownedCondition.fixVarReferences(v);
-        self.ownedElse.fixVarReferences(v);
-        self.ownedThen.fixVarReferences(v);
-    } else if (self.isTypeOf(QVT!CollectionLiteralExp)) {
-        for (p in self.ownedParts) {
-            if (p.isTypeOf(QVT!CollectionItem)) {
-                p.ownedItem.fixVarReferences(v);
-            } else if (p.isTypeOf(QVT!CollectionRange)) {
-                p.ownedFirst.fixVarReferences(v);
-                p.ownedLast.fixVarReferences(v);
-            } 
-        } 
-    } else if (self.isKindOf(QVT!LiteralExp)) {
-		// Nothing to fix
-    } else if (self.isKindOf(QVT!IteratorExp)) {
-        self.ownedBody.fixVarReferences(v);
-        self.ownedSource.fixVarReferences(v);
-    } else if (self.isKindOf(QVT!TypeExp)) {
-    	// Nothing to fix	
-    } else {
-        self.println();
-        throw "Error! Add fixVarReference() for " + self.type();
-    }
+	for (oclElement in self.getAllContentsIncludingSelf()) {
+		if (oclElement.isTypeOf(QVT!VariableExp)) {
+			if (oclElement.referredVariable.name = v.name) {
+				oclElement.referredVariable = v;
+			}
+		}
+	}
  }
 
 /****o* OCLExpressionAnalysis/findReferencedVariables
@@ -202,3 +175,11 @@ operation QVT!OCLExpression getReferredProperty() : Any {
     
     return self.ownedSource.referredProperty;
  }
+ 
+operation QVT!OCLExpression getAllContents() : Sequence {
+	return self.asSequence().closure(x | x.eContents());
+}
+
+operation QVT!OCLExpression getAllContentsIncludingSelf() : Sequence {
+	return self.getAllContents().including(self);
+}

@@ -76,13 +76,22 @@ public interface qvtschedulePackage extends EPackage {
 	int ABSTRACT_DATUM__SUPER = 0;
 
 	/**
+	 * The feature id for the '<em><b>Sub</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_DATUM__SUB = 1;
+
+	/**
 	 * The feature id for the '<em><b>Domain</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATUM__DOMAIN = 1;
+	int ABSTRACT_DATUM__DOMAIN = 2;
 
 	/**
 	 * The feature id for the '<em><b>Produced By</b></em>' reference list.
@@ -91,7 +100,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATUM__PRODUCED_BY = 2;
+	int ABSTRACT_DATUM__PRODUCED_BY = 3;
 
 	/**
 	 * The feature id for the '<em><b>Required By</b></em>' reference list.
@@ -100,7 +109,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATUM__REQUIRED_BY = 3;
+	int ABSTRACT_DATUM__REQUIRED_BY = 4;
 
 	/**
 	 * The feature id for the '<em><b>Schedule</b></em>' container reference.
@@ -109,7 +118,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATUM__SCHEDULE = 4;
+	int ABSTRACT_DATUM__SCHEDULE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Data Parameter</b></em>' reference list.
@@ -118,7 +127,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATUM__DATA_PARAMETER = 5;
+	int ABSTRACT_DATUM__DATA_PARAMETER = 6;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Datum</em>' class.
@@ -127,7 +136,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATUM_FEATURE_COUNT = 6;
+	int ABSTRACT_DATUM_FEATURE_COUNT = 7;
 
 	/**
 	 * The number of operations of the '<em>Abstract Datum</em>' class.
@@ -256,6 +265,15 @@ public interface qvtschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int CLASS_DATUM__SUPER = ABSTRACT_DATUM__SUPER;
+
+	/**
+	 * The feature id for the '<em><b>Sub</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int CLASS_DATUM__SUB = ABSTRACT_DATUM__SUB;
 
 	/**
 	 * The feature id for the '<em><b>Domain</b></em>' reference.
@@ -795,6 +813,15 @@ public interface qvtschedulePackage extends EPackage {
 	int PROPERTY_DATUM__SUPER = ABSTRACT_DATUM__SUPER;
 
 	/**
+	 * The feature id for the '<em><b>Sub</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY_DATUM__SUB = ABSTRACT_DATUM__SUB;
+
+	/**
 	 * The feature id for the '<em><b>Domain</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -951,6 +978,17 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getAbstractDatum_Super();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getSub <em>Sub</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Sub</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getSub()
+	 * @see #getAbstractDatum()
+	 * @generated
+	 */
+	EReference getAbstractDatum_Sub();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getDomain <em>Domain</em>}'.
@@ -1401,6 +1439,14 @@ public interface qvtschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference ABSTRACT_DATUM__SUPER = eINSTANCE.getAbstractDatum_Super();
+
+		/**
+		 * The meta object literal for the '<em><b>Sub</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ABSTRACT_DATUM__SUB = eINSTANCE.getAbstractDatum_Sub();
 
 		/**
 		 * The meta object literal for the '<em><b>Domain</b></em>' reference feature.

@@ -10,6 +10,7 @@
       fileExtensions="qvts" ecorePackage="QVTSchedule.ecore#/">
     <genClasses image="false" ecoreClass="QVTSchedule.ecore#//AbstractDatum">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractDatum/super"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractDatum/sub"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractDatum/domain"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractDatum/producedBy"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//AbstractDatum/requiredBy"/>
