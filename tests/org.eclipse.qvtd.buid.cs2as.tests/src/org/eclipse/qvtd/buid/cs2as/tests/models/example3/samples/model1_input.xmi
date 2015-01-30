@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kiamacs:TopCS
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kiamacs="http://ocldependencyanalysis/kiamaExampleCS/1.0"
+    xsi:schemaLocation="http://ocldependencyanalysis/kiamaExampleCS/1.0 ../KiamaCS.ecore">
+  <node xsi:type="kiamacs:PlusCS">
+    <left xsi:type="kiamacs:PlusCS">
+      <left
+          xsi:type="kiamacs:NumCS"
+          value="3"/>
+      <right
+          xsi:type="kiamacs:NumCS"
+          value="4"/>
+    </left>
+    <right xsi:type="kiamacs:NumCS"
+        value="1"/>
+  </node>
+</kiamacs:TopCS>
