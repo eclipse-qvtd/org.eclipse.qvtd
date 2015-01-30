@@ -1,0 +1,56 @@
+	
+operation OCL!ConstructorExp getExpressionContextType () : OCL!Class {
+	return self.getContainingExpressionInOCL().ownedContext.type;
+}
+
+operation OCL!OCLExpression getContainingExpressionInOCL() {
+	var container = self.eContainer();
+	while (not container.isKindOf(OCL!ExpressionInOCL)) {
+		container = container.eContainer();
+	}
+	return container;
+}
+
+operation OCL!ConstructorExp getConstructedTypeName() : String { 
+	var expInOCL = self.getContainingExpressionInOCL();
+	var allConstructorExps = expInOCL.getAllContents().select(x | x.isKindOf(OCL!ConstructorExp));
+	var sameTypeConstructorExps = allConstructorExps.select(x | x.type = self.type);
+	if (sameTypeConstructorExps.size() > 1) { // If there are more constructors returning the same type:
+		return self.type.name + "_" + sameTypeConstructorExps.indexOf(self);
+	} else {
+		return self.type.name;
+	}
+}
+
+operation OCL!ConstructorExp getCreationMappingName() : String { 
+	return 'c' + self.getExpressionContextType().name + '_2_' + self.getConstructedTypeName();
+}
+
+operation OCL!ConstructorPart getUpdateMappingName() : String {
+ 	var constructorExp = self.eContainer();
+ 	var refProp = self.referredProperty;
+	return 'u' + constructorExp.getConstructedTypeName() + '_' + refProp.name;
+}
+
+// FIXME clash naming
+// Remove if the traceMM-based transformation is discarded
+operation OCL!ConstructorExp getTraceElementName() : String {	
+	return getTraceElementName(self.getExpressionContextType(), self.type);
+}
+
+// FIXME clash naming
+// Remove if the traceMM-based transformation is discarded
+operation OCL!ConstructorExp getTraceElementVariableName() : String {
+	var fromType = self.getExpressionContextType();
+	var toType = self.type;
+	
+	return fromType.name.subString(0,1).firstToLowerCase() + '2' + toType.name.subString(0,1).firstToLowerCase();
+}
+
+operation getTraceElementName(fromType, toType) : String {
+	return fromType.name + '2' + toType.name;
+}
+
+operation OCL!Element getAllContents() : Sequence  {
+	return self.asSequence().closure(x | x.eContents());
+}
