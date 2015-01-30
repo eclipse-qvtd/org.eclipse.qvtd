@@ -833,6 +833,11 @@
           </assignment>
         </bottomPattern>
       </rule>
+      <rule xsi:type="qvti:Mapping" xmi:id="m..Source2Target.qvtp.qvtias.__root__"
+          name="__root__">
+        <guardPattern/>
+        <bottomPattern/>
+      </rule>
     </ownedClasses>
   </ownedPackages>
   <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage"

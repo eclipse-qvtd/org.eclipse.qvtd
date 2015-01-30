@@ -51,6 +51,7 @@ import org.junit.Test;
  */
 public class OCL2QVTiTestCases extends LoadTestCase {
 	
+	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("org.eclipse.qvtd.buid.cs2as.tests/src/org/eclipse/qvtd/buid/cs2as/tests/models", true);
 	protected class MyQVT extends OCL.Internal
 	{
 		public MyQVT(@NonNull QVTiEnvironmentFactory environmentFactory) {
@@ -125,7 +126,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	@Test
 	public void testExample1_OCL2QVTp() throws Exception {
 
-		URI baseURI = URI.createURI("platform:/resource/oclDependencyAnalysis.qvt/src/oclDependencyAnalysis/qvt/tests/models/example1/");
+		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
 		String oclDocURI = baseURI.appendSegment("Source2Target.oclas").toString();
 		String qvtpFileURI = baseURI.appendSegment("Source2Target.qvtp.qvtias").toString();
 		
@@ -137,7 +138,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	
 	@Test
 	public void testExample1_Interpreted() throws Exception {
-		URI baseURI = URI.createURI("platform:/resource/oclDependencyAnalysis.qvt/src/oclDependencyAnalysis/qvt/tests/models/example1");
+		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
 
 		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI,"Source2Target.oclas", myQVT);
     	mtc.execute();
@@ -169,7 +170,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	
 	@Test
 	public void testExample2_Interpreted() throws Exception {
-		URI baseURI = URI.createURI("platform:/resource/oclDependencyAnalysis.qvt/src/oclDependencyAnalysis/qvt/tests/models/example2");
+		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 
 		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "classescs2as.oclas", myQVT);
     	mtc.execute();
@@ -208,7 +209,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	
 	@Test
 	public void testExample3_Interpreted() throws Exception {
-		URI baseURI = URI.createURI("platform:/resource/oclDependencyAnalysis.qvt/src/oclDependencyAnalysis/qvt/tests/models/example3");
+		URI baseURI = TESTS_BASE_URI.appendSegment("example3");
 
 		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "KiamaRewrite.oclas", myQVT);
     	mtc.execute();
@@ -313,7 +314,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	@Test
 	public void testExample2_OCL2QVTp_MiddleModel() throws Exception {
 				
-		URI baseURI = URI.createURI("platform:/resource/oclDependencyAnalysis.qvt/src/oclDependencyAnalysis/qvt/tests/models/example2");
+		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 		String oclDocURI = baseURI.appendSegment("classescs2as.oclas").toString();
 		String qvtpFileURI = baseURI.appendSegment("classescs2as.qvtp.qvtias").toString();
 		String tracesMMURI = baseURI.appendSegment("classescs2as.ecore.oclas").toString();
@@ -327,7 +328,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	@Test
 	public void testExample2_OCL2QVTp_MiddleFolded() throws Exception {
 				
-		URI baseURI = URI.createURI("platform:/resource/oclDependencyAnalysis.qvt/src/oclDependencyAnalysis/qvt/tests/models/example2");
+		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 		String oclDocURI = baseURI.appendSegment("classescs2as.oclas").toString();
 		String qvtpFileURI = baseURI.appendSegment("classescs2as.qvtp.qvtias").toString();
 		
