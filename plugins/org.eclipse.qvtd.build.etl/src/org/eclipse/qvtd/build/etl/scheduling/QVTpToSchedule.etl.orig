@@ -1,0 +1,620 @@
+/*******************************************************************************
+ * Copyright (c) 2014 The University of York and Willink Transformations.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
+import "../helpers/QVTHelpers.eol";
+import "../helpers/QVTsHelpers.eol";
+//import "Scheduler.eol";
+ 
+/****t* /org.eclipse.qvtd.build.etl/scheduling/QVTpToSchedule
+ * NAME
+ *  QVTpToSchedule -- Craetes the base schedule from a partitioned (QVTp)
+  * transformation
+ * FUNCTION
+ *  Extract the basic Schedule information from the QVTp trnasformation. The QVTp
+ *  trasnformation must conform to QVTi. The basic schedule craetes the Class and
+ *  Parameter information but does not reduce the DistinctData information (i.e.
+ *  does not perform derivation analysis.
+ * SEE ALSO
+ *  /org.eclipse.qvtd.build.etl/scheduling/DerivationAnalysis
+ *    
+ */
+
+/****u* QVTpToSchedule/TransformationToSchedule
+ * NAME
+ *  TransformationToSchedule - Transform the trnsformation
+ * FUNCTION
+ *  Just creates the place holder for datums and actions
+ * FROM
+ *  QVTp!Transformation
+ * TO
+ *  QVTs!Schedule
+ */
+rule TransformationToSchedule
+    transform t : QVTp!Transformation
+    to s : QVTs!Schedule {
+        
+    }
+
+/****u* QVTpToSchedule/MappingToMappingAction
+ * NAME
+ *  MappingToMappingAction - A mapping genereates a mapping action and its datums
+ * FUNCTION
+ *  Visit the mapping input/ouput variables to create the appropriate results and
+ *  arguments.
+ * FROM
+ *  QVTp!Mapping
+ * TO
+ *  QVTs!MappingAction
+ */
+rule MappingToMappingAction
+    transform m : QVTp!Mapping
+    to ma : QVTs!MappingAction {
+        
+        //m.name.println("mapping ");
+        ma.schedule ::= m.transformation;
+        ma.mapping = m;
+        ma.distinctArguments.addAll(m.getInputVariables().equivalents().collect(e | e.first()));
+        ma.productions.addAll(m.getOutputVariables().collect(v | v.type).equivalent());
+        ma.arguments.addAll(ma.getDistinctDataClassDatums()); -- FIXME arguments should be derived.
+        ma.requisites.addAll(ma.getDistinctDataClassDatums());
+        
+    }
+
+/****u* QVTpToSchedule/VariableToDataParameter
+ * NAME
+ *  VariableToDataParameter - Variables and RealizedVariables are transformed
+ *  into a DistinctData and a DataParameter.
+ * FUNCTION
+ *  All Variables are treated as initialy treated as primary arguments. Analysis
+ *  of derivation is done in a later stage.
+ * FROM
+ *  QVTp!Variable
+ * TO
+ *  QVTs!DistinctData, QVTs!DataParameter
+ * ANNOTATIONS
+ *  lazy        Lazy variables from iterators and not automatically transformed
+ *  greedy      Greedy so we also transform RealizedVariables
+ */
+@lazy
+@greedy
+rule VariableToDataParameter
+    transform v : QVTp!Variable
+    to dd : QVTs!DistinctData, dp : QVTs!DataParameter {
+        
+        //v.name.println("VariableToDataParameter ");
+        dp.variable = v;
+        dp.datum ::= v.type;    
+        dp.datum = v.type.equivalent();
+        dd.primaryArguments.add(dp);
+            
+    }
+
+// Only types in the TypedModel pacakges and that are used by a variable
+@lazy
+@greedy
+rule ClassToClassDatum
+    transform t : QVTp!Class
+    to d : QVTs!ClassDatum {
+                         
+        guard : t.producesDatums()
+        
+        var domain;
+        if (t.existsCorePatternVariable()) {
+        	// FIXME What if we have different variables belonging to different domains ?
+        	domain = t.getCorePatternVariables().first().oppositePattern().area;
+        } else {
+        	domain = null; 
+        }
+        //t.name.println("TypeToClassDatum ");
+        d.type = t;
+        d.super.addAll(t.superClasses.equivalent());
+ 		d.domain = domain;
+ 		d.schedule ::= QVTp!Transformation.all.first();
+    }
+
+@greedy 
+rule PropertyCallExpToPropertyDatum
+    transform pCallExp : QVTp!PropertyCallExp
+    to pDatum : QVTs!PropertyDatum{
+       
+		guard { 
+			var propContext = pCallExp.getContextType();
+			var refProperty = pCallExp.referredProperty;
+			return pCallExp.isContainedInAnArea() and refProperty.propertyDatumNotCreated(propContext);
+		}
+		var propContext = pCallExp.getContextType();
+		var refProperty = pCallExp.referredProperty;
+		pDatum.updatePropertyDatum(propContext,refProperty);
+	}
+
+-- greedy to also consider MiddlePropertyCallExp
+@greedy
+rule OppositePropertyCallExpToPropertyDatum
+    transform oPropCallExp : QVTp!OppositePropertyCallExp
+    to pDatum : QVTs!PropertyDatum{
+       
+		guard { 
+			var propContext = oPropCallExp.getContextType();
+			var refProperty = oPropCallExp.referredProperty.opposite;
+       		return pCallExp.isContainedInAnArea() and refProperty.propertyDatumNotCreated(propContext);
+		}
+		var propContext = oPropCallExp.getContextType();
+		var refProperty = oPropCallExp.referredProperty.opposite;
+		pDatum.updatePropertyDatum(propContext,refProperty);
+	}
+
+
+-- greedy to also consider MiddlePropertyAssignment
+// FIXME opposites (nonNavigable) will need different treat. See Bug 454555
+@greedy    
+rule PropertyAssignmentToPropertyDatum 
+    transform pAssign : QVTp!PropertyAssignment
+    to pDatum : QVTs!PropertyDatum {
+       
+		guard { 
+			var propContext = pAssign.getContextType();
+			var refProperty = pAssign.targetProperty;
+			var isOpposite = pAssign.isKindOf(QVTp!MiddlePropertyAssignment);
+       		return refProperty.propertyDatumNotCreated(propContext);
+		}
+     	var propContext = pAssign.getContextType();
+		var refProperty = pAssign.targetProperty;
+     	pDatum.updatePropertyDatum(propContext, refProperty);
+	}
+
+--
+-- Since operations might have other PropertyCallExp and OperationCallExp of interest, they have
+-- to be individually analyzed. We will start the analysis from OperationCallExps which are used
+-- from expression which belong to the mapping (or any of their CorePatterns)
+--
+-- Note that the original context type on which the operation is called, needs to be carried on
+-- through the anlysis, so the proper PropertyDatums are accordingly created
+--
+rule OperationCallExpToPropertyDatums
+	transform opCall : QVTp!OperationCallExp
+	to pDatums : OrderedSet(QVTs!PropertyDatum) {
+
+	// We are only interested in operation call expressions made from expressions
+	// belonging to the mappings (or any of their CorePatterns)
+	guard : opCall.isContainedInAnArea()
+	
+	var context = opCall.getContextType();
+	pDatums.addAll(opCall.analyseOCLExpression(context, Map{}, Map{}));
+}
+
+operation QVTp!OperationCallExp analyseOCLExpression(context : QVTp!Type, type2VisitedOperations : Map, type2VariableBindings : Map) : OrderedSet(QVTp!PropertyDatum) {
+		
+	var visitedOps = type2VisitedOperations.get(context);
+	if (visitedOps = null) {
+		visitedOps = Set{};
+		type2VisitedOperations.put(context, visitedOps);
+	}
+	
+	var variable2BoundContext = type2VariableBindings.get(context);
+	if (variable2BoundContext = null) {
+		variable2BoundContext = Map{};
+		type2VariableBindings.put(context, variable2BoundContext);
+	}
+	
+	var result = OrderedSet{};
+	var op = self.referredOperation;
+	
+	if (not visitedOps.contains(op)) {
+		/*context.name.print("Op analised: ");
+		op.name.println("::");*/
+		visitedOps.add(op);
+		if (op.isOclContainerOp()) {
+			for (newContext in self.getComputedContexts(variable2BoundContext)) {
+				result.addAll(newContext.analyseOclContainerCall());
+			} 
+		} else {
+			var expInOCL = op.getBodyExpression();
+			if (expInOCL.isKindOf(QVTp!ExpressionInOCL)) {
+				var oclExp = expInOCL.getOwnedBody();
+				if (oclExp <> null) {
+					variable2BoundContext.put(expInOCL.ownedContext, context);
+					for (eObject in oclExp.getAllContentsIncludingSelf()) {
+						if (eObject.isKindOf(QVTp!LetExp)) {
+							eObject.updateVariableBindings(variable2BoundContext);
+						} else if (eObject.isKindOf(QVTp!PropertyCallExp)) { // FIXME OppositeCallExp ?
+							for (newContext in eObject.getComputedContexts(variable2BoundContext)) {
+								result.add(eObject.analyseOCLExpression(newContext));
+							}
+						} else if (eObject.isKindOf(QVTp!OperationCallExp)) {
+							for (newContext in eObject.getComputedContexts(variable2BoundContext)) {
+								result.addAll(eObject.analyseOCLExpression(newContext, type2VisitedOperations, type2VariableBindings));
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	return result;
+}
+
+operation QVTp!PropertyCallExp analyseOCLExpression(context : QVTp!Type) : QVTs!PropertyDatum {
+
+	var refProperty = self.referredProperty;
+	return refProperty.getOrCreateAccessedPropertyDatum(context);
+}
+
+operation QVTp!Type analyseOclContainerCall() : OrderedSet(QVTp!PropertyDatum) {
+	
+	var result =  OrderedSet{};	
+	for (parentClass in self.getContainingTypes()) {
+		for (prop in parentClass.ownedProperties.select(x | x.composite)) {
+			if (self.getAllSuperClassesIncludingSelf().includes(prop.getElementType())) {
+				// FIXME I'm getting non-deterministic QVTs 2 Graphml transformations
+				// when there are references to non-navigable (inexistent) properties
+				// in .oclas. Example3: Kiama
+				// For the time being, let's create the dependency on the forward
+				// containment property
+				--var opposite = prop.opposite;
+				--result.add(opposite.getOrCreateAccessedPropertyDatum(self));
+				result.add(prop.getOrCreateAccessedPropertyDatum(parentClass));
+			}
+		}
+	}
+	return result;
+}
+
+
+
+operation QVTp!LetExp updateVariableBindings(variable2BoundContext : Map ) {
+
+	var variable = self.ownedVariable;
+	variable2BoundContext.put(variable, variable.ownedInit.computeContexts(variable2BoundContext));
+}
+
+--
+-- PropertyDatums can be created either via an ETL rule or 'new' statment. Whereas PropertyDatums can 
+-- be differently created, this common subroutine will accordignly update the properties of those PropertyDatums.
+--
+operation QVTs!PropertyDatum updatePropertyDatum(context: QVTp!Type, prop : QVTp!Property) {
+
+	var classDatum ::= context;
+	--context.name.print("Updating property for ");
+	--prop.name.println("::");
+	self.domain = classDatum.domain;
+	self.property = prop;
+    self.classDatum = classDatum;
+    if (context <> prop.owningClass) { // Propagate to supertypes as long as the context is not the property owner
+	    for (superClass in context.superClasses) {
+	    	if (superClass.producesDatums()) {
+		    	var superPropDatum = prop.getOrCreateAccessedPropertyDatum(superClass);
+		    	self.super.add(superPropDatum);
+	    	}
+	    }
+    }
+}
+
+operation QVTs!PropertyDatum getOrCreateOppositePropDatum() : QVTs!PropertyDatum {
+	if (self.opposite.isDefined()) { // The opposite was already created
+		return self;
+	} else {
+		var oppProp = self.property.opposite;
+		if (oppProp.isDefined()) {
+			var oppPropContext = oppProp.owningClass;
+			if (oppPropContext.producesDatums()) {
+				var oppositePropDatum = oppProp.getOrCreateAccessedPropertyDatum(oppPropContext);
+				self.opposite = oppositePropDatum;
+				return oppositePropDatum;
+			}
+		}
+		return null;	
+	}
+}
+
+operation QVTp!Property propertyDatumNotCreated(context : QVTp!Type) : Boolean {
+    return self.getPropertyDatum(context).isUndefined();
+}
+
+operation QVTp!Property getOrCreateAccessedPropertyDatum(context : QVTp!Type) : QVTs!PropertyDatum {
+
+	if (self.propertyDatumNotCreated(context)) {
+		var pDatum = new QVTs!PropertyDatum;
+		pDatum.updatePropertyDatum(context,self);
+		return pDatum;
+	} else {
+		return self.getPropertyDatum(context);
+	}
+}
+
+operation QVTp!Property getPropertyDatum(context : QVTp!Type) {
+	var classDatum = context.equivalent();
+    if (classDatum.isUndefined()) {
+    	return null;
+    } else {
+    	return classDatum.propertyDatums.selectOne(x | x.property = self);
+    }
+}
+
+operation QVTp!OperationCallExp getPropertyDatums() : OrderedSet(QVTs!PropertyDatum) {
+	return self.equivalent();
+}
+
+operation QVTp!PropertyCallExp getPropertyDatum() : QVTs!PropertyDatum {
+	return self.referredProperty.getPropertyDatum(self.ownedSource.type);
+} 
+
+operation QVTp!OppositePropertyCallExp getPropertyDatum() : QVTs!PropertyDatum {
+	return self.referredProperty.opposite.getPropertyDatum(self.ownedSource.type);
+}
+
+operation QVTp!PropertyAssignment getPropertyDatum() : QVTs!PropertyDatum {
+	return self.targetProperty.getPropertyDatum(self.slotExpression.type);
+}
+
+@cached
+operation QVTp!Type producesDatums() : Boolean {
+	return self.existsCorePatternVariable() or self.hasUsedProperties();
+}
+
+@cached
+operation QVTp!Type existsCorePatternVariable() : Boolean {
+	return self.getCorePatternVariables().notEmpty();
+}
+
+@cached
+operation QVTp!Type getCorePatternVariables() : OrderedSet(QVTp!Variable) {
+	return QVTp!Variable.all().asOrderedSet().select(v | v.eContainer().isKindOf(QVTp!CorePattern) 
+		and self.getAllSuperClasses().select(x | x.existsCorePatternVariable()).including(v.type).includes(self));
+}
+
+@cached
+operation QVTp!Type getAllSuperClasses() : OrderedSet {
+    if (self.isClass().isDefined())
+	   return self.asSequence().closure(x | x.superClasses).asOrderedSet();
+	return new OrderedSet();
+}
+
+@cached 
+operation QVTp!Type getAllSuperClassesIncludingSelf() : OrderedSet {
+	return self.getAllSuperClasses().including(self);
+}
+
+@cached
+operation QVTp!Type getAllSubClasses() : OrderedSet {
+	return QVTp!Class.all().select(x | x.getAllSuperClasses().includes(self)).asOrderedSet();
+}
+
+@cached
+operation QVTp!Type getAllSubClassesIncludingSelf() : OrderedSet {
+	return self.getAllSubClasses().including(self);
+}
+
+@cached
+operation QVTp!Type hasUsedProperties() : Boolean {
+	return self.getUsedProperties().notEmpty();
+}
+
+@cached 
+operation QVTp!Type getUsedProperties() : OrderedSet(QVTp!Property) {
+	var allSuperTypes = self.getAllSuperClasses();
+<<<<<<< HEAD
+=======
+	
+	var allUsedForwardProps = getAllUsedForwardProps();
+	var allUsedOppositeProps = getAllUsedOppositeProps();
+	// FIXME Since oclContainerOpCalls are dependending on the forward containment reference
+	// of the possible object parent types. This allUsedContainerProps is not needed, for the time being
+	// See comment in analyseOclContainerCall();
+	
+	//var allUsedContainerProps = getAllUsedContainerProps();
+	
+	return
+		allUsedForwardProps.select(x | allSuperTypes.including(self).includes(x.owningClass)).includingAll(
+		allUsedOppositeProps.select(x | self = x.type));/*.includingAll(
+		allUsedContainerProps.select(x | allSuperTypes.including(self).includes(x.owningClass)));*/
+}
+
+@cached
+operation getAllUsedForwardProps() : OrderedSet(QVTp!Property) {
+>>>>>>> upstream/asanchez/mtc
+	// TODO Using all() ->  might bring properties from PropCallExp unused operation. Improve analysis
+	var allForwardPropCalls = QVTp!PropertyCallExp.all();
+	var allForwardPropAssigns = QVTp!PropertyAssignment.all();
+	var allUsedForwardProps = allForwardPropCalls.collect(x | x.referredProperty).asOrderedSet();
+	allUsedForwardProps.addAll(allForwardPropAssigns.collect(x | x.targetProperty));
+	return allUsedForwardProps;
+}
+
+@cached
+operation getAllUsedOppositeProps() : OrderedSet(QVTp!Property) {
+	// TODO Using all() ->  might bring properties from OppositeCallExp unused operation. Improve analysis
+	var allOppositePropCalls = QVTp!OppositePropertyCallExp.all();
+	return allOppositePropCalls.collect(x | x.referredProperty).asOrderedSet();
+}
+
+@cached
+operation getAllUsedContainerProps() : OrderedSet(QVTp!Property) {
+	// TODO Using all() ->  might bring properties from OppositeCallExp unused operation. Improve analysis
+	var allUsedContainerOpCalls = QVTp!OperationCallExp.all().select(x | x.referredOperation.isOclContainerOp());
+	var allUsedContainerOpCallCtxs = allUsedContainerOpCalls.collect(x | x.ownedSource.type).asOrderedSet();
+	var allUsedContainerOpCallCtxsWithSubs = allUsedContainerOpCallCtxs.collect(x | x.getAllSubClassesIncludingSelf()).flatten();
+	var allContainmentProperties = QVTp!Property.all().select(x | x.composite);
+
+	var allUsedContainmentProperties = allContainmentProperties.select(x | allUsedContainerOpCallCtxsWithSubs.includes(x.getElementType()));
+
+	return allUsedContainmentProperties.collect(x | x.opposite).excluding(null).asOrderedSet();
+}
+
+@cached
+operation QVTp!OCLExpression getSourceVariable() : QVTp!Variable {
+    -- return self.asSequence().closure(x | if x.isKindOf(QVTp!CallExp) x.ownedSource else Collection{}).one(x | x.isKindOf(QVTp!VariableExp).variable;
+    var exp = self;
+	while (true) {
+		if (exp.isKindOf(QVTp!VariableExp)) {
+			return exp.referredVariable;
+		}
+		if (not exp.isKindOf(QVTp!CallExp)) {
+			return null;
+		}
+		exp = exp.ownedSource;
+	}
+}
+
+@cached
+operation QVTp!PropertyAssignment getSourceVariable() : QVTp!Variable { 
+	return self.slotExpression.getSourceVariable(); 
+}
+
+@cached 
+operation QVT!Mapping getAllContents() : Sequence {
+	return self.asSequence().closure(x | x.eContents());
+}
+
+@cached
+operation QVTp!Mapping getPropertyAssignments() : Sequence { 
+	return self.getAllContents().select(x | x.isKindOf(QVTp!PropertyAssignment));
+}
+
+@cached
+operation QVTp!Mapping getPropertyAccesses() : Sequence { 
+	return self.getAllContents().select(x | x.isKindOf(QVTp!PropertyCallExp) or x.isKindOf(QVTp!OppositePropertyCallExp));
+}
+
+@cached
+operation QVTp!Mapping getOperationCallExps() : Sequence { 
+	return self.getAllContents().select(x | x.isKindOf(QVTp!OperationCallExp));
+}
+
+@cached
+operation QVTp!CallExp getContextType() : QVTp!Type {
+	return self.ownedSource.type;
+}
+
+@cached
+operation QVTp!PropertyAssignment getContextType() : QVTp!Type {
+	return self.slotExpression.type;
+}
+
+@cached
+operation QVTp!TypedElement getElementType() : QVTp!Type {
+	var type = self.type;
+	if (type.isKindOf(QVTp!CollectionType)) {
+		return type.elementType;
+	} else {
+		return type;
+	}
+}
+
+-- This is needed when analysing Property/Operation call exps so that they exploit the statically computed context 
+-- carried on through the analysis.
+@cached
+operation QVTp!CallExp getComputedContexts(variable2BoundContext : Map) : OrderedSet(QVTp!Type) {
+	var source = self.ownedSource;
+	return source.computeContexts(variable2BoundContext);
+}
+
+@cached
+operation QVTp!VariableExp computeContexts(variable2BoundContext : Map) : OrderedSet(QVTp!Type) {
+	var result;
+	var context = variable2BoundContext.get(self.referredVariable);
+	if (context.isDefined()) {
+		result = context;
+	} else {
+		result = self.type;
+	}
+	return result.asOrderedSet();
+}
+
+@cached
+operation QVTp!CallExp computeContexts(variable2BoundContext : Map) : OrderedSet(QVTp!Type) {
+	var result = OrderedSet{};
+	if (self.isKindOf(QVTp!OperationCallExp) and self.referredOperation.isOclContainerOp()) {
+		for(oclContainerOpContext in self.ownedSource.computeContexts(variable2BoundContext)) {
+			result.addAll(oclContainerOpContext.getContainingTypes());
+		}
+	} else {
+		result.add(self.type);
+	}
+	return result;
+}
+
+@cached
+operation QVTp!Operation isOclContainerOp() : Boolean {
+	// FIXME make this check more robust
+	return self.name = 'oclContainer' and self.ownedParameters.isEmpty();
+}
+@cached 
+operation QVTp!OCLExpression isContainedInAnArea() : Boolean {
+
+	var container = self.eContainer();
+	while (container <> null) {
+		if (container.isKindOf(QVTp!Area)) {
+			return true;
+		}
+		container = container.eContainer();
+	}
+	return false;
+}
+
+@cached 
+operation QVTp!OCLExpression getAllContents() : Sequence {
+	return self.asSequence().closure(x | x.eContents());
+}
+
+@cached
+operation QVTp!OCLExpression getAllContentsIncludingSelf() : Sequence {
+	var initSeq = self.asSequence(); 
+	return initSeq.includingAll(initSeq.closure(x | x.eContents()));
+}
+
+@cached
+operation QVTp!Type getContainingTypes() : OrderedSet(QVTp!PropertyType) {
+
+	var result =  OrderedSet{};
+	var node = self.getNode();
+	if (node == null) {
+		return result;
+	} else {
+		for (parentNode in node.parent) {
+			result.add(parentNode.getClass());
+		}
+		return result;
+	}
+}
+
+// FIXME oclContainer might be used on inputs. Discuss with Ed if we want to add those dependencies or not.
+// Probably not.
+@cached
+operation rTree!Node getClass() : QVTp!Class {
+	return QVTp!Class.all.selectOne(x | x.getETarget() = self.element);
+}
+
+// FIXME oclContainer might be used on inputs. Discuss with Ed if we want to add those dependencies or not.
+// Probably not.
+@cached
+operation QVTp!Class getNode() : rTree!Node {
+	return rTree!Node.all.selectOne(x | x.element = self.getETarget());
+}
+
+post{
+	// Traces can't be used because only one pDatum access/assignment is associated with the pDatum via traces
+	// Therefore, update the arguments/results at the end
+	for (ma in  QVTs!MappingAction.all) {
+		var m = ma.mapping;
+		var consumedPDatums = m.getPropertyAccesses().collect(x | x.getPropertyDatum()).asOrderedSet();
+		consumedPDatums.addAll(m.getOperationCallExps().collect(x | x.getPropertyDatums()).flatten());
+		var producedPDatums = m.getPropertyAssignments().collect(x | x.getPropertyDatum()).asOrderedSet();
+		for (pDatum in producedPDatums) { // We want all the opposite produced by them
+			var oppositePDatum = pDatum.getOrCreateOppositePropDatum();
+			if (oppositePDatum.isDefined()) {
+				producedPDatums.add(oppositePDatum);
+			}
+		}
+		ma.productions.addAll(producedPDatums);
+		ma.requisites.addAll(consumedPDatums);
+	} 
+	
+	"QVTpToSchedule Done".println();
+}

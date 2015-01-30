@@ -71,6 +71,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="DataBinding">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sourceExp" eType="ecore:EClass http://www.eclipse.org/ocl/2015/Pivot#//OCLExpression"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targetDataParameter" eType="#//DataParameter"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="metric" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OutputAction" eSuperTypes="#//AbstractAction"/>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyDatum" eSuperTypes="#//AbstractDatum">

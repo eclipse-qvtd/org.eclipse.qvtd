@@ -30,7 +30,6 @@
 @cached 
 operation QVTs!MappingAction defineArgumentDerivation() : Map {
     
-    self.mapping.name.println("m ");
     // Find all the derivation alternatives. Nesting depends on which works best
     /*
         For each DataParameter (they are all primaryArguemnts at this point) find which
@@ -42,8 +41,8 @@ operation QVTs!MappingAction defineArgumentDerivation() : Map {
         We return [ma, [DataParameter, {{loopDataParameters}, {directDataParameters}}]] so
         the nesting policiy can use this information as it suits.      
         */
-    var dps = ma.distinctArguments.collect(da | da.primaryArguments.first());
-    var derivees = dps.aggregate(pa | pa, pa.derivedParameters(dps.excluding(pa),0));
+    self.parameters.println();
+    var derivees = self.parameters.aggregate(pa | pa, pa.derivedParameters(self.parameters.excluding(pa),0));
     
     for(k in derivees.keySet()) {
     	k.variable.name.println("Derived from ");
@@ -81,7 +80,7 @@ operation QVTs!MappingAction defineArgumentDerivation() : Map {
  * SEE ALSO
  *
  */
-operation QVTs!DataParameter derivedParameters(dps : Sequence, ident : Integer) : Sequence {
+operation QVTs!DataParameter derivedParameters(dps : OrderedSet, ident : Integer) : Sequence {
 
     var derived = new Sequence();
     var loop = new Set();
@@ -101,26 +100,21 @@ operation QVTs!DataParameter derivedParameters(dps : Sequence, ident : Integer) 
         // Can the opposite relation be used?
         for (rel in vB.variable.hasRelation(self.variable)) { //self.hasRelation(vB).sortBy(r | r.getCost()) // In the future cost can be used to select the less expensive navigation
             //vB.variable.name.println(printIdent(4*(ident+1)) + self.variable.name + "    has opposite relation to ");
-            
-            	if (rel.opposite.isDefined()) {
-		            if (rel.opposite.isMany()) {
-		            	if (not direct.includes(vB))
-		                	loop.add(vB);
-		            } else {
-		            	if (not loop.includes(vB))
-		                	direct.add(vB);
-		            }
-		            ident = ident+1;
-		            var recDerived = vB.derivedParameters(dps.excluding(self),ident);
-		            loop.addAll(recDerived.first());        // loop
-		            direct.addAll(recDerived.last());       // direct
-		            ident = ident -1;
-		        }
-            
-            
+        	if (rel.opposite.isDefined()) {
+	            if (rel.opposite.isMany()) {
+	                loop.add(vB);
+	            } else {
+	                direct.add(vB);
+	            }
+	            ident = ident+1;
+	            var recDerived = vB.derivedParameters(dps.excluding(self),ident);
+	            loop.addAll(recDerived.first());        // loop
+	            direct.addAll(recDerived.last());       // direct
+	            ident = ident -1;
+	        }
         }
     }
-    derived.add(loop);
+    derived.add(loop.excludingAll(direct));	// If the same variable can be found directly, preffer it!
     derived.add(direct);
     return derived;
 }

@@ -108,13 +108,15 @@ operation QVTs!Schedule findMapOrdering()  {
  */
 operation QVTs!MappingAction getOrdering(visited) {
 	
-	//self.mapping.name.println("getOrdering ");
-	visited.add(self);
-	for (ma in self.getPredecessors()) {
-		if (visited.excludes(ma))
-			ma.getOrdering(visited);
+	if (self.order = 0) {
+		//self.mapping.name.println("getOrdering ");
+		visited.add(self);
+		for (ma in self.getPredecessors()) {
+			if (visited.excludes(ma))
+				ma.getOrdering(visited);
+		}
+		self.order = self.schedule.getMaxIndex() + 1;
 	}
-	self.order = self.schedule.getMaxIndex() + 1;
 }
 
 
