@@ -41,25 +41,24 @@ operation QVTs!MappingAction defineArgumentDerivation() : Map {
         We return [ma, [DataParameter, {{loopDataParameters}, {directDataParameters}}]] so
         the nesting policiy can use this information as it suits.      
         */
-    self.parameters.println();
+    //self.parameters.println();
     var derivees = self.parameters.aggregate(pa | pa, pa.derivedParameters(self.parameters.excluding(pa),0));
-    
+    /*
     for(k in derivees.keySet()) {
     	k.variable.name.println("Derived from ");
-        derivees.get(k).last().collect(v | v.variable.name).println("  direct: ");
-        derivees.get(k).first().collect(v | v.variable.name).println("  loops: ");
+    	derivees.get(k).last().prettyPrint("direct:");
+    	derivees.get(k).first().prettyPrint("loop:");
     }
+    */
     return derivees;
-    /*
-        This depends on the nesting strategy, this loop works for the flat schedule                          
-        for (da in ma.distinctArguments.sortBy(da | derivees.get(da.primaryArguments.first()).size()).invert()) {
-            for (dv in derivees.get(da.primaryArguments.first())) {
-                if (ma.distinctArguments.exists(da | da.primaryArguments.exists(pa | pa.variable == dv))) {
-                    da.secondaryArguments.add(ma.distinctArguments.selectOne(da | da.primaryArguments.exists(pa | pa.variable == dv)).primaryArguments.first());
-                }
-            }
-        }
-        */
+}
+
+operation Map prettyPrint(what : String) {
+    what.println("  ");
+    for(k in self.keySet()) {
+        ": ".print(k.name);
+        self.get(k).variable.name.println();
+    }
 }
 
 /****o* ArgumentDerivation/derivedParameters
@@ -83,17 +82,16 @@ operation QVTs!MappingAction defineArgumentDerivation() : Map {
 operation QVTs!DataParameter derivedParameters(dps : OrderedSet, ident : Integer) : Sequence {
 
     var derived = new Sequence();
-    var loop = new Set();
-    var direct = new Set();
+    var loop = new Map();
+    var direct = new Map();
     //self.variable.name.println(printIdent(4*ident) + "derivedVariables ");
     for (vB in dps) {
-        for (rel in self.variable.hasRelation(vB.variable)) { //self.hasRelation(vB).sortBy(r | r.getCost()) // In the future cost can be used to select the less expensive navigation
-            //vB.variable.name.println(printIdent(4*(ident+1)) + self.variable.name + "    has relation to ");
-            direct.add(vB);
+        for (rel in self.variable.hasRelation(vB.variable)) {
+            direct.put(rel, vB);
             ident = ident+1;
             var recDerived = vB.derivedParameters(dps.excluding(self),ident);
-            loop.addAll(recDerived.first());        // loop
-            direct.addAll(recDerived.last());       // direct
+            loop.putAll(recDerived.first());
+            direct.putAll(recDerived.last());
             ident = ident -1;
             break;
         }
@@ -102,19 +100,24 @@ operation QVTs!DataParameter derivedParameters(dps : OrderedSet, ident : Integer
             //vB.variable.name.println(printIdent(4*(ident+1)) + self.variable.name + "    has opposite relation to ");
         	if (rel.opposite.isDefined()) {
 	            if (rel.opposite.isMany()) {
-	                loop.add(vB);
+	                loop.put(rel, vB);
 	            } else {
-	                direct.add(vB);
+	                direct.put(rel, vB);
 	            }
 	            ident = ident+1;
 	            var recDerived = vB.derivedParameters(dps.excluding(self),ident);
-	            loop.addAll(recDerived.first());        // loop
-	            direct.addAll(recDerived.last());       // direct
+	            loop.putAll(recDerived.first());
+                direct.putAll(recDerived.last());
 	            ident = ident -1;
 	        }
         }
     }
-    derived.add(loop.excludingAll(direct));	// If the same variable can be found directly, preffer it!
+    for (k in loop.keySet().clone()) {
+        if (direct.values.includes(loop.get(k))) {
+            loop.remove(k);
+        }
+    }
+    derived.add(loop);
     derived.add(direct);
     return derived;
 }
