@@ -49,6 +49,7 @@ import org.junit.Test;
  */
 public class OCL2QVTiTestCases extends LoadTestCase {
 	
+	private static final String TESTS_GEN_PATH = "/org.eclipse.qvtd.buid.cs2as.tests/tests-gen/";
 	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("org.eclipse.qvtd.buid.cs2as.tests/src/org/eclipse/qvtd/buid/cs2as/tests/models", true);
 	
 	protected class MyQVT extends OCL
@@ -57,13 +58,22 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 			super(environmentFactory);
 		}
 
-		public @NonNull QVTiPivotEvaluator createEvaluator(Transformation transformation) throws IOException {
+		public @NonNull QVTiPivotEvaluator createEvaluator(Transformation transformation) {
 			return new QVTiPivotEvaluator(getEnvironmentFactory(), transformation);
 		}
 
+		public @NonNull TxEvaluator createEvaluator(Constructor<? extends TransformationExecutor> txConstructor) throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
+			return new TxEvaluator(getCompleteEnvironment(), txConstructor);
+		}
 		@Override
 		public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
 			return (QVTiEnvironmentFactory) super.getEnvironmentFactory();
+		}
+	}
+	
+	protected static class TxEvaluator extends AbstractTransformationEvaluator {
+		private TxEvaluator(@NonNull CompleteEnvironment environment, Constructor<? extends TransformationExecutor> txConstructor) throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
+			super(environment, txConstructor);
 		}
 	}
 	
@@ -254,44 +264,80 @@ public class OCL2QVTiTestCases extends LoadTestCase {
     	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("SimplerKiamaSchedule_complete.graphml").toString(), false);
     	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("SimplerKiamaSchedule_pruned.graphml").toString(), true);
 	}
-//	
-////	FIXME commented until 	
-//	@Test
-//	public void testExample1_CG() throws Exception {
-//		URI baseURI = URI.createURI("platform:/resource/oclDependencyAnalysis.qvt/src/oclDependencyAnalysis/qvt/tests/models/example2/");
-//		URI oclDocUri = baseURI.appendSegment("classescs2as.oclas");
-//
-//		OCL2QVTiBroker mtc = new OCL2QVTiBroker(oclDocUri.toString(), this.getClass(), metamodelManager);
-//    	mtc.execute();
-//    	PivotModel qvtiTransf = mtc.getiModel();
-//    	
-//    	URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());
-//    	assertValidQVTiModel(txURI);
-//    	
-//    	//
-//    	// Generate the transformation java code
-//    	// 
-//		URI middleGenModelURI= oclDocUri.trimFileExtension().appendFileExtension("genmodel");
-//		Class<? extends AbstractTransformation> txClass = generateCode(qvtiTransf.getTransformation(), middleGenModelURI, "/oclDependencyAnalysis.qvt/tests-gen/");
-//    	
-//		
-//		Constructor<? extends AbstractTransformation> txConstructor = txClass.getConstructor(DomainEvaluator.class);
-//		DomainEvaluator evaluator = new TxEvaluator(ClassUtil.nonNullState(metamodelManager));
-//		AbstractTransformation tx = txConstructor.newInstance(evaluator);
-//		
-//		//
-//		// Execute the transformation
-//		//
-//    	URI samplesBaseUri = baseURI.appendSegment("samples");
-//    	URI csModelURI = samplesBaseUri.appendSegment("example1_input.xmi");
-//    	URI asModelURI = samplesBaseUri.appendSegment("example1_output.xmi");
-//		Resource inputResource = resourceSet.getResource(csModelURI, true);
-//		tx.addRootObjects("leftCS", ClassUtil.nonNullState(inputResource.getContents()));
-//		tx.run();
-//		Resource outputResource = resourceSet.createResource(asModelURI);
-//		outputResource.getContents().addAll(tx.getRootObjects("rightAS"));
-//		outputResource.save(null);
-//	}
+	
+	
+	@Test
+	public void testExample4_() throws Exception {
+		URI baseURI = TESTS_BASE_URI.appendSegment("example4");
+
+		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "SimplerKiama.oclas", myQVT);
+    	mtc.execute();
+    	
+    	PivotModel qvtiTransf = mtc.getiModel();
+    	URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());
+    	assertValidQVTiModel(txURI);
+    	
+    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("SimplerKiamaSchedule_complete.graphml").toString(), false);
+    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("SimplerKiamaSchedule_pruned.graphml").toString(), true);
+	}
+	
+	@Test
+	public void testExample1_CGv() throws Exception {
+		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
+
+		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "Source2Target.oclas", myQVT);
+    	mtc.execute();
+    	PivotModel qvtiTransf = mtc.getiModel();
+    	
+    	URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());
+    	assertValidQVTiModel(txURI);
+    	
+    	//
+    	// Generate the transformation java code
+    	// 
+		URI middleGenModelURI= baseURI.appendSegment("Source2Target.genmodel");
+		Class<? extends TransformationExecutor> txClass = generateCode(qvtiTransf.getTransformation(), middleGenModelURI, TESTS_GEN_PATH);
+	}
+		
+		
+	@Test
+	public void testExample2_CG() throws Exception {
+		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
+
+		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "classescs2as.oclas", myQVT);
+    	mtc.execute();
+    	PivotModel qvtiTransf = mtc.getiModel();
+    	
+    	URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());
+    	assertValidQVTiModel(txURI);
+    	
+    	//
+    	// Generate the transformation java code
+    	// 
+		URI middleGenModelURI= baseURI.appendSegment("classescs2as.genmodel");
+		Class<? extends TransformationExecutor> txClass = generateCode(qvtiTransf.getTransformation(), middleGenModelURI, TESTS_GEN_PATH);
+
+		/* FIXME allInstances doesn't work on output elements. Don't try yet
+		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
+		TransformationEvaluator evaluator = myQVT.createEvaluator(txConstructor);
+		TransformationExecutor tx = evaluator.getExecutor();
+		
+		//
+		// Execute the transformation
+		//
+
+    	URI samplesBaseUri = baseURI.appendSegment("samples");
+    	URI csModelURI = samplesBaseUri.appendSegment("example1_input.xmi");
+    	URI asModelURI = samplesBaseUri.appendSegment("example1_output.xmi");
+    	
+    	ResourceSet rSet = myQVT.getResourceSet();
+		Resource inputResource = rSet.getResource(csModelURI, true);
+		tx.addRootObjects("leftCS", ClassUtil.nonNullState(inputResource.getContents()));
+		tx.run();
+		Resource outputResource = rSet.createResource(asModelURI);
+		outputResource.getContents().addAll(tx.getRootObjects("rightAS"));
+		outputResource.save(null);*/
+	}
 	
 //	@Test
 //	public void testExample1_CGv2() throws Exception {
@@ -376,8 +422,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	protected static void assertValidQVTiModel(@NonNull URI asURI ) {
 	    
 		//EnvironmentFactory factory =  OCL.createEnvironmentFactory(new StandaloneProjectMap());
-		/* FIXME Validating QVTi models are causing problems. Not researched.
-		MetamodelManager.Internal mManager = factory.getMetamodelManager(); 
+		//FIXME Validating QVTi models are causing problems. Not researched.
+		/*MetamodelManager.Internal mManager = factory.getMetamodelManager(); 
         mManager.configureLoadFirstStrategy();
 		
 		URI oclURI = ClassUtil.nonNullState(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true));
