@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:eCoreContainemntTree="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree">
+  <eCoreContainemntTree:Node name="TopCS" children="/2 /1 /3" superTypes="/4">
+    <element href="SimplerKiamaCS.ecore#//TopCS"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="NodeCS" parent="/0 /2" subTypes="/2 /3" superTypes="/4">
+    <element href="SimplerKiamaCS.ecore#//NodeCS"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="CompositeCS" parent="/0 /2" children="/2 /1 /3" superTypes="/1 /4">
+    <element href="SimplerKiamaCS.ecore#//CompositeCS"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="LeafCS" parent="/0 /2" superTypes="/1 /4">
+    <element href="SimplerKiamaCS.ecore#//LeafCS"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="BaseCS" subTypes="/0 /1 /2 /3">
+    <element href="SimplerKiamaCS.ecore#//BaseCS"/>
+  </eCoreContainemntTree:Node>
+</xmi:XMI>

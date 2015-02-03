@@ -238,6 +238,22 @@ public class OCL2QVTiTestCases extends LoadTestCase {
         Resource expected =  rSet.getResource(expectedAsModelURI, true);
         assertSameModel(expected, rSet.getResource(asModelURI, true));
 	}
+	
+	
+	@Test
+	public void testExample4_() throws Exception {
+		URI baseURI = TESTS_BASE_URI.appendSegment("example4");
+
+		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "SimplerKiama.oclas", myQVT);
+    	mtc.execute();
+    	
+    	PivotModel qvtiTransf = mtc.getiModel();
+    	URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());
+    	assertValidQVTiModel(txURI);
+    	
+    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("SimplerKiamaSchedule_complete.graphml").toString(), false);
+    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("SimplerKiamaSchedule_pruned.graphml").toString(), true);
+	}
 //	
 ////	FIXME commented until 	
 //	@Test
