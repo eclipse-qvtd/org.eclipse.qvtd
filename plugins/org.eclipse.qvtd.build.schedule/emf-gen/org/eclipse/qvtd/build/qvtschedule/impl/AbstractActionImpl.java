@@ -3,20 +3,27 @@
 package org.eclipse.qvtd.build.qvtschedule.impl;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.eclipse.qvtd.build.qvtschedule.AbstractAction;
 import org.eclipse.qvtd.build.qvtschedule.AbstractDatum;
+import org.eclipse.qvtd.build.qvtschedule.DataParameter;
 import org.eclipse.qvtd.build.qvtschedule.DistinctData;
 import org.eclipse.qvtd.build.qvtschedule.Schedule;
 import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
@@ -36,7 +43,8 @@ import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractActionImpl#getOrder <em>Order</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractActionImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractActionImpl#getChildren <em>Children</em>}</li>
- *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractActionImpl#getArguments <em>Arguments</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractActionImpl#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractActionImpl#getResults <em>Results</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractActionImpl#getSchedule <em>Schedule</em>}</li>
  * </ul>
  *
@@ -114,14 +122,24 @@ public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container im
 	protected EList<AbstractAction> children;
 
 	/**
-	 * The cached value of the '{@link #getArguments() <em>Arguments</em>}' reference list.
+	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getArguments()
+	 * @see #getParameters()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AbstractDatum> arguments;
+	protected EList<AbstractDatum> parameters;
+
+	/**
+	 * The cached value of the '{@link #getResults() <em>Results</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getResults()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<DataParameter> results;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -276,11 +294,23 @@ public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<AbstractDatum> getArguments() {
-		if (arguments == null) {
-			arguments = new EObjectResolvingEList<AbstractDatum>(AbstractDatum.class, this, qvtschedulePackage.ABSTRACT_ACTION__ARGUMENTS);
+	public EList<AbstractDatum> getParameters() {
+		if (parameters == null) {
+			parameters = new EObjectResolvingEList<AbstractDatum>(AbstractDatum.class, this, qvtschedulePackage.ABSTRACT_ACTION__PARAMETERS);
 		}
-		return arguments;
+		return parameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<DataParameter> getResults() {
+		if (results == null) {
+			results = new EObjectResolvingEList<DataParameter>(DataParameter.class, this, qvtschedulePackage.ABSTRACT_ACTION__RESULTS);
+		}
+		return results;
 	}
 
 	/**
@@ -412,8 +442,10 @@ public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container im
 				return basicGetParent();
 			case qvtschedulePackage.ABSTRACT_ACTION__CHILDREN:
 				return getChildren();
-			case qvtschedulePackage.ABSTRACT_ACTION__ARGUMENTS:
-				return getArguments();
+			case qvtschedulePackage.ABSTRACT_ACTION__PARAMETERS:
+				return getParameters();
+			case qvtschedulePackage.ABSTRACT_ACTION__RESULTS:
+				return getResults();
 			case qvtschedulePackage.ABSTRACT_ACTION__SCHEDULE:
 				return getSchedule();
 		}
@@ -451,9 +483,13 @@ public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container im
 				getChildren().clear();
 				getChildren().addAll((Collection<? extends AbstractAction>)newValue);
 				return;
-			case qvtschedulePackage.ABSTRACT_ACTION__ARGUMENTS:
-				getArguments().clear();
-				getArguments().addAll((Collection<? extends AbstractDatum>)newValue);
+			case qvtschedulePackage.ABSTRACT_ACTION__PARAMETERS:
+				getParameters().clear();
+				getParameters().addAll((Collection<? extends AbstractDatum>)newValue);
+				return;
+			case qvtschedulePackage.ABSTRACT_ACTION__RESULTS:
+				getResults().clear();
+				getResults().addAll((Collection<? extends DataParameter>)newValue);
 				return;
 			case qvtschedulePackage.ABSTRACT_ACTION__SCHEDULE:
 				setSchedule((Schedule)newValue);
@@ -488,8 +524,11 @@ public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container im
 			case qvtschedulePackage.ABSTRACT_ACTION__CHILDREN:
 				getChildren().clear();
 				return;
-			case qvtschedulePackage.ABSTRACT_ACTION__ARGUMENTS:
-				getArguments().clear();
+			case qvtschedulePackage.ABSTRACT_ACTION__PARAMETERS:
+				getParameters().clear();
+				return;
+			case qvtschedulePackage.ABSTRACT_ACTION__RESULTS:
+				getResults().clear();
 				return;
 			case qvtschedulePackage.ABSTRACT_ACTION__SCHEDULE:
 				setSchedule((Schedule)null);
@@ -518,8 +557,10 @@ public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container im
 				return parent != null;
 			case qvtschedulePackage.ABSTRACT_ACTION__CHILDREN:
 				return children != null && !children.isEmpty();
-			case qvtschedulePackage.ABSTRACT_ACTION__ARGUMENTS:
-				return arguments != null && !arguments.isEmpty();
+			case qvtschedulePackage.ABSTRACT_ACTION__PARAMETERS:
+				return parameters != null && !parameters.isEmpty();
+			case qvtschedulePackage.ABSTRACT_ACTION__RESULTS:
+				return results != null && !results.isEmpty();
 			case qvtschedulePackage.ABSTRACT_ACTION__SCHEDULE:
 				return getSchedule() != null;
 		}

@@ -62,7 +62,7 @@ public class MtcBroker {
 	private static final String QVTS_MM = "platform:/resource/org.eclipse.qvtd.build.schedule/model/QVTSchedule.ecore";
 	
 	/** The Constant QVTS_URI. */
-	private static final String QVTS_URI = "http://www.eclipse.org/qvt/0.1/QVTschedule/";
+	private static final String QVTS_URI = "http://www.eclipse.org/qvt/0.2/QVTschedule/";
 	
 	/** The Constant OCL_STD_LIB_MODEL_NAME. */
 	private static final String OCL_STD_LIB_MODEL_NAME = "oclStdLib";

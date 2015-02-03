@@ -33,6 +33,7 @@ rule CoreModel
         mOut.ownedPackages.addAll(mIn.ownedPackages.equivalent());
         mOut.externalURI = mIn.externalURI.replace(".qvtm.qvtc", ".qvtp.qvti");
     }
+    
 rule Pacakge
 	transform pIn:QVTm!Package
 	to pOut:QVTp!Package {

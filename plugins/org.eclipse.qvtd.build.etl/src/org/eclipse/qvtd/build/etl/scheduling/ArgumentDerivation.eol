@@ -1,0 +1,143 @@
+/*******************************************************************************
+ * Copyright (c) 2015 The University of York and Willink Transformations.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
+ import "../helpers/QVTHelpers.eol";
+ 
+ /****l* /org.eclipse.qvtd.build.etl/scheduling/ArgumentDerivation
+ * NAME
+ *  ArgumentDerivation -- A set of operations to identyfy
+ * NOTES
+ *  Some of this operations can/should be moved to the QVTcore model/code 
+ */
+ 
+ /****o* ArgumentDerivation/defineArgumentDerivation
+ * NAME
+ *  defineArgumentDerivation - Identifies what parameters can be derived from
+ *  others
+ * FUNCTION
+ *  
+ * CONTEXT
+ *  QVTs!Schedule  The Schdule
+ * SEE ALSO
+ */
+@cached 
+operation QVTs!MappingAction defineArgumentDerivation() : Map {
+    
+    // Find all the derivation alternatives. Nesting depends on which works best
+    /*
+        For each DataParameter (they are all primaryArguemnts at this point) find which
+        other of the DataParameters can be derived. Create a map of this form:
+            [DataParameter, {{loopDataParameters}, {directDataParameters}}]
+        where the DataParameter is the key and the value is a tuple. The tuple contains
+        a set that can be loop variables and a set of which are directly derived.
+
+        We return [ma, [DataParameter, {{loopDataParameters}, {directDataParameters}}]] so
+        the nesting policiy can use this information as it suits.      
+        */
+    //self.parameters.println();
+    var derivees = self.parameters.aggregate(pa | pa, pa.derivedParameters(self.parameters.excluding(pa),0));
+    /*
+    for(k in derivees.keySet()) {
+    	k.variable.name.println("Derived from ");
+    	derivees.get(k).last().prettyPrint("direct:");
+    	derivees.get(k).first().prettyPrint("loop:");
+    }
+    */
+    return derivees;
+}
+
+operation Map prettyPrint(what : String) {
+    what.println("  ");
+    for(k in self.keySet()) {
+        ": ".print(k.name);
+        self.get(k).variable.name.println();
+    }
+}
+
+/****o* ArgumentDerivation/derivedParameters
+ * NAME
+ *  derivedParameters - Analysis of variable relations to find derivable ones
+ * FUNCTION
+ *  Returns a tuple (collection) of DataParameters that can be derived from the
+ *  context DataParameter.
+ *  The function performs a full depth search looking for variables that can be
+ *  derived from the derived ones too.
+ *
+ * CONTEXT
+ *  QVT!Variable  The variable being analyzed
+ * PARAMETERS
+ *  vars The variables to look for relations
+ * RESULT
+ *  A
+ * SEE ALSO
+ *
+ */
+operation QVTs!DataParameter derivedParameters(dps : OrderedSet, ident : Integer) : Sequence {
+
+    var derived = new Sequence();
+    var loop = new Map();
+    var direct = new Map();
+    //self.variable.name.println(printIdent(4*ident) + "derivedVariables ");
+    for (vB in dps) {
+        for (rel in self.variable.hasRelation(vB.variable)) {
+            direct.put(rel, vB);
+            ident = ident+1;
+            var recDerived = vB.derivedParameters(dps.excluding(self),ident);
+            loop.putAll(recDerived.first());
+            direct.putAll(recDerived.last());
+            ident = ident -1;
+            break;
+        }
+        // Can the opposite relation be used?
+        for (rel in vB.variable.hasRelation(self.variable)) { //self.hasRelation(vB).sortBy(r | r.getCost()) // In the future cost can be used to select the less expensive navigation
+            //vB.variable.name.println(printIdent(4*(ident+1)) + self.variable.name + "    has opposite relation to ");
+        	if (rel.opposite.isDefined()) {
+	            if (rel.opposite.isMany()) {
+	                loop.put(rel, vB);
+	            } else {
+	                direct.put(rel, vB);
+	            }
+	            ident = ident+1;
+	            var recDerived = vB.derivedParameters(dps.excluding(self),ident);
+	            loop.putAll(recDerived.first());
+                direct.putAll(recDerived.last());
+	            ident = ident -1;
+	        }
+        }
+    }
+    for (k in loop.keySet().clone()) {
+        if (direct.values.includes(loop.get(k))) {
+            loop.remove(k);
+        }
+    }
+    derived.add(loop);
+    derived.add(direct);
+    return derived;
+}
+
+/****o* Scheduler/removeEmptyDistinctData
+ * NAME
+ *  removeEmptyDistinctData - Remove DistinctData elements that don't have a 
+ *  primary argument.
+ * CONTEXT
+ *  QVTs!Schedule  The Schdule
+ */
+operation QVTs!Schedule removeEmptyDistinctData() {
+    
+    for (da in self.actions.collect(a | a.distinctArguments).flatten().select(dd | dd.primaryArguments.isEmpty())) {
+        delete da;
+    }
+}
+
+/* =========================================== */
+
+operation printIdent(size : Integer) : String {
+    return "".pad(size, " ", true);
+}

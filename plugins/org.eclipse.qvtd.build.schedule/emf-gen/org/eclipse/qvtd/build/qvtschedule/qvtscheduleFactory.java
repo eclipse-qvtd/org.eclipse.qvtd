@@ -67,6 +67,15 @@ public interface qvtscheduleFactory extends EFactory {
 	MappingAction createMappingAction();
 
 	/**
+	 * Returns a new object of class '<em>Data Binding</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Data Binding</em>'.
+	 * @generated
+	 */
+	DataBinding createDataBinding();
+
+	/**
 	 * Returns a new object of class '<em>Output Action</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -134,20 +134,24 @@ operation GML!NodeType stilishNode(shapeType) {
 	self.data.add(nType);
 }
 
-operation GML!EdgeType stilishEdge(lineType) {
+operation GML!EdgeType stilishEdge(lineType, color) {
 
  	var eType = new GML!DataType;
     var ePolyLine = new GML!PolyLineEdgeType;
     var eArrow : new GML!ArrowsType;
 	var eStyle : new GML!LineStyleType;
+	var eLabel : new GML!EdgeLabelType;
+    
     
     eStyle.type = lineType;
+    eStyle.color = color;
     eArrow.target = GML!ArrowTypeType#standard;
     eArrow.source = GML!ArrowTypeType#none;    
     ePolyLine.arrows= eArrow;
     ePolyLine.lineStyle = eStyle;
     eType.key = eTypeKey.id;
     eType.polyLineEdge = ePolyLine;
+    eLable.value = self.id;
     self.data.add(eType);
     
 }

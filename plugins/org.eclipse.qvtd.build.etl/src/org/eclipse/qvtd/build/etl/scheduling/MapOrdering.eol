@@ -31,53 +31,13 @@ import "../helpers/QVTsHelpers.eol";
 
 operation QVTs!Schedule doMapOrdering() {
 
+    // This is not relevant to ordering, move to scheduling
 	// Secondary Argument Derivations
-	self.defineArgumentDerivation();
-	self.removeEmptyDistinctData();
+	--self.defineArgumentDerivation();
+	--self.removeEmptyDistinctData();
 	
 	// Ordering
 	self.findMapOrdering();
-}
-
-/****o* Scheduler/defineArgumentDerivation
- * NAME
- *  defineArgumentDerivation - Identifies what parameters can be derived from
- *  others
- * FUNCTION
- *  
- * CONTEXT
- *  QVTs!Schedule  The Schdule
- * SEE ALSO
- */
-operation QVTs!Schedule defineArgumentDerivation() {
-    for (ma in self.actions) {
-        //ma.mapping.name.println("m ");
-        // Find the best derivation alternatives
-        var inputVars = ma.distinctArguments.collect(da | da.primaryArguments.first().variable);
-        var derivees = ma.distinctArguments.collect(da | da.primaryArguments.first())
-                .aggregate(pa | pa, pa.variable.derivedVariables(inputVars));                    
-        for (da in ma.distinctArguments.sortBy(da | derivees.get(da.primaryArguments.first()).size()).invert()) {
-            for (dv in derivees.get(da.primaryArguments.first())) {
-                if (ma.distinctArguments.exists(da | da.primaryArguments.exists(pa | pa.variable == dv))) {
-                    da.secondaryArguments.add(ma.distinctArguments.selectOne(da | da.primaryArguments.exists(pa | pa.variable == dv)).primaryArguments.first());
-                }
-            }
-        }
-    }
-}
-
-/****o* Scheduler/removeEmptyDistinctData
- * NAME
- *  removeEmptyDistinctData - Remove DistinctData elements that don't have a 
- *  primary argument.
- * CONTEXT
- *  QVTs!Schedule  The Schdule
- */
-operation QVTs!Schedule removeEmptyDistinctData() {
-    
-    for (da in self.actions.collect(a | a.distinctArguments).flatten().select(dd | dd.primaryArguments.isEmpty())) {
-        delete da;
-    }
 }
 
 
@@ -148,54 +108,19 @@ operation QVTs!Schedule findMapOrdering()  {
  */
 operation QVTs!MappingAction getOrdering(visited) {
 	
-	//self.mapping.name.println("getOrdering ");
-	visited.add(self);
-	for (ma in self.getPredecessors()) {
-		if (visited.excludes(ma))
-			ma.getOrdering(visited);
+	if (self.order = 0) {
+		//self.mapping.name.println("getOrdering ");
+		visited.add(self);
+		for (ma in self.getPredecessors()) {
+			if (visited.excludes(ma))
+				ma.getOrdering(visited);
+		}
+		self.order = self.schedule.getMaxIndex() + 1;
 	}
-	self.order = self.schedule.getMaxIndex() + 1;
 }
 
 
-/****o* Scheduler/derivedVariables
- * NAME
- *  derivedVariables - Analysis of variable relations to find derivable ones
- * FUNCTION
- *  Returns a list of variables that can be derived from the context variable.
- *  The function performs a full depth search looking for variables that can be
- *  derived from the derived ones too.
- *
- * CONTEXT
- *  QVT!Variable  The variable being analyzed
- * PARAMETERS
- *  vars The variables to look for relations
- * RESULT
- *  A
- * SEE ALSO
- *
- */
-operation QVT!Variable derivedVariables(vars : Sequence) : Set {
 
-    var derived : Set;
-    for (vB in vars.excluding(self)) {
-        for (rel in self.hasRelation(vB)) { //self.hasRelation(vB).sortBy(r | r.getCost()) // In the future cost can be used to select the less expensive navigation
-            //vB.name.println(self.name + "    has relation to ");
-            derived.add(vB);
-            derived.addAll(vB.derivedVariables(vars.excluding(self)));
-            break;
-        }
-        // Can the opposite relation be used?
-        for (rel in vB.hasRelation(self)) { //self.hasRelation(vB).sortBy(r | r.getCost()) // In the future cost can be used to select the less expensive navigation
-            //vB.name.println(self.name + "    has relation to ");
-            if (hasNavigableOpposite(rel)) {
-                derived.add(vB);
-                derived.addAll(vB.derivedVariables(vars.excluding(self)));
-            }
-        }
-    }
-    return derived;
-}
 
 /****o* MapOrdering/getMaxIndex
  * NAME
@@ -222,6 +147,7 @@ operation QVTs!Schedule getMaxIndex() : Integer {
 operation rTree!Node isRootElementCandidate() : Boolean {
 	return self.parent.isEmpty() and not self.element.isAbstract;
 }
+
 @cached
 operation QVTs!ClassDatum correspondsWith(node : rTree!Node) : Boolean {
 	return self.type.getETarget() = node.element;
@@ -230,4 +156,3 @@ operation QVTs!ClassDatum correspondsWith(node : rTree!Node) : Boolean {
 
  
 /* =========================================== */
-

@@ -4,7 +4,6 @@ package org.eclipse.qvtd.build.qvtschedule;
 
 import org.eclipse.emf.common.util.EList;
 
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Class Datum</b></em>'.
@@ -23,7 +22,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface ClassDatum extends AbstractDatum {
-
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -67,4 +65,5 @@ public interface ClassDatum extends AbstractDatum {
 	 * @generated
 	 */
 	EList<PropertyDatum> getPropertyDatums();
+
 } // ClassDatum

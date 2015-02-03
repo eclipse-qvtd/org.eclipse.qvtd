@@ -1,0 +1,262 @@
+/*******************************************************************************
+ * Copyright (c) 2013 The University of York and Willink Transformations.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
+import "RootMapping.eol";
+import "MapOrdering.eol";
+import "ArgumentDerivation.eol";
+
+ /****l* /org.eclipse.qvtd.build.etl.scheduling/NestedSchedule
+ * NAME
+ *  NestedSchedule -- Creates a simple nested schedule, solely based on the
+ *  map ordering and nesting based on containment trees (i.e. mappings are nested
+ *  in mappings that 
+ *
+ * MODELS
+ *  Required models to run the script:
+ *      - NAME      ALIASES METAMODEL               ROL SOD
+ *      - QVTp      QVT     QVTi                     X   -        The QVTi (partitioned) AST
+ *      - rTree     tree    ECoreContainmentTree     X   -        The right metamodel containment tree
+ *      - mTree     tree    ECoreContainmentTree     X   -        The middle metamodel containment tree
+ *      - lTree     tree    ECoreContainmentTree     X   -        The left metamodel containment tree
+ *      - QVTs              QVTScheduling            -   X        The scheduling model
+ *
+ * FUNCTION
+ *  Defines a nested simple schedule based on the mapping ordering and by nesting
+ *  mappings under mappings that provide the most variable/types in order to
+ *  reduce the global searches. Placement should be as low down as possible, i.e.
+ *  prefer the more inmediate predecesor, but above any unused iteration
+ *  variables.
+ *
+ *  Mappings with multiple input variables of the same type
+ * TRHOWS
+ *  Exception if a mapping with name "__root__" already exists. 
+ * SEE ALSO
+ *  MapOrdering.eol
+ *  RootMapping.eol
+ *  FlatSchedule.eol
+ ******
+ */
+
+var s = QVTs!qvtschedule::Schedule.all.first();
+// Map Ordering
+s.doMapOrdering();
+
+// Schedule
+s.simpleNest();
+
+
+//QVTp.setCachingEnabled(false);
+//t.forceOrder();
+//QVTp.setCachingEnabled(true);
+
+// Create root mapping
+//var t = QVTp!Transformation.all.first(); 
+//var bm = t.getRootMapping();
+
+
+///var ma = new QVTs!MappingAction;
+//ma.order = 0;
+// Parentless mapping actions to the root.
+//for (na in s.actions.select(ma | not ma.parent.isDefined()).sortBy(a | a.order)) {
+//    na.parent = ma;     // All mappings invoked from the root in order
+//}
+//ma.schedule = s;
+//ma.mapping = bm;
+"Nested Scheduling Done".println();
+
+
+/****o* NestedSchedule/simpleNest
+ * NAME
+ *  simpleNest - Define the mapping action nesting.
+ * FUNCTION
+ *  Constructs the schedule tree by finding the best place for each
+ *  node (MappingAction).
+ * CONTEXT
+ *  QVTs!Schedule   The schedule
+ */
+operation QVTs!Schedule simpleNest() {
+	var rootNode = new QVTs!MappingAction;
+	rootNode.order = 0;
+	self.~rootNode = rootNode;
+	for (ma in QVTs!MappingAction.all().excluding(rootNode).sortBy(ma | ma.order)) {
+		ma.mapping.name.println("Nesting: ");
+		var parent = s.bestParent(ma);
+		if (parent.isDefined()) {
+            parent.mapping.name.println("Best parent ");
+			ma.parent = parent;
+			//parent.defineBindings(ma);	
+		} else {
+			ma.parent = rootNode;
+			//rootNode.defineBindings(ma);
+		}
+	}
+}
+
+/****o* NestedSchedule/bestParent
+ * NAME
+ *  bestParent - Find the best parent for a given node.
+ * FUNCTION
+ *  The parent can only be in the right edge nodes of the root and can have at
+ *  most 1 input per requried type. The best parent is the one with the best
+ *  metric. For similar metrics the depth of the tree and of the parent is
+ *  taken into consideration.
+ * CONTEXT
+ *  QVTs!Schedule   The schedule
+ * PARAMETERS
+ *  QVTs!MappingAction The next node to place in the tree
+ */
+operation QVTs!Schedule bestParent(nextNode : QVTs!MappingAction) : QVTs!MappingAction {
+	
+	var ren = self.rightEdgeNodes();
+	ren.collect(ma | ma.mapping.name).println("Right Edge Nodes: ");
+	var parentNodes = ren.select(parentNode | nextNode.hasAtMostOneInputPerIterator(parentNode));
+	parentNodes.collect(pn | pn.mapping.name).println("parentNodes ");
+	for (pn in parentNodes) {
+	   nextNode.metric(pn).println(pn.mapping.name + " metric: ");
+	}
+	parentNodes = parentNodes.sortBy(pn | nextNode.metric(pn)*self.treeDepth() + pn.depth());
+	return parentNodes.first();
+}
+
+operation QVTs!Schedule rightEdgeNodes() : Sequence {
+	return self.~rootNode.closure(n | n.children.last());
+}
+
+operation  QVTs!MappingAction hasAtMostOneInputPerIterator(parentNode : QVTs!MappingAction) : Boolean {
+	
+	parentNode.mapping.name.println(self.mapping.name + " AtMostOneInputPerIterator in ");
+	var iterators = parentNode.getContextDataParameters();
+	iterators.collect(i | i.variable.name).println("iterators ");
+	var iteratorTypes = iterators.collect(i | i.variable.type).asSet();
+	iteratorTypes.collect(t | t.name).println("iteratorTypes ");
+	var inputTypes = self.parameters.collect(dp | dp.variable.type);
+	inputTypes.collect(t | t.name).println("inputTypes ");
+	var inputTypeCountPerIteratorType = iteratorTypes.collect(it | inputTypes.select(t | t == it).size());
+	inputTypeCountPerIteratorType.println("inputTypeCountPerIteratorType ");
+	(not inputTypeCountPerIteratorType.exists(c | c > 1)).println();
+	return not inputTypeCountPerIteratorType.exists(c | c > 1);
+}
+
+@cached
+operation QVTs!MappingAction metric(parentNode : QVTs!MappingAction) : Integer {
+    
+    return self.getBestPrimaryParameter(parentNode).last();
+}
+
+operation QVTs!MappingAction defineBindings(nestedNode :  QVTs!MappingAction) {
+
+	self.println(nestedNode + " defineBindings to ");
+	var bestKey = nestedNode.getBestPrimaryParameter(self).first();
+	bestKey.isLoop = true;
+	// TODO, what happens if not all the variables can be derived from just 1 key?
+}
+
+// returns {QVTs!DataParameter, metric}
+operation QVTs!MappingAction getBestPrimaryParameter(parentNode :  QVTs!MappingAction) : Sequence {
+    var nnDerivations = self.defineArgumentDerivation();
+    // Select the derivation with the lowest cost
+    parentNode.mapping.name.println("getBestPrimaryParameter: ");
+    var metrics = nnDerivations.keySet().aggregate(k | k, parentNode.comboCost(k, nnDerivations.get(k)));
+    var bestKey = metrics.keySet().sortBy(k | metrics.get(k)).first();
+    bestKey.variable.name.println("BestPrimaryParameter ");
+    return Sequence{bestKey, metrics.get(bestKey)};
+}
+
+operation QVTs!MappingAction comboCost(primary : QVTs!DataParameter, derived : Sequence) {
+
+	// self is the possible parentNode and holds the context information
+    //dataParameters.println("cost ");
+    /*  A MappingAction can have different combinations of primary and derived DataParameters.
+		The derived ones, can be either direct, or loops. We have this information in a map of maps.
+		TODO this could be moved to a in-memory model
+	    
+			[ma, [PrimaryDataParameter, {[rel, loopDataParameter], [rel, directDataParameter]}]]
+
+		This operation calculates the cost of one combination. Either the primary or derived can
+ 		be on the context (if a derived, we must check they are related by the same relation)
+		
+        1 - a variable already computed by a parent mapping/iteration
+		2*N - a [M..N] composition parent / child reference
+		20 - [M..*] child reference
+		2*N - a [M..N] forward reference
+		20 - [M..*] forward reference
+		5*N - a [M..N] unnavigable opposite reference
+		50 - a [M..*] unnavigable opposite reference
+		100 - an unbound reference (i.e. allInstances())
+    */
+    
+    var metricResult = 0;
+    var matched = self.getContextDataParameters();
+    var matchedTypes = matched.collect(m | m.variable.type);
+    // 1. Primary
+    if (matchedTypes.includes(primary.variable.type)) {
+        // TODO The actual cost should be the cost that was previously found when binding that variable?
+    	metricResult = metricResult + 1;
+    } else {
+    	metricResult = metricResult + 100;
+    }
+    // 2. Derived
+    // a. Non loop references can be forward, opposite or unnavigable 0..1, i.e. N = 1
+      // FIXME select the ones that are unnavigable opposites beacuse they are expensier
+    var directCost = 0;
+    for (d in derived.last().keySet()) {
+        if (d.isImplicit) {
+            "direct is implict".println();
+            directCost = directCost + 5;
+        } else {
+            directCost = directCost + 2;
+        }
+    }
+    metricResult = metricResult + directCost;
+    // b. For loop, the cost depends on the multiplicity of the opposite reference
+    // FIXME derived analysis could return the opposite so we directly know what reference to use
+    var loopCost = 0;
+    for (d in derived.first().keySet()) {
+        var M = d.opposite.getType().getUpperValue();
+        //M.println("M ");
+        var mult = 2;
+        if (d.isImplicit) {
+            "loop is implict".println();
+            mult = 5;
+        }
+        if (M.isUnlimited()) {
+            loopCost = loopCost + mult*10;   // FIXME Test for unnavigable opposite
+        } else {
+            var N = d.opposite.getType().getLowerValue();
+            //N.println("N ");
+            loopCost = loopCost + mult*(M.intValue()-N);   // FIXME Test for unnavigable opposite 
+        }
+    }
+    metricResult = metricResult + loopCost;
+    primary.variable.name.println("Primary: ");
+    loopCost.println("loopCost: ");
+    metricResult.println("metric: ");
+    return metricResult;
+}
+
+@cached
+operation QVTs!MappingAction getContextDataParameters() : OrderedSet {
+	
+	var contextdp = self.getAvailableDataParameters();
+	if (self.parent.isDefined()) {
+		contextdp.addAll(self.parent.closure(p | p.parent).collect(p | p.getAvailableDataParameters()));
+	}
+	return contextdp;
+}
+
+operation QVTs!MappingAction getAvailableDataParameters() : OrderedSet {
+	
+	return self.parameters.includingAll(self.results);
+}
+
+//==============================================================================
+
+
+

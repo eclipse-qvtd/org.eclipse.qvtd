@@ -111,7 +111,7 @@ rule Mappings
         if (not ma.children.isEmpty()) {
             mOut.mappingStatement = new QVTi!MappingSequence;
             // Add loops of mapping calls accordingly... hard!
-            if (ma.hasLoopVariable()) {
+            if (ma.parent.mapping) {
                 // Add only the loops of the PrimaryArguments with the most secondary arguments
                 // The other DistinctData loops will be nested inside these
                 mOut.mappingStatement.mappingStatements.addAll(ma.children

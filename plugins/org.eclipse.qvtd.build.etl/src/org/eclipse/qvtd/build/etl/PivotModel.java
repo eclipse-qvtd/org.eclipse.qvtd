@@ -160,7 +160,7 @@ public class PivotModel extends EmfModel {
 	}
 	
 	@Override
-	protected Collection<EObject> allContentsFromModel(){
+	protected Collection<EObject> allContentsFromModel() {
 		final List<EObject> allInstances = new ArrayList<EObject>();
 		List<Resource> resources = new ArrayList<Resource>();
 		if (expand && modelImpl.getResourceSet() != null) {

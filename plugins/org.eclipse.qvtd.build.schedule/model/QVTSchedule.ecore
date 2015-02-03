@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvtschedule" nsURI="http://www.eclipse.org/qvt/0.1/QVTschedule/"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="qvtschedule" nsURI="http://www.eclipse.org/qvt/0.2/QVTschedule/"
     nsPrefix="qvtschedule">
   <eClassifiers xsi:type="ecore:EClass" name="AbstractDatum" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="super" upperBound="-1"
@@ -29,8 +29,10 @@
         eOpposite="#//AbstractAction/children"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//AbstractAction" eOpposite="#//AbstractAction/parent"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
-        eType="#//AbstractDatum" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//AbstractDatum"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="results" upperBound="-1"
+        eType="#//DataParameter"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="schedule" eType="#//Schedule"
         eOpposite="#//Schedule/actions"/>
   </eClassifiers>
@@ -63,6 +65,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="MappingAction" eSuperTypes="#//AbstractAction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="mapping" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/qvt/2015/QVTimperative#//Mapping"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataBindings" upperBound="-1"
+        eType="#//DataBinding" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataBinding">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceExp" eType="ecore:EClass http://www.eclipse.org/ocl/2015/Pivot#//OCLExpression"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetDataParameter" eType="#//DataParameter"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="metric" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OutputAction" eSuperTypes="#//AbstractAction"/>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyDatum" eSuperTypes="#//AbstractDatum">

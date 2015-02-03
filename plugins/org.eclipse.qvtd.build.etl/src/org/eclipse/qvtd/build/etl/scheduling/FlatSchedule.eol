@@ -10,6 +10,7 @@
  ******************************************************************************/
 import "RootMapping.eol";
 import "MapOrdering.eol";
+import "ArgumentDerivation.eol";
 
  /****l* /org.eclipse.qvtd.build.etl.scheduling/FlatSchedule
  * NAME
@@ -35,14 +36,19 @@ var s = QVTs!Schedule.all.first();
 s.doMapOrdering();
 
 // Schedule
+var maDerivations = s.defineArgumentDerivation();
+
+// Flat nesting at the root
 var ma = new QVTs!MappingAction;
 ma.order = 0;
-// Define nestings
 for (na in s.actions.sortBy(a | a.order)) {
     na.parent = ma;     // All mappings invoked from the root in order
 }
+
+//s.removeEmptyDistinctData();
+
 ma.schedule = s;
 var t = QVTp!Transformation.all.first(); 
-var bm = t.getRootMapping();
-ma.mapping = bm;
+//var bm = t.getRootMapping();
+//ma.mapping = bm;
 "Flat Scheduling Done".println();

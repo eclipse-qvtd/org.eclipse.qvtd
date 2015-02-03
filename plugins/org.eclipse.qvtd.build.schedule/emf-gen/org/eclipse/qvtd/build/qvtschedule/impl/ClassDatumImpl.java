@@ -3,14 +3,20 @@
 package org.eclipse.qvtd.build.qvtschedule.impl;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.eclipse.qvtd.build.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.build.qvtschedule.PropertyDatum;
 import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
@@ -40,6 +46,7 @@ public class ClassDatumImpl extends AbstractDatumImpl implements ClassDatum {
 	 * @ordered
 	 */
 	protected org.eclipse.ocl.pivot.Class type;
+
 	/**
 	 * The cached value of the '{@link #getPropertyDatums() <em>Property Datums</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

@@ -14,6 +14,7 @@ import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.qvtd.build.qvtschedule.AbstractAction;
 import org.eclipse.qvtd.build.qvtschedule.AbstractDatum;
 import org.eclipse.qvtd.build.qvtschedule.ClassDatum;
+import org.eclipse.qvtd.build.qvtschedule.DataBinding;
 import org.eclipse.qvtd.build.qvtschedule.DataParameter;
 import org.eclipse.qvtd.build.qvtschedule.DistinctData;
 import org.eclipse.qvtd.build.qvtschedule.InputAction;
@@ -83,6 +84,13 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * @generated
 	 */
 	private EClass mappingActionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dataBindingEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -309,7 +317,7 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractAction_Arguments() {
+	public EReference getAbstractAction_Parameters() {
 		return (EReference)abstractActionEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -318,8 +326,17 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractAction_Schedule() {
+	public EReference getAbstractAction_Results() {
 		return (EReference)abstractActionEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractAction_Schedule() {
+		return (EReference)abstractActionEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -471,6 +488,42 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getMappingAction_DataBindings() {
+		return (EReference)mappingActionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getDataBinding() {
+		return dataBindingEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDataBinding_SourceExp() {
+		return (EReference)dataBindingEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getDataBinding_TargetDataParameter() {
+		return (EReference)dataBindingEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getOutputAction() {
 		return outputActionEClass;
 	}
@@ -582,7 +635,8 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 		createEAttribute(abstractActionEClass, ABSTRACT_ACTION__ORDER);
 		createEReference(abstractActionEClass, ABSTRACT_ACTION__PARENT);
 		createEReference(abstractActionEClass, ABSTRACT_ACTION__CHILDREN);
-		createEReference(abstractActionEClass, ABSTRACT_ACTION__ARGUMENTS);
+		createEReference(abstractActionEClass, ABSTRACT_ACTION__PARAMETERS);
+		createEReference(abstractActionEClass, ABSTRACT_ACTION__RESULTS);
 		createEReference(abstractActionEClass, ABSTRACT_ACTION__SCHEDULE);
 
 		classDatumEClass = createEClass(CLASS_DATUM);
@@ -605,6 +659,11 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 
 		mappingActionEClass = createEClass(MAPPING_ACTION);
 		createEReference(mappingActionEClass, MAPPING_ACTION__MAPPING);
+		createEReference(mappingActionEClass, MAPPING_ACTION__DATA_BINDINGS);
+
+		dataBindingEClass = createEClass(DATA_BINDING);
+		createEReference(dataBindingEClass, DATA_BINDING__SOURCE_EXP);
+		createEReference(dataBindingEClass, DATA_BINDING__TARGET_DATA_PARAMETER);
 
 		outputActionEClass = createEClass(OUTPUT_ACTION);
 
@@ -674,7 +733,8 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 		initEAttribute(getAbstractAction_Order(), ecorePackage.getEInt(), "order", null, 0, 1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractAction_Parent(), this.getAbstractAction(), this.getAbstractAction_Children(), "parent", null, 0, 1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractAction_Children(), this.getAbstractAction(), this.getAbstractAction_Parent(), "children", null, 0, -1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbstractAction_Arguments(), this.getAbstractDatum(), null, "arguments", null, 0, -1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractAction_Parameters(), this.getAbstractDatum(), null, "parameters", null, 0, -1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractAction_Results(), this.getDataParameter(), null, "results", null, 0, -1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractAction_Schedule(), this.getSchedule(), this.getSchedule_Actions(), "schedule", null, 0, 1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(classDatumEClass, ClassDatum.class, "ClassDatum", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -697,6 +757,11 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 
 		initEClass(mappingActionEClass, MappingAction.class, "MappingAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMappingAction_Mapping(), theQVTimperativePackage.getMapping(), null, "mapping", null, 1, 1, MappingAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingAction_DataBindings(), this.getDataBinding(), null, "dataBindings", null, 0, -1, MappingAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(dataBindingEClass, DataBinding.class, "DataBinding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getDataBinding_SourceExp(), thePivotPackage.getOCLExpression(), null, "sourceExp", null, 0, 1, DataBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDataBinding_TargetDataParameter(), this.getDataParameter(), null, "targetDataParameter", null, 0, 1, DataBinding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(outputActionEClass, OutputAction.class, "OutputAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
