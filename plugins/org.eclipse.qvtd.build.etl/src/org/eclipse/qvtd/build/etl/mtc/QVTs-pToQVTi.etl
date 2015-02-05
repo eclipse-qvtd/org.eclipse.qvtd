@@ -110,6 +110,10 @@ rule Mappings
         var ma = QVTs!MappingAction.all().selectOne(ma | ma.mapping.name == mIn.name); 
         if (not ma.children.isEmpty()) {
             mOut.mappingStatement = new QVTi!MappingSequence;
+            mOut.mappingStatement.mappingStatements.addAll(ma.children
+            		.select(c | not c.parameterDerivations.exists(pd | pd.secondaryParameter.isLoop)).equivalent());
+            //mOut.mappingStatement.mappingStatements.addAll(ma.children.equivalent());
+            /*
             // Add loops of mapping calls accordingly... hard!
             if (ma.parent.mapping) {
                 // Add only the loops of the PrimaryArguments with the most secondary arguments
@@ -120,6 +124,7 @@ rule Mappings
             } else {
                 mOut.mappingStatement.mappingStatements.addAll(ma.children.equivalent());
             }
+			*/
         }
     }
 
@@ -261,8 +266,7 @@ rule Variables
         guard { var varContainer = vIn.eContainer();
         		return (not varContainer.isKindOf(QVTp!OCLExpression)) and
         			   (not varContainer.isKindOf(QVTp!ExpressionInOCL));
-         }
-        
+        }
         vOut.isImplicit = vIn.isImplicit;
         vOut.type = vIn.type;
     }
@@ -283,10 +287,31 @@ rule RootMappingAction
 	transform ma : QVTs!MappingAction
     to m : QVTi!Mapping
     {
-    	guard : ma.order = 0
+    	guard : ma.parent.isUndefined() and ma.order = 0
     	
     	m.name = "__root__";
     	m.transformation ::= QVTp!Transformation.all.first();
+    	m.name.println("Mappings " );
+    	m.guardPattern = new QVTi!GuardPattern;
+    	m.bottomPattern = new QVTi!BottomPattern;
+        //if (not ma.children.isEmpty()) {
+            m.mappingStatement = new QVTi!MappingSequence;
+            m.mappingStatement.mappingStatements.addAll(ma.children
+            		.select(c | not c.parameterDerivations.exists(pd | pd.secondaryParameter.isLoop)).equivalent());
+            //mOut.mappingStatement.mappingStatements.addAll(ma.children.equivalent());
+            /*
+            // Add loops of mapping calls accordingly... hard!
+            if (ma.parent.mapping) {
+                // Add only the loops of the PrimaryArguments with the most secondary arguments
+                // The other DistinctData loops will be nested inside these
+                mOut.mappingStatement.mappingStatements.addAll(ma.children
+                    .collect(ma | ma.getMainDistinctData())
+                    .flatten().equivalent());
+            } else {
+                mOut.mappingStatement.mappingStatements.addAll(ma.children.equivalent());
+            }
+			*/
+        //}
     }
 
 
@@ -297,71 +322,28 @@ rule MappingActions
         guard : ma.parent.isDefined()
         
         mc.referredMapping ::= QVTp!Mapping.all().selectOne(m | ma.mapping.name == m.name);
-        mc.binding.addAll(ma.distinctArguments.collect(da | da.primaryArguments.includingAll(da.secondaryArguments)).equivalent().select(e | e.isTypeOf(QVTi!MappingCallBinding)));
+        mc.binding.addAll(ma.parameters.equivalent());
+        //for (binding in mc.binding.select(b | b.value.isTypeOf(QVTi!VariableExp) and b.value.referredVariable.isUndefined())) {
+        //	binding.value.referredVariable ::= ma.getContextDataParameters().selectOne(dp | dp.variable.type == binding.boundVariable.type).variable;
+        //	binding.value.type = binding.value.referredVariable.type;
+        //}
     }
 
-    
-rule DistinctData
-    transform dd : QVTs!DistinctData
-    to loop : QVTi!MappingLoop
-    {
-        
-        var it = new QVTi!Variable;
-        it.name = dd.primaryArguments.first().variable.name;
-        it.type = dd.primaryArguments.first().variable.type;
-        loop.ownedIterators.add(it);
-        var exp = new QVTi!OperationCallExp;
-        exp.referredOperation = getOclElementAllInstancesOp();
-        exp.ownedSource = new QVTi!TypeExp;
-        exp.ownedSource.referredType = dd.primaryArguments.first().variable.type;
-        exp.ownedSource.type = dd.primaryArguments.first().variable.type;
-        exp.type = exp.referredOperation.type;
-        loop.ownedSource = exp;
-        // TODO what happens with multiple Distinct Datas?
-        loop.ownedBody = new QVTi!MappingSequence;
-        loop.ownedBody.mappingStatements.add(dd.target.equivalent());
-        // To make loops nest, only one loop can be added. Which? The next one with the most secondary arguments
-        var nextDD = dd.getNextDistinctData();
-        if (nextDD <> null) {
-            loop.ownedBody.mappingStatements.add(nextDD.equivalent());
-        }        
-    }
-    
 
-rule PrimaryDataParameter
+// Non loop variables can be bound directly from the primary parameter
+rule DerivedDataParameter
     transform dp : QVTs!DataParameter
     to cb : QVTi!MappingCallBinding
     {
-        guard : dp.primaryDistinctData.isDefined()
-        
-        //dp.primaryDistinctData.target.mapping.name.println("PrimaryDataParameter ");
-        var it = dp.primaryDistinctData.equivalent().ownedIterators.first();
-        //it.name.println("primaryVar ");
-        cb.boundVariable ::= dp.variable.getSameVariable();
-        cb.value = new QVTi!VariableExp;
-        cb.value.referredVariable = it;
-        cb.value.type = it.type;
-        cb.mappingCall ::= dp.primaryDistinctData.target;
-    }
-    
-
-rule SecondaryDataParameter
-    transform dp : QVTs!DataParameter
-    to cb : QVTi!MappingCallBinding
-    {
-        guard {
-            if (not dp.secondaryDistinctData.isDefined()) {
-                return false;
-            }
-            var paramVar = dp.variable.getSameVariable();
-            var primaryVar = dp.secondaryDistinctData.primaryArguments.first().variable.getSameVariable();
-            return not primaryVar.hasRelation(paramVar).isEmpty();
-        }    
-        //dp.secondaryDistinctData.target.mapping.name.println("SecondaryDataParameter ");
+        guard : dp.secondaryParameter.isDefined()
+        	and not dp.secondaryParameter.isLoop
+        	and dp.secondaryParameter.derivation.primaryParameter.isDefined()
+        	 
         var paramVar = dp.variable.getSameVariable();
-        var primaryVar = dp.secondaryDistinctData.primaryArguments.first().variable.getSameVariable();
-        var prop = primaryVar.hasRelation(paramVar).first();
+        var primaryVar = dp.secondaryParameter.derivation.primaryParameter.variable.getSameVariable();
+        var prop = dp.secondaryParameter.derivationProperty;
         var refVar = primaryVar.equivalent();
+        
         //primaryVar.name.println("primaryVar ");
         //paramVar.name.println("paramVar ");
         //prop.name.println("prop ");
@@ -373,59 +355,137 @@ rule SecondaryDataParameter
         cb.value.ownedSource = new QVTi!VariableExp;
         cb.value.ownedSource.referredVariable = refVar;
         cb.value.ownedSource.type = refVar.type;   
-        cb.mappingCall ::= dp.secondaryDistinctData.target;
+        //cb.mappingCall ::= dp.secondaryDistinctData.target;
     }
 
-// Derived from a derived
-rule SecondarySecondaryDataParameter
+// Loop variables need to be derived form the loop iterator
+rule DerivedLoopDataParameter
     transform dp : QVTs!DataParameter
     to cb : QVTi!MappingCallBinding
     {
-        guard {
-            if (not dp.secondaryDistinctData.isDefined()) {
-                return false;
-            }
-            var paramVar = dp.variable.getSameVariable();
-            var primaryVar = dp.secondaryDistinctData.primaryArguments.first().variable.getSameVariable();
-            return primaryVar.hasRelation(paramVar).isEmpty();
-        }    
-        
-        //dp.secondaryDistinctData.target.mapping.name.println("SecondaryDataParameter Derived ");
+        guard : dp.secondaryParameter.isDefined()
+        	and dp.secondaryParameter.isLoop
+        	and dp.secondaryParameter.derivation.primaryParameter.isDefined()
+        	 
         var paramVar = dp.variable.getSameVariable();
-        cb.boundVariable ::= paramVar;
+        var prop = dp.secondaryParameter.derivationProperty;
+        var refVar = dp.secondaryParameter.equivalent().ownedIterators.first();
+        
+        //primaryVar.name.println("primaryVar ");
         //paramVar.name.println("paramVar ");
-        cb.value = new QVTi!PropertyCallExp;
-        for (sa in dp.secondaryDistinctData.secondaryArguments.excluding(dp)) {
-            var secondaryVar = sa.variable.getSameVariable();
-            //secondaryVar.name.println("secondaryVar ");
-            if (not secondaryVar.hasRelation(paramVar).isEmpty()) {
-                //"Direct".println();
-                var prop = secondaryVar.hasRelation(paramVar).first();
-                //prop.name.println("prop ");
-                cb.value.referredProperty = prop;
-                cb.value.type = prop.type;
-                cb.value.ownedSource = emfTool.getEcoreUtil().copy(sa.equivalent().value);
-                break;
-	        } 
-        }
-        // If we didn't find a direct, try an opposite
-        if (not cb.value.referredProperty.isDefined()) {
-            for (sa in dp.secondaryDistinctData.secondaryArguments.excluding(dp)) {
-                var secondaryVar = sa.variable.getSameVariable();
-                //secondaryVar.name.println("secondaryVar ");
-                if (not paramVar.hasRelation(secondaryVar).isEmpty() and hasNavigableOpposite( paramVar.hasRelation(secondaryVar).first())) { // Can it be an opposite relation?
-	                //"Opposite".println();
-	                var prop = paramVar.hasRelation(secondaryVar).first().opposite;
-	                //prop.name.println("prop ");
-	                cb.value.referredProperty = prop;
-	                cb.value.type = prop.type;
-	                cb.value.ownedSource = emfTool.getEcoreUtil().copy(sa.equivalent().value);
-	                break;
-               }
-            }
-        }
-        cb.mappingCall ::= dp.secondaryDistinctData.target;
+        //prop.name.println("prop ");
+        //refVar.name.println("refVar ");
+        cb.boundVariable ::= paramVar;
+        cb.value = new QVTi!VariableExp;
+        cb.value.referredVariable = refVar;
+        cb.value.type = refVar.type;
+        //cb.mappingCall ::= dp.secondaryDistinctData.target;
     }
+
+
+rule PrimaryDataParameter
+    transform dp : QVTs!DataParameter
+    to cb : QVTi!MappingCallBinding
+    {
+        guard : not dp.secondaryParameter.isDefined()
+        
+        //var refVar = ??
+        //refVar.name.println("primaryVar ");
+        cb.boundVariable ::= dp.variable.getSameVariable();
+        cb.value = new QVTi!VariableExp;
+        // refferedVariable assigned by the invoking mapping
+        //cb.value.referredVariable = refVar;
+        //cb.value.type = refVar.type;
+        //cb.mappingCall ::= dp.primaryDistinctData.target;
+    }
+    
+rule BindingLoops
+	transform sp : QVTs!SecondaryParameter
+	to loop : QVTi!MappingLoop
+	{
+		guard : sp.isLoop
+		
+		sp.dataParameter.variable.name.println("BindingLoops ");
+        if (sp.derivation.primaryParameter.isUndefined()) {
+        	// for dp.v : <dp.v.type> in <dp.v.type>.allInstances()
+        	var it = new QVTi!Variable;
+	        it.name = sp.dataParameter.variable.name;
+	        it.type = sp.dataParameter.variable.type;
+	        loop.ownedIterators.add(it);
+        	var exp = new QVTi!OperationCallExp;
+        	exp.referredOperation = getOclElementAllInstancesOp();
+	        exp.ownedSource = new QVTi!TypeExp;
+	        exp.ownedSource.referredType = it.type;
+	        exp.ownedSource.type = it.type;
+	        exp.type = exp.referredOperation.type;
+	        loop.ownedSource = exp;
+        } else {
+        	var sourceVar ::= sp.derivation.target.getContextDataParameters()
+        			.selectOne(dp | dp.variable.type == sp.derivation.primaryParameter.variable.type).variable.getSameVariable();
+        	// The containement property may be the exact type or a supertype of the variable we are binding
+        	// The property must be a collection, so we need to check the elements type
+        	if (sp.derivationProperty.type.elementType == sp.dataParameter.variable.type) {
+        		// for dp.v in pp.property 
+        		var it = new QVTi!Variable;
+		        it.name = sp.dataParameter.variable.name;
+		        it.type = sp.dataParameter.variable.type;
+		        loop.ownedIterators.add(it);
+		        var exp = new QVTi!PropertyCallExp;
+	        	exp.type = sp.derivationProperty.type;
+	        	exp.ownedSource = new QVTi!VariableExp;
+		        exp.ownedSource.referredVariable = sourceVar;
+		        exp.ownedSource.type = sourceVar.type;
+	        	exp.referredProperty = sp.derivationProperty;
+		        loop.ownedSource = exp;
+        	} else {
+        		//for child in pp.property->select(e | e.oclIsTypeOf(dp.v.type))
+        		var it = new QVTi!Variable;
+		        it.name = "child";
+		        it.type = sp.dataParameter.variable.type;
+		        loop.ownedIterators.add(it);
+		        
+        		var exp = new QVTi!IteratorExp;
+	        	exp.type = sp.derivationProperty.type;
+	        	
+	        	exp.ownedSource = new QVTi!PropertyCallExp;
+	        	exp.ownedSource.type = sp.derivationProperty.type;
+	        	exp.ownedSource.ownedSource = new QVTi!VariableExp;
+		        exp.ownedSource.ownedSource.referredVariable = sourceVar;
+		        exp.ownedSource.ownedSource.type = sourceVar.type;
+	        	exp.ownedSource.referredProperty = sp.derivationProperty;
+		        
+		        exp.ownedBody = new QVTi!OperationCallExp;
+		        exp.ownedBody.type = getPrimitiveTypeByName("Boolean");
+		        var bodyIt = new QVTi!Variable;
+		        bodyIt.name = sp.derivationProperty.name.charAt(0).asString();
+		        bodyIt.type = sp.derivationProperty.type.elementType;
+		        exp.ownedBody.ownedSource = new QVTi!VariableExp;
+		        exp.ownedBody.ownedSource.referredVariable = bodyIt;
+		        exp.ownedBody.ownedSource.type = bodyIt.type;
+		        var argument = new QVTi!TypeExp;
+		        argument.type = getClassByName("Class");
+		        argument.referredType = it.type;
+		        exp.ownedBody.ownedArguments.add(argument);
+		        exp.ownedBody.referredOperation = exp.ownedBody.type.getOperationByName("oclIsTypeOf");
+		        
+		        exp.ownedIterators.add(bodyIt);
+		        exp.referredIteration = getSelectIterator();
+		        loop.ownedSource = exp;
+				
+       		}
+        }
+        // TODO what happens with multiple Distinct Datas?
+        loop.ownedBody = new QVTi!MappingSequence;
+        loop.ownedBody.mappingStatements.add(sp.derivation.target.equivalent());
+        // To make loops nest, only one loop can be added. Which? The next one with the most secondary arguments
+        // FIXME
+        //var nextDD = dd.getNextDistinctData();
+        //if (nextDD <> null) {
+        //    loop.ownedBody.mappingStatements.add(nextDD.equivalent());
+        //}
+                
+		
+	}
 
 @cached
 operation QVTs!Variable getSameVariable() : QVTp!Variable {
