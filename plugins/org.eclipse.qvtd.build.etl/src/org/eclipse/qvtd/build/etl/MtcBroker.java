@@ -110,10 +110,10 @@ public class MtcBroker {
 	private static final String QVTP_FLAT_SCHEDULE_EOL = "scheduling/FlatSchedule.eol";
 	
 	/** The Constant QVTP_SIMPLE_NESTING_SCHEDULE_EOL. */
-	private static final String QVTP_SIMPLE_NESTING_SCHEDULE_EOL = "scheduling/SimpleNestedSchedule.eol";
+	private static final String QVTP_SIMPLE_NESTING_SCHEDULE_EOL = "scheduling/NestedSchedule.eol";
 	
 	/** The Constant QVTPS_TO_QVTI_ETL. */
-	private static final String QVTPS_TO_QVTI_ETL = "scheduling/QVTs-pToQVTi.etl";
+	private static final String QVTPS_TO_QVTI_ETL = "mtc/QVTs-pToQVTi.etl";
 	
 	/** The Constant LEFT_DIR_NAME. */
 	@SuppressWarnings("unused")
@@ -271,7 +271,7 @@ public class MtcBroker {
 		
 		sModel = qvtpToQvts(pModel);
 		
-		qvtpFlatScheduling(pModel, sModel);
+		qvtpNestingScheduling(pModel, sModel);
 		iModel = qvtpQvtsToQvti(pModel, sModel);
 	}
 	
@@ -442,7 +442,7 @@ public class MtcBroker {
 	 * @param sModel the s model
 	 * @throws QvtMtcExecutionException If there was an error loading the script
 	 */
-	protected void qvtpSimpleNestingScheduling(PivotModel pModel, PivotModel sModel) throws QvtMtcExecutionException {
+	protected void qvtpNestingScheduling(PivotModel pModel, PivotModel sModel) throws QvtMtcExecutionException {
 		
 		qvtpScheduling(pModel, sModel, QVTP_SIMPLE_NESTING_SCHEDULE_EOL);
 	}
