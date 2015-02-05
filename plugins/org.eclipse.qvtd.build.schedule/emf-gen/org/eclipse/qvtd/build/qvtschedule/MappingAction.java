@@ -2,8 +2,6 @@
  */
 package org.eclipse.qvtd.build.qvtschedule;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
 /**
@@ -16,7 +14,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.MappingAction#getMapping <em>Mapping</em>}</li>
- *   <li>{@link org.eclipse.qvtd.build.qvtschedule.MappingAction#getDataBindings <em>Data Bindings</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getMappingAction()
@@ -49,21 +46,5 @@ public interface MappingAction extends AbstractAction {
 	 * @generated
 	 */
 	void setMapping(Mapping value);
-
-	/**
-	 * Returns the value of the '<em><b>Data Bindings</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.build.qvtschedule.DataBinding}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Data Bindings</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Data Bindings</em>' containment reference list.
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getMappingAction_DataBindings()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<DataBinding> getDataBindings();
 
 } // MappingAction

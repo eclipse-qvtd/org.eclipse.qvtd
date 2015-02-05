@@ -84,8 +84,8 @@ public class qvtscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createDataParameterAdapter();
 			}
 			@Override
-			public Adapter caseDistinctData(DistinctData object) {
-				return createDistinctDataAdapter();
+			public Adapter caseParameterDerivation(ParameterDerivation object) {
+				return createParameterDerivationAdapter();
 			}
 			@Override
 			public Adapter caseInputAction(InputAction object) {
@@ -94,10 +94,6 @@ public class qvtscheduleAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseMappingAction(MappingAction object) {
 				return createMappingActionAdapter();
-			}
-			@Override
-			public Adapter caseDataBinding(DataBinding object) {
-				return createDataBindingAdapter();
 			}
 			@Override
 			public Adapter caseOutputAction(OutputAction object) {
@@ -110,6 +106,10 @@ public class qvtscheduleAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseSchedule(Schedule object) {
 				return createScheduleAdapter();
+			}
+			@Override
+			public Adapter caseSecondaryParameter(SecondaryParameter object) {
+				return createSecondaryParameterAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -188,16 +188,16 @@ public class qvtscheduleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.build.qvtschedule.DistinctData <em>Distinct Data</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.build.qvtschedule.ParameterDerivation <em>Parameter Derivation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.build.qvtschedule.DistinctData
+	 * @see org.eclipse.qvtd.build.qvtschedule.ParameterDerivation
 	 * @generated
 	 */
-	public Adapter createDistinctDataAdapter() {
+	public Adapter createParameterDerivationAdapter() {
 		return null;
 	}
 
@@ -226,20 +226,6 @@ public class qvtscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMappingActionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.build.qvtschedule.DataBinding <em>Data Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.build.qvtschedule.DataBinding
-	 * @generated
-	 */
-	public Adapter createDataBindingAdapter() {
 		return null;
 	}
 
@@ -282,6 +268,20 @@ public class qvtscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createScheduleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.build.qvtschedule.SecondaryParameter <em>Secondary Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.build.qvtschedule.SecondaryParameter
+	 * @generated
+	 */
+	public Adapter createSecondaryParameterAdapter() {
 		return null;
 	}
 

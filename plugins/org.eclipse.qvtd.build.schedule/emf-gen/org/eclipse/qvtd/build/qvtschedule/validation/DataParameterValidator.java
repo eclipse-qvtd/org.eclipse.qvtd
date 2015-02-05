@@ -7,7 +7,7 @@ package org.eclipse.qvtd.build.qvtschedule.validation;
 import org.eclipse.ocl.pivot.Variable;
 
 import org.eclipse.qvtd.build.qvtschedule.AbstractDatum;
-import org.eclipse.qvtd.build.qvtschedule.DistinctData;
+import org.eclipse.qvtd.build.qvtschedule.SecondaryParameter;
 
 /**
  * A sample validator interface for {@link org.eclipse.qvtd.build.qvtschedule.DataParameter}.
@@ -18,9 +18,7 @@ import org.eclipse.qvtd.build.qvtschedule.DistinctData;
 public interface DataParameterValidator {
 	boolean validate();
 
-	boolean validateIsLoop(boolean value);
 	boolean validateVariable(Variable value);
-	boolean validatePrimaryDistinctData(DistinctData value);
-	boolean validateSecondaryDistinctData(DistinctData value);
+	boolean validateSecondaryParameter(SecondaryParameter value);
 	boolean validateDatum(AbstractDatum value);
 }

@@ -91,9 +91,9 @@ public class qvtscheduleSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case qvtschedulePackage.DISTINCT_DATA: {
-				DistinctData distinctData = (DistinctData)theEObject;
-				T result = caseDistinctData(distinctData);
+			case qvtschedulePackage.PARAMETER_DERIVATION: {
+				ParameterDerivation parameterDerivation = (ParameterDerivation)theEObject;
+				T result = caseParameterDerivation(parameterDerivation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -108,12 +108,6 @@ public class qvtscheduleSwitch<T> extends Switch<T> {
 				MappingAction mappingAction = (MappingAction)theEObject;
 				T result = caseMappingAction(mappingAction);
 				if (result == null) result = caseAbstractAction(mappingAction);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case qvtschedulePackage.DATA_BINDING: {
-				DataBinding dataBinding = (DataBinding)theEObject;
-				T result = caseDataBinding(dataBinding);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -134,6 +128,12 @@ public class qvtscheduleSwitch<T> extends Switch<T> {
 			case qvtschedulePackage.SCHEDULE: {
 				Schedule schedule = (Schedule)theEObject;
 				T result = caseSchedule(schedule);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case qvtschedulePackage.SECONDARY_PARAMETER: {
+				SecondaryParameter secondaryParameter = (SecondaryParameter)theEObject;
+				T result = caseSecondaryParameter(secondaryParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -202,17 +202,17 @@ public class qvtscheduleSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Distinct Data</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Parameter Derivation</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Distinct Data</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Parameter Derivation</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDistinctData(DistinctData object) {
+	public T caseParameterDerivation(ParameterDerivation object) {
 		return null;
 	}
 
@@ -243,21 +243,6 @@ public class qvtscheduleSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseMappingAction(MappingAction object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Data Binding</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Data Binding</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDataBinding(DataBinding object) {
 		return null;
 	}
 
@@ -303,6 +288,21 @@ public class qvtscheduleSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSchedule(Schedule object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Secondary Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Secondary Parameter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSecondaryParameter(SecondaryParameter object) {
 		return null;
 	}
 

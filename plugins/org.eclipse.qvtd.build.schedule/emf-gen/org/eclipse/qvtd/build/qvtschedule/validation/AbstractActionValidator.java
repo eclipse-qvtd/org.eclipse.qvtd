@@ -9,7 +9,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.qvtd.build.qvtschedule.AbstractAction;
 import org.eclipse.qvtd.build.qvtschedule.AbstractDatum;
 import org.eclipse.qvtd.build.qvtschedule.DataParameter;
-import org.eclipse.qvtd.build.qvtschedule.DistinctData;
+import org.eclipse.qvtd.build.qvtschedule.ParameterDerivation;
 import org.eclipse.qvtd.build.qvtschedule.Schedule;
 
 /**
@@ -23,7 +23,7 @@ public interface AbstractActionValidator {
 
 	boolean validateProductions(EList<AbstractDatum> value);
 	boolean validateRequisites(EList<AbstractDatum> value);
-	boolean validateDistinctArguments(EList<DistinctData> value);
+	boolean validateParameterDerivations(EList<ParameterDerivation> value);
 	boolean validateOrder(int value);
 	boolean validateParent(AbstractAction value);
 	boolean validateChildren(EList<AbstractAction> value);

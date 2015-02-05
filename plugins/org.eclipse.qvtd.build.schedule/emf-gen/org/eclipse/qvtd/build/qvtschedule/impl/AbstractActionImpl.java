@@ -15,8 +15,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.qvtd.build.qvtschedule.AbstractAction;
 import org.eclipse.qvtd.build.qvtschedule.AbstractDatum;
 import org.eclipse.qvtd.build.qvtschedule.DataParameter;
-import org.eclipse.qvtd.build.qvtschedule.DistinctData;
+import org.eclipse.qvtd.build.qvtschedule.ParameterDerivation;
 import org.eclipse.qvtd.build.qvtschedule.Schedule;
 import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
 
@@ -39,7 +39,7 @@ import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractActionImpl#getProductions <em>Productions</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractActionImpl#getRequisites <em>Requisites</em>}</li>
- *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractActionImpl#getDistinctArguments <em>Distinct Arguments</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractActionImpl#getParameterDerivations <em>Parameter Derivations</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractActionImpl#getOrder <em>Order</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractActionImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.AbstractActionImpl#getChildren <em>Children</em>}</li>
@@ -72,14 +72,14 @@ public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container im
 	protected EList<AbstractDatum> requisites;
 
 	/**
-	 * The cached value of the '{@link #getDistinctArguments() <em>Distinct Arguments</em>}' containment reference list.
+	 * The cached value of the '{@link #getParameterDerivations() <em>Parameter Derivations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDistinctArguments()
+	 * @see #getParameterDerivations()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DistinctData> distinctArguments;
+	protected EList<ParameterDerivation> parameterDerivations;
 
 	/**
 	 * The default value of the '{@link #getOrder() <em>Order</em>}' attribute.
@@ -122,7 +122,7 @@ public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container im
 	protected EList<AbstractAction> children;
 
 	/**
-	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' reference list.
+	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getParameters()
@@ -132,7 +132,7 @@ public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container im
 	protected EList<AbstractDatum> parameters;
 
 	/**
-	 * The cached value of the '{@link #getResults() <em>Results</em>}' reference list.
+	 * The cached value of the '{@link #getResults() <em>Results</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getResults()
@@ -189,11 +189,11 @@ public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<DistinctData> getDistinctArguments() {
-		if (distinctArguments == null) {
-			distinctArguments = new EObjectContainmentWithInverseEList<DistinctData>(DistinctData.class, this, qvtschedulePackage.ABSTRACT_ACTION__DISTINCT_ARGUMENTS, qvtschedulePackage.DISTINCT_DATA__TARGET);
+	public EList<ParameterDerivation> getParameterDerivations() {
+		if (parameterDerivations == null) {
+			parameterDerivations = new EObjectContainmentWithInverseEList<ParameterDerivation>(ParameterDerivation.class, this, qvtschedulePackage.ABSTRACT_ACTION__PARAMETER_DERIVATIONS, qvtschedulePackage.PARAMETER_DERIVATION__TARGET);
 		}
-		return distinctArguments;
+		return parameterDerivations;
 	}
 
 	/**
@@ -296,7 +296,7 @@ public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container im
 	 */
 	public EList<AbstractDatum> getParameters() {
 		if (parameters == null) {
-			parameters = new EObjectResolvingEList<AbstractDatum>(AbstractDatum.class, this, qvtschedulePackage.ABSTRACT_ACTION__PARAMETERS);
+			parameters = new EObjectContainmentEList<AbstractDatum>(AbstractDatum.class, this, qvtschedulePackage.ABSTRACT_ACTION__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -308,7 +308,7 @@ public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container im
 	 */
 	public EList<DataParameter> getResults() {
 		if (results == null) {
-			results = new EObjectResolvingEList<DataParameter>(DataParameter.class, this, qvtschedulePackage.ABSTRACT_ACTION__RESULTS);
+			results = new EObjectContainmentEList<DataParameter>(DataParameter.class, this, qvtschedulePackage.ABSTRACT_ACTION__RESULTS);
 		}
 		return results;
 	}
@@ -367,8 +367,8 @@ public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container im
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getProductions()).basicAdd(otherEnd, msgs);
 			case qvtschedulePackage.ABSTRACT_ACTION__REQUISITES:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getRequisites()).basicAdd(otherEnd, msgs);
-			case qvtschedulePackage.ABSTRACT_ACTION__DISTINCT_ARGUMENTS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getDistinctArguments()).basicAdd(otherEnd, msgs);
+			case qvtschedulePackage.ABSTRACT_ACTION__PARAMETER_DERIVATIONS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getParameterDerivations()).basicAdd(otherEnd, msgs);
 			case qvtschedulePackage.ABSTRACT_ACTION__PARENT:
 				if (parent != null)
 					msgs = ((InternalEObject)parent).eInverseRemove(this, qvtschedulePackage.ABSTRACT_ACTION__CHILDREN, AbstractAction.class, msgs);
@@ -395,12 +395,16 @@ public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container im
 				return ((InternalEList<?>)getProductions()).basicRemove(otherEnd, msgs);
 			case qvtschedulePackage.ABSTRACT_ACTION__REQUISITES:
 				return ((InternalEList<?>)getRequisites()).basicRemove(otherEnd, msgs);
-			case qvtschedulePackage.ABSTRACT_ACTION__DISTINCT_ARGUMENTS:
-				return ((InternalEList<?>)getDistinctArguments()).basicRemove(otherEnd, msgs);
+			case qvtschedulePackage.ABSTRACT_ACTION__PARAMETER_DERIVATIONS:
+				return ((InternalEList<?>)getParameterDerivations()).basicRemove(otherEnd, msgs);
 			case qvtschedulePackage.ABSTRACT_ACTION__PARENT:
 				return basicSetParent(null, msgs);
 			case qvtschedulePackage.ABSTRACT_ACTION__CHILDREN:
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
+			case qvtschedulePackage.ABSTRACT_ACTION__PARAMETERS:
+				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+			case qvtschedulePackage.ABSTRACT_ACTION__RESULTS:
+				return ((InternalEList<?>)getResults()).basicRemove(otherEnd, msgs);
 			case qvtschedulePackage.ABSTRACT_ACTION__SCHEDULE:
 				return basicSetSchedule(null, msgs);
 		}
@@ -433,8 +437,8 @@ public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container im
 				return getProductions();
 			case qvtschedulePackage.ABSTRACT_ACTION__REQUISITES:
 				return getRequisites();
-			case qvtschedulePackage.ABSTRACT_ACTION__DISTINCT_ARGUMENTS:
-				return getDistinctArguments();
+			case qvtschedulePackage.ABSTRACT_ACTION__PARAMETER_DERIVATIONS:
+				return getParameterDerivations();
 			case qvtschedulePackage.ABSTRACT_ACTION__ORDER:
 				return getOrder();
 			case qvtschedulePackage.ABSTRACT_ACTION__PARENT:
@@ -469,9 +473,9 @@ public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container im
 				getRequisites().clear();
 				getRequisites().addAll((Collection<? extends AbstractDatum>)newValue);
 				return;
-			case qvtschedulePackage.ABSTRACT_ACTION__DISTINCT_ARGUMENTS:
-				getDistinctArguments().clear();
-				getDistinctArguments().addAll((Collection<? extends DistinctData>)newValue);
+			case qvtschedulePackage.ABSTRACT_ACTION__PARAMETER_DERIVATIONS:
+				getParameterDerivations().clear();
+				getParameterDerivations().addAll((Collection<? extends ParameterDerivation>)newValue);
 				return;
 			case qvtschedulePackage.ABSTRACT_ACTION__ORDER:
 				setOrder((Integer)newValue);
@@ -512,8 +516,8 @@ public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container im
 			case qvtschedulePackage.ABSTRACT_ACTION__REQUISITES:
 				getRequisites().clear();
 				return;
-			case qvtschedulePackage.ABSTRACT_ACTION__DISTINCT_ARGUMENTS:
-				getDistinctArguments().clear();
+			case qvtschedulePackage.ABSTRACT_ACTION__PARAMETER_DERIVATIONS:
+				getParameterDerivations().clear();
 				return;
 			case qvtschedulePackage.ABSTRACT_ACTION__ORDER:
 				setOrder(ORDER_EDEFAULT);
@@ -549,8 +553,8 @@ public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container im
 				return productions != null && !productions.isEmpty();
 			case qvtschedulePackage.ABSTRACT_ACTION__REQUISITES:
 				return requisites != null && !requisites.isEmpty();
-			case qvtschedulePackage.ABSTRACT_ACTION__DISTINCT_ARGUMENTS:
-				return distinctArguments != null && !distinctArguments.isEmpty();
+			case qvtschedulePackage.ABSTRACT_ACTION__PARAMETER_DERIVATIONS:
+				return parameterDerivations != null && !parameterDerivations.isEmpty();
 			case qvtschedulePackage.ABSTRACT_ACTION__ORDER:
 				return order != ORDER_EDEFAULT;
 			case qvtschedulePackage.ABSTRACT_ACTION__PARENT:

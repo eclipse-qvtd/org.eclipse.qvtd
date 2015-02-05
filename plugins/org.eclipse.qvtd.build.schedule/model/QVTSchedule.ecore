@@ -22,17 +22,17 @@
         eType="#//AbstractDatum" eOpposite="#//AbstractDatum/producedBy"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="requisites" upperBound="-1"
         eType="#//AbstractDatum" eOpposite="#//AbstractDatum/requiredBy"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="distinctArguments" upperBound="-1"
-        eType="#//DistinctData" containment="true" eOpposite="#//DistinctData/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameterDerivations" upperBound="-1"
+        eType="#//ParameterDerivation" containment="true" eOpposite="#//ParameterDerivation/target"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="order" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//AbstractAction"
         eOpposite="#//AbstractAction/children"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//AbstractAction" eOpposite="#//AbstractAction/parent"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
-        eType="#//AbstractDatum"/>
+        eType="#//AbstractDatum" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="results" upperBound="-1"
-        eType="#//DataParameter"/>
+        eType="#//DataParameter" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="schedule" eType="#//Schedule"
         eOpposite="#//Schedule/actions"/>
   </eClassifiers>
@@ -43,35 +43,25 @@
         eType="#//PropertyDatum" containment="true" eOpposite="#//PropertyDatum/classDatum"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataParameter">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLoop" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/ocl/2015/Pivot#//Variable"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="primaryDistinctData" eType="#//DistinctData"
-        eOpposite="#//DistinctData/primaryArguments"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="secondaryDistinctData"
-        eType="#//DistinctData" eOpposite="#//DistinctData/secondaryArguments"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="secondaryParameter" eType="#//SecondaryParameter"
+        eOpposite="#//SecondaryParameter/dataParameter"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="datum" lowerBound="1" eType="#//AbstractDatum"
         eOpposite="#//AbstractDatum/dataParameter"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DistinctData">
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterDerivation">
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//AbstractAction"
-        eOpposite="#//AbstractAction/distinctArguments"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="primaryArguments" lowerBound="1"
-        upperBound="-1" eType="#//DataParameter" containment="true" eOpposite="#//DataParameter/primaryDistinctData"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="secondaryArguments" upperBound="-1"
-        eType="#//DataParameter" containment="true" eOpposite="#//DataParameter/secondaryDistinctData"/>
+        eOpposite="#//AbstractAction/parameterDerivations"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="primaryParameter" lowerBound="1"
+        eType="#//DataParameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="secondaryParameters" upperBound="-1"
+        eType="#//SecondaryParameter" containment="true" eOpposite="#//SecondaryParameter/derivation"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InputAction" eSuperTypes="#//AbstractAction"/>
   <eClassifiers xsi:type="ecore:EClass" name="MappingAction" eSuperTypes="#//AbstractAction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="mapping" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/qvt/2015/QVTimperative#//Mapping"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dataBindings" upperBound="-1"
-        eType="#//DataBinding" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DataBinding">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceExp" eType="ecore:EClass http://www.eclipse.org/ocl/2015/Pivot#//OCLExpression"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="targetDataParameter" eType="#//DataParameter"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="metric" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OutputAction" eSuperTypes="#//AbstractAction"/>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyDatum" eSuperTypes="#//AbstractDatum">
@@ -86,5 +76,14 @@
         eType="#//AbstractDatum" containment="true" eOpposite="#//AbstractDatum/schedule"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
         eType="#//AbstractAction" containment="true" eOpposite="#//AbstractAction/schedule"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SecondaryParameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLoop" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataParameter" lowerBound="1"
+        eType="#//DataParameter" eOpposite="#//DataParameter/secondaryParameter"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="derivationProperty" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/ocl/2015/Pivot#//Property"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="derivation" eType="#//ParameterDerivation"
+        eOpposite="#//ParameterDerivation/secondaryParameters"/>
   </eClassifiers>
 </ecore:EPackage>

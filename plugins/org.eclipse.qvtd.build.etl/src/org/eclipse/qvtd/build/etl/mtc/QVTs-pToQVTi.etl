@@ -279,6 +279,17 @@ rule RealizedVariables
 
 //=============== QVTs to QVTi (add mapping calls)  ===============
 
+rule RootMappingAction
+	transform ma : QVTs!MappingAction
+    to m : QVTi!Mapping
+    {
+    	guard : ma.order = 0
+    	
+    	m.name = "__root__";
+    	m.transformation ::= QVTp!Transformation.all.first();
+    }
+
+
 rule MappingActions
     transform ma : QVTs!MappingAction
     to mc : QVTi!MappingCall

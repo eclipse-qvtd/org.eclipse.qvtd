@@ -40,13 +40,13 @@ public interface qvtscheduleFactory extends EFactory {
 	DataParameter createDataParameter();
 
 	/**
-	 * Returns a new object of class '<em>Distinct Data</em>'.
+	 * Returns a new object of class '<em>Parameter Derivation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Distinct Data</em>'.
+	 * @return a new object of class '<em>Parameter Derivation</em>'.
 	 * @generated
 	 */
-	DistinctData createDistinctData();
+	ParameterDerivation createParameterDerivation();
 
 	/**
 	 * Returns a new object of class '<em>Input Action</em>'.
@@ -65,15 +65,6 @@ public interface qvtscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	MappingAction createMappingAction();
-
-	/**
-	 * Returns a new object of class '<em>Data Binding</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Data Binding</em>'.
-	 * @generated
-	 */
-	DataBinding createDataBinding();
 
 	/**
 	 * Returns a new object of class '<em>Output Action</em>'.
@@ -101,6 +92,15 @@ public interface qvtscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	Schedule createSchedule();
+
+	/**
+	 * Returns a new object of class '<em>Secondary Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Secondary Parameter</em>'.
+	 * @generated
+	 */
+	SecondaryParameter createSecondaryParameter();
 
 	/**
 	 * Returns the package supported by this factory.

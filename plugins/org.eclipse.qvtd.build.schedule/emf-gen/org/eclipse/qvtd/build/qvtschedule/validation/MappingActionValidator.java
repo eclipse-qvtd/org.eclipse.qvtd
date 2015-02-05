@@ -4,10 +4,6 @@
  */
 package org.eclipse.qvtd.build.qvtschedule.validation;
 
-import org.eclipse.emf.common.util.EList;
-
-import org.eclipse.qvtd.build.qvtschedule.DataBinding;
-
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
 /**
@@ -20,5 +16,4 @@ public interface MappingActionValidator {
 	boolean validate();
 
 	boolean validateMapping(Mapping value);
-	boolean validateDataBindings(EList<DataBinding> value);
 }

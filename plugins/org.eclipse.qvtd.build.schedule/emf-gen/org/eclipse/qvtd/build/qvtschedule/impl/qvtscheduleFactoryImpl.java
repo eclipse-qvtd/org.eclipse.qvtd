@@ -58,13 +58,13 @@ public class qvtscheduleFactoryImpl extends EFactoryImpl implements qvtscheduleF
 		switch (eClass.getClassifierID()) {
 			case qvtschedulePackage.CLASS_DATUM: return createClassDatum();
 			case qvtschedulePackage.DATA_PARAMETER: return createDataParameter();
-			case qvtschedulePackage.DISTINCT_DATA: return createDistinctData();
+			case qvtschedulePackage.PARAMETER_DERIVATION: return createParameterDerivation();
 			case qvtschedulePackage.INPUT_ACTION: return createInputAction();
 			case qvtschedulePackage.MAPPING_ACTION: return createMappingAction();
-			case qvtschedulePackage.DATA_BINDING: return createDataBinding();
 			case qvtschedulePackage.OUTPUT_ACTION: return createOutputAction();
 			case qvtschedulePackage.PROPERTY_DATUM: return createPropertyDatum();
 			case qvtschedulePackage.SCHEDULE: return createSchedule();
+			case qvtschedulePackage.SECONDARY_PARAMETER: return createSecondaryParameter();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -95,9 +95,9 @@ public class qvtscheduleFactoryImpl extends EFactoryImpl implements qvtscheduleF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DistinctData createDistinctData() {
-		DistinctDataImpl distinctData = new DistinctDataImpl();
-		return distinctData;
+	public ParameterDerivation createParameterDerivation() {
+		ParameterDerivationImpl parameterDerivation = new ParameterDerivationImpl();
+		return parameterDerivation;
 	}
 
 	/**
@@ -118,16 +118,6 @@ public class qvtscheduleFactoryImpl extends EFactoryImpl implements qvtscheduleF
 	public MappingAction createMappingAction() {
 		MappingActionImpl mappingAction = new MappingActionImpl();
 		return mappingAction;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public DataBinding createDataBinding() {
-		DataBindingImpl dataBinding = new DataBindingImpl();
-		return dataBinding;
 	}
 
 	/**
@@ -158,6 +148,16 @@ public class qvtscheduleFactoryImpl extends EFactoryImpl implements qvtscheduleF
 	public Schedule createSchedule() {
 		ScheduleImpl schedule = new ScheduleImpl();
 		return schedule;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SecondaryParameter createSecondaryParameter() {
+		SecondaryParameterImpl secondaryParameter = new SecondaryParameterImpl();
+		return secondaryParameter;
 	}
 
 	/**

@@ -176,13 +176,13 @@ public interface qvtschedulePackage extends EPackage {
 	int ABSTRACT_ACTION__REQUISITES = 1;
 
 	/**
-	 * The feature id for the '<em><b>Distinct Arguments</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Parameter Derivations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ACTION__DISTINCT_ARGUMENTS = 2;
+	int ABSTRACT_ACTION__PARAMETER_DERIVATIONS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Order</b></em>' attribute.
@@ -212,7 +212,7 @@ public interface qvtschedulePackage extends EPackage {
 	int ABSTRACT_ACTION__CHILDREN = 5;
 
 	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -221,7 +221,7 @@ public interface qvtschedulePackage extends EPackage {
 	int ABSTRACT_ACTION__PARAMETERS = 6;
 
 	/**
-	 * The feature id for the '<em><b>Results</b></em>' reference list.
+	 * The feature id for the '<em><b>Results</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -376,40 +376,22 @@ public interface qvtschedulePackage extends EPackage {
 	int DATA_PARAMETER = 3;
 
 	/**
-	 * The feature id for the '<em><b>Is Loop</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_PARAMETER__IS_LOOP = 0;
-
-	/**
 	 * The feature id for the '<em><b>Variable</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_PARAMETER__VARIABLE = 1;
+	int DATA_PARAMETER__VARIABLE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Primary Distinct Data</b></em>' container reference.
+	 * The feature id for the '<em><b>Secondary Parameter</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_PARAMETER__PRIMARY_DISTINCT_DATA = 2;
-
-	/**
-	 * The feature id for the '<em><b>Secondary Distinct Data</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_PARAMETER__SECONDARY_DISTINCT_DATA = 3;
+	int DATA_PARAMETER__SECONDARY_PARAMETER = 1;
 
 	/**
 	 * The feature id for the '<em><b>Datum</b></em>' reference.
@@ -418,7 +400,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_PARAMETER__DATUM = 4;
+	int DATA_PARAMETER__DATUM = 2;
 
 	/**
 	 * The number of structural features of the '<em>Data Parameter</em>' class.
@@ -427,7 +409,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_PARAMETER_FEATURE_COUNT = 5;
+	int DATA_PARAMETER_FEATURE_COUNT = 3;
 
 	/**
 	 * The number of operations of the '<em>Data Parameter</em>' class.
@@ -439,14 +421,14 @@ public interface qvtschedulePackage extends EPackage {
 	int DATA_PARAMETER_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.DistinctDataImpl <em>Distinct Data</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.ParameterDerivationImpl <em>Parameter Derivation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.build.qvtschedule.impl.DistinctDataImpl
-	 * @see org.eclipse.qvtd.build.qvtschedule.impl.qvtschedulePackageImpl#getDistinctData()
+	 * @see org.eclipse.qvtd.build.qvtschedule.impl.ParameterDerivationImpl
+	 * @see org.eclipse.qvtd.build.qvtschedule.impl.qvtschedulePackageImpl#getParameterDerivation()
 	 * @generated
 	 */
-	int DISTINCT_DATA = 4;
+	int PARAMETER_DERIVATION = 4;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' container reference.
@@ -455,43 +437,43 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DISTINCT_DATA__TARGET = 0;
+	int PARAMETER_DERIVATION__TARGET = 0;
 
 	/**
-	 * The feature id for the '<em><b>Primary Arguments</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Primary Parameter</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DISTINCT_DATA__PRIMARY_ARGUMENTS = 1;
+	int PARAMETER_DERIVATION__PRIMARY_PARAMETER = 1;
 
 	/**
-	 * The feature id for the '<em><b>Secondary Arguments</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Secondary Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DISTINCT_DATA__SECONDARY_ARGUMENTS = 2;
+	int PARAMETER_DERIVATION__SECONDARY_PARAMETERS = 2;
 
 	/**
-	 * The number of structural features of the '<em>Distinct Data</em>' class.
+	 * The number of structural features of the '<em>Parameter Derivation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DISTINCT_DATA_FEATURE_COUNT = 3;
+	int PARAMETER_DERIVATION_FEATURE_COUNT = 3;
 
 	/**
-	 * The number of operations of the '<em>Distinct Data</em>' class.
+	 * The number of operations of the '<em>Parameter Derivation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DISTINCT_DATA_OPERATION_COUNT = 0;
+	int PARAMETER_DERIVATION_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.InputActionImpl <em>Input Action</em>}' class.
@@ -522,13 +504,13 @@ public interface qvtschedulePackage extends EPackage {
 	int INPUT_ACTION__REQUISITES = ABSTRACT_ACTION__REQUISITES;
 
 	/**
-	 * The feature id for the '<em><b>Distinct Arguments</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Parameter Derivations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INPUT_ACTION__DISTINCT_ARGUMENTS = ABSTRACT_ACTION__DISTINCT_ARGUMENTS;
+	int INPUT_ACTION__PARAMETER_DERIVATIONS = ABSTRACT_ACTION__PARAMETER_DERIVATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Order</b></em>' attribute.
@@ -558,7 +540,7 @@ public interface qvtschedulePackage extends EPackage {
 	int INPUT_ACTION__CHILDREN = ABSTRACT_ACTION__CHILDREN;
 
 	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -567,7 +549,7 @@ public interface qvtschedulePackage extends EPackage {
 	int INPUT_ACTION__PARAMETERS = ABSTRACT_ACTION__PARAMETERS;
 
 	/**
-	 * The feature id for the '<em><b>Results</b></em>' reference list.
+	 * The feature id for the '<em><b>Results</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -631,13 +613,13 @@ public interface qvtschedulePackage extends EPackage {
 	int MAPPING_ACTION__REQUISITES = ABSTRACT_ACTION__REQUISITES;
 
 	/**
-	 * The feature id for the '<em><b>Distinct Arguments</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Parameter Derivations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_ACTION__DISTINCT_ARGUMENTS = ABSTRACT_ACTION__DISTINCT_ARGUMENTS;
+	int MAPPING_ACTION__PARAMETER_DERIVATIONS = ABSTRACT_ACTION__PARAMETER_DERIVATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Order</b></em>' attribute.
@@ -667,7 +649,7 @@ public interface qvtschedulePackage extends EPackage {
 	int MAPPING_ACTION__CHILDREN = ABSTRACT_ACTION__CHILDREN;
 
 	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -676,7 +658,7 @@ public interface qvtschedulePackage extends EPackage {
 	int MAPPING_ACTION__PARAMETERS = ABSTRACT_ACTION__PARAMETERS;
 
 	/**
-	 * The feature id for the '<em><b>Results</b></em>' reference list.
+	 * The feature id for the '<em><b>Results</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -703,22 +685,13 @@ public interface qvtschedulePackage extends EPackage {
 	int MAPPING_ACTION__MAPPING = ABSTRACT_ACTION_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Data Bindings</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MAPPING_ACTION__DATA_BINDINGS = ABSTRACT_ACTION_FEATURE_COUNT + 1;
-
-	/**
 	 * The number of structural features of the '<em>Mapping Action</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_ACTION_FEATURE_COUNT = ABSTRACT_ACTION_FEATURE_COUNT + 2;
+	int MAPPING_ACTION_FEATURE_COUNT = ABSTRACT_ACTION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Mapping Action</em>' class.
@@ -730,52 +703,6 @@ public interface qvtschedulePackage extends EPackage {
 	int MAPPING_ACTION_OPERATION_COUNT = ABSTRACT_ACTION_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.DataBindingImpl <em>Data Binding</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.build.qvtschedule.impl.DataBindingImpl
-	 * @see org.eclipse.qvtd.build.qvtschedule.impl.qvtschedulePackageImpl#getDataBinding()
-	 * @generated
-	 */
-	int DATA_BINDING = 7;
-
-	/**
-	 * The feature id for the '<em><b>Source Exp</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_BINDING__SOURCE_EXP = 0;
-
-	/**
-	 * The feature id for the '<em><b>Target Data Parameter</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_BINDING__TARGET_DATA_PARAMETER = 1;
-
-	/**
-	 * The number of structural features of the '<em>Data Binding</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_BINDING_FEATURE_COUNT = 2;
-
-	/**
-	 * The number of operations of the '<em>Data Binding</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DATA_BINDING_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.OutputActionImpl <em>Output Action</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -783,7 +710,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.build.qvtschedule.impl.qvtschedulePackageImpl#getOutputAction()
 	 * @generated
 	 */
-	int OUTPUT_ACTION = 8;
+	int OUTPUT_ACTION = 7;
 
 	/**
 	 * The feature id for the '<em><b>Productions</b></em>' reference list.
@@ -804,13 +731,13 @@ public interface qvtschedulePackage extends EPackage {
 	int OUTPUT_ACTION__REQUISITES = ABSTRACT_ACTION__REQUISITES;
 
 	/**
-	 * The feature id for the '<em><b>Distinct Arguments</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Parameter Derivations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OUTPUT_ACTION__DISTINCT_ARGUMENTS = ABSTRACT_ACTION__DISTINCT_ARGUMENTS;
+	int OUTPUT_ACTION__PARAMETER_DERIVATIONS = ABSTRACT_ACTION__PARAMETER_DERIVATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Order</b></em>' attribute.
@@ -840,7 +767,7 @@ public interface qvtschedulePackage extends EPackage {
 	int OUTPUT_ACTION__CHILDREN = ABSTRACT_ACTION__CHILDREN;
 
 	/**
-	 * The feature id for the '<em><b>Parameters</b></em>' reference list.
+	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -849,7 +776,7 @@ public interface qvtschedulePackage extends EPackage {
 	int OUTPUT_ACTION__PARAMETERS = ABSTRACT_ACTION__PARAMETERS;
 
 	/**
-	 * The feature id for the '<em><b>Results</b></em>' reference list.
+	 * The feature id for the '<em><b>Results</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -892,7 +819,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.build.qvtschedule.impl.qvtschedulePackageImpl#getPropertyDatum()
 	 * @generated
 	 */
-	int PROPERTY_DATUM = 9;
+	int PROPERTY_DATUM = 8;
 
 	/**
 	 * The feature id for the '<em><b>Super</b></em>' reference list.
@@ -1010,7 +937,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.build.qvtschedule.impl.qvtschedulePackageImpl#getSchedule()
 	 * @generated
 	 */
-	int SCHEDULE = 10;
+	int SCHEDULE = 9;
 
 	/**
 	 * The feature id for the '<em><b>Datums</b></em>' containment reference list.
@@ -1047,6 +974,70 @@ public interface qvtschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int SCHEDULE_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.SecondaryParameterImpl <em>Secondary Parameter</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.build.qvtschedule.impl.SecondaryParameterImpl
+	 * @see org.eclipse.qvtd.build.qvtschedule.impl.qvtschedulePackageImpl#getSecondaryParameter()
+	 * @generated
+	 */
+	int SECONDARY_PARAMETER = 10;
+
+	/**
+	 * The feature id for the '<em><b>Is Loop</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECONDARY_PARAMETER__IS_LOOP = 0;
+
+	/**
+	 * The feature id for the '<em><b>Data Parameter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECONDARY_PARAMETER__DATA_PARAMETER = 1;
+
+	/**
+	 * The feature id for the '<em><b>Derivation Property</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECONDARY_PARAMETER__DERIVATION_PROPERTY = 2;
+
+	/**
+	 * The feature id for the '<em><b>Derivation</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECONDARY_PARAMETER__DERIVATION = 3;
+
+	/**
+	 * The number of structural features of the '<em>Secondary Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECONDARY_PARAMETER_FEATURE_COUNT = 4;
+
+	/**
+	 * The number of operations of the '<em>Secondary Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SECONDARY_PARAMETER_OPERATION_COUNT = 0;
 
 
 	/**
@@ -1169,15 +1160,15 @@ public interface qvtschedulePackage extends EPackage {
 	EReference getAbstractAction_Requisites();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getDistinctArguments <em>Distinct Arguments</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getParameterDerivations <em>Parameter Derivations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Distinct Arguments</em>'.
-	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractAction#getDistinctArguments()
+	 * @return the meta object for the containment reference list '<em>Parameter Derivations</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractAction#getParameterDerivations()
 	 * @see #getAbstractAction()
 	 * @generated
 	 */
-	EReference getAbstractAction_DistinctArguments();
+	EReference getAbstractAction_ParameterDerivations();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getOrder <em>Order</em>}'.
@@ -1213,10 +1204,10 @@ public interface qvtschedulePackage extends EPackage {
 	EReference getAbstractAction_Children();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getParameters <em>Parameters</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getParameters <em>Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Parameters</em>'.
+	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
 	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractAction#getParameters()
 	 * @see #getAbstractAction()
 	 * @generated
@@ -1224,10 +1215,10 @@ public interface qvtschedulePackage extends EPackage {
 	EReference getAbstractAction_Parameters();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getResults <em>Results</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getResults <em>Results</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Results</em>'.
+	 * @return the meta object for the containment reference list '<em>Results</em>'.
 	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractAction#getResults()
 	 * @see #getAbstractAction()
 	 * @generated
@@ -1288,17 +1279,6 @@ public interface qvtschedulePackage extends EPackage {
 	EClass getDataParameter();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.build.qvtschedule.DataParameter#isIsLoop <em>Is Loop</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Loop</em>'.
-	 * @see org.eclipse.qvtd.build.qvtschedule.DataParameter#isIsLoop()
-	 * @see #getDataParameter()
-	 * @generated
-	 */
-	EAttribute getDataParameter_IsLoop();
-
-	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.build.qvtschedule.DataParameter#getVariable <em>Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1310,26 +1290,15 @@ public interface qvtschedulePackage extends EPackage {
 	EReference getDataParameter_Variable();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.build.qvtschedule.DataParameter#getPrimaryDistinctData <em>Primary Distinct Data</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.build.qvtschedule.DataParameter#getSecondaryParameter <em>Secondary Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Primary Distinct Data</em>'.
-	 * @see org.eclipse.qvtd.build.qvtschedule.DataParameter#getPrimaryDistinctData()
+	 * @return the meta object for the reference '<em>Secondary Parameter</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.DataParameter#getSecondaryParameter()
 	 * @see #getDataParameter()
 	 * @generated
 	 */
-	EReference getDataParameter_PrimaryDistinctData();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.build.qvtschedule.DataParameter#getSecondaryDistinctData <em>Secondary Distinct Data</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Secondary Distinct Data</em>'.
-	 * @see org.eclipse.qvtd.build.qvtschedule.DataParameter#getSecondaryDistinctData()
-	 * @see #getDataParameter()
-	 * @generated
-	 */
-	EReference getDataParameter_SecondaryDistinctData();
+	EReference getDataParameter_SecondaryParameter();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.build.qvtschedule.DataParameter#getDatum <em>Datum</em>}'.
@@ -1343,47 +1312,47 @@ public interface qvtschedulePackage extends EPackage {
 	EReference getDataParameter_Datum();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.build.qvtschedule.DistinctData <em>Distinct Data</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.build.qvtschedule.ParameterDerivation <em>Parameter Derivation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Distinct Data</em>'.
-	 * @see org.eclipse.qvtd.build.qvtschedule.DistinctData
+	 * @return the meta object for class '<em>Parameter Derivation</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.ParameterDerivation
 	 * @generated
 	 */
-	EClass getDistinctData();
+	EClass getParameterDerivation();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.build.qvtschedule.DistinctData#getTarget <em>Target</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getTarget <em>Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the container reference '<em>Target</em>'.
-	 * @see org.eclipse.qvtd.build.qvtschedule.DistinctData#getTarget()
-	 * @see #getDistinctData()
+	 * @see org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getTarget()
+	 * @see #getParameterDerivation()
 	 * @generated
 	 */
-	EReference getDistinctData_Target();
+	EReference getParameterDerivation_Target();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.build.qvtschedule.DistinctData#getPrimaryArguments <em>Primary Arguments</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getPrimaryParameter <em>Primary Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Primary Arguments</em>'.
-	 * @see org.eclipse.qvtd.build.qvtschedule.DistinctData#getPrimaryArguments()
-	 * @see #getDistinctData()
+	 * @return the meta object for the containment reference '<em>Primary Parameter</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getPrimaryParameter()
+	 * @see #getParameterDerivation()
 	 * @generated
 	 */
-	EReference getDistinctData_PrimaryArguments();
+	EReference getParameterDerivation_PrimaryParameter();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.build.qvtschedule.DistinctData#getSecondaryArguments <em>Secondary Arguments</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getSecondaryParameters <em>Secondary Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Secondary Arguments</em>'.
-	 * @see org.eclipse.qvtd.build.qvtschedule.DistinctData#getSecondaryArguments()
-	 * @see #getDistinctData()
+	 * @return the meta object for the containment reference list '<em>Secondary Parameters</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getSecondaryParameters()
+	 * @see #getParameterDerivation()
 	 * @generated
 	 */
-	EReference getDistinctData_SecondaryArguments();
+	EReference getParameterDerivation_SecondaryParameters();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.build.qvtschedule.InputAction <em>Input Action</em>}'.
@@ -1415,49 +1384,6 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMappingAction_Mapping();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.build.qvtschedule.MappingAction#getDataBindings <em>Data Bindings</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Data Bindings</em>'.
-	 * @see org.eclipse.qvtd.build.qvtschedule.MappingAction#getDataBindings()
-	 * @see #getMappingAction()
-	 * @generated
-	 */
-	EReference getMappingAction_DataBindings();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.build.qvtschedule.DataBinding <em>Data Binding</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Data Binding</em>'.
-	 * @see org.eclipse.qvtd.build.qvtschedule.DataBinding
-	 * @generated
-	 */
-	EClass getDataBinding();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.build.qvtschedule.DataBinding#getSourceExp <em>Source Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Source Exp</em>'.
-	 * @see org.eclipse.qvtd.build.qvtschedule.DataBinding#getSourceExp()
-	 * @see #getDataBinding()
-	 * @generated
-	 */
-	EReference getDataBinding_SourceExp();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.build.qvtschedule.DataBinding#getTargetDataParameter <em>Target Data Parameter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Target Data Parameter</em>'.
-	 * @see org.eclipse.qvtd.build.qvtschedule.DataBinding#getTargetDataParameter()
-	 * @see #getDataBinding()
-	 * @generated
-	 */
-	EReference getDataBinding_TargetDataParameter();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.build.qvtschedule.OutputAction <em>Output Action</em>}'.
@@ -1543,6 +1469,60 @@ public interface qvtschedulePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getSchedule_Actions();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.build.qvtschedule.SecondaryParameter <em>Secondary Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Secondary Parameter</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.SecondaryParameter
+	 * @generated
+	 */
+	EClass getSecondaryParameter();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.build.qvtschedule.SecondaryParameter#isIsLoop <em>Is Loop</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Loop</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.SecondaryParameter#isIsLoop()
+	 * @see #getSecondaryParameter()
+	 * @generated
+	 */
+	EAttribute getSecondaryParameter_IsLoop();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.build.qvtschedule.SecondaryParameter#getDataParameter <em>Data Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Data Parameter</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.SecondaryParameter#getDataParameter()
+	 * @see #getSecondaryParameter()
+	 * @generated
+	 */
+	EReference getSecondaryParameter_DataParameter();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.build.qvtschedule.SecondaryParameter#getDerivationProperty <em>Derivation Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Derivation Property</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.SecondaryParameter#getDerivationProperty()
+	 * @see #getSecondaryParameter()
+	 * @generated
+	 */
+	EReference getSecondaryParameter_DerivationProperty();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.build.qvtschedule.SecondaryParameter#getDerivation <em>Derivation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Derivation</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.SecondaryParameter#getDerivation()
+	 * @see #getSecondaryParameter()
+	 * @generated
+	 */
+	EReference getSecondaryParameter_Derivation();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1660,12 +1640,12 @@ public interface qvtschedulePackage extends EPackage {
 		EReference ABSTRACT_ACTION__REQUISITES = eINSTANCE.getAbstractAction_Requisites();
 
 		/**
-		 * The meta object literal for the '<em><b>Distinct Arguments</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Parameter Derivations</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ABSTRACT_ACTION__DISTINCT_ARGUMENTS = eINSTANCE.getAbstractAction_DistinctArguments();
+		EReference ABSTRACT_ACTION__PARAMETER_DERIVATIONS = eINSTANCE.getAbstractAction_ParameterDerivations();
 
 		/**
 		 * The meta object literal for the '<em><b>Order</b></em>' attribute feature.
@@ -1692,7 +1672,7 @@ public interface qvtschedulePackage extends EPackage {
 		EReference ABSTRACT_ACTION__CHILDREN = eINSTANCE.getAbstractAction_Children();
 
 		/**
-		 * The meta object literal for the '<em><b>Parameters</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1700,7 +1680,7 @@ public interface qvtschedulePackage extends EPackage {
 		EReference ABSTRACT_ACTION__PARAMETERS = eINSTANCE.getAbstractAction_Parameters();
 
 		/**
-		 * The meta object literal for the '<em><b>Results</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Results</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1752,14 +1732,6 @@ public interface qvtschedulePackage extends EPackage {
 		EClass DATA_PARAMETER = eINSTANCE.getDataParameter();
 
 		/**
-		 * The meta object literal for the '<em><b>Is Loop</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DATA_PARAMETER__IS_LOOP = eINSTANCE.getDataParameter_IsLoop();
-
-		/**
 		 * The meta object literal for the '<em><b>Variable</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1768,20 +1740,12 @@ public interface qvtschedulePackage extends EPackage {
 		EReference DATA_PARAMETER__VARIABLE = eINSTANCE.getDataParameter_Variable();
 
 		/**
-		 * The meta object literal for the '<em><b>Primary Distinct Data</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Secondary Parameter</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DATA_PARAMETER__PRIMARY_DISTINCT_DATA = eINSTANCE.getDataParameter_PrimaryDistinctData();
-
-		/**
-		 * The meta object literal for the '<em><b>Secondary Distinct Data</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DATA_PARAMETER__SECONDARY_DISTINCT_DATA = eINSTANCE.getDataParameter_SecondaryDistinctData();
+		EReference DATA_PARAMETER__SECONDARY_PARAMETER = eINSTANCE.getDataParameter_SecondaryParameter();
 
 		/**
 		 * The meta object literal for the '<em><b>Datum</b></em>' reference feature.
@@ -1792,14 +1756,14 @@ public interface qvtschedulePackage extends EPackage {
 		EReference DATA_PARAMETER__DATUM = eINSTANCE.getDataParameter_Datum();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.DistinctDataImpl <em>Distinct Data</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.ParameterDerivationImpl <em>Parameter Derivation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.build.qvtschedule.impl.DistinctDataImpl
-		 * @see org.eclipse.qvtd.build.qvtschedule.impl.qvtschedulePackageImpl#getDistinctData()
+		 * @see org.eclipse.qvtd.build.qvtschedule.impl.ParameterDerivationImpl
+		 * @see org.eclipse.qvtd.build.qvtschedule.impl.qvtschedulePackageImpl#getParameterDerivation()
 		 * @generated
 		 */
-		EClass DISTINCT_DATA = eINSTANCE.getDistinctData();
+		EClass PARAMETER_DERIVATION = eINSTANCE.getParameterDerivation();
 
 		/**
 		 * The meta object literal for the '<em><b>Target</b></em>' container reference feature.
@@ -1807,23 +1771,23 @@ public interface qvtschedulePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DISTINCT_DATA__TARGET = eINSTANCE.getDistinctData_Target();
+		EReference PARAMETER_DERIVATION__TARGET = eINSTANCE.getParameterDerivation_Target();
 
 		/**
-		 * The meta object literal for the '<em><b>Primary Arguments</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Primary Parameter</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DISTINCT_DATA__PRIMARY_ARGUMENTS = eINSTANCE.getDistinctData_PrimaryArguments();
+		EReference PARAMETER_DERIVATION__PRIMARY_PARAMETER = eINSTANCE.getParameterDerivation_PrimaryParameter();
 
 		/**
-		 * The meta object literal for the '<em><b>Secondary Arguments</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Secondary Parameters</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DISTINCT_DATA__SECONDARY_ARGUMENTS = eINSTANCE.getDistinctData_SecondaryArguments();
+		EReference PARAMETER_DERIVATION__SECONDARY_PARAMETERS = eINSTANCE.getParameterDerivation_SecondaryParameters();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.InputActionImpl <em>Input Action</em>}' class.
@@ -1852,40 +1816,6 @@ public interface qvtschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference MAPPING_ACTION__MAPPING = eINSTANCE.getMappingAction_Mapping();
-
-		/**
-		 * The meta object literal for the '<em><b>Data Bindings</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference MAPPING_ACTION__DATA_BINDINGS = eINSTANCE.getMappingAction_DataBindings();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.DataBindingImpl <em>Data Binding</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.build.qvtschedule.impl.DataBindingImpl
-		 * @see org.eclipse.qvtd.build.qvtschedule.impl.qvtschedulePackageImpl#getDataBinding()
-		 * @generated
-		 */
-		EClass DATA_BINDING = eINSTANCE.getDataBinding();
-
-		/**
-		 * The meta object literal for the '<em><b>Source Exp</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DATA_BINDING__SOURCE_EXP = eINSTANCE.getDataBinding_SourceExp();
-
-		/**
-		 * The meta object literal for the '<em><b>Target Data Parameter</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference DATA_BINDING__TARGET_DATA_PARAMETER = eINSTANCE.getDataBinding_TargetDataParameter();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.OutputActionImpl <em>Output Action</em>}' class.
@@ -1956,6 +1886,48 @@ public interface qvtschedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference SCHEDULE__ACTIONS = eINSTANCE.getSchedule_Actions();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.SecondaryParameterImpl <em>Secondary Parameter</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.build.qvtschedule.impl.SecondaryParameterImpl
+		 * @see org.eclipse.qvtd.build.qvtschedule.impl.qvtschedulePackageImpl#getSecondaryParameter()
+		 * @generated
+		 */
+		EClass SECONDARY_PARAMETER = eINSTANCE.getSecondaryParameter();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Loop</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute SECONDARY_PARAMETER__IS_LOOP = eINSTANCE.getSecondaryParameter_IsLoop();
+
+		/**
+		 * The meta object literal for the '<em><b>Data Parameter</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SECONDARY_PARAMETER__DATA_PARAMETER = eINSTANCE.getSecondaryParameter_DataParameter();
+
+		/**
+		 * The meta object literal for the '<em><b>Derivation Property</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SECONDARY_PARAMETER__DERIVATION_PROPERTY = eINSTANCE.getSecondaryParameter_DerivationProperty();
+
+		/**
+		 * The meta object literal for the '<em><b>Derivation</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference SECONDARY_PARAMETER__DERIVATION = eINSTANCE.getSecondaryParameter_Derivation();
 
 	}
 
