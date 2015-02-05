@@ -111,7 +111,7 @@ operation QVTs!MappingAction getContextDataParameters() : OrderedSet {
 	
 	var contextdp = self.getAvailableDataParameters();
 	if (self.parent.isDefined()) {
-		contextdp.addAll(self.parent.closure(p | p.parent).collect(p | p.getAvailableDataParameters()));
+		contextdp.addAll(self.parent.closure(p | p.parent).collect(p | p.getAvailableDataParameters()).flatten());
 	}
 	return contextdp;
 }

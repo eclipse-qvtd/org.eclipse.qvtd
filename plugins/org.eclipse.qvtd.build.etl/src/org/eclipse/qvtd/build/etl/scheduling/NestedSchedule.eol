@@ -73,10 +73,10 @@ operation QVTs!Schedule simpleNest() {
 	rootNode.order = 0;
 	self.~rootNode = rootNode;
 	for (ma in QVTs!MappingAction.all().excluding(rootNode).sortBy(ma | ma.order)) {
-		ma.mapping.name.println("Mapping ");
+		//ma.mapping.name.println("Mapping ");
 		var parent = s.bestParent(ma);
 		if (parent.isDefined()) {
-            parent.mapping.name.println("Best parent ");
+            //parent.mapping.name.println("Best parent ");
 			ma.parent = parent;
 			ma.defineBindings(parent);	
 		} else {
@@ -103,10 +103,10 @@ operation QVTs!Schedule simpleNest() {
 operation QVTs!Schedule bestParent(nextNode : QVTs!MappingAction) : QVTs!MappingAction {
 	
 	var ren = self.rightEdgeNodes();
-	ren.collect(ma | ma.mapping.name).println("RightEdgeNodes: ");
+	//ren.collect(ma | ma.mapping.name).println("RightEdgeNodes: ");
 	var parentNodes = ren.select(parentNode | nextNode.hasAtMostOneInputPerIterator(parentNode));
 	parentNodes = parentNodes.sortBy(pn | nextNode.metric(pn)*self.treeDepth() + pn.depth());
-	parentNodes.collect(pn | pn.mapping.name).println("parentNodes ");
+	//parentNodes.collect(pn | pn.mapping.name).println("parentNodes ");
 	return parentNodes.first();
 }
 
@@ -117,7 +117,7 @@ operation QVTs!Schedule rightEdgeNodes() : Sequence {
 // at most 1 input per parameter type, and minumin 1 parameter type
 operation  QVTs!MappingAction hasAtMostOneInputPerIterator(parentNode : QVTs!MappingAction) : Boolean {
 	
-	parentNode.mapping.name.println(self.mapping.name + " AtMostOneInputPerIterator in ");
+	//parentNode.mapping.name.println(self.mapping.name + " AtMostOneInputPerIterator in ");
 	var iterators = parentNode.getContextDataParameters();
 	//iterators.collect(i | i.variable.name).println("iterators ");
 	var iteratorTypes = iterators.collect(i | i.variable.type).asSet();
@@ -126,35 +126,36 @@ operation  QVTs!MappingAction hasAtMostOneInputPerIterator(parentNode : QVTs!Map
 	//inputTypes.collect(t | t.name).println("inputTypes ");
 	var inputTypeCountPerIteratorType = iteratorTypes.collect(it | inputTypes.select(t | t == it).size());
 	//inputTypeCountPerIteratorType.println("inputTypeCountPerIteratorType ");
-	(not inputTypeCountPerIteratorType.exists(c | c > 1) and not inputTypeCountPerIteratorType.forAll(c | c == 0)).println();
+	//(not inputTypeCountPerIteratorType.exists(c | c > 1) and not inputTypeCountPerIteratorType.forAll(c | c == 0)).println();
 	return not inputTypeCountPerIteratorType.exists(c | c > 1) and not inputTypeCountPerIteratorType.forAll(c | c == 0);
 }
 
 @cached
 operation QVTs!MappingAction metric(parentNode : QVTs!MappingAction) : Integer {
     
-    parentNode.mapping.name.println(self.mapping.name + " metric for ");
-    var best = self.getBestDerivationOption(parentNode).last();
-    best.println();
-    return best;
-    //return self.getBestDerivationOption(parentNode).last();
+    //parentNode.mapping.name.println(self.mapping.name + " metric for ");
+    //var best = self.getBestDerivationOption(parentNode).last();
+    //best.println();
+    //return best;
+    return self.getBestDerivationOption(parentNode).last();
 }
 
 @cached
 operation QVTs!MappingAction getBestDerivationOption(parentNode :  QVTs!MappingAction) : Sequence {
 	
-	var matched = self.getContextDataParameters();
+	var matched = parentNode.getContextDataParameters();
     var matchedTypes = matched.collect(m | m.variable.type);
     // Select all the MA's parameters whos type (or supertype) exists in the context
     var candidates = self.parameters.select(primary |
     		matchedTypes.includes(primary.variable.type)
     		or matchedTypes.includes(primary.variable.type.closure(t | t.getSuperClasses())));
 	var best = self.getCheapestDerivation(candidates);
-	if (best.first().isEmpty()) {
-		// Metric should be infinite, i.e. can't be placed
-		"we should never get here, hasAtMostOneInputPerIterator shold avoid this".errln();
+	if (best.first().isUndefined()) {
+		// No derivations could be found. The caller should figure out what this means in their context
+		// E.g. if the parent is the root, we need an allInstances
+		return best;
 	} else {
-		if (best.first().values().one(s | s.isEmpty)) {
+		if (best.first().values().one(s | s.isEmpty())) {
 			return best;
 		} else {
 			"The selected best is missing one or more paramater derivations".errln();	
@@ -164,57 +165,83 @@ operation QVTs!MappingAction getBestDerivationOption(parentNode :  QVTs!MappingA
 
 operation QVTs!MappingAction defineBindings(parentNode :  QVTs!MappingAction) {
 
-	parentNode.println(self + " defineBindings to ");
+	//parentNode.println(self + " defineBindings to ");
 	var best = self.getBestDerivationOption(parentNode);
-	if (best.isEmpty()) {
+	var primary = null;
+	if (best.first().isUndefined()) {
 		// The parent must be the root, and hence we don't have any DataParameters
 		// in the context. Call getCheapestDerivation with the mapping parameters to
-		// find the best root combination.
+		// find the best root combination. By leaving the primary parameter empty all
+		// loops must be done on allInstances
+		//"root parent ".println();
 		best = self.getCheapestDerivation(self.parameters);
+		primary = best.first().keySet().selectOne(k | best.first().get(k).isEmpty());
+		var pd = new QVTs!ParameterDerivation;
+		var sp = new QVTs!SecondaryParameter;
+		sp.isLoop = true;
+		sp.dataParameter = primary;
+		pd.secondaryParameter = sp;
+		self.parameterDerivations.add(pd);
+	} else {
+		primary = best.first().keySet().selectOne(k | best.first().get(k).isEmpty());
 	}
-	var primary = best.first().keySet().selectOne(k | best.first().get(k).isEmpty());
-	var pd = new QVTs!ParameterDerivation;
-	pd.primaryParameter = primary;
+	//primary.variable.name.println("primary ");
 	for (k in best.first().keySet().excluding(primary)) {
+		//k.variable.name.println("bindings for ");
 		var derivations = best.first().get(k);
-		self.parameterDerivations.addAll(derivations.collect(d | d.last().createSecondaryParameter(d.first())));
+		//erivations.println();
+		var fromDP = primary;
+		for (d in derivations) {
+			var toDP = d.last(); 
+			var pd = toDP.createDerivation();
+			//fromDP.variable.name.println("    PD.prim ");
+			//toDP.variable.name.println("    PD.sec.dp ");
+			pd.primaryParameter = fromDP;
+			var sp = pd.secondaryParameter;
+			sp.derivationProperty = d.first();
+			sp.isLoop = d.first().isMany();
+			self.parameterDerivations.add(pd);
+			fromDP = toDP;
+		}
 	}
 }
 
-operation QVTs!DataParameter createSecondaryParameter(property) :  QVTs!SecondaryParameter {
+@cached
+operation QVTs!DataParameter createDerivation() :  QVTs!ParameterDerivation {
 	
+	//"    new PD".println();
+	var pd = new QVTs!ParameterDerivation;
 	var sp = new QVTs!SecondaryParameter;
-	sp.isLoop = property.isMany();
 	sp.dataParameter = self;
-	sp.derivationProperty = property;
-	return sp;
+	pd.secondaryParameter = sp;
+	return pd;
 }
-
 
 // return the cheapest derivation option
 operation QVTs!MappingAction getCheapestDerivation(startPoints : Collection) : Sequence {
 	
-	return startPoints.collect(sp | self.dijkstras(sp)).sortBy(der | der.last()).first().ifUndefined(Sequence{});
+	// If startpoints is empty, there is no derivation.
+	return startPoints.collect(sp | self.dijkstras(sp)).sortBy(der | der.last()).first().ifUndefined(Sequence{null, 2e31-1});
 }
 
-@cached
 operation QVTs!MappingAction dijkstras(start : QVTs!DataParameter) : Sequence {
-
+	
+	var MAX_VAL = 2e31-1;
 	//start.variable.name.println("dijkstras from ");
-	var dist = self.parameters.aggregate(p | p, 2e31);
+	var dist = self.parameters.aggregate(p | p, MAX_VAL);
 	var path = self.parameters.aggregate(p | p, Sequence{});
 	var done = self.parameters.aggregate(p | p, false);
 	dist.put(start, 0);
 	while (true) {
 		var u = null;
-		var bestDist = 2e31;
+		var bestDist = MAX_VAL;
 		for (p in self.parameters) {
 			if (not done.get(p) and dist.get(p) < bestDist) {	// The first time it should find start
 				u = p;
 				bestDist = dist.get(p);
 			}
 		}
-		if (bestDist == 2e31) break;
+		if (bestDist == MAX_VAL) break;
 		//u.variable.name.println("u ");
 		// relax neighbourh edges
 		for (p in self.parameters) {
@@ -254,7 +281,6 @@ operation QVTs!MappingAction dijkstras(start : QVTs!DataParameter) : Sequence {
 		50 - a [M..*] unnavigable opposite reference
 		100 - an unbound reference (i.e. allInstances())
     */
-@cached
 operation QVTs!DataParameter weight(dest : QVTs!DataParameter) : Sequence {
 	
 	//dest.variable.name.println(self.variable.name + " weight to ");
@@ -266,7 +292,7 @@ operation QVTs!DataParameter weight(dest : QVTs!DataParameter) : Sequence {
         }
    	}
    	if (property.isDefined()) {
-   		property.println();
+   		//property.println();
 		var cost = 0;
 	    var mult = 2;
 	    if (property.isImplicit) {
