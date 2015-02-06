@@ -159,7 +159,7 @@ public interface AbstractAction extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum}.
+	 * The list contents are of type {@link org.eclipse.qvtd.build.qvtschedule.DataParameter}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear,
@@ -171,7 +171,7 @@ public interface AbstractAction extends EObject {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<AbstractDatum> getParameters();
+	EList<DataParameter> getParameters();
 
 	/**
 	 * Returns the value of the '<em><b>Results</b></em>' containment reference list.

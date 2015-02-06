@@ -37,16 +37,16 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//DataParameter/secondaryParameter"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//DataParameter/datum"/>
     </genClasses>
-    <genClasses ecoreClass="QVTSchedule.ecore#//ParameterDerivation">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTSchedule.ecore#//ParameterDerivation/target"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//ParameterDerivation/primaryParameter"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//ParameterDerivation/secondaryParameters"/>
-    </genClasses>
     <genClasses ecoreClass="QVTSchedule.ecore#//InputAction"/>
     <genClasses ecoreClass="QVTSchedule.ecore#//MappingAction">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//MappingAction/mapping"/>
     </genClasses>
     <genClasses ecoreClass="QVTSchedule.ecore#//OutputAction"/>
+    <genClasses ecoreClass="QVTSchedule.ecore#//ParameterDerivation">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTSchedule.ecore#//ParameterDerivation/target"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//ParameterDerivation/primaryParameter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//ParameterDerivation/secondaryParameter"/>
+    </genClasses>
     <genClasses ecoreClass="QVTSchedule.ecore#//PropertyDatum">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//PropertyDatum/property"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTSchedule.ecore#//PropertyDatum/classDatum"/>
@@ -60,6 +60,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTSchedule.ecore#//SecondaryParameter/isLoop"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//SecondaryParameter/dataParameter"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTSchedule.ecore#//SecondaryParameter/derivationProperty"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTSchedule.ecore#//SecondaryParameter/derivation"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

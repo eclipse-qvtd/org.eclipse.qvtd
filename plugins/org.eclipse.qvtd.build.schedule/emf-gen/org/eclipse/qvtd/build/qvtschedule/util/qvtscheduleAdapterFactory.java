@@ -84,10 +84,6 @@ public class qvtscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createDataParameterAdapter();
 			}
 			@Override
-			public Adapter caseParameterDerivation(ParameterDerivation object) {
-				return createParameterDerivationAdapter();
-			}
-			@Override
 			public Adapter caseInputAction(InputAction object) {
 				return createInputActionAdapter();
 			}
@@ -98,6 +94,10 @@ public class qvtscheduleAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseOutputAction(OutputAction object) {
 				return createOutputActionAdapter();
+			}
+			@Override
+			public Adapter caseParameterDerivation(ParameterDerivation object) {
+				return createParameterDerivationAdapter();
 			}
 			@Override
 			public Adapter casePropertyDatum(PropertyDatum object) {

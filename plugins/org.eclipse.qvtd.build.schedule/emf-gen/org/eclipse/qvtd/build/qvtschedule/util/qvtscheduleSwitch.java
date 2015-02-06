@@ -91,12 +91,6 @@ public class qvtscheduleSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case qvtschedulePackage.PARAMETER_DERIVATION: {
-				ParameterDerivation parameterDerivation = (ParameterDerivation)theEObject;
-				T result = caseParameterDerivation(parameterDerivation);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case qvtschedulePackage.INPUT_ACTION: {
 				InputAction inputAction = (InputAction)theEObject;
 				T result = caseInputAction(inputAction);
@@ -115,6 +109,12 @@ public class qvtscheduleSwitch<T> extends Switch<T> {
 				OutputAction outputAction = (OutputAction)theEObject;
 				T result = caseOutputAction(outputAction);
 				if (result == null) result = caseAbstractAction(outputAction);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case qvtschedulePackage.PARAMETER_DERIVATION: {
+				ParameterDerivation parameterDerivation = (ParameterDerivation)theEObject;
+				T result = caseParameterDerivation(parameterDerivation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

@@ -23,7 +23,7 @@ Package qvtschedule <http://www.eclipse.org/qvt/0.2/QVTschedule/>
     Attribute order : EInt
     Reference parent : AbstractAction
     Reference children : AbstractAction<<0..*>>
-    Reference parameters : AbstractDatum<<0..*>>
+    Reference parameters : DataParameter<<0..*>>
     Reference results : DataParameter<<0..*>>
     Reference schedule : Schedule
 
@@ -36,17 +36,17 @@ Package qvtschedule <http://www.eclipse.org/qvt/0.2/QVTschedule/>
     Reference secondaryParameter : SecondaryParameter
     Reference datum : AbstractDatum<<1..1>>
 
-  Class ParameterDerivation
-    Reference target : AbstractAction
-    Reference primaryParameter : DataParameter<<1..1>>
-    Reference secondaryParameters : SecondaryParameter<<0..*>>
-
   Class InputAction -> AbstractAction
 
   Class MappingAction -> AbstractAction
     Reference mapping : Mapping<<1..1>>
 
   Class OutputAction -> AbstractAction
+
+  Class ParameterDerivation
+    Reference target : AbstractAction
+    Reference primaryParameter : DataParameter
+    Reference secondaryParameter : SecondaryParameter
 
   Class PropertyDatum -> AbstractDatum
     Reference property : Property<<1..1>>
@@ -60,5 +60,5 @@ Package qvtschedule <http://www.eclipse.org/qvt/0.2/QVTschedule/>
   Class SecondaryParameter
     Attribute isLoop : EBoolean
     Reference dataParameter : DataParameter<<1..1>>
-    Reference derivationProperty : Property<<1..1>>
+    Reference derivationProperty : Property
     Reference derivation : ParameterDerivation

@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.eclipse.emf.common.EMFPlugin;
+import org.eclipse.emf.common.notify.impl.SingletonAdapterImpl;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -14,22 +15,27 @@ import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.qvtd.build.etl.MtcBroker;
+import org.eclipse.qvtd.build.etl.PivotModel;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
@@ -40,14 +46,17 @@ import org.junit.Test;
 
 public class QVTdMtcTests extends LoadTestCase {
 	
+	
+	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests", true);
+	
 	protected class MyQVT extends OCL
 	{
 		public MyQVT(@NonNull QVTiEnvironmentFactory environmentFactory) {
 			super(environmentFactory);
 		}
 
-		public @NonNull MyQvtiEvaluator createEvaluator(@NonNull String fileNamePrefix, @NonNull String transformationFileName) throws IOException {
-			return new MyQvtiEvaluator(getEnvironmentFactory(), fileNamePrefix, transformationFileName);
+		public @NonNull QVTiPivotEvaluator createEvaluator(Transformation transformation) throws IOException {
+			return new QVTiPivotEvaluator(getEnvironmentFactory(), transformation);
 		}
 
 		@Override
@@ -56,101 +65,9 @@ public class QVTdMtcTests extends LoadTestCase {
 		}
 	}
 	
-	protected static class MyQVTiEnvironmentFactory extends QVTiEnvironmentFactory
-	{
-		public MyQVTiEnvironmentFactory(@Nullable ProjectManager projectMap) {
-			super(projectMap);
-	    	setEvaluationTracingEnabled(true);
-		}
-	}
-	
-	/**
-	 * The Class MyQvtiEvaluator provides helper methods for loading and creating models used in the test
-	 */
-	private final class MyQvtiEvaluator extends QVTiXtextEvaluator
-	{
+	private MyQVT myQVT;
+
 		
-		/** The typed model validation resource map. */
-		protected final @NonNull Map<TypedModel, Resource> typedModelValidationResourceMap = new HashMap<TypedModel, Resource>();
-		
-		/** The file name prefix. */
-		private final @NonNull String fileNamePrefix;
-
-		/**
-		 * Instantiates a new my Qvti evaluator.
-		 *
-		 * @param metamodelManager the meta model manager
-		 * @param fileNamePrefix the file name prefix
-		 * @param transformationFileName the transformation file name
-		 * @throws IOException Signals that an I/O exception has occurred.
-		 */
-		public MyQvtiEvaluator(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull String fileNamePrefix, @NonNull String transformationFileName) throws IOException {
-			super(environmentFactory, getProjectFileURI(fileNamePrefix + "/"  + transformationFileName));
-			this.fileNamePrefix = fileNamePrefix + "/";
-		}
-		
-		/**
-		 * Associates a typed model, identified by typedModelName, with a new resource with
-		 * name modelFileName, in the current project.
-		 *
-		 * @param typedModelName the name of the typed model
-		 * @param modelFileName the model file name
-		 * 
-		 * @see #loadModel(String, String)
-		 */
-		public void createModel(@NonNull String typedModelName, @NonNull String modelFileName) {
-			createModel(typedModelName, getProjectFileURI(fileNamePrefix + modelFileName), null);
-		}
-
-		/**
-		 * Associates a typed model, identified by typedModelName, with an existing resource
-		 * with name modelFileName, in the current project.
-		 *
-		 * @param name the name
-		 * @param modelFileName the model file name
-		 * 
-		 * @see #createModel(String, String)
-		 */
-		public void loadModel(@NonNull String name, @NonNull String modelFileName) {
-			loadModel(name, getProjectFileURI(fileNamePrefix + modelFileName));
-		}
-
-		/**
-		 * Loads a reference model, identified by modelFileName, as a resource. The reference
-		 * model is used to validate if the generated model is correct, i.e. the output
-		 * and reference model must be equal.
-		 *
-		 * @param name the name
-		 * @param modelFileName the model file name
-		 */
-		public void loadReference(@NonNull String name, @NonNull String modelFileName) {
-	        TypedModel typedModel = NameUtil.getNameable(transformation.getModelParameter(), name);
-	        if (typedModel == null) {
-	        	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
-	        }
-			URI modelURI = getProjectFileURI(fileNamePrefix + modelFileName);
-	        Resource resource = metamodelManager.getExternalResourceSet().getResource(modelURI, true);
-	        typedModelValidationResourceMap.put(typedModel, resource);
-		}
-
-		/**
-		 * Test.
-		 *
-		 * @throws Exception the exception
-		 */
-		public void test() throws Exception {
-	    	boolean result = execute();
-	        assertTrue(getClass().getSimpleName() + " should not return null.", result);
-	        saveModels(getProjectFileURI(fileNamePrefix + "middle.xmi"));
-	        for (Entry<TypedModel, Resource> entry : typedModelValidationResourceMap.entrySet()) { // Validate against reference models
-	        	TypedModel typedModel = ClassUtil.nonNullState(entry.getKey());
-	        	Resource expectedModel = entry.getValue();
-	        	Resource actualModel = modelManager.getModel(typedModel);
-	            assertSameModel(expectedModel, actualModel);
-	        }
-	    }
-	}
-	
 	/**
 	 * Assert same model.
 	 *
@@ -177,8 +94,9 @@ public class QVTdMtcTests extends LoadTestCase {
         assertNoResourceErrors("Loading", resource);
 	}
 
+	
 	protected @NonNull MyQVT createQVT() {
-		return new MyQVT(new MyQVTiEnvironmentFactory(new StandaloneProjectMap()));
+		return new MyQVT(new QVTiEnvironmentFactory(new StandaloneProjectMap()));
 	}
 	
 	/* (non-Javadoc)
@@ -189,11 +107,15 @@ public class QVTdMtcTests extends LoadTestCase {
 	    
 		BaseLinkingService.DEBUG_RETRY.setState(true);
 		super.setUp();
-		OCLstdlib.install();
+		CompleteOCLStandaloneSetup.doSetup(); // To be able to add QVTimperative.ocl validation
 		QVTcoreStandaloneSetup.doSetup();
-		QVTcorePivotStandaloneSetup.doSetup();
 		QVTimperativePivotStandaloneSetup.doSetup();
 		
+		myQVT = createQVT();
+		QVTiEnvironmentFactory factory = myQVT.getEnvironmentFactory(); 
+		factory.setEvaluationTracingEnabled(true);
+		PivotMetamodelManager metamodelManager = factory.getMetamodelManager();
+		metamodelManager.configureLoadFirstStrategy(); // Since the models might use a different URI to refer the same meta-model
     }
 	
 	 /* (non-Javadoc)
@@ -201,6 +123,7 @@ public class QVTdMtcTests extends LoadTestCase {
      */
     @After
     public void tearDown() throws Exception {
+    	myQVT.dispose();
 		super.tearDown();
     }
     
@@ -208,14 +131,11 @@ public class QVTdMtcTests extends LoadTestCase {
     @Test
     public void testUmlToRdbms() throws Exception {
     	
-    	MyQVT myQVT = createQVT();
     	
-    	URI baseURI = URI.createURI("platform:/resource/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests/UmlToRdbms/");
+    	URI baseURI = TESTS_BASE_URI.appendSegment("UmlToRdbms");
     	String qvtcSource = "UmlToRdbms.qvtcas";
     	
-    	//URL r = this.getClass().getResource("UmlToRdbms/UmlToRdbms.qvtcas");
-		//String qvtcasUri = MtcBroker.changeResourceToSource(r.toURI().toString());
-		MtcBroker mtc = new MtcBroker(baseURI, qvtcSource, myQVT);
+    	MtcBroker mtc = new MtcBroker(baseURI, qvtcSource, myQVT);
     	mtc.execute();
     	Diagnostic diagnostic = Diagnostician.INSTANCE.validate(mtc.getuModel().getRooteObject());
     	// TODO do we want perfect or can we tolerate info and warnings?
@@ -226,23 +146,32 @@ public class QVTdMtcTests extends LoadTestCase {
         diagnostic = Diagnostician.INSTANCE.validate(mtc.getpModel().getRooteObject());
         assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
         diagnostic = Diagnostician.INSTANCE.validate(mtc.getsModel().getRooteObject());
-        assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
+        //assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
         diagnostic = Diagnostician.INSTANCE.validate(mtc.getiModel().getRooteObject());
         assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
         
-        MyQvtiEvaluator testEvaluator = myQVT.createEvaluator("Graph2GraphMinimal", "Graph2GraphMinimal.qvti");
+        // Run the QVTi transformation
+        PivotModel qvtiTransf = mtc.getiModel();
+    	//URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());
+    	//assertValidQVTiModel(txURI);
+        URI txURI = ClassUtil.nonNullState(qvtiTransf.getTransformation().eResource().getURI());
+        assertLoadable(txURI);
+        URI samplesBaseUri = baseURI.appendSegment("samples");
+        URI umlURI = samplesBaseUri.appendSegment("SimpleUMLPeople.xmi");
+    	URI rdbmsURI = samplesBaseUri.appendSegment("SimpleRDBMSPeople.xmi");
+    	URI traceURI = samplesBaseUri.appendSegment("SimpleUMLtoRDBMSPeople.xmi");
+        
+        QVTiPivotEvaluator testEvaluator =  new QVTiPivotEvaluator(myQVT.getEnvironmentFactory(), qvtiTransf.getTransformation());
     	testEvaluator.saveTransformation(null);
-        testEvaluator.loadModel("uml", "SimpleUMLPeople.xmi");
-        testEvaluator.createModel("middle", "UML2RDBMS.xmi");
-        testEvaluator.createModel("rdbms", "SimpleRDBMSPeople.xmi");
+        testEvaluator.loadModel("uml", umlURI);
+        testEvaluator.createModel("middle", traceURI, null);
+        testEvaluator.createModel("rdbms", rdbmsURI, null);
+        System.out.println("Executing QVTi transformation on test models.");
+        testEvaluator.execute();
+        testEvaluator.saveModels();
+        testEvaluator.dispose();
         // TODO create validation model 
         //testEvaluator.loadReference("rdbms", "SimpleRDBMSPeopleValidate.xmi");
-        System.out.println("Executing QVTi transformation on test models.");
-        testEvaluator.test();
-        testEvaluator.dispose();
-        
-        URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
-        assertLoadable(txURI);
         mtc.disposeModels();
     }
     /*
@@ -311,5 +240,34 @@ public class QVTdMtcTests extends LoadTestCase {
         
     }
     */
+    
+    protected static void assertValidQVTiModel(@NonNull URI asURI ) {
+	    
+		EnvironmentFactory factory =  OCL.createEnvironmentFactory(new StandaloneProjectMap());
+		/* FIXME Validating QVTi models are causing problems. Not researched.
+		MetamodelManager.Internal mManager = factory.getMetamodelManager(); 
+        mManager.configureLoadFirstStrategy();
+		
+		URI oclURI = ClassUtil.nonNullState(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true));
+
+		CompleteOCLEObjectValidator validator = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, factory);
+		validator.initialize();
+		PivotEObjectValidator.install(ClassUtil.nonNullState(factory.getResourceSet()), factory);
+		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTbasePackage.eINSTANCE));
+		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE));
+		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE));*/
+		
+		assertValidModel(asURI, factory.getResourceSet());
+	}
+    
+    protected static void assertValidModel(URI asURI, ResourceSet rSet) {
+		Resource resource = rSet.getResource(asURI, true);
+        EcoreUtil.resolveAll(resource);
+	        
+		String rUriString = resource.getURI().toString();
+		assertNoUnresolvedProxies("Validating a resource: " + rUriString, resource);
+        assertNoResourceErrors("Loading a resource" + rUriString, resource);
+        //assertNoValidationErrors("Loading a resource" + rUriString, resource);
+	}
 	
 }

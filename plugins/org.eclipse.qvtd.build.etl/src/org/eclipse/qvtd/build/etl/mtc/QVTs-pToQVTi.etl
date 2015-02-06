@@ -106,25 +106,21 @@ rule Mappings
     extends Rules, Areas
     {
         
-        mIn.name.println("Mappings " );
+        //mIn.name.println("Mappings " );
         var ma = QVTs!MappingAction.all().selectOne(ma | ma.mapping.name == mIn.name); 
         if (not ma.children.isEmpty()) {
             mOut.mappingStatement = new QVTi!MappingSequence;
-            mOut.mappingStatement.mappingStatements.addAll(ma.children
-            		.select(c | not c.parameterDerivations.exists(pd | pd.secondaryParameter.isLoop)).equivalent());
-            //mOut.mappingStatement.mappingStatements.addAll(ma.children.equivalent());
-            /*
-            // Add loops of mapping calls accordingly... hard!
-            if (ma.parent.mapping) {
-                // Add only the loops of the PrimaryArguments with the most secondary arguments
-                // The other DistinctData loops will be nested inside these
-                mOut.mappingStatement.mappingStatements.addAll(ma.children
-                    .collect(ma | ma.getMainDistinctData())
-                    .flatten().equivalent());
-            } else {
-                mOut.mappingStatement.mappingStatements.addAll(ma.children.equivalent());
-            }
-			*/
+            // Do it with a for to respect the ordering
+            for (c in ma.children) {
+            	//c.mapping.name.println("child ");
+	        	if (not c.parameterDerivations.exists(pd | pd.secondaryParameter.isLoop)) {
+	        		mOut.mappingStatement.mappingStatements.add(c.equivalent());	
+	        	} else {
+	        		mOut.mappingStatement.mappingStatements.addAll(
+	        				c.parameterDerivations.select(pd | pd.secondaryParameter.isLoop).collect(pd | pd.secondaryParameter.equivalent())
+        					.flatten().select(ms | ms.eContainer.isUndefined()));
+	        	}
+	       	}
         }
     }
 
@@ -291,27 +287,20 @@ rule RootMappingAction
     	
     	m.name = "__root__";
     	m.transformation ::= QVTp!Transformation.all.first();
-    	m.name.println("Mappings " );
+    	//"Adding root".println();
     	m.guardPattern = new QVTi!GuardPattern;
     	m.bottomPattern = new QVTi!BottomPattern;
-        //if (not ma.children.isEmpty()) {
-            m.mappingStatement = new QVTi!MappingSequence;
-            m.mappingStatement.mappingStatements.addAll(ma.children
-            		.select(c | not c.parameterDerivations.exists(pd | pd.secondaryParameter.isLoop)).equivalent());
-            //mOut.mappingStatement.mappingStatements.addAll(ma.children.equivalent());
-            /*
-            // Add loops of mapping calls accordingly... hard!
-            if (ma.parent.mapping) {
-                // Add only the loops of the PrimaryArguments with the most secondary arguments
-                // The other DistinctData loops will be nested inside these
-                mOut.mappingStatement.mappingStatements.addAll(ma.children
-                    .collect(ma | ma.getMainDistinctData())
-                    .flatten().equivalent());
-            } else {
-                mOut.mappingStatement.mappingStatements.addAll(ma.children.equivalent());
-            }
-			*/
-        //}
+    	// All mappings in the root should be nested inside loops    
+	    m.mappingStatement = new QVTi!MappingSequence;
+        if (not ma.children.select(c | not c.parameterDerivations.exists(pd | pd.secondaryParameter.isLoop)).isEmpty()) {
+        	"Root has a child which is not a loop".errln();
+        }
+        for (c in ma.children) {
+        	//c.mapping.name.println("Child ");
+        	m.mappingStatement.mappingStatements.addAll(
+        			c.parameterDerivations.select(pd | pd.secondaryParameter.isLoop).collect(pd | pd.secondaryParameter.equivalent())
+        			.flatten().select(ms | ms.eContainer.isUndefined()));
+        }
     }
 
 
@@ -323,12 +312,12 @@ rule MappingActions
         
         mc.referredMapping ::= QVTp!Mapping.all().selectOne(m | ma.mapping.name == m.name);
         mc.binding.addAll(ma.parameters.equivalent());
-        //for (binding in mc.binding.select(b | b.value.isTypeOf(QVTi!VariableExp) and b.value.referredVariable.isUndefined())) {
-        //	binding.value.referredVariable ::= ma.getContextDataParameters().selectOne(dp | dp.variable.type == binding.boundVariable.type).variable;
-        //	binding.value.type = binding.value.referredVariable.type;
-        //}
+        for (p in ma.parameters.select(dp | not dp.secondaryParameter.isDefined())) {
+        	var binding = p.equivalent();
+        	binding.value.referredVariable ::= ma.parent.getAllContextDataParameters(p.variable.type).first().variable.getSameVariable();
+        	binding.value.type = binding.value.referredVariable.type;
+        }
     }
-
 
 // Non loop variables can be bound directly from the primary parameter
 rule DerivedDataParameter
@@ -339,23 +328,8 @@ rule DerivedDataParameter
         	and not dp.secondaryParameter.isLoop
         	and dp.secondaryParameter.derivation.primaryParameter.isDefined()
         	 
-        var paramVar = dp.variable.getSameVariable();
-        var primaryVar = dp.secondaryParameter.derivation.primaryParameter.variable.getSameVariable();
-        var prop = dp.secondaryParameter.derivationProperty;
-        var refVar = primaryVar.equivalent();
-        
-        //primaryVar.name.println("primaryVar ");
-        //paramVar.name.println("paramVar ");
-        //prop.name.println("prop ");
-        //refVar.name.println("refVar ");
-        cb.boundVariable ::= paramVar;
-        cb.value = new QVTi!PropertyCallExp;
-        cb.value.referredProperty = prop;
-        cb.value.type = prop.type;
-        cb.value.ownedSource = new QVTi!VariableExp;
-        cb.value.ownedSource.referredVariable = refVar;
-        cb.value.ownedSource.type = refVar.type;   
-        //cb.mappingCall ::= dp.secondaryDistinctData.target;
+        cb.boundVariable ::= dp.variable.getSameVariable();
+        cb.value = dp.secondaryParameter.getNavigationExp();
     }
 
 // Loop variables need to be derived form the loop iterator
@@ -365,39 +339,24 @@ rule DerivedLoopDataParameter
     {
         guard : dp.secondaryParameter.isDefined()
         	and dp.secondaryParameter.isLoop
-        	and dp.secondaryParameter.derivation.primaryParameter.isDefined()
         	 
-        var paramVar = dp.variable.getSameVariable();
-        var prop = dp.secondaryParameter.derivationProperty;
-        var refVar = dp.secondaryParameter.equivalent().ownedIterators.first();
-        
-        //primaryVar.name.println("primaryVar ");
-        //paramVar.name.println("paramVar ");
-        //prop.name.println("prop ");
-        //refVar.name.println("refVar ");
-        cb.boundVariable ::= paramVar;
+        cb.boundVariable ::= dp.variable.getSameVariable();
         cb.value = new QVTi!VariableExp;
-        cb.value.referredVariable = refVar;
-        cb.value.type = refVar.type;
-        //cb.mappingCall ::= dp.secondaryDistinctData.target;
+        cb.value.referredVariable = dp.secondaryParameter.equivalent().ownedIterators.first();
+        cb.value.type = cb.value.referredVariable.type;
     }
-
 
 rule PrimaryDataParameter
     transform dp : QVTs!DataParameter
     to cb : QVTi!MappingCallBinding
     {
-        guard : not dp.secondaryParameter.isDefined()
+        guard : not dp.secondaryParameter.isDefined() and not dp.variable.isTypeOf(QVTs!RealizedVariable)
         
-        //var refVar = ??
-        //refVar.name.println("primaryVar ");
         cb.boundVariable ::= dp.variable.getSameVariable();
         cb.value = new QVTi!VariableExp;
         // refferedVariable assigned by the invoking mapping
-        //cb.value.referredVariable = refVar;
-        //cb.value.type = refVar.type;
-        //cb.mappingCall ::= dp.primaryDistinctData.target;
     }
+    
     
 rule BindingLoops
 	transform sp : QVTs!SecondaryParameter
@@ -405,9 +364,11 @@ rule BindingLoops
 	{
 		guard : sp.isLoop
 		
-		sp.dataParameter.variable.name.println("BindingLoops ");
+		//sp.dataParameter.variable.name.println("BindingLoops ");
+		
         if (sp.derivation.primaryParameter.isUndefined()) {
         	// for dp.v : <dp.v.type> in <dp.v.type>.allInstances()
+        	//"allInstances".println();
         	var it = new QVTi!Variable;
 	        it.name = sp.dataParameter.variable.name;
 	        it.type = sp.dataParameter.variable.type;
@@ -420,25 +381,20 @@ rule BindingLoops
 	        exp.type = exp.referredOperation.type;
 	        loop.ownedSource = exp;
         } else {
-        	var sourceVar ::= sp.derivation.target.getContextDataParameters()
-        			.selectOne(dp | dp.variable.type == sp.derivation.primaryParameter.variable.type).variable.getSameVariable();
+        	var sourveVarExp = sp.getNavigationExp();
         	// The containement property may be the exact type or a supertype of the variable we are binding
         	// The property must be a collection, so we need to check the elements type
         	if (sp.derivationProperty.type.elementType == sp.dataParameter.variable.type) {
         		// for dp.v in pp.property 
+        		//"directLoop".println();
         		var it = new QVTi!Variable;
 		        it.name = sp.dataParameter.variable.name;
 		        it.type = sp.dataParameter.variable.type;
 		        loop.ownedIterators.add(it);
-		        var exp = new QVTi!PropertyCallExp;
-	        	exp.type = sp.derivationProperty.type;
-	        	exp.ownedSource = new QVTi!VariableExp;
-		        exp.ownedSource.referredVariable = sourceVar;
-		        exp.ownedSource.type = sourceVar.type;
-	        	exp.referredProperty = sp.derivationProperty;
-		        loop.ownedSource = exp;
+		        loop.ownedSource = sourveVarExp;
         	} else {
         		//for child in pp.property->select(e | e.oclIsTypeOf(dp.v.type))
+        		//"selectLoop".println();
         		var it = new QVTi!Variable;
 		        it.name = "child";
 		        it.type = sp.dataParameter.variable.type;
@@ -447,12 +403,7 @@ rule BindingLoops
         		var exp = new QVTi!IteratorExp;
 	        	exp.type = sp.derivationProperty.type;
 	        	
-	        	exp.ownedSource = new QVTi!PropertyCallExp;
-	        	exp.ownedSource.type = sp.derivationProperty.type;
-	        	exp.ownedSource.ownedSource = new QVTi!VariableExp;
-		        exp.ownedSource.ownedSource.referredVariable = sourceVar;
-		        exp.ownedSource.ownedSource.type = sourceVar.type;
-	        	exp.ownedSource.referredProperty = sp.derivationProperty;
+	        	exp.ownedSource = sourveVarExp;
 		        
 		        exp.ownedBody = new QVTi!OperationCallExp;
 		        exp.ownedBody.type = getPrimitiveTypeByName("Boolean");
@@ -466,25 +417,32 @@ rule BindingLoops
 		        argument.type = getClassByName("Class");
 		        argument.referredType = it.type;
 		        exp.ownedBody.ownedArguments.add(argument);
-		        exp.ownedBody.referredOperation = exp.ownedBody.type.getOperationByName("oclIsTypeOf");
+		        exp.ownedBody.referredOperation = getOclAnyOperation("oclIsTypeOf");
 		        
 		        exp.ownedIterators.add(bodyIt);
 		        exp.referredIteration = getSelectIterator();
 		        loop.ownedSource = exp;
-				
        		}
         }
-        // TODO what happens with multiple Distinct Datas?
         loop.ownedBody = new QVTi!MappingSequence;
-        loop.ownedBody.mappingStatements.add(sp.derivation.target.equivalent());
-        // To make loops nest, only one loop can be added. Which? The next one with the most secondary arguments
-        // FIXME
-        //var nextDD = dd.getNextDistinctData();
-        //if (nextDD <> null) {
-        //    loop.ownedBody.mappingStatements.add(nextDD.equivalent());
-        //}
-                
-		
+        
+        //"Nesting loops".println();
+        // We can eiter nest the maping call or another loop
+        // 1. Search for other loops that have already a nest
+        var innerLoop = sp.derivation.target.parameterDerivations.secondaryParameter
+        		.select(p | p <> sp and p.isLoop).equivalent().selectOne(l | not l.ownedBody.mappingStatements.isEmpty());
+        if (innerLoop.isDefined() and innerLoop.eContainer.isUndefined()) {
+       		//"Loop in Loop.".println(); 
+        	loop.ownedBody.mappingStatements.add(innerLoop);
+        } else {
+        	var ms = sp.derivation.target.equivalent();	
+	        // sp.derivation.target.mapping.name.println(sp.dataParameter.variable.name + " sp mapping ");
+	        //ms.eContainer.println(sp.dataParameter.variable.name + " sp.derivation.target.eq container: ");
+	        if (ms.eContainer.isUndefined()) {
+	        	//"MapCall in Loop.".println();
+	        	loop.ownedBody.mappingStatements.add(ms);
+	        } 	
+	    }
 	}
 
 @cached
@@ -492,13 +450,52 @@ operation QVTs!Variable getSameVariable() : QVTp!Variable {
     return QVTp!Variable.all.selectOne(v | QVTp.getElementId(v) == QVTs.getElementId(self));
 } 
 
+operation QVTs!SecondaryParameter getNavigationExp() : QVTi!OCLExpression {
 
-operation QVTs!MappingAction hasLoopVariable() : Boolean {
-    
-    // This is the actual operation that finds the nesting
-    return true;
+	//self.dataParameter.variable.name.println("getNavigationExp ");
+	var exp;
+	if (self.derivationProperty.isDefined()) {
+		//self.dataParameter.variable.name.println("derivationProperty.isDefined ");
+		//self.derivationProperty.name.println("prop ");
+		exp = new QVTi!PropertyCallExp;
+		exp.referredProperty = self.derivationProperty;
+		exp.type = exp.referredProperty.type;
+		if (self.derivation.primaryParameter.secondaryParameter.isDefined()) {
+			if (self.derivation.primaryParameter.secondaryParameter.isLoop) {
+				//self.dataParameter.variable.name.println("End Rec with iterator ");
+				exp.ownedSource = new QVTi!VariableExp;
+		    	exp.ownedSource.referredVariable = self.derivation.primaryParameter.secondaryParameter.equivalent().ownedIterators.first();
+		    	exp.ownedSource.type = exp.ownedSource.referredVariable.type;
+			} else {
+				//self.dataParameter.variable.name.println("source = getNavigationExp ");
+				exp.ownedSource = self.derivation.primaryParameter.secondaryParameter.getNavigationExp();
+			}
+		} else {
+			//self.derivation.target.mapping.name.println("Binding from context ");
+			exp.ownedSource = new QVTi!VariableExp;
+	    	// TODO What about supertypes?
+	    	exp.ownedSource.referredVariable ::= self.derivation.target.parent.getContextDataParameters()
+	    			.selectOne(dp | dp.variable.type == self.derivation.primaryParameter.variable.type).variable.getSameVariable();
+	    	exp.ownedSource.type = exp.ownedSource.referredVariable.type;	
+		}
+		
+	} else {
+		//self.dataParameter.variable.name.println("End Rec with iterator ");
+		exp = new QVTi!VariableExp;
+    	exp.referredVariable = self.equivalent().ownedIterators.first();
+    	exp.type = exp.referredVariable.type;
+	}
+	//exp.toString().println("ret ");
+	return exp;
 }
 
+// Gets the DataParamerters in the context of the type or a supertype
+operation QVTs!MappingAction getAllContextDataParameters(type) {
+	//self.getContextDataParameters().collect(dp | dp.variable.type).println();
+	//type.println();
+	return self.getContextDataParameters().select(dp | dp.variable.type == type or dp.variable.type.closure(t | t.superClasses).includes(type));
+}
+        		
 
 post {
 	-- FIXME By some reason making the rule Imports be lazy, makes the transformation strangely behave. Investigate

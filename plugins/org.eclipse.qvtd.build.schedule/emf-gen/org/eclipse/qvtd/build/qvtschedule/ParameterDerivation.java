@@ -2,8 +2,6 @@
  */
 package org.eclipse.qvtd.build.qvtschedule;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -17,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getTarget <em>Target</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getPrimaryParameter <em>Primary Parameter</em>}</li>
- *   <li>{@link org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getSecondaryParameters <em>Secondary Parameters</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getSecondaryParameter <em>Secondary Parameter</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getParameterDerivation()
@@ -54,47 +52,57 @@ public interface ParameterDerivation extends EObject {
 	void setTarget(AbstractAction value);
 
 	/**
-	 * Returns the value of the '<em><b>Primary Parameter</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Primary Parameter</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Primary Parameter</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Primary Parameter</em>' containment reference.
+	 * @return the value of the '<em>Primary Parameter</em>' reference.
 	 * @see #setPrimaryParameter(DataParameter)
 	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getParameterDerivation_PrimaryParameter()
-	 * @model containment="true" required="true"
+	 * @model
 	 * @generated
 	 */
 	DataParameter getPrimaryParameter();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getPrimaryParameter <em>Primary Parameter</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getPrimaryParameter <em>Primary Parameter</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Primary Parameter</em>' containment reference.
+	 * @param value the new value of the '<em>Primary Parameter</em>' reference.
 	 * @see #getPrimaryParameter()
 	 * @generated
 	 */
 	void setPrimaryParameter(DataParameter value);
 
 	/**
-	 * Returns the value of the '<em><b>Secondary Parameters</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.build.qvtschedule.SecondaryParameter}.
+	 * Returns the value of the '<em><b>Secondary Parameter</b></em>' containment reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.build.qvtschedule.SecondaryParameter#getDerivation <em>Derivation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Secondary Parameters</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Secondary Parameter</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Secondary Parameters</em>' containment reference list.
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getParameterDerivation_SecondaryParameters()
+	 * @return the value of the '<em>Secondary Parameter</em>' containment reference.
+	 * @see #setSecondaryParameter(SecondaryParameter)
+	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getParameterDerivation_SecondaryParameter()
 	 * @see org.eclipse.qvtd.build.qvtschedule.SecondaryParameter#getDerivation
 	 * @model opposite="derivation" containment="true"
 	 * @generated
 	 */
-	EList<SecondaryParameter> getSecondaryParameters();
+	SecondaryParameter getSecondaryParameter();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getSecondaryParameter <em>Secondary Parameter</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Secondary Parameter</em>' containment reference.
+	 * @see #getSecondaryParameter()
+	 * @generated
+	 */
+	void setSecondaryParameter(SecondaryParameter value);
 
 } // ParameterDerivation

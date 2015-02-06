@@ -30,7 +30,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//AbstractAction" eOpposite="#//AbstractAction/parent"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
-        eType="#//AbstractDatum" containment="true"/>
+        eType="#//DataParameter" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="results" upperBound="-1"
         eType="#//DataParameter" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="schedule" eType="#//Schedule"
@@ -50,20 +50,19 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="datum" lowerBound="1" eType="#//AbstractDatum"
         eOpposite="#//AbstractDatum/dataParameter"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ParameterDerivation">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//AbstractAction"
-        eOpposite="#//AbstractAction/parameterDerivations"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="primaryParameter" lowerBound="1"
-        eType="#//DataParameter" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="secondaryParameters" upperBound="-1"
-        eType="#//SecondaryParameter" containment="true" eOpposite="#//SecondaryParameter/derivation"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InputAction" eSuperTypes="#//AbstractAction"/>
   <eClassifiers xsi:type="ecore:EClass" name="MappingAction" eSuperTypes="#//AbstractAction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="mapping" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/qvt/2015/QVTimperative#//Mapping"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OutputAction" eSuperTypes="#//AbstractAction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterDerivation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//AbstractAction"
+        eOpposite="#//AbstractAction/parameterDerivations"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="primaryParameter" eType="#//DataParameter"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="secondaryParameter" eType="#//SecondaryParameter"
+        containment="true" eOpposite="#//SecondaryParameter/derivation"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PropertyDatum" eSuperTypes="#//AbstractDatum">
     <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/ocl/2015/Pivot#//Property"/>
@@ -81,9 +80,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLoop" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataParameter" lowerBound="1"
         eType="#//DataParameter" eOpposite="#//DataParameter/secondaryParameter"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="derivationProperty" lowerBound="1"
-        eType="ecore:EClass http://www.eclipse.org/ocl/2015/Pivot#//Property"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="derivationProperty" eType="ecore:EClass http://www.eclipse.org/ocl/2015/Pivot#//Property"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="derivation" eType="#//ParameterDerivation"
-        eOpposite="#//ParameterDerivation/secondaryParameters"/>
+        eOpposite="#//ParameterDerivation/secondaryParameter"/>
   </eClassifiers>
 </ecore:EPackage>

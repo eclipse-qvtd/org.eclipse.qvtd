@@ -428,52 +428,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.build.qvtschedule.impl.qvtschedulePackageImpl#getParameterDerivation()
 	 * @generated
 	 */
-	int PARAMETER_DERIVATION = 4;
-
-	/**
-	 * The feature id for the '<em><b>Target</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER_DERIVATION__TARGET = 0;
-
-	/**
-	 * The feature id for the '<em><b>Primary Parameter</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER_DERIVATION__PRIMARY_PARAMETER = 1;
-
-	/**
-	 * The feature id for the '<em><b>Secondary Parameters</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER_DERIVATION__SECONDARY_PARAMETERS = 2;
-
-	/**
-	 * The number of structural features of the '<em>Parameter Derivation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER_DERIVATION_FEATURE_COUNT = 3;
-
-	/**
-	 * The number of operations of the '<em>Parameter Derivation</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETER_DERIVATION_OPERATION_COUNT = 0;
+	int PARAMETER_DERIVATION = 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.InputActionImpl <em>Input Action</em>}' class.
@@ -483,7 +438,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.build.qvtschedule.impl.qvtschedulePackageImpl#getInputAction()
 	 * @generated
 	 */
-	int INPUT_ACTION = 5;
+	int INPUT_ACTION = 4;
 
 	/**
 	 * The feature id for the '<em><b>Productions</b></em>' reference list.
@@ -592,7 +547,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.build.qvtschedule.impl.qvtschedulePackageImpl#getMappingAction()
 	 * @generated
 	 */
-	int MAPPING_ACTION = 6;
+	int MAPPING_ACTION = 5;
 
 	/**
 	 * The feature id for the '<em><b>Productions</b></em>' reference list.
@@ -710,7 +665,7 @@ public interface qvtschedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.build.qvtschedule.impl.qvtschedulePackageImpl#getOutputAction()
 	 * @generated
 	 */
-	int OUTPUT_ACTION = 7;
+	int OUTPUT_ACTION = 6;
 
 	/**
 	 * The feature id for the '<em><b>Productions</b></em>' reference list.
@@ -810,6 +765,51 @@ public interface qvtschedulePackage extends EPackage {
 	 * @ordered
 	 */
 	int OUTPUT_ACTION_OPERATION_COUNT = ABSTRACT_ACTION_OPERATION_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Target</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_DERIVATION__TARGET = 0;
+
+	/**
+	 * The feature id for the '<em><b>Primary Parameter</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_DERIVATION__PRIMARY_PARAMETER = 1;
+
+	/**
+	 * The feature id for the '<em><b>Secondary Parameter</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_DERIVATION__SECONDARY_PARAMETER = 2;
+
+	/**
+	 * The number of structural features of the '<em>Parameter Derivation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_DERIVATION_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of operations of the '<em>Parameter Derivation</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETER_DERIVATION_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.PropertyDatumImpl <em>Property Datum</em>}' class.
@@ -1333,10 +1333,10 @@ public interface qvtschedulePackage extends EPackage {
 	EReference getParameterDerivation_Target();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getPrimaryParameter <em>Primary Parameter</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getPrimaryParameter <em>Primary Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Primary Parameter</em>'.
+	 * @return the meta object for the reference '<em>Primary Parameter</em>'.
 	 * @see org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getPrimaryParameter()
 	 * @see #getParameterDerivation()
 	 * @generated
@@ -1344,15 +1344,15 @@ public interface qvtschedulePackage extends EPackage {
 	EReference getParameterDerivation_PrimaryParameter();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getSecondaryParameters <em>Secondary Parameters</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getSecondaryParameter <em>Secondary Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Secondary Parameters</em>'.
-	 * @see org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getSecondaryParameters()
+	 * @return the meta object for the containment reference '<em>Secondary Parameter</em>'.
+	 * @see org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getSecondaryParameter()
 	 * @see #getParameterDerivation()
 	 * @generated
 	 */
-	EReference getParameterDerivation_SecondaryParameters();
+	EReference getParameterDerivation_SecondaryParameter();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.build.qvtschedule.InputAction <em>Input Action</em>}'.
@@ -1774,7 +1774,7 @@ public interface qvtschedulePackage extends EPackage {
 		EReference PARAMETER_DERIVATION__TARGET = eINSTANCE.getParameterDerivation_Target();
 
 		/**
-		 * The meta object literal for the '<em><b>Primary Parameter</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Primary Parameter</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1782,12 +1782,12 @@ public interface qvtschedulePackage extends EPackage {
 		EReference PARAMETER_DERIVATION__PRIMARY_PARAMETER = eINSTANCE.getParameterDerivation_PrimaryParameter();
 
 		/**
-		 * The meta object literal for the '<em><b>Secondary Parameters</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Secondary Parameter</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PARAMETER_DERIVATION__SECONDARY_PARAMETERS = eINSTANCE.getParameterDerivation_SecondaryParameters();
+		EReference PARAMETER_DERIVATION__SECONDARY_PARAMETER = eINSTANCE.getParameterDerivation_SecondaryParameter();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.build.qvtschedule.impl.InputActionImpl <em>Input Action</em>}' class.

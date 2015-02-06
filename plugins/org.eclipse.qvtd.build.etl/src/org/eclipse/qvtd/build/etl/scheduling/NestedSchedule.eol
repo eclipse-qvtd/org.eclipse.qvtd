@@ -158,6 +158,7 @@ operation QVTs!MappingAction getBestDerivationOption(parentNode :  QVTs!MappingA
 		if (best.first().values().one(s | s.isEmpty())) {
 			return best;
 		} else {
+			best.println();
 			"The selected best is missing one or more paramater derivations".errln();	
 		}
 	}

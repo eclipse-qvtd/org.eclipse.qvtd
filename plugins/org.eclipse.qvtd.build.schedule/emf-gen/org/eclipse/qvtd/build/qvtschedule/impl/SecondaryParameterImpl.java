@@ -248,7 +248,7 @@ public class SecondaryParameterImpl extends MinimalEObjectImpl.Container impleme
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newDerivation != null)
-				msgs = ((InternalEObject)newDerivation).eInverseAdd(this, qvtschedulePackage.PARAMETER_DERIVATION__SECONDARY_PARAMETERS, ParameterDerivation.class, msgs);
+				msgs = ((InternalEObject)newDerivation).eInverseAdd(this, qvtschedulePackage.PARAMETER_DERIVATION__SECONDARY_PARAMETER, ParameterDerivation.class, msgs);
 			msgs = basicSetDerivation(newDerivation, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -301,7 +301,7 @@ public class SecondaryParameterImpl extends MinimalEObjectImpl.Container impleme
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case qvtschedulePackage.SECONDARY_PARAMETER__DERIVATION:
-				return eInternalContainer().eInverseRemove(this, qvtschedulePackage.PARAMETER_DERIVATION__SECONDARY_PARAMETERS, ParameterDerivation.class, msgs);
+				return eInternalContainer().eInverseRemove(this, qvtschedulePackage.PARAMETER_DERIVATION__SECONDARY_PARAMETER, ParameterDerivation.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}

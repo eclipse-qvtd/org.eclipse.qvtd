@@ -434,7 +434,7 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getParameterDerivation_SecondaryParameters() {
+	public EReference getParameterDerivation_SecondaryParameter() {
 		return (EReference)parameterDerivationEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -639,17 +639,17 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 		createEReference(dataParameterEClass, DATA_PARAMETER__SECONDARY_PARAMETER);
 		createEReference(dataParameterEClass, DATA_PARAMETER__DATUM);
 
-		parameterDerivationEClass = createEClass(PARAMETER_DERIVATION);
-		createEReference(parameterDerivationEClass, PARAMETER_DERIVATION__TARGET);
-		createEReference(parameterDerivationEClass, PARAMETER_DERIVATION__PRIMARY_PARAMETER);
-		createEReference(parameterDerivationEClass, PARAMETER_DERIVATION__SECONDARY_PARAMETERS);
-
 		inputActionEClass = createEClass(INPUT_ACTION);
 
 		mappingActionEClass = createEClass(MAPPING_ACTION);
 		createEReference(mappingActionEClass, MAPPING_ACTION__MAPPING);
 
 		outputActionEClass = createEClass(OUTPUT_ACTION);
+
+		parameterDerivationEClass = createEClass(PARAMETER_DERIVATION);
+		createEReference(parameterDerivationEClass, PARAMETER_DERIVATION__TARGET);
+		createEReference(parameterDerivationEClass, PARAMETER_DERIVATION__PRIMARY_PARAMETER);
+		createEReference(parameterDerivationEClass, PARAMETER_DERIVATION__SECONDARY_PARAMETER);
 
 		propertyDatumEClass = createEClass(PROPERTY_DATUM);
 		createEReference(propertyDatumEClass, PROPERTY_DATUM__PROPERTY);
@@ -723,7 +723,7 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 		initEAttribute(getAbstractAction_Order(), ecorePackage.getEInt(), "order", null, 0, 1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractAction_Parent(), this.getAbstractAction(), this.getAbstractAction_Children(), "parent", null, 0, 1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractAction_Children(), this.getAbstractAction(), this.getAbstractAction_Parent(), "children", null, 0, -1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbstractAction_Parameters(), this.getAbstractDatum(), null, "parameters", null, 0, -1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractAction_Parameters(), this.getDataParameter(), null, "parameters", null, 0, -1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractAction_Results(), this.getDataParameter(), null, "results", null, 0, -1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractAction_Schedule(), this.getSchedule(), this.getSchedule_Actions(), "schedule", null, 0, 1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -736,17 +736,17 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 		initEReference(getDataParameter_SecondaryParameter(), this.getSecondaryParameter(), this.getSecondaryParameter_DataParameter(), "secondaryParameter", null, 0, 1, DataParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDataParameter_Datum(), this.getAbstractDatum(), this.getAbstractDatum_DataParameter(), "datum", null, 1, 1, DataParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(parameterDerivationEClass, ParameterDerivation.class, "ParameterDerivation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getParameterDerivation_Target(), this.getAbstractAction(), this.getAbstractAction_ParameterDerivations(), "target", null, 0, 1, ParameterDerivation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getParameterDerivation_PrimaryParameter(), this.getDataParameter(), null, "primaryParameter", null, 1, 1, ParameterDerivation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getParameterDerivation_SecondaryParameters(), this.getSecondaryParameter(), this.getSecondaryParameter_Derivation(), "secondaryParameters", null, 0, -1, ParameterDerivation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(inputActionEClass, InputAction.class, "InputAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(mappingActionEClass, MappingAction.class, "MappingAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMappingAction_Mapping(), theQVTimperativePackage.getMapping(), null, "mapping", null, 1, 1, MappingAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(outputActionEClass, OutputAction.class, "OutputAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(parameterDerivationEClass, ParameterDerivation.class, "ParameterDerivation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getParameterDerivation_Target(), this.getAbstractAction(), this.getAbstractAction_ParameterDerivations(), "target", null, 0, 1, ParameterDerivation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getParameterDerivation_PrimaryParameter(), this.getDataParameter(), null, "primaryParameter", null, 0, 1, ParameterDerivation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getParameterDerivation_SecondaryParameter(), this.getSecondaryParameter(), this.getSecondaryParameter_Derivation(), "secondaryParameter", null, 0, 1, ParameterDerivation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(propertyDatumEClass, PropertyDatum.class, "PropertyDatum", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPropertyDatum_Property(), thePivotPackage.getProperty(), null, "property", null, 1, 1, PropertyDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -760,8 +760,8 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 		initEClass(secondaryParameterEClass, SecondaryParameter.class, "SecondaryParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSecondaryParameter_IsLoop(), ecorePackage.getEBoolean(), "isLoop", null, 0, 1, SecondaryParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSecondaryParameter_DataParameter(), this.getDataParameter(), this.getDataParameter_SecondaryParameter(), "dataParameter", null, 1, 1, SecondaryParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSecondaryParameter_DerivationProperty(), thePivotPackage.getProperty(), null, "derivationProperty", null, 1, 1, SecondaryParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSecondaryParameter_Derivation(), this.getParameterDerivation(), this.getParameterDerivation_SecondaryParameters(), "derivation", null, 0, 1, SecondaryParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSecondaryParameter_DerivationProperty(), thePivotPackage.getProperty(), null, "derivationProperty", null, 0, 1, SecondaryParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSecondaryParameter_Derivation(), this.getParameterDerivation(), this.getParameterDerivation_SecondaryParameter(), "derivation", null, 0, 1, SecondaryParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

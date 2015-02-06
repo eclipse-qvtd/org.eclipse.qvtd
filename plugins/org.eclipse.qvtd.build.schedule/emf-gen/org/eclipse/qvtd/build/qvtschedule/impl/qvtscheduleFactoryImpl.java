@@ -58,10 +58,10 @@ public class qvtscheduleFactoryImpl extends EFactoryImpl implements qvtscheduleF
 		switch (eClass.getClassifierID()) {
 			case qvtschedulePackage.CLASS_DATUM: return createClassDatum();
 			case qvtschedulePackage.DATA_PARAMETER: return createDataParameter();
-			case qvtschedulePackage.PARAMETER_DERIVATION: return createParameterDerivation();
 			case qvtschedulePackage.INPUT_ACTION: return createInputAction();
 			case qvtschedulePackage.MAPPING_ACTION: return createMappingAction();
 			case qvtschedulePackage.OUTPUT_ACTION: return createOutputAction();
+			case qvtschedulePackage.PARAMETER_DERIVATION: return createParameterDerivation();
 			case qvtschedulePackage.PROPERTY_DATUM: return createPropertyDatum();
 			case qvtschedulePackage.SCHEDULE: return createSchedule();
 			case qvtschedulePackage.SECONDARY_PARAMETER: return createSecondaryParameter();

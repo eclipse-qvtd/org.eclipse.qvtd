@@ -129,7 +129,7 @@ public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container im
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AbstractDatum> parameters;
+	protected EList<DataParameter> parameters;
 
 	/**
 	 * The cached value of the '{@link #getResults() <em>Results</em>}' containment reference list.
@@ -294,9 +294,9 @@ public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<AbstractDatum> getParameters() {
+	public EList<DataParameter> getParameters() {
 		if (parameters == null) {
-			parameters = new EObjectContainmentEList<AbstractDatum>(AbstractDatum.class, this, qvtschedulePackage.ABSTRACT_ACTION__PARAMETERS);
+			parameters = new EObjectContainmentEList<DataParameter>(DataParameter.class, this, qvtschedulePackage.ABSTRACT_ACTION__PARAMETERS);
 		}
 		return parameters;
 	}
@@ -489,7 +489,7 @@ public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container im
 				return;
 			case qvtschedulePackage.ABSTRACT_ACTION__PARAMETERS:
 				getParameters().clear();
-				getParameters().addAll((Collection<? extends AbstractDatum>)newValue);
+				getParameters().addAll((Collection<? extends DataParameter>)newValue);
 				return;
 			case qvtschedulePackage.ABSTRACT_ACTION__RESULTS:
 				getResults().clear();

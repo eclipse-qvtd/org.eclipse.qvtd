@@ -2,17 +2,13 @@
  */
 package org.eclipse.qvtd.build.qvtschedule.impl;
 
-import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.qvtd.build.qvtschedule.AbstractAction;
 import org.eclipse.qvtd.build.qvtschedule.DataParameter;
 import org.eclipse.qvtd.build.qvtschedule.ParameterDerivation;
@@ -30,14 +26,14 @@ import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.ParameterDerivationImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.ParameterDerivationImpl#getPrimaryParameter <em>Primary Parameter</em>}</li>
- *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.ParameterDerivationImpl#getSecondaryParameters <em>Secondary Parameters</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.ParameterDerivationImpl#getSecondaryParameter <em>Secondary Parameter</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ParameterDerivationImpl extends MinimalEObjectImpl.Container implements ParameterDerivation {
 	/**
-	 * The cached value of the '{@link #getPrimaryParameter() <em>Primary Parameter</em>}' containment reference.
+	 * The cached value of the '{@link #getPrimaryParameter() <em>Primary Parameter</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getPrimaryParameter()
@@ -47,14 +43,14 @@ public class ParameterDerivationImpl extends MinimalEObjectImpl.Container implem
 	protected DataParameter primaryParameter;
 
 	/**
-	 * The cached value of the '{@link #getSecondaryParameters() <em>Secondary Parameters</em>}' containment reference list.
+	 * The cached value of the '{@link #getSecondaryParameter() <em>Secondary Parameter</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSecondaryParameters()
+	 * @see #getSecondaryParameter()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<SecondaryParameter> secondaryParameters;
+	protected SecondaryParameter secondaryParameter;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -122,6 +118,14 @@ public class ParameterDerivationImpl extends MinimalEObjectImpl.Container implem
 	 * @generated
 	 */
 	public DataParameter getPrimaryParameter() {
+		if (primaryParameter != null && primaryParameter.eIsProxy()) {
+			InternalEObject oldPrimaryParameter = (InternalEObject)primaryParameter;
+			primaryParameter = (DataParameter)eResolveProxy(oldPrimaryParameter);
+			if (primaryParameter != oldPrimaryParameter) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, qvtschedulePackage.PARAMETER_DERIVATION__PRIMARY_PARAMETER, oldPrimaryParameter, primaryParameter));
+			}
+		}
 		return primaryParameter;
 	}
 
@@ -130,11 +134,41 @@ public class ParameterDerivationImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetPrimaryParameter(DataParameter newPrimaryParameter, NotificationChain msgs) {
+	public DataParameter basicGetPrimaryParameter() {
+		return primaryParameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setPrimaryParameter(DataParameter newPrimaryParameter) {
 		DataParameter oldPrimaryParameter = primaryParameter;
 		primaryParameter = newPrimaryParameter;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, qvtschedulePackage.PARAMETER_DERIVATION__PRIMARY_PARAMETER, oldPrimaryParameter, primaryParameter));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public SecondaryParameter getSecondaryParameter() {
+		return secondaryParameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetSecondaryParameter(SecondaryParameter newSecondaryParameter, NotificationChain msgs) {
+		SecondaryParameter oldSecondaryParameter = secondaryParameter;
+		secondaryParameter = newSecondaryParameter;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, qvtschedulePackage.PARAMETER_DERIVATION__PRIMARY_PARAMETER, oldPrimaryParameter, newPrimaryParameter);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, qvtschedulePackage.PARAMETER_DERIVATION__SECONDARY_PARAMETER, oldSecondaryParameter, newSecondaryParameter);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -145,30 +179,18 @@ public class ParameterDerivationImpl extends MinimalEObjectImpl.Container implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPrimaryParameter(DataParameter newPrimaryParameter) {
-		if (newPrimaryParameter != primaryParameter) {
+	public void setSecondaryParameter(SecondaryParameter newSecondaryParameter) {
+		if (newSecondaryParameter != secondaryParameter) {
 			NotificationChain msgs = null;
-			if (primaryParameter != null)
-				msgs = ((InternalEObject)primaryParameter).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - qvtschedulePackage.PARAMETER_DERIVATION__PRIMARY_PARAMETER, null, msgs);
-			if (newPrimaryParameter != null)
-				msgs = ((InternalEObject)newPrimaryParameter).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - qvtschedulePackage.PARAMETER_DERIVATION__PRIMARY_PARAMETER, null, msgs);
-			msgs = basicSetPrimaryParameter(newPrimaryParameter, msgs);
+			if (secondaryParameter != null)
+				msgs = ((InternalEObject)secondaryParameter).eInverseRemove(this, qvtschedulePackage.SECONDARY_PARAMETER__DERIVATION, SecondaryParameter.class, msgs);
+			if (newSecondaryParameter != null)
+				msgs = ((InternalEObject)newSecondaryParameter).eInverseAdd(this, qvtschedulePackage.SECONDARY_PARAMETER__DERIVATION, SecondaryParameter.class, msgs);
+			msgs = basicSetSecondaryParameter(newSecondaryParameter, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, qvtschedulePackage.PARAMETER_DERIVATION__PRIMARY_PARAMETER, newPrimaryParameter, newPrimaryParameter));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<SecondaryParameter> getSecondaryParameters() {
-		if (secondaryParameters == null) {
-			secondaryParameters = new EObjectContainmentWithInverseEList<SecondaryParameter>(SecondaryParameter.class, this, qvtschedulePackage.PARAMETER_DERIVATION__SECONDARY_PARAMETERS, qvtschedulePackage.SECONDARY_PARAMETER__DERIVATION);
-		}
-		return secondaryParameters;
+			eNotify(new ENotificationImpl(this, Notification.SET, qvtschedulePackage.PARAMETER_DERIVATION__SECONDARY_PARAMETER, newSecondaryParameter, newSecondaryParameter));
 	}
 
 	/**
@@ -184,8 +206,10 @@ public class ParameterDerivationImpl extends MinimalEObjectImpl.Container implem
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetTarget((AbstractAction)otherEnd, msgs);
-			case qvtschedulePackage.PARAMETER_DERIVATION__SECONDARY_PARAMETERS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getSecondaryParameters()).basicAdd(otherEnd, msgs);
+			case qvtschedulePackage.PARAMETER_DERIVATION__SECONDARY_PARAMETER:
+				if (secondaryParameter != null)
+					msgs = ((InternalEObject)secondaryParameter).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - qvtschedulePackage.PARAMETER_DERIVATION__SECONDARY_PARAMETER, null, msgs);
+				return basicSetSecondaryParameter((SecondaryParameter)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -200,10 +224,8 @@ public class ParameterDerivationImpl extends MinimalEObjectImpl.Container implem
 		switch (featureID) {
 			case qvtschedulePackage.PARAMETER_DERIVATION__TARGET:
 				return basicSetTarget(null, msgs);
-			case qvtschedulePackage.PARAMETER_DERIVATION__PRIMARY_PARAMETER:
-				return basicSetPrimaryParameter(null, msgs);
-			case qvtschedulePackage.PARAMETER_DERIVATION__SECONDARY_PARAMETERS:
-				return ((InternalEList<?>)getSecondaryParameters()).basicRemove(otherEnd, msgs);
+			case qvtschedulePackage.PARAMETER_DERIVATION__SECONDARY_PARAMETER:
+				return basicSetSecondaryParameter(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -233,9 +255,10 @@ public class ParameterDerivationImpl extends MinimalEObjectImpl.Container implem
 			case qvtschedulePackage.PARAMETER_DERIVATION__TARGET:
 				return getTarget();
 			case qvtschedulePackage.PARAMETER_DERIVATION__PRIMARY_PARAMETER:
-				return getPrimaryParameter();
-			case qvtschedulePackage.PARAMETER_DERIVATION__SECONDARY_PARAMETERS:
-				return getSecondaryParameters();
+				if (resolve) return getPrimaryParameter();
+				return basicGetPrimaryParameter();
+			case qvtschedulePackage.PARAMETER_DERIVATION__SECONDARY_PARAMETER:
+				return getSecondaryParameter();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -255,9 +278,8 @@ public class ParameterDerivationImpl extends MinimalEObjectImpl.Container implem
 			case qvtschedulePackage.PARAMETER_DERIVATION__PRIMARY_PARAMETER:
 				setPrimaryParameter((DataParameter)newValue);
 				return;
-			case qvtschedulePackage.PARAMETER_DERIVATION__SECONDARY_PARAMETERS:
-				getSecondaryParameters().clear();
-				getSecondaryParameters().addAll((Collection<? extends SecondaryParameter>)newValue);
+			case qvtschedulePackage.PARAMETER_DERIVATION__SECONDARY_PARAMETER:
+				setSecondaryParameter((SecondaryParameter)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -277,8 +299,8 @@ public class ParameterDerivationImpl extends MinimalEObjectImpl.Container implem
 			case qvtschedulePackage.PARAMETER_DERIVATION__PRIMARY_PARAMETER:
 				setPrimaryParameter((DataParameter)null);
 				return;
-			case qvtschedulePackage.PARAMETER_DERIVATION__SECONDARY_PARAMETERS:
-				getSecondaryParameters().clear();
+			case qvtschedulePackage.PARAMETER_DERIVATION__SECONDARY_PARAMETER:
+				setSecondaryParameter((SecondaryParameter)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -296,8 +318,8 @@ public class ParameterDerivationImpl extends MinimalEObjectImpl.Container implem
 				return getTarget() != null;
 			case qvtschedulePackage.PARAMETER_DERIVATION__PRIMARY_PARAMETER:
 				return primaryParameter != null;
-			case qvtschedulePackage.PARAMETER_DERIVATION__SECONDARY_PARAMETERS:
-				return secondaryParameters != null && !secondaryParameters.isEmpty();
+			case qvtschedulePackage.PARAMETER_DERIVATION__SECONDARY_PARAMETER:
+				return secondaryParameter != null;
 		}
 		return super.eIsSet(featureID);
 	}

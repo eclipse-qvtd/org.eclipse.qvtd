@@ -91,7 +91,7 @@ public interface SecondaryParameter extends EObject {
 	 * @return the value of the '<em>Derivation Property</em>' reference.
 	 * @see #setDerivationProperty(Property)
 	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getSecondaryParameter_DerivationProperty()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	Property getDerivationProperty();
@@ -108,7 +108,7 @@ public interface SecondaryParameter extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Derivation</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getSecondaryParameters <em>Secondary Parameters</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getSecondaryParameter <em>Secondary Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Derivation</em>' container reference isn't clear,
@@ -118,8 +118,8 @@ public interface SecondaryParameter extends EObject {
 	 * @return the value of the '<em>Derivation</em>' container reference.
 	 * @see #setDerivation(ParameterDerivation)
 	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getSecondaryParameter_Derivation()
-	 * @see org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getSecondaryParameters
-	 * @model opposite="secondaryParameters" transient="false"
+	 * @see org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getSecondaryParameter
+	 * @model opposite="secondaryParameter" transient="false"
 	 * @generated
 	 */
 	ParameterDerivation getDerivation();
