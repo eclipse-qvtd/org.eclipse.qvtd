@@ -1,12 +1,8 @@
 package org.eclipse.qvtd.build.etl.tests;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import org.eclipse.emf.common.EMFPlugin;
-import org.eclipse.emf.common.notify.impl.SingletonAdapterImpl;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -14,31 +10,22 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
-import org.eclipse.ocl.pivot.resource.ASResource;
-import org.eclipse.ocl.pivot.resource.CSResource;
-import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.qvtd.build.etl.MtcBroker;
 import org.eclipse.qvtd.build.etl.PivotModel;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
-import org.eclipse.qvtd.pivot.qvtcore.QVTcorePivotStandaloneSetup;
-import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
-import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.junit.After;
 import org.junit.Before;
@@ -107,15 +94,16 @@ public class QVTdMtcTests extends LoadTestCase {
 	    
 		BaseLinkingService.DEBUG_RETRY.setState(true);
 		super.setUp();
-		CompleteOCLStandaloneSetup.doSetup(); // To be able to add QVTimperative.ocl validation
+		OCLstdlib.install();
+		//CompleteOCLStandaloneSetup.doSetup(); // To be able to add QVTimperative.ocl validation
 		QVTcoreStandaloneSetup.doSetup();
 		QVTimperativePivotStandaloneSetup.doSetup();
 		
 		myQVT = createQVT();
-		QVTiEnvironmentFactory factory = myQVT.getEnvironmentFactory(); 
-		factory.setEvaluationTracingEnabled(true);
-		PivotMetamodelManager metamodelManager = factory.getMetamodelManager();
-		metamodelManager.configureLoadFirstStrategy(); // Since the models might use a different URI to refer the same meta-model
+		//QVTiEnvironmentFactory factory = myQVT.getEnvironmentFactory(); 
+		//factory.setEvaluationTracingEnabled(true);
+		//PivotMetamodelManager metamodelManager = factory.getMetamodelManager();
+		//metamodelManager.configureLoadFirstStrategy(); // Since the models might use a different URI to refer the same meta-model
     }
 	
 	 /* (non-Javadoc)
