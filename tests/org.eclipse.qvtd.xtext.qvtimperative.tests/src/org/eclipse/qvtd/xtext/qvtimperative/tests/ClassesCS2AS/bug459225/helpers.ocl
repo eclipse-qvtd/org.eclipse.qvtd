@@ -9,7 +9,7 @@ def : hasName() : Boolean =
 	
 def : computeName() : String =
 	let container = self.oclContainer() in
-	if container.oclIsKindOf(NamedElementCS) 
+	if not container.oclIsUndefined() and container.oclIsKindOf(NamedElementCS) 
 	then container.oclAsType(NamedElementCS).computeName() + '::' + self.name
 	else self.name
 	endif
