@@ -73,9 +73,13 @@ operation QVTs!MappingAction depth() : Integer {
 @cached
 operation QVTs!MappingAction getPredecessors() : OrderedSet {
 
-	//self.mapping.name.println("getPredecessors ");
+	self.mapping.name.println("getPredecessors ");
 	var reqs = self.requisites;
 	var subReqs = reqs.closure(x | x.sub);
+	reqs.includingAll(subReqs)
+            .collect(req| req.producedBy).flatten()
+            .sortBy(a | a.mapping.name) // To ensure determinism
+            .asOrderedSet().mapping.name.println(); // Remove duplicates
 	return reqs.includingAll(subReqs)
 			.collect(req| req.producedBy).flatten()
 			.sortBy(a | a.mapping.name) // To ensure determinism

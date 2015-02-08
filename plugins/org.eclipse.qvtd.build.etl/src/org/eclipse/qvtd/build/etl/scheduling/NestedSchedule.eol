@@ -47,14 +47,13 @@ var s = QVTs!qvtschedule::Schedule.all.first();
 // Map Ordering
 s.doMapOrdering();
 
-/*for (ma in QVTs!MappingAction.all().select(ma | ma.mapping.name == "attributeColumns_MR")) {
-	ma.mapping.name.println("Mapping ");
-	var best = ma.getCheapestDerivation(ma.parameters).println("Best ");
-	best.first().keySet().variable.name.println();
+for (ma in QVTs!MappingAction.all().select(ma | ma.mapping.isDefined()).sortBy(ma | ma.order)) {
+	ma.order.println("Mapping " + ma.mapping.name + ": ");
 	
-}*/
+	
+}
 // Schedule
-s.simpleNest();
+//s.simpleNest();
 
 "Nested Scheduling Done".println();
 
@@ -73,7 +72,7 @@ operation QVTs!Schedule simpleNest() {
 	rootNode.order = 0;
 	self.~rootNode = rootNode;
 	for (ma in QVTs!MappingAction.all().excluding(rootNode).sortBy(ma | ma.order)) {
-		//ma.mapping.name.println("Mapping ");
+		ma.mapping.name.println("Mapping ");
 		var parent = s.bestParent(ma);
 		if (parent.isDefined()) {
             //parent.mapping.name.println("Best parent ");
@@ -103,7 +102,7 @@ operation QVTs!Schedule simpleNest() {
 operation QVTs!Schedule bestParent(nextNode : QVTs!MappingAction) : QVTs!MappingAction {
 	
 	var ren = self.rightEdgeNodes();
-	//ren.collect(ma | ma.mapping.name).println("RightEdgeNodes: ");
+	ren.collect(ma | ma.mapping.name).println("RightEdgeNodes: ");
 	var parentNodes = ren.select(parentNode | nextNode.hasAtMostOneInputPerIterator(parentNode));
 	parentNodes = parentNodes.sortBy(pn | nextNode.metric(pn)*self.treeDepth() + pn.depth());
 	//parentNodes.collect(pn | pn.mapping.name).println("parentNodes ");
@@ -143,12 +142,17 @@ operation QVTs!MappingAction metric(parentNode : QVTs!MappingAction) : Integer {
 @cached
 operation QVTs!MappingAction getBestDerivationOption(parentNode :  QVTs!MappingAction) : Sequence {
 	
+	if (parentNode.mapping.isUndefined())
+	   parentNode.order.println(self.mapping.name + " getBestDerivationOption in ");
+	else 
+	   parentNode.mapping.name.println(self.mapping.name + " getBestDerivationOption in ");
 	var matched = parentNode.getContextDataParameters();
     var matchedTypes = matched.collect(m | m.variable.type);
     // Select all the MA's parameters whos type (or supertype) exists in the context
     var candidates = self.parameters.select(primary |
     		matchedTypes.includes(primary.variable.type)
     		or matchedTypes.includes(primary.variable.type.closure(t | t.getSuperClasses())));
+    candidates.variable.name.println();		
 	var best = self.getCheapestDerivation(candidates);
 	if (best.first().isUndefined()) {
 		// No derivations could be found. The caller should figure out what this means in their context
@@ -228,7 +232,7 @@ operation QVTs!MappingAction getCheapestDerivation(startPoints : Collection) : S
 operation QVTs!MappingAction dijkstras(start : QVTs!DataParameter) : Sequence {
 	
 	var MAX_VAL = 2e31-1;
-	//start.variable.name.println("dijkstras from ");
+	start.variable.name.println("dijkstras from ");
 	var dist = self.parameters.aggregate(p | p, MAX_VAL);
 	var path = self.parameters.aggregate(p | p, Sequence{});
 	var done = self.parameters.aggregate(p | p, false);
@@ -258,12 +262,12 @@ operation QVTs!MappingAction dijkstras(start : QVTs!DataParameter) : Sequence {
 		}
 		done.put(u, true);
 	}
-	//for (k in dist.keySet()) {
-	//	dist.get(k).print(k.variable.name + "->");
-	//	" ".print();
-	//}
-	//"".println();
-	//dist.values.sum().println();
+	for (k in dist.keySet()) {
+		dist.get(k).print(k.variable.name + "->");
+		" ".print();
+	}
+	"".println();
+	dist.values.sum().println();
 	return Sequence{path, dist.values.sum()+1}; // 1 to account for the start
 }
 
