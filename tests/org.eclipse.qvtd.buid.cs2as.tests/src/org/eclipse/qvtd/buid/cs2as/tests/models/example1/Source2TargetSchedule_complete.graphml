@@ -437,12 +437,6 @@
           <y:Shape type="ellipse"/>
         </y:ShapeNode></graphml:data>
     </graphml:node>
-    <graphml:node id="__root__ (0)">
-      <graphml:data key="d6"><y:ShapeNode>
-          <y:NodeLabel>__root__ (0)</y:NodeLabel>
-          <y:Shape type="ellipse"/>
-        </y:ShapeNode></graphml:data>
-    </graphml:node>
     <graphml:edge source="SRoot" target="SElement">
       <graphml:data key="d9"><y:PolyLineEdge>
           <y:LineStyle type="dotted"/>

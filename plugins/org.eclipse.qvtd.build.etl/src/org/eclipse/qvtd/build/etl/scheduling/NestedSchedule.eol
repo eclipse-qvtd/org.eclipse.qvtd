@@ -53,7 +53,7 @@ for (ma in QVTs!MappingAction.all().select(ma | ma.mapping.isDefined()).sortBy(m
 	
 }
 // Schedule
-//s.simpleNest();
+s.simpleNest();
 
 "Nested Scheduling Done".println();
 
