@@ -1,7 +1,8 @@
 package org.eclipse.qvtd.buid.cs2as.tests;
 
 import java.io.File;
-import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
@@ -19,7 +20,7 @@ import org.eclipse.epsilon.eol.types.EolPrimitiveType;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
-import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
+import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.OCL;
@@ -32,7 +33,9 @@ import org.eclipse.qvtd.build.etl.QvtMtcExecutionException;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationEvaluator;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
+import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
@@ -117,7 +120,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT = createQVT();
 		QVTiEnvironmentFactory factory = myQVT.getEnvironmentFactory(); 
 		factory.setEvaluationTracingEnabled(true);
-		PivotMetamodelManager metamodelManager = factory.getMetamodelManager();
+		// PivotMetamodelManager metamodelManager = factory.getMetamodelManager();
 		//metamodelManager.configureLoadFirstStrategy(); // Since the models might use a different URI to refer the same meta-model
 		
 	}
@@ -254,23 +257,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	public void testExample4_() throws Exception {
 		URI baseURI = TESTS_BASE_URI.appendSegment("example4");
 
-		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "SimplerKiama.oclas", myQVT);
-    	mtc.execute();
-    	
-    	PivotModel qvtiTransf = mtc.getiModel();
-    	URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());
-    	assertValidQVTiModel(txURI);
-    	
-    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("SimplerKiamaSchedule_complete.graphml").toString(), false);
-    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("SimplerKiamaSchedule_pruned.graphml").toString(), true);
-	}
-	
-	
-	@Test
-	public void testExample4_() throws Exception {
-		URI baseURI = TESTS_BASE_URI.appendSegment("example4");
-
-		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "SimplerKiama.oclas", myQVT);
+		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "SimplerKiama.oclas", myQVT.getEnvironmentFactory());
     	mtc.execute();
     	
     	PivotModel qvtiTransf = mtc.getiModel();
@@ -285,7 +272,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	public void testExample1_CGv() throws Exception {
 		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
 
-		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "Source2Target.oclas", myQVT);
+		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "Source2Target.oclas", myQVT.getEnvironmentFactory());
     	mtc.execute();
     	PivotModel qvtiTransf = mtc.getiModel();
     	
@@ -304,7 +291,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	public void testExample2_CG() throws Exception {
 		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 
-		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "classescs2as.oclas", myQVT);
+		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "classescs2as.oclas", myQVT.getEnvironmentFactory());
     	mtc.execute();
     	PivotModel qvtiTransf = mtc.getiModel();
     	
