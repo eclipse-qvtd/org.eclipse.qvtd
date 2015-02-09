@@ -2,7 +2,7 @@
 <simplerdbms:Schema
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
-    xmlns:simplerdbms="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS">
+    xmlns:simplerdbms="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS ../SimpleRDBMS.ecore">
   <tables name="Student"
       kind="base">
     <columns

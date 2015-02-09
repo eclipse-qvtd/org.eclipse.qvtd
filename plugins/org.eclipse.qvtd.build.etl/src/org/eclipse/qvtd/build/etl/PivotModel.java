@@ -30,7 +30,6 @@ import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.emc.emf.EmfUtil;
 import org.eclipse.epsilon.eol.exceptions.models.EolEnumerationValueNotFoundException;
 import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
-import org.eclipse.epsilon.eol.exceptions.models.EolNotInstantiableModelElementTypeException;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
@@ -76,7 +75,7 @@ public class PivotModel extends EmfModel {
 	public void loadModelFromUri() throws EolModelLoadingException {
 
 		ResourceSet rSet = isASResource ? environmentFactory.getMetamodelManager().getASResourceSet() : environmentFactory.getResourceSet();
-		determinePackagesFrom(resourceSet);
+		determinePackagesFrom(rSet);
 		try {
 			if (readOnLoad) {
 				modelImpl = rSet.getResource(modelUri, true);
@@ -195,7 +194,7 @@ public class PivotModel extends EmfModel {
 		for (EObject eContent : modelImpl.getContents()) {
 			if (eContent instanceof ImperativeModel) {
 	    		for (org.eclipse.ocl.pivot.Package aPackage : ((ImperativeModel)eContent).getOwnedPackages()) {
-	    			for (Class aClass : aPackage.getOwnedClasses()) {
+	    			for (org.eclipse.ocl.pivot.Class aClass : aPackage.getOwnedClasses()) {
 	    				if (aClass instanceof Transformation) {
 		                    return (Transformation) aClass;
 		    			}	

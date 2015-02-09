@@ -4,7 +4,7 @@
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:simpleuml="http://www.eclipse.org/qvt/examples/0.1/simpleUML"
-    xsi:schemaLocation="http://www.eclipse.org/qvt/examples/0.1/simpleUML SimpleUML.ecore"
+    xsi:schemaLocation="http://www.eclipse.org/qvt/examples/0.1/simpleUML ../SimpleUML.ecore"
     kind=""
     name="People">
   <elements
