@@ -101,7 +101,10 @@ rule MappingAction2Node
 	transform s : QVTs!MappingAction
 	to t : GML!NodeType {
 	
-	t.id = s.mapping.name + " (" + s.order + ")";
+	if (s.mapping.isDefined())
+		t.id = s.mapping.name + " (" + s.order + ")";
+	else 
+		t.id = "root (" + s.order + ")";
 	for (datum in s.requisites) {
      	var e = new GML!EdgeType;
         e.source = datum.equivalent().id;
