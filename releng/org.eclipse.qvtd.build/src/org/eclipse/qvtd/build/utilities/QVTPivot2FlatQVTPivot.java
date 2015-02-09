@@ -58,7 +58,7 @@ public class QVTPivot2FlatQVTPivot
 {
 
 	public static void main(String [ ] args) throws IOException {
-		ProjectMap projectMap = new ProjectMap();
+		ProjectMap projectMap = new ProjectMap(false);
 //		EcorePlugin.ExtensionProcessor.process(Ecore2UML.class.getClassLoader());
 		ResourceSet ecoreResourceSet = new ResourceSetImpl();
 		projectMap.initializeResourceSet(ecoreResourceSet);

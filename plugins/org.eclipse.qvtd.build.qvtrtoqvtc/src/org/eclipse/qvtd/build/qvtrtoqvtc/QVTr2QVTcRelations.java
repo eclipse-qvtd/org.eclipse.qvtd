@@ -293,7 +293,7 @@ public class QVTr2QVTcRelations {
 		pe.setType(pep.getType());
 		ee.setOwnedSource(pe);
 		ee.setReferredOperation(getEqualsOPeration());
-		ee.setType(transformation.getMetamodelManager().getStandardLibrary().getBooleanType());
+		ee.setType(transformation.getStandardLibrary().getBooleanType());
 		ave.setReferredVariable(mv);
 		ave.setType(mv.getType());
 		ee.getOwnedArguments().add(ave);
@@ -932,7 +932,7 @@ public class QVTr2QVTcRelations {
 				pe.setType(tp.getType());
 				ee.setOwnedSource(pe);
 				ee.setReferredOperation(getEqualsOPeration());
-				ee.setType(transformation.getMetamodelManager().getStandardLibrary().getBooleanType());
+				ee.setType(transformation.getStandardLibrary().getBooleanType());
 				ve2.setReferredVariable(mv);
 				ve2.setType(mv.getType());
 				ee.getOwnedArguments().add(ve2);
@@ -1155,7 +1155,7 @@ public class QVTr2QVTcRelations {
 		pe.setReferredProperty(pep);
 		pe.setType(pep.getType());
 		ee.setReferredOperation(getEqualsOPeration());
-		ee.setType(transformation.getMetamodelManager().getStandardLibrary().getBooleanType());
+		ee.setType(transformation.getStandardLibrary().getBooleanType());
 		ave.setReferredVariable(mv);
 		ave.setType(mv.getType());
 		ee.getOwnedArguments().add(ave);
@@ -1357,7 +1357,7 @@ public class QVTr2QVTcRelations {
 		pe.setReferredProperty(pep);
 		pe.setType(pep.getType());
 		ee.setReferredOperation(getEqualsOPeration());
-		ee.setType(transformation.getMetamodelManager().getStandardLibrary().getBooleanType());
+		ee.setType(transformation.getStandardLibrary().getBooleanType());
 		ave.setReferredVariable(mdv);
 		ave.setType(mdv.getType());
 		ee.getOwnedArguments().add(ave);
@@ -1392,7 +1392,7 @@ public class QVTr2QVTcRelations {
 	
 	private Operation getEqualsOPeration() {
 		Operation referredOperation = null;
-		for (Operation o : transformation.getMetamodelManager().getStandardLibrary().getOclAnyType().getOwnedOperations()) {
+		for (Operation o : transformation.getStandardLibrary().getOclAnyType().getOwnedOperations()) {
 			if (o.getName().equals("=")) {
 				referredOperation = o;
 				break;

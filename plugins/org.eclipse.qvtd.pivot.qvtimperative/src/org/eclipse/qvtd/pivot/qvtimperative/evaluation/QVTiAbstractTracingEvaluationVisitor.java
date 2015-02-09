@@ -173,10 +173,10 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 			Object value = safeVisit(assignment.getValue());
 			// Unbox to asign to ecore type
 	        value = delegate.getEnvironmentFactory().getIdResolver().unboxedValueOf(value);
-	        logger.info(getIndent() + "VisitAssignment " + prettyPrint(assignment.getETarget())
+	        logger.info(getIndent() + "VisitAssignment " + prettyPrint(assignment.getESObject())
 	        		+ " := " + prettyPrint(value));
 		} catch (InvalidValueException ex) {
-			logger.info(getIndent() + "VisitAssignment " + prettyPrint(assignment.getETarget())
+			logger.info(getIndent() + "VisitAssignment " + prettyPrint(assignment.getESObject())
 	        		+ " := Invalid expression" );
 		}
 		Object result = delegate.visitAssignment(assignment);

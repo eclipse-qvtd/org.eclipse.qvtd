@@ -66,8 +66,8 @@ public class QVTiInterpreterTests extends LoadTestCase
 	
 	protected static class MyQVTiEnvironmentFactory extends QVTiEnvironmentFactory
 	{
-		public MyQVTiEnvironmentFactory(@Nullable ProjectManager projectMap) {
-			super(projectMap);
+		public MyQVTiEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
+			super(projectMap, externalResourceSet);
 	    	setEvaluationTracingEnabled(true);
 		}
 	}
@@ -137,7 +137,7 @@ public class QVTiInterpreterTests extends LoadTestCase
 	        	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
 	        }
 			URI modelURI = getProjectFileURI(fileNamePrefix + modelFileName);
-	        Resource resource = metamodelManager.getExternalResourceSet().getResource(modelURI, true);
+	        Resource resource = environmentFactory.getResourceSet().getResource(modelURI, true);
 	        typedModelValidationResourceMap.put(typedModel, resource);
 		}
 
@@ -174,7 +174,9 @@ public class QVTiInterpreterTests extends LoadTestCase
 	}
 
 	protected static void assertLoadable(@NonNull URI asURI) {
-        ResourceSet asResourceSet = OCL.createEnvironmentFactory(OCL.NO_PROJECTS).getMetamodelManager().getASResourceSet();
+		OCL ocl = OCL.newInstance(OCL.NO_PROJECTS);
+        ResourceSet asResourceSet = ocl.getMetamodelManager().getASResourceSet();
+//        ResourceSet asResourceSet = OCL.createEnvironmentFactory(OCL.NO_PROJECTS).getMetamodelManager().getASResourceSet();
         if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			OCLstdlib.install();
 //	        MetamodelManager.initializeASResourceSet(asResourceSet);
@@ -183,10 +185,11 @@ public class QVTiInterpreterTests extends LoadTestCase
         EcoreUtil.resolveAll(resource);
         assertNoUnresolvedProxies("Loading", resource);
         assertNoResourceErrors("Loading", resource);
+        ocl.dispose();
 	}
 
 	protected @NonNull MyQVT createQVT() {
-		return new MyQVT(new MyQVTiEnvironmentFactory(OCL.NO_PROJECTS));
+		return new MyQVT(new MyQVTiEnvironmentFactory(OCL.NO_PROJECTS, null));
 	}
 	
 	/* (non-Javadoc)

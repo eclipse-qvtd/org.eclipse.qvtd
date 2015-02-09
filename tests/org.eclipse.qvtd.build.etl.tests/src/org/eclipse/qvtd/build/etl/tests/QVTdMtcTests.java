@@ -52,8 +52,8 @@ public class QVTdMtcTests extends LoadTestCase
 	
 	protected static class MyQVTiEnvironmentFactory extends QVTiEnvironmentFactory
 	{
-		public MyQVTiEnvironmentFactory(@Nullable ProjectManager projectMap) {
-			super(projectMap);
+		public MyQVTiEnvironmentFactory(@Nullable ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
+			super(projectMap, externalResourceSet);
 	    	setEvaluationTracingEnabled(true);
 		}
 	}
@@ -154,7 +154,9 @@ public class QVTdMtcTests extends LoadTestCase
 	}
 	
 	protected static void assertLoadable(@NonNull URI asURI) {
-        ResourceSet asResourceSet = OCL.createEnvironmentFactory(null).getMetamodelManager().getASResourceSet();
+		OCL ocl = OCL.newInstance();
+        ResourceSet asResourceSet = ocl.getMetamodelManager().getASResourceSet();
+//        ResourceSet asResourceSet = OCL.createEnvironmentFactory(null).getMetamodelManager().getASResourceSet();
         if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
 			OCLstdlib.install();
 //	        MetamodelManager.initializeASResourceSet(asResourceSet);
@@ -163,10 +165,11 @@ public class QVTdMtcTests extends LoadTestCase
         EcoreUtil.resolveAll(resource);
         assertNoUnresolvedProxies("Loading", resource);
         assertNoResourceErrors("Loading", resource);
+        ocl.dispose();
 	}
 
 	protected @NonNull MyQVT createQVT() {
-		return new MyQVT(new MyQVTiEnvironmentFactory(getProjectMap()));
+		return new MyQVT(new MyQVTiEnvironmentFactory(getProjectMap(), null));
 	}
 	
 	/* (non-Javadoc)
@@ -198,7 +201,7 @@ public class QVTdMtcTests extends LoadTestCase
     	MyQVT myQVT = createQVT();
     	URL r = this.getClass().getResource("UmlToRdbms/UmlToRdbms.qvtcas");
 		String qvtcasUri = MtcBroker.changeResourceToSource(r.toURI().toString());
-    	MtcBroker mtc = new MtcBroker(qvtcasUri, this.getClass(), myQVT.getMetamodelManager());
+    	MtcBroker mtc = new MtcBroker(qvtcasUri, this.getClass(), myQVT.getEnvironmentFactory());
     	mtc.execute();
     	Diagnostic diagnostic = Diagnostician.INSTANCE.validate(mtc.getuModel().getRooteObject());
     	// TODO do we want perfect or can we tolerate info and warnings?

@@ -31,10 +31,11 @@ import org.eclipse.ocl.pivot.Package;
 import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
+import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.InvokedRelationToMappingForEnforcement;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseBottomPatternKey;
 import org.eclipse.qvtd.build.qvtrtoqvtc.impl.QVTcoreBaseCoreDomainKey;
@@ -92,7 +93,7 @@ public class QvtrToQvtcTransformation
 	private final Map<RelationCallExp, Relation> invokingRelationsForRelationCallExp = new HashMap<RelationCallExp, Relation>();
 	
 	private boolean doGlobalSearch = true;
-	private final @NonNull MetamodelManager metamodelManager;
+	private final @NonNull EnvironmentFactory environmentFactory;
 
 	private QVTcoreMappingKey mappings = new QVTcoreMappingKey();
 	
@@ -108,9 +109,9 @@ public class QvtrToQvtcTransformation
 	
 	private QVTcoreVariableKey realizedVariables = new QVTcoreVariableKey();
 	
-	public QvtrToQvtcTransformation(@NonNull MetamodelManager metamodelManager, @NonNull Resource qvtrModel, @NonNull Resource qvtcModel, @Nullable Resource qvtcTraceModel) {
+	public QvtrToQvtcTransformation(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource qvtrModel, @NonNull Resource qvtcModel, @Nullable Resource qvtcTraceModel) {
 		
-		this.metamodelManager = metamodelManager;
+		this.environmentFactory = environmentFactory;
 		this.qvtrModel = qvtrModel;		
 		this.qvtcModel = qvtcModel;
 		this.qvtcTraceModel = qvtcTraceModel;
@@ -449,8 +450,11 @@ public class QvtrToQvtcTransformation
 	/**
 	 * @return the metamodelManager
 	 */
-	public MetamodelManager getMetamodelManager() {
-		return metamodelManager;
+//	public MetamodelManager getMetamodelManager() {
+//	return metamodelManager;
+//}
+	public @NonNull StandardLibrary getStandardLibrary() {
+		return environmentFactory.getStandardLibrary();
 	}
 	
 	private Set<Variable> getNestedBindToVariable(ObjectTemplateExp ote) {

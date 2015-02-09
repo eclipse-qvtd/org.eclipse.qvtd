@@ -259,7 +259,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	public @Nullable ElementCS visitImport(@NonNull Import asUnit) {
 		BaseCSResource csResource = context.getCSResource();
 		Namespace asNamespace = asUnit.getImportedNamespace();
-		EObject eObject = asNamespace.getETarget();
+		EObject eObject = asNamespace.getESObject();
 		String importURI = null;
 		if (eObject instanceof EPackage) {
 			EPackage ePackage = (EPackage)eObject;

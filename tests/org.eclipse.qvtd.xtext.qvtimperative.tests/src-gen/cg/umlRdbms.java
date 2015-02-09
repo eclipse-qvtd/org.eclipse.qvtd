@@ -29,6 +29,7 @@ import org.eclipse.ocl.pivot.library.collection.CollectionAsSetOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionSelectByKindOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionUnionOperation;
 import org.eclipse.ocl.pivot.library.collection.OrderedCollectionFirstOperation;
+import org.eclipse.ocl.pivot.library.logical.BooleanAndOperation;
 import org.eclipse.ocl.pivot.library.string.StringConcatOperation;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
@@ -1265,90 +1266,27 @@ public class umlRdbms extends AbstractTransformationExecutor
             final @Nullable /*@Thrown*/ ClassToTable ClassToTable_0 = ClassUtil.nonNullState (OPPOSITE_OF_ClassToTable_umlClass.get(sc));
             final @Nullable /*@Thrown*/ ClassToTable sc2t_0 = ClassToTable_0;
             final @Nullable /*@Thrown*/ String name = a.getName();
-            @NonNull /*@Caught*/ Object CAUGHT_self_0;
+            @NonNull /*@Caught*/ Object CAUGHT_eq_2;
             try {
                 if (dc instanceof InvalidValueException) {
                     throw (InvalidValueException)dc;
                 }
-                final /*@Thrown*/ boolean self_0 = (destination != null) ? destination.equals(dc) : (dc == null);
-                CAUGHT_self_0 = self_0;
+                final /*@Thrown*/ boolean eq_2 = (destination != null) ? destination.equals(dc) : (dc == null);
+                CAUGHT_eq_2 = eq_2;
             }
             catch (Exception e) {
-                CAUGHT_self_0 = ValueUtil.createInvalidValue(e);
+                CAUGHT_eq_2 = ValueUtil.createInvalidValue(e);
             }
-            @NonNull /*@Caught*/ Object CAUGHT_b;
+            @NonNull /*@Caught*/ Object CAUGHT_eq_3;
             try {
                 if (sc instanceof InvalidValueException) {
                     throw (InvalidValueException)sc;
                 }
-                final /*@Thrown*/ boolean b = (source != null) ? source.equals(sc) : (sc == null);
-                CAUGHT_b = b;
+                final /*@Thrown*/ boolean eq_3 = (source != null) ? source.equals(sc) : (sc == null);
+                CAUGHT_eq_3 = eq_3;
             }
             catch (Exception e) {
-                CAUGHT_b = ValueUtil.createInvalidValue(e);
-            }
-            final /*@NonInvalid*/ boolean symbol_4 = CAUGHT_self_0 instanceof InvalidValueException;
-            /*@Thrown*/ boolean symbol_12;
-            if (symbol_4) {
-                final /*@NonInvalid*/ boolean symbol_5 = CAUGHT_b instanceof InvalidValueException;
-                /*@Thrown*/ boolean symbol_7;
-                if (symbol_5) {
-                    if (CAUGHT_self_0 instanceof InvalidValueException) {
-                        throw (InvalidValueException)CAUGHT_self_0;
-                    }
-                    symbol_7 = (Boolean)CAUGHT_self_0;
-                }
-                else {
-                    if (CAUGHT_b instanceof InvalidValueException) {
-                        throw (InvalidValueException)CAUGHT_b;
-                    }
-                    final /*@Thrown*/ boolean eq_2 = CAUGHT_b == Boolean.FALSE;
-                    /*@Thrown*/ boolean symbol_6;
-                    if (eq_2) {
-                        symbol_6 = ValueUtil.FALSE_VALUE;
-                    }
-                    else {
-                        if (CAUGHT_self_0 instanceof InvalidValueException) {
-                            throw (InvalidValueException)CAUGHT_self_0;
-                        }
-                        symbol_6 = (Boolean)CAUGHT_self_0;
-                    }
-                    symbol_7 = symbol_6;
-                }
-                symbol_12 = symbol_7;
-            }
-            else {
-                if (CAUGHT_self_0 instanceof InvalidValueException) {
-                    throw (InvalidValueException)CAUGHT_self_0;
-                }
-                final /*@Thrown*/ boolean eq_3 = CAUGHT_self_0 == Boolean.FALSE;
-                /*@Thrown*/ boolean symbol_11;
-                if (eq_3) {
-                    symbol_11 = ValueUtil.FALSE_VALUE;
-                }
-                else {
-                    if (CAUGHT_b instanceof InvalidValueException) {
-                        throw (InvalidValueException)CAUGHT_b;
-                    }
-                    final /*@NonInvalid*/ boolean symbol_8 = CAUGHT_b instanceof InvalidValueException;
-                    /*@Thrown*/ boolean symbol_10;
-                    if (symbol_8) {
-                        symbol_10 = (Boolean)CAUGHT_b;
-                    }
-                    else {
-                        final /*@Thrown*/ boolean eq_4 = CAUGHT_b == Boolean.FALSE;
-                        /*@NonInvalid*/ boolean symbol_9;
-                        if (eq_4) {
-                            symbol_9 = ValueUtil.FALSE_VALUE;
-                        }
-                        else {
-                            symbol_9 = ValueUtil.TRUE_VALUE;
-                        }
-                        symbol_10 = symbol_9;
-                    }
-                    symbol_11 = symbol_10;
-                }
-                symbol_12 = symbol_11;
+                CAUGHT_eq_3 = ValueUtil.createInvalidValue(e);
             }
             // creations
             final /*@Thrown*/ AssociationToForeignKey a2f_0 = UmltordbmsFactory.eINSTANCE.createAssociationToForeignKey();
@@ -1359,25 +1297,59 @@ public class umlRdbms extends AbstractTransformationExecutor
             a2f_0.setOwner(sc2t_0);
             a2f_0.setReferenced(dc2t_0);
             a2f_0.setAssociation(a);
-            @Nullable /*@Thrown*/ String symbol_33;
-            if (symbol_12) {
-                symbol_33 = name;
+            final @Nullable /*@Thrown*/ Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq_2, CAUGHT_eq_3);
+            if (and == null) {
+                throw new InvalidValueException("Null if condition");
+            }
+            @Nullable /*@Thrown*/ String symbol_6;
+            if (and) {
+                symbol_6 = name;
             }
             else {
-                @NonNull /*@Thrown*/ String symbol_32;
-                if (symbol_12) {
+                @NonNull /*@Caught*/ Object CAUGHT_ne;
+                try {
+                    if (dc instanceof InvalidValueException) {
+                        throw (InvalidValueException)dc;
+                    }
+                    final /*@Thrown*/ boolean ne = (destination != null) ? !destination.equals(dc) : (dc != null);
+                    CAUGHT_ne = ne;
+                }
+                catch (Exception e) {
+                    CAUGHT_ne = ValueUtil.createInvalidValue(e);
+                }
+                final @Nullable /*@Thrown*/ Boolean and_0 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_ne, CAUGHT_eq_3);
+                if (and_0 == null) {
+                    throw new InvalidValueException("Null if condition");
+                }
+                @NonNull /*@Thrown*/ String symbol_5;
+                if (and_0) {
                     final @Nullable /*@Thrown*/ String name_0 = dc.getName();
                     final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name_0, STR__);
                     final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name);
-                    symbol_32 = sum_0;
+                    symbol_5 = sum_0;
                 }
                 else {
                     final @Nullable /*@Thrown*/ String name_6 = sc.getName();
-                    @NonNull /*@Thrown*/ String symbol_31;
-                    if (symbol_12) {
+                    @NonNull /*@Caught*/ Object CAUGHT_ne_0;
+                    try {
+                        if (sc instanceof InvalidValueException) {
+                            throw (InvalidValueException)sc;
+                        }
+                        final /*@Thrown*/ boolean ne_0 = (source != null) ? !source.equals(sc) : (sc != null);
+                        CAUGHT_ne_0 = ne_0;
+                    }
+                    catch (Exception e) {
+                        CAUGHT_ne_0 = ValueUtil.createInvalidValue(e);
+                    }
+                    final @Nullable /*@Thrown*/ Boolean and_1 = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq_2, CAUGHT_ne_0);
+                    if (and_1 == null) {
+                        throw new InvalidValueException("Null if condition");
+                    }
+                    @NonNull /*@Thrown*/ String symbol_4;
+                    if (and_1) {
                         final @NonNull /*@Thrown*/ String sum_1 = StringConcatOperation.INSTANCE.evaluate(name, STR__);
                         final @NonNull /*@Thrown*/ String sum_2 = StringConcatOperation.INSTANCE.evaluate(sum_1, name_6);
-                        symbol_31 = sum_2;
+                        symbol_4 = sum_2;
                     }
                     else {
                         final @Nullable /*@Thrown*/ String name_4 = dc.getName();
@@ -1385,13 +1357,13 @@ public class umlRdbms extends AbstractTransformationExecutor
                         final @NonNull /*@Thrown*/ String sum_4 = StringConcatOperation.INSTANCE.evaluate(sum_3, name);
                         final @NonNull /*@Thrown*/ String sum_5 = StringConcatOperation.INSTANCE.evaluate(sum_4, STR__);
                         final @NonNull /*@Thrown*/ String sum_6 = StringConcatOperation.INSTANCE.evaluate(sum_5, name_6);
-                        symbol_31 = sum_6;
+                        symbol_4 = sum_6;
                     }
-                    symbol_32 = symbol_31;
+                    symbol_5 = symbol_4;
                 }
-                symbol_33 = symbol_32;
+                symbol_6 = symbol_5;
             }
-            a2f_0.setName(symbol_33);
+            a2f_0.setName(symbol_6);
             // mapping statements
             return true;
         }

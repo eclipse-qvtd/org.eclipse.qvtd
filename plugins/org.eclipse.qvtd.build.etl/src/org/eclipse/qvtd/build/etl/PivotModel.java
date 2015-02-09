@@ -29,7 +29,8 @@ import org.eclipse.epsilon.eol.exceptions.models.EolEnumerationValueNotFoundExce
 import org.eclipse.epsilon.eol.exceptions.models.EolModelElementTypeNotFoundException;
 import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
 import org.eclipse.epsilon.eol.exceptions.models.EolNotInstantiableModelElementTypeException;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 
@@ -41,7 +42,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 public class PivotModel extends EmfModel {
 	
 	/** The meta model manager. */
-	private MetamodelManager metamodelManager;
+	private @NonNull EnvironmentFactory environmentFactory;
 	
 	private boolean isASResource;
 	
@@ -50,10 +51,10 @@ public class PivotModel extends EmfModel {
 	 *
 	 * @param metamodelManager the meta model manager
 	 */
-	public PivotModel(MetamodelManager metamodelManager, boolean isASResource) {
+	public PivotModel(@NonNull EnvironmentFactory environmentFactory, boolean isASResource) {
 		
 		this.isASResource = isASResource;
-		this.metamodelManager = metamodelManager;
+		this.environmentFactory = environmentFactory;
 	}
 	
 	/* (non-Javadoc)
@@ -62,7 +63,7 @@ public class PivotModel extends EmfModel {
 	@Override
 	public void loadModelFromUri() throws EolModelLoadingException {
 
-		ResourceSet rSet = isASResource ? metamodelManager.getASResourceSet() : metamodelManager.getExternalResourceSet();
+		ResourceSet rSet = isASResource ? environmentFactory.getMetamodelManager().getASResourceSet() : environmentFactory.getResourceSet();
 		try {
 			if (readOnLoad) {
 				modelImpl = rSet.getResource(modelUri, true);

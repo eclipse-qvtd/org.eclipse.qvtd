@@ -221,7 +221,7 @@ public class PivotTestCase extends TestCase
 	
 	public URI getTestModelURI(String localFileName) {
 		if (projectMap == null) {
-			projectMap = new ProjectMap();
+			projectMap = new ProjectMap(false);
 		}
 		String urlString = projectMap.getLocation(PLUGIN_ID).toString();
 		TestCase.assertNotNull(urlString);
