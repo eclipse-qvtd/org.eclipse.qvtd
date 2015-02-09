@@ -20,7 +20,7 @@ import org.eclipse.ocl.pivot.Variable;
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.DataParameter#getDatum <em>Datum</em>}</li>
  * </ul>
  *
- * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getDataParameter()
+ * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getDataParameter()
  * @model
  * @generated
  */
@@ -35,7 +35,7 @@ public interface DataParameter extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Variable</em>' reference.
 	 * @see #setVariable(Variable)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getDataParameter_Variable()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getDataParameter_Variable()
 	 * @model required="true"
 	 * @generated
 	 */
@@ -62,7 +62,7 @@ public interface DataParameter extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Secondary Parameter</em>' reference.
 	 * @see #setSecondaryParameter(SecondaryParameter)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getDataParameter_SecondaryParameter()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getDataParameter_SecondaryParameter()
 	 * @see org.eclipse.qvtd.build.qvtschedule.SecondaryParameter#getDataParameter
 	 * @model opposite="dataParameter"
 	 * @generated
@@ -90,7 +90,7 @@ public interface DataParameter extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Datum</em>' reference.
 	 * @see #setDatum(AbstractDatum)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getDataParameter_Datum()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getDataParameter_Datum()
 	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getDataParameter
 	 * @model opposite="dataParameter" required="true"
 	 * @generated

@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getSecondaryParameter <em>Secondary Parameter</em>}</li>
  * </ul>
  *
- * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getParameterDerivation()
+ * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getParameterDerivation()
  * @model
  * @generated
  */
@@ -34,7 +34,7 @@ public interface ParameterDerivation extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Target</em>' container reference.
 	 * @see #setTarget(AbstractAction)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getParameterDerivation_Target()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getParameterDerivation_Target()
 	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractAction#getParameterDerivations
 	 * @model opposite="parameterDerivations" transient="false"
 	 * @generated
@@ -55,13 +55,13 @@ public interface ParameterDerivation extends EObject {
 	 * Returns the value of the '<em><b>Primary Parameter</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Primary Parameter</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Primary Parameter</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Primary Parameter</em>' reference.
 	 * @see #setPrimaryParameter(DataParameter)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getParameterDerivation_PrimaryParameter()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getParameterDerivation_PrimaryParameter()
 	 * @model
 	 * @generated
 	 */
@@ -88,7 +88,7 @@ public interface ParameterDerivation extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Secondary Parameter</em>' containment reference.
 	 * @see #setSecondaryParameter(SecondaryParameter)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getParameterDerivation_SecondaryParameter()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getParameterDerivation_SecondaryParameter()
 	 * @see org.eclipse.qvtd.build.qvtschedule.SecondaryParameter#getDerivation
 	 * @model opposite="derivation" containment="true"
 	 * @generated

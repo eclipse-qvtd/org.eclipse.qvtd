@@ -10,7 +10,7 @@
       <!-- @generated QVTSchedule -->
       <package
             uri="http://www.eclipse.org/qvt/0.2/QVTschedule/"
-            class="org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage"
+            class="org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage"
             genModel="model/QVTSchedule.genmodel"/>
    </extension>
 

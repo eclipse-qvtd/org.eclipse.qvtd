@@ -18,7 +18,7 @@ import org.eclipse.ocl.pivot.Property;
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.PropertyDatum#getOpposite <em>Opposite</em>}</li>
  * </ul>
  *
- * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getPropertyDatum()
+ * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getPropertyDatum()
  * @model
  * @generated
  */
@@ -33,7 +33,7 @@ public interface PropertyDatum extends AbstractDatum {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Property</em>' reference.
 	 * @see #setProperty(Property)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getPropertyDatum_Property()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getPropertyDatum_Property()
 	 * @model required="true"
 	 * @generated
 	 */
@@ -60,7 +60,7 @@ public interface PropertyDatum extends AbstractDatum {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Class Datum</em>' container reference.
 	 * @see #setClassDatum(ClassDatum)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getPropertyDatum_ClassDatum()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getPropertyDatum_ClassDatum()
 	 * @see org.eclipse.qvtd.build.qvtschedule.ClassDatum#getPropertyDatums
 	 * @model opposite="propertyDatums" required="true" transient="false"
 	 * @generated
@@ -87,7 +87,7 @@ public interface PropertyDatum extends AbstractDatum {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Opposite</em>' reference.
 	 * @see #setOpposite(PropertyDatum)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getPropertyDatum_Opposite()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getPropertyDatum_Opposite()
 	 * @model
 	 * @generated
 	 */

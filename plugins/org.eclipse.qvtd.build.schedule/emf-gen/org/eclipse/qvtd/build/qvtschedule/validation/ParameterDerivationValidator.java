@@ -4,8 +4,6 @@
  */
 package org.eclipse.qvtd.build.qvtschedule.validation;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.qvtd.build.qvtschedule.AbstractAction;
 import org.eclipse.qvtd.build.qvtschedule.DataParameter;
 import org.eclipse.qvtd.build.qvtschedule.SecondaryParameter;
@@ -22,6 +20,4 @@ public interface ParameterDerivationValidator {
 	boolean validateTarget(AbstractAction value);
 	boolean validatePrimaryParameter(DataParameter value);
 	boolean validateSecondaryParameter(SecondaryParameter value);
-
-	boolean validateSecondaryParameters(EList<SecondaryParameter> value);
 }

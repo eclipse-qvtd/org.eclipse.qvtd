@@ -15,14 +15,13 @@ import org.eclipse.ocl.pivot.Variable;
 
 import org.eclipse.qvtd.build.qvtschedule.AbstractDatum;
 import org.eclipse.qvtd.build.qvtschedule.DataParameter;
+import org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.build.qvtschedule.SecondaryParameter;
-import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
 
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Data Parameter</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  * <p>
  * The following features are implemented:
  * </p>
@@ -81,7 +80,7 @@ public class DataParameterImpl extends MinimalEObjectImpl.Container implements D
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return qvtschedulePackage.Literals.DATA_PARAMETER;
+		return QVTschedulePackage.Literals.DATA_PARAMETER;
 	}
 
 	/**
@@ -95,7 +94,7 @@ public class DataParameterImpl extends MinimalEObjectImpl.Container implements D
 			variable = (Variable)eResolveProxy(oldVariable);
 			if (variable != oldVariable) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, qvtschedulePackage.DATA_PARAMETER__VARIABLE, oldVariable, variable));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.DATA_PARAMETER__VARIABLE, oldVariable, variable));
 			}
 		}
 		return variable;
@@ -119,7 +118,7 @@ public class DataParameterImpl extends MinimalEObjectImpl.Container implements D
 		Variable oldVariable = variable;
 		variable = newVariable;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, qvtschedulePackage.DATA_PARAMETER__VARIABLE, oldVariable, variable));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.DATA_PARAMETER__VARIABLE, oldVariable, variable));
 	}
 
 	/**
@@ -133,7 +132,7 @@ public class DataParameterImpl extends MinimalEObjectImpl.Container implements D
 			secondaryParameter = (SecondaryParameter)eResolveProxy(oldSecondaryParameter);
 			if (secondaryParameter != oldSecondaryParameter) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, qvtschedulePackage.DATA_PARAMETER__SECONDARY_PARAMETER, oldSecondaryParameter, secondaryParameter));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.DATA_PARAMETER__SECONDARY_PARAMETER, oldSecondaryParameter, secondaryParameter));
 			}
 		}
 		return secondaryParameter;
@@ -157,7 +156,7 @@ public class DataParameterImpl extends MinimalEObjectImpl.Container implements D
 		SecondaryParameter oldSecondaryParameter = secondaryParameter;
 		secondaryParameter = newSecondaryParameter;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, qvtschedulePackage.DATA_PARAMETER__SECONDARY_PARAMETER, oldSecondaryParameter, newSecondaryParameter);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTschedulePackage.DATA_PARAMETER__SECONDARY_PARAMETER, oldSecondaryParameter, newSecondaryParameter);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -172,14 +171,14 @@ public class DataParameterImpl extends MinimalEObjectImpl.Container implements D
 		if (newSecondaryParameter != secondaryParameter) {
 			NotificationChain msgs = null;
 			if (secondaryParameter != null)
-				msgs = ((InternalEObject)secondaryParameter).eInverseRemove(this, qvtschedulePackage.SECONDARY_PARAMETER__DATA_PARAMETER, SecondaryParameter.class, msgs);
+				msgs = ((InternalEObject)secondaryParameter).eInverseRemove(this, QVTschedulePackage.SECONDARY_PARAMETER__DATA_PARAMETER, SecondaryParameter.class, msgs);
 			if (newSecondaryParameter != null)
-				msgs = ((InternalEObject)newSecondaryParameter).eInverseAdd(this, qvtschedulePackage.SECONDARY_PARAMETER__DATA_PARAMETER, SecondaryParameter.class, msgs);
+				msgs = ((InternalEObject)newSecondaryParameter).eInverseAdd(this, QVTschedulePackage.SECONDARY_PARAMETER__DATA_PARAMETER, SecondaryParameter.class, msgs);
 			msgs = basicSetSecondaryParameter(newSecondaryParameter, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, qvtschedulePackage.DATA_PARAMETER__SECONDARY_PARAMETER, newSecondaryParameter, newSecondaryParameter));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.DATA_PARAMETER__SECONDARY_PARAMETER, newSecondaryParameter, newSecondaryParameter));
 	}
 
 	/**
@@ -193,7 +192,7 @@ public class DataParameterImpl extends MinimalEObjectImpl.Container implements D
 			datum = (AbstractDatum)eResolveProxy(oldDatum);
 			if (datum != oldDatum) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, qvtschedulePackage.DATA_PARAMETER__DATUM, oldDatum, datum));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.DATA_PARAMETER__DATUM, oldDatum, datum));
 			}
 		}
 		return datum;
@@ -217,7 +216,7 @@ public class DataParameterImpl extends MinimalEObjectImpl.Container implements D
 		AbstractDatum oldDatum = datum;
 		datum = newDatum;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, qvtschedulePackage.DATA_PARAMETER__DATUM, oldDatum, newDatum);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTschedulePackage.DATA_PARAMETER__DATUM, oldDatum, newDatum);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -232,14 +231,14 @@ public class DataParameterImpl extends MinimalEObjectImpl.Container implements D
 		if (newDatum != datum) {
 			NotificationChain msgs = null;
 			if (datum != null)
-				msgs = ((InternalEObject)datum).eInverseRemove(this, qvtschedulePackage.ABSTRACT_DATUM__DATA_PARAMETER, AbstractDatum.class, msgs);
+				msgs = ((InternalEObject)datum).eInverseRemove(this, QVTschedulePackage.ABSTRACT_DATUM__DATA_PARAMETER, AbstractDatum.class, msgs);
 			if (newDatum != null)
-				msgs = ((InternalEObject)newDatum).eInverseAdd(this, qvtschedulePackage.ABSTRACT_DATUM__DATA_PARAMETER, AbstractDatum.class, msgs);
+				msgs = ((InternalEObject)newDatum).eInverseAdd(this, QVTschedulePackage.ABSTRACT_DATUM__DATA_PARAMETER, AbstractDatum.class, msgs);
 			msgs = basicSetDatum(newDatum, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, qvtschedulePackage.DATA_PARAMETER__DATUM, newDatum, newDatum));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.DATA_PARAMETER__DATUM, newDatum, newDatum));
 	}
 
 	/**
@@ -250,13 +249,13 @@ public class DataParameterImpl extends MinimalEObjectImpl.Container implements D
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case qvtschedulePackage.DATA_PARAMETER__SECONDARY_PARAMETER:
+			case QVTschedulePackage.DATA_PARAMETER__SECONDARY_PARAMETER:
 				if (secondaryParameter != null)
-					msgs = ((InternalEObject)secondaryParameter).eInverseRemove(this, qvtschedulePackage.SECONDARY_PARAMETER__DATA_PARAMETER, SecondaryParameter.class, msgs);
+					msgs = ((InternalEObject)secondaryParameter).eInverseRemove(this, QVTschedulePackage.SECONDARY_PARAMETER__DATA_PARAMETER, SecondaryParameter.class, msgs);
 				return basicSetSecondaryParameter((SecondaryParameter)otherEnd, msgs);
-			case qvtschedulePackage.DATA_PARAMETER__DATUM:
+			case QVTschedulePackage.DATA_PARAMETER__DATUM:
 				if (datum != null)
-					msgs = ((InternalEObject)datum).eInverseRemove(this, qvtschedulePackage.ABSTRACT_DATUM__DATA_PARAMETER, AbstractDatum.class, msgs);
+					msgs = ((InternalEObject)datum).eInverseRemove(this, QVTschedulePackage.ABSTRACT_DATUM__DATA_PARAMETER, AbstractDatum.class, msgs);
 				return basicSetDatum((AbstractDatum)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -270,9 +269,9 @@ public class DataParameterImpl extends MinimalEObjectImpl.Container implements D
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case qvtschedulePackage.DATA_PARAMETER__SECONDARY_PARAMETER:
+			case QVTschedulePackage.DATA_PARAMETER__SECONDARY_PARAMETER:
 				return basicSetSecondaryParameter(null, msgs);
-			case qvtschedulePackage.DATA_PARAMETER__DATUM:
+			case QVTschedulePackage.DATA_PARAMETER__DATUM:
 				return basicSetDatum(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -286,13 +285,13 @@ public class DataParameterImpl extends MinimalEObjectImpl.Container implements D
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case qvtschedulePackage.DATA_PARAMETER__VARIABLE:
+			case QVTschedulePackage.DATA_PARAMETER__VARIABLE:
 				if (resolve) return getVariable();
 				return basicGetVariable();
-			case qvtschedulePackage.DATA_PARAMETER__SECONDARY_PARAMETER:
+			case QVTschedulePackage.DATA_PARAMETER__SECONDARY_PARAMETER:
 				if (resolve) return getSecondaryParameter();
 				return basicGetSecondaryParameter();
-			case qvtschedulePackage.DATA_PARAMETER__DATUM:
+			case QVTschedulePackage.DATA_PARAMETER__DATUM:
 				if (resolve) return getDatum();
 				return basicGetDatum();
 		}
@@ -307,13 +306,13 @@ public class DataParameterImpl extends MinimalEObjectImpl.Container implements D
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case qvtschedulePackage.DATA_PARAMETER__VARIABLE:
+			case QVTschedulePackage.DATA_PARAMETER__VARIABLE:
 				setVariable((Variable)newValue);
 				return;
-			case qvtschedulePackage.DATA_PARAMETER__SECONDARY_PARAMETER:
+			case QVTschedulePackage.DATA_PARAMETER__SECONDARY_PARAMETER:
 				setSecondaryParameter((SecondaryParameter)newValue);
 				return;
-			case qvtschedulePackage.DATA_PARAMETER__DATUM:
+			case QVTschedulePackage.DATA_PARAMETER__DATUM:
 				setDatum((AbstractDatum)newValue);
 				return;
 		}
@@ -328,13 +327,13 @@ public class DataParameterImpl extends MinimalEObjectImpl.Container implements D
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case qvtschedulePackage.DATA_PARAMETER__VARIABLE:
+			case QVTschedulePackage.DATA_PARAMETER__VARIABLE:
 				setVariable((Variable)null);
 				return;
-			case qvtschedulePackage.DATA_PARAMETER__SECONDARY_PARAMETER:
+			case QVTschedulePackage.DATA_PARAMETER__SECONDARY_PARAMETER:
 				setSecondaryParameter((SecondaryParameter)null);
 				return;
-			case qvtschedulePackage.DATA_PARAMETER__DATUM:
+			case QVTschedulePackage.DATA_PARAMETER__DATUM:
 				setDatum((AbstractDatum)null);
 				return;
 		}
@@ -349,11 +348,11 @@ public class DataParameterImpl extends MinimalEObjectImpl.Container implements D
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case qvtschedulePackage.DATA_PARAMETER__VARIABLE:
+			case QVTschedulePackage.DATA_PARAMETER__VARIABLE:
 				return variable != null;
-			case qvtschedulePackage.DATA_PARAMETER__SECONDARY_PARAMETER:
+			case QVTschedulePackage.DATA_PARAMETER__SECONDARY_PARAMETER:
 				return secondaryParameter != null;
-			case qvtschedulePackage.DATA_PARAMETER__DATUM:
+			case QVTschedulePackage.DATA_PARAMETER__DATUM:
 				return datum != null;
 		}
 		return super.eIsSet(featureID);

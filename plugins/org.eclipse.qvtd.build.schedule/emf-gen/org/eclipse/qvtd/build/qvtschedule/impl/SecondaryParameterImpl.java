@@ -12,18 +12,18 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+
 import org.eclipse.ocl.pivot.Property;
 
 import org.eclipse.qvtd.build.qvtschedule.DataParameter;
 import org.eclipse.qvtd.build.qvtschedule.ParameterDerivation;
+import org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.build.qvtschedule.SecondaryParameter;
-import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
 
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Secondary Parameter</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  * <p>
  * The following features are implemented:
  * </p>
@@ -93,7 +93,7 @@ public class SecondaryParameterImpl extends MinimalEObjectImpl.Container impleme
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return qvtschedulePackage.Literals.SECONDARY_PARAMETER;
+		return QVTschedulePackage.Literals.SECONDARY_PARAMETER;
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class SecondaryParameterImpl extends MinimalEObjectImpl.Container impleme
 		boolean oldIsLoop = isLoop;
 		isLoop = newIsLoop;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, qvtschedulePackage.SECONDARY_PARAMETER__IS_LOOP, oldIsLoop, isLoop));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.SECONDARY_PARAMETER__IS_LOOP, oldIsLoop, isLoop));
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class SecondaryParameterImpl extends MinimalEObjectImpl.Container impleme
 			dataParameter = (DataParameter)eResolveProxy(oldDataParameter);
 			if (dataParameter != oldDataParameter) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, qvtschedulePackage.SECONDARY_PARAMETER__DATA_PARAMETER, oldDataParameter, dataParameter));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.SECONDARY_PARAMETER__DATA_PARAMETER, oldDataParameter, dataParameter));
 			}
 		}
 		return dataParameter;
@@ -152,7 +152,7 @@ public class SecondaryParameterImpl extends MinimalEObjectImpl.Container impleme
 		DataParameter oldDataParameter = dataParameter;
 		dataParameter = newDataParameter;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, qvtschedulePackage.SECONDARY_PARAMETER__DATA_PARAMETER, oldDataParameter, newDataParameter);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTschedulePackage.SECONDARY_PARAMETER__DATA_PARAMETER, oldDataParameter, newDataParameter);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -167,14 +167,14 @@ public class SecondaryParameterImpl extends MinimalEObjectImpl.Container impleme
 		if (newDataParameter != dataParameter) {
 			NotificationChain msgs = null;
 			if (dataParameter != null)
-				msgs = ((InternalEObject)dataParameter).eInverseRemove(this, qvtschedulePackage.DATA_PARAMETER__SECONDARY_PARAMETER, DataParameter.class, msgs);
+				msgs = ((InternalEObject)dataParameter).eInverseRemove(this, QVTschedulePackage.DATA_PARAMETER__SECONDARY_PARAMETER, DataParameter.class, msgs);
 			if (newDataParameter != null)
-				msgs = ((InternalEObject)newDataParameter).eInverseAdd(this, qvtschedulePackage.DATA_PARAMETER__SECONDARY_PARAMETER, DataParameter.class, msgs);
+				msgs = ((InternalEObject)newDataParameter).eInverseAdd(this, QVTschedulePackage.DATA_PARAMETER__SECONDARY_PARAMETER, DataParameter.class, msgs);
 			msgs = basicSetDataParameter(newDataParameter, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, qvtschedulePackage.SECONDARY_PARAMETER__DATA_PARAMETER, newDataParameter, newDataParameter));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.SECONDARY_PARAMETER__DATA_PARAMETER, newDataParameter, newDataParameter));
 	}
 
 	/**
@@ -188,7 +188,7 @@ public class SecondaryParameterImpl extends MinimalEObjectImpl.Container impleme
 			derivationProperty = (Property)eResolveProxy(oldDerivationProperty);
 			if (derivationProperty != oldDerivationProperty) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, qvtschedulePackage.SECONDARY_PARAMETER__DERIVATION_PROPERTY, oldDerivationProperty, derivationProperty));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.SECONDARY_PARAMETER__DERIVATION_PROPERTY, oldDerivationProperty, derivationProperty));
 			}
 		}
 		return derivationProperty;
@@ -212,7 +212,7 @@ public class SecondaryParameterImpl extends MinimalEObjectImpl.Container impleme
 		Property oldDerivationProperty = derivationProperty;
 		derivationProperty = newDerivationProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, qvtschedulePackage.SECONDARY_PARAMETER__DERIVATION_PROPERTY, oldDerivationProperty, derivationProperty));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.SECONDARY_PARAMETER__DERIVATION_PROPERTY, oldDerivationProperty, derivationProperty));
 	}
 
 	/**
@@ -221,7 +221,7 @@ public class SecondaryParameterImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	public ParameterDerivation getDerivation() {
-		if (eContainerFeatureID() != qvtschedulePackage.SECONDARY_PARAMETER__DERIVATION) return null;
+		if (eContainerFeatureID() != QVTschedulePackage.SECONDARY_PARAMETER__DERIVATION) return null;
 		return (ParameterDerivation)eInternalContainer();
 	}
 
@@ -231,7 +231,7 @@ public class SecondaryParameterImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	public NotificationChain basicSetDerivation(ParameterDerivation newDerivation, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newDerivation, qvtschedulePackage.SECONDARY_PARAMETER__DERIVATION, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newDerivation, QVTschedulePackage.SECONDARY_PARAMETER__DERIVATION, msgs);
 		return msgs;
 	}
 
@@ -241,19 +241,19 @@ public class SecondaryParameterImpl extends MinimalEObjectImpl.Container impleme
 	 * @generated
 	 */
 	public void setDerivation(ParameterDerivation newDerivation) {
-		if (newDerivation != eInternalContainer() || (eContainerFeatureID() != qvtschedulePackage.SECONDARY_PARAMETER__DERIVATION && newDerivation != null)) {
+		if (newDerivation != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.SECONDARY_PARAMETER__DERIVATION && newDerivation != null)) {
 			if (EcoreUtil.isAncestor(this, newDerivation))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newDerivation != null)
-				msgs = ((InternalEObject)newDerivation).eInverseAdd(this, qvtschedulePackage.PARAMETER_DERIVATION__SECONDARY_PARAMETER, ParameterDerivation.class, msgs);
+				msgs = ((InternalEObject)newDerivation).eInverseAdd(this, QVTschedulePackage.PARAMETER_DERIVATION__SECONDARY_PARAMETER, ParameterDerivation.class, msgs);
 			msgs = basicSetDerivation(newDerivation, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, qvtschedulePackage.SECONDARY_PARAMETER__DERIVATION, newDerivation, newDerivation));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.SECONDARY_PARAMETER__DERIVATION, newDerivation, newDerivation));
 	}
 
 	/**
@@ -264,11 +264,11 @@ public class SecondaryParameterImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case qvtschedulePackage.SECONDARY_PARAMETER__DATA_PARAMETER:
+			case QVTschedulePackage.SECONDARY_PARAMETER__DATA_PARAMETER:
 				if (dataParameter != null)
-					msgs = ((InternalEObject)dataParameter).eInverseRemove(this, qvtschedulePackage.DATA_PARAMETER__SECONDARY_PARAMETER, DataParameter.class, msgs);
+					msgs = ((InternalEObject)dataParameter).eInverseRemove(this, QVTschedulePackage.DATA_PARAMETER__SECONDARY_PARAMETER, DataParameter.class, msgs);
 				return basicSetDataParameter((DataParameter)otherEnd, msgs);
-			case qvtschedulePackage.SECONDARY_PARAMETER__DERIVATION:
+			case QVTschedulePackage.SECONDARY_PARAMETER__DERIVATION:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetDerivation((ParameterDerivation)otherEnd, msgs);
@@ -284,9 +284,9 @@ public class SecondaryParameterImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case qvtschedulePackage.SECONDARY_PARAMETER__DATA_PARAMETER:
+			case QVTschedulePackage.SECONDARY_PARAMETER__DATA_PARAMETER:
 				return basicSetDataParameter(null, msgs);
-			case qvtschedulePackage.SECONDARY_PARAMETER__DERIVATION:
+			case QVTschedulePackage.SECONDARY_PARAMETER__DERIVATION:
 				return basicSetDerivation(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -300,8 +300,8 @@ public class SecondaryParameterImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case qvtschedulePackage.SECONDARY_PARAMETER__DERIVATION:
-				return eInternalContainer().eInverseRemove(this, qvtschedulePackage.PARAMETER_DERIVATION__SECONDARY_PARAMETER, ParameterDerivation.class, msgs);
+			case QVTschedulePackage.SECONDARY_PARAMETER__DERIVATION:
+				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.PARAMETER_DERIVATION__SECONDARY_PARAMETER, ParameterDerivation.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -314,15 +314,15 @@ public class SecondaryParameterImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case qvtschedulePackage.SECONDARY_PARAMETER__IS_LOOP:
+			case QVTschedulePackage.SECONDARY_PARAMETER__IS_LOOP:
 				return isIsLoop();
-			case qvtschedulePackage.SECONDARY_PARAMETER__DATA_PARAMETER:
+			case QVTschedulePackage.SECONDARY_PARAMETER__DATA_PARAMETER:
 				if (resolve) return getDataParameter();
 				return basicGetDataParameter();
-			case qvtschedulePackage.SECONDARY_PARAMETER__DERIVATION_PROPERTY:
+			case QVTschedulePackage.SECONDARY_PARAMETER__DERIVATION_PROPERTY:
 				if (resolve) return getDerivationProperty();
 				return basicGetDerivationProperty();
-			case qvtschedulePackage.SECONDARY_PARAMETER__DERIVATION:
+			case QVTschedulePackage.SECONDARY_PARAMETER__DERIVATION:
 				return getDerivation();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -336,16 +336,16 @@ public class SecondaryParameterImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case qvtschedulePackage.SECONDARY_PARAMETER__IS_LOOP:
+			case QVTschedulePackage.SECONDARY_PARAMETER__IS_LOOP:
 				setIsLoop((Boolean)newValue);
 				return;
-			case qvtschedulePackage.SECONDARY_PARAMETER__DATA_PARAMETER:
+			case QVTschedulePackage.SECONDARY_PARAMETER__DATA_PARAMETER:
 				setDataParameter((DataParameter)newValue);
 				return;
-			case qvtschedulePackage.SECONDARY_PARAMETER__DERIVATION_PROPERTY:
+			case QVTschedulePackage.SECONDARY_PARAMETER__DERIVATION_PROPERTY:
 				setDerivationProperty((Property)newValue);
 				return;
-			case qvtschedulePackage.SECONDARY_PARAMETER__DERIVATION:
+			case QVTschedulePackage.SECONDARY_PARAMETER__DERIVATION:
 				setDerivation((ParameterDerivation)newValue);
 				return;
 		}
@@ -360,16 +360,16 @@ public class SecondaryParameterImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case qvtschedulePackage.SECONDARY_PARAMETER__IS_LOOP:
+			case QVTschedulePackage.SECONDARY_PARAMETER__IS_LOOP:
 				setIsLoop(IS_LOOP_EDEFAULT);
 				return;
-			case qvtschedulePackage.SECONDARY_PARAMETER__DATA_PARAMETER:
+			case QVTschedulePackage.SECONDARY_PARAMETER__DATA_PARAMETER:
 				setDataParameter((DataParameter)null);
 				return;
-			case qvtschedulePackage.SECONDARY_PARAMETER__DERIVATION_PROPERTY:
+			case QVTschedulePackage.SECONDARY_PARAMETER__DERIVATION_PROPERTY:
 				setDerivationProperty((Property)null);
 				return;
-			case qvtschedulePackage.SECONDARY_PARAMETER__DERIVATION:
+			case QVTschedulePackage.SECONDARY_PARAMETER__DERIVATION:
 				setDerivation((ParameterDerivation)null);
 				return;
 		}
@@ -384,13 +384,13 @@ public class SecondaryParameterImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case qvtschedulePackage.SECONDARY_PARAMETER__IS_LOOP:
+			case QVTschedulePackage.SECONDARY_PARAMETER__IS_LOOP:
 				return isLoop != IS_LOOP_EDEFAULT;
-			case qvtschedulePackage.SECONDARY_PARAMETER__DATA_PARAMETER:
+			case QVTschedulePackage.SECONDARY_PARAMETER__DATA_PARAMETER:
 				return dataParameter != null;
-			case qvtschedulePackage.SECONDARY_PARAMETER__DERIVATION_PROPERTY:
+			case QVTschedulePackage.SECONDARY_PARAMETER__DERIVATION_PROPERTY:
 				return derivationProperty != null;
-			case qvtschedulePackage.SECONDARY_PARAMETER__DERIVATION:
+			case QVTschedulePackage.SECONDARY_PARAMETER__DERIVATION:
 				return getDerivation() != null;
 		}
 		return super.eIsSet(featureID);

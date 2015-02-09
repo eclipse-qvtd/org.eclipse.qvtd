@@ -27,7 +27,7 @@ public interface AbstractActionValidator {
 	boolean validateOrder(int value);
 	boolean validateParent(AbstractAction value);
 	boolean validateChildren(EList<AbstractAction> value);
-	boolean validateParameters(EList<AbstractDatum> value);
+	boolean validateParameters(EList<DataParameter> value);
 	boolean validateResults(EList<DataParameter> value);
 	boolean validateSchedule(Schedule value);
 }

@@ -21,7 +21,7 @@ import org.eclipse.ocl.pivot.Property;
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.SecondaryParameter#getDerivation <em>Derivation</em>}</li>
  * </ul>
  *
- * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getSecondaryParameter()
+ * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getSecondaryParameter()
  * @model
  * @generated
  */
@@ -36,7 +36,7 @@ public interface SecondaryParameter extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Is Loop</em>' attribute.
 	 * @see #setIsLoop(boolean)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getSecondaryParameter_IsLoop()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getSecondaryParameter_IsLoop()
 	 * @model
 	 * @generated
 	 */
@@ -63,7 +63,7 @@ public interface SecondaryParameter extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Data Parameter</em>' reference.
 	 * @see #setDataParameter(DataParameter)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getSecondaryParameter_DataParameter()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getSecondaryParameter_DataParameter()
 	 * @see org.eclipse.qvtd.build.qvtschedule.DataParameter#getSecondaryParameter
 	 * @model opposite="secondaryParameter" required="true"
 	 * @generated
@@ -90,7 +90,7 @@ public interface SecondaryParameter extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Derivation Property</em>' reference.
 	 * @see #setDerivationProperty(Property)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getSecondaryParameter_DerivationProperty()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getSecondaryParameter_DerivationProperty()
 	 * @model
 	 * @generated
 	 */
@@ -117,7 +117,7 @@ public interface SecondaryParameter extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Derivation</em>' container reference.
 	 * @see #setDerivation(ParameterDerivation)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getSecondaryParameter_Derivation()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getSecondaryParameter_Derivation()
 	 * @see org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getSecondaryParameter
 	 * @model opposite="secondaryParameter" transient="false"
 	 * @generated

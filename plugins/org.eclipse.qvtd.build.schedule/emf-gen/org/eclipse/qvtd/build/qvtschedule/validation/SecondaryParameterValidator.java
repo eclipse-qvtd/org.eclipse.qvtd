@@ -21,6 +21,5 @@ public interface SecondaryParameterValidator {
 	boolean validateIsLoop(boolean value);
 	boolean validateDataParameter(DataParameter value);
 	boolean validateDerivationProperty(Property value);
-
 	boolean validateDerivation(ParameterDerivation value);
 }

@@ -26,7 +26,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getDataParameter <em>Data Parameter</em>}</li>
  * </ul>
  *
- * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractDatum()
+ * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractDatum()
  * @model abstract="true"
  * @generated
  */
@@ -42,7 +42,7 @@ public interface AbstractDatum extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Super</em>' reference list.
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractDatum_Super()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractDatum_Super()
 	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getSub
 	 * @model opposite="sub"
 	 * @generated
@@ -60,7 +60,7 @@ public interface AbstractDatum extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Sub</em>' reference list.
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractDatum_Sub()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractDatum_Sub()
 	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getSuper
 	 * @model opposite="super"
 	 * @generated
@@ -77,7 +77,7 @@ public interface AbstractDatum extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Domain</em>' reference.
 	 * @see #setDomain(CoreDomain)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractDatum_Domain()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractDatum_Domain()
 	 * @model
 	 * @generated
 	 */
@@ -104,7 +104,7 @@ public interface AbstractDatum extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Produced By</em>' reference list.
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractDatum_ProducedBy()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractDatum_ProducedBy()
 	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractAction#getProductions
 	 * @model opposite="productions"
 	 * @generated
@@ -122,7 +122,7 @@ public interface AbstractDatum extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Required By</em>' reference list.
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractDatum_RequiredBy()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractDatum_RequiredBy()
 	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractAction#getRequisites
 	 * @model opposite="requisites" derived="true"
 	 * @generated
@@ -140,7 +140,7 @@ public interface AbstractDatum extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Schedule</em>' container reference.
 	 * @see #setSchedule(Schedule)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractDatum_Schedule()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractDatum_Schedule()
 	 * @see org.eclipse.qvtd.build.qvtschedule.Schedule#getDatums
 	 * @model opposite="datums" transient="false"
 	 * @generated
@@ -168,7 +168,7 @@ public interface AbstractDatum extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Data Parameter</em>' reference list.
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractDatum_DataParameter()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractDatum_DataParameter()
 	 * @see org.eclipse.qvtd.build.qvtschedule.DataParameter#getDatum
 	 * @model opposite="datum"
 	 * @generated

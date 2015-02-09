@@ -16,13 +16,12 @@ import org.eclipse.ocl.pivot.Property;
 
 import org.eclipse.qvtd.build.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.build.qvtschedule.PropertyDatum;
-import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
+import org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage;
 
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Property Datum</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  * <p>
  * The following features are implemented:
  * </p>
@@ -71,7 +70,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return qvtschedulePackage.Literals.PROPERTY_DATUM;
+		return QVTschedulePackage.Literals.PROPERTY_DATUM;
 	}
 
 	/**
@@ -85,7 +84,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 			property = (Property)eResolveProxy(oldProperty);
 			if (property != oldProperty) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, qvtschedulePackage.PROPERTY_DATUM__PROPERTY, oldProperty, property));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.PROPERTY_DATUM__PROPERTY, oldProperty, property));
 			}
 		}
 		return property;
@@ -109,7 +108,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 		Property oldProperty = property;
 		property = newProperty;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, qvtschedulePackage.PROPERTY_DATUM__PROPERTY, oldProperty, property));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.PROPERTY_DATUM__PROPERTY, oldProperty, property));
 	}
 
 	/**
@@ -118,7 +117,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * @generated
 	 */
 	public ClassDatum getClassDatum() {
-		if (eContainerFeatureID() != qvtschedulePackage.PROPERTY_DATUM__CLASS_DATUM) return null;
+		if (eContainerFeatureID() != QVTschedulePackage.PROPERTY_DATUM__CLASS_DATUM) return null;
 		return (ClassDatum)eInternalContainer();
 	}
 
@@ -128,7 +127,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * @generated
 	 */
 	public NotificationChain basicSetClassDatum(ClassDatum newClassDatum, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newClassDatum, qvtschedulePackage.PROPERTY_DATUM__CLASS_DATUM, msgs);
+		msgs = eBasicSetContainer((InternalEObject)newClassDatum, QVTschedulePackage.PROPERTY_DATUM__CLASS_DATUM, msgs);
 		return msgs;
 	}
 
@@ -138,19 +137,19 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	 * @generated
 	 */
 	public void setClassDatum(ClassDatum newClassDatum) {
-		if (newClassDatum != eInternalContainer() || (eContainerFeatureID() != qvtschedulePackage.PROPERTY_DATUM__CLASS_DATUM && newClassDatum != null)) {
+		if (newClassDatum != eInternalContainer() || (eContainerFeatureID() != QVTschedulePackage.PROPERTY_DATUM__CLASS_DATUM && newClassDatum != null)) {
 			if (EcoreUtil.isAncestor(this, newClassDatum))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newClassDatum != null)
-				msgs = ((InternalEObject)newClassDatum).eInverseAdd(this, qvtschedulePackage.CLASS_DATUM__PROPERTY_DATUMS, ClassDatum.class, msgs);
+				msgs = ((InternalEObject)newClassDatum).eInverseAdd(this, QVTschedulePackage.CLASS_DATUM__PROPERTY_DATUMS, ClassDatum.class, msgs);
 			msgs = basicSetClassDatum(newClassDatum, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, qvtschedulePackage.PROPERTY_DATUM__CLASS_DATUM, newClassDatum, newClassDatum));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.PROPERTY_DATUM__CLASS_DATUM, newClassDatum, newClassDatum));
 	}
 
 	/**
@@ -164,7 +163,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 			opposite = (PropertyDatum)eResolveProxy(oldOpposite);
 			if (opposite != oldOpposite) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, qvtschedulePackage.PROPERTY_DATUM__OPPOSITE, oldOpposite, opposite));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.PROPERTY_DATUM__OPPOSITE, oldOpposite, opposite));
 			}
 		}
 		return opposite;
@@ -188,7 +187,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 		PropertyDatum oldOpposite = opposite;
 		opposite = newOpposite;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, qvtschedulePackage.PROPERTY_DATUM__OPPOSITE, oldOpposite, opposite));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.PROPERTY_DATUM__OPPOSITE, oldOpposite, opposite));
 	}
 
 	/**
@@ -199,7 +198,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case qvtschedulePackage.PROPERTY_DATUM__CLASS_DATUM:
+			case QVTschedulePackage.PROPERTY_DATUM__CLASS_DATUM:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetClassDatum((ClassDatum)otherEnd, msgs);
@@ -215,7 +214,7 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case qvtschedulePackage.PROPERTY_DATUM__CLASS_DATUM:
+			case QVTschedulePackage.PROPERTY_DATUM__CLASS_DATUM:
 				return basicSetClassDatum(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -229,8 +228,8 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case qvtschedulePackage.PROPERTY_DATUM__CLASS_DATUM:
-				return eInternalContainer().eInverseRemove(this, qvtschedulePackage.CLASS_DATUM__PROPERTY_DATUMS, ClassDatum.class, msgs);
+			case QVTschedulePackage.PROPERTY_DATUM__CLASS_DATUM:
+				return eInternalContainer().eInverseRemove(this, QVTschedulePackage.CLASS_DATUM__PROPERTY_DATUMS, ClassDatum.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -243,12 +242,12 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case qvtschedulePackage.PROPERTY_DATUM__PROPERTY:
+			case QVTschedulePackage.PROPERTY_DATUM__PROPERTY:
 				if (resolve) return getProperty();
 				return basicGetProperty();
-			case qvtschedulePackage.PROPERTY_DATUM__CLASS_DATUM:
+			case QVTschedulePackage.PROPERTY_DATUM__CLASS_DATUM:
 				return getClassDatum();
-			case qvtschedulePackage.PROPERTY_DATUM__OPPOSITE:
+			case QVTschedulePackage.PROPERTY_DATUM__OPPOSITE:
 				if (resolve) return getOpposite();
 				return basicGetOpposite();
 		}
@@ -263,13 +262,13 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case qvtschedulePackage.PROPERTY_DATUM__PROPERTY:
+			case QVTschedulePackage.PROPERTY_DATUM__PROPERTY:
 				setProperty((Property)newValue);
 				return;
-			case qvtschedulePackage.PROPERTY_DATUM__CLASS_DATUM:
+			case QVTschedulePackage.PROPERTY_DATUM__CLASS_DATUM:
 				setClassDatum((ClassDatum)newValue);
 				return;
-			case qvtschedulePackage.PROPERTY_DATUM__OPPOSITE:
+			case QVTschedulePackage.PROPERTY_DATUM__OPPOSITE:
 				setOpposite((PropertyDatum)newValue);
 				return;
 		}
@@ -284,13 +283,13 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case qvtschedulePackage.PROPERTY_DATUM__PROPERTY:
+			case QVTschedulePackage.PROPERTY_DATUM__PROPERTY:
 				setProperty((Property)null);
 				return;
-			case qvtschedulePackage.PROPERTY_DATUM__CLASS_DATUM:
+			case QVTschedulePackage.PROPERTY_DATUM__CLASS_DATUM:
 				setClassDatum((ClassDatum)null);
 				return;
-			case qvtschedulePackage.PROPERTY_DATUM__OPPOSITE:
+			case QVTschedulePackage.PROPERTY_DATUM__OPPOSITE:
 				setOpposite((PropertyDatum)null);
 				return;
 		}
@@ -305,11 +304,11 @@ public class PropertyDatumImpl extends AbstractDatumImpl implements PropertyDatu
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case qvtschedulePackage.PROPERTY_DATUM__PROPERTY:
+			case QVTschedulePackage.PROPERTY_DATUM__PROPERTY:
 				return property != null;
-			case qvtschedulePackage.PROPERTY_DATUM__CLASS_DATUM:
+			case QVTschedulePackage.PROPERTY_DATUM__CLASS_DATUM:
 				return getClassDatum() != null;
-			case qvtschedulePackage.PROPERTY_DATUM__OPPOSITE:
+			case QVTschedulePackage.PROPERTY_DATUM__OPPOSITE:
 				return opposite != null;
 		}
 		return super.eIsSet(featureID);

@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getSchedule <em>Schedule</em>}</li>
  * </ul>
  *
- * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractAction()
+ * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractAction()
  * @model abstract="true"
  * @generated
  */
@@ -42,7 +42,7 @@ public interface AbstractAction extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Productions</em>' reference list.
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractAction_Productions()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractAction_Productions()
 	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getProducedBy
 	 * @model opposite="producedBy"
 	 * @generated
@@ -60,7 +60,7 @@ public interface AbstractAction extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Requisites</em>' reference list.
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractAction_Requisites()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractAction_Requisites()
 	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getRequiredBy
 	 * @model opposite="requiredBy"
 	 * @generated
@@ -78,7 +78,7 @@ public interface AbstractAction extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameter Derivations</em>' containment reference list.
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractAction_ParameterDerivations()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractAction_ParameterDerivations()
 	 * @see org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getTarget
 	 * @model opposite="target" containment="true"
 	 * @generated
@@ -95,7 +95,7 @@ public interface AbstractAction extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Order</em>' attribute.
 	 * @see #setOrder(int)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractAction_Order()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractAction_Order()
 	 * @model
 	 * @generated
 	 */
@@ -122,7 +122,7 @@ public interface AbstractAction extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parent</em>' reference.
 	 * @see #setParent(AbstractAction)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractAction_Parent()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractAction_Parent()
 	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractAction#getChildren
 	 * @model opposite="children"
 	 * @generated
@@ -150,7 +150,7 @@ public interface AbstractAction extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Children</em>' reference list.
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractAction_Children()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractAction_Children()
 	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractAction#getParent
 	 * @model opposite="parent"
 	 * @generated
@@ -167,7 +167,7 @@ public interface AbstractAction extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parameters</em>' containment reference list.
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractAction_Parameters()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractAction_Parameters()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -183,7 +183,7 @@ public interface AbstractAction extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Results</em>' containment reference list.
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractAction_Results()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractAction_Results()
 	 * @model containment="true"
 	 * @generated
 	 */
@@ -200,7 +200,7 @@ public interface AbstractAction extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Schedule</em>' container reference.
 	 * @see #setSchedule(Schedule)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractAction_Schedule()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractAction_Schedule()
 	 * @see org.eclipse.qvtd.build.qvtschedule.Schedule#getActions
 	 * @model opposite="actions" transient="false"
 	 * @generated
