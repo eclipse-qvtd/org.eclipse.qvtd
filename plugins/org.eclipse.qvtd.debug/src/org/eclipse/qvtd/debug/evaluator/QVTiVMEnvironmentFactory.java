@@ -11,6 +11,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.debug.evaluator;
 
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.debug.vm.IVMDebuggerShell;
@@ -29,8 +30,8 @@ public class QVTiVMEnvironmentFactory extends QVTiEnvironmentFactory implements 
 	private @Nullable IVMDebuggerShell shell;
 	private long envId = 0;
 	
-	public QVTiVMEnvironmentFactory(@Nullable ProjectManager projectMap) {
-		super(projectMap);
+	public QVTiVMEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
+		super(projectMap, externalResourceSet);
 	}
 
 	public @NonNull IQVTiVMEvaluationEnvironment createEvaluationEnvironment(@NonNull Transformation transformation, @NonNull QVTiModelManager modelManager) {

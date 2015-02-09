@@ -304,7 +304,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		CGRealizedVariable cgVariable = (CGRealizedVariable) variablesStack.getVariable(pRealizedVariable);
 		if (cgVariable == null) {
 			Type pivotType = ClassUtil.nonNullModel(pRealizedVariable.getType());
-			EClassifier eClassifier = (EClassifier) pivotType.getETarget();
+			EClassifier eClassifier = (EClassifier) pivotType.getESObject();
 			if (eClassifier != null) {
 				CGEcoreRealizedVariable cgEcoreRealizedVariable = QVTiCGModelFactory.eINSTANCE.createCGEcoreRealizedVariable();
 				cgEcoreRealizedVariable.setEClassifier(eClassifier);
@@ -379,7 +379,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		LanguageExpression specification = asFunction.getBodyExpression();
 		if (specification != null) {
 			try {
-				ExpressionInOCL query = metamodelManager.parseSpecification(asFunction, specification);
+				ExpressionInOCL query = metamodelManager.parseSpecification(specification);
 				Variable contextVariable = query.getOwnedContext();
 				if (contextVariable != null) {
 					getParameter(contextVariable);
@@ -519,7 +519,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 		cgPropertyAssignment.setTypeId(analyzer.getTypeId(TypeId.OCL_VOID));
 //		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
 		cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, asPropertyAssignment.getValue()));
-		EStructuralFeature eStructuralFeature = (EStructuralFeature) asProperty.getETarget();
+		EStructuralFeature eStructuralFeature = (EStructuralFeature) asProperty.getESObject();
 		if (eStructuralFeature != null) {
 			try {
 				genModelHelper.getGetAccessor(eStructuralFeature);
@@ -589,10 +589,10 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 	@Override
 	public @Nullable CGNamedElement visitPropertyAssignment(@NonNull PropertyAssignment asPropertyAssignment) {
 		Property asTargetProperty = ClassUtil.nonNullModel(asPropertyAssignment.getTargetProperty());
-		LibraryProperty libraryProperty = metamodelManager.getImplementation(null, asTargetProperty);
+		LibraryProperty libraryProperty = metamodelManager.getImplementation(asPropertyAssignment, null, asTargetProperty);
 		CGPropertyAssignment cgPropertyAssignment = null;
 		if (isEcoreProperty(libraryProperty)) {
-			EStructuralFeature eStructuralFeature = (EStructuralFeature) asTargetProperty.getETarget();
+			EStructuralFeature eStructuralFeature = (EStructuralFeature) asTargetProperty.getESObject();
 			if (eStructuralFeature != null) {
 				try {
 					genModelHelper.getGetAccessor(eStructuralFeature);

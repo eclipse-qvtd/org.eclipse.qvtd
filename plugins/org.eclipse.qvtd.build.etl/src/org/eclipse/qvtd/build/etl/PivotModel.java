@@ -30,8 +30,9 @@ import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.emc.emf.EmfUtil;
 import org.eclipse.epsilon.eol.exceptions.models.EolEnumerationValueNotFoundException;
 import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
-import org.eclipse.ocl.pivot.Class;
-import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.epsilon.eol.exceptions.models.EolNotInstantiableModelElementTypeException;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 
@@ -43,7 +44,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 public class PivotModel extends EmfModel {
 	
 	/** The meta model manager. */
-	private OCL qvtUtility;
+	private @NonNull EnvironmentFactory environmentFactory;
 	
 	private boolean isASResource;
 	
@@ -52,10 +53,10 @@ public class PivotModel extends EmfModel {
 	 *
 	 * @param qvtUtility the meta model manager
 	 */
-	public PivotModel(OCL qvtUtility, boolean isASResource) {
+	public PivotModel(@NonNull EnvironmentFactory environmentFactory, boolean isASResource) {
 		
 		this.isASResource = isASResource;
-		this.qvtUtility = qvtUtility;
+		this.environmentFactory = environmentFactory;
 	}
 	
 	public PivotModel(PivotModel pModel) {
@@ -74,16 +75,16 @@ public class PivotModel extends EmfModel {
 	@Override
 	public void loadModelFromUri() throws EolModelLoadingException {
 
-		ResourceSet resourceSet = isASResource ? qvtUtility.getMetamodelManager().getASResourceSet() : qvtUtility.getMetamodelManager().getExternalResourceSet();
+		ResourceSet rSet = isASResource ? environmentFactory.getMetamodelManager().getASResourceSet() : environmentFactory.getResourceSet();
 		determinePackagesFrom(resourceSet);
 		try {
 			if (readOnLoad) {
-				modelImpl = resourceSet.getResource(modelUri, true);
+				modelImpl = rSet.getResource(modelUri, true);
 				if (expand) {
 					EcoreUtil.resolveAll(modelImpl);
 				}
 			} else {
-				modelImpl = resourceSet.createResource(modelUri);
+				modelImpl = rSet.createResource(modelUri);
 			}
 		} catch (RuntimeException e) {
 			throw new EolModelLoadingException(e, this);

@@ -30,13 +30,13 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
+import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.internal.validation.PivotEObjectValidator;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
-import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.validation.ComposedEValidator;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
@@ -70,7 +70,7 @@ public class QVTiCompilerTests extends LoadTestCase
 {
 	@SuppressWarnings("unused")private static ComposedEValidator makeSureRequiredBundleIsLoaded = null;
 	
-	protected static class MyQVT extends OCL.Internal
+	protected static class MyQVT extends OCLInternal
 	{
 		public MyQVT(@NonNull QVTiEnvironmentFactory environmentFactory) {
 			super(environmentFactory);
@@ -88,8 +88,8 @@ public class QVTiCompilerTests extends LoadTestCase
 	
 	protected static class MyQVTiEnvironmentFactory extends QVTiEnvironmentFactory
 	{
-		public MyQVTiEnvironmentFactory(@Nullable ProjectManager projectMap) {
-			super(projectMap);
+		public MyQVTiEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
+			super(projectMap, externalResourceSet);
 	    	setEvaluationTracingEnabled(true);
 		}
 	}
@@ -101,7 +101,7 @@ public class QVTiCompilerTests extends LoadTestCase
 	}
 
 	protected @NonNull MyQVT createQVT() {
-		return new MyQVT(new MyQVTiEnvironmentFactory(getProjectMap()));
+		return new MyQVT(new MyQVTiEnvironmentFactory(getProjectMap(), null));
 	}
 
 	@Override
@@ -258,8 +258,8 @@ public class QVTiCompilerTests extends LoadTestCase
 		OCLstdlibTables.LIBRARY.getClass();		// Ensure coherent initialization
 		ResourceSet resourceSet = myQVT.getResourceSet();
 		resourceSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
-		MetamodelManager.Internal metamodelManager = myQVT.getMetamodelManager();
-		metamodelManager.configureLoadFirstStrategy();
+		MetamodelManagerInternal metamodelManager = myQVT.getMetamodelManager();
+		myQVT.getEnvironmentFactory().configureLoadFirstStrategy();
 		Resource genResource = resourceSet.getResource(genModelURI, true);
 		for (EObject eObject : genResource.getContents()) {
 			if (eObject instanceof GenModel) {

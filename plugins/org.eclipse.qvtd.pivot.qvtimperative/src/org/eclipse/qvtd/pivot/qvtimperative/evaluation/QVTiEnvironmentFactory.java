@@ -10,6 +10,7 @@
  ******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.NamedElement;
@@ -22,8 +23,8 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
 public class QVTiEnvironmentFactory extends AbstractEnvironmentFactory {
 
-	public QVTiEnvironmentFactory(@Nullable ProjectManager projectMap) {
-		super(projectMap);
+	public QVTiEnvironmentFactory(@NonNull ProjectManager projectMap, @Nullable ResourceSet externalResourceSet) {
+		super(projectMap, externalResourceSet);
 	}
 
 	@Override

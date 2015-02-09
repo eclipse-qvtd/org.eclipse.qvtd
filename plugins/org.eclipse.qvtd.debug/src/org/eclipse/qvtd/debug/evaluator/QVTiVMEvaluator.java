@@ -60,17 +60,17 @@ public class QVTiVMEvaluator implements IVMEvaluator
     
 	protected final @NonNull MetamodelManager metamodelManager;
 	protected final @NonNull Transformation transformation;
-	protected final @NonNull QVTiVMEnvironmentFactory envFactory;
+	protected final @NonNull QVTiVMEnvironmentFactory environmentFactory;
 	protected final @NonNull QVTiVMModelManager modelManager;
 	private boolean suspendOnStartup = false;
 
-    private QVTiVMEvaluator(@NonNull QVTiVMEnvironmentFactory envFactory, @NonNull Transformation transformation) {
-    	this.envFactory = envFactory;
-    	this.metamodelManager = envFactory.getMetamodelManager();
+    private QVTiVMEvaluator(@NonNull QVTiVMEnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
+    	this.environmentFactory = environmentFactory;
+    	this.metamodelManager = environmentFactory.getMetamodelManager();
     	this.transformation = transformation;
-    	QVTiTransformationAnalysis transformationAnalysis = envFactory.createTransformationAnalysis();
+    	QVTiTransformationAnalysis transformationAnalysis = environmentFactory.createTransformationAnalysis();
     	transformationAnalysis.analyzeTransformation(transformation);
-    	this.modelManager = envFactory.createModelManager(transformationAnalysis);
+    	this.modelManager = environmentFactory.createModelManager(transformationAnalysis);
 //    	this.modelManager = envFactory.createModelManager(metamodelManager);
     }
 
@@ -83,7 +83,7 @@ public class QVTiVMEvaluator implements IVMEvaluator
         if (typedModel == null) {
         	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
         }
-        Resource resource = metamodelManager.getExternalResourceSet().createResource(modelURI, contentType);
+        Resource resource = environmentFactory.getResourceSet().createResource(modelURI, contentType);
         if (resource != null) {
         	modelManager.addModel(typedModel, resource);
         }
@@ -95,8 +95,8 @@ public class QVTiVMEvaluator implements IVMEvaluator
 
 	public Boolean execute() {
 		Transformation transformation = getTransformation();
-		IQVTiVMEvaluationEnvironment evalEnv = envFactory.createEvaluationEnvironment(transformation, modelManager);
-        QVTiVMRootEvaluationVisitor visitor = envFactory.createEvaluationVisitor(evalEnv);
+		IQVTiVMEvaluationEnvironment evalEnv = environmentFactory.createEvaluationEnvironment(transformation, modelManager);
+        QVTiVMRootEvaluationVisitor visitor = environmentFactory.createEvaluationVisitor(evalEnv);
         visitor.start(suspendOnStartup);
         return (Boolean) transformation.accept(visitor);
 	}
@@ -107,7 +107,7 @@ public class QVTiVMEvaluator implements IVMEvaluator
 	}
 
 	public final @NonNull QVTiVMEnvironmentFactory getEnvironmentFactory() {
-		return envFactory;
+		return environmentFactory;
 	}
 
 	public final @NonNull MetamodelManager getMetamodelManager() {
@@ -128,10 +128,10 @@ public class QVTiVMEvaluator implements IVMEvaluator
         }
         Resource resource;
         if (contentType == null) {
-        	resource = metamodelManager.getExternalResourceSet().getResource(modelURI, true);
+        	resource = environmentFactory.getResourceSet().getResource(modelURI, true);
         }
         else {
-        	resource = metamodelManager.getExternalResourceSet().createResource(modelURI, contentType);
+        	resource = environmentFactory.getResourceSet().createResource(modelURI, contentType);
         	try {
 				resource.load(null);
 			} catch (IOException e) {

@@ -27,7 +27,6 @@ import org.apache.log4j.spi.LoggingEvent;
 import org.apache.log4j.spi.ThrowableInformation;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
@@ -53,7 +52,6 @@ import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
-import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
 import org.eclipse.ocl.pivot.values.Bag;
@@ -171,7 +169,7 @@ public class XtextTestCase extends PivotTestCase
 	public static @NonNull StandaloneProjectMap getProjectMap() {
 		StandaloneProjectMap projectMap2 = projectMap;
 		if (projectMap2 == null) {
-			projectMap = projectMap2 = new StandaloneProjectMap();
+			projectMap = projectMap2 = new StandaloneProjectMap(false);
 		}
 		return projectMap2;
 	}
@@ -330,9 +328,9 @@ public class XtextTestCase extends PivotTestCase
 	protected void setUp() throws Exception {
 		super.setUp();
 		testCaseAppender.install();
-    	if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
-    		OCL.initialize(null);
-    	}
+//    	if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+//    		OCL.initialize(null);
+//    	}
 		PivotStandaloneSetup.doSetup();
 //		CompleteOCLStandaloneSetup.doSetup();
 //		OCLinEcoreStandaloneSetup.doSetup();

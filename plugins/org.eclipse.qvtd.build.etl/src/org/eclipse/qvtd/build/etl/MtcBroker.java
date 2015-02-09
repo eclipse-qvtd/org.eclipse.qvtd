@@ -22,12 +22,15 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.epsilon.common.util.StringProperties;
 import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.resource.OCLASResourceFactory;
-import org.eclipse.ocl.pivot.resource.ASResource;
-import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.qvtd.build.qvtschedule.qvtscheduleFactory;
+import org.eclipse.qvtd.build.qvtschedule.impl.qvtscheduleFactoryImpl;
 
 /**
  * The Class MtcBroker.
@@ -168,7 +171,7 @@ public class MtcBroker {
 	private Map<String, List<PivotModel>> candidateMetamodelContainmentTrees; 
 	
 	/** The meta model manager. */
-	private OCL qvtUtility;
+	private @NonNull EnvironmentFactory environmentFactory;
 	
 	private PivotModel cModel;
 	private PivotModel uModel;
@@ -182,10 +185,23 @@ public class MtcBroker {
 	private ASResource qvtcAS;
 
 	
-	public MtcBroker(URI baseURI, String qvtcSource, OCL myQVT) throws Exception {
+	/**
+	 * Instantiates a new MTC broker.
+	 *
+	 * @param qvtcasUri the qvtcas uri
+	 * @param owner the owner
+	 * @param metamodelManager the meta model manager
+	 * @throws QvtMtcExecutionException If there is a problem registering the required metamodels.
+	 */
+	public MtcBroker(URI baseURI, String qvtcSource, @NonNull EnvironmentFactory environmentFactory) throws QvtMtcExecutionException {
+		
+		this.environmentFactory = environmentFactory;
+		this.baseUri = baseURI;
+		System.out.println("Executing the QVTc to QVTi MTC for " + qvtcSource);
+		
 		
 		this.baseUri = baseURI;
-		this.qvtUtility = myQVT;
+
 		System.out.println("Executing the QVTc to QVTi MTC for " + qvtcSource);
 		URI qvtcURI = baseURI.appendSegment(qvtcSource);
 		//CSResource qvtcCS = myQVT.getCSResource(qvtcURI);
@@ -200,10 +216,7 @@ public class MtcBroker {
 		this.configUri = URI.createURI(modelsBaseUri.toString() + "Config").appendFileExtension("xmi").toString();
 		this.scheduleUri = URI.createURI(modelsBaseUri.toString() + "Schedule").appendFileExtension("xmi").toString();
 		candidateMetamodelContainmentTrees = new HashMap<String, List<PivotModel>>();
-		registerMetamodels(myQVT);
-    	
-		
-
+		registerMetamodels(environmentFactory);
 	}
 
 	/**
@@ -625,17 +638,23 @@ public class MtcBroker {
 	 * @param myQVT the meta model manager
 	 * @throws QvtMtcExecutionException If there is a problem finding the metamodels
 	 */
-	private void registerMetamodels(OCL myQVT) throws QvtMtcExecutionException {
+	private void registerMetamodels(@NonNull EnvironmentFactory environmentFactory) throws QvtMtcExecutionException {
 		
 		URI mmURI = null;
 		// Configuration Metamodel
+		ResourceSet externalResourceSet = environmentFactory.getResourceSet();
 		try {
 			mmURI = URI.createURI(CONFIG_MM);
 		} catch (IllegalArgumentException e) {
 			throw new QvtMtcExecutionException(e.getMessage(), e.getCause());
 		} finally {
-			if (mmURI != null) {
-				registerPackages(myQVT, mmURI);
+			if (path != null) {
+				r = externalResourceSet.getResource(URI.createURI(path, false), true);
+				eObject = r.getContents().get(0);
+				if (eObject instanceof EPackage) {
+				    EPackage p = (EPackage)eObject;
+				    externalResourceSet.getPackageRegistry().put(p.getNsURI(), p);
+				}
 			}
 		}
 		// Containment tree metamodel
@@ -645,35 +664,31 @@ public class MtcBroker {
 		} catch (IllegalArgumentException e) {
 			throw new QvtMtcExecutionException(e.getMessage(), e.getCause());
 		} finally {
-			if (mmURI != null) {
-				registerPackages(myQVT, mmURI);
+			if (path != null) {
+				r = externalResourceSet.getResource(URI.createURI(path, false), true);
+				eObject = r.getContents().get(0);
+				if (eObject instanceof EPackage) {
+				    EPackage p = (EPackage)eObject;
+				    externalResourceSet.getPackageRegistry().put(p.getNsURI(), p);
+				}
 			}
 			
 		}
 		// Schedule metamodel
 		mmURI = null;
 		try {
-			mmURI =  URI.createURI(QVTS_MM);
-		} catch (IllegalArgumentException e) {
-			throw new QvtMtcExecutionException(e.getMessage(), e.getCause());
+			qvtscheduleFactory sf = new qvtscheduleFactoryImpl();
+			path = getResourceUriFromClass(sf.getClass(), QVTS_MM);
+		} catch (URISyntaxException e) {
+			throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
 		} finally {
-			if (mmURI != null) {
-				registerPackages(myQVT, mmURI);
-			}
-		}
-	}
-
-	/**
-	 * @param myQVT
-	 * @param mmURI
-	 */
-	private void registerPackages(OCL myQVT, URI mmURI) {
-		Resource r;
-		r = myQVT.getResourceSet().getResource(mmURI, true);
-		for (EObject eObject : r.getContents()) {
-			if (eObject instanceof EPackage) {
-			    EPackage p = (EPackage)eObject;
-			    myQVT.getResourceSet().getPackageRegistry().put(p.getNsURI(), p);
+			if (path != null) {
+				r = externalResourceSet.getResource(URI.createURI(path, false), true);
+				eObject = r.getContents().get(0);
+				if (eObject instanceof EPackage) {
+				    EPackage p = (EPackage)eObject;
+				    externalResourceSet.getPackageRegistry().put(p.getNsURI(), p);
+				}
 			}
 		}
 	}
@@ -697,7 +712,7 @@ public class MtcBroker {
 	protected PivotModel createModel(String modeUri, String modelName, String modelAliases, String metamodelUris,
 				boolean readOnLoad, boolean storeOnDispoal, boolean cached, boolean expand) throws QvtMtcExecutionException {
 	
-		PivotModel model = new PivotModel(qvtUtility, false);
+		PivotModel model = new PivotModel(environmentFactory, false);
 		StringProperties properties = new StringProperties();
 		properties.put(EmfModel.PROPERTY_NAME, modelName);
 		properties.put(EmfModel.PROPERTY_ALIASES, modelAliases);
@@ -717,25 +732,25 @@ public class MtcBroker {
 	
 	
 	private PivotModel createASModel(String modeUri, String modelName, String modelAliases, String metamodelUris,
-			boolean readOnLoad, boolean storeOnDispoal, boolean cached, boolean expand) throws QvtMtcExecutionException {
-	
-		PivotModel model = new PivotModel(qvtUtility, true);
-		StringProperties properties = new StringProperties();
-		properties.put(EmfModel.PROPERTY_NAME, modelName);
-		properties.put(EmfModel.PROPERTY_ALIASES, modelAliases);
-		properties.put(EmfModel.PROPERTY_METAMODEL_URI, metamodelUris);
-		properties.put(EmfModel.PROPERTY_MODEL_URI, modeUri);
-		properties.put(EmfModel.PROPERTY_READONLOAD, String.valueOf(readOnLoad));
-		properties.put(EmfModel.PROPERTY_STOREONDISPOSAL, String.valueOf(storeOnDispoal));
-		properties.put(EmfModel.PROPERTY_CACHED, String.valueOf(cached));
-		properties.put(EmfModel.PROPERTY_EXPAND, String.valueOf(expand));
-		try {
-			model.load(properties, "");
-		} catch (EolModelLoadingException e) {
-			throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
-		}
-		return model;
+			boolean readOnLoad, boolean storeOnDispoal, boolean cached) throws QvtMtcExecutionException {
+
+	PivotModel model = new PivotModel(environmentFactory, true);
+	StringProperties properties = new StringProperties();
+	properties.put(EmfModel.PROPERTY_NAME, modelName);
+	properties.put(EmfModel.PROPERTY_ALIASES, modelAliases);
+	properties.put(EmfModel.PROPERTY_METAMODEL_URI, metamodelUris);
+	properties.put(EmfModel.PROPERTY_MODEL_URI, modeUri);
+	properties.put(EmfModel.PROPERTY_READONLOAD, String.valueOf(readOnLoad));
+	properties.put(EmfModel.PROPERTY_STOREONDISPOSAL, String.valueOf(storeOnDispoal));
+	properties.put(EmfModel.PROPERTY_CACHED, String.valueOf(cached));
+	properties.put(EmfModel.PROPERTY_EXPAND, String.valueOf(false));
+	try {
+		model.load(properties, "");
+	} catch (EolModelLoadingException e) {
+		throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
 	}
+	return model;
+}
 	
 	/**
 	 * Change resource to source. 

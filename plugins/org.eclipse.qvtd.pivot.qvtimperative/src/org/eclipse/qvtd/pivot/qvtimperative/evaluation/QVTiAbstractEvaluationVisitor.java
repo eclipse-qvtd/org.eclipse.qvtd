@@ -94,7 +94,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends OCLEvaluationVisitor
 				Object boxedValue = safeVisit(propertyAssignment.getValue());
 				Property targetProperty = propertyAssignment.getTargetProperty();
 				Class<?> instanceClass = null;
-				EObject eTarget = targetProperty.getETarget();
+				EObject eTarget = targetProperty.getESObject();
 				if (eTarget instanceof EStructuralFeature) {
 					EClassifier eType = ((EStructuralFeature)eTarget).getEType();
 					if (eType != null) {

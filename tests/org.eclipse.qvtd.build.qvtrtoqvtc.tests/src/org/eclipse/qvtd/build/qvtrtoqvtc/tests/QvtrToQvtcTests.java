@@ -7,15 +7,12 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.ocl.pivot.manager.MetaModelManager;
-import org.eclipse.ocl.pivot.manager.MetaModelManagerResourceSetAdapter;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
+import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
-import org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBaseStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtrelation.QVTrelationStandaloneSetup;
 import org.junit.After;
 import org.junit.Before;
@@ -30,14 +27,11 @@ public class QvtrToQvtcTests extends LoadTestCase {
 	 */
 	@Before
     public void setUp() throws Exception {
-	    
-		BaseLinkingService.DEBUG_RETRY.setState(true);
+//		BaseLinkingService.DEBUG_RETRY.setState(true);
 		super.setUp();
 		QVTrelationStandaloneSetup.doSetup();
 		QVTcoreStandaloneSetup.doSetup();
-		QVTcoreBaseStandaloneSetup.doSetup();
-		metaModelManager = new MetaModelManager();
-        MetaModelManagerResourceSetAdapter.getAdapter(ClassUtil.nonNullState(resourceSet), metaModelManager);
+//		QVTcoreBaseStandaloneSetup.doSetup();
     }
  
     /* (non-Javadoc)
@@ -98,17 +92,19 @@ public class QvtrToQvtcTests extends LoadTestCase {
     
     @Test
     public void testSeqToStm() throws Exception {
+		OCL ocl = OCL.newInstance(OCL.NO_PROJECTS);
+    	ResourceSet asResourceSet = ocl.getMetamodelManager().getASResourceSet();
     	URL projectURL = this.getClass().getResource("seqtostm/SeqToStm.qvtras");
     	File f = new File(projectURL.getFile());
     	URI qvtrURI = URI.createFileURI(f.toString());
-    	Resource qvtrResource = metaModelManager.getASResourceSet().getResource(qvtrURI, true);
+		Resource qvtrResource = asResourceSet.getResource(qvtrURI, true);
     	URI qvtcURI = qvtrURI.trimFileExtension();
     	qvtcURI = qvtcURI.appendFileExtension("qvtcas");
-    	Resource qvtcResource = metaModelManager.getASResourceSet().createResource(qvtcURI, null);
+    	Resource qvtcResource = asResourceSet.createResource(qvtcURI, null);
     	URI qvtcTraceURI = qvtrURI.trimFileExtension();
     	qvtcTraceURI = qvtcTraceURI.appendFileExtension("ecore.oclas");
-    	Resource qvtcTraceResource = metaModelManager.getASResourceSet().createResource(qvtcTraceURI, null);
-    	QvtrToQvtcTransformation t = new QvtrToQvtcTransformation(metaModelManager, qvtrResource, qvtcResource, qvtcTraceResource);
+    	Resource qvtcTraceResource = asResourceSet.createResource(qvtcTraceURI, null);
+    	QvtrToQvtcTransformation t = new QvtrToQvtcTransformation(ocl.getEnvironmentFactory(), qvtrResource, qvtcResource, qvtcTraceResource);
 		t.prepare();
 		t.execute();
 		Map<Object, Object> options = new HashMap<Object, Object>();
@@ -117,7 +113,7 @@ public class QvtrToQvtcTests extends LoadTestCase {
         assertNoResourceErrors("Trace save", qvtcTraceResource);
         t.saveCore(qvtcResource, t.getCoreRoots(), options);
         assertNoResourceErrors("Core save", qvtcResource);
-		
+        ocl.dispose();
     }
 
 }

@@ -34,7 +34,6 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
 {
 	protected final @NonNull QVTiEnvironmentFactory environmentFactory;
 	protected final @NonNull Transformation transformation;
-	protected final @NonNull PivotMetamodelManager metamodelManager;
 	protected final @NonNull QVTiModelManager modelManager;
     private EvaluationMonitor monitor = null;
     private boolean canceled = false;
@@ -42,7 +41,6 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
     public QVTiPivotEvaluator(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
     	this.environmentFactory = environmentFactory;
     	this.transformation = transformation;
-    	this.metamodelManager = environmentFactory.getMetamodelManager();
     	QVTiTransformationAnalysis transformationAnalysis = environmentFactory.createTransformationAnalysis();
     	transformationAnalysis.analyzeTransformation(transformation);
     	this.modelManager = environmentFactory.createModelManager(transformationAnalysis);
@@ -77,7 +75,7 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
         if (typedModel == null) {
         	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
         }
-        Resource resource = metamodelManager.getExternalResourceSet().createResource(modelURI, contentType);
+        Resource resource = environmentFactory.getResourceSet().createResource(modelURI, contentType);
         if (resource != null) {
         	modelManager.addModel(typedModel, resource);
         }
@@ -105,7 +103,7 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
 	}
 
 	public final @NonNull PivotMetamodelManager getMetamodelManager() {
-		return metamodelManager;
+		return environmentFactory.getMetamodelManager();
 	}
 	
 	public final @NonNull QVTiModelManager getModelManager() {
@@ -129,7 +127,7 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
         if (typedModel == null) {
         	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
         }
-        Resource resource = metamodelManager.getExternalResourceSet().getResource(modelURI, true);
+        Resource resource = environmentFactory.getResourceSet().getResource(modelURI, true);
         if (resource != null) {
         	modelManager.addModel(typedModel, resource);
         }
@@ -141,10 +139,10 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
         }
         Resource resource;
         if (contentType == null) {
-        	resource = metamodelManager.getExternalResourceSet().getResource(modelURI, true);
+        	resource = environmentFactory.getResourceSet().getResource(modelURI, true);
         }
         else {
-        	resource = metamodelManager.getExternalResourceSet().createResource(modelURI, contentType);
+        	resource = environmentFactory.getResourceSet().createResource(modelURI, contentType);
         	try {
 				resource.load(null);
 			} catch (IOException e) {
