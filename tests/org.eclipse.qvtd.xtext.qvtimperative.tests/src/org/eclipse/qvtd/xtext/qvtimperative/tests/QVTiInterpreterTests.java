@@ -17,7 +17,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -28,6 +27,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
@@ -365,7 +365,8 @@ public class QVTiInterpreterTests extends LoadTestCase
     @Test
     public void testClassesCS2AS_bug457239() throws Exception {
     	CompleteOCLStandaloneSetup.doSetup();
-        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(ClassUtil.nonNullState(metamodelManager), "ClassesCS2AS/bug457239", "ClassesCS2AS.qvti");
+    	MyQVT myQVT = createQVT();
+        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(myQVT.getEnvironmentFactory(), "ClassesCS2AS/bug457239", "ClassesCS2AS.qvti");
     	testEvaluator.saveTransformation(null);
         
         testEvaluator.loadModel("leftCS", "example_input.xmi");
@@ -375,18 +376,20 @@ public class QVTiInterpreterTests extends LoadTestCase
         testEvaluator.dispose();
     	URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
         assertLoadable(txURI);
+        myQVT.dispose();
     }
     
     @Test
     public void testClassesCS2AS_bug457239b() throws Exception {
     	CompleteOCLStandaloneSetup.doSetup();
-    	
+    	MyQVT myQVT = createQVT();
     	URI baseURI = URI.createURI("platform:/resource/org.eclipse.qvtd.xtext.qvtimperative.tests/src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassesCS2AS/bug457239");
     	URI txURI = baseURI.appendSegment("ClassesCS2ASv2_AS.qvtias"); 
     	assertLoadable(ClassUtil.nonNullState(txURI));
      
-    	QVTiPivotEvaluator testEvaluator =  new QVTiPivotEvaluator(ClassUtil.nonNullState(metamodelManager),
-    				ClassUtil.nonNullState(loadTransformation(metamodelManager, txURI)));
+    	QVTiEnvironmentFactory environmentFactory = myQVT.getEnvironmentFactory();
+		QVTiPivotEvaluator testEvaluator =  new QVTiPivotEvaluator(environmentFactory,
+    				ClassUtil.nonNullState(loadTransformation(environmentFactory.getMetamodelManager(), txURI)));
     	    	
     	URI csModelURI = baseURI.appendSegment("example_input.xmi");
     	URI asModelURI = baseURI.appendSegment("example_output.xmi");
@@ -398,9 +401,10 @@ public class QVTiInterpreterTests extends LoadTestCase
         testEvaluator.saveModels();
         testEvaluator.dispose();
         
-        ResourceSet rSet = metamodelManager.getExternalResourceSet();        
+        ResourceSet rSet = environmentFactory.getResourceSet();        
         assertSameModel(rSet.getResource(refAsModelURI, true), 
         				rSet.getResource(asModelURI, true));
+        myQVT.dispose();
     }
     
    static  protected Transformation loadTransformation(MetamodelManager metamodelManager, URI txURI) {
