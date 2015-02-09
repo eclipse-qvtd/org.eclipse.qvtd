@@ -2,10 +2,10 @@ package org.eclipse.qvtd.buid.cs2as;
 
 import java.net.URISyntaxException;
 
-
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.qvtd.build.etl.EtlTask;
 import org.eclipse.qvtd.build.etl.MtcBroker;
@@ -45,16 +45,16 @@ public class OCL2QVTiBroker extends MtcBroker {
 	private @NonNull PivotModelUtil pmUtil;
 	
 
-	public OCL2QVTiBroker(URI baseURI, String oclDocName, OCL ocl)
+	public OCL2QVTiBroker(URI baseURI, String oclDocName, @NonNull EnvironmentFactory environmentFactory)
 		throws Exception {
-		this(baseURI, oclDocName, ocl, true);
+		this(baseURI, oclDocName, environmentFactory, true);
 	}
 			
-	public OCL2QVTiBroker(URI baseURI, String oclDocName, OCL ocl, boolean usesMiddleFoldedInInputs)
+	public OCL2QVTiBroker(URI baseURI, String oclDocName, @NonNull EnvironmentFactory environmentFactory, boolean usesMiddleFoldedInInputs)
 		throws Exception {
 		
-		super(baseURI, oclDocName,  ocl);
-		this.pmUtil = new PivotModelUtil(ocl);
+		super(baseURI, oclDocName, environmentFactory);
+		this.pmUtil = new PivotModelUtil(environmentFactory);
 		this.oclDocUri = baseURI.appendSegment(oclDocName).toString();
 	
 		if (!usesMiddleFoldedInInputs) {
@@ -73,7 +73,8 @@ public class OCL2QVTiBroker extends MtcBroker {
 		loadConfigurationModel();
 		createContainmentTrees();
 		sModel = qvtpToQvts(pModel);
-		qvtpFlatScheduling(pModel, sModel);
+		//qvtpFlatScheduling(pModel, sModel);
+		qvtpNestingScheduling(pModel, sModel);
 		iModel = qvtpQvtsToQvti(pModel, sModel);
 	}
 	

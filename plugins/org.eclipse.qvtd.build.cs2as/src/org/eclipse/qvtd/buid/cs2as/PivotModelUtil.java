@@ -3,17 +3,18 @@ package org.eclipse.qvtd.buid.cs2as;
 import org.eclipse.epsilon.common.util.StringProperties;
 import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
-import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.build.etl.PivotModel;
 import org.eclipse.qvtd.build.etl.QvtMtcExecutionException;
 
 public class PivotModelUtil {
 
-	private OCL ocl;
+	private @NonNull EnvironmentFactory environmentFactory;
 	
-	public PivotModelUtil(OCL mmManager) {
+	public PivotModelUtil(@NonNull EnvironmentFactory environmentFactory) {
 		
-		this.ocl = mmManager;
+		this.environmentFactory = environmentFactory;
 	}
 	
 	/**
@@ -35,7 +36,7 @@ public class PivotModelUtil {
 	public PivotModel createPivotModel(String modeUri, String modelName, String modelAliases, String metamodelUris,
 			boolean readOnLoad, boolean storeOnDispoal, boolean cached, boolean resolveExternalRefs, boolean isPivotResource) throws QvtMtcExecutionException {
 
-		PivotModel model = new PivotModel(ocl, isPivotResource);
+		PivotModel model = new PivotModel(environmentFactory, isPivotResource);
 		StringProperties properties = new StringProperties();
 		properties.put(EmfModel.PROPERTY_NAME, modelName);
 		properties.put(EmfModel.PROPERTY_ALIASES, modelAliases);

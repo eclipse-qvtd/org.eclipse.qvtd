@@ -284,6 +284,14 @@
             </slotExpression>
           </assignment>
         </bottomPattern>
+        <mappingStatement xsi:type="qvti:MappingSequence">
+          <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..KiamaRewrite.qvtp.qvtias.uPlus_right">
+            <binding boundVariable="#qV..KiamaRewrite.qvtp.qvtias.uPlus_right.leftCS.guard.plusCS">
+              <value xsi:type="pivot:VariableExp" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.PlusCS"
+                  referredVariable="#qV..KiamaRewrite.qvtp.qvtias.uPlus_left.leftCS.guard.plusCS"/>
+            </binding>
+          </mappingStatements>
+        </mappingStatement>
       </rule>
       <rule xsi:type="qvti:Mapping" xmi:id="m..KiamaRewrite.qvtp.qvtias.uPlus_right"
           name="uPlus_right">
@@ -621,23 +629,6 @@
           <mappingStatements xsi:type="qvti:MappingLoop">
             <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.1"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
-              <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.PlusCS"
-                  referredType="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.PlusCS"/>
-            </ownedSource>
-            <ownedBody xsi:type="qvti:MappingSequence">
-              <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..KiamaRewrite.qvtp.qvtias.uPlus_right">
-                <binding boundVariable="#qV..KiamaRewrite.qvtp.qvtias.uPlus_right.leftCS.guard.plusCS">
-                  <value xsi:type="pivot:VariableExp" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.PlusCS"
-                      referredVariable="#i..KiamaRewrite.qvtp.qvtias.__root__.0.5.plusCS"/>
-                </binding>
-              </mappingStatements>
-            </ownedBody>
-            <ownedIterators xmi:id="i..KiamaRewrite.qvtp.qvtias.__root__.0.5.plusCS"
-                name="plusCS" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.PlusCS"/>
-          </mappingStatements>
-          <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.1"
-                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.NumCS"
                   referredType="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.NumCS"/>
             </ownedSource>
@@ -645,11 +636,11 @@
               <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..KiamaRewrite.qvtp.qvtias.uNum_deep">
                 <binding boundVariable="#qV..KiamaRewrite.qvtp.qvtias.uNum_deep.leftCS.guard.numCS">
                   <value xsi:type="pivot:VariableExp" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.NumCS"
-                      referredVariable="#i..KiamaRewrite.qvtp.qvtias.__root__.0.6.numCS"/>
+                      referredVariable="#i..KiamaRewrite.qvtp.qvtias.__root__.0.5.numCS"/>
                 </binding>
               </mappingStatements>
             </ownedBody>
-            <ownedIterators xmi:id="i..KiamaRewrite.qvtp.qvtias.__root__.0.6.numCS"
+            <ownedIterators xmi:id="i..KiamaRewrite.qvtp.qvtias.__root__.0.5.numCS"
                 name="numCS" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.NumCS"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
@@ -662,11 +653,11 @@
               <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..KiamaRewrite.qvtp.qvtias.uPlus_deep">
                 <binding boundVariable="#qV..KiamaRewrite.qvtp.qvtias.uPlus_deep.leftCS.guard.plusCS">
                   <value xsi:type="pivot:VariableExp" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.PlusCS"
-                      referredVariable="#i..KiamaRewrite.qvtp.qvtias.__root__.0.7.plusCS"/>
+                      referredVariable="#i..KiamaRewrite.qvtp.qvtias.__root__.0.6.plusCS"/>
                 </binding>
               </mappingStatements>
             </ownedBody>
-            <ownedIterators xmi:id="i..KiamaRewrite.qvtp.qvtias.__root__.0.7.plusCS"
+            <ownedIterators xmi:id="i..KiamaRewrite.qvtp.qvtias.__root__.0.6.plusCS"
                 name="plusCS" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.PlusCS"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
@@ -679,11 +670,11 @@
               <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..KiamaRewrite.qvtp.qvtias.uNum_height">
                 <binding boundVariable="#qV..KiamaRewrite.qvtp.qvtias.uNum_height.leftCS.guard.numCS">
                   <value xsi:type="pivot:VariableExp" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.NumCS"
-                      referredVariable="#i..KiamaRewrite.qvtp.qvtias.__root__.0.8.numCS"/>
+                      referredVariable="#i..KiamaRewrite.qvtp.qvtias.__root__.0.7.numCS"/>
                 </binding>
               </mappingStatements>
             </ownedBody>
-            <ownedIterators xmi:id="i..KiamaRewrite.qvtp.qvtias.__root__.0.8.numCS"
+            <ownedIterators xmi:id="i..KiamaRewrite.qvtp.qvtias.__root__.0.7.numCS"
                 name="numCS" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.NumCS"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
@@ -696,11 +687,11 @@
               <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..KiamaRewrite.qvtp.qvtias.uPlus_height">
                 <binding boundVariable="#qV..KiamaRewrite.qvtp.qvtias.uPlus_height.leftCS.guard.plusCS">
                   <value xsi:type="pivot:VariableExp" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.PlusCS"
-                      referredVariable="#i..KiamaRewrite.qvtp.qvtias.__root__.0.9.plusCS"/>
+                      referredVariable="#i..KiamaRewrite.qvtp.qvtias.__root__.0.8.plusCS"/>
                 </binding>
               </mappingStatements>
             </ownedBody>
-            <ownedIterators xmi:id="i..KiamaRewrite.qvtp.qvtias.__root__.0.9.plusCS"
+            <ownedIterators xmi:id="i..KiamaRewrite.qvtp.qvtias.__root__.0.8.plusCS"
                 name="plusCS" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.PlusCS"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
@@ -713,11 +704,11 @@
               <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..KiamaRewrite.qvtp.qvtias.uNum_value">
                 <binding boundVariable="#qV..KiamaRewrite.qvtp.qvtias.uNum_value.leftCS.guard.numCS">
                   <value xsi:type="pivot:VariableExp" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.NumCS"
-                      referredVariable="#i..KiamaRewrite.qvtp.qvtias.__root__.0.10.numCS"/>
+                      referredVariable="#i..KiamaRewrite.qvtp.qvtias.__root__.0.9.numCS"/>
                 </binding>
               </mappingStatements>
             </ownedBody>
-            <ownedIterators xmi:id="i..KiamaRewrite.qvtp.qvtias.__root__.0.10.numCS"
+            <ownedIterators xmi:id="i..KiamaRewrite.qvtp.qvtias.__root__.0.9.numCS"
                 name="numCS" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.NumCS"/>
           </mappingStatements>
         </mappingStatement>
