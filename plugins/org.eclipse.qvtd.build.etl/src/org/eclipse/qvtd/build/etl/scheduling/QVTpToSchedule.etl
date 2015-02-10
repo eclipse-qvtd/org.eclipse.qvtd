@@ -132,10 +132,13 @@ rule PropertyCallExpToPropertyDatum
     transform pCallExp : QVTp!PropertyCallExp
     to pDatum : QVTs!PropertyDatum {
        
+        // guard: PropertyCallExp belonging to a mapping and
+        //        the referred property doesn't have any property datum
 		guard { 
 			var propContext = pCallExp.getContextType();
 			var refProperty = pCallExp.referredProperty;
-			return pCallExp.isContainedInAnArea() and refProperty.propertyDatumNotCreated(propContext);
+			return pCallExp.isContainedInAnArea() and 
+					refProperty.propertyDatumNotCreated(propContext);
 		}
 		var propContext = pCallExp.getContextType();
 		var refProperty = pCallExp.referredProperty;
@@ -147,11 +150,14 @@ rule PropertyCallExpToPropertyDatum
 rule OppositePropertyCallExpToPropertyDatum
     transform oPropCallExp : QVTp!OppositePropertyCallExp
     to pDatum : QVTs!PropertyDatum {
-       
+
+        // guard: OppPropertyCallExp belonging to a mapping and
+        //        the referred property doesn't have any property datum
 		guard { 
 			var propContext = oPropCallExp.getContextType();
 			var refProperty = oPropCallExp.referredProperty.opposite;
-       		return pCallExp.isContainedInAnArea() and refProperty.propertyDatumNotCreated(propContext);
+       		return pCallExp.isContainedInAnArea() and 
+       				refProperty.propertyDatumNotCreated(propContext);
 		}
 		var propContext = oPropCallExp.getContextType();
 		var refProperty = oPropCallExp.referredProperty.opposite;
@@ -165,11 +171,11 @@ rule OppositePropertyCallExpToPropertyDatum
 rule PropertyAssignmentToPropertyDatum 
     transform pAssign : QVTp!PropertyAssignment
     to pDatum : QVTs!PropertyDatum {
-       
+
+		// guard: the referred property doesn't have any property datum        
 		guard { 
 			var propContext = pAssign.getContextType();
 			var refProperty = pAssign.targetProperty;
-			var isOpposite = pAssign.isKindOf(QVTp!MiddlePropertyAssignment);
        		return refProperty.propertyDatumNotCreated(propContext);
 		}
 		var propContext = pAssign.getContextType();
@@ -251,7 +257,7 @@ operation QVTp!OperationCallExp analyseOCLExpression(context : QVTp!Type, type2V
 operation QVTp!PropertyCallExp analyseOCLExpression(context : QVTp!Type) : QVTs!PropertyDatum {
 
 	var refProperty = self.referredProperty;
-	return refProperty.getOrCreateAccessedPropertyDatum(context);
+	return refProperty.getOrCreatePropertyDatum(context);
 }
 
 operation QVTp!Type analyseOclContainerCall() : OrderedSet(QVTp!PropertyDatum) {
@@ -266,8 +272,8 @@ operation QVTp!Type analyseOclContainerCall() : OrderedSet(QVTp!PropertyDatum) {
 				// For the time being, let's create the dependency on the forward
 				// containment property
 				--var opposite = prop.opposite;
-				--result.add(opposite.getOrCreateAccessedPropertyDatum(self));
-				result.add(prop.getOrCreateAccessedPropertyDatum(parentClass));
+				--result.add(opposite.getOrCreatePropertyDatum(self));
+				result.add(prop.getOrCreatePropertyDatum(parentClass));
 			}
 		}
 	}
@@ -297,11 +303,26 @@ operation QVTs!PropertyDatum updatePropertyDatum(context: QVTp!Type, prop : QVTp
     if (context <> prop.owningClass) { // Propagate to supertypes as long as the context is not the property owner
 	    for (superClass in context.superClasses) {
 	    	if (superClass.producesDatums()) {
-		    	var superPropDatum = prop.getOrCreateAccessedPropertyDatum(superClass);
+		    	var superPropDatum = prop.getOrCreatePropertyDatum(superClass);
 		    	self.super.add(superPropDatum);
 	    	}
 	    }
     }
+}
+
+operation QVTp!Property propertyDatumNotCreated(context : QVTp!Type) : Boolean {
+    return self.getPropertyDatum(context).isUndefined();
+}
+
+operation QVTp!Property getOrCreatePropertyDatum(context : QVTp!Type) : QVTs!PropertyDatum {
+
+	if (self.propertyDatumNotCreated(context)) {
+		var pDatum = new QVTs!PropertyDatum;
+		pDatum.updatePropertyDatum(context,self);
+		return pDatum;
+	} else {
+		return self.getPropertyDatum(context);
+	}
 }
 
 operation QVTs!PropertyDatum getOrCreateOppositePropDatum() : QVTs!PropertyDatum {
@@ -312,27 +333,12 @@ operation QVTs!PropertyDatum getOrCreateOppositePropDatum() : QVTs!PropertyDatum
 		if (oppProp.isDefined()) {
 			var oppPropContext = oppProp.owningClass;
 			if (oppPropContext.producesDatums()) {
-				var oppositePropDatum = oppProp.getOrCreateAccessedPropertyDatum(oppPropContext);
+				var oppositePropDatum = oppProp.getOrCreatePropertyDatum(oppPropContext);
 				self.opposite = oppositePropDatum;
 				return oppositePropDatum;
 			}
 		}
 		return null;	
-	}
-}
-
-operation QVTp!Property propertyDatumNotCreated(context : QVTp!Type) : Boolean {
-    return self.getPropertyDatum(context).isUndefined();
-}
-
-operation QVTp!Property getOrCreateAccessedPropertyDatum(context : QVTp!Type) : QVTs!PropertyDatum {
-
-	if (self.propertyDatumNotCreated(context)) {
-		var pDatum = new QVTs!PropertyDatum;
-		pDatum.updatePropertyDatum(context,self);
-		return pDatum;
-	} else {
-		return self.getPropertyDatum(context);
 	}
 }
 
@@ -605,7 +611,7 @@ operation QVTp!Class getNode() : rTree!Node {
 
 post{
 	// Traces can't be used because only one pDatum access/assignment is associated with the pDatum via traces
-	// Therefore, update the arguments/results at the end
+	// Therefore, update the requisites/productions at the end
 	for (ma in  QVTs!MappingAction.all) {
 		var m = ma.mapping;
 		var consumedPDatums = m.getPropertyAccesses().collect(x | x.getPropertyDatum()).asOrderedSet();
