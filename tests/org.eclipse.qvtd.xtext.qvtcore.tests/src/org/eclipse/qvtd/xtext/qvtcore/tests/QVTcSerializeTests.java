@@ -53,7 +53,7 @@ public class QVTcSerializeTests extends LoadTestCase
 	}	
 
 	protected ASResource loadQVTiAS(@NonNull OCL ocl, @NonNull URI inputURI) {
-		Resource asResource = ocl.getResourceSet().getResource(inputURI, true);
+		Resource asResource = ocl.getMetamodelManager().getASResourceSet().getResource(inputURI, true);
 //		List<String> conversionErrors = new ArrayList<String>();
 //		RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, null, ecoreResource);
 //		Resource eResource = documentCS.eResource();
