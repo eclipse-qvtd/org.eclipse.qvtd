@@ -39,7 +39,7 @@ Package qvtschedule <http://www.eclipse.org/qvt/0.2/QVTschedule/>
   Class InputAction -> AbstractAction
 
   Class MappingAction -> AbstractAction
-    Reference mapping : Mapping<<1..1>>
+    Reference mapping : Mapping
 
   Class OutputAction -> AbstractAction
 

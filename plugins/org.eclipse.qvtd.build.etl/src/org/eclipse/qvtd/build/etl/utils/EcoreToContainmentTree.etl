@@ -17,3 +17,7 @@ rule EClass2Node
 operation mm!EClass getAllSuperTypes() : OrderedSet{
 	return self.asSequence().closure(x | x.eSuperTypes).asOrderedSet(); -- To remove duplicates
 }
+
+post {
+	"Containment Tree Done".println();
+}

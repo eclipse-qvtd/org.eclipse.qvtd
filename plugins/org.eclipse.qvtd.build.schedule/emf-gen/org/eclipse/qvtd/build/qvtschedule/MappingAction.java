@@ -32,7 +32,7 @@ public interface MappingAction extends AbstractAction {
 	 * @return the value of the '<em>Mapping</em>' reference.
 	 * @see #setMapping(Mapping)
 	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getMappingAction_Mapping()
-	 * @model required="true"
+	 * @model
 	 * @generated
 	 */
 	Mapping getMapping();

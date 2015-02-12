@@ -82,7 +82,6 @@ operation QVTs!Schedule findMapOrdering()  {
 		        }
 		    }
 	    }
-	    
 	    queue.addAll(n.children.excludingAll(visitedNodes));
 	}
 	// Finally we schedule the mapping actions pending to be scheduled

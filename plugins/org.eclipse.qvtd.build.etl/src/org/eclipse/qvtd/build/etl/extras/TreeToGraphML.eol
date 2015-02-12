@@ -2,7 +2,6 @@ var root : new gml!DocumentRoot;
 var graphml : new gml!GraphmlType;
 var g : new gml!GraphType;
 
-root.graphml = graphml;
 root.xMLNSPrefixMap.put("", "http://graphml.graphdrawing.org/xmlns");
 root.xMLNSPrefixMap.put("xsi", "http://www.w3.org/2001/XMLSchema-instance");
 root.xMLNSPrefixMap.put("y", "http://www.yworks.com/xml/graphml");
@@ -10,14 +9,46 @@ root.xMLNSPrefixMap.put("yed", "http://www.yworks.com/xml/yed/3");
 root.xSISchemaLocation.put("http://graphml.graphdrawing.org/xmlns", "http://graphml.graphdrawing.org/xmlns/1.1/graphml.xsd");
 
 
+
+// Key types shared across the transformation.
+var nTypeKey : new gml!KeyType;
+nTypeKey.`for` = gml!KeyForType#node;
+nTypeKey.id = "d5";
+nTypeKey.yfilesType="nodegraphics";
+
+var eTypeKey : new gml!KeyType;	
+eTypeKey.`for` = gml!KeyForType#edge;
+eTypeKey.id = "d9";
+eTypeKey.yfilesType="edgegraphics";
+
+// Graphml Types
+graphml.key.add(nTypeKey);
+graphml.key.add(eTypeKey);
+root.graphml = graphml;
+
 // Graph information
 graphml.graph.add(g);
 g.edgedefault = gml!GraphEdgedefaultType#directed;
 g.id = "G";
 
-for (l in tree!Node.all().select(n | not n.parent.isDefined())) {
+for (l in tree!Node.all().select(n | n.parent.isEmpty())) {
+	var nType : new gml!DataType;
+	var nShape : new gml!ShapeNodeType;
+    var nLabel : new gml!NodeLabelType;
+    var shape : new gml!ShapeType1;
+
+	nLabel.value = l.name;
+	l.name.println();
+	shape.type = gml!ShapeTypeType#rectangle;
+	nShape.nodeLabel.add(nLabel);
+	nShape.shape = shape;
+	nType.key = nTypeKey.id;	
+	nType.shapeNode = nShape;
+	
+
     var n = new gml!NodeType;
-    n.id = "n" + loopCount;
+    n.id = loopCount.toString();
+    n.data.add(nType);
     g.node.add(n);
     l.addChildren(n);
 }
@@ -26,8 +57,21 @@ for (l in tree!Node.all().select(n | not n.parent.isDefined())) {
 
 operation tree!Node addChildren (parent : gml!NodeType) {
     for (c in self.children) {
+    	var nType : new gml!DataType;
+		var nShape : new gml!ShapeNodeType;
+	    var nLabel : new gml!NodeLabelType;
+	    var shape : new gml!ShapeType1;
+	
+		nLabel.value = c.name;
+		c.name.println();
+		shape.type = gml!ShapeTypeType#rectangle;
+		nShape.nodeLabel.add(nLabel);
+		nShape.shape = shape;
+		nType.key = nTypeKey.id;	
+		nType.shapeNode = nShape;
         var n = new gml!NodeType;
         n.id = parent.id + loopCount;
+        n.data.add(nType);
         g.node.add(n);
         
         var e = new gml!EdgeType;

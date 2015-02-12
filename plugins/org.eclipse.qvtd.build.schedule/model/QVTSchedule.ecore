@@ -52,8 +52,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InputAction" eSuperTypes="#//AbstractAction"/>
   <eClassifiers xsi:type="ecore:EClass" name="MappingAction" eSuperTypes="#//AbstractAction">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="mapping" lowerBound="1"
-        eType="ecore:EClass http://www.eclipse.org/qvt/2015/QVTimperative#//Mapping"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mapping" eType="ecore:EClass http://www.eclipse.org/qvt/2015/QVTimperative#//Mapping"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OutputAction" eSuperTypes="#//AbstractAction"/>
   <eClassifiers xsi:type="ecore:EClass" name="ParameterDerivation">
