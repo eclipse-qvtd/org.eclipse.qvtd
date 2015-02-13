@@ -168,12 +168,16 @@ operation QVT!Variable oppositePattern() : QVT!CorePattern  {
  */
 @cached
 operation QVT!OCLExpression getArea() : QVT!Area {
+	var retVal : QVT!OCLExpression; 
     if (self.isTypeOf(QVT!VariableExp)) {
-        if (self.referredVariable.type() == null) {
-            return null;
+    	if (self.referredVariable.type() == null) {
+    		self.println();
+        	throw "Error! All variables should have types?" + self.type();
+            //return null;
         }
         return self.referredVariable.oppositePattern().area;
     } else if (self.isKindOf(QVT!CallExp)) {
+    	// TODO Calling operations in the context is trycky, analyze this!
         return self.ownedSource.getArea();
     } else if (self.isTypeOf(QVT!IfExp)) {
         return self.ownedCondition.getArea();

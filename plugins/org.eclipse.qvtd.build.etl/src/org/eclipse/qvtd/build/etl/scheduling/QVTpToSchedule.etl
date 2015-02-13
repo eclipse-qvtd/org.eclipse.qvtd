@@ -500,6 +500,7 @@ operation QVTp!Mapping getOperationCallExps() : Sequence {
 
 @cached
 operation QVTp!CallExp getContextType() : QVTp!Type {
+	// TODO Calling operations in the context is trycky, analyze this!
 	return self.ownedSource.type;
 }
 

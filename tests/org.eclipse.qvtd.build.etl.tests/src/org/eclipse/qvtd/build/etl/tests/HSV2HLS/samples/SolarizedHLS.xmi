@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:hls="http://www.eclipse.org/qvt/examples/0.1/HLSTree"
+    xsi:schemaLocation="http://www.eclipse.org/qvt/examples/0.1/HLSTree ../HLSTree.ecore">
+  <hls:HLSNode name="base03"/>
+  <hls:HLSNode name="base03"/>
+  <hls:HLSNode name="base03"/>
+  <hls:HLSNode name="base03">
+    <children name="base02"/>
+    <children name="base01"/>
+    <children name="yellow"/>
+    <children name="base2"/>
+  </hls:HLSNode>
+</xmi:XMI>

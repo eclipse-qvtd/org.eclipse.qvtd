@@ -310,10 +310,14 @@ rule MappingActions
     {
         guard : ma.parent.isDefined()
         
+        //ma.mapping.name.println();
         mc.referredMapping ::= QVTp!Mapping.all().selectOne(m | ma.mapping.name == m.name);
         mc.binding.addAll(ma.parameters.equivalent());
         for (p in ma.parameters.select(dp | not dp.secondaryParameter.isDefined())) {
         	var binding = p.equivalent();
+        	//binding.println("MappingActions ");
+        	//p.variable.type.println();
+        	//ma.parent.getAllContextDataParameters(p.variable.type).variable
         	binding.value.referredVariable ::= ma.parent.getAllContextDataParameters(p.variable.type).first().variable.getSameVariable();
         	binding.value.type = binding.value.referredVariable.type;
         }
@@ -396,7 +400,7 @@ rule BindingLoops
         		//for child in pp.property->select(e | e.oclIsTypeOf(dp.v.type))
         		//"selectLoop".println();
         		var it = new QVTi!Variable;
-		        it.name = "child";
+		        it.name = sp.dataParameter.variable.type.name.toLowerCase();
 		        it.type = sp.dataParameter.variable.type;
 		        loop.ownedIterators.add(it);
 		        

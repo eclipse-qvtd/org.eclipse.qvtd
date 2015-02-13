@@ -1,63 +1,15 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:eCoreContainemntTree="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree">
-  <eCoreContainemntTree:Node name="Configuration" children="/4">
-    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.etl/bin/QVTcConfig.ecore#//Configuration"/>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="Direction" parent="/4" superTypes="/2">
-    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.etl/bin/QVTcConfig.ecore#//Direction"/>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="NamedElement" subTypes="/1 /4 /3">
-    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.etl/bin/QVTcConfig.ecore#//NamedElement"/>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="Import" parent="/4" superTypes="/2">
-    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.etl/bin/QVTcConfig.ecore#//Import"/>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="Transformation" parent="/0" children="/1 /3" superTypes="/2">
-    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.etl/bin/QVTcConfig.ecore#//Transformation"/>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="Node">
-    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.etl/bin/ECoreContainmentTree.ecore#//Node"/>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="AbstractDatum" parent="/15" subTypes="/8 /14">
-    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.schedule/bin/QVTSchedule.ecore#//AbstractDatum"/>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="AbstractAction" parent="/15" children="/10" subTypes="/11 /12 /13">
-    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.schedule/bin/QVTSchedule.ecore#//AbstractAction"/>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="ClassDatum" parent="/15" children="/14" superTypes="/6">
-    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.schedule/bin/QVTSchedule.ecore#//ClassDatum"/>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="DataParameter" parent="/10">
-    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.schedule/bin/QVTSchedule.ecore#//DataParameter"/>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="DistinctData" parent="/7" children="/9">
-    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.schedule/bin/QVTSchedule.ecore#//DistinctData"/>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="InputAction" parent="/15" superTypes="/7">
-    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.schedule/bin/QVTSchedule.ecore#//InputAction"/>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="MappingAction" parent="/15" superTypes="/7">
-    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.schedule/bin/QVTSchedule.ecore#//MappingAction"/>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="OutputAction" parent="/15" superTypes="/7">
-    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.schedule/bin/QVTSchedule.ecore#//OutputAction"/>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="PropertyDatum" parent="/8 /15" superTypes="/6">
-    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.schedule/bin/QVTSchedule.ecore#//PropertyDatum"/>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="Schedule" children="/6 /7 /8 /11 /12 /13 /14">
-    <element href="../../../../../../../../../../plugins/org.eclipse.qvtd.build.schedule/bin/QVTSchedule.ecore#//Schedule"/>
-  </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="Node" parent="/19" superTypes="/18">
+  <eCoreContainemntTree:Node name="Node" parent="/3" superTypes="/2">
     <element href="SimpleGraph.ecore#//Node"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="Edge" parent="/19" superTypes="/18">
+  <eCoreContainemntTree:Node name="Edge" parent="/3" superTypes="/2">
     <element href="SimpleGraph.ecore#//Edge"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="Element" parent="/19" subTypes="/16 /17">
+  <eCoreContainemntTree:Node name="Element" parent="/3" subTypes="/0 /1">
     <element href="SimpleGraph.ecore#//Element"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="Graph" children="/18 /16 /17">
+  <eCoreContainemntTree:Node name="Graph" children="/2 /0 /1">
     <element href="SimpleGraph.ecore#//Graph"/>
   </eCoreContainemntTree:Node>
 </xmi:XMI>

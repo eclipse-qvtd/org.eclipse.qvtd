@@ -1,21 +1,20 @@
-[% for (i in qvtm!Unit.all()) { %]
-import [%=i.name%]: '[%=i.usedPackage.nsURI%]';
+[% for (i in QVTc!Model.all.first().ownedImports) { %]
+import [%=i.name%]: '[%=i.importedNamespace.URI%]';
 [% } %]
 
-[% for (t in qvtm!Transformation.all()) { %]
+[% for (t in QVTc!Transformation.all()) { %]
 transformation [%=t.name %] {
   [%for (mp in t.modelParameter) { %]
     [%=mp.name%] imports [%=mp.usedPackage.collect(up | up.name).concat(",")%]; 
   [%}%]
 }
 
-  [%for (r in t.rule) { 
+  [%for (r in t.rule) {
         r.declaration(t);
-    }%]
-    [%
+    }
 }%]
 
-[% operation Mapping declaration(t) { %]
+[% operation QVTc!Mapping declaration(t : QVTc!Transformation) { %]
 map [%if (self.name.isDefined()){%][%=self.name%][%if (t.isDefined()){%] in [%=t.name%][%}}%] {
 [% for (d in self.domain) {
     var domainName = "";
@@ -37,9 +36,9 @@ map [%if (self.name.isDefined()){%][%=self.name%][%if (t.isDefined()){%] in [%=t
 }
 [%}%]
 
-[% operation GuardPattern declaration() {%]
+[% operation QVTc!GuardPattern declaration() {%]
 [%  if (not self.variable.isEmpty()) {
-        for (v in self.variable.select(v | v.isTypeOf(qvtm!Variable))){%]
+        for (v in self.variable.select(v | v.isTypeOf(QVTc!Variable))){%]
     [%=v.name+":"+v.type.name%][%if(hasMore){%],
 [%out.print("        ");}%]
       [%}%]
@@ -51,12 +50,12 @@ map [%if (self.name.isDefined()){%][%=self.name%][%if (t.isDefined()){%] in [%=t
     }%]
 [%} %] 
 
-[% operation BottomPattern declaration() {
+[% operation QVTc!BottomPattern declaration() {
     var vars : Set();
     vars.addAll(self.variable);
     vars.addAll(self.realizedVariable);
     for (v in vars.sortBy(v | v.type())) {%]
-[%printIdent(8);%][%if(v.isTypeOf(qvtm!RealizedVariable)){%][%="realize "%][%}%][%=v.name+":"+v.type.name%][%if(hasMore){%],
+[%printIdent(8);%][%if(v.isTypeOf(QVTc!RealizedVariable)){%][%="realize "%][%}%][%=v.name+":"+v.type.name%][%if(hasMore){%],
 [%}%]
       [%}%]  |[% 
     for (p in self.predicate){%]

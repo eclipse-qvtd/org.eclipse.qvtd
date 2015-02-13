@@ -195,11 +195,7 @@ public class MtcBroker {
 		this.environmentFactory = environmentFactory;
 		this.baseUri = baseURI;
 		System.out.println("Executing the QVTc to QVTi MTC for " + qvtcSource);
-		
-		
 		this.baseUri = baseURI;
-
-		System.out.println("Executing the QVTc to QVTi MTC for " + qvtcSource);
 		URI qvtcURI = baseURI.appendSegment(qvtcSource);
 		this.qvtcasUri = qvtcURI.toString();
     	URI modelsBaseUri = qvtcURI.trimFileExtension();
@@ -257,6 +253,13 @@ public class MtcBroker {
 	public PivotModel getiModel() {
 		return iModel;
 	}
+	
+	public void prepare() throws QvtMtcExecutionException {
+		loadConfigurationModel();
+		loadOclStdLibModel();
+		// This could be run on editor saves by reading the imports!
+		createContainmentTrees();
+	}
 
 	/**
 	 * Execute.
@@ -266,10 +269,7 @@ public class MtcBroker {
 	 */
 	public void execute() throws QvtMtcExecutionException {
 		
-		loadConfigurationModel();
-		loadOclStdLibModel();
-		// This could be run on editor saves by reading the imports!
-		createContainmentTrees();
+		prepare();
 		cModel = createASModel(qvtcasUri, "QVTc", "QVT", QVTC_FULL_NS, true, false, true, false);
 		uModel = qvtcToQvtu(cModel);
 		
@@ -281,6 +281,23 @@ public class MtcBroker {
 		
 		qvtpNestingScheduling(pModel, sModel);
 		iModel = qvtpQvtsToQvti(pModel, sModel);
+	}
+	
+	
+	public void executeScheduling(boolean dryRun) throws QvtMtcExecutionException {
+		
+		prepare();
+		try {
+			pModel = createASModel(partitionUri, "QVTp", "QVT", QVTI_FULL_NS, true, false, false, true);
+			sModel = qvtpToQvts(pModel);
+		} catch (QvtMtcExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if ((pModel != null) && (sModel != null))
+				sModel.setStoredOnDisposal(!dryRun);
+				qvtpNestingScheduling(pModel, sModel);
+		}
 	}
 	
 	public void disposeModels() {
@@ -370,7 +387,7 @@ public class MtcBroker {
 	private PivotModel qvtmToQvtp(PivotModel mModel) throws QvtMtcExecutionException {
 		
 		PivotModel pModel = null;
-		pModel = createASModel(partitionUri, "QVTp", "QVTp,QVT", QVTI_FULL_NS, false, true, false, true);
+		pModel = createASModel(partitionUri, "QVTp", "QVT", QVTI_FULL_NS, false, true, false, true);
 		if (mModel != null && pModel != null  ) {
 			mModel.setCachingEnabled(true);
 			mModel.clearCache();
@@ -404,7 +421,7 @@ public class MtcBroker {
 	 */
 	protected PivotModel qvtpToQvts(PivotModel pModel) throws QvtMtcExecutionException {
 		PivotModel sModel = null;
-		sModel = createModel(scheduleUri, "QVTs", "", QVTS_FULL_NS, false, true, false, true);
+		sModel = createModel(scheduleUri, "QVTs", "QVT", QVTS_FULL_NS, false, true, false, true);
 		pModel.setCachingEnabled(true);
 		pModel.clearCache();
 		pModel.setStoredOnDisposal(false);
