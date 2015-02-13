@@ -123,19 +123,16 @@ public class QVTdMtcTests extends LoadTestCase {
     	
     	Diagnostic diagnostic = Diagnostician.INSTANCE.validate(mtc.getuModel().getRooteObject());
     	// TODO do we want perfect or can we tolerate info and warnings?
-        //assertEquals(Diagnostic.OK, diagnostic.getSeverity());
-    	//assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
         diagnostic = Diagnostician.INSTANCE.validate(mtc.getmModel().getRooteObject());
-        //assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
+        assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
         diagnostic = Diagnostician.INSTANCE.validate(mtc.getpModel().getRooteObject());
-        //assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
+        assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
         diagnostic = Diagnostician.INSTANCE.validate(mtc.getsModel().getRooteObject());
-        //assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
+        assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
         diagnostic = Diagnostician.INSTANCE.validate(mtc.getiModel().getRooteObject());
         assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
         
         // Run the QVTi transformation in interpreter mode
-         
     	URI inputURI = samplesBaseUri.appendSegment("SimpleUMLPeople.xmi");
     	URI outputURI = samplesBaseUri.appendSegment("SimpleRDBMSPeople.xmi");
     	URI middleURI = samplesBaseUri.appendSegment("SimpleUMLtoRDBMS_trace.xmi");
@@ -145,8 +142,6 @@ public class QVTdMtcTests extends LoadTestCase {
     	testEvaluator.loadModel("uml", inputURI);
         testEvaluator.createModel("middle", middleURI, null);
         testEvaluator.createModel("rdbms", outputURI, null);
-        // TODO create validation model 
-        //testEvaluator.loadReference("rdbms", "SimpleRDBMSPeopleValidate.xmi");
         System.out.println("Executing QVTi transformation on test models.");
         testEvaluator.execute();
         
@@ -158,13 +153,14 @@ public class QVTdMtcTests extends LoadTestCase {
         mtc.disposeModels();
         myQVT.dispose();
     }
-    /*
+    
     @Test
     public void testUpperToLower() throws Exception {
     	
-    	URL r = this.getClass().getResource("UpperToLower/UpperToLower.qvtcas");
-		String qvtcasUri = MtcBroker.changeResourceToSource(r.toURI().toString());
-    	MtcBroker mtc = new MtcBroker(qvtcasUri, this.getClass(), metamodelManager);
+    	MyQVT myQVT = createQVT();
+    	
+    	URI testBaseURI = TESTS_BASE_URI.appendSegment("UpperToLower");;
+    	MtcBroker mtc = new MtcBroker(testBaseURI, "UpperToLower.qvtcas", myQVT.getEnvironmentFactory());
     	mtc.execute();
     	Diagnostic diagnostic = Diagnostician.INSTANCE.validate(mtc.getuModel().getRooteObject());
     	assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
@@ -176,28 +172,39 @@ public class QVTdMtcTests extends LoadTestCase {
         assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
         diagnostic = Diagnostician.INSTANCE.validate(mtc.getiModel().getRooteObject());
         assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
-        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(metamodelManager, "UpperToLower",mtc.getiModel().getTransformation());
-    	testEvaluator.saveTransformation(null);
-        testEvaluator.loadModel("upperGraph", "SimpleGraph.xmi");
-        testEvaluator.createModel("middle", "Graph2Graph.xmi");
-        testEvaluator.createModel("lowerGraph", "SimpleGraphLower.xmi");
-        testEvaluator.loadReference("lowerGraph", "SimpleGraphLowerValidate.xmi");
+
+        URI samplesBaseUri = testBaseURI.appendSegment("samples");
+        URI inputURI = samplesBaseUri.appendSegment("SimpleGraph.xmi");
+    	URI outputURI = samplesBaseUri.appendSegment("SimpleGraphLower.xmi");
+    	URI middleURI = samplesBaseUri.appendSegment("UpperToLower_trace.xmi");
+    	URI expectedOutputURI = samplesBaseUri.appendSegment("SimpleGraphLower_expected.xmi");
+        QVTiPivotEvaluator testEvaluator = myQVT.createEvaluator(mtc.getiModel());
+        testEvaluator.loadModel("upperGraph", inputURI);
+        testEvaluator.createModel("middle", middleURI, null);
+        testEvaluator.createModel("lowerGraph", outputURI, null);
         System.out.println("Executing QVTi transformation on test models.");
-        testEvaluator.test();
-        testEvaluator.dispose();
+        testEvaluator.execute();
+        testEvaluator.saveModels();
         
-        URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
-        assertLoadable(txURI);
+        Resource expected =  myQVT.getEnvironmentFactory().getResourceSet().getResource(expectedOutputURI, true);
+        Resource actual =  myQVT.getEnvironmentFactory().getResourceSet().getResource(outputURI, true);
+        assertSameModel(expected, actual);
+        
+        testEvaluator.dispose();
         mtc.disposeModels();
+        myQVT.dispose();
     }
     
     @Test
     public void testHSVToHLS() throws Exception {
     	
-    	URL r = this.getClass().getResource("HSV2HLS/HSV2HLS.qvtcas");
-		String qvtcasUri = MtcBroker.changeResourceToSource(r.toURI().toString());
-    	MtcBroker mtc = new MtcBroker(qvtcasUri, this.getClass(), metamodelManager);
+    	
+    	MyQVT myQVT = createQVT();
+    	
+    	URI testBaseURI = TESTS_BASE_URI.appendSegment("HSV2HLS");;
+    	MtcBroker mtc = new MtcBroker(testBaseURI, "HSV2HLS.qvtcas", myQVT.getEnvironmentFactory());
     	mtc.execute();
+    	
     	Diagnostic diagnostic = Diagnostician.INSTANCE.validate(mtc.getuModel().getRooteObject());
     	assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
         diagnostic = Diagnostician.INSTANCE.validate(mtc.getmModel().getRooteObject());
@@ -208,21 +215,28 @@ public class QVTdMtcTests extends LoadTestCase {
         assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
         diagnostic = Diagnostician.INSTANCE.validate(mtc.getiModel().getRooteObject());
         assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
-        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(metamodelManager, "HSV2HLS",mtc.getiModel().getTransformation());
-    	testEvaluator.saveTransformation(null);
-        testEvaluator.loadModel("hsv", "HSVNode.xmi");
-        testEvaluator.createModel("middle", "HSV2HLS.xmi");
-        testEvaluator.createModel("hls", "HLSNode.xmi");
-        testEvaluator.loadReference("hls", "HLSNodeValidate.xmi");
+        
+        URI samplesBaseUri = testBaseURI.appendSegment("samples");
+        URI inputURI = samplesBaseUri.appendSegment("SolarizedHSV.xmi");
+    	URI outputURI = samplesBaseUri.appendSegment("SolarizedHLS.xmi");
+    	URI middleURI = samplesBaseUri.appendSegment("HSV2HLS_trace.xmi");
+    	URI expectedOutputURI = samplesBaseUri.appendSegment("SolarizedHLS_expected.xmi");
+    	QVTiPivotEvaluator testEvaluator = myQVT.createEvaluator(mtc.getiModel());
+    	testEvaluator.loadModel("hsv", inputURI);
+        testEvaluator.createModel("middle", middleURI, null);
+        testEvaluator.createModel("hls", outputURI, null);
         System.out.println("Executing QVTi transformation on test models.");
-        testEvaluator.test();
+        testEvaluator.execute();
+        testEvaluator.saveModels();
+        
+        Resource expected =  myQVT.getEnvironmentFactory().getResourceSet().getResource(expectedOutputURI, true);
+        Resource actual =  myQVT.getEnvironmentFactory().getResourceSet().getResource(outputURI, true);
+        assertSameModel(expected, actual);
+        
         testEvaluator.dispose();
-        
-        URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
-        assertLoadable(txURI);
         mtc.disposeModels();
-        
+        myQVT.dispose();
     }
-    */
+    
 	
 }

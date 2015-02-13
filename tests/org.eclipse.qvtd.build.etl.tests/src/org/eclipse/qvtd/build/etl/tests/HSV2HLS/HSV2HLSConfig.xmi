@@ -4,8 +4,8 @@
     <direction name="hsv" imports="//@transformation/@import.0"/>
     <direction name="hls" imports="//@transformation/@import.2"/>
     <direction imports="//@transformation/@import.1"/>
-    <import name="HSVTree" metamodelFile="HSV2HLS/HSVTree.ecore" package="HSVTree"/>
-    <import name="HSV2HLS" metamodelFile="HSV2HLS/HSV2HLS.ecore" package="HSV2HLS"/>
-    <import name="HLSTree" metamodelFile="HSV2HLS/HLSTree.ecore" package="HLSTree"/>
+    <import name="HSVTree" metamodelFile="HSVTree.ecore" package="HSVTree"/>
+    <import name="HSV2HLS" metamodelFile="HSV2HLS.ecore" package="HSV2HLS"/>
+    <import name="HLSTree" metamodelFile="HLSTree.ecore" package="HLSTree"/>
   </transformation>
 </qvtcconfig:Configuration>

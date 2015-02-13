@@ -36,15 +36,16 @@ import "../helpers/OclLibHelper.eol";
  */
 @cascade
 delete PropertyAssignment
+	// TODO what happens when the CallEXp is a cal to an operation defined in the transformation
+	// context?
     when : (original.value.getArea() <> null) 
-             
-            and ( (original.value.getArea().isOutputDomain()
-                  and not original.value.isTypeOf(QVTc!VariableExp)
-                  and original.slotExpression.getArea().isMiddleDomain())
-                or
-                  (original.value.getArea().isMiddleDomain()
-                  and original.slotExpression.getArea().isInputDomain())
-                )
+        and ( (original.value.getArea().isOutputDomain()
+              and not original.value.isTypeOf(QVTc!VariableExp)
+              and original.slotExpression.getArea().isMiddleDomain())
+            or
+              (original.value.getArea().isMiddleDomain()
+              and original.slotExpression.getArea().isInputDomain())
+            )
 
 
 /****d* QVTcToQVTu/Predicate

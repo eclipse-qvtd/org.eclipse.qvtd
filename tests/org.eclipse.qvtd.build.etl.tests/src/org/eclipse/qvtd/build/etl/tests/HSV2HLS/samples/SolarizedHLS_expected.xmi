@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ASCII"?>
+<pfx:HLSNode
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:pfx="http://www.eclipse.org/qvt/examples/0.1/HLSTree"
+    xsi:schemaLocation="http://www.eclipse.org/qvt/examples/0.1/HLSTree ../HLSTree.ecore"
+    hls = "192,100,10.6" name="n1">
+  <children hls="192,80.8,14.3" name="base02"/>
+  <children hls="194,14.1,40.2" name="base01">
+    <children hls="196,12.9,45.5" name="base00">
+      <children hls="186,8.3,55.1" name="base0">
+        <children hls="180,6.9,60.4" name="base1"/>
+      </children>
+    </children>
+  </children>
+  <children hls="46,42.4,88.4" name="base2">
+    <children hls="44,86.7,94.1" name="base3"/>
+  </children>
+  <children hls="45,100,35.5" name="yellow">
+    <children hls="45,100,35.5" name="orange">
+      <children hls="1,71.2,52.4" name="red">
+        <children hls="331,64.1,52" name="magenta"/>
+        <children hls="237,42.7,59.6" name="violet">
+          <children hls="205,69.4,48.6" name="blue">
+          <children hls="175,58.6,39.8" name="cyan">
+            <children hls="68,100,30" name="green"/>
+          </children>
+        </children>
+      </children>
+      </children>
+    </children>
+  </children>
+</pfx:HLSNode>
