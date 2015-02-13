@@ -21,6 +21,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.pivot.CompleteEnvironment;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.OCL;
@@ -52,7 +53,7 @@ import org.junit.Test;
  */
 public class OCL2QVTiTestCases extends LoadTestCase {
 	
-	private static final String TESTS_GEN_PATH = "/org.eclipse.qvtd.buid.cs2as.tests/tests-gen/";
+	private static final String TESTS_GEN_PATH = "../org.eclipse.qvtd.buid.cs2as.tests/tests-gen/";
 	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("org.eclipse.qvtd.buid.cs2as.tests/src/org/eclipse/qvtd/buid/cs2as/tests/models", true);
 	
 	protected class MyQVT extends OCL
@@ -126,7 +127,6 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	}
 	
 	protected @NonNull MyQVT createQVT() {
-		//return new MyQVT(new QVTiEnvironmentFactory(new StandaloneProjectMap()));
 		return new MyQVT(new QVTiEnvironmentFactory(getProjectMap(), null));
 	}
 	
@@ -290,7 +290,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	@Test
 	public void testExample2_CG() throws Exception {
 		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
-
+		
+//		Registry packageRegistry = myQVT.getResourceSet().getPackageRegistry();
+//		packageRegistry.put(ClassescsPackage.eNS_URI, ClassescsPackage.eINSTANCE);
+//		packageRegistry.put(ClassesPackage.eNS_URI, ClassesPackage.eINSTANCE);
 		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "classescs2as.oclas", myQVT.getEnvironmentFactory());
     	mtc.execute();
     	PivotModel qvtiTransf = mtc.getiModel();
@@ -465,7 +468,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		Resource genResource = rSet.getResource(genModelURI, true);
 		for (EObject eObject : genResource.getContents()) {
 			if (eObject instanceof GenModel) {
-				//mManager.addGenModel((GenModel)eObject);
+				((MetamodelManagerInternal)mManager).addGenModel((GenModel)eObject);
 			}
 		}
 	}

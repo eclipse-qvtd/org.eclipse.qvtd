@@ -21,7 +21,7 @@ pre {
 	
 	
 	var qvtiTransf = new QVTi!Transformation;
-	qvtiTransf.name = qvtiModel.name;
+	qvtiTransf.name = qvtiModel.name.replace("\\.","_"); // FIXME . as part of the name is causing issues in the CG
 	qvtiTransf.modelParameter.addAll(QVTi!TypedModel.all());
 	
 	var typedModel = new QVTi!TypedModel;
