@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pivot:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot" xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage"
-    name="classescs2as.ocl" externalURI="platform:/resource/oclDependencyAnalysis.qvt/src/oclDependencyAnalysis/qvt/tests/models/example2/classescs2as.ocl">
+    name="classescs2as.ocl" externalURI="platform:/resource/org.eclipse.qvtd.build.cs2as.tests/src/org/eclipse/qvtd/build/cs2as/tests/models/example2/classescs2as.ocl">
   <ownedImports importedNamespace="pivot:Model ClassesCS.ecore.oclas#/"/>
   <ownedImports importedNamespace="pivot:Model Classes.ecore.oclas#/"/>
   <ownedImports importedNamespace="pivot:Model ClassesLookup.ocl.oclas#/"/>
@@ -9,7 +9,7 @@
     <ownedClasses xmi:id="T.classescs.ClassCS.0" name="ClassCS">
       <ownedOperations xmi:id="o.classescs.ClassCS.ast" name="ast" type="pivot:Class Classes.ecore.oclas#T.classes.Class">
         <bodyExpression xsi:type="pivot:ExpressionInOCL" type="pivot:Class Classes.ecore.oclas#T.classes.Class"
-            body="&#xA;&#x9;classes::Class {&#xA;&#x9;&#x9;name = name,&#xA;&#x9;&#x9;superClass = ast().lookupClass(_extends)&#xA;&#x9;}&#xA;&#xA;">
+            body="&#xA;&#x9;classes::Class {&#xA;&#x9;&#x9;name = name&#xA;&#x9;&#x9;-- superClass = ast().lookupClass(_extends)&#xA;&#x9;}&#xA;&#xA;">
           <ownedBody xsi:type="pivot:ConstructorExp" type="pivot:Class Classes.ecore.oclas#T.classes.Class">
             <ownedParts name="name" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredProperty="Classes.ecore.oclas#p.classes.NamedElement.name">
@@ -17,23 +17,6 @@
                   referredProperty="ClassesCS.ecore.oclas#p.classescs.NamedElementCS.name">
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
                     isImplicit="true" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@ownedOperations.0/@bodyExpression/@ownedContext"/>
-              </ownedInit>
-            </ownedParts>
-            <ownedParts name="superClass" isRequired="false" type="pivot:Class Classes.ecore.oclas#T.classes.Class"
-                referredProperty="Classes.ecore.oclas#p.classes.Class.superClass">
-              <ownedInit xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Class"
-                  referredOperation="ClassesLookup.ocl.oclas#o.ocl.OclElement.lookupClass..classescs.PathNameCS">
-                <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Class"
-                    referredOperation="#o.classescs.ClassCS.ast">
-                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
-                      isImplicit="true" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@ownedOperations.0/@bodyExpression/@ownedContext"/>
-                </ownedSource>
-                <ownedArguments xsi:type="pivot:PropertyCallExp" isRequired="false"
-                    type="pivot:Class ClassesCS.ecore.oclas#T.classescs.PathNameCS"
-                    referredProperty="ClassesCS.ecore.oclas#p.classescs.ClassCS.extends">
-                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
-                      isImplicit="true" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@ownedOperations.0/@bodyExpression/@ownedContext"/>
-                </ownedArguments>
               </ownedInit>
             </ownedParts>
           </ownedBody>
