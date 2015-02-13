@@ -1,0 +1,183 @@
+/*******************************************************************************
+ * Copyright (c) 2015 The University of York and Willink Transformations.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
+ import "../helpers/QVTHelpers.eol";
+ 
+ /****l* /org.eclipse.qvtd.build.etl/scheduling/ArgumentDerivation
+ * NAME
+ *  ArgumentDerivation -- A set of operations to identyfy
+ * NOTES
+ *  Some of this operations can/should be moved to the QVTcore model/code 
+ */
+ 
+ /****o* ArgumentDerivation/defineArgumentDerivation
+ * NAME
+ *  defineArgumentDerivation - Identifies what parameters can be derived from
+ *  others
+ * FUNCTION
+ *  
+ * CONTEXT
+ *  QVTs!Schedule  The Schdule
+ * SEE ALSO
+ */
+@cached 
+operation QVTs!MappingAction defineArgumentDerivation() : Map {
+    
+    // Find all the derivation alternatives. Nesting depends on which works best
+    /*
+        For each MA's paramter find which other of the parameters can be derived.
+		Create a map of this form:
+            [DataParameter, [property, {DataParameter, [property, { ... }]}]]
+        The map is a recusrsive decent that simulates a graph of dependencies. For each
+		naviagable property of the DataParameter, the value is in turn a sequence that
+		points at the DataParameter that can be accessed through the property and a map
+		of all the properties from the derived one. 
+	*/
+    //self.mapping.name.println("mapping ");
+    var derivees = self.parameters.aggregate(pa | pa, pa.derivedParameters(self.parameters.excluding(pa),0));
+    
+    /*
+    for(k in derivees.keySet()) {
+    	k.variable.name.println("Derived from ");
+    	derivees.get(k).last().prettyPrint("direct:");
+    	derivees.get(k).first().prettyPrint("loop:");
+    }
+    */
+    return derivees;
+}
+
+operation Map prettyPrint(what : String) {
+    what.println("  ");
+    for(k in self.keySet()) {
+        ": ".print(k.name);
+        self.get(k).variable.name.println();
+    }
+}
+
+/****o* ArgumentDerivation/derivedParameters
+ * NAME
+ *  derivedParameters - Analysis of variable relations to find derivable ones
+ * FUNCTION
+ *  Returns a tuple (collection) of DataParameters that can be derived from the
+ *  context DataParameter.
+ *  The function performs a full depth search looking for variables that can be
+ *  derived from the derived ones too.
+ *
+ * CONTEXT
+ *  QVT!Variable  The variable being analyzed
+ * PARAMETERS
+ *  vars The variables to look for relations
+ * RESULT
+ *  A
+ * SEE ALSO
+ *
+ */
+operation QVTs!DataParameter derivedParametersOld(dps : OrderedSet, ident : Integer) : Map {
+	self.variable.name.println(printIdent(4*ident) + "derivedParameters ");
+	var result = self.derivedForwardParameters(dps, ident);
+	result.putAll(self.derivedOppositeParameters(dps, ident));
+	dps.collect(v | v.variable.name).println(printIdent(4*ident) + "missing ");
+	result.values().includingAll(result.values().closure(s | s.last().values())).collect(s | s.first()).variable.name.println("Derived ");
+	while (not dps.isEmpty()) {
+		for (dvRel in result.keySet()) {
+	    	ident = ident+1;
+	    	var dvVar = result.get(dvRel).first();
+	        result.put(dvRel, Sequence{dvVar, dvVar.derivedParameters(dps, ident)});
+	        ident = ident -1;
+	    }
+	}
+	return result;
+}
+
+operation QVTs!DataParameter derivedParameters(dps : OrderedSet, ident : Integer) : Map {
+    var direct = new Map();
+    self.variable.name.println(printIdent(4*ident) + "derivedParameters ");
+    dps.collect(v | v.variable.name).println(printIdent(4*ident));
+    // First pass preffers forward relations
+    for (vB in dps.clone()) {
+    	var property = self.variable.hasRelation(vB.variable).first(); // TODO how to pick one, if multiple options are returned? 
+        if (property.isDefined()) {
+        	property.name.println(printIdent(4*ident+1) + vB.variable.name + " derived from ");
+            //dps.remove(vB);
+            ident = ident+1;
+            //direct.put(forward, vB);
+            direct.put(property, Sequence{vB, vB.derivedParameters(dps.excluding(vB), ident)});
+            ident = ident -1;
+        }
+        property = vB.variable.hasRelation(self.variable).first(); //self.hasRelation(vB).sortBy(r | r.getCost()) // In the future cost can be used to select the less expensive navigation
+        //vB.variable.name.println(printIdent(4*(ident+1)) + self.variable.name + "    has opposite relation to ");
+    	if (property.isDefined()) {
+        	if (property.opposite.isDefined()) {
+	            if (property.opposite.isMany()) {
+	            	property.opposite.name.println(printIdent(4*ident+1) +  vB.variable.name + " loop derived from(oppoiste) ");
+	            } else {
+	            	property.opposite.name.println(printIdent(4*ident+1) +  vB.variable.name + " derived from (oppoiste) ");
+	            }
+	            //dps.remove(vB);
+	            ident = ident+1;
+	            direct.put(property.opposite, Sequence {vB, vB.derivedParameters(dps.excluding(vB), ident)});
+	            ident = ident -1;
+	        }
+	    }
+    }
+    // Recursively find derivations from found ones
+    /*for (dvRel in direct.keySet()) {
+    	ident = ident+1;
+    	var dvVar = direct.get(dvRel);
+        direct.put(dvRel, Sequence{dvVar, dvVar.derivedForwardParameters(dps, ident)});
+        ident = ident -1;
+    }*/
+	return direct;
+}
+
+operation QVTs!DataParameter derivedOppositeParameters(dps : OrderedSet, ident : Integer) : Map {
+	self.variable.name.println(printIdent(4*ident) + "derivedOppositeParameters ");
+	dps.collect(v | v.variable.name).println(printIdent(4*ident));
+	// Now try to derive any missing ones using opposites
+    var opp = new Map();
+    for (vB in dps.clone()) {
+    	var forward = vB.variable.hasRelation(self.variable).first(); //self.hasRelation(vB).sortBy(r | r.getCost()) // In the future cost can be used to select the less expensive navigation
+        //vB.variable.name.println(printIdent(4*(ident+1)) + self.variable.name + "    has opposite relation to ");
+    	if (forward.isDefined()) {
+        	if (forward.opposite.isDefined()) {
+	            if (forward.opposite.isMany()) {
+	            	forward.opposite.name.println(printIdent(4*ident+1) +  vB.variable.name + " loop derived from(oppoiste) ");
+	            } else {
+	            	forward.opposite.name.println(printIdent(4*ident+1) +  vB.variable.name + " derived from (oppoiste) ");
+	            }
+	            dps.remove(vB);
+	            ident = ident+1;
+	            opp.put(forward.opposite, Sequence {vB, new Map()});
+	            ident = ident -1;
+	        }
+	    }
+    }
+    return opp;
+}
+
+/****o* Scheduler/removeEmptyDistinctData
+ * NAME
+ *  removeEmptyDistinctData - Remove DistinctData elements that don't have a 
+ *  primary argument.
+ * CONTEXT
+ *  QVTs!Schedule  The Schdule
+ */
+operation QVTs!Schedule removeEmptyDistinctData() {
+    
+    for (da in self.actions.collect(a | a.distinctArguments).flatten().select(dd | dd.primaryArguments.isEmpty())) {
+        delete da;
+    }
+}
+
+/* =========================================== */
+
+operation printIdent(size : Integer) : String {
+    return "".pad(size, " ", true);
+}

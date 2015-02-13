@@ -15,55 +15,75 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getResults <em>Results</em>}</li>
- *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getDistinctArguments <em>Distinct Arguments</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getProductions <em>Productions</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getRequisites <em>Requisites</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getParameterDerivations <em>Parameter Derivations</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getOrder <em>Order</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getParent <em>Parent</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getChildren <em>Children</em>}</li>
- *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getArguments <em>Arguments</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getParameters <em>Parameters</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getResults <em>Results</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.AbstractAction#getSchedule <em>Schedule</em>}</li>
  * </ul>
  *
- * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractAction()
+ * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractAction()
  * @model abstract="true"
  * @generated
  */
 public interface AbstractAction extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Results</b></em>' reference list.
+	 * Returns the value of the '<em><b>Productions</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getSources <em>Sources</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getProducedBy <em>Produced By</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Results</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Productions</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Results</em>' reference list.
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractAction_Results()
-	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getSources
-	 * @model opposite="sources"
+	 * @return the value of the '<em>Productions</em>' reference list.
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractAction_Productions()
+	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getProducedBy
+	 * @model opposite="producedBy"
 	 * @generated
 	 */
-	EList<AbstractDatum> getResults();
+	EList<AbstractDatum> getProductions();
 
 	/**
-	 * Returns the value of the '<em><b>Distinct Arguments</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.build.qvtschedule.DistinctData}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.build.qvtschedule.DistinctData#getTarget <em>Target</em>}'.
+	 * Returns the value of the '<em><b>Requisites</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getRequiredBy <em>Required By</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Distinct Arguments</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Requisites</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Distinct Arguments</em>' containment reference list.
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractAction_DistinctArguments()
-	 * @see org.eclipse.qvtd.build.qvtschedule.DistinctData#getTarget
+	 * @return the value of the '<em>Requisites</em>' reference list.
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractAction_Requisites()
+	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getRequiredBy
+	 * @model opposite="requiredBy"
+	 * @generated
+	 */
+	EList<AbstractDatum> getRequisites();
+
+	/**
+	 * Returns the value of the '<em><b>Parameter Derivations</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.build.qvtschedule.ParameterDerivation}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getTarget <em>Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Parameter Derivations</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Parameter Derivations</em>' containment reference list.
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractAction_ParameterDerivations()
+	 * @see org.eclipse.qvtd.build.qvtschedule.ParameterDerivation#getTarget
 	 * @model opposite="target" containment="true"
 	 * @generated
 	 */
-	EList<DistinctData> getDistinctArguments();
+	EList<ParameterDerivation> getParameterDerivations();
 
 	/**
 	 * Returns the value of the '<em><b>Order</b></em>' attribute.
@@ -75,7 +95,7 @@ public interface AbstractAction extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Order</em>' attribute.
 	 * @see #setOrder(int)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractAction_Order()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractAction_Order()
 	 * @model
 	 * @generated
 	 */
@@ -102,7 +122,7 @@ public interface AbstractAction extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parent</em>' reference.
 	 * @see #setParent(AbstractAction)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractAction_Parent()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractAction_Parent()
 	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractAction#getChildren
 	 * @model opposite="children"
 	 * @generated
@@ -130,7 +150,7 @@ public interface AbstractAction extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Children</em>' reference list.
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractAction_Children()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractAction_Children()
 	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractAction#getParent
 	 * @model opposite="parent"
 	 * @generated
@@ -138,22 +158,36 @@ public interface AbstractAction extends EObject {
 	EList<AbstractAction> getChildren();
 
 	/**
-	 * Returns the value of the '<em><b>Arguments</b></em>' reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getTargets <em>Targets</em>}'.
+	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.build.qvtschedule.DataParameter}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Arguments</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Parameters</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Arguments</em>' reference list.
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractAction_Arguments()
-	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getTargets
-	 * @model opposite="targets" derived="true"
+	 * @return the value of the '<em>Parameters</em>' containment reference list.
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractAction_Parameters()
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<AbstractDatum> getArguments();
+	EList<DataParameter> getParameters();
+
+	/**
+	 * Returns the value of the '<em><b>Results</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.build.qvtschedule.DataParameter}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Results</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Results</em>' containment reference list.
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractAction_Results()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<DataParameter> getResults();
 
 	/**
 	 * Returns the value of the '<em><b>Schedule</b></em>' container reference.
@@ -166,7 +200,7 @@ public interface AbstractAction extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Schedule</em>' container reference.
 	 * @see #setSchedule(Schedule)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getAbstractAction_Schedule()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getAbstractAction_Schedule()
 	 * @see org.eclipse.qvtd.build.qvtschedule.Schedule#getActions
 	 * @model opposite="actions" transient="false"
 	 * @generated

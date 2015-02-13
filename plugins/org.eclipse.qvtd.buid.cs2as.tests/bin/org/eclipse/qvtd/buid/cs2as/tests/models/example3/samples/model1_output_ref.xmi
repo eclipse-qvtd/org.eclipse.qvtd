@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ASCII"?>
+<kiamaas:Top
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:kiamaas="http://ocldependencyanalysis/kiamaExampleAS/1.0"
+    xsi:schemaLocation="http://ocldependencyanalysis/kiamaExampleAS/1.0 ../KiamaAS.ecore">
+  <node xsi:type="kiamaas:Plus"
+      height="2">
+    <left xsi:type="kiamaas:Plus"
+        height="1"
+        deep="1">
+      <left
+          xsi:type="kiamaas:Num"
+          deep="2"
+          value="3"/>
+      <right
+          xsi:type="kiamaas:Num"
+          deep="2"
+          value="4"/>
+    </left>
+    <right xsi:type="kiamaas:Num"
+        deep="1"
+        value="1"/>
+  </node>
+</kiamaas:Top>

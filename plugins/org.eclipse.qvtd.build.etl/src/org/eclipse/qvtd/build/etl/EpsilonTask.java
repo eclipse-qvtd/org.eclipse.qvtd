@@ -12,11 +12,13 @@
 package org.eclipse.qvtd.build.etl;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.epsilon.common.parse.problem.ParseProblem;
 import org.eclipse.epsilon.eol.IEolExecutableModule;
 import org.eclipse.epsilon.eol.exceptions.EolRuntimeException;
+import org.eclipse.epsilon.eol.execute.context.Variable;
 import org.eclipse.epsilon.eol.models.IModel;
 
 /**
@@ -40,6 +42,8 @@ public abstract class EpsilonTask {
 	/** The result. */
 	protected Object result;
 	
+	/** Parameters */
+	protected List<Variable> parameters = new ArrayList<Variable>();
 	/**
 	 * Creates the module used by the engine to execute the ExL source. Specific
 	 * ExL language engines should provide a specific module.
@@ -159,6 +163,10 @@ public abstract class EpsilonTask {
 			module.getContext().getModelRepository().addModel(model);
 		}
 		
+		for (Variable param : parameters) {
+			module.getContext().getFrameStack().put(param);
+		}
+	
 		preProcess();
 		try {
 			result = execute(module);
@@ -198,5 +206,8 @@ public abstract class EpsilonTask {
 	public Object getResult() {
 		return result;
 	}
-
+	
+	public void addParameter(Variable parameter){
+		parameters.add(parameter);
+	}
 }

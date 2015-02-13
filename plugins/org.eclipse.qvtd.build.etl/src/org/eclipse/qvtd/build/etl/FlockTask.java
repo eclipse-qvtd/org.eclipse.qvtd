@@ -134,7 +134,6 @@ public class FlockTask extends EpsilonTask {
 		preProcess();
 		try {
 			result = module.execute();
-			((FlockResult)result).printWarnings(System.out);
 		} catch (EolRuntimeException e) {
 			throw new QvtMtcExecutionException(e.getMessage(),e.getCause());
 		}
@@ -151,5 +150,14 @@ public class FlockTask extends EpsilonTask {
 			module.getContext().getModelRepository().removeModel(model);
 		}
 	}
+
+	@Override
+	public void postProcess() {
+		// TODO Auto-generated method stub
+		super.postProcess();
+		((FlockResult)result).printWarnings(System.out);
+	}
+	
+	
 	
 }

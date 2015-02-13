@@ -18,14 +18,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.qvtd.build.qvtschedule.AbstractAction;
 import org.eclipse.qvtd.build.qvtschedule.AbstractDatum;
+import org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.build.qvtschedule.Schedule;
-import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
 
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Schedule</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  * <p>
  * The following features are implemented:
  * </p>
@@ -73,7 +72,7 @@ public class ScheduleImpl extends MinimalEObjectImpl.Container implements Schedu
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return qvtschedulePackage.Literals.SCHEDULE;
+		return QVTschedulePackage.Literals.SCHEDULE;
 	}
 
 	/**
@@ -83,7 +82,7 @@ public class ScheduleImpl extends MinimalEObjectImpl.Container implements Schedu
 	 */
 	public EList<AbstractDatum> getDatums() {
 		if (datums == null) {
-			datums = new EObjectContainmentWithInverseEList<AbstractDatum>(AbstractDatum.class, this, qvtschedulePackage.SCHEDULE__DATUMS, qvtschedulePackage.ABSTRACT_DATUM__SCHEDULE);
+			datums = new EObjectContainmentWithInverseEList<AbstractDatum>(AbstractDatum.class, this, QVTschedulePackage.SCHEDULE__DATUMS, QVTschedulePackage.ABSTRACT_DATUM__SCHEDULE);
 		}
 		return datums;
 	}
@@ -95,7 +94,7 @@ public class ScheduleImpl extends MinimalEObjectImpl.Container implements Schedu
 	 */
 	public EList<AbstractAction> getActions() {
 		if (actions == null) {
-			actions = new EObjectContainmentWithInverseEList<AbstractAction>(AbstractAction.class, this, qvtschedulePackage.SCHEDULE__ACTIONS, qvtschedulePackage.ABSTRACT_ACTION__SCHEDULE);
+			actions = new EObjectContainmentWithInverseEList<AbstractAction>(AbstractAction.class, this, QVTschedulePackage.SCHEDULE__ACTIONS, QVTschedulePackage.ABSTRACT_ACTION__SCHEDULE);
 		}
 		return actions;
 	}
@@ -109,9 +108,9 @@ public class ScheduleImpl extends MinimalEObjectImpl.Container implements Schedu
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case qvtschedulePackage.SCHEDULE__DATUMS:
+			case QVTschedulePackage.SCHEDULE__DATUMS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getDatums()).basicAdd(otherEnd, msgs);
-			case qvtschedulePackage.SCHEDULE__ACTIONS:
+			case QVTschedulePackage.SCHEDULE__ACTIONS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getActions()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -125,9 +124,9 @@ public class ScheduleImpl extends MinimalEObjectImpl.Container implements Schedu
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case qvtschedulePackage.SCHEDULE__DATUMS:
+			case QVTschedulePackage.SCHEDULE__DATUMS:
 				return ((InternalEList<?>)getDatums()).basicRemove(otherEnd, msgs);
-			case qvtschedulePackage.SCHEDULE__ACTIONS:
+			case QVTschedulePackage.SCHEDULE__ACTIONS:
 				return ((InternalEList<?>)getActions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -141,9 +140,9 @@ public class ScheduleImpl extends MinimalEObjectImpl.Container implements Schedu
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case qvtschedulePackage.SCHEDULE__DATUMS:
+			case QVTschedulePackage.SCHEDULE__DATUMS:
 				return getDatums();
-			case qvtschedulePackage.SCHEDULE__ACTIONS:
+			case QVTschedulePackage.SCHEDULE__ACTIONS:
 				return getActions();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -158,11 +157,11 @@ public class ScheduleImpl extends MinimalEObjectImpl.Container implements Schedu
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case qvtschedulePackage.SCHEDULE__DATUMS:
+			case QVTschedulePackage.SCHEDULE__DATUMS:
 				getDatums().clear();
 				getDatums().addAll((Collection<? extends AbstractDatum>)newValue);
 				return;
-			case qvtschedulePackage.SCHEDULE__ACTIONS:
+			case QVTschedulePackage.SCHEDULE__ACTIONS:
 				getActions().clear();
 				getActions().addAll((Collection<? extends AbstractAction>)newValue);
 				return;
@@ -178,10 +177,10 @@ public class ScheduleImpl extends MinimalEObjectImpl.Container implements Schedu
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case qvtschedulePackage.SCHEDULE__DATUMS:
+			case QVTschedulePackage.SCHEDULE__DATUMS:
 				getDatums().clear();
 				return;
-			case qvtschedulePackage.SCHEDULE__ACTIONS:
+			case QVTschedulePackage.SCHEDULE__ACTIONS:
 				getActions().clear();
 				return;
 		}
@@ -196,9 +195,9 @@ public class ScheduleImpl extends MinimalEObjectImpl.Container implements Schedu
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case qvtschedulePackage.SCHEDULE__DATUMS:
+			case QVTschedulePackage.SCHEDULE__DATUMS:
 				return datums != null && !datums.isEmpty();
-			case qvtschedulePackage.SCHEDULE__ACTIONS:
+			case QVTschedulePackage.SCHEDULE__ACTIONS:
 				return actions != null && !actions.isEmpty();
 		}
 		return super.eIsSet(featureID);

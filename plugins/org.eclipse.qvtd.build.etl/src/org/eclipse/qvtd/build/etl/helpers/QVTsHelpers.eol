@@ -42,5 +42,86 @@ operation QVTs!DistinctData getNextDistinctData() : QVTs!DistinctData {
 	}
 }
 
+operation QVTs!Schedule treeDepth() : Integer {
+    
+    if (self.~rootNode.isDefined()) {        
+        //self.~rootNode.closure(n | n.children).collect(c | c.depth()).sortBy(d | true).last().println("treeDepth ");
+        return self.~rootNode.closure(n | n.children).collect(c | c.depth()).sortBy(d | true).last();
+    }
+    return 0;
+}
 
-   
+operation QVTs!MappingAction depth() : Integer {
+    //self.closure(a | a.parent).size().println(self + " depth: ");
+    return self.closure(a | a.parent).size();
+}
+
+
+/****o* QVTsHelpers/getPredecessors
+ * NAME
+ *  getPredecessors - Get the predecessors of a mapping action
+ * FUNCTION
+ *  The predecessors of a mapping action are calculating by following the 
+ *  mapping arguments' sources. This method could be invoked recursively
+ *  to do a graph search iif a mechanism is added to prevent loops. 
+ * CONTEXT
+ *  QVTs!MappingAction  The MappingAction
+ * RETURNS
+ *  Sequence	The sequence of mapping predecesors. 
+ *  SEE ALSO
+ */
+@cached
+operation QVTs!MappingAction getPredecessors() : OrderedSet {
+
+	//self.mapping.name.println("getPredecessors ");
+	var reqs = self.requisites;
+	var subReqs = reqs.closure(x | x.sub);
+	//reqs.includingAll(subReqs)
+    //        .collect(req| req.producedBy).flatten()
+    //        .sortBy(a | a.mapping.name) // To ensure determinism
+    //        .asOrderedSet().mapping.name.println(); // Remove duplicates
+	return reqs.includingAll(subReqs)
+			.collect(req| req.producedBy).flatten()
+			.sortBy(a | a.mapping.name) // To ensure determinism
+			.asOrderedSet(); // Remove duplicates
+}
+
+@cached
+operation QVTs!AbstractDatum isDatumOrSubdatum(datum : QVTs!ClassDatum) : Boolean {
+	if (self = datum) {
+		return true;
+	} else if (datum.isKindOf(QVTs!ClassDatum)) {
+		// FIXME Rethink this
+		// With respect to PropertyDatums we will never be interested in this
+		return self.getAllSuperDatums().includes(datum);
+	} else {
+		return false;
+	}
+}
+
+@cached 
+operation QVTs!AbstractDatum getAllSuperDatums() : OrderedSet(QVTs!AbstractDatum) {
+	return self.asSequence().closure(x | x.super).asOrderedSet();
+}
+
+@cached
+operation QVTs!Schedule getAllDatums() : OrderedSet(QVTs!AbstractDatum) {
+	var classDatums = self.datums;
+	return classDatums.includingAll(classDatums.propertyDatums.flatten());
+}
+
+@cached
+operation QVTs!MappingAction getContextDataParameters() : OrderedSet {
+	
+	var contextdp = self.getAvailableDataParameters();
+	if (self.parent.isDefined()) {
+		contextdp.addAll(self.parent.closure(p | p.parent).collect(p | p.getAvailableDataParameters()).flatten());
+	}
+	return contextdp;
+}
+
+@cached
+operation QVTs!MappingAction getAvailableDataParameters() : OrderedSet {
+	
+	return self.parameters.includingAll(self.results);
+}

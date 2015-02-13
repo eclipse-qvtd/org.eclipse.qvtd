@@ -4,7 +4,6 @@ package org.eclipse.qvtd.build.qvtschedule;
 
 import org.eclipse.emf.common.util.EList;
 
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Class Datum</b></em>'.
@@ -18,12 +17,11 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.ClassDatum#getPropertyDatums <em>Property Datums</em>}</li>
  * </ul>
  *
- * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getClassDatum()
+ * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getClassDatum()
  * @model
  * @generated
  */
 public interface ClassDatum extends AbstractDatum {
-
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
@@ -34,7 +32,7 @@ public interface ClassDatum extends AbstractDatum {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' reference.
 	 * @see #setType(org.eclipse.ocl.pivot.Class)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getClassDatum_Type()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getClassDatum_Type()
 	 * @model required="true" derived="true"
 	 * @generated
 	 */
@@ -61,10 +59,11 @@ public interface ClassDatum extends AbstractDatum {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Property Datums</em>' containment reference list.
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getClassDatum_PropertyDatums()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getClassDatum_PropertyDatums()
 	 * @see org.eclipse.qvtd.build.qvtschedule.PropertyDatum#getClassDatum
 	 * @model opposite="classDatum" containment="true"
 	 * @generated
 	 */
 	EList<PropertyDatum> getPropertyDatums();
+
 } // ClassDatum

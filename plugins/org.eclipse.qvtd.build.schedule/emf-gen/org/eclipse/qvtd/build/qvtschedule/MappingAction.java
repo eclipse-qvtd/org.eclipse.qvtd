@@ -16,7 +16,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.MappingAction#getMapping <em>Mapping</em>}</li>
  * </ul>
  *
- * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getMappingAction()
+ * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getMappingAction()
  * @model
  * @generated
  */
@@ -31,8 +31,8 @@ public interface MappingAction extends AbstractAction {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Mapping</em>' reference.
 	 * @see #setMapping(Mapping)
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getMappingAction_Mapping()
-	 * @model required="true"
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getMappingAction_Mapping()
+	 * @model
 	 * @generated
 	 */
 	Mapping getMapping();

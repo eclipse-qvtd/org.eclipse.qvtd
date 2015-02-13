@@ -14,7 +14,7 @@ import "../helpers/Math.eol";
 /****l* /org.eclipse.qvtd.build.etl/dependence/QVTiDataDependencies
  * NAME
  *  QVTiDataDependencies.eol -- A set of EOL operations to perform mapping data
- * dependence analysis for a QVTi transformation.
+ * dependence analysis for a QVTi transformation represented as a graph
  *
  * SEE ALSO
  *

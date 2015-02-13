@@ -1,0 +1,23 @@
+rule EClass2Node
+	transform s : mm!EClass
+	to t : tree!Node {
+	
+	t.element = s;
+	t.name = s.name;
+	// Hierarchy relationships
+	t.superTypes ::= s.getAllSuperTypes();
+	// Containment relationships
+	var containmentFeatures = mm!EStructuralFeature.all.select(ef | 
+				ef.containment and 
+				s.getAllSuperTypes().including(s).includes(ef.eType));
+	t.parent ::= containmentFeatures.eContainingClass;
+}
+
+@cached
+operation mm!EClass getAllSuperTypes() : OrderedSet{
+	return self.asSequence().closure(x | x.eSuperTypes).asOrderedSet(); -- To remove duplicates
+}
+
+post {
+	"Containment Tree Done".println();
+}

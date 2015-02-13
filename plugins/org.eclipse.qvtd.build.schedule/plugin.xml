@@ -9,8 +9,8 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated QVTSchedule -->
       <package
-            uri="http://www.eclipse.org/qvt/0.1/QVTschedule/"
-            class="org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage"
+            uri="http://www.eclipse.org/qvt/0.2/QVTschedule/"
+            class="org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage"
             genModel="model/QVTSchedule.genmodel"/>
    </extension>
 

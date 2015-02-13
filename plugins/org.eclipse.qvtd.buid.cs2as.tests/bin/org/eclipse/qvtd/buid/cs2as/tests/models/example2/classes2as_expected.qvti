@@ -1,0 +1,187 @@
+import classes : 'Classes.ecore#/';
+import classescs : 'ClassesCS.ecore#/';
+import classescstraces : 'classescs2as.ecore#/';
+
+transformation classescs2as
+{
+	leftCS imports classescs;
+	rightAS imports classes;
+	middle imports classescstraces;
+}
+
+map mRootCS2Root_LM in classescs2as
+{
+	check leftCS(rootCS : RootCS) {}
+	enforce middle() {
+		realize r2r : RootCS2Root
+	}
+	where () {
+		r2r.rootCS := rootCS;
+	}
+}
+
+map mPackageCS2Package_LM in classescs2as
+{
+	check leftCS(packageCS : PackageCS) {}
+	enforce middle() {
+		realize p2p : PackageCS2Package
+	}
+	where () {
+		p2p.packageCS := packageCS;
+	}
+}
+
+map mClassCS2Class_LM in classescs2as
+{
+	check leftCS(classCS : ClassCS) {}
+	enforce middle() {
+		realize c2c : ClassCS2Class
+	}
+	where () {
+		c2c.classCS := classCS;
+	}
+}
+
+map mRootCS2Root_MR in classescs2as
+{
+	check middle(r2r : RootCS2Root) {}
+	enforce rightAS() {
+		realize root : Root
+	}
+	where () {
+		r2r.root := root;
+	}
+}
+
+map mPackageCS2Package_MR in classescs2as
+{
+	check middle(p2p : PackageCS2Package) {}
+	enforce rightAS() {
+		realize package : Package
+	}
+	where () {
+		p2p.package := package;
+	}
+}
+
+map mClassCS2Class_MR in classescs2as
+{
+	check middle(c2c : ClassCS2Class) {}
+	enforce rightAS() {
+		realize class : Class
+	}
+	where () {
+		c2c.class := class;
+	}
+}
+
+map uRoot_ownedPackages in classescs2as
+{
+	check rightAS(root : Root) {}
+	check leftCS(rootCS : RootCS) {}
+	where (rootCS.RootCS2Root.root = root;) {
+		root.ownedPackages := rootCS.ownedPackages.PackageCS2Package.package;
+	}
+}
+
+map uPackage_name in classescs2as
+{
+	check rightAS(package : Package) {}
+	check leftCS(packageCS : PackageCS) {}
+	where (packageCS.PackageCS2Package.package = package;) {
+		package.name := packageCS.name;
+	}
+}
+
+map uPackage_ownedClasses in classescs2as
+{
+	check rightAS(package : Package) {}
+	check leftCS(packageCS : PackageCS) {}
+	where (packageCS.PackageCS2Package.package = package;) {
+		package.ownedClasses := packageCS.ownedClasses.ClassCS2Class.class;
+	}
+}
+
+map uClass_name in classescs2as
+{
+	check rightAS(class : Class) {}
+	check leftCS(classCS : ClassCS) {}
+	where (classCS.ClassCS2Class.class = class;) {
+		class.name := classCS.name;
+	}
+}
+
+map __root__ in classescs2as
+{
+	where () {}
+	for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
+		call mPackageCS2Package_LM {
+			packageCS := packageCS;
+		}
+	}
+	for p2p : classescstraces::PackageCS2Package in classescstraces::PackageCS2Package.allInstances() {
+		call mPackageCS2Package_MR {
+			p2p := p2p;
+		}
+	}
+	for packageCS : classes::Package in classescs::PackageCS.allInstances() {
+		for package : classescs::PackageCS in classes::Package.allInstances() {
+			call uPackage_name {
+				package := package;
+				packageCS := packageCS;
+			}
+		}
+	}
+	for classCS : classes::Package in classescs::ClassCS.allInstances() {
+		call mClassCS2Class_LM {
+			classCS := classCS;
+		}
+	}
+	for c2c : classescs::ClassCS in classescstraces::ClassCS2Class.allInstances() {
+		call mClassCS2Class_MR {
+			c2c := c2c;
+		}
+	}
+	for package : classescstraces::ClassCS2Class in classes::Package.allInstances() {
+		for packageCS : classes::Class in classescs::PackageCS.allInstances() {
+			call uPackage_ownedClasses {
+				packageCS := packageCS;
+				package := package;
+			}
+		}
+	}
+	for classCS : classescs::ClassCS in classescs::ClassCS.allInstances() {
+		for class : classes::Class in classes::Class.allInstances() {
+			call uClass_name {
+				class := class;
+				classCS := classCS;
+			}
+		}
+	}
+	for package : classescs::RootCS in classes::Package.allInstances() {
+		for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
+			call uPackage_ownedClasses {
+				packageCS := packageCS;
+				package := package;
+			}
+		}
+	}
+	for rootCS : classescstraces::RootCS2Root in classescs::RootCS.allInstances() {
+		call mRootCS2Root_LM {
+			rootCS := rootCS;
+		}
+	}
+	for r2r : classescs::RootCS in classescstraces::RootCS2Root.allInstances() {
+		call mRootCS2Root_MR {
+			r2r := r2r;
+		}
+	}
+	for root : classes::Root in classes::Root.allInstances() {
+		for rootCS : classescs::RootCS in classescs::RootCS.allInstances() {
+			call uRoot_ownedPackages {
+				rootCS := rootCS;
+				root := root;
+			}
+		}
+	}
+}
