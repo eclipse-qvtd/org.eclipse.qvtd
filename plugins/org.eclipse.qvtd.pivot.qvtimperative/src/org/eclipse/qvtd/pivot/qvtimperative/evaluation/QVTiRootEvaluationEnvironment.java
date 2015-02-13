@@ -11,16 +11,13 @@
 package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.pivot.internal.EnvironmentFactoryInternal;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
 public class QVTiRootEvaluationEnvironment extends QVTiEvaluationEnvironment
 {
-    protected final @NonNull Transformation transformation;
-
-    public QVTiRootEvaluationEnvironment(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull QVTiModelManager modelManager, @NonNull Transformation transformation) {
-		super(environmentFactory, modelManager);
-		this.transformation = transformation;
+    public QVTiRootEvaluationEnvironment(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull Transformation executableObject, @NonNull QVTiModelManager modelManager) {
+		super(environmentFactory, executableObject, modelManager);
 	}
 
 	@Override
@@ -30,6 +27,8 @@ public class QVTiRootEvaluationEnvironment extends QVTiEvaluationEnvironment
 
 	@Override
 	public @NonNull Transformation getTransformation() {
-		return transformation;
+		Object executableObject2 = executableObject;
+		assert executableObject2 != null;
+		return (Transformation) executableObject2;
 	}
 }

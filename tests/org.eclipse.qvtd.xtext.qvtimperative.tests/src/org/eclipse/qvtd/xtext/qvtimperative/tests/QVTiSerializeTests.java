@@ -22,12 +22,11 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Model;
-import org.eclipse.ocl.pivot.internal.PivotConstantsInternal;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.pivot.resource.CSResource;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
+import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
@@ -40,8 +39,8 @@ import org.eclipse.xtext.resource.XtextResource;
 public class QVTiSerializeTests extends LoadTestCase
 {
 	protected void doSerializeRoundTrip(@NonNull String stem) throws Exception {
-		OCL ocl1 = OCL.newInstance();
-		OCL ocl2 = OCL.newInstance();
+		OCL ocl1 = OCL.newInstance(OCL.NO_PROJECTS);
+		OCL ocl2 = OCL.newInstance(OCL.NO_PROJECTS);
 		Resource asResource1 = doLoad_Concrete(ocl1, stem + ".qvti", stem + ".qvtias");
 		URI inputURI = getProjectFileURI(stem + ".qvtias");
 		URI referenceURI = getProjectFileURI(stem + "ref.qvtias");
@@ -53,8 +52,8 @@ public class QVTiSerializeTests extends LoadTestCase
 		ocl2.dispose();
 	}	
 
-	protected ASResource loadQVTiAS(@NonNull MetamodelManager MetamodelManager, @NonNull URI inputURI) {
-		Resource asResource = MetamodelManager.getExternalResourceSet().getResource(inputURI, true);
+	protected ASResource loadQVTiAS(@NonNull OCL ocl, @NonNull URI inputURI) {
+		Resource asResource = ocl.getMetamodelManager().getASResourceSet().getResource(inputURI, true);
 //		List<String> conversionErrors = new ArrayList<String>();
 //		RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, null, ecoreResource);
 //		Resource eResource = documentCS.eResource();
@@ -73,7 +72,7 @@ public class QVTiSerializeTests extends LoadTestCase
 		//	CS save
 		//		
 		URI savedURI = ClassUtil.nonNullState(asResource.getURI());
-		asResource.setURI(outputURI.trimFileExtension().trimFileExtension().appendFileExtension(PivotConstantsInternal.OCL_AS_FILE_EXTENSION));
+		asResource.setURI(outputURI.trimFileExtension().trimFileExtension().appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
 		asResource.save(null);
 		asResource.setURI(savedURI);
 		
@@ -103,9 +102,9 @@ public class QVTiSerializeTests extends LoadTestCase
 		//
 		//	Load QVTiAS
 		//		
-		OCL ocl = OCL.newInstance();
+		OCL ocl = OCL.newInstance(OCL.NO_PROJECTS);
 		try {
-			ASResource asResource = loadQVTiAS(ocl.getMetamodelManager(), inputURI);
+			ASResource asResource = loadQVTiAS(ocl, inputURI);
 			assertNoResourceErrors("Normalisation failed", asResource);
 			assertNoValidationErrors("Normalisation invalid", asResource);
 			//

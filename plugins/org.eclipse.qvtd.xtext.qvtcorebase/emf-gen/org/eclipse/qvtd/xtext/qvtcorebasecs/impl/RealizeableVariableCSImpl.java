@@ -19,7 +19,6 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizeableVariableCS;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Realizeable Variable CS</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

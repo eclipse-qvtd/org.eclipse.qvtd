@@ -18,11 +18,11 @@ import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.StandardLibrary;
 import org.eclipse.ocl.pivot.evaluation.EvaluationLogger;
+import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.evaluation.AbstractEvaluationVisitorDecorator;
-import org.eclipse.ocl.pivot.internal.evaluation.EvaluationVisitor;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
 import org.eclipse.ocl.pivot.util.Visitable;
+import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
@@ -51,11 +51,11 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 /**
  * QVTcoreEvaluationVisitorImpl is the class for ...
  */
-public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationVisitorDecorator<QVTiEvaluationVisitor>
-        implements QVTiEvaluationVisitor {
+public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationVisitorDecorator<IQVTiEvaluationVisitor>
+        implements IQVTiEvaluationVisitor {
 	
 	
-	public QVTiEvaluationVisitorDecorator(@NonNull QVTiEvaluationVisitor decorated) {
+	public QVTiEvaluationVisitorDecorator(@NonNull IQVTiEvaluationVisitor decorated) {
 		super(decorated);
 	}
 	
@@ -63,7 +63,7 @@ public abstract class QVTiEvaluationVisitorDecorator extends AbstractEvaluationV
      * Delegates to my decorated visitor.
      */
 	@Override
-	public @NonNull QVTiEvaluationVisitor createNestedEvaluator() {
+	public @NonNull IQVTiEvaluationVisitor createNestedEvaluator() {
         return delegate.createNestedEvaluator();
 	}
 

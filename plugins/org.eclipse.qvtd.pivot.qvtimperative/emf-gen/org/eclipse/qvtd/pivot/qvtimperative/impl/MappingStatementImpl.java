@@ -19,7 +19,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Mapping Statement</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

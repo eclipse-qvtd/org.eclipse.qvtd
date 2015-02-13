@@ -49,7 +49,7 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.EMOFExtendedMetaData;
 import org.eclipse.emf.ecore.xmi.impl.EMOFResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
-import org.eclipse.ocl.pivot.resource.ProjectMap;
+import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 
 /**
  * Merge the QVT Pivot files intp a single flat package for use by ModelMorf
@@ -58,7 +58,7 @@ public class QVTPivot2FlatQVTPivot
 {
 
 	public static void main(String [ ] args) throws IOException {
-		ProjectMap projectMap = new ProjectMap();
+		ProjectMap projectMap = new ProjectMap(false);
 //		EcorePlugin.ExtensionProcessor.process(Ecore2UML.class.getClassLoader());
 		ResourceSet ecoreResourceSet = new ResourceSetImpl();
 		projectMap.initializeResourceSet(ecoreResourceSet);

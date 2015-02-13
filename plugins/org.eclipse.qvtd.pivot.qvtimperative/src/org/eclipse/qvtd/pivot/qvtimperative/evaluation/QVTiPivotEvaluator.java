@@ -18,7 +18,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
+import org.eclipse.ocl.pivot.evaluation.EvaluationEnvironment;
+import org.eclipse.ocl.pivot.evaluation.EvaluationVisitor;
+import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
@@ -30,27 +32,16 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  */
 public class QVTiPivotEvaluator implements EvaluationMonitor
 {
-	protected final @NonNull MetamodelManager metamodelManager;
-	protected final @NonNull Transformation transformation;
 	protected final @NonNull QVTiEnvironmentFactory environmentFactory;
+	protected final @NonNull Transformation transformation;
 	protected final @NonNull QVTiModelManager modelManager;
     private EvaluationMonitor monitor = null;
     private boolean canceled = false;
 
     public QVTiPivotEvaluator(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
     	this.environmentFactory = environmentFactory;
-    	this.metamodelManager = environmentFactory.getMetamodelManager();
     	this.transformation = transformation;
     	QVTiTransformationAnalysis transformationAnalysis = environmentFactory.createTransformationAnalysis();
-    	transformationAnalysis.analyzeTransformation(transformation);
-    	this.modelManager = environmentFactory.createModelManager(transformationAnalysis);
-    }
-
-    public QVTiPivotEvaluator(@NonNull MetamodelManager metamodelManager, @NonNull Transformation transformation) {
-    	this.metamodelManager = metamodelManager;
-    	this.transformation = transformation;
-    	this.environmentFactory = (QVTiEnvironmentFactory) metamodelManager.getEnvironmentFactory();
-     	QVTiTransformationAnalysis transformationAnalysis = environmentFactory.createTransformationAnalysis();
     	transformationAnalysis.analyzeTransformation(transformation);
     	this.modelManager = environmentFactory.createModelManager(transformationAnalysis);
     }
@@ -84,7 +75,7 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
         if (typedModel == null) {
         	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
         }
-        Resource resource = metamodelManager.getExternalResourceSet().createResource(modelURI, contentType);
+        Resource resource = environmentFactory.getResourceSet().createResource(modelURI, contentType);
         if (resource != null) {
         	modelManager.addModel(typedModel, resource);
         }
@@ -95,8 +86,8 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
 	}
 
 	public Boolean execute() {
-        IQVTiEvaluationEnvironment evalEnv = environmentFactory.createEvaluationEnvironment(modelManager, transformation);
-        QVTiEvaluationVisitor visitor = environmentFactory.createEvaluationVisitor(evalEnv);
+        EvaluationEnvironment evalEnv = environmentFactory.createEvaluationEnvironment(transformation, modelManager);
+        EvaluationVisitor visitor = environmentFactory.createEvaluationVisitor(evalEnv);
         return (Boolean) transformation.accept(visitor);
 	}
 
@@ -111,8 +102,8 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
 		return environmentFactory;
 	}
 
-	public final @NonNull MetamodelManager getMetamodelManager() {
-		return metamodelManager;
+	public final @NonNull PivotMetamodelManager getMetamodelManager() {
+		return environmentFactory.getMetamodelManager();
 	}
 	
 	public final @NonNull QVTiModelManager getModelManager() {
@@ -136,7 +127,7 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
         if (typedModel == null) {
         	throw new IllegalStateException("Unknown TypedModel '" + name + "'");
         }
-        Resource resource = metamodelManager.getExternalResourceSet().getResource(modelURI, true);
+        Resource resource = environmentFactory.getResourceSet().getResource(modelURI, true);
         if (resource != null) {
         	modelManager.addModel(typedModel, resource);
         }
@@ -148,10 +139,10 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
         }
         Resource resource;
         if (contentType == null) {
-        	resource = metamodelManager.getExternalResourceSet().getResource(modelURI, true);
+        	resource = environmentFactory.getResourceSet().getResource(modelURI, true);
         }
         else {
-        	resource = metamodelManager.getExternalResourceSet().createResource(modelURI, contentType);
+        	resource = environmentFactory.getResourceSet().createResource(modelURI, contentType);
         	try {
 				resource.load(null);
 			} catch (IOException e) {

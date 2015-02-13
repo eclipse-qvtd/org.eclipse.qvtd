@@ -16,6 +16,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
 public interface IQVTiEvaluationEnvironment extends EvaluationEnvironment
 {
+	@Override
 	@NonNull QVTiModelManager getModelManager();
 	@NonNull QVTiRootEvaluationEnvironment getRootEvaluationEnvironment();
 	@NonNull Transformation getTransformation();

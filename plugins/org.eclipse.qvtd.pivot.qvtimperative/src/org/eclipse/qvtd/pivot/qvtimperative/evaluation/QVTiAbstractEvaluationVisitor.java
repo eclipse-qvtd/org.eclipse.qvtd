@@ -24,7 +24,7 @@ import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.ids.IdResolver;
-import org.eclipse.ocl.pivot.internal.evaluation.EvaluationVisitorImpl;
+import org.eclipse.ocl.pivot.internal.evaluation.OCLEvaluationVisitor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
@@ -64,7 +64,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
  * 
  * @author Horacio Hoyos
  */
-public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImpl implements QVTiEvaluationVisitor
+public abstract class QVTiAbstractEvaluationVisitor extends OCLEvaluationVisitor implements IQVTiEvaluationVisitor
 {
 //	private static final Logger logger = Logger.getLogger(QVTiAbstractEvaluationVisitor.class);
         
@@ -75,14 +75,14 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
      * @param evalEnv The evaluation environment
      */
     public QVTiAbstractEvaluationVisitor(@NonNull IQVTiEvaluationEnvironment evalEnv) {
-        super(evalEnv, evalEnv.getModelManager());
+        super(evalEnv);
     }
 
     /* (non-Javadoc)
      * @see org.eclipse.ocl.pivot.evaluation.EvaluationVisitorImpl#createNestedEvaluator()
      */
     @Override
-	public abstract @NonNull QVTiEvaluationVisitor createNestedEvaluator();
+	public abstract @NonNull IQVTiEvaluationVisitor createNestedEvaluator();
 
 	protected void doMappingStatements(@NonNull List<MappingStatement> mappingStatements) {
 	}
@@ -94,14 +94,14 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 				Object boxedValue = safeVisit(propertyAssignment.getValue());
 				Property targetProperty = propertyAssignment.getTargetProperty();
 				Class<?> instanceClass = null;
-				EObject eTarget = targetProperty.getETarget();
+				EObject eTarget = targetProperty.getESObject();
 				if (eTarget instanceof EStructuralFeature) {
 					EClassifier eType = ((EStructuralFeature)eTarget).getEType();
 					if (eType != null) {
 						instanceClass = eType.getInstanceClass();
 					}
 				}
-				Object ecoreValue = metamodelManager.getIdResolver().ecoreValueOf(instanceClass, boxedValue);
+				Object ecoreValue = environmentFactory.getIdResolver().ecoreValueOf(instanceClass, boxedValue);
 				targetProperty.initValue((EObject) slotExpValue, ecoreValue);
 				if (cacheIndex != null) {
 					getModelManager().setMiddleOpposite(cacheIndex, slotExpValue, ecoreValue);
@@ -318,13 +318,13 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 			Variable boundVariable = ClassUtil.nonNullModel(binding.getBoundVariable());
 			Object valueOrValues = null;
 			try {
-				valueOrValues = ((QVTiEvaluationVisitor)undecoratedVisitor).safeVisit(binding.getValue());
+				valueOrValues = ((IQVTiEvaluationVisitor)undecoratedVisitor).safeVisit(binding.getValue());
 			} catch (InvalidValueException ex) {
 				// There was an OCLVoid value being navigated or any other/similar OCL error
 				// evaluating the binding value
 				return null;
 			}
-			Type valueType = metamodelManager.getIdResolver().getDynamicTypeOf(valueOrValues);
+			Type valueType = environmentFactory.getIdResolver().getDynamicTypeOf(valueOrValues);
 			Type varType = boundVariable.getType();
 			if ((varType != null) && valueType.conformsTo(metamodelManager.getStandardLibrary(), varType)) {
 				evaluationEnvironment.replace(boundVariable, valueOrValues);
@@ -364,7 +364,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 	@Override
 	public @Nullable Object visitMappingSequence(@NonNull MappingSequence mappingSequence) {
 		for (MappingStatement mappingStatement : mappingSequence.getMappingStatements()) {
-			QVTiEvaluationVisitor nv = ((QVTiEvaluationVisitor) undecoratedVisitor).createNestedEvaluator();
+			IQVTiEvaluationVisitor nv = ((IQVTiEvaluationVisitor) undecoratedVisitor).createNestedEvaluator();
 			// The Undecorated visitor createNestedEvaluator should return the undecorated, so no need
 			// to call the getUndecoratedVisitor.
 			try {
@@ -497,7 +497,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
     @Override
 	public @Nullable Object visitVariableAssignment(@NonNull VariableAssignment variableAssignment) {
     	Variable targetVariable = variableAssignment.getTargetVariable() ;
-		Object value = ((QVTiEvaluationVisitor)undecoratedVisitor).safeVisit(variableAssignment.getValue());
+		Object value = ((IQVTiEvaluationVisitor)undecoratedVisitor).safeVisit(variableAssignment.getValue());
 		// The variable had been added to the environment before the mapping call
 		if (targetVariable != null) {
 			evaluationEnvironment.replace(targetVariable, value);
@@ -507,10 +507,10 @@ public abstract class QVTiAbstractEvaluationVisitor extends EvaluationVisitorImp
 
 	@Override
 	public @Nullable Object visitVariablePredicate(@NonNull VariablePredicate variablePredicate) {     
-        IdResolver idResolver = metamodelManager.getIdResolver();
+        IdResolver idResolver = environmentFactory.getIdResolver();
         // Each predicate has a conditionExpression that is an OCLExpression
         OCLExpression exp = variablePredicate.getConditionExpression();
-		Object value = ((QVTiEvaluationVisitor)undecoratedVisitor).safeVisit(exp);
+		Object value = ((IQVTiEvaluationVisitor)undecoratedVisitor).safeVisit(exp);
         Variable variable = variablePredicate.getTargetVariable();
 		Type guardType = variable.getType();
 		Type valueType = idResolver.getDynamicTypeOf(value);

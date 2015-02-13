@@ -10,7 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtrelationcs;
 
-import org.eclipse.ocl.pivot.Nameable;
+import org.eclipse.ocl.pivot.utilities.Nameable;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 
 /**
@@ -20,7 +20,7 @@ import org.eclipse.ocl.xtext.basecs.ModelElementCS;
  *
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getAbstractDomainCS()
- * @model abstract="true" superTypes="org.eclipse.ocl.xtext.basecs.ModelElementCS org.eclipse.ocl.pivot.Nameable"
+ * @model abstract="true" superTypes="org.eclipse.ocl.xtext.basecs.ModelElementCS org.eclipse.ocl.pivot.utilities.Nameable"
  * @generated
  */
 public interface AbstractDomainCS extends ModelElementCS, Nameable {

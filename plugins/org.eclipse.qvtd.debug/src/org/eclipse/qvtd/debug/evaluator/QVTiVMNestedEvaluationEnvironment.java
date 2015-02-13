@@ -32,17 +32,17 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiNestedEvaluationEnvir
 public class QVTiVMNestedEvaluationEnvironment extends QVTiNestedEvaluationEnvironment implements IQVTiVMEvaluationEnvironment
 {
 	private @NonNull Element myCurrentIP;
-	private @NonNull NamedElement myOperation;
+	private @NonNull NamedElement myOperation;		// Redundant if final
     private final int myStackDepth;
 	private final long id;
 	private final @NonNull Stack<StepperEntry> stepperStack = new Stack<StepperEntry>();
     
-	public QVTiVMNestedEvaluationEnvironment(@NonNull IQVTiVMEvaluationEnvironment evaluationEnvironment, long id, @NonNull NamedElement operation) {
-		super(evaluationEnvironment);
+	public QVTiVMNestedEvaluationEnvironment(@NonNull IQVTiVMEvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject, long id) {
+		super(evaluationEnvironment, executableObject);
 		myStackDepth = evaluationEnvironment.getDepth() + 1;
 		this.id = id;
-		this.myOperation = operation;
-		this.myCurrentIP = operation;
+		this.myOperation = executableObject;
+		this.myCurrentIP = executableObject;
 	}
 
 	@Override

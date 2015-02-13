@@ -12,14 +12,14 @@ package org.eclipse.qvtd.xtext.qvtcore.ui.model;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.ocl.xtext.base.ui.model.BaseDocumentProvider;
+import org.eclipse.ocl.xtext.base.ui.model.BaseCSorASDocumentProvider;
 import org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage;
 
 /**
  * QVTcoreDocumentProvider orchestrates the load and saving of optional XMI content
  * externally while maintaining the serialised human friendly form internally. 
  */
-public class QVTcoreDocumentProvider extends BaseDocumentProvider
+public class QVTcoreDocumentProvider extends BaseCSorASDocumentProvider
 {
 	@Override
 	protected @NonNull String createTestDocument(@NonNull URI uri, @NonNull String lastSegment) {

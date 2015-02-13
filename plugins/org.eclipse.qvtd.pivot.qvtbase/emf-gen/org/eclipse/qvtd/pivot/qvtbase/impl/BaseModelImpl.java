@@ -23,7 +23,6 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Base Model</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */

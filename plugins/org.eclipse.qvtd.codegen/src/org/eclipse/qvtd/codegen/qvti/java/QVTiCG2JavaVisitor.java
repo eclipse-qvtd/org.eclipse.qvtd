@@ -982,7 +982,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 
 	@Override
 	public @NonNull Boolean visitCGTransformation(@NonNull CGTransformation cgTransformation) {		
-		QVTiTransformationAnalysis transformationAnalysis = new QVTiTransformationAnalysis(getMetamodelManager());
+		QVTiTransformationAnalysis transformationAnalysis = new QVTiTransformationAnalysis(context.getEnvironmentFactory().getMetamodelManager());
 		@SuppressWarnings("null")@NonNull Transformation transformation = (Transformation) cgTransformation.getAst();
 		transformationAnalysis.analyzeTransformation(transformation);
 		String className = cgTransformation.getName();

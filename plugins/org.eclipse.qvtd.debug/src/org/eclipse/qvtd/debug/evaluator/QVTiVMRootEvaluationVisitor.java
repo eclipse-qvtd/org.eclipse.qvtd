@@ -59,7 +59,7 @@ import org.eclipse.qvtd.debug.stepper.QVTiStepperVisitor;
 import org.eclipse.qvtd.debug.vm.QVTiVMVirtualMachine;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 
-public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor implements IVMRootEvaluationVisitor<Transformation>
+public class QVTiVMRootEvaluationVisitor extends AbstractQVTiVMEvaluationVisitor implements IVMRootEvaluationVisitor<Transformation>
 {
 	private final @NonNull IVMDebuggerShell fDebugShell;
 	private final @NonNull VMBreakpointManager fBPM;
@@ -67,11 +67,11 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 	private final @NonNull IterateBreakpointHelper fIterateBPHelper;
 //	private final List<UnitLocation> fLocationStack;
 	private @NonNull VMSuspension fCurrentStepMode;
-	private @NonNull Stack<QVTiVMEvaluationVisitor> visitorStack = new Stack<QVTiVMEvaluationVisitor>();
+	private @NonNull Stack<AbstractQVTiVMEvaluationVisitor> visitorStack = new Stack<AbstractQVTiVMEvaluationVisitor>();
 	private final @NonNull Variable invalidVariable;
 
 	public QVTiVMRootEvaluationVisitor(@NonNull IQVTiVMEvaluationEnvironment evalEnv, @NonNull IVMDebuggerShell shell) {
-		super(new QVTiVMEvaluationVisitorImpl(evalEnv));
+		super(new QVTiVMEvaluationVisitor(evalEnv));
 		fDebugShell = shell;
 		fBPM = shell.getBreakPointManager();
 		fIterateBPHelper = new IterateBreakpointHelper(fBPM);
@@ -82,7 +82,7 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		invalidVariable = ClassUtil.nonNullEMF(PivotFactory.eINSTANCE.createVariable());
 		invalidVariable.setName("$invalid");
 		String typeName = ClassUtil.nonNullEMF(PivotPackage.Literals.OCL_EXPRESSION.getName());
-		invalidVariable.setType(getEnvironmentFactory().getMetamodelManager().getPivotType(typeName));
+		invalidVariable.setType(getEnvironmentFactory().getMetamodelManager().getASClass(typeName));
 	}
 
 	@Override
@@ -140,7 +140,7 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 	}
 
 	public @NonNull UnitLocation getCurrentLocation() {
-		QVTiVMEvaluationVisitor currentVisitor = visitorStack.peek();
+		AbstractQVTiVMEvaluationVisitor currentVisitor = visitorStack.peek();
 		IVMEvaluationEnvironment<?> evaluationEnvironment = currentVisitor.getEvaluationEnvironment();
 		return evaluationEnvironment.getCurrentLocation();
 //		return fCurrentLocation;
@@ -310,7 +310,7 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		if (VMVirtualMachine.VISITOR_STACK.isActive()) {
 			VMVirtualMachine.VISITOR_STACK.println("[" + Thread.currentThread().getName() + "] " + "Pop " + evaluationVisitor.toString());
 		}
-		QVTiVMEvaluationVisitor poppedVisitor = visitorStack.pop();
+		AbstractQVTiVMEvaluationVisitor poppedVisitor = visitorStack.pop();
 		assert poppedVisitor == evaluationVisitor;
 	}
 
@@ -427,7 +427,7 @@ public class QVTiVMRootEvaluationVisitor extends QVTiVMEvaluationVisitor impleme
 		doProcessRequest(location, event);
 	}
 
-	public void pushVisitor(@NonNull QVTiVMEvaluationVisitor evaluationVisitor) {
+	public void pushVisitor(@NonNull AbstractQVTiVMEvaluationVisitor evaluationVisitor) {
 		if (VMVirtualMachine.VISITOR_STACK.isActive()) {
 			VMVirtualMachine.VISITOR_STACK.println("[" + Thread.currentThread().getName() + "] " + "Push " + evaluationVisitor.toString());
 		}

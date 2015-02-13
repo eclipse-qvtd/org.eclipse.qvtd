@@ -5,7 +5,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="AbstractDatum" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="super" upperBound="-1"
         eType="#//AbstractDatum"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="domain" eType="ecore:EClass http://www.eclipse.org/qvt/2015/QVTcoreBase#//CoreDomain"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/ocl/3.1.0/Pivot#//Type"
+        derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="domain" eType="ecore:EClass http://www.eclipse.org/qvt/0.9/QVTcoreBase#//CoreDomain"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sources" upperBound="-1"
         eType="#//AbstractAction" eOpposite="#//AbstractAction/results"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="targets" upperBound="-1"
@@ -30,16 +32,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="schedule" eType="#//Schedule"
         eOpposite="#//Schedule/actions"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ClassDatum" eSuperTypes="#//AbstractDatum">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/ocl/2015/Pivot#//Class"
-        derived="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="propertyDatums" upperBound="-1"
-        eType="#//PropertyDatum" containment="true" eOpposite="#//PropertyDatum/classDatum"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassDatum" eSuperTypes="#//AbstractDatum"/>
   <eClassifiers xsi:type="ecore:EClass" name="DataParameter">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLoop" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
-        eType="ecore:EClass http://www.eclipse.org/ocl/2015/Pivot#//Variable"/>
+        eType="ecore:EClass http://www.eclipse.org/ocl/3.1.0/Pivot#//Variable"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="primaryDistinctData" eType="#//DistinctData"
         eOpposite="#//DistinctData/primaryArguments"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="secondaryDistinctData"
@@ -58,16 +55,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="InputAction" eSuperTypes="#//AbstractAction"/>
   <eClassifiers xsi:type="ecore:EClass" name="MappingAction" eSuperTypes="#//AbstractAction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="mapping" lowerBound="1"
-        eType="ecore:EClass http://www.eclipse.org/qvt/2015/QVTimperative#//Mapping"/>
+        eType="ecore:EClass http://www.eclipse.org/qvt/0.9/QVTimperative#//Mapping"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OutputAction" eSuperTypes="#//AbstractAction"/>
-  <eClassifiers xsi:type="ecore:EClass" name="PropertyDatum" eSuperTypes="#//AbstractDatum">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"
-        eType="ecore:EClass http://www.eclipse.org/ocl/2015/Pivot#//Property"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="classDatum" lowerBound="1"
-        eType="#//ClassDatum" eOpposite="#//ClassDatum/propertyDatums"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="opposite" eType="#//PropertyDatum"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Schedule">
     <eStructuralFeatures xsi:type="ecore:EReference" name="datums" upperBound="-1"
         eType="#//AbstractDatum" containment="true" eOpposite="#//AbstractDatum/schedule"/>

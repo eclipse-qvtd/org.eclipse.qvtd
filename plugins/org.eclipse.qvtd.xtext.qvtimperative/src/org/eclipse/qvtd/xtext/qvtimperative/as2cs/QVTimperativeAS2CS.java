@@ -13,13 +13,11 @@ package org.eclipse.qvtd.xtext.qvtimperative.as2cs;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.PivotPackage;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerResourceAdapter;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CS;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CSConversion;
@@ -59,12 +57,12 @@ public class QVTimperativeAS2CS extends EssentialOCLAS2CS
 		}
 	}
 		
-	public QVTimperativeAS2CS(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap, @NonNull MetamodelManager metamodelManager) {
-		super(cs2asResourceMap, metamodelManager);
+	public QVTimperativeAS2CS(@NonNull Map<? extends BaseCSResource, ? extends ASResource> cs2asResourceMap, @NonNull EnvironmentFactoryInternal environmentFactory) {
+		super(cs2asResourceMap, environmentFactory);
 		addFactory(Factory.INSTANCE);
-		for (Resource csResource : cs2asResourceMap.keySet()) {
+		for (BaseCSResource csResource : cs2asResourceMap.keySet()) {
 			assert csResource != null;
-			MetamodelManagerResourceAdapter.getAdapter(csResource, metamodelManager);
+			environmentFactory.adapt(csResource);
 		}
 	}
 

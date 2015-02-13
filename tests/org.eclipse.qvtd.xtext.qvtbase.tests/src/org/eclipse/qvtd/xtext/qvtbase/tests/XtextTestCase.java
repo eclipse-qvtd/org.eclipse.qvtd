@@ -11,15 +11,10 @@
 package org.eclipse.qvtd.xtext.qvtbase.tests;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
 import java.lang.reflect.Method;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import junit.framework.TestCase;
@@ -34,7 +29,6 @@ import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -45,7 +39,6 @@ import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.LambdaType;
 import org.eclipse.ocl.pivot.LoopExp;
-import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Property;
@@ -54,19 +47,14 @@ import org.eclipse.ocl.pivot.TupleType;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.VariableExp;
-import org.eclipse.ocl.pivot.internal.PivotConstantsInternal;
 import org.eclipse.ocl.pivot.internal.StandardLibraryImpl;
-import org.eclipse.ocl.pivot.internal.delegate.OCLDelegateDomain;
-import org.eclipse.ocl.pivot.internal.ecore.as2es.AS2Ecore;
-import org.eclipse.ocl.pivot.internal.ecore.es2as.Ecore2AS;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
+import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
-import org.eclipse.ocl.pivot.resource.ProjectMap;
+import org.eclipse.ocl.pivot.utilities.PivotConstants;
+import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
 import org.eclipse.ocl.pivot.values.Bag;
-import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.xtext.base.utilities.CS2ASResourceAdapter;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
 
 public class XtextTestCase extends PivotTestCase
@@ -106,6 +94,7 @@ public class XtextTestCase extends PivotTestCase
 		}
 	}
 	
+	private static StandaloneProjectMap projectMap = null;
 	public static TestCaseAppender testCaseAppender = new TestCaseAppender();
 
 	protected void assertPivotIsValid(URI pivotURI) {
@@ -177,6 +166,14 @@ public class XtextTestCase extends PivotTestCase
 		return s != null ? s.toString() : null;
 	}
 
+	public static @NonNull StandaloneProjectMap getProjectMap() {
+		StandaloneProjectMap projectMap2 = projectMap;
+		if (projectMap2 == null) {
+			projectMap = projectMap2 = new StandaloneProjectMap(false);
+		}
+		return projectMap2;
+	}
+
 	protected static boolean hasCorrespondingCS(Element pivotElement) {
 		if (!isValidPivot(pivotElement)) {
 			return false;
@@ -223,7 +220,7 @@ public class XtextTestCase extends PivotTestCase
 	
 	protected static boolean isValidPivot(Element pivotElement) {
 		if (pivotElement instanceof org.eclipse.ocl.pivot.Package) {
-			if ((pivotElement.eContainer() == null) && PivotConstantsInternal.ORPHANAGE_NAME.equals(((NamedElement) pivotElement).getName())) {
+			if ((pivotElement.eContainer() == null) && PivotConstants.ORPHANAGE_NAME.equals(((NamedElement) pivotElement).getName())) {
 				return false;
 			}
 		}
@@ -239,8 +236,8 @@ public class XtextTestCase extends PivotTestCase
 		if (pivotElement instanceof Type) {
 			EObject eContainer = pivotElement.eContainer();
 			if ((eContainer instanceof org.eclipse.ocl.pivot.Package) && (eContainer.eContainer() == null)
-					&& PivotConstantsInternal.ORPHANAGE_NAME.equals(((NamedElement) pivotElement).getName())
-					&& PivotConstantsInternal.ORPHANAGE_NAME.equals(((NamedElement) eContainer).getName())) {
+					&& PivotConstants.ORPHANAGE_NAME.equals(((NamedElement) pivotElement).getName())
+					&& PivotConstants.ORPHANAGE_NAME.equals(((NamedElement) eContainer).getName())) {
 				return false;
 			}
 		}
@@ -252,8 +249,6 @@ public class XtextTestCase extends PivotTestCase
 		}
 		return true;
 	}
-	
-	protected ResourceSet resourceSet;
 
 /*	protected XtextResource savePivotAsCS(MetamodelManager metamodelManager, Resource pivotResource, URI outputURI) throws IOException {
 //		ResourceSet csResourceSet = resourceSet; //new ResourceSetImpl();
@@ -290,47 +285,15 @@ public class XtextTestCase extends PivotTestCase
 		}
 		return xtextResource;
 	} */
-	
-	public void createEcoreFile(MetamodelManager metamodelManager, String fileName, String fileContent) throws IOException {
-		String inputName = fileName + ".oclinecore";
-		createOCLinEcoreFile(inputName, fileContent);
-		URI inputURI = getProjectFileURI(inputName);
-		URI ecoreURI = getProjectFileURI(fileName + ".ecore");
-		CS2ASResourceAdapter adapter = null;
-		try {
-			ResourceSet resourceSet2 = metamodelManager.getExternalResourceSet();
-			BaseCSResource xtextResource = (BaseCSResource) resourceSet2.getResource(inputURI, true);
-			assertNoResourceErrors("Load failed", xtextResource);
-			adapter = xtextResource.getCS2ASAdapter(null);
-			Resource pivotResource = adapter.getASResource(xtextResource);
-			assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
-			assertNoValidationErrors("Pivot validation errors", pivotResource.getContents().get(0));
-			Resource ecoreResource = AS2Ecore.createResource(metamodelManager, pivotResource, ecoreURI, null);
-			assertNoResourceErrors("To Ecore errors", ecoreResource);
-			ecoreResource.save(null);
-		}
-		finally {
-			if (adapter != null) {
-				adapter.dispose();
-			}
-		}
-	}
-	
-	public void createOCLinEcoreFile(String fileName, String fileContent) throws IOException {
-		File file = new File(getProjectFile(), fileName);
-		Writer writer = new FileWriter(file);
-		writer.append(fileContent);
-		writer.close();
-	}
 
-	protected Resource getPivotFromEcore(MetamodelManager metamodelManager, Resource ecoreResource) {
-		Ecore2AS ecore2Pivot = Ecore2AS.getAdapter(ecoreResource, metamodelManager);
+/*	protected Resource getPivotFromEcore(@NonNull EnvironmentFactoryInternal environmentFactory, Resource ecoreResource) {
+		Ecore2AS ecore2Pivot = Ecore2AS.getAdapter(ecoreResource, environmentFactory);
 		Model pivotRoot = ecore2Pivot.getPivotModel();
 		Resource pivotResource = pivotRoot.eResource();
 		assertNoResourceErrors("Normalisation failed", pivotResource);
 		assertNoValidationErrors("Normalisation invalid", pivotResource);
 		return pivotResource;
-	}
+	} */
 
 	protected File getProjectFile() {
 		String projectName = getProjectName();
@@ -360,54 +323,22 @@ public class XtextTestCase extends PivotTestCase
 		}
 		return projectURL;
 	}
-
-	protected Resource loadEcore(URI inputURI) {
-		Resource ecoreResource = resourceSet.getResource(inputURI, true);
-		mapOwnURI(ecoreResource);
-//		List<String> conversionErrors = new ArrayList<String>();
-//		RootPackageCS documentCS = Ecore2OCLinEcore.importFromEcore(resourceSet, null, ecoreResource);
-//		Resource eResource = documentCS.eResource();
-		assertNoResourceErrors("Load failed", ecoreResource);
-//		Resource xtextResource = resourceSet.createResource(outputURI, OCLinEcoreCSTPackage.eCONTENT_TYPE);
-//		XtextResource xtextResource = (XtextResource) resourceSet.createResource(outputURI);
-//		xtextResource.getContents().add(documentCS);
-		return ecoreResource;
-	}
-
-	/**
-	 * Some example files have inconsistent self references so map the URI back to
-	 * the resource.
-	 */
-	protected void mapOwnURI(Resource resource) {
-		List<EObject> contents = resource.getContents();
-		if (contents.size() == 1) {
-			EObject root = contents.get(0);
-			if (root instanceof EPackage) {
-				EPackage rootPackage = (EPackage) root;
-				String nsURI = rootPackage.getNsURI();
-				if (nsURI != null) {
-					Map<URI, Resource> uriResourceMap = ((ResourceSetImpl)resourceSet).getURIResourceMap();
-					if (uriResourceMap == null) {
-						uriResourceMap = new HashMap<URI, Resource>();
-						((ResourceSetImpl)resourceSet).setURIResourceMap(uriResourceMap);
-					}
-					uriResourceMap.put(URI.createURI(nsURI), resource);
-				}
-			}
-		}
-	}
 	
 	@Override
 	protected void setUp() throws Exception {
-    	testCaseAppender.install();
+		super.setUp();
+		testCaseAppender.install();
+//    	if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+//    		OCL.initialize(null);
+//    	}
+		PivotStandaloneSetup.doSetup();
 //		CompleteOCLStandaloneSetup.doSetup();
 //		OCLinEcoreStandaloneSetup.doSetup();
 //		OCLstdlibStandaloneSetup.doSetup();
-		super.setUp();
-		resourceSet = new ResourceSetImpl();
-		ProjectMap.initializeURIResourceMap(resourceSet);
-		Map<URI, URI> uriMap = resourceSet.getURIConverter().getURIMap();
-		uriMap.putAll(EcorePlugin.computePlatformURIMap(false));
+//		resourceSet = new ResourceSetImpl();
+//		ProjectMap.initializeURIResourceMap(resourceSet);
+//		Map<URI, URI> uriMap = resourceSet.getURIConverter().getURIMap();
+//		uriMap.putAll(EcorePlugin.computePlatformURIMap(false));
 //		for (Map.Entry<URI,URI> entry : uriMap.entrySet()) {
 //			System.out.println(entry.getKey() + " => " + entry.getValue());
 //		}
@@ -416,18 +347,11 @@ public class XtextTestCase extends PivotTestCase
 //		URI projectOCLstdlibURI = URI.createURI("oclstdlib.oclstdlib").resolve(projectURI);
 //		uriMap.put(platformOCLstdlibURI, projectOCLstdlibURI);
 		StandardLibraryContribution.REGISTRY.put(StandardLibraryImpl.DEFAULT_OCL_STDLIB_URI, new OCLstdlib.Loader());
-        OCLDelegateDomain.initialize(null);
+//        OCLDelegateDomain.initialize(null);
 	}
 
 	@Override
 	protected void tearDown() throws Exception {
-		if (resourceSet != null) {
-			for (Resource resource : resourceSet.getResources()) {
-				resource.unload();
-			}
-			resourceSet.getResources().clear();
-			resourceSet = null;
-		}
 		super.tearDown();
 	}
 }

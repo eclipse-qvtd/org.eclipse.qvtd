@@ -22,7 +22,9 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManager;
+import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
+import org.eclipse.ocl.pivot.resource.BasicProjectManager;
+import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
@@ -36,7 +38,7 @@ public abstract class AbstractMainTab extends AbstractLaunchConfigurationTab
 {
 	private static final Logger logger = Logger.getLogger(AbstractMainTab.class);
 
-	protected @Nullable MetamodelManager metamodelManager;		// FIXME Add a dispose() when not visible for a long time
+	protected @Nullable OCLInternal ocl;		// FIXME Add a dispose() when not visible for a long time
 	
 	/**
 	 * Internal flag to suppress redundant recursive updates while initializing controls.
@@ -45,20 +47,20 @@ public abstract class AbstractMainTab extends AbstractLaunchConfigurationTab
 	
 	@Override
 	public void dispose() {
-		MetamodelManager metamodelManager2 = metamodelManager;
-		if (metamodelManager2 != null) {
-			metamodelManager2.dispose();
-			metamodelManager = null;
+		OCL ocl2 = ocl;
+		if (ocl2 != null) {
+			ocl2.dispose();
+			ocl = null;
 		}
 		super.dispose();
 	}
 
-	protected @NonNull MetamodelManager getMetamodelManager() {
-		MetamodelManager metamodelManager2 = metamodelManager;
-		if (metamodelManager2 == null) {
-			metamodelManager = metamodelManager2 = new QVTiEnvironmentFactory(null, null).getMetamodelManager();
+	protected @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
+		OCLInternal ocl2 = ocl;
+		if (ocl2 == null) {
+			ocl = ocl2 = OCLInternal.newInstance(new QVTiEnvironmentFactory(BasicProjectManager.createDefaultProjectManager(), null));
 		}
-		return metamodelManager2;
+		return (QVTiEnvironmentFactory) ocl2.getEnvironmentFactory();
 	}
 
 	public @NonNull String getName() {

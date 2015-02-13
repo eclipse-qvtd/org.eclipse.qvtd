@@ -12,26 +12,23 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.internal.EnvironmentFactoryInternal;
-import org.eclipse.ocl.pivot.internal.evaluation.PivotEvaluationEnvironment;
+import org.eclipse.ocl.pivot.NamedElement;
+import org.eclipse.ocl.pivot.internal.evaluation.BasicEvaluationEnvironment;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 
-public abstract class QVTiEvaluationEnvironment extends PivotEvaluationEnvironment implements IQVTiEvaluationEnvironment
+public abstract class QVTiEvaluationEnvironment extends BasicEvaluationEnvironment implements IQVTiEvaluationEnvironment
 {
-	protected final @NonNull QVTiModelManager modelManager;
-	
-	protected QVTiEvaluationEnvironment(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull QVTiModelManager modelManager) {
-		super(environmentFactory);
-		this.modelManager = modelManager;
+	protected QVTiEvaluationEnvironment(@NonNull EnvironmentFactoryInternal environmentFactory, @NonNull NamedElement executableObject, @NonNull QVTiModelManager modelManager) {
+		super(environmentFactory, executableObject, modelManager);
 	}
 
-	protected QVTiEvaluationEnvironment(@NonNull IQVTiEvaluationEnvironment evaluationEnvironment) {
-		super(evaluationEnvironment);
-		this.modelManager = evaluationEnvironment.getModelManager();
+	protected QVTiEvaluationEnvironment(@NonNull IQVTiEvaluationEnvironment evaluationEnvironment, @NonNull NamedElement executableObject) {
+		super(evaluationEnvironment, executableObject);
 	}
 
 	@Override
 	public @NonNull QVTiModelManager getModelManager() {
-		return modelManager;
+		return (QVTiModelManager) modelManager;
 	}
 
 	public @Nullable IQVTiEvaluationEnvironment getParentEvaluationEnvironment() {

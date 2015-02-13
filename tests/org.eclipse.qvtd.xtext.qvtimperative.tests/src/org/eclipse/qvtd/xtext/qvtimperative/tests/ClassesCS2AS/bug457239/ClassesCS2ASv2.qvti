@@ -1,0 +1,35 @@
+import classes : '../Classes.ecore';
+import classescs : '../ClassesCS.ecore';
+import 'helpers.ocl';
+
+transformation classescs2as
+{
+	leftCS imports classescs;
+	rightAS imports classes;
+}
+
+map createPackage in classescs2as
+{
+	check leftCS(packageCS : PackageCS) {}
+	enforce rightAS() {
+		realize package : Package
+	}
+	where () {
+		package.name := if packageCS.aBooleanElementOp()
+						--if not packageCS.name.oclIsUndefined()
+						then 'transformation worked'
+						else 'unexpected'
+						endif;
+	}
+}
+
+map __root__ in classescs2as
+{
+	where () {}
+
+	for packageCS : classescs::PackageCS in classescs::PackageCS.allInstances() {
+		call createPackage {
+			packageCS := packageCS;
+		}
+	}
+}

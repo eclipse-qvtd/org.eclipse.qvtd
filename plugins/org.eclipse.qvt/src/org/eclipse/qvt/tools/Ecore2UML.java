@@ -60,7 +60,7 @@ import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMLHelperImpl;
-import org.eclipse.ocl.pivot.resource.ProjectMap;
+import org.eclipse.ocl.pivot.internal.resource.ProjectMap;
 import org.eclipse.uml2.uml.Association;
 import org.eclipse.uml2.uml.Classifier;
 import org.eclipse.uml2.uml.Comment;
@@ -170,7 +170,7 @@ public class Ecore2UML {
 	}
 
 	public static void main(String [ ] args) throws IOException {
-		ProjectMap projectMap = new ProjectMap();
+		ProjectMap projectMap = new ProjectMap(false);
 //		EcorePlugin.ExtensionProcessor.process(Ecore2UML.class.getClassLoader());
 		ResourceSet ecoreResourceSet = new ResourceSetImpl();
 		projectMap.initializeResourceSet(ecoreResourceSet);

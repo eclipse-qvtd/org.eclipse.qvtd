@@ -23,7 +23,6 @@ import org.eclipse.qvtd.pivot.qvtrelation.util.QVTrelationVisitor;
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Relation Model</b></em>'.
  * <!-- end-user-doc -->
- * <p>
  *
  * @generated
  */
