@@ -18,3 +18,12 @@ Require-Bundle: org.junit,
  org.eclipse.qvtd.build.etl.tests;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: classes,
+ classes.impl,
+ classes.util,
+ classescs,
+ classescs.impl,
+ classescs.util,
+ classescstraces,
+ classescstraces.impl,
+ classescstraces.util
