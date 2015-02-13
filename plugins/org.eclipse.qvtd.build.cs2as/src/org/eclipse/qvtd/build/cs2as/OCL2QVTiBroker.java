@@ -1,4 +1,4 @@
-package org.eclipse.qvtd.buid.cs2as;
+package org.eclipse.qvtd.build.cs2as;
 
 import java.net.URISyntaxException;
 
@@ -6,7 +6,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.qvtd.build.etl.EtlTask;
 import org.eclipse.qvtd.build.etl.MtcBroker;
 import org.eclipse.qvtd.build.etl.PivotModel;

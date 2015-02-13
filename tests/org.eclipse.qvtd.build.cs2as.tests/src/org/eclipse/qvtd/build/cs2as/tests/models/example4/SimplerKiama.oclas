@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pivot:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot" xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage"
-    name="SimplerKiama.ocl" externalURI="platform:/resource/org.eclipse.qvtd.buid.cs2as.tests/src/org/eclipse/qvtd/buid/cs2as/tests/models/example4/SimplerKiama.ocl">
+    name="SimplerKiama.ocl" externalURI="platform:/resource/org.eclipse.qvtd.build.cs2as.tests/src/org/eclipse/qvtd/build/cs2as/tests/models/example4/SimplerKiama.ocl">
   <ownedImports importedNamespace="pivot:Model SimplerKiamaCS.ecore.oclas#/"/>
   <ownedImports importedNamespace="pivot:Model SimplerKiamaAS.ecore.oclas#/"/>
   <ownedPackages xmi:id="P.kiamacs" name="kiamacs" URI="http://ocldependencyanalysis/kiamaExampleCS/1.0">

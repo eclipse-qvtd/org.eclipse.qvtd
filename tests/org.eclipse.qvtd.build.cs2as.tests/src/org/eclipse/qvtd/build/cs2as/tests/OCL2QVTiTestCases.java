@@ -1,4 +1,4 @@
-package org.eclipse.qvtd.buid.cs2as.tests;
+package org.eclipse.qvtd.build.cs2as.tests;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -26,7 +26,7 @@ import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
-import org.eclipse.qvtd.buid.cs2as.OCL2QVTiBroker;
+import org.eclipse.qvtd.build.cs2as.OCL2QVTiBroker;
 import org.eclipse.qvtd.build.etl.EtlTask;
 import org.eclipse.qvtd.build.etl.MtcBroker;
 import org.eclipse.qvtd.build.etl.PivotModel;
@@ -53,8 +53,8 @@ import org.junit.Test;
  */
 public class OCL2QVTiTestCases extends LoadTestCase {
 	
-	private static final String TESTS_GEN_PATH = "../org.eclipse.qvtd.buid.cs2as.tests/tests-gen/";
-	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("org.eclipse.qvtd.buid.cs2as.tests/src/org/eclipse/qvtd/buid/cs2as/tests/models", true);
+	private static final String TESTS_GEN_PATH = "../org.eclipse.qvtd.build.cs2as.tests/tests-gen/";
+	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("org.eclipse.qvtd.build.cs2as.tests/src/org/eclipse/qvtd/build/cs2as/tests/models", true);
 	
 	protected class MyQVT extends OCL
 	{
@@ -159,8 +159,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
     	URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());
     	assertValidQVTiModel(txURI);
     	
-    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("Source2TargetSchedule_complete.graphml").toString(), false);
-    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("Source2TargetSchedule_pruned.graphml").toString(), true);
+//    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("Source2TargetSchedule_complete.graphml").toString(), false);
+//    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("Source2TargetSchedule_pruned.graphml").toString(), true);
 		
     	QVTiPivotEvaluator testEvaluator =  new QVTiPivotEvaluator(myQVT.getEnvironmentFactory(), qvtiTransf.getTransformation());
 		URI samplesBaseUri = baseURI.appendSegment("samples");
@@ -264,8 +264,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
     	URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());
     	assertValidQVTiModel(txURI);
     	
-    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("SimplerKiamaSchedule_complete.graphml").toString(), false);
-    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("SimplerKiamaSchedule_pruned.graphml").toString(), true);
+    	//launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("SimplerKiamaSchedule_complete.graphml").toString(), false);
+    	//launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("SimplerKiamaSchedule_pruned.graphml").toString(), true);
 	}
 	
 	@Test

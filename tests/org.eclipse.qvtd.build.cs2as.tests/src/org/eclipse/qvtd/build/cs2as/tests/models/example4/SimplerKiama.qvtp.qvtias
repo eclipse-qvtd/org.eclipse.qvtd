@@ -3,117 +3,109 @@
     xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot" xmlns:qvtb="http://www.eclipse.org/qvt/2015/QVTbase"
     xmlns:qvtcb="http://www.eclipse.org/qvt/2015/QVTcoreBase" xmlns:qvti="http://www.eclipse.org/qvt/2015/QVTimperative"
     xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTbase java://org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage http://www.eclipse.org/qvt/2015/QVTcoreBase java://org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage http://www.eclipse.org/qvt/2015/QVTimperative java://org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage"
-    name="SimplerKiama.qvtias" externalURI="platform:/resource/org.eclipse.qvtd.buid.cs2as.tests/src/org/eclipse/qvtd/buid/cs2as/tests/models/example4/SimplerKiama.qvtias">
+    name="SimplerKiama.qvtp.qvtias" externalURI="platform:/resource/org.eclipse.qvtd.build.cs2as.tests/src/org/eclipse/qvtd/build/cs2as/tests/models/example4/SimplerKiama.qvtp.qvtias">
   <ownedImports importedNamespace="pivot:Model SimplerKiamaCS.ecore.oclas#/"/>
   <ownedImports importedNamespace="pivot:Model SimplerKiamaAS.ecore.oclas#/"/>
   <ownedPackages xmi:id="P." name="">
-    <ownedClasses xsi:type="qvtb:Transformation" xmi:id="T..SimplerKiama%46%qvtp%46%qvtias"
-        name="SimplerKiama.qvtp.qvtias">
-      <modelParameter xmi:id="qT..SimplerKiama.qvtp.qvtias.leftCS" name="leftCS" usedPackage="SimplerKiamaCS.ecore.oclas#P.kiamacs"/>
-      <modelParameter xmi:id="qT..SimplerKiama.qvtp.qvtias.rightAS" name="rightAS"
+    <ownedClasses xsi:type="qvtb:Transformation" xmi:id="T..SimplerKiama_qvtp_qvtias"
+        name="SimplerKiama_qvtp_qvtias">
+      <modelParameter xmi:id="qT..SimplerKiama_qvtp_qvtias.leftCS" name="leftCS" usedPackage="SimplerKiamaCS.ecore.oclas#P.kiamacs"/>
+      <modelParameter xmi:id="qT..SimplerKiama_qvtp_qvtias.rightAS" name="rightAS"
           usedPackage="SimplerKiamaAS.ecore.oclas#P.kiamaas"/>
-      <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama.qvtp.qvtias.cCompositeCS_2_Composite"
+      <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama_qvtp_qvtias.cCompositeCS_2_Composite"
           name="cCompositeCS_2_Composite">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false"
-            typedModel="#qT..SimplerKiama.qvtp.qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
           <guardPattern>
-            <variable xmi:id="qV..SimplerKiama.qvtp.qvtias.cCompositeCS_2_Composite.leftCS.guard.compositeCS"
+            <variable xmi:id="qV..SimplerKiama_qvtp_qvtias.cCompositeCS_2_Composite.leftCS.guard.compositeCS"
                 name="compositeCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true"
-            typedModel="#qT..SimplerKiama.qvtp.qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern>
-            <realizedVariable xmi:id="qV..SimplerKiama.qvtp.qvtias.cCompositeCS_2_Composite.rightAS.bottom.composite"
+            <realizedVariable xmi:id="qV..SimplerKiama_qvtp_qvtias.cCompositeCS_2_Composite.rightAS.bottom.composite"
                 name="composite" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Composite"/>
           </bottomPattern>
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" isDefault="false" targetProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
+          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Composite"
-                referredVariable="#qV..SimplerKiama.qvtp.qvtias.cCompositeCS_2_Composite.rightAS.bottom.composite"/>
+                referredVariable="#qV..SimplerKiama_qvtp_qvtias.cCompositeCS_2_Composite.rightAS.bottom.composite"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"
-                referredVariable="#qV..SimplerKiama.qvtp.qvtias.cCompositeCS_2_Composite.leftCS.guard.compositeCS"/>
+                referredVariable="#qV..SimplerKiama_qvtp_qvtias.cCompositeCS_2_Composite.leftCS.guard.compositeCS"/>
           </assignment>
         </bottomPattern>
       </rule>
-      <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama.qvtp.qvtias.cLeafCS_2_Leaf"
+      <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama_qvtp_qvtias.cLeafCS_2_Leaf"
           name="cLeafCS_2_Leaf">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false"
-            typedModel="#qT..SimplerKiama.qvtp.qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
           <guardPattern>
-            <variable xmi:id="qV..SimplerKiama.qvtp.qvtias.cLeafCS_2_Leaf.leftCS.guard.leafCS"
+            <variable xmi:id="qV..SimplerKiama_qvtp_qvtias.cLeafCS_2_Leaf.leftCS.guard.leafCS"
                 name="leafCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true"
-            typedModel="#qT..SimplerKiama.qvtp.qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern>
-            <realizedVariable xmi:id="qV..SimplerKiama.qvtp.qvtias.cLeafCS_2_Leaf.rightAS.bottom.leaf"
+            <realizedVariable xmi:id="qV..SimplerKiama_qvtp_qvtias.cLeafCS_2_Leaf.rightAS.bottom.leaf"
                 name="leaf" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Leaf"/>
           </bottomPattern>
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" isDefault="false" targetProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
+          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Leaf"
-                referredVariable="#qV..SimplerKiama.qvtp.qvtias.cLeafCS_2_Leaf.rightAS.bottom.leaf"/>
+                referredVariable="#qV..SimplerKiama_qvtp_qvtias.cLeafCS_2_Leaf.rightAS.bottom.leaf"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"
-                referredVariable="#qV..SimplerKiama.qvtp.qvtias.cLeafCS_2_Leaf.leftCS.guard.leafCS"/>
+                referredVariable="#qV..SimplerKiama_qvtp_qvtias.cLeafCS_2_Leaf.leftCS.guard.leafCS"/>
           </assignment>
         </bottomPattern>
       </rule>
-      <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama.qvtp.qvtias.cTopCS_2_Top"
+      <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama_qvtp_qvtias.cTopCS_2_Top"
           name="cTopCS_2_Top">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false"
-            typedModel="#qT..SimplerKiama.qvtp.qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
           <guardPattern>
-            <variable xmi:id="qV..SimplerKiama.qvtp.qvtias.cTopCS_2_Top.leftCS.guard.topCS"
+            <variable xmi:id="qV..SimplerKiama_qvtp_qvtias.cTopCS_2_Top.leftCS.guard.topCS"
                 name="topCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true"
-            typedModel="#qT..SimplerKiama.qvtp.qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern>
-            <realizedVariable xmi:id="qV..SimplerKiama.qvtp.qvtias.cTopCS_2_Top.rightAS.bottom.top"
+            <realizedVariable xmi:id="qV..SimplerKiama_qvtp_qvtias.cTopCS_2_Top.rightAS.bottom.top"
                 name="top" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Top"/>
           </bottomPattern>
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" isDefault="false" targetProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
+          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Top"
-                referredVariable="#qV..SimplerKiama.qvtp.qvtias.cTopCS_2_Top.rightAS.bottom.top"/>
+                referredVariable="#qV..SimplerKiama_qvtp_qvtias.cTopCS_2_Top.rightAS.bottom.top"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS"
-                referredVariable="#qV..SimplerKiama.qvtp.qvtias.cTopCS_2_Top.leftCS.guard.topCS"/>
+                referredVariable="#qV..SimplerKiama_qvtp_qvtias.cTopCS_2_Top.leftCS.guard.topCS"/>
           </assignment>
         </bottomPattern>
       </rule>
-      <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama.qvtp.qvtias.uComposite_child"
+      <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama_qvtp_qvtias.uComposite_child"
           name="uComposite_child">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false"
-            typedModel="#qT..SimplerKiama.qvtp.qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
           <guardPattern>
-            <variable xmi:id="qV..SimplerKiama.qvtp.qvtias.uComposite_child.leftCS.guard.compositeCS"
+            <variable xmi:id="qV..SimplerKiama_qvtp_qvtias.uComposite_child.leftCS.guard.compositeCS"
                 name="compositeCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true"
-            typedModel="#qT..SimplerKiama.qvtp.qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" isDefault="false" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Composite.child">
+          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Composite.child">
             <value xsi:type="pivot:OperationCallExp" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Node"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
               <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
@@ -121,7 +113,7 @@
                 <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.NodeCS"
                     referredProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.CompositeCS.child">
                   <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"
-                      isImplicit="true" referredVariable="#qV..SimplerKiama.qvtp.qvtias.uComposite_child.leftCS.guard.compositeCS"/>
+                      isImplicit="true" referredVariable="#qV..SimplerKiama_qvtp_qvtias.uComposite_child.leftCS.guard.compositeCS"/>
                 </ownedSource>
               </ownedSource>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
@@ -132,7 +124,7 @@
               <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                   referredProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"
-                    referredVariable="#qV..SimplerKiama.qvtp.qvtias.uComposite_child.leftCS.guard.compositeCS"/>
+                    referredVariable="#qV..SimplerKiama_qvtp_qvtias.uComposite_child.leftCS.guard.compositeCS"/>
               </ownedSource>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
                   referredType="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Composite"/>
@@ -140,24 +132,22 @@
           </assignment>
         </bottomPattern>
       </rule>
-      <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama.qvtp.qvtias.uComposite_deep"
+      <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama_qvtp_qvtias.uComposite_deep"
           name="uComposite_deep">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false"
-            typedModel="#qT..SimplerKiama.qvtp.qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
           <guardPattern>
-            <variable xmi:id="qV..SimplerKiama.qvtp.qvtias.uComposite_deep.leftCS.guard.compositeCS"
+            <variable xmi:id="qV..SimplerKiama_qvtp_qvtias.uComposite_deep.leftCS.guard.compositeCS"
                 name="compositeCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true"
-            typedModel="#qT..SimplerKiama.qvtp.qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" isDefault="false" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.deep">
+          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.deep">
             <value xsi:type="pivot:LetExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer">
               <ownedIn xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer">
                 <ownedCondition xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
@@ -196,7 +186,7 @@
                     <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                         referredProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
                       <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"
-                          isImplicit="true" referredVariable="#qV..SimplerKiama.qvtp.qvtias.uComposite_deep.leftCS.guard.compositeCS"/>
+                          isImplicit="true" referredVariable="#qV..SimplerKiama_qvtp_qvtias.uComposite_deep.leftCS.guard.compositeCS"/>
                     </ownedSource>
                     <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
                         referredType="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Composite"/>
@@ -209,7 +199,7 @@
               <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                   referredProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"
-                    referredVariable="#qV..SimplerKiama.qvtp.qvtias.uComposite_deep.leftCS.guard.compositeCS"/>
+                    referredVariable="#qV..SimplerKiama_qvtp_qvtias.uComposite_deep.leftCS.guard.compositeCS"/>
               </ownedSource>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
                   referredType="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Composite"/>
@@ -217,24 +207,22 @@
           </assignment>
         </bottomPattern>
       </rule>
-      <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama.qvtp.qvtias.uComposite_height"
+      <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama_qvtp_qvtias.uComposite_height"
           name="uComposite_height">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false"
-            typedModel="#qT..SimplerKiama.qvtp.qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
           <guardPattern>
-            <variable xmi:id="qV..SimplerKiama.qvtp.qvtias.uComposite_height.leftCS.guard.compositeCS"
+            <variable xmi:id="qV..SimplerKiama_qvtp_qvtias.uComposite_height.leftCS.guard.compositeCS"
                 name="compositeCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true"
-            typedModel="#qT..SimplerKiama.qvtp.qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" isDefault="false" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.height">
+          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.height">
             <value xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Integer.%43%..ocl.OclSelf">
               <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
@@ -246,7 +234,7 @@
                     <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                         referredProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
                       <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"
-                          isImplicit="true" referredVariable="#qV..SimplerKiama.qvtp.qvtias.uComposite_height.leftCS.guard.compositeCS"/>
+                          isImplicit="true" referredVariable="#qV..SimplerKiama_qvtp_qvtias.uComposite_height.leftCS.guard.compositeCS"/>
                     </ownedSource>
                     <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
                         referredType="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Composite"/>
@@ -261,7 +249,7 @@
               <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                   referredProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"
-                    referredVariable="#qV..SimplerKiama.qvtp.qvtias.uComposite_height.leftCS.guard.compositeCS"/>
+                    referredVariable="#qV..SimplerKiama_qvtp_qvtias.uComposite_height.leftCS.guard.compositeCS"/>
               </ownedSource>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
                   referredType="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Composite"/>
@@ -269,24 +257,22 @@
           </assignment>
         </bottomPattern>
       </rule>
-      <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama.qvtp.qvtias.uLeaf_deep"
+      <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama_qvtp_qvtias.uLeaf_deep"
           name="uLeaf_deep">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false"
-            typedModel="#qT..SimplerKiama.qvtp.qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
           <guardPattern>
-            <variable xmi:id="qV..SimplerKiama.qvtp.qvtias.uLeaf_deep.leftCS.guard.leafCS"
+            <variable xmi:id="qV..SimplerKiama_qvtp_qvtias.uLeaf_deep.leftCS.guard.leafCS"
                 name="leafCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true"
-            typedModel="#qT..SimplerKiama.qvtp.qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" isDefault="false" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.deep">
+          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.deep">
             <value xsi:type="pivot:LetExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer">
               <ownedIn xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer">
                 <ownedCondition xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
@@ -325,7 +311,7 @@
                     <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                         referredProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
                       <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"
-                          isImplicit="true" referredVariable="#qV..SimplerKiama.qvtp.qvtias.uLeaf_deep.leftCS.guard.leafCS"/>
+                          isImplicit="true" referredVariable="#qV..SimplerKiama_qvtp_qvtias.uLeaf_deep.leftCS.guard.leafCS"/>
                     </ownedSource>
                     <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
                         referredType="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Leaf"/>
@@ -338,7 +324,7 @@
               <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                   referredProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"
-                    referredVariable="#qV..SimplerKiama.qvtp.qvtias.uLeaf_deep.leftCS.guard.leafCS"/>
+                    referredVariable="#qV..SimplerKiama_qvtp_qvtias.uLeaf_deep.leftCS.guard.leafCS"/>
               </ownedSource>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
                   referredType="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Leaf"/>
@@ -346,24 +332,22 @@
           </assignment>
         </bottomPattern>
       </rule>
-      <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama.qvtp.qvtias.uLeaf_height"
+      <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama_qvtp_qvtias.uLeaf_height"
           name="uLeaf_height">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false"
-            typedModel="#qT..SimplerKiama.qvtp.qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
           <guardPattern>
-            <variable xmi:id="qV..SimplerKiama.qvtp.qvtias.uLeaf_height.leftCS.guard.leafCS"
+            <variable xmi:id="qV..SimplerKiama_qvtp_qvtias.uLeaf_height.leftCS.guard.leafCS"
                 name="leafCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true"
-            typedModel="#qT..SimplerKiama.qvtp.qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" isDefault="false" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.height">
+          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Node.height">
             <value xsi:type="pivot:IntegerLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
                 integerSymbol="0"/>
             <slotExpression xsi:type="pivot:OperationCallExp" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Leaf"
@@ -371,7 +355,7 @@
               <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                   referredProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"
-                    referredVariable="#qV..SimplerKiama.qvtp.qvtias.uLeaf_height.leftCS.guard.leafCS"/>
+                    referredVariable="#qV..SimplerKiama_qvtp_qvtias.uLeaf_height.leftCS.guard.leafCS"/>
               </ownedSource>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
                   referredType="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Leaf"/>
@@ -379,24 +363,22 @@
           </assignment>
         </bottomPattern>
       </rule>
-      <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama.qvtp.qvtias.uTop_node"
+      <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama_qvtp_qvtias.uTop_node"
           name="uTop_node">
-        <domain xsi:type="qvtcb:CoreDomain" name="leftCS" isCheckable="true" isEnforceable="false"
-            typedModel="#qT..SimplerKiama.qvtp.qvtias.leftCS">
+        <domain xsi:type="qvtcb:CoreDomain" isCheckable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.leftCS">
           <guardPattern>
-            <variable xmi:id="qV..SimplerKiama.qvtp.qvtias.uTop_node.leftCS.guard.topCS"
+            <variable xmi:id="qV..SimplerKiama_qvtp_qvtias.uTop_node.leftCS.guard.topCS"
                 name="topCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS"/>
           </guardPattern>
           <bottomPattern/>
         </domain>
-        <domain xsi:type="qvtcb:CoreDomain" name="rightAS" isCheckable="false" isEnforceable="true"
-            typedModel="#qT..SimplerKiama.qvtp.qvtias.rightAS">
+        <domain xsi:type="qvtcb:CoreDomain" isEnforceable="true" typedModel="#qT..SimplerKiama_qvtp_qvtias.rightAS">
           <guardPattern/>
           <bottomPattern/>
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" isDefault="false" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Top.node">
+          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="SimplerKiamaAS.ecore.oclas#p.kiamaas.Top.node">
             <value xsi:type="pivot:OperationCallExp" type="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Node"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
               <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
@@ -404,7 +386,7 @@
                 <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.NodeCS"
                     referredProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.TopCS.node">
                   <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS"
-                      isImplicit="true" referredVariable="#qV..SimplerKiama.qvtp.qvtias.uTop_node.leftCS.guard.topCS"/>
+                      isImplicit="true" referredVariable="#qV..SimplerKiama_qvtp_qvtias.uTop_node.leftCS.guard.topCS"/>
                 </ownedSource>
               </ownedSource>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
@@ -415,7 +397,7 @@
               <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                   referredProperty="SimplerKiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS"
-                    referredVariable="#qV..SimplerKiama.qvtp.qvtias.uTop_node.leftCS.guard.topCS"/>
+                    referredVariable="#qV..SimplerKiama_qvtp_qvtias.uTop_node.leftCS.guard.topCS"/>
               </ownedSource>
               <ownedArguments xsi:type="pivot:TypeExp" type="pivot:Class http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Class"
                   referredType="pivot:Class SimplerKiamaAS.ecore.oclas#T.kiamaas.Top"/>
@@ -423,190 +405,6 @@
           </assignment>
         </bottomPattern>
       </rule>
-      <rule xsi:type="qvti:Mapping" xmi:id="m..SimplerKiama.qvtp.qvtias.__root__"
-          name="__root__">
-        <guardPattern/>
-        <bottomPattern/>
-        <mappingStatement xsi:type="qvti:MappingSequence">
-          <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0"
-                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
-              <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS"
-                  referredType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS"/>
-            </ownedSource>
-            <ownedBody xsi:type="qvti:MappingSequence">
-              <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..SimplerKiama.qvtp.qvtias.cTopCS_2_Top">
-                <binding boundVariable="#qV..SimplerKiama.qvtp.qvtias.cTopCS_2_Top.leftCS.guard.topCS">
-                  <value xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS"
-                      referredVariable="#i..SimplerKiama.qvtp.qvtias.__root__.0.0.topCS"/>
-                </binding>
-              </mappingStatements>
-            </ownedBody>
-            <ownedIterators xmi:id="i..SimplerKiama.qvtp.qvtias.__root__.0.0.topCS"
-                name="topCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS"/>
-          </mappingStatements>
-          <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0"
-                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
-              <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"
-                  referredType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"/>
-            </ownedSource>
-            <ownedBody xsi:type="qvti:MappingSequence">
-              <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..SimplerKiama.qvtp.qvtias.cCompositeCS_2_Composite">
-                <binding boundVariable="#qV..SimplerKiama.qvtp.qvtias.cCompositeCS_2_Composite.leftCS.guard.compositeCS">
-                  <value xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"
-                      referredVariable="#i..SimplerKiama.qvtp.qvtias.__root__.0.1.compositeCS"/>
-                </binding>
-              </mappingStatements>
-            </ownedBody>
-            <ownedIterators xmi:id="i..SimplerKiama.qvtp.qvtias.__root__.0.1.compositeCS"
-                name="compositeCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"/>
-          </mappingStatements>
-          <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0"
-                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
-              <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"
-                  referredType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"/>
-            </ownedSource>
-            <ownedBody xsi:type="qvti:MappingSequence">
-              <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..SimplerKiama.qvtp.qvtias.cLeafCS_2_Leaf">
-                <binding boundVariable="#qV..SimplerKiama.qvtp.qvtias.cLeafCS_2_Leaf.leftCS.guard.leafCS">
-                  <value xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"
-                      referredVariable="#i..SimplerKiama.qvtp.qvtias.__root__.0.2.leafCS"/>
-                </binding>
-              </mappingStatements>
-            </ownedBody>
-            <ownedIterators xmi:id="i..SimplerKiama.qvtp.qvtias.__root__.0.2.leafCS"
-                name="leafCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"/>
-          </mappingStatements>
-          <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0"
-                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
-              <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS"
-                  referredType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS"/>
-            </ownedSource>
-            <ownedBody xsi:type="qvti:MappingSequence">
-              <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..SimplerKiama.qvtp.qvtias.uTop_node">
-                <binding boundVariable="#qV..SimplerKiama.qvtp.qvtias.uTop_node.leftCS.guard.topCS">
-                  <value xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS"
-                      referredVariable="#i..SimplerKiama.qvtp.qvtias.__root__.0.3.topCS"/>
-                </binding>
-              </mappingStatements>
-            </ownedBody>
-            <ownedIterators xmi:id="i..SimplerKiama.qvtp.qvtias.__root__.0.3.topCS"
-                name="topCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS"/>
-          </mappingStatements>
-          <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0"
-                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
-              <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"
-                  referredType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"/>
-            </ownedSource>
-            <ownedBody xsi:type="qvti:MappingSequence">
-              <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..SimplerKiama.qvtp.qvtias.uComposite_child">
-                <binding boundVariable="#qV..SimplerKiama.qvtp.qvtias.uComposite_child.leftCS.guard.compositeCS">
-                  <value xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"
-                      referredVariable="#i..SimplerKiama.qvtp.qvtias.__root__.0.4.compositeCS"/>
-                </binding>
-              </mappingStatements>
-            </ownedBody>
-            <ownedIterators xmi:id="i..SimplerKiama.qvtp.qvtias.__root__.0.4.compositeCS"
-                name="compositeCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"/>
-          </mappingStatements>
-          <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0"
-                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
-              <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"
-                  referredType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"/>
-            </ownedSource>
-            <ownedBody xsi:type="qvti:MappingSequence">
-              <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..SimplerKiama.qvtp.qvtias.uLeaf_deep">
-                <binding boundVariable="#qV..SimplerKiama.qvtp.qvtias.uLeaf_deep.leftCS.guard.leafCS">
-                  <value xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"
-                      referredVariable="#i..SimplerKiama.qvtp.qvtias.__root__.0.5.leafCS"/>
-                </binding>
-              </mappingStatements>
-            </ownedBody>
-            <ownedIterators xmi:id="i..SimplerKiama.qvtp.qvtias.__root__.0.5.leafCS"
-                name="leafCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"/>
-          </mappingStatements>
-          <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0"
-                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
-              <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"
-                  referredType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"/>
-            </ownedSource>
-            <ownedBody xsi:type="qvti:MappingSequence">
-              <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..SimplerKiama.qvtp.qvtias.uComposite_deep">
-                <binding boundVariable="#qV..SimplerKiama.qvtp.qvtias.uComposite_deep.leftCS.guard.compositeCS">
-                  <value xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"
-                      referredVariable="#i..SimplerKiama.qvtp.qvtias.__root__.0.6.compositeCS"/>
-                </binding>
-              </mappingStatements>
-            </ownedBody>
-            <ownedIterators xmi:id="i..SimplerKiama.qvtp.qvtias.__root__.0.6.compositeCS"
-                name="compositeCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"/>
-          </mappingStatements>
-          <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0"
-                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
-              <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"
-                  referredType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"/>
-            </ownedSource>
-            <ownedBody xsi:type="qvti:MappingSequence">
-              <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..SimplerKiama.qvtp.qvtias.uLeaf_height">
-                <binding boundVariable="#qV..SimplerKiama.qvtp.qvtias.uLeaf_height.leftCS.guard.leafCS">
-                  <value xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"
-                      referredVariable="#i..SimplerKiama.qvtp.qvtias.__root__.0.7.leafCS"/>
-                </binding>
-              </mappingStatements>
-            </ownedBody>
-            <ownedIterators xmi:id="i..SimplerKiama.qvtp.qvtias.__root__.0.7.leafCS"
-                name="leafCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"/>
-          </mappingStatements>
-          <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0"
-                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
-              <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"
-                  referredType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"/>
-            </ownedSource>
-            <ownedBody xsi:type="qvti:MappingSequence">
-              <mappingStatements xsi:type="qvti:MappingCall" referredMapping="#m..SimplerKiama.qvtp.qvtias.uComposite_height">
-                <binding boundVariable="#qV..SimplerKiama.qvtp.qvtias.uComposite_height.leftCS.guard.compositeCS">
-                  <value xsi:type="pivot:VariableExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"
-                      referredVariable="#i..SimplerKiama.qvtp.qvtias.__root__.0.8.compositeCS"/>
-                </binding>
-              </mappingStatements>
-            </ownedBody>
-            <ownedIterators xmi:id="i..SimplerKiama.qvtp.qvtias.__root__.0.8.compositeCS"
-                name="compositeCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"/>
-          </mappingStatements>
-        </mappingStatement>
-      </rule>
-    </ownedClasses>
-  </ownedPackages>
-  <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage"
-      nsPrefix="orphanage">
-    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.1"
-        elementType="pivot:SelfType http://www.eclipse.org/ocl/2015/Library.oclas#OclSelf">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:SelfType http://www.eclipse.org/ocl/2015/Library.oclas#OclSelf"
-            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.2"
-        elementType="pivot:SelfType http://www.eclipse.org/ocl/2015/Library.oclas#OclSelf">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:SelfType http://www.eclipse.org/ocl/2015/Library.oclas#OclSelf"
-            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
-        elementType="pivot:SelfType http://www.eclipse.org/ocl/2015/Library.oclas#OclSelf">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:SelfType http://www.eclipse.org/ocl/2015/Library.oclas#OclSelf"
-            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
-      </ownedBindings>
     </ownedClasses>
   </ownedPackages>
 </qvti:ImperativeModel>

@@ -1,4 +1,4 @@
----- Transformation KiamaRewrite.qvtp.qvtias ----
+---- Transformation KiamaRewrite_qvtp_qvtias ----
 Mapping __root__
   Visiting Mapping GuardPattern
     GuardPattern has no predicates.
@@ -18,12 +18,12 @@ Visiting MappingCall, calling: cTopCS_2_Top
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment topCS.ast = Top [78dbdd8d] {
+      VisitMiddlePropertyAssignment topCS.ast = Top [4586a9c5] {
         node = [ null ]
         }
     RealizedVariables for CoreDomain leftCS
     RealizedVariables for CoreDomain rightAS
-    RealizedVariable top: Top [78dbdd8d] {
+    RealizedVariable top: Top [4586a9c5] {
       node = [ null ]
       }
 ==============================
@@ -40,14 +40,14 @@ Visiting MappingCall, calling: cNumCS_2_Num
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment numCS.ast = Num [709487e9] {
+      VisitMiddlePropertyAssignment numCS.ast = Num [2397247] {
         height = 0
         deep = 0
         value = 0
         }
     RealizedVariables for CoreDomain leftCS
     RealizedVariables for CoreDomain rightAS
-    RealizedVariable num: Num [709487e9] {
+    RealizedVariable num: Num [2397247] {
       height = 0
       deep = 0
       value = 0
@@ -65,14 +65,14 @@ Visiting MappingCall, calling: cNumCS_2_Num
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment numCS.ast = Num [27670bbd] {
+      VisitMiddlePropertyAssignment numCS.ast = Num [97d9475] {
         height = 0
         deep = 0
         value = 0
         }
     RealizedVariables for CoreDomain leftCS
     RealizedVariables for CoreDomain rightAS
-    RealizedVariable num: Num [27670bbd] {
+    RealizedVariable num: Num [97d9475] {
       height = 0
       deep = 0
       value = 0
@@ -90,14 +90,14 @@ Visiting MappingCall, calling: cNumCS_2_Num
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment numCS.ast = Num [5e33b980] {
+      VisitMiddlePropertyAssignment numCS.ast = Num [139d9231] {
         height = 0
         deep = 0
         value = 0
         }
     RealizedVariables for CoreDomain leftCS
     RealizedVariables for CoreDomain rightAS
-    RealizedVariable num: Num [5e33b980] {
+    RealizedVariable num: Num [139d9231] {
       height = 0
       deep = 0
       value = 0
@@ -116,7 +116,7 @@ Visiting MappingCall, calling: cPlusCS_2_Plus
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment plusCS.ast = Plus [7c2835c8] {
+      VisitMiddlePropertyAssignment plusCS.ast = Plus [6ea32af1] {
         height = 0
         deep = 0
         left = [ null ]
@@ -124,7 +124,7 @@ Visiting MappingCall, calling: cPlusCS_2_Plus
         }
     RealizedVariables for CoreDomain leftCS
     RealizedVariables for CoreDomain rightAS
-    RealizedVariable plus: Plus [7c2835c8] {
+    RealizedVariable plus: Plus [6ea32af1] {
       height = 0
       deep = 0
       left = [ null ]
@@ -143,7 +143,7 @@ Visiting MappingCall, calling: cPlusCS_2_Plus
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment plusCS.ast = Plus [33e31d26] {
+      VisitMiddlePropertyAssignment plusCS.ast = Plus [1a586cf6] {
         height = 0
         deep = 0
         left = [ null ]
@@ -151,7 +151,7 @@ Visiting MappingCall, calling: cPlusCS_2_Plus
         }
     RealizedVariables for CoreDomain leftCS
     RealizedVariables for CoreDomain rightAS
-    RealizedVariable plus: Plus [33e31d26] {
+    RealizedVariable plus: Plus [1a586cf6] {
       height = 0
       deep = 0
       left = [ null ]
@@ -171,7 +171,7 @@ Visiting MappingCall, calling: uTop_node
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment topCS.ast.oclAsType(kiamaas::Top).node = Plus [33e31d26] {
+      VisitMiddlePropertyAssignment topCS.ast.oclAsType(kiamaas::Top).node = Plus [6ea32af1] {
         height = 0
         deep = 0
         left = [ null ]
@@ -193,10 +193,11 @@ Visiting MappingCall, calling: uPlus_left
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment plusCS.ast.oclAsType(kiamaas::Plus).left = Num [27670bbd] {
+      VisitMiddlePropertyAssignment plusCS.ast.oclAsType(kiamaas::Plus).left = Plus [1a586cf6] {
         height = 0
         deep = 0
-        value = 0
+        left = [ null ]
+        right = [ null ]
         }
     RealizedVariables for CoreDomain leftCS
     RealizedVariables for CoreDomain rightAS
@@ -213,7 +214,7 @@ Visiting MappingCall, calling: uPlus_right
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment plusCS.ast.oclAsType(kiamaas::Plus).right = Num [709487e9] {
+      VisitMiddlePropertyAssignment plusCS.ast.oclAsType(kiamaas::Plus).right = Num [2397247] {
         height = 0
         deep = 0
         value = 0
@@ -233,11 +234,10 @@ Visiting MappingCall, calling: uPlus_left
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment plusCS.ast.oclAsType(kiamaas::Plus).left = Plus [7c2835c8] {
+      VisitMiddlePropertyAssignment plusCS.ast.oclAsType(kiamaas::Plus).left = Num [97d9475] {
         height = 0
         deep = 0
-        left = Num [27670bbd]
-        right = Num [709487e9]
+        value = 0
         }
     RealizedVariables for CoreDomain leftCS
     RealizedVariables for CoreDomain rightAS
@@ -254,7 +254,7 @@ Visiting MappingCall, calling: uPlus_right
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment plusCS.ast.oclAsType(kiamaas::Plus).right = Num [5e33b980] {
+      VisitMiddlePropertyAssignment plusCS.ast.oclAsType(kiamaas::Plus).right = Num [139d9231] {
         height = 0
         deep = 0
         value = 0
@@ -324,7 +324,7 @@ Visiting MappingCall, calling: uPlus_deep
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment plusCS.ast.oclAsType(kiamaas::Plus).deep = 1
+      VisitMiddlePropertyAssignment plusCS.ast.oclAsType(kiamaas::Plus).deep = 0
     RealizedVariables for CoreDomain leftCS
     RealizedVariables for CoreDomain rightAS
 ==============================
@@ -340,7 +340,7 @@ Visiting MappingCall, calling: uPlus_deep
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment plusCS.ast.oclAsType(kiamaas::Plus).deep = 0
+      VisitMiddlePropertyAssignment plusCS.ast.oclAsType(kiamaas::Plus).deep = 1
     RealizedVariables for CoreDomain leftCS
     RealizedVariables for CoreDomain rightAS
 ==============================
@@ -422,7 +422,7 @@ Visiting MappingCall, calling: uPlus_height
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment plusCS.ast.oclAsType(kiamaas::Plus).height = 2
+      VisitMiddlePropertyAssignment plusCS.ast.oclAsType(kiamaas::Plus).height = 1
     RealizedVariables for CoreDomain leftCS
     RealizedVariables for CoreDomain rightAS
 ==============================
@@ -439,7 +439,7 @@ Visiting MappingCall, calling: uNum_value
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment numCS.ast.oclAsType(kiamaas::Num).value = 4
+      VisitMiddlePropertyAssignment numCS.ast.oclAsType(kiamaas::Num).value = 1
     RealizedVariables for CoreDomain leftCS
     RealizedVariables for CoreDomain rightAS
 ==============================
@@ -471,14 +471,14 @@ Visiting MappingCall, calling: uNum_value
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment numCS.ast.oclAsType(kiamaas::Num).value = 1
+      VisitMiddlePropertyAssignment numCS.ast.oclAsType(kiamaas::Num).value = 4
     RealizedVariables for CoreDomain leftCS
     RealizedVariables for CoreDomain rightAS
 ==============================
 Output Model
 ==============================
 ---- Transformation End ----
----- Transformation classescs2as.qvtp.qvtias ----
+---- Transformation classescs2as_qvtp_qvtias ----
 Mapping __root__
   Visiting Mapping GuardPattern
     GuardPattern has no predicates.
@@ -498,12 +498,12 @@ Visiting MappingCall, calling: cRootCS_2_Root
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment rootCS.ast = Root [52778b1e] {
+      VisitMiddlePropertyAssignment rootCS.ast = Root [2dad6a1b] {
         ownedPackages = [ ]
         }
     RealizedVariables for CoreDomain leftCS
     RealizedVariables for CoreDomain rightAS
-    RealizedVariable root: Root [52778b1e] {
+    RealizedVariable root: Root [2dad6a1b] {
       ownedPackages = [ ]
       }
 ==============================
@@ -520,14 +520,14 @@ Visiting MappingCall, calling: cPackageCS_2_Package
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment packageCS.ast = Package [6dfbba77] {
+      VisitMiddlePropertyAssignment packageCS.ast = Package [32df21a4] {
         name = [ null ]
         ownedClasses = [ ]
         ownedPackages = [ ]
         }
     RealizedVariables for CoreDomain leftCS
     RealizedVariables for CoreDomain rightAS
-    RealizedVariable package: Package [6dfbba77] {
+    RealizedVariable package: Package [32df21a4] {
       name = [ null ]
       ownedClasses = [ ]
       ownedPackages = [ ]
@@ -546,7 +546,7 @@ Visiting MappingCall, calling: uRoot_ownedPackages
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment rootCS.ast.oclAsType(classes::Root).ownedPackages = [org.eclipse.emf.ecore.impl.DynamicEObjectImpl@6dfbba77 (eClass: org.eclipse.emf.ecore.impl.EClassImpl@648feaad (name: Package) (instanceClassName: null) (abstract: false, interface: false))]
+      VisitMiddlePropertyAssignment rootCS.ast.oclAsType(classes::Root).ownedPackages = [org.eclipse.emf.ecore.impl.DynamicEObjectImpl@32df21a4 (eClass: org.eclipse.emf.ecore.impl.EClassImpl@5bdd7bdf (name: Package) (instanceClassName: null) (abstract: false, interface: false))]
     RealizedVariables for CoreDomain leftCS
     RealizedVariables for CoreDomain rightAS
 ==============================
@@ -580,13 +580,13 @@ Visiting MappingCall, calling: cClassCS_2_Class
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment classCS.ast = Class [5cda42a3] {
+      VisitMiddlePropertyAssignment classCS.ast = Class [244e2417] {
         name = [ null ]
         superClass = [ null ]
         }
     RealizedVariables for CoreDomain leftCS
     RealizedVariables for CoreDomain rightAS
-    RealizedVariable class: Class [5cda42a3] {
+    RealizedVariable class: Class [244e2417] {
       name = [ null ]
       superClass = [ null ]
       }
@@ -603,13 +603,13 @@ Visiting MappingCall, calling: cClassCS_2_Class
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment classCS.ast = Class [7d4d0af4] {
+      VisitMiddlePropertyAssignment classCS.ast = Class [62374a0] {
         name = [ null ]
         superClass = [ null ]
         }
     RealizedVariables for CoreDomain leftCS
     RealizedVariables for CoreDomain rightAS
-    RealizedVariable class: Class [7d4d0af4] {
+    RealizedVariable class: Class [62374a0] {
       name = [ null ]
       superClass = [ null ]
       }
@@ -627,7 +627,7 @@ Visiting MappingCall, calling: uPackage_ownedClasses
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment packageCS.ast.oclAsType(classes::Package).ownedClasses = [org.eclipse.emf.ecore.impl.DynamicEObjectImpl@5cda42a3 (eClass: org.eclipse.emf.ecore.impl.EClassImpl@5d516634 (name: Class) (instanceClassName: null) (abstract: false, interface: false)), org.eclipse.emf.ecore.impl.DynamicEObjectImpl@7d4d0af4 (eClass: org.eclipse.emf.ecore.impl.EClassImpl@5d516634 (name: Class) (instanceClassName: null) (abstract: false, interface: false))]
+      VisitMiddlePropertyAssignment packageCS.ast.oclAsType(classes::Package).ownedClasses = [org.eclipse.emf.ecore.impl.DynamicEObjectImpl@244e2417 (eClass: org.eclipse.emf.ecore.impl.EClassImpl@1fcac3a3 (name: Class) (instanceClassName: null) (abstract: false, interface: false)), org.eclipse.emf.ecore.impl.DynamicEObjectImpl@62374a0 (eClass: org.eclipse.emf.ecore.impl.EClassImpl@1fcac3a3 (name: Class) (instanceClassName: null) (abstract: false, interface: false))]
     RealizedVariables for CoreDomain leftCS
     RealizedVariables for CoreDomain rightAS
 ==============================
@@ -699,7 +699,7 @@ Visiting MappingCall, calling: uClass_superClass
 Output Model
 ==============================
 ---- Transformation End ----
----- Transformation Source2Target.qvtp.qvtias ----
+---- Transformation Source2Target_qvtp_qvtias ----
 Mapping __root__
   Visiting Mapping GuardPattern
     GuardPattern has no predicates.
@@ -719,18 +719,24 @@ Visiting MappingCall, calling: cSRoot_2_TRoot
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment sRoot.ast = TRoot [167a8059] {
+      VisitMiddlePropertyAssignment sRoot.ast = TRoot [687bdd36] {
         ownedA = [ ]
         }
     RealizedVariables for CoreDomain leftCS
     RealizedVariables for CoreDomain rightAS
-    RealizedVariable tRoot: TRoot [167a8059] {
+    RealizedVariable tRoot: TRoot [687bdd36] {
       ownedA = [ ]
       }
 ==============================
 Output Model
 ==============================
 Visiting MappingLoop, calling: x
+  Visiting MappingSequence
+Visiting MappingCall, calling: cX_2_A1
+  Mapping cX_2_A1
+    Visiting Mapping GuardPattern
+      Predicate isA1->false
+      GuardPattern result: false
   Visiting MappingSequence
 Visiting MappingCall, calling: cX_2_A1
   Mapping cX_2_A1
@@ -742,12 +748,12 @@ Visiting MappingCall, calling: cX_2_A1
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment x.ast = A1 [5a6aa46a] {
+      VisitMiddlePropertyAssignment x.ast = A1 [5a8ded0] {
         ownsB = [ ]
         }
     RealizedVariables for CoreDomain leftCS
     RealizedVariables for CoreDomain rightAS
-    RealizedVariable a1: A1 [5a6aa46a] {
+    RealizedVariable a1: A1 [5a8ded0] {
       ownsB = [ ]
       }
 ==============================
@@ -758,12 +764,6 @@ Visiting MappingCall, calling: cX_2_A2
   Mapping cX_2_A2
     Visiting Mapping GuardPattern
       Predicate not isA1->false
-      GuardPattern result: false
-  Visiting MappingSequence
-Visiting MappingCall, calling: cX_2_A1
-  Mapping cX_2_A1
-    Visiting Mapping GuardPattern
-      Predicate isA1->false
       GuardPattern result: false
 Visiting MappingLoop, calling: sRoot
   Visiting MappingSequence
@@ -776,4 +776,4 @@ Visiting MappingCall, calling: uTRoot_ownedA
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-      VisitMiddlePropertyAssignment sRoot.ast.oclAsType(target::TRoot).ownedA = [org.eclipse.emf.ecore.impl.DynamicEObjectImpl@5a6aa46a (eClass: org.eclipse.emf.ecore.impl.EClassImpl@35bccb98 (name: A1) (instanceClassName: null) (abstract: false, interface: false)), null]
+      VisitMiddlePropertyAssignment sRoot.ast.oclAsType(target::TRoot).ownedA = [org.eclipse.emf.ecore.impl.DynamicEObjectImpl@5a8ded0 (eClass: org.eclipse.emf.ecore.impl.EClassImpl@32120874 (name: A1) (instanceClassName: null) (abstract: false, interface: false)), null]

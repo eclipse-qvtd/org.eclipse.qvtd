@@ -1,4 +1,4 @@
-package org.eclipse.qvtd.buid.cs2as;
+package org.eclipse.qvtd.build.cs2as;
 
 import org.eclipse.epsilon.common.util.StringProperties;
 import org.eclipse.epsilon.emc.emf.EmfModel;
