@@ -77,7 +77,7 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 	// Core
 	Transformation mt = null;
 	org.eclipse.ocl.pivot.Package p = null;
-	private TypedModel tmtm = null;
+	TypedModel mmtm = null;
 	//public static final @NonNull RuleBindings.RuleKey<Transformation> CORE_mt = RULE_BINDINGS.create((Transformation)null, "mt");
 //	public static final @NonNull RuleBindings.RuleKey<TypedModel> CORE_mtm = RULE_BINDINGS.create((TypedModel)null, "mtm");
 	
@@ -86,7 +86,6 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 //	public static final @NonNull RuleBindings.RuleKey<List<org.eclipse.ocl.examples.pivot.Package>> SHARED_up = RULE_BINDINGS.create((List<org.eclipse.ocl.examples.pivot.Package>)null, "up");
 	String rtn;
 	 
-	
 	protected final @NonNull List<SubRecord> subRecords = new ArrayList<SubRecord>();
 
 	
@@ -101,6 +100,8 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 		RelationalTransformation rt = ruleBindings.get(RELATIONS_rt);
 		rtn = rt.getName();
 		assert (rt != null) && (mt == null);
+		p = transformation.getTransformationToPackageTrace(rt);
+		assert p != null;
 		for (TypedModel rtm : rt.getModelParameter()) {
 			@SuppressWarnings("null")@NonNull List<org.eclipse.ocl.pivot.Package> usedPackage = rtm.getUsedPackage();
 			String tmn = rtm.getName();
@@ -122,8 +123,8 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 		mt = QVTbaseFactory.eINSTANCE.createTransformation();
 		assert mt != null;
 		transformation.addOrphan(mt);
-		// Middle model
-		//tmtm =  QVTbaseFactory.eINSTANCE.createTypedModel();
+		// One TypeModel for the middle model
+		mmtm =  QVTbaseFactory.eINSTANCE.createTypedModel();
 		for (SubRecord subRecord : subRecords) {
 			TypedModel mtm =  QVTbaseFactory.eINSTANCE.createTypedModel();
 			subRecord.mtm = mtm;
@@ -139,10 +140,10 @@ public class RelationalTransformationToMappingTransformation extends AbstractRul
 		assert mt != null;
 		mt.setName(rtn);
 		assert p != null;
-		//assert tmtm != null;
-		//tmtm.setName("");
-		//tmtm.getUsedPackage().add(p);
-		//mt.getModelParameter().add(tmtm);
+		assert mmtm != null;
+		mmtm.setName("");
+		mmtm.getUsedPackage().add(p);
+		mt.getModelParameter().add(mmtm);
 		for (SubRecord subRecord : subRecords) {
 			TypedModel mtm = subRecord.mtm;
 			assert mtm != null;
