@@ -446,7 +446,7 @@
                 name="topCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0"
+            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.1"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"
                   referredType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"/>
@@ -463,7 +463,7 @@
                 name="compositeCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0"
+            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.2"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"
                   referredType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"/>
@@ -497,7 +497,7 @@
                 name="topCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0"
+            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.1"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"
                   referredType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"/>
@@ -514,7 +514,7 @@
                 name="compositeCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0"
+            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.2"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"
                   referredType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"/>
@@ -531,7 +531,7 @@
                 name="leafCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0"
+            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.1"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"
                   referredType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"/>
@@ -548,7 +548,7 @@
                 name="compositeCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0"
+            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.2"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"
                   referredType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"/>
@@ -565,7 +565,7 @@
                 name="leafCS" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.0"
+            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.1"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"
                   referredType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"/>
@@ -587,24 +587,66 @@
   </ownedPackages>
   <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage"
       nsPrefix="orphanage">
-    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.1"
-        elementType="pivot:SelfType http://www.eclipse.org/ocl/2015/Library.oclas#OclSelf">
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.3"
+        elementType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:SelfType http://www.eclipse.org/ocl/2015/Library.oclas#OclSelf"
+        <ownedSubstitutions actual="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.2"
-        elementType="pivot:SelfType http://www.eclipse.org/ocl/2015/Library.oclas#OclSelf">
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.4"
+        elementType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:SelfType http://www.eclipse.org/ocl/2015/Library.oclas#OclSelf"
+        <ownedSubstitutions actual="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.5"
+        elementType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.6"
+        elementType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.7"
+        elementType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.8"
+        elementType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
-        elementType="pivot:SelfType http://www.eclipse.org/ocl/2015/Library.oclas#OclSelf">
+        elementType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:SelfType http://www.eclipse.org/ocl/2015/Library.oclas#OclSelf"
+        <ownedSubstitutions actual="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.TopCS"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
+        elementType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.CompositeCS"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
+        elementType="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SimplerKiamaCS.ecore.oclas#T.kiamacs.LeafCS"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
       </ownedBindings>
     </ownedClasses>

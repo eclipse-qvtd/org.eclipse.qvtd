@@ -7,6 +7,7 @@
  * 
  * Contributors:
  *     Horacio Hoyos - initial API and implementation
+ *     Adolfo Sanchez-Barbudo Herrera - Some enhancements
  ******************************************************************************/
 package org.eclipse.qvtd.build.etl;
 
@@ -31,6 +32,7 @@ import org.eclipse.epsilon.emc.emf.EmfUtil;
 import org.eclipse.epsilon.eol.exceptions.models.EolEnumerationValueNotFoundException;
 import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
@@ -205,4 +207,8 @@ public class PivotModel extends EmfModel {
 		throw new Exception("The QVTi model does not have a Transformation element.");
 	}
 	
+	
+	public MetamodelManagerInternal getMetaModelManager() {
+		return (MetamodelManagerInternal) environmentFactory.getMetamodelManager();
+	}
 }

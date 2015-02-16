@@ -22,10 +22,14 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
+import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
+import org.eclipse.ocl.pivot.internal.validation.PivotEObjectValidator;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
+import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.build.cs2as.OCL2QVTiBroker;
 import org.eclipse.qvtd.build.etl.EtlTask;
 import org.eclipse.qvtd.build.etl.MtcBroker;
@@ -33,11 +37,14 @@ import org.eclipse.qvtd.build.etl.PivotModel;
 import org.eclipse.qvtd.build.etl.QvtMtcExecutionException;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationEvaluator;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationExecutor;
+import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
@@ -323,7 +330,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
     	ResourceSet rSet = myQVT.getResourceSet();
 		Resource inputResource = rSet.getResource(csModelURI, true);
 		tx.addRootObjects("leftCS", ClassUtil.nonNullState(inputResource.getContents()));
-		tx.run();
+		assertTrue(tx.run());
 		Resource outputResource = rSet.createResource(asModelURI);
 		outputResource.getContents().addAll(tx.getRootObjects("rightAS"));
 		outputResource.save(null);*/
@@ -411,21 +418,21 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	
 	protected static void assertValidQVTiModel(@NonNull URI asURI ) {
 	    
-		//EnvironmentFactory factory =  OCL.createEnvironmentFactory(new StandaloneProjectMap());
-		//FIXME Validating QVTi models are causing problems. Not researched.
-		/*MetamodelManager.Internal mManager = factory.getMetamodelManager(); 
-        mManager.configureLoadFirstStrategy();
+		OCLInternal ocl =  OCLInternal.newInstance();
+		EnvironmentFactoryInternal factory = ocl.getEnvironmentFactory();
+		factory.configureLoadFirstStrategy();
+		ResourceSet asResourceSet = ocl.getMetamodelManager().getASResourceSet();
 		
 		URI oclURI = ClassUtil.nonNullState(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true));
 
 		CompleteOCLEObjectValidator validator = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, factory);
 		validator.initialize();
-		PivotEObjectValidator.install(ClassUtil.nonNullState(factory.getResourceSet()), factory);
+		PivotEObjectValidator.install(asResourceSet, factory);
 		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTbasePackage.eINSTANCE));
 		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE));
-		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE));*/
+		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE));
 		
-		//assertValidModel(asURI, factory.getResourceSet());
+		assertValidModel(asURI, asResourceSet);
 	}
 	
 	

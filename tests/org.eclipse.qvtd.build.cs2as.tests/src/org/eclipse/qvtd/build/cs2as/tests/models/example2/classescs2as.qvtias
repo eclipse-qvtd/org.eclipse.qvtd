@@ -300,7 +300,7 @@
                 name="rootCS" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.RootCS"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.6"
+            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.7"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS"
                   referredType="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS"/>
@@ -334,7 +334,7 @@
                 name="rootCS" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.RootCS"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.6"
+            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.7"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS"
                   referredType="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS"/>
@@ -351,7 +351,7 @@
                 name="packageCS" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.6"
+            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.8"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
                   referredType="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"/>
@@ -368,7 +368,7 @@
                 name="classCS" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.6"
+            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.7"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS"
                   referredType="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS"/>
@@ -385,7 +385,7 @@
                 name="packageCS" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.6"
+            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.8"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
                   referredType="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"/>
@@ -407,115 +407,143 @@
   </ownedPackages>
   <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage"
       nsPrefix="orphanage">
-    <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.7 #//@ownedPackages.1/@ownedClasses.8"
+    <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.9 #//@ownedPackages.1/@ownedClasses.10"
         elementType="pivot:Class Classes.ecore.oclas#T.classes.Class">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class Classes.ecore.oclas#T.classes.Class"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedSetT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SequenceType" name="Sequence" superClasses="#//@ownedPackages.1/@ownedClasses.7"
+    <ownedClasses xsi:type="pivot:SequenceType" name="Sequence" superClasses="#//@ownedPackages.1/@ownedClasses.9"
         elementType="pivot:Class Classes.ecore.oclas#T.classes.Class">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class Classes.ecore.oclas#T.classes.Class"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SequenceT"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.9 #//@ownedPackages.1/@ownedClasses.10"
-        elementType="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
-            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedSetT"/>
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.11 #//@ownedPackages.1/@ownedClasses.12"
+        elementType="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedSetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.13 #//@ownedPackages.1/@ownedClasses.14"
         elementType="pivot:Class Classes.ecore.oclas#T.classes.Package">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class Classes.ecore.oclas#T.classes.Package"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedSetT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SequenceType" name="Sequence" superClasses="#//@ownedPackages.1/@ownedClasses.11"
+    <ownedClasses xsi:type="pivot:SequenceType" name="Sequence" superClasses="#//@ownedPackages.1/@ownedClasses.13"
         elementType="pivot:Class Classes.ecore.oclas#T.classes.Package">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class Classes.ecore.oclas#T.classes.Package"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SequenceT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.13 #//@ownedPackages.1/@ownedClasses.14"
+    <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.15 #//@ownedPackages.1/@ownedClasses.16"
         elementType="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedSetT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.15"
-        elementType="pivot:SelfType http://www.eclipse.org/ocl/2015/Library.oclas#OclSelf">
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.17"
+        elementType="pivot:Class ClassesCS.ecore.oclas#T.classescs.RootCS">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:SelfType http://www.eclipse.org/ocl/2015/Library.oclas#OclSelf"
+        <ownedSubstitutions actual="pivot:Class ClassesCS.ecore.oclas#T.classescs.RootCS"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.16"
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.18"
+        elementType="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.19"
+        elementType="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.20"
         elementType="pivot:Class Classes.ecore.oclas#T.classes.Class">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class Classes.ecore.oclas#T.classes.Class"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.16"
-        elementType="pivot:Class Classes.ecore.oclas#T.classes.Class">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class Classes.ecore.oclas#T.classes.Class"
-            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.17"
-        elementType="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
-            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.17"
-        elementType="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
-            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.18"
-        elementType="pivot:Class Classes.ecore.oclas#T.classes.Package">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class Classes.ecore.oclas#T.classes.Package"
-            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.18"
-        elementType="pivot:Class Classes.ecore.oclas#T.classes.Package">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class Classes.ecore.oclas#T.classes.Package"
-            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.19"
-        elementType="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS"
-            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.19"
-        elementType="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS"
-            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.20"
-        elementType="pivot:SelfType http://www.eclipse.org/ocl/2015/Library.oclas#OclSelf">
+        elementType="pivot:Class Classes.ecore.oclas#T.classes.Class">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:SelfType http://www.eclipse.org/ocl/2015/Library.oclas#OclSelf"
+        <ownedSubstitutions actual="pivot:Class Classes.ecore.oclas#T.classes.Class"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.21"
+        elementType="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.21"
+        elementType="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.22"
+        elementType="pivot:Class Classes.ecore.oclas#T.classes.Package">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class Classes.ecore.oclas#T.classes.Package"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.22"
+        elementType="pivot:Class Classes.ecore.oclas#T.classes.Package">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class Classes.ecore.oclas#T.classes.Package"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.23"
+        elementType="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.23"
+        elementType="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.24"
+        elementType="pivot:Class ClassesCS.ecore.oclas#T.classescs.RootCS">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ClassesCS.ecore.oclas#T.classescs.RootCS"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.25"
+        elementType="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.26"
+        elementType="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
       </ownedBindings>
     </ownedClasses>
@@ -548,9 +576,23 @@
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
-        elementType="pivot:SelfType http://www.eclipse.org/ocl/2015/Library.oclas#OclSelf">
+        elementType="pivot:Class ClassesCS.ecore.oclas#T.classescs.RootCS">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:SelfType http://www.eclipse.org/ocl/2015/Library.oclas#OclSelf"
+        <ownedSubstitutions actual="pivot:Class ClassesCS.ecore.oclas#T.classescs.RootCS"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
+        elementType="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
+        elementType="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
       </ownedBindings>
     </ownedClasses>

@@ -954,7 +954,7 @@
                 name="sRoot" type="pivot:Class SourceMM1.ecore.oclas#T.source.SRoot"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.7"
+            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.8"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X"
                   referredType="pivot:Class SourceMM1.ecore.oclas#T.source.X"/>
@@ -988,7 +988,7 @@
                 name="sRoot" type="pivot:Class SourceMM1.ecore.oclas#T.source.SRoot"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.7"
+            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.9"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y1"
                   referredType="pivot:Class SourceMM1.ecore.oclas#T.source.Y1"/>
@@ -1005,7 +1005,7 @@
                 name="y1" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y1"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.7"
+            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.10"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y2"
                   referredType="pivot:Class SourceMM1.ecore.oclas#T.source.Y2"/>
@@ -1022,7 +1022,7 @@
                 name="y2" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y2"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.7"
+            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.11"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.Z"
                   referredType="pivot:Class SourceMM1.ecore.oclas#T.source.Z"/>
@@ -1039,7 +1039,7 @@
                 type="pivot:Class SourceMM1.ecore.oclas#T.source.Z"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.7"
+            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.8"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X"
                   referredType="pivot:Class SourceMM1.ecore.oclas#T.source.X"/>
@@ -1056,7 +1056,7 @@
                 type="pivot:Class SourceMM1.ecore.oclas#T.source.X"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.7"
+            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.9"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y1"
                   referredType="pivot:Class SourceMM1.ecore.oclas#T.source.Y1"/>
@@ -1073,7 +1073,7 @@
                 name="y1" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y1"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.7"
+            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.10"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y2"
                   referredType="pivot:Class SourceMM1.ecore.oclas#T.source.Y2"/>
@@ -1090,7 +1090,7 @@
                 name="y2" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y2"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.7"
+            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.11"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.Z"
                   referredType="pivot:Class SourceMM1.ecore.oclas#T.source.Z"/>
@@ -1107,7 +1107,7 @@
                 type="pivot:Class SourceMM1.ecore.oclas#T.source.Z"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.7"
+            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.10"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y2"
                   referredType="pivot:Class SourceMM1.ecore.oclas#T.source.Y2"/>
@@ -1124,7 +1124,7 @@
                 name="y2" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y2"/>
           </mappingStatements>
           <mappingStatements xsi:type="qvti:MappingLoop">
-            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.7"
+            <ownedSource xsi:type="pivot:OperationCallExp" type="#//@ownedPackages.1/@ownedClasses.11"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclElement.allInstances">
               <ownedSource xsi:type="pivot:TypeExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.Z"
                   referredType="pivot:Class SourceMM1.ecore.oclas#T.source.Z"/>
@@ -1146,129 +1146,185 @@
   </ownedPackages>
   <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage"
       nsPrefix="orphanage">
-    <ownedClasses xsi:type="pivot:SequenceType" name="Sequence" superClasses="#//@ownedPackages.1/@ownedClasses.8"
+    <ownedClasses xsi:type="pivot:SequenceType" name="Sequence" superClasses="#//@ownedPackages.1/@ownedClasses.12"
         elementType="pivot:Class TargetMM1.ecore.oclas#T.target.A">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class TargetMM1.ecore.oclas#T.target.A"
-            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SequenceT"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.9 #//@ownedPackages.1/@ownedClasses.10"
-        elementType="pivot:Class SourceMM1.ecore.oclas#T.source.X">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.X"
-            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedSetT"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:SequenceType" name="Sequence" superClasses="#//@ownedPackages.1/@ownedClasses.11"
-        elementType="pivot:Class TargetMM1.ecore.oclas#T.target.C">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class TargetMM1.ecore.oclas#T.target.C"
-            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SequenceT"/>
-      </ownedBindings>
-    </ownedClasses>
-    <ownedClasses xsi:type="pivot:SequenceType" name="Sequence" superClasses="#//@ownedPackages.1/@ownedClasses.12"
-        elementType="pivot:Class SourceMM1.ecore.oclas#T.source.Y2">
-      <ownedBindings>
-        <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.Y2"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SequenceT"/>
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.13 #//@ownedPackages.1/@ownedClasses.14"
+        elementType="pivot:Class SourceMM1.ecore.oclas#T.source.X">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.X"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedSetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:SequenceType" name="Sequence" superClasses="#//@ownedPackages.1/@ownedClasses.15"
+        elementType="pivot:Class TargetMM1.ecore.oclas#T.target.C">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class TargetMM1.ecore.oclas#T.target.C"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SequenceT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:SequenceType" name="Sequence" superClasses="#//@ownedPackages.1/@ownedClasses.16"
+        elementType="pivot:Class SourceMM1.ecore.oclas#T.source.Y2">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.Y2"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SequenceT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:OrderedSetType" name="OrderedSet" superClasses="#//@ownedPackages.1/@ownedClasses.17 #//@ownedPackages.1/@ownedClasses.18"
         elementType="pivot:Class SourceMM1.ecore.oclas#T.source.Y">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.Y"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedSetT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SequenceType" name="Sequence" superClasses="#//@ownedPackages.1/@ownedClasses.15"
+    <ownedClasses xsi:type="pivot:SequenceType" name="Sequence" superClasses="#//@ownedPackages.1/@ownedClasses.19"
         elementType="pivot:Class TargetMM1.ecore.oclas#T.target.B">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class TargetMM1.ecore.oclas#T.target.B"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SequenceT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SequenceType" name="Sequence" superClasses="#//@ownedPackages.1/@ownedClasses.16"
+    <ownedClasses xsi:type="pivot:SequenceType" name="Sequence" superClasses="#//@ownedPackages.1/@ownedClasses.20"
         elementType="pivot:Class SourceMM1.ecore.oclas#T.source.Y1">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.Y1"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SequenceT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.17"
-        elementType="pivot:SelfType http://www.eclipse.org/ocl/2015/Library.oclas#OclSelf">
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.21"
+        elementType="pivot:Class SourceMM1.ecore.oclas#T.source.SRoot">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:SelfType http://www.eclipse.org/ocl/2015/Library.oclas#OclSelf"
+        <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.SRoot"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.18"
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.22"
+        elementType="pivot:Class SourceMM1.ecore.oclas#T.source.X">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.X"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.23"
+        elementType="pivot:Class SourceMM1.ecore.oclas#T.source.Y1">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.Y1"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.24"
+        elementType="pivot:Class SourceMM1.ecore.oclas#T.source.Y2">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.Y2"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.25"
+        elementType="pivot:Class SourceMM1.ecore.oclas#T.source.Z">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.Z"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.26"
         elementType="pivot:Class TargetMM1.ecore.oclas#T.target.A">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class TargetMM1.ecore.oclas#T.target.A"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.19"
+    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.27"
         elementType="pivot:Class SourceMM1.ecore.oclas#T.source.X">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.X"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.19"
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.27"
         elementType="pivot:Class SourceMM1.ecore.oclas#T.source.X">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.X"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.20"
+    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.28"
         elementType="pivot:Class TargetMM1.ecore.oclas#T.target.C">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class TargetMM1.ecore.oclas#T.target.C"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.21"
+    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.29"
         elementType="pivot:Class SourceMM1.ecore.oclas#T.source.Y2">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.Y2"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.22"
+    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.30"
         elementType="pivot:Class SourceMM1.ecore.oclas#T.source.Y">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.Y"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.22"
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.30"
         elementType="pivot:Class SourceMM1.ecore.oclas#T.source.Y">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.Y"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.23"
+    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.31"
         elementType="pivot:Class TargetMM1.ecore.oclas#T.target.B">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class TargetMM1.ecore.oclas#T.target.B"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.24"
+    <ownedClasses xsi:type="pivot:CollectionType" name="OrderedCollection" superClasses="#//@ownedPackages.1/@ownedClasses.32"
         elementType="pivot:Class SourceMM1.ecore.oclas#T.source.Y1">
       <ownedBindings>
         <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.Y1"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..OrderedCollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.25"
-        elementType="pivot:SelfType http://www.eclipse.org/ocl/2015/Library.oclas#OclSelf">
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.33"
+        elementType="pivot:Class SourceMM1.ecore.oclas#T.source.SRoot">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:SelfType http://www.eclipse.org/ocl/2015/Library.oclas#OclSelf"
+        <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.SRoot"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.34"
+        elementType="pivot:Class SourceMM1.ecore.oclas#T.source.X">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.X"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.35"
+        elementType="pivot:Class SourceMM1.ecore.oclas#T.source.Y1">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.Y1"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.36"
+        elementType="pivot:Class SourceMM1.ecore.oclas#T.source.Y2">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.Y2"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.37"
+        elementType="pivot:Class SourceMM1.ecore.oclas#T.source.Z">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.Z"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
       </ownedBindings>
     </ownedClasses>
@@ -1322,9 +1378,37 @@
       </ownedBindings>
     </ownedClasses>
     <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
-        elementType="pivot:SelfType http://www.eclipse.org/ocl/2015/Library.oclas#OclSelf">
+        elementType="pivot:Class SourceMM1.ecore.oclas#T.source.SRoot">
       <ownedBindings>
-        <ownedSubstitutions actual="pivot:SelfType http://www.eclipse.org/ocl/2015/Library.oclas#OclSelf"
+        <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.SRoot"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
+        elementType="pivot:Class SourceMM1.ecore.oclas#T.source.X">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.X"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
+        elementType="pivot:Class SourceMM1.ecore.oclas#T.source.Y1">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.Y1"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
+        elementType="pivot:Class SourceMM1.ecore.oclas#T.source.Y2">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.Y2"
+            formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
+        elementType="pivot:Class SourceMM1.ecore.oclas#T.source.Z">
+      <ownedBindings>
+        <ownedSubstitutions actual="pivot:Class SourceMM1.ecore.oclas#T.source.Z"
             formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
       </ownedBindings>
     </ownedClasses>
