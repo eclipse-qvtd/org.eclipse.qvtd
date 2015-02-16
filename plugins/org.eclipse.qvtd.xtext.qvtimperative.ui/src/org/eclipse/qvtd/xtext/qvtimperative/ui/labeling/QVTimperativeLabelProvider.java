@@ -14,6 +14,8 @@ import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.xtext.qvtcorebase.ui.labeling.QVTcoreBaseLabelProvider;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 
@@ -49,6 +51,14 @@ public class QVTimperativeLabelProvider extends QVTcoreBaseLabelProvider {
 
 	protected String text(MappingCallBinding ele) {
 		return NameUtil.getSafeName(ele.getBoundVariable());
+	}
+
+	protected String text(MappingLoop ele) {
+		return "«for»";
+	}
+
+	protected String text(MappingSequence ele) {
+		return "«sequence»";
 	}
 
 	protected String image(TopLevelCS ele) {
