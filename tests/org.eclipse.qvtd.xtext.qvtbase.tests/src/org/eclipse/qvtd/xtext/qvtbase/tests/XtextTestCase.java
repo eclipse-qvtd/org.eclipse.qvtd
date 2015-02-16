@@ -35,6 +35,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.ExpressionInOCL;
 import org.eclipse.ocl.pivot.LambdaType;
@@ -106,7 +107,7 @@ public class XtextTestCase extends PivotTestCase
 	}
 	
 	public static void assertSameModel(@NonNull Resource expectedResource, @NonNull Resource actualResource) throws IOException, InterruptedException {
-		org.eclipse.ocl.examples.xtext.tests.XtextTestCase.assertSameModel(expectedResource, actualResource);
+		TestUtil.assertSameModel(expectedResource, actualResource);
 	}
 	
 	/**
