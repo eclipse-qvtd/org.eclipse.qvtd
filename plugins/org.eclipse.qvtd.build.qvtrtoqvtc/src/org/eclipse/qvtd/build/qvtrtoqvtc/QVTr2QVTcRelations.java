@@ -397,11 +397,18 @@ public class QVTr2QVTcRelations {
 				Relation r = e.getReferredRelation();
 				List<Domain> dseq = new ArrayList<Domain>(r.getDomain());
 				// where
+				StringBuilder s = new StringBuilder();
 				for (OCLExpression arg : e.getArgument()) {
 					VariableExp a = (VariableExp) arg;
+					s.append("_");
+					s.append(a.getReferredVariable().getName());
+				}
+				String vdId = s.toString();
+			    for (OCLExpression arg : e.getArgument()) {
+					VariableExp a = (VariableExp) arg;
 					RelationDomain rd = (RelationDomain) dseq.get(e.getArgument().indexOf(a));
-					assert (a != null) && (rd != null);
-					doRWhenRelCallArgToMGuardPredicate(r, a, rd, mp);
+					assert (a != null) && (rd != null) && (vdId != null);
+					doRWhenRelCallArgToMGuardPredicate(r, a, rd, mp, vdId);
 				}
 			}
 		}
@@ -1126,7 +1133,7 @@ public class QVTr2QVTcRelations {
 	
 	// 39
 	private void doRWhenRelCallArgToMGuardPredicate(@NonNull Relation r, @NonNull VariableExp ve,
-			@NonNull RelationDomain d, @NonNull GuardPattern mg) {
+			@NonNull RelationDomain d, @NonNull GuardPattern mg, @NonNull String vdId) {
 		// when
 		Type tc = transformation.getRelationTrace(r);
 		assert tc != null;
@@ -1136,7 +1143,7 @@ public class QVTr2QVTcRelations {
 		Variable v = (Variable) ve.getReferredVariable();
 		assert v != null;
 		// init
-		Variable vd = transformation.findVariable(tc.getName()+"_v", tc, mg);
+		Variable vd = transformation.findVariable(tc.getName()+vdId+"_v", tc, mg);
 		Predicate mgp = transformation.createPredicate();
 		OperationCallExp ee = transformation.createOperationCallExp();
 		PropertyCallExp pe = transformation.createPropertyCallExp();

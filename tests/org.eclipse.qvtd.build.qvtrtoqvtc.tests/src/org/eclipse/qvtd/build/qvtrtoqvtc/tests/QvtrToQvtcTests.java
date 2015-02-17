@@ -20,8 +20,9 @@ import org.junit.Test;
 
 
 public class QvtrToQvtcTests extends LoadTestCase {
-
 	
+	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.build.qvtrtoqvtc.tests/src/org/eclipse/qvtd/build/qvtrtoqvtc/tests/", true);
+
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase#setUp()
 	 */
@@ -92,11 +93,11 @@ public class QvtrToQvtcTests extends LoadTestCase {
     
     @Test
     public void testSeqToStm() throws Exception {
+    	
+    	URI testBaseURI = TESTS_BASE_URI.appendSegment("seqtostm");
 		OCL ocl = OCL.newInstance(OCL.NO_PROJECTS);
     	ResourceSet asResourceSet = ocl.getMetamodelManager().getASResourceSet();
-    	URL projectURL = this.getClass().getResource("seqtostm/SeqToStm.qvtras");
-    	File f = new File(projectURL.getFile());
-    	URI qvtrURI = URI.createFileURI(f.toString());
+    	URI qvtrURI = testBaseURI.appendSegment("SeqToStm.qvtras");
 		Resource qvtrResource = asResourceSet.getResource(qvtrURI, true);
     	URI qvtcURI = qvtrURI.trimFileExtension();
     	qvtcURI = qvtcURI.appendFileExtension("qvtcas");

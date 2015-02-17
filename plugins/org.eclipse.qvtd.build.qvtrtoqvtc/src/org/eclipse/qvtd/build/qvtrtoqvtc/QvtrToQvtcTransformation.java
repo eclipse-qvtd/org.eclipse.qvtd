@@ -22,9 +22,12 @@ import java.util.Set;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.Model;
+import org.eclipse.ocl.pivot.Namespace;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.Package;
@@ -67,6 +70,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationalTransformation;
 import org.eclipse.qvtd.pivot.qvttemplate.ObjectTemplateExp;
 import org.eclipse.qvtd.pivot.qvttemplate.PropertyTemplateItem;
 import org.eclipse.qvtd.pivot.qvttemplate.TemplateExp;
@@ -85,7 +89,8 @@ public class QvtrToQvtcTransformation
 	private final @NonNull List<EObject> traceRoots = new ArrayList<EObject>();
 	private final @NonNull List<EObject> coreRoots = new ArrayList<EObject>();
 	private final @NonNull Map<Variable, Variable> variableTrace = new HashMap<Variable, Variable>();
-	private final @NonNull Map<Relation, org.eclipse.ocl.pivot.Class> relationToTraceClass = new HashMap<Relation, org.eclipse.ocl.pivot.Class>();	
+	private final @NonNull Map<Relation, org.eclipse.ocl.pivot.Class> relationToTraceClass = new HashMap<Relation, org.eclipse.ocl.pivot.Class>();
+	private final @NonNull Map<RelationalTransformation, org.eclipse.ocl.pivot.Package>  transformationToPackage = new HashMap<RelationalTransformation, org.eclipse.ocl.pivot.Package>();
 	// Un-navigable opposites
 	private final Map<Type, Key> keyForType = new HashMap<Type, Key>();
 	private final Map <Variable, TemplateExp> templateExpForVaraible = new HashMap<Variable, TemplateExp>();
@@ -108,6 +113,8 @@ public class QvtrToQvtcTransformation
 	private QVTcoreVariableKey variables = new QVTcoreVariableKey();
 	
 	private QVTcoreVariableKey realizedVariables = new QVTcoreVariableKey();
+	private CoreModel coreModel;
+	
 	
 	public QvtrToQvtcTransformation(@NonNull EnvironmentFactory environmentFactory, @NonNull Resource qvtrModel, @NonNull Resource qvtcModel, @Nullable Resource qvtcTraceModel) {
 		
@@ -116,7 +123,9 @@ public class QvtrToQvtcTransformation
 		this.qvtcModel = qvtcModel;
 		this.qvtcTraceModel = qvtcTraceModel;
 		traceData = new TransformationTraceDataImpl();
-		// Create a cache of opposite relations
+		this.coreModel = QVTcoreFactory.eINSTANCE.createCoreModel();
+        
+		// Create a cache of opposite relations and copy imports
 		TreeIterator<EObject> it = qvtrModel.getAllContents();
 		while(it.hasNext()) {
 			EObject eo = it.next();
@@ -161,6 +170,9 @@ public class QvtrToQvtcTransformation
 						invokingRelationsForRelationCallExp.put(ri, ir);
 					}
 				}
+			}
+			if (eo instanceof Import) {
+				this.coreModel.getOwnedImports().add((Import) EcoreUtil.copy(eo));
 			}
 		}
 	}
@@ -500,6 +512,11 @@ public class QvtrToQvtcTransformation
 		
 		return relationToTraceClass.get(relation);
 	}
+	
+	public @Nullable org.eclipse.ocl.pivot.Package getTransformationToPackageTrace(RelationalTransformation rt) {
+		
+		return transformationToPackage.get(rt);
+	}
 
 	public @Nullable Variable getVariableTrace(@NonNull Variable referredVariable) {
 		
@@ -546,6 +563,11 @@ public class QvtrToQvtcTransformation
 		relationToTraceClass.put(r, rc);
 	}
 	
+	public void putTransformationToPackageTrace(RelationalTransformation rt, org.eclipse.ocl.pivot.Package p) {
+		
+		transformationToPackage.put(rt, p);
+	}
+	
 	public void putVariableTrace(@NonNull Variable rv, @NonNull Variable mv) {
 		
 		Variable oldVal = variableTrace.put(rv, mv);
@@ -562,7 +584,13 @@ public class QvtrToQvtcTransformation
         asResource.getContents().add(root);
         for (EObject eObject : eObjects) {
         	if (eObject instanceof org.eclipse.ocl.pivot.Package) {
-                root.getOwnedPackages().add((org.eclipse.ocl.pivot.Package)eObject);
+        		org.eclipse.ocl.pivot.Package p = (org.eclipse.ocl.pivot.Package)eObject; 
+                root.getOwnedPackages().add(p);
+                // Add the package to the CoreModel imports, there should be only one!!
+                Import i = PivotFactory.eINSTANCE.createImport();
+                i.setName(p.getName());
+                i.setImportedNamespace((Namespace) eObject);
+                this.coreModel.getOwnedImports().add(i);
         	}
         	else {
         		asResource.getContents().add(eObject);
@@ -572,11 +600,12 @@ public class QvtrToQvtcTransformation
 	}
 	
 	public void saveCore(@NonNull Resource asResource, @NonNull Collection<? extends EObject> eObjects, @NonNull Map<Object, Object> options) throws IOException {
-        CoreModel root = QVTcoreFactory.eINSTANCE.createCoreModel();
-        root.setExternalURI(asResource.getURI().toString());
+        this.coreModel.setExternalURI(asResource.getURI().toString());
+        // Copy imports
+        
         Package capsule = PivotFactory.eINSTANCE.createPackage();
-        root.getOwnedPackages().add(capsule);
-        asResource.getContents().add(root);
+        this.coreModel.getOwnedPackages().add(capsule);
+        asResource.getContents().add(this.coreModel);
         for (EObject eObject : eObjects) {
         	if (eObject instanceof org.eclipse.qvtd.pivot.qvtbase.Transformation) {
                 capsule.getOwnedClasses().add((org.eclipse.qvtd.pivot.qvtbase.Transformation) eObject);
