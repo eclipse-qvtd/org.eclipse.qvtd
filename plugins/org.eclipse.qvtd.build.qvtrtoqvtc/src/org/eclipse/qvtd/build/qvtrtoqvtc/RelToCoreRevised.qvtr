@@ -1161,6 +1161,8 @@ relation RSimplePatternToMPattern
 --
 relation RWhenRelCallToMGuard
 {
+    vdId:String;
+    
     domain relations rp:Pattern {
         predicate = pd:Predicate {
             conditionExpression = e:RelationCallExp {
@@ -1173,7 +1175,8 @@ relation RWhenRelCallToMGuard
 };
     enforce domain core mp:GuardPattern {};
     where {
-        aseq->forAll( a | RWhenRelCallArgToMGuardPredicate( Sequence{ r, a, dseq->at(aseq->indexOf(a)) }, mp) );
+        vdId = aseq->iterate(a; s:String = '' | s.concat('_'.concat(a.referredVariable.name)));
+        aseq->forAll( a | RWhenRelCallArgToMGuardPredicate( Sequence{r, a, dseq->at(aseq->indexOf(a)), vdId}, mp) );
     }
 }
 
@@ -1192,12 +1195,13 @@ relation RWhenRelCallArgToMGuardPredicate
             rootVariable = dv:pivotocl::Variable {
                 name = dvn
             }
-        }
+        },
+        vdId:String {}
         ++ _
     };
     enforce domain core mg:GuardPattern {
         variable = vd:pivotocl::Variable {
-            name = tc.name+'_v',
+            name = tc.name + vdId + '_v',
             type = tc
         },
         predicate = mgp:Predicate {
