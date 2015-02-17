@@ -33,7 +33,6 @@ import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.library.classifier.ClassifierAllInstancesOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionAsOrderedSetOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
-import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
@@ -77,9 +76,28 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_RootCS = TypeId.SET.getSpecializedId(CLSSid_RootCS);
     
     
+    /*
+     * Array of the ClassIds of each class for which allInstances() may be invoked. Array index is the ClassIndex.
+     */
+    private static final @NonNull ClassId[] classIndex2classId = new ClassId[]{
+        CLSSid_ClassCS,		// 0 => ClassCS
+        CLSSid_PackageCS,		// 1 => PackageCS
+        CLSSid_RootCS		// 2 => RootCS
+    };
+    /*
+     * Mapping from each ClassIndex to all the ClassIndexes to which an object of the outer index
+     * may contribute results to an allInstances() invocation.
+     * Non trivial inner arrays arise when one ClassId is a derivation of another and so an
+     * instance of the derived classId contributes to derived and inherited ClassIndexes.
+     */
+    private final static @NonNull int[][] classIndex2allClassIndexes = new int[][] {
+        {0},		// 0 : ClassCS -> {ClassCS}
+        {1},		// 1 : PackageCS -> {PackageCS}
+        {2}		// 2 : RootCS -> {RootCS}
+    };
     
     public classescs2as_qvtp_qvtias(final @NonNull Evaluator evaluator) {
-        super(evaluator, new String[] {"leftCS", "rightAS"}, null, null, null);
+        super(evaluator, new String[] {"leftCS", "rightAS"}, null, classIndex2classId, classIndex2allClassIndexes);
     }
     
     public boolean run() {
@@ -336,7 +354,7 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
                 //
                 accumulator.add(oclAsType_0);
             }
-            final @NonNull /*@Thrown*/ OrderedSetValue asOrderedSet = ClassUtil.nonNullState(CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect));
+            final @NonNull /*@Thrown*/ OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect);
             final List<classes.Class> UNBOXED_asOrderedSet = asOrderedSet.asEcoreObjects(idResolver, classes.Class.class);
             assert UNBOXED_asOrderedSet != null;
             oclAsType.getOwnedClasses().addAll(UNBOXED_asOrderedSet);
@@ -404,7 +422,7 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
                 //
                 accumulator.add(oclAsType_0);
             }
-            final @NonNull /*@Thrown*/ OrderedSetValue asOrderedSet = ClassUtil.nonNullState(CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect));
+            final @NonNull /*@Thrown*/ OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect);
             final List<Package> UNBOXED_asOrderedSet = asOrderedSet.asEcoreObjects(idResolver, Package.class);
             assert UNBOXED_asOrderedSet != null;
             oclAsType.getOwnedPackages().addAll(UNBOXED_asOrderedSet);
@@ -468,9 +486,9 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
             final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classescs_c_c_ClassCS_1 = idResolver.getClass(CLSSid_ClassCS, null);
             final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classescs_c_c_PackageCS_2 = idResolver.getClass(CLSSid_PackageCS, null);
             final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classescs_c_c_RootCS_1 = idResolver.getClass(CLSSid_RootCS, null);
-            final @NonNull /*@Thrown*/ SetValue allInstances_5 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_ClassCS, TYP_classescs_c_c_ClassCS_1));
-            final @NonNull /*@Thrown*/ SetValue allInstances_2 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_2));
-            final @NonNull /*@Thrown*/ SetValue allInstances_1 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_RootCS, TYP_classescs_c_c_RootCS_1));
+            final @NonNull /*@Thrown*/ SetValue allInstances_5 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_ClassCS, TYP_classescs_c_c_ClassCS_1);
+            final @NonNull /*@Thrown*/ SetValue allInstances_2 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_2);
+            final @NonNull /*@Thrown*/ SetValue allInstances_1 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_RootCS, TYP_classescs_c_c_RootCS_1);
             final List<ClassCS> UNBOXED_allInstances_5 = allInstances_5.asEcoreObjects(idResolver, ClassCS.class);
             assert UNBOXED_allInstances_5 != null;
             final List<PackageCS> UNBOXED_allInstances_2 = allInstances_2.asEcoreObjects(idResolver, PackageCS.class);

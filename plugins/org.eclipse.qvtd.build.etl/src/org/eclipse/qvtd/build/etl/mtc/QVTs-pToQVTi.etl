@@ -382,7 +382,9 @@ rule BindingLoops
 	        exp.ownedSource = new QVTi!TypeExp;
 	        exp.ownedSource.referredType = it.type;
 	        exp.ownedSource.type = it.type;
+	        exp.ownedSource.typeValue = it.type;
 	        exp.type = getSet(it.type);
+	        exp.typeValue = it.type;
 	        loop.ownedSource = exp;
         } else {
         	var sourveVarExp = sp.getNavigationExp();

@@ -486,7 +486,7 @@ public class classescs2as extends AbstractTransformationExecutor
                 //
                 accumulator_0.add(symbol_3);
             }
-            final @NonNull /*@Thrown*/ OrderedSetValue asOrderedSet = ClassUtil.nonNullState(CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect));
+            final @NonNull /*@Thrown*/ OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect);
             final List<Package> UNBOXED_asOrderedSet = asOrderedSet.asEcoreObjects(idResolver, Package.class);
             assert UNBOXED_asOrderedSet != null;
             root.getOwnedPackages().addAll(UNBOXED_asOrderedSet);
@@ -615,7 +615,7 @@ public class classescs2as extends AbstractTransformationExecutor
                 //
                 accumulator_0.add(symbol_4);
             }
-            final @NonNull /*@Thrown*/ OrderedSetValue asOrderedSet = ClassUtil.nonNullState(CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect));
+            final @NonNull /*@Thrown*/ OrderedSetValue asOrderedSet = CollectionAsOrderedSetOperation.INSTANCE.evaluate(collect);
             final List<classes.Class> UNBOXED_asOrderedSet = asOrderedSet.asEcoreObjects(idResolver, classes.Class.class);
             assert UNBOXED_asOrderedSet != null;
             symbol_2.getOwnedClasses().addAll(UNBOXED_asOrderedSet);
@@ -715,10 +715,10 @@ public class classescs2as extends AbstractTransformationExecutor
             final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classescstraces_c_c_ClassCS2Class_0 = idResolver.getClass(CLSSid_ClassCS2Class, null);
             final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classescstraces_c_c_PackageCS2Package_0 = idResolver.getClass(CLSSid_PackageCS2Package, null);
             final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classescstraces_c_c_RootCS2Root_0 = idResolver.getClass(CLSSid_RootCS2Root, null);
-            final @NonNull /*@Thrown*/ SetValue allInstances_3 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Package, TYP_classes_c_c_Package_1));
-            final @NonNull /*@Thrown*/ SetValue allInstances_7 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_ClassCS, TYP_classescs_c_c_ClassCS_1));
-            final @NonNull /*@Thrown*/ SetValue allInstances = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_0));
-            final @NonNull /*@Thrown*/ SetValue allInstances_11 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_RootCS, TYP_classescs_c_c_RootCS_1));
+            final @NonNull /*@Thrown*/ SetValue allInstances_3 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Package, TYP_classes_c_c_Package_1);
+            final @NonNull /*@Thrown*/ SetValue allInstances_7 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_ClassCS, TYP_classescs_c_c_ClassCS_1);
+            final @NonNull /*@Thrown*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_0);
+            final @NonNull /*@Thrown*/ SetValue allInstances_11 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_RootCS, TYP_classescs_c_c_RootCS_1);
             final List<Package> UNBOXED_allInstances_3 = allInstances_3.asEcoreObjects(idResolver, Package.class);
             assert UNBOXED_allInstances_3 != null;
             final List<ClassCS> UNBOXED_allInstances_7 = allInstances_7.asEcoreObjects(idResolver, ClassCS.class);
@@ -737,7 +737,7 @@ public class classescs2as extends AbstractTransformationExecutor
                     mPackageCS2Package_LM(symbol_7);
                 }
             }
-            final @NonNull /*@Thrown*/ SetValue allInstances_0 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_PackageCS2Package, TYP_classescstraces_c_c_PackageCS2Package_0));
+            final @NonNull /*@Thrown*/ SetValue allInstances_0 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_PackageCS2Package, TYP_classescstraces_c_c_PackageCS2Package_0);
             final List<PackageCS2Package> UNBOXED_allInstances_0 = allInstances_0.asEcoreObjects(idResolver, PackageCS2Package.class);
             assert UNBOXED_allInstances_0 != null;
             ;
@@ -780,7 +780,7 @@ public class classescs2as extends AbstractTransformationExecutor
                     mClassCS2Class_LM(symbol_31);
                 }
             }
-            final @NonNull /*@Thrown*/ SetValue allInstances_6 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_ClassCS2Class, TYP_classescstraces_c_c_ClassCS2Class_0));
+            final @NonNull /*@Thrown*/ SetValue allInstances_6 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_ClassCS2Class, TYP_classescstraces_c_c_ClassCS2Class_0);
             final List<ClassCS2Class> UNBOXED_allInstances_6 = allInstances_6.asEcoreObjects(idResolver, ClassCS2Class.class);
             assert UNBOXED_allInstances_6 != null;
             ;
@@ -794,7 +794,7 @@ public class classescs2as extends AbstractTransformationExecutor
             for (ClassCS classCS_4 : UNBOXED_allInstances_7) {
                 if (classCS_4 != null) {
                     final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Class_0 = idResolver.getClass(CLSSid_Class, null);
-                    final @NonNull /*@Thrown*/ SetValue allInstances_8 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Class, TYP_classes_c_c_Class_0));
+                    final @NonNull /*@Thrown*/ SetValue allInstances_8 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Class, TYP_classes_c_c_Class_0);
                     final List<classes.Class> UNBOXED_allInstances_8 = allInstances_8.asEcoreObjects(idResolver, classes.Class.class);
                     assert UNBOXED_allInstances_8 != null;
                     ;
@@ -814,7 +814,7 @@ public class classescs2as extends AbstractTransformationExecutor
                     mRootCS2Root_LM(symbol_47);
                 }
             }
-            final @NonNull /*@Thrown*/ SetValue allInstances_10 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_RootCS2Root, TYP_classescstraces_c_c_RootCS2Root_0));
+            final @NonNull /*@Thrown*/ SetValue allInstances_10 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_RootCS2Root, TYP_classescstraces_c_c_RootCS2Root_0);
             final List<RootCS2Root> UNBOXED_allInstances_10 = allInstances_10.asEcoreObjects(idResolver, RootCS2Root.class);
             assert UNBOXED_allInstances_10 != null;
             ;
@@ -828,7 +828,7 @@ public class classescs2as extends AbstractTransformationExecutor
             for (RootCS rootCS_4 : UNBOXED_allInstances_11) {
                 if (rootCS_4 != null) {
                     final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Root_0 = idResolver.getClass(CLSSid_Root, null);
-                    final @NonNull /*@Thrown*/ SetValue allInstances_12 = ClassUtil.nonNullState(ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Root, TYP_classes_c_c_Root_0));
+                    final @NonNull /*@Thrown*/ SetValue allInstances_12 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Root, TYP_classes_c_c_Root_0);
                     final List<Root> UNBOXED_allInstances_12 = allInstances_12.asEcoreObjects(idResolver, Root.class);
                     assert UNBOXED_allInstances_12 != null;
                     ;

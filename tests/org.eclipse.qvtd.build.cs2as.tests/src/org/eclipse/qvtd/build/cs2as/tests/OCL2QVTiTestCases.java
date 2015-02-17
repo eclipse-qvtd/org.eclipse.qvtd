@@ -4,6 +4,7 @@ import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
+import java.util.Collections;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
@@ -21,6 +22,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.pivot.CompleteEnvironment;
+import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
@@ -41,6 +43,7 @@ import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationEvaluator;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
+import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationEvaluator;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
@@ -178,10 +181,11 @@ public class OCL2QVTiTestCases extends LoadTestCase {
     	testEvaluator.saveTransformation(null);
         testEvaluator.loadModel("leftCS", csModelURI);
         testEvaluator.createModel("rightAS", asModelURI, null);
-        testEvaluator.execute();
+        boolean success = testEvaluator.execute();
         testEvaluator.saveModels();
         testEvaluator.dispose();
-                
+        assertTrue(success);
+        
         ResourceSet rSet = myQVT.getResourceSet();
         Resource expected =  rSet.getResource(expectedAsModelURI, true);
         assertSameModel(expected, rSet.getResource(asModelURI, true));
@@ -209,7 +213,6 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		URI samplesBaseUri = baseURI.appendSegment("samples");
     	URI csModelURI = samplesBaseUri.appendSegment("example1_input.xmi");
     	URI asModelURI = samplesBaseUri.appendSegment("example1_output.xmi");
-//    	URI middleModelURI = samplesBaseUri.appendSegment("example1_middle.xmi");
     	URI expectedAsModelURI = samplesBaseUri.appendSegment("example1_output_expected.xmi");
     	
     	
@@ -217,11 +220,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
     	testEvaluator.saveTransformation(null);
         testEvaluator.loadModel("leftCS", csModelURI);
         testEvaluator.createModel("rightAS", asModelURI, null);
-        // testEvaluator.createModel("middle", middleModelURI, null);
-        testEvaluator.execute();
+        boolean success = testEvaluator.execute();
         testEvaluator.saveModels();
         testEvaluator.dispose();
-                
+        assertTrue(success);                
         ResourceSet rSet = myQVT.getResourceSet();
         Resource expected =  rSet.getResource(expectedAsModelURI, true);
         assertSameModel(expected, rSet.getResource(asModelURI, true));
@@ -250,9 +252,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
     	testEvaluator.saveTransformation(null);
         testEvaluator.loadModel("leftCS", csModelURI);
         testEvaluator.createModel("rightAS", asModelURI, null);
-        testEvaluator.execute();
+        boolean success = testEvaluator.execute();
         testEvaluator.saveModels();
         testEvaluator.dispose();
+        assertTrue(success);
                 
         ResourceSet rSet = myQVT.getResourceSet();
         Resource expected =  rSet.getResource(expectedAsModelURI, true);
@@ -313,8 +316,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
     	// 
 		URI middleGenModelURI= baseURI.appendSegment("classescs2as.genmodel");
 		Class<? extends TransformationExecutor> txClass = generateCode(qvtiTransf.getTransformation(), middleGenModelURI, TESTS_GEN_PATH);
-
-		/* FIXME allInstances doesn't work on output elements. Don't try yet
+		
 		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
 		TransformationEvaluator evaluator = myQVT.createEvaluator(txConstructor);
 		TransformationExecutor tx = evaluator.getExecutor();
@@ -326,6 +328,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
     	URI samplesBaseUri = baseURI.appendSegment("samples");
     	URI csModelURI = samplesBaseUri.appendSegment("example1_input.xmi");
     	URI asModelURI = samplesBaseUri.appendSegment("example1_output.xmi");
+    	URI expectedAsModelURI = samplesBaseUri.appendSegment("example1_output_expected.xmi");
     	
     	ResourceSet rSet = myQVT.getResourceSet();
 		Resource inputResource = rSet.getResource(csModelURI, true);
@@ -333,7 +336,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		assertTrue(tx.run());
 		Resource outputResource = rSet.createResource(asModelURI);
 		outputResource.getContents().addAll(tx.getRootObjects("rightAS"));
-		outputResource.save(null);*/
+		outputResource.save(null);
+
+        Resource expected =  rSet.getResource(expectedAsModelURI, true);
+        assertSameModel(expected, rSet.getResource(asModelURI, true));
 	}
 	
 //	@Test
