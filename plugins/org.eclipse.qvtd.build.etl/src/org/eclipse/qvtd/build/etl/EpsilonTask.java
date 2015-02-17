@@ -12,7 +12,7 @@
 package org.eclipse.qvtd.build.etl;
 
 import java.net.URI;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.epsilon.common.parse.problem.ParseProblem;
@@ -42,8 +42,6 @@ public abstract class EpsilonTask {
 	/** The result. */
 	protected Object result;
 	
-	/** Parameters */
-	protected List<Variable> parameters = new ArrayList<Variable>();
 	/**
 	 * Creates the module used by the engine to execute the ExL source. Specific
 	 * ExL language engines should provide a specific module.
@@ -130,6 +128,10 @@ public abstract class EpsilonTask {
 	 */
 	public void preProcess() {};
 	
+	public void execute() throws QvtMtcExecutionException {
+		execute(Collections.<Variable>emptyList());
+	}
+
 	/**
 	 * Executes the Epsilon source on the loaded models using the engine.
 	 * Parses the Epsilon source for errors, loads the models to the engine's
@@ -144,7 +146,7 @@ public abstract class EpsilonTask {
 	 * @throws QvtMtcExecutionException If there was an error executing the
 	 * 	parsing or executing the script.
 	 */
-	public void execute() throws QvtMtcExecutionException {
+	public void execute(List<Variable> parameters) throws QvtMtcExecutionException {
 		
 		module = createModule();
 		try {
@@ -183,6 +185,8 @@ public abstract class EpsilonTask {
 	}
 	
 	
+	
+	
 	/**
 	 * Execute. The actual module execution.
 	 * Depending on the specific executor this method may be implemented 
@@ -207,7 +211,4 @@ public abstract class EpsilonTask {
 		return result;
 	}
 	
-	public void addParameter(Variable parameter){
-		parameters.add(parameter);
-	}
 }

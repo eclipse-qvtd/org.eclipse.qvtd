@@ -511,8 +511,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 			XmlModel graphMl = createGraphMlModel(graphMlURI);
 			etl.addModel(qvtsModel);
 			etl.addModel(graphMl);
-			etl.addParameter(new Variable("pruneModel", pruneQVTs, EolPrimitiveType.Boolean));
-			etl.execute();
+			etl.execute(Collections.singletonList(new Variable("pruneModel", pruneQVTs, EolPrimitiveType.Boolean)));
 		} catch (URISyntaxException e) {
 			throw new QvtMtcExecutionException("Exception launching QVTs 2 GraphMl transformation", e);
 		}
