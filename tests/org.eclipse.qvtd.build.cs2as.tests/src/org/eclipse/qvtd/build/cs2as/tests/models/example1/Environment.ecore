@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="env" nsURI="http://www.example.org/examples/env.ecore" nsPrefix="env">
-  <eClassifiers xsi:type="ecore:EClass" name="Environment" instanceClassName="org.eclipse.ocl.pivot.lookup.internal.Environment">
+  <eClassifiers xsi:type="ecore:EClass" name="Environment" instanceClassName="org.eclipse.qvtd.build.cs2as.tests.Environment">
     <eOperations name="addElement" lowerBound="1" eType="#//Environment">
       <eParameters name="element" lowerBound="1" eType="ecore:EClass TargetMM1.ecore#//NamedElement"/>
     </eOperations>

@@ -26,4 +26,10 @@ Export-Package: classes,
  classescs.util,
  classescstraces,
  classescstraces.impl,
- classescstraces.util
+ classescstraces.util,
+ source,
+ source.impl,
+ source.util,
+ target,
+ target.impl,
+ target.util
