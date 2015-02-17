@@ -17,6 +17,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
+import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
@@ -91,7 +92,19 @@ public class QVTcoreBaseLabelProvider extends QVTbaseLabelProvider
 	}
 
 	protected String text(BottomPattern ele) {
-		return "bottom";
+		return "«bottom»";
+	}
+
+	protected String text(CoreDomain ele) {
+		StringBuilder s = new StringBuilder();
+		if (ele.isIsCheckable()) {
+			s.append("«checkable» ");
+		}
+		if (ele.isIsEnforceable()) {
+			s.append("«enforceable» ");
+		}
+		appendName(s, ele);
+		return s.toString();
 	}
 
 	protected String text(DomainCS ele) {
@@ -99,7 +112,11 @@ public class QVTcoreBaseLabelProvider extends QVTbaseLabelProvider
 	}
 
 	protected String text(GuardPattern ele) {
-		return "guard";
+		return "«guard»";
+	}
+
+	protected String text(Predicate ele) {
+		return "«predicate»";
 	}
 
 	protected String text(PropertyAssignment ele) {
@@ -122,6 +139,7 @@ public class QVTcoreBaseLabelProvider extends QVTbaseLabelProvider
 				s.append(PrettyPrinter.printType(type, namespace));
 			}
 		}
+		s.append(" := ");
 		return s.toString();
 	}
 
@@ -141,6 +159,7 @@ public class QVTcoreBaseLabelProvider extends QVTbaseLabelProvider
 				s.append(PrettyPrinter.printType(type, namespace));
 			}
 		}
+		s.append(" := ");
 		return s.toString();
 	}
 }

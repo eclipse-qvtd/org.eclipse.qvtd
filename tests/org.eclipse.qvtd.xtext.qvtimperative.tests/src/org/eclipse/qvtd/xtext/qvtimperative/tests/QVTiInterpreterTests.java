@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012, 2014 The University of York, Willink Transformations and others.
+ * Copyright (c) 2012, 2015 The University of York, Willink Transformations and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,6 +7,7 @@
  * 
  * Contributors:
  *     Horacio Hoyos - initial API and implementation
+ *     Adolfo Sanchez-Barbudo Herrera - Bug 456900, 457239 
  ******************************************************************************/
 
 package org.eclipse.qvtd.xtext.qvtimperative.tests;
@@ -26,14 +27,18 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
+import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
@@ -357,4 +362,62 @@ public class QVTiInterpreterTests extends LoadTestCase
         myQVT.dispose();
     }
     
+    @Test
+    public void testClassesCS2AS_bug457239() throws Exception {
+    	CompleteOCLStandaloneSetup.doSetup();
+    	MyQVT myQVT = createQVT();
+        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(myQVT.getEnvironmentFactory(), "ClassesCS2AS/bug457239", "ClassesCS2AS.qvti");
+    	testEvaluator.saveTransformation(null);
+        
+        testEvaluator.loadModel("leftCS", "example_input.xmi");
+        testEvaluator.createModel("rightAS", "example_output.xmi");
+        testEvaluator.loadReference("rightAS", "example_output_ref.xmi");
+        testEvaluator.test();
+        testEvaluator.dispose();
+    	URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
+        assertLoadable(txURI);
+        myQVT.dispose();
+    }
+    
+    @Test
+    public void testClassesCS2AS_bug457239b() throws Exception {
+    	CompleteOCLStandaloneSetup.doSetup();
+    	MyQVT myQVT = createQVT();
+    	URI baseURI = URI.createURI("platform:/resource/org.eclipse.qvtd.xtext.qvtimperative.tests/src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassesCS2AS/bug457239");
+    	URI txURI = baseURI.appendSegment("ClassesCS2ASv2_AS.qvtias"); 
+    	assertLoadable(ClassUtil.nonNullState(txURI));
+     
+    	QVTiEnvironmentFactory environmentFactory = myQVT.getEnvironmentFactory();
+		QVTiPivotEvaluator testEvaluator =  new QVTiPivotEvaluator(environmentFactory,
+    				ClassUtil.nonNullState(loadTransformation(environmentFactory.getMetamodelManager(), txURI)));
+    	    	
+    	URI csModelURI = baseURI.appendSegment("example_input.xmi");
+    	URI asModelURI = baseURI.appendSegment("example_output.xmi");
+    	URI refAsModelURI = baseURI.appendSegment("exampleV2_output_ref.xmi");
+    	
+        testEvaluator.loadModel("leftCS", ClassUtil.nonNullState(csModelURI));
+        testEvaluator.createModel("rightAS", ClassUtil.nonNullState(asModelURI), null);
+        testEvaluator.execute();
+        testEvaluator.saveModels();
+        testEvaluator.dispose();
+        
+        ResourceSet rSet = environmentFactory.getResourceSet();        
+        assertSameModel(rSet.getResource(refAsModelURI, true), 
+        				rSet.getResource(asModelURI, true));
+        myQVT.dispose();
+    }
+    
+   static  protected Transformation loadTransformation(MetamodelManager metamodelManager, URI txURI) {
+    	Resource txResource = metamodelManager.getASResourceSet().getResource(txURI, true);
+    	ImperativeModel iModel = (ImperativeModel) txResource.getContents().get(0);
+    	for (org.eclipse.ocl.pivot.Package p : iModel.getOwnedPackages()) {
+    		for (org.eclipse.ocl.pivot.Class c : p.getOwnedClasses()) {
+    			if (c instanceof Transformation){
+    				return (Transformation) c;
+    			}
+    		}
+    	}
+    	return null;
+    }
+	
 }

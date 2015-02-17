@@ -14,6 +14,11 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.NamedElement;
+import org.eclipse.ocl.pivot.Type;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.internal.prettyprint.PrettyPrinter;
+import org.eclipse.ocl.pivot.utilities.NameUtil;
+import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Pattern;
 import org.eclipse.qvtd.pivot.qvtrelation.DomainPattern;
 import org.eclipse.qvtd.pivot.qvtrelation.Key;
@@ -113,17 +118,76 @@ public class QVTrelationLabelProvider extends QVTbaseLabelProvider {
 	protected String text(Pattern ele) {
 		EStructuralFeature eContainingFeature = ele.eContainingFeature();
 		if (eContainingFeature == QVTrelationPackage.Literals.RELATION__WHEN) {
-			return "when";
+			return "«when»";
 		}
 		else if (eContainingFeature == QVTrelationPackage.Literals.RELATION__WHERE) {
-			return "where";
+			return "«where»";
 		}
 		else {
-			return "<pattern>";
+			return "«pattern»";
 		}
 	}
 
+	protected String text(PropertyTemplateItem ele) {
+		return NameUtil.getSafeName(ele.getReferredProperty()) + " =";
+	}
+
+	protected String text(Relation ele) {
+		StringBuilder s = new StringBuilder();
+		if (ele.isIsTopLevel()) {
+			s.append("«top» ");
+		}
+		appendName(s, ele);
+		return s.toString();
+	}
+
+	protected String text(RelationDomain ele) {
+		StringBuilder s = new StringBuilder();
+		if (ele.isIsCheckable()) {
+			s.append("«checkable» ");
+		}
+		if (ele.isIsEnforceable()) {
+			s.append("«enforceable» ");
+		}
+		appendName(s, ele);
+		return s.toString();
+	}
+
 	protected String text(RelationCallExp ele) {
-		return ele.getName();
+		assert ele != null;
+		StringBuilder s = new StringBuilder();
+		Relation referredRelation = ele.getReferredRelation();
+		if (referredRelation != null) {
+			appendName(s, referredRelation);
+			s.append("(");
+			String prefix = "";
+			for (Domain csDomain : referredRelation.getDomain()) {
+				s.append(prefix);
+				appendName(s, csDomain);
+				prefix = ", ";
+			}
+			s.append(")");
+		}
+		else {
+			s.append("<<null>>");
+		}
+		return s.toString();
+	}
+
+	@Override
+	protected String text(Variable ele) {
+		assert ele != null;
+		if (ele.getName() == null) {
+			StringBuilder s = new StringBuilder();
+			s.append("_ : ");
+			Type type = ele.getType();
+			if (type != null) {
+				s.append(PrettyPrinter.printType(type));
+			}
+			return s.toString();
+		}
+		else {
+			return super.text(ele);
+		}
 	}
 }

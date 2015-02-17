@@ -10,7 +10,16 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtcore.ui.outline;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.ocl.xtext.basecs.ImportCS;
+import org.eclipse.ocl.xtext.basecs.LibraryCS;
+import org.eclipse.ocl.xtext.basecs.PackageCS;
 import org.eclipse.qvtd.xtext.qvtcorebase.ui.outline.QVTcoreBaseOutlineTreeProvider;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
+import org.eclipse.qvtd.xtext.qvtcorecs.MappingCS;
+import org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS;
+import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
 
 /**
  * customization of the default outline structure
@@ -18,7 +27,28 @@ import org.eclipse.qvtd.xtext.qvtcorebase.ui.outline.QVTcoreBaseOutlineTreeProvi
  */
 public class QVTcoreOutlineTreeProvider extends QVTcoreBaseOutlineTreeProvider
 {
-//	protected void _createNode(IOutlineNode parentNode, PredicateCS csPredicate) {
-//		createNode(parentNode, csPredicate.getExpr());
-//	}
+	protected void _createChildren(IOutlineNode parentNode, TopLevelCS ele) {
+		for (ImportCS csImport : ele.getOwnedImports()) {
+			createNode(parentNode, csImport);
+		}
+		for (LibraryCS csLibrary : ele.getOwnedLibraries()) {
+			createNode(parentNode, csLibrary);
+		}
+		for (PackageCS csPackage : ele.getOwnedPackages()) {
+			createNode(parentNode, csPackage);
+		}
+		for (TransformationCS csTransformation : ele.getTransformations()) {
+			createNode(parentNode, csTransformation);
+		}
+		for (QueryCS csQuery : ele.getQueries()) {
+			createNode(parentNode, csQuery);
+		}
+		for (MappingCS csMapping : ele.getMappings()) {
+			createNode(parentNode, csMapping);
+		}
+	}
+
+	protected void _createNode(IOutlineNode parentNode, TopLevelCS ele) {
+		_createNode(parentNode, (EObject)ele);
+	}
 }
