@@ -32,8 +32,6 @@
             class="classes.ClassesPackage"
             genModel="src/org/eclipse/qvtd/build/cs2as/tests/models/example2/classescs2as.genmodel"/>
    </extension>
-
-<!--  
    <extension point="org.eclipse.emf.ecore.generated_package">
 -->   
       <!-- @generated Source2Target -->
