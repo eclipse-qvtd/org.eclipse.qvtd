@@ -382,7 +382,9 @@ rule BindingLoops
 	        exp.ownedSource = new QVTi!TypeExp;
 	        exp.ownedSource.referredType = it.type;
 	        exp.ownedSource.type = it.type;
-	        exp.type = exp.referredOperation.type;
+	        exp.ownedSource.typeValue = it.type;
+	        exp.type = getSet(it.type);
+	        exp.typeValue = it.type;
 	        loop.ownedSource = exp;
         } else {
         	var sourveVarExp = sp.getNavigationExp();
@@ -500,6 +502,10 @@ operation QVTs!MappingAction getAllContextDataParameters(type) {
 	return self.getContextDataParameters().select(dp | dp.variable.type == type or dp.variable.type.closure(t | t.superClasses).includes(type));
 }
         		
+
+operation getSet(class : QVTi!Class) {
+	return class.owningModel.getMetamodelManager().getCollectionType("Set", class, null, null);	
+}
 
 post {
 	-- FIXME By some reason making the rule Imports be lazy, makes the transformation strangely behave. Investigate
