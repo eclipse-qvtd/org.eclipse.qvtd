@@ -301,9 +301,6 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	public void testExample2_CG() throws Exception {
 		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 		
-//		Registry packageRegistry = myQVT.getResourceSet().getPackageRegistry();
-//		packageRegistry.put(ClassescsPackage.eNS_URI, ClassescsPackage.eINSTANCE);
-//		packageRegistry.put(ClassesPackage.eNS_URI, ClassesPackage.eINSTANCE);
 		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "classescs2as.oclas", myQVT.getEnvironmentFactory());
     	mtc.execute();
     	PivotModel qvtiTransf = mtc.getiModel();
@@ -315,7 +312,9 @@ public class OCL2QVTiTestCases extends LoadTestCase {
     	// Generate the transformation java code
     	// 
 		URI middleGenModelURI= baseURI.appendSegment("classescs2as.genmodel");
-		Class<? extends TransformationExecutor> txClass = generateCode(qvtiTransf.getTransformation(), middleGenModelURI, TESTS_GEN_PATH);
+//		ResourceSet asRset = myQVT.getMetamodelManager().getASResourceSet();
+//		Class<? extends TransformationExecutor> txClass = generateCode(getTransformation(asRset, baseURI.appendSegment("classescs2as.qvtias")) , middleGenModelURI, TESTS_GEN_PATH);
+		Class<? extends TransformationExecutor> txClass = generateCode(qvtiTransf.getTransformation() , middleGenModelURI, TESTS_GEN_PATH);
 		
 		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
 		TransformationEvaluator evaluator = myQVT.createEvaluator(txConstructor);

@@ -20,6 +20,8 @@ import classescstraces.ClassescstracesPackage;
 
 import classescstraces.impl.ClassescstracesPackageImpl;
 
+import env.EnvironmentPackage;
+import env.impl.EnvironmentPackageImpl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -132,16 +134,19 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 		// Obtain or create and register interdependencies
 		ClassescstracesPackageImpl theClassescstracesPackage = (ClassescstracesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ClassescstracesPackage.eNS_URI) instanceof ClassescstracesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ClassescstracesPackage.eNS_URI) : ClassescstracesPackage.eINSTANCE);
 		ClassesPackageImpl theClassesPackage = (ClassesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ClassesPackage.eNS_URI) instanceof ClassesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ClassesPackage.eNS_URI) : ClassesPackage.eINSTANCE);
+		EnvironmentPackageImpl theEnvironmentPackage = (EnvironmentPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(EnvironmentPackage.eNS_URI) instanceof EnvironmentPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(EnvironmentPackage.eNS_URI) : EnvironmentPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theClassescsPackage.createPackageContents();
 		theClassescstracesPackage.createPackageContents();
 		theClassesPackage.createPackageContents();
+		theEnvironmentPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theClassescsPackage.initializePackageContents();
 		theClassescstracesPackage.initializePackageContents();
 		theClassesPackage.initializePackageContents();
+		theEnvironmentPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theClassescsPackage.freeze();

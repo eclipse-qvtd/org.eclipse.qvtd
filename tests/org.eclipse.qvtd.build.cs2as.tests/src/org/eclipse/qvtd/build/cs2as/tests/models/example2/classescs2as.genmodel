@@ -57,4 +57,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Classes.ecore#//Root/ownedPackages"/>
     </genClasses>
   </genPackages>
+  <genPackages prefix="Environment" disposableProviderFactory="true" ecorePackage="Environment.ecore#/">
+    <genClasses image="false" ecoreClass="Environment.ecore#//Environment"/>
+  </genPackages>
 </genmodel:GenModel>

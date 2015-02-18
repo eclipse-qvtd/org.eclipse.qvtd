@@ -9,7 +9,7 @@
     <ownedClasses xmi:id="T.classescs.ClassCS.0" name="ClassCS">
       <ownedOperations xmi:id="o.classescs.ClassCS.ast" name="ast" type="pivot:Class Classes.ecore.oclas#T.classes.Class">
         <bodyExpression xsi:type="pivot:ExpressionInOCL" type="pivot:Class Classes.ecore.oclas#T.classes.Class"
-            body="&#xA;&#x9;classes::Class {&#xA;&#x9;&#x9;name = name&#xA;&#x9;&#x9;-- superClass = ast().lookupClass(_extends)&#xA;&#x9;}&#xA;&#xA;">
+            body="&#xA;&#x9;classes::Class {&#xA;&#x9;&#x9;name = name,&#xA;&#x9;&#x9;superClass = ast().env().lookupClass(_extends)&#xA;&#x9;}&#xA;&#xA;">
           <ownedBody xsi:type="pivot:ConstructorExp" type="pivot:Class Classes.ecore.oclas#T.classes.Class">
             <ownedParts name="name" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredProperty="Classes.ecore.oclas#p.classes.NamedElement.name">
@@ -17,6 +17,26 @@
                   referredProperty="ClassesCS.ecore.oclas#p.classescs.NamedElementCS.name">
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
                     isImplicit="true" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@ownedOperations.0/@bodyExpression/@ownedContext"/>
+              </ownedInit>
+            </ownedParts>
+            <ownedParts name="superClass" isRequired="false" type="pivot:Class Classes.ecore.oclas#T.classes.Class"
+                referredProperty="Classes.ecore.oclas#p.classes.Class.superClass">
+              <ownedInit xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Class"
+                  referredOperation="ClassesLookup.ocl.oclas#o.env.Environment.lookupClass..classescs.PathNameCS">
+                <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class Environment.ecore.oclas#T.env.Environment"
+                    referredOperation="ClassesLookup.ocl.oclas#o.ocl.OclElement.env">
+                  <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Class"
+                      referredOperation="#o.classescs.ClassCS.ast">
+                    <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
+                        isImplicit="true" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@ownedOperations.0/@bodyExpression/@ownedContext"/>
+                  </ownedSource>
+                </ownedSource>
+                <ownedArguments xsi:type="pivot:PropertyCallExp" isRequired="false"
+                    type="pivot:Class ClassesCS.ecore.oclas#T.classescs.PathNameCS"
+                    referredProperty="ClassesCS.ecore.oclas#p.classescs.ClassCS.extends">
+                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
+                      isImplicit="true" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@ownedOperations.0/@bodyExpression/@ownedContext"/>
+                </ownedArguments>
               </ownedInit>
             </ownedParts>
           </ownedBody>

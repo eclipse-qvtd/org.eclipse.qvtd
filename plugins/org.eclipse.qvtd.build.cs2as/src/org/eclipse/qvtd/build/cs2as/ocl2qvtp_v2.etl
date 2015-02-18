@@ -57,6 +57,8 @@ rule ConstructorExp2CreationMapping
 	
 	guard {
 		// FIXME this is hazardy. Rework
+		// Ideally lazy transformation on the content of the OCL Model should avoid calling
+		// this rule on undesired elemenets (imported from other ocl files)
 		return s.closure(x|x.eContainer()).contains(LEFTCS_PACKAGE); 
 	}
 	
@@ -95,10 +97,11 @@ rule ConstructorPart2UpdateMapping
 	transform s : OCL!ConstructorPart
 	to t : QVTi!Mapping {
 	
-	guard { 
-		var astCalls = s.getAstCalls();
-		return true;
-		--return astCalls.isEmpty() and s.closure(x|x.eContainer()).contains(LEFTCS_PACKAGE);
+	guard {
+		// FIXME this is hazardy. Rework
+		// Ideally lazy transformation on the content of the OCL Model should avoid calling
+		// this rule on undesired elemenets (imported from other ocl files)
+		return s.closure(x|x.eContainer()).contains(LEFTCS_PACKAGE); 
 	}
 		
 	var constructorExp = s.eContainer();
