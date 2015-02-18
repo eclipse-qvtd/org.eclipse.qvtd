@@ -315,6 +315,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 //		ResourceSet asRset = myQVT.getMetamodelManager().getASResourceSet();
 //		Class<? extends TransformationExecutor> txClass = generateCode(getTransformation(asRset, baseURI.appendSegment("classescs2as.qvtias")) , middleGenModelURI, TESTS_GEN_PATH);
 		Class<? extends TransformationExecutor> txClass = generateCode(qvtiTransf.getTransformation() , middleGenModelURI, TESTS_GEN_PATH);
+//		Class<? extends TransformationExecutor> txClass = classescs2as_qvtp_qvtias.class;
+				
 		
 		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
 		TransformationEvaluator evaluator = myQVT.createEvaluator(txConstructor);

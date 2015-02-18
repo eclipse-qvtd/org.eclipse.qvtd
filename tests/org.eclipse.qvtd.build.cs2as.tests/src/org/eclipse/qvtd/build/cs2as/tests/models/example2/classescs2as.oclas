@@ -9,7 +9,7 @@
     <ownedClasses xmi:id="T.classescs.ClassCS.0" name="ClassCS">
       <ownedOperations xmi:id="o.classescs.ClassCS.ast" name="ast" type="pivot:Class Classes.ecore.oclas#T.classes.Class">
         <bodyExpression xsi:type="pivot:ExpressionInOCL" type="pivot:Class Classes.ecore.oclas#T.classes.Class"
-            body="&#xA;&#x9;classes::Class {&#xA;&#x9;&#x9;name = name,&#xA;&#x9;&#x9;superClass = ast().env().lookupClass(_extends)&#xA;&#x9;}&#xA;&#xA;">
+            body="&#xA;&#x9;classes::Class {&#xA;&#x9;&#x9;name = name,&#xA;&#x9;&#x9;superClass = if (_extends = null) then null else ast().env().lookupClass(_extends) endif&#xA;&#x9;}&#xA;&#xA;">
           <ownedBody xsi:type="pivot:ConstructorExp" type="pivot:Class Classes.ecore.oclas#T.classes.Class">
             <ownedParts name="name" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredProperty="Classes.ecore.oclas#p.classes.NamedElement.name">
@@ -21,22 +21,36 @@
             </ownedParts>
             <ownedParts name="superClass" isRequired="false" type="pivot:Class Classes.ecore.oclas#T.classes.Class"
                 referredProperty="Classes.ecore.oclas#p.classes.Class.superClass">
-              <ownedInit xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Class"
-                  referredOperation="ClassesLookup.ocl.oclas#o.env.Environment.lookupClass..classescs.PathNameCS">
-                <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class Environment.ecore.oclas#T.env.Environment"
-                    referredOperation="ClassesLookup.ocl.oclas#o.ocl.OclElement.env">
-                  <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Class"
-                      referredOperation="#o.classescs.ClassCS.ast">
+              <ownedInit xsi:type="pivot:IfExp" isRequired="false" type="pivot:Class Classes.ecore.oclas#T.classes.Class">
+                <ownedCondition xsi:type="pivot:OperationCallExp" name="=" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
+                    referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
+                  <ownedSource xsi:type="pivot:PropertyCallExp" isRequired="false"
+                      type="pivot:Class ClassesCS.ecore.oclas#T.classescs.PathNameCS"
+                      referredProperty="ClassesCS.ecore.oclas#p.classescs.ClassCS.extends">
                     <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
                         isImplicit="true" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@ownedOperations.0/@bodyExpression/@ownedContext"/>
                   </ownedSource>
-                </ownedSource>
-                <ownedArguments xsi:type="pivot:PropertyCallExp" isRequired="false"
-                    type="pivot:Class ClassesCS.ecore.oclas#T.classescs.PathNameCS"
-                    referredProperty="ClassesCS.ecore.oclas#p.classescs.ClassCS.extends">
-                  <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
-                      isImplicit="true" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@ownedOperations.0/@bodyExpression/@ownedContext"/>
-                </ownedArguments>
+                  <ownedArguments xsi:type="pivot:NullLiteralExp" isRequired="false"
+                      type="pivot:VoidType http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclVoid"/>
+                </ownedCondition>
+                <ownedElse xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Class"
+                    referredOperation="ClassesLookup.ocl.oclas#o.env.Environment.lookupClass..classescs.PathNameCS">
+                  <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class Environment.ecore.oclas#T.env.Environment"
+                      referredOperation="ClassesLookup.ocl.oclas#o.classes.Class.env">
+                    <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Class"
+                        referredOperation="#o.classescs.ClassCS.ast">
+                      <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
+                          isImplicit="true" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@ownedOperations.0/@bodyExpression/@ownedContext"/>
+                    </ownedSource>
+                  </ownedSource>
+                  <ownedArguments xsi:type="pivot:PropertyCallExp" isRequired="false"
+                      type="pivot:Class ClassesCS.ecore.oclas#T.classescs.PathNameCS"
+                      referredProperty="ClassesCS.ecore.oclas#p.classescs.ClassCS.extends">
+                    <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
+                        isImplicit="true" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@ownedOperations.0/@bodyExpression/@ownedContext"/>
+                  </ownedArguments>
+                </ownedElse>
+                <ownedThen xsi:type="pivot:NullLiteralExp" isRequired="false" type="pivot:VoidType http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclVoid"/>
               </ownedInit>
             </ownedParts>
           </ownedBody>

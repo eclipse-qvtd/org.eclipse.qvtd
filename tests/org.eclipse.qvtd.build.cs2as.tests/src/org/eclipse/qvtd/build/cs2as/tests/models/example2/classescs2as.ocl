@@ -22,7 +22,7 @@ context ClassCS
 def : ast() : classes::Class =
 	classes::Class {
 		name = name,
-		superClass = ast().env().lookupClass(_extends)
+		superClass = if (_extends = null) then null else ast().env().lookupClass(_extends) endif
 	}
 
 endpackage

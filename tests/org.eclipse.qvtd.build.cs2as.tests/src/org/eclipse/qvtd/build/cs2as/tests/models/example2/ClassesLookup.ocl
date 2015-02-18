@@ -7,8 +7,8 @@ package ocl
 -- Default Environment related functionality
 context OclElement
 	
-def : env() : env::Environment =
-	_env(null)
+--def : env() : env::Environment =
+--	_env(null)
 
 def : _env(child : OclElement) : env::Environment =
 	parentEnv()
@@ -99,5 +99,21 @@ def : _env(child : ocl::OclElement) : env::Environment =
 def : _env_Package(child : ocl::OclElement) : env::Environment =
 	parentEnv().nestedEnv().
 		addElements(self.ownedPackages)
+
+-- Inlining
+context Class
+def : env() : env::Environment =
+	let parent = oclContainer() in
+	-- Classes can only be contained in Packages	
+	parent.oclAsType(Package)._env(self) 
+	
+context Package
+def : env() : env::Environment =
+	let parent = oclContainer() in
+	if parent.oclIsKindOf(Package)
+	then parent.oclAsType(Package)._env(self)
+	-- It needs to be root
+	else parent.oclAsType(Root)._env(self)
+	endif
 
 endpackage
