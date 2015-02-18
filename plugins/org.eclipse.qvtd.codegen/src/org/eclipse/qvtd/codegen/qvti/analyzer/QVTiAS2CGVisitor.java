@@ -372,6 +372,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 	public @Nullable CGNamedElement visitFunction(@NonNull Function asFunction) {
 		CGFunction cgFunction = QVTiCGModelFactory.eINSTANCE.createCGFunction();
 		setAst(cgFunction, asFunction);
+		pushOperationCall(asFunction);
 		cgFunction.setRequired(asFunction.isRequired());
 		for (Parameter pParameter : asFunction.getOwnedParameters()) {
 			cgFunction.getParameters().add(doVisit(CGParameter.class, pParameter));
@@ -393,6 +394,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 				e.printStackTrace();
 			}
 		}
+		popOperationCall(asFunction);
 		analyzer.addFunction(asFunction, cgFunction);
 		return cgFunction;
 	}
@@ -642,6 +644,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 	public @Nullable CGNamedElement visitTransformation(@NonNull Transformation asTransformation) {
 		CGTransformation cgTransformation = QVTiCGModelFactory.eINSTANCE.createCGTransformation();
 		setAst(cgTransformation, asTransformation);
+		pushCurrentClass(cgTransformation);
 		List<CGTypedModel> cgTypedModels = cgTransformation.getTypedModels();
 		for (TypedModel asTypedModel : asTransformation.getModelParameter()) {
 			CGTypedModel cgTypedModel = doVisit(CGTypedModel.class, asTypedModel);
@@ -656,6 +659,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 			CGOperation cgOperation = doVisit(CGOperation.class, asOperation);
 			cgTransformation.getOperations().add(cgOperation);
 		}
+		popCurrentClass(cgTransformation);
 		return cgTransformation;
 	}
 

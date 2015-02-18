@@ -196,6 +196,39 @@ public class QVTiCompilerTests extends LoadTestCase
 		generateCode(myQVT, asTransformation, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");		
         myQVT.dispose();
 	}
+	
+	public void testCG_ClassesCS2AS_bug459225() throws Exception {
+		CompleteOCLStandaloneSetup.doSetup();
+		MyQVT myQVT = createQVT();
+		ResourceSet resourceSet = new ResourceSetImpl();
+		Registry packageRegistry = resourceSet.getPackageRegistry();
+		packageRegistry.put(HSVTreePackage.eNS_URI, HSVTreePackage.eINSTANCE);
+		packageRegistry.put(HSV2HLSPackage.eNS_URI, HSV2HLSPackage.eINSTANCE);
+		packageRegistry.put(HLSTreePackage.eNS_URI, HLSTreePackage.eINSTANCE);
+		
+		URI transformURI = getProjectFileURI("ClassesCS2AS/bug459225/ClassesCS2AS.qvti");
+		URI genModelURI = getProjectFileURI("ClassesCS2AS/ClassesCS2AS.genmodel");
+		URI inputModelURI = getProjectFileURI("ClassesCS2AS/bug459225/example_input.xmi");
+		URI outputModelURI = getProjectFileURI("ClassesCS2AS/bug459225/example_output.xmi");
+		URI referenceModelURI = getProjectFileURI("ClassesCS2AS/bug459225/example_output_ref.xmi");
+		Transformation asTransformation = loadTransformation(myQVT, transformURI, genModelURI);
+		assert asTransformation != null;
+		Class<? extends TransformationExecutor> txClass = generateCode(myQVT, asTransformation, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");	
+		
+		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
+		TxEvaluator evaluator = myQVT.createEvaluator(txConstructor);
+		TransformationExecutor tx = evaluator.getExecutor();
+		Resource inputResource = resourceSet.getResource(inputModelURI, true);
+		tx.addRootObjects("leftCS", ClassUtil.nonNullState(inputResource.getContents()));
+		tx.run();
+		Resource outputResource = resourceSet.createResource(outputModelURI);
+		outputResource.getContents().addAll(tx.getRootObjects("rightAS"));
+		outputResource.save(getSaveOptions());
+		Resource referenceResource = resourceSet.getResource(referenceModelURI, true);
+		assert referenceResource != null;
+		assertSameModel(referenceResource, outputResource);
+		myQVT.dispose();
+	}
 
 	public void testCG_ClassToRDBMS_qvti() throws Exception {
     	MyQVT myQVT = createQVT();
