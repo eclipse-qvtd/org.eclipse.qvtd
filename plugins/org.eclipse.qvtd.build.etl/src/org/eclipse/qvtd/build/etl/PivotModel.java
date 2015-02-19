@@ -49,16 +49,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 public class PivotModel extends EmfModel {
 	
 
-	public static Map<String, Object> defaultSavingOptions; 
-	
-	// FIXME use a better default strategy for the saving options
-	static {
-		defaultSavingOptions = new HashMap<String, Object>();
-		defaultSavingOptions.put(XMIResource.OPTION_ENCODING, "UTF-8");
-		defaultSavingOptions.put(XMIResource.OPTION_LINE_DELIMITER, "\n"); 
-		
-	}
-	
 	/** The meta model manager. */
 	private @NonNull EnvironmentFactory environmentFactory;
 	
@@ -69,7 +59,7 @@ public class PivotModel extends EmfModel {
 
 
 	public PivotModel(@NonNull EnvironmentFactory environmentFactory, boolean isASResource) {
-		this(environmentFactory, isASResource, defaultSavingOptions);
+		this(environmentFactory, isASResource, null);
 	}
 	
 	

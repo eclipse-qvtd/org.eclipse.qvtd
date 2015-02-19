@@ -13,4 +13,5 @@ Require-Bundle: org.junit;visibility:=reexport,
  org.eclipse.ocl.examples.xtext.tests
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Export-Package: org.eclipse.qvtd.xtext.qvtbase.tests
+Export-Package: org.eclipse.qvtd.xtext.qvtbase.tests,
+ org.eclipse.qvtd.xtext.qvtbase.tests.utilities

@@ -27,6 +27,7 @@ import org.eclipse.epsilon.common.util.StringProperties;
 import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.resource.OCLASResourceFactory;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage;
@@ -172,6 +173,8 @@ public class MtcBroker {
 	/** The meta model manager. */
 	private @NonNull EnvironmentFactory environmentFactory;
 	
+	protected @Nullable Map<String, Object> savingOptions;
+	
 	
 	private URI baseUri;
 	private PivotModel cModel;
@@ -180,7 +183,7 @@ public class MtcBroker {
 	protected PivotModel pModel;
 	protected PivotModel sModel;
 	protected PivotModel iModel;
-
+	
 	
 	/**
 	 * Instantiates a new MTC broker.
@@ -191,7 +194,12 @@ public class MtcBroker {
 	 * @throws QvtMtcExecutionException If there is a problem registering the required metamodels.
 	 */
 	public MtcBroker(URI baseURI, String qvtcSource, @NonNull EnvironmentFactory environmentFactory) throws QvtMtcExecutionException {
+		this(baseURI, qvtcSource, environmentFactory, null);
+	}
+	
+	public MtcBroker(URI baseURI, String qvtcSource, @NonNull EnvironmentFactory environmentFactory, Map<String, Object> savingOptions) throws QvtMtcExecutionException {
 		
+		this.savingOptions = savingOptions;
 		this.environmentFactory = environmentFactory;
 		this.baseUri = baseURI;
 		System.out.println("Executing the QVTc to QVTi MTC for " + qvtcSource);
@@ -711,7 +719,7 @@ public class MtcBroker {
 	protected PivotModel createModel(String modeUri, String modelName, String modelAliases, String metamodelUris,
 				boolean readOnLoad, boolean storeOnDispoal, boolean cached, boolean expand) throws QvtMtcExecutionException {
 	
-		PivotModel model = new PivotModel(environmentFactory, false);
+		PivotModel model = new PivotModel(environmentFactory, false, savingOptions);
 		StringProperties properties = new StringProperties();
 		properties.put(EmfModel.PROPERTY_NAME, modelName);
 		properties.put(EmfModel.PROPERTY_ALIASES, modelAliases);
@@ -733,7 +741,7 @@ public class MtcBroker {
 	private PivotModel createASModel(String modeUri, String modelName, String modelAliases, String metamodelUris,
 			boolean readOnLoad, boolean storeOnDispoal, boolean cached, boolean expand) throws QvtMtcExecutionException {
 
-	PivotModel model = new PivotModel(environmentFactory, true);
+	PivotModel model = new PivotModel(environmentFactory, true, savingOptions);
 	StringProperties properties = new StringProperties();
 	properties.put(EmfModel.PROPERTY_NAME, modelName);
 	properties.put(EmfModel.PROPERTY_ALIASES, modelAliases);

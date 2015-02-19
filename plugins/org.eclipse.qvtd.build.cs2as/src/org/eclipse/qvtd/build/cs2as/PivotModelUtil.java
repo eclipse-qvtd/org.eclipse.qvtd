@@ -1,5 +1,7 @@
 package org.eclipse.qvtd.build.cs2as;
 
+import java.util.Map;
+
 import org.eclipse.epsilon.common.util.StringProperties;
 import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
@@ -34,9 +36,9 @@ public class PivotModelUtil {
 	 */
 	// Copied from MTC broker
 	public PivotModel createPivotModel(String modeUri, String modelName, String modelAliases, String metamodelUris,
-			boolean readOnLoad, boolean storeOnDispoal, boolean cached, boolean resolveExternalRefs, boolean isPivotResource) throws QvtMtcExecutionException {
+			boolean readOnLoad, boolean storeOnDispoal, boolean cached, boolean resolveExternalRefs, boolean isPivotResource, Map<String, Object> savingOptions) throws QvtMtcExecutionException {
 
-		PivotModel model = new PivotModel(environmentFactory, isPivotResource);
+		PivotModel model = new PivotModel(environmentFactory, isPivotResource, savingOptions);
 		StringProperties properties = new StringProperties();
 		properties.put(EmfModel.PROPERTY_NAME, modelName);
 		properties.put(EmfModel.PROPERTY_ALIASES, modelAliases);

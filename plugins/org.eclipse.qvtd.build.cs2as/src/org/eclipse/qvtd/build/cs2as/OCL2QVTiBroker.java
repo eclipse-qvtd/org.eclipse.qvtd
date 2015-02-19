@@ -1,6 +1,7 @@
 package org.eclipse.qvtd.build.cs2as;
 
 import java.net.URISyntaxException;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
@@ -44,15 +45,16 @@ public class OCL2QVTiBroker extends MtcBroker {
 	private @NonNull PivotModelUtil pmUtil;
 	
 
-	public OCL2QVTiBroker(URI baseURI, String oclDocName, @NonNull EnvironmentFactory environmentFactory)
+	public OCL2QVTiBroker(URI baseURI, String oclDocName, @NonNull EnvironmentFactory environmentFactory, Map<String, Object> savingOptions )
 		throws Exception {
-		this(baseURI, oclDocName, environmentFactory, true);
+		this(baseURI, oclDocName, environmentFactory, savingOptions, true);
 	}
 			
-	public OCL2QVTiBroker(URI baseURI, String oclDocName, @NonNull EnvironmentFactory environmentFactory, boolean usesMiddleFoldedInInputs)
+	public OCL2QVTiBroker(URI baseURI, String oclDocName, @NonNull EnvironmentFactory environmentFactory, Map<String, Object> savingOptions,
+			boolean usesMiddleFoldedInInputs)
 		throws Exception {
 		
-		super(baseURI, oclDocName, environmentFactory);
+		super(baseURI, oclDocName, environmentFactory, savingOptions);
 		this.pmUtil = new PivotModelUtil(environmentFactory);
 		this.oclDocUri = baseURI.appendSegment(oclDocName).toString();
 	
@@ -115,23 +117,23 @@ public class OCL2QVTiBroker extends MtcBroker {
 	
 	private PivotModel createOCLModel(String oclDocURI) throws QvtMtcExecutionException {
 		String oclDocModelName = "OCL";
-		return pmUtil.createPivotModel(oclDocURI, oclDocModelName, "", PIVOT_URI, true, false, true, true, true);
+		return pmUtil.createPivotModel(oclDocURI, oclDocModelName, "", PIVOT_URI, true, false, true, true, true, savingOptions);
 		
 	}
 	
 	private PivotModel createQVTpModel(String qvtiFileURI) throws QvtMtcExecutionException { 
 		String qvtiModelName = "QVTp";
 		String qvtiModelAlises = "QVTi,QVT"; // FIXME further steps should configure the aliases
-		return pmUtil.createPivotModel(qvtiFileURI, qvtiModelName, qvtiModelAlises, QVTI_FULL_NS, false, true, false, true, true);
+		return pmUtil.createPivotModel(qvtiFileURI, qvtiModelName, qvtiModelAlises, QVTI_FULL_NS, false, true, false, true, true, savingOptions);
 	}
 	
 	private PivotModel createTacesModel(String tracesMMURI) throws QvtMtcExecutionException { 
 		String tracesMModelName = "MiddleMM";
-		return pmUtil.createPivotModel(tracesMMURI, tracesMModelName, "", TRACES_FULL_NS , true, false, true, false, true);
+		return pmUtil.createPivotModel(tracesMMURI, tracesMModelName, "", TRACES_FULL_NS , true, false, true, false, true, savingOptions);
 	}
 	
 	private PivotModel createOclStdLibModel() throws QvtMtcExecutionException {
 		String oclStdlibName = "OclStdLib";
-		return pmUtil.createPivotModel(OCLSTDLIB_URI, oclStdlibName, "", PIVOT_URI, true, false, true, false, true);
+		return pmUtil.createPivotModel(OCLSTDLIB_URI, oclStdlibName, "", PIVOT_URI, true, false, true, false, true, savingOptions);
 	}
 }
