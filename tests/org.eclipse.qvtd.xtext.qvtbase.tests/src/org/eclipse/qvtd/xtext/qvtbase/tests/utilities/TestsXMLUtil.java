@@ -6,7 +6,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.xmi.XMIResource;
 
 
-public class EMFResourceUtils {
+public class TestsXMLUtil {
 
 	public static Map<String, Object> defaultSavingOptions; 
 	

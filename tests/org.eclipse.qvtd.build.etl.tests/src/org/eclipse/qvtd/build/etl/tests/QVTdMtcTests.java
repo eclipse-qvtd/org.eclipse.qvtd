@@ -21,7 +21,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePivotStandaloneSetup;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
-import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.EMFResourceUtils;
+import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
 import org.junit.After;
 import org.junit.Before;
@@ -157,7 +157,7 @@ public class QVTdMtcTests extends LoadTestCase {
     	MyQVT myQVT = createQVT();
     	
     	URI testBaseURI = TESTS_BASE_URI.appendSegment("UpperToLower");;
-    	MtcBroker mtc = new MtcBroker(testBaseURI, "UpperToLower.qvtcas", myQVT.getEnvironmentFactory(), EMFResourceUtils.defaultSavingOptions);
+    	MtcBroker mtc = new MtcBroker(testBaseURI, "UpperToLower.qvtcas", myQVT.getEnvironmentFactory(), TestsXMLUtil.defaultSavingOptions);
     	mtc.execute();
     	//mtc.executeScheduling(false);
     	assertNoValidationErrors("QVTu validation", mtc.getuModel().getRooteObject());
@@ -196,7 +196,7 @@ public class QVTdMtcTests extends LoadTestCase {
     	MyQVT myQVT = createQVT();
     	
     	URI testBaseURI = TESTS_BASE_URI.appendSegment("HSV2HLS");;
-    	MtcBroker mtc = new MtcBroker(testBaseURI, "HSV2HLS.qvtcas", myQVT.getEnvironmentFactory(), EMFResourceUtils.defaultSavingOptions);
+    	MtcBroker mtc = new MtcBroker(testBaseURI, "HSV2HLS.qvtcas", myQVT.getEnvironmentFactory(), TestsXMLUtil.defaultSavingOptions);
     	mtc.execute();
     	
     	assertNoValidationErrors("QVTu validation", mtc.getuModel().getRooteObject());
