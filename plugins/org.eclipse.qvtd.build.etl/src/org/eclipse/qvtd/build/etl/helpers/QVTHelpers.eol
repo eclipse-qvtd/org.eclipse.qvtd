@@ -137,14 +137,18 @@ operation QVT!Transformation getMiddleTypedModel() : QVT!TypedModel {
 @cached
 operation QVT!Variable oppositePattern() : QVT!CorePattern  {
     
-    return self.owningModel().getAllOfKind("CorePattern").selectOne(p | p.variable.includes(self));
+   	//return self.owningModel().getAllOfType("GuardPattern").selectOne(p | p.variable.includes(self));
+	if (self.eContainer().isKindOf(QVT!CorePattern))
+   		return self.eContainer();
+	return null;
 }
 
-@cached
-operation QVT!RealizedVariable oppositePattern() : QVT!CorePattern  {
+//@cached
+//operation QVT!RealizedVariable oppositePattern() : QVT!CorePattern  {
     
-    return self.owningModel().getAllOfType("BottomPattern").selectOne(p | p.realizedVariable.includes(self));
-}
+    //return self.owningModel().getAllOfType("BottomPattern").selectOne(p | p.realizedVariable.includes(self));
+//    return self.eContainer();
+//}
 
 
 /****o* QVTHelpers/getArea
@@ -164,15 +168,19 @@ operation QVT!RealizedVariable oppositePattern() : QVT!CorePattern  {
  */
 @cached
 operation QVT!OCLExpression getArea() : QVT!Area {
+	var retVal : QVT!OCLExpression; 
     if (self.isTypeOf(QVT!VariableExp)) {
-        if (self.referredVariable.type() == null) {
-            return null;
+    	if (self.referredVariable.type() == null) {
+    		self.println();
+        	throw "Error! All variables should have types?" + self.type();
+            //return null;
         }
         return self.referredVariable.oppositePattern().area;
     } else if (self.isKindOf(QVT!CallExp)) {
-        return self.source.getArea();
+    	// TODO Calling operations in the context is trycky, analyze this!
+        return self.ownedSource.getArea();
     } else if (self.isTypeOf(QVT!IfExp)) {
-        return self.condition.getArea();
+        return self.ownedCondition.getArea();
     } else if (self.isKindOf(QVT!LiteralExp)) {
         return null;
     } else {
@@ -276,7 +284,7 @@ operation getLowestRankVariable(vars : Collection) {
         var min = vars.first();
         for(v in vars.excluding(min)) {
             //minType = (ClassImpl) min.eGet(typeFeat);
-            if (v.type.superClass.includes(min.type)) {
+            if (v.type.superClasses.includes(min.type)) {
                 min = v;    
             }
         }
@@ -670,7 +678,7 @@ operation QVT!Mapping hasDataTypeUse(values : Sequence) : Boolean {
     // Get all the assignments that hava a value that is a PropertyCallExp in which
     // the source is of the type and the referredProperty is the same
     if (self.getAllAssignments().exists(a | a.value.isTypeOf(QVT!PropertyCallExp)
-            and a.value.source.isTypeOf(QVT!VariableExp) and pivotUtil.isKindOf(values.first(), a.value.source.type) 
+            and a.value.ownedSource.isTypeOf(QVT!VariableExp) and pivotUtil.isKindOf(values.first(), a.value.ownedSource.type) 
             and a.value.referredProperty == values.last())) {
         return true;        
     }
@@ -678,12 +686,12 @@ operation QVT!Mapping hasDataTypeUse(values : Sequence) : Boolean {
         // Any of the arguments can be the use
         if (p.conditionExpression.isKindOf(QVT!OperationCallExp)) {
             //p.conditionExpression.toString().println();
-            for (a in p.conditionExpression.argument.select(a | a.isTypeOf(QVT!PropertyCallExp))) {
-                if (a.source.type == values.first() and a.referredProperty == values.last()) {
+            for (a in p.conditionExpression.ownedArguments.select(a | a.isTypeOf(QVT!PropertyCallExp))) {
+                if (a.ownedSource.type == values.first() and a.referredProperty == values.last()) {
                     return true;
                 }
             }
-            if (pivotUtil.isKindOf(values.first(), p.conditionExpression.source.source.type ) and p.conditionExpression.source.referredProperty == values.last()) {
+            if (pivotUtil.isKindOf(values.first(), p.conditionExpression.ownedSource.ownedSource.type ) and p.conditionExpression.ownedSource.referredProperty == values.last()) {
                 return true;
             }
         }

@@ -4,7 +4,7 @@
     <direction name="upperGraph" imports="//@transformation/@import.0"/>
     <direction name="lowerGraph" imports="//@transformation/@import.0"/>
     <direction imports="//@transformation/@import.1"/>
-    <import name="SimpleGraph" metamodelFile="UpperToLower/SimpleGraph.ecore" package="simplegraph"/>
-    <import name="SimpleGraph2Graph" metamodelFile="UpperToLower/SimpleGraph2Graph.ecore" package="simplegraph2graph"/>
+    <import name="SimpleGraph" metamodelFile="SimpleGraph.ecore" package="simplegraph"/>
+    <import name="SimpleGraph2Graph" metamodelFile="SimpleGraph2Graph.ecore" package="simplegraph2graph"/>
   </transformation>
 </qvtcconfig:Configuration>

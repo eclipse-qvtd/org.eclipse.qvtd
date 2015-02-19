@@ -12,11 +12,13 @@
 package org.eclipse.qvtd.build.etl;
 
 import java.net.URI;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.epsilon.common.parse.problem.ParseProblem;
 import org.eclipse.epsilon.eol.IEolExecutableModule;
 import org.eclipse.epsilon.eol.exceptions.EolRuntimeException;
+import org.eclipse.epsilon.eol.execute.context.Variable;
 import org.eclipse.epsilon.eol.models.IModel;
 
 /**
@@ -126,6 +128,10 @@ public abstract class EpsilonTask {
 	 */
 	public void preProcess() {};
 	
+	public void execute() throws QvtMtcExecutionException {
+		execute(Collections.<Variable>emptyList());
+	}
+
 	/**
 	 * Executes the Epsilon source on the loaded models using the engine.
 	 * Parses the Epsilon source for errors, loads the models to the engine's
@@ -140,7 +146,7 @@ public abstract class EpsilonTask {
 	 * @throws QvtMtcExecutionException If there was an error executing the
 	 * 	parsing or executing the script.
 	 */
-	public void execute() throws QvtMtcExecutionException {
+	public void execute(List<Variable> parameters) throws QvtMtcExecutionException {
 		
 		module = createModule();
 		try {
@@ -159,6 +165,10 @@ public abstract class EpsilonTask {
 			module.getContext().getModelRepository().addModel(model);
 		}
 		
+		for (Variable param : parameters) {
+			module.getContext().getFrameStack().put(param);
+		}
+	
 		preProcess();
 		try {
 			result = execute(module);
@@ -173,6 +183,8 @@ public abstract class EpsilonTask {
 			module.getContext().getModelRepository().removeModel(model);
 		}
 	}
+	
+	
 	
 	
 	/**
@@ -198,5 +210,5 @@ public abstract class EpsilonTask {
 	public Object getResult() {
 		return result;
 	}
-
+	
 }

@@ -7,6 +7,7 @@
  * 
  * Contributors:
  *     Horacio Hoyos - initial implementation
+ *     Adolfo Sanchez-Barbudo Herrera - Various fixes
  ******************************************************************************/
 import "../helpers/OclLibHelper.eol";
 
@@ -29,39 +30,13 @@ import "../helpers/OclLibHelper.eol";
  *  v The variable to fix
  */
 operation QVT!OCLExpression fixVarReferences(v : QVT!Variable) {
-    if (self.isTypeOf(QVT!VariableExp)) {
-        if (self.referredVariable.name = v.name) {
-            self.referredVariable = v;
-        }
-    } else if (self.isTypeOf(QVT!OperationCallExp)) {
-        self.source.fixVarReferences(v);
-        for (arg in self.argument) {
-           arg.fixVarReferences(v);
-        }
-    } else if (self.isKindOf(QVT!NavigationCallExp)) {
-        self.source.fixVarReferences(v);
-    } else if (self.isTypeOf(QVT!IfExp)) {
-        self.condition.fixVarReferences(v);
-        self.elseExpression.fixVarReferences(v);
-        self.thenExpression.fixVarReferences(v);
-    } else if (self.isTypeOf(QVT!CollectionLiteralExp)) {
-        for (p in self.part) {
-            if (p.isTypeOf(QVT!CollectionItem)) {
-                p.item.fixVarReferences(v);
-            } else if (p.isTypeOf(QVT!CollectionRange)) {
-                p.first.fixVarReferences(v);
-                p.last.fixVarReferences(v);
-            } 
-        } 
-    } else if (self.isKindOf(QVT!LiteralExp)) {
-      // Noting to fix
-    } else if (self.isKindOf(QVT!IteratorExp)) {
-        self.body.fixVarReferences(v);
-        self.source.fixVarReferences(v);
-    } else {
-        self.println();
-        throw "Error! Add fixVarReference() for " + self.type();
-    }
+	for (oclElement in self.getAllContentsIncludingSelf()) {
+		if (oclElement.isTypeOf(QVT!VariableExp)) {
+			if (oclElement.referredVariable.name = v.name) {
+				oclElement.referredVariable = v;
+			}
+		}
+	}
  }
 
 /****o* OCLExpressionAnalysis/findReferencedVariables
@@ -91,25 +66,26 @@ operation QVT!OCLExpression findReferencedVariables(ignore : Set) : Set {
     if (self.isTypeOf(QVT!VariableExp)) {
         varRefs.add(self.referredVariable);
     } else if (self.isTypeOf(QVT!OperationCallExp)) {
-        varRefs.addAll(self.source.findReferencedVariables());
-        for (arg in self.argument) {
+    	if (self.ownedSource.isDefined())
+        	varRefs.addAll(self.ownedSource.findReferencedVariables());
+        for (arg in self.ownedArguments) {
             varRefs.addAll(arg.findReferencedVariables());
         }
     } else if (self.isTypeOf(QVT!PropertyCallExp)) {
-        varRefs.addAll(self.source.findReferencedVariables());
+        varRefs.addAll(self.ownedSource.findReferencedVariables());
     } else if (self.isTypeOf(QVT!IfExp)) {
-        varRefs.addAll(self.condition.findReferencedVariables());
-        varRefs.addAll(self.elseExpression.findReferencedVariables());
-        varRefs.addAll(self.thenExpression.findReferencedVariables());
+        varRefs.addAll(self.ownedCondition.findReferencedVariables());
+        varRefs.addAll(self.ownedElse.findReferencedVariables());
+        varRefs.addAll(self.ownedThen.findReferencedVariables());
     } else if (self.isTypeOf(QVT!CollectionLiteralExp)) {
         // TODO Check that it is a collection of variables. 
         // TODO what if it is a collection of collections or other OCL types?
-        for (p in self.part) {
+        for (p in self.ownedParts) {
             if (p.isTypeOf(QVT!CollectionItem)) {
-                varRefs.addAll(p.item.findReferencedVariables());
+                varRefs.addAll(p.ownedItem.findReferencedVariables());
             } else if (p.isTypeOf(QVT!CollectionRange)) {
-                varRefs.addAll(p.first);
-                varRefs.addAll(p.last);
+                varRefs.addAll(p.ownedFirst);
+                varRefs.addAll(p.ownedLast);
             } else {
                 self.println();
                 throw "Error! Add findReferencedVariables() for " + p.type() + " in collections";
@@ -117,8 +93,8 @@ operation QVT!OCLExpression findReferencedVariables(ignore : Set) : Set {
         }
     } else if (self.isKindOf(QVT!IteratorExp)) {
         // Ignore iterator variables
-        varRefs.addAll(self.body.findReferencedVariables(self.iterator));
-        varRefs.addAll(self.source.findReferencedVariables());
+        varRefs.addAll(self.ownedBody.findReferencedVariables(self.ownedIterators));
+        varRefs.addAll(self.ownedSource.findReferencedVariables());
     } else if (self.isKindOf(QVT!LiteralExp) or self.isTypeOf(QVT!TypeExp)) {
       // Noting to add
     } else {
@@ -138,11 +114,11 @@ operation QVT!OCLExpression isSimpleAttributeNavigation() : Boolean {
         //if (self.referredOperation == self.referredOperation.owningType.getOperationByName("=")) {
         if (self.referredOperation.name == "=") {
             // The arguments must be 1: VariableExp
-            if ( (self.argument.size() == 1) and self.argument.first().isTypeOf(QVT!VariableExp)) {
+            if ( (self.ownedArguments.size() == 1) and self.ownedArguments.first().isTypeOf(QVT!VariableExp)) {
                 // The source must be a  PropertyCallExp
-                if (self.source.isTypeOf(QVT!PropertyCallExp)) {
+                if (self.ownedSource.isTypeOf(QVT!PropertyCallExp)) {
                     // the source's source must be a VariableExp
-                    if (self.source.source.isTypeOf(QVT!VariableExp)) {
+                    if (self.ownedSource.ownedSource.isTypeOf(QVT!VariableExp)) {
                         return true;
                     }
                 }
@@ -155,8 +131,8 @@ operation QVT!OCLExpression isSimpleAttributeNavigation() : Boolean {
 // Only call if isSimpleAttributeNavigation returns true
 // We are only interested in domains
 operation QVT!OCLExpression isSingleDomained() : Boolean {
-    return self.argument.first().referredVariable.oppositePattern().area.isTypeOf(QVT!CoreDomain)
-        and self.argument.first().referredVariable.oppositePattern().area == self.source.source.referredVariable.oppositePattern().area;
+    return self.ownedArguments.first().referredVariable.oppositePattern().area.isTypeOf(QVT!CoreDomain)
+        and self.ownedArguments.first().referredVariable.oppositePattern().area == self.ownedSource.ownedSource.referredVariable.oppositePattern().area;
 }
 
 // Only call if isSimpleAttributeNavigation returns true
@@ -170,22 +146,22 @@ operation QVT!PropertyAssignment isSingleDomained() : Boolean {
 // TODO If isSimpleAttributeNavigation is a requirement, the if statement should
 // not exist!
 operation QVT!OCLExpression getNavigatedProperty() : QVT!Property {
-    if (self.source.isTypeOf(QVT!PropertyCallExp)) {
-        return self.source.referredProperty;
+    if (self.ownedSource.isTypeOf(QVT!PropertyCallExp)) {
+        return self.ownedSource.referredProperty;
     }
 } 
 
 // 
 // Only call if isSimpleAttributeNavigation returns true
 operation QVT!OCLExpression isArgumentVariable(v : QVT!Variable) : Boolean {
-    if (self.argument.first().isTypeOf(QVT!VariableExp) and self.argument.first().referredVariable == v) {
+    if (self.ownedArguments.first().isTypeOf(QVT!VariableExp) and self.ownedArguments.first().referredVariable == v) {
         return true;
     }
     return false;
 }  
 
 operation QVT!OCLExpression isSourceVariable(v : QVT!Variable) : Boolean {
-    if (self.source.source.isTypeOf(QVT!VariableExp) and self.source.source.referredVariable == v) {
+    if (self.ownedSource.ownedSource.isTypeOf(QVT!VariableExp) and self.ownedSource.ownedSource.referredVariable == v) {
         return true;
     }
     return false;
@@ -198,5 +174,13 @@ operation OCLExpression containmentPredicate() : Boolean {
 // Only invoke if ocl expression is simple attribute navigation
 operation QVT!OCLExpression getReferredProperty() : Any {
     
-    return self.source.referredProperty;
+    return self.ownedSource.referredProperty;
  }
+ 
+operation QVT!OCLExpression getAllContents() : Sequence {
+	return self.asSequence().closure(x | x.eContents());
+}
+
+operation QVT!OCLExpression getAllContentsIncludingSelf() : Sequence {
+	return self.getAllContents().including(self);
+}

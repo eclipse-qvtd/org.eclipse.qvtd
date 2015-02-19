@@ -97,6 +97,9 @@ public class QVTiTransformationAnalysis
 					OCLExpression source = operationCallExp.getOwnedSource();
 					if (source != null) {
 						Type sourceType = source.getTypeValue();
+						if (sourceType == null) {
+							sourceType = source.getType();
+						}
 						if (sourceType instanceof org.eclipse.ocl.pivot.Class) {
 							allInstancesClasses.add((org.eclipse.ocl.pivot.Class)sourceType);
 						}

@@ -11,7 +11,7 @@
 --     E.D.Willink - adaptation to comply with QVT specification
 --     H. Hoyos - adaptation to comply with QVT 1.2 and bug fixes
 --------------------------------------------------------------------------------
-import pivotocl     :   'platform:/resource/org.eclipse.ocl.pivot.internal/model/Pivot.ecore'::pivot;
+import pivotocl     :   'platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore'::pivot;
 import qvtbase      :   'platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore'::qvtbase;
 import qvttemplate  :   'platform:/resource/org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore'::qvttemplate;
 import qvtrelation  :   'platform:/resource/org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore'::qvtrelation;
@@ -1161,6 +1161,8 @@ relation RSimplePatternToMPattern
 --
 relation RWhenRelCallToMGuard
 {
+    vdId:String;
+    
     domain relations rp:Pattern {
         predicate = pd:Predicate {
             conditionExpression = e:RelationCallExp {
@@ -1173,7 +1175,8 @@ relation RWhenRelCallToMGuard
 };
     enforce domain core mp:GuardPattern {};
     where {
-        aseq->forAll( a | RWhenRelCallArgToMGuardPredicate( Sequence{ r, a, dseq->at(aseq->indexOf(a)) }, mp) );
+        vdId = aseq->iterate(a; s:String = '' | s.concat('_'.concat(a.referredVariable.name)));
+        aseq->forAll( a | RWhenRelCallArgToMGuardPredicate( Sequence{r, a, dseq->at(aseq->indexOf(a)), vdId}, mp) );
     }
 }
 
@@ -1192,12 +1195,13 @@ relation RWhenRelCallArgToMGuardPredicate
             rootVariable = dv:pivotocl::Variable {
                 name = dvn
             }
-        }
+        },
+        vdId:String {}
         ++ _
     };
     enforce domain core mg:GuardPattern {
         variable = vd:pivotocl::Variable {
-            name = tc.name+'_v',
+            name = tc.name + vdId + '_v',
             type = tc
         },
         predicate = mgp:Predicate {

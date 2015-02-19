@@ -36,15 +36,16 @@ import "../helpers/OclLibHelper.eol";
  */
 @cascade
 delete PropertyAssignment
+	// TODO what happens when the CallEXp is a cal to an operation defined in the transformation
+	// context?
     when : (original.value.getArea() <> null) 
-             
-            and ( (original.value.getArea().isOutputDomain()
-                  and not original.value.isTypeOf(QVTc!VariableExp)
-                  and original.slotExpression.getArea().isMiddleDomain())
-                or
-                  (original.value.getArea().isMiddleDomain()
-                  and original.slotExpression.getArea().isInputDomain())
-                )
+        and ( (original.value.getArea().isOutputDomain()
+              and not original.value.isTypeOf(QVTc!VariableExp)
+              and original.slotExpression.getArea().isMiddleDomain())
+            or
+              (original.value.getArea().isMiddleDomain()
+              and original.slotExpression.getArea().isInputDomain())
+            )
 
 
 /****d* QVTcToQVTu/Predicate
@@ -159,16 +160,16 @@ migrate PropertyAssignment
         // The type is boolean
         exp.type = exp.referredOperation.type;
         // The source is a PropertyCallExp
-        exp.source = new QVTc!PropertyCallExp;
+        exp.ownedSource = new QVTc!PropertyCallExp;
         // The property is the targetProperty
-        exp.source.referredProperty = original.targetProperty.equivalent();
+        exp.ownedSource.referredProperty = original.targetProperty.equivalent();
         // The source of the PropertyCallExp is the slotExpression
-        exp.source.source = original.slotExpression.equivalent();
-        exp.source.type = original.targetProperty.equivalent().type;
+        exp.ownedSource.ownedSource = original.slotExpression.equivalent();
+        exp.ownedSource.type = original.targetProperty.equivalent().type;
         // The argument is the value
         var args : Set;
         args.add(original.value.equivalent());
-        exp.argument = args;
+        exp.ownedArguments = args;
         migrated.conditionExpression = exp;    
     }
 
@@ -202,7 +203,7 @@ migrate PropertyAssignment
 migrate Transformation {
     var comment : QVTc!Comment = new QVTc!Comment;
     comment.body = getUnidirComment();
-    migrated.ownedComment.add(comment);
+    migrated.ownedComments.add(comment);
 }
 
 /****m* QVTcToQVTu/CoreDomain

@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:eCoreContainemntTree="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree">
-  <eCoreContainemntTree:Node EClassName="simplegraph" children="/1"/>
-  <eCoreContainemntTree:Node EClassName="Graph" parent="/0" children="/2 /3"/>
-  <eCoreContainemntTree:Node EClassName="Node" parent="/1">
-    <superTypes>Element</superTypes>
+  <eCoreContainemntTree:Node name="Node" parent="/3" superTypes="/2">
+    <element href="SimpleGraph.ecore#//Node"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="Edge" parent="/1">
-    <superTypes>Element</superTypes>
+  <eCoreContainemntTree:Node name="Edge" parent="/3" superTypes="/2">
+    <element href="SimpleGraph.ecore#//Edge"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="simplegraph" children="/5"/>
-  <eCoreContainemntTree:Node EClassName="Graph" parent="/4" children="/6 /7"/>
-  <eCoreContainemntTree:Node EClassName="Node" parent="/5">
-    <superTypes>Element</superTypes>
+  <eCoreContainemntTree:Node name="Element" parent="/3" subTypes="/0 /1">
+    <element href="SimpleGraph.ecore#//Element"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node EClassName="Edge" parent="/5">
-    <superTypes>Element</superTypes>
+  <eCoreContainemntTree:Node name="Graph" children="/2 /0 /1">
+    <element href="SimpleGraph.ecore#//Graph"/>
   </eCoreContainemntTree:Node>
 </xmi:XMI>

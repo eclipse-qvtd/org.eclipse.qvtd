@@ -1,0 +1,196 @@
+// Transformation to produce a graphml file from a QVTs model 
+// Additional parameters:
+//    pruneModel: to prune the QVTs model prior to do the transformation. default = true
+//
+
+pre {
+	
+	if (pruneModel) {
+		QVTs!AbstractDatum.all.size().println("Number of Datums prior pruning: ");
+		pruneQVTsModel();
+	}
+	QVTs!AbstractDatum.all.size().println("Number of Datums: ");
+	
+	// Key types shared across the transformation.
+	var nTypeKey : new GML!KeyType;
+	nTypeKey.`for` = GML!KeyForType#node;
+	nTypeKey.id = "d6";
+	nTypeKey.yfilesType="nodegraphics";
+	
+	var eTypeKey : new GML!KeyType;	
+	eTypeKey.`for` = GML!KeyForType#edge;
+	eTypeKey.id = "d9";
+	eTypeKey.yfilesType="edgegraphics";
+}
+
+rule Schedule2DocumentRoot 
+	transform s : QVTs!Schedule
+	to root : GML!DocumentRoot {
+	
+	root.xMLNSPrefixMap.put("", "http://graphml.graphdrawing.org/xmlns");
+	root.xMLNSPrefixMap.put("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+	root.xMLNSPrefixMap.put("y", "http://www.yworks.com/xml/graphml");
+	root.xMLNSPrefixMap.put("yed", "http://www.yworks.com/xml/yed/3");
+	root.xSISchemaLocation.put("http://graphml.graphdrawing.org/xmlns", "http://graphml.graphdrawing.org/xmlns/1.1/graphml.xsd");
+	
+	// Graphml Types
+	var graphml : new GML!GraphmlType;	
+	graphml.key.addAll(GML!KeyType.all());
+	
+	root.graphml = graphml;
+	
+	// Graph information
+	var g : new GML!GraphType;
+	g.edgedefault = GML!GraphEdgedefaultType#directed;
+	g.id = "Graph";	
+	g.node.addAll(s.datums.equivalent());
+	g.node.addAll(s.datums.propertyDatums.flatten().equivalent());
+	g.node.addAll(s.actions.equivalent());
+		
+	graphml.graph.add(g);
+}
+
+rule ClassDatum2Node 
+	transform s : QVTs!ClassDatum
+	to t : GML!NodeType {
+	
+	
+	t.id = s.type.name;
+	
+	// Super dependencies (FIXME Refactor)
+	for (superDatum in s.super) {
+		var e = new GML!EdgeType;
+		e.source = t.id;
+ 		e.target = superDatum.equivalent().id;
+ 		e.stilishEdge(GML!LineTypeType#dotted);
+	}
+ 	
+	// style	
+	t.stilishNode(GML!ShapeTypeType#rectangle);
+}
+
+
+rule PropertyDatum2Node 
+	transform s : QVTs!PropertyDatum
+	to t : GML!NodeType {
+	
+	t.id = s.classDatum.type.name + "::" + s.property.name;
+	
+	// Opposite
+	if (s.opposite.isDefined()) {
+		var e = new GML!EdgeType;
+		e.source = t.id;
+		e.target = s.opposite.equivalent().id;
+		e.stilishEdge(GML!LineTypeType#dashed);
+	}
+
+	// Super dependencies (FIXME Refactor)
+	for (superDatum in s.super) {
+		var e = new GML!EdgeType;
+		e.source = t.id;
+		e.target = superDatum.equivalent().id;
+		e.stilishEdge(GML!LineTypeType#dotted);
+	}
+	
+	
+	// Style	
+	t.stilishNode(GML!ShapeTypeType#rectangle);
+}
+
+rule MappingAction2Node
+	transform s : QVTs!MappingAction
+	to t : GML!NodeType {
+
+	guard : s.mapping.isDefined()
+		
+	t.id = s.mapping.name + " (" + s.order + ")";
+	for (datum in s.requisites) {
+     	var e = new GML!EdgeType;
+        e.source = datum.equivalent().id;
+        e.target = t.id;
+	}
+	
+	for (datum in s.productions) {
+     	var e = new GML!EdgeType;
+        e.source = t.id;
+        e.target = datum.equivalent().id;
+	}
+	
+	// style
+	t.stilishNode(GML!ShapeTypeType#ellipse);
+}
+
+operation GML!NodeType stilishNode(shapeType) {
+
+	var nType : new GML!DataType;
+	var nShape : new GML!ShapeNodeType;
+    var nLabel : new GML!NodeLabelType;
+    var shape : new GML!ShapeType1;
+
+	nLabel.value = self.id;
+	shape.type = shapeType;
+	nShape.nodeLabel.add(nLabel);
+	nShape.shape = shape;
+	nType.key = nTypeKey.id;	
+	nType.shapeNode = nShape;
+	self.data.add(nType);
+}
+
+operation GML!EdgeType stilishEdge(lineType) {
+
+ 	var eType = new GML!DataType;
+    var ePolyLine = new GML!PolyLineEdgeType;
+    var eArrow : new GML!ArrowsType;
+	var eStyle : new GML!LineStyleType;
+	var eLabel : new GML!EdgeLabelType;
+    
+    
+    eStyle.type = lineType;
+    //eStyle.color = color;
+    eArrow.target = GML!ArrowTypeType#standard;
+    eArrow.source = GML!ArrowTypeType#none;    
+    ePolyLine.arrows= eArrow;
+    ePolyLine.lineStyle = eStyle;
+    eType.key = eTypeKey.id;
+    eType.polyLineEdge = ePolyLine;
+    eLabel.value = self.id;
+    self.data.add(eType);
+    
+}
+
+-- Function which cleans the QVTs input model to generates a cleaner Graphml representation
+operation pruneQVTsModel() {
+
+	var graphChanged = true;
+	while (graphChanged) {
+		var pDatumsToRemove = OrderedSet{};
+		// We remove all the PropertyDatum which don't are not produced/required by an action and doesn't have any super
+		for (pDatum in QVTs!PropertyDatum.all()) {
+			if(pDatum.producedBy.isEmpty() and
+				pDatum.requiredBy.isEmpty()and
+				pDatum.super.isEmpty()) {
+				pDatumsToRemove.add(pDatum);
+			}
+		}
+		
+		var cDatumsToRemove = OrderedSet{};
+		// We will remove all the ClassDatum which are not required by an action, and doesn't have any PropertyDatum
+		for (cDatum in QVTs!ClassDatum.all()) {
+			if(cDatum.requiredBy.isEmpty() and 
+				(cDatum.propertyDatums.isEmpty() 
+					or cDatum.propertyDatums.forAll(x | pDatumsToRemove.contains(x)))) {
+				cDatumsToRemove.add(cDatum);
+			}
+		}
+		
+		for  (datum in pDatumsToRemove.including(cDatumsToRemove)) {
+			delete datum;
+		}
+		graphChanged = pDatumsToRemove.size() > 0;
+	}
+}
+post {
+	// Edges are not created via rules. Add them at the end
+	GML!GraphType.all.first().edge.addAll(GML!EdgeType.all());
+	"QVTs 2 GraphML Done".println();
+}

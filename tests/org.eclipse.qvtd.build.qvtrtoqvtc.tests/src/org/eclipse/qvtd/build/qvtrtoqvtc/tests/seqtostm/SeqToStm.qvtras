@@ -4,6 +4,10 @@
     xmlns:qvtt="http://www.eclipse.org/qvt/2015/QVTtemplate" xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage http://www.eclipse.org/qvt/2015/QVTrelation java://org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage http://www.eclipse.org/qvt/2015/QVTtemplate java://org.eclipse.qvtd.pivot.qvttemplate.QVTtemplatePackage"
     name="SeqToStm.qvtr" externalURI="platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/src/org/eclipse/qvtd/build/qvtrtoqvtc/tests/seqtostm/SeqToStm.qvtr">
   <ownedComments body="*****************************************************************************&#xA;Copyright (c) 2007,2008 Tata Consultancy Services and others.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;TCS - initial implementation for ModelMorf&#xA;E.D.Willink - alignment with evolved specification&#xA;*****************************************************************************"/>
+  <ownedImports name="SeqMM" importedNamespace="pivot:Package SeqMM.emof.oclas#P.SeqMM">
+    <ownedComments body="*****************************************************************************&#xA;Copyright (c) 2007,2008 Tata Consultancy Services and others.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;TCS - initial implementation for ModelMorf&#xA;E.D.Willink - alignment with evolved specification&#xA;*****************************************************************************"/>
+  </ownedImports>
+  <ownedImports name="StmcMM" importedNamespace="pivot:Package StmcMM.emof.oclas#P.StmcMM"/>
   <ownedPackages xmi:id="P." name="">
     <ownedClasses xsi:type="qvtr:RelationalTransformation" xmi:id="T..SeqToStm" name="SeqToStm"
         superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
@@ -378,8 +382,4 @@
       </ownedBindings>
     </ownedClasses>
   </ownedPackages>
-  <unit name="SeqMM" usedPackage="pivot:Package SeqMM.emof.oclas#P.SeqMM">
-    <ownedComments body="*****************************************************************************&#xA;Copyright (c) 2007,2008 Tata Consultancy Services and others.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;TCS - initial implementation for ModelMorf&#xA;E.D.Willink - alignment with evolved specification&#xA;*****************************************************************************"/>
-  </unit>
-  <unit name="StmcMM" usedPackage="pivot:Package StmcMM.emof.oclas#P.StmcMM"/>
 </qvtr:RelationModel>

@@ -18,27 +18,41 @@
  * @param name the name of the operation
  * @param owningType the type to which the operation belongs
  */
-operation oclStdLib!Class getOperationByName(name : String) : oclStdLib!Operation {
-	return self.ownedOperation.selectOne(o | o.name == name);
+operation oclStdLib!pivot::AnyType getOperationByName(name : String) : oclStdLib!Operation {
+	return self.ownedOperations.selectOne(o | o.name == name);
 }
 
-operation getPrimitiveTypeByName(name : String) : oclStdLib!PrimitiveType {
-    return oclStdLib!PrimitiveType.all.selectOne(t | t.name == name);
+operation getPrimitiveTypeByName(name : String) : oclStdLib!pivot::PrimitiveType {
+	return oclStdLib!pivot::PrimitiveType.all.selectOne(t | t.name == name);
 }
 
-operation getClassByName(name : String) : oclStdLib!Class {
-    return oclStdLib!Class.all().selectOne(c | c.name == name);
+
+operation getClassByName(name : String) : oclStdLib!pivot::Class {
+	//oclStdLib.getElementById("T.ocl.Class").type.println("class? ");
+	//oclStdLib!pivot::Class.all.selectOne(c | c.name == name).println();
+    return oclStdLib!pivot::Class.all.selectOne(c | c.name == name);
 } 
 
+
 // HACK There must be a "correct" way to acces the OCL Std Library!
-@cached
 operation getOclAnyEqualsOp() : Any {
-    return oclStdLib.getElementById("T.ocl.OclAny").ownedOperation.selectOne(op | op.name == "=");
+    return oclStdLib.getElementById("T.ocl.OclAny").ownedOperations.selectOne(op | op.name == "=");
+}
+
+operation getOclAnyOperation(name : String) : Any {
+    return oclStdLib.getElementById("T.ocl.OclAny").ownedOperations.selectOne(op | op.name == name);
 }
 
 // HACK There must be a "correct" way to acces the OCL Std Library!
 @cached
 operation getOclElementAllInstancesOp() : Any {
-    return oclStdLib.getElementById("T.ocl.OclElement").ownedOperation.selectOne(op | op.name == "allInstances");
+    return oclStdLib.getElementById("T.ocl.OclElement").ownedOperations.selectOne(op | op.name == "allInstances");
 }
+
+// HACK There must be a "correct" way to acces the OCL Std Library!
+@cached
+operation getSelectIterator() : Any {
+    return oclStdLib.getElementById("i.ocl.Collection.select..T");
+}
+
 
