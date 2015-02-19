@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ASCII"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <qvtschedule:Schedule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvtschedule="http://www.eclipse.org/qvt/0.2/QVTschedule/">
   <datums xsi:type="qvtschedule:ClassDatum" sub="//@datums.1 //@datums.7">
     <type href="KiamaCS.ecore.oclas#T.kiamacs.BaseCS"/>
@@ -36,7 +36,7 @@
       <property href="KiamaAS.ecore.oclas#//@ownedPackages.0/@ownedClasses.1/@ownedProperties.2"/>
     </propertyDatums>
     <propertyDatums producedBy="//@actions.7">
-      <property href="KiamaAS.ecore.oclas#//@ownedPackages.0/@ownedClasses.1/@ownedProperties.3"/>
+      <property href="KiamaAS.ecore.oclas#//@ownedPackages.0/@ownedClasses.1/@ownedProperties.4"/>
     </propertyDatums>
     <propertyDatums producedBy="//@actions.10">
       <property href="KiamaAS.ecore.oclas#p.kiamaas.Node.Top"/>

@@ -45,6 +45,7 @@ import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationEvaluator
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationEvaluator;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationExecutor;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.EMFResourceUtils;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
@@ -131,9 +132,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT = createQVT();
 		QVTiEnvironmentFactory factory = myQVT.getEnvironmentFactory(); 
 		factory.setEvaluationTracingEnabled(true);
-		// PivotMetamodelManager metamodelManager = factory.getMetamodelManager();
-		//metamodelManager.configureLoadFirstStrategy(); // Since the models might use a different URI to refer the same meta-model
-		
+		factory.configureLoadFirstStrategy(); // Since the models might use a different URI to refer the same meta-model
 	}
 	
 	protected @NonNull MyQVT createQVT() {
@@ -337,7 +336,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		assertTrue(tx.run());
 		Resource outputResource = rSet.createResource(asModelURI);
 		outputResource.getContents().addAll(tx.getRootObjects("rightAS"));
-		outputResource.save(null);
+		outputResource.save(EMFResourceUtils.defaultSavingOptions);
 
         Resource expected =  rSet.getResource(expectedAsModelURI, true);
         assertSameModel(expected, rSet.getResource(asModelURI, true));

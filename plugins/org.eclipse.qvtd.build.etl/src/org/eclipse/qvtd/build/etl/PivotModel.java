@@ -11,10 +11,13 @@
  ******************************************************************************/
 package org.eclipse.qvtd.build.etl;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -27,47 +30,53 @@ import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.emc.emf.EmfUtil;
 import org.eclipse.epsilon.eol.exceptions.models.EolEnumerationValueNotFoundException;
 import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Pivot Model extends the EmfModel to provide access to the utilities
  * provided by the OCL framework.
  */
 public class PivotModel extends EmfModel {
 	
+
+	public static Map<String, Object> defaultSavingOptions; 
+	
+	// FIXME use a better default strategy for the saving options
+	static {
+		defaultSavingOptions = new HashMap<String, Object>();
+		defaultSavingOptions.put(XMIResource.OPTION_ENCODING, "UTF-8");
+		defaultSavingOptions.put(XMIResource.OPTION_LINE_DELIMITER, "\n"); 
+		
+	}
+	
 	/** The meta model manager. */
 	private @NonNull EnvironmentFactory environmentFactory;
 	
 	private boolean isASResource;
 	
-	/**
-	 * Instantiates a new pivot model.
-	 *
-	 * @param qvtUtility the meta model manager
-	 */
+	private @Nullable Map<String, Object> savingOptions;
+	
+
+
 	public PivotModel(@NonNull EnvironmentFactory environmentFactory, boolean isASResource) {
-		
-		this.isASResource = isASResource;
-		this.environmentFactory = environmentFactory;
+		this(environmentFactory, isASResource, defaultSavingOptions);
 	}
 	
-	public PivotModel(PivotModel pModel) {
-		this.aliases = pModel.aliases;
-		this.cachingEnabled = pModel.cachingEnabled;
-		this.expand = pModel.expand;
-		this.modelImpl = pModel.modelImpl;
-		this.readOnLoad = pModel.readOnLoad;
-		this.registry = pModel.registry;
-		this.metamodelUris = pModel.metamodelUris;
+	
+	public PivotModel(@NonNull EnvironmentFactory environmentFactory, boolean isASResource, @Nullable Map<String, Object> savingOptions) {
+		this.isASResource = isASResource;
+		this.environmentFactory = environmentFactory;
+		this.savingOptions = savingOptions;
 	}
 
 	/* (non-Javadoc)
@@ -210,5 +219,20 @@ public class PivotModel extends EmfModel {
 	
 	public MetamodelManagerInternal getMetaModelManager() {
 		return (MetamodelManagerInternal) environmentFactory.getMetamodelManager();
+	}
+	
+	@Override
+	// FIXME Raise epsilon bugzilla
+	public boolean store() {
+
+		if (modelImpl == null) return false;
+		
+		try {
+			modelImpl.save(savingOptions);
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 }
