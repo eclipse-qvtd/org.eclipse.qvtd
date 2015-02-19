@@ -2,8 +2,6 @@
  */
 package classescs;
 
-import classes.Element;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -32,12 +30,12 @@ public interface ElementCS extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Ast</em>' reference.
-	 * @see #setAst(Element)
+	 * @see #setAst(EObject)
 	 * @see classescs.ClassescsPackage#getElementCS_Ast()
 	 * @model
 	 * @generated
 	 */
-	Element getAst();
+	EObject getAst();
 
 	/**
 	 * Sets the value of the '{@link classescs.ElementCS#getAst <em>Ast</em>}' reference.
@@ -47,6 +45,6 @@ public interface ElementCS extends EObject {
 	 * @see #getAst()
 	 * @generated
 	 */
-	void setAst(Element value);
+	void setAst(EObject value);
 
 } // ElementCS

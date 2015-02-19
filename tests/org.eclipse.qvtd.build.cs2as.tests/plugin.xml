@@ -5,37 +5,42 @@
 -->
 
 <plugin>
-<!-- FIXME Interpreted Test fails if the package is contributed. Comment it out
+<!-- FIXME Interpreted Test fails if the package is contributed. Comment it out-->
    <extension point="org.eclipse.emf.ecore.generated_package">
--->
       <!-- @generated classescs2as -->
-<!--      <package
+      <package
             uri="http://tracesmodel/1.0/classescstraces"
             class="classescstraces.ClassescstracesPackage"
             genModel="src/org/eclipse/qvtd/build/cs2as/tests/models/example2/classescs2as.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
--->
       <!-- @generated classescs2as -->
-<!--      <package
+      <package
             uri="http://ocldependencyanalysis/classescs/1.0"
             class="classescs.ClassescsPackage"
             genModel="src/org/eclipse/qvtd/build/cs2as/tests/models/example2/classescs2as.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
--->
       <!-- @generated classescs2as -->
-<!--      <package
+      <package
             uri="http://ocldependencyanalysis/classes/1.0"
             class="classes.ClassesPackage"
             genModel="src/org/eclipse/qvtd/build/cs2as/tests/models/example2/classescs2as.genmodel"/>
    </extension>
+
    <extension point="org.eclipse.emf.ecore.generated_package">
--->   
+      <!-- @generated classescs2as -->
+      <package
+            uri="http://qvtd.buid.cs.tests/example2/env"
+            class="env.EnvironmentPackage"
+            genModel="src/org/eclipse/qvtd/build/cs2as/tests/models/example2/classescs2as.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+   
       <!-- @generated Source2Target -->
-<!--      
+      
       <package
             uri="http://ocldependencyanalysis/sourceMM/1.0"
             class="source.SourcePackage"
@@ -43,13 +48,13 @@
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
--->   
+   
       <!-- @generated Source2Target -->
-<!--        
+        
       <package
             uri="http://ocldependencyanalysis/targetMM/1.0"
             class="target.TargetPackage"
             genModel="src/org/eclipse/qvtd/build/cs2as/tests/models/example1/Source2Target.genmodel"/>
    </extension>
--->   
+   
 </plugin>

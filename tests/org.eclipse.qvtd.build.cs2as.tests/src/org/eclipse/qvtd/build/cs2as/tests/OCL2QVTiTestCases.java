@@ -10,6 +10,7 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -56,6 +57,8 @@ import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
+import env.EnvironmentPackage;
 
 /**
  * @author asbh500
@@ -299,6 +302,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	@Test
 	public void testExample2_CG() throws Exception {
 		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
+		
+		Registry reg = myQVT.getPackageRegistry();
+		//reg.put(baseURI.appendSegment("Environment.ecore").toString(), EnvironmentPackage.eINSTANCE);
+		reg.put(EnvironmentPackage.eNS_URI, EnvironmentPackage.eINSTANCE);		
 		
 		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "classescs2as.ocl", myQVT, TestsXMLUtil.defaultSavingOptions);
     	mtc.execute();

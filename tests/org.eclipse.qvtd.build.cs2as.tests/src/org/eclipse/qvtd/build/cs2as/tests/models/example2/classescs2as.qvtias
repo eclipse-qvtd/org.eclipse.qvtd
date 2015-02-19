@@ -122,7 +122,7 @@
             </value>
             <slotExpression xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Class"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
-              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Element"
+              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                   referredProperty="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast">
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
                     referredVariable="#qV..classescs2as_qvtp_qvtias.uClass_name.leftCS.guard.classCS"/>
@@ -168,7 +168,7 @@
                     referredOperation="ClassesLookup.ocl.oclas#o.classes.Class.env">
                   <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Class"
                       referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
-                    <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Element"
+                    <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                         referredProperty="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast">
                       <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
                           isImplicit="true" referredVariable="#qV..classescs2as_qvtp_qvtias.uClass_superClass.leftCS.guard.classCS"/>
@@ -188,7 +188,7 @@
             </value>
             <slotExpression xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Class"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
-              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Element"
+              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                   referredProperty="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast">
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
                     referredVariable="#qV..classescs2as_qvtp_qvtias.uClass_superClass.leftCS.guard.classCS"/>
@@ -224,7 +224,7 @@
             </value>
             <slotExpression xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Package"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
-              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Element"
+              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                   referredProperty="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast">
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS"
                     referredVariable="#qV..classescs2as_qvtp_qvtias.uPackage_name.leftCS.guard.packageCS"/>
@@ -264,7 +264,7 @@
                 </ownedSource>
                 <ownedBody xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Class"
                     referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
-                  <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Element"
+                  <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                       referredProperty="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast">
                     <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.ClassCS"
                         isImplicit="true" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.6/@bottomPattern/@assignment.0/@value/@ownedSource/@ownedIterators.0"/>
@@ -278,7 +278,7 @@
             </value>
             <slotExpression xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Package"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
-              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Element"
+              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                   referredProperty="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast">
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS"
                     referredVariable="#qV..classescs2as_qvtp_qvtias.uPackage_ownedClasses.leftCS.guard.packageCS"/>
@@ -318,7 +318,7 @@
                 </ownedSource>
                 <ownedBody xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Package"
                     referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
-                  <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Element"
+                  <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                       referredProperty="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast">
                     <ownedSource xsi:type="pivot:VariableExp" isRequired="false" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.PackageCS"
                         isImplicit="true" referredVariable="#//@ownedPackages.0/@ownedClasses.0/@rule.7/@bottomPattern/@assignment.0/@value/@ownedSource/@ownedIterators.0"/>
@@ -332,7 +332,7 @@
             </value>
             <slotExpression xsi:type="pivot:OperationCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Root"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
-              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class Classes.ecore.oclas#T.classes.Element"
+              <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                   referredProperty="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast">
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class ClassesCS.ecore.oclas#T.classescs.RootCS"
                     referredVariable="#qV..classescs2as_qvtp_qvtias.uRoot_ownedPackages.leftCS.guard.rootCS"/>

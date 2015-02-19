@@ -233,20 +233,15 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * }
      */
     protected boolean cSRoot_2_TRoot(final @NonNull /*@NonInvalid*/ SRoot sRoot) {
-        try {
-            // predicates
-            // creations
-            final /*@Thrown*/ TRoot tRoot = TargetFactory.eINSTANCE.createTRoot();
-            assert tRoot != null;
-            modelObjects[1/*rightAS*/].add(tRoot);
-            // assignments
-            sRoot.setAst(tRoot);
-            // mapping statements
-            return true;
-        }
-        catch (Exception e) {
-            return false;
-        }
+        // predicates
+        // creations
+        final /*@Thrown*/ TRoot tRoot = TargetFactory.eINSTANCE.createTRoot();
+        assert tRoot != null;
+        modelObjects[1/*rightAS*/].add(tRoot);
+        // assignments
+        sRoot.setAst(tRoot);
+        // mapping statements
+        return true;
     }
     
     /**
@@ -271,25 +266,20 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * }
      */
     protected boolean cX_2_A2(final @NonNull /*@NonInvalid*/ X x) {
-        try {
-            // predicates
-            final @Nullable /*@Thrown*/ Boolean isA1 = x.isIsA1();
-            final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(isA1);
-            if (not != ValueUtil.TRUE_VALUE) {
-                return false;
-            }
-            // creations
-            final /*@Thrown*/ A2 a2 = TargetFactory.eINSTANCE.createA2();
-            assert a2 != null;
-            modelObjects[1/*rightAS*/].add(a2);
-            // assignments
-            x.setAst(a2);
-            // mapping statements
-            return true;
-        }
-        catch (Exception e) {
+        // predicates
+        final @Nullable /*@Thrown*/ Boolean isA1 = x.isIsA1();
+        final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(isA1);
+        if (not != ValueUtil.TRUE_VALUE) {
             return false;
         }
+        // creations
+        final /*@Thrown*/ A2 a2 = TargetFactory.eINSTANCE.createA2();
+        assert a2 != null;
+        modelObjects[1/*rightAS*/].add(a2);
+        // assignments
+        x.setAst(a2);
+        // mapping statements
+        return true;
     }
     
     /**
@@ -317,25 +307,20 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * }
      */
     protected boolean cX_2_A1(final @NonNull /*@NonInvalid*/ X x_0) {
-        try {
-            // predicates
-            final @Nullable /*@Thrown*/ Boolean isA1 = x_0.isIsA1();
-            if (isA1 != ValueUtil.TRUE_VALUE) {
-                return false;
-            }
-            // creations
-            final /*@Thrown*/ A1 a1 = TargetFactory.eINSTANCE.createA1();
-            assert a1 != null;
-            modelObjects[1/*rightAS*/].add(a1);
-            // assignments
-            x_0.setAst(a1);
-            // mapping statements
-            cX_2_A2(x_0);
-            return true;
-        }
-        catch (Exception e) {
+        // predicates
+        final @Nullable /*@Thrown*/ Boolean isA1 = x_0.isIsA1();
+        if (isA1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
+        // creations
+        final /*@Thrown*/ A1 a1 = TargetFactory.eINSTANCE.createA1();
+        assert a1 != null;
+        modelObjects[1/*rightAS*/].add(a1);
+        // assignments
+        x_0.setAst(a1);
+        // mapping statements
+        cX_2_A2(x_0);
+        return true;
     }
     
     /**
@@ -360,20 +345,15 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * }
      */
     protected boolean cY1_2_B(final @NonNull /*@NonInvalid*/ Y1 y1) {
-        try {
-            // predicates
-            // creations
-            final /*@Thrown*/ B b = TargetFactory.eINSTANCE.createB();
-            assert b != null;
-            modelObjects[1/*rightAS*/].add(b);
-            // assignments
-            y1.setAst(b);
-            // mapping statements
-            return true;
-        }
-        catch (Exception e) {
-            return false;
-        }
+        // predicates
+        // creations
+        final /*@Thrown*/ B b = TargetFactory.eINSTANCE.createB();
+        assert b != null;
+        modelObjects[1/*rightAS*/].add(b);
+        // assignments
+        y1.setAst(b);
+        // mapping statements
+        return true;
     }
     
     /**
@@ -398,20 +378,15 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * }
      */
     protected boolean cY2_2_C(final @NonNull /*@NonInvalid*/ Y2 y2) {
-        try {
-            // predicates
-            // creations
-            final /*@Thrown*/ C c = TargetFactory.eINSTANCE.createC();
-            assert c != null;
-            modelObjects[1/*rightAS*/].add(c);
-            // assignments
-            y2.setAst(c);
-            // mapping statements
-            return true;
-        }
-        catch (Exception e) {
-            return false;
-        }
+        // predicates
+        // creations
+        final /*@Thrown*/ C c = TargetFactory.eINSTANCE.createC();
+        assert c != null;
+        modelObjects[1/*rightAS*/].add(c);
+        // assignments
+        y2.setAst(c);
+        // mapping statements
+        return true;
     }
     
     /**
@@ -440,29 +415,24 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * }
      */
     protected boolean cZ_2_D_0(final @NonNull /*@NonInvalid*/ Z z) {
-        try {
-            // predicates
-            final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-            final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Y1_0 = idResolver.getClass(CLSSid_Y1, null);
-            final @Nullable /*@Thrown*/ Y toY = z.getToY();
-            final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, toY, TYP_source_c_c_Y1_0).booleanValue();
-            final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(oclIsKindOf);
-            if (not != ValueUtil.TRUE_VALUE) {
-                return false;
-            }
-            // creations
-            final /*@Thrown*/ D d = TargetFactory.eINSTANCE.createD();
-            assert d != null;
-            modelObjects[1/*rightAS*/].add(d);
-            // assignments
-            z.setAst(d);
-            // mapping statements
-            cZ_2_D_1(z);
-            return true;
-        }
-        catch (Exception e) {
+        // predicates
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Y1_0 = idResolver.getClass(CLSSid_Y1, null);
+        final @Nullable /*@Thrown*/ Y toY = z.getToY();
+        final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, toY, TYP_source_c_c_Y1_0).booleanValue();
+        final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(oclIsKindOf);
+        if (not != ValueUtil.TRUE_VALUE) {
             return false;
         }
+        // creations
+        final /*@Thrown*/ D d = TargetFactory.eINSTANCE.createD();
+        assert d != null;
+        modelObjects[1/*rightAS*/].add(d);
+        // assignments
+        z.setAst(d);
+        // mapping statements
+        cZ_2_D_1(z);
+        return true;
     }
     
     /**
@@ -488,27 +458,22 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * }
      */
     protected boolean cZ_2_D_1(final @NonNull /*@NonInvalid*/ Z z_0) {
-        try {
-            // predicates
-            final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-            final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Y1_0 = idResolver.getClass(CLSSid_Y1, null);
-            final @Nullable /*@Thrown*/ Y toY = z_0.getToY();
-            final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, toY, TYP_source_c_c_Y1_0).booleanValue();
-            if (!oclIsKindOf) {
-                return false;
-            }
-            // creations
-            final /*@Thrown*/ D d = TargetFactory.eINSTANCE.createD();
-            assert d != null;
-            modelObjects[1/*rightAS*/].add(d);
-            // assignments
-            z_0.setAst(d);
-            // mapping statements
-            return true;
-        }
-        catch (Exception e) {
+        // predicates
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Y1_0 = idResolver.getClass(CLSSid_Y1, null);
+        final @Nullable /*@Thrown*/ Y toY = z_0.getToY();
+        final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, toY, TYP_source_c_c_Y1_0).booleanValue();
+        if (!oclIsKindOf) {
             return false;
         }
+        // creations
+        final /*@Thrown*/ D d = TargetFactory.eINSTANCE.createD();
+        assert d != null;
+        modelObjects[1/*rightAS*/].add(d);
+        // assignments
+        z_0.setAst(d);
+        // mapping statements
+        return true;
     }
     
     /**
@@ -534,47 +499,42 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * }
      */
     protected boolean uTRoot_ownedA(final @NonNull /*@NonInvalid*/ SRoot sRoot_0) {
-        try {
-            // predicates
-            final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_TRoot_0 = idResolver.getClass(CLSSid_TRoot, null);
-            // creations
-            // assignments
-            final @Nullable /*@Thrown*/ EObject ast = sRoot_0.getAst();
-            final @Nullable /*@Thrown*/ TRoot oclAsType = (TRoot)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_TRoot_0);
-            final @Nullable /*@Thrown*/ List<X> ownedX = sRoot_0.getOwnedX();
-            assert ownedX != null;
-            final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedX = idResolver.createOrderedSetOfAll(ORD_CLSSid_X, ownedX);
-            @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_A);
-            @Nullable Iterator<?> ITERATOR__1 = BOXED_ownedX.iterator();
-            @NonNull /*@Thrown*/ SequenceValue collect;
-            while (true) {
-                if (!ITERATOR__1.hasNext()) {
-                    collect = accumulator;
-                    break;
-                }
-                @Nullable /*@NonInvalid*/ X _1 = (X)ITERATOR__1.next();
-                /**
-                 * ast.oclAsType(target::A)
-                 */
-                final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_A_0 = idResolver.getClass(CLSSid_A, null);
-                if (_1 == null) {
-                    throw new InvalidValueException("Null source for \'source::SElement::ast\'");
-                }
-                final @Nullable /*@Thrown*/ EObject ast_0 = _1.getAst();
-                final @Nullable /*@Thrown*/ A oclAsType_0 = (A)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_A_0);
-                //
-                accumulator.add(oclAsType_0);
+        // predicates
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_TRoot_0 = idResolver.getClass(CLSSid_TRoot, null);
+        // creations
+        // assignments
+        final @Nullable /*@Thrown*/ EObject ast = sRoot_0.getAst();
+        final @Nullable /*@Thrown*/ TRoot oclAsType = (TRoot)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_TRoot_0);
+        final @Nullable /*@Thrown*/ List<X> ownedX = sRoot_0.getOwnedX();
+        assert ownedX != null;
+        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedX = idResolver.createOrderedSetOfAll(ORD_CLSSid_X, ownedX);
+        @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_A);
+        @Nullable Iterator<?> ITERATOR__1 = BOXED_ownedX.iterator();
+        @NonNull /*@Thrown*/ SequenceValue collect;
+        while (true) {
+            if (!ITERATOR__1.hasNext()) {
+                collect = accumulator;
+                break;
             }
-            final List<A> UNBOXED_collect = collect.asEcoreObjects(idResolver, A.class);
-            assert UNBOXED_collect != null;
-            oclAsType.getOwnedA().addAll(UNBOXED_collect);
-            // mapping statements
-            return true;
+            @Nullable /*@NonInvalid*/ X _1 = (X)ITERATOR__1.next();
+            /**
+             * ast.oclAsType(target::A)
+             */
+            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_A_0 = idResolver.getClass(CLSSid_A, null);
+            if (_1 == null) {
+                throw new InvalidValueException("Null source for \'source::SElement::ast\'");
+            }
+            final @Nullable /*@Thrown*/ EObject ast_0 = _1.getAst();
+            final @Nullable /*@Thrown*/ A oclAsType_0 = (A)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_A_0);
+            //
+            accumulator.add(oclAsType_0);
         }
-        catch (Exception e) {
-            return false;
-        }
+        final List<A> UNBOXED_collect = collect.asEcoreObjects(idResolver, A.class);
+        assert UNBOXED_collect != null;
+        oclAsType.getOwnedA().addAll(UNBOXED_collect);
+        // mapping statements
+        return true;
     }
     
     /**
@@ -601,64 +561,59 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * }
      */
     protected boolean uA2_ownsC(final @NonNull /*@NonInvalid*/ X x_1) {
-        try {
-            // predicates
-            final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_A2_0 = idResolver.getClass(CLSSid_A2, null);
-            // creations
-            // assignments
-            final @Nullable /*@Thrown*/ EObject ast = x_1.getAst();
-            final @Nullable /*@Thrown*/ A2 oclAsType = (A2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_A2_0);
-            final @Nullable /*@Thrown*/ List<Y> ownsY = x_1.getOwnsY();
-            assert ownsY != null;
-            final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownsY = idResolver.createOrderedSetOfAll(ORD_CLSSid_Y, ownsY);
-            @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Y2);
-            @Nullable Iterator<?> ITERATOR__1 = BOXED_ownsY.iterator();
-            @NonNull /*@Thrown*/ SequenceValue collect_0;
-            while (true) {
-                if (!ITERATOR__1.hasNext()) {
-                    collect_0 = accumulator;
-                    break;
-                }
-                @Nullable /*@NonInvalid*/ Y _1 = (Y)ITERATOR__1.next();
-                /**
-                 * oclAsType(source::Y2)
-                 */
-                final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Y2_0 = idResolver.getClass(CLSSid_Y2, null);
-                final @Nullable /*@Thrown*/ Y2 oclAsType_0 = (Y2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, _1, TYP_source_c_c_Y2_0);
-                //
-                accumulator.add(oclAsType_0);
+        // predicates
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_A2_0 = idResolver.getClass(CLSSid_A2, null);
+        // creations
+        // assignments
+        final @Nullable /*@Thrown*/ EObject ast = x_1.getAst();
+        final @Nullable /*@Thrown*/ A2 oclAsType = (A2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_A2_0);
+        final @Nullable /*@Thrown*/ List<Y> ownsY = x_1.getOwnsY();
+        assert ownsY != null;
+        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownsY = idResolver.createOrderedSetOfAll(ORD_CLSSid_Y, ownsY);
+        @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Y2);
+        @Nullable Iterator<?> ITERATOR__1 = BOXED_ownsY.iterator();
+        @NonNull /*@Thrown*/ SequenceValue collect_0;
+        while (true) {
+            if (!ITERATOR__1.hasNext()) {
+                collect_0 = accumulator;
+                break;
             }
-            @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_C);
-            @Nullable Iterator<?> ITERATOR__1_0 = collect_0.iterator();
-            @NonNull /*@Thrown*/ SequenceValue collect;
-            while (true) {
-                if (!ITERATOR__1_0.hasNext()) {
-                    collect = accumulator_0;
-                    break;
-                }
-                @Nullable /*@NonInvalid*/ Y2 _1_0 = (Y2)ITERATOR__1_0.next();
-                /**
-                 * ast.oclAsType(target::C)
-                 */
-                final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_C_0 = idResolver.getClass(CLSSid_C, null);
-                if (_1_0 == null) {
-                    throw new InvalidValueException("Null source for \'source::SElement::ast\'");
-                }
-                final @Nullable /*@Thrown*/ EObject ast_0 = _1_0.getAst();
-                final @Nullable /*@Thrown*/ C oclAsType_1 = (C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_C_0);
-                //
-                accumulator_0.add(oclAsType_1);
+            @Nullable /*@NonInvalid*/ Y _1 = (Y)ITERATOR__1.next();
+            /**
+             * oclAsType(source::Y2)
+             */
+            final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Y2_0 = idResolver.getClass(CLSSid_Y2, null);
+            final @Nullable /*@Thrown*/ Y2 oclAsType_0 = (Y2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, _1, TYP_source_c_c_Y2_0);
+            //
+            accumulator.add(oclAsType_0);
+        }
+        @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_C);
+        @Nullable Iterator<?> ITERATOR__1_0 = collect_0.iterator();
+        @NonNull /*@Thrown*/ SequenceValue collect;
+        while (true) {
+            if (!ITERATOR__1_0.hasNext()) {
+                collect = accumulator_0;
+                break;
             }
-            final List<C> UNBOXED_collect = collect.asEcoreObjects(idResolver, C.class);
-            assert UNBOXED_collect != null;
-            oclAsType.getOwnsC().addAll(UNBOXED_collect);
-            // mapping statements
-            return true;
+            @Nullable /*@NonInvalid*/ Y2 _1_0 = (Y2)ITERATOR__1_0.next();
+            /**
+             * ast.oclAsType(target::C)
+             */
+            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_C_0 = idResolver.getClass(CLSSid_C, null);
+            if (_1_0 == null) {
+                throw new InvalidValueException("Null source for \'source::SElement::ast\'");
+            }
+            final @Nullable /*@Thrown*/ EObject ast_0 = _1_0.getAst();
+            final @Nullable /*@Thrown*/ C oclAsType_1 = (C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_C_0);
+            //
+            accumulator_0.add(oclAsType_1);
         }
-        catch (Exception e) {
-            return false;
-        }
+        final List<C> UNBOXED_collect = collect.asEcoreObjects(idResolver, C.class);
+        assert UNBOXED_collect != null;
+        oclAsType.getOwnsC().addAll(UNBOXED_collect);
+        // mapping statements
+        return true;
     }
     
     /**
@@ -688,65 +643,60 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * }
      */
     protected boolean uA1_ownsB(final @NonNull /*@NonInvalid*/ X x_2) {
-        try {
-            // predicates
-            final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_A1_0 = idResolver.getClass(CLSSid_A1, null);
-            // creations
-            // assignments
-            final @Nullable /*@Thrown*/ EObject ast = x_2.getAst();
-            final @Nullable /*@Thrown*/ A1 oclAsType = (A1)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_A1_0);
-            final @Nullable /*@Thrown*/ List<Y> ownsY = x_2.getOwnsY();
-            assert ownsY != null;
-            final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownsY = idResolver.createOrderedSetOfAll(ORD_CLSSid_Y, ownsY);
-            @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Y1);
-            @Nullable Iterator<?> ITERATOR__1 = BOXED_ownsY.iterator();
-            @NonNull /*@Thrown*/ SequenceValue collect_0;
-            while (true) {
-                if (!ITERATOR__1.hasNext()) {
-                    collect_0 = accumulator;
-                    break;
-                }
-                @Nullable /*@NonInvalid*/ Y _1 = (Y)ITERATOR__1.next();
-                /**
-                 * oclAsType(source::Y1)
-                 */
-                final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Y1_0 = idResolver.getClass(CLSSid_Y1, null);
-                final @Nullable /*@Thrown*/ Y1 oclAsType_0 = (Y1)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, _1, TYP_source_c_c_Y1_0);
-                //
-                accumulator.add(oclAsType_0);
+        // predicates
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_A1_0 = idResolver.getClass(CLSSid_A1, null);
+        // creations
+        // assignments
+        final @Nullable /*@Thrown*/ EObject ast = x_2.getAst();
+        final @Nullable /*@Thrown*/ A1 oclAsType = (A1)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_A1_0);
+        final @Nullable /*@Thrown*/ List<Y> ownsY = x_2.getOwnsY();
+        assert ownsY != null;
+        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownsY = idResolver.createOrderedSetOfAll(ORD_CLSSid_Y, ownsY);
+        @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Y1);
+        @Nullable Iterator<?> ITERATOR__1 = BOXED_ownsY.iterator();
+        @NonNull /*@Thrown*/ SequenceValue collect_0;
+        while (true) {
+            if (!ITERATOR__1.hasNext()) {
+                collect_0 = accumulator;
+                break;
             }
-            @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_B);
-            @Nullable Iterator<?> ITERATOR__1_0 = collect_0.iterator();
-            @NonNull /*@Thrown*/ SequenceValue collect;
-            while (true) {
-                if (!ITERATOR__1_0.hasNext()) {
-                    collect = accumulator_0;
-                    break;
-                }
-                @Nullable /*@NonInvalid*/ Y1 _1_0 = (Y1)ITERATOR__1_0.next();
-                /**
-                 * ast.oclAsType(target::B)
-                 */
-                final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_B_0 = idResolver.getClass(CLSSid_B, null);
-                if (_1_0 == null) {
-                    throw new InvalidValueException("Null source for \'source::SElement::ast\'");
-                }
-                final @Nullable /*@Thrown*/ EObject ast_0 = _1_0.getAst();
-                final @Nullable /*@Thrown*/ B oclAsType_1 = (B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_B_0);
-                //
-                accumulator_0.add(oclAsType_1);
+            @Nullable /*@NonInvalid*/ Y _1 = (Y)ITERATOR__1.next();
+            /**
+             * oclAsType(source::Y1)
+             */
+            final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Y1_0 = idResolver.getClass(CLSSid_Y1, null);
+            final @Nullable /*@Thrown*/ Y1 oclAsType_0 = (Y1)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, _1, TYP_source_c_c_Y1_0);
+            //
+            accumulator.add(oclAsType_0);
+        }
+        @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_B);
+        @Nullable Iterator<?> ITERATOR__1_0 = collect_0.iterator();
+        @NonNull /*@Thrown*/ SequenceValue collect;
+        while (true) {
+            if (!ITERATOR__1_0.hasNext()) {
+                collect = accumulator_0;
+                break;
             }
-            final List<B> UNBOXED_collect = collect.asEcoreObjects(idResolver, B.class);
-            assert UNBOXED_collect != null;
-            oclAsType.getOwnsB().addAll(UNBOXED_collect);
-            // mapping statements
-            uA2_ownsC(x_2);
-            return true;
+            @Nullable /*@NonInvalid*/ Y1 _1_0 = (Y1)ITERATOR__1_0.next();
+            /**
+             * ast.oclAsType(target::B)
+             */
+            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_B_0 = idResolver.getClass(CLSSid_B, null);
+            if (_1_0 == null) {
+                throw new InvalidValueException("Null source for \'source::SElement::ast\'");
+            }
+            final @Nullable /*@Thrown*/ EObject ast_0 = _1_0.getAst();
+            final @Nullable /*@Thrown*/ B oclAsType_1 = (B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_B_0);
+            //
+            accumulator_0.add(oclAsType_1);
         }
-        catch (Exception e) {
-            return false;
-        }
+        final List<B> UNBOXED_collect = collect.asEcoreObjects(idResolver, B.class);
+        assert UNBOXED_collect != null;
+        oclAsType.getOwnsB().addAll(UNBOXED_collect);
+        // mapping statements
+        uA2_ownsC(x_2);
+        return true;
     }
     
     /**
@@ -775,29 +725,24 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * }
      */
     protected boolean uB_ownsD(final @NonNull /*@NonInvalid*/ Y1 y1_0) {
-        try {
-            // predicates
-            final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_B_0 = idResolver.getClass(CLSSid_B, null);
-            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
-            // creations
-            // assignments
-            final @Nullable /*@Thrown*/ EObject ast = y1_0.getAst();
-            final @Nullable /*@Thrown*/ B oclAsType = (B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_B_0);
-            final @Nullable /*@Thrown*/ Z ownsZ = y1_0.getOwnsZ();
-            if (ownsZ == null) {
-                throw new InvalidValueException("Null source for \'source::SElement::ast\'");
-            }
-            final @Nullable /*@Thrown*/ EObject ast_0 = ownsZ.getAst();
-            final @Nullable /*@Thrown*/ D oclAsType_0 = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_D_0);
-            oclAsType.setOwnsD(oclAsType_0);
-            // mapping statements
-            uB_name(y1_0);
-            return true;
+        // predicates
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_B_0 = idResolver.getClass(CLSSid_B, null);
+        final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
+        // creations
+        // assignments
+        final @Nullable /*@Thrown*/ EObject ast = y1_0.getAst();
+        final @Nullable /*@Thrown*/ B oclAsType = (B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_B_0);
+        final @Nullable /*@Thrown*/ Z ownsZ = y1_0.getOwnsZ();
+        if (ownsZ == null) {
+            throw new InvalidValueException("Null source for \'source::SElement::ast\'");
         }
-        catch (Exception e) {
-            return false;
-        }
+        final @Nullable /*@Thrown*/ EObject ast_0 = ownsZ.getAst();
+        final @Nullable /*@Thrown*/ D oclAsType_0 = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_D_0);
+        oclAsType.setOwnsD(oclAsType_0);
+        // mapping statements
+        uB_name(y1_0);
+        return true;
     }
     
     /**
@@ -822,22 +767,17 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * }
      */
     protected boolean uB_name(final @NonNull /*@NonInvalid*/ Y1 y1_1) {
-        try {
-            // predicates
-            final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_B_0 = idResolver.getClass(CLSSid_B, null);
-            // creations
-            // assignments
-            final @Nullable /*@Thrown*/ EObject ast = y1_1.getAst();
-            final @Nullable /*@Thrown*/ B oclAsType = (B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_B_0);
-            final @Nullable /*@Thrown*/ String name = y1_1.getName();
-            oclAsType.setName(name);
-            // mapping statements
-            return true;
-        }
-        catch (Exception e) {
-            return false;
-        }
+        // predicates
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_B_0 = idResolver.getClass(CLSSid_B, null);
+        // creations
+        // assignments
+        final @Nullable /*@Thrown*/ EObject ast = y1_1.getAst();
+        final @Nullable /*@Thrown*/ B oclAsType = (B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_B_0);
+        final @Nullable /*@Thrown*/ String name = y1_1.getName();
+        oclAsType.setName(name);
+        // mapping statements
+        return true;
     }
     
     /**
@@ -863,28 +803,23 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * }
      */
     protected boolean uC_ownsD(final @NonNull /*@NonInvalid*/ Y2 y2_0) {
-        try {
-            // predicates
-            final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_C_0 = idResolver.getClass(CLSSid_C, null);
-            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
-            // creations
-            // assignments
-            final @Nullable /*@Thrown*/ EObject ast = y2_0.getAst();
-            final @Nullable /*@Thrown*/ C oclAsType = (C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_C_0);
-            final @Nullable /*@Thrown*/ Z ownsZ = y2_0.getOwnsZ();
-            if (ownsZ == null) {
-                throw new InvalidValueException("Null source for \'source::SElement::ast\'");
-            }
-            final @Nullable /*@Thrown*/ EObject ast_0 = ownsZ.getAst();
-            final @Nullable /*@Thrown*/ D oclAsType_0 = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_D_0);
-            oclAsType.setOwnsD(oclAsType_0);
-            // mapping statements
-            return true;
+        // predicates
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_C_0 = idResolver.getClass(CLSSid_C, null);
+        final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
+        // creations
+        // assignments
+        final @Nullable /*@Thrown*/ EObject ast = y2_0.getAst();
+        final @Nullable /*@Thrown*/ C oclAsType = (C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_C_0);
+        final @Nullable /*@Thrown*/ Z ownsZ = y2_0.getOwnsZ();
+        if (ownsZ == null) {
+            throw new InvalidValueException("Null source for \'source::SElement::ast\'");
         }
-        catch (Exception e) {
-            return false;
-        }
+        final @Nullable /*@Thrown*/ EObject ast_0 = ownsZ.getAst();
+        final @Nullable /*@Thrown*/ D oclAsType_0 = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_D_0);
+        oclAsType.setOwnsD(oclAsType_0);
+        // mapping statements
+        return true;
     }
     
     /**
@@ -909,22 +844,17 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * }
      */
     protected boolean uC_name(final @NonNull /*@NonInvalid*/ Y2 y2_1) {
-        try {
-            // predicates
-            final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_C_0 = idResolver.getClass(CLSSid_C, null);
-            // creations
-            // assignments
-            final @Nullable /*@Thrown*/ EObject ast = y2_1.getAst();
-            final @Nullable /*@Thrown*/ C oclAsType = (C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_C_0);
-            final @Nullable /*@Thrown*/ String name = y2_1.getName();
-            oclAsType.setName(name);
-            // mapping statements
-            return true;
-        }
-        catch (Exception e) {
-            return false;
-        }
+        // predicates
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_C_0 = idResolver.getClass(CLSSid_C, null);
+        // creations
+        // assignments
+        final @Nullable /*@Thrown*/ EObject ast = y2_1.getAst();
+        final @Nullable /*@Thrown*/ C oclAsType = (C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_C_0);
+        final @Nullable /*@Thrown*/ String name = y2_1.getName();
+        oclAsType.setName(name);
+        // mapping statements
+        return true;
     }
     
     /**
@@ -951,34 +881,29 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * }
      */
     protected boolean uD_0_toA(final @NonNull /*@NonInvalid*/ Z z_1) {
-        try {
-            // predicates
-            final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-            final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Y2_0 = idResolver.getClass(CLSSid_Y2, null);
-            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_C_0 = idResolver.getClass(CLSSid_C, null);
-            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
-            // creations
-            // assignments
-            final @Nullable /*@Thrown*/ EObject ast = z_1.getAst();
-            final @Nullable /*@Thrown*/ D oclAsType = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
-            final @Nullable /*@Thrown*/ Y toY = z_1.getToY();
-            final @Nullable /*@Thrown*/ Y2 oclAsType_0 = (Y2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, toY, TYP_source_c_c_Y2_0);
-            if (oclAsType_0 == null) {
-                throw new InvalidValueException("Null source for \'source::SElement::ast\'");
-            }
-            final @Nullable /*@Thrown*/ EObject ast_0 = oclAsType_0.getAst();
-            final @Nullable /*@Thrown*/ C oclAsType_1 = (C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_C_0);
-            if (oclAsType_1 == null) {
-                throw new InvalidValueException("Null source for \'target::C::toA2\'");
-            }
-            final @Nullable /*@Thrown*/ A2 toA2 = oclAsType_1.getToA2();
-            oclAsType.setToA(toA2);
-            // mapping statements
-            return true;
+        // predicates
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Y2_0 = idResolver.getClass(CLSSid_Y2, null);
+        final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_C_0 = idResolver.getClass(CLSSid_C, null);
+        final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
+        // creations
+        // assignments
+        final @Nullable /*@Thrown*/ EObject ast = z_1.getAst();
+        final @Nullable /*@Thrown*/ D oclAsType = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
+        final @Nullable /*@Thrown*/ Y toY = z_1.getToY();
+        final @Nullable /*@Thrown*/ Y2 oclAsType_0 = (Y2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, toY, TYP_source_c_c_Y2_0);
+        if (oclAsType_0 == null) {
+            throw new InvalidValueException("Null source for \'source::SElement::ast\'");
         }
-        catch (Exception e) {
-            return false;
+        final @Nullable /*@Thrown*/ EObject ast_0 = oclAsType_0.getAst();
+        final @Nullable /*@Thrown*/ C oclAsType_1 = (C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_C_0);
+        if (oclAsType_1 == null) {
+            throw new InvalidValueException("Null source for \'target::C::toA2\'");
         }
+        final @Nullable /*@Thrown*/ A2 toA2 = oclAsType_1.getToA2();
+        oclAsType.setToA(toA2);
+        // mapping statements
+        return true;
     }
     
     /**
@@ -1003,22 +928,17 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * }
      */
     protected boolean uD_0_name(final @NonNull /*@NonInvalid*/ Z z_2) {
-        try {
-            // predicates
-            final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
-            // creations
-            // assignments
-            final @Nullable /*@Thrown*/ EObject ast = z_2.getAst();
-            final @Nullable /*@Thrown*/ D oclAsType = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
-            final @Nullable /*@Thrown*/ String name = z_2.getName();
-            oclAsType.setName(name);
-            // mapping statements
-            return true;
-        }
-        catch (Exception e) {
-            return false;
-        }
+        // predicates
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
+        // creations
+        // assignments
+        final @Nullable /*@Thrown*/ EObject ast = z_2.getAst();
+        final @Nullable /*@Thrown*/ D oclAsType = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
+        final @Nullable /*@Thrown*/ String name = z_2.getName();
+        oclAsType.setName(name);
+        // mapping statements
+        return true;
     }
     
     /**
@@ -1057,74 +977,69 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * }
      */
     protected boolean uD_0_refsC(final @NonNull /*@NonInvalid*/ Z z_3) {
-        try {
-            // predicates
-            final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
-            final @Nullable /*@Thrown*/ EObject ast = z_3.getAst();
-            // creations
-            // assignments
-            final @Nullable /*@Thrown*/ D oclAsType = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
-            final @Nullable /*@Thrown*/ D self_4 = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
-            final @Nullable /*@Thrown*/ String name = z_3.getName();
-            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_C_0 = idResolver.getClass(CLSSid_C, null);
-            final @NonNull /*@NonInvalid*/ UnboxedExplicitNavigationProperty IMPPROPid_namedElements = new UnboxedExplicitNavigationProperty(PROPid_namedElements);
-            if (self_4 == null) {
-                throw new InvalidValueException("Null source for \'OclElement::_env(OclElement) : env::Environment\'");
-            }
-            final @NonNull /*@Thrown*/ Environment _env = this._env(self_4, null);
-            final @NonNull /*@Thrown*/ List<NamedElement> namedElements = (List<NamedElement>)IMPPROPid_namedElements.evaluate(evaluator, ORD_CLSSid_NamedElement, _env);
-            final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements);
-            final @NonNull /*@Thrown*/ OrderedSetValue selectByKind = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(evaluator, BOXED_namedElements, TYP_target_c_c_C_0);
-            @NonNull /*@Thrown*/ OrderedSetValue.Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_C);
-            @Nullable Iterator<?> ITERATOR__1 = selectByKind.iterator();
-            @NonNull /*@Thrown*/ OrderedSetValue select;
-            while (true) {
-                if (!ITERATOR__1.hasNext()) {
-                    select = accumulator;
-                    break;
-                }
-                @Nullable /*@NonInvalid*/ C _1 = (C)ITERATOR__1.next();
-                /**
-                 * _'=' : Boolean
-                 */
-                if (_1 == null) {
-                    throw new InvalidValueException("Null source for \'target::NamedElement::name\'");
-                }
-                final @Nullable /*@Thrown*/ String name_0 = _1.getName();
-                final /*@Thrown*/ boolean eq = (name_0 != null) ? name_0.equals(name) : (name == null);
-                //
-                if (eq == ValueUtil.TRUE_VALUE) {
-                    accumulator.add(_1);
-                }
-            }
-            @Nullable Iterator<?> ITERATOR__1_0 = select.iterator();
-            @Nullable /*@Thrown*/ C any;
-            while (true) {
-                if (!ITERATOR__1_0.hasNext()) {
-                    throw new InvalidValueException("No matching content for 'any'");
-                }
-                @Nullable /*@NonInvalid*/ C _1_0 = (C)ITERATOR__1_0.next();
-                /**
-                 * _'null' : Boolean
-                 */
-                //
-                if (ValueUtil.TRUE_VALUE != ValueUtil.FALSE_VALUE) {			// Carry on till something found
-                    any = _1_0;
-                    break;
-                }
-            }
-            oclAsType.setRefsC(any);
-            // mapping statements
-            uD_0_toA(z_3);
-            uD_1_toA(z_3);
-            uD_0_name(z_3);
-            uD_1_name(z_3);
-            return true;
+        // predicates
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
+        final @Nullable /*@Thrown*/ EObject ast = z_3.getAst();
+        // creations
+        // assignments
+        final @Nullable /*@Thrown*/ D oclAsType = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
+        final @Nullable /*@Thrown*/ D self_4 = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
+        final @Nullable /*@Thrown*/ String name = z_3.getName();
+        final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_C_0 = idResolver.getClass(CLSSid_C, null);
+        final @NonNull /*@NonInvalid*/ UnboxedExplicitNavigationProperty IMPPROPid_namedElements = new UnboxedExplicitNavigationProperty(PROPid_namedElements);
+        if (self_4 == null) {
+            throw new InvalidValueException("Null source for \'OclElement::_env(OclElement) : env::Environment\'");
         }
-        catch (Exception e) {
-            return false;
+        final @NonNull /*@Thrown*/ Environment _env = this._env(self_4, null);
+        final @NonNull /*@Thrown*/ List<NamedElement> namedElements = (List<NamedElement>)IMPPROPid_namedElements.evaluate(evaluator, ORD_CLSSid_NamedElement, _env);
+        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements);
+        final @NonNull /*@Thrown*/ OrderedSetValue selectByKind = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(evaluator, BOXED_namedElements, TYP_target_c_c_C_0);
+        @NonNull /*@Thrown*/ OrderedSetValue.Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_C);
+        @Nullable Iterator<?> ITERATOR__1 = selectByKind.iterator();
+        @NonNull /*@Thrown*/ OrderedSetValue select;
+        while (true) {
+            if (!ITERATOR__1.hasNext()) {
+                select = accumulator;
+                break;
+            }
+            @Nullable /*@NonInvalid*/ C _1 = (C)ITERATOR__1.next();
+            /**
+             * _'=' : Boolean
+             */
+            if (_1 == null) {
+                throw new InvalidValueException("Null source for \'target::NamedElement::name\'");
+            }
+            final @Nullable /*@Thrown*/ String name_0 = _1.getName();
+            final /*@Thrown*/ boolean eq = (name_0 != null) ? name_0.equals(name) : (name == null);
+            //
+            if (eq == ValueUtil.TRUE_VALUE) {
+                accumulator.add(_1);
+            }
         }
+        @Nullable Iterator<?> ITERATOR__1_0 = select.iterator();
+        @Nullable /*@Thrown*/ C any;
+        while (true) {
+            if (!ITERATOR__1_0.hasNext()) {
+                throw new InvalidValueException("No matching content for 'any'");
+            }
+            @Nullable /*@NonInvalid*/ C _1_0 = (C)ITERATOR__1_0.next();
+            /**
+             * _'null' : Boolean
+             */
+            //
+            if (ValueUtil.TRUE_VALUE != ValueUtil.FALSE_VALUE) {			// Carry on till something found
+                any = _1_0;
+                break;
+            }
+        }
+        oclAsType.setRefsC(any);
+        // mapping statements
+        uD_0_toA(z_3);
+        uD_1_toA(z_3);
+        uD_0_name(z_3);
+        uD_1_name(z_3);
+        return true;
     }
     
     /**
@@ -1151,34 +1066,29 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * }
      */
     protected boolean uD_1_toA(final @NonNull /*@NonInvalid*/ Z z_4) {
-        try {
-            // predicates
-            final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-            final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Y1_0 = idResolver.getClass(CLSSid_Y1, null);
-            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_B_0 = idResolver.getClass(CLSSid_B, null);
-            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
-            // creations
-            // assignments
-            final @Nullable /*@Thrown*/ EObject ast = z_4.getAst();
-            final @Nullable /*@Thrown*/ D oclAsType = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
-            final @Nullable /*@Thrown*/ Y toY = z_4.getToY();
-            final @Nullable /*@Thrown*/ Y1 oclAsType_0 = (Y1)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, toY, TYP_source_c_c_Y1_0);
-            if (oclAsType_0 == null) {
-                throw new InvalidValueException("Null source for \'source::SElement::ast\'");
-            }
-            final @Nullable /*@Thrown*/ EObject ast_0 = oclAsType_0.getAst();
-            final @Nullable /*@Thrown*/ B oclAsType_1 = (B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_B_0);
-            if (oclAsType_1 == null) {
-                throw new InvalidValueException("Null source for \'target::B::toA1\'");
-            }
-            final @Nullable /*@Thrown*/ A1 toA1 = oclAsType_1.getToA1();
-            oclAsType.setToA(toA1);
-            // mapping statements
-            return true;
+        // predicates
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Y1_0 = idResolver.getClass(CLSSid_Y1, null);
+        final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_B_0 = idResolver.getClass(CLSSid_B, null);
+        final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
+        // creations
+        // assignments
+        final @Nullable /*@Thrown*/ EObject ast = z_4.getAst();
+        final @Nullable /*@Thrown*/ D oclAsType = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
+        final @Nullable /*@Thrown*/ Y toY = z_4.getToY();
+        final @Nullable /*@Thrown*/ Y1 oclAsType_0 = (Y1)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, toY, TYP_source_c_c_Y1_0);
+        if (oclAsType_0 == null) {
+            throw new InvalidValueException("Null source for \'source::SElement::ast\'");
         }
-        catch (Exception e) {
-            return false;
+        final @Nullable /*@Thrown*/ EObject ast_0 = oclAsType_0.getAst();
+        final @Nullable /*@Thrown*/ B oclAsType_1 = (B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_B_0);
+        if (oclAsType_1 == null) {
+            throw new InvalidValueException("Null source for \'target::B::toA1\'");
         }
+        final @Nullable /*@Thrown*/ A1 toA1 = oclAsType_1.getToA1();
+        oclAsType.setToA(toA1);
+        // mapping statements
+        return true;
     }
     
     /**
@@ -1203,22 +1113,17 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * }
      */
     protected boolean uD_1_name(final @NonNull /*@NonInvalid*/ Z z_5) {
-        try {
-            // predicates
-            final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
-            // creations
-            // assignments
-            final @Nullable /*@Thrown*/ EObject ast = z_5.getAst();
-            final @Nullable /*@Thrown*/ D oclAsType = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
-            final @Nullable /*@Thrown*/ String name = z_5.getName();
-            oclAsType.setName(name);
-            // mapping statements
-            return true;
-        }
-        catch (Exception e) {
-            return false;
-        }
+        // predicates
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
+        // creations
+        // assignments
+        final @Nullable /*@Thrown*/ EObject ast = z_5.getAst();
+        final @Nullable /*@Thrown*/ D oclAsType = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
+        final @Nullable /*@Thrown*/ String name = z_5.getName();
+        oclAsType.setName(name);
+        // mapping statements
+        return true;
     }
     
     /**
@@ -1245,70 +1150,65 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * }
      */
     protected boolean uD_1_refsB(final @NonNull /*@NonInvalid*/ Z z_6) {
-        try {
-            // predicates
-            final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
-            final @Nullable /*@Thrown*/ EObject ast = z_6.getAst();
-            // creations
-            // assignments
-            final @Nullable /*@Thrown*/ D oclAsType = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
-            final @Nullable /*@Thrown*/ D self_4 = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
-            final @Nullable /*@Thrown*/ String name = z_6.getName();
-            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_B_0 = idResolver.getClass(CLSSid_B, null);
-            final @NonNull /*@NonInvalid*/ UnboxedExplicitNavigationProperty IMPPROPid_namedElements = new UnboxedExplicitNavigationProperty(PROPid_namedElements);
-            if (self_4 == null) {
-                throw new InvalidValueException("Null source for \'OclElement::_env(OclElement) : env::Environment\'");
-            }
-            final @NonNull /*@Thrown*/ Environment _env = this._env(self_4, null);
-            final @NonNull /*@Thrown*/ List<NamedElement> namedElements = (List<NamedElement>)IMPPROPid_namedElements.evaluate(evaluator, ORD_CLSSid_NamedElement, _env);
-            final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements);
-            final @NonNull /*@Thrown*/ OrderedSetValue selectByKind = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(evaluator, BOXED_namedElements, TYP_target_c_c_B_0);
-            @NonNull /*@Thrown*/ OrderedSetValue.Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_B);
-            @Nullable Iterator<?> ITERATOR__1 = selectByKind.iterator();
-            @NonNull /*@Thrown*/ OrderedSetValue select;
-            while (true) {
-                if (!ITERATOR__1.hasNext()) {
-                    select = accumulator;
-                    break;
-                }
-                @Nullable /*@NonInvalid*/ B _1 = (B)ITERATOR__1.next();
-                /**
-                 * _'=' : Boolean
-                 */
-                if (_1 == null) {
-                    throw new InvalidValueException("Null source for \'target::NamedElement::name\'");
-                }
-                final @Nullable /*@Thrown*/ String name_0 = _1.getName();
-                final /*@Thrown*/ boolean eq = (name_0 != null) ? name_0.equals(name) : (name == null);
-                //
-                if (eq == ValueUtil.TRUE_VALUE) {
-                    accumulator.add(_1);
-                }
-            }
-            @Nullable Iterator<?> ITERATOR__1_0 = select.iterator();
-            @Nullable /*@Thrown*/ B any;
-            while (true) {
-                if (!ITERATOR__1_0.hasNext()) {
-                    throw new InvalidValueException("No matching content for 'any'");
-                }
-                @Nullable /*@NonInvalid*/ B _1_0 = (B)ITERATOR__1_0.next();
-                /**
-                 * _'null' : Boolean
-                 */
-                //
-                if (ValueUtil.TRUE_VALUE != ValueUtil.FALSE_VALUE) {			// Carry on till something found
-                    any = _1_0;
-                    break;
-                }
-            }
-            oclAsType.setRefsB(any);
-            // mapping statements
-            return true;
+        // predicates
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_D_0 = idResolver.getClass(CLSSid_D, null);
+        final @Nullable /*@Thrown*/ EObject ast = z_6.getAst();
+        // creations
+        // assignments
+        final @Nullable /*@Thrown*/ D oclAsType = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
+        final @Nullable /*@Thrown*/ D self_4 = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
+        final @Nullable /*@Thrown*/ String name = z_6.getName();
+        final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_B_0 = idResolver.getClass(CLSSid_B, null);
+        final @NonNull /*@NonInvalid*/ UnboxedExplicitNavigationProperty IMPPROPid_namedElements = new UnboxedExplicitNavigationProperty(PROPid_namedElements);
+        if (self_4 == null) {
+            throw new InvalidValueException("Null source for \'OclElement::_env(OclElement) : env::Environment\'");
         }
-        catch (Exception e) {
-            return false;
+        final @NonNull /*@Thrown*/ Environment _env = this._env(self_4, null);
+        final @NonNull /*@Thrown*/ List<NamedElement> namedElements = (List<NamedElement>)IMPPROPid_namedElements.evaluate(evaluator, ORD_CLSSid_NamedElement, _env);
+        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements);
+        final @NonNull /*@Thrown*/ OrderedSetValue selectByKind = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(evaluator, BOXED_namedElements, TYP_target_c_c_B_0);
+        @NonNull /*@Thrown*/ OrderedSetValue.Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_B);
+        @Nullable Iterator<?> ITERATOR__1 = selectByKind.iterator();
+        @NonNull /*@Thrown*/ OrderedSetValue select;
+        while (true) {
+            if (!ITERATOR__1.hasNext()) {
+                select = accumulator;
+                break;
+            }
+            @Nullable /*@NonInvalid*/ B _1 = (B)ITERATOR__1.next();
+            /**
+             * _'=' : Boolean
+             */
+            if (_1 == null) {
+                throw new InvalidValueException("Null source for \'target::NamedElement::name\'");
+            }
+            final @Nullable /*@Thrown*/ String name_0 = _1.getName();
+            final /*@Thrown*/ boolean eq = (name_0 != null) ? name_0.equals(name) : (name == null);
+            //
+            if (eq == ValueUtil.TRUE_VALUE) {
+                accumulator.add(_1);
+            }
         }
+        @Nullable Iterator<?> ITERATOR__1_0 = select.iterator();
+        @Nullable /*@Thrown*/ B any;
+        while (true) {
+            if (!ITERATOR__1_0.hasNext()) {
+                throw new InvalidValueException("No matching content for 'any'");
+            }
+            @Nullable /*@NonInvalid*/ B _1_0 = (B)ITERATOR__1_0.next();
+            /**
+             * _'null' : Boolean
+             */
+            //
+            if (ValueUtil.TRUE_VALUE != ValueUtil.FALSE_VALUE) {			// Carry on till something found
+                any = _1_0;
+                break;
+            }
+        }
+        oclAsType.setRefsB(any);
+        // mapping statements
+        return true;
     }
     
     /**
@@ -1382,120 +1282,115 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * }
      */
     protected boolean __root__() {
-        try {
-            // predicates
-            final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-            final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_SRoot_1 = idResolver.getClass(CLSSid_SRoot, null);
-            final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_X_1 = idResolver.getClass(CLSSid_X, null);
-            final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Y1_1 = idResolver.getClass(CLSSid_Y1, null);
-            final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Y2_2 = idResolver.getClass(CLSSid_Y2, null);
-            final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Z_2 = idResolver.getClass(CLSSid_Z, null);
-            final @NonNull /*@Thrown*/ SetValue allInstances_1 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_SRoot, TYP_source_c_c_SRoot_1);
-            final @NonNull /*@Thrown*/ SetValue allInstances_5 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_X, TYP_source_c_c_X_1);
-            final @NonNull /*@Thrown*/ SetValue allInstances_6 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Y1, TYP_source_c_c_Y1_1);
-            final @NonNull /*@Thrown*/ SetValue allInstances_7 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Y2, TYP_source_c_c_Y2_2);
-            final @NonNull /*@Thrown*/ SetValue allInstances_8 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Z, TYP_source_c_c_Z_2);
-            final List<SRoot> UNBOXED_allInstances_1 = allInstances_1.asEcoreObjects(idResolver, SRoot.class);
-            assert UNBOXED_allInstances_1 != null;
-            final List<X> UNBOXED_allInstances_5 = allInstances_5.asEcoreObjects(idResolver, X.class);
-            assert UNBOXED_allInstances_5 != null;
-            final List<Y1> UNBOXED_allInstances_6 = allInstances_6.asEcoreObjects(idResolver, Y1.class);
-            assert UNBOXED_allInstances_6 != null;
-            final List<Y2> UNBOXED_allInstances_7 = allInstances_7.asEcoreObjects(idResolver, Y2.class);
-            assert UNBOXED_allInstances_7 != null;
-            final List<Z> UNBOXED_allInstances_8 = allInstances_8.asEcoreObjects(idResolver, Z.class);
-            assert UNBOXED_allInstances_8 != null;
-            // creations
-            // assignments
-            // mapping statements
-            ;
-            for (SRoot sRoot_3 : UNBOXED_allInstances_1) {
-                if (sRoot_3 != null) {
-                    final @NonNull /*@NonInvalid*/ SRoot symbol_1 = (SRoot)sRoot_3;
-                    cSRoot_2_TRoot(symbol_1);
-                }
+        // predicates
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_SRoot_1 = idResolver.getClass(CLSSid_SRoot, null);
+        final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_X_1 = idResolver.getClass(CLSSid_X, null);
+        final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Y1_1 = idResolver.getClass(CLSSid_Y1, null);
+        final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Y2_2 = idResolver.getClass(CLSSid_Y2, null);
+        final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Z_2 = idResolver.getClass(CLSSid_Z, null);
+        final @NonNull /*@Thrown*/ SetValue allInstances_1 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_SRoot, TYP_source_c_c_SRoot_1);
+        final @NonNull /*@Thrown*/ SetValue allInstances_5 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_X, TYP_source_c_c_X_1);
+        final @NonNull /*@Thrown*/ SetValue allInstances_6 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Y1, TYP_source_c_c_Y1_1);
+        final @NonNull /*@Thrown*/ SetValue allInstances_7 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Y2, TYP_source_c_c_Y2_2);
+        final @NonNull /*@Thrown*/ SetValue allInstances_8 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Z, TYP_source_c_c_Z_2);
+        final List<SRoot> UNBOXED_allInstances_1 = allInstances_1.asEcoreObjects(idResolver, SRoot.class);
+        assert UNBOXED_allInstances_1 != null;
+        final List<X> UNBOXED_allInstances_5 = allInstances_5.asEcoreObjects(idResolver, X.class);
+        assert UNBOXED_allInstances_5 != null;
+        final List<Y1> UNBOXED_allInstances_6 = allInstances_6.asEcoreObjects(idResolver, Y1.class);
+        assert UNBOXED_allInstances_6 != null;
+        final List<Y2> UNBOXED_allInstances_7 = allInstances_7.asEcoreObjects(idResolver, Y2.class);
+        assert UNBOXED_allInstances_7 != null;
+        final List<Z> UNBOXED_allInstances_8 = allInstances_8.asEcoreObjects(idResolver, Z.class);
+        assert UNBOXED_allInstances_8 != null;
+        // creations
+        // assignments
+        // mapping statements
+        ;
+        for (SRoot sRoot_3 : UNBOXED_allInstances_1) {
+            if (sRoot_3 != null) {
+                final @NonNull /*@NonInvalid*/ SRoot symbol_1 = (SRoot)sRoot_3;
+                cSRoot_2_TRoot(symbol_1);
             }
-            ;
-            for (X x_5 : UNBOXED_allInstances_5) {
-                if (x_5 != null) {
-                    final @NonNull /*@NonInvalid*/ X symbol_5 = (X)x_5;
-                    cX_2_A1(symbol_5);
-                }
-            }
-            ;
-            for (SRoot sRoot_4 : UNBOXED_allInstances_1) {
-                if (sRoot_4 != null) {
-                    final @NonNull /*@NonInvalid*/ SRoot symbol_9 = (SRoot)sRoot_4;
-                    uTRoot_ownedA(symbol_9);
-                }
-            }
-            ;
-            for (Y1 y1_4 : UNBOXED_allInstances_6) {
-                if (y1_4 != null) {
-                    final @NonNull /*@NonInvalid*/ Y1 symbol_13 = (Y1)y1_4;
-                    cY1_2_B(symbol_13);
-                }
-            }
-            ;
-            for (Y2 y2_5 : UNBOXED_allInstances_7) {
-                if (y2_5 != null) {
-                    final @NonNull /*@NonInvalid*/ Y2 symbol_17 = (Y2)y2_5;
-                    cY2_2_C(symbol_17);
-                }
-            }
-            ;
-            for (Z z_10 : UNBOXED_allInstances_8) {
-                if (z_10 != null) {
-                    final @NonNull /*@NonInvalid*/ Z symbol_21 = (Z)z_10;
-                    cZ_2_D_0(symbol_21);
-                }
-            }
-            ;
-            for (X x_6 : UNBOXED_allInstances_5) {
-                if (x_6 != null) {
-                    final @NonNull /*@NonInvalid*/ X symbol_25 = (X)x_6;
-                    uA1_ownsB(symbol_25);
-                }
-            }
-            ;
-            for (Y1 y1_5 : UNBOXED_allInstances_6) {
-                if (y1_5 != null) {
-                    final @NonNull /*@NonInvalid*/ Y1 symbol_29 = (Y1)y1_5;
-                    uB_ownsD(symbol_29);
-                }
-            }
-            ;
-            for (Y2 y2_6 : UNBOXED_allInstances_7) {
-                if (y2_6 != null) {
-                    final @NonNull /*@NonInvalid*/ Y2 symbol_33 = (Y2)y2_6;
-                    uC_ownsD(symbol_33);
-                }
-            }
-            ;
-            for (Z z_11 : UNBOXED_allInstances_8) {
-                if (z_11 != null) {
-                    final @NonNull /*@NonInvalid*/ Z symbol_37 = (Z)z_11;
-                    uD_1_refsB(symbol_37);
-                }
-            }
-            ;
-            for (Y2 y2_7 : UNBOXED_allInstances_7) {
-                if (y2_7 != null) {
-                    final @NonNull /*@NonInvalid*/ Y2 symbol_41 = (Y2)y2_7;
-                    uC_name(symbol_41);
-                }
-            }
-            ;
-            for (Z z_12 : UNBOXED_allInstances_8) {
-                if (z_12 != null) {
-                    final @NonNull /*@NonInvalid*/ Z symbol_45 = (Z)z_12;
-                    uD_0_refsC(symbol_45);
-                }
-            }
-            return true;
         }
-        catch (Exception e) {
-            return false;
+        ;
+        for (X x_5 : UNBOXED_allInstances_5) {
+            if (x_5 != null) {
+                final @NonNull /*@NonInvalid*/ X symbol_5 = (X)x_5;
+                cX_2_A1(symbol_5);
+            }
         }
+        ;
+        for (SRoot sRoot_4 : UNBOXED_allInstances_1) {
+            if (sRoot_4 != null) {
+                final @NonNull /*@NonInvalid*/ SRoot symbol_9 = (SRoot)sRoot_4;
+                uTRoot_ownedA(symbol_9);
+            }
+        }
+        ;
+        for (Y1 y1_4 : UNBOXED_allInstances_6) {
+            if (y1_4 != null) {
+                final @NonNull /*@NonInvalid*/ Y1 symbol_13 = (Y1)y1_4;
+                cY1_2_B(symbol_13);
+            }
+        }
+        ;
+        for (Y2 y2_5 : UNBOXED_allInstances_7) {
+            if (y2_5 != null) {
+                final @NonNull /*@NonInvalid*/ Y2 symbol_17 = (Y2)y2_5;
+                cY2_2_C(symbol_17);
+            }
+        }
+        ;
+        for (Z z_10 : UNBOXED_allInstances_8) {
+            if (z_10 != null) {
+                final @NonNull /*@NonInvalid*/ Z symbol_21 = (Z)z_10;
+                cZ_2_D_0(symbol_21);
+            }
+        }
+        ;
+        for (X x_6 : UNBOXED_allInstances_5) {
+            if (x_6 != null) {
+                final @NonNull /*@NonInvalid*/ X symbol_25 = (X)x_6;
+                uA1_ownsB(symbol_25);
+            }
+        }
+        ;
+        for (Y1 y1_5 : UNBOXED_allInstances_6) {
+            if (y1_5 != null) {
+                final @NonNull /*@NonInvalid*/ Y1 symbol_29 = (Y1)y1_5;
+                uB_ownsD(symbol_29);
+            }
+        }
+        ;
+        for (Y2 y2_6 : UNBOXED_allInstances_7) {
+            if (y2_6 != null) {
+                final @NonNull /*@NonInvalid*/ Y2 symbol_33 = (Y2)y2_6;
+                uC_ownsD(symbol_33);
+            }
+        }
+        ;
+        for (Z z_11 : UNBOXED_allInstances_8) {
+            if (z_11 != null) {
+                final @NonNull /*@NonInvalid*/ Z symbol_37 = (Z)z_11;
+                uD_1_refsB(symbol_37);
+            }
+        }
+        ;
+        for (Y2 y2_7 : UNBOXED_allInstances_7) {
+            if (y2_7 != null) {
+                final @NonNull /*@NonInvalid*/ Y2 symbol_41 = (Y2)y2_7;
+                uC_name(symbol_41);
+            }
+        }
+        ;
+        for (Z z_12 : UNBOXED_allInstances_8) {
+            if (z_12 != null) {
+                final @NonNull /*@NonInvalid*/ Z symbol_45 = (Z)z_12;
+                uD_0_refsC(symbol_45);
+            }
+        }
+        return true;
     }
 }
