@@ -9,17 +9,17 @@ import org.eclipse.emf.ecore.EFactory;
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage
+ * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage
  * @generated
  */
-public interface qvtscheduleFactory extends EFactory {
+public interface QVTscheduleFactory extends EFactory {
 	/**
 	 * The singleton instance of the factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	qvtscheduleFactory eINSTANCE = org.eclipse.qvtd.build.qvtschedule.impl.qvtscheduleFactoryImpl.init();
+	QVTscheduleFactory eINSTANCE = org.eclipse.qvtd.build.qvtschedule.impl.QVTscheduleFactoryImpl.init();
 
 	/**
 	 * Returns a new object of class '<em>Class Datum</em>'.
@@ -38,15 +38,6 @@ public interface qvtscheduleFactory extends EFactory {
 	 * @generated
 	 */
 	DataParameter createDataParameter();
-
-	/**
-	 * Returns a new object of class '<em>Distinct Data</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Distinct Data</em>'.
-	 * @generated
-	 */
-	DistinctData createDistinctData();
 
 	/**
 	 * Returns a new object of class '<em>Input Action</em>'.
@@ -76,6 +67,24 @@ public interface qvtscheduleFactory extends EFactory {
 	OutputAction createOutputAction();
 
 	/**
+	 * Returns a new object of class '<em>Parameter Derivation</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Parameter Derivation</em>'.
+	 * @generated
+	 */
+	ParameterDerivation createParameterDerivation();
+
+	/**
+	 * Returns a new object of class '<em>Property Datum</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Property Datum</em>'.
+	 * @generated
+	 */
+	PropertyDatum createPropertyDatum();
+
+	/**
 	 * Returns a new object of class '<em>Schedule</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -85,12 +94,21 @@ public interface qvtscheduleFactory extends EFactory {
 	Schedule createSchedule();
 
 	/**
+	 * Returns a new object of class '<em>Secondary Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Secondary Parameter</em>'.
+	 * @generated
+	 */
+	SecondaryParameter createSecondaryParameter();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the package supported by this factory.
 	 * @generated
 	 */
-	qvtschedulePackage getqvtschedulePackage();
+	QVTschedulePackage getQVTschedulePackage();
 
-} //qvtscheduleFactory
+} //QVTscheduleFactory

@@ -19,17 +19,17 @@ import org.eclipse.qvtd.build.qvtschedule.*;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage
+ * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage
  * @generated
  */
-public class qvtscheduleSwitch<T> extends Switch<T> {
+public class QVTscheduleSwitch<T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static qvtschedulePackage modelPackage;
+	protected static QVTschedulePackage modelPackage;
 
 	/**
 	 * Creates an instance of the switch.
@@ -37,9 +37,9 @@ public class qvtscheduleSwitch<T> extends Switch<T> {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public qvtscheduleSwitch() {
+	public QVTscheduleSwitch() {
 		if (modelPackage == null) {
-			modelPackage = qvtschedulePackage.eINSTANCE;
+			modelPackage = QVTschedulePackage.eINSTANCE;
 		}
 	}
 
@@ -47,7 +47,7 @@ public class qvtscheduleSwitch<T> extends Switch<T> {
 	 * Checks whether this is a switch for the given package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @parameter ePackage the package in question.
+	 * @param ePackage the package in question.
 	 * @return whether this is a switch for the given package.
 	 * @generated
 	 */
@@ -66,61 +66,74 @@ public class qvtscheduleSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case qvtschedulePackage.ABSTRACT_DATUM: {
+			case QVTschedulePackage.ABSTRACT_DATUM: {
 				AbstractDatum abstractDatum = (AbstractDatum)theEObject;
 				T result = caseAbstractDatum(abstractDatum);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case qvtschedulePackage.ABSTRACT_ACTION: {
+			case QVTschedulePackage.ABSTRACT_ACTION: {
 				AbstractAction abstractAction = (AbstractAction)theEObject;
 				T result = caseAbstractAction(abstractAction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case qvtschedulePackage.CLASS_DATUM: {
+			case QVTschedulePackage.CLASS_DATUM: {
 				ClassDatum classDatum = (ClassDatum)theEObject;
 				T result = caseClassDatum(classDatum);
 				if (result == null) result = caseAbstractDatum(classDatum);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case qvtschedulePackage.DATA_PARAMETER: {
+			case QVTschedulePackage.DATA_PARAMETER: {
 				DataParameter dataParameter = (DataParameter)theEObject;
 				T result = caseDataParameter(dataParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case qvtschedulePackage.DISTINCT_DATA: {
-				DistinctData distinctData = (DistinctData)theEObject;
-				T result = caseDistinctData(distinctData);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case qvtschedulePackage.INPUT_ACTION: {
+			case QVTschedulePackage.INPUT_ACTION: {
 				InputAction inputAction = (InputAction)theEObject;
 				T result = caseInputAction(inputAction);
 				if (result == null) result = caseAbstractAction(inputAction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case qvtschedulePackage.MAPPING_ACTION: {
+			case QVTschedulePackage.MAPPING_ACTION: {
 				MappingAction mappingAction = (MappingAction)theEObject;
 				T result = caseMappingAction(mappingAction);
 				if (result == null) result = caseAbstractAction(mappingAction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case qvtschedulePackage.OUTPUT_ACTION: {
+			case QVTschedulePackage.OUTPUT_ACTION: {
 				OutputAction outputAction = (OutputAction)theEObject;
 				T result = caseOutputAction(outputAction);
 				if (result == null) result = caseAbstractAction(outputAction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case qvtschedulePackage.SCHEDULE: {
+			case QVTschedulePackage.PARAMETER_DERIVATION: {
+				ParameterDerivation parameterDerivation = (ParameterDerivation)theEObject;
+				T result = caseParameterDerivation(parameterDerivation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTschedulePackage.PROPERTY_DATUM: {
+				PropertyDatum propertyDatum = (PropertyDatum)theEObject;
+				T result = casePropertyDatum(propertyDatum);
+				if (result == null) result = caseAbstractDatum(propertyDatum);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTschedulePackage.SCHEDULE: {
 				Schedule schedule = (Schedule)theEObject;
 				T result = caseSchedule(schedule);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTschedulePackage.SECONDARY_PARAMETER: {
+				SecondaryParameter secondaryParameter = (SecondaryParameter)theEObject;
+				T result = caseSecondaryParameter(secondaryParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -189,21 +202,6 @@ public class qvtscheduleSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Distinct Data</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Distinct Data</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDistinctData(DistinctData object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Input Action</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -249,6 +247,36 @@ public class qvtscheduleSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Parameter Derivation</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Parameter Derivation</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParameterDerivation(ParameterDerivation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Property Datum</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Property Datum</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePropertyDatum(PropertyDatum object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Schedule</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -260,6 +288,21 @@ public class qvtscheduleSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSchedule(Schedule object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Secondary Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Secondary Parameter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSecondaryParameter(SecondaryParameter object) {
 		return null;
 	}
 
@@ -279,4 +322,4 @@ public class qvtscheduleSwitch<T> extends Switch<T> {
 		return null;
 	}
 
-} //qvtscheduleSwitch
+} //QVTscheduleSwitch

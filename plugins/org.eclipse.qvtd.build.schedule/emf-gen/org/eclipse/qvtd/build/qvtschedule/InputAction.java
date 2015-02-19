@@ -9,7 +9,7 @@ package org.eclipse.qvtd.build.qvtschedule;
  * <!-- end-user-doc -->
  *
  *
- * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getInputAction()
+ * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getInputAction()
  * @model
  * @generated
  */

@@ -16,17 +16,17 @@ import org.eclipse.qvtd.build.qvtschedule.*;
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage
+ * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage
  * @generated
  */
-public class qvtscheduleAdapterFactory extends AdapterFactoryImpl {
+public class QVTscheduleAdapterFactory extends AdapterFactoryImpl {
 	/**
 	 * The cached model package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected static qvtschedulePackage modelPackage;
+	protected static QVTschedulePackage modelPackage;
 
 	/**
 	 * Creates an instance of the adapter factory.
@@ -34,9 +34,9 @@ public class qvtscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public qvtscheduleAdapterFactory() {
+	public QVTscheduleAdapterFactory() {
 		if (modelPackage == null) {
-			modelPackage = qvtschedulePackage.eINSTANCE;
+			modelPackage = QVTschedulePackage.eINSTANCE;
 		}
 	}
 
@@ -65,8 +65,8 @@ public class qvtscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected qvtscheduleSwitch<Adapter> modelSwitch =
-		new qvtscheduleSwitch<Adapter>() {
+	protected QVTscheduleSwitch<Adapter> modelSwitch =
+		new QVTscheduleSwitch<Adapter>() {
 			@Override
 			public Adapter caseAbstractDatum(AbstractDatum object) {
 				return createAbstractDatumAdapter();
@@ -84,10 +84,6 @@ public class qvtscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createDataParameterAdapter();
 			}
 			@Override
-			public Adapter caseDistinctData(DistinctData object) {
-				return createDistinctDataAdapter();
-			}
-			@Override
 			public Adapter caseInputAction(InputAction object) {
 				return createInputActionAdapter();
 			}
@@ -100,8 +96,20 @@ public class qvtscheduleAdapterFactory extends AdapterFactoryImpl {
 				return createOutputActionAdapter();
 			}
 			@Override
+			public Adapter caseParameterDerivation(ParameterDerivation object) {
+				return createParameterDerivationAdapter();
+			}
+			@Override
+			public Adapter casePropertyDatum(PropertyDatum object) {
+				return createPropertyDatumAdapter();
+			}
+			@Override
 			public Adapter caseSchedule(Schedule object) {
 				return createScheduleAdapter();
+			}
+			@Override
+			public Adapter caseSecondaryParameter(SecondaryParameter object) {
+				return createSecondaryParameterAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -180,20 +188,6 @@ public class qvtscheduleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.build.qvtschedule.DistinctData <em>Distinct Data</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.build.qvtschedule.DistinctData
-	 * @generated
-	 */
-	public Adapter createDistinctDataAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.build.qvtschedule.InputAction <em>Input Action</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -236,6 +230,34 @@ public class qvtscheduleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.build.qvtschedule.ParameterDerivation <em>Parameter Derivation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.build.qvtschedule.ParameterDerivation
+	 * @generated
+	 */
+	public Adapter createParameterDerivationAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.build.qvtschedule.PropertyDatum <em>Property Datum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.build.qvtschedule.PropertyDatum
+	 * @generated
+	 */
+	public Adapter createPropertyDatumAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.build.qvtschedule.Schedule <em>Schedule</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -246,6 +268,20 @@ public class qvtscheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createScheduleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.build.qvtschedule.SecondaryParameter <em>Secondary Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.build.qvtschedule.SecondaryParameter
+	 * @generated
+	 */
+	public Adapter createSecondaryParameterAdapter() {
 		return null;
 	}
 
@@ -261,4 +297,4 @@ public class qvtscheduleAdapterFactory extends AdapterFactoryImpl {
 		return null;
 	}
 
-} //qvtscheduleAdapterFactory
+} //QVTscheduleAdapterFactory

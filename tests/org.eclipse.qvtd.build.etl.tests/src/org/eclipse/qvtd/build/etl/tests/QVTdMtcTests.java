@@ -196,7 +196,7 @@ public class QVTdMtcTests extends LoadTestCase
     }
     
     
-    @Test
+/*    @Test
     public void testUmlToRdbms() throws Exception {
     	MyQVT myQVT = createQVT();
     	URL r = this.getClass().getResource("UmlToRdbms/UmlToRdbms.qvtcas");
@@ -230,7 +230,7 @@ public class QVTdMtcTests extends LoadTestCase
         assertLoadable(txURI);
         mtc.disposeModels();
         myQVT.dispose();
-    }
+    } */
     /*
     @Test
     public void testUpperToLower() throws Exception {

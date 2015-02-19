@@ -3,16 +3,13 @@
 package org.eclipse.qvtd.build.qvtschedule.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.qvtd.build.qvtschedule.OutputAction;
-import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
+import org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage;
 
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Output Action</b></em>'.
  * <!-- end-user-doc -->
- * <p>
- * </p>
  *
  * @generated
  */
@@ -33,7 +30,7 @@ public class OutputActionImpl extends AbstractActionImpl implements OutputAction
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return qvtschedulePackage.Literals.OUTPUT_ACTION;
+		return QVTschedulePackage.Literals.OUTPUT_ACTION;
 	}
 
 } //OutputActionImpl

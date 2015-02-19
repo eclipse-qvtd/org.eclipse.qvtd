@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.qvtd.build.qvtschedule.MappingAction;
-import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
+import org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage;
 
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
@@ -20,10 +20,10 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.impl.MappingActionImpl#getMapping <em>Mapping</em>}</li>
  * </ul>
- * </p>
  *
  * @generated
  */
@@ -54,7 +54,7 @@ public class MappingActionImpl extends AbstractActionImpl implements MappingActi
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return qvtschedulePackage.Literals.MAPPING_ACTION;
+		return QVTschedulePackage.Literals.MAPPING_ACTION;
 	}
 
 	/**
@@ -68,7 +68,7 @@ public class MappingActionImpl extends AbstractActionImpl implements MappingActi
 			mapping = (Mapping)eResolveProxy(oldMapping);
 			if (mapping != oldMapping) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, qvtschedulePackage.MAPPING_ACTION__MAPPING, oldMapping, mapping));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTschedulePackage.MAPPING_ACTION__MAPPING, oldMapping, mapping));
 			}
 		}
 		return mapping;
@@ -92,7 +92,7 @@ public class MappingActionImpl extends AbstractActionImpl implements MappingActi
 		Mapping oldMapping = mapping;
 		mapping = newMapping;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, qvtschedulePackage.MAPPING_ACTION__MAPPING, oldMapping, mapping));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTschedulePackage.MAPPING_ACTION__MAPPING, oldMapping, mapping));
 	}
 
 	/**
@@ -103,7 +103,7 @@ public class MappingActionImpl extends AbstractActionImpl implements MappingActi
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case qvtschedulePackage.MAPPING_ACTION__MAPPING:
+			case QVTschedulePackage.MAPPING_ACTION__MAPPING:
 				if (resolve) return getMapping();
 				return basicGetMapping();
 		}
@@ -118,7 +118,7 @@ public class MappingActionImpl extends AbstractActionImpl implements MappingActi
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case qvtschedulePackage.MAPPING_ACTION__MAPPING:
+			case QVTschedulePackage.MAPPING_ACTION__MAPPING:
 				setMapping((Mapping)newValue);
 				return;
 		}
@@ -133,7 +133,7 @@ public class MappingActionImpl extends AbstractActionImpl implements MappingActi
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case qvtschedulePackage.MAPPING_ACTION__MAPPING:
+			case QVTschedulePackage.MAPPING_ACTION__MAPPING:
 				setMapping((Mapping)null);
 				return;
 		}
@@ -148,7 +148,7 @@ public class MappingActionImpl extends AbstractActionImpl implements MappingActi
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case qvtschedulePackage.MAPPING_ACTION__MAPPING:
+			case QVTschedulePackage.MAPPING_ACTION__MAPPING:
 				return mapping != null;
 		}
 		return super.eIsSet(featureID);

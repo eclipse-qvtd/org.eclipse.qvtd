@@ -15,13 +15,15 @@ import org.eclipse.qvtd.build.qvtschedule.AbstractAction;
 import org.eclipse.qvtd.build.qvtschedule.AbstractDatum;
 import org.eclipse.qvtd.build.qvtschedule.ClassDatum;
 import org.eclipse.qvtd.build.qvtschedule.DataParameter;
-import org.eclipse.qvtd.build.qvtschedule.DistinctData;
 import org.eclipse.qvtd.build.qvtschedule.InputAction;
 import org.eclipse.qvtd.build.qvtschedule.MappingAction;
 import org.eclipse.qvtd.build.qvtschedule.OutputAction;
+import org.eclipse.qvtd.build.qvtschedule.ParameterDerivation;
+import org.eclipse.qvtd.build.qvtschedule.PropertyDatum;
+import org.eclipse.qvtd.build.qvtschedule.QVTscheduleFactory;
+import org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.build.qvtschedule.Schedule;
-import org.eclipse.qvtd.build.qvtschedule.qvtscheduleFactory;
-import org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage;
+import org.eclipse.qvtd.build.qvtschedule.SecondaryParameter;
 
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 
@@ -33,7 +35,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class qvtschedulePackageImpl extends EPackageImpl implements qvtschedulePackage {
+public class QVTschedulePackageImpl extends EPackageImpl implements QVTschedulePackage {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -67,13 +69,6 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass distinctDataEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass inputActionEClass = null;
 
 	/**
@@ -95,7 +90,28 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass parameterDerivationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass propertyDatumEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass scheduleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass secondaryParameterEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -108,12 +124,12 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#eNS_URI
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */
-	private qvtschedulePackageImpl() {
-		super(eNS_URI, qvtscheduleFactory.eINSTANCE);
+	private QVTschedulePackageImpl() {
+		super(eNS_URI, QVTscheduleFactory.eINSTANCE);
 	}
 
 	/**
@@ -126,7 +142,7 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	/**
 	 * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
 	 * 
-	 * <p>This method is used to initialize {@link qvtschedulePackage#eINSTANCE} when that field is accessed.
+	 * <p>This method is used to initialize {@link QVTschedulePackage#eINSTANCE} when that field is accessed.
 	 * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -135,11 +151,11 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * @see #initializePackageContents()
 	 * @generated
 	 */
-	public static qvtschedulePackage init() {
-		if (isInited) return (qvtschedulePackage)EPackage.Registry.INSTANCE.getEPackage(qvtschedulePackage.eNS_URI);
+	public static QVTschedulePackage init() {
+		if (isInited) return (QVTschedulePackage)EPackage.Registry.INSTANCE.getEPackage(QVTschedulePackage.eNS_URI);
 
 		// Obtain or create and register package
-		qvtschedulePackageImpl theqvtschedulePackage = (qvtschedulePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof qvtschedulePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new qvtschedulePackageImpl());
+		QVTschedulePackageImpl theQVTschedulePackage = (QVTschedulePackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof QVTschedulePackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new QVTschedulePackageImpl());
 
 		isInited = true;
 
@@ -147,18 +163,18 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 		QVTimperativePackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
-		theqvtschedulePackage.createPackageContents();
+		theQVTschedulePackage.createPackageContents();
 
 		// Initialize created meta-data
-		theqvtschedulePackage.initializePackageContents();
+		theQVTschedulePackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
-		theqvtschedulePackage.freeze();
+		theQVTschedulePackage.freeze();
 
   
 		// Update the registry and return the package
-		EPackage.Registry.INSTANCE.put(qvtschedulePackage.eNS_URI, theqvtschedulePackage);
-		return theqvtschedulePackage;
+		EPackage.Registry.INSTANCE.put(QVTschedulePackage.eNS_URI, theQVTschedulePackage);
+		return theQVTschedulePackage;
 	}
 
 	/**
@@ -184,7 +200,7 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractDatum_Type() {
+	public EReference getAbstractDatum_Sub() {
 		return (EReference)abstractDatumEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -202,7 +218,7 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractDatum_Sources() {
+	public EReference getAbstractDatum_ProducedBy() {
 		return (EReference)abstractDatumEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -211,7 +227,7 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractDatum_Targets() {
+	public EReference getAbstractDatum_RequiredBy() {
 		return (EReference)abstractDatumEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -247,7 +263,7 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractAction_Results() {
+	public EReference getAbstractAction_Productions() {
 		return (EReference)abstractActionEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -256,7 +272,7 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractAction_DistinctArguments() {
+	public EReference getAbstractAction_Requisites() {
 		return (EReference)abstractActionEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -265,8 +281,17 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getAbstractAction_ParameterDerivations() {
+		return (EReference)abstractActionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EAttribute getAbstractAction_Order() {
-		return (EAttribute)abstractActionEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)abstractActionEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -275,15 +300,6 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * @generated
 	 */
 	public EReference getAbstractAction_Parent() {
-		return (EReference)abstractActionEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getAbstractAction_Children() {
 		return (EReference)abstractActionEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -292,7 +308,7 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractAction_Arguments() {
+	public EReference getAbstractAction_Children() {
 		return (EReference)abstractActionEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -301,8 +317,26 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAbstractAction_Schedule() {
+	public EReference getAbstractAction_Parameters() {
 		return (EReference)abstractActionEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractAction_Results() {
+		return (EReference)abstractActionEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getAbstractAction_Schedule() {
+		return (EReference)abstractActionEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -319,6 +353,24 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getClassDatum_Type() {
+		return (EReference)classDatumEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getClassDatum_PropertyDatums() {
+		return (EReference)classDatumEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getDataParameter() {
 		return dataParameterEClass;
 	}
@@ -328,8 +380,8 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getDataParameter_IsLoop() {
-		return (EAttribute)dataParameterEClass.getEStructuralFeatures().get(0);
+	public EReference getDataParameter_Variable() {
+		return (EReference)dataParameterEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -337,7 +389,7 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDataParameter_Variable() {
+	public EReference getDataParameter_SecondaryParameter() {
 		return (EReference)dataParameterEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -346,62 +398,8 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getDataParameter_PrimaryDistinctData() {
-		return (EReference)dataParameterEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getDataParameter_SecondaryDistinctData() {
-		return (EReference)dataParameterEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getDataParameter_Datum() {
-		return (EReference)dataParameterEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getDistinctData() {
-		return distinctDataEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getDistinctData_Target() {
-		return (EReference)distinctDataEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getDistinctData_PrimaryArguments() {
-		return (EReference)distinctDataEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getDistinctData_SecondaryArguments() {
-		return (EReference)distinctDataEClass.getEStructuralFeatures().get(2);
+		return (EReference)dataParameterEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -445,6 +443,78 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getParameterDerivation() {
+		return parameterDerivationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParameterDerivation_Target() {
+		return (EReference)parameterDerivationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParameterDerivation_PrimaryParameter() {
+		return (EReference)parameterDerivationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParameterDerivation_SecondaryParameter() {
+		return (EReference)parameterDerivationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPropertyDatum() {
+		return propertyDatumEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPropertyDatum_Property() {
+		return (EReference)propertyDatumEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPropertyDatum_ClassDatum() {
+		return (EReference)propertyDatumEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPropertyDatum_Opposite() {
+		return (EReference)propertyDatumEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSchedule() {
 		return scheduleEClass;
 	}
@@ -472,8 +542,53 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public qvtscheduleFactory getqvtscheduleFactory() {
-		return (qvtscheduleFactory)getEFactoryInstance();
+	public EClass getSecondaryParameter() {
+		return secondaryParameterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getSecondaryParameter_IsLoop() {
+		return (EAttribute)secondaryParameterEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSecondaryParameter_DataParameter() {
+		return (EReference)secondaryParameterEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSecondaryParameter_DerivationProperty() {
+		return (EReference)secondaryParameterEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getSecondaryParameter_Derivation() {
+		return (EReference)secondaryParameterEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public QVTscheduleFactory getQVTscheduleFactory() {
+		return (QVTscheduleFactory)getEFactoryInstance();
 	}
 
 	/**
@@ -497,35 +612,32 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 		// Create classes and their features
 		abstractDatumEClass = createEClass(ABSTRACT_DATUM);
 		createEReference(abstractDatumEClass, ABSTRACT_DATUM__SUPER);
-		createEReference(abstractDatumEClass, ABSTRACT_DATUM__TYPE);
+		createEReference(abstractDatumEClass, ABSTRACT_DATUM__SUB);
 		createEReference(abstractDatumEClass, ABSTRACT_DATUM__DOMAIN);
-		createEReference(abstractDatumEClass, ABSTRACT_DATUM__SOURCES);
-		createEReference(abstractDatumEClass, ABSTRACT_DATUM__TARGETS);
+		createEReference(abstractDatumEClass, ABSTRACT_DATUM__PRODUCED_BY);
+		createEReference(abstractDatumEClass, ABSTRACT_DATUM__REQUIRED_BY);
 		createEReference(abstractDatumEClass, ABSTRACT_DATUM__SCHEDULE);
 		createEReference(abstractDatumEClass, ABSTRACT_DATUM__DATA_PARAMETER);
 
 		abstractActionEClass = createEClass(ABSTRACT_ACTION);
-		createEReference(abstractActionEClass, ABSTRACT_ACTION__RESULTS);
-		createEReference(abstractActionEClass, ABSTRACT_ACTION__DISTINCT_ARGUMENTS);
+		createEReference(abstractActionEClass, ABSTRACT_ACTION__PRODUCTIONS);
+		createEReference(abstractActionEClass, ABSTRACT_ACTION__REQUISITES);
+		createEReference(abstractActionEClass, ABSTRACT_ACTION__PARAMETER_DERIVATIONS);
 		createEAttribute(abstractActionEClass, ABSTRACT_ACTION__ORDER);
 		createEReference(abstractActionEClass, ABSTRACT_ACTION__PARENT);
 		createEReference(abstractActionEClass, ABSTRACT_ACTION__CHILDREN);
-		createEReference(abstractActionEClass, ABSTRACT_ACTION__ARGUMENTS);
+		createEReference(abstractActionEClass, ABSTRACT_ACTION__PARAMETERS);
+		createEReference(abstractActionEClass, ABSTRACT_ACTION__RESULTS);
 		createEReference(abstractActionEClass, ABSTRACT_ACTION__SCHEDULE);
 
 		classDatumEClass = createEClass(CLASS_DATUM);
+		createEReference(classDatumEClass, CLASS_DATUM__TYPE);
+		createEReference(classDatumEClass, CLASS_DATUM__PROPERTY_DATUMS);
 
 		dataParameterEClass = createEClass(DATA_PARAMETER);
-		createEAttribute(dataParameterEClass, DATA_PARAMETER__IS_LOOP);
 		createEReference(dataParameterEClass, DATA_PARAMETER__VARIABLE);
-		createEReference(dataParameterEClass, DATA_PARAMETER__PRIMARY_DISTINCT_DATA);
-		createEReference(dataParameterEClass, DATA_PARAMETER__SECONDARY_DISTINCT_DATA);
+		createEReference(dataParameterEClass, DATA_PARAMETER__SECONDARY_PARAMETER);
 		createEReference(dataParameterEClass, DATA_PARAMETER__DATUM);
-
-		distinctDataEClass = createEClass(DISTINCT_DATA);
-		createEReference(distinctDataEClass, DISTINCT_DATA__TARGET);
-		createEReference(distinctDataEClass, DISTINCT_DATA__PRIMARY_ARGUMENTS);
-		createEReference(distinctDataEClass, DISTINCT_DATA__SECONDARY_ARGUMENTS);
 
 		inputActionEClass = createEClass(INPUT_ACTION);
 
@@ -534,9 +646,25 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 
 		outputActionEClass = createEClass(OUTPUT_ACTION);
 
+		parameterDerivationEClass = createEClass(PARAMETER_DERIVATION);
+		createEReference(parameterDerivationEClass, PARAMETER_DERIVATION__TARGET);
+		createEReference(parameterDerivationEClass, PARAMETER_DERIVATION__PRIMARY_PARAMETER);
+		createEReference(parameterDerivationEClass, PARAMETER_DERIVATION__SECONDARY_PARAMETER);
+
+		propertyDatumEClass = createEClass(PROPERTY_DATUM);
+		createEReference(propertyDatumEClass, PROPERTY_DATUM__PROPERTY);
+		createEReference(propertyDatumEClass, PROPERTY_DATUM__CLASS_DATUM);
+		createEReference(propertyDatumEClass, PROPERTY_DATUM__OPPOSITE);
+
 		scheduleEClass = createEClass(SCHEDULE);
 		createEReference(scheduleEClass, SCHEDULE__DATUMS);
 		createEReference(scheduleEClass, SCHEDULE__ACTIONS);
+
+		secondaryParameterEClass = createEClass(SECONDARY_PARAMETER);
+		createEAttribute(secondaryParameterEClass, SECONDARY_PARAMETER__IS_LOOP);
+		createEReference(secondaryParameterEClass, SECONDARY_PARAMETER__DATA_PARAMETER);
+		createEReference(secondaryParameterEClass, SECONDARY_PARAMETER__DERIVATION_PROPERTY);
+		createEReference(secondaryParameterEClass, SECONDARY_PARAMETER__DERIVATION);
 	}
 
 	/**
@@ -563,8 +691,8 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 		setNsURI(eNS_URI);
 
 		// Obtain other dependent packages
-		PivotPackage thePivotPackage = (PivotPackage)EPackage.Registry.INSTANCE.getEPackage(PivotPackage.eNS_URI);
 		QVTcoreBasePackage theQVTcoreBasePackage = (QVTcoreBasePackage)EPackage.Registry.INSTANCE.getEPackage(QVTcoreBasePackage.eNS_URI);
+		PivotPackage thePivotPackage = (PivotPackage)EPackage.Registry.INSTANCE.getEPackage(PivotPackage.eNS_URI);
 		QVTimperativePackage theQVTimperativePackage = (QVTimperativePackage)EPackage.Registry.INSTANCE.getEPackage(QVTimperativePackage.eNS_URI);
 
 		// Create type parameters
@@ -576,113 +704,67 @@ public class qvtschedulePackageImpl extends EPackageImpl implements qvtscheduleP
 		inputActionEClass.getESuperTypes().add(this.getAbstractAction());
 		mappingActionEClass.getESuperTypes().add(this.getAbstractAction());
 		outputActionEClass.getESuperTypes().add(this.getAbstractAction());
+		propertyDatumEClass.getESuperTypes().add(this.getAbstractDatum());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(abstractDatumEClass, AbstractDatum.class, "AbstractDatum", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAbstractDatum_Super(), this.getAbstractDatum(), null, "super", null, 0, -1, AbstractDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbstractDatum_Type(), thePivotPackage.getType(), null, "type", null, 1, 1, AbstractDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractDatum_Super(), this.getAbstractDatum(), this.getAbstractDatum_Sub(), "super", null, 0, -1, AbstractDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractDatum_Sub(), this.getAbstractDatum(), this.getAbstractDatum_Super(), "sub", null, 0, -1, AbstractDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractDatum_Domain(), theQVTcoreBasePackage.getCoreDomain(), null, "domain", null, 0, 1, AbstractDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbstractDatum_Sources(), this.getAbstractAction(), this.getAbstractAction_Results(), "sources", null, 0, -1, AbstractDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbstractDatum_Targets(), this.getAbstractAction(), this.getAbstractAction_Arguments(), "targets", null, 0, -1, AbstractDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractDatum_ProducedBy(), this.getAbstractAction(), this.getAbstractAction_Productions(), "producedBy", null, 0, -1, AbstractDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractDatum_RequiredBy(), this.getAbstractAction(), this.getAbstractAction_Requisites(), "requiredBy", null, 0, -1, AbstractDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractDatum_Schedule(), this.getSchedule(), this.getSchedule_Datums(), "schedule", null, 0, 1, AbstractDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractDatum_DataParameter(), this.getDataParameter(), this.getDataParameter_Datum(), "dataParameter", null, 0, -1, AbstractDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(abstractActionEClass, AbstractAction.class, "AbstractAction", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAbstractAction_Results(), this.getAbstractDatum(), this.getAbstractDatum_Sources(), "results", null, 0, -1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbstractAction_DistinctArguments(), this.getDistinctData(), this.getDistinctData_Target(), "distinctArguments", null, 0, -1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractAction_Productions(), this.getAbstractDatum(), this.getAbstractDatum_ProducedBy(), "productions", null, 0, -1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractAction_Requisites(), this.getAbstractDatum(), this.getAbstractDatum_RequiredBy(), "requisites", null, 0, -1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractAction_ParameterDerivations(), this.getParameterDerivation(), this.getParameterDerivation_Target(), "parameterDerivations", null, 0, -1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAbstractAction_Order(), ecorePackage.getEInt(), "order", null, 0, 1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractAction_Parent(), this.getAbstractAction(), this.getAbstractAction_Children(), "parent", null, 0, 1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractAction_Children(), this.getAbstractAction(), this.getAbstractAction_Parent(), "children", null, 0, -1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getAbstractAction_Arguments(), this.getAbstractDatum(), this.getAbstractDatum_Targets(), "arguments", null, 0, -1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractAction_Parameters(), this.getDataParameter(), null, "parameters", null, 0, -1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAbstractAction_Results(), this.getDataParameter(), null, "results", null, 0, -1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractAction_Schedule(), this.getSchedule(), this.getSchedule_Actions(), "schedule", null, 0, 1, AbstractAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(classDatumEClass, ClassDatum.class, "ClassDatum", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getClassDatum_Type(), thePivotPackage.getClass_(), null, "type", null, 1, 1, ClassDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getClassDatum_PropertyDatums(), this.getPropertyDatum(), this.getPropertyDatum_ClassDatum(), "propertyDatums", null, 0, -1, ClassDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(dataParameterEClass, DataParameter.class, "DataParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDataParameter_IsLoop(), ecorePackage.getEBoolean(), "isLoop", null, 0, 1, DataParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDataParameter_Variable(), thePivotPackage.getVariable(), null, "variable", null, 1, 1, DataParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDataParameter_PrimaryDistinctData(), this.getDistinctData(), this.getDistinctData_PrimaryArguments(), "primaryDistinctData", null, 0, 1, DataParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDataParameter_SecondaryDistinctData(), this.getDistinctData(), this.getDistinctData_SecondaryArguments(), "secondaryDistinctData", null, 0, 1, DataParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDataParameter_SecondaryParameter(), this.getSecondaryParameter(), this.getSecondaryParameter_DataParameter(), "secondaryParameter", null, 0, 1, DataParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDataParameter_Datum(), this.getAbstractDatum(), this.getAbstractDatum_DataParameter(), "datum", null, 1, 1, DataParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(distinctDataEClass, DistinctData.class, "DistinctData", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDistinctData_Target(), this.getAbstractAction(), this.getAbstractAction_DistinctArguments(), "target", null, 0, 1, DistinctData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDistinctData_PrimaryArguments(), this.getDataParameter(), this.getDataParameter_PrimaryDistinctData(), "primaryArguments", null, 1, -1, DistinctData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDistinctData_SecondaryArguments(), this.getDataParameter(), this.getDataParameter_SecondaryDistinctData(), "secondaryArguments", null, 0, -1, DistinctData.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(inputActionEClass, InputAction.class, "InputAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(mappingActionEClass, MappingAction.class, "MappingAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMappingAction_Mapping(), theQVTimperativePackage.getMapping(), null, "mapping", null, 1, 1, MappingAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingAction_Mapping(), theQVTimperativePackage.getMapping(), null, "mapping", null, 0, 1, MappingAction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(outputActionEClass, OutputAction.class, "OutputAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(parameterDerivationEClass, ParameterDerivation.class, "ParameterDerivation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getParameterDerivation_Target(), this.getAbstractAction(), this.getAbstractAction_ParameterDerivations(), "target", null, 0, 1, ParameterDerivation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getParameterDerivation_PrimaryParameter(), this.getDataParameter(), null, "primaryParameter", null, 0, 1, ParameterDerivation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getParameterDerivation_SecondaryParameter(), this.getSecondaryParameter(), this.getSecondaryParameter_Derivation(), "secondaryParameter", null, 0, 1, ParameterDerivation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(propertyDatumEClass, PropertyDatum.class, "PropertyDatum", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPropertyDatum_Property(), thePivotPackage.getProperty(), null, "property", null, 1, 1, PropertyDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPropertyDatum_ClassDatum(), this.getClassDatum(), this.getClassDatum_PropertyDatums(), "classDatum", null, 1, 1, PropertyDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPropertyDatum_Opposite(), this.getPropertyDatum(), null, "opposite", null, 0, 1, PropertyDatum.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(scheduleEClass, Schedule.class, "Schedule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSchedule_Datums(), this.getAbstractDatum(), this.getAbstractDatum_Schedule(), "datums", null, 0, -1, Schedule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSchedule_Actions(), this.getAbstractAction(), this.getAbstractAction_Schedule(), "actions", null, 0, -1, Schedule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(secondaryParameterEClass, SecondaryParameter.class, "SecondaryParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSecondaryParameter_IsLoop(), ecorePackage.getEBoolean(), "isLoop", null, 0, 1, SecondaryParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSecondaryParameter_DataParameter(), this.getDataParameter(), this.getDataParameter_SecondaryParameter(), "dataParameter", null, 1, 1, SecondaryParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSecondaryParameter_DerivationProperty(), thePivotPackage.getProperty(), null, "derivationProperty", null, 0, 1, SecondaryParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getSecondaryParameter_Derivation(), this.getParameterDerivation(), this.getParameterDerivation_SecondaryParameter(), "derivation", null, 0, 1, SecondaryParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		// Create resource
 		createResource(eNS_URI);
-
-		// Create annotations
-		// http://www.eclipse.org/OCL/Import
-		createImportAnnotations();
-		// http://www.eclipse.org/emf/2002/Ecore
-		createEcoreAnnotations();
-		// http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot
-		createPivotAnnotations();
 	}
 
-	/**
-	 * Initializes the annotations for <b>http://www.eclipse.org/OCL/Import</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createImportAnnotations() {
-		String source = "http://www.eclipse.org/OCL/Import";	
-		addAnnotation
-		  (this, 
-		   source, 
-		   new String[] {
-			 "ecore", "http://www.eclipse.org/emf/2002/Ecore",
-			 "qvtcb", "../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#/",
-			 "qvti", "../../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore#/"
-		   });
-	}
-
-	/**
-	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";	
-		addAnnotation
-		  (this, 
-		   source, 
-		   new String[] {
-			 "invocationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
-			 "settingDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
-			 "validationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"
-		   });
-	}
-
-	/**
-	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createPivotAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot";	
-		addAnnotation
-		  (getAbstractAction_Arguments(), 
-		   source, 
-		   new String[] {
-			 "derivation", "\n            self.distinctArguments.primaryArguments->union(self.distinctArguments.secondaryArguments)->collect(datum)"
-		   });
-	}
-
-} //qvtschedulePackageImpl
+} //QVTschedulePackageImpl

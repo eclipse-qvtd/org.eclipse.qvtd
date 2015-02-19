@@ -13,13 +13,13 @@ import org.eclipse.emf.ecore.EObject;
  *
  * <p>
  * The following features are supported:
+ * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.Schedule#getDatums <em>Datums</em>}</li>
  *   <li>{@link org.eclipse.qvtd.build.qvtschedule.Schedule#getActions <em>Actions</em>}</li>
  * </ul>
- * </p>
  *
- * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getSchedule()
+ * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getSchedule()
  * @model
  * @generated
  */
@@ -35,7 +35,7 @@ public interface Schedule extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Datums</em>' containment reference list.
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getSchedule_Datums()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getSchedule_Datums()
 	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractDatum#getSchedule
 	 * @model opposite="schedule" containment="true"
 	 * @generated
@@ -53,7 +53,7 @@ public interface Schedule extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Actions</em>' containment reference list.
-	 * @see org.eclipse.qvtd.build.qvtschedule.qvtschedulePackage#getSchedule_Actions()
+	 * @see org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage#getSchedule_Actions()
 	 * @see org.eclipse.qvtd.build.qvtschedule.AbstractAction#getSchedule
 	 * @model opposite="schedule" containment="true"
 	 * @generated
