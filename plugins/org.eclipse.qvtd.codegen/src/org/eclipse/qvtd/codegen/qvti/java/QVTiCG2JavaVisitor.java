@@ -681,7 +681,6 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		if (localContext2 != null) {
 			localContext = localContext2;
 			try {
-				String eName = globalContext.getEName();
 				CGValuedElement cgBody = cgMapping.getBody();
 				List<CGGuardVariable> cgFreeVariables = cgMapping.getFreeVariables();
 				//
@@ -697,27 +696,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 				}
 				js.append(") {\n");
 				js.pushIndentation(null);
-					if (cgBody.isNonInvalid()) {
-						js.append("// predicates\n");
-						cgBody.accept(this);
-						js.append("return true;\n");
-					}
-					else {
-						js.append("try {\n");
-						js.pushIndentation(null);
-							js.append("// predicates\n");
-							cgBody.accept(this);
-							js.append("return true;\n");
-						js.popIndentation();
-						js.append("}\n");
-						js.append("catch (");
-						js.appendClassReference(Exception.class);
-						js.append(" " + eName + ") {\n");
-						js.pushIndentation(null);
-							js.append("return false;\n");
-						js.popIndentation();
-						js.append("}\n");
-					}
+					js.append("// predicates\n");
+					cgBody.accept(this);
+					js.append("return true;\n");
 				js.popIndentation();
 				js.append("}\n");
 			}
