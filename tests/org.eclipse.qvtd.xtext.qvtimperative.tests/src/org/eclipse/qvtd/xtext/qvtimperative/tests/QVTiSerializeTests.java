@@ -143,12 +143,12 @@ public class QVTiSerializeTests extends LoadTestCase
 		doSerializeRoundTrip("HSV2HLS/HSV2HLS");
 	}
 	
-	public void testSerialize_ManualUML2RDBMS() throws Exception {
+	public void testSerialize_ManualUML2RDBMS_qvti() throws Exception {
 		doSerializeRoundTrip("ManualUML2RDBMS/ManualUML2RDBMS");
 	}
 	
-	public void testSerialize_UmlToRdbms_qvti() throws Exception {
-		doSerializeRoundTrip("UMLToRDBMS/UmlToRdbms");
+	public void testSerialize_SimpleUML2RDBMS_qvti() throws Exception {
+		doSerializeRoundTrip("SimpleUML2RDBMS/SimpleUML2RDBMS");
 	}
 /*	protected void doSerialize(@NonNull String stem) throws Exception {
 		URI inputURI = getProjectFileURI(stem + ".qvtias");

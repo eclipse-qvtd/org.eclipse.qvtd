@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ASCII"?>
+<rdbms:Schema xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rdbms="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS"
+    xsi:schemaLocation="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS SimpleRDBMS.ecore" name="People">
+  <tables name="Professor" kind="base">
+    <columns name="Professor_tid" type="NUMBER" keys="//@tables.0/@keys.0"/>
+    <columns name="proffesorLivesAt_tid" type="NUMBER" foreignKeys="//@tables.0/@foreignKeys.0"/>
+    <columns name="employed" type="BOOLEAN"/>
+    <columns name="name" type="VARCHAR"/>
+    <keys name="Professor_pk" kind="primary" column="//@tables.0/@columns.0"/>
+    <foreignKeys name="proffesorLivesAt" refersTo="//@tables.3/@keys.0" columns="//@tables.0/@columns.1"/>
+  </tables>
+  <tables name="Budget" kind="base">
+    <columns name="Budget_tid" type="NUMBER" keys="//@tables.1/@keys.0"/>
+    <columns name="year" type="VARCHAR"/>
+    <keys name="Budget_pk" kind="primary" column="//@tables.1/@columns.0"/>
+  </tables>
+  <tables name="Student" kind="base">
+    <columns name="Student_tid" type="NUMBER" keys="//@tables.2/@keys.0"/>
+    <columns name="studentNumber" type="NUMBER"/>
+    <columns name="guardian" type="VARCHAR"/>
+    <columns name="name" type="VARCHAR"/>
+    <keys name="Student_pk" kind="primary" column="//@tables.2/@columns.0"/>
+  </tables>
+  <tables name="Address" kind="base">
+    <columns name="Address_tid" type="NUMBER" keys="//@tables.3/@keys.0"/>
+    <keys name="Address_pk" kind="primary" column="//@tables.3/@columns.0"/>
+  </tables>
+  <tables name="Timetable" kind="base">
+    <columns name="Timetable_tid" type="NUMBER" keys="//@tables.4/@keys.0"/>
+    <columns name="year" type="VARCHAR"/>
+    <keys name="Timetable_pk" kind="primary" column="//@tables.4/@columns.0"/>
+  </tables>
+  <tables name="ResearchGroup" kind="base">
+    <columns name="ResearchGroup_tid" type="NUMBER" keys="//@tables.5/@keys.0"/>
+    <columns name="name" type="VARCHAR"/>
+    <keys name="ResearchGroup_pk" kind="primary" column="//@tables.5/@columns.0"/>
+  </tables>
+</rdbms:Schema>

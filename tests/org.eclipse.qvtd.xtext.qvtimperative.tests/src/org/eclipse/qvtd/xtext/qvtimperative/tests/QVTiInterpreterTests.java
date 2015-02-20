@@ -42,6 +42,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.ManualUML2RDBMS.ManualRDBMSNormalizer;
+import org.eclipse.qvtd.xtext.qvtimperative.tests.SimpleUML2RDBMS.SimpleRDBMSNormalizer;
 import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.junit.Before;
@@ -329,7 +330,7 @@ public class QVTiInterpreterTests extends LoadTestCase
      * @throws Exception the exception
      */
     @Test
-    public void testUMLToRDBMS() throws Exception {
+    public void testSimpleUML2RDBMS() throws Exception {
     	MyQVT myQVT = createQVT();
         CompleteOCLStandaloneSetup.doSetup();
         URI oclURI = ClassUtil.nonNullState(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true));
@@ -338,14 +339,14 @@ public class QVTiInterpreterTests extends LoadTestCase
         @SuppressWarnings("unused")
 		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, environmentFactory);
         
-        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(environmentFactory, "UMLToRDBMS", "UmlToRdbms.qvti");
+        MyQvtiEvaluator testEvaluator = new MyQvtiEvaluator(environmentFactory, "SimpleUML2RDBMS", "SimpleUML2RDBMS.qvti");
     	testEvaluator.saveTransformation(null);
         //assertNoValidationErrors("Pivot validation errors", testEvaluator.pivotResource.getContents().get(0));
         testEvaluator.loadModel("uml", "SimpleUMLPeople.xmi");
-        testEvaluator.createModel("middle", "UML2RDBMS.xmi");
+        testEvaluator.createModel("middle", "SimpleUML2RDBMS.xmi");
         testEvaluator.createModel("rdbms", "SimpleRDBMSPeople.xmi");
-//FIXME Table.columns not sorted       testEvaluator.loadReference("rdbms", "SimpleRDBMSPeopleValidate.xmi");
-        testEvaluator.test();
+        testEvaluator.loadReference("rdbms", "SimpleRDBMSPeopleValidate.xmi");
+        testEvaluator.test(SimpleRDBMSNormalizer.INSTANCE);
         testEvaluator.dispose();
         
         URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
