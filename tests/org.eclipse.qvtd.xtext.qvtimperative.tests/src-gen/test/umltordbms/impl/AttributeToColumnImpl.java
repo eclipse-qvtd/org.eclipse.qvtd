@@ -31,7 +31,6 @@ import test.umltordbms.UmltordbmsPackage;
  * An implementation of the model object '<em><b>Attribute To Column</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

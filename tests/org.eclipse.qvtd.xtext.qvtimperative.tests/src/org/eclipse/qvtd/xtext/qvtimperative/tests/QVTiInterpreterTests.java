@@ -41,6 +41,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
+import org.eclipse.qvtd.xtext.qvtimperative.tests.ManualUML2RDBMS.ManualRDBMSNormalizer;
 import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.junit.Before;
@@ -152,13 +153,22 @@ public class QVTiInterpreterTests extends LoadTestCase
 		 * @throws Exception the exception
 		 */
 		public void test() throws Exception {
+	    	test(null);
+	    }
+		public void test(@Nullable ModelNormalizer modelNormalizer) throws Exception {
 	    	boolean result = execute();
 	        assertTrue(getClass().getSimpleName() + " should not return null.", result);
 	        saveModels(getProjectFileURI(fileNamePrefix + "middle.xmi"));
 	        for (Entry<TypedModel, Resource> entry : typedModelValidationResourceMap.entrySet()) { // Validate against reference models
 	        	TypedModel typedModel = ClassUtil.nonNullState(entry.getKey());
 	        	Resource expectedModel = entry.getValue();
+	        	assert expectedModel != null;
 	        	Resource actualModel = modelManager.getModel(typedModel);
+	        	assert actualModel != null;
+	        	if (modelNormalizer != null) {
+	        		modelNormalizer.normalize(expectedModel);
+	        		modelNormalizer.normalize(actualModel);
+	        	}
 	            assertSameModel(expectedModel, actualModel);
 	        }
 	    }
@@ -291,7 +301,7 @@ public class QVTiInterpreterTests extends LoadTestCase
      * @throws Exception the exception
      */
     @Test
-    public void testClassToRDBMS() throws Exception {
+    public void testManualUML2RDBMS() throws Exception {
     	MyQVT myQVT = createQVT();
         CompleteOCLStandaloneSetup.doSetup();
         URI oclURI = ClassUtil.nonNullState(URI.createPlatformResourceURI("/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ocl", true));
@@ -299,16 +309,15 @@ public class QVTiInterpreterTests extends LoadTestCase
         @SuppressWarnings("unused")
 		CompleteOCLEObjectValidator completeOCLEObjectValidator2 = new CompleteOCLEObjectValidator(ClassUtil.nonNullState(QVTcoreBasePackage.eINSTANCE), oclURI, myQVT.getEnvironmentFactory());
         
-        MyQvtiEvaluator testEvaluator = myQVT.createEvaluator("ClassToRDBMS", "ClassToRDBMSSchedule.qvti");
+        MyQvtiEvaluator testEvaluator = myQVT.createEvaluator("ManualUML2RDBMS", "ManualUML2RDBMS.qvti");
     	testEvaluator.saveTransformation(null);
         //assertNoValidationErrors("Pivot validation errors", testEvaluator.pivotResource.getContents().get(0));
-        testEvaluator.loadModel("uml", "SimpleUMLPeople.xmi");
-        testEvaluator.createModel("middle", "UML2RDBMS.xmi");
-        testEvaluator.createModel("rdbms", "SimpleRDBMSPeople.xmi");
-//FIXME Table.columns not sorted       testEvaluator.loadReference("rdbms", "SimpleRDBMSPeopleValidate.xmi");
-        testEvaluator.test();
+        testEvaluator.loadModel("uml", "ManualUMLPeople.xmi");
+        testEvaluator.createModel("middle", "ManualUML2RDBMS.xmi");
+        testEvaluator.createModel("rdbms", "ManualRDBMSPeople.xmi");
+        testEvaluator.loadReference("rdbms", "ManualRDBMSPeopleValidate.xmi");
+        testEvaluator.test(ManualRDBMSNormalizer.INSTANCE);
         testEvaluator.dispose();
-        
         URI txURI = ClassUtil.nonNullState(testEvaluator.getTransformation().eResource().getURI());
         assertLoadable(txURI);
         myQVT.dispose();

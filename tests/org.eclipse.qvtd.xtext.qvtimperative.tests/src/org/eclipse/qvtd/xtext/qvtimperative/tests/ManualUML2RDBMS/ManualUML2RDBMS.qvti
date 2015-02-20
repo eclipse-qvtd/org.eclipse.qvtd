@@ -1,24 +1,24 @@
-import SimpleUML: 'SimpleUML.ecore'::simpleuml;
-import SimpleRDBMS: 'SimpleRDBMS.ecore'::simplerdbms;
-import UMLtoRDBMS: 'UMLtoRDBMS.ecore'::umltordbms;
+import UML: 'ManualUML.ecore'::uml;
+import RDBMS: 'ManualRDBMS.ecore'::rdbms;
+import UML2RDBMS: 'ManualUML2RDBMS.ecore'::uml2rdbms;
 
-transformation umlRdbms {
-    uml imports SimpleUML;
-    rdbms imports SimpleRDBMS;
-    middle imports UMLtoRDBMS;
+transformation ManualUML2RDBMS {
+    uml imports UML;
+    rdbms imports RDBMS;
+    middle imports UML2RDBMS;
 }
 
-map __root__ in umlRdbms {
+map __root__ in ManualUML2RDBMS {
     
     where () {}
-    for p1 : SimpleUML::Package in SimpleUML::Package.allInstances() {
+    for p1 : UML::Package in UML::Package.allInstances() {
         call packageToSchemaLM {
             p := p1;
         }
     }
 }
 
-map packageToSchemaLM in umlRdbms {
+map packageToSchemaLM in ManualUML2RDBMS {
     check uml (p:Package) { }
     enforce middle () {
         realize p2s:PackageToSchema
@@ -74,7 +74,7 @@ map packageToSchemaLM in umlRdbms {
     
 }
 
-map packageToSchemaMR in umlRdbms {
+map packageToSchemaMR in ManualUML2RDBMS {
     check middle (p2s:PackageToSchema) {}
     enforce rdbms () {
         realize s:Schema
@@ -109,7 +109,7 @@ map packageToSchemaMR in umlRdbms {
 	}
 }
 
-map packageToSchemaMR_1 in umlRdbms {
+map packageToSchemaMR_1 in ManualUML2RDBMS {
     check middle (p2s_1:PackageToSchema) {}
     enforce rdbms (s_1:Schema) {}
     where () {
@@ -117,7 +117,7 @@ map packageToSchemaMR_1 in umlRdbms {
     }
 }
 
-map integerToNumberLM in umlRdbms {
+map integerToNumberLM in ManualUML2RDBMS {
     check uml (p:Package, prim:PrimitiveDataType) {}
     enforce middle (p2s:PackageToSchema) {
     	realize p2n:PrimitiveToName
@@ -129,10 +129,11 @@ map integerToNumberLM in umlRdbms {
         p2n.owner := p2s;
         p2n.primitive := prim;
         p2n.name := prim.name + '2' + 'NUMBER';     
+		p2n.typeName := 'NUMBER';
     }
 }
 
-map integerToNumberMR in umlRdbms {
+map integerToNumberMR in ManualUML2RDBMS {
     check middle (p2s:PackageToSchema, p2n:PrimitiveToName) {}
     enforce rdbms () {}
     where (
@@ -141,7 +142,7 @@ map integerToNumberMR in umlRdbms {
     ) {}
 }
 
-map booleanToBooleanLM in umlRdbms {
+map booleanToBooleanLM in ManualUML2RDBMS {
     check uml (p:Package, prim:PrimitiveDataType) { }
     enforce middle (p2s:PackageToSchema) {
     	realize p2n:PrimitiveToName
@@ -154,10 +155,11 @@ map booleanToBooleanLM in umlRdbms {
         p2n.owner := p2s;
         p2n.primitive := prim;
         p2n.name := prim.name + '2' + 'BOOLEAN';
+		p2n.typeName := 'BOOLEAN';
     }
 }
 
-map booleanToBooleanMR in umlRdbms {
+map booleanToBooleanMR in ManualUML2RDBMS {
     check middle (p2s:PackageToSchema, p2n:PrimitiveToName) {}
     enforce rdbms () {}
     where (
@@ -166,7 +168,7 @@ map booleanToBooleanMR in umlRdbms {
     ) {}
 }
 
-map stringToVarcharLM in umlRdbms {
+map stringToVarcharLM in ManualUML2RDBMS {
     check uml (p:Package, prim:PrimitiveDataType) { }
     enforce middle (p2s:PackageToSchema) {
     	realize p2n:PrimitiveToName
@@ -179,10 +181,11 @@ map stringToVarcharLM in umlRdbms {
         p2n.owner := p2s;
         p2n.primitive := prim;
         p2n.name := prim.name + '2' + 'VARCHAR';
+		p2n.typeName := 'VARCHAR';
     }
 }
 
-map stringToVarcharMR in umlRdbms {
+map stringToVarcharMR in ManualUML2RDBMS {
     check middle (p2s:PackageToSchema, p2n:PrimitiveToName) {}
     enforce rdbms () {}
     where (
@@ -191,19 +194,19 @@ map stringToVarcharMR in umlRdbms {
     ) {}
 }
 
-query umlRdbms::getAllSupers(cls : SimpleUML::Class) : Set(SimpleUML::Class) {
+query ManualUML2RDBMS::getAllSupers(cls : UML::Class) : Set(UML::Class) {
     cls.general->collect(gen | getAllSupers(gen))->including(cls)->asSet()
 }
 
-query umlRdbms::getAllAttributes(cls :  SimpleUML::Class) : Set( SimpleUML::Attribute) {
+query ManualUML2RDBMS::getAllAttributes(cls :  UML::Class) : Set(UML::Attribute) {
     getAllSupers(cls).attributes -- ->collect(c | c.attribute)
 }
     
-query umlRdbms::getAllForwards(cls :  SimpleUML::Class) : Set( SimpleUML::Association) {
+query ManualUML2RDBMS::getAllForwards(cls : UML::Class) : Set(UML::Association) {
     getAllSupers(cls).forward
 }
 
-map classToTableLM in umlRdbms {
+map classToTableLM in ManualUML2RDBMS {
     check uml (p:Package, c:Class) { }
     enforce middle (p2s:PackageToSchema) {
     	realize c2t:ClassToTable
@@ -240,7 +243,7 @@ map classToTableLM in umlRdbms {
     }
 }
 
-map classToTableMR in umlRdbms {
+map classToTableMR in ManualUML2RDBMS {
     check middle (p2s:PackageToSchema, c2t:ClassToTable) {}
     enforce rdbms (s:Schema) {
         realize t:Table
@@ -274,7 +277,7 @@ map classToTableMR in umlRdbms {
 	    }
     }
     -- A Class has attributes
-    for child in c2t.fromAttributes->union(c2t.fromAttributes->selectByKind(umltordbms::NonLeafAttribute).fromAttributes) {
+    for child in c2t.fromAttributes->union(c2t.fromAttributes->selectByKind(UML2RDBMS::NonLeafAttribute).fromAttributes) {
 	    call attributeColumnsMR {
 	        c2t := c2t;
 	        a2c := child;
@@ -283,7 +286,7 @@ map classToTableMR in umlRdbms {
     }
 }
 
-map classToTableMR_1 in umlRdbms {
+map classToTableMR_1 in ManualUML2RDBMS {
     check middle (c2t_1:ClassToTable) {}
     enforce rdbms (t_1:Table) { }
     where () {
@@ -292,7 +295,7 @@ map classToTableMR_1 in umlRdbms {
     }
 }
 
-map classToTableMR_2 in umlRdbms {
+map classToTableMR_2 in ManualUML2RDBMS {
     check middle (c2t_2:ClassToTable) {}
     enforce rdbms (t_2:Table) {
         realize pk:Key,
@@ -317,7 +320,7 @@ map classToTableMR_2 in umlRdbms {
     }
 }
 
-map classToTableMR_2_1 in umlRdbms {
+map classToTableMR_2_1 in ManualUML2RDBMS {
     check middle (c2t_2_1:ClassToTable) {}
 	enforce rdbms (pk_2_1:Key, pc_2_1:Column) {}
     where () {
@@ -326,7 +329,7 @@ map classToTableMR_2_1 in umlRdbms {
     }
 }
         
-map classToTableMR_2_2 in umlRdbms {
+map classToTableMR_2_2 in ManualUML2RDBMS {
     check middle () {}
     enforce rdbms (pk_2_2:Key, pc_2_2:Column, t_2_2:Table) {}
     where () {
@@ -335,7 +338,7 @@ map classToTableMR_2_2 in umlRdbms {
     }
 }
 
-map associationToForeignKeyLM in umlRdbms {
+map associationToForeignKeyLM in ManualUML2RDBMS {
     check uml (p:Package, sc:Class, dc:Class, a:Association) {
 --            sc.namespace = p;
         }
@@ -368,7 +371,7 @@ map associationToForeignKeyLM in umlRdbms {
     }
 }
 
-map associationToForeignKeyMR in umlRdbms {
+map associationToForeignKeyMR in ManualUML2RDBMS {
     check middle (p2s:PackageToSchema, sc2t:ClassToTable, dc2t:ClassToTable, a2f:AssociationToForeignKey) {}
     enforce rdbms (s:Schema, st:Table, dt:Table, rk:Key) {
         realize fk:ForeignKey,
@@ -405,7 +408,7 @@ map associationToForeignKeyMR in umlRdbms {
     }
 }
 
-map associationToForeignKeyMR_1 in umlRdbms {
+map associationToForeignKeyMR_1 in ManualUML2RDBMS {
     check middle () {}
     enforce rdbms (fk:ForeignKey, fc:Column, dt:Table, rk:Key) {}
     where () {
@@ -415,7 +418,7 @@ map associationToForeignKeyMR_1 in umlRdbms {
     }
 }
 
-map associationToForeignKeyMR_2 in umlRdbms {
+map associationToForeignKeyMR_2 in ManualUML2RDBMS {
     check middle (a2f_1:AssociationToForeignKey) {}
     enforce rdbms (fk_1:ForeignKey, fc_1:Column) {}   
     where () {
@@ -424,7 +427,7 @@ map associationToForeignKeyMR_2 in umlRdbms {
     }
 }
 
-map classPrimitiveAttributesLM in umlRdbms {
+map classPrimitiveAttributesLM in ManualUML2RDBMS {
     check uml (c:Class, t:PrimitiveDataType, a:Attribute) {
         }
     enforce middle (fao:ClassToTable, p2n:PrimitiveToName) {
@@ -447,7 +450,7 @@ map classPrimitiveAttributesLM in umlRdbms {
     }
 }
 
-map classComplexAttributesLM in umlRdbms {
+map classComplexAttributesLM in ManualUML2RDBMS {
     check uml (c:Class, t:Class, a:Attribute) { 
         }
     enforce middle (fao:ClassToTable) {
@@ -467,7 +470,7 @@ map classComplexAttributesLM in umlRdbms {
     }
 }
 
-map complexAttributePrimitiveAttributesLM in umlRdbms {
+map complexAttributePrimitiveAttributesLM in ManualUML2RDBMS {
     check uml (c:Class, ca:Attribute) {
         }
     enforce middle (fao:NonLeafAttribute) {}
@@ -486,7 +489,7 @@ map complexAttributePrimitiveAttributesLM in umlRdbms {
 	}
 }
 
-map complexAttributePrimitiveAttributesLM_1 in umlRdbms {
+map complexAttributePrimitiveAttributesLM_1 in ManualUML2RDBMS {
     check uml (c_1:Class, t_1:PrimitiveDataType, a_1:Attribute, ca_1:Attribute) {
         }
     enforce middle (fao_1:NonLeafAttribute, p2n_1:PrimitiveToName)
@@ -507,7 +510,7 @@ map complexAttributePrimitiveAttributesLM_1 in umlRdbms {
     }
 }
 
-map complexAttributeComplexAttributesLM in umlRdbms {
+map complexAttributeComplexAttributesLM in ManualUML2RDBMS {
     check uml (c:Class, ca:Attribute) {
         }
     enforce middle (fao:NonLeafAttribute) {}
@@ -526,7 +529,7 @@ map complexAttributeComplexAttributesLM in umlRdbms {
 	}
 }
 
-map complexAttributeComplexAttributesLM_1 in umlRdbms {
+map complexAttributeComplexAttributesLM_1 in ManualUML2RDBMS {
     check uml (c_1:Class, ca_1:Attribute, t_1:Class, a_1:Attribute) {
         }
     enforce middle (fao_1:NonLeafAttribute) {
@@ -547,7 +550,7 @@ map complexAttributeComplexAttributesLM_1 in umlRdbms {
 }
 
 
-map attributeColumnsMR in umlRdbms {
+map attributeColumnsMR in ManualUML2RDBMS {
     check middle (c2t:ClassToTable, a2c:AttributeToColumn, p2n:PrimitiveToName) {}
     enforce rdbms (t:Table, ct:String) {
         realize c:Column
@@ -577,7 +580,7 @@ map attributeColumnsMR in umlRdbms {
     }
 }
 
-map attributeColumnsMR_1 in umlRdbms {
+map attributeColumnsMR_1 in ManualUML2RDBMS {
     check middle (a2c_1:AttributeToColumn) {}
     enforce rdbms (c_1:Column) {}
     where () {
@@ -585,7 +588,7 @@ map attributeColumnsMR_1 in umlRdbms {
     }
 }
 
-map attributeColumnsMR_2 in umlRdbms {
+map attributeColumnsMR_2 in ManualUML2RDBMS {
     check middle (p2n_2:PrimitiveToName, a2c_2:AttributeToColumn) {}
     enforce rdbms (c_2:Column, ct_2:String) {}
     where (
@@ -599,7 +602,7 @@ map attributeColumnsMR_2 in umlRdbms {
     }
 }
 
-map attributeColumnsMR_2_1 in umlRdbms {
+map attributeColumnsMR_2_1 in ManualUML2RDBMS {
     check middle (p2n_2_1:PrimitiveToName) {}
     enforce rdbms (ct_2_1:String) {}
     where () {
@@ -607,7 +610,7 @@ map attributeColumnsMR_2_1 in umlRdbms {
     }
 }
 
-map attributeColumnsMR_3 in umlRdbms {
+map attributeColumnsMR_3 in ManualUML2RDBMS {
     check middle (a2c_3:AttributeToColumn) {}
     enforce rdbms (c_3:Column) { }
     where () {

@@ -55,13 +55,11 @@ import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
+import org.eclipse.qvtd.xtext.qvtimperative.tests.ManualUML2RDBMS.ManualRDBMSNormalizer;
 
 import test.hls.HLSTree.HLSTreePackage;
 import test.hsv.HSVTree.HSVTreePackage;
 import test.middle.HSV2HLS.HSV2HLSPackage;
-import test.simplerdbms.SimplerdbmsPackage;
-import test.simpleuml.SimpleumlPackage;
-import test.umltordbms.UmltordbmsPackage;
 
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
@@ -230,18 +228,17 @@ public class QVTiCompilerTests extends LoadTestCase
 		myQVT.dispose();
 	}
 
-	public void testCG_ClassToRDBMS_qvti() throws Exception {
+	public void testCG_ManualUML2RDBMS_qvti() throws Exception {
     	MyQVT myQVT = createQVT();
-		ResourceSet resourceSet = new ResourceSetImpl();
-		Registry packageRegistry = resourceSet.getPackageRegistry();
-		packageRegistry.put(SimpleumlPackage.eNS_URI, SimpleumlPackage.eINSTANCE);
-		packageRegistry.put(UmltordbmsPackage.eNS_URI, UmltordbmsPackage.eINSTANCE);
-		packageRegistry.put(SimplerdbmsPackage.eNS_URI, SimplerdbmsPackage.eINSTANCE);
-		URI transformURI = getProjectFileURI("ClassToRDBMS/ClassToRDBMSSchedule.qvti");
-		URI genModelURI = getProjectFileURI("ClassToRDBMS/UMLtoRDBMS.genmodel");
-		URI inputModelURI = getProjectFileURI("ClassToRDBMS/SimpleUMLPeople.xmi");
-		URI outputModelURI = getProjectFileURI("ClassToRDBMS/SimpleRDBMSPeople.xmi");
-		URI referenceModelURI = getProjectFileURI("ClassToRDBMS/SimpleRDBMSPeopleValidate.xmi");
+		ResourceSet resourceSet = myQVT.getResourceSet();
+//		Resource umlResource = resourceSet.getResource(URI.createURI(manualuml2rdbms.uml.UMLPackage.eNS_URI, false), false);
+//		Resource rdbmsResource = resourceSet.getResource(URI.createURI(manualuml2rdbms.rdbms.RDBMSPackage.eNS_URI, false), false);
+//		Resource uml2rdbmsResource = resourceSet.getResource(URI.createURI(manualuml2rdbms.uml2rdbms.UML2RDBMSPackage.eNS_URI, false), false);
+		URI transformURI = getProjectFileURI("ManualUML2RDBMS/ManualUML2RDBMS.qvti");
+		URI genModelURI = getProjectFileURI("ManualUML2RDBMS/ManualUML2RDBMS.genmodel");
+		URI inputModelURI = getProjectFileURI("ManualUML2RDBMS/ManualUMLPeople.xmi");
+		URI outputModelURI = getProjectFileURI("ManualUML2RDBMS/ManualRDBMSPeople.xmi");
+		URI referenceModelURI = getProjectFileURI("ManualUML2RDBMS/ManualRDBMSPeopleValidate.xmi");
 		Transformation asTransformation = loadTransformation(myQVT, transformURI, genModelURI);
 		assert asTransformation != null;
 		Class<? extends TransformationExecutor> txClass = generateCode(myQVT, asTransformation, "../org.eclipse.qvtd.xtext.qvtimperative.tests/src-gen/");
@@ -256,10 +253,12 @@ public class QVTiCompilerTests extends LoadTestCase
 		outputResource.save(getSaveOptions());
 		Resource referenceResource = resourceSet.getResource(referenceModelURI, true);
 		assert referenceResource != null;
+		ManualRDBMSNormalizer.INSTANCE.normalize(referenceResource);
+		ManualRDBMSNormalizer.INSTANCE.normalize(outputResource);
         assertSameModel(referenceResource, outputResource);
         myQVT.dispose();
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	public Class<? extends TransformationExecutor> compileTransformation(@NonNull QVTiCodeGenerator cg) throws Exception {
 		String qualifiedName = cg.getQualifiedName();

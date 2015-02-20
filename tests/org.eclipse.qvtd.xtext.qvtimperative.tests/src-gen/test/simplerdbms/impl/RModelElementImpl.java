@@ -27,7 +27,6 @@ import test.simplerdbms.SimplerdbmsPackage;
  * An implementation of the model object '<em><b>RModel Element</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

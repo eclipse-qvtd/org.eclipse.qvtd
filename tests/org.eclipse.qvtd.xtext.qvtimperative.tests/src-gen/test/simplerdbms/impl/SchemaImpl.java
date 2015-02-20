@@ -28,7 +28,6 @@ import test.simplerdbms.Table;
  * An implementation of the model object '<em><b>Schema</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

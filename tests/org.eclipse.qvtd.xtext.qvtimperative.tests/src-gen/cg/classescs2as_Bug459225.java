@@ -192,41 +192,36 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
      * }
      */
     protected boolean createPackage(final @NonNull /*@NonInvalid*/ PackageCS packageCS) {
+        // predicates
+        // creations
+        final /*@Thrown*/ Package symbol_0 = ClassesFactory.eINSTANCE.createPackage();
+        assert symbol_0 != null;
+        modelObjects[1/*rightAS*/].add(symbol_0);
+        // assignments
+        @Nullable /*@Caught*/ Object CAUGHT_name;
         try {
-            // predicates
-            // creations
-            final /*@Thrown*/ Package symbol_0 = ClassesFactory.eINSTANCE.createPackage();
-            assert symbol_0 != null;
-            modelObjects[1/*rightAS*/].add(symbol_0);
-            // assignments
-            @Nullable /*@Caught*/ Object CAUGHT_name;
-            try {
-                final @Nullable /*@Thrown*/ String name = packageCS.getName();
-                CAUGHT_name = name;
-            }
-            catch (Exception e) {
-                CAUGHT_name = ValueUtil.createInvalidValue(e);
-            }
-            final /*@NonInvalid*/ boolean symbol_1 = (CAUGHT_name == null) || (CAUGHT_name instanceof InvalidValueException);
-            final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(symbol_1);
-            if (not == null) {
-                throw new InvalidValueException("Null if condition");
-            }
-            @NonNull /*@Thrown*/ String symbol_2;
-            if (not) {
-                final @NonNull /*@Thrown*/ String computeName = this.computeName(packageCS);
-                symbol_2 = computeName;
-            }
-            else {
-                symbol_2 = STR_unnamed;
-            }
-            symbol_0.setName(symbol_2);
-            // mapping statements
-            return true;
+            final @Nullable /*@Thrown*/ String name = packageCS.getName();
+            CAUGHT_name = name;
         }
         catch (Exception e) {
-            return false;
+            CAUGHT_name = ValueUtil.createInvalidValue(e);
         }
+        final /*@NonInvalid*/ boolean symbol_1 = (CAUGHT_name == null) || (CAUGHT_name instanceof InvalidValueException);
+        final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(symbol_1);
+        if (not == null) {
+            throw new InvalidValueException("Null if condition");
+        }
+        @NonNull /*@Thrown*/ String symbol_2;
+        if (not) {
+            final @NonNull /*@Thrown*/ String computeName = this.computeName(packageCS);
+            symbol_2 = computeName;
+        }
+        else {
+            symbol_2 = STR_unnamed;
+        }
+        symbol_0.setName(symbol_2);
+        // mapping statements
+        return true;
     }
     
     /**
@@ -245,27 +240,22 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
      * }
      */
     protected boolean __root__() {
-        try {
-            // predicates
-            final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-            final @NonNull /*@NonInvalid*/ Class TYP_classescs_c_c_PackageCS_0 = idResolver.getClass(CLSSid_PackageCS, null);
-            // creations
-            // assignments
-            // mapping statements
-            final @NonNull /*@Thrown*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_0);
-            final List<PackageCS> UNBOXED_allInstances = allInstances.asEcoreObjects(idResolver, PackageCS.class);
-            assert UNBOXED_allInstances != null;
-            ;
-            for (PackageCS packageCS_1 : UNBOXED_allInstances) {
-                if (packageCS_1 != null) {
-                    final @NonNull /*@NonInvalid*/ PackageCS symbol_1 = (PackageCS)packageCS_1;
-                    createPackage(symbol_1);
-                }
+        // predicates
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ Class TYP_classescs_c_c_PackageCS_0 = idResolver.getClass(CLSSid_PackageCS, null);
+        // creations
+        // assignments
+        // mapping statements
+        final @NonNull /*@Thrown*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_0);
+        final List<PackageCS> UNBOXED_allInstances = allInstances.asEcoreObjects(idResolver, PackageCS.class);
+        assert UNBOXED_allInstances != null;
+        ;
+        for (PackageCS packageCS_1 : UNBOXED_allInstances) {
+            if (packageCS_1 != null) {
+                final @NonNull /*@NonInvalid*/ PackageCS symbol_1 = (PackageCS)packageCS_1;
+                createPackage(symbol_1);
             }
-            return true;
         }
-        catch (Exception e) {
-            return false;
-        }
+        return true;
     }
 }

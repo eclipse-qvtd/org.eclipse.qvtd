@@ -38,7 +38,6 @@ import test.simplerdbms.Table;
  * An implementation of the model object '<em><b>Key</b></em>'.
  * <!-- end-user-doc -->
  * <p>
- * <p>
  * The following features are implemented:
  * </p>
  * <ul>

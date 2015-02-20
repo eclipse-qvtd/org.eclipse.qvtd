@@ -121,28 +121,23 @@ public class hsv2hls extends AbstractTransformationExecutor
      * }
      */
     protected boolean __root__() {
-        try {
-            // predicates
-            final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-            final @NonNull /*@NonInvalid*/ Class TYP_HSVTree_c_c_HSVNode_0 = idResolver.getClass(CLSSid_HSVNode, null);
-            // creations
-            // assignments
-            // mapping statements
-            final @NonNull /*@Thrown*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_HSVNode, TYP_HSVTree_c_c_HSVNode_0);
-            final List<HSVNode> UNBOXED_allInstances = allInstances.asEcoreObjects(idResolver, HSVNode.class);
-            assert UNBOXED_allInstances != null;
-            ;
-            for (HSVNode hsvRoot_1 : UNBOXED_allInstances) {
-                if (hsvRoot_1 != null) {
-                    final @NonNull /*@NonInvalid*/ HSVNode symbol_1 = (HSVNode)hsvRoot_1;
-                    HSV2MiddleRoot(symbol_1);
-                }
+        // predicates
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ Class TYP_HSVTree_c_c_HSVNode_0 = idResolver.getClass(CLSSid_HSVNode, null);
+        // creations
+        // assignments
+        // mapping statements
+        final @NonNull /*@Thrown*/ SetValue allInstances = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_HSVNode, TYP_HSVTree_c_c_HSVNode_0);
+        final List<HSVNode> UNBOXED_allInstances = allInstances.asEcoreObjects(idResolver, HSVNode.class);
+        assert UNBOXED_allInstances != null;
+        ;
+        for (HSVNode hsvRoot_1 : UNBOXED_allInstances) {
+            if (hsvRoot_1 != null) {
+                final @NonNull /*@NonInvalid*/ HSVNode symbol_1 = (HSVNode)hsvRoot_1;
+                HSV2MiddleRoot(symbol_1);
             }
-            return true;
         }
-        catch (Exception e) {
-            return false;
-        }
+        return true;
     }
     
     /**
@@ -177,37 +172,32 @@ public class hsv2hls extends AbstractTransformationExecutor
      * }
      */
     protected boolean HSV2MiddleRoot(final @NonNull /*@NonInvalid*/ HSVNode hsvRoot) {
-        try {
-            // predicates
-            final @Nullable /*@Thrown*/ HSVNode parent = hsvRoot.getParent();
-            final /*@Thrown*/ boolean eq = parent == null;
-            if (!eq) {
-                return false;
-            }
-            // creations
-            final /*@Thrown*/ HSVNode2HLSNode middleRoot = HSV2HLSFactory.eINSTANCE.createHSVNode2HLSNode();
-            assert middleRoot != null;
-            modelObjects[2/*middle*/].add(middleRoot);
-            // assignments
-            middleRoot.setHsv(hsvRoot);
-            final @Nullable /*@Thrown*/ String name = hsvRoot.getName();
-            middleRoot.setName(name);
-            // mapping statements
-            final @Nullable /*@Thrown*/ List<HSVNode> children = hsvRoot.getChildren();
-            assert children != null;
-            ;
-            for (HSVNode hsvChild : children) {
-                if (hsvChild != null) {
-                    final @NonNull /*@NonInvalid*/ HSVNode symbol_3 = (HSVNode)hsvChild;
-                    HSV2MiddleRecursion(symbol_3, middleRoot);
-                }
-            }
-            Middle2HLSRoot(middleRoot);
-            return true;
-        }
-        catch (Exception e) {
+        // predicates
+        final @Nullable /*@Thrown*/ HSVNode parent = hsvRoot.getParent();
+        final /*@Thrown*/ boolean eq = parent == null;
+        if (!eq) {
             return false;
         }
+        // creations
+        final /*@Thrown*/ HSVNode2HLSNode middleRoot = HSV2HLSFactory.eINSTANCE.createHSVNode2HLSNode();
+        assert middleRoot != null;
+        modelObjects[2/*middle*/].add(middleRoot);
+        // assignments
+        middleRoot.setHsv(hsvRoot);
+        final @Nullable /*@Thrown*/ String name = hsvRoot.getName();
+        middleRoot.setName(name);
+        // mapping statements
+        final @Nullable /*@Thrown*/ List<HSVNode> children = hsvRoot.getChildren();
+        assert children != null;
+        ;
+        for (HSVNode hsvChild : children) {
+            if (hsvChild != null) {
+                final @NonNull /*@NonInvalid*/ HSVNode symbol_3 = (HSVNode)hsvChild;
+                HSV2MiddleRecursion(symbol_3, middleRoot);
+            }
+        }
+        Middle2HLSRoot(middleRoot);
+        return true;
     }
     
     /**
@@ -241,32 +231,27 @@ public class hsv2hls extends AbstractTransformationExecutor
      * }
      */
     protected boolean HSV2MiddleRecursion(final @NonNull /*@NonInvalid*/ HSVNode hsvNode, final @NonNull /*@NonInvalid*/ HSVNode2HLSNode middleParent) {
-        try {
-            // predicates
-            // creations
-            final /*@Thrown*/ HSVNode2HLSNode middleNode_1 = HSV2HLSFactory.eINSTANCE.createHSVNode2HLSNode();
-            assert middleNode_1 != null;
-            modelObjects[2/*middle*/].add(middleNode_1);
-            // assignments
-            middleNode_1.setParent(middleParent);
-            middleNode_1.setHsv(hsvNode);
-            final @Nullable /*@Thrown*/ String name = hsvNode.getName();
-            middleNode_1.setName(name);
-            // mapping statements
-            final @Nullable /*@Thrown*/ List<HSVNode> children = hsvNode.getChildren();
-            assert children != null;
-            ;
-            for (HSVNode hsvChild : children) {
-                if (hsvChild != null) {
-                    final @NonNull /*@NonInvalid*/ HSVNode symbol_4 = (HSVNode)hsvChild;
-                    HSV2MiddleRecursion(symbol_4, middleNode_1);
-                }
+        // predicates
+        // creations
+        final /*@Thrown*/ HSVNode2HLSNode middleNode_1 = HSV2HLSFactory.eINSTANCE.createHSVNode2HLSNode();
+        assert middleNode_1 != null;
+        modelObjects[2/*middle*/].add(middleNode_1);
+        // assignments
+        middleNode_1.setParent(middleParent);
+        middleNode_1.setHsv(hsvNode);
+        final @Nullable /*@Thrown*/ String name = hsvNode.getName();
+        middleNode_1.setName(name);
+        // mapping statements
+        final @Nullable /*@Thrown*/ List<HSVNode> children = hsvNode.getChildren();
+        assert children != null;
+        ;
+        for (HSVNode hsvChild : children) {
+            if (hsvChild != null) {
+                final @NonNull /*@NonInvalid*/ HSVNode symbol_4 = (HSVNode)hsvChild;
+                HSV2MiddleRecursion(symbol_4, middleNode_1);
             }
-            return true;
         }
-        catch (Exception e) {
-            return false;
-        }
+        return true;
     }
     
     /**
@@ -298,32 +283,27 @@ public class hsv2hls extends AbstractTransformationExecutor
      * }
      */
     protected boolean Middle2HLSRoot(final @NonNull /*@NonInvalid*/ HSVNode2HLSNode middleNode) {
-        try {
-            // predicates
-            // creations
-            final /*@Thrown*/ HLSNode hlsNode = HLSTreeFactory.eINSTANCE.createHLSNode();
-            assert hlsNode != null;
-            modelObjects[1/*hls*/].add(hlsNode);
-            // assignments
-            hlsNode.setParent(null);
-            middleNode.setHls(hlsNode);
-            final @Nullable /*@Thrown*/ String name = middleNode.getName();
-            hlsNode.setName(name);
-            // mapping statements
-            final @Nullable /*@Thrown*/ List<HSVNode2HLSNode> children = middleNode.getChildren();
-            assert children != null;
-            ;
-            for (HSVNode2HLSNode middleChild : children) {
-                if (middleChild != null) {
-                    final @NonNull /*@NonInvalid*/ HSVNode2HLSNode symbol_4 = (HSVNode2HLSNode)middleChild;
-                    Middle2HLSRecursion(symbol_4);
-                }
+        // predicates
+        // creations
+        final /*@Thrown*/ HLSNode hlsNode = HLSTreeFactory.eINSTANCE.createHLSNode();
+        assert hlsNode != null;
+        modelObjects[1/*hls*/].add(hlsNode);
+        // assignments
+        hlsNode.setParent(null);
+        middleNode.setHls(hlsNode);
+        final @Nullable /*@Thrown*/ String name = middleNode.getName();
+        hlsNode.setName(name);
+        // mapping statements
+        final @Nullable /*@Thrown*/ List<HSVNode2HLSNode> children = middleNode.getChildren();
+        assert children != null;
+        ;
+        for (HSVNode2HLSNode middleChild : children) {
+            if (middleChild != null) {
+                final @NonNull /*@NonInvalid*/ HSVNode2HLSNode symbol_4 = (HSVNode2HLSNode)middleChild;
+                Middle2HLSRecursion(symbol_4);
             }
-            return true;
         }
-        catch (Exception e) {
-            return false;
-        }
+        return true;
     }
     
     /**
@@ -355,36 +335,31 @@ public class hsv2hls extends AbstractTransformationExecutor
      * }
      */
     protected boolean Middle2HLSRecursion(final @NonNull /*@NonInvalid*/ HSVNode2HLSNode middleNode_0) {
-        try {
-            // predicates
-            // creations
-            final /*@Thrown*/ HLSNode hlsNode = HLSTreeFactory.eINSTANCE.createHLSNode();
-            assert hlsNode != null;
-            modelObjects[1/*hls*/].add(hlsNode);
-            // assignments
-            final @Nullable /*@Thrown*/ HSVNode2HLSNode parent = middleNode_0.getParent();
-            if (parent == null) {
-                throw new InvalidValueException("Null source for \'HSV2HLS::HSVNode2HLSNode::hls\'");
-            }
-            final @Nullable /*@Thrown*/ HLSNode hls = parent.getHls();
-            hlsNode.setParent(hls);
-            middleNode_0.setHls(hlsNode);
-            final @Nullable /*@Thrown*/ String name = middleNode_0.getName();
-            hlsNode.setName(name);
-            // mapping statements
-            final @Nullable /*@Thrown*/ List<HSVNode2HLSNode> children = middleNode_0.getChildren();
-            assert children != null;
-            ;
-            for (HSVNode2HLSNode middleChild : children) {
-                if (middleChild != null) {
-                    final @NonNull /*@NonInvalid*/ HSVNode2HLSNode symbol_4 = (HSVNode2HLSNode)middleChild;
-                    Middle2HLSRecursion(symbol_4);
-                }
-            }
-            return true;
+        // predicates
+        // creations
+        final /*@Thrown*/ HLSNode hlsNode = HLSTreeFactory.eINSTANCE.createHLSNode();
+        assert hlsNode != null;
+        modelObjects[1/*hls*/].add(hlsNode);
+        // assignments
+        final @Nullable /*@Thrown*/ HSVNode2HLSNode parent = middleNode_0.getParent();
+        if (parent == null) {
+            throw new InvalidValueException("Null source for \'HSV2HLS::HSVNode2HLSNode::hls\'");
         }
-        catch (Exception e) {
-            return false;
+        final @Nullable /*@Thrown*/ HLSNode hls = parent.getHls();
+        hlsNode.setParent(hls);
+        middleNode_0.setHls(hlsNode);
+        final @Nullable /*@Thrown*/ String name = middleNode_0.getName();
+        hlsNode.setName(name);
+        // mapping statements
+        final @Nullable /*@Thrown*/ List<HSVNode2HLSNode> children = middleNode_0.getChildren();
+        assert children != null;
+        ;
+        for (HSVNode2HLSNode middleChild : children) {
+            if (middleChild != null) {
+                final @NonNull /*@NonInvalid*/ HSVNode2HLSNode symbol_4 = (HSVNode2HLSNode)middleChild;
+                Middle2HLSRecursion(symbol_4);
+            }
         }
+        return true;
     }
 }

@@ -15,7 +15,7 @@
       <package
             uri="dummy-protocol://dummy-nsuri/qvt/examples/0.1/UMLtoRDBMS"
             class="test.umltordbms.UmltordbmsPackage"
-            genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassToRDBMS/UMLtoRDBMS.genmodel"/>
+            genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ManualUML2RDBMS/ManualUML2RDBMS.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
@@ -34,7 +34,7 @@
       <package
             uri="dummy-protocol://dummy-nsuri/qvt/examples/0.1/simpleUML"
             class="test.simpleuml.SimpleumlPackage"
-            genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassToRDBMS/UMLtoRDBMS.genmodel"/>
+            genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ManualUML2RDBMS/ManualUML2RDBMS.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
@@ -53,7 +53,7 @@
       <package
             uri="dummy-protocol://dummy-nsuri/qvt/examples/0.1/SimpleRDBMS"
             class="test.simplerdbms.SimplerdbmsPackage"
-            genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassToRDBMS/UMLtoRDBMS.genmodel"/>
+            genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ManualUML2RDBMS/ManualUML2RDBMS.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.extension_parser">
@@ -97,5 +97,28 @@
             uri="dummy-protocol://dummy-nsuri/qvt/ocldependencyanalysis/classes/1.0"
             class="classes.ClassesPackage"
             genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ClassesCS2AS/ClassesCS2AS.genmodel"/>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ManualUML2RDBMS -->
+      <package
+            uri="http://www.eclipse.org/qvt/examples/0.1/ManualUML2RDBMS"
+            class="manualuml2rdbms.uml2rdbms.UML2RDBMSPackage"
+            genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ManualUML2RDBMS/ManualUML2RDBMS.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ManualUML2RDBMS -->
+      <package
+            uri="http://www.eclipse.org/qvt/examples/0.1/ManualUML"
+            class="manualuml2rdbms.uml.UMLPackage"
+            genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ManualUML2RDBMS/ManualUML2RDBMS.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated ManualUML2RDBMS -->
+      <package
+            uri="http://www.eclipse.org/qvt/examples/0.1/ManualRDBMS"
+            class="manualuml2rdbms.rdbms.RDBMSPackage"
+            genModel="src/org/eclipse/qvtd/xtext/qvtimperative/tests/ManualUML2RDBMS/ManualUML2RDBMS.genmodel"/>
    </extension>
 </plugin>

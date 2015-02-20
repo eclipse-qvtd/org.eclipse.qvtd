@@ -127,10 +127,6 @@ public class QVTiSerializeTests extends LoadTestCase
 		QVTimperativeStandaloneSetup.doSetup();
 	}
 	
-	public void testSerialize_ClassToRDBMS() throws Exception {
-		doSerializeRoundTrip("ClassToRDBMS/ClassToRDBMSSchedule");
-	}
-	
 	public void testSerialize_Expressions() throws Exception {
 		doSerializeRoundTrip("Expressions/Expressions");
 	}
@@ -145,6 +141,10 @@ public class QVTiSerializeTests extends LoadTestCase
 	
 	public void testSerialize_HSV2HLS_qvti() throws Exception {
 		doSerializeRoundTrip("HSV2HLS/HSV2HLS");
+	}
+	
+	public void testSerialize_ManualUML2RDBMS() throws Exception {
+		doSerializeRoundTrip("ManualUML2RDBMS/ManualUML2RDBMS");
 	}
 	
 	public void testSerialize_UmlToRdbms_qvti() throws Exception {

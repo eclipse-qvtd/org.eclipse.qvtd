@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="ASCII"?>
-<simplerdbms:Schema xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI"
- xmlns:simplerdbms="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS"
- xsi:schemaLocation="http://www.eclipse.org/qvt/examples/0.1/SimpleRDBMS SimpleRDBMS.ecore"
- name="People">
+<rdbms:Schema xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:rdbms="http://www.eclipse.org/qvt/examples/0.1/ManualRDBMS"
+    xsi:schemaLocation="http://www.eclipse.org/qvt/examples/0.1/ManualRDBMS java://manualuml2rdbms.rdbms.RDBMSPackage" name="People">
   <tables name="Student" kind="base">
     <column name="Student_tid" type="NUMBER" key="//@tables.0/@key.0"/>
-    <column/>
-    <column/>
-    <column/>
-    <column/>
+    <column name="timeTable_year" type="VARCHAR"/>
+    <column name="studentNumber" type="NUMBER"/>
+    <column name="name" type="VARCHAR"/>
+    <column name="guardian" type="VARCHAR"/>
     <key name="Student_pk" kind="primary" column="//@tables.0/@column.0"/>
   </tables>
   <tables name="Professor" kind="base">
     <column name="Professor_tid" type="NUMBER" key="//@tables.1/@key.0"/>
-    <column/>
-    <column/>
-    <column/>
+    <column name="group_name" type="VARCHAR"/>
+    <column name="employed" type="BOOLEAN"/>
+    <column name="name" type="VARCHAR"/>
     <key name="Professor_pk" kind="primary" column="//@tables.1/@column.0"/>
   </tables>
   <tables name="Address" kind="base">
@@ -24,18 +22,18 @@
   </tables>
   <tables name="Timetable" kind="base">
     <column name="Timetable_tid" type="NUMBER" key="//@tables.3/@key.0"/>
-    <column/>
+    <column name="year" type="VARCHAR"/>
     <key name="Timetable_pk" kind="primary" column="//@tables.3/@column.0"/>
   </tables>
   <tables name="ResearchGroup" kind="base">
     <column name="ResearchGroup_tid" type="NUMBER" key="//@tables.4/@key.0"/>
-    <column/>
-    <column/>
+    <column name="budget_year" type="VARCHAR"/>
+    <column name="name" type="VARCHAR"/>
     <key name="ResearchGroup_pk" kind="primary" column="//@tables.4/@column.0"/>
   </tables>
   <tables name="Budget" kind="base">
     <column name="Budget_tid" type="NUMBER" key="//@tables.5/@key.0"/>
-    <column/>
+    <column name="year" type="VARCHAR"/>
     <key name="Budget_pk" kind="primary" column="//@tables.5/@column.0"/>
   </tables>
-</simplerdbms:Schema>
+</rdbms:Schema>
