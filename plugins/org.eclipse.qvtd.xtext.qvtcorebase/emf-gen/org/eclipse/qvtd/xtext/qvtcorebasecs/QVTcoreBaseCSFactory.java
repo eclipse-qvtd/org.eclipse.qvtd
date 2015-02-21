@@ -93,6 +93,15 @@ public interface QVTcoreBaseCSFactory extends EFactory {
 	ParamDeclarationCS createParamDeclarationCS();
 
 	/**
+	 * Returns a new object of class '<em>Predicate CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Predicate CS</em>'.
+	 * @generated
+	 */
+	PredicateCS createPredicateCS();
+
+	/**
 	 * Returns a new object of class '<em>Query CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

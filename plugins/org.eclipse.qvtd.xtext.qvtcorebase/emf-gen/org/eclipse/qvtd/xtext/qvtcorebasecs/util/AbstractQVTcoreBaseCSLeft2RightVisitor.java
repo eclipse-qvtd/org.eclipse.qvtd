@@ -94,6 +94,11 @@ public abstract class AbstractQVTcoreBaseCSLeft2RightVisitor
 	}
 
 	@Override
+	public @Nullable Element visitPredicateCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS csElement) {
+		return visitExpCS(csElement);
+	}
+
+	@Override
 	public @Nullable Element visitQueryCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS csElement) {
 		return visitTypedElementCS(csElement);
 	}

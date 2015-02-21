@@ -94,6 +94,11 @@ public abstract class AbstractQVTcoreBaseCSContainmentVisitor
 	}
 
 	@Override
+	public @Nullable Continuation<?> visitPredicateCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS csElement) {
+		return visitExpCS(csElement);
+	}
+
+	@Override
 	public @Nullable Continuation<?> visitQueryCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS csElement) {
 		return visitTypedElementCS(csElement);
 	}

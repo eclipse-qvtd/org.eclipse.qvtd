@@ -25,6 +25,7 @@ import org.eclipse.ocl.xtext.basecs.TypeCS;
 import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.basecs.util.VisitableCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.*;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
@@ -221,6 +222,18 @@ public class QVTcoreBaseCSSwitch<T> extends Switch<T> {
 				if (result == null) result = caseElementCS(patternCS);
 				if (result == null) result = casePivotable(patternCS);
 				if (result == null) result = caseVisitableCS(patternCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTcoreBaseCSPackage.PREDICATE_CS: {
+				PredicateCS predicateCS = (PredicateCS)theEObject;
+				T result = casePredicateCS(predicateCS);
+				if (result == null) result = caseExpCS(predicateCS);
+				if (result == null) result = caseModelElementCS(predicateCS);
+				if (result == null) result = casePivotableElementCS(predicateCS);
+				if (result == null) result = caseElementCS(predicateCS);
+				if (result == null) result = casePivotable(predicateCS);
+				if (result == null) result = caseVisitableCS(predicateCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -449,6 +462,21 @@ public class QVTcoreBaseCSSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePatternCS(PatternCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Predicate CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Predicate CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePredicateCS(PredicateCS object) {
 		return null;
 	}
 

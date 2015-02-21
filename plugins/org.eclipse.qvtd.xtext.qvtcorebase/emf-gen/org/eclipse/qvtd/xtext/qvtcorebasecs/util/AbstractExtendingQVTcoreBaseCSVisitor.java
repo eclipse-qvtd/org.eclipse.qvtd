@@ -91,6 +91,11 @@ public abstract class AbstractExtendingQVTcoreBaseCSVisitor<R, C>
 	}
 
 	@Override
+	public @Nullable R visitPredicateCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS object) {
+		return visitExpCS(object);
+	}
+
+	@Override
 	public @Nullable R visitQueryCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS object) {
 		return visitTypedElementCS(object);
 	}

@@ -23,6 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getEnforcementOperations <em>Enforcement Operations</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getRealizedVariables <em>Realized Variables</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getConstraints <em>Constraints</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getBottomPatternCS()
@@ -61,5 +62,21 @@ public interface BottomPatternCS extends PatternCS {
 	 * @generated
 	 */
 	EList<RealizedVariableCS> getRealizedVariables();
+
+	/**
+	 * Returns the value of the '<em><b>Constraints</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Constraints</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Constraints</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getBottomPatternCS_Constraints()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<AssignmentCS> getConstraints();
 
 } // BottomPatternCS

@@ -34,6 +34,8 @@
         upperBound="-1" eType="#//EnforcementOperationCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="realizedVariables" upperBound="-1"
         eType="#//RealizedVariableCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
+        eType="#//AssignmentCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DirectionCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//NamedElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
@@ -50,13 +52,19 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="operationCall" eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//NameExpCS"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="GuardPatternCS" eSuperTypes="#//PatternCS"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GuardPatternCS" eSuperTypes="#//PatternCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPredicates" upperBound="-1"
+        eType="#//PredicateCS" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ParamDeclarationCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//TypedElementCS"/>
   <eClassifiers xsi:type="ecore:EClass" name="PatternCS" abstract="true" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//ModelElementCS">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
-        eType="#//AssignmentCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="unrealizedVariables" upperBound="-1"
         eType="#//UnrealizedVariableCS" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PredicateCS" eSuperTypes="../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedCondition" lowerBound="1"
+        eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="QueryCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//TypedElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="pathName" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"

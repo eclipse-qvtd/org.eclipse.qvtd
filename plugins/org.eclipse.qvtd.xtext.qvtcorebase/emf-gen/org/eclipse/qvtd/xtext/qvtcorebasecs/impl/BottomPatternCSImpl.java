@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
@@ -37,6 +38,7 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.util.QVTcoreBaseCSVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.BottomPatternCSImpl#getEnforcementOperations <em>Enforcement Operations</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.BottomPatternCSImpl#getRealizedVariables <em>Realized Variables</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.BottomPatternCSImpl#getConstraints <em>Constraints</em>}</li>
  * </ul>
  *
  * @generated
@@ -61,6 +63,16 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	 * @ordered
 	 */
 	protected EList<RealizedVariableCS> realizedVariables;
+
+	/**
+	 * The cached value of the '{@link #getConstraints() <em>Constraints</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstraints()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<AssignmentCS> constraints;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -113,12 +125,27 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	 * @generated
 	 */
 	@Override
+	public EList<AssignmentCS> getConstraints() {
+		if (constraints == null) {
+			constraints = new EObjectContainmentEList<AssignmentCS>(AssignmentCS.class, this, QVTcoreBaseCSPackage.BOTTOM_PATTERN_CS__CONSTRAINTS);
+		}
+		return constraints;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTcoreBaseCSPackage.BOTTOM_PATTERN_CS__ENFORCEMENT_OPERATIONS:
 				return ((InternalEList<?>)getEnforcementOperations()).basicRemove(otherEnd, msgs);
 			case QVTcoreBaseCSPackage.BOTTOM_PATTERN_CS__REALIZED_VARIABLES:
 				return ((InternalEList<?>)getRealizedVariables()).basicRemove(otherEnd, msgs);
+			case QVTcoreBaseCSPackage.BOTTOM_PATTERN_CS__CONSTRAINTS:
+				return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -135,6 +162,8 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 				return getEnforcementOperations();
 			case QVTcoreBaseCSPackage.BOTTOM_PATTERN_CS__REALIZED_VARIABLES:
 				return getRealizedVariables();
+			case QVTcoreBaseCSPackage.BOTTOM_PATTERN_CS__CONSTRAINTS:
+				return getConstraints();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -156,6 +185,10 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 				getRealizedVariables().clear();
 				getRealizedVariables().addAll((Collection<? extends RealizedVariableCS>)newValue);
 				return;
+			case QVTcoreBaseCSPackage.BOTTOM_PATTERN_CS__CONSTRAINTS:
+				getConstraints().clear();
+				getConstraints().addAll((Collection<? extends AssignmentCS>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -174,6 +207,9 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 			case QVTcoreBaseCSPackage.BOTTOM_PATTERN_CS__REALIZED_VARIABLES:
 				getRealizedVariables().clear();
 				return;
+			case QVTcoreBaseCSPackage.BOTTOM_PATTERN_CS__CONSTRAINTS:
+				getConstraints().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -190,6 +226,8 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 				return enforcementOperations != null && !enforcementOperations.isEmpty();
 			case QVTcoreBaseCSPackage.BOTTOM_PATTERN_CS__REALIZED_VARIABLES:
 				return realizedVariables != null && !realizedVariables.isEmpty();
+			case QVTcoreBaseCSPackage.BOTTOM_PATTERN_CS__CONSTRAINTS:
+				return constraints != null && !constraints.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

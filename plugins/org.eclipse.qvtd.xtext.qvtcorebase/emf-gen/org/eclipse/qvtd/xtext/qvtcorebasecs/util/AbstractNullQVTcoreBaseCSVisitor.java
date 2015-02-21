@@ -87,6 +87,11 @@ public abstract class AbstractNullQVTcoreBaseCSVisitor<R, C>
 	}
 
 	@Override
+	public @Nullable R visitPredicateCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS object) {
+		return null;
+	}
+
+	@Override
 	public @Nullable R visitQueryCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS object) {
 		return null;
 	}

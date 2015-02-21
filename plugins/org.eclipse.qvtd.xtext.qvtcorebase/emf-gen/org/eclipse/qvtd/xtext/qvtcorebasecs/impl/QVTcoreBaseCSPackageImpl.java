@@ -30,6 +30,7 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PatternCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSFactory;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
@@ -114,6 +115,13 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 	 * @generated
 	 */
 	private EClass patternCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass predicateCSEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -361,6 +369,16 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 	 * @generated
 	 */
 	@Override
+	public EReference getBottomPatternCS_Constraints() {
+		return (EReference)bottomPatternCSEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getDirectionCS() {
 		return directionCSEClass;
 	}
@@ -471,6 +489,16 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 	 * @generated
 	 */
 	@Override
+	public EReference getGuardPatternCS_OwnedPredicates() {
+		return (EReference)guardPatternCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getParamDeclarationCS() {
 		return paramDeclarationCSEClass;
 	}
@@ -491,7 +519,7 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 	 * @generated
 	 */
 	@Override
-	public EReference getPatternCS_Constraints() {
+	public EReference getPatternCS_UnrealizedVariables() {
 		return (EReference)patternCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -501,8 +529,18 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 	 * @generated
 	 */
 	@Override
-	public EReference getPatternCS_UnrealizedVariables() {
-		return (EReference)patternCSEClass.getEStructuralFeatures().get(1);
+	public EClass getPredicateCS() {
+		return predicateCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getPredicateCS_OwnedCondition() {
+		return (EReference)predicateCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -681,6 +719,7 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 		bottomPatternCSEClass = createEClass(BOTTOM_PATTERN_CS);
 		createEReference(bottomPatternCSEClass, BOTTOM_PATTERN_CS__ENFORCEMENT_OPERATIONS);
 		createEReference(bottomPatternCSEClass, BOTTOM_PATTERN_CS__REALIZED_VARIABLES);
+		createEReference(bottomPatternCSEClass, BOTTOM_PATTERN_CS__CONSTRAINTS);
 
 		directionCSEClass = createEClass(DIRECTION_CS);
 		createEReference(directionCSEClass, DIRECTION_CS__IMPORTS);
@@ -696,12 +735,15 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 		createEReference(enforcementOperationCSEClass, ENFORCEMENT_OPERATION_CS__OPERATION_CALL);
 
 		guardPatternCSEClass = createEClass(GUARD_PATTERN_CS);
+		createEReference(guardPatternCSEClass, GUARD_PATTERN_CS__OWNED_PREDICATES);
 
 		paramDeclarationCSEClass = createEClass(PARAM_DECLARATION_CS);
 
 		patternCSEClass = createEClass(PATTERN_CS);
-		createEReference(patternCSEClass, PATTERN_CS__CONSTRAINTS);
 		createEReference(patternCSEClass, PATTERN_CS__UNREALIZED_VARIABLES);
+
+		predicateCSEClass = createEClass(PREDICATE_CS);
+		createEReference(predicateCSEClass, PREDICATE_CS__OWNED_CONDITION);
 
 		queryCSEClass = createEClass(QUERY_CS);
 		createEReference(queryCSEClass, QUERY_CS__PATH_NAME);
@@ -767,6 +809,7 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 		guardPatternCSEClass.getESuperTypes().add(this.getPatternCS());
 		paramDeclarationCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		patternCSEClass.getESuperTypes().add(theBaseCSPackage.getModelElementCS());
+		predicateCSEClass.getESuperTypes().add(theEssentialOCLCSPackage.getExpCS());
 		queryCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		realizeableVariableCSEClass.getESuperTypes().add(theBaseCSPackage.getTypedElementCS());
 		realizedVariableCSEClass.getESuperTypes().add(this.getRealizeableVariableCS());
@@ -791,6 +834,7 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 		initEClass(bottomPatternCSEClass, BottomPatternCS.class, "BottomPatternCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBottomPatternCS_EnforcementOperations(), this.getEnforcementOperationCS(), null, "enforcementOperations", null, 0, -1, BottomPatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBottomPatternCS_RealizedVariables(), this.getRealizedVariableCS(), null, "realizedVariables", null, 0, -1, BottomPatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBottomPatternCS_Constraints(), this.getAssignmentCS(), null, "constraints", null, 0, -1, BottomPatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(directionCSEClass, DirectionCS.class, "DirectionCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDirectionCS_Imports(), thePivotPackage.getPackage(), null, "imports", null, 0, -1, DirectionCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -806,12 +850,15 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 		initEReference(getEnforcementOperationCS_OperationCall(), theEssentialOCLCSPackage.getNameExpCS(), null, "operationCall", null, 0, 1, EnforcementOperationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(guardPatternCSEClass, GuardPatternCS.class, "GuardPatternCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getGuardPatternCS_OwnedPredicates(), this.getPredicateCS(), null, "ownedPredicates", null, 0, -1, GuardPatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(paramDeclarationCSEClass, ParamDeclarationCS.class, "ParamDeclarationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(patternCSEClass, PatternCS.class, "PatternCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPatternCS_Constraints(), this.getAssignmentCS(), null, "constraints", null, 0, -1, PatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPatternCS_UnrealizedVariables(), this.getUnrealizedVariableCS(), null, "unrealizedVariables", null, 0, -1, PatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(predicateCSEClass, PredicateCS.class, "PredicateCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPredicateCS_OwnedCondition(), theEssentialOCLCSPackage.getExpCS(), null, "ownedCondition", null, 1, 1, PredicateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(queryCSEClass, QueryCS.class, "QueryCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getQueryCS_PathName(), theBaseCSPackage.getPathNameCS(), null, "pathName", null, 0, 1, QueryCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

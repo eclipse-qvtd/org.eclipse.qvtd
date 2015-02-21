@@ -34,6 +34,7 @@ public interface QVTcoreBaseCSVisitor<R> extends org.eclipse.ocl.xtext.essential
 	@Nullable R visitGuardPatternCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS object);
 	@Nullable R visitParamDeclarationCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.ParamDeclarationCS object);
 	@Nullable R visitPatternCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.PatternCS object);
+	@Nullable R visitPredicateCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS object);
 	@Nullable R visitQueryCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS object);
 	@Nullable R visitRealizeableVariableCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.RealizeableVariableCS object);
 	@Nullable R visitRealizedVariableCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS object);

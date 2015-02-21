@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.*;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS;
@@ -80,6 +81,7 @@ public class QVTcoreBaseCSFactoryImpl extends EFactoryImpl implements QVTcoreBas
 			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS: return createEnforcementOperationCS();
 			case QVTcoreBaseCSPackage.GUARD_PATTERN_CS: return createGuardPatternCS();
 			case QVTcoreBaseCSPackage.PARAM_DECLARATION_CS: return createParamDeclarationCS();
+			case QVTcoreBaseCSPackage.PREDICATE_CS: return createPredicateCS();
 			case QVTcoreBaseCSPackage.QUERY_CS: return createQueryCS();
 			case QVTcoreBaseCSPackage.REALIZED_VARIABLE_CS: return createRealizedVariableCS();
 			case QVTcoreBaseCSPackage.TRANSFORMATION_CS: return createTransformationCS();
@@ -164,6 +166,17 @@ public class QVTcoreBaseCSFactoryImpl extends EFactoryImpl implements QVTcoreBas
 	public ParamDeclarationCS createParamDeclarationCS() {
 		ParamDeclarationCSImpl paramDeclarationCS = new ParamDeclarationCSImpl();
 		return paramDeclarationCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public PredicateCS createPredicateCS() {
+		PredicateCSImpl predicateCS = new PredicateCSImpl();
+		return predicateCS;
 	}
 
 	/**

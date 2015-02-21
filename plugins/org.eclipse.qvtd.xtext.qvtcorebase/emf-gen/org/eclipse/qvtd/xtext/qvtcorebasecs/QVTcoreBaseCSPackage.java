@@ -467,22 +467,13 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int PATTERN_CS__OWNED_ANNOTATIONS = BaseCSPackage.MODEL_ELEMENT_CS__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PATTERN_CS__CONSTRAINTS = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Unrealized Variables</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PATTERN_CS__UNREALIZED_VARIABLES = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
+	int PATTERN_CS__UNREALIZED_VARIABLES = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Pattern CS</em>' class.
@@ -491,7 +482,7 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PATTERN_CS_FEATURE_COUNT = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 2;
+	int PATTERN_CS_FEATURE_COUNT = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.BottomPatternCSImpl <em>Bottom Pattern CS</em>}' class.
@@ -549,15 +540,6 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int BOTTOM_PATTERN_CS__OWNED_ANNOTATIONS = PATTERN_CS__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOTTOM_PATTERN_CS__CONSTRAINTS = PATTERN_CS__CONSTRAINTS;
-
-	/**
 	 * The feature id for the '<em><b>Unrealized Variables</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -585,13 +567,22 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int BOTTOM_PATTERN_CS__REALIZED_VARIABLES = PATTERN_CS_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BOTTOM_PATTERN_CS__CONSTRAINTS = PATTERN_CS_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Bottom Pattern CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOTTOM_PATTERN_CS_FEATURE_COUNT = PATTERN_CS_FEATURE_COUNT + 2;
+	int BOTTOM_PATTERN_CS_FEATURE_COUNT = PATTERN_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.DirectionCSImpl <em>Direction CS</em>}' class.
@@ -940,15 +931,6 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int GUARD_PATTERN_CS__OWNED_ANNOTATIONS = PATTERN_CS__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GUARD_PATTERN_CS__CONSTRAINTS = PATTERN_CS__CONSTRAINTS;
-
-	/**
 	 * The feature id for the '<em><b>Unrealized Variables</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -958,13 +940,22 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int GUARD_PATTERN_CS__UNREALIZED_VARIABLES = PATTERN_CS__UNREALIZED_VARIABLES;
 
 	/**
+	 * The feature id for the '<em><b>Owned Predicates</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GUARD_PATTERN_CS__OWNED_PREDICATES = PATTERN_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Guard Pattern CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GUARD_PATTERN_CS_FEATURE_COUNT = PATTERN_CS_FEATURE_COUNT + 0;
+	int GUARD_PATTERN_CS_FEATURE_COUNT = PATTERN_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.ParamDeclarationCSImpl <em>Param Declaration CS</em>}' class.
@@ -1067,6 +1058,142 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int PARAM_DECLARATION_CS_FEATURE_COUNT = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.PredicateCSImpl <em>Predicate CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.PredicateCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QVTcoreBaseCSPackageImpl#getPredicateCS()
+	 * @generated
+	 */
+	int PREDICATE_CS = 10;
+
+	/**
+	 * The feature id for the '<em><b>Csi</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_CS__CSI = EssentialOCLCSPackage.EXP_CS__CSI;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_CS__PARENT = EssentialOCLCSPackage.EXP_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Pivot</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_CS__PIVOT = EssentialOCLCSPackage.EXP_CS__PIVOT;
+
+	/**
+	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_CS__ORIGINAL_XMI_ID = EssentialOCLCSPackage.EXP_CS__ORIGINAL_XMI_ID;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_CS__OWNED_ANNOTATIONS = EssentialOCLCSPackage.EXP_CS__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_CS__HAS_ERROR = EssentialOCLCSPackage.EXP_CS__HAS_ERROR;
+
+	/**
+	 * The feature id for the '<em><b>Local Left</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_CS__LOCAL_LEFT = EssentialOCLCSPackage.EXP_CS__LOCAL_LEFT;
+
+	/**
+	 * The feature id for the '<em><b>Local Leftmost Descendant</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_CS__LOCAL_LEFTMOST_DESCENDANT = EssentialOCLCSPackage.EXP_CS__LOCAL_LEFTMOST_DESCENDANT;
+
+	/**
+	 * The feature id for the '<em><b>Local Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_CS__LOCAL_PARENT = EssentialOCLCSPackage.EXP_CS__LOCAL_PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Local Right</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_CS__LOCAL_RIGHT = EssentialOCLCSPackage.EXP_CS__LOCAL_RIGHT;
+
+	/**
+	 * The feature id for the '<em><b>Local Rightmost Descendant</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_CS__LOCAL_RIGHTMOST_DESCENDANT = EssentialOCLCSPackage.EXP_CS__LOCAL_RIGHTMOST_DESCENDANT;
+
+	/**
+	 * The feature id for the '<em><b>Precedence</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_CS__PRECEDENCE = EssentialOCLCSPackage.EXP_CS__PRECEDENCE;
+
+	/**
+	 * The feature id for the '<em><b>Owned Condition</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_CS__OWNED_CONDITION = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Predicate CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_CS_FEATURE_COUNT = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QueryCSImpl <em>Query CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1074,7 +1201,7 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QVTcoreBaseCSPackageImpl#getQueryCS()
 	 * @generated
 	 */
-	int QUERY_CS = 10;
+	int QUERY_CS = 11;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1210,7 +1337,7 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QVTcoreBaseCSPackageImpl#getRealizeableVariableCS()
 	 * @generated
 	 */
-	int REALIZEABLE_VARIABLE_CS = 11;
+	int REALIZEABLE_VARIABLE_CS = 12;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1310,7 +1437,7 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QVTcoreBaseCSPackageImpl#getRealizedVariableCS()
 	 * @generated
 	 */
-	int REALIZED_VARIABLE_CS = 12;
+	int REALIZED_VARIABLE_CS = 13;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1410,7 +1537,7 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QVTcoreBaseCSPackageImpl#getTransformationCS()
 	 * @generated
 	 */
-	int TRANSFORMATION_CS = 13;
+	int TRANSFORMATION_CS = 14;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1546,7 +1673,7 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QVTcoreBaseCSPackageImpl#getUnrealizedVariableCS()
 	 * @generated
 	 */
-	int UNREALIZED_VARIABLE_CS = 14;
+	int UNREALIZED_VARIABLE_CS = 15;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1799,6 +1926,17 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	EReference getBottomPatternCS_RealizedVariables();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getConstraints <em>Constraints</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Constraints</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getConstraints()
+	 * @see #getBottomPatternCS()
+	 * @generated
+	 */
+	EReference getBottomPatternCS_Constraints();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS <em>Direction CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1916,6 +2054,17 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	EClass getGuardPatternCS();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS#getOwnedPredicates <em>Owned Predicates</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Predicates</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS#getOwnedPredicates()
+	 * @see #getGuardPatternCS()
+	 * @generated
+	 */
+	EReference getGuardPatternCS_OwnedPredicates();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.ParamDeclarationCS <em>Param Declaration CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1936,17 +2085,6 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	EClass getPatternCS();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.PatternCS#getConstraints <em>Constraints</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Constraints</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.PatternCS#getConstraints()
-	 * @see #getPatternCS()
-	 * @generated
-	 */
-	EReference getPatternCS_Constraints();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.PatternCS#getUnrealizedVariables <em>Unrealized Variables</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1956,6 +2094,27 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPatternCS_UnrealizedVariables();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS <em>Predicate CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Predicate CS</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS
+	 * @generated
+	 */
+	EClass getPredicateCS();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS#getOwnedCondition <em>Owned Condition</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Owned Condition</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS#getOwnedCondition()
+	 * @see #getPredicateCS()
+	 * @generated
+	 */
+	EReference getPredicateCS_OwnedCondition();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS <em>Query CS</em>}'.
@@ -2238,6 +2397,14 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 		EReference BOTTOM_PATTERN_CS__REALIZED_VARIABLES = eINSTANCE.getBottomPatternCS_RealizedVariables();
 
 		/**
+		 * The meta object literal for the '<em><b>Constraints</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BOTTOM_PATTERN_CS__CONSTRAINTS = eINSTANCE.getBottomPatternCS_Constraints();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.DirectionCSImpl <em>Direction CS</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2334,6 +2501,14 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 		EClass GUARD_PATTERN_CS = eINSTANCE.getGuardPatternCS();
 
 		/**
+		 * The meta object literal for the '<em><b>Owned Predicates</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference GUARD_PATTERN_CS__OWNED_PREDICATES = eINSTANCE.getGuardPatternCS_OwnedPredicates();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.ParamDeclarationCSImpl <em>Param Declaration CS</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2354,20 +2529,30 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 		EClass PATTERN_CS = eINSTANCE.getPatternCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Constraints</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference PATTERN_CS__CONSTRAINTS = eINSTANCE.getPatternCS_Constraints();
-
-		/**
 		 * The meta object literal for the '<em><b>Unrealized Variables</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference PATTERN_CS__UNREALIZED_VARIABLES = eINSTANCE.getPatternCS_UnrealizedVariables();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.PredicateCSImpl <em>Predicate CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.PredicateCSImpl
+		 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QVTcoreBaseCSPackageImpl#getPredicateCS()
+		 * @generated
+		 */
+		EClass PREDICATE_CS = eINSTANCE.getPredicateCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Condition</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PREDICATE_CS__OWNED_CONDITION = eINSTANCE.getPredicateCS_OwnedCondition();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QueryCSImpl <em>Query CS</em>}' class.

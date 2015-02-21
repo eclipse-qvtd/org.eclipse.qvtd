@@ -26,6 +26,7 @@ import org.eclipse.ocl.xtext.basecs.TypeCS;
 import org.eclipse.ocl.xtext.basecs.TypedElementCS;
 import org.eclipse.ocl.xtext.basecs.util.VisitableCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.*;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
@@ -138,6 +139,10 @@ public class QVTcoreBaseCSAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter casePatternCS(PatternCS object) {
 				return createPatternCSAdapter();
+			}
+			@Override
+			public Adapter casePredicateCS(PredicateCS object) {
+				return createPredicateCSAdapter();
 			}
 			@Override
 			public Adapter caseQueryCS(QueryCS object) {
@@ -364,6 +369,20 @@ public class QVTcoreBaseCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPatternCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS <em>Predicate CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS
+	 * @generated
+	 */
+	public Adapter createPredicateCSAdapter() {
 		return null;
 	}
 
