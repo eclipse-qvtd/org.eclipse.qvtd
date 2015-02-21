@@ -52,22 +52,25 @@ map integerToNumber_LM in SimpleUML2RDBMS
 map integerToNumber_MR in SimpleUML2RDBMS
 {
 	enforce rdbms() {
+		sqlType : String := 'NUMBER'
 	}
 	check middle(p2s : PackageToSchema,
 		p2n : IntegerToNumber) {}
 	where (p2n.owner = p2s;) {
-		p2n.typeName := 'NUMBER';
+		p2n.typeName := sqlType;
 	}
 }
 
 map booleanToBoolean_MR in SimpleUML2RDBMS
 {
 	enforce rdbms() {
+		sqlType : String
 	}
 	check middle(p2s : PackageToSchema,
 		p2n : BooleanToBoolean) {}
 	where (p2n.owner = p2s;) {
-		p2n.typeName := 'BOOLEAN';
+		p2n.typeName := sqlType;
+		sqlType := 'BOOLEAN';
 	}
 }
 
@@ -90,11 +93,12 @@ map booleanToBoolean_LM in SimpleUML2RDBMS
 map stringToVarchar_MR in SimpleUML2RDBMS
 {
 	enforce rdbms() {
+		sqlType : String := 'VARCHAR'
 	}
 	check middle(p2s : PackageToSchema,
 		p2n : StringToVarchar) {}
 	where (p2n.owner = p2s;) {
-		p2n.typeName := 'VARCHAR';
+		p2n.typeName := sqlType;
 	}
 }
 

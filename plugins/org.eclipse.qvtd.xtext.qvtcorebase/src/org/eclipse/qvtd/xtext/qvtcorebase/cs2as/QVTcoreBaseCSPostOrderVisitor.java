@@ -221,7 +221,15 @@ public class QVTcoreBaseCSPostOrderVisitor extends AbstractQVTcoreBaseCSPostOrde
 	}
 
 	@Override
-	public Continuation<?> visitUnrealizedVariableCS(@NonNull UnrealizedVariableCS object) {
+	public Continuation<?> visitUnrealizedVariableCS(@NonNull UnrealizedVariableCS csElement) {
+		Variable asVariable = PivotUtil.getPivot(Variable.class, csElement);
+		if (asVariable != null) {
+			ExpCS expression = csElement.getOwnedInitExpression();
+			if (expression != null) {
+				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
+				asVariable.setOwnedInit(target);
+			}
+		}
 		return null;
 	}
 }

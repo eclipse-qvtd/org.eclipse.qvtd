@@ -12,6 +12,8 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -24,6 +26,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
+import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
@@ -75,6 +78,13 @@ public class QVTiEvaluationVisitor extends QVTiAbstractEvaluationVisitor {
             for (RealizedVariable rVar : bottomPattern.getRealizedVariable()) {
                 rVar.accept(undecoratedVisitor);
             }
+            for (Variable rVar : bottomPattern.getVariable()) {
+            	OCLExpression ownedInit = rVar.getOwnedInit();
+                if (ownedInit != null) {
+                	Object initValue = ownedInit.accept(undecoratedVisitor);
+        			evaluationEnvironment.replace(rVar, initValue);
+                }
+            }
 //            for (Assignment assigment : bottomPattern.getAssignment()) {
 //                assigment.accept(undecoratedVisitor);
 //            }
@@ -90,12 +100,20 @@ public class QVTiEvaluationVisitor extends QVTiAbstractEvaluationVisitor {
         	assert area instanceof Mapping;
         	assert bottomPattern.getPredicate().isEmpty();
         	assert bottomPattern.getRealizedVariable().isEmpty();
+        	assert bottomPattern.getVariable().isEmpty();
         	assert bottomPattern.getEnforcementOperation().isEmpty();
 //            for (RealizedVariable rVar : bottomPattern.getRealizedVariable()) {
 //                rVar.accept(undecoratedVisitor);
 //            }
-            for (Assignment assigment : bottomPattern.getAssignment()) {
-                assigment.accept(undecoratedVisitor);
+            for (Assignment assignment : bottomPattern.getAssignment()) {
+                if (assignment instanceof VariableAssignment) {
+                	assignment.accept(undecoratedVisitor);
+                }
+            }
+            for (Assignment assignment : bottomPattern.getAssignment()) {
+                if (!(assignment instanceof VariableAssignment)) {
+                	assignment.accept(undecoratedVisitor);
+                }
             }
 //            for (EnforcementOperation enforceOp : bottomPattern.getEnforcementOperation()) {
 //                enforceOp.accept(undecoratedVisitor);
