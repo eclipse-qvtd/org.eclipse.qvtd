@@ -30,7 +30,13 @@ Workflow {
     bean = StandaloneSetup {
 		platformUri = "${QVTrelationRuntimeProject}/.."
    		scanClassPath = true
-    	registerGeneratedEPackage = "org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage"
+		registerEcoreFile = "platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore"
+		registerEcoreFile = "platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore"
+		registerEcoreFile = "platform:/resource/org.eclipse.qvtd.pivot.qvttemplate/model/QVTtemplate.ecore"
+		registerEcoreFile = "platform:/resource/org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore"
+		registerEcoreFile = "platform:/resource/org.eclipse.ocl.xtext.base/model/BaseCS.ecore"
+		registerEcoreFile = "platform:/resource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore"
+		registerEcoreFile = "platform:/resource/org.eclipse.qvtd.xtext.qvtrelation/model/QVTrelationCS.ecore"
 		registerGenModelFile = "platform:/resource/org.eclipse.qvtd.xtext.qvtrelation/model/QVTrelationCS.genmodel"
 	}
 	
