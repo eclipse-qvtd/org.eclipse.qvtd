@@ -6,7 +6,6 @@ package org.eclipse.qvtd.xtext.qvtrelation;
 import java.util.Properties;
 
 import org.eclipse.xtext.Constants;
-import org.eclipse.xtext.service.DefaultRuntimeModule;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -14,8 +13,8 @@ import com.google.inject.name.Names;
 /**
  * Manual modifications go to {org.eclipse.qvtd.xtext.qvtrelation.QVTrelationRuntimeModule}
  */
- @SuppressWarnings("all")
-public abstract class AbstractQVTrelationRuntimeModule extends DefaultRuntimeModule {
+@SuppressWarnings("all")
+public abstract class AbstractQVTrelationRuntimeModule extends org.eclipse.xtext.service.DefaultRuntimeModule {
 
 	protected Properties properties = null;
 

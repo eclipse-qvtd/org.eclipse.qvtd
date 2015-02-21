@@ -19,12 +19,13 @@ import "http://www.eclipse.org/qvt/2015/QVTcoreBase" as qvtcorebase
 import "http://www.eclipse.org/qvt/2015/QVTcoreBaseCS"
 		
 BottomPatternCS:
-	( '{' (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS)
-		(',' (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS))* '|'
-		constraints+=AssignmentCS* '}'
-	)
-	| ( {BottomPatternCS} '{' constraints+=AssignmentCS* '}'
-	)
+	{BottomPatternCS} '{' (
+		((unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS)
+		 (',' (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS))*
+		 ('|' constraints+=AssignmentCS*)?
+		)
+		| (constraints+=AssignmentCS*)
+	) '}'
 ;
 		
 //Constraint ::= Predicate | Assignment
@@ -40,9 +41,16 @@ DirectionCS: {DirectionCS} name=UnrestrictedName?
 //EnforcementOperationCS: ('creation'|'deletion') ExpCS ';';
 	
 GuardPatternCS:
-	{GuardPatternCS} '(' (unrealizedVariables+=UnrealizedVariableCS (',' unrealizedVariables+=UnrealizedVariableCS)* '|')?
-		constraints+=AssignmentCS* ')'
+	{GuardPatternCS} '(' (
+		(unrealizedVariables+=GuardVariableCS (',' unrealizedVariables+=GuardVariableCS)*
+			('|' constraints+=AssignmentCS*)?
+		)
+		| (constraints+=AssignmentCS*)
+	) ')'
 ;
+	
+//Variable := VariableName �:� TypeDeclaration
+GuardVariableCS returns UnrealizedVariableCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
 
 ImportCS returns base::ImportCS:
 	'import' (name=Identifier ':')? ownedPathName=URIPathNameCS (isAll?='::' '*')? ';';
@@ -73,7 +81,7 @@ TransformationCS:
 	'transformation' pathName=ScopeNameCS? name=UnreservedName '{' (directions+=DirectionCS ';')* '}';
 	
 //Variable := VariableName �:� TypeDeclaration
-UnrealizedVariableCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
+UnrealizedVariableCS: name=UnrestrictedName (':' ownedType=TypeExpCS)? (':=' ownedInitExpression=ExpCS)?;
 		
 //RealizedVariable := �realized� VariableName �:� TypeDeclaration
 RealizedVariableCS: 'realize' name=UnrestrictedName ':' ownedType=TypeExpCS;

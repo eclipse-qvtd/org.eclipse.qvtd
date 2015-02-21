@@ -4,14 +4,13 @@
  */
 package org.eclipse.qvtd.xtext.qvtrelation.ui;
 
-import org.eclipse.xtext.ui.DefaultUiModule;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
  * Manual modifications go to {org.eclipse.qvtd.xtext.qvtrelation.ui.QVTrelationUiModule}
  */
 @SuppressWarnings("all")
-public abstract class AbstractQVTrelationUiModule extends DefaultUiModule {
+public abstract class AbstractQVTrelationUiModule extends org.eclipse.xtext.ui.DefaultUiModule {
 	
 	public AbstractQVTrelationUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
@@ -30,12 +29,12 @@ public abstract class AbstractQVTrelationUiModule extends DefaultUiModule {
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
 	public void configureHighlightingLexer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING)).to(org.eclipse.qvtd.xtext.qvtrelation.parser.antlr.internal.InternalQVTrelationLexer.class);
+		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING)).to(org.eclipse.qvtd.xtext.qvtrelation.parser.antlr.internal.InternalQVTrelationLexer.class);
 	}
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrGeneratorFragment
 	public void configureHighlightingTokenDefProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.parser.antlr.ITokenDefProvider.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.HIGHLIGHTING)).to(org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class);
+		binder.bind(org.eclipse.xtext.parser.antlr.ITokenDefProvider.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ide.LexerIdeBindings.HIGHLIGHTING)).to(org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class);
 	}
 
 	// contributed by org.eclipse.xtext.generator.exporting.QualifiedNamesFragment
@@ -75,11 +74,11 @@ public abstract class AbstractQVTrelationUiModule extends DefaultUiModule {
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext.Factory> bindContentAssistContext$Factory() {
-		return org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.class;
+		return org.eclipse.xtext.ui.editor.contentassist.antlr.DelegatingContentAssistContextFactory.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment
-	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.antlr.IContentAssistParser> bindIContentAssistParser() {
+	public Class<? extends org.eclipse.xtext.ide.editor.contentassist.antlr.IContentAssistParser> bindIContentAssistParser() {
 		return org.eclipse.qvtd.xtext.qvtrelation.ui.contentassist.antlr.QVTrelationParser.class;
 	}
 
@@ -90,7 +89,7 @@ public abstract class AbstractQVTrelationUiModule extends DefaultUiModule {
 
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment
 	public void configureContentAssistLexer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.qvtd.xtext.qvtrelation.ui.contentassist.antlr.internal.InternalQVTrelationLexer.class);
+		binder.bind(org.eclipse.xtext.ide.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ide.LexerIdeBindings.CONTENT_ASSIST)).to(org.eclipse.qvtd.xtext.qvtrelation.ui.contentassist.antlr.internal.InternalQVTrelationLexer.class);
 	}
 
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
