@@ -1630,13 +1630,22 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int UNREALIZED_VARIABLE_CS__QUALIFIERS = REALIZEABLE_VARIABLE_CS__QUALIFIERS;
 
 	/**
+	 * The feature id for the '<em><b>Owned Init Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int UNREALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION = REALIZEABLE_VARIABLE_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Unrealized Variable CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNREALIZED_VARIABLE_CS_FEATURE_COUNT = REALIZEABLE_VARIABLE_CS_FEATURE_COUNT + 0;
+	int UNREALIZED_VARIABLE_CS_FEATURE_COUNT = REALIZEABLE_VARIABLE_CS_FEATURE_COUNT + 1;
 
 
 	/**
@@ -2076,6 +2085,17 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	EClass getUnrealizedVariableCS();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS#getOwnedInitExpression <em>Owned Init Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Owned Init Expression</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS#getOwnedInitExpression()
+	 * @see #getUnrealizedVariableCS()
+	 * @generated
+	 */
+	EReference getUnrealizedVariableCS_OwnedInitExpression();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2454,6 +2474,14 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 		 * @generated
 		 */
 		EClass UNREALIZED_VARIABLE_CS = eINSTANCE.getUnrealizedVariableCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Init Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference UNREALIZED_VARIABLE_CS__OWNED_INIT_EXPRESSION = eINSTANCE.getUnrealizedVariableCS_OwnedInitExpression();
 
 	}
 

@@ -79,5 +79,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="directions" upperBound="-1"
         eType="#//DirectionCS" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="UnrealizedVariableCS" eSuperTypes="#//RealizeableVariableCS"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UnrealizedVariableCS" eSuperTypes="#//RealizeableVariableCS">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedInitExpression" eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
+        containment="true"/>
+  </eClassifiers>
 </ecore:EPackage>
