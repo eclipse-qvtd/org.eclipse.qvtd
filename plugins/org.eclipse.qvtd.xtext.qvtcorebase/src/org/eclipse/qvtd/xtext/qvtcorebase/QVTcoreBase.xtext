@@ -19,13 +19,12 @@ import "http://www.eclipse.org/qvt/2015/QVTcoreBase" as qvtcorebase
 import "http://www.eclipse.org/qvt/2015/QVTcoreBaseCS"
 		
 BottomPatternCS:
-	{BottomPatternCS} '{' (
-		((unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS)
-		 (',' (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS))*
-		 ('|' constraints+=AssignmentCS*)?
-		)
-		| (constraints+=AssignmentCS*)
-	) '}'
+	( '{' (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS)
+		(',' (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS))*
+		('|' constraints+=AssignmentCS*)? '}'
+	)
+	| ( {BottomPatternCS} '{' constraints+=AssignmentCS* '}'
+	)
 ;
 		
 //Constraint ::= Predicate | Assignment
@@ -41,12 +40,12 @@ DirectionCS: {DirectionCS} name=UnrestrictedName?
 //EnforcementOperationCS: ('creation'|'deletion') ExpCS ';';
 	
 GuardPatternCS:
-	{GuardPatternCS} '(' (
-		(unrealizedVariables+=GuardVariableCS (',' unrealizedVariables+=GuardVariableCS)*
-			('|' constraints+=AssignmentCS*)?
-		)
-		| (constraints+=AssignmentCS*)
-	) ')'
+	({GuardPatternCS} '(' (unrealizedVariables+=GuardVariableCS (',' unrealizedVariables+=GuardVariableCS)*)?
+	   ('|' constraints+=AssignmentCS*)? ')' )
+	|
+	({GuardPatternCS} '(' (unrealizedVariables+=GuardVariableCS (',' unrealizedVariables+=GuardVariableCS)*)? ')' )	// FIXME Redundant but avoids serializer failure on Class2RDBMS.qvtc
+	|
+	({GuardPatternCS} '(' (constraints+=AssignmentCS*) ')' )
 ;
 	
 //Variable := VariableName �:� TypeDeclaration

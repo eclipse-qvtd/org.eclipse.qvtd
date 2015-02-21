@@ -1173,9 +1173,9 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//BottomPatternCS:
-	//	{BottomPatternCS} "{" ((unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS) (","
+	//	"{" (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS) (","
 	//	(unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS))* ("|"
-	//	constraints+=AssignmentCS*)? | constraints+=AssignmentCS*) "}";
+	//	constraints+=AssignmentCS*)? "}" | {BottomPatternCS} "{" constraints+=AssignmentCS* "}";
 	public QVTcoreBaseGrammarAccess.BottomPatternCSElements getBottomPatternCSAccess() {
 		return gaQVTcoreBase.getBottomPatternCSAccess();
 	}
@@ -1200,8 +1200,11 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 
 	////EnforcementOperationCS: ('creation'|'deletion') ExpCS ';';
 	// GuardPatternCS:
-	//	{GuardPatternCS} "(" (unrealizedVariables+=GuardVariableCS ("," unrealizedVariables+=GuardVariableCS)* ("|"
-	//	constraints+=AssignmentCS*)? | constraints+=AssignmentCS*) ")";
+	//	{GuardPatternCS} "(" (unrealizedVariables+=GuardVariableCS ("," unrealizedVariables+=GuardVariableCS)*)? ("|"
+	//	constraints+=AssignmentCS*)? ")" // FIXME Redundant but avoids serializer failure on Class2RDBMS.qvtc
+	// |
+	//	{GuardPatternCS} "(" (unrealizedVariables+=GuardVariableCS ("," unrealizedVariables+=GuardVariableCS)*)? ")" |
+	//	{GuardPatternCS} "(" constraints+=AssignmentCS* ")";
 	public QVTcoreBaseGrammarAccess.GuardPatternCSElements getGuardPatternCSAccess() {
 		return gaQVTcoreBase.getGuardPatternCSAccess();
 	}
