@@ -33,6 +33,10 @@
          id="org.eclipse.qvtd.doc"
          version="0.0.0"/>
 
+   <includes
+         id="org.eclipse.qvtd.epsilon"
+         version="0.0.0"/>
+
    <plugin
          id="org.eclipse.qvtd.pivot.qvtbase"
          download-size="0"
@@ -160,6 +164,27 @@
 
    <plugin
          id="org.eclipse.qvtd.debug.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.qvtd.build.etl"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.qvtd.build.qvtrtoqvtc"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.qvtd.build.schedule"
          download-size="0"
          install-size="0"
          version="0.0.0"

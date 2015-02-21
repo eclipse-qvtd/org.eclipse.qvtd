@@ -27,6 +27,7 @@
   <rm:locator pattern="^org\.antlr\.runtime$" searchPathRef="xtext"/>
   <rm:locator pattern="^org\.eclipse\.draw2d$" searchPathRef="gef"/>
   <rm:locator pattern="^org\.eclipse\.emf.*" searchPathRef="emf"/>
+  <rm:locator pattern="^org\.eclipse\.epsilon.*" searchPathRef="epsilon"/>
   <rm:locator pattern="^org\.eclipse\.uml2.*" searchPathRef="uml"/>
   <rm:locator pattern="^org\.eclipse\.test$" searchPathRef="eclipse-tests-source-code"/>
   <rm:locator pattern="^org\.eclipse\.ant\.optional\.junit$" searchPathRef="eclipse-tests-source-code"/>
@@ -361,6 +362,15 @@
       <rm:property key="buckminster.source" value="false"/>
       <rm:property key="buckminster.mutable" value="false"/>
       <rm:uri format="{0}/eclipse/updates/4.4">
+        <bc:propertyRef key="eclipse.download"/>
+      </rm:uri>
+    </rm:provider>
+  </rm:searchPath>
+  <rm:searchPath name="epsilon">
+    <rm:provider componentTypes="eclipse.feature,osgi.bundle" resolutionFilter="(resolve.target.platform=true)" readerType="p2" source="false" mutable="false">
+      <rm:property key="buckminster.source" value="false"/>
+      <rm:property key="buckminster.mutable" value="false"/>
+      <rm:uri format="{0}/epsilon/updates/">
         <bc:propertyRef key="eclipse.download"/>
       </rm:uri>
     </rm:provider>
