@@ -103,22 +103,22 @@ public class QVTcoreDeclarationVisitor extends QVTcoreBaseDeclarationVisitor imp
 			// else other packages, orphanage
 		}
 		if (asTransformations != null) {
-			context.refreshList(csDocument.getTransformations(), context.visitDeclarations(TransformationCS.class, asTransformations, null));
+			context.refreshList(csDocument.getOwnedTransformations(), context.visitDeclarations(TransformationCS.class, asTransformations, null));
 		}
 		else {
-			csDocument.getTransformations().clear();
+			csDocument.getOwnedTransformations().clear();
 		}
 		if (asMappings != null) {
-			context.refreshList(csDocument.getMappings(), context.visitDeclarations(MappingCS.class, asMappings, null));
+			context.refreshList(csDocument.getOwnedMappings(), context.visitDeclarations(MappingCS.class, asMappings, null));
 		}
 		else {
-			csDocument.getMappings().clear();
+			csDocument.getOwnedMappings().clear();
 		}
 		if (asQueries != null) {
-			context.refreshList(csDocument.getQueries(), context.visitDeclarations(QueryCS.class, asQueries, null));
+			context.refreshList(csDocument.getOwnedQueries(), context.visitDeclarations(QueryCS.class, asQueries, null));
 		}
 		else {
-			csDocument.getQueries().clear();
+			csDocument.getOwnedQueries().clear();
 		}
 		return csDocument;
 	}
@@ -143,7 +143,7 @@ public class QVTcoreDeclarationVisitor extends QVTcoreBaseDeclarationVisitor imp
 		csDomain.setBottomPattern(context.visitDeclaration(BottomPatternCS.class, asMapping.getBottomPattern()));
 		csDomain.setGuardPattern(context.visitDeclaration(GuardPatternCS.class, asMapping.getGuardPattern()));
 		csMapping.setMiddle(csDomain);
-		context.refreshList(csMapping.getComposedMappings(), context.visitDeclarations(MappingCS.class, asMapping.getLocal(), null));
+		context.refreshList(csMapping.getOwnedComposedMappings(), context.visitDeclarations(MappingCS.class, asMapping.getLocal(), null));
 		PivotUtilInternal.refreshList(csMapping.getRefines(), asMapping.getRefinement());
 		return csMapping;
 	}

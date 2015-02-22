@@ -164,13 +164,13 @@ public interface QVTcoreCSPackage extends EPackage {
 	int MAPPING_CS__MIDDLE = QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__MIDDLE;
 
 	/**
-	 * The feature id for the '<em><b>Composed Mappings</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Composed Mappings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__COMPOSED_MAPPINGS = QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS_FEATURE_COUNT + 0;
+	int MAPPING_CS__OWNED_COMPOSED_MAPPINGS = QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Refines</b></em>' reference list.
@@ -273,31 +273,31 @@ public interface QVTcoreCSPackage extends EPackage {
 	int TOP_LEVEL_CS__OWNED_LIBRARIES = BaseCSPackage.ROOT_PACKAGE_CS__OWNED_LIBRARIES;
 
 	/**
-	 * The feature id for the '<em><b>Transformations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Transformations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_LEVEL_CS__TRANSFORMATIONS = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 0;
+	int TOP_LEVEL_CS__OWNED_TRANSFORMATIONS = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Queries</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Queries</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_LEVEL_CS__QUERIES = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 1;
+	int TOP_LEVEL_CS__OWNED_QUERIES = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Mappings</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Mappings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_LEVEL_CS__MAPPINGS = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 2;
+	int TOP_LEVEL_CS__OWNED_MAPPINGS = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Top Level CS</em>' class.
@@ -319,15 +319,15 @@ public interface QVTcoreCSPackage extends EPackage {
 	EClass getMappingCS();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getComposedMappings <em>Composed Mappings</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getOwnedComposedMappings <em>Owned Composed Mappings</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Composed Mappings</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getComposedMappings()
+	 * @return the meta object for the containment reference list '<em>Owned Composed Mappings</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getOwnedComposedMappings()
 	 * @see #getMappingCS()
 	 * @generated
 	 */
-	EReference getMappingCS_ComposedMappings();
+	EReference getMappingCS_OwnedComposedMappings();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xtext.qvtcorecs.MappingCS#getRefines <em>Refines</em>}'.
@@ -351,37 +351,37 @@ public interface QVTcoreCSPackage extends EPackage {
 	EClass getTopLevelCS();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS#getTransformations <em>Transformations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS#getOwnedTransformations <em>Owned Transformations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Transformations</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS#getTransformations()
+	 * @return the meta object for the containment reference list '<em>Owned Transformations</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS#getOwnedTransformations()
 	 * @see #getTopLevelCS()
 	 * @generated
 	 */
-	EReference getTopLevelCS_Transformations();
+	EReference getTopLevelCS_OwnedTransformations();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS#getQueries <em>Queries</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS#getOwnedQueries <em>Owned Queries</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Queries</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS#getQueries()
+	 * @return the meta object for the containment reference list '<em>Owned Queries</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS#getOwnedQueries()
 	 * @see #getTopLevelCS()
 	 * @generated
 	 */
-	EReference getTopLevelCS_Queries();
+	EReference getTopLevelCS_OwnedQueries();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS#getMappings <em>Mappings</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS#getOwnedMappings <em>Owned Mappings</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Mappings</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS#getMappings()
+	 * @return the meta object for the containment reference list '<em>Owned Mappings</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorecs.TopLevelCS#getOwnedMappings()
 	 * @see #getTopLevelCS()
 	 * @generated
 	 */
-	EReference getTopLevelCS_Mappings();
+	EReference getTopLevelCS_OwnedMappings();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -416,12 +416,12 @@ public interface QVTcoreCSPackage extends EPackage {
 		EClass MAPPING_CS = eINSTANCE.getMappingCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Composed Mappings</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Composed Mappings</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MAPPING_CS__COMPOSED_MAPPINGS = eINSTANCE.getMappingCS_ComposedMappings();
+		EReference MAPPING_CS__OWNED_COMPOSED_MAPPINGS = eINSTANCE.getMappingCS_OwnedComposedMappings();
 
 		/**
 		 * The meta object literal for the '<em><b>Refines</b></em>' reference list feature.
@@ -442,28 +442,28 @@ public interface QVTcoreCSPackage extends EPackage {
 		EClass TOP_LEVEL_CS = eINSTANCE.getTopLevelCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Transformations</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Transformations</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TOP_LEVEL_CS__TRANSFORMATIONS = eINSTANCE.getTopLevelCS_Transformations();
+		EReference TOP_LEVEL_CS__OWNED_TRANSFORMATIONS = eINSTANCE.getTopLevelCS_OwnedTransformations();
 
 		/**
-		 * The meta object literal for the '<em><b>Queries</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Queries</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TOP_LEVEL_CS__QUERIES = eINSTANCE.getTopLevelCS_Queries();
+		EReference TOP_LEVEL_CS__OWNED_QUERIES = eINSTANCE.getTopLevelCS_OwnedQueries();
 
 		/**
-		 * The meta object literal for the '<em><b>Mappings</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Mappings</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TOP_LEVEL_CS__MAPPINGS = eINSTANCE.getTopLevelCS_Mappings();
+		EReference TOP_LEVEL_CS__OWNED_MAPPINGS = eINSTANCE.getTopLevelCS_OwnedMappings();
 
 	}
 

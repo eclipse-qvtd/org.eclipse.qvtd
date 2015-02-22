@@ -36,7 +36,7 @@ import org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.MappingCSImpl#getComposedMappings <em>Composed Mappings</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.MappingCSImpl#getOwnedComposedMappings <em>Owned Composed Mappings</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorecs.impl.MappingCSImpl#getRefines <em>Refines</em>}</li>
  * </ul>
  *
@@ -44,14 +44,14 @@ import org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSVisitor;
  */
 public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	/**
-	 * The cached value of the '{@link #getComposedMappings() <em>Composed Mappings</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedComposedMappings() <em>Owned Composed Mappings</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getComposedMappings()
+	 * @see #getOwnedComposedMappings()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<MappingCS> composedMappings;
+	protected EList<MappingCS> ownedComposedMappings;
 
 	/**
 	 * The cached value of the '{@link #getRefines() <em>Refines</em>}' reference list.
@@ -88,11 +88,11 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	 * @generated
 	 */
 	@Override
-	public EList<MappingCS> getComposedMappings() {
-		if (composedMappings == null) {
-			composedMappings = new EObjectContainmentEList<MappingCS>(MappingCS.class, this, QVTcoreCSPackage.MAPPING_CS__COMPOSED_MAPPINGS);
+	public EList<MappingCS> getOwnedComposedMappings() {
+		if (ownedComposedMappings == null) {
+			ownedComposedMappings = new EObjectContainmentEList<MappingCS>(MappingCS.class, this, QVTcoreCSPackage.MAPPING_CS__OWNED_COMPOSED_MAPPINGS);
 		}
-		return composedMappings;
+		return ownedComposedMappings;
 	}
 
 	/**
@@ -116,8 +116,8 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcoreCSPackage.MAPPING_CS__COMPOSED_MAPPINGS:
-				return ((InternalEList<?>)getComposedMappings()).basicRemove(otherEnd, msgs);
+			case QVTcoreCSPackage.MAPPING_CS__OWNED_COMPOSED_MAPPINGS:
+				return ((InternalEList<?>)getOwnedComposedMappings()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -130,8 +130,8 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcoreCSPackage.MAPPING_CS__COMPOSED_MAPPINGS:
-				return getComposedMappings();
+			case QVTcoreCSPackage.MAPPING_CS__OWNED_COMPOSED_MAPPINGS:
+				return getOwnedComposedMappings();
 			case QVTcoreCSPackage.MAPPING_CS__REFINES:
 				return getRefines();
 		}
@@ -147,9 +147,9 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcoreCSPackage.MAPPING_CS__COMPOSED_MAPPINGS:
-				getComposedMappings().clear();
-				getComposedMappings().addAll((Collection<? extends MappingCS>)newValue);
+			case QVTcoreCSPackage.MAPPING_CS__OWNED_COMPOSED_MAPPINGS:
+				getOwnedComposedMappings().clear();
+				getOwnedComposedMappings().addAll((Collection<? extends MappingCS>)newValue);
 				return;
 			case QVTcoreCSPackage.MAPPING_CS__REFINES:
 				getRefines().clear();
@@ -167,8 +167,8 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.MAPPING_CS__COMPOSED_MAPPINGS:
-				getComposedMappings().clear();
+			case QVTcoreCSPackage.MAPPING_CS__OWNED_COMPOSED_MAPPINGS:
+				getOwnedComposedMappings().clear();
 				return;
 			case QVTcoreCSPackage.MAPPING_CS__REFINES:
 				getRefines().clear();
@@ -185,8 +185,8 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcoreCSPackage.MAPPING_CS__COMPOSED_MAPPINGS:
-				return composedMappings != null && !composedMappings.isEmpty();
+			case QVTcoreCSPackage.MAPPING_CS__OWNED_COMPOSED_MAPPINGS:
+				return ownedComposedMappings != null && !ownedComposedMappings.isEmpty();
 			case QVTcoreCSPackage.MAPPING_CS__REFINES:
 				return refines != null && !refines.isEmpty();
 		}

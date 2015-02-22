@@ -37,13 +37,13 @@ public class QVTcoreOutlineTreeProvider extends QVTcoreBaseOutlineTreeProvider
 		for (PackageCS csPackage : ele.getOwnedPackages()) {
 			createNode(parentNode, csPackage);
 		}
-		for (TransformationCS csTransformation : ele.getTransformations()) {
+		for (TransformationCS csTransformation : ele.getOwnedTransformations()) {
 			createNode(parentNode, csTransformation);
 		}
-		for (QueryCS csQuery : ele.getQueries()) {
+		for (QueryCS csQuery : ele.getOwnedQueries()) {
 			createNode(parentNode, csQuery);
 		}
-		for (MappingCS csMapping : ele.getMappings()) {
+		for (MappingCS csMapping : ele.getOwnedMappings()) {
 			createNode(parentNode, csMapping);
 		}
 	}

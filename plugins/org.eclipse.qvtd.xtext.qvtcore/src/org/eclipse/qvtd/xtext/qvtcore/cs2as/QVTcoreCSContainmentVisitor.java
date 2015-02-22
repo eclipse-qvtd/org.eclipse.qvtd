@@ -58,7 +58,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 
 	protected void resolveTransformationMappings(@NonNull TopLevelCS csTopLevel) {
 		Map<Transformation, List<Mapping>> tx2mappings = new HashMap<Transformation, List<Mapping>>();
-		for (MappingCS csMapping : csTopLevel.getMappings()) {
+		for (MappingCS csMapping : csTopLevel.getOwnedMappings()) {
 			Transformation asTransformation = csMapping.getIn();
 			if (asTransformation != null) {
 				Mapping asMapping = PivotUtil.getPivot(Mapping.class, csMapping);
@@ -86,7 +86,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 
 	protected void resolveTransformationQueries(@NonNull TopLevelCS csTopLevel) {
 		Map<Transformation, List<Function>> tx2qMap = new HashMap<Transformation, List<Function>>();
-		for (QueryCS csQuery : csTopLevel.getQueries()) {
+		for (QueryCS csQuery : csTopLevel.getOwnedQueries()) {
 			Transformation asTransformation = csQuery.getTransformation();
 			if (asTransformation != null) {
 				Function asQuery = PivotUtil.getPivot(Function.class,  csQuery);
@@ -167,7 +167,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 			}
 		}
 		context.refreshPivotList(CoreDomain.class, pivotElement.getDomain(), csElement.getDomains());
-		context.refreshPivotList(Mapping.class, pivotElement.getLocal(), csElement.getComposedMappings());
+		context.refreshPivotList(Mapping.class, pivotElement.getLocal(), csElement.getOwnedComposedMappings());
 		return null;
 	}
 
@@ -188,7 +188,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 			context.installRootElement((BaseCSResource)eResource, asCoreModel);		// Ensure containment viable for imported library type references
 //			importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
 		}
-		List<TransformationCS> csTransformations = csElement.getTransformations();
+		List<TransformationCS> csTransformations = csElement.getOwnedTransformations();
 		List<org.eclipse.ocl.pivot.Package> asPackages = resolveTransformations(csTransformations, asCoreModel);
 		PivotUtilInternal.refreshList(asCoreModel.getOwnedPackages(), asPackages);
 //		context.refreshPivotList(Type.class, pivotElement.getOwnedType(), csElement.getOwnedType());

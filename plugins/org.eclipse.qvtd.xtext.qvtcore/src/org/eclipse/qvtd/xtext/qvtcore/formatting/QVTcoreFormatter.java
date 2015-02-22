@@ -74,9 +74,9 @@ public class QVTcoreFormatter extends QVTcoreBaseFormatter
 			c.setLinewrap(2).between(a.getDomainsAssignment_6(), a.getDomainsAssignment_6());
 			c.setLinewrap(2).between(a.getDomainsAssignment_6(), a.getGroup_7());
 			c.setLinewrap(1,2,2).before(a.getGroup_7());
-			c.setLinewrap(2).between(a.getGroup_7(), a.getComposedMappingsAssignment_8());
-			c.setLinewrap(1,2,2).before(a.getComposedMappingsAssignment_8());
-			c.setLinewrap(2).between(a.getComposedMappingsAssignment_8(), a.getComposedMappingsAssignment_8());
+			c.setLinewrap(2).between(a.getGroup_7(), a.getOwnedComposedMappingsAssignment_8());
+			c.setLinewrap(1,2,2).before(a.getOwnedComposedMappingsAssignment_8());
+			c.setLinewrap(2).between(a.getOwnedComposedMappingsAssignment_8(), a.getOwnedComposedMappingsAssignment_8());
 	    }
 	    {
 	    	TopLevelCSElements a = f.getTopLevelCSAccess();

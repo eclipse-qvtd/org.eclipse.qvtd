@@ -124,7 +124,7 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingCS_ComposedMappings() {
+	public EReference getMappingCS_OwnedComposedMappings() {
 		return (EReference)mappingCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -154,7 +154,7 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getTopLevelCS_Transformations() {
+	public EReference getTopLevelCS_OwnedTransformations() {
 		return (EReference)topLevelCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -164,7 +164,7 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getTopLevelCS_Queries() {
+	public EReference getTopLevelCS_OwnedQueries() {
 		return (EReference)topLevelCSEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -174,7 +174,7 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 	 * @generated
 	 */
 	@Override
-	public EReference getTopLevelCS_Mappings() {
+	public EReference getTopLevelCS_OwnedMappings() {
 		return (EReference)topLevelCSEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -208,13 +208,13 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 
 		// Create classes and their features
 		mappingCSEClass = createEClass(MAPPING_CS);
-		createEReference(mappingCSEClass, MAPPING_CS__COMPOSED_MAPPINGS);
+		createEReference(mappingCSEClass, MAPPING_CS__OWNED_COMPOSED_MAPPINGS);
 		createEReference(mappingCSEClass, MAPPING_CS__REFINES);
 
 		topLevelCSEClass = createEClass(TOP_LEVEL_CS);
-		createEReference(topLevelCSEClass, TOP_LEVEL_CS__TRANSFORMATIONS);
-		createEReference(topLevelCSEClass, TOP_LEVEL_CS__QUERIES);
-		createEReference(topLevelCSEClass, TOP_LEVEL_CS__MAPPINGS);
+		createEReference(topLevelCSEClass, TOP_LEVEL_CS__OWNED_TRANSFORMATIONS);
+		createEReference(topLevelCSEClass, TOP_LEVEL_CS__OWNED_QUERIES);
+		createEReference(topLevelCSEClass, TOP_LEVEL_CS__OWNED_MAPPINGS);
 	}
 
 	/**
@@ -255,13 +255,13 @@ public class QVTcoreCSPackageImpl extends EPackageImpl implements QVTcoreCSPacka
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(mappingCSEClass, MappingCS.class, "MappingCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMappingCS_ComposedMappings(), this.getMappingCS(), null, "composedMappings", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getMappingCS_OwnedComposedMappings(), this.getMappingCS(), null, "ownedComposedMappings", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 		initEReference(getMappingCS_Refines(), theQVTcorePackage.getMapping(), null, "refines", null, 0, -1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(topLevelCSEClass, TopLevelCS.class, "TopLevelCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTopLevelCS_Transformations(), theQVTcoreBaseCSPackage.getTransformationCS(), null, "transformations", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTopLevelCS_Queries(), theQVTcoreBaseCSPackage.getQueryCS(), null, "queries", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTopLevelCS_Mappings(), this.getMappingCS(), null, "mappings", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTopLevelCS_OwnedTransformations(), theQVTcoreBaseCSPackage.getTransformationCS(), null, "ownedTransformations", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTopLevelCS_OwnedQueries(), theQVTcoreBaseCSPackage.getQueryCS(), null, "ownedQueries", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTopLevelCS_OwnedMappings(), this.getMappingCS(), null, "ownedMappings", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

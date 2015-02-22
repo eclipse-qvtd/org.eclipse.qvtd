@@ -400,7 +400,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTcoreBaseSemant
 	 *         (refines+=[Mapping|UnrestrictedName] refines+=[Mapping|UnrestrictedName]*)? 
 	 *         domains+=NamedDomainCS* 
 	 *         middle=UnnamedDomainCS? 
-	 *         composedMappings+=MappingCS*
+	 *         ownedComposedMappings+=MappingCS*
 	 *     )
 	 */
 	protected void sequence_MappingCS(EObject context, MappingCS semanticObject) {
@@ -410,7 +410,10 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTcoreBaseSemant
 	
 	/**
 	 * Constraint:
-	 *     ((ownedImports+=ImportCS | ownedLibraries+=LibraryCS)* (mappings+=MappingCS | transformations+=TransformationCS | queries+=QueryCS)*)
+	 *     (
+	 *         (ownedImports+=ImportCS | ownedLibraries+=LibraryCS)* 
+	 *         (ownedMappings+=MappingCS | ownedTransformations+=TransformationCS | ownedQueries+=QueryCS)*
+	 *     )
 	 */
 	protected void sequence_TopLevelCS(EObject context, TopLevelCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

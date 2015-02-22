@@ -29,20 +29,20 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedLibrariesAssignment_0_1 = (Assignment)cAlternatives_0.eContents().get(1);
 		private final RuleCall cOwnedLibrariesLibraryCSParserRuleCall_0_1_0 = (RuleCall)cOwnedLibrariesAssignment_0_1.eContents().get(0);
 		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
-		private final Assignment cMappingsAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
-		private final RuleCall cMappingsMappingCSParserRuleCall_1_0_0 = (RuleCall)cMappingsAssignment_1_0.eContents().get(0);
-		private final Assignment cTransformationsAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
-		private final RuleCall cTransformationsTransformationCSParserRuleCall_1_1_0 = (RuleCall)cTransformationsAssignment_1_1.eContents().get(0);
-		private final Assignment cQueriesAssignment_1_2 = (Assignment)cAlternatives_1.eContents().get(2);
-		private final RuleCall cQueriesQueryCSParserRuleCall_1_2_0 = (RuleCall)cQueriesAssignment_1_2.eContents().get(0);
+		private final Assignment cOwnedMappingsAssignment_1_0 = (Assignment)cAlternatives_1.eContents().get(0);
+		private final RuleCall cOwnedMappingsMappingCSParserRuleCall_1_0_0 = (RuleCall)cOwnedMappingsAssignment_1_0.eContents().get(0);
+		private final Assignment cOwnedTransformationsAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
+		private final RuleCall cOwnedTransformationsTransformationCSParserRuleCall_1_1_0 = (RuleCall)cOwnedTransformationsAssignment_1_1.eContents().get(0);
+		private final Assignment cOwnedQueriesAssignment_1_2 = (Assignment)cAlternatives_1.eContents().get(2);
+		private final RuleCall cOwnedQueriesQueryCSParserRuleCall_1_2_0 = (RuleCall)cOwnedQueriesAssignment_1_2.eContents().get(0);
 		
 		//TopLevelCS:
-		//	(ownedImports+=ImportCS | / *ownedInclude+=IncludeCS |* / ownedLibraries+=LibraryCS)* (mappings+=MappingCS |
-		//	transformations+=TransformationCS | queries+=QueryCS)*;
+		//	(ownedImports+=ImportCS | / *ownedInclude+=IncludeCS |* / ownedLibraries+=LibraryCS)* (ownedMappings+=MappingCS |
+		//	ownedTransformations+=TransformationCS | ownedQueries+=QueryCS)*;
 		@Override public ParserRule getRule() { return rule; }
 
-		//(ownedImports+=ImportCS | / *ownedInclude+=IncludeCS |* / ownedLibraries+=LibraryCS)* (mappings+=MappingCS |
-		//transformations+=TransformationCS | queries+=QueryCS)*
+		//(ownedImports+=ImportCS | / *ownedInclude+=IncludeCS |* / ownedLibraries+=LibraryCS)* (ownedMappings+=MappingCS |
+		//ownedTransformations+=TransformationCS | ownedQueries+=QueryCS)*
 		public Group getGroup() { return cGroup; }
 
 		//(ownedImports+=ImportCS | / *ownedInclude+=IncludeCS |* / ownedLibraries+=LibraryCS)*
@@ -60,26 +60,26 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//LibraryCS
 		public RuleCall getOwnedLibrariesLibraryCSParserRuleCall_0_1_0() { return cOwnedLibrariesLibraryCSParserRuleCall_0_1_0; }
 
-		//(mappings+=MappingCS | transformations+=TransformationCS | queries+=QueryCS)*
+		//(ownedMappings+=MappingCS | ownedTransformations+=TransformationCS | ownedQueries+=QueryCS)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//mappings+=MappingCS
-		public Assignment getMappingsAssignment_1_0() { return cMappingsAssignment_1_0; }
+		//ownedMappings+=MappingCS
+		public Assignment getOwnedMappingsAssignment_1_0() { return cOwnedMappingsAssignment_1_0; }
 
 		//MappingCS
-		public RuleCall getMappingsMappingCSParserRuleCall_1_0_0() { return cMappingsMappingCSParserRuleCall_1_0_0; }
+		public RuleCall getOwnedMappingsMappingCSParserRuleCall_1_0_0() { return cOwnedMappingsMappingCSParserRuleCall_1_0_0; }
 
-		//transformations+=TransformationCS
-		public Assignment getTransformationsAssignment_1_1() { return cTransformationsAssignment_1_1; }
+		//ownedTransformations+=TransformationCS
+		public Assignment getOwnedTransformationsAssignment_1_1() { return cOwnedTransformationsAssignment_1_1; }
 
 		//TransformationCS
-		public RuleCall getTransformationsTransformationCSParserRuleCall_1_1_0() { return cTransformationsTransformationCSParserRuleCall_1_1_0; }
+		public RuleCall getOwnedTransformationsTransformationCSParserRuleCall_1_1_0() { return cOwnedTransformationsTransformationCSParserRuleCall_1_1_0; }
 
-		//queries+=QueryCS
-		public Assignment getQueriesAssignment_1_2() { return cQueriesAssignment_1_2; }
+		//ownedQueries+=QueryCS
+		public Assignment getOwnedQueriesAssignment_1_2() { return cOwnedQueriesAssignment_1_2; }
 
 		//QueryCS
-		public RuleCall getQueriesQueryCSParserRuleCall_1_2_0() { return cQueriesQueryCSParserRuleCall_1_2_0; }
+		public RuleCall getOwnedQueriesQueryCSParserRuleCall_1_2_0() { return cOwnedQueriesQueryCSParserRuleCall_1_2_0; }
 	}
 
 	public class MappingCSElements extends AbstractParserRuleElementFinder {
@@ -111,19 +111,19 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cWhereKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
 		private final Assignment cMiddleAssignment_7_1 = (Assignment)cGroup_7.eContents().get(1);
 		private final RuleCall cMiddleUnnamedDomainCSParserRuleCall_7_1_0 = (RuleCall)cMiddleAssignment_7_1.eContents().get(0);
-		private final Assignment cComposedMappingsAssignment_8 = (Assignment)cGroup.eContents().get(8);
-		private final RuleCall cComposedMappingsMappingCSParserRuleCall_8_0 = (RuleCall)cComposedMappingsAssignment_8.eContents().get(0);
+		private final Assignment cOwnedComposedMappingsAssignment_8 = (Assignment)cGroup.eContents().get(8);
+		private final RuleCall cOwnedComposedMappingsMappingCSParserRuleCall_8_0 = (RuleCall)cOwnedComposedMappingsAssignment_8.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_9 = (Keyword)cGroup.eContents().get(9);
 		
 		//MappingCS:
 		//	{MappingCS} "map" name=UnrestrictedName? ("in" in=[qvtbase::Transformation|UnrestrictedName])? ("refines"
 		//	refines+=[qvtcore::Mapping|UnrestrictedName] ("," refines+=[qvtcore::Mapping|UnrestrictedName])*)? "{"
-		//	domains+=NamedDomainCS* ("where" middle=UnnamedDomainCS)? composedMappings+=MappingCS* "}";
+		//	domains+=NamedDomainCS* ("where" middle=UnnamedDomainCS)? ownedComposedMappings+=MappingCS* "}";
 		@Override public ParserRule getRule() { return rule; }
 
 		//{MappingCS} "map" name=UnrestrictedName? ("in" in=[qvtbase::Transformation|UnrestrictedName])? ("refines"
 		//refines+=[qvtcore::Mapping|UnrestrictedName] ("," refines+=[qvtcore::Mapping|UnrestrictedName])*)? "{"
-		//domains+=NamedDomainCS* ("where" middle=UnnamedDomainCS)? composedMappings+=MappingCS* "}"
+		//domains+=NamedDomainCS* ("where" middle=UnnamedDomainCS)? ownedComposedMappings+=MappingCS* "}"
 		public Group getGroup() { return cGroup; }
 
 		//{MappingCS}
@@ -204,11 +204,11 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 		//UnnamedDomainCS
 		public RuleCall getMiddleUnnamedDomainCSParserRuleCall_7_1_0() { return cMiddleUnnamedDomainCSParserRuleCall_7_1_0; }
 
-		//composedMappings+=MappingCS*
-		public Assignment getComposedMappingsAssignment_8() { return cComposedMappingsAssignment_8; }
+		//ownedComposedMappings+=MappingCS*
+		public Assignment getOwnedComposedMappingsAssignment_8() { return cOwnedComposedMappingsAssignment_8; }
 
 		//MappingCS
-		public RuleCall getComposedMappingsMappingCSParserRuleCall_8_0() { return cComposedMappingsMappingCSParserRuleCall_8_0; }
+		public RuleCall getOwnedComposedMappingsMappingCSParserRuleCall_8_0() { return cOwnedComposedMappingsMappingCSParserRuleCall_8_0; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_9() { return cRightCurlyBracketKeyword_9; }
@@ -259,8 +259,8 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//TopLevelCS:
-	//	(ownedImports+=ImportCS | / *ownedInclude+=IncludeCS |* / ownedLibraries+=LibraryCS)* (mappings+=MappingCS |
-	//	transformations+=TransformationCS | queries+=QueryCS)*;
+	//	(ownedImports+=ImportCS | / *ownedInclude+=IncludeCS |* / ownedLibraries+=LibraryCS)* (ownedMappings+=MappingCS |
+	//	ownedTransformations+=TransformationCS | ownedQueries+=QueryCS)*;
 	public TopLevelCSElements getTopLevelCSAccess() {
 		return pTopLevelCS;
 	}
@@ -272,7 +272,7 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 	//MappingCS:
 	//	{MappingCS} "map" name=UnrestrictedName? ("in" in=[qvtbase::Transformation|UnrestrictedName])? ("refines"
 	//	refines+=[qvtcore::Mapping|UnrestrictedName] ("," refines+=[qvtcore::Mapping|UnrestrictedName])*)? "{"
-	//	domains+=NamedDomainCS* ("where" middle=UnnamedDomainCS)? composedMappings+=MappingCS* "}";
+	//	domains+=NamedDomainCS* ("where" middle=UnnamedDomainCS)? ownedComposedMappings+=MappingCS* "}";
 	public MappingCSElements getMappingCSAccess() {
 		return pMappingCS;
 	}
