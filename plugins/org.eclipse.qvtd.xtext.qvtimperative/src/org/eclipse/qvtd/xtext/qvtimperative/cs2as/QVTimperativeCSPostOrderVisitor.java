@@ -56,7 +56,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 		public BasicContinuation<?> execute() {
 			MappingCallBinding pBinding = PivotUtil.getPivot(MappingCallBinding.class, csElement);
 			if (pBinding != null) {
-				ExpCS expression = csElement.getValue();
+				ExpCS expression = csElement.getOwnedValue();
 				if (expression != null) {
 					OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
 					pBinding.setValue(target);
@@ -102,7 +102,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 	public Continuation<?> visitMappingLoopCS(@NonNull MappingLoopCS csElement) {
 		MappingLoop pMappingLoop = PivotUtil.getPivot(MappingLoop.class, csElement);
 		if (pMappingLoop != null) {
-			ExpCS expression = csElement.getInExpression();
+			ExpCS expression = csElement.getOwnedInExpression();
 			if (expression != null) {
 				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
 				pMappingLoop.setOwnedSource(target);

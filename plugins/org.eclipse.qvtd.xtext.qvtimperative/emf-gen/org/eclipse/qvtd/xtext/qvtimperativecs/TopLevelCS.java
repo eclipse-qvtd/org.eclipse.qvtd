@@ -24,9 +24,9 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getTransformations <em>Transformations</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getQueries <em>Queries</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getMappings <em>Mappings</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getOwnedTransformations <em>Owned Transformations</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getOwnedQueries <em>Owned Queries</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getOwnedMappings <em>Owned Mappings</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getTopLevelCS()
@@ -35,51 +35,51 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
  */
 public interface TopLevelCS extends RootPackageCS {
 	/**
-	 * Returns the value of the '<em><b>Transformations</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Transformations</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Transformations</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Transformations</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Transformations</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getTopLevelCS_Transformations()
+	 * @return the value of the '<em>Owned Transformations</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getTopLevelCS_OwnedTransformations()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<TransformationCS> getTransformations();
+	EList<TransformationCS> getOwnedTransformations();
 
 	/**
-	 * Returns the value of the '<em><b>Queries</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Queries</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Queries</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Queries</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Queries</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getTopLevelCS_Queries()
+	 * @return the value of the '<em>Owned Queries</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getTopLevelCS_OwnedQueries()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<QueryCS> getQueries();
+	EList<QueryCS> getOwnedQueries();
 
 	/**
-	 * Returns the value of the '<em><b>Mappings</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Mappings</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Mappings</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Mappings</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mappings</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getTopLevelCS_Mappings()
+	 * @return the value of the '<em>Owned Mappings</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getTopLevelCS_OwnedMappings()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<MappingCS> getMappings();
+	EList<MappingCS> getOwnedMappings();
 
 } // TopLevelCS

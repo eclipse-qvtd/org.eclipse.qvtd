@@ -21,7 +21,7 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getMappingSequence <em>Mapping Sequence</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedMappingSequence <em>Owned Mapping Sequence</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCS()
@@ -30,29 +30,29 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
  */
 public interface MappingCS extends AbstractMappingCS {
 	/**
-	 * Returns the value of the '<em><b>Mapping Sequence</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Mapping Sequence</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Mapping Sequence</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Mapping Sequence</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mapping Sequence</em>' containment reference.
-	 * @see #setMappingSequence(MappingSequenceCS)
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCS_MappingSequence()
+	 * @return the value of the '<em>Owned Mapping Sequence</em>' containment reference.
+	 * @see #setOwnedMappingSequence(MappingSequenceCS)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCS_OwnedMappingSequence()
 	 * @model containment="true"
 	 * @generated
 	 */
-	MappingSequenceCS getMappingSequence();
+	MappingSequenceCS getOwnedMappingSequence();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getMappingSequence <em>Mapping Sequence</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedMappingSequence <em>Owned Mapping Sequence</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Mapping Sequence</em>' containment reference.
-	 * @see #getMappingSequence()
+	 * @param value the new value of the '<em>Owned Mapping Sequence</em>' containment reference.
+	 * @see #getOwnedMappingSequence()
 	 * @generated
 	 */
-	void setMappingSequence(MappingSequenceCS value);
+	void setOwnedMappingSequence(MappingSequenceCS value);
 
 } // MappingCS

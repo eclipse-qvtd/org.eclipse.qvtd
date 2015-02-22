@@ -474,7 +474,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	 *         in=[Transformation|UnrestrictedName]? 
 	 *         (domains+=SourceDomainCS | domains+=TargetDomainCS)* 
 	 *         middle=MiddleDomainCS? 
-	 *         mappingSequence=MappingSequenceCS?
+	 *         ownedMappingSequence=MappingSequenceCS?
 	 *     )
 	 */
 	protected void sequence_MappingCS(EObject context, MappingCS semanticObject) {
@@ -484,7 +484,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	
 	/**
 	 * Constraint:
-	 *     (referredVariable=[Variable|UnrestrictedName] value=ExpCS)
+	 *     (referredVariable=[Variable|UnrestrictedName] ownedValue=ExpCS)
 	 */
 	protected void sequence_MappingCallBindingCS(EObject context, MappingCallBindingCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -493,7 +493,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	
 	/**
 	 * Constraint:
-	 *     (referredMapping=[Mapping|UnrestrictedName] bindings+=MappingCallBindingCS*)
+	 *     (referredMapping=[Mapping|UnrestrictedName] ownedBindings+=MappingCallBindingCS*)
 	 */
 	protected void sequence_MappingCallCS(EObject context, MappingCallCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -511,7 +511,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	
 	/**
 	 * Constraint:
-	 *     (ownedIterator=MappingIteratorCS inExpression=ExpCS mappingSequence=MappingSequenceCS)
+	 *     (ownedIterator=MappingIteratorCS ownedInExpression=ExpCS ownedMappingSequence=MappingSequenceCS)
 	 */
 	protected void sequence_MappingLoopCS(EObject context, MappingLoopCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -520,7 +520,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	
 	/**
 	 * Constraint:
-	 *     mappingStatements+=MappingStatementCS+
+	 *     ownedMappingStatements+=MappingStatementCS+
 	 */
 	protected void sequence_MappingSequenceCS(EObject context, MappingSequenceCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -615,7 +615,10 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	
 	/**
 	 * Constraint:
-	 *     ((ownedImports+=ImportCS | ownedLibraries+=LibraryCS)* (transformations+=TransformationCS | mappings+=MappingCS | queries+=QueryCS)*)
+	 *     (
+	 *         (ownedImports+=ImportCS | ownedLibraries+=LibraryCS)* 
+	 *         (ownedTransformations+=TransformationCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)*
+	 *     )
 	 */
 	protected void sequence_TopLevelCS(EObject context, TopLevelCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -34,22 +34,21 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingSequenceCSImpl#getMappingStatements <em>Mapping Statements</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingSequenceCSImpl#getOwnedMappingStatements <em>Owned Mapping Statements</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class MappingSequenceCSImpl extends MappingStatementCSImpl implements MappingSequenceCS {
 	/**
-	 * The cached value of the '{@link #getMappingStatements() <em>Mapping Statements</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedMappingStatements() <em>Owned Mapping Statements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMappingStatements()
+	 * @see #getOwnedMappingStatements()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<MappingStatementCS> mappingStatements;
-
+	protected EList<MappingStatementCS> ownedMappingStatements;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -75,11 +74,11 @@ public class MappingSequenceCSImpl extends MappingStatementCSImpl implements Map
 	 * @generated
 	 */
 	@Override
-	public EList<MappingStatementCS> getMappingStatements() {
-		if (mappingStatements == null) {
-			mappingStatements = new EObjectContainmentEList<MappingStatementCS>(MappingStatementCS.class, this, QVTimperativeCSPackage.MAPPING_SEQUENCE_CS__MAPPING_STATEMENTS);
+	public EList<MappingStatementCS> getOwnedMappingStatements() {
+		if (ownedMappingStatements == null) {
+			ownedMappingStatements = new EObjectContainmentEList<MappingStatementCS>(MappingStatementCS.class, this, QVTimperativeCSPackage.MAPPING_SEQUENCE_CS__OWNED_MAPPING_STATEMENTS);
 		}
-		return mappingStatements;
+		return ownedMappingStatements;
 	}
 
 	/**
@@ -90,8 +89,8 @@ public class MappingSequenceCSImpl extends MappingStatementCSImpl implements Map
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_SEQUENCE_CS__MAPPING_STATEMENTS:
-				return ((InternalEList<?>)getMappingStatements()).basicRemove(otherEnd, msgs);
+			case QVTimperativeCSPackage.MAPPING_SEQUENCE_CS__OWNED_MAPPING_STATEMENTS:
+				return ((InternalEList<?>)getOwnedMappingStatements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -104,8 +103,8 @@ public class MappingSequenceCSImpl extends MappingStatementCSImpl implements Map
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_SEQUENCE_CS__MAPPING_STATEMENTS:
-				return getMappingStatements();
+			case QVTimperativeCSPackage.MAPPING_SEQUENCE_CS__OWNED_MAPPING_STATEMENTS:
+				return getOwnedMappingStatements();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -119,9 +118,9 @@ public class MappingSequenceCSImpl extends MappingStatementCSImpl implements Map
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_SEQUENCE_CS__MAPPING_STATEMENTS:
-				getMappingStatements().clear();
-				getMappingStatements().addAll((Collection<? extends MappingStatementCS>)newValue);
+			case QVTimperativeCSPackage.MAPPING_SEQUENCE_CS__OWNED_MAPPING_STATEMENTS:
+				getOwnedMappingStatements().clear();
+				getOwnedMappingStatements().addAll((Collection<? extends MappingStatementCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -135,8 +134,8 @@ public class MappingSequenceCSImpl extends MappingStatementCSImpl implements Map
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_SEQUENCE_CS__MAPPING_STATEMENTS:
-				getMappingStatements().clear();
+			case QVTimperativeCSPackage.MAPPING_SEQUENCE_CS__OWNED_MAPPING_STATEMENTS:
+				getOwnedMappingStatements().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -150,8 +149,8 @@ public class MappingSequenceCSImpl extends MappingStatementCSImpl implements Map
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_SEQUENCE_CS__MAPPING_STATEMENTS:
-				return mappingStatements != null && !mappingStatements.isEmpty();
+			case QVTimperativeCSPackage.MAPPING_SEQUENCE_CS__OWNED_MAPPING_STATEMENTS:
+				return ownedMappingStatements != null && !ownedMappingStatements.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

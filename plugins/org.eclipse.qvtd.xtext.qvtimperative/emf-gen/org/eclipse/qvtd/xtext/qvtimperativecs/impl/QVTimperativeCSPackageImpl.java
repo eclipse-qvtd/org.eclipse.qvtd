@@ -166,7 +166,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingCS_MappingSequence() {
+	public EReference getMappingCS_OwnedMappingSequence() {
 		return (EReference)mappingCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -186,7 +186,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingCallBindingCS_MappingCall() {
+	public EReference getMappingCallBindingCS_OwningMappingCall() {
 		return (EReference)mappingCallBindingCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -206,7 +206,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingCallBindingCS_Value() {
+	public EReference getMappingCallBindingCS_OwnedValue() {
 		return (EReference)mappingCallBindingCSEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -236,7 +236,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingCallCS_Bindings() {
+	public EReference getMappingCallCS_OwnedBindings() {
 		return (EReference)mappingCallCSEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -266,7 +266,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingLoopCS_InExpression() {
+	public EReference getMappingLoopCS_OwnedInExpression() {
 		return (EReference)mappingLoopCSEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -276,7 +276,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingLoopCS_MappingSequence() {
+	public EReference getMappingLoopCS_OwnedMappingSequence() {
 		return (EReference)mappingLoopCSEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -296,7 +296,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getMappingSequenceCS_MappingStatements() {
+	public EReference getMappingSequenceCS_OwnedMappingStatements() {
 		return (EReference)mappingSequenceCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -326,7 +326,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getTopLevelCS_Transformations() {
+	public EReference getTopLevelCS_OwnedTransformations() {
 		return (EReference)topLevelCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -336,7 +336,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getTopLevelCS_Queries() {
+	public EReference getTopLevelCS_OwnedQueries() {
 		return (EReference)topLevelCSEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -346,7 +346,7 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 	 * @generated
 	 */
 	@Override
-	public EReference getTopLevelCS_Mappings() {
+	public EReference getTopLevelCS_OwnedMappings() {
 		return (EReference)topLevelCSEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -380,31 +380,31 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 		// Create classes and their features
 		mappingCSEClass = createEClass(MAPPING_CS);
-		createEReference(mappingCSEClass, MAPPING_CS__MAPPING_SEQUENCE);
+		createEReference(mappingCSEClass, MAPPING_CS__OWNED_MAPPING_SEQUENCE);
 
 		mappingCallBindingCSEClass = createEClass(MAPPING_CALL_BINDING_CS);
-		createEReference(mappingCallBindingCSEClass, MAPPING_CALL_BINDING_CS__MAPPING_CALL);
+		createEReference(mappingCallBindingCSEClass, MAPPING_CALL_BINDING_CS__OWNING_MAPPING_CALL);
 		createEReference(mappingCallBindingCSEClass, MAPPING_CALL_BINDING_CS__REFERRED_VARIABLE);
-		createEReference(mappingCallBindingCSEClass, MAPPING_CALL_BINDING_CS__VALUE);
+		createEReference(mappingCallBindingCSEClass, MAPPING_CALL_BINDING_CS__OWNED_VALUE);
 
 		mappingCallCSEClass = createEClass(MAPPING_CALL_CS);
 		createEReference(mappingCallCSEClass, MAPPING_CALL_CS__REFERRED_MAPPING);
-		createEReference(mappingCallCSEClass, MAPPING_CALL_CS__BINDINGS);
+		createEReference(mappingCallCSEClass, MAPPING_CALL_CS__OWNED_BINDINGS);
 
 		mappingLoopCSEClass = createEClass(MAPPING_LOOP_CS);
 		createEReference(mappingLoopCSEClass, MAPPING_LOOP_CS__OWNED_ITERATOR);
-		createEReference(mappingLoopCSEClass, MAPPING_LOOP_CS__IN_EXPRESSION);
-		createEReference(mappingLoopCSEClass, MAPPING_LOOP_CS__MAPPING_SEQUENCE);
+		createEReference(mappingLoopCSEClass, MAPPING_LOOP_CS__OWNED_IN_EXPRESSION);
+		createEReference(mappingLoopCSEClass, MAPPING_LOOP_CS__OWNED_MAPPING_SEQUENCE);
 
 		mappingSequenceCSEClass = createEClass(MAPPING_SEQUENCE_CS);
-		createEReference(mappingSequenceCSEClass, MAPPING_SEQUENCE_CS__MAPPING_STATEMENTS);
+		createEReference(mappingSequenceCSEClass, MAPPING_SEQUENCE_CS__OWNED_MAPPING_STATEMENTS);
 
 		mappingStatementCSEClass = createEClass(MAPPING_STATEMENT_CS);
 
 		topLevelCSEClass = createEClass(TOP_LEVEL_CS);
-		createEReference(topLevelCSEClass, TOP_LEVEL_CS__TRANSFORMATIONS);
-		createEReference(topLevelCSEClass, TOP_LEVEL_CS__QUERIES);
-		createEReference(topLevelCSEClass, TOP_LEVEL_CS__MAPPINGS);
+		createEReference(topLevelCSEClass, TOP_LEVEL_CS__OWNED_TRANSFORMATIONS);
+		createEReference(topLevelCSEClass, TOP_LEVEL_CS__OWNED_QUERIES);
+		createEReference(topLevelCSEClass, TOP_LEVEL_CS__OWNED_MAPPINGS);
 	}
 
 	/**
@@ -452,31 +452,31 @@ public class QVTimperativeCSPackageImpl extends EPackageImpl implements QVTimper
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(mappingCSEClass, MappingCS.class, "MappingCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMappingCS_MappingSequence(), this.getMappingSequenceCS(), null, "mappingSequence", null, 0, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingCS_OwnedMappingSequence(), this.getMappingSequenceCS(), null, "ownedMappingSequence", null, 0, 1, MappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingCallBindingCSEClass, MappingCallBindingCS.class, "MappingCallBindingCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMappingCallBindingCS_MappingCall(), this.getMappingCallCS(), this.getMappingCallCS_Bindings(), "mappingCall", null, 0, 1, MappingCallBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingCallBindingCS_OwningMappingCall(), this.getMappingCallCS(), this.getMappingCallCS_OwnedBindings(), "owningMappingCall", null, 0, 1, MappingCallBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getMappingCallBindingCS_ReferredVariable(), thePivotPackage.getVariable(), null, "referredVariable", null, 1, 1, MappingCallBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMappingCallBindingCS_Value(), theEssentialOCLCSPackage.getExpCS(), null, "value", null, 1, 1, MappingCallBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingCallBindingCS_OwnedValue(), theEssentialOCLCSPackage.getExpCS(), null, "ownedValue", null, 1, 1, MappingCallBindingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingCallCSEClass, MappingCallCS.class, "MappingCallCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMappingCallCS_ReferredMapping(), theQVTimperativePackage.getMapping(), null, "referredMapping", null, 1, 1, MappingCallCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMappingCallCS_Bindings(), this.getMappingCallBindingCS(), this.getMappingCallBindingCS_MappingCall(), "bindings", null, 0, -1, MappingCallCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getMappingCallCS_OwnedBindings(), this.getMappingCallBindingCS(), this.getMappingCallBindingCS_OwningMappingCall(), "ownedBindings", null, 0, -1, MappingCallCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(mappingLoopCSEClass, MappingLoopCS.class, "MappingLoopCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMappingLoopCS_OwnedIterator(), theEssentialOCLCSPackage.getVariableCS(), null, "ownedIterator", null, 1, 1, MappingLoopCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMappingLoopCS_InExpression(), theEssentialOCLCSPackage.getExpCS(), null, "inExpression", null, 1, 1, MappingLoopCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMappingLoopCS_MappingSequence(), this.getMappingSequenceCS(), null, "mappingSequence", null, 1, 1, MappingLoopCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingLoopCS_OwnedInExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedInExpression", null, 1, 1, MappingLoopCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingLoopCS_OwnedMappingSequence(), this.getMappingSequenceCS(), null, "ownedMappingSequence", null, 1, 1, MappingLoopCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingSequenceCSEClass, MappingSequenceCS.class, "MappingSequenceCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMappingSequenceCS_MappingStatements(), this.getMappingStatementCS(), null, "mappingStatements", null, 1, -1, MappingSequenceCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getMappingSequenceCS_OwnedMappingStatements(), this.getMappingStatementCS(), null, "ownedMappingStatements", null, 1, -1, MappingSequenceCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(mappingStatementCSEClass, MappingStatementCS.class, "MappingStatementCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(topLevelCSEClass, TopLevelCS.class, "TopLevelCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTopLevelCS_Transformations(), theQVTcoreBaseCSPackage.getTransformationCS(), null, "transformations", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTopLevelCS_Queries(), theQVTcoreBaseCSPackage.getQueryCS(), null, "queries", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTopLevelCS_Mappings(), this.getMappingCS(), null, "mappings", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTopLevelCS_OwnedTransformations(), theQVTcoreBaseCSPackage.getTransformationCS(), null, "ownedTransformations", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTopLevelCS_OwnedQueries(), theQVTcoreBaseCSPackage.getQueryCS(), null, "ownedQueries", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTopLevelCS_OwnedMappings(), this.getMappingCS(), null, "ownedMappings", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

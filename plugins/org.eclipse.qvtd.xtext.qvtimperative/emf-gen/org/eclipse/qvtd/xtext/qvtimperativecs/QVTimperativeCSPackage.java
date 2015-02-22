@@ -165,13 +165,13 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int MAPPING_CS__MIDDLE = QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__MIDDLE;
 
 	/**
-	 * The feature id for the '<em><b>Mapping Sequence</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Mapping Sequence</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__MAPPING_SEQUENCE = QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS_FEATURE_COUNT + 0;
+	int MAPPING_CS__OWNED_MAPPING_SEQUENCE = QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Mapping CS</em>' class.
@@ -301,13 +301,13 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int MAPPING_CALL_BINDING_CS__PRECEDENCE = EssentialOCLCSPackage.EXP_CS__PRECEDENCE;
 
 	/**
-	 * The feature id for the '<em><b>Mapping Call</b></em>' container reference.
+	 * The feature id for the '<em><b>Owning Mapping Call</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_BINDING_CS__MAPPING_CALL = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 0;
+	int MAPPING_CALL_BINDING_CS__OWNING_MAPPING_CALL = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Referred Variable</b></em>' reference.
@@ -319,13 +319,13 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int MAPPING_CALL_BINDING_CS__REFERRED_VARIABLE = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Value</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_BINDING_CS__VALUE = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 2;
+	int MAPPING_CALL_BINDING_CS__OWNED_VALUE = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Mapping Call Binding CS</em>' class.
@@ -465,13 +465,13 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int MAPPING_CALL_CS__REFERRED_MAPPING = MAPPING_STATEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Bindings</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Bindings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_CS__BINDINGS = MAPPING_STATEMENT_CS_FEATURE_COUNT + 1;
+	int MAPPING_CALL_CS__OWNED_BINDINGS = MAPPING_STATEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Mapping Call CS</em>' class.
@@ -557,22 +557,22 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int MAPPING_LOOP_CS__OWNED_ITERATOR = MAPPING_STATEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>In Expression</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned In Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP_CS__IN_EXPRESSION = MAPPING_STATEMENT_CS_FEATURE_COUNT + 1;
+	int MAPPING_LOOP_CS__OWNED_IN_EXPRESSION = MAPPING_STATEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Mapping Sequence</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Mapping Sequence</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_LOOP_CS__MAPPING_SEQUENCE = MAPPING_STATEMENT_CS_FEATURE_COUNT + 2;
+	int MAPPING_LOOP_CS__OWNED_MAPPING_SEQUENCE = MAPPING_STATEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Mapping Loop CS</em>' class.
@@ -629,13 +629,13 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int MAPPING_SEQUENCE_CS__OWNED_ANNOTATIONS = MAPPING_STATEMENT_CS__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Mapping Statements</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Mapping Statements</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_SEQUENCE_CS__MAPPING_STATEMENTS = MAPPING_STATEMENT_CS_FEATURE_COUNT + 0;
+	int MAPPING_SEQUENCE_CS__OWNED_MAPPING_STATEMENTS = MAPPING_STATEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Mapping Sequence CS</em>' class.
@@ -729,31 +729,31 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int TOP_LEVEL_CS__OWNED_LIBRARIES = BaseCSPackage.ROOT_PACKAGE_CS__OWNED_LIBRARIES;
 
 	/**
-	 * The feature id for the '<em><b>Transformations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Transformations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_LEVEL_CS__TRANSFORMATIONS = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 0;
+	int TOP_LEVEL_CS__OWNED_TRANSFORMATIONS = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Queries</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Queries</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_LEVEL_CS__QUERIES = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 1;
+	int TOP_LEVEL_CS__OWNED_QUERIES = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Mappings</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Mappings</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_LEVEL_CS__MAPPINGS = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 2;
+	int TOP_LEVEL_CS__OWNED_MAPPINGS = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Top Level CS</em>' class.
@@ -775,15 +775,15 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EClass getMappingCS();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getMappingSequence <em>Mapping Sequence</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedMappingSequence <em>Owned Mapping Sequence</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Mapping Sequence</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getMappingSequence()
+	 * @return the meta object for the containment reference '<em>Owned Mapping Sequence</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS#getOwnedMappingSequence()
 	 * @see #getMappingCS()
 	 * @generated
 	 */
-	EReference getMappingCS_MappingSequence();
+	EReference getMappingCS_OwnedMappingSequence();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS <em>Mapping Call Binding CS</em>}'.
@@ -796,15 +796,15 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EClass getMappingCallBindingCS();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getMappingCall <em>Mapping Call</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getOwningMappingCall <em>Owning Mapping Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Mapping Call</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getMappingCall()
+	 * @return the meta object for the container reference '<em>Owning Mapping Call</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getOwningMappingCall()
 	 * @see #getMappingCallBindingCS()
 	 * @generated
 	 */
-	EReference getMappingCallBindingCS_MappingCall();
+	EReference getMappingCallBindingCS_OwningMappingCall();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getReferredVariable <em>Referred Variable</em>}'.
@@ -818,15 +818,15 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EReference getMappingCallBindingCS_ReferredVariable();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getValue <em>Value</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getOwnedValue <em>Owned Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Value</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getValue()
+	 * @return the meta object for the containment reference '<em>Owned Value</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getOwnedValue()
 	 * @see #getMappingCallBindingCS()
 	 * @generated
 	 */
-	EReference getMappingCallBindingCS_Value();
+	EReference getMappingCallBindingCS_OwnedValue();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS <em>Mapping Call CS</em>}'.
@@ -850,15 +850,15 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EReference getMappingCallCS_ReferredMapping();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#getBindings <em>Bindings</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#getOwnedBindings <em>Owned Bindings</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Bindings</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#getBindings()
+	 * @return the meta object for the containment reference list '<em>Owned Bindings</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#getOwnedBindings()
 	 * @see #getMappingCallCS()
 	 * @generated
 	 */
-	EReference getMappingCallCS_Bindings();
+	EReference getMappingCallCS_OwnedBindings();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS <em>Mapping Loop CS</em>}'.
@@ -882,26 +882,26 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EReference getMappingLoopCS_OwnedIterator();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS#getInExpression <em>In Expression</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS#getOwnedInExpression <em>Owned In Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>In Expression</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS#getInExpression()
+	 * @return the meta object for the containment reference '<em>Owned In Expression</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS#getOwnedInExpression()
 	 * @see #getMappingLoopCS()
 	 * @generated
 	 */
-	EReference getMappingLoopCS_InExpression();
+	EReference getMappingLoopCS_OwnedInExpression();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS#getMappingSequence <em>Mapping Sequence</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS#getOwnedMappingSequence <em>Owned Mapping Sequence</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Mapping Sequence</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS#getMappingSequence()
+	 * @return the meta object for the containment reference '<em>Owned Mapping Sequence</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS#getOwnedMappingSequence()
 	 * @see #getMappingLoopCS()
 	 * @generated
 	 */
-	EReference getMappingLoopCS_MappingSequence();
+	EReference getMappingLoopCS_OwnedMappingSequence();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingSequenceCS <em>Mapping Sequence CS</em>}'.
@@ -914,15 +914,15 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EClass getMappingSequenceCS();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingSequenceCS#getMappingStatements <em>Mapping Statements</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingSequenceCS#getOwnedMappingStatements <em>Owned Mapping Statements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Mapping Statements</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingSequenceCS#getMappingStatements()
+	 * @return the meta object for the containment reference list '<em>Owned Mapping Statements</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingSequenceCS#getOwnedMappingStatements()
 	 * @see #getMappingSequenceCS()
 	 * @generated
 	 */
-	EReference getMappingSequenceCS_MappingStatements();
+	EReference getMappingSequenceCS_OwnedMappingStatements();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingStatementCS <em>Mapping Statement CS</em>}'.
@@ -945,37 +945,37 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EClass getTopLevelCS();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getTransformations <em>Transformations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getOwnedTransformations <em>Owned Transformations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Transformations</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getTransformations()
+	 * @return the meta object for the containment reference list '<em>Owned Transformations</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getOwnedTransformations()
 	 * @see #getTopLevelCS()
 	 * @generated
 	 */
-	EReference getTopLevelCS_Transformations();
+	EReference getTopLevelCS_OwnedTransformations();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getQueries <em>Queries</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getOwnedQueries <em>Owned Queries</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Queries</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getQueries()
+	 * @return the meta object for the containment reference list '<em>Owned Queries</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getOwnedQueries()
 	 * @see #getTopLevelCS()
 	 * @generated
 	 */
-	EReference getTopLevelCS_Queries();
+	EReference getTopLevelCS_OwnedQueries();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getMappings <em>Mappings</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getOwnedMappings <em>Owned Mappings</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Mappings</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getMappings()
+	 * @return the meta object for the containment reference list '<em>Owned Mappings</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS#getOwnedMappings()
 	 * @see #getTopLevelCS()
 	 * @generated
 	 */
-	EReference getTopLevelCS_Mappings();
+	EReference getTopLevelCS_OwnedMappings();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -1010,12 +1010,12 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EClass MAPPING_CS = eINSTANCE.getMappingCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Mapping Sequence</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Mapping Sequence</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MAPPING_CS__MAPPING_SEQUENCE = eINSTANCE.getMappingCS_MappingSequence();
+		EReference MAPPING_CS__OWNED_MAPPING_SEQUENCE = eINSTANCE.getMappingCS_OwnedMappingSequence();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallBindingCSImpl <em>Mapping Call Binding CS</em>}' class.
@@ -1028,12 +1028,12 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EClass MAPPING_CALL_BINDING_CS = eINSTANCE.getMappingCallBindingCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Mapping Call</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Owning Mapping Call</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MAPPING_CALL_BINDING_CS__MAPPING_CALL = eINSTANCE.getMappingCallBindingCS_MappingCall();
+		EReference MAPPING_CALL_BINDING_CS__OWNING_MAPPING_CALL = eINSTANCE.getMappingCallBindingCS_OwningMappingCall();
 
 		/**
 		 * The meta object literal for the '<em><b>Referred Variable</b></em>' reference feature.
@@ -1044,12 +1044,12 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EReference MAPPING_CALL_BINDING_CS__REFERRED_VARIABLE = eINSTANCE.getMappingCallBindingCS_ReferredVariable();
 
 		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Value</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MAPPING_CALL_BINDING_CS__VALUE = eINSTANCE.getMappingCallBindingCS_Value();
+		EReference MAPPING_CALL_BINDING_CS__OWNED_VALUE = eINSTANCE.getMappingCallBindingCS_OwnedValue();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl <em>Mapping Call CS</em>}' class.
@@ -1070,12 +1070,12 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EReference MAPPING_CALL_CS__REFERRED_MAPPING = eINSTANCE.getMappingCallCS_ReferredMapping();
 
 		/**
-		 * The meta object literal for the '<em><b>Bindings</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Bindings</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MAPPING_CALL_CS__BINDINGS = eINSTANCE.getMappingCallCS_Bindings();
+		EReference MAPPING_CALL_CS__OWNED_BINDINGS = eINSTANCE.getMappingCallCS_OwnedBindings();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingLoopCSImpl <em>Mapping Loop CS</em>}' class.
@@ -1096,20 +1096,20 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EReference MAPPING_LOOP_CS__OWNED_ITERATOR = eINSTANCE.getMappingLoopCS_OwnedIterator();
 
 		/**
-		 * The meta object literal for the '<em><b>In Expression</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned In Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MAPPING_LOOP_CS__IN_EXPRESSION = eINSTANCE.getMappingLoopCS_InExpression();
+		EReference MAPPING_LOOP_CS__OWNED_IN_EXPRESSION = eINSTANCE.getMappingLoopCS_OwnedInExpression();
 
 		/**
-		 * The meta object literal for the '<em><b>Mapping Sequence</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Mapping Sequence</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MAPPING_LOOP_CS__MAPPING_SEQUENCE = eINSTANCE.getMappingLoopCS_MappingSequence();
+		EReference MAPPING_LOOP_CS__OWNED_MAPPING_SEQUENCE = eINSTANCE.getMappingLoopCS_OwnedMappingSequence();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingSequenceCSImpl <em>Mapping Sequence CS</em>}' class.
@@ -1122,12 +1122,12 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EClass MAPPING_SEQUENCE_CS = eINSTANCE.getMappingSequenceCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Mapping Statements</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Mapping Statements</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MAPPING_SEQUENCE_CS__MAPPING_STATEMENTS = eINSTANCE.getMappingSequenceCS_MappingStatements();
+		EReference MAPPING_SEQUENCE_CS__OWNED_MAPPING_STATEMENTS = eINSTANCE.getMappingSequenceCS_OwnedMappingStatements();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingStatementCSImpl <em>Mapping Statement CS</em>}' class.
@@ -1150,28 +1150,28 @@ public interface QVTimperativeCSPackage extends EPackage {
 		EClass TOP_LEVEL_CS = eINSTANCE.getTopLevelCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Transformations</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Transformations</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TOP_LEVEL_CS__TRANSFORMATIONS = eINSTANCE.getTopLevelCS_Transformations();
+		EReference TOP_LEVEL_CS__OWNED_TRANSFORMATIONS = eINSTANCE.getTopLevelCS_OwnedTransformations();
 
 		/**
-		 * The meta object literal for the '<em><b>Queries</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Queries</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TOP_LEVEL_CS__QUERIES = eINSTANCE.getTopLevelCS_Queries();
+		EReference TOP_LEVEL_CS__OWNED_QUERIES = eINSTANCE.getTopLevelCS_OwnedQueries();
 
 		/**
-		 * The meta object literal for the '<em><b>Mappings</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Mappings</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TOP_LEVEL_CS__MAPPINGS = eINSTANCE.getTopLevelCS_Mappings();
+		EReference TOP_LEVEL_CS__OWNED_MAPPINGS = eINSTANCE.getTopLevelCS_OwnedMappings();
 
 	}
 

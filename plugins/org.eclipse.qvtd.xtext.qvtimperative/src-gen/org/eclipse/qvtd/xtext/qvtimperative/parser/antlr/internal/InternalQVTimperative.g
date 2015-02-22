@@ -123,16 +123,16 @@ ruleTopLevelCS returns [EObject current=null]
 ))*((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTopLevelCSAccess().getTransformationsTransformationCSParserRuleCall_1_0_0()); 
+	        newCompositeNode(grammarAccess.getTopLevelCSAccess().getOwnedTransformationsTransformationCSParserRuleCall_1_0_0()); 
 	    }
-		lv_transformations_2_0=ruleTransformationCS		{
+		lv_ownedTransformations_2_0=ruleTransformationCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getTopLevelCSRule());
 	        }
        		add(
        			$current, 
-       			"transformations",
-        		lv_transformations_2_0, 
+       			"ownedTransformations",
+        		lv_ownedTransformations_2_0, 
         		"TransformationCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -142,16 +142,16 @@ ruleTopLevelCS returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTopLevelCSAccess().getMappingsMappingCSParserRuleCall_1_1_0()); 
+	        newCompositeNode(grammarAccess.getTopLevelCSAccess().getOwnedMappingsMappingCSParserRuleCall_1_1_0()); 
 	    }
-		lv_mappings_3_0=ruleMappingCS		{
+		lv_ownedMappings_3_0=ruleMappingCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getTopLevelCSRule());
 	        }
        		add(
        			$current, 
-       			"mappings",
-        		lv_mappings_3_0, 
+       			"ownedMappings",
+        		lv_ownedMappings_3_0, 
         		"MappingCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -161,16 +161,16 @@ ruleTopLevelCS returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTopLevelCSAccess().getQueriesQueryCSParserRuleCall_1_2_0()); 
+	        newCompositeNode(grammarAccess.getTopLevelCSAccess().getOwnedQueriesQueryCSParserRuleCall_1_2_0()); 
 	    }
-		lv_queries_4_0=ruleQueryCS		{
+		lv_ownedQueries_4_0=ruleQueryCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getTopLevelCSRule());
 	        }
        		add(
        			$current, 
-       			"queries",
-        		lv_queries_4_0, 
+       			"ownedQueries",
+        		lv_ownedQueries_4_0, 
         		"QueryCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -451,16 +451,16 @@ ruleMappingCS returns [EObject current=null]
 ))?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMappingCSAccess().getMappingSequenceMappingSequenceCSParserRuleCall_7_0()); 
+	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedMappingSequenceMappingSequenceCSParserRuleCall_7_0()); 
 	    }
-		lv_mappingSequence_9_0=ruleMappingSequenceCS		{
+		lv_ownedMappingSequence_9_0=ruleMappingSequenceCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMappingCSRule());
 	        }
        		set(
        			$current, 
-       			"mappingSequence",
-        		lv_mappingSequence_9_0, 
+       			"ownedMappingSequence",
+        		lv_ownedMappingSequence_9_0, 
         		"MappingSequenceCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -529,16 +529,16 @@ ruleMappingCallCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMappingCallCSAccess().getBindingsMappingCallBindingCSParserRuleCall_4_0()); 
+	        newCompositeNode(grammarAccess.getMappingCallCSAccess().getOwnedBindingsMappingCallBindingCSParserRuleCall_4_0()); 
 	    }
-		lv_bindings_4_0=ruleMappingCallBindingCS		{
+		lv_ownedBindings_4_0=ruleMappingCallBindingCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMappingCallCSRule());
 	        }
        		add(
        			$current, 
-       			"bindings",
-        		lv_bindings_4_0, 
+       			"ownedBindings",
+        		lv_ownedBindings_4_0, 
         		"MappingCallBindingCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -594,16 +594,16 @@ ruleMappingCallBindingCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMappingCallBindingCSAccess().getValueExpCSParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getMappingCallBindingCSAccess().getOwnedValueExpCSParserRuleCall_2_0()); 
 	    }
-		lv_value_2_0=ruleExpCS		{
+		lv_ownedValue_2_0=ruleExpCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMappingCallBindingCSRule());
 	        }
        		set(
        			$current, 
-       			"value",
-        		lv_value_2_0, 
+       			"ownedValue",
+        		lv_ownedValue_2_0, 
         		"ExpCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -663,16 +663,16 @@ ruleMappingLoopCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMappingLoopCSAccess().getInExpressionExpCSParserRuleCall_3_0()); 
+	        newCompositeNode(grammarAccess.getMappingLoopCSAccess().getOwnedInExpressionExpCSParserRuleCall_3_0()); 
 	    }
-		lv_inExpression_3_0=ruleExpCS		{
+		lv_ownedInExpression_3_0=ruleExpCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMappingLoopCSRule());
 	        }
        		set(
        			$current, 
-       			"inExpression",
-        		lv_inExpression_3_0, 
+       			"ownedInExpression",
+        		lv_ownedInExpression_3_0, 
         		"ExpCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -685,16 +685,16 @@ ruleMappingLoopCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMappingLoopCSAccess().getMappingSequenceMappingSequenceCSParserRuleCall_5_0()); 
+	        newCompositeNode(grammarAccess.getMappingLoopCSAccess().getOwnedMappingSequenceMappingSequenceCSParserRuleCall_5_0()); 
 	    }
-		lv_mappingSequence_5_0=ruleMappingSequenceCS		{
+		lv_ownedMappingSequence_5_0=ruleMappingSequenceCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMappingLoopCSRule());
 	        }
        		set(
        			$current, 
-       			"mappingSequence",
-        		lv_mappingSequence_5_0, 
+       			"ownedMappingSequence",
+        		lv_ownedMappingSequence_5_0, 
         		"MappingSequenceCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -789,16 +789,16 @@ ruleMappingSequenceCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getMappingSequenceCSAccess().getMappingStatementsMappingStatementCSParserRuleCall_0()); 
+	        newCompositeNode(grammarAccess.getMappingSequenceCSAccess().getOwnedMappingStatementsMappingStatementCSParserRuleCall_0()); 
 	    }
-		lv_mappingStatements_0_0=ruleMappingStatementCS		{
+		lv_ownedMappingStatements_0_0=ruleMappingStatementCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMappingSequenceCSRule());
 	        }
        		add(
        			$current, 
-       			"mappingStatements",
-        		lv_mappingStatements_0_0, 
+       			"ownedMappingStatements",
+        		lv_ownedMappingStatements_0_0, 
         		"MappingStatementCS");
 	        afterParserOrEnumRuleCall();
 	    }

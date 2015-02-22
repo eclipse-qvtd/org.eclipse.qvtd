@@ -38,7 +38,7 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl#getReferredMapping <em>Referred Mapping</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl#getBindings <em>Bindings</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl#getOwnedBindings <em>Owned Bindings</em>}</li>
  * </ul>
  *
  * @generated
@@ -55,14 +55,14 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	protected Mapping referredMapping;
 
 	/**
-	 * The cached value of the '{@link #getBindings() <em>Bindings</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedBindings() <em>Owned Bindings</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getBindings()
+	 * @see #getOwnedBindings()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<MappingCallBindingCS> bindings;
+	protected EList<MappingCallBindingCS> ownedBindings;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -129,11 +129,11 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	 * @generated
 	 */
 	@Override
-	public EList<MappingCallBindingCS> getBindings() {
-		if (bindings == null) {
-			bindings = new EObjectContainmentWithInverseEList<MappingCallBindingCS>(MappingCallBindingCS.class, this, QVTimperativeCSPackage.MAPPING_CALL_CS__BINDINGS, QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__MAPPING_CALL);
+	public EList<MappingCallBindingCS> getOwnedBindings() {
+		if (ownedBindings == null) {
+			ownedBindings = new EObjectContainmentWithInverseEList<MappingCallBindingCS>(MappingCallBindingCS.class, this, QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS, QVTimperativeCSPackage.MAPPING_CALL_BINDING_CS__OWNING_MAPPING_CALL);
 		}
-		return bindings;
+		return ownedBindings;
 	}
 
 	/**
@@ -145,8 +145,8 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CALL_CS__BINDINGS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getBindings()).basicAdd(otherEnd, msgs);
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedBindings()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -159,8 +159,8 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CALL_CS__BINDINGS:
-				return ((InternalEList<?>)getBindings()).basicRemove(otherEnd, msgs);
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS:
+				return ((InternalEList<?>)getOwnedBindings()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -176,8 +176,8 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__REFERRED_MAPPING:
 				if (resolve) return getReferredMapping();
 				return basicGetReferredMapping();
-			case QVTimperativeCSPackage.MAPPING_CALL_CS__BINDINGS:
-				return getBindings();
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS:
+				return getOwnedBindings();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -194,9 +194,9 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__REFERRED_MAPPING:
 				setReferredMapping((Mapping)newValue);
 				return;
-			case QVTimperativeCSPackage.MAPPING_CALL_CS__BINDINGS:
-				getBindings().clear();
-				getBindings().addAll((Collection<? extends MappingCallBindingCS>)newValue);
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS:
+				getOwnedBindings().clear();
+				getOwnedBindings().addAll((Collection<? extends MappingCallBindingCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -213,8 +213,8 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__REFERRED_MAPPING:
 				setReferredMapping((Mapping)null);
 				return;
-			case QVTimperativeCSPackage.MAPPING_CALL_CS__BINDINGS:
-				getBindings().clear();
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS:
+				getOwnedBindings().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -230,8 +230,8 @@ public class MappingCallCSImpl extends MappingStatementCSImpl implements Mapping
 		switch (featureID) {
 			case QVTimperativeCSPackage.MAPPING_CALL_CS__REFERRED_MAPPING:
 				return referredMapping != null;
-			case QVTimperativeCSPackage.MAPPING_CALL_CS__BINDINGS:
-				return bindings != null && !bindings.isEmpty();
+			case QVTimperativeCSPackage.MAPPING_CALL_CS__OWNED_BINDINGS:
+				return ownedBindings != null && !ownedBindings.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

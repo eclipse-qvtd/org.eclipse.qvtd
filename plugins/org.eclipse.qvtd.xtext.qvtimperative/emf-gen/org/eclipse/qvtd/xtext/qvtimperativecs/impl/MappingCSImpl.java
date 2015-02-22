@@ -32,21 +32,21 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getMappingSequence <em>Mapping Sequence</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCSImpl#getOwnedMappingSequence <em>Owned Mapping Sequence</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	/**
-	 * The cached value of the '{@link #getMappingSequence() <em>Mapping Sequence</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedMappingSequence() <em>Owned Mapping Sequence</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMappingSequence()
+	 * @see #getOwnedMappingSequence()
 	 * @generated
 	 * @ordered
 	 */
-	protected MappingSequenceCS mappingSequence;
+	protected MappingSequenceCS ownedMappingSequence;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -72,8 +72,8 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	 * @generated
 	 */
 	@Override
-	public MappingSequenceCS getMappingSequence() {
-		return mappingSequence;
+	public MappingSequenceCS getOwnedMappingSequence() {
+		return ownedMappingSequence;
 	}
 
 	/**
@@ -81,11 +81,11 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetMappingSequence(MappingSequenceCS newMappingSequence, NotificationChain msgs) {
-		MappingSequenceCS oldMappingSequence = mappingSequence;
-		mappingSequence = newMappingSequence;
+	public NotificationChain basicSetOwnedMappingSequence(MappingSequenceCS newOwnedMappingSequence, NotificationChain msgs) {
+		MappingSequenceCS oldOwnedMappingSequence = ownedMappingSequence;
+		ownedMappingSequence = newOwnedMappingSequence;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CS__MAPPING_SEQUENCE, oldMappingSequence, newMappingSequence);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CS__OWNED_MAPPING_SEQUENCE, oldOwnedMappingSequence, newOwnedMappingSequence);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -97,18 +97,18 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	 * @generated
 	 */
 	@Override
-	public void setMappingSequence(MappingSequenceCS newMappingSequence) {
-		if (newMappingSequence != mappingSequence) {
+	public void setOwnedMappingSequence(MappingSequenceCS newOwnedMappingSequence) {
+		if (newOwnedMappingSequence != ownedMappingSequence) {
 			NotificationChain msgs = null;
-			if (mappingSequence != null)
-				msgs = ((InternalEObject)mappingSequence).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.MAPPING_CS__MAPPING_SEQUENCE, null, msgs);
-			if (newMappingSequence != null)
-				msgs = ((InternalEObject)newMappingSequence).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.MAPPING_CS__MAPPING_SEQUENCE, null, msgs);
-			msgs = basicSetMappingSequence(newMappingSequence, msgs);
+			if (ownedMappingSequence != null)
+				msgs = ((InternalEObject)ownedMappingSequence).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.MAPPING_CS__OWNED_MAPPING_SEQUENCE, null, msgs);
+			if (newOwnedMappingSequence != null)
+				msgs = ((InternalEObject)newOwnedMappingSequence).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTimperativeCSPackage.MAPPING_CS__OWNED_MAPPING_SEQUENCE, null, msgs);
+			msgs = basicSetOwnedMappingSequence(newOwnedMappingSequence, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CS__MAPPING_SEQUENCE, newMappingSequence, newMappingSequence));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativeCSPackage.MAPPING_CS__OWNED_MAPPING_SEQUENCE, newOwnedMappingSequence, newOwnedMappingSequence));
 	}
 
 	/**
@@ -119,8 +119,8 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CS__MAPPING_SEQUENCE:
-				return basicSetMappingSequence(null, msgs);
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MAPPING_SEQUENCE:
+				return basicSetOwnedMappingSequence(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -133,8 +133,8 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CS__MAPPING_SEQUENCE:
-				return getMappingSequence();
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MAPPING_SEQUENCE:
+				return getOwnedMappingSequence();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -147,8 +147,8 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CS__MAPPING_SEQUENCE:
-				setMappingSequence((MappingSequenceCS)newValue);
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MAPPING_SEQUENCE:
+				setOwnedMappingSequence((MappingSequenceCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -162,8 +162,8 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CS__MAPPING_SEQUENCE:
-				setMappingSequence((MappingSequenceCS)null);
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MAPPING_SEQUENCE:
+				setOwnedMappingSequence((MappingSequenceCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -177,8 +177,8 @@ public class MappingCSImpl extends AbstractMappingCSImpl implements MappingCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTimperativeCSPackage.MAPPING_CS__MAPPING_SEQUENCE:
-				return mappingSequence != null;
+			case QVTimperativeCSPackage.MAPPING_CS__OWNED_MAPPING_SEQUENCE:
+				return ownedMappingSequence != null;
 		}
 		return super.eIsSet(featureID);
 	}

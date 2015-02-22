@@ -22,9 +22,9 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getMappingCall <em>Mapping Call</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getOwningMappingCall <em>Owning Mapping Call</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getReferredVariable <em>Referred Variable</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getOwnedValue <em>Owned Value</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCallBindingCS()
@@ -33,32 +33,32 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  */
 public interface MappingCallBindingCS extends ExpCS {
 	/**
-	 * Returns the value of the '<em><b>Mapping Call</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#getBindings <em>Bindings</em>}'.
+	 * Returns the value of the '<em><b>Owning Mapping Call</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#getOwnedBindings <em>Owned Bindings</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Mapping Call</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Owning Mapping Call</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mapping Call</em>' container reference.
-	 * @see #setMappingCall(MappingCallCS)
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCallBindingCS_MappingCall()
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#getBindings
-	 * @model opposite="bindings" transient="false"
+	 * @return the value of the '<em>Owning Mapping Call</em>' container reference.
+	 * @see #setOwningMappingCall(MappingCallCS)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCallBindingCS_OwningMappingCall()
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#getOwnedBindings
+	 * @model opposite="ownedBindings" transient="false"
 	 * @generated
 	 */
-	MappingCallCS getMappingCall();
+	MappingCallCS getOwningMappingCall();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getMappingCall <em>Mapping Call</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getOwningMappingCall <em>Owning Mapping Call</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Mapping Call</em>' container reference.
-	 * @see #getMappingCall()
+	 * @param value the new value of the '<em>Owning Mapping Call</em>' container reference.
+	 * @see #getOwningMappingCall()
 	 * @generated
 	 */
-	void setMappingCall(MappingCallCS value);
+	void setOwningMappingCall(MappingCallCS value);
 
 	/**
 	 * Returns the value of the '<em><b>Referred Variable</b></em>' reference.
@@ -87,29 +87,29 @@ public interface MappingCallBindingCS extends ExpCS {
 	void setReferredVariable(Variable value);
 
 	/**
-	 * Returns the value of the '<em><b>Value</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Value</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Value</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Value</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' containment reference.
-	 * @see #setValue(ExpCS)
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCallBindingCS_Value()
+	 * @return the value of the '<em>Owned Value</em>' containment reference.
+	 * @see #setOwnedValue(ExpCS)
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCallBindingCS_OwnedValue()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	ExpCS getValue();
+	ExpCS getOwnedValue();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getValue <em>Value</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getOwnedValue <em>Owned Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' containment reference.
-	 * @see #getValue()
+	 * @param value the new value of the '<em>Owned Value</em>' containment reference.
+	 * @see #getOwnedValue()
 	 * @generated
 	 */
-	void setValue(ExpCS value);
+	void setOwnedValue(ExpCS value);
 
 } // MappingCallBindingCS

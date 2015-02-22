@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingSequenceCS#getMappingStatements <em>Mapping Statements</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingSequenceCS#getOwnedMappingStatements <em>Owned Mapping Statements</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingSequenceCS()
@@ -30,19 +30,19 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface MappingSequenceCS extends MappingStatementCS {
 	/**
-	 * Returns the value of the '<em><b>Mapping Statements</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Mapping Statements</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingStatementCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Mapping Statements</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Mapping Statements</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Mapping Statements</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingSequenceCS_MappingStatements()
+	 * @return the value of the '<em>Owned Mapping Statements</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingSequenceCS_OwnedMappingStatements()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<MappingStatementCS> getMappingStatements();
+	EList<MappingStatementCS> getOwnedMappingStatements();
 
 } // MappingSequenceCS

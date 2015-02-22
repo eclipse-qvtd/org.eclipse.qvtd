@@ -23,7 +23,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#getReferredMapping <em>Referred Mapping</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#getBindings <em>Bindings</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS#getOwnedBindings <em>Owned Bindings</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCallCS()
@@ -58,21 +58,21 @@ public interface MappingCallCS extends MappingStatementCS {
 	void setReferredMapping(Mapping value);
 
 	/**
-	 * Returns the value of the '<em><b>Bindings</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Bindings</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getMappingCall <em>Mapping Call</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getOwningMappingCall <em>Owning Mapping Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Bindings</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Bindings</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Bindings</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCallCS_Bindings()
-	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getMappingCall
-	 * @model opposite="mappingCall" containment="true" ordered="false"
+	 * @return the value of the '<em>Owned Bindings</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage#getMappingCallCS_OwnedBindings()
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#getOwningMappingCall
+	 * @model opposite="owningMappingCall" containment="true" ordered="false"
 	 * @generated
 	 */
-	EList<MappingCallBindingCS> getBindings();
+	EList<MappingCallBindingCS> getOwnedBindings();
 
 } // MappingCallCS

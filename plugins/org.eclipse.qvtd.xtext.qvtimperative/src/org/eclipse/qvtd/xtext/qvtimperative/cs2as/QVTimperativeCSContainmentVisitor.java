@@ -127,14 +127,14 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 			}
 		}
 		context.refreshPivotList(CoreDomain.class, pivotElement.getDomain(), csElement.getDomains());
-		pivotElement.setMappingStatement(PivotUtil.getPivot(MappingStatement.class, csElement.getMappingSequence()));
+		pivotElement.setMappingStatement(PivotUtil.getPivot(MappingStatement.class, csElement.getOwnedMappingSequence()));
 		return null;
 	}
 
 	@Override
 	public Continuation<?> visitMappingCallCS(@NonNull MappingCallCS csElement) {
 		@NonNull MappingCall pivotElement = context.refreshModelElement(MappingCall.class, QVTimperativePackage.Literals.MAPPING_CALL, csElement);
-		context.refreshPivotList(MappingCallBinding.class, pivotElement.getBinding(), csElement.getBindings());
+		context.refreshPivotList(MappingCallBinding.class, pivotElement.getBinding(), csElement.getOwnedBindings());
 		context.refreshComments(pivotElement, csElement);
 		return null;
 	}
@@ -152,7 +152,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		@NonNull Variable iterator = refreshNamedElement(Variable.class, PivotPackage.Literals.VARIABLE, ClassUtil.nonNullState(csMappingLoop.getOwnedIterator()));
 		pivotElement.getOwnedIterators().clear();
 		pivotElement.getOwnedIterators().add(iterator);
-		pivotElement.setOwnedBody(PivotUtil.getPivot(MappingStatement.class, csMappingLoop.getMappingSequence()));
+		pivotElement.setOwnedBody(PivotUtil.getPivot(MappingStatement.class, csMappingLoop.getOwnedMappingSequence()));
 //		CollectionType collectionType = metamodelManager.getCollectionType();
 //		DomainOperation forAllIteration = ClassUtil.getNamedElement(collectionType.getLocalOperations(), "forAll");
 //		pivotElement.setReferredIteration((Iteration) forAllIteration);
@@ -163,7 +163,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	@Override
 	public Continuation<?> visitMappingSequenceCS(@NonNull MappingSequenceCS csMappingSequence) {
 		@NonNull MappingSequence pivotElement = context.refreshModelElement(MappingSequence.class, QVTimperativePackage.Literals.MAPPING_SEQUENCE, csMappingSequence);
-		context.refreshPivotList(MappingStatement.class, pivotElement.getMappingStatements(), csMappingSequence.getMappingStatements());
+		context.refreshPivotList(MappingStatement.class, pivotElement.getMappingStatements(), csMappingSequence.getOwnedMappingStatements());
 		return null;
 	}
 
@@ -184,7 +184,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		importPackages(csElement);
 		@NonNull ImperativeModel asModel = refreshRoot(ImperativeModel.class, QVTimperativePackage.Literals.IMPERATIVE_MODEL, csElement);
 		context.refreshPivotList(Import.class, asModel.getOwnedImports(), csElement.getOwnedImports());
-		List<TransformationCS> csTransformations = csElement.getTransformations();
+		List<TransformationCS> csTransformations = csElement.getOwnedTransformations();
 //		List<Transformation> txList = new ArrayList<Transformation>(csTransformations.size());
 		Map<Transformation, List<Mapping>> tx2mappings = new HashMap<Transformation, List<Mapping>>();
 		for (TransformationCS csTransformation : csTransformations) {
@@ -206,7 +206,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 //			importPackages(csElement);			// FIXME This has to be after refreshPackage which is irregular and prevents local realization of ImportCS etc
 		}
 		//
-		for (MappingCS csMapping : csElement.getMappings()) {
+		for (MappingCS csMapping : csElement.getOwnedMappings()) {
 			Transformation inTransformation = csMapping.getIn();
 			List<Mapping> mappings = tx2mappings.get(inTransformation);
 			if (mappings != null) {
@@ -217,7 +217,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 			}
 		}
 		Map<Transformation, List<Function>> tx2qMap = new HashMap<Transformation, List<Function>>();
-		for (QueryCS csQuery : csElement.getQueries()) {
+		for (QueryCS csQuery : csElement.getOwnedQueries()) {
 			Transformation transformation = csQuery.getTransformation();
 			Function query = PivotUtil.getPivot(Function.class,  csQuery);
 			List<Function> queries = tx2qMap.get(transformation);

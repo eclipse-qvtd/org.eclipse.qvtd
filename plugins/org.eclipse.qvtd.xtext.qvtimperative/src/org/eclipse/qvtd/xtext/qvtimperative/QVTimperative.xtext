@@ -22,7 +22,7 @@ import "http://www.eclipse.org/qvt/2015/QVTimperativeCS"
 
 TopLevelCS:
 	(ownedImports+=ImportCS | /*ownedInclude+=IncludeCS |*/ ownedLibraries+=LibraryCS)*
-	(transformations+=TransformationCS | mappings+=MappingCS | queries+=QueryCS)*
+	(ownedTransformations+=TransformationCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)*
 ;
 	
 DirectionCS: {DirectionCS} name=UnrestrictedName
@@ -31,18 +31,18 @@ DirectionCS: {DirectionCS} name=UnrestrictedName
 ;
 
 MappingCS: {MappingCS} 'map' name=UnrestrictedName ('in' in=[qvtbase::Transformation|UnrestrictedName])?
-	'{' domains+=(SourceDomainCS | TargetDomainCS)* ('where' middle=MiddleDomainCS)? mappingSequence=MappingSequenceCS? '}';
+	'{' domains+=(SourceDomainCS | TargetDomainCS)* ('where' middle=MiddleDomainCS)? ownedMappingSequence=MappingSequenceCS? '}';
 	
 MappingCallCS: {MappingCallCS} 'call' referredMapping=[qvtimperative::Mapping|UnrestrictedName]
-	'{' bindings+=MappingCallBindingCS* '}';
+	'{' ownedBindings+=MappingCallBindingCS* '}';
 
-MappingCallBindingCS: referredVariable=[pivot::Variable|UnrestrictedName] ':=' value=ExpCS ';';
+MappingCallBindingCS: referredVariable=[pivot::Variable|UnrestrictedName] ':=' ownedValue=ExpCS ';';
 	
-MappingLoopCS: 'for' ownedIterator=MappingIteratorCS 'in' inExpression=ExpCS '{' mappingSequence=MappingSequenceCS '}';
+MappingLoopCS: 'for' ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingSequence=MappingSequenceCS '}';
 	
 MappingIteratorCS returns essentialocl::VariableCS: name=UnrestrictedName (':' ownedType=TypeExpCS)?;
 
-MappingSequenceCS: mappingStatements+=MappingStatementCS+;
+MappingSequenceCS: ownedMappingStatements+=MappingStatementCS+;
 	
 MappingStatementCS: MappingCallCS | MappingLoopCS;
 	

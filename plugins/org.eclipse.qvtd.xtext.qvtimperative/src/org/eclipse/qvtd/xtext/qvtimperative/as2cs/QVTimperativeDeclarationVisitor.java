@@ -145,22 +145,22 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 			// else other packages, orphanage
 		}
 		if (asTransformations != null) {
-			context.refreshList(csDocument.getTransformations(), context.visitDeclarations(TransformationCS.class, asTransformations, null));
+			context.refreshList(csDocument.getOwnedTransformations(), context.visitDeclarations(TransformationCS.class, asTransformations, null));
 		}
 		else {
-			csDocument.getTransformations().clear();
+			csDocument.getOwnedTransformations().clear();
 		}
 		if (asMappings != null) {
-			context.refreshList(csDocument.getMappings(), context.visitDeclarations(MappingCS.class, asMappings, null));
+			context.refreshList(csDocument.getOwnedMappings(), context.visitDeclarations(MappingCS.class, asMappings, null));
 		}
 		else {
-			csDocument.getMappings().clear();
+			csDocument.getOwnedMappings().clear();
 		}
 		if (asQueries != null) {
-			context.refreshList(csDocument.getQueries(), context.visitDeclarations(QueryCS.class, asQueries, null));
+			context.refreshList(csDocument.getOwnedQueries(), context.visitDeclarations(QueryCS.class, asQueries, null));
 		}
 		else {
-			csDocument.getQueries().clear();
+			csDocument.getOwnedQueries().clear();
 		}
 		return csDocument;
 	}
@@ -176,7 +176,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		csDomain.setBottomPattern(context.visitDeclaration(BottomPatternCS.class, asMapping.getBottomPattern()));
 		csDomain.setGuardPattern(context.visitDeclaration(GuardPatternCS.class, asMapping.getGuardPattern()));
 		csMapping.setMiddle(csDomain);
-		csMapping.setMappingSequence(context.visitDeclaration(MappingSequenceCS.class, asMapping.getMappingStatement()));
+		csMapping.setOwnedMappingSequence(context.visitDeclaration(MappingSequenceCS.class, asMapping.getMappingStatement()));
 		return csMapping;
 	}
 
@@ -184,7 +184,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 	public ElementCS visitMappingCall(@NonNull MappingCall asMappingCall) {
 		MappingCallCS csMappingCall = context.refreshElement(MappingCallCS.class, QVTimperativeCSPackage.Literals.MAPPING_CALL_CS, asMappingCall);
 		csMappingCall.setPivot(asMappingCall);
-		context.refreshList(csMappingCall.getBindings(), context.visitDeclarations(MappingCallBindingCS.class, asMappingCall.getBinding(), null));
+		context.refreshList(csMappingCall.getOwnedBindings(), context.visitDeclarations(MappingCallBindingCS.class, asMappingCall.getBinding(), null));
 		csMappingCall.setReferredMapping(asMappingCall.getReferredMapping());
 		return csMappingCall;
 	}
@@ -194,7 +194,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		MappingCallBindingCS csMappingCallBinding = context.refreshElement(MappingCallBindingCS.class, QVTimperativeCSPackage.Literals.MAPPING_CALL_BINDING_CS, asMappingCallBinding);
 		csMappingCallBinding.setPivot(asMappingCallBinding);
 		csMappingCallBinding.setReferredVariable(asMappingCallBinding.getBoundVariable());
-		csMappingCallBinding.setValue(createExpCS(asMappingCallBinding.getValue()));
+		csMappingCallBinding.setOwnedValue(createExpCS(asMappingCallBinding.getValue()));
 		return csMappingCallBinding;
 	}
 
@@ -203,15 +203,15 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		MappingLoopCS csMappingLoop = context.refreshElement(MappingLoopCS.class, QVTimperativeCSPackage.Literals.MAPPING_LOOP_CS, asMappingLoop);
 		csMappingLoop.setPivot(asMappingLoop);
 		csMappingLoop.setOwnedIterator(context.visitDeclaration(VariableCS.class, asMappingLoop.getOwnedIterators().get(0)));
-		csMappingLoop.setInExpression(createExpCS(asMappingLoop.getOwnedSource()));
-		csMappingLoop.setMappingSequence(context.visitDeclaration(MappingSequenceCS.class, asMappingLoop.getOwnedBody()));
+		csMappingLoop.setOwnedInExpression(createExpCS(asMappingLoop.getOwnedSource()));
+		csMappingLoop.setOwnedMappingSequence(context.visitDeclaration(MappingSequenceCS.class, asMappingLoop.getOwnedBody()));
 		return csMappingLoop;
 	}
 
 	@Override
 	public ElementCS visitMappingSequence(@NonNull MappingSequence pMappingSequence) {
 		MappingSequenceCS csMappingSequence = context.refreshElement(MappingSequenceCS.class, QVTimperativeCSPackage.Literals.MAPPING_SEQUENCE_CS, pMappingSequence);
-		context.refreshList(csMappingSequence.getMappingStatements(), context.visitDeclarations(MappingStatementCS.class, pMappingSequence.getMappingStatements(), null));
+		context.refreshList(csMappingSequence.getOwnedMappingStatements(), context.visitDeclarations(MappingStatementCS.class, pMappingSequence.getMappingStatements(), null));
 		return csMappingSequence;
 	}
 
