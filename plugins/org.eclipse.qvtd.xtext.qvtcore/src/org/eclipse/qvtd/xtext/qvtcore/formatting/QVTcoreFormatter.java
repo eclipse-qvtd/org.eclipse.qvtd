@@ -58,11 +58,12 @@ public class QVTcoreFormatter extends QVTcoreBaseFormatter
 		c.setLinewrap(0, 1, 2).before(f.getML_COMMENTRule());
 		c.setLinewrap(0, 1, 1).after(f.getML_COMMENTRule());
 
-	    configureAssignmentCS(c, f.getAssignmentCSAccess());
 	    configureBottomPatternCS(c, f.getBottomPatternCSAccess());
 	    configureDirectionCS(c, f.getDirectionCSAccess());
 	    configureGuardPatternCS(c, f.getGuardPatternCSAccess());
 	    configureImportCS(c, f.getImportCSAccess());
+	    configurePredicateCS(c, f.getPredicateCSAccess());
+		configurePredicateOrAssignmentCS(c, f.getPredicateOrAssignmentCSAccess());
 	    configureQueryCS(c, f.getQueryCSAccess());
 	    configureScopeNameCS(c, f.getScopeNameCSAccess());
 	    configureTransformationCS(c, f.getTransformationCSAccess());

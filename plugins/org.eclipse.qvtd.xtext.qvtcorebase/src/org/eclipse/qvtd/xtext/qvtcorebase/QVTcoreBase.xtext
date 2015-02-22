@@ -21,16 +21,11 @@ import "http://www.eclipse.org/qvt/2015/QVTcoreBaseCS"
 BottomPatternCS:
 	( '{' (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS)
 		(',' (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS))*
-		('|' constraints+=AssignmentCS*)? '}'
+		('|' constraints+=PredicateOrAssignmentCS*)? '}'
 	)
-	| ( {BottomPatternCS} '{' constraints+=AssignmentCS* '}'
+	| ( {BottomPatternCS} '{' constraints+=PredicateOrAssignmentCS* '}'
 	)
 ;
-		
-//Constraint ::= Predicate | Assignment
-//Predicate ::= BooleanOCLExpr
-//Assignement ::= [�default�] SlotOwnerOCLExpr�.�PropertyName �:=� ValueOCLExpr
-AssignmentCS: default?='default'? target=ExpCS (':=' initialiser=ExpCS)? ';';
 	
 DirectionCS: {DirectionCS} name=UnrestrictedName?
 	('imports' imports+=[pivot::Package|UnrestrictedName] (',' imports+=[pivot::Package|UnrestrictedName])*)?
@@ -41,11 +36,11 @@ DirectionCS: {DirectionCS} name=UnrestrictedName?
 	
 GuardPatternCS:
 	({GuardPatternCS} '(' (unrealizedVariables+=GuardVariableCS (',' unrealizedVariables+=GuardVariableCS)*)?
-	   ('|' constraints+=AssignmentCS*)? ')' )
+	   ('|' ownedPredicates+=PredicateCS*)? ')' )
 	|
 	({GuardPatternCS} '(' (unrealizedVariables+=GuardVariableCS (',' unrealizedVariables+=GuardVariableCS)*)? ')' )	// FIXME Redundant but avoids serializer failure on Class2RDBMS.qvtc
 	|
-	({GuardPatternCS} '(' (constraints+=AssignmentCS*) ')' )
+	({GuardPatternCS} '(' (ownedPredicates+=PredicateCS*) ')' )
 ;
 	
 //Variable := VariableName �:� TypeDeclaration
@@ -64,6 +59,13 @@ NamedDomainCS returns DomainCS: check?='check'? enforce?='enforce'? direction=[q
 	guardPattern=GuardPatternCS bottomPattern=BottomPatternCS;
 	
 ParamDeclarationCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
+
+PredicateCS: ownedCondition=ExpCS ';';
+		
+//Constraint ::= Predicate | Assignment
+//Predicate ::= BooleanOCLExpr
+//Assignement ::= [�default�] SlotOwnerOCLExpr�.�PropertyName �:=� ValueOCLExpr
+PredicateOrAssignmentCS returns AssignmentCS: default?='default'? target=ExpCS (':=' initialiser=ExpCS)? ';';
 		
 QueryCS: 'query' pathName=ScopeNameCS name=UnrestrictedName
 		'(' (inputParamDeclaration+=ParamDeclarationCS (',' inputParamDeclaration+=ParamDeclarationCS)*)? ')'

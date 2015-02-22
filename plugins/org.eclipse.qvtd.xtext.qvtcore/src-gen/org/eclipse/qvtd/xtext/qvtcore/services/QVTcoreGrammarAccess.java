@@ -284,27 +284,13 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 	//BottomPatternCS:
 	//	"{" (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS) (","
 	//	(unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS))* ("|"
-	//	constraints+=AssignmentCS*)? "}" | {BottomPatternCS} "{" constraints+=AssignmentCS* "}";
+	//	constraints+=PredicateOrAssignmentCS*)? "}" | {BottomPatternCS} "{" constraints+=PredicateOrAssignmentCS* "}";
 	public QVTcoreBaseGrammarAccess.BottomPatternCSElements getBottomPatternCSAccess() {
 		return gaQVTcoreBase.getBottomPatternCSAccess();
 	}
 	
 	public ParserRule getBottomPatternCSRule() {
 		return getBottomPatternCSAccess().getRule();
-	}
-
-	////Constraint ::= Predicate | Assignment
-	// //Predicate ::= BooleanOCLExpr
-	//
-	////Assignement ::= [�default�] SlotOwnerOCLExpr�.�PropertyName �:=� ValueOCLExpr
-	// AssignmentCS:
-	//	default?="default"? target=ExpCS (":=" initialiser=ExpCS)? ";";
-	public QVTcoreBaseGrammarAccess.AssignmentCSElements getAssignmentCSAccess() {
-		return gaQVTcoreBase.getAssignmentCSAccess();
-	}
-	
-	public ParserRule getAssignmentCSRule() {
-		return getAssignmentCSAccess().getRule();
 	}
 
 	//DirectionCS:
@@ -322,10 +308,10 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 	////EnforcementOperationCS: ('creation'|'deletion') ExpCS ';';
 	// GuardPatternCS:
 	//	{GuardPatternCS} "(" (unrealizedVariables+=GuardVariableCS ("," unrealizedVariables+=GuardVariableCS)*)? ("|"
-	//	constraints+=AssignmentCS*)? ")" // FIXME Redundant but avoids serializer failure on Class2RDBMS.qvtc
+	//	ownedPredicates+=PredicateCS*)? ")" // FIXME Redundant but avoids serializer failure on Class2RDBMS.qvtc
 	// |
 	//	{GuardPatternCS} "(" (unrealizedVariables+=GuardVariableCS ("," unrealizedVariables+=GuardVariableCS)*)? ")" |
-	//	{GuardPatternCS} "(" constraints+=AssignmentCS* ")";
+	//	{GuardPatternCS} "(" ownedPredicates+=PredicateCS* ")";
 	public QVTcoreBaseGrammarAccess.GuardPatternCSElements getGuardPatternCSAccess() {
 		return gaQVTcoreBase.getGuardPatternCSAccess();
 	}
@@ -386,6 +372,31 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getParamDeclarationCSRule() {
 		return getParamDeclarationCSAccess().getRule();
+	}
+
+	//PredicateCS:
+	//	ownedCondition=ExpCS ";";
+	public QVTcoreBaseGrammarAccess.PredicateCSElements getPredicateCSAccess() {
+		return gaQVTcoreBase.getPredicateCSAccess();
+	}
+	
+	public ParserRule getPredicateCSRule() {
+		return getPredicateCSAccess().getRule();
+	}
+
+	////Constraint ::= Predicate | Assignment
+	// //Predicate ::= BooleanOCLExpr
+	//
+	////Assignement ::= [�default�] SlotOwnerOCLExpr�.�PropertyName �:=� ValueOCLExpr
+	// PredicateOrAssignmentCS returns
+	//AssignmentCS:
+	//	default?="default"? target=ExpCS (":=" initialiser=ExpCS)? ";";
+	public QVTcoreBaseGrammarAccess.PredicateOrAssignmentCSElements getPredicateOrAssignmentCSAccess() {
+		return gaQVTcoreBase.getPredicateOrAssignmentCSAccess();
+	}
+	
+	public ParserRule getPredicateOrAssignmentCSRule() {
+		return getPredicateOrAssignmentCSAccess().getRule();
 	}
 
 	//QueryCS:

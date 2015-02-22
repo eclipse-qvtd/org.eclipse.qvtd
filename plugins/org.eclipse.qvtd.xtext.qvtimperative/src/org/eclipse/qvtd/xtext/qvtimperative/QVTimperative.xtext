@@ -61,11 +61,11 @@ SourceGuardPatternCS returns GuardPatternCS:
 MiddleDomainCS returns DomainCS: {DomainCS} guardPattern=MiddleGuardPatternCS bottomPattern=MiddleBottomPatternCS;
 		
 MiddleBottomPatternCS returns BottomPatternCS:
-	{BottomPatternCS} '{' constraints+=AssignmentCS* '}'
+	{BottomPatternCS} '{' constraints+=PredicateOrAssignmentCS* '}'
 ;
 	
 MiddleGuardPatternCS returns GuardPatternCS:
-	{GuardPatternCS} '(' constraints+=AssignmentCS* ')'
+	{GuardPatternCS} '(' ownedPredicates+=PredicateCS* ')'
 ;
 	
 TargetDomainCS returns DomainCS: enforce?='enforce' direction=[qvtbase::TypedModel|UnrestrictedName]

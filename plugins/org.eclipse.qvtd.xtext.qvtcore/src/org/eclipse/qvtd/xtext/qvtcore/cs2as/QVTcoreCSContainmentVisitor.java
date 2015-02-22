@@ -43,7 +43,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.MappingCS;
@@ -115,7 +115,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 	@Override
 	public Continuation<?> visitAssignmentCS(@NonNull AssignmentCS csElement) {
 		ExpCS csTarget = csElement.getTarget();
-		if ((csElement.getInitialiser() == null) || (csElement.eContainer() instanceof GuardPatternCS)) {
+		if (csElement.getInitialiser() == null) {
 			context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csElement);
 		}
 		else if (csTarget instanceof NameExpCS) {
@@ -168,6 +168,12 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 		}
 		context.refreshPivotList(CoreDomain.class, pivotElement.getDomain(), csElement.getDomains());
 		context.refreshPivotList(Mapping.class, pivotElement.getLocal(), csElement.getComposedMappings());
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitPredicateCS(@NonNull PredicateCS csElement) {
+		context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csElement);
 		return null;
 	}
 

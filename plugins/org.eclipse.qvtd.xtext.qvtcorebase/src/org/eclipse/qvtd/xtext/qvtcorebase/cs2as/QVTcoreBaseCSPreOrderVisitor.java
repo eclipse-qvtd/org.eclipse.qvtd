@@ -31,6 +31,7 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.ParamDeclarationCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizeableVariableCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
@@ -126,6 +127,11 @@ public class QVTcoreBaseCSPreOrderVisitor extends AbstractQVTcoreBaseCSPreOrderV
 	@Override
 	public Continuation<?> visitParamDeclarationCS(@NonNull ParamDeclarationCS csElement) {
 		return new ParamDeclarationCompletion(context, csElement);
+	}
+
+	@Override
+	public Continuation<?> visitPredicateCS(@NonNull PredicateCS csElement) {
+		return null;
 	}
 
 	@Override

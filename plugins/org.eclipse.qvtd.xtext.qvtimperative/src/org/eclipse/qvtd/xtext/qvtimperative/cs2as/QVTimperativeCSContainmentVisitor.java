@@ -28,6 +28,7 @@ import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
+import org.eclipse.ocl.xtext.essentialoclcs.InfixExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
@@ -52,6 +53,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
@@ -162,6 +164,18 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	public Continuation<?> visitMappingSequenceCS(@NonNull MappingSequenceCS csMappingSequence) {
 		@NonNull MappingSequence pivotElement = context.refreshModelElement(MappingSequence.class, QVTimperativePackage.Literals.MAPPING_SEQUENCE, csMappingSequence);
 		context.refreshPivotList(MappingStatement.class, pivotElement.getMappingStatements(), csMappingSequence.getMappingStatements());
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitPredicateCS(@NonNull PredicateCS csElement) {
+		ExpCS csCondition = csElement.getOwnedCondition();
+		if ((csCondition instanceof InfixExpCS) && "=".equals(((InfixExpCS)csCondition).getName()) && (((InfixExpCS)csCondition).getOwnedLeft() instanceof NameExpCS)) {
+			context.refreshModelElement(VariablePredicate.class, QVTimperativePackage.Literals.VARIABLE_PREDICATE, csElement);
+		}
+		else {
+			context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csElement);
+		}
 		return null;
 	}
 

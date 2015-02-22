@@ -58,6 +58,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
+import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
@@ -69,6 +70,7 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.ParamDeclarationCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
@@ -206,10 +208,18 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 
 	@Override
 	public ElementCS visitPredicate(@NonNull Predicate asPredicate) {
-		AssignmentCS csPredicate = context.refreshElement(AssignmentCS.class, QVTcoreBaseCSPackage.Literals.ASSIGNMENT_CS, asPredicate);
-		csPredicate.setPivot(asPredicate);
-		csPredicate.setTarget(createExpCS(asPredicate.getConditionExpression()));
-		return csPredicate;
+		if (asPredicate.eContainer() instanceof GuardPattern) {
+			PredicateCS csPredicate = context.refreshElement(PredicateCS.class, QVTcoreBaseCSPackage.Literals.PREDICATE_CS, asPredicate);
+			csPredicate.setPivot(asPredicate);
+			csPredicate.setOwnedCondition(createExpCS(asPredicate.getConditionExpression()));
+			return csPredicate;
+		}
+		else {
+			AssignmentCS csPredicate = context.refreshElement(AssignmentCS.class, QVTcoreBaseCSPackage.Literals.ASSIGNMENT_CS, asPredicate);
+			csPredicate.setPivot(asPredicate);
+			csPredicate.setTarget(createExpCS(asPredicate.getConditionExpression()));
+			return csPredicate;
+		}
 	}
 
 	@Override

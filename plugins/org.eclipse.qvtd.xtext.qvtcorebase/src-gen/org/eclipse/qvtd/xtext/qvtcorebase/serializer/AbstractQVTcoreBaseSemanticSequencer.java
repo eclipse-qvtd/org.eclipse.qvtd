@@ -63,6 +63,7 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.ParamDeclarationCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
@@ -330,7 +331,7 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 			}
 		else if(semanticObject.eClass().getEPackage() == QVTcoreBaseCSPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case QVTcoreBaseCSPackage.ASSIGNMENT_CS:
-				sequence_AssignmentCS(context, (AssignmentCS) semanticObject); 
+				sequence_PredicateOrAssignmentCS(context, (AssignmentCS) semanticObject); 
 				return; 
 			case QVTcoreBaseCSPackage.BOTTOM_PATTERN_CS:
 				sequence_BottomPatternCS(context, (BottomPatternCS) semanticObject); 
@@ -353,6 +354,9 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 				return; 
 			case QVTcoreBaseCSPackage.PARAM_DECLARATION_CS:
 				sequence_ParamDeclarationCS(context, (ParamDeclarationCS) semanticObject); 
+				return; 
+			case QVTcoreBaseCSPackage.PREDICATE_CS:
+				sequence_PredicateCS(context, (PredicateCS) semanticObject); 
 				return; 
 			case QVTcoreBaseCSPackage.QUERY_CS:
 				sequence_QueryCS(context, (QueryCS) semanticObject); 
@@ -379,16 +383,7 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 	
 	/**
 	 * Constraint:
-	 *     (default?='default'? target=ExpCS initialiser=ExpCS?)
-	 */
-	protected void sequence_AssignmentCS(EObject context, AssignmentCS semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (constraints+=AssignmentCS*)
+	 *     (constraints+=PredicateOrAssignmentCS*)
 	 */
 	protected void sequence_BottomPatternCS(EObject context, BottomPatternCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -411,9 +406,9 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 	/**
 	 * Constraint:
 	 *     (
-	 *         ((unrealizedVariables+=GuardVariableCS unrealizedVariables+=GuardVariableCS*)? constraints+=AssignmentCS*) | 
+	 *         ((unrealizedVariables+=GuardVariableCS unrealizedVariables+=GuardVariableCS*)? ownedPredicates+=PredicateCS*) | 
 	 *         ((unrealizedVariables+=GuardVariableCS unrealizedVariables+=GuardVariableCS*)?) | 
-	 *         (constraints+=AssignmentCS*)
+	 *         (ownedPredicates+=PredicateCS*)
 	 *     )
 	 */
 	protected void sequence_GuardPatternCS(EObject context, GuardPatternCS semanticObject) {
@@ -462,6 +457,24 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 	 *     (name=UnrestrictedName ownedType=TypeExpCS)
 	 */
 	protected void sequence_ParamDeclarationCS(EObject context, ParamDeclarationCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ownedCondition=ExpCS
+	 */
+	protected void sequence_PredicateCS(EObject context, PredicateCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (default?='default'? target=ExpCS initialiser=ExpCS?)
+	 */
+	protected void sequence_PredicateOrAssignmentCS(EObject context, AssignmentCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

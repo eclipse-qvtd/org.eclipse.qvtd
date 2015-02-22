@@ -19,7 +19,6 @@ import org.eclipse.qvtd.xtext.qvtcorecs.util.AbstractQVTcoreCSPostOrderVisitor;
 
 public class QVTcoreCSPostOrderVisitor extends AbstractQVTcoreCSPostOrderVisitor
 {
-
 	public QVTcoreCSPostOrderVisitor(@NonNull CS2ASConversion context) {
 		super(context);
 	}

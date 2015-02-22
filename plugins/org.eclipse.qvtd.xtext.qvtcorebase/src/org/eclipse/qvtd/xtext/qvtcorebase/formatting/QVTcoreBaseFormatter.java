@@ -11,11 +11,12 @@
 package org.eclipse.qvtd.xtext.qvtcorebase.formatting;
 
 import org.eclipse.ocl.xtext.essentialocl.formatting.AbstractEssentialOCLFormatter;
-import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.AssignmentCSElements;
 import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.BottomPatternCSElements;
 import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.DirectionCSElements;
 import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.GuardPatternCSElements;
 import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.ImportCSElements;
+import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.PredicateCSElements;
+import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.PredicateOrAssignmentCSElements;
 import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.QueryCSElements;
 import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.ScopeNameCSElements;
 import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.TransformationCSElements;
@@ -35,10 +36,6 @@ public class QVTcoreBaseFormatter extends AbstractEssentialOCLFormatter {
 	protected void configureFormatting(FormattingConfig config) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	protected void configureAssignmentCS(FormattingConfig c, AssignmentCSElements a) {
-		setNoSpaceLineWrap(c, a.getSemicolonKeyword_3());
 	}
 
 	protected void configureBottomPatternCS(FormattingConfig c, BottomPatternCSElements a) {
@@ -113,6 +110,14 @@ public class QVTcoreBaseFormatter extends AbstractEssentialOCLFormatter {
 
 	protected void configureImportCS(FormattingConfig c, ImportCSElements a) {
 		setNoSpaceLineWrap(c, a.getSemicolonKeyword_4());
+	}
+
+	protected void configurePredicateCS(FormattingConfig c, PredicateCSElements a) {
+		setNoSpaceLineWrap(c, a.getSemicolonKeyword_1());
+	}
+
+	protected void configurePredicateOrAssignmentCS(FormattingConfig c, PredicateOrAssignmentCSElements a) {
+		setNoSpaceLineWrap(c, a.getSemicolonKeyword_3());
 	}
 
 	protected void configureQueryCS(FormattingConfig c, QueryCSElements a) {

@@ -113,8 +113,6 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getBottomPatternCSAccess().getGroup_0_2(), "rule__BottomPatternCS__Group_0_2__0");
 					put(grammarAccess.getBottomPatternCSAccess().getGroup_0_3(), "rule__BottomPatternCS__Group_0_3__0");
 					put(grammarAccess.getBottomPatternCSAccess().getGroup_1(), "rule__BottomPatternCS__Group_1__0");
-					put(grammarAccess.getAssignmentCSAccess().getGroup(), "rule__AssignmentCS__Group__0");
-					put(grammarAccess.getAssignmentCSAccess().getGroup_2(), "rule__AssignmentCS__Group_2__0");
 					put(grammarAccess.getGuardPatternCSAccess().getGroup_0(), "rule__GuardPatternCS__Group_0__0");
 					put(grammarAccess.getGuardPatternCSAccess().getGroup_0_2(), "rule__GuardPatternCS__Group_0_2__0");
 					put(grammarAccess.getGuardPatternCSAccess().getGroup_0_2_1(), "rule__GuardPatternCS__Group_0_2_1__0");
@@ -130,6 +128,9 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getLibraryCSAccess().getGroup(), "rule__LibraryCS__Group__0");
 					put(grammarAccess.getNamedDomainCSAccess().getGroup(), "rule__NamedDomainCS__Group__0");
 					put(grammarAccess.getParamDeclarationCSAccess().getGroup(), "rule__ParamDeclarationCS__Group__0");
+					put(grammarAccess.getPredicateCSAccess().getGroup(), "rule__PredicateCS__Group__0");
+					put(grammarAccess.getPredicateOrAssignmentCSAccess().getGroup(), "rule__PredicateOrAssignmentCS__Group__0");
+					put(grammarAccess.getPredicateOrAssignmentCSAccess().getGroup_2(), "rule__PredicateOrAssignmentCS__Group_2__0");
 					put(grammarAccess.getQueryCSAccess().getGroup(), "rule__QueryCS__Group__0");
 					put(grammarAccess.getQueryCSAccess().getGroup_4(), "rule__QueryCS__Group_4__0");
 					put(grammarAccess.getQueryCSAccess().getGroup_4_1(), "rule__QueryCS__Group_4_1__0");
@@ -266,7 +267,7 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMiddleDomainCSAccess().getGuardPatternAssignment_1(), "rule__MiddleDomainCS__GuardPatternAssignment_1");
 					put(grammarAccess.getMiddleDomainCSAccess().getBottomPatternAssignment_2(), "rule__MiddleDomainCS__BottomPatternAssignment_2");
 					put(grammarAccess.getMiddleBottomPatternCSAccess().getConstraintsAssignment_2(), "rule__MiddleBottomPatternCS__ConstraintsAssignment_2");
-					put(grammarAccess.getMiddleGuardPatternCSAccess().getConstraintsAssignment_2(), "rule__MiddleGuardPatternCS__ConstraintsAssignment_2");
+					put(grammarAccess.getMiddleGuardPatternCSAccess().getOwnedPredicatesAssignment_2(), "rule__MiddleGuardPatternCS__OwnedPredicatesAssignment_2");
 					put(grammarAccess.getTargetDomainCSAccess().getEnforceAssignment_0(), "rule__TargetDomainCS__EnforceAssignment_0");
 					put(grammarAccess.getTargetDomainCSAccess().getDirectionAssignment_1(), "rule__TargetDomainCS__DirectionAssignment_1");
 					put(grammarAccess.getTargetDomainCSAccess().getGuardPatternAssignment_2(), "rule__TargetDomainCS__GuardPatternAssignment_2");
@@ -283,15 +284,12 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getBottomPatternCSAccess().getRealizedVariablesAssignment_0_2_1_1(), "rule__BottomPatternCS__RealizedVariablesAssignment_0_2_1_1");
 					put(grammarAccess.getBottomPatternCSAccess().getConstraintsAssignment_0_3_1(), "rule__BottomPatternCS__ConstraintsAssignment_0_3_1");
 					put(grammarAccess.getBottomPatternCSAccess().getConstraintsAssignment_1_2(), "rule__BottomPatternCS__ConstraintsAssignment_1_2");
-					put(grammarAccess.getAssignmentCSAccess().getDefaultAssignment_0(), "rule__AssignmentCS__DefaultAssignment_0");
-					put(grammarAccess.getAssignmentCSAccess().getTargetAssignment_1(), "rule__AssignmentCS__TargetAssignment_1");
-					put(grammarAccess.getAssignmentCSAccess().getInitialiserAssignment_2_1(), "rule__AssignmentCS__InitialiserAssignment_2_1");
 					put(grammarAccess.getGuardPatternCSAccess().getUnrealizedVariablesAssignment_0_2_0(), "rule__GuardPatternCS__UnrealizedVariablesAssignment_0_2_0");
 					put(grammarAccess.getGuardPatternCSAccess().getUnrealizedVariablesAssignment_0_2_1_1(), "rule__GuardPatternCS__UnrealizedVariablesAssignment_0_2_1_1");
-					put(grammarAccess.getGuardPatternCSAccess().getConstraintsAssignment_0_3_1(), "rule__GuardPatternCS__ConstraintsAssignment_0_3_1");
+					put(grammarAccess.getGuardPatternCSAccess().getOwnedPredicatesAssignment_0_3_1(), "rule__GuardPatternCS__OwnedPredicatesAssignment_0_3_1");
 					put(grammarAccess.getGuardPatternCSAccess().getUnrealizedVariablesAssignment_1_2_0(), "rule__GuardPatternCS__UnrealizedVariablesAssignment_1_2_0");
 					put(grammarAccess.getGuardPatternCSAccess().getUnrealizedVariablesAssignment_1_2_1_1(), "rule__GuardPatternCS__UnrealizedVariablesAssignment_1_2_1_1");
-					put(grammarAccess.getGuardPatternCSAccess().getConstraintsAssignment_2_2(), "rule__GuardPatternCS__ConstraintsAssignment_2_2");
+					put(grammarAccess.getGuardPatternCSAccess().getOwnedPredicatesAssignment_2_2(), "rule__GuardPatternCS__OwnedPredicatesAssignment_2_2");
 					put(grammarAccess.getGuardVariableCSAccess().getNameAssignment_0(), "rule__GuardVariableCS__NameAssignment_0");
 					put(grammarAccess.getGuardVariableCSAccess().getOwnedTypeAssignment_2(), "rule__GuardVariableCS__OwnedTypeAssignment_2");
 					put(grammarAccess.getImportCSAccess().getNameAssignment_1_0(), "rule__ImportCS__NameAssignment_1_0");
@@ -305,6 +303,10 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getNamedDomainCSAccess().getBottomPatternAssignment_4(), "rule__NamedDomainCS__BottomPatternAssignment_4");
 					put(grammarAccess.getParamDeclarationCSAccess().getNameAssignment_0(), "rule__ParamDeclarationCS__NameAssignment_0");
 					put(grammarAccess.getParamDeclarationCSAccess().getOwnedTypeAssignment_2(), "rule__ParamDeclarationCS__OwnedTypeAssignment_2");
+					put(grammarAccess.getPredicateCSAccess().getOwnedConditionAssignment_0(), "rule__PredicateCS__OwnedConditionAssignment_0");
+					put(grammarAccess.getPredicateOrAssignmentCSAccess().getDefaultAssignment_0(), "rule__PredicateOrAssignmentCS__DefaultAssignment_0");
+					put(grammarAccess.getPredicateOrAssignmentCSAccess().getTargetAssignment_1(), "rule__PredicateOrAssignmentCS__TargetAssignment_1");
+					put(grammarAccess.getPredicateOrAssignmentCSAccess().getInitialiserAssignment_2_1(), "rule__PredicateOrAssignmentCS__InitialiserAssignment_2_1");
 					put(grammarAccess.getQueryCSAccess().getPathNameAssignment_1(), "rule__QueryCS__PathNameAssignment_1");
 					put(grammarAccess.getQueryCSAccess().getNameAssignment_2(), "rule__QueryCS__NameAssignment_2");
 					put(grammarAccess.getQueryCSAccess().getInputParamDeclarationAssignment_4_0(), "rule__QueryCS__InputParamDeclarationAssignment_4_0");

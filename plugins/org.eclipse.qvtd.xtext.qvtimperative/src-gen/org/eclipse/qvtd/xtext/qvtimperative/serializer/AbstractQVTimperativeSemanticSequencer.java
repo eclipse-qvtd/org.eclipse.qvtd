@@ -63,6 +63,7 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.ParamDeclarationCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
@@ -341,7 +342,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 			}
 		else if(semanticObject.eClass().getEPackage() == QVTcoreBaseCSPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case QVTcoreBaseCSPackage.ASSIGNMENT_CS:
-				sequence_AssignmentCS(context, (AssignmentCS) semanticObject); 
+				sequence_PredicateOrAssignmentCS(context, (AssignmentCS) semanticObject); 
 				return; 
 			case QVTcoreBaseCSPackage.BOTTOM_PATTERN_CS:
 				if(context == grammarAccess.getBottomPatternCSRule()) {
@@ -406,6 +407,9 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 				else break;
 			case QVTcoreBaseCSPackage.PARAM_DECLARATION_CS:
 				sequence_ParamDeclarationCS(context, (ParamDeclarationCS) semanticObject); 
+				return; 
+			case QVTcoreBaseCSPackage.PREDICATE_CS:
+				sequence_PredicateCS(context, (PredicateCS) semanticObject); 
 				return; 
 			case QVTcoreBaseCSPackage.QUERY_CS:
 				sequence_QueryCS(context, (QueryCS) semanticObject); 
@@ -525,7 +529,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	
 	/**
 	 * Constraint:
-	 *     (constraints+=AssignmentCS*)
+	 *     (constraints+=PredicateOrAssignmentCS*)
 	 */
 	protected void sequence_MiddleBottomPatternCS(EObject context, BottomPatternCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -543,7 +547,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	
 	/**
 	 * Constraint:
-	 *     (constraints+=AssignmentCS*)
+	 *     (ownedPredicates+=PredicateCS*)
 	 */
 	protected void sequence_MiddleGuardPatternCS(EObject context, GuardPatternCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

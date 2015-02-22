@@ -228,7 +228,7 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 	public Continuation<?> visitGuardPatternCS(@NonNull GuardPatternCS csElement) {
 		@NonNull GuardPattern pGuardPattern = context.refreshModelElement(GuardPattern.class, QVTcoreBasePackage.Literals.GUARD_PATTERN, csElement);
 		context.refreshPivotList(Variable.class, pGuardPattern.getVariable(), csElement.getUnrealizedVariables());
-		context.refreshPivotList(Predicate.class, pGuardPattern.getPredicate(), csElement.getConstraints());
+		context.refreshPivotList(Predicate.class, pGuardPattern.getPredicate(), csElement.getOwnedPredicates());
 		context.refreshComments(pGuardPattern, csElement);
 		return null;
 	}

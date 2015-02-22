@@ -666,14 +666,14 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Action cBottomPatternCSAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cConstraintsAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cConstraintsAssignmentCSParserRuleCall_2_0 = (RuleCall)cConstraintsAssignment_2.eContents().get(0);
+		private final RuleCall cConstraintsPredicateOrAssignmentCSParserRuleCall_2_0 = (RuleCall)cConstraintsAssignment_2.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//MiddleBottomPatternCS returns BottomPatternCS:
-		//	{BottomPatternCS} "{" constraints+=AssignmentCS* "}";
+		//	{BottomPatternCS} "{" constraints+=PredicateOrAssignmentCS* "}";
 		@Override public ParserRule getRule() { return rule; }
 
-		//{BottomPatternCS} "{" constraints+=AssignmentCS* "}"
+		//{BottomPatternCS} "{" constraints+=PredicateOrAssignmentCS* "}"
 		public Group getGroup() { return cGroup; }
 
 		//{BottomPatternCS}
@@ -682,11 +682,11 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_1() { return cLeftCurlyBracketKeyword_1; }
 
-		//constraints+=AssignmentCS*
+		//constraints+=PredicateOrAssignmentCS*
 		public Assignment getConstraintsAssignment_2() { return cConstraintsAssignment_2; }
 
-		//AssignmentCS
-		public RuleCall getConstraintsAssignmentCSParserRuleCall_2_0() { return cConstraintsAssignmentCSParserRuleCall_2_0; }
+		//PredicateOrAssignmentCS
+		public RuleCall getConstraintsPredicateOrAssignmentCSParserRuleCall_2_0() { return cConstraintsPredicateOrAssignmentCSParserRuleCall_2_0; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_3() { return cRightCurlyBracketKeyword_3; }
@@ -697,15 +697,15 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cGuardPatternCSAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cConstraintsAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cConstraintsAssignmentCSParserRuleCall_2_0 = (RuleCall)cConstraintsAssignment_2.eContents().get(0);
+		private final Assignment cOwnedPredicatesAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cOwnedPredicatesPredicateCSParserRuleCall_2_0 = (RuleCall)cOwnedPredicatesAssignment_2.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//MiddleGuardPatternCS returns GuardPatternCS:
-		//	{GuardPatternCS} "(" constraints+=AssignmentCS* ")";
+		//	{GuardPatternCS} "(" ownedPredicates+=PredicateCS* ")";
 		@Override public ParserRule getRule() { return rule; }
 
-		//{GuardPatternCS} "(" constraints+=AssignmentCS* ")"
+		//{GuardPatternCS} "(" ownedPredicates+=PredicateCS* ")"
 		public Group getGroup() { return cGroup; }
 
 		//{GuardPatternCS}
@@ -714,11 +714,11 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//"("
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 
-		//constraints+=AssignmentCS*
-		public Assignment getConstraintsAssignment_2() { return cConstraintsAssignment_2; }
+		//ownedPredicates+=PredicateCS*
+		public Assignment getOwnedPredicatesAssignment_2() { return cOwnedPredicatesAssignment_2; }
 
-		//AssignmentCS
-		public RuleCall getConstraintsAssignmentCSParserRuleCall_2_0() { return cConstraintsAssignmentCSParserRuleCall_2_0; }
+		//PredicateCS
+		public RuleCall getOwnedPredicatesPredicateCSParserRuleCall_2_0() { return cOwnedPredicatesPredicateCSParserRuleCall_2_0; }
 
 		//")"
 		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
@@ -1120,7 +1120,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MiddleBottomPatternCS returns BottomPatternCS:
-	//	{BottomPatternCS} "{" constraints+=AssignmentCS* "}";
+	//	{BottomPatternCS} "{" constraints+=PredicateOrAssignmentCS* "}";
 	public MiddleBottomPatternCSElements getMiddleBottomPatternCSAccess() {
 		return pMiddleBottomPatternCS;
 	}
@@ -1130,7 +1130,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MiddleGuardPatternCS returns GuardPatternCS:
-	//	{GuardPatternCS} "(" constraints+=AssignmentCS* ")";
+	//	{GuardPatternCS} "(" ownedPredicates+=PredicateCS* ")";
 	public MiddleGuardPatternCSElements getMiddleGuardPatternCSAccess() {
 		return pMiddleGuardPatternCS;
 	}
@@ -1175,7 +1175,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	//BottomPatternCS:
 	//	"{" (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS) (","
 	//	(unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS))* ("|"
-	//	constraints+=AssignmentCS*)? "}" | {BottomPatternCS} "{" constraints+=AssignmentCS* "}";
+	//	constraints+=PredicateOrAssignmentCS*)? "}" | {BottomPatternCS} "{" constraints+=PredicateOrAssignmentCS* "}";
 	public QVTcoreBaseGrammarAccess.BottomPatternCSElements getBottomPatternCSAccess() {
 		return gaQVTcoreBase.getBottomPatternCSAccess();
 	}
@@ -1184,27 +1184,13 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		return getBottomPatternCSAccess().getRule();
 	}
 
-	////Constraint ::= Predicate | Assignment
-	// //Predicate ::= BooleanOCLExpr
-	//
-	////Assignement ::= [�default�] SlotOwnerOCLExpr�.�PropertyName �:=� ValueOCLExpr
-	// AssignmentCS:
-	//	default?="default"? target=ExpCS (":=" initialiser=ExpCS)? ";";
-	public QVTcoreBaseGrammarAccess.AssignmentCSElements getAssignmentCSAccess() {
-		return gaQVTcoreBase.getAssignmentCSAccess();
-	}
-	
-	public ParserRule getAssignmentCSRule() {
-		return getAssignmentCSAccess().getRule();
-	}
-
 	////EnforcementOperationCS: ('creation'|'deletion') ExpCS ';';
 	// GuardPatternCS:
 	//	{GuardPatternCS} "(" (unrealizedVariables+=GuardVariableCS ("," unrealizedVariables+=GuardVariableCS)*)? ("|"
-	//	constraints+=AssignmentCS*)? ")" // FIXME Redundant but avoids serializer failure on Class2RDBMS.qvtc
+	//	ownedPredicates+=PredicateCS*)? ")" // FIXME Redundant but avoids serializer failure on Class2RDBMS.qvtc
 	// |
 	//	{GuardPatternCS} "(" (unrealizedVariables+=GuardVariableCS ("," unrealizedVariables+=GuardVariableCS)*)? ")" |
-	//	{GuardPatternCS} "(" constraints+=AssignmentCS* ")";
+	//	{GuardPatternCS} "(" ownedPredicates+=PredicateCS* ")";
 	public QVTcoreBaseGrammarAccess.GuardPatternCSElements getGuardPatternCSAccess() {
 		return gaQVTcoreBase.getGuardPatternCSAccess();
 	}
@@ -1265,6 +1251,31 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getParamDeclarationCSRule() {
 		return getParamDeclarationCSAccess().getRule();
+	}
+
+	//PredicateCS:
+	//	ownedCondition=ExpCS ";";
+	public QVTcoreBaseGrammarAccess.PredicateCSElements getPredicateCSAccess() {
+		return gaQVTcoreBase.getPredicateCSAccess();
+	}
+	
+	public ParserRule getPredicateCSRule() {
+		return getPredicateCSAccess().getRule();
+	}
+
+	////Constraint ::= Predicate | Assignment
+	// //Predicate ::= BooleanOCLExpr
+	//
+	////Assignement ::= [�default�] SlotOwnerOCLExpr�.�PropertyName �:=� ValueOCLExpr
+	// PredicateOrAssignmentCS returns
+	//AssignmentCS:
+	//	default?="default"? target=ExpCS (":=" initialiser=ExpCS)? ";";
+	public QVTcoreBaseGrammarAccess.PredicateOrAssignmentCSElements getPredicateOrAssignmentCSAccess() {
+		return gaQVTcoreBase.getPredicateOrAssignmentCSAccess();
+	}
+	
+	public ParserRule getPredicateOrAssignmentCSRule() {
+		return getPredicateOrAssignmentCSAccess().getRule();
 	}
 
 	//QueryCS:

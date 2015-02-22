@@ -41,6 +41,7 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PatternCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizeableVariableCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
@@ -149,38 +150,12 @@ public class QVTcoreBaseCSPostOrderVisitor extends AbstractQVTcoreBaseCSPostOrde
 
 	@Override
 	public Continuation<?> visitGuardPatternCS(@NonNull GuardPatternCS csElement) {
-		GuardPattern pGuardPattern = PivotUtil.getPivot(GuardPattern.class, csElement);
-		if (pGuardPattern != null) {
-			List<Predicate> pPredicates = new ArrayList<Predicate>(); 
-			for (AssignmentCS csConstraint : csElement.getConstraints()) {
-				ExpCS csTarget = csConstraint.getTarget();
-				ExpCS csInitialiser = csConstraint.getInitialiser();
-				OCLExpression target = csTarget != null ? context.visitLeft2Right(OCLExpression.class, csTarget) : null;
-				if (csInitialiser != null) {
-					if (target instanceof VariableExp) {
-						Variable variable = (Variable) ((VariableExp)target).getReferredVariable();
-						OCLExpression initialiser = context.visitLeft2Right(OCLExpression.class, csInitialiser);
-						variable.setOwnedInit(initialiser);
-					}
-					else if (target != null) {
-						context.addDiagnostic(csElement, "unrecognised Guard Constraint target " + target.eClass().getName());
-					}
-				}
-				else {
-					Predicate predicate = PivotUtil.getPivot(Predicate.class, csConstraint);
-					if (predicate != null) {
-						predicate.setConditionExpression(target);
-						pPredicates.add(predicate);
-					}
-				}
-				if (csConstraint.isDefault()) {
-					context.addDiagnostic(csElement, "misplaced default ignored");
-				}
-			}
-			PivotUtilInternal.refreshList(pGuardPattern.getPredicate(), pPredicates);
+		GuardPattern asGuardPattern = PivotUtil.getPivot(GuardPattern.class, csElement);
+		if (asGuardPattern != null) {
+			context.refreshList(Predicate.class, asGuardPattern.getPredicate(), csElement.getOwnedPredicates());
 		}
 		return null;
-	}
+	} 
 
 	@Override
 	public Continuation<?> visitParamDeclarationCS(@NonNull ParamDeclarationCS object) {
@@ -189,6 +164,20 @@ public class QVTcoreBaseCSPostOrderVisitor extends AbstractQVTcoreBaseCSPostOrde
 
 	@Override
 	public Continuation<?> visitPatternCS(@NonNull PatternCS object) {
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitPredicateCS(@NonNull PredicateCS csElement) {
+		Predicate asPredicate = PivotUtil.getPivot(Predicate.class, csElement);
+		if (asPredicate != null) {
+			OCLExpression asCondition = null;
+			ExpCS csCondition = csElement.getOwnedCondition();
+			if (csCondition != null) {
+				asCondition = context.visitLeft2Right(OCLExpression.class, csCondition);
+			}
+			asPredicate.setConditionExpression(asCondition);
+		}
 		return null;
 	}
 
