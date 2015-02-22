@@ -38,32 +38,32 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.QueryCSImpl#getInputParamDeclarations <em>Input Param Declarations</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.QueryCSImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.QueryCSImpl#getOwnedParameters <em>Owned Parameters</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.QueryCSImpl#getOwnedExpression <em>Owned Expression</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	/**
-	 * The cached value of the '{@link #getInputParamDeclarations() <em>Input Param Declarations</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedParameters() <em>Owned Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInputParamDeclarations()
+	 * @see #getOwnedParameters()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ParamDeclarationCS> inputParamDeclarations;
+	protected EList<ParamDeclarationCS> ownedParameters;
 
 	/**
-	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedExpression() <em>Owned Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExpression()
+	 * @see #getOwnedExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected ExpCS expression;
+	protected ExpCS ownedExpression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -90,11 +90,11 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * @generated
 	 */
 	@Override
-	public EList<ParamDeclarationCS> getInputParamDeclarations() {
-		if (inputParamDeclarations == null) {
-			inputParamDeclarations = new EObjectContainmentEList<ParamDeclarationCS>(ParamDeclarationCS.class, this, QVTrelationCSPackage.QUERY_CS__INPUT_PARAM_DECLARATIONS);
+	public EList<ParamDeclarationCS> getOwnedParameters() {
+		if (ownedParameters == null) {
+			ownedParameters = new EObjectContainmentEList<ParamDeclarationCS>(ParamDeclarationCS.class, this, QVTrelationCSPackage.QUERY_CS__OWNED_PARAMETERS);
 		}
-		return inputParamDeclarations;
+		return ownedParameters;
 	}
 
 	/**
@@ -103,8 +103,8 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * @generated
 	 */
 	@Override
-	public ExpCS getExpression() {
-		return expression;
+	public ExpCS getOwnedExpression() {
+		return ownedExpression;
 	}
 
 	/**
@@ -112,11 +112,11 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetExpression(ExpCS newExpression, NotificationChain msgs) {
-		ExpCS oldExpression = expression;
-		expression = newExpression;
+	public NotificationChain basicSetOwnedExpression(ExpCS newOwnedExpression, NotificationChain msgs) {
+		ExpCS oldOwnedExpression = ownedExpression;
+		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.QUERY_CS__EXPRESSION, oldExpression, newExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.QUERY_CS__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -128,18 +128,18 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * @generated
 	 */
 	@Override
-	public void setExpression(ExpCS newExpression) {
-		if (newExpression != expression) {
+	public void setOwnedExpression(ExpCS newOwnedExpression) {
+		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
-			if (expression != null)
-				msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.QUERY_CS__EXPRESSION, null, msgs);
-			if (newExpression != null)
-				msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.QUERY_CS__EXPRESSION, null, msgs);
-			msgs = basicSetExpression(newExpression, msgs);
+			if (ownedExpression != null)
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.QUERY_CS__OWNED_EXPRESSION, null, msgs);
+			if (newOwnedExpression != null)
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.QUERY_CS__OWNED_EXPRESSION, null, msgs);
+			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.QUERY_CS__EXPRESSION, newExpression, newExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.QUERY_CS__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -150,10 +150,10 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.QUERY_CS__INPUT_PARAM_DECLARATIONS:
-				return ((InternalEList<?>)getInputParamDeclarations()).basicRemove(otherEnd, msgs);
-			case QVTrelationCSPackage.QUERY_CS__EXPRESSION:
-				return basicSetExpression(null, msgs);
+			case QVTrelationCSPackage.QUERY_CS__OWNED_PARAMETERS:
+				return ((InternalEList<?>)getOwnedParameters()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSPackage.QUERY_CS__OWNED_EXPRESSION:
+				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -166,10 +166,10 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.QUERY_CS__INPUT_PARAM_DECLARATIONS:
-				return getInputParamDeclarations();
-			case QVTrelationCSPackage.QUERY_CS__EXPRESSION:
-				return getExpression();
+			case QVTrelationCSPackage.QUERY_CS__OWNED_PARAMETERS:
+				return getOwnedParameters();
+			case QVTrelationCSPackage.QUERY_CS__OWNED_EXPRESSION:
+				return getOwnedExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -183,12 +183,12 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.QUERY_CS__INPUT_PARAM_DECLARATIONS:
-				getInputParamDeclarations().clear();
-				getInputParamDeclarations().addAll((Collection<? extends ParamDeclarationCS>)newValue);
+			case QVTrelationCSPackage.QUERY_CS__OWNED_PARAMETERS:
+				getOwnedParameters().clear();
+				getOwnedParameters().addAll((Collection<? extends ParamDeclarationCS>)newValue);
 				return;
-			case QVTrelationCSPackage.QUERY_CS__EXPRESSION:
-				setExpression((ExpCS)newValue);
+			case QVTrelationCSPackage.QUERY_CS__OWNED_EXPRESSION:
+				setOwnedExpression((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -202,11 +202,11 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.QUERY_CS__INPUT_PARAM_DECLARATIONS:
-				getInputParamDeclarations().clear();
+			case QVTrelationCSPackage.QUERY_CS__OWNED_PARAMETERS:
+				getOwnedParameters().clear();
 				return;
-			case QVTrelationCSPackage.QUERY_CS__EXPRESSION:
-				setExpression((ExpCS)null);
+			case QVTrelationCSPackage.QUERY_CS__OWNED_EXPRESSION:
+				setOwnedExpression((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -220,10 +220,10 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.QUERY_CS__INPUT_PARAM_DECLARATIONS:
-				return inputParamDeclarations != null && !inputParamDeclarations.isEmpty();
-			case QVTrelationCSPackage.QUERY_CS__EXPRESSION:
-				return expression != null;
+			case QVTrelationCSPackage.QUERY_CS__OWNED_PARAMETERS:
+				return ownedParameters != null && !ownedParameters.isEmpty();
+			case QVTrelationCSPackage.QUERY_CS__OWNED_EXPRESSION:
+				return ownedExpression != null;
 		}
 		return super.eIsSet(featureID);
 	}

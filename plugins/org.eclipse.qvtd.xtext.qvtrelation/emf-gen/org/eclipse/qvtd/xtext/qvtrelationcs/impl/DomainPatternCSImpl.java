@@ -32,22 +32,21 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainPatternCSImpl#getTemplate <em>Template</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainPatternCSImpl#getOwnedTemplate <em>Owned Template</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class DomainPatternCSImpl extends ModelElementCSImpl implements DomainPatternCS {
 	/**
-	 * The cached value of the '{@link #getTemplate() <em>Template</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedTemplate() <em>Owned Template</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTemplate()
+	 * @see #getOwnedTemplate()
 	 * @generated
 	 * @ordered
 	 */
-	protected TemplateCS template;
-
+	protected TemplateCS ownedTemplate;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -73,8 +72,8 @@ public class DomainPatternCSImpl extends ModelElementCSImpl implements DomainPat
 	 * @generated
 	 */
 	@Override
-	public TemplateCS getTemplate() {
-		return template;
+	public TemplateCS getOwnedTemplate() {
+		return ownedTemplate;
 	}
 
 	/**
@@ -82,11 +81,11 @@ public class DomainPatternCSImpl extends ModelElementCSImpl implements DomainPat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTemplate(TemplateCS newTemplate, NotificationChain msgs) {
-		TemplateCS oldTemplate = template;
-		template = newTemplate;
+	public NotificationChain basicSetOwnedTemplate(TemplateCS newOwnedTemplate, NotificationChain msgs) {
+		TemplateCS oldOwnedTemplate = ownedTemplate;
+		ownedTemplate = newOwnedTemplate;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DOMAIN_PATTERN_CS__TEMPLATE, oldTemplate, newTemplate);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DOMAIN_PATTERN_CS__OWNED_TEMPLATE, oldOwnedTemplate, newOwnedTemplate);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -98,18 +97,18 @@ public class DomainPatternCSImpl extends ModelElementCSImpl implements DomainPat
 	 * @generated
 	 */
 	@Override
-	public void setTemplate(TemplateCS newTemplate) {
-		if (newTemplate != template) {
+	public void setOwnedTemplate(TemplateCS newOwnedTemplate) {
+		if (newOwnedTemplate != ownedTemplate) {
 			NotificationChain msgs = null;
-			if (template != null)
-				msgs = ((InternalEObject)template).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.DOMAIN_PATTERN_CS__TEMPLATE, null, msgs);
-			if (newTemplate != null)
-				msgs = ((InternalEObject)newTemplate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.DOMAIN_PATTERN_CS__TEMPLATE, null, msgs);
-			msgs = basicSetTemplate(newTemplate, msgs);
+			if (ownedTemplate != null)
+				msgs = ((InternalEObject)ownedTemplate).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.DOMAIN_PATTERN_CS__OWNED_TEMPLATE, null, msgs);
+			if (newOwnedTemplate != null)
+				msgs = ((InternalEObject)newOwnedTemplate).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.DOMAIN_PATTERN_CS__OWNED_TEMPLATE, null, msgs);
+			msgs = basicSetOwnedTemplate(newOwnedTemplate, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DOMAIN_PATTERN_CS__TEMPLATE, newTemplate, newTemplate));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DOMAIN_PATTERN_CS__OWNED_TEMPLATE, newOwnedTemplate, newOwnedTemplate));
 	}
 
 	/**
@@ -120,8 +119,8 @@ public class DomainPatternCSImpl extends ModelElementCSImpl implements DomainPat
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.DOMAIN_PATTERN_CS__TEMPLATE:
-				return basicSetTemplate(null, msgs);
+			case QVTrelationCSPackage.DOMAIN_PATTERN_CS__OWNED_TEMPLATE:
+				return basicSetOwnedTemplate(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -134,8 +133,8 @@ public class DomainPatternCSImpl extends ModelElementCSImpl implements DomainPat
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.DOMAIN_PATTERN_CS__TEMPLATE:
-				return getTemplate();
+			case QVTrelationCSPackage.DOMAIN_PATTERN_CS__OWNED_TEMPLATE:
+				return getOwnedTemplate();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -148,8 +147,8 @@ public class DomainPatternCSImpl extends ModelElementCSImpl implements DomainPat
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.DOMAIN_PATTERN_CS__TEMPLATE:
-				setTemplate((TemplateCS)newValue);
+			case QVTrelationCSPackage.DOMAIN_PATTERN_CS__OWNED_TEMPLATE:
+				setOwnedTemplate((TemplateCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -163,8 +162,8 @@ public class DomainPatternCSImpl extends ModelElementCSImpl implements DomainPat
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.DOMAIN_PATTERN_CS__TEMPLATE:
-				setTemplate((TemplateCS)null);
+			case QVTrelationCSPackage.DOMAIN_PATTERN_CS__OWNED_TEMPLATE:
+				setOwnedTemplate((TemplateCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -178,8 +177,8 @@ public class DomainPatternCSImpl extends ModelElementCSImpl implements DomainPat
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.DOMAIN_PATTERN_CS__TEMPLATE:
-				return template != null;
+			case QVTrelationCSPackage.DOMAIN_PATTERN_CS__OWNED_TEMPLATE:
+				return ownedTemplate != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -34,8 +34,8 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.TemplateVariableCS;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TemplateCSImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TemplateCSImpl#getType <em>Type</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TemplateCSImpl#getGuardExpression <em>Guard Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TemplateCSImpl#getOwnedType <em>Owned Type</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TemplateCSImpl#getOwnedGuardExpression <em>Owned Guard Expression</em>}</li>
  * </ul>
  *
  * @generated
@@ -62,24 +62,24 @@ public abstract class TemplateCSImpl extends ExpCSImpl implements TemplateCS {
 	protected String name = NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedType() <em>Owned Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getType()
+	 * @see #getOwnedType()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypedRefCS type;
+	protected TypedRefCS ownedType;
 
 	/**
-	 * The cached value of the '{@link #getGuardExpression() <em>Guard Expression</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedGuardExpression() <em>Owned Guard Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getGuardExpression()
+	 * @see #getOwnedGuardExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected ExpCS guardExpression;
+	protected ExpCS ownedGuardExpression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -129,8 +129,8 @@ public abstract class TemplateCSImpl extends ExpCSImpl implements TemplateCS {
 	 * @generated
 	 */
 	@Override
-	public TypedRefCS getType() {
-		return type;
+	public TypedRefCS getOwnedType() {
+		return ownedType;
 	}
 
 	/**
@@ -138,11 +138,11 @@ public abstract class TemplateCSImpl extends ExpCSImpl implements TemplateCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetType(TypedRefCS newType, NotificationChain msgs) {
-		TypedRefCS oldType = type;
-		type = newType;
+	public NotificationChain basicSetOwnedType(TypedRefCS newOwnedType, NotificationChain msgs) {
+		TypedRefCS oldOwnedType = ownedType;
+		ownedType = newOwnedType;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.TEMPLATE_CS__TYPE, oldType, newType);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.TEMPLATE_CS__OWNED_TYPE, oldOwnedType, newOwnedType);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -154,18 +154,18 @@ public abstract class TemplateCSImpl extends ExpCSImpl implements TemplateCS {
 	 * @generated
 	 */
 	@Override
-	public void setType(TypedRefCS newType) {
-		if (newType != type) {
+	public void setOwnedType(TypedRefCS newOwnedType) {
+		if (newOwnedType != ownedType) {
 			NotificationChain msgs = null;
-			if (type != null)
-				msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.TEMPLATE_CS__TYPE, null, msgs);
-			if (newType != null)
-				msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.TEMPLATE_CS__TYPE, null, msgs);
-			msgs = basicSetType(newType, msgs);
+			if (ownedType != null)
+				msgs = ((InternalEObject)ownedType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.TEMPLATE_CS__OWNED_TYPE, null, msgs);
+			if (newOwnedType != null)
+				msgs = ((InternalEObject)newOwnedType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.TEMPLATE_CS__OWNED_TYPE, null, msgs);
+			msgs = basicSetOwnedType(newOwnedType, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.TEMPLATE_CS__TYPE, newType, newType));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.TEMPLATE_CS__OWNED_TYPE, newOwnedType, newOwnedType));
 	}
 
 	/**
@@ -174,8 +174,8 @@ public abstract class TemplateCSImpl extends ExpCSImpl implements TemplateCS {
 	 * @generated
 	 */
 	@Override
-	public ExpCS getGuardExpression() {
-		return guardExpression;
+	public ExpCS getOwnedGuardExpression() {
+		return ownedGuardExpression;
 	}
 
 	/**
@@ -183,11 +183,11 @@ public abstract class TemplateCSImpl extends ExpCSImpl implements TemplateCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetGuardExpression(ExpCS newGuardExpression, NotificationChain msgs) {
-		ExpCS oldGuardExpression = guardExpression;
-		guardExpression = newGuardExpression;
+	public NotificationChain basicSetOwnedGuardExpression(ExpCS newOwnedGuardExpression, NotificationChain msgs) {
+		ExpCS oldOwnedGuardExpression = ownedGuardExpression;
+		ownedGuardExpression = newOwnedGuardExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.TEMPLATE_CS__GUARD_EXPRESSION, oldGuardExpression, newGuardExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.TEMPLATE_CS__OWNED_GUARD_EXPRESSION, oldOwnedGuardExpression, newOwnedGuardExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -199,18 +199,18 @@ public abstract class TemplateCSImpl extends ExpCSImpl implements TemplateCS {
 	 * @generated
 	 */
 	@Override
-	public void setGuardExpression(ExpCS newGuardExpression) {
-		if (newGuardExpression != guardExpression) {
+	public void setOwnedGuardExpression(ExpCS newOwnedGuardExpression) {
+		if (newOwnedGuardExpression != ownedGuardExpression) {
 			NotificationChain msgs = null;
-			if (guardExpression != null)
-				msgs = ((InternalEObject)guardExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.TEMPLATE_CS__GUARD_EXPRESSION, null, msgs);
-			if (newGuardExpression != null)
-				msgs = ((InternalEObject)newGuardExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.TEMPLATE_CS__GUARD_EXPRESSION, null, msgs);
-			msgs = basicSetGuardExpression(newGuardExpression, msgs);
+			if (ownedGuardExpression != null)
+				msgs = ((InternalEObject)ownedGuardExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.TEMPLATE_CS__OWNED_GUARD_EXPRESSION, null, msgs);
+			if (newOwnedGuardExpression != null)
+				msgs = ((InternalEObject)newOwnedGuardExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.TEMPLATE_CS__OWNED_GUARD_EXPRESSION, null, msgs);
+			msgs = basicSetOwnedGuardExpression(newOwnedGuardExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.TEMPLATE_CS__GUARD_EXPRESSION, newGuardExpression, newGuardExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.TEMPLATE_CS__OWNED_GUARD_EXPRESSION, newOwnedGuardExpression, newOwnedGuardExpression));
 	}
 
 	/**
@@ -231,10 +231,10 @@ public abstract class TemplateCSImpl extends ExpCSImpl implements TemplateCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TEMPLATE_CS__TYPE:
-				return basicSetType(null, msgs);
-			case QVTrelationCSPackage.TEMPLATE_CS__GUARD_EXPRESSION:
-				return basicSetGuardExpression(null, msgs);
+			case QVTrelationCSPackage.TEMPLATE_CS__OWNED_TYPE:
+				return basicSetOwnedType(null, msgs);
+			case QVTrelationCSPackage.TEMPLATE_CS__OWNED_GUARD_EXPRESSION:
+				return basicSetOwnedGuardExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -249,10 +249,10 @@ public abstract class TemplateCSImpl extends ExpCSImpl implements TemplateCS {
 		switch (featureID) {
 			case QVTrelationCSPackage.TEMPLATE_CS__NAME:
 				return getName();
-			case QVTrelationCSPackage.TEMPLATE_CS__TYPE:
-				return getType();
-			case QVTrelationCSPackage.TEMPLATE_CS__GUARD_EXPRESSION:
-				return getGuardExpression();
+			case QVTrelationCSPackage.TEMPLATE_CS__OWNED_TYPE:
+				return getOwnedType();
+			case QVTrelationCSPackage.TEMPLATE_CS__OWNED_GUARD_EXPRESSION:
+				return getOwnedGuardExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -268,11 +268,11 @@ public abstract class TemplateCSImpl extends ExpCSImpl implements TemplateCS {
 			case QVTrelationCSPackage.TEMPLATE_CS__NAME:
 				setName((String)newValue);
 				return;
-			case QVTrelationCSPackage.TEMPLATE_CS__TYPE:
-				setType((TypedRefCS)newValue);
+			case QVTrelationCSPackage.TEMPLATE_CS__OWNED_TYPE:
+				setOwnedType((TypedRefCS)newValue);
 				return;
-			case QVTrelationCSPackage.TEMPLATE_CS__GUARD_EXPRESSION:
-				setGuardExpression((ExpCS)newValue);
+			case QVTrelationCSPackage.TEMPLATE_CS__OWNED_GUARD_EXPRESSION:
+				setOwnedGuardExpression((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -289,11 +289,11 @@ public abstract class TemplateCSImpl extends ExpCSImpl implements TemplateCS {
 			case QVTrelationCSPackage.TEMPLATE_CS__NAME:
 				setName(NAME_EDEFAULT);
 				return;
-			case QVTrelationCSPackage.TEMPLATE_CS__TYPE:
-				setType((TypedRefCS)null);
+			case QVTrelationCSPackage.TEMPLATE_CS__OWNED_TYPE:
+				setOwnedType((TypedRefCS)null);
 				return;
-			case QVTrelationCSPackage.TEMPLATE_CS__GUARD_EXPRESSION:
-				setGuardExpression((ExpCS)null);
+			case QVTrelationCSPackage.TEMPLATE_CS__OWNED_GUARD_EXPRESSION:
+				setOwnedGuardExpression((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -309,10 +309,10 @@ public abstract class TemplateCSImpl extends ExpCSImpl implements TemplateCS {
 		switch (featureID) {
 			case QVTrelationCSPackage.TEMPLATE_CS__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-			case QVTrelationCSPackage.TEMPLATE_CS__TYPE:
-				return type != null;
-			case QVTrelationCSPackage.TEMPLATE_CS__GUARD_EXPRESSION:
-				return guardExpression != null;
+			case QVTrelationCSPackage.TEMPLATE_CS__OWNED_TYPE:
+				return ownedType != null;
+			case QVTrelationCSPackage.TEMPLATE_CS__OWNED_GUARD_EXPRESSION:
+				return ownedGuardExpression != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -337,7 +337,7 @@ public abstract class TemplateCSImpl extends ExpCSImpl implements TemplateCS {
 		}
 		if (baseClass == TemplateVariableCS.class) {
 			switch (derivedFeatureID) {
-				case QVTrelationCSPackage.TEMPLATE_CS__TYPE: return QVTrelationCSPackage.TEMPLATE_VARIABLE_CS__TYPE;
+				case QVTrelationCSPackage.TEMPLATE_CS__OWNED_TYPE: return QVTrelationCSPackage.TEMPLATE_VARIABLE_CS__OWNED_TYPE;
 				default: return -1;
 			}
 		}
@@ -364,7 +364,7 @@ public abstract class TemplateCSImpl extends ExpCSImpl implements TemplateCS {
 		}
 		if (baseClass == TemplateVariableCS.class) {
 			switch (baseFeatureID) {
-				case QVTrelationCSPackage.TEMPLATE_VARIABLE_CS__TYPE: return QVTrelationCSPackage.TEMPLATE_CS__TYPE;
+				case QVTrelationCSPackage.TEMPLATE_VARIABLE_CS__OWNED_TYPE: return QVTrelationCSPackage.TEMPLATE_CS__OWNED_TYPE;
 				default: return -1;
 			}
 		}

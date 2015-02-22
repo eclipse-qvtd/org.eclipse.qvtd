@@ -275,22 +275,22 @@ public interface QVTrelationCSPackage extends EPackage {
 	int TEMPLATE_CS__NAME = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEMPLATE_CS__TYPE = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 1;
+	int TEMPLATE_CS__OWNED_TYPE = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Guard Expression</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Guard Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEMPLATE_CS__GUARD_EXPRESSION = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 2;
+	int TEMPLATE_CS__OWNED_GUARD_EXPRESSION = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Template CS</em>' class.
@@ -429,31 +429,31 @@ public interface QVTrelationCSPackage extends EPackage {
 	int COLLECTION_TEMPLATE_CS__NAME = TEMPLATE_CS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_TEMPLATE_CS__TYPE = TEMPLATE_CS__TYPE;
+	int COLLECTION_TEMPLATE_CS__OWNED_TYPE = TEMPLATE_CS__OWNED_TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Guard Expression</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Guard Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_TEMPLATE_CS__GUARD_EXPRESSION = TEMPLATE_CS__GUARD_EXPRESSION;
+	int COLLECTION_TEMPLATE_CS__OWNED_GUARD_EXPRESSION = TEMPLATE_CS__OWNED_GUARD_EXPRESSION;
 
 	/**
-	 * The feature id for the '<em><b>Member Identifiers</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Member Identifiers</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COLLECTION_TEMPLATE_CS__MEMBER_IDENTIFIERS = TEMPLATE_CS_FEATURE_COUNT + 0;
+	int COLLECTION_TEMPLATE_CS__OWNED_MEMBER_IDENTIFIERS = TEMPLATE_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Rest Identifier</b></em>' reference.
@@ -529,13 +529,13 @@ public interface QVTrelationCSPackage extends EPackage {
 	int DEFAULT_VALUE_CS__OWNED_ANNOTATIONS = BaseCSPackage.MODEL_ELEMENT_CS__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Initialiser</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Init Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEFAULT_VALUE_CS__INITIALISER = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
+	int DEFAULT_VALUE_CS__OWNED_INIT_EXPRESSION = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Property Id</b></em>' reference.
@@ -611,22 +611,22 @@ public interface QVTrelationCSPackage extends EPackage {
 	int DOMAIN_CS__OWNED_ANNOTATIONS = ABSTRACT_DOMAIN_CS__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Checkonly</b></em>' attribute.
+	 * The feature id for the '<em><b>Is Checkonly</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_CS__CHECKONLY = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0;
+	int DOMAIN_CS__IS_CHECKONLY = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Enforce</b></em>' attribute.
+	 * The feature id for the '<em><b>Is Enforce</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_CS__ENFORCE = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 1;
+	int DOMAIN_CS__IS_ENFORCE = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Model Id</b></em>' reference.
@@ -638,40 +638,40 @@ public interface QVTrelationCSPackage extends EPackage {
 	int DOMAIN_CS__MODEL_ID = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Replace</b></em>' attribute.
+	 * The feature id for the '<em><b>Is Replace</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_CS__REPLACE = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 3;
+	int DOMAIN_CS__IS_REPLACE = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Pattern</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Pattern</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_CS__PATTERN = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 4;
+	int DOMAIN_CS__OWNED_PATTERN = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Default Values</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Default Values</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_CS__DEFAULT_VALUES = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 5;
+	int DOMAIN_CS__OWNED_DEFAULT_VALUES = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 5;
 
 	/**
-	 * The feature id for the '<em><b>Implemented By</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Implemented By</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_CS__IMPLEMENTED_BY = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 6;
+	int DOMAIN_CS__OWNED_IMPLEMENTED_BY = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Domain CS</em>' class.
@@ -738,13 +738,13 @@ public interface QVTrelationCSPackage extends EPackage {
 	int DOMAIN_PATTERN_CS__OWNED_ANNOTATIONS = BaseCSPackage.MODEL_ELEMENT_CS__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Template</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Template</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_PATTERN_CS__TEMPLATE = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
+	int DOMAIN_PATTERN_CS__OWNED_TEMPLATE = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Domain Pattern CS</em>' class.
@@ -810,13 +810,13 @@ public interface QVTrelationCSPackage extends EPackage {
 	int TEMPLATE_VARIABLE_CS__NAME = BaseCSPackage.NAMED_ELEMENT_CS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TEMPLATE_VARIABLE_CS__TYPE = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int TEMPLATE_VARIABLE_CS__OWNED_TYPE = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Template Variable CS</em>' class.
@@ -892,13 +892,13 @@ public interface QVTrelationCSPackage extends EPackage {
 	int ELEMENT_TEMPLATE_CS__NAME = TEMPLATE_VARIABLE_CS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ELEMENT_TEMPLATE_CS__TYPE = TEMPLATE_VARIABLE_CS__TYPE;
+	int ELEMENT_TEMPLATE_CS__OWNED_TYPE = TEMPLATE_VARIABLE_CS__OWNED_TYPE;
 
 	/**
 	 * The number of structural features of the '<em>Element Template CS</em>' class.
@@ -965,13 +965,13 @@ public interface QVTrelationCSPackage extends EPackage {
 	int KEY_DECL_CS__OWNED_ANNOTATIONS = BaseCSPackage.MODEL_ELEMENT_CS__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Path Name</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Path Name</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KEY_DECL_CS__PATH_NAME = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
+	int KEY_DECL_CS__OWNED_PATH_NAME = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Property Ids</b></em>' reference list.
@@ -983,13 +983,13 @@ public interface QVTrelationCSPackage extends EPackage {
 	int KEY_DECL_CS__PROPERTY_IDS = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Opposite Property Ids</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Opposite Property Ids</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int KEY_DECL_CS__OPPOSITE_PROPERTY_IDS = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 2;
+	int KEY_DECL_CS__OWNED_OPPOSITE_PROPERTY_IDS = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Class Id</b></em>' reference.
@@ -1219,31 +1219,31 @@ public interface QVTrelationCSPackage extends EPackage {
 	int OBJECT_TEMPLATE_CS__NAME = TEMPLATE_CS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT_TEMPLATE_CS__TYPE = TEMPLATE_CS__TYPE;
+	int OBJECT_TEMPLATE_CS__OWNED_TYPE = TEMPLATE_CS__OWNED_TYPE;
 
 	/**
-	 * The feature id for the '<em><b>Guard Expression</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Guard Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT_TEMPLATE_CS__GUARD_EXPRESSION = TEMPLATE_CS__GUARD_EXPRESSION;
+	int OBJECT_TEMPLATE_CS__OWNED_GUARD_EXPRESSION = TEMPLATE_CS__OWNED_GUARD_EXPRESSION;
 
 	/**
-	 * The feature id for the '<em><b>Property Templates</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Property Templates</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT_TEMPLATE_CS__PROPERTY_TEMPLATES = TEMPLATE_CS_FEATURE_COUNT + 0;
+	int OBJECT_TEMPLATE_CS__OWNED_PROPERTY_TEMPLATES = TEMPLATE_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Object Template CS</em>' class.
@@ -1410,13 +1410,13 @@ public interface QVTrelationCSPackage extends EPackage {
 	int PATTERN_CS__OWNED_ANNOTATIONS = BaseCSPackage.MODEL_ELEMENT_CS__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Predicates</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Predicates</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PATTERN_CS__PREDICATES = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
+	int PATTERN_CS__OWNED_PREDICATES = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Pattern CS</em>' class.
@@ -1483,13 +1483,13 @@ public interface QVTrelationCSPackage extends EPackage {
 	int PREDICATE_CS__OWNED_ANNOTATIONS = BaseCSPackage.MODEL_ELEMENT_CS__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Expr</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Condition</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PREDICATE_CS__EXPR = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
+	int PREDICATE_CS__OWNED_CONDITION = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Predicate CS</em>' class.
@@ -1565,13 +1565,13 @@ public interface QVTrelationCSPackage extends EPackage {
 	int PRIMITIVE_TYPE_DOMAIN_CS__NAME = TEMPLATE_VARIABLE_CS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMITIVE_TYPE_DOMAIN_CS__TYPE = TEMPLATE_VARIABLE_CS__TYPE;
+	int PRIMITIVE_TYPE_DOMAIN_CS__OWNED_TYPE = TEMPLATE_VARIABLE_CS__OWNED_TYPE;
 
 	/**
 	 * The number of structural features of the '<em>Primitive Type Domain CS</em>' class.
@@ -1638,13 +1638,13 @@ public interface QVTrelationCSPackage extends EPackage {
 	int PROPERTY_TEMPLATE_CS__OWNED_ANNOTATIONS = BaseCSPackage.MODEL_ELEMENT_CS__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Object Template</b></em>' container reference.
+	 * The feature id for the '<em><b>Owning Object Template</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
+	int PROPERTY_TEMPLATE_CS__OWNING_OBJECT_TEMPLATE = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Property Id</b></em>' reference.
@@ -1656,22 +1656,22 @@ public interface QVTrelationCSPackage extends EPackage {
 	int PROPERTY_TEMPLATE_CS__PROPERTY_ID = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Opposite Property Id</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Opposite Property Id</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_TEMPLATE_CS__OPPOSITE_PROPERTY_ID = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 2;
+	int PROPERTY_TEMPLATE_CS__OWNED_OPPOSITE_PROPERTY_ID = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_TEMPLATE_CS__EXPRESSION = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 3;
+	int PROPERTY_TEMPLATE_CS__OWNED_EXPRESSION = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Property Template CS</em>' class.
@@ -1774,22 +1774,22 @@ public interface QVTrelationCSPackage extends EPackage {
 	int QUERY_CS__QUALIFIERS = BaseCSPackage.TYPED_ELEMENT_CS__QUALIFIERS;
 
 	/**
-	 * The feature id for the '<em><b>Input Param Declarations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS__INPUT_PARAM_DECLARATIONS = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int QUERY_CS__OWNED_PARAMETERS = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS__EXPRESSION = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int QUERY_CS__OWNED_EXPRESSION = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Query CS</em>' class.
@@ -1865,13 +1865,13 @@ public interface QVTrelationCSPackage extends EPackage {
 	int RELATION_CS__NAME = BaseCSPackage.NAMED_ELEMENT_CS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Top</b></em>' attribute.
+	 * The feature id for the '<em><b>Is Top</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_CS__TOP = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int RELATION_CS__IS_TOP = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Overrides</b></em>' reference.
@@ -1883,40 +1883,40 @@ public interface QVTrelationCSPackage extends EPackage {
 	int RELATION_CS__OVERRIDES = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Var Declarations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Var Declarations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_CS__VAR_DECLARATIONS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int RELATION_CS__OWNED_VAR_DECLARATIONS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Domains</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Domains</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_CS__DOMAINS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
+	int RELATION_CS__OWNED_DOMAINS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>When</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned When</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_CS__WHEN = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
+	int RELATION_CS__OWNED_WHEN = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Where</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Where</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_CS__WHERE = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 5;
+	int RELATION_CS__OWNED_WHERE = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Relation CS</em>' class.
@@ -2010,22 +2010,22 @@ public interface QVTrelationCSPackage extends EPackage {
 	int TOP_LEVEL_CS__OWNED_LIBRARIES = BaseCSPackage.ROOT_PACKAGE_CS__OWNED_LIBRARIES;
 
 	/**
-	 * The feature id for the '<em><b>Import Clauses</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Import Clauses</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_LEVEL_CS__IMPORT_CLAUSES = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 0;
+	int TOP_LEVEL_CS__OWNED_IMPORT_CLAUSES = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Transformations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Transformations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TOP_LEVEL_CS__TRANSFORMATIONS = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 1;
+	int TOP_LEVEL_CS__OWNED_TRANSFORMATIONS = BaseCSPackage.ROOT_PACKAGE_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Top Level CS</em>' class.
@@ -2137,13 +2137,13 @@ public interface QVTrelationCSPackage extends EPackage {
 	int TRANSFORMATION_CS__OWNING_PACKAGE = BaseCSPackage.CLASS_CS__OWNING_PACKAGE;
 
 	/**
-	 * The feature id for the '<em><b>Model Decls</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Model Decls</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__MODEL_DECLS = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 0;
+	int TRANSFORMATION_CS__OWNED_MODEL_DECLS = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Extends</b></em>' reference list.
@@ -2155,31 +2155,31 @@ public interface QVTrelationCSPackage extends EPackage {
 	int TRANSFORMATION_CS__EXTENDS = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Key Decls</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Key Decls</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__KEY_DECLS = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 2;
+	int TRANSFORMATION_CS__OWNED_KEY_DECLS = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Queries</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Queries</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__QUERIES = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 3;
+	int TRANSFORMATION_CS__OWNED_QUERIES = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Relation</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Relations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__RELATION = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 4;
+	int TRANSFORMATION_CS__OWNED_RELATIONS = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Transformation CS</em>' class.
@@ -2246,13 +2246,13 @@ public interface QVTrelationCSPackage extends EPackage {
 	int UNIT_CS__OWNED_ANNOTATIONS = BaseCSPackage.MODEL_ELEMENT_CS__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Identifier</b></em>' reference list.
+	 * The feature id for the '<em><b>Identifiers</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UNIT_CS__IDENTIFIER = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
+	int UNIT_CS__IDENTIFIERS = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Unit CS</em>' class.
@@ -2319,22 +2319,22 @@ public interface QVTrelationCSPackage extends EPackage {
 	int VAR_DECLARATION_CS__OWNED_ANNOTATIONS = BaseCSPackage.MODEL_ELEMENT_CS__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Var Declaration Ids</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Var Declaration Ids</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_DECLARATION_CS__VAR_DECLARATION_IDS = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
+	int VAR_DECLARATION_CS__OWNED_VAR_DECLARATION_IDS = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_DECLARATION_CS__TYPE = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
+	int VAR_DECLARATION_CS__OWNED_TYPE = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Var Declaration CS</em>' class.
@@ -2439,15 +2439,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getCollectionTemplateCS();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS#getMemberIdentifiers <em>Member Identifiers</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS#getOwnedMemberIdentifiers <em>Owned Member Identifiers</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Member Identifiers</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS#getMemberIdentifiers()
+	 * @return the meta object for the containment reference list '<em>Owned Member Identifiers</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS#getOwnedMemberIdentifiers()
 	 * @see #getCollectionTemplateCS()
 	 * @generated
 	 */
-	EReference getCollectionTemplateCS_MemberIdentifiers();
+	EReference getCollectionTemplateCS_OwnedMemberIdentifiers();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS#getRestIdentifier <em>Rest Identifier</em>}'.
@@ -2471,15 +2471,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getDefaultValueCS();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS#getInitialiser <em>Initialiser</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS#getOwnedInitExpression <em>Owned Init Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Initialiser</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS#getInitialiser()
+	 * @return the meta object for the containment reference '<em>Owned Init Expression</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS#getOwnedInitExpression()
 	 * @see #getDefaultValueCS()
 	 * @generated
 	 */
-	EReference getDefaultValueCS_Initialiser();
+	EReference getDefaultValueCS_OwnedInitExpression();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS#getPropertyId <em>Property Id</em>}'.
@@ -2503,26 +2503,26 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getDomainCS();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isCheckonly <em>Checkonly</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isIsCheckonly <em>Is Checkonly</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Checkonly</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isCheckonly()
+	 * @return the meta object for the attribute '<em>Is Checkonly</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isIsCheckonly()
 	 * @see #getDomainCS()
 	 * @generated
 	 */
-	EAttribute getDomainCS_Checkonly();
+	EAttribute getDomainCS_IsCheckonly();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isEnforce <em>Enforce</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isIsEnforce <em>Is Enforce</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Enforce</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isEnforce()
+	 * @return the meta object for the attribute '<em>Is Enforce</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isIsEnforce()
 	 * @see #getDomainCS()
 	 * @generated
 	 */
-	EAttribute getDomainCS_Enforce();
+	EAttribute getDomainCS_IsEnforce();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getModelId <em>Model Id</em>}'.
@@ -2536,48 +2536,48 @@ public interface QVTrelationCSPackage extends EPackage {
 	EReference getDomainCS_ModelId();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isReplace <em>Replace</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isIsReplace <em>Is Replace</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Replace</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isReplace()
+	 * @return the meta object for the attribute '<em>Is Replace</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isIsReplace()
 	 * @see #getDomainCS()
 	 * @generated
 	 */
-	EAttribute getDomainCS_Replace();
+	EAttribute getDomainCS_IsReplace();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getPattern <em>Pattern</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getOwnedPattern <em>Owned Pattern</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Pattern</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getPattern()
+	 * @return the meta object for the containment reference '<em>Owned Pattern</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getOwnedPattern()
 	 * @see #getDomainCS()
 	 * @generated
 	 */
-	EReference getDomainCS_Pattern();
+	EReference getDomainCS_OwnedPattern();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getDefaultValues <em>Default Values</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getOwnedDefaultValues <em>Owned Default Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Default Values</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getDefaultValues()
+	 * @return the meta object for the containment reference list '<em>Owned Default Values</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getOwnedDefaultValues()
 	 * @see #getDomainCS()
 	 * @generated
 	 */
-	EReference getDomainCS_DefaultValues();
+	EReference getDomainCS_OwnedDefaultValues();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getImplementedBy <em>Implemented By</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getOwnedImplementedBy <em>Owned Implemented By</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Implemented By</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getImplementedBy()
+	 * @return the meta object for the containment reference '<em>Owned Implemented By</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getOwnedImplementedBy()
 	 * @see #getDomainCS()
 	 * @generated
 	 */
-	EReference getDomainCS_ImplementedBy();
+	EReference getDomainCS_OwnedImplementedBy();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainPatternCS <em>Domain Pattern CS</em>}'.
@@ -2590,15 +2590,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getDomainPatternCS();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainPatternCS#getTemplate <em>Template</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainPatternCS#getOwnedTemplate <em>Owned Template</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Template</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.DomainPatternCS#getTemplate()
+	 * @return the meta object for the containment reference '<em>Owned Template</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.DomainPatternCS#getOwnedTemplate()
 	 * @see #getDomainPatternCS()
 	 * @generated
 	 */
-	EReference getDomainPatternCS_Template();
+	EReference getDomainPatternCS_OwnedTemplate();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.ElementTemplateCS <em>Element Template CS</em>}'.
@@ -2621,15 +2621,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getKeyDeclCS();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS#getPathName <em>Path Name</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS#getOwnedPathName <em>Owned Path Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Path Name</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS#getPathName()
+	 * @return the meta object for the containment reference '<em>Owned Path Name</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS#getOwnedPathName()
 	 * @see #getKeyDeclCS()
 	 * @generated
 	 */
-	EReference getKeyDeclCS_PathName();
+	EReference getKeyDeclCS_OwnedPathName();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS#getPropertyIds <em>Property Ids</em>}'.
@@ -2643,15 +2643,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	EReference getKeyDeclCS_PropertyIds();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS#getOppositePropertyIds <em>Opposite Property Ids</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS#getOwnedOppositePropertyIds <em>Owned Opposite Property Ids</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Opposite Property Ids</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS#getOppositePropertyIds()
+	 * @return the meta object for the containment reference list '<em>Owned Opposite Property Ids</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS#getOwnedOppositePropertyIds()
 	 * @see #getKeyDeclCS()
 	 * @generated
 	 */
-	EReference getKeyDeclCS_OppositePropertyIds();
+	EReference getKeyDeclCS_OwnedOppositePropertyIds();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS#getClassId <em>Class Id</em>}'.
@@ -2696,15 +2696,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getObjectTemplateCS();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.ObjectTemplateCS#getPropertyTemplates <em>Property Templates</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.ObjectTemplateCS#getOwnedPropertyTemplates <em>Owned Property Templates</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Property Templates</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.ObjectTemplateCS#getPropertyTemplates()
+	 * @return the meta object for the containment reference list '<em>Owned Property Templates</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.ObjectTemplateCS#getOwnedPropertyTemplates()
 	 * @see #getObjectTemplateCS()
 	 * @generated
 	 */
-	EReference getObjectTemplateCS_PropertyTemplates();
+	EReference getObjectTemplateCS_OwnedPropertyTemplates();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.ParamDeclarationCS <em>Param Declaration CS</em>}'.
@@ -2727,15 +2727,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getPatternCS();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PatternCS#getPredicates <em>Predicates</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PatternCS#getOwnedPredicates <em>Owned Predicates</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Predicates</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.PatternCS#getPredicates()
+	 * @return the meta object for the containment reference list '<em>Owned Predicates</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.PatternCS#getOwnedPredicates()
 	 * @see #getPatternCS()
 	 * @generated
 	 */
-	EReference getPatternCS_Predicates();
+	EReference getPatternCS_OwnedPredicates();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PredicateCS <em>Predicate CS</em>}'.
@@ -2748,15 +2748,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getPredicateCS();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PredicateCS#getExpr <em>Expr</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PredicateCS#getOwnedCondition <em>Owned Condition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Expr</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.PredicateCS#getExpr()
+	 * @return the meta object for the containment reference '<em>Owned Condition</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.PredicateCS#getOwnedCondition()
 	 * @see #getPredicateCS()
 	 * @generated
 	 */
-	EReference getPredicateCS_Expr();
+	EReference getPredicateCS_OwnedCondition();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PrimitiveTypeDomainCS <em>Primitive Type Domain CS</em>}'.
@@ -2779,15 +2779,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getPropertyTemplateCS();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getObjectTemplate <em>Object Template</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getOwningObjectTemplate <em>Owning Object Template</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Object Template</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getObjectTemplate()
+	 * @return the meta object for the container reference '<em>Owning Object Template</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getOwningObjectTemplate()
 	 * @see #getPropertyTemplateCS()
 	 * @generated
 	 */
-	EReference getPropertyTemplateCS_ObjectTemplate();
+	EReference getPropertyTemplateCS_OwningObjectTemplate();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getPropertyId <em>Property Id</em>}'.
@@ -2801,26 +2801,26 @@ public interface QVTrelationCSPackage extends EPackage {
 	EReference getPropertyTemplateCS_PropertyId();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getOppositePropertyId <em>Opposite Property Id</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getOwnedOppositePropertyId <em>Owned Opposite Property Id</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Opposite Property Id</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getOppositePropertyId()
+	 * @return the meta object for the containment reference '<em>Owned Opposite Property Id</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getOwnedOppositePropertyId()
 	 * @see #getPropertyTemplateCS()
 	 * @generated
 	 */
-	EReference getPropertyTemplateCS_OppositePropertyId();
+	EReference getPropertyTemplateCS_OwnedOppositePropertyId();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getExpression <em>Expression</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getOwnedExpression <em>Owned Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Expression</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getExpression()
+	 * @return the meta object for the containment reference '<em>Owned Expression</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getOwnedExpression()
 	 * @see #getPropertyTemplateCS()
 	 * @generated
 	 */
-	EReference getPropertyTemplateCS_Expression();
+	EReference getPropertyTemplateCS_OwnedExpression();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS <em>Query CS</em>}'.
@@ -2833,26 +2833,26 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getQueryCS();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS#getInputParamDeclarations <em>Input Param Declarations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS#getOwnedParameters <em>Owned Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Input Param Declarations</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS#getInputParamDeclarations()
+	 * @return the meta object for the containment reference list '<em>Owned Parameters</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS#getOwnedParameters()
 	 * @see #getQueryCS()
 	 * @generated
 	 */
-	EReference getQueryCS_InputParamDeclarations();
+	EReference getQueryCS_OwnedParameters();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS#getExpression <em>Expression</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS#getOwnedExpression <em>Owned Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Expression</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS#getExpression()
+	 * @return the meta object for the containment reference '<em>Owned Expression</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS#getOwnedExpression()
 	 * @see #getQueryCS()
 	 * @generated
 	 */
-	EReference getQueryCS_Expression();
+	EReference getQueryCS_OwnedExpression();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS <em>Relation CS</em>}'.
@@ -2865,15 +2865,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getRelationCS();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isTop <em>Top</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsTop <em>Is Top</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Top</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isTop()
+	 * @return the meta object for the attribute '<em>Is Top</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsTop()
 	 * @see #getRelationCS()
 	 * @generated
 	 */
-	EAttribute getRelationCS_Top();
+	EAttribute getRelationCS_IsTop();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOverrides <em>Overrides</em>}'.
@@ -2887,48 +2887,48 @@ public interface QVTrelationCSPackage extends EPackage {
 	EReference getRelationCS_Overrides();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getVarDeclarations <em>Var Declarations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOwnedVarDeclarations <em>Owned Var Declarations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Var Declarations</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getVarDeclarations()
+	 * @return the meta object for the containment reference list '<em>Owned Var Declarations</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOwnedVarDeclarations()
 	 * @see #getRelationCS()
 	 * @generated
 	 */
-	EReference getRelationCS_VarDeclarations();
+	EReference getRelationCS_OwnedVarDeclarations();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getDomains <em>Domains</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOwnedDomains <em>Owned Domains</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Domains</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getDomains()
+	 * @return the meta object for the containment reference list '<em>Owned Domains</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOwnedDomains()
 	 * @see #getRelationCS()
 	 * @generated
 	 */
-	EReference getRelationCS_Domains();
+	EReference getRelationCS_OwnedDomains();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getWhen <em>When</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOwnedWhen <em>Owned When</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>When</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getWhen()
+	 * @return the meta object for the containment reference '<em>Owned When</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOwnedWhen()
 	 * @see #getRelationCS()
 	 * @generated
 	 */
-	EReference getRelationCS_When();
+	EReference getRelationCS_OwnedWhen();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getWhere <em>Where</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOwnedWhere <em>Owned Where</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Where</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getWhere()
+	 * @return the meta object for the containment reference '<em>Owned Where</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOwnedWhere()
 	 * @see #getRelationCS()
 	 * @generated
 	 */
-	EReference getRelationCS_Where();
+	EReference getRelationCS_OwnedWhere();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TemplateCS <em>Template CS</em>}'.
@@ -2941,15 +2941,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getTemplateCS();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TemplateCS#getGuardExpression <em>Guard Expression</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TemplateCS#getOwnedGuardExpression <em>Owned Guard Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Guard Expression</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.TemplateCS#getGuardExpression()
+	 * @return the meta object for the containment reference '<em>Owned Guard Expression</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.TemplateCS#getOwnedGuardExpression()
 	 * @see #getTemplateCS()
 	 * @generated
 	 */
-	EReference getTemplateCS_GuardExpression();
+	EReference getTemplateCS_OwnedGuardExpression();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TemplateVariableCS <em>Template Variable CS</em>}'.
@@ -2962,15 +2962,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getTemplateVariableCS();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TemplateVariableCS#getType <em>Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TemplateVariableCS#getOwnedType <em>Owned Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Type</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.TemplateVariableCS#getType()
+	 * @return the meta object for the containment reference '<em>Owned Type</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.TemplateVariableCS#getOwnedType()
 	 * @see #getTemplateVariableCS()
 	 * @generated
 	 */
-	EReference getTemplateVariableCS_Type();
+	EReference getTemplateVariableCS_OwnedType();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS <em>Top Level CS</em>}'.
@@ -2983,26 +2983,26 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getTopLevelCS();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS#getImportClauses <em>Import Clauses</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS#getOwnedImportClauses <em>Owned Import Clauses</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Import Clauses</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS#getImportClauses()
+	 * @return the meta object for the containment reference list '<em>Owned Import Clauses</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS#getOwnedImportClauses()
 	 * @see #getTopLevelCS()
 	 * @generated
 	 */
-	EReference getTopLevelCS_ImportClauses();
+	EReference getTopLevelCS_OwnedImportClauses();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS#getTransformations <em>Transformations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS#getOwnedTransformations <em>Owned Transformations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Transformations</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS#getTransformations()
+	 * @return the meta object for the containment reference list '<em>Owned Transformations</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS#getOwnedTransformations()
 	 * @see #getTopLevelCS()
 	 * @generated
 	 */
-	EReference getTopLevelCS_Transformations();
+	EReference getTopLevelCS_OwnedTransformations();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS <em>Transformation CS</em>}'.
@@ -3015,15 +3015,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getTransformationCS();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getModelDecls <em>Model Decls</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedModelDecls <em>Owned Model Decls</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Model Decls</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getModelDecls()
+	 * @return the meta object for the containment reference list '<em>Owned Model Decls</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedModelDecls()
 	 * @see #getTransformationCS()
 	 * @generated
 	 */
-	EReference getTransformationCS_ModelDecls();
+	EReference getTransformationCS_OwnedModelDecls();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getExtends <em>Extends</em>}'.
@@ -3037,37 +3037,37 @@ public interface QVTrelationCSPackage extends EPackage {
 	EReference getTransformationCS_Extends();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getKeyDecls <em>Key Decls</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedKeyDecls <em>Owned Key Decls</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Key Decls</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getKeyDecls()
+	 * @return the meta object for the containment reference list '<em>Owned Key Decls</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedKeyDecls()
 	 * @see #getTransformationCS()
 	 * @generated
 	 */
-	EReference getTransformationCS_KeyDecls();
+	EReference getTransformationCS_OwnedKeyDecls();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getQueries <em>Queries</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedQueries <em>Owned Queries</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Queries</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getQueries()
+	 * @return the meta object for the containment reference list '<em>Owned Queries</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedQueries()
 	 * @see #getTransformationCS()
 	 * @generated
 	 */
-	EReference getTransformationCS_Queries();
+	EReference getTransformationCS_OwnedQueries();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getRelation <em>Relation</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedRelations <em>Owned Relations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Relation</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getRelation()
+	 * @return the meta object for the containment reference list '<em>Owned Relations</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedRelations()
 	 * @see #getTransformationCS()
 	 * @generated
 	 */
-	EReference getTransformationCS_Relation();
+	EReference getTransformationCS_OwnedRelations();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.UnitCS <em>Unit CS</em>}'.
@@ -3080,15 +3080,15 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getUnitCS();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.UnitCS#getIdentifier <em>Identifier</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.UnitCS#getIdentifiers <em>Identifiers</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Identifier</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.UnitCS#getIdentifier()
+	 * @return the meta object for the reference list '<em>Identifiers</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.UnitCS#getIdentifiers()
 	 * @see #getUnitCS()
 	 * @generated
 	 */
-	EReference getUnitCS_Identifier();
+	EReference getUnitCS_Identifiers();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS <em>Var Declaration CS</em>}'.
@@ -3101,26 +3101,26 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getVarDeclarationCS();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS#getVarDeclarationIds <em>Var Declaration Ids</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS#getOwnedVarDeclarationIds <em>Owned Var Declaration Ids</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Var Declaration Ids</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS#getVarDeclarationIds()
+	 * @return the meta object for the containment reference list '<em>Owned Var Declaration Ids</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS#getOwnedVarDeclarationIds()
 	 * @see #getVarDeclarationCS()
 	 * @generated
 	 */
-	EReference getVarDeclarationCS_VarDeclarationIds();
+	EReference getVarDeclarationCS_OwnedVarDeclarationIds();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS#getType <em>Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS#getOwnedType <em>Owned Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Type</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS#getType()
+	 * @return the meta object for the containment reference '<em>Owned Type</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS#getOwnedType()
 	 * @see #getVarDeclarationCS()
 	 * @generated
 	 */
-	EReference getVarDeclarationCS_Type();
+	EReference getVarDeclarationCS_OwnedType();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationIdCS <em>Var Declaration Id CS</em>}'.
@@ -3175,12 +3175,12 @@ public interface QVTrelationCSPackage extends EPackage {
 		EClass COLLECTION_TEMPLATE_CS = eINSTANCE.getCollectionTemplateCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Member Identifiers</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Member Identifiers</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COLLECTION_TEMPLATE_CS__MEMBER_IDENTIFIERS = eINSTANCE.getCollectionTemplateCS_MemberIdentifiers();
+		EReference COLLECTION_TEMPLATE_CS__OWNED_MEMBER_IDENTIFIERS = eINSTANCE.getCollectionTemplateCS_OwnedMemberIdentifiers();
 
 		/**
 		 * The meta object literal for the '<em><b>Rest Identifier</b></em>' reference feature.
@@ -3201,12 +3201,12 @@ public interface QVTrelationCSPackage extends EPackage {
 		EClass DEFAULT_VALUE_CS = eINSTANCE.getDefaultValueCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Initialiser</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Init Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DEFAULT_VALUE_CS__INITIALISER = eINSTANCE.getDefaultValueCS_Initialiser();
+		EReference DEFAULT_VALUE_CS__OWNED_INIT_EXPRESSION = eINSTANCE.getDefaultValueCS_OwnedInitExpression();
 
 		/**
 		 * The meta object literal for the '<em><b>Property Id</b></em>' reference feature.
@@ -3227,20 +3227,20 @@ public interface QVTrelationCSPackage extends EPackage {
 		EClass DOMAIN_CS = eINSTANCE.getDomainCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Checkonly</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Is Checkonly</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DOMAIN_CS__CHECKONLY = eINSTANCE.getDomainCS_Checkonly();
+		EAttribute DOMAIN_CS__IS_CHECKONLY = eINSTANCE.getDomainCS_IsCheckonly();
 
 		/**
-		 * The meta object literal for the '<em><b>Enforce</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Is Enforce</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DOMAIN_CS__ENFORCE = eINSTANCE.getDomainCS_Enforce();
+		EAttribute DOMAIN_CS__IS_ENFORCE = eINSTANCE.getDomainCS_IsEnforce();
 
 		/**
 		 * The meta object literal for the '<em><b>Model Id</b></em>' reference feature.
@@ -3251,36 +3251,36 @@ public interface QVTrelationCSPackage extends EPackage {
 		EReference DOMAIN_CS__MODEL_ID = eINSTANCE.getDomainCS_ModelId();
 
 		/**
-		 * The meta object literal for the '<em><b>Replace</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Is Replace</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DOMAIN_CS__REPLACE = eINSTANCE.getDomainCS_Replace();
+		EAttribute DOMAIN_CS__IS_REPLACE = eINSTANCE.getDomainCS_IsReplace();
 
 		/**
-		 * The meta object literal for the '<em><b>Pattern</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Pattern</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DOMAIN_CS__PATTERN = eINSTANCE.getDomainCS_Pattern();
+		EReference DOMAIN_CS__OWNED_PATTERN = eINSTANCE.getDomainCS_OwnedPattern();
 
 		/**
-		 * The meta object literal for the '<em><b>Default Values</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Default Values</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DOMAIN_CS__DEFAULT_VALUES = eINSTANCE.getDomainCS_DefaultValues();
+		EReference DOMAIN_CS__OWNED_DEFAULT_VALUES = eINSTANCE.getDomainCS_OwnedDefaultValues();
 
 		/**
-		 * The meta object literal for the '<em><b>Implemented By</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Implemented By</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DOMAIN_CS__IMPLEMENTED_BY = eINSTANCE.getDomainCS_ImplementedBy();
+		EReference DOMAIN_CS__OWNED_IMPLEMENTED_BY = eINSTANCE.getDomainCS_OwnedImplementedBy();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainPatternCSImpl <em>Domain Pattern CS</em>}' class.
@@ -3293,12 +3293,12 @@ public interface QVTrelationCSPackage extends EPackage {
 		EClass DOMAIN_PATTERN_CS = eINSTANCE.getDomainPatternCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Template</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Template</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DOMAIN_PATTERN_CS__TEMPLATE = eINSTANCE.getDomainPatternCS_Template();
+		EReference DOMAIN_PATTERN_CS__OWNED_TEMPLATE = eINSTANCE.getDomainPatternCS_OwnedTemplate();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.ElementTemplateCSImpl <em>Element Template CS</em>}' class.
@@ -3321,12 +3321,12 @@ public interface QVTrelationCSPackage extends EPackage {
 		EClass KEY_DECL_CS = eINSTANCE.getKeyDeclCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Path Name</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Path Name</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KEY_DECL_CS__PATH_NAME = eINSTANCE.getKeyDeclCS_PathName();
+		EReference KEY_DECL_CS__OWNED_PATH_NAME = eINSTANCE.getKeyDeclCS_OwnedPathName();
 
 		/**
 		 * The meta object literal for the '<em><b>Property Ids</b></em>' reference list feature.
@@ -3337,12 +3337,12 @@ public interface QVTrelationCSPackage extends EPackage {
 		EReference KEY_DECL_CS__PROPERTY_IDS = eINSTANCE.getKeyDeclCS_PropertyIds();
 
 		/**
-		 * The meta object literal for the '<em><b>Opposite Property Ids</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Opposite Property Ids</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference KEY_DECL_CS__OPPOSITE_PROPERTY_IDS = eINSTANCE.getKeyDeclCS_OppositePropertyIds();
+		EReference KEY_DECL_CS__OWNED_OPPOSITE_PROPERTY_IDS = eINSTANCE.getKeyDeclCS_OwnedOppositePropertyIds();
 
 		/**
 		 * The meta object literal for the '<em><b>Class Id</b></em>' reference feature.
@@ -3381,12 +3381,12 @@ public interface QVTrelationCSPackage extends EPackage {
 		EClass OBJECT_TEMPLATE_CS = eINSTANCE.getObjectTemplateCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Property Templates</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Property Templates</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference OBJECT_TEMPLATE_CS__PROPERTY_TEMPLATES = eINSTANCE.getObjectTemplateCS_PropertyTemplates();
+		EReference OBJECT_TEMPLATE_CS__OWNED_PROPERTY_TEMPLATES = eINSTANCE.getObjectTemplateCS_OwnedPropertyTemplates();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.ParamDeclarationCSImpl <em>Param Declaration CS</em>}' class.
@@ -3409,12 +3409,12 @@ public interface QVTrelationCSPackage extends EPackage {
 		EClass PATTERN_CS = eINSTANCE.getPatternCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Predicates</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Predicates</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PATTERN_CS__PREDICATES = eINSTANCE.getPatternCS_Predicates();
+		EReference PATTERN_CS__OWNED_PREDICATES = eINSTANCE.getPatternCS_OwnedPredicates();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.PredicateCSImpl <em>Predicate CS</em>}' class.
@@ -3427,12 +3427,12 @@ public interface QVTrelationCSPackage extends EPackage {
 		EClass PREDICATE_CS = eINSTANCE.getPredicateCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Expr</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Condition</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PREDICATE_CS__EXPR = eINSTANCE.getPredicateCS_Expr();
+		EReference PREDICATE_CS__OWNED_CONDITION = eINSTANCE.getPredicateCS_OwnedCondition();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.PrimitiveTypeDomainCSImpl <em>Primitive Type Domain CS</em>}' class.
@@ -3455,12 +3455,12 @@ public interface QVTrelationCSPackage extends EPackage {
 		EClass PROPERTY_TEMPLATE_CS = eINSTANCE.getPropertyTemplateCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Object Template</b></em>' container reference feature.
+		 * The meta object literal for the '<em><b>Owning Object Template</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE = eINSTANCE.getPropertyTemplateCS_ObjectTemplate();
+		EReference PROPERTY_TEMPLATE_CS__OWNING_OBJECT_TEMPLATE = eINSTANCE.getPropertyTemplateCS_OwningObjectTemplate();
 
 		/**
 		 * The meta object literal for the '<em><b>Property Id</b></em>' reference feature.
@@ -3471,20 +3471,20 @@ public interface QVTrelationCSPackage extends EPackage {
 		EReference PROPERTY_TEMPLATE_CS__PROPERTY_ID = eINSTANCE.getPropertyTemplateCS_PropertyId();
 
 		/**
-		 * The meta object literal for the '<em><b>Opposite Property Id</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Opposite Property Id</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROPERTY_TEMPLATE_CS__OPPOSITE_PROPERTY_ID = eINSTANCE.getPropertyTemplateCS_OppositePropertyId();
+		EReference PROPERTY_TEMPLATE_CS__OWNED_OPPOSITE_PROPERTY_ID = eINSTANCE.getPropertyTemplateCS_OwnedOppositePropertyId();
 
 		/**
-		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PROPERTY_TEMPLATE_CS__EXPRESSION = eINSTANCE.getPropertyTemplateCS_Expression();
+		EReference PROPERTY_TEMPLATE_CS__OWNED_EXPRESSION = eINSTANCE.getPropertyTemplateCS_OwnedExpression();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.QueryCSImpl <em>Query CS</em>}' class.
@@ -3497,20 +3497,20 @@ public interface QVTrelationCSPackage extends EPackage {
 		EClass QUERY_CS = eINSTANCE.getQueryCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Input Param Declarations</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Parameters</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference QUERY_CS__INPUT_PARAM_DECLARATIONS = eINSTANCE.getQueryCS_InputParamDeclarations();
+		EReference QUERY_CS__OWNED_PARAMETERS = eINSTANCE.getQueryCS_OwnedParameters();
 
 		/**
-		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference QUERY_CS__EXPRESSION = eINSTANCE.getQueryCS_Expression();
+		EReference QUERY_CS__OWNED_EXPRESSION = eINSTANCE.getQueryCS_OwnedExpression();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl <em>Relation CS</em>}' class.
@@ -3523,12 +3523,12 @@ public interface QVTrelationCSPackage extends EPackage {
 		EClass RELATION_CS = eINSTANCE.getRelationCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Top</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Is Top</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute RELATION_CS__TOP = eINSTANCE.getRelationCS_Top();
+		EAttribute RELATION_CS__IS_TOP = eINSTANCE.getRelationCS_IsTop();
 
 		/**
 		 * The meta object literal for the '<em><b>Overrides</b></em>' reference feature.
@@ -3539,36 +3539,36 @@ public interface QVTrelationCSPackage extends EPackage {
 		EReference RELATION_CS__OVERRIDES = eINSTANCE.getRelationCS_Overrides();
 
 		/**
-		 * The meta object literal for the '<em><b>Var Declarations</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Var Declarations</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference RELATION_CS__VAR_DECLARATIONS = eINSTANCE.getRelationCS_VarDeclarations();
+		EReference RELATION_CS__OWNED_VAR_DECLARATIONS = eINSTANCE.getRelationCS_OwnedVarDeclarations();
 
 		/**
-		 * The meta object literal for the '<em><b>Domains</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Domains</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference RELATION_CS__DOMAINS = eINSTANCE.getRelationCS_Domains();
+		EReference RELATION_CS__OWNED_DOMAINS = eINSTANCE.getRelationCS_OwnedDomains();
 
 		/**
-		 * The meta object literal for the '<em><b>When</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned When</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference RELATION_CS__WHEN = eINSTANCE.getRelationCS_When();
+		EReference RELATION_CS__OWNED_WHEN = eINSTANCE.getRelationCS_OwnedWhen();
 
 		/**
-		 * The meta object literal for the '<em><b>Where</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Where</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference RELATION_CS__WHERE = eINSTANCE.getRelationCS_Where();
+		EReference RELATION_CS__OWNED_WHERE = eINSTANCE.getRelationCS_OwnedWhere();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TemplateCSImpl <em>Template CS</em>}' class.
@@ -3581,12 +3581,12 @@ public interface QVTrelationCSPackage extends EPackage {
 		EClass TEMPLATE_CS = eINSTANCE.getTemplateCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Guard Expression</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Guard Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TEMPLATE_CS__GUARD_EXPRESSION = eINSTANCE.getTemplateCS_GuardExpression();
+		EReference TEMPLATE_CS__OWNED_GUARD_EXPRESSION = eINSTANCE.getTemplateCS_OwnedGuardExpression();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TemplateVariableCSImpl <em>Template Variable CS</em>}' class.
@@ -3599,12 +3599,12 @@ public interface QVTrelationCSPackage extends EPackage {
 		EClass TEMPLATE_VARIABLE_CS = eINSTANCE.getTemplateVariableCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Type</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TEMPLATE_VARIABLE_CS__TYPE = eINSTANCE.getTemplateVariableCS_Type();
+		EReference TEMPLATE_VARIABLE_CS__OWNED_TYPE = eINSTANCE.getTemplateVariableCS_OwnedType();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TopLevelCSImpl <em>Top Level CS</em>}' class.
@@ -3617,20 +3617,20 @@ public interface QVTrelationCSPackage extends EPackage {
 		EClass TOP_LEVEL_CS = eINSTANCE.getTopLevelCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Import Clauses</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Import Clauses</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TOP_LEVEL_CS__IMPORT_CLAUSES = eINSTANCE.getTopLevelCS_ImportClauses();
+		EReference TOP_LEVEL_CS__OWNED_IMPORT_CLAUSES = eINSTANCE.getTopLevelCS_OwnedImportClauses();
 
 		/**
-		 * The meta object literal for the '<em><b>Transformations</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Transformations</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TOP_LEVEL_CS__TRANSFORMATIONS = eINSTANCE.getTopLevelCS_Transformations();
+		EReference TOP_LEVEL_CS__OWNED_TRANSFORMATIONS = eINSTANCE.getTopLevelCS_OwnedTransformations();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl <em>Transformation CS</em>}' class.
@@ -3643,12 +3643,12 @@ public interface QVTrelationCSPackage extends EPackage {
 		EClass TRANSFORMATION_CS = eINSTANCE.getTransformationCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Model Decls</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Model Decls</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TRANSFORMATION_CS__MODEL_DECLS = eINSTANCE.getTransformationCS_ModelDecls();
+		EReference TRANSFORMATION_CS__OWNED_MODEL_DECLS = eINSTANCE.getTransformationCS_OwnedModelDecls();
 
 		/**
 		 * The meta object literal for the '<em><b>Extends</b></em>' reference list feature.
@@ -3659,28 +3659,28 @@ public interface QVTrelationCSPackage extends EPackage {
 		EReference TRANSFORMATION_CS__EXTENDS = eINSTANCE.getTransformationCS_Extends();
 
 		/**
-		 * The meta object literal for the '<em><b>Key Decls</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Key Decls</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TRANSFORMATION_CS__KEY_DECLS = eINSTANCE.getTransformationCS_KeyDecls();
+		EReference TRANSFORMATION_CS__OWNED_KEY_DECLS = eINSTANCE.getTransformationCS_OwnedKeyDecls();
 
 		/**
-		 * The meta object literal for the '<em><b>Queries</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Queries</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TRANSFORMATION_CS__QUERIES = eINSTANCE.getTransformationCS_Queries();
+		EReference TRANSFORMATION_CS__OWNED_QUERIES = eINSTANCE.getTransformationCS_OwnedQueries();
 
 		/**
-		 * The meta object literal for the '<em><b>Relation</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Relations</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TRANSFORMATION_CS__RELATION = eINSTANCE.getTransformationCS_Relation();
+		EReference TRANSFORMATION_CS__OWNED_RELATIONS = eINSTANCE.getTransformationCS_OwnedRelations();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.UnitCSImpl <em>Unit CS</em>}' class.
@@ -3693,12 +3693,12 @@ public interface QVTrelationCSPackage extends EPackage {
 		EClass UNIT_CS = eINSTANCE.getUnitCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Identifier</b></em>' reference list feature.
+		 * The meta object literal for the '<em><b>Identifiers</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference UNIT_CS__IDENTIFIER = eINSTANCE.getUnitCS_Identifier();
+		EReference UNIT_CS__IDENTIFIERS = eINSTANCE.getUnitCS_Identifiers();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.VarDeclarationCSImpl <em>Var Declaration CS</em>}' class.
@@ -3711,20 +3711,20 @@ public interface QVTrelationCSPackage extends EPackage {
 		EClass VAR_DECLARATION_CS = eINSTANCE.getVarDeclarationCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Var Declaration Ids</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Var Declaration Ids</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference VAR_DECLARATION_CS__VAR_DECLARATION_IDS = eINSTANCE.getVarDeclarationCS_VarDeclarationIds();
+		EReference VAR_DECLARATION_CS__OWNED_VAR_DECLARATION_IDS = eINSTANCE.getVarDeclarationCS_OwnedVarDeclarationIds();
 
 		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Type</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference VAR_DECLARATION_CS__TYPE = eINSTANCE.getVarDeclarationCS_Type();
+		EReference VAR_DECLARATION_CS__OWNED_TYPE = eINSTANCE.getVarDeclarationCS_OwnedType();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.VarDeclarationIdCSImpl <em>Var Declaration Id CS</em>}' class.

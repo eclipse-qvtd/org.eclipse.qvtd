@@ -122,7 +122,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 				pKey.setIdentifies(csElement.getClassId());
 				PivotUtilInternal.refreshList(pKey.getPart(), csElement.getPropertyIds());
 				List<Property> oppositePart = new ArrayList<Property>();
-				for (PathNameCS oppositePropertyId : csElement.getOppositePropertyIds()) {
+				for (PathNameCS oppositePropertyId : csElement.getOwnedOppositePropertyIds()) {
 					Element element = oppositePropertyId.getReferredElement();
 					if (element instanceof Property) {
 						oppositePart.add((Property) element);
@@ -284,7 +284,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 //			pivotElement.setRest(variable);
 //		}
 //		context.refreshName(variable, csElement.getRestIdentifier());
-		context.refreshPivotList(OCLExpression.class, pivotElement.getMember(), csElement.getMemberIdentifiers());
+		context.refreshPivotList(OCLExpression.class, pivotElement.getMember(), csElement.getOwnedMemberIdentifiers());
 		return null;
 	}
 
@@ -297,8 +297,8 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 	@Override
 	public Continuation<?> visitDomainCS(@NonNull DomainCS csElement) {
 		@NonNull RelationDomain pivotElement = context.refreshModelElement(RelationDomain.class, QVTrelationPackage.Literals.RELATION_DOMAIN, csElement);
-		pivotElement.setPattern(PivotUtil.getPivot(DomainPattern.class, csElement.getPattern()));
-		context.refreshPivotList(RelationDomainAssignment.class, pivotElement.getDefaultAssignment(), csElement.getDefaultValues());
+		pivotElement.setPattern(PivotUtil.getPivot(DomainPattern.class, csElement.getOwnedPattern()));
+		context.refreshPivotList(RelationDomainAssignment.class, pivotElement.getDefaultAssignment(), csElement.getOwnedDefaultValues());
 		Variable rootVariable = null;
 		DomainPattern rootPattern = pivotElement.getPattern();
 		if (rootPattern != null) {
@@ -314,7 +314,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 	@Override
 	public Continuation<?> visitDomainPatternCS(@NonNull DomainPatternCS csElement) {
 		@NonNull DomainPattern pivotElement = context.refreshModelElement(DomainPattern.class, QVTrelationPackage.Literals.DOMAIN_PATTERN, csElement);
-		pivotElement.setTemplateExpression(PivotUtil.getPivot(TemplateExp.class, csElement.getTemplate()));
+		pivotElement.setTemplateExpression(PivotUtil.getPivot(TemplateExp.class, csElement.getOwnedTemplate()));
 		return null;
 	}
 
@@ -332,9 +332,9 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 
 	@Override
 	public Continuation<?> visitKeyDeclCS(@NonNull KeyDeclCS csElement) {
-		PathNameCS csPathName = ClassUtil.nonNullState(csElement.getPathName());
+		PathNameCS csPathName = ClassUtil.nonNullState(csElement.getOwnedPathName());
 		CS2AS.setElementType(csPathName, PivotPackage.Literals.CLASS, csElement, null);
-		for (PathNameCS csOppositePropertyId : csElement.getOppositePropertyIds()) {
+		for (PathNameCS csOppositePropertyId : csElement.getOwnedOppositePropertyIds()) {
 			if (csOppositePropertyId != null) {
 				CS2AS.setElementType(csOppositePropertyId, PivotPackage.Literals.PROPERTY, csElement, null);
 			}
@@ -366,7 +366,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 			pivotElement.setBindsTo(variable);
 		}
 		context.refreshName(variable, csElement.getName());
-		context.refreshPivotList(PropertyTemplateItem.class, pivotElement.getPart(), csElement.getPropertyTemplates());
+		context.refreshPivotList(PropertyTemplateItem.class, pivotElement.getPart(), csElement.getOwnedPropertyTemplates());
 		return null;
 	}
 
@@ -380,7 +380,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 	@Override
 	public Continuation<?> visitPatternCS(@NonNull PatternCS csElement) {
 		@NonNull Pattern pivotElement = context.refreshModelElement(Pattern.class, QVTbasePackage.Literals.PATTERN, csElement);
-		context.refreshPivotList(Predicate.class, pivotElement.getPredicate(), csElement.getPredicates());
+		context.refreshPivotList(Predicate.class, pivotElement.getPredicate(), csElement.getOwnedPredicates());
 		return null;
 	}
 
@@ -407,12 +407,12 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 
 	@Override
 	public Continuation<?> visitPropertyTemplateCS(@NonNull PropertyTemplateCS csElement) {
-		PathNameCS csOppositePropertyId = csElement.getOppositePropertyId();
+		PathNameCS csOppositePropertyId = csElement.getOwnedOppositePropertyId();
 		if (csOppositePropertyId != null) {
 			CS2AS.setElementType(csOppositePropertyId, PivotPackage.Literals.PROPERTY, csElement, null);
 		}
 		@NonNull PropertyTemplateItem pivotElement = context.refreshModelElement(PropertyTemplateItem.class, QVTtemplatePackage.Literals.PROPERTY_TEMPLATE_ITEM, csElement);
-		ExpCS csExp = csElement.getExpression();
+		ExpCS csExp = csElement.getOwnedExpression();
 		if (csExp instanceof TemplateCS) {
 			pivotElement.setValue(PivotUtil.getPivot(TemplateExp.class, csExp));
 		}
@@ -422,17 +422,17 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 	@Override
 	public Continuation<?> visitQueryCS(@NonNull QueryCS csElement) {
 		@NonNull Function pivotElement = refreshNamedElement(Function.class, QVTbasePackage.Literals.FUNCTION, csElement);
-		context.refreshPivotList(Parameter.class, pivotElement.getOwnedParameters(), csElement.getInputParamDeclarations());
+		context.refreshPivotList(Parameter.class, pivotElement.getOwnedParameters(), csElement.getOwnedParameters());
 		return null;
 	}
 
 	@Override
 	public Continuation<?> visitRelationCS(@NonNull RelationCS csElement) {
 		@NonNull Relation pivotElement = refreshNamedElement(Relation.class, QVTrelationPackage.Literals.RELATION, csElement);
-		context.refreshPivotList(Domain.class, pivotElement.getDomain(), csElement.getDomains());
+		context.refreshPivotList(Domain.class, pivotElement.getDomain(), csElement.getOwnedDomains());
 		List<Variable> pivotVariables = new ArrayList<Variable>();
-		for (VarDeclarationCS csVarDeclarations : csElement.getVarDeclarations()) {
-			for (VarDeclarationIdCS csVarDeclarationId : csVarDeclarations.getVarDeclarationIds()) {
+		for (VarDeclarationCS csVarDeclarations : csElement.getOwnedVarDeclarations()) {
+			for (VarDeclarationIdCS csVarDeclarationId : csVarDeclarations.getOwnedVarDeclarationIds()) {
 				pivotVariables.add(PivotUtil.getPivot(Variable.class, csVarDeclarationId));
 			}
 		}
@@ -454,33 +454,33 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		}
 		boolean explicitCheckonly = false;
 		boolean explicitEnforce = false;
-		for (AbstractDomainCS abstractDomainCS : csElement.getDomains()) {
+		for (AbstractDomainCS abstractDomainCS : csElement.getOwnedDomains()) {
 			if (abstractDomainCS instanceof DomainCS) {
 				DomainCS domainCS = (DomainCS) abstractDomainCS;
-				if (domainCS.isCheckonly())
+				if (domainCS.isIsCheckonly())
 					explicitCheckonly = true;
-				if (domainCS.isEnforce())
+				if (domainCS.isIsEnforce())
 					explicitEnforce = true;
 			}
 		}
-		for (AbstractDomainCS abstractDomainCS : csElement.getDomains()) {
+		for (AbstractDomainCS abstractDomainCS : csElement.getOwnedDomains()) {
 			Domain domain = PivotUtil.getPivot(Domain.class, abstractDomainCS);
 			if (domain != null) {
 				boolean isCheckable = true;
 				boolean isEnforceable = true;
 				if (abstractDomainCS instanceof DomainCS) {
 					DomainCS domainCS = (DomainCS) abstractDomainCS;
-					isCheckable = !explicitCheckonly || domainCS.isCheckonly();
-					isEnforceable = !explicitEnforce || domainCS.isEnforce();
+					isCheckable = !explicitCheckonly || domainCS.isIsCheckonly();
+					isEnforceable = !explicitEnforce || domainCS.isIsEnforce();
 				}
 				domain.setIsCheckable(isCheckable);
 				domain.setIsEnforceable(isEnforceable);
 			}
 		}
 		PivotUtilInternal.refreshList(pivotElement.getVariable(), pivotVariables);
-		pivotElement.setWhen(PivotUtil.getPivot(Pattern.class, csElement.getWhen()));
-		pivotElement.setWhere(PivotUtil.getPivot(Pattern.class, csElement.getWhere()));
-		pivotElement.setIsTopLevel(csElement.isTop());
+		pivotElement.setWhen(PivotUtil.getPivot(Pattern.class, csElement.getOwnedWhen()));
+		pivotElement.setWhere(PivotUtil.getPivot(Pattern.class, csElement.getOwnedWhere()));
+		pivotElement.setIsTopLevel(csElement.isIsTop());
 		return null;
 	}
 
@@ -499,7 +499,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 	public Continuation<?> visitTopLevelCS(@NonNull TopLevelCS csElement) {
 //		importPackages(csElement);
 		RelationModel asModel = refreshRoot(RelationModel.class, QVTrelationPackage.Literals.RELATION_MODEL, csElement);
-		List<TransformationCS> csTransformations = csElement.getTransformations();
+		List<TransformationCS> csTransformations = csElement.getOwnedTransformations();
 		List<org.eclipse.ocl.pivot.Package> asPackages = resolveTransformations(csTransformations, asModel);
 		PivotUtilInternal.refreshList(asModel.getOwnedPackages(), asPackages);
 //		context.refreshPivotList(Transformation.class, pivotElement.getOwnedTransformations(), csElement.getTransformations());
@@ -545,10 +545,10 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		@SuppressWarnings("null") @NonNull EClass eClass = QVTrelationPackage.Literals.RELATIONAL_TRANSFORMATION;
 		RelationalTransformation pivotElement = refreshNamedElement(RelationalTransformation.class, eClass, csElement);
 		refreshClassifier(pivotElement, csElement);
-		context.refreshPivotList(Key.class, pivotElement.getOwnedKey(), csElement.getKeyDecls());
-		context.refreshPivotList(TypedModel.class, pivotElement.getModelParameter(), csElement.getModelDecls());
-		context.refreshPivotList(Relation.class, pivotElement.getRule(), csElement.getRelation());
-		context.refreshPivotList(Operation.class, pivotElement.getOwnedOperations(), csElement.getQueries());
+		context.refreshPivotList(Key.class, pivotElement.getOwnedKey(), csElement.getOwnedKeyDecls());
+		context.refreshPivotList(TypedModel.class, pivotElement.getModelParameter(), csElement.getOwnedModelDecls());
+		context.refreshPivotList(Relation.class, pivotElement.getRule(), csElement.getOwnedRelations());
+		context.refreshPivotList(Operation.class, pivotElement.getOwnedOperations(), csElement.getOwnedQueries());
 		return null;
 	}
 

@@ -22,7 +22,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.PredicateCS#getExpr <em>Expr</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.PredicateCS#getOwnedCondition <em>Owned Condition</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getPredicateCS()
@@ -31,29 +31,29 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  */
 public interface PredicateCS extends ModelElementCS {
 	/**
-	 * Returns the value of the '<em><b>Expr</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Condition</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Expr</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Condition</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Expr</em>' containment reference.
-	 * @see #setExpr(ExpCS)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getPredicateCS_Expr()
+	 * @return the value of the '<em>Owned Condition</em>' containment reference.
+	 * @see #setOwnedCondition(ExpCS)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getPredicateCS_OwnedCondition()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	ExpCS getExpr();
+	ExpCS getOwnedCondition();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PredicateCS#getExpr <em>Expr</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PredicateCS#getOwnedCondition <em>Owned Condition</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Expr</em>' containment reference.
-	 * @see #getExpr()
+	 * @param value the new value of the '<em>Owned Condition</em>' containment reference.
+	 * @see #getOwnedCondition()
 	 * @generated
 	 */
-	void setExpr(ExpCS value);
+	void setOwnedCondition(ExpCS value);
 
 } // PredicateCS

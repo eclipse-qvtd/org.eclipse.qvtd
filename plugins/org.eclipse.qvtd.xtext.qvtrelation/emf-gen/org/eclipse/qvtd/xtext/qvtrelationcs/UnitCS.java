@@ -23,7 +23,7 @@ import org.eclipse.ocl.xtext.basecs.ModelElementCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.UnitCS#getIdentifier <em>Identifier</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.UnitCS#getIdentifiers <em>Identifiers</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getUnitCS()
@@ -32,19 +32,19 @@ import org.eclipse.ocl.xtext.basecs.ModelElementCS;
  */
 public interface UnitCS extends ModelElementCS {
 	/**
-	 * Returns the value of the '<em><b>Identifier</b></em>' reference list.
+	 * Returns the value of the '<em><b>Identifiers</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.pivot.Element}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Identifier</em>' reference list isn't clear,
+	 * If the meaning of the '<em>Identifiers</em>' reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Identifier</em>' reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getUnitCS_Identifier()
+	 * @return the value of the '<em>Identifiers</em>' reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getUnitCS_Identifiers()
 	 * @model required="true"
 	 * @generated
 	 */
-	EList<Element> getIdentifier();
+	EList<Element> getIdentifiers();
 
 } // UnitCS

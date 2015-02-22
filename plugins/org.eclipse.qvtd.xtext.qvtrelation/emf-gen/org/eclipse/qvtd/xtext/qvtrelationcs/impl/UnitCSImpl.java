@@ -32,22 +32,21 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.UnitCSImpl#getIdentifier <em>Identifier</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.UnitCSImpl#getIdentifiers <em>Identifiers</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class UnitCSImpl extends ModelElementCSImpl implements UnitCS {
 	/**
-	 * The cached value of the '{@link #getIdentifier() <em>Identifier</em>}' reference list.
+	 * The cached value of the '{@link #getIdentifiers() <em>Identifiers</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIdentifier()
+	 * @see #getIdentifiers()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Element> identifier;
-
+	protected EList<Element> identifiers;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -73,11 +72,11 @@ public class UnitCSImpl extends ModelElementCSImpl implements UnitCS {
 	 * @generated
 	 */
 	@Override
-	public EList<Element> getIdentifier() {
-		if (identifier == null) {
-			identifier = new EObjectResolvingEList<Element>(Element.class, this, QVTrelationCSPackage.UNIT_CS__IDENTIFIER);
+	public EList<Element> getIdentifiers() {
+		if (identifiers == null) {
+			identifiers = new EObjectResolvingEList<Element>(Element.class, this, QVTrelationCSPackage.UNIT_CS__IDENTIFIERS);
 		}
-		return identifier;
+		return identifiers;
 	}
 
 	/**
@@ -88,8 +87,8 @@ public class UnitCSImpl extends ModelElementCSImpl implements UnitCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.UNIT_CS__IDENTIFIER:
-				return getIdentifier();
+			case QVTrelationCSPackage.UNIT_CS__IDENTIFIERS:
+				return getIdentifiers();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -103,9 +102,9 @@ public class UnitCSImpl extends ModelElementCSImpl implements UnitCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.UNIT_CS__IDENTIFIER:
-				getIdentifier().clear();
-				getIdentifier().addAll((Collection<? extends Element>)newValue);
+			case QVTrelationCSPackage.UNIT_CS__IDENTIFIERS:
+				getIdentifiers().clear();
+				getIdentifiers().addAll((Collection<? extends Element>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -119,8 +118,8 @@ public class UnitCSImpl extends ModelElementCSImpl implements UnitCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.UNIT_CS__IDENTIFIER:
-				getIdentifier().clear();
+			case QVTrelationCSPackage.UNIT_CS__IDENTIFIERS:
+				getIdentifiers().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -134,8 +133,8 @@ public class UnitCSImpl extends ModelElementCSImpl implements UnitCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.UNIT_CS__IDENTIFIER:
-				return identifier != null && !identifier.isEmpty();
+			case QVTrelationCSPackage.UNIT_CS__IDENTIFIERS:
+				return identifiers != null && !identifiers.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

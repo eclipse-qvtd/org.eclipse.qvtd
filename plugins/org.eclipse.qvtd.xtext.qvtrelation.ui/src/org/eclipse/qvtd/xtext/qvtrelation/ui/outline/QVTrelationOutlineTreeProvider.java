@@ -55,7 +55,7 @@ public class QVTrelationOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 		for (PackageCS csPackage : ele.getOwnedPackages()) {
 			createNode(parentNode, csPackage);
 		}
-		for (TransformationCS csTransformation : ele.getTransformations()) {
+		for (TransformationCS csTransformation : ele.getOwnedTransformations()) {
 			createNode(parentNode, csTransformation);
 		}
 	}
@@ -141,7 +141,7 @@ public class QVTrelationOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 	}
 
 	protected void _createNode(IOutlineNode parentNode, PredicateCS csPredicate) {
-		createNode(parentNode, csPredicate.getExpr());
+		createNode(parentNode, csPredicate.getOwnedCondition());
 	}
 
 	protected void _createNode(IOutlineNode parentNode, TopLevelCS ele) {
@@ -149,7 +149,7 @@ public class QVTrelationOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 	}
 
 	protected void _createNode(IOutlineNode parentNode, VarDeclarationCS csVars) {
-		for (VarDeclarationIdCS var : csVars.getVarDeclarationIds()) {
+		for (VarDeclarationIdCS var : csVars.getOwnedVarDeclarationIds()) {
 			createNode(parentNode, var);
 		}
 	}

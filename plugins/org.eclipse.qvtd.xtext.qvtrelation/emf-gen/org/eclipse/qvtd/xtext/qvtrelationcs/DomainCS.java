@@ -23,13 +23,13 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isCheckonly <em>Checkonly</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isEnforce <em>Enforce</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isIsCheckonly <em>Is Checkonly</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isIsEnforce <em>Is Enforce</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getModelId <em>Model Id</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isReplace <em>Replace</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getPattern <em>Pattern</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getDefaultValues <em>Default Values</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getImplementedBy <em>Implemented By</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isIsReplace <em>Is Replace</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getOwnedPattern <em>Owned Pattern</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getOwnedDefaultValues <em>Owned Default Values</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getOwnedImplementedBy <em>Owned Implemented By</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDomainCS()
@@ -38,56 +38,56 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  */
 public interface DomainCS extends AbstractDomainCS {
 	/**
-	 * Returns the value of the '<em><b>Checkonly</b></em>' attribute.
+	 * Returns the value of the '<em><b>Is Checkonly</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Checkonly</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Is Checkonly</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Checkonly</em>' attribute.
-	 * @see #setCheckonly(boolean)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDomainCS_Checkonly()
+	 * @return the value of the '<em>Is Checkonly</em>' attribute.
+	 * @see #setIsCheckonly(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDomainCS_IsCheckonly()
 	 * @model
 	 * @generated
 	 */
-	boolean isCheckonly();
+	boolean isIsCheckonly();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isCheckonly <em>Checkonly</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isIsCheckonly <em>Is Checkonly</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Checkonly</em>' attribute.
-	 * @see #isCheckonly()
+	 * @param value the new value of the '<em>Is Checkonly</em>' attribute.
+	 * @see #isIsCheckonly()
 	 * @generated
 	 */
-	void setCheckonly(boolean value);
+	void setIsCheckonly(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Enforce</b></em>' attribute.
+	 * Returns the value of the '<em><b>Is Enforce</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Enforce</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Is Enforce</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Enforce</em>' attribute.
-	 * @see #setEnforce(boolean)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDomainCS_Enforce()
+	 * @return the value of the '<em>Is Enforce</em>' attribute.
+	 * @see #setIsEnforce(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDomainCS_IsEnforce()
 	 * @model
 	 * @generated
 	 */
-	boolean isEnforce();
+	boolean isIsEnforce();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isEnforce <em>Enforce</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isIsEnforce <em>Is Enforce</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Enforce</em>' attribute.
-	 * @see #isEnforce()
+	 * @param value the new value of the '<em>Is Enforce</em>' attribute.
+	 * @see #isIsEnforce()
 	 * @generated
 	 */
-	void setEnforce(boolean value);
+	void setIsEnforce(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Model Id</b></em>' reference.
@@ -116,97 +116,97 @@ public interface DomainCS extends AbstractDomainCS {
 	void setModelId(TypedModel value);
 
 	/**
-	 * Returns the value of the '<em><b>Replace</b></em>' attribute.
+	 * Returns the value of the '<em><b>Is Replace</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Replace</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Is Replace</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Replace</em>' attribute.
-	 * @see #setReplace(boolean)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDomainCS_Replace()
+	 * @return the value of the '<em>Is Replace</em>' attribute.
+	 * @see #setIsReplace(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDomainCS_IsReplace()
 	 * @model
 	 * @generated
 	 */
-	boolean isReplace();
+	boolean isIsReplace();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isReplace <em>Replace</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isIsReplace <em>Is Replace</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Replace</em>' attribute.
-	 * @see #isReplace()
+	 * @param value the new value of the '<em>Is Replace</em>' attribute.
+	 * @see #isIsReplace()
 	 * @generated
 	 */
-	void setReplace(boolean value);
+	void setIsReplace(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Pattern</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Pattern</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Pattern</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Pattern</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Pattern</em>' containment reference.
-	 * @see #setPattern(DomainPatternCS)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDomainCS_Pattern()
+	 * @return the value of the '<em>Owned Pattern</em>' containment reference.
+	 * @see #setOwnedPattern(DomainPatternCS)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDomainCS_OwnedPattern()
 	 * @model containment="true"
 	 * @generated
 	 */
-	DomainPatternCS getPattern();
+	DomainPatternCS getOwnedPattern();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getPattern <em>Pattern</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getOwnedPattern <em>Owned Pattern</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Pattern</em>' containment reference.
-	 * @see #getPattern()
+	 * @param value the new value of the '<em>Owned Pattern</em>' containment reference.
+	 * @see #getOwnedPattern()
 	 * @generated
 	 */
-	void setPattern(DomainPatternCS value);
+	void setOwnedPattern(DomainPatternCS value);
 
 	/**
-	 * Returns the value of the '<em><b>Default Values</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Default Values</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Default Values</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Default Values</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Default Values</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDomainCS_DefaultValues()
+	 * @return the value of the '<em>Owned Default Values</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDomainCS_OwnedDefaultValues()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<DefaultValueCS> getDefaultValues();
+	EList<DefaultValueCS> getOwnedDefaultValues();
 
 	/**
-	 * Returns the value of the '<em><b>Implemented By</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Implemented By</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Implemented By</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Implemented By</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Implemented By</em>' containment reference.
-	 * @see #setImplementedBy(ExpCS)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDomainCS_ImplementedBy()
+	 * @return the value of the '<em>Owned Implemented By</em>' containment reference.
+	 * @see #setOwnedImplementedBy(ExpCS)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDomainCS_OwnedImplementedBy()
 	 * @model containment="true"
 	 * @generated
 	 */
-	ExpCS getImplementedBy();
+	ExpCS getOwnedImplementedBy();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getImplementedBy <em>Implemented By</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getOwnedImplementedBy <em>Owned Implemented By</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Implemented By</em>' containment reference.
-	 * @see #getImplementedBy()
+	 * @param value the new value of the '<em>Owned Implemented By</em>' containment reference.
+	 * @see #getOwnedImplementedBy()
 	 * @generated
 	 */
-	void setImplementedBy(ExpCS value);
+	void setOwnedImplementedBy(ExpCS value);
 
 } // DomainCS

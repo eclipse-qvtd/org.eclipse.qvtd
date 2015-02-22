@@ -23,11 +23,11 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getModelDecls <em>Model Decls</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedModelDecls <em>Owned Model Decls</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getExtends <em>Extends</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getKeyDecls <em>Key Decls</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getQueries <em>Queries</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getRelation <em>Relation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedKeyDecls <em>Owned Key Decls</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedQueries <em>Owned Queries</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedRelations <em>Owned Relations</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getTransformationCS()
@@ -36,20 +36,20 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  */
 public interface TransformationCS extends ClassCS {
 	/**
-	 * Returns the value of the '<em><b>Model Decls</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Model Decls</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcs.ModelDeclCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Model Decls</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Model Decls</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Model Decls</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getTransformationCS_ModelDecls()
+	 * @return the value of the '<em>Owned Model Decls</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getTransformationCS_OwnedModelDecls()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ModelDeclCS> getModelDecls();
+	EList<ModelDeclCS> getOwnedModelDecls();
 
 	/**
 	 * Returns the value of the '<em><b>Extends</b></em>' reference list.
@@ -68,51 +68,51 @@ public interface TransformationCS extends ClassCS {
 	EList<Transformation> getExtends();
 
 	/**
-	 * Returns the value of the '<em><b>Key Decls</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Key Decls</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Key Decls</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Key Decls</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Key Decls</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getTransformationCS_KeyDecls()
+	 * @return the value of the '<em>Owned Key Decls</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getTransformationCS_OwnedKeyDecls()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<KeyDeclCS> getKeyDecls();
+	EList<KeyDeclCS> getOwnedKeyDecls();
 
 	/**
-	 * Returns the value of the '<em><b>Queries</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Queries</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Queries</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Queries</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Queries</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getTransformationCS_Queries()
+	 * @return the value of the '<em>Owned Queries</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getTransformationCS_OwnedQueries()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<QueryCS> getQueries();
+	EList<QueryCS> getOwnedQueries();
 
 	/**
-	 * Returns the value of the '<em><b>Relation</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Relations</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Relation</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Relations</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Relation</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getTransformationCS_Relation()
+	 * @return the value of the '<em>Owned Relations</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getTransformationCS_OwnedRelations()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<RelationCS> getRelation();
+	EList<RelationCS> getOwnedRelations();
 
 } // TransformationCS

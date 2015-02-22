@@ -21,7 +21,7 @@ import org.eclipse.ocl.xtext.basecs.ModelElementCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainPatternCS#getTemplate <em>Template</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainPatternCS#getOwnedTemplate <em>Owned Template</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDomainPatternCS()
@@ -30,29 +30,29 @@ import org.eclipse.ocl.xtext.basecs.ModelElementCS;
  */
 public interface DomainPatternCS extends ModelElementCS {
 	/**
-	 * Returns the value of the '<em><b>Template</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Template</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Template</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Template</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Template</em>' containment reference.
-	 * @see #setTemplate(TemplateCS)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDomainPatternCS_Template()
+	 * @return the value of the '<em>Owned Template</em>' containment reference.
+	 * @see #setOwnedTemplate(TemplateCS)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDomainPatternCS_OwnedTemplate()
 	 * @model containment="true"
 	 * @generated
 	 */
-	TemplateCS getTemplate();
+	TemplateCS getOwnedTemplate();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainPatternCS#getTemplate <em>Template</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainPatternCS#getOwnedTemplate <em>Owned Template</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Template</em>' containment reference.
-	 * @see #getTemplate()
+	 * @param value the new value of the '<em>Owned Template</em>' containment reference.
+	 * @see #getOwnedTemplate()
 	 * @generated
 	 */
-	void setTemplate(TemplateCS value);
+	void setOwnedTemplate(TemplateCS value);
 
 } // DomainPatternCS

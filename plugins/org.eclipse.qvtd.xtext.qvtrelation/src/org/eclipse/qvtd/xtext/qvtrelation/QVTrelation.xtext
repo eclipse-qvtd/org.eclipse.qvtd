@@ -20,33 +20,33 @@ import "http://www.eclipse.org/qvt/2015/QVTrelationCS"
 
 TopLevelCS:
 	(ownedImports+=UnitCS | /*ownedInclude+=IncludeCS |*/ ownedLibraries+=LibraryCS)*
-	transformations+=TransformationCS*	
+	ownedTransformations+=TransformationCS*	
 ;
 		
 //UnitCS: identifier+=[pivot::Element|UnrestrictedName] ('.' identifier+=[pivot::Element|UnrestrictedName])*;
 	
-CollectionTemplateCS: name=UnrestrictedName? ':' type=CollectionTypeCS
-	'{' (memberIdentifiers+=(TemplateCS | ElementTemplateCS)
-	    (',' memberIdentifiers+=(TemplateCS | ElementTemplateCS))*
+CollectionTemplateCS: name=UnrestrictedName? ':' ownedType=CollectionTypeCS
+	'{' (ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS)
+	    (',' ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS))*
         '++' (restIdentifier=[pivot::Variable|UnrestrictedName] | '_')                     
          )? '}';
 
-DefaultValueCS: propertyId=[pivot::Variable|UnrestrictedName] '=' initialiser=ExpCS ';';
+DefaultValueCS: propertyId=[pivot::Variable|UnrestrictedName] '=' ownedInitExpression=ExpCS ';';
 
-DomainCS: (checkonly?='checkonly' | enforce?='enforce' | 'replace')? 'domain' modelId=[qvtbase::TypedModel|UnrestrictedName] pattern=DomainPatternCS
-             ('implementedby' implementedBy=ExpCS)?
-             ('default_values' '{' (defaultValues+=DefaultValueCS)+ '}')?
+DomainCS: (isCheckonly?='checkonly' | isEnforce?='enforce' | 'replace')? 'domain' modelId=[qvtbase::TypedModel|UnrestrictedName] ownedPattern=DomainPatternCS
+             ('implementedby' ownedImplementedBy=ExpCS)?
+             ('default_values' '{' (ownedDefaultValues+=DefaultValueCS)+ '}')?
              ';';
 
-DomainPatternCS: template=TemplateCS;
+DomainPatternCS: ownedTemplate=TemplateCS;
 
 ElementTemplateCS: name=UnrestrictedName | {ElementTemplateCS} '_';
 
-KeyDeclCS: 'key' pathName=PathNameCS '{'
+KeyDeclCS: 'key' ownedPathName=PathNameCS '{'
 	(propertyIds+=[pivot::Property|UnrestrictedName]
-	| ('opposite' '(' oppositePropertyIds+=PathNameCS ')'))
+	| ('opposite' '(' ownedOppositePropertyIds+=PathNameCS ')'))
 	(',' (propertyIds+=[pivot::Property|UnrestrictedName]
-	| ('opposite' '(' oppositePropertyIds+=PathNameCS ')'))
+	| ('opposite' '(' ownedOppositePropertyIds+=PathNameCS ')'))
 	)* '}' ';'
 ;
 
@@ -57,51 +57,51 @@ ModelDeclCS: name=UnrestrictedName ':' (metamodelIds+=[pivot::Namespace|Unrestri
 	| '{' metamodelIds+=[pivot::Namespace|UnrestrictedName] (',' metamodelIds+=[pivot::Namespace|UnrestrictedName])* '}')
 ;
 	
-ObjectTemplateCS: name=UnrestrictedName? ':' type=TypedRefCS
-	'{' (propertyTemplates+=PropertyTemplateCS (',' propertyTemplates+=PropertyTemplateCS)*)? '}';
+ObjectTemplateCS: name=UnrestrictedName? ':' ownedType=TypedRefCS
+	'{' (ownedPropertyTemplates+=PropertyTemplateCS (',' ownedPropertyTemplates+=PropertyTemplateCS)*)? '}';
 	
 ParamDeclarationCS: name=UnrestrictedName ':' ownedType=TypedRefCS;	
 
-PredicateCS: expr=ExpCS ';';
+PredicateCS: ownedCondition=ExpCS ';';
 
-PrimitiveTypeDomainCS: 'primitive' 'domain' name=UnrestrictedName ':' type=TypedRefCS ';';
+PrimitiveTypeDomainCS: 'primitive' 'domain' name=UnrestrictedName ':' ownedType=TypedRefCS ';';
 
 PropertyTemplateCS: (propertyId=[pivot::Property|UnrestrictedName]
-	| ('opposite' '(' oppositePropertyId=PathNameCS ')'))
-	'=' expression=ExpCSOrTemplateCS;
+	| ('opposite' '(' ownedOppositePropertyId=PathNameCS ')'))
+	'=' ownedExpression=ExpCSOrTemplateCS;
 		
 QueryCS: 'query' name=UnrestrictedName 
-            '(' (inputParamDeclarations+=ParamDeclarationCS (',' inputParamDeclarations+=ParamDeclarationCS)*)? ')'
+            '(' (ownedParameters+=ParamDeclarationCS (',' ownedParameters+=ParamDeclarationCS)*)? ')'
       	  ':' ownedType=TypedRefCS
-            (';' | '{' expression=ExpCS '}');
+            (';' | '{' ownedExpression=ExpCS '}');
 
-RelationCS: top?='top'? 'relation' name=UnrestrictedName
+RelationCS: isTop?='top'? 'relation' name=UnrestrictedName
    			 ('overrides' overrides=[qvtrelation::Relation|UnrestrictedName])?
                '{'
-               varDeclarations+=VarDeclarationCS*
-               (domains+=DomainCS | domains+=PrimitiveTypeDomainCS)+ 
-               when=WhenCS? where=WhereCS?
+               ownedVarDeclarations+=VarDeclarationCS*
+               (ownedDomains+=DomainCS | ownedDomains+=PrimitiveTypeDomainCS)+ 
+               ownedWhen=WhenCS? ownedWhere=WhereCS?
                '}'
 ;
 
-TemplateCS: (CollectionTemplateCS | ObjectTemplateCS) ('{' guardExpression=ExpCS '}')?;
+TemplateCS: (CollectionTemplateCS | ObjectTemplateCS) ('{' ownedGuardExpression=ExpCS '}')?;
 	
 TransformationCS: 'transformation' name=UnrestrictedName 
-                     '(' modelDecls+=ModelDeclCS (',' modelDecls+=ModelDeclCS)* ')' 
+                     '(' ownedModelDecls+=ModelDeclCS (',' ownedModelDecls+=ModelDeclCS)* ')' 
                      ('extends' extends+=[qvtbase::Transformation|UnrestrictedName] (',' extends+=[qvtbase::Transformation|UnrestrictedName])*)?
-                     '{' keyDecls+=KeyDeclCS* ( relation+=RelationCS | queries+=QueryCS )* '}'
+                     '{' ownedKeyDecls+=KeyDeclCS* ( ownedRelations+=RelationCS | ownedQueries+=QueryCS )* '}'
 ;
 
 UnitCS returns base::ImportCS:
 	'import' (name=UnrestrictedName ':')? ownedPathName=URIPathNameCS ('::' isAll?='*')? ';';
 
-VarDeclarationCS: varDeclarationIds+=VarDeclarationIdCS (',' varDeclarationIds+=VarDeclarationIdCS)* ':' type=TypedRefCS ';';
+VarDeclarationCS: ownedVarDeclarationIds+=VarDeclarationIdCS (',' ownedVarDeclarationIds+=VarDeclarationIdCS)* ':' ownedType=TypedRefCS ';';
 
 VarDeclarationIdCS: name=UnrestrictedName;
 
-WhenCS returns PatternCS: {PatternCS} 'when' '{' predicates+=PredicateCS* '}';
+WhenCS returns PatternCS: {PatternCS} 'when' '{' ownedPredicates+=PredicateCS* '}';
 
-WhereCS returns PatternCS: {PatternCS} 'where' '{' predicates+=PredicateCS* '}';
+WhereCS returns PatternCS: {PatternCS} 'where' '{' ownedPredicates+=PredicateCS* '}';
 		
 //<OCLExpressionCS> ::= <PropertyCallExpCS> 
 //                    | <VariableExpCS>

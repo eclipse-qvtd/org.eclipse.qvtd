@@ -11,7 +11,6 @@
 package org.eclipse.qvtd.xtext.qvtrelationcs;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.basecs.RootPackageCS;
 
 /**
@@ -23,8 +22,8 @@ import org.eclipse.ocl.xtext.basecs.RootPackageCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS#getImportClauses <em>Import Clauses</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS#getTransformations <em>Transformations</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS#getOwnedImportClauses <em>Owned Import Clauses</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TopLevelCS#getOwnedTransformations <em>Owned Transformations</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getTopLevelCS()
@@ -33,35 +32,35 @@ import org.eclipse.ocl.xtext.basecs.RootPackageCS;
  */
 public interface TopLevelCS extends RootPackageCS {
 	/**
-	 * Returns the value of the '<em><b>Import Clauses</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Import Clauses</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcs.UnitCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Import Clauses</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Import Clauses</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Import Clauses</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getTopLevelCS_ImportClauses()
+	 * @return the value of the '<em>Owned Import Clauses</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getTopLevelCS_OwnedImportClauses()
 	 * @model containment="true"
 	 * @generated
 	 */
-	@NonNull EList<UnitCS> getImportClauses();
+	EList<UnitCS> getOwnedImportClauses();
 
 	/**
-	 * Returns the value of the '<em><b>Transformations</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Transformations</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Transformations</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Transformations</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Transformations</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getTopLevelCS_Transformations()
+	 * @return the value of the '<em>Owned Transformations</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getTopLevelCS_OwnedTransformations()
 	 * @model containment="true"
 	 * @generated
 	 */
-	@NonNull EList<TransformationCS> getTransformations();
+	EList<TransformationCS> getOwnedTransformations();
 
 } // TopLevelCS

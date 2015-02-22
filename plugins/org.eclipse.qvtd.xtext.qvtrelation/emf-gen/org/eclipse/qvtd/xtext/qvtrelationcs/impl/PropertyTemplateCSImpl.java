@@ -36,10 +36,10 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.PropertyTemplateCSImpl#getObjectTemplate <em>Object Template</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.PropertyTemplateCSImpl#getOwningObjectTemplate <em>Owning Object Template</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.PropertyTemplateCSImpl#getPropertyId <em>Property Id</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.PropertyTemplateCSImpl#getOppositePropertyId <em>Opposite Property Id</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.PropertyTemplateCSImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.PropertyTemplateCSImpl#getOwnedOppositePropertyId <em>Owned Opposite Property Id</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.PropertyTemplateCSImpl#getOwnedExpression <em>Owned Expression</em>}</li>
  * </ul>
  *
  * @generated
@@ -56,24 +56,24 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	protected Property propertyId;
 
 	/**
-	 * The cached value of the '{@link #getOppositePropertyId() <em>Opposite Property Id</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedOppositePropertyId() <em>Owned Opposite Property Id</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOppositePropertyId()
+	 * @see #getOwnedOppositePropertyId()
 	 * @generated
 	 * @ordered
 	 */
-	protected PathNameCS oppositePropertyId;
+	protected PathNameCS ownedOppositePropertyId;
 
 	/**
-	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedExpression() <em>Owned Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExpression()
+	 * @see #getOwnedExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected ExpCS expression;
+	protected ExpCS ownedExpression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -100,8 +100,8 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	 * @generated
 	 */
 	@Override
-	public ObjectTemplateCS getObjectTemplate() {
-		if (eContainerFeatureID() != QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE) return null;
+	public ObjectTemplateCS getOwningObjectTemplate() {
+		if (eContainerFeatureID() != QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNING_OBJECT_TEMPLATE) return null;
 		return (ObjectTemplateCS)eInternalContainer();
 	}
 
@@ -110,8 +110,8 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetObjectTemplate(ObjectTemplateCS newObjectTemplate, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newObjectTemplate, QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE, msgs);
+	public NotificationChain basicSetOwningObjectTemplate(ObjectTemplateCS newOwningObjectTemplate, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwningObjectTemplate, QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNING_OBJECT_TEMPLATE, msgs);
 		return msgs;
 	}
 
@@ -121,20 +121,20 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	 * @generated
 	 */
 	@Override
-	public void setObjectTemplate(ObjectTemplateCS newObjectTemplate) {
-		if (newObjectTemplate != eInternalContainer() || (eContainerFeatureID() != QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE && newObjectTemplate != null)) {
-			if (EcoreUtil.isAncestor(this, newObjectTemplate))
+	public void setOwningObjectTemplate(ObjectTemplateCS newOwningObjectTemplate) {
+		if (newOwningObjectTemplate != eInternalContainer() || (eContainerFeatureID() != QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNING_OBJECT_TEMPLATE && newOwningObjectTemplate != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningObjectTemplate))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newObjectTemplate != null)
-				msgs = ((InternalEObject)newObjectTemplate).eInverseAdd(this, QVTrelationCSPackage.OBJECT_TEMPLATE_CS__PROPERTY_TEMPLATES, ObjectTemplateCS.class, msgs);
-			msgs = basicSetObjectTemplate(newObjectTemplate, msgs);
+			if (newOwningObjectTemplate != null)
+				msgs = ((InternalEObject)newOwningObjectTemplate).eInverseAdd(this, QVTrelationCSPackage.OBJECT_TEMPLATE_CS__OWNED_PROPERTY_TEMPLATES, ObjectTemplateCS.class, msgs);
+			msgs = basicSetOwningObjectTemplate(newOwningObjectTemplate, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE, newObjectTemplate, newObjectTemplate));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNING_OBJECT_TEMPLATE, newOwningObjectTemplate, newOwningObjectTemplate));
 	}
 
 	/**
@@ -183,8 +183,8 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	 * @generated
 	 */
 	@Override
-	public PathNameCS getOppositePropertyId() {
-		return oppositePropertyId;
+	public PathNameCS getOwnedOppositePropertyId() {
+		return ownedOppositePropertyId;
 	}
 
 	/**
@@ -192,11 +192,11 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOppositePropertyId(PathNameCS newOppositePropertyId, NotificationChain msgs) {
-		PathNameCS oldOppositePropertyId = oppositePropertyId;
-		oppositePropertyId = newOppositePropertyId;
+	public NotificationChain basicSetOwnedOppositePropertyId(PathNameCS newOwnedOppositePropertyId, NotificationChain msgs) {
+		PathNameCS oldOwnedOppositePropertyId = ownedOppositePropertyId;
+		ownedOppositePropertyId = newOwnedOppositePropertyId;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OPPOSITE_PROPERTY_ID, oldOppositePropertyId, newOppositePropertyId);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNED_OPPOSITE_PROPERTY_ID, oldOwnedOppositePropertyId, newOwnedOppositePropertyId);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -208,18 +208,18 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	 * @generated
 	 */
 	@Override
-	public void setOppositePropertyId(PathNameCS newOppositePropertyId) {
-		if (newOppositePropertyId != oppositePropertyId) {
+	public void setOwnedOppositePropertyId(PathNameCS newOwnedOppositePropertyId) {
+		if (newOwnedOppositePropertyId != ownedOppositePropertyId) {
 			NotificationChain msgs = null;
-			if (oppositePropertyId != null)
-				msgs = ((InternalEObject)oppositePropertyId).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OPPOSITE_PROPERTY_ID, null, msgs);
-			if (newOppositePropertyId != null)
-				msgs = ((InternalEObject)newOppositePropertyId).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OPPOSITE_PROPERTY_ID, null, msgs);
-			msgs = basicSetOppositePropertyId(newOppositePropertyId, msgs);
+			if (ownedOppositePropertyId != null)
+				msgs = ((InternalEObject)ownedOppositePropertyId).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNED_OPPOSITE_PROPERTY_ID, null, msgs);
+			if (newOwnedOppositePropertyId != null)
+				msgs = ((InternalEObject)newOwnedOppositePropertyId).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNED_OPPOSITE_PROPERTY_ID, null, msgs);
+			msgs = basicSetOwnedOppositePropertyId(newOwnedOppositePropertyId, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OPPOSITE_PROPERTY_ID, newOppositePropertyId, newOppositePropertyId));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNED_OPPOSITE_PROPERTY_ID, newOwnedOppositePropertyId, newOwnedOppositePropertyId));
 	}
 
 	/**
@@ -228,8 +228,8 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	 * @generated
 	 */
 	@Override
-	public ExpCS getExpression() {
-		return expression;
+	public ExpCS getOwnedExpression() {
+		return ownedExpression;
 	}
 
 	/**
@@ -237,11 +237,11 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetExpression(ExpCS newExpression, NotificationChain msgs) {
-		ExpCS oldExpression = expression;
-		expression = newExpression;
+	public NotificationChain basicSetOwnedExpression(ExpCS newOwnedExpression, NotificationChain msgs) {
+		ExpCS oldOwnedExpression = ownedExpression;
+		ownedExpression = newOwnedExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__EXPRESSION, oldExpression, newExpression);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -253,18 +253,18 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	 * @generated
 	 */
 	@Override
-	public void setExpression(ExpCS newExpression) {
-		if (newExpression != expression) {
+	public void setOwnedExpression(ExpCS newOwnedExpression) {
+		if (newOwnedExpression != ownedExpression) {
 			NotificationChain msgs = null;
-			if (expression != null)
-				msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__EXPRESSION, null, msgs);
-			if (newExpression != null)
-				msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__EXPRESSION, null, msgs);
-			msgs = basicSetExpression(newExpression, msgs);
+			if (ownedExpression != null)
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNED_EXPRESSION, null, msgs);
+			if (newOwnedExpression != null)
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNED_EXPRESSION, null, msgs);
+			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__EXPRESSION, newExpression, newExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
 	}
 
 	/**
@@ -275,10 +275,10 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE:
+			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNING_OBJECT_TEMPLATE:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetObjectTemplate((ObjectTemplateCS)otherEnd, msgs);
+				return basicSetOwningObjectTemplate((ObjectTemplateCS)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -291,12 +291,12 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE:
-				return basicSetObjectTemplate(null, msgs);
-			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OPPOSITE_PROPERTY_ID:
-				return basicSetOppositePropertyId(null, msgs);
-			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__EXPRESSION:
-				return basicSetExpression(null, msgs);
+			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNING_OBJECT_TEMPLATE:
+				return basicSetOwningObjectTemplate(null, msgs);
+			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNED_OPPOSITE_PROPERTY_ID:
+				return basicSetOwnedOppositePropertyId(null, msgs);
+			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNED_EXPRESSION:
+				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -309,8 +309,8 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE:
-				return eInternalContainer().eInverseRemove(this, QVTrelationCSPackage.OBJECT_TEMPLATE_CS__PROPERTY_TEMPLATES, ObjectTemplateCS.class, msgs);
+			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNING_OBJECT_TEMPLATE:
+				return eInternalContainer().eInverseRemove(this, QVTrelationCSPackage.OBJECT_TEMPLATE_CS__OWNED_PROPERTY_TEMPLATES, ObjectTemplateCS.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -323,15 +323,15 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE:
-				return getObjectTemplate();
+			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNING_OBJECT_TEMPLATE:
+				return getOwningObjectTemplate();
 			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__PROPERTY_ID:
 				if (resolve) return getPropertyId();
 				return basicGetPropertyId();
-			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OPPOSITE_PROPERTY_ID:
-				return getOppositePropertyId();
-			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__EXPRESSION:
-				return getExpression();
+			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNED_OPPOSITE_PROPERTY_ID:
+				return getOwnedOppositePropertyId();
+			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNED_EXPRESSION:
+				return getOwnedExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -344,17 +344,17 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE:
-				setObjectTemplate((ObjectTemplateCS)newValue);
+			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNING_OBJECT_TEMPLATE:
+				setOwningObjectTemplate((ObjectTemplateCS)newValue);
 				return;
 			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__PROPERTY_ID:
 				setPropertyId((Property)newValue);
 				return;
-			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OPPOSITE_PROPERTY_ID:
-				setOppositePropertyId((PathNameCS)newValue);
+			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNED_OPPOSITE_PROPERTY_ID:
+				setOwnedOppositePropertyId((PathNameCS)newValue);
 				return;
-			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__EXPRESSION:
-				setExpression((ExpCS)newValue);
+			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNED_EXPRESSION:
+				setOwnedExpression((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -368,17 +368,17 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE:
-				setObjectTemplate((ObjectTemplateCS)null);
+			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNING_OBJECT_TEMPLATE:
+				setOwningObjectTemplate((ObjectTemplateCS)null);
 				return;
 			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__PROPERTY_ID:
 				setPropertyId((Property)null);
 				return;
-			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OPPOSITE_PROPERTY_ID:
-				setOppositePropertyId((PathNameCS)null);
+			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNED_OPPOSITE_PROPERTY_ID:
+				setOwnedOppositePropertyId((PathNameCS)null);
 				return;
-			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__EXPRESSION:
-				setExpression((ExpCS)null);
+			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNED_EXPRESSION:
+				setOwnedExpression((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -392,14 +392,14 @@ public class PropertyTemplateCSImpl extends ModelElementCSImpl implements Proper
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE:
-				return getObjectTemplate() != null;
+			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNING_OBJECT_TEMPLATE:
+				return getOwningObjectTemplate() != null;
 			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__PROPERTY_ID:
 				return propertyId != null;
-			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OPPOSITE_PROPERTY_ID:
-				return oppositePropertyId != null;
-			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__EXPRESSION:
-				return expression != null;
+			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNED_OPPOSITE_PROPERTY_ID:
+				return ownedOppositePropertyId != null;
+			case QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNED_EXPRESSION:
+				return ownedExpression != null;
 		}
 		return super.eIsSet(featureID);
 	}

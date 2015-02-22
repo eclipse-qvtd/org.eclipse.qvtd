@@ -23,12 +23,12 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isTop <em>Top</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsTop <em>Is Top</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOverrides <em>Overrides</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getVarDeclarations <em>Var Declarations</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getDomains <em>Domains</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getWhen <em>When</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getWhere <em>Where</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOwnedVarDeclarations <em>Owned Var Declarations</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOwnedDomains <em>Owned Domains</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOwnedWhen <em>Owned When</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOwnedWhere <em>Owned Where</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getRelationCS()
@@ -37,30 +37,30 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
  */
 public interface RelationCS extends NamedElementCS {
 	/**
-	 * Returns the value of the '<em><b>Top</b></em>' attribute.
+	 * Returns the value of the '<em><b>Is Top</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Top</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Is Top</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Top</em>' attribute.
-	 * @see #setTop(boolean)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getRelationCS_Top()
+	 * @return the value of the '<em>Is Top</em>' attribute.
+	 * @see #setIsTop(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getRelationCS_IsTop()
 	 * @model
 	 * @generated
 	 */
-	boolean isTop();
+	boolean isIsTop();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isTop <em>Top</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsTop <em>Is Top</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Top</em>' attribute.
-	 * @see #isTop()
+	 * @param value the new value of the '<em>Is Top</em>' attribute.
+	 * @see #isIsTop()
 	 * @generated
 	 */
-	void setTop(boolean value);
+	void setIsTop(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Overrides</b></em>' reference.
@@ -89,87 +89,87 @@ public interface RelationCS extends NamedElementCS {
 	void setOverrides(Relation value);
 
 	/**
-	 * Returns the value of the '<em><b>Var Declarations</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Var Declarations</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Var Declarations</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Var Declarations</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Var Declarations</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getRelationCS_VarDeclarations()
+	 * @return the value of the '<em>Owned Var Declarations</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getRelationCS_OwnedVarDeclarations()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<VarDeclarationCS> getVarDeclarations();
+	EList<VarDeclarationCS> getOwnedVarDeclarations();
 
 	/**
-	 * Returns the value of the '<em><b>Domains</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Domains</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcs.AbstractDomainCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Domains</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Domains</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Domains</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getRelationCS_Domains()
+	 * @return the value of the '<em>Owned Domains</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getRelationCS_OwnedDomains()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<AbstractDomainCS> getDomains();
+	EList<AbstractDomainCS> getOwnedDomains();
 
 	/**
-	 * Returns the value of the '<em><b>When</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned When</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>When</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned When</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>When</em>' containment reference.
-	 * @see #setWhen(PatternCS)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getRelationCS_When()
+	 * @return the value of the '<em>Owned When</em>' containment reference.
+	 * @see #setOwnedWhen(PatternCS)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getRelationCS_OwnedWhen()
 	 * @model containment="true"
 	 * @generated
 	 */
-	PatternCS getWhen();
+	PatternCS getOwnedWhen();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getWhen <em>When</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOwnedWhen <em>Owned When</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>When</em>' containment reference.
-	 * @see #getWhen()
+	 * @param value the new value of the '<em>Owned When</em>' containment reference.
+	 * @see #getOwnedWhen()
 	 * @generated
 	 */
-	void setWhen(PatternCS value);
+	void setOwnedWhen(PatternCS value);
 
 	/**
-	 * Returns the value of the '<em><b>Where</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Where</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Where</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Where</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Where</em>' containment reference.
-	 * @see #setWhere(PatternCS)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getRelationCS_Where()
+	 * @return the value of the '<em>Owned Where</em>' containment reference.
+	 * @see #setOwnedWhere(PatternCS)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getRelationCS_OwnedWhere()
 	 * @model containment="true"
 	 * @generated
 	 */
-	PatternCS getWhere();
+	PatternCS getOwnedWhere();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getWhere <em>Where</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOwnedWhere <em>Owned Where</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Where</em>' containment reference.
-	 * @see #getWhere()
+	 * @param value the new value of the '<em>Owned Where</em>' containment reference.
+	 * @see #getOwnedWhere()
 	 * @generated
 	 */
-	void setWhere(PatternCS value);
+	void setOwnedWhere(PatternCS value);
 
 } // RelationCS

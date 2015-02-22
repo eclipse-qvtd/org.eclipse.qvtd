@@ -23,8 +23,8 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS#getInputParamDeclarations <em>Input Param Declarations</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS#getOwnedParameters <em>Owned Parameters</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS#getOwnedExpression <em>Owned Expression</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getQueryCS()
@@ -33,45 +33,45 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  */
 public interface QueryCS extends TypedElementCS {
 	/**
-	 * Returns the value of the '<em><b>Input Param Declarations</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcs.ParamDeclarationCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Input Param Declarations</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Parameters</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Input Param Declarations</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getQueryCS_InputParamDeclarations()
+	 * @return the value of the '<em>Owned Parameters</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getQueryCS_OwnedParameters()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ParamDeclarationCS> getInputParamDeclarations();
+	EList<ParamDeclarationCS> getOwnedParameters();
 
 	/**
-	 * Returns the value of the '<em><b>Expression</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Expression</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Expression</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Expression</em>' containment reference.
-	 * @see #setExpression(ExpCS)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getQueryCS_Expression()
+	 * @return the value of the '<em>Owned Expression</em>' containment reference.
+	 * @see #setOwnedExpression(ExpCS)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getQueryCS_OwnedExpression()
 	 * @model containment="true"
 	 * @generated
 	 */
-	ExpCS getExpression();
+	ExpCS getOwnedExpression();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS#getExpression <em>Expression</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.QueryCS#getOwnedExpression <em>Owned Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Expression</em>' containment reference.
-	 * @see #getExpression()
+	 * @param value the new value of the '<em>Owned Expression</em>' containment reference.
+	 * @see #getOwnedExpression()
 	 * @generated
 	 */
-	void setExpression(ExpCS value);
+	void setOwnedExpression(ExpCS value);
 
 } // QueryCS

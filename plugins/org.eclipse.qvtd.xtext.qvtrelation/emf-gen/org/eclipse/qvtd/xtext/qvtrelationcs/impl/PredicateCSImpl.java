@@ -32,22 +32,21 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.PredicateCSImpl#getExpr <em>Expr</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.PredicateCSImpl#getOwnedCondition <em>Owned Condition</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class PredicateCSImpl extends ModelElementCSImpl implements PredicateCS {
 	/**
-	 * The cached value of the '{@link #getExpr() <em>Expr</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedCondition() <em>Owned Condition</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExpr()
+	 * @see #getOwnedCondition()
 	 * @generated
 	 * @ordered
 	 */
-	protected ExpCS expr;
-
+	protected ExpCS ownedCondition;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -73,8 +72,8 @@ public class PredicateCSImpl extends ModelElementCSImpl implements PredicateCS {
 	 * @generated
 	 */
 	@Override
-	public ExpCS getExpr() {
-		return expr;
+	public ExpCS getOwnedCondition() {
+		return ownedCondition;
 	}
 
 	/**
@@ -82,11 +81,11 @@ public class PredicateCSImpl extends ModelElementCSImpl implements PredicateCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetExpr(ExpCS newExpr, NotificationChain msgs) {
-		ExpCS oldExpr = expr;
-		expr = newExpr;
+	public NotificationChain basicSetOwnedCondition(ExpCS newOwnedCondition, NotificationChain msgs) {
+		ExpCS oldOwnedCondition = ownedCondition;
+		ownedCondition = newOwnedCondition;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.PREDICATE_CS__EXPR, oldExpr, newExpr);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.PREDICATE_CS__OWNED_CONDITION, oldOwnedCondition, newOwnedCondition);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -98,18 +97,18 @@ public class PredicateCSImpl extends ModelElementCSImpl implements PredicateCS {
 	 * @generated
 	 */
 	@Override
-	public void setExpr(ExpCS newExpr) {
-		if (newExpr != expr) {
+	public void setOwnedCondition(ExpCS newOwnedCondition) {
+		if (newOwnedCondition != ownedCondition) {
 			NotificationChain msgs = null;
-			if (expr != null)
-				msgs = ((InternalEObject)expr).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.PREDICATE_CS__EXPR, null, msgs);
-			if (newExpr != null)
-				msgs = ((InternalEObject)newExpr).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.PREDICATE_CS__EXPR, null, msgs);
-			msgs = basicSetExpr(newExpr, msgs);
+			if (ownedCondition != null)
+				msgs = ((InternalEObject)ownedCondition).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.PREDICATE_CS__OWNED_CONDITION, null, msgs);
+			if (newOwnedCondition != null)
+				msgs = ((InternalEObject)newOwnedCondition).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.PREDICATE_CS__OWNED_CONDITION, null, msgs);
+			msgs = basicSetOwnedCondition(newOwnedCondition, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.PREDICATE_CS__EXPR, newExpr, newExpr));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.PREDICATE_CS__OWNED_CONDITION, newOwnedCondition, newOwnedCondition));
 	}
 
 	/**
@@ -120,8 +119,8 @@ public class PredicateCSImpl extends ModelElementCSImpl implements PredicateCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PREDICATE_CS__EXPR:
-				return basicSetExpr(null, msgs);
+			case QVTrelationCSPackage.PREDICATE_CS__OWNED_CONDITION:
+				return basicSetOwnedCondition(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -134,8 +133,8 @@ public class PredicateCSImpl extends ModelElementCSImpl implements PredicateCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PREDICATE_CS__EXPR:
-				return getExpr();
+			case QVTrelationCSPackage.PREDICATE_CS__OWNED_CONDITION:
+				return getOwnedCondition();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -148,8 +147,8 @@ public class PredicateCSImpl extends ModelElementCSImpl implements PredicateCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PREDICATE_CS__EXPR:
-				setExpr((ExpCS)newValue);
+			case QVTrelationCSPackage.PREDICATE_CS__OWNED_CONDITION:
+				setOwnedCondition((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -163,8 +162,8 @@ public class PredicateCSImpl extends ModelElementCSImpl implements PredicateCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PREDICATE_CS__EXPR:
-				setExpr((ExpCS)null);
+			case QVTrelationCSPackage.PREDICATE_CS__OWNED_CONDITION:
+				setOwnedCondition((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -178,8 +177,8 @@ public class PredicateCSImpl extends ModelElementCSImpl implements PredicateCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PREDICATE_CS__EXPR:
-				return expr != null;
+			case QVTrelationCSPackage.PREDICATE_CS__OWNED_CONDITION:
+				return ownedCondition != null;
 		}
 		return super.eIsSet(featureID);
 	}

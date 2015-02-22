@@ -39,9 +39,9 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.KeyDeclCSImpl#getPathName <em>Path Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.KeyDeclCSImpl#getOwnedPathName <em>Owned Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.KeyDeclCSImpl#getPropertyIds <em>Property Ids</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.KeyDeclCSImpl#getOppositePropertyIds <em>Opposite Property Ids</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.KeyDeclCSImpl#getOwnedOppositePropertyIds <em>Owned Opposite Property Ids</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.KeyDeclCSImpl#getClassId <em>Class Id</em>}</li>
  * </ul>
  *
@@ -49,14 +49,14 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  */
 public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	/**
-	 * The cached value of the '{@link #getPathName() <em>Path Name</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedPathName() <em>Owned Path Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPathName()
+	 * @see #getOwnedPathName()
 	 * @generated
 	 * @ordered
 	 */
-	protected PathNameCS pathName;
+	protected PathNameCS ownedPathName;
 
 	/**
 	 * The cached value of the '{@link #getPropertyIds() <em>Property Ids</em>}' reference list.
@@ -69,14 +69,14 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	protected EList<Property> propertyIds;
 
 	/**
-	 * The cached value of the '{@link #getOppositePropertyIds() <em>Opposite Property Ids</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedOppositePropertyIds() <em>Owned Opposite Property Ids</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOppositePropertyIds()
+	 * @see #getOwnedOppositePropertyIds()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<PathNameCS> oppositePropertyIds;
+	protected EList<PathNameCS> ownedOppositePropertyIds;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -103,8 +103,8 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	 * @generated
 	 */
 	@Override
-	public PathNameCS getPathName() {
-		return pathName;
+	public PathNameCS getOwnedPathName() {
+		return ownedPathName;
 	}
 
 	/**
@@ -112,11 +112,11 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetPathName(PathNameCS newPathName, NotificationChain msgs) {
-		PathNameCS oldPathName = pathName;
-		pathName = newPathName;
+	public NotificationChain basicSetOwnedPathName(PathNameCS newOwnedPathName, NotificationChain msgs) {
+		PathNameCS oldOwnedPathName = ownedPathName;
+		ownedPathName = newOwnedPathName;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.KEY_DECL_CS__PATH_NAME, oldPathName, newPathName);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.KEY_DECL_CS__OWNED_PATH_NAME, oldOwnedPathName, newOwnedPathName);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -128,18 +128,18 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	 * @generated
 	 */
 	@Override
-	public void setPathName(PathNameCS newPathName) {
-		if (newPathName != pathName) {
+	public void setOwnedPathName(PathNameCS newOwnedPathName) {
+		if (newOwnedPathName != ownedPathName) {
 			NotificationChain msgs = null;
-			if (pathName != null)
-				msgs = ((InternalEObject)pathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.KEY_DECL_CS__PATH_NAME, null, msgs);
-			if (newPathName != null)
-				msgs = ((InternalEObject)newPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.KEY_DECL_CS__PATH_NAME, null, msgs);
-			msgs = basicSetPathName(newPathName, msgs);
+			if (ownedPathName != null)
+				msgs = ((InternalEObject)ownedPathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.KEY_DECL_CS__OWNED_PATH_NAME, null, msgs);
+			if (newOwnedPathName != null)
+				msgs = ((InternalEObject)newOwnedPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.KEY_DECL_CS__OWNED_PATH_NAME, null, msgs);
+			msgs = basicSetOwnedPathName(newOwnedPathName, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.KEY_DECL_CS__PATH_NAME, newPathName, newPathName));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.KEY_DECL_CS__OWNED_PATH_NAME, newOwnedPathName, newOwnedPathName));
 	}
 
 	/**
@@ -161,11 +161,11 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	 * @generated
 	 */
 	@Override
-	public EList<PathNameCS> getOppositePropertyIds() {
-		if (oppositePropertyIds == null) {
-			oppositePropertyIds = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, QVTrelationCSPackage.KEY_DECL_CS__OPPOSITE_PROPERTY_IDS);
+	public EList<PathNameCS> getOwnedOppositePropertyIds() {
+		if (ownedOppositePropertyIds == null) {
+			ownedOppositePropertyIds = new EObjectContainmentEList<PathNameCS>(PathNameCS.class, this, QVTrelationCSPackage.KEY_DECL_CS__OWNED_OPPOSITE_PROPERTY_IDS);
 		}
-		return oppositePropertyIds;
+		return ownedOppositePropertyIds;
 	}
 
 	/**
@@ -176,10 +176,10 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.KEY_DECL_CS__PATH_NAME:
-				return basicSetPathName(null, msgs);
-			case QVTrelationCSPackage.KEY_DECL_CS__OPPOSITE_PROPERTY_IDS:
-				return ((InternalEList<?>)getOppositePropertyIds()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSPackage.KEY_DECL_CS__OWNED_PATH_NAME:
+				return basicSetOwnedPathName(null, msgs);
+			case QVTrelationCSPackage.KEY_DECL_CS__OWNED_OPPOSITE_PROPERTY_IDS:
+				return ((InternalEList<?>)getOwnedOppositePropertyIds()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -192,12 +192,12 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.KEY_DECL_CS__PATH_NAME:
-				return getPathName();
+			case QVTrelationCSPackage.KEY_DECL_CS__OWNED_PATH_NAME:
+				return getOwnedPathName();
 			case QVTrelationCSPackage.KEY_DECL_CS__PROPERTY_IDS:
 				return getPropertyIds();
-			case QVTrelationCSPackage.KEY_DECL_CS__OPPOSITE_PROPERTY_IDS:
-				return getOppositePropertyIds();
+			case QVTrelationCSPackage.KEY_DECL_CS__OWNED_OPPOSITE_PROPERTY_IDS:
+				return getOwnedOppositePropertyIds();
 			case QVTrelationCSPackage.KEY_DECL_CS__CLASS_ID:
 				return getClassId();
 		}
@@ -213,16 +213,16 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.KEY_DECL_CS__PATH_NAME:
-				setPathName((PathNameCS)newValue);
+			case QVTrelationCSPackage.KEY_DECL_CS__OWNED_PATH_NAME:
+				setOwnedPathName((PathNameCS)newValue);
 				return;
 			case QVTrelationCSPackage.KEY_DECL_CS__PROPERTY_IDS:
 				getPropertyIds().clear();
 				getPropertyIds().addAll((Collection<? extends Property>)newValue);
 				return;
-			case QVTrelationCSPackage.KEY_DECL_CS__OPPOSITE_PROPERTY_IDS:
-				getOppositePropertyIds().clear();
-				getOppositePropertyIds().addAll((Collection<? extends PathNameCS>)newValue);
+			case QVTrelationCSPackage.KEY_DECL_CS__OWNED_OPPOSITE_PROPERTY_IDS:
+				getOwnedOppositePropertyIds().clear();
+				getOwnedOppositePropertyIds().addAll((Collection<? extends PathNameCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -236,14 +236,14 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.KEY_DECL_CS__PATH_NAME:
-				setPathName((PathNameCS)null);
+			case QVTrelationCSPackage.KEY_DECL_CS__OWNED_PATH_NAME:
+				setOwnedPathName((PathNameCS)null);
 				return;
 			case QVTrelationCSPackage.KEY_DECL_CS__PROPERTY_IDS:
 				getPropertyIds().clear();
 				return;
-			case QVTrelationCSPackage.KEY_DECL_CS__OPPOSITE_PROPERTY_IDS:
-				getOppositePropertyIds().clear();
+			case QVTrelationCSPackage.KEY_DECL_CS__OWNED_OPPOSITE_PROPERTY_IDS:
+				getOwnedOppositePropertyIds().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -257,12 +257,12 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.KEY_DECL_CS__PATH_NAME:
-				return pathName != null;
+			case QVTrelationCSPackage.KEY_DECL_CS__OWNED_PATH_NAME:
+				return ownedPathName != null;
 			case QVTrelationCSPackage.KEY_DECL_CS__PROPERTY_IDS:
 				return propertyIds != null && !propertyIds.isEmpty();
-			case QVTrelationCSPackage.KEY_DECL_CS__OPPOSITE_PROPERTY_IDS:
-				return oppositePropertyIds != null && !oppositePropertyIds.isEmpty();
+			case QVTrelationCSPackage.KEY_DECL_CS__OWNED_OPPOSITE_PROPERTY_IDS:
+				return ownedOppositePropertyIds != null && !ownedOppositePropertyIds.isEmpty();
 			case QVTrelationCSPackage.KEY_DECL_CS__CLASS_ID:
 				return getClassId() != null;
 		}
@@ -287,9 +287,9 @@ public class KeyDeclCSImpl extends ModelElementCSImpl implements KeyDeclCS {
 	 */
 	@Override
 	public org.eclipse.ocl.pivot.Class getClassId() {
-		if (pathName == null) {
+		if (ownedPathName == null) {
 			return null;
 		}
-		return (org.eclipse.ocl.pivot.Class) pathName.getReferredElement();
+		return (org.eclipse.ocl.pivot.Class) ownedPathName.getReferredElement();
 	}
 } //KeyDeclCSImpl

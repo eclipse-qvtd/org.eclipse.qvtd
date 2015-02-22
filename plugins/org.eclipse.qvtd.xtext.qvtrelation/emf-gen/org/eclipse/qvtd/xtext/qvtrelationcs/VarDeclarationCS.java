@@ -23,8 +23,8 @@ import org.eclipse.ocl.xtext.basecs.TypedRefCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS#getVarDeclarationIds <em>Var Declaration Ids</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS#getOwnedVarDeclarationIds <em>Owned Var Declaration Ids</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS#getOwnedType <em>Owned Type</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getVarDeclarationCS()
@@ -34,45 +34,45 @@ import org.eclipse.ocl.xtext.basecs.TypedRefCS;
 public interface VarDeclarationCS extends ModelElementCS {
 
 	/**
-	 * Returns the value of the '<em><b>Var Declaration Ids</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Var Declaration Ids</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationIdCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Var Declaration Ids</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Var Declaration Ids</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Var Declaration Ids</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getVarDeclarationCS_VarDeclarationIds()
+	 * @return the value of the '<em>Owned Var Declaration Ids</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getVarDeclarationCS_OwnedVarDeclarationIds()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<VarDeclarationIdCS> getVarDeclarationIds();
+	EList<VarDeclarationIdCS> getOwnedVarDeclarationIds();
 
 	/**
-	 * Returns the value of the '<em><b>Type</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Type</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Type</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' containment reference.
-	 * @see #setType(TypedRefCS)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getVarDeclarationCS_Type()
+	 * @return the value of the '<em>Owned Type</em>' containment reference.
+	 * @see #setOwnedType(TypedRefCS)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getVarDeclarationCS_OwnedType()
 	 * @model containment="true"
 	 * @generated
 	 */
-	TypedRefCS getType();
+	TypedRefCS getOwnedType();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS#getType <em>Type</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS#getOwnedType <em>Owned Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' containment reference.
-	 * @see #getType()
+	 * @param value the new value of the '<em>Owned Type</em>' containment reference.
+	 * @see #getOwnedType()
 	 * @generated
 	 */
-	void setType(TypedRefCS value);
+	void setOwnedType(TypedRefCS value);
 
 } // VarDeclarationCS

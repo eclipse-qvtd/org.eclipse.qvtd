@@ -305,7 +305,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getCollectionTemplateCS_MemberIdentifiers() {
+	public EReference getCollectionTemplateCS_OwnedMemberIdentifiers() {
 		return (EReference)collectionTemplateCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -335,7 +335,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getDefaultValueCS_Initialiser() {
+	public EReference getDefaultValueCS_OwnedInitExpression() {
 		return (EReference)defaultValueCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -365,7 +365,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EAttribute getDomainCS_Checkonly() {
+	public EAttribute getDomainCS_IsCheckonly() {
 		return (EAttribute)domainCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -375,7 +375,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EAttribute getDomainCS_Enforce() {
+	public EAttribute getDomainCS_IsEnforce() {
 		return (EAttribute)domainCSEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -395,7 +395,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EAttribute getDomainCS_Replace() {
+	public EAttribute getDomainCS_IsReplace() {
 		return (EAttribute)domainCSEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -405,7 +405,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getDomainCS_Pattern() {
+	public EReference getDomainCS_OwnedPattern() {
 		return (EReference)domainCSEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -415,7 +415,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getDomainCS_DefaultValues() {
+	public EReference getDomainCS_OwnedDefaultValues() {
 		return (EReference)domainCSEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -425,7 +425,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getDomainCS_ImplementedBy() {
+	public EReference getDomainCS_OwnedImplementedBy() {
 		return (EReference)domainCSEClass.getEStructuralFeatures().get(6);
 	}
 
@@ -445,7 +445,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getDomainPatternCS_Template() {
+	public EReference getDomainPatternCS_OwnedTemplate() {
 		return (EReference)domainPatternCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -475,7 +475,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getKeyDeclCS_PathName() {
+	public EReference getKeyDeclCS_OwnedPathName() {
 		return (EReference)keyDeclCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -495,7 +495,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getKeyDeclCS_OppositePropertyIds() {
+	public EReference getKeyDeclCS_OwnedOppositePropertyIds() {
 		return (EReference)keyDeclCSEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -545,7 +545,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getObjectTemplateCS_PropertyTemplates() {
+	public EReference getObjectTemplateCS_OwnedPropertyTemplates() {
 		return (EReference)objectTemplateCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -575,7 +575,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getPatternCS_Predicates() {
+	public EReference getPatternCS_OwnedPredicates() {
 		return (EReference)patternCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -595,7 +595,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getPredicateCS_Expr() {
+	public EReference getPredicateCS_OwnedCondition() {
 		return (EReference)predicateCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -625,7 +625,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getPropertyTemplateCS_ObjectTemplate() {
+	public EReference getPropertyTemplateCS_OwningObjectTemplate() {
 		return (EReference)propertyTemplateCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -645,7 +645,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getPropertyTemplateCS_OppositePropertyId() {
+	public EReference getPropertyTemplateCS_OwnedOppositePropertyId() {
 		return (EReference)propertyTemplateCSEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -655,7 +655,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getPropertyTemplateCS_Expression() {
+	public EReference getPropertyTemplateCS_OwnedExpression() {
 		return (EReference)propertyTemplateCSEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -675,7 +675,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getQueryCS_InputParamDeclarations() {
+	public EReference getQueryCS_OwnedParameters() {
 		return (EReference)queryCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -685,7 +685,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getQueryCS_Expression() {
+	public EReference getQueryCS_OwnedExpression() {
 		return (EReference)queryCSEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -705,7 +705,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EAttribute getRelationCS_Top() {
+	public EAttribute getRelationCS_IsTop() {
 		return (EAttribute)relationCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -725,7 +725,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getRelationCS_VarDeclarations() {
+	public EReference getRelationCS_OwnedVarDeclarations() {
 		return (EReference)relationCSEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -735,7 +735,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getRelationCS_Domains() {
+	public EReference getRelationCS_OwnedDomains() {
 		return (EReference)relationCSEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -745,7 +745,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getRelationCS_When() {
+	public EReference getRelationCS_OwnedWhen() {
 		return (EReference)relationCSEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -755,7 +755,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getRelationCS_Where() {
+	public EReference getRelationCS_OwnedWhere() {
 		return (EReference)relationCSEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -775,7 +775,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getTemplateCS_GuardExpression() {
+	public EReference getTemplateCS_OwnedGuardExpression() {
 		return (EReference)templateCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -795,7 +795,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getTemplateVariableCS_Type() {
+	public EReference getTemplateVariableCS_OwnedType() {
 		return (EReference)templateVariableCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -815,7 +815,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getTopLevelCS_ImportClauses() {
+	public EReference getTopLevelCS_OwnedImportClauses() {
 		return (EReference)topLevelCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -825,7 +825,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getTopLevelCS_Transformations() {
+	public EReference getTopLevelCS_OwnedTransformations() {
 		return (EReference)topLevelCSEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -845,7 +845,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getTransformationCS_ModelDecls() {
+	public EReference getTransformationCS_OwnedModelDecls() {
 		return (EReference)transformationCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -865,7 +865,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getTransformationCS_KeyDecls() {
+	public EReference getTransformationCS_OwnedKeyDecls() {
 		return (EReference)transformationCSEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -875,7 +875,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getTransformationCS_Queries() {
+	public EReference getTransformationCS_OwnedQueries() {
 		return (EReference)transformationCSEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -885,7 +885,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getTransformationCS_Relation() {
+	public EReference getTransformationCS_OwnedRelations() {
 		return (EReference)transformationCSEClass.getEStructuralFeatures().get(4);
 	}
 
@@ -905,7 +905,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getUnitCS_Identifier() {
+	public EReference getUnitCS_Identifiers() {
 		return (EReference)unitCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -925,7 +925,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getVarDeclarationCS_VarDeclarationIds() {
+	public EReference getVarDeclarationCS_OwnedVarDeclarationIds() {
 		return (EReference)varDeclarationCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -935,7 +935,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getVarDeclarationCS_Type() {
+	public EReference getVarDeclarationCS_OwnedType() {
 		return (EReference)varDeclarationCSEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -981,90 +981,90 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		abstractDomainCSEClass = createEClass(ABSTRACT_DOMAIN_CS);
 
 		collectionTemplateCSEClass = createEClass(COLLECTION_TEMPLATE_CS);
-		createEReference(collectionTemplateCSEClass, COLLECTION_TEMPLATE_CS__MEMBER_IDENTIFIERS);
+		createEReference(collectionTemplateCSEClass, COLLECTION_TEMPLATE_CS__OWNED_MEMBER_IDENTIFIERS);
 		createEReference(collectionTemplateCSEClass, COLLECTION_TEMPLATE_CS__REST_IDENTIFIER);
 
 		defaultValueCSEClass = createEClass(DEFAULT_VALUE_CS);
-		createEReference(defaultValueCSEClass, DEFAULT_VALUE_CS__INITIALISER);
+		createEReference(defaultValueCSEClass, DEFAULT_VALUE_CS__OWNED_INIT_EXPRESSION);
 		createEReference(defaultValueCSEClass, DEFAULT_VALUE_CS__PROPERTY_ID);
 
 		domainCSEClass = createEClass(DOMAIN_CS);
-		createEAttribute(domainCSEClass, DOMAIN_CS__CHECKONLY);
-		createEAttribute(domainCSEClass, DOMAIN_CS__ENFORCE);
+		createEAttribute(domainCSEClass, DOMAIN_CS__IS_CHECKONLY);
+		createEAttribute(domainCSEClass, DOMAIN_CS__IS_ENFORCE);
 		createEReference(domainCSEClass, DOMAIN_CS__MODEL_ID);
-		createEAttribute(domainCSEClass, DOMAIN_CS__REPLACE);
-		createEReference(domainCSEClass, DOMAIN_CS__PATTERN);
-		createEReference(domainCSEClass, DOMAIN_CS__DEFAULT_VALUES);
-		createEReference(domainCSEClass, DOMAIN_CS__IMPLEMENTED_BY);
+		createEAttribute(domainCSEClass, DOMAIN_CS__IS_REPLACE);
+		createEReference(domainCSEClass, DOMAIN_CS__OWNED_PATTERN);
+		createEReference(domainCSEClass, DOMAIN_CS__OWNED_DEFAULT_VALUES);
+		createEReference(domainCSEClass, DOMAIN_CS__OWNED_IMPLEMENTED_BY);
 
 		domainPatternCSEClass = createEClass(DOMAIN_PATTERN_CS);
-		createEReference(domainPatternCSEClass, DOMAIN_PATTERN_CS__TEMPLATE);
+		createEReference(domainPatternCSEClass, DOMAIN_PATTERN_CS__OWNED_TEMPLATE);
 
 		elementTemplateCSEClass = createEClass(ELEMENT_TEMPLATE_CS);
 
 		keyDeclCSEClass = createEClass(KEY_DECL_CS);
-		createEReference(keyDeclCSEClass, KEY_DECL_CS__PATH_NAME);
+		createEReference(keyDeclCSEClass, KEY_DECL_CS__OWNED_PATH_NAME);
 		createEReference(keyDeclCSEClass, KEY_DECL_CS__PROPERTY_IDS);
-		createEReference(keyDeclCSEClass, KEY_DECL_CS__OPPOSITE_PROPERTY_IDS);
+		createEReference(keyDeclCSEClass, KEY_DECL_CS__OWNED_OPPOSITE_PROPERTY_IDS);
 		createEReference(keyDeclCSEClass, KEY_DECL_CS__CLASS_ID);
 
 		modelDeclCSEClass = createEClass(MODEL_DECL_CS);
 		createEReference(modelDeclCSEClass, MODEL_DECL_CS__METAMODEL_IDS);
 
 		objectTemplateCSEClass = createEClass(OBJECT_TEMPLATE_CS);
-		createEReference(objectTemplateCSEClass, OBJECT_TEMPLATE_CS__PROPERTY_TEMPLATES);
+		createEReference(objectTemplateCSEClass, OBJECT_TEMPLATE_CS__OWNED_PROPERTY_TEMPLATES);
 
 		paramDeclarationCSEClass = createEClass(PARAM_DECLARATION_CS);
 
 		patternCSEClass = createEClass(PATTERN_CS);
-		createEReference(patternCSEClass, PATTERN_CS__PREDICATES);
+		createEReference(patternCSEClass, PATTERN_CS__OWNED_PREDICATES);
 
 		predicateCSEClass = createEClass(PREDICATE_CS);
-		createEReference(predicateCSEClass, PREDICATE_CS__EXPR);
+		createEReference(predicateCSEClass, PREDICATE_CS__OWNED_CONDITION);
 
 		primitiveTypeDomainCSEClass = createEClass(PRIMITIVE_TYPE_DOMAIN_CS);
 
 		propertyTemplateCSEClass = createEClass(PROPERTY_TEMPLATE_CS);
-		createEReference(propertyTemplateCSEClass, PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE);
+		createEReference(propertyTemplateCSEClass, PROPERTY_TEMPLATE_CS__OWNING_OBJECT_TEMPLATE);
 		createEReference(propertyTemplateCSEClass, PROPERTY_TEMPLATE_CS__PROPERTY_ID);
-		createEReference(propertyTemplateCSEClass, PROPERTY_TEMPLATE_CS__OPPOSITE_PROPERTY_ID);
-		createEReference(propertyTemplateCSEClass, PROPERTY_TEMPLATE_CS__EXPRESSION);
+		createEReference(propertyTemplateCSEClass, PROPERTY_TEMPLATE_CS__OWNED_OPPOSITE_PROPERTY_ID);
+		createEReference(propertyTemplateCSEClass, PROPERTY_TEMPLATE_CS__OWNED_EXPRESSION);
 
 		queryCSEClass = createEClass(QUERY_CS);
-		createEReference(queryCSEClass, QUERY_CS__INPUT_PARAM_DECLARATIONS);
-		createEReference(queryCSEClass, QUERY_CS__EXPRESSION);
+		createEReference(queryCSEClass, QUERY_CS__OWNED_PARAMETERS);
+		createEReference(queryCSEClass, QUERY_CS__OWNED_EXPRESSION);
 
 		relationCSEClass = createEClass(RELATION_CS);
-		createEAttribute(relationCSEClass, RELATION_CS__TOP);
+		createEAttribute(relationCSEClass, RELATION_CS__IS_TOP);
 		createEReference(relationCSEClass, RELATION_CS__OVERRIDES);
-		createEReference(relationCSEClass, RELATION_CS__VAR_DECLARATIONS);
-		createEReference(relationCSEClass, RELATION_CS__DOMAINS);
-		createEReference(relationCSEClass, RELATION_CS__WHEN);
-		createEReference(relationCSEClass, RELATION_CS__WHERE);
+		createEReference(relationCSEClass, RELATION_CS__OWNED_VAR_DECLARATIONS);
+		createEReference(relationCSEClass, RELATION_CS__OWNED_DOMAINS);
+		createEReference(relationCSEClass, RELATION_CS__OWNED_WHEN);
+		createEReference(relationCSEClass, RELATION_CS__OWNED_WHERE);
 
 		templateCSEClass = createEClass(TEMPLATE_CS);
-		createEReference(templateCSEClass, TEMPLATE_CS__GUARD_EXPRESSION);
+		createEReference(templateCSEClass, TEMPLATE_CS__OWNED_GUARD_EXPRESSION);
 
 		templateVariableCSEClass = createEClass(TEMPLATE_VARIABLE_CS);
-		createEReference(templateVariableCSEClass, TEMPLATE_VARIABLE_CS__TYPE);
+		createEReference(templateVariableCSEClass, TEMPLATE_VARIABLE_CS__OWNED_TYPE);
 
 		topLevelCSEClass = createEClass(TOP_LEVEL_CS);
-		createEReference(topLevelCSEClass, TOP_LEVEL_CS__IMPORT_CLAUSES);
-		createEReference(topLevelCSEClass, TOP_LEVEL_CS__TRANSFORMATIONS);
+		createEReference(topLevelCSEClass, TOP_LEVEL_CS__OWNED_IMPORT_CLAUSES);
+		createEReference(topLevelCSEClass, TOP_LEVEL_CS__OWNED_TRANSFORMATIONS);
 
 		transformationCSEClass = createEClass(TRANSFORMATION_CS);
-		createEReference(transformationCSEClass, TRANSFORMATION_CS__MODEL_DECLS);
+		createEReference(transformationCSEClass, TRANSFORMATION_CS__OWNED_MODEL_DECLS);
 		createEReference(transformationCSEClass, TRANSFORMATION_CS__EXTENDS);
-		createEReference(transformationCSEClass, TRANSFORMATION_CS__KEY_DECLS);
-		createEReference(transformationCSEClass, TRANSFORMATION_CS__QUERIES);
-		createEReference(transformationCSEClass, TRANSFORMATION_CS__RELATION);
+		createEReference(transformationCSEClass, TRANSFORMATION_CS__OWNED_KEY_DECLS);
+		createEReference(transformationCSEClass, TRANSFORMATION_CS__OWNED_QUERIES);
+		createEReference(transformationCSEClass, TRANSFORMATION_CS__OWNED_RELATIONS);
 
 		unitCSEClass = createEClass(UNIT_CS);
-		createEReference(unitCSEClass, UNIT_CS__IDENTIFIER);
+		createEReference(unitCSEClass, UNIT_CS__IDENTIFIERS);
 
 		varDeclarationCSEClass = createEClass(VAR_DECLARATION_CS);
-		createEReference(varDeclarationCSEClass, VAR_DECLARATION_CS__VAR_DECLARATION_IDS);
-		createEReference(varDeclarationCSEClass, VAR_DECLARATION_CS__TYPE);
+		createEReference(varDeclarationCSEClass, VAR_DECLARATION_CS__OWNED_VAR_DECLARATION_IDS);
+		createEReference(varDeclarationCSEClass, VAR_DECLARATION_CS__OWNED_TYPE);
 
 		varDeclarationIdCSEClass = createEClass(VAR_DECLARATION_ID_CS);
 	}
@@ -1135,90 +1135,90 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		initEClass(abstractDomainCSEClass, AbstractDomainCS.class, "AbstractDomainCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(collectionTemplateCSEClass, CollectionTemplateCS.class, "CollectionTemplateCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getCollectionTemplateCS_MemberIdentifiers(), this.getTemplateVariableCS(), null, "memberIdentifiers", null, 1, -1, CollectionTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getCollectionTemplateCS_OwnedMemberIdentifiers(), this.getTemplateVariableCS(), null, "ownedMemberIdentifiers", null, 1, -1, CollectionTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getCollectionTemplateCS_RestIdentifier(), thePivotPackage.getVariable(), null, "restIdentifier", null, 0, 1, CollectionTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(defaultValueCSEClass, DefaultValueCS.class, "DefaultValueCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDefaultValueCS_Initialiser(), theEssentialOCLCSPackage.getExpCS(), null, "initialiser", null, 1, 1, DefaultValueCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDefaultValueCS_OwnedInitExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedInitExpression", null, 1, 1, DefaultValueCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDefaultValueCS_PropertyId(), thePivotPackage.getVariable(), null, "propertyId", null, 1, 1, DefaultValueCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(domainCSEClass, DomainCS.class, "DomainCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getDomainCS_Checkonly(), ecorePackage.getEBoolean(), "checkonly", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDomainCS_Enforce(), ecorePackage.getEBoolean(), "enforce", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDomainCS_IsCheckonly(), ecorePackage.getEBoolean(), "isCheckonly", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDomainCS_IsEnforce(), ecorePackage.getEBoolean(), "isEnforce", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDomainCS_ModelId(), theQVTbasePackage.getTypedModel(), null, "modelId", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getDomainCS_Replace(), ecorePackage.getEBoolean(), "replace", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDomainCS_Pattern(), this.getDomainPatternCS(), null, "pattern", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDomainCS_DefaultValues(), this.getDefaultValueCS(), null, "defaultValues", null, 0, -1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getDomainCS_ImplementedBy(), theEssentialOCLCSPackage.getExpCS(), null, "implementedBy", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDomainCS_IsReplace(), ecorePackage.getEBoolean(), "isReplace", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDomainCS_OwnedPattern(), this.getDomainPatternCS(), null, "ownedPattern", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDomainCS_OwnedDefaultValues(), this.getDefaultValueCS(), null, "ownedDefaultValues", null, 0, -1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDomainCS_OwnedImplementedBy(), theEssentialOCLCSPackage.getExpCS(), null, "ownedImplementedBy", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(domainPatternCSEClass, DomainPatternCS.class, "DomainPatternCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDomainPatternCS_Template(), this.getTemplateCS(), null, "template", null, 0, 1, DomainPatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDomainPatternCS_OwnedTemplate(), this.getTemplateCS(), null, "ownedTemplate", null, 0, 1, DomainPatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(elementTemplateCSEClass, ElementTemplateCS.class, "ElementTemplateCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(keyDeclCSEClass, KeyDeclCS.class, "KeyDeclCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getKeyDeclCS_PathName(), theBaseCSPackage.getPathNameCS(), null, "pathName", null, 0, 1, KeyDeclCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKeyDeclCS_OwnedPathName(), theBaseCSPackage.getPathNameCS(), null, "ownedPathName", null, 0, 1, KeyDeclCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKeyDeclCS_PropertyIds(), thePivotPackage.getProperty(), null, "propertyIds", null, 0, -1, KeyDeclCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getKeyDeclCS_OppositePropertyIds(), theBaseCSPackage.getPathNameCS(), null, "oppositePropertyIds", null, 0, -1, KeyDeclCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getKeyDeclCS_OwnedOppositePropertyIds(), theBaseCSPackage.getPathNameCS(), null, "ownedOppositePropertyIds", null, 0, -1, KeyDeclCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getKeyDeclCS_ClassId(), thePivotPackage.getClass_(), null, "classId", null, 0, 1, KeyDeclCS.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(modelDeclCSEClass, ModelDeclCS.class, "ModelDeclCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getModelDeclCS_MetamodelIds(), thePivotPackage.getNamespace(), null, "metamodelIds", null, 0, -1, ModelDeclCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(objectTemplateCSEClass, ObjectTemplateCS.class, "ObjectTemplateCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getObjectTemplateCS_PropertyTemplates(), this.getPropertyTemplateCS(), this.getPropertyTemplateCS_ObjectTemplate(), "propertyTemplates", null, 0, -1, ObjectTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getObjectTemplateCS_OwnedPropertyTemplates(), this.getPropertyTemplateCS(), this.getPropertyTemplateCS_OwningObjectTemplate(), "ownedPropertyTemplates", null, 0, -1, ObjectTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(paramDeclarationCSEClass, ParamDeclarationCS.class, "ParamDeclarationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(patternCSEClass, PatternCS.class, "PatternCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPatternCS_Predicates(), this.getPredicateCS(), null, "predicates", null, 1, -1, PatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPatternCS_OwnedPredicates(), this.getPredicateCS(), null, "ownedPredicates", null, 1, -1, PatternCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(predicateCSEClass, PredicateCS.class, "PredicateCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPredicateCS_Expr(), theEssentialOCLCSPackage.getExpCS(), null, "expr", null, 1, 1, PredicateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPredicateCS_OwnedCondition(), theEssentialOCLCSPackage.getExpCS(), null, "ownedCondition", null, 1, 1, PredicateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(primitiveTypeDomainCSEClass, PrimitiveTypeDomainCS.class, "PrimitiveTypeDomainCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(propertyTemplateCSEClass, PropertyTemplateCS.class, "PropertyTemplateCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPropertyTemplateCS_ObjectTemplate(), this.getObjectTemplateCS(), this.getObjectTemplateCS_PropertyTemplates(), "objectTemplate", null, 0, 1, PropertyTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPropertyTemplateCS_OwningObjectTemplate(), this.getObjectTemplateCS(), this.getObjectTemplateCS_OwnedPropertyTemplates(), "owningObjectTemplate", null, 0, 1, PropertyTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getPropertyTemplateCS_PropertyId(), thePivotPackage.getProperty(), null, "propertyId", null, 0, 1, PropertyTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPropertyTemplateCS_OppositePropertyId(), theBaseCSPackage.getPathNameCS(), null, "oppositePropertyId", null, 0, 1, PropertyTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getPropertyTemplateCS_Expression(), theEssentialOCLCSPackage.getExpCS(), null, "expression", null, 0, 1, PropertyTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPropertyTemplateCS_OwnedOppositePropertyId(), theBaseCSPackage.getPathNameCS(), null, "ownedOppositePropertyId", null, 0, 1, PropertyTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPropertyTemplateCS_OwnedExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedExpression", null, 0, 1, PropertyTemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(queryCSEClass, QueryCS.class, "QueryCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getQueryCS_InputParamDeclarations(), this.getParamDeclarationCS(), null, "inputParamDeclarations", null, 0, -1, QueryCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getQueryCS_Expression(), theEssentialOCLCSPackage.getExpCS(), null, "expression", null, 0, 1, QueryCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getQueryCS_OwnedParameters(), this.getParamDeclarationCS(), null, "ownedParameters", null, 0, -1, QueryCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getQueryCS_OwnedExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedExpression", null, 0, 1, QueryCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(relationCSEClass, RelationCS.class, "RelationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getRelationCS_Top(), ecorePackage.getEBoolean(), "top", null, 0, 1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRelationCS_IsTop(), ecorePackage.getEBoolean(), "isTop", null, 0, 1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRelationCS_Overrides(), theQVTrelationPackage.getRelation(), null, "overrides", null, 0, 1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRelationCS_VarDeclarations(), this.getVarDeclarationCS(), null, "varDeclarations", null, 0, -1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRelationCS_Domains(), this.getAbstractDomainCS(), null, "domains", null, 0, -1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRelationCS_When(), this.getPatternCS(), null, "when", null, 0, 1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getRelationCS_Where(), this.getPatternCS(), null, "where", null, 0, 1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRelationCS_OwnedVarDeclarations(), this.getVarDeclarationCS(), null, "ownedVarDeclarations", null, 0, -1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRelationCS_OwnedDomains(), this.getAbstractDomainCS(), null, "ownedDomains", null, 0, -1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRelationCS_OwnedWhen(), this.getPatternCS(), null, "ownedWhen", null, 0, 1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRelationCS_OwnedWhere(), this.getPatternCS(), null, "ownedWhere", null, 0, 1, RelationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(templateCSEClass, TemplateCS.class, "TemplateCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTemplateCS_GuardExpression(), theEssentialOCLCSPackage.getExpCS(), null, "guardExpression", null, 0, 1, TemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTemplateCS_OwnedGuardExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedGuardExpression", null, 0, 1, TemplateCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(templateVariableCSEClass, TemplateVariableCS.class, "TemplateVariableCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTemplateVariableCS_Type(), theBaseCSPackage.getTypedRefCS(), null, "type", null, 0, 1, TemplateVariableCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTemplateVariableCS_OwnedType(), theBaseCSPackage.getTypedRefCS(), null, "ownedType", null, 0, 1, TemplateVariableCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(topLevelCSEClass, TopLevelCS.class, "TopLevelCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTopLevelCS_ImportClauses(), this.getUnitCS(), null, "importClauses", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTopLevelCS_Transformations(), this.getTransformationCS(), null, "transformations", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTopLevelCS_OwnedImportClauses(), this.getUnitCS(), null, "ownedImportClauses", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTopLevelCS_OwnedTransformations(), this.getTransformationCS(), null, "ownedTransformations", null, 0, -1, TopLevelCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(transformationCSEClass, TransformationCS.class, "TransformationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTransformationCS_ModelDecls(), this.getModelDeclCS(), null, "modelDecls", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransformationCS_OwnedModelDecls(), this.getModelDeclCS(), null, "ownedModelDecls", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransformationCS_Extends(), theQVTbasePackage.getTransformation(), null, "extends", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTransformationCS_KeyDecls(), this.getKeyDeclCS(), null, "keyDecls", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTransformationCS_Queries(), this.getQueryCS(), null, "queries", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTransformationCS_Relation(), this.getRelationCS(), null, "relation", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransformationCS_OwnedKeyDecls(), this.getKeyDeclCS(), null, "ownedKeyDecls", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransformationCS_OwnedQueries(), this.getQueryCS(), null, "ownedQueries", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransformationCS_OwnedRelations(), this.getRelationCS(), null, "ownedRelations", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(unitCSEClass, UnitCS.class, "UnitCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getUnitCS_Identifier(), thePivotPackage.getElement(), null, "identifier", null, 1, -1, UnitCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUnitCS_Identifiers(), thePivotPackage.getElement(), null, "identifiers", null, 1, -1, UnitCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(varDeclarationCSEClass, VarDeclarationCS.class, "VarDeclarationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getVarDeclarationCS_VarDeclarationIds(), this.getVarDeclarationIdCS(), null, "varDeclarationIds", null, 0, -1, VarDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getVarDeclarationCS_Type(), theBaseCSPackage.getTypedRefCS(), null, "type", null, 0, 1, VarDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVarDeclarationCS_OwnedVarDeclarationIds(), this.getVarDeclarationIdCS(), null, "ownedVarDeclarationIds", null, 0, -1, VarDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVarDeclarationCS_OwnedType(), theBaseCSPackage.getTypedRefCS(), null, "ownedType", null, 0, 1, VarDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(varDeclarationIdCSEClass, VarDeclarationIdCS.class, "VarDeclarationIdCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

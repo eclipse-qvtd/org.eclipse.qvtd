@@ -33,7 +33,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DefaultValueCSImpl#getInitialiser <em>Initialiser</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DefaultValueCSImpl#getOwnedInitExpression <em>Owned Init Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DefaultValueCSImpl#getPropertyId <em>Property Id</em>}</li>
  * </ul>
  *
@@ -41,14 +41,14 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  */
 public class DefaultValueCSImpl extends ModelElementCSImpl implements DefaultValueCS {
 	/**
-	 * The cached value of the '{@link #getInitialiser() <em>Initialiser</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedInitExpression() <em>Owned Init Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInitialiser()
+	 * @see #getOwnedInitExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected ExpCS initialiser;
+	protected ExpCS ownedInitExpression;
 
 	/**
 	 * The cached value of the '{@link #getPropertyId() <em>Property Id</em>}' reference.
@@ -85,8 +85,8 @@ public class DefaultValueCSImpl extends ModelElementCSImpl implements DefaultVal
 	 * @generated
 	 */
 	@Override
-	public ExpCS getInitialiser() {
-		return initialiser;
+	public ExpCS getOwnedInitExpression() {
+		return ownedInitExpression;
 	}
 
 	/**
@@ -94,11 +94,11 @@ public class DefaultValueCSImpl extends ModelElementCSImpl implements DefaultVal
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetInitialiser(ExpCS newInitialiser, NotificationChain msgs) {
-		ExpCS oldInitialiser = initialiser;
-		initialiser = newInitialiser;
+	public NotificationChain basicSetOwnedInitExpression(ExpCS newOwnedInitExpression, NotificationChain msgs) {
+		ExpCS oldOwnedInitExpression = ownedInitExpression;
+		ownedInitExpression = newOwnedInitExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DEFAULT_VALUE_CS__INITIALISER, oldInitialiser, newInitialiser);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DEFAULT_VALUE_CS__OWNED_INIT_EXPRESSION, oldOwnedInitExpression, newOwnedInitExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -110,18 +110,18 @@ public class DefaultValueCSImpl extends ModelElementCSImpl implements DefaultVal
 	 * @generated
 	 */
 	@Override
-	public void setInitialiser(ExpCS newInitialiser) {
-		if (newInitialiser != initialiser) {
+	public void setOwnedInitExpression(ExpCS newOwnedInitExpression) {
+		if (newOwnedInitExpression != ownedInitExpression) {
 			NotificationChain msgs = null;
-			if (initialiser != null)
-				msgs = ((InternalEObject)initialiser).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.DEFAULT_VALUE_CS__INITIALISER, null, msgs);
-			if (newInitialiser != null)
-				msgs = ((InternalEObject)newInitialiser).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.DEFAULT_VALUE_CS__INITIALISER, null, msgs);
-			msgs = basicSetInitialiser(newInitialiser, msgs);
+			if (ownedInitExpression != null)
+				msgs = ((InternalEObject)ownedInitExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.DEFAULT_VALUE_CS__OWNED_INIT_EXPRESSION, null, msgs);
+			if (newOwnedInitExpression != null)
+				msgs = ((InternalEObject)newOwnedInitExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.DEFAULT_VALUE_CS__OWNED_INIT_EXPRESSION, null, msgs);
+			msgs = basicSetOwnedInitExpression(newOwnedInitExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DEFAULT_VALUE_CS__INITIALISER, newInitialiser, newInitialiser));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DEFAULT_VALUE_CS__OWNED_INIT_EXPRESSION, newOwnedInitExpression, newOwnedInitExpression));
 	}
 
 	/**
@@ -172,8 +172,8 @@ public class DefaultValueCSImpl extends ModelElementCSImpl implements DefaultVal
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.DEFAULT_VALUE_CS__INITIALISER:
-				return basicSetInitialiser(null, msgs);
+			case QVTrelationCSPackage.DEFAULT_VALUE_CS__OWNED_INIT_EXPRESSION:
+				return basicSetOwnedInitExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -186,8 +186,8 @@ public class DefaultValueCSImpl extends ModelElementCSImpl implements DefaultVal
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.DEFAULT_VALUE_CS__INITIALISER:
-				return getInitialiser();
+			case QVTrelationCSPackage.DEFAULT_VALUE_CS__OWNED_INIT_EXPRESSION:
+				return getOwnedInitExpression();
 			case QVTrelationCSPackage.DEFAULT_VALUE_CS__PROPERTY_ID:
 				if (resolve) return getPropertyId();
 				return basicGetPropertyId();
@@ -203,8 +203,8 @@ public class DefaultValueCSImpl extends ModelElementCSImpl implements DefaultVal
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.DEFAULT_VALUE_CS__INITIALISER:
-				setInitialiser((ExpCS)newValue);
+			case QVTrelationCSPackage.DEFAULT_VALUE_CS__OWNED_INIT_EXPRESSION:
+				setOwnedInitExpression((ExpCS)newValue);
 				return;
 			case QVTrelationCSPackage.DEFAULT_VALUE_CS__PROPERTY_ID:
 				setPropertyId((Variable)newValue);
@@ -221,8 +221,8 @@ public class DefaultValueCSImpl extends ModelElementCSImpl implements DefaultVal
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.DEFAULT_VALUE_CS__INITIALISER:
-				setInitialiser((ExpCS)null);
+			case QVTrelationCSPackage.DEFAULT_VALUE_CS__OWNED_INIT_EXPRESSION:
+				setOwnedInitExpression((ExpCS)null);
 				return;
 			case QVTrelationCSPackage.DEFAULT_VALUE_CS__PROPERTY_ID:
 				setPropertyId((Variable)null);
@@ -239,8 +239,8 @@ public class DefaultValueCSImpl extends ModelElementCSImpl implements DefaultVal
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.DEFAULT_VALUE_CS__INITIALISER:
-				return initialiser != null;
+			case QVTrelationCSPackage.DEFAULT_VALUE_CS__OWNED_INIT_EXPRESSION:
+				return ownedInitExpression != null;
 			case QVTrelationCSPackage.DEFAULT_VALUE_CS__PROPERTY_ID:
 				return propertyId != null;
 		}

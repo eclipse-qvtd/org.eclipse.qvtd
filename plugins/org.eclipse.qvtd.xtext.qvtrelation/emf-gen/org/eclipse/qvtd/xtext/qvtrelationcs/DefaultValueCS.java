@@ -23,7 +23,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS#getInitialiser <em>Initialiser</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS#getOwnedInitExpression <em>Owned Init Expression</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS#getPropertyId <em>Property Id</em>}</li>
  * </ul>
  *
@@ -33,30 +33,30 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  */
 public interface DefaultValueCS extends ModelElementCS {
 	/**
-	 * Returns the value of the '<em><b>Initialiser</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Init Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Initialiser</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Init Expression</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Initialiser</em>' containment reference.
-	 * @see #setInitialiser(ExpCS)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDefaultValueCS_Initialiser()
+	 * @return the value of the '<em>Owned Init Expression</em>' containment reference.
+	 * @see #setOwnedInitExpression(ExpCS)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDefaultValueCS_OwnedInitExpression()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	ExpCS getInitialiser();
+	ExpCS getOwnedInitExpression();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS#getInitialiser <em>Initialiser</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DefaultValueCS#getOwnedInitExpression <em>Owned Init Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Initialiser</em>' containment reference.
-	 * @see #getInitialiser()
+	 * @param value the new value of the '<em>Owned Init Expression</em>' containment reference.
+	 * @see #getOwnedInitExpression()
 	 * @generated
 	 */
-	void setInitialiser(ExpCS value);
+	void setOwnedInitExpression(ExpCS value);
 
 	/**
 	 * Returns the value of the '<em><b>Property Id</b></em>' reference.

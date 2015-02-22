@@ -22,7 +22,7 @@ import org.eclipse.ocl.xtext.basecs.ModelElementCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.PatternCS#getPredicates <em>Predicates</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.PatternCS#getOwnedPredicates <em>Owned Predicates</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getPatternCS()
@@ -31,19 +31,19 @@ import org.eclipse.ocl.xtext.basecs.ModelElementCS;
  */
 public interface PatternCS extends ModelElementCS {
 	/**
-	 * Returns the value of the '<em><b>Predicates</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Predicates</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcs.PredicateCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Predicates</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Predicates</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Predicates</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getPatternCS_Predicates()
+	 * @return the value of the '<em>Owned Predicates</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getPatternCS_OwnedPredicates()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<PredicateCS> getPredicates();
+	EList<PredicateCS> getOwnedPredicates();
 
 } // PatternCS

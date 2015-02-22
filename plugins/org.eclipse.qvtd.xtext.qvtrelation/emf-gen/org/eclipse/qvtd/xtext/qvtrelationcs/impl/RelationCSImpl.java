@@ -40,36 +40,36 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#isTop <em>Top</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#isIsTop <em>Is Top</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#getOverrides <em>Overrides</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#getVarDeclarations <em>Var Declarations</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#getDomains <em>Domains</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#getWhen <em>When</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#getWhere <em>Where</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#getOwnedVarDeclarations <em>Owned Var Declarations</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#getOwnedDomains <em>Owned Domains</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#getOwnedWhen <em>Owned When</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#getOwnedWhere <em>Owned Where</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	/**
-	 * The default value of the '{@link #isTop() <em>Top</em>}' attribute.
+	 * The default value of the '{@link #isIsTop() <em>Is Top</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isTop()
+	 * @see #isIsTop()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean TOP_EDEFAULT = false;
+	protected static final boolean IS_TOP_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isTop() <em>Top</em>}' attribute.
+	 * The cached value of the '{@link #isIsTop() <em>Is Top</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isTop()
+	 * @see #isIsTop()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean top = TOP_EDEFAULT;
+	protected boolean isTop = IS_TOP_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getOverrides() <em>Overrides</em>}' reference.
@@ -82,44 +82,44 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	protected Relation overrides;
 
 	/**
-	 * The cached value of the '{@link #getVarDeclarations() <em>Var Declarations</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedVarDeclarations() <em>Owned Var Declarations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getVarDeclarations()
+	 * @see #getOwnedVarDeclarations()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<VarDeclarationCS> varDeclarations;
+	protected EList<VarDeclarationCS> ownedVarDeclarations;
 
 	/**
-	 * The cached value of the '{@link #getDomains() <em>Domains</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedDomains() <em>Owned Domains</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDomains()
+	 * @see #getOwnedDomains()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AbstractDomainCS> domains;
+	protected EList<AbstractDomainCS> ownedDomains;
 
 	/**
-	 * The cached value of the '{@link #getWhen() <em>When</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedWhen() <em>Owned When</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getWhen()
+	 * @see #getOwnedWhen()
 	 * @generated
 	 * @ordered
 	 */
-	protected PatternCS when;
+	protected PatternCS ownedWhen;
 
 	/**
-	 * The cached value of the '{@link #getWhere() <em>Where</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedWhere() <em>Owned Where</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getWhere()
+	 * @see #getOwnedWhere()
 	 * @generated
 	 * @ordered
 	 */
-	protected PatternCS where;
+	protected PatternCS ownedWhere;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -146,8 +146,8 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	 * @generated
 	 */
 	@Override
-	public boolean isTop() {
-		return top;
+	public boolean isIsTop() {
+		return isTop;
 	}
 
 	/**
@@ -156,11 +156,11 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	 * @generated
 	 */
 	@Override
-	public void setTop(boolean newTop) {
-		boolean oldTop = top;
-		top = newTop;
+	public void setIsTop(boolean newIsTop) {
+		boolean oldIsTop = isTop;
+		isTop = newIsTop;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.RELATION_CS__TOP, oldTop, top));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.RELATION_CS__IS_TOP, oldIsTop, isTop));
 	}
 
 	/**
@@ -209,11 +209,11 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	 * @generated
 	 */
 	@Override
-	public EList<VarDeclarationCS> getVarDeclarations() {
-		if (varDeclarations == null) {
-			varDeclarations = new EObjectContainmentEList<VarDeclarationCS>(VarDeclarationCS.class, this, QVTrelationCSPackage.RELATION_CS__VAR_DECLARATIONS);
+	public EList<VarDeclarationCS> getOwnedVarDeclarations() {
+		if (ownedVarDeclarations == null) {
+			ownedVarDeclarations = new EObjectContainmentEList<VarDeclarationCS>(VarDeclarationCS.class, this, QVTrelationCSPackage.RELATION_CS__OWNED_VAR_DECLARATIONS);
 		}
-		return varDeclarations;
+		return ownedVarDeclarations;
 	}
 
 	/**
@@ -222,11 +222,11 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	 * @generated
 	 */
 	@Override
-	public EList<AbstractDomainCS> getDomains() {
-		if (domains == null) {
-			domains = new EObjectContainmentEList<AbstractDomainCS>(AbstractDomainCS.class, this, QVTrelationCSPackage.RELATION_CS__DOMAINS);
+	public EList<AbstractDomainCS> getOwnedDomains() {
+		if (ownedDomains == null) {
+			ownedDomains = new EObjectContainmentEList<AbstractDomainCS>(AbstractDomainCS.class, this, QVTrelationCSPackage.RELATION_CS__OWNED_DOMAINS);
 		}
-		return domains;
+		return ownedDomains;
 	}
 
 	/**
@@ -235,8 +235,8 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	 * @generated
 	 */
 	@Override
-	public PatternCS getWhen() {
-		return when;
+	public PatternCS getOwnedWhen() {
+		return ownedWhen;
 	}
 
 	/**
@@ -244,11 +244,11 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetWhen(PatternCS newWhen, NotificationChain msgs) {
-		PatternCS oldWhen = when;
-		when = newWhen;
+	public NotificationChain basicSetOwnedWhen(PatternCS newOwnedWhen, NotificationChain msgs) {
+		PatternCS oldOwnedWhen = ownedWhen;
+		ownedWhen = newOwnedWhen;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.RELATION_CS__WHEN, oldWhen, newWhen);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.RELATION_CS__OWNED_WHEN, oldOwnedWhen, newOwnedWhen);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -260,18 +260,18 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	 * @generated
 	 */
 	@Override
-	public void setWhen(PatternCS newWhen) {
-		if (newWhen != when) {
+	public void setOwnedWhen(PatternCS newOwnedWhen) {
+		if (newOwnedWhen != ownedWhen) {
 			NotificationChain msgs = null;
-			if (when != null)
-				msgs = ((InternalEObject)when).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.RELATION_CS__WHEN, null, msgs);
-			if (newWhen != null)
-				msgs = ((InternalEObject)newWhen).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.RELATION_CS__WHEN, null, msgs);
-			msgs = basicSetWhen(newWhen, msgs);
+			if (ownedWhen != null)
+				msgs = ((InternalEObject)ownedWhen).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.RELATION_CS__OWNED_WHEN, null, msgs);
+			if (newOwnedWhen != null)
+				msgs = ((InternalEObject)newOwnedWhen).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.RELATION_CS__OWNED_WHEN, null, msgs);
+			msgs = basicSetOwnedWhen(newOwnedWhen, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.RELATION_CS__WHEN, newWhen, newWhen));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.RELATION_CS__OWNED_WHEN, newOwnedWhen, newOwnedWhen));
 	}
 
 	/**
@@ -280,8 +280,8 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	 * @generated
 	 */
 	@Override
-	public PatternCS getWhere() {
-		return where;
+	public PatternCS getOwnedWhere() {
+		return ownedWhere;
 	}
 
 	/**
@@ -289,11 +289,11 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetWhere(PatternCS newWhere, NotificationChain msgs) {
-		PatternCS oldWhere = where;
-		where = newWhere;
+	public NotificationChain basicSetOwnedWhere(PatternCS newOwnedWhere, NotificationChain msgs) {
+		PatternCS oldOwnedWhere = ownedWhere;
+		ownedWhere = newOwnedWhere;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.RELATION_CS__WHERE, oldWhere, newWhere);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.RELATION_CS__OWNED_WHERE, oldOwnedWhere, newOwnedWhere);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -305,18 +305,18 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	 * @generated
 	 */
 	@Override
-	public void setWhere(PatternCS newWhere) {
-		if (newWhere != where) {
+	public void setOwnedWhere(PatternCS newOwnedWhere) {
+		if (newOwnedWhere != ownedWhere) {
 			NotificationChain msgs = null;
-			if (where != null)
-				msgs = ((InternalEObject)where).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.RELATION_CS__WHERE, null, msgs);
-			if (newWhere != null)
-				msgs = ((InternalEObject)newWhere).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.RELATION_CS__WHERE, null, msgs);
-			msgs = basicSetWhere(newWhere, msgs);
+			if (ownedWhere != null)
+				msgs = ((InternalEObject)ownedWhere).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.RELATION_CS__OWNED_WHERE, null, msgs);
+			if (newOwnedWhere != null)
+				msgs = ((InternalEObject)newOwnedWhere).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.RELATION_CS__OWNED_WHERE, null, msgs);
+			msgs = basicSetOwnedWhere(newOwnedWhere, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.RELATION_CS__WHERE, newWhere, newWhere));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.RELATION_CS__OWNED_WHERE, newOwnedWhere, newOwnedWhere));
 	}
 
 	/**
@@ -337,14 +337,14 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.RELATION_CS__VAR_DECLARATIONS:
-				return ((InternalEList<?>)getVarDeclarations()).basicRemove(otherEnd, msgs);
-			case QVTrelationCSPackage.RELATION_CS__DOMAINS:
-				return ((InternalEList<?>)getDomains()).basicRemove(otherEnd, msgs);
-			case QVTrelationCSPackage.RELATION_CS__WHEN:
-				return basicSetWhen(null, msgs);
-			case QVTrelationCSPackage.RELATION_CS__WHERE:
-				return basicSetWhere(null, msgs);
+			case QVTrelationCSPackage.RELATION_CS__OWNED_VAR_DECLARATIONS:
+				return ((InternalEList<?>)getOwnedVarDeclarations()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSPackage.RELATION_CS__OWNED_DOMAINS:
+				return ((InternalEList<?>)getOwnedDomains()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSPackage.RELATION_CS__OWNED_WHEN:
+				return basicSetOwnedWhen(null, msgs);
+			case QVTrelationCSPackage.RELATION_CS__OWNED_WHERE:
+				return basicSetOwnedWhere(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -357,19 +357,19 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.RELATION_CS__TOP:
-				return isTop();
+			case QVTrelationCSPackage.RELATION_CS__IS_TOP:
+				return isIsTop();
 			case QVTrelationCSPackage.RELATION_CS__OVERRIDES:
 				if (resolve) return getOverrides();
 				return basicGetOverrides();
-			case QVTrelationCSPackage.RELATION_CS__VAR_DECLARATIONS:
-				return getVarDeclarations();
-			case QVTrelationCSPackage.RELATION_CS__DOMAINS:
-				return getDomains();
-			case QVTrelationCSPackage.RELATION_CS__WHEN:
-				return getWhen();
-			case QVTrelationCSPackage.RELATION_CS__WHERE:
-				return getWhere();
+			case QVTrelationCSPackage.RELATION_CS__OWNED_VAR_DECLARATIONS:
+				return getOwnedVarDeclarations();
+			case QVTrelationCSPackage.RELATION_CS__OWNED_DOMAINS:
+				return getOwnedDomains();
+			case QVTrelationCSPackage.RELATION_CS__OWNED_WHEN:
+				return getOwnedWhen();
+			case QVTrelationCSPackage.RELATION_CS__OWNED_WHERE:
+				return getOwnedWhere();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -383,25 +383,25 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.RELATION_CS__TOP:
-				setTop((Boolean)newValue);
+			case QVTrelationCSPackage.RELATION_CS__IS_TOP:
+				setIsTop((Boolean)newValue);
 				return;
 			case QVTrelationCSPackage.RELATION_CS__OVERRIDES:
 				setOverrides((Relation)newValue);
 				return;
-			case QVTrelationCSPackage.RELATION_CS__VAR_DECLARATIONS:
-				getVarDeclarations().clear();
-				getVarDeclarations().addAll((Collection<? extends VarDeclarationCS>)newValue);
+			case QVTrelationCSPackage.RELATION_CS__OWNED_VAR_DECLARATIONS:
+				getOwnedVarDeclarations().clear();
+				getOwnedVarDeclarations().addAll((Collection<? extends VarDeclarationCS>)newValue);
 				return;
-			case QVTrelationCSPackage.RELATION_CS__DOMAINS:
-				getDomains().clear();
-				getDomains().addAll((Collection<? extends AbstractDomainCS>)newValue);
+			case QVTrelationCSPackage.RELATION_CS__OWNED_DOMAINS:
+				getOwnedDomains().clear();
+				getOwnedDomains().addAll((Collection<? extends AbstractDomainCS>)newValue);
 				return;
-			case QVTrelationCSPackage.RELATION_CS__WHEN:
-				setWhen((PatternCS)newValue);
+			case QVTrelationCSPackage.RELATION_CS__OWNED_WHEN:
+				setOwnedWhen((PatternCS)newValue);
 				return;
-			case QVTrelationCSPackage.RELATION_CS__WHERE:
-				setWhere((PatternCS)newValue);
+			case QVTrelationCSPackage.RELATION_CS__OWNED_WHERE:
+				setOwnedWhere((PatternCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -415,23 +415,23 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.RELATION_CS__TOP:
-				setTop(TOP_EDEFAULT);
+			case QVTrelationCSPackage.RELATION_CS__IS_TOP:
+				setIsTop(IS_TOP_EDEFAULT);
 				return;
 			case QVTrelationCSPackage.RELATION_CS__OVERRIDES:
 				setOverrides((Relation)null);
 				return;
-			case QVTrelationCSPackage.RELATION_CS__VAR_DECLARATIONS:
-				getVarDeclarations().clear();
+			case QVTrelationCSPackage.RELATION_CS__OWNED_VAR_DECLARATIONS:
+				getOwnedVarDeclarations().clear();
 				return;
-			case QVTrelationCSPackage.RELATION_CS__DOMAINS:
-				getDomains().clear();
+			case QVTrelationCSPackage.RELATION_CS__OWNED_DOMAINS:
+				getOwnedDomains().clear();
 				return;
-			case QVTrelationCSPackage.RELATION_CS__WHEN:
-				setWhen((PatternCS)null);
+			case QVTrelationCSPackage.RELATION_CS__OWNED_WHEN:
+				setOwnedWhen((PatternCS)null);
 				return;
-			case QVTrelationCSPackage.RELATION_CS__WHERE:
-				setWhere((PatternCS)null);
+			case QVTrelationCSPackage.RELATION_CS__OWNED_WHERE:
+				setOwnedWhere((PatternCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -445,18 +445,18 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.RELATION_CS__TOP:
-				return top != TOP_EDEFAULT;
+			case QVTrelationCSPackage.RELATION_CS__IS_TOP:
+				return isTop != IS_TOP_EDEFAULT;
 			case QVTrelationCSPackage.RELATION_CS__OVERRIDES:
 				return overrides != null;
-			case QVTrelationCSPackage.RELATION_CS__VAR_DECLARATIONS:
-				return varDeclarations != null && !varDeclarations.isEmpty();
-			case QVTrelationCSPackage.RELATION_CS__DOMAINS:
-				return domains != null && !domains.isEmpty();
-			case QVTrelationCSPackage.RELATION_CS__WHEN:
-				return when != null;
-			case QVTrelationCSPackage.RELATION_CS__WHERE:
-				return where != null;
+			case QVTrelationCSPackage.RELATION_CS__OWNED_VAR_DECLARATIONS:
+				return ownedVarDeclarations != null && !ownedVarDeclarations.isEmpty();
+			case QVTrelationCSPackage.RELATION_CS__OWNED_DOMAINS:
+				return ownedDomains != null && !ownedDomains.isEmpty();
+			case QVTrelationCSPackage.RELATION_CS__OWNED_WHEN:
+				return ownedWhen != null;
+			case QVTrelationCSPackage.RELATION_CS__OWNED_WHERE:
+				return ownedWhere != null;
 		}
 		return super.eIsSet(featureID);
 	}

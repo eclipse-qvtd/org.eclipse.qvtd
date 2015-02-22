@@ -24,9 +24,9 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS#getPathName <em>Path Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS#getOwnedPathName <em>Owned Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS#getPropertyIds <em>Property Ids</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS#getOppositePropertyIds <em>Opposite Property Ids</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS#getOwnedOppositePropertyIds <em>Owned Opposite Property Ids</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS#getClassId <em>Class Id</em>}</li>
  * </ul>
  *
@@ -36,30 +36,30 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
  */
 public interface KeyDeclCS extends ModelElementCS {
 	/**
-	 * Returns the value of the '<em><b>Path Name</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Path Name</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Path Name</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Path Name</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Path Name</em>' containment reference.
-	 * @see #setPathName(PathNameCS)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getKeyDeclCS_PathName()
+	 * @return the value of the '<em>Owned Path Name</em>' containment reference.
+	 * @see #setOwnedPathName(PathNameCS)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getKeyDeclCS_OwnedPathName()
 	 * @model containment="true"
 	 * @generated
 	 */
-	PathNameCS getPathName();
+	PathNameCS getOwnedPathName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS#getPathName <em>Path Name</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.KeyDeclCS#getOwnedPathName <em>Owned Path Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Path Name</em>' containment reference.
-	 * @see #getPathName()
+	 * @param value the new value of the '<em>Owned Path Name</em>' containment reference.
+	 * @see #getOwnedPathName()
 	 * @generated
 	 */
-	void setPathName(PathNameCS value);
+	void setOwnedPathName(PathNameCS value);
 
 	/**
 	 * Returns the value of the '<em><b>Property Ids</b></em>' reference list.
@@ -78,20 +78,20 @@ public interface KeyDeclCS extends ModelElementCS {
 	EList<Property> getPropertyIds();
 
 	/**
-	 * Returns the value of the '<em><b>Opposite Property Ids</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Opposite Property Ids</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.ocl.xtext.basecs.PathNameCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Opposite Property Ids</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Opposite Property Ids</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Opposite Property Ids</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getKeyDeclCS_OppositePropertyIds()
+	 * @return the value of the '<em>Owned Opposite Property Ids</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getKeyDeclCS_OwnedOppositePropertyIds()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<PathNameCS> getOppositePropertyIds();
+	EList<PathNameCS> getOwnedOppositePropertyIds();
 
 	/**
 	 * Returns the value of the '<em><b>Class Id</b></em>' reference.

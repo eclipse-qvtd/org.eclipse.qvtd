@@ -535,26 +535,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "ruleDomainPatternCS"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:182:1: ruleDomainPatternCS : ( ( rule__DomainPatternCS__TemplateAssignment ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:182:1: ruleDomainPatternCS : ( ( rule__DomainPatternCS__OwnedTemplateAssignment ) ) ;
     public final void ruleDomainPatternCS() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:186:2: ( ( ( rule__DomainPatternCS__TemplateAssignment ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:187:1: ( ( rule__DomainPatternCS__TemplateAssignment ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:186:2: ( ( ( rule__DomainPatternCS__OwnedTemplateAssignment ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:187:1: ( ( rule__DomainPatternCS__OwnedTemplateAssignment ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:187:1: ( ( rule__DomainPatternCS__TemplateAssignment ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:188:1: ( rule__DomainPatternCS__TemplateAssignment )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:187:1: ( ( rule__DomainPatternCS__OwnedTemplateAssignment ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:188:1: ( rule__DomainPatternCS__OwnedTemplateAssignment )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDomainPatternCSAccess().getTemplateAssignment()); 
+               before(grammarAccess.getDomainPatternCSAccess().getOwnedTemplateAssignment()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:189:1: ( rule__DomainPatternCS__TemplateAssignment )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:189:2: rule__DomainPatternCS__TemplateAssignment
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:189:1: ( rule__DomainPatternCS__OwnedTemplateAssignment )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:189:2: rule__DomainPatternCS__OwnedTemplateAssignment
             {
-            pushFollow(FollowSets000.FOLLOW_rule__DomainPatternCS__TemplateAssignment_in_ruleDomainPatternCS340);
-            rule__DomainPatternCS__TemplateAssignment();
+            pushFollow(FollowSets000.FOLLOW_rule__DomainPatternCS__OwnedTemplateAssignment_in_ruleDomainPatternCS340);
+            rule__DomainPatternCS__OwnedTemplateAssignment();
 
             state._fsp--;
             if (state.failed) return ;
@@ -562,7 +562,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDomainPatternCSAccess().getTemplateAssignment()); 
+               after(grammarAccess.getDomainPatternCSAccess().getOwnedTemplateAssignment()); 
             }
 
             }
@@ -8810,9 +8810,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__TopLevelCS__Alternatives_0"
 
 
-    // $ANTLR start "rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_0_0"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:2926:1: rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_0_0 : ( ( ruleTemplateCS ) | ( ruleElementTemplateCS ) );
-    public final void rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_0_0() throws RecognitionException {
+    // $ANTLR start "rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_0_0"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:2926:1: rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_0_0 : ( ( ruleTemplateCS ) | ( ruleElementTemplateCS ) );
+    public final void rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -8828,15 +8828,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:2932:1: ruleTemplateCS
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getCollectionTemplateCSAccess().getMemberIdentifiersTemplateCSParserRuleCall_4_0_0_0()); 
+                       before(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersTemplateCSParserRuleCall_4_0_0_0()); 
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTemplateCS_in_rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_0_06201);
+                    pushFollow(FollowSets000.FOLLOW_ruleTemplateCS_in_rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_0_06201);
                     ruleTemplateCS();
 
                     state._fsp--;
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getCollectionTemplateCSAccess().getMemberIdentifiersTemplateCSParserRuleCall_4_0_0_0()); 
+                       after(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersTemplateCSParserRuleCall_4_0_0_0()); 
                     }
 
                     }
@@ -8851,15 +8851,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:2938:1: ruleElementTemplateCS
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getCollectionTemplateCSAccess().getMemberIdentifiersElementTemplateCSParserRuleCall_4_0_0_1()); 
+                       before(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersElementTemplateCSParserRuleCall_4_0_0_1()); 
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleElementTemplateCS_in_rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_0_06218);
+                    pushFollow(FollowSets000.FOLLOW_ruleElementTemplateCS_in_rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_0_06218);
                     ruleElementTemplateCS();
 
                     state._fsp--;
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getCollectionTemplateCSAccess().getMemberIdentifiersElementTemplateCSParserRuleCall_4_0_0_1()); 
+                       after(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersElementTemplateCSParserRuleCall_4_0_0_1()); 
                     }
 
                     }
@@ -8881,12 +8881,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_0_0"
+    // $ANTLR end "rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_0_0"
 
 
-    // $ANTLR start "rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_1_1_0"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:2948:1: rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_1_1_0 : ( ( ruleTemplateCS ) | ( ruleElementTemplateCS ) );
-    public final void rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_1_1_0() throws RecognitionException {
+    // $ANTLR start "rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_1_1_0"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:2948:1: rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_1_1_0 : ( ( ruleTemplateCS ) | ( ruleElementTemplateCS ) );
+    public final void rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_1_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -8902,15 +8902,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:2954:1: ruleTemplateCS
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getCollectionTemplateCSAccess().getMemberIdentifiersTemplateCSParserRuleCall_4_1_1_0_0()); 
+                       before(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersTemplateCSParserRuleCall_4_1_1_0_0()); 
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTemplateCS_in_rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_1_1_06250);
+                    pushFollow(FollowSets000.FOLLOW_ruleTemplateCS_in_rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_1_1_06250);
                     ruleTemplateCS();
 
                     state._fsp--;
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getCollectionTemplateCSAccess().getMemberIdentifiersTemplateCSParserRuleCall_4_1_1_0_0()); 
+                       after(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersTemplateCSParserRuleCall_4_1_1_0_0()); 
                     }
 
                     }
@@ -8925,15 +8925,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:2960:1: ruleElementTemplateCS
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getCollectionTemplateCSAccess().getMemberIdentifiersElementTemplateCSParserRuleCall_4_1_1_0_1()); 
+                       before(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersElementTemplateCSParserRuleCall_4_1_1_0_1()); 
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleElementTemplateCS_in_rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_1_1_06267);
+                    pushFollow(FollowSets000.FOLLOW_ruleElementTemplateCS_in_rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_1_1_06267);
                     ruleElementTemplateCS();
 
                     state._fsp--;
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getCollectionTemplateCSAccess().getMemberIdentifiersElementTemplateCSParserRuleCall_4_1_1_0_1()); 
+                       after(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersElementTemplateCSParserRuleCall_4_1_1_0_1()); 
                     }
 
                     }
@@ -8955,7 +8955,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_1_1_0"
+    // $ANTLR end "rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_1_1_0"
 
 
     // $ANTLR start "rule__CollectionTemplateCS__Alternatives_4_3"
@@ -9049,13 +9049,13 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__DomainCS__Alternatives_0"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:2994:1: rule__DomainCS__Alternatives_0 : ( ( ( rule__DomainCS__CheckonlyAssignment_0_0 ) ) | ( ( rule__DomainCS__EnforceAssignment_0_1 ) ) | ( 'replace' ) );
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:2994:1: rule__DomainCS__Alternatives_0 : ( ( ( rule__DomainCS__IsCheckonlyAssignment_0_0 ) ) | ( ( rule__DomainCS__IsEnforceAssignment_0_1 ) ) | ( 'replace' ) );
     public final void rule__DomainCS__Alternatives_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:2998:1: ( ( ( rule__DomainCS__CheckonlyAssignment_0_0 ) ) | ( ( rule__DomainCS__EnforceAssignment_0_1 ) ) | ( 'replace' ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:2998:1: ( ( ( rule__DomainCS__IsCheckonlyAssignment_0_0 ) ) | ( ( rule__DomainCS__IsEnforceAssignment_0_1 ) ) | ( 'replace' ) )
             int alt6=3;
             switch ( input.LA(1) ) {
             case 19:
@@ -9083,19 +9083,19 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
             switch (alt6) {
                 case 1 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:2999:1: ( ( rule__DomainCS__CheckonlyAssignment_0_0 ) )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:2999:1: ( ( rule__DomainCS__IsCheckonlyAssignment_0_0 ) )
                     {
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:2999:1: ( ( rule__DomainCS__CheckonlyAssignment_0_0 ) )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3000:1: ( rule__DomainCS__CheckonlyAssignment_0_0 )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:2999:1: ( ( rule__DomainCS__IsCheckonlyAssignment_0_0 ) )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3000:1: ( rule__DomainCS__IsCheckonlyAssignment_0_0 )
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getDomainCSAccess().getCheckonlyAssignment_0_0()); 
+                       before(grammarAccess.getDomainCSAccess().getIsCheckonlyAssignment_0_0()); 
                     }
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3001:1: ( rule__DomainCS__CheckonlyAssignment_0_0 )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3001:2: rule__DomainCS__CheckonlyAssignment_0_0
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3001:1: ( rule__DomainCS__IsCheckonlyAssignment_0_0 )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3001:2: rule__DomainCS__IsCheckonlyAssignment_0_0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__DomainCS__CheckonlyAssignment_0_0_in_rule__DomainCS__Alternatives_06352);
-                    rule__DomainCS__CheckonlyAssignment_0_0();
+                    pushFollow(FollowSets000.FOLLOW_rule__DomainCS__IsCheckonlyAssignment_0_0_in_rule__DomainCS__Alternatives_06352);
+                    rule__DomainCS__IsCheckonlyAssignment_0_0();
 
                     state._fsp--;
                     if (state.failed) return ;
@@ -9103,7 +9103,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     }
 
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getDomainCSAccess().getCheckonlyAssignment_0_0()); 
+                       after(grammarAccess.getDomainCSAccess().getIsCheckonlyAssignment_0_0()); 
                     }
 
                     }
@@ -9112,19 +9112,19 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 2 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3005:6: ( ( rule__DomainCS__EnforceAssignment_0_1 ) )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3005:6: ( ( rule__DomainCS__IsEnforceAssignment_0_1 ) )
                     {
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3005:6: ( ( rule__DomainCS__EnforceAssignment_0_1 ) )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3006:1: ( rule__DomainCS__EnforceAssignment_0_1 )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3005:6: ( ( rule__DomainCS__IsEnforceAssignment_0_1 ) )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3006:1: ( rule__DomainCS__IsEnforceAssignment_0_1 )
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getDomainCSAccess().getEnforceAssignment_0_1()); 
+                       before(grammarAccess.getDomainCSAccess().getIsEnforceAssignment_0_1()); 
                     }
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3007:1: ( rule__DomainCS__EnforceAssignment_0_1 )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3007:2: rule__DomainCS__EnforceAssignment_0_1
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3007:1: ( rule__DomainCS__IsEnforceAssignment_0_1 )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3007:2: rule__DomainCS__IsEnforceAssignment_0_1
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__DomainCS__EnforceAssignment_0_1_in_rule__DomainCS__Alternatives_06370);
-                    rule__DomainCS__EnforceAssignment_0_1();
+                    pushFollow(FollowSets000.FOLLOW_rule__DomainCS__IsEnforceAssignment_0_1_in_rule__DomainCS__Alternatives_06370);
+                    rule__DomainCS__IsEnforceAssignment_0_1();
 
                     state._fsp--;
                     if (state.failed) return ;
@@ -9132,7 +9132,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     }
 
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getDomainCSAccess().getEnforceAssignment_0_1()); 
+                       after(grammarAccess.getDomainCSAccess().getIsEnforceAssignment_0_1()); 
                     }
 
                     }
@@ -9809,13 +9809,13 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__RelationCS__Alternatives_6"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3158:1: rule__RelationCS__Alternatives_6 : ( ( ( rule__RelationCS__DomainsAssignment_6_0 ) ) | ( ( rule__RelationCS__DomainsAssignment_6_1 ) ) );
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3158:1: rule__RelationCS__Alternatives_6 : ( ( ( rule__RelationCS__OwnedDomainsAssignment_6_0 ) ) | ( ( rule__RelationCS__OwnedDomainsAssignment_6_1 ) ) );
     public final void rule__RelationCS__Alternatives_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3162:1: ( ( ( rule__RelationCS__DomainsAssignment_6_0 ) ) | ( ( rule__RelationCS__DomainsAssignment_6_1 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3162:1: ( ( ( rule__RelationCS__OwnedDomainsAssignment_6_0 ) ) | ( ( rule__RelationCS__OwnedDomainsAssignment_6_1 ) ) )
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -9834,19 +9834,19 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
             switch (alt13) {
                 case 1 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3163:1: ( ( rule__RelationCS__DomainsAssignment_6_0 ) )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3163:1: ( ( rule__RelationCS__OwnedDomainsAssignment_6_0 ) )
                     {
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3163:1: ( ( rule__RelationCS__DomainsAssignment_6_0 ) )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3164:1: ( rule__RelationCS__DomainsAssignment_6_0 )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3163:1: ( ( rule__RelationCS__OwnedDomainsAssignment_6_0 ) )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3164:1: ( rule__RelationCS__OwnedDomainsAssignment_6_0 )
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getRelationCSAccess().getDomainsAssignment_6_0()); 
+                       before(grammarAccess.getRelationCSAccess().getOwnedDomainsAssignment_6_0()); 
                     }
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3165:1: ( rule__RelationCS__DomainsAssignment_6_0 )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3165:2: rule__RelationCS__DomainsAssignment_6_0
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3165:1: ( rule__RelationCS__OwnedDomainsAssignment_6_0 )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3165:2: rule__RelationCS__OwnedDomainsAssignment_6_0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__RelationCS__DomainsAssignment_6_0_in_rule__RelationCS__Alternatives_66731);
-                    rule__RelationCS__DomainsAssignment_6_0();
+                    pushFollow(FollowSets000.FOLLOW_rule__RelationCS__OwnedDomainsAssignment_6_0_in_rule__RelationCS__Alternatives_66731);
+                    rule__RelationCS__OwnedDomainsAssignment_6_0();
 
                     state._fsp--;
                     if (state.failed) return ;
@@ -9854,7 +9854,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     }
 
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getRelationCSAccess().getDomainsAssignment_6_0()); 
+                       after(grammarAccess.getRelationCSAccess().getOwnedDomainsAssignment_6_0()); 
                     }
 
                     }
@@ -9863,19 +9863,19 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 2 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3169:6: ( ( rule__RelationCS__DomainsAssignment_6_1 ) )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3169:6: ( ( rule__RelationCS__OwnedDomainsAssignment_6_1 ) )
                     {
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3169:6: ( ( rule__RelationCS__DomainsAssignment_6_1 ) )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3170:1: ( rule__RelationCS__DomainsAssignment_6_1 )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3169:6: ( ( rule__RelationCS__OwnedDomainsAssignment_6_1 ) )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3170:1: ( rule__RelationCS__OwnedDomainsAssignment_6_1 )
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getRelationCSAccess().getDomainsAssignment_6_1()); 
+                       before(grammarAccess.getRelationCSAccess().getOwnedDomainsAssignment_6_1()); 
                     }
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3171:1: ( rule__RelationCS__DomainsAssignment_6_1 )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3171:2: rule__RelationCS__DomainsAssignment_6_1
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3171:1: ( rule__RelationCS__OwnedDomainsAssignment_6_1 )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3171:2: rule__RelationCS__OwnedDomainsAssignment_6_1
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__RelationCS__DomainsAssignment_6_1_in_rule__RelationCS__Alternatives_66749);
-                    rule__RelationCS__DomainsAssignment_6_1();
+                    pushFollow(FollowSets000.FOLLOW_rule__RelationCS__OwnedDomainsAssignment_6_1_in_rule__RelationCS__Alternatives_66749);
+                    rule__RelationCS__OwnedDomainsAssignment_6_1();
 
                     state._fsp--;
                     if (state.failed) return ;
@@ -9883,7 +9883,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     }
 
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getRelationCSAccess().getDomainsAssignment_6_1()); 
+                       after(grammarAccess.getRelationCSAccess().getOwnedDomainsAssignment_6_1()); 
                     }
 
                     }
@@ -9983,13 +9983,13 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TransformationCS__Alternatives_9"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3202:1: rule__TransformationCS__Alternatives_9 : ( ( ( rule__TransformationCS__RelationAssignment_9_0 ) ) | ( ( rule__TransformationCS__QueriesAssignment_9_1 ) ) );
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3202:1: rule__TransformationCS__Alternatives_9 : ( ( ( rule__TransformationCS__OwnedRelationsAssignment_9_0 ) ) | ( ( rule__TransformationCS__OwnedQueriesAssignment_9_1 ) ) );
     public final void rule__TransformationCS__Alternatives_9() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3206:1: ( ( ( rule__TransformationCS__RelationAssignment_9_0 ) ) | ( ( rule__TransformationCS__QueriesAssignment_9_1 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3206:1: ( ( ( rule__TransformationCS__OwnedRelationsAssignment_9_0 ) ) | ( ( rule__TransformationCS__OwnedQueriesAssignment_9_1 ) ) )
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -10008,19 +10008,19 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
             switch (alt15) {
                 case 1 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3207:1: ( ( rule__TransformationCS__RelationAssignment_9_0 ) )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3207:1: ( ( rule__TransformationCS__OwnedRelationsAssignment_9_0 ) )
                     {
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3207:1: ( ( rule__TransformationCS__RelationAssignment_9_0 ) )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3208:1: ( rule__TransformationCS__RelationAssignment_9_0 )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3207:1: ( ( rule__TransformationCS__OwnedRelationsAssignment_9_0 ) )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3208:1: ( rule__TransformationCS__OwnedRelationsAssignment_9_0 )
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getTransformationCSAccess().getRelationAssignment_9_0()); 
+                       before(grammarAccess.getTransformationCSAccess().getOwnedRelationsAssignment_9_0()); 
                     }
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3209:1: ( rule__TransformationCS__RelationAssignment_9_0 )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3209:2: rule__TransformationCS__RelationAssignment_9_0
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3209:1: ( rule__TransformationCS__OwnedRelationsAssignment_9_0 )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3209:2: rule__TransformationCS__OwnedRelationsAssignment_9_0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__TransformationCS__RelationAssignment_9_0_in_rule__TransformationCS__Alternatives_96831);
-                    rule__TransformationCS__RelationAssignment_9_0();
+                    pushFollow(FollowSets000.FOLLOW_rule__TransformationCS__OwnedRelationsAssignment_9_0_in_rule__TransformationCS__Alternatives_96831);
+                    rule__TransformationCS__OwnedRelationsAssignment_9_0();
 
                     state._fsp--;
                     if (state.failed) return ;
@@ -10028,7 +10028,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     }
 
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getTransformationCSAccess().getRelationAssignment_9_0()); 
+                       after(grammarAccess.getTransformationCSAccess().getOwnedRelationsAssignment_9_0()); 
                     }
 
                     }
@@ -10037,19 +10037,19 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     }
                     break;
                 case 2 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3213:6: ( ( rule__TransformationCS__QueriesAssignment_9_1 ) )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3213:6: ( ( rule__TransformationCS__OwnedQueriesAssignment_9_1 ) )
                     {
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3213:6: ( ( rule__TransformationCS__QueriesAssignment_9_1 ) )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3214:1: ( rule__TransformationCS__QueriesAssignment_9_1 )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3213:6: ( ( rule__TransformationCS__OwnedQueriesAssignment_9_1 ) )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3214:1: ( rule__TransformationCS__OwnedQueriesAssignment_9_1 )
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getTransformationCSAccess().getQueriesAssignment_9_1()); 
+                       before(grammarAccess.getTransformationCSAccess().getOwnedQueriesAssignment_9_1()); 
                     }
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3215:1: ( rule__TransformationCS__QueriesAssignment_9_1 )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3215:2: rule__TransformationCS__QueriesAssignment_9_1
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3215:1: ( rule__TransformationCS__OwnedQueriesAssignment_9_1 )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:3215:2: rule__TransformationCS__OwnedQueriesAssignment_9_1
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__TransformationCS__QueriesAssignment_9_1_in_rule__TransformationCS__Alternatives_96849);
-                    rule__TransformationCS__QueriesAssignment_9_1();
+                    pushFollow(FollowSets000.FOLLOW_rule__TransformationCS__OwnedQueriesAssignment_9_1_in_rule__TransformationCS__Alternatives_96849);
+                    rule__TransformationCS__OwnedQueriesAssignment_9_1();
 
                     state._fsp--;
                     if (state.failed) return ;
@@ -10057,7 +10057,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
                     }
 
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getTransformationCSAccess().getQueriesAssignment_9_1()); 
+                       after(grammarAccess.getTransformationCSAccess().getOwnedQueriesAssignment_9_1()); 
                     }
 
                     }
@@ -14625,22 +14625,22 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TopLevelCS__Group__1__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4455:1: rule__TopLevelCS__Group__1__Impl : ( ( rule__TopLevelCS__TransformationsAssignment_1 )* ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4455:1: rule__TopLevelCS__Group__1__Impl : ( ( rule__TopLevelCS__OwnedTransformationsAssignment_1 )* ) ;
     public final void rule__TopLevelCS__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4459:1: ( ( ( rule__TopLevelCS__TransformationsAssignment_1 )* ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4460:1: ( ( rule__TopLevelCS__TransformationsAssignment_1 )* )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4459:1: ( ( ( rule__TopLevelCS__OwnedTransformationsAssignment_1 )* ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4460:1: ( ( rule__TopLevelCS__OwnedTransformationsAssignment_1 )* )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4460:1: ( ( rule__TopLevelCS__TransformationsAssignment_1 )* )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4461:1: ( rule__TopLevelCS__TransformationsAssignment_1 )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4460:1: ( ( rule__TopLevelCS__OwnedTransformationsAssignment_1 )* )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4461:1: ( rule__TopLevelCS__OwnedTransformationsAssignment_1 )*
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTopLevelCSAccess().getTransformationsAssignment_1()); 
+               before(grammarAccess.getTopLevelCSAccess().getOwnedTransformationsAssignment_1()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4462:1: ( rule__TopLevelCS__TransformationsAssignment_1 )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4462:1: ( rule__TopLevelCS__OwnedTransformationsAssignment_1 )*
             loop51:
             do {
                 int alt51=2;
@@ -14653,10 +14653,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
                 switch (alt51) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4462:2: rule__TopLevelCS__TransformationsAssignment_1
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4462:2: rule__TopLevelCS__OwnedTransformationsAssignment_1
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__TopLevelCS__TransformationsAssignment_1_in_rule__TopLevelCS__Group__1__Impl9765);
-            	    rule__TopLevelCS__TransformationsAssignment_1();
+            	    pushFollow(FollowSets000.FOLLOW_rule__TopLevelCS__OwnedTransformationsAssignment_1_in_rule__TopLevelCS__Group__1__Impl9765);
+            	    rule__TopLevelCS__OwnedTransformationsAssignment_1();
 
             	    state._fsp--;
             	    if (state.failed) return ;
@@ -14670,7 +14670,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             } while (true);
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTopLevelCSAccess().getTransformationsAssignment_1()); 
+               after(grammarAccess.getTopLevelCSAccess().getOwnedTransformationsAssignment_1()); 
             }
 
             }
@@ -14911,26 +14911,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__CollectionTemplateCS__Group__2__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4548:1: rule__CollectionTemplateCS__Group__2__Impl : ( ( rule__CollectionTemplateCS__TypeAssignment_2 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4548:1: rule__CollectionTemplateCS__Group__2__Impl : ( ( rule__CollectionTemplateCS__OwnedTypeAssignment_2 ) ) ;
     public final void rule__CollectionTemplateCS__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4552:1: ( ( ( rule__CollectionTemplateCS__TypeAssignment_2 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4553:1: ( ( rule__CollectionTemplateCS__TypeAssignment_2 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4552:1: ( ( ( rule__CollectionTemplateCS__OwnedTypeAssignment_2 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4553:1: ( ( rule__CollectionTemplateCS__OwnedTypeAssignment_2 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4553:1: ( ( rule__CollectionTemplateCS__TypeAssignment_2 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4554:1: ( rule__CollectionTemplateCS__TypeAssignment_2 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4553:1: ( ( rule__CollectionTemplateCS__OwnedTypeAssignment_2 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4554:1: ( rule__CollectionTemplateCS__OwnedTypeAssignment_2 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getCollectionTemplateCSAccess().getTypeAssignment_2()); 
+               before(grammarAccess.getCollectionTemplateCSAccess().getOwnedTypeAssignment_2()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4555:1: ( rule__CollectionTemplateCS__TypeAssignment_2 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4555:2: rule__CollectionTemplateCS__TypeAssignment_2
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4555:1: ( rule__CollectionTemplateCS__OwnedTypeAssignment_2 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4555:2: rule__CollectionTemplateCS__OwnedTypeAssignment_2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__CollectionTemplateCS__TypeAssignment_2_in_rule__CollectionTemplateCS__Group__2__Impl9953);
-            rule__CollectionTemplateCS__TypeAssignment_2();
+            pushFollow(FollowSets000.FOLLOW_rule__CollectionTemplateCS__OwnedTypeAssignment_2_in_rule__CollectionTemplateCS__Group__2__Impl9953);
+            rule__CollectionTemplateCS__OwnedTypeAssignment_2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -14938,7 +14938,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getCollectionTemplateCSAccess().getTypeAssignment_2()); 
+               after(grammarAccess.getCollectionTemplateCSAccess().getOwnedTypeAssignment_2()); 
             }
 
             }
@@ -15253,26 +15253,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__CollectionTemplateCS__Group_4__0__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4679:1: rule__CollectionTemplateCS__Group_4__0__Impl : ( ( rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_0 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4679:1: rule__CollectionTemplateCS__Group_4__0__Impl : ( ( rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_0 ) ) ;
     public final void rule__CollectionTemplateCS__Group_4__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4683:1: ( ( ( rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_0 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4684:1: ( ( rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_0 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4683:1: ( ( ( rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_0 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4684:1: ( ( rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_0 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4684:1: ( ( rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_0 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4685:1: ( rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_0 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4684:1: ( ( rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_0 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4685:1: ( rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getCollectionTemplateCSAccess().getMemberIdentifiersAssignment_4_0()); 
+               before(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersAssignment_4_0()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4686:1: ( rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_0 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4686:2: rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_0
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4686:1: ( rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_0 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4686:2: rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_0_in_rule__CollectionTemplateCS__Group_4__0__Impl10207);
-            rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_0();
+            pushFollow(FollowSets000.FOLLOW_rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_0_in_rule__CollectionTemplateCS__Group_4__0__Impl10207);
+            rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -15280,7 +15280,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getCollectionTemplateCSAccess().getMemberIdentifiersAssignment_4_0()); 
+               after(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersAssignment_4_0()); 
             }
 
             }
@@ -15686,26 +15686,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__CollectionTemplateCS__Group_4_1__1__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4834:1: rule__CollectionTemplateCS__Group_4_1__1__Impl : ( ( rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_1_1 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4834:1: rule__CollectionTemplateCS__Group_4_1__1__Impl : ( ( rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_1_1 ) ) ;
     public final void rule__CollectionTemplateCS__Group_4_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4838:1: ( ( ( rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_1_1 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4839:1: ( ( rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_1_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4838:1: ( ( ( rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_1_1 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4839:1: ( ( rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_1_1 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4839:1: ( ( rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_1_1 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4840:1: ( rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_1_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4839:1: ( ( rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_1_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4840:1: ( rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_1_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getCollectionTemplateCSAccess().getMemberIdentifiersAssignment_4_1_1()); 
+               before(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersAssignment_4_1_1()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4841:1: ( rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_1_1 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4841:2: rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_1_1
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4841:1: ( rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_1_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4841:2: rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_1_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_1_1_in_rule__CollectionTemplateCS__Group_4_1__1__Impl10514);
-            rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_1_1();
+            pushFollow(FollowSets000.FOLLOW_rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_1_1_in_rule__CollectionTemplateCS__Group_4_1__1__Impl10514);
+            rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_1_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -15713,7 +15713,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getCollectionTemplateCSAccess().getMemberIdentifiersAssignment_4_1_1()); 
+               after(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersAssignment_4_1_1()); 
             }
 
             }
@@ -15943,26 +15943,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__DefaultValueCS__Group__2__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4927:1: rule__DefaultValueCS__Group__2__Impl : ( ( rule__DefaultValueCS__InitialiserAssignment_2 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4927:1: rule__DefaultValueCS__Group__2__Impl : ( ( rule__DefaultValueCS__OwnedInitExpressionAssignment_2 ) ) ;
     public final void rule__DefaultValueCS__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4931:1: ( ( ( rule__DefaultValueCS__InitialiserAssignment_2 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4932:1: ( ( rule__DefaultValueCS__InitialiserAssignment_2 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4931:1: ( ( ( rule__DefaultValueCS__OwnedInitExpressionAssignment_2 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4932:1: ( ( rule__DefaultValueCS__OwnedInitExpressionAssignment_2 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4932:1: ( ( rule__DefaultValueCS__InitialiserAssignment_2 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4933:1: ( rule__DefaultValueCS__InitialiserAssignment_2 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4932:1: ( ( rule__DefaultValueCS__OwnedInitExpressionAssignment_2 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4933:1: ( rule__DefaultValueCS__OwnedInitExpressionAssignment_2 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDefaultValueCSAccess().getInitialiserAssignment_2()); 
+               before(grammarAccess.getDefaultValueCSAccess().getOwnedInitExpressionAssignment_2()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4934:1: ( rule__DefaultValueCS__InitialiserAssignment_2 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4934:2: rule__DefaultValueCS__InitialiserAssignment_2
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4934:1: ( rule__DefaultValueCS__OwnedInitExpressionAssignment_2 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:4934:2: rule__DefaultValueCS__OwnedInitExpressionAssignment_2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__DefaultValueCS__InitialiserAssignment_2_in_rule__DefaultValueCS__Group__2__Impl10700);
-            rule__DefaultValueCS__InitialiserAssignment_2();
+            pushFollow(FollowSets000.FOLLOW_rule__DefaultValueCS__OwnedInitExpressionAssignment_2_in_rule__DefaultValueCS__Group__2__Impl10700);
+            rule__DefaultValueCS__OwnedInitExpressionAssignment_2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -15970,7 +15970,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDefaultValueCSAccess().getInitialiserAssignment_2()); 
+               after(grammarAccess.getDefaultValueCSAccess().getOwnedInitExpressionAssignment_2()); 
             }
 
             }
@@ -16374,26 +16374,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__DomainCS__Group__3__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5083:1: rule__DomainCS__Group__3__Impl : ( ( rule__DomainCS__PatternAssignment_3 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5083:1: rule__DomainCS__Group__3__Impl : ( ( rule__DomainCS__OwnedPatternAssignment_3 ) ) ;
     public final void rule__DomainCS__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5087:1: ( ( ( rule__DomainCS__PatternAssignment_3 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5088:1: ( ( rule__DomainCS__PatternAssignment_3 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5087:1: ( ( ( rule__DomainCS__OwnedPatternAssignment_3 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5088:1: ( ( rule__DomainCS__OwnedPatternAssignment_3 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5088:1: ( ( rule__DomainCS__PatternAssignment_3 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5089:1: ( rule__DomainCS__PatternAssignment_3 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5088:1: ( ( rule__DomainCS__OwnedPatternAssignment_3 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5089:1: ( rule__DomainCS__OwnedPatternAssignment_3 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDomainCSAccess().getPatternAssignment_3()); 
+               before(grammarAccess.getDomainCSAccess().getOwnedPatternAssignment_3()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5090:1: ( rule__DomainCS__PatternAssignment_3 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5090:2: rule__DomainCS__PatternAssignment_3
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5090:1: ( rule__DomainCS__OwnedPatternAssignment_3 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5090:2: rule__DomainCS__OwnedPatternAssignment_3
             {
-            pushFollow(FollowSets000.FOLLOW_rule__DomainCS__PatternAssignment_3_in_rule__DomainCS__Group__3__Impl11010);
-            rule__DomainCS__PatternAssignment_3();
+            pushFollow(FollowSets000.FOLLOW_rule__DomainCS__OwnedPatternAssignment_3_in_rule__DomainCS__Group__3__Impl11010);
+            rule__DomainCS__OwnedPatternAssignment_3();
 
             state._fsp--;
             if (state.failed) return ;
@@ -16401,7 +16401,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDomainCSAccess().getPatternAssignment_3()); 
+               after(grammarAccess.getDomainCSAccess().getOwnedPatternAssignment_3()); 
             }
 
             }
@@ -16811,26 +16811,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__DomainCS__Group_4__1__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5244:1: rule__DomainCS__Group_4__1__Impl : ( ( rule__DomainCS__ImplementedByAssignment_4_1 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5244:1: rule__DomainCS__Group_4__1__Impl : ( ( rule__DomainCS__OwnedImplementedByAssignment_4_1 ) ) ;
     public final void rule__DomainCS__Group_4__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5248:1: ( ( ( rule__DomainCS__ImplementedByAssignment_4_1 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5249:1: ( ( rule__DomainCS__ImplementedByAssignment_4_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5248:1: ( ( ( rule__DomainCS__OwnedImplementedByAssignment_4_1 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5249:1: ( ( rule__DomainCS__OwnedImplementedByAssignment_4_1 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5249:1: ( ( rule__DomainCS__ImplementedByAssignment_4_1 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5250:1: ( rule__DomainCS__ImplementedByAssignment_4_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5249:1: ( ( rule__DomainCS__OwnedImplementedByAssignment_4_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5250:1: ( rule__DomainCS__OwnedImplementedByAssignment_4_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDomainCSAccess().getImplementedByAssignment_4_1()); 
+               before(grammarAccess.getDomainCSAccess().getOwnedImplementedByAssignment_4_1()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5251:1: ( rule__DomainCS__ImplementedByAssignment_4_1 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5251:2: rule__DomainCS__ImplementedByAssignment_4_1
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5251:1: ( rule__DomainCS__OwnedImplementedByAssignment_4_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5251:2: rule__DomainCS__OwnedImplementedByAssignment_4_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__DomainCS__ImplementedByAssignment_4_1_in_rule__DomainCS__Group_4__1__Impl11324);
-            rule__DomainCS__ImplementedByAssignment_4_1();
+            pushFollow(FollowSets000.FOLLOW_rule__DomainCS__OwnedImplementedByAssignment_4_1_in_rule__DomainCS__Group_4__1__Impl11324);
+            rule__DomainCS__OwnedImplementedByAssignment_4_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -16838,7 +16838,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDomainCSAccess().getImplementedByAssignment_4_1()); 
+               after(grammarAccess.getDomainCSAccess().getOwnedImplementedByAssignment_4_1()); 
             }
 
             }
@@ -17058,29 +17058,29 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__DomainCS__Group_5__2__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5339:1: rule__DomainCS__Group_5__2__Impl : ( ( ( rule__DomainCS__DefaultValuesAssignment_5_2 ) ) ( ( rule__DomainCS__DefaultValuesAssignment_5_2 )* ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5339:1: rule__DomainCS__Group_5__2__Impl : ( ( ( rule__DomainCS__OwnedDefaultValuesAssignment_5_2 ) ) ( ( rule__DomainCS__OwnedDefaultValuesAssignment_5_2 )* ) ) ;
     public final void rule__DomainCS__Group_5__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5343:1: ( ( ( ( rule__DomainCS__DefaultValuesAssignment_5_2 ) ) ( ( rule__DomainCS__DefaultValuesAssignment_5_2 )* ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5344:1: ( ( ( rule__DomainCS__DefaultValuesAssignment_5_2 ) ) ( ( rule__DomainCS__DefaultValuesAssignment_5_2 )* ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5343:1: ( ( ( ( rule__DomainCS__OwnedDefaultValuesAssignment_5_2 ) ) ( ( rule__DomainCS__OwnedDefaultValuesAssignment_5_2 )* ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5344:1: ( ( ( rule__DomainCS__OwnedDefaultValuesAssignment_5_2 ) ) ( ( rule__DomainCS__OwnedDefaultValuesAssignment_5_2 )* ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5344:1: ( ( ( rule__DomainCS__DefaultValuesAssignment_5_2 ) ) ( ( rule__DomainCS__DefaultValuesAssignment_5_2 )* ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5345:1: ( ( rule__DomainCS__DefaultValuesAssignment_5_2 ) ) ( ( rule__DomainCS__DefaultValuesAssignment_5_2 )* )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5344:1: ( ( ( rule__DomainCS__OwnedDefaultValuesAssignment_5_2 ) ) ( ( rule__DomainCS__OwnedDefaultValuesAssignment_5_2 )* ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5345:1: ( ( rule__DomainCS__OwnedDefaultValuesAssignment_5_2 ) ) ( ( rule__DomainCS__OwnedDefaultValuesAssignment_5_2 )* )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5345:1: ( ( rule__DomainCS__DefaultValuesAssignment_5_2 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5346:1: ( rule__DomainCS__DefaultValuesAssignment_5_2 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5345:1: ( ( rule__DomainCS__OwnedDefaultValuesAssignment_5_2 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5346:1: ( rule__DomainCS__OwnedDefaultValuesAssignment_5_2 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDomainCSAccess().getDefaultValuesAssignment_5_2()); 
+               before(grammarAccess.getDomainCSAccess().getOwnedDefaultValuesAssignment_5_2()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5347:1: ( rule__DomainCS__DefaultValuesAssignment_5_2 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5347:2: rule__DomainCS__DefaultValuesAssignment_5_2
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5347:1: ( rule__DomainCS__OwnedDefaultValuesAssignment_5_2 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5347:2: rule__DomainCS__OwnedDefaultValuesAssignment_5_2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__DomainCS__DefaultValuesAssignment_5_2_in_rule__DomainCS__Group_5__2__Impl11514);
-            rule__DomainCS__DefaultValuesAssignment_5_2();
+            pushFollow(FollowSets000.FOLLOW_rule__DomainCS__OwnedDefaultValuesAssignment_5_2_in_rule__DomainCS__Group_5__2__Impl11514);
+            rule__DomainCS__OwnedDefaultValuesAssignment_5_2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -17088,18 +17088,18 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDomainCSAccess().getDefaultValuesAssignment_5_2()); 
+               after(grammarAccess.getDomainCSAccess().getOwnedDefaultValuesAssignment_5_2()); 
             }
 
             }
 
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5350:1: ( ( rule__DomainCS__DefaultValuesAssignment_5_2 )* )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5351:1: ( rule__DomainCS__DefaultValuesAssignment_5_2 )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5350:1: ( ( rule__DomainCS__OwnedDefaultValuesAssignment_5_2 )* )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5351:1: ( rule__DomainCS__OwnedDefaultValuesAssignment_5_2 )*
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDomainCSAccess().getDefaultValuesAssignment_5_2()); 
+               before(grammarAccess.getDomainCSAccess().getOwnedDefaultValuesAssignment_5_2()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5352:1: ( rule__DomainCS__DefaultValuesAssignment_5_2 )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5352:1: ( rule__DomainCS__OwnedDefaultValuesAssignment_5_2 )*
             loop58:
             do {
                 int alt58=2;
@@ -17112,10 +17112,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
                 switch (alt58) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5352:2: rule__DomainCS__DefaultValuesAssignment_5_2
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5352:2: rule__DomainCS__OwnedDefaultValuesAssignment_5_2
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__DomainCS__DefaultValuesAssignment_5_2_in_rule__DomainCS__Group_5__2__Impl11526);
-            	    rule__DomainCS__DefaultValuesAssignment_5_2();
+            	    pushFollow(FollowSets000.FOLLOW_rule__DomainCS__OwnedDefaultValuesAssignment_5_2_in_rule__DomainCS__Group_5__2__Impl11526);
+            	    rule__DomainCS__OwnedDefaultValuesAssignment_5_2();
 
             	    state._fsp--;
             	    if (state.failed) return ;
@@ -17129,7 +17129,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             } while (true);
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDomainCSAccess().getDefaultValuesAssignment_5_2()); 
+               after(grammarAccess.getDomainCSAccess().getOwnedDefaultValuesAssignment_5_2()); 
             }
 
             }
@@ -17500,26 +17500,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__KeyDeclCS__Group__1__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5509:1: rule__KeyDeclCS__Group__1__Impl : ( ( rule__KeyDeclCS__PathNameAssignment_1 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5509:1: rule__KeyDeclCS__Group__1__Impl : ( ( rule__KeyDeclCS__OwnedPathNameAssignment_1 ) ) ;
     public final void rule__KeyDeclCS__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5513:1: ( ( ( rule__KeyDeclCS__PathNameAssignment_1 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5514:1: ( ( rule__KeyDeclCS__PathNameAssignment_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5513:1: ( ( ( rule__KeyDeclCS__OwnedPathNameAssignment_1 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5514:1: ( ( rule__KeyDeclCS__OwnedPathNameAssignment_1 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5514:1: ( ( rule__KeyDeclCS__PathNameAssignment_1 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5515:1: ( rule__KeyDeclCS__PathNameAssignment_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5514:1: ( ( rule__KeyDeclCS__OwnedPathNameAssignment_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5515:1: ( rule__KeyDeclCS__OwnedPathNameAssignment_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getKeyDeclCSAccess().getPathNameAssignment_1()); 
+               before(grammarAccess.getKeyDeclCSAccess().getOwnedPathNameAssignment_1()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5516:1: ( rule__KeyDeclCS__PathNameAssignment_1 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5516:2: rule__KeyDeclCS__PathNameAssignment_1
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5516:1: ( rule__KeyDeclCS__OwnedPathNameAssignment_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5516:2: rule__KeyDeclCS__OwnedPathNameAssignment_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__KeyDeclCS__PathNameAssignment_1_in_rule__KeyDeclCS__Group__1__Impl11842);
-            rule__KeyDeclCS__PathNameAssignment_1();
+            pushFollow(FollowSets000.FOLLOW_rule__KeyDeclCS__OwnedPathNameAssignment_1_in_rule__KeyDeclCS__Group__1__Impl11842);
+            rule__KeyDeclCS__OwnedPathNameAssignment_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -17527,7 +17527,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getKeyDeclCSAccess().getPathNameAssignment_1()); 
+               after(grammarAccess.getKeyDeclCSAccess().getOwnedPathNameAssignment_1()); 
             }
 
             }
@@ -18175,26 +18175,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__KeyDeclCS__Group_3_1__2__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5764:1: rule__KeyDeclCS__Group_3_1__2__Impl : ( ( rule__KeyDeclCS__OppositePropertyIdsAssignment_3_1_2 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5764:1: rule__KeyDeclCS__Group_3_1__2__Impl : ( ( rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_3_1_2 ) ) ;
     public final void rule__KeyDeclCS__Group_3_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5768:1: ( ( ( rule__KeyDeclCS__OppositePropertyIdsAssignment_3_1_2 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5769:1: ( ( rule__KeyDeclCS__OppositePropertyIdsAssignment_3_1_2 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5768:1: ( ( ( rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_3_1_2 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5769:1: ( ( rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_3_1_2 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5769:1: ( ( rule__KeyDeclCS__OppositePropertyIdsAssignment_3_1_2 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5770:1: ( rule__KeyDeclCS__OppositePropertyIdsAssignment_3_1_2 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5769:1: ( ( rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_3_1_2 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5770:1: ( rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_3_1_2 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getKeyDeclCSAccess().getOppositePropertyIdsAssignment_3_1_2()); 
+               before(grammarAccess.getKeyDeclCSAccess().getOwnedOppositePropertyIdsAssignment_3_1_2()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5771:1: ( rule__KeyDeclCS__OppositePropertyIdsAssignment_3_1_2 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5771:2: rule__KeyDeclCS__OppositePropertyIdsAssignment_3_1_2
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5771:1: ( rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_3_1_2 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5771:2: rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_3_1_2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__KeyDeclCS__OppositePropertyIdsAssignment_3_1_2_in_rule__KeyDeclCS__Group_3_1__2__Impl12344);
-            rule__KeyDeclCS__OppositePropertyIdsAssignment_3_1_2();
+            pushFollow(FollowSets000.FOLLOW_rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_3_1_2_in_rule__KeyDeclCS__Group_3_1__2__Impl12344);
+            rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_3_1_2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -18202,7 +18202,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getKeyDeclCSAccess().getOppositePropertyIdsAssignment_3_1_2()); 
+               after(grammarAccess.getKeyDeclCSAccess().getOwnedOppositePropertyIdsAssignment_3_1_2()); 
             }
 
             }
@@ -18659,26 +18659,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__KeyDeclCS__Group_4_1_1__2__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5956:1: rule__KeyDeclCS__Group_4_1_1__2__Impl : ( ( rule__KeyDeclCS__OppositePropertyIdsAssignment_4_1_1_2 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5956:1: rule__KeyDeclCS__Group_4_1_1__2__Impl : ( ( rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_4_1_1_2 ) ) ;
     public final void rule__KeyDeclCS__Group_4_1_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5960:1: ( ( ( rule__KeyDeclCS__OppositePropertyIdsAssignment_4_1_1_2 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5961:1: ( ( rule__KeyDeclCS__OppositePropertyIdsAssignment_4_1_1_2 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5960:1: ( ( ( rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_4_1_1_2 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5961:1: ( ( rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_4_1_1_2 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5961:1: ( ( rule__KeyDeclCS__OppositePropertyIdsAssignment_4_1_1_2 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5962:1: ( rule__KeyDeclCS__OppositePropertyIdsAssignment_4_1_1_2 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5961:1: ( ( rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_4_1_1_2 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5962:1: ( rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_4_1_1_2 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getKeyDeclCSAccess().getOppositePropertyIdsAssignment_4_1_1_2()); 
+               before(grammarAccess.getKeyDeclCSAccess().getOwnedOppositePropertyIdsAssignment_4_1_1_2()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5963:1: ( rule__KeyDeclCS__OppositePropertyIdsAssignment_4_1_1_2 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5963:2: rule__KeyDeclCS__OppositePropertyIdsAssignment_4_1_1_2
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5963:1: ( rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_4_1_1_2 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:5963:2: rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_4_1_1_2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__KeyDeclCS__OppositePropertyIdsAssignment_4_1_1_2_in_rule__KeyDeclCS__Group_4_1_1__2__Impl12718);
-            rule__KeyDeclCS__OppositePropertyIdsAssignment_4_1_1_2();
+            pushFollow(FollowSets000.FOLLOW_rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_4_1_1_2_in_rule__KeyDeclCS__Group_4_1_1__2__Impl12718);
+            rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_4_1_1_2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -18686,7 +18686,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getKeyDeclCSAccess().getOppositePropertyIdsAssignment_4_1_1_2()); 
+               after(grammarAccess.getKeyDeclCSAccess().getOwnedOppositePropertyIdsAssignment_4_1_1_2()); 
             }
 
             }
@@ -20007,26 +20007,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ObjectTemplateCS__Group__2__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6463:1: rule__ObjectTemplateCS__Group__2__Impl : ( ( rule__ObjectTemplateCS__TypeAssignment_2 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6463:1: rule__ObjectTemplateCS__Group__2__Impl : ( ( rule__ObjectTemplateCS__OwnedTypeAssignment_2 ) ) ;
     public final void rule__ObjectTemplateCS__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6467:1: ( ( ( rule__ObjectTemplateCS__TypeAssignment_2 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6468:1: ( ( rule__ObjectTemplateCS__TypeAssignment_2 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6467:1: ( ( ( rule__ObjectTemplateCS__OwnedTypeAssignment_2 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6468:1: ( ( rule__ObjectTemplateCS__OwnedTypeAssignment_2 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6468:1: ( ( rule__ObjectTemplateCS__TypeAssignment_2 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6469:1: ( rule__ObjectTemplateCS__TypeAssignment_2 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6468:1: ( ( rule__ObjectTemplateCS__OwnedTypeAssignment_2 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6469:1: ( rule__ObjectTemplateCS__OwnedTypeAssignment_2 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getObjectTemplateCSAccess().getTypeAssignment_2()); 
+               before(grammarAccess.getObjectTemplateCSAccess().getOwnedTypeAssignment_2()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6470:1: ( rule__ObjectTemplateCS__TypeAssignment_2 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6470:2: rule__ObjectTemplateCS__TypeAssignment_2
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6470:1: ( rule__ObjectTemplateCS__OwnedTypeAssignment_2 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6470:2: rule__ObjectTemplateCS__OwnedTypeAssignment_2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__ObjectTemplateCS__TypeAssignment_2_in_rule__ObjectTemplateCS__Group__2__Impl13713);
-            rule__ObjectTemplateCS__TypeAssignment_2();
+            pushFollow(FollowSets000.FOLLOW_rule__ObjectTemplateCS__OwnedTypeAssignment_2_in_rule__ObjectTemplateCS__Group__2__Impl13713);
+            rule__ObjectTemplateCS__OwnedTypeAssignment_2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -20034,7 +20034,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getObjectTemplateCSAccess().getTypeAssignment_2()); 
+               after(grammarAccess.getObjectTemplateCSAccess().getOwnedTypeAssignment_2()); 
             }
 
             }
@@ -20349,26 +20349,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ObjectTemplateCS__Group_4__0__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6594:1: rule__ObjectTemplateCS__Group_4__0__Impl : ( ( rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_0 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6594:1: rule__ObjectTemplateCS__Group_4__0__Impl : ( ( rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_0 ) ) ;
     public final void rule__ObjectTemplateCS__Group_4__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6598:1: ( ( ( rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_0 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6599:1: ( ( rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_0 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6598:1: ( ( ( rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_0 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6599:1: ( ( rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_0 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6599:1: ( ( rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_0 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6600:1: ( rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_0 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6599:1: ( ( rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_0 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6600:1: ( rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getObjectTemplateCSAccess().getPropertyTemplatesAssignment_4_0()); 
+               before(grammarAccess.getObjectTemplateCSAccess().getOwnedPropertyTemplatesAssignment_4_0()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6601:1: ( rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_0 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6601:2: rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_0
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6601:1: ( rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_0 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6601:2: rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_0_in_rule__ObjectTemplateCS__Group_4__0__Impl13967);
-            rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_0();
+            pushFollow(FollowSets000.FOLLOW_rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_0_in_rule__ObjectTemplateCS__Group_4__0__Impl13967);
+            rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -20376,7 +20376,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getObjectTemplateCSAccess().getPropertyTemplatesAssignment_4_0()); 
+               after(grammarAccess.getObjectTemplateCSAccess().getOwnedPropertyTemplatesAssignment_4_0()); 
             }
 
             }
@@ -20614,26 +20614,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__ObjectTemplateCS__Group_4_1__1__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6685:1: rule__ObjectTemplateCS__Group_4_1__1__Impl : ( ( rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_1_1 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6685:1: rule__ObjectTemplateCS__Group_4_1__1__Impl : ( ( rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_1_1 ) ) ;
     public final void rule__ObjectTemplateCS__Group_4_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6689:1: ( ( ( rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_1_1 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6690:1: ( ( rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_1_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6689:1: ( ( ( rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_1_1 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6690:1: ( ( rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_1_1 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6690:1: ( ( rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_1_1 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6691:1: ( rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_1_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6690:1: ( ( rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_1_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6691:1: ( rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_1_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getObjectTemplateCSAccess().getPropertyTemplatesAssignment_4_1_1()); 
+               before(grammarAccess.getObjectTemplateCSAccess().getOwnedPropertyTemplatesAssignment_4_1_1()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6692:1: ( rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_1_1 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6692:2: rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_1_1
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6692:1: ( rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_1_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6692:2: rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_1_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_1_1_in_rule__ObjectTemplateCS__Group_4_1__1__Impl14148);
-            rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_1_1();
+            pushFollow(FollowSets000.FOLLOW_rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_1_1_in_rule__ObjectTemplateCS__Group_4_1__1__Impl14148);
+            rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_1_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -20641,7 +20641,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getObjectTemplateCSAccess().getPropertyTemplatesAssignment_4_1_1()); 
+               after(grammarAccess.getObjectTemplateCSAccess().getOwnedPropertyTemplatesAssignment_4_1_1()); 
             }
 
             }
@@ -20955,26 +20955,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__PredicateCS__Group__0__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6812:1: rule__PredicateCS__Group__0__Impl : ( ( rule__PredicateCS__ExprAssignment_0 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6812:1: rule__PredicateCS__Group__0__Impl : ( ( rule__PredicateCS__OwnedConditionAssignment_0 ) ) ;
     public final void rule__PredicateCS__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6816:1: ( ( ( rule__PredicateCS__ExprAssignment_0 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6817:1: ( ( rule__PredicateCS__ExprAssignment_0 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6816:1: ( ( ( rule__PredicateCS__OwnedConditionAssignment_0 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6817:1: ( ( rule__PredicateCS__OwnedConditionAssignment_0 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6817:1: ( ( rule__PredicateCS__ExprAssignment_0 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6818:1: ( rule__PredicateCS__ExprAssignment_0 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6817:1: ( ( rule__PredicateCS__OwnedConditionAssignment_0 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6818:1: ( rule__PredicateCS__OwnedConditionAssignment_0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getPredicateCSAccess().getExprAssignment_0()); 
+               before(grammarAccess.getPredicateCSAccess().getOwnedConditionAssignment_0()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6819:1: ( rule__PredicateCS__ExprAssignment_0 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6819:2: rule__PredicateCS__ExprAssignment_0
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6819:1: ( rule__PredicateCS__OwnedConditionAssignment_0 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6819:2: rule__PredicateCS__OwnedConditionAssignment_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__PredicateCS__ExprAssignment_0_in_rule__PredicateCS__Group__0__Impl14397);
-            rule__PredicateCS__ExprAssignment_0();
+            pushFollow(FollowSets000.FOLLOW_rule__PredicateCS__OwnedConditionAssignment_0_in_rule__PredicateCS__Group__0__Impl14397);
+            rule__PredicateCS__OwnedConditionAssignment_0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -20982,7 +20982,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getPredicateCSAccess().getExprAssignment_0()); 
+               after(grammarAccess.getPredicateCSAccess().getOwnedConditionAssignment_0()); 
             }
 
             }
@@ -21444,26 +21444,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__PrimitiveTypeDomainCS__Group__4__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6997:1: rule__PrimitiveTypeDomainCS__Group__4__Impl : ( ( rule__PrimitiveTypeDomainCS__TypeAssignment_4 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:6997:1: rule__PrimitiveTypeDomainCS__Group__4__Impl : ( ( rule__PrimitiveTypeDomainCS__OwnedTypeAssignment_4 ) ) ;
     public final void rule__PrimitiveTypeDomainCS__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7001:1: ( ( ( rule__PrimitiveTypeDomainCS__TypeAssignment_4 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7002:1: ( ( rule__PrimitiveTypeDomainCS__TypeAssignment_4 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7001:1: ( ( ( rule__PrimitiveTypeDomainCS__OwnedTypeAssignment_4 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7002:1: ( ( rule__PrimitiveTypeDomainCS__OwnedTypeAssignment_4 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7002:1: ( ( rule__PrimitiveTypeDomainCS__TypeAssignment_4 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7003:1: ( rule__PrimitiveTypeDomainCS__TypeAssignment_4 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7002:1: ( ( rule__PrimitiveTypeDomainCS__OwnedTypeAssignment_4 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7003:1: ( rule__PrimitiveTypeDomainCS__OwnedTypeAssignment_4 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getPrimitiveTypeDomainCSAccess().getTypeAssignment_4()); 
+               before(grammarAccess.getPrimitiveTypeDomainCSAccess().getOwnedTypeAssignment_4()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7004:1: ( rule__PrimitiveTypeDomainCS__TypeAssignment_4 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7004:2: rule__PrimitiveTypeDomainCS__TypeAssignment_4
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7004:1: ( rule__PrimitiveTypeDomainCS__OwnedTypeAssignment_4 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7004:2: rule__PrimitiveTypeDomainCS__OwnedTypeAssignment_4
             {
-            pushFollow(FollowSets000.FOLLOW_rule__PrimitiveTypeDomainCS__TypeAssignment_4_in_rule__PrimitiveTypeDomainCS__Group__4__Impl14766);
-            rule__PrimitiveTypeDomainCS__TypeAssignment_4();
+            pushFollow(FollowSets000.FOLLOW_rule__PrimitiveTypeDomainCS__OwnedTypeAssignment_4_in_rule__PrimitiveTypeDomainCS__Group__4__Impl14766);
+            rule__PrimitiveTypeDomainCS__OwnedTypeAssignment_4();
 
             state._fsp--;
             if (state.failed) return ;
@@ -21471,7 +21471,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getPrimitiveTypeDomainCSAccess().getTypeAssignment_4()); 
+               after(grammarAccess.getPrimitiveTypeDomainCSAccess().getOwnedTypeAssignment_4()); 
             }
 
             }
@@ -21770,26 +21770,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__PropertyTemplateCS__Group__2__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7127:1: rule__PropertyTemplateCS__Group__2__Impl : ( ( rule__PropertyTemplateCS__ExpressionAssignment_2 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7127:1: rule__PropertyTemplateCS__Group__2__Impl : ( ( rule__PropertyTemplateCS__OwnedExpressionAssignment_2 ) ) ;
     public final void rule__PropertyTemplateCS__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7131:1: ( ( ( rule__PropertyTemplateCS__ExpressionAssignment_2 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7132:1: ( ( rule__PropertyTemplateCS__ExpressionAssignment_2 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7131:1: ( ( ( rule__PropertyTemplateCS__OwnedExpressionAssignment_2 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7132:1: ( ( rule__PropertyTemplateCS__OwnedExpressionAssignment_2 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7132:1: ( ( rule__PropertyTemplateCS__ExpressionAssignment_2 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7133:1: ( rule__PropertyTemplateCS__ExpressionAssignment_2 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7132:1: ( ( rule__PropertyTemplateCS__OwnedExpressionAssignment_2 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7133:1: ( rule__PropertyTemplateCS__OwnedExpressionAssignment_2 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getPropertyTemplateCSAccess().getExpressionAssignment_2()); 
+               before(grammarAccess.getPropertyTemplateCSAccess().getOwnedExpressionAssignment_2()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7134:1: ( rule__PropertyTemplateCS__ExpressionAssignment_2 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7134:2: rule__PropertyTemplateCS__ExpressionAssignment_2
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7134:1: ( rule__PropertyTemplateCS__OwnedExpressionAssignment_2 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7134:2: rule__PropertyTemplateCS__OwnedExpressionAssignment_2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__PropertyTemplateCS__ExpressionAssignment_2_in_rule__PropertyTemplateCS__Group__2__Impl15016);
-            rule__PropertyTemplateCS__ExpressionAssignment_2();
+            pushFollow(FollowSets000.FOLLOW_rule__PropertyTemplateCS__OwnedExpressionAssignment_2_in_rule__PropertyTemplateCS__Group__2__Impl15016);
+            rule__PropertyTemplateCS__OwnedExpressionAssignment_2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -21797,7 +21797,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getPropertyTemplateCSAccess().getExpressionAssignment_2()); 
+               after(grammarAccess.getPropertyTemplateCSAccess().getOwnedExpressionAssignment_2()); 
             }
 
             }
@@ -22017,26 +22017,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__PropertyTemplateCS__Group_0_1__2__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7224:1: rule__PropertyTemplateCS__Group_0_1__2__Impl : ( ( rule__PropertyTemplateCS__OppositePropertyIdAssignment_0_1_2 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7224:1: rule__PropertyTemplateCS__Group_0_1__2__Impl : ( ( rule__PropertyTemplateCS__OwnedOppositePropertyIdAssignment_0_1_2 ) ) ;
     public final void rule__PropertyTemplateCS__Group_0_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7228:1: ( ( ( rule__PropertyTemplateCS__OppositePropertyIdAssignment_0_1_2 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7229:1: ( ( rule__PropertyTemplateCS__OppositePropertyIdAssignment_0_1_2 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7228:1: ( ( ( rule__PropertyTemplateCS__OwnedOppositePropertyIdAssignment_0_1_2 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7229:1: ( ( rule__PropertyTemplateCS__OwnedOppositePropertyIdAssignment_0_1_2 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7229:1: ( ( rule__PropertyTemplateCS__OppositePropertyIdAssignment_0_1_2 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7230:1: ( rule__PropertyTemplateCS__OppositePropertyIdAssignment_0_1_2 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7229:1: ( ( rule__PropertyTemplateCS__OwnedOppositePropertyIdAssignment_0_1_2 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7230:1: ( rule__PropertyTemplateCS__OwnedOppositePropertyIdAssignment_0_1_2 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getPropertyTemplateCSAccess().getOppositePropertyIdAssignment_0_1_2()); 
+               before(grammarAccess.getPropertyTemplateCSAccess().getOwnedOppositePropertyIdAssignment_0_1_2()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7231:1: ( rule__PropertyTemplateCS__OppositePropertyIdAssignment_0_1_2 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7231:2: rule__PropertyTemplateCS__OppositePropertyIdAssignment_0_1_2
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7231:1: ( rule__PropertyTemplateCS__OwnedOppositePropertyIdAssignment_0_1_2 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7231:2: rule__PropertyTemplateCS__OwnedOppositePropertyIdAssignment_0_1_2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__PropertyTemplateCS__OppositePropertyIdAssignment_0_1_2_in_rule__PropertyTemplateCS__Group_0_1__2__Impl15206);
-            rule__PropertyTemplateCS__OppositePropertyIdAssignment_0_1_2();
+            pushFollow(FollowSets000.FOLLOW_rule__PropertyTemplateCS__OwnedOppositePropertyIdAssignment_0_1_2_in_rule__PropertyTemplateCS__Group_0_1__2__Impl15206);
+            rule__PropertyTemplateCS__OwnedOppositePropertyIdAssignment_0_1_2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -22044,7 +22044,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getPropertyTemplateCSAccess().getOppositePropertyIdAssignment_0_1_2()); 
+               after(grammarAccess.getPropertyTemplateCSAccess().getOwnedOppositePropertyIdAssignment_0_1_2()); 
             }
 
             }
@@ -22858,26 +22858,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__QueryCS__Group_3__0__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7546:1: rule__QueryCS__Group_3__0__Impl : ( ( rule__QueryCS__InputParamDeclarationsAssignment_3_0 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7546:1: rule__QueryCS__Group_3__0__Impl : ( ( rule__QueryCS__OwnedParametersAssignment_3_0 ) ) ;
     public final void rule__QueryCS__Group_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7550:1: ( ( ( rule__QueryCS__InputParamDeclarationsAssignment_3_0 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7551:1: ( ( rule__QueryCS__InputParamDeclarationsAssignment_3_0 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7550:1: ( ( ( rule__QueryCS__OwnedParametersAssignment_3_0 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7551:1: ( ( rule__QueryCS__OwnedParametersAssignment_3_0 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7551:1: ( ( rule__QueryCS__InputParamDeclarationsAssignment_3_0 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7552:1: ( rule__QueryCS__InputParamDeclarationsAssignment_3_0 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7551:1: ( ( rule__QueryCS__OwnedParametersAssignment_3_0 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7552:1: ( rule__QueryCS__OwnedParametersAssignment_3_0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getQueryCSAccess().getInputParamDeclarationsAssignment_3_0()); 
+               before(grammarAccess.getQueryCSAccess().getOwnedParametersAssignment_3_0()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7553:1: ( rule__QueryCS__InputParamDeclarationsAssignment_3_0 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7553:2: rule__QueryCS__InputParamDeclarationsAssignment_3_0
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7553:1: ( rule__QueryCS__OwnedParametersAssignment_3_0 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7553:2: rule__QueryCS__OwnedParametersAssignment_3_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__QueryCS__InputParamDeclarationsAssignment_3_0_in_rule__QueryCS__Group_3__0__Impl15835);
-            rule__QueryCS__InputParamDeclarationsAssignment_3_0();
+            pushFollow(FollowSets000.FOLLOW_rule__QueryCS__OwnedParametersAssignment_3_0_in_rule__QueryCS__Group_3__0__Impl15835);
+            rule__QueryCS__OwnedParametersAssignment_3_0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -22885,7 +22885,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getQueryCSAccess().getInputParamDeclarationsAssignment_3_0()); 
+               after(grammarAccess.getQueryCSAccess().getOwnedParametersAssignment_3_0()); 
             }
 
             }
@@ -23123,26 +23123,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__QueryCS__Group_3_1__1__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7637:1: rule__QueryCS__Group_3_1__1__Impl : ( ( rule__QueryCS__InputParamDeclarationsAssignment_3_1_1 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7637:1: rule__QueryCS__Group_3_1__1__Impl : ( ( rule__QueryCS__OwnedParametersAssignment_3_1_1 ) ) ;
     public final void rule__QueryCS__Group_3_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7641:1: ( ( ( rule__QueryCS__InputParamDeclarationsAssignment_3_1_1 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7642:1: ( ( rule__QueryCS__InputParamDeclarationsAssignment_3_1_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7641:1: ( ( ( rule__QueryCS__OwnedParametersAssignment_3_1_1 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7642:1: ( ( rule__QueryCS__OwnedParametersAssignment_3_1_1 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7642:1: ( ( rule__QueryCS__InputParamDeclarationsAssignment_3_1_1 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7643:1: ( rule__QueryCS__InputParamDeclarationsAssignment_3_1_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7642:1: ( ( rule__QueryCS__OwnedParametersAssignment_3_1_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7643:1: ( rule__QueryCS__OwnedParametersAssignment_3_1_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getQueryCSAccess().getInputParamDeclarationsAssignment_3_1_1()); 
+               before(grammarAccess.getQueryCSAccess().getOwnedParametersAssignment_3_1_1()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7644:1: ( rule__QueryCS__InputParamDeclarationsAssignment_3_1_1 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7644:2: rule__QueryCS__InputParamDeclarationsAssignment_3_1_1
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7644:1: ( rule__QueryCS__OwnedParametersAssignment_3_1_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7644:2: rule__QueryCS__OwnedParametersAssignment_3_1_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__QueryCS__InputParamDeclarationsAssignment_3_1_1_in_rule__QueryCS__Group_3_1__1__Impl16016);
-            rule__QueryCS__InputParamDeclarationsAssignment_3_1_1();
+            pushFollow(FollowSets000.FOLLOW_rule__QueryCS__OwnedParametersAssignment_3_1_1_in_rule__QueryCS__Group_3_1__1__Impl16016);
+            rule__QueryCS__OwnedParametersAssignment_3_1_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -23150,7 +23150,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getQueryCSAccess().getInputParamDeclarationsAssignment_3_1_1()); 
+               after(grammarAccess.getQueryCSAccess().getOwnedParametersAssignment_3_1_1()); 
             }
 
             }
@@ -23291,26 +23291,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__QueryCS__Group_7_1__1__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7701:1: rule__QueryCS__Group_7_1__1__Impl : ( ( rule__QueryCS__ExpressionAssignment_7_1_1 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7701:1: rule__QueryCS__Group_7_1__1__Impl : ( ( rule__QueryCS__OwnedExpressionAssignment_7_1_1 ) ) ;
     public final void rule__QueryCS__Group_7_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7705:1: ( ( ( rule__QueryCS__ExpressionAssignment_7_1_1 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7706:1: ( ( rule__QueryCS__ExpressionAssignment_7_1_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7705:1: ( ( ( rule__QueryCS__OwnedExpressionAssignment_7_1_1 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7706:1: ( ( rule__QueryCS__OwnedExpressionAssignment_7_1_1 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7706:1: ( ( rule__QueryCS__ExpressionAssignment_7_1_1 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7707:1: ( rule__QueryCS__ExpressionAssignment_7_1_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7706:1: ( ( rule__QueryCS__OwnedExpressionAssignment_7_1_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7707:1: ( rule__QueryCS__OwnedExpressionAssignment_7_1_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getQueryCSAccess().getExpressionAssignment_7_1_1()); 
+               before(grammarAccess.getQueryCSAccess().getOwnedExpressionAssignment_7_1_1()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7708:1: ( rule__QueryCS__ExpressionAssignment_7_1_1 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7708:2: rule__QueryCS__ExpressionAssignment_7_1_1
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7708:1: ( rule__QueryCS__OwnedExpressionAssignment_7_1_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7708:2: rule__QueryCS__OwnedExpressionAssignment_7_1_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__QueryCS__ExpressionAssignment_7_1_1_in_rule__QueryCS__Group_7_1__1__Impl16142);
-            rule__QueryCS__ExpressionAssignment_7_1_1();
+            pushFollow(FollowSets000.FOLLOW_rule__QueryCS__OwnedExpressionAssignment_7_1_1_in_rule__QueryCS__Group_7_1__1__Impl16142);
+            rule__QueryCS__OwnedExpressionAssignment_7_1_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -23318,7 +23318,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getQueryCSAccess().getExpressionAssignment_7_1_1()); 
+               after(grammarAccess.getQueryCSAccess().getOwnedExpressionAssignment_7_1_1()); 
             }
 
             }
@@ -23454,22 +23454,22 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__RelationCS__Group__0__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7766:1: rule__RelationCS__Group__0__Impl : ( ( rule__RelationCS__TopAssignment_0 )? ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7766:1: rule__RelationCS__Group__0__Impl : ( ( rule__RelationCS__IsTopAssignment_0 )? ) ;
     public final void rule__RelationCS__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7770:1: ( ( ( rule__RelationCS__TopAssignment_0 )? ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7771:1: ( ( rule__RelationCS__TopAssignment_0 )? )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7770:1: ( ( ( rule__RelationCS__IsTopAssignment_0 )? ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7771:1: ( ( rule__RelationCS__IsTopAssignment_0 )? )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7771:1: ( ( rule__RelationCS__TopAssignment_0 )? )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7772:1: ( rule__RelationCS__TopAssignment_0 )?
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7771:1: ( ( rule__RelationCS__IsTopAssignment_0 )? )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7772:1: ( rule__RelationCS__IsTopAssignment_0 )?
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getRelationCSAccess().getTopAssignment_0()); 
+               before(grammarAccess.getRelationCSAccess().getIsTopAssignment_0()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7773:1: ( rule__RelationCS__TopAssignment_0 )?
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7773:1: ( rule__RelationCS__IsTopAssignment_0 )?
             int alt66=2;
             int LA66_0 = input.LA(1);
 
@@ -23478,10 +23478,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
             switch (alt66) {
                 case 1 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7773:2: rule__RelationCS__TopAssignment_0
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7773:2: rule__RelationCS__IsTopAssignment_0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__RelationCS__TopAssignment_0_in_rule__RelationCS__Group__0__Impl16267);
-                    rule__RelationCS__TopAssignment_0();
+                    pushFollow(FollowSets000.FOLLOW_rule__RelationCS__IsTopAssignment_0_in_rule__RelationCS__Group__0__Impl16267);
+                    rule__RelationCS__IsTopAssignment_0();
 
                     state._fsp--;
                     if (state.failed) return ;
@@ -23492,7 +23492,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getRelationCSAccess().getTopAssignment_0()); 
+               after(grammarAccess.getRelationCSAccess().getIsTopAssignment_0()); 
             }
 
             }
@@ -23901,22 +23901,22 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__RelationCS__Group__5__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7915:1: rule__RelationCS__Group__5__Impl : ( ( rule__RelationCS__VarDeclarationsAssignment_5 )* ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7915:1: rule__RelationCS__Group__5__Impl : ( ( rule__RelationCS__OwnedVarDeclarationsAssignment_5 )* ) ;
     public final void rule__RelationCS__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7919:1: ( ( ( rule__RelationCS__VarDeclarationsAssignment_5 )* ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7920:1: ( ( rule__RelationCS__VarDeclarationsAssignment_5 )* )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7919:1: ( ( ( rule__RelationCS__OwnedVarDeclarationsAssignment_5 )* ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7920:1: ( ( rule__RelationCS__OwnedVarDeclarationsAssignment_5 )* )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7920:1: ( ( rule__RelationCS__VarDeclarationsAssignment_5 )* )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7921:1: ( rule__RelationCS__VarDeclarationsAssignment_5 )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7920:1: ( ( rule__RelationCS__OwnedVarDeclarationsAssignment_5 )* )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7921:1: ( rule__RelationCS__OwnedVarDeclarationsAssignment_5 )*
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getRelationCSAccess().getVarDeclarationsAssignment_5()); 
+               before(grammarAccess.getRelationCSAccess().getOwnedVarDeclarationsAssignment_5()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7922:1: ( rule__RelationCS__VarDeclarationsAssignment_5 )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7922:1: ( rule__RelationCS__OwnedVarDeclarationsAssignment_5 )*
             loop68:
             do {
                 int alt68=2;
@@ -24001,10 +24001,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
                 switch (alt68) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7922:2: rule__RelationCS__VarDeclarationsAssignment_5
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7922:2: rule__RelationCS__OwnedVarDeclarationsAssignment_5
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__RelationCS__VarDeclarationsAssignment_5_in_rule__RelationCS__Group__5__Impl16573);
-            	    rule__RelationCS__VarDeclarationsAssignment_5();
+            	    pushFollow(FollowSets000.FOLLOW_rule__RelationCS__OwnedVarDeclarationsAssignment_5_in_rule__RelationCS__Group__5__Impl16573);
+            	    rule__RelationCS__OwnedVarDeclarationsAssignment_5();
 
             	    state._fsp--;
             	    if (state.failed) return ;
@@ -24018,7 +24018,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             } while (true);
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getRelationCSAccess().getVarDeclarationsAssignment_5()); 
+               after(grammarAccess.getRelationCSAccess().getOwnedVarDeclarationsAssignment_5()); 
             }
 
             }
@@ -24216,22 +24216,22 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__RelationCS__Group__7__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7980:1: rule__RelationCS__Group__7__Impl : ( ( rule__RelationCS__WhenAssignment_7 )? ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7980:1: rule__RelationCS__Group__7__Impl : ( ( rule__RelationCS__OwnedWhenAssignment_7 )? ) ;
     public final void rule__RelationCS__Group__7__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7984:1: ( ( ( rule__RelationCS__WhenAssignment_7 )? ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7985:1: ( ( rule__RelationCS__WhenAssignment_7 )? )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7984:1: ( ( ( rule__RelationCS__OwnedWhenAssignment_7 )? ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7985:1: ( ( rule__RelationCS__OwnedWhenAssignment_7 )? )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7985:1: ( ( rule__RelationCS__WhenAssignment_7 )? )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7986:1: ( rule__RelationCS__WhenAssignment_7 )?
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7985:1: ( ( rule__RelationCS__OwnedWhenAssignment_7 )? )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7986:1: ( rule__RelationCS__OwnedWhenAssignment_7 )?
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getRelationCSAccess().getWhenAssignment_7()); 
+               before(grammarAccess.getRelationCSAccess().getOwnedWhenAssignment_7()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7987:1: ( rule__RelationCS__WhenAssignment_7 )?
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7987:1: ( rule__RelationCS__OwnedWhenAssignment_7 )?
             int alt70=2;
             int LA70_0 = input.LA(1);
 
@@ -24240,10 +24240,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
             switch (alt70) {
                 case 1 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7987:2: rule__RelationCS__WhenAssignment_7
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:7987:2: rule__RelationCS__OwnedWhenAssignment_7
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__RelationCS__WhenAssignment_7_in_rule__RelationCS__Group__7__Impl16711);
-                    rule__RelationCS__WhenAssignment_7();
+                    pushFollow(FollowSets000.FOLLOW_rule__RelationCS__OwnedWhenAssignment_7_in_rule__RelationCS__Group__7__Impl16711);
+                    rule__RelationCS__OwnedWhenAssignment_7();
 
                     state._fsp--;
                     if (state.failed) return ;
@@ -24254,7 +24254,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getRelationCSAccess().getWhenAssignment_7()); 
+               after(grammarAccess.getRelationCSAccess().getOwnedWhenAssignment_7()); 
             }
 
             }
@@ -24316,22 +24316,22 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__RelationCS__Group__8__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8009:1: rule__RelationCS__Group__8__Impl : ( ( rule__RelationCS__WhereAssignment_8 )? ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8009:1: rule__RelationCS__Group__8__Impl : ( ( rule__RelationCS__OwnedWhereAssignment_8 )? ) ;
     public final void rule__RelationCS__Group__8__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8013:1: ( ( ( rule__RelationCS__WhereAssignment_8 )? ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8014:1: ( ( rule__RelationCS__WhereAssignment_8 )? )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8013:1: ( ( ( rule__RelationCS__OwnedWhereAssignment_8 )? ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8014:1: ( ( rule__RelationCS__OwnedWhereAssignment_8 )? )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8014:1: ( ( rule__RelationCS__WhereAssignment_8 )? )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8015:1: ( rule__RelationCS__WhereAssignment_8 )?
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8014:1: ( ( rule__RelationCS__OwnedWhereAssignment_8 )? )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8015:1: ( rule__RelationCS__OwnedWhereAssignment_8 )?
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getRelationCSAccess().getWhereAssignment_8()); 
+               before(grammarAccess.getRelationCSAccess().getOwnedWhereAssignment_8()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8016:1: ( rule__RelationCS__WhereAssignment_8 )?
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8016:1: ( rule__RelationCS__OwnedWhereAssignment_8 )?
             int alt71=2;
             int LA71_0 = input.LA(1);
 
@@ -24340,10 +24340,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
             switch (alt71) {
                 case 1 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8016:2: rule__RelationCS__WhereAssignment_8
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8016:2: rule__RelationCS__OwnedWhereAssignment_8
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__RelationCS__WhereAssignment_8_in_rule__RelationCS__Group__8__Impl16772);
-                    rule__RelationCS__WhereAssignment_8();
+                    pushFollow(FollowSets000.FOLLOW_rule__RelationCS__OwnedWhereAssignment_8_in_rule__RelationCS__Group__8__Impl16772);
+                    rule__RelationCS__OwnedWhereAssignment_8();
 
                     state._fsp--;
                     if (state.failed) return ;
@@ -24354,7 +24354,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getRelationCSAccess().getWhereAssignment_8()); 
+               after(grammarAccess.getRelationCSAccess().getOwnedWhereAssignment_8()); 
             }
 
             }
@@ -24916,26 +24916,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TemplateCS__Group_1__1__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8243:1: rule__TemplateCS__Group_1__1__Impl : ( ( rule__TemplateCS__GuardExpressionAssignment_1_1 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8243:1: rule__TemplateCS__Group_1__1__Impl : ( ( rule__TemplateCS__OwnedGuardExpressionAssignment_1_1 ) ) ;
     public final void rule__TemplateCS__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8247:1: ( ( ( rule__TemplateCS__GuardExpressionAssignment_1_1 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8248:1: ( ( rule__TemplateCS__GuardExpressionAssignment_1_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8247:1: ( ( ( rule__TemplateCS__OwnedGuardExpressionAssignment_1_1 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8248:1: ( ( rule__TemplateCS__OwnedGuardExpressionAssignment_1_1 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8248:1: ( ( rule__TemplateCS__GuardExpressionAssignment_1_1 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8249:1: ( rule__TemplateCS__GuardExpressionAssignment_1_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8248:1: ( ( rule__TemplateCS__OwnedGuardExpressionAssignment_1_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8249:1: ( rule__TemplateCS__OwnedGuardExpressionAssignment_1_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTemplateCSAccess().getGuardExpressionAssignment_1_1()); 
+               before(grammarAccess.getTemplateCSAccess().getOwnedGuardExpressionAssignment_1_1()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8250:1: ( rule__TemplateCS__GuardExpressionAssignment_1_1 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8250:2: rule__TemplateCS__GuardExpressionAssignment_1_1
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8250:1: ( rule__TemplateCS__OwnedGuardExpressionAssignment_1_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8250:2: rule__TemplateCS__OwnedGuardExpressionAssignment_1_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__TemplateCS__GuardExpressionAssignment_1_1_in_rule__TemplateCS__Group_1__1__Impl17219);
-            rule__TemplateCS__GuardExpressionAssignment_1_1();
+            pushFollow(FollowSets000.FOLLOW_rule__TemplateCS__OwnedGuardExpressionAssignment_1_1_in_rule__TemplateCS__Group_1__1__Impl17219);
+            rule__TemplateCS__OwnedGuardExpressionAssignment_1_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -24943,7 +24943,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTemplateCSAccess().getGuardExpressionAssignment_1_1()); 
+               after(grammarAccess.getTemplateCSAccess().getOwnedGuardExpressionAssignment_1_1()); 
             }
 
             }
@@ -25326,26 +25326,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TransformationCS__Group__3__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8399:1: rule__TransformationCS__Group__3__Impl : ( ( rule__TransformationCS__ModelDeclsAssignment_3 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8399:1: rule__TransformationCS__Group__3__Impl : ( ( rule__TransformationCS__OwnedModelDeclsAssignment_3 ) ) ;
     public final void rule__TransformationCS__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8403:1: ( ( ( rule__TransformationCS__ModelDeclsAssignment_3 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8404:1: ( ( rule__TransformationCS__ModelDeclsAssignment_3 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8403:1: ( ( ( rule__TransformationCS__OwnedModelDeclsAssignment_3 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8404:1: ( ( rule__TransformationCS__OwnedModelDeclsAssignment_3 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8404:1: ( ( rule__TransformationCS__ModelDeclsAssignment_3 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8405:1: ( rule__TransformationCS__ModelDeclsAssignment_3 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8404:1: ( ( rule__TransformationCS__OwnedModelDeclsAssignment_3 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8405:1: ( rule__TransformationCS__OwnedModelDeclsAssignment_3 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTransformationCSAccess().getModelDeclsAssignment_3()); 
+               before(grammarAccess.getTransformationCSAccess().getOwnedModelDeclsAssignment_3()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8406:1: ( rule__TransformationCS__ModelDeclsAssignment_3 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8406:2: rule__TransformationCS__ModelDeclsAssignment_3
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8406:1: ( rule__TransformationCS__OwnedModelDeclsAssignment_3 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8406:2: rule__TransformationCS__OwnedModelDeclsAssignment_3
             {
-            pushFollow(FollowSets000.FOLLOW_rule__TransformationCS__ModelDeclsAssignment_3_in_rule__TransformationCS__Group__3__Impl17528);
-            rule__TransformationCS__ModelDeclsAssignment_3();
+            pushFollow(FollowSets000.FOLLOW_rule__TransformationCS__OwnedModelDeclsAssignment_3_in_rule__TransformationCS__Group__3__Impl17528);
+            rule__TransformationCS__OwnedModelDeclsAssignment_3();
 
             state._fsp--;
             if (state.failed) return ;
@@ -25353,7 +25353,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTransformationCSAccess().getModelDeclsAssignment_3()); 
+               after(grammarAccess.getTransformationCSAccess().getOwnedModelDeclsAssignment_3()); 
             }
 
             }
@@ -25780,22 +25780,22 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TransformationCS__Group__8__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8548:1: rule__TransformationCS__Group__8__Impl : ( ( rule__TransformationCS__KeyDeclsAssignment_8 )* ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8548:1: rule__TransformationCS__Group__8__Impl : ( ( rule__TransformationCS__OwnedKeyDeclsAssignment_8 )* ) ;
     public final void rule__TransformationCS__Group__8__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8552:1: ( ( ( rule__TransformationCS__KeyDeclsAssignment_8 )* ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8553:1: ( ( rule__TransformationCS__KeyDeclsAssignment_8 )* )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8552:1: ( ( ( rule__TransformationCS__OwnedKeyDeclsAssignment_8 )* ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8553:1: ( ( rule__TransformationCS__OwnedKeyDeclsAssignment_8 )* )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8553:1: ( ( rule__TransformationCS__KeyDeclsAssignment_8 )* )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8554:1: ( rule__TransformationCS__KeyDeclsAssignment_8 )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8553:1: ( ( rule__TransformationCS__OwnedKeyDeclsAssignment_8 )* )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8554:1: ( rule__TransformationCS__OwnedKeyDeclsAssignment_8 )*
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTransformationCSAccess().getKeyDeclsAssignment_8()); 
+               before(grammarAccess.getTransformationCSAccess().getOwnedKeyDeclsAssignment_8()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8555:1: ( rule__TransformationCS__KeyDeclsAssignment_8 )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8555:1: ( rule__TransformationCS__OwnedKeyDeclsAssignment_8 )*
             loop75:
             do {
                 int alt75=2;
@@ -25808,10 +25808,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
                 switch (alt75) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8555:2: rule__TransformationCS__KeyDeclsAssignment_8
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8555:2: rule__TransformationCS__OwnedKeyDeclsAssignment_8
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__TransformationCS__KeyDeclsAssignment_8_in_rule__TransformationCS__Group__8__Impl17834);
-            	    rule__TransformationCS__KeyDeclsAssignment_8();
+            	    pushFollow(FollowSets000.FOLLOW_rule__TransformationCS__OwnedKeyDeclsAssignment_8_in_rule__TransformationCS__Group__8__Impl17834);
+            	    rule__TransformationCS__OwnedKeyDeclsAssignment_8();
 
             	    state._fsp--;
             	    if (state.failed) return ;
@@ -25825,7 +25825,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             } while (true);
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTransformationCSAccess().getKeyDeclsAssignment_8()); 
+               after(grammarAccess.getTransformationCSAccess().getOwnedKeyDeclsAssignment_8()); 
             }
 
             }
@@ -26142,26 +26142,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__TransformationCS__Group_4__1__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8688:1: rule__TransformationCS__Group_4__1__Impl : ( ( rule__TransformationCS__ModelDeclsAssignment_4_1 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8688:1: rule__TransformationCS__Group_4__1__Impl : ( ( rule__TransformationCS__OwnedModelDeclsAssignment_4_1 ) ) ;
     public final void rule__TransformationCS__Group_4__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8692:1: ( ( ( rule__TransformationCS__ModelDeclsAssignment_4_1 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8693:1: ( ( rule__TransformationCS__ModelDeclsAssignment_4_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8692:1: ( ( ( rule__TransformationCS__OwnedModelDeclsAssignment_4_1 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8693:1: ( ( rule__TransformationCS__OwnedModelDeclsAssignment_4_1 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8693:1: ( ( rule__TransformationCS__ModelDeclsAssignment_4_1 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8694:1: ( rule__TransformationCS__ModelDeclsAssignment_4_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8693:1: ( ( rule__TransformationCS__OwnedModelDeclsAssignment_4_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8694:1: ( rule__TransformationCS__OwnedModelDeclsAssignment_4_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTransformationCSAccess().getModelDeclsAssignment_4_1()); 
+               before(grammarAccess.getTransformationCSAccess().getOwnedModelDeclsAssignment_4_1()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8695:1: ( rule__TransformationCS__ModelDeclsAssignment_4_1 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8695:2: rule__TransformationCS__ModelDeclsAssignment_4_1
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8695:1: ( rule__TransformationCS__OwnedModelDeclsAssignment_4_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:8695:2: rule__TransformationCS__OwnedModelDeclsAssignment_4_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__TransformationCS__ModelDeclsAssignment_4_1_in_rule__TransformationCS__Group_4__1__Impl18096);
-            rule__TransformationCS__ModelDeclsAssignment_4_1();
+            pushFollow(FollowSets000.FOLLOW_rule__TransformationCS__OwnedModelDeclsAssignment_4_1_in_rule__TransformationCS__Group_4__1__Impl18096);
+            rule__TransformationCS__OwnedModelDeclsAssignment_4_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -26169,7 +26169,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTransformationCSAccess().getModelDeclsAssignment_4_1()); 
+               after(grammarAccess.getTransformationCSAccess().getOwnedModelDeclsAssignment_4_1()); 
             }
 
             }
@@ -27428,26 +27428,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__VarDeclarationCS__Group__0__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9162:1: rule__VarDeclarationCS__Group__0__Impl : ( ( rule__VarDeclarationCS__VarDeclarationIdsAssignment_0 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9162:1: rule__VarDeclarationCS__Group__0__Impl : ( ( rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_0 ) ) ;
     public final void rule__VarDeclarationCS__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9166:1: ( ( ( rule__VarDeclarationCS__VarDeclarationIdsAssignment_0 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9167:1: ( ( rule__VarDeclarationCS__VarDeclarationIdsAssignment_0 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9166:1: ( ( ( rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_0 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9167:1: ( ( rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_0 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9167:1: ( ( rule__VarDeclarationCS__VarDeclarationIdsAssignment_0 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9168:1: ( rule__VarDeclarationCS__VarDeclarationIdsAssignment_0 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9167:1: ( ( rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_0 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9168:1: ( rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getVarDeclarationCSAccess().getVarDeclarationIdsAssignment_0()); 
+               before(grammarAccess.getVarDeclarationCSAccess().getOwnedVarDeclarationIdsAssignment_0()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9169:1: ( rule__VarDeclarationCS__VarDeclarationIdsAssignment_0 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9169:2: rule__VarDeclarationCS__VarDeclarationIdsAssignment_0
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9169:1: ( rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_0 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9169:2: rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__VarDeclarationCS__VarDeclarationIdsAssignment_0_in_rule__VarDeclarationCS__Group__0__Impl19028);
-            rule__VarDeclarationCS__VarDeclarationIdsAssignment_0();
+            pushFollow(FollowSets000.FOLLOW_rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_0_in_rule__VarDeclarationCS__Group__0__Impl19028);
+            rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -27455,7 +27455,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getVarDeclarationCSAccess().getVarDeclarationIdsAssignment_0()); 
+               after(grammarAccess.getVarDeclarationCSAccess().getOwnedVarDeclarationIdsAssignment_0()); 
             }
 
             }
@@ -27703,26 +27703,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__VarDeclarationCS__Group__3__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9251:1: rule__VarDeclarationCS__Group__3__Impl : ( ( rule__VarDeclarationCS__TypeAssignment_3 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9251:1: rule__VarDeclarationCS__Group__3__Impl : ( ( rule__VarDeclarationCS__OwnedTypeAssignment_3 ) ) ;
     public final void rule__VarDeclarationCS__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9255:1: ( ( ( rule__VarDeclarationCS__TypeAssignment_3 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9256:1: ( ( rule__VarDeclarationCS__TypeAssignment_3 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9255:1: ( ( ( rule__VarDeclarationCS__OwnedTypeAssignment_3 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9256:1: ( ( rule__VarDeclarationCS__OwnedTypeAssignment_3 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9256:1: ( ( rule__VarDeclarationCS__TypeAssignment_3 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9257:1: ( rule__VarDeclarationCS__TypeAssignment_3 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9256:1: ( ( rule__VarDeclarationCS__OwnedTypeAssignment_3 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9257:1: ( rule__VarDeclarationCS__OwnedTypeAssignment_3 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getVarDeclarationCSAccess().getTypeAssignment_3()); 
+               before(grammarAccess.getVarDeclarationCSAccess().getOwnedTypeAssignment_3()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9258:1: ( rule__VarDeclarationCS__TypeAssignment_3 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9258:2: rule__VarDeclarationCS__TypeAssignment_3
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9258:1: ( rule__VarDeclarationCS__OwnedTypeAssignment_3 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9258:2: rule__VarDeclarationCS__OwnedTypeAssignment_3
             {
-            pushFollow(FollowSets000.FOLLOW_rule__VarDeclarationCS__TypeAssignment_3_in_rule__VarDeclarationCS__Group__3__Impl19211);
-            rule__VarDeclarationCS__TypeAssignment_3();
+            pushFollow(FollowSets000.FOLLOW_rule__VarDeclarationCS__OwnedTypeAssignment_3_in_rule__VarDeclarationCS__Group__3__Impl19211);
+            rule__VarDeclarationCS__OwnedTypeAssignment_3();
 
             state._fsp--;
             if (state.failed) return ;
@@ -27730,7 +27730,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getVarDeclarationCSAccess().getTypeAssignment_3()); 
+               after(grammarAccess.getVarDeclarationCSAccess().getOwnedTypeAssignment_3()); 
             }
 
             }
@@ -27940,26 +27940,26 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__VarDeclarationCS__Group_1__1__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9350:1: rule__VarDeclarationCS__Group_1__1__Impl : ( ( rule__VarDeclarationCS__VarDeclarationIdsAssignment_1_1 ) ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9350:1: rule__VarDeclarationCS__Group_1__1__Impl : ( ( rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_1_1 ) ) ;
     public final void rule__VarDeclarationCS__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9354:1: ( ( ( rule__VarDeclarationCS__VarDeclarationIdsAssignment_1_1 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9355:1: ( ( rule__VarDeclarationCS__VarDeclarationIdsAssignment_1_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9354:1: ( ( ( rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_1_1 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9355:1: ( ( rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_1_1 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9355:1: ( ( rule__VarDeclarationCS__VarDeclarationIdsAssignment_1_1 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9356:1: ( rule__VarDeclarationCS__VarDeclarationIdsAssignment_1_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9355:1: ( ( rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_1_1 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9356:1: ( rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_1_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getVarDeclarationCSAccess().getVarDeclarationIdsAssignment_1_1()); 
+               before(grammarAccess.getVarDeclarationCSAccess().getOwnedVarDeclarationIdsAssignment_1_1()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9357:1: ( rule__VarDeclarationCS__VarDeclarationIdsAssignment_1_1 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9357:2: rule__VarDeclarationCS__VarDeclarationIdsAssignment_1_1
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9357:1: ( rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_1_1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9357:2: rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_1_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__VarDeclarationCS__VarDeclarationIdsAssignment_1_1_in_rule__VarDeclarationCS__Group_1__1__Impl19399);
-            rule__VarDeclarationCS__VarDeclarationIdsAssignment_1_1();
+            pushFollow(FollowSets000.FOLLOW_rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_1_1_in_rule__VarDeclarationCS__Group_1__1__Impl19399);
+            rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_1_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -27967,7 +27967,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getVarDeclarationCSAccess().getVarDeclarationIdsAssignment_1_1()); 
+               after(grammarAccess.getVarDeclarationCSAccess().getOwnedVarDeclarationIdsAssignment_1_1()); 
             }
 
             }
@@ -28266,22 +28266,22 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__WhenCS__Group__3__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9476:1: rule__WhenCS__Group__3__Impl : ( ( rule__WhenCS__PredicatesAssignment_3 )* ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9476:1: rule__WhenCS__Group__3__Impl : ( ( rule__WhenCS__OwnedPredicatesAssignment_3 )* ) ;
     public final void rule__WhenCS__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9480:1: ( ( ( rule__WhenCS__PredicatesAssignment_3 )* ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9481:1: ( ( rule__WhenCS__PredicatesAssignment_3 )* )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9480:1: ( ( ( rule__WhenCS__OwnedPredicatesAssignment_3 )* ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9481:1: ( ( rule__WhenCS__OwnedPredicatesAssignment_3 )* )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9481:1: ( ( rule__WhenCS__PredicatesAssignment_3 )* )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9482:1: ( rule__WhenCS__PredicatesAssignment_3 )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9481:1: ( ( rule__WhenCS__OwnedPredicatesAssignment_3 )* )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9482:1: ( rule__WhenCS__OwnedPredicatesAssignment_3 )*
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getWhenCSAccess().getPredicatesAssignment_3()); 
+               before(grammarAccess.getWhenCSAccess().getOwnedPredicatesAssignment_3()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9483:1: ( rule__WhenCS__PredicatesAssignment_3 )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9483:1: ( rule__WhenCS__OwnedPredicatesAssignment_3 )*
             loop81:
             do {
                 int alt81=2;
@@ -28294,10 +28294,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
                 switch (alt81) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9483:2: rule__WhenCS__PredicatesAssignment_3
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9483:2: rule__WhenCS__OwnedPredicatesAssignment_3
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__WhenCS__PredicatesAssignment_3_in_rule__WhenCS__Group__3__Impl19648);
-            	    rule__WhenCS__PredicatesAssignment_3();
+            	    pushFollow(FollowSets000.FOLLOW_rule__WhenCS__OwnedPredicatesAssignment_3_in_rule__WhenCS__Group__3__Impl19648);
+            	    rule__WhenCS__OwnedPredicatesAssignment_3();
 
             	    state._fsp--;
             	    if (state.failed) return ;
@@ -28311,7 +28311,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             } while (true);
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getWhenCSAccess().getPredicatesAssignment_3()); 
+               after(grammarAccess.getWhenCSAccess().getOwnedPredicatesAssignment_3()); 
             }
 
             }
@@ -28684,22 +28684,22 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start "rule__WhereCS__Group__3__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9638:1: rule__WhereCS__Group__3__Impl : ( ( rule__WhereCS__PredicatesAssignment_3 )* ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9638:1: rule__WhereCS__Group__3__Impl : ( ( rule__WhereCS__OwnedPredicatesAssignment_3 )* ) ;
     public final void rule__WhereCS__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9642:1: ( ( ( rule__WhereCS__PredicatesAssignment_3 )* ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9643:1: ( ( rule__WhereCS__PredicatesAssignment_3 )* )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9642:1: ( ( ( rule__WhereCS__OwnedPredicatesAssignment_3 )* ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9643:1: ( ( rule__WhereCS__OwnedPredicatesAssignment_3 )* )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9643:1: ( ( rule__WhereCS__PredicatesAssignment_3 )* )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9644:1: ( rule__WhereCS__PredicatesAssignment_3 )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9643:1: ( ( rule__WhereCS__OwnedPredicatesAssignment_3 )* )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9644:1: ( rule__WhereCS__OwnedPredicatesAssignment_3 )*
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getWhereCSAccess().getPredicatesAssignment_3()); 
+               before(grammarAccess.getWhereCSAccess().getOwnedPredicatesAssignment_3()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9645:1: ( rule__WhereCS__PredicatesAssignment_3 )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9645:1: ( rule__WhereCS__OwnedPredicatesAssignment_3 )*
             loop82:
             do {
                 int alt82=2;
@@ -28712,10 +28712,10 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
 
                 switch (alt82) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9645:2: rule__WhereCS__PredicatesAssignment_3
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:9645:2: rule__WhereCS__OwnedPredicatesAssignment_3
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__WhereCS__PredicatesAssignment_3_in_rule__WhereCS__Group__3__Impl19963);
-            	    rule__WhereCS__PredicatesAssignment_3();
+            	    pushFollow(FollowSets000.FOLLOW_rule__WhereCS__OwnedPredicatesAssignment_3_in_rule__WhereCS__Group__3__Impl19963);
+            	    rule__WhereCS__OwnedPredicatesAssignment_3();
 
             	    state._fsp--;
             	    if (state.failed) return ;
@@ -28729,7 +28729,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             } while (true);
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getWhereCSAccess().getPredicatesAssignment_3()); 
+               after(grammarAccess.getWhereCSAccess().getOwnedPredicatesAssignment_3()); 
             }
 
             }
@@ -48284,9 +48284,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__TopLevelCS__OwnedLibrariesAssignment_0_1"
 
 
-    // $ANTLR start "rule__TopLevelCS__TransformationsAssignment_1"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16793:1: rule__TopLevelCS__TransformationsAssignment_1 : ( ruleTransformationCS ) ;
-    public final void rule__TopLevelCS__TransformationsAssignment_1() throws RecognitionException {
+    // $ANTLR start "rule__TopLevelCS__OwnedTransformationsAssignment_1"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16793:1: rule__TopLevelCS__OwnedTransformationsAssignment_1 : ( ruleTransformationCS ) ;
+    public final void rule__TopLevelCS__OwnedTransformationsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -48298,15 +48298,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16799:1: ruleTransformationCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTopLevelCSAccess().getTransformationsTransformationCSParserRuleCall_1_0()); 
+               before(grammarAccess.getTopLevelCSAccess().getOwnedTransformationsTransformationCSParserRuleCall_1_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleTransformationCS_in_rule__TopLevelCS__TransformationsAssignment_134038);
+            pushFollow(FollowSets001.FOLLOW_ruleTransformationCS_in_rule__TopLevelCS__OwnedTransformationsAssignment_134038);
             ruleTransformationCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTopLevelCSAccess().getTransformationsTransformationCSParserRuleCall_1_0()); 
+               after(grammarAccess.getTopLevelCSAccess().getOwnedTransformationsTransformationCSParserRuleCall_1_0()); 
             }
 
             }
@@ -48326,7 +48326,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__TopLevelCS__TransformationsAssignment_1"
+    // $ANTLR end "rule__TopLevelCS__OwnedTransformationsAssignment_1"
 
 
     // $ANTLR start "rule__CollectionTemplateCS__NameAssignment_0"
@@ -48374,9 +48374,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__CollectionTemplateCS__NameAssignment_0"
 
 
-    // $ANTLR start "rule__CollectionTemplateCS__TypeAssignment_2"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16823:1: rule__CollectionTemplateCS__TypeAssignment_2 : ( ruleCollectionTypeCS ) ;
-    public final void rule__CollectionTemplateCS__TypeAssignment_2() throws RecognitionException {
+    // $ANTLR start "rule__CollectionTemplateCS__OwnedTypeAssignment_2"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16823:1: rule__CollectionTemplateCS__OwnedTypeAssignment_2 : ( ruleCollectionTypeCS ) ;
+    public final void rule__CollectionTemplateCS__OwnedTypeAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -48388,15 +48388,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16829:1: ruleCollectionTypeCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getCollectionTemplateCSAccess().getTypeCollectionTypeCSParserRuleCall_2_0()); 
+               before(grammarAccess.getCollectionTemplateCSAccess().getOwnedTypeCollectionTypeCSParserRuleCall_2_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleCollectionTypeCS_in_rule__CollectionTemplateCS__TypeAssignment_234100);
+            pushFollow(FollowSets001.FOLLOW_ruleCollectionTypeCS_in_rule__CollectionTemplateCS__OwnedTypeAssignment_234100);
             ruleCollectionTypeCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getCollectionTemplateCSAccess().getTypeCollectionTypeCSParserRuleCall_2_0()); 
+               after(grammarAccess.getCollectionTemplateCSAccess().getOwnedTypeCollectionTypeCSParserRuleCall_2_0()); 
             }
 
             }
@@ -48416,30 +48416,30 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__CollectionTemplateCS__TypeAssignment_2"
+    // $ANTLR end "rule__CollectionTemplateCS__OwnedTypeAssignment_2"
 
 
-    // $ANTLR start "rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_0"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16838:1: rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_0 : ( ( rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_0_0 ) ) ;
-    public final void rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_0() throws RecognitionException {
+    // $ANTLR start "rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_0"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16838:1: rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_0 : ( ( rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_0_0 ) ) ;
+    public final void rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16842:1: ( ( ( rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_0_0 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16843:1: ( ( rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_0_0 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16842:1: ( ( ( rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_0_0 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16843:1: ( ( rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_0_0 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16843:1: ( ( rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_0_0 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16844:1: ( rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_0_0 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16843:1: ( ( rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_0_0 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16844:1: ( rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_0_0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getCollectionTemplateCSAccess().getMemberIdentifiersAlternatives_4_0_0()); 
+               before(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersAlternatives_4_0_0()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16845:1: ( rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_0_0 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16845:2: rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_0_0
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16845:1: ( rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_0_0 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16845:2: rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_0_0
             {
-            pushFollow(FollowSets001.FOLLOW_rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_0_0_in_rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_034131);
-            rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_0_0();
+            pushFollow(FollowSets001.FOLLOW_rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_0_0_in_rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_034131);
+            rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_0_0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -48447,7 +48447,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getCollectionTemplateCSAccess().getMemberIdentifiersAlternatives_4_0_0()); 
+               after(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersAlternatives_4_0_0()); 
             }
 
             }
@@ -48467,30 +48467,30 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_0"
+    // $ANTLR end "rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_0"
 
 
-    // $ANTLR start "rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_1_1"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16854:1: rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_1_1 : ( ( rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_1_1_0 ) ) ;
-    public final void rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_1_1() throws RecognitionException {
+    // $ANTLR start "rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_1_1"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16854:1: rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_1_1 : ( ( rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_1_1_0 ) ) ;
+    public final void rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16858:1: ( ( ( rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_1_1_0 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16859:1: ( ( rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_1_1_0 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16858:1: ( ( ( rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_1_1_0 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16859:1: ( ( rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_1_1_0 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16859:1: ( ( rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_1_1_0 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16860:1: ( rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_1_1_0 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16859:1: ( ( rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_1_1_0 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16860:1: ( rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_1_1_0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getCollectionTemplateCSAccess().getMemberIdentifiersAlternatives_4_1_1_0()); 
+               before(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersAlternatives_4_1_1_0()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16861:1: ( rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_1_1_0 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16861:2: rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_1_1_0
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16861:1: ( rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_1_1_0 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16861:2: rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_1_1_0
             {
-            pushFollow(FollowSets001.FOLLOW_rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_1_1_0_in_rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_1_134164);
-            rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_1_1_0();
+            pushFollow(FollowSets001.FOLLOW_rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_1_1_0_in_rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_1_134164);
+            rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_1_1_0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -48498,7 +48498,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getCollectionTemplateCSAccess().getMemberIdentifiersAlternatives_4_1_1_0()); 
+               after(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersAlternatives_4_1_1_0()); 
             }
 
             }
@@ -48518,7 +48518,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_1_1"
+    // $ANTLR end "rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_1_1"
 
 
     // $ANTLR start "rule__CollectionTemplateCS__RestIdentifierAssignment_4_3_0"
@@ -48635,9 +48635,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__DefaultValueCS__PropertyIdAssignment_0"
 
 
-    // $ANTLR start "rule__DefaultValueCS__InitialiserAssignment_2"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16908:1: rule__DefaultValueCS__InitialiserAssignment_2 : ( ruleExpCS ) ;
-    public final void rule__DefaultValueCS__InitialiserAssignment_2() throws RecognitionException {
+    // $ANTLR start "rule__DefaultValueCS__OwnedInitExpressionAssignment_2"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16908:1: rule__DefaultValueCS__OwnedInitExpressionAssignment_2 : ( ruleExpCS ) ;
+    public final void rule__DefaultValueCS__OwnedInitExpressionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -48649,15 +48649,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16914:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDefaultValueCSAccess().getInitialiserExpCSParserRuleCall_2_0()); 
+               before(grammarAccess.getDefaultValueCSAccess().getOwnedInitExpressionExpCSParserRuleCall_2_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleExpCS_in_rule__DefaultValueCS__InitialiserAssignment_234275);
+            pushFollow(FollowSets001.FOLLOW_ruleExpCS_in_rule__DefaultValueCS__OwnedInitExpressionAssignment_234275);
             ruleExpCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDefaultValueCSAccess().getInitialiserExpCSParserRuleCall_2_0()); 
+               after(grammarAccess.getDefaultValueCSAccess().getOwnedInitExpressionExpCSParserRuleCall_2_0()); 
             }
 
             }
@@ -48677,12 +48677,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__DefaultValueCS__InitialiserAssignment_2"
+    // $ANTLR end "rule__DefaultValueCS__OwnedInitExpressionAssignment_2"
 
 
-    // $ANTLR start "rule__DomainCS__CheckonlyAssignment_0_0"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16923:1: rule__DomainCS__CheckonlyAssignment_0_0 : ( ( 'checkonly' ) ) ;
-    public final void rule__DomainCS__CheckonlyAssignment_0_0() throws RecognitionException {
+    // $ANTLR start "rule__DomainCS__IsCheckonlyAssignment_0_0"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16923:1: rule__DomainCS__IsCheckonlyAssignment_0_0 : ( ( 'checkonly' ) ) ;
+    public final void rule__DomainCS__IsCheckonlyAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -48694,23 +48694,23 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16929:1: ( 'checkonly' )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDomainCSAccess().getCheckonlyCheckonlyKeyword_0_0_0()); 
+               before(grammarAccess.getDomainCSAccess().getIsCheckonlyCheckonlyKeyword_0_0_0()); 
             }
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16930:1: ( 'checkonly' )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16931:1: 'checkonly'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDomainCSAccess().getCheckonlyCheckonlyKeyword_0_0_0()); 
+               before(grammarAccess.getDomainCSAccess().getIsCheckonlyCheckonlyKeyword_0_0_0()); 
             }
-            match(input,19,FollowSets001.FOLLOW_19_in_rule__DomainCS__CheckonlyAssignment_0_034311); if (state.failed) return ;
+            match(input,19,FollowSets001.FOLLOW_19_in_rule__DomainCS__IsCheckonlyAssignment_0_034311); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDomainCSAccess().getCheckonlyCheckonlyKeyword_0_0_0()); 
+               after(grammarAccess.getDomainCSAccess().getIsCheckonlyCheckonlyKeyword_0_0_0()); 
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDomainCSAccess().getCheckonlyCheckonlyKeyword_0_0_0()); 
+               after(grammarAccess.getDomainCSAccess().getIsCheckonlyCheckonlyKeyword_0_0_0()); 
             }
 
             }
@@ -48730,12 +48730,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__DomainCS__CheckonlyAssignment_0_0"
+    // $ANTLR end "rule__DomainCS__IsCheckonlyAssignment_0_0"
 
 
-    // $ANTLR start "rule__DomainCS__EnforceAssignment_0_1"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16946:1: rule__DomainCS__EnforceAssignment_0_1 : ( ( 'enforce' ) ) ;
-    public final void rule__DomainCS__EnforceAssignment_0_1() throws RecognitionException {
+    // $ANTLR start "rule__DomainCS__IsEnforceAssignment_0_1"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16946:1: rule__DomainCS__IsEnforceAssignment_0_1 : ( ( 'enforce' ) ) ;
+    public final void rule__DomainCS__IsEnforceAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -48747,23 +48747,23 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16952:1: ( 'enforce' )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDomainCSAccess().getEnforceEnforceKeyword_0_1_0()); 
+               before(grammarAccess.getDomainCSAccess().getIsEnforceEnforceKeyword_0_1_0()); 
             }
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16953:1: ( 'enforce' )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16954:1: 'enforce'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDomainCSAccess().getEnforceEnforceKeyword_0_1_0()); 
+               before(grammarAccess.getDomainCSAccess().getIsEnforceEnforceKeyword_0_1_0()); 
             }
-            match(input,22,FollowSets001.FOLLOW_22_in_rule__DomainCS__EnforceAssignment_0_134355); if (state.failed) return ;
+            match(input,22,FollowSets001.FOLLOW_22_in_rule__DomainCS__IsEnforceAssignment_0_134355); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDomainCSAccess().getEnforceEnforceKeyword_0_1_0()); 
+               after(grammarAccess.getDomainCSAccess().getIsEnforceEnforceKeyword_0_1_0()); 
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDomainCSAccess().getEnforceEnforceKeyword_0_1_0()); 
+               after(grammarAccess.getDomainCSAccess().getIsEnforceEnforceKeyword_0_1_0()); 
             }
 
             }
@@ -48783,7 +48783,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__DomainCS__EnforceAssignment_0_1"
+    // $ANTLR end "rule__DomainCS__IsEnforceAssignment_0_1"
 
 
     // $ANTLR start "rule__DomainCS__ModelIdAssignment_2"
@@ -48843,9 +48843,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__DomainCS__ModelIdAssignment_2"
 
 
-    // $ANTLR start "rule__DomainCS__PatternAssignment_3"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16988:1: rule__DomainCS__PatternAssignment_3 : ( ruleDomainPatternCS ) ;
-    public final void rule__DomainCS__PatternAssignment_3() throws RecognitionException {
+    // $ANTLR start "rule__DomainCS__OwnedPatternAssignment_3"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16988:1: rule__DomainCS__OwnedPatternAssignment_3 : ( ruleDomainPatternCS ) ;
+    public final void rule__DomainCS__OwnedPatternAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -48857,15 +48857,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:16994:1: ruleDomainPatternCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDomainCSAccess().getPatternDomainPatternCSParserRuleCall_3_0()); 
+               before(grammarAccess.getDomainCSAccess().getOwnedPatternDomainPatternCSParserRuleCall_3_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleDomainPatternCS_in_rule__DomainCS__PatternAssignment_334433);
+            pushFollow(FollowSets001.FOLLOW_ruleDomainPatternCS_in_rule__DomainCS__OwnedPatternAssignment_334433);
             ruleDomainPatternCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDomainCSAccess().getPatternDomainPatternCSParserRuleCall_3_0()); 
+               after(grammarAccess.getDomainCSAccess().getOwnedPatternDomainPatternCSParserRuleCall_3_0()); 
             }
 
             }
@@ -48885,12 +48885,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__DomainCS__PatternAssignment_3"
+    // $ANTLR end "rule__DomainCS__OwnedPatternAssignment_3"
 
 
-    // $ANTLR start "rule__DomainCS__ImplementedByAssignment_4_1"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17003:1: rule__DomainCS__ImplementedByAssignment_4_1 : ( ruleExpCS ) ;
-    public final void rule__DomainCS__ImplementedByAssignment_4_1() throws RecognitionException {
+    // $ANTLR start "rule__DomainCS__OwnedImplementedByAssignment_4_1"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17003:1: rule__DomainCS__OwnedImplementedByAssignment_4_1 : ( ruleExpCS ) ;
+    public final void rule__DomainCS__OwnedImplementedByAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -48902,15 +48902,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17009:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDomainCSAccess().getImplementedByExpCSParserRuleCall_4_1_0()); 
+               before(grammarAccess.getDomainCSAccess().getOwnedImplementedByExpCSParserRuleCall_4_1_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleExpCS_in_rule__DomainCS__ImplementedByAssignment_4_134464);
+            pushFollow(FollowSets001.FOLLOW_ruleExpCS_in_rule__DomainCS__OwnedImplementedByAssignment_4_134464);
             ruleExpCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDomainCSAccess().getImplementedByExpCSParserRuleCall_4_1_0()); 
+               after(grammarAccess.getDomainCSAccess().getOwnedImplementedByExpCSParserRuleCall_4_1_0()); 
             }
 
             }
@@ -48930,12 +48930,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__DomainCS__ImplementedByAssignment_4_1"
+    // $ANTLR end "rule__DomainCS__OwnedImplementedByAssignment_4_1"
 
 
-    // $ANTLR start "rule__DomainCS__DefaultValuesAssignment_5_2"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17018:1: rule__DomainCS__DefaultValuesAssignment_5_2 : ( ruleDefaultValueCS ) ;
-    public final void rule__DomainCS__DefaultValuesAssignment_5_2() throws RecognitionException {
+    // $ANTLR start "rule__DomainCS__OwnedDefaultValuesAssignment_5_2"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17018:1: rule__DomainCS__OwnedDefaultValuesAssignment_5_2 : ( ruleDefaultValueCS ) ;
+    public final void rule__DomainCS__OwnedDefaultValuesAssignment_5_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -48947,15 +48947,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17024:1: ruleDefaultValueCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDomainCSAccess().getDefaultValuesDefaultValueCSParserRuleCall_5_2_0()); 
+               before(grammarAccess.getDomainCSAccess().getOwnedDefaultValuesDefaultValueCSParserRuleCall_5_2_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleDefaultValueCS_in_rule__DomainCS__DefaultValuesAssignment_5_234495);
+            pushFollow(FollowSets001.FOLLOW_ruleDefaultValueCS_in_rule__DomainCS__OwnedDefaultValuesAssignment_5_234495);
             ruleDefaultValueCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDomainCSAccess().getDefaultValuesDefaultValueCSParserRuleCall_5_2_0()); 
+               after(grammarAccess.getDomainCSAccess().getOwnedDefaultValuesDefaultValueCSParserRuleCall_5_2_0()); 
             }
 
             }
@@ -48975,12 +48975,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__DomainCS__DefaultValuesAssignment_5_2"
+    // $ANTLR end "rule__DomainCS__OwnedDefaultValuesAssignment_5_2"
 
 
-    // $ANTLR start "rule__DomainPatternCS__TemplateAssignment"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17033:1: rule__DomainPatternCS__TemplateAssignment : ( ruleTemplateCS ) ;
-    public final void rule__DomainPatternCS__TemplateAssignment() throws RecognitionException {
+    // $ANTLR start "rule__DomainPatternCS__OwnedTemplateAssignment"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17033:1: rule__DomainPatternCS__OwnedTemplateAssignment : ( ruleTemplateCS ) ;
+    public final void rule__DomainPatternCS__OwnedTemplateAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -48992,15 +48992,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17039:1: ruleTemplateCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getDomainPatternCSAccess().getTemplateTemplateCSParserRuleCall_0()); 
+               before(grammarAccess.getDomainPatternCSAccess().getOwnedTemplateTemplateCSParserRuleCall_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleTemplateCS_in_rule__DomainPatternCS__TemplateAssignment34526);
+            pushFollow(FollowSets001.FOLLOW_ruleTemplateCS_in_rule__DomainPatternCS__OwnedTemplateAssignment34526);
             ruleTemplateCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getDomainPatternCSAccess().getTemplateTemplateCSParserRuleCall_0()); 
+               after(grammarAccess.getDomainPatternCSAccess().getOwnedTemplateTemplateCSParserRuleCall_0()); 
             }
 
             }
@@ -49020,7 +49020,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__DomainPatternCS__TemplateAssignment"
+    // $ANTLR end "rule__DomainPatternCS__OwnedTemplateAssignment"
 
 
     // $ANTLR start "rule__ElementTemplateCS__NameAssignment_0"
@@ -49068,9 +49068,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__ElementTemplateCS__NameAssignment_0"
 
 
-    // $ANTLR start "rule__KeyDeclCS__PathNameAssignment_1"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17063:1: rule__KeyDeclCS__PathNameAssignment_1 : ( rulePathNameCS ) ;
-    public final void rule__KeyDeclCS__PathNameAssignment_1() throws RecognitionException {
+    // $ANTLR start "rule__KeyDeclCS__OwnedPathNameAssignment_1"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17063:1: rule__KeyDeclCS__OwnedPathNameAssignment_1 : ( rulePathNameCS ) ;
+    public final void rule__KeyDeclCS__OwnedPathNameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -49082,15 +49082,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17069:1: rulePathNameCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getKeyDeclCSAccess().getPathNamePathNameCSParserRuleCall_1_0()); 
+               before(grammarAccess.getKeyDeclCSAccess().getOwnedPathNamePathNameCSParserRuleCall_1_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_rulePathNameCS_in_rule__KeyDeclCS__PathNameAssignment_134588);
+            pushFollow(FollowSets001.FOLLOW_rulePathNameCS_in_rule__KeyDeclCS__OwnedPathNameAssignment_134588);
             rulePathNameCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getKeyDeclCSAccess().getPathNamePathNameCSParserRuleCall_1_0()); 
+               after(grammarAccess.getKeyDeclCSAccess().getOwnedPathNamePathNameCSParserRuleCall_1_0()); 
             }
 
             }
@@ -49110,7 +49110,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__KeyDeclCS__PathNameAssignment_1"
+    // $ANTLR end "rule__KeyDeclCS__OwnedPathNameAssignment_1"
 
 
     // $ANTLR start "rule__KeyDeclCS__PropertyIdsAssignment_3_0"
@@ -49170,9 +49170,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__KeyDeclCS__PropertyIdsAssignment_3_0"
 
 
-    // $ANTLR start "rule__KeyDeclCS__OppositePropertyIdsAssignment_3_1_2"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17097:1: rule__KeyDeclCS__OppositePropertyIdsAssignment_3_1_2 : ( rulePathNameCS ) ;
-    public final void rule__KeyDeclCS__OppositePropertyIdsAssignment_3_1_2() throws RecognitionException {
+    // $ANTLR start "rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_3_1_2"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17097:1: rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_3_1_2 : ( rulePathNameCS ) ;
+    public final void rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_3_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -49184,15 +49184,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17103:1: rulePathNameCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getKeyDeclCSAccess().getOppositePropertyIdsPathNameCSParserRuleCall_3_1_2_0()); 
+               before(grammarAccess.getKeyDeclCSAccess().getOwnedOppositePropertyIdsPathNameCSParserRuleCall_3_1_2_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_rulePathNameCS_in_rule__KeyDeclCS__OppositePropertyIdsAssignment_3_1_234658);
+            pushFollow(FollowSets001.FOLLOW_rulePathNameCS_in_rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_3_1_234658);
             rulePathNameCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getKeyDeclCSAccess().getOppositePropertyIdsPathNameCSParserRuleCall_3_1_2_0()); 
+               after(grammarAccess.getKeyDeclCSAccess().getOwnedOppositePropertyIdsPathNameCSParserRuleCall_3_1_2_0()); 
             }
 
             }
@@ -49212,7 +49212,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__KeyDeclCS__OppositePropertyIdsAssignment_3_1_2"
+    // $ANTLR end "rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_3_1_2"
 
 
     // $ANTLR start "rule__KeyDeclCS__PropertyIdsAssignment_4_1_0"
@@ -49272,9 +49272,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__KeyDeclCS__PropertyIdsAssignment_4_1_0"
 
 
-    // $ANTLR start "rule__KeyDeclCS__OppositePropertyIdsAssignment_4_1_1_2"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17131:1: rule__KeyDeclCS__OppositePropertyIdsAssignment_4_1_1_2 : ( rulePathNameCS ) ;
-    public final void rule__KeyDeclCS__OppositePropertyIdsAssignment_4_1_1_2() throws RecognitionException {
+    // $ANTLR start "rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_4_1_1_2"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17131:1: rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_4_1_1_2 : ( rulePathNameCS ) ;
+    public final void rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_4_1_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -49286,15 +49286,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17137:1: rulePathNameCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getKeyDeclCSAccess().getOppositePropertyIdsPathNameCSParserRuleCall_4_1_1_2_0()); 
+               before(grammarAccess.getKeyDeclCSAccess().getOwnedOppositePropertyIdsPathNameCSParserRuleCall_4_1_1_2_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_rulePathNameCS_in_rule__KeyDeclCS__OppositePropertyIdsAssignment_4_1_1_234728);
+            pushFollow(FollowSets001.FOLLOW_rulePathNameCS_in_rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_4_1_1_234728);
             rulePathNameCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getKeyDeclCSAccess().getOppositePropertyIdsPathNameCSParserRuleCall_4_1_1_2_0()); 
+               after(grammarAccess.getKeyDeclCSAccess().getOwnedOppositePropertyIdsPathNameCSParserRuleCall_4_1_1_2_0()); 
             }
 
             }
@@ -49314,7 +49314,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__KeyDeclCS__OppositePropertyIdsAssignment_4_1_1_2"
+    // $ANTLR end "rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_4_1_1_2"
 
 
     // $ANTLR start "rule__LibraryCS__ReferredPackageAssignment_1"
@@ -49635,9 +49635,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__ObjectTemplateCS__NameAssignment_0"
 
 
-    // $ANTLR start "rule__ObjectTemplateCS__TypeAssignment_2"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17252:1: rule__ObjectTemplateCS__TypeAssignment_2 : ( ruleTypedRefCS ) ;
-    public final void rule__ObjectTemplateCS__TypeAssignment_2() throws RecognitionException {
+    // $ANTLR start "rule__ObjectTemplateCS__OwnedTypeAssignment_2"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17252:1: rule__ObjectTemplateCS__OwnedTypeAssignment_2 : ( ruleTypedRefCS ) ;
+    public final void rule__ObjectTemplateCS__OwnedTypeAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -49649,15 +49649,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17258:1: ruleTypedRefCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getObjectTemplateCSAccess().getTypeTypedRefCSParserRuleCall_2_0()); 
+               before(grammarAccess.getObjectTemplateCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleTypedRefCS_in_rule__ObjectTemplateCS__TypeAssignment_234977);
+            pushFollow(FollowSets001.FOLLOW_ruleTypedRefCS_in_rule__ObjectTemplateCS__OwnedTypeAssignment_234977);
             ruleTypedRefCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getObjectTemplateCSAccess().getTypeTypedRefCSParserRuleCall_2_0()); 
+               after(grammarAccess.getObjectTemplateCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_0()); 
             }
 
             }
@@ -49677,12 +49677,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__ObjectTemplateCS__TypeAssignment_2"
+    // $ANTLR end "rule__ObjectTemplateCS__OwnedTypeAssignment_2"
 
 
-    // $ANTLR start "rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_0"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17267:1: rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_0 : ( rulePropertyTemplateCS ) ;
-    public final void rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_0() throws RecognitionException {
+    // $ANTLR start "rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_0"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17267:1: rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_0 : ( rulePropertyTemplateCS ) ;
+    public final void rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -49694,15 +49694,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17273:1: rulePropertyTemplateCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getObjectTemplateCSAccess().getPropertyTemplatesPropertyTemplateCSParserRuleCall_4_0_0()); 
+               before(grammarAccess.getObjectTemplateCSAccess().getOwnedPropertyTemplatesPropertyTemplateCSParserRuleCall_4_0_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_rulePropertyTemplateCS_in_rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_035008);
+            pushFollow(FollowSets001.FOLLOW_rulePropertyTemplateCS_in_rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_035008);
             rulePropertyTemplateCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getObjectTemplateCSAccess().getPropertyTemplatesPropertyTemplateCSParserRuleCall_4_0_0()); 
+               after(grammarAccess.getObjectTemplateCSAccess().getOwnedPropertyTemplatesPropertyTemplateCSParserRuleCall_4_0_0()); 
             }
 
             }
@@ -49722,12 +49722,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_0"
+    // $ANTLR end "rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_0"
 
 
-    // $ANTLR start "rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_1_1"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17282:1: rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_1_1 : ( rulePropertyTemplateCS ) ;
-    public final void rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_1_1() throws RecognitionException {
+    // $ANTLR start "rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_1_1"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17282:1: rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_1_1 : ( rulePropertyTemplateCS ) ;
+    public final void rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -49739,15 +49739,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17288:1: rulePropertyTemplateCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getObjectTemplateCSAccess().getPropertyTemplatesPropertyTemplateCSParserRuleCall_4_1_1_0()); 
+               before(grammarAccess.getObjectTemplateCSAccess().getOwnedPropertyTemplatesPropertyTemplateCSParserRuleCall_4_1_1_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_rulePropertyTemplateCS_in_rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_1_135039);
+            pushFollow(FollowSets001.FOLLOW_rulePropertyTemplateCS_in_rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_1_135039);
             rulePropertyTemplateCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getObjectTemplateCSAccess().getPropertyTemplatesPropertyTemplateCSParserRuleCall_4_1_1_0()); 
+               after(grammarAccess.getObjectTemplateCSAccess().getOwnedPropertyTemplatesPropertyTemplateCSParserRuleCall_4_1_1_0()); 
             }
 
             }
@@ -49767,7 +49767,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_1_1"
+    // $ANTLR end "rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_1_1"
 
 
     // $ANTLR start "rule__ParamDeclarationCS__NameAssignment_0"
@@ -49860,9 +49860,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__ParamDeclarationCS__OwnedTypeAssignment_2"
 
 
-    // $ANTLR start "rule__PredicateCS__ExprAssignment_0"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17327:1: rule__PredicateCS__ExprAssignment_0 : ( ruleExpCS ) ;
-    public final void rule__PredicateCS__ExprAssignment_0() throws RecognitionException {
+    // $ANTLR start "rule__PredicateCS__OwnedConditionAssignment_0"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17327:1: rule__PredicateCS__OwnedConditionAssignment_0 : ( ruleExpCS ) ;
+    public final void rule__PredicateCS__OwnedConditionAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -49874,15 +49874,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17333:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getPredicateCSAccess().getExprExpCSParserRuleCall_0_0()); 
+               before(grammarAccess.getPredicateCSAccess().getOwnedConditionExpCSParserRuleCall_0_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleExpCS_in_rule__PredicateCS__ExprAssignment_035132);
+            pushFollow(FollowSets001.FOLLOW_ruleExpCS_in_rule__PredicateCS__OwnedConditionAssignment_035132);
             ruleExpCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getPredicateCSAccess().getExprExpCSParserRuleCall_0_0()); 
+               after(grammarAccess.getPredicateCSAccess().getOwnedConditionExpCSParserRuleCall_0_0()); 
             }
 
             }
@@ -49902,7 +49902,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__PredicateCS__ExprAssignment_0"
+    // $ANTLR end "rule__PredicateCS__OwnedConditionAssignment_0"
 
 
     // $ANTLR start "rule__PrimitiveTypeDomainCS__NameAssignment_2"
@@ -49950,9 +49950,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__PrimitiveTypeDomainCS__NameAssignment_2"
 
 
-    // $ANTLR start "rule__PrimitiveTypeDomainCS__TypeAssignment_4"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17357:1: rule__PrimitiveTypeDomainCS__TypeAssignment_4 : ( ruleTypedRefCS ) ;
-    public final void rule__PrimitiveTypeDomainCS__TypeAssignment_4() throws RecognitionException {
+    // $ANTLR start "rule__PrimitiveTypeDomainCS__OwnedTypeAssignment_4"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17357:1: rule__PrimitiveTypeDomainCS__OwnedTypeAssignment_4 : ( ruleTypedRefCS ) ;
+    public final void rule__PrimitiveTypeDomainCS__OwnedTypeAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -49964,15 +49964,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17363:1: ruleTypedRefCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getPrimitiveTypeDomainCSAccess().getTypeTypedRefCSParserRuleCall_4_0()); 
+               before(grammarAccess.getPrimitiveTypeDomainCSAccess().getOwnedTypeTypedRefCSParserRuleCall_4_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleTypedRefCS_in_rule__PrimitiveTypeDomainCS__TypeAssignment_435194);
+            pushFollow(FollowSets001.FOLLOW_ruleTypedRefCS_in_rule__PrimitiveTypeDomainCS__OwnedTypeAssignment_435194);
             ruleTypedRefCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getPrimitiveTypeDomainCSAccess().getTypeTypedRefCSParserRuleCall_4_0()); 
+               after(grammarAccess.getPrimitiveTypeDomainCSAccess().getOwnedTypeTypedRefCSParserRuleCall_4_0()); 
             }
 
             }
@@ -49992,7 +49992,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__PrimitiveTypeDomainCS__TypeAssignment_4"
+    // $ANTLR end "rule__PrimitiveTypeDomainCS__OwnedTypeAssignment_4"
 
 
     // $ANTLR start "rule__PropertyTemplateCS__PropertyIdAssignment_0_0"
@@ -50052,9 +50052,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__PropertyTemplateCS__PropertyIdAssignment_0_0"
 
 
-    // $ANTLR start "rule__PropertyTemplateCS__OppositePropertyIdAssignment_0_1_2"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17391:1: rule__PropertyTemplateCS__OppositePropertyIdAssignment_0_1_2 : ( rulePathNameCS ) ;
-    public final void rule__PropertyTemplateCS__OppositePropertyIdAssignment_0_1_2() throws RecognitionException {
+    // $ANTLR start "rule__PropertyTemplateCS__OwnedOppositePropertyIdAssignment_0_1_2"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17391:1: rule__PropertyTemplateCS__OwnedOppositePropertyIdAssignment_0_1_2 : ( rulePathNameCS ) ;
+    public final void rule__PropertyTemplateCS__OwnedOppositePropertyIdAssignment_0_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -50066,15 +50066,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17397:1: rulePathNameCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getPropertyTemplateCSAccess().getOppositePropertyIdPathNameCSParserRuleCall_0_1_2_0()); 
+               before(grammarAccess.getPropertyTemplateCSAccess().getOwnedOppositePropertyIdPathNameCSParserRuleCall_0_1_2_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_rulePathNameCS_in_rule__PropertyTemplateCS__OppositePropertyIdAssignment_0_1_235264);
+            pushFollow(FollowSets001.FOLLOW_rulePathNameCS_in_rule__PropertyTemplateCS__OwnedOppositePropertyIdAssignment_0_1_235264);
             rulePathNameCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getPropertyTemplateCSAccess().getOppositePropertyIdPathNameCSParserRuleCall_0_1_2_0()); 
+               after(grammarAccess.getPropertyTemplateCSAccess().getOwnedOppositePropertyIdPathNameCSParserRuleCall_0_1_2_0()); 
             }
 
             }
@@ -50094,12 +50094,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__PropertyTemplateCS__OppositePropertyIdAssignment_0_1_2"
+    // $ANTLR end "rule__PropertyTemplateCS__OwnedOppositePropertyIdAssignment_0_1_2"
 
 
-    // $ANTLR start "rule__PropertyTemplateCS__ExpressionAssignment_2"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17406:1: rule__PropertyTemplateCS__ExpressionAssignment_2 : ( ruleExpCSOrTemplateCS ) ;
-    public final void rule__PropertyTemplateCS__ExpressionAssignment_2() throws RecognitionException {
+    // $ANTLR start "rule__PropertyTemplateCS__OwnedExpressionAssignment_2"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17406:1: rule__PropertyTemplateCS__OwnedExpressionAssignment_2 : ( ruleExpCSOrTemplateCS ) ;
+    public final void rule__PropertyTemplateCS__OwnedExpressionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -50111,15 +50111,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17412:1: ruleExpCSOrTemplateCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getPropertyTemplateCSAccess().getExpressionExpCSOrTemplateCSParserRuleCall_2_0()); 
+               before(grammarAccess.getPropertyTemplateCSAccess().getOwnedExpressionExpCSOrTemplateCSParserRuleCall_2_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleExpCSOrTemplateCS_in_rule__PropertyTemplateCS__ExpressionAssignment_235295);
+            pushFollow(FollowSets001.FOLLOW_ruleExpCSOrTemplateCS_in_rule__PropertyTemplateCS__OwnedExpressionAssignment_235295);
             ruleExpCSOrTemplateCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getPropertyTemplateCSAccess().getExpressionExpCSOrTemplateCSParserRuleCall_2_0()); 
+               after(grammarAccess.getPropertyTemplateCSAccess().getOwnedExpressionExpCSOrTemplateCSParserRuleCall_2_0()); 
             }
 
             }
@@ -50139,7 +50139,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__PropertyTemplateCS__ExpressionAssignment_2"
+    // $ANTLR end "rule__PropertyTemplateCS__OwnedExpressionAssignment_2"
 
 
     // $ANTLR start "rule__QueryCS__NameAssignment_1"
@@ -50187,9 +50187,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__QueryCS__NameAssignment_1"
 
 
-    // $ANTLR start "rule__QueryCS__InputParamDeclarationsAssignment_3_0"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17436:1: rule__QueryCS__InputParamDeclarationsAssignment_3_0 : ( ruleParamDeclarationCS ) ;
-    public final void rule__QueryCS__InputParamDeclarationsAssignment_3_0() throws RecognitionException {
+    // $ANTLR start "rule__QueryCS__OwnedParametersAssignment_3_0"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17436:1: rule__QueryCS__OwnedParametersAssignment_3_0 : ( ruleParamDeclarationCS ) ;
+    public final void rule__QueryCS__OwnedParametersAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -50201,15 +50201,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17442:1: ruleParamDeclarationCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getQueryCSAccess().getInputParamDeclarationsParamDeclarationCSParserRuleCall_3_0_0()); 
+               before(grammarAccess.getQueryCSAccess().getOwnedParametersParamDeclarationCSParserRuleCall_3_0_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleParamDeclarationCS_in_rule__QueryCS__InputParamDeclarationsAssignment_3_035357);
+            pushFollow(FollowSets001.FOLLOW_ruleParamDeclarationCS_in_rule__QueryCS__OwnedParametersAssignment_3_035357);
             ruleParamDeclarationCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getQueryCSAccess().getInputParamDeclarationsParamDeclarationCSParserRuleCall_3_0_0()); 
+               after(grammarAccess.getQueryCSAccess().getOwnedParametersParamDeclarationCSParserRuleCall_3_0_0()); 
             }
 
             }
@@ -50229,12 +50229,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__QueryCS__InputParamDeclarationsAssignment_3_0"
+    // $ANTLR end "rule__QueryCS__OwnedParametersAssignment_3_0"
 
 
-    // $ANTLR start "rule__QueryCS__InputParamDeclarationsAssignment_3_1_1"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17451:1: rule__QueryCS__InputParamDeclarationsAssignment_3_1_1 : ( ruleParamDeclarationCS ) ;
-    public final void rule__QueryCS__InputParamDeclarationsAssignment_3_1_1() throws RecognitionException {
+    // $ANTLR start "rule__QueryCS__OwnedParametersAssignment_3_1_1"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17451:1: rule__QueryCS__OwnedParametersAssignment_3_1_1 : ( ruleParamDeclarationCS ) ;
+    public final void rule__QueryCS__OwnedParametersAssignment_3_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -50246,15 +50246,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17457:1: ruleParamDeclarationCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getQueryCSAccess().getInputParamDeclarationsParamDeclarationCSParserRuleCall_3_1_1_0()); 
+               before(grammarAccess.getQueryCSAccess().getOwnedParametersParamDeclarationCSParserRuleCall_3_1_1_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleParamDeclarationCS_in_rule__QueryCS__InputParamDeclarationsAssignment_3_1_135388);
+            pushFollow(FollowSets001.FOLLOW_ruleParamDeclarationCS_in_rule__QueryCS__OwnedParametersAssignment_3_1_135388);
             ruleParamDeclarationCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getQueryCSAccess().getInputParamDeclarationsParamDeclarationCSParserRuleCall_3_1_1_0()); 
+               after(grammarAccess.getQueryCSAccess().getOwnedParametersParamDeclarationCSParserRuleCall_3_1_1_0()); 
             }
 
             }
@@ -50274,7 +50274,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__QueryCS__InputParamDeclarationsAssignment_3_1_1"
+    // $ANTLR end "rule__QueryCS__OwnedParametersAssignment_3_1_1"
 
 
     // $ANTLR start "rule__QueryCS__OwnedTypeAssignment_6"
@@ -50322,9 +50322,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__QueryCS__OwnedTypeAssignment_6"
 
 
-    // $ANTLR start "rule__QueryCS__ExpressionAssignment_7_1_1"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17481:1: rule__QueryCS__ExpressionAssignment_7_1_1 : ( ruleExpCS ) ;
-    public final void rule__QueryCS__ExpressionAssignment_7_1_1() throws RecognitionException {
+    // $ANTLR start "rule__QueryCS__OwnedExpressionAssignment_7_1_1"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17481:1: rule__QueryCS__OwnedExpressionAssignment_7_1_1 : ( ruleExpCS ) ;
+    public final void rule__QueryCS__OwnedExpressionAssignment_7_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -50336,15 +50336,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17487:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getQueryCSAccess().getExpressionExpCSParserRuleCall_7_1_1_0()); 
+               before(grammarAccess.getQueryCSAccess().getOwnedExpressionExpCSParserRuleCall_7_1_1_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleExpCS_in_rule__QueryCS__ExpressionAssignment_7_1_135450);
+            pushFollow(FollowSets001.FOLLOW_ruleExpCS_in_rule__QueryCS__OwnedExpressionAssignment_7_1_135450);
             ruleExpCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getQueryCSAccess().getExpressionExpCSParserRuleCall_7_1_1_0()); 
+               after(grammarAccess.getQueryCSAccess().getOwnedExpressionExpCSParserRuleCall_7_1_1_0()); 
             }
 
             }
@@ -50364,12 +50364,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__QueryCS__ExpressionAssignment_7_1_1"
+    // $ANTLR end "rule__QueryCS__OwnedExpressionAssignment_7_1_1"
 
 
-    // $ANTLR start "rule__RelationCS__TopAssignment_0"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17496:1: rule__RelationCS__TopAssignment_0 : ( ( 'top' ) ) ;
-    public final void rule__RelationCS__TopAssignment_0() throws RecognitionException {
+    // $ANTLR start "rule__RelationCS__IsTopAssignment_0"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17496:1: rule__RelationCS__IsTopAssignment_0 : ( ( 'top' ) ) ;
+    public final void rule__RelationCS__IsTopAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -50381,23 +50381,23 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17502:1: ( 'top' )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getRelationCSAccess().getTopTopKeyword_0_0()); 
+               before(grammarAccess.getRelationCSAccess().getIsTopTopKeyword_0_0()); 
             }
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17503:1: ( 'top' )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17504:1: 'top'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getRelationCSAccess().getTopTopKeyword_0_0()); 
+               before(grammarAccess.getRelationCSAccess().getIsTopTopKeyword_0_0()); 
             }
-            match(input,33,FollowSets001.FOLLOW_33_in_rule__RelationCS__TopAssignment_035486); if (state.failed) return ;
+            match(input,33,FollowSets001.FOLLOW_33_in_rule__RelationCS__IsTopAssignment_035486); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getRelationCSAccess().getTopTopKeyword_0_0()); 
+               after(grammarAccess.getRelationCSAccess().getIsTopTopKeyword_0_0()); 
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getRelationCSAccess().getTopTopKeyword_0_0()); 
+               after(grammarAccess.getRelationCSAccess().getIsTopTopKeyword_0_0()); 
             }
 
             }
@@ -50417,7 +50417,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__RelationCS__TopAssignment_0"
+    // $ANTLR end "rule__RelationCS__IsTopAssignment_0"
 
 
     // $ANTLR start "rule__RelationCS__NameAssignment_2"
@@ -50522,9 +50522,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__RelationCS__OverridesAssignment_3_1"
 
 
-    // $ANTLR start "rule__RelationCS__VarDeclarationsAssignment_5"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17553:1: rule__RelationCS__VarDeclarationsAssignment_5 : ( ruleVarDeclarationCS ) ;
-    public final void rule__RelationCS__VarDeclarationsAssignment_5() throws RecognitionException {
+    // $ANTLR start "rule__RelationCS__OwnedVarDeclarationsAssignment_5"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17553:1: rule__RelationCS__OwnedVarDeclarationsAssignment_5 : ( ruleVarDeclarationCS ) ;
+    public final void rule__RelationCS__OwnedVarDeclarationsAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -50536,15 +50536,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17559:1: ruleVarDeclarationCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getRelationCSAccess().getVarDeclarationsVarDeclarationCSParserRuleCall_5_0()); 
+               before(grammarAccess.getRelationCSAccess().getOwnedVarDeclarationsVarDeclarationCSParserRuleCall_5_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleVarDeclarationCS_in_rule__RelationCS__VarDeclarationsAssignment_535595);
+            pushFollow(FollowSets001.FOLLOW_ruleVarDeclarationCS_in_rule__RelationCS__OwnedVarDeclarationsAssignment_535595);
             ruleVarDeclarationCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getRelationCSAccess().getVarDeclarationsVarDeclarationCSParserRuleCall_5_0()); 
+               after(grammarAccess.getRelationCSAccess().getOwnedVarDeclarationsVarDeclarationCSParserRuleCall_5_0()); 
             }
 
             }
@@ -50564,12 +50564,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__RelationCS__VarDeclarationsAssignment_5"
+    // $ANTLR end "rule__RelationCS__OwnedVarDeclarationsAssignment_5"
 
 
-    // $ANTLR start "rule__RelationCS__DomainsAssignment_6_0"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17568:1: rule__RelationCS__DomainsAssignment_6_0 : ( ruleDomainCS ) ;
-    public final void rule__RelationCS__DomainsAssignment_6_0() throws RecognitionException {
+    // $ANTLR start "rule__RelationCS__OwnedDomainsAssignment_6_0"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17568:1: rule__RelationCS__OwnedDomainsAssignment_6_0 : ( ruleDomainCS ) ;
+    public final void rule__RelationCS__OwnedDomainsAssignment_6_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -50581,15 +50581,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17574:1: ruleDomainCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getRelationCSAccess().getDomainsDomainCSParserRuleCall_6_0_0()); 
+               before(grammarAccess.getRelationCSAccess().getOwnedDomainsDomainCSParserRuleCall_6_0_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleDomainCS_in_rule__RelationCS__DomainsAssignment_6_035626);
+            pushFollow(FollowSets001.FOLLOW_ruleDomainCS_in_rule__RelationCS__OwnedDomainsAssignment_6_035626);
             ruleDomainCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getRelationCSAccess().getDomainsDomainCSParserRuleCall_6_0_0()); 
+               after(grammarAccess.getRelationCSAccess().getOwnedDomainsDomainCSParserRuleCall_6_0_0()); 
             }
 
             }
@@ -50609,12 +50609,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__RelationCS__DomainsAssignment_6_0"
+    // $ANTLR end "rule__RelationCS__OwnedDomainsAssignment_6_0"
 
 
-    // $ANTLR start "rule__RelationCS__DomainsAssignment_6_1"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17583:1: rule__RelationCS__DomainsAssignment_6_1 : ( rulePrimitiveTypeDomainCS ) ;
-    public final void rule__RelationCS__DomainsAssignment_6_1() throws RecognitionException {
+    // $ANTLR start "rule__RelationCS__OwnedDomainsAssignment_6_1"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17583:1: rule__RelationCS__OwnedDomainsAssignment_6_1 : ( rulePrimitiveTypeDomainCS ) ;
+    public final void rule__RelationCS__OwnedDomainsAssignment_6_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -50626,15 +50626,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17589:1: rulePrimitiveTypeDomainCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getRelationCSAccess().getDomainsPrimitiveTypeDomainCSParserRuleCall_6_1_0()); 
+               before(grammarAccess.getRelationCSAccess().getOwnedDomainsPrimitiveTypeDomainCSParserRuleCall_6_1_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_rulePrimitiveTypeDomainCS_in_rule__RelationCS__DomainsAssignment_6_135657);
+            pushFollow(FollowSets001.FOLLOW_rulePrimitiveTypeDomainCS_in_rule__RelationCS__OwnedDomainsAssignment_6_135657);
             rulePrimitiveTypeDomainCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getRelationCSAccess().getDomainsPrimitiveTypeDomainCSParserRuleCall_6_1_0()); 
+               after(grammarAccess.getRelationCSAccess().getOwnedDomainsPrimitiveTypeDomainCSParserRuleCall_6_1_0()); 
             }
 
             }
@@ -50654,12 +50654,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__RelationCS__DomainsAssignment_6_1"
+    // $ANTLR end "rule__RelationCS__OwnedDomainsAssignment_6_1"
 
 
-    // $ANTLR start "rule__RelationCS__WhenAssignment_7"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17598:1: rule__RelationCS__WhenAssignment_7 : ( ruleWhenCS ) ;
-    public final void rule__RelationCS__WhenAssignment_7() throws RecognitionException {
+    // $ANTLR start "rule__RelationCS__OwnedWhenAssignment_7"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17598:1: rule__RelationCS__OwnedWhenAssignment_7 : ( ruleWhenCS ) ;
+    public final void rule__RelationCS__OwnedWhenAssignment_7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -50671,15 +50671,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17604:1: ruleWhenCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getRelationCSAccess().getWhenWhenCSParserRuleCall_7_0()); 
+               before(grammarAccess.getRelationCSAccess().getOwnedWhenWhenCSParserRuleCall_7_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleWhenCS_in_rule__RelationCS__WhenAssignment_735688);
+            pushFollow(FollowSets001.FOLLOW_ruleWhenCS_in_rule__RelationCS__OwnedWhenAssignment_735688);
             ruleWhenCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getRelationCSAccess().getWhenWhenCSParserRuleCall_7_0()); 
+               after(grammarAccess.getRelationCSAccess().getOwnedWhenWhenCSParserRuleCall_7_0()); 
             }
 
             }
@@ -50699,12 +50699,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__RelationCS__WhenAssignment_7"
+    // $ANTLR end "rule__RelationCS__OwnedWhenAssignment_7"
 
 
-    // $ANTLR start "rule__RelationCS__WhereAssignment_8"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17613:1: rule__RelationCS__WhereAssignment_8 : ( ruleWhereCS ) ;
-    public final void rule__RelationCS__WhereAssignment_8() throws RecognitionException {
+    // $ANTLR start "rule__RelationCS__OwnedWhereAssignment_8"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17613:1: rule__RelationCS__OwnedWhereAssignment_8 : ( ruleWhereCS ) ;
+    public final void rule__RelationCS__OwnedWhereAssignment_8() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -50716,15 +50716,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17619:1: ruleWhereCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getRelationCSAccess().getWhereWhereCSParserRuleCall_8_0()); 
+               before(grammarAccess.getRelationCSAccess().getOwnedWhereWhereCSParserRuleCall_8_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleWhereCS_in_rule__RelationCS__WhereAssignment_835719);
+            pushFollow(FollowSets001.FOLLOW_ruleWhereCS_in_rule__RelationCS__OwnedWhereAssignment_835719);
             ruleWhereCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getRelationCSAccess().getWhereWhereCSParserRuleCall_8_0()); 
+               after(grammarAccess.getRelationCSAccess().getOwnedWhereWhereCSParserRuleCall_8_0()); 
             }
 
             }
@@ -50744,12 +50744,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__RelationCS__WhereAssignment_8"
+    // $ANTLR end "rule__RelationCS__OwnedWhereAssignment_8"
 
 
-    // $ANTLR start "rule__TemplateCS__GuardExpressionAssignment_1_1"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17628:1: rule__TemplateCS__GuardExpressionAssignment_1_1 : ( ruleExpCS ) ;
-    public final void rule__TemplateCS__GuardExpressionAssignment_1_1() throws RecognitionException {
+    // $ANTLR start "rule__TemplateCS__OwnedGuardExpressionAssignment_1_1"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17628:1: rule__TemplateCS__OwnedGuardExpressionAssignment_1_1 : ( ruleExpCS ) ;
+    public final void rule__TemplateCS__OwnedGuardExpressionAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -50761,15 +50761,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17634:1: ruleExpCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTemplateCSAccess().getGuardExpressionExpCSParserRuleCall_1_1_0()); 
+               before(grammarAccess.getTemplateCSAccess().getOwnedGuardExpressionExpCSParserRuleCall_1_1_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleExpCS_in_rule__TemplateCS__GuardExpressionAssignment_1_135750);
+            pushFollow(FollowSets001.FOLLOW_ruleExpCS_in_rule__TemplateCS__OwnedGuardExpressionAssignment_1_135750);
             ruleExpCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTemplateCSAccess().getGuardExpressionExpCSParserRuleCall_1_1_0()); 
+               after(grammarAccess.getTemplateCSAccess().getOwnedGuardExpressionExpCSParserRuleCall_1_1_0()); 
             }
 
             }
@@ -50789,7 +50789,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__TemplateCS__GuardExpressionAssignment_1_1"
+    // $ANTLR end "rule__TemplateCS__OwnedGuardExpressionAssignment_1_1"
 
 
     // $ANTLR start "rule__TransformationCS__NameAssignment_1"
@@ -50837,9 +50837,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__TransformationCS__NameAssignment_1"
 
 
-    // $ANTLR start "rule__TransformationCS__ModelDeclsAssignment_3"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17658:1: rule__TransformationCS__ModelDeclsAssignment_3 : ( ruleModelDeclCS ) ;
-    public final void rule__TransformationCS__ModelDeclsAssignment_3() throws RecognitionException {
+    // $ANTLR start "rule__TransformationCS__OwnedModelDeclsAssignment_3"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17658:1: rule__TransformationCS__OwnedModelDeclsAssignment_3 : ( ruleModelDeclCS ) ;
+    public final void rule__TransformationCS__OwnedModelDeclsAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -50851,15 +50851,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17664:1: ruleModelDeclCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTransformationCSAccess().getModelDeclsModelDeclCSParserRuleCall_3_0()); 
+               before(grammarAccess.getTransformationCSAccess().getOwnedModelDeclsModelDeclCSParserRuleCall_3_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleModelDeclCS_in_rule__TransformationCS__ModelDeclsAssignment_335812);
+            pushFollow(FollowSets001.FOLLOW_ruleModelDeclCS_in_rule__TransformationCS__OwnedModelDeclsAssignment_335812);
             ruleModelDeclCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTransformationCSAccess().getModelDeclsModelDeclCSParserRuleCall_3_0()); 
+               after(grammarAccess.getTransformationCSAccess().getOwnedModelDeclsModelDeclCSParserRuleCall_3_0()); 
             }
 
             }
@@ -50879,12 +50879,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__TransformationCS__ModelDeclsAssignment_3"
+    // $ANTLR end "rule__TransformationCS__OwnedModelDeclsAssignment_3"
 
 
-    // $ANTLR start "rule__TransformationCS__ModelDeclsAssignment_4_1"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17673:1: rule__TransformationCS__ModelDeclsAssignment_4_1 : ( ruleModelDeclCS ) ;
-    public final void rule__TransformationCS__ModelDeclsAssignment_4_1() throws RecognitionException {
+    // $ANTLR start "rule__TransformationCS__OwnedModelDeclsAssignment_4_1"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17673:1: rule__TransformationCS__OwnedModelDeclsAssignment_4_1 : ( ruleModelDeclCS ) ;
+    public final void rule__TransformationCS__OwnedModelDeclsAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -50896,15 +50896,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17679:1: ruleModelDeclCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTransformationCSAccess().getModelDeclsModelDeclCSParserRuleCall_4_1_0()); 
+               before(grammarAccess.getTransformationCSAccess().getOwnedModelDeclsModelDeclCSParserRuleCall_4_1_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleModelDeclCS_in_rule__TransformationCS__ModelDeclsAssignment_4_135843);
+            pushFollow(FollowSets001.FOLLOW_ruleModelDeclCS_in_rule__TransformationCS__OwnedModelDeclsAssignment_4_135843);
             ruleModelDeclCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTransformationCSAccess().getModelDeclsModelDeclCSParserRuleCall_4_1_0()); 
+               after(grammarAccess.getTransformationCSAccess().getOwnedModelDeclsModelDeclCSParserRuleCall_4_1_0()); 
             }
 
             }
@@ -50924,7 +50924,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__TransformationCS__ModelDeclsAssignment_4_1"
+    // $ANTLR end "rule__TransformationCS__OwnedModelDeclsAssignment_4_1"
 
 
     // $ANTLR start "rule__TransformationCS__ExtendsAssignment_6_1"
@@ -51041,9 +51041,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__TransformationCS__ExtendsAssignment_6_2_1"
 
 
-    // $ANTLR start "rule__TransformationCS__KeyDeclsAssignment_8"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17726:1: rule__TransformationCS__KeyDeclsAssignment_8 : ( ruleKeyDeclCS ) ;
-    public final void rule__TransformationCS__KeyDeclsAssignment_8() throws RecognitionException {
+    // $ANTLR start "rule__TransformationCS__OwnedKeyDeclsAssignment_8"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17726:1: rule__TransformationCS__OwnedKeyDeclsAssignment_8 : ( ruleKeyDeclCS ) ;
+    public final void rule__TransformationCS__OwnedKeyDeclsAssignment_8() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -51055,15 +51055,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17732:1: ruleKeyDeclCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTransformationCSAccess().getKeyDeclsKeyDeclCSParserRuleCall_8_0()); 
+               before(grammarAccess.getTransformationCSAccess().getOwnedKeyDeclsKeyDeclCSParserRuleCall_8_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleKeyDeclCS_in_rule__TransformationCS__KeyDeclsAssignment_835952);
+            pushFollow(FollowSets001.FOLLOW_ruleKeyDeclCS_in_rule__TransformationCS__OwnedKeyDeclsAssignment_835952);
             ruleKeyDeclCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTransformationCSAccess().getKeyDeclsKeyDeclCSParserRuleCall_8_0()); 
+               after(grammarAccess.getTransformationCSAccess().getOwnedKeyDeclsKeyDeclCSParserRuleCall_8_0()); 
             }
 
             }
@@ -51083,12 +51083,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__TransformationCS__KeyDeclsAssignment_8"
+    // $ANTLR end "rule__TransformationCS__OwnedKeyDeclsAssignment_8"
 
 
-    // $ANTLR start "rule__TransformationCS__RelationAssignment_9_0"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17741:1: rule__TransformationCS__RelationAssignment_9_0 : ( ruleRelationCS ) ;
-    public final void rule__TransformationCS__RelationAssignment_9_0() throws RecognitionException {
+    // $ANTLR start "rule__TransformationCS__OwnedRelationsAssignment_9_0"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17741:1: rule__TransformationCS__OwnedRelationsAssignment_9_0 : ( ruleRelationCS ) ;
+    public final void rule__TransformationCS__OwnedRelationsAssignment_9_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -51100,15 +51100,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17747:1: ruleRelationCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTransformationCSAccess().getRelationRelationCSParserRuleCall_9_0_0()); 
+               before(grammarAccess.getTransformationCSAccess().getOwnedRelationsRelationCSParserRuleCall_9_0_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleRelationCS_in_rule__TransformationCS__RelationAssignment_9_035983);
+            pushFollow(FollowSets001.FOLLOW_ruleRelationCS_in_rule__TransformationCS__OwnedRelationsAssignment_9_035983);
             ruleRelationCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTransformationCSAccess().getRelationRelationCSParserRuleCall_9_0_0()); 
+               after(grammarAccess.getTransformationCSAccess().getOwnedRelationsRelationCSParserRuleCall_9_0_0()); 
             }
 
             }
@@ -51128,12 +51128,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__TransformationCS__RelationAssignment_9_0"
+    // $ANTLR end "rule__TransformationCS__OwnedRelationsAssignment_9_0"
 
 
-    // $ANTLR start "rule__TransformationCS__QueriesAssignment_9_1"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17756:1: rule__TransformationCS__QueriesAssignment_9_1 : ( ruleQueryCS ) ;
-    public final void rule__TransformationCS__QueriesAssignment_9_1() throws RecognitionException {
+    // $ANTLR start "rule__TransformationCS__OwnedQueriesAssignment_9_1"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17756:1: rule__TransformationCS__OwnedQueriesAssignment_9_1 : ( ruleQueryCS ) ;
+    public final void rule__TransformationCS__OwnedQueriesAssignment_9_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -51145,15 +51145,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17762:1: ruleQueryCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTransformationCSAccess().getQueriesQueryCSParserRuleCall_9_1_0()); 
+               before(grammarAccess.getTransformationCSAccess().getOwnedQueriesQueryCSParserRuleCall_9_1_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleQueryCS_in_rule__TransformationCS__QueriesAssignment_9_136014);
+            pushFollow(FollowSets001.FOLLOW_ruleQueryCS_in_rule__TransformationCS__OwnedQueriesAssignment_9_136014);
             ruleQueryCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTransformationCSAccess().getQueriesQueryCSParserRuleCall_9_1_0()); 
+               after(grammarAccess.getTransformationCSAccess().getOwnedQueriesQueryCSParserRuleCall_9_1_0()); 
             }
 
             }
@@ -51173,7 +51173,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__TransformationCS__QueriesAssignment_9_1"
+    // $ANTLR end "rule__TransformationCS__OwnedQueriesAssignment_9_1"
 
 
     // $ANTLR start "rule__UnitCS__NameAssignment_1_0"
@@ -51319,9 +51319,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__UnitCS__IsAllAssignment_3_1"
 
 
-    // $ANTLR start "rule__VarDeclarationCS__VarDeclarationIdsAssignment_0"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17824:1: rule__VarDeclarationCS__VarDeclarationIdsAssignment_0 : ( ruleVarDeclarationIdCS ) ;
-    public final void rule__VarDeclarationCS__VarDeclarationIdsAssignment_0() throws RecognitionException {
+    // $ANTLR start "rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_0"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17824:1: rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_0 : ( ruleVarDeclarationIdCS ) ;
+    public final void rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -51333,15 +51333,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17830:1: ruleVarDeclarationIdCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getVarDeclarationCSAccess().getVarDeclarationIdsVarDeclarationIdCSParserRuleCall_0_0()); 
+               before(grammarAccess.getVarDeclarationCSAccess().getOwnedVarDeclarationIdsVarDeclarationIdCSParserRuleCall_0_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleVarDeclarationIdCS_in_rule__VarDeclarationCS__VarDeclarationIdsAssignment_036151);
+            pushFollow(FollowSets001.FOLLOW_ruleVarDeclarationIdCS_in_rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_036151);
             ruleVarDeclarationIdCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getVarDeclarationCSAccess().getVarDeclarationIdsVarDeclarationIdCSParserRuleCall_0_0()); 
+               after(grammarAccess.getVarDeclarationCSAccess().getOwnedVarDeclarationIdsVarDeclarationIdCSParserRuleCall_0_0()); 
             }
 
             }
@@ -51361,12 +51361,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__VarDeclarationCS__VarDeclarationIdsAssignment_0"
+    // $ANTLR end "rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_0"
 
 
-    // $ANTLR start "rule__VarDeclarationCS__VarDeclarationIdsAssignment_1_1"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17839:1: rule__VarDeclarationCS__VarDeclarationIdsAssignment_1_1 : ( ruleVarDeclarationIdCS ) ;
-    public final void rule__VarDeclarationCS__VarDeclarationIdsAssignment_1_1() throws RecognitionException {
+    // $ANTLR start "rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_1_1"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17839:1: rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_1_1 : ( ruleVarDeclarationIdCS ) ;
+    public final void rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -51378,15 +51378,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17845:1: ruleVarDeclarationIdCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getVarDeclarationCSAccess().getVarDeclarationIdsVarDeclarationIdCSParserRuleCall_1_1_0()); 
+               before(grammarAccess.getVarDeclarationCSAccess().getOwnedVarDeclarationIdsVarDeclarationIdCSParserRuleCall_1_1_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleVarDeclarationIdCS_in_rule__VarDeclarationCS__VarDeclarationIdsAssignment_1_136182);
+            pushFollow(FollowSets001.FOLLOW_ruleVarDeclarationIdCS_in_rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_1_136182);
             ruleVarDeclarationIdCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getVarDeclarationCSAccess().getVarDeclarationIdsVarDeclarationIdCSParserRuleCall_1_1_0()); 
+               after(grammarAccess.getVarDeclarationCSAccess().getOwnedVarDeclarationIdsVarDeclarationIdCSParserRuleCall_1_1_0()); 
             }
 
             }
@@ -51406,12 +51406,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__VarDeclarationCS__VarDeclarationIdsAssignment_1_1"
+    // $ANTLR end "rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_1_1"
 
 
-    // $ANTLR start "rule__VarDeclarationCS__TypeAssignment_3"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17854:1: rule__VarDeclarationCS__TypeAssignment_3 : ( ruleTypedRefCS ) ;
-    public final void rule__VarDeclarationCS__TypeAssignment_3() throws RecognitionException {
+    // $ANTLR start "rule__VarDeclarationCS__OwnedTypeAssignment_3"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17854:1: rule__VarDeclarationCS__OwnedTypeAssignment_3 : ( ruleTypedRefCS ) ;
+    public final void rule__VarDeclarationCS__OwnedTypeAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -51423,15 +51423,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17860:1: ruleTypedRefCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getVarDeclarationCSAccess().getTypeTypedRefCSParserRuleCall_3_0()); 
+               before(grammarAccess.getVarDeclarationCSAccess().getOwnedTypeTypedRefCSParserRuleCall_3_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleTypedRefCS_in_rule__VarDeclarationCS__TypeAssignment_336213);
+            pushFollow(FollowSets001.FOLLOW_ruleTypedRefCS_in_rule__VarDeclarationCS__OwnedTypeAssignment_336213);
             ruleTypedRefCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getVarDeclarationCSAccess().getTypeTypedRefCSParserRuleCall_3_0()); 
+               after(grammarAccess.getVarDeclarationCSAccess().getOwnedTypeTypedRefCSParserRuleCall_3_0()); 
             }
 
             }
@@ -51451,7 +51451,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__VarDeclarationCS__TypeAssignment_3"
+    // $ANTLR end "rule__VarDeclarationCS__OwnedTypeAssignment_3"
 
 
     // $ANTLR start "rule__VarDeclarationIdCS__NameAssignment"
@@ -51499,9 +51499,9 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
     // $ANTLR end "rule__VarDeclarationIdCS__NameAssignment"
 
 
-    // $ANTLR start "rule__WhenCS__PredicatesAssignment_3"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17884:1: rule__WhenCS__PredicatesAssignment_3 : ( rulePredicateCS ) ;
-    public final void rule__WhenCS__PredicatesAssignment_3() throws RecognitionException {
+    // $ANTLR start "rule__WhenCS__OwnedPredicatesAssignment_3"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17884:1: rule__WhenCS__OwnedPredicatesAssignment_3 : ( rulePredicateCS ) ;
+    public final void rule__WhenCS__OwnedPredicatesAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -51513,15 +51513,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17890:1: rulePredicateCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getWhenCSAccess().getPredicatesPredicateCSParserRuleCall_3_0()); 
+               before(grammarAccess.getWhenCSAccess().getOwnedPredicatesPredicateCSParserRuleCall_3_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_rulePredicateCS_in_rule__WhenCS__PredicatesAssignment_336275);
+            pushFollow(FollowSets001.FOLLOW_rulePredicateCS_in_rule__WhenCS__OwnedPredicatesAssignment_336275);
             rulePredicateCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getWhenCSAccess().getPredicatesPredicateCSParserRuleCall_3_0()); 
+               after(grammarAccess.getWhenCSAccess().getOwnedPredicatesPredicateCSParserRuleCall_3_0()); 
             }
 
             }
@@ -51541,12 +51541,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__WhenCS__PredicatesAssignment_3"
+    // $ANTLR end "rule__WhenCS__OwnedPredicatesAssignment_3"
 
 
-    // $ANTLR start "rule__WhereCS__PredicatesAssignment_3"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17899:1: rule__WhereCS__PredicatesAssignment_3 : ( rulePredicateCS ) ;
-    public final void rule__WhereCS__PredicatesAssignment_3() throws RecognitionException {
+    // $ANTLR start "rule__WhereCS__OwnedPredicatesAssignment_3"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17899:1: rule__WhereCS__OwnedPredicatesAssignment_3 : ( rulePredicateCS ) ;
+    public final void rule__WhereCS__OwnedPredicatesAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -51558,15 +51558,15 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             // ../../plugins/org.eclipse.qvtd.xtext.qvtrelation.ui/src-gen/org/eclipse/qvtd/xtext/qvtrelation/ui/contentassist/antlr/internal/InternalQVTrelation.g:17905:1: rulePredicateCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getWhereCSAccess().getPredicatesPredicateCSParserRuleCall_3_0()); 
+               before(grammarAccess.getWhereCSAccess().getOwnedPredicatesPredicateCSParserRuleCall_3_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_rulePredicateCS_in_rule__WhereCS__PredicatesAssignment_336306);
+            pushFollow(FollowSets001.FOLLOW_rulePredicateCS_in_rule__WhereCS__OwnedPredicatesAssignment_336306);
             rulePredicateCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getWhereCSAccess().getPredicatesPredicateCSParserRuleCall_3_0()); 
+               after(grammarAccess.getWhereCSAccess().getOwnedPredicatesPredicateCSParserRuleCall_3_0()); 
             }
 
             }
@@ -51586,7 +51586,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         }
         return ;
     }
-    // $ANTLR end "rule__WhereCS__PredicatesAssignment_3"
+    // $ANTLR end "rule__WhereCS__OwnedPredicatesAssignment_3"
 
 
     // $ANTLR start "rule__TypedTypeRefCS__OwnedPathNameAssignment"
@@ -57037,7 +57037,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             this.transition = DFA3_transition;
         }
         public String getDescription() {
-            return "2926:1: rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_0_0 : ( ( ruleTemplateCS ) | ( ruleElementTemplateCS ) );";
+            return "2926:1: rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_0_0 : ( ( ruleTemplateCS ) | ( ruleElementTemplateCS ) );";
         }
     }
     static final String DFA4_eotS =
@@ -57111,7 +57111,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
             this.transition = DFA4_transition;
         }
         public String getDescription() {
-            return "2948:1: rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_1_1_0 : ( ( ruleTemplateCS ) | ( ruleElementTemplateCS ) );";
+            return "2948:1: rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_1_1_0 : ( ( ruleTemplateCS ) | ( ruleElementTemplateCS ) );";
         }
     }
     static final String DFA14_eotS =
@@ -58520,7 +58520,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_rule__DomainCS__Group__0_in_ruleDomainCS280 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleDomainPatternCS_in_entryRuleDomainPatternCS307 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleDomainPatternCS314 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__DomainPatternCS__TemplateAssignment_in_ruleDomainPatternCS340 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__DomainPatternCS__OwnedTemplateAssignment_in_ruleDomainPatternCS340 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleElementTemplateCS_in_entryRuleElementTemplateCS367 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleElementTemplateCS374 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ElementTemplateCS__Alternatives_in_ruleElementTemplateCS400 = new BitSet(new long[]{0x0000000000000002L});
@@ -58812,14 +58812,14 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_RULE_SINGLE_QUOTED_STRING_in_ruleURI6115 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TopLevelCS__OwnedImportsAssignment_0_0_in_rule__TopLevelCS__Alternatives_06150 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TopLevelCS__OwnedLibrariesAssignment_0_1_in_rule__TopLevelCS__Alternatives_06168 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTemplateCS_in_rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_0_06201 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleElementTemplateCS_in_rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_0_06218 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTemplateCS_in_rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_1_1_06250 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleElementTemplateCS_in_rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_1_1_06267 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTemplateCS_in_rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_0_06201 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleElementTemplateCS_in_rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_0_06218 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTemplateCS_in_rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_1_1_06250 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleElementTemplateCS_in_rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_1_1_06267 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CollectionTemplateCS__RestIdentifierAssignment_4_3_0_in_rule__CollectionTemplateCS__Alternatives_4_36299 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_16_in_rule__CollectionTemplateCS__Alternatives_4_36318 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__DomainCS__CheckonlyAssignment_0_0_in_rule__DomainCS__Alternatives_06352 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__DomainCS__EnforceAssignment_0_1_in_rule__DomainCS__Alternatives_06370 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__DomainCS__IsCheckonlyAssignment_0_0_in_rule__DomainCS__Alternatives_06352 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__DomainCS__IsEnforceAssignment_0_1_in_rule__DomainCS__Alternatives_06370 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_17_in_rule__DomainCS__Alternatives_06389 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ElementTemplateCS__NameAssignment_0_in_rule__ElementTemplateCS__Alternatives6423 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ElementTemplateCS__Group_1__0_in_rule__ElementTemplateCS__Alternatives6441 = new BitSet(new long[]{0x0000000000000002L});
@@ -58833,12 +58833,12 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_rule__PropertyTemplateCS__Group_0_1__0_in_rule__PropertyTemplateCS__Alternatives_06645 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_18_in_rule__QueryCS__Alternatives_76679 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__QueryCS__Group_7_1__0_in_rule__QueryCS__Alternatives_76698 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__RelationCS__DomainsAssignment_6_0_in_rule__RelationCS__Alternatives_66731 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__RelationCS__DomainsAssignment_6_1_in_rule__RelationCS__Alternatives_66749 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__RelationCS__OwnedDomainsAssignment_6_0_in_rule__RelationCS__Alternatives_66731 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__RelationCS__OwnedDomainsAssignment_6_1_in_rule__RelationCS__Alternatives_66749 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleCollectionTemplateCS_in_rule__TemplateCS__Alternatives_06782 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleObjectTemplateCS_in_rule__TemplateCS__Alternatives_06799 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__TransformationCS__RelationAssignment_9_0_in_rule__TransformationCS__Alternatives_96831 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__TransformationCS__QueriesAssignment_9_1_in_rule__TransformationCS__Alternatives_96849 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TransformationCS__OwnedRelationsAssignment_9_0_in_rule__TransformationCS__Alternatives_96831 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TransformationCS__OwnedQueriesAssignment_9_1_in_rule__TransformationCS__Alternatives_96849 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleExpCS_in_rule__ExpCSOrTemplateCS__Alternatives6882 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTemplateCS_in_rule__ExpCSOrTemplateCS__Alternatives6899 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rulePrimitiveTypeCS_in_rule__TypedRefCS__Alternatives6931 = new BitSet(new long[]{0x0000000000000002L});
@@ -58967,7 +58967,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_rule__TopLevelCS__Group__1_in_rule__TopLevelCS__Group__09680 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TopLevelCS__Alternatives_0_in_rule__TopLevelCS__Group__0__Impl9707 = new BitSet(new long[]{0x0000000006000002L});
         public static final BitSet FOLLOW_rule__TopLevelCS__Group__1__Impl_in_rule__TopLevelCS__Group__19738 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__TopLevelCS__TransformationsAssignment_1_in_rule__TopLevelCS__Group__1__Impl9765 = new BitSet(new long[]{0x0000000400000002L});
+        public static final BitSet FOLLOW_rule__TopLevelCS__OwnedTransformationsAssignment_1_in_rule__TopLevelCS__Group__1__Impl9765 = new BitSet(new long[]{0x0000000400000002L});
         public static final BitSet FOLLOW_rule__CollectionTemplateCS__Group__0__Impl_in_rule__CollectionTemplateCS__Group__09800 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__CollectionTemplateCS__Group__1_in_rule__CollectionTemplateCS__Group__09803 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CollectionTemplateCS__NameAssignment_0_in_rule__CollectionTemplateCS__Group__0__Impl9830 = new BitSet(new long[]{0x0000000000000002L});
@@ -58976,7 +58976,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_71_in_rule__CollectionTemplateCS__Group__1__Impl9892 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CollectionTemplateCS__Group__2__Impl_in_rule__CollectionTemplateCS__Group__29923 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
         public static final BitSet FOLLOW_rule__CollectionTemplateCS__Group__3_in_rule__CollectionTemplateCS__Group__29926 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__CollectionTemplateCS__TypeAssignment_2_in_rule__CollectionTemplateCS__Group__2__Impl9953 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__CollectionTemplateCS__OwnedTypeAssignment_2_in_rule__CollectionTemplateCS__Group__2__Impl9953 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CollectionTemplateCS__Group__3__Impl_in_rule__CollectionTemplateCS__Group__39983 = new BitSet(new long[]{0x0000001FFFFB00C0L,0x0000000000000280L});
         public static final BitSet FOLLOW_rule__CollectionTemplateCS__Group__4_in_rule__CollectionTemplateCS__Group__39986 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_72_in_rule__CollectionTemplateCS__Group__3__Impl10014 = new BitSet(new long[]{0x0000000000000002L});
@@ -58987,7 +58987,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_73_in_rule__CollectionTemplateCS__Group__5__Impl10134 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CollectionTemplateCS__Group_4__0__Impl_in_rule__CollectionTemplateCS__Group_4__010177 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000C00L});
         public static final BitSet FOLLOW_rule__CollectionTemplateCS__Group_4__1_in_rule__CollectionTemplateCS__Group_4__010180 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_0_in_rule__CollectionTemplateCS__Group_4__0__Impl10207 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_0_in_rule__CollectionTemplateCS__Group_4__0__Impl10207 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CollectionTemplateCS__Group_4__1__Impl_in_rule__CollectionTemplateCS__Group_4__110237 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000C00L});
         public static final BitSet FOLLOW_rule__CollectionTemplateCS__Group_4__2_in_rule__CollectionTemplateCS__Group_4__110240 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CollectionTemplateCS__Group_4_1__0_in_rule__CollectionTemplateCS__Group_4__1__Impl10267 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000800L});
@@ -59000,7 +59000,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_rule__CollectionTemplateCS__Group_4_1__1_in_rule__CollectionTemplateCS__Group_4_1__010428 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_75_in_rule__CollectionTemplateCS__Group_4_1__0__Impl10456 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CollectionTemplateCS__Group_4_1__1__Impl_in_rule__CollectionTemplateCS__Group_4_1__110487 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_1_1_in_rule__CollectionTemplateCS__Group_4_1__1__Impl10514 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_1_1_in_rule__CollectionTemplateCS__Group_4_1__1__Impl10514 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__DefaultValueCS__Group__0__Impl_in_rule__DefaultValueCS__Group__010548 = new BitSet(new long[]{0x0000400000000000L});
         public static final BitSet FOLLOW_rule__DefaultValueCS__Group__1_in_rule__DefaultValueCS__Group__010551 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__DefaultValueCS__PropertyIdAssignment_0_in_rule__DefaultValueCS__Group__0__Impl10578 = new BitSet(new long[]{0x0000000000000002L});
@@ -59009,7 +59009,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_46_in_rule__DefaultValueCS__Group__1__Impl10639 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__DefaultValueCS__Group__2__Impl_in_rule__DefaultValueCS__Group__210670 = new BitSet(new long[]{0x0000000000040000L});
         public static final BitSet FOLLOW_rule__DefaultValueCS__Group__3_in_rule__DefaultValueCS__Group__210673 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__DefaultValueCS__InitialiserAssignment_2_in_rule__DefaultValueCS__Group__2__Impl10700 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__DefaultValueCS__OwnedInitExpressionAssignment_2_in_rule__DefaultValueCS__Group__2__Impl10700 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__DefaultValueCS__Group__3__Impl_in_rule__DefaultValueCS__Group__310730 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_18_in_rule__DefaultValueCS__Group__3__Impl10758 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__DomainCS__Group__0__Impl_in_rule__DomainCS__Group__010797 = new BitSet(new long[]{0x0000000000200000L});
@@ -59023,7 +59023,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_rule__DomainCS__ModelIdAssignment_2_in_rule__DomainCS__Group__2__Impl10950 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__DomainCS__Group__3__Impl_in_rule__DomainCS__Group__310980 = new BitSet(new long[]{0x0000000001140000L});
         public static final BitSet FOLLOW_rule__DomainCS__Group__4_in_rule__DomainCS__Group__310983 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__DomainCS__PatternAssignment_3_in_rule__DomainCS__Group__3__Impl11010 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__DomainCS__OwnedPatternAssignment_3_in_rule__DomainCS__Group__3__Impl11010 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__DomainCS__Group__4__Impl_in_rule__DomainCS__Group__411040 = new BitSet(new long[]{0x0000000001140000L});
         public static final BitSet FOLLOW_rule__DomainCS__Group__5_in_rule__DomainCS__Group__411043 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__DomainCS__Group_4__0_in_rule__DomainCS__Group__4__Impl11070 = new BitSet(new long[]{0x0000000000000002L});
@@ -59036,7 +59036,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_rule__DomainCS__Group_4__1_in_rule__DomainCS__Group_4__011238 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_24_in_rule__DomainCS__Group_4__0__Impl11266 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__DomainCS__Group_4__1__Impl_in_rule__DomainCS__Group_4__111297 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__DomainCS__ImplementedByAssignment_4_1_in_rule__DomainCS__Group_4__1__Impl11324 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__DomainCS__OwnedImplementedByAssignment_4_1_in_rule__DomainCS__Group_4__1__Impl11324 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__DomainCS__Group_5__0__Impl_in_rule__DomainCS__Group_5__011358 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
         public static final BitSet FOLLOW_rule__DomainCS__Group_5__1_in_rule__DomainCS__Group_5__011361 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_20_in_rule__DomainCS__Group_5__0__Impl11389 = new BitSet(new long[]{0x0000000000000002L});
@@ -59045,8 +59045,8 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_72_in_rule__DomainCS__Group_5__1__Impl11451 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__DomainCS__Group_5__2__Impl_in_rule__DomainCS__Group_5__211482 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000200L});
         public static final BitSet FOLLOW_rule__DomainCS__Group_5__3_in_rule__DomainCS__Group_5__211485 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__DomainCS__DefaultValuesAssignment_5_2_in_rule__DomainCS__Group_5__2__Impl11514 = new BitSet(new long[]{0x0000001FFFFA00C2L});
-        public static final BitSet FOLLOW_rule__DomainCS__DefaultValuesAssignment_5_2_in_rule__DomainCS__Group_5__2__Impl11526 = new BitSet(new long[]{0x0000001FFFFA00C2L});
+        public static final BitSet FOLLOW_rule__DomainCS__OwnedDefaultValuesAssignment_5_2_in_rule__DomainCS__Group_5__2__Impl11514 = new BitSet(new long[]{0x0000001FFFFA00C2L});
+        public static final BitSet FOLLOW_rule__DomainCS__OwnedDefaultValuesAssignment_5_2_in_rule__DomainCS__Group_5__2__Impl11526 = new BitSet(new long[]{0x0000001FFFFA00C2L});
         public static final BitSet FOLLOW_rule__DomainCS__Group_5__3__Impl_in_rule__DomainCS__Group_5__311559 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_73_in_rule__DomainCS__Group_5__3__Impl11587 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ElementTemplateCS__Group_1__0__Impl_in_rule__ElementTemplateCS__Group_1__011626 = new BitSet(new long[]{0x0000001FFFFB00C0L,0x0000000000000080L});
@@ -59058,7 +59058,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_27_in_rule__KeyDeclCS__Group__0__Impl11781 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__KeyDeclCS__Group__1__Impl_in_rule__KeyDeclCS__Group__111812 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
         public static final BitSet FOLLOW_rule__KeyDeclCS__Group__2_in_rule__KeyDeclCS__Group__111815 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__KeyDeclCS__PathNameAssignment_1_in_rule__KeyDeclCS__Group__1__Impl11842 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__KeyDeclCS__OwnedPathNameAssignment_1_in_rule__KeyDeclCS__Group__1__Impl11842 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__KeyDeclCS__Group__2__Impl_in_rule__KeyDeclCS__Group__211872 = new BitSet(new long[]{0x0000001FFFFA00C0L});
         public static final BitSet FOLLOW_rule__KeyDeclCS__Group__3_in_rule__KeyDeclCS__Group__211875 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_72_in_rule__KeyDeclCS__Group__2__Impl11903 = new BitSet(new long[]{0x0000000000000002L});
@@ -59081,7 +59081,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_76_in_rule__KeyDeclCS__Group_3_1__1__Impl12283 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__KeyDeclCS__Group_3_1__2__Impl_in_rule__KeyDeclCS__Group_3_1__212314 = new BitSet(new long[]{0x0000000000000000L,0x0000000000002000L});
         public static final BitSet FOLLOW_rule__KeyDeclCS__Group_3_1__3_in_rule__KeyDeclCS__Group_3_1__212317 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__KeyDeclCS__OppositePropertyIdsAssignment_3_1_2_in_rule__KeyDeclCS__Group_3_1__2__Impl12344 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_3_1_2_in_rule__KeyDeclCS__Group_3_1__2__Impl12344 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__KeyDeclCS__Group_3_1__3__Impl_in_rule__KeyDeclCS__Group_3_1__312374 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_77_in_rule__KeyDeclCS__Group_3_1__3__Impl12402 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__KeyDeclCS__Group_4__0__Impl_in_rule__KeyDeclCS__Group_4__012441 = new BitSet(new long[]{0x0000001FFFFA00C0L});
@@ -59097,7 +59097,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_76_in_rule__KeyDeclCS__Group_4_1_1__1__Impl12657 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__KeyDeclCS__Group_4_1_1__2__Impl_in_rule__KeyDeclCS__Group_4_1_1__212688 = new BitSet(new long[]{0x0000000000000000L,0x0000000000002000L});
         public static final BitSet FOLLOW_rule__KeyDeclCS__Group_4_1_1__3_in_rule__KeyDeclCS__Group_4_1_1__212691 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__KeyDeclCS__OppositePropertyIdsAssignment_4_1_1_2_in_rule__KeyDeclCS__Group_4_1_1__2__Impl12718 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_4_1_1_2_in_rule__KeyDeclCS__Group_4_1_1__2__Impl12718 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__KeyDeclCS__Group_4_1_1__3__Impl_in_rule__KeyDeclCS__Group_4_1_1__312748 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_77_in_rule__KeyDeclCS__Group_4_1_1__3__Impl12776 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__LibraryCS__Group__0__Impl_in_rule__LibraryCS__Group__012815 = new BitSet(new long[]{0x0000000000000020L});
@@ -59140,7 +59140,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_71_in_rule__ObjectTemplateCS__Group__1__Impl13652 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ObjectTemplateCS__Group__2__Impl_in_rule__ObjectTemplateCS__Group__213683 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
         public static final BitSet FOLLOW_rule__ObjectTemplateCS__Group__3_in_rule__ObjectTemplateCS__Group__213686 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ObjectTemplateCS__TypeAssignment_2_in_rule__ObjectTemplateCS__Group__2__Impl13713 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ObjectTemplateCS__OwnedTypeAssignment_2_in_rule__ObjectTemplateCS__Group__2__Impl13713 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ObjectTemplateCS__Group__3__Impl_in_rule__ObjectTemplateCS__Group__313743 = new BitSet(new long[]{0x0000001FFFFA00C0L,0x0000000000000200L});
         public static final BitSet FOLLOW_rule__ObjectTemplateCS__Group__4_in_rule__ObjectTemplateCS__Group__313746 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_72_in_rule__ObjectTemplateCS__Group__3__Impl13774 = new BitSet(new long[]{0x0000000000000002L});
@@ -59151,14 +59151,14 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_73_in_rule__ObjectTemplateCS__Group__5__Impl13894 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ObjectTemplateCS__Group_4__0__Impl_in_rule__ObjectTemplateCS__Group_4__013937 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000800L});
         public static final BitSet FOLLOW_rule__ObjectTemplateCS__Group_4__1_in_rule__ObjectTemplateCS__Group_4__013940 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_0_in_rule__ObjectTemplateCS__Group_4__0__Impl13967 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_0_in_rule__ObjectTemplateCS__Group_4__0__Impl13967 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ObjectTemplateCS__Group_4__1__Impl_in_rule__ObjectTemplateCS__Group_4__113997 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ObjectTemplateCS__Group_4_1__0_in_rule__ObjectTemplateCS__Group_4__1__Impl14024 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000800L});
         public static final BitSet FOLLOW_rule__ObjectTemplateCS__Group_4_1__0__Impl_in_rule__ObjectTemplateCS__Group_4_1__014059 = new BitSet(new long[]{0x0000001FFFFA00C0L});
         public static final BitSet FOLLOW_rule__ObjectTemplateCS__Group_4_1__1_in_rule__ObjectTemplateCS__Group_4_1__014062 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_75_in_rule__ObjectTemplateCS__Group_4_1__0__Impl14090 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ObjectTemplateCS__Group_4_1__1__Impl_in_rule__ObjectTemplateCS__Group_4_1__114121 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_1_1_in_rule__ObjectTemplateCS__Group_4_1__1__Impl14148 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_1_1_in_rule__ObjectTemplateCS__Group_4_1__1__Impl14148 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParamDeclarationCS__Group__0__Impl_in_rule__ParamDeclarationCS__Group__014182 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000080L});
         public static final BitSet FOLLOW_rule__ParamDeclarationCS__Group__1_in_rule__ParamDeclarationCS__Group__014185 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__ParamDeclarationCS__NameAssignment_0_in_rule__ParamDeclarationCS__Group__0__Impl14212 = new BitSet(new long[]{0x0000000000000002L});
@@ -59169,7 +59169,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_rule__ParamDeclarationCS__OwnedTypeAssignment_2_in_rule__ParamDeclarationCS__Group__2__Impl14331 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__PredicateCS__Group__0__Impl_in_rule__PredicateCS__Group__014367 = new BitSet(new long[]{0x0000000000040000L});
         public static final BitSet FOLLOW_rule__PredicateCS__Group__1_in_rule__PredicateCS__Group__014370 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__PredicateCS__ExprAssignment_0_in_rule__PredicateCS__Group__0__Impl14397 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__PredicateCS__OwnedConditionAssignment_0_in_rule__PredicateCS__Group__0__Impl14397 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__PredicateCS__Group__1__Impl_in_rule__PredicateCS__Group__114427 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_18_in_rule__PredicateCS__Group__1__Impl14455 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__PrimitiveTypeDomainCS__Group__0__Impl_in_rule__PrimitiveTypeDomainCS__Group__014490 = new BitSet(new long[]{0x0000000000200000L});
@@ -59186,7 +59186,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_71_in_rule__PrimitiveTypeDomainCS__Group__3__Impl14705 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__PrimitiveTypeDomainCS__Group__4__Impl_in_rule__PrimitiveTypeDomainCS__Group__414736 = new BitSet(new long[]{0x0000000000040000L});
         public static final BitSet FOLLOW_rule__PrimitiveTypeDomainCS__Group__5_in_rule__PrimitiveTypeDomainCS__Group__414739 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__PrimitiveTypeDomainCS__TypeAssignment_4_in_rule__PrimitiveTypeDomainCS__Group__4__Impl14766 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__PrimitiveTypeDomainCS__OwnedTypeAssignment_4_in_rule__PrimitiveTypeDomainCS__Group__4__Impl14766 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__PrimitiveTypeDomainCS__Group__5__Impl_in_rule__PrimitiveTypeDomainCS__Group__514796 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_18_in_rule__PrimitiveTypeDomainCS__Group__5__Impl14824 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__PropertyTemplateCS__Group__0__Impl_in_rule__PropertyTemplateCS__Group__014867 = new BitSet(new long[]{0x0000400000000000L});
@@ -59196,7 +59196,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_rule__PropertyTemplateCS__Group__2_in_rule__PropertyTemplateCS__Group__114930 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_46_in_rule__PropertyTemplateCS__Group__1__Impl14958 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__PropertyTemplateCS__Group__2__Impl_in_rule__PropertyTemplateCS__Group__214989 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__PropertyTemplateCS__ExpressionAssignment_2_in_rule__PropertyTemplateCS__Group__2__Impl15016 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__PropertyTemplateCS__OwnedExpressionAssignment_2_in_rule__PropertyTemplateCS__Group__2__Impl15016 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__PropertyTemplateCS__Group_0_1__0__Impl_in_rule__PropertyTemplateCS__Group_0_1__015052 = new BitSet(new long[]{0x0000000000000000L,0x0000000000001000L});
         public static final BitSet FOLLOW_rule__PropertyTemplateCS__Group_0_1__1_in_rule__PropertyTemplateCS__Group_0_1__015055 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_28_in_rule__PropertyTemplateCS__Group_0_1__0__Impl15083 = new BitSet(new long[]{0x0000000000000002L});
@@ -59205,7 +59205,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_76_in_rule__PropertyTemplateCS__Group_0_1__1__Impl15145 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__PropertyTemplateCS__Group_0_1__2__Impl_in_rule__PropertyTemplateCS__Group_0_1__215176 = new BitSet(new long[]{0x0000000000000000L,0x0000000000002000L});
         public static final BitSet FOLLOW_rule__PropertyTemplateCS__Group_0_1__3_in_rule__PropertyTemplateCS__Group_0_1__215179 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__PropertyTemplateCS__OppositePropertyIdAssignment_0_1_2_in_rule__PropertyTemplateCS__Group_0_1__2__Impl15206 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__PropertyTemplateCS__OwnedOppositePropertyIdAssignment_0_1_2_in_rule__PropertyTemplateCS__Group_0_1__2__Impl15206 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__PropertyTemplateCS__Group_0_1__3__Impl_in_rule__PropertyTemplateCS__Group_0_1__315236 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_77_in_rule__PropertyTemplateCS__Group_0_1__3__Impl15264 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__QueryCS__Group__0__Impl_in_rule__QueryCS__Group__015303 = new BitSet(new long[]{0x0000001FFFFA00C0L});
@@ -59233,25 +59233,25 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_rule__QueryCS__Alternatives_7_in_rule__QueryCS__Group__7__Impl15759 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__QueryCS__Group_3__0__Impl_in_rule__QueryCS__Group_3__015805 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000800L});
         public static final BitSet FOLLOW_rule__QueryCS__Group_3__1_in_rule__QueryCS__Group_3__015808 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__QueryCS__InputParamDeclarationsAssignment_3_0_in_rule__QueryCS__Group_3__0__Impl15835 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__QueryCS__OwnedParametersAssignment_3_0_in_rule__QueryCS__Group_3__0__Impl15835 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__QueryCS__Group_3__1__Impl_in_rule__QueryCS__Group_3__115865 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__QueryCS__Group_3_1__0_in_rule__QueryCS__Group_3__1__Impl15892 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000800L});
         public static final BitSet FOLLOW_rule__QueryCS__Group_3_1__0__Impl_in_rule__QueryCS__Group_3_1__015927 = new BitSet(new long[]{0x0000001FFFFA00C0L});
         public static final BitSet FOLLOW_rule__QueryCS__Group_3_1__1_in_rule__QueryCS__Group_3_1__015930 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_75_in_rule__QueryCS__Group_3_1__0__Impl15958 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__QueryCS__Group_3_1__1__Impl_in_rule__QueryCS__Group_3_1__115989 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__QueryCS__InputParamDeclarationsAssignment_3_1_1_in_rule__QueryCS__Group_3_1__1__Impl16016 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__QueryCS__OwnedParametersAssignment_3_1_1_in_rule__QueryCS__Group_3_1__1__Impl16016 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__QueryCS__Group_7_1__0__Impl_in_rule__QueryCS__Group_7_1__016050 = new BitSet(new long[]{0xFF0000FFFFFA00F0L,0x000000033087103FL});
         public static final BitSet FOLLOW_rule__QueryCS__Group_7_1__1_in_rule__QueryCS__Group_7_1__016053 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_72_in_rule__QueryCS__Group_7_1__0__Impl16081 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__QueryCS__Group_7_1__1__Impl_in_rule__QueryCS__Group_7_1__116112 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000200L});
         public static final BitSet FOLLOW_rule__QueryCS__Group_7_1__2_in_rule__QueryCS__Group_7_1__116115 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__QueryCS__ExpressionAssignment_7_1_1_in_rule__QueryCS__Group_7_1__1__Impl16142 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__QueryCS__OwnedExpressionAssignment_7_1_1_in_rule__QueryCS__Group_7_1__1__Impl16142 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__QueryCS__Group_7_1__2__Impl_in_rule__QueryCS__Group_7_1__216172 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_73_in_rule__QueryCS__Group_7_1__2__Impl16200 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RelationCS__Group__0__Impl_in_rule__RelationCS__Group__016237 = new BitSet(new long[]{0x0000000100000000L});
         public static final BitSet FOLLOW_rule__RelationCS__Group__1_in_rule__RelationCS__Group__016240 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__RelationCS__TopAssignment_0_in_rule__RelationCS__Group__0__Impl16267 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__RelationCS__IsTopAssignment_0_in_rule__RelationCS__Group__0__Impl16267 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RelationCS__Group__1__Impl_in_rule__RelationCS__Group__116298 = new BitSet(new long[]{0x0000001FFFFA00C0L});
         public static final BitSet FOLLOW_rule__RelationCS__Group__2_in_rule__RelationCS__Group__116301 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_32_in_rule__RelationCS__Group__1__Impl16329 = new BitSet(new long[]{0x0000000000000002L});
@@ -59266,17 +59266,17 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_72_in_rule__RelationCS__Group__4__Impl16512 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RelationCS__Group__5__Impl_in_rule__RelationCS__Group__516543 = new BitSet(new long[]{0x0000001FFFFA00C0L});
         public static final BitSet FOLLOW_rule__RelationCS__Group__6_in_rule__RelationCS__Group__516546 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__RelationCS__VarDeclarationsAssignment_5_in_rule__RelationCS__Group__5__Impl16573 = new BitSet(new long[]{0x0000001FFFFA00C2L});
+        public static final BitSet FOLLOW_rule__RelationCS__OwnedVarDeclarationsAssignment_5_in_rule__RelationCS__Group__5__Impl16573 = new BitSet(new long[]{0x0000001FFFFA00C2L});
         public static final BitSet FOLLOW_rule__RelationCS__Group__6__Impl_in_rule__RelationCS__Group__616604 = new BitSet(new long[]{0x0000001800000000L,0x0000000000000200L});
         public static final BitSet FOLLOW_rule__RelationCS__Group__7_in_rule__RelationCS__Group__616607 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RelationCS__Alternatives_6_in_rule__RelationCS__Group__6__Impl16636 = new BitSet(new long[]{0x0000001FFFFA00C2L});
         public static final BitSet FOLLOW_rule__RelationCS__Alternatives_6_in_rule__RelationCS__Group__6__Impl16648 = new BitSet(new long[]{0x0000001FFFFA00C2L});
         public static final BitSet FOLLOW_rule__RelationCS__Group__7__Impl_in_rule__RelationCS__Group__716681 = new BitSet(new long[]{0x0000001800000000L,0x0000000000000200L});
         public static final BitSet FOLLOW_rule__RelationCS__Group__8_in_rule__RelationCS__Group__716684 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__RelationCS__WhenAssignment_7_in_rule__RelationCS__Group__7__Impl16711 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__RelationCS__OwnedWhenAssignment_7_in_rule__RelationCS__Group__7__Impl16711 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RelationCS__Group__8__Impl_in_rule__RelationCS__Group__816742 = new BitSet(new long[]{0x0000001800000000L,0x0000000000000200L});
         public static final BitSet FOLLOW_rule__RelationCS__Group__9_in_rule__RelationCS__Group__816745 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__RelationCS__WhereAssignment_8_in_rule__RelationCS__Group__8__Impl16772 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__RelationCS__OwnedWhereAssignment_8_in_rule__RelationCS__Group__8__Impl16772 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RelationCS__Group__9__Impl_in_rule__RelationCS__Group__916803 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_73_in_rule__RelationCS__Group__9__Impl16831 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__RelationCS__Group_3__0__Impl_in_rule__RelationCS__Group_3__016882 = new BitSet(new long[]{0x0000001FFFFA00C0L});
@@ -59294,7 +59294,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_72_in_rule__TemplateCS__Group_1__0__Impl17158 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TemplateCS__Group_1__1__Impl_in_rule__TemplateCS__Group_1__117189 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000200L});
         public static final BitSet FOLLOW_rule__TemplateCS__Group_1__2_in_rule__TemplateCS__Group_1__117192 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__TemplateCS__GuardExpressionAssignment_1_1_in_rule__TemplateCS__Group_1__1__Impl17219 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TemplateCS__OwnedGuardExpressionAssignment_1_1_in_rule__TemplateCS__Group_1__1__Impl17219 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TemplateCS__Group_1__2__Impl_in_rule__TemplateCS__Group_1__217249 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_73_in_rule__TemplateCS__Group_1__2__Impl17277 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TransformationCS__Group__0__Impl_in_rule__TransformationCS__Group__017314 = new BitSet(new long[]{0x0000001FFFFA00C0L});
@@ -59308,7 +59308,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_76_in_rule__TransformationCS__Group__2__Impl17467 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TransformationCS__Group__3__Impl_in_rule__TransformationCS__Group__317498 = new BitSet(new long[]{0x0000000000000000L,0x0000000000002800L});
         public static final BitSet FOLLOW_rule__TransformationCS__Group__4_in_rule__TransformationCS__Group__317501 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__TransformationCS__ModelDeclsAssignment_3_in_rule__TransformationCS__Group__3__Impl17528 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TransformationCS__OwnedModelDeclsAssignment_3_in_rule__TransformationCS__Group__3__Impl17528 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TransformationCS__Group__4__Impl_in_rule__TransformationCS__Group__417558 = new BitSet(new long[]{0x0000000000000000L,0x0000000000002800L});
         public static final BitSet FOLLOW_rule__TransformationCS__Group__5_in_rule__TransformationCS__Group__417561 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TransformationCS__Group_4__0_in_rule__TransformationCS__Group__4__Impl17588 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000800L});
@@ -59323,7 +59323,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_72_in_rule__TransformationCS__Group__7__Impl17773 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TransformationCS__Group__8__Impl_in_rule__TransformationCS__Group__817804 = new BitSet(new long[]{0x0000000388000000L,0x0000000000000200L});
         public static final BitSet FOLLOW_rule__TransformationCS__Group__9_in_rule__TransformationCS__Group__817807 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__TransformationCS__KeyDeclsAssignment_8_in_rule__TransformationCS__Group__8__Impl17834 = new BitSet(new long[]{0x0000000008000002L});
+        public static final BitSet FOLLOW_rule__TransformationCS__OwnedKeyDeclsAssignment_8_in_rule__TransformationCS__Group__8__Impl17834 = new BitSet(new long[]{0x0000000008000002L});
         public static final BitSet FOLLOW_rule__TransformationCS__Group__9__Impl_in_rule__TransformationCS__Group__917865 = new BitSet(new long[]{0x0000000388000000L,0x0000000000000200L});
         public static final BitSet FOLLOW_rule__TransformationCS__Group__10_in_rule__TransformationCS__Group__917868 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TransformationCS__Alternatives_9_in_rule__TransformationCS__Group__9__Impl17895 = new BitSet(new long[]{0x0000000380000002L});
@@ -59333,7 +59333,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_rule__TransformationCS__Group_4__1_in_rule__TransformationCS__Group_4__018010 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_75_in_rule__TransformationCS__Group_4__0__Impl18038 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TransformationCS__Group_4__1__Impl_in_rule__TransformationCS__Group_4__118069 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__TransformationCS__ModelDeclsAssignment_4_1_in_rule__TransformationCS__Group_4__1__Impl18096 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TransformationCS__OwnedModelDeclsAssignment_4_1_in_rule__TransformationCS__Group_4__1__Impl18096 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__TransformationCS__Group_6__0__Impl_in_rule__TransformationCS__Group_6__018130 = new BitSet(new long[]{0x0000001FFFFA00C0L});
         public static final BitSet FOLLOW_rule__TransformationCS__Group_6__1_in_rule__TransformationCS__Group_6__018133 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_23_in_rule__TransformationCS__Group_6__0__Impl18161 = new BitSet(new long[]{0x0000000000000002L});
@@ -59373,7 +59373,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_rule__UnitCS__IsAllAssignment_3_1_in_rule__UnitCS__Group_3__1__Impl18964 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__VarDeclarationCS__Group__0__Impl_in_rule__VarDeclarationCS__Group__018998 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000880L});
         public static final BitSet FOLLOW_rule__VarDeclarationCS__Group__1_in_rule__VarDeclarationCS__Group__019001 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__VarDeclarationCS__VarDeclarationIdsAssignment_0_in_rule__VarDeclarationCS__Group__0__Impl19028 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_0_in_rule__VarDeclarationCS__Group__0__Impl19028 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__VarDeclarationCS__Group__1__Impl_in_rule__VarDeclarationCS__Group__119058 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000880L});
         public static final BitSet FOLLOW_rule__VarDeclarationCS__Group__2_in_rule__VarDeclarationCS__Group__119061 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__VarDeclarationCS__Group_1__0_in_rule__VarDeclarationCS__Group__1__Impl19088 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000800L});
@@ -59382,14 +59382,14 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_71_in_rule__VarDeclarationCS__Group__2__Impl19150 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__VarDeclarationCS__Group__3__Impl_in_rule__VarDeclarationCS__Group__319181 = new BitSet(new long[]{0x0000000000040000L});
         public static final BitSet FOLLOW_rule__VarDeclarationCS__Group__4_in_rule__VarDeclarationCS__Group__319184 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__VarDeclarationCS__TypeAssignment_3_in_rule__VarDeclarationCS__Group__3__Impl19211 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__VarDeclarationCS__OwnedTypeAssignment_3_in_rule__VarDeclarationCS__Group__3__Impl19211 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__VarDeclarationCS__Group__4__Impl_in_rule__VarDeclarationCS__Group__419241 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_18_in_rule__VarDeclarationCS__Group__4__Impl19269 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__VarDeclarationCS__Group_1__0__Impl_in_rule__VarDeclarationCS__Group_1__019310 = new BitSet(new long[]{0x0000001FFFFA00C0L});
         public static final BitSet FOLLOW_rule__VarDeclarationCS__Group_1__1_in_rule__VarDeclarationCS__Group_1__019313 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_75_in_rule__VarDeclarationCS__Group_1__0__Impl19341 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__VarDeclarationCS__Group_1__1__Impl_in_rule__VarDeclarationCS__Group_1__119372 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__VarDeclarationCS__VarDeclarationIdsAssignment_1_1_in_rule__VarDeclarationCS__Group_1__1__Impl19399 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_1_1_in_rule__VarDeclarationCS__Group_1__1__Impl19399 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WhenCS__Group__0__Impl_in_rule__WhenCS__Group__019433 = new BitSet(new long[]{0x0000000800000000L});
         public static final BitSet FOLLOW_rule__WhenCS__Group__1_in_rule__WhenCS__Group__019436 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WhenCS__Group__1__Impl_in_rule__WhenCS__Group__119494 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000100L});
@@ -59400,7 +59400,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_72_in_rule__WhenCS__Group__2__Impl19587 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WhenCS__Group__3__Impl_in_rule__WhenCS__Group__319618 = new BitSet(new long[]{0xFF0000FFFFFA00F0L,0x000000033087123FL});
         public static final BitSet FOLLOW_rule__WhenCS__Group__4_in_rule__WhenCS__Group__319621 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__WhenCS__PredicatesAssignment_3_in_rule__WhenCS__Group__3__Impl19648 = new BitSet(new long[]{0xFF0000FFFFFA00F2L,0x000000033087103FL});
+        public static final BitSet FOLLOW_rule__WhenCS__OwnedPredicatesAssignment_3_in_rule__WhenCS__Group__3__Impl19648 = new BitSet(new long[]{0xFF0000FFFFFA00F2L,0x000000033087103FL});
         public static final BitSet FOLLOW_rule__WhenCS__Group__4__Impl_in_rule__WhenCS__Group__419679 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_73_in_rule__WhenCS__Group__4__Impl19707 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WhereCS__Group__0__Impl_in_rule__WhereCS__Group__019748 = new BitSet(new long[]{0x0000001000000000L});
@@ -59413,7 +59413,7 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_72_in_rule__WhereCS__Group__2__Impl19902 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__WhereCS__Group__3__Impl_in_rule__WhereCS__Group__319933 = new BitSet(new long[]{0xFF0000FFFFFA00F0L,0x000000033087123FL});
         public static final BitSet FOLLOW_rule__WhereCS__Group__4_in_rule__WhereCS__Group__319936 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__WhereCS__PredicatesAssignment_3_in_rule__WhereCS__Group__3__Impl19963 = new BitSet(new long[]{0xFF0000FFFFFA00F2L,0x000000033087103FL});
+        public static final BitSet FOLLOW_rule__WhereCS__OwnedPredicatesAssignment_3_in_rule__WhereCS__Group__3__Impl19963 = new BitSet(new long[]{0xFF0000FFFFFA00F2L,0x000000033087103FL});
         public static final BitSet FOLLOW_rule__WhereCS__Group__4__Impl_in_rule__WhereCS__Group__419994 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_73_in_rule__WhereCS__Group__4__Impl20022 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__URIPathNameCS__Group__0__Impl_in_rule__URIPathNameCS__Group__020063 = new BitSet(new long[]{0x0000000000000000L,0x0000000000004000L});
@@ -60001,75 +60001,75 @@ public class InternalQVTrelationParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_rule__WildcardTypeRefCS__OwnedSuperAssignment_2_1_1_in_rule__WildcardTypeRefCS__Group_2_1__1__Impl33937 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnitCS_in_rule__TopLevelCS__OwnedImportsAssignment_0_033976 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleLibraryCS_in_rule__TopLevelCS__OwnedLibrariesAssignment_0_134007 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTransformationCS_in_rule__TopLevelCS__TransformationsAssignment_134038 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTransformationCS_in_rule__TopLevelCS__OwnedTransformationsAssignment_134038 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__CollectionTemplateCS__NameAssignment_034069 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleCollectionTypeCS_in_rule__CollectionTemplateCS__TypeAssignment_234100 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_0_0_in_rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_034131 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__CollectionTemplateCS__MemberIdentifiersAlternatives_4_1_1_0_in_rule__CollectionTemplateCS__MemberIdentifiersAssignment_4_1_134164 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCollectionTypeCS_in_rule__CollectionTemplateCS__OwnedTypeAssignment_234100 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_0_0_in_rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_034131 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_1_1_0_in_rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_1_134164 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__CollectionTemplateCS__RestIdentifierAssignment_4_3_034201 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__DefaultValueCS__PropertyIdAssignment_034240 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpCS_in_rule__DefaultValueCS__InitialiserAssignment_234275 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_19_in_rule__DomainCS__CheckonlyAssignment_0_034311 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_22_in_rule__DomainCS__EnforceAssignment_0_134355 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpCS_in_rule__DefaultValueCS__OwnedInitExpressionAssignment_234275 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_19_in_rule__DomainCS__IsCheckonlyAssignment_0_034311 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_22_in_rule__DomainCS__IsEnforceAssignment_0_134355 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__DomainCS__ModelIdAssignment_234398 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleDomainPatternCS_in_rule__DomainCS__PatternAssignment_334433 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpCS_in_rule__DomainCS__ImplementedByAssignment_4_134464 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleDefaultValueCS_in_rule__DomainCS__DefaultValuesAssignment_5_234495 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTemplateCS_in_rule__DomainPatternCS__TemplateAssignment34526 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleDomainPatternCS_in_rule__DomainCS__OwnedPatternAssignment_334433 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpCS_in_rule__DomainCS__OwnedImplementedByAssignment_4_134464 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleDefaultValueCS_in_rule__DomainCS__OwnedDefaultValuesAssignment_5_234495 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTemplateCS_in_rule__DomainPatternCS__OwnedTemplateAssignment34526 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__ElementTemplateCS__NameAssignment_034557 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePathNameCS_in_rule__KeyDeclCS__PathNameAssignment_134588 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePathNameCS_in_rule__KeyDeclCS__OwnedPathNameAssignment_134588 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__KeyDeclCS__PropertyIdsAssignment_3_034623 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePathNameCS_in_rule__KeyDeclCS__OppositePropertyIdsAssignment_3_1_234658 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePathNameCS_in_rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_3_1_234658 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__KeyDeclCS__PropertyIdsAssignment_4_1_034693 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePathNameCS_in_rule__KeyDeclCS__OppositePropertyIdsAssignment_4_1_1_234728 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePathNameCS_in_rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_4_1_1_234728 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleURI_in_rule__LibraryCS__ReferredPackageAssignment_134763 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__ModelDeclCS__NameAssignment_034798 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__ModelDeclCS__MetamodelIdsAssignment_2_034833 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__ModelDeclCS__MetamodelIdsAssignment_2_1_134872 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__ModelDeclCS__MetamodelIdsAssignment_2_1_2_134911 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__ObjectTemplateCS__NameAssignment_034946 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_rule__ObjectTemplateCS__TypeAssignment_234977 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePropertyTemplateCS_in_rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_035008 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePropertyTemplateCS_in_rule__ObjectTemplateCS__PropertyTemplatesAssignment_4_1_135039 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypedRefCS_in_rule__ObjectTemplateCS__OwnedTypeAssignment_234977 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePropertyTemplateCS_in_rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_035008 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePropertyTemplateCS_in_rule__ObjectTemplateCS__OwnedPropertyTemplatesAssignment_4_1_135039 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__ParamDeclarationCS__NameAssignment_035070 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTypedRefCS_in_rule__ParamDeclarationCS__OwnedTypeAssignment_235101 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpCS_in_rule__PredicateCS__ExprAssignment_035132 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpCS_in_rule__PredicateCS__OwnedConditionAssignment_035132 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__PrimitiveTypeDomainCS__NameAssignment_235163 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_rule__PrimitiveTypeDomainCS__TypeAssignment_435194 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypedRefCS_in_rule__PrimitiveTypeDomainCS__OwnedTypeAssignment_435194 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__PropertyTemplateCS__PropertyIdAssignment_0_035229 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePathNameCS_in_rule__PropertyTemplateCS__OppositePropertyIdAssignment_0_1_235264 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpCSOrTemplateCS_in_rule__PropertyTemplateCS__ExpressionAssignment_235295 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePathNameCS_in_rule__PropertyTemplateCS__OwnedOppositePropertyIdAssignment_0_1_235264 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpCSOrTemplateCS_in_rule__PropertyTemplateCS__OwnedExpressionAssignment_235295 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__QueryCS__NameAssignment_135326 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleParamDeclarationCS_in_rule__QueryCS__InputParamDeclarationsAssignment_3_035357 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleParamDeclarationCS_in_rule__QueryCS__InputParamDeclarationsAssignment_3_1_135388 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleParamDeclarationCS_in_rule__QueryCS__OwnedParametersAssignment_3_035357 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleParamDeclarationCS_in_rule__QueryCS__OwnedParametersAssignment_3_1_135388 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTypedRefCS_in_rule__QueryCS__OwnedTypeAssignment_635419 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpCS_in_rule__QueryCS__ExpressionAssignment_7_1_135450 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_33_in_rule__RelationCS__TopAssignment_035486 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpCS_in_rule__QueryCS__OwnedExpressionAssignment_7_1_135450 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_33_in_rule__RelationCS__IsTopAssignment_035486 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__RelationCS__NameAssignment_235525 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__RelationCS__OverridesAssignment_3_135560 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleVarDeclarationCS_in_rule__RelationCS__VarDeclarationsAssignment_535595 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleDomainCS_in_rule__RelationCS__DomainsAssignment_6_035626 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePrimitiveTypeDomainCS_in_rule__RelationCS__DomainsAssignment_6_135657 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleWhenCS_in_rule__RelationCS__WhenAssignment_735688 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleWhereCS_in_rule__RelationCS__WhereAssignment_835719 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpCS_in_rule__TemplateCS__GuardExpressionAssignment_1_135750 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleVarDeclarationCS_in_rule__RelationCS__OwnedVarDeclarationsAssignment_535595 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleDomainCS_in_rule__RelationCS__OwnedDomainsAssignment_6_035626 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePrimitiveTypeDomainCS_in_rule__RelationCS__OwnedDomainsAssignment_6_135657 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleWhenCS_in_rule__RelationCS__OwnedWhenAssignment_735688 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleWhereCS_in_rule__RelationCS__OwnedWhereAssignment_835719 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpCS_in_rule__TemplateCS__OwnedGuardExpressionAssignment_1_135750 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__TransformationCS__NameAssignment_135781 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleModelDeclCS_in_rule__TransformationCS__ModelDeclsAssignment_335812 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleModelDeclCS_in_rule__TransformationCS__ModelDeclsAssignment_4_135843 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleModelDeclCS_in_rule__TransformationCS__OwnedModelDeclsAssignment_335812 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleModelDeclCS_in_rule__TransformationCS__OwnedModelDeclsAssignment_4_135843 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__TransformationCS__ExtendsAssignment_6_135878 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__TransformationCS__ExtendsAssignment_6_2_135917 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleKeyDeclCS_in_rule__TransformationCS__KeyDeclsAssignment_835952 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleRelationCS_in_rule__TransformationCS__RelationAssignment_9_035983 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleQueryCS_in_rule__TransformationCS__QueriesAssignment_9_136014 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleKeyDeclCS_in_rule__TransformationCS__OwnedKeyDeclsAssignment_835952 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleRelationCS_in_rule__TransformationCS__OwnedRelationsAssignment_9_035983 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleQueryCS_in_rule__TransformationCS__OwnedQueriesAssignment_9_136014 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__UnitCS__NameAssignment_1_036045 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleURIPathNameCS_in_rule__UnitCS__OwnedPathNameAssignment_236076 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_39_in_rule__UnitCS__IsAllAssignment_3_136112 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleVarDeclarationIdCS_in_rule__VarDeclarationCS__VarDeclarationIdsAssignment_036151 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleVarDeclarationIdCS_in_rule__VarDeclarationCS__VarDeclarationIdsAssignment_1_136182 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_rule__VarDeclarationCS__TypeAssignment_336213 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleVarDeclarationIdCS_in_rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_036151 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleVarDeclarationIdCS_in_rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_1_136182 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypedRefCS_in_rule__VarDeclarationCS__OwnedTypeAssignment_336213 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__VarDeclarationIdCS__NameAssignment36244 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePredicateCS_in_rule__WhenCS__PredicatesAssignment_336275 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePredicateCS_in_rule__WhereCS__PredicatesAssignment_336306 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePredicateCS_in_rule__WhenCS__OwnedPredicatesAssignment_336275 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePredicateCS_in_rule__WhereCS__OwnedPredicatesAssignment_336306 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rulePathNameCS_in_rule__TypedTypeRefCS__OwnedPathNameAssignment36337 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleURIFirstPathElementCS_in_rule__URIPathNameCS__OwnedPathElementsAssignment_036369 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleNextPathElementCS_in_rule__URIPathNameCS__OwnedPathElementsAssignment_1_136400 = new BitSet(new long[]{0x0000000000000002L});

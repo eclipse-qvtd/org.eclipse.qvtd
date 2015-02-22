@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.ObjectTemplateCS#getPropertyTemplates <em>Property Templates</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.ObjectTemplateCS#getOwnedPropertyTemplates <em>Owned Property Templates</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getObjectTemplateCS()
@@ -30,21 +30,21 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface ObjectTemplateCS extends TemplateCS {
 	/**
-	 * Returns the value of the '<em><b>Property Templates</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Property Templates</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS}.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getObjectTemplate <em>Object Template</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getOwningObjectTemplate <em>Owning Object Template</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Property Templates</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Property Templates</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Property Templates</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getObjectTemplateCS_PropertyTemplates()
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getObjectTemplate
-	 * @model opposite="objectTemplate" containment="true"
+	 * @return the value of the '<em>Owned Property Templates</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getObjectTemplateCS_OwnedPropertyTemplates()
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getOwningObjectTemplate
+	 * @model opposite="owningObjectTemplate" containment="true"
 	 * @generated
 	 */
-	EList<PropertyTemplateCS> getPropertyTemplates();
+	EList<PropertyTemplateCS> getOwnedPropertyTemplates();
 
 } // ObjectTemplateCS

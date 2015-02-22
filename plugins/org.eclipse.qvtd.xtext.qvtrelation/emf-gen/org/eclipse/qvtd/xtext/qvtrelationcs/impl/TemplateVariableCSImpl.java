@@ -28,22 +28,21 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.TemplateVariableCS;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TemplateVariableCSImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TemplateVariableCSImpl#getOwnedType <em>Owned Type</em>}</li>
  * </ul>
  *
  * @generated
  */
 public abstract class TemplateVariableCSImpl extends NamedElementCSImpl implements TemplateVariableCS {
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedType() <em>Owned Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getType()
+	 * @see #getOwnedType()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypedRefCS type;
-
+	protected TypedRefCS ownedType;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -69,8 +68,8 @@ public abstract class TemplateVariableCSImpl extends NamedElementCSImpl implemen
 	 * @generated
 	 */
 	@Override
-	public TypedRefCS getType() {
-		return type;
+	public TypedRefCS getOwnedType() {
+		return ownedType;
 	}
 
 	/**
@@ -78,11 +77,11 @@ public abstract class TemplateVariableCSImpl extends NamedElementCSImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetType(TypedRefCS newType, NotificationChain msgs) {
-		TypedRefCS oldType = type;
-		type = newType;
+	public NotificationChain basicSetOwnedType(TypedRefCS newOwnedType, NotificationChain msgs) {
+		TypedRefCS oldOwnedType = ownedType;
+		ownedType = newOwnedType;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.TEMPLATE_VARIABLE_CS__TYPE, oldType, newType);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.TEMPLATE_VARIABLE_CS__OWNED_TYPE, oldOwnedType, newOwnedType);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -94,18 +93,18 @@ public abstract class TemplateVariableCSImpl extends NamedElementCSImpl implemen
 	 * @generated
 	 */
 	@Override
-	public void setType(TypedRefCS newType) {
-		if (newType != type) {
+	public void setOwnedType(TypedRefCS newOwnedType) {
+		if (newOwnedType != ownedType) {
 			NotificationChain msgs = null;
-			if (type != null)
-				msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.TEMPLATE_VARIABLE_CS__TYPE, null, msgs);
-			if (newType != null)
-				msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.TEMPLATE_VARIABLE_CS__TYPE, null, msgs);
-			msgs = basicSetType(newType, msgs);
+			if (ownedType != null)
+				msgs = ((InternalEObject)ownedType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.TEMPLATE_VARIABLE_CS__OWNED_TYPE, null, msgs);
+			if (newOwnedType != null)
+				msgs = ((InternalEObject)newOwnedType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.TEMPLATE_VARIABLE_CS__OWNED_TYPE, null, msgs);
+			msgs = basicSetOwnedType(newOwnedType, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.TEMPLATE_VARIABLE_CS__TYPE, newType, newType));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.TEMPLATE_VARIABLE_CS__OWNED_TYPE, newOwnedType, newOwnedType));
 	}
 
 	/**
@@ -116,8 +115,8 @@ public abstract class TemplateVariableCSImpl extends NamedElementCSImpl implemen
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TEMPLATE_VARIABLE_CS__TYPE:
-				return basicSetType(null, msgs);
+			case QVTrelationCSPackage.TEMPLATE_VARIABLE_CS__OWNED_TYPE:
+				return basicSetOwnedType(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -130,8 +129,8 @@ public abstract class TemplateVariableCSImpl extends NamedElementCSImpl implemen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TEMPLATE_VARIABLE_CS__TYPE:
-				return getType();
+			case QVTrelationCSPackage.TEMPLATE_VARIABLE_CS__OWNED_TYPE:
+				return getOwnedType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -144,8 +143,8 @@ public abstract class TemplateVariableCSImpl extends NamedElementCSImpl implemen
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TEMPLATE_VARIABLE_CS__TYPE:
-				setType((TypedRefCS)newValue);
+			case QVTrelationCSPackage.TEMPLATE_VARIABLE_CS__OWNED_TYPE:
+				setOwnedType((TypedRefCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -159,8 +158,8 @@ public abstract class TemplateVariableCSImpl extends NamedElementCSImpl implemen
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TEMPLATE_VARIABLE_CS__TYPE:
-				setType((TypedRefCS)null);
+			case QVTrelationCSPackage.TEMPLATE_VARIABLE_CS__OWNED_TYPE:
+				setOwnedType((TypedRefCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -174,8 +173,8 @@ public abstract class TemplateVariableCSImpl extends NamedElementCSImpl implemen
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TEMPLATE_VARIABLE_CS__TYPE:
-				return type != null;
+			case QVTrelationCSPackage.TEMPLATE_VARIABLE_CS__OWNED_TYPE:
+				return ownedType != null;
 		}
 		return super.eIsSet(featureID);
 	}

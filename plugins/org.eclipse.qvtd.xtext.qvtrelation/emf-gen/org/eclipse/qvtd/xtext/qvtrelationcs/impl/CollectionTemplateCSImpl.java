@@ -37,7 +37,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.CollectionTemplateCSImpl#getMemberIdentifiers <em>Member Identifiers</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.CollectionTemplateCSImpl#getOwnedMemberIdentifiers <em>Owned Member Identifiers</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.CollectionTemplateCSImpl#getRestIdentifier <em>Rest Identifier</em>}</li>
  * </ul>
  *
@@ -45,14 +45,14 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  */
 public class CollectionTemplateCSImpl extends TemplateCSImpl implements CollectionTemplateCS {
 	/**
-	 * The cached value of the '{@link #getMemberIdentifiers() <em>Member Identifiers</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedMemberIdentifiers() <em>Owned Member Identifiers</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getMemberIdentifiers()
+	 * @see #getOwnedMemberIdentifiers()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TemplateVariableCS> memberIdentifiers;
+	protected EList<TemplateVariableCS> ownedMemberIdentifiers;
 
 	/**
 	 * The cached value of the '{@link #getRestIdentifier() <em>Rest Identifier</em>}' reference.
@@ -89,11 +89,11 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	 * @generated
 	 */
 	@Override
-	public EList<TemplateVariableCS> getMemberIdentifiers() {
-		if (memberIdentifiers == null) {
-			memberIdentifiers = new EObjectContainmentEList<TemplateVariableCS>(TemplateVariableCS.class, this, QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__MEMBER_IDENTIFIERS);
+	public EList<TemplateVariableCS> getOwnedMemberIdentifiers() {
+		if (ownedMemberIdentifiers == null) {
+			ownedMemberIdentifiers = new EObjectContainmentEList<TemplateVariableCS>(TemplateVariableCS.class, this, QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_MEMBER_IDENTIFIERS);
 		}
-		return memberIdentifiers;
+		return ownedMemberIdentifiers;
 	}
 
 	/**
@@ -144,8 +144,8 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__MEMBER_IDENTIFIERS:
-				return ((InternalEList<?>)getMemberIdentifiers()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_MEMBER_IDENTIFIERS:
+				return ((InternalEList<?>)getOwnedMemberIdentifiers()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -158,8 +158,8 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__MEMBER_IDENTIFIERS:
-				return getMemberIdentifiers();
+			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_MEMBER_IDENTIFIERS:
+				return getOwnedMemberIdentifiers();
 			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER:
 				if (resolve) return getRestIdentifier();
 				return basicGetRestIdentifier();
@@ -176,9 +176,9 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__MEMBER_IDENTIFIERS:
-				getMemberIdentifiers().clear();
-				getMemberIdentifiers().addAll((Collection<? extends TemplateVariableCS>)newValue);
+			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_MEMBER_IDENTIFIERS:
+				getOwnedMemberIdentifiers().clear();
+				getOwnedMemberIdentifiers().addAll((Collection<? extends TemplateVariableCS>)newValue);
 				return;
 			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER:
 				setRestIdentifier((Variable)newValue);
@@ -195,8 +195,8 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__MEMBER_IDENTIFIERS:
-				getMemberIdentifiers().clear();
+			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_MEMBER_IDENTIFIERS:
+				getOwnedMemberIdentifiers().clear();
 				return;
 			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER:
 				setRestIdentifier((Variable)null);
@@ -213,8 +213,8 @@ public class CollectionTemplateCSImpl extends TemplateCSImpl implements Collecti
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__MEMBER_IDENTIFIERS:
-				return memberIdentifiers != null && !memberIdentifiers.isEmpty();
+			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__OWNED_MEMBER_IDENTIFIERS:
+				return ownedMemberIdentifiers != null && !ownedMemberIdentifiers.isEmpty();
 			case QVTrelationCSPackage.COLLECTION_TEMPLATE_CS__REST_IDENTIFIER:
 				return restIdentifier != null;
 		}

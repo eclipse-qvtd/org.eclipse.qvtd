@@ -42,14 +42,14 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 	public static class CollectionTemplateCompletion extends SingleContinuation<CollectionTemplateCS>
 	{
 		public CollectionTemplateCompletion(@NonNull CS2ASConversion context, @NonNull CollectionTemplateCS csElement) {
-			super(context, null, null, csElement, new PivotDependency(csElement.getType()));
+			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
 		}
 
 		@Override
 		public BasicContinuation<?> execute() {
 			CollectionTemplateExp pivotElement = PivotUtil.getPivot(CollectionTemplateExp.class, csElement);
 			if (pivotElement != null) {
-				CollectionType type = PivotUtil.getPivot(CollectionType.class, csElement.getType());
+				CollectionType type = PivotUtil.getPivot(CollectionType.class, csElement.getOwnedType());
 				pivotElement.setReferredCollectionType(type);
 				pivotElement.setType(type);
 				Variable variable = pivotElement.getBindsTo();
@@ -64,14 +64,14 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 	public static class ObjectTemplateCompletion extends SingleContinuation<ObjectTemplateCS>
 	{
 		public ObjectTemplateCompletion(@NonNull CS2ASConversion context, @NonNull ObjectTemplateCS csElement) {
-			super(context, null, null, csElement, new PivotDependency(csElement.getType()));
+			super(context, null, null, csElement, new PivotDependency(csElement.getOwnedType()));
 		}
 
 		@Override
 		public BasicContinuation<?> execute() {
 			ObjectTemplateExp pivotElement = PivotUtil.getPivot(ObjectTemplateExp.class, csElement);
 			if (pivotElement != null) {
-				org.eclipse.ocl.pivot.Class type = PivotUtil.getPivot(org.eclipse.ocl.pivot.Class.class, csElement.getType());
+				org.eclipse.ocl.pivot.Class type = PivotUtil.getPivot(org.eclipse.ocl.pivot.Class.class, csElement.getOwnedType());
 				pivotElement.setReferredClass(type);
 				pivotElement.setType(type);
 				Variable variable = pivotElement.getBindsTo();
@@ -94,7 +94,7 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 			if (!super.canExecute()) {
 				return false;
 			}
-			ObjectTemplateExp pivotElement = PivotUtil.getPivot(ObjectTemplateExp.class, csElement.getObjectTemplate());
+			ObjectTemplateExp pivotElement = PivotUtil.getPivot(ObjectTemplateExp.class, csElement.getOwningObjectTemplate());
 			if (pivotElement == null) {
 				return false;
 			}
@@ -112,7 +112,7 @@ public class QVTrelationCSPreOrderVisitor extends AbstractQVTrelationCSPreOrderV
 					pivotElement.setIsOpposite(false);
 				}
 				else {
-					PathNameCS oppositePropertyId = csElement.getOppositePropertyId();
+					PathNameCS oppositePropertyId = csElement.getOwnedOppositePropertyId();
 					Element element = oppositePropertyId.getReferredElement();
 					if (element instanceof Property) {
 						pivotElement.setReferredProperty((Property) element);

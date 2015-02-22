@@ -39,57 +39,57 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainCSImpl#isCheckonly <em>Checkonly</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainCSImpl#isEnforce <em>Enforce</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainCSImpl#isIsCheckonly <em>Is Checkonly</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainCSImpl#isIsEnforce <em>Is Enforce</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainCSImpl#getModelId <em>Model Id</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainCSImpl#isReplace <em>Replace</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainCSImpl#getPattern <em>Pattern</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainCSImpl#getDefaultValues <em>Default Values</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainCSImpl#getImplementedBy <em>Implemented By</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainCSImpl#isIsReplace <em>Is Replace</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainCSImpl#getOwnedPattern <em>Owned Pattern</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainCSImpl#getOwnedDefaultValues <em>Owned Default Values</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainCSImpl#getOwnedImplementedBy <em>Owned Implemented By</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	/**
-	 * The default value of the '{@link #isCheckonly() <em>Checkonly</em>}' attribute.
+	 * The default value of the '{@link #isIsCheckonly() <em>Is Checkonly</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isCheckonly()
+	 * @see #isIsCheckonly()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean CHECKONLY_EDEFAULT = false;
+	protected static final boolean IS_CHECKONLY_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isCheckonly() <em>Checkonly</em>}' attribute.
+	 * The cached value of the '{@link #isIsCheckonly() <em>Is Checkonly</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isCheckonly()
+	 * @see #isIsCheckonly()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean checkonly = CHECKONLY_EDEFAULT;
+	protected boolean isCheckonly = IS_CHECKONLY_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isEnforce() <em>Enforce</em>}' attribute.
+	 * The default value of the '{@link #isIsEnforce() <em>Is Enforce</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isEnforce()
+	 * @see #isIsEnforce()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean ENFORCE_EDEFAULT = false;
+	protected static final boolean IS_ENFORCE_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isEnforce() <em>Enforce</em>}' attribute.
+	 * The cached value of the '{@link #isIsEnforce() <em>Is Enforce</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isEnforce()
+	 * @see #isIsEnforce()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean enforce = ENFORCE_EDEFAULT;
+	protected boolean isEnforce = IS_ENFORCE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getModelId() <em>Model Id</em>}' reference.
@@ -102,54 +102,54 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	protected TypedModel modelId;
 
 	/**
-	 * The default value of the '{@link #isReplace() <em>Replace</em>}' attribute.
+	 * The default value of the '{@link #isIsReplace() <em>Is Replace</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isReplace()
+	 * @see #isIsReplace()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean REPLACE_EDEFAULT = false;
+	protected static final boolean IS_REPLACE_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isReplace() <em>Replace</em>}' attribute.
+	 * The cached value of the '{@link #isIsReplace() <em>Is Replace</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isReplace()
+	 * @see #isIsReplace()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean replace = REPLACE_EDEFAULT;
+	protected boolean isReplace = IS_REPLACE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getPattern() <em>Pattern</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedPattern() <em>Owned Pattern</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPattern()
+	 * @see #getOwnedPattern()
 	 * @generated
 	 * @ordered
 	 */
-	protected DomainPatternCS pattern;
+	protected DomainPatternCS ownedPattern;
 
 	/**
-	 * The cached value of the '{@link #getDefaultValues() <em>Default Values</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedDefaultValues() <em>Owned Default Values</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDefaultValues()
+	 * @see #getOwnedDefaultValues()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DefaultValueCS> defaultValues;
+	protected EList<DefaultValueCS> ownedDefaultValues;
 
 	/**
-	 * The cached value of the '{@link #getImplementedBy() <em>Implemented By</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedImplementedBy() <em>Owned Implemented By</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getImplementedBy()
+	 * @see #getOwnedImplementedBy()
 	 * @generated
 	 * @ordered
 	 */
-	protected ExpCS implementedBy;
+	protected ExpCS ownedImplementedBy;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -176,8 +176,8 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	 * @generated
 	 */
 	@Override
-	public boolean isCheckonly() {
-		return checkonly;
+	public boolean isIsCheckonly() {
+		return isCheckonly;
 	}
 
 	/**
@@ -186,11 +186,11 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	 * @generated
 	 */
 	@Override
-	public void setCheckonly(boolean newCheckonly) {
-		boolean oldCheckonly = checkonly;
-		checkonly = newCheckonly;
+	public void setIsCheckonly(boolean newIsCheckonly) {
+		boolean oldIsCheckonly = isCheckonly;
+		isCheckonly = newIsCheckonly;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DOMAIN_CS__CHECKONLY, oldCheckonly, checkonly));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DOMAIN_CS__IS_CHECKONLY, oldIsCheckonly, isCheckonly));
 	}
 
 	/**
@@ -199,8 +199,8 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	 * @generated
 	 */
 	@Override
-	public boolean isEnforce() {
-		return enforce;
+	public boolean isIsEnforce() {
+		return isEnforce;
 	}
 
 	/**
@@ -209,11 +209,11 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	 * @generated
 	 */
 	@Override
-	public void setEnforce(boolean newEnforce) {
-		boolean oldEnforce = enforce;
-		enforce = newEnforce;
+	public void setIsEnforce(boolean newIsEnforce) {
+		boolean oldIsEnforce = isEnforce;
+		isEnforce = newIsEnforce;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DOMAIN_CS__ENFORCE, oldEnforce, enforce));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DOMAIN_CS__IS_ENFORCE, oldIsEnforce, isEnforce));
 	}
 
 	/**
@@ -262,8 +262,8 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	 * @generated
 	 */
 	@Override
-	public boolean isReplace() {
-		return replace;
+	public boolean isIsReplace() {
+		return isReplace;
 	}
 
 	/**
@@ -272,11 +272,11 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	 * @generated
 	 */
 	@Override
-	public void setReplace(boolean newReplace) {
-		boolean oldReplace = replace;
-		replace = newReplace;
+	public void setIsReplace(boolean newIsReplace) {
+		boolean oldIsReplace = isReplace;
+		isReplace = newIsReplace;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DOMAIN_CS__REPLACE, oldReplace, replace));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DOMAIN_CS__IS_REPLACE, oldIsReplace, isReplace));
 	}
 
 	/**
@@ -285,8 +285,8 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	 * @generated
 	 */
 	@Override
-	public DomainPatternCS getPattern() {
-		return pattern;
+	public DomainPatternCS getOwnedPattern() {
+		return ownedPattern;
 	}
 
 	/**
@@ -294,11 +294,11 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetPattern(DomainPatternCS newPattern, NotificationChain msgs) {
-		DomainPatternCS oldPattern = pattern;
-		pattern = newPattern;
+	public NotificationChain basicSetOwnedPattern(DomainPatternCS newOwnedPattern, NotificationChain msgs) {
+		DomainPatternCS oldOwnedPattern = ownedPattern;
+		ownedPattern = newOwnedPattern;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DOMAIN_CS__PATTERN, oldPattern, newPattern);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERN, oldOwnedPattern, newOwnedPattern);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -310,18 +310,18 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	 * @generated
 	 */
 	@Override
-	public void setPattern(DomainPatternCS newPattern) {
-		if (newPattern != pattern) {
+	public void setOwnedPattern(DomainPatternCS newOwnedPattern) {
+		if (newOwnedPattern != ownedPattern) {
 			NotificationChain msgs = null;
-			if (pattern != null)
-				msgs = ((InternalEObject)pattern).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.DOMAIN_CS__PATTERN, null, msgs);
-			if (newPattern != null)
-				msgs = ((InternalEObject)newPattern).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.DOMAIN_CS__PATTERN, null, msgs);
-			msgs = basicSetPattern(newPattern, msgs);
+			if (ownedPattern != null)
+				msgs = ((InternalEObject)ownedPattern).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERN, null, msgs);
+			if (newOwnedPattern != null)
+				msgs = ((InternalEObject)newOwnedPattern).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERN, null, msgs);
+			msgs = basicSetOwnedPattern(newOwnedPattern, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DOMAIN_CS__PATTERN, newPattern, newPattern));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERN, newOwnedPattern, newOwnedPattern));
 	}
 
 	/**
@@ -330,11 +330,11 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	 * @generated
 	 */
 	@Override
-	public EList<DefaultValueCS> getDefaultValues() {
-		if (defaultValues == null) {
-			defaultValues = new EObjectContainmentEList<DefaultValueCS>(DefaultValueCS.class, this, QVTrelationCSPackage.DOMAIN_CS__DEFAULT_VALUES);
+	public EList<DefaultValueCS> getOwnedDefaultValues() {
+		if (ownedDefaultValues == null) {
+			ownedDefaultValues = new EObjectContainmentEList<DefaultValueCS>(DefaultValueCS.class, this, QVTrelationCSPackage.DOMAIN_CS__OWNED_DEFAULT_VALUES);
 		}
-		return defaultValues;
+		return ownedDefaultValues;
 	}
 
 	/**
@@ -343,8 +343,8 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	 * @generated
 	 */
 	@Override
-	public ExpCS getImplementedBy() {
-		return implementedBy;
+	public ExpCS getOwnedImplementedBy() {
+		return ownedImplementedBy;
 	}
 
 	/**
@@ -352,11 +352,11 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetImplementedBy(ExpCS newImplementedBy, NotificationChain msgs) {
-		ExpCS oldImplementedBy = implementedBy;
-		implementedBy = newImplementedBy;
+	public NotificationChain basicSetOwnedImplementedBy(ExpCS newOwnedImplementedBy, NotificationChain msgs) {
+		ExpCS oldOwnedImplementedBy = ownedImplementedBy;
+		ownedImplementedBy = newOwnedImplementedBy;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DOMAIN_CS__IMPLEMENTED_BY, oldImplementedBy, newImplementedBy);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DOMAIN_CS__OWNED_IMPLEMENTED_BY, oldOwnedImplementedBy, newOwnedImplementedBy);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -368,18 +368,18 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	 * @generated
 	 */
 	@Override
-	public void setImplementedBy(ExpCS newImplementedBy) {
-		if (newImplementedBy != implementedBy) {
+	public void setOwnedImplementedBy(ExpCS newOwnedImplementedBy) {
+		if (newOwnedImplementedBy != ownedImplementedBy) {
 			NotificationChain msgs = null;
-			if (implementedBy != null)
-				msgs = ((InternalEObject)implementedBy).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.DOMAIN_CS__IMPLEMENTED_BY, null, msgs);
-			if (newImplementedBy != null)
-				msgs = ((InternalEObject)newImplementedBy).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.DOMAIN_CS__IMPLEMENTED_BY, null, msgs);
-			msgs = basicSetImplementedBy(newImplementedBy, msgs);
+			if (ownedImplementedBy != null)
+				msgs = ((InternalEObject)ownedImplementedBy).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.DOMAIN_CS__OWNED_IMPLEMENTED_BY, null, msgs);
+			if (newOwnedImplementedBy != null)
+				msgs = ((InternalEObject)newOwnedImplementedBy).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.DOMAIN_CS__OWNED_IMPLEMENTED_BY, null, msgs);
+			msgs = basicSetOwnedImplementedBy(newOwnedImplementedBy, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DOMAIN_CS__IMPLEMENTED_BY, newImplementedBy, newImplementedBy));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DOMAIN_CS__OWNED_IMPLEMENTED_BY, newOwnedImplementedBy, newOwnedImplementedBy));
 	}
 
 	/**
@@ -400,12 +400,12 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.DOMAIN_CS__PATTERN:
-				return basicSetPattern(null, msgs);
-			case QVTrelationCSPackage.DOMAIN_CS__DEFAULT_VALUES:
-				return ((InternalEList<?>)getDefaultValues()).basicRemove(otherEnd, msgs);
-			case QVTrelationCSPackage.DOMAIN_CS__IMPLEMENTED_BY:
-				return basicSetImplementedBy(null, msgs);
+			case QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERN:
+				return basicSetOwnedPattern(null, msgs);
+			case QVTrelationCSPackage.DOMAIN_CS__OWNED_DEFAULT_VALUES:
+				return ((InternalEList<?>)getOwnedDefaultValues()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSPackage.DOMAIN_CS__OWNED_IMPLEMENTED_BY:
+				return basicSetOwnedImplementedBy(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -418,21 +418,21 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.DOMAIN_CS__CHECKONLY:
-				return isCheckonly();
-			case QVTrelationCSPackage.DOMAIN_CS__ENFORCE:
-				return isEnforce();
+			case QVTrelationCSPackage.DOMAIN_CS__IS_CHECKONLY:
+				return isIsCheckonly();
+			case QVTrelationCSPackage.DOMAIN_CS__IS_ENFORCE:
+				return isIsEnforce();
 			case QVTrelationCSPackage.DOMAIN_CS__MODEL_ID:
 				if (resolve) return getModelId();
 				return basicGetModelId();
-			case QVTrelationCSPackage.DOMAIN_CS__REPLACE:
-				return isReplace();
-			case QVTrelationCSPackage.DOMAIN_CS__PATTERN:
-				return getPattern();
-			case QVTrelationCSPackage.DOMAIN_CS__DEFAULT_VALUES:
-				return getDefaultValues();
-			case QVTrelationCSPackage.DOMAIN_CS__IMPLEMENTED_BY:
-				return getImplementedBy();
+			case QVTrelationCSPackage.DOMAIN_CS__IS_REPLACE:
+				return isIsReplace();
+			case QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERN:
+				return getOwnedPattern();
+			case QVTrelationCSPackage.DOMAIN_CS__OWNED_DEFAULT_VALUES:
+				return getOwnedDefaultValues();
+			case QVTrelationCSPackage.DOMAIN_CS__OWNED_IMPLEMENTED_BY:
+				return getOwnedImplementedBy();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -446,27 +446,27 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.DOMAIN_CS__CHECKONLY:
-				setCheckonly((Boolean)newValue);
+			case QVTrelationCSPackage.DOMAIN_CS__IS_CHECKONLY:
+				setIsCheckonly((Boolean)newValue);
 				return;
-			case QVTrelationCSPackage.DOMAIN_CS__ENFORCE:
-				setEnforce((Boolean)newValue);
+			case QVTrelationCSPackage.DOMAIN_CS__IS_ENFORCE:
+				setIsEnforce((Boolean)newValue);
 				return;
 			case QVTrelationCSPackage.DOMAIN_CS__MODEL_ID:
 				setModelId((TypedModel)newValue);
 				return;
-			case QVTrelationCSPackage.DOMAIN_CS__REPLACE:
-				setReplace((Boolean)newValue);
+			case QVTrelationCSPackage.DOMAIN_CS__IS_REPLACE:
+				setIsReplace((Boolean)newValue);
 				return;
-			case QVTrelationCSPackage.DOMAIN_CS__PATTERN:
-				setPattern((DomainPatternCS)newValue);
+			case QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERN:
+				setOwnedPattern((DomainPatternCS)newValue);
 				return;
-			case QVTrelationCSPackage.DOMAIN_CS__DEFAULT_VALUES:
-				getDefaultValues().clear();
-				getDefaultValues().addAll((Collection<? extends DefaultValueCS>)newValue);
+			case QVTrelationCSPackage.DOMAIN_CS__OWNED_DEFAULT_VALUES:
+				getOwnedDefaultValues().clear();
+				getOwnedDefaultValues().addAll((Collection<? extends DefaultValueCS>)newValue);
 				return;
-			case QVTrelationCSPackage.DOMAIN_CS__IMPLEMENTED_BY:
-				setImplementedBy((ExpCS)newValue);
+			case QVTrelationCSPackage.DOMAIN_CS__OWNED_IMPLEMENTED_BY:
+				setOwnedImplementedBy((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -480,26 +480,26 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.DOMAIN_CS__CHECKONLY:
-				setCheckonly(CHECKONLY_EDEFAULT);
+			case QVTrelationCSPackage.DOMAIN_CS__IS_CHECKONLY:
+				setIsCheckonly(IS_CHECKONLY_EDEFAULT);
 				return;
-			case QVTrelationCSPackage.DOMAIN_CS__ENFORCE:
-				setEnforce(ENFORCE_EDEFAULT);
+			case QVTrelationCSPackage.DOMAIN_CS__IS_ENFORCE:
+				setIsEnforce(IS_ENFORCE_EDEFAULT);
 				return;
 			case QVTrelationCSPackage.DOMAIN_CS__MODEL_ID:
 				setModelId((TypedModel)null);
 				return;
-			case QVTrelationCSPackage.DOMAIN_CS__REPLACE:
-				setReplace(REPLACE_EDEFAULT);
+			case QVTrelationCSPackage.DOMAIN_CS__IS_REPLACE:
+				setIsReplace(IS_REPLACE_EDEFAULT);
 				return;
-			case QVTrelationCSPackage.DOMAIN_CS__PATTERN:
-				setPattern((DomainPatternCS)null);
+			case QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERN:
+				setOwnedPattern((DomainPatternCS)null);
 				return;
-			case QVTrelationCSPackage.DOMAIN_CS__DEFAULT_VALUES:
-				getDefaultValues().clear();
+			case QVTrelationCSPackage.DOMAIN_CS__OWNED_DEFAULT_VALUES:
+				getOwnedDefaultValues().clear();
 				return;
-			case QVTrelationCSPackage.DOMAIN_CS__IMPLEMENTED_BY:
-				setImplementedBy((ExpCS)null);
+			case QVTrelationCSPackage.DOMAIN_CS__OWNED_IMPLEMENTED_BY:
+				setOwnedImplementedBy((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -513,20 +513,20 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.DOMAIN_CS__CHECKONLY:
-				return checkonly != CHECKONLY_EDEFAULT;
-			case QVTrelationCSPackage.DOMAIN_CS__ENFORCE:
-				return enforce != ENFORCE_EDEFAULT;
+			case QVTrelationCSPackage.DOMAIN_CS__IS_CHECKONLY:
+				return isCheckonly != IS_CHECKONLY_EDEFAULT;
+			case QVTrelationCSPackage.DOMAIN_CS__IS_ENFORCE:
+				return isEnforce != IS_ENFORCE_EDEFAULT;
 			case QVTrelationCSPackage.DOMAIN_CS__MODEL_ID:
 				return modelId != null;
-			case QVTrelationCSPackage.DOMAIN_CS__REPLACE:
-				return replace != REPLACE_EDEFAULT;
-			case QVTrelationCSPackage.DOMAIN_CS__PATTERN:
-				return pattern != null;
-			case QVTrelationCSPackage.DOMAIN_CS__DEFAULT_VALUES:
-				return defaultValues != null && !defaultValues.isEmpty();
-			case QVTrelationCSPackage.DOMAIN_CS__IMPLEMENTED_BY:
-				return implementedBy != null;
+			case QVTrelationCSPackage.DOMAIN_CS__IS_REPLACE:
+				return isReplace != IS_REPLACE_EDEFAULT;
+			case QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERN:
+				return ownedPattern != null;
+			case QVTrelationCSPackage.DOMAIN_CS__OWNED_DEFAULT_VALUES:
+				return ownedDefaultValues != null && !ownedDefaultValues.isEmpty();
+			case QVTrelationCSPackage.DOMAIN_CS__OWNED_IMPLEMENTED_BY:
+				return ownedImplementedBy != null;
 		}
 		return super.eIsSet(featureID);
 	}

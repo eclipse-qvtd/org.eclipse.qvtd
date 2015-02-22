@@ -35,21 +35,21 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.PatternCSImpl#getPredicates <em>Predicates</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.PatternCSImpl#getOwnedPredicates <em>Owned Predicates</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class PatternCSImpl extends ModelElementCSImpl implements PatternCS {
 	/**
-	 * The cached value of the '{@link #getPredicates() <em>Predicates</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedPredicates() <em>Owned Predicates</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPredicates()
+	 * @see #getOwnedPredicates()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<PredicateCS> predicates;
+	protected EList<PredicateCS> ownedPredicates;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -75,11 +75,11 @@ public class PatternCSImpl extends ModelElementCSImpl implements PatternCS {
 	 * @generated
 	 */
 	@Override
-	public EList<PredicateCS> getPredicates() {
-		if (predicates == null) {
-			predicates = new EObjectContainmentEList<PredicateCS>(PredicateCS.class, this, QVTrelationCSPackage.PATTERN_CS__PREDICATES);
+	public EList<PredicateCS> getOwnedPredicates() {
+		if (ownedPredicates == null) {
+			ownedPredicates = new EObjectContainmentEList<PredicateCS>(PredicateCS.class, this, QVTrelationCSPackage.PATTERN_CS__OWNED_PREDICATES);
 		}
-		return predicates;
+		return ownedPredicates;
 	}
 
 	/**
@@ -90,8 +90,8 @@ public class PatternCSImpl extends ModelElementCSImpl implements PatternCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PATTERN_CS__PREDICATES:
-				return ((InternalEList<?>)getPredicates()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSPackage.PATTERN_CS__OWNED_PREDICATES:
+				return ((InternalEList<?>)getOwnedPredicates()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -104,8 +104,8 @@ public class PatternCSImpl extends ModelElementCSImpl implements PatternCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PATTERN_CS__PREDICATES:
-				return getPredicates();
+			case QVTrelationCSPackage.PATTERN_CS__OWNED_PREDICATES:
+				return getOwnedPredicates();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -119,9 +119,9 @@ public class PatternCSImpl extends ModelElementCSImpl implements PatternCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PATTERN_CS__PREDICATES:
-				getPredicates().clear();
-				getPredicates().addAll((Collection<? extends PredicateCS>)newValue);
+			case QVTrelationCSPackage.PATTERN_CS__OWNED_PREDICATES:
+				getOwnedPredicates().clear();
+				getOwnedPredicates().addAll((Collection<? extends PredicateCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -135,8 +135,8 @@ public class PatternCSImpl extends ModelElementCSImpl implements PatternCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PATTERN_CS__PREDICATES:
-				getPredicates().clear();
+			case QVTrelationCSPackage.PATTERN_CS__OWNED_PREDICATES:
+				getOwnedPredicates().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -150,8 +150,8 @@ public class PatternCSImpl extends ModelElementCSImpl implements PatternCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.PATTERN_CS__PREDICATES:
-				return predicates != null && !predicates.isEmpty();
+			case QVTrelationCSPackage.PATTERN_CS__OWNED_PREDICATES:
+				return ownedPredicates != null && !ownedPredicates.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

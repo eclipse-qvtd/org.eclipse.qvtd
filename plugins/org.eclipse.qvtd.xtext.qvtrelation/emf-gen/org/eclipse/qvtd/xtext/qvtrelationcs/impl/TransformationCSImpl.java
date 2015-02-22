@@ -40,25 +40,25 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl#getModelDecls <em>Model Decls</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl#getOwnedModelDecls <em>Owned Model Decls</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl#getExtends <em>Extends</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl#getKeyDecls <em>Key Decls</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl#getQueries <em>Queries</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl#getRelation <em>Relation</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl#getOwnedKeyDecls <em>Owned Key Decls</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl#getOwnedQueries <em>Owned Queries</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TransformationCSImpl#getOwnedRelations <em>Owned Relations</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class TransformationCSImpl extends ClassCSImpl implements TransformationCS {
 	/**
-	 * The cached value of the '{@link #getModelDecls() <em>Model Decls</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedModelDecls() <em>Owned Model Decls</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getModelDecls()
+	 * @see #getOwnedModelDecls()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ModelDeclCS> modelDecls;
+	protected EList<ModelDeclCS> ownedModelDecls;
 
 	/**
 	 * The cached value of the '{@link #getExtends() <em>Extends</em>}' reference list.
@@ -71,34 +71,34 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 	protected EList<Transformation> extends_;
 
 	/**
-	 * The cached value of the '{@link #getKeyDecls() <em>Key Decls</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedKeyDecls() <em>Owned Key Decls</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getKeyDecls()
+	 * @see #getOwnedKeyDecls()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<KeyDeclCS> keyDecls;
+	protected EList<KeyDeclCS> ownedKeyDecls;
 
 	/**
-	 * The cached value of the '{@link #getQueries() <em>Queries</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedQueries() <em>Owned Queries</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getQueries()
+	 * @see #getOwnedQueries()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<QueryCS> queries;
+	protected EList<QueryCS> ownedQueries;
 
 	/**
-	 * The cached value of the '{@link #getRelation() <em>Relation</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedRelations() <em>Owned Relations</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRelation()
+	 * @see #getOwnedRelations()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<RelationCS> relation;
+	protected EList<RelationCS> ownedRelations;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -125,11 +125,11 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 	 * @generated
 	 */
 	@Override
-	public EList<ModelDeclCS> getModelDecls() {
-		if (modelDecls == null) {
-			modelDecls = new EObjectContainmentEList<ModelDeclCS>(ModelDeclCS.class, this, QVTrelationCSPackage.TRANSFORMATION_CS__MODEL_DECLS);
+	public EList<ModelDeclCS> getOwnedModelDecls() {
+		if (ownedModelDecls == null) {
+			ownedModelDecls = new EObjectContainmentEList<ModelDeclCS>(ModelDeclCS.class, this, QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_MODEL_DECLS);
 		}
-		return modelDecls;
+		return ownedModelDecls;
 	}
 
 	/**
@@ -151,11 +151,11 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 	 * @generated
 	 */
 	@Override
-	public EList<KeyDeclCS> getKeyDecls() {
-		if (keyDecls == null) {
-			keyDecls = new EObjectContainmentEList<KeyDeclCS>(KeyDeclCS.class, this, QVTrelationCSPackage.TRANSFORMATION_CS__KEY_DECLS);
+	public EList<KeyDeclCS> getOwnedKeyDecls() {
+		if (ownedKeyDecls == null) {
+			ownedKeyDecls = new EObjectContainmentEList<KeyDeclCS>(KeyDeclCS.class, this, QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_KEY_DECLS);
 		}
-		return keyDecls;
+		return ownedKeyDecls;
 	}
 
 	/**
@@ -164,11 +164,11 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 	 * @generated
 	 */
 	@Override
-	public EList<QueryCS> getQueries() {
-		if (queries == null) {
-			queries = new EObjectContainmentEList<QueryCS>(QueryCS.class, this, QVTrelationCSPackage.TRANSFORMATION_CS__QUERIES);
+	public EList<QueryCS> getOwnedQueries() {
+		if (ownedQueries == null) {
+			ownedQueries = new EObjectContainmentEList<QueryCS>(QueryCS.class, this, QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_QUERIES);
 		}
-		return queries;
+		return ownedQueries;
 	}
 
 	/**
@@ -177,11 +177,11 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 	 * @generated
 	 */
 	@Override
-	public EList<RelationCS> getRelation() {
-		if (relation == null) {
-			relation = new EObjectContainmentEList<RelationCS>(RelationCS.class, this, QVTrelationCSPackage.TRANSFORMATION_CS__RELATION);
+	public EList<RelationCS> getOwnedRelations() {
+		if (ownedRelations == null) {
+			ownedRelations = new EObjectContainmentEList<RelationCS>(RelationCS.class, this, QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_RELATIONS);
 		}
-		return relation;
+		return ownedRelations;
 	}
 
 	/**
@@ -192,14 +192,14 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TRANSFORMATION_CS__MODEL_DECLS:
-				return ((InternalEList<?>)getModelDecls()).basicRemove(otherEnd, msgs);
-			case QVTrelationCSPackage.TRANSFORMATION_CS__KEY_DECLS:
-				return ((InternalEList<?>)getKeyDecls()).basicRemove(otherEnd, msgs);
-			case QVTrelationCSPackage.TRANSFORMATION_CS__QUERIES:
-				return ((InternalEList<?>)getQueries()).basicRemove(otherEnd, msgs);
-			case QVTrelationCSPackage.TRANSFORMATION_CS__RELATION:
-				return ((InternalEList<?>)getRelation()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_MODEL_DECLS:
+				return ((InternalEList<?>)getOwnedModelDecls()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_KEY_DECLS:
+				return ((InternalEList<?>)getOwnedKeyDecls()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_QUERIES:
+				return ((InternalEList<?>)getOwnedQueries()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_RELATIONS:
+				return ((InternalEList<?>)getOwnedRelations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -212,16 +212,16 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TRANSFORMATION_CS__MODEL_DECLS:
-				return getModelDecls();
+			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_MODEL_DECLS:
+				return getOwnedModelDecls();
 			case QVTrelationCSPackage.TRANSFORMATION_CS__EXTENDS:
 				return getExtends();
-			case QVTrelationCSPackage.TRANSFORMATION_CS__KEY_DECLS:
-				return getKeyDecls();
-			case QVTrelationCSPackage.TRANSFORMATION_CS__QUERIES:
-				return getQueries();
-			case QVTrelationCSPackage.TRANSFORMATION_CS__RELATION:
-				return getRelation();
+			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_KEY_DECLS:
+				return getOwnedKeyDecls();
+			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_QUERIES:
+				return getOwnedQueries();
+			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_RELATIONS:
+				return getOwnedRelations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -235,25 +235,25 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TRANSFORMATION_CS__MODEL_DECLS:
-				getModelDecls().clear();
-				getModelDecls().addAll((Collection<? extends ModelDeclCS>)newValue);
+			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_MODEL_DECLS:
+				getOwnedModelDecls().clear();
+				getOwnedModelDecls().addAll((Collection<? extends ModelDeclCS>)newValue);
 				return;
 			case QVTrelationCSPackage.TRANSFORMATION_CS__EXTENDS:
 				getExtends().clear();
 				getExtends().addAll((Collection<? extends Transformation>)newValue);
 				return;
-			case QVTrelationCSPackage.TRANSFORMATION_CS__KEY_DECLS:
-				getKeyDecls().clear();
-				getKeyDecls().addAll((Collection<? extends KeyDeclCS>)newValue);
+			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_KEY_DECLS:
+				getOwnedKeyDecls().clear();
+				getOwnedKeyDecls().addAll((Collection<? extends KeyDeclCS>)newValue);
 				return;
-			case QVTrelationCSPackage.TRANSFORMATION_CS__QUERIES:
-				getQueries().clear();
-				getQueries().addAll((Collection<? extends QueryCS>)newValue);
+			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_QUERIES:
+				getOwnedQueries().clear();
+				getOwnedQueries().addAll((Collection<? extends QueryCS>)newValue);
 				return;
-			case QVTrelationCSPackage.TRANSFORMATION_CS__RELATION:
-				getRelation().clear();
-				getRelation().addAll((Collection<? extends RelationCS>)newValue);
+			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_RELATIONS:
+				getOwnedRelations().clear();
+				getOwnedRelations().addAll((Collection<? extends RelationCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -267,20 +267,20 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TRANSFORMATION_CS__MODEL_DECLS:
-				getModelDecls().clear();
+			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_MODEL_DECLS:
+				getOwnedModelDecls().clear();
 				return;
 			case QVTrelationCSPackage.TRANSFORMATION_CS__EXTENDS:
 				getExtends().clear();
 				return;
-			case QVTrelationCSPackage.TRANSFORMATION_CS__KEY_DECLS:
-				getKeyDecls().clear();
+			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_KEY_DECLS:
+				getOwnedKeyDecls().clear();
 				return;
-			case QVTrelationCSPackage.TRANSFORMATION_CS__QUERIES:
-				getQueries().clear();
+			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_QUERIES:
+				getOwnedQueries().clear();
 				return;
-			case QVTrelationCSPackage.TRANSFORMATION_CS__RELATION:
-				getRelation().clear();
+			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_RELATIONS:
+				getOwnedRelations().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -294,16 +294,16 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.TRANSFORMATION_CS__MODEL_DECLS:
-				return modelDecls != null && !modelDecls.isEmpty();
+			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_MODEL_DECLS:
+				return ownedModelDecls != null && !ownedModelDecls.isEmpty();
 			case QVTrelationCSPackage.TRANSFORMATION_CS__EXTENDS:
 				return extends_ != null && !extends_.isEmpty();
-			case QVTrelationCSPackage.TRANSFORMATION_CS__KEY_DECLS:
-				return keyDecls != null && !keyDecls.isEmpty();
-			case QVTrelationCSPackage.TRANSFORMATION_CS__QUERIES:
-				return queries != null && !queries.isEmpty();
-			case QVTrelationCSPackage.TRANSFORMATION_CS__RELATION:
-				return relation != null && !relation.isEmpty();
+			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_KEY_DECLS:
+				return ownedKeyDecls != null && !ownedKeyDecls.isEmpty();
+			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_QUERIES:
+				return ownedQueries != null && !ownedQueries.isEmpty();
+			case QVTrelationCSPackage.TRANSFORMATION_CS__OWNED_RELATIONS:
+				return ownedRelations != null && !ownedRelations.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

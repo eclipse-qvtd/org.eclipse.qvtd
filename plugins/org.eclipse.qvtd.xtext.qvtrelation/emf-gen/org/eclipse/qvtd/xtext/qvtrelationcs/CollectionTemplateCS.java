@@ -22,7 +22,7 @@ import org.eclipse.ocl.pivot.Variable;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS#getMemberIdentifiers <em>Member Identifiers</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS#getOwnedMemberIdentifiers <em>Owned Member Identifiers</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.CollectionTemplateCS#getRestIdentifier <em>Rest Identifier</em>}</li>
  * </ul>
  *
@@ -32,20 +32,20 @@ import org.eclipse.ocl.pivot.Variable;
  */
 public interface CollectionTemplateCS extends TemplateCS {
 	/**
-	 * Returns the value of the '<em><b>Member Identifiers</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Member Identifiers</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcs.TemplateVariableCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Member Identifiers</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Member Identifiers</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Member Identifiers</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getCollectionTemplateCS_MemberIdentifiers()
+	 * @return the value of the '<em>Owned Member Identifiers</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getCollectionTemplateCS_OwnedMemberIdentifiers()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<TemplateVariableCS> getMemberIdentifiers();
+	EList<TemplateVariableCS> getOwnedMemberIdentifiers();
 
 	/**
 	 * Returns the value of the '<em><b>Rest Identifier</b></em>' reference.

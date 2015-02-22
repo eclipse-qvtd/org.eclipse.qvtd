@@ -21,7 +21,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TemplateCS#getGuardExpression <em>Guard Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.TemplateCS#getOwnedGuardExpression <em>Owned Guard Expression</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getTemplateCS()
@@ -30,29 +30,29 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  */
 public interface TemplateCS extends ExpCS, TemplateVariableCS {
 	/**
-	 * Returns the value of the '<em><b>Guard Expression</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Guard Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Guard Expression</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Guard Expression</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Guard Expression</em>' containment reference.
-	 * @see #setGuardExpression(ExpCS)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getTemplateCS_GuardExpression()
+	 * @return the value of the '<em>Owned Guard Expression</em>' containment reference.
+	 * @see #setOwnedGuardExpression(ExpCS)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getTemplateCS_OwnedGuardExpression()
 	 * @model containment="true"
 	 * @generated
 	 */
-	ExpCS getGuardExpression();
+	ExpCS getOwnedGuardExpression();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TemplateCS#getGuardExpression <em>Guard Expression</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TemplateCS#getOwnedGuardExpression <em>Owned Guard Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Guard Expression</em>' containment reference.
-	 * @see #getGuardExpression()
+	 * @param value the new value of the '<em>Owned Guard Expression</em>' containment reference.
+	 * @see #getOwnedGuardExpression()
 	 * @generated
 	 */
-	void setGuardExpression(ExpCS value);
+	void setOwnedGuardExpression(ExpCS value);
 
 } // TemplateCS

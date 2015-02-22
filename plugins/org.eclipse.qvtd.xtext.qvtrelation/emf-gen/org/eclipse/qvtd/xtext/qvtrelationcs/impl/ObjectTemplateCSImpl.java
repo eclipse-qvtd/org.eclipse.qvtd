@@ -34,21 +34,21 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.ObjectTemplateCSImpl#getPropertyTemplates <em>Property Templates</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.ObjectTemplateCSImpl#getOwnedPropertyTemplates <em>Owned Property Templates</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ObjectTemplateCSImpl extends TemplateCSImpl implements ObjectTemplateCS {
 	/**
-	 * The cached value of the '{@link #getPropertyTemplates() <em>Property Templates</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedPropertyTemplates() <em>Owned Property Templates</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPropertyTemplates()
+	 * @see #getOwnedPropertyTemplates()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<PropertyTemplateCS> propertyTemplates;
+	protected EList<PropertyTemplateCS> ownedPropertyTemplates;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -74,11 +74,11 @@ public class ObjectTemplateCSImpl extends TemplateCSImpl implements ObjectTempla
 	 * @generated
 	 */
 	@Override
-	public EList<PropertyTemplateCS> getPropertyTemplates() {
-		if (propertyTemplates == null) {
-			propertyTemplates = new EObjectContainmentWithInverseEList<PropertyTemplateCS>(PropertyTemplateCS.class, this, QVTrelationCSPackage.OBJECT_TEMPLATE_CS__PROPERTY_TEMPLATES, QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OBJECT_TEMPLATE);
+	public EList<PropertyTemplateCS> getOwnedPropertyTemplates() {
+		if (ownedPropertyTemplates == null) {
+			ownedPropertyTemplates = new EObjectContainmentWithInverseEList<PropertyTemplateCS>(PropertyTemplateCS.class, this, QVTrelationCSPackage.OBJECT_TEMPLATE_CS__OWNED_PROPERTY_TEMPLATES, QVTrelationCSPackage.PROPERTY_TEMPLATE_CS__OWNING_OBJECT_TEMPLATE);
 		}
-		return propertyTemplates;
+		return ownedPropertyTemplates;
 	}
 
 	/**
@@ -90,8 +90,8 @@ public class ObjectTemplateCSImpl extends TemplateCSImpl implements ObjectTempla
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.OBJECT_TEMPLATE_CS__PROPERTY_TEMPLATES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getPropertyTemplates()).basicAdd(otherEnd, msgs);
+			case QVTrelationCSPackage.OBJECT_TEMPLATE_CS__OWNED_PROPERTY_TEMPLATES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getOwnedPropertyTemplates()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -104,8 +104,8 @@ public class ObjectTemplateCSImpl extends TemplateCSImpl implements ObjectTempla
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.OBJECT_TEMPLATE_CS__PROPERTY_TEMPLATES:
-				return ((InternalEList<?>)getPropertyTemplates()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSPackage.OBJECT_TEMPLATE_CS__OWNED_PROPERTY_TEMPLATES:
+				return ((InternalEList<?>)getOwnedPropertyTemplates()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -118,8 +118,8 @@ public class ObjectTemplateCSImpl extends TemplateCSImpl implements ObjectTempla
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.OBJECT_TEMPLATE_CS__PROPERTY_TEMPLATES:
-				return getPropertyTemplates();
+			case QVTrelationCSPackage.OBJECT_TEMPLATE_CS__OWNED_PROPERTY_TEMPLATES:
+				return getOwnedPropertyTemplates();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -133,9 +133,9 @@ public class ObjectTemplateCSImpl extends TemplateCSImpl implements ObjectTempla
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.OBJECT_TEMPLATE_CS__PROPERTY_TEMPLATES:
-				getPropertyTemplates().clear();
-				getPropertyTemplates().addAll((Collection<? extends PropertyTemplateCS>)newValue);
+			case QVTrelationCSPackage.OBJECT_TEMPLATE_CS__OWNED_PROPERTY_TEMPLATES:
+				getOwnedPropertyTemplates().clear();
+				getOwnedPropertyTemplates().addAll((Collection<? extends PropertyTemplateCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -149,8 +149,8 @@ public class ObjectTemplateCSImpl extends TemplateCSImpl implements ObjectTempla
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.OBJECT_TEMPLATE_CS__PROPERTY_TEMPLATES:
-				getPropertyTemplates().clear();
+			case QVTrelationCSPackage.OBJECT_TEMPLATE_CS__OWNED_PROPERTY_TEMPLATES:
+				getOwnedPropertyTemplates().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -164,8 +164,8 @@ public class ObjectTemplateCSImpl extends TemplateCSImpl implements ObjectTempla
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.OBJECT_TEMPLATE_CS__PROPERTY_TEMPLATES:
-				return propertyTemplates != null && !propertyTemplates.isEmpty();
+			case QVTrelationCSPackage.OBJECT_TEMPLATE_CS__OWNED_PROPERTY_TEMPLATES:
+				return ownedPropertyTemplates != null && !ownedPropertyTemplates.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

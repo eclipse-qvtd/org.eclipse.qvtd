@@ -24,10 +24,10 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getObjectTemplate <em>Object Template</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getOwningObjectTemplate <em>Owning Object Template</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getPropertyId <em>Property Id</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getOppositePropertyId <em>Opposite Property Id</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getOwnedOppositePropertyId <em>Owned Opposite Property Id</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getOwnedExpression <em>Owned Expression</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getPropertyTemplateCS()
@@ -36,32 +36,32 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  */
 public interface PropertyTemplateCS extends ModelElementCS {
 	/**
-	 * Returns the value of the '<em><b>Object Template</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.xtext.qvtrelationcs.ObjectTemplateCS#getPropertyTemplates <em>Property Templates</em>}'.
+	 * Returns the value of the '<em><b>Owning Object Template</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.xtext.qvtrelationcs.ObjectTemplateCS#getOwnedPropertyTemplates <em>Owned Property Templates</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Object Template</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Owning Object Template</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Object Template</em>' container reference.
-	 * @see #setObjectTemplate(ObjectTemplateCS)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getPropertyTemplateCS_ObjectTemplate()
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.ObjectTemplateCS#getPropertyTemplates
-	 * @model opposite="propertyTemplates" resolveProxies="false" transient="false"
+	 * @return the value of the '<em>Owning Object Template</em>' container reference.
+	 * @see #setOwningObjectTemplate(ObjectTemplateCS)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getPropertyTemplateCS_OwningObjectTemplate()
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.ObjectTemplateCS#getOwnedPropertyTemplates
+	 * @model opposite="ownedPropertyTemplates" resolveProxies="false" transient="false"
 	 * @generated
 	 */
-	ObjectTemplateCS getObjectTemplate();
+	ObjectTemplateCS getOwningObjectTemplate();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getObjectTemplate <em>Object Template</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getOwningObjectTemplate <em>Owning Object Template</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Object Template</em>' container reference.
-	 * @see #getObjectTemplate()
+	 * @param value the new value of the '<em>Owning Object Template</em>' container reference.
+	 * @see #getOwningObjectTemplate()
 	 * @generated
 	 */
-	void setObjectTemplate(ObjectTemplateCS value);
+	void setOwningObjectTemplate(ObjectTemplateCS value);
 
 	/**
 	 * Returns the value of the '<em><b>Property Id</b></em>' reference.
@@ -90,55 +90,55 @@ public interface PropertyTemplateCS extends ModelElementCS {
 	void setPropertyId(Property value);
 
 	/**
-	 * Returns the value of the '<em><b>Opposite Property Id</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Opposite Property Id</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Opposite Property Id</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Opposite Property Id</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Opposite Property Id</em>' containment reference.
-	 * @see #setOppositePropertyId(PathNameCS)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getPropertyTemplateCS_OppositePropertyId()
+	 * @return the value of the '<em>Owned Opposite Property Id</em>' containment reference.
+	 * @see #setOwnedOppositePropertyId(PathNameCS)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getPropertyTemplateCS_OwnedOppositePropertyId()
 	 * @model containment="true"
 	 * @generated
 	 */
-	PathNameCS getOppositePropertyId();
+	PathNameCS getOwnedOppositePropertyId();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getOppositePropertyId <em>Opposite Property Id</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getOwnedOppositePropertyId <em>Owned Opposite Property Id</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Opposite Property Id</em>' containment reference.
-	 * @see #getOppositePropertyId()
+	 * @param value the new value of the '<em>Owned Opposite Property Id</em>' containment reference.
+	 * @see #getOwnedOppositePropertyId()
 	 * @generated
 	 */
-	void setOppositePropertyId(PathNameCS value);
+	void setOwnedOppositePropertyId(PathNameCS value);
 
 	/**
-	 * Returns the value of the '<em><b>Expression</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Expression</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Expression</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Expression</em>' containment reference.
-	 * @see #setExpression(ExpCS)
-	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getPropertyTemplateCS_Expression()
+	 * @return the value of the '<em>Owned Expression</em>' containment reference.
+	 * @see #setOwnedExpression(ExpCS)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getPropertyTemplateCS_OwnedExpression()
 	 * @model containment="true"
 	 * @generated
 	 */
-	ExpCS getExpression();
+	ExpCS getOwnedExpression();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getExpression <em>Expression</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.PropertyTemplateCS#getOwnedExpression <em>Owned Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Expression</em>' containment reference.
-	 * @see #getExpression()
+	 * @param value the new value of the '<em>Owned Expression</em>' containment reference.
+	 * @see #getOwnedExpression()
 	 * @generated
 	 */
-	void setExpression(ExpCS value);
+	void setOwnedExpression(ExpCS value);
 
 } // PropertyTemplateCS

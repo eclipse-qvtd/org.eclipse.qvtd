@@ -38,32 +38,31 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.VarDeclarationCSImpl#getVarDeclarationIds <em>Var Declaration Ids</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.VarDeclarationCSImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.VarDeclarationCSImpl#getOwnedVarDeclarationIds <em>Owned Var Declaration Ids</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.VarDeclarationCSImpl#getOwnedType <em>Owned Type</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class VarDeclarationCSImpl extends ModelElementCSImpl implements VarDeclarationCS {
 	/**
-	 * The cached value of the '{@link #getVarDeclarationIds() <em>Var Declaration Ids</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedVarDeclarationIds() <em>Owned Var Declaration Ids</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getVarDeclarationIds()
+	 * @see #getOwnedVarDeclarationIds()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<VarDeclarationIdCS> varDeclarationIds;
+	protected EList<VarDeclarationIdCS> ownedVarDeclarationIds;
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedType() <em>Owned Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getType()
+	 * @see #getOwnedType()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypedRefCS type;
-
+	protected TypedRefCS ownedType;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -89,11 +88,11 @@ public class VarDeclarationCSImpl extends ModelElementCSImpl implements VarDecla
 	 * @generated
 	 */
 	@Override
-	public EList<VarDeclarationIdCS> getVarDeclarationIds() {
-		if (varDeclarationIds == null) {
-			varDeclarationIds = new EObjectContainmentEList<VarDeclarationIdCS>(VarDeclarationIdCS.class, this, QVTrelationCSPackage.VAR_DECLARATION_CS__VAR_DECLARATION_IDS);
+	public EList<VarDeclarationIdCS> getOwnedVarDeclarationIds() {
+		if (ownedVarDeclarationIds == null) {
+			ownedVarDeclarationIds = new EObjectContainmentEList<VarDeclarationIdCS>(VarDeclarationIdCS.class, this, QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_VAR_DECLARATION_IDS);
 		}
-		return varDeclarationIds;
+		return ownedVarDeclarationIds;
 	}
 
 	/**
@@ -102,8 +101,8 @@ public class VarDeclarationCSImpl extends ModelElementCSImpl implements VarDecla
 	 * @generated
 	 */
 	@Override
-	public TypedRefCS getType() {
-		return type;
+	public TypedRefCS getOwnedType() {
+		return ownedType;
 	}
 
 	/**
@@ -111,11 +110,11 @@ public class VarDeclarationCSImpl extends ModelElementCSImpl implements VarDecla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetType(TypedRefCS newType, NotificationChain msgs) {
-		TypedRefCS oldType = type;
-		type = newType;
+	public NotificationChain basicSetOwnedType(TypedRefCS newOwnedType, NotificationChain msgs) {
+		TypedRefCS oldOwnedType = ownedType;
+		ownedType = newOwnedType;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.VAR_DECLARATION_CS__TYPE, oldType, newType);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_TYPE, oldOwnedType, newOwnedType);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -127,18 +126,18 @@ public class VarDeclarationCSImpl extends ModelElementCSImpl implements VarDecla
 	 * @generated
 	 */
 	@Override
-	public void setType(TypedRefCS newType) {
-		if (newType != type) {
+	public void setOwnedType(TypedRefCS newOwnedType) {
+		if (newOwnedType != ownedType) {
 			NotificationChain msgs = null;
-			if (type != null)
-				msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.VAR_DECLARATION_CS__TYPE, null, msgs);
-			if (newType != null)
-				msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.VAR_DECLARATION_CS__TYPE, null, msgs);
-			msgs = basicSetType(newType, msgs);
+			if (ownedType != null)
+				msgs = ((InternalEObject)ownedType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_TYPE, null, msgs);
+			if (newOwnedType != null)
+				msgs = ((InternalEObject)newOwnedType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_TYPE, null, msgs);
+			msgs = basicSetOwnedType(newOwnedType, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.VAR_DECLARATION_CS__TYPE, newType, newType));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_TYPE, newOwnedType, newOwnedType));
 	}
 
 	/**
@@ -149,10 +148,10 @@ public class VarDeclarationCSImpl extends ModelElementCSImpl implements VarDecla
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__VAR_DECLARATION_IDS:
-				return ((InternalEList<?>)getVarDeclarationIds()).basicRemove(otherEnd, msgs);
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__TYPE:
-				return basicSetType(null, msgs);
+			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_VAR_DECLARATION_IDS:
+				return ((InternalEList<?>)getOwnedVarDeclarationIds()).basicRemove(otherEnd, msgs);
+			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_TYPE:
+				return basicSetOwnedType(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -165,10 +164,10 @@ public class VarDeclarationCSImpl extends ModelElementCSImpl implements VarDecla
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__VAR_DECLARATION_IDS:
-				return getVarDeclarationIds();
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__TYPE:
-				return getType();
+			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_VAR_DECLARATION_IDS:
+				return getOwnedVarDeclarationIds();
+			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_TYPE:
+				return getOwnedType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -182,12 +181,12 @@ public class VarDeclarationCSImpl extends ModelElementCSImpl implements VarDecla
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__VAR_DECLARATION_IDS:
-				getVarDeclarationIds().clear();
-				getVarDeclarationIds().addAll((Collection<? extends VarDeclarationIdCS>)newValue);
+			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_VAR_DECLARATION_IDS:
+				getOwnedVarDeclarationIds().clear();
+				getOwnedVarDeclarationIds().addAll((Collection<? extends VarDeclarationIdCS>)newValue);
 				return;
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__TYPE:
-				setType((TypedRefCS)newValue);
+			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_TYPE:
+				setOwnedType((TypedRefCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -201,11 +200,11 @@ public class VarDeclarationCSImpl extends ModelElementCSImpl implements VarDecla
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__VAR_DECLARATION_IDS:
-				getVarDeclarationIds().clear();
+			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_VAR_DECLARATION_IDS:
+				getOwnedVarDeclarationIds().clear();
 				return;
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__TYPE:
-				setType((TypedRefCS)null);
+			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_TYPE:
+				setOwnedType((TypedRefCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -219,10 +218,10 @@ public class VarDeclarationCSImpl extends ModelElementCSImpl implements VarDecla
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__VAR_DECLARATION_IDS:
-				return varDeclarationIds != null && !varDeclarationIds.isEmpty();
-			case QVTrelationCSPackage.VAR_DECLARATION_CS__TYPE:
-				return type != null;
+			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_VAR_DECLARATION_IDS:
+				return ownedVarDeclarationIds != null && !ownedVarDeclarationIds.isEmpty();
+			case QVTrelationCSPackage.VAR_DECLARATION_CS__OWNED_TYPE:
+				return ownedType != null;
 		}
 		return super.eIsSet(featureID);
 	}
