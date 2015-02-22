@@ -11,7 +11,6 @@ Require-Bundle: org.eclipse.qvtd.build.etl;bundle-version="[1.0.0,2.0.0)",
  org.eclipse.ocl.xtext.completeocl;bundle-version="[1.0.0,2.0.0)",
  org.eclipse.epsilon.eol.engine;bundle-version="[1.2.0,2.0.0)",
  org.eclipse.epsilon.etl.engine;bundle-version="[1.2.0,2.0.0)",
- org.eclipse.epsilon.emc.emf;bundle-version="[1.2.0,2.0.0)",
- org.eclipse.ocl.jdt.annotation7;bundle-version="[1.0.0,2.0.0)";visibility:=reexport
+ org.eclipse.epsilon.emc.emf;bundle-version="[1.2.0,2.0.0)"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
