@@ -16,7 +16,9 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.resource.ASResource;
+import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
@@ -38,30 +40,36 @@ public class QVTiXtextEvaluator extends QVTiPivotEvaluator
 		// Load the transformation resource
         BaseCSResource xtextResource = null;
         xtextResource = (BaseCSResource) environmentFactory.getResourceSet().getResource(transformationURI, true);
-        if (xtextResource != null) {
-    		try {
-    			asResource = xtextResource.getASResource();
-    			for (EObject eContent : asResource.getContents()) {
-    				if (eContent instanceof ImperativeModel) {
-    	    			for (org.eclipse.ocl.pivot.Package asPackage : ((ImperativeModel)eContent).getOwnedPackages()) {
-        	    			for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
-        	    				if (asClass instanceof Transformation) {
-        	    	                return (Transformation)asClass;
-        	    				}
-        	    			}
-    	    			}
-    				}
-    			}
-    		} finally {
-    			if (!keepDebug) {
-    				xtextResource.dispose();
-    			}
-    		}
-        } else {
-        	// TODO Can I get the parsing errors?
-        	//return null;
+        if (xtextResource == null) {
+            throw new IOException("Failed to load '" + transformationURI + "'");
         }
-        throw new IOException("There was an error loading the QVTi file. ");
+		String csMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.nonNullEMF(xtextResource.getErrors()), "Failed to load '" + transformationURI + "'", "\n");
+		if (csMessage != null) {
+			throw new IOException(csMessage);
+		}
+		try {
+			asResource = xtextResource.getASResource();
+			String asMessage = PivotUtil.formatResourceDiagnostics(ClassUtil.nonNullEMF(asResource.getErrors()), "Failed to load '" + asResource.getURI() + "'", "\n");
+			if (asMessage != null) {
+				throw new IOException(asMessage);
+			}
+			for (EObject eContent : asResource.getContents()) {
+				if (eContent instanceof ImperativeModel) {
+	    			for (org.eclipse.ocl.pivot.Package asPackage : ((ImperativeModel)eContent).getOwnedPackages()) {
+    	    			for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
+    	    				if (asClass instanceof Transformation) {
+    	    	                return (Transformation)asClass;
+    	    				}
+    	    			}
+	    			}
+				}
+			}
+		} finally {
+			if (!keepDebug) {
+				xtextResource.dispose();
+			}
+		}
+        throw new IOException("Failed to locate a transformation in '" + transformationURI + "'");
 	}
     
     public QVTiXtextEvaluator(@NonNull QVTiEnvironmentFactory envFactory, @NonNull URI transformationURI) throws IOException {
