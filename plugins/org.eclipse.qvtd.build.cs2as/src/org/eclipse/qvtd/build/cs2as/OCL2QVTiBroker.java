@@ -6,7 +6,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
+import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.qvtd.build.etl.EtlTask;
 import org.eclipse.qvtd.build.etl.MtcBroker;
 import org.eclipse.qvtd.build.etl.PivotModel;
@@ -40,26 +40,41 @@ public class OCL2QVTiBroker extends MtcBroker {
 	
 	private static final String TRACES_FULL_NS = PIVOT_URI + ',' + ECORE_URI;
 	
-	private @NonNull String oclDocUri;	
-	private @Nullable String tracesMMUri;
+	private @NonNull URI oclASUri;	
+	private @Nullable URI tracesASUri;
 	private @NonNull PivotModelUtil pmUtil;
-	
 
-	public OCL2QVTiBroker(URI baseURI, String oclDocName, @NonNull EnvironmentFactory environmentFactory, Map<?, ?> savingOptions )
+	/**
+	 * @param baseURI the base {@link URI} on which the OCL document resides
+	 * @param oclDocName the name of the OCL document (e.g myCS2AS.ocl)
+	 * @param ocl an {@link OCL} instance to parse the OCL document
+	 * @param savingOptions some optional savingOptions
+	 * @throws Exception
+	 */
+	public OCL2QVTiBroker(@NonNull URI baseURI, @NonNull String oclDocName, @NonNull OCL ocl, @Nullable Map<?, ?> savingOptions )
 		throws Exception {
-		this(baseURI, oclDocName, environmentFactory, savingOptions, true);
+		this(baseURI, oclDocName, ocl, savingOptions, true);
 	}
-			
-	public OCL2QVTiBroker(URI baseURI, String oclDocName, @NonNull EnvironmentFactory environmentFactory, Map<?, ?> savingOptions,
+
+	/**
+	 * @param baseURI the base {@link URI} on which the OCL document resides
+	 * @param oclDocName the name of the OCL document (e.g myCS2AS.ocl)
+	 * @param ocl an {@link OCL} instance to parse the OCL document
+	 * @param savingOptions some optional savingOptions
+	 * @param usesMiddleFoldedInInputs true if the generated QVTp transformation should use middle folded in inputs approach
+	 * @throws Exception
+	 */
+	
+	public OCL2QVTiBroker(@NonNull URI baseURI, @NonNull String oclDocName, @NonNull OCL ocl, @Nullable Map<?, ?> savingOptions,
 			boolean usesMiddleFoldedInInputs)
 		throws Exception {
 		
-		super(baseURI, oclDocName, environmentFactory, savingOptions);
-		this.pmUtil = new PivotModelUtil(environmentFactory);
-		this.oclDocUri = baseURI.appendSegment(oclDocName).toString();
-	
+		super(baseURI, oclDocName,  ocl.getEnvironmentFactory(), savingOptions);
+		this.pmUtil = new PivotModelUtil( ocl.getEnvironmentFactory());
+		URI oclDocUri = baseURI.appendSegment(oclDocName);
+		this.oclASUri = ocl.parse(oclDocUri).getURI();
 		if (!usesMiddleFoldedInInputs) {
-			this.tracesMMUri = baseURI.appendFileExtension("ecore.oclas").toString();	
+			this.tracesASUri = this.oclASUri.trimFileExtension().trimFileExtension().appendFileExtension("ecore.oclas");
 		}
 	}
 	
@@ -67,12 +82,10 @@ public class OCL2QVTiBroker extends MtcBroker {
 	@Override
 	public void execute() throws QvtMtcExecutionException {
 		
-		pModel = (tracesMMUri == null)	? runOCL2QVTp_MiddleFolded(oclDocUri, partitionUri) 
-										: runOCL2QVTp_MiddleModel(oclDocUri, partitionUri, tracesMMUri);
+		pModel = (tracesASUri == null)	? runOCL2QVTp_MiddleFolded(oclASUri, URI.createURI(partitionUri)) 
+										: runOCL2QVTp_MiddleModel(oclASUri, URI.createURI(partitionUri), tracesASUri);
 		
-		loadOclStdLibModel();
-		loadConfigurationModel();
-		createContainmentTrees();
+		prepare();
 		sModel = qvtpToQvts(pModel);
 		//qvtpFlatScheduling(pModel, sModel);
 		qvtpNestingScheduling(pModel, sModel);
@@ -80,14 +93,14 @@ public class OCL2QVTiBroker extends MtcBroker {
 	}
 	
 	
-	protected PivotModel runOCL2QVTp_MiddleModel (String oclDocURI, String qvtiFileURI, String tracesMMURI) throws QvtMtcExecutionException {
+	protected PivotModel runOCL2QVTp_MiddleModel (URI oclDocURI, URI qvtiFileURI, URI tracesMMURI) throws QvtMtcExecutionException {
 		
 		try {
 			EtlTask etl = new EtlTask(OCL2QVTiBroker.class.getResource(OCL2QVTP_MIDDLE_MODEL).toURI());
 			pModel = createQVTpModel(qvtiFileURI);
 			etl.addModel(createOCLModel(oclDocURI));
 			etl.addModel(pModel);
-			etl.addModel(createTacesModel(tracesMMURI));
+			etl.addModel(createTracesModel(tracesMMURI));
 			etl.addModel(createOclStdLibModel());
 			etl.execute();
 
@@ -98,7 +111,7 @@ public class OCL2QVTiBroker extends MtcBroker {
 		return pModel;
 	}
 	
-	protected PivotModel runOCL2QVTp_MiddleFolded (String oclDocURI, String qvtiFileURI) throws QvtMtcExecutionException {
+	protected PivotModel runOCL2QVTp_MiddleFolded (URI oclDocURI, URI qvtiFileURI) throws QvtMtcExecutionException {
 
 		try {
 			EtlTask etl = new EtlTask(OCL2QVTiBroker.class.getResource(OCL2QVTP_MIDDLE_FOLDED).toURI());
@@ -115,21 +128,21 @@ public class OCL2QVTiBroker extends MtcBroker {
 		return pModel;
 	}
 	
-	private PivotModel createOCLModel(String oclDocURI) throws QvtMtcExecutionException {
+	private PivotModel createOCLModel(URI oclDocURI) throws QvtMtcExecutionException {
 		String oclDocModelName = "OCL";
-		return pmUtil.createPivotModel(oclDocURI, oclDocModelName, "", PIVOT_URI, true, false, true, true, true, savingOptions);
+		return pmUtil.createPivotModel(oclDocURI.toString(), oclDocModelName, "", PIVOT_URI, true, false, true, true, true, savingOptions);
 		
 	}
 	
-	private PivotModel createQVTpModel(String qvtiFileURI) throws QvtMtcExecutionException { 
+	private PivotModel createQVTpModel(URI qvtiFileURI) throws QvtMtcExecutionException { 
 		String qvtiModelName = "QVTp";
 		String qvtiModelAlises = "QVTi,QVT"; // FIXME further steps should configure the aliases
-		return pmUtil.createPivotModel(qvtiFileURI, qvtiModelName, qvtiModelAlises, QVTI_FULL_NS, false, true, false, true, true, savingOptions);
+		return pmUtil.createPivotModel(qvtiFileURI.toString(), qvtiModelName, qvtiModelAlises, QVTI_FULL_NS, false, true, false, true, true, savingOptions);
 	}
 	
-	private PivotModel createTacesModel(String tracesMMURI) throws QvtMtcExecutionException { 
+	private PivotModel createTracesModel(URI tracesMMURI) throws QvtMtcExecutionException { 
 		String tracesMModelName = "MiddleMM";
-		return pmUtil.createPivotModel(tracesMMURI, tracesMModelName, "", TRACES_FULL_NS , true, false, true, false, true, savingOptions);
+		return pmUtil.createPivotModel(tracesMMURI.toString(), tracesMModelName, "", TRACES_FULL_NS , true, false, true, false, true, savingOptions);
 	}
 	
 	private PivotModel createOclStdLibModel() throws QvtMtcExecutionException {
