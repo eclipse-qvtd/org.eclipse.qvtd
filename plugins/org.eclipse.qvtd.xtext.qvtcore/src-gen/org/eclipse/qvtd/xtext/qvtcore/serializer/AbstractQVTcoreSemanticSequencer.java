@@ -398,8 +398,8 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTcoreBaseSemant
 	 *         name=UnrestrictedName? 
 	 *         in=[Transformation|UnrestrictedName]? 
 	 *         (refines+=[Mapping|UnrestrictedName] refines+=[Mapping|UnrestrictedName]*)? 
-	 *         domains+=NamedDomainCS* 
-	 *         middle=UnnamedDomainCS? 
+	 *         ownedDomains+=NamedDomainCS* 
+	 *         ownedMiddle=UnnamedDomainCS? 
 	 *         ownedComposedMappings+=MappingCS*
 	 *     )
 	 */

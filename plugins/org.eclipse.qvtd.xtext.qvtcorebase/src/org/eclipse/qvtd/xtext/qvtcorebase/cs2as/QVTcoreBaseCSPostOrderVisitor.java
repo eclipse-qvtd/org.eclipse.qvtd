@@ -88,10 +88,10 @@ public class QVTcoreBaseCSPostOrderVisitor extends AbstractQVTcoreBaseCSPostOrde
 		if (pBottomPattern != null) {
 			List<Assignment> pAssignments = new ArrayList<Assignment>(); 
 			List<Predicate> pPredicates = new ArrayList<Predicate>(); 
-			for (AssignmentCS csConstraint : csElement.getConstraints()) {
-				ExpCS csTarget = csConstraint.getTarget();
-				ExpCS csInitialiser = csConstraint.getInitialiser();
-				boolean isDefault = csConstraint.isDefault();
+			for (AssignmentCS csConstraint : csElement.getOwnedConstraints()) {
+				ExpCS csTarget = csConstraint.getOwnedTarget();
+				ExpCS csInitialiser = csConstraint.getOwnedInitExpression();
+				boolean isDefault = csConstraint.isIsDefault();
 				OCLExpression target = csTarget != null ? context.visitLeft2Right(OCLExpression.class, csTarget) : null;
 				if (csInitialiser != null) {
 					Assignment assignment = null;
@@ -185,7 +185,7 @@ public class QVTcoreBaseCSPostOrderVisitor extends AbstractQVTcoreBaseCSPostOrde
 	public Continuation<?> visitQueryCS(@NonNull QueryCS csElement) {
 		Function pFunction = PivotUtil.getPivot(Function.class, csElement);
 		if (pFunction != null) {
-			ExpCS expression = csElement.getExpression();
+			ExpCS expression = csElement.getOwnedExpression();
 			if (expression != null) {
 				OCLExpression target = context.visitLeft2Right(OCLExpression.class, expression);
 				pFunction.setQueryExpression(target);

@@ -23,9 +23,9 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getDomains <em>Domains</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getOwnedDomains <em>Owned Domains</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getIn <em>In</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getMiddle <em>Middle</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getOwnedMiddle <em>Owned Middle</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAbstractMappingCS()
@@ -34,20 +34,20 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  */
 public interface AbstractMappingCS extends NamedElementCS {
 	/**
-	 * Returns the value of the '<em><b>Domains</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Domains</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Domains</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Domains</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Domains</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAbstractMappingCS_Domains()
+	 * @return the value of the '<em>Owned Domains</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAbstractMappingCS_OwnedDomains()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<DomainCS> getDomains();
+	EList<DomainCS> getOwnedDomains();
 
 	/**
 	 * Returns the value of the '<em><b>In</b></em>' reference.
@@ -76,29 +76,29 @@ public interface AbstractMappingCS extends NamedElementCS {
 	void setIn(Transformation value);
 
 	/**
-	 * Returns the value of the '<em><b>Middle</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Middle</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Middle</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Middle</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Middle</em>' containment reference.
-	 * @see #setMiddle(DomainCS)
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAbstractMappingCS_Middle()
+	 * @return the value of the '<em>Owned Middle</em>' containment reference.
+	 * @see #setOwnedMiddle(DomainCS)
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAbstractMappingCS_OwnedMiddle()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	DomainCS getMiddle();
+	DomainCS getOwnedMiddle();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getMiddle <em>Middle</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getOwnedMiddle <em>Owned Middle</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Middle</em>' containment reference.
-	 * @see #getMiddle()
+	 * @param value the new value of the '<em>Owned Middle</em>' containment reference.
+	 * @see #getOwnedMiddle()
 	 * @generated
 	 */
-	void setMiddle(DomainCS value);
+	void setOwnedMiddle(DomainCS value);
 
 } // MappingCS

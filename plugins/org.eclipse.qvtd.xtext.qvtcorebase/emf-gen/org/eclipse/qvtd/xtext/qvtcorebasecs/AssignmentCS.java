@@ -21,9 +21,9 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#isDefault <em>Default</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getTarget <em>Target</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getInitialiser <em>Initialiser</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#isIsDefault <em>Is Default</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getOwnedTarget <em>Owned Target</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getOwnedInitExpression <em>Owned Init Expression</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAssignmentCS()
@@ -32,81 +32,81 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  */
 public interface AssignmentCS extends ExpCS {
 	/**
-	 * Returns the value of the '<em><b>Default</b></em>' attribute.
+	 * Returns the value of the '<em><b>Is Default</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Default</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Is Default</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Default</em>' attribute.
-	 * @see #setDefault(boolean)
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAssignmentCS_Default()
+	 * @return the value of the '<em>Is Default</em>' attribute.
+	 * @see #setIsDefault(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAssignmentCS_IsDefault()
 	 * @model
 	 * @generated
 	 */
-	boolean isDefault();
+	boolean isIsDefault();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#isDefault <em>Default</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#isIsDefault <em>Is Default</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Default</em>' attribute.
-	 * @see #isDefault()
+	 * @param value the new value of the '<em>Is Default</em>' attribute.
+	 * @see #isIsDefault()
 	 * @generated
 	 */
-	void setDefault(boolean value);
+	void setIsDefault(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Target</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Target</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Target</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Target</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Target</em>' containment reference.
-	 * @see #setTarget(ExpCS)
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAssignmentCS_Target()
+	 * @return the value of the '<em>Owned Target</em>' containment reference.
+	 * @see #setOwnedTarget(ExpCS)
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAssignmentCS_OwnedTarget()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	ExpCS getTarget();
+	ExpCS getOwnedTarget();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getTarget <em>Target</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getOwnedTarget <em>Owned Target</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Target</em>' containment reference.
-	 * @see #getTarget()
+	 * @param value the new value of the '<em>Owned Target</em>' containment reference.
+	 * @see #getOwnedTarget()
 	 * @generated
 	 */
-	void setTarget(ExpCS value);
+	void setOwnedTarget(ExpCS value);
 
 	/**
-	 * Returns the value of the '<em><b>Initialiser</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Init Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Initialiser</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Init Expression</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Initialiser</em>' containment reference.
-	 * @see #setInitialiser(ExpCS)
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAssignmentCS_Initialiser()
+	 * @return the value of the '<em>Owned Init Expression</em>' containment reference.
+	 * @see #setOwnedInitExpression(ExpCS)
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAssignmentCS_OwnedInitExpression()
 	 * @model containment="true"
 	 * @generated
 	 */
-	ExpCS getInitialiser();
+	ExpCS getOwnedInitExpression();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getInitialiser <em>Initialiser</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getOwnedInitExpression <em>Owned Init Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Initialiser</em>' containment reference.
-	 * @see #getInitialiser()
+	 * @param value the new value of the '<em>Owned Init Expression</em>' containment reference.
+	 * @see #getOwnedInitExpression()
 	 * @generated
 	 */
-	void setInitialiser(ExpCS value);
+	void setOwnedInitExpression(ExpCS value);
 
 } // AssignmentCS

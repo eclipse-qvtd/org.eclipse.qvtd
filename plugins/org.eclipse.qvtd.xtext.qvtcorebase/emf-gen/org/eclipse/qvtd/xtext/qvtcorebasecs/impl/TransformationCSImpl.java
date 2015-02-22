@@ -38,33 +38,33 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.util.QVTcoreBaseCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.TransformationCSImpl#getPathName <em>Path Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.TransformationCSImpl#getOwnedPathName <em>Owned Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.TransformationCSImpl#getPackage <em>Package</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.TransformationCSImpl#getDirections <em>Directions</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.TransformationCSImpl#getOwnedDirections <em>Owned Directions</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class TransformationCSImpl extends ClassCSImpl implements TransformationCS {
 	/**
-	 * The cached value of the '{@link #getPathName() <em>Path Name</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedPathName() <em>Owned Path Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPathName()
+	 * @see #getOwnedPathName()
 	 * @generated
 	 * @ordered
 	 */
-	protected PathNameCS pathName;
+	protected PathNameCS ownedPathName;
 
 	/**
-	 * The cached value of the '{@link #getDirections() <em>Directions</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedDirections() <em>Owned Directions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDirections()
+	 * @see #getOwnedDirections()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<DirectionCS> directions;
+	protected EList<DirectionCS> ownedDirections;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -91,8 +91,8 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 	 * @generated
 	 */
 	@Override
-	public PathNameCS getPathName() {
-		return pathName;
+	public PathNameCS getOwnedPathName() {
+		return ownedPathName;
 	}
 
 	/**
@@ -100,11 +100,11 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetPathName(PathNameCS newPathName, NotificationChain msgs) {
-		PathNameCS oldPathName = pathName;
-		pathName = newPathName;
+	public NotificationChain basicSetOwnedPathName(PathNameCS newOwnedPathName, NotificationChain msgs) {
+		PathNameCS oldOwnedPathName = ownedPathName;
+		ownedPathName = newOwnedPathName;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.TRANSFORMATION_CS__PATH_NAME, oldPathName, newPathName);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.TRANSFORMATION_CS__OWNED_PATH_NAME, oldOwnedPathName, newOwnedPathName);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -116,31 +116,18 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 	 * @generated
 	 */
 	@Override
-	public void setPathName(PathNameCS newPathName) {
-		if (newPathName != pathName) {
+	public void setOwnedPathName(PathNameCS newOwnedPathName) {
+		if (newOwnedPathName != ownedPathName) {
 			NotificationChain msgs = null;
-			if (pathName != null)
-				msgs = ((InternalEObject)pathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.TRANSFORMATION_CS__PATH_NAME, null, msgs);
-			if (newPathName != null)
-				msgs = ((InternalEObject)newPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.TRANSFORMATION_CS__PATH_NAME, null, msgs);
-			msgs = basicSetPathName(newPathName, msgs);
+			if (ownedPathName != null)
+				msgs = ((InternalEObject)ownedPathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.TRANSFORMATION_CS__OWNED_PATH_NAME, null, msgs);
+			if (newOwnedPathName != null)
+				msgs = ((InternalEObject)newOwnedPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.TRANSFORMATION_CS__OWNED_PATH_NAME, null, msgs);
+			msgs = basicSetOwnedPathName(newOwnedPathName, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.TRANSFORMATION_CS__PATH_NAME, newPathName, newPathName));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<DirectionCS> getDirections() {
-		if (directions == null) {
-			directions = new EObjectContainmentEList<DirectionCS>(DirectionCS.class, this, QVTcoreBaseCSPackage.TRANSFORMATION_CS__DIRECTIONS);
-		}
-		return directions;
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.TRANSFORMATION_CS__OWNED_PATH_NAME, newOwnedPathName, newOwnedPathName));
 	}
 
 	/**
@@ -151,10 +138,10 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcoreBaseCSPackage.TRANSFORMATION_CS__PATH_NAME:
-				return basicSetPathName(null, msgs);
-			case QVTcoreBaseCSPackage.TRANSFORMATION_CS__DIRECTIONS:
-				return ((InternalEList<?>)getDirections()).basicRemove(otherEnd, msgs);
+			case QVTcoreBaseCSPackage.TRANSFORMATION_CS__OWNED_PATH_NAME:
+				return basicSetOwnedPathName(null, msgs);
+			case QVTcoreBaseCSPackage.TRANSFORMATION_CS__OWNED_DIRECTIONS:
+				return ((InternalEList<?>)getOwnedDirections()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -167,12 +154,12 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcoreBaseCSPackage.TRANSFORMATION_CS__PATH_NAME:
-				return getPathName();
+			case QVTcoreBaseCSPackage.TRANSFORMATION_CS__OWNED_PATH_NAME:
+				return getOwnedPathName();
 			case QVTcoreBaseCSPackage.TRANSFORMATION_CS__PACKAGE:
 				return getPackage();
-			case QVTcoreBaseCSPackage.TRANSFORMATION_CS__DIRECTIONS:
-				return getDirections();
+			case QVTcoreBaseCSPackage.TRANSFORMATION_CS__OWNED_DIRECTIONS:
+				return getOwnedDirections();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -186,12 +173,12 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcoreBaseCSPackage.TRANSFORMATION_CS__PATH_NAME:
-				setPathName((PathNameCS)newValue);
+			case QVTcoreBaseCSPackage.TRANSFORMATION_CS__OWNED_PATH_NAME:
+				setOwnedPathName((PathNameCS)newValue);
 				return;
-			case QVTcoreBaseCSPackage.TRANSFORMATION_CS__DIRECTIONS:
-				getDirections().clear();
-				getDirections().addAll((Collection<? extends DirectionCS>)newValue);
+			case QVTcoreBaseCSPackage.TRANSFORMATION_CS__OWNED_DIRECTIONS:
+				getOwnedDirections().clear();
+				getOwnedDirections().addAll((Collection<? extends DirectionCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -205,11 +192,11 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcoreBaseCSPackage.TRANSFORMATION_CS__PATH_NAME:
-				setPathName((PathNameCS)null);
+			case QVTcoreBaseCSPackage.TRANSFORMATION_CS__OWNED_PATH_NAME:
+				setOwnedPathName((PathNameCS)null);
 				return;
-			case QVTcoreBaseCSPackage.TRANSFORMATION_CS__DIRECTIONS:
-				getDirections().clear();
+			case QVTcoreBaseCSPackage.TRANSFORMATION_CS__OWNED_DIRECTIONS:
+				getOwnedDirections().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -223,12 +210,12 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcoreBaseCSPackage.TRANSFORMATION_CS__PATH_NAME:
-				return pathName != null;
+			case QVTcoreBaseCSPackage.TRANSFORMATION_CS__OWNED_PATH_NAME:
+				return ownedPathName != null;
 			case QVTcoreBaseCSPackage.TRANSFORMATION_CS__PACKAGE:
 				return getPackage() != null;
-			case QVTcoreBaseCSPackage.TRANSFORMATION_CS__DIRECTIONS:
-				return directions != null && !directions.isEmpty();
+			case QVTcoreBaseCSPackage.TRANSFORMATION_CS__OWNED_DIRECTIONS:
+				return ownedDirections != null && !ownedDirections.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -251,9 +238,22 @@ public class TransformationCSImpl extends ClassCSImpl implements TransformationC
 	 */
 	@Override
 	public org.eclipse.ocl.pivot.Package getPackage() {
-		if (pathName == null) {
+		if (ownedPathName == null) {
 			return null;
 		}
-		return (org.eclipse.ocl.pivot.Package) pathName.getReferredElement();
+		return (org.eclipse.ocl.pivot.Package) ownedPathName.getReferredElement();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<DirectionCS> getOwnedDirections() {
+		if (ownedDirections == null) {
+			ownedDirections = new EObjectContainmentEList<DirectionCS>(DirectionCS.class, this, QVTcoreBaseCSPackage.TRANSFORMATION_CS__OWNED_DIRECTIONS);
+		}
+		return ownedDirections;
 	}
 } //TransformationCSImpl

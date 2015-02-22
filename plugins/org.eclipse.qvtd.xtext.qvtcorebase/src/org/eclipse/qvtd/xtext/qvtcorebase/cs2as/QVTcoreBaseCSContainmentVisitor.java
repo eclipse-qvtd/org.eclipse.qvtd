@@ -69,7 +69,7 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 		
 		@Override
 		public boolean apply(AssignmentCS csAssignment) {
-			return csAssignment.getInitialiser() != null;
+			return csAssignment.getOwnedInitExpression() != null;
 		}
 	}
 
@@ -79,7 +79,7 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 		
 		@Override
 		public boolean apply(AssignmentCS csAssignment) {
-			return csAssignment.getInitialiser() == null;
+			return csAssignment.getOwnedInitExpression() == null;
 		}
 	}
 
@@ -133,7 +133,7 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 		for (TransformationCS csTransformation : csTransformations) {
 			org.eclipse.ocl.pivot.Package asParent = null;
 			Transformation asTransformation = PivotUtil.getPivot(Transformation.class, csTransformation);
-			PathNameCS pathName = csTransformation.getPathName();
+			PathNameCS pathName = csTransformation.getOwnedPathName();
 			List<PathElementCS> ownedPathElements = pathName != null ? pathName.getOwnedPathElements() : null;
 			if ((ownedPathElements == null) || ownedPathElements.isEmpty()) {
 				asParent = NameUtil.getNameable(asCoreModel.getOwnedPackages(), "");
@@ -188,11 +188,11 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 	@Override
 	public Continuation<?> visitBottomPatternCS(@NonNull BottomPatternCS csElement) {
 		@NonNull BottomPattern pBottomPattern = context.refreshModelElement(BottomPattern.class, QVTcoreBasePackage.Literals.BOTTOM_PATTERN, csElement);
-		context.refreshPivotList(RealizedVariable.class, pBottomPattern.getRealizedVariable(), csElement.getRealizedVariables());
-		context.refreshPivotList(Variable.class, pBottomPattern.getVariable(), csElement.getUnrealizedVariables());
-		context.refreshPivotList(EnforcementOperation.class, pBottomPattern.getEnforcementOperation(), csElement.getEnforcementOperations());
-		context.refreshPivotList(Assignment.class, pBottomPattern.getAssignment(), Iterables.filter(csElement.getConstraints(), IsAssignmentPredicate.INSTANCE));
-		context.refreshPivotList(Predicate.class, pBottomPattern.getPredicate(), Iterables.filter(csElement.getConstraints(), IsPredicatePredicate.INSTANCE));
+		context.refreshPivotList(RealizedVariable.class, pBottomPattern.getRealizedVariable(), csElement.getOwnedRealizedVariables());
+		context.refreshPivotList(Variable.class, pBottomPattern.getVariable(), csElement.getOwnedUnrealizedVariables());
+		context.refreshPivotList(EnforcementOperation.class, pBottomPattern.getEnforcementOperation(), csElement.getOwnedEnforcementOperations());
+		context.refreshPivotList(Assignment.class, pBottomPattern.getAssignment(), Iterables.filter(csElement.getOwnedConstraints(), IsAssignmentPredicate.INSTANCE));
+		context.refreshPivotList(Predicate.class, pBottomPattern.getPredicate(), Iterables.filter(csElement.getOwnedConstraints(), IsPredicatePredicate.INSTANCE));
 		context.refreshComments(pBottomPattern, csElement);
 		return null;
 	}
@@ -206,14 +206,14 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 	@Override
 	public Continuation<?> visitDomainCS(@NonNull DomainCS csElement) {
 		EObject eContainer = csElement.eContainer();
-		if ((eContainer instanceof AbstractMappingCS) && (((AbstractMappingCS)eContainer).getMiddle() == csElement)) {
+		if ((eContainer instanceof AbstractMappingCS) && (((AbstractMappingCS)eContainer).getOwnedMiddle() == csElement)) {
 			return null;
 		}
 		@NonNull CoreDomain pivotElement = context.refreshModelElement(CoreDomain.class, QVTcoreBasePackage.Literals.CORE_DOMAIN, csElement);
-		pivotElement.setIsCheckable(csElement.isCheck());
-		pivotElement.setIsEnforceable(csElement.isEnforce());
-		pivotElement.setBottomPattern(PivotUtil.getPivot(BottomPattern.class, csElement.getBottomPattern()));
-		pivotElement.setGuardPattern(PivotUtil.getPivot(GuardPattern.class, csElement.getGuardPattern()));
+		pivotElement.setIsCheckable(csElement.isIsCheck());
+		pivotElement.setIsEnforceable(csElement.isIsEnforce());
+		pivotElement.setBottomPattern(PivotUtil.getPivot(BottomPattern.class, csElement.getOwnedBottomPattern()));
+		pivotElement.setGuardPattern(PivotUtil.getPivot(GuardPattern.class, csElement.getOwnedGuardPattern()));
 		context.refreshComments(pivotElement, csElement);
 		return new DomainContentContinuation(context, csElement);
 	}
@@ -227,7 +227,7 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 	@Override
 	public Continuation<?> visitGuardPatternCS(@NonNull GuardPatternCS csElement) {
 		@NonNull GuardPattern pGuardPattern = context.refreshModelElement(GuardPattern.class, QVTcoreBasePackage.Literals.GUARD_PATTERN, csElement);
-		context.refreshPivotList(Variable.class, pGuardPattern.getVariable(), csElement.getUnrealizedVariables());
+		context.refreshPivotList(Variable.class, pGuardPattern.getVariable(), csElement.getOwnedUnrealizedVariables());
 		context.refreshPivotList(Predicate.class, pGuardPattern.getPredicate(), csElement.getOwnedPredicates());
 		context.refreshComments(pGuardPattern, csElement);
 		return null;
@@ -241,13 +241,13 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 
 	@Override
 	public Continuation<?> visitQueryCS(@NonNull QueryCS csElement) {
-		PathNameCS pathName = csElement.getPathName();
+		PathNameCS pathName = csElement.getOwnedPathName();
 		if (pathName != null) {
 			CS2AS.setElementType(pathName, PivotPackage.Literals.NAMESPACE, csElement, null);
 		}
 		@NonNull Function pivotElement = refreshNamedElement(Function.class, QVTbasePackage.Literals.FUNCTION, csElement);
 		pivotElement.setIsStatic(true);
-		context.refreshPivotList(FunctionParameter.class, pivotElement.getOwnedParameters(), csElement.getInputParamDeclaration());
+		context.refreshPivotList(FunctionParameter.class, pivotElement.getOwnedParameters(), csElement.getOwnedParameters());
 		return null;
 	}
 
@@ -259,7 +259,7 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 
 	@Override
 	public Continuation<?> visitTransformationCS(@NonNull TransformationCS csElement) {
-		PathNameCS pathName = csElement.getPathName();
+		PathNameCS pathName = csElement.getOwnedPathName();
 		if (pathName != null) {
 			CS2AS.setElementType(pathName, PivotPackage.Literals.NAMESPACE, csElement, null);
 		}
@@ -268,7 +268,7 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 		refreshClassifier(pivotElement, csElement);
 //		Transformation pivotElement = refreshPackage(Transformation.class, QVTbasePackage.Literals.TRANSFORMATION, csElement);
 //		context.refreshPivotList(Mapping.class, pivotElement.getRule(), csElement.getMapping());
-		context.refreshPivotList(TypedModel.class, pivotElement.getModelParameter(), csElement.getDirections());
+		context.refreshPivotList(TypedModel.class, pivotElement.getModelParameter(), csElement.getOwnedDirections());
 //		context.refreshPivotList(org.eclipse.ocl.pivot.Package.class, pivotElement.getNestedPackage(), csElement.getOwnedNestedPackage());
 		return null;
 	}

@@ -32,42 +32,42 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.util.QVTcoreBaseCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.EnforcementOperationCSImpl#isDeletion <em>Deletion</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.EnforcementOperationCSImpl#getOperationCall <em>Operation Call</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.EnforcementOperationCSImpl#isIsDeletion <em>Is Deletion</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.EnforcementOperationCSImpl#getOwnedOperationCall <em>Owned Operation Call</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class EnforcementOperationCSImpl extends ModelElementCSImpl implements EnforcementOperationCS {
 	/**
-	 * The default value of the '{@link #isDeletion() <em>Deletion</em>}' attribute.
+	 * The default value of the '{@link #isIsDeletion() <em>Is Deletion</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isDeletion()
+	 * @see #isIsDeletion()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean DELETION_EDEFAULT = false;
+	protected static final boolean IS_DELETION_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isDeletion() <em>Deletion</em>}' attribute.
+	 * The cached value of the '{@link #isIsDeletion() <em>Is Deletion</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isDeletion()
+	 * @see #isIsDeletion()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean deletion = DELETION_EDEFAULT;
+	protected boolean isDeletion = IS_DELETION_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getOperationCall() <em>Operation Call</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedOperationCall() <em>Owned Operation Call</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOperationCall()
+	 * @see #getOwnedOperationCall()
 	 * @generated
 	 * @ordered
 	 */
-	protected NameExpCS operationCall;
+	protected NameExpCS ownedOperationCall;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -94,8 +94,8 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	 * @generated
 	 */
 	@Override
-	public boolean isDeletion() {
-		return deletion;
+	public boolean isIsDeletion() {
+		return isDeletion;
 	}
 
 	/**
@@ -104,11 +104,11 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	 * @generated
 	 */
 	@Override
-	public void setDeletion(boolean newDeletion) {
-		boolean oldDeletion = deletion;
-		deletion = newDeletion;
+	public void setIsDeletion(boolean newIsDeletion) {
+		boolean oldIsDeletion = isDeletion;
+		isDeletion = newIsDeletion;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__DELETION, oldDeletion, deletion));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__IS_DELETION, oldIsDeletion, isDeletion));
 	}
 
 	/**
@@ -117,8 +117,8 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	 * @generated
 	 */
 	@Override
-	public NameExpCS getOperationCall() {
-		return operationCall;
+	public NameExpCS getOwnedOperationCall() {
+		return ownedOperationCall;
 	}
 
 	/**
@@ -126,11 +126,11 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOperationCall(NameExpCS newOperationCall, NotificationChain msgs) {
-		NameExpCS oldOperationCall = operationCall;
-		operationCall = newOperationCall;
+	public NotificationChain basicSetOwnedOperationCall(NameExpCS newOwnedOperationCall, NotificationChain msgs) {
+		NameExpCS oldOwnedOperationCall = ownedOperationCall;
+		ownedOperationCall = newOwnedOperationCall;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OPERATION_CALL, oldOperationCall, newOperationCall);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OWNED_OPERATION_CALL, oldOwnedOperationCall, newOwnedOperationCall);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -142,18 +142,18 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	 * @generated
 	 */
 	@Override
-	public void setOperationCall(NameExpCS newOperationCall) {
-		if (newOperationCall != operationCall) {
+	public void setOwnedOperationCall(NameExpCS newOwnedOperationCall) {
+		if (newOwnedOperationCall != ownedOperationCall) {
 			NotificationChain msgs = null;
-			if (operationCall != null)
-				msgs = ((InternalEObject)operationCall).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OPERATION_CALL, null, msgs);
-			if (newOperationCall != null)
-				msgs = ((InternalEObject)newOperationCall).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OPERATION_CALL, null, msgs);
-			msgs = basicSetOperationCall(newOperationCall, msgs);
+			if (ownedOperationCall != null)
+				msgs = ((InternalEObject)ownedOperationCall).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OWNED_OPERATION_CALL, null, msgs);
+			if (newOwnedOperationCall != null)
+				msgs = ((InternalEObject)newOwnedOperationCall).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OWNED_OPERATION_CALL, null, msgs);
+			msgs = basicSetOwnedOperationCall(newOwnedOperationCall, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OPERATION_CALL, newOperationCall, newOperationCall));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OWNED_OPERATION_CALL, newOwnedOperationCall, newOwnedOperationCall));
 	}
 
 	/**
@@ -174,8 +174,8 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OPERATION_CALL:
-				return basicSetOperationCall(null, msgs);
+			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OWNED_OPERATION_CALL:
+				return basicSetOwnedOperationCall(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -188,10 +188,10 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__DELETION:
-				return isDeletion();
-			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OPERATION_CALL:
-				return getOperationCall();
+			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__IS_DELETION:
+				return isIsDeletion();
+			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OWNED_OPERATION_CALL:
+				return getOwnedOperationCall();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -204,11 +204,11 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__DELETION:
-				setDeletion((Boolean)newValue);
+			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__IS_DELETION:
+				setIsDeletion((Boolean)newValue);
 				return;
-			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OPERATION_CALL:
-				setOperationCall((NameExpCS)newValue);
+			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OWNED_OPERATION_CALL:
+				setOwnedOperationCall((NameExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -222,11 +222,11 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__DELETION:
-				setDeletion(DELETION_EDEFAULT);
+			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__IS_DELETION:
+				setIsDeletion(IS_DELETION_EDEFAULT);
 				return;
-			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OPERATION_CALL:
-				setOperationCall((NameExpCS)null);
+			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OWNED_OPERATION_CALL:
+				setOwnedOperationCall((NameExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -240,10 +240,10 @@ public class EnforcementOperationCSImpl extends ModelElementCSImpl implements En
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__DELETION:
-				return deletion != DELETION_EDEFAULT;
-			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OPERATION_CALL:
-				return operationCall != null;
+			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__IS_DELETION:
+				return isDeletion != IS_DELETION_EDEFAULT;
+			case QVTcoreBaseCSPackage.ENFORCEMENT_OPERATION_CS__OWNED_OPERATION_CALL:
+				return ownedOperationCall != null;
 		}
 		return super.eIsSet(featureID);
 	}

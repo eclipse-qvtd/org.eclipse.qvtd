@@ -23,9 +23,9 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS#getPathName <em>Path Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS#getOwnedPathName <em>Owned Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS#getPackage <em>Package</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS#getDirections <em>Directions</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS#getOwnedDirections <em>Owned Directions</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getTransformationCS()
@@ -34,30 +34,30 @@ import org.eclipse.ocl.xtext.basecs.PathNameCS;
  */
 public interface TransformationCS extends ClassCS {
 	/**
-	 * Returns the value of the '<em><b>Path Name</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Path Name</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Path Name</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Path Name</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Path Name</em>' containment reference.
-	 * @see #setPathName(PathNameCS)
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getTransformationCS_PathName()
+	 * @return the value of the '<em>Owned Path Name</em>' containment reference.
+	 * @see #setOwnedPathName(PathNameCS)
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getTransformationCS_OwnedPathName()
 	 * @model containment="true"
 	 * @generated
 	 */
-	PathNameCS getPathName();
+	PathNameCS getOwnedPathName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS#getPathName <em>Path Name</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS#getOwnedPathName <em>Owned Path Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Path Name</em>' containment reference.
-	 * @see #getPathName()
+	 * @param value the new value of the '<em>Owned Path Name</em>' containment reference.
+	 * @see #getOwnedPathName()
 	 * @generated
 	 */
-	void setPathName(PathNameCS value);
+	void setOwnedPathName(PathNameCS value);
 
 	/**
 	 * Returns the value of the '<em><b>Package</b></em>' reference.
@@ -75,19 +75,19 @@ public interface TransformationCS extends ClassCS {
 	org.eclipse.ocl.pivot.Package getPackage();
 
 	/**
-	 * Returns the value of the '<em><b>Directions</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Directions</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Directions</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Directions</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Directions</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getTransformationCS_Directions()
+	 * @return the value of the '<em>Owned Directions</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getTransformationCS_OwnedDirections()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<DirectionCS> getDirections();
+	EList<DirectionCS> getOwnedDirections();
 
 } // TransformationCS

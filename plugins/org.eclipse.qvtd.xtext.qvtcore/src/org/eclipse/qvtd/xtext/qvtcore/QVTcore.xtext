@@ -26,4 +26,4 @@ TopLevelCS:
 	
 MappingCS: {MappingCS} 'map' name=UnrestrictedName? ('in' in=[qvtbase::Transformation|UnrestrictedName])?
 	('refines' refines+=[qvtcore::Mapping|UnrestrictedName] (',' refines+=[qvtcore::Mapping|UnrestrictedName])*)?
-	'{' domains+=NamedDomainCS* ('where' middle=UnnamedDomainCS)? ownedComposedMappings+=MappingCS* '}';
+	'{' ownedDomains+=NamedDomainCS* ('where' ownedMiddle=UnnamedDomainCS)? ownedComposedMappings+=MappingCS* '}';

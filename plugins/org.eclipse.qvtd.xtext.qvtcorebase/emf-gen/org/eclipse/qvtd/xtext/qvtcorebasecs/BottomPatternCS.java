@@ -21,9 +21,9 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getEnforcementOperations <em>Enforcement Operations</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getRealizedVariables <em>Realized Variables</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getConstraints <em>Constraints</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getOwnedEnforcementOperations <em>Owned Enforcement Operations</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getOwnedRealizedVariables <em>Owned Realized Variables</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getOwnedConstraints <em>Owned Constraints</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getBottomPatternCS()
@@ -32,51 +32,51 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface BottomPatternCS extends PatternCS {
 	/**
-	 * Returns the value of the '<em><b>Enforcement Operations</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Enforcement Operations</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Enforcement Operations</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Enforcement Operations</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Enforcement Operations</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getBottomPatternCS_EnforcementOperations()
+	 * @return the value of the '<em>Owned Enforcement Operations</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getBottomPatternCS_OwnedEnforcementOperations()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<EnforcementOperationCS> getEnforcementOperations();
+	EList<EnforcementOperationCS> getOwnedEnforcementOperations();
 
 	/**
-	 * Returns the value of the '<em><b>Realized Variables</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Realized Variables</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Realized Variables</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Realized Variables</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Realized Variables</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getBottomPatternCS_RealizedVariables()
+	 * @return the value of the '<em>Owned Realized Variables</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getBottomPatternCS_OwnedRealizedVariables()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<RealizedVariableCS> getRealizedVariables();
+	EList<RealizedVariableCS> getOwnedRealizedVariables();
 
 	/**
-	 * Returns the value of the '<em><b>Constraints</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Constraints</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Constraints</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Constraints</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Constraints</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getBottomPatternCS_Constraints()
+	 * @return the value of the '<em>Owned Constraints</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getBottomPatternCS_OwnedConstraints()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<AssignmentCS> getConstraints();
+	EList<AssignmentCS> getOwnedConstraints();
 
 } // BottomPatternCS

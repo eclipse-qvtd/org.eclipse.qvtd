@@ -30,8 +30,8 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.util.QVTcoreBaseCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.DomainCSImpl#isCheck <em>Check</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.DomainCSImpl#isEnforce <em>Enforce</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.DomainCSImpl#isIsCheck <em>Is Check</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.DomainCSImpl#isIsEnforce <em>Is Enforce</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.DomainCSImpl#getDirection <em>Direction</em>}</li>
  * </ul>
  *
@@ -39,44 +39,44 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.util.QVTcoreBaseCSVisitor;
  */
 public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	/**
-	 * The default value of the '{@link #isCheck() <em>Check</em>}' attribute.
+	 * The default value of the '{@link #isIsCheck() <em>Is Check</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isCheck()
+	 * @see #isIsCheck()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean CHECK_EDEFAULT = false;
+	protected static final boolean IS_CHECK_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isCheck() <em>Check</em>}' attribute.
+	 * The cached value of the '{@link #isIsCheck() <em>Is Check</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isCheck()
+	 * @see #isIsCheck()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean check = CHECK_EDEFAULT;
+	protected boolean isCheck = IS_CHECK_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isEnforce() <em>Enforce</em>}' attribute.
+	 * The default value of the '{@link #isIsEnforce() <em>Is Enforce</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isEnforce()
+	 * @see #isIsEnforce()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean ENFORCE_EDEFAULT = false;
+	protected static final boolean IS_ENFORCE_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isEnforce() <em>Enforce</em>}' attribute.
+	 * The cached value of the '{@link #isIsEnforce() <em>Is Enforce</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isEnforce()
+	 * @see #isIsEnforce()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean enforce = ENFORCE_EDEFAULT;
+	protected boolean isEnforce = IS_ENFORCE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getDirection() <em>Direction</em>}' reference.
@@ -113,8 +113,8 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	 * @generated
 	 */
 	@Override
-	public boolean isCheck() {
-		return check;
+	public boolean isIsCheck() {
+		return isCheck;
 	}
 
 	/**
@@ -123,11 +123,11 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	 * @generated
 	 */
 	@Override
-	public void setCheck(boolean newCheck) {
-		boolean oldCheck = check;
-		check = newCheck;
+	public void setIsCheck(boolean newIsCheck) {
+		boolean oldIsCheck = isCheck;
+		isCheck = newIsCheck;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.DOMAIN_CS__CHECK, oldCheck, check));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.DOMAIN_CS__IS_CHECK, oldIsCheck, isCheck));
 	}
 
 	/**
@@ -136,8 +136,8 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	 * @generated
 	 */
 	@Override
-	public boolean isEnforce() {
-		return enforce;
+	public boolean isIsEnforce() {
+		return isEnforce;
 	}
 
 	/**
@@ -146,11 +146,11 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	 * @generated
 	 */
 	@Override
-	public void setEnforce(boolean newEnforce) {
-		boolean oldEnforce = enforce;
-		enforce = newEnforce;
+	public void setIsEnforce(boolean newIsEnforce) {
+		boolean oldIsEnforce = isEnforce;
+		isEnforce = newIsEnforce;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.DOMAIN_CS__ENFORCE, oldEnforce, enforce));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.DOMAIN_CS__IS_ENFORCE, oldIsEnforce, isEnforce));
 	}
 
 	/**
@@ -211,10 +211,10 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcoreBaseCSPackage.DOMAIN_CS__CHECK:
-				return isCheck();
-			case QVTcoreBaseCSPackage.DOMAIN_CS__ENFORCE:
-				return isEnforce();
+			case QVTcoreBaseCSPackage.DOMAIN_CS__IS_CHECK:
+				return isIsCheck();
+			case QVTcoreBaseCSPackage.DOMAIN_CS__IS_ENFORCE:
+				return isIsEnforce();
 			case QVTcoreBaseCSPackage.DOMAIN_CS__DIRECTION:
 				if (resolve) return getDirection();
 				return basicGetDirection();
@@ -230,11 +230,11 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcoreBaseCSPackage.DOMAIN_CS__CHECK:
-				setCheck((Boolean)newValue);
+			case QVTcoreBaseCSPackage.DOMAIN_CS__IS_CHECK:
+				setIsCheck((Boolean)newValue);
 				return;
-			case QVTcoreBaseCSPackage.DOMAIN_CS__ENFORCE:
-				setEnforce((Boolean)newValue);
+			case QVTcoreBaseCSPackage.DOMAIN_CS__IS_ENFORCE:
+				setIsEnforce((Boolean)newValue);
 				return;
 			case QVTcoreBaseCSPackage.DOMAIN_CS__DIRECTION:
 				setDirection((TypedModel)newValue);
@@ -251,11 +251,11 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcoreBaseCSPackage.DOMAIN_CS__CHECK:
-				setCheck(CHECK_EDEFAULT);
+			case QVTcoreBaseCSPackage.DOMAIN_CS__IS_CHECK:
+				setIsCheck(IS_CHECK_EDEFAULT);
 				return;
-			case QVTcoreBaseCSPackage.DOMAIN_CS__ENFORCE:
-				setEnforce(ENFORCE_EDEFAULT);
+			case QVTcoreBaseCSPackage.DOMAIN_CS__IS_ENFORCE:
+				setIsEnforce(IS_ENFORCE_EDEFAULT);
 				return;
 			case QVTcoreBaseCSPackage.DOMAIN_CS__DIRECTION:
 				setDirection((TypedModel)null);
@@ -272,10 +272,10 @@ public class DomainCSImpl extends AreaCSImpl implements DomainCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcoreBaseCSPackage.DOMAIN_CS__CHECK:
-				return check != CHECK_EDEFAULT;
-			case QVTcoreBaseCSPackage.DOMAIN_CS__ENFORCE:
-				return enforce != ENFORCE_EDEFAULT;
+			case QVTcoreBaseCSPackage.DOMAIN_CS__IS_CHECK:
+				return isCheck != IS_CHECK_EDEFAULT;
+			case QVTcoreBaseCSPackage.DOMAIN_CS__IS_ENFORCE:
+				return isEnforce != IS_ENFORCE_EDEFAULT;
 			case QVTcoreBaseCSPackage.DOMAIN_CS__DIRECTION:
 				return direction != null;
 		}

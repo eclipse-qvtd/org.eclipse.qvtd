@@ -40,44 +40,44 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.util.QVTcoreBaseCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QueryCSImpl#getPathName <em>Path Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QueryCSImpl#getOwnedPathName <em>Owned Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QueryCSImpl#getTransformation <em>Transformation</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QueryCSImpl#getInputParamDeclaration <em>Input Param Declaration</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QueryCSImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QueryCSImpl#getOwnedParameters <em>Owned Parameters</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QueryCSImpl#getOwnedExpression <em>Owned Expression</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	/**
-	 * The cached value of the '{@link #getPathName() <em>Path Name</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedPathName() <em>Owned Path Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPathName()
+	 * @see #getOwnedPathName()
 	 * @generated
 	 * @ordered
 	 */
-	protected PathNameCS pathName;
+	protected PathNameCS ownedPathName;
 
 	/**
-	 * The cached value of the '{@link #getInputParamDeclaration() <em>Input Param Declaration</em>}' containment reference list.
+	 * The cached value of the '{@link #getOwnedParameters() <em>Owned Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInputParamDeclaration()
+	 * @see #getOwnedParameters()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<ParamDeclarationCS> inputParamDeclaration;
+	protected EList<ParamDeclarationCS> ownedParameters;
 
 	/**
-	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedExpression() <em>Owned Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExpression()
+	 * @see #getOwnedExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected ExpCS expression;
+	protected ExpCS ownedExpression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -104,8 +104,8 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * @generated
 	 */
 	@Override
-	public PathNameCS getPathName() {
-		return pathName;
+	public PathNameCS getOwnedPathName() {
+		return ownedPathName;
 	}
 
 	/**
@@ -113,11 +113,11 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetPathName(PathNameCS newPathName, NotificationChain msgs) {
-		PathNameCS oldPathName = pathName;
-		pathName = newPathName;
+	public NotificationChain basicSetOwnedPathName(PathNameCS newOwnedPathName, NotificationChain msgs) {
+		PathNameCS oldOwnedPathName = ownedPathName;
+		ownedPathName = newOwnedPathName;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.QUERY_CS__PATH_NAME, oldPathName, newPathName);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.QUERY_CS__OWNED_PATH_NAME, oldOwnedPathName, newOwnedPathName);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -129,76 +129,18 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 * @generated
 	 */
 	@Override
-	public void setPathName(PathNameCS newPathName) {
-		if (newPathName != pathName) {
+	public void setOwnedPathName(PathNameCS newOwnedPathName) {
+		if (newOwnedPathName != ownedPathName) {
 			NotificationChain msgs = null;
-			if (pathName != null)
-				msgs = ((InternalEObject)pathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.QUERY_CS__PATH_NAME, null, msgs);
-			if (newPathName != null)
-				msgs = ((InternalEObject)newPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.QUERY_CS__PATH_NAME, null, msgs);
-			msgs = basicSetPathName(newPathName, msgs);
+			if (ownedPathName != null)
+				msgs = ((InternalEObject)ownedPathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.QUERY_CS__OWNED_PATH_NAME, null, msgs);
+			if (newOwnedPathName != null)
+				msgs = ((InternalEObject)newOwnedPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.QUERY_CS__OWNED_PATH_NAME, null, msgs);
+			msgs = basicSetOwnedPathName(newOwnedPathName, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.QUERY_CS__PATH_NAME, newPathName, newPathName));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<ParamDeclarationCS> getInputParamDeclaration() {
-		if (inputParamDeclaration == null) {
-			inputParamDeclaration = new EObjectContainmentEList<ParamDeclarationCS>(ParamDeclarationCS.class, this, QVTcoreBaseCSPackage.QUERY_CS__INPUT_PARAM_DECLARATION);
-		}
-		return inputParamDeclaration;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ExpCS getExpression() {
-		return expression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetExpression(ExpCS newExpression, NotificationChain msgs) {
-		ExpCS oldExpression = expression;
-		expression = newExpression;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.QUERY_CS__EXPRESSION, oldExpression, newExpression);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setExpression(ExpCS newExpression) {
-		if (newExpression != expression) {
-			NotificationChain msgs = null;
-			if (expression != null)
-				msgs = ((InternalEObject)expression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.QUERY_CS__EXPRESSION, null, msgs);
-			if (newExpression != null)
-				msgs = ((InternalEObject)newExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.QUERY_CS__EXPRESSION, null, msgs);
-			msgs = basicSetExpression(newExpression, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.QUERY_CS__EXPRESSION, newExpression, newExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.QUERY_CS__OWNED_PATH_NAME, newOwnedPathName, newOwnedPathName));
 	}
 
 	/**
@@ -209,12 +151,12 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcoreBaseCSPackage.QUERY_CS__PATH_NAME:
-				return basicSetPathName(null, msgs);
-			case QVTcoreBaseCSPackage.QUERY_CS__INPUT_PARAM_DECLARATION:
-				return ((InternalEList<?>)getInputParamDeclaration()).basicRemove(otherEnd, msgs);
-			case QVTcoreBaseCSPackage.QUERY_CS__EXPRESSION:
-				return basicSetExpression(null, msgs);
+			case QVTcoreBaseCSPackage.QUERY_CS__OWNED_PATH_NAME:
+				return basicSetOwnedPathName(null, msgs);
+			case QVTcoreBaseCSPackage.QUERY_CS__OWNED_PARAMETERS:
+				return ((InternalEList<?>)getOwnedParameters()).basicRemove(otherEnd, msgs);
+			case QVTcoreBaseCSPackage.QUERY_CS__OWNED_EXPRESSION:
+				return basicSetOwnedExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -227,14 +169,14 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcoreBaseCSPackage.QUERY_CS__PATH_NAME:
-				return getPathName();
+			case QVTcoreBaseCSPackage.QUERY_CS__OWNED_PATH_NAME:
+				return getOwnedPathName();
 			case QVTcoreBaseCSPackage.QUERY_CS__TRANSFORMATION:
 				return getTransformation();
-			case QVTcoreBaseCSPackage.QUERY_CS__INPUT_PARAM_DECLARATION:
-				return getInputParamDeclaration();
-			case QVTcoreBaseCSPackage.QUERY_CS__EXPRESSION:
-				return getExpression();
+			case QVTcoreBaseCSPackage.QUERY_CS__OWNED_PARAMETERS:
+				return getOwnedParameters();
+			case QVTcoreBaseCSPackage.QUERY_CS__OWNED_EXPRESSION:
+				return getOwnedExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -248,15 +190,15 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcoreBaseCSPackage.QUERY_CS__PATH_NAME:
-				setPathName((PathNameCS)newValue);
+			case QVTcoreBaseCSPackage.QUERY_CS__OWNED_PATH_NAME:
+				setOwnedPathName((PathNameCS)newValue);
 				return;
-			case QVTcoreBaseCSPackage.QUERY_CS__INPUT_PARAM_DECLARATION:
-				getInputParamDeclaration().clear();
-				getInputParamDeclaration().addAll((Collection<? extends ParamDeclarationCS>)newValue);
+			case QVTcoreBaseCSPackage.QUERY_CS__OWNED_PARAMETERS:
+				getOwnedParameters().clear();
+				getOwnedParameters().addAll((Collection<? extends ParamDeclarationCS>)newValue);
 				return;
-			case QVTcoreBaseCSPackage.QUERY_CS__EXPRESSION:
-				setExpression((ExpCS)newValue);
+			case QVTcoreBaseCSPackage.QUERY_CS__OWNED_EXPRESSION:
+				setOwnedExpression((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -270,14 +212,14 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcoreBaseCSPackage.QUERY_CS__PATH_NAME:
-				setPathName((PathNameCS)null);
+			case QVTcoreBaseCSPackage.QUERY_CS__OWNED_PATH_NAME:
+				setOwnedPathName((PathNameCS)null);
 				return;
-			case QVTcoreBaseCSPackage.QUERY_CS__INPUT_PARAM_DECLARATION:
-				getInputParamDeclaration().clear();
+			case QVTcoreBaseCSPackage.QUERY_CS__OWNED_PARAMETERS:
+				getOwnedParameters().clear();
 				return;
-			case QVTcoreBaseCSPackage.QUERY_CS__EXPRESSION:
-				setExpression((ExpCS)null);
+			case QVTcoreBaseCSPackage.QUERY_CS__OWNED_EXPRESSION:
+				setOwnedExpression((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -291,14 +233,14 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcoreBaseCSPackage.QUERY_CS__PATH_NAME:
-				return pathName != null;
+			case QVTcoreBaseCSPackage.QUERY_CS__OWNED_PATH_NAME:
+				return ownedPathName != null;
 			case QVTcoreBaseCSPackage.QUERY_CS__TRANSFORMATION:
 				return getTransformation() != null;
-			case QVTcoreBaseCSPackage.QUERY_CS__INPUT_PARAM_DECLARATION:
-				return inputParamDeclaration != null && !inputParamDeclaration.isEmpty();
-			case QVTcoreBaseCSPackage.QUERY_CS__EXPRESSION:
-				return expression != null;
+			case QVTcoreBaseCSPackage.QUERY_CS__OWNED_PARAMETERS:
+				return ownedParameters != null && !ownedParameters.isEmpty();
+			case QVTcoreBaseCSPackage.QUERY_CS__OWNED_EXPRESSION:
+				return ownedExpression != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -321,9 +263,67 @@ public class QueryCSImpl extends TypedElementCSImpl implements QueryCS {
 	 */
 	@Override
 	public Transformation getTransformation() {
-		if (pathName == null) {
+		if (ownedPathName == null) {
 			return null;
 		}
-		return (Transformation) pathName.getReferredElement();
+		return (Transformation) ownedPathName.getReferredElement();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<ParamDeclarationCS> getOwnedParameters() {
+		if (ownedParameters == null) {
+			ownedParameters = new EObjectContainmentEList<ParamDeclarationCS>(ParamDeclarationCS.class, this, QVTcoreBaseCSPackage.QUERY_CS__OWNED_PARAMETERS);
+		}
+		return ownedParameters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ExpCS getOwnedExpression() {
+		return ownedExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwnedExpression(ExpCS newOwnedExpression, NotificationChain msgs) {
+		ExpCS oldOwnedExpression = ownedExpression;
+		ownedExpression = newOwnedExpression;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.QUERY_CS__OWNED_EXPRESSION, oldOwnedExpression, newOwnedExpression);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setOwnedExpression(ExpCS newOwnedExpression) {
+		if (newOwnedExpression != ownedExpression) {
+			NotificationChain msgs = null;
+			if (ownedExpression != null)
+				msgs = ((InternalEObject)ownedExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.QUERY_CS__OWNED_EXPRESSION, null, msgs);
+			if (newOwnedExpression != null)
+				msgs = ((InternalEObject)newOwnedExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.QUERY_CS__OWNED_EXPRESSION, null, msgs);
+			msgs = basicSetOwnedExpression(newOwnedExpression, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.QUERY_CS__OWNED_EXPRESSION, newOwnedExpression, newOwnedExpression));
 	}
 } //QueryCSImpl

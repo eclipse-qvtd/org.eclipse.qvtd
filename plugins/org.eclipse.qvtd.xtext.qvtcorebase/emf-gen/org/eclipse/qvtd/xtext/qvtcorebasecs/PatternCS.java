@@ -22,7 +22,7 @@ import org.eclipse.ocl.xtext.basecs.ModelElementCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.PatternCS#getUnrealizedVariables <em>Unrealized Variables</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.PatternCS#getOwnedUnrealizedVariables <em>Owned Unrealized Variables</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getPatternCS()
@@ -31,19 +31,19 @@ import org.eclipse.ocl.xtext.basecs.ModelElementCS;
  */
 public interface PatternCS extends ModelElementCS {
 	/**
-	 * Returns the value of the '<em><b>Unrealized Variables</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Unrealized Variables</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Unrealized Variables</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Unrealized Variables</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Unrealized Variables</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getPatternCS_UnrealizedVariables()
+	 * @return the value of the '<em>Owned Unrealized Variables</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getPatternCS_OwnedUnrealizedVariables()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<UnrealizedVariableCS> getUnrealizedVariables();
+	EList<UnrealizedVariableCS> getOwnedUnrealizedVariables();
 
 } // PatternCS

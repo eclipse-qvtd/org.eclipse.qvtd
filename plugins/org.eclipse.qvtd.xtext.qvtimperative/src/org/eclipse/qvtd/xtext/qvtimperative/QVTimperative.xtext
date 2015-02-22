@@ -31,7 +31,7 @@ DirectionCS: {DirectionCS} name=UnrestrictedName
 ;
 
 MappingCS: {MappingCS} 'map' name=UnrestrictedName ('in' in=[qvtbase::Transformation|UnrestrictedName])?
-	'{' domains+=(SourceDomainCS | TargetDomainCS)* ('where' middle=MiddleDomainCS)? ownedMappingSequence=MappingSequenceCS? '}';
+	'{' ownedDomains+=(SourceDomainCS | TargetDomainCS)* ('where' ownedMiddle=MiddleDomainCS)? ownedMappingSequence=MappingSequenceCS? '}';
 	
 MappingCallCS: {MappingCallCS} 'call' referredMapping=[qvtimperative::Mapping|UnrestrictedName]
 	'{' ownedBindings+=MappingCallBindingCS* '}';
@@ -46,8 +46,8 @@ MappingSequenceCS: ownedMappingStatements+=MappingStatementCS+;
 	
 MappingStatementCS: MappingCallCS | MappingLoopCS;
 	
-SourceDomainCS returns DomainCS: check?='check' direction=[qvtbase::TypedModel|UnrestrictedName]
-	guardPattern=SourceGuardPatternCS bottomPattern=SourceBottomPatternCS
+SourceDomainCS returns DomainCS: isCheck?='check' direction=[qvtbase::TypedModel|UnrestrictedName]
+	ownedGuardPattern=SourceGuardPatternCS ownedBottomPattern=SourceBottomPatternCS
 ;
 		
 SourceBottomPatternCS returns BottomPatternCS:
@@ -55,29 +55,29 @@ SourceBottomPatternCS returns BottomPatternCS:
 ;
 	
 SourceGuardPatternCS returns GuardPatternCS:
-	{GuardPatternCS} '(' (unrealizedVariables+=UnrealizedVariableCS (',' unrealizedVariables+=UnrealizedVariableCS)*)? ')'
+	{GuardPatternCS} '(' (ownedUnrealizedVariables+=UnrealizedVariableCS (',' ownedUnrealizedVariables+=UnrealizedVariableCS)*)? ')'
 ;
 	
-MiddleDomainCS returns DomainCS: {DomainCS} guardPattern=MiddleGuardPatternCS bottomPattern=MiddleBottomPatternCS;
+MiddleDomainCS returns DomainCS: {DomainCS} ownedGuardPattern=MiddleGuardPatternCS ownedBottomPattern=MiddleBottomPatternCS;
 		
 MiddleBottomPatternCS returns BottomPatternCS:
-	{BottomPatternCS} '{' constraints+=PredicateOrAssignmentCS* '}'
+	{BottomPatternCS} '{' ownedConstraints+=PredicateOrAssignmentCS* '}'
 ;
 	
 MiddleGuardPatternCS returns GuardPatternCS:
 	{GuardPatternCS} '(' ownedPredicates+=PredicateCS* ')'
 ;
 	
-TargetDomainCS returns DomainCS: enforce?='enforce' direction=[qvtbase::TypedModel|UnrestrictedName]
-	guardPattern=TargetGuardPatternCS bottomPattern=TargetBottomPatternCS
+TargetDomainCS returns DomainCS: isEnforce?='enforce' direction=[qvtbase::TypedModel|UnrestrictedName]
+	ownedGuardPattern=TargetGuardPatternCS ownedBottomPattern=TargetBottomPatternCS
 ;
 		
 TargetBottomPatternCS returns BottomPatternCS:
-	{BottomPatternCS} '{' ((unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS)
-		(',' (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS))*)?
+	{BottomPatternCS} '{' ((ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS)
+		(',' (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS))*)?
 	'}'
 ;
 	
 TargetGuardPatternCS returns GuardPatternCS:
-	{GuardPatternCS} '(' (unrealizedVariables+=UnrealizedVariableCS (',' unrealizedVariables+=UnrealizedVariableCS)*)? ')'
+	{GuardPatternCS} '(' (ownedUnrealizedVariables+=UnrealizedVariableCS (',' ownedUnrealizedVariables+=UnrealizedVariableCS)*)? ')'
 ;

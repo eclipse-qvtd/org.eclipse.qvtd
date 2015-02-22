@@ -472,8 +472,8 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	 *     (
 	 *         name=UnrestrictedName 
 	 *         in=[Transformation|UnrestrictedName]? 
-	 *         (domains+=SourceDomainCS | domains+=TargetDomainCS)* 
-	 *         middle=MiddleDomainCS? 
+	 *         (ownedDomains+=SourceDomainCS | ownedDomains+=TargetDomainCS)* 
+	 *         ownedMiddle=MiddleDomainCS? 
 	 *         ownedMappingSequence=MappingSequenceCS?
 	 *     )
 	 */
@@ -529,7 +529,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	
 	/**
 	 * Constraint:
-	 *     (constraints+=PredicateOrAssignmentCS*)
+	 *     (ownedConstraints+=PredicateOrAssignmentCS*)
 	 */
 	protected void sequence_MiddleBottomPatternCS(EObject context, BottomPatternCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -538,7 +538,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	
 	/**
 	 * Constraint:
-	 *     (guardPattern=MiddleGuardPatternCS bottomPattern=MiddleBottomPatternCS)
+	 *     (ownedGuardPattern=MiddleGuardPatternCS ownedBottomPattern=MiddleBottomPatternCS)
 	 */
 	protected void sequence_MiddleDomainCS(EObject context, DomainCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -565,7 +565,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	
 	/**
 	 * Constraint:
-	 *     (check?='check' direction=[TypedModel|UnrestrictedName] guardPattern=SourceGuardPatternCS bottomPattern=SourceBottomPatternCS)
+	 *     (isCheck?='check' direction=[TypedModel|UnrestrictedName] ownedGuardPattern=SourceGuardPatternCS ownedBottomPattern=SourceBottomPatternCS)
 	 */
 	protected void sequence_SourceDomainCS(EObject context, DomainCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -574,7 +574,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	
 	/**
 	 * Constraint:
-	 *     ((unrealizedVariables+=UnrealizedVariableCS unrealizedVariables+=UnrealizedVariableCS*)?)
+	 *     ((ownedUnrealizedVariables+=UnrealizedVariableCS ownedUnrealizedVariables+=UnrealizedVariableCS*)?)
 	 */
 	protected void sequence_SourceGuardPatternCS(EObject context, GuardPatternCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -585,8 +585,8 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	 * Constraint:
 	 *     (
 	 *         (
-	 *             (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS) 
-	 *             (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS)*
+	 *             (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS) 
+	 *             (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS)*
 	 *         )?
 	 *     )
 	 */
@@ -597,7 +597,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	
 	/**
 	 * Constraint:
-	 *     (enforce?='enforce' direction=[TypedModel|UnrestrictedName] guardPattern=TargetGuardPatternCS bottomPattern=TargetBottomPatternCS)
+	 *     (isEnforce?='enforce' direction=[TypedModel|UnrestrictedName] ownedGuardPattern=TargetGuardPatternCS ownedBottomPattern=TargetBottomPatternCS)
 	 */
 	protected void sequence_TargetDomainCS(EObject context, DomainCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -606,7 +606,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	
 	/**
 	 * Constraint:
-	 *     ((unrealizedVariables+=UnrealizedVariableCS unrealizedVariables+=UnrealizedVariableCS*)?)
+	 *     ((ownedUnrealizedVariables+=UnrealizedVariableCS ownedUnrealizedVariables+=UnrealizedVariableCS*)?)
 	 */
 	protected void sequence_TargetGuardPatternCS(EObject context, GuardPatternCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

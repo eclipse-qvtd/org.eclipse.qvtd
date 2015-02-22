@@ -159,11 +159,11 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	public ElementCS visitCoreDomain(@NonNull CoreDomain asCoreDomain) {
 		DomainCS csDomain = context.refreshElement(DomainCS.class, QVTcoreBaseCSPackage.Literals.DOMAIN_CS, asCoreDomain);
 		csDomain.setPivot(asCoreDomain);
-		csDomain.setBottomPattern(context.visitDeclaration(BottomPatternCS.class, asCoreDomain.getBottomPattern()));
-		csDomain.setGuardPattern(context.visitDeclaration(GuardPatternCS.class, asCoreDomain.getGuardPattern()));
-		csDomain.setCheck(asCoreDomain.isIsCheckable());
+		csDomain.setOwnedBottomPattern(context.visitDeclaration(BottomPatternCS.class, asCoreDomain.getBottomPattern()));
+		csDomain.setOwnedGuardPattern(context.visitDeclaration(GuardPatternCS.class, asCoreDomain.getGuardPattern()));
+		csDomain.setIsCheck(asCoreDomain.isIsCheckable());
 		csDomain.setDirection(asCoreDomain.getTypedModel());
-		csDomain.setEnforce(asCoreDomain.isIsEnforceable());
+		csDomain.setIsEnforce(asCoreDomain.isIsEnforceable());
 		return csDomain;
 	}
 
@@ -186,10 +186,10 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	public ElementCS visitFunction(@NonNull Function asFunction) {
 		QueryCS csQuery = context.refreshNamedElement(QueryCS.class, QVTcoreBaseCSPackage.Literals.QUERY_CS, asFunction);
 		csQuery.setPivot(asFunction);
-		csQuery.setPathName(createPathNameCS(asFunction.getOwningClass()));
+		csQuery.setOwnedPathName(createPathNameCS(asFunction.getOwningClass()));
 		csQuery.setOwnedType(createTypeRefCS(asFunction.getType()));
-		context.refreshList(csQuery.getInputParamDeclaration(), context.visitDeclarations(ParamDeclarationCS.class, asFunction.getOwnedParameters(), null));
-		csQuery.setExpression(createExpCS(asFunction.getQueryExpression()));
+		context.refreshList(csQuery.getOwnedParameters(), context.visitDeclarations(ParamDeclarationCS.class, asFunction.getOwnedParameters(), null));
+		csQuery.setOwnedExpression(createExpCS(asFunction.getQueryExpression()));
 		return csQuery;
 	}
 
@@ -217,7 +217,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		else {
 			AssignmentCS csPredicate = context.refreshElement(AssignmentCS.class, QVTcoreBaseCSPackage.Literals.ASSIGNMENT_CS, asPredicate);
 			csPredicate.setPivot(asPredicate);
-			csPredicate.setTarget(createExpCS(asPredicate.getConditionExpression()));
+			csPredicate.setOwnedTarget(createExpCS(asPredicate.getConditionExpression()));
 			return csPredicate;
 		}
 	}
@@ -229,9 +229,9 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		csAssignment.setPivot(asPropertyAssignment);
 		ExpCS csSlotExp = createExpCS(asPropertyAssignment.getSlotExpression());
 		NameExpCS csPropName = createNameExpCS(asPropertyAssignment.getTargetProperty());
-		csAssignment.setTarget(createInfixExpCS(csSlotExp, ".", csPropName));
-		csAssignment.setInitialiser(createExpCS(asPropertyAssignment.getValue()));
-		csAssignment.setDefault(asPropertyAssignment.isIsDefault());
+		csAssignment.setOwnedTarget(createInfixExpCS(csSlotExp, ".", csPropName));
+		csAssignment.setOwnedInitExpression(createExpCS(asPropertyAssignment.getValue()));
+		csAssignment.setIsDefault(asPropertyAssignment.isIsDefault());
 		return csAssignment;
 	}
 
@@ -252,7 +252,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	public ElementCS visitTransformation(@NonNull Transformation asTransformation) {
 		TransformationCS csTransformation = context.refreshNamedElement(TransformationCS.class, QVTcoreBaseCSPackage.Literals.TRANSFORMATION_CS, asTransformation);
 		csTransformation.setPivot(asTransformation);
-		context.refreshList(csTransformation.getDirections(), context.visitDeclarations(DirectionCS.class, asTransformation.getModelParameter(), null));
+		context.refreshList(csTransformation.getOwnedDirections(), context.visitDeclarations(DirectionCS.class, asTransformation.getModelParameter(), null));
 		return csTransformation;
 	}
 
@@ -318,10 +318,10 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 		csAssignment.setPivot(asVariableAssignment);
 		Variable asVariable = asVariableAssignment.getTargetVariable();
 		if (asVariable != null) {
-			csAssignment.setTarget(createNameExpCS(asVariable));
+			csAssignment.setOwnedTarget(createNameExpCS(asVariable));
 		}
-		csAssignment.setInitialiser(context.visitDeclaration(ExpCS.class, asVariableAssignment.getValue()));
-		csAssignment.setDefault(asVariableAssignment.isIsDefault());
+		csAssignment.setOwnedInitExpression(context.visitDeclaration(ExpCS.class, asVariableAssignment.getValue()));
+		csAssignment.setIsDefault(asVariableAssignment.isIsDefault());
 		return csAssignment;
 	}
 }

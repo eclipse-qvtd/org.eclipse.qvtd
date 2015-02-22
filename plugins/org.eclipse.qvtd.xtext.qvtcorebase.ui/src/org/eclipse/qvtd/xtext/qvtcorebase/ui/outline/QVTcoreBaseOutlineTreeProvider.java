@@ -63,7 +63,7 @@ public class QVTcoreBaseOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 	}
 
 	protected void _createChildren(IOutlineNode parentNode, TransformationCS ele) {
-		for (DirectionCS csDirection : ele.getDirections()) {
+		for (DirectionCS csDirection : ele.getOwnedDirections()) {
 			createNode(parentNode, csDirection);
 		}
 	}
@@ -83,6 +83,6 @@ public class QVTcoreBaseOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 	} */
 
 	protected boolean _isLeaf(QueryCS csExp) {
-		return csExp.getExpression() == null;
+		return csExp.getOwnedExpression() == null;
 	}
 }

@@ -32,53 +32,53 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.util.QVTcoreBaseCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AssignmentCSImpl#isDefault <em>Default</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AssignmentCSImpl#getTarget <em>Target</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AssignmentCSImpl#getInitialiser <em>Initialiser</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AssignmentCSImpl#isIsDefault <em>Is Default</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AssignmentCSImpl#getOwnedTarget <em>Owned Target</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AssignmentCSImpl#getOwnedInitExpression <em>Owned Init Expression</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class AssignmentCSImpl extends ExpCSImpl implements AssignmentCS {
 	/**
-	 * The default value of the '{@link #isDefault() <em>Default</em>}' attribute.
+	 * The default value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isDefault()
+	 * @see #isIsDefault()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final boolean DEFAULT_EDEFAULT = false;
+	protected static final boolean IS_DEFAULT_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isDefault() <em>Default</em>}' attribute.
+	 * The cached value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isDefault()
+	 * @see #isIsDefault()
 	 * @generated
 	 * @ordered
 	 */
-	protected boolean default_ = DEFAULT_EDEFAULT;
+	protected boolean isDefault = IS_DEFAULT_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getTarget() <em>Target</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedTarget() <em>Owned Target</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTarget()
+	 * @see #getOwnedTarget()
 	 * @generated
 	 * @ordered
 	 */
-	protected ExpCS target;
+	protected ExpCS ownedTarget;
 
 	/**
-	 * The cached value of the '{@link #getInitialiser() <em>Initialiser</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedInitExpression() <em>Owned Init Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getInitialiser()
+	 * @see #getOwnedInitExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected ExpCS initialiser;
+	protected ExpCS ownedInitExpression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -105,8 +105,8 @@ public class AssignmentCSImpl extends ExpCSImpl implements AssignmentCS {
 	 * @generated
 	 */
 	@Override
-	public boolean isDefault() {
-		return default_;
+	public boolean isIsDefault() {
+		return isDefault;
 	}
 
 	/**
@@ -115,11 +115,11 @@ public class AssignmentCSImpl extends ExpCSImpl implements AssignmentCS {
 	 * @generated
 	 */
 	@Override
-	public void setDefault(boolean newDefault) {
-		boolean oldDefault = default_;
-		default_ = newDefault;
+	public void setIsDefault(boolean newIsDefault) {
+		boolean oldIsDefault = isDefault;
+		isDefault = newIsDefault;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.ASSIGNMENT_CS__DEFAULT, oldDefault, default_));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.ASSIGNMENT_CS__IS_DEFAULT, oldIsDefault, isDefault));
 	}
 
 	/**
@@ -128,8 +128,8 @@ public class AssignmentCSImpl extends ExpCSImpl implements AssignmentCS {
 	 * @generated
 	 */
 	@Override
-	public ExpCS getTarget() {
-		return target;
+	public ExpCS getOwnedTarget() {
+		return ownedTarget;
 	}
 
 	/**
@@ -137,11 +137,11 @@ public class AssignmentCSImpl extends ExpCSImpl implements AssignmentCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetTarget(ExpCS newTarget, NotificationChain msgs) {
-		ExpCS oldTarget = target;
-		target = newTarget;
+	public NotificationChain basicSetOwnedTarget(ExpCS newOwnedTarget, NotificationChain msgs) {
+		ExpCS oldOwnedTarget = ownedTarget;
+		ownedTarget = newOwnedTarget;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.ASSIGNMENT_CS__TARGET, oldTarget, newTarget);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.ASSIGNMENT_CS__OWNED_TARGET, oldOwnedTarget, newOwnedTarget);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -153,18 +153,18 @@ public class AssignmentCSImpl extends ExpCSImpl implements AssignmentCS {
 	 * @generated
 	 */
 	@Override
-	public void setTarget(ExpCS newTarget) {
-		if (newTarget != target) {
+	public void setOwnedTarget(ExpCS newOwnedTarget) {
+		if (newOwnedTarget != ownedTarget) {
 			NotificationChain msgs = null;
-			if (target != null)
-				msgs = ((InternalEObject)target).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.ASSIGNMENT_CS__TARGET, null, msgs);
-			if (newTarget != null)
-				msgs = ((InternalEObject)newTarget).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.ASSIGNMENT_CS__TARGET, null, msgs);
-			msgs = basicSetTarget(newTarget, msgs);
+			if (ownedTarget != null)
+				msgs = ((InternalEObject)ownedTarget).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.ASSIGNMENT_CS__OWNED_TARGET, null, msgs);
+			if (newOwnedTarget != null)
+				msgs = ((InternalEObject)newOwnedTarget).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.ASSIGNMENT_CS__OWNED_TARGET, null, msgs);
+			msgs = basicSetOwnedTarget(newOwnedTarget, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.ASSIGNMENT_CS__TARGET, newTarget, newTarget));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.ASSIGNMENT_CS__OWNED_TARGET, newOwnedTarget, newOwnedTarget));
 	}
 
 	/**
@@ -173,8 +173,8 @@ public class AssignmentCSImpl extends ExpCSImpl implements AssignmentCS {
 	 * @generated
 	 */
 	@Override
-	public ExpCS getInitialiser() {
-		return initialiser;
+	public ExpCS getOwnedInitExpression() {
+		return ownedInitExpression;
 	}
 
 	/**
@@ -182,11 +182,11 @@ public class AssignmentCSImpl extends ExpCSImpl implements AssignmentCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetInitialiser(ExpCS newInitialiser, NotificationChain msgs) {
-		ExpCS oldInitialiser = initialiser;
-		initialiser = newInitialiser;
+	public NotificationChain basicSetOwnedInitExpression(ExpCS newOwnedInitExpression, NotificationChain msgs) {
+		ExpCS oldOwnedInitExpression = ownedInitExpression;
+		ownedInitExpression = newOwnedInitExpression;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.ASSIGNMENT_CS__INITIALISER, oldInitialiser, newInitialiser);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.ASSIGNMENT_CS__OWNED_INIT_EXPRESSION, oldOwnedInitExpression, newOwnedInitExpression);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -198,18 +198,18 @@ public class AssignmentCSImpl extends ExpCSImpl implements AssignmentCS {
 	 * @generated
 	 */
 	@Override
-	public void setInitialiser(ExpCS newInitialiser) {
-		if (newInitialiser != initialiser) {
+	public void setOwnedInitExpression(ExpCS newOwnedInitExpression) {
+		if (newOwnedInitExpression != ownedInitExpression) {
 			NotificationChain msgs = null;
-			if (initialiser != null)
-				msgs = ((InternalEObject)initialiser).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.ASSIGNMENT_CS__INITIALISER, null, msgs);
-			if (newInitialiser != null)
-				msgs = ((InternalEObject)newInitialiser).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.ASSIGNMENT_CS__INITIALISER, null, msgs);
-			msgs = basicSetInitialiser(newInitialiser, msgs);
+			if (ownedInitExpression != null)
+				msgs = ((InternalEObject)ownedInitExpression).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.ASSIGNMENT_CS__OWNED_INIT_EXPRESSION, null, msgs);
+			if (newOwnedInitExpression != null)
+				msgs = ((InternalEObject)newOwnedInitExpression).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.ASSIGNMENT_CS__OWNED_INIT_EXPRESSION, null, msgs);
+			msgs = basicSetOwnedInitExpression(newOwnedInitExpression, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.ASSIGNMENT_CS__INITIALISER, newInitialiser, newInitialiser));
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.ASSIGNMENT_CS__OWNED_INIT_EXPRESSION, newOwnedInitExpression, newOwnedInitExpression));
 	}
 
 	/**
@@ -230,10 +230,10 @@ public class AssignmentCSImpl extends ExpCSImpl implements AssignmentCS {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__TARGET:
-				return basicSetTarget(null, msgs);
-			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__INITIALISER:
-				return basicSetInitialiser(null, msgs);
+			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__OWNED_TARGET:
+				return basicSetOwnedTarget(null, msgs);
+			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__OWNED_INIT_EXPRESSION:
+				return basicSetOwnedInitExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -246,12 +246,12 @@ public class AssignmentCSImpl extends ExpCSImpl implements AssignmentCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__DEFAULT:
-				return isDefault();
-			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__TARGET:
-				return getTarget();
-			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__INITIALISER:
-				return getInitialiser();
+			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__IS_DEFAULT:
+				return isIsDefault();
+			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__OWNED_TARGET:
+				return getOwnedTarget();
+			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__OWNED_INIT_EXPRESSION:
+				return getOwnedInitExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -264,14 +264,14 @@ public class AssignmentCSImpl extends ExpCSImpl implements AssignmentCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__DEFAULT:
-				setDefault((Boolean)newValue);
+			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__IS_DEFAULT:
+				setIsDefault((Boolean)newValue);
 				return;
-			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__TARGET:
-				setTarget((ExpCS)newValue);
+			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__OWNED_TARGET:
+				setOwnedTarget((ExpCS)newValue);
 				return;
-			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__INITIALISER:
-				setInitialiser((ExpCS)newValue);
+			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__OWNED_INIT_EXPRESSION:
+				setOwnedInitExpression((ExpCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -285,14 +285,14 @@ public class AssignmentCSImpl extends ExpCSImpl implements AssignmentCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__DEFAULT:
-				setDefault(DEFAULT_EDEFAULT);
+			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__IS_DEFAULT:
+				setIsDefault(IS_DEFAULT_EDEFAULT);
 				return;
-			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__TARGET:
-				setTarget((ExpCS)null);
+			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__OWNED_TARGET:
+				setOwnedTarget((ExpCS)null);
 				return;
-			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__INITIALISER:
-				setInitialiser((ExpCS)null);
+			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__OWNED_INIT_EXPRESSION:
+				setOwnedInitExpression((ExpCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -306,12 +306,12 @@ public class AssignmentCSImpl extends ExpCSImpl implements AssignmentCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__DEFAULT:
-				return default_ != DEFAULT_EDEFAULT;
-			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__TARGET:
-				return target != null;
-			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__INITIALISER:
-				return initialiser != null;
+			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__IS_DEFAULT:
+				return isDefault != IS_DEFAULT_EDEFAULT;
+			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__OWNED_TARGET:
+				return ownedTarget != null;
+			case QVTcoreBaseCSPackage.ASSIGNMENT_CS__OWNED_INIT_EXPRESSION:
+				return ownedInitExpression != null;
 		}
 		return super.eIsSet(featureID);
 	}

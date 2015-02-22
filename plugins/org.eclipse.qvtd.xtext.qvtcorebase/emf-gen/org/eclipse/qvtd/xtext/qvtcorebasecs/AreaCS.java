@@ -21,8 +21,8 @@ import org.eclipse.ocl.xtext.basecs.NamedElementCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS#getGuardPattern <em>Guard Pattern</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS#getBottomPattern <em>Bottom Pattern</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS#getOwnedGuardPattern <em>Owned Guard Pattern</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS#getOwnedBottomPattern <em>Owned Bottom Pattern</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAreaCS()
@@ -31,55 +31,55 @@ import org.eclipse.ocl.xtext.basecs.NamedElementCS;
  */
 public interface AreaCS extends NamedElementCS {
 	/**
-	 * Returns the value of the '<em><b>Guard Pattern</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Guard Pattern</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Guard Pattern</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Guard Pattern</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Guard Pattern</em>' containment reference.
-	 * @see #setGuardPattern(GuardPatternCS)
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAreaCS_GuardPattern()
+	 * @return the value of the '<em>Owned Guard Pattern</em>' containment reference.
+	 * @see #setOwnedGuardPattern(GuardPatternCS)
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAreaCS_OwnedGuardPattern()
 	 * @model containment="true"
 	 * @generated
 	 */
-	GuardPatternCS getGuardPattern();
+	GuardPatternCS getOwnedGuardPattern();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS#getGuardPattern <em>Guard Pattern</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS#getOwnedGuardPattern <em>Owned Guard Pattern</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Guard Pattern</em>' containment reference.
-	 * @see #getGuardPattern()
+	 * @param value the new value of the '<em>Owned Guard Pattern</em>' containment reference.
+	 * @see #getOwnedGuardPattern()
 	 * @generated
 	 */
-	void setGuardPattern(GuardPatternCS value);
+	void setOwnedGuardPattern(GuardPatternCS value);
 
 	/**
-	 * Returns the value of the '<em><b>Bottom Pattern</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Bottom Pattern</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Bottom Pattern</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Bottom Pattern</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Bottom Pattern</em>' containment reference.
-	 * @see #setBottomPattern(BottomPatternCS)
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAreaCS_BottomPattern()
+	 * @return the value of the '<em>Owned Bottom Pattern</em>' containment reference.
+	 * @see #setOwnedBottomPattern(BottomPatternCS)
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAreaCS_OwnedBottomPattern()
 	 * @model containment="true"
 	 * @generated
 	 */
-	BottomPatternCS getBottomPattern();
+	BottomPatternCS getOwnedBottomPattern();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS#getBottomPattern <em>Bottom Pattern</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS#getOwnedBottomPattern <em>Owned Bottom Pattern</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Bottom Pattern</em>' containment reference.
-	 * @see #getBottomPattern()
+	 * @param value the new value of the '<em>Owned Bottom Pattern</em>' containment reference.
+	 * @see #getOwnedBottomPattern()
 	 * @generated
 	 */
-	void setBottomPattern(BottomPatternCS value);
+	void setOwnedBottomPattern(BottomPatternCS value);
 
 } // AreaCS

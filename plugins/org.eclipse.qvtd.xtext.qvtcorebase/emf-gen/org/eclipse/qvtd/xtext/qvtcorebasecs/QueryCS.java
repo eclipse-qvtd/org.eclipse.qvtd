@@ -25,10 +25,10 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getPathName <em>Path Name</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getOwnedPathName <em>Owned Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getTransformation <em>Transformation</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getInputParamDeclaration <em>Input Param Declaration</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getExpression <em>Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getOwnedParameters <em>Owned Parameters</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getOwnedExpression <em>Owned Expression</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getQueryCS()
@@ -37,30 +37,30 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  */
 public interface QueryCS extends TypedElementCS {
 	/**
-	 * Returns the value of the '<em><b>Path Name</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Path Name</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Path Name</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Path Name</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Path Name</em>' containment reference.
-	 * @see #setPathName(PathNameCS)
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getQueryCS_PathName()
+	 * @return the value of the '<em>Owned Path Name</em>' containment reference.
+	 * @see #setOwnedPathName(PathNameCS)
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getQueryCS_OwnedPathName()
 	 * @model containment="true"
 	 * @generated
 	 */
-	PathNameCS getPathName();
+	PathNameCS getOwnedPathName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getPathName <em>Path Name</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getOwnedPathName <em>Owned Path Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Path Name</em>' containment reference.
-	 * @see #getPathName()
+	 * @param value the new value of the '<em>Owned Path Name</em>' containment reference.
+	 * @see #getOwnedPathName()
 	 * @generated
 	 */
-	void setPathName(PathNameCS value);
+	void setOwnedPathName(PathNameCS value);
 
 	/**
 	 * Returns the value of the '<em><b>Transformation</b></em>' reference.
@@ -78,45 +78,45 @@ public interface QueryCS extends TypedElementCS {
 	Transformation getTransformation();
 
 	/**
-	 * Returns the value of the '<em><b>Input Param Declaration</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Owned Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtcorebasecs.ParamDeclarationCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Input Param Declaration</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Owned Parameters</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Input Param Declaration</em>' containment reference list.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getQueryCS_InputParamDeclaration()
+	 * @return the value of the '<em>Owned Parameters</em>' containment reference list.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getQueryCS_OwnedParameters()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<ParamDeclarationCS> getInputParamDeclaration();
+	EList<ParamDeclarationCS> getOwnedParameters();
 
 	/**
-	 * Returns the value of the '<em><b>Expression</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Expression</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Expression</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Expression</em>' containment reference.
-	 * @see #setExpression(ExpCS)
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getQueryCS_Expression()
+	 * @return the value of the '<em>Owned Expression</em>' containment reference.
+	 * @see #setOwnedExpression(ExpCS)
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getQueryCS_OwnedExpression()
 	 * @model containment="true"
 	 * @generated
 	 */
-	ExpCS getExpression();
+	ExpCS getOwnedExpression();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getExpression <em>Expression</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getOwnedExpression <em>Owned Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Expression</em>' containment reference.
-	 * @see #getExpression()
+	 * @param value the new value of the '<em>Owned Expression</em>' containment reference.
+	 * @see #getOwnedExpression()
 	 * @generated
 	 */
-	void setExpression(ExpCS value);
+	void setOwnedExpression(ExpCS value);
 
 } // QueryCS

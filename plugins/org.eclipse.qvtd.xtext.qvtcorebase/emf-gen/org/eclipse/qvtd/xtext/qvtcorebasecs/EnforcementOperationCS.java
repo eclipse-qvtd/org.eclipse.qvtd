@@ -22,8 +22,8 @@ import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS#isDeletion <em>Deletion</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS#getOperationCall <em>Operation Call</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS#isIsDeletion <em>Is Deletion</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS#getOwnedOperationCall <em>Owned Operation Call</em>}</li>
  * </ul>
  *
  * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getEnforcementOperationCS()
@@ -32,55 +32,55 @@ import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
  */
 public interface EnforcementOperationCS extends ModelElementCS {
 	/**
-	 * Returns the value of the '<em><b>Deletion</b></em>' attribute.
+	 * Returns the value of the '<em><b>Is Deletion</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Deletion</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Is Deletion</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Deletion</em>' attribute.
-	 * @see #setDeletion(boolean)
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getEnforcementOperationCS_Deletion()
+	 * @return the value of the '<em>Is Deletion</em>' attribute.
+	 * @see #setIsDeletion(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getEnforcementOperationCS_IsDeletion()
 	 * @model
 	 * @generated
 	 */
-	boolean isDeletion();
+	boolean isIsDeletion();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS#isDeletion <em>Deletion</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS#isIsDeletion <em>Is Deletion</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Deletion</em>' attribute.
-	 * @see #isDeletion()
+	 * @param value the new value of the '<em>Is Deletion</em>' attribute.
+	 * @see #isIsDeletion()
 	 * @generated
 	 */
-	void setDeletion(boolean value);
+	void setIsDeletion(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Operation Call</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Operation Call</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Operation Call</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owned Operation Call</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Operation Call</em>' containment reference.
-	 * @see #setOperationCall(NameExpCS)
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getEnforcementOperationCS_OperationCall()
+	 * @return the value of the '<em>Owned Operation Call</em>' containment reference.
+	 * @see #setOwnedOperationCall(NameExpCS)
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getEnforcementOperationCS_OwnedOperationCall()
 	 * @model containment="true"
 	 * @generated
 	 */
-	NameExpCS getOperationCall();
+	NameExpCS getOwnedOperationCall();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS#getOperationCall <em>Operation Call</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS#getOwnedOperationCall <em>Owned Operation Call</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Operation Call</em>' containment reference.
-	 * @see #getOperationCall()
+	 * @param value the new value of the '<em>Owned Operation Call</em>' containment reference.
+	 * @see #getOwnedOperationCall()
 	 * @generated
 	 */
-	void setOperationCall(NameExpCS value);
+	void setOwnedOperationCall(NameExpCS value);
 
 } // EnforcementOperationCS

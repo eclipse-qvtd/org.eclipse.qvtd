@@ -19,11 +19,11 @@ import "http://www.eclipse.org/qvt/2015/QVTcoreBase" as qvtcorebase
 import "http://www.eclipse.org/qvt/2015/QVTcoreBaseCS"
 		
 BottomPatternCS:
-	( '{' (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS)
-		(',' (unrealizedVariables+=UnrealizedVariableCS | realizedVariables+=RealizedVariableCS))*
-		('|' constraints+=PredicateOrAssignmentCS*)? '}'
+	( '{' (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS)
+		(',' (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS))*
+		('|' ownedConstraints+=PredicateOrAssignmentCS*)? '}'
 	)
-	| ( {BottomPatternCS} '{' constraints+=PredicateOrAssignmentCS* '}'
+	| ( {BottomPatternCS} '{' ownedConstraints+=PredicateOrAssignmentCS* '}'
 	)
 ;
 	
@@ -35,10 +35,10 @@ DirectionCS: {DirectionCS} name=UnrestrictedName?
 //EnforcementOperationCS: ('creation'|'deletion') ExpCS ';';
 	
 GuardPatternCS:
-	({GuardPatternCS} '(' (unrealizedVariables+=GuardVariableCS (',' unrealizedVariables+=GuardVariableCS)*)?
+	({GuardPatternCS} '(' (ownedUnrealizedVariables+=GuardVariableCS (',' ownedUnrealizedVariables+=GuardVariableCS)*)?
 	   ('|' ownedPredicates+=PredicateCS*)? ')' )
 	|
-	({GuardPatternCS} '(' (unrealizedVariables+=GuardVariableCS (',' unrealizedVariables+=GuardVariableCS)*)? ')' )	// FIXME Redundant but avoids serializer failure on Class2RDBMS.qvtc
+	({GuardPatternCS} '(' (ownedUnrealizedVariables+=GuardVariableCS (',' ownedUnrealizedVariables+=GuardVariableCS)*)? ')' )	// FIXME Redundant but avoids serializer failure on Class2RDBMS.qvtc
 	|
 	({GuardPatternCS} '(' (ownedPredicates+=PredicateCS*) ')' )
 ;
@@ -55,8 +55,8 @@ ImportCS returns base::ImportCS:
 LibraryCS returns base::LibraryCS:
 	'library' referredPackage=[pivot::Package|URI] ';';
 	
-NamedDomainCS returns DomainCS: check?='check'? enforce?='enforce'? direction=[qvtbase::TypedModel|UnrestrictedName]
-	guardPattern=GuardPatternCS bottomPattern=BottomPatternCS;
+NamedDomainCS returns DomainCS: isCheck?='check'? isEnforce?='enforce'? direction=[qvtbase::TypedModel|UnrestrictedName]
+	ownedGuardPattern=GuardPatternCS ownedBottomPattern=BottomPatternCS;
 	
 ParamDeclarationCS: name=UnrestrictedName ':' ownedType=TypeExpCS;
 
@@ -65,11 +65,11 @@ PredicateCS: ownedCondition=ExpCS ';';
 //Constraint ::= Predicate | Assignment
 //Predicate ::= BooleanOCLExpr
 //Assignement ::= [�default�] SlotOwnerOCLExpr�.�PropertyName �:=� ValueOCLExpr
-PredicateOrAssignmentCS returns AssignmentCS: default?='default'? target=ExpCS (':=' initialiser=ExpCS)? ';';
+PredicateOrAssignmentCS returns AssignmentCS: isDefault?='default'? ownedTarget=ExpCS (':=' ownedInitExpression=ExpCS)? ';';
 		
-QueryCS: 'query' pathName=ScopeNameCS name=UnrestrictedName
-		'(' (inputParamDeclaration+=ParamDeclarationCS (',' inputParamDeclaration+=ParamDeclarationCS)*)? ')'
-		':' ownedType=TypeExpCS (';' | '{' expression=ExpCS '}');
+QueryCS: 'query' ownedPathName=ScopeNameCS name=UnrestrictedName
+		'(' (ownedParameters+=ParamDeclarationCS (',' ownedParameters+=ParamDeclarationCS)*)? ')'
+		':' ownedType=TypeExpCS (';' | '{' ownedExpression=ExpCS '}');
 //<query> ::= 'query' <PathNameCS> 
 //            '(' [<paramDeclaration> (',' <paramDeclaration>)*] ')'
 //      	  ':' <TypeCS>
@@ -79,7 +79,7 @@ ScopeNameCS returns base::PathNameCS:
 	ownedPathElements+=FirstPathElementCS '::' (ownedPathElements+=NextPathElementCS '::')*;
 
 TransformationCS:
-	'transformation' pathName=ScopeNameCS? name=UnreservedName '{' (directions+=DirectionCS ';')* '}';
+	'transformation' ownedPathName=ScopeNameCS? name=UnreservedName '{' (ownedDirections+=DirectionCS ';')* '}';
 	
 //Variable := VariableName �:� TypeDeclaration
 UnrealizedVariableCS: name=UnrestrictedName (':' ownedType=TypeExpCS)? (':=' ownedInitExpression=ExpCS)?;
@@ -87,7 +87,7 @@ UnrealizedVariableCS: name=UnrestrictedName (':' ownedType=TypeExpCS)? (':=' own
 //RealizedVariable := �realized� VariableName �:� TypeDeclaration
 RealizedVariableCS: 'realize' name=UnrestrictedName ':' ownedType=TypeExpCS;
 	
-UnnamedDomainCS returns DomainCS: {DomainCS} guardPattern=GuardPatternCS bottomPattern=BottomPatternCS;
+UnnamedDomainCS returns DomainCS: {DomainCS} ownedGuardPattern=GuardPatternCS ownedBottomPattern=BottomPatternCS;
 		
 UnrestrictedName returns ecore::EString:
 	EssentialOCLUnrestrictedName

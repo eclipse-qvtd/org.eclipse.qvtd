@@ -114,8 +114,8 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 
 	@Override
 	public Continuation<?> visitAssignmentCS(@NonNull AssignmentCS csElement) {
-		ExpCS csTarget = csElement.getTarget();
-		if (csElement.getInitialiser() == null) {
+		ExpCS csTarget = csElement.getOwnedTarget();
+		if (csElement.getOwnedInitExpression() == null) {
 			context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csElement);
 		}
 		else if (csTarget instanceof NameExpCS) {
@@ -140,10 +140,10 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 			}			
 		}
 		@NonNull Mapping pivotElement = refreshNamedElement(Mapping.class, QVTcorePackage.Literals.MAPPING, csElement);
-		DomainCS csMiddle = csElement.getMiddle();
+		DomainCS csMiddle = csElement.getOwnedMiddle();
 		if (csMiddle != null) {
-			pivotElement.setBottomPattern(PivotUtil.getPivot(BottomPattern.class, csMiddle.getBottomPattern()));
-			pivotElement.setGuardPattern(PivotUtil.getPivot(GuardPattern.class, csMiddle.getGuardPattern()));
+			pivotElement.setBottomPattern(PivotUtil.getPivot(BottomPattern.class, csMiddle.getOwnedBottomPattern()));
+			pivotElement.setGuardPattern(PivotUtil.getPivot(GuardPattern.class, csMiddle.getOwnedGuardPattern()));
 		}
 		else {
 			BottomPattern bottomPattern = pivotElement.getBottomPattern();
@@ -166,7 +166,7 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 				pivotElement.setGuardPattern(guardPattern);
 			}
 		}
-		context.refreshPivotList(CoreDomain.class, pivotElement.getDomain(), csElement.getDomains());
+		context.refreshPivotList(CoreDomain.class, pivotElement.getDomain(), csElement.getOwnedDomains());
 		context.refreshPivotList(Mapping.class, pivotElement.getLocal(), csElement.getOwnedComposedMappings());
 		return null;
 	}

@@ -82,11 +82,11 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		if (asArea instanceof Mapping) {
 			List<Element> asConstraints = new ArrayList<Element>(asBottomPattern.getAssignment());
 			asConstraints.addAll(asBottomPattern.getPredicate());
-			context.refreshList(csBottomPattern.getConstraints(), context.visitDeclarations(AssignmentCS.class, asConstraints, null));
+			context.refreshList(csBottomPattern.getOwnedConstraints(), context.visitDeclarations(AssignmentCS.class, asConstraints, null));
 		}
 		else {
-			context.refreshList(csBottomPattern.getRealizedVariables(), context.visitDeclarations(RealizedVariableCS.class, asBottomPattern.getRealizedVariable(), null));
-			context.refreshList(csBottomPattern.getUnrealizedVariables(), context.visitDeclarations(UnrealizedVariableCS.class, asBottomPattern.getVariable(), null));
+			context.refreshList(csBottomPattern.getOwnedRealizedVariables(), context.visitDeclarations(RealizedVariableCS.class, asBottomPattern.getRealizedVariable(), null));
+			context.refreshList(csBottomPattern.getOwnedUnrealizedVariables(), context.visitDeclarations(UnrealizedVariableCS.class, asBottomPattern.getVariable(), null));
 		}
 		return csBottomPattern;
 	}
@@ -100,7 +100,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 			context.refreshList(csGuardPattern.getOwnedPredicates(), context.visitDeclarations(PredicateCS.class, asGuardPattern.getPredicate(), null));
 		}
 		else {
-			context.refreshList(csGuardPattern.getUnrealizedVariables(), context.visitDeclarations(UnrealizedVariableCS.class, asGuardPattern.getVariable(), null));
+			context.refreshList(csGuardPattern.getOwnedUnrealizedVariables(), context.visitDeclarations(UnrealizedVariableCS.class, asGuardPattern.getVariable(), null));
 		}
 		return csGuardPattern;
 	}
@@ -170,12 +170,12 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 		MappingCS csMapping = context.refreshNamedElement(MappingCS.class, QVTimperativeCSPackage.Literals.MAPPING_CS, asMapping);
 		csMapping.setPivot(asMapping);
 		csMapping.setIn(asMapping.getTransformation());
-		context.refreshList(csMapping.getDomains(), context.visitDeclarations(DomainCS.class, asMapping.getDomain(), null));
+		context.refreshList(csMapping.getOwnedDomains(), context.visitDeclarations(DomainCS.class, asMapping.getDomain(), null));
 		DomainCS csDomain = context.refreshElement(DomainCS.class, QVTcoreBaseCSPackage.Literals.DOMAIN_CS, asMapping);
 		csDomain.setPivot(null);		// stop comment duplication
-		csDomain.setBottomPattern(context.visitDeclaration(BottomPatternCS.class, asMapping.getBottomPattern()));
-		csDomain.setGuardPattern(context.visitDeclaration(GuardPatternCS.class, asMapping.getGuardPattern()));
-		csMapping.setMiddle(csDomain);
+		csDomain.setOwnedBottomPattern(context.visitDeclaration(BottomPatternCS.class, asMapping.getBottomPattern()));
+		csDomain.setOwnedGuardPattern(context.visitDeclaration(GuardPatternCS.class, asMapping.getGuardPattern()));
+		csMapping.setOwnedMiddle(csDomain);
 		csMapping.setOwnedMappingSequence(context.visitDeclaration(MappingSequenceCS.class, asMapping.getMappingStatement()));
 		return csMapping;
 	}

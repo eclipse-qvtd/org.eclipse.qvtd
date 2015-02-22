@@ -131,13 +131,13 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int ABSTRACT_MAPPING_CS__NAME = BaseCSPackage.NAMED_ELEMENT_CS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Domains</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Domains</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_MAPPING_CS__DOMAINS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int ABSTRACT_MAPPING_CS__OWNED_DOMAINS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>In</b></em>' reference.
@@ -149,13 +149,13 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int ABSTRACT_MAPPING_CS__IN = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Middle</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Middle</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_MAPPING_CS__MIDDLE = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int ABSTRACT_MAPPING_CS__OWNED_MIDDLE = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Mapping CS</em>' class.
@@ -231,22 +231,22 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int AREA_CS__NAME = BaseCSPackage.NAMED_ELEMENT_CS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Guard Pattern</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Guard Pattern</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AREA_CS__GUARD_PATTERN = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int AREA_CS__OWNED_GUARD_PATTERN = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Bottom Pattern</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Bottom Pattern</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AREA_CS__BOTTOM_PATTERN = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int AREA_CS__OWNED_BOTTOM_PATTERN = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Area CS</em>' class.
@@ -376,31 +376,31 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int ASSIGNMENT_CS__PRECEDENCE = EssentialOCLCSPackage.EXP_CS__PRECEDENCE;
 
 	/**
-	 * The feature id for the '<em><b>Default</b></em>' attribute.
+	 * The feature id for the '<em><b>Is Default</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT_CS__DEFAULT = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 0;
+	int ASSIGNMENT_CS__IS_DEFAULT = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Target</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Target</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT_CS__TARGET = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 1;
+	int ASSIGNMENT_CS__OWNED_TARGET = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Initialiser</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Init Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGNMENT_CS__INITIALISER = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 2;
+	int ASSIGNMENT_CS__OWNED_INIT_EXPRESSION = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Assignment CS</em>' class.
@@ -467,13 +467,13 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int PATTERN_CS__OWNED_ANNOTATIONS = BaseCSPackage.MODEL_ELEMENT_CS__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Unrealized Variables</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Unrealized Variables</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PATTERN_CS__UNREALIZED_VARIABLES = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
+	int PATTERN_CS__OWNED_UNREALIZED_VARIABLES = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Pattern CS</em>' class.
@@ -540,40 +540,40 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int BOTTOM_PATTERN_CS__OWNED_ANNOTATIONS = PATTERN_CS__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Unrealized Variables</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Unrealized Variables</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOTTOM_PATTERN_CS__UNREALIZED_VARIABLES = PATTERN_CS__UNREALIZED_VARIABLES;
+	int BOTTOM_PATTERN_CS__OWNED_UNREALIZED_VARIABLES = PATTERN_CS__OWNED_UNREALIZED_VARIABLES;
 
 	/**
-	 * The feature id for the '<em><b>Enforcement Operations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Enforcement Operations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOTTOM_PATTERN_CS__ENFORCEMENT_OPERATIONS = PATTERN_CS_FEATURE_COUNT + 0;
+	int BOTTOM_PATTERN_CS__OWNED_ENFORCEMENT_OPERATIONS = PATTERN_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Realized Variables</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Realized Variables</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOTTOM_PATTERN_CS__REALIZED_VARIABLES = PATTERN_CS_FEATURE_COUNT + 1;
+	int BOTTOM_PATTERN_CS__OWNED_REALIZED_VARIABLES = PATTERN_CS_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Constraints</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOTTOM_PATTERN_CS__CONSTRAINTS = PATTERN_CS_FEATURE_COUNT + 2;
+	int BOTTOM_PATTERN_CS__OWNED_CONSTRAINTS = PATTERN_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Bottom Pattern CS</em>' class.
@@ -740,40 +740,40 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int DOMAIN_CS__NAME = AREA_CS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Guard Pattern</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Guard Pattern</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_CS__GUARD_PATTERN = AREA_CS__GUARD_PATTERN;
+	int DOMAIN_CS__OWNED_GUARD_PATTERN = AREA_CS__OWNED_GUARD_PATTERN;
 
 	/**
-	 * The feature id for the '<em><b>Bottom Pattern</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Bottom Pattern</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_CS__BOTTOM_PATTERN = AREA_CS__BOTTOM_PATTERN;
+	int DOMAIN_CS__OWNED_BOTTOM_PATTERN = AREA_CS__OWNED_BOTTOM_PATTERN;
 
 	/**
-	 * The feature id for the '<em><b>Check</b></em>' attribute.
+	 * The feature id for the '<em><b>Is Check</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_CS__CHECK = AREA_CS_FEATURE_COUNT + 0;
+	int DOMAIN_CS__IS_CHECK = AREA_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Enforce</b></em>' attribute.
+	 * The feature id for the '<em><b>Is Enforce</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_CS__ENFORCE = AREA_CS_FEATURE_COUNT + 1;
+	int DOMAIN_CS__IS_ENFORCE = AREA_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Direction</b></em>' reference.
@@ -849,22 +849,22 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int ENFORCEMENT_OPERATION_CS__OWNED_ANNOTATIONS = BaseCSPackage.MODEL_ELEMENT_CS__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Deletion</b></em>' attribute.
+	 * The feature id for the '<em><b>Is Deletion</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENFORCEMENT_OPERATION_CS__DELETION = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
+	int ENFORCEMENT_OPERATION_CS__IS_DELETION = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Operation Call</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Operation Call</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENFORCEMENT_OPERATION_CS__OPERATION_CALL = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
+	int ENFORCEMENT_OPERATION_CS__OWNED_OPERATION_CALL = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Enforcement Operation CS</em>' class.
@@ -931,13 +931,13 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int GUARD_PATTERN_CS__OWNED_ANNOTATIONS = PATTERN_CS__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Unrealized Variables</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Unrealized Variables</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GUARD_PATTERN_CS__UNREALIZED_VARIABLES = PATTERN_CS__UNREALIZED_VARIABLES;
+	int GUARD_PATTERN_CS__OWNED_UNREALIZED_VARIABLES = PATTERN_CS__OWNED_UNREALIZED_VARIABLES;
 
 	/**
 	 * The feature id for the '<em><b>Owned Predicates</b></em>' containment reference list.
@@ -1285,13 +1285,13 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int QUERY_CS__QUALIFIERS = BaseCSPackage.TYPED_ELEMENT_CS__QUALIFIERS;
 
 	/**
-	 * The feature id for the '<em><b>Path Name</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Path Name</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS__PATH_NAME = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int QUERY_CS__OWNED_PATH_NAME = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Transformation</b></em>' reference.
@@ -1303,22 +1303,22 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int QUERY_CS__TRANSFORMATION = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Input Param Declaration</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS__INPUT_PARAM_DECLARATION = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int QUERY_CS__OWNED_PARAMETERS = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int QUERY_CS__EXPRESSION = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 3;
+	int QUERY_CS__OWNED_EXPRESSION = BaseCSPackage.TYPED_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Query CS</em>' class.
@@ -1630,13 +1630,13 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int TRANSFORMATION_CS__OWNING_PACKAGE = BaseCSPackage.CLASS_CS__OWNING_PACKAGE;
 
 	/**
-	 * The feature id for the '<em><b>Path Name</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Path Name</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__PATH_NAME = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 0;
+	int TRANSFORMATION_CS__OWNED_PATH_NAME = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Package</b></em>' reference.
@@ -1648,13 +1648,13 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int TRANSFORMATION_CS__PACKAGE = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Directions</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Directions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__DIRECTIONS = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 2;
+	int TRANSFORMATION_CS__OWNED_DIRECTIONS = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Transformation CS</em>' class.
@@ -1786,15 +1786,15 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	EClass getAbstractMappingCS();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getDomains <em>Domains</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getOwnedDomains <em>Owned Domains</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Domains</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getDomains()
+	 * @return the meta object for the containment reference list '<em>Owned Domains</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getOwnedDomains()
 	 * @see #getAbstractMappingCS()
 	 * @generated
 	 */
-	EReference getAbstractMappingCS_Domains();
+	EReference getAbstractMappingCS_OwnedDomains();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getIn <em>In</em>}'.
@@ -1808,15 +1808,15 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	EReference getAbstractMappingCS_In();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getMiddle <em>Middle</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getOwnedMiddle <em>Owned Middle</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Middle</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getMiddle()
+	 * @return the meta object for the containment reference '<em>Owned Middle</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getOwnedMiddle()
 	 * @see #getAbstractMappingCS()
 	 * @generated
 	 */
-	EReference getAbstractMappingCS_Middle();
+	EReference getAbstractMappingCS_OwnedMiddle();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS <em>Area CS</em>}'.
@@ -1829,26 +1829,26 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	EClass getAreaCS();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS#getGuardPattern <em>Guard Pattern</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS#getOwnedGuardPattern <em>Owned Guard Pattern</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Guard Pattern</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS#getGuardPattern()
+	 * @return the meta object for the containment reference '<em>Owned Guard Pattern</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS#getOwnedGuardPattern()
 	 * @see #getAreaCS()
 	 * @generated
 	 */
-	EReference getAreaCS_GuardPattern();
+	EReference getAreaCS_OwnedGuardPattern();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS#getBottomPattern <em>Bottom Pattern</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS#getOwnedBottomPattern <em>Owned Bottom Pattern</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Bottom Pattern</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS#getBottomPattern()
+	 * @return the meta object for the containment reference '<em>Owned Bottom Pattern</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS#getOwnedBottomPattern()
 	 * @see #getAreaCS()
 	 * @generated
 	 */
-	EReference getAreaCS_BottomPattern();
+	EReference getAreaCS_OwnedBottomPattern();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS <em>Assignment CS</em>}'.
@@ -1861,37 +1861,37 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	EClass getAssignmentCS();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#isDefault <em>Default</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#isIsDefault <em>Is Default</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Default</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#isDefault()
+	 * @return the meta object for the attribute '<em>Is Default</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#isIsDefault()
 	 * @see #getAssignmentCS()
 	 * @generated
 	 */
-	EAttribute getAssignmentCS_Default();
+	EAttribute getAssignmentCS_IsDefault();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getTarget <em>Target</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getOwnedTarget <em>Owned Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Target</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getTarget()
+	 * @return the meta object for the containment reference '<em>Owned Target</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getOwnedTarget()
 	 * @see #getAssignmentCS()
 	 * @generated
 	 */
-	EReference getAssignmentCS_Target();
+	EReference getAssignmentCS_OwnedTarget();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getInitialiser <em>Initialiser</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getOwnedInitExpression <em>Owned Init Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Initialiser</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getInitialiser()
+	 * @return the meta object for the containment reference '<em>Owned Init Expression</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getOwnedInitExpression()
 	 * @see #getAssignmentCS()
 	 * @generated
 	 */
-	EReference getAssignmentCS_Initialiser();
+	EReference getAssignmentCS_OwnedInitExpression();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS <em>Bottom Pattern CS</em>}'.
@@ -1904,37 +1904,37 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	EClass getBottomPatternCS();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getEnforcementOperations <em>Enforcement Operations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getOwnedEnforcementOperations <em>Owned Enforcement Operations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Enforcement Operations</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getEnforcementOperations()
+	 * @return the meta object for the containment reference list '<em>Owned Enforcement Operations</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getOwnedEnforcementOperations()
 	 * @see #getBottomPatternCS()
 	 * @generated
 	 */
-	EReference getBottomPatternCS_EnforcementOperations();
+	EReference getBottomPatternCS_OwnedEnforcementOperations();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getRealizedVariables <em>Realized Variables</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getOwnedRealizedVariables <em>Owned Realized Variables</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Realized Variables</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getRealizedVariables()
+	 * @return the meta object for the containment reference list '<em>Owned Realized Variables</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getOwnedRealizedVariables()
 	 * @see #getBottomPatternCS()
 	 * @generated
 	 */
-	EReference getBottomPatternCS_RealizedVariables();
+	EReference getBottomPatternCS_OwnedRealizedVariables();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getConstraints <em>Constraints</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getOwnedConstraints <em>Owned Constraints</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Constraints</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getConstraints()
+	 * @return the meta object for the containment reference list '<em>Owned Constraints</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS#getOwnedConstraints()
 	 * @see #getBottomPatternCS()
 	 * @generated
 	 */
-	EReference getBottomPatternCS_Constraints();
+	EReference getBottomPatternCS_OwnedConstraints();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS <em>Direction CS</em>}'.
@@ -1979,26 +1979,26 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	EClass getDomainCS();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS#isCheck <em>Check</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS#isIsCheck <em>Is Check</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Check</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS#isCheck()
+	 * @return the meta object for the attribute '<em>Is Check</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS#isIsCheck()
 	 * @see #getDomainCS()
 	 * @generated
 	 */
-	EAttribute getDomainCS_Check();
+	EAttribute getDomainCS_IsCheck();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS#isEnforce <em>Enforce</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS#isIsEnforce <em>Is Enforce</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Enforce</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS#isEnforce()
+	 * @return the meta object for the attribute '<em>Is Enforce</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS#isIsEnforce()
 	 * @see #getDomainCS()
 	 * @generated
 	 */
-	EAttribute getDomainCS_Enforce();
+	EAttribute getDomainCS_IsEnforce();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS#getDirection <em>Direction</em>}'.
@@ -2022,26 +2022,26 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	EClass getEnforcementOperationCS();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS#isDeletion <em>Deletion</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS#isIsDeletion <em>Is Deletion</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Deletion</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS#isDeletion()
+	 * @return the meta object for the attribute '<em>Is Deletion</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS#isIsDeletion()
 	 * @see #getEnforcementOperationCS()
 	 * @generated
 	 */
-	EAttribute getEnforcementOperationCS_Deletion();
+	EAttribute getEnforcementOperationCS_IsDeletion();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS#getOperationCall <em>Operation Call</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS#getOwnedOperationCall <em>Owned Operation Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Operation Call</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS#getOperationCall()
+	 * @return the meta object for the containment reference '<em>Owned Operation Call</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS#getOwnedOperationCall()
 	 * @see #getEnforcementOperationCS()
 	 * @generated
 	 */
-	EReference getEnforcementOperationCS_OperationCall();
+	EReference getEnforcementOperationCS_OwnedOperationCall();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS <em>Guard Pattern CS</em>}'.
@@ -2085,15 +2085,15 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	EClass getPatternCS();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.PatternCS#getUnrealizedVariables <em>Unrealized Variables</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.PatternCS#getOwnedUnrealizedVariables <em>Owned Unrealized Variables</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Unrealized Variables</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.PatternCS#getUnrealizedVariables()
+	 * @return the meta object for the containment reference list '<em>Owned Unrealized Variables</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.PatternCS#getOwnedUnrealizedVariables()
 	 * @see #getPatternCS()
 	 * @generated
 	 */
-	EReference getPatternCS_UnrealizedVariables();
+	EReference getPatternCS_OwnedUnrealizedVariables();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS <em>Predicate CS</em>}'.
@@ -2127,15 +2127,15 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	EClass getQueryCS();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getPathName <em>Path Name</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getOwnedPathName <em>Owned Path Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Path Name</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getPathName()
+	 * @return the meta object for the containment reference '<em>Owned Path Name</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getOwnedPathName()
 	 * @see #getQueryCS()
 	 * @generated
 	 */
-	EReference getQueryCS_PathName();
+	EReference getQueryCS_OwnedPathName();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getTransformation <em>Transformation</em>}'.
@@ -2149,26 +2149,26 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	EReference getQueryCS_Transformation();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getInputParamDeclaration <em>Input Param Declaration</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getOwnedParameters <em>Owned Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Input Param Declaration</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getInputParamDeclaration()
+	 * @return the meta object for the containment reference list '<em>Owned Parameters</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getOwnedParameters()
 	 * @see #getQueryCS()
 	 * @generated
 	 */
-	EReference getQueryCS_InputParamDeclaration();
+	EReference getQueryCS_OwnedParameters();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getExpression <em>Expression</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getOwnedExpression <em>Owned Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Expression</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getExpression()
+	 * @return the meta object for the containment reference '<em>Owned Expression</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS#getOwnedExpression()
 	 * @see #getQueryCS()
 	 * @generated
 	 */
-	EReference getQueryCS_Expression();
+	EReference getQueryCS_OwnedExpression();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.RealizeableVariableCS <em>Realizeable Variable CS</em>}'.
@@ -2201,15 +2201,15 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	EClass getTransformationCS();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS#getPathName <em>Path Name</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS#getOwnedPathName <em>Owned Path Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Path Name</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS#getPathName()
+	 * @return the meta object for the containment reference '<em>Owned Path Name</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS#getOwnedPathName()
 	 * @see #getTransformationCS()
 	 * @generated
 	 */
-	EReference getTransformationCS_PathName();
+	EReference getTransformationCS_OwnedPathName();
 
 	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS#getPackage <em>Package</em>}'.
@@ -2223,15 +2223,15 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	EReference getTransformationCS_Package();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS#getDirections <em>Directions</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS#getOwnedDirections <em>Owned Directions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Directions</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS#getDirections()
+	 * @return the meta object for the containment reference list '<em>Owned Directions</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS#getOwnedDirections()
 	 * @see #getTransformationCS()
 	 * @generated
 	 */
-	EReference getTransformationCS_Directions();
+	EReference getTransformationCS_OwnedDirections();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.UnrealizedVariableCS <em>Unrealized Variable CS</em>}'.
@@ -2287,12 +2287,12 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 		EClass ABSTRACT_MAPPING_CS = eINSTANCE.getAbstractMappingCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Domains</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Domains</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ABSTRACT_MAPPING_CS__DOMAINS = eINSTANCE.getAbstractMappingCS_Domains();
+		EReference ABSTRACT_MAPPING_CS__OWNED_DOMAINS = eINSTANCE.getAbstractMappingCS_OwnedDomains();
 
 		/**
 		 * The meta object literal for the '<em><b>In</b></em>' reference feature.
@@ -2303,12 +2303,12 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 		EReference ABSTRACT_MAPPING_CS__IN = eINSTANCE.getAbstractMappingCS_In();
 
 		/**
-		 * The meta object literal for the '<em><b>Middle</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Middle</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ABSTRACT_MAPPING_CS__MIDDLE = eINSTANCE.getAbstractMappingCS_Middle();
+		EReference ABSTRACT_MAPPING_CS__OWNED_MIDDLE = eINSTANCE.getAbstractMappingCS_OwnedMiddle();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AreaCSImpl <em>Area CS</em>}' class.
@@ -2321,20 +2321,20 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 		EClass AREA_CS = eINSTANCE.getAreaCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Guard Pattern</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Guard Pattern</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference AREA_CS__GUARD_PATTERN = eINSTANCE.getAreaCS_GuardPattern();
+		EReference AREA_CS__OWNED_GUARD_PATTERN = eINSTANCE.getAreaCS_OwnedGuardPattern();
 
 		/**
-		 * The meta object literal for the '<em><b>Bottom Pattern</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Bottom Pattern</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference AREA_CS__BOTTOM_PATTERN = eINSTANCE.getAreaCS_BottomPattern();
+		EReference AREA_CS__OWNED_BOTTOM_PATTERN = eINSTANCE.getAreaCS_OwnedBottomPattern();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AssignmentCSImpl <em>Assignment CS</em>}' class.
@@ -2347,28 +2347,28 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 		EClass ASSIGNMENT_CS = eINSTANCE.getAssignmentCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Default</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Is Default</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ASSIGNMENT_CS__DEFAULT = eINSTANCE.getAssignmentCS_Default();
+		EAttribute ASSIGNMENT_CS__IS_DEFAULT = eINSTANCE.getAssignmentCS_IsDefault();
 
 		/**
-		 * The meta object literal for the '<em><b>Target</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Target</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ASSIGNMENT_CS__TARGET = eINSTANCE.getAssignmentCS_Target();
+		EReference ASSIGNMENT_CS__OWNED_TARGET = eINSTANCE.getAssignmentCS_OwnedTarget();
 
 		/**
-		 * The meta object literal for the '<em><b>Initialiser</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Init Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ASSIGNMENT_CS__INITIALISER = eINSTANCE.getAssignmentCS_Initialiser();
+		EReference ASSIGNMENT_CS__OWNED_INIT_EXPRESSION = eINSTANCE.getAssignmentCS_OwnedInitExpression();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.BottomPatternCSImpl <em>Bottom Pattern CS</em>}' class.
@@ -2381,28 +2381,28 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 		EClass BOTTOM_PATTERN_CS = eINSTANCE.getBottomPatternCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Enforcement Operations</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Enforcement Operations</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BOTTOM_PATTERN_CS__ENFORCEMENT_OPERATIONS = eINSTANCE.getBottomPatternCS_EnforcementOperations();
+		EReference BOTTOM_PATTERN_CS__OWNED_ENFORCEMENT_OPERATIONS = eINSTANCE.getBottomPatternCS_OwnedEnforcementOperations();
 
 		/**
-		 * The meta object literal for the '<em><b>Realized Variables</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Realized Variables</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BOTTOM_PATTERN_CS__REALIZED_VARIABLES = eINSTANCE.getBottomPatternCS_RealizedVariables();
+		EReference BOTTOM_PATTERN_CS__OWNED_REALIZED_VARIABLES = eINSTANCE.getBottomPatternCS_OwnedRealizedVariables();
 
 		/**
-		 * The meta object literal for the '<em><b>Constraints</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Constraints</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BOTTOM_PATTERN_CS__CONSTRAINTS = eINSTANCE.getBottomPatternCS_Constraints();
+		EReference BOTTOM_PATTERN_CS__OWNED_CONSTRAINTS = eINSTANCE.getBottomPatternCS_OwnedConstraints();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.DirectionCSImpl <em>Direction CS</em>}' class.
@@ -2441,20 +2441,20 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 		EClass DOMAIN_CS = eINSTANCE.getDomainCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Check</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Is Check</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DOMAIN_CS__CHECK = eINSTANCE.getDomainCS_Check();
+		EAttribute DOMAIN_CS__IS_CHECK = eINSTANCE.getDomainCS_IsCheck();
 
 		/**
-		 * The meta object literal for the '<em><b>Enforce</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Is Enforce</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute DOMAIN_CS__ENFORCE = eINSTANCE.getDomainCS_Enforce();
+		EAttribute DOMAIN_CS__IS_ENFORCE = eINSTANCE.getDomainCS_IsEnforce();
 
 		/**
 		 * The meta object literal for the '<em><b>Direction</b></em>' reference feature.
@@ -2475,20 +2475,20 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 		EClass ENFORCEMENT_OPERATION_CS = eINSTANCE.getEnforcementOperationCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Deletion</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Is Deletion</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute ENFORCEMENT_OPERATION_CS__DELETION = eINSTANCE.getEnforcementOperationCS_Deletion();
+		EAttribute ENFORCEMENT_OPERATION_CS__IS_DELETION = eINSTANCE.getEnforcementOperationCS_IsDeletion();
 
 		/**
-		 * The meta object literal for the '<em><b>Operation Call</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Operation Call</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ENFORCEMENT_OPERATION_CS__OPERATION_CALL = eINSTANCE.getEnforcementOperationCS_OperationCall();
+		EReference ENFORCEMENT_OPERATION_CS__OWNED_OPERATION_CALL = eINSTANCE.getEnforcementOperationCS_OwnedOperationCall();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.GuardPatternCSImpl <em>Guard Pattern CS</em>}' class.
@@ -2529,12 +2529,12 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 		EClass PATTERN_CS = eINSTANCE.getPatternCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Unrealized Variables</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Unrealized Variables</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PATTERN_CS__UNREALIZED_VARIABLES = eINSTANCE.getPatternCS_UnrealizedVariables();
+		EReference PATTERN_CS__OWNED_UNREALIZED_VARIABLES = eINSTANCE.getPatternCS_OwnedUnrealizedVariables();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.PredicateCSImpl <em>Predicate CS</em>}' class.
@@ -2565,12 +2565,12 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 		EClass QUERY_CS = eINSTANCE.getQueryCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Path Name</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Path Name</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference QUERY_CS__PATH_NAME = eINSTANCE.getQueryCS_PathName();
+		EReference QUERY_CS__OWNED_PATH_NAME = eINSTANCE.getQueryCS_OwnedPathName();
 
 		/**
 		 * The meta object literal for the '<em><b>Transformation</b></em>' reference feature.
@@ -2581,20 +2581,20 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 		EReference QUERY_CS__TRANSFORMATION = eINSTANCE.getQueryCS_Transformation();
 
 		/**
-		 * The meta object literal for the '<em><b>Input Param Declaration</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Parameters</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference QUERY_CS__INPUT_PARAM_DECLARATION = eINSTANCE.getQueryCS_InputParamDeclaration();
+		EReference QUERY_CS__OWNED_PARAMETERS = eINSTANCE.getQueryCS_OwnedParameters();
 
 		/**
-		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Expression</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference QUERY_CS__EXPRESSION = eINSTANCE.getQueryCS_Expression();
+		EReference QUERY_CS__OWNED_EXPRESSION = eINSTANCE.getQueryCS_OwnedExpression();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.RealizeableVariableCSImpl <em>Realizeable Variable CS</em>}' class.
@@ -2627,12 +2627,12 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 		EClass TRANSFORMATION_CS = eINSTANCE.getTransformationCS();
 
 		/**
-		 * The meta object literal for the '<em><b>Path Name</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Path Name</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TRANSFORMATION_CS__PATH_NAME = eINSTANCE.getTransformationCS_PathName();
+		EReference TRANSFORMATION_CS__OWNED_PATH_NAME = eINSTANCE.getTransformationCS_OwnedPathName();
 
 		/**
 		 * The meta object literal for the '<em><b>Package</b></em>' reference feature.
@@ -2643,12 +2643,12 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 		EReference TRANSFORMATION_CS__PACKAGE = eINSTANCE.getTransformationCS_Package();
 
 		/**
-		 * The meta object literal for the '<em><b>Directions</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Owned Directions</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TRANSFORMATION_CS__DIRECTIONS = eINSTANCE.getTransformationCS_Directions();
+		EReference TRANSFORMATION_CS__OWNED_DIRECTIONS = eINSTANCE.getTransformationCS_OwnedDirections();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.UnrealizedVariableCSImpl <em>Unrealized Variable CS</em>}' class.

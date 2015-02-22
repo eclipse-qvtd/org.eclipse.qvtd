@@ -90,16 +90,16 @@ ruleBottomPatternCS returns [EObject current=null]
 ((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getUnrealizedVariablesUnrealizedVariableCSParserRuleCall_0_1_0_0()); 
+	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_0_1_0_0()); 
 	    }
-		lv_unrealizedVariables_1_0=ruleUnrealizedVariableCS		{
+		lv_ownedUnrealizedVariables_1_0=ruleUnrealizedVariableCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getBottomPatternCSRule());
 	        }
        		add(
        			$current, 
-       			"unrealizedVariables",
-        		lv_unrealizedVariables_1_0, 
+       			"ownedUnrealizedVariables",
+        		lv_ownedUnrealizedVariables_1_0, 
         		"UnrealizedVariableCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -109,16 +109,16 @@ ruleBottomPatternCS returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getRealizedVariablesRealizedVariableCSParserRuleCall_0_1_1_0()); 
+	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedRealizedVariablesRealizedVariableCSParserRuleCall_0_1_1_0()); 
 	    }
-		lv_realizedVariables_2_0=ruleRealizedVariableCS		{
+		lv_ownedRealizedVariables_2_0=ruleRealizedVariableCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getBottomPatternCSRule());
 	        }
        		add(
        			$current, 
-       			"realizedVariables",
-        		lv_realizedVariables_2_0, 
+       			"ownedRealizedVariables",
+        		lv_ownedRealizedVariables_2_0, 
         		"RealizedVariableCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -131,16 +131,16 @@ ruleBottomPatternCS returns [EObject current=null]
 ((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getUnrealizedVariablesUnrealizedVariableCSParserRuleCall_0_2_1_0_0()); 
+	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_0_2_1_0_0()); 
 	    }
-		lv_unrealizedVariables_4_0=ruleUnrealizedVariableCS		{
+		lv_ownedUnrealizedVariables_4_0=ruleUnrealizedVariableCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getBottomPatternCSRule());
 	        }
        		add(
        			$current, 
-       			"unrealizedVariables",
-        		lv_unrealizedVariables_4_0, 
+       			"ownedUnrealizedVariables",
+        		lv_ownedUnrealizedVariables_4_0, 
         		"UnrealizedVariableCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -150,16 +150,16 @@ ruleBottomPatternCS returns [EObject current=null]
     |(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getRealizedVariablesRealizedVariableCSParserRuleCall_0_2_1_1_0()); 
+	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedRealizedVariablesRealizedVariableCSParserRuleCall_0_2_1_1_0()); 
 	    }
-		lv_realizedVariables_5_0=ruleRealizedVariableCS		{
+		lv_ownedRealizedVariables_5_0=ruleRealizedVariableCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getBottomPatternCSRule());
 	        }
        		add(
        			$current, 
-       			"realizedVariables",
-        		lv_realizedVariables_5_0, 
+       			"ownedRealizedVariables",
+        		lv_ownedRealizedVariables_5_0, 
         		"RealizedVariableCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -172,16 +172,16 @@ ruleBottomPatternCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getConstraintsPredicateOrAssignmentCSParserRuleCall_0_3_1_0()); 
+	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedConstraintsPredicateOrAssignmentCSParserRuleCall_0_3_1_0()); 
 	    }
-		lv_constraints_7_0=rulePredicateOrAssignmentCS		{
+		lv_ownedConstraints_7_0=rulePredicateOrAssignmentCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getBottomPatternCSRule());
 	        }
        		add(
        			$current, 
-       			"constraints",
-        		lv_constraints_7_0, 
+       			"ownedConstraints",
+        		lv_ownedConstraints_7_0, 
         		"PredicateOrAssignmentCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -208,16 +208,16 @@ ruleBottomPatternCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getConstraintsPredicateOrAssignmentCSParserRuleCall_1_2_0()); 
+	        newCompositeNode(grammarAccess.getBottomPatternCSAccess().getOwnedConstraintsPredicateOrAssignmentCSParserRuleCall_1_2_0()); 
 	    }
-		lv_constraints_11_0=rulePredicateOrAssignmentCS		{
+		lv_ownedConstraints_11_0=rulePredicateOrAssignmentCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getBottomPatternCSRule());
 	        }
        		add(
        			$current, 
-       			"constraints",
-        		lv_constraints_11_0, 
+       			"ownedConstraints",
+        		lv_ownedConstraints_11_0, 
         		"PredicateOrAssignmentCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -400,16 +400,16 @@ ruleGuardPatternCS returns [EObject current=null]
 ((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getUnrealizedVariablesGuardVariableCSParserRuleCall_0_2_0_0()); 
+	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getOwnedUnrealizedVariablesGuardVariableCSParserRuleCall_0_2_0_0()); 
 	    }
-		lv_unrealizedVariables_2_0=ruleGuardVariableCS		{
+		lv_ownedUnrealizedVariables_2_0=ruleGuardVariableCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getGuardPatternCSRule());
 	        }
        		add(
        			$current, 
-       			"unrealizedVariables",
-        		lv_unrealizedVariables_2_0, 
+       			"ownedUnrealizedVariables",
+        		lv_ownedUnrealizedVariables_2_0, 
         		"GuardVariableCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -422,16 +422,16 @@ ruleGuardPatternCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getUnrealizedVariablesGuardVariableCSParserRuleCall_0_2_1_1_0()); 
+	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getOwnedUnrealizedVariablesGuardVariableCSParserRuleCall_0_2_1_1_0()); 
 	    }
-		lv_unrealizedVariables_4_0=ruleGuardVariableCS		{
+		lv_ownedUnrealizedVariables_4_0=ruleGuardVariableCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getGuardPatternCSRule());
 	        }
        		add(
        			$current, 
-       			"unrealizedVariables",
-        		lv_unrealizedVariables_4_0, 
+       			"ownedUnrealizedVariables",
+        		lv_ownedUnrealizedVariables_4_0, 
         		"GuardVariableCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -480,16 +480,16 @@ ruleGuardPatternCS returns [EObject current=null]
 ((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getUnrealizedVariablesGuardVariableCSParserRuleCall_1_2_0_0()); 
+	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getOwnedUnrealizedVariablesGuardVariableCSParserRuleCall_1_2_0_0()); 
 	    }
-		lv_unrealizedVariables_10_0=ruleGuardVariableCS		{
+		lv_ownedUnrealizedVariables_10_0=ruleGuardVariableCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getGuardPatternCSRule());
 	        }
        		add(
        			$current, 
-       			"unrealizedVariables",
-        		lv_unrealizedVariables_10_0, 
+       			"ownedUnrealizedVariables",
+        		lv_ownedUnrealizedVariables_10_0, 
         		"GuardVariableCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -502,16 +502,16 @@ ruleGuardPatternCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getUnrealizedVariablesGuardVariableCSParserRuleCall_1_2_1_1_0()); 
+	        newCompositeNode(grammarAccess.getGuardPatternCSAccess().getOwnedUnrealizedVariablesGuardVariableCSParserRuleCall_1_2_1_1_0()); 
 	    }
-		lv_unrealizedVariables_12_0=ruleGuardVariableCS		{
+		lv_ownedUnrealizedVariables_12_0=ruleGuardVariableCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getGuardPatternCSRule());
 	        }
        		add(
        			$current, 
-       			"unrealizedVariables",
-        		lv_unrealizedVariables_12_0, 
+       			"ownedUnrealizedVariables",
+        		lv_ownedUnrealizedVariables_12_0, 
         		"GuardVariableCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -751,32 +751,32 @@ rulePredicateOrAssignmentCS returns [EObject current=null]
     @after { leaveRule(); }:
 ((
 (
-		lv_default_0_0=	'default' 
+		lv_isDefault_0_0=	'default' 
     {
-        newLeafNode(lv_default_0_0, grammarAccess.getPredicateOrAssignmentCSAccess().getDefaultDefaultKeyword_0_0());
+        newLeafNode(lv_isDefault_0_0, grammarAccess.getPredicateOrAssignmentCSAccess().getIsDefaultDefaultKeyword_0_0());
     }
  
 	    {
 	        if ($current==null) {
 	            $current = createModelElement(grammarAccess.getPredicateOrAssignmentCSRule());
 	        }
-       		setWithLastConsumed($current, "default", true, "default");
+       		setWithLastConsumed($current, "isDefault", true, "default");
 	    }
 
 )
 )?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getPredicateOrAssignmentCSAccess().getTargetExpCSParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getPredicateOrAssignmentCSAccess().getOwnedTargetExpCSParserRuleCall_1_0()); 
 	    }
-		lv_target_1_0=ruleExpCS		{
+		lv_ownedTarget_1_0=ruleExpCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getPredicateOrAssignmentCSRule());
 	        }
        		set(
        			$current, 
-       			"target",
-        		lv_target_1_0, 
+       			"ownedTarget",
+        		lv_ownedTarget_1_0, 
         		"ExpCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -789,16 +789,16 @@ rulePredicateOrAssignmentCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getPredicateOrAssignmentCSAccess().getInitialiserExpCSParserRuleCall_2_1_0()); 
+	        newCompositeNode(grammarAccess.getPredicateOrAssignmentCSAccess().getOwnedInitExpressionExpCSParserRuleCall_2_1_0()); 
 	    }
-		lv_initialiser_3_0=ruleExpCS		{
+		lv_ownedInitExpression_3_0=ruleExpCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getPredicateOrAssignmentCSRule());
 	        }
        		set(
        			$current, 
-       			"initialiser",
-        		lv_initialiser_3_0, 
+       			"ownedInitExpression",
+        		lv_ownedInitExpression_3_0, 
         		"ExpCS");
 	        afterParserOrEnumRuleCall();
 	    }

@@ -383,7 +383,7 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 	
 	/**
 	 * Constraint:
-	 *     (constraints+=PredicateOrAssignmentCS*)
+	 *     (ownedConstraints+=PredicateOrAssignmentCS*)
 	 */
 	protected void sequence_BottomPatternCS(EObject context, BottomPatternCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -406,8 +406,8 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 	/**
 	 * Constraint:
 	 *     (
-	 *         ((unrealizedVariables+=GuardVariableCS unrealizedVariables+=GuardVariableCS*)? ownedPredicates+=PredicateCS*) | 
-	 *         ((unrealizedVariables+=GuardVariableCS unrealizedVariables+=GuardVariableCS*)?) | 
+	 *         ((ownedUnrealizedVariables+=GuardVariableCS ownedUnrealizedVariables+=GuardVariableCS*)? ownedPredicates+=PredicateCS*) | 
+	 *         ((ownedUnrealizedVariables+=GuardVariableCS ownedUnrealizedVariables+=GuardVariableCS*)?) | 
 	 *         (ownedPredicates+=PredicateCS*)
 	 *     )
 	 */
@@ -445,7 +445,13 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 	
 	/**
 	 * Constraint:
-	 *     (check?='check'? enforce?='enforce'? direction=[TypedModel|UnrestrictedName] guardPattern=GuardPatternCS bottomPattern=BottomPatternCS)
+	 *     (
+	 *         isCheck?='check'? 
+	 *         isEnforce?='enforce'? 
+	 *         direction=[TypedModel|UnrestrictedName] 
+	 *         ownedGuardPattern=GuardPatternCS 
+	 *         ownedBottomPattern=BottomPatternCS
+	 *     )
 	 */
 	protected void sequence_NamedDomainCS(EObject context, DomainCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -472,7 +478,7 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 	
 	/**
 	 * Constraint:
-	 *     (default?='default'? target=ExpCS initialiser=ExpCS?)
+	 *     (isDefault?='default'? ownedTarget=ExpCS ownedInitExpression=ExpCS?)
 	 */
 	protected void sequence_PredicateOrAssignmentCS(EObject context, AssignmentCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -482,11 +488,11 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 	/**
 	 * Constraint:
 	 *     (
-	 *         pathName=ScopeNameCS 
+	 *         ownedPathName=ScopeNameCS 
 	 *         name=UnrestrictedName 
-	 *         (inputParamDeclaration+=ParamDeclarationCS inputParamDeclaration+=ParamDeclarationCS*)? 
+	 *         (ownedParameters+=ParamDeclarationCS ownedParameters+=ParamDeclarationCS*)? 
 	 *         ownedType=TypeExpCS 
-	 *         expression=ExpCS?
+	 *         ownedExpression=ExpCS?
 	 *     )
 	 */
 	protected void sequence_QueryCS(EObject context, QueryCS semanticObject) {
@@ -514,7 +520,7 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 	
 	/**
 	 * Constraint:
-	 *     (pathName=ScopeNameCS? name=UnreservedName directions+=DirectionCS*)
+	 *     (ownedPathName=ScopeNameCS? name=UnreservedName ownedDirections+=DirectionCS*)
 	 */
 	protected void sequence_TransformationCS(EObject context, TransformationCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -523,7 +529,7 @@ public abstract class AbstractQVTcoreBaseSemanticSequencer extends EssentialOCLS
 	
 	/**
 	 * Constraint:
-	 *     (guardPattern=GuardPatternCS bottomPattern=BottomPatternCS)
+	 *     (ownedGuardPattern=GuardPatternCS ownedBottomPattern=BottomPatternCS)
 	 */
 	protected void sequence_UnnamedDomainCS(EObject context, DomainCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

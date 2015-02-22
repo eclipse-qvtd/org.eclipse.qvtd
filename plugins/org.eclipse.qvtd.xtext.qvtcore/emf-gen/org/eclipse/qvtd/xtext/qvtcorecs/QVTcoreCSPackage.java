@@ -137,13 +137,13 @@ public interface QVTcoreCSPackage extends EPackage {
 	int MAPPING_CS__NAME = QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Domains</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Domains</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__DOMAINS = QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__DOMAINS;
+	int MAPPING_CS__OWNED_DOMAINS = QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_DOMAINS;
 
 	/**
 	 * The feature id for the '<em><b>In</b></em>' reference.
@@ -155,13 +155,13 @@ public interface QVTcoreCSPackage extends EPackage {
 	int MAPPING_CS__IN = QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__IN;
 
 	/**
-	 * The feature id for the '<em><b>Middle</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Middle</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__MIDDLE = QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__MIDDLE;
+	int MAPPING_CS__OWNED_MIDDLE = QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_MIDDLE;
 
 	/**
 	 * The feature id for the '<em><b>Owned Composed Mappings</b></em>' containment reference list.

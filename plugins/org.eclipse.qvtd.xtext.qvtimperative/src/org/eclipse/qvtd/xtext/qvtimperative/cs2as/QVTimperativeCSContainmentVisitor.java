@@ -72,9 +72,9 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 
 	@Override
 	public Continuation<?> visitAssignmentCS(@NonNull AssignmentCS csElement) {
-		ExpCS csTarget = csElement.getTarget();
+		ExpCS csTarget = csElement.getOwnedTarget();
 		EObject eContainer = csElement.eContainer();
-		if ((csElement.getInitialiser() == null) || (eContainer instanceof GuardPatternCS)) {
+		if ((csElement.getOwnedInitExpression() == null) || (eContainer instanceof GuardPatternCS)) {
 			if (csTarget instanceof NameExpCS) {
 				context.refreshModelElement(VariablePredicate.class, QVTimperativePackage.Literals.VARIABLE_PREDICATE, csElement);
 			}
@@ -100,10 +100,10 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	@Override
 	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
 		@NonNull Mapping pivotElement = refreshNamedElement(Mapping.class, QVTimperativePackage.Literals.MAPPING, csElement);
-		DomainCS csMiddle = csElement.getMiddle();
+		DomainCS csMiddle = csElement.getOwnedMiddle();
 		if (csMiddle != null) {
-			pivotElement.setBottomPattern(PivotUtil.getPivot(BottomPattern.class, csMiddle.getBottomPattern()));
-			pivotElement.setGuardPattern(PivotUtil.getPivot(GuardPattern.class, csMiddle.getGuardPattern()));
+			pivotElement.setBottomPattern(PivotUtil.getPivot(BottomPattern.class, csMiddle.getOwnedBottomPattern()));
+			pivotElement.setGuardPattern(PivotUtil.getPivot(GuardPattern.class, csMiddle.getOwnedGuardPattern()));
 		}
 		else {
 			BottomPattern bottomPattern = pivotElement.getBottomPattern();
@@ -126,7 +126,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 				pivotElement.setGuardPattern(guardPattern);
 			}
 		}
-		context.refreshPivotList(CoreDomain.class, pivotElement.getDomain(), csElement.getDomains());
+		context.refreshPivotList(CoreDomain.class, pivotElement.getDomain(), csElement.getOwnedDomains());
 		pivotElement.setMappingStatement(PivotUtil.getPivot(MappingStatement.class, csElement.getOwnedMappingSequence()));
 		return null;
 	}

@@ -22,8 +22,8 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS#isCheck <em>Check</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS#isEnforce <em>Enforce</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS#isIsCheck <em>Is Check</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS#isIsEnforce <em>Is Enforce</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS#getDirection <em>Direction</em>}</li>
  * </ul>
  *
@@ -33,56 +33,56 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  */
 public interface DomainCS extends AreaCS {
 	/**
-	 * Returns the value of the '<em><b>Check</b></em>' attribute.
+	 * Returns the value of the '<em><b>Is Check</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Check</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Is Check</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Check</em>' attribute.
-	 * @see #setCheck(boolean)
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getDomainCS_Check()
+	 * @return the value of the '<em>Is Check</em>' attribute.
+	 * @see #setIsCheck(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getDomainCS_IsCheck()
 	 * @model
 	 * @generated
 	 */
-	boolean isCheck();
+	boolean isIsCheck();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS#isCheck <em>Check</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS#isIsCheck <em>Is Check</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Check</em>' attribute.
-	 * @see #isCheck()
+	 * @param value the new value of the '<em>Is Check</em>' attribute.
+	 * @see #isIsCheck()
 	 * @generated
 	 */
-	void setCheck(boolean value);
+	void setIsCheck(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Enforce</b></em>' attribute.
+	 * Returns the value of the '<em><b>Is Enforce</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Enforce</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Is Enforce</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Enforce</em>' attribute.
-	 * @see #setEnforce(boolean)
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getDomainCS_Enforce()
+	 * @return the value of the '<em>Is Enforce</em>' attribute.
+	 * @see #setIsEnforce(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getDomainCS_IsEnforce()
 	 * @model
 	 * @generated
 	 */
-	boolean isEnforce();
+	boolean isIsEnforce();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS#isEnforce <em>Enforce</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS#isIsEnforce <em>Is Enforce</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Enforce</em>' attribute.
-	 * @see #isEnforce()
+	 * @param value the new value of the '<em>Is Enforce</em>' attribute.
+	 * @see #isIsEnforce()
 	 * @generated
 	 */
-	void setEnforce(boolean value);
+	void setIsEnforce(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Direction</b></em>' reference.
