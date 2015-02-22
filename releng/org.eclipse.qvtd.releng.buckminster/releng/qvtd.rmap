@@ -24,9 +24,10 @@
   <rm:locator pattern="^org\.eclipse\.xtend.*" searchPathRef="xpand"/>
   <rm:locator pattern="^org\.eclipse\.xtext.*" searchPathRef="xtext"/>
   <rm:locator pattern="^com\.google.(inject|guava)$" searchPathRef="xtext"/>
-  <rm:locator pattern="^org\.antlr\.runtime$" searchPathRef="xtext"/>
+  <!--rm:locator pattern="^org\.antlr\.runtime$" searchPathRef="xtext"/-->
   <rm:locator pattern="^org\.eclipse\.draw2d$" searchPathRef="gef"/>
   <rm:locator pattern="^org\.eclipse\.emf.*" searchPathRef="emf"/>
+  <rm:locator pattern="^org\.eclipse\.xsd.*" searchPathRef="emf"/>
   <rm:locator pattern="^org\.eclipse\.epsilon.*" searchPathRef="epsilon"/>
   <rm:locator pattern="^org\.eclipse\.uml2.*" searchPathRef="uml"/>
   <rm:locator pattern="^org\.eclipse\.test$" searchPathRef="eclipse-tests-source-code"/>
