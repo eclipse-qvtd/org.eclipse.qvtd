@@ -1,0 +1,188 @@
+
+operation QVTs!MappingAction defineBindings(parentNode :  QVTs!MappingAction) {
+
+	//parentNode.println(self + " defineBindings to ");
+	var best = self.getBestDerivationOption(parentNode);
+	var primary : Set;	// We can have many primaries
+	if (best.first().isUndefined()) {
+		// The parent must be the root, and hence we don't have any DataParameters
+		// in the context. Call getCheapestDerivation with the mapping parameters to
+		// find the best root combination. By leaving the primary parameter empty all
+		// loops must be done on allInstances
+		//"root parent ".println();
+		best = self.getCheapestDerivation(self.parameters);
+		primary.add(best.first().keySet().selectOne(k | best.first().get(k).isEmpty()));
+		if (not best.first().values().one(s | s.isEmpty())) {
+			"defineBindings The selected best is missing one or more paramater derivations".errln();
+			primary.addAll(best.first().keySet().select(k | best.first().get(k).isEmpty()));
+			// TODO Figure out what to do here!
+		}
+		for (p in primary) {
+			var pd = new QVTs!ParameterDerivation;
+			var sp = new QVTs!SecondaryParameter;
+			sp.isLoop = true;
+			sp.dataParameter = p;
+			pd.secondaryParameter = sp;
+			self.parameterDerivations.add(pd);
+		}
+	} else {
+		primary.add(best.first().keySet().selectOne(k | best.first().get(k).isEmpty()));
+		if (not best.first().values().one(s | s.isEmpty())) {
+			"defineBindings The selected best is missing one or more paramater derivations".errln();
+			// TODO Loop over the other ones with no derivations (i.e., other priamries)
+			// how to know which ones derive form other primaries?
+			primary.addAll(best.first().keySet().select(k | best.first().get(k).isEmpty()));
+		}
+	}
+	//primary.variable.name.println("primary ");
+	//var secKeySet = best.first().keySet().excluding(primary));
+	for (p in primary) {
+		for (k in best.first().keySet().excluding(p)) {
+			//k.variable.name.println("bindings for ");
+			var derivations = best.first().get(k);
+			//erivations.println();
+			var fromDP = p;
+			for (d in derivations) {
+				var toDP = d.last(); 
+				var pd = toDP.createDerivation();
+				//fromDP.variable.name.println("    PD.prim ");
+				//toDP.variable.name.println("    PD.sec.dp ");
+				pd.primaryParameter = fromDP;
+				var sp = pd.secondaryParameter;
+				sp.derivationProperty = d.first();
+				sp.isLoop = d.first().isMany();
+				self.parameterDerivations.add(pd);
+				fromDP = toDP;
+			}
+		}
+	}
+}
+
+operation QVTs!MappingAction getBestDerivationOption(parentNode :  QVTs!MappingAction) : Sequence {
+	
+	//if (parentNode.mapping.isUndefined())
+	   //parentNode.order.println(self.mapping.name + " getBestDerivationOption in ");
+	//else 
+	   //parentNode.mapping.name.println(self.mapping.name + " getBestDerivationOption in ");
+	var matched = parentNode.getContextDataParameters();
+    var matchedTypes = matched.collect(m | m.variable.type);
+    // Select all the MA's parameters whos type (or supertype) exists in the context
+    var candidates = self.parameters.select(primary |
+    		matchedTypes.includes(primary.variable.type)
+    		or matchedTypes.includes(primary.variable.type.closure(t | t.getSuperClasses())));
+    //candidates.variable.name.println();		
+	var best = self.getCheapestDerivation(candidates);
+	// getCheapestDerivation returns null, MAX_INT*#parameters if no derivations where found making it a very
+	// expensive choice. How to manage this case, or the case with multiple possible primary parameters (i.e.
+	// there is more that one value with an empty sequence), dependes on the caller
+	return best;
+	/* 
+	if (best.first().isUndefined()) {
+		// No derivations could be found. The caller should figure out what this means in their context
+		// E.g. if the parent is the root, we need an allInstances
+		return best;
+	} else {
+		// For bindings it is important to know how many are missing, for options, we only care about the cost
+		if (best.first().values().one(s | s.isEmpty())) {
+			return best;
+		} else {
+			"The selected best is missing one or more paramater derivations".println();
+			for (k in best.first().keySet()) {
+				k.variable.name.print();
+				best.first().get(k).println(": ");
+			}
+			best.last().println("bes metric ");
+			return best;
+				
+		}
+	} */
+}
+
+// return the cheapest derivation option
+operation QVTs!MappingAction getCheapestDerivation(startPoints : Collection) : Sequence {
+	
+	// If startpoints is empty, there is no derivation.
+	return startPoints.collect(sp | self.dijkstras(sp)).sortBy(der | der.last()).first().ifUndefined(Sequence{null, (2e31-1)*self.parameters.size()});
+}
+
+operation QVTs!MappingAction dijkstras(start : QVTs!DataParameter) : Sequence {
+	
+	var MAX_VAL = 2e31-1;
+	//start.variable.name.println("dijkstras from ");
+	var dist = self.parameters.aggregate(p | p, MAX_VAL);
+	var path = self.parameters.aggregate(p | p, Sequence{});
+	var done = self.parameters.aggregate(p | p, false);
+	dist.put(start, 0);
+	while (true) {
+		var u = null;
+		var bestDist = MAX_VAL;
+		for (p in self.parameters) {
+			if (not done.get(p) and dist.get(p) < bestDist) {	// The first time it should find start
+				u = p;
+				bestDist = dist.get(p);
+			}
+		}
+		if (bestDist == MAX_VAL) break;
+		//u.variable.name.println("u ");
+		// relax neighbourh edges
+		for (p in self.parameters) {
+			var w = u.weight(p);
+			if (not done.get(p) and w.last() <> -1) {
+				if (dist.get(p) > dist.get(u) + w.last()) {
+					//p.variable.name.println("relax ");				
+					dist.put(p, dist.get(u) + w.last());
+					path.get(p).addAll(path.get(u));
+					path.get(p).add(Sequence{w.first(), p}); 
+				} 
+			}
+		}
+		done.put(u, true);
+	}
+	//for (k in dist.keySet()) {
+	//	dist.get(k).print(k.variable.name + "->");
+	//	" ".print();
+	//}
+	//"".println();
+	//dist.values.sum().println();
+	return Sequence{path, dist.values.sum()+1}; // 1 to account for the start
+}
+
+operation QVTs!DataParameter weight(dest : QVTs!DataParameter) : Sequence {
+	
+	//dest.variable.name.println(self.variable.name + " weight to ");
+	var property = self.variable.hasRelation(dest.variable).first(); // TODO how to pick one, if multiple options are returned?
+	if (not property.isDefined()) {
+        property = dest.variable.hasRelation(self.variable).first();
+        if (property.isDefined()) {
+        	property = property.opposite;
+        }
+   	}
+   	if (property.isDefined()) {
+   		//property.println();
+		var cost = 0;
+	    var mult = 2;
+	    if (property.isImplicit) {
+	    	//"isImplict".println();
+	        mult = 5;
+	    }
+	    if (property.isMany()) {
+        	var M = property.getType().getUpperValue();
+	        if (M.isUnlimited()) {
+	        	//"M *".println();
+	            cost = cost + mult*10;  
+	        } else {
+	            var N = d.getType().getLowerValue();
+	            //M.intValue().println("M ");
+	            //N.println("N ");
+	            cost = cost + mult*(M.intValue()-N);  
+	        }
+        } else {
+        	cost = cost + 1*mult;
+        }	        
+	    //cost.println();
+	    return Sequence {property, cost};
+	} else {
+		//"-1".println();
+		return Sequence {property, -1};
+	}
+}
