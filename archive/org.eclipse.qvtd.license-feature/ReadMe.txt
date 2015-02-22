@@ -1,0 +1,1 @@
+This plugin is no longer used. The shared org.eclipse.license feature is used instead.
