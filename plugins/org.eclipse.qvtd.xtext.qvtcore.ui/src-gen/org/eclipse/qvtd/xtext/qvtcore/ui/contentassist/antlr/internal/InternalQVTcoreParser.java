@@ -8,8 +8,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
-import org.eclipse.xtext.ide.editor.contentassist.antlr.internal.DFA;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.DFA;
 import org.eclipse.qvtd.xtext.qvtcore.services.QVTcoreGrammarAccess;
 
 
@@ -61,8 +61,8 @@ public class InternalQVTcoreParser extends AbstractInternalContentAssistParser {
     public static final int T__86=86;
     public static final int T__89=89;
     public static final int T__88=88;
-    public static final int RULE_LETTER_CHARACTER=9;
     public static final int RULE_ML_COMMENT=12;
+    public static final int RULE_LETTER_CHARACTER=9;
     public static final int T__71=71;
     public static final int T__72=72;
     public static final int T__70=70;

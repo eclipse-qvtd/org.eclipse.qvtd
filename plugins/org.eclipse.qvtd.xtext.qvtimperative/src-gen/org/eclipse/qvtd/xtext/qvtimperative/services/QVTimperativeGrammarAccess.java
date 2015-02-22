@@ -132,61 +132,61 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//("imports" imports+=[pivot::Package|UnrestrictedName] ("," imports+=[pivot::Package|UnrestrictedName])*)?
 		public Group getGroup_2() { return cGroup_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.1/@alternatives/@elements.2/@elements.0'
+		//"imports"
 		public Keyword getImportsKeyword_2_0() { return cImportsKeyword_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.1/@alternatives/@elements.2/@elements.1'
+		//imports+=[pivot::Package|UnrestrictedName]
 		public Assignment getImportsAssignment_2_1() { return cImportsAssignment_2_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.1/@alternatives/@elements.2/@elements.1/@terminal'
+		//[pivot::Package|UnrestrictedName]
 		public CrossReference getImportsPackageCrossReference_2_1_0() { return cImportsPackageCrossReference_2_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.1/@alternatives/@elements.2/@elements.1/@terminal/@terminal'
+		//UnrestrictedName
 		public RuleCall getImportsPackageUnrestrictedNameParserRuleCall_2_1_0_1() { return cImportsPackageUnrestrictedNameParserRuleCall_2_1_0_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.1/@alternatives/@elements.2/@elements.2'
+		//("," imports+=[pivot::Package|UnrestrictedName])*
 		public Group getGroup_2_2() { return cGroup_2_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.1/@alternatives/@elements.2/@elements.2/@elements.0'
+		//","
 		public Keyword getCommaKeyword_2_2_0() { return cCommaKeyword_2_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.1/@alternatives/@elements.2/@elements.2/@elements.1'
+		//imports+=[pivot::Package|UnrestrictedName]
 		public Assignment getImportsAssignment_2_2_1() { return cImportsAssignment_2_2_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.1/@alternatives/@elements.2/@elements.2/@elements.1/@terminal'
+		//[pivot::Package|UnrestrictedName]
 		public CrossReference getImportsPackageCrossReference_2_2_1_0() { return cImportsPackageCrossReference_2_2_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.1/@alternatives/@elements.2/@elements.2/@elements.1/@terminal/@terminal'
+		//UnrestrictedName
 		public RuleCall getImportsPackageUnrestrictedNameParserRuleCall_2_2_1_0_1() { return cImportsPackageUnrestrictedNameParserRuleCall_2_2_1_0_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.1/@alternatives/@elements.3'
+		//("uses" uses+=[qvtcorebase::CoreDomain|UnrestrictedName] ("," uses+=[qvtcorebase::CoreDomain|UnrestrictedName])*)?
 		public Group getGroup_3() { return cGroup_3; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.1/@alternatives/@elements.3/@elements.0'
+		//"uses"
 		public Keyword getUsesKeyword_3_0() { return cUsesKeyword_3_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.1/@alternatives/@elements.3/@elements.1'
+		//uses+=[qvtcorebase::CoreDomain|UnrestrictedName]
 		public Assignment getUsesAssignment_3_1() { return cUsesAssignment_3_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.1/@alternatives/@elements.3/@elements.1/@terminal'
+		//[qvtcorebase::CoreDomain|UnrestrictedName]
 		public CrossReference getUsesCoreDomainCrossReference_3_1_0() { return cUsesCoreDomainCrossReference_3_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.1/@alternatives/@elements.3/@elements.1/@terminal/@terminal'
+		//UnrestrictedName
 		public RuleCall getUsesCoreDomainUnrestrictedNameParserRuleCall_3_1_0_1() { return cUsesCoreDomainUnrestrictedNameParserRuleCall_3_1_0_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.1/@alternatives/@elements.3/@elements.2'
+		//("," uses+=[qvtcorebase::CoreDomain|UnrestrictedName])*
 		public Group getGroup_3_2() { return cGroup_3_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.1/@alternatives/@elements.3/@elements.2/@elements.0'
+		//","
 		public Keyword getCommaKeyword_3_2_0() { return cCommaKeyword_3_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.1/@alternatives/@elements.3/@elements.2/@elements.1'
+		//uses+=[qvtcorebase::CoreDomain|UnrestrictedName]
 		public Assignment getUsesAssignment_3_2_1() { return cUsesAssignment_3_2_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.1/@alternatives/@elements.3/@elements.2/@elements.1/@terminal'
+		//[qvtcorebase::CoreDomain|UnrestrictedName]
 		public CrossReference getUsesCoreDomainCrossReference_3_2_1_0() { return cUsesCoreDomainCrossReference_3_2_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.1/@alternatives/@elements.3/@elements.2/@elements.1/@terminal/@terminal'
+		//UnrestrictedName
 		public RuleCall getUsesCoreDomainUnrestrictedNameParserRuleCall_3_2_1_0_1() { return cUsesCoreDomainUnrestrictedNameParserRuleCall_3_2_1_0_1; }
 	}
 
@@ -367,16 +367,16 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//UnrestrictedName
 		public RuleCall getReferredVariableVariableUnrestrictedNameParserRuleCall_0_0_1() { return cReferredVariableVariableUnrestrictedNameParserRuleCall_0_0_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.4/@alternatives/@elements.1'
+		//":="
 		public Keyword getColonEqualsSignKeyword_1() { return cColonEqualsSignKeyword_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.4/@alternatives/@elements.2'
+		//ownedValue=ExpCS
 		public Assignment getOwnedValueAssignment_2() { return cOwnedValueAssignment_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.4/@alternatives/@elements.2/@terminal'
+		//ExpCS
 		public RuleCall getOwnedValueExpCSParserRuleCall_2_0() { return cOwnedValueExpCSParserRuleCall_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.4/@alternatives/@elements.3'
+		//";"
 		public Keyword getSemicolonKeyword_3() { return cSemicolonKeyword_3; }
 	}
 
@@ -394,13 +394,14 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cOwnedMappingSequenceMappingSequenceCSParserRuleCall_5_0 = (RuleCall)cOwnedMappingSequenceAssignment_5.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_6 = (Keyword)cGroup.eContents().get(6);
 		
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#XtextFragmentProvider_org.eclipse.qvtd.xtext.qvtimperative.QVTimperative/MappingLoopCS'
+		//MappingLoopCS:
+		//	"for" ownedIterator=MappingIteratorCS "in" ownedInExpression=ExpCS "{" ownedMappingSequence=MappingSequenceCS "}";
 		@Override public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.5/@alternatives'
+		//"for" ownedIterator=MappingIteratorCS "in" ownedInExpression=ExpCS "{" ownedMappingSequence=MappingSequenceCS "}"
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.5/@alternatives/@elements.0'
+		//"for"
 		public Keyword getForKeyword_0() { return cForKeyword_0; }
 
 		//ownedIterator=MappingIteratorCS
@@ -596,37 +597,38 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		//	ownedUnrealizedVariables+=UnrealizedVariableCS)*)? ")";
 		@Override public ParserRule getRule() { return rule; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.11/@alternatives'
+		//{GuardPatternCS} "(" (ownedUnrealizedVariables+=UnrealizedVariableCS (","
+		//ownedUnrealizedVariables+=UnrealizedVariableCS)*)? ")"
 		public Group getGroup() { return cGroup; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.11/@alternatives/@elements.0'
+		//{GuardPatternCS}
 		public Action getGuardPatternCSAction_0() { return cGuardPatternCSAction_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.11/@alternatives/@elements.1'
+		//"("
 		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.11/@alternatives/@elements.2'
+		//(ownedUnrealizedVariables+=UnrealizedVariableCS ("," ownedUnrealizedVariables+=UnrealizedVariableCS)*)?
 		public Group getGroup_2() { return cGroup_2; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.11/@alternatives/@elements.2/@elements.0'
+		//ownedUnrealizedVariables+=UnrealizedVariableCS
 		public Assignment getOwnedUnrealizedVariablesAssignment_2_0() { return cOwnedUnrealizedVariablesAssignment_2_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.11/@alternatives/@elements.2/@elements.0/@terminal'
+		//UnrealizedVariableCS
 		public RuleCall getOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_2_0_0() { return cOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_2_0_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.11/@alternatives/@elements.2/@elements.1'
+		//("," ownedUnrealizedVariables+=UnrealizedVariableCS)*
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.11/@alternatives/@elements.2/@elements.1/@elements.0'
+		//","
 		public Keyword getCommaKeyword_2_1_0() { return cCommaKeyword_2_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.11/@alternatives/@elements.2/@elements.1/@elements.1'
+		//ownedUnrealizedVariables+=UnrealizedVariableCS
 		public Assignment getOwnedUnrealizedVariablesAssignment_2_1_1() { return cOwnedUnrealizedVariablesAssignment_2_1_1; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.11/@alternatives/@elements.2/@elements.1/@elements.1/@terminal'
+		//UnrealizedVariableCS
 		public RuleCall getOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_2_1_1_0() { return cOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_2_1_1_0; }
 
-		//org.eclipse.xtext.resource.ClasspathUriResolutionException: org.eclipse.xtext.resource.FileNotFoundOnClasspathException: Couldn't find resource on classpath. URI was 'classpath:/org/eclipse/qvtd/xtext/qvtimperative/QVTimperative.xtext#/0/@rules.11/@alternatives/@elements.3'
+		//")"
 		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
 	}
 

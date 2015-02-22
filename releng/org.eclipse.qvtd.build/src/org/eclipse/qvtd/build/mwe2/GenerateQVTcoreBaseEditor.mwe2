@@ -156,4 +156,7 @@ Workflow {
 	component = ConvertToUnixLineEndings {
 		directory = "${QVTcoreBaseRuntimeProject}.ui/src-gen"
 	}
+	component = BackportToXtext_2_7 {
+		directory = "${QVTcoreBaseRuntimeProject}.ui/src-gen"
+	}
 }
