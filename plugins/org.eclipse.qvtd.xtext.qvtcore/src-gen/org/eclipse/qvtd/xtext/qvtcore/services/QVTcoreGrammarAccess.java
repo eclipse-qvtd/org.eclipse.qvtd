@@ -389,8 +389,7 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 	// //Predicate ::= BooleanOCLExpr
 	//
 	////Assignement ::= [�default�] SlotOwnerOCLExpr�.�PropertyName �:=� ValueOCLExpr
-	// PredicateOrAssignmentCS returns
-	//AssignmentCS:
+	// PredicateOrAssignmentCS:
 	//	isDefault?="default"? ownedTarget=ExpCS (":=" ownedInitExpression=ExpCS)? ";";
 	public QVTcoreBaseGrammarAccess.PredicateOrAssignmentCSElements getPredicateOrAssignmentCSAccess() {
 		return gaQVTcoreBase.getPredicateOrAssignmentCSAccess();

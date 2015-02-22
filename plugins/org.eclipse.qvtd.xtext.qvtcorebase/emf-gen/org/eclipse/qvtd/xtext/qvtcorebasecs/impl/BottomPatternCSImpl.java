@@ -21,7 +21,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.xtext.basecs.util.BaseCSVisitor;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.EnforcementOperationCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
@@ -72,7 +72,7 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<AssignmentCS> ownedConstraints;
+	protected EList<PredicateOrAssignmentCS> ownedConstraints;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -125,9 +125,9 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 	 * @generated
 	 */
 	@Override
-	public EList<AssignmentCS> getOwnedConstraints() {
+	public EList<PredicateOrAssignmentCS> getOwnedConstraints() {
 		if (ownedConstraints == null) {
-			ownedConstraints = new EObjectContainmentEList<AssignmentCS>(AssignmentCS.class, this, QVTcoreBaseCSPackage.BOTTOM_PATTERN_CS__OWNED_CONSTRAINTS);
+			ownedConstraints = new EObjectContainmentEList<PredicateOrAssignmentCS>(PredicateOrAssignmentCS.class, this, QVTcoreBaseCSPackage.BOTTOM_PATTERN_CS__OWNED_CONSTRAINTS);
 		}
 		return ownedConstraints;
 	}
@@ -187,7 +187,7 @@ public class BottomPatternCSImpl extends PatternCSImpl implements BottomPatternC
 				return;
 			case QVTcoreBaseCSPackage.BOTTOM_PATTERN_CS__OWNED_CONSTRAINTS:
 				getOwnedConstraints().clear();
-				getOwnedConstraints().addAll((Collection<? extends AssignmentCS>)newValue);
+				getOwnedConstraints().addAll((Collection<? extends PredicateOrAssignmentCS>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

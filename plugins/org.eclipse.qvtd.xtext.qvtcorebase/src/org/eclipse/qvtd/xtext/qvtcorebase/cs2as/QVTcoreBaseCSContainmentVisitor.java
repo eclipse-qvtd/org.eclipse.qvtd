@@ -46,7 +46,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
@@ -63,22 +63,22 @@ import com.google.common.collect.Iterables;
 
 public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContainmentVisitor
 {
-	protected static class IsAssignmentPredicate implements com.google.common.base.Predicate<AssignmentCS>
+	protected static class IsAssignmentPredicate implements com.google.common.base.Predicate<PredicateOrAssignmentCS>
 	{
 		public final static @NonNull IsAssignmentPredicate INSTANCE = new IsAssignmentPredicate();
 		
 		@Override
-		public boolean apply(AssignmentCS csAssignment) {
+		public boolean apply(PredicateOrAssignmentCS csAssignment) {
 			return csAssignment.getOwnedInitExpression() != null;
 		}
 	}
 
-	protected static class IsPredicatePredicate implements com.google.common.base.Predicate<AssignmentCS>
+	protected static class IsPredicatePredicate implements com.google.common.base.Predicate<PredicateOrAssignmentCS>
 	{
 		public final static @NonNull IsPredicatePredicate INSTANCE = new IsPredicatePredicate();
 		
 		@Override
-		public boolean apply(AssignmentCS csAssignment) {
+		public boolean apply(PredicateOrAssignmentCS csAssignment) {
 			return csAssignment.getOwnedInitExpression() == null;
 		}
 	}

@@ -41,7 +41,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
@@ -113,21 +113,6 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 	}
 
 	@Override
-	public Continuation<?> visitAssignmentCS(@NonNull AssignmentCS csElement) {
-		ExpCS csTarget = csElement.getOwnedTarget();
-		if (csElement.getOwnedInitExpression() == null) {
-			context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csElement);
-		}
-		else if (csTarget instanceof NameExpCS) {
-			context.refreshModelElement(VariableAssignment.class, QVTcoreBasePackage.Literals.VARIABLE_ASSIGNMENT, csElement);
-		}
-		else {
-			context.refreshModelElement(PropertyAssignment.class, QVTcoreBasePackage.Literals.PROPERTY_ASSIGNMENT, csElement);
-		}
-		return null;
-	}
-
-	@Override
 	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
 		if (csElement.eContainer() instanceof TopLevelCS) {
 			if (csElement.getName() == null) {
@@ -174,6 +159,21 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 	@Override
 	public Continuation<?> visitPredicateCS(@NonNull PredicateCS csElement) {
 		context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csElement);
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitPredicateOrAssignmentCS(@NonNull PredicateOrAssignmentCS csElement) {
+		ExpCS csTarget = csElement.getOwnedTarget();
+		if (csElement.getOwnedInitExpression() == null) {
+			context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csElement);
+		}
+		else if (csTarget instanceof NameExpCS) {
+			context.refreshModelElement(VariableAssignment.class, QVTcoreBasePackage.Literals.VARIABLE_ASSIGNMENT, csElement);
+		}
+		else {
+			context.refreshModelElement(PropertyAssignment.class, QVTcoreBasePackage.Literals.PROPERTY_ASSIGNMENT, csElement);
+		}
 		return null;
 	}
 

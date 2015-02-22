@@ -29,7 +29,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.*;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
@@ -109,10 +109,6 @@ public class QVTcoreBaseCSAdapterFactory extends AdapterFactoryImpl {
 				return createAreaCSAdapter();
 			}
 			@Override
-			public Adapter caseAssignmentCS(AssignmentCS object) {
-				return createAssignmentCSAdapter();
-			}
-			@Override
 			public Adapter caseBottomPatternCS(BottomPatternCS object) {
 				return createBottomPatternCSAdapter();
 			}
@@ -143,6 +139,10 @@ public class QVTcoreBaseCSAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter casePredicateCS(PredicateCS object) {
 				return createPredicateCSAdapter();
+			}
+			@Override
+			public Adapter casePredicateOrAssignmentCS(PredicateOrAssignmentCS object) {
+				return createPredicateOrAssignmentCSAdapter();
 			}
 			@Override
 			public Adapter caseQueryCS(QueryCS object) {
@@ -193,12 +193,12 @@ public class QVTcoreBaseCSAdapterFactory extends AdapterFactoryImpl {
 				return createNamedElementCSAdapter();
 			}
 			@Override
-			public Adapter caseExpCS(ExpCS object) {
-				return createExpCSAdapter();
-			}
-			@Override
 			public Adapter caseTypedElementCS(TypedElementCS object) {
 				return createTypedElementCSAdapter();
+			}
+			@Override
+			public Adapter caseExpCS(ExpCS object) {
+				return createExpCSAdapter();
 			}
 			@Override
 			public Adapter caseTypeCS(TypeCS object) {
@@ -257,20 +257,6 @@ public class QVTcoreBaseCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createAreaCSAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS <em>Assignment CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS
-	 * @generated
-	 */
-	public Adapter createAssignmentCSAdapter() {
 		return null;
 	}
 
@@ -383,6 +369,20 @@ public class QVTcoreBaseCSAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPredicateCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS <em>Predicate Or Assignment CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS
+	 * @generated
+	 */
+	public Adapter createPredicateOrAssignmentCSAdapter() {
 		return null;
 	}
 

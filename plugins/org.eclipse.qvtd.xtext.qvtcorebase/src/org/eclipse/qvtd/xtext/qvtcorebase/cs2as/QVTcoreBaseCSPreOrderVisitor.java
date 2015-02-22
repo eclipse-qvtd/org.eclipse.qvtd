@@ -24,7 +24,7 @@ import org.eclipse.ocl.xtext.base.cs2as.SingleContinuation;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.FunctionParameter;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
@@ -95,11 +95,6 @@ public class QVTcoreBaseCSPreOrderVisitor extends AbstractQVTcoreBaseCSPreOrderV
 	}
 
 	@Override
-	public Continuation<?> visitAssignmentCS(@NonNull AssignmentCS csElement) {
-		return null;
-	}
-
-	@Override
 	public Continuation<?> visitBottomPatternCS(@NonNull BottomPatternCS csElement) {
 		return null;
 	}
@@ -131,6 +126,11 @@ public class QVTcoreBaseCSPreOrderVisitor extends AbstractQVTcoreBaseCSPreOrderV
 
 	@Override
 	public Continuation<?> visitPredicateCS(@NonNull PredicateCS csElement) {
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitPredicateOrAssignmentCS(@NonNull PredicateOrAssignmentCS csElement) {
 		return null;
 	}
 

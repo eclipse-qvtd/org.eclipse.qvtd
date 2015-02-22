@@ -50,7 +50,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
@@ -69,33 +69,6 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	public QVTimperativeCSContainmentVisitor(@NonNull CS2ASConversion context) {
 		super(context);
 	}	
-
-	@Override
-	public Continuation<?> visitAssignmentCS(@NonNull AssignmentCS csElement) {
-		ExpCS csTarget = csElement.getOwnedTarget();
-		EObject eContainer = csElement.eContainer();
-		if ((csElement.getOwnedInitExpression() == null) || (eContainer instanceof GuardPatternCS)) {
-			if (csTarget instanceof NameExpCS) {
-				context.refreshModelElement(VariablePredicate.class, QVTimperativePackage.Literals.VARIABLE_PREDICATE, csElement);
-			}
-			else {
-				context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csElement);
-			}
-		}
-		else if (csTarget instanceof NameExpCS) {
-			context.refreshModelElement(VariableAssignment.class, QVTcoreBasePackage.Literals.VARIABLE_ASSIGNMENT, csElement);
-		}
-		else {
-			EObject eContainerContainer = eContainer != null ? eContainer.eContainer() : null;
-			if ((eContainerContainer instanceof DomainCS) && (((DomainCS)eContainerContainer).getName() == null)) {
-				context.refreshModelElement(PropertyAssignment.class, QVTimperativePackage.Literals.MIDDLE_PROPERTY_ASSIGNMENT, csElement);
-			}
-			else {
-				context.refreshModelElement(PropertyAssignment.class, QVTcoreBasePackage.Literals.PROPERTY_ASSIGNMENT, csElement);
-			}
-		}
-		return null;
-	}
 
 	@Override
 	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
@@ -175,6 +148,33 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		}
 		else {
 			context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csElement);
+		}
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitPredicateOrAssignmentCS(@NonNull PredicateOrAssignmentCS csElement) {
+		ExpCS csTarget = csElement.getOwnedTarget();
+		EObject eContainer = csElement.eContainer();
+		if ((csElement.getOwnedInitExpression() == null) || (eContainer instanceof GuardPatternCS)) {
+			if (csTarget instanceof NameExpCS) {
+				context.refreshModelElement(VariablePredicate.class, QVTimperativePackage.Literals.VARIABLE_PREDICATE, csElement);
+			}
+			else {
+				context.refreshModelElement(Predicate.class, QVTbasePackage.Literals.PREDICATE, csElement);
+			}
+		}
+		else if (csTarget instanceof NameExpCS) {
+			context.refreshModelElement(VariableAssignment.class, QVTcoreBasePackage.Literals.VARIABLE_ASSIGNMENT, csElement);
+		}
+		else {
+			EObject eContainerContainer = eContainer != null ? eContainer.eContainer() : null;
+			if ((eContainerContainer instanceof DomainCS) && (((DomainCS)eContainerContainer).getName() == null)) {
+				context.refreshModelElement(PropertyAssignment.class, QVTimperativePackage.Literals.MIDDLE_PROPERTY_ASSIGNMENT, csElement);
+			}
+			else {
+				context.refreshModelElement(PropertyAssignment.class, QVTcoreBasePackage.Literals.PROPERTY_ASSIGNMENT, csElement);
+			}
 		}
 		return null;
 	}

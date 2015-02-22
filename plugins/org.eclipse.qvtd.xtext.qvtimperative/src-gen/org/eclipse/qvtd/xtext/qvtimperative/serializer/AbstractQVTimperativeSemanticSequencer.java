@@ -57,13 +57,13 @@ import org.eclipse.ocl.xtext.essentialoclcs.TypeNameExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.UnlimitedNaturalLiteralExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.VariableCS;
 import org.eclipse.qvtd.xtext.qvtcorebase.serializer.QVTcoreBaseSemanticSequencer;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
@@ -341,9 +341,6 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 				return; 
 			}
 		else if(semanticObject.eClass().getEPackage() == QVTcoreBaseCSPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
-			case QVTcoreBaseCSPackage.ASSIGNMENT_CS:
-				sequence_PredicateOrAssignmentCS(context, (AssignmentCS) semanticObject); 
-				return; 
 			case QVTcoreBaseCSPackage.BOTTOM_PATTERN_CS:
 				if(context == grammarAccess.getBottomPatternCSRule()) {
 					sequence_BottomPatternCS(context, (BottomPatternCS) semanticObject); 
@@ -410,6 +407,9 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 				return; 
 			case QVTcoreBaseCSPackage.PREDICATE_CS:
 				sequence_PredicateCS(context, (PredicateCS) semanticObject); 
+				return; 
+			case QVTcoreBaseCSPackage.PREDICATE_OR_ASSIGNMENT_CS:
+				sequence_PredicateOrAssignmentCS(context, (PredicateOrAssignmentCS) semanticObject); 
 				return; 
 			case QVTcoreBaseCSPackage.QUERY_CS:
 				sequence_QueryCS(context, (QueryCS) semanticObject); 

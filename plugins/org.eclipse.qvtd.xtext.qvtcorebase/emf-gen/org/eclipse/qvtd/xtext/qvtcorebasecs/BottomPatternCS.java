@@ -65,7 +65,7 @@ public interface BottomPatternCS extends PatternCS {
 
 	/**
 	 * Returns the value of the '<em><b>Owned Constraints</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS}.
+	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Owned Constraints</em>' containment reference list isn't clear,
@@ -77,6 +77,6 @@ public interface BottomPatternCS extends PatternCS {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<AssignmentCS> getOwnedConstraints();
+	EList<PredicateOrAssignmentCS> getOwnedConstraints();
 
 } // BottomPatternCS

@@ -54,11 +54,6 @@ public abstract class AbstractQVTcoreBaseCSLeft2RightVisitor
 	}
 
 	@Override
-	public @Nullable Element visitAssignmentCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS csElement) {
-		return visitExpCS(csElement);
-	}
-
-	@Override
 	public @Nullable Element visitBottomPatternCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS csElement) {
 		return visitPatternCS(csElement);
 	}
@@ -95,6 +90,11 @@ public abstract class AbstractQVTcoreBaseCSLeft2RightVisitor
 
 	@Override
 	public @Nullable Element visitPredicateCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS csElement) {
+		return visitExpCS(csElement);
+	}
+
+	@Override
+	public @Nullable Element visitPredicateOrAssignmentCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS csElement) {
 		return visitExpCS(csElement);
 	}
 

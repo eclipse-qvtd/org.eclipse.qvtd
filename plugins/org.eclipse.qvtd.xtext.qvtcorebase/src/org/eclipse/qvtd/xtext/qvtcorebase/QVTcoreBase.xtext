@@ -65,7 +65,7 @@ PredicateCS: ownedCondition=ExpCS ';';
 //Constraint ::= Predicate | Assignment
 //Predicate ::= BooleanOCLExpr
 //Assignement ::= [�default�] SlotOwnerOCLExpr�.�PropertyName �:=� ValueOCLExpr
-PredicateOrAssignmentCS returns AssignmentCS: isDefault?='default'? ownedTarget=ExpCS (':=' ownedInitExpression=ExpCS)? ';';
+PredicateOrAssignmentCS: isDefault?='default'? ownedTarget=ExpCS (':=' ownedInitExpression=ExpCS)? ';';
 		
 QueryCS: 'query' ownedPathName=ScopeNameCS name=UnrestrictedName
 		'(' (ownedParameters+=ParamDeclarationCS (',' ownedParameters+=ParamDeclarationCS)*)? ')'

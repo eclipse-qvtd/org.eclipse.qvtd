@@ -21,16 +21,16 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#isIsDefault <em>Is Default</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getOwnedTarget <em>Owned Target</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getOwnedInitExpression <em>Owned Init Expression</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS#isIsDefault <em>Is Default</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS#getOwnedTarget <em>Owned Target</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS#getOwnedInitExpression <em>Owned Init Expression</em>}</li>
  * </ul>
  *
- * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAssignmentCS()
+ * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getPredicateOrAssignmentCS()
  * @model
  * @generated
  */
-public interface AssignmentCS extends ExpCS {
+public interface PredicateOrAssignmentCS extends ExpCS {
 	/**
 	 * Returns the value of the '<em><b>Is Default</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -41,14 +41,14 @@ public interface AssignmentCS extends ExpCS {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Is Default</em>' attribute.
 	 * @see #setIsDefault(boolean)
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAssignmentCS_IsDefault()
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getPredicateOrAssignmentCS_IsDefault()
 	 * @model
 	 * @generated
 	 */
 	boolean isIsDefault();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#isIsDefault <em>Is Default</em>}' attribute.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS#isIsDefault <em>Is Default</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Is Default</em>' attribute.
@@ -67,14 +67,14 @@ public interface AssignmentCS extends ExpCS {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owned Target</em>' containment reference.
 	 * @see #setOwnedTarget(ExpCS)
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAssignmentCS_OwnedTarget()
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getPredicateOrAssignmentCS_OwnedTarget()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	ExpCS getOwnedTarget();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getOwnedTarget <em>Owned Target</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS#getOwnedTarget <em>Owned Target</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Owned Target</em>' containment reference.
@@ -93,14 +93,14 @@ public interface AssignmentCS extends ExpCS {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Owned Init Expression</em>' containment reference.
 	 * @see #setOwnedInitExpression(ExpCS)
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAssignmentCS_OwnedInitExpression()
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getPredicateOrAssignmentCS_OwnedInitExpression()
 	 * @model containment="true"
 	 * @generated
 	 */
 	ExpCS getOwnedInitExpression();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getOwnedInitExpression <em>Owned Init Expression</em>}' containment reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS#getOwnedInitExpression <em>Owned Init Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Owned Init Expression</em>' containment reference.

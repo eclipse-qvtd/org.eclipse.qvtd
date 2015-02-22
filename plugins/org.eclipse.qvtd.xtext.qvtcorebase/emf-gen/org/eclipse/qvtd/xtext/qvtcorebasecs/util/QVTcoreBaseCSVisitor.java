@@ -26,7 +26,6 @@ public interface QVTcoreBaseCSVisitor<R> extends org.eclipse.ocl.xtext.essential
 {
 	@Nullable R visitAbstractMappingCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS object);
 	@Nullable R visitAreaCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS object);
-	@Nullable R visitAssignmentCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS object);
 	@Nullable R visitBottomPatternCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS object);
 	@Nullable R visitDirectionCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS object);
 	@Nullable R visitDomainCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS object);
@@ -35,6 +34,7 @@ public interface QVTcoreBaseCSVisitor<R> extends org.eclipse.ocl.xtext.essential
 	@Nullable R visitParamDeclarationCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.ParamDeclarationCS object);
 	@Nullable R visitPatternCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.PatternCS object);
 	@Nullable R visitPredicateCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS object);
+	@Nullable R visitPredicateOrAssignmentCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS object);
 	@Nullable R visitQueryCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS object);
 	@Nullable R visitRealizeableVariableCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.RealizeableVariableCS object);
 	@Nullable R visitRealizedVariableCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS object);

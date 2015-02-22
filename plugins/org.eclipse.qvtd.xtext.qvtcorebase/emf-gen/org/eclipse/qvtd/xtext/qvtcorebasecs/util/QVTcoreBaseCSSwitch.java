@@ -28,7 +28,7 @@ import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.*;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
@@ -123,18 +123,6 @@ public class QVTcoreBaseCSSwitch<T> extends Switch<T> {
 				if (result == null) result = caseElementCS(areaCS);
 				if (result == null) result = casePivotable(areaCS);
 				if (result == null) result = caseVisitableCS(areaCS);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case QVTcoreBaseCSPackage.ASSIGNMENT_CS: {
-				AssignmentCS assignmentCS = (AssignmentCS)theEObject;
-				T result = caseAssignmentCS(assignmentCS);
-				if (result == null) result = caseExpCS(assignmentCS);
-				if (result == null) result = caseModelElementCS(assignmentCS);
-				if (result == null) result = casePivotableElementCS(assignmentCS);
-				if (result == null) result = caseElementCS(assignmentCS);
-				if (result == null) result = casePivotable(assignmentCS);
-				if (result == null) result = caseVisitableCS(assignmentCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -234,6 +222,18 @@ public class QVTcoreBaseCSSwitch<T> extends Switch<T> {
 				if (result == null) result = caseElementCS(predicateCS);
 				if (result == null) result = casePivotable(predicateCS);
 				if (result == null) result = caseVisitableCS(predicateCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case QVTcoreBaseCSPackage.PREDICATE_OR_ASSIGNMENT_CS: {
+				PredicateOrAssignmentCS predicateOrAssignmentCS = (PredicateOrAssignmentCS)theEObject;
+				T result = casePredicateOrAssignmentCS(predicateOrAssignmentCS);
+				if (result == null) result = caseExpCS(predicateOrAssignmentCS);
+				if (result == null) result = caseModelElementCS(predicateOrAssignmentCS);
+				if (result == null) result = casePivotableElementCS(predicateOrAssignmentCS);
+				if (result == null) result = caseElementCS(predicateOrAssignmentCS);
+				if (result == null) result = casePivotable(predicateOrAssignmentCS);
+				if (result == null) result = caseVisitableCS(predicateOrAssignmentCS);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -342,21 +342,6 @@ public class QVTcoreBaseCSSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseAreaCS(AreaCS object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Assignment CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Assignment CS</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAssignmentCS(AssignmentCS object) {
 		return null;
 	}
 
@@ -477,6 +462,21 @@ public class QVTcoreBaseCSSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T casePredicateCS(PredicateCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Predicate Or Assignment CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Predicate Or Assignment CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePredicateOrAssignmentCS(PredicateOrAssignmentCS object) {
 		return null;
 	}
 

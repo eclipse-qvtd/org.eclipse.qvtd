@@ -30,15 +30,6 @@ public interface QVTcoreBaseCSFactory extends EFactory {
 	QVTcoreBaseCSFactory eINSTANCE = org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QVTcoreBaseCSFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Assignment CS</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Assignment CS</em>'.
-	 * @generated
-	 */
-	AssignmentCS createAssignmentCS();
-
-	/**
 	 * Returns a new object of class '<em>Bottom Pattern CS</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -100,6 +91,15 @@ public interface QVTcoreBaseCSFactory extends EFactory {
 	 * @generated
 	 */
 	PredicateCS createPredicateCS();
+
+	/**
+	 * Returns a new object of class '<em>Predicate Or Assignment CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Predicate Or Assignment CS</em>'.
+	 * @generated
+	 */
+	PredicateOrAssignmentCS createPredicateOrAssignmentCS();
 
 	/**
 	 * Returns a new object of class '<em>Query CS</em>'.

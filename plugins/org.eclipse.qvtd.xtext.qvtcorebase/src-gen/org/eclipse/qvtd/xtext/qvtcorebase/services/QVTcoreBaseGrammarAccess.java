@@ -655,8 +655,7 @@ public class QVTcoreBaseGrammarAccess extends AbstractGrammarElementFinder {
 		// //Predicate ::= BooleanOCLExpr
 		//
 		////Assignement ::= [�default�] SlotOwnerOCLExpr�.�PropertyName �:=� ValueOCLExpr
-		// PredicateOrAssignmentCS returns
-		//AssignmentCS:
+		// PredicateOrAssignmentCS:
 		//	isDefault?="default"? ownedTarget=ExpCS (":=" ownedInitExpression=ExpCS)? ";";
 		@Override public ParserRule getRule() { return rule; }
 
@@ -1277,8 +1276,7 @@ public class QVTcoreBaseGrammarAccess extends AbstractGrammarElementFinder {
 	// //Predicate ::= BooleanOCLExpr
 	//
 	////Assignement ::= [�default�] SlotOwnerOCLExpr�.�PropertyName �:=� ValueOCLExpr
-	// PredicateOrAssignmentCS returns
-	//AssignmentCS:
+	// PredicateOrAssignmentCS:
 	//	isDefault?="default"? ownedTarget=ExpCS (":=" ownedInitExpression=ExpCS)? ";";
 	public PredicateOrAssignmentCSElements getPredicateOrAssignmentCSAccess() {
 		return pPredicateOrAssignmentCS;

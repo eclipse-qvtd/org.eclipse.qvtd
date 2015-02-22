@@ -258,160 +258,6 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int AREA_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AssignmentCSImpl <em>Assignment CS</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AssignmentCSImpl
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QVTcoreBaseCSPackageImpl#getAssignmentCS()
-	 * @generated
-	 */
-	int ASSIGNMENT_CS = 2;
-
-	/**
-	 * The feature id for the '<em><b>Csi</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT_CS__CSI = EssentialOCLCSPackage.EXP_CS__CSI;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT_CS__PARENT = EssentialOCLCSPackage.EXP_CS__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Pivot</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT_CS__PIVOT = EssentialOCLCSPackage.EXP_CS__PIVOT;
-
-	/**
-	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT_CS__ORIGINAL_XMI_ID = EssentialOCLCSPackage.EXP_CS__ORIGINAL_XMI_ID;
-
-	/**
-	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT_CS__OWNED_ANNOTATIONS = EssentialOCLCSPackage.EXP_CS__OWNED_ANNOTATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT_CS__HAS_ERROR = EssentialOCLCSPackage.EXP_CS__HAS_ERROR;
-
-	/**
-	 * The feature id for the '<em><b>Local Left</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT_CS__LOCAL_LEFT = EssentialOCLCSPackage.EXP_CS__LOCAL_LEFT;
-
-	/**
-	 * The feature id for the '<em><b>Local Leftmost Descendant</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT_CS__LOCAL_LEFTMOST_DESCENDANT = EssentialOCLCSPackage.EXP_CS__LOCAL_LEFTMOST_DESCENDANT;
-
-	/**
-	 * The feature id for the '<em><b>Local Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT_CS__LOCAL_PARENT = EssentialOCLCSPackage.EXP_CS__LOCAL_PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Local Right</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT_CS__LOCAL_RIGHT = EssentialOCLCSPackage.EXP_CS__LOCAL_RIGHT;
-
-	/**
-	 * The feature id for the '<em><b>Local Rightmost Descendant</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT_CS__LOCAL_RIGHTMOST_DESCENDANT = EssentialOCLCSPackage.EXP_CS__LOCAL_RIGHTMOST_DESCENDANT;
-
-	/**
-	 * The feature id for the '<em><b>Precedence</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT_CS__PRECEDENCE = EssentialOCLCSPackage.EXP_CS__PRECEDENCE;
-
-	/**
-	 * The feature id for the '<em><b>Is Default</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT_CS__IS_DEFAULT = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owned Target</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT_CS__OWNED_TARGET = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Owned Init Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT_CS__OWNED_INIT_EXPRESSION = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of structural features of the '<em>Assignment CS</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGNMENT_CS_FEATURE_COUNT = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 3;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.PatternCSImpl <em>Pattern CS</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -419,7 +265,7 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QVTcoreBaseCSPackageImpl#getPatternCS()
 	 * @generated
 	 */
-	int PATTERN_CS = 9;
+	int PATTERN_CS = 8;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -492,7 +338,7 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QVTcoreBaseCSPackageImpl#getBottomPatternCS()
 	 * @generated
 	 */
-	int BOTTOM_PATTERN_CS = 3;
+	int BOTTOM_PATTERN_CS = 2;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -592,7 +438,7 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QVTcoreBaseCSPackageImpl#getDirectionCS()
 	 * @generated
 	 */
-	int DIRECTION_CS = 4;
+	int DIRECTION_CS = 3;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -683,7 +529,7 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QVTcoreBaseCSPackageImpl#getDomainCS()
 	 * @generated
 	 */
-	int DOMAIN_CS = 5;
+	int DOMAIN_CS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -801,7 +647,7 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QVTcoreBaseCSPackageImpl#getEnforcementOperationCS()
 	 * @generated
 	 */
-	int ENFORCEMENT_OPERATION_CS = 6;
+	int ENFORCEMENT_OPERATION_CS = 5;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -883,7 +729,7 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QVTcoreBaseCSPackageImpl#getGuardPatternCS()
 	 * @generated
 	 */
-	int GUARD_PATTERN_CS = 7;
+	int GUARD_PATTERN_CS = 6;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -965,7 +811,7 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QVTcoreBaseCSPackageImpl#getParamDeclarationCS()
 	 * @generated
 	 */
-	int PARAM_DECLARATION_CS = 8;
+	int PARAM_DECLARATION_CS = 7;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1065,7 +911,7 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QVTcoreBaseCSPackageImpl#getPredicateCS()
 	 * @generated
 	 */
-	int PREDICATE_CS = 10;
+	int PREDICATE_CS = 9;
 
 	/**
 	 * The feature id for the '<em><b>Csi</b></em>' attribute.
@@ -1192,6 +1038,160 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	 * @ordered
 	 */
 	int PREDICATE_CS_FEATURE_COUNT = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.PredicateOrAssignmentCSImpl <em>Predicate Or Assignment CS</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.PredicateOrAssignmentCSImpl
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QVTcoreBaseCSPackageImpl#getPredicateOrAssignmentCS()
+	 * @generated
+	 */
+	int PREDICATE_OR_ASSIGNMENT_CS = 10;
+
+	/**
+	 * The feature id for the '<em><b>Csi</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_OR_ASSIGNMENT_CS__CSI = EssentialOCLCSPackage.EXP_CS__CSI;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_OR_ASSIGNMENT_CS__PARENT = EssentialOCLCSPackage.EXP_CS__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Pivot</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_OR_ASSIGNMENT_CS__PIVOT = EssentialOCLCSPackage.EXP_CS__PIVOT;
+
+	/**
+	 * The feature id for the '<em><b>Original Xmi Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_OR_ASSIGNMENT_CS__ORIGINAL_XMI_ID = EssentialOCLCSPackage.EXP_CS__ORIGINAL_XMI_ID;
+
+	/**
+	 * The feature id for the '<em><b>Owned Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_OR_ASSIGNMENT_CS__OWNED_ANNOTATIONS = EssentialOCLCSPackage.EXP_CS__OWNED_ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Has Error</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_OR_ASSIGNMENT_CS__HAS_ERROR = EssentialOCLCSPackage.EXP_CS__HAS_ERROR;
+
+	/**
+	 * The feature id for the '<em><b>Local Left</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_OR_ASSIGNMENT_CS__LOCAL_LEFT = EssentialOCLCSPackage.EXP_CS__LOCAL_LEFT;
+
+	/**
+	 * The feature id for the '<em><b>Local Leftmost Descendant</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_OR_ASSIGNMENT_CS__LOCAL_LEFTMOST_DESCENDANT = EssentialOCLCSPackage.EXP_CS__LOCAL_LEFTMOST_DESCENDANT;
+
+	/**
+	 * The feature id for the '<em><b>Local Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_OR_ASSIGNMENT_CS__LOCAL_PARENT = EssentialOCLCSPackage.EXP_CS__LOCAL_PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Local Right</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_OR_ASSIGNMENT_CS__LOCAL_RIGHT = EssentialOCLCSPackage.EXP_CS__LOCAL_RIGHT;
+
+	/**
+	 * The feature id for the '<em><b>Local Rightmost Descendant</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_OR_ASSIGNMENT_CS__LOCAL_RIGHTMOST_DESCENDANT = EssentialOCLCSPackage.EXP_CS__LOCAL_RIGHTMOST_DESCENDANT;
+
+	/**
+	 * The feature id for the '<em><b>Precedence</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_OR_ASSIGNMENT_CS__PRECEDENCE = EssentialOCLCSPackage.EXP_CS__PRECEDENCE;
+
+	/**
+	 * The feature id for the '<em><b>Is Default</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Owned Target</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Owned Init Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_OR_ASSIGNMENT_CS__OWNED_INIT_EXPRESSION = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Predicate Or Assignment CS</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PREDICATE_OR_ASSIGNMENT_CS_FEATURE_COUNT = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QueryCSImpl <em>Query CS</em>}' class.
@@ -1851,49 +1851,6 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	EReference getAreaCS_OwnedBottomPattern();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS <em>Assignment CS</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Assignment CS</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS
-	 * @generated
-	 */
-	EClass getAssignmentCS();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#isIsDefault <em>Is Default</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Is Default</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#isIsDefault()
-	 * @see #getAssignmentCS()
-	 * @generated
-	 */
-	EAttribute getAssignmentCS_IsDefault();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getOwnedTarget <em>Owned Target</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Owned Target</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getOwnedTarget()
-	 * @see #getAssignmentCS()
-	 * @generated
-	 */
-	EReference getAssignmentCS_OwnedTarget();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getOwnedInitExpression <em>Owned Init Expression</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Owned Init Expression</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS#getOwnedInitExpression()
-	 * @see #getAssignmentCS()
-	 * @generated
-	 */
-	EReference getAssignmentCS_OwnedInitExpression();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS <em>Bottom Pattern CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2117,6 +2074,49 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	EReference getPredicateCS_OwnedCondition();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS <em>Predicate Or Assignment CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Predicate Or Assignment CS</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS
+	 * @generated
+	 */
+	EClass getPredicateOrAssignmentCS();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS#isIsDefault <em>Is Default</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Default</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS#isIsDefault()
+	 * @see #getPredicateOrAssignmentCS()
+	 * @generated
+	 */
+	EAttribute getPredicateOrAssignmentCS_IsDefault();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS#getOwnedTarget <em>Owned Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Owned Target</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS#getOwnedTarget()
+	 * @see #getPredicateOrAssignmentCS()
+	 * @generated
+	 */
+	EReference getPredicateOrAssignmentCS_OwnedTarget();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS#getOwnedInitExpression <em>Owned Init Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Owned Init Expression</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS#getOwnedInitExpression()
+	 * @see #getPredicateOrAssignmentCS()
+	 * @generated
+	 */
+	EReference getPredicateOrAssignmentCS_OwnedInitExpression();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS <em>Query CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2337,40 +2337,6 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 		EReference AREA_CS__OWNED_BOTTOM_PATTERN = eINSTANCE.getAreaCS_OwnedBottomPattern();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AssignmentCSImpl <em>Assignment CS</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AssignmentCSImpl
-		 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QVTcoreBaseCSPackageImpl#getAssignmentCS()
-		 * @generated
-		 */
-		EClass ASSIGNMENT_CS = eINSTANCE.getAssignmentCS();
-
-		/**
-		 * The meta object literal for the '<em><b>Is Default</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute ASSIGNMENT_CS__IS_DEFAULT = eINSTANCE.getAssignmentCS_IsDefault();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Target</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ASSIGNMENT_CS__OWNED_TARGET = eINSTANCE.getAssignmentCS_OwnedTarget();
-
-		/**
-		 * The meta object literal for the '<em><b>Owned Init Expression</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ASSIGNMENT_CS__OWNED_INIT_EXPRESSION = eINSTANCE.getAssignmentCS_OwnedInitExpression();
-
-		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.BottomPatternCSImpl <em>Bottom Pattern CS</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2553,6 +2519,40 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PREDICATE_CS__OWNED_CONDITION = eINSTANCE.getPredicateCS_OwnedCondition();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.PredicateOrAssignmentCSImpl <em>Predicate Or Assignment CS</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.PredicateOrAssignmentCSImpl
+		 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QVTcoreBaseCSPackageImpl#getPredicateOrAssignmentCS()
+		 * @generated
+		 */
+		EClass PREDICATE_OR_ASSIGNMENT_CS = eINSTANCE.getPredicateOrAssignmentCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Default</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PREDICATE_OR_ASSIGNMENT_CS__IS_DEFAULT = eINSTANCE.getPredicateOrAssignmentCS_IsDefault();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Target</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PREDICATE_OR_ASSIGNMENT_CS__OWNED_TARGET = eINSTANCE.getPredicateOrAssignmentCS_OwnedTarget();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Init Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PREDICATE_OR_ASSIGNMENT_CS__OWNED_INIT_EXPRESSION = eINSTANCE.getPredicateOrAssignmentCS_OwnedInitExpression();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.QueryCSImpl <em>Query CS</em>}' class.

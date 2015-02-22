@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.*;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
@@ -74,7 +74,6 @@ public class QVTcoreBaseCSFactoryImpl extends EFactoryImpl implements QVTcoreBas
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case QVTcoreBaseCSPackage.ASSIGNMENT_CS: return createAssignmentCS();
 			case QVTcoreBaseCSPackage.BOTTOM_PATTERN_CS: return createBottomPatternCS();
 			case QVTcoreBaseCSPackage.DIRECTION_CS: return createDirectionCS();
 			case QVTcoreBaseCSPackage.DOMAIN_CS: return createDomainCS();
@@ -82,6 +81,7 @@ public class QVTcoreBaseCSFactoryImpl extends EFactoryImpl implements QVTcoreBas
 			case QVTcoreBaseCSPackage.GUARD_PATTERN_CS: return createGuardPatternCS();
 			case QVTcoreBaseCSPackage.PARAM_DECLARATION_CS: return createParamDeclarationCS();
 			case QVTcoreBaseCSPackage.PREDICATE_CS: return createPredicateCS();
+			case QVTcoreBaseCSPackage.PREDICATE_OR_ASSIGNMENT_CS: return createPredicateOrAssignmentCS();
 			case QVTcoreBaseCSPackage.QUERY_CS: return createQueryCS();
 			case QVTcoreBaseCSPackage.REALIZED_VARIABLE_CS: return createRealizedVariableCS();
 			case QVTcoreBaseCSPackage.TRANSFORMATION_CS: return createTransformationCS();
@@ -89,17 +89,6 @@ public class QVTcoreBaseCSFactoryImpl extends EFactoryImpl implements QVTcoreBas
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public AssignmentCS createAssignmentCS() {
-		AssignmentCSImpl assignmentCS = new AssignmentCSImpl();
-		return assignmentCS;
 	}
 
 	/**
@@ -177,6 +166,17 @@ public class QVTcoreBaseCSFactoryImpl extends EFactoryImpl implements QVTcoreBas
 	public PredicateCS createPredicateCS() {
 		PredicateCSImpl predicateCS = new PredicateCSImpl();
 		return predicateCS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public PredicateOrAssignmentCS createPredicateOrAssignmentCS() {
+		PredicateOrAssignmentCSImpl predicateOrAssignmentCS = new PredicateOrAssignmentCSImpl();
+		return predicateOrAssignmentCS;
 	}
 
 	/**

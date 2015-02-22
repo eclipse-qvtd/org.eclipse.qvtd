@@ -64,7 +64,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
@@ -215,7 +215,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 			return csPredicate;
 		}
 		else {
-			AssignmentCS csPredicate = context.refreshElement(AssignmentCS.class, QVTcoreBaseCSPackage.Literals.ASSIGNMENT_CS, asPredicate);
+			PredicateOrAssignmentCS csPredicate = context.refreshElement(PredicateOrAssignmentCS.class, QVTcoreBaseCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS, asPredicate);
 			csPredicate.setPivot(asPredicate);
 			csPredicate.setOwnedTarget(createExpCS(asPredicate.getConditionExpression()));
 			return csPredicate;
@@ -225,7 +225,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	@Override
 	@Nullable
 	public ElementCS visitPropertyAssignment(@NonNull PropertyAssignment asPropertyAssignment) {
-		AssignmentCS csAssignment = context.refreshElement(AssignmentCS.class, QVTcoreBaseCSPackage.Literals.ASSIGNMENT_CS, asPropertyAssignment);
+		PredicateOrAssignmentCS csAssignment = context.refreshElement(PredicateOrAssignmentCS.class, QVTcoreBaseCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS, asPropertyAssignment);
 		csAssignment.setPivot(asPropertyAssignment);
 		ExpCS csSlotExp = createExpCS(asPropertyAssignment.getSlotExpression());
 		NameExpCS csPropName = createNameExpCS(asPropertyAssignment.getTargetProperty());
@@ -314,7 +314,7 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	@Override
 	@Nullable
 	public ElementCS visitVariableAssignment(@NonNull VariableAssignment asVariableAssignment) {
-		AssignmentCS csAssignment = context.refreshElement(AssignmentCS.class, QVTcoreBaseCSPackage.Literals.ASSIGNMENT_CS, asVariableAssignment);
+		PredicateOrAssignmentCS csAssignment = context.refreshElement(PredicateOrAssignmentCS.class, QVTcoreBaseCSPackage.Literals.PREDICATE_OR_ASSIGNMENT_CS, asVariableAssignment);
 		csAssignment.setPivot(asVariableAssignment);
 		Variable asVariable = asVariableAssignment.getTargetVariable();
 		if (asVariable != null) {

@@ -51,11 +51,6 @@ public abstract class AbstractExtendingQVTcoreBaseCSVisitor<R, C>
 	}
 
 	@Override
-	public @Nullable R visitAssignmentCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS object) {
-		return visitExpCS(object);
-	}
-
-	@Override
 	public @Nullable R visitBottomPatternCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS object) {
 		return visitPatternCS(object);
 	}
@@ -92,6 +87,11 @@ public abstract class AbstractExtendingQVTcoreBaseCSVisitor<R, C>
 
 	@Override
 	public @Nullable R visitPredicateCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS object) {
+		return visitExpCS(object);
+	}
+
+	@Override
+	public @Nullable R visitPredicateOrAssignmentCS(@NonNull org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS object) {
 		return visitExpCS(object);
 	}
 

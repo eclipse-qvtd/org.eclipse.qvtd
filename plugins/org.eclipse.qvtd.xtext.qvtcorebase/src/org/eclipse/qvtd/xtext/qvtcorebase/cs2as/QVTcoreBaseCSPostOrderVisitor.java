@@ -33,7 +33,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AreaCS;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.AssignmentCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
@@ -55,7 +55,7 @@ public class QVTcoreBaseCSPostOrderVisitor extends AbstractQVTcoreBaseCSPostOrde
 		super(context);
 	}
 
-	protected @Nullable Assignment refreshPropertyAssignment(@NonNull PropertyCallExp propertyCallExp, @NonNull AssignmentCS csConstraint) {
+	protected @Nullable Assignment refreshPropertyAssignment(@NonNull PropertyCallExp propertyCallExp, @NonNull PredicateOrAssignmentCS csConstraint) {
 		PropertyAssignment propertyAssignment = PivotUtil.getPivot(PropertyAssignment.class, csConstraint);
 		if (propertyAssignment != null) {
 			propertyAssignment.setSlotExpression(propertyCallExp.getOwnedSource());
@@ -64,7 +64,7 @@ public class QVTcoreBaseCSPostOrderVisitor extends AbstractQVTcoreBaseCSPostOrde
 		return propertyAssignment;
 	}
 
-	protected @Nullable Assignment refreshVariableAssignment(@NonNull VariableExp variableExp, @NonNull AssignmentCS csConstraint) {
+	protected @Nullable Assignment refreshVariableAssignment(@NonNull VariableExp variableExp, @NonNull PredicateOrAssignmentCS csConstraint) {
 		VariableAssignment variableAssignment = PivotUtil.getPivot(VariableAssignment.class, csConstraint);
 		if (variableAssignment != null) {
 			variableAssignment.setTargetVariable((Variable) variableExp.getReferredVariable());
@@ -78,17 +78,12 @@ public class QVTcoreBaseCSPostOrderVisitor extends AbstractQVTcoreBaseCSPostOrde
 	}
 
 	@Override
-	public Continuation<?> visitAssignmentCS(@NonNull AssignmentCS csElement) {
-		return null;
-	}
-
-	@Override
 	public Continuation<?> visitBottomPatternCS(@NonNull BottomPatternCS csElement) {
 		BottomPattern pBottomPattern = PivotUtil.getPivot(BottomPattern.class, csElement);
 		if (pBottomPattern != null) {
 			List<Assignment> pAssignments = new ArrayList<Assignment>(); 
 			List<Predicate> pPredicates = new ArrayList<Predicate>(); 
-			for (AssignmentCS csConstraint : csElement.getOwnedConstraints()) {
+			for (PredicateOrAssignmentCS csConstraint : csElement.getOwnedConstraints()) {
 				ExpCS csTarget = csConstraint.getOwnedTarget();
 				ExpCS csInitialiser = csConstraint.getOwnedInitExpression();
 				boolean isDefault = csConstraint.isIsDefault();
@@ -178,6 +173,11 @@ public class QVTcoreBaseCSPostOrderVisitor extends AbstractQVTcoreBaseCSPostOrde
 			}
 			asPredicate.setConditionExpression(asCondition);
 		}
+		return null;
+	}
+
+	@Override
+	public Continuation<?> visitPredicateOrAssignmentCS(@NonNull PredicateOrAssignmentCS csElement) {
 		return null;
 	}
 
