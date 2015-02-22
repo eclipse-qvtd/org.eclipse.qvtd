@@ -33,10 +33,10 @@
       <property href="KiamaAS.ecore.oclas#p.kiamaas.Node.height"/>
     </propertyDatums>
     <propertyDatums producedBy="//@actions.6">
-      <property href="KiamaAS.ecore.oclas#//@ownedPackages.0/@ownedClasses.1/@ownedProperties.2"/>
+      <property href="KiamaAS.ecore.oclas#//@ownedPackages.0/@ownedClasses.1/@ownedProperties.4"/>
     </propertyDatums>
     <propertyDatums producedBy="//@actions.7">
-      <property href="KiamaAS.ecore.oclas#//@ownedPackages.0/@ownedClasses.1/@ownedProperties.3"/>
+      <property href="KiamaAS.ecore.oclas#//@ownedPackages.0/@ownedClasses.1/@ownedProperties.2"/>
     </propertyDatums>
     <propertyDatums producedBy="//@actions.10">
       <property href="KiamaAS.ecore.oclas#p.kiamaas.Node.Top"/>
@@ -177,7 +177,7 @@
     </parameters>
     <mapping href="KiamaRewrite.qvtp.qvtias#m..KiamaRewrite_qvtp_qvtias.uNum_height"/>
   </actions>
-  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.6/@propertyDatums.0 //@datums.3/@propertyDatums.2" requisites="//@datums.5 //@datums.1/@propertyDatums.0 //@datums.5/@propertyDatums.0 //@datums.5/@propertyDatums.1" order="5" parent="//@actions.11" children="//@actions.7">
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.6/@propertyDatums.0 //@datums.3/@propertyDatums.2" requisites="//@datums.5 //@datums.1/@propertyDatums.0 //@datums.5/@propertyDatums.0 //@datums.5/@propertyDatums.1" order="5" parent="//@actions.11">
     <parameterDerivations>
       <secondaryParameter isLoop="true" dataParameter="//@actions.6/@parameters.0"/>
     </parameterDerivations>
@@ -186,8 +186,11 @@
     </parameters>
     <mapping href="KiamaRewrite.qvtp.qvtias#m..KiamaRewrite_qvtp_qvtias.uPlus_left"/>
   </actions>
-  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.6/@propertyDatums.1 //@datums.3/@propertyDatums.3" requisites="//@datums.5 //@datums.1/@propertyDatums.0 //@datums.5/@propertyDatums.2 //@datums.5/@propertyDatums.1" order="6" parent="//@actions.6">
-    <parameters datum="//@datums.5">
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.6/@propertyDatums.1 //@datums.3/@propertyDatums.3" requisites="//@datums.5 //@datums.1/@propertyDatums.0 //@datums.5/@propertyDatums.2 //@datums.5/@propertyDatums.1" order="6" parent="//@actions.11">
+    <parameterDerivations>
+      <secondaryParameter isLoop="true" dataParameter="//@actions.7/@parameters.0"/>
+    </parameterDerivations>
+    <parameters secondaryParameter="//@actions.7/@parameterDerivations.0/@secondaryParameter" datum="//@datums.5">
       <variable href="KiamaRewrite.qvtp.qvtias#qV..KiamaRewrite_qvtp_qvtias.uPlus_right.leftCS.guard.plusCS"/>
     </parameters>
     <mapping href="KiamaRewrite.qvtp.qvtias#m..KiamaRewrite_qvtp_qvtias.uPlus_right"/>
@@ -219,5 +222,5 @@
     </parameters>
     <mapping href="KiamaRewrite.qvtp.qvtias#m..KiamaRewrite_qvtp_qvtias.uTop_node"/>
   </actions>
-  <actions xsi:type="qvtschedule:MappingAction" children="//@actions.2 //@actions.0 //@actions.1 //@actions.10 //@actions.6 //@actions.4 //@actions.8 //@actions.5 //@actions.9 //@actions.3"/>
+  <actions xsi:type="qvtschedule:MappingAction" children="//@actions.2 //@actions.0 //@actions.1 //@actions.10 //@actions.6 //@actions.7 //@actions.4 //@actions.8 //@actions.5 //@actions.9 //@actions.3"/>
 </qvtschedule:Schedule>
