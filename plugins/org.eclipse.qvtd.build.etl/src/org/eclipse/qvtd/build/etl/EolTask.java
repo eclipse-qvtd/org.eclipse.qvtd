@@ -18,7 +18,7 @@ import java.util.List;
 import org.eclipse.epsilon.common.parse.problem.ParseProblem;
 import org.eclipse.epsilon.eol.EolModule;
 import org.eclipse.epsilon.eol.IEolExecutableModule;
-import org.eclipse.epsilon.eol.dom.Operation;
+//import org.eclipse.epsilon.eol.dom.Operation;
 import org.eclipse.epsilon.eol.exceptions.EolRuntimeException;
 import org.eclipse.epsilon.eol.models.IModel;
 
@@ -137,7 +137,7 @@ public class EolTask extends EpsilonTask {
 	 * @throws QvtMtcExecutionException If there was an error executing the operation.
 	 */
 	public void executeFromFirstOperation() throws QvtMtcExecutionException {
-		prepare();
+/*		prepare();
 		Operation operation = module.getDeclaredOperations().get(0);
 		preProcess();
 		try {
@@ -156,7 +156,7 @@ public class EolTask extends EpsilonTask {
 				}
 			}
 			module.getContext().getModelRepository().removeModel(model);
-		}
+		} */
 	}
 	
 	/**
@@ -168,7 +168,7 @@ public class EolTask extends EpsilonTask {
 	 * @throws QvtMtcExecutionException the execution exception
 	 */
 	private Object executeOperation(IEolExecutableModule module, String operationName) throws QvtMtcExecutionException {
-		Operation operation = module.getDeclaredOperations().getOperation(operationName);
+/*		Operation operation = module.getDeclaredOperations().getOperation(operationName);
 		if(operation != null) {
 			try {
 				return operation.execute(null, Collections.EMPTY_LIST, module.getContext());
@@ -176,7 +176,7 @@ public class EolTask extends EpsilonTask {
 				e.printStackTrace();
 				throw new QvtMtcExecutionException(e.getMessage());
 			}
-		}
+		} */
 		return null;
 	}
 
