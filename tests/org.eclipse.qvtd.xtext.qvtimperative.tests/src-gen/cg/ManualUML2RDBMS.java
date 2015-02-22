@@ -1317,6 +1317,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * where ( |
      * a2f.owner = sc2ta2f.referenced = dc2tp2s.schema = sst.schema = s)
      * { |
+     * sc2t = p2s;
      * fk = a2f.name;
      * fc = a2f.name +
      *   '_tid';
@@ -1367,6 +1368,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         assert fk_0 != null;
         modelObjects[1/*rdbms*/].add(fk_0);
         // assignments
+        sc2t.setOwner(p2s_10);
         fk_0.setName(name);
         final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name, STR__tid);
         fc_0.setName(sum);
