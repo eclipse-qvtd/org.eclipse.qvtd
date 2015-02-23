@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<classes:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:classes="http://ocldependencyanalysis/classes/1.0">
-  <ownedPackages name="P1">
-    <ownedClasses name="C1"/>
-    <ownedClasses name="C2" superClass="//@ownedPackages.0/@ownedClasses.0"/>
-  </ownedPackages>
-</classes:Root>

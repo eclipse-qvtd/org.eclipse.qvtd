@@ -134,8 +134,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		
 		myQVT = createQVT();
 		QVTiEnvironmentFactory factory = myQVT.getEnvironmentFactory(); 
-		factory.setEvaluationTracingEnabled(true);
-		factory.configureLoadFirstStrategy(); // Since the models might use a different URI to refer the same meta-model
+		// factory.setEvaluationTracingEnabled(true);
+		// factory.configureLoadFirstStrategy(); // Since the models might use a different URI to refer the same meta-model
 	}
 	
 	protected @NonNull MyQVT createQVT() {
@@ -177,7 +177,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
     	QVTiPivotEvaluator testEvaluator =  new QVTiPivotEvaluator(myQVT.getEnvironmentFactory(), qvtiTransf.getTransformation());
 		URI samplesBaseUri = baseURI.appendSegment("samples");
     	URI csModelURI = samplesBaseUri.appendSegment("model1_input.xmi");
-    	URI asModelURI = samplesBaseUri.appendSegment("model1_output.xmi");
+    	URI asModelURI = samplesBaseUri.appendSegment("model1_output_Interpreter.xmi");
     	URI expectedAsModelURI = samplesBaseUri.appendSegment("model1_output_ref.xmi");
     	
     	testEvaluator.saveTransformation(null);
@@ -213,9 +213,9 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 //    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("classescs2asSchedule_pruned.graphml").toString(), true);
     	
 		URI samplesBaseUri = baseURI.appendSegment("samples");
-    	URI csModelURI = samplesBaseUri.appendSegment("example1_input.xmi");
-    	URI asModelURI = samplesBaseUri.appendSegment("example1_output.xmi");
-    	URI expectedAsModelURI = samplesBaseUri.appendSegment("example1_output_expected.xmi");
+    	URI csModelURI = samplesBaseUri.appendSegment("model1_input.xmi");
+    	URI asModelURI = samplesBaseUri.appendSegment("model1_output_Interpreter.xmi");
+    	URI expectedAsModelURI = samplesBaseUri.appendSegment("model1_output_ref.xmi");
     	
     	
 //    	QVTiPivotEvaluator testEvaluator = new QVTiPivotEvaluator(ClassUtil.nonNullState(metamodelManager), qvtiTransf.getTransformation());
@@ -281,7 +281,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	}
 	
 	@Test
-	public void testExample1_CGv() throws Exception {
+	public void testExample1_CG() throws Exception {
 		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
 
 		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "Source2Target.ocl", myQVT, TestsXMLUtil.defaultSavingOptions);
@@ -316,14 +316,14 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		URI middleGenModelURI= baseURI.appendSegment("classescs2as.genmodel");
 //		ResourceSet asRset = myQVT.getMetamodelManager().getASResourceSet();
 //		Class<? extends TransformationExecutor> txClass = generateCode(getTransformation(asRset, baseURI.appendSegment("classescs2as.qvtias")) , middleGenModelURI, TESTS_GEN_PATH);
-		Class<? extends TransformationExecutor> txClass = generateCode(myQVT, qvtiTransf.getTransformation() , middleGenModelURI, TESTS_GEN_PATH);
+		Class<? extends TransformationExecutor> txClass = generateCode(myQVT, qvtiTransf.getTransformation(), middleGenModelURI, TESTS_GEN_PATH);
 //		Class<? extends TransformationExecutor> txClass = classescs2as_qvtp_qvtias.class;
 				
 		
 		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore 
 		MyQVT myQVT2 = createQVT();
-		Registry reg2 = myQVT2.getPackageRegistry();
-		reg2.put(EnvironmentPackage.eNS_URI, EnvironmentPackage.eINSTANCE);
+		Registry reg = myQVT2.getPackageRegistry();
+		reg.put(EnvironmentPackage.eNS_URI, EnvironmentPackage.eINSTANCE);
 		
 		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
 		TransformationEvaluator evaluator = myQVT2.createEvaluator(txConstructor);
@@ -334,9 +334,9 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		//
 
     	URI samplesBaseUri = baseURI.appendSegment("samples");
-    	URI csModelURI = samplesBaseUri.appendSegment("example1_input.xmi");
-    	URI asModelURI = samplesBaseUri.appendSegment("example1_output.xmi");
-    	URI expectedAsModelURI = samplesBaseUri.appendSegment("example1_output_expected.xmi");
+    	URI csModelURI = samplesBaseUri.appendSegment("model1_input.xmi");
+    	URI asModelURI = samplesBaseUri.appendSegment("model1_output_CG.xmi");
+    	URI expectedAsModelURI = samplesBaseUri.appendSegment("model1_output_ref.xmi");
     	
     	ResourceSet rSet = myQVT2.getResourceSet();
 		Resource inputResource = rSet.getResource(csModelURI, true);

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<qvtschedule:Schedule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvtschedule="http://www.eclipse.org/qvt/0.2/QVTschedule/">
+<qvtschedule:Schedule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvtschedule="http://www.eclipse.org/qvt/0.2/QVTschedule/"
+    xsi:schemaLocation="http://www.eclipse.org/qvt/0.2/QVTschedule/ java://org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage">
   <datums xsi:type="qvtschedule:ClassDatum" sub="//@datums.1 //@datums.7 //@datums.11">
     <type href="ClassesCS.ecore.oclas#T.classescs.ElementCS"/>
     <propertyDatums sub="//@datums.1/@propertyDatums.1 //@datums.7/@propertyDatums.1">
@@ -131,7 +132,8 @@
       <property href="ClassesCS.ecore.oclas#p.classescs.PathNameCS.path"/>
     </propertyDatums>
   </datums>
-  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.4 //@datums.2/@propertyDatums.1" requisites="//@datums.2" order="5" parent="//@actions.8">
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.4 //@datums.2/@propertyDatums.1" requisites="//@datums.2" order="5"
+      parent="//@actions.8">
     <parameterDerivations>
       <secondaryParameter isLoop="true" dataParameter="//@actions.0/@parameters.0"/>
     </parameterDerivations>
@@ -143,7 +145,8 @@
     </results>
     <mapping href="classescs2as.qvtp.qvtias#m..classescs2as_qvtp_qvtias.cClassCS_2_Class"/>
   </actions>
-  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.6 //@datums.5/@propertyDatums.1" requisites="//@datums.5" order="2" parent="//@actions.8">
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.6 //@datums.5/@propertyDatums.1" requisites="//@datums.5" order="2"
+      parent="//@actions.8">
     <parameterDerivations>
       <secondaryParameter isLoop="true" dataParameter="//@actions.1/@parameters.0"/>
     </parameterDerivations>
@@ -155,7 +158,8 @@
     </results>
     <mapping href="classescs2as.qvtp.qvtias#m..classescs2as_qvtp_qvtias.cPackageCS_2_Package"/>
   </actions>
-  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.8 //@datums.7/@propertyDatums.1" requisites="//@datums.7" order="1" parent="//@actions.8">
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.8 //@datums.7/@propertyDatums.1" requisites="//@datums.7" order="1"
+      parent="//@actions.8">
     <parameterDerivations>
       <secondaryParameter isLoop="true" dataParameter="//@actions.2/@parameters.0"/>
     </parameterDerivations>
@@ -167,7 +171,8 @@
     </results>
     <mapping href="classescs2as.qvtp.qvtias#m..classescs2as_qvtp_qvtias.cRootCS_2_Root"/>
   </actions>
-  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.4/@propertyDatums.0" requisites="//@datums.2 //@datums.2/@propertyDatums.0 //@datums.2/@propertyDatums.1" order="7" parent="//@actions.8">
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.4/@propertyDatums.0" requisites="//@datums.2 //@datums.2/@propertyDatums.0 //@datums.2/@propertyDatums.1"
+      order="7" parent="//@actions.8">
     <parameterDerivations>
       <secondaryParameter isLoop="true" dataParameter="//@actions.3/@parameters.0"/>
     </parameterDerivations>
@@ -176,7 +181,8 @@
     </parameters>
     <mapping href="classescs2as.qvtp.qvtias#m..classescs2as_qvtp_qvtias.uClass_name"/>
   </actions>
-  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.4/@propertyDatums.1 //@datums.4/@propertyDatums.2" requisites="//@datums.2 //@datums.2/@propertyDatums.2 //@datums.2/@propertyDatums.1 //@datums.9/@propertyDatums.0 //@datums.6/@propertyDatums.2 //@datums.8/@propertyDatums.0 //@datums.6/@propertyDatums.1 //@datums.6/@propertyDatums.0 //@datums.10/@propertyDatums.0 //@datums.4/@propertyDatums.0 //@datums.11/@propertyDatums.0" order="8" parent="//@actions.8">
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.4/@propertyDatums.1 //@datums.4/@propertyDatums.2" requisites="//@datums.2 //@datums.2/@propertyDatums.2 //@datums.2/@propertyDatums.1 //@datums.9/@propertyDatums.0 //@datums.6/@propertyDatums.2 //@datums.8/@propertyDatums.0 //@datums.6/@propertyDatums.1 //@datums.6/@propertyDatums.0 //@datums.10/@propertyDatums.0 //@datums.4/@propertyDatums.0 //@datums.11/@propertyDatums.0"
+      order="8" parent="//@actions.8">
     <parameterDerivations>
       <secondaryParameter isLoop="true" dataParameter="//@actions.4/@parameters.0"/>
     </parameterDerivations>
@@ -185,7 +191,8 @@
     </parameters>
     <mapping href="classescs2as.qvtp.qvtias#m..classescs2as_qvtp_qvtias.uClass_superClass"/>
   </actions>
-  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.6/@propertyDatums.0" requisites="//@datums.5 //@datums.5/@propertyDatums.0 //@datums.5/@propertyDatums.1" order="4" parent="//@actions.8">
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.6/@propertyDatums.0" requisites="//@datums.5 //@datums.5/@propertyDatums.0 //@datums.5/@propertyDatums.1"
+      order="4" parent="//@actions.8">
     <parameterDerivations>
       <secondaryParameter isLoop="true" dataParameter="//@actions.5/@parameters.0"/>
     </parameterDerivations>
@@ -194,7 +201,8 @@
     </parameters>
     <mapping href="classescs2as.qvtp.qvtias#m..classescs2as_qvtp_qvtias.uPackage_name"/>
   </actions>
-  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.6/@propertyDatums.1 //@datums.4/@propertyDatums.3" requisites="//@datums.5 //@datums.5/@propertyDatums.2 //@datums.2/@propertyDatums.1 //@datums.5/@propertyDatums.1" order="6" parent="//@actions.8">
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.6/@propertyDatums.1 //@datums.4/@propertyDatums.3" requisites="//@datums.5 //@datums.5/@propertyDatums.2 //@datums.2/@propertyDatums.1 //@datums.5/@propertyDatums.1"
+      order="6" parent="//@actions.8">
     <parameterDerivations>
       <secondaryParameter isLoop="true" dataParameter="//@actions.6/@parameters.0"/>
     </parameterDerivations>
@@ -203,7 +211,8 @@
     </parameters>
     <mapping href="classescs2as.qvtp.qvtias#m..classescs2as_qvtp_qvtias.uPackage_ownedClasses"/>
   </actions>
-  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.8/@propertyDatums.0 //@datums.6/@propertyDatums.3" requisites="//@datums.7 //@datums.7/@propertyDatums.0 //@datums.5/@propertyDatums.1 //@datums.7/@propertyDatums.1" order="3" parent="//@actions.8">
+  <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.8/@propertyDatums.0 //@datums.6/@propertyDatums.3" requisites="//@datums.7 //@datums.7/@propertyDatums.0 //@datums.5/@propertyDatums.1 //@datums.7/@propertyDatums.1"
+      order="3" parent="//@actions.8">
     <parameterDerivations>
       <secondaryParameter isLoop="true" dataParameter="//@actions.7/@parameters.0"/>
     </parameterDerivations>

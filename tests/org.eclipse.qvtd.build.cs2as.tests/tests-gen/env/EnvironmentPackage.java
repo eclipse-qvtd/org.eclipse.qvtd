@@ -37,7 +37,7 @@ public interface EnvironmentPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://qvtd.buid.cs.tests/example2/env";
+	String eNS_URI = "http://cs2as/tests/example2/env/1.0";
 
 	/**
 	 * The package namespace name.

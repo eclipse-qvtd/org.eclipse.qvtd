@@ -72,28 +72,28 @@ import target.TargetPackage;
 public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
 {
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
-    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_ocldependencyanalysis_s_sourceMM_s_1_0 = IdManager.getNsURIPackageId("http://ocldependencyanalysis/sourceMM/1.0", null, SourcePackage.eINSTANCE);
-    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_ocldependencyanalysis_s_targetMM_s_1_0 = IdManager.getNsURIPackageId("http://ocldependencyanalysis/targetMM/1.0", null, TargetPackage.eINSTANCE);
+    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_sourceMM_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example1/sourceMM/1.0", null, SourcePackage.eINSTANCE);
+    public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example1/targetMM/1.0", null, TargetPackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore = IdManager.getNsURIPackageId("http://www.eclipse.org/emf/2002/Ecore", null, EcorePackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_www_example_org_s_examples_s_env_ecore = IdManager.getNsURIPackageId("http://www.example.org/examples/env.ecore", null, null);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_A = PACKid_http_c_s_s_ocldependencyanalysis_s_targetMM_s_1_0.getClassId("A", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_A1 = PACKid_http_c_s_s_ocldependencyanalysis_s_targetMM_s_1_0.getClassId("A1", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_A2 = PACKid_http_c_s_s_ocldependencyanalysis_s_targetMM_s_1_0.getClassId("A2", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_B = PACKid_http_c_s_s_ocldependencyanalysis_s_targetMM_s_1_0.getClassId("B", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_C = PACKid_http_c_s_s_ocldependencyanalysis_s_targetMM_s_1_0.getClassId("C", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_A = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("A", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_A1 = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("A1", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_A2 = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("A2", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_B = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("B", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_C = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("C", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Class = PACKid_$metamodel$.getClassId("Class", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_D = PACKid_http_c_s_s_ocldependencyanalysis_s_targetMM_s_1_0.getClassId("D", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_D = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("D", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_EObject = PACKid_http_c_s_s_www_eclipse_org_s_emf_s_2002_s_Ecore.getClassId("EObject", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Environment = PACKid_http_c_s_s_www_example_org_s_examples_s_env_ecore.getClassId("Environment", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_NamedElement = PACKid_http_c_s_s_ocldependencyanalysis_s_targetMM_s_1_0.getClassId("NamedElement", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_NamedElement = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("NamedElement", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OclElement = PACKid_$metamodel$.getClassId("OclElement", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_SRoot = PACKid_http_c_s_s_ocldependencyanalysis_s_sourceMM_s_1_0.getClassId("SRoot", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_TRoot = PACKid_http_c_s_s_ocldependencyanalysis_s_targetMM_s_1_0.getClassId("TRoot", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_X = PACKid_http_c_s_s_ocldependencyanalysis_s_sourceMM_s_1_0.getClassId("X", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Y = PACKid_http_c_s_s_ocldependencyanalysis_s_sourceMM_s_1_0.getClassId("Y", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Y1 = PACKid_http_c_s_s_ocldependencyanalysis_s_sourceMM_s_1_0.getClassId("Y1", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Y2 = PACKid_http_c_s_s_ocldependencyanalysis_s_sourceMM_s_1_0.getClassId("Y2", 0);
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Z = PACKid_http_c_s_s_ocldependencyanalysis_s_sourceMM_s_1_0.getClassId("Z", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_SRoot = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_sourceMM_s_1_0.getClassId("SRoot", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_TRoot = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("TRoot", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_X = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_sourceMM_s_1_0.getClassId("X", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Y = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_sourceMM_s_1_0.getClassId("Y", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Y1 = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_sourceMM_s_1_0.getClassId("Y1", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Y2 = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_sourceMM_s_1_0.getClassId("Y2", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Z = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_sourceMM_s_1_0.getClassId("Z", 0);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_B = TypeId.ORDERED_SET.getSpecializedId(CLSSid_B);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_C = TypeId.ORDERED_SET.getSpecializedId(CLSSid_C);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_NamedElement = TypeId.ORDERED_SET.getSpecializedId(CLSSid_NamedElement);
@@ -203,8 +203,7 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
     public @NonNull /*@NonInvalid*/ Environment _env(final @NonNull /*@NonInvalid*/ Object self_0, final @NonNull /*@NonInvalid*/ Object child) {
         final @NonNull /*@Thrown*/ Environment _env_B = this._env_B(self_0, child);
         final @NonNull /*@Thrown*/ Environment _env_C = this._env_C(self_0, child);
-        // FIXME Not clear if this kind of expressions will be used in the name resolution descriptions
-        final @Nullable /*@Thrown*/ Environment mergeEnv = _env_B.mergeEnv(_env_C);
+        final @Nullable /*@Thrown*/ Environment mergeEnv = this.mergeEnv(_env_B, _env_C);
         if (mergeEnv == null) {
             throw new InvalidValueException("Null body for \'OclElement::_env(OclElement) : env::Environment\'");
         }

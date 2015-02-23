@@ -3,8 +3,8 @@
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:classescs="http://ocldependencyanalysis/classescs/1.0"
-    xsi:schemaLocation="http://ocldependencyanalysis/classescs/1.0 ../ClassesCS.ecore">
+    xmlns:classescs="http://cs2as/tests/example2/classescs/1.0"
+    xsi:schemaLocation="http://cs2as/tests/example2/classescs/1.0 ../ClassesCS.ecore">
   <ownedPackages
       name="P1">
     <ownedClasses

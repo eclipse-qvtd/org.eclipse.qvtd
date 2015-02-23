@@ -38,7 +38,7 @@ public interface ClassescstracesPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://tracesmodel/1.0/classescstraces";
+	String eNS_URI = "http://cs2as/tests/example2/classescs2as/1.0";
 
 	/**
 	 * The package namespace name.

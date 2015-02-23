@@ -38,7 +38,7 @@ public interface ClassescsPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://ocldependencyanalysis/classescs/1.0";
+	String eNS_URI = "http://cs2as/tests/example2/classescs/1.0";
 
 	/**
 	 * The package namespace name.

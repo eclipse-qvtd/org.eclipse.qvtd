@@ -3,8 +3,8 @@
     xmi:version="2.0"
     xmlns:xmi="http://www.omg.org/XMI"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:source="http://ocldependencyanalysis/sourceMM/1.0"
-    xsi:schemaLocation="http://ocldependencyanalysis/sourceMM/1.0 ../SourceMM1.ecore">
+    xmlns:source="http://cs2as/tests/example1/sourceMM/1.0"
+    xsi:schemaLocation="http://cs2as/tests/example1/sourceMM/1.0 ../SourceMM1.ecore">
   <ownedX isA1="true">
     <ownsY xsi:type="source:Y1"
         name="Y1-a">

@@ -38,7 +38,7 @@ public interface TargetPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	String eNS_URI = "http://ocldependencyanalysis/targetMM/1.0";
+	String eNS_URI = "http://cs2as/tests/example1/targetMM/1.0";
 
 	/**
 	 * The package namespace name.
