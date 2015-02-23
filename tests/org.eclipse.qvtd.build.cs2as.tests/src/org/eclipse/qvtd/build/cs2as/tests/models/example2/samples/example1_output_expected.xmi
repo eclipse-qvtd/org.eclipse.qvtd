@@ -10,6 +10,7 @@
     <ownedClasses
         name="C1"/>
     <ownedClasses
-        name="C2"/>
+        name="C2"
+        superClass="//@ownedPackages.0/@ownedClasses.0"/>
   </ownedPackages>
 </classes:Root>

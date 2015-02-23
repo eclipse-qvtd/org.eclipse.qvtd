@@ -295,18 +295,14 @@ public class OCL2QVTiTestCases extends LoadTestCase {
     	// Generate the transformation java code
     	// 
 		URI middleGenModelURI= baseURI.appendSegment("Source2Target.genmodel");
-		Class<? extends TransformationExecutor> txClass = generateCode(qvtiTransf.getTransformation(), middleGenModelURI, TESTS_GEN_PATH);
+		Class<? extends TransformationExecutor> txClass = generateCode(myQVT, qvtiTransf.getTransformation(), middleGenModelURI, TESTS_GEN_PATH);
 	}
 		
 		
 	@Test
 	public void testExample2_CG() throws Exception {
 		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
-		
-		Registry reg = myQVT.getPackageRegistry();
-		//reg.put(baseURI.appendSegment("Environment.ecore").toString(), EnvironmentPackage.eINSTANCE);
-		reg.put(EnvironmentPackage.eNS_URI, EnvironmentPackage.eINSTANCE);		
-		
+			
 		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "classescs2as.ocl", myQVT, TestsXMLUtil.defaultSavingOptions);
     	mtc.execute();
     	PivotModel qvtiTransf = mtc.getiModel();
@@ -320,12 +316,17 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		URI middleGenModelURI= baseURI.appendSegment("classescs2as.genmodel");
 //		ResourceSet asRset = myQVT.getMetamodelManager().getASResourceSet();
 //		Class<? extends TransformationExecutor> txClass = generateCode(getTransformation(asRset, baseURI.appendSegment("classescs2as.qvtias")) , middleGenModelURI, TESTS_GEN_PATH);
-		Class<? extends TransformationExecutor> txClass = generateCode(qvtiTransf.getTransformation() , middleGenModelURI, TESTS_GEN_PATH);
+		Class<? extends TransformationExecutor> txClass = generateCode(myQVT, qvtiTransf.getTransformation() , middleGenModelURI, TESTS_GEN_PATH);
 //		Class<? extends TransformationExecutor> txClass = classescs2as_qvtp_qvtias.class;
 				
 		
+		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore 
+		MyQVT myQVT2 = createQVT();
+		Registry reg2 = myQVT2.getPackageRegistry();
+		reg2.put(EnvironmentPackage.eNS_URI, EnvironmentPackage.eINSTANCE);
+		
 		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
-		TransformationEvaluator evaluator = myQVT.createEvaluator(txConstructor);
+		TransformationEvaluator evaluator = myQVT2.createEvaluator(txConstructor);
 		TransformationExecutor tx = evaluator.getExecutor();
 		
 		//
@@ -337,7 +338,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
     	URI asModelURI = samplesBaseUri.appendSegment("example1_output.xmi");
     	URI expectedAsModelURI = samplesBaseUri.appendSegment("example1_output_expected.xmi");
     	
-    	ResourceSet rSet = myQVT.getResourceSet();
+    	ResourceSet rSet = myQVT2.getResourceSet();
 		Resource inputResource = rSet.getResource(csModelURI, true);
 		tx.addRootObjects("leftCS", ClassUtil.nonNullState(inputResource.getContents()));
 		assertTrue(tx.run());
@@ -347,6 +348,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
         Resource expected =  rSet.getResource(expectedAsModelURI, true);
         assertSameModel(expected, rSet.getResource(asModelURI, true));
+        myQVT2.dispose();
 	}
 	
 //	@Test
@@ -450,11 +452,11 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	
 	
 	// Copied from QVTiCompilerTest
-	protected Class<? extends AbstractTransformationExecutor> generateCode(@NonNull Transformation transformation, URI genModelURI, @Nullable String savePath) throws Exception {
+	protected Class<? extends AbstractTransformationExecutor> generateCode(@NonNull MyQVT qvt, @NonNull Transformation transformation, URI genModelURI, @Nullable String savePath) throws Exception {
 
-		registerGenModels(myQVT.getResourceSet(), myQVT.getMetamodelManager(), genModelURI);
+		registerGenModels(qvt.getResourceSet(), qvt.getMetamodelManager(), genModelURI);
 				
-		QVTiCodeGenerator cg = new QVTiCodeGenerator(myQVT.getEnvironmentFactory(), transformation);
+		QVTiCodeGenerator cg = new QVTiCodeGenerator(qvt.getEnvironmentFactory(), transformation);
 		QVTiCodeGenOptions options = cg.getOptions();
 		options.setUseNullAnnotations(true);
 		options.setPackagePrefix("cg");
