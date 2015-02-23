@@ -578,7 +578,7 @@ public class QvtrToQvtcTransformation
 	}
 
 
-	public void saveTrace(@NonNull Resource asResource, @NonNull Collection<? extends EObject> eObjects, @NonNull Map<Object, Object> options) throws IOException {
+	public void saveTrace(@NonNull Resource asResource, @NonNull Collection<? extends EObject> eObjects, @NonNull Map<?, ?> options) throws IOException {
         Model root = PivotFactory.eINSTANCE.createModel();
         root.setExternalURI(asResource.getURI().toString());
         asResource.getContents().add(root);
@@ -599,7 +599,7 @@ public class QvtrToQvtcTransformation
 		asResource.save(options);
 	}
 	
-	public void saveCore(@NonNull Resource asResource, @NonNull Collection<? extends EObject> eObjects, @NonNull Map<Object, Object> options) throws IOException {
+	public void saveCore(@NonNull Resource asResource, @NonNull Collection<? extends EObject> eObjects, @NonNull Map<?, ?> options) throws IOException {
         this.coreModel.setExternalURI(asResource.getURI().toString());
         // Copy imports
         

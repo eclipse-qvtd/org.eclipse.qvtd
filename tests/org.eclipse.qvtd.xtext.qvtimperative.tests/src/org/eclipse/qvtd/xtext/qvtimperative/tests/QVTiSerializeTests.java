@@ -11,14 +11,12 @@
 package org.eclipse.qvtd.xtext.qvtimperative.tests;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Model;
@@ -29,6 +27,7 @@ import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.xtext.base.services.BaseLinkingService;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
+import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtimperativecs.QVTimperativeCSPackage;
 import org.eclipse.xtext.resource.XtextResource;
@@ -73,21 +72,19 @@ public class QVTiSerializeTests extends LoadTestCase
 		//		
 		URI savedURI = ClassUtil.nonNullState(asResource.getURI());
 		asResource.setURI(outputURI.trimFileExtension().trimFileExtension().appendFileExtension(PivotConstants.OCL_AS_FILE_EXTENSION));
-		asResource.save(null);
+		asResource.save(TestsXMLUtil.defaultSavingOptions);
 		asResource.setURI(savedURI);
 		
 		assertNoDiagnosticErrors("Concrete Syntax validation failed", xtextResource);
-		try {
-			HashMap<String, Object> saveOptions = new HashMap<String,Object>();
-			saveOptions.put(XMLResource.OPTION_LINE_DELIMITER, "\n");		// BUG 439440 Xtext ignores this
-			xtextResource.save(saveOptions);
+		try {		
+			xtextResource.save(TestsXMLUtil.defaultSavingOptions);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 			URI xmiURI = outputURI.appendFileExtension(".xmi");
 			Resource xmiResource = resourceSet.createResource(xmiURI);
 			xmiResource.getContents().addAll(xtextResource.getContents());
-			xmiResource.save(null);
+			xmiResource.save(TestsXMLUtil.defaultSavingOptions);
 			fail(e.toString());
 		}
 		return xtextResource;

@@ -36,7 +36,7 @@ public class PivotModelUtil {
 	 */
 	// Copied from MTC broker
 	public PivotModel createPivotModel(String modeUri, String modelName, String modelAliases, String metamodelUris,
-			boolean readOnLoad, boolean storeOnDispoal, boolean cached, boolean resolveExternalRefs, boolean isPivotResource, Map<String, Object> savingOptions) throws QvtMtcExecutionException {
+			boolean readOnLoad, boolean storeOnDispoal, boolean cached, boolean resolveExternalRefs, boolean isPivotResource, Map<?, ?> savingOptions) throws QvtMtcExecutionException {
 
 		PivotModel model = new PivotModel(environmentFactory, isPivotResource, savingOptions);
 		StringProperties properties = new StringProperties();

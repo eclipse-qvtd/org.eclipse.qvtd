@@ -6,10 +6,10 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.qvtd.build.qvtrtoqvtc.QvtrToQvtcTransformation;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
+import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtrelation.QVTrelationStandaloneSetup;
 import org.junit.After;
@@ -56,11 +56,9 @@ public class QvtrToQvtcTests extends LoadTestCase {
     	QvtrToQvtcTransformation t = new QvtrToQvtcTransformation(metaModelManager, qvtrResource, qvtcResource, qvtcTraceResource);
 		t.prepare();
 		t.execute();
-		Map<Object, Object> options = new HashMap<Object, Object>();
-        options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
-        t.save(qvtcTraceResource, t.getTraceRoots(), options);
+        t.save(qvtcTraceResource, t.getTraceRoots(), TestsXMLUtil.defaultSavingOptions);
         assertNoResourceErrors("Trace save", qvtcTraceResource);
-        t.save(qvtcResource, t.getCoreRoots(), options);
+        t.save(qvtcResource, t.getCoreRoots(), TestsXMLUtil.defaultSavingOptions);
         assertNoResourceErrors("Core save", qvtcResource);
 		
     }*/
@@ -80,11 +78,9 @@ public class QvtrToQvtcTests extends LoadTestCase {
     	QvtrToQvtcTransformation t = new QvtrToQvtcTransformation(metaModelManager, qvtrResource, qvtcResource, qvtcTraceResource);
 		t.prepare();
 		t.execute();
-		Map<Object, Object> options = new HashMap<Object, Object>();
-        options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
-        t.save(qvtcTraceResource, t.getTraceRoots(), options);
+        t.save(qvtcTraceResource, t.getTraceRoots(), TestsXMLUtil.defaultSavingOptions);
         assertNoResourceErrors("Trace save", qvtcTraceResource);
-        t.save(qvtcResource, t.getCoreRoots(), options);
+        t.save(qvtcResource, t.getCoreRoots(), TestsXMLUtil.defaultSavingOptions);
         assertNoResourceErrors("Core save", qvtcResource);
 		
     }*/
@@ -105,12 +101,10 @@ public class QvtrToQvtcTests extends LoadTestCase {
     	Resource qvtcTraceResource = asResourceSet.createResource(qvtcTraceURI, null);
     	QvtrToQvtcTransformation t = new QvtrToQvtcTransformation(ocl.getEnvironmentFactory(), qvtrResource, qvtcResource, qvtcTraceResource);
 		t.prepare();
-		t.execute();
-		Map<Object, Object> options = new HashMap<Object, Object>();
-        options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
-        t.saveTrace(qvtcTraceResource, t.getTraceRoots(), options);
+		t.execute();		
+        t.saveTrace(qvtcTraceResource, t.getTraceRoots(), TestsXMLUtil.defaultSavingOptions);
         assertNoResourceErrors("Trace save", qvtcTraceResource);
-        t.saveCore(qvtcResource, t.getCoreRoots(), options);
+        t.saveCore(qvtcResource, t.getCoreRoots(), TestsXMLUtil.defaultSavingOptions);
         assertNoResourceErrors("Core save", qvtcResource);
         ocl.dispose();
     }

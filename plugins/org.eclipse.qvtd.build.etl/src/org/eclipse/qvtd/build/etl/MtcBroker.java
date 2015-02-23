@@ -173,7 +173,7 @@ public class MtcBroker {
 	/** The meta model manager. */
 	private @NonNull EnvironmentFactory environmentFactory;
 	
-	protected @Nullable Map<String, Object> savingOptions;
+	protected @Nullable Map<?, ?> savingOptions;
 	
 	
 	private URI baseUri;
@@ -197,7 +197,7 @@ public class MtcBroker {
 		this(baseURI, qvtcSource, environmentFactory, null);
 	}
 	
-	public MtcBroker(URI baseURI, String qvtcSource, @NonNull EnvironmentFactory environmentFactory, Map<String, Object> savingOptions) throws QvtMtcExecutionException {
+	public MtcBroker(URI baseURI, String qvtcSource, @NonNull EnvironmentFactory environmentFactory, Map<?, ?> savingOptions) throws QvtMtcExecutionException {
 		
 		this.savingOptions = savingOptions;
 		this.environmentFactory = environmentFactory;

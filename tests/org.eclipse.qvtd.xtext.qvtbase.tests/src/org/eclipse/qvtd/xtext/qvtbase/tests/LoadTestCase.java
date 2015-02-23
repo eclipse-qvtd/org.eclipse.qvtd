@@ -11,21 +11,19 @@
 package org.eclipse.qvtd.xtext.qvtbase.tests;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.internal.StandardLibraryImpl;
 import org.eclipse.ocl.pivot.internal.library.StandardLibraryContribution;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
+import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 
 /**
  * Tests that load a model and verify that there are no unresolved proxies as a result.
@@ -58,9 +56,7 @@ public class LoadTestCase extends XtextTestCase
 		saveAsXMI(xtextResource, cstURI);
 		pivotResource.setURI(pivotURI);
 		assertNoValidationErrors("Pivot validation errors", pivotResource.getContents().get(0));
-		Map<String, Object> options = new HashMap<String, Object>();
-		options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
-	    pivotResource.save(options);
+	    pivotResource.save(TestsXMLUtil.defaultSavingOptions);
 		return pivotResource;
 	}
 
@@ -69,9 +65,7 @@ public class LoadTestCase extends XtextTestCase
 		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("*", new XMIResourceFactoryImpl()); //$NON-NLS-1$
 		Resource xmiResource = resourceSet.createResource(xmiURI);
 		xmiResource.getContents().addAll(resource.getContents());
-		Map<String, Object> options = new HashMap<String, Object>();
-//		options.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
-		xmiResource.save(options);
+		xmiResource.save(TestsXMLUtil.defaultSavingOptions);
 		assertNoResourceErrors("Save failed", xmiResource);
 		resource.getContents().addAll(xmiResource.getContents());
 	}

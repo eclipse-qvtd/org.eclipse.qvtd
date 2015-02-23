@@ -13,7 +13,6 @@ package org.eclipse.qvtd.xtext.qvtimperative.tests;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
@@ -24,7 +23,6 @@ import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
@@ -54,6 +52,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
+import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.ManualUML2RDBMS.ManualRDBMSNormalizer;
 
@@ -140,19 +139,12 @@ public class QVTiCompilerTests extends LoadTestCase
 		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE));
 	    
 		assertNoValidationErrors("Pivot validation errors", asResource.getContents().get(0));
-		Map<String, Object> options = new HashMap<String, Object>();
-		options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
-		asResource.save(options);
+		asResource.save(getSaveOptions());
 		return asResource;
 	}
 
-	protected @NonNull Map<Object, Object> getSaveOptions() {
-		Map<Object, Object> saveOptions = new HashMap<Object, Object>();
-        saveOptions.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
-        saveOptions.put(XMLResource.OPTION_SCHEMA_LOCATION_IMPLEMENTATION, Boolean.TRUE);
-        saveOptions.put(XMLResource.OPTION_LINE_WIDTH, Integer.valueOf(132));
-        saveOptions.put(XMLResource.OPTION_LINE_DELIMITER, "\n");
-		return saveOptions;
+	protected @NonNull Map<Object, Object> getSaveOptions() {		
+		return TestsXMLUtil.defaultSavingOptions;
 	}
 
 	public void testCG_HSV2HLS_qvti() throws Exception {

@@ -45,12 +45,12 @@ public class OCL2QVTiBroker extends MtcBroker {
 	private @NonNull PivotModelUtil pmUtil;
 	
 
-	public OCL2QVTiBroker(URI baseURI, String oclDocName, @NonNull EnvironmentFactory environmentFactory, Map<String, Object> savingOptions )
+	public OCL2QVTiBroker(URI baseURI, String oclDocName, @NonNull EnvironmentFactory environmentFactory, Map<?, ?> savingOptions )
 		throws Exception {
 		this(baseURI, oclDocName, environmentFactory, savingOptions, true);
 	}
 			
-	public OCL2QVTiBroker(URI baseURI, String oclDocName, @NonNull EnvironmentFactory environmentFactory, Map<String, Object> savingOptions,
+	public OCL2QVTiBroker(URI baseURI, String oclDocName, @NonNull EnvironmentFactory environmentFactory, Map<?, ?> savingOptions,
 			boolean usesMiddleFoldedInInputs)
 		throws Exception {
 		

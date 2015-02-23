@@ -14,7 +14,6 @@ package org.eclipse.qvtd.build.etl;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +29,6 @@ import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xmi.XMIResource;
 import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.emc.emf.EmfUtil;
 import org.eclipse.epsilon.eol.exceptions.models.EolEnumerationValueNotFoundException;
@@ -54,7 +52,7 @@ public class PivotModel extends EmfModel {
 	
 	private boolean isASResource;
 	
-	private @Nullable Map<String, Object> savingOptions;
+	private @Nullable Map<?, ?> savingOptions;
 	
 
 
@@ -63,7 +61,7 @@ public class PivotModel extends EmfModel {
 	}
 	
 	
-	public PivotModel(@NonNull EnvironmentFactory environmentFactory, boolean isASResource, @Nullable Map<String, Object> savingOptions) {
+	public PivotModel(@NonNull EnvironmentFactory environmentFactory, boolean isASResource, @Nullable Map<?, ?> savingOptions) {
 		this.isASResource = isASResource;
 		this.environmentFactory = environmentFactory;
 		this.savingOptions = savingOptions;

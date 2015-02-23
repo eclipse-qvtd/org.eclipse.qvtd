@@ -262,25 +262,25 @@ public class XtextTestCase extends PivotTestCase
 		Pivot2CS pivot2cs = new OCLinEcorePivot2CS(cs2PivotResourceMap, metamodelManager);
 		pivot2cs.update();
 		assertNoResourceErrors("Conversion failed", xtextResource);
-//		csResource.save(null);
+//		csResource.save(TestsXMLUtil.defaultSavingOptions);
 		//
 		//	CS save and reload
 		//		
 		URI savedURI = pivotResource.getURI();
 		pivotResource.setURI(PivotUtil.getNonPivotURI(savedURI).appendFileExtension("pivot"));
-		pivotResource.save(null);
+		pivotResource.save(TestsXMLUtil.defaultSavingOptions);
 		pivotResource.setURI(savedURI);
 		
 		assertNoDiagnosticErrors("Concrete Syntax validation failed", xtextResource);
 		try {
-			xtextResource.save(null);
+			xtextResource.save(TestsXMLUtil.defaultSavingOptions);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 			URI xmiURI = outputURI.appendFileExtension(".xmi");
 			Resource xmiResource = resourceSet.createResource(xmiURI);
 			xmiResource.getContents().addAll(xtextResource.getContents());
-			xmiResource.save(null);
+			xmiResource.save(TestsXMLUtil.defaultSavingOptions);
 			fail(e.toString());
 		}
 		return xtextResource;
