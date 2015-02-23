@@ -285,8 +285,7 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
     /**
      * 
      * map cX_2_A1 in Source2Target_qvtp_qvtias) {
-     * 
-     *   leftCS (x : source::X;
+     * leftCS (x : source::X;
      *  |
      * )
      * { |
@@ -301,9 +300,7 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * { |
      * x = a1;
      * }
-     * map cX_2_A2 {
-     * x := x;
-     * }
+     * 
      * }
      */
     protected boolean cX_2_A1(final @NonNull /*@NonInvalid*/ X x_0) {
@@ -319,7 +316,6 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
         // assignments
         x_0.setAst(a1);
         // mapping statements
-        cX_2_A2(x_0);
         return true;
     }
     
@@ -404,14 +400,11 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      *  |
      * }
      * where ( |
-     * not toY.oclIsKindOf(source::Y1)
-     *   )
+     * not toY.oclIsKindOf(source::Y1))
      * { |
      * z = d;
      * }
-     * map cZ_2_D_1 {
-     * z := z;
-     * }
+     * 
      * }
      */
     protected boolean cZ_2_D_0(final @NonNull /*@NonInvalid*/ Z z) {
@@ -431,7 +424,6 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
         // assignments
         z.setAst(d);
         // mapping statements
-        cZ_2_D_1(z);
         return true;
     }
     
@@ -634,12 +626,9 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * { |
      * x.ast.oclAsType(target::A1)
      *    = ownsY.oclAsType(source::Y1)
-     *   .ast.oclAsType(target::B)
-     *   ;
+     *   .ast.oclAsType(target::B);
      * }
-     * map uA2_ownsC {
-     * x := x;
-     * }
+     * 
      * }
      */
     protected boolean uA1_ownsB(final @NonNull /*@NonInvalid*/ X x_2) {
@@ -695,7 +684,6 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
         assert UNBOXED_collect != null;
         oclAsType.getOwnsB().addAll(UNBOXED_collect);
         // mapping statements
-        uA2_ownsC(x_2);
         return true;
     }
     
@@ -716,12 +704,9 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * )
      * { |
      * y1.ast.oclAsType(target::B)
-     *    = ownsZ.ast.oclAsType(target::D)
-     *   ;
+     *    = ownsZ.ast.oclAsType(target::D);
      * }
-     * map uB_name {
-     * y1 := y1;
-     * }
+     * 
      * }
      */
     protected boolean uB_ownsD(final @NonNull /*@NonInvalid*/ Y1 y1_0) {
@@ -741,7 +726,6 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
         final @Nullable /*@Thrown*/ D oclAsType_0 = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_D_0);
         oclAsType.setOwnsD(oclAsType_0);
         // mapping statements
-        uB_name(y1_0);
         return true;
     }
     
@@ -959,21 +943,9 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * { |
      * z.ast.oclAsType(target::D)
      *    = ast.oclAsType(target::D)
-     *   .lookupC(name)
-     *   ;
+     *   .lookupC(name);
      * }
-     * map uD_0_toA {
-     * z := z;
-     * }
-     *   map uD_1_toA {
-     * z := z;
-     * }
-     *   map uD_0_name {
-     * z := z;
-     * }
-     *   map uD_1_name {
-     * z := z;
-     * }
+     * 
      * }
      */
     protected boolean uD_0_refsC(final @NonNull /*@NonInvalid*/ Z z_3) {
@@ -1035,10 +1007,6 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
         }
         oclAsType.setRefsC(any);
         // mapping statements
-        uD_0_toA(z_3);
-        uD_1_toA(z_3);
-        uD_0_name(z_3);
-        uD_1_name(z_3);
         return true;
     }
     
@@ -1229,6 +1197,11 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * map cX_2_A1 {
      * x := x;
      * }}
+     *   for x : source::X in source::X.allInstances()
+     *    {
+     * map cX_2_A2 {
+     * x := x;
+     * }}
      *   for sRoot : source::SRoot in source::SRoot.allInstances()
      *    {
      * map uTRoot_ownedA {
@@ -1249,14 +1222,29 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * map cZ_2_D_0 {
      * z := z;
      * }}
+     *   for z : source::Z in source::Z.allInstances()
+     *    {
+     * map cZ_2_D_1 {
+     * z := z;
+     * }}
      *   for x : source::X in source::X.allInstances()
      *    {
      * map uA1_ownsB {
      * x := x;
      * }}
+     *   for x : source::X in source::X.allInstances()
+     *    {
+     * map uA2_ownsC {
+     * x := x;
+     * }}
      *   for y1 : source::Y1 in source::Y1.allInstances()
      *    {
      * map uB_ownsD {
+     * y1 := y1;
+     * }}
+     *   for y1 : source::Y1 in source::Y1.allInstances()
+     *    {
+     * map uB_name {
      * y1 := y1;
      * }}
      *   for y2 : source::Y2 in source::Y2.allInstances()
@@ -1279,116 +1267,192 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * map uD_0_refsC {
      * z := z;
      * }}
+     *   for z : source::Z in source::Z.allInstances()
+     *    {
+     * map uD_0_toA {
+     * z := z;
+     * }}
+     *   for z : source::Z in source::Z.allInstances()
+     *    {
+     * map uD_1_toA {
+     * z := z;
+     * }}
+     *   for z : source::Z in source::Z.allInstances()
+     *    {
+     * map uD_0_name {
+     * z := z;
+     * }}
+     *   for z : source::Z in source::Z.allInstances()
+     *    {
+     * map uD_1_name {
+     * z := z;
+     * }}
      * }
      */
     protected boolean __root__() {
         // predicates
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_SRoot_1 = idResolver.getClass(CLSSid_SRoot, null);
-        final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_X_1 = idResolver.getClass(CLSSid_X, null);
-        final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Y1_1 = idResolver.getClass(CLSSid_Y1, null);
+        final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_X_3 = idResolver.getClass(CLSSid_X, null);
+        final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Y1_2 = idResolver.getClass(CLSSid_Y1, null);
         final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Y2_2 = idResolver.getClass(CLSSid_Y2, null);
-        final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Z_2 = idResolver.getClass(CLSSid_Z, null);
-        final @NonNull /*@Thrown*/ SetValue allInstances_1 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_SRoot, TYP_source_c_c_SRoot_1);
-        final @NonNull /*@Thrown*/ SetValue allInstances_5 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_X, TYP_source_c_c_X_1);
-        final @NonNull /*@Thrown*/ SetValue allInstances_6 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Y1, TYP_source_c_c_Y1_1);
-        final @NonNull /*@Thrown*/ SetValue allInstances_7 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Y2, TYP_source_c_c_Y2_2);
-        final @NonNull /*@Thrown*/ SetValue allInstances_8 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Z, TYP_source_c_c_Z_2);
-        final List<SRoot> UNBOXED_allInstances_1 = allInstances_1.asEcoreObjects(idResolver, SRoot.class);
+        final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Z_7 = idResolver.getClass(CLSSid_Z, null);
+        final @NonNull /*@Thrown*/ SetValue allInstances_2 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_SRoot, TYP_source_c_c_SRoot_1);
+        final @NonNull /*@Thrown*/ SetValue allInstances_1 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_X, TYP_source_c_c_X_3);
+        final @NonNull /*@Thrown*/ SetValue allInstances_9 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Y1, TYP_source_c_c_Y1_2);
+        final @NonNull /*@Thrown*/ SetValue allInstances_11 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Y2, TYP_source_c_c_Y2_2);
+        final @NonNull /*@Thrown*/ SetValue allInstances_6 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Z, TYP_source_c_c_Z_7);
+        final List<SRoot> UNBOXED_allInstances_2 = allInstances_2.asEcoreObjects(idResolver, SRoot.class);
+        assert UNBOXED_allInstances_2 != null;
+        final List<X> UNBOXED_allInstances_1 = allInstances_1.asEcoreObjects(idResolver, X.class);
         assert UNBOXED_allInstances_1 != null;
-        final List<X> UNBOXED_allInstances_5 = allInstances_5.asEcoreObjects(idResolver, X.class);
-        assert UNBOXED_allInstances_5 != null;
-        final List<Y1> UNBOXED_allInstances_6 = allInstances_6.asEcoreObjects(idResolver, Y1.class);
+        final List<Y1> UNBOXED_allInstances_9 = allInstances_9.asEcoreObjects(idResolver, Y1.class);
+        assert UNBOXED_allInstances_9 != null;
+        final List<Y2> UNBOXED_allInstances_11 = allInstances_11.asEcoreObjects(idResolver, Y2.class);
+        assert UNBOXED_allInstances_11 != null;
+        final List<Z> UNBOXED_allInstances_6 = allInstances_6.asEcoreObjects(idResolver, Z.class);
         assert UNBOXED_allInstances_6 != null;
-        final List<Y2> UNBOXED_allInstances_7 = allInstances_7.asEcoreObjects(idResolver, Y2.class);
-        assert UNBOXED_allInstances_7 != null;
-        final List<Z> UNBOXED_allInstances_8 = allInstances_8.asEcoreObjects(idResolver, Z.class);
-        assert UNBOXED_allInstances_8 != null;
         // creations
         // assignments
         // mapping statements
         ;
-        for (SRoot sRoot_3 : UNBOXED_allInstances_1) {
+        for (SRoot sRoot_3 : UNBOXED_allInstances_2) {
             if (sRoot_3 != null) {
                 final @NonNull /*@NonInvalid*/ SRoot symbol_1 = (SRoot)sRoot_3;
                 cSRoot_2_TRoot(symbol_1);
             }
         }
         ;
-        for (X x_5 : UNBOXED_allInstances_5) {
-            if (x_5 != null) {
-                final @NonNull /*@NonInvalid*/ X symbol_5 = (X)x_5;
+        for (X x_7 : UNBOXED_allInstances_1) {
+            if (x_7 != null) {
+                final @NonNull /*@NonInvalid*/ X symbol_5 = (X)x_7;
                 cX_2_A1(symbol_5);
             }
         }
         ;
-        for (SRoot sRoot_4 : UNBOXED_allInstances_1) {
+        for (X x_8 : UNBOXED_allInstances_1) {
+            if (x_8 != null) {
+                final @NonNull /*@NonInvalid*/ X symbol_9 = (X)x_8;
+                cX_2_A2(symbol_9);
+            }
+        }
+        ;
+        for (SRoot sRoot_4 : UNBOXED_allInstances_2) {
             if (sRoot_4 != null) {
-                final @NonNull /*@NonInvalid*/ SRoot symbol_9 = (SRoot)sRoot_4;
-                uTRoot_ownedA(symbol_9);
+                final @NonNull /*@NonInvalid*/ SRoot symbol_13 = (SRoot)sRoot_4;
+                uTRoot_ownedA(symbol_13);
             }
         }
         ;
-        for (Y1 y1_4 : UNBOXED_allInstances_6) {
-            if (y1_4 != null) {
-                final @NonNull /*@NonInvalid*/ Y1 symbol_13 = (Y1)y1_4;
-                cY1_2_B(symbol_13);
-            }
-        }
-        ;
-        for (Y2 y2_5 : UNBOXED_allInstances_7) {
-            if (y2_5 != null) {
-                final @NonNull /*@NonInvalid*/ Y2 symbol_17 = (Y2)y2_5;
-                cY2_2_C(symbol_17);
-            }
-        }
-        ;
-        for (Z z_10 : UNBOXED_allInstances_8) {
-            if (z_10 != null) {
-                final @NonNull /*@NonInvalid*/ Z symbol_21 = (Z)z_10;
-                cZ_2_D_0(symbol_21);
-            }
-        }
-        ;
-        for (X x_6 : UNBOXED_allInstances_5) {
-            if (x_6 != null) {
-                final @NonNull /*@NonInvalid*/ X symbol_25 = (X)x_6;
-                uA1_ownsB(symbol_25);
-            }
-        }
-        ;
-        for (Y1 y1_5 : UNBOXED_allInstances_6) {
+        for (Y1 y1_5 : UNBOXED_allInstances_9) {
             if (y1_5 != null) {
-                final @NonNull /*@NonInvalid*/ Y1 symbol_29 = (Y1)y1_5;
-                uB_ownsD(symbol_29);
+                final @NonNull /*@NonInvalid*/ Y1 symbol_17 = (Y1)y1_5;
+                cY1_2_B(symbol_17);
             }
         }
         ;
-        for (Y2 y2_6 : UNBOXED_allInstances_7) {
+        for (Y2 y2_5 : UNBOXED_allInstances_11) {
+            if (y2_5 != null) {
+                final @NonNull /*@NonInvalid*/ Y2 symbol_21 = (Y2)y2_5;
+                cY2_2_C(symbol_21);
+            }
+        }
+        ;
+        for (Z z_15 : UNBOXED_allInstances_6) {
+            if (z_15 != null) {
+                final @NonNull /*@NonInvalid*/ Z symbol_25 = (Z)z_15;
+                cZ_2_D_0(symbol_25);
+            }
+        }
+        ;
+        for (Z z_16 : UNBOXED_allInstances_6) {
+            if (z_16 != null) {
+                final @NonNull /*@NonInvalid*/ Z symbol_29 = (Z)z_16;
+                cZ_2_D_1(symbol_29);
+            }
+        }
+        ;
+        for (X x_9 : UNBOXED_allInstances_1) {
+            if (x_9 != null) {
+                final @NonNull /*@NonInvalid*/ X symbol_33 = (X)x_9;
+                uA1_ownsB(symbol_33);
+            }
+        }
+        ;
+        for (X x_10 : UNBOXED_allInstances_1) {
+            if (x_10 != null) {
+                final @NonNull /*@NonInvalid*/ X symbol_37 = (X)x_10;
+                uA2_ownsC(symbol_37);
+            }
+        }
+        ;
+        for (Y1 y1_6 : UNBOXED_allInstances_9) {
+            if (y1_6 != null) {
+                final @NonNull /*@NonInvalid*/ Y1 symbol_41 = (Y1)y1_6;
+                uB_ownsD(symbol_41);
+            }
+        }
+        ;
+        for (Y1 y1_7 : UNBOXED_allInstances_9) {
+            if (y1_7 != null) {
+                final @NonNull /*@NonInvalid*/ Y1 symbol_45 = (Y1)y1_7;
+                uB_name(symbol_45);
+            }
+        }
+        ;
+        for (Y2 y2_6 : UNBOXED_allInstances_11) {
             if (y2_6 != null) {
-                final @NonNull /*@NonInvalid*/ Y2 symbol_33 = (Y2)y2_6;
-                uC_ownsD(symbol_33);
+                final @NonNull /*@NonInvalid*/ Y2 symbol_49 = (Y2)y2_6;
+                uC_ownsD(symbol_49);
             }
         }
         ;
-        for (Z z_11 : UNBOXED_allInstances_8) {
-            if (z_11 != null) {
-                final @NonNull /*@NonInvalid*/ Z symbol_37 = (Z)z_11;
-                uD_1_refsB(symbol_37);
+        for (Z z_17 : UNBOXED_allInstances_6) {
+            if (z_17 != null) {
+                final @NonNull /*@NonInvalid*/ Z symbol_53 = (Z)z_17;
+                uD_1_refsB(symbol_53);
             }
         }
         ;
-        for (Y2 y2_7 : UNBOXED_allInstances_7) {
+        for (Y2 y2_7 : UNBOXED_allInstances_11) {
             if (y2_7 != null) {
-                final @NonNull /*@NonInvalid*/ Y2 symbol_41 = (Y2)y2_7;
-                uC_name(symbol_41);
+                final @NonNull /*@NonInvalid*/ Y2 symbol_57 = (Y2)y2_7;
+                uC_name(symbol_57);
             }
         }
         ;
-        for (Z z_12 : UNBOXED_allInstances_8) {
-            if (z_12 != null) {
-                final @NonNull /*@NonInvalid*/ Z symbol_45 = (Z)z_12;
-                uD_0_refsC(symbol_45);
+        for (Z z_18 : UNBOXED_allInstances_6) {
+            if (z_18 != null) {
+                final @NonNull /*@NonInvalid*/ Z symbol_61 = (Z)z_18;
+                uD_0_refsC(symbol_61);
+            }
+        }
+        ;
+        for (Z z_19 : UNBOXED_allInstances_6) {
+            if (z_19 != null) {
+                final @NonNull /*@NonInvalid*/ Z symbol_65 = (Z)z_19;
+                uD_0_toA(symbol_65);
+            }
+        }
+        ;
+        for (Z z_20 : UNBOXED_allInstances_6) {
+            if (z_20 != null) {
+                final @NonNull /*@NonInvalid*/ Z symbol_69 = (Z)z_20;
+                uD_1_toA(symbol_69);
+            }
+        }
+        ;
+        for (Z z_21 : UNBOXED_allInstances_6) {
+            if (z_21 != null) {
+                final @NonNull /*@NonInvalid*/ Z symbol_73 = (Z)z_21;
+                uD_0_name(symbol_73);
+            }
+        }
+        ;
+        for (Z z_22 : UNBOXED_allInstances_6) {
+            if (z_22 != null) {
+                final @NonNull /*@NonInvalid*/ Z symbol_77 = (Z)z_22;
+                uD_1_name(symbol_77);
             }
         }
         return true;

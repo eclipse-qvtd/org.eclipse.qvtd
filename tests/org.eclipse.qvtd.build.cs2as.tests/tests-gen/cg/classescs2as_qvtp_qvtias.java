@@ -475,12 +475,9 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
      * where ( |
      * )
      * { |
-     * classCS.ast.oclAsType(classes::Class)
-     *    = name;
+     * classCS.ast.oclAsType(classes::Class) = name;
      * }
-     * map uClass_superClass {
-     * classCS := classCS;
-     * }
+     * 
      * }
      */
     protected boolean uClass_name(final @NonNull /*@NonInvalid*/ ClassCS classCS_0) {
@@ -494,7 +491,6 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
         final @Nullable /*@Thrown*/ String name = classCS_0.getName();
         oclAsType.setName(name);
         // mapping statements
-        uClass_superClass(classCS_0);
         return true;
     }
     
@@ -967,15 +963,20 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
      * map uClass_name {
      * classCS := classCS;
      * }}
+     *   for classCS : classescs::ClassCS in classescs::ClassCS.allInstances()
+     *    {
+     * map uClass_superClass {
+     * classCS := classCS;
+     * }}
      * }
      */
     protected boolean __root__() {
         // predicates
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-        final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classescs_c_c_ClassCS_1 = idResolver.getClass(CLSSid_ClassCS, null);
+        final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classescs_c_c_ClassCS_2 = idResolver.getClass(CLSSid_ClassCS, null);
         final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classescs_c_c_PackageCS_2 = idResolver.getClass(CLSSid_PackageCS, null);
         final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classescs_c_c_RootCS_1 = idResolver.getClass(CLSSid_RootCS, null);
-        final @NonNull /*@Thrown*/ SetValue allInstances_5 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_ClassCS, TYP_classescs_c_c_ClassCS_1);
+        final @NonNull /*@Thrown*/ SetValue allInstances_5 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_ClassCS, TYP_classescs_c_c_ClassCS_2);
         final @NonNull /*@Thrown*/ SetValue allInstances_2 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_PackageCS, TYP_classescs_c_c_PackageCS_2);
         final @NonNull /*@Thrown*/ SetValue allInstances_1 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_RootCS, TYP_classescs_c_c_RootCS_1);
         final List<ClassCS> UNBOXED_allInstances_5 = allInstances_5.asEcoreObjects(idResolver, ClassCS.class);
@@ -1016,9 +1017,9 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
             }
         }
         ;
-        for (ClassCS classCS_4 : UNBOXED_allInstances_5) {
-            if (classCS_4 != null) {
-                final @NonNull /*@NonInvalid*/ ClassCS symbol_17 = (ClassCS)classCS_4;
+        for (ClassCS classCS_5 : UNBOXED_allInstances_5) {
+            if (classCS_5 != null) {
+                final @NonNull /*@NonInvalid*/ ClassCS symbol_17 = (ClassCS)classCS_5;
                 cClassCS_2_Class(symbol_17);
             }
         }
@@ -1030,10 +1031,17 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
             }
         }
         ;
-        for (ClassCS classCS_5 : UNBOXED_allInstances_5) {
-            if (classCS_5 != null) {
-                final @NonNull /*@NonInvalid*/ ClassCS symbol_25 = (ClassCS)classCS_5;
+        for (ClassCS classCS_6 : UNBOXED_allInstances_5) {
+            if (classCS_6 != null) {
+                final @NonNull /*@NonInvalid*/ ClassCS symbol_25 = (ClassCS)classCS_6;
                 uClass_name(symbol_25);
+            }
+        }
+        ;
+        for (ClassCS classCS_7 : UNBOXED_allInstances_5) {
+            if (classCS_7 != null) {
+                final @NonNull /*@NonInvalid*/ ClassCS symbol_29 = (ClassCS)classCS_7;
+                uClass_superClass(symbol_29);
             }
         }
         return true;
