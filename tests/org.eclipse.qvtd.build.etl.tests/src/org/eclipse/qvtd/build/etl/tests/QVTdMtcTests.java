@@ -178,7 +178,7 @@ public class QVTdMtcTests extends LoadTestCase {
         testEvaluator.createModel("lowerGraph", outputURI, null);
         System.out.println("Executing QVTi transformation on test models.");
         testEvaluator.execute();
-        testEvaluator.saveModels();
+        testEvaluator.saveModels(TestsXMLUtil.defaultSavingOptions);
         
         Resource expected =  myQVT.getEnvironmentFactory().getResourceSet().getResource(expectedOutputURI, true);
         Resource actual =  myQVT.getEnvironmentFactory().getResourceSet().getResource(outputURI, true);
@@ -216,7 +216,7 @@ public class QVTdMtcTests extends LoadTestCase {
         testEvaluator.createModel("hls", outputURI, null);
         System.out.println("Executing QVTi transformation on test models.");
         testEvaluator.execute();
-        testEvaluator.saveModels();
+        testEvaluator.saveModels(TestsXMLUtil.defaultSavingOptions);
         
         Resource expected =  myQVT.getEnvironmentFactory().getResourceSet().getResource(expectedOutputURI, true);
         Resource actual =  myQVT.getEnvironmentFactory().getResourceSet().getResource(outputURI, true);

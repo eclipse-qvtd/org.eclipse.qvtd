@@ -25,7 +25,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Package;
@@ -64,8 +63,9 @@ public class QVTiModelManager implements ModelManager
 	 */
 	private @NonNull Map<?, ?> middleOpposites[];
 	
+	
 	/**
-	 * Instantiates a new QVTc Domain Manager. Responsible for creating new
+	 * Instantiates a new QVTi Domain Manager. Responsible for creating new
 	 * instances of the middle model and the middle model EFactory.
 	 */
 	public QVTiModelManager(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
@@ -249,9 +249,16 @@ public class QVTiModelManager implements ModelManager
 	}
 
 	/**
-	 * Saves all the models managed by the domain manager.
+	 * Saves all the models managed by the domain manager
 	 */
     public void saveModels() {
+    	this.saveModels(null);
+    }
+	/**
+	 * Saves all the models managed by the domain manager using the provided (optional) 
+	 * saving options.
+	 */
+    public void saveModels(@Nullable Map<?, ?> savingOptions) {
         for (Map.Entry<TypedModel, Resource> entry : modelResourceMap.entrySet()) {
             Resource model = entry.getValue();
             TypedModel key = entry.getKey();
@@ -269,19 +276,20 @@ public class QVTiModelManager implements ModelManager
             TypedModel key = entry.getKey();
             if (modelElementsMap.containsKey(key)) {       // Only save modified models
                 try{
-                    Map<Object, Object> options = new HashMap<Object, Object>();
-                    options.put(XMLResource.OPTION_SCHEMA_LOCATION, Boolean.TRUE);
-                    options.put(XMLResource.OPTION_LINE_WIDTH, Integer.valueOf(132));
-            		options.put(XMLResource.OPTION_LINE_DELIMITER, "\n");
-                    model.save(options);
-                   } catch (IOException e) {
+                	model.save(savingOptions);
+                } catch (IOException e) {
                       e.printStackTrace();
-                   }
+                }
             }
         }
     }
-
+    
     public void saveMiddleModel(@NonNull URI uri) {
+    	this.saveMiddleModel(uri, null);
+    }
+    
+    public void saveMiddleModel(@NonNull URI uri, Map<?, ?> savingOptions) {
+    	// TODO
 /*        Resource r = metamodelManager.getExternalResourceSet().createResource(uri);
         for (EObject e : modelElementsMap.get(MIDDLE_MODEL)) {
             if (e.eContainer() == null) {

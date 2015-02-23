@@ -181,7 +181,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
         testEvaluator.loadModel("leftCS", csModelURI);
         testEvaluator.createModel("rightAS", asModelURI, null);
         boolean success = testEvaluator.execute();
-        testEvaluator.saveModels();
+        testEvaluator.saveModels(TestsXMLUtil.defaultSavingOptions);
         testEvaluator.dispose();
         assertTrue(success);
         
@@ -220,7 +220,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
         testEvaluator.loadModel("leftCS", csModelURI);
         testEvaluator.createModel("rightAS", asModelURI, null);
         boolean success = testEvaluator.execute();
-        testEvaluator.saveModels();
+        testEvaluator.saveModels(TestsXMLUtil.defaultSavingOptions);
         testEvaluator.dispose();
         assertTrue(success);                
         ResourceSet rSet = myQVT.getResourceSet();
@@ -252,7 +252,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
         testEvaluator.loadModel("leftCS", csModelURI);
         testEvaluator.createModel("rightAS", asModelURI, null);
         boolean success = testEvaluator.execute();
-        testEvaluator.saveModels();
+        testEvaluator.saveModels(TestsXMLUtil.defaultSavingOptions);
         testEvaluator.dispose();
         assertTrue(success);
                 

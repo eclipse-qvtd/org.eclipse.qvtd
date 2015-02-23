@@ -40,6 +40,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
+import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.ManualUML2RDBMS.ManualRDBMSNormalizer;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.SimpleUML2RDBMS.SimpleRDBMSNormalizer;
@@ -408,11 +409,11 @@ public class QVTiInterpreterTests extends LoadTestCase
         testEvaluator.loadModel("leftCS", ClassUtil.nonNullState(csModelURI));
         testEvaluator.createModel("rightAS", ClassUtil.nonNullState(asModelURI), null);
         testEvaluator.execute();
-        testEvaluator.saveModels();
+        testEvaluator.saveModels(TestsXMLUtil.defaultSavingOptions);
         testEvaluator.dispose();
         
-        ResourceSet rSet = environmentFactory.getResourceSet();        
-        assertSameModel(rSet.getResource(refAsModelURI, true), 
+        ResourceSet rSet = environmentFactory.getResourceSet();
+        assertSameModel(rSet.getResource(refAsModelURI, true),
         				rSet.getResource(asModelURI, true));
         myQVT.dispose();
     }

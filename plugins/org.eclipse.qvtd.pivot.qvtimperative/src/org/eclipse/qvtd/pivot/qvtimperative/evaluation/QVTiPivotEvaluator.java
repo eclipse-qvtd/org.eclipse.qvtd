@@ -159,9 +159,17 @@ public class QVTiPivotEvaluator implements EvaluationMonitor
 		modelManager.saveModels();
 	}
 	
+	public void saveModels(@Nullable Map<?, ?> savingOptions) {
+		modelManager.saveModels(savingOptions);
+	}
+	
 	public void saveModels(@NonNull URI traceURI) {
-		this.saveModels();
-		modelManager.saveMiddleModel(traceURI);
+		this.saveModels(traceURI, null);
+	}
+	
+	public void saveModels(@NonNull URI traceURI, @Nullable Map<?, ?> savingOptions) {
+		this.saveModels(savingOptions);
+		modelManager.saveMiddleModel(traceURI, savingOptions);
 	}
 
 	public void saveTransformation(Map<?,?> options) throws IOException {
