@@ -7,7 +7,7 @@
   <eCoreContainemntTree:Node name="NamedElementCS" subTypes="/2 /3 /5" superTypes="/0">
     <element href="ClassesCS.ecore#//NamedElementCS"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="PackageCS" parent="/6" children="/3" superTypes="/1 /0">
+  <eCoreContainemntTree:Node name="PackageCS" parent="/2 /6" children="/2 /3" superTypes="/1 /0">
     <element href="ClassesCS.ecore#//PackageCS"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="ClassCS" parent="/2" children="/4" superTypes="/1 /0">

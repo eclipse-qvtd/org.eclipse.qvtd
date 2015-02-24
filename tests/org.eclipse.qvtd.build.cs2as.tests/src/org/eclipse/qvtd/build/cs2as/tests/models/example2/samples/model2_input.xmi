@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ASCII"?>
+<classescs:RootCS
+    xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:classescs="http://cs2as/tests/example2/classescs/1.0"
+    xsi:schemaLocation="http://cs2as/tests/example2/classescs/1.0 ../ClassesCS.ecore">
+  <ownedPackages
+      name="P1">
+    <ownedClasses
+        name="C1"/>
+    <ownedClasses
+        name="C2">
+      <extends>
+        <path
+            name="C1"/>
+      </extends>
+    </ownedClasses>
+    <ownedPackages
+        name="P1_sub">
+      <ownedClasses
+          name="C3">
+        <extends>
+          <path
+              name="C2"/>
+        </extends>
+      </ownedClasses>
+    </ownedPackages>
+  </ownedPackages>
+</classescs:RootCS>

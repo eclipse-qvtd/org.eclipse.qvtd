@@ -15,14 +15,18 @@ context PackageCS
 def : ast() : classes::Package =
 	classes::Package {	
 		name = name,
-		ownedClasses = ownedClasses.ast()->asOrderedSet()
+		ownedClasses = ownedClasses.ast()->asOrderedSet(),
+		ownedPackages = ownedPackages.ast()->asOrderedSet()
 	}
 
 context ClassCS
 def : ast() : classes::Class =
 	classes::Class {
 		name = name,
-		superClass = if (_extends = null) then null else ast().env().lookupClass(_extends) endif
+		superClass = if (_extends = null) 
+					then null 
+					else ast().env().lookupClass(_extends) 
+					endif
 	}
 
 endpackage

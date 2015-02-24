@@ -11,6 +11,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="PackageCS" eSuperTypes="#//NamedElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedClasses" upperBound="-1"
         eType="#//ClassCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPackages" upperBound="-1"
+        eType="#//PackageCS" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClassCS" eSuperTypes="#//NamedElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="extends" eType="#//PathNameCS"

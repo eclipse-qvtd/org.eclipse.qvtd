@@ -177,13 +177,22 @@ public interface ClassescsPackage extends EPackage {
 	int PACKAGE_CS__OWNED_CLASSES = NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Owned Packages</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE_CS__OWNED_PACKAGES = NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Package CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE_CS_FEATURE_COUNT = NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int PACKAGE_CS_FEATURE_COUNT = NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Package CS</em>' class.
@@ -452,6 +461,17 @@ public interface ClassescsPackage extends EPackage {
 	EReference getPackageCS_OwnedClasses();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link classescs.PackageCS#getOwnedPackages <em>Owned Packages</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Owned Packages</em>'.
+	 * @see classescs.PackageCS#getOwnedPackages()
+	 * @see #getPackageCS()
+	 * @generated
+	 */
+	EReference getPackageCS_OwnedPackages();
+
+	/**
 	 * Returns the meta object for class '{@link classescs.ClassCS <em>Class CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -600,6 +620,14 @@ public interface ClassescsPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PACKAGE_CS__OWNED_CLASSES = eINSTANCE.getPackageCS_OwnedClasses();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Packages</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PACKAGE_CS__OWNED_PACKAGES = eINSTANCE.getPackageCS_OwnedPackages();
 
 		/**
 		 * The meta object literal for the '{@link classescs.impl.ClassCSImpl <em>Class CS</em>}' class.

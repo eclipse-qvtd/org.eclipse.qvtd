@@ -28,6 +28,7 @@
     </genClasses>
     <genClasses ecoreClass="ClassesCS.ecore#//PackageCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassesCS.ecore#//PackageCS/ownedClasses"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassesCS.ecore#//PackageCS/ownedPackages"/>
     </genClasses>
     <genClasses ecoreClass="ClassesCS.ecore#//ClassCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ClassesCS.ecore#//ClassCS/extends"/>

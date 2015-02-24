@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * </p>
  * <ul>
  *   <li>{@link classescs.impl.PackageCSImpl#getOwnedClasses <em>Owned Classes</em>}</li>
+ *   <li>{@link classescs.impl.PackageCSImpl#getOwnedPackages <em>Owned Packages</em>}</li>
  * </ul>
  *
  * @generated
@@ -41,6 +42,16 @@ public class PackageCSImpl extends NamedElementCSImpl implements PackageCS {
 	 * @ordered
 	 */
 	protected EList<ClassCS> ownedClasses;
+
+	/**
+	 * The cached value of the '{@link #getOwnedPackages() <em>Owned Packages</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnedPackages()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<PackageCS> ownedPackages;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -78,11 +89,25 @@ public class PackageCSImpl extends NamedElementCSImpl implements PackageCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<PackageCS> getOwnedPackages() {
+		if (ownedPackages == null) {
+			ownedPackages = new EObjectContainmentEList<PackageCS>(PackageCS.class, this, ClassescsPackage.PACKAGE_CS__OWNED_PACKAGES);
+		}
+		return ownedPackages;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case ClassescsPackage.PACKAGE_CS__OWNED_CLASSES:
 				return ((InternalEList<?>)getOwnedClasses()).basicRemove(otherEnd, msgs);
+			case ClassescsPackage.PACKAGE_CS__OWNED_PACKAGES:
+				return ((InternalEList<?>)getOwnedPackages()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -97,6 +122,8 @@ public class PackageCSImpl extends NamedElementCSImpl implements PackageCS {
 		switch (featureID) {
 			case ClassescsPackage.PACKAGE_CS__OWNED_CLASSES:
 				return getOwnedClasses();
+			case ClassescsPackage.PACKAGE_CS__OWNED_PACKAGES:
+				return getOwnedPackages();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -114,6 +141,10 @@ public class PackageCSImpl extends NamedElementCSImpl implements PackageCS {
 				getOwnedClasses().clear();
 				getOwnedClasses().addAll((Collection<? extends ClassCS>)newValue);
 				return;
+			case ClassescsPackage.PACKAGE_CS__OWNED_PACKAGES:
+				getOwnedPackages().clear();
+				getOwnedPackages().addAll((Collection<? extends PackageCS>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -129,6 +160,9 @@ public class PackageCSImpl extends NamedElementCSImpl implements PackageCS {
 			case ClassescsPackage.PACKAGE_CS__OWNED_CLASSES:
 				getOwnedClasses().clear();
 				return;
+			case ClassescsPackage.PACKAGE_CS__OWNED_PACKAGES:
+				getOwnedPackages().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -143,6 +177,8 @@ public class PackageCSImpl extends NamedElementCSImpl implements PackageCS {
 		switch (featureID) {
 			case ClassescsPackage.PACKAGE_CS__OWNED_CLASSES:
 				return ownedClasses != null && !ownedClasses.isEmpty();
+			case ClassescsPackage.PACKAGE_CS__OWNED_PACKAGES:
+				return ownedPackages != null && !ownedPackages.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

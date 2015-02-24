@@ -216,6 +216,15 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getPackageCS_OwnedPackages() {
+		return (EReference)packageCSEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getClassCS() {
 		return classCSEClass;
 	}
@@ -310,6 +319,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 
 		packageCSEClass = createEClass(PACKAGE_CS);
 		createEReference(packageCSEClass, PACKAGE_CS__OWNED_CLASSES);
+		createEReference(packageCSEClass, PACKAGE_CS__OWNED_PACKAGES);
 
 		classCSEClass = createEClass(CLASS_CS);
 		createEReference(classCSEClass, CLASS_CS__EXTENDS);
@@ -367,6 +377,7 @@ public class ClassescsPackageImpl extends EPackageImpl implements ClassescsPacka
 
 		initEClass(packageCSEClass, PackageCS.class, "PackageCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getPackageCS_OwnedClasses(), this.getClassCS(), null, "ownedClasses", null, 0, -1, PackageCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPackageCS_OwnedPackages(), this.getPackageCS(), null, "ownedPackages", null, 0, -1, PackageCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(classCSEClass, ClassCS.class, "ClassCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getClassCS_Extends(), this.getPathNameCS(), null, "extends", null, 0, 1, ClassCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
