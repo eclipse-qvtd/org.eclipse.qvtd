@@ -42,6 +42,7 @@ import org.eclipse.ocl.pivot.internal.library.UnboxedExplicitNavigationProperty;
 import org.eclipse.ocl.pivot.library.classifier.ClassifierAllInstancesOperation;
 import org.eclipse.ocl.pivot.library.classifier.ClassifierOclContainerOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionAsOrderedSetOperation;
+import org.eclipse.ocl.pivot.library.collection.CollectionAsSequenceOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionIncludingAllOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionSelectByKindOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionSizeOperation;
@@ -103,6 +104,7 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
     public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_namedElements = CLSSid_Environment.getPropertyId("namedElements");
     public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_parentEnv = CLSSid_Environment.getPropertyId("parentEnv");
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_Class = TypeId.SEQUENCE.getSpecializedId(CLSSid_Class);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_NamedElement = TypeId.SEQUENCE.getSpecializedId(CLSSid_NamedElement);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_Package = TypeId.SEQUENCE.getSpecializedId(CLSSid_Package);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_ClassCS = TypeId.SET.getSpecializedId(CLSSid_ClassCS);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_PackageCS = TypeId.SET.getSpecializedId(CLSSid_PackageCS);
@@ -261,13 +263,15 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
                 final @NonNull /*@Thrown*/ Environment symbol_1 = (Environment)TYP_env_c_c_Environment_0.createInstance();
                 final @NonNull /*@Thrown*/ List<NamedElement> namedElements_0 = (List<NamedElement>)IMPPROPid_namedElements_2.evaluate(evaluator, ORD_CLSSid_NamedElement, symbol_0);
                 final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements_0);
+                final @NonNull /*@Thrown*/ SequenceValue asSequence = CollectionAsSequenceOperation.INSTANCE.evaluate(BOXED_namedElements_0);
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_elements = idResolver.createCollectionOfAll(COL_CLSSid_NamedElement, elements);
-                final @NonNull /*@Thrown*/ CollectionValue includingAll = CollectionIncludingAllOperation.INSTANCE.evaluate(BOXED_namedElements_0, BOXED_elements);
+                final @NonNull /*@Thrown*/ CollectionValue includingAll = CollectionIncludingAllOperation.INSTANCE.evaluate(asSequence, BOXED_elements);
                 final List<NamedElement> UNBOXED_includingAll = includingAll.asEcoreObjects(idResolver, NamedElement.class);
                 assert UNBOXED_includingAll != null;
                 CTORid_namedElements.initValue(symbol_1, UNBOXED_includingAll);
                 final @NonNull /*@Thrown*/ List<NamedElement> namedElements_2 = (List<NamedElement>)IMPPROPid_namedElements_2.evaluate(evaluator, ORD_CLSSid_NamedElement, symbol_1);
                 final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements_2 = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements_2);
+                final @NonNull /*@Thrown*/ SequenceValue asSequence_0 = CollectionAsSequenceOperation.INSTANCE.evaluate(BOXED_namedElements_2);
                 if (self_4 == null) {
                     throw new InvalidValueException("Null source for \'classes::Package::ownedPackages\'");
                 }
@@ -280,14 +284,15 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
                 final @NonNull /*@Thrown*/ Environment symbol_3 = (Environment)TYP_env_c_c_Environment_0.createInstance();
                 final @NonNull /*@Thrown*/ List<NamedElement> namedElements_3 = (List<NamedElement>)IMPPROPid_namedElements_2.evaluate(evaluator, ORD_CLSSid_NamedElement, symbol_2);
                 final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements_3 = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements_3);
+                final @NonNull /*@Thrown*/ SequenceValue asSequence_1 = CollectionAsSequenceOperation.INSTANCE.evaluate(BOXED_namedElements_3);
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_elements_0 = idResolver.createCollectionOfAll(COL_CLSSid_NamedElement, elements_0);
-                final @NonNull /*@Thrown*/ CollectionValue includingAll_0 = CollectionIncludingAllOperation.INSTANCE.evaluate(BOXED_namedElements_3, BOXED_elements_0);
+                final @NonNull /*@Thrown*/ CollectionValue includingAll_0 = CollectionIncludingAllOperation.INSTANCE.evaluate(asSequence_1, BOXED_elements_0);
                 final List<NamedElement> UNBOXED_includingAll_0 = includingAll_0.asEcoreObjects(idResolver, NamedElement.class);
                 assert UNBOXED_includingAll_0 != null;
                 CTORid_namedElements.initValue(symbol_3, UNBOXED_includingAll_0);
                 final @NonNull /*@Thrown*/ List<NamedElement> namedElements_5 = (List<NamedElement>)IMPPROPid_namedElements_2.evaluate(evaluator, ORD_CLSSid_NamedElement, symbol_3);
                 final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements_5 = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements_5);
-                final @NonNull /*@Thrown*/ CollectionValue includingAll_1 = CollectionIncludingAllOperation.INSTANCE.evaluate(BOXED_namedElements_2, BOXED_namedElements_5);
+                final @NonNull /*@Thrown*/ CollectionValue includingAll_1 = CollectionIncludingAllOperation.INSTANCE.evaluate(asSequence_0, BOXED_namedElements_5);
                 final List<NamedElement> UNBOXED_includingAll_1 = includingAll_1.asEcoreObjects(idResolver, NamedElement.class);
                 assert UNBOXED_includingAll_1 != null;
                 CTORid_namedElements.initValue(symbol_4, UNBOXED_includingAll_1);
@@ -312,8 +317,9 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
                 final @NonNull /*@Thrown*/ Environment symbol_6 = (Environment)TYP_env_c_c_Environment_6.createInstance();
                 final @NonNull /*@Thrown*/ List<NamedElement> namedElements_7 = (List<NamedElement>)IMPPROPid_namedElements_4.evaluate(evaluator, ORD_CLSSid_NamedElement, symbol_5);
                 final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements_7 = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements_7);
+                final @NonNull /*@Thrown*/ SequenceValue asSequence_2 = CollectionAsSequenceOperation.INSTANCE.evaluate(BOXED_namedElements_7);
                 final @NonNull /*@Thrown*/ CollectionValue BOXED_elements_1 = idResolver.createCollectionOfAll(COL_CLSSid_NamedElement, elements_1);
-                final @NonNull /*@Thrown*/ CollectionValue includingAll_2 = CollectionIncludingAllOperation.INSTANCE.evaluate(BOXED_namedElements_7, BOXED_elements_1);
+                final @NonNull /*@Thrown*/ CollectionValue includingAll_2 = CollectionIncludingAllOperation.INSTANCE.evaluate(asSequence_2, BOXED_elements_1);
                 final List<NamedElement> UNBOXED_includingAll_2 = includingAll_2.asEcoreObjects(idResolver, NamedElement.class);
                 assert UNBOXED_includingAll_2 != null;
                 CTORid_namedElements_2.initValue(symbol_6, UNBOXED_includingAll_2);
@@ -557,13 +563,15 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
             final @NonNull /*@Thrown*/ Environment symbol_2 = (Environment)TYP_env_c_c_Environment_0.createInstance();
             final @NonNull /*@Thrown*/ List<NamedElement> namedElements = (List<NamedElement>)IMPPROPid_namedElements_1.evaluate(evaluator, ORD_CLSSid_NamedElement, symbol_1);
             final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements);
+            final @NonNull /*@Thrown*/ SequenceValue asSequence = CollectionAsSequenceOperation.INSTANCE.evaluate(BOXED_namedElements);
             final @NonNull /*@Thrown*/ CollectionValue BOXED_elements = idResolver.createCollectionOfAll(COL_CLSSid_NamedElement, elements);
-            final @NonNull /*@Thrown*/ CollectionValue includingAll = CollectionIncludingAllOperation.INSTANCE.evaluate(BOXED_namedElements, BOXED_elements);
+            final @NonNull /*@Thrown*/ CollectionValue includingAll = CollectionIncludingAllOperation.INSTANCE.evaluate(asSequence, BOXED_elements);
             final List<NamedElement> UNBOXED_includingAll = includingAll.asEcoreObjects(idResolver, NamedElement.class);
             assert UNBOXED_includingAll != null;
             CTORid_namedElements.initValue(symbol_2, UNBOXED_includingAll);
             final @NonNull /*@Thrown*/ List<NamedElement> namedElements_1 = (List<NamedElement>)IMPPROPid_namedElements_1.evaluate(evaluator, ORD_CLSSid_NamedElement, symbol_2);
             final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements_1 = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements_1);
+            final @NonNull /*@Thrown*/ SequenceValue asSequence_0 = CollectionAsSequenceOperation.INSTANCE.evaluate(BOXED_namedElements_1);
             if (self_4 == null) {
                 throw new InvalidValueException("Null source for \'classes::Package::ownedPackages\'");
             }
@@ -576,14 +584,15 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
             final @NonNull /*@Thrown*/ Environment symbol_4 = (Environment)TYP_env_c_c_Environment_0.createInstance();
             final @NonNull /*@Thrown*/ List<NamedElement> namedElements_2 = (List<NamedElement>)IMPPROPid_namedElements_1.evaluate(evaluator, ORD_CLSSid_NamedElement, symbol_3);
             final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements_2 = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements_2);
+            final @NonNull /*@Thrown*/ SequenceValue asSequence_1 = CollectionAsSequenceOperation.INSTANCE.evaluate(BOXED_namedElements_2);
             final @NonNull /*@Thrown*/ CollectionValue BOXED_elements_0 = idResolver.createCollectionOfAll(COL_CLSSid_NamedElement, elements_0);
-            final @NonNull /*@Thrown*/ CollectionValue includingAll_0 = CollectionIncludingAllOperation.INSTANCE.evaluate(BOXED_namedElements_2, BOXED_elements_0);
+            final @NonNull /*@Thrown*/ CollectionValue includingAll_0 = CollectionIncludingAllOperation.INSTANCE.evaluate(asSequence_1, BOXED_elements_0);
             final List<NamedElement> UNBOXED_includingAll_0 = includingAll_0.asEcoreObjects(idResolver, NamedElement.class);
             assert UNBOXED_includingAll_0 != null;
             CTORid_namedElements.initValue(symbol_4, UNBOXED_includingAll_0);
             final @NonNull /*@Thrown*/ List<NamedElement> namedElements_4 = (List<NamedElement>)IMPPROPid_namedElements_1.evaluate(evaluator, ORD_CLSSid_NamedElement, symbol_4);
             final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements_4 = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements_4);
-            final @NonNull /*@Thrown*/ CollectionValue includingAll_1 = CollectionIncludingAllOperation.INSTANCE.evaluate(BOXED_namedElements_1, BOXED_namedElements_4);
+            final @NonNull /*@Thrown*/ CollectionValue includingAll_1 = CollectionIncludingAllOperation.INSTANCE.evaluate(asSequence_0, BOXED_namedElements_4);
             final List<NamedElement> UNBOXED_includingAll_1 = includingAll_1.asEcoreObjects(idResolver, NamedElement.class);
             assert UNBOXED_includingAll_1 != null;
             CTORid_namedElements.initValue(symbol_5, UNBOXED_includingAll_1);
@@ -660,13 +669,15 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
                     final @NonNull /*@Thrown*/ Environment symbol_7 = (Environment)TYP_env_c_c_Environment_5.createInstance();
                     final @NonNull /*@Thrown*/ List<NamedElement> namedElements_7 = (List<NamedElement>)IMPPROPid_namedElements_6.evaluate(evaluator, ORD_CLSSid_NamedElement, symbol_6);
                     final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements_7 = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements_7);
+                    final @NonNull /*@Thrown*/ SequenceValue asSequence_2 = CollectionAsSequenceOperation.INSTANCE.evaluate(BOXED_namedElements_7);
                     final @NonNull /*@Thrown*/ CollectionValue BOXED_elements_1 = idResolver.createCollectionOfAll(COL_CLSSid_NamedElement, elements_1);
-                    final @NonNull /*@Thrown*/ CollectionValue includingAll_2 = CollectionIncludingAllOperation.INSTANCE.evaluate(BOXED_namedElements_7, BOXED_elements_1);
+                    final @NonNull /*@Thrown*/ CollectionValue includingAll_2 = CollectionIncludingAllOperation.INSTANCE.evaluate(asSequence_2, BOXED_elements_1);
                     final List<NamedElement> UNBOXED_includingAll_2 = includingAll_2.asEcoreObjects(idResolver, NamedElement.class);
                     assert UNBOXED_includingAll_2 != null;
                     CTORid_namedElements_2.initValue(symbol_7, UNBOXED_includingAll_2);
                     final @NonNull /*@Thrown*/ List<NamedElement> namedElements_9 = (List<NamedElement>)IMPPROPid_namedElements_6.evaluate(evaluator, ORD_CLSSid_NamedElement, symbol_7);
                     final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements_9 = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements_9);
+                    final @NonNull /*@Thrown*/ SequenceValue asSequence_3 = CollectionAsSequenceOperation.INSTANCE.evaluate(BOXED_namedElements_9);
                     if (self_8 == null) {
                         throw new InvalidValueException("Null source for \'classes::Package::ownedPackages\'");
                     }
@@ -679,14 +690,15 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
                     final @NonNull /*@Thrown*/ Environment symbol_9 = (Environment)TYP_env_c_c_Environment_5.createInstance();
                     final @NonNull /*@Thrown*/ List<NamedElement> namedElements_10 = (List<NamedElement>)IMPPROPid_namedElements_6.evaluate(evaluator, ORD_CLSSid_NamedElement, symbol_8);
                     final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements_10 = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements_10);
+                    final @NonNull /*@Thrown*/ SequenceValue asSequence_4 = CollectionAsSequenceOperation.INSTANCE.evaluate(BOXED_namedElements_10);
                     final @NonNull /*@Thrown*/ CollectionValue BOXED_elements_2 = idResolver.createCollectionOfAll(COL_CLSSid_NamedElement, elements_2);
-                    final @NonNull /*@Thrown*/ CollectionValue includingAll_3 = CollectionIncludingAllOperation.INSTANCE.evaluate(BOXED_namedElements_10, BOXED_elements_2);
+                    final @NonNull /*@Thrown*/ CollectionValue includingAll_3 = CollectionIncludingAllOperation.INSTANCE.evaluate(asSequence_4, BOXED_elements_2);
                     final List<NamedElement> UNBOXED_includingAll_3 = includingAll_3.asEcoreObjects(idResolver, NamedElement.class);
                     assert UNBOXED_includingAll_3 != null;
                     CTORid_namedElements_2.initValue(symbol_9, UNBOXED_includingAll_3);
                     final @NonNull /*@Thrown*/ List<NamedElement> namedElements_12 = (List<NamedElement>)IMPPROPid_namedElements_6.evaluate(evaluator, ORD_CLSSid_NamedElement, symbol_9);
                     final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements_12 = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements_12);
-                    final @NonNull /*@Thrown*/ CollectionValue includingAll_4 = CollectionIncludingAllOperation.INSTANCE.evaluate(BOXED_namedElements_9, BOXED_namedElements_12);
+                    final @NonNull /*@Thrown*/ CollectionValue includingAll_4 = CollectionIncludingAllOperation.INSTANCE.evaluate(asSequence_3, BOXED_namedElements_12);
                     final List<NamedElement> UNBOXED_includingAll_4 = includingAll_4.asEcoreObjects(idResolver, NamedElement.class);
                     assert UNBOXED_includingAll_4 != null;
                     CTORid_namedElements_2.initValue(symbol_10, UNBOXED_includingAll_4);
@@ -711,8 +723,9 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
                     final @NonNull /*@Thrown*/ Environment symbol_12 = (Environment)TYP_env_c_c_Environment_11.createInstance();
                     final @NonNull /*@Thrown*/ List<NamedElement> namedElements_14 = (List<NamedElement>)IMPPROPid_namedElements_8.evaluate(evaluator, ORD_CLSSid_NamedElement, symbol_11);
                     final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements_14 = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements_14);
+                    final @NonNull /*@Thrown*/ SequenceValue asSequence_5 = CollectionAsSequenceOperation.INSTANCE.evaluate(BOXED_namedElements_14);
                     final @NonNull /*@Thrown*/ CollectionValue BOXED_elements_3 = idResolver.createCollectionOfAll(COL_CLSSid_NamedElement, elements_3);
-                    final @NonNull /*@Thrown*/ CollectionValue includingAll_5 = CollectionIncludingAllOperation.INSTANCE.evaluate(BOXED_namedElements_14, BOXED_elements_3);
+                    final @NonNull /*@Thrown*/ CollectionValue includingAll_5 = CollectionIncludingAllOperation.INSTANCE.evaluate(asSequence_5, BOXED_elements_3);
                     final List<NamedElement> UNBOXED_includingAll_5 = includingAll_5.asEcoreObjects(idResolver, NamedElement.class);
                     assert UNBOXED_includingAll_5 != null;
                     CTORid_namedElements_5.initValue(symbol_12, UNBOXED_includingAll_5);

@@ -28,12 +28,14 @@ context Environment
 -- General Environment configuration operations
 def : addElement(element : classes::NamedElement) : Environment =
 	Environment{
-		namedElements = namedElements->including(element)
+		namedElements = namedElements->asSequence() -- FIXME bug 460682
+			->including(element)
 	}
 	
 def : addElements(elements : Collection(classes::NamedElement)) : Environment =
 	Environment{
-		namedElements = namedElements->includingAll(elements)
+		namedElements = namedElements->asSequence() -- FIXME bug 460682
+			->includingAll(elements)
 	}
 	
 def : nestedEnv() : Environment = 
@@ -81,7 +83,8 @@ def : _env(child : ocl::OclElement) : env::Environment =
 	--_env_Class(child).mergeEnv(
 	--_env_Package(child))
 	env::Environment {
-		namedElements = _env_Class(child).namedElements->includingAll(_env_Package(child).namedElements)
+		namedElements = _env_Class(child).namedElements->asSequence() -- FIXME bug 460682
+				->includingAll(_env_Package(child).namedElements)
 	}
 
 def : _env_Class(child : ocl::OclElement) : env::Environment =
