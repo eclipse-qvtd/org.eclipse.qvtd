@@ -609,7 +609,7 @@
                 </ownedSource>
               </ownedCondition>
               <ownedElse xsi:type="pivot:OperationCallExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.C" referredOperation="TargetLookup.ocl.oclas#o.env.Environment.lookupC..ocl.String">
-                <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class Environment.ecore.oclas#T.env.Environment" referredOperation="TargetLookup.ocl.oclas#o.ocl.OclElement.env">
+                <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class Environment.ecore.oclas#T.env.Environment" referredOperation="TargetLookup.ocl.oclas#o.target.C.env">
                   <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.C" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
                     <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                         referredProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
@@ -769,7 +769,7 @@
                 </ownedSource>
               </ownedCondition>
               <ownedElse xsi:type="pivot:OperationCallExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.B" referredOperation="TargetLookup.ocl.oclas#o.env.Environment.lookupB..ocl.String">
-                <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class Environment.ecore.oclas#T.env.Environment" referredOperation="TargetLookup.ocl.oclas#o.ocl.OclElement.env">
+                <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class Environment.ecore.oclas#T.env.Environment" referredOperation="TargetLookup.ocl.oclas#o.target.B.env">
                   <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.B" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
                     <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                         referredProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">

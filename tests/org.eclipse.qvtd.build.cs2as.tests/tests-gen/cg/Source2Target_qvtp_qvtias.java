@@ -35,22 +35,30 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Class;
+import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.NsURIPackageId;
+import org.eclipse.ocl.pivot.ids.PropertyId;
 import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 import org.eclipse.ocl.pivot.library.classifier.ClassifierAllInstancesOperation;
 import org.eclipse.ocl.pivot.library.classifier.ClassifierOclContainerOperation;
+import org.eclipse.ocl.pivot.library.collection.CollectionAsSequenceOperation;
+import org.eclipse.ocl.pivot.library.collection.CollectionIncludingAllOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionIsEmptyOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionSelectByKindOperation;
+import org.eclipse.ocl.pivot.library.collection.OrderedCollectionIndexOfOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
+import org.eclipse.ocl.pivot.library.oclany.OclComparableLessThanOperation;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
+import org.eclipse.ocl.pivot.values.CollectionValue;
+import org.eclipse.ocl.pivot.values.IntegerValue;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
@@ -94,14 +102,18 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Y1 = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_sourceMM_s_1_0.getClassId("Y1", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Y2 = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_sourceMM_s_1_0.getClassId("Y2", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Z = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_sourceMM_s_1_0.getClassId("Z", 0);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId COL_CLSSid_NamedElement = TypeId.COLLECTION.getSpecializedId(CLSSid_NamedElement);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_B = TypeId.ORDERED_SET.getSpecializedId(CLSSid_B);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_C = TypeId.ORDERED_SET.getSpecializedId(CLSSid_C);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_NamedElement = TypeId.ORDERED_SET.getSpecializedId(CLSSid_NamedElement);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_X = TypeId.ORDERED_SET.getSpecializedId(CLSSid_X);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_Y = TypeId.ORDERED_SET.getSpecializedId(CLSSid_Y);
+    public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_namedElements = CLSSid_Environment.getPropertyId("namedElements");
+    public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_parentEnv = CLSSid_Environment.getPropertyId("parentEnv");
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_A = TypeId.SEQUENCE.getSpecializedId(CLSSid_A);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_B = TypeId.SEQUENCE.getSpecializedId(CLSSid_B);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_C = TypeId.SEQUENCE.getSpecializedId(CLSSid_C);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_NamedElement = TypeId.SEQUENCE.getSpecializedId(CLSSid_NamedElement);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_Y1 = TypeId.SEQUENCE.getSpecializedId(CLSSid_Y1);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_Y2 = TypeId.SEQUENCE.getSpecializedId(CLSSid_Y2);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_SRoot = TypeId.SET.getSpecializedId(CLSSid_SRoot);
@@ -141,47 +153,6 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
     
     public boolean run() {
         return __root__();
-    }
-    
-    /**
-     * ocl::OclElement::parentEnv() : env::Environment
-     * 
-     * 
-     * let parent : OclElement = oclContainer()
-     * in
-     *   if parent = null
-     *   then env::Environment{}
-     *   else parent._env(self)
-     *   endif
-     */
-    public @NonNull /*@NonInvalid*/ Environment parentEnv(final @NonNull /*@NonInvalid*/ Object self_1) {
-        final @Nullable /*@Thrown*/ Object parent = ClassifierOclContainerOperation.INSTANCE.evaluate(evaluator, self_1);
-        final /*@Thrown*/ boolean eq = parent == null;
-        @NonNull /*@Thrown*/ Environment symbol_1;
-        if (eq) {
-            final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-            final @NonNull /*@NonInvalid*/ Class TYP_env_c_c_Environment_0 = idResolver.getClass(CLSSid_Environment, null);
-            final @NonNull /*@NonInvalid*/ Environment symbol_0 = (Environment)TYP_env_c_c_Environment_0.createInstance();
-            symbol_1 = symbol_0;
-        }
-        else {
-            if (parent == null) {
-                throw new InvalidValueException("Null source for \'OclElement::_env(OclElement) : env::Environment\'");
-            }
-            final @NonNull /*@Thrown*/ Environment _env = this._env(parent, self_1);
-            symbol_1 = _env;
-        }
-        return symbol_1;
-    }
-    
-    /**
-     * ocl::OclElement::_env(child : OclElement) : env::Environment
-     * 
-     * parentEnv()
-     */
-    public @NonNull /*@NonInvalid*/ Environment _env(final @NonNull /*@NonInvalid*/ Object self_0, final @NonNull /*@NonInvalid*/ Object child) {
-        final @NonNull /*@Thrown*/ Environment parentEnv = this.parentEnv(self_0);
-        return parentEnv;
     }
     
     /**
@@ -976,9 +947,9 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
             CAUGHT_name = ValueUtil.createInvalidValue(e);
         }
         final /*@NonInvalid*/ boolean symbol_0 = (CAUGHT_name == null) || (CAUGHT_name instanceof InvalidValueException);
-        @Nullable /*@Thrown*/ C symbol_2;
+        @Nullable /*@Thrown*/ C symbol_5;
         if (symbol_0) {
-            symbol_2 = null;
+            symbol_5 = null;
         }
         else {
             final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Y2_0 = idResolver.getClass(CLSSid_Y2, null);
@@ -988,22 +959,67 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
                 throw new InvalidValueException("Null source for \'source::SElement::ast\'");
             }
             final @Nullable /*@Thrown*/ EObject ast_0 = oclAsType_0.getAst();
-            final @Nullable /*@Thrown*/ C self_2 = (C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_C_0);
-            if (self_2 == null) {
-                throw new InvalidValueException("Null source for \'OclElement::_env(OclElement) : env::Environment\'");
+            final @Nullable /*@Thrown*/ C self_0 = (C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_C_0);
+            final @Nullable /*@Thrown*/ Object parent = ClassifierOclContainerOperation.INSTANCE.evaluate(evaluator, self_0);
+            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_A2_0 = idResolver.getClass(CLSSid_A2, null);
+            final @Nullable /*@Thrown*/ A2 self_1 = (A2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, parent, TYP_target_c_c_A2_0);
+            if (self_1 == null) {
+                throw new InvalidValueException("Null source for \'target::A2::ownsC\'");
             }
-            final @NonNull /*@Thrown*/ Environment _env = this._env(self_2, null);
-            final @Nullable /*@Thrown*/ String name_0 = z_3.getName();
-            final @Nullable /*@Thrown*/ List<NamedElement> namedElements = _env.getNamedElements();
+            final @Nullable /*@Thrown*/ List<C> ownedCs = self_1.getOwnsC();
+            assert ownedCs != null;
+            final @Nullable /*@Thrown*/ Object parent_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(evaluator, self_1);
+            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_TRoot_0 = idResolver.getClass(CLSSid_TRoot, null);
+            final @Nullable /*@Thrown*/ TRoot self_2 = (TRoot)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, parent_0, TYP_target_c_c_TRoot_0);
+            final @NonNull /*@NonInvalid*/ Class TYP_env_c_c_Environment_0 = idResolver.getClass(CLSSid_Environment, null);
+            final @NonNull /*@NonInvalid*/ Environment symbol_1 = (Environment)TYP_env_c_c_Environment_0.createInstance();
+            final @NonNull /*@NonInvalid*/ Property CTORid_parentEnv = idResolver.getProperty(PROPid_parentEnv);
+            final @NonNull /*@NonInvalid*/ Class TYP_env_c_c_Environment_1 = idResolver.getClass(CLSSid_Environment, null);
+            final @NonNull /*@Thrown*/ Environment symbol_2 = (Environment)TYP_env_c_c_Environment_1.createInstance();
+            CTORid_parentEnv.initValue(symbol_2, symbol_1);
+            final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedCs = idResolver.createOrderedSetOfAll(ORD_CLSSid_C, ownedCs);
+            @NonNull /*@Thrown*/ OrderedSetValue.Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_C);
+            @Nullable Iterator<?> ITERATOR_x_3 = BOXED_ownedCs.iterator();
+            @NonNull /*@Thrown*/ OrderedSetValue elements;
+            while (true) {
+                if (!ITERATOR_x_3.hasNext()) {
+                    elements = accumulator;
+                    break;
+                }
+                @Nullable /*@NonInvalid*/ C x_3 = (C)ITERATOR_x_3.next();
+                /**
+                 * _'<' : Boolean
+                 */
+                final @NonNull /*@Thrown*/ IntegerValue indexOf = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedCs, x_3);
+                final @NonNull /*@Thrown*/ IntegerValue indexOf_0 = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedCs, self_0);
+                final /*@Thrown*/ boolean lt = OclComparableLessThanOperation.INSTANCE.evaluate(evaluator, indexOf, indexOf_0).booleanValue();
+                //
+                if (lt == ValueUtil.TRUE_VALUE) {
+                    accumulator.add(x_3);
+                }
+            }
+            final @NonNull /*@NonInvalid*/ Class TYP_env_c_c_Environment_2 = idResolver.getClass(CLSSid_Environment, null);
+            final @NonNull /*@NonInvalid*/ Property CTORid_namedElements = idResolver.getProperty(PROPid_namedElements);
+            final @NonNull /*@Thrown*/ Environment symbol_3 = (Environment)TYP_env_c_c_Environment_2.createInstance();
+            final @Nullable /*@Thrown*/ List<NamedElement> namedElements = symbol_2.getNamedElements();
             assert namedElements != null;
             final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements);
-            final @NonNull /*@Thrown*/ OrderedSetValue selectByKind = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(evaluator, BOXED_namedElements, TYP_target_c_c_C_0);
-            @NonNull /*@Thrown*/ OrderedSetValue.Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_C);
+            final @NonNull /*@Thrown*/ SequenceValue asSequence = CollectionAsSequenceOperation.INSTANCE.evaluate(BOXED_namedElements);
+            final @NonNull /*@Thrown*/ CollectionValue includingAll = CollectionIncludingAllOperation.INSTANCE.evaluate(asSequence, elements);
+            final List<NamedElement> UNBOXED_includingAll = includingAll.asEcoreObjects(idResolver, NamedElement.class);
+            assert UNBOXED_includingAll != null;
+            CTORid_namedElements.initValue(symbol_3, UNBOXED_includingAll);
+            final @Nullable /*@Thrown*/ String name_0 = z_3.getName();
+            final @Nullable /*@Thrown*/ List<NamedElement> namedElements_1 = symbol_3.getNamedElements();
+            assert namedElements_1 != null;
+            final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements_1 = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements_1);
+            final @NonNull /*@Thrown*/ OrderedSetValue selectByKind = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(evaluator, BOXED_namedElements_1, TYP_target_c_c_C_0);
+            @NonNull /*@Thrown*/ OrderedSetValue.Accumulator accumulator_0 = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_C);
             @Nullable Iterator<?> ITERATOR__1 = selectByKind.iterator();
             @NonNull /*@Thrown*/ OrderedSetValue select;
             while (true) {
                 if (!ITERATOR__1.hasNext()) {
-                    select = accumulator;
+                    select = accumulator_0;
                     break;
                 }
                 @Nullable /*@NonInvalid*/ C _1 = (C)ITERATOR__1.next();
@@ -1017,13 +1033,13 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
                 final /*@Thrown*/ boolean eq = (name_1 != null) ? name_1.equals(name_0) : (name_0 == null);
                 //
                 if (eq == ValueUtil.TRUE_VALUE) {
-                    accumulator.add(_1);
+                    accumulator_0.add(_1);
                 }
             }
             final /*@Thrown*/ boolean isEmpty = CollectionIsEmptyOperation.INSTANCE.evaluate(select).booleanValue();
-            @Nullable /*@Thrown*/ C symbol_1;
+            @Nullable /*@Thrown*/ C symbol_4;
             if (isEmpty) {
-                symbol_1 = null;
+                symbol_4 = null;
             }
             else {
                 @Nullable Iterator<?> ITERATOR__1_0 = select.iterator();
@@ -1042,11 +1058,11 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
                         break;
                     }
                 }
-                symbol_1 = any;
+                symbol_4 = any;
             }
-            symbol_2 = symbol_1;
+            symbol_5 = symbol_4;
         }
-        oclAsType.setRefsC(symbol_2);
+        oclAsType.setRefsC(symbol_5);
         // mapping statements
         return true;
     }
@@ -1200,9 +1216,9 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
             CAUGHT_name = ValueUtil.createInvalidValue(e);
         }
         final /*@NonInvalid*/ boolean symbol_0 = (CAUGHT_name == null) || (CAUGHT_name instanceof InvalidValueException);
-        @Nullable /*@Thrown*/ B symbol_2;
+        @Nullable /*@Thrown*/ B symbol_5;
         if (symbol_0) {
-            symbol_2 = null;
+            symbol_5 = null;
         }
         else {
             final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_B_0 = idResolver.getClass(CLSSid_B, null);
@@ -1211,22 +1227,67 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
                 throw new InvalidValueException("Null source for \'source::SElement::ast\'");
             }
             final @Nullable /*@Thrown*/ EObject ast_0 = oclAsType_0.getAst();
-            final @Nullable /*@Thrown*/ B self_2 = (B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_B_0);
-            if (self_2 == null) {
-                throw new InvalidValueException("Null source for \'OclElement::_env(OclElement) : env::Environment\'");
+            final @Nullable /*@Thrown*/ B self_0 = (B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_B_0);
+            final @Nullable /*@Thrown*/ Object parent = ClassifierOclContainerOperation.INSTANCE.evaluate(evaluator, self_0);
+            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_A1_0 = idResolver.getClass(CLSSid_A1, null);
+            final @Nullable /*@Thrown*/ A1 self_1 = (A1)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, parent, TYP_target_c_c_A1_0);
+            if (self_1 == null) {
+                throw new InvalidValueException("Null source for \'target::A1::ownsB\'");
             }
-            final @NonNull /*@Thrown*/ Environment _env = this._env(self_2, null);
-            final @Nullable /*@Thrown*/ String name_0 = z_6.getName();
-            final @Nullable /*@Thrown*/ List<NamedElement> namedElements = _env.getNamedElements();
+            final @Nullable /*@Thrown*/ List<B> ownedBs = self_1.getOwnsB();
+            assert ownedBs != null;
+            final @Nullable /*@Thrown*/ Object parent_0 = ClassifierOclContainerOperation.INSTANCE.evaluate(evaluator, self_1);
+            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_TRoot_0 = idResolver.getClass(CLSSid_TRoot, null);
+            final @Nullable /*@Thrown*/ TRoot self_2 = (TRoot)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, parent_0, TYP_target_c_c_TRoot_0);
+            final @NonNull /*@NonInvalid*/ Class TYP_env_c_c_Environment_0 = idResolver.getClass(CLSSid_Environment, null);
+            final @NonNull /*@NonInvalid*/ Environment symbol_1 = (Environment)TYP_env_c_c_Environment_0.createInstance();
+            final @NonNull /*@NonInvalid*/ Property CTORid_parentEnv = idResolver.getProperty(PROPid_parentEnv);
+            final @NonNull /*@NonInvalid*/ Class TYP_env_c_c_Environment_1 = idResolver.getClass(CLSSid_Environment, null);
+            final @NonNull /*@Thrown*/ Environment symbol_2 = (Environment)TYP_env_c_c_Environment_1.createInstance();
+            CTORid_parentEnv.initValue(symbol_2, symbol_1);
+            final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedBs = idResolver.createOrderedSetOfAll(ORD_CLSSid_B, ownedBs);
+            @NonNull /*@Thrown*/ OrderedSetValue.Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_B);
+            @Nullable Iterator<?> ITERATOR_x_3 = BOXED_ownedBs.iterator();
+            @NonNull /*@Thrown*/ OrderedSetValue elements;
+            while (true) {
+                if (!ITERATOR_x_3.hasNext()) {
+                    elements = accumulator;
+                    break;
+                }
+                @Nullable /*@NonInvalid*/ B x_3 = (B)ITERATOR_x_3.next();
+                /**
+                 * _'<' : Boolean
+                 */
+                final @NonNull /*@Thrown*/ IntegerValue indexOf = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedBs, x_3);
+                final @NonNull /*@Thrown*/ IntegerValue indexOf_0 = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedBs, self_0);
+                final /*@Thrown*/ boolean lt = OclComparableLessThanOperation.INSTANCE.evaluate(evaluator, indexOf, indexOf_0).booleanValue();
+                //
+                if (lt == ValueUtil.TRUE_VALUE) {
+                    accumulator.add(x_3);
+                }
+            }
+            final @NonNull /*@NonInvalid*/ Class TYP_env_c_c_Environment_2 = idResolver.getClass(CLSSid_Environment, null);
+            final @NonNull /*@NonInvalid*/ Property CTORid_namedElements = idResolver.getProperty(PROPid_namedElements);
+            final @NonNull /*@Thrown*/ Environment symbol_3 = (Environment)TYP_env_c_c_Environment_2.createInstance();
+            final @Nullable /*@Thrown*/ List<NamedElement> namedElements = symbol_2.getNamedElements();
             assert namedElements != null;
             final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements);
-            final @NonNull /*@Thrown*/ OrderedSetValue selectByKind = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(evaluator, BOXED_namedElements, TYP_target_c_c_B_0);
-            @NonNull /*@Thrown*/ OrderedSetValue.Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_B);
+            final @NonNull /*@Thrown*/ SequenceValue asSequence = CollectionAsSequenceOperation.INSTANCE.evaluate(BOXED_namedElements);
+            final @NonNull /*@Thrown*/ CollectionValue includingAll = CollectionIncludingAllOperation.INSTANCE.evaluate(asSequence, elements);
+            final List<NamedElement> UNBOXED_includingAll = includingAll.asEcoreObjects(idResolver, NamedElement.class);
+            assert UNBOXED_includingAll != null;
+            CTORid_namedElements.initValue(symbol_3, UNBOXED_includingAll);
+            final @Nullable /*@Thrown*/ String name_0 = z_6.getName();
+            final @Nullable /*@Thrown*/ List<NamedElement> namedElements_1 = symbol_3.getNamedElements();
+            assert namedElements_1 != null;
+            final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements_1 = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements_1);
+            final @NonNull /*@Thrown*/ OrderedSetValue selectByKind = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(evaluator, BOXED_namedElements_1, TYP_target_c_c_B_0);
+            @NonNull /*@Thrown*/ OrderedSetValue.Accumulator accumulator_0 = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_B);
             @Nullable Iterator<?> ITERATOR__1 = selectByKind.iterator();
             @NonNull /*@Thrown*/ OrderedSetValue select;
             while (true) {
                 if (!ITERATOR__1.hasNext()) {
-                    select = accumulator;
+                    select = accumulator_0;
                     break;
                 }
                 @Nullable /*@NonInvalid*/ B _1 = (B)ITERATOR__1.next();
@@ -1240,13 +1301,13 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
                 final /*@Thrown*/ boolean eq = (name_1 != null) ? name_1.equals(name_0) : (name_0 == null);
                 //
                 if (eq == ValueUtil.TRUE_VALUE) {
-                    accumulator.add(_1);
+                    accumulator_0.add(_1);
                 }
             }
             final /*@Thrown*/ boolean isEmpty = CollectionIsEmptyOperation.INSTANCE.evaluate(select).booleanValue();
-            @Nullable /*@Thrown*/ B symbol_1;
+            @Nullable /*@Thrown*/ B symbol_4;
             if (isEmpty) {
-                symbol_1 = null;
+                symbol_4 = null;
             }
             else {
                 @Nullable Iterator<?> ITERATOR__1_0 = select.iterator();
@@ -1265,11 +1326,11 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
                         break;
                     }
                 }
-                symbol_1 = any;
+                symbol_4 = any;
             }
-            symbol_2 = symbol_1;
+            symbol_5 = symbol_4;
         }
-        oclAsType.setRefsB(symbol_2);
+        oclAsType.setRefsB(symbol_5);
         // mapping statements
         return true;
     }

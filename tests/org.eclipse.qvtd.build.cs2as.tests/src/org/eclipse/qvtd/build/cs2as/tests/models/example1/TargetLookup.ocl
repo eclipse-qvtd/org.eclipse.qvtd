@@ -2,19 +2,19 @@ import 'Environment.ecore'
 --import 'Environment.ocl' FIXME imported OCL doesn't work
 import 'TargetMM1.ecore'
 
-package ocl
--- Default Environment related functionality
-context OclElement
-	
-def : env() : env::Environment =
-	_env(null)
-
-def : _env(child : OclElement) : env::Environment =
-	parentEnv()
-	
-def : parentEnv() : env::Environment =
-	let parent = oclContainer() in if parent = null then env::Environment { } else parent._env(self) endif
-endpackage 
+--package ocl
+---- Default Environment related functionality
+--context OclElement
+--	
+--def : env() : env::Environment =
+--	_env(null)
+--
+--def : _env(child : OclElement) : env::Environment =
+--	parentEnv()
+--	
+--def : parentEnv() : env::Environment =
+--	let parent = oclContainer() in if parent = null then env::Environment { } else parent._env(self) endif
+--endpackage 
 
 package env
 
@@ -127,5 +127,51 @@ def : _env(child : ocl:: OclElement) : env::Environment =
 context D
 def : _env(child : ocl::OclElement) : env::Environment =
 	parentEnv()
+
+
+-- Specifying parent() env() operations
+
+context TRoot
+def : parentEnv() : env::Environment =
+	env::Environment{}
+	
+context A1
+def : parentEnv() : env::Environment =
+	let parent = oclContainer()
+	in parent.oclAsType(TRoot)._env(self)
+	
+
+context A2
+def : parentEnv() : env::Environment =
+	let parent = oclContainer()
+	in parent.oclAsType(TRoot)._env(self)
+	
+
+
+context B
+def : env() : env::Environment =
+	self._env(null)
+	
+def : parentEnv() : env::Environment =
+	let parent = oclContainer()
+	in parent.oclAsType(A1)._env(self)
+	
+context C
+def : env() : env::Environment =
+	self._env(null)
+	
+def : parentEnv() : env::Environment =
+	let parent = oclContainer()
+	in parent.oclAsType(A2)._env(self)
+
+context D
+	
+def : parentEnv() : env::Environment =
+	let parent = oclContainer()
+	in
+		if parent.oclIsKindOf(B)
+		then parent.oclAsType(B)._env(self)
+		else parent.oclAsType(C)._env(self)
+		endif
 	
 endpackage

@@ -259,28 +259,9 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		reg.put(example1.env.EnvironmentPackage.eNS_URI, example1.env.EnvironmentPackage.eINSTANCE);
 		
 		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
-		TransformationEvaluator evaluator = myQVT2.createEvaluator(txConstructor);
-		TransformationExecutor tx = evaluator.getExecutor();
-		
-		//
-		// Execute the transformation
-		//
 
-    	URI samplesBaseUri = baseURI.appendSegment("samples");
-    	URI csModelURI = samplesBaseUri.appendSegment("model1_input.xmi");
-    	URI asModelURI = samplesBaseUri.appendSegment("model1_output_CG.xmi");
-    	URI expectedAsModelURI = samplesBaseUri.appendSegment("model1_output_ref.xmi");
-    	
-    	ResourceSet rSet = myQVT2.getResourceSet();
-		Resource inputResource = rSet.getResource(csModelURI, true);
-		tx.addRootObjects("leftCS", ClassUtil.nonNullState(inputResource.getContents()));
-		assertTrue(tx.run());
-		Resource outputResource = rSet.createResource(asModelURI);
-		outputResource.getContents().addAll(tx.getRootObjects("rightAS"));
-		outputResource.save(TestsXMLUtil.defaultSavingOptions);
-
-        Resource expected =  rSet.getResource(expectedAsModelURI, true);
-        assertSameModel(expected, rSet.getResource(asModelURI, true));
+		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model1");		
+	
         myQVT2.dispose();
 	}
 		

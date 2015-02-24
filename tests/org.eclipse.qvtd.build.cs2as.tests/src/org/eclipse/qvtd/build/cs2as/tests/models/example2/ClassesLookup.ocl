@@ -149,6 +149,9 @@ def : parentEnv() : env::Environment =
 context Class
 def : env() : env::Environment =
 	-- Class doesn't contribute elements no the environment, start from its container
+	parentEnv()
+	
+def : parentEnv() : env::Environment =
 	let parent = oclContainer() in	
 	parent.oclAsType(Package)._env(self) -- Classes can only be contained in Packages 
 
