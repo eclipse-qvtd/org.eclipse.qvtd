@@ -149,6 +149,8 @@ rule ConstructorPart2UpdateMapping
 	var bottomPattern = new QVTi!BottomPattern;
 	bottomPattern.assignment.add(pAssignment);
 	
+	constructorExp.updateGuardPattern(guardPattern, leftVar);
+	
 	t.guardPattern = guardPattern;
 	t.bottomPattern = bottomPattern;
 }

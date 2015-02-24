@@ -104,6 +104,7 @@ def : _env_Package(child : ocl::OclElement) : env::Environment =
 		addElements(self.ownedPackages)
 
 -- Inlining
+-- FIXME study
 context Class
 def : env() : env::Environment =
 	let parent = oclContainer() in

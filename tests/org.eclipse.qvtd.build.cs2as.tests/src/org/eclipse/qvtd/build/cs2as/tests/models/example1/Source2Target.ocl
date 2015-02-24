@@ -50,14 +50,20 @@ def : ast() : target::D =
 	then target::D {
 		toA = toY.oclAsType(source::Y1).ast().toA1,
 		name = name,
-		refsB = ast().lookupB(name) -- Lookups are performed from the created ast element
-									-- Problem : disambiguating lookups need to start from the container 
+		refsB = if name.oclIsUndefined() 
+				then null
+				else toY.oclAsType(source::Y1).ast().env().lookupB(name) -- Lookups are performed from the created ast element
+									-- Problem : disambiguating lookups need to start from the container
+				endif 
 	}
 	else target::D {
 		toA = toY.oclAsType(source::Y2).ast().toA2,
 		name = name,
-		refsC = ast().lookupC(name) -- Lookups are performed from the created ast element
+		refsC = if name.oclIsUndefined() 
+				then null
+				else toY.oclAsType(source::Y2).ast().env().lookupC(name) -- Lookups are performed from the created ast element
 									-- Problem : disambiguating lookups need to start from the container 
+				endif
 	}
 	endif
 
