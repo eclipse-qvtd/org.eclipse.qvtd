@@ -54,7 +54,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -161,12 +160,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		MyQVT myQVT = createQVT();
 		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
 
-		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI,"Source2Target.ocl", myQVT, TestsXMLUtil.defaultSavingOptions);
-    	mtc.execute();
-    	PivotModel qvtiTransf = mtc.getiModel();
-    	URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());
-    	assertValidQVTiModel(txURI);
-    	
+		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "Source2Target.ocl");
+	    	
 //    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("Source2TargetSchedule_complete.graphml").toString(), false);
 //    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("Source2TargetSchedule_pruned.graphml").toString(), true);
 		
@@ -181,11 +176,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		MyQVT myQVT = createQVT();
 		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 
-		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "classescs2as.ocl", myQVT, TestsXMLUtil.defaultSavingOptions);
-    	mtc.execute();
-    	PivotModel qvtiTransf = mtc.getiModel();
-    	URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());		
-    	assertValidQVTiModel(txURI);
+		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "classescs2as.ocl");
 
 //    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("classescs2asSchedule_complete.graphml").toString(), false);
 //    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("classescs2asSchedule_pruned.graphml").toString(), true);
@@ -222,16 +213,12 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	public void testExample4_() throws Exception {
 		MyQVT myQVT = createQVT();
 		URI baseURI = TESTS_BASE_URI.appendSegment("example4");
-
-		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "SimplerKiama.ocl", myQVT, TestsXMLUtil.defaultSavingOptions);
-    	mtc.execute();
-    	
-    	PivotModel qvtiTransf = mtc.getiModel();
-    	URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());
-    	assertValidQVTiModel(txURI);
-    	
+				
+		executeOCL2QVTi_MTC(myQVT, baseURI, "SimplerKiama.ocl");
+		    	
     	//launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("SimplerKiamaSchedule_complete.graphml").toString(), false);
     	//launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("SimplerKiamaSchedule_pruned.graphml").toString(), true);
+				
     	myQVT.dispose();
 	}
 	
@@ -240,12 +227,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		MyQVT myQVT = createQVT();
 		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
 
-		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "Source2Target.ocl", myQVT, TestsXMLUtil.defaultSavingOptions);
-    	mtc.execute();
-    	PivotModel qvtiTransf = mtc.getiModel();
-    	
-    	URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());
-    	assertValidQVTiModel(txURI);
+		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "Source2Target.ocl");
     	
     	//
     	// Generate the transformation java code
@@ -272,13 +254,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		MyQVT myQVT = createQVT();
 		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 			
-		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "classescs2as.ocl", myQVT, TestsXMLUtil.defaultSavingOptions);
-    	mtc.execute();
-    	PivotModel qvtiTransf = mtc.getiModel();
-    	
-    	URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());
-    	assertValidQVTiModel(txURI);
-    	
+		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "classescs2as.ocl");
+	    	    	
     	//
     	// Generate the transformation java code
     	// 
@@ -370,6 +347,18 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		PivotEObjectValidator.install(ClassUtil.nonNullState(QVTimperativePackage.eINSTANCE));
 		
 		assertValidModel(asURI, asResourceSet);
+	}
+	
+	protected PivotModel executeOCL2QVTi_MTC(MyQVT qvt, URI baseURI, String oclDocName) throws Exception {
+		
+		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, oclDocName, qvt, TestsXMLUtil.defaultSavingOptions);
+    	mtc.execute();
+    	PivotModel qvtiTransf = mtc.getiModel();
+    	
+    	URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());
+    	assertValidQVTiModel(txURI);
+    	
+    	return qvtiTransf;
 	}
 	
 	//
