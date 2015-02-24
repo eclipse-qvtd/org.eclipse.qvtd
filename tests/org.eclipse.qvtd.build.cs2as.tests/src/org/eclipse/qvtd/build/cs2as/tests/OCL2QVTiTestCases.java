@@ -193,28 +193,29 @@ public class OCL2QVTiTestCases extends LoadTestCase {
     	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model1");
     	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model2");
     	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model3");
+    	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model4");
 
         myQVT.dispose();
 	}
 	
-	@Test
-	public void testExample3_Interpreted() throws Exception {
-		MyQVT myQVT = createQVT();
-		URI baseURI = TESTS_BASE_URI.appendSegment("example3");
-
-		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "KiamaRewrite.ocl", myQVT, TestsXMLUtil.defaultSavingOptions);
-    	mtc.execute();
-    	PivotModel qvtiTransf = mtc.getiModel();
-    	URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());
-    	assertValidQVTiModel(txURI);
-    	
-    	//launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("KiamaRewriteSchedule_complete.graphml").toString(), false);
-    	//launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("KiamaRewriteSchedule_pruned.graphml").toString(), true);
-    	
-    	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model1");
-    	
-        myQVT.dispose();
-	}
+//	@Test
+//	public void testExample3_Interpreted() throws Exception {
+//		MyQVT myQVT = createQVT();
+//		URI baseURI = TESTS_BASE_URI.appendSegment("example3");
+//
+//		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, "KiamaRewrite.ocl", myQVT, TestsXMLUtil.defaultSavingOptions);
+//    	mtc.execute();
+//    	PivotModel qvtiTransf = mtc.getiModel();
+//    	URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());
+//    	assertValidQVTiModel(txURI);
+//    	
+//    	//launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("KiamaRewriteSchedule_complete.graphml").toString(), false);
+//    	//launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("KiamaRewriteSchedule_pruned.graphml").toString(), true);
+//    	
+//    	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model1");
+//    	
+//        myQVT.dispose();
+//	}
 	
 	
 	@Test
@@ -299,6 +300,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model1");
 		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model2");
 		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model3");
+		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model4");
 		
         myQVT2.dispose();
 	}
