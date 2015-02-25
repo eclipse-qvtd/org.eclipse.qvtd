@@ -25,6 +25,7 @@ import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
+import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.internal.validation.PivotEObjectValidator;
@@ -57,7 +58,8 @@ import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.junit.Before;
 import org.junit.Test;
 
-import env.EnvironmentPackage;
+import classes.ClassesPackage;
+import example1.source.SourcePackage;
 
 /**
  * @author asbh500
@@ -161,13 +163,19 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
 
 		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "Source2Target.ocl");
-	    	
+		URI txURI = qvtiTransf.getModelFileUri();
+		myQVT.dispose();
+		
 //    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("Source2TargetSchedule_complete.graphml").toString(), false);
 //    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("Source2TargetSchedule_pruned.graphml").toString(), true);
 		
-    	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model1");
-    	
-        myQVT.dispose();
+		myQVT = createQVT();
+//		myQVT.getEnvironmentFactory().configureLoadStrategy(StandaloneProjectMap.LoadBothStrategy.INSTANCE, StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
+		
+		SourcePackage.eINSTANCE.getClass();
+    	executeModelsTX_Interpreted(myQVT, getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI), baseURI, "model1");
+    	myQVT.dispose();
+        
 	}
 	
 	
@@ -181,6 +189,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 //    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("classescs2asSchedule_complete.graphml").toString(), false);
 //    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("classescs2asSchedule_pruned.graphml").toString(), true);
     	
+		ClassesPackage.eINSTANCE.getClass();
     	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model1");
     	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model2");
     	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model3");
@@ -237,15 +246,13 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT.dispose();
 		
 		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore 
-		MyQVT myQVT2 = createQVT();
-		Registry reg = myQVT2.getPackageRegistry();
-		reg.put(example1.env.EnvironmentPackage.eNS_URI, example1.env.EnvironmentPackage.eINSTANCE);
+		myQVT = createQVT();
 		
 		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
 
-		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model1");		
+		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model1");		
 	
-        myQVT2.dispose();
+		myQVT.dispose();
 	}
 		
 		
@@ -269,9 +276,6 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		// Execute CGed transformation
 		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore 
 		MyQVT myQVT2 = createQVT();
-		Registry reg = myQVT2.getPackageRegistry();
-		reg.put(EnvironmentPackage.eNS_URI, EnvironmentPackage.eINSTANCE);
-		
 		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
 		
 		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model1");
