@@ -179,6 +179,15 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getX_IsA2() {
+		return (EAttribute)xEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getY() {
 		return yEClass;
 	}
@@ -322,6 +331,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 		xEClass = createEClass(X);
 		createEReference(xEClass, X__OWNS_Y);
 		createEAttribute(xEClass, X__IS_A1);
+		createEAttribute(xEClass, X__IS_A2);
 
 		yEClass = createEClass(Y);
 		createEReference(yEClass, Y__OWNS_Z);
@@ -382,6 +392,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 		initEClass(xEClass, example1.source.X.class, "X", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getX_OwnsY(), this.getY(), this.getY_ToX(), "ownsY", null, 0, -1, example1.source.X.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getX_IsA1(), ecorePackage.getEBoolean(), "isA1", null, 0, 1, example1.source.X.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getX_IsA2(), ecorePackage.getEBoolean(), "isA2", null, 0, 1, example1.source.X.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(yEClass, example1.source.Y.class, "Y", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getY_OwnsZ(), this.getZ(), this.getZ_ToY(), "ownsZ", null, 0, 1, example1.source.Y.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -58,6 +58,7 @@ public class TargetFactoryImpl extends EFactoryImpl implements TargetFactory {
 		switch (eClass.getClassifierID()) {
 			case TargetPackage.A1: return createA1();
 			case TargetPackage.A2: return createA2();
+			case TargetPackage.A3: return createA3();
 			case TargetPackage.B: return createB();
 			case TargetPackage.C: return createC();
 			case TargetPackage.D: return createD();
@@ -86,6 +87,16 @@ public class TargetFactoryImpl extends EFactoryImpl implements TargetFactory {
 	public A2 createA2() {
 		A2Impl a2 = new A2Impl();
 		return a2;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public A3 createA3() {
+		A3Impl a3 = new A3Impl();
+		return a3;
 	}
 
 	/**

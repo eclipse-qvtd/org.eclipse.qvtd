@@ -5,11 +5,15 @@
     modelName="Source2Target" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
     operationReflection="true" importOrganizing="true">
+  <foreignModel>SourceMM1.ecore</foreignModel>
+  <foreignModel>TargetMM1.ecore</foreignModel>
+  <foreignModel>Environment.ecore</foreignModel>
   <genPackages prefix="Source" basePackage="example1" disposableProviderFactory="true"
       ecorePackage="SourceMM1.ecore#/">
     <genClasses ecoreClass="SourceMM1.ecore#//X">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SourceMM1.ecore#//X/ownsY"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SourceMM1.ecore#//X/isA1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SourceMM1.ecore#//X/isA2"/>
     </genClasses>
     <genClasses image="false" ecoreClass="SourceMM1.ecore#//Y">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SourceMM1.ecore#//Y/ownsZ"/>
@@ -38,6 +42,7 @@
     <genClasses ecoreClass="TargetMM1.ecore#//A2">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TargetMM1.ecore#//A2/ownsC"/>
     </genClasses>
+    <genClasses ecoreClass="TargetMM1.ecore#//A3"/>
     <genClasses ecoreClass="TargetMM1.ecore#//B">
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference TargetMM1.ecore#//B/toA1"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TargetMM1.ecore#//B/ownsD"/>

@@ -24,4 +24,20 @@
           name=""/>
     </ownsY>
   </ownedX>
+  <ownedX>
+    <ownsY xsi:type="source:Y2"
+        name="Y3-a">
+      <ownsZ
+          name="Y3-c"/>
+    </ownsY>
+    <ownsY xsi:type="source:Y2"
+        name="Y3-b">
+      <ownsZ/>
+    </ownsY>
+    <ownsY xsi:type="source:Y2"
+        name="Y3-c">
+      <ownsZ
+          name="Y3-a"/>
+    </ownsY>
+  </ownedX>
 </source:SRoot>

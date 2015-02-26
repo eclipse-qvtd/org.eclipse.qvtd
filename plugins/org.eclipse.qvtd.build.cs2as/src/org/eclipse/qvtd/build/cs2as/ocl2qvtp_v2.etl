@@ -270,30 +270,46 @@ operation OCL!ConstructorExp updateGuardPattern(guardPattern : QVTi!GuardPattern
 
 	var container = self.eContainer();
 	
-	if (container.isKindOf(OCL!IfExp)) {
-		var predicate = new QVTi!Predicate;
+	if (container.isKindOf(OCL!IfExp)) {		
 		var eUtil = emfTool.getEcoreUtil();
 		var condition = container.ownedCondition;
-		var newCondition;
+		var guardPredicates = Sequence{};
 		if (container.ownedThen = self) {
-			newCondition = eUtil.copy(condition);
+			guardPredicates.add(eUtil.copy(condition));
 		} else { // it's the else
-			// We don't want to create a 'not not conditionExp'
-			if (condition.isBooleanNotOpCallExp()) {
-				newCondition = eUtil.copy(condition.ownedSource);
-			} else {
-				newCondition = new OCL!OperationCallExp;
-				newCondition.name = 'not';
-				newCondition.referredOperation = getBooleanNotOp();
-				newCondition.type = getBooleanPrimitiveType();
-				newCondition.ownedSource = eUtil.copy(condition);
-			}
+			guardPredicates.add(condition.createNegatedExpression());
 		}
-		-- We need to replace the OCL refered "self" varible by the QVTi domain "leftVar" and ast op calls
-		predicate.conditionExpression = newCondition.println("NEW CONDITION-> ").doReplacements(leftVar.println("LEFT VAR-> "));
-		guardPattern.predicate.add(predicate);
+		
+		container = container.eContainer();
+		-- FIXME create a cached operation to improve performance
+		while (container.isKindOf(OCL!IfExp)) {
+			guardPredicates.add(container.ownedCondition.createNegatedExpression());
+			container = container.eContainer();
+		}
+		-- We need to replace the OCL refered "self" varible by the QVTi domain "leftVar"
+		for (guardPredicate in guardPredicates.invert() ) {
+			var predicate = new QVTi!Predicate;
+			predicate.conditionExpression = guardPredicate.doReplacements(leftVar);
+			guardPattern.predicate.add(predicate);
+		}
 	}
 }
+
+operation OCL!OCLExpression createNegatedExpression() : OCL!OCLExpression {
+	var negatedExpression;
+	// We don't want to create a 'not not conditionExp'
+	if (self.isBooleanNotOpCallExp()) {
+		negatedExpression = eUtil.copy(self.ownedSource);
+	} else {
+		var eUtil = emfTool.getEcoreUtil();
+		negatedExpression = new OCL!OperationCallExp;
+		negatedExpression.name = 'not';
+		negatedExpression.referredOperation = getBooleanNotOp();
+		negatedExpression.type = getBooleanPrimitiveType();
+		negatedExpression.ownedSource = eUtil.copy(self);
+	}
+	return negatedExpression;
+}  
 
 operation OCL!Element isSelfVarExp() : Boolean {
 	return self.isKindOf(OCL!VariableExp) and self.referredVariable.name = 'self';

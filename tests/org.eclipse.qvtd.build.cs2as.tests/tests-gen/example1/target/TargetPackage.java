@@ -159,6 +159,43 @@ public interface TargetPackage extends EPackage {
 	int A2_OPERATION_COUNT = A_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link example1.target.impl.A3Impl <em>A3</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see example1.target.impl.A3Impl
+	 * @see example1.target.impl.TargetPackageImpl#getA3()
+	 * @generated
+	 */
+	int A3 = 3;
+
+	/**
+	 * The feature id for the '<em><b>Owns C</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int A3__OWNS_C = A2__OWNS_C;
+
+	/**
+	 * The number of structural features of the '<em>A3</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int A3_FEATURE_COUNT = A2_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>A3</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int A3_OPERATION_COUNT = A2_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link example1.target.impl.NamedElementImpl <em>Named Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -166,7 +203,7 @@ public interface TargetPackage extends EPackage {
 	 * @see example1.target.impl.TargetPackageImpl#getNamedElement()
 	 * @generated
 	 */
-	int NAMED_ELEMENT = 7;
+	int NAMED_ELEMENT = 8;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -203,7 +240,7 @@ public interface TargetPackage extends EPackage {
 	 * @see example1.target.impl.TargetPackageImpl#getB()
 	 * @generated
 	 */
-	int B = 3;
+	int B = 4;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -258,7 +295,7 @@ public interface TargetPackage extends EPackage {
 	 * @see example1.target.impl.TargetPackageImpl#getC()
 	 * @generated
 	 */
-	int C = 4;
+	int C = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -313,7 +350,7 @@ public interface TargetPackage extends EPackage {
 	 * @see example1.target.impl.TargetPackageImpl#getD()
 	 * @generated
 	 */
-	int D = 5;
+	int D = 6;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -395,7 +432,7 @@ public interface TargetPackage extends EPackage {
 	 * @see example1.target.impl.TargetPackageImpl#getTRoot()
 	 * @generated
 	 */
-	int TROOT = 6;
+	int TROOT = 7;
 
 	/**
 	 * The feature id for the '<em><b>Owned A</b></em>' containment reference list.
@@ -476,6 +513,16 @@ public interface TargetPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getA2_OwnsC();
+
+	/**
+	 * Returns the meta object for class '{@link example1.target.A3 <em>A3</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>A3</em>'.
+	 * @see example1.target.A3
+	 * @generated
+	 */
+	EClass getA3();
 
 	/**
 	 * Returns the meta object for class '{@link example1.target.B <em>B</em>}'.
@@ -716,6 +763,16 @@ public interface TargetPackage extends EPackage {
 		 * @generated
 		 */
 		EReference A2__OWNS_C = eINSTANCE.getA2_OwnsC();
+
+		/**
+		 * The meta object literal for the '{@link example1.target.impl.A3Impl <em>A3</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see example1.target.impl.A3Impl
+		 * @see example1.target.impl.TargetPackageImpl#getA3()
+		 * @generated
+		 */
+		EClass A3 = eINSTANCE.getA3();
 
 		/**
 		 * The meta object literal for the '{@link example1.target.impl.BImpl <em>B</em>}' class.

@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link example1.source.X#getOwnsY <em>Owns Y</em>}</li>
  *   <li>{@link example1.source.X#isIsA1 <em>Is A1</em>}</li>
+ *   <li>{@link example1.source.X#isIsA2 <em>Is A2</em>}</li>
  * </ul>
  *
  * @see example1.source.SourcePackage#getX()
@@ -65,5 +66,31 @@ public interface X extends SElement {
 	 * @generated
 	 */
 	void setIsA1(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Is A2</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is A2</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is A2</em>' attribute.
+	 * @see #setIsA2(boolean)
+	 * @see example1.source.SourcePackage#getX_IsA2()
+	 * @model
+	 * @generated
+	 */
+	boolean isIsA2();
+
+	/**
+	 * Sets the value of the '{@link example1.source.X#isIsA2 <em>Is A2</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is A2</em>' attribute.
+	 * @see #isIsA2()
+	 * @generated
+	 */
+	void setIsA2(boolean value);
 
 } // X

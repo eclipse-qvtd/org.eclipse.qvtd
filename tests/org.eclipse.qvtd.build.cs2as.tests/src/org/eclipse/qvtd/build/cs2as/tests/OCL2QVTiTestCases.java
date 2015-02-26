@@ -161,18 +161,14 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
 
 		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "Source2Target.ocl");
-		URI txURI = qvtiTransf.getModelFileUri();
-		myQVT.dispose();
-		
+	    	
 //    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("Source2TargetSchedule_complete.graphml").toString(), false);
 //    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("Source2TargetSchedule_pruned.graphml").toString(), true);
 		
-		myQVT = createQVT();
-//		myQVT.getEnvironmentFactory().configureLoadStrategy(StandaloneProjectMap.LoadBothStrategy.INSTANCE, StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
-		
-		SourcePackage.eINSTANCE.getClass();
-    	executeModelsTX_Interpreted(myQVT, getTransformation(myQVT.getMetamodelManager().getASResourceSet(), txURI), baseURI, "model1");
-    	myQVT.dispose();
+    	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model1");
+    	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model2");
+    	
+        myQVT.dispose();
         
 	}
 	
@@ -258,13 +254,14 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT.dispose();
 		
 		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore 
-		myQVT = createQVT();
+		MyQVT myQVT2 = createQVT();
 		
 		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
 
-		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model1");		
+		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model1");		
+		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model2");
 	
-		myQVT.dispose();
+        myQVT2.dispose();
 	}
 		
 		

@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link example1.source.impl.XImpl#getOwnsY <em>Owns Y</em>}</li>
  *   <li>{@link example1.source.impl.XImpl#isIsA1 <em>Is A1</em>}</li>
+ *   <li>{@link example1.source.impl.XImpl#isIsA2 <em>Is A2</em>}</li>
  * </ul>
  *
  * @generated
@@ -65,6 +66,26 @@ public class XImpl extends SElementImpl implements X {
 	 * @ordered
 	 */
 	protected boolean isA1 = IS_A1_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isIsA2() <em>Is A2</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsA2()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_A2_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsA2() <em>Is A2</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsA2()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isA2 = IS_A2_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -123,6 +144,27 @@ public class XImpl extends SElementImpl implements X {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isIsA2() {
+		return isA2;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setIsA2(boolean newIsA2) {
+		boolean oldIsA2 = isA2;
+		isA2 = newIsA2;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SourcePackage.X__IS_A2, oldIsA2, isA2));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -159,6 +201,8 @@ public class XImpl extends SElementImpl implements X {
 				return getOwnsY();
 			case SourcePackage.X__IS_A1:
 				return isIsA1();
+			case SourcePackage.X__IS_A2:
+				return isIsA2();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -179,6 +223,9 @@ public class XImpl extends SElementImpl implements X {
 			case SourcePackage.X__IS_A1:
 				setIsA1((Boolean)newValue);
 				return;
+			case SourcePackage.X__IS_A2:
+				setIsA2((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -197,6 +244,9 @@ public class XImpl extends SElementImpl implements X {
 			case SourcePackage.X__IS_A1:
 				setIsA1(IS_A1_EDEFAULT);
 				return;
+			case SourcePackage.X__IS_A2:
+				setIsA2(IS_A2_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -213,6 +263,8 @@ public class XImpl extends SElementImpl implements X {
 				return ownsY != null && !ownsY.isEmpty();
 			case SourcePackage.X__IS_A1:
 				return isA1 != IS_A1_EDEFAULT;
+			case SourcePackage.X__IS_A2:
+				return isA2 != IS_A2_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -229,6 +281,8 @@ public class XImpl extends SElementImpl implements X {
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (isA1: ");
 		result.append(isA1);
+		result.append(", isA2: ");
+		result.append(isA2);
 		result.append(')');
 		return result.toString();
 	}

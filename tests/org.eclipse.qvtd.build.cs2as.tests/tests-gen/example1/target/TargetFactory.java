@@ -40,6 +40,15 @@ public interface TargetFactory extends EFactory {
 	A2 createA2();
 
 	/**
+	 * Returns a new object of class '<em>A3</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>A3</em>'.
+	 * @generated
+	 */
+	A3 createA3();
+
+	/**
 	 * Returns a new object of class '<em>B</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

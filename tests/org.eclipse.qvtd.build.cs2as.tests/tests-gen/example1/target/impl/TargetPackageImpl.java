@@ -55,6 +55,13 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass a3EClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EClass bEClass = null;
 
 	/**
@@ -197,6 +204,15 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 */
 	public EReference getA2_OwnsC() {
 		return (EReference)a2EClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getA3() {
+		return a3EClass;
 	}
 
 	/**
@@ -379,6 +395,8 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 		a2EClass = createEClass(A2);
 		createEReference(a2EClass, A2__OWNS_C);
 
+		a3EClass = createEClass(A3);
+
 		bEClass = createEClass(B);
 		createEReference(bEClass, B__TO_A1);
 		createEReference(bEClass, B__OWNS_D);
@@ -431,6 +449,7 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 		// Add supertypes to classes
 		a1EClass.getESuperTypes().add(this.getA());
 		a2EClass.getESuperTypes().add(this.getA());
+		a3EClass.getESuperTypes().add(this.getA2());
 		bEClass.getESuperTypes().add(this.getNamedElement());
 		cEClass.getESuperTypes().add(this.getNamedElement());
 		dEClass.getESuperTypes().add(this.getNamedElement());
@@ -443,6 +462,8 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 
 		initEClass(a2EClass, example1.target.A2.class, "A2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getA2_OwnsC(), this.getC(), this.getC_ToA2(), "ownsC", null, 0, -1, example1.target.A2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(a3EClass, example1.target.A3.class, "A3", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(bEClass, example1.target.B.class, "B", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getB_ToA1(), this.getA1(), this.getA1_OwnsB(), "toA1", null, 0, 1, example1.target.B.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -80,6 +80,10 @@ public class TargetAdapterFactory extends AdapterFactoryImpl {
 				return createA2Adapter();
 			}
 			@Override
+			public Adapter caseA3(A3 object) {
+				return createA3Adapter();
+			}
+			@Override
 			public Adapter caseB(B object) {
 				return createBAdapter();
 			}
@@ -158,6 +162,20 @@ public class TargetAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createA2Adapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link example1.target.A3 <em>A3</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see example1.target.A3
+	 * @generated
+	 */
+	public Adapter createA3Adapter() {
 		return null;
 	}
 

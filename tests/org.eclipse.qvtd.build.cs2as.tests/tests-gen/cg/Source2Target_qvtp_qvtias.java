@@ -21,6 +21,7 @@ import example1.source.Z;
 import example1.target.A;
 import example1.target.A1;
 import example1.target.A2;
+import example1.target.A3;
 import example1.target.B;
 import example1.target.C;
 import example1.target.D;
@@ -87,6 +88,7 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_A = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("A", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_A1 = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("A1", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_A2 = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("A2", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_A3 = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("A3", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_B = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("B", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_C = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("C", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Class = PACKid_$metamodel$.getClassId("Class", 0);
@@ -190,8 +192,54 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
     
     /**
      * 
+     * map cX_2_A3 in Source2Target_qvtp_qvtias) {
+     * 
+     *   leftCS (x : source::X;
+     *  |
+     * )
+     * { |
+     * }
+     * rightAS ( |
+     * )
+     * {realize a3 : target::A3;
+     *  |
+     * }
+     * where ( |
+     * not disambiguatesToA1()
+     *   not disambiguatesToA2())
+     * { |
+     * x = a3;
+     * }
+     * 
+     * }
+     */
+    protected boolean cX_2_A3(final @NonNull /*@NonInvalid*/ X x) {
+        // predicates
+        final @Nullable /*@Thrown*/ Boolean isA1 = x.isIsA1();
+        final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(isA1);
+        if (not != ValueUtil.TRUE_VALUE) {
+            return false;
+        }
+        final @Nullable /*@Thrown*/ Boolean isA2 = x.isIsA2();
+        final @Nullable /*@Thrown*/ Boolean not_0 = BooleanNotOperation.INSTANCE.evaluate(isA2);
+        if (not_0 != ValueUtil.TRUE_VALUE) {
+            return false;
+        }
+        // creations
+        final /*@Thrown*/ A3 a3 = TargetFactory.eINSTANCE.createA3();
+        assert a3 != null;
+        modelObjects[1/*rightAS*/].add(a3);
+        // assignments
+        x.setAst(a3);
+        // mapping statements
+        return true;
+    }
+    
+    /**
+     * 
      * map cX_2_A2 in Source2Target_qvtp_qvtias) {
-     * leftCS (x : source::X;
+     * 
+     *   leftCS (x : source::X;
      *  |
      * )
      * { |
@@ -202,16 +250,21 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      *  |
      * }
      * where ( |
-     * not isA1)
+     * not disambiguatesToA1()
+     *   disambiguatesToA2())
      * { |
      * x = a2;
      * }
      * 
      * }
      */
-    protected boolean cX_2_A2(final @NonNull /*@NonInvalid*/ X x) {
+    protected boolean cX_2_A2(final @NonNull /*@NonInvalid*/ X x_0) {
         // predicates
-        final @Nullable /*@Thrown*/ Boolean isA1 = x.isIsA1();
+        final @Nullable /*@Thrown*/ Boolean isA2 = x_0.isIsA2();
+        if (isA2 != ValueUtil.TRUE_VALUE) {
+            return false;
+        }
+        final @Nullable /*@Thrown*/ Boolean isA1 = x_0.isIsA1();
         final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(isA1);
         if (not != ValueUtil.TRUE_VALUE) {
             return false;
@@ -221,7 +274,7 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
         assert a2 != null;
         modelObjects[1/*rightAS*/].add(a2);
         // assignments
-        x.setAst(a2);
+        x_0.setAst(a2);
         // mapping statements
         return true;
     }
@@ -229,7 +282,8 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
     /**
      * 
      * map cX_2_A1 in Source2Target_qvtp_qvtias) {
-     * leftCS (x : source::X;
+     * 
+     *   leftCS (x : source::X;
      *  |
      * )
      * { |
@@ -240,16 +294,16 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      *  |
      * }
      * where ( |
-     * isA1)
+     * disambiguatesToA1())
      * { |
      * x = a1;
      * }
      * 
      * }
      */
-    protected boolean cX_2_A1(final @NonNull /*@NonInvalid*/ X x_0) {
+    protected boolean cX_2_A1(final @NonNull /*@NonInvalid*/ X x_1) {
         // predicates
-        final @Nullable /*@Thrown*/ Boolean isA1 = x_0.isIsA1();
+        final @Nullable /*@Thrown*/ Boolean isA1 = x_1.isIsA1();
         if (isA1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
@@ -258,7 +312,7 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
         assert a1 != null;
         modelObjects[1/*rightAS*/].add(a1);
         // assignments
-        x_0.setAst(a1);
+        x_1.setAst(a1);
         // mapping statements
         return true;
     }
@@ -475,6 +529,97 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
     
     /**
      * 
+     * map uA3_ownsC in Source2Target_qvtp_qvtias) {
+     * 
+     *   leftCS (x : source::X;
+     *  |
+     * )
+     * { |
+     * }
+     * rightAS ( |
+     * )
+     * { |
+     * }
+     * where ( |
+     * not disambiguatesToA1()
+     *   not disambiguatesToA2()
+     *   )
+     * { |
+     * x.ast.oclAsType(target::A3)
+     *    = ownsY.oclAsType(source::Y2)
+     *   .ast.oclAsType(target::C);
+     * }
+     * 
+     * }
+     */
+    protected boolean uA3_ownsC(final @NonNull /*@NonInvalid*/ X x_2) {
+        // predicates
+        final @Nullable /*@Thrown*/ Boolean isA1 = x_2.isIsA1();
+        final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(isA1);
+        if (not != ValueUtil.TRUE_VALUE) {
+            return false;
+        }
+        final @Nullable /*@Thrown*/ Boolean isA2 = x_2.isIsA2();
+        final @Nullable /*@Thrown*/ Boolean not_0 = BooleanNotOperation.INSTANCE.evaluate(isA2);
+        if (not_0 != ValueUtil.TRUE_VALUE) {
+            return false;
+        }
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_A3_0 = idResolver.getClass(CLSSid_A3, null);
+        // creations
+        // assignments
+        final @Nullable /*@Thrown*/ EObject ast = x_2.getAst();
+        final @Nullable /*@Thrown*/ A3 oclAsType = (A3)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_A3_0);
+        final @Nullable /*@Thrown*/ List<Y> ownsY = x_2.getOwnsY();
+        assert ownsY != null;
+        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownsY = idResolver.createOrderedSetOfAll(ORD_CLSSid_Y, ownsY);
+        @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Y2);
+        @Nullable Iterator<?> ITERATOR__1 = BOXED_ownsY.iterator();
+        @NonNull /*@Thrown*/ SequenceValue collect_0;
+        while (true) {
+            if (!ITERATOR__1.hasNext()) {
+                collect_0 = accumulator;
+                break;
+            }
+            @Nullable /*@NonInvalid*/ Y _1 = (Y)ITERATOR__1.next();
+            /**
+             * oclAsType(source::Y2)
+             */
+            final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Y2_0 = idResolver.getClass(CLSSid_Y2, null);
+            final @Nullable /*@Thrown*/ Y2 oclAsType_0 = (Y2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, _1, TYP_source_c_c_Y2_0);
+            //
+            accumulator.add(oclAsType_0);
+        }
+        @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator_0 = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_C);
+        @Nullable Iterator<?> ITERATOR__1_0 = collect_0.iterator();
+        @NonNull /*@Thrown*/ SequenceValue collect;
+        while (true) {
+            if (!ITERATOR__1_0.hasNext()) {
+                collect = accumulator_0;
+                break;
+            }
+            @Nullable /*@NonInvalid*/ Y2 _1_0 = (Y2)ITERATOR__1_0.next();
+            /**
+             * ast.oclAsType(target::C)
+             */
+            final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_C_0 = idResolver.getClass(CLSSid_C, null);
+            if (_1_0 == null) {
+                throw new InvalidValueException("Null source for \'source::SElement::ast\'");
+            }
+            final @Nullable /*@Thrown*/ EObject ast_0 = _1_0.getAst();
+            final @Nullable /*@Thrown*/ C oclAsType_1 = (C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_C_0);
+            //
+            accumulator_0.add(oclAsType_1);
+        }
+        final List<C> UNBOXED_collect = collect.asEcoreObjects(idResolver, C.class);
+        assert UNBOXED_collect != null;
+        oclAsType.getOwnsC().addAll(UNBOXED_collect);
+        // mapping statements
+        return true;
+    }
+    
+    /**
+     * 
      * map uA2_ownsC in Source2Target_qvtp_qvtias) {
      * 
      *   leftCS (x : source::X;
@@ -487,7 +632,9 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * { |
      * }
      * where ( |
-     * not isA1)
+     * not disambiguatesToA1()
+     *   disambiguatesToA2()
+     *   )
      * { |
      * x.ast.oclAsType(target::A2)
      *    = ownsY.oclAsType(source::Y2)
@@ -496,9 +643,13 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * 
      * }
      */
-    protected boolean uA2_ownsC(final @NonNull /*@NonInvalid*/ X x_1) {
+    protected boolean uA2_ownsC(final @NonNull /*@NonInvalid*/ X x_3) {
         // predicates
-        final @Nullable /*@Thrown*/ Boolean isA1 = x_1.isIsA1();
+        final @Nullable /*@Thrown*/ Boolean isA2 = x_3.isIsA2();
+        if (isA2 != ValueUtil.TRUE_VALUE) {
+            return false;
+        }
+        final @Nullable /*@Thrown*/ Boolean isA1 = x_3.isIsA1();
         final @Nullable /*@Thrown*/ Boolean not = BooleanNotOperation.INSTANCE.evaluate(isA1);
         if (not != ValueUtil.TRUE_VALUE) {
             return false;
@@ -507,9 +658,9 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
         final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_A2_0 = idResolver.getClass(CLSSid_A2, null);
         // creations
         // assignments
-        final @Nullable /*@Thrown*/ EObject ast = x_1.getAst();
+        final @Nullable /*@Thrown*/ EObject ast = x_3.getAst();
         final @Nullable /*@Thrown*/ A2 oclAsType = (A2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_A2_0);
-        final @Nullable /*@Thrown*/ List<Y> ownsY = x_1.getOwnsY();
+        final @Nullable /*@Thrown*/ List<Y> ownsY = x_3.getOwnsY();
         assert ownsY != null;
         final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownsY = idResolver.createOrderedSetOfAll(ORD_CLSSid_Y, ownsY);
         @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Y2);
@@ -571,7 +722,8 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * { |
      * }
      * where ( |
-     * isA1)
+     * disambiguatesToA1()
+     *   )
      * { |
      * x.ast.oclAsType(target::A1)
      *    = ownsY.oclAsType(source::Y1)
@@ -580,9 +732,9 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * 
      * }
      */
-    protected boolean uA1_ownsB(final @NonNull /*@NonInvalid*/ X x_2) {
+    protected boolean uA1_ownsB(final @NonNull /*@NonInvalid*/ X x_4) {
         // predicates
-        final @Nullable /*@Thrown*/ Boolean isA1 = x_2.isIsA1();
+        final @Nullable /*@Thrown*/ Boolean isA1 = x_4.isIsA1();
         if (isA1 != ValueUtil.TRUE_VALUE) {
             return false;
         }
@@ -590,9 +742,9 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
         final @NonNull /*@NonInvalid*/ Class TYP_target_c_c_A1_0 = idResolver.getClass(CLSSid_A1, null);
         // creations
         // assignments
-        final @Nullable /*@Thrown*/ EObject ast = x_2.getAst();
+        final @Nullable /*@Thrown*/ EObject ast = x_4.getAst();
         final @Nullable /*@Thrown*/ A1 oclAsType = (A1)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_A1_0);
-        final @Nullable /*@Thrown*/ List<Y> ownsY = x_2.getOwnsY();
+        final @Nullable /*@Thrown*/ List<Y> ownsY = x_4.getOwnsY();
         assert ownsY != null;
         final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownsY = idResolver.createOrderedSetOfAll(ORD_CLSSid_Y, ownsY);
         @NonNull /*@Thrown*/ SequenceValue.Accumulator accumulator = ValueUtil.createSequenceAccumulatorValue(SEQ_CLSSid_Y1);
@@ -979,23 +1131,23 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
             CTORid_parentEnv.initValue(symbol_2, symbol_1);
             final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedCs = idResolver.createOrderedSetOfAll(ORD_CLSSid_C, ownedCs);
             @NonNull /*@Thrown*/ OrderedSetValue.Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_C);
-            @Nullable Iterator<?> ITERATOR_x_3 = BOXED_ownedCs.iterator();
+            @Nullable Iterator<?> ITERATOR_x_5 = BOXED_ownedCs.iterator();
             @NonNull /*@Thrown*/ OrderedSetValue elements;
             while (true) {
-                if (!ITERATOR_x_3.hasNext()) {
+                if (!ITERATOR_x_5.hasNext()) {
                     elements = accumulator;
                     break;
                 }
-                @Nullable /*@NonInvalid*/ C x_3 = (C)ITERATOR_x_3.next();
+                @Nullable /*@NonInvalid*/ C x_5 = (C)ITERATOR_x_5.next();
                 /**
                  * _'<' : Boolean
                  */
-                final @NonNull /*@Thrown*/ IntegerValue indexOf = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedCs, x_3);
+                final @NonNull /*@Thrown*/ IntegerValue indexOf = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedCs, x_5);
                 final @NonNull /*@Thrown*/ IntegerValue indexOf_0 = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedCs, self_0);
                 final /*@Thrown*/ boolean lt = OclComparableLessThanOperation.INSTANCE.evaluate(evaluator, indexOf, indexOf_0).booleanValue();
                 //
                 if (lt == ValueUtil.TRUE_VALUE) {
-                    accumulator.add(x_3);
+                    accumulator.add(x_5);
                 }
             }
             final @NonNull /*@NonInvalid*/ Class TYP_env_c_c_Environment_2 = idResolver.getClass(CLSSid_Environment, null);
@@ -1247,23 +1399,23 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
             CTORid_parentEnv.initValue(symbol_2, symbol_1);
             final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedBs = idResolver.createOrderedSetOfAll(ORD_CLSSid_B, ownedBs);
             @NonNull /*@Thrown*/ OrderedSetValue.Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_B);
-            @Nullable Iterator<?> ITERATOR_x_3 = BOXED_ownedBs.iterator();
+            @Nullable Iterator<?> ITERATOR_x_5 = BOXED_ownedBs.iterator();
             @NonNull /*@Thrown*/ OrderedSetValue elements;
             while (true) {
-                if (!ITERATOR_x_3.hasNext()) {
+                if (!ITERATOR_x_5.hasNext()) {
                     elements = accumulator;
                     break;
                 }
-                @Nullable /*@NonInvalid*/ B x_3 = (B)ITERATOR_x_3.next();
+                @Nullable /*@NonInvalid*/ B x_5 = (B)ITERATOR_x_5.next();
                 /**
                  * _'<' : Boolean
                  */
-                final @NonNull /*@Thrown*/ IntegerValue indexOf = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedBs, x_3);
+                final @NonNull /*@Thrown*/ IntegerValue indexOf = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedBs, x_5);
                 final @NonNull /*@Thrown*/ IntegerValue indexOf_0 = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedBs, self_0);
                 final /*@Thrown*/ boolean lt = OclComparableLessThanOperation.INSTANCE.evaluate(evaluator, indexOf, indexOf_0).booleanValue();
                 //
                 if (lt == ValueUtil.TRUE_VALUE) {
-                    accumulator.add(x_3);
+                    accumulator.add(x_5);
                 }
             }
             final @NonNull /*@NonInvalid*/ Class TYP_env_c_c_Environment_2 = idResolver.getClass(CLSSid_Environment, null);
@@ -1358,6 +1510,11 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      * map cX_2_A2 {
      * x := x;
      * }}
+     *   for x : source::X in source::X.allInstances()
+     *    {
+     * map cX_2_A3 {
+     * x := x;
+     * }}
      *   for sRoot : source::SRoot in source::SRoot.allInstances()
      *    {
      * map uTRoot_ownedA {
@@ -1391,6 +1548,11 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
      *   for x : source::X in source::X.allInstances()
      *    {
      * map uA2_ownsC {
+     * x := x;
+     * }}
+     *   for x : source::X in source::X.allInstances()
+     *    {
+     * map uA3_ownsC {
      * x := x;
      * }}
      *   for y1 : source::Y1 in source::Y1.allInstances()
@@ -1449,166 +1611,180 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
         // predicates
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_SRoot_1 = idResolver.getClass(CLSSid_SRoot, null);
-        final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_X_3 = idResolver.getClass(CLSSid_X, null);
+        final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_X_5 = idResolver.getClass(CLSSid_X, null);
         final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Y1_2 = idResolver.getClass(CLSSid_Y1, null);
         final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Y2_2 = idResolver.getClass(CLSSid_Y2, null);
         final @NonNull /*@NonInvalid*/ Class TYP_source_c_c_Z_7 = idResolver.getClass(CLSSid_Z, null);
-        final @NonNull /*@Thrown*/ SetValue allInstances_2 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_SRoot, TYP_source_c_c_SRoot_1);
-        final @NonNull /*@Thrown*/ SetValue allInstances_1 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_X, TYP_source_c_c_X_3);
-        final @NonNull /*@Thrown*/ SetValue allInstances_9 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Y1, TYP_source_c_c_Y1_2);
-        final @NonNull /*@Thrown*/ SetValue allInstances_12 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Y2, TYP_source_c_c_Y2_2);
-        final @NonNull /*@Thrown*/ SetValue allInstances_6 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Z, TYP_source_c_c_Z_7);
-        final List<SRoot> UNBOXED_allInstances_2 = allInstances_2.asEcoreObjects(idResolver, SRoot.class);
-        assert UNBOXED_allInstances_2 != null;
+        final @NonNull /*@Thrown*/ SetValue allInstances_3 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_SRoot, TYP_source_c_c_SRoot_1);
+        final @NonNull /*@Thrown*/ SetValue allInstances_1 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_X, TYP_source_c_c_X_5);
+        final @NonNull /*@Thrown*/ SetValue allInstances_11 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Y1, TYP_source_c_c_Y1_2);
+        final @NonNull /*@Thrown*/ SetValue allInstances_14 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Y2, TYP_source_c_c_Y2_2);
+        final @NonNull /*@Thrown*/ SetValue allInstances_7 = ClassifierAllInstancesOperation.INSTANCE.evaluate(evaluator, SET_CLSSid_Z, TYP_source_c_c_Z_7);
+        final List<SRoot> UNBOXED_allInstances_3 = allInstances_3.asEcoreObjects(idResolver, SRoot.class);
+        assert UNBOXED_allInstances_3 != null;
         final List<X> UNBOXED_allInstances_1 = allInstances_1.asEcoreObjects(idResolver, X.class);
         assert UNBOXED_allInstances_1 != null;
-        final List<Y1> UNBOXED_allInstances_9 = allInstances_9.asEcoreObjects(idResolver, Y1.class);
-        assert UNBOXED_allInstances_9 != null;
-        final List<Y2> UNBOXED_allInstances_12 = allInstances_12.asEcoreObjects(idResolver, Y2.class);
-        assert UNBOXED_allInstances_12 != null;
-        final List<Z> UNBOXED_allInstances_6 = allInstances_6.asEcoreObjects(idResolver, Z.class);
-        assert UNBOXED_allInstances_6 != null;
+        final List<Y1> UNBOXED_allInstances_11 = allInstances_11.asEcoreObjects(idResolver, Y1.class);
+        assert UNBOXED_allInstances_11 != null;
+        final List<Y2> UNBOXED_allInstances_14 = allInstances_14.asEcoreObjects(idResolver, Y2.class);
+        assert UNBOXED_allInstances_14 != null;
+        final List<Z> UNBOXED_allInstances_7 = allInstances_7.asEcoreObjects(idResolver, Z.class);
+        assert UNBOXED_allInstances_7 != null;
         // creations
         // assignments
         // mapping statements
         ;
-        for (SRoot sRoot_3 : UNBOXED_allInstances_2) {
+        for (SRoot sRoot_3 : UNBOXED_allInstances_3) {
             if (sRoot_3 != null) {
                 final @NonNull /*@NonInvalid*/ SRoot symbol_1 = (SRoot)sRoot_3;
                 cSRoot_2_TRoot(symbol_1);
             }
         }
         ;
-        for (X x_7 : UNBOXED_allInstances_1) {
-            if (x_7 != null) {
-                final @NonNull /*@NonInvalid*/ X symbol_5 = (X)x_7;
+        for (X x_11 : UNBOXED_allInstances_1) {
+            if (x_11 != null) {
+                final @NonNull /*@NonInvalid*/ X symbol_5 = (X)x_11;
                 cX_2_A1(symbol_5);
             }
         }
         ;
-        for (X x_8 : UNBOXED_allInstances_1) {
-            if (x_8 != null) {
-                final @NonNull /*@NonInvalid*/ X symbol_9 = (X)x_8;
+        for (X x_12 : UNBOXED_allInstances_1) {
+            if (x_12 != null) {
+                final @NonNull /*@NonInvalid*/ X symbol_9 = (X)x_12;
                 cX_2_A2(symbol_9);
             }
         }
         ;
-        for (SRoot sRoot_4 : UNBOXED_allInstances_2) {
+        for (X x_13 : UNBOXED_allInstances_1) {
+            if (x_13 != null) {
+                final @NonNull /*@NonInvalid*/ X symbol_13 = (X)x_13;
+                cX_2_A3(symbol_13);
+            }
+        }
+        ;
+        for (SRoot sRoot_4 : UNBOXED_allInstances_3) {
             if (sRoot_4 != null) {
-                final @NonNull /*@NonInvalid*/ SRoot symbol_13 = (SRoot)sRoot_4;
-                uTRoot_ownedA(symbol_13);
+                final @NonNull /*@NonInvalid*/ SRoot symbol_17 = (SRoot)sRoot_4;
+                uTRoot_ownedA(symbol_17);
             }
         }
         ;
-        for (Y1 y1_5 : UNBOXED_allInstances_9) {
+        for (Y1 y1_5 : UNBOXED_allInstances_11) {
             if (y1_5 != null) {
-                final @NonNull /*@NonInvalid*/ Y1 symbol_17 = (Y1)y1_5;
-                cY1_2_B(symbol_17);
+                final @NonNull /*@NonInvalid*/ Y1 symbol_21 = (Y1)y1_5;
+                cY1_2_B(symbol_21);
             }
         }
         ;
-        for (Y2 y2_5 : UNBOXED_allInstances_12) {
+        for (Y2 y2_5 : UNBOXED_allInstances_14) {
             if (y2_5 != null) {
-                final @NonNull /*@NonInvalid*/ Y2 symbol_21 = (Y2)y2_5;
-                cY2_2_C(symbol_21);
+                final @NonNull /*@NonInvalid*/ Y2 symbol_25 = (Y2)y2_5;
+                cY2_2_C(symbol_25);
             }
         }
         ;
-        for (Z z_15 : UNBOXED_allInstances_6) {
+        for (Z z_15 : UNBOXED_allInstances_7) {
             if (z_15 != null) {
-                final @NonNull /*@NonInvalid*/ Z symbol_25 = (Z)z_15;
-                cZ_2_D_0(symbol_25);
+                final @NonNull /*@NonInvalid*/ Z symbol_29 = (Z)z_15;
+                cZ_2_D_0(symbol_29);
             }
         }
         ;
-        for (Z z_16 : UNBOXED_allInstances_6) {
+        for (Z z_16 : UNBOXED_allInstances_7) {
             if (z_16 != null) {
-                final @NonNull /*@NonInvalid*/ Z symbol_29 = (Z)z_16;
-                cZ_2_D_1(symbol_29);
+                final @NonNull /*@NonInvalid*/ Z symbol_33 = (Z)z_16;
+                cZ_2_D_1(symbol_33);
             }
         }
         ;
-        for (X x_9 : UNBOXED_allInstances_1) {
-            if (x_9 != null) {
-                final @NonNull /*@NonInvalid*/ X symbol_33 = (X)x_9;
-                uA1_ownsB(symbol_33);
+        for (X x_14 : UNBOXED_allInstances_1) {
+            if (x_14 != null) {
+                final @NonNull /*@NonInvalid*/ X symbol_37 = (X)x_14;
+                uA1_ownsB(symbol_37);
             }
         }
         ;
-        for (X x_10 : UNBOXED_allInstances_1) {
-            if (x_10 != null) {
-                final @NonNull /*@NonInvalid*/ X symbol_37 = (X)x_10;
-                uA2_ownsC(symbol_37);
+        for (X x_15 : UNBOXED_allInstances_1) {
+            if (x_15 != null) {
+                final @NonNull /*@NonInvalid*/ X symbol_41 = (X)x_15;
+                uA2_ownsC(symbol_41);
             }
         }
         ;
-        for (Y1 y1_6 : UNBOXED_allInstances_9) {
+        for (X x_16 : UNBOXED_allInstances_1) {
+            if (x_16 != null) {
+                final @NonNull /*@NonInvalid*/ X symbol_45 = (X)x_16;
+                uA3_ownsC(symbol_45);
+            }
+        }
+        ;
+        for (Y1 y1_6 : UNBOXED_allInstances_11) {
             if (y1_6 != null) {
-                final @NonNull /*@NonInvalid*/ Y1 symbol_41 = (Y1)y1_6;
-                uB_ownsD(symbol_41);
+                final @NonNull /*@NonInvalid*/ Y1 symbol_49 = (Y1)y1_6;
+                uB_ownsD(symbol_49);
             }
         }
         ;
-        for (Y1 y1_7 : UNBOXED_allInstances_9) {
+        for (Y1 y1_7 : UNBOXED_allInstances_11) {
             if (y1_7 != null) {
-                final @NonNull /*@NonInvalid*/ Y1 symbol_45 = (Y1)y1_7;
-                uB_name(symbol_45);
+                final @NonNull /*@NonInvalid*/ Y1 symbol_53 = (Y1)y1_7;
+                uB_name(symbol_53);
             }
         }
         ;
-        for (Z z_17 : UNBOXED_allInstances_6) {
+        for (Z z_17 : UNBOXED_allInstances_7) {
             if (z_17 != null) {
-                final @NonNull /*@NonInvalid*/ Z symbol_49 = (Z)z_17;
-                uD_1_refsB(symbol_49);
+                final @NonNull /*@NonInvalid*/ Z symbol_57 = (Z)z_17;
+                uD_1_refsB(symbol_57);
             }
         }
         ;
-        for (Y2 y2_6 : UNBOXED_allInstances_12) {
+        for (Y2 y2_6 : UNBOXED_allInstances_14) {
             if (y2_6 != null) {
-                final @NonNull /*@NonInvalid*/ Y2 symbol_53 = (Y2)y2_6;
-                uC_ownsD(symbol_53);
+                final @NonNull /*@NonInvalid*/ Y2 symbol_61 = (Y2)y2_6;
+                uC_ownsD(symbol_61);
             }
         }
         ;
-        for (Y2 y2_7 : UNBOXED_allInstances_12) {
+        for (Y2 y2_7 : UNBOXED_allInstances_14) {
             if (y2_7 != null) {
-                final @NonNull /*@NonInvalid*/ Y2 symbol_57 = (Y2)y2_7;
-                uC_name(symbol_57);
+                final @NonNull /*@NonInvalid*/ Y2 symbol_65 = (Y2)y2_7;
+                uC_name(symbol_65);
             }
         }
         ;
-        for (Z z_18 : UNBOXED_allInstances_6) {
+        for (Z z_18 : UNBOXED_allInstances_7) {
             if (z_18 != null) {
-                final @NonNull /*@NonInvalid*/ Z symbol_61 = (Z)z_18;
-                uD_0_refsC(symbol_61);
+                final @NonNull /*@NonInvalid*/ Z symbol_69 = (Z)z_18;
+                uD_0_refsC(symbol_69);
             }
         }
         ;
-        for (Z z_19 : UNBOXED_allInstances_6) {
+        for (Z z_19 : UNBOXED_allInstances_7) {
             if (z_19 != null) {
-                final @NonNull /*@NonInvalid*/ Z symbol_65 = (Z)z_19;
-                uD_0_toA(symbol_65);
+                final @NonNull /*@NonInvalid*/ Z symbol_73 = (Z)z_19;
+                uD_0_toA(symbol_73);
             }
         }
         ;
-        for (Z z_20 : UNBOXED_allInstances_6) {
+        for (Z z_20 : UNBOXED_allInstances_7) {
             if (z_20 != null) {
-                final @NonNull /*@NonInvalid*/ Z symbol_69 = (Z)z_20;
-                uD_1_toA(symbol_69);
+                final @NonNull /*@NonInvalid*/ Z symbol_77 = (Z)z_20;
+                uD_1_toA(symbol_77);
             }
         }
         ;
-        for (Z z_21 : UNBOXED_allInstances_6) {
+        for (Z z_21 : UNBOXED_allInstances_7) {
             if (z_21 != null) {
-                final @NonNull /*@NonInvalid*/ Z symbol_73 = (Z)z_21;
-                uD_0_name(symbol_73);
+                final @NonNull /*@NonInvalid*/ Z symbol_81 = (Z)z_21;
+                uD_0_name(symbol_81);
             }
         }
         ;
-        for (Z z_22 : UNBOXED_allInstances_6) {
+        for (Z z_22 : UNBOXED_allInstances_7) {
             if (z_22 != null) {
-                final @NonNull /*@NonInvalid*/ Z symbol_77 = (Z)z_22;
-                uD_1_name(symbol_77);
+                final @NonNull /*@NonInvalid*/ Z symbol_85 = (Z)z_22;
+                uD_1_name(symbol_85);
             }
         }
         return true;

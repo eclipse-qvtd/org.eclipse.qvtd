@@ -131,13 +131,22 @@ public interface SourcePackage extends EPackage {
 	int X__IS_A1 = SELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Is A2</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int X__IS_A2 = SELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>X</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int X_FEATURE_COUNT = SELEMENT_FEATURE_COUNT + 2;
+	int X_FEATURE_COUNT = SELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>X</em>' class.
@@ -475,6 +484,17 @@ public interface SourcePackage extends EPackage {
 	EAttribute getX_IsA1();
 
 	/**
+	 * Returns the meta object for the attribute '{@link example1.source.X#isIsA2 <em>Is A2</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is A2</em>'.
+	 * @see example1.source.X#isIsA2()
+	 * @see #getX()
+	 * @generated
+	 */
+	EAttribute getX_IsA2();
+
+	/**
 	 * Returns the meta object for class '{@link example1.source.Y <em>Y</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -659,6 +679,14 @@ public interface SourcePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute X__IS_A1 = eINSTANCE.getX_IsA1();
+
+		/**
+		 * The meta object literal for the '<em><b>Is A2</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute X__IS_A2 = eINSTANCE.getX_IsA2();
 
 		/**
 		 * The meta object literal for the '{@link example1.source.impl.YImpl <em>Y</em>}' class.
