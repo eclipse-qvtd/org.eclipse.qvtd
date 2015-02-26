@@ -109,18 +109,18 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final CrossReference cUsesCoreDomainCrossReference_3_2_1_0 = (CrossReference)cUsesAssignment_3_2_1.eContents().get(0);
 		private final RuleCall cUsesCoreDomainUnrestrictedNameParserRuleCall_3_2_1_0_1 = (RuleCall)cUsesCoreDomainCrossReference_3_2_1_0.eContents().get(1);
 		
-		//DirectionCS:
-		//	{DirectionCS} name=UnrestrictedName ("imports" imports+=[pivot::Package|UnrestrictedName] (","
+		//DirectionCS returns qvtcorebasecs::DirectionCS:
+		//	{qvtcorebasecs::DirectionCS} name=UnrestrictedName ("imports" imports+=[pivot::Package|UnrestrictedName] (","
 		//	imports+=[pivot::Package|UnrestrictedName])*)? ("uses" uses+=[qvtcorebase::CoreDomain|UnrestrictedName] (","
 		//	uses+=[qvtcorebase::CoreDomain|UnrestrictedName])*)?;
 		@Override public ParserRule getRule() { return rule; }
 
-		//{DirectionCS} name=UnrestrictedName ("imports" imports+=[pivot::Package|UnrestrictedName] (","
+		//{qvtcorebasecs::DirectionCS} name=UnrestrictedName ("imports" imports+=[pivot::Package|UnrestrictedName] (","
 		//imports+=[pivot::Package|UnrestrictedName])*)? ("uses" uses+=[qvtcorebase::CoreDomain|UnrestrictedName] (","
 		//uses+=[qvtcorebase::CoreDomain|UnrestrictedName])*)?
 		public Group getGroup() { return cGroup; }
 
-		//{DirectionCS}
+		//{qvtcorebasecs::DirectionCS}
 		public Action getDirectionCSAction_0() { return cDirectionCSAction_0; }
 
 		//name=UnrestrictedName
@@ -517,7 +517,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedBottomPatternAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cOwnedBottomPatternSourceBottomPatternCSParserRuleCall_3_0 = (RuleCall)cOwnedBottomPatternAssignment_3.eContents().get(0);
 		
-		//SourceDomainCS returns DomainCS:
+		//SourceDomainCS returns qvtcorebasecs::DomainCS:
 		//	isCheck?="check" direction=[qvtbase::TypedModel|UnrestrictedName] ownedGuardPattern=SourceGuardPatternCS
 		//	ownedBottomPattern=SourceBottomPatternCS;
 		@Override public ParserRule getRule() { return rule; }
@@ -561,14 +561,14 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cLeftCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Keyword cRightCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
-		//SourceBottomPatternCS returns BottomPatternCS:
-		//	{BottomPatternCS} "{" "}";
+		//SourceBottomPatternCS returns qvtcorebasecs::BottomPatternCS:
+		//	{qvtcorebasecs::BottomPatternCS} "{" "}";
 		@Override public ParserRule getRule() { return rule; }
 
-		//{BottomPatternCS} "{" "}"
+		//{qvtcorebasecs::BottomPatternCS} "{" "}"
 		public Group getGroup() { return cGroup; }
 
-		//{BottomPatternCS}
+		//{qvtcorebasecs::BottomPatternCS}
 		public Action getBottomPatternCSAction_0() { return cBottomPatternCSAction_0; }
 
 		//"{"
@@ -592,16 +592,16 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_2_1_1_0 = (RuleCall)cOwnedUnrealizedVariablesAssignment_2_1_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//SourceGuardPatternCS returns GuardPatternCS:
-		//	{GuardPatternCS} "(" (ownedUnrealizedVariables+=UnrealizedVariableCS (","
+		//SourceGuardPatternCS returns qvtcorebasecs::GuardPatternCS:
+		//	{qvtcorebasecs::GuardPatternCS} "(" (ownedUnrealizedVariables+=UnrealizedVariableCS (","
 		//	ownedUnrealizedVariables+=UnrealizedVariableCS)*)? ")";
 		@Override public ParserRule getRule() { return rule; }
 
-		//{GuardPatternCS} "(" (ownedUnrealizedVariables+=UnrealizedVariableCS (","
+		//{qvtcorebasecs::GuardPatternCS} "(" (ownedUnrealizedVariables+=UnrealizedVariableCS (","
 		//ownedUnrealizedVariables+=UnrealizedVariableCS)*)? ")"
 		public Group getGroup() { return cGroup; }
 
-		//{GuardPatternCS}
+		//{qvtcorebasecs::GuardPatternCS}
 		public Action getGuardPatternCSAction_0() { return cGuardPatternCSAction_0; }
 
 		//"("
@@ -641,14 +641,14 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedBottomPatternAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cOwnedBottomPatternMiddleBottomPatternCSParserRuleCall_2_0 = (RuleCall)cOwnedBottomPatternAssignment_2.eContents().get(0);
 		
-		//MiddleDomainCS returns DomainCS:
-		//	{DomainCS} ownedGuardPattern=MiddleGuardPatternCS ownedBottomPattern=MiddleBottomPatternCS;
+		//MiddleDomainCS returns qvtcorebasecs::DomainCS:
+		//	{qvtcorebasecs::DomainCS} ownedGuardPattern=MiddleGuardPatternCS ownedBottomPattern=MiddleBottomPatternCS;
 		@Override public ParserRule getRule() { return rule; }
 
-		//{DomainCS} ownedGuardPattern=MiddleGuardPatternCS ownedBottomPattern=MiddleBottomPatternCS
+		//{qvtcorebasecs::DomainCS} ownedGuardPattern=MiddleGuardPatternCS ownedBottomPattern=MiddleBottomPatternCS
 		public Group getGroup() { return cGroup; }
 
-		//{DomainCS}
+		//{qvtcorebasecs::DomainCS}
 		public Action getDomainCSAction_0() { return cDomainCSAction_0; }
 
 		//ownedGuardPattern=MiddleGuardPatternCS
@@ -673,14 +673,14 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cOwnedConstraintsPredicateOrAssignmentCSParserRuleCall_2_0 = (RuleCall)cOwnedConstraintsAssignment_2.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//MiddleBottomPatternCS returns BottomPatternCS:
-		//	{BottomPatternCS} "{" ownedConstraints+=PredicateOrAssignmentCS* "}";
+		//MiddleBottomPatternCS returns qvtcorebasecs::BottomPatternCS:
+		//	{qvtcorebasecs::BottomPatternCS} "{" ownedConstraints+=PredicateOrAssignmentCS* "}";
 		@Override public ParserRule getRule() { return rule; }
 
-		//{BottomPatternCS} "{" ownedConstraints+=PredicateOrAssignmentCS* "}"
+		//{qvtcorebasecs::BottomPatternCS} "{" ownedConstraints+=PredicateOrAssignmentCS* "}"
 		public Group getGroup() { return cGroup; }
 
-		//{BottomPatternCS}
+		//{qvtcorebasecs::BottomPatternCS}
 		public Action getBottomPatternCSAction_0() { return cBottomPatternCSAction_0; }
 
 		//"{"
@@ -705,14 +705,14 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cOwnedPredicatesPredicateCSParserRuleCall_2_0 = (RuleCall)cOwnedPredicatesAssignment_2.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//MiddleGuardPatternCS returns GuardPatternCS:
-		//	{GuardPatternCS} "(" ownedPredicates+=PredicateCS* ")";
+		//MiddleGuardPatternCS returns qvtcorebasecs::GuardPatternCS:
+		//	{qvtcorebasecs::GuardPatternCS} "(" ownedPredicates+=PredicateCS* ")";
 		@Override public ParserRule getRule() { return rule; }
 
-		//{GuardPatternCS} "(" ownedPredicates+=PredicateCS* ")"
+		//{qvtcorebasecs::GuardPatternCS} "(" ownedPredicates+=PredicateCS* ")"
 		public Group getGroup() { return cGroup; }
 
-		//{GuardPatternCS}
+		//{qvtcorebasecs::GuardPatternCS}
 		public Action getGuardPatternCSAction_0() { return cGuardPatternCSAction_0; }
 
 		//"("
@@ -741,7 +741,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedBottomPatternAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cOwnedBottomPatternTargetBottomPatternCSParserRuleCall_3_0 = (RuleCall)cOwnedBottomPatternAssignment_3.eContents().get(0);
 		
-		//TargetDomainCS returns DomainCS:
+		//TargetDomainCS returns qvtcorebasecs::DomainCS:
 		//	isEnforce?="enforce" direction=[qvtbase::TypedModel|UnrestrictedName] ownedGuardPattern=TargetGuardPatternCS
 		//	ownedBottomPattern=TargetBottomPatternCS;
 		@Override public ParserRule getRule() { return rule; }
@@ -798,16 +798,18 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cOwnedRealizedVariablesRealizedVariableCSParserRuleCall_2_1_1_1_0 = (RuleCall)cOwnedRealizedVariablesAssignment_2_1_1_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//TargetBottomPatternCS returns BottomPatternCS:
-		//	{BottomPatternCS} "{" ((ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS)
-		//	("," (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS))*)? "}";
+		//TargetBottomPatternCS returns qvtcorebasecs::BottomPatternCS:
+		//	{qvtcorebasecs::BottomPatternCS} "{" ((ownedUnrealizedVariables+=UnrealizedVariableCS |
+		//	ownedRealizedVariables+=RealizedVariableCS) ("," (ownedUnrealizedVariables+=UnrealizedVariableCS |
+		//	ownedRealizedVariables+=RealizedVariableCS))*)? "}";
 		@Override public ParserRule getRule() { return rule; }
 
-		//{BottomPatternCS} "{" ((ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS)
-		//("," (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS))*)? "}"
+		//{qvtcorebasecs::BottomPatternCS} "{" ((ownedUnrealizedVariables+=UnrealizedVariableCS |
+		//ownedRealizedVariables+=RealizedVariableCS) ("," (ownedUnrealizedVariables+=UnrealizedVariableCS |
+		//ownedRealizedVariables+=RealizedVariableCS))*)? "}"
 		public Group getGroup() { return cGroup; }
 
-		//{BottomPatternCS}
+		//{qvtcorebasecs::BottomPatternCS}
 		public Action getBottomPatternCSAction_0() { return cBottomPatternCSAction_0; }
 
 		//"{"
@@ -871,16 +873,16 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cOwnedUnrealizedVariablesUnrealizedVariableCSParserRuleCall_2_1_1_0 = (RuleCall)cOwnedUnrealizedVariablesAssignment_2_1_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//TargetGuardPatternCS returns GuardPatternCS:
-		//	{GuardPatternCS} "(" (ownedUnrealizedVariables+=UnrealizedVariableCS (","
+		//TargetGuardPatternCS returns qvtcorebasecs::GuardPatternCS:
+		//	{qvtcorebasecs::GuardPatternCS} "(" (ownedUnrealizedVariables+=UnrealizedVariableCS (","
 		//	ownedUnrealizedVariables+=UnrealizedVariableCS)*)? ")";
 		@Override public ParserRule getRule() { return rule; }
 
-		//{GuardPatternCS} "(" (ownedUnrealizedVariables+=UnrealizedVariableCS (","
+		//{qvtcorebasecs::GuardPatternCS} "(" (ownedUnrealizedVariables+=UnrealizedVariableCS (","
 		//ownedUnrealizedVariables+=UnrealizedVariableCS)*)? ")"
 		public Group getGroup() { return cGroup; }
 
-		//{GuardPatternCS}
+		//{qvtcorebasecs::GuardPatternCS}
 		public Action getGuardPatternCSAction_0() { return cGuardPatternCSAction_0; }
 
 		//"("
@@ -998,8 +1000,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		return getTopLevelCSAccess().getRule();
 	}
 
-	//DirectionCS:
-	//	{DirectionCS} name=UnrestrictedName ("imports" imports+=[pivot::Package|UnrestrictedName] (","
+	//DirectionCS returns qvtcorebasecs::DirectionCS:
+	//	{qvtcorebasecs::DirectionCS} name=UnrestrictedName ("imports" imports+=[pivot::Package|UnrestrictedName] (","
 	//	imports+=[pivot::Package|UnrestrictedName])*)? ("uses" uses+=[qvtcorebase::CoreDomain|UnrestrictedName] (","
 	//	uses+=[qvtcorebase::CoreDomain|UnrestrictedName])*)?;
 	public DirectionCSElements getDirectionCSAccess() {
@@ -1083,7 +1085,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		return getMappingStatementCSAccess().getRule();
 	}
 
-	//SourceDomainCS returns DomainCS:
+	//SourceDomainCS returns qvtcorebasecs::DomainCS:
 	//	isCheck?="check" direction=[qvtbase::TypedModel|UnrestrictedName] ownedGuardPattern=SourceGuardPatternCS
 	//	ownedBottomPattern=SourceBottomPatternCS;
 	public SourceDomainCSElements getSourceDomainCSAccess() {
@@ -1094,8 +1096,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		return getSourceDomainCSAccess().getRule();
 	}
 
-	//SourceBottomPatternCS returns BottomPatternCS:
-	//	{BottomPatternCS} "{" "}";
+	//SourceBottomPatternCS returns qvtcorebasecs::BottomPatternCS:
+	//	{qvtcorebasecs::BottomPatternCS} "{" "}";
 	public SourceBottomPatternCSElements getSourceBottomPatternCSAccess() {
 		return pSourceBottomPatternCS;
 	}
@@ -1104,8 +1106,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		return getSourceBottomPatternCSAccess().getRule();
 	}
 
-	//SourceGuardPatternCS returns GuardPatternCS:
-	//	{GuardPatternCS} "(" (ownedUnrealizedVariables+=UnrealizedVariableCS (","
+	//SourceGuardPatternCS returns qvtcorebasecs::GuardPatternCS:
+	//	{qvtcorebasecs::GuardPatternCS} "(" (ownedUnrealizedVariables+=UnrealizedVariableCS (","
 	//	ownedUnrealizedVariables+=UnrealizedVariableCS)*)? ")";
 	public SourceGuardPatternCSElements getSourceGuardPatternCSAccess() {
 		return pSourceGuardPatternCS;
@@ -1115,8 +1117,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		return getSourceGuardPatternCSAccess().getRule();
 	}
 
-	//MiddleDomainCS returns DomainCS:
-	//	{DomainCS} ownedGuardPattern=MiddleGuardPatternCS ownedBottomPattern=MiddleBottomPatternCS;
+	//MiddleDomainCS returns qvtcorebasecs::DomainCS:
+	//	{qvtcorebasecs::DomainCS} ownedGuardPattern=MiddleGuardPatternCS ownedBottomPattern=MiddleBottomPatternCS;
 	public MiddleDomainCSElements getMiddleDomainCSAccess() {
 		return pMiddleDomainCS;
 	}
@@ -1125,8 +1127,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		return getMiddleDomainCSAccess().getRule();
 	}
 
-	//MiddleBottomPatternCS returns BottomPatternCS:
-	//	{BottomPatternCS} "{" ownedConstraints+=PredicateOrAssignmentCS* "}";
+	//MiddleBottomPatternCS returns qvtcorebasecs::BottomPatternCS:
+	//	{qvtcorebasecs::BottomPatternCS} "{" ownedConstraints+=PredicateOrAssignmentCS* "}";
 	public MiddleBottomPatternCSElements getMiddleBottomPatternCSAccess() {
 		return pMiddleBottomPatternCS;
 	}
@@ -1135,8 +1137,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		return getMiddleBottomPatternCSAccess().getRule();
 	}
 
-	//MiddleGuardPatternCS returns GuardPatternCS:
-	//	{GuardPatternCS} "(" ownedPredicates+=PredicateCS* ")";
+	//MiddleGuardPatternCS returns qvtcorebasecs::GuardPatternCS:
+	//	{qvtcorebasecs::GuardPatternCS} "(" ownedPredicates+=PredicateCS* ")";
 	public MiddleGuardPatternCSElements getMiddleGuardPatternCSAccess() {
 		return pMiddleGuardPatternCS;
 	}
@@ -1145,7 +1147,7 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		return getMiddleGuardPatternCSAccess().getRule();
 	}
 
-	//TargetDomainCS returns DomainCS:
+	//TargetDomainCS returns qvtcorebasecs::DomainCS:
 	//	isEnforce?="enforce" direction=[qvtbase::TypedModel|UnrestrictedName] ownedGuardPattern=TargetGuardPatternCS
 	//	ownedBottomPattern=TargetBottomPatternCS;
 	public TargetDomainCSElements getTargetDomainCSAccess() {
@@ -1156,9 +1158,10 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		return getTargetDomainCSAccess().getRule();
 	}
 
-	//TargetBottomPatternCS returns BottomPatternCS:
-	//	{BottomPatternCS} "{" ((ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS)
-	//	("," (ownedUnrealizedVariables+=UnrealizedVariableCS | ownedRealizedVariables+=RealizedVariableCS))*)? "}";
+	//TargetBottomPatternCS returns qvtcorebasecs::BottomPatternCS:
+	//	{qvtcorebasecs::BottomPatternCS} "{" ((ownedUnrealizedVariables+=UnrealizedVariableCS |
+	//	ownedRealizedVariables+=RealizedVariableCS) ("," (ownedUnrealizedVariables+=UnrealizedVariableCS |
+	//	ownedRealizedVariables+=RealizedVariableCS))*)? "}";
 	public TargetBottomPatternCSElements getTargetBottomPatternCSAccess() {
 		return pTargetBottomPatternCS;
 	}
@@ -1167,8 +1170,8 @@ public class QVTimperativeGrammarAccess extends AbstractGrammarElementFinder {
 		return getTargetBottomPatternCSAccess().getRule();
 	}
 
-	//TargetGuardPatternCS returns GuardPatternCS:
-	//	{GuardPatternCS} "(" (ownedUnrealizedVariables+=UnrealizedVariableCS (","
+	//TargetGuardPatternCS returns qvtcorebasecs::GuardPatternCS:
+	//	{qvtcorebasecs::GuardPatternCS} "(" (ownedUnrealizedVariables+=UnrealizedVariableCS (","
 	//	ownedUnrealizedVariables+=UnrealizedVariableCS)*)? ")";
 	public TargetGuardPatternCSElements getTargetGuardPatternCSAccess() {
 		return pTargetGuardPatternCS;

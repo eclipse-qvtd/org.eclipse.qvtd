@@ -61,32 +61,46 @@ public abstract class AbstractQVTcoreSyntacticSequencer extends AbstractSyntacti
 	}
 
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     '|'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     ownedRealizedVariables+=RealizedVariableCS (ambiguity) '}' (rule end)
+	 *     ownedUnrealizedVariables+=UnrealizedVariableCS (ambiguity) '}' (rule end)
 	 */
 	protected void emit_BottomPatternCS_VerticalLineKeyword_0_3_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     '|'?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     ownedUnrealizedVariables+=GuardVariableCS (ambiguity) ')' (rule end)
 	 */
 	protected void emit_GuardPatternCS_VerticalLineKeyword_0_3_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     ('(' '|'? ')') | (('(' ')') | ('(' ')'))
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) (rule start)
 	 */
 	protected void emit_GuardPatternCS___LeftParenthesisKeyword_0_1_VerticalLineKeyword_0_3_0_q_RightParenthesisKeyword_0_4___or_____LeftParenthesisKeyword_1_1_RightParenthesisKeyword_1_3___or___LeftParenthesisKeyword_2_1_RightParenthesisKeyword_2_3____(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
-	 * Syntax:
+	 * Ambiguous syntax:
 	 *     ('(' ')')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     name='Tuple' (ambiguity) (rule end)
+	 *     name='Tuple' (ambiguity) ownedMultiplicity=MultiplicityCS
 	 */
 	protected void emit_TupleTypeCS___LeftParenthesisKeyword_1_0_RightParenthesisKeyword_1_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

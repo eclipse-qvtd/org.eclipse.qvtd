@@ -15,7 +15,7 @@ Export-Package: org.eclipse.qvtd.xtext.qvtcore.ui,
  org.eclipse.qvtd.xtext.qvtcore.ui.model,
  org.eclipse.qvtd.xtext.qvtcore.ui.outline,
  org.eclipse.qvtd.xtext.qvtcore.ui.quickfix
-Require-Bundle: org.eclipse.xtext.builder;bundle-version="[2.5.0,3.0.0)",
+Require-Bundle: org.eclipse.xtext.builder;bundle-version="[2.3.0,3.0.0)",
  org.eclipse.qvtd.xtext.qvtcore;visibility:=reexport,
  org.eclipse.qvtd.xtext.qvtcorebase.ui;visibility:=reexport
 Import-Package: org.apache.log4j

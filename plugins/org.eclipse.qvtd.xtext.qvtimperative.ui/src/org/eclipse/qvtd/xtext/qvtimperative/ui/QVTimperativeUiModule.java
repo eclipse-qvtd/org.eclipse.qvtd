@@ -10,17 +10,9 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperative.ui;
 
-import java.util.List;
-
 import org.eclipse.qvtd.xtext.qvtimperative.ui.model.QVTimperativeDocumentProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtext.AbstractElement;
-import org.eclipse.xtext.ui.editor.XtextEditor;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
-import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
-
-import com.google.common.collect.Multimap;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -29,32 +21,6 @@ public class QVTimperativeUiModule extends AbstractQVTimperativeUiModule
 {
 	public QVTimperativeUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
-	}
-
-	public static class Bug382088Workaround extends ParserBasedContentAssistContextFactory.StatefulFactory
-	{
-		private int depth = 0;
-
-		@Override
-		protected void computeFollowElements(ParserBasedContentAssistContextFactory.FollowElementCalculator calculator,
-				FollowElement element, Multimap<Integer, List<AbstractElement>> visited) {
-			try {
-				if (++depth < 10) {
-					super.computeFollowElements(calculator, element, visited);
-				}
-			} finally {
-				depth--;
-			}
-		}		
-	}
-	
-	public Class<? extends ParserBasedContentAssistContextFactory.StatefulFactory> bindStatefulFactory() {
-		return Bug382088Workaround.class;		// BUG 382088
-	}
-
-	@Override
-	public Class<? extends XtextEditor> bindXtextEditor() {
-		return QVTimperativeEditor.class;
 	}
 
 	public Class<? extends XtextDocumentProvider> bindXtextDocumentProvider() {

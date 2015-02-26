@@ -38,6 +38,7 @@ public class AllQVTdTests extends TestCase
 		result.addTest(AllQVTcoreTests.suite());
 		result.addTest(AllQVTimperativeTests.suite());
 		result.addTest(AllQVTrelationTests.suite());
+		result.addTestSuite(GrammarTests.class);
 		return result;
 	}
 

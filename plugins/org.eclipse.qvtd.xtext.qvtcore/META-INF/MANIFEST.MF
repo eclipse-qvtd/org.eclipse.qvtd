@@ -23,7 +23,7 @@ Export-Package: org.eclipse.qvtd.xtext.qvtcore,
  org.eclipse.qvtd.xtext.qvtcorecs.impl,
  org.eclipse.qvtd.xtext.qvtcorecs.util
 Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
- org.eclipse.xtext;bundle-version="[2.8.0,3.0.0)",
+ org.eclipse.xtext;bundle-version="[2.3.0,3.0.0)",
  org.eclipse.qvtd.pivot.qvtcore;visibility:=reexport,
  org.eclipse.qvtd.xtext.qvtcorebase;visibility:=reexport
 Bundle-Activator: org.eclipse.qvtd.xtext.qvtcore.utilities.QVTcorePlugin$Implementation

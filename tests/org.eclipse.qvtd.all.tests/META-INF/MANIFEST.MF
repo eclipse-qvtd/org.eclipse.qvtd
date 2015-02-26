@@ -6,6 +6,7 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ocl.examples.xtext.tests,
  org.eclipse.qvtd.xtext.qvtbase.tests,
  org.eclipse.qvtd.xtext.qvtcore.ui,
  org.eclipse.qvtd.xtext.qvtcore.tests,

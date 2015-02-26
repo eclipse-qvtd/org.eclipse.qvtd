@@ -17,6 +17,7 @@ module GenerateQVTcoreEditor
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.ocl.examples.build.*
 import org.eclipse.ocl.examples.build.utilities.*
+import org.eclipse.ocl.examples.build.xtend.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
@@ -31,14 +32,15 @@ Workflow {
     bean = StandaloneSetup {
 		platformUri = "${QVTcoreRuntimeProject}/.."
    		scanClassPath = true
-		registerEcoreFile = "platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore"
-		registerEcoreFile = "platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore"
-		registerEcoreFile = "platform:/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore"
-		registerEcoreFile = "platform:/resource/org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore"
-		registerEcoreFile = "platform:/resource/org.eclipse.ocl.xtext.base/model/BaseCS.ecore"
-		registerEcoreFile = "platform:/resource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore"
-		registerEcoreFile = "platform:/resource/org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCS.ecore"
-		registerEcoreFile = "platform:/resource/org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore"
+//		registerEcoreFile = "platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore"
+//		registerEcoreFile = "platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore"
+//		registerEcoreFile = "platform:/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore"
+//		registerEcoreFile = "platform:/resource/org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore"
+//		registerEcoreFile = "platform:/resource/org.eclipse.ocl.xtext.base/model/BaseCS.ecore"
+//		registerEcoreFile = "platform:/resource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore"
+//		registerEcoreFile = "platform:/resource/org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCS.ecore"
+//		registerEcoreFile = "platform:/resource/org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore"
+		registerGeneratedEPackage = "org.eclipse.qvtd.xtext.qvtcorecs.QVTcoreCSPackage"
 		registerGenModelFile = "platform:/resource/org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.genmodel"
 	}
 	
@@ -152,13 +154,21 @@ Workflow {
 			fragment = fragments.CompatibilityFragment {}			
 		}
 	}
+	component = GenerateGrammarXtend {
+		javaFolder = "${QVTcoreRuntimeProject}/src-gen"
+		javaPackageName = "${QVTcoreProjectName}"
+		grammarFileStem = "QVTcore"
+	}
+	component = BackportToXtext_2_3_1 {
+		directory = "${QVTcoreRuntimeProject}/src-gen"
+	}
+	component = BackportToXtext_2_3_1 {
+		directory = "${QVTcoreRuntimeProject}.ui/src-gen"
+	}
 	component = ConvertToUnixLineEndings {
 		directory = "${QVTcoreRuntimeProject}/src-gen"
 	}
 	component = ConvertToUnixLineEndings {
-		directory = "${QVTcoreRuntimeProject}.ui/src-gen"
-	}
-	component = BackportToXtext_2_7 {
 		directory = "${QVTcoreRuntimeProject}.ui/src-gen"
 	}
 }
