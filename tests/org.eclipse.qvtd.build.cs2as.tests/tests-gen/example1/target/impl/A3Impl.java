@@ -2,10 +2,10 @@
  */
 package example1.target.impl;
 
+import org.eclipse.emf.ecore.EClass;
+
 import example1.target.A3;
 import example1.target.TargetPackage;
-
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->

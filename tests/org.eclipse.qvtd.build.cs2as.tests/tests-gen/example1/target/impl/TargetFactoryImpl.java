@@ -2,15 +2,22 @@
  */
 package example1.target.impl;
 
-import example1.target.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import example1.target.A1;
+import example1.target.A2;
+import example1.target.A3;
+import example1.target.B;
+import example1.target.C;
+import example1.target.D;
+import example1.target.NamedElement;
+import example1.target.TRoot;
+import example1.target.TargetFactory;
+import example1.target.TargetPackage;
 
 /**
  * <!-- begin-user-doc -->

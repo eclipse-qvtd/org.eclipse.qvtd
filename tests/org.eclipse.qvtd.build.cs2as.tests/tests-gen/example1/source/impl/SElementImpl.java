@@ -2,17 +2,15 @@
  */
 package example1.source.impl;
 
-import example1.source.SElement;
-import example1.source.SourcePackage;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import example1.source.SElement;
+import example1.source.SourcePackage;
 
 /**
  * <!-- begin-user-doc -->

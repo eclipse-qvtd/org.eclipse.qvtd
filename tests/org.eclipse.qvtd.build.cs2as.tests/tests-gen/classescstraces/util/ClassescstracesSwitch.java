@@ -2,12 +2,14 @@
  */
 package classescstraces.util;
 
-import classescstraces.*;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
+
+import classescstraces.ClassCS2Class;
+import classescstraces.ClassescstracesPackage;
+import classescstraces.PackageCS2Package;
+import classescstraces.RootCS2Root;
 
 /**
  * <!-- begin-user-doc -->

@@ -2,11 +2,10 @@
  */
 package classescstraces;
 
-import classes.Root;
-
-import classescs.RootCS;
-
 import org.eclipse.emf.ecore.EObject;
+
+import classes.Root;
+import classescs.RootCS;
 
 /**
  * <!-- begin-user-doc -->

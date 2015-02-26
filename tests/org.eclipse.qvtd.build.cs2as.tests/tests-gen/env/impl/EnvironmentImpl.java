@@ -2,19 +2,19 @@
  */
 package env.impl;
 
-import classes.NamedElement;
-import env.Environment;
-import env.EnvironmentPackage;
-
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+
+import classes.NamedElement;
+import env.EnvPackage;
+import env.Environment;
 
 /**
  * <!-- begin-user-doc -->
@@ -67,7 +67,7 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return EnvironmentPackage.Literals.ENVIRONMENT;
+		return EnvPackage.Literals.ENVIRONMENT;
 	}
 
 	/**
@@ -77,7 +77,7 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	 */
 	public EList<NamedElement> getNamedElements() {
 		if (namedElements == null) {
-			namedElements = new EObjectResolvingEList<NamedElement>(NamedElement.class, this, EnvironmentPackage.ENVIRONMENT__NAMED_ELEMENTS);
+			namedElements = new EObjectResolvingEList<NamedElement>(NamedElement.class, this, EnvPackage.ENVIRONMENT__NAMED_ELEMENTS);
 		}
 		return namedElements;
 	}
@@ -93,7 +93,7 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 			parentEnv = (Environment)eResolveProxy(oldParentEnv);
 			if (parentEnv != oldParentEnv) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EnvironmentPackage.ENVIRONMENT__PARENT_ENV, oldParentEnv, parentEnv));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, EnvPackage.ENVIRONMENT__PARENT_ENV, oldParentEnv, parentEnv));
 			}
 		}
 		return parentEnv;
@@ -117,7 +117,7 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 		Environment oldParentEnv = parentEnv;
 		parentEnv = newParentEnv;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, EnvironmentPackage.ENVIRONMENT__PARENT_ENV, oldParentEnv, parentEnv));
+			eNotify(new ENotificationImpl(this, Notification.SET, EnvPackage.ENVIRONMENT__PARENT_ENV, oldParentEnv, parentEnv));
 	}
 
 	/**
@@ -128,9 +128,9 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case EnvironmentPackage.ENVIRONMENT__NAMED_ELEMENTS:
+			case EnvPackage.ENVIRONMENT__NAMED_ELEMENTS:
 				return getNamedElements();
-			case EnvironmentPackage.ENVIRONMENT__PARENT_ENV:
+			case EnvPackage.ENVIRONMENT__PARENT_ENV:
 				if (resolve) return getParentEnv();
 				return basicGetParentEnv();
 		}
@@ -146,11 +146,11 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case EnvironmentPackage.ENVIRONMENT__NAMED_ELEMENTS:
+			case EnvPackage.ENVIRONMENT__NAMED_ELEMENTS:
 				getNamedElements().clear();
 				getNamedElements().addAll((Collection<? extends NamedElement>)newValue);
 				return;
-			case EnvironmentPackage.ENVIRONMENT__PARENT_ENV:
+			case EnvPackage.ENVIRONMENT__PARENT_ENV:
 				setParentEnv((Environment)newValue);
 				return;
 		}
@@ -165,10 +165,10 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case EnvironmentPackage.ENVIRONMENT__NAMED_ELEMENTS:
+			case EnvPackage.ENVIRONMENT__NAMED_ELEMENTS:
 				getNamedElements().clear();
 				return;
-			case EnvironmentPackage.ENVIRONMENT__PARENT_ENV:
+			case EnvPackage.ENVIRONMENT__PARENT_ENV:
 				setParentEnv((Environment)null);
 				return;
 		}
@@ -183,9 +183,9 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case EnvironmentPackage.ENVIRONMENT__NAMED_ELEMENTS:
+			case EnvPackage.ENVIRONMENT__NAMED_ELEMENTS:
 				return namedElements != null && !namedElements.isEmpty();
-			case EnvironmentPackage.ENVIRONMENT__PARENT_ENV:
+			case EnvPackage.ENVIRONMENT__PARENT_ENV:
 				return parentEnv != null;
 		}
 		return super.eIsSet(featureID);

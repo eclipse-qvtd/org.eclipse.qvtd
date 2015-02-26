@@ -2,10 +2,10 @@
  */
 package example1.source.impl;
 
+import org.eclipse.emf.ecore.EClass;
+
 import example1.source.SourcePackage;
 import example1.source.Y2;
-
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->

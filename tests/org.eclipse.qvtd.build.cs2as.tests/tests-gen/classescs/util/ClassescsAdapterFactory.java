@@ -2,14 +2,19 @@
  */
 package classescs.util;
 
-import classescs.*;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
+
+import classescs.ClassCS;
+import classescs.ClassescsPackage;
+import classescs.ElementCS;
+import classescs.NamedElementCS;
+import classescs.PackageCS;
+import classescs.PathElementCS;
+import classescs.PathNameCS;
+import classescs.RootCS;
 
 /**
  * <!-- begin-user-doc -->

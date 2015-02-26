@@ -2,9 +2,10 @@
  */
 package env;
 
-import classes.NamedElement;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+
+import classes.NamedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link env.Environment#getParentEnv <em>Parent Env</em>}</li>
  * </ul>
  *
- * @see env.EnvironmentPackage#getEnvironment()
+ * @see env.EnvPackage#getEnvironment()
  * @model
  * @generated
  */
@@ -35,7 +36,7 @@ public interface Environment extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Named Elements</em>' reference list.
-	 * @see env.EnvironmentPackage#getEnvironment_NamedElements()
+	 * @see env.EnvPackage#getEnvironment_NamedElements()
 	 * @model
 	 * @generated
 	 */
@@ -51,7 +52,7 @@ public interface Environment extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Parent Env</em>' reference.
 	 * @see #setParentEnv(Environment)
-	 * @see env.EnvironmentPackage#getEnvironment_ParentEnv()
+	 * @see env.EnvPackage#getEnvironment_ParentEnv()
 	 * @model
 	 * @generated
 	 */

@@ -2,15 +2,17 @@
  */
 package classescstraces.impl;
 
-import classescstraces.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import classescstraces.ClassCS2Class;
+import classescstraces.ClassescstracesFactory;
+import classescstraces.ClassescstracesPackage;
+import classescstraces.PackageCS2Package;
+import classescstraces.RootCS2Root;
 
 /**
  * <!-- begin-user-doc -->

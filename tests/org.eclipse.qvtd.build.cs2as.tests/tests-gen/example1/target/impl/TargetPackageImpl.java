@@ -2,25 +2,20 @@
  */
 package example1.target.impl;
 
-import example1.env.EnvironmentPackage;
-
-import example1.env.impl.EnvironmentPackageImpl;
-
-import example1.source.SourcePackage;
-
-import example1.source.impl.SourcePackageImpl;
-
-import example1.target.NamedElement;
-import example1.target.TRoot;
-import example1.target.TargetFactory;
-import example1.target.TargetPackage;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
+import example1.env.EnvironmentPackage;
+import example1.env.impl.EnvironmentPackageImpl;
+import example1.source.SourcePackage;
+import example1.source.impl.SourcePackageImpl;
+import example1.target.NamedElement;
+import example1.target.TRoot;
+import example1.target.TargetFactory;
+import example1.target.TargetPackage;
 
 /**
  * <!-- begin-user-doc -->

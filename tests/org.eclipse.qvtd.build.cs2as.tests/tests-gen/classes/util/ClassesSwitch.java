@@ -2,16 +2,15 @@
  */
 package classes.util;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.util.Switch;
+
 import classes.ClassesPackage;
 import classes.Element;
 import classes.NamedElement;
 import classes.Namespace;
 import classes.Root;
-
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-
-import org.eclipse.emf.ecore.util.Switch;
 
 /**
  * <!-- begin-user-doc -->

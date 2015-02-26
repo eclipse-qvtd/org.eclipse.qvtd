@@ -2,14 +2,15 @@
  */
 package classescstraces.util;
 
-import classescstraces.*;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
+
+import classescstraces.ClassCS2Class;
+import classescstraces.ClassescstracesPackage;
+import classescstraces.PackageCS2Package;
+import classescstraces.RootCS2Root;
 
 /**
  * <!-- begin-user-doc -->

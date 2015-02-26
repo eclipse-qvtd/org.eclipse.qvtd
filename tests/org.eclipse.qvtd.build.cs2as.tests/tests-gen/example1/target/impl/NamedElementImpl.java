@@ -2,15 +2,13 @@
  */
 package example1.target.impl;
 
-import example1.target.NamedElement;
-import example1.target.TargetPackage;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import example1.target.NamedElement;
+import example1.target.TargetPackage;
 
 /**
  * <!-- begin-user-doc -->

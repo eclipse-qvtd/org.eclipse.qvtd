@@ -2,15 +2,19 @@
  */
 package classescs.impl;
 
-import classescs.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import classescs.ClassCS;
+import classescs.ClassescsFactory;
+import classescs.ClassescsPackage;
+import classescs.PackageCS;
+import classescs.PathElementCS;
+import classescs.PathNameCS;
+import classescs.RootCS;
 
 /**
  * <!-- begin-user-doc -->

@@ -2,14 +2,21 @@
  */
 package example1.target.util;
 
-import example1.target.*;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
+
+import example1.target.A;
+import example1.target.A1;
+import example1.target.A2;
+import example1.target.A3;
+import example1.target.B;
+import example1.target.C;
+import example1.target.D;
+import example1.target.NamedElement;
+import example1.target.TRoot;
+import example1.target.TargetPackage;
 
 /**
  * <!-- begin-user-doc -->

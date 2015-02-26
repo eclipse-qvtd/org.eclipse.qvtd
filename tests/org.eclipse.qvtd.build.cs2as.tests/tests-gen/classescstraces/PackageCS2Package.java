@@ -2,9 +2,9 @@
  */
 package classescstraces;
 
-import classescs.PackageCS;
-
 import org.eclipse.emf.ecore.EObject;
+
+import classescs.PackageCS;
 
 /**
  * <!-- begin-user-doc -->

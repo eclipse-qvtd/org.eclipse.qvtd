@@ -2,27 +2,20 @@
  */
 package env.impl;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import classes.ClassesPackage;
-
 import classes.impl.ClassesPackageImpl;
-
 import classescs.ClassescsPackage;
-
 import classescs.impl.ClassescsPackageImpl;
-
 import classescstraces.ClassescstracesPackage;
-
 import classescstraces.impl.ClassescstracesPackageImpl;
-
 import env.Environment;
 import env.EnvironmentFactory;
 import env.EnvironmentPackage;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EPackage;
-
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->

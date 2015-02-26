@@ -2,10 +2,10 @@
  */
 package classes.impl;
 
+import org.eclipse.emf.ecore.EClass;
+
 import classes.ClassesPackage;
 import classes.Namespace;
-
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->

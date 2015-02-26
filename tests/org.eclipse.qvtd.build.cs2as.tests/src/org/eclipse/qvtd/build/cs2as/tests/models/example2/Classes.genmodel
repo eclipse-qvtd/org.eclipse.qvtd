@@ -5,6 +5,10 @@
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="7.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
   <foreignModel>Classes.ecore</foreignModel>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/Visitor">
+  <details key="Root Visitor Class" value="classes.util.Visitor"/>
+  <details key="Visitable Classes" value="classes.Element"/>
+  </genAnnotations>
   <genPackages prefix="Classes" basePackage="example2" disposableProviderFactory="true"
       ecorePackage="Classes.ecore#/">
     <genClasses image="false" ecoreClass="Classes.ecore#//Element"/>

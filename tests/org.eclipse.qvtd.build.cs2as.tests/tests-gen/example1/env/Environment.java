@@ -2,11 +2,10 @@
  */
 package example1.env;
 
-import example1.target.NamedElement;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
+
+import example1.target.NamedElement;
 
 /**
  * <!-- begin-user-doc -->

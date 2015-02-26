@@ -2,19 +2,17 @@
  */
 package classes.impl;
 
-import classes.ClassesPackage;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import classes.ClassesPackage;
+import classes.util.Visitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -179,6 +177,15 @@ public class PackageImpl extends NamedElementImpl implements classes.Package {
 				return ownedPackages != null && !ownedPackages.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public <R> R accept(Visitor<R> visitor) {
+		return visitor.visitPackage(this);
 	}
 
 } //PackageImpl

@@ -2,14 +2,19 @@
  */
 package example1.source.util;
 
-import example1.source.*;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
+
+import example1.source.SElement;
+import example1.source.SRoot;
+import example1.source.SourcePackage;
+import example1.source.X;
+import example1.source.Y;
+import example1.source.Y1;
+import example1.source.Y2;
+import example1.source.Z;
 
 /**
  * <!-- begin-user-doc -->

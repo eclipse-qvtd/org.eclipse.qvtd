@@ -2,12 +2,18 @@
  */
 package example1.source.util;
 
-import example1.source.*;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
+
+import example1.source.SElement;
+import example1.source.SRoot;
+import example1.source.SourcePackage;
+import example1.source.X;
+import example1.source.Y;
+import example1.source.Y1;
+import example1.source.Y2;
+import example1.source.Z;
 
 /**
  * <!-- begin-user-doc -->

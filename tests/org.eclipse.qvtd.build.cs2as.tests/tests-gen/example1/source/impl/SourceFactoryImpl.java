@@ -2,15 +2,20 @@
  */
 package example1.source.impl;
 
-import example1.source.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import example1.source.SElement;
+import example1.source.SRoot;
+import example1.source.SourceFactory;
+import example1.source.SourcePackage;
+import example1.source.X;
+import example1.source.Y1;
+import example1.source.Y2;
+import example1.source.Z;
 
 /**
  * <!-- begin-user-doc -->

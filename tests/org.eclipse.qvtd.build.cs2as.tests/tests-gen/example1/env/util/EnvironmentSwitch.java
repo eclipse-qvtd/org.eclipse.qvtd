@@ -2,12 +2,12 @@
  */
 package example1.env.util;
 
-import example1.env.*;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
+
+import example1.env.Environment;
+import example1.env.EnvironmentPackage;
 
 /**
  * <!-- begin-user-doc -->

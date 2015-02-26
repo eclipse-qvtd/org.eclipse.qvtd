@@ -2,24 +2,19 @@
  */
 package example1.env.impl;
 
-import example1.env.Environment;
-import example1.env.EnvironmentPackage;
-
-import example1.target.NamedElement;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+
+import example1.env.Environment;
+import example1.env.EnvironmentPackage;
+import example1.target.NamedElement;
 
 /**
  * <!-- begin-user-doc -->
