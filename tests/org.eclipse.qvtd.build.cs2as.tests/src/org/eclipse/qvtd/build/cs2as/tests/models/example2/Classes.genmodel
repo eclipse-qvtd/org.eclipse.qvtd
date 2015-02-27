@@ -6,8 +6,8 @@
     complianceLevel="7.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
   <foreignModel>Classes.ecore</foreignModel>
   <genAnnotations source="http://www.eclipse.org/OCL/GenModel/Visitor">
-  <details key="Root Visitor Class" value="classes.util.Visitor"/>
-  <details key="Visitable Classes" value="classes.Element"/>
+  <details key="Root Visitor Class" value="example2.classes.util.Visitor"/>
+  <details key="Visitable Classes" value="example2.classes.Element"/>
   </genAnnotations>
   <genPackages prefix="Classes" basePackage="example2" disposableProviderFactory="true"
       ecorePackage="Classes.ecore#/">

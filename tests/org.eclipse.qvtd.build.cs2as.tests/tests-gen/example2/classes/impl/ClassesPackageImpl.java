@@ -2,19 +2,20 @@
  */
 package example2.classes.impl;
 
+import static example2.classes.ClassesPackage.CLASS;
+
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import example2.classes.ClassesFactory;
 import example2.classes.ClassesPackage;
 import example2.classes.Element;
 import example2.classes.NamedElement;
 import example2.classes.Namespace;
 import example2.classes.Root;
-
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->

@@ -2,12 +2,18 @@
  */
 package example2.classescs.util;
 
-import example2.classescs.*;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
+
+import example2.classescs.ClassCS;
+import example2.classescs.ClassescsPackage;
+import example2.classescs.ElementCS;
+import example2.classescs.NamedElementCS;
+import example2.classescs.PackageCS;
+import example2.classescs.PathElementCS;
+import example2.classescs.PathNameCS;
+import example2.classescs.RootCS;
 
 /**
  * <!-- begin-user-doc -->

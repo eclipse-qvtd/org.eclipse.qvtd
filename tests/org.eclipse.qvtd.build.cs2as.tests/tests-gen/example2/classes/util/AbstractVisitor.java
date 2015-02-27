@@ -8,7 +8,7 @@
  *
  * Only the copyright statement is editable.
  *******************************************************************************/
-package	classes.util;
+package	example2.classes.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -52,7 +52,7 @@ public abstract class AbstractVisitor<R, C>
 	 * @return <code>null</code> if the visitable is <code>null</code>;
 	 *	 otherwise, the result of visiting it
 	 */
-	public @Nullable R safeVisit(@Nullable classes.util.Visitable v) {
+	public @Nullable R safeVisit(@Nullable example2.classes.util.Visitable v) {
 		return (v == null) ? null : v.accept(this);
 	}
 	
@@ -63,11 +63,11 @@ public abstract class AbstractVisitor<R, C>
 	 * @return <code>null</code> if the visitable is <code>null</code>;
 	 *	 otherwise, the result of visiting it
 	 */
-	public @Nullable R visit(@NonNull classes.util.Visitable v) {
+	public @Nullable R visit(@NonNull example2.classes.util.Visitable v) {
 		return v.accept(this);
 	}
 
-	//	public @Nullable R visiting(@NonNull classes.util.Visitable visitable) {
+	//	public @Nullable R visiting(@NonNull example2.classes.util.Visitable visitable) {
 	//		return null;
 	//	}
 }

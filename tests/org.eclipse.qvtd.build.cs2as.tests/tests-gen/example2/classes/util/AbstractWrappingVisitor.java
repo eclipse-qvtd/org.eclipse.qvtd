@@ -8,7 +8,7 @@
  *
  * Only the copyright statement is editable.
  *******************************************************************************/
-package	classes.util;
+package	example2.classes.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -34,7 +34,7 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	 * 
 	 * @return a rethrown RuntimeException or a RuntimeException-wrapped non-RuntimeException.
 	 */
-	protected @Nullable R badVisit(@NonNull classes.Element visitable, @Nullable P prologue, @NonNull Throwable e) throws RuntimeException {
+	protected @Nullable R badVisit(@NonNull example2.classes.Element visitable, @Nullable P prologue, @NonNull Throwable e) throws RuntimeException {
 		if (e instanceof Exception) {
 			throw (RuntimeException)e;
 		}
@@ -59,7 +59,7 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	 * 
 	 * @return the epilogue result, which defaults to the delegated result.
 	 */
-	protected @Nullable R postVisit(@NonNull classes.Element visitable, @Nullable P prologue, @Nullable R result) {
+	protected @Nullable R postVisit(@NonNull example2.classes.Element visitable, @Nullable P prologue, @Nullable R result) {
 		return result;
 	}
 
@@ -68,17 +68,17 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	 * 
 	 * @return the prologue result, which defauilts to null.
 	 */
-	protected @Nullable P preVisit(@NonNull classes.Element visitable) {
+	protected @Nullable P preVisit(@NonNull example2.classes.Element visitable) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visiting(@NonNull classes.util.Visitable visitable) {
+	public @Nullable R visiting(@NonNull example2.classes.util.Visitable visitable) {
 		throw new UnsupportedOperationException();		// Cannot happen since all methods delegate.
 	}
 
 	@Override
-	public @Nullable R visitClass(@NonNull classes.Class object) {
+	public @Nullable R visitClass(@NonNull example2.classes.Class object) {
 		P prologue = preVisit(object);
 		try {
 			R result = delegate.visitClass(object);
@@ -90,7 +90,7 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	}
 
 	@Override
-	public @Nullable R visitElement(@NonNull classes.Element object) {
+	public @Nullable R visitElement(@NonNull example2.classes.Element object) {
 		P prologue = preVisit(object);
 		try {
 			R result = delegate.visitElement(object);
@@ -102,7 +102,7 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	}
 
 	@Override
-	public @Nullable R visitNamedElement(@NonNull classes.NamedElement object) {
+	public @Nullable R visitNamedElement(@NonNull example2.classes.NamedElement object) {
 		P prologue = preVisit(object);
 		try {
 			R result = delegate.visitNamedElement(object);
@@ -114,7 +114,7 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	}
 
 	@Override
-	public @Nullable R visitNamespace(@NonNull classes.Namespace object) {
+	public @Nullable R visitNamespace(@NonNull example2.classes.Namespace object) {
 		P prologue = preVisit(object);
 		try {
 			R result = delegate.visitNamespace(object);
@@ -126,7 +126,7 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	}
 
 	@Override
-	public @Nullable R visitPackage(@NonNull classes.Package object) {
+	public @Nullable R visitPackage(@NonNull example2.classes.Package object) {
 		P prologue = preVisit(object);
 		try {
 			R result = delegate.visitPackage(object);
@@ -138,7 +138,7 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	}
 
 	@Override
-	public @Nullable R visitRoot(@NonNull classes.Root object) {
+	public @Nullable R visitRoot(@NonNull example2.classes.Root object) {
 		P prologue = preVisit(object);
 		try {
 			R result = delegate.visitRoot(object);

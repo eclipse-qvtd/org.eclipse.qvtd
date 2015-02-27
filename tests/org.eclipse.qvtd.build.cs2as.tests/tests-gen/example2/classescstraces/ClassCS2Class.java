@@ -2,9 +2,9 @@
  */
 package example2.classescstraces;
 
-import example2.classescs.ClassCS;
-
 import org.eclipse.emf.ecore.EObject;
+
+import example2.classescs.ClassCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -59,12 +59,12 @@ public interface ClassCS2Class extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Class</em>' reference.
-	 * @see #setClass(classes.Class)
+	 * @see #setClass(example2.classes.Class)
 	 * @see example2.classescstraces.ClassescstracesPackage#getClassCS2Class_Class()
 	 * @model required="true"
 	 * @generated
 	 */
-	classes.Class getClass_();
+	example2.classes.Class getClass_();
 
 	/**
 	 * Sets the value of the '{@link example2.classescstraces.ClassCS2Class#getClass_ <em>Class</em>}' reference.
@@ -74,6 +74,6 @@ public interface ClassCS2Class extends EObject {
 	 * @see #getClass_()
 	 * @generated
 	 */
-	void setClass(classes.Class value);
+	void setClass(example2.classes.Class value);
 
 } // ClassCS2Class

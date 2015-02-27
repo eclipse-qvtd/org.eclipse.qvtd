@@ -2,14 +2,19 @@
  */
 package example2.classescs.util;
 
-import example2.classescs.*;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
+
+import example2.classescs.ClassCS;
+import example2.classescs.ClassescsPackage;
+import example2.classescs.ElementCS;
+import example2.classescs.NamedElementCS;
+import example2.classescs.PackageCS;
+import example2.classescs.PathElementCS;
+import example2.classescs.PathNameCS;
+import example2.classescs.RootCS;
 
 /**
  * <!-- begin-user-doc -->

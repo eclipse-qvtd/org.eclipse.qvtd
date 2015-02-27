@@ -2,18 +2,15 @@
  */
 package example2.classescstraces.impl;
 
-import example2.classescs.PackageCS;
-
-import example2.classescstraces.ClassescstracesPackage;
-import example2.classescstraces.PackageCS2Package;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import example2.classescs.PackageCS;
+import example2.classescstraces.ClassescstracesPackage;
+import example2.classescstraces.PackageCS2Package;
 
 /**
  * <!-- begin-user-doc -->
@@ -48,7 +45,7 @@ public class PackageCS2PackageImpl extends MinimalEObjectImpl.Container implemen
 	 * @generated
 	 * @ordered
 	 */
-	protected classes.Package package_;
+	protected example2.classes.Package package_;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -112,10 +109,10 @@ public class PackageCS2PackageImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public classes.Package getPackage() {
+	public example2.classes.Package getPackage() {
 		if (package_ != null && package_.eIsProxy()) {
 			InternalEObject oldPackage = (InternalEObject)package_;
-			package_ = (classes.Package)eResolveProxy(oldPackage);
+			package_ = (example2.classes.Package)eResolveProxy(oldPackage);
 			if (package_ != oldPackage) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassescstracesPackage.PACKAGE_CS2_PACKAGE__PACKAGE, oldPackage, package_));
@@ -129,7 +126,7 @@ public class PackageCS2PackageImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public classes.Package basicGetPackage() {
+	public example2.classes.Package basicGetPackage() {
 		return package_;
 	}
 
@@ -138,8 +135,8 @@ public class PackageCS2PackageImpl extends MinimalEObjectImpl.Container implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPackage(classes.Package newPackage) {
-		classes.Package oldPackage = package_;
+	public void setPackage(example2.classes.Package newPackage) {
+		example2.classes.Package oldPackage = package_;
 		package_ = newPackage;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClassescstracesPackage.PACKAGE_CS2_PACKAGE__PACKAGE, oldPackage, package_));
@@ -175,7 +172,7 @@ public class PackageCS2PackageImpl extends MinimalEObjectImpl.Container implemen
 				setPackageCS((PackageCS)newValue);
 				return;
 			case ClassescstracesPackage.PACKAGE_CS2_PACKAGE__PACKAGE:
-				setPackage((classes.Package)newValue);
+				setPackage((example2.classes.Package)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -193,7 +190,7 @@ public class PackageCS2PackageImpl extends MinimalEObjectImpl.Container implemen
 				setPackageCS((PackageCS)null);
 				return;
 			case ClassescstracesPackage.PACKAGE_CS2_PACKAGE__PACKAGE:
-				setPackage((classes.Package)null);
+				setPackage((example2.classes.Package)null);
 				return;
 		}
 		super.eUnset(featureID);

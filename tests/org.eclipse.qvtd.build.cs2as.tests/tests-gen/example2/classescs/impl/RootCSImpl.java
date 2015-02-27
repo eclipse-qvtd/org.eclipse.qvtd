@@ -2,21 +2,18 @@
  */
 package example2.classescs.impl;
 
-import example2.classescs.ClassescsPackage;
-import example2.classescs.PackageCS;
-import example2.classescs.RootCS;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import example2.classescs.ClassescsPackage;
+import example2.classescs.PackageCS;
+import example2.classescs.RootCS;
 
 /**
  * <!-- begin-user-doc -->

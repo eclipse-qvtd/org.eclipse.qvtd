@@ -8,7 +8,7 @@
  *
  * Only the copyright statement is editable.
  *******************************************************************************/
-package	classes.util;
+package	example2.classes.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -30,32 +30,32 @@ public abstract class AbstractNullVisitor<R, C>
 	}	
 
 	@Override
-	public @Nullable R visitClass(@NonNull classes.Class object) {
+	public @Nullable R visitClass(@NonNull example2.classes.Class object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitElement(@NonNull classes.Element object) {
+	public @Nullable R visitElement(@NonNull example2.classes.Element object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitNamedElement(@NonNull classes.NamedElement object) {
+	public @Nullable R visitNamedElement(@NonNull example2.classes.NamedElement object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitNamespace(@NonNull classes.Namespace object) {
+	public @Nullable R visitNamespace(@NonNull example2.classes.Namespace object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitPackage(@NonNull classes.Package object) {
+	public @Nullable R visitPackage(@NonNull example2.classes.Package object) {
 		return null;
 	}
 
 	@Override
-	public @Nullable R visitRoot(@NonNull classes.Root object) {
+	public @Nullable R visitRoot(@NonNull example2.classes.Root object) {
 		return null;
 	}
 }

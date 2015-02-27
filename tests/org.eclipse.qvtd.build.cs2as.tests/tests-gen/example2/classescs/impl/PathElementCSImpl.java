@@ -2,10 +2,10 @@
  */
 package example2.classescs.impl;
 
+import org.eclipse.emf.ecore.EClass;
+
 import example2.classescs.ClassescsPackage;
 import example2.classescs.PathElementCS;
-
-import org.eclipse.emf.ecore.EClass;
 
 /**
  * <!-- begin-user-doc -->

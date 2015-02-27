@@ -2,9 +2,9 @@
  */
 package example2.classescstraces;
 
-import example2.classescs.PackageCS;
-
 import org.eclipse.emf.ecore.EObject;
+
+import example2.classescs.PackageCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -59,12 +59,12 @@ public interface PackageCS2Package extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Package</em>' reference.
-	 * @see #setPackage(classes.Package)
+	 * @see #setPackage(example2.classes.Package)
 	 * @see example2.classescstraces.ClassescstracesPackage#getPackageCS2Package_Package()
 	 * @model required="true"
 	 * @generated
 	 */
-	classes.Package getPackage();
+	example2.classes.Package getPackage();
 
 	/**
 	 * Sets the value of the '{@link example2.classescstraces.PackageCS2Package#getPackage <em>Package</em>}' reference.
@@ -74,6 +74,6 @@ public interface PackageCS2Package extends EObject {
 	 * @see #getPackage()
 	 * @generated
 	 */
-	void setPackage(classes.Package value);
+	void setPackage(example2.classes.Package value);
 
 } // PackageCS2Package

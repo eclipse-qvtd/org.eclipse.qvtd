@@ -2,18 +2,15 @@
  */
 package example2.classescstraces.impl;
 
-import example2.classescs.ClassCS;
-
-import example2.classescstraces.ClassCS2Class;
-import example2.classescstraces.ClassescstracesPackage;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import example2.classescs.ClassCS;
+import example2.classescstraces.ClassCS2Class;
+import example2.classescstraces.ClassescstracesPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -48,7 +45,7 @@ public class ClassCS2ClassImpl extends MinimalEObjectImpl.Container implements C
 	 * @generated
 	 * @ordered
 	 */
-	protected classes.Class class_;
+	protected example2.classes.Class class_;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -112,10 +109,10 @@ public class ClassCS2ClassImpl extends MinimalEObjectImpl.Container implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public classes.Class getClass_() {
+	public example2.classes.Class getClass_() {
 		if (class_ != null && class_.eIsProxy()) {
 			InternalEObject oldClass = (InternalEObject)class_;
-			class_ = (classes.Class)eResolveProxy(oldClass);
+			class_ = (example2.classes.Class)eResolveProxy(oldClass);
 			if (class_ != oldClass) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ClassescstracesPackage.CLASS_CS2_CLASS__CLASS, oldClass, class_));
@@ -129,7 +126,7 @@ public class ClassCS2ClassImpl extends MinimalEObjectImpl.Container implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public classes.Class basicGetClass() {
+	public example2.classes.Class basicGetClass() {
 		return class_;
 	}
 
@@ -138,8 +135,8 @@ public class ClassCS2ClassImpl extends MinimalEObjectImpl.Container implements C
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setClass(classes.Class newClass) {
-		classes.Class oldClass = class_;
+	public void setClass(example2.classes.Class newClass) {
+		example2.classes.Class oldClass = class_;
 		class_ = newClass;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ClassescstracesPackage.CLASS_CS2_CLASS__CLASS, oldClass, class_));
@@ -175,7 +172,7 @@ public class ClassCS2ClassImpl extends MinimalEObjectImpl.Container implements C
 				setClassCS((ClassCS)newValue);
 				return;
 			case ClassescstracesPackage.CLASS_CS2_CLASS__CLASS:
-				setClass((classes.Class)newValue);
+				setClass((example2.classes.Class)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -193,7 +190,7 @@ public class ClassCS2ClassImpl extends MinimalEObjectImpl.Container implements C
 				setClassCS((ClassCS)null);
 				return;
 			case ClassescstracesPackage.CLASS_CS2_CLASS__CLASS:
-				setClass((classes.Class)null);
+				setClass((example2.classes.Class)null);
 				return;
 		}
 		super.eUnset(featureID);

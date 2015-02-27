@@ -2,14 +2,13 @@
  */
 package example2.env.util;
 
-import example2.env.*;
-
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
+
+import example2.env.Environment;
+import example2.env.EnvironmentPackage;
 
 /**
  * <!-- begin-user-doc -->

@@ -2,15 +2,15 @@
  */
 package example2.env.impl;
 
-import example2.env.*;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import example2.env.Environment;
+import example2.env.EnvironmentFactory;
+import example2.env.EnvironmentPackage;
 
 /**
  * <!-- begin-user-doc -->

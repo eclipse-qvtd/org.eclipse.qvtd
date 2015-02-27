@@ -8,7 +8,7 @@
  *
  * Only the copyright statement is editable.
  *******************************************************************************/
-package	classes.util;
+package	example2.classes.util;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.jdt.annotation.NonNull;
@@ -31,7 +31,7 @@ public interface Visitable
 	 * @param visitor
 	 * @return the result of the visit.
 	 */
-	@Nullable <R> R accept(@NonNull classes.util.Visitor<R> visitor);
+	@Nullable <R> R accept(@NonNull example2.classes.util.Visitor<R> visitor);
 	
 	EClass eClass();
 }

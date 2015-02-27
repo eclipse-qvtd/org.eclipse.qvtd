@@ -2,12 +2,12 @@
  */
 package example2.classes.impl;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import example2.classes.ClassesPackage;
 import example2.classes.Element;
-
-import org.eclipse.emf.ecore.EClass;
-
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import example2.classes.util.Visitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,6 +34,14 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 	@Override
 	protected EClass eStaticClass() {
 		return ClassesPackage.Literals.ELEMENT;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public <R> R accept(Visitor<R> visitor) {
+		return visitor.visitElement(this);
 	}
 
 } //ElementImpl

@@ -2,20 +2,17 @@
  */
 package example2.classes.impl;
 
-import example2.classes.ClassesPackage;
-import example2.classes.Root;
-
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+
+import example2.classes.ClassesPackage;
+import example2.classes.Root;
 
 /**
  * <!-- begin-user-doc -->
@@ -144,6 +141,15 @@ public class RootImpl extends ElementImpl implements Root {
 				return ownedPackages != null && !ownedPackages.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public <R> R accept(example2.classes.util.Visitor<R> visitor) {
+		return visitor.visitRoot(this);
 	}
 
 } //RootImpl

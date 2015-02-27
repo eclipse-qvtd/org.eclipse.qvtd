@@ -2,21 +2,18 @@
  */
 package example2.classescstraces.impl;
 
-import classes.ClassesPackage;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import example2.classes.ClassesPackage;
 import example2.classescs.ClassescsPackage;
-
 import example2.classescstraces.ClassCS2Class;
 import example2.classescstraces.ClassescstracesFactory;
 import example2.classescstraces.ClassescstracesPackage;
 import example2.classescstraces.PackageCS2Package;
 import example2.classescstraces.RootCS2Root;
-
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->

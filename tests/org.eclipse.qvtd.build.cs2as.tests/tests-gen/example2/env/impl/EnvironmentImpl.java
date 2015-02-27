@@ -2,9 +2,8 @@
  */
 package example2.env.impl;
 
-import example2.env.Environment;
-import example2.env.EnvironmentPackage;
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -12,6 +11,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+
+import example2.classes.NamedElement;
+import example2.env.Environment;
+import example2.env.EnvironmentPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,7 +39,7 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<example2.classes.NamedElement> namedElements;
+	protected EList<NamedElement> namedElements;
 
 	/**
 	 * The cached value of the '{@link #getParentEnv() <em>Parent Env</em>}' reference.
@@ -72,9 +75,9 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<example2.classes.NamedElement> getNamedElements() {
+	public EList<NamedElement> getNamedElements() {
 		if (namedElements == null) {
-			namedElements = new EObjectResolvingEList<example2.classes.NamedElement>(example2.classes.NamedElement.class, this, EnvironmentPackage.ENVIRONMENT__NAMED_ELEMENTS);
+			namedElements = new EObjectResolvingEList<NamedElement>(NamedElement.class, this, EnvironmentPackage.ENVIRONMENT__NAMED_ELEMENTS);
 		}
 		return namedElements;
 	}
@@ -145,7 +148,7 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 		switch (featureID) {
 			case EnvironmentPackage.ENVIRONMENT__NAMED_ELEMENTS:
 				getNamedElements().clear();
-				getNamedElements().addAll((Collection<? extends example2.classes.NamedElement>)newValue);
+				getNamedElements().addAll((Collection<? extends NamedElement>)newValue);
 				return;
 			case EnvironmentPackage.ENVIRONMENT__PARENT_ENV:
 				setParentEnv((Environment)newValue);

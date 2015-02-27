@@ -8,7 +8,7 @@
  *
  * Only the copyright statement is editable.
  *******************************************************************************/
-package	classes.util;
+package	example2.classes.util;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -33,12 +33,12 @@ public interface Visitor<R>
 	 * Return the result of visiting a visitable for which no more specific pivot type method
 	 * is available.
 	 */
-	@Nullable R visiting(@NonNull classes.util.Visitable visitable);
+	@Nullable R visiting(@NonNull example2.classes.util.Visitable visitable);
 
-	@Nullable R visitClass(@NonNull classes.Class object);
-	@Nullable R visitElement(@NonNull classes.Element object);
-	@Nullable R visitNamedElement(@NonNull classes.NamedElement object);
-	@Nullable R visitNamespace(@NonNull classes.Namespace object);
-	@Nullable R visitPackage(@NonNull classes.Package object);
-	@Nullable R visitRoot(@NonNull classes.Root object);
+	@Nullable R visitClass(@NonNull example2.classes.Class object);
+	@Nullable R visitElement(@NonNull example2.classes.Element object);
+	@Nullable R visitNamedElement(@NonNull example2.classes.NamedElement object);
+	@Nullable R visitNamespace(@NonNull example2.classes.Namespace object);
+	@Nullable R visitPackage(@NonNull example2.classes.Package object);
+	@Nullable R visitRoot(@NonNull example2.classes.Root object);
 }

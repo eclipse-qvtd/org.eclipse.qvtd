@@ -2,14 +2,12 @@
  */
 package example2.classes.impl;
 
-import example2.classes.ClassesPackage;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
+import example2.classes.ClassesPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -149,6 +147,15 @@ public class ClassImpl extends NamedElementImpl implements example2.classes.Clas
 				return superClass != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public <R> R accept(example2.classes.util.Visitor<R> visitor) {
+		return visitor.visitClass(this);
 	}
 
 } //ClassImpl

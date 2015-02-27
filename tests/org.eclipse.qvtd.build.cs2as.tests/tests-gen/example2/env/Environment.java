@@ -5,6 +5,8 @@ package example2.env;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
+import example2.classes.NamedElement;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Environment</b></em>'.
@@ -37,7 +39,7 @@ public interface Environment extends EObject {
 	 * @model
 	 * @generated
 	 */
-	EList<example2.classes.NamedElement> getNamedElements();
+	EList<NamedElement> getNamedElements();
 
 	/**
 	 * Returns the value of the '<em><b>Parent Env</b></em>' reference.

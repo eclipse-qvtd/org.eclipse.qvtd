@@ -48,8 +48,8 @@ Workflow {
     	superProjectName = ""
     	genModelFile = "${examplesFolder}/Classes.genmodel"
     	javaFolder = "tests-gen"
-    	modelPackageName = "classes"
-    	visitorPackageName = "classes.util"
+    	modelPackageName = "example2.classes"
+    	visitorPackageName = "example2.classes.util"
     	visitorClassName = "Visitor"
     	visitableClassName = "Visitable"
     }

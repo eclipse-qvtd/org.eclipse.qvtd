@@ -2,17 +2,15 @@
  */
 package example2.classes.impl;
 
-import example2.classes.ClassesFactory;
-import example2.classes.ClassesPackage;
-import example2.classes.Root;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+
+import example2.classes.ClassesFactory;
+import example2.classes.ClassesPackage;
+import example2.classes.Root;
 
 /**
  * <!-- begin-user-doc -->

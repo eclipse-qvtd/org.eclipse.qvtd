@@ -2,6 +2,12 @@
  */
 package example2.classescs.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import example2.classescs.ClassCS;
 import example2.classescs.ClassescsFactory;
 import example2.classescs.ClassescsPackage;
@@ -11,13 +17,6 @@ import example2.classescs.PackageCS;
 import example2.classescs.PathElementCS;
 import example2.classescs.PathNameCS;
 import example2.classescs.RootCS;
-
-import org.eclipse.emf.ecore.EAttribute;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-
-import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
