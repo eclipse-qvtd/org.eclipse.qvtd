@@ -88,33 +88,26 @@ public abstract class QVTiAbstractEvaluationVisitor extends OCLEvaluationVisitor
 	}
 
     protected void doPropertyAssignment(@NonNull PropertyAssignment propertyAssignment, @Nullable Integer cacheIndex) {
-		try {
-			Object slotExpValue = safeVisit(propertyAssignment.getSlotExpression());
-			if (slotExpValue instanceof EObject) {
-				Object boxedValue = safeVisit(propertyAssignment.getValue());
-				Property targetProperty = propertyAssignment.getTargetProperty();
-				Class<?> instanceClass = null;
-				EObject eTarget = targetProperty.getESObject();
-				if (eTarget instanceof EStructuralFeature) {
-					EClassifier eType = ((EStructuralFeature)eTarget).getEType();
-					if (eType != null) {
-						instanceClass = eType.getInstanceClass();
-					}
+		Object slotExpValue = safeVisit(propertyAssignment.getSlotExpression());
+		if (slotExpValue instanceof EObject) {
+			Object boxedValue = safeVisit(propertyAssignment.getValue());
+			Property targetProperty = propertyAssignment.getTargetProperty();
+			Class<?> instanceClass = null;
+			EObject eTarget = targetProperty.getESObject();
+			if (eTarget instanceof EStructuralFeature) {
+				EClassifier eType = ((EStructuralFeature)eTarget).getEType();
+				if (eType != null) {
+					instanceClass = eType.getInstanceClass();
 				}
-				Object ecoreValue = environmentFactory.getIdResolver().ecoreValueOf(instanceClass, boxedValue);
-				targetProperty.initValue((EObject) slotExpValue, ecoreValue);
-				if (cacheIndex != null) {
-					getModelManager().setMiddleOpposite(cacheIndex, slotExpValue, ecoreValue);
-				}
-			} else {
-				throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
-					+ " specification. The assigment slot expression evaluates to non-ecore value");
 			}
-		} catch (InvalidValueException ex) {
-			// There was an OCLVoid value being navigated or any other/similar OCL error
-			// evaluating the slot or value expression
-			// TODO, is this an error?
-			System.out.println("visitPropertyAssignment InvalidValueException");
+			Object ecoreValue = environmentFactory.getIdResolver().ecoreValueOf(instanceClass, boxedValue);
+			targetProperty.initValue((EObject) slotExpValue, ecoreValue);
+			if (cacheIndex != null) {
+				getModelManager().setMiddleOpposite(cacheIndex, slotExpValue, ecoreValue);
+			}
+		} else {
+			throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
+				+ " specification. The assigment slot expression evaluates to non-ecore value");
 		}
 	}
 
