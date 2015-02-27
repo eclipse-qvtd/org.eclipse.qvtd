@@ -13,9 +13,7 @@ package org.eclipse.qvtd.pivot.qvtimperative.evaluation;
 
 import java.util.List;
 
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Import;
@@ -26,6 +24,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.internal.evaluation.OCLEvaluationVisitor;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
+import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -92,19 +91,13 @@ public abstract class QVTiAbstractEvaluationVisitor extends OCLEvaluationVisitor
 		if (slotExpValue instanceof EObject) {
 			Object boxedValue = safeVisit(propertyAssignment.getValue());
 			Property targetProperty = propertyAssignment.getTargetProperty();
-			Class<?> instanceClass = null;
-			EObject eTarget = targetProperty.getESObject();
-			if (eTarget instanceof EStructuralFeature) {
-				EClassifier eType = ((EStructuralFeature)eTarget).getEType();
-				if (eType != null) {
-					instanceClass = eType.getInstanceClass();
-				}
-			}
+			Class<?> instanceClass = PivotUtil.getEcoreInstanceClass(targetProperty);
 			Object ecoreValue = environmentFactory.getIdResolver().ecoreValueOf(instanceClass, boxedValue);
 			targetProperty.initValue((EObject) slotExpValue, ecoreValue);
 			if (cacheIndex != null) {
 				getModelManager().setMiddleOpposite(cacheIndex, slotExpValue, ecoreValue);
 			}
+			return;
 		} else {
 			throw new IllegalArgumentException("Unsupported " + propertyAssignment.eClass().getName()
 				+ " specification. The assigment slot expression evaluates to non-ecore value");
