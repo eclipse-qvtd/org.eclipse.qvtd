@@ -10,7 +10,6 @@ import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -58,7 +57,6 @@ import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.junit.Before;
 import org.junit.Test;
 
-import classes.ClassesPackage;
 import example1.source.SourcePackage;
 
 /**
@@ -181,7 +179,20 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	
 	@Test
 	public void testExample2_Interpreted() throws Exception {
+		StandaloneProjectMap.PROJECT_MAP_ADD_EPACKAGE.setState(true);
+//		StandaloneProjectMap.PROJECT_MAP_ADD_GEN_MODEL.setState(true);
+		StandaloneProjectMap.PROJECT_MAP_ADD_GENERATED_PACKAGE.setState(true);
+//		StandaloneProjectMap.PROJECT_MAP_ADD_URI_MAP.setState(true);
+		StandaloneProjectMap.PROJECT_MAP_CONFIGURE.setState(true);
+		StandaloneProjectMap.PROJECT_MAP_GET.setState(true);
+		StandaloneProjectMap.PROJECT_MAP_INSTALL.setState(true);
+		StandaloneProjectMap.PROJECT_MAP_RESOLVE.setState(true);
 		MyQVT myQVT = createQVT();
+		ResourceSet resourceSet = myQVT.getResourceSet();
+		resourceSet.getResource(URI.createURI(example2.classes.ClassesPackage.eNS_URI, true), true);
+		resourceSet.getResource(URI.createURI(example2.classescs.ClassescsPackage.eNS_URI, true), true);
+		resourceSet.getResource(URI.createURI(example2.env.EnvironmentPackage.eNS_URI, true), true);
+	    System.out.println("MyQVT created");
 		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 
 		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "classescs2as.ocl");
@@ -189,8 +200,9 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 //    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("classescs2asSchedule_complete.graphml").toString(), false);
 //    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("classescs2asSchedule_pruned.graphml").toString(), true);
     	
-		ClassesPackage.eINSTANCE.getClass();
+	    System.out.println("MyQVT execute model1");
     	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model1");
+	    System.out.println("MyQVT execute model2");
     	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model2");
     	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model3");
     	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model4");
@@ -360,7 +372,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
     	PivotModel qvtiTransf = mtc.getiModel();
     	
     	URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());
-    	assertValidQVTiModel(txURI);
+//    	assertValidQVTiModel(txURI);
     	
     	return qvtiTransf;
 	}

@@ -8,22 +8,10 @@ import classes.Element;
 import classes.NamedElement;
 import classes.Namespace;
 import classes.Root;
-
-import classescs.ClassescsPackage;
-
-import classescs.impl.ClassescsPackageImpl;
-
-import classescstraces.ClassescstracesPackage;
-
-import classescstraces.impl.ClassescstracesPackageImpl;
-
-import env.EnvironmentPackage;
-import env.impl.EnvironmentPackageImpl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
@@ -121,22 +109,11 @@ public class ClassesPackageImpl extends EPackageImpl implements ClassesPackage {
 
 		isInited = true;
 
-		// Obtain or create and register interdependencies
-		ClassescstracesPackageImpl theClassescstracesPackage = (ClassescstracesPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ClassescstracesPackage.eNS_URI) instanceof ClassescstracesPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ClassescstracesPackage.eNS_URI) : ClassescstracesPackage.eINSTANCE);
-		ClassescsPackageImpl theClassescsPackage = (ClassescsPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(ClassescsPackage.eNS_URI) instanceof ClassescsPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(ClassescsPackage.eNS_URI) : ClassescsPackage.eINSTANCE);
-		EnvironmentPackageImpl theEnvironmentPackage = (EnvironmentPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(EnvironmentPackage.eNS_URI) instanceof EnvironmentPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(EnvironmentPackage.eNS_URI) : EnvironmentPackage.eINSTANCE);
-
 		// Create package meta-data objects
 		theClassesPackage.createPackageContents();
-		theClassescstracesPackage.createPackageContents();
-		theClassescsPackage.createPackageContents();
-		theEnvironmentPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theClassesPackage.initializePackageContents();
-		theClassescstracesPackage.initializePackageContents();
-		theClassescsPackage.initializePackageContents();
-		theEnvironmentPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theClassesPackage.freeze();

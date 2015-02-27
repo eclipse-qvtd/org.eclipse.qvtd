@@ -2,21 +2,21 @@
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:eCoreContainemntTree="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree"
     xsi:schemaLocation="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree ../../../../../../../../../../org.eclipse.qvtd.build.etl/model/ECoreContainmentTree.ecore">
   <eCoreContainemntTree:Node name="Element" subTypes="/1 /2 /3 /5 /4">
-    <element href="Classes.ecore#//Element"/>
+    <element href="http://cs2as/tests/example2/classes/1.0#//Element"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="NamedElement" subTypes="/3 /4" superTypes="/0">
-    <element href="Classes.ecore#//NamedElement"/>
+    <element href="http://cs2as/tests/example2/classes/1.0#//NamedElement"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="Namespace" subTypes="/3" superTypes="/0">
-    <element href="Classes.ecore#//Namespace"/>
+    <element href="http://cs2as/tests/example2/classes/1.0#//Namespace"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="Package" parent="/3 /5" children="/3 /4" superTypes="/1 /0 /2">
-    <element href="Classes.ecore#//Package"/>
+    <element href="http://cs2as/tests/example2/classes/1.0#//Package"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="Class" parent="/3" superTypes="/1 /0">
-    <element href="Classes.ecore#//Class"/>
+    <element href="http://cs2as/tests/example2/classes/1.0#//Class"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="Root" children="/3" superTypes="/0">
-    <element href="Classes.ecore#//Root"/>
+    <element href="http://cs2as/tests/example2/classes/1.0#//Root"/>
   </eCoreContainemntTree:Node>
 </xmi:XMI>

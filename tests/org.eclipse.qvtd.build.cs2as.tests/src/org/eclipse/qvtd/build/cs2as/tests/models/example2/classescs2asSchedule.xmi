@@ -2,145 +2,145 @@
 <qvtschedule:Schedule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvtschedule="http://www.eclipse.org/qvt/0.2/QVTschedule/"
     xsi:schemaLocation="http://www.eclipse.org/qvt/0.2/QVTschedule/ java://org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage">
   <datums xsi:type="qvtschedule:ClassDatum" sub="//@datums.1 //@datums.7 //@datums.11">
-    <type href="ClassesCS.ecore.oclas#T.classescs.ElementCS"/>
+    <type href="http://cs2as/tests/example2/classescs/1.0.oclas#T.classescs.ElementCS"/>
     <propertyDatums sub="//@datums.1/@propertyDatums.1 //@datums.7/@propertyDatums.1">
-      <property href="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast"/>
+      <property href="http://cs2as/tests/example2/classescs/1.0.oclas#p.classescs.ElementCS.ast"/>
     </propertyDatums>
   </datums>
   <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.0" sub="//@datums.2 //@datums.5 //@datums.10">
-    <type href="ClassesCS.ecore.oclas#T.classescs.NamedElementCS"/>
+    <type href="http://cs2as/tests/example2/classescs/1.0.oclas#T.classescs.NamedElementCS"/>
     <propertyDatums sub="//@datums.2/@propertyDatums.0 //@datums.5/@propertyDatums.0 //@datums.10/@propertyDatums.0">
-      <property href="ClassesCS.ecore.oclas#p.classescs.NamedElementCS.name"/>
+      <property href="http://cs2as/tests/example2/classescs/1.0.oclas#p.classescs.NamedElementCS.name"/>
     </propertyDatums>
     <propertyDatums super="//@datums.0/@propertyDatums.0" sub="//@datums.2/@propertyDatums.1 //@datums.5/@propertyDatums.1">
-      <property href="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast"/>
+      <property href="http://cs2as/tests/example2/classescs/1.0.oclas#p.classescs.ElementCS.ast"/>
     </propertyDatums>
   </datums>
   <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.1" requiredBy="//@actions.0 //@actions.3 //@actions.4" dataParameter="//@actions.0/@parameters.0 //@actions.3/@parameters.0 //@actions.4/@parameters.0">
     <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.0"/>
-    <type href="ClassesCS.ecore.oclas#T.classescs.ClassCS"/>
+    <type href="http://cs2as/tests/example2/classescs/1.0.oclas#T.classescs.ClassCS"/>
     <propertyDatums super="//@datums.1/@propertyDatums.0" requiredBy="//@actions.3">
       <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.0"/>
-      <property href="ClassesCS.ecore.oclas#p.classescs.NamedElementCS.name"/>
+      <property href="http://cs2as/tests/example2/classescs/1.0.oclas#p.classescs.NamedElementCS.name"/>
     </propertyDatums>
     <propertyDatums super="//@datums.1/@propertyDatums.1" producedBy="//@actions.0" requiredBy="//@actions.3 //@actions.4 //@actions.6">
       <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.0"/>
-      <property href="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast"/>
+      <property href="http://cs2as/tests/example2/classescs/1.0.oclas#p.classescs.ElementCS.ast"/>
     </propertyDatums>
     <propertyDatums requiredBy="//@actions.4">
       <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.0"/>
-      <property href="ClassesCS.ecore.oclas#p.classescs.ClassCS.extends"/>
+      <property href="http://cs2as/tests/example2/classescs/1.0.oclas#p.classescs.ClassCS.extends"/>
     </propertyDatums>
   </datums>
   <datums xsi:type="qvtschedule:ClassDatum" sub="//@datums.4 //@datums.6">
-    <type href="Classes.ecore.oclas#T.classes.NamedElement"/>
+    <type href="http://cs2as/tests/example2/classes/1.0.oclas#T.classes.NamedElement"/>
     <propertyDatums sub="//@datums.4/@propertyDatums.0 //@datums.6/@propertyDatums.0">
-      <property href="Classes.ecore.oclas#p.classes.NamedElement.name"/>
+      <property href="http://cs2as/tests/example2/classes/1.0.oclas#p.classes.NamedElement.name"/>
     </propertyDatums>
   </datums>
   <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.3" producedBy="//@actions.0" dataParameter="//@actions.0/@results.0">
     <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.1"/>
-    <type href="Classes.ecore.oclas#T.classes.Class"/>
+    <type href="http://cs2as/tests/example2/classes/1.0.oclas#T.classes.Class"/>
     <propertyDatums super="//@datums.3/@propertyDatums.0" producedBy="//@actions.3" requiredBy="//@actions.4">
       <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.1"/>
-      <property href="Classes.ecore.oclas#p.classes.NamedElement.name"/>
+      <property href="http://cs2as/tests/example2/classes/1.0.oclas#p.classes.NamedElement.name"/>
     </propertyDatums>
     <propertyDatums producedBy="//@actions.4" opposite="//@datums.4/@propertyDatums.2">
       <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.1"/>
-      <property href="Classes.ecore.oclas#p.classes.Class.superClass"/>
+      <property href="http://cs2as/tests/example2/classes/1.0.oclas#p.classes.Class.superClass"/>
     </propertyDatums>
     <propertyDatums producedBy="//@actions.4">
       <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.1"/>
-      <property href="Classes.ecore.oclas#p.classes.Class.Class"/>
+      <property href="http://cs2as/tests/example2/classes/1.0.oclas#p.classes.Class.Class"/>
     </propertyDatums>
     <propertyDatums producedBy="//@actions.6">
       <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.0/@domain.1"/>
-      <property href="Classes.ecore.oclas#p.classes.Class.Package"/>
+      <property href="http://cs2as/tests/example2/classes/1.0.oclas#p.classes.Class.Package"/>
     </propertyDatums>
   </datums>
   <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.1" requiredBy="//@actions.1 //@actions.5 //@actions.6 //@actions.7" dataParameter="//@actions.1/@parameters.0 //@actions.5/@parameters.0 //@actions.6/@parameters.0 //@actions.7/@parameters.0">
     <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0"/>
-    <type href="ClassesCS.ecore.oclas#T.classescs.PackageCS"/>
+    <type href="http://cs2as/tests/example2/classescs/1.0.oclas#T.classescs.PackageCS"/>
     <propertyDatums super="//@datums.1/@propertyDatums.0" requiredBy="//@actions.5">
       <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0"/>
-      <property href="ClassesCS.ecore.oclas#p.classescs.NamedElementCS.name"/>
+      <property href="http://cs2as/tests/example2/classescs/1.0.oclas#p.classescs.NamedElementCS.name"/>
     </propertyDatums>
     <propertyDatums super="//@datums.1/@propertyDatums.1" producedBy="//@actions.1" requiredBy="//@actions.5 //@actions.6 //@actions.7 //@actions.8">
       <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0"/>
-      <property href="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast"/>
+      <property href="http://cs2as/tests/example2/classescs/1.0.oclas#p.classescs.ElementCS.ast"/>
     </propertyDatums>
     <propertyDatums requiredBy="//@actions.6">
       <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0"/>
-      <property href="ClassesCS.ecore.oclas#p.classescs.PackageCS.ownedClasses"/>
+      <property href="http://cs2as/tests/example2/classescs/1.0.oclas#p.classescs.PackageCS.ownedClasses"/>
     </propertyDatums>
     <propertyDatums requiredBy="//@actions.7">
       <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.0"/>
-      <property href="ClassesCS.ecore.oclas#p.classescs.PackageCS.ownedPackages"/>
+      <property href="http://cs2as/tests/example2/classescs/1.0.oclas#p.classescs.PackageCS.ownedPackages"/>
     </propertyDatums>
   </datums>
   <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.3" producedBy="//@actions.1" dataParameter="//@actions.1/@results.0">
     <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.1"/>
-    <type href="Classes.ecore.oclas#T.classes.Package"/>
+    <type href="http://cs2as/tests/example2/classes/1.0.oclas#T.classes.Package"/>
     <propertyDatums super="//@datums.3/@propertyDatums.0" producedBy="//@actions.5" requiredBy="//@actions.4">
       <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.1"/>
-      <property href="Classes.ecore.oclas#p.classes.NamedElement.name"/>
+      <property href="http://cs2as/tests/example2/classes/1.0.oclas#p.classes.NamedElement.name"/>
     </propertyDatums>
     <propertyDatums producedBy="//@actions.6" requiredBy="//@actions.4" opposite="//@datums.4/@propertyDatums.3">
       <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.1"/>
-      <property href="Classes.ecore.oclas#p.classes.Package.ownedClasses"/>
+      <property href="http://cs2as/tests/example2/classes/1.0.oclas#p.classes.Package.ownedClasses"/>
     </propertyDatums>
     <propertyDatums producedBy="//@actions.7" requiredBy="//@actions.4" opposite="//@datums.6/@propertyDatums.3">
       <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.1"/>
-      <property href="Classes.ecore.oclas#p.classes.Package.ownedPackages"/>
+      <property href="http://cs2as/tests/example2/classes/1.0.oclas#p.classes.Package.ownedPackages"/>
     </propertyDatums>
     <propertyDatums producedBy="//@actions.7">
       <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.1"/>
-      <property href="Classes.ecore.oclas#p.classes.Package.Package"/>
+      <property href="http://cs2as/tests/example2/classes/1.0.oclas#p.classes.Package.Package"/>
     </propertyDatums>
     <propertyDatums producedBy="//@actions.8">
       <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.1/@domain.1"/>
-      <property href="Classes.ecore.oclas#p.classes.Package.Root"/>
+      <property href="http://cs2as/tests/example2/classes/1.0.oclas#p.classes.Package.Root"/>
     </propertyDatums>
   </datums>
   <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.0" requiredBy="//@actions.2 //@actions.8" dataParameter="//@actions.2/@parameters.0 //@actions.8/@parameters.0">
     <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0"/>
-    <type href="ClassesCS.ecore.oclas#T.classescs.RootCS"/>
+    <type href="http://cs2as/tests/example2/classescs/1.0.oclas#T.classescs.RootCS"/>
     <propertyDatums requiredBy="//@actions.8">
       <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0"/>
-      <property href="ClassesCS.ecore.oclas#p.classescs.RootCS.ownedPackages"/>
+      <property href="http://cs2as/tests/example2/classescs/1.0.oclas#p.classescs.RootCS.ownedPackages"/>
     </propertyDatums>
     <propertyDatums super="//@datums.0/@propertyDatums.0" producedBy="//@actions.2" requiredBy="//@actions.8">
       <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.0"/>
-      <property href="ClassesCS.ecore.oclas#p.classescs.ElementCS.ast"/>
+      <property href="http://cs2as/tests/example2/classescs/1.0.oclas#p.classescs.ElementCS.ast"/>
     </propertyDatums>
   </datums>
   <datums xsi:type="qvtschedule:ClassDatum" producedBy="//@actions.2" dataParameter="//@actions.2/@results.0">
     <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.1"/>
-    <type href="Classes.ecore.oclas#T.classes.Root"/>
+    <type href="http://cs2as/tests/example2/classes/1.0.oclas#T.classes.Root"/>
     <propertyDatums producedBy="//@actions.8" requiredBy="//@actions.4" opposite="//@datums.6/@propertyDatums.4">
       <domain href="classescs2as.qvtp.qvtias#//@ownedPackages.0/@ownedClasses.0/@rule.2/@domain.1"/>
-      <property href="Classes.ecore.oclas#p.classes.Root.ownedPackages"/>
+      <property href="http://cs2as/tests/example2/classes/1.0.oclas#p.classes.Root.ownedPackages"/>
     </propertyDatums>
   </datums>
   <datums xsi:type="qvtschedule:ClassDatum">
-    <type href="Environment.ecore.oclas#T.env.Environment"/>
+    <type href="http://cs2as/tests/example2/env/1.0.oclas#T.env.Environment"/>
     <propertyDatums requiredBy="//@actions.4">
-      <property href="Environment.ecore.oclas#p.env.Environment.namedElements"/>
+      <property href="http://cs2as/tests/example2/env/1.0.oclas#p.env.Environment.namedElements"/>
     </propertyDatums>
     <propertyDatums requiredBy="//@actions.4">
-      <property href="Environment.ecore.oclas#p.env.Environment.parentEnv"/>
+      <property href="http://cs2as/tests/example2/env/1.0.oclas#p.env.Environment.parentEnv"/>
     </propertyDatums>
   </datums>
   <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.1">
-    <type href="ClassesCS.ecore.oclas#T.classescs.PathElementCS"/>
+    <type href="http://cs2as/tests/example2/classescs/1.0.oclas#T.classescs.PathElementCS"/>
     <propertyDatums super="//@datums.1/@propertyDatums.0" requiredBy="//@actions.4">
-      <property href="ClassesCS.ecore.oclas#p.classescs.NamedElementCS.name"/>
+      <property href="http://cs2as/tests/example2/classescs/1.0.oclas#p.classescs.NamedElementCS.name"/>
     </propertyDatums>
   </datums>
   <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.0">
-    <type href="ClassesCS.ecore.oclas#T.classescs.PathNameCS"/>
+    <type href="http://cs2as/tests/example2/classescs/1.0.oclas#T.classescs.PathNameCS"/>
     <propertyDatums requiredBy="//@actions.4">
-      <property href="ClassesCS.ecore.oclas#p.classescs.PathNameCS.path"/>
+      <property href="http://cs2as/tests/example2/classescs/1.0.oclas#p.classescs.PathNameCS.path"/>
     </propertyDatums>
   </datums>
   <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.4 //@datums.2/@propertyDatums.1" requisites="//@datums.2" order="5"

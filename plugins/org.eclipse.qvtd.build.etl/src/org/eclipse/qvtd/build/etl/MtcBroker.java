@@ -21,6 +21,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.epsilon.common.util.StringProperties;
@@ -28,9 +29,15 @@ import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.resource.OCLASResourceFactory;
+import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage;
+import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
+import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
+import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 
 /**
  * The Class MtcBroker.
@@ -38,7 +45,7 @@ import org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage;
 public class MtcBroker {
 	
 	/** The Constant ECORE_URI. */
-	private static final String ECORE_URI = "http://www.eclipse.org/emf/2002/Ecore";
+	private static final String ECORE_URI = EcorePackage.eNS_URI;
 	
 	/** The Constant CONFIG_MODEL_NAME. */
 	private static final String CONFIG_MODEL_NAME = "config";
@@ -65,28 +72,28 @@ public class MtcBroker {
 	//private static final String QVTS_MM = "platform:/resource/org.eclipse.qvtd.build.schedule/model/QVTSchedule.ecore";
 	
 	/** The Constant QVTS_URI. */
-	private static final String QVTS_URI = "http://www.eclipse.org/qvt/0.2/QVTschedule/";
+	private static final String QVTS_URI = QVTschedulePackage.eNS_URI;
 	
 	/** The Constant OCL_STD_LIB_MODEL_NAME. */
 	private static final String OCL_STD_LIB_MODEL_NAME = "oclStdLib";
 	
 	/** The Constant OCL_STD_LIB_URI. */
-	private static final String OCL_STD_LIB_URI = "http://www.eclipse.org/ocl/2015/Library.oclas";
+	private static final String OCL_STD_LIB_URI = OCLstdlibPackage.eNS_URI + ".oclas";
 	
 	/** The Constant PIVOT_URI. */
-	private static final String PIVOT_URI = "http://www.eclipse.org/ocl/2015/Pivot";
+	private static final String PIVOT_URI = PivotPackage.eNS_URI;
 	
 	/** The Constant QVTB_URI. */
-	private static final String QVTB_URI ="http://www.eclipse.org/qvt/2015/QVTbase";
+	private static final String QVTB_URI = QVTbasePackage.eNS_URI;
 	
 	/** The Constant QVTCB_URI. */
-	private static final String QVTCB_URI = "http://www.eclipse.org/qvt/2015/QVTcoreBase";
+	private static final String QVTCB_URI =  QVTcoreBasePackage.eNS_URI;
 	
 	/** The Constant QVTC_URI. */
-	private static final String QVTC_URI = "http://www.eclipse.org/qvt/2015/QVTcore";
+	private static final String QVTC_URI = QVTcorePackage.eNS_URI;
 	
 	/** The Constant QVTI_URI. */
-	private static final String QVTI_URI = "http://www.eclipse.org/qvt/2015/QVTimperative";
+	private static final String QVTI_URI = QVTimperativePackage.eNS_URI;
 	
 	/** The Constant QVTC_FULL_NS. */
 	private static final String QVTC_FULL_NS = QVTC_URI + "," + QVTCB_URI + "," + QVTB_URI + "," + PIVOT_URI;
