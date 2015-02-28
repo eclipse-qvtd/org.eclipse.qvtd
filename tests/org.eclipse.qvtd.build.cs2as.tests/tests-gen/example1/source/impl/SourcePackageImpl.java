@@ -8,14 +8,10 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import example1.env.EnvironmentPackage;
-import example1.env.impl.EnvironmentPackageImpl;
 import example1.source.SElement;
 import example1.source.SRoot;
 import example1.source.SourceFactory;
 import example1.source.SourcePackage;
-import example1.target.TargetPackage;
-import example1.target.impl.TargetPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -119,19 +115,11 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 
 		isInited = true;
 
-		// Obtain or create and register interdependencies
-		TargetPackageImpl theTargetPackage = (TargetPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TargetPackage.eNS_URI) instanceof TargetPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TargetPackage.eNS_URI) : TargetPackage.eINSTANCE);
-		EnvironmentPackageImpl theEnvironmentPackage = (EnvironmentPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(EnvironmentPackage.eNS_URI) instanceof EnvironmentPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(EnvironmentPackage.eNS_URI) : EnvironmentPackage.eINSTANCE);
-
 		// Create package meta-data objects
 		theSourcePackage.createPackageContents();
-		theTargetPackage.createPackageContents();
-		theEnvironmentPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theSourcePackage.initializePackageContents();
-		theTargetPackage.initializePackageContents();
-		theEnvironmentPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theSourcePackage.freeze();

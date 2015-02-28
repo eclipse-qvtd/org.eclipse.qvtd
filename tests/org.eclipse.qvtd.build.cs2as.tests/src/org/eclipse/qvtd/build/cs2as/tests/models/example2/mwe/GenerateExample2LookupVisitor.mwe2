@@ -45,7 +45,7 @@ Workflow {
     	superProjectName = ""
     	superModelName = ""
     	genModelFile = "${examplesFolder}/Classes.genmodel"
-		visitorPackageName = "classes.util"
+		visitorPackageName = "example2.classes.util"
     }
        
 }

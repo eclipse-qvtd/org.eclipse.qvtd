@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2014, 2015 Willink Transformations Ltd., University of York and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Adolfo Sanchez-Barbudo Herrera (University of York) - initial API and implementation
+ *******************************************************************************/
 package org.eclipse.qvtd.build.cs2as.tests;
 
 import java.io.File;
@@ -6,8 +16,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.util.Collections;
 
-import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
-import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -23,13 +31,11 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.pivot.CompleteEnvironment;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
-import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
 import org.eclipse.ocl.pivot.internal.validation.PivotEObjectValidator;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
-import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
@@ -56,8 +62,6 @@ import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 import org.junit.Before;
 import org.junit.Test;
-
-import example1.source.SourcePackage;
 
 /**
  * @author asbh500
@@ -158,10 +162,15 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	@Test
 	public void testExample1_Interpreted() throws Exception {
 		MyQVT myQVT = createQVT();
+		ResourceSet resourceSet = myQVT.getResourceSet();		
+		resourceSet.getResource(URI.createURI(example1.source.SourcePackage.eNS_URI, true), true);
+		resourceSet.getResource(URI.createURI(example1.target.TargetPackage.eNS_URI, true), true);
+		resourceSet.getResource(URI.createURI(example1.env.EnvironmentPackage.eNS_URI, true), true);
+		
 		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
 
 		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "Source2Target.ocl");
-	    	
+		
 //    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("Source2TargetSchedule_complete.graphml").toString(), false);
 //    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("Source2TargetSchedule_pruned.graphml").toString(), true);
 		
@@ -245,12 +254,9 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
 
 		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "Source2Target.ocl");
-    	
-    	//
-    	// Generate the transformation java code
-    	// 
-		URI middleGenModelURI= baseURI.appendSegment("Source2Target.genmodel");
-		Class<? extends TransformationExecutor> txClass = generateCode(myQVT, qvtiTransf.getTransformation(), middleGenModelURI, TESTS_GEN_PATH);
+
+	
+		Class<? extends TransformationExecutor> txClass = generateCode(myQVT, qvtiTransf.getTransformation(), TESTS_GEN_PATH);
 		myQVT.dispose();
 		
 		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore 
@@ -271,14 +277,13 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 			
 		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "classescs2as.ocl");
-	    	    	
+		
     	//
     	// Generate the transformation java code
     	// 
-		URI middleGenModelURI= baseURI.appendSegment("classescs2as.genmodel");
 //		ResourceSet asRset = myQVT.getMetamodelManager().getASResourceSet();
 //		Class<? extends TransformationExecutor> txClass = generateCode(getTransformation(asRset, baseURI.appendSegment("classescs2as.qvtias")) , middleGenModelURI, TESTS_GEN_PATH);
-		Class<? extends TransformationExecutor> txClass = generateCode(myQVT, qvtiTransf.getTransformation(), middleGenModelURI, TESTS_GEN_PATH);
+		Class<? extends TransformationExecutor> txClass = generateCode(myQVT, qvtiTransf.getTransformation(), TESTS_GEN_PATH);
 //		Class<? extends TransformationExecutor> txClass = classescs2as_qvtp_qvtias.class;
 		myQVT.dispose();
 		
@@ -369,7 +374,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
     	PivotModel qvtiTransf = mtc.getiModel();
     	
     	URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());
-//    	assertValidQVTiModel(txURI);
+    	assertValidQVTiModel(txURI);
     	
     	return qvtiTransf;
 	}
@@ -423,9 +428,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	}
 	
 	// Copied from QVTiCompilerTest
-	protected Class<? extends AbstractTransformationExecutor> generateCode(@NonNull MyQVT qvt, @NonNull Transformation transformation, URI genModelURI, @Nullable String savePath) throws Exception {
-
-		registerGenModels(qvt.getResourceSet(), qvt.getMetamodelManager(), genModelURI);
+	protected Class<? extends AbstractTransformationExecutor> generateCode(@NonNull MyQVT qvt, @NonNull Transformation transformation, @Nullable String savePath) throws Exception {
 				
 		QVTiCodeGenerator cg = new QVTiCodeGenerator(qvt.getEnvironmentFactory(), transformation);
 		QVTiCodeGenOptions options = cg.getOptions();
@@ -453,17 +456,6 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 			}
 		}
 		return null;
-	}
-	
-	protected void registerGenModels(ResourceSet rSet, MetamodelManager mManager, URI genModelURI) {
-		
-		rSet.getPackageRegistry().put(GenModelPackage.eNS_URI, GenModelPackage.eINSTANCE);
-		Resource genResource = rSet.getResource(genModelURI, true);
-		for (EObject eObject : genResource.getContents()) {
-			if (eObject instanceof GenModel) {
-				((MetamodelManagerInternal)mManager).addGenModel((GenModel)eObject);
-			}
-		}
 	}
 	
 	// Copied from QVTiCompilerTest

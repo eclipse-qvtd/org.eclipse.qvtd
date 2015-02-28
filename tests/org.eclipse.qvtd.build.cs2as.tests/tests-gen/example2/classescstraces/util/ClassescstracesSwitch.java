@@ -5,6 +5,7 @@ package example2.classescstraces.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+
 import example2.classescstraces.ClassCS2Class;
 import example2.classescstraces.ClassescstracesPackage;
 import example2.classescstraces.PackageCS2Package;

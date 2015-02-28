@@ -9,21 +9,9 @@
 
 package cg;
 
-import example2.classes.ClassesFactory;
-import example2.classes.ClassesPackage;
-import example2.classes.NamedElement;
-import example2.classes.Package;
-import example2.classes.Root;
-import example2.classescs.ClassCS;
-import example2.classescs.ClassescsPackage;
-import example2.classescs.PackageCS;
-import example2.classescs.PathElementCS;
-import example2.classescs.PathNameCS;
-import example2.classescs.RootCS;
-import example2.env.Environment;
-import example2.env.EnvironmentPackage;
 import java.util.Iterator;
 import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.annotation.NonNull;
@@ -60,6 +48,20 @@ import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
+
+import example2.classes.ClassesFactory;
+import example2.classes.ClassesPackage;
+import example2.classes.NamedElement;
+import example2.classes.Package;
+import example2.classes.Root;
+import example2.classescs.ClassCS;
+import example2.classescs.ClassescsPackage;
+import example2.classescs.PackageCS;
+import example2.classescs.PathElementCS;
+import example2.classescs.PathNameCS;
+import example2.classescs.RootCS;
+import example2.env.Environment;
+import example2.env.EnvironmentPackage;
 
 /**
  * The classescs2as_qvtp_qvtias transformation:

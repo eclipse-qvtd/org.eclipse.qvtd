@@ -10,10 +10,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import example1.env.Environment;
 import example1.env.EnvironmentFactory;
 import example1.env.EnvironmentPackage;
-import example1.source.SourcePackage;
-import example1.source.impl.SourcePackageImpl;
 import example1.target.TargetPackage;
-import example1.target.impl.TargetPackageImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -75,19 +72,14 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 
 		isInited = true;
 
-		// Obtain or create and register interdependencies
-		SourcePackageImpl theSourcePackage = (SourcePackageImpl)(EPackage.Registry.INSTANCE.getEPackage(SourcePackage.eNS_URI) instanceof SourcePackageImpl ? EPackage.Registry.INSTANCE.getEPackage(SourcePackage.eNS_URI) : SourcePackage.eINSTANCE);
-		TargetPackageImpl theTargetPackage = (TargetPackageImpl)(EPackage.Registry.INSTANCE.getEPackage(TargetPackage.eNS_URI) instanceof TargetPackageImpl ? EPackage.Registry.INSTANCE.getEPackage(TargetPackage.eNS_URI) : TargetPackage.eINSTANCE);
+		// Initialize simple dependencies
+		TargetPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theEnvironmentPackage.createPackageContents();
-		theSourcePackage.createPackageContents();
-		theTargetPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theEnvironmentPackage.initializePackageContents();
-		theSourcePackage.initializePackageContents();
-		theTargetPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theEnvironmentPackage.freeze();

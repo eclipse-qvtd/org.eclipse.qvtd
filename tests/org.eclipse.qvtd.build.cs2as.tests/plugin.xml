@@ -6,41 +6,29 @@
 
 <plugin>
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated Source2Target NOT -->
-      <!-- <package
+      <!-- @generated SourceMM1 -->
+      <package
             uri="http://cs2as/tests/example1/sourceMM/1.0"
             class="example1.source.SourcePackage"
-            genModel="src/org/eclipse/qvtd/build/cs2as/tests/models/example1/Source2Target.genmodel"/> -->
-      <package
-            uri="dummy-protocol://cs2as/tests/example1/sourceMM/1.0"
-            class="example1.source.SourcePackage"
-            genModel="src/org/eclipse/qvtd/build/cs2as/tests/models/example1/Source2Target.genmodel"/>
+            genModel="src/org/eclipse/qvtd/build/cs2as/tests/models/example1/SourceMM1.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated Source2Target NOT -->
-      <!-- <package
+      <!-- @generated TargetMM1 -->
+      <package
             uri="http://cs2as/tests/example1/targetMM/1.0"
             class="example1.target.TargetPackage"
-            genModel="src/org/eclipse/qvtd/build/cs2as/tests/models/example1/Source2Target.genmodel"/> -->
-      <package
-            uri="dummy-protocol://cs2as/tests/example1/targetMM/1.0"
-            class="example1.target.TargetPackage"
-            genModel="src/org/eclipse/qvtd/build/cs2as/tests/models/example1/Source2Target.genmodel"/>
-   </extension>
-   
-   <extension point="org.eclipse.emf.ecore.generated_package">
-      <!-- @generated Source2Target NOT -->
-      <!-- <package
-            uri="http://cs2as/tests/example1/env/1.0"
-            class="example1.env.EnvironmentPackage"
-            genModel="src/org/eclipse/qvtd/build/cs2as/tests/models/example1/Source2Target.genmodel"/>-->
-	<package
-            uri="dummy-protocol://cs2as/tests/example1/env/1.0"
-            class="example1.env.EnvironmentPackage"
-            genModel="src/org/eclipse/qvtd/build/cs2as/tests/models/example1/Source2Target.genmodel"/>
+            genModel="src/org/eclipse/qvtd/build/cs2as/tests/models/example1/TargetMM1.genmodel"/>
    </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Environment -->
+      <package
+            uri="http://cs2as/tests/example1/env/1.0"
+            class="example1.env.EnvironmentPackage"
+            genModel="src/org/eclipse/qvtd/build/cs2as/tests/models/example1/Environment.genmodel"/>
+   </extension>
+   
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated Environment -->
       <package
