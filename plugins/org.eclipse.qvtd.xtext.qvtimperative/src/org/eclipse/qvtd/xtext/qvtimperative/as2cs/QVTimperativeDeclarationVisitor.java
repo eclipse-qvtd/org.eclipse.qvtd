@@ -49,11 +49,11 @@ import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 import org.eclipse.qvtd.xtext.qvtcorebase.as2cs.QVTcoreBaseDeclarationVisitor;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
@@ -209,9 +209,13 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 	}
 
 	@Override
-	public ElementCS visitMappingSequence(@NonNull MappingSequence pMappingSequence) {
-		MappingSequenceCS csMappingSequence = context.refreshElement(MappingSequenceCS.class, QVTimperativeCSPackage.Literals.MAPPING_SEQUENCE_CS, pMappingSequence);
-		context.refreshList(csMappingSequence.getOwnedMappingStatements(), context.visitDeclarations(MappingStatementCS.class, pMappingSequence.getMappingStatements(), null));
+	public ElementCS visitMappingSequence(@NonNull MappingSequence asMappingSequence) {
+		List<MappingStatement> asMappingStatements = asMappingSequence.getMappingStatements();
+		if (asMappingStatements.size() <= 0) {
+			return null;
+		}
+		MappingSequenceCS csMappingSequence = context.refreshElement(MappingSequenceCS.class, QVTimperativeCSPackage.Literals.MAPPING_SEQUENCE_CS, asMappingSequence);
+		context.refreshList(csMappingSequence.getOwnedMappingStatements(), context.visitDeclarations(MappingStatementCS.class, asMappingStatements, null));
 		return csMappingSequence;
 	}
 
