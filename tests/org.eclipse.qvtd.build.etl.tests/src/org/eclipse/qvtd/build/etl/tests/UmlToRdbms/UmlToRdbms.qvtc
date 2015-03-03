@@ -57,9 +57,10 @@ map primitiveToName in umlRdbms {
         prim.namespace = p;
     }
     check enforce rdbms () {
-        realize sqlType:String |
+        sqlType:String |
     }
-    where (p2s:PackageToSchema | p2s.umlPackage = p;) {
+    where (p2s:PackageToSchema |
+        p2s.umlPackage = p; ) {
         realize p2n:PrimitiveToName |
         p2n.owner := p2s;
         p2n.primitive := prim;
@@ -161,7 +162,8 @@ map classToTable in umlRdbms {
         t.schema := s;
     }
     where (p2s:PackageToSchema |
-            p2s.umlPackage = p; p2s.schema = s;) {
+            p2s.umlPackage = p;
+            p2s.schema = s;) {
         realize c2t:ClassToTable |
         c2t.owner := p2s;
         c2t.umlClass := c;
@@ -223,8 +225,7 @@ map associationToForeignKey in umlRdbms refines flattening {
     check enforce rdbms (s:Schema, st:Table, dt:Table, rk:Key |
             st.schema = s;
             rk.owner = dt;
-            rk.kind = 'primary';
-        ) {
+            rk.kind = 'primary';) {
         realize fk:ForeignKey,
         realize fc:Column |
         fk.owner := st;
@@ -389,13 +390,13 @@ map attributeColumns in umlRdbms {
         default a2c.owner := c2t; -- Check, not always a2c are owned by c2t, it maybe a nla!
     }
     map {
-        check enforce rdbms (ct:String |) {
-            c.type := ct;
-        }
-        where (p2n:PrimitiveToName |
-            p2n.typeName = ct;) {
+        check enforce rdbms () {
+                ct:String |
+                c.type := ct;
+            }
+        where (p2n:PrimitiveToName |) {
+            p2n.typeName := ct;
             a2c.type := p2n;
-            
         }
     }
     map {
