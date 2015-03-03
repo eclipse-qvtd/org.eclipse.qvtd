@@ -5,7 +5,9 @@ package example2.env.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.eclipse.ocl.pivot.evaluation.Evaluator;
 
+import example2.env.Env4CG;
 import example2.env.Environment;
 import example2.env.EnvironmentPackage;
 
@@ -69,6 +71,19 @@ public class EnvironmentSwitch<T> extends Switch<T> {
 			case EnvironmentPackage.ENVIRONMENT: {
 				Environment environment = (Environment)theEObject;
 				T result = caseEnvironment(environment);
+				if (result == null) result = caseEnv4CG(environment);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case EnvironmentPackage.ENV4_CG: {
+				Env4CG env4CG = (Env4CG)theEObject;
+				T result = caseEnv4CG(env4CG);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case EnvironmentPackage.EVALUATOR: {
+				Evaluator evaluator = (Evaluator)theEObject;
+				T result = caseEvaluator(evaluator);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -88,6 +103,36 @@ public class EnvironmentSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseEnvironment(Environment object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Env4 CG</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Env4 CG</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEnv4CG(Env4CG object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Evaluator</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Evaluator</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEvaluator(Evaluator object) {
 		return null;
 	}
 

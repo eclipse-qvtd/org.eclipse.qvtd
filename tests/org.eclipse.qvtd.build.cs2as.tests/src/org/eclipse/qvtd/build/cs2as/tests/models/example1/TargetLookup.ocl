@@ -1,4 +1,4 @@
-import 'Environment.ecore'
+import 'EnvExample1.ecore'
 --import 'Environment.ocl' FIXME imported OCL doesn't work
 import 'TargetMM1.ecore'
 

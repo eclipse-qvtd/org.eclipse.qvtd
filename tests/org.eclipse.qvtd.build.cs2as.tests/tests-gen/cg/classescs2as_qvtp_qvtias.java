@@ -152,8 +152,8 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
      *   else parent.oclAsType(Root)._env(self)
      *   endif
      */
-    public @NonNull /*@NonInvalid*/ Environment parentEnv(final @NonNull /*@NonInvalid*/ Package self_2) {
-        final @Nullable /*@Thrown*/ Object parent = ClassifierOclContainerOperation.INSTANCE.evaluate(evaluator, self_2);
+    public @NonNull /*@NonInvalid*/ Environment parentEnv(final @NonNull /*@NonInvalid*/ Package self_1) {
+        final @Nullable /*@Thrown*/ Object parent = ClassifierOclContainerOperation.INSTANCE.evaluate(evaluator, self_1);
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Package_0 = idResolver.getClass(CLSSid_Package, null);
         final /*@Thrown*/ boolean oclIsKindOf = OclAnyOclIsKindOfOperation.INSTANCE.evaluate(evaluator, parent, TYP_classes_c_c_Package_0).booleanValue();
@@ -163,22 +163,22 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
             if (oclAsType == null) {
                 throw new InvalidValueException("Null source for \'classes::Package::_env(OclElement) : env::Environment\'");
             }
-            final @NonNull /*@Thrown*/ Environment _env = this._env(oclAsType, self_2);
+            final @NonNull /*@Thrown*/ Environment _env = this._env(oclAsType, self_1);
             symbol_3 = _env;
         }
         else {
             final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Root_0 = idResolver.getClass(CLSSid_Root, null);
-            final @Nullable /*@Thrown*/ Root self_7 = (Root)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, parent, TYP_classes_c_c_Root_0);
+            final @Nullable /*@Thrown*/ Root self_5 = (Root)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, parent, TYP_classes_c_c_Root_0);
             final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_env_c_c_Environment_0 = idResolver.getClass(CLSSid_Environment, null);
             final @NonNull /*@NonInvalid*/ Environment symbol_0 = (Environment)TYP_env_c_c_Environment_0.createInstance();
             final @NonNull /*@NonInvalid*/ Property CTORid_parentEnv = idResolver.getProperty(PROPid_parentEnv);
             final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_env_c_c_Environment_1 = idResolver.getClass(CLSSid_Environment, null);
             final @NonNull /*@Thrown*/ Environment symbol_1 = (Environment)TYP_env_c_c_Environment_1.createInstance();
             CTORid_parentEnv.initValue(symbol_1, symbol_0);
-            if (self_7 == null) {
+            if (self_5 == null) {
                 throw new InvalidValueException("Null source for \'classes::Root::ownedPackages\'");
             }
-            final @Nullable /*@Thrown*/ List<Package> elements = self_7.getOwnedPackages();
+            final @Nullable /*@Thrown*/ List<Package> elements = self_5.getOwnedPackages();
             assert elements != null;
             final @NonNull /*@NonInvalid*/ Property CTORid_parentEnv_0 = idResolver.getProperty(PROPid_parentEnv);
             final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_env_c_c_Environment_2 = idResolver.getClass(CLSSid_Environment, null);
@@ -201,102 +201,58 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
     }
     
     /**
-     * classes::Package::_env_Package(child : OclElement) : env::Environment
-     * 
-     * parentEnv().nestedEnv().addElements(self.ownedPackages)
-     */
-    public @NonNull /*@NonInvalid*/ Environment _env_Package(final @NonNull /*@NonInvalid*/ Package self_1, final @NonNull /*@NonInvalid*/ Object child_0) {
-        final @NonNull /*@Thrown*/ Environment self_7 = this.parentEnv(self_1);
-        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-        final @NonNull /*@NonInvalid*/ Property CTORid_parentEnv = idResolver.getProperty(PROPid_parentEnv);
-        final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_env_c_c_Environment_0 = idResolver.getClass(CLSSid_Environment, null);
-        final @NonNull /*@Thrown*/ Environment symbol_0 = (Environment)TYP_env_c_c_Environment_0.createInstance();
-        CTORid_parentEnv.initValue(symbol_0, self_7);
-        final @Nullable /*@Thrown*/ List<Package> elements = self_1.getOwnedPackages();
-        assert elements != null;
-        final @NonNull /*@NonInvalid*/ IdResolver idResolver_0 = evaluator.getIdResolver();
-        final @NonNull /*@NonInvalid*/ Property CTORid_parentEnv_0 = idResolver_0.getProperty(PROPid_parentEnv);
-        final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_env_c_c_Environment_1 = idResolver_0.getClass(CLSSid_Environment, null);
-        final @NonNull /*@NonInvalid*/ Property CTORid_namedElements = idResolver_0.getProperty(PROPid_namedElements);
-        final @NonNull /*@Thrown*/ Environment symbol_1 = (Environment)TYP_env_c_c_Environment_1.createInstance();
-        final @Nullable /*@Thrown*/ List<NamedElement> namedElements = symbol_0.getNamedElements();
-        assert namedElements != null;
-        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements = idResolver_0.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements);
-        final @NonNull /*@Thrown*/ SequenceValue asSequence = CollectionAsSequenceOperation.INSTANCE.evaluate(BOXED_namedElements);
-        final @NonNull /*@Thrown*/ CollectionValue BOXED_elements = idResolver_0.createCollectionOfAll(COL_CLSSid_NamedElement, elements);
-        final @NonNull /*@Thrown*/ CollectionValue includingAll = CollectionIncludingAllOperation.INSTANCE.evaluate(asSequence, BOXED_elements);
-        final List<NamedElement> UNBOXED_includingAll = includingAll.asEcoreObjects(idResolver_0, NamedElement.class);
-        assert UNBOXED_includingAll != null;
-        CTORid_namedElements.initValue(symbol_1, UNBOXED_includingAll);
-        final @Nullable /*@Thrown*/ Environment parentEnv_0 = symbol_0.getParentEnv();
-        CTORid_parentEnv_0.initValue(symbol_1, parentEnv_0);
-        return symbol_1;
-    }
-    
-    /**
-     * classes::Package::_env_Class(child : OclElement) : env::Environment
-     * 
-     * parentEnv().nestedEnv().addElements(self.ownedClasses)
-     */
-    public @NonNull /*@NonInvalid*/ Environment _env_Class(final @NonNull /*@NonInvalid*/ Package self_3, final @NonNull /*@NonInvalid*/ Object child_1) {
-        final @NonNull /*@Thrown*/ Environment self_7 = this.parentEnv(self_3);
-        final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-        final @NonNull /*@NonInvalid*/ Property CTORid_parentEnv = idResolver.getProperty(PROPid_parentEnv);
-        final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_env_c_c_Environment_0 = idResolver.getClass(CLSSid_Environment, null);
-        final @NonNull /*@Thrown*/ Environment symbol_0 = (Environment)TYP_env_c_c_Environment_0.createInstance();
-        CTORid_parentEnv.initValue(symbol_0, self_7);
-        final @Nullable /*@Thrown*/ List<example2.classes.Class> elements = self_3.getOwnedClasses();
-        assert elements != null;
-        final @NonNull /*@NonInvalid*/ IdResolver idResolver_0 = evaluator.getIdResolver();
-        final @NonNull /*@NonInvalid*/ Property CTORid_parentEnv_0 = idResolver_0.getProperty(PROPid_parentEnv);
-        final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_env_c_c_Environment_1 = idResolver_0.getClass(CLSSid_Environment, null);
-        final @NonNull /*@NonInvalid*/ Property CTORid_namedElements = idResolver_0.getProperty(PROPid_namedElements);
-        final @NonNull /*@Thrown*/ Environment symbol_1 = (Environment)TYP_env_c_c_Environment_1.createInstance();
-        final @Nullable /*@Thrown*/ List<NamedElement> namedElements = symbol_0.getNamedElements();
-        assert namedElements != null;
-        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements = idResolver_0.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements);
-        final @NonNull /*@Thrown*/ SequenceValue asSequence = CollectionAsSequenceOperation.INSTANCE.evaluate(BOXED_namedElements);
-        final @NonNull /*@Thrown*/ CollectionValue BOXED_elements = idResolver_0.createCollectionOfAll(COL_CLSSid_NamedElement, elements);
-        final @NonNull /*@Thrown*/ CollectionValue includingAll = CollectionIncludingAllOperation.INSTANCE.evaluate(asSequence, BOXED_elements);
-        final List<NamedElement> UNBOXED_includingAll = includingAll.asEcoreObjects(idResolver_0, NamedElement.class);
-        assert UNBOXED_includingAll != null;
-        CTORid_namedElements.initValue(symbol_1, UNBOXED_includingAll);
-        final @Nullable /*@Thrown*/ Environment parentEnv_0 = symbol_0.getParentEnv();
-        CTORid_parentEnv_0.initValue(symbol_1, parentEnv_0);
-        return symbol_1;
-    }
-    
-    /**
      * classes::Package::_env(child : OclElement) : env::Environment
      * 
      * 
-     * let _env_Package : env::Environment = _env_Package(child)
-     * in
-     *   let _env_Class : env::Environment = _env_Class(child)
-     *   in _env_Package.mergEnv(_env_Class)
+     * parentEnv()
+     * .nestedEnv()
+     * .addElements(self.ownedClasses)
+     * .addElements(self.ownedPackages)
      */
     public @NonNull /*@NonInvalid*/ Environment _env(final @NonNull /*@NonInvalid*/ Package self_0, final @NonNull /*@NonInvalid*/ Object child) {
-        final @NonNull /*@Thrown*/ Environment _env_Package = this._env_Package(self_0, child);
-        final @NonNull /*@Thrown*/ Environment _env_Class = this._env_Class(self_0, child);
+        final @NonNull /*@Thrown*/ Environment self_5 = this.parentEnv(self_0);
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final @NonNull /*@NonInvalid*/ Property CTORid_parentEnv = idResolver.getProperty(PROPid_parentEnv);
         final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_env_c_c_Environment_0 = idResolver.getClass(CLSSid_Environment, null);
-        final @NonNull /*@NonInvalid*/ Property CTORid_namedElements = idResolver.getProperty(PROPid_namedElements);
         final @NonNull /*@Thrown*/ Environment symbol_0 = (Environment)TYP_env_c_c_Environment_0.createInstance();
-        final @Nullable /*@Thrown*/ List<NamedElement> namedElements = _env_Package.getNamedElements();
+        CTORid_parentEnv.initValue(symbol_0, self_5);
+        final @Nullable /*@Thrown*/ List<example2.classes.Class> elements = self_0.getOwnedClasses();
+        assert elements != null;
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver_0 = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ Property CTORid_parentEnv_0 = idResolver_0.getProperty(PROPid_parentEnv);
+        final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_env_c_c_Environment_1 = idResolver_0.getClass(CLSSid_Environment, null);
+        final @NonNull /*@NonInvalid*/ Property CTORid_namedElements = idResolver_0.getProperty(PROPid_namedElements);
+        final @NonNull /*@Thrown*/ Environment symbol_1 = (Environment)TYP_env_c_c_Environment_1.createInstance();
+        final @Nullable /*@Thrown*/ List<NamedElement> namedElements = symbol_0.getNamedElements();
         assert namedElements != null;
-        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements);
+        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements = idResolver_0.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements);
         final @NonNull /*@Thrown*/ SequenceValue asSequence = CollectionAsSequenceOperation.INSTANCE.evaluate(BOXED_namedElements);
-        final @Nullable /*@Thrown*/ List<NamedElement> namedElements_0 = _env_Class.getNamedElements();
-        assert namedElements_0 != null;
-        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements_0);
-        final @NonNull /*@Thrown*/ CollectionValue includingAll = CollectionIncludingAllOperation.INSTANCE.evaluate(asSequence, BOXED_namedElements_0);
-        final List<NamedElement> UNBOXED_includingAll = includingAll.asEcoreObjects(idResolver, NamedElement.class);
+        final @NonNull /*@Thrown*/ CollectionValue BOXED_elements = idResolver_0.createCollectionOfAll(COL_CLSSid_NamedElement, elements);
+        final @NonNull /*@Thrown*/ CollectionValue includingAll = CollectionIncludingAllOperation.INSTANCE.evaluate(asSequence, BOXED_elements);
+        final List<NamedElement> UNBOXED_includingAll = includingAll.asEcoreObjects(idResolver_0, NamedElement.class);
         assert UNBOXED_includingAll != null;
-        CTORid_namedElements.initValue(symbol_0, UNBOXED_includingAll);
-        final @Nullable /*@Thrown*/ Environment parentEnv = _env_Package.getParentEnv();
-        CTORid_parentEnv.initValue(symbol_0, parentEnv);
-        return symbol_0;
+        CTORid_namedElements.initValue(symbol_1, UNBOXED_includingAll);
+        final @Nullable /*@Thrown*/ Environment parentEnv_0 = symbol_0.getParentEnv();
+        CTORid_parentEnv_0.initValue(symbol_1, parentEnv_0);
+        final @Nullable /*@Thrown*/ List<Package> elements_0 = self_0.getOwnedPackages();
+        assert elements_0 != null;
+        final @NonNull /*@NonInvalid*/ IdResolver idResolver_1 = evaluator.getIdResolver();
+        final @NonNull /*@NonInvalid*/ Property CTORid_parentEnv_1 = idResolver_1.getProperty(PROPid_parentEnv);
+        final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_env_c_c_Environment_2 = idResolver_1.getClass(CLSSid_Environment, null);
+        final @NonNull /*@NonInvalid*/ Property CTORid_namedElements_0 = idResolver_1.getProperty(PROPid_namedElements);
+        final @NonNull /*@Thrown*/ Environment symbol_2 = (Environment)TYP_env_c_c_Environment_2.createInstance();
+        final @Nullable /*@Thrown*/ List<NamedElement> namedElements_1 = symbol_1.getNamedElements();
+        assert namedElements_1 != null;
+        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements_1 = idResolver_1.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements_1);
+        final @NonNull /*@Thrown*/ SequenceValue asSequence_0 = CollectionAsSequenceOperation.INSTANCE.evaluate(BOXED_namedElements_1);
+        final @NonNull /*@Thrown*/ CollectionValue BOXED_elements_0 = idResolver_1.createCollectionOfAll(COL_CLSSid_NamedElement, elements_0);
+        final @NonNull /*@Thrown*/ CollectionValue includingAll_0 = CollectionIncludingAllOperation.INSTANCE.evaluate(asSequence_0, BOXED_elements_0);
+        final List<NamedElement> UNBOXED_includingAll_0 = includingAll_0.asEcoreObjects(idResolver_1, NamedElement.class);
+        assert UNBOXED_includingAll_0 != null;
+        CTORid_namedElements_0.initValue(symbol_2, UNBOXED_includingAll_0);
+        final @Nullable /*@Thrown*/ Environment parentEnv_2 = symbol_1.getParentEnv();
+        CTORid_parentEnv_1.initValue(symbol_2, parentEnv_2);
+        return symbol_2;
     }
     
     /**
@@ -316,10 +272,10 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
      *   else foundClasses->first()
      *   endif
      */
-    public @NonNull /*@NonInvalid*/ example2.classes.Class lookupClass(final @NonNull /*@NonInvalid*/ Environment self_4, final @NonNull /*@NonInvalid*/ PathElementCS path) {
+    public @NonNull /*@NonInvalid*/ example2.classes.Class lookupClass(final @NonNull /*@NonInvalid*/ Environment self_2, final @NonNull /*@NonInvalid*/ PathElementCS path) {
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Class_0 = idResolver.getClass(CLSSid_Class, null);
-        final @Nullable /*@Thrown*/ List<NamedElement> namedElements = self_4.getNamedElements();
+        final @Nullable /*@Thrown*/ List<NamedElement> namedElements = self_2.getNamedElements();
         assert namedElements != null;
         final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements);
         final @NonNull /*@Thrown*/ OrderedSetValue selectByKind = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(evaluator, BOXED_namedElements, TYP_classes_c_c_Class_0);
@@ -351,7 +307,7 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
         if (isEmpty) {
             @Nullable /*@Caught*/ Object CAUGHT_parentEnv;
             try {
-                final @Nullable /*@Thrown*/ Environment parentEnv = self_4.getParentEnv();
+                final @Nullable /*@Thrown*/ Environment parentEnv = self_2.getParentEnv();
                 CAUGHT_parentEnv = parentEnv;
             }
             catch (Exception e) {
@@ -363,7 +319,7 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
                 symbol_1 = null;
             }
             else {
-                final @Nullable /*@Thrown*/ Environment parentEnv_0 = self_4.getParentEnv();
+                final @Nullable /*@Thrown*/ Environment parentEnv_0 = self_2.getParentEnv();
                 if (parentEnv_0 == null) {
                     throw new InvalidValueException("Null source for \'env::Environment::lookupClass(classescs::PathElementCS) : classes::Class\'");
                 }
@@ -399,10 +355,10 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
      *   else foundPackages->first()
      *   endif
      */
-    public @NonNull /*@NonInvalid*/ Package lookupPackage(final @NonNull /*@NonInvalid*/ Environment self_6, final @NonNull /*@NonInvalid*/ PathElementCS path_0) {
+    public @NonNull /*@NonInvalid*/ Package lookupPackage(final @NonNull /*@NonInvalid*/ Environment self_4, final @NonNull /*@NonInvalid*/ PathElementCS path_0) {
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Package_0 = idResolver.getClass(CLSSid_Package, null);
-        final @Nullable /*@Thrown*/ List<NamedElement> namedElements = self_6.getNamedElements();
+        final @Nullable /*@Thrown*/ List<NamedElement> namedElements = self_4.getNamedElements();
         assert namedElements != null;
         final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements);
         final @NonNull /*@Thrown*/ OrderedSetValue selectByKind = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(evaluator, BOXED_namedElements, TYP_classes_c_c_Package_0);
@@ -434,7 +390,7 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
         if (isEmpty) {
             @Nullable /*@Caught*/ Object CAUGHT_parentEnv;
             try {
-                final @Nullable /*@Thrown*/ Environment parentEnv = self_6.getParentEnv();
+                final @Nullable /*@Thrown*/ Environment parentEnv = self_4.getParentEnv();
                 CAUGHT_parentEnv = parentEnv;
             }
             catch (Exception e) {
@@ -446,7 +402,7 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
                 symbol_1 = null;
             }
             else {
-                final @Nullable /*@Thrown*/ Environment parentEnv_0 = self_6.getParentEnv();
+                final @Nullable /*@Thrown*/ Environment parentEnv_0 = self_4.getParentEnv();
                 if (parentEnv_0 == null) {
                     throw new InvalidValueException("Null source for \'env::Environment::lookupPackage(classescs::PathElementCS) : classes::Package\'");
                 }
@@ -478,7 +434,7 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
      *   .lookupPackage(pathSeq->last())
      * endif
      */
-    public @NonNull /*@NonInvalid*/ Package lookupPackage(final @NonNull /*@NonInvalid*/ Environment self_5, final @NonNull /*@NonInvalid*/ List<PathElementCS> pathSeq) {
+    public @NonNull /*@NonInvalid*/ Package lookupPackage(final @NonNull /*@NonInvalid*/ Environment self_3, final @NonNull /*@NonInvalid*/ List<PathElementCS> pathSeq) {
         final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final @NonNull /*@NonInvalid*/ OrderedSetValue BOXED_pathSeq_3 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, pathSeq);
         final @NonNull /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_pathSeq_3);
@@ -486,7 +442,7 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
         @NonNull /*@Thrown*/ Package symbol_0;
         if (eq) {
             final @Nullable /*@Thrown*/ PathElementCS first = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_pathSeq_3);
-            final @NonNull /*@Thrown*/ Package lookupPackage = this.lookupPackage(self_5, first);
+            final @NonNull /*@Thrown*/ Package lookupPackage = this.lookupPackage(self_3, first);
             symbol_0 = lookupPackage;
         }
         else {
@@ -494,8 +450,8 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
             final @NonNull /*@Thrown*/ OrderedSetValue subOrderedSet = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_pathSeq_3, INT_1, diff);
             final List<PathElementCS> UNBOXED_subOrderedSet = subOrderedSet.asEcoreObjects(idResolver, PathElementCS.class);
             assert UNBOXED_subOrderedSet != null;
-            final @NonNull /*@Thrown*/ Package self_7 = this.lookupPackage(self_5, UNBOXED_subOrderedSet);
-            final @NonNull /*@Thrown*/ Environment _env = this._env(self_7, null);
+            final @NonNull /*@Thrown*/ Package self_5 = this.lookupPackage(self_3, UNBOXED_subOrderedSet);
+            final @NonNull /*@Thrown*/ Environment _env = this._env(self_5, null);
             final @Nullable /*@Thrown*/ PathElementCS last = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_pathSeq_3);
             final @NonNull /*@Thrown*/ Package lookupPackage_0 = this.lookupPackage(_env, last);
             symbol_0 = lookupPackage_0;
@@ -680,14 +636,14 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
             symbol_2 = null;
         }
         else {
-            final @Nullable /*@Thrown*/ example2.classes.Class self_7 = (example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_classes_c_c_Class_0);
-            final @Nullable /*@Thrown*/ Object parent = ClassifierOclContainerOperation.INSTANCE.evaluate(evaluator, self_7);
+            final @Nullable /*@Thrown*/ example2.classes.Class self_5 = (example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_classes_c_c_Class_0);
+            final @Nullable /*@Thrown*/ Object parent = ClassifierOclContainerOperation.INSTANCE.evaluate(evaluator, self_5);
             final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Package_0 = idResolver.getClass(CLSSid_Package, null);
             final @Nullable /*@Thrown*/ Package oclAsType_0 = (Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, parent, TYP_classes_c_c_Package_0);
             if (oclAsType_0 == null) {
                 throw new InvalidValueException("Null source for \'classes::Package::_env(OclElement) : env::Environment\'");
             }
-            final @NonNull /*@Thrown*/ Environment _env = this._env(oclAsType_0, self_7);
+            final @NonNull /*@Thrown*/ Environment _env = this._env(oclAsType_0, self_5);
             final @Nullable /*@Thrown*/ PathNameCS classPathName = classCS_1.getExtends();
             if (classPathName == null) {
                 throw new InvalidValueException("Null source for \'classescs::PathNameCS::path\'");
@@ -708,8 +664,8 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
                 final @NonNull /*@Thrown*/ OrderedSetValue subOrderedSet = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_pathSeq_0_3, INT_1, diff);
                 final List<PathElementCS> UNBOXED_subOrderedSet = subOrderedSet.asEcoreObjects(idResolver, PathElementCS.class);
                 assert UNBOXED_subOrderedSet != null;
-                final @NonNull /*@Thrown*/ Package self_8 = this.lookupPackage(_env, UNBOXED_subOrderedSet);
-                final @NonNull /*@Thrown*/ Environment _env_0 = this._env(self_8, null);
+                final @NonNull /*@Thrown*/ Package self_6 = this.lookupPackage(_env, UNBOXED_subOrderedSet);
+                final @NonNull /*@Thrown*/ Environment _env_0 = this._env(self_6, null);
                 final @Nullable /*@Thrown*/ PathElementCS last = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_pathSeq_0_3);
                 final @NonNull /*@Thrown*/ example2.classes.Class lookupClass_0 = this.lookupClass(_env_0, last);
                 symbol_1 = lookupClass_0;

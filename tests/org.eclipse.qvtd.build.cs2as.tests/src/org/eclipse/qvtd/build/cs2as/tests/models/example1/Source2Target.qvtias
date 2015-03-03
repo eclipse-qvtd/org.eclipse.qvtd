@@ -5,7 +5,6 @@
     name="Source2Target.qvtias" externalURI="platform:/resource/org.eclipse.qvtd.build.cs2as.tests/src/org/eclipse/qvtd/build/cs2as/tests/models/example1/Source2Target.qvtias">
   <ownedImports importedNamespace="pivot:Model SourceMM1.ecore.oclas#/"/>
   <ownedImports importedNamespace="pivot:Model TargetMM1.ecore.oclas#/"/>
-  <ownedImports importedNamespace="pivot:Model Environment.ecore.oclas#/"/>
   <ownedImports importedNamespace="pivot:Model SourceDisambiguation.ocl.oclas#/"/>
   <ownedImports importedNamespace="pivot:Model TargetLookup.ocl.oclas#/"/>
   <ownedPackages xmi:id="P." name="">
@@ -729,7 +728,7 @@
                 </ownedSource>
               </ownedCondition>
               <ownedElse xsi:type="pivot:OperationCallExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.C" referredOperation="TargetLookup.ocl.oclas#o.env.Environment.lookupC..ocl.String">
-                <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class Environment.ecore.oclas#T.env.Environment" referredOperation="TargetLookup.ocl.oclas#o.target.C.env">
+                <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class EnvExample1.ecore.oclas#T.env.Environment" referredOperation="TargetLookup.ocl.oclas#o.target.C.env">
                   <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.C" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
                     <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                         referredProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
@@ -889,7 +888,7 @@
                 </ownedSource>
               </ownedCondition>
               <ownedElse xsi:type="pivot:OperationCallExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.B" referredOperation="TargetLookup.ocl.oclas#o.env.Environment.lookupB..ocl.String">
-                <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class Environment.ecore.oclas#T.env.Environment" referredOperation="TargetLookup.ocl.oclas#o.target.B.env">
+                <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class EnvExample1.ecore.oclas#T.env.Environment" referredOperation="TargetLookup.ocl.oclas#o.target.B.env">
                   <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.B" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
                     <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                         referredProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">

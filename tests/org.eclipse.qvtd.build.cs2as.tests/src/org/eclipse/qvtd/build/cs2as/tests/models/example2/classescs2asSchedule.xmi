@@ -123,12 +123,12 @@
     </propertyDatums>
   </datums>
   <datums xsi:type="qvtschedule:ClassDatum">
-    <type href="Environment.ecore.oclas#T.env.Environment"/>
+    <type href="EnvExample2.ecore.oclas#T.env.Environment"/>
     <propertyDatums requiredBy="//@actions.4">
-      <property href="Environment.ecore.oclas#p.env.Environment.namedElements"/>
+      <property href="EnvExample2.ecore.oclas#p.env.Environment.namedElements"/>
     </propertyDatums>
     <propertyDatums requiredBy="//@actions.4">
-      <property href="Environment.ecore.oclas#p.env.Environment.parentEnv"/>
+      <property href="EnvExample2.ecore.oclas#p.env.Environment.parentEnv"/>
     </propertyDatums>
   </datums>
   <datums xsi:type="qvtschedule:ClassDatum" super="//@datums.1">

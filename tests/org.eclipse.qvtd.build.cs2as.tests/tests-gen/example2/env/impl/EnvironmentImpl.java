@@ -2,6 +2,7 @@
  */
 package example2.env.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -11,6 +12,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.ocl.pivot.evaluation.Evaluator;
 
 import example2.classes.NamedElement;
 import example2.env.Environment;
@@ -125,6 +127,24 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean hasFinalResult() {
+		throw new UnsupportedOperationException("Enviroment::hasFinalResult() has been created for CG purposes. Don't call this method");
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Evaluator getEvaluator() {
+		throw new UnsupportedOperationException("Enviroment::getEvaluator() has been created for CG purposes. Don't call this method");
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -190,5 +210,24 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 		}
 		return super.eIsSet(featureID);
 	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case EnvironmentPackage.ENVIRONMENT___HAS_FINAL_RESULT:
+				return hasFinalResult();
+			case EnvironmentPackage.ENVIRONMENT___GET_EVALUATOR:
+				return getEvaluator();
+		}
+		return super.eInvoke(operationID, arguments);
+	}
+
+
+
 
 } //EnvironmentImpl

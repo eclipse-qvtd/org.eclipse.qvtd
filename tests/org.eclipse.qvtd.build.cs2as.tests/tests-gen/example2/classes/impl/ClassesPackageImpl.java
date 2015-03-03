@@ -2,8 +2,6 @@
  */
 package example2.classes.impl;
 
-import static example2.classes.ClassesPackage.CLASS;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;

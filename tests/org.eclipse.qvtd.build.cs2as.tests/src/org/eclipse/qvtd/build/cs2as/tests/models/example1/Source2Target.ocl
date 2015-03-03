@@ -1,6 +1,5 @@
 import 'SourceMM1.ecore'
 import 'TargetMM1.ecore'
-import 'Environment.ecore'
 import 'SourceDisambiguation.ocl'
 import 'TargetLookup.ocl'
 

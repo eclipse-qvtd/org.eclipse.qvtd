@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 import example2.classes.ClassesPackage;
 import example2.classes.Root;
+import example2.classes.util.Visitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -148,7 +149,7 @@ public class RootImpl extends ElementImpl implements Root {
 	 * @generated
 	 */
 	@Override
-	public <R> R accept(example2.classes.util.Visitor<R> visitor) {
+	public <R> R accept(Visitor<R> visitor) {
 		return visitor.visitRoot(this);
 	}
 

@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import example2.classes.ClassesPackage;
+import example2.classes.util.Visitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -183,7 +184,7 @@ public class PackageImpl extends NamedElementImpl implements example2.classes.Pa
 	 * @generated
 	 */
 	@Override
-	public <R> R accept(example2.classes.util.Visitor<R> visitor) {
+	public <R> R accept(Visitor<R> visitor) {
 		return visitor.visitPackage(this);
 	}
 

@@ -26,7 +26,7 @@
       <package
             uri="http://cs2as/tests/example1/env/1.0"
             class="example1.env.EnvironmentPackage"
-            genModel="src/org/eclipse/qvtd/build/cs2as/tests/models/example1/Environment.genmodel"/>
+            genModel="src/org/eclipse/qvtd/build/cs2as/tests/models/example1/EnvExample1.genmodel"/>
    </extension>
    
    <extension point="org.eclipse.emf.ecore.generated_package">
@@ -34,7 +34,7 @@
       <package
             uri="http://cs2as/tests/example2/env/1.0"
             class="example2.env.EnvironmentPackage"
-            genModel="src/org/eclipse/qvtd/build/cs2as/tests/models/example2/Environment.genmodel"/>
+            genModel="src/org/eclipse/qvtd/build/cs2as/tests/models/example2/EnvExample2.genmodel"/>
    </extension>
 
    <extension point="org.eclipse.emf.ecore.generated_package">

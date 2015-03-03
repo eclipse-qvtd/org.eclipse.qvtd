@@ -5,12 +5,12 @@
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="7.0" copyrightFields="false" usedGenPackages="Classes.genmodel#//classes"
     operationReflection="true" importOrganizing="true">
-  <foreignModel>Environment.ecore</foreignModel>
+  <foreignModel>EnvExample2.ecore</foreignModel>
   <genPackages prefix="Environment" basePackage="example2" disposableProviderFactory="true"
-      ecorePackage="Environment.ecore#/">
-    <genClasses image="false" ecoreClass="Environment.ecore#//Environment">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Environment.ecore#//Environment/namedElements"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Environment.ecore#//Environment/parentEnv"/>
+      ecorePackage="EnvExample2.ecore#/">
+    <genClasses image="false" ecoreClass="EnvExample2.ecore#//Environment">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EnvExample2.ecore#//Environment/namedElements"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EnvExample2.ecore#//Environment/parentEnv"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

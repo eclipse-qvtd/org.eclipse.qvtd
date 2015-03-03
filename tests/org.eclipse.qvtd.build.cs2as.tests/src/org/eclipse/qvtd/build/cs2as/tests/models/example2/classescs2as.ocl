@@ -1,6 +1,6 @@
 import 'ClassesCS.ecore'
 import 'Classes.ecore'
-import 'ClassesLookup.ocl'
+import 'ClassesNameResolution.ocl'
 --import 'EnvDefinition.ocl' -- FIXME Report bug to OCL transitive import doesn't work
 
 package classescs

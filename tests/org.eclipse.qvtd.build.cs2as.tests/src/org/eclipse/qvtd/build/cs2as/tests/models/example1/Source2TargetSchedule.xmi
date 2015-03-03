@@ -208,9 +208,9 @@
     </propertyDatums>
   </datums>
   <datums xsi:type="qvtschedule:ClassDatum">
-    <type href="Environment.ecore.oclas#T.env.Environment"/>
+    <type href="EnvExample1.ecore.oclas#T.env.Environment"/>
     <propertyDatums requiredBy="//@actions.18 //@actions.21">
-      <property href="Environment.ecore.oclas#p.env.Environment.namedElements"/>
+      <property href="EnvExample1.ecore.oclas#p.env.Environment.namedElements"/>
     </propertyDatums>
   </datums>
   <actions xsi:type="qvtschedule:MappingAction" productions="//@datums.2 //@datums.1/@propertyDatums.1" requisites="//@datums.1" order="1"

@@ -3,7 +3,6 @@
 package example2.env;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 
 import example2.classes.NamedElement;
 
@@ -24,7 +23,7 @@ import example2.classes.NamedElement;
  * @model
  * @generated
  */
-public interface Environment extends EObject {
+public interface Environment extends Env4CG {
 	/**
 	 * Returns the value of the '<em><b>Named Elements</b></em>' reference list.
 	 * The list contents are of type {@link example2.classes.NamedElement}.

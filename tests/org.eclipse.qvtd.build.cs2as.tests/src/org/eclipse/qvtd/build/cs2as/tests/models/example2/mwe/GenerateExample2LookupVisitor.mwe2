@@ -1,17 +1,15 @@
 /*******************************************************************************
- * Copyright (c) 2010, 2013 E.D.Willink and others.
+ * Copyright (c) 2015 Willink Transformations Ltd, University Of York and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  * Contributors:
- *     E.D.Willink - initial API and implementation
- *     Adolfo Sanchez-Barbudo Herrera (University of York) - bug397429"
+ *     Adolfo Sanchez-Barbudo Herrera (University of York) - Initial API and Implementation
  * 
- * Run As->MWE2 Workflow to regenerate the Xtest CS models.
  *******************************************************************************/
-module org.eclipse.qvtd.build.cs2as.tests.GeneratExample2LookupVisitor
+module org.eclipse.qvtd.build.cs2as.tests.GenerateExample2LookupVisitor
 
 import org.eclipse.ocl.examples.build.*
 import org.eclipse.ocl.examples.build.utilities.*
@@ -24,9 +22,6 @@ import org.eclipse.emf.ecore.resource.impl.*
 var projectName = "org.eclipse.qvtd.build.cs2as.tests"
 var examplesFolder = "src/org/eclipse/qvtd/build/cs2as/tests/models/example2"
 
-/**
- *	Generate the EXtension to the Abstract Syntax Models used by the Xtext editors.
- */
 Workflow {
 	bean = ResourceSetImpl : resourceSet {}
     bean = StandaloneSetup { resourceSet = resourceSet
@@ -34,10 +29,7 @@ Workflow {
     	scanClassPath = true
     }
     bean = GenModelSetup { resourceSet = resourceSet }
-//    bean = UMLGenModelSetup { resourceSet = resourceSet }
-//    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
-//    	genModel = "/org.eclipse.ocl.xtext.markup/model/Markup.genmodel"
-//    }
+
     component = @SubGenerateAutoASModel { resourceSet = resourceSet
     	projectName = "${projectName}"
     	modelName = "classes"
@@ -45,7 +37,10 @@ Workflow {
     	superProjectName = ""
     	superModelName = ""
     	genModelFile = "${examplesFolder}/Classes.genmodel"
+    	lookupFilePath = "${examplesFolder}/ClassesNameResolution.ocl"
 		visitorPackageName = "example2.classes.util"
+		visitorClassName = "Visitor"
+    	visitableClassName = "Visitable"
     }
        
 }

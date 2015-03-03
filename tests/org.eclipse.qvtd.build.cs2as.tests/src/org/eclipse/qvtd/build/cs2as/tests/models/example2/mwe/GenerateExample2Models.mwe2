@@ -18,13 +18,7 @@ import org.eclipse.emf.ecore.resource.impl.*
 
 var projectName = "org.eclipse.qvtd.build.cs2as.tests"
 var examplesFolder = "src/org/eclipse/qvtd/build/cs2as/tests/models/example2"
-//var platformURI = ".."
 
-/**
- *	Generate the Pivot Model, by performing the merge to create the flattened package
- *  with additional MDT/OCL content, alphabeticsing the classes, reloading the genmodel
- *  and finally generating the model code.
- */
 Workflow {
 	bean = ResourceSetImpl : resourceSet {}
     bean = ProjectMapSetup { resourceSet = resourceSet }
@@ -39,7 +33,7 @@ Workflow {
     }
     
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
-    	genModel = "/${projectName}/${examplesFolder}/Environment.genmodel"
+    	genModel = "/${projectName}/${examplesFolder}/EnvExample2.genmodel"
     }
 
     component = GenerateASVisitors { resourceSet = resourceSet
@@ -53,7 +47,6 @@ Workflow {
     	visitorClassName = "Visitor"
     	visitableClassName = "Visitable"
     }
-
 }
 
 

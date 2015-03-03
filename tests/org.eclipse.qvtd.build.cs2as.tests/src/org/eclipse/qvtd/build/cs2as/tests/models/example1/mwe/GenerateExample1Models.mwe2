@@ -39,7 +39,7 @@ Workflow {
     }
     
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
-    	genModel = "/${projectName}/${examplesFolder}/Environment.genmodel"
+    	genModel = "/${projectName}/${examplesFolder}/EnvExample1.genmodel"
     }
 
     /*component = GenerateASVisitors { resourceSet = resourceSet
