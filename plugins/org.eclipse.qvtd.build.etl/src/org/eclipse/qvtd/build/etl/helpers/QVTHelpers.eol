@@ -599,7 +599,6 @@ operation QVT!Variable findReferencesInPatterns(patterns : Sequence) : QVT!Varia
  *  If the QVT model had a getAllVariables() method that returned variables and
  *  realized variables, these two methods could be combined. 
  */
-@cached
 operation QVT!GuardPattern findVariableByName(variable : QVT!TypedElement) {
     
     return self.variable.selectOne(lv | lv.name == variable.name);
@@ -617,7 +616,6 @@ operation QVT!GuardPattern findVariableByName(variable : QVT!TypedElement) {
  *  If the QVT model had a getAllVariables() method that returned variables and
  *  realized variables, these two methods could be combined. 
  */
-@cached
 operation QVT!BottomPattern findVariableByName(variable : QVT!TypedElement) {
     
     return self.variable.includingAll(self.realizedVariable).selectOne(lv | lv.name == variable.name);
