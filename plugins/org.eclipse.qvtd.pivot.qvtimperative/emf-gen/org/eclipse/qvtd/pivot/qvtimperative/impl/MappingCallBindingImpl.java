@@ -37,6 +37,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallBindingImpl#getMappingCall <em>Mapping Call</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallBindingImpl#getBoundVariable <em>Bound Variable</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallBindingImpl#isIsPolled <em>Is Polled</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MappingCallBindingImpl#getValue <em>Value</em>}</li>
  * </ul>
  *
@@ -52,6 +53,35 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 	 * @ordered
 	 */
 	protected Variable boundVariable;
+
+	/**
+	 * The default value of the '{@link #isIsPolled() <em>Is Polled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsPolled()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_POLLED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsPolled() <em>Is Polled</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsPolled()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isPolled = IS_POLLED_EDEFAULT;
+
+	/**
+	 * This is true if the Is Polled attribute has been set.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isPolledESet;
 
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
@@ -171,6 +201,56 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 	 * @generated
 	 */
 	@Override
+	public boolean isIsPolled() {
+		return isPolled;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsPolled(boolean newIsPolled) {
+		boolean oldIsPolled = isPolled;
+		isPolled = newIsPolled;
+		boolean oldIsPolledESet = isPolledESet;
+		isPolledESet = true;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING_CALL_BINDING__IS_POLLED, oldIsPolled, isPolled, !oldIsPolledESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void unsetIsPolled() {
+		boolean oldIsPolled = isPolled;
+		boolean oldIsPolledESet = isPolledESet;
+		isPolled = IS_POLLED_EDEFAULT;
+		isPolledESet = false;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.UNSET, QVTimperativePackage.MAPPING_CALL_BINDING__IS_POLLED, oldIsPolled, IS_POLLED_EDEFAULT, oldIsPolledESet));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isSetIsPolled() {
+		return isPolledESet;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public OCLExpression getValue() {
 		return value;
 	}
@@ -208,6 +288,16 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, QVTimperativePackage.MAPPING_CALL_BINDING__VALUE, newValue, newValue));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 
 	/**
@@ -269,6 +359,8 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 			case QVTimperativePackage.MAPPING_CALL_BINDING__BOUND_VARIABLE:
 				if (resolve) return getBoundVariable();
 				return basicGetBoundVariable();
+			case QVTimperativePackage.MAPPING_CALL_BINDING__IS_POLLED:
+				return isIsPolled();
 			case QVTimperativePackage.MAPPING_CALL_BINDING__VALUE:
 				return getValue();
 		}
@@ -288,6 +380,9 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 				return;
 			case QVTimperativePackage.MAPPING_CALL_BINDING__BOUND_VARIABLE:
 				setBoundVariable((Variable)newValue);
+				return;
+			case QVTimperativePackage.MAPPING_CALL_BINDING__IS_POLLED:
+				setIsPolled((Boolean)newValue);
 				return;
 			case QVTimperativePackage.MAPPING_CALL_BINDING__VALUE:
 				setValue((OCLExpression)newValue);
@@ -310,6 +405,9 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 			case QVTimperativePackage.MAPPING_CALL_BINDING__BOUND_VARIABLE:
 				setBoundVariable((Variable)null);
 				return;
+			case QVTimperativePackage.MAPPING_CALL_BINDING__IS_POLLED:
+				unsetIsPolled();
+				return;
 			case QVTimperativePackage.MAPPING_CALL_BINDING__VALUE:
 				setValue((OCLExpression)null);
 				return;
@@ -329,6 +427,8 @@ public class MappingCallBindingImpl extends ElementImpl implements MappingCallBi
 				return getMappingCall() != null;
 			case QVTimperativePackage.MAPPING_CALL_BINDING__BOUND_VARIABLE:
 				return boundVariable != null;
+			case QVTimperativePackage.MAPPING_CALL_BINDING__IS_POLLED:
+				return isSetIsPolled();
 			case QVTimperativePackage.MAPPING_CALL_BINDING__VALUE:
 				return value != null;
 		}

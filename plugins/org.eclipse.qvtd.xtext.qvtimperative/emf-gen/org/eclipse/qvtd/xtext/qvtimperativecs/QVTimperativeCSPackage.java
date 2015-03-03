@@ -10,6 +10,7 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtimperativecs;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -328,13 +329,22 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int MAPPING_CALL_BINDING_CS__OWNED_VALUE = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Is Polled</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CALL_BINDING_CS__IS_POLLED = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Mapping Call Binding CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CALL_BINDING_CS_FEATURE_COUNT = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 3;
+	int MAPPING_CALL_BINDING_CS_FEATURE_COUNT = EssentialOCLCSPackage.EXP_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingStatementCSImpl <em>Mapping Statement CS</em>}' class.
@@ -829,6 +839,17 @@ public interface QVTimperativeCSPackage extends EPackage {
 	EReference getMappingCallBindingCS_OwnedValue();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#isIsPolled <em>Is Polled</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Polled</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS#isIsPolled()
+	 * @see #getMappingCallBindingCS()
+	 * @generated
+	 */
+	EAttribute getMappingCallBindingCS_IsPolled();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallCS <em>Mapping Call CS</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1050,6 +1071,14 @@ public interface QVTimperativeCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference MAPPING_CALL_BINDING_CS__OWNED_VALUE = eINSTANCE.getMappingCallBindingCS_OwnedValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Polled</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute MAPPING_CALL_BINDING_CS__IS_POLLED = eINSTANCE.getMappingCallBindingCS_IsPolled();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.xtext.qvtimperativecs.impl.MappingCallCSImpl <em>Mapping Call CS</em>}' class.

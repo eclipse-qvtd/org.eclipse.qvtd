@@ -115,6 +115,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 	@Override
 	public Continuation<?> visitMappingCallBindingCS(@NonNull MappingCallBindingCS csElement) {
 		@NonNull MappingCallBinding pivotElement = context.refreshModelElement(MappingCallBinding.class, QVTimperativePackage.Literals.MAPPING_CALL_BINDING, csElement);
+		pivotElement.setIsPolled(csElement.isIsPolled());
 		context.refreshComments(pivotElement, csElement);
 		return null;
 	}

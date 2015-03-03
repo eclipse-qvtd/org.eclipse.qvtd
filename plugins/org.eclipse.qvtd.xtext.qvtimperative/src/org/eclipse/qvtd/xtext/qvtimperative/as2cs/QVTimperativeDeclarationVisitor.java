@@ -193,6 +193,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 	public ElementCS visitMappingCallBinding(@NonNull MappingCallBinding asMappingCallBinding) {
 		MappingCallBindingCS csMappingCallBinding = context.refreshElement(MappingCallBindingCS.class, QVTimperativeCSPackage.Literals.MAPPING_CALL_BINDING_CS, asMappingCallBinding);
 		csMappingCallBinding.setPivot(asMappingCallBinding);
+		csMappingCallBinding.setIsPolled(asMappingCallBinding.isIsPolled());
 		csMappingCallBinding.setReferredVariable(asMappingCallBinding.getBoundVariable());
 		csMappingCallBinding.setOwnedValue(createExpCS(asMappingCallBinding.getValue()));
 		return csMappingCallBinding;

@@ -587,31 +587,47 @@ ruleMappingCallBindingCS returns [EObject current=null]
 	    }
 
 )
-)	otherlv_1=':=' 
+)(	otherlv_1=':=' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getMappingCallBindingCSAccess().getColonEqualsSignKeyword_1());
+    	newLeafNode(otherlv_1, grammarAccess.getMappingCallBindingCSAccess().getColonEqualsSignKeyword_1_0());
     }
+
+    |(
 (
+		lv_isPolled_2_0=	'?=' 
+    {
+        newLeafNode(lv_isPolled_2_0, grammarAccess.getMappingCallBindingCSAccess().getIsPolledQuestionMarkEqualsSignKeyword_1_1_0());
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getMappingCallBindingCSRule());
+	        }
+       		setWithLastConsumed($current, "isPolled", true, "?=");
+	    }
+
+)
+))(
 (
 		{ 
 	        newCompositeNode(grammarAccess.getMappingCallBindingCSAccess().getOwnedValueExpCSParserRuleCall_2_0()); 
 	    }
-		lv_ownedValue_2_0=ruleExpCS		{
+		lv_ownedValue_3_0=ruleExpCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getMappingCallBindingCSRule());
 	        }
        		set(
        			$current, 
        			"ownedValue",
-        		lv_ownedValue_2_0, 
+        		lv_ownedValue_3_0, 
         		"ExpCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)	otherlv_3=';' 
+)	otherlv_4=';' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getMappingCallBindingCSAccess().getSemicolonKeyword_3());
+    	newLeafNode(otherlv_4, grammarAccess.getMappingCallBindingCSAccess().getSemicolonKeyword_3());
     }
 )
 ;

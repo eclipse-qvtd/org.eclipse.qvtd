@@ -36,7 +36,7 @@ MappingCS: {MappingCS} 'map' name=UnrestrictedName ('in' in=[qvtbase::Transforma
 MappingCallCS: {MappingCallCS} 'call' referredMapping=[qvtimperative::Mapping|UnrestrictedName]
 	'{' ownedBindings+=MappingCallBindingCS* '}';
 
-MappingCallBindingCS: referredVariable=[pivot::Variable|UnrestrictedName] ':=' ownedValue=ExpCS ';';
+MappingCallBindingCS: referredVariable=[pivot::Variable|UnrestrictedName] (':='|isPolled?='?=') ownedValue=ExpCS ';';
 	
 MappingLoopCS: 'for' ownedIterator=MappingIteratorCS 'in' ownedInExpression=ExpCS '{' ownedMappingSequence=MappingSequenceCS '}';
 	

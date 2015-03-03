@@ -14,6 +14,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedValue" lowerBound="1"
         eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isPolled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MappingCallCS" eSuperTypes="#//MappingStatementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="referredMapping" lowerBound="1"

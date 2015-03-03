@@ -9,7 +9,7 @@
  *     E.D.Willink - initial API and implementation
  *******************************************************************************
  * This code is 100% auto-generated
- * from: C:\GIT\org.eclipse.qvtd\plugins..\..\plugins\org.eclipse.qvtd.xtext.qvtcore\src-gen\org\eclipse\qvtd\xtext\qvtcore\QVTcore.xtextbin
+ * from: E:\GIT\org.eclipse.qvtd\plugins..\..\plugins\org.eclipse.qvtd.xtext.qvtcore\src-gen\org\eclipse\qvtd\xtext\qvtcore\QVTcore.xtextbin
  * by: org.eclipse.ocl.examples.build.xtend.generateGrammar.xtend
  *
  * Do not edit it.

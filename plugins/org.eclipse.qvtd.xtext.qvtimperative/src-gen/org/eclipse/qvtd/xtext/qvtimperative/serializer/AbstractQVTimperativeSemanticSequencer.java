@@ -484,7 +484,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	
 	/**
 	 * Constraint:
-	 *     (referredVariable=[Variable|UnrestrictedName] ownedValue=ExpCS)
+	 *     (referredVariable=[Variable|UnrestrictedName] isPolled?='?='? ownedValue=ExpCS)
 	 */
 	protected void sequence_MappingCallBindingCS(EObject context, MappingCallBindingCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

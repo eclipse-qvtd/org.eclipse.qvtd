@@ -1,7 +1,5 @@
 package org.eclipse.qvtd.build.qvtrtoqvtc.tests;
 
-import java.io.File;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
