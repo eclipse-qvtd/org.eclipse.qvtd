@@ -39,7 +39,7 @@ map [%if (self.name.isDefined()){%][%=self.name%][%if (t.isDefined()){%] in [%=t
 [% operation QVTc!GuardPattern declaration() {%]
 [%  if (not self.variable.isEmpty()) {
         for (v in self.variable.select(v | v.isTypeOf(QVTc!Variable))){%]
-    [%=v.name+":"+v.type.name%][%if(hasMore){%],
+    [%=v.toString()%][%if(hasMore){%],
 [%out.print("        ");}%]
       [%}%]
       |[%
@@ -55,7 +55,7 @@ map [%if (self.name.isDefined()){%][%=self.name%][%if (t.isDefined()){%] in [%=t
     vars.addAll(self.variable);
     vars.addAll(self.realizedVariable);
     for (v in vars.sortBy(v | v.type())) {%]
-[%printIdent(8);%][%if(v.isTypeOf(QVTc!RealizedVariable)){%][%="realize "%][%}%][%=v.name+":"+v.type.name%][%if(hasMore){%],
+[%printIdent(8);%][%=v.toString()%][%if(hasMore){%],
 [%}%]
       [%}%]  |[% 
     for (p in self.predicate){%]
