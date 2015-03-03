@@ -25,7 +25,7 @@ pre {
  */
 
 
-// **** Flat mappings by removing nested mappings ****
+// **** Flatten mappings by removing nested mappings ****
 
 /****d* QVTuToQVTm/delete/NestedMappings
  * CONTEXT
@@ -154,10 +154,9 @@ migrate Predicate
         }
     }
     
-// **** Flat mappings by removing nested mappings ****
+// **** Flat mappings by removing refinement ****
 
-
-/****d* QVTuToQVTm/delete/RefinedMappings
+/****m* QVTuToQVTm/migrate/RefinedMappings
  * CONTEXT
  *  mapping
  * WHEN
@@ -177,8 +176,44 @@ migrate Mapping
     	var refinedLocal = original.closure(m | m.refinement).asSet()
     			.closure(m | m.local).asSet();//.println("refinedLocal ");
     	migrated.migrateFromMappings(refinedLocal);
+    	// Init Variables
+    	for (d in original.domain.includingAll(refined.domain)) {
+			for (a in d.bottomPattern.assignment.select(a | a.equivalent().isUndefined()).flatten()) {
+				a.toString().println("using ");
+				var migBottomPat = migrated.domain
+						.selectOne(d | d.typedModel.name == a.bottomPattern.area.typedModel.name).bottomPattern; 
+				var targetVar = migBottomPat.variable
+						.selectOne(v | v.name == a.targetVariable.name).println();
+				targetVar.ownedInit = emfTool.getECoreUtil().copy(a.value);
+				// Fix the var references
+				targetVar.ownedInit.fixVarReferences(migBottomPat);
+				targetVar.toString().println();
+			}    			
+    	}
+    	for (a in original.bottomPattern.assignment
+    			.includingAll(refined.bottomPattern.assignment).flatten()
+    			.select(a | a.equivalent().isUndefined()).flatten()) {
+			a.toString().println("using ");
+			var targetVar = migrated.bottomPattern.variable
+					.select(v | v.name == a.targetVariable.name).println();
+			targetVar.ownedInit = emfTool.getECoreUtil().copy(avalue);
+			// Fix the var references
+			targetVar.ownedInit.fixVarReferences(migrated.bottomPattern);
+		}
     }
 
+@cascade
+delete VariableAssignment
+	when {
+		var refined; 
+		if (original.bottomPattern.area.isTypeOf(QVTu!Mapping)) {
+			refined = original.bottomPattern.area.closure(m | m.refinement).asSet().bottomPattern;
+		} else {
+			refined = original.bottomPattern.area.rule.closure(m | m.refinement).asSet().domain.flatten()
+					.select(d | d.typedModel == original.bottomPattern.area.typedModel).bottomPattern;
+		}
+		return original.isVariableInit(refined);
+	}
 
 operation QVTm!Mapping migrateFromMappings(mappings : Collection) {
 	for (tm in QVTu!TypedModel.all().select(tm | tm.name.isDefined())) {
@@ -199,17 +234,19 @@ operation QVTm!Mapping migrateFromMappings(mappings : Collection) {
     	}
     	migDomain.migrateFromAreas(tmDomains);
 	}
-	//"MappingPatterns ".println();
 	self.migrateFromAreas(mappings);
 }
 
 	
 operation QVTm!Area migrateFromAreas(areas : Collection) {
+	//self.toString().println("migrateFromAreas ");
 	self.guardPattern.addRefinedVariables(areas.guardPattern);
    	self.bottomPattern.addRefinedVariables(areas.bottomPattern);
     self.bottomPattern.addRefinedRealizedVariables(areas.bottomPattern);
     for (a in areas.bottomPattern.assignment.flatten()) {
 		//a.toString().println();
+		if (a.isTypeOf(QVTu!VariableAssignment) and a.isVariableInit(areas.bottomPattern))
+			break;
 		var aCopy = emfTool.getECoreUtil().copy(a);
 		self.bottomPattern.assignment.add(aCopy);
 		// Fix the var references
@@ -229,7 +266,71 @@ operation QVTm!Area migrateFromAreas(areas : Collection) {
 		// Fix the var references
 		pCopy.fixVarReferences();
 	}
+	
+}
 
+operation QVTu!VariableAssignment isVariableInit(refinedPatterns : Collection) {
+	
+	var initVarCandidate = self.targetVariable;
+	//self.toString().println("isVariableInit ");
+	//refinedPatterns.collect(p | p.toString()).println();
+	//self.bottomPattern.variable.includingAll(refinedPatterns.variable.flatten()).println();
+	// Test if the variable is in a bottom pattern (i.e. local)
+	 if (self.bottomPattern.variable.includingAll(refinedPatterns.variable.flatten())
+	 		.includes(initVarCandidate)) {
+		return true;
+	} else {
+		return false;
+	}
+}
+	
+
+operation areEquivalentAssignments(assg1, assg2) : Boolean {
+	// FIXME If we found an example decide if we need OCL to provide OCL expression comparision
+	return false;
+}
+
+operation QVTm!OCLExpression fixVarReferences(pattern : QVTm!Pattern) {
+	//self.toString().println("Fixing Assignment ");
+    var refVars =  self.findReferencedVariables();
+    //refVars.println("refVars ");
+    // Find variables and fix references
+    for (v in refVars) {
+        //v.println("Fixing ");
+        var searchPatterns = new Sequence();
+        searchPatterns.add(pattern);
+        if (pattern.area.isTypeOf(QVTm!CoreDomain)) {
+        	if (pattern.isTypeOf(QVTm!BottomPattern)) {
+        		// 1. GuardPattern of the Domain
+	            searchPatterns.add(pattern.area.guardPattern);
+	            // 2. BottomPattern of domains with depending typed models
+	            searchPatterns.add(pattern.area.rule.domain
+	            		.select(d | d.typedModel.dependsOn.includes(self.pattern.area.typedModel))
+	            		.collect(d | d.bottomPattern).flatten());
+        	}
+		} else if (pattern.area.isTypeOf(QVTm!Mapping)) {
+			if (pattern.isTypeOf(QVTm!BottomPattern)) {
+				// 1. GuardPattern of the Mapping, and thus GuardPatterns of the domains
+	            searchPatterns.add(pattern.area.guardPattern);
+            }
+            searchPatterns.addAll(pattern.area.domain.collect(d | d.guardPattern).flatten());
+            // 2. BottomPatterns of the Mapping's domains
+            searchPatterns.addAll(pattern.area.domain.collect(d | d.bottomPattern).flatten());
+	        
+		}
+        // MiddleGuard Pattern depends on domain guard patterns
+        //searchPatterns.println("searchPatterns ");
+        var targetVar = v.findReferencesInPatterns(searchPatterns);
+        //targetVar.println("targetVar ");
+        if (targetVar == null) {
+            if (self.pattern.area.isTypeOf(QVTm!Mapping)) {
+                throw "Error! not able to find a local reference for variable " + v + " in predicate " + self.toString() + "in " + pattern.area;  
+            } else if(self.pattern.area.isTypeOf(QVTm!CoreDomain)) {
+                throw "Error! not able to find a local reference for variable " + v + " in predicate " + self.toString() + "in " + self.area;  
+            }  
+        }
+        self.conditionExpression.fixVarReferences(targetVar);
+    }
 }
 
 operation QVTm!Predicate fixVarReferences() {
