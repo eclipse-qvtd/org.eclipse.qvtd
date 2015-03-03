@@ -134,7 +134,7 @@ rule TypedModel
  */
 rule Mapping
     transform m:QVTm!Mapping
-    to mappings : Set {
+    to mappings : Sequence {
     
         guard : m.specification.isEmpty()
         
@@ -145,9 +145,7 @@ rule Mapping
             mappings.add(lmM);
             //m.println("LMMaping: ");
             lmM.~side = "l";
-		    if (not m.context.isDefined()) {
-		        lmM.name = m.name + "_LM";
-		    }
+		    lmM.name = m.name + "_LM";
 		    // We need the patterns to have a place to move variables and predicates from domains
 		    lmM.guardPattern = new QVTp!GuardPattern;
             lmM.guardPattern.predicate.addAll(emfTool.getECoreUtil().copyAll(m.guardPattern.predicate.select(
@@ -173,22 +171,29 @@ rule Mapping
 		    mM.typedModel = tm;
 		    mM.name = tm.name; 
 		    mM.guardPattern = new QVTp!GuardPattern;
-		    mM.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(m.guardPattern.variable));
-		    mM.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(m.bottomPattern.variable));
+		    mM.guardPattern.variable.addAll(m.guardPattern.variable.equivalent().select(v | v.~side == "l"));
+		    mM.guardPattern.variable.addAll(m.bottomPattern.variable.equivalent().select(v | v.~side == "l"));
+		    // FIXME init var references
+		    //for (v in mM.guardPattern.variable) {
+	        // 	v.ownedInit.fixVarReferences(mM.guardPattern);
+	        //}
 		    mM.bottomPattern = new QVTp!BottomPattern;
-		    mM.bottomPattern.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(m.bottomPattern.realizedVariable));
-		    
+		    //mM.bottomPattern.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(m.bottomPattern.realizedVariable));
+		    mM.bottomPattern.realizedVariable.addAll(m.bottomPattern.realizedVariable.equivalent().select(v | v.~side == "l"));
+		    // FIXME init var references
+		    //for (v in mM.bottomPattern.variable) {
+	        // 	v.ownedInit.fixVarReferences(mM.guardPattern);
+	        //}
 		    lmM.domain.add(mM);
 		    //lmM.local.addAll(m.local.equivalent().select(m | m.~side = "l"));
         }
+        // FIXME This should be 1 mapping per domain!
         if (m.domain.exists(d | d.isOutputDomain())) {
             // Create MR mapping
             var mrM = new QVTp!Mapping;
 		    mappings.add(mrM);
-		    mrM.~side = "r";
-            if (not m.context.isDefined()) {
-		        mrM.name = m.name + "_MR";
-		    }
+		    mrM.~side = "r";		// FIXME use domain name
+            mrM.name = m.name + "_MR";
 		    // We need guard patterns first to have a place to move variables and predicates from domains
 		    mrM.guardPattern = new QVTp!GuardPattern;
             mrM.guardPattern.predicate.addAll(emfTool.getECoreUtil().copyAll(m.guardPattern.predicate.select(
@@ -222,13 +227,16 @@ rule Mapping
 		    mM.typedModel = tm;
             mM.name = tm.name; 
 		    mM.guardPattern = new QVTp!GuardPattern;
-		    mM.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(m.guardPattern.variable));
-		    mM.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(m.bottomPattern.variable));
+		    mM.guardPattern.variable.addAll(m.guardPattern.variable.equivalent().select(v | v.~side == "r"));
+		    mM.guardPattern.variable.addAll(m.bottomPattern.variable.equivalent().select(v | v.~side == "r"));
+		    // FIXME init var references
+		    //for (v in mM.guardPattern.variable) {
+	        // 	v.ownedInit.fixVarReferences(mM.guardPattern);
+	        //}
 		    // RealizedVariables to Variables
-		    mM.guardPattern.variable.addAll(m.bottomPattern.realizedVariable.collect(rv | rv.copyToVariable()));
+		    mM.guardPattern.variable.addAll(m.bottomPattern.realizedVariable.equivalent().select(v | v.~side == "r"));
 		    mM.bottomPattern = new QVTp!BottomPattern;
 		    mrM.domain.add(mM);
-		    //mrM.local.addAll(m.local.equivalent().select(m | m.~side = "r"));
         }
     }
 
@@ -277,17 +285,17 @@ rule VariableAssignment
  */    
 rule MMPropertyAssignment
     transform ia : QVTm!PropertyAssignment
-    to assgAndPred : Set {
+    to assgAndPred : Sequence {
         
         guard {
-        	var migMapping;
+        	var inNotRefinedMapping;
         	if (ia.bottomPattern.area.isTypeOf(QVTm!Mapping)) {
-				migMapping = ia.bottomPattern.area.specification.isEmpty();
+				inNotRefinedMapping = ia.bottomPattern.area.specification.isEmpty();
         	} else {
-        		migMapping = ia.bottomPattern.area.`rule`.specification.isEmpty();
+        		inNotRefinedMapping = ia.bottomPattern.area.`rule`.specification.isEmpty();
         	}
-	        	return migMapping and ia.findReferencedVariables().forAll(v | v.oppositePattern().area.isMiddleDomain());
-        	}
+	        	return inNotRefinedMapping and ia.findReferencedVariables().forAll(v | v.oppositePattern().area.isMiddleDomain());
+        }
         
         if (ia.bottomPattern.area.domain.exists(d | d.isInputDomain())) {
 	        var oa = new QVTp!PropertyAssignment;  
@@ -307,16 +315,16 @@ rule MMPropertyAssignment
 
 rule MMVariableAssignment
     transform ia : QVTm!VariableAssignment
-    to assgAndPred : Set {
+    to assgAndPred : Sequence {
         
         guard {
-        	var migMapping;
+        	var inNotRefinedMapping;
         	if (ia.bottomPattern.area.isTypeOf(QVTm!Mapping)) {
-				migMapping = ia.bottomPattern.area.specification.isEmpty();
+				inNotRefinedMapping = ia.bottomPattern.area.specification.isEmpty();
         	} else {
-        		migMapping = ia.bottomPattern.area.`rule`.specification.isEmpty();
+        		inNotRefinedMapping = ia.bottomPattern.area.`rule`.specification.isEmpty();
         	}
-        	return migMapping and ia.findReferencedVariables().forAll(v | v.oppositePattern().area.isMiddleDomain());
+        	return inNotRefinedMapping and ia.findReferencedVariables().forAll(v | v.oppositePattern().area.isMiddleDomain());
         } 
         
         if (ia.bottomPattern.area.domain.exists(d | d.isInputDomain())) {
@@ -334,7 +342,7 @@ rule MMVariableAssignment
     }     
 
 
-rule LMDomain
+rule LDomain
     transform id : QVTm!CoreDomain
     to od : QVTp!CoreDomain {
          
@@ -346,8 +354,14 @@ rule LMDomain
          od.isEnforceable = id.isEnforceable;
          od.typedModel ::= id.typedModel;
          od.guardPattern = new QVTp!GuardPattern;
-         od.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.guardPattern.variable));
-         od.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.bottomPattern.variable));
+         //od.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.guardPattern.variable));
+         //od.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.bottomPattern.variable));
+         od.guardPattern.variable.addAll(id.guardPattern.variable.equivalent());
+         od.guardPattern.variable.addAll(id.bottomPattern.variable.equivalent());
+         // FIXME init var references
+         //for (v in od.guardPattern.variable) {
+         //	v.ownedInit.fixVarReferences(od.guardPattern);
+         //}
          if(id.`rule`.equivalents().isDefined()) {
             id.`rule`.equivalents().flatten().selectOne(m | m.~side = "l").guardPattern.predicate.
                 addAll(emfTool.getECoreUtil().copyAll(id.guardPattern.predicate.includingAll(id.bottomPattern.predicate)));
@@ -356,7 +370,7 @@ rule LMDomain
     }
 
 
-rule MRDomain
+rule RDomain
     transform id : QVTm!CoreDomain
     to od : QVTp!CoreDomain {
          
@@ -368,22 +382,130 @@ rule MRDomain
          od.isEnforceable = id.isEnforceable;
          od.typedModel ::= id.typedModel;
          od.guardPattern = new QVTp!GuardPattern;
-         od.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.guardPattern.variable));
-         
+         //od.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.guardPattern.variable));
+         od.guardPattern.variable.addAll(id.guardPattern.variable.equivalent());
+         // FIXME init var references
+         //for (v in od.guardPattern.variable) {
+         //	v.ownedInit.fixVarReferences(od.guardPattern);
+         //}
          od.bottomPattern = new QVTp!BottomPattern;
-         od.bottomPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.bottomPattern.variable));
-         od.bottomPattern.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(id.bottomPattern.realizedVariable));
+         //od.bottomPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.bottomPattern.variable));
+         //od.bottomPattern.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(id.bottomPattern.realizedVariable));
+         od.bottomPattern.variable.addAll(id.bottomPattern.variable.equivalent());
+         od.bottomPattern.realizedVariable.addAll(id.bottomPattern.realizedVariable.equivalent());
+         // FIXME init var references
+         //for (v in od.bottomPattern.variable) {
+         //	v.ownedInit.fixVarReferences(od.bottomPattern);
+         //}
          // Predicates and assignments are moved to the mapping patterns
-         if(id.`rule`.equivalents().isDefined()) {
-             id.`rule`.equivalents().flatten().selectOne(m | m.~side = "r").guardPattern.predicate.
+         id.`rule`.equivalents().flatten().selectOne(m | m.~side = "r").guardPattern.predicate.
                 addAll(emfTool.getECoreUtil().copyAll(id.guardPattern.predicate.includingAll(id.bottomPattern.predicate)));
                 
-         }
          id.`rule`.equivalent().selectOne(m | m.~side = "r").bottomPattern.assignment.
                 addAll(id.bottomPattern.assignment.equivalent());
     }
 
+// Variables and realized variables in L and R domains
+rule LRVariable
+	transform iv : QVTm!Variable
+	to ov : QVTp!Variable {
+		
+		guard {
+			if (iv.oppositePattern().isDefined() and iv.oppositePattern().area.isTypeOf(QVTm!Mapping)) {
+				return false;	// Middle variables are trasnformed into two
+        	} else {
+        		return iv.oppositePattern().isDefined() and iv.oppositePattern().area.`rule`.specification.isEmpty();
+        	}
+		}
+		ov.name = iv.name;
+		ov.isImplicit = iv.isImplicit();
+		ov.ownedInit = emfTool.getECoreUtil().copy(iv.ownedInit);
+		ov.type = iv.type;
+	}
 
+rule LRRealizedVariable
+	transform iv : QVTm!RealizedVariable
+	to ov : QVTp!RealizedVariable {
+		
+		guard {
+			if (iv.oppositePattern().isDefined() and iv.oppositePattern().area.isTypeOf(QVTm!Mapping)) {
+				return false;	// Middle variables are trasnformed into two
+        	} else {
+        		return iv.oppositePattern().isDefined() and iv.oppositePattern().area.`rule`.specification.isEmpty();
+        	}
+		}
+		ov.name = iv.name;
+		ov.isImplicit = iv.isImplicit();
+		ov.ownedInit = emfTool.getECoreUtil().copy(iv.ownedInit);
+		ov.type = iv.type;
+	}
+
+// Variables and realized variables in M domain
+rule MVariable
+	transform iv : QVTm!Variable
+	to vars : Sequence { // {var, var}
+	
+		guard {
+			if (iv.oppositePattern().isDefined() and  iv.oppositePattern().area.isTypeOf(QVTm!Mapping)) {
+				return iv.oppositePattern().area.specification.isEmpty();
+        	} else {
+        		return false;
+        	}
+		}
+		if (iv.oppositePattern().area.domain.one(d | d.isInputDomain())) {
+			var lVar = new QVTp!Variable;
+			lVar.name = iv.name;
+			lVar.~side = "l";
+			lVar.isImplicit = iv.isImplicit();
+			lVar.ownedInit = emfTool.getECoreUtil().copy(iv.ownedInit);
+			lVar.type = iv.type;
+			vars.add(lVar);
+		}
+		// FIXME This should be 1 mapping per domain!
+        if (iv.oppositePattern().area.domain.exists(d | d.isOutputDomain())) {
+        	var rVar = new QVTp!Variable;
+			rVar.name = iv.name;
+			rVar.~side = "r";		// FIXME use domain name
+			rVar.isImplicit = iv.isImplicit();
+			rVar.ownedInit = emfTool.getECoreUtil().copy(iv.ownedInit);
+			rVar.type = iv.type;
+			vars.add(rVar);
+        }
+	}
+
+rule MRalizedVariable
+	transform iv : QVTm!RealizedVariable
+	to vars : Sequence { // {RealizedVar, var}
+	
+		guard {
+			if (iv.oppositePattern().isDefined() and iv.oppositePattern().area.isTypeOf(QVTm!Mapping)) {
+				return iv.oppositePattern().area.specification.isEmpty();
+        	} else {
+        		return false;
+        	}
+		}
+		if (iv.oppositePattern().area.domain.one(d | d.isInputDomain())) {
+			var lVar = new QVTp!RealizedVariable;
+			lVar.name = iv.name;
+			lVar.~side = "l";
+			lVar.isImplicit = iv.isImplicit();
+			lVar.ownedInit = emfTool.getECoreUtil().copy(iv.ownedInit);
+			lVar.type = iv.type;
+			vars.add(lVar);
+		}
+		// FIXME This should be 1 mapping per domain!
+        if (iv.oppositePattern().area.domain.exists(d | d.isOutputDomain())) {
+			var rVar = new QVTp!Variable;
+			rVar.name = iv.name;
+			rVar.~side = "r";	// FIXME use domain name
+			rVar.isImplicit = iv.isImplicit();
+			rVar.ownedInit = emfTool.getECoreUtil().copy(iv.ownedInit);
+			rVar.type = iv.type;
+			vars.add(rVar);
+		}
+	}
+
+//============================= END ===========================================
 
 operation  QVTp!RealizedVariable copyToVariable() : QVTp!Variable {
     var v = new QVTp!Variable;
@@ -402,38 +524,6 @@ operation  QVTp!RealizedVariable copyToVariable() : QVTp!Variable {
     v.ownedComments = emfTool.getECoreUtil().copyAll(self.ownedComments);
     return v;
 }
-   
-// TODO OCL constriant: Guardless mappings can not have nested mapppings with
-// guard variables? Only Promote mappings with no cars at all
-operation QVT!Mapping promoteMappings() {
-    
-    //self.println("promoteMappings ");
-    //if (self.guardPattern.variable.isEmpty() and self.domain.collect(d | d.guardPattern.variable).flatten().isEmpty()) {
-        for (local in self.local) {
-            local.promoteMappings();
-        }
-        self.context.guardPattern.variable.addAll(self.guardPattern.variable);
-        self.context.guardPattern.predicate.addAll(self.guardPattern.predicate);
-        self.context.bottomPattern.variable.addAll(self.bottomPattern.variable);
-        self.context.bottomPattern.realizedVariable.addAll(self.bottomPattern.realizedVariable);
-        self.context.bottomPattern.predicate.addAll(self.bottomPattern.predicate);
-        self.context.bottomPattern.assignment.addAll(self.bottomPattern.assignment);
-        self.context.bottomPattern.enforcementOperation.addAll(self.bottomPattern.enforcementOperation);
-        
-        // promote domains
-        for (d in self.domain) {
-            var td = self.context.domain.selectOne(od | od.typedModel == d.typedModel);
-            td.guardPattern.variable.addAll(d.guardPattern.variable);
-            td.guardPattern.predicate.addAll(d.guardPattern.predicate);
-            td.bottomPattern.variable.addAll(d.bottomPattern.variable);
-            td.bottomPattern.realizedVariable.addAll(d.bottomPattern.realizedVariable);
-            td.bottomPattern.predicate.addAll(d.bottomPattern.predicate);
-            td.bottomPattern.assignment.addAll(d.bottomPattern.assignment);
-            td.bottomPattern.enforcementOperation.addAll(d.bottomPattern.enforcementOperation);
-        }
-    //}
-}
-
 
 /****o* /org.eclipse.qvtd.build.etl/helpers/QVTHelpers/toOCLExpression
  * NAME

@@ -201,7 +201,6 @@ operation QVT!OCLExpression getArea() : QVT!Area {
  * RESULT
  *  A collection of all the varaibles found.
  */
-@cached 
 operation QVT!Assignment findReferencedVariables() : Collection {
     
     var varRefs : Set();
@@ -225,7 +224,6 @@ operation QVT!Assignment findReferencedVariables() : Collection {
  * RESULT
  *  A collection of all the varaibles found.
  */
-@cached
 operation QVT!Predicate findReferencedVariables() : Collection {
     return self.conditionExpression.findReferencedVariables();
 }
@@ -494,6 +492,48 @@ operation QVT!BottomPattern fixAssignmentVarReferences() {
                 }
             }
         }
+    }
+}
+
+operation QVT!OCLExpression fixVarReferences(pattern : QVT!Pattern) {
+	//self.toString().println("Fixing OCLExpression ");
+    var refVars =  self.findReferencedVariables();
+    //refVars.println("refVars ");
+    // Find variables and fix references
+    for (v in refVars) {
+        //v.println("Fixing ");
+        var searchPatterns = new Sequence();
+        searchPatterns.add(pattern);
+        if (pattern.area.isTypeOf(QVTm!CoreDomain)) {
+        	if (pattern.isTypeOf(QVTm!BottomPattern)) {
+        		// 1. GuardPattern of the Domain
+	            searchPatterns.add(pattern.area.guardPattern);
+	            // 2. BottomPattern of domains with depending typed models
+	            searchPatterns.add(pattern.area.rule.domain
+	            		.select(d | d.typedModel.dependsOn.includes(self.pattern.area.typedModel))
+	            		.collect(d | d.bottomPattern).flatten());
+        	}
+		} else if (pattern.area.isTypeOf(QVTm!Mapping)) {
+			if (pattern.isTypeOf(QVTm!BottomPattern)) {
+				// 1. GuardPattern of the Mapping, and thus GuardPatterns of the domains
+	            searchPatterns.add(pattern.area.guardPattern);
+            }
+            searchPatterns.addAll(pattern.area.domain.collect(d | d.guardPattern).flatten());
+            // 2. BottomPatterns of the Mapping's domains
+            searchPatterns.addAll(pattern.area.domain.collect(d | d.bottomPattern).flatten());
+		}
+        // MiddleGuard Pattern depends on domain guard patterns
+        //searchPatterns.println("searchPatterns ");
+        var targetVar = v.findReferencesInPatterns(searchPatterns);
+        //targetVar.println("targetVar ");
+        if (targetVar == null) {
+            if (self.pattern.area.isTypeOf(QVTm!Mapping)) {
+                throw "Error! not able to find a local reference for variable " + v + " in predicate " + self.toString() + "in " + pattern.area;  
+            } else if(self.pattern.area.isTypeOf(QVTm!CoreDomain)) {
+                throw "Error! not able to find a local reference for variable " + v + " in predicate " + self.toString() + "in " + self.area;  
+            }  
+        }
+        self.fixVarReferences(targetVar);
     }
 }
 
