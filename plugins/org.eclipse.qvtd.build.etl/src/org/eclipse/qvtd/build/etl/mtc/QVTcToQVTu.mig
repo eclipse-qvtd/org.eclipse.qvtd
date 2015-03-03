@@ -172,24 +172,37 @@ migrate Predicate
                 .one(a : QVTc!PropertyCallExp | a.ownedSource.isTypeOf(QVTc!VariableExp)
                         and a.ownedSource.referredVariable.isTypeOf(QVTc!RealizedVariable))
     {
-        //original.toString().println("Migrate predicate ");
-        migrated.slotExpression = original.conditionExpression.ownedArguments
+        original.toString().println("Migrate predicate ");
+        //migrated.slotExpression = original.conditionExpression.ownedArguments
+        //        .selectOne(a : QVTc!PropertyCallExp | a.ownedSource.isTypeOf(QVTc!VariableExp)
+        //                and a.ownedSource.referredVariable.isTypeOf(QVTc!RealizedVariable)).ownedSource.equivalent();
+                        
+		migrated.slotExpression = new QVTu!VariableExp;
+		migrated.slotExpression.referredVariable = original.conditionExpression.ownedArguments
                 .selectOne(a : QVTc!PropertyCallExp | a.ownedSource.isTypeOf(QVTc!VariableExp)
-                        and a.ownedSource.referredVariable.isTypeOf(QVTc!RealizedVariable)).ownedSource.equivalent();
+                        and a.ownedSource.referredVariable.isTypeOf(QVTc!RealizedVariable)).ownedSource.referredVariable.equivalent();
+		               
         migrated.targetProperty = original.conditionExpression.ownedArguments
                 .selectOne(a : QVTc!PropertyCallExp | a.ownedSource.isTypeOf(QVTc!VariableExp)
-                        and a.ownedSource.referredVariable.isTypeOf(QVTc!RealizedVariable)).referredProperty.equivalent();
-        migrated.value =  original.conditionExpression.ownedSource.equivalent();
-        //migrated.toString().println("Migrate assignment ");
+                        and a.ownedSource.referredVariable.isTypeOf(QVTc!RealizedVariable)).referredProperty;
+        migrated.value = new QVTu!PropertyCallExp;
+        migrated.value.type = original.conditionExpression.ownedSource.type;
+        migrated.value.referredProperty = original.conditionExpression.ownedSource.referredProperty;
+        migrated.value.ownedSource = new QVTu!VariableExp;
+        migrated.value.ownedSource.referredVariable = original.conditionExpression.ownedSource.ownedSource.referredVariable.equivalent();
+        migrated.value.ownedSource.type =migrated.value.ownedSource.referredVariable.type; 
+        //original.conditionExpression.ownedSource.equivalent();
+        migrated.toString().println("Migrate assignment ");
     }
 
 // HACK. The migrate Predicate to Assignment is not ignoring the conditionExpression.
-@cascade 
-delete OCLExpression
+@cascade
+delete OperationCallExp
 	when : original.eContainer().isTypeOf(QVTc!Predicate) and 
 		 original.eContainer().conditionExpression.ownedArguments
                 .one(a : QVTc!PropertyCallExp | a.ownedSource.isTypeOf(QVTc!VariableExp)
                         and a.ownedSource.referredVariable.isTypeOf(QVTc!RealizedVariable))
+
 
 /****r* QVTcToQVTu/retype/RealizedVariable
  * ORIGINAL
