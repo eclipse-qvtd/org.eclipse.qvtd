@@ -34,7 +34,7 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	 * 
 	 * @return a rethrown RuntimeException or a RuntimeException-wrapped non-RuntimeException.
 	 */
-	protected @Nullable R badVisit(@NonNull example2.classes.Element visitable, @Nullable P prologue, @NonNull Throwable e) throws RuntimeException {
+	protected @Nullable R badVisit(@NonNull example2.classes.util.Visitable visitable, @Nullable P prologue, @NonNull Throwable e) throws RuntimeException {
 		if (e instanceof Exception) {
 			throw (RuntimeException)e;
 		}
@@ -59,7 +59,7 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	 * 
 	 * @return the epilogue result, which defaults to the delegated result.
 	 */
-	protected @Nullable R postVisit(@NonNull example2.classes.Element visitable, @Nullable P prologue, @Nullable R result) {
+	protected @Nullable R postVisit(@NonNull example2.classes.util.Visitable visitable, @Nullable P prologue, @Nullable R result) {
 		return result;
 	}
 
@@ -68,7 +68,7 @@ public abstract class AbstractWrappingVisitor<R, C, D extends Visitor<R>, P>
 	 * 
 	 * @return the prologue result, which defauilts to null.
 	 */
-	protected @Nullable P preVisit(@NonNull example2.classes.Element visitable) {
+	protected @Nullable P preVisit(@NonNull example2.classes.util.Visitable visitable) {
 		return null;
 	}
 

@@ -72,6 +72,7 @@ public class ClassesSwitch<T> extends Switch<T> {
 			case ClassesPackage.ELEMENT: {
 				Element element = (Element)theEObject;
 				T result = caseElement(element);
+				if (result == null) result = caseVisitable(element);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -79,6 +80,7 @@ public class ClassesSwitch<T> extends Switch<T> {
 				NamedElement namedElement = (NamedElement)theEObject;
 				T result = caseNamedElement(namedElement);
 				if (result == null) result = caseElement(namedElement);
+				if (result == null) result = caseVisitable(namedElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -86,6 +88,7 @@ public class ClassesSwitch<T> extends Switch<T> {
 				Namespace namespace = (Namespace)theEObject;
 				T result = caseNamespace(namespace);
 				if (result == null) result = caseElement(namespace);
+				if (result == null) result = caseVisitable(namespace);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -95,6 +98,7 @@ public class ClassesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseNamedElement(package_);
 				if (result == null) result = caseNamespace(package_);
 				if (result == null) result = caseElement(package_);
+				if (result == null) result = caseVisitable(package_);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -103,6 +107,7 @@ public class ClassesSwitch<T> extends Switch<T> {
 				T result = caseClass(class_);
 				if (result == null) result = caseNamedElement(class_);
 				if (result == null) result = caseElement(class_);
+				if (result == null) result = caseVisitable(class_);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -110,6 +115,13 @@ public class ClassesSwitch<T> extends Switch<T> {
 				Root root = (Root)theEObject;
 				T result = caseRoot(root);
 				if (result == null) result = caseElement(root);
+				if (result == null) result = caseVisitable(root);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ClassesPackage.VISITABLE: {
+				example2.classes.util.Visitable visitable = (example2.classes.util.Visitable)theEObject;
+				T result = caseVisitable(visitable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -204,6 +216,21 @@ public class ClassesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRoot(Root object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Visitable</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Visitable</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVisitable(example2.classes.util.Visitable object) {
 		return null;
 	}
 

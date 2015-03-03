@@ -2,6 +2,8 @@
  */
 package example2.classes.impl;
 
+import static example2.classes.ClassesPackage.CLASS;
+
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -63,6 +65,13 @@ public class ClassesPackageImpl extends EPackageImpl implements ClassesPackage {
 	 * @generated
 	 */
 	private EClass rootEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass visitableEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -229,6 +238,15 @@ public class ClassesPackageImpl extends EPackageImpl implements ClassesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getVisitable() {
+		return visitableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public ClassesFactory getClassesFactory() {
 		return (ClassesFactory)getEFactoryInstance();
 	}
@@ -268,6 +286,8 @@ public class ClassesPackageImpl extends EPackageImpl implements ClassesPackage {
 
 		rootEClass = createEClass(ROOT);
 		createEReference(rootEClass, ROOT__OWNED_PACKAGES);
+
+		visitableEClass = createEClass(VISITABLE);
 	}
 
 	/**
@@ -298,6 +318,7 @@ public class ClassesPackageImpl extends EPackageImpl implements ClassesPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		elementEClass.getESuperTypes().add(this.getVisitable());
 		namedElementEClass.getESuperTypes().add(this.getElement());
 		namespaceEClass.getESuperTypes().add(this.getElement());
 		packageEClass.getESuperTypes().add(this.getNamedElement());
@@ -322,6 +343,8 @@ public class ClassesPackageImpl extends EPackageImpl implements ClassesPackage {
 
 		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRoot_OwnedPackages(), this.getPackage(), null, "ownedPackages", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(visitableEClass, example2.classes.util.Visitable.class, "Visitable", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

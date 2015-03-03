@@ -9,9 +9,28 @@
 
 package cg;
 
+import example1.env.Environment;
+import example1.env.EnvironmentPackage;
+import example1.source.SRoot;
+import example1.source.SourcePackage;
+import example1.source.X;
+import example1.source.Y;
+import example1.source.Y1;
+import example1.source.Y2;
+import example1.source.Z;
+import example1.target.A;
+import example1.target.A1;
+import example1.target.A2;
+import example1.target.A3;
+import example1.target.B;
+import example1.target.C;
+import example1.target.D;
+import example1.target.NamedElement;
+import example1.target.TRoot;
+import example1.target.TargetFactory;
+import example1.target.TargetPackage;
 import java.util.Iterator;
 import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.jdt.annotation.NonNull;
@@ -46,27 +65,6 @@ import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
-
-import example1.env.Environment;
-import example1.env.EnvironmentPackage;
-import example1.source.SRoot;
-import example1.source.SourcePackage;
-import example1.source.X;
-import example1.source.Y;
-import example1.source.Y1;
-import example1.source.Y2;
-import example1.source.Z;
-import example1.target.A;
-import example1.target.A1;
-import example1.target.A2;
-import example1.target.A3;
-import example1.target.B;
-import example1.target.C;
-import example1.target.D;
-import example1.target.NamedElement;
-import example1.target.TRoot;
-import example1.target.TargetFactory;
-import example1.target.TargetPackage;
 
 /**
  * The Source2Target_qvtp_qvtias transformation:

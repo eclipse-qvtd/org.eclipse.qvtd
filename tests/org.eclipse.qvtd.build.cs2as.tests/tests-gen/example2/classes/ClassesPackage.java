@@ -57,6 +57,34 @@ public interface ClassesPackage extends EPackage {
 	ClassesPackage eINSTANCE = example2.classes.impl.ClassesPackageImpl.init();
 
 	/**
+	 * The meta object id for the '{@link example2.classes.util.Visitable <em>Visitable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see example2.classes.util.Visitable
+	 * @see example2.classes.impl.ClassesPackageImpl#getVisitable()
+	 * @generated
+	 */
+	int VISITABLE = 6;
+
+	/**
+	 * The number of structural features of the '<em>Visitable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISITABLE_FEATURE_COUNT = 0;
+
+	/**
+	 * The number of operations of the '<em>Visitable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISITABLE_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link example2.classes.impl.ElementImpl <em>Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -73,7 +101,7 @@ public interface ClassesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ELEMENT_FEATURE_COUNT = 0;
+	int ELEMENT_FEATURE_COUNT = VISITABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Element</em>' class.
@@ -82,7 +110,7 @@ public interface ClassesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ELEMENT_OPERATION_COUNT = 0;
+	int ELEMENT_OPERATION_COUNT = VISITABLE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link example2.classes.impl.NamedElementImpl <em>Named Element</em>}' class.
@@ -404,6 +432,17 @@ public interface ClassesPackage extends EPackage {
 	EReference getRoot_OwnedPackages();
 
 	/**
+	 * Returns the meta object for class '{@link example2.classes.util.Visitable <em>Visitable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Visitable</em>'.
+	 * @see example2.classes.util.Visitable
+	 * @model instanceClass="example2.classes.util.Visitable"
+	 * @generated
+	 */
+	EClass getVisitable();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -525,6 +564,16 @@ public interface ClassesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ROOT__OWNED_PACKAGES = eINSTANCE.getRoot_OwnedPackages();
+
+		/**
+		 * The meta object literal for the '{@link example2.classes.util.Visitable <em>Visitable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see example2.classes.util.Visitable
+		 * @see example2.classes.impl.ClassesPackageImpl#getVisitable()
+		 * @generated
+		 */
+		EClass VISITABLE = eINSTANCE.getVisitable();
 
 	}
 

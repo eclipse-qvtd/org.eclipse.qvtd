@@ -94,6 +94,10 @@ public class ClassesAdapterFactory extends AdapterFactoryImpl {
 				return createRootAdapter();
 			}
 			@Override
+			public Adapter caseVisitable(example2.classes.util.Visitable object) {
+				return createVisitableAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -194,6 +198,20 @@ public class ClassesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRootAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link example2.classes.util.Visitable <em>Visitable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see example2.classes.util.Visitable
+	 * @generated
+	 */
+	public Adapter createVisitableAdapter() {
 		return null;
 	}
 

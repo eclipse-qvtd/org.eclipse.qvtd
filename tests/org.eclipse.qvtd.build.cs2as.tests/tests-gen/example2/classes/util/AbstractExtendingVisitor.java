@@ -40,7 +40,7 @@ public abstract class AbstractExtendingVisitor<R, C>
 
 	@Override
 	public @Nullable R visitElement(@NonNull example2.classes.Element object) {
-		return null;
+		return visiting(object);
 	}
 
 	@Override
