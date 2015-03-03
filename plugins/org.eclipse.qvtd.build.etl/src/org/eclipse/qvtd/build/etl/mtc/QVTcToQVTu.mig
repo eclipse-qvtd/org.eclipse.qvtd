@@ -21,115 +21,50 @@ import "../helpers/OclLibHelper.eol";
  */
 
 
-/****d* QVTcToQVTu/PropertyAssignment
+/****d* QVTcToQVTu/delete/PropertyAssignment
  * ORIGINAL
  *  PropertyAssignment
  * FUNCTION
- *  * Output domain to middle assignments are removed, iif
- *  the value expression is not a variable
- *  * Middle domain to input domain assignments are removed
- * TODO
- *      Check that if the slot expression area is Null, the test is correct
- *      Do we also have to migrate VariableAssignments?!?!?!
+ *  * R to M assignments are removed, iif the value expression is not a
+ *    VariableExp (trace assignment)
+ *  * M to L domain assignments are removed
+ *  The slotExpression type determines the affected domain. For the value, we
+ *  have to check all the variables used in the expression.
  *    
  ******
  */
 @cascade
 delete PropertyAssignment
-	// TODO what happens when the CallEXp is a cal to an operation defined in the transformation
-	// context?
-    when : (original.value.getArea() <> null) 
-        and ( (original.value.getArea().isOutputDomain()
-              and not original.value.isTypeOf(QVTc!VariableExp)
-              and original.slotExpression.getArea().isMiddleDomain())
-            or
-              (original.value.getArea().isMiddleDomain()
-              and original.slotExpression.getArea().isInputDomain())
+	when : (original.slotExpression.isFromInputDomain()      // M to L
+            and not original.value.isKindOf(QVTc!PrimitiveLiteralExp)
+            and original.value.findReferencedVariables().exists(v | v.oppositePattern().area.isMiddleDomain())
+            )
+        or (original.slotExpression.isFromMiddleDomain()      // R to M
+            and not original.value.isTypeOf(QVTc!VariableExp)
+            and original.value.findReferencedVariables().forAll(v | v.oppositePattern().area.isOutputDomain())
             )
 
-
-/****d* QVTcToQVTu/Predicate
- * ORIGINAL
- *  Predicate
- * FUNCTION 
- *  Delete output domain predicates of realized variables
- * SEE ALSO
- *    
- ******
- */
-@cascade
-delete Predicate
-    when : original.pattern.isTypeOf(QVTc!BottomPattern)
-    and original.conditionExpression.findReferencedVariables().forAll(v | v.oppositePattern().area.isOutputDomain())
-
-    
-/****r* QVTcToQVTu/PropertyAssignment
+/****r* QVTcToQVTu/retype/PropertyAssignment
  * ORIGINAL
  *  PropertyAssignment
  * EVOLVED
  *  Predicate 
  * FUNCTION
- *  Property assignments from middle to middle are retyped to predicates 
+ *  Property assignments from L/Primitive to L are retyped to predicates
  *    
  ******
  */
 retype PropertyAssignment to Predicate
-    when {
-        if (original.bottomPattern.area.isInputDomain()) {
-            return true;
-        } else {
-            if (original.bottomPattern.area.isMiddleDomain()) {
-                return original.bottomPattern.area.domain.size() > 0 and
-                       original.bottomPattern.area.domain.forAll(d | d.isOutputDomain()) and 
-                       original.findReferencedVariables().forAll(v | v.oppositePattern().area.isMiddleDomain());
-            } else {
-                return false;
-            }
-        }
-    }  
+    when : original.slotExpression.isFromInputDomain()
+            and (original.value.isKindOf(QVTc!PrimitiveLiteralExp)
+            or original.value.findReferencedVariables().forAll(v | v.oppositePattern().area.isInputDomain()))
+        
 
-
-/****r* QVTcToQVTu/RealizedVariable
- * ORIGINAL
- *  RealizedVariable
- * EVOLVED
- *  Variable
- * FUNCTION
- *  Realized variables in the input domain are retyped to variables
- *    
- ******
- */
-retype RealizedVariable to Variable
-    when {
-        if (original.oppositePattern().area.isInputDomain()) {
-            return true;
-        } else {
-            if (original.oppositePattern().area.isMiddleDomain()) {
-                return original.oppositePattern().area.domain.size() > 0 and
-                       original.oppositePattern().area.domain.forAll(d | d.isOutputDomain());
-            } else {
-                return false;
-            }
-        }
-    }  
-
-
-/****m* QVTcToQVTu/CoreModel
- * ORIGINAL
- *  CoreModel
- * FUNCTION
- *  Fix the name and the external URI of the migrated model
- *    
- ******
- */  
-migrate CoreModel
-    {
-        migrated.externalURI = original.externalURI.replace(".qvtc", ".qvtu.qvtc");
-    }
-    
-/****m* QVTcToQVTu/PropertyAssignment
+/****m* QVTcToQVTu/migrate/PropertyAssignment
  * ORIGINAL
  *  PropertyAssignment
+ * MIGRATE_TO
+ *  Predicate 
  * FUNCTION
  *  For PropertyAssignment that have been retyped to Predicates, we need to 
  *  define the OCL Expression that replaces the assignment. CST wise, this is
@@ -138,19 +73,11 @@ migrate CoreModel
  ******
  */  
 migrate PropertyAssignment
-    when {
-        if (original.bottomPattern.area.isInputDomain()) {
-            return true;
-        } else {
-            if (original.bottomPattern.area.isMiddleDomain()) {
-                return original.bottomPattern.area.domain.size() > 0 and
-                       original.bottomPattern.area.domain.forAll(d | d.isOutputDomain()) and 
-                       original.findReferencedVariables().forAll(v | v.oppositePattern().area.isMiddleDomain());
-            } else {
-                return false;
-            }
-        } }{
-    
+   when : original.slotExpression.isFromInputDomain()
+        and (original.value.isKindOf(QVTc!PrimitiveLiteralExp)
+            or original.value.findReferencedVariables().forAll(v | v.oppositePattern().area.isInputDomain()))
+    {
+        //original.toString().println("migrate PropertyAssignment ");
         var exp = new QVTc!OperationCallExp;
         // It's an '=' operation. TODO, how to get the correct type?
         //exp.referredOperation = getOperationByName("=", oclStdLib!PrimitiveType.all().selectOne(t | t.name == "Boolean"));
@@ -167,15 +94,15 @@ migrate PropertyAssignment
         exp.ownedSource.ownedSource = original.slotExpression.equivalent();
         exp.ownedSource.type = original.targetProperty.equivalent().type;
         // The argument is the value
-        var args : Set;
-        args.add(original.value.equivalent());
-        exp.ownedArguments = args;
-        migrated.conditionExpression = exp;    
+        exp.ownedArguments.add(original.value.equivalent());
+        migrated.conditionExpression = exp; 
     }
 
 
-/****m* QVTcToQVTu/PropertyAssignment
+/****m* QVTcToQVTu/migrate/PropertyAssignment_NoDefaults
  * ORIGINAL
+ *  PropertyAssignment
+ * MIGRATE_TO
  *  PropertyAssignment
  * FUNCTION
  *  Output domain PropertyAssignments should not be default if the operation
@@ -191,7 +118,108 @@ migrate PropertyAssignment
     migrated.isDefault = false;
 }
 
-/****m* QVTcToQVTu/Transformation
+
+/****d* QVTcToQVTu/delete/Predicate
+ * ORIGINAL
+ *  Predicate
+ * FUNCTION 
+ *  Delete output domain predicates of realized variables
+ * SEE ALSO
+ *    
+ ******
+ */
+@cascade
+delete Predicate
+    when : original.pattern.isTypeOf(QVTc!BottomPattern)
+    and original.conditionExpression.findReferencedVariables().forAll(v | v.oppositePattern().area.isOutputDomain())
+
+
+
+/****r* QVTcToQVTu/retype/Predicate_RtoM
+ * ORIGINAL
+ *  Predicate
+ * EVOLVED
+ *  PropertyAssignment 
+ * FUNCTION
+ *  Predicates on the middle with a right side with references to realized
+ *  varaibles in the output domain are transformed to assignments in the 
+ *  opposite direction, e.g.
+ *      a:M.prop = b:R.att  becomes  b:R.att := a:M.prop
+ *  TODO this is more complex as the right side exression becomes more complex 
+ *    
+ ******
+ */
+retype Predicate to PropertyAssignment  
+    when : original.conditionExpression.ownedArguments
+                .exists(a : QVTc!PropertyCallExp | a.ownedSource.isTypeOf(QVTc!VariableExp)
+                        and a.ownedSource.referredVariable.isTypeOf(QVTc!RealizedVariable))
+
+/****m* QVTcToQVTu/migrate/Predicate
+ * ORIGINAL
+ *  Predicate
+ * MIGRATE_TO
+ *  PropertyAssignment
+ * FUNCTION
+ *  For Predicate that have been retyped to PropertyAssignment (Predicate_RtoM),
+ *  we need to define the OCL Expression that flips the sides and creates the
+ *  assignment
+ *    
+ ******
+ */  
+migrate Predicate
+	ignoring conditionExpression
+    when : original.conditionExpression.ownedArguments
+                .one(a : QVTc!PropertyCallExp | a.ownedSource.isTypeOf(QVTc!VariableExp)
+                        and a.ownedSource.referredVariable.isTypeOf(QVTc!RealizedVariable))
+    {
+        //original.toString().println("Migrate predicate ");
+        migrated.slotExpression = original.conditionExpression.ownedArguments
+                .selectOne(a : QVTc!PropertyCallExp | a.ownedSource.isTypeOf(QVTc!VariableExp)
+                        and a.ownedSource.referredVariable.isTypeOf(QVTc!RealizedVariable)).ownedSource.equivalent();
+        migrated.targetProperty = original.conditionExpression.ownedArguments
+                .selectOne(a : QVTc!PropertyCallExp | a.ownedSource.isTypeOf(QVTc!VariableExp)
+                        and a.ownedSource.referredVariable.isTypeOf(QVTc!RealizedVariable)).referredProperty.equivalent();
+        migrated.value =  original.conditionExpression.ownedSource.equivalent();
+        //migrated.toString().println("Migrate assignment ");
+    }
+
+// HACK. The migrate Predicate to Assignment is not ignoring the conditionExpression.
+@cascade 
+delete OCLExpression
+	when : original.eContainer().isTypeOf(QVTc!Predicate) and 
+		 original.eContainer().conditionExpression.ownedArguments
+                .one(a : QVTc!PropertyCallExp | a.ownedSource.isTypeOf(QVTc!VariableExp)
+                        and a.ownedSource.referredVariable.isTypeOf(QVTc!RealizedVariable))
+
+/****r* QVTcToQVTu/retype/RealizedVariable
+ * ORIGINAL
+ *  RealizedVariable
+ * EVOLVED
+ *  Variable
+ * FUNCTION
+ *  Realized variables in the input domain are retyped to variables
+ *    
+ ******
+ */
+retype RealizedVariable to Variable
+    when : original.oppositePattern().area.isInputDomain()
+
+
+/****m* QVTcToQVTu/migrate/CoreModel
+ * ORIGINAL
+ *  CoreModel
+ * FUNCTION
+ *  Fix the name and the external URI of the migrated model
+ *    
+ ******
+ */  
+migrate CoreModel
+    {
+        migrated.externalURI = original.externalURI.replace(".qvtc", ".qvtu.qvtc");
+    }
+    
+
+/****m* QVTcToQVTu/migrate/Transformation
  * ORIGINAL
  *  Transformation
  * FUNCTION
@@ -206,7 +234,7 @@ migrate Transformation {
     migrated.ownedComments.add(comment);
 }
 
-/****m* QVTcToQVTu/CoreDomain
+/****m* QVTcToQVTu/migrate/CoreDomain
  * ORIGINAL
  *  CoreDomain
  * WHEN
@@ -224,7 +252,7 @@ migrate CoreDomain
 	    migrated.isCheckable = true;
     }
 
-/****m* QVTcToQVTu/CoreDomain
+/****m* QVTcToQVTu/migrate/CoreDomain
  * ORIGINAL
  *  CoreDomain
  * WHEN
@@ -244,7 +272,7 @@ migrate CoreDomain
 	    }
     }
 
-/****m* QVTcToQVTu/BottomPattern
+/****m* QVTcToQVTu/migrate/BottomPattern
  * ORIGINAL
  *  BottomPattern
  * WHEN
@@ -258,26 +286,17 @@ migrate CoreDomain
  ******
  */   
 migrate BottomPattern 
-    when {
-        if (original.area.isInputDomain()) {
-            return true;
-        } else {
-            if (original.area.isMiddleDomain()) {
-                return not original.area.domain.isEmpty() and
-                       original.area.domain.forAll(d | d.isOutputDomain());
-            } else {
-                return false;
-            }
-        }
-    } {
+    when :
+        not original.assignment.equivalent().select(e | e.isTypeOf(QVTu!Predicate)).isEmpty() or
+        not original.area.guardPattern.predicate.equivalent().select(e | e.isTypeOf(QVTu!PropertyAssignment)).isEmpty()
+    {
 	    migrated.variable.addAll(original.realizedVariable.equivalent());
-	    for (a in original.assignment) {
-	        if (original.area.isInputDomain() or 
-	            a.findReferencedVariables().forAll(v | v.oppositePattern().area.isMiddleDomain())) {
-	               migrated.predicate.add(a.equivalent());
-	            }
-	    }
-}
+        //original.area.println();
+        migrated.predicate.addAll(original.assignment.equivalent().select(e | e.isTypeOf(QVTu!Predicate)));
+        //original.area.guardPattern.predicate.println("gp pred ");
+        //original.area.guardPattern.predicate.equivalent().select(e | e.isTypeOf(QVTu!PropertyAssignment)).println("bp a to p ");
+	    migrated.assignment.addAll(original.area.guardPattern.predicate.equivalent().select(e | e.isTypeOf(QVTu!PropertyAssignment)));
+    }
 
 @cached
 operation getEqualsOperation() : Any {
