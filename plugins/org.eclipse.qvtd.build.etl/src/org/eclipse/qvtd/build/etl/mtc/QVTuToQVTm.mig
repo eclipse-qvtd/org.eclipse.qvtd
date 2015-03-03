@@ -24,412 +24,324 @@ pre {
  ******
  */
 
-/****d* QVTuToQVTm/Mapping
+
+// **** Flat mappings by removing nested mappings ****
+
+/****d* QVTuToQVTm/delete/NestedMappings
  * CONTEXT
  *  Mapping
  * WHEN
  *  The mapping is nested
  * FUNCTION
  *  Delete all nested mappings, i.e., flatten the mappings
- * TODO
- *  Revise this if flock os fixed and correctly cascade deletes the mapping
  ******
  */
-@cascade 
 delete Mapping
     when : original.context.isDefined()
 
-/****d* QVTuToQVTm/CorePattern
- * CONTEXT
- *  CorePattern
- * WHEN
- *  The Pattern is in a nested mapping
- * FUNCTION
- *  Delete patterns in nested mappings
- ******
- */
-@cascade 
-delete CorePattern
-    when : original.area.isTypeOf(QVT!Mapping) and original.area.context.isDefined()
-    
-/****d* QVTuToQVTm/Assignment
- * CONTEXT
- *  Assignment
- * WHEN
- *  The assignemnt's bottom pattern is in a nested mapping
- * FUNCTION
- *  Delete assignments in nested mappings' patterns
- ******
- */
-@cascade
-delete Assignment
-    when : original.bottomPattern.area.isTypeOf(QVT!Mapping) and original.bottomPattern.area.context.isDefined()
-
-/****d* QVTuToQVTm/Predicate
- * CONTEXT
- *  Predicate
- * WHEN
- *  The assignemnt's pattern is in a nested mapping
- * FUNCTION
- *  Delete assignments in nested mappings' doamins' patterns
- ******
- */
-@cascade
-delete Predicate
-    when : original.pattern.area.isTypeOf(QVT!Mapping) and original.pattern.area.context.isDefined()
-
-/****d* QVTuToQVTm/CoreDomain
+/****d* QVTuToQVTm/delete/NestedMappingCoreDomains
  * CONTEXT
  *  CoreDomain
  * WHEN
- *  The CoreDomain is in a nested mapping
+ *  The CoreDomain's mapping is nested
  * FUNCTION
- *  Delete domains in nested mappings
+ *  Delete all CoreDomains in nested mappings.
  ******
  */
-@cascade 
 delete CoreDomain
-    when : original.rule.context.isDefined()    
+    when : original.rule.context.isDefined()        // Nested
 
-/****d* QVTuToQVTm/Mapping
+/****d* QVTuToQVTm/delete/NestedMappingCorePattern
  * CONTEXT
- *  Mapping
+ *  CorePattern
  * WHEN
- *  The mapping is nested
+ *  The Pattern's area is a nested mapping or a domain in a nested mapping
  * FUNCTION
- *  Delete all nested mappings, i.e., flatten the mappings
+ *  Delete patterns in nested mappings regardles
  ******
  */
-@cascade 
 delete CorePattern
-    when : original.area.isTypeOf(QVT!CoreDomain) and original.area.rule.context.isDefined()
+    when : original.area.isNested()
 
-/****d* QVTuToQVTm/Assignment
+/****m* QVTuToQVTm/migrate/NestedMappingDomainCorePatternVariable
+ * CONTEXT
+ *  Variable
+ * WHEN
+ *  The variables's pattern belongs to a domain, the domain's mapping is nested
+ *  the top mapping has a domain with the same TypeModel.
+ * FUNCTION
+ *  Move the variable to the domain in the top containment mapping with the same
+ *  typed model. 
+ ******
+ */
+migrate Variable
+    when : original.oppositePattern().isDefined()
+            and original.oppositePattern().area.isDefined()
+            and original.oppositePattern().area.isNested()
+    {
+        var migArea;
+        if (original.oppositePattern().area.isTypeOf(QVTu!Mapping)) {
+            migArea = original.oppositePattern().area
+                .closure(m | m.context)
+                .selectOne(m | not m.context.isDefined()).equivalent(); 
+        } else {
+            migArea = original.oppositePattern().area.rule
+                .closure(m | m.context)
+                .selectOne(m | not m.context.isDefined()).domain
+                .selectOne(d| d.typedModel == original.oppositePattern().area.typedModel).equivalent();
+        }
+        if (original.oppositePattern().isTypeOf(QVTu!GuardPattern)) {
+            migArea.guardPattern.variable.add(migrated);
+        } else {
+            migArea.bottomPattern.variable.add(migrated);
+        }
+    }
+
+
+/****d* QVTuToQVTm/migrate/NestedMappingCorePatternAssignments
  * CONTEXT
  *  Assignment
  * WHEN
- *  The assignemnt's bottom pattern is in domain that is in a nested mapping
+ *  The assignment's bottom pattern is in a nested mapping
  * FUNCTION
- *  Delete assignments in nested mappings' doamins' patterns
+ *  Move the assignment to the top containment mapping.
  ******
  */
-@cascade
-delete Assignment
-    when : original.bottomPattern.area.isTypeOf(QVT!CoreDomain) and original.bottomPattern.area.rule.context.isDefined()
-
-/****d* QVTuToQVTm/Predicate
- * CONTEXT
- *  Predicate
- * WHEN
- *  The predicate's pattern is in a domain that is in a nested mapping
- * FUNCTION
- *  Delete assignments in nested mappings' doamins' patterns
- ******
- */
-@cascade
-delete Predicate
-    when : original.pattern.area.isTypeOf(QVT!CoreDomain) and original.pattern.area.rule.context.isDefined()
-
-/****d* QVTuToQVTm/Variable
- * CONTEXT
- *  Predicate
- * WHEN
- *  The predicate's pattern is in a domain that is in a nested mapping
- * FUNCTION
- *  Delete assignments in nested mappings' doamins' patterns
- ******
- */
-delete Variable
-    when {
-        if (original.oppositePattern().isDefined()) {
-            return (original.oppositePattern().area.isTypeOf(QVT!CoreDomain) and original.oppositePattern().area.rule.context.isDefined())
-                or (original.oppositePattern().area.isTypeOf(QVT!Mapping) and original.oppositePattern().area.context.isDefined());
+migrate Assignment
+    when : original.bottomPattern.area.isNested()
+    {   
+        var migArea;
+        if (original.bottomPattern.area.isTypeOf(QVTu!Mapping)) {
+            migArea = original.bottomPattern.area
+                .closure(m | m.context)
+                .selectOne(m | not m.context.isDefined()).equivalent(); 
         } else {
-            // Is it a var in an operation/query?
-            return false;
+            migArea = original.bottomPattern.area.rule
+                .closure(m | m.context)
+                .selectOne(m | not m.context.isDefined()).domain
+                .selectOne(d| d.typedModel == original.bottomPattern.area.typedModel).equivalent();
         }
+        migrated.bottomPattern = migArea.bottomPattern;
     }
 
-/****m* QVTuToQVTm/CoreModel
- * ORIGINAL
- *  CoreModel
- * FUNCTION
- *  Fix the name and the external URI of the migrated model
- *    
- ******
- */  
-migrate CoreModel
-    {
-        migrated.externalURI = original.externalURI.replace(".qvtu.qvtc", ".qvtm.qvtc");
-    }
-
-/****m* QVTuToQVTm/Mapping
- * ORIGINAL
- *  Mapping
- * IGNORING
- *  nested (local) mappings as we are flattening
+/****m* QVTuToQVTm/migrate/NestedMappingCorePatternPredicate
+ * CONTEXT
+ *  Predicate
  * WHEN
- *  The mapping is not nested and doesn't refine other mappings
+ *  The predicate's pattern is in a nested mapping
  * FUNCTION
- *  Migrate all content from the original mapping's nested mappings to the
- *  migrated one. 
- *    
+ *  Move predicates in nested mappings to the top containment mapping
  ******
- */ 
-migrate Mapping
-    ignoring local
-    when : not original.context.isDefined()
-            and original.refinement.isEmpty()
+ */
+migrate Predicate
+    when : original.pattern.area.isNested()
     {
-        //original.name.println("ContextMapping ");
-        original.flattenNestedMappings(migrated);
-        migrated.fixReferences();
+        var migArea;
+        if (original.pattern.area.isTypeOf(QVTu!Mapping)) {
+            migArea = original.pattern.area
+                .closure(m | m.context)
+                .selectOne(m | not m.context.isDefined()).equivalent(); 
+        } else {
+            migArea = original.pattern.area.rule
+                .closure(m | m.context)
+                .selectOne(m | not m.context.isDefined()).domain
+                .selectOne(d| d.typedModel == original.pattern.area.typedModel).equivalent();
+        }
+        if (original.pattern.isTypeOf(QVTu!GuardPattern)) {
+            migArea.guardPattern.variable.add(migrated);
+        } else {
+            migArea.bottomPattern.variable.add(migrated);
+        }
     }
+    
+// **** Flat mappings by removing nested mappings ****
 
-/****m* QVTuToQVTm/Mapping
- * ORIGINAL
- *  Mapping
- * IGNORING
- *  nested (local) mappings as we are flattening
+
+/****d* QVTuToQVTm/delete/RefinedMappings
+ * CONTEXT
+ *  mapping
  * WHEN
- *  The mapping is not nested and refines other mappings
+ *  The mapping refines other mapping(s)
  * FUNCTION
- *  Migrate all content from the original mapping's nested mappings to the
- *  migrated one. Copy all domains and patterns from the refined mapping(s)
- *  and then merge all the resulting domains.
- *    
+ *  Copy the refined mappings features to the refining mapping.
  ******
- */ 
+ */
 migrate Mapping
-    ignoring local
-    when : not original.context.isDefined() and not original.refinement.isEmpty()  
+    when : not original.refinement.isEmpty()
     {
-        //original.println("RefinnedMapping ");
-        original.flattenNestedMappings(migrated);
-        for (refined in original.refinement) {
-            //refined.println("refined ");
-            // Copy the contents of the local mappings of the refined mapping
-            for (m in refined.collect(r | r.local).flatten()) {
-                m.flattenNestedMappings(migrated);
+    	//original.println("Refining ");
+    	// Get the set of refined mappings
+    	var refined = original.closure(m | m.refinement).asSet();//.println("refined ");
+    	migrated.migrateFromMappings(refined);
+    	// Promote local mappings from refined mappings
+    	var refinedLocal = original.closure(m | m.refinement).asSet()
+    			.closure(m | m.local).asSet();//.println("refinedLocal ");
+    	migrated.migrateFromMappings(refinedLocal);
+    }
+
+
+operation QVTm!Mapping migrateFromMappings(mappings : Collection) {
+	for (tm in QVTu!TypedModel.all().select(tm | tm.name.isDefined())) {
+		//tm.println("tm ");
+		var tmDomains = mappings.domain.flatten().select(d | d.typedModel == tm);
+		//tmDomains.println();
+		var migDomain = self.domain.selectOne(ed | ed.typedModel == tm.equivalent());
+    	if (migDomain.isUndefined()) {
+  		    //tm.println("Create ");
+            migDomain = new QVTm!CoreDomain;
+            migDomain.guardPattern = new QVTm!GuardPattern;
+            migDomain.bottomPattern = new QVTm!BottomPattern;
+            migDomain.isCheckable = tmDomains.exists(d | d.isCheckable);
+            migDomain.isEnforceable = tmDomains.exists(d | d.isEnforceable);
+            migDomain.typedModel = tm.equivalent();
+            migDomain.name = tm.name;
+            self.domain.add(migDomain);
+    	}
+    	migDomain.migrateFromAreas(tmDomains);
+	}
+	//"MappingPatterns ".println();
+	self.migrateFromAreas(mappings);
+}
+
+	
+operation QVTm!Area migrateFromAreas(areas : Collection) {
+	self.guardPattern.addRefinedVariables(areas.guardPattern);
+   	self.bottomPattern.addRefinedVariables(areas.bottomPattern);
+    self.bottomPattern.addRefinedRealizedVariables(areas.bottomPattern);
+    for (a in areas.bottomPattern.assignment.flatten()) {
+		//a.toString().println();
+		var aCopy = emfTool.getECoreUtil().copy(a);
+		self.bottomPattern.assignment.add(aCopy);
+		// Fix the var references
+		aCopy.fixVarReferences();
+	}
+	for (p in areas.bottomPattern.predicate.flatten()) {
+		//p.toString().println();
+		var pCopy = emfTool.getECoreUtil().copy(p);
+		self.bottomPattern.predicate.add(pCopy);
+		// Fix the var references
+		pCopy.fixVarReferences();
+	}
+	for (p in areas.guardPattern.predicate.flatten()) {
+		//p.toString().println();
+		var pCopy = emfTool.getECoreUtil().copy(p);
+		self.guardPattern.predicate.add(pCopy);
+		// Fix the var references
+		pCopy.fixVarReferences();
+	}
+
+}
+
+operation QVTm!Predicate fixVarReferences() {
+    //self.toString().println("Fixing Assignment ");
+    var refVars =  self.findReferencedVariables();
+    //refVars.println("refVars ");
+    // Find variables and fix references
+    for (v in refVars) {
+        //v.println("Fixing ");
+        var searchPatterns = new Sequence();
+        searchPatterns.add(self.pattern);
+        if (self.pattern.area.isTypeOf(QVTm!CoreDomain)) {
+        	if (self.pattern.isTypeOf(QVTm!BottomPattern)) {
+        		// 1. GuardPattern of the Domain
+	            searchPatterns.add(self.pattern.area.guardPattern);
+	            // 2. BottomPattern of domains with depending typed models
+	            searchPatterns.add(self.pattern.area.rule.domain
+	            		.select(d | d.typedModel.dependsOn.includes(self.pattern.area.typedModel))
+	            		.collect(d | d.bottomPattern).flatten());
+        	}
+		} else if (self.pattern.area.isTypeOf(QVTm!Mapping)) {
+			if (self.pattern.isTypeOf(QVTm!BottomPattern)) {
+				// 1. GuardPattern of the Mapping, and thus GuardPatterns of the domains
+	            searchPatterns.add(self.pattern.area.guardPattern);
             }
-            
-            // For each domain in the refined mapping, if it doesn't exist, copy it. If it does exist, merge it.
-            // Domains added first so nested mappings can find them
-            for (d in refined.collect(r | r.domain).flatten()) {
-                if (not migrated.domain.exists(ed | ed.name == d.name)) {
-                    //d.println("Copy ");
-                    migrated.domain.add(emfTool.getECoreUtil().copy(d.equivalent()));
-                    
-                } else {
-                    //d.println("Merge ");
-                    var local = migrated.domain.selectOne(ed | ed.name == d.name);
-                    local.guardPattern.mergeGuardPatterns(d.equivalent().guardPattern);
-                    local.bottomPattern.mergeBottomPatterns(d.equivalent().bottomPattern);
-                }
+            searchPatterns.addAll(self.pattern.area.domain.collect(d | d.guardPattern).flatten());
+            // 2. BottomPatterns of the Mapping's domains
+            searchPatterns.addAll(self.pattern.area.domain.collect(d | d.bottomPattern).flatten());
+	        
+		}
+        // MiddleGuard Pattern depends on domain guard patterns
+        //searchPatterns.println("searchPatterns ");
+        var targetVar = v.findReferencesInPatterns(searchPatterns);
+        //targetVar.println("targetVar ");
+        if (targetVar == null) {
+            if (self.pattern.area.isTypeOf(QVTm!Mapping)) {
+                throw "Error! not able to find a local reference for variable " + v + " in predicate " + self.toString() + "in " + self.area;  
+            } else if(self.pattern.area.isTypeOf(QVTm!CoreDomain)) {
+                throw "Error! not able to find a local reference for variable " + v + " in predicate " + self.toString() + "in " + self.area;  
+            }  
+        }
+        self.conditionExpression.fixVarReferences(targetVar);
+    }
+}
+
+operation QVTm!Assignment fixVarReferences() {
+    //self.toString().println("Fixing Assignment ");
+    var refVars =  self.findReferencedVariables();
+    //refVars.println("refVars ");
+    // Find variables and fix references
+    for (v in refVars) {
+        //v.println("Fixing ");
+        var searchPatterns = new Sequence();
+        searchPatterns.add(self.bottomPattern);
+        if (self.bottomPattern.area.isTypeOf(QVTm!CoreDomain)) {
+            // 1. GuardPattern of the Domain
+            searchPatterns.add(self.bottomPattern.area.guardPattern);
+            // 2. BottomPattern of domains with depending typed models
+            searchPatterns.add(self.bottomPattern.area.rule.domain
+            		.select(d | d.typedModel.dependsOn.includes(self.bottomPattern.area.typedModel))
+            		.collect(d | d.bottomPattern).flatten());
+		} else if (self.bottomPattern.area.isTypeOf(QVTm!Mapping)) {
+			// 1. GuardPattern of the Mapping, and thus GuardPatterns of the domains
+            searchPatterns.add(self.bottomPattern.area.guardPattern);
+            searchPatterns.addAll(self.bottomPattern.area.domain.collect(d | d.guardPattern).flatten());
+            // 2. BottomPatterns of the Mapping's domains
+            searchPatterns.addAll(self.bottomPattern.area.domain.collect(d | d.bottomPattern).flatten());
+		}
+        // MiddleGuard Pattern depends on domain guard patterns
+        //searchPatterns.println("searchPatterns ");
+        var targetVar = v.findReferencesInPatterns(searchPatterns);
+        //targetVar.println("targetVar ");
+        if (targetVar == null) {
+            if (self.bottomPattern.area.isTypeOf(QVT!Mapping)) {
+                throw "Error! not able to find a local reference for variable " + v + " in assignemnt " + self.toString() + "in BottomPattern of Mapping " + self.area;  
+            } else if(self.bottomPattern.area.isTypeOf(QVT!CoreDomain)) {
+                throw "Error! not able to find a local reference for variable " + v + " in assignment " + self.toString() + "in BottomPattern of Domain " + self.area;  
+            }  
+        }
+        self.value.fixVarReferences(targetVar);
+        if (self.isTypeOf(QVTm!PropertyAssignment)) {
+            self.slotExpression.fixVarReferences(targetVar);
+        } else if (self.isTypeOf(QVTm!VariableAssignment)) {
+            if (self.targetVariable.name = targetVar.name) {
+                self.targetVariable = targetVar;
             }
-            // Merge middle patterns
-            migrated.guardPattern.mergeGuardPatterns(refined.equivalent().guardPattern);
-            migrated.bottomPattern.mergeBottomPatterns(refined.equivalent().bottomPattern);
         }
-        migrated.fixReferences();
-    }
-
-/****o* QVTuToQVTm/fixReferences
- * NAME
- *  fixReferences -- Fix trailing references in the output model to variables in
- *  the input model that result from using emf copy utilities.   
- * CONTEXT
- *  QVT!Mapping
- */
-operation QVT!Mapping fixReferences() {
-    self.guardPattern.fixPredicateVarReferences();
-    self.bottomPattern.fixPredicateVarReferences();
-    self.bottomPattern.fixOperationCallReferences();
-    self.bottomPattern.fixAssignmentVarReferences();
-    for (d in self.domain) {
-        d.guardPattern.fixPredicateVarReferences();
-        d.bottomPattern.fixPredicateVarReferences();
-        d.bottomPattern.fixOperationCallReferences();
-        d.bottomPattern.fixAssignmentVarReferences();
     }
 }
 
 
-/****o* QVTuToQVTm/mergeGuardPatterns
- * NAME
- *  mergeGuardPatterns -- Merge this patterns with the other one. This operation
- *  is to be used when flattening a mapping to compose domains and nested mappings.
- * CONTEXT
- *  QVT!Mapping
- * PARAMETERS
- *  other  the other pattern
- */
-operation QVT!GuardPattern mergeGuardPatterns(other : QVT!GuardPattern) {
-
-    // Variables. Search for variables in the refined mapping. Copy all variables that have
-    // different names as the local variables. If there is any with the same name, re-type it
-    var localVarNames = self.variable.collect(v | v.name); 
-    
-    // TODO this should be an OCL constraint: if mapping refines, and there is
-    // a variable with the same name, then its type should be the same or extend
-    // it
-    //var refinedPatterns = self.getRefinedPatterns(other, "guard");
-    //refinedPatterns.println("refined patterns ");
-    for (localVar in self.variable) {
-        localVar.retypeVar(other);
-    }
-    
-    // Straight copy non-refined variables
-    self.variable.addAll(emfTool.getECoreUtil().copyAll(other.variable.select(v | not localVarNames.includes(v.name))));
-    // Copy predicates
-    self.predicate.addAll(emfTool.getECoreUtil().copyAll(other.predicate));
+// FIXME we assume the refining mapping uses the least abstract type
+operation QVTm!Pattern addRefinedVariables(sourcePatterns : Collection) {
+	
+	var varNames = sourcePatterns.variable.flatten().name.asSet();			// Unique variable names 
+	var lowRankVars = varNames.collect(n | getLowestRankVariable(sourcePatterns.variable.flatten()	// For variables with same name, get the less abstract one
+			.includingAll(self.variable).select(v | v.name == n)))
+			.excludingAll(self.variable.select(v | v.name == varNames.first()));		// Only copy theones that don't esist already
+	//lowRankVars.println("lr vars ");
+	self.variable.addAll(emfTool.getECoreUtil().copyAll(lowRankVars));
 }
 
-/****o* QVTuToQVTm/mergeBottomPatterns
- * NAME
- *  mergeBottomPatterns -- Merge this patterns with the other one. This operation
- *  is to be used when flattening a mapping to compose domains and nested mappings.
- * CONTEXT
- *  QVT!Mapping
- * PARAMETERS
- *  other  the other pattern
- */  
-operation QVT!BottomPattern mergeBottomPatterns(other : QVT!BottomPattern) {
+// FIXME we assume the refining mapping uses the least abstract type
+operation QVTm!BottomPattern addRefinedRealizedVariables(sourcePatterns : Collection ) {
 
-    // Variables. Search for variables in the refined mapping. Copy all variables that have
-    // different names as the local variables. If there is any with the same name, re-type it
-    var localVarNames = self.variable.collect(v | v.name);
-        
-    // Perhaps this shuold be done after all the refinements have been done
-    //var refinedPatterns = self.getRefinedPatterns(other, "bottom");
-    for (localVar in self.variable) {
-        localVar.retypeVar(other);
-    }
-    
-    // Straight copy non-refined variables
-    self.variable.addAll(emfTool.getECoreUtil().copyAll(other.variable.select(v | not localVarNames.includes(v.name))));
-    
-    // The same for realized variables
-    var localRealizedVarNames = self.realizedVariable.collect(v | v.name);
-    for (localVar in self.realizedVariable) {
-        localVar.retypeRealizedVar(other);
-    }
-    
-    // Straight copy non-refined realized variables
-    self.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(other.realizedVariable.select(v | not localRealizedVarNames.includes(v.name))));
-    // Copy predicates
-    self.predicate.addAll(emfTool.getECoreUtil().copyAll(other.predicate));
-    // Copy assignments
-    self.assignment.addAll(emfTool.getECoreUtil().copyAll(other.assignment));
-    // Copy operations
-    self.enforcementOperation.addAll(emfTool.getECoreUtil().copyAll(other.enforcementOperation));
-}
-
-/****o* QVTuToQVTm/getRefinedPatterns
- * NAME
- *  getRefinedPatterns -- Retruns a Collection of patterns related this pattern
- * FUNCTION
- *  The related patterns are searched in the orginial pattern and its refinement's areas.
- * CONTEXT
- *  QVT!CorePattern
- * PARAMETERS
- *  orig    the original pattern in which the search is done
- *  pattern A string that indicates what pattern are we looking for:
- *      * "guard" = GuardPatterns
- *      * "bottom" = BottomPattern
- */ 
-@cached
-operation QVT!CorePattern getRefinedPatterns(orig : QVT!CorePattern, pattern : String) : Collection {
-    
-    var refinedAreas;
-    if (orig.area.isTypeOf(QVT!Mapping)) {
-        refinedAreas = orig.area.refinement;
-    } else if (orig.area.isTypeOf(QVT!CoreDomain)) {
-        refinedAreas = orig.area.rule.refinement.collect(m | m.domain).flatten().select(d | d.typedModel == orig.area.typedModel);
-    }
-    if (pattern = "guard") {
-        return refinedAreas.collect(r | r.guardPattern);
-    } else if (pattern = "bottom") {
-        return refinedAreas.collect(r | r.bottomPattern);
-    }
-}
-
-/****o* QVTuToQVTm/flattenNestedMappings
- * NAME
- *  flattenNestedMappings -- Copy all attributes and references from a this
- *  mapping to the target mapping.
- * FUNCTION
- *  First, all nested mappings are promoted to this mapping, and then the copy
- *  is done. The difference with moveMappingContents, is that flattenNestedMappings
- *  copies, while moveMappingContents moves.
- * CONTEXT
- *  QVT!Mapping
- * PARAMETERS
- *    target    The maping to copy the nested mappings to
- */
-operation QVT!Mapping flattenNestedMappings(target : QVT!Mapping) {
-    
-    //self.name.println("flattenNestedMappings ");
-    for (l in self.local) {
-        for (ll in l.local) {
-            ll.moveMappingContents(l);
-        }
-        target.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(l.guardPattern.variable));
-	    target.guardPattern.predicate.addAll(emfTool.getECoreUtil().copyAll(l.guardPattern.predicate));
-	    target.bottomPattern.variable.addAll(emfTool.getECoreUtil().copyAll(l.bottomPattern.variable));
-	    target.bottomPattern.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(l.bottomPattern.realizedVariable));
-	    target.bottomPattern.predicate.addAll(emfTool.getECoreUtil().copyAll(l.bottomPattern.predicate));
-	    target.bottomPattern.assignment.addAll(emfTool.getECoreUtil().copyAll(l.bottomPattern.assignment));
-	    target.bottomPattern.enforcementOperation.addAll(emfTool.getECoreUtil().copyAll(l.bottomPattern.enforcementOperation));
-	    for (d in l.domain) {
-	        var td = target.domain.selectOne(od | od.name == d.name);
-	        td.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(d.guardPattern.variable));
-	        td.guardPattern.predicate.addAll(emfTool.getECoreUtil().copyAll(d.guardPattern.predicate));
-	        td.bottomPattern.variable.addAll(emfTool.getECoreUtil().copyAll(d.bottomPattern.variable));
-	        td.bottomPattern.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(d.bottomPattern.realizedVariable));
-	        td.bottomPattern.predicate.addAll(emfTool.getECoreUtil().copyAll(d.bottomPattern.predicate));
-	        td.bottomPattern.assignment.addAll(emfTool.getECoreUtil().copyAll(d.bottomPattern.assignment));
-	        td.bottomPattern.enforcementOperation.addAll(emfTool.getECoreUtil().copyAll(d.bottomPattern.enforcementOperation));
-	    }
-    }
-}
-
-/****o* QVTuToQVTm/moveMappingContents
- * NAME
- *  moveMappingContents -- Move all attributes and references from a this
- *  mapping to the target mapping.
- * FUNCTION
- *  Movement is done recursively for nested mappings in this one. The difference
- *  with flattenNestedMappings, is that flattenNestedMappings
- *  copies, while moveMappingContents moves.
- * CONTEXT
- *  QVT!Mapping
- * PARAMETERS
- *    target    The maping to copy the nested mappings to
- */
-operation QVT!Mapping moveMappingContents(target : QVT!Mapping) {
-    
-    //self.name.println("moveMappingContents ");
-    for (local in self.local) {
-        local.moveMappingContents(self);
-    }
-    target.guardPattern.variable.addAll(self.guardPattern.variable);
-    target.guardPattern.predicate.addAll(self.guardPattern.predicate);
-    target.bottomPattern.variable.addAll(self.bottomPattern.variable);
-    target.bottomPattern.realizedVariable.addAll(self.bottomPattern.realizedVariable);
-    target.bottomPattern.predicate.addAll(self.bottomPattern.predicate);
-    target.bottomPattern.assignment.addAll(self.bottomPattern.assignment);
-    target.bottomPattern.enforcementOperation.addAll(self.bottomPattern.enforcementOperation);
-    for (d in self.domain) {
-        var td = target.domain.selectOne(od | od.typedModel == d.typedModel);
-        td.guardPattern.variable.addAll(d.guardPattern.variable);
-        td.guardPattern.predicate.addAll(d.guardPattern.predicate);
-        td.bottomPattern.variable.addAll(d.bottomPattern.variable);
-        td.bottomPattern.realizedVariable.addAll(d.bottomPattern.realizedVariable);
-        td.bottomPattern.predicate.addAll(d.bottomPattern.predicate);
-        td.bottomPattern.assignment.addAll(d.bottomPattern.assignment);
-        td.bottomPattern.enforcementOperation.addAll(d.bottomPattern.enforcementOperation);
-    }
+	var varNames = sourcePatterns.realizedVariable.flatten().name.asSet();			// Unique variable names 
+	//varNames.println("gp rvarNames ");
+	var lowRankVars = varNames.collect(n | getLowestRankVariable(sourcePatterns.realizedVariable.flatten()	// For variables with same name, get the less abstract one
+			.includingAll(self.realizedVariable).select(v | v.name == n)))
+			.excludingAll(self.realizedVariable.select(v | v.name == varNames.first()));
+	//lowRankVars.println("lr rvars ");
+	self.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(lowRankVars));
 }
 
 post {

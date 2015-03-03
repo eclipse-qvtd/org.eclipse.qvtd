@@ -279,7 +279,7 @@ operation QVT!RealizedVariable retypeRealizedVar(pattern : QVT!Pattern) {
  * PARAMETERS
  *  vars     The collection to perform the search
  */
-operation getLowestRankVariable(vars : Collection) {
+operation getLowestRankVariable(vars : Collection) : QVT!Variable {
         
         var min = vars.first();
         for(v in vars.excluding(min)) {
