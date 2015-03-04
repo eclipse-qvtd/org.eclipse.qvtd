@@ -20,14 +20,14 @@ import "../helpers/OclLibHelper.eol";
  ******
  */
 
-
 /****d* QVTcToQVTu/delete/PropertyAssignment
  * ORIGINAL
  *  PropertyAssignment
  * FUNCTION
  *  * R to M assignments are removed, iif the value expression is not a
  *    VariableExp (trace assignment)
- *  * M to L domain assignments are removed
+ *  * M to L are removed
+ *  * M to M are removed, iif the value references a local variable (i.e. pattern == bottomPattern)
  *  The slotExpression type determines the affected domain. For the value, we
  *  have to check all the variables used in the expression.
  *    
@@ -35,30 +35,48 @@ import "../helpers/OclLibHelper.eol";
  */
 @cascade
 delete PropertyAssignment
-	when : (original.slotExpression.isFromInputDomain()      // M to L
-            and not original.value.isKindOf(QVTc!PrimitiveLiteralExp)
+	when : (original.slotExpression.isFromInputDomain()        // M to L
             and original.value.findReferencedVariables().exists(v | v.oppositePattern().area.isMiddleDomain())
             )
-        or (original.slotExpression.isFromMiddleDomain()      // R to M
+        or (original.slotExpression.isFromMiddleDomain()       // R to M, except trace values
             and not original.value.isTypeOf(QVTc!VariableExp)
             and original.value.findReferencedVariables().forAll(v | v.oppositePattern().area.isOutputDomain())
             )
+        or (original.slotExpression.isFromMiddleDomain()      // M (local variable) to M
+            and original.value.isTypeOf(QVTc!VariableExp)
+            and original.value.referredVariable.oppositePattern().area.isMiddleDomain()
+            and original.value.referredVariable.oppositePattern().isTypeOf(QVTc!BottomPattern)
+            )
 
+@cascade
+delete VariableAssignment
+    when : (original.targetVariable.oppositePattern().area.isInputDomain()      // M to L
+            and original.value.findReferencedVariables().exists(v | v.oppositePattern().area.isMiddleDomain())
+            )
+        or (original.targetVariable.oppositePattern().area.isMiddleDomain()      // R to M
+            and not original.value.isTypeOf(QVTc!VariableExp)
+            and original.value.findReferencedVariables().forAll(v | v.oppositePattern().area.isOutputDomain())
+            )
+        or (original.targetVariable.oppositePattern().area.isMiddleDomain()      // R to M
+            and original.value.findReferencedVariables().exists(v | v.oppositePattern().area.isMiddleDomain()
+                    and v.oppositePattern().isTypeOf(QVTc!BottomPattern))
+            )    
+    
 /****r* QVTcToQVTu/retype/PropertyAssignment
  * ORIGINAL
  *  PropertyAssignment
  * EVOLVED
  *  Predicate 
  * FUNCTION
- *  Property assignments from L/Primitive to L are retyped to predicates
+ *  Property assignments from L to L are retyped to predicates
  *    
  ******
  */
 retype PropertyAssignment to Predicate
     when : original.slotExpression.isFromInputDomain()
-            and (original.value.isKindOf(QVTc!PrimitiveLiteralExp)
-            or original.value.findReferencedVariables().forAll(v | v.oppositePattern().area.isInputDomain()))
-        
+            and //(original.value.isKindOf(QVTc!PrimitiveLiteralExp) or
+            original.value.findReferencedVariables().forAll(v | v.oppositePattern().area.isInputDomain())//)
+   
 
 /****m* QVTcToQVTu/migrate/PropertyAssignment
  * ORIGINAL
@@ -72,6 +90,7 @@ retype PropertyAssignment to Predicate
  *    
  ******
  */  
+
 migrate PropertyAssignment
    when : original.slotExpression.isFromInputDomain()
         and (original.value.isKindOf(QVTc!PrimitiveLiteralExp)
@@ -149,10 +168,12 @@ delete Predicate
  *    
  ******
  */
+ /*
 retype Predicate to PropertyAssignment  
     when : original.conditionExpression.ownedArguments
                 .exists(a : QVTc!PropertyCallExp | a.ownedSource.isTypeOf(QVTc!VariableExp)
                         and a.ownedSource.referredVariable.isTypeOf(QVTc!RealizedVariable))
+*/
 
 /****m* QVTcToQVTu/migrate/Predicate
  * ORIGINAL
@@ -166,6 +187,7 @@ retype Predicate to PropertyAssignment
  *    
  ******
  */  
+/*
 migrate Predicate
 	ignoring conditionExpression
     when : original.conditionExpression.ownedArguments
@@ -203,6 +225,7 @@ delete OperationCallExp
                 .one(a : QVTc!PropertyCallExp | a.ownedSource.isTypeOf(QVTc!VariableExp)
                         and a.ownedSource.referredVariable.isTypeOf(QVTc!RealizedVariable))
 
+*/
 
 /****r* QVTcToQVTu/retype/RealizedVariable
  * ORIGINAL

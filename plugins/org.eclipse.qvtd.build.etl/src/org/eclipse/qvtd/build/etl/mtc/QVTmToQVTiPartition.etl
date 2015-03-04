@@ -83,11 +83,17 @@ rule Transformation
 	        r.bottomPattern.fixPredicateVarReferences();
 	        r.bottomPattern.fixOperationCallReferences();
 	        r.bottomPattern.fixAssignmentVarReferences();
+	        for (v in r.bottomPattern.variable.select(v | v.ownedInit.isDefined())) {
+	            v.ownedInit.fixVarReferences(r.bottomPattern);
+	        }
 	        for (d in r.domain) {
 	            d.guardPattern.fixPredicateVarReferences();
                 d.bottomPattern.fixPredicateVarReferences();
                 d.bottomPattern.fixOperationCallReferences();
                 d.bottomPattern.fixAssignmentVarReferences();
+                for (v in d.bottomPattern.variable.select(v | v.ownedInit.isDefined())) {
+	                v.ownedInit.fixVarReferences(d.bottomPattern);
+	            }
 	        }
         }
     }
@@ -138,7 +144,7 @@ rule Mapping
     
         guard : m.specification.isEmpty()
         
-        m.name.println("m ");
+        //m.name.println("m ");
         if (m.domain.one(d | d.isInputDomain())) {
             // Create LM mapping
             var lmM = new QVTp!Mapping;
@@ -228,14 +234,10 @@ rule Mapping
             mM.name = tm.name; 
 		    mM.guardPattern = new QVTp!GuardPattern;
 		    mM.guardPattern.variable.addAll(m.guardPattern.variable.equivalent().select(v | v.~side == "r"));
-		    mM.guardPattern.variable.addAll(m.bottomPattern.variable.equivalent().select(v | v.~side == "r"));
-		    // FIXME init var references
-		    //for (v in mM.guardPattern.variable) {
-	        // 	v.ownedInit.fixVarReferences(mM.guardPattern);
-	        //}
+		    mM.bottomPattern = new QVTp!BottomPattern;
+		    mM.bottomPattern.variable.addAll(m.bottomPattern.variable.equivalent().select(v | v.~side == "r"));
 		    // RealizedVariables to Variables
 		    mM.guardPattern.variable.addAll(m.bottomPattern.realizedVariable.equivalent().select(v | v.~side == "r"));
-		    mM.bottomPattern = new QVTp!BottomPattern;
 		    mrM.domain.add(mM);
         }
     }
@@ -261,7 +263,9 @@ rule PropertyAssignment
     to oa : QVTp!PropertyAssignment
     extends Assignment {
         
-        guard : not ia.findReferencedVariables().forAll(v |v.oppositePattern().area.isMiddleDomain())
+        guard : not ia.findReferencedVariables()
+                .select(v | v.oppositePattern().isDefined())
+                .forAll(v |v.oppositePattern().area.isMiddleDomain())
         
         oa.slotExpression =  emfTool.getECoreUtil().copy(ia.slotExpression);
         oa.targetProperty =  ia.targetProperty;
@@ -272,7 +276,9 @@ rule VariableAssignment
     to oa : QVTp!VariableAssignment
     extends Assignment {
     
-        guard : not ia.findReferencedVariables().forAll(v | v.oppositePattern().area.isMiddleDomain())
+        guard : not ia.findReferencedVariables()
+                .select(v | v.oppositePattern().isDefined())
+                .forAll(v | v.oppositePattern().area.isMiddleDomain())
         
         //ia.toString().println();
         oa.targetVariable = ia.targetVariable;

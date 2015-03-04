@@ -47,7 +47,7 @@ operation QVT!OCLExpression fixVarReferences(v : QVT!Variable) {
  *  QVT!OCLExpression The expression to analyze
  *  
  */
-operation QVT!OCLExpression findReferencedVariables() : Set {
+operation QVT!OCLExpression findReferencedVariables() : Sequence {
     return self.findReferencedVariables(Set{});
 }
 
@@ -61,7 +61,7 @@ operation QVT!OCLExpression findReferencedVariables() : Set {
  * PARAMETERS
  *  ignore The set of variables to ignore in the analysis
  */
-operation QVT!OCLExpression findReferencedVariables(ignore : Set) : Set {
+operation QVT!OCLExpression findReferencedVariables(ignore : Set) : Sequence {
     var varRefs : Set();
     if (self.isTypeOf(QVT!VariableExp)) {
         varRefs.add(self.referredVariable);
@@ -101,7 +101,7 @@ operation QVT!OCLExpression findReferencedVariables(ignore : Set) : Set {
         self.println();
         throw "Error! Add findReferencedVariables() for " + self.type();
     }
-    return varRefs.excludingAll(ignore);
+    return varRefs.excludingAll(ignore).asSequence();
 }
  
  // Determine if the OCLExpression is of the form 

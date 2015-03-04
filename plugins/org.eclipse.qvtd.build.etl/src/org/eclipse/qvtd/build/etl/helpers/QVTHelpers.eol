@@ -74,6 +74,22 @@ operation QVT!Area isOutputDomain() : Boolean {
         config!Configuration.all.first().outputDirection.collect(od | od.name).includes(self.typedModel.name);
 }
 
+// TODO the configuration should really point to the specific package
+@cached
+operation QVT!OCLExpression isFromInputDomain() : Boolean {
+    return config!Configuration.all.first().inputDirection.imports.package.flatten().includes(self.type.owningPackage.name);
+}
+
+@cached
+operation QVT!OCLExpression isFromMiddleDomain() : Boolean {
+    return config!Configuration.all.first().middle.imports.package.flatten().includes(self.type.owningPackage.name);
+}
+
+@cached
+operation QVT!OCLExpression isFromOutputDomain() : Boolean {
+    return config!Configuration.all.first().outputDirection.imports.package.flatten().includes(self.type.owningPackage.name);
+}
+
 
 /****o* QVTHelpers/isCheckMode
  * NAME
@@ -201,9 +217,9 @@ operation QVT!OCLExpression getArea() : QVT!Area {
  * RESULT
  *  A collection of all the varaibles found.
  */
-operation QVT!Assignment findReferencedVariables() : Collection {
+operation QVT!Assignment findReferencedVariables() : Sequence {
     
-    var varRefs : Set();
+    var varRefs : Sequence();
     varRefs = self.value.findReferencedVariables();
     if (self.isTypeOf(QVT!PropertyAssignment)) {
         varRefs.addAll(self.slotExpression.findReferencedVariables());
@@ -224,7 +240,7 @@ operation QVT!Assignment findReferencedVariables() : Collection {
  * RESULT
  *  A collection of all the varaibles found.
  */
-operation QVT!Predicate findReferencedVariables() : Collection {
+operation QVT!Predicate findReferencedVariables() : Sequence {
     return self.conditionExpression.findReferencedVariables();
 }
 
@@ -510,7 +526,7 @@ operation QVT!OCLExpression fixVarReferences(pattern : QVT!Pattern) {
 	            searchPatterns.add(pattern.area.guardPattern);
 	            // 2. BottomPattern of domains with depending typed models
 	            searchPatterns.add(pattern.area.rule.domain
-	            		.select(d | d.typedModel.dependsOn.includes(self.pattern.area.typedModel))
+	            		.select(d | d.typedModel.dependsOn.includes(pattern.area.typedModel))
 	            		.collect(d | d.bottomPattern).flatten());
         	}
 		} else if (pattern.area.isTypeOf(QVTm!Mapping)) {
@@ -527,7 +543,7 @@ operation QVT!OCLExpression fixVarReferences(pattern : QVT!Pattern) {
         var targetVar = v.findReferencesInPatterns(searchPatterns);
         //targetVar.println("targetVar ");
         if (targetVar == null) {
-            if (self.pattern.area.isTypeOf(QVTm!Mapping)) {
+            if (pattern.area.isTypeOf(QVTm!Mapping)) {
                 throw "Error! not able to find a local reference for variable " + v + " in predicate " + self.toString() + "in " + pattern.area;  
             } else if(self.pattern.area.isTypeOf(QVTm!CoreDomain)) {
                 throw "Error! not able to find a local reference for variable " + v + " in predicate " + self.toString() + "in " + self.area;  
@@ -1007,6 +1023,14 @@ operation QVT!Assignment isPrimitivePropertyAssignemnt() : Boolean {
     
     return self.isSimpleAttributeNavigation()
     	and self.value.type.isTypeOf(QVT!PrimitiveType);
+}
+
+@chached
+operation QVT!Area isNested() : Boolean {
+    if (self.isTypeOf(QVT!Mapping))
+        return self.context.isDefined();
+    // Else is a CoreDomain
+    return self.rule.context.isDefined();
 }
 
 

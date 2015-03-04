@@ -24,7 +24,6 @@ pre {
  ******
  */
 
-
 // **** Flatten mappings by removing nested mappings ****
 
 /****d* QVTuToQVTm/delete/NestedMappings
@@ -108,9 +107,23 @@ migrate Variable
  ******
  */
 migrate Assignment
-    when : original.bottomPattern.area.isNested()
+    when {
+        if (original.isTypeOf(QVTu!VariableAssignment)) {
+            var refined;
+	        if (original.bottomPattern.area.isTypeOf(QVTu!Mapping)) {
+	            refined = original.bottomPattern.area.closure(m | m.refinement).asSet().bottomPattern;
+	        } else {
+	            refined = original.bottomPattern.area.rule.closure(m | m.refinement).asSet().domain.flatten()
+	                    .select(d | d.typedModel == original.bottomPattern.area.typedModel).bottomPattern;
+	        }
+	        return original.bottomPattern.area.isNested() and not original.isVariableInit(refined);
+        } else {
+            return original.bottomPattern.area.isNested();
+        }
+    } 
     {   
         var migArea;
+        //original.toString().println("NestedMappingCorePatternAssignments ");
         if (original.bottomPattern.area.isTypeOf(QVTu!Mapping)) {
             migArea = original.bottomPattern.area
                 .closure(m | m.context)
@@ -148,9 +161,41 @@ migrate Predicate
                 .selectOne(d| d.typedModel == original.pattern.area.typedModel).equivalent();
         }
         if (original.pattern.isTypeOf(QVTu!GuardPattern)) {
-            migArea.guardPattern.variable.add(migrated);
+            migArea.guardPattern.predicate.add(migrated);
         } else {
-            migArea.bottomPattern.variable.add(migrated);
+            migArea.bottomPattern.predicate.add(migrated);
+        }
+    }
+
+migrate Mapping
+    when : not original.context.isDefined() and original.refinement.isEmpty()
+    {
+        //original.println("Normal ");
+        var nested = original.closure(m | m.local).asSet();//.println("refined ");
+        // Init Variables
+        for (d in original.domain.includingAll(nested.domain)) {
+            for (a in d.bottomPattern.assignment.select(a | a.equivalent().isUndefined()).flatten()) {
+                //a.toString().println("using ");
+                var migBottomPat = migrated.domain
+                        .selectOne(d | d.typedModel.name == a.bottomPattern.area.typedModel.name).bottomPattern; 
+                var targetVar = migBottomPat.variable
+                        .selectOne(v | v.name == a.targetVariable.name);//.println();
+                targetVar.ownedInit = emfTool.getECoreUtil().copy(a.value);
+                // Fix the var references
+                targetVar.ownedInit.fixVarReferences(migBottomPat);
+                //targetVar.toString().println();
+            }               
+        }
+        for (a in original.bottomPattern.assignment
+                .includingAll(nested.bottomPattern.assignment).flatten()
+                .select(a | a.equivalent().isUndefined()).flatten()) {
+            //a.toString().println("using ");
+            //migrated.bottomPattern.variable.toString().println();
+            var orgVar = original.bottomPattern.variable
+                    .includingAll(nested.bottomPattern.variable).flatten()
+                    .selectOne(v | v.name == a.targetVariable.name);
+            var targetVar = orgVar.equivalent();
+            targetVar.ownedInit = emfTool.getECoreUtil().copy(a.value);
         }
     }
     
@@ -179,24 +224,24 @@ migrate Mapping
     	// Init Variables
     	for (d in original.domain.includingAll(refined.domain)) {
 			for (a in d.bottomPattern.assignment.select(a | a.equivalent().isUndefined()).flatten()) {
-				a.toString().println("using ");
+				//a.toString().println("using ");
 				var migBottomPat = migrated.domain
 						.selectOne(d | d.typedModel.name == a.bottomPattern.area.typedModel.name).bottomPattern; 
 				var targetVar = migBottomPat.variable
-						.selectOne(v | v.name == a.targetVariable.name).println();
+						.selectOne(v | v.name == a.targetVariable.name);//.println();
 				targetVar.ownedInit = emfTool.getECoreUtil().copy(a.value);
 				// Fix the var references
 				targetVar.ownedInit.fixVarReferences(migBottomPat);
-				targetVar.toString().println();
+				//targetVar.toString().println();
 			}    			
     	}
     	for (a in original.bottomPattern.assignment
     			.includingAll(refined.bottomPattern.assignment).flatten()
     			.select(a | a.equivalent().isUndefined()).flatten()) {
-			a.toString().println("using ");
+			//a.toString().println("using ");
 			var targetVar = migrated.bottomPattern.variable
-					.select(v | v.name == a.targetVariable.name).println();
-			targetVar.ownedInit = emfTool.getECoreUtil().copy(avalue);
+					.selecOnet(v | v.name == a.targetVariable.name);
+			targetVar.ownedInit = emfTool.getECoreUtil().copy(a.value);
 			// Fix the var references
 			targetVar.ownedInit.fixVarReferences(migrated.bottomPattern);
 		}
@@ -274,10 +319,11 @@ operation QVTm!Area migrateFromAreas(areas : Collection) {
 operation QVTu!VariableAssignment isVariableInit(refinedPatterns : Collection) {
 	
 	var initVarCandidate = self.targetVariable;
+	//self.toString().println("isVariableInit ");
 	// Test if the variable is in a bottom pattern (i.e. local)
 	if (self.bottomPattern.variable.includingAll(refinedPatterns.variable.flatten())
 	 		.includes(initVarCandidate)) {
-		return true;
+	 	return true;
 	} else {
 		return false;
 	}
@@ -291,16 +337,14 @@ operation areEquivalentAssignments(assg1, assg2) : Boolean {
 
 operation QVT!Predicate fixVarReferences() {
     //self.toString().println("Fixing Assignment ");
-    self.conditionExpression.fixVarReferences(self);
+    self.conditionExpression.fixVarReferences(self.pattern);
 }
 
 operation QVT!Assignment fixVarReferences() {
     //self.toString().println("Fixing Assignment ");
-    self.value.fixVarReferences(self);
+    self.value.fixVarReferences(self.bottomPattern);
     if (self.isTypeOf(QVT!PropertyAssignment)) {
-        self.slotExpression.fixVarReferences(self);
-    } else if (self.isTypeOf(QVT!VariableAssignment)) {
-        varRefs.add(self.targetVariable);
+        self.slotExpression.fixVarReferences(self.bottomPattern);
     }
     /*
     //refVars.println("refVars ");
@@ -371,6 +415,18 @@ operation QVTm!BottomPattern addRefinedRealizedVariables(sourcePatterns : Collec
 }
 
 post {
+    // Init expressions in mappings with nested mappings that get flatten can only
+    // be fixed at the end when all the flattening has occured
+    for (m in QVTm!Mapping) {
+        for (d in m.domain) {
+            for (v in d.bottomPattern.variable.select(v | v.ownedInit.isDefined())) {
+                v.ownedInit.fixVarReferences(d.bottomPattern);
+            }
+        }
+        for (v in m.bottomPattern.variable.select(v | v.ownedInit.isDefined())) {
+            v.ownedInit.fixVarReferences(m.bottomPattern);
+        }
+    }
     "QVTuToQVTm Done!".println();
 }
 
