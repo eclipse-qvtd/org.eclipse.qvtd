@@ -9,9 +9,9 @@
    <feature id="org.eclipse.qvtd.all.sdk" version="0.0.0">
       <category name="qvtd"/>
    </feature>
-   <category-def name="qvtd" label="QVTd${category.qualifier}">
+   <category-def name="qvtd" label="QVTd">
       <description>
-         Eclipse QVTd${category.qualifier} features.
+         Eclipse QVT Declarative features.
       </description>
    </category-def>
 </site>
