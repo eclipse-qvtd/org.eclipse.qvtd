@@ -17,6 +17,12 @@
         <details key="body" value="throw new &lt;%java.lang.UnsupportedOperationException%>(&quot;Enviroment::getEvaluator() has been created for CG purposes. Don't call this method&quot;);"/>
       </eAnnotations>
     </eOperations>
+    <eOperations name="addElements" eType="#//Environment">
+      <eParameters name="elements" upperBound="-1" eType="ecore:EClass Classes.ecore#//NamedElement"/>
+    </eOperations>
+    <eOperations name="addElement" eType="#//Environment">
+      <eParameters name="element" eType="ecore:EClass Classes.ecore#//NamedElement"/>
+    </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Evaluator" instanceClassName="org.eclipse.ocl.pivot.evaluation.Evaluator"
       abstract="true" interface="true"/>

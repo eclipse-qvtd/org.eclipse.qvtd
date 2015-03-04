@@ -127,6 +127,28 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Environment addElements(EList<NamedElement> elements) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Environment addElement(NamedElement element) {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public boolean hasFinalResult() {
 		throw new UnsupportedOperationException("Enviroment::hasFinalResult() has been created for CG purposes. Don't call this method");
 	}
@@ -217,8 +239,13 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 	 * @generated
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
+			case EnvironmentPackage.ENVIRONMENT___ADD_ELEMENTS__ELIST:
+				return addElements((EList<NamedElement>)arguments.get(0));
+			case EnvironmentPackage.ENVIRONMENT___ADD_ELEMENT__NAMEDELEMENT:
+				return addElement((NamedElement)arguments.get(0));
 			case EnvironmentPackage.ENVIRONMENT___HAS_FINAL_RESULT:
 				return hasFinalResult();
 			case EnvironmentPackage.ENVIRONMENT___GET_EVALUATOR:

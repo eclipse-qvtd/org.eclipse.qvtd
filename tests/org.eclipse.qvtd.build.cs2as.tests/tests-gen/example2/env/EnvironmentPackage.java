@@ -158,13 +158,31 @@ public interface EnvironmentPackage extends EPackage {
 	int ENVIRONMENT___GET_EVALUATOR = ENV4_CG___GET_EVALUATOR;
 
 	/**
+	 * The operation id for the '<em>Add Elements</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENVIRONMENT___ADD_ELEMENTS__ELIST = ENV4_CG_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Add Element</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENVIRONMENT___ADD_ELEMENT__NAMEDELEMENT = ENV4_CG_OPERATION_COUNT + 1;
+
+	/**
 	 * The number of operations of the '<em>Environment</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENVIRONMENT_OPERATION_COUNT = ENV4_CG_OPERATION_COUNT + 0;
+	int ENVIRONMENT_OPERATION_COUNT = ENV4_CG_OPERATION_COUNT + 2;
 
 
 	/**
@@ -227,6 +245,26 @@ public interface EnvironmentPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getEnvironment_ParentEnv();
+
+	/**
+	 * Returns the meta object for the '{@link example2.env.Environment#addElements(org.eclipse.emf.common.util.EList) <em>Add Elements</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Add Elements</em>' operation.
+	 * @see example2.env.Environment#addElements(org.eclipse.emf.common.util.EList)
+	 * @generated
+	 */
+	EOperation getEnvironment__AddElements__EList();
+
+	/**
+	 * Returns the meta object for the '{@link example2.env.Environment#addElement(example2.classes.NamedElement) <em>Add Element</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Add Element</em>' operation.
+	 * @see example2.env.Environment#addElement(example2.classes.NamedElement)
+	 * @generated
+	 */
+	EOperation getEnvironment__AddElement__NamedElement();
 
 	/**
 	 * Returns the meta object for class '{@link example2.env.Env4CG <em>Env4 CG</em>}'.
@@ -317,6 +355,22 @@ public interface EnvironmentPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ENVIRONMENT__PARENT_ENV = eINSTANCE.getEnvironment_ParentEnv();
+
+		/**
+		 * The meta object literal for the '<em><b>Add Elements</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ENVIRONMENT___ADD_ELEMENTS__ELIST = eINSTANCE.getEnvironment__AddElements__EList();
+
+		/**
+		 * The meta object literal for the '<em><b>Add Element</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ENVIRONMENT___ADD_ELEMENT__NAMEDELEMENT = eINSTANCE.getEnvironment__AddElement__NamedElement();
 
 		/**
 		 * The meta object literal for the '{@link example2.env.Env4CG <em>Env4 CG</em>}' class.

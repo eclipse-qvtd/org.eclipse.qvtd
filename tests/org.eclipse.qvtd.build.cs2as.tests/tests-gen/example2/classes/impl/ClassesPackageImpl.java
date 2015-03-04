@@ -16,6 +16,7 @@ import example2.classes.Element;
 import example2.classes.NamedElement;
 import example2.classes.Namespace;
 import example2.classes.Root;
+import example2.classes.util.Visitable;
 
 /**
  * <!-- begin-user-doc -->
@@ -344,7 +345,7 @@ public class ClassesPackageImpl extends EPackageImpl implements ClassesPackage {
 		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRoot_OwnedPackages(), this.getPackage(), null, "ownedPackages", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(visitableEClass, example2.classes.util.Visitable.class, "Visitable", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEClass(visitableEClass, Visitable.class, "Visitable", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

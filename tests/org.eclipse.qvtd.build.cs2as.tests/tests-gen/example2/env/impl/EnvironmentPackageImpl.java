@@ -139,6 +139,24 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EOperation getEnvironment__AddElements__EList() {
+		return environmentEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getEnvironment__AddElement__NamedElement() {
+		return environmentEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getEnv4CG() {
 		return env4CGEClass;
 	}
@@ -201,6 +219,8 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 		environmentEClass = createEClass(ENVIRONMENT);
 		createEReference(environmentEClass, ENVIRONMENT__NAMED_ELEMENTS);
 		createEReference(environmentEClass, ENVIRONMENT__PARENT_ENV);
+		createEOperation(environmentEClass, ENVIRONMENT___ADD_ELEMENTS__ELIST);
+		createEOperation(environmentEClass, ENVIRONMENT___ADD_ELEMENT__NAMEDELEMENT);
 
 		env4CGEClass = createEClass(ENV4_CG);
 		createEOperation(env4CGEClass, ENV4_CG___HAS_FINAL_RESULT);
@@ -246,6 +266,12 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 		initEClass(environmentEClass, Environment.class, "Environment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEnvironment_NamedElements(), theClassesPackage.getNamedElement(), null, "namedElements", null, 0, -1, Environment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEnvironment_ParentEnv(), this.getEnvironment(), null, "parentEnv", null, 0, 1, Environment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		EOperation op = initEOperation(getEnvironment__AddElements__EList(), this.getEnvironment(), "addElements", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theClassesPackage.getNamedElement(), "elements", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getEnvironment__AddElement__NamedElement(), this.getEnvironment(), "addElement", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theClassesPackage.getNamedElement(), "element", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(env4CGEClass, Env4CG.class, "Env4CG", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

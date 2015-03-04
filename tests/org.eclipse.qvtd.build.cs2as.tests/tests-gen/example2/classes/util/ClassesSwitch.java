@@ -120,7 +120,7 @@ public class ClassesSwitch<T> extends Switch<T> {
 				return result;
 			}
 			case ClassesPackage.VISITABLE: {
-				example2.classes.util.Visitable visitable = (example2.classes.util.Visitable)theEObject;
+				Visitable visitable = (Visitable)theEObject;
 				T result = caseVisitable(visitable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -230,7 +230,7 @@ public class ClassesSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseVisitable(example2.classes.util.Visitable object) {
+	public T caseVisitable(Visitable object) {
 		return null;
 	}
 

@@ -94,7 +94,7 @@ public class ClassesAdapterFactory extends AdapterFactoryImpl {
 				return createRootAdapter();
 			}
 			@Override
-			public Adapter caseVisitable(example2.classes.util.Visitable object) {
+			public Adapter caseVisitable(Visitable object) {
 				return createVisitableAdapter();
 			}
 			@Override

@@ -66,4 +66,20 @@ public interface Environment extends Env4CG {
 	 */
 	void setParentEnv(Environment value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model elementsMany="true"
+	 * @generated
+	 */
+	Environment addElements(EList<NamedElement> elements);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	Environment addElement(NamedElement element);
+
 } // Environment

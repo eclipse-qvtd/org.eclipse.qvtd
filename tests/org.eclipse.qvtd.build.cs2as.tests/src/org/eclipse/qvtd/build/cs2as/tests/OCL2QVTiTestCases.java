@@ -42,6 +42,7 @@ import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.build.cs2as.OCL2QVTiBroker;
+import org.eclipse.qvtd.build.cs2as.tests.models.example2.java.classescs2as_qvtp_qvtias_Manual;
 import org.eclipse.qvtd.build.etl.EtlTask;
 import org.eclipse.qvtd.build.etl.MtcBroker;
 import org.eclipse.qvtd.build.etl.PivotModel;
@@ -306,6 +307,25 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model7");
 		
         myQVT2.dispose();
+	}
+	
+	@Test
+	public void testExample2_CG_and_LookupVisitor() throws Exception {
+		
+		MyQVT myQVT = createQVT();
+		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
+
+		Class<? extends TransformationExecutor> txClass = classescs2as_qvtp_qvtias_Manual.class;
+
+		
+		// Execute CGed transformation
+		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore 
+		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
+		
+		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model1");
+		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model2");
+		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model3");
+		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model4");
 	}
 	
 	@Test
