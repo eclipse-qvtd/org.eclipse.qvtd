@@ -92,7 +92,11 @@ migrate Variable
         if (original.oppositePattern().isTypeOf(QVTu!GuardPattern)) {
             migArea.guardPattern.variable.add(migrated);
         } else {
-            migArea.bottomPattern.variable.add(migrated);
+        	if (original.isTypeOf(QVTu!Variable)) {
+        		migArea.bottomPattern.variable.add(migrated);
+        	} else {
+        		migArea.bottomPattern.realizedVariable.add(migrated);
+        	}
         }
     }
 
@@ -346,48 +350,6 @@ operation QVT!Assignment fixVarReferences() {
     if (self.isTypeOf(QVT!PropertyAssignment)) {
         self.slotExpression.fixVarReferences(self.bottomPattern);
     }
-    /*
-    //refVars.println("refVars ");
-    // Find variables and fix references
-    for (v in refVars) {
-        //v.println("Fixing ");
-        var searchPatterns = new Sequence();
-        searchPatterns.add(self.bottomPattern);
-        if (self.bottomPattern.area.isTypeOf(QVTm!CoreDomain)) {
-            // 1. GuardPattern of the Domain
-            searchPatterns.add(self.bottomPattern.area.guardPattern);
-            // 2. BottomPattern of domains with depending typed models
-            searchPatterns.add(self.bottomPattern.area.rule.domain
-            		.select(d | d.typedModel.dependsOn.includes(self.bottomPattern.area.typedModel))
-            		.collect(d | d.bottomPattern).flatten());
-		} else if (self.bottomPattern.area.isTypeOf(QVTm!Mapping)) {
-			// 1. GuardPattern of the Mapping, and thus GuardPatterns of the domains
-            searchPatterns.add(self.bottomPattern.area.guardPattern);
-            searchPatterns.addAll(self.bottomPattern.area.domain.collect(d | d.guardPattern).flatten());
-            // 2. BottomPatterns of the Mapping's domains
-            searchPatterns.addAll(self.bottomPattern.area.domain.collect(d | d.bottomPattern).flatten());
-		}
-        // MiddleGuard Pattern depends on domain guard patterns
-        //searchPatterns.println("searchPatterns ");
-        var targetVar = v.findReferencesInPatterns(searchPatterns);
-        //targetVar.println("targetVar ");
-        if (targetVar == null) {
-            if (self.bottomPattern.area.isTypeOf(QVT!Mapping)) {
-                throw "Error! not able to find a local reference for variable " + v + " in assignemnt " + self.toString() + "in BottomPattern of Mapping " + self.area;  
-            } else if(self.bottomPattern.area.isTypeOf(QVT!CoreDomain)) {
-                throw "Error! not able to find a local reference for variable " + v + " in assignment " + self.toString() + "in BottomPattern of Domain " + self.area;  
-            }  
-        }
-        self.value.fixVarReferences(targetVar);
-        if (self.isTypeOf(QVTm!PropertyAssignment)) {
-            self.slotExpression.fixVarReferences(targetVar);
-        } else if (self.isTypeOf(QVTm!VariableAssignment)) {
-            if (self.targetVariable.name = targetVar.name) {
-                self.targetVariable = targetVar;
-            }
-        }
-    }
-	*/
 }
 
 
@@ -417,7 +379,10 @@ operation QVTm!BottomPattern addRefinedRealizedVariables(sourcePatterns : Collec
 post {
     // Init expressions in mappings with nested mappings that get flatten can only
     // be fixed at the end when all the flattening has occured
-    for (m in QVTm!Mapping) {
+    for (v in QVTm!Variable.all().select(v | v.ownedInit.isDefined())) {
+		v.ownedInit.fixVarReferences(v.oppositePattern());
+    } 
+    /*for (m in QVTm!Mapping) {
         for (d in m.domain) {
             for (v in d.bottomPattern.variable.select(v | v.ownedInit.isDefined())) {
                 v.ownedInit.fixVarReferences(d.bottomPattern);
@@ -426,7 +391,7 @@ post {
         for (v in m.bottomPattern.variable.select(v | v.ownedInit.isDefined())) {
             v.ownedInit.fixVarReferences(m.bottomPattern);
         }
-    }
+    }*/
     "QVTuToQVTm Done!".println();
 }
 
