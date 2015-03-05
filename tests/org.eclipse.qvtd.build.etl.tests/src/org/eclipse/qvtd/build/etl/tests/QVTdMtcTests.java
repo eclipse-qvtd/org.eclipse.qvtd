@@ -110,7 +110,7 @@ public class QVTdMtcTests extends LoadTestCase {
     }
     
     
-/*    @Test
+    @Test
     public void testUmlToRdbms() throws Exception {
     	
     	MyQVT myQVT = createQVT();
@@ -139,7 +139,8 @@ public class QVTdMtcTests extends LoadTestCase {
     	URI expectedOutputURI = samplesBaseUri.appendSegment("SimpleRDBMSPeople_expected.xmi");
     	
         QVTiPivotEvaluator testEvaluator = myQVT.createEvaluator(mtc.getiModel());
-    	testEvaluator.loadModel("uml", inputURI);
+        testEvaluator.getEnvironmentFactory().setEvaluationTracingEnabled(true);
+		testEvaluator.loadModel("uml", inputURI);
         testEvaluator.createModel("middle", middleURI, null);
         testEvaluator.createModel("rdbms", outputURI, null);
         System.out.println("Executing QVTi transformation on test models.");
@@ -152,8 +153,8 @@ public class QVTdMtcTests extends LoadTestCase {
         testEvaluator.dispose();
         mtc.disposeModels();
         myQVT.dispose();
-    } */
-
+    }
+/*
     @Test
     public void testUpperToLower() throws Exception {
     	
@@ -237,6 +238,6 @@ public class QVTdMtcTests extends LoadTestCase {
         mtc.disposeModels();
         myQVT.dispose();
     }
-    
+    */
 	
 }

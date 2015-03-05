@@ -315,369 +315,6 @@ operation getLowestRankVariable(vars : Collection) : QVT!Variable {
         return min;
 }
 
-/****o* QVTHelpers/fixPredicateVarReferences
- * NAME
- *  fixPredicateVarReferences - Fixes predicate's varaible references that point
- *  to variables in some other model (same name, different model)
- * FUNCTION
- *  Loops trough all the predicates and fixes references to the variables. 
- * CONTEXT
- *  QVT!GuardPattern
- * TODO
- *  Only predicates with references to variables in other models should be checked,
- *  and then only references to varaibles in other models fixed. Add a select
- *  statement to filter these.
- */
-operation QVT!GuardPattern fixPredicateVarReferences() {
-    for (predicate in self.predicate.select(p | p.findReferencedVariables().exists(v | v.owningModel() <> p.owningModel()))) {
-        //predicate.toString.println("Fixing Predicate ");
-        var refVars =  predicate.findReferencedVariables().select(v | v.owningModel() <> predicate.owningModel());
-        //refVars.println("refVars ");
-        // Find variables and fix references
-        for (v in refVars) {
-            //v.println("Fixing ");
-            var targetVar = v.findReferencesInPatterns(self.asSequence());
-            if (targetVar == null) {
-                var searchPatterns;
-                if (self.area.isTypeOf(QVT!CoreDomain)) {
-                    // Domain guard patterns depend on guard patterns of domains with depending typed models
-                    searchPatterns = self.area.rule.domain.select(d | d.typedModel.dependsOn.includes(self.area.typedModel)).collect(d | d.guardPattern).flatten();
-                } else if (self.area.isTypeOf(QVT!Mapping)) {
-                    // 1. Mapping's domain guard patterns
-                    searchPatterns = self.area.domain.collect(d | d.guardPattern).flatten();
-                }
-                targetVar = v.findReferencesInPatterns(searchPatterns);
-                if (targetVar == null) {
-                    // Search in the context
-                    searchPatterns = self.area.getContextMappingPatterns();
-                    targetVar = v.findReferencesInPatterns(searchPatterns);
-                }
-            }
-            if (targetVar == null) {
-                if (self.area.isTypeOf(QVT!Mapping)) {
-                    throw "Error! not able to find a local reference for variable " + v + " in predicate " + predicate + " in GuardPattern of Mapping " + self.area;  
-                } else if(self.area.isTypeOf(QVT!CoreDomain)) {
-                    throw "Error! not able to find a local reference for variable " + v + " in predicate " + predicate + " in GuardPattern of Domain " + self.area;  
-                }  
-            }
-            //targetVar.println("local ");
-            predicate.conditionExpression.fixVarReferences(targetVar);
-        }
-    }
-}
-
-/****o* QVTHelpers/fixPredicateVarReferences
- * NAME
- *  fixPredicateVarReferences - Fixes predicate's varaible references that point
- *  to variables in some other model (same name, different model)
- * FUNCTION
- *  Loops trough all the predicates and fixes references to the variables. 
- * CONTEXT
- *  QVT!BottomPattern
- * TODO
- *  Only predicates with references to variables in other models should be checked,
- *  and then only references to varaibles in other models fixed. Add a select
- *  statement to filter these.
- */
-operation QVT!BottomPattern fixPredicateVarReferences() {
-    
-    for (predicate in self.predicate.select(p | p.findReferencedVariables().exists(v | v.owningModel() <> p.owningModel()))) {
-        //predicate.println("Predicate ");
-        var refVars =  predicate.findReferencedVariables().select(v | v.owningModel() <> predicate.owningModel());
-        //refVars.println("refVars ");
-        // Find variables and fix references
-        for (v in refVars) {
-            //v.println("Fixing ");
-            // MiddleGuard Pattern depends on domain guard patterns
-            var targetVar = v.findReferencesInPatterns(self.asSequence());
-            if (targetVar == null) {
-                var searchPatterns : Sequence;
-                if (self.area.isTypeOf(QVT!CoreDomain)) {
-                    // 1. Guard Pattern of the Domain
-                    searchPatterns = self.area.rule.domain.collect(d | d.guardPattern).flatten();
-                    targetVar = v.findReferencesInPatterns(searchPatterns); 
-                    // 2. Bottom Pattern of domains with depending typed models
-                    if (targetVar == null) {
-                        searchPatterns = self.area.rule.domain.select(d | d.typedModel.dependsOn.includes(self.area.typedModel)).collect(d | d.bottomPattern).flatten();
-                        targetVar = v.findReferencesInPatterns(searchPatterns); 
-                    }
-                    
-                } else if (self.area.isTypeOf(QVT!Mapping)) {
-                    // 1. Guard Pattern of the Mapping
-                    searchPatterns = self.area.guardPattern.asSequence();
-                    targetVar = v.findReferencesInPatterns(searchPatterns); 
-                    // 2. Mapping's domain bottom pattern
-                    if (targetVar == null) {
-                        searchPatterns = self.area.domain.collect(d | d.bottomPattern).flatten();
-                        targetVar = v.findReferencesInPatterns(searchPatterns); 
-                        if (targetVar == null) {
-                            // 3. Mapping's domain guard patterns
-                            searchPatterns = self.area.domain.collect(d | d.guardPattern).flatten();
-                            targetVar = v.findReferencesInPatterns(searchPatterns); 
-                        }
-                    }
-                }
-                if (targetVar == null) {
-                    // Search in the context
-                    searchPatterns = self.area.getContextMappingPatterns();
-                    targetVar = v.findReferencesInPatterns(searchPatterns);
-                }
-            }
-            if (targetVar == null) {
-                if (self.area.isTypeOf(QVT!Mapping)) {
-                    throw "Error! not able to find a local reference for variable " + v + " in predicate " + predicate + "in BottomPattern of Mapping " + self.area;  
-                } else if(self.area.isTypeOf(QVT!CoreDomain)) {
-                    throw "Error! not able to find a local reference for variable " + v + " in predicate " + predicate + "in BottomPattern of Domain " + self.area;  
-                }  
-            }
-            predicate.conditionExpression.fixVarReferences(targetVar);
-        }
-    }
-}
-
-
-/****o* QVTHelpers/fixAssignmentVarReferences
- * NAME
- *  fixAssignmentVarReferences - Fixes assignment's varaible references that point
- *  to variables in some other model (same name, different model)
- * FUNCTION
- *  Loops trough all the assignments and fixes references to the variables. 
- * CONTEXT
- *  QVT!BottomPattern
- * TODO
- *  Only predicates with references to variables in other models should be checked,
- *  and then only references to varaibles in other models fixed. Add a select
- *  statement to filter these.
- */
-operation QVT!BottomPattern fixAssignmentVarReferences() {
-    for (assignment in self.assignment.select(a | a.findReferencedVariables().exists(v | v.owningModel() <> a.owningModel()))) {
-        //assignment.toString().println("Fixing Assignment ");
-        var refVars =  assignment.findReferencedVariables().select(v | v.owningModel() <> assignment.owningModel());
-        //refVars.println("refVars ");
-        // Find variables and fix references
-        for (v in refVars) {
-            //v.println("Fixing ");
-            // MiddleGuard Pattern depends on domain guard patterns
-            var targetVar = v.findReferencesInPatterns(self.asSequence());
-            //targetVar.println("targetVar ");
-            if (targetVar == null) {
-                var searchPatterns;
-                if (self.area.isTypeOf(QVT!CoreDomain)) {
-                    // 1. Guard Pattern of the Domain
-                    searchPatterns = self.area.rule.domain.collect(d | d.guardPattern).flatten();
-                    targetVar = v.findReferencesInPatterns(searchPatterns); 
-                    // 2. Bottom Pattern of domains with depending typed models
-                    if (targetVar == null) {
-                        searchPatterns = self.area.rule.domain.select(d | d.typedModel.dependsOn.includes(self.area.typedModel)).collect(d | d.bottomPattern).flatten();
-                        targetVar = v.findReferencesInPatterns(searchPatterns); 
-                    }
-                } else if (self.area.isTypeOf(QVT!Mapping)) {
-                    // 1. Guard Pattern of the Mapping
-                    searchPatterns = self.area.guardPattern.asSequence();
-                    targetVar = v.findReferencesInPatterns(searchPatterns); 
-                    // 2. Mapping's domain bottom pattern
-                    if (targetVar == null) {
-                        searchPatterns = self.area.domain.collect(d | d.bottomPattern).flatten();
-                        targetVar = v.findReferencesInPatterns(searchPatterns); 
-                        if (targetVar == null) {
-                            // 3. Mapping's domain guard patterns
-                            searchPatterns = self.area.domain.collect(d | d.guardPattern).flatten();
-                            targetVar = v.findReferencesInPatterns(searchPatterns); 
-                        }
-                    }
-                }
-                if (targetVar == null) {
-                    // Search in the context
-                    searchPatterns = self.area.getContextMappingPatterns();
-                    targetVar = v.findReferencesInPatterns(searchPatterns);
-                }
-            }
-            if (targetVar == null) {
-                if (self.area.isTypeOf(QVT!Mapping)) {
-                    throw "Error! not able to find a local reference for variable " + v + " in assignemnt " + assignment + "in BottomPattern of Mapping " + self.area;  
-                } else if(self.area.isTypeOf(QVT!CoreDomain)) {
-                    throw "Error! not able to find a local reference for variable " + v + " in assignment " + assignment + "in BottomPattern of Domain " + self.area;  
-                }  
-            }
-            assignment.value.fixVarReferences(targetVar);
-            if (assignment.isTypeOf(QVT!PropertyAssignment)) {
-                assignment.slotExpression.fixVarReferences(targetVar);
-            } else if (assignment.isTypeOf(QVT!VariableAssignment)) {
-                if (assignment.targetVariable.name = targetVar.name) {
-                    assignment.targetVariable = targetVar;
-                }
-            }
-        }
-    }
-}
-
-operation QVT!OCLExpression fixVarReferences(pattern : QVT!Pattern) {
-	//self.toString().println("Fixing OCLExpression ");
-    var refVars =  self.findReferencedVariables();
-    //refVars.println("refVars ");
-    // Find variables and fix references
-    for (v in refVars) {
-        //v.println("Fixing ");
-        var searchPatterns = new Sequence();
-        searchPatterns.add(pattern);
-        if (pattern.area.isTypeOf(QVTm!CoreDomain)) {
-        	if (pattern.isTypeOf(QVTm!BottomPattern)) {
-        		// 1. GuardPattern of the Domain
-	            searchPatterns.add(pattern.area.guardPattern);
-	            // 2. BottomPattern of domains with depending typed models
-	            searchPatterns.add(pattern.area.rule.domain
-	            		.select(d | d.typedModel.dependsOn.includes(pattern.area.typedModel))
-	            		.collect(d | d.bottomPattern).flatten());
-        	}
-		} else if (pattern.area.isTypeOf(QVTm!Mapping)) {
-			if (pattern.isTypeOf(QVTm!BottomPattern)) {
-				// 1. GuardPattern of the Mapping, and thus GuardPatterns of the domains
-	            searchPatterns.add(pattern.area.guardPattern);
-            }
-            searchPatterns.addAll(pattern.area.domain.collect(d | d.guardPattern).flatten());
-            // 2. BottomPatterns of the Mapping's domains
-            searchPatterns.addAll(pattern.area.domain.collect(d | d.bottomPattern).flatten());
-		}
-        // MiddleGuard Pattern depends on domain guard patterns
-        //searchPatterns.println("searchPatterns ");
-        var targetVar = v.findReferencesInPatterns(searchPatterns);
-        //targetVar.println("targetVar ");
-        if (targetVar == null) {
-            if (pattern.area.isTypeOf(QVTm!Mapping)) {
-                throw "Error! not able to find a local reference for variable " + v + " in predicate " + self.toString() + "in " + pattern.area;  
-            } else if(self.pattern.area.isTypeOf(QVTm!CoreDomain)) {
-                throw "Error! not able to find a local reference for variable " + v + " in predicate " + self.toString() + "in " + self.area;  
-            }  
-        }
-        self.fixVarReferences(targetVar);
-    }
-}
-
-/****o* QVTHelpers/fixOperationCallReferences
- * NAME
- *  fixOperationCallReferences - Fixes OperationCall's varaible references that point
- *  to variables in some other model (same name, different model)
- * FUNCTION
- *  Loops trough all the operation calls and fixes references to the variables. 
- * CONTEXT
- *  QVT!BottomPattern
- * TODO
- *  Only predicates with references to variables in other models should be checked,
- *  and then only references to varaibles in other models fixed. Add a select
- *  statement to filter these.
- */
-operation QVT!BottomPattern fixOperationCallReferences() {
-    for (o in self.enforcementOperation) {
-        //predicate.println("Predicate ");
-        var refVars =  o.operationCallExp.findReferencedVariables();
-        //refVars.println("refVars ");
-        // Find variables and fix references
-        for (v in refVars) {
-            //v.println("Fixing ");
-            // MiddleGuard Pattern depends on domain guard patterns
-            var targetVar = v.findReferencesInPatterns(self.asSequence());
-            if (targetVar == null) {
-                var searchPatterns;
-                if (self.area.isTypeOf(QVT!CoreDomain)) {
-                    // 1. Guard Pattern of the Domain
-                    searchPatterns = self.area.rule.domain.collect(d | d.guardPattern).flatten();
-                    targetVar = v.findReferencesInPatterns(searchPatterns); 
-                    // 2. Bottom Pattern of domains with depending typed models
-                    if (targetVar == null) {
-                        searchPatterns = self.area.rule.domain.select(d | d.typedModel.dependsOn.includes(self.area.typedModel)).collect(d | d.bottomPattern).flatten();
-                        targetVar = v.findReferencesInPatterns(searchPatterns); 
-                    }
-                } else if (self.area.isTypeOf(QVT!Mapping)) {
-                    // 1. Guard Pattern of the Mapping
-                    searchPatterns = self.area.guardPattern.asSequence();
-                    targetVar = v.findReferencesInPatterns(searchPatterns); 
-                    // 2. Mapping's domain bottom pattern
-                    if (targetVar == null) {
-                        searchPatterns = self.area.domain.collect(d | d.bottomPattern).flatten();
-                        targetVar = v.findReferencesInPatterns(searchPatterns); 
-                        if (targetVar == null) {
-                            // 3. Mapping's domain guard patterns
-                            searchPatterns = self.area.domain.collect(d | d.guardPattern).flatten();
-                            targetVar = v.findReferencesInPatterns(searchPatterns); 
-                        }
-                    }
-                }
-                if (targetVar == null) {
-                    // Search in the context
-                    searchPatterns = self.area.getContextMappingPatterns();
-                    targetVar = v.findReferencesInPatterns(searchPatterns);
-                }
-            }
-            if (targetVar == null) {
-                if (self.area.isTypeOf(QVT!Mapping)) {
-                    throw "Error! not able to find a local reference for variable " + v + " in operation " + o + "in BottomPattern of Mapping " + self.area;  
-                } else if(self.area.isTypeOf(QVT!CoreDomain)) {
-                    throw "Error! not able to find a local reference for variable " + v + " in operation " + o + "in BottomPattern of Domain " + self.area;  
-                }  
-            }
-            o.operationCallExp.fixVarReferences(targetVar);
-        }
-    }
-}
-
-/****o* QVTHelpers/findReferencesInPatterns
- * NAME
- *  findReferencesInPatterns - Searches in the patterns for a reference to a 
- *  variable with the same name as this.
- * CONTEXT
- *  QVT!Variable  The variable to search
- * PARAMETERS
- *  patterns The collection of patterns to seach in
- * RESULT
- *  A reference to the varaible if found. null otherwise.
- */
-operation QVT!Variable findReferencesInPatterns(patterns : Sequence) : QVT!Variable {
-    
-    var targetVar = null;
-    for (p in patterns) {
-        targetVar = p.findVariableByName(self);
-        if (targetVar <> null) {
-           break;
-        }
-    }
-    return targetVar;
-}
-
-/****o* QVTHelpers/findVariableByName
- * NAME
- *  findVariableByName - Find all variables in the pattern that match the input 
- *  variable by name 
- * CONTEXT
- *  QVT!GuardPattern  The pattern to search
- * ANNOTATIONS
- *  cached
- * TODO
- *  If the QVT model had a getAllVariables() method that returned variables and
- *  realized variables, these two methods could be combined. 
- */
-operation QVT!GuardPattern findVariableByName(variable : QVT!TypedElement) {
-    
-    return self.variable.selectOne(lv | lv.name == variable.name);
-}
-
-/****o* QVTHelpers/findVariableByName
- * NAME
- *  findVariableByName - Find all variables in the pattern that match the input 
- *  variable by name 
- * CONTEXT
- *  QVT!GuardPattern  The pattern to search
- * ANNOTATIONS
- *  cached
- * TODO
- *  If the QVT model had a getAllVariables() method that returned variables and
- *  realized variables, these two methods could be combined. 
- */
-operation QVT!BottomPattern findVariableByName(variable : QVT!TypedElement) {
-    
-    return self.variable.includingAll(self.realizedVariable).selectOne(lv | lv.name == variable.name);
-}
-
-
 /****o* QVTHelpers/isContainer
  * NAME
  *  isContainer - Indicates if the property is a containment relation
@@ -1033,4 +670,52 @@ operation QVT!Area isNested() : Boolean {
     return self.rule.context.isDefined();
 }
 
+operation areEquivalentAssignments(assg1 : QVT!Assignment, assg2 : QVT!Assignment) : Boolean {
+	// FIXME If we found an example decide if we need OCL to provide OCL expression comparision
+	return false;
+}
+
+
+// ======================== Fix Variable References ===========================
+
+// There are two bad references:
+// 1. The variable belongs to another model
+// 2. The variable belongs to another mapping
+// TODO We really only neeed VariableExp?
+// TODO check types/superTypes too?
+operation QVT!VariableExp fixVarReferences() {
+	//self.toString().println("fixCopiedVarReferences ");
+	//self.getOwningMapping().println();
+	var targetVar = self.getOwningMapping().getVariables().selectOne(v | v.name == self.referredVariable.name);
+	//targetVar.println("targetVar ");
+	self.referredVariable = targetVar;
+}
+
+@cached
+operation QVT!Variable getOwningMapping() : QVT!Mapping {
+	
+	if (self.oppositePattern().area.isTypeOf(QVT!Mapping))
+		return self.oppositePattern().area;
+	else
+		return self.oppositePattern().area.rule;
+}
+
+operation QVT!VariableExp getOwningMapping() : QVT!Mapping {
+	
+	return self.eContainer().closure(e | e.eContainer()).selectOne(m | m.isTypeOf(QVT!Mapping));
+}
+
+
+
+operation QVT!Mapping getVariables() : Sequence {
+	
+	var vars : Sequence();
+	vars.addAll(self.guardPattern.variable);
+	vars.addAll(self.bottomPattern.variable);
+	vars.addAll(self.bottomPattern.realizedVariable);
+	vars.addAll(self.domain.guardPattern.variable.flatten());
+	vars.addAll(self.domain.bottomPattern.variable.flatten());
+	vars.addAll(self.domain.bottomPattern.realizedVariable.flatten());
+	return vars;
+}
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:eCoreContainemntTree="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree">
+  <eCoreContainemntTree:Node name="Column" parent="/5" superTypes="/3">
+    <element href="SimpleRDBMS.ecore#//Column"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="ForeignKey" parent="/5" superTypes="/3">
+    <element href="SimpleRDBMS.ecore#//ForeignKey"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="Key" parent="/5" superTypes="/3">
+    <element href="SimpleRDBMS.ecore#//Key"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="RModelElement" subTypes="/0 /5 /4 /1 /2">
+    <element href="SimpleRDBMS.ecore#//RModelElement"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="Schema" children="/5" superTypes="/3">
+    <element href="SimpleRDBMS.ecore#//Schema"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="Table" parent="/4" children="/0 /1 /2" superTypes="/3">
+    <element href="SimpleRDBMS.ecore#//Table"/>
+  </eCoreContainemntTree:Node>
+</xmi:XMI>

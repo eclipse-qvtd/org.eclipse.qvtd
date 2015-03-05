@@ -24,6 +24,12 @@ pre {
  ******
  */
 
+migrate CoreModel
+	{
+		migrated.externalURI = original.externalURI.replace(".qvtu.qvtc", ".qvtm.qvtc");
+	}
+	
+
 // **** Flatten mappings by removing nested mappings ****
 
 /****d* QVTuToQVTm/delete/NestedMappings
@@ -179,16 +185,12 @@ migrate Mapping
         // Init Variables
         for (d in original.domain.includingAll(nested.domain)) {
             for (a in d.bottomPattern.assignment.select(a | a.equivalent().isUndefined()).flatten()) {
-                //a.toString().println("using ");
                 var migBottomPat = migrated.domain
                         .selectOne(d | d.typedModel.name == a.bottomPattern.area.typedModel.name).bottomPattern; 
                 var targetVar = migBottomPat.variable
                         .selectOne(v | v.name == a.targetVariable.name);//.println();
                 targetVar.ownedInit = emfTool.getECoreUtil().copy(a.value);
-                // Fix the var references
-                targetVar.ownedInit.fixVarReferences(migBottomPat);
-                //targetVar.toString().println();
-            }               
+            }
         }
         for (a in original.bottomPattern.assignment
                 .includingAll(nested.bottomPattern.assignment).flatten()
@@ -219,24 +221,20 @@ migrate Mapping
     {
     	//original.println("Refining ");
     	// Get the set of refined mappings
-    	var refined = original.closure(m | m.refinement).asSet();//.println("refined ");
+    	var refined = original.closure(m | m.refinement).asSet();
     	migrated.migrateFromMappings(refined);
     	// Promote local mappings from refined mappings
     	var refinedLocal = original.closure(m | m.refinement).asSet()
-    			.closure(m | m.local).asSet();//.println("refinedLocal ");
+    			.closure(m | m.local).asSet();
     	migrated.migrateFromMappings(refinedLocal);
     	// Init Variables
     	for (d in original.domain.includingAll(refined.domain)) {
 			for (a in d.bottomPattern.assignment.select(a | a.equivalent().isUndefined()).flatten()) {
-				//a.toString().println("using ");
 				var migBottomPat = migrated.domain
 						.selectOne(d | d.typedModel.name == a.bottomPattern.area.typedModel.name).bottomPattern; 
 				var targetVar = migBottomPat.variable
-						.selectOne(v | v.name == a.targetVariable.name);//.println();
+						.selectOne(v | v.name == a.targetVariable.name);
 				targetVar.ownedInit = emfTool.getECoreUtil().copy(a.value);
-				// Fix the var references
-				targetVar.ownedInit.fixVarReferences(migBottomPat);
-				//targetVar.toString().println();
 			}    			
     	}
     	for (a in original.bottomPattern.assignment
@@ -246,8 +244,6 @@ migrate Mapping
 			var targetVar = migrated.bottomPattern.variable
 					.selecOnet(v | v.name == a.targetVariable.name);
 			targetVar.ownedInit = emfTool.getECoreUtil().copy(a.value);
-			// Fix the var references
-			targetVar.ownedInit.fixVarReferences(migrated.bottomPattern);
 		}
     }
 
@@ -267,28 +263,29 @@ delete VariableAssignment
 //============================= END ===========================================
 
 operation QVTm!Mapping migrateFromMappings(mappings : Collection) {
+	//self.name.println();
 	for (tm in QVTu!TypedModel.all().select(tm | tm.name.isDefined())) {
 		//tm.println("tm ");
 		var tmDomains = mappings.domain.flatten().select(d | d.typedModel == tm);
-		//tmDomains.println();
-		var migDomain = self.domain.selectOne(ed | ed.typedModel == tm.equivalent());
-    	if (migDomain.isUndefined()) {
-  		    //tm.println("Create ");
-            migDomain = new QVTm!CoreDomain;
-            migDomain.guardPattern = new QVTm!GuardPattern;
-            migDomain.bottomPattern = new QVTm!BottomPattern;
-            migDomain.isCheckable = tmDomains.exists(d | d.isCheckable);
-            migDomain.isEnforceable = tmDomains.exists(d | d.isEnforceable);
-            migDomain.typedModel = tm.equivalent();
-            migDomain.name = tm.name;
-            self.domain.add(migDomain);
-    	}
-    	migDomain.migrateFromAreas(tmDomains);
+		if (not tmDomains.isEmpty()) {
+			var migDomain = self.domain.selectOne(ed | ed.typedModel == tm.equivalent());
+	    	if (migDomain.isUndefined()) {
+	  		    //tm.println("Create ");
+	            migDomain = new QVTm!CoreDomain;
+	            migDomain.guardPattern = new QVTm!GuardPattern;
+	            migDomain.bottomPattern = new QVTm!BottomPattern;
+	            migDomain.isCheckable = tmDomains.exists(d | d.isCheckable);
+	            migDomain.isEnforceable = tmDomains.exists(d | d.isEnforceable);
+	            migDomain.typedModel = tm.equivalent();
+	            migDomain.name = tm.name;
+	            self.domain.add(migDomain);
+	    	}
+	    	migDomain.migrateFromAreas(tmDomains);
+		}
 	}
 	self.migrateFromAreas(mappings);
 }
 
-	
 operation QVTm!Area migrateFromAreas(areas : Collection) {
 	//self.toString().println("migrateFromAreas ");
 	self.guardPattern.addRefinedVariables(areas.guardPattern);
@@ -301,21 +298,21 @@ operation QVTm!Area migrateFromAreas(areas : Collection) {
 		var aCopy = emfTool.getECoreUtil().copy(a);
 		self.bottomPattern.assignment.add(aCopy);
 		// Fix the var references
-		aCopy.fixVarReferences();
+		//aCopy.fixCopiedVarReferences();
 	}
 	for (p in areas.bottomPattern.predicate.flatten()) {
 		//p.toString().println();
 		var pCopy = emfTool.getECoreUtil().copy(p);
 		self.bottomPattern.predicate.add(pCopy);
 		// Fix the var references
-		pCopy.fixVarReferences();
+		//pCopy.fixCopiedVarReferences();
 	}
 	for (p in areas.guardPattern.predicate.flatten()) {
 		//p.toString().println();
 		var pCopy = emfTool.getECoreUtil().copy(p);
 		self.guardPattern.predicate.add(pCopy);
 		// Fix the var references
-		pCopy.fixVarReferences();
+		//pCopy.fixCopiedVarReferences();
 	}
 	
 }
@@ -331,25 +328,6 @@ operation QVTu!VariableAssignment isVariableInit(refinedPatterns : Collection) {
 	} else {
 		return false;
 	}
-}
-	
-
-operation areEquivalentAssignments(assg1, assg2) : Boolean {
-	// FIXME If we found an example decide if we need OCL to provide OCL expression comparision
-	return false;
-}
-
-operation QVT!Predicate fixVarReferences() {
-    //self.toString().println("Fixing Assignment ");
-    self.conditionExpression.fixVarReferences(self.pattern);
-}
-
-operation QVT!Assignment fixVarReferences() {
-    //self.toString().println("Fixing Assignment ");
-    self.value.fixVarReferences(self.bottomPattern);
-    if (self.isTypeOf(QVT!PropertyAssignment)) {
-        self.slotExpression.fixVarReferences(self.bottomPattern);
-    }
 }
 
 
@@ -377,21 +355,26 @@ operation QVTm!BottomPattern addRefinedRealizedVariables(sourcePatterns : Collec
 }
 
 post {
-    // Init expressions in mappings with nested mappings that get flatten can only
-    // be fixed at the end when all the flattening has occured
-    for (v in QVTm!Variable.all().select(v | v.ownedInit.isDefined())) {
-		v.ownedInit.fixVarReferences(v.oppositePattern());
-    } 
-    /*for (m in QVTm!Mapping) {
-        for (d in m.domain) {
-            for (v in d.bottomPattern.variable.select(v | v.ownedInit.isDefined())) {
-                v.ownedInit.fixVarReferences(d.bottomPattern);
-            }
-        }
-        for (v in m.bottomPattern.variable.select(v | v.ownedInit.isDefined())) {
-            v.ownedInit.fixVarReferences(m.bottomPattern);
-        }
-    }*/
+    
+    /*QVTm!VariableExp.all().select(ve | not ve.referredVariable.eContainer().isTypeOf(QVT!IteratorExp)).size.println();
+    QVTm!VariableExp.all()
+    	.select(ve | not ve.referredVariable.eContainer().isTypeOf(QVT!IteratorExp)
+    			and (ve.referredVariable.owningModel() <> ve.owningModel()
+    				or ve.referredVariable.getOwningMapping() <> ve.getOwningMapping())).size().println("to fix ");
+    */
+    // Trailing variable references can only be fixed once all the elements are in place
+    for (ve in QVTm!VariableExp.all()
+    	.select(ve | not ve.referredVariable.eContainer().isKindOf(QVT!LoopExp)
+    			and (ve.referredVariable.owningModel() <> ve.owningModel()
+    				or ve.referredVariable.getOwningMapping() <> ve.getOwningMapping())
+    	)) {
+    	ve.fixVarReferences();
+    }
+    /*QVTm!VariableExp.all()
+    	.select(ve | not ve.referredVariable.eContainer().isTypeOf(QVT!IteratorExp)
+    			and (ve.referredVariable.owningModel() <> ve.owningModel()
+    				or ve.referredVariable.getOwningMapping() <> ve.getOwningMapping())).size().println("missing ");
+	*/
     "QVTuToQVTm Done!".println();
 }
 

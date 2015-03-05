@@ -193,9 +193,6 @@ rule Assignments
         } else {
             vars = aIn.bottomPattern.area.getAllVariables().equivalent();
         }
-        for (vFix in vars) {
-            aOut.value.fixVarReferences(vFix);
-        }
     }
 
 rule PropertyAssignments
@@ -210,9 +207,6 @@ rule PropertyAssignments
             vars = paIn.bottomPattern.area.`rule`.getAllVariables().equivalent();
         } else {
             vars = paIn.bottomPattern.area.getAllVariables().equivalent();
-        }
-        for (vFix in vars) {
-            paOut.slotExpression.fixVarReferences(vFix);
         }
     }
 
@@ -243,10 +237,6 @@ rule Predicates
         } else {
             vars = pIn.pattern.area.getAllVariables().equivalent();
         }
-        for (vFix in vars) {
-            pOut.conditionExpression.fixVarReferences(vFix);
-        }
-        
     }
      
 rule Variables
@@ -265,6 +255,9 @@ rule Variables
         }
         vOut.isImplicit = vIn.isImplicit;
         vOut.type = vIn.type;
+        if (vIn.ownedInit.isDefined()) {
+        	vOut.ownedInit = emfTool.getEcoreUtil().copy(vIn.ownedInit);
+        }
     }
     
 rule RealizedVariables
@@ -509,5 +502,13 @@ post {
 	-- FIXME By some reason making the rule Imports be lazy, makes the transformation strangely behave. Investigate
 	-- For the time being, I don't make the rule lazy and I remove the orphane elements at the end'
 	delete QVTi!Import.all.select(x | x.eContainer().isUndefined());
+	// Trailing variable references can only be fixed once all the elements are in place
+	for (ve in QVTi!VariableExp.all()
+    	.select(ve | not ve.referredVariable.eContainer().isKindOf(QVT!LoopExp)
+    			and (ve.referredVariable.owningModel() <> ve.owningModel()
+    				or ve.referredVariable.getOwningMapping() <> ve.getOwningMapping())
+    	)) {
+    	ve.fixVarReferences();
+    }
     "QVTp+s to QVTi Done".println();
 }    

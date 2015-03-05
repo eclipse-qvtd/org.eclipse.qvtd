@@ -76,26 +76,6 @@ rule Transformation
         tOut.name = tIn.name;
         tOut.modelParameter ::= tIn.modelParameter;
         tOut.`rule`.addAll(tIn.`rule`.equivalents().flatten());
-        // Fix references
-        // TODO emfTool.getEcoreUtil() to do a filtered loop
-        for(r in tOut.`rule`) {
-            r.guardPattern.fixPredicateVarReferences();
-	        r.bottomPattern.fixPredicateVarReferences();
-	        r.bottomPattern.fixOperationCallReferences();
-	        r.bottomPattern.fixAssignmentVarReferences();
-	        for (v in r.bottomPattern.variable.select(v | v.ownedInit.isDefined())) {
-	            v.ownedInit.fixVarReferences(r.bottomPattern);
-	        }
-	        for (d in r.domain) {
-	            d.guardPattern.fixPredicateVarReferences();
-                d.bottomPattern.fixPredicateVarReferences();
-                d.bottomPattern.fixOperationCallReferences();
-                d.bottomPattern.fixAssignmentVarReferences();
-                for (v in d.bottomPattern.variable.select(v | v.ownedInit.isDefined())) {
-	                v.ownedInit.fixVarReferences(d.bottomPattern);
-	            }
-	        }
-        }
     }
 
 /****u* QVTmToQVTiPartition/TypedModel
@@ -172,26 +152,16 @@ rule Mapping
 		    // Create Middle domain
 		    var mM : QVTp!CoreDomain = new QVTp!CoreDomain;
 		    var tm = m.getTransforamtion().getMiddleTypedModel().equivalent();
-		    mM.isEnforceable = true;
 		    mM.isCheckable = false;
+		    mM.isEnforceable = true;
 		    mM.typedModel = tm;
 		    mM.name = tm.name; 
 		    mM.guardPattern = new QVTp!GuardPattern;
 		    mM.guardPattern.variable.addAll(m.guardPattern.variable.equivalent().select(v | v.~side == "l"));
 		    mM.guardPattern.variable.addAll(m.bottomPattern.variable.equivalent().select(v | v.~side == "l"));
-		    // FIXME init var references
-		    //for (v in mM.guardPattern.variable) {
-	        // 	v.ownedInit.fixVarReferences(mM.guardPattern);
-	        //}
 		    mM.bottomPattern = new QVTp!BottomPattern;
-		    //mM.bottomPattern.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(m.bottomPattern.realizedVariable));
 		    mM.bottomPattern.realizedVariable.addAll(m.bottomPattern.realizedVariable.equivalent().select(v | v.~side == "l"));
-		    // FIXME init var references
-		    //for (v in mM.bottomPattern.variable) {
-	        // 	v.ownedInit.fixVarReferences(mM.guardPattern);
-	        //}
 		    lmM.domain.add(mM);
-		    //lmM.local.addAll(m.local.equivalent().select(m | m.~side = "l"));
         }
         // FIXME This should be 1 mapping per domain!
         if (m.domain.exists(d | d.isOutputDomain())) {
@@ -360,14 +330,8 @@ rule LDomain
          od.isEnforceable = id.isEnforceable;
          od.typedModel ::= id.typedModel;
          od.guardPattern = new QVTp!GuardPattern;
-         //od.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.guardPattern.variable));
-         //od.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.bottomPattern.variable));
          od.guardPattern.variable.addAll(id.guardPattern.variable.equivalent());
          od.guardPattern.variable.addAll(id.bottomPattern.variable.equivalent());
-         // FIXME init var references
-         //for (v in od.guardPattern.variable) {
-         //	v.ownedInit.fixVarReferences(od.guardPattern);
-         //}
          if(id.`rule`.equivalents().isDefined()) {
             id.`rule`.equivalents().flatten().selectOne(m | m.~side = "l").guardPattern.predicate.
                 addAll(emfTool.getECoreUtil().copyAll(id.guardPattern.predicate.includingAll(id.bottomPattern.predicate)));
@@ -388,21 +352,10 @@ rule RDomain
          od.isEnforceable = id.isEnforceable;
          od.typedModel ::= id.typedModel;
          od.guardPattern = new QVTp!GuardPattern;
-         //od.guardPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.guardPattern.variable));
          od.guardPattern.variable.addAll(id.guardPattern.variable.equivalent());
-         // FIXME init var references
-         //for (v in od.guardPattern.variable) {
-         //	v.ownedInit.fixVarReferences(od.guardPattern);
-         //}
          od.bottomPattern = new QVTp!BottomPattern;
-         //od.bottomPattern.variable.addAll(emfTool.getECoreUtil().copyAll(id.bottomPattern.variable));
-         //od.bottomPattern.realizedVariable.addAll(emfTool.getECoreUtil().copyAll(id.bottomPattern.realizedVariable));
          od.bottomPattern.variable.addAll(id.bottomPattern.variable.equivalent());
          od.bottomPattern.realizedVariable.addAll(id.bottomPattern.realizedVariable.equivalent());
-         // FIXME init var references
-         //for (v in od.bottomPattern.variable) {
-         //	v.ownedInit.fixVarReferences(od.bottomPattern);
-         //}
          // Predicates and assignments are moved to the mapping patterns
          id.`rule`.equivalents().flatten().selectOne(m | m.~side = "r").guardPattern.predicate.
                 addAll(emfTool.getECoreUtil().copyAll(id.guardPattern.predicate.includingAll(id.bottomPattern.predicate)));
@@ -425,7 +378,9 @@ rule LRVariable
 		}
 		ov.name = iv.name;
 		ov.isImplicit = iv.isImplicit();
-		ov.ownedInit = emfTool.getECoreUtil().copy(iv.ownedInit);
+		if (iv.ownedInit.isDefined()) {
+			ov.ownedInit = emfTool.getECoreUtil().copy(iv.ownedInit);
+		}
 		ov.type = iv.type;
 	}
 
@@ -442,7 +397,9 @@ rule LRRealizedVariable
 		}
 		ov.name = iv.name;
 		ov.isImplicit = iv.isImplicit();
-		ov.ownedInit = emfTool.getECoreUtil().copy(iv.ownedInit);
+		if (iv.ownedInit.isDefined()) {
+			ov.ownedInit = emfTool.getECoreUtil().copy(iv.ownedInit);
+		}
 		ov.type = iv.type;
 	}
 
@@ -463,7 +420,9 @@ rule MVariable
 			lVar.name = iv.name;
 			lVar.~side = "l";
 			lVar.isImplicit = iv.isImplicit();
-			lVar.ownedInit = emfTool.getECoreUtil().copy(iv.ownedInit);
+			if (iv.ownedInit.isDefined()) {
+				lVar.ownedInit = emfTool.getECoreUtil().copy(iv.ownedInit);
+			}
 			lVar.type = iv.type;
 			vars.add(lVar);
 		}
@@ -473,7 +432,9 @@ rule MVariable
 			rVar.name = iv.name;
 			rVar.~side = "r";		// FIXME use domain name
 			rVar.isImplicit = iv.isImplicit();
-			rVar.ownedInit = emfTool.getECoreUtil().copy(iv.ownedInit);
+			if (iv.ownedInit.isDefined()) {
+				rVar.ownedInit = emfTool.getECoreUtil().copy(iv.ownedInit);
+			}
 			rVar.type = iv.type;
 			vars.add(rVar);
         }
@@ -493,9 +454,8 @@ rule MRalizedVariable
 		if (iv.oppositePattern().area.domain.one(d | d.isInputDomain())) {
 			var lVar = new QVTp!RealizedVariable;
 			lVar.name = iv.name;
-			lVar.~side = "l";
+			lVar.~side = "l";	// FIXME use domain name
 			lVar.isImplicit = iv.isImplicit();
-			lVar.ownedInit = emfTool.getECoreUtil().copy(iv.ownedInit);
 			lVar.type = iv.type;
 			vars.add(lVar);
 		}
@@ -505,7 +465,6 @@ rule MRalizedVariable
 			rVar.name = iv.name;
 			rVar.~side = "r";	// FIXME use domain name
 			rVar.isImplicit = iv.isImplicit();
-			rVar.ownedInit = emfTool.getECoreUtil().copy(iv.ownedInit);
 			rVar.type = iv.type;
 			vars.add(rVar);
 		}
@@ -517,7 +476,7 @@ operation  QVTp!RealizedVariable copyToVariable() : QVTp!Variable {
     var v = new QVTp!Variable;
     // Var
     v.isImplicit = self.isImplicit;
-    v.ownedInit = emfTool.getECoreUtil().copy(self.ownedInit);
+    //v.ownedInit = emfTool.getECoreUtil().copy(self.ownedInit);
     v.representedParameter = self.representedParameter;
     // Typed Element
     v.isRequired = self.isRequired;
@@ -600,6 +559,15 @@ operation QVT!VariableAssignment toOCLExpression() : QVT!OperationCallExp {
 operation getEqualsOperation() : Any {
 	return QVTm!Predicate.all().first().conditionExpression.referredOperation;
 }
+
 post {
+	// Trailing variable references can only be fixed once all the elements are in place
+	for (ve in QVTp!VariableExp.all()
+    	.select(ve | not ve.referredVariable.eContainer().isKindOf(QVT!LoopExp)
+    			and (ve.referredVariable.owningModel() <> ve.owningModel()
+    				or ve.referredVariable.getOwningMapping() <> ve.getOwningMapping())
+    	)) {
+    	ve.fixVarReferences();
+    }
 	"Partition Done".println();
 }

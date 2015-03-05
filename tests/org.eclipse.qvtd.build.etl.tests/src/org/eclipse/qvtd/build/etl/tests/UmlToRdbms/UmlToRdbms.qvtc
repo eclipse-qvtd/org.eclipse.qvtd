@@ -390,13 +390,14 @@ map attributeColumns in umlRdbms {
         default a2c.owner := c2t; -- Check, not always a2c are owned by c2t, it maybe a nla!
     }
     map {
-        check enforce rdbms () {
-                ct:String |
-                c.type := ct;
-            }
         where (p2n:PrimitiveToName |) {
-            p2n.typeName := ct;
+            ct:String |
             a2c.type := p2n;
+            ct := c.type;
+            ct := p2n.typeName;
+            p2n.typeName := ct;
+            c.type := ct;
+            --c.type := p2n.typeName;
         }
     }
     map {

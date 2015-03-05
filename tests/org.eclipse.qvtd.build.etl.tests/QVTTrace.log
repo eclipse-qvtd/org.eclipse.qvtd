@@ -6,12 +6,2096 @@ Mapping __root__
 ==============================
 Output Model
 ==============================
-  Visiting MappingSequence
-Visiting MappingLoop, calling: p
-  Visiting MappingSequence
+Visiting MappingLoop, binding: p
 Visiting MappingCall, calling: packageToSchema_LM
   Mapping packageToSchema_LM
+    Visiting Mapping GuardPattern
+      GuardPattern has no predicates.
     CoreDomain middle
       Visiting CoreDomain GuardPattern
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment p2s.umlPackage = Package [6b1316f4] {
+      kind = 
+      name = People
+      elements = [Class] x 10
+      }
+    VisitPropertyAssignment p2s.name = People
+    RealizedVariables for CoreDomain uml
+    RealizedVariables for CoreDomain middle
+    RealizedVariable p2s: PackageToSchema [625e068] {
+      name = People
+      classesToTables = [ ]
+      primitivesToNames = [ ]
+      schema = [ null ]
+      umlPackage = Package [6b1316f4]
+      }
+==============================
+Output Model
+==============================
+Visiting MappingCall, calling: packageToSchema_MR
+  Mapping packageToSchema_MR
+    Visiting Mapping GuardPattern
+      GuardPattern has no predicates.
+    CoreDomain rdbms
+      Visiting CoreDomain GuardPattern
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment s.name = People
+    VisitPropertyAssignment p2s.schema = Schema [2c888fc9] {
+      name = People
+      kind = [ null ]
+      tables = [ ]
+      }
+    RealizedVariables for CoreDomain rdbms
+    RealizedVariable s: Schema [2c888fc9] {
+      name = People
+      kind = [ null ]
+      tables = [ ]
+      }
+    RealizedVariables for CoreDomain middle
+==============================
+Output Model
+Schema [2c888fc9] {
+  name = People
+  kind = [ null ]
+  tables = [ ]
+  }
+==============================
+Visiting MappingLoop, binding: class
+Visiting MappingCall, calling: classToTable_LM
+  Mapping classToTable_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate c.namespace = p is true
+      Predicate c.kind = 'persistent' is true
+      GuardPattern result: true
+    CoreDomain middle
+      Visiting CoreDomain GuardPattern
+        Variable p2s: PackageToSchema [625e068] {
+          name = People
+          classesToTables = [ ]
+          primitivesToNames = [ ]
+          schema = Schema [2c888fc9]
+          umlPackage = Package [6b1316f4]
+          }
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment c2t.owner = PackageToSchema [625e068] {
+      name = People
+      classesToTables = [ ]
+      primitivesToNames = [ ]
+      schema = Schema [2c888fc9]
+      umlPackage = Package [6b1316f4]
+      }
+    VisitPropertyAssignment c2t.name = Student
+    VisitPropertyAssignment c2t.umlClass = Class [3997ebf6] {
+      kind = persistent
+      name = Student
+      namespace = Package [6b1316f4]
+      typeOpposite = [ ]
+      attributes = [Attribute] x 4
+      forward = [ ]
+      general = [ ]
+      generalOpposite = [ ]
+      reverse = [ ]
+      }
+    RealizedVariables for CoreDomain uml
+    RealizedVariables for CoreDomain middle
+    RealizedVariable c2t: ClassToTable [1161a1d5] {
+      fromAttributes = [ ]
+      column = [ null ]
+      name = Student
+      associationsToForeignKeys = [ ]
+      owner = PackageToSchema [625e068]
+      primaryKey = [ null ]
+      table = [ null ]
+      umlClass = Class [3997ebf6]
+      }
+==============================
+Output Model
+==============================
+Visiting MappingCall, calling: classToTable_MR
+  Mapping classToTable_MR
+    Visiting Mapping GuardPattern
+      Predicate p2s.schema = s is true
+      Predicate c2t.owner = p2s is true
+      GuardPattern result: true
+    CoreDomain rdbms
+      Visiting CoreDomain GuardPattern
+        Variable s: Schema [2c888fc9] {
+          name = People
+          kind = [ null ]
+          tables = [ ]
+          }
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment c2t.column = Column [1a754a4a] {
+      name = [ null ]
+      kind = [ null ]
+      type = [ null ]
+      owner = [ null ]
+      foreignKeys = [ ]
+      keys = [ ]
+      }
+    VisitPropertyAssignment c2t.table = Table [a604dd8] {
+      name = [ null ]
+      kind = [ null ]
+      columns = [ ]
+      schema = [ null ]
+      keys = [ ]
+      foreignKeys = [ ]
+      }
+    VisitPropertyAssignment t.name = Student
+    VisitPropertyAssignment c2t.primaryKey = Key [3896a53a] {
+      name = [ null ]
+      kind = [ null ]
+      owner = [ null ]
+      column = [ ]
+      }
+    VisitPropertyAssignment t.kind = base
+    VisitPropertyAssignment t.schema = Schema [2c888fc9] {
+      name = People
+      kind = [ null ]
+      tables = [ ]
+      }
+    VisitPropertyAssignment pk.owner = Table [a604dd8] {
+      name = Student
+      kind = base
+      columns = [ ]
+      schema = Schema [2c888fc9]
+      keys = [ ]
+      foreignKeys = [ ]
+      }
+    VisitPropertyAssignment pk.kind = primary
+    VisitPropertyAssignment pc.owner = Table [a604dd8] {
+      name = Student
+      kind = base
+      columns = [ ]
+      schema = Schema [2c888fc9]
+      keys = [Key] x 1
+      foreignKeys = [ ]
+      }
+    VisitPropertyAssignment pc.keys = [org.eclipse.emf.ecore.impl.DynamicEObjectImpl@3896a53a (eClass: org.eclipse.emf.ecore.impl.EClassImpl@1e5cd7f9 (name: Key) (instanceClassName: null) (abstract: false, interface: false))]
+    VisitPropertyAssignment pc.type = NUMBER
+    VisitPropertyAssignment pc.name = Student_tid
+    VisitPropertyAssignment pk.name = Student_pk
+    RealizedVariables for CoreDomain rdbms
+    RealizedVariable t: Table [a604dd8] {
+      name = Student
+      kind = base
+      columns = [Column] x 1
+      schema = Schema [2c888fc9]
+      keys = [Key] x 1
+      foreignKeys = [ ]
+      }
+    RealizedVariable pk: Key [3896a53a] {
+      name = Student_pk
+      kind = primary
+      owner = Table [a604dd8]
+      column = [Column] x 1
+      }
+    RealizedVariable pc: Column [1a754a4a] {
+      name = Student_tid
+      kind = [ null ]
+      type = NUMBER
+      owner = Table [a604dd8]
+      foreignKeys = [ ]
+      keys = [Key] x 1
+      }
+    RealizedVariables for CoreDomain middle
+==============================
+Output Model
+Schema [2c888fc9] {
+  name = People
+  kind = [ null ]
+  tables = [Table] x 1
+  }
+Table [a604dd8] {
+  name = Student
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [3896a53a] {
+  name = Student_pk
+  kind = primary
+  owner = Table [a604dd8]
+  column = [Column] x 1
+  }
+Column [1a754a4a] {
+  name = Student_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [a604dd8]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+==============================
+Visiting MappingCall, calling: classToTable_LM
+  Mapping classToTable_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate c.namespace = p is true
+      Predicate c.kind = 'persistent' is true
+      GuardPattern result: true
+    CoreDomain middle
+      Visiting CoreDomain GuardPattern
+        Variable p2s: PackageToSchema [625e068] {
+          name = People
+          classesToTables = [ClassToTable] x 1
+          primitivesToNames = [ ]
+          schema = Schema [2c888fc9]
+          umlPackage = Package [6b1316f4]
+          }
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment c2t.owner = PackageToSchema [625e068] {
+      name = People
+      classesToTables = [ClassToTable] x 1
+      primitivesToNames = [ ]
+      schema = Schema [2c888fc9]
+      umlPackage = Package [6b1316f4]
+      }
+    VisitPropertyAssignment c2t.name = Professor
+    VisitPropertyAssignment c2t.umlClass = Class [25048104] {
+      kind = persistent
+      name = Professor
+      namespace = Package [6b1316f4]
+      typeOpposite = [ ]
+      attributes = [Attribute] x 3
+      forward = [Association] x 1
+      general = [ ]
+      generalOpposite = [ ]
+      reverse = [ ]
+      }
+    RealizedVariables for CoreDomain uml
+    RealizedVariables for CoreDomain middle
+    RealizedVariable c2t: ClassToTable [22d5631c] {
+      fromAttributes = [ ]
+      column = [ null ]
+      name = Professor
+      associationsToForeignKeys = [ ]
+      owner = PackageToSchema [625e068]
+      primaryKey = [ null ]
+      table = [ null ]
+      umlClass = Class [25048104]
+      }
+==============================
+Output Model
+==============================
+Visiting MappingCall, calling: classToTable_MR
+  Mapping classToTable_MR
+    Visiting Mapping GuardPattern
+      Predicate p2s.schema = s is true
+      Predicate c2t.owner = p2s is true
+      GuardPattern result: true
+    CoreDomain rdbms
+      Visiting CoreDomain GuardPattern
+        Variable s: Schema [2c888fc9] {
+          name = People
+          kind = [ null ]
+          tables = [Table] x 1
+          }
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment c2t.column = Column [17ef771b] {
+      name = [ null ]
+      kind = [ null ]
+      type = [ null ]
+      owner = [ null ]
+      foreignKeys = [ ]
+      keys = [ ]
+      }
+    VisitPropertyAssignment c2t.table = Table [6a7499e3] {
+      name = [ null ]
+      kind = [ null ]
+      columns = [ ]
+      schema = [ null ]
+      keys = [ ]
+      foreignKeys = [ ]
+      }
+    VisitPropertyAssignment t.name = Professor
+    VisitPropertyAssignment c2t.primaryKey = Key [d233caf] {
+      name = [ null ]
+      kind = [ null ]
+      owner = [ null ]
+      column = [ ]
+      }
+    VisitPropertyAssignment t.kind = base
+    VisitPropertyAssignment t.schema = Schema [2c888fc9] {
+      name = People
+      kind = [ null ]
+      tables = [Table] x 1
+      }
+    VisitPropertyAssignment pk.owner = Table [6a7499e3] {
+      name = Professor
+      kind = base
+      columns = [ ]
+      schema = Schema [2c888fc9]
+      keys = [ ]
+      foreignKeys = [ ]
+      }
+    VisitPropertyAssignment pk.kind = primary
+    VisitPropertyAssignment pc.owner = Table [6a7499e3] {
+      name = Professor
+      kind = base
+      columns = [ ]
+      schema = Schema [2c888fc9]
+      keys = [Key] x 1
+      foreignKeys = [ ]
+      }
+    VisitPropertyAssignment pc.keys = [org.eclipse.emf.ecore.impl.DynamicEObjectImpl@d233caf (eClass: org.eclipse.emf.ecore.impl.EClassImpl@1e5cd7f9 (name: Key) (instanceClassName: null) (abstract: false, interface: false))]
+    VisitPropertyAssignment pc.type = NUMBER
+    VisitPropertyAssignment pc.name = Professor_tid
+    VisitPropertyAssignment pk.name = Professor_pk
+    RealizedVariables for CoreDomain rdbms
+    RealizedVariable t: Table [6a7499e3] {
+      name = Professor
+      kind = base
+      columns = [Column] x 1
+      schema = Schema [2c888fc9]
+      keys = [Key] x 1
+      foreignKeys = [ ]
+      }
+    RealizedVariable pk: Key [d233caf] {
+      name = Professor_pk
+      kind = primary
+      owner = Table [6a7499e3]
+      column = [Column] x 1
+      }
+    RealizedVariable pc: Column [17ef771b] {
+      name = Professor_tid
+      kind = [ null ]
+      type = NUMBER
+      owner = Table [6a7499e3]
+      foreignKeys = [ ]
+      keys = [Key] x 1
+      }
+    RealizedVariables for CoreDomain middle
+==============================
+Output Model
+Schema [2c888fc9] {
+  name = People
+  kind = [ null ]
+  tables = [Table] x 2
+  }
+Table [a604dd8] {
+  name = Student
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [3896a53a] {
+  name = Student_pk
+  kind = primary
+  owner = Table [a604dd8]
+  column = [Column] x 1
+  }
+Column [1a754a4a] {
+  name = Student_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [a604dd8]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+Table [6a7499e3] {
+  name = Professor
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [d233caf] {
+  name = Professor_pk
+  kind = primary
+  owner = Table [6a7499e3]
+  column = [Column] x 1
+  }
+Column [17ef771b] {
+  name = Professor_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [6a7499e3]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+==============================
+Visiting MappingCall, calling: classToTable_LM
+  Mapping classToTable_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate c.namespace = p is true
+      Predicate c.kind = 'persistent' is true
+      GuardPattern result: true
+    CoreDomain middle
+      Visiting CoreDomain GuardPattern
+        Variable p2s: PackageToSchema [625e068] {
+          name = People
+          classesToTables = [ClassToTable] x 2
+          primitivesToNames = [ ]
+          schema = Schema [2c888fc9]
+          umlPackage = Package [6b1316f4]
+          }
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment c2t.owner = PackageToSchema [625e068] {
+      name = People
+      classesToTables = [ClassToTable] x 2
+      primitivesToNames = [ ]
+      schema = Schema [2c888fc9]
+      umlPackage = Package [6b1316f4]
+      }
+    VisitPropertyAssignment c2t.name = Address
+    VisitPropertyAssignment c2t.umlClass = Class [4ab24098] {
+      kind = persistent
+      name = Address
+      namespace = Package [6b1316f4]
+      typeOpposite = [ ]
+      attributes = [ ]
+      forward = [ ]
+      general = [ ]
+      generalOpposite = [ ]
+      reverse = [Association] x 1
+      }
+    RealizedVariables for CoreDomain uml
+    RealizedVariables for CoreDomain middle
+    RealizedVariable c2t: ClassToTable [5f50ac7e] {
+      fromAttributes = [ ]
+      column = [ null ]
+      name = Address
+      associationsToForeignKeys = [ ]
+      owner = PackageToSchema [625e068]
+      primaryKey = [ null ]
+      table = [ null ]
+      umlClass = Class [4ab24098]
+      }
+==============================
+Output Model
+==============================
+Visiting MappingCall, calling: classToTable_MR
+  Mapping classToTable_MR
+    Visiting Mapping GuardPattern
+      Predicate p2s.schema = s is true
+      Predicate c2t.owner = p2s is true
+      GuardPattern result: true
+    CoreDomain rdbms
+      Visiting CoreDomain GuardPattern
+        Variable s: Schema [2c888fc9] {
+          name = People
+          kind = [ null ]
+          tables = [Table] x 2
+          }
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment c2t.column = Column [2c26cbf4] {
+      name = [ null ]
+      kind = [ null ]
+      type = [ null ]
+      owner = [ null ]
+      foreignKeys = [ ]
+      keys = [ ]
+      }
+    VisitPropertyAssignment c2t.table = Table [271816d1] {
+      name = [ null ]
+      kind = [ null ]
+      columns = [ ]
+      schema = [ null ]
+      keys = [ ]
+      foreignKeys = [ ]
+      }
+    VisitPropertyAssignment t.name = Address
+    VisitPropertyAssignment c2t.primaryKey = Key [1e820764] {
+      name = [ null ]
+      kind = [ null ]
+      owner = [ null ]
+      column = [ ]
+      }
+    VisitPropertyAssignment t.kind = base
+    VisitPropertyAssignment t.schema = Schema [2c888fc9] {
+      name = People
+      kind = [ null ]
+      tables = [Table] x 2
+      }
+    VisitPropertyAssignment pk.owner = Table [271816d1] {
+      name = Address
+      kind = base
+      columns = [ ]
+      schema = Schema [2c888fc9]
+      keys = [ ]
+      foreignKeys = [ ]
+      }
+    VisitPropertyAssignment pk.kind = primary
+    VisitPropertyAssignment pc.owner = Table [271816d1] {
+      name = Address
+      kind = base
+      columns = [ ]
+      schema = Schema [2c888fc9]
+      keys = [Key] x 1
+      foreignKeys = [ ]
+      }
+    VisitPropertyAssignment pc.keys = [org.eclipse.emf.ecore.impl.DynamicEObjectImpl@1e820764 (eClass: org.eclipse.emf.ecore.impl.EClassImpl@1e5cd7f9 (name: Key) (instanceClassName: null) (abstract: false, interface: false))]
+    VisitPropertyAssignment pc.type = NUMBER
+    VisitPropertyAssignment pc.name = Address_tid
+    VisitPropertyAssignment pk.name = Address_pk
+    RealizedVariables for CoreDomain rdbms
+    RealizedVariable t: Table [271816d1] {
+      name = Address
+      kind = base
+      columns = [Column] x 1
+      schema = Schema [2c888fc9]
+      keys = [Key] x 1
+      foreignKeys = [ ]
+      }
+    RealizedVariable pk: Key [1e820764] {
+      name = Address_pk
+      kind = primary
+      owner = Table [271816d1]
+      column = [Column] x 1
+      }
+    RealizedVariable pc: Column [2c26cbf4] {
+      name = Address_tid
+      kind = [ null ]
+      type = NUMBER
+      owner = Table [271816d1]
+      foreignKeys = [ ]
+      keys = [Key] x 1
+      }
+    RealizedVariables for CoreDomain middle
+==============================
+Output Model
+Schema [2c888fc9] {
+  name = People
+  kind = [ null ]
+  tables = [Table] x 3
+  }
+Table [a604dd8] {
+  name = Student
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [3896a53a] {
+  name = Student_pk
+  kind = primary
+  owner = Table [a604dd8]
+  column = [Column] x 1
+  }
+Column [1a754a4a] {
+  name = Student_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [a604dd8]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+Table [6a7499e3] {
+  name = Professor
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [d233caf] {
+  name = Professor_pk
+  kind = primary
+  owner = Table [6a7499e3]
+  column = [Column] x 1
+  }
+Column [17ef771b] {
+  name = Professor_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [6a7499e3]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+Table [271816d1] {
+  name = Address
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [1e820764] {
+  name = Address_pk
+  kind = primary
+  owner = Table [271816d1]
+  column = [Column] x 1
+  }
+Column [2c26cbf4] {
+  name = Address_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [271816d1]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+==============================
+Visiting MappingCall, calling: classToTable_LM
+  Mapping classToTable_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate c.namespace = p is true
+      Predicate c.kind = 'persistent' is true
+      GuardPattern result: true
+    CoreDomain middle
+      Visiting CoreDomain GuardPattern
+        Variable p2s: PackageToSchema [625e068] {
+          name = People
+          classesToTables = [ClassToTable] x 3
+          primitivesToNames = [ ]
+          schema = Schema [2c888fc9]
+          umlPackage = Package [6b1316f4]
+          }
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment c2t.owner = PackageToSchema [625e068] {
+      name = People
+      classesToTables = [ClassToTable] x 3
+      primitivesToNames = [ ]
+      schema = Schema [2c888fc9]
+      umlPackage = Package [6b1316f4]
+      }
+    VisitPropertyAssignment c2t.name = Timetable
+    VisitPropertyAssignment c2t.umlClass = Class [7caee177] {
+      kind = persistent
+      name = Timetable
+      namespace = Package [6b1316f4]
+      typeOpposite = [Attribute] x 1
+      attributes = [Attribute] x 1
+      forward = [ ]
+      general = [ ]
+      generalOpposite = [ ]
+      reverse = [ ]
+      }
+    RealizedVariables for CoreDomain uml
+    RealizedVariables for CoreDomain middle
+    RealizedVariable c2t: ClassToTable [609945e9] {
+      fromAttributes = [ ]
+      column = [ null ]
+      name = Timetable
+      associationsToForeignKeys = [ ]
+      owner = PackageToSchema [625e068]
+      primaryKey = [ null ]
+      table = [ null ]
+      umlClass = Class [7caee177]
+      }
+==============================
+Output Model
+==============================
+Visiting MappingCall, calling: classToTable_MR
+  Mapping classToTable_MR
+    Visiting Mapping GuardPattern
+      Predicate p2s.schema = s is true
+      Predicate c2t.owner = p2s is true
+      GuardPattern result: true
+    CoreDomain rdbms
+      Visiting CoreDomain GuardPattern
+        Variable s: Schema [2c888fc9] {
+          name = People
+          kind = [ null ]
+          tables = [Table] x 3
+          }
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment c2t.column = Column [67cc3210] {
+      name = [ null ]
+      kind = [ null ]
+      type = [ null ]
+      owner = [ null ]
+      foreignKeys = [ ]
+      keys = [ ]
+      }
+    VisitPropertyAssignment c2t.table = Table [eeaedad] {
+      name = [ null ]
+      kind = [ null ]
+      columns = [ ]
+      schema = [ null ]
+      keys = [ ]
+      foreignKeys = [ ]
+      }
+    VisitPropertyAssignment t.name = Timetable
+    VisitPropertyAssignment c2t.primaryKey = Key [619a0081] {
+      name = [ null ]
+      kind = [ null ]
+      owner = [ null ]
+      column = [ ]
+      }
+    VisitPropertyAssignment t.kind = base
+    VisitPropertyAssignment t.schema = Schema [2c888fc9] {
+      name = People
+      kind = [ null ]
+      tables = [Table] x 3
+      }
+    VisitPropertyAssignment pk.owner = Table [eeaedad] {
+      name = Timetable
+      kind = base
+      columns = [ ]
+      schema = Schema [2c888fc9]
+      keys = [ ]
+      foreignKeys = [ ]
+      }
+    VisitPropertyAssignment pk.kind = primary
+    VisitPropertyAssignment pc.owner = Table [eeaedad] {
+      name = Timetable
+      kind = base
+      columns = [ ]
+      schema = Schema [2c888fc9]
+      keys = [Key] x 1
+      foreignKeys = [ ]
+      }
+    VisitPropertyAssignment pc.keys = [org.eclipse.emf.ecore.impl.DynamicEObjectImpl@619a0081 (eClass: org.eclipse.emf.ecore.impl.EClassImpl@1e5cd7f9 (name: Key) (instanceClassName: null) (abstract: false, interface: false))]
+    VisitPropertyAssignment pc.type = NUMBER
+    VisitPropertyAssignment pc.name = Timetable_tid
+    VisitPropertyAssignment pk.name = Timetable_pk
+    RealizedVariables for CoreDomain rdbms
+    RealizedVariable t: Table [eeaedad] {
+      name = Timetable
+      kind = base
+      columns = [Column] x 1
+      schema = Schema [2c888fc9]
+      keys = [Key] x 1
+      foreignKeys = [ ]
+      }
+    RealizedVariable pk: Key [619a0081] {
+      name = Timetable_pk
+      kind = primary
+      owner = Table [eeaedad]
+      column = [Column] x 1
+      }
+    RealizedVariable pc: Column [67cc3210] {
+      name = Timetable_tid
+      kind = [ null ]
+      type = NUMBER
+      owner = Table [eeaedad]
+      foreignKeys = [ ]
+      keys = [Key] x 1
+      }
+    RealizedVariables for CoreDomain middle
+==============================
+Output Model
+Schema [2c888fc9] {
+  name = People
+  kind = [ null ]
+  tables = [Table] x 4
+  }
+Table [a604dd8] {
+  name = Student
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [3896a53a] {
+  name = Student_pk
+  kind = primary
+  owner = Table [a604dd8]
+  column = [Column] x 1
+  }
+Column [1a754a4a] {
+  name = Student_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [a604dd8]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+Table [6a7499e3] {
+  name = Professor
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [d233caf] {
+  name = Professor_pk
+  kind = primary
+  owner = Table [6a7499e3]
+  column = [Column] x 1
+  }
+Column [17ef771b] {
+  name = Professor_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [6a7499e3]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+Table [271816d1] {
+  name = Address
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [1e820764] {
+  name = Address_pk
+  kind = primary
+  owner = Table [271816d1]
+  column = [Column] x 1
+  }
+Column [2c26cbf4] {
+  name = Address_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [271816d1]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+Table [eeaedad] {
+  name = Timetable
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [619a0081] {
+  name = Timetable_pk
+  kind = primary
+  owner = Table [eeaedad]
+  column = [Column] x 1
+  }
+Column [67cc3210] {
+  name = Timetable_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [eeaedad]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+==============================
+Visiting MappingCall, calling: classToTable_LM
+  Mapping classToTable_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate c.namespace = p is true
+      Predicate c.kind = 'persistent' is true
+      GuardPattern result: true
+    CoreDomain middle
+      Visiting CoreDomain GuardPattern
+        Variable p2s: PackageToSchema [625e068] {
+          name = People
+          classesToTables = [ClassToTable] x 4
+          primitivesToNames = [ ]
+          schema = Schema [2c888fc9]
+          umlPackage = Package [6b1316f4]
+          }
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment c2t.owner = PackageToSchema [625e068] {
+      name = People
+      classesToTables = [ClassToTable] x 4
+      primitivesToNames = [ ]
+      schema = Schema [2c888fc9]
+      umlPackage = Package [6b1316f4]
+      }
+    VisitPropertyAssignment c2t.name = ResearchGroup
+    VisitPropertyAssignment c2t.umlClass = Class [3d548b94] {
+      kind = persistent
+      name = ResearchGroup
+      namespace = Package [6b1316f4]
+      typeOpposite = [Attribute] x 1
+      attributes = [Attribute] x 2
+      forward = [ ]
+      general = [ ]
+      generalOpposite = [ ]
+      reverse = [ ]
+      }
+    RealizedVariables for CoreDomain uml
+    RealizedVariables for CoreDomain middle
+    RealizedVariable c2t: ClassToTable [6016a917] {
+      fromAttributes = [ ]
+      column = [ null ]
+      name = ResearchGroup
+      associationsToForeignKeys = [ ]
+      owner = PackageToSchema [625e068]
+      primaryKey = [ null ]
+      table = [ null ]
+      umlClass = Class [3d548b94]
+      }
+==============================
+Output Model
+==============================
+Visiting MappingCall, calling: classToTable_MR
+  Mapping classToTable_MR
+    Visiting Mapping GuardPattern
+      Predicate p2s.schema = s is true
+      Predicate c2t.owner = p2s is true
+      GuardPattern result: true
+    CoreDomain rdbms
+      Visiting CoreDomain GuardPattern
+        Variable s: Schema [2c888fc9] {
+          name = People
+          kind = [ null ]
+          tables = [Table] x 4
+          }
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment c2t.column = Column [6762ffa1] {
+      name = [ null ]
+      kind = [ null ]
+      type = [ null ]
+      owner = [ null ]
+      foreignKeys = [ ]
+      keys = [ ]
+      }
+    VisitPropertyAssignment c2t.table = Table [147cd80e] {
+      name = [ null ]
+      kind = [ null ]
+      columns = [ ]
+      schema = [ null ]
+      keys = [ ]
+      foreignKeys = [ ]
+      }
+    VisitPropertyAssignment t.name = ResearchGroup
+    VisitPropertyAssignment c2t.primaryKey = Key [104c89a4] {
+      name = [ null ]
+      kind = [ null ]
+      owner = [ null ]
+      column = [ ]
+      }
+    VisitPropertyAssignment t.kind = base
+    VisitPropertyAssignment t.schema = Schema [2c888fc9] {
+      name = People
+      kind = [ null ]
+      tables = [Table] x 4
+      }
+    VisitPropertyAssignment pk.owner = Table [147cd80e] {
+      name = ResearchGroup
+      kind = base
+      columns = [ ]
+      schema = Schema [2c888fc9]
+      keys = [ ]
+      foreignKeys = [ ]
+      }
+    VisitPropertyAssignment pk.kind = primary
+    VisitPropertyAssignment pc.owner = Table [147cd80e] {
+      name = ResearchGroup
+      kind = base
+      columns = [ ]
+      schema = Schema [2c888fc9]
+      keys = [Key] x 1
+      foreignKeys = [ ]
+      }
+    VisitPropertyAssignment pc.keys = [org.eclipse.emf.ecore.impl.DynamicEObjectImpl@104c89a4 (eClass: org.eclipse.emf.ecore.impl.EClassImpl@1e5cd7f9 (name: Key) (instanceClassName: null) (abstract: false, interface: false))]
+    VisitPropertyAssignment pc.type = NUMBER
+    VisitPropertyAssignment pc.name = ResearchGroup_tid
+    VisitPropertyAssignment pk.name = ResearchGroup_pk
+    RealizedVariables for CoreDomain rdbms
+    RealizedVariable t: Table [147cd80e] {
+      name = ResearchGroup
+      kind = base
+      columns = [Column] x 1
+      schema = Schema [2c888fc9]
+      keys = [Key] x 1
+      foreignKeys = [ ]
+      }
+    RealizedVariable pk: Key [104c89a4] {
+      name = ResearchGroup_pk
+      kind = primary
+      owner = Table [147cd80e]
+      column = [Column] x 1
+      }
+    RealizedVariable pc: Column [6762ffa1] {
+      name = ResearchGroup_tid
+      kind = [ null ]
+      type = NUMBER
+      owner = Table [147cd80e]
+      foreignKeys = [ ]
+      keys = [Key] x 1
+      }
+    RealizedVariables for CoreDomain middle
+==============================
+Output Model
+Schema [2c888fc9] {
+  name = People
+  kind = [ null ]
+  tables = [Table] x 5
+  }
+Table [a604dd8] {
+  name = Student
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [3896a53a] {
+  name = Student_pk
+  kind = primary
+  owner = Table [a604dd8]
+  column = [Column] x 1
+  }
+Column [1a754a4a] {
+  name = Student_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [a604dd8]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+Table [6a7499e3] {
+  name = Professor
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [d233caf] {
+  name = Professor_pk
+  kind = primary
+  owner = Table [6a7499e3]
+  column = [Column] x 1
+  }
+Column [17ef771b] {
+  name = Professor_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [6a7499e3]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+Table [271816d1] {
+  name = Address
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [1e820764] {
+  name = Address_pk
+  kind = primary
+  owner = Table [271816d1]
+  column = [Column] x 1
+  }
+Column [2c26cbf4] {
+  name = Address_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [271816d1]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+Table [eeaedad] {
+  name = Timetable
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [619a0081] {
+  name = Timetable_pk
+  kind = primary
+  owner = Table [eeaedad]
+  column = [Column] x 1
+  }
+Column [67cc3210] {
+  name = Timetable_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [eeaedad]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+Table [147cd80e] {
+  name = ResearchGroup
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [104c89a4] {
+  name = ResearchGroup_pk
+  kind = primary
+  owner = Table [147cd80e]
+  column = [Column] x 1
+  }
+Column [6762ffa1] {
+  name = ResearchGroup_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [147cd80e]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+==============================
+Visiting MappingCall, calling: classToTable_LM
+  Mapping classToTable_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate c.namespace = p is true
+      Predicate c.kind = 'persistent' is true
+      GuardPattern result: true
+    CoreDomain middle
+      Visiting CoreDomain GuardPattern
+        Variable p2s: PackageToSchema [625e068] {
+          name = People
+          classesToTables = [ClassToTable] x 5
+          primitivesToNames = [ ]
+          schema = Schema [2c888fc9]
+          umlPackage = Package [6b1316f4]
+          }
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment c2t.owner = PackageToSchema [625e068] {
+      name = People
+      classesToTables = [ClassToTable] x 5
+      primitivesToNames = [ ]
+      schema = Schema [2c888fc9]
+      umlPackage = Package [6b1316f4]
+      }
+    VisitPropertyAssignment c2t.name = Budget
+    VisitPropertyAssignment c2t.umlClass = Class [7997c100] {
+      kind = persistent
+      name = Budget
+      namespace = Package [6b1316f4]
+      typeOpposite = [Attribute] x 1
+      attributes = [Attribute] x 1
+      forward = [ ]
+      general = [ ]
+      generalOpposite = [ ]
+      reverse = [ ]
+      }
+    RealizedVariables for CoreDomain uml
+    RealizedVariables for CoreDomain middle
+    RealizedVariable c2t: ClassToTable [4876d42] {
+      fromAttributes = [ ]
+      column = [ null ]
+      name = Budget
+      associationsToForeignKeys = [ ]
+      owner = PackageToSchema [625e068]
+      primaryKey = [ null ]
+      table = [ null ]
+      umlClass = Class [7997c100]
+      }
+==============================
+Output Model
+==============================
+Visiting MappingCall, calling: classToTable_MR
+  Mapping classToTable_MR
+    Visiting Mapping GuardPattern
+      Predicate p2s.schema = s is true
+      Predicate c2t.owner = p2s is true
+      GuardPattern result: true
+    CoreDomain rdbms
+      Visiting CoreDomain GuardPattern
+        Variable s: Schema [2c888fc9] {
+          name = People
+          kind = [ null ]
+          tables = [Table] x 5
+          }
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment c2t.column = Column [1b490621] {
+      name = [ null ]
+      kind = [ null ]
+      type = [ null ]
+      owner = [ null ]
+      foreignKeys = [ ]
+      keys = [ ]
+      }
+    VisitPropertyAssignment c2t.table = Table [57316e85] {
+      name = [ null ]
+      kind = [ null ]
+      columns = [ ]
+      schema = [ null ]
+      keys = [ ]
+      foreignKeys = [ ]
+      }
+    VisitPropertyAssignment t.name = Budget
+    VisitPropertyAssignment c2t.primaryKey = Key [6e4f0a7b] {
+      name = [ null ]
+      kind = [ null ]
+      owner = [ null ]
+      column = [ ]
+      }
+    VisitPropertyAssignment t.kind = base
+    VisitPropertyAssignment t.schema = Schema [2c888fc9] {
+      name = People
+      kind = [ null ]
+      tables = [Table] x 5
+      }
+    VisitPropertyAssignment pk.owner = Table [57316e85] {
+      name = Budget
+      kind = base
+      columns = [ ]
+      schema = Schema [2c888fc9]
+      keys = [ ]
+      foreignKeys = [ ]
+      }
+    VisitPropertyAssignment pk.kind = primary
+    VisitPropertyAssignment pc.owner = Table [57316e85] {
+      name = Budget
+      kind = base
+      columns = [ ]
+      schema = Schema [2c888fc9]
+      keys = [Key] x 1
+      foreignKeys = [ ]
+      }
+    VisitPropertyAssignment pc.keys = [org.eclipse.emf.ecore.impl.DynamicEObjectImpl@6e4f0a7b (eClass: org.eclipse.emf.ecore.impl.EClassImpl@1e5cd7f9 (name: Key) (instanceClassName: null) (abstract: false, interface: false))]
+    VisitPropertyAssignment pc.type = NUMBER
+    VisitPropertyAssignment pc.name = Budget_tid
+    VisitPropertyAssignment pk.name = Budget_pk
+    RealizedVariables for CoreDomain rdbms
+    RealizedVariable t: Table [57316e85] {
+      name = Budget
+      kind = base
+      columns = [Column] x 1
+      schema = Schema [2c888fc9]
+      keys = [Key] x 1
+      foreignKeys = [ ]
+      }
+    RealizedVariable pk: Key [6e4f0a7b] {
+      name = Budget_pk
+      kind = primary
+      owner = Table [57316e85]
+      column = [Column] x 1
+      }
+    RealizedVariable pc: Column [1b490621] {
+      name = Budget_tid
+      kind = [ null ]
+      type = NUMBER
+      owner = Table [57316e85]
+      foreignKeys = [ ]
+      keys = [Key] x 1
+      }
+    RealizedVariables for CoreDomain middle
+==============================
+Output Model
+Schema [2c888fc9] {
+  name = People
+  kind = [ null ]
+  tables = [Table] x 6
+  }
+Table [a604dd8] {
+  name = Student
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [3896a53a] {
+  name = Student_pk
+  kind = primary
+  owner = Table [a604dd8]
+  column = [Column] x 1
+  }
+Column [1a754a4a] {
+  name = Student_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [a604dd8]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+Table [6a7499e3] {
+  name = Professor
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [d233caf] {
+  name = Professor_pk
+  kind = primary
+  owner = Table [6a7499e3]
+  column = [Column] x 1
+  }
+Column [17ef771b] {
+  name = Professor_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [6a7499e3]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+Table [271816d1] {
+  name = Address
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [1e820764] {
+  name = Address_pk
+  kind = primary
+  owner = Table [271816d1]
+  column = [Column] x 1
+  }
+Column [2c26cbf4] {
+  name = Address_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [271816d1]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+Table [eeaedad] {
+  name = Timetable
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [619a0081] {
+  name = Timetable_pk
+  kind = primary
+  owner = Table [eeaedad]
+  column = [Column] x 1
+  }
+Column [67cc3210] {
+  name = Timetable_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [eeaedad]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+Table [147cd80e] {
+  name = ResearchGroup
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [104c89a4] {
+  name = ResearchGroup_pk
+  kind = primary
+  owner = Table [147cd80e]
+  column = [Column] x 1
+  }
+Column [6762ffa1] {
+  name = ResearchGroup_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [147cd80e]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+Table [57316e85] {
+  name = Budget
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [6e4f0a7b] {
+  name = Budget_pk
+  kind = primary
+  owner = Table [57316e85]
+  column = [Column] x 1
+  }
+Column [1b490621] {
+  name = Budget_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [57316e85]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+==============================
+Visiting MappingLoop, binding: sc2t
+Visiting MappingLoop, binding: association
+Visiting MappingLoop, binding: class
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is true
+      Predicate dc2t.umlClass = dc is true
+      Predicate sc.namespace = p is true
+      Predicate a.namespace = p is true
+      Predicate a.destination = dc is true
+      Predicate a.source = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingLoop, binding: association
+Visiting MappingLoop, binding: class
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is true
+      Predicate dc2t.umlClass = dc is true
+      Predicate sc.namespace = p is true
+      Predicate a.namespace = p is true
+      Predicate a.destination = dc is true
+      Predicate a.source = sc is false
+      GuardPattern result: false
+Visiting MappingLoop, binding: association
+Visiting MappingLoop, binding: class
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is true
+      Predicate dc2t.umlClass = dc is true
+      Predicate sc.namespace = p is true
+      Predicate a.namespace = p is true
+      Predicate a.destination = dc is true
+      Predicate a.source = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingLoop, binding: association
+Visiting MappingLoop, binding: class
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is true
+      Predicate dc2t.umlClass = dc is true
+      Predicate sc.namespace = p is true
+      Predicate a.namespace = p is true
+      Predicate a.destination = dc is true
+      Predicate a.source = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingLoop, binding: association
+Visiting MappingLoop, binding: class
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is true
+      Predicate dc2t.umlClass = dc is true
+      Predicate sc.namespace = p is true
+      Predicate a.namespace = p is true
+      Predicate a.destination = dc is true
+      Predicate a.source = sc is true
+      GuardPattern result: true
+    CoreDomain middle
+      Visiting CoreDomain GuardPattern
+        Variable p2s: PackageToSchema [625e068] {
+          name = People
+          classesToTables = [ClassToTable] x 6
+          primitivesToNames = [ ]
+          schema = Schema [2c888fc9]
+          umlPackage = Package [6b1316f4]
+          }
+        Variable sc2t: ClassToTable [22d5631c] {
+          fromAttributes = [ ]
+          column = Column [17ef771b]
+          name = Professor
+          associationsToForeignKeys = [ ]
+          owner = PackageToSchema [625e068]
+          primaryKey = Key [d233caf]
+          table = Table [6a7499e3]
+          umlClass = Class [25048104]
+          }
+        Variable dc2t: ClassToTable [5f50ac7e] {
+          fromAttributes = [ ]
+          column = Column [2c26cbf4]
+          name = Address
+          associationsToForeignKeys = [ ]
+          owner = PackageToSchema [625e068]
+          primaryKey = Key [1e820764]
+          table = Table [271816d1]
+          umlClass = Class [4ab24098]
+          }
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment a2f.referenced = ClassToTable [5f50ac7e] {
+      fromAttributes = [ ]
+      column = Column [2c26cbf4]
+      name = Address
+      associationsToForeignKeys = [ ]
+      owner = PackageToSchema [625e068]
+      primaryKey = Key [1e820764]
+      table = Table [271816d1]
+      umlClass = Class [4ab24098]
+      }
+    VisitPropertyAssignment a2f.owner = ClassToTable [22d5631c] {
+      fromAttributes = [ ]
+      column = Column [17ef771b]
+      name = Professor
+      associationsToForeignKeys = [ ]
+      owner = PackageToSchema [625e068]
+      primaryKey = Key [d233caf]
+      table = Table [6a7499e3]
+      umlClass = Class [25048104]
+      }
+    VisitPropertyAssignment a2f.association = Association [5a00255d] {
+      kind = 
+      name = proffesorLivesAt
+      namespace = Package [6b1316f4]
+      destination = Class [4ab24098]
+      source = Class [25048104]
+      }
+    VisitPropertyAssignment a2f.name = proffesorLivesAt
+    RealizedVariables for CoreDomain uml
+    RealizedVariables for CoreDomain middle
+    RealizedVariable a2f: AssociationToForeignKey [6931bf42] {
+      column = [ null ]
+      name = proffesorLivesAt
+      association = Association [5a00255d]
+      foreignKey = [ null ]
+      owner = ClassToTable [22d5631c]
+      referenced = ClassToTable [5f50ac7e]
+      }
+==============================
+Output Model
+==============================
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingLoop, binding: association
+Visiting MappingLoop, binding: class
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is true
+      Predicate dc2t.umlClass = dc is true
+      Predicate sc.namespace = p is true
+      Predicate a.namespace = p is true
+      Predicate a.destination = dc is true
+      Predicate a.source = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingCall, calling: associationToForeignKey_LM
+  Mapping associationToForeignKey_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate sc2t.owner = p2s is true
+      Predicate sc2t.umlClass = sc is false
+      GuardPattern result: false
+Visiting MappingLoop, binding: primitivedatatype
+Visiting MappingCall, calling: booleanToBoolean_LM
+  Mapping booleanToBoolean_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate prim.namespace = p is true
+      Predicate prim.name = 'Boolean' is false
+      GuardPattern result: false
+Visiting MappingCall, calling: booleanToBoolean_LM
+  Mapping booleanToBoolean_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate prim.namespace = p is true
+      Predicate prim.name = 'Boolean' is false
+      GuardPattern result: false
+Visiting MappingCall, calling: booleanToBoolean_LM
+  Mapping booleanToBoolean_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate prim.namespace = p is true
+      Predicate prim.name = 'Boolean' is true
+      GuardPattern result: true
+    CoreDomain middle
+      Visiting CoreDomain GuardPattern
+        Variable p2s: PackageToSchema [625e068] {
+          name = People
+          classesToTables = [ClassToTable] x 6
+          primitivesToNames = [ ]
+          schema = Schema [2c888fc9]
+          umlPackage = Package [6b1316f4]
+          }
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment p2n.primitive = PrimitiveDataType [3cb66999] {
+      kind = [ null ]
+      name = Boolean
+      namespace = Package [6b1316f4]
+      typeOpposite = [Attribute] x 1
+      }
+    VisitPropertyAssignment p2n.name = Boolean2BOOLEAN
+    VisitPropertyAssignment p2n.owner = PackageToSchema [625e068] {
+      name = People
+      classesToTables = [ClassToTable] x 6
+      primitivesToNames = [ ]
+      schema = Schema [2c888fc9]
+      umlPackage = Package [6b1316f4]
+      }
+    RealizedVariables for CoreDomain uml
+    RealizedVariables for CoreDomain middle
+    RealizedVariable p2n: BooleanToBoolean [787be75d] {
+      name = Boolean2BOOLEAN
+      typeName = [ null ]
+      owner = PackageToSchema [625e068]
+      primitive = PrimitiveDataType [3cb66999]
+      }
+==============================
+Output Model
+==============================
+Visiting MappingCall, calling: integerToNumber_LM
+  Mapping integerToNumber_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate prim.name = 'Integer' is false
+      GuardPattern result: false
+Visiting MappingCall, calling: stringToVarchar_LM
+  Mapping stringToVarchar_LM
+    Visiting Mapping GuardPattern
+      Predicate p2s.umlPackage = p is true
+      Predicate prim.name = 'String' is false
+      GuardPattern result: false
+Visiting MappingCall, calling: booleanToBoolean_MR
+  Mapping booleanToBoolean_MR
+    Visiting Mapping GuardPattern
+      Predicate p2n.owner = p2s is true
+      GuardPattern result: true
+    CoreDomain rdbms
+      Visiting CoreDomain GuardPattern
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment p2n.typeName = BOOLEAN
+    RealizedVariables for CoreDomain rdbms
+    RealizedVariables for CoreDomain middle
+==============================
+Output Model
+Schema [2c888fc9] {
+  name = People
+  kind = [ null ]
+  tables = [Table] x 6
+  }
+Table [a604dd8] {
+  name = Student
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [3896a53a] {
+  name = Student_pk
+  kind = primary
+  owner = Table [a604dd8]
+  column = [Column] x 1
+  }
+Column [1a754a4a] {
+  name = Student_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [a604dd8]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+Table [6a7499e3] {
+  name = Professor
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [d233caf] {
+  name = Professor_pk
+  kind = primary
+  owner = Table [6a7499e3]
+  column = [Column] x 1
+  }
+Column [17ef771b] {
+  name = Professor_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [6a7499e3]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+Table [271816d1] {
+  name = Address
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [1e820764] {
+  name = Address_pk
+  kind = primary
+  owner = Table [271816d1]
+  column = [Column] x 1
+  }
+Column [2c26cbf4] {
+  name = Address_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [271816d1]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+Table [eeaedad] {
+  name = Timetable
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [619a0081] {
+  name = Timetable_pk
+  kind = primary
+  owner = Table [eeaedad]
+  column = [Column] x 1
+  }
+Column [67cc3210] {
+  name = Timetable_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [eeaedad]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+Table [147cd80e] {
+  name = ResearchGroup
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [104c89a4] {
+  name = ResearchGroup_pk
+  kind = primary
+  owner = Table [147cd80e]
+  column = [Column] x 1
+  }
+Column [6762ffa1] {
+  name = ResearchGroup_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [147cd80e]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+Table [57316e85] {
+  name = Budget
+  kind = base
+  columns = [Column] x 1
+  schema = Schema [2c888fc9]
+  keys = [Key] x 1
+  foreignKeys = [ ]
+  }
+Key [6e4f0a7b] {
+  name = Budget_pk
+  kind = primary
+  owner = Table [57316e85]
+  column = [Column] x 1
+  }
+Column [1b490621] {
+  name = Budget_tid
+  kind = [ null ]
+  type = NUMBER
+  owner = Table [57316e85]
+  foreignKeys = [ ]
+  keys = [Key] x 1
+  }
+==============================
+Visiting MappingLoop, binding: a
+Visiting MappingCall, calling: classPrimitiveAttributes_LM
+  Mapping classPrimitiveAttributes_LM
+    Visiting Mapping GuardPattern
+      Predicate fao.umlClass = c is true
+      Predicate p2n.primitive = t is true
+      Predicate a.type = t is true
+      Predicate a.owner = c is true
+      GuardPattern result: true
+    CoreDomain middle
+      Visiting CoreDomain GuardPattern
+        Variable fao: ClassToTable [22d5631c] {
+          fromAttributes = [ ]
+          column = Column [17ef771b]
+          name = Professor
+          associationsToForeignKeys = [AssociationToForeignKey] x 1
+          owner = PackageToSchema [625e068]
+          primaryKey = Key [d233caf]
+          table = Table [6a7499e3]
+          umlClass = Class [25048104]
+          }
+        Variable p2n: BooleanToBoolean [787be75d] {
+          name = Boolean2BOOLEAN
+          typeName = BOOLEAN
+          owner = PackageToSchema [625e068]
+          primitive = PrimitiveDataType [3cb66999]
+          }
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment fa.leafs = [org.eclipse.emf.ecore.impl.DynamicEObjectImpl@157032da (eClass: org.eclipse.emf.ecore.impl.EClassImpl@3ee969f8 (name: AttributeToColumn) (instanceClassName: null) (abstract: false, interface: false))]
+    VisitPropertyAssignment fa.owner = ClassToTable [22d5631c] {
+      fromAttributes = [ ]
+      column = Column [17ef771b]
+      name = Professor
+      associationsToForeignKeys = [AssociationToForeignKey] x 1
+      owner = PackageToSchema [625e068]
+      primaryKey = Key [d233caf]
+      table = Table [6a7499e3]
+      umlClass = Class [25048104]
+      }
+    VisitPropertyAssignment fa.kind = null
+    VisitPropertyAssignment fa.type = BooleanToBoolean [787be75d] {
+      name = Boolean2BOOLEAN
+      typeName = BOOLEAN
+      owner = PackageToSchema [625e068]
+      primitive = PrimitiveDataType [3cb66999]
+      }
+    VisitPropertyAssignment fa.attribute = Attribute [3a2f4ac0] {
+      kind = [ null ]
+      name = employed
+      owner = Class [25048104]
+      type = PrimitiveDataType [3cb66999]
+      }
+    VisitPropertyAssignment fa.name = employed
+    RealizedVariables for CoreDomain uml
+    RealizedVariables for CoreDomain middle
+    RealizedVariable fa: AttributeToColumn [157032da] {
+      name = employed
+      kind = [ null ]
+      attribute = Attribute [3a2f4ac0]
+      leafs = [AttributeToColumn] x 1
+      owner = ClassToTable [22d5631c]
+      column = [ null ]
+      type = BooleanToBoolean [787be75d]
+      }
+==============================
+Output Model
+==============================
+Visiting MappingLoop, binding: a
+Visiting MappingLoop, binding: ca
+Visiting MappingLoop, binding: a
+Visiting MappingLoop, binding: ca
+Visiting MappingCall, calling: complexAttributeComplexAttributes_LM
