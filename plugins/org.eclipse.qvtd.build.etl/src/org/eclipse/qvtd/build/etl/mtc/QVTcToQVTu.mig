@@ -163,8 +163,7 @@ delete Predicate
  ******
  */
 retype RealizedVariable to Variable
-    when : original.oppositePattern().area.isInputDomain()
-
+    when : original.oppositePattern().area.isInputDomain()     
 
 /****m* QVTcToQVTu/migrate/CoreModel
  * ORIGINAL
@@ -247,16 +246,13 @@ migrate CoreDomain
  ******
  */   
 migrate BottomPattern 
-    when :
-        not original.assignment.equivalent().select(e | e.isTypeOf(QVTu!Predicate)).isEmpty() or
-        not original.area.guardPattern.predicate.equivalent().select(e | e.isTypeOf(QVTu!PropertyAssignment)).isEmpty()
     {
 	    migrated.variable.addAll(original.realizedVariable.equivalent());
         //original.area.println();
-        migrated.predicate.addAll(original.assignment.equivalent().select(e | e.isTypeOf(QVTu!Predicate)));
-        //original.area.guardPattern.predicate.println("gp pred ");
-        //original.area.guardPattern.predicate.equivalent().select(e | e.isTypeOf(QVTu!PropertyAssignment)).println("bp a to p ");
-	    migrated.assignment.addAll(original.area.guardPattern.predicate.equivalent().select(e | e.isTypeOf(QVTu!PropertyAssignment)));
+        if (not original.assignment.equivalent().select(e | e.isTypeOf(QVTu!Predicate)).isEmpty())
+        	migrated.predicate.addAll(original.assignment.equivalent().select(e | e.isTypeOf(QVTu!Predicate)));
+		if (not original.area.guardPattern.predicate.equivalent().select(e | e.isTypeOf(QVTu!PropertyAssignment)).isEmpty())        	
+        	migrated.assignment.addAll(original.area.guardPattern.predicate.equivalent().select(e | e.isTypeOf(QVTu!PropertyAssignment)));
     }
 
 @cached
