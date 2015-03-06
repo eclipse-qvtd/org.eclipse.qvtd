@@ -28,19 +28,6 @@ context Environment
 -- def : parentEnv : Environment = null
 
 -- General Environment configuration operations
-def : addElement(element : classes::NamedElement) : Environment =
-	Environment{
-		namedElements = namedElements->asSequence() -- FIXME bug 460682
-			->including(element),
-		parentEnv = parentEnv
-	}
-	
-def : addElements(elements : Collection(classes::NamedElement)) : Environment =
-	Environment{
-		namedElements = namedElements->asSequence() -- FIXME bug 460682
-			->includingAll(elements),
-		parentEnv = parentEnv	
-	}
 
 def : mergEnv(env : Environment) : Environment =
 	Environment {

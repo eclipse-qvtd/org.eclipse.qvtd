@@ -3,7 +3,6 @@
 package example2.env;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -21,6 +20,7 @@ import org.eclipse.emf.ecore.EReference;
  * <!-- end-user-doc -->
  * @see example2.env.EnvironmentFactory
  * @model kind="package"
+ *        annotation="http://www.eclipse.org/OCL/Import classes='Classes.ecore#/'"
  * @generated
  */
 public interface EnvironmentPackage extends EPackage {
@@ -76,33 +76,6 @@ public interface EnvironmentPackage extends EPackage {
 	int ENV4_CG_FEATURE_COUNT = 0;
 
 	/**
-	 * The operation id for the '<em>Has Final Result</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENV4_CG___HAS_FINAL_RESULT = 0;
-
-	/**
-	 * The operation id for the '<em>Get Evaluator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENV4_CG___GET_EVALUATOR = 1;
-
-	/**
-	 * The number of operations of the '<em>Env4 CG</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENV4_CG_OPERATION_COUNT = 2;
-
-	/**
 	 * The meta object id for the '{@link example2.env.impl.EnvironmentImpl <em>Environment</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -140,52 +113,6 @@ public interface EnvironmentPackage extends EPackage {
 	int ENVIRONMENT_FEATURE_COUNT = ENV4_CG_FEATURE_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Has Final Result</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENVIRONMENT___HAS_FINAL_RESULT = ENV4_CG___HAS_FINAL_RESULT;
-
-	/**
-	 * The operation id for the '<em>Get Evaluator</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENVIRONMENT___GET_EVALUATOR = ENV4_CG___GET_EVALUATOR;
-
-	/**
-	 * The operation id for the '<em>Add Elements</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENVIRONMENT___ADD_ELEMENTS__ELIST = ENV4_CG_OPERATION_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Add Element</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENVIRONMENT___ADD_ELEMENT__NAMEDELEMENT = ENV4_CG_OPERATION_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Environment</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENVIRONMENT_OPERATION_COUNT = ENV4_CG_OPERATION_COUNT + 2;
-
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.ocl.pivot.evaluation.Evaluator <em>Evaluator</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -203,16 +130,6 @@ public interface EnvironmentPackage extends EPackage {
 	 * @ordered
 	 */
 	int EVALUATOR_FEATURE_COUNT = 0;
-
-	/**
-	 * The number of operations of the '<em>Evaluator</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVALUATOR_OPERATION_COUNT = 0;
-
 
 	/**
 	 * Returns the meta object for class '{@link example2.env.Environment <em>Environment</em>}'.
@@ -247,26 +164,6 @@ public interface EnvironmentPackage extends EPackage {
 	EReference getEnvironment_ParentEnv();
 
 	/**
-	 * Returns the meta object for the '{@link example2.env.Environment#addElements(org.eclipse.emf.common.util.EList) <em>Add Elements</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Add Elements</em>' operation.
-	 * @see example2.env.Environment#addElements(org.eclipse.emf.common.util.EList)
-	 * @generated
-	 */
-	EOperation getEnvironment__AddElements__EList();
-
-	/**
-	 * Returns the meta object for the '{@link example2.env.Environment#addElement(example2.classes.NamedElement) <em>Add Element</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Add Element</em>' operation.
-	 * @see example2.env.Environment#addElement(example2.classes.NamedElement)
-	 * @generated
-	 */
-	EOperation getEnvironment__AddElement__NamedElement();
-
-	/**
 	 * Returns the meta object for class '{@link example2.env.Env4CG <em>Env4 CG</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -275,26 +172,6 @@ public interface EnvironmentPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getEnv4CG();
-
-	/**
-	 * Returns the meta object for the '{@link example2.env.Env4CG#hasFinalResult() <em>Has Final Result</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Has Final Result</em>' operation.
-	 * @see example2.env.Env4CG#hasFinalResult()
-	 * @generated
-	 */
-	EOperation getEnv4CG__HasFinalResult();
-
-	/**
-	 * Returns the meta object for the '{@link example2.env.Env4CG#getEvaluator() <em>Get Evaluator</em>}' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Evaluator</em>' operation.
-	 * @see example2.env.Env4CG#getEvaluator()
-	 * @generated
-	 */
-	EOperation getEnv4CG__GetEvaluator();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.ocl.pivot.evaluation.Evaluator <em>Evaluator</em>}'.
@@ -357,22 +234,6 @@ public interface EnvironmentPackage extends EPackage {
 		EReference ENVIRONMENT__PARENT_ENV = eINSTANCE.getEnvironment_ParentEnv();
 
 		/**
-		 * The meta object literal for the '<em><b>Add Elements</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ENVIRONMENT___ADD_ELEMENTS__ELIST = eINSTANCE.getEnvironment__AddElements__EList();
-
-		/**
-		 * The meta object literal for the '<em><b>Add Element</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ENVIRONMENT___ADD_ELEMENT__NAMEDELEMENT = eINSTANCE.getEnvironment__AddElement__NamedElement();
-
-		/**
 		 * The meta object literal for the '{@link example2.env.Env4CG <em>Env4 CG</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -381,22 +242,6 @@ public interface EnvironmentPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ENV4_CG = eINSTANCE.getEnv4CG();
-
-		/**
-		 * The meta object literal for the '<em><b>Has Final Result</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ENV4_CG___HAS_FINAL_RESULT = eINSTANCE.getEnv4CG__HasFinalResult();
-
-		/**
-		 * The meta object literal for the '<em><b>Get Evaluator</b></em>' operation.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EOperation ENV4_CG___GET_EVALUATOR = eINSTANCE.getEnv4CG__GetEvaluator();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.ocl.pivot.evaluation.Evaluator <em>Evaluator</em>}' class.

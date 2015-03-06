@@ -7,7 +7,6 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
-
 import example2.env.Env4CG;
 import example2.env.Environment;
 import example2.env.EnvironmentPackage;

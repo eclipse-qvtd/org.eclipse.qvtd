@@ -35,7 +35,7 @@ public interface Environment extends Env4CG {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Named Elements</em>' reference list.
 	 * @see example2.env.EnvironmentPackage#getEnvironment_NamedElements()
-	 * @model
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example2/env/1.0!Environment!namedElements'"
 	 * @generated
 	 */
 	EList<NamedElement> getNamedElements();
@@ -51,7 +51,7 @@ public interface Environment extends Env4CG {
 	 * @return the value of the '<em>Parent Env</em>' reference.
 	 * @see #setParentEnv(Environment)
 	 * @see example2.env.EnvironmentPackage#getEnvironment_ParentEnv()
-	 * @model
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example2/env/1.0!Environment!parentEnv'"
 	 * @generated
 	 */
 	Environment getParentEnv();
@@ -70,6 +70,7 @@ public interface Environment extends Env4CG {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @model elementsMany="true"
+	 *        annotation="http://www.eclipse.org/emf/2002/GenModel body='/**\n * Environment{\n *   namedElements = namedElements->asSequence()\n *   ->includingAll(elements), parentEnv = parentEnv}\n \052/\nfinal /*@NonNull\052/ /*@NonInvalid\052/ <%org.eclipse.ocl.pivot.evaluation.Evaluator%> evaluator = <%org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal%>.getEvaluator(this);\nfinal /*@NonNull\052/ /*@NonInvalid\052/ <%org.eclipse.ocl.pivot.ids.IdResolver%> idResolver = evaluator.getIdResolver();\nfinal /*@NonNull\052/ /*@NonInvalid\052/ <%org.eclipse.ocl.pivot.Property%> CTORid_namedElements = idResolver.getProperty(<%example2.env.EnvironmentTables%>.PROPid_namedElements);\nfinal /*@NonNull\052/ /*@NonInvalid\052/ <%org.eclipse.ocl.pivot.Property%> CTORid_parentEnv = idResolver.getProperty(<%example2.env.EnvironmentTables%>.PROPid_parentEnv);\nfinal /*@NonNull\052/ /*@NonInvalid\052/ <%org.eclipse.ocl.pivot.Class%> TYP_env_c_c_Environment_0 = idResolver.getClass(<%example2.env.EnvironmentTables%>.CLSSid_Environment, null);\nfinal /*@NonNull\052/ /*@Thrown\052/ <%example2.env.Environment%> symbol_0 = (<%example2.env.Environment%>)TYP_env_c_c_Environment_0.createInstance();\nfinal /*@NonNull\052/ /*@Thrown\052/ <%java.util.List%><<%example2.classes.NamedElement%>> namedElements = this.getNamedElements();\nfinal /*@NonNull\052/ /*@Thrown\052/ <%org.eclipse.ocl.pivot.values.OrderedSetValue%> BOXED_namedElements = idResolver.createOrderedSetOfAll(<%example2.env.EnvironmentTables%>.ORD_CLSSid_NamedElement, namedElements);\nfinal /*@NonNull\052/ /*@Thrown\052/ <%org.eclipse.ocl.pivot.values.SequenceValue%> asSequence = <%org.eclipse.ocl.pivot.utilities.ClassUtil%>.nonNullState(<%org.eclipse.ocl.pivot.library.collection.CollectionAsSequenceOperation%>.INSTANCE.evaluate(BOXED_namedElements));\nfinal /*@NonNull\052/ /*@NonInvalid\052/ <%org.eclipse.ocl.pivot.values.OrderedSetValue%> BOXED_elements = idResolver.createOrderedSetOfAll(<%example2.env.EnvironmentTables%>.ORD_CLSSid_NamedElement, elements);\nfinal /*@NonNull\052/ /*@Thrown\052/ <%org.eclipse.ocl.pivot.values.CollectionValue%> includingAll = <%org.eclipse.ocl.pivot.utilities.ClassUtil%>.nonNullState(<%org.eclipse.ocl.pivot.library.collection.CollectionIncludingAllOperation%>.INSTANCE.evaluate(asSequence, BOXED_elements));\nfinal <%java.util.List%><<%example2.classes.NamedElement%>> UNBOXED_includingAll = includingAll.asEcoreObjects(idResolver, example2.classes.NamedElement.class);\nassert UNBOXED_includingAll != null;\nCTORid_namedElements.initValue(symbol_0, UNBOXED_includingAll);\nfinal /*@Nullable\052/ /*@Thrown\052/ <%example2.env.Environment%> parentEnv = this.getParentEnv();\nCTORid_parentEnv.initValue(symbol_0, parentEnv);\nreturn (<%example2.env.Environment%>)symbol_0;'"
 	 * @generated
 	 */
 	Environment addElements(EList<NamedElement> elements);
@@ -77,7 +78,7 @@ public interface Environment extends Env4CG {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @model
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel body='/**\n * Environment{\n *   namedElements = namedElements->asSequence()\n *   ->including(element), parentEnv = parentEnv}\n \052/\nfinal /*@NonNull\052/ /*@NonInvalid\052/ <%org.eclipse.ocl.pivot.evaluation.Evaluator%> evaluator = <%org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal%>.getEvaluator(this);\nfinal /*@NonNull\052/ /*@NonInvalid\052/ <%org.eclipse.ocl.pivot.ids.IdResolver%> idResolver = evaluator.getIdResolver();\nfinal /*@NonNull\052/ /*@NonInvalid\052/ <%org.eclipse.ocl.pivot.Property%> CTORid_namedElements = idResolver.getProperty(<%example2.env.EnvironmentTables%>.PROPid_namedElements);\nfinal /*@NonNull\052/ /*@NonInvalid\052/ <%org.eclipse.ocl.pivot.Property%> CTORid_parentEnv = idResolver.getProperty(<%example2.env.EnvironmentTables%>.PROPid_parentEnv);\nfinal /*@NonNull\052/ /*@NonInvalid\052/ <%org.eclipse.ocl.pivot.Class%> TYP_env_c_c_Environment_0 = idResolver.getClass(<%example2.env.EnvironmentTables%>.CLSSid_Environment, null);\nfinal /*@NonNull\052/ /*@Thrown\052/ <%example2.env.Environment%> symbol_0 = (<%example2.env.Environment%>)TYP_env_c_c_Environment_0.createInstance();\nfinal /*@NonNull\052/ /*@Thrown\052/ <%java.util.List%><<%example2.classes.NamedElement%>> namedElements = this.getNamedElements();\nfinal /*@NonNull\052/ /*@Thrown\052/ <%org.eclipse.ocl.pivot.values.OrderedSetValue%> BOXED_namedElements = idResolver.createOrderedSetOfAll(<%example2.env.EnvironmentTables%>.ORD_CLSSid_NamedElement, namedElements);\nfinal /*@NonNull\052/ /*@Thrown\052/ <%org.eclipse.ocl.pivot.values.SequenceValue%> asSequence = <%org.eclipse.ocl.pivot.utilities.ClassUtil%>.nonNullState(<%org.eclipse.ocl.pivot.library.collection.CollectionAsSequenceOperation%>.INSTANCE.evaluate(BOXED_namedElements));\nfinal /*@NonNull\052/ /*@Thrown\052/ <%org.eclipse.ocl.pivot.values.SequenceValue%> including = <%org.eclipse.ocl.pivot.utilities.ClassUtil%>.nonNullState((<%org.eclipse.ocl.pivot.values.SequenceValue%>)<%org.eclipse.ocl.pivot.library.collection.CollectionIncludingOperation%>.INSTANCE.evaluate(asSequence, element));\nfinal <%java.util.List%><<%example2.classes.NamedElement%>> UNBOXED_including = including.asEcoreObjects(idResolver, example2.classes.NamedElement.class);\nassert UNBOXED_including != null;\nCTORid_namedElements.initValue(symbol_0, UNBOXED_including);\nfinal /*@Nullable\052/ /*@Thrown\052/ <%example2.env.Environment%> parentEnv = this.getParentEnv();\nCTORid_parentEnv.initValue(symbol_0, parentEnv);\nreturn (<%example2.env.Environment%>)symbol_0;'"
 	 * @generated
 	 */
 	Environment addElement(NamedElement element);
