@@ -1,4 +1,4 @@
----- Transformation umlRdbms ----
+---- Transformation UpperToLower ----
 Mapping __root__
   Visiting Mapping GuardPattern
     GuardPattern has no predicates.
@@ -6,9 +6,9 @@ Mapping __root__
 ==============================
 Output Model
 ==============================
-Visiting MappingLoop, binding: p
-Visiting MappingCall, calling: packageToSchema_LM
-  Mapping packageToSchema_LM
+Visiting MappingLoop, binding: g1
+Visiting MappingCall, calling: graph2graph_LM
+  Mapping graph2graph_LM
     Visiting Mapping GuardPattern
       GuardPattern has no predicates.
     CoreDomain middle
@@ -16,2086 +16,2172 @@ Visiting MappingCall, calling: packageToSchema_LM
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-    VisitPropertyAssignment p2s.umlPackage = Package [6b1316f4] {
-      kind = 
-      name = People
-      elements = [Class] x 10
+    VisitPropertyAssignment g2g.name = graphone
+    VisitPropertyAssignment g2g.graph1 = Graph [64125b4d] {
+      element = [Node] x 11
+      name = GraphOne
       }
-    VisitPropertyAssignment p2s.name = People
-    RealizedVariables for CoreDomain uml
+    RealizedVariables for CoreDomain upperGraph
     RealizedVariables for CoreDomain middle
-    RealizedVariable p2s: PackageToSchema [625e068] {
-      name = People
-      classesToTables = [ ]
-      primitivesToNames = [ ]
-      schema = [ null ]
-      umlPackage = Package [6b1316f4]
+    RealizedVariable g2g: Graph2Graph [2d76343e] {
+      graph1 = Graph [64125b4d]
+      graph2 = [ null ]
+      element2Element = [ ]
+      name = graphone
       }
 ==============================
 Output Model
 ==============================
-Visiting MappingCall, calling: packageToSchema_MR
-  Mapping packageToSchema_MR
+Visiting MappingCall, calling: graph2graph_MR
+  Mapping graph2graph_MR
     Visiting Mapping GuardPattern
       GuardPattern has no predicates.
-    CoreDomain rdbms
+    CoreDomain lowerGraph
       Visiting CoreDomain GuardPattern
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-    VisitPropertyAssignment s.name = People
-    VisitPropertyAssignment p2s.schema = Schema [2c888fc9] {
-      name = People
-      kind = [ null ]
-      tables = [ ]
+    VisitPropertyAssignment g2g.graph2 = Graph [2b5fe9c3] {
+      element = [ ]
+      name = [ null ]
       }
-    RealizedVariables for CoreDomain rdbms
-    RealizedVariable s: Schema [2c888fc9] {
-      name = People
-      kind = [ null ]
-      tables = [ ]
+    VisitPropertyAssignment g2.name = graphone
+    RealizedVariables for CoreDomain lowerGraph
+    RealizedVariable g2: Graph [2b5fe9c3] {
+      element = [ ]
+      name = graphone
       }
     RealizedVariables for CoreDomain middle
 ==============================
 Output Model
-Schema [2c888fc9] {
-  name = People
-  kind = [ null ]
-  tables = [ ]
+Graph [2b5fe9c3] {
+  element = [ ]
+  name = graphone
   }
 ==============================
-Visiting MappingLoop, binding: class
-Visiting MappingCall, calling: classToTable_LM
-  Mapping classToTable_LM
+Visiting MappingLoop, binding: node
+Visiting MappingCall, calling: node2node_LM
+  Mapping node2node_LM
     Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate c.namespace = p is true
-      Predicate c.kind = 'persistent' is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate n1.graph = g1 is true
       GuardPattern result: true
     CoreDomain middle
       Visiting CoreDomain GuardPattern
-        Variable p2s: PackageToSchema [625e068] {
-          name = People
-          classesToTables = [ ]
-          primitivesToNames = [ ]
-          schema = Schema [2c888fc9]
-          umlPackage = Package [6b1316f4]
+        Variable g2g: Graph2Graph [2d76343e] {
+          graph1 = Graph [64125b4d]
+          graph2 = Graph [2b5fe9c3]
+          element2Element = [ ]
+          name = graphone
           }
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-    VisitPropertyAssignment c2t.owner = PackageToSchema [625e068] {
-      name = People
-      classesToTables = [ ]
-      primitivesToNames = [ ]
-      schema = Schema [2c888fc9]
-      umlPackage = Package [6b1316f4]
+    VisitPropertyAssignment n2n.node1 = Node [25ec1774] {
+      graph = Graph [64125b4d]
+      incoming = [Edge] x 1
+      outgoing = [Edge] x 1
+      label = York
       }
-    VisitPropertyAssignment c2t.name = Student
-    VisitPropertyAssignment c2t.umlClass = Class [3997ebf6] {
-      kind = persistent
-      name = Student
-      namespace = Package [6b1316f4]
-      typeOpposite = [ ]
-      attributes = [Attribute] x 4
-      forward = [ ]
-      general = [ ]
-      generalOpposite = [ ]
-      reverse = [ ]
+    VisitPropertyAssignment n2n.label = york
+    VisitPropertyAssignment n2n.owner = Graph2Graph [2d76343e] {
+      graph1 = Graph [64125b4d]
+      graph2 = Graph [2b5fe9c3]
+      element2Element = [ ]
+      name = graphone
       }
-    RealizedVariables for CoreDomain uml
+    RealizedVariables for CoreDomain upperGraph
     RealizedVariables for CoreDomain middle
-    RealizedVariable c2t: ClassToTable [1161a1d5] {
-      fromAttributes = [ ]
-      column = [ null ]
-      name = Student
-      associationsToForeignKeys = [ ]
-      owner = PackageToSchema [625e068]
-      primaryKey = [ null ]
-      table = [ null ]
-      umlClass = Class [3997ebf6]
+    RealizedVariable n2n: Node2Node [6a9a4f8e] {
+      owner = Graph2Graph [2d76343e]
+      node1 = Node [25ec1774]
+      node2 = [ null ]
+      label = york
       }
 ==============================
 Output Model
 ==============================
-Visiting MappingCall, calling: classToTable_MR
-  Mapping classToTable_MR
+Visiting MappingCall, calling: node2node_MR
+  Mapping node2node_MR
     Visiting Mapping GuardPattern
-      Predicate p2s.schema = s is true
-      Predicate c2t.owner = p2s is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate n2n.owner = g2g is true
       GuardPattern result: true
-    CoreDomain rdbms
+    CoreDomain lowerGraph
       Visiting CoreDomain GuardPattern
-        Variable s: Schema [2c888fc9] {
-          name = People
-          kind = [ null ]
-          tables = [ ]
+        Variable g2: Graph [2b5fe9c3] {
+          element = [ ]
+          name = graphone
           }
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-    VisitPropertyAssignment c2t.column = Column [1a754a4a] {
-      name = [ null ]
-      kind = [ null ]
-      type = [ null ]
-      owner = [ null ]
-      foreignKeys = [ ]
-      keys = [ ]
+    VisitPropertyAssignment n2.label = york
+    VisitPropertyAssignment n2n.node2 = Node [38dd2a4f] {
+      graph = [ null ]
+      incoming = [ ]
+      outgoing = [ ]
+      label = york
       }
-    VisitPropertyAssignment c2t.table = Table [a604dd8] {
-      name = [ null ]
-      kind = [ null ]
-      columns = [ ]
-      schema = [ null ]
-      keys = [ ]
-      foreignKeys = [ ]
+    VisitPropertyAssignment n2.graph = Graph [2b5fe9c3] {
+      element = [ ]
+      name = graphone
       }
-    VisitPropertyAssignment t.name = Student
-    VisitPropertyAssignment c2t.primaryKey = Key [3896a53a] {
-      name = [ null ]
-      kind = [ null ]
-      owner = [ null ]
-      column = [ ]
-      }
-    VisitPropertyAssignment t.kind = base
-    VisitPropertyAssignment t.schema = Schema [2c888fc9] {
-      name = People
-      kind = [ null ]
-      tables = [ ]
-      }
-    VisitPropertyAssignment pk.owner = Table [a604dd8] {
-      name = Student
-      kind = base
-      columns = [ ]
-      schema = Schema [2c888fc9]
-      keys = [ ]
-      foreignKeys = [ ]
-      }
-    VisitPropertyAssignment pk.kind = primary
-    VisitPropertyAssignment pc.owner = Table [a604dd8] {
-      name = Student
-      kind = base
-      columns = [ ]
-      schema = Schema [2c888fc9]
-      keys = [Key] x 1
-      foreignKeys = [ ]
-      }
-    VisitPropertyAssignment pc.keys = [org.eclipse.emf.ecore.impl.DynamicEObjectImpl@3896a53a (eClass: org.eclipse.emf.ecore.impl.EClassImpl@1e5cd7f9 (name: Key) (instanceClassName: null) (abstract: false, interface: false))]
-    VisitPropertyAssignment pc.type = NUMBER
-    VisitPropertyAssignment pc.name = Student_tid
-    VisitPropertyAssignment pk.name = Student_pk
-    RealizedVariables for CoreDomain rdbms
-    RealizedVariable t: Table [a604dd8] {
-      name = Student
-      kind = base
-      columns = [Column] x 1
-      schema = Schema [2c888fc9]
-      keys = [Key] x 1
-      foreignKeys = [ ]
-      }
-    RealizedVariable pk: Key [3896a53a] {
-      name = Student_pk
-      kind = primary
-      owner = Table [a604dd8]
-      column = [Column] x 1
-      }
-    RealizedVariable pc: Column [1a754a4a] {
-      name = Student_tid
-      kind = [ null ]
-      type = NUMBER
-      owner = Table [a604dd8]
-      foreignKeys = [ ]
-      keys = [Key] x 1
+    RealizedVariables for CoreDomain lowerGraph
+    RealizedVariable n2: Node [38dd2a4f] {
+      graph = Graph [2b5fe9c3]
+      incoming = [ ]
+      outgoing = [ ]
+      label = york
       }
     RealizedVariables for CoreDomain middle
 ==============================
 Output Model
-Schema [2c888fc9] {
-  name = People
-  kind = [ null ]
-  tables = [Table] x 1
+Graph [2b5fe9c3] {
+  element = [Node] x 1
+  name = graphone
   }
-Table [a604dd8] {
-  name = Student
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
-  }
-Key [3896a53a] {
-  name = Student_pk
-  kind = primary
-  owner = Table [a604dd8]
-  column = [Column] x 1
-  }
-Column [1a754a4a] {
-  name = Student_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [a604dd8]
-  foreignKeys = [ ]
-  keys = [Key] x 1
+Node [38dd2a4f] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [ ]
+  label = york
   }
 ==============================
-Visiting MappingCall, calling: classToTable_LM
-  Mapping classToTable_LM
+Visiting MappingCall, calling: node2node_LM
+  Mapping node2node_LM
     Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate c.namespace = p is true
-      Predicate c.kind = 'persistent' is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate n1.graph = g1 is true
       GuardPattern result: true
     CoreDomain middle
       Visiting CoreDomain GuardPattern
-        Variable p2s: PackageToSchema [625e068] {
-          name = People
-          classesToTables = [ClassToTable] x 1
-          primitivesToNames = [ ]
-          schema = Schema [2c888fc9]
-          umlPackage = Package [6b1316f4]
+        Variable g2g: Graph2Graph [2d76343e] {
+          graph1 = Graph [64125b4d]
+          graph2 = Graph [2b5fe9c3]
+          element2Element = [Node2Node] x 1
+          name = graphone
           }
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-    VisitPropertyAssignment c2t.owner = PackageToSchema [625e068] {
-      name = People
-      classesToTables = [ClassToTable] x 1
-      primitivesToNames = [ ]
-      schema = Schema [2c888fc9]
-      umlPackage = Package [6b1316f4]
+    VisitPropertyAssignment n2n.node1 = Node [10875750] {
+      graph = Graph [64125b4d]
+      incoming = [Edge] x 2
+      outgoing = [Edge] x 2
+      label = Stansted
       }
-    VisitPropertyAssignment c2t.name = Professor
-    VisitPropertyAssignment c2t.umlClass = Class [25048104] {
-      kind = persistent
-      name = Professor
-      namespace = Package [6b1316f4]
-      typeOpposite = [ ]
-      attributes = [Attribute] x 3
-      forward = [Association] x 1
-      general = [ ]
-      generalOpposite = [ ]
-      reverse = [ ]
+    VisitPropertyAssignment n2n.label = stansted
+    VisitPropertyAssignment n2n.owner = Graph2Graph [2d76343e] {
+      graph1 = Graph [64125b4d]
+      graph2 = Graph [2b5fe9c3]
+      element2Element = [Node2Node] x 1
+      name = graphone
       }
-    RealizedVariables for CoreDomain uml
+    RealizedVariables for CoreDomain upperGraph
     RealizedVariables for CoreDomain middle
-    RealizedVariable c2t: ClassToTable [22d5631c] {
-      fromAttributes = [ ]
-      column = [ null ]
-      name = Professor
-      associationsToForeignKeys = [ ]
-      owner = PackageToSchema [625e068]
-      primaryKey = [ null ]
-      table = [ null ]
-      umlClass = Class [25048104]
+    RealizedVariable n2n: Node2Node [4004c5b3] {
+      owner = Graph2Graph [2d76343e]
+      node1 = Node [10875750]
+      node2 = [ null ]
+      label = stansted
       }
 ==============================
 Output Model
 ==============================
-Visiting MappingCall, calling: classToTable_MR
-  Mapping classToTable_MR
+Visiting MappingCall, calling: node2node_MR
+  Mapping node2node_MR
     Visiting Mapping GuardPattern
-      Predicate p2s.schema = s is true
-      Predicate c2t.owner = p2s is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate n2n.owner = g2g is true
       GuardPattern result: true
-    CoreDomain rdbms
+    CoreDomain lowerGraph
       Visiting CoreDomain GuardPattern
-        Variable s: Schema [2c888fc9] {
-          name = People
-          kind = [ null ]
-          tables = [Table] x 1
+        Variable g2: Graph [2b5fe9c3] {
+          element = [Node] x 1
+          name = graphone
           }
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-    VisitPropertyAssignment c2t.column = Column [17ef771b] {
-      name = [ null ]
-      kind = [ null ]
-      type = [ null ]
-      owner = [ null ]
-      foreignKeys = [ ]
-      keys = [ ]
+    VisitPropertyAssignment n2.label = stansted
+    VisitPropertyAssignment n2n.node2 = Node [794f8b9a] {
+      graph = [ null ]
+      incoming = [ ]
+      outgoing = [ ]
+      label = stansted
       }
-    VisitPropertyAssignment c2t.table = Table [6a7499e3] {
-      name = [ null ]
-      kind = [ null ]
-      columns = [ ]
-      schema = [ null ]
-      keys = [ ]
-      foreignKeys = [ ]
+    VisitPropertyAssignment n2.graph = Graph [2b5fe9c3] {
+      element = [Node] x 1
+      name = graphone
       }
-    VisitPropertyAssignment t.name = Professor
-    VisitPropertyAssignment c2t.primaryKey = Key [d233caf] {
-      name = [ null ]
-      kind = [ null ]
-      owner = [ null ]
-      column = [ ]
-      }
-    VisitPropertyAssignment t.kind = base
-    VisitPropertyAssignment t.schema = Schema [2c888fc9] {
-      name = People
-      kind = [ null ]
-      tables = [Table] x 1
-      }
-    VisitPropertyAssignment pk.owner = Table [6a7499e3] {
-      name = Professor
-      kind = base
-      columns = [ ]
-      schema = Schema [2c888fc9]
-      keys = [ ]
-      foreignKeys = [ ]
-      }
-    VisitPropertyAssignment pk.kind = primary
-    VisitPropertyAssignment pc.owner = Table [6a7499e3] {
-      name = Professor
-      kind = base
-      columns = [ ]
-      schema = Schema [2c888fc9]
-      keys = [Key] x 1
-      foreignKeys = [ ]
-      }
-    VisitPropertyAssignment pc.keys = [org.eclipse.emf.ecore.impl.DynamicEObjectImpl@d233caf (eClass: org.eclipse.emf.ecore.impl.EClassImpl@1e5cd7f9 (name: Key) (instanceClassName: null) (abstract: false, interface: false))]
-    VisitPropertyAssignment pc.type = NUMBER
-    VisitPropertyAssignment pc.name = Professor_tid
-    VisitPropertyAssignment pk.name = Professor_pk
-    RealizedVariables for CoreDomain rdbms
-    RealizedVariable t: Table [6a7499e3] {
-      name = Professor
-      kind = base
-      columns = [Column] x 1
-      schema = Schema [2c888fc9]
-      keys = [Key] x 1
-      foreignKeys = [ ]
-      }
-    RealizedVariable pk: Key [d233caf] {
-      name = Professor_pk
-      kind = primary
-      owner = Table [6a7499e3]
-      column = [Column] x 1
-      }
-    RealizedVariable pc: Column [17ef771b] {
-      name = Professor_tid
-      kind = [ null ]
-      type = NUMBER
-      owner = Table [6a7499e3]
-      foreignKeys = [ ]
-      keys = [Key] x 1
+    RealizedVariables for CoreDomain lowerGraph
+    RealizedVariable n2: Node [794f8b9a] {
+      graph = Graph [2b5fe9c3]
+      incoming = [ ]
+      outgoing = [ ]
+      label = stansted
       }
     RealizedVariables for CoreDomain middle
 ==============================
 Output Model
-Schema [2c888fc9] {
-  name = People
-  kind = [ null ]
-  tables = [Table] x 2
+Graph [2b5fe9c3] {
+  element = [Node] x 2
+  name = graphone
   }
-Table [a604dd8] {
-  name = Student
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
+Node [38dd2a4f] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [ ]
+  label = york
   }
-Key [3896a53a] {
-  name = Student_pk
-  kind = primary
-  owner = Table [a604dd8]
-  column = [Column] x 1
-  }
-Column [1a754a4a] {
-  name = Student_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [a604dd8]
-  foreignKeys = [ ]
-  keys = [Key] x 1
-  }
-Table [6a7499e3] {
-  name = Professor
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
-  }
-Key [d233caf] {
-  name = Professor_pk
-  kind = primary
-  owner = Table [6a7499e3]
-  column = [Column] x 1
-  }
-Column [17ef771b] {
-  name = Professor_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [6a7499e3]
-  foreignKeys = [ ]
-  keys = [Key] x 1
+Node [794f8b9a] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [ ]
+  label = stansted
   }
 ==============================
-Visiting MappingCall, calling: classToTable_LM
-  Mapping classToTable_LM
+Visiting MappingCall, calling: node2node_LM
+  Mapping node2node_LM
     Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate c.namespace = p is true
-      Predicate c.kind = 'persistent' is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate n1.graph = g1 is true
       GuardPattern result: true
     CoreDomain middle
       Visiting CoreDomain GuardPattern
-        Variable p2s: PackageToSchema [625e068] {
-          name = People
-          classesToTables = [ClassToTable] x 2
-          primitivesToNames = [ ]
-          schema = Schema [2c888fc9]
-          umlPackage = Package [6b1316f4]
+        Variable g2g: Graph2Graph [2d76343e] {
+          graph1 = Graph [64125b4d]
+          graph2 = Graph [2b5fe9c3]
+          element2Element = [Node2Node] x 2
+          name = graphone
           }
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-    VisitPropertyAssignment c2t.owner = PackageToSchema [625e068] {
-      name = People
-      classesToTables = [ClassToTable] x 2
-      primitivesToNames = [ ]
-      schema = Schema [2c888fc9]
-      umlPackage = Package [6b1316f4]
+    VisitPropertyAssignment n2n.node1 = Node [680ffc1c] {
+      graph = Graph [64125b4d]
+      incoming = [Edge] x 1
+      outgoing = [Edge] x 1
+      label = Munich
       }
-    VisitPropertyAssignment c2t.name = Address
-    VisitPropertyAssignment c2t.umlClass = Class [4ab24098] {
-      kind = persistent
-      name = Address
-      namespace = Package [6b1316f4]
-      typeOpposite = [ ]
-      attributes = [ ]
-      forward = [ ]
-      general = [ ]
-      generalOpposite = [ ]
-      reverse = [Association] x 1
+    VisitPropertyAssignment n2n.label = munich
+    VisitPropertyAssignment n2n.owner = Graph2Graph [2d76343e] {
+      graph1 = Graph [64125b4d]
+      graph2 = Graph [2b5fe9c3]
+      element2Element = [Node2Node] x 2
+      name = graphone
       }
-    RealizedVariables for CoreDomain uml
+    RealizedVariables for CoreDomain upperGraph
     RealizedVariables for CoreDomain middle
-    RealizedVariable c2t: ClassToTable [5f50ac7e] {
-      fromAttributes = [ ]
-      column = [ null ]
-      name = Address
-      associationsToForeignKeys = [ ]
-      owner = PackageToSchema [625e068]
-      primaryKey = [ null ]
-      table = [ null ]
-      umlClass = Class [4ab24098]
+    RealizedVariable n2n: Node2Node [555669ae] {
+      owner = Graph2Graph [2d76343e]
+      node1 = Node [680ffc1c]
+      node2 = [ null ]
+      label = munich
       }
 ==============================
 Output Model
 ==============================
-Visiting MappingCall, calling: classToTable_MR
-  Mapping classToTable_MR
+Visiting MappingCall, calling: node2node_MR
+  Mapping node2node_MR
     Visiting Mapping GuardPattern
-      Predicate p2s.schema = s is true
-      Predicate c2t.owner = p2s is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate n2n.owner = g2g is true
       GuardPattern result: true
-    CoreDomain rdbms
+    CoreDomain lowerGraph
       Visiting CoreDomain GuardPattern
-        Variable s: Schema [2c888fc9] {
-          name = People
-          kind = [ null ]
-          tables = [Table] x 2
+        Variable g2: Graph [2b5fe9c3] {
+          element = [Node] x 2
+          name = graphone
           }
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-    VisitPropertyAssignment c2t.column = Column [2c26cbf4] {
-      name = [ null ]
-      kind = [ null ]
-      type = [ null ]
-      owner = [ null ]
-      foreignKeys = [ ]
-      keys = [ ]
+    VisitPropertyAssignment n2.label = munich
+    VisitPropertyAssignment n2n.node2 = Node [1c344a47] {
+      graph = [ null ]
+      incoming = [ ]
+      outgoing = [ ]
+      label = munich
       }
-    VisitPropertyAssignment c2t.table = Table [271816d1] {
-      name = [ null ]
-      kind = [ null ]
-      columns = [ ]
-      schema = [ null ]
-      keys = [ ]
-      foreignKeys = [ ]
+    VisitPropertyAssignment n2.graph = Graph [2b5fe9c3] {
+      element = [Node] x 2
+      name = graphone
       }
-    VisitPropertyAssignment t.name = Address
-    VisitPropertyAssignment c2t.primaryKey = Key [1e820764] {
-      name = [ null ]
-      kind = [ null ]
-      owner = [ null ]
-      column = [ ]
-      }
-    VisitPropertyAssignment t.kind = base
-    VisitPropertyAssignment t.schema = Schema [2c888fc9] {
-      name = People
-      kind = [ null ]
-      tables = [Table] x 2
-      }
-    VisitPropertyAssignment pk.owner = Table [271816d1] {
-      name = Address
-      kind = base
-      columns = [ ]
-      schema = Schema [2c888fc9]
-      keys = [ ]
-      foreignKeys = [ ]
-      }
-    VisitPropertyAssignment pk.kind = primary
-    VisitPropertyAssignment pc.owner = Table [271816d1] {
-      name = Address
-      kind = base
-      columns = [ ]
-      schema = Schema [2c888fc9]
-      keys = [Key] x 1
-      foreignKeys = [ ]
-      }
-    VisitPropertyAssignment pc.keys = [org.eclipse.emf.ecore.impl.DynamicEObjectImpl@1e820764 (eClass: org.eclipse.emf.ecore.impl.EClassImpl@1e5cd7f9 (name: Key) (instanceClassName: null) (abstract: false, interface: false))]
-    VisitPropertyAssignment pc.type = NUMBER
-    VisitPropertyAssignment pc.name = Address_tid
-    VisitPropertyAssignment pk.name = Address_pk
-    RealizedVariables for CoreDomain rdbms
-    RealizedVariable t: Table [271816d1] {
-      name = Address
-      kind = base
-      columns = [Column] x 1
-      schema = Schema [2c888fc9]
-      keys = [Key] x 1
-      foreignKeys = [ ]
-      }
-    RealizedVariable pk: Key [1e820764] {
-      name = Address_pk
-      kind = primary
-      owner = Table [271816d1]
-      column = [Column] x 1
-      }
-    RealizedVariable pc: Column [2c26cbf4] {
-      name = Address_tid
-      kind = [ null ]
-      type = NUMBER
-      owner = Table [271816d1]
-      foreignKeys = [ ]
-      keys = [Key] x 1
+    RealizedVariables for CoreDomain lowerGraph
+    RealizedVariable n2: Node [1c344a47] {
+      graph = Graph [2b5fe9c3]
+      incoming = [ ]
+      outgoing = [ ]
+      label = munich
       }
     RealizedVariables for CoreDomain middle
 ==============================
 Output Model
-Schema [2c888fc9] {
-  name = People
-  kind = [ null ]
-  tables = [Table] x 3
+Graph [2b5fe9c3] {
+  element = [Node] x 3
+  name = graphone
   }
-Table [a604dd8] {
-  name = Student
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
+Node [38dd2a4f] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [ ]
+  label = york
   }
-Key [3896a53a] {
-  name = Student_pk
-  kind = primary
-  owner = Table [a604dd8]
-  column = [Column] x 1
+Node [794f8b9a] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [ ]
+  label = stansted
   }
-Column [1a754a4a] {
-  name = Student_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [a604dd8]
-  foreignKeys = [ ]
-  keys = [Key] x 1
-  }
-Table [6a7499e3] {
-  name = Professor
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
-  }
-Key [d233caf] {
-  name = Professor_pk
-  kind = primary
-  owner = Table [6a7499e3]
-  column = [Column] x 1
-  }
-Column [17ef771b] {
-  name = Professor_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [6a7499e3]
-  foreignKeys = [ ]
-  keys = [Key] x 1
-  }
-Table [271816d1] {
-  name = Address
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
-  }
-Key [1e820764] {
-  name = Address_pk
-  kind = primary
-  owner = Table [271816d1]
-  column = [Column] x 1
-  }
-Column [2c26cbf4] {
-  name = Address_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [271816d1]
-  foreignKeys = [ ]
-  keys = [Key] x 1
+Node [1c344a47] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [ ]
+  label = munich
   }
 ==============================
-Visiting MappingCall, calling: classToTable_LM
-  Mapping classToTable_LM
+Visiting MappingCall, calling: node2node_LM
+  Mapping node2node_LM
     Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate c.namespace = p is true
-      Predicate c.kind = 'persistent' is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate n1.graph = g1 is true
       GuardPattern result: true
     CoreDomain middle
       Visiting CoreDomain GuardPattern
-        Variable p2s: PackageToSchema [625e068] {
-          name = People
-          classesToTables = [ClassToTable] x 3
-          primitivesToNames = [ ]
-          schema = Schema [2c888fc9]
-          umlPackage = Package [6b1316f4]
+        Variable g2g: Graph2Graph [2d76343e] {
+          graph1 = Graph [64125b4d]
+          graph2 = Graph [2b5fe9c3]
+          element2Element = [Node2Node] x 3
+          name = graphone
           }
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-    VisitPropertyAssignment c2t.owner = PackageToSchema [625e068] {
-      name = People
-      classesToTables = [ClassToTable] x 3
-      primitivesToNames = [ ]
-      schema = Schema [2c888fc9]
-      umlPackage = Package [6b1316f4]
+    VisitPropertyAssignment n2n.node1 = Node [2342d884] {
+      graph = Graph [64125b4d]
+      incoming = [Edge] x 1
+      outgoing = [Edge] x 1
+      label = Innsbruck
       }
-    VisitPropertyAssignment c2t.name = Timetable
-    VisitPropertyAssignment c2t.umlClass = Class [7caee177] {
-      kind = persistent
-      name = Timetable
-      namespace = Package [6b1316f4]
-      typeOpposite = [Attribute] x 1
-      attributes = [Attribute] x 1
-      forward = [ ]
-      general = [ ]
-      generalOpposite = [ ]
-      reverse = [ ]
+    VisitPropertyAssignment n2n.label = innsbruck
+    VisitPropertyAssignment n2n.owner = Graph2Graph [2d76343e] {
+      graph1 = Graph [64125b4d]
+      graph2 = Graph [2b5fe9c3]
+      element2Element = [Node2Node] x 3
+      name = graphone
       }
-    RealizedVariables for CoreDomain uml
+    RealizedVariables for CoreDomain upperGraph
     RealizedVariables for CoreDomain middle
-    RealizedVariable c2t: ClassToTable [609945e9] {
-      fromAttributes = [ ]
-      column = [ null ]
-      name = Timetable
-      associationsToForeignKeys = [ ]
-      owner = PackageToSchema [625e068]
-      primaryKey = [ null ]
-      table = [ null ]
-      umlClass = Class [7caee177]
+    RealizedVariable n2n: Node2Node [2cf889c8] {
+      owner = Graph2Graph [2d76343e]
+      node1 = Node [2342d884]
+      node2 = [ null ]
+      label = innsbruck
       }
 ==============================
 Output Model
 ==============================
-Visiting MappingCall, calling: classToTable_MR
-  Mapping classToTable_MR
+Visiting MappingCall, calling: node2node_MR
+  Mapping node2node_MR
     Visiting Mapping GuardPattern
-      Predicate p2s.schema = s is true
-      Predicate c2t.owner = p2s is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate n2n.owner = g2g is true
       GuardPattern result: true
-    CoreDomain rdbms
+    CoreDomain lowerGraph
       Visiting CoreDomain GuardPattern
-        Variable s: Schema [2c888fc9] {
-          name = People
-          kind = [ null ]
-          tables = [Table] x 3
+        Variable g2: Graph [2b5fe9c3] {
+          element = [Node] x 3
+          name = graphone
           }
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-    VisitPropertyAssignment c2t.column = Column [67cc3210] {
-      name = [ null ]
-      kind = [ null ]
-      type = [ null ]
-      owner = [ null ]
-      foreignKeys = [ ]
-      keys = [ ]
+    VisitPropertyAssignment n2.label = innsbruck
+    VisitPropertyAssignment n2n.node2 = Node [711dc088] {
+      graph = [ null ]
+      incoming = [ ]
+      outgoing = [ ]
+      label = innsbruck
       }
-    VisitPropertyAssignment c2t.table = Table [eeaedad] {
-      name = [ null ]
-      kind = [ null ]
-      columns = [ ]
-      schema = [ null ]
-      keys = [ ]
-      foreignKeys = [ ]
+    VisitPropertyAssignment n2.graph = Graph [2b5fe9c3] {
+      element = [Node] x 3
+      name = graphone
       }
-    VisitPropertyAssignment t.name = Timetable
-    VisitPropertyAssignment c2t.primaryKey = Key [619a0081] {
-      name = [ null ]
-      kind = [ null ]
-      owner = [ null ]
-      column = [ ]
-      }
-    VisitPropertyAssignment t.kind = base
-    VisitPropertyAssignment t.schema = Schema [2c888fc9] {
-      name = People
-      kind = [ null ]
-      tables = [Table] x 3
-      }
-    VisitPropertyAssignment pk.owner = Table [eeaedad] {
-      name = Timetable
-      kind = base
-      columns = [ ]
-      schema = Schema [2c888fc9]
-      keys = [ ]
-      foreignKeys = [ ]
-      }
-    VisitPropertyAssignment pk.kind = primary
-    VisitPropertyAssignment pc.owner = Table [eeaedad] {
-      name = Timetable
-      kind = base
-      columns = [ ]
-      schema = Schema [2c888fc9]
-      keys = [Key] x 1
-      foreignKeys = [ ]
-      }
-    VisitPropertyAssignment pc.keys = [org.eclipse.emf.ecore.impl.DynamicEObjectImpl@619a0081 (eClass: org.eclipse.emf.ecore.impl.EClassImpl@1e5cd7f9 (name: Key) (instanceClassName: null) (abstract: false, interface: false))]
-    VisitPropertyAssignment pc.type = NUMBER
-    VisitPropertyAssignment pc.name = Timetable_tid
-    VisitPropertyAssignment pk.name = Timetable_pk
-    RealizedVariables for CoreDomain rdbms
-    RealizedVariable t: Table [eeaedad] {
-      name = Timetable
-      kind = base
-      columns = [Column] x 1
-      schema = Schema [2c888fc9]
-      keys = [Key] x 1
-      foreignKeys = [ ]
-      }
-    RealizedVariable pk: Key [619a0081] {
-      name = Timetable_pk
-      kind = primary
-      owner = Table [eeaedad]
-      column = [Column] x 1
-      }
-    RealizedVariable pc: Column [67cc3210] {
-      name = Timetable_tid
-      kind = [ null ]
-      type = NUMBER
-      owner = Table [eeaedad]
-      foreignKeys = [ ]
-      keys = [Key] x 1
+    RealizedVariables for CoreDomain lowerGraph
+    RealizedVariable n2: Node [711dc088] {
+      graph = Graph [2b5fe9c3]
+      incoming = [ ]
+      outgoing = [ ]
+      label = innsbruck
       }
     RealizedVariables for CoreDomain middle
 ==============================
 Output Model
-Schema [2c888fc9] {
-  name = People
-  kind = [ null ]
-  tables = [Table] x 4
+Graph [2b5fe9c3] {
+  element = [Node] x 4
+  name = graphone
   }
-Table [a604dd8] {
-  name = Student
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
+Node [38dd2a4f] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [ ]
+  label = york
   }
-Key [3896a53a] {
-  name = Student_pk
-  kind = primary
-  owner = Table [a604dd8]
-  column = [Column] x 1
+Node [794f8b9a] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [ ]
+  label = stansted
   }
-Column [1a754a4a] {
-  name = Student_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [a604dd8]
-  foreignKeys = [ ]
-  keys = [Key] x 1
+Node [1c344a47] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [ ]
+  label = munich
   }
-Table [6a7499e3] {
-  name = Professor
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
-  }
-Key [d233caf] {
-  name = Professor_pk
-  kind = primary
-  owner = Table [6a7499e3]
-  column = [Column] x 1
-  }
-Column [17ef771b] {
-  name = Professor_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [6a7499e3]
-  foreignKeys = [ ]
-  keys = [Key] x 1
-  }
-Table [271816d1] {
-  name = Address
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
-  }
-Key [1e820764] {
-  name = Address_pk
-  kind = primary
-  owner = Table [271816d1]
-  column = [Column] x 1
-  }
-Column [2c26cbf4] {
-  name = Address_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [271816d1]
-  foreignKeys = [ ]
-  keys = [Key] x 1
-  }
-Table [eeaedad] {
-  name = Timetable
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
-  }
-Key [619a0081] {
-  name = Timetable_pk
-  kind = primary
-  owner = Table [eeaedad]
-  column = [Column] x 1
-  }
-Column [67cc3210] {
-  name = Timetable_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [eeaedad]
-  foreignKeys = [ ]
-  keys = [Key] x 1
+Node [711dc088] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [ ]
+  label = innsbruck
   }
 ==============================
-Visiting MappingCall, calling: classToTable_LM
-  Mapping classToTable_LM
+Visiting MappingCall, calling: node2node_LM
+  Mapping node2node_LM
     Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate c.namespace = p is true
-      Predicate c.kind = 'persistent' is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate n1.graph = g1 is true
       GuardPattern result: true
     CoreDomain middle
       Visiting CoreDomain GuardPattern
-        Variable p2s: PackageToSchema [625e068] {
-          name = People
-          classesToTables = [ClassToTable] x 4
-          primitivesToNames = [ ]
-          schema = Schema [2c888fc9]
-          umlPackage = Package [6b1316f4]
+        Variable g2g: Graph2Graph [2d76343e] {
+          graph1 = Graph [64125b4d]
+          graph2 = Graph [2b5fe9c3]
+          element2Element = [Node2Node] x 4
+          name = graphone
           }
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-    VisitPropertyAssignment c2t.owner = PackageToSchema [625e068] {
-      name = People
-      classesToTables = [ClassToTable] x 4
-      primitivesToNames = [ ]
-      schema = Schema [2c888fc9]
-      umlPackage = Package [6b1316f4]
+    VisitPropertyAssignment n2n.node1 = Node [19f71b53] {
+      graph = Graph [64125b4d]
+      incoming = [Edge] x 1
+      outgoing = [Edge] x 1
+      label = Stuttgart
       }
-    VisitPropertyAssignment c2t.name = ResearchGroup
-    VisitPropertyAssignment c2t.umlClass = Class [3d548b94] {
-      kind = persistent
-      name = ResearchGroup
-      namespace = Package [6b1316f4]
-      typeOpposite = [Attribute] x 1
-      attributes = [Attribute] x 2
-      forward = [ ]
-      general = [ ]
-      generalOpposite = [ ]
-      reverse = [ ]
+    VisitPropertyAssignment n2n.label = stuttgart
+    VisitPropertyAssignment n2n.owner = Graph2Graph [2d76343e] {
+      graph1 = Graph [64125b4d]
+      graph2 = Graph [2b5fe9c3]
+      element2Element = [Node2Node] x 4
+      name = graphone
       }
-    RealizedVariables for CoreDomain uml
+    RealizedVariables for CoreDomain upperGraph
     RealizedVariables for CoreDomain middle
-    RealizedVariable c2t: ClassToTable [6016a917] {
-      fromAttributes = [ ]
-      column = [ null ]
-      name = ResearchGroup
-      associationsToForeignKeys = [ ]
-      owner = PackageToSchema [625e068]
-      primaryKey = [ null ]
-      table = [ null ]
-      umlClass = Class [3d548b94]
+    RealizedVariable n2n: Node2Node [584b5abc] {
+      owner = Graph2Graph [2d76343e]
+      node1 = Node [19f71b53]
+      node2 = [ null ]
+      label = stuttgart
       }
 ==============================
 Output Model
 ==============================
-Visiting MappingCall, calling: classToTable_MR
-  Mapping classToTable_MR
+Visiting MappingCall, calling: node2node_MR
+  Mapping node2node_MR
     Visiting Mapping GuardPattern
-      Predicate p2s.schema = s is true
-      Predicate c2t.owner = p2s is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate n2n.owner = g2g is true
       GuardPattern result: true
-    CoreDomain rdbms
+    CoreDomain lowerGraph
       Visiting CoreDomain GuardPattern
-        Variable s: Schema [2c888fc9] {
-          name = People
-          kind = [ null ]
-          tables = [Table] x 4
+        Variable g2: Graph [2b5fe9c3] {
+          element = [Node] x 4
+          name = graphone
           }
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-    VisitPropertyAssignment c2t.column = Column [6762ffa1] {
-      name = [ null ]
-      kind = [ null ]
-      type = [ null ]
-      owner = [ null ]
-      foreignKeys = [ ]
-      keys = [ ]
+    VisitPropertyAssignment n2.label = stuttgart
+    VisitPropertyAssignment n2n.node2 = Node [3b3219ed] {
+      graph = [ null ]
+      incoming = [ ]
+      outgoing = [ ]
+      label = stuttgart
       }
-    VisitPropertyAssignment c2t.table = Table [147cd80e] {
-      name = [ null ]
-      kind = [ null ]
-      columns = [ ]
-      schema = [ null ]
-      keys = [ ]
-      foreignKeys = [ ]
+    VisitPropertyAssignment n2.graph = Graph [2b5fe9c3] {
+      element = [Node] x 4
+      name = graphone
       }
-    VisitPropertyAssignment t.name = ResearchGroup
-    VisitPropertyAssignment c2t.primaryKey = Key [104c89a4] {
-      name = [ null ]
-      kind = [ null ]
-      owner = [ null ]
-      column = [ ]
-      }
-    VisitPropertyAssignment t.kind = base
-    VisitPropertyAssignment t.schema = Schema [2c888fc9] {
-      name = People
-      kind = [ null ]
-      tables = [Table] x 4
-      }
-    VisitPropertyAssignment pk.owner = Table [147cd80e] {
-      name = ResearchGroup
-      kind = base
-      columns = [ ]
-      schema = Schema [2c888fc9]
-      keys = [ ]
-      foreignKeys = [ ]
-      }
-    VisitPropertyAssignment pk.kind = primary
-    VisitPropertyAssignment pc.owner = Table [147cd80e] {
-      name = ResearchGroup
-      kind = base
-      columns = [ ]
-      schema = Schema [2c888fc9]
-      keys = [Key] x 1
-      foreignKeys = [ ]
-      }
-    VisitPropertyAssignment pc.keys = [org.eclipse.emf.ecore.impl.DynamicEObjectImpl@104c89a4 (eClass: org.eclipse.emf.ecore.impl.EClassImpl@1e5cd7f9 (name: Key) (instanceClassName: null) (abstract: false, interface: false))]
-    VisitPropertyAssignment pc.type = NUMBER
-    VisitPropertyAssignment pc.name = ResearchGroup_tid
-    VisitPropertyAssignment pk.name = ResearchGroup_pk
-    RealizedVariables for CoreDomain rdbms
-    RealizedVariable t: Table [147cd80e] {
-      name = ResearchGroup
-      kind = base
-      columns = [Column] x 1
-      schema = Schema [2c888fc9]
-      keys = [Key] x 1
-      foreignKeys = [ ]
-      }
-    RealizedVariable pk: Key [104c89a4] {
-      name = ResearchGroup_pk
-      kind = primary
-      owner = Table [147cd80e]
-      column = [Column] x 1
-      }
-    RealizedVariable pc: Column [6762ffa1] {
-      name = ResearchGroup_tid
-      kind = [ null ]
-      type = NUMBER
-      owner = Table [147cd80e]
-      foreignKeys = [ ]
-      keys = [Key] x 1
+    RealizedVariables for CoreDomain lowerGraph
+    RealizedVariable n2: Node [3b3219ed] {
+      graph = Graph [2b5fe9c3]
+      incoming = [ ]
+      outgoing = [ ]
+      label = stuttgart
       }
     RealizedVariables for CoreDomain middle
 ==============================
 Output Model
-Schema [2c888fc9] {
-  name = People
-  kind = [ null ]
-  tables = [Table] x 5
+Graph [2b5fe9c3] {
+  element = [Node] x 5
+  name = graphone
   }
-Table [a604dd8] {
-  name = Student
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
+Node [38dd2a4f] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [ ]
+  label = york
   }
-Key [3896a53a] {
-  name = Student_pk
-  kind = primary
-  owner = Table [a604dd8]
-  column = [Column] x 1
+Node [794f8b9a] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [ ]
+  label = stansted
   }
-Column [1a754a4a] {
-  name = Student_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [a604dd8]
-  foreignKeys = [ ]
-  keys = [Key] x 1
+Node [1c344a47] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [ ]
+  label = munich
   }
-Table [6a7499e3] {
-  name = Professor
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
+Node [711dc088] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [ ]
+  label = innsbruck
   }
-Key [d233caf] {
-  name = Professor_pk
-  kind = primary
-  owner = Table [6a7499e3]
-  column = [Column] x 1
-  }
-Column [17ef771b] {
-  name = Professor_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [6a7499e3]
-  foreignKeys = [ ]
-  keys = [Key] x 1
-  }
-Table [271816d1] {
-  name = Address
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
-  }
-Key [1e820764] {
-  name = Address_pk
-  kind = primary
-  owner = Table [271816d1]
-  column = [Column] x 1
-  }
-Column [2c26cbf4] {
-  name = Address_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [271816d1]
-  foreignKeys = [ ]
-  keys = [Key] x 1
-  }
-Table [eeaedad] {
-  name = Timetable
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
-  }
-Key [619a0081] {
-  name = Timetable_pk
-  kind = primary
-  owner = Table [eeaedad]
-  column = [Column] x 1
-  }
-Column [67cc3210] {
-  name = Timetable_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [eeaedad]
-  foreignKeys = [ ]
-  keys = [Key] x 1
-  }
-Table [147cd80e] {
-  name = ResearchGroup
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
-  }
-Key [104c89a4] {
-  name = ResearchGroup_pk
-  kind = primary
-  owner = Table [147cd80e]
-  column = [Column] x 1
-  }
-Column [6762ffa1] {
-  name = ResearchGroup_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [147cd80e]
-  foreignKeys = [ ]
-  keys = [Key] x 1
+Node [3b3219ed] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [ ]
+  label = stuttgart
   }
 ==============================
-Visiting MappingCall, calling: classToTable_LM
-  Mapping classToTable_LM
+Visiting MappingLoop, binding: edge
+Visiting MappingLoop, binding: node2node
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
     Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate c.namespace = p is true
-      Predicate c.kind = 'persistent' is true
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is true
+      Predicate e1.graph = g1 is true
       GuardPattern result: true
     CoreDomain middle
       Visiting CoreDomain GuardPattern
-        Variable p2s: PackageToSchema [625e068] {
-          name = People
-          classesToTables = [ClassToTable] x 5
-          primitivesToNames = [ ]
-          schema = Schema [2c888fc9]
-          umlPackage = Package [6b1316f4]
+        Variable g2g: Graph2Graph [2d76343e] {
+          graph1 = Graph [64125b4d]
+          graph2 = Graph [2b5fe9c3]
+          element2Element = [Node2Node] x 5
+          name = graphone
+          }
+        Variable sn2n: Node2Node [6a9a4f8e] {
+          owner = Graph2Graph [2d76343e]
+          node1 = Node [25ec1774]
+          node2 = Node [38dd2a4f]
+          label = york
+          }
+        Variable tn2n: Node2Node [4004c5b3] {
+          owner = Graph2Graph [2d76343e]
+          node1 = Node [10875750]
+          node2 = Node [794f8b9a]
+          label = stansted
           }
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-    VisitPropertyAssignment c2t.owner = PackageToSchema [625e068] {
-      name = People
-      classesToTables = [ClassToTable] x 5
-      primitivesToNames = [ ]
-      schema = Schema [2c888fc9]
-      umlPackage = Package [6b1316f4]
+    VisitPropertyAssignment e2e.edge1 = Edge [2ef7d41f] {
+      graph = Graph [64125b4d]
+      target = Node [10875750]
+      source = Node [25ec1774]
       }
-    VisitPropertyAssignment c2t.name = Budget
-    VisitPropertyAssignment c2t.umlClass = Class [7997c100] {
-      kind = persistent
-      name = Budget
-      namespace = Package [6b1316f4]
-      typeOpposite = [Attribute] x 1
-      attributes = [Attribute] x 1
-      forward = [ ]
-      general = [ ]
-      generalOpposite = [ ]
-      reverse = [ ]
+    VisitPropertyAssignment e2e.target = Node2Node [4004c5b3] {
+      owner = Graph2Graph [2d76343e]
+      node1 = Node [10875750]
+      node2 = Node [794f8b9a]
+      label = stansted
       }
-    RealizedVariables for CoreDomain uml
+    VisitPropertyAssignment e2e.source = Node2Node [6a9a4f8e] {
+      owner = Graph2Graph [2d76343e]
+      node1 = Node [25ec1774]
+      node2 = Node [38dd2a4f]
+      label = york
+      }
+    VisitPropertyAssignment e2e.owner = Graph2Graph [2d76343e] {
+      graph1 = Graph [64125b4d]
+      graph2 = Graph [2b5fe9c3]
+      element2Element = [Node2Node] x 5
+      name = graphone
+      }
+    RealizedVariables for CoreDomain upperGraph
     RealizedVariables for CoreDomain middle
-    RealizedVariable c2t: ClassToTable [4876d42] {
-      fromAttributes = [ ]
-      column = [ null ]
-      name = Budget
-      associationsToForeignKeys = [ ]
-      owner = PackageToSchema [625e068]
-      primaryKey = [ null ]
-      table = [ null ]
-      umlClass = Class [7997c100]
+    RealizedVariable e2e: Edge2Edge [69e0312b] {
+      owner = Graph2Graph [2d76343e]
+      edge1 = Edge [2ef7d41f]
+      edge2 = [ null ]
+      target = Node2Node [4004c5b3]
+      source = Node2Node [6a9a4f8e]
       }
 ==============================
 Output Model
 ==============================
-Visiting MappingCall, calling: classToTable_MR
-  Mapping classToTable_MR
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
     Visiting Mapping GuardPattern
-      Predicate p2s.schema = s is true
-      Predicate c2t.owner = p2s is true
-      GuardPattern result: true
-    CoreDomain rdbms
-      Visiting CoreDomain GuardPattern
-        Variable s: Schema [2c888fc9] {
-          name = People
-          kind = [ null ]
-          tables = [Table] x 5
-          }
-        GuardPattern has no predicates.
-      Visiting CoreDomain BottomPattern
-    Visiting Mapping BottomPattern
-    VisitPropertyAssignment c2t.column = Column [1b490621] {
-      name = [ null ]
-      kind = [ null ]
-      type = [ null ]
-      owner = [ null ]
-      foreignKeys = [ ]
-      keys = [ ]
-      }
-    VisitPropertyAssignment c2t.table = Table [57316e85] {
-      name = [ null ]
-      kind = [ null ]
-      columns = [ ]
-      schema = [ null ]
-      keys = [ ]
-      foreignKeys = [ ]
-      }
-    VisitPropertyAssignment t.name = Budget
-    VisitPropertyAssignment c2t.primaryKey = Key [6e4f0a7b] {
-      name = [ null ]
-      kind = [ null ]
-      owner = [ null ]
-      column = [ ]
-      }
-    VisitPropertyAssignment t.kind = base
-    VisitPropertyAssignment t.schema = Schema [2c888fc9] {
-      name = People
-      kind = [ null ]
-      tables = [Table] x 5
-      }
-    VisitPropertyAssignment pk.owner = Table [57316e85] {
-      name = Budget
-      kind = base
-      columns = [ ]
-      schema = Schema [2c888fc9]
-      keys = [ ]
-      foreignKeys = [ ]
-      }
-    VisitPropertyAssignment pk.kind = primary
-    VisitPropertyAssignment pc.owner = Table [57316e85] {
-      name = Budget
-      kind = base
-      columns = [ ]
-      schema = Schema [2c888fc9]
-      keys = [Key] x 1
-      foreignKeys = [ ]
-      }
-    VisitPropertyAssignment pc.keys = [org.eclipse.emf.ecore.impl.DynamicEObjectImpl@6e4f0a7b (eClass: org.eclipse.emf.ecore.impl.EClassImpl@1e5cd7f9 (name: Key) (instanceClassName: null) (abstract: false, interface: false))]
-    VisitPropertyAssignment pc.type = NUMBER
-    VisitPropertyAssignment pc.name = Budget_tid
-    VisitPropertyAssignment pk.name = Budget_pk
-    RealizedVariables for CoreDomain rdbms
-    RealizedVariable t: Table [57316e85] {
-      name = Budget
-      kind = base
-      columns = [Column] x 1
-      schema = Schema [2c888fc9]
-      keys = [Key] x 1
-      foreignKeys = [ ]
-      }
-    RealizedVariable pk: Key [6e4f0a7b] {
-      name = Budget_pk
-      kind = primary
-      owner = Table [57316e85]
-      column = [Column] x 1
-      }
-    RealizedVariable pc: Column [1b490621] {
-      name = Budget_tid
-      kind = [ null ]
-      type = NUMBER
-      owner = Table [57316e85]
-      foreignKeys = [ ]
-      keys = [Key] x 1
-      }
-    RealizedVariables for CoreDomain middle
-==============================
-Output Model
-Schema [2c888fc9] {
-  name = People
-  kind = [ null ]
-  tables = [Table] x 6
-  }
-Table [a604dd8] {
-  name = Student
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
-  }
-Key [3896a53a] {
-  name = Student_pk
-  kind = primary
-  owner = Table [a604dd8]
-  column = [Column] x 1
-  }
-Column [1a754a4a] {
-  name = Student_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [a604dd8]
-  foreignKeys = [ ]
-  keys = [Key] x 1
-  }
-Table [6a7499e3] {
-  name = Professor
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
-  }
-Key [d233caf] {
-  name = Professor_pk
-  kind = primary
-  owner = Table [6a7499e3]
-  column = [Column] x 1
-  }
-Column [17ef771b] {
-  name = Professor_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [6a7499e3]
-  foreignKeys = [ ]
-  keys = [Key] x 1
-  }
-Table [271816d1] {
-  name = Address
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
-  }
-Key [1e820764] {
-  name = Address_pk
-  kind = primary
-  owner = Table [271816d1]
-  column = [Column] x 1
-  }
-Column [2c26cbf4] {
-  name = Address_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [271816d1]
-  foreignKeys = [ ]
-  keys = [Key] x 1
-  }
-Table [eeaedad] {
-  name = Timetable
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
-  }
-Key [619a0081] {
-  name = Timetable_pk
-  kind = primary
-  owner = Table [eeaedad]
-  column = [Column] x 1
-  }
-Column [67cc3210] {
-  name = Timetable_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [eeaedad]
-  foreignKeys = [ ]
-  keys = [Key] x 1
-  }
-Table [147cd80e] {
-  name = ResearchGroup
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
-  }
-Key [104c89a4] {
-  name = ResearchGroup_pk
-  kind = primary
-  owner = Table [147cd80e]
-  column = [Column] x 1
-  }
-Column [6762ffa1] {
-  name = ResearchGroup_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [147cd80e]
-  foreignKeys = [ ]
-  keys = [Key] x 1
-  }
-Table [57316e85] {
-  name = Budget
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
-  }
-Key [6e4f0a7b] {
-  name = Budget_pk
-  kind = primary
-  owner = Table [57316e85]
-  column = [Column] x 1
-  }
-Column [1b490621] {
-  name = Budget_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [57316e85]
-  foreignKeys = [ ]
-  keys = [Key] x 1
-  }
-==============================
-Visiting MappingLoop, binding: sc2t
-Visiting MappingLoop, binding: association
-Visiting MappingLoop, binding: class
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is false
       GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
     Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is false
       GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
     Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is true
-      Predicate dc2t.umlClass = dc is true
-      Predicate sc.namespace = p is true
-      Predicate a.namespace = p is true
-      Predicate a.destination = dc is true
-      Predicate a.source = sc is false
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is false
       GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
     Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is false
       GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
+Visiting MappingLoop, binding: node2node
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
     Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is false
       GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
     Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
-      GuardPattern result: false
-Visiting MappingLoop, binding: association
-Visiting MappingLoop, binding: class
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
-      GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
-      GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
-      GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
-      GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
-      GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is true
-      Predicate dc2t.umlClass = dc is true
-      Predicate sc.namespace = p is true
-      Predicate a.namespace = p is true
-      Predicate a.destination = dc is true
-      Predicate a.source = sc is false
-      GuardPattern result: false
-Visiting MappingLoop, binding: association
-Visiting MappingLoop, binding: class
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
-      GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
-      GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
-      GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
-      GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is true
-      Predicate dc2t.umlClass = dc is true
-      Predicate sc.namespace = p is true
-      Predicate a.namespace = p is true
-      Predicate a.destination = dc is true
-      Predicate a.source = sc is false
-      GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
-      GuardPattern result: false
-Visiting MappingLoop, binding: association
-Visiting MappingLoop, binding: class
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
-      GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
-      GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
-      GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is true
-      Predicate dc2t.umlClass = dc is true
-      Predicate sc.namespace = p is true
-      Predicate a.namespace = p is true
-      Predicate a.destination = dc is true
-      Predicate a.source = sc is false
-      GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
-      GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
-      GuardPattern result: false
-Visiting MappingLoop, binding: association
-Visiting MappingLoop, binding: class
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
-      GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is true
-      Predicate dc2t.umlClass = dc is true
-      Predicate sc.namespace = p is true
-      Predicate a.namespace = p is true
-      Predicate a.destination = dc is true
-      Predicate a.source = sc is true
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is true
+      Predicate e1.graph = g1 is true
       GuardPattern result: true
     CoreDomain middle
       Visiting CoreDomain GuardPattern
-        Variable p2s: PackageToSchema [625e068] {
-          name = People
-          classesToTables = [ClassToTable] x 6
-          primitivesToNames = [ ]
-          schema = Schema [2c888fc9]
-          umlPackage = Package [6b1316f4]
+        Variable g2g: Graph2Graph [2d76343e] {
+          graph1 = Graph [64125b4d]
+          graph2 = Graph [2b5fe9c3]
+          element2Element = [Node2Node] x 6
+          name = graphone
           }
-        Variable sc2t: ClassToTable [22d5631c] {
-          fromAttributes = [ ]
-          column = Column [17ef771b]
-          name = Professor
-          associationsToForeignKeys = [ ]
-          owner = PackageToSchema [625e068]
-          primaryKey = Key [d233caf]
-          table = Table [6a7499e3]
-          umlClass = Class [25048104]
+        Variable sn2n: Node2Node [4004c5b3] {
+          owner = Graph2Graph [2d76343e]
+          node1 = Node [10875750]
+          node2 = Node [794f8b9a]
+          label = stansted
           }
-        Variable dc2t: ClassToTable [5f50ac7e] {
-          fromAttributes = [ ]
-          column = Column [2c26cbf4]
-          name = Address
-          associationsToForeignKeys = [ ]
-          owner = PackageToSchema [625e068]
-          primaryKey = Key [1e820764]
-          table = Table [271816d1]
-          umlClass = Class [4ab24098]
+        Variable tn2n: Node2Node [6a9a4f8e] {
+          owner = Graph2Graph [2d76343e]
+          node1 = Node [25ec1774]
+          node2 = Node [38dd2a4f]
+          label = york
           }
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-    VisitPropertyAssignment a2f.referenced = ClassToTable [5f50ac7e] {
-      fromAttributes = [ ]
-      column = Column [2c26cbf4]
-      name = Address
-      associationsToForeignKeys = [ ]
-      owner = PackageToSchema [625e068]
-      primaryKey = Key [1e820764]
-      table = Table [271816d1]
-      umlClass = Class [4ab24098]
+    VisitPropertyAssignment e2e.edge1 = Edge [25754daa] {
+      graph = Graph [64125b4d]
+      target = Node [25ec1774]
+      source = Node [10875750]
       }
-    VisitPropertyAssignment a2f.owner = ClassToTable [22d5631c] {
-      fromAttributes = [ ]
-      column = Column [17ef771b]
-      name = Professor
-      associationsToForeignKeys = [ ]
-      owner = PackageToSchema [625e068]
-      primaryKey = Key [d233caf]
-      table = Table [6a7499e3]
-      umlClass = Class [25048104]
+    VisitPropertyAssignment e2e.target = Node2Node [6a9a4f8e] {
+      owner = Graph2Graph [2d76343e]
+      node1 = Node [25ec1774]
+      node2 = Node [38dd2a4f]
+      label = york
       }
-    VisitPropertyAssignment a2f.association = Association [5a00255d] {
-      kind = 
-      name = proffesorLivesAt
-      namespace = Package [6b1316f4]
-      destination = Class [4ab24098]
-      source = Class [25048104]
+    VisitPropertyAssignment e2e.source = Node2Node [4004c5b3] {
+      owner = Graph2Graph [2d76343e]
+      node1 = Node [10875750]
+      node2 = Node [794f8b9a]
+      label = stansted
       }
-    VisitPropertyAssignment a2f.name = proffesorLivesAt
-    RealizedVariables for CoreDomain uml
+    VisitPropertyAssignment e2e.owner = Graph2Graph [2d76343e] {
+      graph1 = Graph [64125b4d]
+      graph2 = Graph [2b5fe9c3]
+      element2Element = [Node2Node] x 6
+      name = graphone
+      }
+    RealizedVariables for CoreDomain upperGraph
     RealizedVariables for CoreDomain middle
-    RealizedVariable a2f: AssociationToForeignKey [6931bf42] {
-      column = [ null ]
-      name = proffesorLivesAt
-      association = Association [5a00255d]
-      foreignKey = [ null ]
-      owner = ClassToTable [22d5631c]
-      referenced = ClassToTable [5f50ac7e]
+    RealizedVariable e2e: Edge2Edge [7dbc345a] {
+      owner = Graph2Graph [2d76343e]
+      edge1 = Edge [25754daa]
+      edge2 = [ null ]
+      target = Node2Node [6a9a4f8e]
+      source = Node2Node [4004c5b3]
       }
 ==============================
 Output Model
 ==============================
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
     Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is false
       GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
     Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is false
       GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
     Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is false
       GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
+Visiting MappingLoop, binding: node2node
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
     Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is false
       GuardPattern result: false
-Visiting MappingLoop, binding: association
-Visiting MappingLoop, binding: class
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
     Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is true
-      Predicate dc2t.umlClass = dc is true
-      Predicate sc.namespace = p is true
-      Predicate a.namespace = p is true
-      Predicate a.destination = dc is true
-      Predicate a.source = sc is false
-      GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
-      GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
-      GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
-      GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
-      GuardPattern result: false
-Visiting MappingCall, calling: associationToForeignKey_LM
-  Mapping associationToForeignKey_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate sc2t.owner = p2s is true
-      Predicate sc2t.umlClass = sc is false
-      GuardPattern result: false
-Visiting MappingLoop, binding: primitivedatatype
-Visiting MappingCall, calling: booleanToBoolean_LM
-  Mapping booleanToBoolean_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate prim.namespace = p is true
-      Predicate prim.name = 'Boolean' is false
-      GuardPattern result: false
-Visiting MappingCall, calling: booleanToBoolean_LM
-  Mapping booleanToBoolean_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate prim.namespace = p is true
-      Predicate prim.name = 'Boolean' is false
-      GuardPattern result: false
-Visiting MappingCall, calling: booleanToBoolean_LM
-  Mapping booleanToBoolean_LM
-    Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate prim.namespace = p is true
-      Predicate prim.name = 'Boolean' is true
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is true
+      Predicate e1.graph = g1 is true
       GuardPattern result: true
     CoreDomain middle
       Visiting CoreDomain GuardPattern
-        Variable p2s: PackageToSchema [625e068] {
-          name = People
-          classesToTables = [ClassToTable] x 6
-          primitivesToNames = [ ]
-          schema = Schema [2c888fc9]
-          umlPackage = Package [6b1316f4]
+        Variable g2g: Graph2Graph [2d76343e] {
+          graph1 = Graph [64125b4d]
+          graph2 = Graph [2b5fe9c3]
+          element2Element = [Node2Node] x 7
+          name = graphone
+          }
+        Variable sn2n: Node2Node [4004c5b3] {
+          owner = Graph2Graph [2d76343e]
+          node1 = Node [10875750]
+          node2 = Node [794f8b9a]
+          label = stansted
+          }
+        Variable tn2n: Node2Node [555669ae] {
+          owner = Graph2Graph [2d76343e]
+          node1 = Node [680ffc1c]
+          node2 = Node [1c344a47]
+          label = munich
           }
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-    VisitPropertyAssignment p2n.primitive = PrimitiveDataType [3cb66999] {
-      kind = [ null ]
-      name = Boolean
-      namespace = Package [6b1316f4]
-      typeOpposite = [Attribute] x 1
+    VisitPropertyAssignment e2e.edge1 = Edge [383de71c] {
+      graph = Graph [64125b4d]
+      target = Node [680ffc1c]
+      source = Node [10875750]
       }
-    VisitPropertyAssignment p2n.name = Boolean2BOOLEAN
-    VisitPropertyAssignment p2n.owner = PackageToSchema [625e068] {
-      name = People
-      classesToTables = [ClassToTable] x 6
-      primitivesToNames = [ ]
-      schema = Schema [2c888fc9]
-      umlPackage = Package [6b1316f4]
+    VisitPropertyAssignment e2e.target = Node2Node [555669ae] {
+      owner = Graph2Graph [2d76343e]
+      node1 = Node [680ffc1c]
+      node2 = Node [1c344a47]
+      label = munich
       }
-    RealizedVariables for CoreDomain uml
+    VisitPropertyAssignment e2e.source = Node2Node [4004c5b3] {
+      owner = Graph2Graph [2d76343e]
+      node1 = Node [10875750]
+      node2 = Node [794f8b9a]
+      label = stansted
+      }
+    VisitPropertyAssignment e2e.owner = Graph2Graph [2d76343e] {
+      graph1 = Graph [64125b4d]
+      graph2 = Graph [2b5fe9c3]
+      element2Element = [Node2Node] x 7
+      name = graphone
+      }
+    RealizedVariables for CoreDomain upperGraph
     RealizedVariables for CoreDomain middle
-    RealizedVariable p2n: BooleanToBoolean [787be75d] {
-      name = Boolean2BOOLEAN
-      typeName = [ null ]
-      owner = PackageToSchema [625e068]
-      primitive = PrimitiveDataType [3cb66999]
+    RealizedVariable e2e: Edge2Edge [4f114133] {
+      owner = Graph2Graph [2d76343e]
+      edge1 = Edge [383de71c]
+      edge2 = [ null ]
+      target = Node2Node [555669ae]
+      source = Node2Node [4004c5b3]
       }
 ==============================
 Output Model
 ==============================
-Visiting MappingCall, calling: integerToNumber_LM
-  Mapping integerToNumber_LM
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
     Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate prim.name = 'Integer' is false
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is false
       GuardPattern result: false
-Visiting MappingCall, calling: stringToVarchar_LM
-  Mapping stringToVarchar_LM
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
     Visiting Mapping GuardPattern
-      Predicate p2s.umlPackage = p is true
-      Predicate prim.name = 'String' is false
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is false
       GuardPattern result: false
-Visiting MappingCall, calling: booleanToBoolean_MR
-  Mapping booleanToBoolean_MR
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
     Visiting Mapping GuardPattern
-      Predicate p2n.owner = p2s is true
-      GuardPattern result: true
-    CoreDomain rdbms
-      Visiting CoreDomain GuardPattern
-        GuardPattern has no predicates.
-      Visiting CoreDomain BottomPattern
-    Visiting Mapping BottomPattern
-    VisitPropertyAssignment p2n.typeName = BOOLEAN
-    RealizedVariables for CoreDomain rdbms
-    RealizedVariables for CoreDomain middle
-==============================
-Output Model
-Schema [2c888fc9] {
-  name = People
-  kind = [ null ]
-  tables = [Table] x 6
-  }
-Table [a604dd8] {
-  name = Student
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
-  }
-Key [3896a53a] {
-  name = Student_pk
-  kind = primary
-  owner = Table [a604dd8]
-  column = [Column] x 1
-  }
-Column [1a754a4a] {
-  name = Student_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [a604dd8]
-  foreignKeys = [ ]
-  keys = [Key] x 1
-  }
-Table [6a7499e3] {
-  name = Professor
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
-  }
-Key [d233caf] {
-  name = Professor_pk
-  kind = primary
-  owner = Table [6a7499e3]
-  column = [Column] x 1
-  }
-Column [17ef771b] {
-  name = Professor_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [6a7499e3]
-  foreignKeys = [ ]
-  keys = [Key] x 1
-  }
-Table [271816d1] {
-  name = Address
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
-  }
-Key [1e820764] {
-  name = Address_pk
-  kind = primary
-  owner = Table [271816d1]
-  column = [Column] x 1
-  }
-Column [2c26cbf4] {
-  name = Address_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [271816d1]
-  foreignKeys = [ ]
-  keys = [Key] x 1
-  }
-Table [eeaedad] {
-  name = Timetable
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
-  }
-Key [619a0081] {
-  name = Timetable_pk
-  kind = primary
-  owner = Table [eeaedad]
-  column = [Column] x 1
-  }
-Column [67cc3210] {
-  name = Timetable_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [eeaedad]
-  foreignKeys = [ ]
-  keys = [Key] x 1
-  }
-Table [147cd80e] {
-  name = ResearchGroup
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
-  }
-Key [104c89a4] {
-  name = ResearchGroup_pk
-  kind = primary
-  owner = Table [147cd80e]
-  column = [Column] x 1
-  }
-Column [6762ffa1] {
-  name = ResearchGroup_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [147cd80e]
-  foreignKeys = [ ]
-  keys = [Key] x 1
-  }
-Table [57316e85] {
-  name = Budget
-  kind = base
-  columns = [Column] x 1
-  schema = Schema [2c888fc9]
-  keys = [Key] x 1
-  foreignKeys = [ ]
-  }
-Key [6e4f0a7b] {
-  name = Budget_pk
-  kind = primary
-  owner = Table [57316e85]
-  column = [Column] x 1
-  }
-Column [1b490621] {
-  name = Budget_tid
-  kind = [ null ]
-  type = NUMBER
-  owner = Table [57316e85]
-  foreignKeys = [ ]
-  keys = [Key] x 1
-  }
-==============================
-Visiting MappingLoop, binding: a
-Visiting MappingCall, calling: classPrimitiveAttributes_LM
-  Mapping classPrimitiveAttributes_LM
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is false
+      GuardPattern result: false
+Visiting MappingLoop, binding: node2node
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
     Visiting Mapping GuardPattern
-      Predicate fao.umlClass = c is true
-      Predicate p2n.primitive = t is true
-      Predicate a.type = t is true
-      Predicate a.owner = c is true
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is false
+      GuardPattern result: false
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
+    Visiting Mapping GuardPattern
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is false
+      GuardPattern result: false
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
+    Visiting Mapping GuardPattern
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is true
+      Predicate e1.graph = g1 is true
       GuardPattern result: true
     CoreDomain middle
       Visiting CoreDomain GuardPattern
-        Variable fao: ClassToTable [22d5631c] {
-          fromAttributes = [ ]
-          column = Column [17ef771b]
-          name = Professor
-          associationsToForeignKeys = [AssociationToForeignKey] x 1
-          owner = PackageToSchema [625e068]
-          primaryKey = Key [d233caf]
-          table = Table [6a7499e3]
-          umlClass = Class [25048104]
+        Variable g2g: Graph2Graph [2d76343e] {
+          graph1 = Graph [64125b4d]
+          graph2 = Graph [2b5fe9c3]
+          element2Element = [Node2Node] x 8
+          name = graphone
           }
-        Variable p2n: BooleanToBoolean [787be75d] {
-          name = Boolean2BOOLEAN
-          typeName = BOOLEAN
-          owner = PackageToSchema [625e068]
-          primitive = PrimitiveDataType [3cb66999]
+        Variable sn2n: Node2Node [555669ae] {
+          owner = Graph2Graph [2d76343e]
+          node1 = Node [680ffc1c]
+          node2 = Node [1c344a47]
+          label = munich
+          }
+        Variable tn2n: Node2Node [2cf889c8] {
+          owner = Graph2Graph [2d76343e]
+          node1 = Node [2342d884]
+          node2 = Node [711dc088]
+          label = innsbruck
           }
         GuardPattern has no predicates.
       Visiting CoreDomain BottomPattern
     Visiting Mapping BottomPattern
-    VisitPropertyAssignment fa.leafs = [org.eclipse.emf.ecore.impl.DynamicEObjectImpl@157032da (eClass: org.eclipse.emf.ecore.impl.EClassImpl@3ee969f8 (name: AttributeToColumn) (instanceClassName: null) (abstract: false, interface: false))]
-    VisitPropertyAssignment fa.owner = ClassToTable [22d5631c] {
-      fromAttributes = [ ]
-      column = Column [17ef771b]
-      name = Professor
-      associationsToForeignKeys = [AssociationToForeignKey] x 1
-      owner = PackageToSchema [625e068]
-      primaryKey = Key [d233caf]
-      table = Table [6a7499e3]
-      umlClass = Class [25048104]
+    VisitPropertyAssignment e2e.edge1 = Edge [7170c7a3] {
+      graph = Graph [64125b4d]
+      target = Node [2342d884]
+      source = Node [680ffc1c]
       }
-    VisitPropertyAssignment fa.kind = null
-    VisitPropertyAssignment fa.type = BooleanToBoolean [787be75d] {
-      name = Boolean2BOOLEAN
-      typeName = BOOLEAN
-      owner = PackageToSchema [625e068]
-      primitive = PrimitiveDataType [3cb66999]
+    VisitPropertyAssignment e2e.target = Node2Node [2cf889c8] {
+      owner = Graph2Graph [2d76343e]
+      node1 = Node [2342d884]
+      node2 = Node [711dc088]
+      label = innsbruck
       }
-    VisitPropertyAssignment fa.attribute = Attribute [3a2f4ac0] {
-      kind = [ null ]
-      name = employed
-      owner = Class [25048104]
-      type = PrimitiveDataType [3cb66999]
+    VisitPropertyAssignment e2e.source = Node2Node [555669ae] {
+      owner = Graph2Graph [2d76343e]
+      node1 = Node [680ffc1c]
+      node2 = Node [1c344a47]
+      label = munich
       }
-    VisitPropertyAssignment fa.name = employed
-    RealizedVariables for CoreDomain uml
+    VisitPropertyAssignment e2e.owner = Graph2Graph [2d76343e] {
+      graph1 = Graph [64125b4d]
+      graph2 = Graph [2b5fe9c3]
+      element2Element = [Node2Node] x 8
+      name = graphone
+      }
+    RealizedVariables for CoreDomain upperGraph
     RealizedVariables for CoreDomain middle
-    RealizedVariable fa: AttributeToColumn [157032da] {
-      name = employed
-      kind = [ null ]
-      attribute = Attribute [3a2f4ac0]
-      leafs = [AttributeToColumn] x 1
-      owner = ClassToTable [22d5631c]
-      column = [ null ]
-      type = BooleanToBoolean [787be75d]
+    RealizedVariable e2e: Edge2Edge [75cfa3d2] {
+      owner = Graph2Graph [2d76343e]
+      edge1 = Edge [7170c7a3]
+      edge2 = [ null ]
+      target = Node2Node [2cf889c8]
+      source = Node2Node [555669ae]
       }
 ==============================
 Output Model
 ==============================
-Visiting MappingLoop, binding: a
-Visiting MappingLoop, binding: ca
-Visiting MappingLoop, binding: a
-Visiting MappingLoop, binding: ca
-Visiting MappingCall, calling: complexAttributeComplexAttributes_LM
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
+    Visiting Mapping GuardPattern
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is false
+      GuardPattern result: false
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
+    Visiting Mapping GuardPattern
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is false
+      GuardPattern result: false
+Visiting MappingLoop, binding: node2node
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
+    Visiting Mapping GuardPattern
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is false
+      GuardPattern result: false
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
+    Visiting Mapping GuardPattern
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is false
+      GuardPattern result: false
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
+    Visiting Mapping GuardPattern
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is false
+      GuardPattern result: false
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
+    Visiting Mapping GuardPattern
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is true
+      Predicate e1.graph = g1 is true
+      GuardPattern result: true
+    CoreDomain middle
+      Visiting CoreDomain GuardPattern
+        Variable g2g: Graph2Graph [2d76343e] {
+          graph1 = Graph [64125b4d]
+          graph2 = Graph [2b5fe9c3]
+          element2Element = [Node2Node] x 9
+          name = graphone
+          }
+        Variable sn2n: Node2Node [2cf889c8] {
+          owner = Graph2Graph [2d76343e]
+          node1 = Node [2342d884]
+          node2 = Node [711dc088]
+          label = innsbruck
+          }
+        Variable tn2n: Node2Node [584b5abc] {
+          owner = Graph2Graph [2d76343e]
+          node1 = Node [19f71b53]
+          node2 = Node [3b3219ed]
+          label = stuttgart
+          }
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment e2e.edge1 = Edge [7994d431] {
+      graph = Graph [64125b4d]
+      target = Node [19f71b53]
+      source = Node [2342d884]
+      }
+    VisitPropertyAssignment e2e.target = Node2Node [584b5abc] {
+      owner = Graph2Graph [2d76343e]
+      node1 = Node [19f71b53]
+      node2 = Node [3b3219ed]
+      label = stuttgart
+      }
+    VisitPropertyAssignment e2e.source = Node2Node [2cf889c8] {
+      owner = Graph2Graph [2d76343e]
+      node1 = Node [2342d884]
+      node2 = Node [711dc088]
+      label = innsbruck
+      }
+    VisitPropertyAssignment e2e.owner = Graph2Graph [2d76343e] {
+      graph1 = Graph [64125b4d]
+      graph2 = Graph [2b5fe9c3]
+      element2Element = [Node2Node] x 9
+      name = graphone
+      }
+    RealizedVariables for CoreDomain upperGraph
+    RealizedVariables for CoreDomain middle
+    RealizedVariable e2e: Edge2Edge [2d41717f] {
+      owner = Graph2Graph [2d76343e]
+      edge1 = Edge [7994d431]
+      edge2 = [ null ]
+      target = Node2Node [584b5abc]
+      source = Node2Node [2cf889c8]
+      }
+==============================
+Output Model
+==============================
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
+    Visiting Mapping GuardPattern
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is false
+      GuardPattern result: false
+Visiting MappingLoop, binding: node2node
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
+    Visiting Mapping GuardPattern
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is false
+      GuardPattern result: false
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
+    Visiting Mapping GuardPattern
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is false
+      GuardPattern result: false
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
+    Visiting Mapping GuardPattern
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is false
+      GuardPattern result: false
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
+    Visiting Mapping GuardPattern
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is false
+      GuardPattern result: false
+Visiting MappingLoop, binding: tn2n
+Visiting MappingCall, calling: edge2edge_LM
+  Mapping edge2edge_LM
+    Visiting Mapping GuardPattern
+      Predicate sn2n.node1 = sn1 is true
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node1 = tn1 is true
+      Predicate g2g.graph1 = g1 is true
+      Predicate e1.target = tn1 is true
+      Predicate e1.source = sn1 is true
+      Predicate e1.graph = g1 is true
+      GuardPattern result: true
+    CoreDomain middle
+      Visiting CoreDomain GuardPattern
+        Variable g2g: Graph2Graph [2d76343e] {
+          graph1 = Graph [64125b4d]
+          graph2 = Graph [2b5fe9c3]
+          element2Element = [Node2Node] x 10
+          name = graphone
+          }
+        Variable sn2n: Node2Node [584b5abc] {
+          owner = Graph2Graph [2d76343e]
+          node1 = Node [19f71b53]
+          node2 = Node [3b3219ed]
+          label = stuttgart
+          }
+        Variable tn2n: Node2Node [4004c5b3] {
+          owner = Graph2Graph [2d76343e]
+          node1 = Node [10875750]
+          node2 = Node [794f8b9a]
+          label = stansted
+          }
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment e2e.edge1 = Edge [2e22f376] {
+      graph = Graph [64125b4d]
+      target = Node [10875750]
+      source = Node [19f71b53]
+      }
+    VisitPropertyAssignment e2e.target = Node2Node [4004c5b3] {
+      owner = Graph2Graph [2d76343e]
+      node1 = Node [10875750]
+      node2 = Node [794f8b9a]
+      label = stansted
+      }
+    VisitPropertyAssignment e2e.source = Node2Node [584b5abc] {
+      owner = Graph2Graph [2d76343e]
+      node1 = Node [19f71b53]
+      node2 = Node [3b3219ed]
+      label = stuttgart
+      }
+    VisitPropertyAssignment e2e.owner = Graph2Graph [2d76343e] {
+      graph1 = Graph [64125b4d]
+      graph2 = Graph [2b5fe9c3]
+      element2Element = [Node2Node] x 10
+      name = graphone
+      }
+    RealizedVariables for CoreDomain upperGraph
+    RealizedVariables for CoreDomain middle
+    RealizedVariable e2e: Edge2Edge [38b58e73] {
+      owner = Graph2Graph [2d76343e]
+      edge1 = Edge [2e22f376]
+      edge2 = [ null ]
+      target = Node2Node [4004c5b3]
+      source = Node2Node [584b5abc]
+      }
+==============================
+Output Model
+==============================
+Visiting MappingLoop, binding: node2node
+Visiting MappingLoop, binding: edge2edge
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is true
+      Predicate e2e.owner = g2g is true
+      GuardPattern result: true
+    CoreDomain lowerGraph
+      Visiting CoreDomain GuardPattern
+        Variable g2: Graph [2b5fe9c3] {
+          element = [Node] x 5
+          name = graphone
+          }
+        Variable sn2: Node [38dd2a4f] {
+          graph = Graph [2b5fe9c3]
+          incoming = [ ]
+          outgoing = [ ]
+          label = york
+          }
+        Variable tn2: Node [794f8b9a] {
+          graph = Graph [2b5fe9c3]
+          incoming = [ ]
+          outgoing = [ ]
+          label = stansted
+          }
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment e2e.edge2 = Edge [179b3d1b] {
+      graph = [ null ]
+      target = [ null ]
+      source = [ null ]
+      }
+    VisitPropertyAssignment e2.graph = Graph [2b5fe9c3] {
+      element = [Node] x 5
+      name = graphone
+      }
+    VisitPropertyAssignment e2.source = Node [38dd2a4f] {
+      graph = Graph [2b5fe9c3]
+      incoming = [ ]
+      outgoing = [ ]
+      label = york
+      }
+    VisitPropertyAssignment e2.target = Node [794f8b9a] {
+      graph = Graph [2b5fe9c3]
+      incoming = [ ]
+      outgoing = [ ]
+      label = stansted
+      }
+    RealizedVariables for CoreDomain lowerGraph
+    RealizedVariable e2: Edge [179b3d1b] {
+      graph = Graph [2b5fe9c3]
+      target = Node [794f8b9a]
+      source = Node [38dd2a4f]
+      }
+    RealizedVariables for CoreDomain middle
+==============================
+Output Model
+Graph [2b5fe9c3] {
+  element = [Node] x 6
+  name = graphone
+  }
+Node [38dd2a4f] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [Edge] x 1
+  label = york
+  }
+Node [794f8b9a] {
+  graph = Graph [2b5fe9c3]
+  incoming = [Edge] x 1
+  outgoing = [ ]
+  label = stansted
+  }
+Node [1c344a47] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [ ]
+  label = munich
+  }
+Node [711dc088] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [ ]
+  label = innsbruck
+  }
+Node [3b3219ed] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [ ]
+  label = stuttgart
+  }
+Edge [179b3d1b] {
+  graph = Graph [2b5fe9c3]
+  target = Node [794f8b9a]
+  source = Node [38dd2a4f]
+  }
+==============================
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is false
+      GuardPattern result: false
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is false
+      GuardPattern result: false
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is false
+      GuardPattern result: false
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is false
+      GuardPattern result: false
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is false
+      GuardPattern result: false
+Visiting MappingLoop, binding: edge2edge
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is false
+      GuardPattern result: false
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is true
+      Predicate e2e.owner = g2g is true
+      GuardPattern result: true
+    CoreDomain lowerGraph
+      Visiting CoreDomain GuardPattern
+        Variable g2: Graph [2b5fe9c3] {
+          element = [Node] x 6
+          name = graphone
+          }
+        Variable sn2: Node [794f8b9a] {
+          graph = Graph [2b5fe9c3]
+          incoming = [Edge] x 1
+          outgoing = [ ]
+          label = stansted
+          }
+        Variable tn2: Node [38dd2a4f] {
+          graph = Graph [2b5fe9c3]
+          incoming = [ ]
+          outgoing = [Edge] x 1
+          label = york
+          }
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment e2e.edge2 = Edge [50c8c3b8] {
+      graph = [ null ]
+      target = [ null ]
+      source = [ null ]
+      }
+    VisitPropertyAssignment e2.graph = Graph [2b5fe9c3] {
+      element = [Node] x 6
+      name = graphone
+      }
+    VisitPropertyAssignment e2.source = Node [794f8b9a] {
+      graph = Graph [2b5fe9c3]
+      incoming = [Edge] x 1
+      outgoing = [ ]
+      label = stansted
+      }
+    VisitPropertyAssignment e2.target = Node [38dd2a4f] {
+      graph = Graph [2b5fe9c3]
+      incoming = [ ]
+      outgoing = [Edge] x 1
+      label = york
+      }
+    RealizedVariables for CoreDomain lowerGraph
+    RealizedVariable e2: Edge [50c8c3b8] {
+      graph = Graph [2b5fe9c3]
+      target = Node [38dd2a4f]
+      source = Node [794f8b9a]
+      }
+    RealizedVariables for CoreDomain middle
+==============================
+Output Model
+Graph [2b5fe9c3] {
+  element = [Node] x 7
+  name = graphone
+  }
+Node [38dd2a4f] {
+  graph = Graph [2b5fe9c3]
+  incoming = [Edge] x 1
+  outgoing = [Edge] x 1
+  label = york
+  }
+Node [794f8b9a] {
+  graph = Graph [2b5fe9c3]
+  incoming = [Edge] x 1
+  outgoing = [Edge] x 1
+  label = stansted
+  }
+Node [1c344a47] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [ ]
+  label = munich
+  }
+Node [711dc088] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [ ]
+  label = innsbruck
+  }
+Node [3b3219ed] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [ ]
+  label = stuttgart
+  }
+Edge [179b3d1b] {
+  graph = Graph [2b5fe9c3]
+  target = Node [794f8b9a]
+  source = Node [38dd2a4f]
+  }
+Edge [50c8c3b8] {
+  graph = Graph [2b5fe9c3]
+  target = Node [38dd2a4f]
+  source = Node [794f8b9a]
+  }
+==============================
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is true
+      Predicate e2e.owner = g2g is true
+      GuardPattern result: true
+    CoreDomain lowerGraph
+      Visiting CoreDomain GuardPattern
+        Variable g2: Graph [2b5fe9c3] {
+          element = [Node] x 7
+          name = graphone
+          }
+        Variable sn2: Node [794f8b9a] {
+          graph = Graph [2b5fe9c3]
+          incoming = [Edge] x 1
+          outgoing = [Edge] x 1
+          label = stansted
+          }
+        Variable tn2: Node [1c344a47] {
+          graph = Graph [2b5fe9c3]
+          incoming = [ ]
+          outgoing = [ ]
+          label = munich
+          }
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment e2e.edge2 = Edge [2ca98e77] {
+      graph = [ null ]
+      target = [ null ]
+      source = [ null ]
+      }
+    VisitPropertyAssignment e2.graph = Graph [2b5fe9c3] {
+      element = [Node] x 7
+      name = graphone
+      }
+    VisitPropertyAssignment e2.source = Node [794f8b9a] {
+      graph = Graph [2b5fe9c3]
+      incoming = [Edge] x 1
+      outgoing = [Edge] x 1
+      label = stansted
+      }
+    VisitPropertyAssignment e2.target = Node [1c344a47] {
+      graph = Graph [2b5fe9c3]
+      incoming = [ ]
+      outgoing = [ ]
+      label = munich
+      }
+    RealizedVariables for CoreDomain lowerGraph
+    RealizedVariable e2: Edge [2ca98e77] {
+      graph = Graph [2b5fe9c3]
+      target = Node [1c344a47]
+      source = Node [794f8b9a]
+      }
+    RealizedVariables for CoreDomain middle
+==============================
+Output Model
+Graph [2b5fe9c3] {
+  element = [Node] x 8
+  name = graphone
+  }
+Node [38dd2a4f] {
+  graph = Graph [2b5fe9c3]
+  incoming = [Edge] x 1
+  outgoing = [Edge] x 1
+  label = york
+  }
+Node [794f8b9a] {
+  graph = Graph [2b5fe9c3]
+  incoming = [Edge] x 1
+  outgoing = [Edge] x 2
+  label = stansted
+  }
+Node [1c344a47] {
+  graph = Graph [2b5fe9c3]
+  incoming = [Edge] x 1
+  outgoing = [ ]
+  label = munich
+  }
+Node [711dc088] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [ ]
+  label = innsbruck
+  }
+Node [3b3219ed] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [ ]
+  label = stuttgart
+  }
+Edge [179b3d1b] {
+  graph = Graph [2b5fe9c3]
+  target = Node [794f8b9a]
+  source = Node [38dd2a4f]
+  }
+Edge [50c8c3b8] {
+  graph = Graph [2b5fe9c3]
+  target = Node [38dd2a4f]
+  source = Node [794f8b9a]
+  }
+Edge [2ca98e77] {
+  graph = Graph [2b5fe9c3]
+  target = Node [1c344a47]
+  source = Node [794f8b9a]
+  }
+==============================
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is false
+      GuardPattern result: false
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is false
+      GuardPattern result: false
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is false
+      GuardPattern result: false
+Visiting MappingLoop, binding: edge2edge
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is false
+      GuardPattern result: false
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is false
+      GuardPattern result: false
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is false
+      GuardPattern result: false
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is true
+      Predicate e2e.owner = g2g is true
+      GuardPattern result: true
+    CoreDomain lowerGraph
+      Visiting CoreDomain GuardPattern
+        Variable g2: Graph [2b5fe9c3] {
+          element = [Node] x 8
+          name = graphone
+          }
+        Variable sn2: Node [1c344a47] {
+          graph = Graph [2b5fe9c3]
+          incoming = [Edge] x 1
+          outgoing = [ ]
+          label = munich
+          }
+        Variable tn2: Node [711dc088] {
+          graph = Graph [2b5fe9c3]
+          incoming = [ ]
+          outgoing = [ ]
+          label = innsbruck
+          }
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment e2e.edge2 = Edge [2fc83d89] {
+      graph = [ null ]
+      target = [ null ]
+      source = [ null ]
+      }
+    VisitPropertyAssignment e2.graph = Graph [2b5fe9c3] {
+      element = [Node] x 8
+      name = graphone
+      }
+    VisitPropertyAssignment e2.source = Node [1c344a47] {
+      graph = Graph [2b5fe9c3]
+      incoming = [Edge] x 1
+      outgoing = [ ]
+      label = munich
+      }
+    VisitPropertyAssignment e2.target = Node [711dc088] {
+      graph = Graph [2b5fe9c3]
+      incoming = [ ]
+      outgoing = [ ]
+      label = innsbruck
+      }
+    RealizedVariables for CoreDomain lowerGraph
+    RealizedVariable e2: Edge [2fc83d89] {
+      graph = Graph [2b5fe9c3]
+      target = Node [711dc088]
+      source = Node [1c344a47]
+      }
+    RealizedVariables for CoreDomain middle
+==============================
+Output Model
+Graph [2b5fe9c3] {
+  element = [Node] x 9
+  name = graphone
+  }
+Node [38dd2a4f] {
+  graph = Graph [2b5fe9c3]
+  incoming = [Edge] x 1
+  outgoing = [Edge] x 1
+  label = york
+  }
+Node [794f8b9a] {
+  graph = Graph [2b5fe9c3]
+  incoming = [Edge] x 1
+  outgoing = [Edge] x 2
+  label = stansted
+  }
+Node [1c344a47] {
+  graph = Graph [2b5fe9c3]
+  incoming = [Edge] x 1
+  outgoing = [Edge] x 1
+  label = munich
+  }
+Node [711dc088] {
+  graph = Graph [2b5fe9c3]
+  incoming = [Edge] x 1
+  outgoing = [ ]
+  label = innsbruck
+  }
+Node [3b3219ed] {
+  graph = Graph [2b5fe9c3]
+  incoming = [ ]
+  outgoing = [ ]
+  label = stuttgart
+  }
+Edge [179b3d1b] {
+  graph = Graph [2b5fe9c3]
+  target = Node [794f8b9a]
+  source = Node [38dd2a4f]
+  }
+Edge [50c8c3b8] {
+  graph = Graph [2b5fe9c3]
+  target = Node [38dd2a4f]
+  source = Node [794f8b9a]
+  }
+Edge [2ca98e77] {
+  graph = Graph [2b5fe9c3]
+  target = Node [1c344a47]
+  source = Node [794f8b9a]
+  }
+Edge [2fc83d89] {
+  graph = Graph [2b5fe9c3]
+  target = Node [711dc088]
+  source = Node [1c344a47]
+  }
+==============================
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is false
+      GuardPattern result: false
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is false
+      GuardPattern result: false
+Visiting MappingLoop, binding: edge2edge
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is false
+      GuardPattern result: false
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is false
+      GuardPattern result: false
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is false
+      GuardPattern result: false
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is false
+      GuardPattern result: false
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is true
+      Predicate e2e.owner = g2g is true
+      GuardPattern result: true
+    CoreDomain lowerGraph
+      Visiting CoreDomain GuardPattern
+        Variable g2: Graph [2b5fe9c3] {
+          element = [Node] x 9
+          name = graphone
+          }
+        Variable sn2: Node [711dc088] {
+          graph = Graph [2b5fe9c3]
+          incoming = [Edge] x 1
+          outgoing = [ ]
+          label = innsbruck
+          }
+        Variable tn2: Node [3b3219ed] {
+          graph = Graph [2b5fe9c3]
+          incoming = [ ]
+          outgoing = [ ]
+          label = stuttgart
+          }
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment e2e.edge2 = Edge [34005e1] {
+      graph = [ null ]
+      target = [ null ]
+      source = [ null ]
+      }
+    VisitPropertyAssignment e2.graph = Graph [2b5fe9c3] {
+      element = [Node] x 9
+      name = graphone
+      }
+    VisitPropertyAssignment e2.source = Node [711dc088] {
+      graph = Graph [2b5fe9c3]
+      incoming = [Edge] x 1
+      outgoing = [ ]
+      label = innsbruck
+      }
+    VisitPropertyAssignment e2.target = Node [3b3219ed] {
+      graph = Graph [2b5fe9c3]
+      incoming = [ ]
+      outgoing = [ ]
+      label = stuttgart
+      }
+    RealizedVariables for CoreDomain lowerGraph
+    RealizedVariable e2: Edge [34005e1] {
+      graph = Graph [2b5fe9c3]
+      target = Node [3b3219ed]
+      source = Node [711dc088]
+      }
+    RealizedVariables for CoreDomain middle
+==============================
+Output Model
+Graph [2b5fe9c3] {
+  element = [Node] x 10
+  name = graphone
+  }
+Node [38dd2a4f] {
+  graph = Graph [2b5fe9c3]
+  incoming = [Edge] x 1
+  outgoing = [Edge] x 1
+  label = york
+  }
+Node [794f8b9a] {
+  graph = Graph [2b5fe9c3]
+  incoming = [Edge] x 1
+  outgoing = [Edge] x 2
+  label = stansted
+  }
+Node [1c344a47] {
+  graph = Graph [2b5fe9c3]
+  incoming = [Edge] x 1
+  outgoing = [Edge] x 1
+  label = munich
+  }
+Node [711dc088] {
+  graph = Graph [2b5fe9c3]
+  incoming = [Edge] x 1
+  outgoing = [Edge] x 1
+  label = innsbruck
+  }
+Node [3b3219ed] {
+  graph = Graph [2b5fe9c3]
+  incoming = [Edge] x 1
+  outgoing = [ ]
+  label = stuttgart
+  }
+Edge [179b3d1b] {
+  graph = Graph [2b5fe9c3]
+  target = Node [794f8b9a]
+  source = Node [38dd2a4f]
+  }
+Edge [50c8c3b8] {
+  graph = Graph [2b5fe9c3]
+  target = Node [38dd2a4f]
+  source = Node [794f8b9a]
+  }
+Edge [2ca98e77] {
+  graph = Graph [2b5fe9c3]
+  target = Node [1c344a47]
+  source = Node [794f8b9a]
+  }
+Edge [2fc83d89] {
+  graph = Graph [2b5fe9c3]
+  target = Node [711dc088]
+  source = Node [1c344a47]
+  }
+Edge [34005e1] {
+  graph = Graph [2b5fe9c3]
+  target = Node [3b3219ed]
+  source = Node [711dc088]
+  }
+==============================
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is false
+      GuardPattern result: false
+Visiting MappingLoop, binding: edge2edge
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is false
+      GuardPattern result: false
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is false
+      GuardPattern result: false
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is false
+      GuardPattern result: false
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is false
+      GuardPattern result: false
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is false
+      GuardPattern result: false
+Visiting MappingCall, calling: edge2edge_MR
+  Mapping edge2edge_MR
+    Visiting Mapping GuardPattern
+      Predicate sn2n.owner = g2g is true
+      Predicate tn2n.node2 = tn2 is true
+      Predicate g2g.graph2 = g2 is true
+      Predicate sn2n.node2 = sn2 is true
+      Predicate e2e.target = tn2n is true
+      Predicate e2e.source = sn2n is true
+      Predicate e2e.owner = g2g is true
+      GuardPattern result: true
+    CoreDomain lowerGraph
+      Visiting CoreDomain GuardPattern
+        Variable g2: Graph [2b5fe9c3] {
+          element = [Node] x 10
+          name = graphone
+          }
+        Variable sn2: Node [3b3219ed] {
+          graph = Graph [2b5fe9c3]
+          incoming = [Edge] x 1
+          outgoing = [ ]
+          label = stuttgart
+          }
+        Variable tn2: Node [794f8b9a] {
+          graph = Graph [2b5fe9c3]
+          incoming = [Edge] x 1
+          outgoing = [Edge] x 2
+          label = stansted
+          }
+        GuardPattern has no predicates.
+      Visiting CoreDomain BottomPattern
+    Visiting Mapping BottomPattern
+    VisitPropertyAssignment e2e.edge2 = Edge [6041f871] {
+      graph = [ null ]
+      target = [ null ]
+      source = [ null ]
+      }
+    VisitPropertyAssignment e2.graph = Graph [2b5fe9c3] {
+      element = [Node] x 10
+      name = graphone
+      }
+    VisitPropertyAssignment e2.source = Node [3b3219ed] {
+      graph = Graph [2b5fe9c3]
+      incoming = [Edge] x 1
+      outgoing = [ ]
+      label = stuttgart
+      }
+    VisitPropertyAssignment e2.target = Node [794f8b9a] {
+      graph = Graph [2b5fe9c3]
+      incoming = [Edge] x 1
+      outgoing = [Edge] x 2
+      label = stansted
+      }
+    RealizedVariables for CoreDomain lowerGraph
+    RealizedVariable e2: Edge [6041f871] {
+      graph = Graph [2b5fe9c3]
+      target = Node [794f8b9a]
+      source = Node [3b3219ed]
+      }
+    RealizedVariables for CoreDomain middle
+==============================
+Output Model
+Graph [2b5fe9c3] {
+  element = [Node] x 11
+  name = graphone
+  }
+Node [38dd2a4f] {
+  graph = Graph [2b5fe9c3]
+  incoming = [Edge] x 1
+  outgoing = [Edge] x 1
+  label = york
+  }
+Node [794f8b9a] {
+  graph = Graph [2b5fe9c3]
+  incoming = [Edge] x 2
+  outgoing = [Edge] x 2
+  label = stansted
+  }
+Node [1c344a47] {
+  graph = Graph [2b5fe9c3]
+  incoming = [Edge] x 1
+  outgoing = [Edge] x 1
+  label = munich
+  }
+Node [711dc088] {
+  graph = Graph [2b5fe9c3]
+  incoming = [Edge] x 1
+  outgoing = [Edge] x 1
+  label = innsbruck
+  }
+Node [3b3219ed] {
+  graph = Graph [2b5fe9c3]
+  incoming = [Edge] x 1
+  outgoing = [Edge] x 1
+  label = stuttgart
+  }
+Edge [179b3d1b] {
+  graph = Graph [2b5fe9c3]
+  target = Node [794f8b9a]
+  source = Node [38dd2a4f]
+  }
+Edge [50c8c3b8] {
+  graph = Graph [2b5fe9c3]
+  target = Node [38dd2a4f]
+  source = Node [794f8b9a]
+  }
+Edge [2ca98e77] {
+  graph = Graph [2b5fe9c3]
+  target = Node [1c344a47]
+  source = Node [794f8b9a]
+  }
+Edge [2fc83d89] {
+  graph = Graph [2b5fe9c3]
+  target = Node [711dc088]
+  source = Node [1c344a47]
+  }
+Edge [34005e1] {
+  graph = Graph [2b5fe9c3]
+  target = Node [3b3219ed]
+  source = Node [711dc088]
+  }
+Edge [6041f871] {
+  graph = Graph [2b5fe9c3]
+  target = Node [794f8b9a]
+  source = Node [3b3219ed]
+  }
+==============================
+---- Transformation End ----

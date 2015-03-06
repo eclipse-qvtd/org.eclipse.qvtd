@@ -153,9 +153,9 @@ operation QVTs!MappingAction metric(parentNode : QVTs!MappingAction) : Real {
 operation QVTs!MappingAction getBestDerivationOption(parentNode :  QVTs!MappingAction) : Sequence {
 	
 	//if (parentNode.mapping.isUndefined())
-	   //parentNode.order.println(self.mapping.name + " getBestDerivationOption in ");
+	//   parentNode.order.println(self.mapping.name + " getBestDerivationOption in ");
 	//else 
-	   //parentNode.mapping.name.println(self.mapping.name + " getBestDerivationOption in ");
+	//   parentNode.mapping.name.println(self.mapping.name + " getBestDerivationOption in ");
 	var matched = parentNode.getContextDataParameters();
     var matchedTypes = matched.collect(m | m.variable.type);
     // Select all the MA's parameters whos type (or supertype) exists in the context
@@ -231,7 +231,7 @@ operation QVTs!MappingAction defineBindings(parentNode :  QVTs!MappingAction) {
 		for (k in best.first().keySet().excluding(p)) {
 			//k.variable.name.println("bindings for ");
 			var derivations = best.first().get(k);
-			//erivations.println();
+			//derivations.println();
 			var fromDP = p;
 			for (d in derivations) {
 				var toDP = d.last(); 
@@ -264,6 +264,7 @@ operation QVTs!DataParameter createDerivation() :  QVTs!ParameterDerivation {
 operation QVTs!MappingAction getCheapestDerivation(startPoints : Collection) : Sequence {
 	
 	// If startpoints is empty, there is no derivation.
+	//startPoints.collect(sp | self.dijkstras(sp)).sortBy(der | der.last()).println("getCheapestDerivation ");
 	return startPoints.collect(sp | self.dijkstras(sp)).sortBy(der | der.last()).first().ifUndefined(Sequence{null, (2e31-1)*self.parameters.size()});
 }
 
@@ -300,12 +301,12 @@ operation QVTs!MappingAction dijkstras(start : QVTs!DataParameter) : Sequence {
 		}
 		done.put(u, true);
 	}
-	//for (k in dist.keySet()) {
-	//	dist.get(k).print(k.variable.name + "->");
-	//	" ".print();
-	//}
-	//"".println();
-	//dist.values.sum().println();
+	/*for (k in dist.keySet()) {
+		dist.get(k).print(k.variable.name + "->");
+		" ".print();
+	}
+	"".println();
+	dist.values.sum().println();*/
 	return Sequence{path, dist.values.sum()+1}; // 1 to account for the start
 }
 
@@ -328,6 +329,7 @@ operation QVTs!DataParameter weight(dest : QVTs!DataParameter) : Sequence {
 	
 	//dest.variable.name.println(self.variable.name + " weight to ");
 	var property = self.variable.hasRelation(dest.variable).first(); // TODO how to pick one, if multiple options are returned?
+	//property.println("direct prop ");
 	if (not property.isDefined()) {
         property = dest.variable.hasRelation(self.variable).first();
         if (property.isDefined()) {

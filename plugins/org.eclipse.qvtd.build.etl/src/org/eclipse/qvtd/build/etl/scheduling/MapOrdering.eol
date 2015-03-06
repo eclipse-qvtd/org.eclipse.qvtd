@@ -65,14 +65,15 @@ operation QVTs!Schedule findMapOrdering()  {
 	    queue.remove(n);
 	    visitedNodes.add(n);
 	    // Do stuff with n
-	    // n.println("n ");
+	    //n.name.println("R Node: ");
 	    // Find all the mappings that have an output type (or subtype)
 	    // corresponding to the type of the target node
 		var baseDatum = self.datums.selectOne(x | x.correspondsWith(n));
+		//baseDatum.println("baseDatum ");
 	    if (baseDatum.isDefined()) {
-		    for (ma in self.actions.select(aa | aa.productions.exists(e | e.isDatumOrSubdatum(baseDatum)))) { 
+	    	for (ma in self.actions.select(aa | aa.productions.exists(e | e.isDatumOrSubdatum(baseDatum)))) { 
 		        // Find the predecesors and linearize
-		        if (visitedAct.excludes(ma))
+		        if (visitedAct.excludes(ma)) 
 		        	ma.getOrdering(visitedAct);
 		        for (pDatum in baseDatum.propertyDatums) {
 		        	for (ma in self.actions.select(aa | aa.productions.exists(e | e = pDatum))) {
@@ -115,6 +116,7 @@ operation QVTs!MappingAction getOrdering(visited) {
 				ma.getOrdering(visited);
 		}
 		self.order = self.schedule.getMaxIndex() + 1;
+		//self.order.println(self.mapping.name + " issued ");
 	}
 }
 
@@ -147,9 +149,11 @@ operation rTree!Node isRootElementCandidate() : Boolean {
 	return self.parent.isEmpty() and not self.element.isAbstract;
 }
 
-@cached
+
 operation QVTs!ClassDatum correspondsWith(node : rTree!Node) : Boolean {
-	return self.type.getETarget() = node.element;
+	// FIXME Issues with getting the EObject from Pivot elements self.type.getESObject() == node.element;
+	//return (self.type.name == node.element.name) and (self.type.owningPackage.name == node.element.ePackage.name);
+	return self.type.getESObject() == node.element;
 }
 
 

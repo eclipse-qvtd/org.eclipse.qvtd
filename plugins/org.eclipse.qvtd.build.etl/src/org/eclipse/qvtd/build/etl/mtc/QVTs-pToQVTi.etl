@@ -303,14 +303,14 @@ rule MappingActions
     {
         guard : ma.parent.isDefined()
         
-        //ma.mapping.name.println();
+        //ma.mapping.name.println("ma ");
         mc.referredMapping ::= QVTp!Mapping.all().selectOne(m | ma.mapping.name == m.name);
         mc.binding.addAll(ma.parameters.equivalent());
         for (p in ma.parameters.select(dp | not dp.secondaryParameter.isDefined())) {
+        	//p.variable.toString().println("param ");
         	var binding = p.equivalent();
-        	//binding.println("MappingActions ");
-        	//p.variable.type.println();
-        	//ma.parent.getAllContextDataParameters(p.variable.type).variable
+        	//binding.println("biding ");
+        	//ma.parent.getAllContextDataParameters(p.variable.type).println("context ");
         	binding.value.referredVariable ::= ma.parent.getAllContextDataParameters(p.variable.type).first().variable.getSameVariable();
         	binding.value.type = binding.value.referredVariable.type;
         }

@@ -5,9 +5,9 @@
   <hls:HLSNode name="base03"/>
   <hls:HLSNode name="base03"/>
   <hls:HLSNode name="base03">
+    <children name="base01"/>
+    <children name="base02"/>
     <children name="base2"/>
     <children name="yellow"/>
-    <children name="base02"/>
-    <children name="base01"/>
   </hls:HLSNode>
 </xmi:XMI>
