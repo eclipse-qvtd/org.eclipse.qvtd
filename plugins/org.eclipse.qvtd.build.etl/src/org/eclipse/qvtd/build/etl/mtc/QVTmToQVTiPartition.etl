@@ -563,7 +563,8 @@ operation getEqualsOperation() : Any {
 post {
 	// Trailing variable references can only be fixed once all the elements are in place
 	for (ve in QVTp!VariableExp.all()
-    	.select(ve | not ve.referredVariable.eContainer().isKindOf(QVT!LoopExp)
+    	.select(ve | not (ve.referredVariable.eContainer().isKindOf(QVT!LoopExp)
+    				or ve.referredVariable.eContainer().isTypeOf(QVT!Function))
     			and (ve.referredVariable.owningModel() <> ve.owningModel()
     				or ve.referredVariable.getOwningMapping() <> ve.getOwningMapping())
     	)) {
