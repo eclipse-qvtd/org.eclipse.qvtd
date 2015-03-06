@@ -283,7 +283,6 @@ public class MtcBroker {
 		iModel = qvtpQvtsToQvti(pModel, sModel);
 	}
 	
-	
 	public void executeScheduling(boolean dryRun) throws QvtMtcExecutionException {
 		
 		prepare();
@@ -421,7 +420,7 @@ public class MtcBroker {
 	 */
 	protected PivotModel qvtpToQvts(PivotModel pModel) throws QvtMtcExecutionException {
 		PivotModel sModel = null;
-		sModel = createModel(scheduleUri, "QVTs", "QVT", QVTS_FULL_NS, false, true, false, true);
+		sModel = createASModel(scheduleUri, "QVTs", "QVT", QVTS_FULL_NS, false, true, false, true);
 		pModel.setCachingEnabled(true);
 		pModel.clearCache();
 		pModel.setStoredOnDisposal(false);
