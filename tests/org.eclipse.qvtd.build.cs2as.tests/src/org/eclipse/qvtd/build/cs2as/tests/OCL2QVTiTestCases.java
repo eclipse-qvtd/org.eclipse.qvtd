@@ -165,58 +165,46 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	@Test
 	public void testExample1_Interpreted() throws Exception {
 		MyQVT myQVT = createQVT();
-		ResourceSet resourceSet = myQVT.getResourceSet();		
-		resourceSet.getResource(URI.createURI(example1.source.SourcePackage.eNS_URI, true), true);
-		resourceSet.getResource(URI.createURI(example1.target.TargetPackage.eNS_URI, true), true);
-		resourceSet.getResource(URI.createURI(example1.env.EnvironmentPackage.eNS_URI, true), true);
-		
 		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
-
 		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "Source2Target.ocl");
+		myQVT.dispose();
 		
 //    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("Source2TargetSchedule_complete.graphml").toString(), false);
 //    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("Source2TargetSchedule_pruned.graphml").toString(), true);
 		
-    	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model1");
-    	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model2");
+		myQVT = createQVT();
+		myQVT.getEnvironmentFactory().configureLoadStrategy(StandaloneProjectMap.LoadGeneratedPackageStrategy.INSTANCE, StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
+		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), qvtiTransf.getModelFileUri());
+		
+    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model1");
+    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model2");
     	
         myQVT.dispose();
-        
 	}
 	
 	
 	@Test
 	public void testExample2_Interpreted() throws Exception {
-		StandaloneProjectMap.PROJECT_MAP_ADD_EPACKAGE.setState(true);
-//		StandaloneProjectMap.PROJECT_MAP_ADD_GEN_MODEL.setState(true);
-		StandaloneProjectMap.PROJECT_MAP_ADD_GENERATED_PACKAGE.setState(true);
-//		StandaloneProjectMap.PROJECT_MAP_ADD_URI_MAP.setState(true);
-		StandaloneProjectMap.PROJECT_MAP_CONFIGURE.setState(true);
-		StandaloneProjectMap.PROJECT_MAP_GET.setState(true);
-		StandaloneProjectMap.PROJECT_MAP_INSTALL.setState(true);
-		StandaloneProjectMap.PROJECT_MAP_RESOLVE.setState(true);
+
 		MyQVT myQVT = createQVT();
-		ResourceSet resourceSet = myQVT.getResourceSet();
-		resourceSet.getResource(URI.createURI(example2.classes.ClassesPackage.eNS_URI, true), true);
-		resourceSet.getResource(URI.createURI(example2.classescs.ClassescsPackage.eNS_URI, true), true);
-		resourceSet.getResource(URI.createURI(example2.env.EnvironmentPackage.eNS_URI, true), true);
-	    System.out.println("MyQVT created");
+		// ResourceSet resourceSet = myQVT.getMetamodelManager().getASResourceSet();		
+				
+		System.out.println("MyQVT created");
 		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 
 		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "classescs2as.ocl");
-
-//    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("classescs2asSchedule_complete.graphml").toString(), false);
-//    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("classescs2asSchedule_pruned.graphml").toString(), true);
-    	
-	    System.out.println("MyQVT execute model1");
-    	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model1");
-	    System.out.println("MyQVT execute model2");
-    	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model2");
-    	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model3");
-    	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model4");
-    	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model5");
-    	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model6");
-    	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model7");
+		myQVT.dispose();
+		
+		myQVT = createQVT();
+		myQVT.getEnvironmentFactory().configureLoadStrategy(StandaloneProjectMap.LoadGeneratedPackageStrategy.INSTANCE, StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
+		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), qvtiTransf.getModelFileUri());
+    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model1");
+    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model2");
+    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model3");
+    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model4");
+    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model5");
+    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model6");
+    	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model7");
 
         myQVT.dispose();
 	}
@@ -266,14 +254,14 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		myQVT.dispose();
 		
 		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore 
-		MyQVT myQVT2 = createQVT();
+		myQVT = createQVT();
 		
 		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
 
-		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model1");		
-		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model2");
+		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model1");		
+		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model2");
 	
-        myQVT2.dispose();
+		myQVT.dispose();
 	}
 		
 		
@@ -284,29 +272,23 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 			
 		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "classescs2as.ocl");
 		
-    	//
-    	// Generate the transformation java code
-    	// 
-//		ResourceSet asRset = myQVT.getMetamodelManager().getASResourceSet();
-//		Class<? extends TransformationExecutor> txClass = generateCode(getTransformation(asRset, baseURI.appendSegment("classescs2as.qvtias")) , middleGenModelURI, TESTS_GEN_PATH);
 		Class<? extends TransformationExecutor> txClass = generateCode(myQVT, qvtiTransf.getTransformation(), TESTS_GEN_PATH);
-//		Class<? extends TransformationExecutor> txClass = classescs2as_qvtp_qvtias.class;
 		myQVT.dispose();
 		
 		// Execute CGed transformation
-		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore 
-		MyQVT myQVT2 = createQVT();
+		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore
+		myQVT = createQVT();
 		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
 		
-		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model1");
-		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model2");
-		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model3");
-		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model4");
-		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model5");
-		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model6");
-		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model7");
+		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model1");
+		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model2");
+		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model3");
+		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model4");
+		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model5");
+		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model6");
+		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model7");
 		
-        myQVT2.dispose();
+		myQVT.dispose();
 	}
 	
 	@Test
