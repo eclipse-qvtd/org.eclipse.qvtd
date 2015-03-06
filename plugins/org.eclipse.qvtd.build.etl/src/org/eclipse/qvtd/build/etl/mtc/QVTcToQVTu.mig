@@ -38,7 +38,7 @@ delete PropertyAssignment
 	when : (original.slotExpression.isFromInputDomain()        // M to L
             and original.value.findReferencedVariables().exists(v | v.oppositePattern().area.isMiddleDomain())
             )
-        or (original.slotExpression.isFromMiddleDomain()       // R to M, except trace values
+        or  (original.slotExpression.isFromMiddleDomain()       // R to M, except trace values
             and not original.value.isTypeOf(QVTc!VariableExp)
             and original.value.findReferencedVariables().forAll(v | v.oppositePattern().area.isOutputDomain())
             )
@@ -74,8 +74,7 @@ delete VariableAssignment
  */
 retype PropertyAssignment to Predicate
     when : original.slotExpression.isFromInputDomain()
-            and //(original.value.isKindOf(QVTc!PrimitiveLiteralExp) or
-            original.value.findReferencedVariables().forAll(v | v.oppositePattern().area.isInputDomain())//)
+            and original.value.findReferencedVariables().forAll(v | v.oppositePattern().area.isInputDomain())
    
 
 /****m* QVTcToQVTu/migrate/PropertyAssignment
@@ -93,8 +92,7 @@ retype PropertyAssignment to Predicate
 
 migrate PropertyAssignment
    when : original.slotExpression.isFromInputDomain()
-        and (original.value.isKindOf(QVTc!PrimitiveLiteralExp)
-            or original.value.findReferencedVariables().forAll(v | v.oppositePattern().area.isInputDomain()))
+        and original.value.findReferencedVariables().forAll(v | v.oppositePattern().area.isInputDomain())
     {
         //original.toString().println("migrate PropertyAssignment ");
         var exp = new QVTc!OperationCallExp;
