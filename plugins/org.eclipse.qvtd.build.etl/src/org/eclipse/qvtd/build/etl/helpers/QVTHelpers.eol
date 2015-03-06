@@ -31,6 +31,7 @@ import "OCLExpressionAnalysis.eol";
  *  QVTHelpers/isMiddleDomain
  *  QVTHelpers/isOutputDomain
  */
+ // TODO the configuration should really point to the specific package
 @chached
 operation QVT!Area isInputDomain() : Boolean {
     return self.isTypeOf(QVT!CoreDomain) and
@@ -74,22 +75,20 @@ operation QVT!Area isOutputDomain() : Boolean {
         config!Configuration.all.first().outputDirection.collect(od | od.name).includes(self.typedModel.name);
 }
 
-// TODO the configuration should really point to the specific package
 @cached
 operation QVT!OCLExpression isFromInputDomain() : Boolean {
-    return config!Configuration.all.first().inputDirection.imports.package.flatten().includes(self.type.owningPackage.name);
+    return self.getArea().isInputDomain();
 }
 
 @cached
 operation QVT!OCLExpression isFromMiddleDomain() : Boolean {
-    return config!Configuration.all.first().middle.imports.package.flatten().includes(self.type.owningPackage.name);
+    return self.getArea().isMiddleDomain();
 }
 
 @cached
 operation QVT!OCLExpression isFromOutputDomain() : Boolean {
-    return config!Configuration.all.first().outputDirection.imports.package.flatten().includes(self.type.owningPackage.name);
+    return self.getArea().isOutputDomain();
 }
-
 
 /****o* QVTHelpers/isCheckMode
  * NAME
@@ -106,7 +105,6 @@ operation isCheckMode() : Boolean {
     return config!Configuration.all.first().mode == config!Mode#check;
 }
 
-
 /****o* QVTHelpers/isEnforceMode
  * NAME
  *  isEnforceMode - Indicates if the transformation is invoked in enforce mode.
@@ -121,7 +119,6 @@ operation isCheckMode() : Boolean {
 operation isEnforceMode() : Boolean {
     return config!Configuration.all.first().mode == config!Mode#enforce;
 }
-
 
 /****o* QVTHelpers/getMiddleTypedModel
  * NAME
@@ -153,19 +150,10 @@ operation QVT!Transformation getMiddleTypedModel() : QVT!TypedModel {
 @cached
 operation QVT!Variable oppositePattern() : QVT!CorePattern  {
     
-   	//return self.owningModel().getAllOfType("GuardPattern").selectOne(p | p.variable.includes(self));
-	if (self.eContainer().isKindOf(QVT!CorePattern))
+   	if (self.eContainer().isKindOf(QVT!CorePattern))
    		return self.eContainer();
 	return null;
 }
-
-//@cached
-//operation QVT!RealizedVariable oppositePattern() : QVT!CorePattern  {
-    
-    //return self.owningModel().getAllOfType("BottomPattern").selectOne(p | p.realizedVariable.includes(self));
-//    return self.eContainer();
-//}
-
 
 /****o* QVTHelpers/getArea
  * NAME

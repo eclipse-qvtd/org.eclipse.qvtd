@@ -114,7 +114,8 @@ migrate PropertyAssignment
         exp.ownedSource.type = original.targetProperty.equivalent().type;
         // The argument is the value
         exp.ownedArguments.add(original.value.equivalent());
-        migrated.conditionExpression = exp; 
+        migrated.conditionExpression = exp;
+        migrated.pattern = original.bottomPattern.equivalent();
     }
 
 
@@ -245,14 +246,11 @@ migrate CoreDomain
  *    
  ******
  */   
-migrate BottomPattern 
+migrate BottomPattern
     {
-	    migrated.variable.addAll(original.realizedVariable.equivalent());
-        //original.area.println();
-        if (not original.assignment.equivalent().select(e | e.isTypeOf(QVTu!Predicate)).isEmpty())
-        	migrated.predicate.addAll(original.assignment.equivalent().select(e | e.isTypeOf(QVTu!Predicate)));
-		if (not original.area.guardPattern.predicate.equivalent().select(e | e.isTypeOf(QVTu!PropertyAssignment)).isEmpty())        	
-        	migrated.assignment.addAll(original.area.guardPattern.predicate.equivalent().select(e | e.isTypeOf(QVTu!PropertyAssignment)));
+    	if (original.area.isInputDomain()) {
+    		migrated.variable.addAll(original.realizedVariable.equivalent());
+    	}
     }
 
 @cached
