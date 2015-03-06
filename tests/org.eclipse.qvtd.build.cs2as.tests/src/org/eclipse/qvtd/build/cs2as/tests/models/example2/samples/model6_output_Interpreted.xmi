@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classes:Root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:classes="http://cs2as/tests/example2/classes/1.0"
+    xsi:schemaLocation="http://cs2as/tests/example2/classes/1.0 java://example2.classes.ClassesPackage">
+  <ownedPackages name="P1">
+    <ownedClasses name="C11"/>
+    <ownedClasses name="C12"/>
+    <ownedClasses name="C13"/>
+    <ownedClasses name="C14"/>
+    <ownedClasses name="C15"/>
+    <ownedPackages name="P11">
+      <ownedClasses name="C111" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+      <ownedClasses name="C112" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+      <ownedClasses name="C113" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+      <ownedClasses name="C114" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+      <ownedClasses name="C115" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+      <ownedPackages name="P111">
+        <ownedClasses name="C1111" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+        <ownedClasses name="C1112" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+        <ownedClasses name="C1113" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+        <ownedClasses name="C1114" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+        <ownedClasses name="C1115" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+        <ownedPackages name="P1111">
+          <ownedClasses name="C11111" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+          <ownedClasses name="C11112" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+          <ownedClasses name="C11113" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+          <ownedClasses name="C11114" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+          <ownedClasses name="C11115" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+          <ownedPackages name="P11111">
+            <ownedClasses name="C111111" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+            <ownedClasses name="C111112" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+            <ownedClasses name="C111113" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+            <ownedClasses name="C111114" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+            <ownedClasses name="C111115" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+            <ownedPackages name="P111111">
+              <ownedClasses name="C1111111" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+              <ownedClasses name="C1111112" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+              <ownedClasses name="C1111113" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+              <ownedClasses name="C1111114" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+              <ownedClasses name="C1111115" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              <ownedPackages name="P1111111">
+                <ownedClasses name="C11111111" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111112" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111113" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111114" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111115" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+              <ownedPackages name="P1111112">
+                <ownedClasses name="C11111121" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111122" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111123" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111124" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111125" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+              <ownedPackages name="P1111113">
+                <ownedClasses name="C11111131" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111132" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111133" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111134" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111135" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+              <ownedPackages name="P1111114">
+                <ownedClasses name="C11111141" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111142" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111143" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111144" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111145" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+              <ownedPackages name="P1111115">
+                <ownedClasses name="C11111151" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111152" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111153" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111154" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111155" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+            </ownedPackages>
+            <ownedPackages name="P111112">
+              <ownedClasses name="C1111121" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+              <ownedClasses name="C1111122" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+              <ownedClasses name="C1111123" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+              <ownedClasses name="C1111124" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+              <ownedClasses name="C1111125" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              <ownedPackages name="P1111121">
+                <ownedClasses name="C11111211" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111212" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111213" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111214" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111215" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+              <ownedPackages name="P1111122">
+                <ownedClasses name="C11111221" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111222" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111223" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111224" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111225" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+              <ownedPackages name="P1111123">
+                <ownedClasses name="C11111231" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111232" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111233" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111234" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111235" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+              <ownedPackages name="P1111124">
+                <ownedClasses name="C11111241" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111242" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111243" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111244" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111245" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+              <ownedPackages name="P1111125">
+                <ownedClasses name="C11111251" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111252" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111253" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111254" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111255" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+            </ownedPackages>
+            <ownedPackages name="P111113">
+              <ownedClasses name="C1111131" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+              <ownedClasses name="C1111132" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+              <ownedClasses name="C1111133" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+              <ownedClasses name="C1111134" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+              <ownedClasses name="C1111135" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              <ownedPackages name="P1111131">
+                <ownedClasses name="C11111311" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111312" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111313" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111314" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111315" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+              <ownedPackages name="P1111132">
+                <ownedClasses name="C11111321" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111322" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111323" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111324" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111325" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+              <ownedPackages name="P1111133">
+                <ownedClasses name="C11111331" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111332" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111333" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111334" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111335" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+              <ownedPackages name="P1111134">
+                <ownedClasses name="C11111341" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111342" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111343" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111344" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111345" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+              <ownedPackages name="P1111135">
+                <ownedClasses name="C11111351" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111352" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111353" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111354" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111355" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+            </ownedPackages>
+            <ownedPackages name="P111114">
+              <ownedClasses name="C1111141" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+              <ownedClasses name="C1111142" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+              <ownedClasses name="C1111143" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+              <ownedClasses name="C1111144" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+              <ownedClasses name="C1111145" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              <ownedPackages name="P1111141">
+                <ownedClasses name="C11111411" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111412" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111413" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111414" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111415" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+              <ownedPackages name="P1111142">
+                <ownedClasses name="C11111421" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111422" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111423" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111424" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111425" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+              <ownedPackages name="P1111143">
+                <ownedClasses name="C11111431" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111432" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111433" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111434" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111435" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+              <ownedPackages name="P1111144">
+                <ownedClasses name="C11111441" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111442" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111443" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111444" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111445" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+              <ownedPackages name="P1111145">
+                <ownedClasses name="C11111451" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111452" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111453" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111454" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111455" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+            </ownedPackages>
+            <ownedPackages name="P111115">
+              <ownedClasses name="C1111151" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+              <ownedClasses name="C1111152" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+              <ownedClasses name="C1111153" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+              <ownedClasses name="C1111154" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+              <ownedClasses name="C1111155" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              <ownedPackages name="P1111151">
+                <ownedClasses name="C11111511" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111512" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111513" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111514" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111515" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+              <ownedPackages name="P1111152">
+                <ownedClasses name="C11111521" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111522" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111523" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111524" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111525" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+              <ownedPackages name="P1111153">
+                <ownedClasses name="C11111531" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111532" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111533" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111534" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111535" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+              <ownedPackages name="P1111154">
+                <ownedClasses name="C11111541" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111542" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111543" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111544" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111545" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+              <ownedPackages name="P1111155">
+                <ownedClasses name="C11111551" superClass="//@ownedPackages.0/@ownedClasses.0"/>
+                <ownedClasses name="C11111552" superClass="//@ownedPackages.0/@ownedClasses.1"/>
+                <ownedClasses name="C11111553" superClass="//@ownedPackages.0/@ownedClasses.2"/>
+                <ownedClasses name="C11111554" superClass="//@ownedPackages.0/@ownedClasses.3"/>
+                <ownedClasses name="C11111555" superClass="//@ownedPackages.0/@ownedClasses.4"/>
+              </ownedPackages>
+            </ownedPackages>
+          </ownedPackages>
+        </ownedPackages>
+      </ownedPackages>
+    </ownedPackages>
+  </ownedPackages>
+</classes:Root>

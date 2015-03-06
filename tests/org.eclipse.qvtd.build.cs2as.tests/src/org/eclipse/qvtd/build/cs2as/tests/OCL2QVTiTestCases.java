@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.build.cs2as.tests;
 
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
@@ -20,6 +21,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.epsilon.common.util.StringProperties;
 import org.eclipse.epsilon.emc.emf.xml.XmlModel;
@@ -211,6 +213,9 @@ public class OCL2QVTiTestCases extends LoadTestCase {
     	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model2");
     	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model3");
     	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model4");
+    	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model5");
+    	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model6");
+    	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model7");
 
         myQVT.dispose();
 	}
@@ -296,6 +301,9 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model2");
 		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model3");
 		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model4");
+		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model5");
+		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model6");
+		executeModelsTX_CG(myQVT2, txConstructor, baseURI, "model7");
 		
         myQVT2.dispose();
 	}
@@ -390,6 +398,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
     	URI csModelURI = samplesBaseUri.appendSegment(String.format("%s_input.xmi", modelName));
     	URI asModelURI = samplesBaseUri.appendSegment(String.format("%s_output_CG.xmi", modelName));
     	URI expectedAsModelURI = samplesBaseUri.appendSegment(String.format("%s_output_ref.xmi", modelName));
+    	saveEmptyModel(asModelURI);
     	
     	ResourceSet rSet = qvt.getResourceSet();
 		Resource inputResource = rSet.getResource(csModelURI, true);
@@ -413,6 +422,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		URI csModelURI = samplesBaseUri.appendSegment(String.format("%s_input.xmi", modelName));
 		URI asModelURI = samplesBaseUri.appendSegment(String.format("%s_output_Interpreted.xmi", modelName));
 		URI expectedAsModelURI = samplesBaseUri.appendSegment(String.format("%s_output_ref.xmi", modelName));
+		saveEmptyModel(asModelURI);
 		
 		QVTiPivotEvaluator testEvaluator = qvt.createEvaluator(tx);
 		testEvaluator.saveTransformation(null);
@@ -425,6 +435,20 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	    ResourceSet rSet = qvt.getResourceSet();
 	    Resource expected =  rSet.getResource(expectedAsModelURI, true);
 	    assertSameModel(expected, rSet.getResource(asModelURI, true));
+	}
+	
+	
+	// QVTiPivotEvaluator only saves models when something is created. If the transformation
+	// does nothing and nothing is created, the output model is not saved. Then I have to ensure
+	// that an empty model is serialized for the sake of the of the test cases results. The comparison
+	// between output model and the reference one, might be done with a previous output model
+	// TODO report QVTd bug
+	protected void saveEmptyModel( URI modelURI) throws IOException {
+		
+		ResourceSet rSet = new ResourceSetImpl();
+		StandaloneProjectMap.getAdapter(rSet);
+		Resource r = rSet.createResource(modelURI);
+		r.save(TestsXMLUtil.defaultSavingOptions);
 	}
 	
 	// Copied from QVTiCompilerTest
