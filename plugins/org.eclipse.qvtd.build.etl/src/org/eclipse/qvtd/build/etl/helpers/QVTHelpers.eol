@@ -707,3 +707,25 @@ operation QVT!Mapping getVariables() : Sequence {
 	return vars;
 }
 
+operation fixReferences(exps : Sequence) {
+	/*QVTm!VariableExp.all().select(ve | not ve.referredVariable.eContainer().isTypeOf(QVT!IteratorExp)).size.println();
+    QVTm!VariableExp.all()
+    	.select(ve | not ve.referredVariable.eContainer().isTypeOf(QVT!IteratorExp)
+    			and (ve.referredVariable.owningModel() <> ve.owningModel()
+    				or ve.referredVariable.getOwningMapping() <> ve.getOwningMapping())).size().println("to fix ");
+    */
+    // Trailing variable references can only be fixed once all the elements are in place
+    for (ve in exps
+    	.select(ve | ve.referredVariable.oppositePattern().isDefined()				// Variables contained in CorePaterrn 
+    			and (ve.referredVariable.owningModel() <> ve.owningModel()
+    				or ve.referredVariable.getOwningMapping() <> ve.getOwningMapping())
+    	)) {
+    	ve.fixVarReferences();
+    }
+    /*QVTm!VariableExp.all()
+    	.select(ve | not ve.referredVariable.eContainer().isTypeOf(QVT!IteratorExp)
+    			and (ve.referredVariable.owningModel() <> ve.owningModel()
+    				or ve.referredVariable.getOwningMapping() <> ve.getOwningMapping())).size().println("missing ");
+	*/
+}
+

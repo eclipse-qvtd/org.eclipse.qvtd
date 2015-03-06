@@ -356,26 +356,7 @@ operation QVTm!BottomPattern addRefinedRealizedVariables(sourcePatterns : Collec
 
 post {
     
-    /*QVTm!VariableExp.all().select(ve | not ve.referredVariable.eContainer().isTypeOf(QVT!IteratorExp)).size.println();
-    QVTm!VariableExp.all()
-    	.select(ve | not ve.referredVariable.eContainer().isTypeOf(QVT!IteratorExp)
-    			and (ve.referredVariable.owningModel() <> ve.owningModel()
-    				or ve.referredVariable.getOwningMapping() <> ve.getOwningMapping())).size().println("to fix ");
-    */
-    // Trailing variable references can only be fixed once all the elements are in place
-    for (ve in QVTm!VariableExp.all()
-    	.select(ve | not (ve.referredVariable.eContainer().isKindOf(QVT!LoopExp)
-    				or ve.referredVariable.eContainer().isTypeOf(QVT!Function))
-    			and (ve.referredVariable.owningModel() <> ve.owningModel()
-    				or ve.referredVariable.getOwningMapping() <> ve.getOwningMapping())
-    	)) {
-    	ve.fixVarReferences();
-    }
-    /*QVTm!VariableExp.all()
-    	.select(ve | not ve.referredVariable.eContainer().isTypeOf(QVT!IteratorExp)
-    			and (ve.referredVariable.owningModel() <> ve.owningModel()
-    				or ve.referredVariable.getOwningMapping() <> ve.getOwningMapping())).size().println("missing ");
-	*/
+    fixReferences(QVTm!VariableExp.all());
     "QVTuToQVTm Done!".println();
 }
 
