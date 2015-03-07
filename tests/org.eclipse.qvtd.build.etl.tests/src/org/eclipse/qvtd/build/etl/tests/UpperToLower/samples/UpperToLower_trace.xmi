@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ASCII"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <simplegraph2graph:Graph2Graph xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:simplegraph2graph="http://http://www.eclipse.org/qvt/examples/0.1/SimpleGraph2Graph" xsi:schemaLocation="http://http://www.eclipse.org/qvt/examples/0.1/SimpleGraph2Graph ../SimpleGraph2Graph.ecore"
     name="graphone">

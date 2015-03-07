@@ -40,7 +40,7 @@ operation QVTs!MappingAction defineBindings(parentNode :  QVTs!MappingAction) {
 		for (k in best.first().keySet().excluding(p)) {
 			//k.variable.name.println("bindings for ");
 			var derivations = best.first().get(k);
-			//erivations.println();
+			//derivations.println();
 			var fromDP = p;
 			for (d in derivations) {
 				var toDP = d.last(); 
@@ -102,7 +102,19 @@ operation QVTs!MappingAction getBestDerivationOption(parentNode :  QVTs!MappingA
 operation QVTs!MappingAction getCheapestDerivation(startPoints : Collection) : Sequence {
 	
 	// If startpoints is empty, there is no derivation.
+	//startPoints.collect(sp | self.dijkstras(sp)).sortBy(der | der.last()).println("getCheapestDerivation ");
 	return startPoints.collect(sp | self.dijkstras(sp)).sortBy(der | der.last()).first().ifUndefined(Sequence{null, (2e31-1)*self.parameters.size()});
+}
+
+@cached
+operation QVTs!DataParameter createDerivation() :  QVTs!ParameterDerivation {
+	
+	//"    new PD".println();
+	var pd = new QVTs!ParameterDerivation;
+	var sp = new QVTs!SecondaryParameter;
+	sp.dataParameter = self;
+	pd.secondaryParameter = sp;
+	return pd;
 }
 
 operation QVTs!MappingAction dijkstras(start : QVTs!DataParameter) : Sequence {
@@ -138,19 +150,35 @@ operation QVTs!MappingAction dijkstras(start : QVTs!DataParameter) : Sequence {
 		}
 		done.put(u, true);
 	}
-	//for (k in dist.keySet()) {
-	//	dist.get(k).print(k.variable.name + "->");
-	//	" ".print();
-	//}
-	//"".println();
-	//dist.values.sum().println();
+	/*for (k in dist.keySet()) {
+		dist.get(k).print(k.variable.name + "->");
+		" ".print();
+	}
+	"".println();
+	dist.values.sum().println();*/
 	return Sequence{path, dist.values.sum()+1}; // 1 to account for the start
 }
 
+
+/*  A MappingAction can have different combinations of primary and derived DataParameters.
+		The derived ones, can be either direct, or loops. We have this information in a map of sequences.
+		This operation calculates the cost of one combination. Either the primary or derived can
+ 		be on the context (if a derived, we must check they are related by the same relation)
+		
+        1 - a variable already computed by a parent mapping/iteration
+		2*N - a [M..N] composition parent / child reference
+		20 - [M..*] child reference
+		2*N - a [M..N] forward reference
+		20 - [M..*] forward reference
+		5*N - a [M..N] unnavigable opposite reference
+		50 - a [M..*] unnavigable opposite reference
+		100 - an unbound reference (i.e. allInstances())
+    */
 operation QVTs!DataParameter weight(dest : QVTs!DataParameter) : Sequence {
 	
 	//dest.variable.name.println(self.variable.name + " weight to ");
 	var property = self.variable.hasRelation(dest.variable).first(); // TODO how to pick one, if multiple options are returned?
+	//property.println("direct prop ");
 	if (not property.isDefined()) {
         property = dest.variable.hasRelation(self.variable).first();
         if (property.isDefined()) {
