@@ -3,14 +3,14 @@
 package example2.classes.impl;
 
 import java.util.Collection;
-
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import example2.classes.ClassesPackage;
 import example2.classes.util.Visitor;
 
@@ -184,7 +184,7 @@ public class PackageImpl extends NamedElementImpl implements example2.classes.Pa
 	 * @generated
 	 */
 	@Override
-	public <R> R accept(Visitor<R> visitor) {
+	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitPackage(this);
 	}
 

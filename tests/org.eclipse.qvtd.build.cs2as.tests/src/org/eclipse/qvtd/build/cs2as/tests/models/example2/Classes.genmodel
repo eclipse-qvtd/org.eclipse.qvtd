@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvtd.build.cs2as.tests/tests-gen"
-    modelPluginID="org.eclipse.qvtd.build.cs2as.tests" modelName="Example2Classes"
-    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="7.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
-  <foreignModel>Classes.ecore</foreignModel>
-  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/Visitor">
-  <details key="Root Visitor Class" value="example2.classes.util.Visitor"/>
-  <details key="Visitable Classes" value="example2.classes.Element"/>
+    modelPluginID="org.eclipse.qvtd.build.cs2as.tests" templateDirectory="/org.eclipse.ocl.examples.build/templates"
+    dynamicTemplates="true" modelName="Example2Classes" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
+    <details key="Use Delegates" value="false"/>
+    <details key="Use Null Annotations" value="true"/>
   </genAnnotations>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/Visitor">
+    <details key="Root Visitor Class" value="example2.classes.util.Visitor"/>
+    <details key="Visitable Classes" value="example2.classes.Element"/>
+  </genAnnotations>
+  <foreignModel>Classes.ecore</foreignModel>
   <genPackages prefix="Classes" basePackage="example2" disposableProviderFactory="true"
       ecorePackage="Classes.ecore#/">
     <genClasses image="false" ecoreClass="Classes.ecore#//Element"/>
@@ -26,5 +31,6 @@
     <genClasses ecoreClass="Classes.ecore#//Root">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Classes.ecore#//Root/ownedPackages"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="Classes.ecore#//Visitable"/>
   </genPackages>
 </genmodel:GenModel>

@@ -2,13 +2,19 @@
  */
 package example2.classes.impl;
 
+import example2.classes.ClassesPackage;
+
+import example2.classes.util.Visitor;
+
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import example2.classes.ClassesPackage;
-import example2.classes.util.Visitor;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * <!-- begin-user-doc -->
@@ -155,7 +161,7 @@ public class ClassImpl extends NamedElementImpl implements example2.classes.Clas
 	 * @generated
 	 */
 	@Override
-	public <R> R accept(Visitor<R> visitor) {
+	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitClass(this);
 	}
 

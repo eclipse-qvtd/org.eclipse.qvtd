@@ -4,7 +4,8 @@ package example2.classes.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import example2.classes.ClassesPackage;
 import example2.classes.Element;
 import example2.classes.util.Visitor;
@@ -40,7 +41,7 @@ public abstract class ElementImpl extends MinimalEObjectImpl.Container implement
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	public <R> R accept(Visitor<R> visitor) {
+	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
 		return visitor.visitElement(this);
 	}
 
