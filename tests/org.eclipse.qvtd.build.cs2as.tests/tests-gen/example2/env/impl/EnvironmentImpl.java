@@ -11,6 +11,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.ids.IdResolver;
@@ -142,20 +144,20 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 		 *   namedElements = namedElements->includingAll(elements), parentEnv = parentEnv
 		 * }
 		 */
-		final /*@NonNull*/ /*@NonInvalid*/ Evaluator evaluator = PivotUtilInternal.getEvaluator(this);
-		final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		final /*@NonNull*/ /*@NonInvalid*/ Property CTORid_namedElements = idResolver.getProperty(EnvironmentTables.PROPid_namedElements);
-		final /*@NonNull*/ /*@NonInvalid*/ Property CTORid_parentEnv = idResolver.getProperty(EnvironmentTables.PROPid_parentEnv);
-		final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_env_c_c_Environment_0 = idResolver.getClass(EnvironmentTables.CLSSid_Environment, null);
-		final /*@NonNull*/ /*@Thrown*/ Environment symbol_0 = (Environment)TYP_env_c_c_Environment_0.createInstance();
-		final /*@NonNull*/ /*@Thrown*/ List<? extends Object> namedElements = this.getNamedElements();
-		final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_namedElements = idResolver.createOrderedSetOfAll(EnvironmentTables.ORD_CLSSid_NamedElement, namedElements);
-		final /*@NonNull*/ /*@NonInvalid*/ OrderedSetValue BOXED_elements = idResolver.createOrderedSetOfAll(EnvironmentTables.ORD_CLSSid_NamedElement, elements);
-		final /*@NonNull*/ /*@Thrown*/ CollectionValue includingAll = ClassUtil.nonNullState(CollectionIncludingAllOperation.INSTANCE.evaluate(BOXED_namedElements, BOXED_elements));
-		final List<? extends Object> UNBOXED_includingAll = includingAll.asEcoreObjects(idResolver, Object.class);
+		final @NonNull /*@NonInvalid*/ Evaluator evaluator = PivotUtilInternal.getEvaluator(this);
+		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+		final @NonNull /*@NonInvalid*/ Property CTORid_namedElements = idResolver.getProperty(EnvironmentTables.PROPid_namedElements);
+		final @NonNull /*@NonInvalid*/ Property CTORid_parentEnv = idResolver.getProperty(EnvironmentTables.PROPid_parentEnv);
+		final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_env_c_c_Environment_0 = idResolver.getClass(EnvironmentTables.CLSSid_Environment, null);
+		final @NonNull /*@Thrown*/ Environment symbol_0 = (Environment)TYP_env_c_c_Environment_0.createInstance();
+		final @NonNull /*@Thrown*/ List<NamedElement> namedElements = this.getNamedElements();
+		final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements = idResolver.createOrderedSetOfAll(EnvironmentTables.ORD_CLSSid_NamedElement, namedElements);
+		final @NonNull /*@NonInvalid*/ OrderedSetValue BOXED_elements = idResolver.createOrderedSetOfAll(EnvironmentTables.ORD_CLSSid_NamedElement, elements);
+		final @NonNull /*@Thrown*/ CollectionValue includingAll = ClassUtil.nonNullState(CollectionIncludingAllOperation.INSTANCE.evaluate(BOXED_namedElements, BOXED_elements));
+		final List<NamedElement> UNBOXED_includingAll = includingAll.asEcoreObjects(idResolver, example2.classes.NamedElement.class);
 		assert UNBOXED_includingAll != null;
 		CTORid_namedElements.initValue(symbol_0, UNBOXED_includingAll);
-		final /*@Nullable*/ /*@Thrown*/ Environment parentEnv = this.getParentEnv();
+		final @Nullable /*@Thrown*/ Environment parentEnv = this.getParentEnv();
 		CTORid_parentEnv.initValue(symbol_0, parentEnv);
 		return (Environment)symbol_0;
 	}
@@ -172,19 +174,19 @@ public class EnvironmentImpl extends MinimalEObjectImpl.Container implements Env
 		 *   namedElements = namedElements->including(element), parentEnv = parentEnv
 		 * }
 		 */
-		final /*@NonNull*/ /*@NonInvalid*/ Evaluator evaluator = PivotUtilInternal.getEvaluator(this);
-		final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
-		final /*@NonNull*/ /*@NonInvalid*/ Property CTORid_namedElements = idResolver.getProperty(EnvironmentTables.PROPid_namedElements);
-		final /*@NonNull*/ /*@NonInvalid*/ Property CTORid_parentEnv = idResolver.getProperty(EnvironmentTables.PROPid_parentEnv);
-		final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_env_c_c_Environment_0 = idResolver.getClass(EnvironmentTables.CLSSid_Environment, null);
-		final /*@NonNull*/ /*@Thrown*/ Environment symbol_0 = (Environment)TYP_env_c_c_Environment_0.createInstance();
-		final /*@NonNull*/ /*@Thrown*/ List<? extends Object> namedElements = this.getNamedElements();
-		final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_namedElements = idResolver.createOrderedSetOfAll(EnvironmentTables.ORD_CLSSid_NamedElement, namedElements);
-		final /*@NonNull*/ /*@Thrown*/ OrderedSetValue including = ClassUtil.nonNullState((OrderedSetValue)CollectionIncludingOperation.INSTANCE.evaluate(BOXED_namedElements, element));
-		final List<? extends Object> UNBOXED_including = including.asEcoreObjects(idResolver, Object.class);
+		final @NonNull /*@NonInvalid*/ Evaluator evaluator = PivotUtilInternal.getEvaluator(this);
+		final @NonNull /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
+		final @NonNull /*@NonInvalid*/ Property CTORid_namedElements = idResolver.getProperty(EnvironmentTables.PROPid_namedElements);
+		final @NonNull /*@NonInvalid*/ Property CTORid_parentEnv = idResolver.getProperty(EnvironmentTables.PROPid_parentEnv);
+		final @NonNull /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_env_c_c_Environment_0 = idResolver.getClass(EnvironmentTables.CLSSid_Environment, null);
+		final @NonNull /*@Thrown*/ Environment symbol_0 = (Environment)TYP_env_c_c_Environment_0.createInstance();
+		final @NonNull /*@Thrown*/ List<NamedElement> namedElements = this.getNamedElements();
+		final @NonNull /*@Thrown*/ OrderedSetValue BOXED_namedElements = idResolver.createOrderedSetOfAll(EnvironmentTables.ORD_CLSSid_NamedElement, namedElements);
+		final @NonNull /*@Thrown*/ OrderedSetValue including = ClassUtil.nonNullState((OrderedSetValue)CollectionIncludingOperation.INSTANCE.evaluate(BOXED_namedElements, element));
+		final List<NamedElement> UNBOXED_including = including.asEcoreObjects(idResolver, example2.classes.NamedElement.class);
 		assert UNBOXED_including != null;
 		CTORid_namedElements.initValue(symbol_0, UNBOXED_including);
-		final /*@Nullable*/ /*@Thrown*/ Environment parentEnv = this.getParentEnv();
+		final @Nullable /*@Thrown*/ Environment parentEnv = this.getParentEnv();
 		CTORid_parentEnv.initValue(symbol_0, parentEnv);
 		return (Environment)symbol_0;
 	}
