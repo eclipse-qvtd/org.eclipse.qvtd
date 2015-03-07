@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<eCoreContainemntTree:Node xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:eCoreContainemntTree="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree" name="HSVNode2HLSNode" parent="/" children="/">
-  <element href="HSV2HLS.ecore#//HSVNode2HLSNode"/>
-</eCoreContainemntTree:Node>
