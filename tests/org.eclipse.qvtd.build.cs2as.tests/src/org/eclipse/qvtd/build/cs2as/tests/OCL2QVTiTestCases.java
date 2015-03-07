@@ -63,6 +63,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -130,6 +131,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		}
 	}
 	
+	@NonNull private MyQVT myQVT;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -137,10 +139,14 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		QVTimperativeStandaloneSetup.doSetup();		
 		CompleteOCLStandaloneSetup.doSetup(); // To be able to add QVTimperative.ocl validation
 		
-		// myQVT = createQVT();
-		// QVTiEnvironmentFactory factory = myQVT.getEnvironmentFactory(); 
-		// factory.setEvaluationTracingEnabled(true);
-		// factory.configureLoadFirstStrategy(); // Since the models might use a different URI to refer the same meta-model
+		myQVT = createQVT();
+	}
+	
+	@Override
+	@After
+	protected void tearDown() throws Exception {
+		myQVT.dispose();
+		super.tearDown();
 	}
 	
 	protected @NonNull MyQVT createQVT() {
@@ -150,7 +156,6 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	
 	@Test
 	public void testExample1_OCL2QVTp() throws Exception {
-		MyQVT myQVT = createQVT();
 		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
 		URI oclDocURI = baseURI.appendSegment("Source2Target.ocl.oclas");
 		URI qvtpFileURI = baseURI.appendSegment("Source2Target.qvtp.qvtias");
@@ -159,44 +164,38 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		mtc.runOCL2QVTp_MiddleFolded(oclDocURI, qvtpFileURI);
 		// Test the QVTp transformation can be loaded
 		assertValidQVTiModel(qvtpFileURI);
-		myQVT.dispose();
 	}
 	
 	@Test
 	public void testExample1_Interpreted() throws Exception {
-		MyQVT myQVT = createQVT();
 		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
 		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "Source2Target.ocl");
-		myQVT.dispose();
 		
 //    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("Source2TargetSchedule_complete.graphml").toString(), false);
 //    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("Source2TargetSchedule_pruned.graphml").toString(), true);
 		
-		myQVT = createQVT();
+		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore 
+		myQVT.dispose();
+		myQVT = createQVT();		
 		myQVT.getEnvironmentFactory().configureLoadStrategy(StandaloneProjectMap.LoadGeneratedPackageStrategy.INSTANCE, StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
-		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), qvtiTransf.getModelFileUri());
-		
+				
+		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), qvtiTransf.getModelFileUri());		
     	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model1");
     	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model2");
-    	
-        myQVT.dispose();
 	}
 	
 	
 	@Test
 	public void testExample2_Interpreted() throws Exception {
-
-		MyQVT myQVT = createQVT();
-		// ResourceSet resourceSet = myQVT.getMetamodelManager().getASResourceSet();		
 				
-		System.out.println("MyQVT created");
 		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
-
 		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "classescs2as.ocl");
-		myQVT.dispose();
 		
+		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore 
+		myQVT.dispose();		
 		myQVT = createQVT();
 		myQVT.getEnvironmentFactory().configureLoadStrategy(StandaloneProjectMap.LoadGeneratedPackageStrategy.INSTANCE, StandaloneProjectMap.MapToFirstConflictHandler.INSTANCE);
+		
 		Transformation tx = getTransformation(myQVT.getMetamodelManager().getASResourceSet(), qvtiTransf.getModelFileUri());
     	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model1");
     	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model2");
@@ -205,8 +204,6 @@ public class OCL2QVTiTestCases extends LoadTestCase {
     	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model5");
     	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model6");
     	executeModelsTX_Interpreted(myQVT, tx, baseURI, "model7");
-
-        myQVT.dispose();
 	}
 	
 //	@Test
@@ -231,29 +228,24 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	
 	@Test
 	public void testExample4_() throws Exception {
-		MyQVT myQVT = createQVT();
 		URI baseURI = TESTS_BASE_URI.appendSegment("example4");
 				
 		executeOCL2QVTi_MTC(myQVT, baseURI, "SimplerKiama.ocl");
 		    	
     	//launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("SimplerKiamaSchedule_complete.graphml").toString(), false);
     	//launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("SimplerKiamaSchedule_pruned.graphml").toString(), true);
-				
-    	myQVT.dispose();
 	}
 	
 	@Test
 	public void testExample1_CG() throws Exception {
-		MyQVT myQVT = createQVT();
 		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
 
 		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "Source2Target.ocl");
 
 	
 		Class<? extends TransformationExecutor> txClass = generateCode(myQVT, qvtiTransf.getTransformation(), TESTS_GEN_PATH);
-		myQVT.dispose();
-		
 		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore 
+		myQVT.dispose();		
 		myQVT = createQVT();
 		
 		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
@@ -261,22 +253,21 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model1");		
 		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model2");
 	
-		myQVT.dispose();
 	}
 		
 		
 	@Test
 	public void testExample2_CG() throws Exception {
-		MyQVT myQVT = createQVT();
 		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 			
 		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "classescs2as.ocl");
 		
 		Class<? extends TransformationExecutor> txClass = generateCode(myQVT, qvtiTransf.getTransformation(), TESTS_GEN_PATH);
-		myQVT.dispose();
+		
 		
 		// Execute CGed transformation
 		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore
+		myQVT.dispose();
 		myQVT = createQVT();
 		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
 		
@@ -287,14 +278,11 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model5");
 		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model6");
 		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model7");
-		
-		myQVT.dispose();
 	}
 	
 	@Test
 	public void testExample2_CG_and_LookupVisitor() throws Exception {
 		
-		MyQVT myQVT = createQVT();
 		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 
 		Class<? extends TransformationExecutor> txClass = classescs2as_qvtp_qvtias_Manual.class;
@@ -312,7 +300,6 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	
 	@Test
 	public void testExample2_OCL2QVTp_MiddleModel() throws Exception {
-		MyQVT myQVT = createQVT();		
 		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 		URI oclDocURI = baseURI.appendSegment("classescs2as.ocl.oclas");
 		URI qvtpFileURI = baseURI.appendSegment("classescs2as.qvtp.qvtias");
@@ -322,12 +309,10 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		mtc.runOCL2QVTp_MiddleModel(oclDocURI, qvtpFileURI, tracesMMURI);
 		// Test the QVTp transformation can be loaded
 		assertValidQVTiModel(qvtpFileURI);
-		myQVT.dispose();
 	}
 	
 	@Test
 	public void testExample2_OCL2QVTp_MiddleFolded() throws Exception {
-		MyQVT myQVT = createQVT();
 		URI baseURI = TESTS_BASE_URI.appendSegment("example2");
 		URI oclDocURI = baseURI.appendSegment("classescs2as.ocl.oclas");
 		URI qvtpFileURI = baseURI.appendSegment("classescs2as.qvtp.qvtias");
@@ -336,7 +321,6 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		mtc.runOCL2QVTp_MiddleFolded(oclDocURI, qvtpFileURI);
 		// Test the QVTp transformation can be loaded
 		assertValidQVTiModel(qvtpFileURI);
-		myQVT.dispose();
 	}
 	
 	/*
