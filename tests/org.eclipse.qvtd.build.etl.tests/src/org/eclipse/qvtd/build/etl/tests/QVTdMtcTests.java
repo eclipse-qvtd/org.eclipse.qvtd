@@ -3,14 +3,13 @@ package org.eclipse.qvtd.build.etl.tests;
 import java.io.IOException;
 
 import org.eclipse.emf.common.EMFPlugin;
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.xtext.tests.TestUtil;
 import org.eclipse.ocl.pivot.model.OCLstdlib;
 import org.eclipse.ocl.pivot.resource.ProjectManager;
 import org.eclipse.ocl.pivot.utilities.OCL;
@@ -63,7 +62,7 @@ public class QVTdMtcTests extends LoadTestCase {
 	
 	
 	public static void assertSameModel(@NonNull Resource expectedResource, @NonNull Resource actualResource) throws IOException, InterruptedException {
-		org.eclipse.ocl.examples.xtext.tests.XtextTestCase.assertSameModel(expectedResource, actualResource);
+		TestUtil.assertSameModel(expectedResource, actualResource);
 	}
 
 	
@@ -122,16 +121,11 @@ public class QVTdMtcTests extends LoadTestCase {
     	URI samplesBaseUri = testBaseURI.appendSegment("samples");
     	MtcBroker mtc = new MtcBroker(testBaseURI, "UmlToRdbms.qvtcas", myQVT.getEnvironmentFactory());
     	mtc.execute();
-    	Diagnostic diagnostic = Diagnostician.INSTANCE.validate(mtc.getuModel().getRooteObject());
-    	// TODO do we want perfect or can we tolerate info and warnings?
-        diagnostic = Diagnostician.INSTANCE.validate(mtc.getmModel().getRooteObject());
-        assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
-        diagnostic = Diagnostician.INSTANCE.validate(mtc.getpModel().getRooteObject());
-        assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
-        diagnostic = Diagnostician.INSTANCE.validate(mtc.getsModel().getRooteObject());
-        assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
-        diagnostic = Diagnostician.INSTANCE.validate(mtc.getiModel().getRooteObject());
-        assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
+    	assertNoValidationErrors("QVTu validation", mtc.getuModel().getRooteObject());
+    	assertNoValidationErrors("QVTm validation", mtc.getmModel().getRooteObject());
+        assertNoValidationErrors("QVTp validation", mtc.getpModel().getRooteObject());
+        assertNoValidationErrors("QVTs validation", mtc.getsModel().getRooteObject());
+        assertNoValidationErrors("QVTi validation", mtc.getiModel().getRooteObject());
         
         // Run the QVTi transformation in interpreter mode
     	URI inputURI = samplesBaseUri.appendSegment("SimpleUMLPeople.xmi");
@@ -165,16 +159,11 @@ public class QVTdMtcTests extends LoadTestCase {
     	MtcBroker mtc = new MtcBroker(testBaseURI, "UpperToLower.qvtcas", myQVT.getEnvironmentFactory());
     	mtc.execute();
     	//mtc.executeScheduling(false);
-    	Diagnostic diagnostic = Diagnostician.INSTANCE.validate(mtc.getuModel().getRooteObject());
-    	assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
-        diagnostic = Diagnostician.INSTANCE.validate(mtc.getmModel().getRooteObject());
-        assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
-        diagnostic = Diagnostician.INSTANCE.validate(mtc.getpModel().getRooteObject());
-        assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
-        diagnostic = Diagnostician.INSTANCE.validate(mtc.getsModel().getRooteObject());
-        assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
-        diagnostic = Diagnostician.INSTANCE.validate(mtc.getiModel().getRooteObject());
-        assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
+    	assertNoValidationErrors("QVTu validation", mtc.getuModel().getRooteObject());
+    	assertNoValidationErrors("QVTm validation", mtc.getmModel().getRooteObject());
+        assertNoValidationErrors("QVTp validation", mtc.getpModel().getRooteObject());
+        assertNoValidationErrors("QVTs validation", mtc.getsModel().getRooteObject());
+        assertNoValidationErrors("QVTi validation", mtc.getiModel().getRooteObject());
 
         URI samplesBaseUri = testBaseURI.appendSegment("samples");
         URI inputURI = samplesBaseUri.appendSegment("SimpleGraph.xmi");
@@ -209,16 +198,11 @@ public class QVTdMtcTests extends LoadTestCase {
     	MtcBroker mtc = new MtcBroker(testBaseURI, "HSV2HLS.qvtcas", myQVT.getEnvironmentFactory());
     	mtc.execute();
     	
-    	Diagnostic diagnostic = Diagnostician.INSTANCE.validate(mtc.getuModel().getRooteObject());
-    	assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
-        diagnostic = Diagnostician.INSTANCE.validate(mtc.getmModel().getRooteObject());
-        assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
-        diagnostic = Diagnostician.INSTANCE.validate(mtc.getpModel().getRooteObject());
-        assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
-        diagnostic = Diagnostician.INSTANCE.validate(mtc.getsModel().getRooteObject());
-        assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
-        diagnostic = Diagnostician.INSTANCE.validate(mtc.getiModel().getRooteObject());
-        assertTrue(diagnostic.getSeverity() < Diagnostic.ERROR);
+    	assertNoValidationErrors("QVTu validation", mtc.getuModel().getRooteObject());
+    	assertNoValidationErrors("QVTm validation", mtc.getmModel().getRooteObject());
+        assertNoValidationErrors("QVTp validation", mtc.getpModel().getRooteObject());
+        assertNoValidationErrors("QVTs validation", mtc.getsModel().getRooteObject());
+        assertNoValidationErrors("QVTi validation", mtc.getiModel().getRooteObject());
         
         URI samplesBaseUri = testBaseURI.appendSegment("samples");
         URI inputURI = samplesBaseUri.appendSegment("SolarizedHSV.xmi");
