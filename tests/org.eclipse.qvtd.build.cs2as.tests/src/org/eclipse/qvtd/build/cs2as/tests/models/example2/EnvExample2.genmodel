@@ -4,7 +4,7 @@
     modelPluginID="org.eclipse.qvtd.build.cs2as.tests" modelName="Example2Environment"
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
     complianceLevel="7.0" copyrightFields="false" usedGenPackages="Classes.genmodel#//classes"
-    importOrganizing="true">
+    operationReflection="true" importOrganizing="true">
   <foreignModel>EnvExample2.ecore</foreignModel>
   <modelPluginVariables>org.eclipse.ocl.pivot</modelPluginVariables>
   <modelPluginVariables>org.eclipse.ocl.examples.codegen</modelPluginVariables>

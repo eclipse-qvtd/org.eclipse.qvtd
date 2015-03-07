@@ -11,7 +11,6 @@
  *******************************************************************************/
 package example2.env;
 
-import example2.classes.ClassesPackage;
 import example2.classes.ClassesTables;
 import example2.env.EnvironmentPackage;
 import example2.env.EnvironmentTables;
@@ -58,7 +57,7 @@ public class EnvironmentTables
 	/**
 	 *	Constants used by auto-generated code.
 	 */
-    public static final /*@NonNull*/ /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example2/classes/1.0", null, ClassesPackage.eINSTANCE);
+    public static final /*@NonNull*/ /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example2/classes/1.0", null, null);
     public static final /*@NonNull*/ /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_env_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example2/env/1.0", null, EnvironmentPackage.eINSTANCE);
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_Environment = EnvironmentTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_env_s_1_0.getClassId("Environment", 0);
     public static final /*@NonNull*/ /*@NonInvalid*/ ClassId CLSSid_Evaluator = EnvironmentTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_env_s_1_0.getClassId("Evaluator", 0);
@@ -68,7 +67,6 @@ public class EnvironmentTables
     public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_NamedElement = TypeId.ORDERED_SET.getSpecializedId(EnvironmentTables.CLSSid_NamedElement);
     public static final /*@NonNull*/ /*@NonInvalid*/ PropertyId PROPid_namedElements = EnvironmentTables.CLSSid_Environment.getPropertyId("namedElements");
     public static final /*@NonNull*/ /*@NonInvalid*/ PropertyId PROPid_parentEnv = EnvironmentTables.CLSSid_Environment.getPropertyId("parentEnv");
-    public static final /*@NonNull*/ /*@NonInvalid*/ CollectionTypeId SEQ_CLSSid_NamedElement = TypeId.SEQUENCE.getSpecializedId(EnvironmentTables.CLSSid_NamedElement);
 
 	/**
 	 *	The type parameters for templated types and operations.

@@ -9,8 +9,15 @@
 
 package example2.classes.util;
 
+import example2.classes.Class;
+import example2.classes.ClassesPackage;
+import example2.classes.Package;
+import example2.classes.Root;
+import example2.classes.util.AbstractExtendingVisitor;
+import example2.classes.util.Visitable;
+import example2.env.Environment;
+import example2.env.EnvironmentPackage;
 import java.util.List;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
@@ -21,13 +28,6 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.NsURIPackageId;
 import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
-
-import example2.classes.Class;
-import example2.classes.ClassesPackage;
-import example2.classes.Package;
-import example2.classes.Root;
-import example2.env.Environment;
-import example2.env.EnvironmentPackage;
 
 public class AutoClassesLookupVisitor
 	extends AbstractExtendingVisitor<Environment, Environment>

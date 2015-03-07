@@ -12,13 +12,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="Environment" eSuperTypes="#//Env4CG">
     <eOperations name="addElements" eType="#//Environment">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="Environment{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;namedElements = namedElements->asSequence() -- FIXME bug 460682&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;->includingAll(elements),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;parentEnv = parentEnv&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;}"/>
+        <details key="body" value="Environment{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;namedElements = namedElements->includingAll(elements),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;parentEnv = parentEnv&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;}"/>
       </eAnnotations>
       <eParameters name="elements" upperBound="-1" eType="ecore:EClass Classes.ecore#//NamedElement"/>
     </eOperations>
     <eOperations name="addElement" eType="#//Environment">
       <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
-        <details key="body" value="Environment{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;namedElements = namedElements->asSequence() -- FIXME bug 460682&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;->including(element),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;parentEnv = parentEnv&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}"/>
+        <details key="body" value="Environment{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;namedElements = namedElements->including(element),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;parentEnv = parentEnv&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}"/>
       </eAnnotations>
       <eParameters name="element" eType="ecore:EClass Classes.ecore#//NamedElement"/>
     </eOperations>
