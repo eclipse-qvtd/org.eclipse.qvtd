@@ -2,7 +2,6 @@
  */
 package example2.classes;
 
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Class</b></em>'.

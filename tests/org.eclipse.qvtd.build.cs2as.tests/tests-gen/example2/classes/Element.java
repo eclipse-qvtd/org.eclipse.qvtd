@@ -19,7 +19,6 @@ import example2.classes.util.Visitor;
  * @generated
  */
 public interface Element extends EObject, Visitable {
-
 	/**
 	 * Accept a visit from a visitor and return the result of a call to the derived type-specific visitXXX in the visitor.
 	 * @generated

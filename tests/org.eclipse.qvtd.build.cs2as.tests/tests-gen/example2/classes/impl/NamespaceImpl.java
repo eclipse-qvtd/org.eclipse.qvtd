@@ -34,4 +34,5 @@ public abstract class NamespaceImpl extends ElementImpl implements Namespace {
 		return ClassesPackage.Literals.NAMESPACE;
 	}
 
+
 } //NamespaceImpl

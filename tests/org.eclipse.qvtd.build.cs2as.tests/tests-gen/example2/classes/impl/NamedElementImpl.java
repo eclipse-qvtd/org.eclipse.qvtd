@@ -157,4 +157,5 @@ public abstract class NamedElementImpl extends ElementImpl implements NamedEleme
 		return result.toString();
 	}
 
+
 } //NamedElementImpl

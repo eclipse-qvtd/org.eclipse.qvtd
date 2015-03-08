@@ -213,6 +213,7 @@ public interface EnvironmentPackage extends EPackage {
 	 */
 	int EVALUATOR_OPERATION_COUNT = 0;
 
+
 	/**
 	 * Returns the meta object for class '{@link example2.env.Environment <em>Environment</em>}'.
 	 * <!-- begin-user-doc -->
