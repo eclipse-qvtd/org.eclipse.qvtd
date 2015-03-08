@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="partialevaluator" nsURI="http://www.eclipse.org/qvt/2015/PartialEvaluator"
+    nsPrefix="pe">
+  <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="pivot" value="http://www.eclipse.org/ocl/2015/Library"/>
+    <details key="values" value="http://www.eclipse.org/ocl/2015/Values"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassInstance" eSuperTypes="#//ObjectInstance"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CompleteResult" eSuperTypes="#//Result">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="object2" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/ocl/2015/Values#//Value"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Evaluator">
+    <eOperations name="getVariable" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/ocl/2015/Values#//Value">
+      <eParameters name="variable" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/ocl/2015/Pivot#//VariableDeclaration"/>
+    </eOperations>
+    <eOperations name="navigateProperty" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/ocl/2015/Values#//Value">
+      <eParameters name="source" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/ocl/2015/Values#//ObjectValue"/>
+      <eParameters name="property" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/ocl/2015/Pivot#//Property"/>
+    </eOperations>
+    <eOperations name="setVariable" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/ocl/2015/Values#//Value">
+      <eParameters name="variable" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/ocl/2015/Pivot#//Variable"/>
+      <eParameters name="value" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/ocl/2015/Values#//Value"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Instance" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectInstance" abstract="true" eSuperTypes="#//Instance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="object" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/ocl/2015/Values#//ObjectValue"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PartialEvaluator" eSuperTypes="#//Evaluator">
+    <eOperations name="evaluate" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/ocl/2015/Values#//Value">
+      <eParameters name="expression" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/ocl/2015/Pivot#//OCLExpression"/>
+    </eOperations>
+    <eOperations name="getUnresolved" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/ocl/2015/Values#//Value"/>
+    <eOperations name="getVariable" lowerBound="1" eType="#//PartialResult">
+      <eParameters name="variable" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/ocl/2015/Pivot#//VariableDeclaration"/>
+    </eOperations>
+    <eOperations name="isUnresolved" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="values" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/ocl/2015/Values#//Value"/>
+    </eOperations>
+    <eOperations name="makeObjectInstance" lowerBound="1" eType="#//ObjectInstance">
+      <eParameters name="value" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/ocl/2015/Values#//Value"/>
+    </eOperations>
+    <eOperations name="makePropertyInstance" lowerBound="1" eType="#//PropertyInstance">
+      <eParameters name="object" lowerBound="1" eType="#//ObjectInstance"/>
+      <eParameters name="property" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/ocl/2015/Pivot#//Property"/>
+    </eOperations>
+    <eOperations name="setVariable" lowerBound="1" eType="#//PartialResult">
+      <eParameters name="variable" lowerBound="1" eType="ecore:EClass http://www.eclipse.org/ocl/2015/Pivot#//Variable"/>
+      <eParameters name="result" lowerBound="1" eType="#//PartialResult"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PartialResult" eSuperTypes="#//Result">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="result" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/ocl/2015/Values#//Value"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" ordered="false"
+        upperBound="-1" eType="#//Instance"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PropertyInstance" eSuperTypes="#//Instance">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="object" lowerBound="1"
+        eType="#//ObjectInstance"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="property" lowerBound="1"
+        eType="ecore:EClass http://www.eclipse.org/ocl/2015/Pivot#//Property"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Result" abstract="true"/>
+</ecore:EPackage>

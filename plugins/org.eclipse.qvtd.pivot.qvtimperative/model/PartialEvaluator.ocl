@@ -1,0 +1,80 @@
+import pe : 'PartialEvaluator.ecore#/'
+import pivot : 'http://www.eclipse.org/ocl/2015/Pivot'
+import v : 'http://www.eclipse.org/ocl/2015/Values'
+
+package ocl
+
+context BooleanLiteralExp
+def: eval(evaluator : pe::Evaluator) : v::Value = self.booleanSymbol
+
+context IfExp
+def: eval(evaluator : pe::Evaluator) : v::Value =
+	let condition : Boolean = self.ownedCondition.eval(evaluator) in
+	if condition.oclIsUndefined() then condition
+	else if condition then self.ownedThen.eval(evaluator)
+		 else self.ownedElse.eval(evaluator)
+		 endif
+	endif
+def: partialEval(evaluator : pe::PartialEvaluator) : pe::PartialResult =
+	let conditionResult : pe::PartialResult = evaluator.evaluate(self.ownedCondition) in
+	let condition : v::Value = conditionResult.result in
+	if evaluator.isUnresolved(condition) or condition.oclIsUndefined() then conditionResult
+	else 
+		let ifResult : pe::PartialResult = evaluator.evaluate(if condition then self.ownedThen else self.ownedElse endif) in
+		pe::PartialResult {
+			result = ifResult.result,
+			dependencies = conditionResult.dependencies->union(ifResult.dependencies)
+		}
+	endif
+
+context IntegerLiteralExp
+def: eval(evaluator : pe::Evaluator) : v::Value = self.integerSymbol
+
+context LetExp
+def: eval(evaluator : pe::Evaluator) : v::Value =
+	let value : v::Value = self.ownedIn.eval(evaluator) in
+	evaluator.setVariable(self.ownedVariable, value)
+def: partialEval(evaluator : pe::PartialEvaluator) : pe::PartialResult =
+	let inResult : pe::PartialResult = evaluator.evaluate(self.ownedIn) in
+	evaluator.setVariable(self.ownedVariable, inResult)
+
+context LiteralExp
+def: partialEval(evaluator : pe::PartialEvaluator) : pe::PartialResult =
+	pe::PartialResult {
+		result = eval(evaluator),
+		dependencies = Set{}
+	}
+
+context OCLExpression
+def: eval(evaluator : pe::Evaluator) : v::Value = invalid
+def: partialEval(evaluator : pe::PartialEvaluator) : pe::PartialResult = invalid
+
+context PropertyCallExp
+def: eval(evaluator : pe::Evaluator) : v::Value =
+	evaluator.navigateProperty(self.ownedSource.eval(evaluator).oclAsType(v::ObjectValue), self.referredProperty)
+def: partialEval(evaluator : pe::PartialEvaluator) : pe::PartialResult =
+	let sourceResult : pe::PartialResult = evaluator.evaluate(self.ownedSource) in
+	let sourceInstance : pe::ObjectInstance = evaluator.makeObjectInstance(sourceResult.result) in
+	let propertyInstance : pe::PropertyInstance = evaluator.makePropertyInstance(sourceInstance, self.referredProperty) in
+	let sourceDependencies : pe::PropertyInstance = sourceResult.dependencies in
+	pe::PartialResult {
+		result = if propertyInstance <> null then sourceResult.result else evaluator.getUnresolved() endif,
+		dependencies = if propertyInstance <> null then sourceDependencies->including(propertyInstance) else sourceDependencies endif
+	}
+
+context RealLiteralExp
+def: eval(evaluator : pe::Evaluator) : v::Value = self.realSymbol
+
+context StringLiteralExp
+def: eval(evaluator : pe::Evaluator) : v::Value = self.stringSymbol
+
+context UnlimitedNaturalLiteralExp
+def: eval(evaluator : pe::Evaluator) : v::Value = self.unlimitedNaturalSymbol
+
+context VariableExp
+def: eval(evaluator : pe::Evaluator) : v::Value =
+	evaluator.getVariable(self.referredVariable)
+def: partialEval(evaluator : pe::PartialEvaluator) : pe::PartialResult =
+	evaluator.getVariable(self.referredVariable)
+
+endpackage
