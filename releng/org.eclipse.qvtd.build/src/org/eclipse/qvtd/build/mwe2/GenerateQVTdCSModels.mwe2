@@ -27,8 +27,9 @@ Workflow {
     	platformUri = ".."
     	scanClassPath = true
     }
-    bean = GenModelSetup { resourceSet = resourceSet }
-    bean = UMLGenModelSetup { resourceSet = resourceSet }
+    bean = EcoreGenModelSetup { resourceSet = resourceSet }
+    bean = UMLGenModelSetup { resourceSet = resourceSet }		// So long as pivot.merged.genmodel is UML-based
+
     component = @SubGenerateCSModel { resourceSet = resourceSet
     	projectName = "org.eclipse.qvtd.xtext.qvtcorebase"
     	visitablePackageName = "org.eclipse.ocl.xtext.basecs.util"

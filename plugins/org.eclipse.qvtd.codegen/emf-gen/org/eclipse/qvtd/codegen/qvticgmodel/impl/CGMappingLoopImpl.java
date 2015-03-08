@@ -80,4 +80,13 @@ public class CGMappingLoopImpl extends CGIterationCallExpImpl implements CGMappi
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isUncommonable() {
+		return true;
+	}
+
 } //CGMappingLoopImpl

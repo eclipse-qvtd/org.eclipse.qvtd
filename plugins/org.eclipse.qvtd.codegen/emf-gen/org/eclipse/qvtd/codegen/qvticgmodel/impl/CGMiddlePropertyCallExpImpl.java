@@ -70,6 +70,15 @@ public class CGMiddlePropertyCallExpImpl extends CGOppositePropertyCallExpImpl i
 	 * @generated
 	 */
 	@Override
+	public boolean isGlobal() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isUnboxed() {
 		return true;
 	}

@@ -393,6 +393,15 @@ public class CGPredicateImpl extends CGValuedElementImpl implements CGPredicate 
 	 * @generated
 	 */
 	@Override
+	public boolean isAssertedNonNull() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isBoxed() {
 		return true;
 	}

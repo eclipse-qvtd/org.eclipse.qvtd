@@ -170,6 +170,15 @@ public class CGFunctionCallExpImpl extends CGOperationCallExpImpl implements CGF
 	 * @generated
 	 */
 	@Override
+	public boolean isGlobal() {
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
 	public boolean isUnboxed() {
 		return true;
 	}

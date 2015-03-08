@@ -343,4 +343,13 @@ public class CGMappingImpl extends CGNamedElementImpl implements CGMapping {
 		return OuterStackPlace.createOuterStackPlace(element2place, this);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isContext() {
+		return true;
+	}
+
 } //CGMappingImpl

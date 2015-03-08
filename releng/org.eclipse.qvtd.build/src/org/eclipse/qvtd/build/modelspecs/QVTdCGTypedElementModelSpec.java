@@ -31,10 +31,12 @@ public class QVTdCGTypedElementModelSpec extends CGTypedElementModelSpec
 		return "return " + classRef(TypeId.class) + ".BOOLEAN;";
 	}};
 
-	public static void register() {
+	public static class Register {
+	  public Register() {
 		new QVTdCGTypedElementModelSpec(CGMapping.class, ATI_BOOL);
 		new QVTdCGTypedElementModelSpec(CGMappingExp.class, ATI_BOOL);
 		new QVTdCGTypedElementModelSpec(CGPredicate.class, ATI_BOOL);
+	  }
 	}
 	
 	protected QVTdCGTypedElementModelSpec(@NonNull Class<?> cgClass, @Nullable Ati ati) {

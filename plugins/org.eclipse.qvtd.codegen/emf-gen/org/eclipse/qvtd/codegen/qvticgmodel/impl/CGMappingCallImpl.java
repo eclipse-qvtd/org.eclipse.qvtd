@@ -192,4 +192,13 @@ public class CGMappingCallImpl extends CGValuedElementImpl implements CGMappingC
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isUncommonable() {
+		return true;
+	}
+
 } //CGMappingCallImpl

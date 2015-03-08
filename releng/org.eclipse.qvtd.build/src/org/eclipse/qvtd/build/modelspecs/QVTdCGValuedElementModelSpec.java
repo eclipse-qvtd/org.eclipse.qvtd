@@ -81,7 +81,8 @@ public class QVTdCGValuedElementModelSpec extends CGValuedElementModelSpec
 		}
 	};
 
-	public static void register() {
+	public static class Register {
+	  public Register() {
 //		new CGValuedElementModelSpec(CGVariable.class, "init",							null     , Ref.DELEG, null     , Nul.VAR  , Inv.VAR  , null     , null     , null     , null    , null     , null     , null     , null     , null     );
 		new QVTdCGValuedElementModelSpec(CGGuardVariable.class, null,					Box.FALSE, null     , null     , Nul.NEVER, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
 		new QVTdCGValuedElementModelSpec(CGRealizedVariable.class, null,				Box.FALSE, null     , null     , Nul.NEVER, null     , Glo.FALSE, null     , null     , null    , null     , null     , null     , null     , null     , null     , null     , null    );
@@ -102,6 +103,7 @@ public class QVTdCGValuedElementModelSpec extends CGValuedElementModelSpec
 
 		new QVTdCGValuedElementModelSpec(CGMappingCall.class, null,						null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.SELF );
 		new QVTdCGValuedElementModelSpec(CGMappingLoop.class, null,						null     , null     , null     , null     , null     , null     , null     , null     , null    , null     , null     , null     , null     , null     , Com.FALSE, null     , Eq.SELF );
+	  }
 	}
 	
 	protected QVTdCGValuedElementModelSpec(@NonNull Class<?> cgClass, @Nullable String delegate,

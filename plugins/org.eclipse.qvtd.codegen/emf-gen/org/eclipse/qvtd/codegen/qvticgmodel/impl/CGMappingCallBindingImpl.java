@@ -244,4 +244,13 @@ public class CGMappingCallBindingImpl extends CGValuedElementImpl implements CGM
 		return (value != null) && value.isUnboxed();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public boolean isUncommonable() {
+		return true;
+	}
+
 } //CGMappingCallBindingImpl

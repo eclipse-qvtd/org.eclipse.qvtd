@@ -12,6 +12,7 @@
  *******************************************************************************/
 module GenerateQVTdCGModels
 
+import org.eclipse.qvtd.build.modelspecs.*
 import org.eclipse.qvtd.build.utilities.*
 import org.eclipse.ocl.examples.build.utilities.*
 import org.eclipse.ocl.examples.build.xtend.*
@@ -29,9 +30,10 @@ Workflow {
     	scanClassPath = true
     	registerGeneratedEPackage = "org.eclipse.xtext.common.types.TypesPackage"
     }
-    bean = GenModelSetup { resourceSet = resourceSet }
-    bean = UMLGenModelSetup { resourceSet = resourceSet }
-    bean = QVTdGenModelSetup {}
+    bean = EcoreGenModelSetup { resourceSet = resourceSet }
+	bean = QVTdCGTypedElementModelSpec.Register {}
+	bean = QVTdCGValuedElementModelSpec.Register {}
+
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
     	genModel = "/org.eclipse.qvtd.codegen/model/qvticgmodel.genmodel" 	
     }
