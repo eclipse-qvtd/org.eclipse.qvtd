@@ -2,19 +2,15 @@
  */
 package example2.classes.impl;
 
-import example2.classes.ClassesPackage;
-
-import example2.classes.util.Visitor;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
+import example2.classes.ClassesPackage;
+import example2.classes.util.Visitor;
 
 /**
  * <!-- begin-user-doc -->

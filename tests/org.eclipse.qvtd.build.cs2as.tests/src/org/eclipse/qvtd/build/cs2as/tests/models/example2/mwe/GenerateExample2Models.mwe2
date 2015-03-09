@@ -55,6 +55,19 @@ Workflow {
     	visitorClassName = "Visitor"
     	visitableClassName = "Visitable"
     }
+    
+    component = @SubGenerateAutoASModel { resourceSet = resourceSet
+    	projectName = "${projectName}"
+    	modelName = "classes"
+    	projectPrefix = "Classes"
+    	superProjectName = ""
+    	superModelName = ""
+    	genModelFile = "${examplesFolder}/Classes.genmodel"
+    	lookupFilePath = "${examplesFolder}/ClassesNameResolution_LookupVisitor.ocl"
+		visitorPackageName = "example2.classes.util"
+		visitorClassName = "Visitor"
+    	visitableClassName = "Visitable"
+    }
 }
 
 

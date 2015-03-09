@@ -11,10 +11,6 @@
  *******************************************************************************/
 package example2.env;
 
-import example2.classes.ClassesPackage;
-import example2.classes.ClassesTables;
-import example2.env.EnvironmentPackage;
-import example2.env.EnvironmentTables;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.ParameterTypes;
 import org.eclipse.ocl.pivot.TemplateParameters;
@@ -36,6 +32,9 @@ import org.eclipse.ocl.pivot.internal.library.executor.ExecutorSpecializedType;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorStandardLibrary;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.TypeUtil;
+
+import example2.classes.ClassesPackage;
+import example2.classes.ClassesTables;
 
 /**
  * EnvironmentTables provides the dispatch tables for the env for use by the OCL dispatcher.

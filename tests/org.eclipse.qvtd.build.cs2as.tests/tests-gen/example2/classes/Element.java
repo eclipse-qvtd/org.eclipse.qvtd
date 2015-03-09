@@ -5,6 +5,7 @@ package example2.classes;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+
 import example2.classes.util.Visitable;
 import example2.classes.util.Visitor;
 

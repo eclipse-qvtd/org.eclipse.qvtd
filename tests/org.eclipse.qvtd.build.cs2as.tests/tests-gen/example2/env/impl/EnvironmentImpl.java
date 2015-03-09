@@ -2,8 +2,10 @@
  */
 package example2.env.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.List;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -21,11 +23,11 @@ import org.eclipse.ocl.pivot.library.collection.CollectionIncludingAllOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionIncludingOperation;
 import org.eclipse.ocl.pivot.values.CollectionValue;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
+
 import example2.classes.NamedElement;
 import example2.env.Environment;
 import example2.env.EnvironmentPackage;
 import example2.env.EnvironmentTables;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * <!-- begin-user-doc -->
