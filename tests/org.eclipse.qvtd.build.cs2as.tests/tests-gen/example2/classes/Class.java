@@ -30,7 +30,7 @@ public interface Class extends NamedElement {
 	 * @return the value of the '<em>Super Class</em>' reference.
 	 * @see #setSuperClass(Class)
 	 * @see example2.classes.ClassesPackage#getClass_SuperClass()
-	 * @model
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example2/classes/1.0!Class!superClass'"
 	 * @generated
 	 */
 	Class getSuperClass();

@@ -30,7 +30,7 @@ public interface NamedElement extends Element {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see example2.classes.ClassesPackage#getNamedElement_Name()
-	 * @model
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example2/classes/1.0!NamedElement!name'"
 	 * @generated
 	 */
 	String getName();
