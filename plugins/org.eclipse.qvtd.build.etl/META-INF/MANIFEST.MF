@@ -6,18 +6,13 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-Activator: org.eclipse.qvtd.build.etl.Activator
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime,
- org.eclipse.ocl.xtext.base,
- org.eclipse.qvtd.pivot.qvtbase,
- org.eclipse.qvtd.pivot.qvtimperative,
+Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
+ org.eclipse.epsilon.emc.emf;bundle-version="[1.2.0,2.0.0)",
+ org.eclipse.epsilon.etl.engine;bundle-version="[1.2.0,2.0.0)",
+ org.eclipse.epsilon.flock.engine;bundle-version="[1.2.0,2.0.0)",
  org.eclipse.qvtd.pivot.qvtcore,
- org.apache.ant;bundle-version="1.8.4",
- org.eclipse.epsilon.etl.engine;bundle-version="1.2.0",
- org.eclipse.epsilon.flock.engine;bundle-version="1.2.0",
- org.eclipse.epsilon.emc.emf;bundle-version="1.1.0",
- org.eclipse.qvtd.build.schedule;bundle-version="1.0.0"
+ org.eclipse.qvtd.pivot.qvtimperative,
+ org.eclipse.qvtd.build.schedule
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.qvtd.build.etl;
@@ -26,5 +21,4 @@ Export-Package: org.eclipse.qvtd.build.etl;
    org.eclipse.ui.plugin,
    org.eclipse.epsilon.etl.trace,
    org.osgi.framework,
-   org.eclipse.epsilon.eol",
- org.eclipse.qvtd.build.etl.ant;uses:="org.eclipse.emf.ecore.resource,org.apache.tools.ant"
+   org.eclipse.epsilon.eol"
