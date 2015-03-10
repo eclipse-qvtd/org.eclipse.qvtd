@@ -16,7 +16,7 @@ import org.junit.Test;
 
 public class QvtrToQvtcTests extends LoadTestCase {
 	
-	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.build.qvtrtoqvtc.tests/src/org/eclipse/qvtd/build/qvtrtoqvtc/tests/", true);
+	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests/", true);
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase#setUp()
