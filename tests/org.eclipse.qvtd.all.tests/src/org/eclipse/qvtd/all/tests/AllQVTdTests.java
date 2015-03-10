@@ -19,12 +19,14 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 import junit.textui.TestRunner;
 
+import org.eclipse.qvtd.build.etl.tests.QVTdMtcTests;
+import org.eclipse.qvtd.build.qvtrtoqvtc.tests.QvtrToQvtcTests;
 import org.eclipse.qvtd.xtext.qvtcore.tests.AllQVTcoreTests;
 import org.eclipse.qvtd.xtext.qvtimperative.tests.AllQVTimperativeTests;
 import org.eclipse.qvtd.xtext.qvtrelation.tests.AllQVTrelationTests;
 
 /**
- * Tests for the Xtext QVTc editor support.
+ * Tests the QWVTr and QVTc parser / compiler / editor / evaluator / debugger support.
  */
 @SuppressWarnings("nls")
 public class AllQVTdTests extends TestCase
@@ -39,6 +41,8 @@ public class AllQVTdTests extends TestCase
 		result.addTest(AllQVTimperativeTests.suite());
 		result.addTest(AllQVTrelationTests.suite());
 		result.addTestSuite(GrammarTests.class);
+		result.addTestSuite(QVTdMtcTests.class);
+		result.addTestSuite(QvtrToQvtcTests.class);
 		return result;
 	}
 

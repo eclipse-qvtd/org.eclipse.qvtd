@@ -189,7 +189,7 @@ public class QVTdMtcTests extends LoadTestCase {
         myQVT.dispose();
     }
     
-    @Test
+/*    @Test
     public void testHSVToHLS() throws Exception {
     	
     	
@@ -225,7 +225,7 @@ public class QVTdMtcTests extends LoadTestCase {
         testEvaluator.dispose();
         mtc.disposeModels();
         myQVT.dispose();
-    }
+    } */
     
 	
 }
