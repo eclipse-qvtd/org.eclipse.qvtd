@@ -169,6 +169,7 @@ top relation RelationalTransformationToPackage
 
     enforce domain core p:pivotocl::Package {
         name = rtn,
+        URI = rtn,
         ownedClasses = rc:Class {}
     };
     where {
@@ -178,11 +179,13 @@ top relation RelationalTransformationToPackage
 
 -- Rule 1: Corresponding to each relation there exists a trace class in core.
 -- The trace class contains a property corresponding to each object node in the
--- pattern of each domain of the relation.
+-- pattern of each domain of the relation, and a property for each shared domain
+-- variable
 --
 relation RelationToTraceClass
 {
     rn:String;
+    sharedDomainVars: Set(pivotocl::Variable);
 
     domain relations r:Relation {
         name = rn,
@@ -196,9 +199,43 @@ relation RelationToTraceClass
         name = 'T'+rn
     };
     where {
+    	sharedDomainVars = getSharedDomainVars(r);
+    	
+    	RVarSetToTraceClassProps(sharedDomainVars->asSequence(), rc);
         SubObjectTemplateToTraceClassProps(t, rc);
         SubCollectionTemplateToTraceClassProps(t, rc);
     }
+}
+
+relation RVarSetToTraceClassProps
+{
+	rvRest: Sequence(pivotocl::Variable);
+
+    domain relations rvSeq:Sequence(pivotocl::Variable) {
+        rv:pivotocl::Variable {}
+        ++ rvRest};
+    enforce domain core rc:Class {};
+    where {
+        
+        RVarToTraceClassProp(rv, rc);
+        RVarSetToTraceClassProps(rvRest, rc);
+    }
+}
+
+relation RVarToTraceClassProp
+{
+	vn: String;
+    
+    domain relations rv:pivotocl::Variable {
+            name = vn,
+            type = c:Class {}
+    };
+    enforce domain core rc:Class {
+        ownedProperties = a:pivotocl::Property {
+            name=vn,
+            type=c
+        }
+    };
 }
 
 relation SubObjectTemplateToTraceClassProps

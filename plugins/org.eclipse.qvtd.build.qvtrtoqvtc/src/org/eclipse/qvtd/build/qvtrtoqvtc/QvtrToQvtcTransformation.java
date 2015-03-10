@@ -589,7 +589,7 @@ public class QvtrToQvtcTransformation
                 // Add the package to the CoreModel imports, there should be only one!!
                 Import i = PivotFactory.eINSTANCE.createImport();
                 i.setName(p.getName());
-                i.setImportedNamespace((Namespace) eObject);
+                i.setImportedNamespace((Namespace) p);
                 this.coreModel.getOwnedImports().add(i);
         	}
         	else {

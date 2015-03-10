@@ -18,6 +18,7 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Class;
 import org.eclipse.ocl.pivot.EnumLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
@@ -421,6 +422,8 @@ public class QVTr2QVTcRelations {
 		String rn = r.getName();
 		assert rn != null;
 		rc.setName("T"+rn);
+		Set<Variable> sharedDomainVars = getSharedDomainVars(r);
+		doRVarSetToTraceClassProps(new ArrayList<Variable>(sharedDomainVars), rc);
 		for (Domain d : r.getDomain()) {
 			RelationDomain rd = (RelationDomain) d;
 			DomainPattern rdp = rd.getPattern();
@@ -432,6 +435,31 @@ public class QVTr2QVTcRelations {
 		}
 	}
 	
+	private void doRVarSetToTraceClassProps(@NonNull ArrayList<Variable> rvSeq, @NonNull Class rc) {
+		
+		if (!rvSeq.isEmpty()) {
+			// check
+			Variable rv = rvSeq.remove(0);
+			assert rv != null;
+			// when
+			RVarToTraceClassProp(rv, rc);
+			doRVarSetToTraceClassProps(rvSeq, rc);
+		}
+	}
+	
+	private void RVarToTraceClassProp(@NonNull Variable rv, @NonNull Class rc) {
+		
+		Type c = rv.getType();
+		assert c != null;
+		String vn = rv.getName();
+		assert vn != null;
+		// init
+		Property a = transformation.findProperty(vn, rc);
+		assert a != null;
+	    // assign
+	    a.setType(c);
+	}
+
 	private void doSubObjectTemplateToTraceClassProps(@NonNull TemplateExp t, 
 			@NonNull org.eclipse.ocl.pivot.Class rc) {
 		
