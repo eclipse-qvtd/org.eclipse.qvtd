@@ -371,17 +371,17 @@ ruleMappingCS returns [EObject current=null]
 (
 (
 		{ 
-		  /* */ 
-		}
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getMappingCSRule());
-	        }
-        }
-		{ 
-	        newCompositeNode(grammarAccess.getMappingCSAccess().getInTransformationCrossReference_3_1_0()); 
+	        newCompositeNode(grammarAccess.getMappingCSAccess().getOwnedInPathNamePathNameCSParserRuleCall_3_1_0()); 
 	    }
-		ruleUnrestrictedName		{ 
+		lv_ownedInPathName_4_0=rulePathNameCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getMappingCSRule());
+	        }
+       		set(
+       			$current, 
+       			"ownedInPathName",
+        		lv_ownedInPathName_4_0, 
+        		"PathNameCS");
 	        afterParserOrEnumRuleCall();
 	    }
 

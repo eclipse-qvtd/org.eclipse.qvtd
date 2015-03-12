@@ -18,8 +18,11 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Element;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.internal.scoping.ScopeFilter;
 import org.eclipse.ocl.pivot.internal.utilities.PivotUtilInternal;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.ocl.pivot.utilities.PivotUtil;
@@ -28,6 +31,7 @@ import org.eclipse.ocl.xtext.base.cs2as.CS2AS;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.xtext.base.cs2as.SingleContinuation;
+import org.eclipse.ocl.xtext.basecs.ElementCS;
 import org.eclipse.ocl.xtext.basecs.PathElementCS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
@@ -125,6 +129,17 @@ public class QVTcoreBaseCSContainmentVisitor extends AbstractQVTcoreBaseCSContai
 	public QVTcoreBaseCSContainmentVisitor(@NonNull CS2ASConversion context) {
 		super(context);
 	}	
+
+	protected @Nullable Transformation lookupTransformation(@NonNull ElementCS csElement, @NonNull PathNameCS csPathName, @Nullable ScopeFilter scopeFilter) {
+		CS2AS.setElementType(csPathName, QVTbasePackage.Literals.TRANSFORMATION, csElement, scopeFilter);
+		Element namedElement = csPathName.getReferredElement();
+		if (namedElement instanceof Transformation) {
+			return (Transformation) namedElement;
+		}
+		else {
+			return null;
+		}
+	}
 
 	protected @NonNull List<org.eclipse.ocl.pivot.Package> resolveTransformations(@NonNull List<TransformationCS> csTransformations, @NonNull BaseModel asCoreModel) {
 		List<org.eclipse.ocl.pivot.Package> asPackages = new ArrayList<org.eclipse.ocl.pivot.Package>();

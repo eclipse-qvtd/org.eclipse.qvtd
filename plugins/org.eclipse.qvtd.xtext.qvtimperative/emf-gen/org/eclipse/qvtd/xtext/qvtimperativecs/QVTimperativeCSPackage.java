@@ -148,13 +148,13 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int MAPPING_CS__OWNED_DOMAINS = QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_DOMAINS;
 
 	/**
-	 * The feature id for the '<em><b>In</b></em>' reference.
+	 * The feature id for the '<em><b>Owned In Path Name</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MAPPING_CS__IN = QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__IN;
+	int MAPPING_CS__OWNED_IN_PATH_NAME = QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_IN_PATH_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owned Middle</b></em>' containment reference.

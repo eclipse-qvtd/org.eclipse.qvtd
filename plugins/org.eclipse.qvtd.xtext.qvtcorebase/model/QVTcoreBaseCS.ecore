@@ -11,7 +11,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="AbstractMappingCS" abstract="true" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//NamedElementCS">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedDomains" upperBound="-1"
         eType="#//DomainCS" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="in" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Transformation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedInPathName" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMiddle" lowerBound="1"
         eType="#//DomainCS" containment="true"/>
   </eClassifiers>

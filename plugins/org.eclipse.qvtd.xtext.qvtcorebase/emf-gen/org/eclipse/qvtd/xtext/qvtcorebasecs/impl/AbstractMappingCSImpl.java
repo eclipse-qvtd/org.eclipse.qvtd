@@ -20,8 +20,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.basecs.impl.NamedElementCSImpl;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
@@ -35,7 +35,7 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AbstractMappingCSImpl#getOwnedDomains <em>Owned Domains</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AbstractMappingCSImpl#getIn <em>In</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AbstractMappingCSImpl#getOwnedInPathName <em>Owned In Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AbstractMappingCSImpl#getOwnedMiddle <em>Owned Middle</em>}</li>
  * </ul>
  *
@@ -53,14 +53,14 @@ public abstract class AbstractMappingCSImpl extends NamedElementCSImpl implement
 	protected EList<DomainCS> ownedDomains;
 
 	/**
-	 * The cached value of the '{@link #getIn() <em>In</em>}' reference.
+	 * The cached value of the '{@link #getOwnedInPathName() <em>Owned In Path Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getIn()
+	 * @see #getOwnedInPathName()
 	 * @generated
 	 * @ordered
 	 */
-	protected Transformation in;
+	protected PathNameCS ownedInPathName;
 
 	/**
 	 * The cached value of the '{@link #getOwnedMiddle() <em>Owned Middle</em>}' containment reference.
@@ -110,16 +110,8 @@ public abstract class AbstractMappingCSImpl extends NamedElementCSImpl implement
 	 * @generated
 	 */
 	@Override
-	public Transformation getIn() {
-		if (in != null && in.eIsProxy()) {
-			InternalEObject oldIn = (InternalEObject)in;
-			in = (Transformation)eResolveProxy(oldIn);
-			if (in != oldIn) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__IN, oldIn, in));
-			}
-		}
-		return in;
+	public PathNameCS getOwnedInPathName() {
+		return ownedInPathName;
 	}
 
 	/**
@@ -127,8 +119,14 @@ public abstract class AbstractMappingCSImpl extends NamedElementCSImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Transformation basicGetIn() {
-		return in;
+	public NotificationChain basicSetOwnedInPathName(PathNameCS newOwnedInPathName, NotificationChain msgs) {
+		PathNameCS oldOwnedInPathName = ownedInPathName;
+		ownedInPathName = newOwnedInPathName;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_IN_PATH_NAME, oldOwnedInPathName, newOwnedInPathName);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -137,11 +135,18 @@ public abstract class AbstractMappingCSImpl extends NamedElementCSImpl implement
 	 * @generated
 	 */
 	@Override
-	public void setIn(Transformation newIn) {
-		Transformation oldIn = in;
-		in = newIn;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__IN, oldIn, in));
+	public void setOwnedInPathName(PathNameCS newOwnedInPathName) {
+		if (newOwnedInPathName != ownedInPathName) {
+			NotificationChain msgs = null;
+			if (ownedInPathName != null)
+				msgs = ((InternalEObject)ownedInPathName).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_IN_PATH_NAME, null, msgs);
+			if (newOwnedInPathName != null)
+				msgs = ((InternalEObject)newOwnedInPathName).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_IN_PATH_NAME, null, msgs);
+			msgs = basicSetOwnedInPathName(newOwnedInPathName, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_IN_PATH_NAME, newOwnedInPathName, newOwnedInPathName));
 	}
 
 	/**
@@ -199,6 +204,8 @@ public abstract class AbstractMappingCSImpl extends NamedElementCSImpl implement
 		switch (featureID) {
 			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_DOMAINS:
 				return ((InternalEList<?>)getOwnedDomains()).basicRemove(otherEnd, msgs);
+			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_IN_PATH_NAME:
+				return basicSetOwnedInPathName(null, msgs);
 			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_MIDDLE:
 				return basicSetOwnedMiddle(null, msgs);
 		}
@@ -215,9 +222,8 @@ public abstract class AbstractMappingCSImpl extends NamedElementCSImpl implement
 		switch (featureID) {
 			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_DOMAINS:
 				return getOwnedDomains();
-			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__IN:
-				if (resolve) return getIn();
-				return basicGetIn();
+			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_IN_PATH_NAME:
+				return getOwnedInPathName();
 			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_MIDDLE:
 				return getOwnedMiddle();
 		}
@@ -237,8 +243,8 @@ public abstract class AbstractMappingCSImpl extends NamedElementCSImpl implement
 				getOwnedDomains().clear();
 				getOwnedDomains().addAll((Collection<? extends DomainCS>)newValue);
 				return;
-			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__IN:
-				setIn((Transformation)newValue);
+			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_IN_PATH_NAME:
+				setOwnedInPathName((PathNameCS)newValue);
 				return;
 			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_MIDDLE:
 				setOwnedMiddle((DomainCS)newValue);
@@ -258,8 +264,8 @@ public abstract class AbstractMappingCSImpl extends NamedElementCSImpl implement
 			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_DOMAINS:
 				getOwnedDomains().clear();
 				return;
-			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__IN:
-				setIn((Transformation)null);
+			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_IN_PATH_NAME:
+				setOwnedInPathName((PathNameCS)null);
 				return;
 			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_MIDDLE:
 				setOwnedMiddle((DomainCS)null);
@@ -278,8 +284,8 @@ public abstract class AbstractMappingCSImpl extends NamedElementCSImpl implement
 		switch (featureID) {
 			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_DOMAINS:
 				return ownedDomains != null && !ownedDomains.isEmpty();
-			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__IN:
-				return in != null;
+			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_IN_PATH_NAME:
+				return ownedInPathName != null;
 			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_MIDDLE:
 				return ownedMiddle != null;
 		}

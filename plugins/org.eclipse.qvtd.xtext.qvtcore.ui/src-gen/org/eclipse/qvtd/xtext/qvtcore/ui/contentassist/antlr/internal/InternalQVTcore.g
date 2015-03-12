@@ -4430,9 +4430,9 @@ rule__MappingCS__Group_3__1__Impl
     }
 :
 (
-{ before(grammarAccess.getMappingCSAccess().getInAssignment_3_1()); }
-(rule__MappingCS__InAssignment_3_1)
-{ after(grammarAccess.getMappingCSAccess().getInAssignment_3_1()); }
+{ before(grammarAccess.getMappingCSAccess().getOwnedInPathNameAssignment_3_1()); }
+(rule__MappingCS__OwnedInPathNameAssignment_3_1)
+{ after(grammarAccess.getMappingCSAccess().getOwnedInPathNameAssignment_3_1()); }
 )
 
 ;
@@ -15982,18 +15982,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__MappingCS__InAssignment_3_1
+rule__MappingCS__OwnedInPathNameAssignment_3_1
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getMappingCSAccess().getInTransformationCrossReference_3_1_0()); }
-(
-{ before(grammarAccess.getMappingCSAccess().getInTransformationUnrestrictedNameParserRuleCall_3_1_0_1()); }
-	ruleUnrestrictedName{ after(grammarAccess.getMappingCSAccess().getInTransformationUnrestrictedNameParserRuleCall_3_1_0_1()); }
-)
-{ after(grammarAccess.getMappingCSAccess().getInTransformationCrossReference_3_1_0()); }
+{ before(grammarAccess.getMappingCSAccess().getOwnedInPathNamePathNameCSParserRuleCall_3_1_0()); }
+	rulePathNameCS{ after(grammarAccess.getMappingCSAccess().getOwnedInPathNamePathNameCSParserRuleCall_3_1_0()); }
 )
 
 ;

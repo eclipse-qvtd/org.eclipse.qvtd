@@ -24,6 +24,7 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
+import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.Function;
@@ -41,9 +42,9 @@ import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.TransformationCS;
 import org.eclipse.qvtd.xtext.qvtcorecs.MappingCS;
@@ -59,16 +60,19 @@ public class QVTcoreCSContainmentVisitor extends AbstractQVTcoreCSContainmentVis
 	protected void resolveTransformationMappings(@NonNull TopLevelCS csTopLevel) {
 		Map<Transformation, List<Mapping>> tx2mappings = new HashMap<Transformation, List<Mapping>>();
 		for (MappingCS csMapping : csTopLevel.getOwnedMappings()) {
-			Transformation asTransformation = csMapping.getIn();
-			if (asTransformation != null) {
-				Mapping asMapping = PivotUtil.getPivot(Mapping.class, csMapping);
-				if (asMapping != null) {
-					List<Mapping> asMappings = tx2mappings.get(asTransformation);
-					if (asMappings == null) {
-						asMappings = new ArrayList<Mapping>();
-						tx2mappings.put(asTransformation, asMappings);
+			PathNameCS csInPathName = csMapping.getOwnedInPathName();
+			if (csInPathName != null) {
+				Transformation asTransformation = lookupTransformation(csMapping, csInPathName, null);
+				if (asTransformation != null) {
+					Mapping asMapping = PivotUtil.getPivot(Mapping.class, csMapping);
+					if (asMapping != null) {
+						List<Mapping> asMappings = tx2mappings.get(asTransformation);
+						if (asMappings == null) {
+							asMappings = new ArrayList<Mapping>();
+							tx2mappings.put(asTransformation, asMappings);
+						}
+						asMappings.add(asMapping);
 					}
-					asMappings.add(asMapping);
 				}
 			}
 		}

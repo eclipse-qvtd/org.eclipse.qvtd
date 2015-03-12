@@ -471,7 +471,7 @@ public abstract class AbstractQVTimperativeSemanticSequencer extends QVTcoreBase
 	 * Constraint:
 	 *     (
 	 *         name=UnrestrictedName 
-	 *         in=[Transformation|UnrestrictedName]? 
+	 *         ownedInPathName=PathNameCS? 
 	 *         (ownedDomains+=SourceDomainCS | ownedDomains+=TargetDomainCS)* 
 	 *         ownedMiddle=MiddleDomainCS? 
 	 *         ownedMappingSequence=MappingSequenceCS?

@@ -27,6 +27,7 @@ import org.eclipse.ocl.pivot.utilities.PivotUtil;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
+import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.InfixExpCS;
 import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
@@ -208,12 +209,17 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		}
 		//
 		for (MappingCS csMapping : csElement.getOwnedMappings()) {
-			Transformation inTransformation = csMapping.getIn();
-			List<Mapping> mappings = tx2mappings.get(inTransformation);
-			if (mappings != null) {
-				Mapping pMapping = PivotUtil.getPivot(Mapping.class, csMapping);
-				if (pMapping != null) {
-					mappings.add(pMapping);
+			PathNameCS csInPathName = csMapping.getOwnedInPathName();
+			if (csInPathName != null) {
+				Transformation asTransformation = lookupTransformation(csMapping, csInPathName, null);
+				if (asTransformation != null) {
+					List<Mapping> mappings = tx2mappings.get(asTransformation);
+					if (mappings != null) {
+						Mapping pMapping = PivotUtil.getPivot(Mapping.class, csMapping);
+						if (pMapping != null) {
+							mappings.add(pMapping);
+						}
+					}
 				}
 			}
 		}

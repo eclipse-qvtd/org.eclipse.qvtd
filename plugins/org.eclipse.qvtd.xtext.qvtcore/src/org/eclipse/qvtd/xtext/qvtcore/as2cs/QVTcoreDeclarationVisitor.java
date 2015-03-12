@@ -30,11 +30,11 @@ import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.xtext.qvtcorebase.as2cs.QVTcoreBaseDeclarationVisitor;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
@@ -136,7 +136,7 @@ public class QVTcoreDeclarationVisitor extends QVTcoreBaseDeclarationVisitor imp
 	public ElementCS visitMapping(@NonNull Mapping asMapping) {
 		MappingCS csMapping = context.refreshNamedElement(MappingCS.class, QVTcoreCSPackage.Literals.MAPPING_CS, asMapping);
 		csMapping.setPivot(asMapping);
-		csMapping.setIn(asMapping.getTransformation());
+		refreshOwnedInTransformation(csMapping, asMapping);
 		context.refreshList(csMapping.getOwnedDomains(), context.visitDeclarations(DomainCS.class, asMapping.getDomain(), null));
 		DomainCS csDomain = context.refreshElement(DomainCS.class, QVTcoreBaseCSPackage.Literals.DOMAIN_CS, asMapping);
 		csDomain.setPivot(null);		// stop comment duplication

@@ -54,6 +54,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
@@ -64,13 +65,14 @@ import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.util.QVTcoreBaseVisitor;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DirectionCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.ParamDeclarationCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.QueryCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.RealizedVariableCS;
@@ -105,6 +107,17 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 
 	public QVTcoreBaseDeclarationVisitor(@NonNull AS2CSConversion context) {
 		super(context);
+	}
+
+	protected void gatherTransformations(@NonNull List<Transformation> asTransformations, @NonNull List<Package> ownedPackages) {
+		for (org.eclipse.ocl.pivot.Package asPackage : ownedPackages) {
+			for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
+				if (asClass instanceof Transformation) {
+					asTransformations.add((Transformation) asClass);
+				}
+			}
+			gatherTransformations(asTransformations, asPackage.getOwnedPackages());
+		}
 	}
 
 	protected @Nullable Package getScope(@NonNull Variable asVariable) {
@@ -142,6 +155,21 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 					}
 				}
 			}
+		}
+	}
+
+	protected void refreshOwnedInTransformation(@NonNull AbstractMappingCS csMapping, @NonNull AbstractMapping asMapping) {
+		Transformation asTransformation = asMapping.getTransformation();
+		if (asTransformation != null) {
+			@SuppressWarnings("null") @NonNull PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
+			csMapping.setOwnedInPathName(csPathName);
+			org.eclipse.ocl.pivot.Package asPackage = asTransformation.getOwningPackage();
+			String asPackageName = asPackage != null ? asPackage.getName() : null;
+			Namespace asScope = (asPackageName == null) || "".equals(asPackageName) ? asPackage : null;
+			context.refreshPathName(csPathName, asTransformation, asScope);
+		}
+		else {
+			csMapping.setOwnedInPathName(null);
 		}
 	}
 
@@ -252,6 +280,15 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 	public ElementCS visitTransformation(@NonNull Transformation asTransformation) {
 		TransformationCS csTransformation = context.refreshNamedElement(TransformationCS.class, QVTcoreBaseCSPackage.Literals.TRANSFORMATION_CS, asTransformation);
 		csTransformation.setPivot(asTransformation);
+		org.eclipse.ocl.pivot.Package owningPackage = asTransformation.getOwningPackage();
+		if ((owningPackage == null) || "".equals(owningPackage.getName()) || (owningPackage.getName() == null)) {
+			csTransformation.setOwnedPathName(null);
+		}
+		else {
+			@SuppressWarnings("null") @NonNull PathNameCS csPathName = BaseCSFactory.eINSTANCE.createPathNameCS();
+			csTransformation.setOwnedPathName(csPathName);
+			context.refreshPathName(csPathName, owningPackage, null);
+		}
 		context.refreshList(csTransformation.getOwnedDirections(), context.visitDeclarations(DirectionCS.class, asTransformation.getModelParameter(), null));
 		return csTransformation;
 	}

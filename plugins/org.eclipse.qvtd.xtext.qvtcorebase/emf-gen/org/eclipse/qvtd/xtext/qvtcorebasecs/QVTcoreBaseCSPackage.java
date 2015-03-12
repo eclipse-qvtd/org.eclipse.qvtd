@@ -140,13 +140,13 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int ABSTRACT_MAPPING_CS__OWNED_DOMAINS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>In</b></em>' reference.
+	 * The feature id for the '<em><b>Owned In Path Name</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_MAPPING_CS__IN = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int ABSTRACT_MAPPING_CS__OWNED_IN_PATH_NAME = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Owned Middle</b></em>' containment reference.
@@ -1797,15 +1797,15 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	EReference getAbstractMappingCS_OwnedDomains();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getIn <em>In</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getOwnedInPathName <em>Owned In Path Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>In</em>'.
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getIn()
+	 * @return the meta object for the containment reference '<em>Owned In Path Name</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getOwnedInPathName()
 	 * @see #getAbstractMappingCS()
 	 * @generated
 	 */
-	EReference getAbstractMappingCS_In();
+	EReference getAbstractMappingCS_OwnedInPathName();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getOwnedMiddle <em>Owned Middle</em>}'.
@@ -2295,12 +2295,12 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 		EReference ABSTRACT_MAPPING_CS__OWNED_DOMAINS = eINSTANCE.getAbstractMappingCS_OwnedDomains();
 
 		/**
-		 * The meta object literal for the '<em><b>In</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Owned In Path Name</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ABSTRACT_MAPPING_CS__IN = eINSTANCE.getAbstractMappingCS_In();
+		EReference ABSTRACT_MAPPING_CS__OWNED_IN_PATH_NAME = eINSTANCE.getAbstractMappingCS_OwnedInPathName();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Middle</b></em>' containment reference feature.

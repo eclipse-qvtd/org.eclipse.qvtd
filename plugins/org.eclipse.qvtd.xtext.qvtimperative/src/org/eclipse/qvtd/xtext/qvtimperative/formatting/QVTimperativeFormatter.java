@@ -12,6 +12,7 @@ package org.eclipse.qvtd.xtext.qvtimperative.formatting;
 
 import org.eclipse.qvtd.xtext.qvtcorebase.formatting.QVTcoreBaseFormatter;
 import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.RealizedVariableCSElements;
+import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.ScopeNameCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.DirectionCSElements;
 import org.eclipse.qvtd.xtext.qvtimperative.services.QVTimperativeGrammarAccess.MappingCSElements;
@@ -130,6 +131,11 @@ public class QVTimperativeFormatter extends QVTcoreBaseFormatter
 	    	RealizedVariableCSElements a = f.getRealizedVariableCSAccess();
 			c.setLinewrap(1).before(a.getRealizeKeyword_0());
 			c.setLinewrap(1).after(a.getOwnedTypeAssignment_3());
+	    }
+	    {
+	    	ScopeNameCSElements a = f.getScopeNameCSAccess();
+			c.setNoSpace().around(a.getColonColonKeyword_1());
+			c.setNoSpace().around(a.getColonColonKeyword_2_1());
 	    }
 	    {
 	    	SourceBottomPatternCSElements a = f.getSourceBottomPatternCSAccess();

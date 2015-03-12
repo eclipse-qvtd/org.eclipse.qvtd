@@ -14,6 +14,7 @@ import org.eclipse.qvtd.xtext.qvtcore.services.QVTcoreGrammarAccess;
 import org.eclipse.qvtd.xtext.qvtcore.services.QVTcoreGrammarAccess.MappingCSElements;
 import org.eclipse.qvtd.xtext.qvtcore.services.QVTcoreGrammarAccess.TopLevelCSElements;
 import org.eclipse.qvtd.xtext.qvtcorebase.formatting.QVTcoreBaseFormatter;
+import org.eclipse.qvtd.xtext.qvtcorebase.services.QVTcoreBaseGrammarAccess.ScopeNameCSElements;
 import org.eclipse.xtext.formatting.impl.FormattingConfig;
 
 /**
@@ -77,6 +78,11 @@ public class QVTcoreFormatter extends QVTcoreBaseFormatter
 			c.setLinewrap(2).between(a.getGroup_7(), a.getOwnedComposedMappingsAssignment_8());
 			c.setLinewrap(1,2,2).before(a.getOwnedComposedMappingsAssignment_8());
 			c.setLinewrap(2).between(a.getOwnedComposedMappingsAssignment_8(), a.getOwnedComposedMappingsAssignment_8());
+	    }
+	    {
+	    	ScopeNameCSElements a = f.getScopeNameCSAccess();
+			c.setNoSpace().around(a.getColonColonKeyword_1());
+			c.setNoSpace().around(a.getColonColonKeyword_2_1());
 	    }
 	    {
 	    	TopLevelCSElements a = f.getTopLevelCSAccess();

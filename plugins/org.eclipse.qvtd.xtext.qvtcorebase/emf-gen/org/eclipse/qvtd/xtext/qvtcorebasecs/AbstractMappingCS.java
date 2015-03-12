@@ -12,7 +12,7 @@ package org.eclipse.qvtd.xtext.qvtcorebasecs;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.ocl.xtext.basecs.NamedElementCS;
-import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.ocl.xtext.basecs.PathNameCS;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,7 +24,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getOwnedDomains <em>Owned Domains</em>}</li>
- *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getIn <em>In</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getOwnedInPathName <em>Owned In Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getOwnedMiddle <em>Owned Middle</em>}</li>
  * </ul>
  *
@@ -50,30 +50,30 @@ public interface AbstractMappingCS extends NamedElementCS {
 	EList<DomainCS> getOwnedDomains();
 
 	/**
-	 * Returns the value of the '<em><b>In</b></em>' reference.
+	 * Returns the value of the '<em><b>Owned In Path Name</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>In</em>' reference isn't clear,
+	 * If the meaning of the '<em>Owned In Path Name</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>In</em>' reference.
-	 * @see #setIn(Transformation)
-	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAbstractMappingCS_In()
-	 * @model
+	 * @return the value of the '<em>Owned In Path Name</em>' containment reference.
+	 * @see #setOwnedInPathName(PathNameCS)
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage#getAbstractMappingCS_OwnedInPathName()
+	 * @model containment="true"
 	 * @generated
 	 */
-	Transformation getIn();
+	PathNameCS getOwnedInPathName();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getIn <em>In</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getOwnedInPathName <em>Owned In Path Name</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>In</em>' reference.
-	 * @see #getIn()
+	 * @param value the new value of the '<em>Owned In Path Name</em>' containment reference.
+	 * @see #getOwnedInPathName()
 	 * @generated
 	 */
-	void setIn(Transformation value);
+	void setOwnedInPathName(PathNameCS value);
 
 	/**
 	 * Returns the value of the '<em><b>Owned Middle</b></em>' containment reference.
