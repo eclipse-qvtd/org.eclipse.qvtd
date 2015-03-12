@@ -68,8 +68,7 @@ public class LoadTests extends LoadTestCase
 		doLoad_ModelMorf("HstmToStm/hstmtostm");
 	}	
 
-	// FIXME
-	public void zztestLoad_Import_qvtr() throws IOException, InterruptedException {
+	public void testLoad_Import_qvtr() throws IOException, InterruptedException {
 		doLoad_ModelMorf("Import/UmlToRdbms_1");
 	}	
 

@@ -18,6 +18,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.internal.resource.ASResourceFactory;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.resource.ASResource;
 import org.eclipse.ocl.xtext.base.as2cs.AS2CS;
@@ -29,6 +30,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CorePattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeASResourceFactory;
 import org.eclipse.qvtd.xtext.qvtimperative.as2cs.QVTimperativeAS2CS;
 import org.eclipse.qvtd.xtext.qvtimperative.cs2as.QVTimperativeCS2AS;
 
@@ -48,6 +50,11 @@ public class QVTimperativeCSResource extends EssentialOCLCSResource
 	@Override
 	public @NonNull String getASContentType() {
 		return QVTimperativePackage.eCONTENT_TYPE;
+	}
+
+	@Override
+	public @NonNull ASResourceFactory getASResourceFactory() {
+		return QVTimperativeASResourceFactory.getInstance();
 	}
 
 	@Override

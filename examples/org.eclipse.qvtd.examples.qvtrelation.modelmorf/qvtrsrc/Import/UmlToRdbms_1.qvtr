@@ -12,7 +12,7 @@
 import umlMM : 'umlMM.emof'::umlMM; 
 import rdbmsMM : 'rdbmsMM.emof'::rdbmsMM; 
 
-import UmlToRdbms_2;
+import 'UmlToRdbms_2.qvtr';
 
 transformation UmlToRdbms_1(uml:umlMM, rdbms:rdbmsMM)
 {
