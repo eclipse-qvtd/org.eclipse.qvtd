@@ -161,6 +161,12 @@
           <y:Shape type="rectangle"/>
         </y:ShapeNode></graphml:data>
     </graphml:node>
+    <graphml:node id="PackageCS::ownedPackages">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>PackageCS::ownedPackages</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
     <graphml:node id="Package::name">
       <graphml:data key="d6"><y:ShapeNode>
           <y:NodeLabel>Package::name</y:NodeLabel>
@@ -176,6 +182,12 @@
     <graphml:node id="Package::ownedPackages">
       <graphml:data key="d6"><y:ShapeNode>
           <y:NodeLabel>Package::ownedPackages</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Package::Package">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Package::Package</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode></graphml:data>
     </graphml:node>
@@ -200,6 +212,12 @@
     <graphml:node id="Root::ownedPackages">
       <graphml:data key="d6"><y:ShapeNode>
           <y:NodeLabel>Root::ownedPackages</y:NodeLabel>
+          <y:Shape type="rectangle"/>
+        </y:ShapeNode></graphml:data>
+    </graphml:node>
+    <graphml:node id="Environment::parentEnv">
+      <graphml:data key="d6"><y:ShapeNode>
+          <y:NodeLabel>Environment::parentEnv</y:NodeLabel>
           <y:Shape type="rectangle"/>
         </y:ShapeNode></graphml:data>
     </graphml:node>
@@ -239,15 +257,15 @@
           <y:Shape type="ellipse"/>
         </y:ShapeNode></graphml:data>
     </graphml:node>
-    <graphml:node id="uClass_name (7)">
+    <graphml:node id="uClass_name (8)">
       <graphml:data key="d6"><y:ShapeNode>
-          <y:NodeLabel>uClass_name (7)</y:NodeLabel>
+          <y:NodeLabel>uClass_name (8)</y:NodeLabel>
           <y:Shape type="ellipse"/>
         </y:ShapeNode></graphml:data>
     </graphml:node>
-    <graphml:node id="uClass_superClass (8)">
+    <graphml:node id="uClass_superClass (9)">
       <graphml:data key="d6"><y:ShapeNode>
-          <y:NodeLabel>uClass_superClass (8)</y:NodeLabel>
+          <y:NodeLabel>uClass_superClass (9)</y:NodeLabel>
           <y:Shape type="ellipse"/>
         </y:ShapeNode></graphml:data>
     </graphml:node>
@@ -263,15 +281,15 @@
           <y:Shape type="ellipse"/>
         </y:ShapeNode></graphml:data>
     </graphml:node>
-    <graphml:node id="uRoot_ownedPackages (3)">
+    <graphml:node id="uPackage_ownedPackages (7)">
       <graphml:data key="d6"><y:ShapeNode>
-          <y:NodeLabel>uRoot_ownedPackages (3)</y:NodeLabel>
+          <y:NodeLabel>uPackage_ownedPackages (7)</y:NodeLabel>
           <y:Shape type="ellipse"/>
         </y:ShapeNode></graphml:data>
     </graphml:node>
-    <graphml:node id="__root__ (0)">
+    <graphml:node id="uRoot_ownedPackages (3)">
       <graphml:data key="d6"><y:ShapeNode>
-          <y:NodeLabel>__root__ (0)</y:NodeLabel>
+          <y:NodeLabel>uRoot_ownedPackages (3)</y:NodeLabel>
           <y:Shape type="ellipse"/>
         </y:ShapeNode></graphml:data>
     </graphml:node>
@@ -377,6 +395,12 @@
           <y:Arrows source="none" target="standard"/>
         </y:PolyLineEdge></graphml:data>
     </graphml:edge>
+    <graphml:edge source="Package::ownedPackages" target="Package::Package">
+      <graphml:data key="d9"><y:PolyLineEdge>
+          <y:LineStyle type="dashed"/>
+          <y:Arrows source="none" target="standard"/>
+        </y:PolyLineEdge></graphml:data>
+    </graphml:edge>
     <graphml:edge source="RootCS::ast" target="ElementCS::ast">
       <graphml:data key="d9"><y:PolyLineEdge>
           <y:LineStyle type="dotted"/>
@@ -404,23 +428,24 @@
     <graphml:edge source="RootCS" target="cRootCS_2_Root (1)"/>
     <graphml:edge source="cRootCS_2_Root (1)" target="Root"/>
     <graphml:edge source="cRootCS_2_Root (1)" target="RootCS::ast"/>
-    <graphml:edge source="ClassCS" target="uClass_name (7)"/>
-    <graphml:edge source="ClassCS::name" target="uClass_name (7)"/>
-    <graphml:edge source="ClassCS::ast" target="uClass_name (7)"/>
-    <graphml:edge source="uClass_name (7)" target="Class::name"/>
-    <graphml:edge source="ClassCS" target="uClass_superClass (8)"/>
-    <graphml:edge source="ClassCS::ast" target="uClass_superClass (8)"/>
-    <graphml:edge source="ClassCS::extends" target="uClass_superClass (8)"/>
-    <graphml:edge source="Environment::namedElements" target="uClass_superClass (8)"/>
-    <graphml:edge source="Package::ownedPackages" target="uClass_superClass (8)"/>
-    <graphml:edge source="Root::ownedPackages" target="uClass_superClass (8)"/>
-    <graphml:edge source="Package::name" target="uClass_superClass (8)"/>
-    <graphml:edge source="PathElementCS::name" target="uClass_superClass (8)"/>
-    <graphml:edge source="Package::ownedClasses" target="uClass_superClass (8)"/>
-    <graphml:edge source="Class::name" target="uClass_superClass (8)"/>
-    <graphml:edge source="PathNameCS::path" target="uClass_superClass (8)"/>
-    <graphml:edge source="uClass_superClass (8)" target="Class::superClass"/>
-    <graphml:edge source="uClass_superClass (8)" target="Class::Class"/>
+    <graphml:edge source="ClassCS" target="uClass_name (8)"/>
+    <graphml:edge source="ClassCS::name" target="uClass_name (8)"/>
+    <graphml:edge source="ClassCS::ast" target="uClass_name (8)"/>
+    <graphml:edge source="uClass_name (8)" target="Class::name"/>
+    <graphml:edge source="ClassCS" target="uClass_superClass (9)"/>
+    <graphml:edge source="ClassCS::extends" target="uClass_superClass (9)"/>
+    <graphml:edge source="ClassCS::ast" target="uClass_superClass (9)"/>
+    <graphml:edge source="Root::ownedPackages" target="uClass_superClass (9)"/>
+    <graphml:edge source="Package::ownedPackages" target="uClass_superClass (9)"/>
+    <graphml:edge source="Package::ownedClasses" target="uClass_superClass (9)"/>
+    <graphml:edge source="Environment::parentEnv" target="uClass_superClass (9)"/>
+    <graphml:edge source="Environment::namedElements" target="uClass_superClass (9)"/>
+    <graphml:edge source="Package::name" target="uClass_superClass (9)"/>
+    <graphml:edge source="PathElementCS::name" target="uClass_superClass (9)"/>
+    <graphml:edge source="Class::name" target="uClass_superClass (9)"/>
+    <graphml:edge source="PathNameCS::path" target="uClass_superClass (9)"/>
+    <graphml:edge source="uClass_superClass (9)" target="Class::superClass"/>
+    <graphml:edge source="uClass_superClass (9)" target="Class::Class"/>
     <graphml:edge source="PackageCS" target="uPackage_name (4)"/>
     <graphml:edge source="PackageCS::name" target="uPackage_name (4)"/>
     <graphml:edge source="PackageCS::ast" target="uPackage_name (4)"/>
@@ -431,6 +456,11 @@
     <graphml:edge source="PackageCS::ast" target="uPackage_ownedClasses (6)"/>
     <graphml:edge source="uPackage_ownedClasses (6)" target="Package::ownedClasses"/>
     <graphml:edge source="uPackage_ownedClasses (6)" target="Class::Package"/>
+    <graphml:edge source="PackageCS" target="uPackage_ownedPackages (7)"/>
+    <graphml:edge source="PackageCS::ownedPackages" target="uPackage_ownedPackages (7)"/>
+    <graphml:edge source="PackageCS::ast" target="uPackage_ownedPackages (7)"/>
+    <graphml:edge source="uPackage_ownedPackages (7)" target="Package::ownedPackages"/>
+    <graphml:edge source="uPackage_ownedPackages (7)" target="Package::Package"/>
     <graphml:edge source="RootCS" target="uRoot_ownedPackages (3)"/>
     <graphml:edge source="RootCS::ownedPackages" target="uRoot_ownedPackages (3)"/>
     <graphml:edge source="PackageCS::ast" target="uRoot_ownedPackages (3)"/>

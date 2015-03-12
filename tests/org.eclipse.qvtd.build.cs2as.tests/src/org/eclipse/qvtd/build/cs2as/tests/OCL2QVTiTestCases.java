@@ -12,8 +12,6 @@ package org.eclipse.qvtd.build.cs2as.tests;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.util.Collections;
 
@@ -29,10 +27,6 @@ import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
 import org.eclipse.epsilon.eol.execute.context.Variable;
 import org.eclipse.epsilon.eol.types.EolPrimitiveType;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
-import org.eclipse.ocl.pivot.CompleteEnvironment;
-import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import org.eclipse.ocl.pivot.internal.resource.StandaloneProjectMap;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
@@ -42,23 +36,20 @@ import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.build.cs2as.OCL2QVTiBroker;
+import org.eclipse.qvtd.build.cs2as.qvti.QVTi2JavaCompiler;
+import org.eclipse.qvtd.build.cs2as.qvti.QVTiFacade;
 import org.eclipse.qvtd.build.cs2as.tests.models.example2.java.classescs2as_qvtp_qvtias_Manual;
 import org.eclipse.qvtd.build.etl.EtlTask;
 import org.eclipse.qvtd.build.etl.MtcBroker;
 import org.eclipse.qvtd.build.etl.PivotModel;
 import org.eclipse.qvtd.build.etl.QvtMtcExecutionException;
-import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
-import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationEvaluator;
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationEvaluator;
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiPivotEvaluator;
 import org.eclipse.qvtd.xtext.qvtbase.tests.LoadTestCase;
 import org.eclipse.qvtd.xtext.qvtbase.tests.utilities.TestsXMLUtil;
@@ -74,33 +65,11 @@ import org.junit.Test;
  */
 public class OCL2QVTiTestCases extends LoadTestCase {
 	
+	private static final boolean CREATE_GRAPHML = false; // Note. You need Epsilon with Bug 458724 fix to have output graphml models serialised
 	private static final String TESTS_GEN_PATH = "../org.eclipse.qvtd.build.cs2as.tests/tests-gen/";
+	private static final String TESTS_PACKAGE_NAME = "cg";
 	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("org.eclipse.qvtd.build.cs2as.tests/src/org/eclipse/qvtd/build/cs2as/tests/models", true);
-	
-	protected class MyQVT extends OCL
-	{
-		public MyQVT(@NonNull QVTiEnvironmentFactory environmentFactory) {
-			super(environmentFactory);
-		}
 
-		public @NonNull QVTiPivotEvaluator createEvaluator(Transformation transformation) {
-			return new QVTiPivotEvaluator(getEnvironmentFactory(), transformation);
-		}
-
-		public @NonNull TxEvaluator createEvaluator(Constructor<? extends TransformationExecutor> txConstructor) throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
-			return new TxEvaluator(getCompleteEnvironment(), txConstructor);
-		}
-		@Override
-		public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
-			return (QVTiEnvironmentFactory) super.getEnvironmentFactory();
-		}
-	}
-	
-	protected static class TxEvaluator extends AbstractTransformationEvaluator {
-		private TxEvaluator(@NonNull CompleteEnvironment environment, Constructor<? extends TransformationExecutor> txConstructor) throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
-			super(environment, txConstructor);
-		}
-	}
 	
 	// For testing purpose
 	private static class OCL2QVTiBrokerTester extends OCL2QVTiBroker {
@@ -131,7 +100,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		}
 	}
 	
-	@NonNull private MyQVT myQVT;
+	@NonNull private QVTiFacade myQVT;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -149,8 +118,8 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		super.tearDown();
 	}
 	
-	protected @NonNull MyQVT createQVT() {
-		return new MyQVT(new QVTiEnvironmentFactory(getProjectMap(), null));
+	protected @NonNull QVTiFacade createQVT() {
+		return QVTiFacade.createInstance(getProjectMap(), null);
 	}
 	
 	
@@ -170,9 +139,6 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 	public void testExample1_Interpreted() throws Exception {
 		URI baseURI = TESTS_BASE_URI.appendSegment("example1");
 		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "Source2Target.ocl");
-		
-//    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("Source2TargetSchedule_complete.graphml").toString(), false);
-//    	launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("Source2TargetSchedule_pruned.graphml").toString(), true);
 		
 		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore 
 		myQVT.dispose();
@@ -217,9 +183,6 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 //    	URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());
 //    	assertValidQVTiModel(txURI);
 //    	
-//    	//launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("KiamaRewriteSchedule_complete.graphml").toString(), false);
-//    	//launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("KiamaRewriteSchedule_pruned.graphml").toString(), true);
-//    	
 //    	executeModelsTX_Interpreted(myQVT, qvtiTransf.getTransformation(), baseURI, "model1");
 //    	
 //        myQVT.dispose();
@@ -231,9 +194,6 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		URI baseURI = TESTS_BASE_URI.appendSegment("example4");
 				
 		executeOCL2QVTi_MTC(myQVT, baseURI, "SimplerKiama.ocl");
-		    	
-    	//launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("SimplerKiamaSchedule_complete.graphml").toString(), false);
-    	//launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment("SimplerKiamaSchedule_pruned.graphml").toString(), true);
 	}
 	
 	@Test
@@ -242,16 +202,14 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "Source2Target.ocl");
 
-	
-		Class<? extends TransformationExecutor> txClass = generateCode(myQVT, qvtiTransf.getTransformation(), TESTS_GEN_PATH);
+		Class<? extends TransformationExecutor> txClass = new QVTi2JavaCompiler()
+			.compileTransformation(myQVT, qvtiTransf.getTransformation(), TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
 		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore 
-		myQVT.dispose();		
+		myQVT.dispose();
 		myQVT = createQVT();
-		
-		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
 
-		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model1");		
-		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model2");
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model1");
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model2");
 	
 	}
 		
@@ -262,22 +220,22 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 			
 		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "classescs2as.ocl");
 		
-		Class<? extends TransformationExecutor> txClass = generateCode(myQVT, qvtiTransf.getTransformation(), TESTS_GEN_PATH);
+		Class<? extends TransformationExecutor> txClass = new QVTi2JavaCompiler()
+			.compileTransformation(myQVT, qvtiTransf.getTransformation(), TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
 		
 		
 		// Execute CGed transformation
 		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore
 		myQVT.dispose();
 		myQVT = createQVT();
-		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
 		
-		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model1");
-		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model2");
-		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model3");
-		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model4");
-		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model5");
-		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model6");
-		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model7");
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model1");
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model2");
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model3");
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model4");
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model5");
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model6");
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model7");
 	}
 	
 	@Test
@@ -289,13 +247,12 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 		
 		// Execute CGed transformation
-		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore 
-		Constructor<? extends TransformationExecutor> txConstructor = ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class));
+		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore
 		
-		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model1");
-		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model2");
-		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model3");
-		executeModelsTX_CG(myQVT, txConstructor, baseURI, "model4");
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model1");
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model2");
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model3");
+		executeModelsTX_CG(myQVT, txClass, baseURI, "model4");
 	}
 	
 	@Test
@@ -361,24 +318,29 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		assertValidModel(asURI, asResourceSet);
 	}
 	
-	protected PivotModel executeOCL2QVTi_MTC(MyQVT qvt, URI baseURI, String oclDocName) throws Exception {
+	protected PivotModel executeOCL2QVTi_MTC(QVTiFacade qvt, URI baseURI, String oclDocName) throws Exception {
 		
 		OCL2QVTiBroker mtc = new OCL2QVTiBroker(baseURI, oclDocName, qvt, TestsXMLUtil.defaultSavingOptions);
     	mtc.execute();
+    	
+    	if (CREATE_GRAPHML) {
+    		launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment(oclDocName.replace(".ocl", "Schedule_complete.graphml")).toString(), false);
+    		launchQVTs2GraphMlTx(mtc.getsModel(), baseURI.appendSegment(oclDocName.replace(".ocl", "Schedule_pruned.graphml")).toString(), true);
+    	}
+    	
     	PivotModel qvtiTransf = mtc.getiModel();
     	
     	URI txURI = ClassUtil.nonNullState(qvtiTransf.getResource().getURI());
     	assertValidQVTiModel(txURI);
-    	
     	return qvtiTransf;
 	}
 	
 	//
 	// Execute the transformation with the interpreter
 	//
-	protected void executeModelsTX_CG(MyQVT qvt, Constructor<? extends TransformationExecutor> txConstructor, URI baseURI, String modelName) throws Exception {
+	protected void executeModelsTX_CG(QVTiFacade qvt, Class<? extends TransformationExecutor> txClass, URI baseURI, String modelName) throws Exception {
 		
-		TransformationEvaluator evaluator = qvt.createEvaluator(txConstructor);
+		TransformationEvaluator evaluator = qvt.createTxEvaluator(txClass);
 		TransformationExecutor tx = evaluator.getExecutor();
 		URI samplesBaseUri = baseURI.appendSegment("samples");
     	URI csModelURI = samplesBaseUri.appendSegment(String.format("%s_input.xmi", modelName));
@@ -394,15 +356,15 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		outputResource.getContents().addAll(tx.getRootObjects("rightAS"));
 		outputResource.save(TestsXMLUtil.defaultSavingOptions);
 
-        Resource expected =  rSet.getResource(expectedAsModelURI, true);
-        assertSameModel(expected, rSet.getResource(asModelURI, true));		
+		Resource expected =  rSet.getResource(expectedAsModelURI, true);
+		assertSameModel(expected, rSet.getResource(asModelURI, true));		
 	}
 
 	//
 	// Execute the transformation with the CGed transformation
 	//
 
-	protected void executeModelsTX_Interpreted(MyQVT qvt, Transformation tx, URI baseURI, String modelName) throws Exception {
+	protected void executeModelsTX_Interpreted(QVTiFacade qvt, Transformation tx, URI baseURI, String modelName) throws Exception {
 		
 		URI samplesBaseUri = baseURI.appendSegment("samples");
 		URI csModelURI = samplesBaseUri.appendSegment(String.format("%s_input.xmi", modelName));
@@ -436,20 +398,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		Resource r = rSet.createResource(modelURI);
 		r.save(TestsXMLUtil.defaultSavingOptions);
 	}
-	
-	// Copied from QVTiCompilerTest
-	protected Class<? extends AbstractTransformationExecutor> generateCode(@NonNull MyQVT qvt, @NonNull Transformation transformation, @Nullable String savePath) throws Exception {
-				
-		QVTiCodeGenerator cg = new QVTiCodeGenerator(qvt.getEnvironmentFactory(), transformation);
-		QVTiCodeGenOptions options = cg.getOptions();
-		options.setUseNullAnnotations(true);
-		options.setPackagePrefix("cg");
-		cg.generateClassFile();
-		if (savePath != null) {
-			cg.saveSourceFile(savePath);
-		}
-		return  compileTransformation(cg);
-	}
+
 
 	protected Transformation getTransformation(ResourceSet rSet, URI qvtiURI) {
 		
@@ -466,23 +415,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 			}
 		}
 		return null;
-	}
-	
-	// Copied from QVTiCompilerTest
-	@SuppressWarnings("unchecked")
-	protected Class<? extends AbstractTransformationExecutor> compileTransformation(@NonNull QVTiCodeGenerator cg) throws Exception {
-		String qualifiedName = cg.getQualifiedName();
-		String javaCodeSource = cg.generateClassFile();
-		try {
-			Class<?> txClass = OCL2JavaFileObject.loadClass(qualifiedName, javaCodeSource);
-			return (Class<? extends AbstractTransformationExecutor>) txClass;
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw e;
-		}
-	}
-	
+	}	
 	
 	private void launchQVTs2GraphMlTx(PivotModel qvtsModel, String graphMlURI, boolean pruneQVTs) throws QvtMtcExecutionException {
 		
@@ -507,7 +440,7 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 		    StringProperties properties = new StringProperties();
 		    properties.put(XmlModel.PROPERTY_NAME, "GML");
 		    properties.put(XmlModel.PROPERTY_ALIASES, "GML");
-		    properties.put(XmlModel.PROPERTY_MODEL_FILE, graphMlURI);
+		    properties.put(XmlModel.PROPERTY_MODEL_FILE, graphMlURI); // TODO when use new APi when released
 		    properties.put(XmlModel.PROPERTY_XSD_FILE, new File("schema/ygraphml.xsd").getAbsolutePath());
 		    properties.put(XmlModel.PROPERTY_READONLOAD, "false");
 		    properties.put(XmlModel.PROPERTY_STOREONDISPOSAL, "true");

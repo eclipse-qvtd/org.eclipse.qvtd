@@ -16,11 +16,17 @@ public abstract class AbstractTransformationEvaluator extends ExecutorManager im
 {
 	protected final @NonNull TransformationExecutor executor;
 	
-	public AbstractTransformationEvaluator(@NonNull CompleteEnvironment environment, Constructor<? extends TransformationExecutor> txConstructor) throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
+	public AbstractTransformationEvaluator(@NonNull CompleteEnvironment environment, Constructor<? extends TransformationExecutor> txConstructor) 
+			throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
 		super(environment);
 		executor = ClassUtil.nonNullState(txConstructor.newInstance(this));
 	}
-
+	
+	public AbstractTransformationEvaluator(@NonNull CompleteEnvironment environment, Class<? extends TransformationExecutor> txClass) 
+			throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException , NoSuchMethodException {
+		this(environment, ClassUtil.nonNullState(txClass.getConstructor(Evaluator.class)));
+	}
+	
 	@Override
 	public @NonNull TransformationExecutor getExecutor() {
 		return executor;

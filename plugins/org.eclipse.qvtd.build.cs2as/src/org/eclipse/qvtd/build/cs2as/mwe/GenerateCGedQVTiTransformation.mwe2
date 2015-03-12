@@ -1,0 +1,42 @@
+/*******************************************************************************
+ * Copyright (c) 2015 Willink Transformations Ltd., University of York and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * 
+ * Contributors:
+ *     Adolfo Sanchez-Barbudo Herrera (University of York) - initial API and implementation
+ *******************************************************************************/
+module org.eclipse.qvtd.build.cs2as.mwe.GenerateCGedQVTiTransformation
+
+import org.eclipse.qvtd.build.cs2as.mwe.*
+import org.eclipse.emf.ecore.resource.*
+
+
+/**
+ * The OCL document URI corresponding to the CS2AS description 
+ */
+var String oclFileURI
+
+/**
+ * Optional resource set 
+ */
+var ResourceSet resourceSet
+
+/**
+ * Optional output 
+ */
+var javaFolder = "src-gen/" // FIXME add the trailing slash in the components code   
+
+var javaPackage = ""
+
+Workflow {
+
+	component = GenerateCGedQVTiTransformation {
+		resourceSet = resourceSet
+		oclDocURI = oclFileURI
+		javaFolder = javaFolder
+		javaPackage = javaPackage 
+	}
+}
