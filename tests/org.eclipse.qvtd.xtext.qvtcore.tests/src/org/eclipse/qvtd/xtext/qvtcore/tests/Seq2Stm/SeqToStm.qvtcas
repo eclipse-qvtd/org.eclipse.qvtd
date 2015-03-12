@@ -22,23 +22,22 @@
   <ownedImports
       name="PSeqToStm"
       importedNamespace="pivot:Package platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#P.PSeqToStm"/>
-  <ownedPackages
-      xmi:id="P.xx"
-      name="xx">
+  <ownedPackages name=""
+      xmi:id="P.">
     <ownedClasses
         xsi:type="qvtb:Transformation"
-        xmi:id="T.xx.SeqToStm"
+        xmi:id="T..SeqToStm"
         name="SeqToStm">
       <modelParameter
-          xmi:id="qT.xx.SeqToStm."
+          xmi:id="qT..SeqToStm."
           name=""
           usedPackage="platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#P.PSeqToStm"/>
       <modelParameter
-          xmi:id="qT.xx.SeqToStm.seqDgm"
+          xmi:id="qT..SeqToStm.seqDgm"
           name="seqDgm"
           usedPackage="SeqMM.emof.oclas#P.SeqMM"/>
       <modelParameter
-          xmi:id="qT.xx.SeqToStm.stm"
+          xmi:id="qT..SeqToStm.stm"
           name="stm"
           usedPackage="StmcMM.emof.oclas#P.StmcMM"/>
       <rule
@@ -48,11 +47,11 @@
             xsi:type="qvtcb:CoreDomain"
             name="stm"
             isEnforceable="true"
-            typedModel="#qT.xx.SeqToStm.stm">
+            typedModel="#qT..SeqToStm.stm">
           <guardPattern/>
           <bottomPattern>
             <realizedVariable
-                xmi:id="qV.xx.SeqToStm.InteractionToStateMachine_stm.stm.bottom.s"
+                xmi:id="qV..SeqToStm.InteractionToStateMachine_stm.stm.bottom.s"
                 name="s"
                 type="pivot:Class StmcMM.emof.oclas#T.StmcMM.StateMachine"/>
           </bottomPattern>
@@ -62,11 +61,11 @@
             name="seqDgm"
             isCheckable="true"
             isEnforceable="false"
-            typedModel="#qT.xx.SeqToStm.seqDgm">
+            typedModel="#qT..SeqToStm.seqDgm">
           <guardPattern/>
           <bottomPattern>
             <variable
-                xmi:id="qV.xx.SeqToStm.InteractionToStateMachine_stm.seqDgm.bottom.i"
+                xmi:id="qV..SeqToStm.InteractionToStateMachine_stm.seqDgm.bottom.i"
                 name="i"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Interaction"/>
           </bottomPattern>
@@ -74,7 +73,7 @@
         <guardPattern/>
         <bottomPattern>
           <variable
-              xmi:id="qV.xx.SeqToStm.InteractionToStateMachine_stm.bottom.sn"
+              xmi:id="qV..SeqToStm.InteractionToStateMachine_stm.bottom.sn"
               name="sn"
               type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
           <assignment
@@ -82,10 +81,10 @@
               targetProperty="SeqMM.emof.oclas#p.SeqMM.Interaction.name">
             <value
                 xsi:type="pivot:VariableExp"
-                referredVariable="#qV.xx.SeqToStm.InteractionToStateMachine_stm.bottom.sn"/>
+                referredVariable="#qV..SeqToStm.InteractionToStateMachine_stm.bottom.sn"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
-                referredVariable="#qV.xx.SeqToStm.InteractionToStateMachine_stm.seqDgm.bottom.i"/>
+                referredVariable="#qV..SeqToStm.InteractionToStateMachine_stm.seqDgm.bottom.i"/>
           </assignment>
           <assignment
               xsi:type="qvtcb:PropertyAssignment"
@@ -93,11 +92,11 @@
             <value
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Interaction"
-                referredVariable="#qV.xx.SeqToStm.InteractionToStateMachine_stm.seqDgm.bottom.i"/>
+                referredVariable="#qV..SeqToStm.InteractionToStateMachine_stm.seqDgm.bottom.i"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TInteractionToStateMachine"
-                referredVariable="#qV.xx.SeqToStm.InteractionToStateMachine_stm.bottom.InteractionToStateMachine_stm_v"/>
+                referredVariable="#qV..SeqToStm.InteractionToStateMachine_stm.bottom.InteractionToStateMachine_stm_v"/>
           </assignment>
           <assignment
               xsi:type="qvtcb:PropertyAssignment"
@@ -105,11 +104,11 @@
             <value
                 xsi:type="pivot:VariableExp"
                 type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
-                referredVariable="#qV.xx.SeqToStm.InteractionToStateMachine_stm.bottom.sn"/>
+                referredVariable="#qV..SeqToStm.InteractionToStateMachine_stm.bottom.sn"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class StmcMM.emof.oclas#T.StmcMM.StateMachine"
-                referredVariable="#qV.xx.SeqToStm.InteractionToStateMachine_stm.stm.bottom.s"/>
+                referredVariable="#qV..SeqToStm.InteractionToStateMachine_stm.stm.bottom.s"/>
           </assignment>
           <assignment
               xsi:type="qvtcb:PropertyAssignment"
@@ -117,14 +116,14 @@
             <value
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class StmcMM.emof.oclas#T.StmcMM.StateMachine"
-                referredVariable="#qV.xx.SeqToStm.InteractionToStateMachine_stm.stm.bottom.s"/>
+                referredVariable="#qV..SeqToStm.InteractionToStateMachine_stm.stm.bottom.s"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TInteractionToStateMachine"
-                referredVariable="#qV.xx.SeqToStm.InteractionToStateMachine_stm.bottom.InteractionToStateMachine_stm_v"/>
+                referredVariable="#qV..SeqToStm.InteractionToStateMachine_stm.bottom.InteractionToStateMachine_stm_v"/>
           </assignment>
           <realizedVariable
-              xmi:id="qV.xx.SeqToStm.InteractionToStateMachine_stm.bottom.InteractionToStateMachine_stm_v"
+              xmi:id="qV..SeqToStm.InteractionToStateMachine_stm.bottom.InteractionToStateMachine_stm_v"
               name="InteractionToStateMachine_stm_v"
               type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TInteractionToStateMachine"/>
         </bottomPattern>
@@ -136,10 +135,10 @@
             xsi:type="qvtcb:CoreDomain"
             name="stm"
             isEnforceable="true"
-            typedModel="#qT.xx.SeqToStm.stm">
+            typedModel="#qT..SeqToStm.stm">
           <guardPattern>
             <variable
-                xmi:id="qV.xx.SeqToStm.StateToState_stm.stm.guard.s"
+                xmi:id="qV..SeqToStm.StateToState_stm.stm.guard.s"
                 name="s"
                 type="pivot:Class StmcMM.emof.oclas#T.StmcMM.StateMachine"/>
           </guardPattern>
@@ -150,14 +149,14 @@
               <value
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class StmcMM.emof.oclas#T.StmcMM.StateMachine"
-                  referredVariable="#qV.xx.SeqToStm.StateToState_stm.stm.guard.s"/>
+                  referredVariable="#qV..SeqToStm.StateToState_stm.stm.guard.s"/>
               <slotExpression
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class StmcMM.emof.oclas#T.StmcMM.State"
-                  referredVariable="#qV.xx.SeqToStm.StateToState_stm.stm.bottom.st2"/>
+                  referredVariable="#qV..SeqToStm.StateToState_stm.stm.bottom.st2"/>
             </assignment>
             <realizedVariable
-                xmi:id="qV.xx.SeqToStm.StateToState_stm.stm.bottom.st2"
+                xmi:id="qV..SeqToStm.StateToState_stm.stm.bottom.st2"
                 name="st2"
                 type="pivot:Class StmcMM.emof.oclas#T.StmcMM.State"/>
           </bottomPattern>
@@ -167,20 +166,20 @@
             name="seqDgm"
             isCheckable="true"
             isEnforceable="false"
-            typedModel="#qT.xx.SeqToStm.seqDgm">
+            typedModel="#qT..SeqToStm.seqDgm">
           <guardPattern>
             <variable
-                xmi:id="qV.xx.SeqToStm.StateToState_stm.seqDgm.guard.i"
+                xmi:id="qV..SeqToStm.StateToState_stm.seqDgm.guard.i"
                 name="i"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Interaction"/>
           </guardPattern>
           <bottomPattern>
             <variable
-                xmi:id="qV.xx.SeqToStm.StateToState_stm.seqDgm.bottom.l"
+                xmi:id="qV..SeqToStm.StateToState_stm.seqDgm.bottom.l"
                 name="l"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.LifeLine"/>
             <variable
-                xmi:id="qV.xx.SeqToStm.StateToState_stm.seqDgm.bottom.st1"
+                xmi:id="qV..SeqToStm.StateToState_stm.seqDgm.bottom.st1"
                 name="st1"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.State"/>
             <assignment
@@ -189,11 +188,11 @@
               <value
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Interaction"
-                  referredVariable="#qV.xx.SeqToStm.StateToState_stm.seqDgm.guard.i"/>
+                  referredVariable="#qV..SeqToStm.StateToState_stm.seqDgm.guard.i"/>
               <slotExpression
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class SeqMM.emof.oclas#T.SeqMM.LifeLine"
-                  referredVariable="#qV.xx.SeqToStm.StateToState_stm.seqDgm.bottom.l"/>
+                  referredVariable="#qV..SeqToStm.StateToState_stm.seqDgm.bottom.l"/>
             </assignment>
             <assignment
                 xsi:type="qvtcb:PropertyAssignment"
@@ -201,11 +200,11 @@
               <value
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class SeqMM.emof.oclas#T.SeqMM.LifeLine"
-                  referredVariable="#qV.xx.SeqToStm.StateToState_stm.seqDgm.bottom.l"/>
+                  referredVariable="#qV..SeqToStm.StateToState_stm.seqDgm.bottom.l"/>
               <slotExpression
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class SeqMM.emof.oclas#T.SeqMM.State"
-                  referredVariable="#qV.xx.SeqToStm.StateToState_stm.seqDgm.bottom.st1"/>
+                  referredVariable="#qV..SeqToStm.StateToState_stm.seqDgm.bottom.st1"/>
             </assignment>
           </bottomPattern>
         </domain>
@@ -222,12 +221,12 @@
                 <ownedSource
                     xsi:type="pivot:VariableExp"
                     type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TInteractionToStateMachine"
-                    referredVariable="#qV.xx.SeqToStm.StateToState_stm.guard.TInteractionToStateMachine_i_s_v"/>
+                    referredVariable="#qV..SeqToStm.StateToState_stm.guard.TInteractionToStateMachine_i_s_v"/>
               </ownedSource>
               <ownedArguments
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Interaction"
-                  referredVariable="#qV.xx.SeqToStm.StateToState_stm.seqDgm.guard.i"/>
+                  referredVariable="#qV..SeqToStm.StateToState_stm.seqDgm.guard.i"/>
             </conditionExpression>
           </predicate>
           <predicate>
@@ -242,22 +241,22 @@
                 <ownedSource
                     xsi:type="pivot:VariableExp"
                     type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TInteractionToStateMachine"
-                    referredVariable="#qV.xx.SeqToStm.StateToState_stm.guard.TInteractionToStateMachine_i_s_v"/>
+                    referredVariable="#qV..SeqToStm.StateToState_stm.guard.TInteractionToStateMachine_i_s_v"/>
               </ownedSource>
               <ownedArguments
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class StmcMM.emof.oclas#T.StmcMM.StateMachine"
-                  referredVariable="#qV.xx.SeqToStm.StateToState_stm.stm.guard.s"/>
+                  referredVariable="#qV..SeqToStm.StateToState_stm.stm.guard.s"/>
             </conditionExpression>
           </predicate>
           <variable
-              xmi:id="qV.xx.SeqToStm.StateToState_stm.guard.TInteractionToStateMachine_i_s_v"
+              xmi:id="qV..SeqToStm.StateToState_stm.guard.TInteractionToStateMachine_i_s_v"
               name="TInteractionToStateMachine_i_s_v"
               type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TInteractionToStateMachine"/>
         </guardPattern>
         <bottomPattern>
           <variable
-              xmi:id="qV.xx.SeqToStm.StateToState_stm.bottom.sn"
+              xmi:id="qV..SeqToStm.StateToState_stm.bottom.sn"
               name="sn"
               type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
           <assignment
@@ -265,10 +264,10 @@
               targetProperty="SeqMM.emof.oclas#p.SeqMM.State.name">
             <value
                 xsi:type="pivot:VariableExp"
-                referredVariable="#qV.xx.SeqToStm.StateToState_stm.bottom.sn"/>
+                referredVariable="#qV..SeqToStm.StateToState_stm.bottom.sn"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
-                referredVariable="#qV.xx.SeqToStm.StateToState_stm.seqDgm.bottom.st1"/>
+                referredVariable="#qV..SeqToStm.StateToState_stm.seqDgm.bottom.st1"/>
           </assignment>
           <assignment
               xsi:type="qvtcb:PropertyAssignment"
@@ -276,11 +275,11 @@
             <value
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.LifeLine"
-                referredVariable="#qV.xx.SeqToStm.StateToState_stm.seqDgm.bottom.l"/>
+                referredVariable="#qV..SeqToStm.StateToState_stm.seqDgm.bottom.l"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TStateToState"
-                referredVariable="#qV.xx.SeqToStm.StateToState_stm.bottom.StateToState_stm_v"/>
+                referredVariable="#qV..SeqToStm.StateToState_stm.bottom.StateToState_stm_v"/>
           </assignment>
           <assignment
               xsi:type="qvtcb:PropertyAssignment"
@@ -288,11 +287,11 @@
             <value
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.State"
-                referredVariable="#qV.xx.SeqToStm.StateToState_stm.seqDgm.bottom.st1"/>
+                referredVariable="#qV..SeqToStm.StateToState_stm.seqDgm.bottom.st1"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TStateToState"
-                referredVariable="#qV.xx.SeqToStm.StateToState_stm.bottom.StateToState_stm_v"/>
+                referredVariable="#qV..SeqToStm.StateToState_stm.bottom.StateToState_stm_v"/>
           </assignment>
           <assignment
               xsi:type="qvtcb:PropertyAssignment"
@@ -300,11 +299,11 @@
             <value
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Interaction"
-                referredVariable="#qV.xx.SeqToStm.StateToState_stm.seqDgm.guard.i"/>
+                referredVariable="#qV..SeqToStm.StateToState_stm.seqDgm.guard.i"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TStateToState"
-                referredVariable="#qV.xx.SeqToStm.StateToState_stm.bottom.StateToState_stm_v"/>
+                referredVariable="#qV..SeqToStm.StateToState_stm.bottom.StateToState_stm_v"/>
           </assignment>
           <assignment
               xsi:type="qvtcb:PropertyAssignment"
@@ -312,11 +311,11 @@
             <value
                 xsi:type="pivot:VariableExp"
                 type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
-                referredVariable="#qV.xx.SeqToStm.StateToState_stm.bottom.sn"/>
+                referredVariable="#qV..SeqToStm.StateToState_stm.bottom.sn"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class StmcMM.emof.oclas#T.StmcMM.State"
-                referredVariable="#qV.xx.SeqToStm.StateToState_stm.stm.bottom.st2"/>
+                referredVariable="#qV..SeqToStm.StateToState_stm.stm.bottom.st2"/>
           </assignment>
           <assignment
               xsi:type="qvtcb:PropertyAssignment"
@@ -324,14 +323,14 @@
             <value
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class StmcMM.emof.oclas#T.StmcMM.State"
-                referredVariable="#qV.xx.SeqToStm.StateToState_stm.stm.bottom.st2"/>
+                referredVariable="#qV..SeqToStm.StateToState_stm.stm.bottom.st2"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TStateToState"
-                referredVariable="#qV.xx.SeqToStm.StateToState_stm.bottom.StateToState_stm_v"/>
+                referredVariable="#qV..SeqToStm.StateToState_stm.bottom.StateToState_stm_v"/>
           </assignment>
           <realizedVariable
-              xmi:id="qV.xx.SeqToStm.StateToState_stm.bottom.StateToState_stm_v"
+              xmi:id="qV..SeqToStm.StateToState_stm.bottom.StateToState_stm_v"
               name="StateToState_stm_v"
               type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TStateToState"/>
         </bottomPattern>
@@ -343,18 +342,18 @@
             xsi:type="qvtcb:CoreDomain"
             name="stm"
             isEnforceable="true"
-            typedModel="#qT.xx.SeqToStm.stm">
+            typedModel="#qT..SeqToStm.stm">
           <guardPattern>
             <variable
-                xmi:id="qV.xx.SeqToStm.MessageToTransition_stm.stm.guard.fst"
+                xmi:id="qV..SeqToStm.MessageToTransition_stm.stm.guard.fst"
                 name="fst"
                 type="pivot:Class StmcMM.emof.oclas#T.StmcMM.State"/>
             <variable
-                xmi:id="qV.xx.SeqToStm.MessageToTransition_stm.stm.guard.tst"
+                xmi:id="qV..SeqToStm.MessageToTransition_stm.stm.guard.tst"
                 name="tst"
                 type="pivot:Class StmcMM.emof.oclas#T.StmcMM.State"/>
             <variable
-                xmi:id="qV.xx.SeqToStm.MessageToTransition_stm.stm.guard.s"
+                xmi:id="qV..SeqToStm.MessageToTransition_stm.stm.guard.s"
                 name="s"
                 type="pivot:Class StmcMM.emof.oclas#T.StmcMM.StateMachine"/>
           </guardPattern>
@@ -365,11 +364,11 @@
               <value
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class StmcMM.emof.oclas#T.StmcMM.State"
-                  referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.stm.guard.fst"/>
+                  referredVariable="#qV..SeqToStm.MessageToTransition_stm.stm.guard.fst"/>
               <slotExpression
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class StmcMM.emof.oclas#T.StmcMM.Transition"
-                  referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.stm.bottom.tr"/>
+                  referredVariable="#qV..SeqToStm.MessageToTransition_stm.stm.bottom.tr"/>
             </assignment>
             <assignment
                 xsi:type="qvtcb:PropertyAssignment"
@@ -377,11 +376,11 @@
               <value
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class StmcMM.emof.oclas#T.StmcMM.State"
-                  referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.stm.guard.tst"/>
+                  referredVariable="#qV..SeqToStm.MessageToTransition_stm.stm.guard.tst"/>
               <slotExpression
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class StmcMM.emof.oclas#T.StmcMM.Transition"
-                  referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.stm.bottom.tr"/>
+                  referredVariable="#qV..SeqToStm.MessageToTransition_stm.stm.bottom.tr"/>
             </assignment>
             <assignment
                 xsi:type="qvtcb:PropertyAssignment"
@@ -389,14 +388,14 @@
               <value
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class StmcMM.emof.oclas#T.StmcMM.StateMachine"
-                  referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.stm.guard.s"/>
+                  referredVariable="#qV..SeqToStm.MessageToTransition_stm.stm.guard.s"/>
               <slotExpression
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class StmcMM.emof.oclas#T.StmcMM.Transition"
-                  referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.stm.bottom.tr"/>
+                  referredVariable="#qV..SeqToStm.MessageToTransition_stm.stm.bottom.tr"/>
             </assignment>
             <realizedVariable
-                xmi:id="qV.xx.SeqToStm.MessageToTransition_stm.stm.bottom.tr"
+                xmi:id="qV..SeqToStm.MessageToTransition_stm.stm.bottom.tr"
                 name="tr"
                 type="pivot:Class StmcMM.emof.oclas#T.StmcMM.Transition"/>
           </bottomPattern>
@@ -406,32 +405,32 @@
             name="seqDgm"
             isCheckable="true"
             isEnforceable="false"
-            typedModel="#qT.xx.SeqToStm.seqDgm">
+            typedModel="#qT..SeqToStm.seqDgm">
           <guardPattern>
             <variable
-                xmi:id="qV.xx.SeqToStm.MessageToTransition_stm.seqDgm.guard.ist2"
+                xmi:id="qV..SeqToStm.MessageToTransition_stm.seqDgm.guard.ist2"
                 name="ist2"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.State"/>
             <variable
-                xmi:id="qV.xx.SeqToStm.MessageToTransition_stm.seqDgm.guard.ist1"
+                xmi:id="qV..SeqToStm.MessageToTransition_stm.seqDgm.guard.ist1"
                 name="ist1"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.State"/>
             <variable
-                xmi:id="qV.xx.SeqToStm.MessageToTransition_stm.seqDgm.guard.i"
+                xmi:id="qV..SeqToStm.MessageToTransition_stm.seqDgm.guard.i"
                 name="i"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Interaction"/>
           </guardPattern>
           <bottomPattern>
             <variable
-                xmi:id="qV.xx.SeqToStm.MessageToTransition_stm.seqDgm.bottom.send"
+                xmi:id="qV..SeqToStm.MessageToTransition_stm.seqDgm.bottom.send"
                 name="send"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.MessageEvent"/>
             <variable
-                xmi:id="qV.xx.SeqToStm.MessageToTransition_stm.seqDgm.bottom.m1"
+                xmi:id="qV..SeqToStm.MessageToTransition_stm.seqDgm.bottom.m1"
                 name="m1"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Message"/>
             <variable
-                xmi:id="qV.xx.SeqToStm.MessageToTransition_stm.seqDgm.bottom.receive"
+                xmi:id="qV..SeqToStm.MessageToTransition_stm.seqDgm.bottom.receive"
                 name="receive"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.MessageEvent"/>
             <assignment
@@ -440,11 +439,11 @@
               <value
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Interaction"
-                  referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.seqDgm.guard.i"/>
+                  referredVariable="#qV..SeqToStm.MessageToTransition_stm.seqDgm.guard.i"/>
               <slotExpression
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Message"
-                  referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.seqDgm.bottom.m1"/>
+                  referredVariable="#qV..SeqToStm.MessageToTransition_stm.seqDgm.bottom.m1"/>
             </assignment>
           </bottomPattern>
         </domain>
@@ -461,12 +460,12 @@
                 <ownedSource
                     xsi:type="pivot:VariableExp"
                     type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TInteractionToStateMachine"
-                    referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.guard.TInteractionToStateMachine_i_s_v"/>
+                    referredVariable="#qV..SeqToStm.MessageToTransition_stm.guard.TInteractionToStateMachine_i_s_v"/>
               </ownedSource>
               <ownedArguments
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Interaction"
-                  referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.seqDgm.guard.i"/>
+                  referredVariable="#qV..SeqToStm.MessageToTransition_stm.seqDgm.guard.i"/>
             </conditionExpression>
           </predicate>
           <predicate>
@@ -481,12 +480,12 @@
                 <ownedSource
                     xsi:type="pivot:VariableExp"
                     type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TInteractionToStateMachine"
-                    referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.guard.TInteractionToStateMachine_i_s_v"/>
+                    referredVariable="#qV..SeqToStm.MessageToTransition_stm.guard.TInteractionToStateMachine_i_s_v"/>
               </ownedSource>
               <ownedArguments
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class StmcMM.emof.oclas#T.StmcMM.StateMachine"
-                  referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.stm.guard.s"/>
+                  referredVariable="#qV..SeqToStm.MessageToTransition_stm.stm.guard.s"/>
             </conditionExpression>
           </predicate>
           <predicate>
@@ -501,12 +500,12 @@
                 <ownedSource
                     xsi:type="pivot:VariableExp"
                     type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TStateToState"
-                    referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.guard.TStateToState_ist1_fst_v"/>
+                    referredVariable="#qV..SeqToStm.MessageToTransition_stm.guard.TStateToState_ist1_fst_v"/>
               </ownedSource>
               <ownedArguments
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class SeqMM.emof.oclas#T.SeqMM.State"
-                  referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.seqDgm.guard.ist1"/>
+                  referredVariable="#qV..SeqToStm.MessageToTransition_stm.seqDgm.guard.ist1"/>
             </conditionExpression>
           </predicate>
           <predicate>
@@ -521,12 +520,12 @@
                 <ownedSource
                     xsi:type="pivot:VariableExp"
                     type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TStateToState"
-                    referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.guard.TStateToState_ist1_fst_v"/>
+                    referredVariable="#qV..SeqToStm.MessageToTransition_stm.guard.TStateToState_ist1_fst_v"/>
               </ownedSource>
               <ownedArguments
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class StmcMM.emof.oclas#T.StmcMM.State"
-                  referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.stm.guard.fst"/>
+                  referredVariable="#qV..SeqToStm.MessageToTransition_stm.stm.guard.fst"/>
             </conditionExpression>
           </predicate>
           <predicate>
@@ -541,12 +540,12 @@
                 <ownedSource
                     xsi:type="pivot:VariableExp"
                     type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TStateToState"
-                    referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.guard.TStateToState_ist2_tst_v"/>
+                    referredVariable="#qV..SeqToStm.MessageToTransition_stm.guard.TStateToState_ist2_tst_v"/>
               </ownedSource>
               <ownedArguments
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class SeqMM.emof.oclas#T.SeqMM.State"
-                  referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.seqDgm.guard.ist2"/>
+                  referredVariable="#qV..SeqToStm.MessageToTransition_stm.seqDgm.guard.ist2"/>
             </conditionExpression>
           </predicate>
           <predicate>
@@ -561,30 +560,30 @@
                 <ownedSource
                     xsi:type="pivot:VariableExp"
                     type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TStateToState"
-                    referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.guard.TStateToState_ist2_tst_v"/>
+                    referredVariable="#qV..SeqToStm.MessageToTransition_stm.guard.TStateToState_ist2_tst_v"/>
               </ownedSource>
               <ownedArguments
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class StmcMM.emof.oclas#T.StmcMM.State"
-                  referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.stm.guard.tst"/>
+                  referredVariable="#qV..SeqToStm.MessageToTransition_stm.stm.guard.tst"/>
             </conditionExpression>
           </predicate>
           <variable
-              xmi:id="qV.xx.SeqToStm.MessageToTransition_stm.guard.TInteractionToStateMachine_i_s_v"
+              xmi:id="qV..SeqToStm.MessageToTransition_stm.guard.TInteractionToStateMachine_i_s_v"
               name="TInteractionToStateMachine_i_s_v"
               type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TInteractionToStateMachine"/>
           <variable
-              xmi:id="qV.xx.SeqToStm.MessageToTransition_stm.guard.TStateToState_ist1_fst_v"
+              xmi:id="qV..SeqToStm.MessageToTransition_stm.guard.TStateToState_ist1_fst_v"
               name="TStateToState_ist1_fst_v"
               type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TStateToState"/>
           <variable
-              xmi:id="qV.xx.SeqToStm.MessageToTransition_stm.guard.TStateToState_ist2_tst_v"
+              xmi:id="qV..SeqToStm.MessageToTransition_stm.guard.TStateToState_ist2_tst_v"
               name="TStateToState_ist2_tst_v"
               type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TStateToState"/>
         </guardPattern>
         <bottomPattern>
           <variable
-              xmi:id="qV.xx.SeqToStm.MessageToTransition_stm.bottom.mid"
+              xmi:id="qV..SeqToStm.MessageToTransition_stm.bottom.mid"
               name="mid"
               type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
           <assignment
@@ -592,10 +591,10 @@
               targetProperty="SeqMM.emof.oclas#p.SeqMM.Message.messageId">
             <value
                 xsi:type="pivot:VariableExp"
-                referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.bottom.mid"/>
+                referredVariable="#qV..SeqToStm.MessageToTransition_stm.bottom.mid"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
-                referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.seqDgm.bottom.m1"/>
+                referredVariable="#qV..SeqToStm.MessageToTransition_stm.seqDgm.bottom.m1"/>
           </assignment>
           <assignment
               xsi:type="qvtcb:PropertyAssignment"
@@ -603,11 +602,11 @@
             <value
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.MessageEvent"
-                referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.seqDgm.bottom.send"/>
+                referredVariable="#qV..SeqToStm.MessageToTransition_stm.seqDgm.bottom.send"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TMessageToTransition"
-                referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.bottom.MessageToTransition_stm_v"/>
+                referredVariable="#qV..SeqToStm.MessageToTransition_stm.bottom.MessageToTransition_stm_v"/>
           </assignment>
           <assignment
               xsi:type="qvtcb:PropertyAssignment"
@@ -615,11 +614,11 @@
             <value
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Message"
-                referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.seqDgm.bottom.m1"/>
+                referredVariable="#qV..SeqToStm.MessageToTransition_stm.seqDgm.bottom.m1"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TMessageToTransition"
-                referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.bottom.MessageToTransition_stm_v"/>
+                referredVariable="#qV..SeqToStm.MessageToTransition_stm.bottom.MessageToTransition_stm_v"/>
           </assignment>
           <assignment
               xsi:type="qvtcb:PropertyAssignment"
@@ -627,11 +626,11 @@
             <value
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.State"
-                referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.seqDgm.guard.ist2"/>
+                referredVariable="#qV..SeqToStm.MessageToTransition_stm.seqDgm.guard.ist2"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TMessageToTransition"
-                referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.bottom.MessageToTransition_stm_v"/>
+                referredVariable="#qV..SeqToStm.MessageToTransition_stm.bottom.MessageToTransition_stm_v"/>
           </assignment>
           <assignment
               xsi:type="qvtcb:PropertyAssignment"
@@ -639,11 +638,11 @@
             <value
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.MessageEvent"
-                referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.seqDgm.bottom.receive"/>
+                referredVariable="#qV..SeqToStm.MessageToTransition_stm.seqDgm.bottom.receive"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TMessageToTransition"
-                referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.bottom.MessageToTransition_stm_v"/>
+                referredVariable="#qV..SeqToStm.MessageToTransition_stm.bottom.MessageToTransition_stm_v"/>
           </assignment>
           <assignment
               xsi:type="qvtcb:PropertyAssignment"
@@ -651,11 +650,11 @@
             <value
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.State"
-                referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.seqDgm.guard.ist1"/>
+                referredVariable="#qV..SeqToStm.MessageToTransition_stm.seqDgm.guard.ist1"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TMessageToTransition"
-                referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.bottom.MessageToTransition_stm_v"/>
+                referredVariable="#qV..SeqToStm.MessageToTransition_stm.bottom.MessageToTransition_stm_v"/>
           </assignment>
           <assignment
               xsi:type="qvtcb:PropertyAssignment"
@@ -663,11 +662,11 @@
             <value
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Interaction"
-                referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.seqDgm.guard.i"/>
+                referredVariable="#qV..SeqToStm.MessageToTransition_stm.seqDgm.guard.i"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TMessageToTransition"
-                referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.bottom.MessageToTransition_stm_v"/>
+                referredVariable="#qV..SeqToStm.MessageToTransition_stm.bottom.MessageToTransition_stm_v"/>
           </assignment>
           <assignment
               xsi:type="qvtcb:PropertyAssignment"
@@ -675,11 +674,11 @@
             <value
                 xsi:type="pivot:VariableExp"
                 type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
-                referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.bottom.mid"/>
+                referredVariable="#qV..SeqToStm.MessageToTransition_stm.bottom.mid"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class StmcMM.emof.oclas#T.StmcMM.Transition"
-                referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.stm.bottom.tr"/>
+                referredVariable="#qV..SeqToStm.MessageToTransition_stm.stm.bottom.tr"/>
           </assignment>
           <assignment
               xsi:type="qvtcb:PropertyAssignment"
@@ -687,14 +686,14 @@
             <value
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class StmcMM.emof.oclas#T.StmcMM.Transition"
-                referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.stm.bottom.tr"/>
+                referredVariable="#qV..SeqToStm.MessageToTransition_stm.stm.bottom.tr"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TMessageToTransition"
-                referredVariable="#qV.xx.SeqToStm.MessageToTransition_stm.bottom.MessageToTransition_stm_v"/>
+                referredVariable="#qV..SeqToStm.MessageToTransition_stm.bottom.MessageToTransition_stm_v"/>
           </assignment>
           <realizedVariable
-              xmi:id="qV.xx.SeqToStm.MessageToTransition_stm.bottom.MessageToTransition_stm_v"
+              xmi:id="qV..SeqToStm.MessageToTransition_stm.bottom.MessageToTransition_stm_v"
               name="MessageToTransition_stm_v"
               type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TMessageToTransition"/>
         </bottomPattern>
@@ -706,14 +705,14 @@
             xsi:type="qvtcb:CoreDomain"
             name="stm"
             isEnforceable="true"
-            typedModel="#qT.xx.SeqToStm.stm">
+            typedModel="#qT..SeqToStm.stm">
           <guardPattern>
             <variable
-                xmi:id="qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.stm.guard.tr2"
+                xmi:id="qV..SeqToStm.MessageSequenceToTransitionSequence_stm.stm.guard.tr2"
                 name="tr2"
                 type="pivot:Class StmcMM.emof.oclas#T.StmcMM.Transition"/>
             <variable
-                xmi:id="qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.stm.guard.tst"
+                xmi:id="qV..SeqToStm.MessageSequenceToTransitionSequence_stm.stm.guard.tst"
                 name="tst"
                 type="pivot:Class StmcMM.emof.oclas#T.StmcMM.State"/>
           </guardPattern>
@@ -724,14 +723,14 @@
               <value
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class StmcMM.emof.oclas#T.StmcMM.State"
-                  referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.stm.guard.tst"/>
+                  referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.stm.guard.tst"/>
               <slotExpression
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class StmcMM.emof.oclas#T.StmcMM.Transition"
-                  referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.stm.bottom.tr1"/>
+                  referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.stm.bottom.tr1"/>
             </assignment>
             <realizedVariable
-                xmi:id="qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.stm.bottom.tr1"
+                xmi:id="qV..SeqToStm.MessageSequenceToTransitionSequence_stm.stm.bottom.tr1"
                 name="tr1"
                 type="pivot:Class StmcMM.emof.oclas#T.StmcMM.Transition"/>
           </bottomPattern>
@@ -741,28 +740,28 @@
             name="seqDgm"
             isCheckable="true"
             isEnforceable="false"
-            typedModel="#qT.xx.SeqToStm.seqDgm">
+            typedModel="#qT..SeqToStm.seqDgm">
           <guardPattern>
             <variable
-                xmi:id="qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.guard.m1"
+                xmi:id="qV..SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.guard.m1"
                 name="m1"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Message"/>
             <variable
-                xmi:id="qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.guard.est"
+                xmi:id="qV..SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.guard.est"
                 name="est"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.State"/>
             <variable
-                xmi:id="qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.guard.m2"
+                xmi:id="qV..SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.guard.m2"
                 name="m2"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Message"/>
           </guardPattern>
           <bottomPattern>
             <variable
-                xmi:id="qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.bottom.ev1"
+                xmi:id="qV..SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.bottom.ev1"
                 name="ev1"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.MessageEvent"/>
             <variable
-                xmi:id="qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.bottom.ev2"
+                xmi:id="qV..SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.bottom.ev2"
                 name="ev2"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.MessageEvent"/>
             <assignment
@@ -771,11 +770,11 @@
               <value
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Message"
-                  referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.guard.m1"/>
+                  referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.guard.m1"/>
               <slotExpression
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class SeqMM.emof.oclas#T.SeqMM.MessageEvent"
-                  referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.bottom.ev1"/>
+                  referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.bottom.ev1"/>
             </assignment>
             <assignment
                 xsi:type="qvtcb:PropertyAssignment"
@@ -783,11 +782,11 @@
               <value
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class SeqMM.emof.oclas#T.SeqMM.State"
-                  referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.guard.est"/>
+                  referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.guard.est"/>
               <slotExpression
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class SeqMM.emof.oclas#T.SeqMM.MessageEvent"
-                  referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.bottom.ev1"/>
+                  referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.bottom.ev1"/>
             </assignment>
             <assignment
                 xsi:type="qvtcb:PropertyAssignment"
@@ -795,11 +794,11 @@
               <value
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Message"
-                  referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.guard.m2"/>
+                  referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.guard.m2"/>
               <slotExpression
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class SeqMM.emof.oclas#T.SeqMM.MessageEvent"
-                  referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.bottom.ev2"/>
+                  referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.bottom.ev2"/>
             </assignment>
             <assignment
                 xsi:type="qvtcb:PropertyAssignment"
@@ -811,7 +810,7 @@
               <slotExpression
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class SeqMM.emof.oclas#T.SeqMM.MessageEvent"
-                  referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.bottom.ev2"/>
+                  referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.bottom.ev2"/>
             </assignment>
             <assignment
                 xsi:type="qvtcb:PropertyAssignment"
@@ -819,11 +818,11 @@
               <value
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class SeqMM.emof.oclas#T.SeqMM.MessageEvent"
-                  referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.bottom.ev2"/>
+                  referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.bottom.ev2"/>
               <slotExpression
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class SeqMM.emof.oclas#T.SeqMM.MessageEvent"
-                  referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.bottom.ev1"/>
+                  referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.bottom.ev1"/>
             </assignment>
             <assignment
                 xsi:type="qvtcb:PropertyAssignment"
@@ -835,7 +834,7 @@
               <slotExpression
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class SeqMM.emof.oclas#T.SeqMM.MessageEvent"
-                  referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.bottom.ev1"/>
+                  referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.bottom.ev1"/>
             </assignment>
           </bottomPattern>
         </domain>
@@ -852,12 +851,12 @@
                 <ownedSource
                     xsi:type="pivot:VariableExp"
                     type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TStateToState"
-                    referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.guard.TStateToState_est_tst_v"/>
+                    referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.guard.TStateToState_est_tst_v"/>
               </ownedSource>
               <ownedArguments
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class SeqMM.emof.oclas#T.SeqMM.State"
-                  referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.guard.est"/>
+                  referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.guard.est"/>
             </conditionExpression>
           </predicate>
           <predicate>
@@ -872,12 +871,12 @@
                 <ownedSource
                     xsi:type="pivot:VariableExp"
                     type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TStateToState"
-                    referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.guard.TStateToState_est_tst_v"/>
+                    referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.guard.TStateToState_est_tst_v"/>
               </ownedSource>
               <ownedArguments
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class StmcMM.emof.oclas#T.StmcMM.State"
-                  referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.stm.guard.tst"/>
+                  referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.stm.guard.tst"/>
             </conditionExpression>
           </predicate>
           <predicate>
@@ -892,32 +891,12 @@
                 <ownedSource
                     xsi:type="pivot:VariableExp"
                     type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TMessageToTransition"
-                    referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.guard.TMessageToTransition_m1_tr1_v"/>
+                    referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.guard.TMessageToTransition_m1_tr1_v"/>
               </ownedSource>
               <ownedArguments
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Message"
-                  referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.guard.m1"/>
-            </conditionExpression>
-          </predicate>
-          <predicate>
-            <conditionExpression
-                xsi:type="pivot:OperationCallExp"
-                type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
-                referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.%61%..ocl.OclSelf">
-              <ownedSource
-                  xsi:type="pivot:PropertyCallExp"
-                  type="pivot:Class StmcMM.emof.oclas#T.StmcMM.Transition"
-                  referredProperty="platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#p.PSeqToStm.TMessageToTransition.tr">
-                <ownedSource
-                    xsi:type="pivot:VariableExp"
-                    type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TMessageToTransition"
-                    referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.guard.TMessageToTransition_m1_tr1_v"/>
-              </ownedSource>
-              <ownedArguments
-                  xsi:type="pivot:VariableExp"
-                  type="pivot:Class StmcMM.emof.oclas#T.StmcMM.Transition"
-                  referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.stm.bottom.tr1"/>
+                  referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.guard.m1"/>
             </conditionExpression>
           </predicate>
           <predicate>
@@ -932,12 +911,12 @@
                 <ownedSource
                     xsi:type="pivot:VariableExp"
                     type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TMessageToTransition"
-                    referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.guard.TMessageToTransition_m2_tr2_v"/>
+                    referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.guard.TMessageToTransition_m2_tr2_v"/>
               </ownedSource>
               <ownedArguments
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Message"
-                  referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.guard.m2"/>
+                  referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.guard.m2"/>
             </conditionExpression>
           </predicate>
           <predicate>
@@ -952,24 +931,24 @@
                 <ownedSource
                     xsi:type="pivot:VariableExp"
                     type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TMessageToTransition"
-                    referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.guard.TMessageToTransition_m2_tr2_v"/>
+                    referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.guard.TMessageToTransition_m2_tr2_v"/>
               </ownedSource>
               <ownedArguments
                   xsi:type="pivot:VariableExp"
                   type="pivot:Class StmcMM.emof.oclas#T.StmcMM.Transition"
-                  referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.stm.guard.tr2"/>
+                  referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.stm.guard.tr2"/>
             </conditionExpression>
           </predicate>
           <variable
-              xmi:id="qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.guard.TStateToState_est_tst_v"
+              xmi:id="qV..SeqToStm.MessageSequenceToTransitionSequence_stm.guard.TStateToState_est_tst_v"
               name="TStateToState_est_tst_v"
               type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TStateToState"/>
           <variable
-              xmi:id="qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.guard.TMessageToTransition_m1_tr1_v"
+              xmi:id="qV..SeqToStm.MessageSequenceToTransitionSequence_stm.guard.TMessageToTransition_m1_tr1_v"
               name="TMessageToTransition_m1_tr1_v"
               type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TMessageToTransition"/>
           <variable
-              xmi:id="qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.guard.TMessageToTransition_m2_tr2_v"
+              xmi:id="qV..SeqToStm.MessageSequenceToTransitionSequence_stm.guard.TMessageToTransition_m2_tr2_v"
               name="TMessageToTransition_m2_tr2_v"
               type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TMessageToTransition"/>
         </guardPattern>
@@ -980,11 +959,11 @@
             <value
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Message"
-                referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.guard.m1"/>
+                referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.guard.m1"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TMessageSequenceToTransitionSequence"
-                referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.bottom.MessageSequenceToTransitionSequence_stm_v"/>
+                referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.bottom.MessageSequenceToTransitionSequence_stm_v"/>
           </assignment>
           <assignment
               xsi:type="qvtcb:PropertyAssignment"
@@ -992,11 +971,11 @@
             <value
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.MessageEvent"
-                referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.bottom.ev1"/>
+                referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.bottom.ev1"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TMessageSequenceToTransitionSequence"
-                referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.bottom.MessageSequenceToTransitionSequence_stm_v"/>
+                referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.bottom.MessageSequenceToTransitionSequence_stm_v"/>
           </assignment>
           <assignment
               xsi:type="qvtcb:PropertyAssignment"
@@ -1004,11 +983,11 @@
             <value
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.State"
-                referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.guard.est"/>
+                referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.guard.est"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TMessageSequenceToTransitionSequence"
-                referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.bottom.MessageSequenceToTransitionSequence_stm_v"/>
+                referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.bottom.MessageSequenceToTransitionSequence_stm_v"/>
           </assignment>
           <assignment
               xsi:type="qvtcb:PropertyAssignment"
@@ -1016,11 +995,11 @@
             <value
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.MessageEvent"
-                referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.bottom.ev2"/>
+                referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.bottom.ev2"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TMessageSequenceToTransitionSequence"
-                referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.bottom.MessageSequenceToTransitionSequence_stm_v"/>
+                referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.bottom.MessageSequenceToTransitionSequence_stm_v"/>
           </assignment>
           <assignment
               xsi:type="qvtcb:PropertyAssignment"
@@ -1028,11 +1007,11 @@
             <value
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Message"
-                referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.guard.m2"/>
+                referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.seqDgm.guard.m2"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TMessageSequenceToTransitionSequence"
-                referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.bottom.MessageSequenceToTransitionSequence_stm_v"/>
+                referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.bottom.MessageSequenceToTransitionSequence_stm_v"/>
           </assignment>
           <assignment
               xsi:type="qvtcb:PropertyAssignment"
@@ -1040,14 +1019,14 @@
             <value
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class StmcMM.emof.oclas#T.StmcMM.Transition"
-                referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.stm.bottom.tr1"/>
+                referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.stm.bottom.tr1"/>
             <slotExpression
                 xsi:type="pivot:VariableExp"
                 type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TMessageSequenceToTransitionSequence"
-                referredVariable="#qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.bottom.MessageSequenceToTransitionSequence_stm_v"/>
+                referredVariable="#qV..SeqToStm.MessageSequenceToTransitionSequence_stm.bottom.MessageSequenceToTransitionSequence_stm_v"/>
           </assignment>
           <realizedVariable
-              xmi:id="qV.xx.SeqToStm.MessageSequenceToTransitionSequence_stm.bottom.MessageSequenceToTransitionSequence_stm_v"
+              xmi:id="qV..SeqToStm.MessageSequenceToTransitionSequence_stm.bottom.MessageSequenceToTransitionSequence_stm_v"
               name="MessageSequenceToTransitionSequence_stm_v"
               type="pivot:Class platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas#T.PSeqToStm.TMessageSequenceToTransitionSequence"/>
         </bottomPattern>

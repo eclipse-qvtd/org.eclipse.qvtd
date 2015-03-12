@@ -165,8 +165,14 @@ public abstract class QVTcoreBaseDeclarationVisitor extends EssentialOCLDeclarat
 			csMapping.setOwnedInPathName(csPathName);
 			org.eclipse.ocl.pivot.Package asPackage = asTransformation.getOwningPackage();
 			String asPackageName = asPackage != null ? asPackage.getName() : null;
-			Namespace asScope = (asPackageName == null) || "".equals(asPackageName) ? asPackage : null;
-			context.refreshPathName(csPathName, asTransformation, asScope);
+			if ((asPackageName == null) || "".equals(asPackageName)) {
+				@SuppressWarnings("null") @NonNull PathElementCS csPathElement = BaseCSFactory.eINSTANCE.createPathElementCS();
+				csPathName.getOwnedPathElements().add(csPathElement);
+				csPathElement.setReferredElement(asTransformation);
+			}
+			else {
+				context.refreshPathName(csPathName, asTransformation, null);
+			}
 		}
 		else {
 			csMapping.setOwnedInPathName(null);

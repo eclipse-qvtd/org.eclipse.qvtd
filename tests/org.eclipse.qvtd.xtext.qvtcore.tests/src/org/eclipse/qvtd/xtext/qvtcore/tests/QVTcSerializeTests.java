@@ -141,7 +141,8 @@ public class QVTcSerializeTests extends LoadTestCase
 		doSerializeRoundTripFromCS("Class2RDBMS/Class2RDBMS");
 	}
 	
+	/* FIXME get better source
 	public void testSerialize_Seq2Stm() throws Exception {
 		doSerializeRoundTripFromAS("Seq2Stm/SeqToStm");
-	}
+	} */
 }

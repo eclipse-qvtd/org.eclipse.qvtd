@@ -1,137 +1,112 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pivot:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot" xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage"
-    name="SeqMM.emof.oclas" externalURI="platform:/resource/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/Seq2Stm/SeqMM.emof.oclas">
+<pivot:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
+    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage" name="SeqMM.emof.oclas" externalURI="platform:/resource/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/Seq2Stm/SeqMM.emof.oclas">
   <ownedPackages xmi:id="P.SeqMM" name="SeqMM" URI="SeqMM">
     <ownedClasses xmi:id="T.SeqMM.Dummy" name="Dummy" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
-      <ownedProperties xmi:id="p.SeqMM.Dummy.hasInteraction" name="hasInteraction"
-          type="#//@ownedPackages.1/@ownedClasses.0" isComposite="true" opposite="#p.SeqMM.Interaction.Dummy"/>
-      <ownedProperties xmi:id="p.SeqMM.Dummy.containedState" name="containedState"
-          type="#//@ownedPackages.1/@ownedClasses.1" isComposite="true" opposite="#p.SeqMM.State.Dummy"/>
+      <ownedProperties xmi:id="p.SeqMM.Dummy.hasInteraction" name="hasInteraction" type="#//@ownedPackages.1/@ownedClasses.0" isComposite="true"
+          opposite="#p.SeqMM.Interaction.Dummy"/>
+      <ownedProperties xmi:id="p.SeqMM.Dummy.containedState" name="containedState" type="#//@ownedPackages.1/@ownedClasses.1" isComposite="true"
+          opposite="#p.SeqMM.State.Dummy"/>
     </ownedClasses>
     <ownedClasses xmi:id="T.SeqMM.Interaction" name="Interaction" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
       <ownedProperties xmi:id="p.SeqMM.Interaction.name" name="name" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
-      <ownedProperties xmi:id="p.SeqMM.Interaction.lifeline" name="lifeline" type="#//@ownedPackages.1/@ownedClasses.2"
-          isComposite="true" opposite="#p.SeqMM.LifeLine.interaction"/>
-      <ownedProperties xmi:id="p.SeqMM.Interaction.message" name="message" type="#//@ownedPackages.1/@ownedClasses.3"
-          isComposite="true" opposite="#p.SeqMM.Message.interaction"/>
-      <ownedProperties xmi:id="p.SeqMM.Interaction.Dummy" name="Dummy" isRequired="false"
-          type="#T.SeqMM.Dummy" isImplicit="true" opposite="#p.SeqMM.Dummy.hasInteraction"/>
+      <ownedProperties xmi:id="p.SeqMM.Interaction.lifeline" name="lifeline" type="#//@ownedPackages.1/@ownedClasses.2" isComposite="true"
+          opposite="#p.SeqMM.LifeLine.interaction"/>
+      <ownedProperties xmi:id="p.SeqMM.Interaction.message" name="message" type="#//@ownedPackages.1/@ownedClasses.3" isComposite="true"
+          opposite="#p.SeqMM.Message.interaction"/>
+      <ownedProperties xmi:id="p.SeqMM.Interaction.Dummy" name="Dummy" isRequired="false" type="#T.SeqMM.Dummy" isImplicit="true" opposite="#p.SeqMM.Dummy.hasInteraction"/>
     </ownedClasses>
     <ownedClasses xmi:id="T.SeqMM.LifeLine" name="LifeLine" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
       <ownedProperties xmi:id="p.SeqMM.LifeLine.name" name="name" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
-      <ownedProperties xmi:id="p.SeqMM.LifeLine.msgEvent" name="msgEvent" type="#//@ownedPackages.1/@ownedClasses.4"
-          isComposite="true" opposite="#p.SeqMM.MessageEvent.lifeline"/>
-      <ownedProperties xmi:id="p.SeqMM.LifeLine.state" name="state" type="#//@ownedPackages.1/@ownedClasses.1"
-          opposite="#p.SeqMM.State.lifeline"/>
-      <ownedProperties xmi:id="p.SeqMM.LifeLine.interaction" name="interaction" type="#T.SeqMM.Interaction"
-          opposite="#p.SeqMM.Interaction.lifeline"/>
+      <ownedProperties xmi:id="p.SeqMM.LifeLine.msgEvent" name="msgEvent" type="#//@ownedPackages.1/@ownedClasses.4" isComposite="true"
+          opposite="#p.SeqMM.MessageEvent.lifeline"/>
+      <ownedProperties xmi:id="p.SeqMM.LifeLine.state" name="state" type="#//@ownedPackages.1/@ownedClasses.1" opposite="#p.SeqMM.State.lifeline"/>
+      <ownedProperties xmi:id="p.SeqMM.LifeLine.interaction" name="interaction" type="#T.SeqMM.Interaction" opposite="#p.SeqMM.Interaction.lifeline"/>
     </ownedClasses>
     <ownedClasses xmi:id="T.SeqMM.Message" name="Message" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
       <ownedProperties xmi:id="p.SeqMM.Message.messageId" name="messageId" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
-      <ownedProperties xmi:id="p.SeqMM.Message.interaction" name="interaction" type="#T.SeqMM.Interaction"
-          opposite="#p.SeqMM.Interaction.message"/>
-      <ownedProperties xmi:id="p.SeqMM.Message.event" name="event" type="#//@ownedPackages.1/@ownedClasses.4"
-          opposite="#p.SeqMM.MessageEvent.message"/>
+      <ownedProperties xmi:id="p.SeqMM.Message.interaction" name="interaction" type="#T.SeqMM.Interaction" opposite="#p.SeqMM.Interaction.message"/>
+      <ownedProperties xmi:id="p.SeqMM.Message.event" name="event" type="#//@ownedPackages.1/@ownedClasses.4" opposite="#p.SeqMM.MessageEvent.message"/>
     </ownedClasses>
     <ownedClasses xmi:id="T.SeqMM.State" name="State" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
       <ownedProperties xmi:id="p.SeqMM.State.name" name="name" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
-      <ownedProperties xmi:id="p.SeqMM.State.messageevent" name="messageevent" type="#//@ownedPackages.1/@ownedClasses.4"
-          opposite="#p.SeqMM.MessageEvent.state"/>
-      <ownedProperties xmi:id="p.SeqMM.State.lifeline" name="lifeline" type="#//@ownedPackages.1/@ownedClasses.2"
-          opposite="#p.SeqMM.LifeLine.state"/>
-      <ownedProperties xmi:id="p.SeqMM.State.Dummy" name="Dummy" isRequired="false"
-          type="#T.SeqMM.Dummy" isImplicit="true" opposite="#p.SeqMM.Dummy.containedState"/>
+      <ownedProperties xmi:id="p.SeqMM.State.messageevent" name="messageevent" type="#//@ownedPackages.1/@ownedClasses.4" opposite="#p.SeqMM.MessageEvent.state"/>
+      <ownedProperties xmi:id="p.SeqMM.State.lifeline" name="lifeline" type="#//@ownedPackages.1/@ownedClasses.2" opposite="#p.SeqMM.LifeLine.state"/>
+      <ownedProperties xmi:id="p.SeqMM.State.Dummy" name="Dummy" isRequired="false" type="#T.SeqMM.Dummy" isImplicit="true" opposite="#p.SeqMM.Dummy.containedState"/>
     </ownedClasses>
     <ownedClasses xmi:id="T.SeqMM.Event" name="Event" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement"/>
     <ownedClasses xmi:id="T.SeqMM.MessageEvent" name="MessageEvent" superClasses="#T.SeqMM.Event">
-      <ownedProperties xmi:id="p.SeqMM.MessageEvent.type" name="type" type="#T.SeqMM.MessageEventType"
-          defaultValueString="Send"/>
-      <ownedProperties xmi:id="p.SeqMM.MessageEvent.prev" name="prev" type="#T.SeqMM.MessageEvent"
-          opposite="#//@ownedPackages.0/@ownedClasses.6/@ownedProperties.7"/>
-      <ownedProperties xmi:id="p.SeqMM.MessageEvent.next" name="next" type="#T.SeqMM.MessageEvent"
-          opposite="#//@ownedPackages.0/@ownedClasses.6/@ownedProperties.6"/>
-      <ownedProperties xmi:id="p.SeqMM.MessageEvent.message" name="message" type="#T.SeqMM.Message"
-          opposite="#p.SeqMM.Message.event"/>
-      <ownedProperties xmi:id="p.SeqMM.MessageEvent.lifeline" name="lifeline" type="#T.SeqMM.LifeLine"
-          opposite="#p.SeqMM.LifeLine.msgEvent"/>
-      <ownedProperties xmi:id="p.SeqMM.MessageEvent.state" name="state" type="#T.SeqMM.State"
-          opposite="#p.SeqMM.State.messageevent"/>
-      <ownedProperties name="MessageEvent" type="#//@ownedPackages.1/@ownedClasses.5"
-          isImplicit="true" opposite="#p.SeqMM.MessageEvent.next"/>
-      <ownedProperties name="MessageEvent" type="#//@ownedPackages.1/@ownedClasses.5"
-          isImplicit="true" opposite="#p.SeqMM.MessageEvent.prev"/>
+      <ownedProperties xmi:id="p.SeqMM.MessageEvent.type" name="type" type="#T.SeqMM.MessageEventType" defaultValueString="Send"/>
+      <ownedProperties xmi:id="p.SeqMM.MessageEvent.prev" name="prev" type="#T.SeqMM.MessageEvent" opposite="#//@ownedPackages.0/@ownedClasses.6/@ownedProperties.7"/>
+      <ownedProperties xmi:id="p.SeqMM.MessageEvent.next" name="next" type="#T.SeqMM.MessageEvent" opposite="#//@ownedPackages.0/@ownedClasses.6/@ownedProperties.6"/>
+      <ownedProperties xmi:id="p.SeqMM.MessageEvent.message" name="message" type="#T.SeqMM.Message" opposite="#p.SeqMM.Message.event"/>
+      <ownedProperties xmi:id="p.SeqMM.MessageEvent.lifeline" name="lifeline" type="#T.SeqMM.LifeLine" opposite="#p.SeqMM.LifeLine.msgEvent"/>
+      <ownedProperties xmi:id="p.SeqMM.MessageEvent.state" name="state" type="#T.SeqMM.State" opposite="#p.SeqMM.State.messageevent"/>
+      <ownedProperties name="MessageEvent" type="#//@ownedPackages.1/@ownedClasses.5" isImplicit="true" opposite="#p.SeqMM.MessageEvent.next"/>
+      <ownedProperties name="MessageEvent" type="#//@ownedPackages.1/@ownedClasses.5" isImplicit="true" opposite="#p.SeqMM.MessageEvent.prev"/>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:Enumeration" xmi:id="T.SeqMM.MessageEventType" name="MessageEventType"
-        superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Enumeration">
+    <ownedClasses xsi:type="pivot:Enumeration" xmi:id="T.SeqMM.MessageEventType" name="MessageEventType" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.Enumeration">
       <ownedLiterals name="Send"/>
       <ownedLiterals name="Receive"/>
     </ownedClasses>
   </ownedPackages>
-  <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage"
-      nsPrefix="orphanage">
-    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.6"
-        elementType="#T.SeqMM.Interaction" lower="1">
+  <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage" nsPrefix="orphanage">
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.6" elementType="#T.SeqMM.Interaction"
+        lower="1">
       <ownedBindings>
         <ownedSubstitutions actual="#T.SeqMM.Interaction" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.7"
-        elementType="#T.SeqMM.State" lower="1">
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.7" elementType="#T.SeqMM.State"
+        lower="1">
       <ownedBindings>
         <ownedSubstitutions actual="#T.SeqMM.State" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.8"
-        elementType="#T.SeqMM.LifeLine" lower="1">
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.8" elementType="#T.SeqMM.LifeLine"
+        lower="1">
       <ownedBindings>
         <ownedSubstitutions actual="#T.SeqMM.LifeLine" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.9"
-        elementType="#T.SeqMM.Message" lower="1">
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.9" elementType="#T.SeqMM.Message"
+        lower="1">
       <ownedBindings>
         <ownedSubstitutions actual="#T.SeqMM.Message" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.10"
-        elementType="#T.SeqMM.MessageEvent" lower="1">
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.10" elementType="#T.SeqMM.MessageEvent"
+        lower="1">
       <ownedBindings>
         <ownedSubstitutions actual="#T.SeqMM.MessageEvent" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:BagType" name="Bag" superClasses="#//@ownedPackages.1/@ownedClasses.11"
-        elementType="#T.SeqMM.MessageEvent">
+    <ownedClasses xsi:type="pivot:BagType" name="Bag" superClasses="#//@ownedPackages.1/@ownedClasses.11" elementType="#T.SeqMM.MessageEvent">
       <ownedBindings>
         <ownedSubstitutions actual="#T.SeqMM.MessageEvent" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..BagT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.12"
-        elementType="#T.SeqMM.Interaction">
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.12" elementType="#T.SeqMM.Interaction">
       <ownedBindings>
         <ownedSubstitutions actual="#T.SeqMM.Interaction" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.13"
-        elementType="#T.SeqMM.State">
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.13" elementType="#T.SeqMM.State">
       <ownedBindings>
         <ownedSubstitutions actual="#T.SeqMM.State" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.14"
-        elementType="#T.SeqMM.LifeLine">
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.14" elementType="#T.SeqMM.LifeLine">
       <ownedBindings>
         <ownedSubstitutions actual="#T.SeqMM.LifeLine" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.15"
-        elementType="#T.SeqMM.Message">
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.15" elementType="#T.SeqMM.Message">
       <ownedBindings>
         <ownedSubstitutions actual="#T.SeqMM.Message" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
       </ownedBindings>
     </ownedClasses>
-    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.11"
-        elementType="#T.SeqMM.MessageEvent">
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.11" elementType="#T.SeqMM.MessageEvent">
       <ownedBindings>
         <ownedSubstitutions actual="#T.SeqMM.MessageEvent" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
       </ownedBindings>
