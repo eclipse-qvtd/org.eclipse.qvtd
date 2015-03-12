@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pivot:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot"
+    xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage" name="SeqToStm.ecore.oclas" externalURI="platform:/resource/org.eclipse.qvtd.build.qvtrtoqvtc.tests/bin/org/eclipse/qvtd/build/qvtrtoqvtc/tests//seqtostm/SeqToStm.ecore.oclas">
+  <ownedPackages xmi:id="P.PSeqToStm" name="PSeqToStm" URI="PSeqToStm">
+    <ownedClasses xmi:id="T.PSeqToStm.TInteractionToStateMachine" name="TInteractionToStateMachine">
+      <ownedProperties xmi:id="p.PSeqToStm.TInteractionToStateMachine.sn" name="sn" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TInteractionToStateMachine.i" name="i" type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Interaction"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TInteractionToStateMachine.s" name="s" type="pivot:Class StmcMM.emof.oclas#T.StmcMM.StateMachine"/>
+    </ownedClasses>
+    <ownedClasses xmi:id="T.PSeqToStm.TStateToState" name="TStateToState">
+      <ownedProperties xmi:id="p.PSeqToStm.TStateToState.sn" name="sn" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TStateToState.st1" name="st1" type="pivot:Class SeqMM.emof.oclas#T.SeqMM.State"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TStateToState.l" name="l" type="pivot:Class SeqMM.emof.oclas#T.SeqMM.LifeLine"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TStateToState.i" name="i" type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Interaction"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TStateToState.st2" name="st2" type="pivot:Class StmcMM.emof.oclas#T.StmcMM.State"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TStateToState.s" name="s" type="pivot:Class StmcMM.emof.oclas#T.StmcMM.StateMachine"/>
+    </ownedClasses>
+    <ownedClasses xmi:id="T.PSeqToStm.TMessageToTransition" name="TMessageToTransition">
+      <ownedProperties xmi:id="p.PSeqToStm.TMessageToTransition.mid" name="mid" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TMessageToTransition.m1" name="m1" type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Message"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TMessageToTransition.send" name="send" type="pivot:Class SeqMM.emof.oclas#T.SeqMM.MessageEvent"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TMessageToTransition.ist1" name="ist1" type="pivot:Class SeqMM.emof.oclas#T.SeqMM.State"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TMessageToTransition.receive" name="receive" type="pivot:Class SeqMM.emof.oclas#T.SeqMM.MessageEvent"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TMessageToTransition.ist2" name="ist2" type="pivot:Class SeqMM.emof.oclas#T.SeqMM.State"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TMessageToTransition.i" name="i" type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Interaction"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TMessageToTransition.tr" name="tr" type="pivot:Class StmcMM.emof.oclas#T.StmcMM.Transition"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TMessageToTransition.fst" name="fst" type="pivot:Class StmcMM.emof.oclas#T.StmcMM.State"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TMessageToTransition.tst" name="tst" type="pivot:Class StmcMM.emof.oclas#T.StmcMM.State"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TMessageToTransition.sm" name="sm" type="pivot:Class StmcMM.emof.oclas#T.StmcMM.SendMsg"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TMessageToTransition.m2" name="m2" type="pivot:Class StmcMM.emof.oclas#T.StmcMM.Message"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TMessageToTransition.s" name="s" type="pivot:Class StmcMM.emof.oclas#T.StmcMM.StateMachine"/>
+    </ownedClasses>
+    <ownedClasses xmi:id="T.PSeqToStm.TMessageSequenceToTransitionSequence" name="TMessageSequenceToTransitionSequence">
+      <ownedProperties xmi:id="p.PSeqToStm.TMessageSequenceToTransitionSequence.ev1" name="ev1" type="pivot:Class SeqMM.emof.oclas#T.SeqMM.MessageEvent"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TMessageSequenceToTransitionSequence.m1" name="m1" type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Message"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TMessageSequenceToTransitionSequence.est" name="est" type="pivot:Class SeqMM.emof.oclas#T.SeqMM.State"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TMessageSequenceToTransitionSequence.ev2" name="ev2" type="pivot:Class SeqMM.emof.oclas#T.SeqMM.MessageEvent"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TMessageSequenceToTransitionSequence.m2" name="m2" type="pivot:Class SeqMM.emof.oclas#T.SeqMM.Message"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TMessageSequenceToTransitionSequence.tr1" name="tr1" type="pivot:Class StmcMM.emof.oclas#T.StmcMM.Transition"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TMessageSequenceToTransitionSequence.tst" name="tst" type="pivot:Class StmcMM.emof.oclas#T.StmcMM.State"/>
+      <ownedProperties xmi:id="p.PSeqToStm.TMessageSequenceToTransitionSequence.tr2" name="tr2" type="pivot:Class StmcMM.emof.oclas#T.StmcMM.Transition"/>
+    </ownedClasses>
+  </ownedPackages>
+</pivot:Model>

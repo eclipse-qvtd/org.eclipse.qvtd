@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pivot:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:pivot="http://www.eclipse.org/ocl/2015/Pivot" xsi:schemaLocation="http://www.eclipse.org/ocl/2015/Pivot java://org.eclipse.ocl.pivot.PivotPackage"
+    name="StmcMM.emof.oclas" externalURI="platform:/resource/org.eclipse.qvtd.xtext.qvtcore.tests/src/org/eclipse/qvtd/xtext/qvtcore/tests/Seq2Stm/StmcMM.emof.oclas">
+  <ownedPackages xmi:id="P.StmcMM" name="StmcMM" URI="StmcMM">
+    <ownedClasses xmi:id="T.StmcMM.Dummy" name="Dummy" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
+      <ownedProperties xmi:id="p.StmcMM.Dummy.containsStateMachine" name="containsStateMachine"
+          type="#//@ownedPackages.1/@ownedClasses.0" isComposite="true" opposite="#p.StmcMM.StateMachine.Dummy"/>
+      <ownedProperties xmi:id="p.StmcMM.Dummy.containsMessage" name="containsMessage"
+          type="#//@ownedPackages.1/@ownedClasses.1" isComposite="true" opposite="#p.StmcMM.Message.Dummy"/>
+    </ownedClasses>
+    <ownedClasses xmi:id="T.StmcMM.StateMachine" name="StateMachine" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
+      <ownedProperties xmi:id="p.StmcMM.StateMachine.name" name="name" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
+      <ownedProperties xmi:id="p.StmcMM.StateMachine.state" name="state" type="#//@ownedPackages.1/@ownedClasses.2"
+          isComposite="true" opposite="#p.StmcMM.State.owner"/>
+      <ownedProperties xmi:id="p.StmcMM.StateMachine.transition" name="transition"
+          type="#//@ownedPackages.1/@ownedClasses.3" isComposite="true" opposite="#p.StmcMM.Transition.owner"/>
+      <ownedProperties xmi:id="p.StmcMM.StateMachine.Dummy" name="Dummy" isRequired="false"
+          type="#T.StmcMM.Dummy" isImplicit="true" opposite="#p.StmcMM.Dummy.containsStateMachine"/>
+    </ownedClasses>
+    <ownedClasses xmi:id="T.StmcMM.State" name="State" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
+      <ownedProperties xmi:id="p.StmcMM.State.name" name="name" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
+      <ownedProperties xmi:id="p.StmcMM.State.owner" name="owner" type="#T.StmcMM.StateMachine"
+          opposite="#p.StmcMM.StateMachine.state"/>
+      <ownedProperties xmi:id="p.StmcMM.State.inTransition" name="inTransition" type="#//@ownedPackages.1/@ownedClasses.3"
+          opposite="#p.StmcMM.Transition.toState"/>
+      <ownedProperties xmi:id="p.StmcMM.State.outTransition" name="outTransition"
+          type="#//@ownedPackages.1/@ownedClasses.3" opposite="#p.StmcMM.Transition.fromState"/>
+    </ownedClasses>
+    <ownedClasses xmi:id="T.StmcMM.Transition" name="Transition" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
+      <ownedProperties xmi:id="p.StmcMM.Transition.name" name="name" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
+      <ownedProperties xmi:id="p.StmcMM.Transition.guard" name="guard" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
+      <ownedProperties xmi:id="p.StmcMM.Transition.owner" name="owner" type="#T.StmcMM.StateMachine"
+          opposite="#p.StmcMM.StateMachine.transition"/>
+      <ownedProperties xmi:id="p.StmcMM.Transition.toState" name="toState" type="#T.StmcMM.State"
+          opposite="#p.StmcMM.State.inTransition"/>
+      <ownedProperties xmi:id="p.StmcMM.Transition.fromState" name="fromState" type="#T.StmcMM.State"
+          opposite="#p.StmcMM.State.outTransition"/>
+      <ownedProperties xmi:id="p.StmcMM.Transition.trigger" name="trigger" type="#T.StmcMM.Event"
+          isComposite="true" opposite="#p.StmcMM.Event.Transition"/>
+      <ownedProperties xmi:id="p.StmcMM.Transition.action" name="action" type="#T.StmcMM.Action"
+          isComposite="true" opposite="#p.StmcMM.Action.Transition"/>
+    </ownedClasses>
+    <ownedClasses xmi:id="T.StmcMM.Event" name="Event" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
+      <ownedProperties xmi:id="p.StmcMM.Event.name" name="name" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
+      <ownedProperties xmi:id="p.StmcMM.Event.Transition" name="Transition" isRequired="false"
+          type="#T.StmcMM.Transition" isImplicit="true" opposite="#p.StmcMM.Transition.trigger"/>
+    </ownedClasses>
+    <ownedClasses xmi:id="T.StmcMM.Action" name="Action" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
+      <ownedProperties xmi:id="p.StmcMM.Action.name" name="name" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
+      <ownedProperties xmi:id="p.StmcMM.Action.Transition" name="Transition" isRequired="false"
+          type="#T.StmcMM.Transition" isImplicit="true" opposite="#p.StmcMM.Transition.action"/>
+    </ownedClasses>
+    <ownedClasses xmi:id="T.StmcMM.Message" name="Message" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclElement">
+      <ownedProperties xmi:id="p.StmcMM.Message.messageId" name="messageId" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"/>
+      <ownedProperties xmi:id="p.StmcMM.Message.SendMsg" name="SendMsg" type="#//@ownedPackages.1/@ownedClasses.4"
+          isImplicit="true" opposite="#p.StmcMM.SendMsg.message"/>
+      <ownedProperties xmi:id="p.StmcMM.Message.Dummy" name="Dummy" isRequired="false"
+          type="#T.StmcMM.Dummy" isImplicit="true" opposite="#p.StmcMM.Dummy.containsMessage"/>
+    </ownedClasses>
+    <ownedClasses xmi:id="T.StmcMM.SendMsg" name="SendMsg" superClasses="#T.StmcMM.Action">
+      <ownedProperties xmi:id="p.StmcMM.SendMsg.message" name="message" type="#T.StmcMM.Message"
+          opposite="#p.StmcMM.Message.SendMsg"/>
+    </ownedClasses>
+  </ownedPackages>
+  <ownedPackages xmi:id="P.$$" name="$$" URI="http://www.eclipse.org/ocl/2015/Orphanage"
+      nsPrefix="orphanage">
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.5"
+        elementType="#T.StmcMM.StateMachine" lower="1">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.StmcMM.StateMachine" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.6"
+        elementType="#T.StmcMM.Message" lower="1">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.StmcMM.Message" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.7"
+        elementType="#T.StmcMM.State" lower="1">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.StmcMM.State" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:SetType" name="Set" superClasses="#//@ownedPackages.1/@ownedClasses.8"
+        elementType="#T.StmcMM.Transition" lower="1">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.StmcMM.Transition" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..SetT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:BagType" name="Bag" superClasses="#//@ownedPackages.1/@ownedClasses.9"
+        elementType="#T.StmcMM.SendMsg">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.StmcMM.SendMsg" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..BagT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.10"
+        elementType="#T.StmcMM.StateMachine">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.StmcMM.StateMachine" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.11"
+        elementType="#T.StmcMM.Message">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.StmcMM.Message" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.12"
+        elementType="#T.StmcMM.State">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.StmcMM.State" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="UniqueCollection" superClasses="#//@ownedPackages.1/@ownedClasses.13"
+        elementType="#T.StmcMM.Transition">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.StmcMM.Transition" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..UniqueCollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
+        elementType="#T.StmcMM.SendMsg">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.StmcMM.SendMsg" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
+        elementType="#T.StmcMM.StateMachine">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.StmcMM.StateMachine" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
+        elementType="#T.StmcMM.Message">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.StmcMM.Message" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
+        elementType="#T.StmcMM.State">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.StmcMM.State" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+    <ownedClasses xsi:type="pivot:CollectionType" name="Collection" superClasses="http://www.eclipse.org/ocl/2015/Library.oclas#T.ocl.OclAny"
+        elementType="#T.StmcMM.Transition">
+      <ownedBindings>
+        <ownedSubstitutions actual="#T.StmcMM.Transition" formal="http://www.eclipse.org/ocl/2015/Library.oclas#t.ocl..CollectionT"/>
+      </ownedBindings>
+    </ownedClasses>
+  </ownedPackages>
+</pivot:Model>

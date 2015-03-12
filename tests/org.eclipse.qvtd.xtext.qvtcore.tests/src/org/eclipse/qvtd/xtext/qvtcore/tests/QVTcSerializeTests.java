@@ -37,7 +37,21 @@ import org.eclipse.xtext.resource.XtextResource;
  */
 public class QVTcSerializeTests extends LoadTestCase
 {
-	protected void doSerializeRoundTrip(@NonNull String stem) throws Exception {
+	protected void doSerializeRoundTripFromAS(@NonNull String stem) throws Exception {
+		OCL ocl1 = OCL.newInstance(OCL.NO_PROJECTS);
+		OCL ocl2 = OCL.newInstance(OCL.NO_PROJECTS);
+		URI inputURI = getProjectFileURI(stem + ".qvtcas");
+		Resource asResource1 = ocl1.getMetamodelManager().getASResourceSet().getResource(inputURI, true);
+		URI referenceURI = getProjectFileURI(stem + "ref.qvtcas");
+		doSerialize(inputURI, stem, referenceURI, null, true, true);
+		Resource asResource3 = doLoad_Concrete(ocl2, stem + ".serialized.qvtc", stem + ".serialized.qvtcas");
+		((Model)asResource3.getContents().get(0)).setExternalURI(((Model)asResource1.getContents().get(0)).getExternalURI());
+		assertSameModel(asResource1, asResource3);
+		ocl1.dispose();
+		ocl2.dispose();
+	}	
+
+	protected void doSerializeRoundTripFromCS(@NonNull String stem) throws Exception {
 		OCL ocl1 = OCL.newInstance(OCL.NO_PROJECTS);
 		OCL ocl2 = OCL.newInstance(OCL.NO_PROJECTS);
 		Resource asResource1 = doLoad_Concrete(ocl1, stem + ".qvtc", stem + ".qvtcas");
@@ -124,6 +138,10 @@ public class QVTcSerializeTests extends LoadTestCase
 	}
 	
 	public void testSerialize_Class2RDBMS() throws Exception {
-		doSerializeRoundTrip("Class2RDBMS/Class2RDBMS");
+		doSerializeRoundTripFromCS("Class2RDBMS/Class2RDBMS");
+	}
+	
+	public void testSerialize_Seq2Stm() throws Exception {
+		doSerializeRoundTripFromAS("Seq2Stm/SeqToStm");
 	}
 }
