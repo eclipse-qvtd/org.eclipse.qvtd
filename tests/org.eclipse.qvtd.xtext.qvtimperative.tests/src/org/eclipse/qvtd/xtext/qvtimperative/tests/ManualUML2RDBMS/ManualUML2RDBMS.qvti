@@ -360,13 +360,14 @@ map associationToForeignKeyLM in ManualUML2RDBMS {
         a2f.owner := sc2t;
         a2f.referenced := dc2t;
         a2f.association := a;
-        a2f.name := if a.destination=dc and a.source=sc
+        -- FIXME Bug 461994 working around Bug 459397; dc2 is gratuitous
+        a2f.name := let dc2 = dc in if a.destination=dc and a.source=sc
                         then a.name
                         else if a.destination<>dc and a.source=sc
-                        then dc.name+'_'+a.name
+                        then dc2.name +'_'+a.name
                         else if a.destination=dc and a.source<>sc
                         then a.name+'_'+sc.name
-                        else dc.name+'_'+a.name+'_'+sc.name
+                        else dc2.name+'_'+a.name+'_'+sc.name
                         endif endif endif;
     }
 }

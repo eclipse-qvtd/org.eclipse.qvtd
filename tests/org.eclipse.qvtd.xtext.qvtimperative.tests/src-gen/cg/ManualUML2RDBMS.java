@@ -1137,18 +1137,21 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * a2f = sc2t;
      * a2f = dc2t;
      * a2f = a;
-     * a2f = if a.destination = dc and a.source = sc
-     *   then a.name
-     *   else
-     *     if a.destination <> dc and a.source = sc
-     *     then dc.name + '_' + a.name
+     * a2f = let dc2 : uml::Class = dc;
+     * 
+     *   in
+     *     if a.destination = dc and a.source = sc
+     *     then a.name
      *     else
-     *       if a.destination = dc and a.source <> sc
-     *       then a.name + '_' + sc.name
-     *       else dc.name + '_' + a.name + '_' + sc.name
+     *       if a.destination <> dc and a.source = sc
+     *       then dc2.name + '_' + a.name
+     *       else
+     *         if a.destination = dc and a.source <> sc
+     *         then a.name + '_' + sc.name
+     *         else dc2.name + '_' + a.name + '_' + sc.name
+     *         endif
      *       endif
-     *     endif
-     *   endif;
+     *     endif;
      * }
      * 
      * }
@@ -1190,6 +1193,15 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         }
         final @Nullable /*@Thrown*/ ClassToTable ClassToTable_0 = ClassUtil.nonNullState (OPPOSITE_OF_ClassToTable_umlClass.get(sc));
         final @Nullable /*@Thrown*/ ClassToTable sc2t_0 = ClassToTable_0;
+        // creations
+        final /*@Thrown*/ AssociationToForeignKey a2f_0 = UML2RDBMSFactory.eINSTANCE.createAssociationToForeignKey();
+        assert a2f_0 != null;
+        modelObjects[2/*middle*/].add(a2f_0);
+        // assignments
+        sc2t_0.setOwner(p2s_9);
+        a2f_0.setOwner(sc2t_0);
+        a2f_0.setReferenced(dc2t_0);
+        a2f_0.setAssociation(a);
         final @Nullable /*@Thrown*/ String name = a.getName();
         @NonNull /*@Caught*/ Object CAUGHT_eq_2;
         try {
@@ -1213,15 +1225,6 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
         catch (Exception e) {
             CAUGHT_eq_3 = ValueUtil.createInvalidValue(e);
         }
-        // creations
-        final /*@Thrown*/ AssociationToForeignKey a2f_0 = UML2RDBMSFactory.eINSTANCE.createAssociationToForeignKey();
-        assert a2f_0 != null;
-        modelObjects[2/*middle*/].add(a2f_0);
-        // assignments
-        sc2t_0.setOwner(p2s_9);
-        a2f_0.setOwner(sc2t_0);
-        a2f_0.setReferenced(dc2t_0);
-        a2f_0.setAssociation(a);
         final @Nullable /*@Thrown*/ Boolean and = BooleanAndOperation.INSTANCE.evaluate(CAUGHT_eq_2, CAUGHT_eq_3);
         if (and == null) {
             throw new InvalidValueException("Null if condition");
@@ -1248,6 +1251,12 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
             }
             @NonNull /*@Thrown*/ String symbol_5;
             if (and_0) {
+                if (dc == null) {
+                    throw new InvalidValueException("Null source for \'uml::UMLModelElement::name\'");
+                }
+                if (dc instanceof InvalidValueException) {
+                    throw (InvalidValueException)dc;
+                }
                 final @Nullable /*@Thrown*/ String name_0 = dc.getName();
                 final @NonNull /*@Thrown*/ String sum = StringConcatOperation.INSTANCE.evaluate(name_0, STR__);
                 final @NonNull /*@Thrown*/ String sum_0 = StringConcatOperation.INSTANCE.evaluate(sum, name);
@@ -1277,6 +1286,12 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
                     symbol_4 = sum_2;
                 }
                 else {
+                    if (dc == null) {
+                        throw new InvalidValueException("Null source for \'uml::UMLModelElement::name\'");
+                    }
+                    if (dc instanceof InvalidValueException) {
+                        throw (InvalidValueException)dc;
+                    }
                     final @Nullable /*@Thrown*/ String name_4 = dc.getName();
                     final @NonNull /*@Thrown*/ String sum_3 = StringConcatOperation.INSTANCE.evaluate(name_4, STR__);
                     final @NonNull /*@Thrown*/ String sum_4 = StringConcatOperation.INSTANCE.evaluate(sum_3, name);
