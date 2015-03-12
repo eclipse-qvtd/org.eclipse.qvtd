@@ -22,6 +22,7 @@ import org.eclipse.ocl.pivot.utilities.MetamodelManager;
 import org.eclipse.ocl.pivot.utilities.NameUtil;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
 import org.eclipse.qvtd.xtext.qvtimperative.utilities.QVTiXtextEvaluator;
 
@@ -75,7 +76,7 @@ public class QVTiVMEvaluator implements IVMEvaluator
     }
 
     public QVTiVMEvaluator(@NonNull QVTiVMEnvironmentFactory envFactory, @NonNull URI transformationURI) throws IOException {
-    	this(envFactory, QVTiXtextEvaluator.loadTransformation(envFactory, transformationURI, envFactory.keepDebug()));
+    	this(envFactory, QVTiXtextEvaluator.loadTransformation(ImperativeModel.class, envFactory, transformationURI, envFactory.keepDebug()));
     }
 
     public void createModel(@NonNull String name, @NonNull URI modelURI, String contentType) {

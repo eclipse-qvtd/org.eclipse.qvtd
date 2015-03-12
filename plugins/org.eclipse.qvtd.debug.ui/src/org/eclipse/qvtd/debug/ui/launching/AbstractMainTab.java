@@ -23,9 +23,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ocl.pivot.internal.utilities.OCLInternal;
-import org.eclipse.ocl.pivot.resource.BasicProjectManager;
 import org.eclipse.ocl.pivot.utilities.OCL;
-import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbench;
@@ -40,11 +38,6 @@ public abstract class AbstractMainTab extends AbstractLaunchConfigurationTab
 
 	protected @Nullable OCLInternal ocl;		// FIXME Add a dispose() when not visible for a long time
 	
-	/**
-	 * Internal flag to suppress redundant recursive updates while initializing controls.
-	 */
-	protected boolean initializing = false;
-	
 	@Override
 	public void dispose() {
 		OCL ocl2 = ocl;
@@ -53,14 +46,6 @@ public abstract class AbstractMainTab extends AbstractLaunchConfigurationTab
 			ocl = null;
 		}
 		super.dispose();
-	}
-
-	protected @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
-		OCLInternal ocl2 = ocl;
-		if (ocl2 == null) {
-			ocl = ocl2 = OCLInternal.newInstance(new QVTiEnvironmentFactory(BasicProjectManager.createDefaultProjectManager(), null));
-		}
-		return (QVTiEnvironmentFactory) ocl2.getEnvironmentFactory();
 	}
 
 	public @NonNull String getName() {
@@ -137,11 +122,4 @@ public abstract class AbstractMainTab extends AbstractLaunchConfigurationTab
 	}
 
 	protected abstract void setDefaults(@NonNull ILaunchConfigurationWorkingCopy configuration, @NonNull IFile iFile);
-
-	@Override
-	public void updateLaunchConfigurationDialog() {
-		if (!initializing) {
-			super.updateLaunchConfigurationDialog();
-		}
-	}
 }

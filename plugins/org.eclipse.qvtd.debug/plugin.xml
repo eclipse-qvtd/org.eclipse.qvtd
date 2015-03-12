@@ -16,10 +16,18 @@
     </extension>
     
    <extension point="org.eclipse.debug.core.launchConfigurationTypes">
+      <launchConfigurationType id="org.eclipse.qvtd.debug.launching.QVTcLaunchConfigurationDelegate"
+            delegate="org.eclipse.qvtd.debug.launching.QVTcLaunchConfigurationDelegate"
+            modes="run"
+            name="QVTc (Core) Transformation"/>
       <launchConfigurationType id="org.eclipse.qvtd.debug.launching.QVTiLaunchConfigurationDelegate"
             delegate="org.eclipse.qvtd.debug.launching.QVTiLaunchConfigurationDelegate"
             modes="run"
-            name="QVTi Transformation Run"/>
+            name="QVTi (Imperative) Transformation"/>
+      <launchConfigurationType id="org.eclipse.qvtd.debug.launching.QVTrLaunchConfigurationDelegate"
+            delegate="org.eclipse.qvtd.debug.launching.QVTrLaunchConfigurationDelegate"
+            modes="run"
+            name="QVTr (Relations) Transformation"/>
    </extension>
 
     <extension point="org.eclipse.debug.core.sourceLocators">

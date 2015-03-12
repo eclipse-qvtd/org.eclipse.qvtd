@@ -51,7 +51,7 @@ public class ParameterRow extends Composite implements ModifyListener
 
 		path.addModifyListener(this);
 		boolean isSave = (style & SWT.SAVE) != 0;
-		LaunchingUtils.prepareBrowseWorkspaceButton(browseWS, path, isSave);
+		LaunchingUtils.prepareBrowseWorkspaceButton(browseWS, /*name.getText(),*/ path, isSave);	// Awaiting OCL enhancement
 		LaunchingUtils.prepareBrowseFileSystemButton(browseFile, path, isSave);
 	}
 

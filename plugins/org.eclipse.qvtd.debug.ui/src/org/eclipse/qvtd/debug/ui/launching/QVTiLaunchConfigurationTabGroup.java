@@ -11,21 +11,19 @@
  *******************************************************************************/
 package org.eclipse.qvtd.debug.ui.launching;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.debug.ui.AbstractLaunchConfigurationTabGroup;
+import org.eclipse.debug.ui.CommonTab;
+import org.eclipse.debug.ui.ILaunchConfigurationDialog;
 import org.eclipse.debug.ui.ILaunchConfigurationTab;
-import org.eclipse.jdt.annotation.NonNull;
 
-public abstract class LaunchConfigurationTabGroup extends AbstractLaunchConfigurationTabGroup
+public class QVTiLaunchConfigurationTabGroup extends LaunchConfigurationTabGroup
 {
-	protected void setTabs(@NonNull List<ILaunchConfigurationTab> tabList) {
-		ILaunchConfigurationTab[] tabs = new ILaunchConfigurationTab[tabList.size()];
-		int i = 0;
-		for (ILaunchConfigurationTab tab : tabList) {
-			tabs[i] = tab;
-			i++;
-		}
-		setTabs(tabs);
+	public void createTabs(ILaunchConfigurationDialog dialog, String mode) {
+		List<ILaunchConfigurationTab> tabList = new ArrayList<ILaunchConfigurationTab>();
+		tabList.add(new QVTiMainTab());
+		tabList.add(new CommonTab());
+		setTabs(tabList);
 	}
 }

@@ -124,16 +124,32 @@
 
    <extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
       <launchConfigurationTypeImage
+            configTypeID="org.eclipse.qvtd.debug.launching.QVTcLaunchConfigurationDelegate"
+            icon="icons/QVTcModelFile.gif"
+            id="QVTc Debug"/>
+      <launchConfigurationTypeImage
             configTypeID="org.eclipse.qvtd.debug.launching.QVTiLaunchConfigurationDelegate"
             icon="icons/QVTiModelFile.gif"
             id="QVTi Debug"/>
+      <launchConfigurationTypeImage
+            configTypeID="org.eclipse.qvtd.debug.launching.QVTrLaunchConfigurationDelegate"
+            icon="icons/QVTrModelFile.gif"
+            id="QVTr Debug"/>
    </extension>
    
    <extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+      <launchConfigurationTabGroup id="org.eclipse.qvtd.debug.launching.QVTcLaunchConfigurationTabGroup"
+            class="org.eclipse.qvtd.debug.ui.launching.QVTcLaunchConfigurationTabGroup"
+            description="Create a configuration to launch a QVTc (Core) transformation"
+            type="org.eclipse.qvtd.debug.launching.QVTcLaunchConfigurationDelegate"/>
       <launchConfigurationTabGroup id="org.eclipse.qvtd.debug.launching.QVTiLaunchConfigurationTabGroup"
-            class="org.eclipse.qvtd.debug.ui.launching.LaunchConfigurationTabGroup"
-            description="Create a configuration to launch a QVTi transformation"
+            class="org.eclipse.qvtd.debug.ui.launching.QVTiLaunchConfigurationTabGroup"
+            description="Create a configuration to launch a QVTi (Imperative) transformation"
             type="org.eclipse.qvtd.debug.launching.QVTiLaunchConfigurationDelegate"/>
+      <launchConfigurationTabGroup id="org.eclipse.qvtd.debug.launching.QVTrLaunchConfigurationTabGroup"
+            class="org.eclipse.qvtd.debug.ui.launching.QVTrLaunchConfigurationTabGroup"
+            description="Create a configuration to launch a QVTr (Relations) transformation"
+            type="org.eclipse.qvtd.debug.launching.QVTrLaunchConfigurationDelegate"/>
    </extension>
 
    <extension point="org.eclipse.debug.core.launchDelegates">
