@@ -875,7 +875,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getTransformationCS_OwnedQueries() {
+	public EReference getTransformationCS_OwnedPathName() {
 		return (EReference)transformationCSEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -885,8 +885,18 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getTransformationCS_OwnedRelations() {
+	public EReference getTransformationCS_OwnedQueries() {
 		return (EReference)transformationCSEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getTransformationCS_OwnedRelations() {
+		return (EReference)transformationCSEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -1056,6 +1066,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		createEReference(transformationCSEClass, TRANSFORMATION_CS__OWNED_MODEL_DECLS);
 		createEReference(transformationCSEClass, TRANSFORMATION_CS__EXTENDS);
 		createEReference(transformationCSEClass, TRANSFORMATION_CS__OWNED_KEY_DECLS);
+		createEReference(transformationCSEClass, TRANSFORMATION_CS__OWNED_PATH_NAME);
 		createEReference(transformationCSEClass, TRANSFORMATION_CS__OWNED_QUERIES);
 		createEReference(transformationCSEClass, TRANSFORMATION_CS__OWNED_RELATIONS);
 
@@ -1210,6 +1221,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		initEReference(getTransformationCS_OwnedModelDecls(), this.getModelDeclCS(), null, "ownedModelDecls", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransformationCS_Extends(), theQVTbasePackage.getTransformation(), null, "extends", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransformationCS_OwnedKeyDecls(), this.getKeyDeclCS(), null, "ownedKeyDecls", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTransformationCS_OwnedPathName(), theBaseCSPackage.getPathNameCS(), null, "ownedPathName", null, 0, 1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransformationCS_OwnedQueries(), this.getQueryCS(), null, "ownedQueries", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTransformationCS_OwnedRelations(), this.getRelationCS(), null, "ownedRelations", null, 0, -1, TransformationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

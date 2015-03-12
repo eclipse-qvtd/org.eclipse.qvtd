@@ -127,6 +127,10 @@ public abstract class AbstractQVTrelationSemanticSequencer extends EssentialOCLS
 					sequence_PathNameCS(context, (PathNameCS) semanticObject); 
 					return; 
 				}
+				else if(context == grammarAccess.getScopeNameCSRule()) {
+					sequence_ScopeNameCS(context, (PathNameCS) semanticObject); 
+					return; 
+				}
 				else if(context == grammarAccess.getURIPathNameCSRule()) {
 					sequence_URIPathNameCS(context, (PathNameCS) semanticObject); 
 					return; 
@@ -621,6 +625,15 @@ public abstract class AbstractQVTrelationSemanticSequencer extends EssentialOCLS
 	
 	/**
 	 * Constraint:
+	 *     (ownedPathElements+=FirstPathElementCS ownedPathElements+=NextPathElementCS*)
+	 */
+	protected void sequence_ScopeNameCS(EObject context, PathNameCS semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     ((ownedImports+=UnitCS | ownedLibraries+=LibraryCS)* ownedTransformations+=TransformationCS*)
 	 */
 	protected void sequence_TopLevelCS(EObject context, TopLevelCS semanticObject) {
@@ -631,6 +644,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends EssentialOCLS
 	/**
 	 * Constraint:
 	 *     (
+	 *         ownedPathName=ScopeNameCS? 
 	 *         name=UnrestrictedName 
 	 *         ownedModelDecls+=ModelDeclCS 
 	 *         ownedModelDecls+=ModelDeclCS* 

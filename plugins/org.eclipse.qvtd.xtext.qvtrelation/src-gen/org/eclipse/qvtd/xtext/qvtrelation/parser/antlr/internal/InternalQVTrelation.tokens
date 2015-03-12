@@ -11,7 +11,7 @@
 '..'=78
 '/'=49
 ':'=16
-'::'=43
+'::'=40
 ';'=23
 '<'=52
 '<='=54
@@ -49,12 +49,12 @@
 'elseif'=94
 'endif'=93
 'enforce'=25
-'extends'=41
+'extends'=42
 'false'=81
 'if'=90
 'implementedby'=28
 'implies'=59
-'import'=42
+'import'=43
 'in'=88
 'invalid'=82
 'key'=30
@@ -74,7 +74,7 @@
 'super'=99
 'then'=91
 'top'=37
-'transformation'=40
+'transformation'=41
 'true'=80
 'when'=45
 'where'=46

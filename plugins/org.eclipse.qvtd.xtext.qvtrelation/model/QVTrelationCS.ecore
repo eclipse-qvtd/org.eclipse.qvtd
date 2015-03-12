@@ -112,6 +112,8 @@
         eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Transformation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedKeyDecls" upperBound="-1"
         eType="#//KeyDeclCS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPathName" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedQueries" upperBound="-1"
         eType="#//QueryCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedRelations" upperBound="-1"

@@ -2164,13 +2164,22 @@ public interface QVTrelationCSPackage extends EPackage {
 	int TRANSFORMATION_CS__OWNED_KEY_DECLS = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Owned Path Name</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSFORMATION_CS__OWNED_PATH_NAME = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Owned Queries</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__OWNED_QUERIES = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 3;
+	int TRANSFORMATION_CS__OWNED_QUERIES = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Owned Relations</b></em>' containment reference list.
@@ -2179,7 +2188,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS__OWNED_RELATIONS = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 4;
+	int TRANSFORMATION_CS__OWNED_RELATIONS = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Transformation CS</em>' class.
@@ -2188,7 +2197,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSFORMATION_CS_FEATURE_COUNT = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 5;
+	int TRANSFORMATION_CS_FEATURE_COUNT = BaseCSPackage.CLASS_CS_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.UnitCSImpl <em>Unit CS</em>}' class.
@@ -3048,6 +3057,17 @@ public interface QVTrelationCSPackage extends EPackage {
 	EReference getTransformationCS_OwnedKeyDecls();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedPathName <em>Owned Path Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Owned Path Name</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedPathName()
+	 * @see #getTransformationCS()
+	 * @generated
+	 */
+	EReference getTransformationCS_OwnedPathName();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.TransformationCS#getOwnedQueries <em>Owned Queries</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3665,6 +3685,14 @@ public interface QVTrelationCSPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRANSFORMATION_CS__OWNED_KEY_DECLS = eINSTANCE.getTransformationCS_OwnedKeyDecls();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Path Name</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRANSFORMATION_CS__OWNED_PATH_NAME = eINSTANCE.getTransformationCS_OwnedPathName();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Queries</b></em>' containment reference list feature.

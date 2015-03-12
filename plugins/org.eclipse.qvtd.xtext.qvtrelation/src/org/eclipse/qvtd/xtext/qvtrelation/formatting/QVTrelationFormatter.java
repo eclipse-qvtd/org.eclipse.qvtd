@@ -23,6 +23,7 @@ import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.Pred
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.PrimitiveTypeDomainCSElements;
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.QueryCSElements;
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.RelationCSElements;
+import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.ScopeNameCSElements;
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.TemplateCSElements;
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.TopLevelCSElements;
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.TransformationCSElements;
@@ -148,6 +149,11 @@ public class QVTrelationFormatter extends AbstractEssentialOCLFormatter
 			c.setLinewrap(2).before(a.getOwnedWhereAssignment_8());
 	    }
 	    {
+	    	ScopeNameCSElements a = f.getScopeNameCSAccess();
+			c.setNoSpace().around(a.getColonColonKeyword_1());
+			c.setNoSpace().around(a.getColonColonKeyword_2_1());
+	    }
+	    {
 	    	TemplateCSElements a = f.getTemplateCSAccess();
 			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_1_0(), a.getRightCurlyBracketKeyword_1_2());
 			setAppendedBraces(c, a.getLeftCurlyBracketKeyword_1_0(), a.getRightCurlyBracketKeyword_1_2());
@@ -158,14 +164,15 @@ public class QVTrelationFormatter extends AbstractEssentialOCLFormatter
 	    }
 	    {
 	    	TransformationCSElements a = f.getTransformationCSAccess();
-			c.setNoSpace().around(a.getLeftParenthesisKeyword_2());	
-			c.setNoSpace().before(a.getCommaKeyword_4_0());
-			c.setNoSpace().before(a.getRightParenthesisKeyword_5());	
-			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_7(), a.getRightCurlyBracketKeyword_10());
-			setBraces(c, a.getLeftCurlyBracketKeyword_7(), a.getRightCurlyBracketKeyword_10());
-			c.setLinewrap(2).between(a.getOwnedKeyDeclsAssignment_8(), a.getAlternatives_9());
-			c.setLinewrap(2).between(a.getAlternatives_9(), a.getAlternatives_9());
-		    c.setIndentation(a.getLeftParenthesisKeyword_2(), a.getRightParenthesisKeyword_5());
+			c.setNoSpace().around(a.getLeftParenthesisKeyword_3());	
+			c.setNoSpace().around(a.getLeftParenthesisKeyword_3());	
+			c.setNoSpace().before(a.getCommaKeyword_5_0());
+			c.setNoSpace().before(a.getRightParenthesisKeyword_6());	
+			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_8(), a.getRightCurlyBracketKeyword_11());
+			setBraces(c, a.getLeftCurlyBracketKeyword_8(), a.getRightCurlyBracketKeyword_11());
+			c.setLinewrap(2).between(a.getOwnedKeyDeclsAssignment_9(), a.getAlternatives_10());
+			c.setLinewrap(2).between(a.getAlternatives_10(), a.getAlternatives_10());
+		    c.setIndentation(a.getLeftParenthesisKeyword_3(), a.getRightParenthesisKeyword_6());
 	    }
 	    {
 	    	UnitCSElements a = f.getUnitCSAccess();

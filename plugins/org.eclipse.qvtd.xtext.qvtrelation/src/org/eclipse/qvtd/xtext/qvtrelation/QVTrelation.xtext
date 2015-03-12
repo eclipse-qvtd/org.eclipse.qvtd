@@ -84,9 +84,12 @@ RelationCS: isTop?='top'? 'relation' name=UnrestrictedName
                '}'
 ;
 
+ScopeNameCS returns base::PathNameCS:
+	ownedPathElements+=FirstPathElementCS '::' (ownedPathElements+=NextPathElementCS '::')*;
+
 TemplateCS: (CollectionTemplateCS | ObjectTemplateCS) ('{' ownedGuardExpression=ExpCS '}')?;
 	
-TransformationCS: 'transformation' name=UnrestrictedName 
+TransformationCS: 'transformation' ownedPathName=ScopeNameCS? name=UnrestrictedName 
                      '(' ownedModelDecls+=ModelDeclCS (',' ownedModelDecls+=ModelDeclCS)* ')' 
                      ('extends' extends+=[qvtbase::Transformation|UnrestrictedName] (',' extends+=[qvtbase::Transformation|UnrestrictedName])*)?
                      '{' ownedKeyDecls+=KeyDeclCS* ( ownedRelations+=RelationCS | ownedQueries+=QueryCS )* '}'
