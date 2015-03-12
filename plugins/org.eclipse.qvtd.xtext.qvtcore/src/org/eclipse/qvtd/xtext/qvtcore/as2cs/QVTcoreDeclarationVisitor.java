@@ -70,44 +70,27 @@ public class QVTcoreDeclarationVisitor extends QVTcoreBaseDeclarationVisitor imp
 		context.refreshList(csDocument.getOwnedImports(), context.visitDeclarations(ImportCS.class, asModel.getOwnedImports(), null));
 		List<Mapping> asMappings = null;
 		List<Function> asQueries = null;
-		List<Transformation> asTransformations = null;
-		for (org.eclipse.ocl.pivot.Package asPackage : asModel.getOwnedPackages()) {
-			if ("".equals(asPackage.getName())) {
-				for (org.eclipse.ocl.pivot.Class asClass : asPackage.getOwnedClasses()) {
-					if (asClass instanceof Transformation) {
-						if (asTransformations == null) {
-							asTransformations = new ArrayList<Transformation>();
-						}
-						Transformation asTransformation = (Transformation) asClass;
-						asTransformations.add(asTransformation);
-						for (Rule asRule : asTransformation.getRule()) {
-							if (asRule instanceof Mapping) {
-								if (asMappings == null) {
-									asMappings = new ArrayList<Mapping>();
-								}
-								asMappings.add((Mapping) asRule);
-							}
-						}
-						for (Operation asOperation : asTransformation.getOwnedOperations()) {
-							if (asOperation instanceof Function) {
-								if (asQueries == null) {
-									asQueries = new ArrayList<Function>();
-								}
-								asQueries.add((Function) asOperation);
-							}
-						}
+		List<Transformation> asTransformations = new ArrayList<Transformation>();
+		gatherTransformations(asTransformations, asModel.getOwnedPackages());
+		for (Transformation asTransformation : asTransformations) {
+			for (Rule asRule : asTransformation.getRule()) {
+				if (asRule instanceof Mapping) {
+					if (asMappings == null) {
+						asMappings = new ArrayList<Mapping>();
 					}
-					// else other packages, orphanage
+					asMappings.add((Mapping) asRule);
 				}
 			}
-			// else other packages, orphanage
+			for (Operation asOperation : asTransformation.getOwnedOperations()) {
+				if (asOperation instanceof Function) {
+					if (asQueries == null) {
+						asQueries = new ArrayList<Function>();
+					}
+					asQueries.add((Function) asOperation);
+				}
+			}
 		}
-		if (asTransformations != null) {
-			context.refreshList(csDocument.getOwnedTransformations(), context.visitDeclarations(TransformationCS.class, asTransformations, null));
-		}
-		else {
-			csDocument.getOwnedTransformations().clear();
-		}
+		context.refreshList(csDocument.getOwnedTransformations(), context.visitDeclarations(TransformationCS.class, asTransformations, null));
 		if (asMappings != null) {
 			context.refreshList(csDocument.getOwnedMappings(), context.visitDeclarations(MappingCS.class, asMappings, null));
 		}
