@@ -50,6 +50,7 @@ import org.eclipse.ocl.pivot.library.collection.CollectionAsSequenceOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionIncludingAllOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionIsEmptyOperation;
 import org.eclipse.ocl.pivot.library.collection.CollectionSelectByKindOperation;
+import org.eclipse.ocl.pivot.library.collection.OrderedCollectionFirstOperation;
 import org.eclipse.ocl.pivot.library.collection.OrderedCollectionIndexOfOperation;
 import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
@@ -1148,6 +1149,7 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
                     accumulator.add(x_5);
                 }
             }
+            final /*@NonNull*/ /*@NonInvalid*/ Property CTORid_parentEnv_0 = idResolver.getProperty(PROPid_parentEnv);
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_env_c_c_Environment_2 = idResolver.getClass(CLSSid_Environment, null);
             final /*@NonNull*/ /*@NonInvalid*/ Property CTORid_namedElements = idResolver.getProperty(PROPid_namedElements);
             final /*@NonNull*/ /*@Thrown*/ Environment symbol_3 = (Environment)TYP_env_c_c_Environment_2.createInstance();
@@ -1159,17 +1161,19 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
             final List<NamedElement> UNBOXED_includingAll = includingAll.asEcoreObjects(idResolver, NamedElement.class);
             assert UNBOXED_includingAll != null;
             CTORid_namedElements.initValue(symbol_3, UNBOXED_includingAll);
-            final /*@Nullable*/ /*@Thrown*/ String name_0 = z_3.getName();
+            final /*@Nullable*/ /*@Thrown*/ Environment parentEnv_0 = symbol_2.getParentEnv();
+            CTORid_parentEnv_0.initValue(symbol_3, parentEnv_0);
+            final /*@Nullable*/ /*@Thrown*/ String cName = z_3.getName();
             final /*@Nullable*/ /*@Thrown*/ List<NamedElement> namedElements_1 = symbol_3.getNamedElements();
             assert namedElements_1 != null;
             final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_namedElements_1 = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements_1);
             final /*@NonNull*/ /*@Thrown*/ OrderedSetValue selectByKind = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(evaluator, BOXED_namedElements_1, TYP_target_c_c_C_0);
             /*@NonNull*/ /*@Thrown*/ OrderedSetValue.Accumulator accumulator_0 = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_C);
             /*@Nullable*/ Iterator<?> ITERATOR__1 = selectByKind.iterator();
-            /*@NonNull*/ /*@Thrown*/ OrderedSetValue select;
+            /*@NonNull*/ /*@Thrown*/ OrderedSetValue foundCs;
             while (true) {
                 if (!ITERATOR__1.hasNext()) {
-                    select = accumulator_0;
+                    foundCs = accumulator_0;
                     break;
                 }
                 /*@Nullable*/ /*@NonInvalid*/ C _1 = (C)ITERATOR__1.next();
@@ -1179,36 +1183,21 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
                 if (_1 == null) {
                     throw new InvalidValueException("Null source for \'target::NamedElement::name\'");
                 }
-                final /*@Nullable*/ /*@Thrown*/ String name_1 = _1.getName();
-                final /*@Thrown*/ boolean eq = (name_1 != null) ? name_1.equals(name_0) : (name_0 == null);
+                final /*@Nullable*/ /*@Thrown*/ String name_0 = _1.getName();
+                final /*@Thrown*/ boolean eq = (name_0 != null) ? name_0.equals(cName) : (cName == null);
                 //
                 if (eq == ValueUtil.TRUE_VALUE) {
                     accumulator_0.add(_1);
                 }
             }
-            final /*@Thrown*/ boolean isEmpty = CollectionIsEmptyOperation.INSTANCE.evaluate(select).booleanValue();
+            final /*@Thrown*/ boolean isEmpty = CollectionIsEmptyOperation.INSTANCE.evaluate(foundCs).booleanValue();
             /*@Nullable*/ /*@Thrown*/ C symbol_4;
             if (isEmpty) {
                 symbol_4 = null;
             }
             else {
-                /*@Nullable*/ Iterator<?> ITERATOR__1_0 = select.iterator();
-                /*@Nullable*/ /*@Thrown*/ C any;
-                while (true) {
-                    if (!ITERATOR__1_0.hasNext()) {
-                        throw new InvalidValueException("No matching content for 'any'");
-                    }
-                    /*@Nullable*/ /*@NonInvalid*/ C _1_0 = (C)ITERATOR__1_0.next();
-                    /**
-                     * _'null' : Boolean
-                     */
-                    //
-                    if (ValueUtil.TRUE_VALUE != ValueUtil.FALSE_VALUE) {			// Carry on till something found
-                        any = _1_0;
-                        break;
-                    }
-                }
-                symbol_4 = any;
+                final /*@Nullable*/ /*@Thrown*/ C first = (C)OrderedCollectionFirstOperation.INSTANCE.evaluate(foundCs);
+                symbol_4 = first;
             }
             symbol_5 = symbol_4;
         }
@@ -1416,6 +1405,7 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
                     accumulator.add(x_5);
                 }
             }
+            final /*@NonNull*/ /*@NonInvalid*/ Property CTORid_parentEnv_0 = idResolver.getProperty(PROPid_parentEnv);
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_env_c_c_Environment_2 = idResolver.getClass(CLSSid_Environment, null);
             final /*@NonNull*/ /*@NonInvalid*/ Property CTORid_namedElements = idResolver.getProperty(PROPid_namedElements);
             final /*@NonNull*/ /*@Thrown*/ Environment symbol_3 = (Environment)TYP_env_c_c_Environment_2.createInstance();
@@ -1427,17 +1417,19 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
             final List<NamedElement> UNBOXED_includingAll = includingAll.asEcoreObjects(idResolver, NamedElement.class);
             assert UNBOXED_includingAll != null;
             CTORid_namedElements.initValue(symbol_3, UNBOXED_includingAll);
-            final /*@Nullable*/ /*@Thrown*/ String name_0 = z_6.getName();
+            final /*@Nullable*/ /*@Thrown*/ Environment parentEnv_0 = symbol_2.getParentEnv();
+            CTORid_parentEnv_0.initValue(symbol_3, parentEnv_0);
+            final /*@Nullable*/ /*@Thrown*/ String bName = z_6.getName();
             final /*@Nullable*/ /*@Thrown*/ List<NamedElement> namedElements_1 = symbol_3.getNamedElements();
             assert namedElements_1 != null;
             final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_namedElements_1 = idResolver.createOrderedSetOfAll(ORD_CLSSid_NamedElement, namedElements_1);
             final /*@NonNull*/ /*@Thrown*/ OrderedSetValue selectByKind = (OrderedSetValue)CollectionSelectByKindOperation.INSTANCE.evaluate(evaluator, BOXED_namedElements_1, TYP_target_c_c_B_0);
             /*@NonNull*/ /*@Thrown*/ OrderedSetValue.Accumulator accumulator_0 = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_B);
             /*@Nullable*/ Iterator<?> ITERATOR__1 = selectByKind.iterator();
-            /*@NonNull*/ /*@Thrown*/ OrderedSetValue select;
+            /*@NonNull*/ /*@Thrown*/ OrderedSetValue foundBs;
             while (true) {
                 if (!ITERATOR__1.hasNext()) {
-                    select = accumulator_0;
+                    foundBs = accumulator_0;
                     break;
                 }
                 /*@Nullable*/ /*@NonInvalid*/ B _1 = (B)ITERATOR__1.next();
@@ -1447,36 +1439,21 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
                 if (_1 == null) {
                     throw new InvalidValueException("Null source for \'target::NamedElement::name\'");
                 }
-                final /*@Nullable*/ /*@Thrown*/ String name_1 = _1.getName();
-                final /*@Thrown*/ boolean eq = (name_1 != null) ? name_1.equals(name_0) : (name_0 == null);
+                final /*@Nullable*/ /*@Thrown*/ String name_0 = _1.getName();
+                final /*@Thrown*/ boolean eq = (name_0 != null) ? name_0.equals(bName) : (bName == null);
                 //
                 if (eq == ValueUtil.TRUE_VALUE) {
                     accumulator_0.add(_1);
                 }
             }
-            final /*@Thrown*/ boolean isEmpty = CollectionIsEmptyOperation.INSTANCE.evaluate(select).booleanValue();
+            final /*@Thrown*/ boolean isEmpty = CollectionIsEmptyOperation.INSTANCE.evaluate(foundBs).booleanValue();
             /*@Nullable*/ /*@Thrown*/ B symbol_4;
             if (isEmpty) {
                 symbol_4 = null;
             }
             else {
-                /*@Nullable*/ Iterator<?> ITERATOR__1_0 = select.iterator();
-                /*@Nullable*/ /*@Thrown*/ B any;
-                while (true) {
-                    if (!ITERATOR__1_0.hasNext()) {
-                        throw new InvalidValueException("No matching content for 'any'");
-                    }
-                    /*@Nullable*/ /*@NonInvalid*/ B _1_0 = (B)ITERATOR__1_0.next();
-                    /**
-                     * _'null' : Boolean
-                     */
-                    //
-                    if (ValueUtil.TRUE_VALUE != ValueUtil.FALSE_VALUE) {			// Carry on till something found
-                        any = _1_0;
-                        break;
-                    }
-                }
-                symbol_4 = any;
+                final /*@Nullable*/ /*@Thrown*/ B first = (B)OrderedCollectionFirstOperation.INSTANCE.evaluate(foundBs);
+                symbol_4 = first;
             }
             symbol_5 = symbol_4;
         }

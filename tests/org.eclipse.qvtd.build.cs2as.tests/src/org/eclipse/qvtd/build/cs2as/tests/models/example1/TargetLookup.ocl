@@ -2,19 +2,19 @@ import 'EnvExample1.ecore'
 --import 'Environment.ocl' FIXME imported OCL doesn't work
 import 'TargetMM1.ecore'
 
---package ocl
+package ocl
 ---- Default Environment related functionality
---context OclElement
+context OclElement
 --	
---def : env() : env::Environment =
---	_env(null)
---
---def : _env(child : OclElement) : env::Environment =
---	parentEnv()
---	
---def : parentEnv() : env::Environment =
---	let parent = oclContainer() in if parent = null then env::Environment { } else parent._env(self) endif
---endpackage 
+def : env() : env::Environment =
+	_env(null)
+
+def : _env(child : OclElement) : env::Environment =
+	parentEnv()
+	
+def : parentEnv() : env::Environment =
+	let parent = oclContainer() in if parent = null then env::Environment { } else parent._env(self) endif
+endpackage 
 
 package env
 
@@ -28,66 +28,56 @@ context Environment
 def : addElement(element : target::NamedElement) : Environment =
 	Environment{
 		namedElements = namedElements->asSequence() -- FIXME bug 460682
-			->including(element)
+			->including(element),
+		parentEnv = parentEnv
 	}
 	
 def : addElements(elements : Collection(target::NamedElement)) : Environment =
 	Environment{
 		namedElements = namedElements->asSequence() -- FIXME bug 460682
-			->includingAll(elements)
+			->includingAll(elements),
+		parentEnv = parentEnv
 	}
 	
 def : nestedEnv() : Environment = 
 	Environment {
 		parentEnv = self
 	}
-	
-def : mergEnv(env : Environment) : Environment =
-	Environment {
-		namedElements = namedElements->includingAll(env.namedElements)
-	}
+
 
 -- General Environment access operations
 def : getNamedElements(name : String) : OrderedSet(target::NamedElement) =
 	namedElements->select(x | x.name = name)
 
 -- Specific lookup operations 
-def: _lookupBs(bName : String) : OrderedSet(target::B) =
-	namedElements->selectByKind(target::B)->select(name = bName)
---	let foundBs : OrderedSet(target::B) = namedElements->selectByKind(target::B)->select(name = bName) in
---	if foundBs->isEmpty()
---	then if parentEnv.oclIsUndefined()
---	     then foundBs
---	     else parentEnv._lookupBs(bName)
---	     endif
---	else foundBs
---	endif
 
-def: _lookupCs(cName : String) : OrderedSet(target::C) =
-	namedElements->selectByKind(target::C)->select(name = cName)
---	let foundCs : OrderedSet(target::C) = namedElements->selectByKind(target::C)->select(name = cName) in
---	if foundCs->isEmpty()
---	then if parentEnv.oclIsUndefined()
---	     then foundCs
---	     else parentEnv._lookupCs(cName)
---	     endif
---	else foundCs
---	endif
-
-def: lookupB(name : String) : target::B =
-	-- FIXME if not found, lookupBs(name)->any gives an execution error, for the time being we return an null B
-	let foundBs = _lookupBs(name) in
+def: lookupB(bName : String) : target::B =
+  	
+	let foundBs = namedElements->selectByKind(target::B)->select(name = bName) in
 	if foundBs->isEmpty()
-	then null
-	else foundBs->any(true) 
+	then 
+		null
+--		if parentEnv.oclIsUndefined()
+--	    then invalid -- not found
+--	    	 --  TODO this provokes a failure in OCL. Report bugzilla
+--	    	 -- invalid -- not found
+--	    else parentEnv.lookupB(bName)
+--	    endif
+	else foundBs->first() -- TODO Ambiguous name case ?
 	endif
 	
-	
-def: lookupC(name : String) : target::C =
-	let foundCs = _lookupCs(name) in
+def: lookupC(cName : String) : target::C =
+	let foundCs = namedElements->selectByKind(target::C)->select(name = cName) in
 	if foundCs->isEmpty()
-	then null
-	else foundCs->any(true) 
+	then
+		null
+--		if parentEnv.oclIsUndefined()
+--	    then null -- not found
+--	    	 --  TODO this provokes a failure in OCL. Report bugzilla
+--	    	 -- invalid -- not found
+--	    else parentEnv.lookupC(cName)
+--	    endif
+	else foundCs->first() -- TODO Ambiguous name case ?
 	endif
 
 endpackage
