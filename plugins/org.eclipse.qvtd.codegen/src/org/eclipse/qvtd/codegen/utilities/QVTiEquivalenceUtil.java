@@ -16,7 +16,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 
 /**
- * EquivalenceUtils provides the bodoes for many of the isEquivalentToInternal operations.
+ * QVTiEquivalenceUtil provides the bodies for many of the isEquivalentToInternal operations.
  * 
  * These return:
  * <br>
@@ -26,7 +26,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
  * <br>
  * null if the values could be the same or different.
  */
-public class QVTiEquivalenceUtils
+public class QVTiEquivalenceUtil
 {
 	public static @Nullable Boolean isEquivalent(@NonNull CGMappingExp thisValue, @NonNull CGMappingExp thatValue) {
 		if (thisValue == thatValue) {

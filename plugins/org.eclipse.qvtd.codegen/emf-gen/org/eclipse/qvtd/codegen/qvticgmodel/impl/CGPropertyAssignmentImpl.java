@@ -27,7 +27,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGMappingExp;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
-import org.eclipse.qvtd.codegen.utilities.QVTiEquivalenceUtils;
+import org.eclipse.qvtd.codegen.utilities.QVTiEquivalenceUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -476,7 +476,7 @@ public class CGPropertyAssignmentImpl extends CGValuedElementImpl implements CGP
 	 */
 	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
-		return (getClass() == thatValue.getClass()) ? QVTiEquivalenceUtils.isEquivalent(this, (CGPropertyAssignment)thatValue) : null;
+		return (getClass() == thatValue.getClass()) ? QVTiEquivalenceUtil.isEquivalent(this, (CGPropertyAssignment)thatValue) : null;
 	}
 
 	/**

@@ -32,7 +32,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGRealizedVariable;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGSequence;
-import org.eclipse.qvtd.codegen.utilities.QVTiEquivalenceUtils;
+import org.eclipse.qvtd.codegen.utilities.QVTiEquivalenceUtil;
 
 /**
  * CGValuedElementModelSpec supports generation of the many methods that contribute to the CGValuedElement.xxxx() method hierarchy.
@@ -76,8 +76,8 @@ public class QVTdCGValuedElementModelSpec extends CGValuedElementModelSpec
 			return null;
 		}
 		@Override public @Nullable String generateIsEquivalentToInternal(@NonNull CGValuedElementModelSpec cgModelSpec, @NonNull GenModel genModel) {
-			String equivalenceUtilsImport = ImportUtils.getAffixedName(QVTiEquivalenceUtils.class);
-			return "return (getClass() == thatValue.getClass()) ? "+ equivalenceUtilsImport + ".isEquivalent(this, (" + cgModelSpec.getCgClass().getSimpleName() + ")thatValue) : null;";
+			String equivalenceUtilImport = ImportUtils.getAffixedName(QVTiEquivalenceUtil.class);
+			return "return (getClass() == thatValue.getClass()) ? "+ equivalenceUtilImport + ".isEquivalent(this, (" + cgModelSpec.getCgClass().getSimpleName() + ")thatValue) : null;";
 		}
 	};
 

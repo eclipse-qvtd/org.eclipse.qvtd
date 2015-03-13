@@ -34,7 +34,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGPredicate;
 import org.eclipse.qvtd.codegen.qvticgmodel.CGPropertyAssignment;
 import org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage;
 import org.eclipse.qvtd.codegen.qvticgmodel.util.QVTiCGModelVisitor;
-import org.eclipse.qvtd.codegen.utilities.QVTiEquivalenceUtils;
+import org.eclipse.qvtd.codegen.utilities.QVTiEquivalenceUtil;
 
 /**
  * <!-- begin-user-doc -->
@@ -394,7 +394,7 @@ public class CGMappingExpImpl extends CGValuedElementImpl implements CGMappingEx
 	 */
 	@Override
 	public @Nullable Boolean isEquivalentToInternal(@NonNull CGValuedElement thatValue) {
-		return (getClass() == thatValue.getClass()) ? QVTiEquivalenceUtils.isEquivalent(this, (CGMappingExp)thatValue) : null;
+		return (getClass() == thatValue.getClass()) ? QVTiEquivalenceUtil.isEquivalent(this, (CGMappingExp)thatValue) : null;
 	}
 
 	/**
