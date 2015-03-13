@@ -24,9 +24,10 @@ import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.qvtd.build.cs2as.OCL2QVTiBroker;
-import org.eclipse.qvtd.build.cs2as.qvti.QVTi2JavaCompiler;
+import org.eclipse.qvtd.build.cs2as.qvti.CS2ASJavaCompiler;
 import org.eclipse.qvtd.build.cs2as.qvti.QVTiFacade;
 import org.eclipse.qvtd.build.etl.PivotModel;
+import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 
 import com.google.common.base.Objects;
 
@@ -53,6 +54,7 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 
 	protected void doSetup() {
 		CompleteOCLStandaloneSetup.doSetup();
+		QVTimperativeStandaloneSetup.doSetup();
 	}
 	
 	@Override
@@ -72,8 +74,8 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 		qvt.dispose();
 	}
 
-	protected QVTi2JavaCompiler createCompiler() {
-		return new QVTi2JavaCompiler();
+	protected CS2ASJavaCompiler createCompiler() {
+		return new CS2ASJavaCompiler();
 	}
 
 

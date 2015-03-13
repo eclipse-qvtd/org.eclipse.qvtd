@@ -435,6 +435,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		js.append("}\n");
 	}
 
+	protected @NonNull Class<? extends AbstractTransformationExecutor> getAbstractTransformationExecutorClass() {
+		return AbstractTransformationExecutor.class;
+	}
+
 	protected @NonNull QVTiGlobalContext getGlobalContext() {
 		return (QVTiGlobalContext) globalContext;
 	}
@@ -980,7 +984,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		js.append(" */\n");
 		js.append("@SuppressWarnings(\"nls\")\n");
 		js.append("public class " + className + " extends ");
-		js.appendClassReference(AbstractTransformationExecutor.class);
+		js.appendClassReference(getAbstractTransformationExecutorClass());
 		js.append("\n");
 		js.append("{\n");
 		js.pushIndentation(null);

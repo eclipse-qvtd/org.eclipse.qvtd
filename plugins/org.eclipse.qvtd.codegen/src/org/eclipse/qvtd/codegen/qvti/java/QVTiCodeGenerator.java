@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.AnalysisVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
@@ -79,6 +80,10 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		return new QVTiCG2JavaPreVisitor(getGlobalContext());
 	}
 
+	protected @NonNull QVTiCG2JavaVisitor createCG2JavaVisitor(@NonNull CGPackage cgPackage, @Nullable List<CGValuedElement> sortedGlobals) {
+		return new QVTiCG2JavaVisitor(this, cgPackage, sortedGlobals);
+	}
+
 	protected @NonNull CGPackage createCGPackage() {
 		String packagePrefix = getOptions().getPackagePrefix();
 		CGPackage cgPackage = CGModelFactory.eINSTANCE.createCGPackage();
@@ -123,7 +128,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 			CGPackage cgPackage = createCGPackage();
 			optimize(cgPackage);
 			List<CGValuedElement> sortedGlobals = prepareGlobals();
-			QVTiCG2JavaVisitor generator = new QVTiCG2JavaVisitor(this, cgPackage, sortedGlobals);
+			QVTiCG2JavaVisitor generator = createCG2JavaVisitor(cgPackage, sortedGlobals);
 			generator.safeVisit(cgPackage);
 			Set<String> allImports = generator.getAllImports();
 			Map<String, String> long2ShortImportNames = ImportUtils.getLong2ShortImportNames(allImports);

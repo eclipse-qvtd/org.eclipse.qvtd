@@ -13,7 +13,8 @@ Require-Bundle: org.eclipse.qvtd.build.etl;bundle-version="[1.0.0,2.0.0)",
  org.eclipse.epsilon.eol.engine;bundle-version="[1.2.0,2.0.0)",
  org.eclipse.epsilon.etl.engine;bundle-version="[1.2.0,2.0.0)",
  org.eclipse.epsilon.emc.emf;bundle-version="[1.2.0,2.0.0)",
- org.eclipse.qvtd.codegen;bundle-version="[1.0.0,2.0.0)"
+ org.eclipse.qvtd.codegen;bundle-version="[1.0.0,2.0.0)",
+ org.eclipse.qvtd.xtext.qvtimperative
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.apache.log4j
