@@ -283,7 +283,7 @@ ruleCollectionTemplateCS returns [EObject current=null]
     {
     	newLeafNode(otherlv_7, grammarAccess.getCollectionTemplateCSAccess().getPlusSignPlusSignKeyword_4_2());
     }
-((
+(
 (
 		{ 
 		  /* */ 
@@ -294,21 +294,16 @@ ruleCollectionTemplateCS returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getCollectionTemplateCSAccess().getRestIdentifierVariableCrossReference_4_3_0_0()); 
+	        newCompositeNode(grammarAccess.getCollectionTemplateCSAccess().getRestIdentifierVariableCrossReference_4_3_0()); 
 	    }
 		ruleUnrestrictedName		{ 
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-)
-    |	otherlv_9='_' 
+))?	otherlv_9='}' 
     {
-    	newLeafNode(otherlv_9, grammarAccess.getCollectionTemplateCSAccess().get_Keyword_4_3_1());
-    }
-))?	otherlv_10='}' 
-    {
-    	newLeafNode(otherlv_10, grammarAccess.getCollectionTemplateCSAccess().getRightCurlyBracketKeyword_5());
+    	newLeafNode(otherlv_9, grammarAccess.getCollectionTemplateCSAccess().getRightCurlyBracketKeyword_5());
     }
 )
 ;
@@ -588,10 +583,10 @@ ruleElementTemplateCS returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-((
+(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getElementTemplateCSAccess().getNameUnrestrictedNameParserRuleCall_0_0()); 
+	        newCompositeNode(grammarAccess.getElementTemplateCSAccess().getNameUnrestrictedNameParserRuleCall_0()); 
 	    }
 		lv_name_0_0=ruleUnrestrictedName		{
 	        if ($current==null) {
@@ -607,20 +602,6 @@ ruleElementTemplateCS returns [EObject current=null]
 
 )
 )
-    |((
-	{ 
-	  /* */ 
-	}
-    {
-        $current = forceCreateModelElement(
-            grammarAccess.getElementTemplateCSAccess().getElementTemplateCSAction_1_0(),
-            $current);
-    }
-)	otherlv_2='_' 
-    {
-    	newLeafNode(otherlv_2, grammarAccess.getElementTemplateCSAccess().get_Keyword_1_1());
-    }
-))
 ;
 
 

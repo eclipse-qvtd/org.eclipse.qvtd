@@ -60,7 +60,7 @@ public class LoadTests extends LoadTestCase
 	}	
 
 	// FIXME
-	public void zztestLoad_DNF_qvtr() throws IOException, InterruptedException {
+	public void testLoad_DNF_qvtr() throws IOException, InterruptedException {
 		doLoad_ModelMorf("DNF/DNF");
 	}	
 

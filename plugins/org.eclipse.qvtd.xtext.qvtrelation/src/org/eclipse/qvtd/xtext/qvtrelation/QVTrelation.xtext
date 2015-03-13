@@ -28,7 +28,7 @@ TopLevelCS:
 CollectionTemplateCS: name=UnrestrictedName? ':' ownedType=CollectionTypeCS
 	'{' (ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS)
 	    (',' ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS))*
-        '++' (restIdentifier=[pivot::Variable|UnrestrictedName] | '_')                     
+        '++' restIdentifier=[pivot::Variable|UnrestrictedName]
          )? '}';
 
 DefaultValueCS: propertyId=[pivot::Variable|UnrestrictedName] '=' ownedInitExpression=ExpCS ';';
@@ -40,7 +40,7 @@ DomainCS: (isCheckonly?='checkonly' | isEnforce?='enforce' | 'replace')? 'domain
 
 DomainPatternCS: ownedTemplate=TemplateCS;
 
-ElementTemplateCS: name=UnrestrictedName | {ElementTemplateCS} '_';
+ElementTemplateCS: name=UnrestrictedName;
 
 KeyDeclCS: 'key' ownedPathName=PathNameCS '{'
 	(propertyIds+=[pivot::Property|UnrestrictedName]
@@ -131,7 +131,6 @@ TypedRefCS returns base::TypedRefCS:
 
 UnrestrictedName returns ecore::EString:
 	EssentialOCLUnrestrictedName
-//|   '_'
 |   'checkonly'
 |   'default_values'
 |   'domain'
@@ -152,4 +151,3 @@ UnrestrictedName returns ecore::EString:
 |   'when'
 |   'where'
 ;
-//--	relationIdentifier -> '_'	

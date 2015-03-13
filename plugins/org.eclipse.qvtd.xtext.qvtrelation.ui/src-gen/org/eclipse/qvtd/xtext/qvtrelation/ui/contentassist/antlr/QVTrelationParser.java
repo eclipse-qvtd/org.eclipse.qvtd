@@ -40,9 +40,7 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTopLevelCSAccess().getAlternatives_0(), "rule__TopLevelCS__Alternatives_0");
 					put(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersAlternatives_4_0_0(), "rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_0_0");
 					put(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersAlternatives_4_1_1_0(), "rule__CollectionTemplateCS__OwnedMemberIdentifiersAlternatives_4_1_1_0");
-					put(grammarAccess.getCollectionTemplateCSAccess().getAlternatives_4_3(), "rule__CollectionTemplateCS__Alternatives_4_3");
 					put(grammarAccess.getDomainCSAccess().getAlternatives_0(), "rule__DomainCS__Alternatives_0");
-					put(grammarAccess.getElementTemplateCSAccess().getAlternatives(), "rule__ElementTemplateCS__Alternatives");
 					put(grammarAccess.getKeyDeclCSAccess().getAlternatives_3(), "rule__KeyDeclCS__Alternatives_3");
 					put(grammarAccess.getKeyDeclCSAccess().getAlternatives_4_1(), "rule__KeyDeclCS__Alternatives_4_1");
 					put(grammarAccess.getModelDeclCSAccess().getAlternatives_2(), "rule__ModelDeclCS__Alternatives_2");
@@ -93,7 +91,6 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDomainCSAccess().getGroup(), "rule__DomainCS__Group__0");
 					put(grammarAccess.getDomainCSAccess().getGroup_4(), "rule__DomainCS__Group_4__0");
 					put(grammarAccess.getDomainCSAccess().getGroup_5(), "rule__DomainCS__Group_5__0");
-					put(grammarAccess.getElementTemplateCSAccess().getGroup_1(), "rule__ElementTemplateCS__Group_1__0");
 					put(grammarAccess.getKeyDeclCSAccess().getGroup(), "rule__KeyDeclCS__Group__0");
 					put(grammarAccess.getKeyDeclCSAccess().getGroup_3_1(), "rule__KeyDeclCS__Group_3_1__0");
 					put(grammarAccess.getKeyDeclCSAccess().getGroup_4(), "rule__KeyDeclCS__Group_4__0");
@@ -226,7 +223,7 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getCollectionTemplateCSAccess().getOwnedTypeAssignment_2(), "rule__CollectionTemplateCS__OwnedTypeAssignment_2");
 					put(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersAssignment_4_0(), "rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_0");
 					put(grammarAccess.getCollectionTemplateCSAccess().getOwnedMemberIdentifiersAssignment_4_1_1(), "rule__CollectionTemplateCS__OwnedMemberIdentifiersAssignment_4_1_1");
-					put(grammarAccess.getCollectionTemplateCSAccess().getRestIdentifierAssignment_4_3_0(), "rule__CollectionTemplateCS__RestIdentifierAssignment_4_3_0");
+					put(grammarAccess.getCollectionTemplateCSAccess().getRestIdentifierAssignment_4_3(), "rule__CollectionTemplateCS__RestIdentifierAssignment_4_3");
 					put(grammarAccess.getDefaultValueCSAccess().getPropertyIdAssignment_0(), "rule__DefaultValueCS__PropertyIdAssignment_0");
 					put(grammarAccess.getDefaultValueCSAccess().getOwnedInitExpressionAssignment_2(), "rule__DefaultValueCS__OwnedInitExpressionAssignment_2");
 					put(grammarAccess.getDomainCSAccess().getIsCheckonlyAssignment_0_0(), "rule__DomainCS__IsCheckonlyAssignment_0_0");
@@ -236,7 +233,7 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDomainCSAccess().getOwnedImplementedByAssignment_4_1(), "rule__DomainCS__OwnedImplementedByAssignment_4_1");
 					put(grammarAccess.getDomainCSAccess().getOwnedDefaultValuesAssignment_5_2(), "rule__DomainCS__OwnedDefaultValuesAssignment_5_2");
 					put(grammarAccess.getDomainPatternCSAccess().getOwnedTemplateAssignment(), "rule__DomainPatternCS__OwnedTemplateAssignment");
-					put(grammarAccess.getElementTemplateCSAccess().getNameAssignment_0(), "rule__ElementTemplateCS__NameAssignment_0");
+					put(grammarAccess.getElementTemplateCSAccess().getNameAssignment(), "rule__ElementTemplateCS__NameAssignment");
 					put(grammarAccess.getKeyDeclCSAccess().getOwnedPathNameAssignment_1(), "rule__KeyDeclCS__OwnedPathNameAssignment_1");
 					put(grammarAccess.getKeyDeclCSAccess().getPropertyIdsAssignment_3_0(), "rule__KeyDeclCS__PropertyIdsAssignment_3_0");
 					put(grammarAccess.getKeyDeclCSAccess().getOwnedOppositePropertyIdsAssignment_3_1_2(), "rule__KeyDeclCS__OwnedOppositePropertyIdsAssignment_3_1_2");

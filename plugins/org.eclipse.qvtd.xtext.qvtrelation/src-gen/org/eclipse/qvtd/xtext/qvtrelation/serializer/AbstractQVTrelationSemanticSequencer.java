@@ -435,7 +435,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends EssentialOCLS
 	 *         (
 	 *             (ownedMemberIdentifiers+=TemplateCS | ownedMemberIdentifiers+=ElementTemplateCS) 
 	 *             (ownedMemberIdentifiers+=TemplateCS | ownedMemberIdentifiers+=ElementTemplateCS)* 
-	 *             restIdentifier=[Variable|UnrestrictedName]?
+	 *             restIdentifier=[Variable|UnrestrictedName]
 	 *         )?
 	 *     )
 	 */
@@ -452,7 +452,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends EssentialOCLS
 	 *         (
 	 *             (ownedMemberIdentifiers+=TemplateCS | ownedMemberIdentifiers+=ElementTemplateCS) 
 	 *             (ownedMemberIdentifiers+=TemplateCS | ownedMemberIdentifiers+=ElementTemplateCS)* 
-	 *             restIdentifier=[Variable|UnrestrictedName]?
+	 *             restIdentifier=[Variable|UnrestrictedName]
 	 *         )? 
 	 *         ownedGuardExpression=ExpCS?
 	 *     )
@@ -497,7 +497,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends EssentialOCLS
 	
 	/**
 	 * Constraint:
-	 *     {ElementTemplateCS}
+	 *     name=UnrestrictedName
 	 */
 	protected void sequence_ElementTemplateCS(EObject context, ElementTemplateCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

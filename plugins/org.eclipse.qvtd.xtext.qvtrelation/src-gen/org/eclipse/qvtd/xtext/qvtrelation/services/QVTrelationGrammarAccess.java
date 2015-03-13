@@ -82,11 +82,9 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cOwnedMemberIdentifiersTemplateCSParserRuleCall_4_1_1_0_0 = (RuleCall)cOwnedMemberIdentifiersAlternatives_4_1_1_0.eContents().get(0);
 		private final RuleCall cOwnedMemberIdentifiersElementTemplateCSParserRuleCall_4_1_1_0_1 = (RuleCall)cOwnedMemberIdentifiersAlternatives_4_1_1_0.eContents().get(1);
 		private final Keyword cPlusSignPlusSignKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
-		private final Alternatives cAlternatives_4_3 = (Alternatives)cGroup_4.eContents().get(3);
-		private final Assignment cRestIdentifierAssignment_4_3_0 = (Assignment)cAlternatives_4_3.eContents().get(0);
-		private final CrossReference cRestIdentifierVariableCrossReference_4_3_0_0 = (CrossReference)cRestIdentifierAssignment_4_3_0.eContents().get(0);
-		private final RuleCall cRestIdentifierVariableUnrestrictedNameParserRuleCall_4_3_0_0_1 = (RuleCall)cRestIdentifierVariableCrossReference_4_3_0_0.eContents().get(1);
-		private final Keyword c_Keyword_4_3_1 = (Keyword)cAlternatives_4_3.eContents().get(1);
+		private final Assignment cRestIdentifierAssignment_4_3 = (Assignment)cGroup_4.eContents().get(3);
+		private final CrossReference cRestIdentifierVariableCrossReference_4_3_0 = (CrossReference)cRestIdentifierAssignment_4_3.eContents().get(0);
+		private final RuleCall cRestIdentifierVariableUnrestrictedNameParserRuleCall_4_3_0_1 = (RuleCall)cRestIdentifierVariableCrossReference_4_3_0.eContents().get(1);
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		////UnitCS: identifier+=[pivot::Element|UnrestrictedName] ('.' identifier+=[pivot::Element|UnrestrictedName])*;
@@ -94,12 +92,12 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//CollectionTemplateCS:
 		//	name=UnrestrictedName? ":" ownedType=CollectionTypeCS "{" (ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS)
 		//	("," ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS))* "++"
-		//	(restIdentifier=[pivot::Variable|UnrestrictedName] | "_"))? "}";
+		//	restIdentifier=[pivot::Variable|UnrestrictedName])? "}";
 		@Override public ParserRule getRule() { return rule; }
 
 		//name=UnrestrictedName? ":" ownedType=CollectionTypeCS "{" (ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS) (","
-		//ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS))* "++" (restIdentifier=[pivot::Variable|UnrestrictedName] |
-		//"_"))? "}"
+		//ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS))* "++" restIdentifier=[pivot::Variable|UnrestrictedName])?
+		//"}"
 		public Group getGroup() { return cGroup; }
 
 		//name=UnrestrictedName?
@@ -121,7 +119,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
 		//(ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS) ("," ownedMemberIdentifiers+=(TemplateCS |
-		//ElementTemplateCS))* "++" (restIdentifier=[pivot::Variable|UnrestrictedName] | "_"))?
+		//ElementTemplateCS))* "++" restIdentifier=[pivot::Variable|UnrestrictedName])?
 		public Group getGroup_4() { return cGroup_4; }
 
 		//ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS)
@@ -157,20 +155,14 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//"++"
 		public Keyword getPlusSignPlusSignKeyword_4_2() { return cPlusSignPlusSignKeyword_4_2; }
 
-		//restIdentifier=[pivot::Variable|UnrestrictedName] | "_"
-		public Alternatives getAlternatives_4_3() { return cAlternatives_4_3; }
-
 		//restIdentifier=[pivot::Variable|UnrestrictedName]
-		public Assignment getRestIdentifierAssignment_4_3_0() { return cRestIdentifierAssignment_4_3_0; }
+		public Assignment getRestIdentifierAssignment_4_3() { return cRestIdentifierAssignment_4_3; }
 
 		//[pivot::Variable|UnrestrictedName]
-		public CrossReference getRestIdentifierVariableCrossReference_4_3_0_0() { return cRestIdentifierVariableCrossReference_4_3_0_0; }
+		public CrossReference getRestIdentifierVariableCrossReference_4_3_0() { return cRestIdentifierVariableCrossReference_4_3_0; }
 
 		//UnrestrictedName
-		public RuleCall getRestIdentifierVariableUnrestrictedNameParserRuleCall_4_3_0_0_1() { return cRestIdentifierVariableUnrestrictedNameParserRuleCall_4_3_0_0_1; }
-
-		//"_"
-		public Keyword get_Keyword_4_3_1() { return c_Keyword_4_3_1; }
+		public RuleCall getRestIdentifierVariableUnrestrictedNameParserRuleCall_4_3_0_1() { return cRestIdentifierVariableUnrestrictedNameParserRuleCall_4_3_0_1; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_5() { return cRightCurlyBracketKeyword_5; }
@@ -342,34 +334,18 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class ElementTemplateCSElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ElementTemplateCS");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Assignment cNameAssignment_0 = (Assignment)cAlternatives.eContents().get(0);
-		private final RuleCall cNameUnrestrictedNameParserRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
-		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
-		private final Action cElementTemplateCSAction_1_0 = (Action)cGroup_1.eContents().get(0);
-		private final Keyword c_Keyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cNameUnrestrictedNameParserRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
 		//ElementTemplateCS:
-		//	name=UnrestrictedName | {ElementTemplateCS} "_";
+		//	name=UnrestrictedName;
 		@Override public ParserRule getRule() { return rule; }
 
-		//name=UnrestrictedName | {ElementTemplateCS} "_"
-		public Alternatives getAlternatives() { return cAlternatives; }
-
 		//name=UnrestrictedName
-		public Assignment getNameAssignment_0() { return cNameAssignment_0; }
+		public Assignment getNameAssignment() { return cNameAssignment; }
 
 		//UnrestrictedName
-		public RuleCall getNameUnrestrictedNameParserRuleCall_0_0() { return cNameUnrestrictedNameParserRuleCall_0_0; }
-
-		//{ElementTemplateCS} "_"
-		public Group getGroup_1() { return cGroup_1; }
-
-		//{ElementTemplateCS}
-		public Action getElementTemplateCSAction_1_0() { return cElementTemplateCSAction_1_0; }
-
-		//"_"
-		public Keyword get_Keyword_1_1() { return c_Keyword_1_1; }
+		public RuleCall getNameUnrestrictedNameParserRuleCall_0() { return cNameUnrestrictedNameParserRuleCall_0; }
 	}
 
 	public class KeyDeclCSElements extends AbstractParserRuleElementFinder {
@@ -1596,19 +1572,15 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		////ExpCS returns essentialocl::ExpCS:
 		// //	InfixedExpCS
 		// //|	TemplateCS;
-		// //--	relationIdentifier -> '_'	
-		//
-		//UnrestrictedName returns ecore::EString:
-		//	EssentialOCLUnrestrictedName //|   '_'
-		// | "checkonly" | "default_values" | "domain" | "enforce" | "extends" |
-		//	"implementedby" | "import" | "library" | "key" | "opposite" | "overrides" | "primitive" | "query" | "relation" |
-		//	"replace" | "top" | "transformation" | "when" | "where";
+		// UnrestrictedName returns ecore::EString:
+		//	EssentialOCLUnrestrictedName | "checkonly" | "default_values" | "domain" | "enforce" | "extends" | "implementedby" |
+		//	"import" | "library" | "key" | "opposite" | "overrides" | "primitive" | "query" | "relation" | "replace" | "top" |
+		//	"transformation" | "when" | "where";
 		@Override public ParserRule getRule() { return rule; }
 
-		//EssentialOCLUnrestrictedName //|   '_'
-		// | "checkonly" | "default_values" | "domain" | "enforce" | "extends" |
-		//"implementedby" | "import" | "library" | "key" | "opposite" | "overrides" | "primitive" | "query" | "relation" |
-		//"replace" | "top" | "transformation" | "when" | "where"
+		//EssentialOCLUnrestrictedName | "checkonly" | "default_values" | "domain" | "enforce" | "extends" | "implementedby" |
+		//"import" | "library" | "key" | "opposite" | "overrides" | "primitive" | "query" | "relation" | "replace" | "top" |
+		//"transformation" | "when" | "where"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//EssentialOCLUnrestrictedName
@@ -1784,7 +1756,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	//CollectionTemplateCS:
 	//	name=UnrestrictedName? ":" ownedType=CollectionTypeCS "{" (ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS)
 	//	("," ownedMemberIdentifiers+=(TemplateCS | ElementTemplateCS))* "++"
-	//	(restIdentifier=[pivot::Variable|UnrestrictedName] | "_"))? "}";
+	//	restIdentifier=[pivot::Variable|UnrestrictedName])? "}";
 	public CollectionTemplateCSElements getCollectionTemplateCSAccess() {
 		return pCollectionTemplateCS;
 	}
@@ -1826,7 +1798,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ElementTemplateCS:
-	//	name=UnrestrictedName | {ElementTemplateCS} "_";
+	//	name=UnrestrictedName;
 	public ElementTemplateCSElements getElementTemplateCSAccess() {
 		return pElementTemplateCS;
 	}
@@ -2071,13 +2043,10 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	////ExpCS returns essentialocl::ExpCS:
 	// //	InfixedExpCS
 	// //|	TemplateCS;
-	// //--	relationIdentifier -> '_'	
-	//
-	//UnrestrictedName returns ecore::EString:
-	//	EssentialOCLUnrestrictedName //|   '_'
-	// | "checkonly" | "default_values" | "domain" | "enforce" | "extends" |
-	//	"implementedby" | "import" | "library" | "key" | "opposite" | "overrides" | "primitive" | "query" | "relation" |
-	//	"replace" | "top" | "transformation" | "when" | "where";
+	// UnrestrictedName returns ecore::EString:
+	//	EssentialOCLUnrestrictedName | "checkonly" | "default_values" | "domain" | "enforce" | "extends" | "implementedby" |
+	//	"import" | "library" | "key" | "opposite" | "overrides" | "primitive" | "query" | "relation" | "replace" | "top" |
+	//	"transformation" | "when" | "where";
 	public UnrestrictedNameElements getUnrestrictedNameAccess() {
 		return pUnrestrictedName;
 	}
