@@ -14,6 +14,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.ocl.pivot.internal.scoping.Attribution;
+import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
 import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
 
 public class QVTrelationScoping
@@ -21,5 +22,6 @@ public class QVTrelationScoping
 	public static void init() {
 		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
 		registry.put(EssentialOCLCSPackage.Literals.NAVIGATING_ARG_CS, QVTrelationNavigatingArgCSAttribution.INSTANCE);
+		registry.put(BaseCSPackage.Literals.PATH_ELEMENT_CS, QVTrelationPathElementCSAttribution.INSTANCE);
 	}
 }

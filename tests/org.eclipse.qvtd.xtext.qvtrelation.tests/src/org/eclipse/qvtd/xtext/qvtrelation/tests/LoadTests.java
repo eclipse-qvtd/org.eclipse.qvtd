@@ -54,12 +54,10 @@ public class LoadTests extends LoadTestCase
 		doLoad_ModelMorf("ClassModelToClassModel/ClassModelToClassModel");
 	}	
 
-	// FIXME
-	public void zztestLoad_DNF_bbox_qvtr() throws IOException, InterruptedException {
+	public void testLoad_DNF_bbox_qvtr() throws IOException, InterruptedException {
 		doLoad_ModelMorf("DNF_bbox/DNF_bbox");
 	}	
 
-	// FIXME
 	public void testLoad_DNF_qvtr() throws IOException, InterruptedException {
 		doLoad_ModelMorf("DNF/DNF");
 	}	
