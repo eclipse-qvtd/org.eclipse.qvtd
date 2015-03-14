@@ -49,7 +49,7 @@ public class LoadTestCase extends XtextTestCase
 		BaseCSResource xtextResource = (BaseCSResource) ocl.getResourceSet().getResource(inputURI, true);
 		assertNoResourceErrors("Load failed", xtextResource);
 		Resource pivotResource = xtextResource.getASResource();
-//		assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
+		assertNoUnresolvedProxies("Unresolved proxies", xtextResource);
 //		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validate()");
 		assertNoValidationErrors("Validation errors", xtextResource.getContents().get(0));
 //		System.out.println(Long.toString(System.currentTimeMillis() - startTime) + " validated()");
