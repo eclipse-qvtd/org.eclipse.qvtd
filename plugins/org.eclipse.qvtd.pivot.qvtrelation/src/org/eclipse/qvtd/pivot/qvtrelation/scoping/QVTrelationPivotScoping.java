@@ -55,6 +55,7 @@ public class QVTrelationPivotScoping
 		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
 		registry.put(QVTrelationPackage.Literals.KEY, KeyAttribution.INSTANCE);
 		registry.put(QVTrelationPackage.Literals.RELATION, RelationAttribution.INSTANCE);
+//		registry.put(QVTrelationPackage.Literals.RELATION_CALL_EXP, RelationCallExpAttribution.INSTANCE);
 		registry.put(QVTrelationPackage.Literals.RELATION_DOMAIN, RelationDomainAttribution.INSTANCE);
 		registry.put(QVTrelationPackage.Literals.RELATION_MODEL, RelationModelAttribution.INSTANCE);
 		EnvironmentView.addDisambiguator(Function.class, new FunctionDisambiguator());

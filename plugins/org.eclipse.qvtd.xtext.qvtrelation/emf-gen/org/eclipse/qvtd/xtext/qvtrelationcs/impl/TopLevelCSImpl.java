@@ -87,8 +87,9 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("null")
 	@Override
-	public EList<UnitCS> getOwnedImportClauses() {
+	public @NonNull EList<UnitCS> getOwnedImportClauses() {
 		if (ownedImportClauses == null) {
 			ownedImportClauses = new EObjectContainmentEList<UnitCS>(UnitCS.class, this, QVTrelationCSPackage.TOP_LEVEL_CS__OWNED_IMPORT_CLAUSES);
 		}
@@ -100,8 +101,9 @@ public class TopLevelCSImpl extends RootPackageCSImpl implements TopLevelCS {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("null")
 	@Override
-	public EList<TransformationCS> getOwnedTransformations() {
+	public @NonNull EList<TransformationCS> getOwnedTransformations() {
 		if (ownedTransformations == null) {
 			ownedTransformations = new EObjectContainmentEList<TransformationCS>(TransformationCS.class, this, QVTrelationCSPackage.TOP_LEVEL_CS__OWNED_TRANSFORMATIONS);
 		}

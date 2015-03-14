@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2014 E.D.Willink and others.
+ * Copyright (c) 2012 E.D.Willink and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,15 +10,16 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtrelation.scoping;
 
-import org.eclipse.ocl.xtext.essentialocl.scoping.EssentialOCLScopeProvider;
+import java.util.Map;
 
-/**
- * This class contains custom scoping description.
- * 
- * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#scoping
- * on how and when to use it 
- *
- */
-public class QVTrelationScopeProvider extends EssentialOCLScopeProvider
-{
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.ocl.pivot.internal.scoping.Attribution;
+import org.eclipse.ocl.xtext.essentialoclcs.EssentialOCLCSPackage;
+
+public class QVTrelationScoping
+{	
+	public static void init() {
+		Map<EClassifier, Attribution> registry = Attribution.REGISTRY;
+		registry.put(EssentialOCLCSPackage.Literals.NAVIGATING_ARG_CS, QVTrelationNavigatingArgCSAttribution.INSTANCE);
+	}
 }

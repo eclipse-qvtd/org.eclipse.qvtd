@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.xtext.qvtrelationcs;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.xtext.basecs.RootPackageCS;
 
 /**
@@ -45,7 +46,7 @@ public interface TopLevelCS extends RootPackageCS {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<UnitCS> getOwnedImportClauses();
+	@NonNull EList<UnitCS> getOwnedImportClauses();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Transformations</b></em>' containment reference list.
@@ -61,6 +62,6 @@ public interface TopLevelCS extends RootPackageCS {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<TransformationCS> getOwnedTransformations();
+	@NonNull EList<TransformationCS> getOwnedTransformations();
 
 } // TopLevelCS
