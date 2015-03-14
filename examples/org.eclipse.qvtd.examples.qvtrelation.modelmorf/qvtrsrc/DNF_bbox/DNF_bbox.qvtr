@@ -12,7 +12,7 @@
 
 -- Transforming an arbitrary boolean expression into disjunctive normal form by using 
 -- DeMorgan's law
-import exprMM : 'DNFMM.emof'::exprMM; 
+import exprMM : 'DNFMM.emof'::deMorgansLawMM; 
 
 transformation DNF_bbox(expr1:exprMM, expr2:exprMM)
 {
