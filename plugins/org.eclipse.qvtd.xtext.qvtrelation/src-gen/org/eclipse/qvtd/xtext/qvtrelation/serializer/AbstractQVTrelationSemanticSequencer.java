@@ -477,7 +477,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends EssentialOCLS
 	 *         (isCheckonly?='checkonly' | isEnforce?='enforce')? 
 	 *         modelId=[TypedModel|UnrestrictedName] 
 	 *         ownedPattern=DomainPatternCS 
-	 *         ownedImplementedBy=ExpCS? 
+	 *         implementedBy=UnrestrictedName? 
 	 *         ownedDefaultValues+=DefaultValueCS*
 	 *     )
 	 */

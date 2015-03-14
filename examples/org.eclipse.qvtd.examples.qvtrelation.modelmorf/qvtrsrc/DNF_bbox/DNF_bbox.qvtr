@@ -266,6 +266,6 @@ transformation DNF_bbox(expr1:exprMM, expr2:exprMM)
 	{
 		domain expr1 e1:Expr {};
 
-		enforce domain expr2 e2:Expr {} implementedby CopyExpr(e1, e2);
+		enforce domain expr2 e2:Expr {} implementedby CopyExpr;
 	}
 }

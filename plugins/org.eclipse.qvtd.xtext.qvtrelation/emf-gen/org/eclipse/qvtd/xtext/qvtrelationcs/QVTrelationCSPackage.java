@@ -611,13 +611,22 @@ public interface QVTrelationCSPackage extends EPackage {
 	int DOMAIN_CS__OWNED_ANNOTATIONS = ABSTRACT_DOMAIN_CS__OWNED_ANNOTATIONS;
 
 	/**
+	 * The feature id for the '<em><b>Implemented By</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_CS__IMPLEMENTED_BY = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Is Checkonly</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_CS__IS_CHECKONLY = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 0;
+	int DOMAIN_CS__IS_CHECKONLY = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Is Enforce</b></em>' attribute.
@@ -626,7 +635,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_CS__IS_ENFORCE = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 1;
+	int DOMAIN_CS__IS_ENFORCE = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Model Id</b></em>' reference.
@@ -635,7 +644,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_CS__MODEL_ID = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 2;
+	int DOMAIN_CS__MODEL_ID = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Is Replace</b></em>' attribute.
@@ -644,7 +653,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_CS__IS_REPLACE = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 3;
+	int DOMAIN_CS__IS_REPLACE = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Owned Pattern</b></em>' containment reference.
@@ -653,7 +662,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_CS__OWNED_PATTERN = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 4;
+	int DOMAIN_CS__OWNED_PATTERN = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Owned Default Values</b></em>' containment reference list.
@@ -662,7 +671,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_CS__OWNED_DEFAULT_VALUES = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 5;
+	int DOMAIN_CS__OWNED_DEFAULT_VALUES = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Owned Implemented By</b></em>' containment reference.
@@ -671,7 +680,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_CS__OWNED_IMPLEMENTED_BY = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 6;
+	int DOMAIN_CS__OWNED_IMPLEMENTED_BY = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>Domain CS</em>' class.
@@ -680,7 +689,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_CS_FEATURE_COUNT = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 7;
+	int DOMAIN_CS_FEATURE_COUNT = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainPatternCSImpl <em>Domain Pattern CS</em>}' class.
@@ -2512,6 +2521,17 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getDomainCS();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getImplementedBy <em>Implemented By</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Implemented By</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getImplementedBy()
+	 * @see #getDomainCS()
+	 * @generated
+	 */
+	EAttribute getDomainCS_ImplementedBy();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isIsCheckonly <em>Is Checkonly</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3245,6 +3265,14 @@ public interface QVTrelationCSPackage extends EPackage {
 		 * @generated
 		 */
 		EClass DOMAIN_CS = eINSTANCE.getDomainCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Implemented By</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DOMAIN_CS__IMPLEMENTED_BY = eINSTANCE.getDomainCS_ImplementedBy();
 
 		/**
 		 * The meta object literal for the '<em><b>Is Checkonly</b></em>' attribute feature.

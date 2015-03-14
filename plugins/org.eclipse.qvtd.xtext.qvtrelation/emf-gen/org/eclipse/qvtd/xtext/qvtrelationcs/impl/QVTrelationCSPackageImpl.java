@@ -365,7 +365,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EAttribute getDomainCS_IsCheckonly() {
+	public EAttribute getDomainCS_ImplementedBy() {
 		return (EAttribute)domainCSEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -375,7 +375,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EAttribute getDomainCS_IsEnforce() {
+	public EAttribute getDomainCS_IsCheckonly() {
 		return (EAttribute)domainCSEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -385,8 +385,18 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
+	public EAttribute getDomainCS_IsEnforce() {
+		return (EAttribute)domainCSEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EReference getDomainCS_ModelId() {
-		return (EReference)domainCSEClass.getEStructuralFeatures().get(2);
+		return (EReference)domainCSEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -396,7 +406,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 */
 	@Override
 	public EAttribute getDomainCS_IsReplace() {
-		return (EAttribute)domainCSEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)domainCSEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -406,16 +416,6 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 */
 	@Override
 	public EReference getDomainCS_OwnedPattern() {
-		return (EReference)domainCSEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getDomainCS_OwnedDefaultValues() {
 		return (EReference)domainCSEClass.getEStructuralFeatures().get(5);
 	}
 
@@ -425,8 +425,18 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getDomainCS_OwnedImplementedBy() {
+	public EReference getDomainCS_OwnedDefaultValues() {
 		return (EReference)domainCSEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getDomainCS_OwnedImplementedBy() {
+		return (EReference)domainCSEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -999,6 +1009,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		createEReference(defaultValueCSEClass, DEFAULT_VALUE_CS__PROPERTY_ID);
 
 		domainCSEClass = createEClass(DOMAIN_CS);
+		createEAttribute(domainCSEClass, DOMAIN_CS__IMPLEMENTED_BY);
 		createEAttribute(domainCSEClass, DOMAIN_CS__IS_CHECKONLY);
 		createEAttribute(domainCSEClass, DOMAIN_CS__IS_ENFORCE);
 		createEReference(domainCSEClass, DOMAIN_CS__MODEL_ID);
@@ -1154,6 +1165,7 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		initEReference(getDefaultValueCS_PropertyId(), thePivotPackage.getVariable(), null, "propertyId", null, 1, 1, DefaultValueCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(domainCSEClass, DomainCS.class, "DomainCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDomainCS_ImplementedBy(), thePivotPackage.getString(), "implementedBy", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDomainCS_IsCheckonly(), ecorePackage.getEBoolean(), "isCheckonly", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDomainCS_IsEnforce(), ecorePackage.getEBoolean(), "isEnforce", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDomainCS_ModelId(), theQVTbasePackage.getTypedModel(), null, "modelId", null, 0, 1, DomainCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

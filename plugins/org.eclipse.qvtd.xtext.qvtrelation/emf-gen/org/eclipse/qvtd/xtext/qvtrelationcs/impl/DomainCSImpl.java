@@ -39,6 +39,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainCSImpl#getImplementedBy <em>Implemented By</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainCSImpl#isIsCheckonly <em>Is Checkonly</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainCSImpl#isIsEnforce <em>Is Enforce</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.DomainCSImpl#getModelId <em>Model Id</em>}</li>
@@ -51,6 +52,26 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * @generated
  */
 public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
+	/**
+	 * The default value of the '{@link #getImplementedBy() <em>Implemented By</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImplementedBy()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String IMPLEMENTED_BY_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getImplementedBy() <em>Implemented By</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImplementedBy()
+	 * @generated
+	 * @ordered
+	 */
+	protected String implementedBy = IMPLEMENTED_BY_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #isIsCheckonly() <em>Is Checkonly</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -168,6 +189,29 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	@Override
 	protected EClass eStaticClass() {
 		return QVTrelationCSPackage.Literals.DOMAIN_CS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getImplementedBy() {
+		return implementedBy;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setImplementedBy(String newImplementedBy) {
+		String oldImplementedBy = implementedBy;
+		implementedBy = newImplementedBy;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DOMAIN_CS__IMPLEMENTED_BY, oldImplementedBy, implementedBy));
 	}
 
 	/**
@@ -418,6 +462,8 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTrelationCSPackage.DOMAIN_CS__IMPLEMENTED_BY:
+				return getImplementedBy();
 			case QVTrelationCSPackage.DOMAIN_CS__IS_CHECKONLY:
 				return isIsCheckonly();
 			case QVTrelationCSPackage.DOMAIN_CS__IS_ENFORCE:
@@ -446,6 +492,9 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTrelationCSPackage.DOMAIN_CS__IMPLEMENTED_BY:
+				setImplementedBy((String)newValue);
+				return;
 			case QVTrelationCSPackage.DOMAIN_CS__IS_CHECKONLY:
 				setIsCheckonly((Boolean)newValue);
 				return;
@@ -480,6 +529,9 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTrelationCSPackage.DOMAIN_CS__IMPLEMENTED_BY:
+				setImplementedBy(IMPLEMENTED_BY_EDEFAULT);
+				return;
 			case QVTrelationCSPackage.DOMAIN_CS__IS_CHECKONLY:
 				setIsCheckonly(IS_CHECKONLY_EDEFAULT);
 				return;
@@ -513,6 +565,8 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTrelationCSPackage.DOMAIN_CS__IMPLEMENTED_BY:
+				return IMPLEMENTED_BY_EDEFAULT == null ? implementedBy != null : !IMPLEMENTED_BY_EDEFAULT.equals(implementedBy);
 			case QVTrelationCSPackage.DOMAIN_CS__IS_CHECKONLY:
 				return isCheckonly != IS_CHECKONLY_EDEFAULT;
 			case QVTrelationCSPackage.DOMAIN_CS__IS_ENFORCE:

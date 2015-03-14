@@ -5229,9 +5229,9 @@ rule__DomainCS__Group_4__1__Impl
     }
 :
 (
-{ before(grammarAccess.getDomainCSAccess().getOwnedImplementedByAssignment_4_1()); }
-(rule__DomainCS__OwnedImplementedByAssignment_4_1)
-{ after(grammarAccess.getDomainCSAccess().getOwnedImplementedByAssignment_4_1()); }
+{ before(grammarAccess.getDomainCSAccess().getImplementedByAssignment_4_1()); }
+(rule__DomainCS__ImplementedByAssignment_4_1)
+{ after(grammarAccess.getDomainCSAccess().getImplementedByAssignment_4_1()); }
 )
 
 ;
@@ -17105,14 +17105,14 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__DomainCS__OwnedImplementedByAssignment_4_1
+rule__DomainCS__ImplementedByAssignment_4_1
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getDomainCSAccess().getOwnedImplementedByExpCSParserRuleCall_4_1_0()); }
-	ruleExpCS{ after(grammarAccess.getDomainCSAccess().getOwnedImplementedByExpCSParserRuleCall_4_1_0()); }
+{ before(grammarAccess.getDomainCSAccess().getImplementedByUnrestrictedNameParserRuleCall_4_1_0()); }
+	ruleUnrestrictedName{ after(grammarAccess.getDomainCSAccess().getImplementedByUnrestrictedNameParserRuleCall_4_1_0()); }
 )
 
 ;

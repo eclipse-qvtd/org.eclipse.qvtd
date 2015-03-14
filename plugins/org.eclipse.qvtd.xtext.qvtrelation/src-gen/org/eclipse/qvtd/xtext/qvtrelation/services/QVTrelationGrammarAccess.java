@@ -225,8 +225,8 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cOwnedPatternDomainPatternCSParserRuleCall_3_0 = (RuleCall)cOwnedPatternAssignment_3.eContents().get(0);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
 		private final Keyword cImplementedbyKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cOwnedImplementedByAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final RuleCall cOwnedImplementedByExpCSParserRuleCall_4_1_0 = (RuleCall)cOwnedImplementedByAssignment_4_1.eContents().get(0);
+		private final Assignment cImplementedByAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cImplementedByUnrestrictedNameParserRuleCall_4_1_0 = (RuleCall)cImplementedByAssignment_4_1.eContents().get(0);
 		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
 		private final Keyword cDefault_valuesKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
 		private final Keyword cLeftCurlyBracketKeyword_5_1 = (Keyword)cGroup_5.eContents().get(1);
@@ -238,11 +238,11 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//DomainCS:
 		//	(isCheckonly?="checkonly" | isEnforce?="enforce" | "replace")? "domain"
 		//	modelId=[qvtbase::TypedModel|UnrestrictedName] ownedPattern=DomainPatternCS ("implementedby"
-		//	ownedImplementedBy=ExpCS)? ("default_values" "{" ownedDefaultValues+=DefaultValueCS+ "}")? ";";
+		//	implementedBy=UnrestrictedName)? ("default_values" "{" ownedDefaultValues+=DefaultValueCS+ "}")? ";";
 		@Override public ParserRule getRule() { return rule; }
 
 		//(isCheckonly?="checkonly" | isEnforce?="enforce" | "replace")? "domain" modelId=[qvtbase::TypedModel|UnrestrictedName]
-		//ownedPattern=DomainPatternCS ("implementedby" ownedImplementedBy=ExpCS)? ("default_values" "{"
+		//ownedPattern=DomainPatternCS ("implementedby" implementedBy=UnrestrictedName)? ("default_values" "{"
 		//ownedDefaultValues+=DefaultValueCS+ "}")? ";"
 		public Group getGroup() { return cGroup; }
 
@@ -282,17 +282,17 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//DomainPatternCS
 		public RuleCall getOwnedPatternDomainPatternCSParserRuleCall_3_0() { return cOwnedPatternDomainPatternCSParserRuleCall_3_0; }
 
-		//("implementedby" ownedImplementedBy=ExpCS)?
+		//("implementedby" implementedBy=UnrestrictedName)?
 		public Group getGroup_4() { return cGroup_4; }
 
 		//"implementedby"
 		public Keyword getImplementedbyKeyword_4_0() { return cImplementedbyKeyword_4_0; }
 
-		//ownedImplementedBy=ExpCS
-		public Assignment getOwnedImplementedByAssignment_4_1() { return cOwnedImplementedByAssignment_4_1; }
+		//implementedBy=UnrestrictedName
+		public Assignment getImplementedByAssignment_4_1() { return cImplementedByAssignment_4_1; }
 
-		//ExpCS
-		public RuleCall getOwnedImplementedByExpCSParserRuleCall_4_1_0() { return cOwnedImplementedByExpCSParserRuleCall_4_1_0; }
+		//UnrestrictedName
+		public RuleCall getImplementedByUnrestrictedNameParserRuleCall_4_1_0() { return cImplementedByUnrestrictedNameParserRuleCall_4_1_0; }
 
 		//("default_values" "{" ownedDefaultValues+=DefaultValueCS+ "}")?
 		public Group getGroup_5() { return cGroup_5; }
@@ -1778,7 +1778,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	//DomainCS:
 	//	(isCheckonly?="checkonly" | isEnforce?="enforce" | "replace")? "domain"
 	//	modelId=[qvtbase::TypedModel|UnrestrictedName] ownedPattern=DomainPatternCS ("implementedby"
-	//	ownedImplementedBy=ExpCS)? ("default_values" "{" ownedDefaultValues+=DefaultValueCS+ "}")? ";";
+	//	implementedBy=UnrestrictedName)? ("default_values" "{" ownedDefaultValues+=DefaultValueCS+ "}")? ";";
 	public DomainCSElements getDomainCSAccess() {
 		return pDomainCS;
 	}

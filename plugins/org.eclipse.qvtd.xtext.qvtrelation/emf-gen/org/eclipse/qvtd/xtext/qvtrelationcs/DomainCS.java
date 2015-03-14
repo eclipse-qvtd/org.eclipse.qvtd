@@ -23,6 +23,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getImplementedBy <em>Implemented By</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isIsCheckonly <em>Is Checkonly</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#isIsEnforce <em>Is Enforce</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getModelId <em>Model Id</em>}</li>
@@ -37,6 +38,32 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * @generated
  */
 public interface DomainCS extends AbstractDomainCS {
+	/**
+	 * Returns the value of the '<em><b>Implemented By</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Implemented By</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Implemented By</em>' attribute.
+	 * @see #setImplementedBy(String)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDomainCS_ImplementedBy()
+	 * @model dataType="org.eclipse.ocl.pivot.String"
+	 * @generated
+	 */
+	String getImplementedBy();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getImplementedBy <em>Implemented By</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Implemented By</em>' attribute.
+	 * @see #getImplementedBy()
+	 * @generated
+	 */
+	void setImplementedBy(String value);
+
 	/**
 	 * Returns the value of the '<em><b>Is Checkonly</b></em>' attribute.
 	 * <!-- begin-user-doc -->

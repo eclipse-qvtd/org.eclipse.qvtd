@@ -230,7 +230,7 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDomainCSAccess().getIsEnforceAssignment_0_1(), "rule__DomainCS__IsEnforceAssignment_0_1");
 					put(grammarAccess.getDomainCSAccess().getModelIdAssignment_2(), "rule__DomainCS__ModelIdAssignment_2");
 					put(grammarAccess.getDomainCSAccess().getOwnedPatternAssignment_3(), "rule__DomainCS__OwnedPatternAssignment_3");
-					put(grammarAccess.getDomainCSAccess().getOwnedImplementedByAssignment_4_1(), "rule__DomainCS__OwnedImplementedByAssignment_4_1");
+					put(grammarAccess.getDomainCSAccess().getImplementedByAssignment_4_1(), "rule__DomainCS__ImplementedByAssignment_4_1");
 					put(grammarAccess.getDomainCSAccess().getOwnedDefaultValuesAssignment_5_2(), "rule__DomainCS__OwnedDefaultValuesAssignment_5_2");
 					put(grammarAccess.getDomainPatternCSAccess().getOwnedTemplateAssignment(), "rule__DomainPatternCS__OwnedTemplateAssignment");
 					put(grammarAccess.getElementTemplateCSAccess().getNameAssignment(), "rule__ElementTemplateCS__NameAssignment");

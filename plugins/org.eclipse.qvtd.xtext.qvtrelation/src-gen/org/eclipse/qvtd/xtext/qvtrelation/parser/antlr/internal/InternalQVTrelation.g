@@ -474,17 +474,17 @@ ruleDomainCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getDomainCSAccess().getOwnedImplementedByExpCSParserRuleCall_4_1_0()); 
+	        newCompositeNode(grammarAccess.getDomainCSAccess().getImplementedByUnrestrictedNameParserRuleCall_4_1_0()); 
 	    }
-		lv_ownedImplementedBy_7_0=ruleExpCS		{
+		lv_implementedBy_7_0=ruleUnrestrictedName		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getDomainCSRule());
 	        }
        		set(
        			$current, 
-       			"ownedImplementedBy",
-        		lv_ownedImplementedBy_7_0, 
-        		"ExpCS");
+       			"implementedBy",
+        		lv_implementedBy_7_0, 
+        		"UnrestrictedName");
 	        afterParserOrEnumRuleCall();
 	    }
 
