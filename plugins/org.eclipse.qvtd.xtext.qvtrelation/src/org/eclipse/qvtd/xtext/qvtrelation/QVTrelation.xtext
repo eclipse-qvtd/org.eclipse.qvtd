@@ -99,7 +99,7 @@ TransformationCS: 'transformation' ownedPathName=ScopeNameCS? name=UnrestrictedN
 UnitCS returns base::ImportCS:
 	'import' (name=UnrestrictedName ':')? ownedPathName=URIPathNameCS ('::' isAll?='*')? ';';
 
-VarDeclarationCS: ownedVarDeclarationIds+=VarDeclarationIdCS (',' ownedVarDeclarationIds+=VarDeclarationIdCS)* ':' ownedType=TypedRefCS ';';
+VarDeclarationCS: ownedVarDeclarationIds+=VarDeclarationIdCS (',' ownedVarDeclarationIds+=VarDeclarationIdCS)* (':' ownedType=TypedRefCS)? ( '=' ownedInitExpression=ExpCS)? ';';
 
 VarDeclarationIdCS: name=UnrestrictedName;
 

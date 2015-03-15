@@ -2346,13 +2346,13 @@ public interface QVTrelationCSPackage extends EPackage {
 	int VAR_DECLARATION_CS__OWNED_ANNOTATIONS = BaseCSPackage.MODEL_ELEMENT_CS__OWNED_ANNOTATIONS;
 
 	/**
-	 * The feature id for the '<em><b>Owned Var Declaration Ids</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owned Init Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_DECLARATION_CS__OWNED_VAR_DECLARATION_IDS = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
+	int VAR_DECLARATION_CS__OWNED_INIT_EXPRESSION = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owned Type</b></em>' containment reference.
@@ -2364,13 +2364,22 @@ public interface QVTrelationCSPackage extends EPackage {
 	int VAR_DECLARATION_CS__OWNED_TYPE = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Owned Var Declaration Ids</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_DECLARATION_CS__OWNED_VAR_DECLARATION_IDS = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Var Declaration CS</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_DECLARATION_CS_FEATURE_COUNT = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 2;
+	int VAR_DECLARATION_CS_FEATURE_COUNT = BaseCSPackage.MODEL_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.VarDeclarationIdCSImpl <em>Var Declaration Id CS</em>}' class.
@@ -3161,6 +3170,17 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getVarDeclarationCS();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS#getOwnedInitExpression <em>Owned Init Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Owned Init Expression</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS#getOwnedInitExpression()
+	 * @see #getVarDeclarationCS()
+	 * @generated
+	 */
+	EReference getVarDeclarationCS_OwnedInitExpression();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.VarDeclarationCS#getOwnedVarDeclarationIds <em>Owned Var Declaration Ids</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3793,6 +3813,14 @@ public interface QVTrelationCSPackage extends EPackage {
 		 * @generated
 		 */
 		EClass VAR_DECLARATION_CS = eINSTANCE.getVarDeclarationCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Owned Init Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VAR_DECLARATION_CS__OWNED_INIT_EXPRESSION = eINSTANCE.getVarDeclarationCS_OwnedInitExpression();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Var Declaration Ids</b></em>' containment reference list feature.

@@ -2155,14 +2155,14 @@ ruleVarDeclarationCS returns [EObject current=null]
 	    }
 
 )
-))*	otherlv_3=':' 
+))*(	otherlv_3=':' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getVarDeclarationCSAccess().getColonKeyword_2());
+    	newLeafNode(otherlv_3, grammarAccess.getVarDeclarationCSAccess().getColonKeyword_2_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getVarDeclarationCSAccess().getOwnedTypeTypedRefCSParserRuleCall_3_0()); 
+	        newCompositeNode(grammarAccess.getVarDeclarationCSAccess().getOwnedTypeTypedRefCSParserRuleCall_2_1_0()); 
 	    }
 		lv_ownedType_4_0=ruleTypedRefCS		{
 	        if ($current==null) {
@@ -2177,9 +2177,31 @@ ruleVarDeclarationCS returns [EObject current=null]
 	    }
 
 )
-)	otherlv_5=';' 
+))?(	otherlv_5='=' 
     {
-    	newLeafNode(otherlv_5, grammarAccess.getVarDeclarationCSAccess().getSemicolonKeyword_4());
+    	newLeafNode(otherlv_5, grammarAccess.getVarDeclarationCSAccess().getEqualsSignKeyword_3_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getVarDeclarationCSAccess().getOwnedInitExpressionExpCSParserRuleCall_3_1_0()); 
+	    }
+		lv_ownedInitExpression_6_0=ruleExpCS		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getVarDeclarationCSRule());
+	        }
+       		set(
+       			$current, 
+       			"ownedInitExpression",
+        		lv_ownedInitExpression_6_0, 
+        		"ExpCS");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))?	otherlv_7=';' 
+    {
+    	newLeafNode(otherlv_7, grammarAccess.getVarDeclarationCSAccess().getSemicolonKeyword_4());
     }
 )
 ;

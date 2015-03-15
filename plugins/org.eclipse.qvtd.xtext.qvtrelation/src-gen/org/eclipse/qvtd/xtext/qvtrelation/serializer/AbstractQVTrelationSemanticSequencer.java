@@ -680,7 +680,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends EssentialOCLS
 	
 	/**
 	 * Constraint:
-	 *     (ownedVarDeclarationIds+=VarDeclarationIdCS ownedVarDeclarationIds+=VarDeclarationIdCS* ownedType=TypedRefCS)
+	 *     (ownedVarDeclarationIds+=VarDeclarationIdCS ownedVarDeclarationIds+=VarDeclarationIdCS* ownedType=TypedRefCS? ownedInitExpression=ExpCS?)
 	 */
 	protected void sequence_VarDeclarationCS(EObject context, VarDeclarationCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

@@ -127,6 +127,8 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getUnitCSAccess().getGroup_3(), "rule__UnitCS__Group_3__0");
 					put(grammarAccess.getVarDeclarationCSAccess().getGroup(), "rule__VarDeclarationCS__Group__0");
 					put(grammarAccess.getVarDeclarationCSAccess().getGroup_1(), "rule__VarDeclarationCS__Group_1__0");
+					put(grammarAccess.getVarDeclarationCSAccess().getGroup_2(), "rule__VarDeclarationCS__Group_2__0");
+					put(grammarAccess.getVarDeclarationCSAccess().getGroup_3(), "rule__VarDeclarationCS__Group_3__0");
 					put(grammarAccess.getWhenCSAccess().getGroup(), "rule__WhenCS__Group__0");
 					put(grammarAccess.getWhereCSAccess().getGroup(), "rule__WhereCS__Group__0");
 					put(grammarAccess.getURIPathNameCSAccess().getGroup(), "rule__URIPathNameCS__Group__0");
@@ -289,7 +291,8 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getUnitCSAccess().getIsAllAssignment_3_1(), "rule__UnitCS__IsAllAssignment_3_1");
 					put(grammarAccess.getVarDeclarationCSAccess().getOwnedVarDeclarationIdsAssignment_0(), "rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_0");
 					put(grammarAccess.getVarDeclarationCSAccess().getOwnedVarDeclarationIdsAssignment_1_1(), "rule__VarDeclarationCS__OwnedVarDeclarationIdsAssignment_1_1");
-					put(grammarAccess.getVarDeclarationCSAccess().getOwnedTypeAssignment_3(), "rule__VarDeclarationCS__OwnedTypeAssignment_3");
+					put(grammarAccess.getVarDeclarationCSAccess().getOwnedTypeAssignment_2_1(), "rule__VarDeclarationCS__OwnedTypeAssignment_2_1");
+					put(grammarAccess.getVarDeclarationCSAccess().getOwnedInitExpressionAssignment_3_1(), "rule__VarDeclarationCS__OwnedInitExpressionAssignment_3_1");
 					put(grammarAccess.getVarDeclarationIdCSAccess().getNameAssignment(), "rule__VarDeclarationIdCS__NameAssignment");
 					put(grammarAccess.getWhenCSAccess().getOwnedPredicatesAssignment_3(), "rule__WhenCS__OwnedPredicatesAssignment_3");
 					put(grammarAccess.getWhereCSAccess().getOwnedPredicatesAssignment_3(), "rule__WhereCS__OwnedPredicatesAssignment_3");

@@ -955,8 +955,18 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 	 * @generated
 	 */
 	@Override
-	public EReference getVarDeclarationCS_OwnedVarDeclarationIds() {
+	public EReference getVarDeclarationCS_OwnedInitExpression() {
 		return (EReference)varDeclarationCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getVarDeclarationCS_OwnedVarDeclarationIds() {
+		return (EReference)varDeclarationCSEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1096,8 +1106,9 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		createEReference(unitCSEClass, UNIT_CS__IDENTIFIERS);
 
 		varDeclarationCSEClass = createEClass(VAR_DECLARATION_CS);
-		createEReference(varDeclarationCSEClass, VAR_DECLARATION_CS__OWNED_VAR_DECLARATION_IDS);
+		createEReference(varDeclarationCSEClass, VAR_DECLARATION_CS__OWNED_INIT_EXPRESSION);
 		createEReference(varDeclarationCSEClass, VAR_DECLARATION_CS__OWNED_TYPE);
+		createEReference(varDeclarationCSEClass, VAR_DECLARATION_CS__OWNED_VAR_DECLARATION_IDS);
 
 		varDeclarationIdCSEClass = createEClass(VAR_DECLARATION_ID_CS);
 	}
@@ -1253,8 +1264,9 @@ public class QVTrelationCSPackageImpl extends EPackageImpl implements QVTrelatio
 		initEReference(getUnitCS_Identifiers(), thePivotPackage.getElement(), null, "identifiers", null, 1, -1, UnitCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(varDeclarationCSEClass, VarDeclarationCS.class, "VarDeclarationCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getVarDeclarationCS_OwnedVarDeclarationIds(), this.getVarDeclarationIdCS(), null, "ownedVarDeclarationIds", null, 0, -1, VarDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVarDeclarationCS_OwnedInitExpression(), theEssentialOCLCSPackage.getExpCS(), null, "ownedInitExpression", null, 0, 1, VarDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVarDeclarationCS_OwnedType(), theBaseCSPackage.getTypedRefCS(), null, "ownedType", null, 0, 1, VarDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getVarDeclarationCS_OwnedVarDeclarationIds(), this.getVarDeclarationIdCS(), null, "ownedVarDeclarationIds", null, 0, -1, VarDeclarationCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(varDeclarationIdCSEClass, VarDeclarationIdCS.class, "VarDeclarationIdCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

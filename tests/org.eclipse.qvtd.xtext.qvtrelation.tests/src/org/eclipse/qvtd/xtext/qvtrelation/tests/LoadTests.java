@@ -85,6 +85,13 @@ public class LoadTests extends LoadTestCase
 		doLoad_Concrete(inputURI, pivotURI);
 	}	
 
+	public void testLoad_SimplerRelToCore_qvtr() throws IOException, InterruptedException {
+//		ProjectMap.getAdapter(resourceSet);
+		URI inputURI = URI.createPlatformResourceURI("/org.eclipse.qvtd.examples.qvtrelation.reltocore/qvtrsrc/SimplerRelToCore.qvtr", true);
+		URI pivotURI = getProjectFileURI("SimplerRelToCore.qvtras");
+		doLoad_Concrete(inputURI, pivotURI);
+	}	
+
 	public void testLoad_SeqToStm_qvtr() throws IOException, InterruptedException {
 		doLoad_ModelMorf("SeqToStm/SeqToStm");
 	}	

@@ -199,13 +199,29 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 
 	@Override
 	public Continuation<?> visitVarDeclarationCS(@NonNull VarDeclarationCS csElement) {
+		Variable pivotVariable = null;
+		Type pivotType = null;
 		TypedRefCS ownedType = csElement.getOwnedType();
-		Type pivotType = ownedType != null ? PivotUtil.getPivot(Type.class, ownedType) : null;
+		if (ownedType != null) {
+			pivotType = PivotUtil.getPivot(Type.class, ownedType);
+		}
+		OCLExpression oclExpression = null;
+		ExpCS initializer = csElement.getOwnedInitExpression();
+		if (initializer != null) {
+			oclExpression = context.visitLeft2Right(OCLExpression.class, initializer);
+			if ((pivotType == null) && (oclExpression != null)) {
+				pivotType = oclExpression.getType();
+			}
+		}
 		for (VarDeclarationIdCS csVarDeclarationId : csElement.getOwnedVarDeclarationIds()) {
-			Variable pivotVariable = PivotUtil.getPivot(Variable.class, csVarDeclarationId);
+			pivotVariable = PivotUtil.getPivot(Variable.class, csVarDeclarationId);
 			if (pivotVariable != null) {
 				context.setType(pivotVariable, pivotType, false);
+				pivotVariable.setOwnedInit(null);
 			}
+		}
+		if ((pivotVariable != null) && (oclExpression != null)) {
+			pivotVariable.setOwnedInit(oclExpression);
 		}
 		return null;
 	}

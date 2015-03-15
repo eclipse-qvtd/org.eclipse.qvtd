@@ -1366,18 +1366,23 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cCommaKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cOwnedVarDeclarationIdsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cOwnedVarDeclarationIdsVarDeclarationIdCSParserRuleCall_1_1_0 = (RuleCall)cOwnedVarDeclarationIdsAssignment_1_1.eContents().get(0);
-		private final Keyword cColonKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Assignment cOwnedTypeAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final RuleCall cOwnedTypeTypedRefCSParserRuleCall_3_0 = (RuleCall)cOwnedTypeAssignment_3.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cColonKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Assignment cOwnedTypeAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cOwnedTypeTypedRefCSParserRuleCall_2_1_0 = (RuleCall)cOwnedTypeAssignment_2_1.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cEqualsSignKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cOwnedInitExpressionAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cOwnedInitExpressionExpCSParserRuleCall_3_1_0 = (RuleCall)cOwnedInitExpressionAssignment_3_1.eContents().get(0);
 		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//VarDeclarationCS:
-		//	ownedVarDeclarationIds+=VarDeclarationIdCS ("," ownedVarDeclarationIds+=VarDeclarationIdCS)* ":" ownedType=TypedRefCS
-		//	";";
+		//	ownedVarDeclarationIds+=VarDeclarationIdCS ("," ownedVarDeclarationIds+=VarDeclarationIdCS)* (":"
+		//	ownedType=TypedRefCS)? ("=" ownedInitExpression=ExpCS)? ";";
 		@Override public ParserRule getRule() { return rule; }
 
-		//ownedVarDeclarationIds+=VarDeclarationIdCS ("," ownedVarDeclarationIds+=VarDeclarationIdCS)* ":" ownedType=TypedRefCS
-		//";"
+		//ownedVarDeclarationIds+=VarDeclarationIdCS ("," ownedVarDeclarationIds+=VarDeclarationIdCS)* (":" ownedType=TypedRefCS)?
+		//("=" ownedInitExpression=ExpCS)? ";"
 		public Group getGroup() { return cGroup; }
 
 		//ownedVarDeclarationIds+=VarDeclarationIdCS
@@ -1398,14 +1403,29 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//VarDeclarationIdCS
 		public RuleCall getOwnedVarDeclarationIdsVarDeclarationIdCSParserRuleCall_1_1_0() { return cOwnedVarDeclarationIdsVarDeclarationIdCSParserRuleCall_1_1_0; }
 
+		//(":" ownedType=TypedRefCS)?
+		public Group getGroup_2() { return cGroup_2; }
+
 		//":"
-		public Keyword getColonKeyword_2() { return cColonKeyword_2; }
+		public Keyword getColonKeyword_2_0() { return cColonKeyword_2_0; }
 
 		//ownedType=TypedRefCS
-		public Assignment getOwnedTypeAssignment_3() { return cOwnedTypeAssignment_3; }
+		public Assignment getOwnedTypeAssignment_2_1() { return cOwnedTypeAssignment_2_1; }
 
 		//TypedRefCS
-		public RuleCall getOwnedTypeTypedRefCSParserRuleCall_3_0() { return cOwnedTypeTypedRefCSParserRuleCall_3_0; }
+		public RuleCall getOwnedTypeTypedRefCSParserRuleCall_2_1_0() { return cOwnedTypeTypedRefCSParserRuleCall_2_1_0; }
+
+		//("=" ownedInitExpression=ExpCS)?
+		public Group getGroup_3() { return cGroup_3; }
+
+		//"="
+		public Keyword getEqualsSignKeyword_3_0() { return cEqualsSignKeyword_3_0; }
+
+		//ownedInitExpression=ExpCS
+		public Assignment getOwnedInitExpressionAssignment_3_1() { return cOwnedInitExpressionAssignment_3_1; }
+
+		//ExpCS
+		public RuleCall getOwnedInitExpressionExpCSParserRuleCall_3_1_0() { return cOwnedInitExpressionExpCSParserRuleCall_3_1_0; }
 
 		//";"
 		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
@@ -1989,8 +2009,8 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//VarDeclarationCS:
-	//	ownedVarDeclarationIds+=VarDeclarationIdCS ("," ownedVarDeclarationIds+=VarDeclarationIdCS)* ":" ownedType=TypedRefCS
-	//	";";
+	//	ownedVarDeclarationIds+=VarDeclarationIdCS ("," ownedVarDeclarationIds+=VarDeclarationIdCS)* (":"
+	//	ownedType=TypedRefCS)? ("=" ownedInitExpression=ExpCS)? ";";
 	public VarDeclarationCSElements getVarDeclarationCSAccess() {
 		return pVarDeclarationCS;
 	}
