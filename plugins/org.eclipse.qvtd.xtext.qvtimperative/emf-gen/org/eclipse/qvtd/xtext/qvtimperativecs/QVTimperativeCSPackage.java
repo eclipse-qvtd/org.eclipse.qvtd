@@ -139,6 +139,15 @@ public interface QVTimperativeCSPackage extends EPackage {
 	int MAPPING_CS__NAME = QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Is Default</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_CS__IS_DEFAULT = QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__IS_DEFAULT;
+
+	/**
 	 * The feature id for the '<em><b>Owned Domains</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

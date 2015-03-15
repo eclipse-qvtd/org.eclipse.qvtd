@@ -102,6 +102,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		}
 		context.refreshPivotList(CoreDomain.class, pivotElement.getDomain(), csElement.getOwnedDomains());
 		pivotElement.setMappingStatement(PivotUtil.getPivot(MappingStatement.class, csElement.getOwnedMappingSequence()));
+		pivotElement.setIsDefault(csElement.isIsDefault());
 		return null;
 	}
 

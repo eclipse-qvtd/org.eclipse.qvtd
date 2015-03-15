@@ -153,6 +153,7 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 	public ElementCS visitMapping(@NonNull Mapping asMapping) {
 		MappingCS csMapping = context.refreshNamedElement(MappingCS.class, QVTimperativeCSPackage.Literals.MAPPING_CS, asMapping);
 		csMapping.setPivot(asMapping);
+		csMapping.setIsDefault(asMapping.isIsDefault());
 		refreshOwnedInTransformation(csMapping, asMapping);
 		context.refreshList(csMapping.getOwnedDomains(), context.visitDeclarations(DomainCS.class, asMapping.getDomain(), null));
 		DomainCS csDomain = context.refreshElement(DomainCS.class, QVTcoreBaseCSPackage.Literals.DOMAIN_CS, asMapping);

@@ -80,7 +80,10 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RelationCS" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//NamedElementCS">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTop" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDefault" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isTop" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="overrides" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.ecore#QVTRelation.Relation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedVarDeclarations" upperBound="-1"
         eType="#//VarDeclarationCS" containment="true"/>

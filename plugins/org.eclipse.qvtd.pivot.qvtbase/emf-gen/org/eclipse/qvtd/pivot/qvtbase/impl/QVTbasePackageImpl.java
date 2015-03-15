@@ -341,8 +341,8 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getRule_Overrides() {
-		return (EReference)ruleEClass.getEStructuralFeatures().get(1);
+	public EAttribute getRule_IsDefault() {
+		return (EAttribute)ruleEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -351,7 +351,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getRule_Transformation() {
+	public EReference getRule_Overrides() {
 		return (EReference)ruleEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -361,8 +361,18 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getRule_Overridden() {
+	public EReference getRule_Transformation() {
 		return (EReference)ruleEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getRule_Overridden() {
+		return (EReference)ruleEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -507,6 +517,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 
 		ruleEClass = createEClass(RULE);
 		createEReference(ruleEClass, RULE__DOMAIN);
+		createEAttribute(ruleEClass, RULE__IS_DEFAULT);
 		createEReference(ruleEClass, RULE__OVERRIDES);
 		createEReference(ruleEClass, RULE__TRANSFORMATION);
 		createEReference(ruleEClass, RULE__OVERRIDDEN);
@@ -590,6 +601,7 @@ public class QVTbasePackageImpl extends EPackageImpl implements QVTbasePackage {
 
 		initEClass(ruleEClass, Rule.class, "Rule", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRule_Domain(), this.getDomain(), this.getDomain_Rule(), "domain", null, 0, -1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRule_IsDefault(), thePivotPackage.getBoolean(), "isDefault", "false", 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRule_Overrides(), this.getRule(), this.getRule_Overridden(), "overrides", null, 0, 1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRule_Transformation(), this.getTransformation(), this.getTransformation_Rule(), "transformation", null, 0, 1, Rule.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getRule_Overridden(), this.getRule(), this.getRule_Overrides(), "overridden", null, 0, -1, Rule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);

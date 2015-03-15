@@ -39,7 +39,7 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 				{
 					put(grammarAccess.getTopLevelCSAccess().getAlternatives_0(), "rule__TopLevelCS__Alternatives_0");
 					put(grammarAccess.getTopLevelCSAccess().getAlternatives_1(), "rule__TopLevelCS__Alternatives_1");
-					put(grammarAccess.getMappingCSAccess().getOwnedDomainsAlternatives_5_0(), "rule__MappingCS__OwnedDomainsAlternatives_5_0");
+					put(grammarAccess.getMappingCSAccess().getOwnedDomainsAlternatives_6_0(), "rule__MappingCS__OwnedDomainsAlternatives_6_0");
 					put(grammarAccess.getMappingCallBindingCSAccess().getAlternatives_1(), "rule__MappingCallBindingCS__Alternatives_1");
 					put(grammarAccess.getMappingStatementCSAccess().getAlternatives(), "rule__MappingStatementCS__Alternatives");
 					put(grammarAccess.getTargetBottomPatternCSAccess().getAlternatives_2_0(), "rule__TargetBottomPatternCS__Alternatives_2_0");
@@ -88,8 +88,8 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDirectionCSAccess().getGroup_3(), "rule__DirectionCS__Group_3__0");
 					put(grammarAccess.getDirectionCSAccess().getGroup_3_2(), "rule__DirectionCS__Group_3_2__0");
 					put(grammarAccess.getMappingCSAccess().getGroup(), "rule__MappingCS__Group__0");
-					put(grammarAccess.getMappingCSAccess().getGroup_3(), "rule__MappingCS__Group_3__0");
-					put(grammarAccess.getMappingCSAccess().getGroup_6(), "rule__MappingCS__Group_6__0");
+					put(grammarAccess.getMappingCSAccess().getGroup_4(), "rule__MappingCS__Group_4__0");
+					put(grammarAccess.getMappingCSAccess().getGroup_7(), "rule__MappingCS__Group_7__0");
 					put(grammarAccess.getMappingCallCSAccess().getGroup(), "rule__MappingCallCS__Group__0");
 					put(grammarAccess.getMappingCallBindingCSAccess().getGroup(), "rule__MappingCallBindingCS__Group__0");
 					put(grammarAccess.getMappingLoopCSAccess().getGroup(), "rule__MappingLoopCS__Group__0");
@@ -244,11 +244,12 @@ public class QVTimperativeParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDirectionCSAccess().getImportsAssignment_2_2_1(), "rule__DirectionCS__ImportsAssignment_2_2_1");
 					put(grammarAccess.getDirectionCSAccess().getUsesAssignment_3_1(), "rule__DirectionCS__UsesAssignment_3_1");
 					put(grammarAccess.getDirectionCSAccess().getUsesAssignment_3_2_1(), "rule__DirectionCS__UsesAssignment_3_2_1");
-					put(grammarAccess.getMappingCSAccess().getNameAssignment_2(), "rule__MappingCS__NameAssignment_2");
-					put(grammarAccess.getMappingCSAccess().getOwnedInPathNameAssignment_3_1(), "rule__MappingCS__OwnedInPathNameAssignment_3_1");
-					put(grammarAccess.getMappingCSAccess().getOwnedDomainsAssignment_5(), "rule__MappingCS__OwnedDomainsAssignment_5");
-					put(grammarAccess.getMappingCSAccess().getOwnedMiddleAssignment_6_1(), "rule__MappingCS__OwnedMiddleAssignment_6_1");
-					put(grammarAccess.getMappingCSAccess().getOwnedMappingSequenceAssignment_7(), "rule__MappingCS__OwnedMappingSequenceAssignment_7");
+					put(grammarAccess.getMappingCSAccess().getIsDefaultAssignment_1(), "rule__MappingCS__IsDefaultAssignment_1");
+					put(grammarAccess.getMappingCSAccess().getNameAssignment_3(), "rule__MappingCS__NameAssignment_3");
+					put(grammarAccess.getMappingCSAccess().getOwnedInPathNameAssignment_4_1(), "rule__MappingCS__OwnedInPathNameAssignment_4_1");
+					put(grammarAccess.getMappingCSAccess().getOwnedDomainsAssignment_6(), "rule__MappingCS__OwnedDomainsAssignment_6");
+					put(grammarAccess.getMappingCSAccess().getOwnedMiddleAssignment_7_1(), "rule__MappingCS__OwnedMiddleAssignment_7_1");
+					put(grammarAccess.getMappingCSAccess().getOwnedMappingSequenceAssignment_8(), "rule__MappingCS__OwnedMappingSequenceAssignment_8");
 					put(grammarAccess.getMappingCallCSAccess().getReferredMappingAssignment_2(), "rule__MappingCallCS__ReferredMappingAssignment_2");
 					put(grammarAccess.getMappingCallCSAccess().getOwnedBindingsAssignment_4(), "rule__MappingCallCS__OwnedBindingsAssignment_4");
 					put(grammarAccess.getMappingCallBindingCSAccess().getReferredVariableAssignment_0(), "rule__MappingCallBindingCS__ReferredVariableAssignment_0");

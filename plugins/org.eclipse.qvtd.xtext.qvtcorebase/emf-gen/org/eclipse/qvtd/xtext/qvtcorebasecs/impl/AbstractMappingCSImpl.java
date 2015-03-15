@@ -34,6 +34,7 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AbstractMappingCSImpl#isIsDefault <em>Is Default</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AbstractMappingCSImpl#getOwnedDomains <em>Owned Domains</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AbstractMappingCSImpl#getOwnedInPathName <em>Owned In Path Name</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AbstractMappingCSImpl#getOwnedMiddle <em>Owned Middle</em>}</li>
@@ -42,6 +43,26 @@ import org.eclipse.qvtd.xtext.qvtcorebasecs.QVTcoreBaseCSPackage;
  * @generated
  */
 public abstract class AbstractMappingCSImpl extends NamedElementCSImpl implements AbstractMappingCS {
+	/**
+	 * The default value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsDefault()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_DEFAULT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsDefault()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isDefault = IS_DEFAULT_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getOwnedDomains() <em>Owned Domains</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -89,6 +110,29 @@ public abstract class AbstractMappingCSImpl extends NamedElementCSImpl implement
 	@Override
 	protected EClass eStaticClass() {
 		return QVTcoreBaseCSPackage.Literals.ABSTRACT_MAPPING_CS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsDefault() {
+		return isDefault;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsDefault(boolean newIsDefault) {
+		boolean oldIsDefault = isDefault;
+		isDefault = newIsDefault;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__IS_DEFAULT, oldIsDefault, isDefault));
 	}
 
 	/**
@@ -200,6 +244,16 @@ public abstract class AbstractMappingCSImpl extends NamedElementCSImpl implement
 	 * @generated
 	 */
 	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_DOMAINS:
@@ -220,6 +274,8 @@ public abstract class AbstractMappingCSImpl extends NamedElementCSImpl implement
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__IS_DEFAULT:
+				return isIsDefault();
 			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_DOMAINS:
 				return getOwnedDomains();
 			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_IN_PATH_NAME:
@@ -239,6 +295,9 @@ public abstract class AbstractMappingCSImpl extends NamedElementCSImpl implement
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__IS_DEFAULT:
+				setIsDefault((Boolean)newValue);
+				return;
 			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_DOMAINS:
 				getOwnedDomains().clear();
 				getOwnedDomains().addAll((Collection<? extends DomainCS>)newValue);
@@ -261,6 +320,9 @@ public abstract class AbstractMappingCSImpl extends NamedElementCSImpl implement
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__IS_DEFAULT:
+				setIsDefault(IS_DEFAULT_EDEFAULT);
+				return;
 			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_DOMAINS:
 				getOwnedDomains().clear();
 				return;
@@ -282,6 +344,8 @@ public abstract class AbstractMappingCSImpl extends NamedElementCSImpl implement
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__IS_DEFAULT:
+				return isDefault != IS_DEFAULT_EDEFAULT;
 			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_DOMAINS:
 				return ownedDomains != null && !ownedDomains.isEmpty();
 			case QVTcoreBaseCSPackage.ABSTRACT_MAPPING_CS__OWNED_IN_PATH_NAME:

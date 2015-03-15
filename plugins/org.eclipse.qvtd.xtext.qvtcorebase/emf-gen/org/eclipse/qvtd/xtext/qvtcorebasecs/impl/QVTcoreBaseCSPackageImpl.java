@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
@@ -239,8 +240,8 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 	 * @generated
 	 */
 	@Override
-	public EReference getAbstractMappingCS_OwnedDomains() {
-		return (EReference)abstractMappingCSEClass.getEStructuralFeatures().get(0);
+	public EAttribute getAbstractMappingCS_IsDefault() {
+		return (EAttribute)abstractMappingCSEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -249,7 +250,7 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 	 * @generated
 	 */
 	@Override
-	public EReference getAbstractMappingCS_OwnedInPathName() {
+	public EReference getAbstractMappingCS_OwnedDomains() {
 		return (EReference)abstractMappingCSEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -259,8 +260,18 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 	 * @generated
 	 */
 	@Override
-	public EReference getAbstractMappingCS_OwnedMiddle() {
+	public EReference getAbstractMappingCS_OwnedInPathName() {
 		return (EReference)abstractMappingCSEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getAbstractMappingCS_OwnedMiddle() {
+		return (EReference)abstractMappingCSEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -703,6 +714,7 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 
 		// Create classes and their features
 		abstractMappingCSEClass = createEClass(ABSTRACT_MAPPING_CS);
+		createEAttribute(abstractMappingCSEClass, ABSTRACT_MAPPING_CS__IS_DEFAULT);
 		createEReference(abstractMappingCSEClass, ABSTRACT_MAPPING_CS__OWNED_DOMAINS);
 		createEReference(abstractMappingCSEClass, ABSTRACT_MAPPING_CS__OWNED_IN_PATH_NAME);
 		createEReference(abstractMappingCSEClass, ABSTRACT_MAPPING_CS__OWNED_MIDDLE);
@@ -789,6 +801,7 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 
 		// Obtain other dependent packages
 		BaseCSPackage theBaseCSPackage = (BaseCSPackage)EPackage.Registry.INSTANCE.getEPackage(BaseCSPackage.eNS_URI);
+		EcorePackage theEcorePackage = (EcorePackage)EPackage.Registry.INSTANCE.getEPackage(EcorePackage.eNS_URI);
 		PivotPackage thePivotPackage = (PivotPackage)EPackage.Registry.INSTANCE.getEPackage(PivotPackage.eNS_URI);
 		QVTcoreBasePackage theQVTcoreBasePackage = (QVTcoreBasePackage)EPackage.Registry.INSTANCE.getEPackage(QVTcoreBasePackage.eNS_URI);
 		QVTbasePackage theQVTbasePackage = (QVTbasePackage)EPackage.Registry.INSTANCE.getEPackage(QVTbasePackage.eNS_URI);
@@ -818,6 +831,7 @@ public class QVTcoreBaseCSPackageImpl extends EPackageImpl implements QVTcoreBas
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(abstractMappingCSEClass, AbstractMappingCS.class, "AbstractMappingCS", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getAbstractMappingCS_IsDefault(), theEcorePackage.getEBoolean(), "isDefault", "false", 0, 1, AbstractMappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractMappingCS_OwnedDomains(), this.getDomainCS(), null, "ownedDomains", null, 0, -1, AbstractMappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractMappingCS_OwnedInPathName(), theBaseCSPackage.getPathNameCS(), null, "ownedInPathName", null, 0, 1, AbstractMappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getAbstractMappingCS_OwnedMiddle(), this.getDomainCS(), null, "ownedMiddle", null, 1, 1, AbstractMappingCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

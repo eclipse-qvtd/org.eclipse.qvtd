@@ -242,6 +242,15 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING__DOMAIN = QVTcoreBasePackage.ABSTRACT_MAPPING__DOMAIN;
 
 	/**
+	 * The feature id for the '<em><b>Is Default</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING__IS_DEFAULT = QVTcoreBasePackage.ABSTRACT_MAPPING__IS_DEFAULT;
+
+	/**
 	 * The feature id for the '<em><b>Overrides</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

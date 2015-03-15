@@ -37,6 +37,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
  * </p>
  * <ul>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getDomain <em>Domain</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#isIsDefault <em>Is Default</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getOverrides <em>Overrides</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getTransformation <em>Transformation</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.RuleImpl#getOverridden <em>Overridden</em>}</li>
@@ -54,6 +55,26 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * @ordered
 	 */
 	protected EList<Domain> domain;
+
+	/**
+	 * The default value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsDefault()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_DEFAULT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsDefault()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isDefault = IS_DEFAULT_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getOverrides() <em>Overrides</em>}' reference.
@@ -105,6 +126,29 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			domain = new EObjectContainmentWithInverseEList<Domain>(Domain.class, this, QVTbasePackage.RULE__DOMAIN, QVTbasePackage.DOMAIN__RULE);
 		}
 		return domain;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsDefault() {
+		return isDefault;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsDefault(boolean newIsDefault) {
+		boolean oldIsDefault = isDefault;
+		isDefault = newIsDefault;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTbasePackage.RULE__IS_DEFAULT, oldIsDefault, isDefault));
 	}
 
 	/**
@@ -230,6 +274,16 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -294,6 +348,8 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		switch (featureID) {
 			case QVTbasePackage.RULE__DOMAIN:
 				return getDomain();
+			case QVTbasePackage.RULE__IS_DEFAULT:
+				return isIsDefault();
 			case QVTbasePackage.RULE__OVERRIDES:
 				if (resolve) return getOverrides();
 				return basicGetOverrides();
@@ -317,6 +373,9 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			case QVTbasePackage.RULE__DOMAIN:
 				getDomain().clear();
 				getDomain().addAll((Collection<? extends Domain>)newValue);
+				return;
+			case QVTbasePackage.RULE__IS_DEFAULT:
+				setIsDefault((Boolean)newValue);
 				return;
 			case QVTbasePackage.RULE__OVERRIDES:
 				setOverrides((Rule)newValue);
@@ -343,6 +402,9 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 			case QVTbasePackage.RULE__DOMAIN:
 				getDomain().clear();
 				return;
+			case QVTbasePackage.RULE__IS_DEFAULT:
+				setIsDefault(IS_DEFAULT_EDEFAULT);
+				return;
 			case QVTbasePackage.RULE__OVERRIDES:
 				setOverrides((Rule)null);
 				return;
@@ -366,6 +428,8 @@ public abstract class RuleImpl extends NamedElementImpl implements Rule {
 		switch (featureID) {
 			case QVTbasePackage.RULE__DOMAIN:
 				return domain != null && !domain.isEmpty();
+			case QVTbasePackage.RULE__IS_DEFAULT:
+				return isDefault != IS_DEFAULT_EDEFAULT;
 			case QVTbasePackage.RULE__OVERRIDES:
 				return overrides != null;
 			case QVTbasePackage.RULE__TRANSFORMATION:

@@ -9,6 +9,8 @@
     <details key="qvtcb" value="../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore#/"/>
   </eAnnotations>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractMappingCS" abstract="true" eSuperTypes="../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//NamedElementCS">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isDefault" eType="ecore:EDataType ../../org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean"
+        defaultValueLiteral="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedDomains" upperBound="-1"
         eType="#//DomainCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedInPathName" eType="ecore:EClass ../../org.eclipse.ocl.xtext.base/model/BaseCS.ecore#//PathNameCS"

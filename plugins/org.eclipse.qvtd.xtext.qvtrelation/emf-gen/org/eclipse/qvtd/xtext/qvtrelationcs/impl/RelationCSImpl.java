@@ -40,6 +40,7 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#isIsDefault <em>Is Default</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#isIsTop <em>Is Top</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#getOverrides <em>Overrides</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.RelationCSImpl#getOwnedVarDeclarations <em>Owned Var Declarations</em>}</li>
@@ -51,6 +52,26 @@ import org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSVisitor;
  * @generated
  */
 public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
+	/**
+	 * The default value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsDefault()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IS_DEFAULT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIsDefault() <em>Is Default</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIsDefault()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean isDefault = IS_DEFAULT_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #isIsTop() <em>Is Top</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -138,6 +159,29 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	@Override
 	protected EClass eStaticClass() {
 		return QVTrelationCSPackage.Literals.RELATION_CS;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isIsDefault() {
+		return isDefault;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setIsDefault(boolean newIsDefault) {
+		boolean oldIsDefault = isDefault;
+		isDefault = newIsDefault;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.RELATION_CS__IS_DEFAULT, oldIsDefault, isDefault));
 	}
 
 	/**
@@ -357,6 +401,8 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case QVTrelationCSPackage.RELATION_CS__IS_DEFAULT:
+				return isIsDefault();
 			case QVTrelationCSPackage.RELATION_CS__IS_TOP:
 				return isIsTop();
 			case QVTrelationCSPackage.RELATION_CS__OVERRIDES:
@@ -383,6 +429,9 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case QVTrelationCSPackage.RELATION_CS__IS_DEFAULT:
+				setIsDefault((Boolean)newValue);
+				return;
 			case QVTrelationCSPackage.RELATION_CS__IS_TOP:
 				setIsTop((Boolean)newValue);
 				return;
@@ -415,6 +464,9 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case QVTrelationCSPackage.RELATION_CS__IS_DEFAULT:
+				setIsDefault(IS_DEFAULT_EDEFAULT);
+				return;
 			case QVTrelationCSPackage.RELATION_CS__IS_TOP:
 				setIsTop(IS_TOP_EDEFAULT);
 				return;
@@ -445,6 +497,8 @@ public class RelationCSImpl extends NamedElementCSImpl implements RelationCS {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case QVTrelationCSPackage.RELATION_CS__IS_DEFAULT:
+				return isDefault != IS_DEFAULT_EDEFAULT;
 			case QVTrelationCSPackage.RELATION_CS__IS_TOP:
 				return isTop != IS_TOP_EDEFAULT;
 			case QVTrelationCSPackage.RELATION_CS__OVERRIDES:

@@ -23,6 +23,7 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsDefault <em>Is Default</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsTop <em>Is Top</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOverrides <em>Overrides</em>}</li>
  *   <li>{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#getOwnedVarDeclarations <em>Owned Var Declarations</em>}</li>
@@ -37,7 +38,35 @@ import org.eclipse.qvtd.pivot.qvtrelation.Relation;
  */
 public interface RelationCS extends NamedElementCS {
 	/**
+	 * Returns the value of the '<em><b>Is Default</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Is Default</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Is Default</em>' attribute.
+	 * @see #setIsDefault(boolean)
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getRelationCS_IsDefault()
+	 * @model default="false"
+	 * @generated
+	 */
+	boolean isIsDefault();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsDefault <em>Is Default</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Is Default</em>' attribute.
+	 * @see #isIsDefault()
+	 * @generated
+	 */
+	void setIsDefault(boolean value);
+
+	/**
 	 * Returns the value of the '<em><b>Is Top</b></em>' attribute.
+	 * The default value is <code>"false"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Is Top</em>' attribute isn't clear,
@@ -47,7 +76,7 @@ public interface RelationCS extends NamedElementCS {
 	 * @return the value of the '<em>Is Top</em>' attribute.
 	 * @see #setIsTop(boolean)
 	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getRelationCS_IsTop()
-	 * @model
+	 * @model default="false"
 	 * @generated
 	 */
 	boolean isIsTop();

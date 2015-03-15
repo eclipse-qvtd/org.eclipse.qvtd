@@ -75,7 +75,7 @@ QueryCS: 'query' name=UnrestrictedName
       	  ':' ownedType=TypedRefCS
             (';' | '{' ownedExpression=ExpCS '}');
 
-RelationCS: isTop?='top'? 'relation' name=UnrestrictedName
+RelationCS: isTop?='top'? isDefault?='default'? 'relation' name=UnrestrictedName
    			 ('overrides' overrides=[qvtrelation::Relation|UnrestrictedName])?
                '{'
                ownedVarDeclarations+=VarDeclarationCS*
@@ -132,6 +132,7 @@ TypedRefCS returns base::TypedRefCS:
 UnrestrictedName returns ecore::EString:
 	EssentialOCLUnrestrictedName
 |   'checkonly'
+|   'default'
 |   'default_values'
 |   'domain'
 |   'enforce'

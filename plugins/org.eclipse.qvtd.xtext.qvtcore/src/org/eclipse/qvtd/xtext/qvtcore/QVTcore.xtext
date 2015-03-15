@@ -24,6 +24,6 @@ TopLevelCS:
 	(ownedMappings+=MappingCS | ownedTransformations+=TransformationCS | ownedQueries+=QueryCS)*
 ;
 	
-MappingCS: {MappingCS} 'map' name=UnrestrictedName? ('in' ownedInPathName=PathNameCS)?
+MappingCS: {MappingCS} isDefault?='default'? 'map' name=UnrestrictedName? ('in' ownedInPathName=PathNameCS)?
 	('refines' refines+=[qvtcore::Mapping|UnrestrictedName] (',' refines+=[qvtcore::Mapping|UnrestrictedName])*)?
 	'{' ownedDomains+=NamedDomainCS* ('where' ownedMiddle=UnnamedDomainCS)? ownedComposedMappings+=MappingCS* '}';

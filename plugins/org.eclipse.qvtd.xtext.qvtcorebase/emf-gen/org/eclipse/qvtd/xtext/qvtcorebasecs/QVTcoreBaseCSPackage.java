@@ -131,13 +131,22 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	int ABSTRACT_MAPPING_CS__NAME = BaseCSPackage.NAMED_ELEMENT_CS__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Is Default</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ABSTRACT_MAPPING_CS__IS_DEFAULT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Owned Domains</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_MAPPING_CS__OWNED_DOMAINS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int ABSTRACT_MAPPING_CS__OWNED_DOMAINS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Owned In Path Name</b></em>' containment reference.
@@ -146,7 +155,7 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_MAPPING_CS__OWNED_IN_PATH_NAME = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int ABSTRACT_MAPPING_CS__OWNED_IN_PATH_NAME = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owned Middle</b></em>' containment reference.
@@ -155,7 +164,7 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_MAPPING_CS__OWNED_MIDDLE = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int ABSTRACT_MAPPING_CS__OWNED_MIDDLE = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Mapping CS</em>' class.
@@ -164,7 +173,7 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_MAPPING_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
+	int ABSTRACT_MAPPING_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.impl.AreaCSImpl <em>Area CS</em>}' class.
@@ -1786,6 +1795,17 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 	EClass getAbstractMappingCS();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#isIsDefault <em>Is Default</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Default</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#isIsDefault()
+	 * @see #getAbstractMappingCS()
+	 * @generated
+	 */
+	EAttribute getAbstractMappingCS_IsDefault();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtcorebasecs.AbstractMappingCS#getOwnedDomains <em>Owned Domains</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2285,6 +2305,14 @@ public interface QVTcoreBaseCSPackage extends EPackage {
 		 * @generated
 		 */
 		EClass ABSTRACT_MAPPING_CS = eINSTANCE.getAbstractMappingCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Default</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ABSTRACT_MAPPING_CS__IS_DEFAULT = eINSTANCE.getAbstractMappingCS_IsDefault();
 
 		/**
 		 * The meta object literal for the '<em><b>Owned Domains</b></em>' containment reference list feature.

@@ -70,14 +70,14 @@ public class QVTcoreFormatter extends QVTcoreBaseFormatter
 	    configureTransformationCS(c, f.getTransformationCSAccess());
 	    {
 	    	MappingCSElements a = f.getMappingCSAccess();
-			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_5(), a.getRightCurlyBracketKeyword_9());
-			setBraces(c, a.getLeftCurlyBracketKeyword_5(), a.getRightCurlyBracketKeyword_9());
-			c.setLinewrap(2).between(a.getOwnedDomainsAssignment_6(), a.getOwnedDomainsAssignment_6());
-			c.setLinewrap(2).between(a.getOwnedDomainsAssignment_6(), a.getGroup_7());
-			c.setLinewrap(1,2,2).before(a.getGroup_7());
-			c.setLinewrap(2).between(a.getGroup_7(), a.getOwnedComposedMappingsAssignment_8());
-			c.setLinewrap(1,2,2).before(a.getOwnedComposedMappingsAssignment_8());
-			c.setLinewrap(2).between(a.getOwnedComposedMappingsAssignment_8(), a.getOwnedComposedMappingsAssignment_8());
+			c.setNoSpace().between(a.getLeftCurlyBracketKeyword_6(), a.getRightCurlyBracketKeyword_10());
+			setBraces(c, a.getLeftCurlyBracketKeyword_6(), a.getRightCurlyBracketKeyword_10());
+			c.setLinewrap(2).between(a.getOwnedDomainsAssignment_7(), a.getOwnedDomainsAssignment_7());
+			c.setLinewrap(2).between(a.getOwnedDomainsAssignment_7(), a.getGroup_8());
+			c.setLinewrap(1,2,2).before(a.getGroup_8());
+			c.setLinewrap(2).between(a.getGroup_8(), a.getOwnedComposedMappingsAssignment_9());
+			c.setLinewrap(1,2,2).before(a.getOwnedComposedMappingsAssignment_9());
+			c.setLinewrap(2).between(a.getOwnedComposedMappingsAssignment_9(), a.getOwnedComposedMappingsAssignment_9());
 	    }
 	    {
 	    	ScopeNameCSElements a = f.getScopeNameCSAccess();

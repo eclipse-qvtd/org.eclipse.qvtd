@@ -1874,13 +1874,22 @@ public interface QVTrelationCSPackage extends EPackage {
 	int RELATION_CS__NAME = BaseCSPackage.NAMED_ELEMENT_CS__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Is Default</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RELATION_CS__IS_DEFAULT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Is Top</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_CS__IS_TOP = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 0;
+	int RELATION_CS__IS_TOP = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Overrides</b></em>' reference.
@@ -1889,7 +1898,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_CS__OVERRIDES = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 1;
+	int RELATION_CS__OVERRIDES = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Owned Var Declarations</b></em>' containment reference list.
@@ -1898,7 +1907,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_CS__OWNED_VAR_DECLARATIONS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 2;
+	int RELATION_CS__OWNED_VAR_DECLARATIONS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Owned Domains</b></em>' containment reference list.
@@ -1907,7 +1916,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_CS__OWNED_DOMAINS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 3;
+	int RELATION_CS__OWNED_DOMAINS = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Owned When</b></em>' containment reference.
@@ -1916,7 +1925,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_CS__OWNED_WHEN = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 4;
+	int RELATION_CS__OWNED_WHEN = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Owned Where</b></em>' containment reference.
@@ -1925,7 +1934,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_CS__OWNED_WHERE = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 5;
+	int RELATION_CS__OWNED_WHERE = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Relation CS</em>' class.
@@ -1934,7 +1943,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RELATION_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 6;
+	int RELATION_CS_FEATURE_COUNT = BaseCSPackage.NAMED_ELEMENT_CS_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.impl.TopLevelCSImpl <em>Top Level CS</em>}' class.
@@ -2894,6 +2903,17 @@ public interface QVTrelationCSPackage extends EPackage {
 	EClass getRelationCS();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsDefault <em>Is Default</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Default</em>'.
+	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsDefault()
+	 * @see #getRelationCS()
+	 * @generated
+	 */
+	EAttribute getRelationCS_IsDefault();
+
+	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.xtext.qvtrelationcs.RelationCS#isIsTop <em>Is Top</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3569,6 +3589,14 @@ public interface QVTrelationCSPackage extends EPackage {
 		 * @generated
 		 */
 		EClass RELATION_CS = eINSTANCE.getRelationCS();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Default</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RELATION_CS__IS_DEFAULT = eINSTANCE.getRelationCS_IsDefault();
 
 		/**
 		 * The meta object literal for the '<em><b>Is Top</b></em>' attribute feature.

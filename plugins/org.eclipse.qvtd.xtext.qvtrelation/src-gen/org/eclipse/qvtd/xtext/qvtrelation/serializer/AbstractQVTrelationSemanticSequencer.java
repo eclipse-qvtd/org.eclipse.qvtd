@@ -610,6 +610,7 @@ public abstract class AbstractQVTrelationSemanticSequencer extends EssentialOCLS
 	 * Constraint:
 	 *     (
 	 *         isTop?='top'? 
+	 *         isDefault?='default'? 
 	 *         name=UnrestrictedName 
 	 *         overrides=[Relation|UnrestrictedName]? 
 	 *         ownedVarDeclarations+=VarDeclarationCS* 

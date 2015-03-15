@@ -890,13 +890,22 @@ public interface QVTbasePackage extends EPackage {
 	int RULE__DOMAIN = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Is Default</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RULE__IS_DEFAULT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Overrides</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RULE__OVERRIDES = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int RULE__OVERRIDES = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Transformation</b></em>' container reference.
@@ -905,7 +914,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RULE__TRANSFORMATION = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int RULE__TRANSFORMATION = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Overridden</b></em>' reference list.
@@ -914,7 +923,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RULE__OVERRIDDEN = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int RULE__OVERRIDDEN = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Rule</em>' class.
@@ -923,7 +932,7 @@ public interface QVTbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RULE_FEATURE_COUNT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int RULE_FEATURE_COUNT = PivotPackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtbase.impl.TransformationImpl <em>Transformation</em>}' class.
@@ -1433,6 +1442,17 @@ public interface QVTbasePackage extends EPackage {
 	EReference getRule_Domain();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#isIsDefault <em>Is Default</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Is Default</em>'.
+	 * @see org.eclipse.qvtd.pivot.qvtbase.Rule#isIsDefault()
+	 * @see #getRule()
+	 * @generated
+	 */
+	EAttribute getRule_IsDefault();
+
+	/**
 	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtbase.Rule#getOverrides <em>Overrides</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1733,6 +1753,14 @@ public interface QVTbasePackage extends EPackage {
 		 * @generated
 		 */
 		EReference RULE__DOMAIN = eINSTANCE.getRule_Domain();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Default</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RULE__IS_DEFAULT = eINSTANCE.getRule_IsDefault();
 
 		/**
 		 * The meta object literal for the '<em><b>Overrides</b></em>' reference feature.
