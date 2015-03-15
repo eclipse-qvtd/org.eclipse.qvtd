@@ -73,9 +73,9 @@ public class QVTr2QVTcRelations {
 		for (Domain d : r.getDomain()) {
 			if (((RelationDomain) d).getPattern() != null) {
 				if (vars.isEmpty()) {
-					vars.addAll(((RelationDomain) d).getPattern().getBindsTo());
+					vars.addAll(((RelationDomain) d).getPattern().get(0).getBindsTo());
 				} else {
-					List<Variable> bt = ((RelationDomain) d).getPattern().getBindsTo(); 
+					List<Variable> bt = ((RelationDomain) d).getPattern().get(0).getBindsTo(); 
 					vars.retainAll(bt);
 				}
 			}
@@ -426,7 +426,7 @@ public class QVTr2QVTcRelations {
 		doRVarSetToTraceClassProps(new ArrayList<Variable>(sharedDomainVars), rc);
 		for (Domain d : r.getDomain()) {
 			RelationDomain rd = (RelationDomain) d;
-			DomainPattern rdp = rd.getPattern();
+			DomainPattern rdp = rd.getPattern().get(0);
 			assert rdp != null;
 			TemplateExp t = rdp.getTemplateExpression();
 			assert t != null;
@@ -532,7 +532,7 @@ public class QVTr2QVTcRelations {
 		rds.remove(rd); // guard
 		for (RelationDomain ord : rds) {
 			// check
-			DomainPattern dp = ord.getPattern();
+			DomainPattern dp = ord.getPattern().get(0);
 			if (dp.getTemplateExpression() instanceof ObjectTemplateExp) {
 				String dn = ord.getName();
 				assert dn != null;
@@ -926,7 +926,7 @@ public class QVTr2QVTcRelations {
 		}
 		assert mt != null;
 		// guard
-		DomainPattern rdp = rd.getPattern();
+		DomainPattern rdp = rd.getPattern().get(0);
 		TemplateExp rdt = rdp.getTemplateExpression();
 		if ((e instanceof VariableExp) && (rdt instanceof ObjectTemplateExp)) {
 			// check
@@ -1166,7 +1166,7 @@ public class QVTr2QVTcRelations {
 		Type tc = transformation.getRelationTrace(r);
 		assert tc != null;
 		// check
-		String dvn = d.getRootVariable().getName();
+		String dvn = d.getRootVariable().get(0).getName();
 		assert dvn != null;
 		Variable v = (Variable) ve.getReferredVariable();
 		assert v != null;
@@ -1272,7 +1272,7 @@ public class QVTr2QVTcRelations {
 		rds.remove(rd); // guard
 		for (RelationDomain ord : rds) {
 			// check
-			DomainPattern dp = ord.getPattern();
+			DomainPattern dp = ord.getPattern().get(0);
 			if (dp.getTemplateExpression() instanceof ObjectTemplateExp) {
 				String dn = ord.getName();
 				assert dn != null;
@@ -1370,7 +1370,7 @@ public class QVTr2QVTcRelations {
 		assert v != null;
 		String vn = v.getName();
 		assert vn != null;
-		Variable dv = rd.getRootVariable();
+		Variable dv = rd.getRootVariable().get(0);
 		assert dv != null;
 		// init
 		Variable vd = transformation.findVariable(tc.getName()+"_v", tc, mg);
@@ -1420,7 +1420,7 @@ public class QVTr2QVTcRelations {
 		Set<Variable> allDomainVars = new HashSet<Variable>();
 		for (Domain d : r.getDomain()) {
 			if (((RelationDomain) d).getPattern() != null)
-				allDomainVars.addAll(((RelationDomain) d).getPattern().getBindsTo());
+				allDomainVars.addAll(((RelationDomain) d).getPattern().get(0).getBindsTo());
 		}
 		return allDomainVars;
 	}

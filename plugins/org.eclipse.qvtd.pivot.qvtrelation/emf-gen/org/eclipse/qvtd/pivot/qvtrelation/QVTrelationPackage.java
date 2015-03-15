@@ -620,7 +620,7 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION_DOMAIN__DEFAULT_ASSIGNMENT = QVTbasePackage.DOMAIN_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Pattern</b></em>' containment reference.
+	 * The feature id for the '<em><b>Pattern</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -629,7 +629,7 @@ public interface QVTrelationPackage extends EPackage {
 	int RELATION_DOMAIN__PATTERN = QVTbasePackage.DOMAIN_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Root Variable</b></em>' reference.
+	 * The feature id for the '<em><b>Root Variable</b></em>' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1340,10 +1340,10 @@ public interface QVTrelationPackage extends EPackage {
 	EReference getRelationDomain_DefaultAssignment();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationDomain#getPattern <em>Pattern</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationDomain#getPattern <em>Pattern</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Pattern</em>'.
+	 * @return the meta object for the containment reference list '<em>Pattern</em>'.
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.RelationDomain#getPattern()
 	 * @see #getRelationDomain()
 	 * @generated
@@ -1351,10 +1351,10 @@ public interface QVTrelationPackage extends EPackage {
 	EReference getRelationDomain_Pattern();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationDomain#getRootVariable <em>Root Variable</em>}'.
+	 * Returns the meta object for the reference list '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationDomain#getRootVariable <em>Root Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Root Variable</em>'.
+	 * @return the meta object for the reference list '<em>Root Variable</em>'.
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.RelationDomain#getRootVariable()
 	 * @see #getRelationDomain()
 	 * @generated
@@ -1644,7 +1644,7 @@ public interface QVTrelationPackage extends EPackage {
 		EReference RELATION_DOMAIN__DEFAULT_ASSIGNMENT = eINSTANCE.getRelationDomain_DefaultAssignment();
 
 		/**
-		 * The meta object literal for the '<em><b>Pattern</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Pattern</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -1652,7 +1652,7 @@ public interface QVTrelationPackage extends EPackage {
 		EReference RELATION_DOMAIN__PATTERN = eINSTANCE.getRelationDomain_Pattern();
 
 		/**
-		 * The meta object literal for the '<em><b>Root Variable</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Root Variable</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

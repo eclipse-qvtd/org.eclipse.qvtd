@@ -57,7 +57,7 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 
 		@NonNull private Relation ir;
 		@NonNull private RelationDomain rd;
-		@NonNull private TypedModel dir;
+//		@NonNull private TypedModel dir;
 		@NonNull private String tmn;
 		@NonNull private List<org.eclipse.ocl.pivot.Package> up;
 		@NonNull private String dn;
@@ -91,7 +91,7 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 			this.ir = ir;
 			this.irn = irn;
 			this.rd = rd;
-			this.dir = dir;
+//			this.dir = dir;
 			this.tmn = tmn;
 			this.dn = dn;
 			this.up = up;
@@ -140,7 +140,7 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 					assert irn != null;
 					for (Domain d : r.getDomain()) {
 						RelationDomain rd = (RelationDomain) d;
-						DomainPattern dp = rd.getPattern();
+						DomainPattern dp = rd.getPattern().get(0);
 						assert dp != null;
 						if (rd.isIsEnforceable() && dp.getTemplateExpression() instanceof ObjectTemplateExp) {
 							//Mapping m = QVTcoreFactory.eINSTANCE.createMapping();
@@ -288,7 +288,7 @@ public class InvokedRelationToMappingForEnforcement extends AbstractRule {
 			Set<Variable> oppositeDomainVars = new HashSet<Variable>();
 			for (Domain d : subRecord.rOppositeDomains) {
 				if (((RelationDomain)d).getPattern() != null) {
-					oppositeDomainVars.addAll(((RelationDomain)d).getPattern().getBindsTo());
+					oppositeDomainVars.addAll(((RelationDomain)d).getPattern().get(0).getBindsTo());
 				}
 			}
 			Set<Variable> domainBottomUnSharedVars = new HashSet<Variable>(subRecord.domainVars);

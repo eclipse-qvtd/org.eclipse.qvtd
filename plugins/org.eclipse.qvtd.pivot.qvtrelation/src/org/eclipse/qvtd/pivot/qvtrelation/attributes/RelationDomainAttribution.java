@@ -26,9 +26,10 @@ public class RelationDomainAttribution extends AbstractAttribution
 	@Override
 	public ScopeView computeLookup(@NonNull EObject target, @NonNull EnvironmentView environmentView, @NonNull ScopeView scopeView) {
 		RelationDomain targetElement = (RelationDomain)target;
-		DomainPattern pattern = targetElement.getPattern();
-		if (pattern != null) {
-			environmentView.addNamedElements(pattern.getBindsTo());
+		for (DomainPattern pattern : targetElement.getPattern()) {
+			if (pattern != null) {
+				environmentView.addNamedElements(pattern.getBindsTo());
+			}
 		}
 		TypedModel typedModel = targetElement.getTypedModel();
 		if (typedModel != null) {

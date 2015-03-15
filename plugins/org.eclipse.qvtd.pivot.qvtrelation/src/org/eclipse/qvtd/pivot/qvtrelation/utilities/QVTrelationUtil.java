@@ -26,10 +26,7 @@ public class QVTrelationUtil extends QVTbaseUtil
 		List<Variable> rootVariables = new ArrayList<Variable>();
 		for (Domain domain : relation.getDomain()) {
 			if (domain instanceof RelationDomain) {
-				Variable rootVariable = ((RelationDomain)domain).getRootVariable();
-				if (rootVariable != null) {
-					rootVariables.add(rootVariable);
-				}
+				rootVariables.addAll(((RelationDomain)domain).getRootVariable());
 			}
 		}
 		return rootVariables;

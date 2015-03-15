@@ -157,11 +157,11 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 		RelationDomain pivotElement = PivotUtil.getPivot(RelationDomain.class, csElement);
 		if (pivotElement != null) {
 			Type type = PivotUtil.getPivot(Type.class, csElement.getOwnedType());
-			Variable rootVariable = pivotElement.getRootVariable();
+			Variable rootVariable = pivotElement.getRootVariable().get(0);
 			if (rootVariable != null) {
 				context.setType(rootVariable, type, true);
 			}
-			DomainPattern pattern = pivotElement.getPattern();
+			DomainPattern pattern = pivotElement.getPattern().get(0);
 			if (pattern != null) {
 				TemplateExp template = pattern.getTemplateExpression();
 				if (template instanceof ObjectTemplateExp) {

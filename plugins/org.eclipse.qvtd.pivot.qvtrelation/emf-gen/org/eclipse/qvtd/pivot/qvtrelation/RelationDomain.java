@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtrelation;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
 
@@ -48,58 +49,38 @@ public interface RelationDomain extends Domain {
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='owner'"
 	 * @generated
 	 */
-	EList<RelationDomainAssignment> getDefaultAssignment();
+	@NonNull EList<RelationDomainAssignment> getDefaultAssignment();
 
 	/**
-	 * Returns the value of the '<em><b>Pattern</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Pattern</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.pivot.qvtrelation.DomainPattern}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Pattern</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Pattern</em>' containment reference.
-	 * @see #setPattern(DomainPattern)
+	 * @return the value of the '<em>Pattern</em>' containment reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelationDomain_Pattern()
 	 * @model containment="true"
 	 * @generated
 	 */
-	DomainPattern getPattern();
+	@NonNull EList<DomainPattern> getPattern();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationDomain#getPattern <em>Pattern</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Pattern</em>' containment reference.
-	 * @see #getPattern()
-	 * @generated
-	 */
-	void setPattern(DomainPattern value);
-
-	/**
-	 * Returns the value of the '<em><b>Root Variable</b></em>' reference.
+	 * Returns the value of the '<em><b>Root Variable</b></em>' reference list.
+	 * The list contents are of type {@link org.eclipse.ocl.pivot.Variable}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Root Variable</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Root Variable</em>' reference.
-	 * @see #setRootVariable(Variable)
+	 * @return the value of the '<em>Root Variable</em>' reference list.
 	 * @see org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage#getRelationDomain_RootVariable()
 	 * @model required="true"
 	 * @generated
 	 */
-	Variable getRootVariable();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtrelation.RelationDomain#getRootVariable <em>Root Variable</em>}' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Root Variable</em>' reference.
-	 * @see #getRootVariable()
-	 * @generated
-	 */
-	void setRootVariable(Variable value);
+	@NonNull EList<Variable> getRootVariable();
 
 } // RelationDomain

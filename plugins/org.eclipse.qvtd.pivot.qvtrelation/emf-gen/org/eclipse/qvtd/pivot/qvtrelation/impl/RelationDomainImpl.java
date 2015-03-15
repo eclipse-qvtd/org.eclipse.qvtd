@@ -12,13 +12,12 @@ package org.eclipse.qvtd.pivot.qvtrelation.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -58,24 +57,24 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 	protected EList<RelationDomainAssignment> defaultAssignment;
 
 	/**
-	 * The cached value of the '{@link #getPattern() <em>Pattern</em>}' containment reference.
+	 * The cached value of the '{@link #getPattern() <em>Pattern</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getPattern()
 	 * @generated
 	 * @ordered
 	 */
-	protected DomainPattern pattern;
+	protected EList<DomainPattern> pattern;
 
 	/**
-	 * The cached value of the '{@link #getRootVariable() <em>Root Variable</em>}' reference.
+	 * The cached value of the '{@link #getRootVariable() <em>Root Variable</em>}' reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getRootVariable()
 	 * @generated
 	 * @ordered
 	 */
-	protected Variable rootVariable;
+	protected EList<Variable> rootVariable;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -101,8 +100,9 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("null")
 	@Override
-	public EList<RelationDomainAssignment> getDefaultAssignment() {
+	public @NonNull EList<RelationDomainAssignment> getDefaultAssignment() {
 		if (defaultAssignment == null) {
 			defaultAssignment = new EObjectContainmentEList<RelationDomainAssignment>(RelationDomainAssignment.class, this, QVTrelationPackage.RELATION_DOMAIN__DEFAULT_ASSIGNMENT);
 		}
@@ -114,8 +114,12 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("null")
 	@Override
-	public DomainPattern getPattern() {
+	public @NonNull EList<DomainPattern> getPattern() {
+		if (pattern == null) {
+			pattern = new EObjectContainmentEList<DomainPattern>(DomainPattern.class, this, QVTrelationPackage.RELATION_DOMAIN__PATTERN);
+		}
 		return pattern;
 	}
 
@@ -124,74 +128,13 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetPattern(DomainPattern newPattern, NotificationChain msgs) {
-		DomainPattern oldPattern = pattern;
-		pattern = newPattern;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationPackage.RELATION_DOMAIN__PATTERN, oldPattern, newPattern);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
+	@SuppressWarnings("null")
 	@Override
-	public void setPattern(DomainPattern newPattern) {
-		if (newPattern != pattern) {
-			NotificationChain msgs = null;
-			if (pattern != null)
-				msgs = ((InternalEObject)pattern).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationPackage.RELATION_DOMAIN__PATTERN, null, msgs);
-			if (newPattern != null)
-				msgs = ((InternalEObject)newPattern).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationPackage.RELATION_DOMAIN__PATTERN, null, msgs);
-			msgs = basicSetPattern(newPattern, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationPackage.RELATION_DOMAIN__PATTERN, newPattern, newPattern));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Variable getRootVariable() {
-		if (rootVariable != null && rootVariable.eIsProxy()) {
-			InternalEObject oldRootVariable = (InternalEObject)rootVariable;
-			rootVariable = (Variable)eResolveProxy(oldRootVariable);
-			if (rootVariable != oldRootVariable) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, QVTrelationPackage.RELATION_DOMAIN__ROOT_VARIABLE, oldRootVariable, rootVariable));
-			}
+	public @NonNull EList<Variable> getRootVariable() {
+		if (rootVariable == null) {
+			rootVariable = new EObjectResolvingEList<Variable>(Variable.class, this, QVTrelationPackage.RELATION_DOMAIN__ROOT_VARIABLE);
 		}
 		return rootVariable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Variable basicGetRootVariable() {
-		return rootVariable;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setRootVariable(Variable newRootVariable) {
-		Variable oldRootVariable = rootVariable;
-		rootVariable = newRootVariable;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationPackage.RELATION_DOMAIN__ROOT_VARIABLE, oldRootVariable, rootVariable));
 	}
 
 	/**
@@ -205,7 +148,7 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 			case QVTrelationPackage.RELATION_DOMAIN__DEFAULT_ASSIGNMENT:
 				return ((InternalEList<?>)getDefaultAssignment()).basicRemove(otherEnd, msgs);
 			case QVTrelationPackage.RELATION_DOMAIN__PATTERN:
-				return basicSetPattern(null, msgs);
+				return ((InternalEList<?>)getPattern()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -223,8 +166,7 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 			case QVTrelationPackage.RELATION_DOMAIN__PATTERN:
 				return getPattern();
 			case QVTrelationPackage.RELATION_DOMAIN__ROOT_VARIABLE:
-				if (resolve) return getRootVariable();
-				return basicGetRootVariable();
+				return getRootVariable();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -243,10 +185,12 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 				getDefaultAssignment().addAll((Collection<? extends RelationDomainAssignment>)newValue);
 				return;
 			case QVTrelationPackage.RELATION_DOMAIN__PATTERN:
-				setPattern((DomainPattern)newValue);
+				getPattern().clear();
+				getPattern().addAll((Collection<? extends DomainPattern>)newValue);
 				return;
 			case QVTrelationPackage.RELATION_DOMAIN__ROOT_VARIABLE:
-				setRootVariable((Variable)newValue);
+				getRootVariable().clear();
+				getRootVariable().addAll((Collection<? extends Variable>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -264,10 +208,10 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 				getDefaultAssignment().clear();
 				return;
 			case QVTrelationPackage.RELATION_DOMAIN__PATTERN:
-				setPattern((DomainPattern)null);
+				getPattern().clear();
 				return;
 			case QVTrelationPackage.RELATION_DOMAIN__ROOT_VARIABLE:
-				setRootVariable((Variable)null);
+				getRootVariable().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -284,9 +228,9 @@ public class RelationDomainImpl extends DomainImpl implements RelationDomain {
 			case QVTrelationPackage.RELATION_DOMAIN__DEFAULT_ASSIGNMENT:
 				return defaultAssignment != null && !defaultAssignment.isEmpty();
 			case QVTrelationPackage.RELATION_DOMAIN__PATTERN:
-				return pattern != null;
+				return pattern != null && !pattern.isEmpty();
 			case QVTrelationPackage.RELATION_DOMAIN__ROOT_VARIABLE:
-				return rootVariable != null;
+				return rootVariable != null && !rootVariable.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

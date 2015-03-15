@@ -82,9 +82,9 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationDomain.pattern"
-        name="pattern" eType="#QVTRelation.DomainPattern" containment="true"/>
+        name="pattern" upperBound="-1" eType="#QVTRelation.DomainPattern" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" xmi:id="QVTRelation.RelationDomain.rootVariable"
-        name="rootVariable" lowerBound="1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable"/>
+        name="rootVariable" lowerBound="1" upperBound="-1" eType="ecore:EClass ../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Variable"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" xmi:id="QVTRelation.RelationDomainAssignment"
       name="RelationDomainAssignment" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//Element">

@@ -39,11 +39,12 @@ public class RelationCallExpAttribution extends AbstractAttribution
 					if (index < domains.size()) {
 						RelationDomain relationDomain = (RelationDomain)domains.get(index);
 						if (relationDomain != null) {
-							DomainPattern pattern = relationDomain.getPattern();
-							if (pattern != null) {
-								environmentView.addNamedElements(pattern.getBindsTo());
-								if (environmentView.hasFinalResult()) {
-									return null;
+							for (DomainPattern pattern : relationDomain.getPattern()) {
+								if (pattern != null) {
+									environmentView.addNamedElements(pattern.getBindsTo());
+									if (environmentView.hasFinalResult()) {
+										return null;
+									}
 								}
 							}
 						}

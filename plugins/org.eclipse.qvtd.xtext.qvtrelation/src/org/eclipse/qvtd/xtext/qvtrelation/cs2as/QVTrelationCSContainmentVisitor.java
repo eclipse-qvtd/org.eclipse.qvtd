@@ -298,31 +298,31 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 	public Continuation<?> visitDomainCS(@NonNull DomainCS csElement) {
 		@NonNull RelationDomain pivotElement = context.refreshModelElement(RelationDomain.class, QVTrelationPackage.Literals.RELATION_DOMAIN, csElement);
 		DomainPattern asPattern = PivotUtil.getPivot(DomainPattern.class, csElement.getOwnedPattern());
-		pivotElement.setPattern(asPattern);
+		pivotElement.getPattern().clear();
+		pivotElement.getPattern().add(asPattern);
 		context.refreshPivotList(RelationDomainAssignment.class, pivotElement.getDefaultAssignment(), csElement.getOwnedDefaultValues());
 		Variable rootVariable = null;
-		DomainPattern rootPattern = pivotElement.getPattern();
+		DomainPattern rootPattern = pivotElement.getPattern().get(0);
 		if (rootPattern != null) {
 			TemplateExp rootTemplate = rootPattern.getTemplateExpression();
 			if (rootTemplate != null) {
 				rootVariable = rootTemplate.getBindsTo();
 			}
 		}
-		pivotElement.setRootVariable(rootVariable);
+		pivotElement.getRootVariable().clear();
+		pivotElement.getRootVariable().add(rootVariable);
 		if (asPattern != null) {
 			List<Variable> pivotVariables = new ArrayList<Variable>();
-			DomainPattern pattern = pivotElement.getPattern();
-			if (pattern != null) {
-				TemplateExp templateExpression = pattern.getTemplateExpression();
-				if (templateExpression != null) {
-					gatherVariables(pivotVariables, templateExpression);
+			for (DomainPattern pattern : pivotElement.getPattern()) {
+				if (pattern != null) {
+					TemplateExp templateExpression = pattern.getTemplateExpression();
+					if (templateExpression != null) {
+						gatherVariables(pivotVariables, templateExpression);
+					}
 				}
-			}
-			else {
-				Variable variable = pivotElement.getRootVariable();
-				if (variable != null) {
-					pivotVariables.add(variable);
-				}
+//				else {
+//					pivotVariables.addAll(pivotElement.getRootVariable());
+//				}
 			}
 			PivotUtilInternal.refreshList(asPattern.getBindsTo(), pivotVariables);
 		}
@@ -413,13 +413,15 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 	public Continuation<?> visitPrimitiveTypeDomainCS(@NonNull PrimitiveTypeDomainCS csElement) {
 		@NonNull RelationDomain pivotElement = context.refreshModelElement(RelationDomain.class, QVTrelationPackage.Literals.RELATION_DOMAIN, csElement);
 		@NonNull DomainPattern asPattern = context.refreshModelElement(DomainPattern.class, QVTrelationPackage.Literals.DOMAIN_PATTERN, null);
-		pivotElement.setPattern(asPattern);
+		pivotElement.getPattern().clear();
+		pivotElement.getPattern().add(asPattern);
 		@NonNull TemplateExp template = context.refreshModelElement(TemplateExp.class, QVTtemplatePackage.Literals.OBJECT_TEMPLATE_EXP, null);
 		asPattern.setTemplateExpression(template);
 		@NonNull Variable rootVariable = context.refreshModelElement(Variable.class, PivotPackage.Literals.VARIABLE, null);
 		context.refreshName(rootVariable, csElement.getName());
 		template.setBindsTo(rootVariable);
-		pivotElement.setRootVariable(rootVariable);
+		pivotElement.getRootVariable().clear();
+		pivotElement.getRootVariable().add(rootVariable);
 		List<Variable> pivotVariables = new ArrayList<Variable>();
 		pivotVariables.add(rootVariable);
 		PivotUtilInternal.refreshList(asPattern.getBindsTo(), pivotVariables);
@@ -484,9 +486,10 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		}
 		for (Domain domain : pivotElement.getDomain()) {
 			RelationDomain relationDomain = (RelationDomain)domain;
-			DomainPattern pattern = relationDomain.getPattern();
-			if (pattern != null) {
-				pivotVariables.addAll(pattern.getBindsTo());
+			for (DomainPattern pattern : relationDomain.getPattern()) {
+				if (pattern != null) {
+					pivotVariables.addAll(pattern.getBindsTo());
+				}
 			}
 		}
 		PivotUtilInternal.refreshList(pivotElement.getVariable(), pivotVariables);
