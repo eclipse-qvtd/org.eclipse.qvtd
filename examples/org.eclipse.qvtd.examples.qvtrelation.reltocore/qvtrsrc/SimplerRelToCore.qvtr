@@ -263,11 +263,12 @@ relation SubTemplateToTraceClassProps
 --
 top relation TopLevelRelationToMappingForChecking
 {
-   allDomainVars: Set(essentialocl::Variable);
-   sharedDomainVars: Set(essentialocl::Variable);
-   unsharedWhereVars: Set(essentialocl::Variable);
-   whenVars: Set(essentialocl::Variable);
-   whereVars: Set(essentialocl::Variable);
+   allDomainVars = r.domain->iterate(md; acc:Set(qvtrelation::RelationDomain)=Set{} | 
+                      acc->including(md.oclAsType(qvtrelation::RelationDomain))).pattern.bindsTo->asSet();
+   sharedDomainVars: Set(essentialocl::Variable) = getSharedDomainVars(r);
+   whenVars: Set(essentialocl::Variable) = r.when.bindsTo;
+   whereVars: Set(essentialocl::Variable) = r.where.bindsTo;
+   unsharedWhereVars: Set(essentialocl::Variable) = (whereVars - whenVars - allDomainVars)->union(sharedDomainVars);
    rn: String;
    mbVars:Set(essentialocl::Variable);
    rt: qvtrelation::RelationalTransformation;
@@ -296,15 +297,6 @@ top relation TopLevelRelationToMappingForChecking
       RelationalTransformationToMappingTransformation(rt, mt);
    }
    where {
-      allDomainVars = r.domain->iterate(md; acc:Set(qvtrelation::RelationDomain)=Set{} | 
-                      acc->including(md.oclAsType(qvtrelation::RelationDomain))).pattern.bindsTo->asSet();
-      whenVars = r.when.bindsTo;
-      whereVars = r.where.bindsTo;
-
-      sharedDomainVars = getSharedDomainVars(r);
-      unsharedWhereVars =
-         (whereVars - whenVars - allDomainVars)->union(sharedDomainVars);
-
       RelationToTraceClassVar(r, tcv);
       RWhenPatternToMGuardPattern(r, mg);
       if (unsharedWhereVars->isEmpty())
@@ -396,21 +388,33 @@ relation DomainBottomUnSharedVarsToDbVars
 --
 top relation TopLevelRelationToMappingForEnforcement
 {
-   allDomainVars: Set(essentialocl::Variable);
-   oppositeDomainVars: Set(essentialocl::Variable);
-   sharedDomainVars: Set(essentialocl::Variable);
-   predicatesWithVarBindings: Set(qvtbase::Predicate);
-   predicatesWithoutVarBindings: Set(qvtbase::Predicate);
-   unsharedWhenVars: Set(essentialocl::Variable);
-   unsharedWhereVars: Set(essentialocl::Variable);
-   domainVarsSharedWithWhen: Set(essentialocl::Variable);
-   domainBottomUnSharedVars: Set(essentialocl::Variable);
-   rn, dn, tmn: String;
    rOppositeDomains:Set(qvtrelation::RelationDomain);
-   whenVars: Set(essentialocl::Variable);
-   whereVars: Set(essentialocl::Variable);
+   allDomainVars = r.domain->iterate(md; acc:Set(qvtrelation::RelationDomain)=Set{} | 
+                      acc->including(md.oclAsType(qvtrelation::RelationDomain))).pattern.bindsTo->asSet();
+   whenVars = r.when.bindsTo;
+   whereVars = r.where.bindsTo;
+   -- Exclude where clause relation calls.
+   -- The predicate corresponding to a where clause relation call is included not in this
+   -- mapping but in the one corresponding to the invoked relation (refer to rule 2.6.1)
+   rpSet = r.where.predicate->reject(p |
+                                 p.conditionExpression.oclIsTypeOf(qvtrelation::RelationCallExp));
+
+   oppositeDomainVars = rOppositeDomains->iterate(d; vars: Set(essentialocl::Variable) = Set{} |
+      vars->union(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo));
+   sharedDomainVars = getSharedDomainVars(r);
+   domainBottomUnSharedVars = domainVars - whenVars - sharedDomainVars;
+
+   unsharedWhereVars =
+      (whereVars - whenVars - allDomainVars)->union(sharedDomainVars);
+
+   predicatesWithVarBindings =
+      filterOutPredicatesThatReferToVars(rpSet, domainBottomUnSharedVars);
+   predicatesWithoutVarBindings = rpSet - predicatesWithVarBindings;
+   unsharedWhenVars = whenVars - allDomainVars;
+   domainVarsSharedWithWhen = domainVars->intersection(whenVars);
+
+   rn, dn, tmn: String;
    mbVars: Set(essentialocl::Variable);
-   rpSet: Set(qvtbase::Predicate);
    rt: qvtrelation::RelationalTransformation;
    mt: qvtbase::Transformation;
     
@@ -467,31 +471,6 @@ top relation TopLevelRelationToMappingForEnforcement
       RelationalTransformationToMappingTransformation(rt, mt);
    }
    where {
-      allDomainVars = r.domain->iterate(md; acc:Set(qvtrelation::RelationDomain)=Set{} | 
-                      acc->including(md.oclAsType(qvtrelation::RelationDomain))).pattern.bindsTo->asSet();
-      whenVars = r.when.bindsTo;
-      whereVars = r.where.bindsTo;
-
-      -- Exclude where clause relation calls.
-      -- The predicate corresponding to a where clause relation call is included not in this
-      -- mapping but in the one corresponding to the invoked relation (refer to rule 2.6.1)
-      rpSet = r.where.predicate->reject(p |
-                                 p.conditionExpression.oclIsTypeOf(qvtrelation::RelationCallExp));
-
-      oppositeDomainVars = rOppositeDomains->iterate(d; vars: Set(essentialocl::Variable) = Set{} |
-         vars->union(d.oclAsType(qvtrelation::RelationDomain).pattern.bindsTo));
-      sharedDomainVars = getSharedDomainVars(r);
-      domainBottomUnSharedVars = domainVars - whenVars - sharedDomainVars;
-
-      unsharedWhereVars =
-         (whereVars - whenVars - allDomainVars)->union(sharedDomainVars);
-
-      predicatesWithVarBindings =
-         filterOutPredicatesThatReferToVars(rpSet, domainBottomUnSharedVars);
-      predicatesWithoutVarBindings = rpSet - predicatesWithVarBindings;
-      unsharedWhenVars = whenVars - allDomainVars;
-      domainVarsSharedWithWhen = domainVars->intersection(whenVars);
-
       RelationDomainToTraceClassVar(r, rd, tcv);
       RWhenPatternToMGuardPattern(r, mg);
       DomainVarsSharedWithWhenToDgVars(domainVarsSharedWithWhen, dg);
@@ -523,15 +502,17 @@ top relation TopLevelRelationToMappingForEnforcement
 --
 top relation InvokedRelationToMappingForChecking
 {
-   allDomainVars: Set(essentialocl::Variable);
-   sharedDomainVars: Set(essentialocl::Variable);
-   unsharedWhereVars: Set(essentialocl::Variable);
+   allDomainVars = r.domain->iterate(md; acc:Set(qvtrelation::RelationDomain)=Set{} | 
+                   acc->including(md.oclAsType(qvtrelation::RelationDomain))).pattern.bindsTo->asSet();
+   whenVars = r.when.bindsTo;
+   whereVars = r.where.bindsTo;
+   sharedDomainVars = getSharedDomainVars(r);
+   unsharedWhereVars = (whereVars - whenVars - allDomainVars)->union(sharedDomainVars);
+
    rn, irn: String;
    mbVars:Set(essentialocl::Variable);
    rt: qvtrelation::RelationalTransformation;
    mt: qvtbase::Transformation;
-   whenVars: Set(essentialocl::Variable);
-   whereVars: Set(essentialocl::Variable);
     
    domain relations r:Relation {
       transformation = rt,
@@ -563,14 +544,6 @@ top relation InvokedRelationToMappingForChecking
       RelationalTransformationToMappingTransformation(rt, mt);
    }
    where {
-      allDomainVars = r.domain->iterate(md; acc:Set(qvtrelation::RelationDomain)=Set{} | 
-                      acc->including(md.oclAsType(qvtrelation::RelationDomain))).pattern.bindsTo->asSet();
-      whenVars = r.when.bindsTo;
-      whereVars = r.where.bindsTo;
-      sharedDomainVars = getSharedDomainVars(r);
-      unsharedWhereVars =
-         (whereVars - whenVars - allDomainVars)->union(sharedDomainVars);
-
       RelationToTraceClassVar(r, tcv);
       RWhenPatternToMGuardPattern(r, mg);
       RInvokerToMGuard(ir, ri, r, mg);
@@ -598,21 +571,27 @@ top relation InvokedRelationToMappingForChecking
 --
 top relation InvokedRelationToMappingForEnforcement
 {
-   allDomainVars: Set(essentialocl::Variable);
-   oppositeDomainVars: Set(essentialocl::Variable);
-   sharedDomainVars: Set(essentialocl::Variable);
-   predicatesWithVarBindings: Set(qvtbase::Predicate);
-   predicatesWithoutVarBindings: Set(qvtbase::Predicate);
-   unsharedWhenVars: Set(essentialocl::Variable);
-   unsharedWhereVars: Set(essentialocl::Variable);
-   domainTopVars: Set(essentialocl::Variable);
-   domainBottomUnSharedVars: Set(essentialocl::Variable);
-   rn, irn, dn, tmn: String;
    rOppositeDomains:Set(qvtrelation::RelationDomain);
-   whenVars: Set(essentialocl::Variable);
-   whereVars: Set(essentialocl::Variable);
+   allDomainVars = r.domain->iterate(md; acc:Set(qvtrelation::RelationDomain)=Set{} | 
+                   acc->including(md.oclAsType(qvtrelation::RelationDomain))).pattern.bindsTo->asSet();
+   whenVars = r.when.bindsTo;
+   whereVars = r.where.bindsTo;
+   -- Exclude where clause relation calls.
+   -- The predicate corresponding to a where clause relation call is included not in this
+   -- mapping but in the one corresponding to the invoked relation (refer to rule 2.6.1)
+   rpSet = r.where.predicate->reject(p | p.conditionExpression.oclIsTypeOf(qvtrelation::RelationCallExp));
+   oppositeDomainVars = rOppositeDomains->iterate(d; vars: Set(essentialocl::Variable) = Set{} |
+      vars->union(d.pattern.bindsTo));
+   sharedDomainVars = getSharedDomainVars(r);
+   domainBottomUnSharedVars = (domainVars - whenVars - sharedDomainVars)->excluding(tev);
+   unsharedWhereVars = (whereVars - whenVars - allDomainVars)->union(sharedDomainVars);
+   predicatesWithVarBindings = filterOutPredicatesThatReferToVars(rpSet, domainBottomUnSharedVars);
+   predicatesWithoutVarBindings = rpSet - predicatesWithVarBindings;
+   unsharedWhenVars = whenVars - allDomainVars;
+   domainTopVars = domainVars->intersection(whenVars)->including(tev);
+
+   rn, irn, dn, tmn: String;
    mbVars: Set(essentialocl::Variable);
-   rpSet: Set(qvtbase::Predicate);
    rt: qvtrelation::RelationalTransformation;
    mt: qvtbase::Transformation;
     
@@ -676,30 +655,6 @@ top relation InvokedRelationToMappingForEnforcement
       RelationalTransformationToMappingTransformation(rt, mt);
    }
    where {
-      allDomainVars = r.domain->iterate(md; acc:Set(qvtrelation::RelationDomain)=Set{} | 
-                      acc->including(md.oclAsType(qvtrelation::RelationDomain))).pattern.bindsTo->asSet();
-      whenVars = r.when.bindsTo;
-      whereVars = r.where.bindsTo;
-
-      -- Exclude where clause relation calls.
-      -- The predicate corresponding to a where clause relation call is included not in this
-      -- mapping but in the one corresponding to the invoked relation (refer to rule 2.6.1)
-      rpSet = r.where.predicate->reject(p |
-                                 p.conditionExpression.oclIsTypeOf(qvtrelation::RelationCallExp));
-
-      oppositeDomainVars = rOppositeDomains->iterate(d; vars: Set(essentialocl::Variable) = Set{} |
-         vars->union(d.pattern.bindsTo));
-      sharedDomainVars = getSharedDomainVars(r);
-      domainBottomUnSharedVars =
-         (domainVars - whenVars - sharedDomainVars)->excluding(tev);
-      unsharedWhereVars =
-         (whereVars - whenVars - allDomainVars)->union(sharedDomainVars);
-      predicatesWithVarBindings =
-         filterOutPredicatesThatReferToVars(rpSet, domainBottomUnSharedVars);
-      predicatesWithoutVarBindings = rpSet - predicatesWithVarBindings;
-      unsharedWhenVars = whenVars - allDomainVars;
-      domainTopVars = domainVars->intersection(whenVars)->including(tev);
-
       RelationDomainToTraceClassVar(r, rd, tcv);
       if (unsharedWhereVars->isEmpty())
       then
@@ -720,10 +675,11 @@ top relation InvokedRelationToMappingForEnforcement
 
 relation RDomainToMDomainForChecking
 {
-   sharedDomainVars: Set(essentialocl::Variable);
-   domainVarsSharedWithWhen: Set(essentialocl::Variable);
-   domainBottomUnSharedVars: Set(essentialocl::Variable);
-   whenVars: Set(essentialocl::Variable);
+   whenVars = r.when.bindsTo;
+   sharedDomainVars = getSharedDomainVars(r);
+   domainVarsSharedWithWhen = domainVars->intersection(whenVars);
+   domainBottomUnSharedVars = domainVars - whenVars - sharedDomainVars;
+
    dn, tmn: String;
    rt: qvtrelation::RelationalTransformation;
    mt: qvtbase::Transformation;
@@ -767,11 +723,6 @@ relation RDomainToMDomainForChecking
       RelationalTransformationToMappingTransformation(rt, mt);
    }
    where {
-      whenVars = r.when.bindsTo;
-      sharedDomainVars = getSharedDomainVars(r);
-      domainVarsSharedWithWhen = domainVars->intersection(whenVars);
-      domainBottomUnSharedVars = domainVars - whenVars - sharedDomainVars;
-
       DomainVarsSharedWithWhenToDgVars(domainVarsSharedWithWhen, dg);
       DomainBottomUnSharedVarsToDbVars(domainBottomUnSharedVars, db);
       RDomainPatternToMDBottomPattern(r, te, db);
@@ -787,14 +738,15 @@ relation RDomainToMDomainForChecking
 --
 relation IROppositeDomainsToMappingForEnforcement
 {
-   sharedDomainVars:Set(essentialocl::Variable);
-   domainTopVars: Set(essentialocl::Variable);
-   domainBottomUnSharedVars: Set(essentialocl::Variable);
-   domainBottomSharedVars: Set(essentialocl::Variable);
+   whenVars = r.when.bindsTo;
+   domainTopVars = domainVars->intersection(whenVars)->including(tev);
+   sharedDomainVars = getSharedDomainVars(r);
+   domainBottomUnSharedVars = (domainVars - whenVars - sharedDomainVars)->excluding(tev);
+   domainBottomSharedVars = (domainVars - whenVars)->intersection(sharedDomainVars)->excluding(tev);
+
    dn, tmn: String;
    c: Boolean;
    mbVars:Set(essentialocl::Variable);
-   whenVars:Set(essentialocl::Variable);
    rt: qvtrelation::RelationalTransformation;
    mt: qvtbase::Transformation;
    up: emof::Package;
@@ -848,13 +800,6 @@ relation IROppositeDomainsToMappingForEnforcement
       RelationalTransformationToMappingTransformation(rt, mt);
    }
    where {
-      whenVars = r.when.bindsTo;
-      domainTopVars = domainVars->intersection(whenVars)->including(tev);
-      sharedDomainVars = getSharedDomainVars(r);
-      domainBottomUnSharedVars = (domainVars - whenVars - sharedDomainVars)->excluding(tev);
-      domainBottomSharedVars =
-         (domainVars - whenVars)->intersection(sharedDomainVars)->excluding(tev);
-
       RVarSetToMVarSet(domainTopVars->asSequence(), dgVars);
       RVarSetToMVarSet(domainBottomUnSharedVars->asSequence(), dbVars);
       RVarSetToMBVarSet(domainBottomSharedVars->asSequence(), mb);
@@ -867,14 +812,15 @@ relation IROppositeDomainsToMappingForEnforcement
 --
 relation TROppositeDomainsToMappingForEnforcement
 {
-   sharedDomainVars:Set(essentialocl::Variable);
-   domainTopVars: Set(essentialocl::Variable);
-   domainBottomUnSharedVars: Set(essentialocl::Variable);
-   domainBottomSharedVars: Set(essentialocl::Variable);
+   whenVars = r.when.bindsTo;
+   domainTopVars = domainVars->intersection(whenVars);
+   sharedDomainVars = getSharedDomainVars(r);
+   domainBottomUnSharedVars = domainVars - whenVars - sharedDomainVars;
+   domainBottomSharedVars = (domainVars - whenVars)->intersection(sharedDomainVars);
+
    dn, tmn: String;
    c: Boolean;
    mbVars:Set(essentialocl::Variable);
-   whenVars:Set(essentialocl::Variable);
    rt: qvtrelation::RelationalTransformation;
    mt: qvtbase::Transformation;
    up: emof::Package;
@@ -923,13 +869,6 @@ relation TROppositeDomainsToMappingForEnforcement
       }
    };
    where {
-      whenVars = r.when.bindsTo;
-      domainTopVars = domainVars->intersection(whenVars);
-      sharedDomainVars = getSharedDomainVars(r);
-      domainBottomUnSharedVars = domainVars - whenVars - sharedDomainVars;
-      domainBottomSharedVars =
-                  (domainVars - whenVars)->intersection(sharedDomainVars);
-
       RelationalTransformationToMappingTransformation(rt, mt);
       RVarSetToMVarSet(domainTopVars->asSequence(), dgVars);
       RVarSetToMVarSet(domainBottomUnSharedVars->asSequence(), dbVars);
@@ -1176,16 +1115,17 @@ relation RDomainPatternToMDBottomPattern
 
 relation RDomainToMDBottomForEnforcement
 {
-   remainingUnBoundDomainVars: Set(essentialocl::Variable);
-   remainingPredicatesWithoutVarBindings:Set(qvtbase::Predicate);
-   predicatesWithoutVarBindings:Set(qvtbase::Predicate);
+   remainingUnBoundDomainVars = unboundDomainVars - Set{v};
+   predicatesWithVarBindings = filterOutPredicatesThatReferToVars(predicatesWithoutVarBindings, remainingUnBoundDomainVars);
+   remainingPredicatesWithoutVarBindings = predicatesWithoutVarBindings - predicatesWithVarBindings;
+   
    tcv, mv: essentialocl::Variable;
 
    domain relations r:Relation{},
          rd:RelationDomain{},
          te:ObjectTemplateExp {bindsTo = v:Variable {}},
-      predicatesWithVarBindings:Set(qvtbase::Predicate) {},
-   	  unboundDomainVars:Set(essentialocl::Variable) {};
+         predicatesWithoutVarBindings:Set(qvtbase::Predicate){},
+         unboundDomainVars:Set(essentialocl::Variable){};
    enforce domain core db:BottomPattern {   -- domain bottom
       area = cd:CoreDomain {
          rule = m:Mapping {
@@ -1196,19 +1136,12 @@ relation RDomainToMDBottomForEnforcement
       }
    };
    where {
-      remainingUnBoundDomainVars = unboundDomainVars - Set{v};
-      predicatesWithVarBindings = filterOutPredicatesThatReferToVars(
-                                    predicatesWithoutVarBindings, remainingUnBoundDomainVars);
-
-      remainingPredicatesWithoutVarBindings =
-            predicatesWithoutVarBindings - predicatesWithVarBindings;
-
       RDomainToMDBottomForEnforcementOfIdentityProp(r, te, db);
       RDomainVarToMDBottomAssignmnetForEnforcement(r, rd, te, mb);
       --RDomainToMDBottomForEnforcementOfIdentityPropObject(r, rd, te, mb);
       RDomainToMDBottomForEnforcementOfNonIdentityPropPrimitive(r, te, rd, m);
       RDomainToMDBottomForEnforcementOfNonIdentityPropObject(r, rd, te, remainingPredicatesWithoutVarBindings, remainingUnBoundDomainVars, m);
-      RDomainToMBottomPredicateForEnforcement(r, rd, te, predicatesWithVarBindings, unboundDomainVars, mb);
+      RDomainToMBottomPredicateForEnforcement(r, rd, te, predicatesWithoutVarBindings, unboundDomainVars, mb);
    }
 }
 
@@ -1882,7 +1815,7 @@ relation RelationDomainToTraceClassVar
 
 -- copy an ocl expression
 -- For space reasons this relation is not expanded out here
-relation RExpToMExp
+default relation RExpToMExp
 {
    domain relations re:OclExpression{};
    enforce domain core me:OclExpression{} /*implementedby CopyOclExpession(re, me)*/;
