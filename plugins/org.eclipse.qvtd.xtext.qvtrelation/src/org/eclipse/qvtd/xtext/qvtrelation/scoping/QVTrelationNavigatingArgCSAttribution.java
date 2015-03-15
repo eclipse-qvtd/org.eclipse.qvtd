@@ -47,18 +47,22 @@ public class QVTrelationNavigatingArgCSAttribution extends NavigatingArgCSAttrib
 					if (eObject instanceof RelationCS) {
 						Relation relation = PivotUtil.getPivot(Relation.class, (RelationCS)eObject);
 						if (relation != null) {
-							List<Domain> domains = relation.getDomain();
-							if (index < domains.size()) {
-								RelationDomain relationDomain = (RelationDomain)domains.get(index);
-								if (relationDomain != null) {
-									for (DomainPattern pattern : relationDomain.getPattern()) {
-										if (pattern != null) {
-											environmentView.addNamedElements(pattern.getBindsTo());
-											if (environmentView.hasFinalResult()) {
-												return null;
+							int firstIndex = 0;
+							for (Domain asDomain : relation.getDomain()) {
+								if (asDomain instanceof RelationDomain) {
+									List<DomainPattern> asPatterns = ((RelationDomain)asDomain).getPattern();
+									int lastIndex = firstIndex + asPatterns.size();
+									if ((firstIndex <= index) && (index < lastIndex)) {
+										for (DomainPattern asPattern : asPatterns) {
+											if (asPattern != null) {
+												environmentView.addNamedElements(asPattern.getBindsTo());
 											}
 										}
+										if (environmentView.hasFinalResult()) {
+											return null;
+										}
 									}
+									firstIndex = lastIndex;
 								}
 							}
 						}

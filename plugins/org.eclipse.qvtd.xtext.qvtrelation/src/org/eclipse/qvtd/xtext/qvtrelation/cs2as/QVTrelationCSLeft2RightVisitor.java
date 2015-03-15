@@ -50,6 +50,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtrelation.QVTrelationPackage;
 import org.eclipse.qvtd.pivot.qvtrelation.Relation;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationCallExp;
+import org.eclipse.qvtd.pivot.qvtrelation.RelationDomain;
 import org.eclipse.qvtd.pivot.qvtrelation.RelationDomainAssignment;
 import org.eclipse.qvtd.pivot.qvtrelation.utilities.QVTrelationUtil;
 import org.eclipse.qvtd.pivot.qvttemplate.CollectionTemplateExp;
@@ -162,7 +163,7 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 			if (relation != null) {
 				@NonNull RelationCallExp relationCallExp = context.refreshModelElement(RelationCallExp.class, QVTrelationPackage.Literals.RELATION_CALL_EXP, csNameExp);
 				relationCallExp.setReferredRelation(relation);
-				context.setType(relationCallExp, metamodelManager.getStandardLibrary().getBooleanType(), true);
+				context.setType(relationCallExp, standardLibrary.getBooleanType(), true);
 				List<Variable> rootVariables = QVTrelationUtil.getRootVariables(relation);
 				resolveRelationArgumentTypes(rootVariables, csRoundBracketedClause);
 				resolveRelationArguments(csRoundBracketedClause, null, relation, relationCallExp);
@@ -197,8 +198,12 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 		@SuppressWarnings("null")@NonNull AbstractNameExpCS csNameExp = csRoundBracketedClause.getOwningNameExp();
 		List<OCLExpression> pivotArguments = new ArrayList<OCLExpression>();
 		List<NavigatingArgCS> csArguments = csRoundBracketedClause.getOwnedArguments();
-		List<Domain> ownedDomains = relation.getDomain();
-		int domainsCount = ownedDomains.size();
+		int patternsCount = 0;
+		for (Domain asDomain : relation.getDomain()) {
+			if (asDomain instanceof RelationDomain) {
+				patternsCount += ((RelationDomain)asDomain).getPattern().size();
+			}
+		}
 		int csArgumentCount = csArguments.size();
 		if (csArgumentCount > 0) {
 			if (csArguments.get(0).getRole() != NavigationRole.EXPRESSION) {
@@ -218,8 +223,8 @@ public class QVTrelationCSLeft2RightVisitor extends AbstractQVTrelationCSLeft2Ri
 				}
 			}
 		}
-		if ((csArgumentCount != domainsCount) && (relation != metamodelManager.getStandardLibrary().getOclInvalidOperation())) {
-			String boundMessage = StringUtil.bind(PivotMessagesInternal.MismatchedArgumentCount_ERROR_, csArgumentCount, domainsCount);
+		if ((csArgumentCount != patternsCount) && (relation != standardLibrary.getOclInvalidOperation())) {
+			String boundMessage = StringUtil.bind(PivotMessagesInternal.MismatchedArgumentCount_ERROR_, csArgumentCount, patternsCount);
 			context.addDiagnostic(csNameExp, boundMessage);			
 		}
 		context.refreshList(relationCallExp.getArgument(), pivotArguments);
