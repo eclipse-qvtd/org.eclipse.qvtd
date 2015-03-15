@@ -91,6 +91,7 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDomainCSAccess().getGroup(), "rule__DomainCS__Group__0");
 					put(grammarAccess.getDomainCSAccess().getGroup_4(), "rule__DomainCS__Group_4__0");
 					put(grammarAccess.getDomainCSAccess().getGroup_5(), "rule__DomainCS__Group_5__0");
+					put(grammarAccess.getDomainCSAccess().getGroup_6(), "rule__DomainCS__Group_6__0");
 					put(grammarAccess.getKeyDeclCSAccess().getGroup(), "rule__KeyDeclCS__Group__0");
 					put(grammarAccess.getKeyDeclCSAccess().getGroup_3_1(), "rule__KeyDeclCS__Group_3_1__0");
 					put(grammarAccess.getKeyDeclCSAccess().getGroup_4(), "rule__KeyDeclCS__Group_4__0");
@@ -230,8 +231,9 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDomainCSAccess().getIsEnforceAssignment_0_1(), "rule__DomainCS__IsEnforceAssignment_0_1");
 					put(grammarAccess.getDomainCSAccess().getModelIdAssignment_2(), "rule__DomainCS__ModelIdAssignment_2");
 					put(grammarAccess.getDomainCSAccess().getOwnedPatternAssignment_3(), "rule__DomainCS__OwnedPatternAssignment_3");
-					put(grammarAccess.getDomainCSAccess().getImplementedByAssignment_4_1(), "rule__DomainCS__ImplementedByAssignment_4_1");
-					put(grammarAccess.getDomainCSAccess().getOwnedDefaultValuesAssignment_5_2(), "rule__DomainCS__OwnedDefaultValuesAssignment_5_2");
+					put(grammarAccess.getDomainCSAccess().getOwnedPatternAssignment_4_1(), "rule__DomainCS__OwnedPatternAssignment_4_1");
+					put(grammarAccess.getDomainCSAccess().getImplementedByAssignment_5_1(), "rule__DomainCS__ImplementedByAssignment_5_1");
+					put(grammarAccess.getDomainCSAccess().getOwnedDefaultValuesAssignment_6_2(), "rule__DomainCS__OwnedDefaultValuesAssignment_6_2");
 					put(grammarAccess.getDomainPatternCSAccess().getOwnedTemplateAssignment(), "rule__DomainPatternCS__OwnedTemplateAssignment");
 					put(grammarAccess.getElementTemplateCSAccess().getNameAssignment(), "rule__ElementTemplateCS__NameAssignment");
 					put(grammarAccess.getKeyDeclCSAccess().getOwnedPathNameAssignment_1(), "rule__KeyDeclCS__OwnedPathNameAssignment_1");

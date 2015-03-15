@@ -143,14 +143,14 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	protected boolean isReplace = IS_REPLACE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getOwnedPattern() <em>Owned Pattern</em>}' containment reference.
+	 * The cached value of the '{@link #getOwnedPattern() <em>Owned Pattern</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getOwnedPattern()
 	 * @generated
 	 * @ordered
 	 */
-	protected DomainPatternCS ownedPattern;
+	protected EList<DomainPatternCS> ownedPattern;
 
 	/**
 	 * The cached value of the '{@link #getOwnedDefaultValues() <em>Owned Default Values</em>}' containment reference list.
@@ -329,43 +329,11 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	 * @generated
 	 */
 	@Override
-	public DomainPatternCS getOwnedPattern() {
+	public EList<DomainPatternCS> getOwnedPattern() {
+		if (ownedPattern == null) {
+			ownedPattern = new EObjectContainmentEList<DomainPatternCS>(DomainPatternCS.class, this, QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERN);
+		}
 		return ownedPattern;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetOwnedPattern(DomainPatternCS newOwnedPattern, NotificationChain msgs) {
-		DomainPatternCS oldOwnedPattern = ownedPattern;
-		ownedPattern = newOwnedPattern;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERN, oldOwnedPattern, newOwnedPattern);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setOwnedPattern(DomainPatternCS newOwnedPattern) {
-		if (newOwnedPattern != ownedPattern) {
-			NotificationChain msgs = null;
-			if (ownedPattern != null)
-				msgs = ((InternalEObject)ownedPattern).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERN, null, msgs);
-			if (newOwnedPattern != null)
-				msgs = ((InternalEObject)newOwnedPattern).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERN, null, msgs);
-			msgs = basicSetOwnedPattern(newOwnedPattern, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERN, newOwnedPattern, newOwnedPattern));
 	}
 
 	/**
@@ -445,7 +413,7 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERN:
-				return basicSetOwnedPattern(null, msgs);
+				return ((InternalEList<?>)getOwnedPattern()).basicRemove(otherEnd, msgs);
 			case QVTrelationCSPackage.DOMAIN_CS__OWNED_DEFAULT_VALUES:
 				return ((InternalEList<?>)getOwnedDefaultValues()).basicRemove(otherEnd, msgs);
 			case QVTrelationCSPackage.DOMAIN_CS__OWNED_IMPLEMENTED_BY:
@@ -508,7 +476,8 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 				setIsReplace((Boolean)newValue);
 				return;
 			case QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERN:
-				setOwnedPattern((DomainPatternCS)newValue);
+				getOwnedPattern().clear();
+				getOwnedPattern().addAll((Collection<? extends DomainPatternCS>)newValue);
 				return;
 			case QVTrelationCSPackage.DOMAIN_CS__OWNED_DEFAULT_VALUES:
 				getOwnedDefaultValues().clear();
@@ -545,7 +514,7 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 				setIsReplace(IS_REPLACE_EDEFAULT);
 				return;
 			case QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERN:
-				setOwnedPattern((DomainPatternCS)null);
+				getOwnedPattern().clear();
 				return;
 			case QVTrelationCSPackage.DOMAIN_CS__OWNED_DEFAULT_VALUES:
 				getOwnedDefaultValues().clear();
@@ -576,7 +545,7 @@ public class DomainCSImpl extends AbstractDomainCSImpl implements DomainCS {
 			case QVTrelationCSPackage.DOMAIN_CS__IS_REPLACE:
 				return isReplace != IS_REPLACE_EDEFAULT;
 			case QVTrelationCSPackage.DOMAIN_CS__OWNED_PATTERN:
-				return ownedPattern != null;
+				return ownedPattern != null && !ownedPattern.isEmpty();
 			case QVTrelationCSPackage.DOMAIN_CS__OWNED_DEFAULT_VALUES:
 				return ownedDefaultValues != null && !ownedDefaultValues.isEmpty();
 			case QVTrelationCSPackage.DOMAIN_CS__OWNED_IMPLEMENTED_BY:

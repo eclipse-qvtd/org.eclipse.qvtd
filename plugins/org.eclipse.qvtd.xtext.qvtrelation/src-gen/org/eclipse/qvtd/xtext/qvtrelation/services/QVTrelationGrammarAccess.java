@@ -224,26 +224,31 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cOwnedPatternAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cOwnedPatternDomainPatternCSParserRuleCall_3_0 = (RuleCall)cOwnedPatternAssignment_3.eContents().get(0);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Keyword cImplementedbyKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final Assignment cImplementedByAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
-		private final RuleCall cImplementedByUnrestrictedNameParserRuleCall_4_1_0 = (RuleCall)cImplementedByAssignment_4_1.eContents().get(0);
+		private final Keyword cCommaKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cOwnedPatternAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cOwnedPatternDomainPatternCSParserRuleCall_4_1_0 = (RuleCall)cOwnedPatternAssignment_4_1.eContents().get(0);
 		private final Group cGroup_5 = (Group)cGroup.eContents().get(5);
-		private final Keyword cDefault_valuesKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
-		private final Keyword cLeftCurlyBracketKeyword_5_1 = (Keyword)cGroup_5.eContents().get(1);
-		private final Assignment cOwnedDefaultValuesAssignment_5_2 = (Assignment)cGroup_5.eContents().get(2);
-		private final RuleCall cOwnedDefaultValuesDefaultValueCSParserRuleCall_5_2_0 = (RuleCall)cOwnedDefaultValuesAssignment_5_2.eContents().get(0);
-		private final Keyword cRightCurlyBracketKeyword_5_3 = (Keyword)cGroup_5.eContents().get(3);
-		private final Keyword cSemicolonKeyword_6 = (Keyword)cGroup.eContents().get(6);
+		private final Keyword cImplementedbyKeyword_5_0 = (Keyword)cGroup_5.eContents().get(0);
+		private final Assignment cImplementedByAssignment_5_1 = (Assignment)cGroup_5.eContents().get(1);
+		private final RuleCall cImplementedByUnrestrictedNameParserRuleCall_5_1_0 = (RuleCall)cImplementedByAssignment_5_1.eContents().get(0);
+		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
+		private final Keyword cDefault_valuesKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_6_1 = (Keyword)cGroup_6.eContents().get(1);
+		private final Assignment cOwnedDefaultValuesAssignment_6_2 = (Assignment)cGroup_6.eContents().get(2);
+		private final RuleCall cOwnedDefaultValuesDefaultValueCSParserRuleCall_6_2_0 = (RuleCall)cOwnedDefaultValuesAssignment_6_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_6_3 = (Keyword)cGroup_6.eContents().get(3);
+		private final Keyword cSemicolonKeyword_7 = (Keyword)cGroup.eContents().get(7);
 		
 		//DomainCS:
 		//	(isCheckonly?="checkonly" | isEnforce?="enforce" | "replace")? "domain"
-		//	modelId=[qvtbase::TypedModel|UnrestrictedName] ownedPattern=DomainPatternCS ("implementedby"
-		//	implementedBy=UnrestrictedName)? ("default_values" "{" ownedDefaultValues+=DefaultValueCS+ "}")? ";";
+		//	modelId=[qvtbase::TypedModel|UnrestrictedName] ownedPattern+=DomainPatternCS ("," ownedPattern+=DomainPatternCS)*
+		//	("implementedby" implementedBy=UnrestrictedName)? ("default_values" "{" ownedDefaultValues+=DefaultValueCS+ "}")?
+		//	";";
 		@Override public ParserRule getRule() { return rule; }
 
 		//(isCheckonly?="checkonly" | isEnforce?="enforce" | "replace")? "domain" modelId=[qvtbase::TypedModel|UnrestrictedName]
-		//ownedPattern=DomainPatternCS ("implementedby" implementedBy=UnrestrictedName)? ("default_values" "{"
-		//ownedDefaultValues+=DefaultValueCS+ "}")? ";"
+		//ownedPattern+=DomainPatternCS ("," ownedPattern+=DomainPatternCS)* ("implementedby" implementedBy=UnrestrictedName)?
+		//("default_values" "{" ownedDefaultValues+=DefaultValueCS+ "}")? ";"
 		public Group getGroup() { return cGroup; }
 
 		//(isCheckonly?="checkonly" | isEnforce?="enforce" | "replace")?
@@ -276,44 +281,56 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 		//UnrestrictedName
 		public RuleCall getModelIdTypedModelUnrestrictedNameParserRuleCall_2_0_1() { return cModelIdTypedModelUnrestrictedNameParserRuleCall_2_0_1; }
 
-		//ownedPattern=DomainPatternCS
+		//ownedPattern+=DomainPatternCS
 		public Assignment getOwnedPatternAssignment_3() { return cOwnedPatternAssignment_3; }
 
 		//DomainPatternCS
 		public RuleCall getOwnedPatternDomainPatternCSParserRuleCall_3_0() { return cOwnedPatternDomainPatternCSParserRuleCall_3_0; }
 
-		//("implementedby" implementedBy=UnrestrictedName)?
+		//("," ownedPattern+=DomainPatternCS)*
 		public Group getGroup_4() { return cGroup_4; }
 
-		//"implementedby"
-		public Keyword getImplementedbyKeyword_4_0() { return cImplementedbyKeyword_4_0; }
+		//","
+		public Keyword getCommaKeyword_4_0() { return cCommaKeyword_4_0; }
 
-		//implementedBy=UnrestrictedName
-		public Assignment getImplementedByAssignment_4_1() { return cImplementedByAssignment_4_1; }
+		//ownedPattern+=DomainPatternCS
+		public Assignment getOwnedPatternAssignment_4_1() { return cOwnedPatternAssignment_4_1; }
 
-		//UnrestrictedName
-		public RuleCall getImplementedByUnrestrictedNameParserRuleCall_4_1_0() { return cImplementedByUnrestrictedNameParserRuleCall_4_1_0; }
+		//DomainPatternCS
+		public RuleCall getOwnedPatternDomainPatternCSParserRuleCall_4_1_0() { return cOwnedPatternDomainPatternCSParserRuleCall_4_1_0; }
 
-		//("default_values" "{" ownedDefaultValues+=DefaultValueCS+ "}")?
+		//("implementedby" implementedBy=UnrestrictedName)?
 		public Group getGroup_5() { return cGroup_5; }
 
+		//"implementedby"
+		public Keyword getImplementedbyKeyword_5_0() { return cImplementedbyKeyword_5_0; }
+
+		//implementedBy=UnrestrictedName
+		public Assignment getImplementedByAssignment_5_1() { return cImplementedByAssignment_5_1; }
+
+		//UnrestrictedName
+		public RuleCall getImplementedByUnrestrictedNameParserRuleCall_5_1_0() { return cImplementedByUnrestrictedNameParserRuleCall_5_1_0; }
+
+		//("default_values" "{" ownedDefaultValues+=DefaultValueCS+ "}")?
+		public Group getGroup_6() { return cGroup_6; }
+
 		//"default_values"
-		public Keyword getDefault_valuesKeyword_5_0() { return cDefault_valuesKeyword_5_0; }
+		public Keyword getDefault_valuesKeyword_6_0() { return cDefault_valuesKeyword_6_0; }
 
 		//"{"
-		public Keyword getLeftCurlyBracketKeyword_5_1() { return cLeftCurlyBracketKeyword_5_1; }
+		public Keyword getLeftCurlyBracketKeyword_6_1() { return cLeftCurlyBracketKeyword_6_1; }
 
 		//ownedDefaultValues+=DefaultValueCS+
-		public Assignment getOwnedDefaultValuesAssignment_5_2() { return cOwnedDefaultValuesAssignment_5_2; }
+		public Assignment getOwnedDefaultValuesAssignment_6_2() { return cOwnedDefaultValuesAssignment_6_2; }
 
 		//DefaultValueCS
-		public RuleCall getOwnedDefaultValuesDefaultValueCSParserRuleCall_5_2_0() { return cOwnedDefaultValuesDefaultValueCSParserRuleCall_5_2_0; }
+		public RuleCall getOwnedDefaultValuesDefaultValueCSParserRuleCall_6_2_0() { return cOwnedDefaultValuesDefaultValueCSParserRuleCall_6_2_0; }
 
 		//"}"
-		public Keyword getRightCurlyBracketKeyword_5_3() { return cRightCurlyBracketKeyword_5_3; }
+		public Keyword getRightCurlyBracketKeyword_6_3() { return cRightCurlyBracketKeyword_6_3; }
 
 		//";"
-		public Keyword getSemicolonKeyword_6() { return cSemicolonKeyword_6; }
+		public Keyword getSemicolonKeyword_7() { return cSemicolonKeyword_7; }
 	}
 
 	public class DomainPatternCSElements extends AbstractParserRuleElementFinder {
@@ -1789,8 +1806,9 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 
 	//DomainCS:
 	//	(isCheckonly?="checkonly" | isEnforce?="enforce" | "replace")? "domain"
-	//	modelId=[qvtbase::TypedModel|UnrestrictedName] ownedPattern=DomainPatternCS ("implementedby"
-	//	implementedBy=UnrestrictedName)? ("default_values" "{" ownedDefaultValues+=DefaultValueCS+ "}")? ";";
+	//	modelId=[qvtbase::TypedModel|UnrestrictedName] ownedPattern+=DomainPatternCS ("," ownedPattern+=DomainPatternCS)*
+	//	("implementedby" implementedBy=UnrestrictedName)? ("default_values" "{" ownedDefaultValues+=DefaultValueCS+ "}")?
+	//	";";
 	public DomainCSElements getDomainCSAccess() {
 		return pDomainCS;
 	}

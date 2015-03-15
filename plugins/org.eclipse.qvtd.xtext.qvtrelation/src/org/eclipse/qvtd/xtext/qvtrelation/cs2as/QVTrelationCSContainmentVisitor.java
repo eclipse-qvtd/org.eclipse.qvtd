@@ -297,34 +297,36 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 	@Override
 	public Continuation<?> visitDomainCS(@NonNull DomainCS csElement) {
 		@NonNull RelationDomain pivotElement = context.refreshModelElement(RelationDomain.class, QVTrelationPackage.Literals.RELATION_DOMAIN, csElement);
-		DomainPattern asPattern = PivotUtil.getPivot(DomainPattern.class, csElement.getOwnedPattern());
-		pivotElement.getPattern().clear();
-		pivotElement.getPattern().add(asPattern);
+		List<DomainPattern> asPatterns = pivotElement.getPattern();
+		context.refreshPivotList(DomainPattern.class, asPatterns, csElement.getOwnedPattern());
 		context.refreshPivotList(RelationDomainAssignment.class, pivotElement.getDefaultAssignment(), csElement.getOwnedDefaultValues());
-		Variable rootVariable = null;
-		DomainPattern rootPattern = pivotElement.getPattern().get(0);
-		if (rootPattern != null) {
-			TemplateExp rootTemplate = rootPattern.getTemplateExpression();
-			if (rootTemplate != null) {
-				rootVariable = rootTemplate.getBindsTo();
+		if (asPatterns.size() > 0) {
+			List<Variable> rootVariables = new ArrayList<Variable>();
+			for (DomainPattern rootPattern : asPatterns) {
+				if (rootPattern != null) {
+					TemplateExp rootTemplate = rootPattern.getTemplateExpression();
+					if (rootTemplate != null) {
+						rootVariables.add(rootTemplate.getBindsTo());
+					}
+				}
 			}
-		}
-		pivotElement.getRootVariable().clear();
-		pivotElement.getRootVariable().add(rootVariable);
-		if (asPattern != null) {
-			List<Variable> pivotVariables = new ArrayList<Variable>();
-			for (DomainPattern pattern : pivotElement.getPattern()) {
-				if (pattern != null) {
-					TemplateExp templateExpression = pattern.getTemplateExpression();
+			PivotUtilInternal.refreshList(pivotElement.getRootVariable(), rootVariables);
+			for (DomainPattern asPattern : asPatterns) {
+				List<Variable> pivotVariables = new ArrayList<Variable>();
+				if (asPattern != null) {
+					TemplateExp templateExpression = asPattern.getTemplateExpression();
 					if (templateExpression != null) {
 						gatherVariables(pivotVariables, templateExpression);
 					}
+					PivotUtilInternal.refreshList(asPattern.getBindsTo(), pivotVariables);
 				}
 //				else {
 //					pivotVariables.addAll(pivotElement.getRootVariable());
 //				}
 			}
-			PivotUtilInternal.refreshList(asPattern.getBindsTo(), pivotVariables);
+		}
+		else {
+			pivotElement.getRootVariable().clear();
 		}
 		return new DomainContentContinuation(context, csElement);
 	}
@@ -413,15 +415,17 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 	public Continuation<?> visitPrimitiveTypeDomainCS(@NonNull PrimitiveTypeDomainCS csElement) {
 		@NonNull RelationDomain pivotElement = context.refreshModelElement(RelationDomain.class, QVTrelationPackage.Literals.RELATION_DOMAIN, csElement);
 		@NonNull DomainPattern asPattern = context.refreshModelElement(DomainPattern.class, QVTrelationPackage.Literals.DOMAIN_PATTERN, null);
-		pivotElement.getPattern().clear();
-		pivotElement.getPattern().add(asPattern);
+		List<DomainPattern> asPatterns = new ArrayList<DomainPattern>();
+		asPatterns.add(asPattern);
+		PivotUtilInternal.refreshList(pivotElement.getPattern(), asPatterns);
 		@NonNull TemplateExp template = context.refreshModelElement(TemplateExp.class, QVTtemplatePackage.Literals.OBJECT_TEMPLATE_EXP, null);
 		asPattern.setTemplateExpression(template);
 		@NonNull Variable rootVariable = context.refreshModelElement(Variable.class, PivotPackage.Literals.VARIABLE, null);
 		context.refreshName(rootVariable, csElement.getName());
 		template.setBindsTo(rootVariable);
-		pivotElement.getRootVariable().clear();
-		pivotElement.getRootVariable().add(rootVariable);
+		List<Variable> rootVariables = new ArrayList<Variable>();
+		rootVariables.add(rootVariable);
+		PivotUtilInternal.refreshList(pivotElement.getRootVariable(), rootVariables);
 		List<Variable> pivotVariables = new ArrayList<Variable>();
 		pivotVariables.add(rootVariable);
 		PivotUtilInternal.refreshList(asPattern.getBindsTo(), pivotVariables);

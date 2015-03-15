@@ -10,6 +10,8 @@
  *******************************************************************************/
 package org.eclipse.qvtd.xtext.qvtrelation.cs2as;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Type;
@@ -157,15 +159,21 @@ public class QVTrelationCSPostOrderVisitor extends AbstractQVTrelationCSPostOrde
 		RelationDomain pivotElement = PivotUtil.getPivot(RelationDomain.class, csElement);
 		if (pivotElement != null) {
 			Type type = PivotUtil.getPivot(Type.class, csElement.getOwnedType());
-			Variable rootVariable = pivotElement.getRootVariable().get(0);
-			if (rootVariable != null) {
-				context.setType(rootVariable, type, true);
+			List<Variable> asRootVariables = pivotElement.getRootVariable();
+			if (asRootVariables.size() > 0) {
+				Variable asRootVariable = asRootVariables.get(0);
+				if (asRootVariable != null) {
+					context.setType(asRootVariable, type, true);
+				}
 			}
-			DomainPattern pattern = pivotElement.getPattern().get(0);
-			if (pattern != null) {
-				TemplateExp template = pattern.getTemplateExpression();
-				if (template instanceof ObjectTemplateExp) {
-					((ObjectTemplateExp)template).setReferredClass((org.eclipse.ocl.pivot.Class)type);
+			List<DomainPattern> asPatterns = pivotElement.getPattern();
+			if (asPatterns.size() > 0) {
+				DomainPattern pattern = asPatterns.get(0);
+				if (pattern != null) {
+					TemplateExp template = pattern.getTemplateExpression();
+					if (template instanceof ObjectTemplateExp) {
+						((ObjectTemplateExp)template).setReferredClass((org.eclipse.ocl.pivot.Class)type);
+					}
 				}
 			}
 		}

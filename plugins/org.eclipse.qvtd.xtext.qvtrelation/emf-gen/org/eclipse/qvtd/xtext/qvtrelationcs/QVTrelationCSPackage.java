@@ -656,7 +656,7 @@ public interface QVTrelationCSPackage extends EPackage {
 	int DOMAIN_CS__IS_REPLACE = ABSTRACT_DOMAIN_CS_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Owned Pattern</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owned Pattern</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2585,10 +2585,10 @@ public interface QVTrelationCSPackage extends EPackage {
 	EAttribute getDomainCS_IsReplace();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getOwnedPattern <em>Owned Pattern</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getOwnedPattern <em>Owned Pattern</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Owned Pattern</em>'.
+	 * @return the meta object for the containment reference list '<em>Owned Pattern</em>'.
 	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getOwnedPattern()
 	 * @see #getDomainCS()
 	 * @generated
@@ -3327,7 +3327,7 @@ public interface QVTrelationCSPackage extends EPackage {
 		EAttribute DOMAIN_CS__IS_REPLACE = eINSTANCE.getDomainCS_IsReplace();
 
 		/**
-		 * The meta object literal for the '<em><b>Owned Pattern</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owned Pattern</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

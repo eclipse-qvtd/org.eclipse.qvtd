@@ -169,30 +169,20 @@ public interface DomainCS extends AbstractDomainCS {
 	void setIsReplace(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Owned Pattern</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owned Pattern</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainPatternCS}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Owned Pattern</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owned Pattern</em>' containment reference.
-	 * @see #setOwnedPattern(DomainPatternCS)
+	 * @return the value of the '<em>Owned Pattern</em>' containment reference list.
 	 * @see org.eclipse.qvtd.xtext.qvtrelationcs.QVTrelationCSPackage#getDomainCS_OwnedPattern()
 	 * @model containment="true"
 	 * @generated
 	 */
-	DomainPatternCS getOwnedPattern();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.xtext.qvtrelationcs.DomainCS#getOwnedPattern <em>Owned Pattern</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owned Pattern</em>' containment reference.
-	 * @see #getOwnedPattern()
-	 * @generated
-	 */
-	void setOwnedPattern(DomainPatternCS value);
+	EList<DomainPatternCS> getOwnedPattern();
 
 	/**
 	 * Returns the value of the '<em><b>Owned Default Values</b></em>' containment reference list.

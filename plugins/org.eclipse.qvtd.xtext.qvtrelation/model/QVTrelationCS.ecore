@@ -21,8 +21,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isEnforce" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="modelId" eType="ecore:EClass ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//TypedModel"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isReplace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPattern" eType="#//DomainPatternCS"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedPattern" upperBound="-1"
+        eType="#//DomainPatternCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedDefaultValues" upperBound="-1"
         eType="#//DefaultValueCS" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedImplementedBy" eType="ecore:EClass ../../org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore#//ExpCS"
