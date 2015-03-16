@@ -11,6 +11,8 @@
  *******************************************************************************/
 package example2.classes;
 
+import example2.classes.ClassesPackage;
+import example2.classes.ClassesTables;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.ids.ClassId;
 import org.eclipse.ocl.pivot.ids.CollectionTypeId;

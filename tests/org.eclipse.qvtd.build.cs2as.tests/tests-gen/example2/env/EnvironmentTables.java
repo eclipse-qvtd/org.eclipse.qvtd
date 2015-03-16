@@ -11,6 +11,10 @@
  *******************************************************************************/
 package example2.env;
 
+import example2.classes.ClassesPackage;
+import example2.classes.ClassesTables;
+import example2.env.EnvironmentPackage;
+import example2.env.EnvironmentTables;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.ParameterTypes;
 import org.eclipse.ocl.pivot.TemplateParameters;
@@ -30,11 +34,9 @@ import org.eclipse.ocl.pivot.internal.library.executor.ExecutorProperty;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorPropertyWithImplementation;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorSpecializedType;
 import org.eclipse.ocl.pivot.internal.library.executor.ExecutorStandardLibrary;
+import org.eclipse.ocl.pivot.internal.library.executor.ExecutorTypeParameter;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibTables;
 import org.eclipse.ocl.pivot.utilities.TypeUtil;
-
-import example2.classes.ClassesPackage;
-import example2.classes.ClassesTables;
 
 /**
  * EnvironmentTables provides the dispatch tables for the env for use by the OCL dispatcher.
@@ -62,6 +64,7 @@ public class EnvironmentTables
 	/**
 	 *	Constants used by auto-generated code.
 	 */
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_PRIMid_OclAny = TypeId.ORDERED_SET.getSpecializedId(TypeId.OCL_ANY);
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example2/classes/1.0", null, ClassesPackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_env_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example2/env/1.0", null, EnvironmentPackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Environment = EnvironmentTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_env_s_1_0.getClassId("Environment", 0);
@@ -81,6 +84,7 @@ public class EnvironmentTables
 			Init.initStart();
 			EnvironmentTables.init();
 		}
+		public static final @NonNull ExecutorTypeParameter __Environment__addElement_T = new ExecutorTypeParameter(TypeId.T_1, "T");
 
 		static {
 			Init.initEnd();
@@ -167,7 +171,7 @@ public class EnvironmentTables
 		}
 
 		public static final @NonNull ParameterTypes _ = TypeUtil.createParameterTypes();
-		public static final @NonNull ParameterTypes _NamedElement = TypeUtil.createParameterTypes(ClassesTables.Types._NamedElement);
+		public static final @NonNull ParameterTypes _Environment_addElement_T = TypeUtil.createParameterTypes(EnvironmentTables.TypeParameters.__Environment__addElement_T);
 		public static final @NonNull ParameterTypes _OrderedSet__NamedElement__ = TypeUtil.createParameterTypes(new ExecutorSpecializedType("OrderedSet", ClassesTables.Types._NamedElement));
 
 		static {
@@ -194,8 +198,8 @@ public class EnvironmentTables
 		public static final @NonNull ExecutorOperation _Env4CG__hasFinalResult = new ExecutorOperation("hasFinalResult", Parameters._, Types._Env4CG,
 			1, TemplateParameters.EMPTY_LIST, null);
 
-		public static final @NonNull ExecutorOperation _Environment__addElement = new ExecutorOperation("addElement", Parameters._NamedElement, Types._Environment,
-			0, TemplateParameters.EMPTY_LIST, null);
+		public static final @NonNull ExecutorOperation _Environment__addElement = new ExecutorOperation("addElement", Parameters._Environment_addElement_T, Types._Environment,
+			0, TypeUtil.createTemplateParameters(TypeParameters.__Environment__addElement_T), null);
 		public static final @NonNull ExecutorOperation _Environment__addElements = new ExecutorOperation("addElements", Parameters._OrderedSet__NamedElement__, Types._Environment,
 			1, TemplateParameters.EMPTY_LIST, null);
 
@@ -319,7 +323,7 @@ public class EnvironmentTables
 		};
 
 		private static final @NonNull ExecutorOperation[] _Environment__Environment = {
-			EnvironmentTables.Operations._Environment__addElement /* addElement(NamedElement[?]) */,
+			EnvironmentTables.Operations._Environment__addElement /* addElement(T)(T[?]) */,
 			EnvironmentTables.Operations._Environment__addElements /* addElements(OrderedSet(classes::NamedElement)) */
 		};
 		private static final @NonNull ExecutorOperation[] _Environment__Env4CG = {

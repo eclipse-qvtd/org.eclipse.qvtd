@@ -60,11 +60,10 @@ public class LookupEnvironment extends EnvironmentImpl   {
 		return this;
 	}
 	
-	
 	@Override
 	@NonNull
-	public Environment addElements(
-			@Nullable EList<NamedElement> namedElements) {
+	public <NE extends NamedElement > Environment addElements(
+			@Nullable EList<NE> namedElements) {
 		
 		if (namedElements != null) {
 			for (NamedElement namedElement : namedElements) {

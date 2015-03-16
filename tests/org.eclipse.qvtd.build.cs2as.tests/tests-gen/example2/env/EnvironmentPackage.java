@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EReference;
  * @see example2.env.EnvironmentFactory
  * @model kind="package"
  *        annotation="http://www.eclipse.org/OCL/Import classes='Classes.ecore#/'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore invocationDelegates='http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot' settingDelegates='http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot' validationDelegates='http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot'"
  * @generated
  */
 public interface EnvironmentPackage extends EPackage {

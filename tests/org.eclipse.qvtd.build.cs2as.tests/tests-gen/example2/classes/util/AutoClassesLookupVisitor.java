@@ -9,8 +9,6 @@
 
 package example2.classes.util;
 
-import java.util.List;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -103,12 +101,12 @@ public class AutoClassesLookupVisitor
      */
     @Override
     public @Nullable /*@NonInvalid*/ Environment visitPackage(final @NonNull /*@NonInvalid*/ Package element) {
-        final @Nullable /*@Thrown*/ List<Class> ownedClasses = element.getOwnedClasses();
+        final @Nullable /*@Thrown*/ EList<Class> ownedClasses = element.getOwnedClasses();
         assert ownedClasses != null;
-        final @NonNull /*@Thrown*/ Environment addElements = context.addElements((EList)ownedClasses);
-        final @Nullable /*@Thrown*/ List<Package> ownedPackages = element.getOwnedPackages();
+        final @NonNull /*@Thrown*/ Environment addElements = context.addElements(ownedClasses);
+        final @Nullable /*@Thrown*/ EList<Package> ownedPackages = element.getOwnedPackages();
         assert ownedPackages != null;
-        final @NonNull /*@Thrown*/ Environment inner = addElements.addElements((EList)ownedPackages);
+        final @NonNull /*@Thrown*/ Environment inner = addElements.addElements(ownedPackages);
         final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
         @Nullable /*@Thrown*/ Environment symbol_0;
         if (hasFinalResult) {
@@ -135,9 +133,9 @@ public class AutoClassesLookupVisitor
      */
     @Override
     public @Nullable /*@NonInvalid*/ Environment visitRoot(final @NonNull /*@NonInvalid*/ Root element_0) {
-        final @Nullable /*@Thrown*/ List<Package> ownedPackages = element_0.getOwnedPackages();
+        final @Nullable /*@Thrown*/ EList<Package> ownedPackages = element_0.getOwnedPackages();
         assert ownedPackages != null;
-        final @NonNull /*@Thrown*/ Environment inner = context.addElements((EList)ownedPackages);
+        final @NonNull /*@Thrown*/ Environment inner = context.addElements(ownedPackages);
         final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
         @Nullable /*@Thrown*/ Environment symbol_0;
         if (hasFinalResult) {

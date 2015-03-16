@@ -3,9 +3,11 @@
 package example2.env.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
 
@@ -268,7 +270,11 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 		initEReference(getEnvironment_ParentEnv(), this.getEnvironment(), null, "parentEnv", null, 0, 1, Environment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = initEOperation(getEnvironment__AddElements__EList(), this.getEnvironment(), "addElements", 0, 1, IS_UNIQUE, IS_ORDERED);
-		addEParameter(op, theClassesPackage.getNamedElement(), "elements", 0, -1, IS_UNIQUE, IS_ORDERED);
+		ETypeParameter t1 = addETypeParameter(op, "NE");
+		EGenericType g1 = createEGenericType(theClassesPackage.getNamedElement());
+		t1.getEBounds().add(g1);
+		g1 = createEGenericType(t1);
+		addEParameter(op, g1, "elements", 0, -1, IS_UNIQUE, IS_ORDERED);
 
 		op = initEOperation(getEnvironment__AddElement__NamedElement(), this.getEnvironment(), "addElement", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, theClassesPackage.getNamedElement(), "element", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -289,6 +295,8 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 		createImportAnnotations();
 		// http://www.eclipse.org/emf/2002/Ecore
 		createEcoreAnnotations();
+		// http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot
+		createPivotAnnotations();
 	}
 
 	/**
@@ -319,6 +327,31 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 		  (this, 
 		   source, 
 		   new String[] {
+			 "invocationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
+			 "settingDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot",
+			 "validationDelegates", "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createPivotAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot";	
+		addAnnotation
+		  (getEnvironment__AddElements__EList(), 
+		   source, 
+		   new String[] {
+			 "body", "Environment{\n\t\t\t\t\t\tnamedElements = namedElements->includingAll(elements),\n\t\t\t\t\t\tparentEnv = parentEnv\t\n\t\t\t\t}"
+		   });	
+		addAnnotation
+		  (getEnvironment__AddElement__NamedElement(), 
+		   source, 
+		   new String[] {
+			 "body", "Environment{\n\t\t\t\t\t\tnamedElements = namedElements->including(element),\n\t\t\t\t\t\tparentEnv = parentEnv\n\t\t\t\t\t}"
 		   });
 	}
 
