@@ -18,33 +18,18 @@ public class CS2ASDiagnostic extends ExceptionDiagnostic
 	@Override
 	public int getLength() {
 		ICompositeNode node = NodeModelUtils.getNode(csObject);
-		return node != null ? node.getTotalLength() : 0;
+		return node != null ? node.getLength() : 0;
 	}
 
 	@Override
 	public int getOffset() {
 		ICompositeNode node = NodeModelUtils.getNode(csObject);
-		return node != null ? node.getTotalOffset() : 0;
-	}
-
-	@Override
-	public int getColumn() {
-		return 0;
+		return node != null ? node.getOffset() : 0;
 	}
 
 	@Override
 	public int getLine() {
 		ICompositeNode node = NodeModelUtils.getNode(csObject);
-		return node != null ? node.getTotalStartLine()+1 : 1;
-	}
-
-	@Override
-	public String getLocation() {
-		return null;
-	}
-	
-	@Override
-	public String toString() {
-		return getMessage();
+		return node != null ? node.getStartLine()+1 : 1;
 	}
 }
