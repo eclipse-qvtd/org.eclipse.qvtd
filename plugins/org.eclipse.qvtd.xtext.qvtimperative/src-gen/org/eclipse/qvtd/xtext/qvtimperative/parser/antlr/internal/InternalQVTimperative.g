@@ -4129,17 +4129,17 @@ ruleCollectionPatternCS returns [EObject current=null]
 
 
 
-// Entry rule entryRuleConstructorPartCS
-entryRuleConstructorPartCS returns [EObject current=null] 
+// Entry rule entryRuleShadowPartCS
+entryRuleShadowPartCS returns [EObject current=null] 
 	:
-	{ newCompositeNode(grammarAccess.getConstructorPartCSRule()); }
-	 iv_ruleConstructorPartCS=ruleConstructorPartCS 
-	 { $current=$iv_ruleConstructorPartCS.current; } 
+	{ newCompositeNode(grammarAccess.getShadowPartCSRule()); }
+	 iv_ruleShadowPartCS=ruleShadowPartCS 
+	 { $current=$iv_ruleShadowPartCS.current; } 
 	 EOF 
 ;
 
-// Rule ConstructorPartCS
-ruleConstructorPartCS returns [EObject current=null] 
+// Rule ShadowPartCS
+ruleShadowPartCS returns [EObject current=null] 
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
@@ -4150,11 +4150,11 @@ ruleConstructorPartCS returns [EObject current=null]
 		}
 		{
 			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getConstructorPartCSRule());
+	            $current = createModelElement(grammarAccess.getShadowPartCSRule());
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getConstructorPartCSAccess().getReferredPropertyPropertyCrossReference_0_0()); 
+	        newCompositeNode(grammarAccess.getShadowPartCSAccess().getReferredPropertyPropertyCrossReference_0_0()); 
 	    }
 		ruleUnrestrictedName		{ 
 	        afterParserOrEnumRuleCall();
@@ -4163,17 +4163,17 @@ ruleConstructorPartCS returns [EObject current=null]
 )
 )	otherlv_1='=' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getConstructorPartCSAccess().getEqualsSignKeyword_1());
+    	newLeafNode(otherlv_1, grammarAccess.getShadowPartCSAccess().getEqualsSignKeyword_1());
     }
 (
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getConstructorPartCSAccess().getOwnedInitExpressionExpCSParserRuleCall_2_0_0()); 
+	        newCompositeNode(grammarAccess.getShadowPartCSAccess().getOwnedInitExpressionExpCSParserRuleCall_2_0_0()); 
 	    }
 		lv_ownedInitExpression_2_1=ruleExpCS		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getConstructorPartCSRule());
+	            $current = createModelElementForParent(grammarAccess.getShadowPartCSRule());
 	        }
        		set(
        			$current, 
@@ -4184,11 +4184,11 @@ ruleConstructorPartCS returns [EObject current=null]
 	    }
 
     |		{ 
-	        newCompositeNode(grammarAccess.getConstructorPartCSAccess().getOwnedInitExpressionPatternExpCSParserRuleCall_2_0_1()); 
+	        newCompositeNode(grammarAccess.getShadowPartCSAccess().getOwnedInitExpressionPatternExpCSParserRuleCall_2_0_1()); 
 	    }
 		lv_ownedInitExpression_2_2=rulePatternExpCS		{
 	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getConstructorPartCSRule());
+	            $current = createModelElementForParent(grammarAccess.getShadowPartCSRule());
 	        }
        		set(
        			$current, 
@@ -5643,9 +5643,9 @@ ruleCurlyBracketedClauseCS returns [EObject current=null]
 (((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getCurlyBracketedClauseCSAccess().getOwnedPartsConstructorPartCSParserRuleCall_2_0_0_0()); 
+	        newCompositeNode(grammarAccess.getCurlyBracketedClauseCSAccess().getOwnedPartsShadowPartCSParserRuleCall_2_0_0_0()); 
 	    }
-		lv_ownedParts_2_0=ruleConstructorPartCS		{
+		lv_ownedParts_2_0=ruleShadowPartCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getCurlyBracketedClauseCSRule());
 	        }
@@ -5653,7 +5653,7 @@ ruleCurlyBracketedClauseCS returns [EObject current=null]
        			$current, 
        			"ownedParts",
         		lv_ownedParts_2_0, 
-        		"ConstructorPartCS");
+        		"ShadowPartCS");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -5665,9 +5665,9 @@ ruleCurlyBracketedClauseCS returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getCurlyBracketedClauseCSAccess().getOwnedPartsConstructorPartCSParserRuleCall_2_0_1_1_0()); 
+	        newCompositeNode(grammarAccess.getCurlyBracketedClauseCSAccess().getOwnedPartsShadowPartCSParserRuleCall_2_0_1_1_0()); 
 	    }
-		lv_ownedParts_4_0=ruleConstructorPartCS		{
+		lv_ownedParts_4_0=ruleShadowPartCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getCurlyBracketedClauseCSRule());
 	        }
@@ -5675,7 +5675,7 @@ ruleCurlyBracketedClauseCS returns [EObject current=null]
        			$current, 
        			"ownedParts",
         		lv_ownedParts_4_0, 
-        		"ConstructorPartCS");
+        		"ShadowPartCS");
 	        afterParserOrEnumRuleCall();
 	    }
 

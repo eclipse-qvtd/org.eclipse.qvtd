@@ -191,7 +191,7 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 				}
 			}
 			Variable rest = collectionTemplateExp.getRest();
-			if ((rest != null)  && rest.isImplicit()) {
+			if ((rest != null)  && rest.isIsImplicit()) {
 				pivotVariables.add(rest);
 			}
 		}

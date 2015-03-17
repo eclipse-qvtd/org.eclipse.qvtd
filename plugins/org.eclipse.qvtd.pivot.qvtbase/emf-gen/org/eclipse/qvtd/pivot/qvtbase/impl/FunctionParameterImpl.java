@@ -40,7 +40,7 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.FunctionParameterImpl#isImplicit <em>Is Implicit</em>}</li>
+ *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.FunctionParameterImpl#isIsImplicit <em>Is Implicit</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.FunctionParameterImpl#getOwnedInit <em>Owned Init</em>}</li>
  *   <li>{@link org.eclipse.qvtd.pivot.qvtbase.impl.FunctionParameterImpl#getRepresentedParameter <em>Represented Parameter</em>}</li>
  * </ul>
@@ -49,20 +49,20 @@ import org.eclipse.qvtd.pivot.qvtbase.util.QVTbaseVisitor;
  */
 public class FunctionParameterImpl extends ParameterImpl implements FunctionParameter {
 	/**
-	 * The default value of the '{@link #isImplicit() <em>Is Implicit</em>}' attribute.
+	 * The default value of the '{@link #isIsImplicit() <em>Is Implicit</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isImplicit()
+	 * @see #isIsImplicit()
 	 * @generated
 	 * @ordered
 	 */
 	protected static final boolean IS_IMPLICIT_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isImplicit() <em>Is Implicit</em>}' attribute.
+	 * The cached value of the '{@link #isIsImplicit() <em>Is Implicit</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #isImplicit()
+	 * @see #isIsImplicit()
 	 * @generated
 	 * @ordered
 	 */
@@ -153,7 +153,7 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	 * @generated
 	 */
 	@Override
-	public boolean isImplicit() {
+	public boolean isIsImplicit() {
 		return isImplicit;
 	}
 
@@ -255,7 +255,7 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 				 VALIDATE_COMPATIBLE_INITIALISER_TYPE_DIAGNOSTIC_CHAIN_MAP__EEXPRESSION,
 				 Diagnostic.ERROR,
 				 PivotValidator.DIAGNOSTIC_SOURCE,
-				 PivotValidator.VARIABLE__COMPATIBLE_INITIALISER_TYPE);
+				 PivotValidator.VARIABLE__VALIDATE_COMPATIBLE_INITIALISER_TYPE);
 	}
 
 	/**
@@ -281,7 +281,7 @@ public class FunctionParameterImpl extends ParameterImpl implements FunctionPara
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case QVTbasePackage.FUNCTION_PARAMETER__IS_IMPLICIT:
-				return isImplicit();
+				return isIsImplicit();
 			case QVTbasePackage.FUNCTION_PARAMETER__OWNED_INIT:
 				return getOwnedInit();
 			case QVTbasePackage.FUNCTION_PARAMETER__REPRESENTED_PARAMETER:

@@ -372,7 +372,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 	public @Nullable CGNamedElement visitFunction(@NonNull Function asFunction) {
 		CGFunction cgFunction = QVTiCGModelFactory.eINSTANCE.createCGFunction();
 		setAst(cgFunction, asFunction);
-		cgFunction.setRequired(asFunction.isRequired());
+		cgFunction.setRequired(asFunction.isIsRequired());
 		for (Parameter pParameter : asFunction.getOwnedParameters()) {
 			cgFunction.getParameters().add(doVisit(CGParameter.class, pParameter));
 		}
@@ -457,7 +457,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 //		setPivot(cgMappingCallBinding, asMappingCallBinding);
 		cgMappingCallBinding.setName(asBoundVariable.getName());
 		cgMappingCallBinding.setAst(asMappingCallBinding);
-		cgMappingCallBinding.setRequired(asBoundVariable.isRequired());
+		cgMappingCallBinding.setRequired(asBoundVariable.isIsRequired());
 		cgMappingCallBinding.setValue(doVisit(CGValuedElement.class, asMappingCallBinding.getValue()));
 		cgMappingCallBinding.setTypeId(analyzer.getTypeId(asBoundVariable.getTypeId()));
 //		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
@@ -473,8 +473,8 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 			if (asIterator != null) {
 				CGIterator cgIterator = getIterator(asIterator);
 				cgIterator.setTypeId(context.getTypeId(asIterator.getTypeId()));
-				cgIterator.setRequired(asIterator.isRequired());
-				if (asIterator.isRequired()) {
+				cgIterator.setRequired(asIterator.isIsRequired());
+				if (asIterator.isIsRequired()) {
 					cgIterator.setNonNull();
 				}
 				cgMappingLoop.getIterators().add(cgIterator);
@@ -543,7 +543,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 //		cgPropertyCallExp.getDependsOn().add(cgExecutorProperty);
 		cgPropertyCallExp.setReferredProperty(asOppositeProperty);
 		setAst(cgPropertyCallExp, asMiddlePropertyCallExp);
-		cgPropertyCallExp.setRequired(asProperty.isRequired());
+		cgPropertyCallExp.setRequired(asProperty.isIsRequired());
 		CGValuedElement cgSource = doVisit(CGValuedElement.class, asMiddlePropertyCallExp.getOwnedSource());
 		cgPropertyCallExp.setSource(cgSource);
 		return cgPropertyCallExp;
@@ -557,7 +557,7 @@ public final class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativ
 			CGFunctionCallExp cgFunctionCallExp = QVTiCGModelFactory.eINSTANCE.createCGFunctionCallExp();
 			cgFunctionCallExp.setReferredOperation(pOperation);
 			setAst(cgFunctionCallExp, asOperationCallExp);
-			cgFunctionCallExp.setRequired(pOperation.isRequired());
+			cgFunctionCallExp.setRequired(pOperation.isIsRequired());
 			for (OCLExpression pArgument : asOperationCallExp.getOwnedArguments()) {
 				CGValuedElement cgArgument = doVisit(CGValuedElement.class, pArgument);
 				cgFunctionCallExp.getArguments().add(cgArgument);

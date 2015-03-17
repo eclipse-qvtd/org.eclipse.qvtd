@@ -16,8 +16,6 @@ import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.Comment;
 import org.eclipse.ocl.pivot.ConnectionPointReference;
 import org.eclipse.ocl.pivot.Constraint;
-import org.eclipse.ocl.pivot.ConstructorExp;
-import org.eclipse.ocl.pivot.ConstructorPart;
 import org.eclipse.ocl.pivot.DataType;
 import org.eclipse.ocl.pivot.Detail;
 import org.eclipse.ocl.pivot.DynamicBehavior;
@@ -66,6 +64,8 @@ import org.eclipse.ocl.pivot.SelfType;
 import org.eclipse.ocl.pivot.SendSignalAction;
 import org.eclipse.ocl.pivot.SequenceType;
 import org.eclipse.ocl.pivot.SetType;
+import org.eclipse.ocl.pivot.ShadowExp;
+import org.eclipse.ocl.pivot.ShadowPart;
 import org.eclipse.ocl.pivot.Signal;
 import org.eclipse.ocl.pivot.State;
 import org.eclipse.ocl.pivot.StateExp;
@@ -228,7 +228,7 @@ public class OCLExpCopy extends PivotSwitch<Element> {
      * @generated
      */
     @Override 
-    public Element caseConstructorExp(ConstructorExp in) {
+    public Element caseShadowExp(ShadowExp in) {
 	    throw new UnsupportedOperationException("Not implememnted yet");
     }
     
@@ -236,7 +236,7 @@ public class OCLExpCopy extends PivotSwitch<Element> {
      * @generated
      */
     @Override 
-    public Element caseConstructorPart(ConstructorPart in) {
+    public Element caseShadowPart(ShadowPart in) {
 	    throw new UnsupportedOperationException("Not implememnted yet");
     }
     
@@ -306,7 +306,7 @@ public class OCLExpCopy extends PivotSwitch<Element> {
 	    transformation.addOrphan(out);
 //	    out.setIsStatic(in.isStatic());
 	    out.setName(in.getName());
-	    out.setIsRequired(in.isRequired());
+	    out.setIsRequired(in.isIsRequired());
         Type _type = in.getType();
         if (_type != null)
             out.setType((Type) doSwitch(_type));
@@ -807,8 +807,8 @@ public class OCLExpCopy extends PivotSwitch<Element> {
         transformation.addOrphan(out);
 //        out.setIsStatic(in.isStatic());
         out.setName(in.getName());
-        out.setIsRequired(in.isRequired());
-        out.setIsImplicit(in.isImplicit());
+        out.setIsRequired(in.isIsRequired());
+        out.setIsImplicit(in.isIsImplicit());
         Type _type = in.getType();
         if (_type != null)
             out.setType((Type) doSwitch(_type));            

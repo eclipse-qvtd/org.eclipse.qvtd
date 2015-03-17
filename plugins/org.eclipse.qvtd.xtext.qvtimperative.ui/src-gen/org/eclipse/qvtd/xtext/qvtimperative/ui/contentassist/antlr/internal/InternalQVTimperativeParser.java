@@ -4680,25 +4680,25 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
     // $ANTLR end "ruleCollectionPatternCS"
 
 
-    // $ANTLR start "entryRuleConstructorPartCS"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:1560:1: entryRuleConstructorPartCS : ruleConstructorPartCS EOF ;
-    public final void entryRuleConstructorPartCS() throws RecognitionException {
+    // $ANTLR start "entryRuleShadowPartCS"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:1560:1: entryRuleShadowPartCS : ruleShadowPartCS EOF ;
+    public final void entryRuleShadowPartCS() throws RecognitionException {
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:1561:1: ( ruleConstructorPartCS EOF )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:1562:1: ruleConstructorPartCS EOF
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:1561:1: ( ruleShadowPartCS EOF )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:1562:1: ruleShadowPartCS EOF
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getConstructorPartCSRule()); 
+               before(grammarAccess.getShadowPartCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleConstructorPartCS_in_entryRuleConstructorPartCS3267);
-            ruleConstructorPartCS();
+            pushFollow(FollowSets000.FOLLOW_ruleShadowPartCS_in_entryRuleShadowPartCS3267);
+            ruleShadowPartCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getConstructorPartCSRule()); 
+               after(grammarAccess.getShadowPartCSRule()); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleConstructorPartCS3274); if (state.failed) return ;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleShadowPartCS3274); if (state.failed) return ;
 
             }
 
@@ -4711,30 +4711,30 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
         }
         return ;
     }
-    // $ANTLR end "entryRuleConstructorPartCS"
+    // $ANTLR end "entryRuleShadowPartCS"
 
 
-    // $ANTLR start "ruleConstructorPartCS"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:1569:1: ruleConstructorPartCS : ( ( rule__ConstructorPartCS__Group__0 ) ) ;
-    public final void ruleConstructorPartCS() throws RecognitionException {
+    // $ANTLR start "ruleShadowPartCS"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:1569:1: ruleShadowPartCS : ( ( rule__ShadowPartCS__Group__0 ) ) ;
+    public final void ruleShadowPartCS() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:1573:2: ( ( ( rule__ConstructorPartCS__Group__0 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:1574:1: ( ( rule__ConstructorPartCS__Group__0 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:1573:2: ( ( ( rule__ShadowPartCS__Group__0 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:1574:1: ( ( rule__ShadowPartCS__Group__0 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:1574:1: ( ( rule__ConstructorPartCS__Group__0 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:1575:1: ( rule__ConstructorPartCS__Group__0 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:1574:1: ( ( rule__ShadowPartCS__Group__0 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:1575:1: ( rule__ShadowPartCS__Group__0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getConstructorPartCSAccess().getGroup()); 
+               before(grammarAccess.getShadowPartCSAccess().getGroup()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:1576:1: ( rule__ConstructorPartCS__Group__0 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:1576:2: rule__ConstructorPartCS__Group__0
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:1576:1: ( rule__ShadowPartCS__Group__0 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:1576:2: rule__ShadowPartCS__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__ConstructorPartCS__Group__0_in_ruleConstructorPartCS3300);
-            rule__ConstructorPartCS__Group__0();
+            pushFollow(FollowSets000.FOLLOW_rule__ShadowPartCS__Group__0_in_ruleShadowPartCS3300);
+            rule__ShadowPartCS__Group__0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -4742,7 +4742,7 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getConstructorPartCSAccess().getGroup()); 
+               after(grammarAccess.getShadowPartCSAccess().getGroup()); 
             }
 
             }
@@ -4762,7 +4762,7 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
         }
         return ;
     }
-    // $ANTLR end "ruleConstructorPartCS"
+    // $ANTLR end "ruleShadowPartCS"
 
 
     // $ANTLR start "entryRulePatternExpCS"
@@ -12472,9 +12472,9 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
     // $ANTLR end "rule__CollectionLiteralPartCS__Alternatives"
 
 
-    // $ANTLR start "rule__ConstructorPartCS__OwnedInitExpressionAlternatives_2_0"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:3938:1: rule__ConstructorPartCS__OwnedInitExpressionAlternatives_2_0 : ( ( ruleExpCS ) | ( rulePatternExpCS ) );
-    public final void rule__ConstructorPartCS__OwnedInitExpressionAlternatives_2_0() throws RecognitionException {
+    // $ANTLR start "rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:3938:1: rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0 : ( ( ruleExpCS ) | ( rulePatternExpCS ) );
+    public final void rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -12490,15 +12490,15 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:3944:1: ruleExpCS
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getConstructorPartCSAccess().getOwnedInitExpressionExpCSParserRuleCall_2_0_0()); 
+                       before(grammarAccess.getShadowPartCSAccess().getOwnedInitExpressionExpCSParserRuleCall_2_0_0()); 
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_rule__ConstructorPartCS__OwnedInitExpressionAlternatives_2_08521);
+                    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_08521);
                     ruleExpCS();
 
                     state._fsp--;
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getConstructorPartCSAccess().getOwnedInitExpressionExpCSParserRuleCall_2_0_0()); 
+                       after(grammarAccess.getShadowPartCSAccess().getOwnedInitExpressionExpCSParserRuleCall_2_0_0()); 
                     }
 
                     }
@@ -12513,15 +12513,15 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:3950:1: rulePatternExpCS
                     {
                     if ( state.backtracking==0 ) {
-                       before(grammarAccess.getConstructorPartCSAccess().getOwnedInitExpressionPatternExpCSParserRuleCall_2_0_1()); 
+                       before(grammarAccess.getShadowPartCSAccess().getOwnedInitExpressionPatternExpCSParserRuleCall_2_0_1()); 
                     }
-                    pushFollow(FollowSets000.FOLLOW_rulePatternExpCS_in_rule__ConstructorPartCS__OwnedInitExpressionAlternatives_2_08538);
+                    pushFollow(FollowSets000.FOLLOW_rulePatternExpCS_in_rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_08538);
                     rulePatternExpCS();
 
                     state._fsp--;
                     if (state.failed) return ;
                     if ( state.backtracking==0 ) {
-                       after(grammarAccess.getConstructorPartCSAccess().getOwnedInitExpressionPatternExpCSParserRuleCall_2_0_1()); 
+                       after(grammarAccess.getShadowPartCSAccess().getOwnedInitExpressionPatternExpCSParserRuleCall_2_0_1()); 
                     }
 
                     }
@@ -12543,7 +12543,7 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
         }
         return ;
     }
-    // $ANTLR end "rule__ConstructorPartCS__OwnedInitExpressionAlternatives_2_0"
+    // $ANTLR end "rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0"
 
 
     // $ANTLR start "rule__PrimitiveLiteralExpCS__Alternatives"
@@ -35816,23 +35816,23 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
     // $ANTLR end "rule__CollectionPatternCS__Group_2_2__1__Impl"
 
 
-    // $ANTLR start "rule__ConstructorPartCS__Group__0"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12222:1: rule__ConstructorPartCS__Group__0 : rule__ConstructorPartCS__Group__0__Impl rule__ConstructorPartCS__Group__1 ;
-    public final void rule__ConstructorPartCS__Group__0() throws RecognitionException {
+    // $ANTLR start "rule__ShadowPartCS__Group__0"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12222:1: rule__ShadowPartCS__Group__0 : rule__ShadowPartCS__Group__0__Impl rule__ShadowPartCS__Group__1 ;
+    public final void rule__ShadowPartCS__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12226:1: ( rule__ConstructorPartCS__Group__0__Impl rule__ConstructorPartCS__Group__1 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12227:2: rule__ConstructorPartCS__Group__0__Impl rule__ConstructorPartCS__Group__1
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12226:1: ( rule__ShadowPartCS__Group__0__Impl rule__ShadowPartCS__Group__1 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12227:2: rule__ShadowPartCS__Group__0__Impl rule__ShadowPartCS__Group__1
             {
-            pushFollow(FollowSets001.FOLLOW_rule__ConstructorPartCS__Group__0__Impl_in_rule__ConstructorPartCS__Group__025015);
-            rule__ConstructorPartCS__Group__0__Impl();
+            pushFollow(FollowSets001.FOLLOW_rule__ShadowPartCS__Group__0__Impl_in_rule__ShadowPartCS__Group__025015);
+            rule__ShadowPartCS__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets001.FOLLOW_rule__ConstructorPartCS__Group__1_in_rule__ConstructorPartCS__Group__025018);
-            rule__ConstructorPartCS__Group__1();
+            pushFollow(FollowSets001.FOLLOW_rule__ShadowPartCS__Group__1_in_rule__ShadowPartCS__Group__025018);
+            rule__ShadowPartCS__Group__1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -35851,30 +35851,30 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
         }
         return ;
     }
-    // $ANTLR end "rule__ConstructorPartCS__Group__0"
+    // $ANTLR end "rule__ShadowPartCS__Group__0"
 
 
-    // $ANTLR start "rule__ConstructorPartCS__Group__0__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12234:1: rule__ConstructorPartCS__Group__0__Impl : ( ( rule__ConstructorPartCS__ReferredPropertyAssignment_0 ) ) ;
-    public final void rule__ConstructorPartCS__Group__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__ShadowPartCS__Group__0__Impl"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12234:1: rule__ShadowPartCS__Group__0__Impl : ( ( rule__ShadowPartCS__ReferredPropertyAssignment_0 ) ) ;
+    public final void rule__ShadowPartCS__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12238:1: ( ( ( rule__ConstructorPartCS__ReferredPropertyAssignment_0 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12239:1: ( ( rule__ConstructorPartCS__ReferredPropertyAssignment_0 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12238:1: ( ( ( rule__ShadowPartCS__ReferredPropertyAssignment_0 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12239:1: ( ( rule__ShadowPartCS__ReferredPropertyAssignment_0 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12239:1: ( ( rule__ConstructorPartCS__ReferredPropertyAssignment_0 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12240:1: ( rule__ConstructorPartCS__ReferredPropertyAssignment_0 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12239:1: ( ( rule__ShadowPartCS__ReferredPropertyAssignment_0 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12240:1: ( rule__ShadowPartCS__ReferredPropertyAssignment_0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getConstructorPartCSAccess().getReferredPropertyAssignment_0()); 
+               before(grammarAccess.getShadowPartCSAccess().getReferredPropertyAssignment_0()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12241:1: ( rule__ConstructorPartCS__ReferredPropertyAssignment_0 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12241:2: rule__ConstructorPartCS__ReferredPropertyAssignment_0
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12241:1: ( rule__ShadowPartCS__ReferredPropertyAssignment_0 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12241:2: rule__ShadowPartCS__ReferredPropertyAssignment_0
             {
-            pushFollow(FollowSets001.FOLLOW_rule__ConstructorPartCS__ReferredPropertyAssignment_0_in_rule__ConstructorPartCS__Group__0__Impl25045);
-            rule__ConstructorPartCS__ReferredPropertyAssignment_0();
+            pushFollow(FollowSets001.FOLLOW_rule__ShadowPartCS__ReferredPropertyAssignment_0_in_rule__ShadowPartCS__Group__0__Impl25045);
+            rule__ShadowPartCS__ReferredPropertyAssignment_0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -35882,7 +35882,7 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getConstructorPartCSAccess().getReferredPropertyAssignment_0()); 
+               after(grammarAccess.getShadowPartCSAccess().getReferredPropertyAssignment_0()); 
             }
 
             }
@@ -35902,26 +35902,26 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
         }
         return ;
     }
-    // $ANTLR end "rule__ConstructorPartCS__Group__0__Impl"
+    // $ANTLR end "rule__ShadowPartCS__Group__0__Impl"
 
 
-    // $ANTLR start "rule__ConstructorPartCS__Group__1"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12251:1: rule__ConstructorPartCS__Group__1 : rule__ConstructorPartCS__Group__1__Impl rule__ConstructorPartCS__Group__2 ;
-    public final void rule__ConstructorPartCS__Group__1() throws RecognitionException {
+    // $ANTLR start "rule__ShadowPartCS__Group__1"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12251:1: rule__ShadowPartCS__Group__1 : rule__ShadowPartCS__Group__1__Impl rule__ShadowPartCS__Group__2 ;
+    public final void rule__ShadowPartCS__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12255:1: ( rule__ConstructorPartCS__Group__1__Impl rule__ConstructorPartCS__Group__2 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12256:2: rule__ConstructorPartCS__Group__1__Impl rule__ConstructorPartCS__Group__2
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12255:1: ( rule__ShadowPartCS__Group__1__Impl rule__ShadowPartCS__Group__2 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12256:2: rule__ShadowPartCS__Group__1__Impl rule__ShadowPartCS__Group__2
             {
-            pushFollow(FollowSets001.FOLLOW_rule__ConstructorPartCS__Group__1__Impl_in_rule__ConstructorPartCS__Group__125075);
-            rule__ConstructorPartCS__Group__1__Impl();
+            pushFollow(FollowSets001.FOLLOW_rule__ShadowPartCS__Group__1__Impl_in_rule__ShadowPartCS__Group__125075);
+            rule__ShadowPartCS__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FollowSets001.FOLLOW_rule__ConstructorPartCS__Group__2_in_rule__ConstructorPartCS__Group__125078);
-            rule__ConstructorPartCS__Group__2();
+            pushFollow(FollowSets001.FOLLOW_rule__ShadowPartCS__Group__2_in_rule__ShadowPartCS__Group__125078);
+            rule__ShadowPartCS__Group__2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -35940,12 +35940,12 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
         }
         return ;
     }
-    // $ANTLR end "rule__ConstructorPartCS__Group__1"
+    // $ANTLR end "rule__ShadowPartCS__Group__1"
 
 
-    // $ANTLR start "rule__ConstructorPartCS__Group__1__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12263:1: rule__ConstructorPartCS__Group__1__Impl : ( '=' ) ;
-    public final void rule__ConstructorPartCS__Group__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__ShadowPartCS__Group__1__Impl"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12263:1: rule__ShadowPartCS__Group__1__Impl : ( '=' ) ;
+    public final void rule__ShadowPartCS__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -35957,11 +35957,11 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
             // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12269:1: '='
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getConstructorPartCSAccess().getEqualsSignKeyword_1()); 
+               before(grammarAccess.getShadowPartCSAccess().getEqualsSignKeyword_1()); 
             }
-            match(input,38,FollowSets001.FOLLOW_38_in_rule__ConstructorPartCS__Group__1__Impl25106); if (state.failed) return ;
+            match(input,38,FollowSets001.FOLLOW_38_in_rule__ShadowPartCS__Group__1__Impl25106); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getConstructorPartCSAccess().getEqualsSignKeyword_1()); 
+               after(grammarAccess.getShadowPartCSAccess().getEqualsSignKeyword_1()); 
             }
 
             }
@@ -35981,21 +35981,21 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
         }
         return ;
     }
-    // $ANTLR end "rule__ConstructorPartCS__Group__1__Impl"
+    // $ANTLR end "rule__ShadowPartCS__Group__1__Impl"
 
 
-    // $ANTLR start "rule__ConstructorPartCS__Group__2"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12282:1: rule__ConstructorPartCS__Group__2 : rule__ConstructorPartCS__Group__2__Impl ;
-    public final void rule__ConstructorPartCS__Group__2() throws RecognitionException {
+    // $ANTLR start "rule__ShadowPartCS__Group__2"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12282:1: rule__ShadowPartCS__Group__2 : rule__ShadowPartCS__Group__2__Impl ;
+    public final void rule__ShadowPartCS__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12286:1: ( rule__ConstructorPartCS__Group__2__Impl )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12287:2: rule__ConstructorPartCS__Group__2__Impl
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12286:1: ( rule__ShadowPartCS__Group__2__Impl )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12287:2: rule__ShadowPartCS__Group__2__Impl
             {
-            pushFollow(FollowSets001.FOLLOW_rule__ConstructorPartCS__Group__2__Impl_in_rule__ConstructorPartCS__Group__225137);
-            rule__ConstructorPartCS__Group__2__Impl();
+            pushFollow(FollowSets001.FOLLOW_rule__ShadowPartCS__Group__2__Impl_in_rule__ShadowPartCS__Group__225137);
+            rule__ShadowPartCS__Group__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
@@ -36014,30 +36014,30 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
         }
         return ;
     }
-    // $ANTLR end "rule__ConstructorPartCS__Group__2"
+    // $ANTLR end "rule__ShadowPartCS__Group__2"
 
 
-    // $ANTLR start "rule__ConstructorPartCS__Group__2__Impl"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12293:1: rule__ConstructorPartCS__Group__2__Impl : ( ( rule__ConstructorPartCS__OwnedInitExpressionAssignment_2 ) ) ;
-    public final void rule__ConstructorPartCS__Group__2__Impl() throws RecognitionException {
+    // $ANTLR start "rule__ShadowPartCS__Group__2__Impl"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12293:1: rule__ShadowPartCS__Group__2__Impl : ( ( rule__ShadowPartCS__OwnedInitExpressionAssignment_2 ) ) ;
+    public final void rule__ShadowPartCS__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12297:1: ( ( ( rule__ConstructorPartCS__OwnedInitExpressionAssignment_2 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12298:1: ( ( rule__ConstructorPartCS__OwnedInitExpressionAssignment_2 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12297:1: ( ( ( rule__ShadowPartCS__OwnedInitExpressionAssignment_2 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12298:1: ( ( rule__ShadowPartCS__OwnedInitExpressionAssignment_2 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12298:1: ( ( rule__ConstructorPartCS__OwnedInitExpressionAssignment_2 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12299:1: ( rule__ConstructorPartCS__OwnedInitExpressionAssignment_2 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12298:1: ( ( rule__ShadowPartCS__OwnedInitExpressionAssignment_2 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12299:1: ( rule__ShadowPartCS__OwnedInitExpressionAssignment_2 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getConstructorPartCSAccess().getOwnedInitExpressionAssignment_2()); 
+               before(grammarAccess.getShadowPartCSAccess().getOwnedInitExpressionAssignment_2()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12300:1: ( rule__ConstructorPartCS__OwnedInitExpressionAssignment_2 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12300:2: rule__ConstructorPartCS__OwnedInitExpressionAssignment_2
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12300:1: ( rule__ShadowPartCS__OwnedInitExpressionAssignment_2 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:12300:2: rule__ShadowPartCS__OwnedInitExpressionAssignment_2
             {
-            pushFollow(FollowSets001.FOLLOW_rule__ConstructorPartCS__OwnedInitExpressionAssignment_2_in_rule__ConstructorPartCS__Group__2__Impl25164);
-            rule__ConstructorPartCS__OwnedInitExpressionAssignment_2();
+            pushFollow(FollowSets001.FOLLOW_rule__ShadowPartCS__OwnedInitExpressionAssignment_2_in_rule__ShadowPartCS__Group__2__Impl25164);
+            rule__ShadowPartCS__OwnedInitExpressionAssignment_2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -36045,7 +36045,7 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getConstructorPartCSAccess().getOwnedInitExpressionAssignment_2()); 
+               after(grammarAccess.getShadowPartCSAccess().getOwnedInitExpressionAssignment_2()); 
             }
 
             }
@@ -36065,7 +36065,7 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
         }
         return ;
     }
-    // $ANTLR end "rule__ConstructorPartCS__Group__2__Impl"
+    // $ANTLR end "rule__ShadowPartCS__Group__2__Impl"
 
 
     // $ANTLR start "rule__PatternExpCS__Group__0"
@@ -56992,9 +56992,9 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
     // $ANTLR end "rule__CollectionPatternCS__RestVariableNameAssignment_2_2_1"
 
 
-    // $ANTLR start "rule__ConstructorPartCS__ReferredPropertyAssignment_0"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:19844:1: rule__ConstructorPartCS__ReferredPropertyAssignment_0 : ( ( ruleUnrestrictedName ) ) ;
-    public final void rule__ConstructorPartCS__ReferredPropertyAssignment_0() throws RecognitionException {
+    // $ANTLR start "rule__ShadowPartCS__ReferredPropertyAssignment_0"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:19844:1: rule__ShadowPartCS__ReferredPropertyAssignment_0 : ( ( ruleUnrestrictedName ) ) ;
+    public final void rule__ShadowPartCS__ReferredPropertyAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -57006,27 +57006,27 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
             // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:19850:1: ( ruleUnrestrictedName )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getConstructorPartCSAccess().getReferredPropertyPropertyCrossReference_0_0()); 
+               before(grammarAccess.getShadowPartCSAccess().getReferredPropertyPropertyCrossReference_0_0()); 
             }
             // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:19851:1: ( ruleUnrestrictedName )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:19852:1: ruleUnrestrictedName
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getConstructorPartCSAccess().getReferredPropertyPropertyUnrestrictedNameParserRuleCall_0_0_1()); 
+               before(grammarAccess.getShadowPartCSAccess().getReferredPropertyPropertyUnrestrictedNameParserRuleCall_0_0_1()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleUnrestrictedName_in_rule__ConstructorPartCS__ReferredPropertyAssignment_040157);
+            pushFollow(FollowSets001.FOLLOW_ruleUnrestrictedName_in_rule__ShadowPartCS__ReferredPropertyAssignment_040157);
             ruleUnrestrictedName();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getConstructorPartCSAccess().getReferredPropertyPropertyUnrestrictedNameParserRuleCall_0_0_1()); 
+               after(grammarAccess.getShadowPartCSAccess().getReferredPropertyPropertyUnrestrictedNameParserRuleCall_0_0_1()); 
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getConstructorPartCSAccess().getReferredPropertyPropertyCrossReference_0_0()); 
+               after(grammarAccess.getShadowPartCSAccess().getReferredPropertyPropertyCrossReference_0_0()); 
             }
 
             }
@@ -57046,30 +57046,30 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
         }
         return ;
     }
-    // $ANTLR end "rule__ConstructorPartCS__ReferredPropertyAssignment_0"
+    // $ANTLR end "rule__ShadowPartCS__ReferredPropertyAssignment_0"
 
 
-    // $ANTLR start "rule__ConstructorPartCS__OwnedInitExpressionAssignment_2"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:19863:1: rule__ConstructorPartCS__OwnedInitExpressionAssignment_2 : ( ( rule__ConstructorPartCS__OwnedInitExpressionAlternatives_2_0 ) ) ;
-    public final void rule__ConstructorPartCS__OwnedInitExpressionAssignment_2() throws RecognitionException {
+    // $ANTLR start "rule__ShadowPartCS__OwnedInitExpressionAssignment_2"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:19863:1: rule__ShadowPartCS__OwnedInitExpressionAssignment_2 : ( ( rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0 ) ) ;
+    public final void rule__ShadowPartCS__OwnedInitExpressionAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:19867:1: ( ( ( rule__ConstructorPartCS__OwnedInitExpressionAlternatives_2_0 ) ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:19868:1: ( ( rule__ConstructorPartCS__OwnedInitExpressionAlternatives_2_0 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:19867:1: ( ( ( rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0 ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:19868:1: ( ( rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0 ) )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:19868:1: ( ( rule__ConstructorPartCS__OwnedInitExpressionAlternatives_2_0 ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:19869:1: ( rule__ConstructorPartCS__OwnedInitExpressionAlternatives_2_0 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:19868:1: ( ( rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0 ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:19869:1: ( rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getConstructorPartCSAccess().getOwnedInitExpressionAlternatives_2_0()); 
+               before(grammarAccess.getShadowPartCSAccess().getOwnedInitExpressionAlternatives_2_0()); 
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:19870:1: ( rule__ConstructorPartCS__OwnedInitExpressionAlternatives_2_0 )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:19870:2: rule__ConstructorPartCS__OwnedInitExpressionAlternatives_2_0
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:19870:1: ( rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0 )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:19870:2: rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0
             {
-            pushFollow(FollowSets001.FOLLOW_rule__ConstructorPartCS__OwnedInitExpressionAlternatives_2_0_in_rule__ConstructorPartCS__OwnedInitExpressionAssignment_240192);
-            rule__ConstructorPartCS__OwnedInitExpressionAlternatives_2_0();
+            pushFollow(FollowSets001.FOLLOW_rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0_in_rule__ShadowPartCS__OwnedInitExpressionAssignment_240192);
+            rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -57077,7 +57077,7 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getConstructorPartCSAccess().getOwnedInitExpressionAlternatives_2_0()); 
+               after(grammarAccess.getShadowPartCSAccess().getOwnedInitExpressionAlternatives_2_0()); 
             }
 
             }
@@ -57097,7 +57097,7 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
         }
         return ;
     }
-    // $ANTLR end "rule__ConstructorPartCS__OwnedInitExpressionAssignment_2"
+    // $ANTLR end "rule__ShadowPartCS__OwnedInitExpressionAssignment_2"
 
 
     // $ANTLR start "rule__PatternExpCS__PatternVariableNameAssignment_0"
@@ -58430,28 +58430,28 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__CurlyBracketedClauseCS__OwnedPartsAssignment_2_0_0"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:20338:1: rule__CurlyBracketedClauseCS__OwnedPartsAssignment_2_0_0 : ( ruleConstructorPartCS ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:20338:1: rule__CurlyBracketedClauseCS__OwnedPartsAssignment_2_0_0 : ( ruleShadowPartCS ) ;
     public final void rule__CurlyBracketedClauseCS__OwnedPartsAssignment_2_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:20342:1: ( ( ruleConstructorPartCS ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:20343:1: ( ruleConstructorPartCS )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:20342:1: ( ( ruleShadowPartCS ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:20343:1: ( ruleShadowPartCS )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:20343:1: ( ruleConstructorPartCS )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:20344:1: ruleConstructorPartCS
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:20343:1: ( ruleShadowPartCS )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:20344:1: ruleShadowPartCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getCurlyBracketedClauseCSAccess().getOwnedPartsConstructorPartCSParserRuleCall_2_0_0_0()); 
+               before(grammarAccess.getCurlyBracketedClauseCSAccess().getOwnedPartsShadowPartCSParserRuleCall_2_0_0_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleConstructorPartCS_in_rule__CurlyBracketedClauseCS__OwnedPartsAssignment_2_0_041163);
-            ruleConstructorPartCS();
+            pushFollow(FollowSets001.FOLLOW_ruleShadowPartCS_in_rule__CurlyBracketedClauseCS__OwnedPartsAssignment_2_0_041163);
+            ruleShadowPartCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getCurlyBracketedClauseCSAccess().getOwnedPartsConstructorPartCSParserRuleCall_2_0_0_0()); 
+               after(grammarAccess.getCurlyBracketedClauseCSAccess().getOwnedPartsShadowPartCSParserRuleCall_2_0_0_0()); 
             }
 
             }
@@ -58475,28 +58475,28 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
 
 
     // $ANTLR start "rule__CurlyBracketedClauseCS__OwnedPartsAssignment_2_0_1_1"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:20353:1: rule__CurlyBracketedClauseCS__OwnedPartsAssignment_2_0_1_1 : ( ruleConstructorPartCS ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:20353:1: rule__CurlyBracketedClauseCS__OwnedPartsAssignment_2_0_1_1 : ( ruleShadowPartCS ) ;
     public final void rule__CurlyBracketedClauseCS__OwnedPartsAssignment_2_0_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:20357:1: ( ( ruleConstructorPartCS ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:20358:1: ( ruleConstructorPartCS )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:20357:1: ( ( ruleShadowPartCS ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:20358:1: ( ruleShadowPartCS )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:20358:1: ( ruleConstructorPartCS )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:20359:1: ruleConstructorPartCS
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:20358:1: ( ruleShadowPartCS )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative.ui/src-gen/org/eclipse/qvtd/xtext/qvtimperative/ui/contentassist/antlr/internal/InternalQVTimperative.g:20359:1: ruleShadowPartCS
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getCurlyBracketedClauseCSAccess().getOwnedPartsConstructorPartCSParserRuleCall_2_0_1_1_0()); 
+               before(grammarAccess.getCurlyBracketedClauseCSAccess().getOwnedPartsShadowPartCSParserRuleCall_2_0_1_1_0()); 
             }
-            pushFollow(FollowSets001.FOLLOW_ruleConstructorPartCS_in_rule__CurlyBracketedClauseCS__OwnedPartsAssignment_2_0_1_141194);
-            ruleConstructorPartCS();
+            pushFollow(FollowSets001.FOLLOW_ruleShadowPartCS_in_rule__CurlyBracketedClauseCS__OwnedPartsAssignment_2_0_1_141194);
+            ruleShadowPartCS();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getCurlyBracketedClauseCSAccess().getOwnedPartsConstructorPartCSParserRuleCall_2_0_1_1_0()); 
+               after(grammarAccess.getCurlyBracketedClauseCSAccess().getOwnedPartsShadowPartCSParserRuleCall_2_0_1_1_0()); 
             }
 
             }
@@ -61646,36 +61646,21 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
     static final String DFA24_specialS =
         "\20\uffff}>";
     static final String[] DFA24_transitionS = {
-            "\2\1\1\2\1\3\12\uffff\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1"+
-            "\14\1\15\1\16\3\1\20\uffff\16\1\10\uffff\1\17\1\1\5\uffff\3"+
-            "\1\3\uffff\1\1\4\uffff\2\1\5\uffff\2\1",
+            "\2\1\1\2\1\3\12\uffff\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\3\1\20\uffff\16\1\10\uffff\1\17\1\1\5\uffff\3\1\3\uffff\1\1\4\uffff\2\1\5\uffff\2\1",
             "",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2"+
-            "\1\5\uffff\1\1\17\uffff\1\1",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2"+
-            "\1\5\uffff\1\1\17\uffff\1\1",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2"+
-            "\1\5\uffff\1\1\17\uffff\1\1",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2"+
-            "\1\5\uffff\1\1\17\uffff\1\1",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2"+
-            "\1\5\uffff\1\1\17\uffff\1\1",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2"+
-            "\1\5\uffff\1\1\17\uffff\1\1",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2"+
-            "\1\5\uffff\1\1\17\uffff\1\1",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2"+
-            "\1\5\uffff\1\1\17\uffff\1\1",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2"+
-            "\1\5\uffff\1\1\17\uffff\1\1",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2"+
-            "\1\5\uffff\1\1\17\uffff\1\1",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2"+
-            "\1\5\uffff\1\1\17\uffff\1\1",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2"+
-            "\1\5\uffff\1\1\17\uffff\1\1",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2"+
-            "\1\5\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2\1\5\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2\1\5\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2\1\5\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2\1\5\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2\1\5\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2\1\5\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2\1\5\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2\1\5\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2\1\5\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2\1\5\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2\1\5\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2\1\5\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\2\1\5\uffff\1\1\17\uffff\1\1",
             ""
     };
 
@@ -61725,36 +61710,21 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
     static final String DFA25_specialS =
         "\20\uffff}>";
     static final String[] DFA25_transitionS = {
-            "\2\1\1\2\1\3\12\uffff\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1"+
-            "\14\1\15\1\16\3\1\20\uffff\16\1\10\uffff\1\17\1\1\5\uffff\3"+
-            "\1\3\uffff\1\1\4\uffff\2\1\5\uffff\2\1",
+            "\2\1\1\2\1\3\12\uffff\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\3\1\20\uffff\16\1\10\uffff\1\17\1\1\5\uffff\3\1\3\uffff\1\1\4\uffff\2\1\5\uffff\2\1",
             "",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\17\uffff\1\1",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\17\uffff\1\1",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\17\uffff\1\1",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\17\uffff\1\1",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\17\uffff\1\1",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\17\uffff\1\1",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\17\uffff\1\1",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\17\uffff\1\1",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\17\uffff\1\1",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\17\uffff\1\1",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\17\uffff\1\1",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\17\uffff\1\1",
-            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\17\uffff\1\1",
+            "\1\1\1\uffff\21\1\17\uffff\3\1\4\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\17\uffff\1\1",
             ""
     };
 
@@ -61788,7 +61758,7 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
             this.transition = DFA25_transition;
         }
         public String getDescription() {
-            return "3938:1: rule__ConstructorPartCS__OwnedInitExpressionAlternatives_2_0 : ( ( ruleExpCS ) | ( rulePatternExpCS ) );";
+            return "3938:1: rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0 : ( ( ruleExpCS ) | ( rulePatternExpCS ) );";
         }
     }
     static final String DFA29_eotS =
@@ -61967,8 +61937,7 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
     static final String DFA30_specialS =
         "\1\uffff\1\0\1\1\47\uffff}>";
     static final String[] DFA30_transitionS = {
-            "\4\3\12\uffff\13\3\1\1\1\2\1\3\20\uffff\16\3\11\uffff\1\3\5"+
-            "\uffff\3\3\3\uffff\1\3\4\uffff\1\51\1\3\5\uffff\2\3",
+            "\4\3\12\uffff\13\3\1\1\1\2\1\3\20\uffff\16\3\11\uffff\1\3\5\uffff\3\3\3\uffff\1\3\4\uffff\1\51\1\3\5\uffff\2\3",
             "\1\uffff",
             "\1\uffff",
             "",
@@ -62095,14 +62064,11 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
     static final String DFA33_maxS =
         "\1\140\12\uffff\6\0\30\uffff";
     static final String DFA33_acceptS =
-        "\1\uffff\1\1\1\2\1\3\1\4\14\uffff\1\7\1\10\7\uffff\1\11\14\uffff"+
-        "\1\5\1\6";
+        "\1\uffff\1\1\1\2\1\3\1\4\14\uffff\1\7\1\10\7\uffff\1\11\14\uffff\1\5\1\6";
     static final String DFA33_specialS =
         "\13\uffff\1\0\1\1\1\2\1\3\1\4\1\5\30\uffff}>";
     static final String[] DFA33_transitionS = {
-            "\2\4\2\32\12\uffff\13\32\2\uffff\1\4\20\uffff\1\13\10\22\1"+
-            "\14\1\15\1\16\1\17\1\20\11\uffff\1\1\5\uffff\1\21\2\4\3\uffff"+
-            "\1\2\5\uffff\1\3\5\uffff\2\4",
+            "\2\4\2\32\12\uffff\13\32\2\uffff\1\4\20\uffff\1\13\10\22\1\14\1\15\1\16\1\17\1\20\11\uffff\1\1\5\uffff\1\21\2\4\3\uffff\1\2\5\uffff\1\3\5\uffff\2\4",
             "",
             "",
             "",
@@ -62292,36 +62258,21 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
     static final String DFA39_specialS =
         "\20\uffff}>";
     static final String[] DFA39_transitionS = {
-            "\2\1\1\2\1\3\12\uffff\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1"+
-            "\14\1\15\1\16\3\1\20\uffff\16\1\10\uffff\1\17\1\1\5\uffff\3"+
-            "\1\3\uffff\1\1\4\uffff\2\1\5\uffff\2\1",
+            "\2\1\1\2\1\3\12\uffff\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\3\1\20\uffff\16\1\10\uffff\1\17\1\1\5\uffff\3\1\3\uffff\1\1\4\uffff\2\1\5\uffff\2\1",
             "",
-            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
-            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
-            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
-            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
-            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
-            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
-            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
-            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
-            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
-            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
-            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
-            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
-            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1"+
-            "\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
+            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
+            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
+            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
+            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
+            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
+            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
+            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
+            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
+            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
+            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
+            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
+            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
+            "\1\1\1\uffff\21\1\20\uffff\1\1\5\uffff\1\17\1\1\2\uffff\1\1\6\uffff\1\1\2\uffff\1\1\14\uffff\1\1",
             ""
     };
 
@@ -62371,9 +62322,7 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
     static final String DFA85_specialS =
         "\36\uffff}>";
     static final String[] DFA85_transitionS = {
-            "\1\2\1\3\12\uffff\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14"+
-            "\1\15\1\16\23\uffff\1\34\1\24\1\25\1\26\1\27\1\30\1\31\1\32"+
-            "\1\33\1\17\1\20\1\21\1\22\1\23",
+            "\1\2\1\3\12\uffff\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16\23\uffff\1\34\1\24\1\25\1\26\1\27\1\30\1\31\1\32\1\33\1\17\1\20\1\21\1\22\1\23",
             "",
             "\1\1\6\uffff\1\1\2\uffff\1\35",
             "\1\1\6\uffff\1\1\2\uffff\1\35",
@@ -62451,8 +62400,7 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
     static final String DFA86_specialS =
         "\20\uffff}>";
     static final String[] DFA86_transitionS = {
-            "\1\1\1\2\12\uffff\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1"+
-            "\14\1\15\23\uffff\16\16",
+            "\1\1\1\2\12\uffff\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\23\uffff\16\16",
             "\1\16\11\uffff\1\17",
             "\1\16\11\uffff\1\17",
             "\1\16\11\uffff\1\17",
@@ -62516,8 +62464,7 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
     static final String DFA104_specialS =
         "\1\uffff\1\0\15\uffff}>";
     static final String[] DFA104_transitionS = {
-            "\2\2\24\uffff\1\2\30\uffff\1\2\1\1\2\2\5\uffff\2\2\2\uffff"+
-            "\1\2\4\uffff\1\2\2\uffff\1\2",
+            "\2\2\24\uffff\1\2\30\uffff\1\2\1\1\2\2\5\uffff\2\2\2\uffff\1\2\4\uffff\1\2\2\uffff\1\2",
             "\1\uffff",
             "",
             "",
@@ -62606,8 +62553,7 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
     static final String DFA105_specialS =
         "\1\uffff\1\0\15\uffff}>";
     static final String[] DFA105_transitionS = {
-            "\2\2\24\uffff\1\2\30\uffff\1\2\1\1\2\2\5\uffff\2\2\2\uffff"+
-            "\1\2\4\uffff\1\2\2\uffff\1\2",
+            "\2\2\24\uffff\1\2\30\uffff\1\2\1\1\2\2\5\uffff\2\2\2\uffff\1\2\4\uffff\1\2\2\uffff\1\2",
             "\1\uffff",
             "",
             "",
@@ -62847,9 +62793,9 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
         public static final BitSet FOLLOW_ruleCollectionPatternCS_in_entryRuleCollectionPatternCS3207 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleCollectionPatternCS3214 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CollectionPatternCS__Group__0_in_ruleCollectionPatternCS3240 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleConstructorPartCS_in_entryRuleConstructorPartCS3267 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleConstructorPartCS3274 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ConstructorPartCS__Group__0_in_ruleConstructorPartCS3300 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleShadowPartCS_in_entryRuleShadowPartCS3267 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleShadowPartCS3274 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ShadowPartCS__Group__0_in_ruleShadowPartCS3300 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rulePatternExpCS_in_entryRulePatternExpCS3327 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRulePatternExpCS3334 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__PatternExpCS__Group__0_in_rulePatternExpCS3360 = new BitSet(new long[]{0x0000000000000002L});
@@ -63097,8 +63043,8 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
         public static final BitSet FOLLOW_61_in_rule__CollectionTypeIdentifier__Alternatives8436 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CollectionLiteralPartCS__Group_0__0_in_rule__CollectionLiteralPartCS__Alternatives8470 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CollectionLiteralPartCS__OwnedExpressionAssignment_1_in_rule__CollectionLiteralPartCS__Alternatives8488 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpCS_in_rule__ConstructorPartCS__OwnedInitExpressionAlternatives_2_08521 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePatternExpCS_in_rule__ConstructorPartCS__OwnedInitExpressionAlternatives_2_08538 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpCS_in_rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_08521 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePatternExpCS_in_rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_08538 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleNumberLiteralExpCS_in_rule__PrimitiveLiteralExpCS__Alternatives8570 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleStringLiteralExpCS_in_rule__PrimitiveLiteralExpCS__Alternatives8587 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleBooleanLiteralExpCS_in_rule__PrimitiveLiteralExpCS__Alternatives8604 = new BitSet(new long[]{0x0000000000000002L});
@@ -63795,14 +63741,14 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
         public static final BitSet FOLLOW_76_in_rule__CollectionPatternCS__Group_2_2__0__Impl24923 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CollectionPatternCS__Group_2_2__1__Impl_in_rule__CollectionPatternCS__Group_2_2__124954 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__CollectionPatternCS__RestVariableNameAssignment_2_2_1_in_rule__CollectionPatternCS__Group_2_2__1__Impl24981 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ConstructorPartCS__Group__0__Impl_in_rule__ConstructorPartCS__Group__025015 = new BitSet(new long[]{0x0000004000000000L});
-        public static final BitSet FOLLOW_rule__ConstructorPartCS__Group__1_in_rule__ConstructorPartCS__Group__025018 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ConstructorPartCS__ReferredPropertyAssignment_0_in_rule__ConstructorPartCS__Group__0__Impl25045 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ConstructorPartCS__Group__1__Impl_in_rule__ConstructorPartCS__Group__125075 = new BitSet(new long[]{0x3FFF0000FFFC00F0L,0x000000018308E0C0L});
-        public static final BitSet FOLLOW_rule__ConstructorPartCS__Group__2_in_rule__ConstructorPartCS__Group__125078 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_38_in_rule__ConstructorPartCS__Group__1__Impl25106 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ConstructorPartCS__Group__2__Impl_in_rule__ConstructorPartCS__Group__225137 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ConstructorPartCS__OwnedInitExpressionAssignment_2_in_rule__ConstructorPartCS__Group__2__Impl25164 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ShadowPartCS__Group__0__Impl_in_rule__ShadowPartCS__Group__025015 = new BitSet(new long[]{0x0000004000000000L});
+        public static final BitSet FOLLOW_rule__ShadowPartCS__Group__1_in_rule__ShadowPartCS__Group__025018 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ShadowPartCS__ReferredPropertyAssignment_0_in_rule__ShadowPartCS__Group__0__Impl25045 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ShadowPartCS__Group__1__Impl_in_rule__ShadowPartCS__Group__125075 = new BitSet(new long[]{0x3FFF0000FFFC00F0L,0x000000018308E0C0L});
+        public static final BitSet FOLLOW_rule__ShadowPartCS__Group__2_in_rule__ShadowPartCS__Group__125078 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_38_in_rule__ShadowPartCS__Group__1__Impl25106 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ShadowPartCS__Group__2__Impl_in_rule__ShadowPartCS__Group__225137 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ShadowPartCS__OwnedInitExpressionAssignment_2_in_rule__ShadowPartCS__Group__2__Impl25164 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__PatternExpCS__Group__0__Impl_in_rule__PatternExpCS__Group__025200 = new BitSet(new long[]{0x3FFF0000FFFC00F0L,0x000000018308E0C0L});
         public static final BitSet FOLLOW_rule__PatternExpCS__Group__1_in_rule__PatternExpCS__Group__025203 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__PatternExpCS__PatternVariableNameAssignment_0_in_rule__PatternExpCS__Group__0__Impl25230 = new BitSet(new long[]{0x0000000000000002L});
@@ -64387,8 +64333,8 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
         public static final BitSet FOLLOW_rulePatternExpCS_in_rule__CollectionPatternCS__OwnedPartsAssignment_2_040060 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rulePatternExpCS_in_rule__CollectionPatternCS__OwnedPartsAssignment_2_1_140091 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleIdentifier_in_rule__CollectionPatternCS__RestVariableNameAssignment_2_2_140122 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__ConstructorPartCS__ReferredPropertyAssignment_040157 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ConstructorPartCS__OwnedInitExpressionAlternatives_2_0_in_rule__ConstructorPartCS__OwnedInitExpressionAssignment_240192 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__ShadowPartCS__ReferredPropertyAssignment_040157 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ShadowPartCS__OwnedInitExpressionAlternatives_2_0_in_rule__ShadowPartCS__OwnedInitExpressionAssignment_240192 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rule__PatternExpCS__PatternVariableNameAssignment_040225 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTypeExpCS_in_rule__PatternExpCS__OwnedPatternTypeAssignment_240256 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleExpCS_in_rule__LambdaLiteralExpCS__OwnedExpressionCSAssignment_240287 = new BitSet(new long[]{0x0000000000000002L});
@@ -64418,8 +64364,8 @@ public class InternalQVTimperativeParser extends AbstractInternalContentAssistPa
         public static final BitSet FOLLOW_ruleRoundBracketedClauseCS_in_rule__NameExpCS__OwnedRoundBracketedClauseAssignment_241057 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleCurlyBracketedClauseCS_in_rule__NameExpCS__OwnedCurlyBracketedClauseAssignment_341088 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_97_in_rule__NameExpCS__IsPreAssignment_4_041124 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleConstructorPartCS_in_rule__CurlyBracketedClauseCS__OwnedPartsAssignment_2_0_041163 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleConstructorPartCS_in_rule__CurlyBracketedClauseCS__OwnedPartsAssignment_2_0_1_141194 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleShadowPartCS_in_rule__CurlyBracketedClauseCS__OwnedPartsAssignment_2_0_041163 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleShadowPartCS_in_rule__CurlyBracketedClauseCS__OwnedPartsAssignment_2_0_1_141194 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleStringLiteral_in_rule__CurlyBracketedClauseCS__ValueAssignment_2_141225 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleNavigatingArgCS_in_rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_041256 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleNavigatingCommaArgCS_in_rule__RoundBracketedClauseCS__OwnedArgumentsAssignment_2_141287 = new BitSet(new long[]{0x0000000000000002L});

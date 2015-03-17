@@ -7064,30 +7064,30 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleCollectionPatternCS"
 
 
-    // $ANTLR start "entryRuleConstructorPartCS"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:2402:1: entryRuleConstructorPartCS returns [EObject current=null] : iv_ruleConstructorPartCS= ruleConstructorPartCS EOF ;
-    public final EObject entryRuleConstructorPartCS() throws RecognitionException {
+    // $ANTLR start "entryRuleShadowPartCS"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:2402:1: entryRuleShadowPartCS returns [EObject current=null] : iv_ruleShadowPartCS= ruleShadowPartCS EOF ;
+    public final EObject entryRuleShadowPartCS() throws RecognitionException {
         EObject current = null;
 
-        EObject iv_ruleConstructorPartCS = null;
+        EObject iv_ruleShadowPartCS = null;
 
 
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:2403:2: (iv_ruleConstructorPartCS= ruleConstructorPartCS EOF )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:2404:2: iv_ruleConstructorPartCS= ruleConstructorPartCS EOF
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:2403:2: (iv_ruleShadowPartCS= ruleShadowPartCS EOF )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:2404:2: iv_ruleShadowPartCS= ruleShadowPartCS EOF
             {
             if ( state.backtracking==0 ) {
-               newCompositeNode(grammarAccess.getConstructorPartCSRule()); 
+               newCompositeNode(grammarAccess.getShadowPartCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleConstructorPartCS_in_entryRuleConstructorPartCS5520);
-            iv_ruleConstructorPartCS=ruleConstructorPartCS();
+            pushFollow(FollowSets000.FOLLOW_ruleShadowPartCS_in_entryRuleShadowPartCS5520);
+            iv_ruleShadowPartCS=ruleShadowPartCS();
 
             state._fsp--;
             if (state.failed) return current;
             if ( state.backtracking==0 ) {
-               current =iv_ruleConstructorPartCS; 
+               current =iv_ruleShadowPartCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleConstructorPartCS5530); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleShadowPartCS5530); if (state.failed) return current;
 
             }
 
@@ -7101,12 +7101,12 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "entryRuleConstructorPartCS"
+    // $ANTLR end "entryRuleShadowPartCS"
 
 
-    // $ANTLR start "ruleConstructorPartCS"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:2411:1: ruleConstructorPartCS returns [EObject current=null] : ( ( ( ruleUnrestrictedName ) ) otherlv_1= '=' ( ( (lv_ownedInitExpression_2_1= ruleExpCS | lv_ownedInitExpression_2_2= rulePatternExpCS ) ) ) ) ;
-    public final EObject ruleConstructorPartCS() throws RecognitionException {
+    // $ANTLR start "ruleShadowPartCS"
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:2411:1: ruleShadowPartCS returns [EObject current=null] : ( ( ( ruleUnrestrictedName ) ) otherlv_1= '=' ( ( (lv_ownedInitExpression_2_1= ruleExpCS | lv_ownedInitExpression_2_2= rulePatternExpCS ) ) ) ) ;
+    public final EObject ruleShadowPartCS() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
@@ -7138,16 +7138,16 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
 
               			if (current==null) {
-              	            current = createModelElement(grammarAccess.getConstructorPartCSRule());
+              	            current = createModelElement(grammarAccess.getShadowPartCSRule());
               	        }
                       
             }
             if ( state.backtracking==0 ) {
                
-              	        newCompositeNode(grammarAccess.getConstructorPartCSAccess().getReferredPropertyPropertyCrossReference_0_0()); 
+              	        newCompositeNode(grammarAccess.getShadowPartCSAccess().getReferredPropertyPropertyCrossReference_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleConstructorPartCS5582);
+            pushFollow(FollowSets000.FOLLOW_ruleUnrestrictedName_in_ruleShadowPartCS5582);
             ruleUnrestrictedName();
 
             state._fsp--;
@@ -7163,10 +7163,10 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,47,FollowSets000.FOLLOW_47_in_ruleConstructorPartCS5594); if (state.failed) return current;
+            otherlv_1=(Token)match(input,47,FollowSets000.FOLLOW_47_in_ruleShadowPartCS5594); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
-                  	newLeafNode(otherlv_1, grammarAccess.getConstructorPartCSAccess().getEqualsSignKeyword_1());
+                  	newLeafNode(otherlv_1, grammarAccess.getShadowPartCSAccess().getEqualsSignKeyword_1());
                   
             }
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:2437:1: ( ( (lv_ownedInitExpression_2_1= ruleExpCS | lv_ownedInitExpression_2_2= rulePatternExpCS ) ) )
@@ -7184,10 +7184,10 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
                        
-                      	        newCompositeNode(grammarAccess.getConstructorPartCSAccess().getOwnedInitExpressionExpCSParserRuleCall_2_0_0()); 
+                      	        newCompositeNode(grammarAccess.getShadowPartCSAccess().getOwnedInitExpressionExpCSParserRuleCall_2_0_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleConstructorPartCS5617);
+                    pushFollow(FollowSets000.FOLLOW_ruleExpCS_in_ruleShadowPartCS5617);
                     lv_ownedInitExpression_2_1=ruleExpCS();
 
                     state._fsp--;
@@ -7195,7 +7195,7 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
                     if ( state.backtracking==0 ) {
 
                       	        if (current==null) {
-                      	            current = createModelElementForParent(grammarAccess.getConstructorPartCSRule());
+                      	            current = createModelElementForParent(grammarAccess.getShadowPartCSRule());
                       	        }
                              		set(
                              			current, 
@@ -7213,10 +7213,10 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
                        
-                      	        newCompositeNode(grammarAccess.getConstructorPartCSAccess().getOwnedInitExpressionPatternExpCSParserRuleCall_2_0_1()); 
+                      	        newCompositeNode(grammarAccess.getShadowPartCSAccess().getOwnedInitExpressionPatternExpCSParserRuleCall_2_0_1()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_rulePatternExpCS_in_ruleConstructorPartCS5636);
+                    pushFollow(FollowSets000.FOLLOW_rulePatternExpCS_in_ruleShadowPartCS5636);
                     lv_ownedInitExpression_2_2=rulePatternExpCS();
 
                     state._fsp--;
@@ -7224,7 +7224,7 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
                     if ( state.backtracking==0 ) {
 
                       	        if (current==null) {
-                      	            current = createModelElementForParent(grammarAccess.getConstructorPartCSRule());
+                      	            current = createModelElementForParent(grammarAccess.getShadowPartCSRule());
                       	        }
                              		set(
                              			current, 
@@ -7265,7 +7265,7 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
         }
         return current;
     }
-    // $ANTLR end "ruleConstructorPartCS"
+    // $ANTLR end "ruleShadowPartCS"
 
 
     // $ANTLR start "entryRulePatternExpCS"
@@ -11296,7 +11296,7 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleCurlyBracketedClauseCS"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3895:1: ruleCurlyBracketedClauseCS returns [EObject current=null] : ( () otherlv_1= '{' ( ( ( (lv_ownedParts_2_0= ruleConstructorPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleConstructorPartCS ) ) )* )? | ( (lv_value_5_0= ruleStringLiteral ) ) ) otherlv_6= '}' ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3895:1: ruleCurlyBracketedClauseCS returns [EObject current=null] : ( () otherlv_1= '{' ( ( ( (lv_ownedParts_2_0= ruleShadowPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleShadowPartCS ) ) )* )? | ( (lv_value_5_0= ruleStringLiteral ) ) ) otherlv_6= '}' ) ;
     public final EObject ruleCurlyBracketedClauseCS() throws RecognitionException {
         EObject current = null;
 
@@ -11313,11 +11313,11 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3898:28: ( ( () otherlv_1= '{' ( ( ( (lv_ownedParts_2_0= ruleConstructorPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleConstructorPartCS ) ) )* )? | ( (lv_value_5_0= ruleStringLiteral ) ) ) otherlv_6= '}' ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3899:1: ( () otherlv_1= '{' ( ( ( (lv_ownedParts_2_0= ruleConstructorPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleConstructorPartCS ) ) )* )? | ( (lv_value_5_0= ruleStringLiteral ) ) ) otherlv_6= '}' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3898:28: ( ( () otherlv_1= '{' ( ( ( (lv_ownedParts_2_0= ruleShadowPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleShadowPartCS ) ) )* )? | ( (lv_value_5_0= ruleStringLiteral ) ) ) otherlv_6= '}' ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3899:1: ( () otherlv_1= '{' ( ( ( (lv_ownedParts_2_0= ruleShadowPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleShadowPartCS ) ) )* )? | ( (lv_value_5_0= ruleStringLiteral ) ) ) otherlv_6= '}' )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3899:1: ( () otherlv_1= '{' ( ( ( (lv_ownedParts_2_0= ruleConstructorPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleConstructorPartCS ) ) )* )? | ( (lv_value_5_0= ruleStringLiteral ) ) ) otherlv_6= '}' )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3899:2: () otherlv_1= '{' ( ( ( (lv_ownedParts_2_0= ruleConstructorPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleConstructorPartCS ) ) )* )? | ( (lv_value_5_0= ruleStringLiteral ) ) ) otherlv_6= '}'
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3899:1: ( () otherlv_1= '{' ( ( ( (lv_ownedParts_2_0= ruleShadowPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleShadowPartCS ) ) )* )? | ( (lv_value_5_0= ruleStringLiteral ) ) ) otherlv_6= '}' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3899:2: () otherlv_1= '{' ( ( ( (lv_ownedParts_2_0= ruleShadowPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleShadowPartCS ) ) )* )? | ( (lv_value_5_0= ruleStringLiteral ) ) ) otherlv_6= '}'
             {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3899:2: ()
             // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3900:2: 
@@ -11343,7 +11343,7 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
                   	newLeafNode(otherlv_1, grammarAccess.getCurlyBracketedClauseCSAccess().getLeftCurlyBracketKeyword_1());
                   
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3912:1: ( ( ( (lv_ownedParts_2_0= ruleConstructorPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleConstructorPartCS ) ) )* )? | ( (lv_value_5_0= ruleStringLiteral ) ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3912:1: ( ( ( (lv_ownedParts_2_0= ruleShadowPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleShadowPartCS ) ) )* )? | ( (lv_value_5_0= ruleStringLiteral ) ) )
             int alt70=2;
             int LA70_0 = input.LA(1);
 
@@ -11362,9 +11362,9 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
             }
             switch (alt70) {
                 case 1 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3912:2: ( ( (lv_ownedParts_2_0= ruleConstructorPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleConstructorPartCS ) ) )* )?
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3912:2: ( ( (lv_ownedParts_2_0= ruleShadowPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleShadowPartCS ) ) )* )?
                     {
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3912:2: ( ( (lv_ownedParts_2_0= ruleConstructorPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleConstructorPartCS ) ) )* )?
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3912:2: ( ( (lv_ownedParts_2_0= ruleShadowPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleShadowPartCS ) ) )* )?
                     int alt69=2;
                     int LA69_0 = input.LA(1);
 
@@ -11373,21 +11373,21 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
                     }
                     switch (alt69) {
                         case 1 :
-                            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3912:3: ( (lv_ownedParts_2_0= ruleConstructorPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleConstructorPartCS ) ) )*
+                            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3912:3: ( (lv_ownedParts_2_0= ruleShadowPartCS ) ) (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleShadowPartCS ) ) )*
                             {
-                            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3912:3: ( (lv_ownedParts_2_0= ruleConstructorPartCS ) )
-                            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3913:1: (lv_ownedParts_2_0= ruleConstructorPartCS )
+                            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3912:3: ( (lv_ownedParts_2_0= ruleShadowPartCS ) )
+                            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3913:1: (lv_ownedParts_2_0= ruleShadowPartCS )
                             {
-                            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3913:1: (lv_ownedParts_2_0= ruleConstructorPartCS )
-                            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3914:3: lv_ownedParts_2_0= ruleConstructorPartCS
+                            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3913:1: (lv_ownedParts_2_0= ruleShadowPartCS )
+                            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3914:3: lv_ownedParts_2_0= ruleShadowPartCS
                             {
                             if ( state.backtracking==0 ) {
                                
-                              	        newCompositeNode(grammarAccess.getCurlyBracketedClauseCSAccess().getOwnedPartsConstructorPartCSParserRuleCall_2_0_0_0()); 
+                              	        newCompositeNode(grammarAccess.getCurlyBracketedClauseCSAccess().getOwnedPartsShadowPartCSParserRuleCall_2_0_0_0()); 
                               	    
                             }
-                            pushFollow(FollowSets000.FOLLOW_ruleConstructorPartCS_in_ruleCurlyBracketedClauseCS8928);
-                            lv_ownedParts_2_0=ruleConstructorPartCS();
+                            pushFollow(FollowSets000.FOLLOW_ruleShadowPartCS_in_ruleCurlyBracketedClauseCS8928);
+                            lv_ownedParts_2_0=ruleShadowPartCS();
 
                             state._fsp--;
                             if (state.failed) return current;
@@ -11400,7 +11400,7 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
                                      			current, 
                                      			"ownedParts",
                                       		lv_ownedParts_2_0, 
-                                      		"ConstructorPartCS");
+                                      		"ShadowPartCS");
                               	        afterParserOrEnumRuleCall();
                               	    
                             }
@@ -11410,7 +11410,7 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
 
                             }
 
-                            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3930:2: (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleConstructorPartCS ) ) )*
+                            // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3930:2: (otherlv_3= ',' ( (lv_ownedParts_4_0= ruleShadowPartCS ) ) )*
                             loop68:
                             do {
                                 int alt68=2;
@@ -11423,7 +11423,7 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
 
                                 switch (alt68) {
                             	case 1 :
-                            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3930:4: otherlv_3= ',' ( (lv_ownedParts_4_0= ruleConstructorPartCS ) )
+                            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3930:4: otherlv_3= ',' ( (lv_ownedParts_4_0= ruleShadowPartCS ) )
                             	    {
                             	    otherlv_3=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleCurlyBracketedClauseCS8941); if (state.failed) return current;
                             	    if ( state.backtracking==0 ) {
@@ -11431,19 +11431,19 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
                             	          	newLeafNode(otherlv_3, grammarAccess.getCurlyBracketedClauseCSAccess().getCommaKeyword_2_0_1_0());
                             	          
                             	    }
-                            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3934:1: ( (lv_ownedParts_4_0= ruleConstructorPartCS ) )
-                            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3935:1: (lv_ownedParts_4_0= ruleConstructorPartCS )
+                            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3934:1: ( (lv_ownedParts_4_0= ruleShadowPartCS ) )
+                            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3935:1: (lv_ownedParts_4_0= ruleShadowPartCS )
                             	    {
-                            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3935:1: (lv_ownedParts_4_0= ruleConstructorPartCS )
-                            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3936:3: lv_ownedParts_4_0= ruleConstructorPartCS
+                            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3935:1: (lv_ownedParts_4_0= ruleShadowPartCS )
+                            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcorebase/src-gen/org/eclipse/qvtd/xtext/qvtcorebase/parser/antlr/internal/InternalQVTcoreBase.g:3936:3: lv_ownedParts_4_0= ruleShadowPartCS
                             	    {
                             	    if ( state.backtracking==0 ) {
                             	       
-                            	      	        newCompositeNode(grammarAccess.getCurlyBracketedClauseCSAccess().getOwnedPartsConstructorPartCSParserRuleCall_2_0_1_1_0()); 
+                            	      	        newCompositeNode(grammarAccess.getCurlyBracketedClauseCSAccess().getOwnedPartsShadowPartCSParserRuleCall_2_0_1_1_0()); 
                             	      	    
                             	    }
-                            	    pushFollow(FollowSets000.FOLLOW_ruleConstructorPartCS_in_ruleCurlyBracketedClauseCS8962);
-                            	    lv_ownedParts_4_0=ruleConstructorPartCS();
+                            	    pushFollow(FollowSets000.FOLLOW_ruleShadowPartCS_in_ruleCurlyBracketedClauseCS8962);
+                            	    lv_ownedParts_4_0=ruleShadowPartCS();
 
                             	    state._fsp--;
                             	    if (state.failed) return current;
@@ -11456,7 +11456,7 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
                             	             			current, 
                             	             			"ownedParts",
                             	              		lv_ownedParts_4_0, 
-                            	              		"ConstructorPartCS");
+                            	              		"ShadowPartCS");
                             	      	        afterParserOrEnumRuleCall();
                             	      	    
                             	    }
@@ -18577,36 +18577,21 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
     static final String DFA43_specialS =
         "\20\uffff}>";
     static final String[] DFA43_transitionS = {
-            "\1\2\1\3\2\1\14\uffff\1\7\1\16\1\1\1\uffff\1\17\4\uffff\1\13"+
-            "\1\4\1\5\1\6\1\10\1\11\1\12\1\14\1\15\3\1\20\uffff\16\1\2\uffff"+
-            "\5\1\5\uffff\1\1\4\uffff\2\1",
+            "\1\2\1\3\2\1\14\uffff\1\7\1\16\1\1\1\uffff\1\17\4\uffff\1\13\1\4\1\5\1\6\1\10\1\11\1\12\1\14\1\15\3\1\20\uffff\16\1\2\uffff\5\1\5\uffff\1\1\4\uffff\2\1",
             "",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\16\uffff\1\1\6\uffff\1\1\1\uffff\1\1",
             ""
     };
 
@@ -18656,36 +18641,21 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
     static final String DFA46_specialS =
         "\20\uffff}>";
     static final String[] DFA46_transitionS = {
-            "\1\2\1\3\2\1\14\uffff\1\7\1\16\1\1\1\uffff\1\17\4\uffff\1\13"+
-            "\1\4\1\5\1\6\1\10\1\11\1\12\1\14\1\15\3\1\20\uffff\16\1\2\uffff"+
-            "\5\1\5\uffff\1\1\4\uffff\2\1",
+            "\1\2\1\3\2\1\14\uffff\1\7\1\16\1\1\1\uffff\1\17\4\uffff\1\13\1\4\1\5\1\6\1\10\1\11\1\12\1\14\1\15\3\1\20\uffff\16\1\2\uffff\5\1\5\uffff\1\1\4\uffff\2\1",
             "",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff"+
-            "\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\2\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1",
             ""
     };
 
@@ -18735,8 +18705,7 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
     static final String DFA57_specialS =
         "\26\uffff\1\0\1\1\1\2\1\3\1\4\2\uffff}>";
     static final String[] DFA57_transitionS = {
-            "\2\1\16\uffff\2\1\7\uffff\11\1\23\uffff\11\16\1\26\1\27\1\30"+
-            "\1\31\1\32",
+            "\2\1\16\uffff\2\1\7\uffff\11\1\23\uffff\11\16\1\26\1\27\1\30\1\31\1\32",
             "",
             "",
             "",
@@ -18899,8 +18868,7 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
     static final String DFA60_specialS =
         "\1\uffff\1\0\1\1\47\uffff}>";
     static final String[] DFA60_transitionS = {
-            "\4\3\14\uffff\3\3\6\uffff\11\3\1\1\1\2\1\3\20\uffff\16\3\2"+
-            "\uffff\5\3\5\uffff\1\3\4\uffff\1\51\1\3",
+            "\4\3\14\uffff\3\3\6\uffff\11\3\1\1\1\2\1\3\20\uffff\16\3\2\uffff\5\3\5\uffff\1\3\4\uffff\1\51\1\3",
             "\1\uffff",
             "\1\uffff",
             "",
@@ -19027,14 +18995,11 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
     static final String DFA63_maxS =
         "\1\131\12\uffff\6\0\30\uffff";
     static final String DFA63_acceptS =
-        "\1\uffff\1\1\1\2\1\3\1\4\14\uffff\1\7\1\10\7\uffff\1\11\14\uffff"+
-        "\1\5\1\6";
+        "\1\uffff\1\1\1\2\1\3\1\4\14\uffff\1\7\1\10\7\uffff\1\11\14\uffff\1\5\1\6";
     static final String DFA63_specialS =
         "\13\uffff\1\0\1\1\1\2\1\3\1\4\1\5\30\uffff}>";
     static final String[] DFA63_transitionS = {
-            "\2\32\2\4\14\uffff\2\32\1\1\6\uffff\11\32\2\uffff\1\4\20\uffff"+
-            "\1\13\10\22\1\14\1\15\1\16\1\17\1\20\2\uffff\1\21\4\4\5\uffff"+
-            "\1\2\5\uffff\1\3",
+            "\2\32\2\4\14\uffff\2\32\1\1\6\uffff\11\32\2\uffff\1\4\20\uffff\1\13\10\22\1\14\1\15\1\16\1\17\1\20\2\uffff\1\21\4\4\5\uffff\1\2\5\uffff\1\3",
             "",
             "",
             "",
@@ -19224,36 +19189,21 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
     static final String DFA87_specialS =
         "\20\uffff}>";
     static final String[] DFA87_transitionS = {
-            "\1\2\1\3\2\1\14\uffff\1\7\1\16\1\1\1\uffff\1\17\4\uffff\1\13"+
-            "\1\4\1\5\1\6\1\10\1\11\1\12\1\14\1\15\3\1\20\uffff\16\1\2\uffff"+
-            "\5\1\5\uffff\1\1\4\uffff\2\1",
+            "\1\2\1\3\2\1\14\uffff\1\7\1\16\1\1\1\uffff\1\17\4\uffff\1\13\1\4\1\5\1\6\1\10\1\11\1\12\1\14\1\15\3\1\20\uffff\16\1\2\uffff\5\1\5\uffff\1\1\4\uffff\2\1",
             "",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff"+
-            "\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff"+
-            "\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff"+
-            "\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff"+
-            "\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff"+
-            "\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff"+
-            "\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff"+
-            "\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff"+
-            "\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff"+
-            "\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff"+
-            "\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff"+
-            "\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff"+
-            "\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff"+
-            "\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\3\uffff\1\1\11\uffff\1\1\1\uffff\21\1\25\uffff\1\1\1\uffff\1\1\3\uffff\1\1",
             ""
     };
 
@@ -19513,12 +19463,12 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
         public static final BitSet FOLLOW_72_in_ruleCollectionPatternCS5448 = new BitSet(new long[]{0x0000000000000030L});
         public static final BitSet FOLLOW_ruleIdentifier_in_ruleCollectionPatternCS5469 = new BitSet(new long[]{0x0000000000080000L});
         public static final BitSet FOLLOW_19_in_ruleCollectionPatternCS5484 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleConstructorPartCS_in_entryRuleConstructorPartCS5520 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleConstructorPartCS5530 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleConstructorPartCS5582 = new BitSet(new long[]{0x0000800000000000L});
-        public static final BitSet FOLLOW_47_in_ruleConstructorPartCS5594 = new BitSet(new long[]{0xFE0001FFE57000F0L,0x0000000003083E7FL});
-        public static final BitSet FOLLOW_ruleExpCS_in_ruleConstructorPartCS5617 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePatternExpCS_in_ruleConstructorPartCS5636 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleShadowPartCS_in_entryRuleShadowPartCS5520 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleShadowPartCS5530 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleShadowPartCS5582 = new BitSet(new long[]{0x0000800000000000L});
+        public static final BitSet FOLLOW_47_in_ruleShadowPartCS5594 = new BitSet(new long[]{0xFE0001FFE57000F0L,0x0000000003083E7FL});
+        public static final BitSet FOLLOW_ruleExpCS_in_ruleShadowPartCS5617 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePatternExpCS_in_ruleShadowPartCS5636 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rulePatternExpCS_in_entryRulePatternExpCS5675 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRulePatternExpCS5685 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleUnrestrictedName_in_rulePatternExpCS5731 = new BitSet(new long[]{0x0000000001000000L});
@@ -19635,9 +19585,9 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
         public static final BitSet FOLLOW_ruleCurlyBracketedClauseCS_in_entryRuleCurlyBracketedClauseCS8846 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleCurlyBracketedClauseCS8856 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_16_in_ruleCurlyBracketedClauseCS8905 = new BitSet(new long[]{0x0000003FE03800B0L});
-        public static final BitSet FOLLOW_ruleConstructorPartCS_in_ruleCurlyBracketedClauseCS8928 = new BitSet(new long[]{0x00000000000A0000L});
+        public static final BitSet FOLLOW_ruleShadowPartCS_in_ruleCurlyBracketedClauseCS8928 = new BitSet(new long[]{0x00000000000A0000L});
         public static final BitSet FOLLOW_17_in_ruleCurlyBracketedClauseCS8941 = new BitSet(new long[]{0x0000003FE0300030L});
-        public static final BitSet FOLLOW_ruleConstructorPartCS_in_ruleCurlyBracketedClauseCS8962 = new BitSet(new long[]{0x00000000000A0000L});
+        public static final BitSet FOLLOW_ruleShadowPartCS_in_ruleCurlyBracketedClauseCS8962 = new BitSet(new long[]{0x00000000000A0000L});
         public static final BitSet FOLLOW_ruleStringLiteral_in_ruleCurlyBracketedClauseCS8993 = new BitSet(new long[]{0x0000000000080000L});
         public static final BitSet FOLLOW_19_in_ruleCurlyBracketedClauseCS9006 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleRoundBracketedClauseCS_in_entryRuleRoundBracketedClauseCS9042 = new BitSet(new long[]{0x0000000000000000L});

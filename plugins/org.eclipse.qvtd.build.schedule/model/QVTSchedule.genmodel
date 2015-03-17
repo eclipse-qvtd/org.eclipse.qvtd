@@ -3,7 +3,7 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvtd.build.schedule/emf-gen" modelPluginID="org.eclipse.qvtd.build.schedule"
     modelName="QVTSchedule" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
-    usedGenPackages="../../org.eclipse.ocl.pivot/model/Pivot.merged.genmodel#//pivot ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel#//qvtbase ../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.genmodel#//qvtcorebase ../../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.genmodel#//qvtimperative"
+    usedGenPackages="../../org.eclipse.ocl.pivot/model/Pivot.genmodel#//pivot ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel#//qvtbase ../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.genmodel#//qvtcorebase ../../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.genmodel#//qvtimperative"
     operationReflection="true" importOrganizing="true">
   <foreignModel>QVTSchedule.ecore</foreignModel>
   <genPackages prefix="QVTschedule" basePackage="org.eclipse.qvtd.build" disposableProviderFactory="true"

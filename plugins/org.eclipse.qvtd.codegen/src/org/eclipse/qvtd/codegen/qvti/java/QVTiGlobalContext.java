@@ -34,7 +34,7 @@ public class QVTiGlobalContext extends JavaGlobalContext<QVTiCodeGenerator>
 	}
 
 	public void addToMiddleProperty(@NonNull Property pivotProperty) {
-		assert !pivotProperty.isImplicit();
+		assert !pivotProperty.isIsImplicit();
 		if (toMiddleProperties == null) {
 			toMiddleProperties = new HashMap<Property, String>();
 		}

@@ -31,7 +31,7 @@ public class QVTimperativeCSLeft2RightVisitor extends AbstractQVTimperativeCSLef
 	@Override
 	protected Type resolvePropertyReturnType(@NonNull NavigationCallExp sourceExp, @NonNull NameExpCS csNameExp, @NonNull Property property) {
 		Property oppositeProperty = property.getOpposite();
-		if (property.isImplicit() && (oppositeProperty != null) && QVTimperativeCS2AS.isMiddle(oppositeProperty.getOwningClass(), csNameExp)) {
+		if (property.isIsImplicit() && (oppositeProperty != null) && QVTimperativeCS2AS.isMiddle(oppositeProperty.getOwningClass(), csNameExp)) {
 			return oppositeProperty.getOwningClass();
 		}
 		else {

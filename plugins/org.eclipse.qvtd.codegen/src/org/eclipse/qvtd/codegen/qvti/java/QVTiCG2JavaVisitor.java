@@ -121,7 +121,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 						Property pProperty = ((PropertyAssignment)pAssignment).getTargetProperty();
 						if (pProperty != null) {
 							Property pOppositeProperty = pProperty.getOpposite();
-							if ((pOppositeProperty != null) && pOppositeProperty.isComposite()) {
+							if ((pOppositeProperty != null) && pOppositeProperty.isIsComposite()) {
 // FIXME must check for null asssignment and correct target								return;
 							}
 						}
@@ -839,7 +839,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 	public @NonNull Boolean visitCGMiddlePropertyAssignment(@NonNull CGMiddlePropertyAssignment cgMiddlePropertyAssignment) {
 		visitCGEcorePropertyAssignment(cgMiddlePropertyAssignment);
 		Property pReferredProperty = ClassUtil.nonNullModel(cgMiddlePropertyAssignment.getReferredProperty());
-		assert !pReferredProperty.isImplicit();
+		assert !pReferredProperty.isIsImplicit();
 		CGValuedElement slotValue = cgMiddlePropertyAssignment.getSlotValue();
 		CGValuedElement initValue = cgMiddlePropertyAssignment.getInitValue();
 		if ((slotValue != null) && (initValue != null)) {
@@ -862,7 +862,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 	@Override
 	public @NonNull Boolean visitCGMiddlePropertyCallExp(@NonNull CGMiddlePropertyCallExp cgPropertyCallExp) {
 		Property pivotProperty = cgPropertyCallExp.getReferredProperty();
-		assert !pivotProperty.isImplicit();
+		assert !pivotProperty.isIsImplicit();
 		CGValuedElement source = getExpression(cgPropertyCallExp.getSource());
 		//
 		if (!js.appendLocalStatements(source)) {

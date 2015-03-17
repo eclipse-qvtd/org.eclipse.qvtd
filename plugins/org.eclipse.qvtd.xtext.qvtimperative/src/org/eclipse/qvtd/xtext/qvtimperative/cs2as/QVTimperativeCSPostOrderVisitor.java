@@ -75,7 +75,7 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 		@Nullable PropertyAssignment propertyAssignment;
 		Property referredProperty = propertyCallExp.getReferredProperty();
 		Property oppositeProperty = referredProperty.getOpposite();
-		if ((oppositeProperty != null) && oppositeProperty.isImplicit() && QVTimperativeCS2AS.isMiddle(referredProperty.getOwningClass(), csConstraint)) {
+		if ((oppositeProperty != null) && oppositeProperty.isIsImplicit() && QVTimperativeCS2AS.isMiddle(referredProperty.getOwningClass(), csConstraint)) {
 			propertyAssignment = PivotUtil.getPivot(MiddlePropertyAssignment.class, csConstraint);
 		}
 		else {
