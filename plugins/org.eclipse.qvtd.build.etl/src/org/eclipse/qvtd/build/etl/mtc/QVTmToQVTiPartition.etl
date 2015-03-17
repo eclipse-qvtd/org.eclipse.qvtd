@@ -377,7 +377,7 @@ rule LRVariable
         	}
 		}
 		ov.name = iv.name;
-		ov.isImplicit = iv.isImplicit();
+		ov.isImplicit = iv.isIsImplicit();
 		if (iv.ownedInit.isDefined()) {
 			ov.ownedInit = emfTool.getECoreUtil().copy(iv.ownedInit);
 		}
@@ -396,7 +396,7 @@ rule LRRealizedVariable
         	}
 		}
 		ov.name = iv.name;
-		ov.isImplicit = iv.isImplicit();
+		ov.isImplicit = iv.isIsImplicit();
 		if (iv.ownedInit.isDefined()) {
 			ov.ownedInit = emfTool.getECoreUtil().copy(iv.ownedInit);
 		}
@@ -419,7 +419,7 @@ rule MVariable
 			var lVar = new QVTp!Variable;
 			lVar.name = iv.name;
 			lVar.~side = "l";
-			lVar.isImplicit = iv.isImplicit();
+			lVar.isImplicit = iv.isIsImplicit();
 			if (iv.ownedInit.isDefined()) {
 				lVar.ownedInit = emfTool.getECoreUtil().copy(iv.ownedInit);
 			}
@@ -431,7 +431,7 @@ rule MVariable
         	var rVar = new QVTp!Variable;
 			rVar.name = iv.name;
 			rVar.~side = "r";		// FIXME use domain name
-			rVar.isImplicit = iv.isImplicit();
+			rVar.isImplicit = iv.isIsImplicit();
 			if (iv.ownedInit.isDefined()) {
 				rVar.ownedInit = emfTool.getECoreUtil().copy(iv.ownedInit);
 			}
@@ -455,7 +455,7 @@ rule MRalizedVariable
 			var lVar = new QVTp!RealizedVariable;
 			lVar.name = iv.name;
 			lVar.~side = "l";	// FIXME use domain name
-			lVar.isImplicit = iv.isImplicit();
+			lVar.isImplicit = iv.isIsImplicit();
 			lVar.type = iv.type;
 			vars.add(lVar);
 		}
@@ -464,7 +464,7 @@ rule MRalizedVariable
 			var rVar = new QVTp!Variable;
 			rVar.name = iv.name;
 			rVar.~side = "r";	// FIXME use domain name
-			rVar.isImplicit = iv.isImplicit();
+			rVar.isImplicit = iv.isIsImplicit();
 			rVar.type = iv.type;
 			vars.add(rVar);
 		}

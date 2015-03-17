@@ -260,7 +260,7 @@ operation ddg!Graph reducedMergedMappingDataDependencies(reduceGraph : ddg!Graph
             derived.addAll(vN.outgoing.select(e | inputVarNodes.includes(e.target)).collect(e | e.target));
 
             for (ie in vN.incoming) {
-                if (ie.referredProperty.getOpposite().isDefined() and not ie.referredProperty.getOpposite().isMany()) {
+                if (ie.referredProperty.getOpposite().isDefined() and not ie.referredProperty.getOpposite().isIsMany()) {
                     derived.add(ie.source);
                 }
             }
@@ -459,7 +459,7 @@ operation ddg!Graph reducedMergedMappingDataDependencies_New() {
             //vN.println("vn ");
             var derived : Sequence = vN.outgoing.select(e | not e.target.isTypeOf(ddg!MappingNode)).collect(e | e.target);
             for (ie in vN.incoming.select(i | not i.source.isTypeOf(ddg!MappingNode))) {
-                if (ie.referredProperty.getOpposite().isDefined() and not ie.referredProperty.getOpposite().isMany()) {
+                if (ie.referredProperty.getOpposite().isDefined() and not ie.referredProperty.getOpposite().isIsMany()) {
                     derived.add(ie.source);
                 }
             }

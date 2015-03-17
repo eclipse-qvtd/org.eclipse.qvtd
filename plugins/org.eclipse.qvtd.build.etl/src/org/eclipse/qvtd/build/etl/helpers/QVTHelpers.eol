@@ -333,7 +333,7 @@ operation QVT!Property isContainer() : Boolean {
  *  cached
  */
 operation hasNavigableOpposite(prop) : Boolean {
-    return prop.opposite.isDefined() and not prop.opposite.isMany(); 
+    return prop.opposite.isDefined() and not prop.opposite.isIsMany(); 
 }
 
 /****o* QVTHelpers/getDataTypeUses

@@ -50,7 +50,7 @@ operation QVTs!MappingAction defineBindings(parentNode :  QVTs!MappingAction) {
 				pd.primaryParameter = fromDP;
 				var sp = pd.secondaryParameter;
 				sp.derivationProperty = d.first();
-				sp.isLoop = d.first().isMany();
+				sp.isLoop = d.first().isIsMany();
 				self.parameterDerivations.add(pd);
 				fromDP = toDP;
 			}
@@ -193,7 +193,7 @@ operation QVTs!DataParameter weight(dest : QVTs!DataParameter) : Sequence {
 	    	//"isImplict".println();
 	        mult = 5;
 	    }
-	    if (property.isMany()) {
+	    if (property.isIsMany()) {
         	var M = property.getType().getUpperValue();
 	        if (M.isUnlimited()) {
 	        	//"M *".println();
