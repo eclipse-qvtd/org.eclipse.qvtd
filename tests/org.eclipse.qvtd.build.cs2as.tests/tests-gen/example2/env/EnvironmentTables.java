@@ -2,9 +2,9 @@
  *************************************************************************
  * This code is 100% auto-generated
  * from:
- *   platform:/resource/org.eclipse.qvtd.build.cs2as.tests/src/org/eclipse/qvtd/build/cs2as/tests/models/example2/EnvExample2.ecore
+ *   /org.eclipse.qvtd.build.cs2as.tests/src/org/eclipse/qvtd/build/cs2as/tests/models/example2/EnvExample2.ecore
  * using:
- *   platform:/resource/org.eclipse.qvtd.build.cs2as.tests/src/org/eclipse/qvtd/build/cs2as/tests/models/example2/EnvExample2.genmodel
+ *   /org.eclipse.qvtd.build.cs2as.tests/src/org/eclipse/qvtd/build/cs2as/tests/models/example2/EnvExample2.genmodel
  *   org.eclipse.ocl.examples.codegen.oclinecore.OCLinEcoreTables
  *
  * Do not edit it.
@@ -64,14 +64,14 @@ public class EnvironmentTables
 	/**
 	 *	Constants used by auto-generated code.
 	 */
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_PRIMid_OclAny = TypeId.ORDERED_SET.getSpecializedId(TypeId.OCL_ANY);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId COL_PRIMid_OclAny = TypeId.COLLECTION.getSpecializedId(TypeId.OCL_ANY);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_TMPLid_ = TypeId.ORDERED_SET.getSpecializedId(IdManager.getTemplateParameterId(0));
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example2/classes/1.0", null, ClassesPackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_env_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example2/env/1.0", null, EnvironmentPackage.eINSTANCE);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Environment = EnvironmentTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_env_s_1_0.getClassId("Environment", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Evaluator = EnvironmentTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_env_s_1_0.getClassId("Evaluator", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_NamedElement = EnvironmentTables.PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("NamedElement", 0);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId BAG_CLSSid_Environment = TypeId.BAG.getSpecializedId(EnvironmentTables.CLSSid_Environment);
-    public static final @NonNull /*@NonInvalid*/ CollectionTypeId COL_CLSSid_NamedElement = TypeId.COLLECTION.getSpecializedId(EnvironmentTables.CLSSid_NamedElement);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_NamedElement = TypeId.ORDERED_SET.getSpecializedId(EnvironmentTables.CLSSid_NamedElement);
     public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_namedElements = EnvironmentTables.CLSSid_Environment.getPropertyId("namedElements");
     public static final @NonNull /*@NonInvalid*/ PropertyId PROPid_parentEnv = EnvironmentTables.CLSSid_Environment.getPropertyId("parentEnv");
@@ -84,7 +84,7 @@ public class EnvironmentTables
 			Init.initStart();
 			EnvironmentTables.init();
 		}
-		public static final @NonNull ExecutorTypeParameter __Environment__addElement_T = new ExecutorTypeParameter(TypeId.T_1, "T");
+		public static final @NonNull ExecutorTypeParameter __Environment__addElements_NE = new ExecutorTypeParameter(TypeId.T_1, "NE");
 
 		static {
 			Init.initEnd();
@@ -171,8 +171,8 @@ public class EnvironmentTables
 		}
 
 		public static final @NonNull ParameterTypes _ = TypeUtil.createParameterTypes();
-		public static final @NonNull ParameterTypes _Environment_addElement_T = TypeUtil.createParameterTypes(EnvironmentTables.TypeParameters.__Environment__addElement_T);
-		public static final @NonNull ParameterTypes _OrderedSet__NamedElement__ = TypeUtil.createParameterTypes(new ExecutorSpecializedType("OrderedSet", ClassesTables.Types._NamedElement));
+		public static final @NonNull ParameterTypes _NamedElement = TypeUtil.createParameterTypes(ClassesTables.Types._NamedElement);
+		public static final @NonNull ParameterTypes _OrderedSet__Environment_addElements_NE__ = TypeUtil.createParameterTypes(new ExecutorSpecializedType("OrderedSet", EnvironmentTables.TypeParameters.__Environment__addElements_NE));
 
 		static {
 			Init.initEnd();
@@ -198,10 +198,10 @@ public class EnvironmentTables
 		public static final @NonNull ExecutorOperation _Env4CG__hasFinalResult = new ExecutorOperation("hasFinalResult", Parameters._, Types._Env4CG,
 			1, TemplateParameters.EMPTY_LIST, null);
 
-		public static final @NonNull ExecutorOperation _Environment__addElement = new ExecutorOperation("addElement", Parameters._Environment_addElement_T, Types._Environment,
-			0, TypeUtil.createTemplateParameters(TypeParameters.__Environment__addElement_T), null);
-		public static final @NonNull ExecutorOperation _Environment__addElements = new ExecutorOperation("addElements", Parameters._OrderedSet__NamedElement__, Types._Environment,
-			1, TemplateParameters.EMPTY_LIST, null);
+		public static final @NonNull ExecutorOperation _Environment__addElement = new ExecutorOperation("addElement", Parameters._NamedElement, Types._Environment,
+			0, TemplateParameters.EMPTY_LIST, null);
+		public static final @NonNull ExecutorOperation _Environment__addElements = new ExecutorOperation("addElements", Parameters._OrderedSet__Environment_addElements_NE__, Types._Environment,
+			1, TypeUtil.createTemplateParameters(TypeParameters.__Environment__addElements_NE), null);
 
 		static {
 			Init.initEnd();
@@ -323,8 +323,8 @@ public class EnvironmentTables
 		};
 
 		private static final @NonNull ExecutorOperation[] _Environment__Environment = {
-			EnvironmentTables.Operations._Environment__addElement /* addElement(T)(T[?]) */,
-			EnvironmentTables.Operations._Environment__addElements /* addElements(OrderedSet(classes::NamedElement)) */
+			EnvironmentTables.Operations._Environment__addElement /* addElement(NamedElement[?]) */,
+			EnvironmentTables.Operations._Environment__addElements /* addElements(NE)(OrderedSet(NE)) */
 		};
 		private static final @NonNull ExecutorOperation[] _Environment__Env4CG = {
 			EnvironmentTables.Operations._Env4CG__getEvaluator /* getEvaluator() */,

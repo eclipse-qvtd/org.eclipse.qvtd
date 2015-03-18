@@ -54,7 +54,7 @@ import example2.classes.ClassesPackage;
 import example2.classes.NamedElement;
 import example2.classes.Package;
 import example2.classes.Root;
-import example2.classes.util.AutoClassesLookupVisitor;
+import example2.classes.util.ClassesLookupVisitor;
 import example2.classes.util.Visitable;
 import example2.classescs.ClassCS;
 import example2.classescs.ClassescsPackage;
@@ -446,7 +446,7 @@ public class classescs2as_qvtp_qvtias_Manual extends AbstractTransformationExecu
             final @Nullable /*@Thrown*/ PathElementCS first = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_pathSeq_3);
             
             Environment lookupEnv = new LookupEnvironment(evaluator, first.getName());
-            AutoClassesLookupVisitor lVisitor = new AutoClassesLookupVisitor(lookupEnv);
+            ClassesLookupVisitor lVisitor = new ClassesLookupVisitor(lookupEnv);
             final @NonNull /*@Thrown*/ Package lookupPackage = (example2.classes.Package) visitable.accept(lVisitor).getNamedElements().get(0);
             symbol_0 = lookupPackage;
         }
@@ -461,7 +461,7 @@ public class classescs2as_qvtp_qvtias_Manual extends AbstractTransformationExecu
             final @Nullable /*@Thrown*/ PathElementCS last = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_pathSeq_3);
 
             Environment lookupEnv = new LookupEnvironment(evaluator, last.getName());
-            AutoClassesLookupVisitor lVisitor = new AutoClassesLookupVisitor(lookupEnv);
+            ClassesLookupVisitor lVisitor = new ClassesLookupVisitor(lookupEnv);
             final @NonNull /*@Thrown*/ Package lookupPackage_0 = (Package) self_5.accept(lVisitor).getNamedElements().get(0);
             symbol_0 = lookupPackage_0;
         }
@@ -668,7 +668,7 @@ public class classescs2as_qvtp_qvtias_Manual extends AbstractTransformationExecu
                 final @Nullable /*@Thrown*/ PathElementCS first = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_pathSeq_0_3);
                 
                 Environment lookupEnv = new LookupEnvironment(evaluator, first.getName());
-                AutoClassesLookupVisitor lVisitor = new AutoClassesLookupVisitor(lookupEnv);
+                ClassesLookupVisitor lVisitor = new ClassesLookupVisitor(lookupEnv);
                 final @NonNull /*@Thrown*/  example2.classes.Class lookupClass = (example2.classes.Class) oclAsType_0.accept(lVisitor).getNamedElements().get(0);
                 symbol_1 = lookupClass;
             }
@@ -682,7 +682,7 @@ public class classescs2as_qvtp_qvtias_Manual extends AbstractTransformationExecu
                 // final @NonNull /*@Thrown*/ Environment _env_0 = this._env(self_6, null);
                 final @Nullable /*@Thrown*/ PathElementCS last = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_pathSeq_0_3);
                 Environment lookupEnv = new LookupEnvironment(evaluator, last.getName());
-                AutoClassesLookupVisitor lVisitor = new AutoClassesLookupVisitor(lookupEnv);
+                ClassesLookupVisitor lVisitor = new ClassesLookupVisitor(lookupEnv);
                 final @NonNull /*@Thrown*/ example2.classes.Class lookupClass_0 = (example2.classes.Class) self_6.accept(lVisitor).getNamedElements().get(0);
                 symbol_1 = lookupClass_0;
             }

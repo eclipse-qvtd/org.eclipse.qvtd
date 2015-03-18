@@ -9,6 +9,15 @@
 
 package example2.classes.util;
 
+import example2.classes.Class;
+import example2.classes.ClassesPackage;
+import example2.classes.Package;
+import example2.classes.Root;
+import example2.classes.util.AbstractExtendingVisitor;
+import example2.classes.util.Visitable;
+import example2.env.Environment;
+import example2.env.EnvironmentPackage;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -22,14 +31,7 @@ import org.eclipse.ocl.pivot.ids.NsURIPackageId;
 import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
 
-import example2.classes.Class;
-import example2.classes.ClassesPackage;
-import example2.classes.Package;
-import example2.classes.Root;
-import example2.env.Environment;
-import example2.env.EnvironmentPackage;
-
-public class AutoClassesLookupVisitor
+public class AbstractClassesLookupVisitor
 	extends AbstractExtendingVisitor<Environment, Environment>
 {
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
@@ -38,7 +40,7 @@ public class AutoClassesLookupVisitor
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_java_c_s_s_org_eclipse_qvtd_build_cs2as_tests_lookup = IdManager.getRootPackageId("java://org.eclipse.qvtd.build.cs2as.tests.lookup");
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_org_eclipse_ocl_pivot_evaluation = IdManager.getRootPackageId("org.eclipse.ocl.pivot.evaluation");
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_org_eclipse_ocl_pivot_ids = IdManager.getRootPackageId("org.eclipse.ocl.pivot.ids");
-    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_AutoClassesLookupVisitor = PACKid_java_c_s_s_org_eclipse_qvtd_build_cs2as_tests_lookup.getClassId("AutoClassesLookupVisitor", 0);
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_AbstractClassesLookupVisitor = PACKid_java_c_s_s_org_eclipse_qvtd_build_cs2as_tests_lookup.getClassId("AbstractClassesLookupVisitor", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Class = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0.getClassId("Class", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Environment = PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_env_s_1_0.getClassId("Environment", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_Evaluator = PACKid_org_eclipse_ocl_pivot_evaluation.getClassId("Evaluator", 0);
@@ -53,7 +55,7 @@ public class AutoClassesLookupVisitor
     protected final @NonNull /*@Thrown*/ Evaluator evaluator;
     protected final @NonNull /*@Thrown*/ IdResolver idResolver;
     
-    public AutoClassesLookupVisitor(@NonNull Environment context) {
+    public AbstractClassesLookupVisitor(@NonNull Environment context) {
         super(context);
         this.evaluator = context.getEvaluator();
         this.idResolver = evaluator.getIdResolver();
@@ -83,7 +85,7 @@ public class AutoClassesLookupVisitor
     
     @Override
     public @Nullable Environment visiting(@NonNull Visitable visitable) {
-        throw new UnsupportedOperationException("AutoClassesLookupVisitor is not supported by \"" + getClass().getName() + "\"");
+        throw new UnsupportedOperationException("AbstractClassesLookupVisitor is not supported by \"" + getClass().getName() + "\"");
     }
     
     /**
@@ -101,12 +103,12 @@ public class AutoClassesLookupVisitor
      */
     @Override
     public @Nullable /*@NonInvalid*/ Environment visitPackage(final @NonNull /*@NonInvalid*/ Package element) {
-        final @Nullable /*@Thrown*/ EList<Class> ownedClasses = element.getOwnedClasses();
+        final @Nullable /*@Thrown*/ List<Class> ownedClasses = element.getOwnedClasses();
         assert ownedClasses != null;
-        final @NonNull /*@Thrown*/ Environment addElements = context.addElements(ownedClasses);
-        final @Nullable /*@Thrown*/ EList<Package> ownedPackages = element.getOwnedPackages();
+        final @NonNull /*@Thrown*/ Environment addElements = context.addElements((EList)ownedClasses);
+        final @Nullable /*@Thrown*/ List<Package> ownedPackages = element.getOwnedPackages();
         assert ownedPackages != null;
-        final @NonNull /*@Thrown*/ Environment inner = addElements.addElements(ownedPackages);
+        final @NonNull /*@Thrown*/ Environment inner = addElements.addElements((EList)ownedPackages);
         final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
         @Nullable /*@Thrown*/ Environment symbol_0;
         if (hasFinalResult) {
@@ -133,9 +135,9 @@ public class AutoClassesLookupVisitor
      */
     @Override
     public @Nullable /*@NonInvalid*/ Environment visitRoot(final @NonNull /*@NonInvalid*/ Root element_0) {
-        final @Nullable /*@Thrown*/ EList<Package> ownedPackages = element_0.getOwnedPackages();
+        final @Nullable /*@Thrown*/ List<Package> ownedPackages = element_0.getOwnedPackages();
         assert ownedPackages != null;
-        final @NonNull /*@Thrown*/ Environment inner = context.addElements(ownedPackages);
+        final @NonNull /*@Thrown*/ Environment inner = context.addElements((EList)ownedPackages);
         final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
         @Nullable /*@Thrown*/ Environment symbol_0;
         if (hasFinalResult) {
