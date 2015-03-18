@@ -4,8 +4,8 @@ pre {
 	-- var helper = new Native('oclDependencyAnalysis.qvt.OCL2QVTiHelper');
 }
 
-rule ConstructorExp2EClass
-	transform s : OCL!ConstructorExp
+rule ShadowExp2EClass
+	transform s : OCL!ShadowExp
 	to t : Ecore!EClass {
 	
 	var fromType = s.getExpressionContextType();

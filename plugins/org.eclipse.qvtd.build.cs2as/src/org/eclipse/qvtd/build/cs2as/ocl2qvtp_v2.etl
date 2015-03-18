@@ -28,14 +28,14 @@ pre {
 	typedModel.name = LEFT;
 	typedModel.usedPackage.add(
 		OCL!Import.all.importedNamespace.ownedPackages.flatten().selectOne(x 
-				| x.name = OCL!ConstructorExp.all.first().getExpressionContextType().owningPackage.name));
+				| x.name = OCL!ShadowExp.all.first().getExpressionContextType().owningPackage.name));
 	qvtiTransf.modelParameter.add(typedModel);
 	
 	typedModel = new QVTi!TypedModel;
 	typedModel.name = RIGHT;
 	typedModel.usedPackage.add(
 		OCL!Import.all.importedNamespace.ownedPackages.flatten().selectOne(x 
-				| x.name = OCL!ConstructorExp.all.first().type.owningPackage.name));
+				| x.name = OCL!ShadowExp.all.first().type.owningPackage.name));
 	qvtiTransf.modelParameter.add(typedModel);
 		
 	qvtiPackage.ownedClasses.add(qvtiTransf);
@@ -51,8 +51,8 @@ rule Import2Import
 	t.importedNamespace = s.importedNamespace;
 }
 
-rule ConstructorExp2CreationMapping
-	transform s : OCL!ConstructorExp
+rule ShadowExp2CreationMapping
+	transform s : OCL!ShadowExp
 	to t : QVTi!Mapping {
 	
 	guard {
@@ -93,8 +93,8 @@ rule ConstructorExp2CreationMapping
 	t.bottomPattern = bottomPattern;
 }
 
-rule ConstructorPart2UpdateMapping
-	transform s : OCL!ConstructorPart
+rule ShadowPart2UpdateMapping
+	transform s : OCL!ShadowPart
 	to t : QVTi!Mapping {
 	
 	guard {
@@ -104,13 +104,13 @@ rule ConstructorPart2UpdateMapping
 		return s.closure(x|x.eContainer()).contains(LEFTCS_PACKAGE); 
 	}
 		
-	var constructorExp = s.eContainer();
+	var shadowExp = s.eContainer();
 	var refProp = s.referredProperty;
 		
 	t.name = s.getUpdateMappingName();
 
-	var rightDomain = constructorExp.createUpdateMapping_RightDomain();
-	var leftDomain = constructorExp.createUpdateMapping_LeftDomain();
+	var rightDomain = shadowExp.createUpdateMapping_RightDomain();
+	var leftDomain = shadowExp.createUpdateMapping_LeftDomain();
 	
 	t.domain.add(leftDomain);
 	t.domain.add(rightDomain);	
@@ -131,10 +131,10 @@ rule ConstructorPart2UpdateMapping
 	var asTypeOpCallExp = new QVTi!OperationCallExp;
 	asTypeOpCallExp.ownedSource = astPropCallExp;  
 	asTypeOpCallExp.referredOperation = getOclAnyOclAsTypeOp();
-	asTypeOpCallExp.type = constructorExp.type; // The created type by the owning constructorExp
+	asTypeOpCallExp.type = shadowExp.type; // The created type by the owning shadowExp
 	
 	var argTypeExp = new QVTi!TypeExp;
-	argTypeExp.referredType =  constructorExp.type;
+	argTypeExp.referredType =  shadowExp.type;
 	argTypeExp.type = getOclMetaClass();
 	
 	asTypeOpCallExp.ownedArguments.add(argTypeExp);
@@ -149,13 +149,13 @@ rule ConstructorPart2UpdateMapping
 	var bottomPattern = new QVTi!BottomPattern;
 	bottomPattern.assignment.add(pAssignment);
 	
-	constructorExp.updateGuardPattern(guardPattern, leftVar);
+	shadowExp.updateGuardPattern(guardPattern, leftVar);
 	
 	t.guardPattern = guardPattern;
 	t.bottomPattern = bottomPattern;
 }
 
-operation OCL!ConstructorExp createCreationMapping_LeftDomain ( ) : QVTi!CoreDomain {
+operation OCL!ShadowExp createCreationMapping_LeftDomain ( ) : QVTi!CoreDomain {
 	var contextType = self.getExpressionContextType();
 	var domain = new QVTi!CoreDomain;	
 	domain.typedModel = QVTi!TypedModel.all.selectOne(x | x.name= LEFT);
@@ -176,7 +176,7 @@ operation OCL!ConstructorExp createCreationMapping_LeftDomain ( ) : QVTi!CoreDom
 }
 
 
-operation OCL!ConstructorExp createCreationMapping_RightDomain () : QVTi!CoreDomain {
+operation OCL!ShadowExp createCreationMapping_RightDomain () : QVTi!CoreDomain {
 	var constructedType = self.type;
 		
 	var domain = new QVTi!CoreDomain;
@@ -197,13 +197,13 @@ operation OCL!ConstructorExp createCreationMapping_RightDomain () : QVTi!CoreDom
 	return domain;
 }
 
-operation OCL!ConstructorExp createUpdateMapping_LeftDomain ( ) : QVTi!CoreDomain {
+operation OCL!ShadowExp createUpdateMapping_LeftDomain ( ) : QVTi!CoreDomain {
 	// It's exactly the same domain as we have for the creation mappings
 	return self.createCreationMapping_LeftDomain();
 }
 
 
-operation OCL!ConstructorExp createUpdateMapping_RightDomain () : QVTi!CoreDomain {
+operation OCL!ShadowExp createUpdateMapping_RightDomain () : QVTi!CoreDomain {
 	var constructedType = self.type;
 		
 	var domain = new QVTi!CoreDomain;
@@ -218,7 +218,7 @@ operation OCL!ConstructorExp createUpdateMapping_RightDomain () : QVTi!CoreDomai
 	return domain;
 }
 
-operation OCL!ConstructorPart createPropertyAssignmentValue(leftVar : QVTi!Variable) : OCL!OCLExpression {
+operation OCL!ShadowPart createPropertyAssignmentValue(leftVar : QVTi!Variable) : OCL!OCLExpression {
 	-- FIXME what happens with synthetised types ????
 	var initExp = self.ownedInit;
 	var eUtil = emfTool.getEcoreUtil();
@@ -264,9 +264,9 @@ operation OCL!OCLExpression doReplacements(leftVar : QVTi!Variable) : OCL!OCLExp
 	}
 	return result;
 }
--- Function which takes into account that the constructor is embedded inside of an IfExp
+-- Function which takes into account that the shadow is embedded inside of an IfExp
 -- so that the guard pattern have the proper guards associated to the the IfExp
-operation OCL!ConstructorExp updateGuardPattern(guardPattern : QVTi!GuardPattern, leftVar : QVTi!Variable) {
+operation OCL!ShadowExp updateGuardPattern(guardPattern : QVTi!GuardPattern, leftVar : QVTi!Variable) {
 
 	var container = self.eContainer();
 	
@@ -320,7 +320,7 @@ operation OCL!Element isAstOpCallExp() : Boolean {
 }
 
 
-operation OCL!ConstructorPart getAstCalls() : Collection(OCL!OperationCallExpression) {
+operation OCL!ShadowPart getAstCalls() : Collection(OCL!OperationCallExpression) {
 	  
 	return self.ownedInit.getAllContents().including(self.ownedInit)
 			.select(x | x.isKindOf(OCL!OperationCallExp) and x.referredOperation.name = "ast" );

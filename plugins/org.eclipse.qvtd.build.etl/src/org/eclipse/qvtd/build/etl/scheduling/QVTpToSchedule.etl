@@ -264,7 +264,7 @@ operation QVTp!Type analyseOclContainerCall() : OrderedSet(QVTp!PropertyDatum) {
 	
 	var result =  OrderedSet{};	
 	for (parentClass in self.getContainingTypes()) {
-		for (prop in parentClass.ownedProperties.select(x | x.composite)) {
+		for (prop in parentClass.ownedProperties.select(x | x.isComposite)) {
 			if (self.getAllSuperClassesIncludingSelf().includes(prop.getElementType())) {
 				// FIXME I'm getting non-deterministic QVTs 2 Graphml transformations
 				// when there are references to non-navigable (inexistent) properties
@@ -451,7 +451,7 @@ operation getAllUsedContainerProps() : OrderedSet(QVTp!Property) {
 	var allUsedContainerOpCalls = QVTp!OperationCallExp.all().select(x | x.referredOperation.isOclContainerOp());
 	var allUsedContainerOpCallCtxs = allUsedContainerOpCalls.collect(x | x.ownedSource.type).asOrderedSet();
 	var allUsedContainerOpCallCtxsWithSubs = allUsedContainerOpCallCtxs.collect(x | x.getAllSubClassesIncludingSelf()).flatten();
-	var allContainmentProperties = QVTp!Property.all().select(x | x.composite);
+	var allContainmentProperties = QVTp!Property.all().select(x | x.isComposite);
 
 	var allUsedContainmentProperties = allContainmentProperties.select(x | allUsedContainerOpCallCtxsWithSubs.includes(x.getElementType()));
 
