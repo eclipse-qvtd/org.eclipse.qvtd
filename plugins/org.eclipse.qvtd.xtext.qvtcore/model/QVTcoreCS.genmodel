@@ -13,17 +13,16 @@
     <details key="Derived Visitor Class" value="org.eclipse.qvtd.xtext.qvtcorecs.util.QVTcoreCSVisitor"/>
   </genAnnotations>
   <foreignModel>QVTcoreCS.ecore</foreignModel>
-  <genPackages prefix="QVTcoreCS" basePackage="org.eclipse.qvtd.xtext" resource="XML"
-      disposableProviderFactory="true" contentTypeIdentifier="org.eclipse.qvtd.xtext.qvtcore"
-      fileExtensions="qvtc" ecorePackage="QVTcoreCS.ecore#/">
+  <genPackages prefix="QVTcoreCS" basePackage="org.eclipse.qvtd.xtext" disposableProviderFactory="true"
+      fileExtensions="qvtccs" ecorePackage="QVTcoreCS.ecore#/">
     <genClasses ecoreClass="QVTcoreCS.ecore#//MappingCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//MappingCS/composedMappings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//MappingCS/ownedComposedMappings"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//MappingCS/refines"/>
     </genClasses>
     <genClasses ecoreClass="QVTcoreCS.ecore#//TopLevelCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//TopLevelCS/transformations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//TopLevelCS/queries"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//TopLevelCS/mappings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//TopLevelCS/ownedTransformations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//TopLevelCS/ownedQueries"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTcoreCS.ecore#//TopLevelCS/ownedMappings"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

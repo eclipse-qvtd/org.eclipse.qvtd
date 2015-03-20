@@ -13,34 +13,34 @@
     <details key="Derived Visitor Class" value="org.eclipse.qvtd.xtext.qvtimperativecs.util.QVTimperativeCSVisitor"/>
   </genAnnotations>
   <foreignModel>QVTimperativeCS.ecore</foreignModel>
-  <genPackages prefix="QVTimperativeCS" basePackage="org.eclipse.qvtd.xtext" resource="XML"
-      disposableProviderFactory="true" contentTypeIdentifier="org.eclipse.qvtd.xtext.qvtimperative"
-      fileExtensions="qvti" ecorePackage="QVTimperativeCS.ecore#/">
+  <genPackages prefix="QVTimperativeCS" basePackage="org.eclipse.qvtd.xtext" disposableProviderFactory="true"
+      fileExtensions="qvtics" ecorePackage="QVTimperativeCS.ecore#/">
     <genClasses ecoreClass="QVTimperativeCS.ecore#//MappingCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCS/mappingSequence"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCS/ownedMappingSequence"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//MappingCallBindingCS">
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCallBindingCS/mappingCall"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCallBindingCS/owningMappingCall"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCallBindingCS/referredVariable"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCallBindingCS/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCallBindingCS/ownedValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QVTimperativeCS.ecore#//MappingCallBindingCS/isPolled"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//MappingCallCS">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCallCS/referredMapping"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCallCS/bindings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingCallCS/ownedBindings"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//MappingLoopCS">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingLoopCS/ownedIterator"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingLoopCS/inExpression"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingLoopCS/mappingSequence"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingLoopCS/ownedInExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingLoopCS/ownedMappingSequence"/>
     </genClasses>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//MappingSequenceCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingSequenceCS/mappingStatements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//MappingSequenceCS/ownedMappingStatements"/>
     </genClasses>
     <genClasses image="false" ecoreClass="QVTimperativeCS.ecore#//MappingStatementCS"/>
     <genClasses ecoreClass="QVTimperativeCS.ecore#//TopLevelCS">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//TopLevelCS/transformations"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//TopLevelCS/queries"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//TopLevelCS/mappings"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//TopLevelCS/ownedTransformations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//TopLevelCS/ownedQueries"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QVTimperativeCS.ecore#//TopLevelCS/ownedMappings"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

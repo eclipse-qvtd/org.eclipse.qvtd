@@ -62,7 +62,7 @@ public interface QVTimperativeCSPackage extends EPackage {
 	 * The package content type ID.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	String eCONTENT_TYPE = "org.eclipse.qvtd.xtext.qvtimperative";
 

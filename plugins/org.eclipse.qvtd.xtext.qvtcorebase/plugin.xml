@@ -15,13 +15,4 @@
             genModel="model/QVTcoreBaseCS.genmodel"/>
    </extension>
 
-   <extension point="org.eclipse.emf.ecore.extension_parser">
-      <!-- @generated QVTcoreBaseCS NOT-->
-      <!--parser
-            type="qvtcb"
-            class="org.eclipse.qvtd.xtext.qvtcorebasecs.util.QVTcoreBaseCSResourceFactoryImpl"/-->
-      <parser
-            type="qvtcbcs"
-            class="org.eclipse.qvtd.xtext.qvtcorebasecs.util.QVTcoreBaseCSResourceFactoryImpl"/>
-   </extension>
 </plugin>

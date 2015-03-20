@@ -13,37 +13,8 @@
             genModel="model/QVTrelationCS.genmodel"/>
    </extension>
 
-   <extension point="org.eclipse.emf.ecore.content_parser">
-      <!-- @generated QVTrelationCS -->
-      <parser
-            contentTypeIdentifier="org.eclipse.qvtd.xtext.qvtrelation"
-            class="org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSResourceFactoryImpl"/>
-   </extension>
-
-   <extension point="org.eclipse.core.contenttype.contentTypes">
-      <!-- @generated QVTrelationCS -->
-      <content-type
-            base-type="org.eclipse.core.runtime.xml"
-            file-extensions="qvtr"
-            id="org.eclipse.qvtd.xtext.qvtrelation"
-            name="%_UI_QVTrelationCS_content_type"
-            priority="normal">
-         <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
-            <parameter name="namespace" value="http://www.eclipse.org/qvt/2015/QVTrelationCS"/>
-         </describer>
-      </content-type>
-   </extension>
-
-   <extension point="org.eclipse.emf.ecore.extension_parser">
-      <!-- @generated QVTrelationCS NOT-->
-      <!--parser
-            type="qvtr"
-            class="org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSResourceFactoryImpl"/-->
-      <parser
-            type="qvtrcs"
-            class="org.eclipse.qvtd.xtext.qvtrelationcs.util.QVTrelationCSResourceFactoryImpl"/>
-   </extension>
    <extension point="org.eclipse.team.core.fileTypes">
       <fileTypes extension="qvtr" type="text" />
+      <fileTypes extension="qvtrcs" type="text" />
    </extension>
 </plugin>
