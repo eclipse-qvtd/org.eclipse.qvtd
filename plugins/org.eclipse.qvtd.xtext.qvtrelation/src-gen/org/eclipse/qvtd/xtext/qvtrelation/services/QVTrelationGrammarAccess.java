@@ -2208,7 +2208,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 
 	/// ** <<<This is a join point for derived grammars - replace with a more disciplined grammar extensibility>>> * /
 	//EssentialOCLUnreservedName returns ecore::EString:
-	//	UnrestrictedName | CollectionTypeIdentifier | PrimitiveTypeIdentifier | "Tuple";
+	//	UnrestrictedName | CollectionTypeIdentifier | PrimitiveTypeIdentifier | "Map" | "Tuple";
 	public EssentialOCLGrammarAccess.EssentialOCLUnreservedNameElements getEssentialOCLUnreservedNameAccess() {
 		return gaEssentialOCL.getEssentialOCLUnreservedNameAccess();
 	}
@@ -2290,6 +2290,16 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getCollectionTypeCSRule() {
 		return getCollectionTypeCSAccess().getRule();
+	}
+
+	//MapTypeCS:
+	//	name="Map" ("(" ownedKeyType=TypeExpCS "," ownedValueType=TypeExpCS ")")?;
+	public EssentialOCLGrammarAccess.MapTypeCSElements getMapTypeCSAccess() {
+		return gaEssentialOCL.getMapTypeCSAccess();
+	}
+	
+	public ParserRule getMapTypeCSRule() {
+		return getMapTypeCSAccess().getRule();
 	}
 
 	//TupleTypeCS returns base::TupleTypeCS:
@@ -2375,6 +2385,26 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getLambdaLiteralExpCSRule() {
 		return getLambdaLiteralExpCSAccess().getRule();
+	}
+
+	//MapLiteralExpCS:
+	//	ownedType=MapTypeCS "{" (ownedParts+=MapLiteralPartCS ("," ownedParts+=MapLiteralPartCS)*)? "}";
+	public EssentialOCLGrammarAccess.MapLiteralExpCSElements getMapLiteralExpCSAccess() {
+		return gaEssentialOCL.getMapLiteralExpCSAccess();
+	}
+	
+	public ParserRule getMapLiteralExpCSRule() {
+		return getMapLiteralExpCSAccess().getRule();
+	}
+
+	//MapLiteralPartCS:
+	//	ownedKey=ExpCS "<-" ownedValue=ExpCS;
+	public EssentialOCLGrammarAccess.MapLiteralPartCSElements getMapLiteralPartCSAccess() {
+		return gaEssentialOCL.getMapLiteralPartCSAccess();
+	}
+	
+	public ParserRule getMapLiteralPartCSRule() {
+		return getMapLiteralPartCSAccess().getRule();
 	}
 
 	//PrimitiveLiteralExpCS:
@@ -2469,7 +2499,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TypeLiteralCS returns base::TypedRefCS:
-	//	PrimitiveTypeCS | CollectionTypeCS | TupleTypeCS;
+	//	PrimitiveTypeCS | CollectionTypeCS | MapTypeCS | TupleTypeCS;
 	public EssentialOCLGrammarAccess.TypeLiteralCSElements getTypeLiteralCSAccess() {
 		return gaEssentialOCL.getTypeLiteralCSAccess();
 	}
@@ -2564,8 +2594,8 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 
 	/// * A primary expression identifies the basic expressions from which more complex expressions may be constructed. * /
 	//PrimaryExpCS returns ExpCS:
-	//	NestedExpCS | IfExpCS | SelfExpCS | PrimitiveLiteralExpCS | TupleLiteralExpCS | CollectionLiteralExpCS |
-	//	LambdaLiteralExpCS | TypeLiteralExpCS | NameExpCS;
+	//	NestedExpCS | IfExpCS | SelfExpCS | PrimitiveLiteralExpCS | TupleLiteralExpCS | MapLiteralExpCS |
+	//	CollectionLiteralExpCS | LambdaLiteralExpCS | TypeLiteralExpCS | NameExpCS;
 	public EssentialOCLGrammarAccess.PrimaryExpCSElements getPrimaryExpCSAccess() {
 		return gaEssentialOCL.getPrimaryExpCSAccess();
 	}
