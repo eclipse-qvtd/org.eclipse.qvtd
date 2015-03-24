@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<qvtschedule:Schedule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvtschedule="http://www.eclipse.org/qvt/0.2/QVTschedule/">
+<qvtschedule:Schedule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvtschedule="http://www.eclipse.org/qvt/2015/Schedule">
   <datums xsi:type="qvtschedule:ClassDatum" sub="//@datums.1 //@datums.6 //@datums.23">
     <type href="SimpleUML.ecore.oclas#T.simpleuml.UMLModelElement"/>
     <propertyDatums sub="//@datums.1/@propertyDatums.0 //@datums.6/@propertyDatums.0 //@datums.23/@propertyDatums.3">

@@ -33,11 +33,11 @@ import org.eclipse.ocl.pivot.PivotPackage;
 import org.eclipse.ocl.pivot.internal.resource.OCLASResourceFactory;
 import org.eclipse.ocl.pivot.oclstdlib.OCLstdlibPackage;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtcore.QVTcorePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
 
 /**
  * The Class MtcBroker.
@@ -69,10 +69,10 @@ public class MtcBroker {
 	private static final String ECORE_TO_TREE_EOL = "utils/EcoreToContainmentTree.etl";
 	
 	/** The Constant QVTS_MM. */
-	//private static final String QVTS_MM = "platform:/resource/org.eclipse.qvtd.build.schedule/model/QVTSchedule.ecore";
+	//private static final String QVTS_MM = "platform:/resource/org.eclipse.qvtd.pivot.schedule/model/Schedule.ecore";
 	
 	/** The Constant QVTS_URI. */
-	private static final String QVTS_URI = QVTschedulePackage.eNS_URI;
+	private static final String QVTS_URI = SchedulePackage.eNS_URI;
 	
 	/** The Constant OCL_STD_LIB_MODEL_NAME. */
 	private static final String OCL_STD_LIB_MODEL_NAME = "oclStdLib";
@@ -703,7 +703,7 @@ public class MtcBroker {
 			
 		}
 		// Schedule metamodel
-		EPackage p = QVTschedulePackage.eINSTANCE;
+		EPackage p = SchedulePackage.eINSTANCE;
 		externalResourceSet.getPackageRegistry().put(p.getNsURI(), p);
 	}
 

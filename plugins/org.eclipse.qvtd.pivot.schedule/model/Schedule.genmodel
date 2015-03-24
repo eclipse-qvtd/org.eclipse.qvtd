@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.qvtd.pivot.schedule/emf-gen" modelPluginID="org.eclipse.qvtd.pivot.schedule"
+    modelName="QVTSchedule" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
+    usedGenPackages="../../org.eclipse.ocl.pivot/model/Pivot.genmodel#//pivot ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel#//qvtbase ../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.genmodel#//qvtcorebase ../../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.genmodel#//qvtimperative"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>Schedule.ecore</foreignModel>
+  <genPackages prefix="Schedule" basePackage="org.eclipse.qvtd.pivot" disposableProviderFactory="true"
+      fileExtensions="qvts" ecorePackage="Schedule.ecore#/">
+    <genClasses image="false" ecoreClass="Schedule.ecore#//AbstractDatum">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Schedule.ecore#//AbstractDatum/super"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Schedule.ecore#//AbstractDatum/sub"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Schedule.ecore#//AbstractDatum/domain"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Schedule.ecore#//AbstractDatum/producedBy"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Schedule.ecore#//AbstractDatum/requiredBy"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Schedule.ecore#//AbstractDatum/schedule"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Schedule.ecore#//AbstractDatum/dataParameter"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="Schedule.ecore#//AbstractAction">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Schedule.ecore#//AbstractAction/productions"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Schedule.ecore#//AbstractAction/requisites"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Schedule.ecore#//AbstractAction/parameterDerivations"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Schedule.ecore#//AbstractAction/order"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Schedule.ecore#//AbstractAction/parent"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Schedule.ecore#//AbstractAction/children"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Schedule.ecore#//AbstractAction/parameters"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Schedule.ecore#//AbstractAction/results"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Schedule.ecore#//AbstractAction/schedule"/>
+    </genClasses>
+    <genClasses ecoreClass="Schedule.ecore#//ClassDatum">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Schedule.ecore#//ClassDatum/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Schedule.ecore#//ClassDatum/propertyDatums"/>
+    </genClasses>
+    <genClasses ecoreClass="Schedule.ecore#//DataParameter">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Schedule.ecore#//DataParameter/variable"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Schedule.ecore#//DataParameter/secondaryParameter"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Schedule.ecore#//DataParameter/datum"/>
+    </genClasses>
+    <genClasses ecoreClass="Schedule.ecore#//InputAction"/>
+    <genClasses ecoreClass="Schedule.ecore#//MappingAction">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Schedule.ecore#//MappingAction/mapping"/>
+    </genClasses>
+    <genClasses ecoreClass="Schedule.ecore#//OutputAction"/>
+    <genClasses ecoreClass="Schedule.ecore#//ParameterDerivation">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Schedule.ecore#//ParameterDerivation/target"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Schedule.ecore#//ParameterDerivation/primaryParameter"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Schedule.ecore#//ParameterDerivation/secondaryParameter"/>
+    </genClasses>
+    <genClasses ecoreClass="Schedule.ecore#//PropertyDatum">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Schedule.ecore#//PropertyDatum/property"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Schedule.ecore#//PropertyDatum/classDatum"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Schedule.ecore#//PropertyDatum/opposite"/>
+    </genClasses>
+    <genClasses ecoreClass="Schedule.ecore#//Schedule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Schedule.ecore#//Schedule/datums"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Schedule.ecore#//Schedule/actions"/>
+    </genClasses>
+    <genClasses ecoreClass="Schedule.ecore#//SecondaryParameter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Schedule.ecore#//SecondaryParameter/isLoop"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Schedule.ecore#//SecondaryParameter/dataParameter"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Schedule.ecore#//SecondaryParameter/derivationProperty"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference Schedule.ecore#//SecondaryParameter/derivation"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

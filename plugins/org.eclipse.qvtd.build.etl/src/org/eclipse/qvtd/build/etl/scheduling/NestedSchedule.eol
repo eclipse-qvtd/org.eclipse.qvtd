@@ -44,7 +44,7 @@ import "MapBindings.eol";
  ******
  */
 
-var s = QVTs!qvtschedule::Schedule.all.first();
+var s = QVTs!schedule::Schedule.all.first();
 // Map Ordering
 s.doMapOrdering();
 /*

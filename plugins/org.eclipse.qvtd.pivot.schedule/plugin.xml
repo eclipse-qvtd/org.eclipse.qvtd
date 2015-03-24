@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Schedule -->
+      <package
+            uri="http://www.eclipse.org/qvt/2015/Schedule"
+            class="org.eclipse.qvtd.pivot.schedule.SchedulePackage"
+            genModel="model/Schedule.genmodel"/>
+   </extension>
+
+</plugin>

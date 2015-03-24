@@ -12,7 +12,7 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.5.0,4.0.0)",
  org.eclipse.epsilon.flock.engine;bundle-version="[1.2.0,2.0.0)",
  org.eclipse.qvtd.pivot.qvtcore,
  org.eclipse.qvtd.pivot.qvtimperative,
- org.eclipse.qvtd.build.schedule
+ org.eclipse.qvtd.pivot.schedule
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.qvtd.build.etl;

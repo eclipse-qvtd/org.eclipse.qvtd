@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<qvtschedule:Schedule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvtschedule="http://www.eclipse.org/qvt/0.2/QVTschedule/"
-    xsi:schemaLocation="http://www.eclipse.org/qvt/0.2/QVTschedule/ java://org.eclipse.qvtd.build.qvtschedule.QVTschedulePackage">
+<qvtschedule:Schedule xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:qvtschedule="http://www.eclipse.org/qvt/2015/Schedule"
+    xsi:schemaLocation="http://www.eclipse.org/qvt/2015/Schedule java://org.eclipse.qvtd.pivot.schedule.SchedulePackage">
   <datums xsi:type="qvtschedule:ClassDatum" sub="//@datums.1 //@datums.7 //@datums.11">
     <type href="ClassesCS.ecore.oclas#T.classescs.ElementCS"/>
     <propertyDatums sub="//@datums.1/@propertyDatums.1 //@datums.7/@propertyDatums.1">

@@ -22,7 +22,7 @@ import "../helpers/QVTsHelpers.eol";
  * MODELS
  *  Required models to run the script:
  *      - NAME      ALIASES METAMODEL               ROL SOD
- *      - QVTs      QVT       QVTSchedule              X   X      The QVT schedule model
+ *      - QVTs      QVT       Schedule              X   X      The QVT schedule model
  * SEE ALSO
  *	FlatSchedule.eol
  *  SimpleNestedSchedule.eol

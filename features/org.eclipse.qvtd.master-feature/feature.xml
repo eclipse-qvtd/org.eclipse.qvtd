@@ -184,7 +184,7 @@
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.qvtd.build.schedule"
+         id="org.eclipse.qvtd.pivot.schedule"
          download-size="0"
          install-size="0"
          version="0.0.0"
