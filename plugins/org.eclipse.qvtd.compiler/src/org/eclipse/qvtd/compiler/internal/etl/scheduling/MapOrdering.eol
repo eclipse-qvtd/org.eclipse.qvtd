@@ -1,0 +1,161 @@
+/*******************************************************************************
+ * Copyright (c) 2013 The University of York and Willink Transformations.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
+import "../helpers/OCLExpressionAnalysis.eol";
+import "../helpers/QVTHelpers.eol";
+import "../helpers/QVTsHelpers.eol";
+
+/****l* /org.eclipse.qvtd.compiler.internal.etl.scheduling/MapOrdering
+ * NAME
+ *  MapOrdering -- A EOL script to derive primary and secondary arguments and 
+ * find the map ordering based on data dependencies.
+ *
+ * Invoke QVTs!Schedule::doMapOrdering();  
+ *
+ * MODELS
+ *  Required models to run the script:
+ *      - NAME      ALIASES METAMODEL               ROL SOD
+ *      - QVTs      QVT       Schedule              X   X      The QVT schedule model
+ * SEE ALSO
+ *	FlatSchedule.eol
+ *  SimpleNestedSchedule.eol
+ ******
+ */
+
+operation QVTs!Schedule doMapOrdering() {
+
+    // This is not relevant to ordering, move to scheduling
+	// Secondary Argument Derivations
+	--self.defineArgumentDerivation();
+	--self.removeEmptyDistinctData();
+	
+	// Ordering
+	self.findMapOrdering();
+}
+
+
+/****o* MapOrdering/findMapOrdering
+ * NAME
+ *  findMapOrdering - Assings an index to all MappingActions to reflect the
+ *  ordering of the mappings based on the R type containment tree and the
+ *  type dependencies.
+ *
+ * CONTEXT
+ *  QVTs!Schedule  The schedule to be indexed
+ * ANNOTATIONS
+ *  cached
+ *  SEE ALSO
+ */
+operation QVTs!Schedule findMapOrdering()  {
+	// Do a Depth first search of the containment tree of the output model
+	var queue = new Sequence();
+	// Marked visited mappings to avoid loops
+	var visitedAct = new Sequence();
+	var visitedNodes = new Sequence();
+	queue.addAll(rTree!Node.all().select(n | n.isRootElementCandidate()));
+	while (not queue.isEmpty()) {
+	    var n = queue.first();
+	    queue.remove(n);
+	    visitedNodes.add(n);
+	    // Do stuff with n
+	    //n.name.println("R Node: ");
+	    // Find all the mappings that have an output type (or subtype)
+	    // corresponding to the type of the target node
+		var baseDatum = self.datums.selectOne(x | x.correspondsWith(n));
+		//baseDatum.println("baseDatum ");
+	    if (baseDatum.isDefined()) {
+	    	for (ma in self.actions.select(aa | aa.productions.exists(e | e.isDatumOrSubdatum(baseDatum)))) { 
+		        // Find the predecesors and linearize
+		        if (visitedAct.excludes(ma)) 
+		        	ma.getOrdering(visitedAct);
+		        for (pDatum in baseDatum.propertyDatums) {
+		        	for (ma in self.actions.select(aa | aa.productions.exists(e | e = pDatum))) {
+		        		if (visitedAct.excludes(ma))
+		        			ma.getOrdering(visitedAct);
+		        	}
+		        }
+		    }
+	    }
+	    queue.addAll(n.children.excludingAll(visitedNodes));
+	}
+	// Finally we schedule the mapping actions pending to be scheduled
+	// These mapping invocations will produce root elements
+	for (ma in self.actions.select(aa | aa.order = 0)) {
+		ma.getOrdering(visitedAct);
+	}
+}
+
+/****o* MapOrdering/getOrdering
+ * NAME
+ *  getOrdering - Assing an index to a mapping action based on its predecesors.
+ *  SYNOPSIS
+ *    ma.getOrdering();
+ *  FUNCTION
+ *    Assings an index to all the predecessors of the mapping action and then 
+ *   assings an index to itself. This is a recursive function.
+ * CONTEXT
+ *  QVTs!MappingAction  The MappingAction
+ * RETURNS
+ *  QVTs!AbstractDatum	The ClassDatum for the variable's type
+ *  SEE ALSO
+ */
+operation QVTs!MappingAction getOrdering(visited) {
+	
+	if (self.order = 0) {
+		//self.mapping.name.println("getOrdering ");
+		visited.add(self);
+		for (ma in self.getPredecessors()) {
+			if (visited.excludes(ma))
+				ma.getOrdering(visited);
+		}
+		self.order = self.schedule.getMaxIndex() + 1;
+		//self.order.println(self.mapping.name + " issued ");
+	}
+}
+
+
+
+
+/****o* MapOrdering/getMaxIndex
+ * NAME
+ *  getMaxIndex - Get the arguments of a mapping action
+ * SYNOPSIS
+ *    s.getMaxIndex();
+ * FUNCTION
+ *    Get the arguments of an mapping action.
+ * TODO
+ *  This should be implemented as the derivied property of the mapping.
+ * CONTEXT
+ *  QVTs!Schedule  The Schedule
+ * ANNOTATIONS
+ *  cached
+ * RETURNS
+ *  QVTs!AbstractDatum	The ClassDatum for the variable's type
+ *  SEE ALSO
+ */
+operation QVTs!Schedule getMaxIndex() : Integer {
+	return self.actions.sortBy(a | a.order).order.last();
+}
+
+@cached
+operation rTree!Node isRootElementCandidate() : Boolean {
+	return self.parent.isEmpty() and not self.element.isAbstract;
+}
+
+
+operation QVTs!ClassDatum correspondsWith(node : rTree!Node) : Boolean {
+	// FIXME Issues with getting the EObject from Pivot elements self.type.getESObject() == node.element;
+	//return (self.type.name == node.element.name) and (self.type.owningPackage.name == node.element.ePackage.name);
+	return self.type.getESObject() == node.element;
+}
+
+
+ 
+/* =========================================== */

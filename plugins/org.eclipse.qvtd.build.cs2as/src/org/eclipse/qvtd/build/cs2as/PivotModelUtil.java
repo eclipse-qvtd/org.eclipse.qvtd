@@ -17,8 +17,8 @@ import org.eclipse.epsilon.emc.emf.EmfModel;
 import org.eclipse.epsilon.eol.exceptions.models.EolModelLoadingException;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
-import org.eclipse.qvtd.build.etl.PivotModel;
-import org.eclipse.qvtd.build.etl.QvtMtcExecutionException;
+import org.eclipse.qvtd.compiler.internal.etl.PivotModel;
+import org.eclipse.qvtd.compiler.internal.etl.QvtMtcExecutionException;
 
 public class PivotModelUtil {
 

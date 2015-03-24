@@ -1,0 +1,51 @@
+/*******************************************************************************
+ * Copyright (c) 2013 The University of York and Willink Transformations.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
+import "RootMapping.eol";
+import "MapOrdering.eol";
+import "MapBindings.eol";
+
+ /****l* /org.eclipse.qvtd.compiler.internal.etl.scheduling/FlatSchedule
+ * NAME
+ *  FlatSchedule -- Use the Schedule model to find a mapping ordering and then
+ *  invoke the mappings in that order without any nesting. 
+ *
+ * MODELS
+ *  Required models to run the script:
+ *      - NAME      ALIASES METAMODEL               ROL SOD
+ *      - QVTp      QVT     QVTi                     X   -        The QVTi (partitioned) AST
+ *      - QVTs              QVTScheduling            -   X        The scheduling model
+ * TRHOWS
+ *  Exception if a mapping with name "__root__" already exists. 
+ * SEE ALSO
+ *  MapOrdering.eol
+ *  RootMapping.eol
+ *  SimpleNestedSchedule.eol
+ ******
+ */
+
+var s = QVTs!schedule::Schedule.all.first();
+// Map Ordering
+s.doMapOrdering();
+
+// Schedule
+s.flatScheduling();
+
+"Flat Scheduling Done".println();
+
+operation QVTs!Schedule flatScheduling() {
+	var rootNode = new QVTs!MappingAction;
+	rootNode.order = 0;
+	for (ma in QVTs!MappingAction.all().excluding(rootNode).sortBy(ma | ma.order)) {
+		ma.parent = rootNode;
+		ma.defineBindings(rootNode);
+	}
+	rootNode.schedule = s;
+}

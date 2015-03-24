@@ -1,0 +1,51 @@
+/*******************************************************************************
+ * Copyright (c) 2013 The University of York and Willink Transformations.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
+ 
+ /****l* /org.eclipse.qvtd.compiler.internal.etl.scheduling/RootMapping
+ * NAME
+ *  RootMapping -- All shcedulers need a base/root mapping. Since the strategy
+ *  to identify the root mapping can change in the future, this script allows
+ *  that all schedulers share the same strategy.
+ *
+ * MODELS
+ *  Required models to run the script:
+ *      - NAME      ALIASES METAMODEL               ROL SOD
+ *      - QVTp      QVT     QVTi                     X          The QVTi (partitioned) AST
+ * SEE ALSO
+ *	FlatSchedule.eol
+ *  SimpleNestedSchedule.eol
+ ******
+ */
+ 
+ /****o* RootMapping/getRootMapping
+ * NAME
+ *  getRootMapping - Creates and returns a mapping with name = "__root__". If
+ *  the a mapping with the same name exists, an exception is thrown.
+ * CONTEXT
+ *  QVTp!Transformation  The transformation that will contain the craeted mapping. 
+ * RETURNS
+ *  A QVTp mapping named "__root__"
+ * TRHOWS
+ *  Exception if a mapping with name "__root__" already exists. 
+ */
+ operation QVTp!Transformation getRootMapping() : QVTp!Mapping {
+ 
+ 	if (self.rule.exists(m | m.name == "__root__")) {
+		throw "__root__ mapping already exists.";
+    } else {
+        var rootMapping = new QVTp!Mapping;
+        rootMapping.name = "__root__";
+        rootMapping.transformation = self;
+        rootMapping.guardPattern = new QVTp!GuardPattern;
+        rootMapping.bottomPattern = new QVTp!BottomPattern;
+        return rootMapping;
+    }
+ }

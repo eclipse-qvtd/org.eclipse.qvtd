@@ -1,0 +1,192 @@
+/*******************************************************************************
+ * Copyright (c) 2013 The University of York and Willink Transformations.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     Horacio Hoyos - initial implementation
+ ******************************************************************************/
+import "RootMapping.eol";
+import "MapOrdering.eol";
+import "MapBindings.eol";
+
+ /****l* /org.eclipse.qvtd.compiler.internal.etl.scheduling/NestedSchedule
+ * NAME
+ *  NestedSchedule -- Creates a simple nested schedule, solely based on the
+ *  map ordering and nesting based on containment trees (i.e. mappings are nested
+ *  in mappings that 
+ *
+ * MODELS
+ *  Required models to run the script:
+ *      - NAME      ALIASES METAMODEL               ROL SOD
+ *      - QVTp      QVT     QVTi                     X   -        The QVTi (partitioned) AST
+ *      - rTree     tree    ECoreContainmentTree     X   -        The right metamodel containment tree
+ *      - mTree     tree    ECoreContainmentTree     X   -        The middle metamodel containment tree
+ *      - lTree     tree    ECoreContainmentTree     X   -        The left metamodel containment tree
+ *      - QVTs              QVTScheduling            -   X        The scheduling model
+ *
+ * FUNCTION
+ *  Defines a nested simple schedule based on the mapping ordering and by nesting
+ *  mappings under mappings that provide the most variable/types in order to
+ *  reduce the global searches. Placement should be as low down as possible, i.e.
+ *  prefer the more inmediate predecesor, but above any unused iteration
+ *  variables.
+ *
+ *  Mappings with multiple input variables of the same type
+ * TRHOWS
+ *  Exception if a mapping with name "__root__" already exists. 
+ * SEE ALSO
+ *  MapOrdering.eol
+ *  RootMapping.eol
+ *  FlatSchedule.eol
+ ******
+ */
+
+var s = QVTs!schedule::Schedule.all.first();
+// Map Ordering
+s.doMapOrdering();
+/*
+for (ma in QVTs!MappingAction.all().select(ma | ma.mapping.isDefined()).sortBy(ma | ma.order)) {
+	ma.order.println("Mapping " + ma.mapping.name + ": ");
+}
+*/
+// Schedule
+s.simpleNest();
+
+"Nested Scheduling Done".println();
+
+/****o* NestedSchedule/simpleNest
+ * NAME
+ *  simpleNest - Define the mapping action nesting.
+ * FUNCTION
+ *  Constructs the schedule tree by finding the best place for each
+ *  node (MappingAction).
+ * CONTEXT
+ *  QVTs!Schedule   The schedule
+ */
+operation QVTs!Schedule simpleNest() {
+	var rootNode = new QVTs!MappingAction;
+	rootNode.order = 0;
+	self.~rootNode = rootNode;
+	for (ma in QVTs!MappingAction.all().excluding(rootNode).sortBy(ma | ma.order)) {
+		//ma.mapping.name.println("Mapping ");
+		var parent = s.bestParent(ma);
+		if (parent.isDefined()) {
+            //parent.mapping.name.println("Best parent ");
+			ma.parent = parent;
+			ma.defineBindings(parent);	
+		} else {
+			ma.parent = rootNode;
+			ma.defineBindings(rootNode);
+		}
+	}
+	rootNode.schedule = s;
+}
+
+/****o* NestedSchedule/bestParent
+ * NAME
+ *  bestParent - Find the best parent for a given node.
+ * FUNCTION
+ *  The parent can only be in the right edge nodes of the root and can have at
+ *  most 1 input per requried type. The best parent is the one with the best
+ *  metric. For similar metrics the depth of the tree and of the parent is
+ *  taken into consideration.
+ * CONTEXT
+ *  QVTs!Schedule   The schedule
+ * PARAMETERS
+ *  QVTs!MappingAction The next node to place in the tree
+ */
+operation QVTs!Schedule bestParent(nextNode : QVTs!MappingAction) : QVTs!MappingAction {
+	
+	var ren = self.rightEdgeNodes();
+	//ren.collect(ma | ma.mapping.name).println("RightEdgeNodes: ");
+	var parentNodes = ren.select(parentNode | nextNode.hasAtMostOneInputPerIterator(parentNode));
+	var parentNode = parentNodes.sortBy(pn | nextNode.metric(pn)*self.treeDepth() + pn.depth()).first();
+	//parentNodes.collect(pn | pn.mapping.name).println("parentNodes ");
+	// If the cost is high, try to see if binding in the root would be cheaper
+	if (parentNode.isDefined()) {
+		var m = nextNode.metric(parentNode);
+		//m.println("best parent m ");
+		if (m > 2E31) {
+			//"trying root nest".println();
+			var best = nextNode.getCheapestDerivation(nextNode.parameters);
+			if (best.last() < m) {
+				return null;
+			}
+		}
+	}
+	return parentNode;
+}
+
+operation QVTs!Schedule rightEdgeNodes() : Sequence {
+	return self.~rootNode.closure(n | n.children.last());
+}
+
+// at most 1 input per parameter type, and minumin 1 parameter type
+operation  QVTs!MappingAction hasAtMostOneInputPerIterator(parentNode : QVTs!MappingAction) : Boolean {
+	
+	//parentNode.mapping.name.println(self.mapping.name + " AtMostOneInputPerIterator in ");
+	var iterators = parentNode.getContextDataParameters();
+	//iterators.collect(i | i.variable.name).println("iterators ");
+	var iteratorTypes = iterators.collect(i | i.variable.type).asSet();
+	//iteratorTypes.collect(t | t.name).println("iteratorTypes ");
+	var inputTypes = self.parameters.collect(dp | dp.variable.type);
+	//inputTypes.collect(t | t.name).println("inputTypes ");
+	var inputTypeCountPerIteratorType = iteratorTypes.collect(it | inputTypes.select(t | t == it).size());
+	//inputTypeCountPerIteratorType.println("inputTypeCountPerIteratorType ");
+	//(not inputTypeCountPerIteratorType.exists(c | c > 1) and not inputTypeCountPerIteratorType.forAll(c | c == 0)).println();
+	return not inputTypeCountPerIteratorType.exists(c | c > 1) and not inputTypeCountPerIteratorType.forAll(c | c == 0);
+}
+
+
+operation QVTs!MappingAction metric(parentNode : QVTs!MappingAction) : Real {
+    
+    //parentNode.mapping.name.println(self.mapping.name + " metric for ");
+    //var best = self.getBestDerivationOption(parentNode).last();
+    //best.println();
+    //return best;
+    // Sum of varions MAX_INT may turn the result into a float
+    return self.getBestDerivationOption(parentNode).last();
+}
+
+operation QVTs!MappingAction getBestDerivationOption(parentNode :  QVTs!MappingAction) : Sequence {
+	
+	//if (parentNode.mapping.isUndefined())
+	//   parentNode.order.println(self.mapping.name + " getBestDerivationOption in ");
+	//else 
+	//   parentNode.mapping.name.println(self.mapping.name + " getBestDerivationOption in ");
+	var matched = parentNode.getContextDataParameters();
+    var matchedTypes = matched.collect(m | m.variable.type);
+    // Select all the MA's parameters whos type (or supertype) exists in the context
+    var candidates = self.parameters.select(primary |
+    		matchedTypes.includes(primary.variable.type)
+    		or matchedTypes.includes(primary.variable.type.closure(t | t.getSuperClasses())));
+    //candidates.variable.name.println();		
+	var best = self.getCheapestDerivation(candidates);
+	// getCheapestDerivation returns null, MAX_INT*#parameters if no derivations where found making it a very
+	// expensive choice. How to manage this case, or the case with multiple possible primary parameters (i.e.
+	// there is more that one value with an empty sequence), dependes on the caller
+	return best;
+	/* 
+	if (best.first().isUndefined()) {
+		// No derivations could be found. The caller should figure out what this means in their context
+		// E.g. if the parent is the root, we need an allInstances
+		return best;
+	} else {
+		// For bindings it is important to know how many are missing, for options, we only care about the cost
+		if (best.first().values().one(s | s.isEmpty())) {
+			return best;
+		} else {
+			"The selected best is missing one or more paramater derivations".println();
+			for (k in best.first().keySet()) {
+				k.variable.name.print();
+				best.first().get(k).println(": ");
+			}
+			best.last().println("bes metric ");
+			return best;
+				
+		}
+	} */
+}

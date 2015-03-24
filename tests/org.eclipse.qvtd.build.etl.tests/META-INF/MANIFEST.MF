@@ -10,7 +10,7 @@ Require-Bundle: org.eclipse.epsilon.common.dt;bundle-version="[1.2.0,2.0.0)",
  org.eclipse.qvtd.xtext.qvtbase.tests,
  org.eclipse.qvtd.xtext.qvtcore,
  org.eclipse.qvtd.xtext.qvtimperative,
- org.eclipse.qvtd.build.etl
+ org.eclipse.qvtd.compiler
 Bundle-ClassPath: .
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy

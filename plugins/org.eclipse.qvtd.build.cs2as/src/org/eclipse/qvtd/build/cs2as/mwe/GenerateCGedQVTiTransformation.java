@@ -26,7 +26,7 @@ import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.qvtd.build.cs2as.OCL2QVTiBroker;
 import org.eclipse.qvtd.build.cs2as.qvti.CS2ASJavaCompiler;
 import org.eclipse.qvtd.build.cs2as.qvti.QVTiFacade;
-import org.eclipse.qvtd.build.etl.PivotModel;
+import org.eclipse.qvtd.compiler.internal.etl.PivotModel;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeStandaloneSetup;
 
 import com.google.common.base.Objects;

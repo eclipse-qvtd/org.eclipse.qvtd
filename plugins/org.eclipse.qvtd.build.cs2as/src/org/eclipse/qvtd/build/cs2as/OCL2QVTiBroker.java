@@ -17,10 +17,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.utilities.OCL;
-import org.eclipse.qvtd.build.etl.EtlTask;
-import org.eclipse.qvtd.build.etl.MtcBroker;
-import org.eclipse.qvtd.build.etl.PivotModel;
-import org.eclipse.qvtd.build.etl.QvtMtcExecutionException;
+import org.eclipse.qvtd.compiler.internal.etl.EtlTask;
+import org.eclipse.qvtd.compiler.internal.etl.MtcBroker;
+import org.eclipse.qvtd.compiler.internal.etl.PivotModel;
+import org.eclipse.qvtd.compiler.internal.etl.QvtMtcExecutionException;
 
 /**
  * This is a quick extension of the MtcBroker, to exercise the OCL2QVTi code in test cases
