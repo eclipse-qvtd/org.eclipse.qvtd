@@ -1,0 +1,52 @@
+/*******************************************************************************
+ * Copyright (c) 2010 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial API and implementation
+ *
+ * Run As->MWE2 Workflow to regenerate the Xtest CST models.
+ *******************************************************************************/
+module GenerateQVTdScheduleModels
+
+import org.eclipse.qvtd.build.modelspecs.*
+import org.eclipse.qvtd.build.utilities.*
+import org.eclipse.ocl.examples.build.utilities.*
+import org.eclipse.ocl.examples.build.xtend.*
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.emf.ecore.resource.impl.*
+
+/**
+ *	Generate the Schedule Model used by the QVT scheduling.
+ */
+Workflow {
+	bean = ResourceSetImpl : resourceSet {}
+    bean = StandaloneSetup { resourceSet = resourceSet
+    	platformUri = ".."
+    	scanClassPath = true
+    }
+    bean = EcoreGenModelSetup { resourceSet = resourceSet }
+
+    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
+    	genModel = "/org.eclipse.qvtd.build.schedule/model/QVTSchedule.genmodel" 	
+    }
+/*    component = GenerateCGVisitors { resourceSet = resourceSet
+    	projectName = "org.eclipse.qvtd.codegen"
+    	projectPrefix = "QVTiCGModel"
+    	superProjectName = "org.eclipse.ocl.examples.codegen"
+    	superProjectPrefix = "CGModel"
+    	genModelFile = "model/qvticgmodel.genmodel"
+    	javaFolder = "emf-gen"
+    	modelPackageName = "org.eclipse.qvtd.codegen.qvticgmodel"
+    	visitorPackageName = "org.eclipse.qvtd.codegen.qvticgmodel.util"
+    	visitorClassName = "QVTiCGModelVisitor"
+    	superVisitorPackageName = "org.eclipse.ocl.examples.codegen.cgmodel.util"
+    	superVisitorClassName = "CGModelVisitor"
+    	visitablePackageName = "org.eclipse.ocl.examples.codegen.cgmodel"
+    	visitableClassName= "CGElement"
+    } */
+}

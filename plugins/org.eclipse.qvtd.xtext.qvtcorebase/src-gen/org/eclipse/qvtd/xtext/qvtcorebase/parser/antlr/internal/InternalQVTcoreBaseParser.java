@@ -97,8 +97,8 @@ public class InternalQVTcoreBaseParser extends AbstractInternalAntlrParser {
     public static final int T__42=42;
     public static final int T__43=43;
     public static final int T__40=40;
-    public static final int RULE_ML_SINGLE_QUOTED_STRING=11;
     public static final int T__41=41;
+    public static final int RULE_ML_SINGLE_QUOTED_STRING=11;
     public static final int T__46=46;
     public static final int T__47=47;
     public static final int T__44=44;
