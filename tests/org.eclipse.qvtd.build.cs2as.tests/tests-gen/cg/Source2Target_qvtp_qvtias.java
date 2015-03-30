@@ -63,7 +63,7 @@ import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.pivot.values.SetValue;
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
+import org.eclipse.qvtd.build.cs2as.qvti.CS2ASTransformationExecutor;
 
 /**
  * The Source2Target_qvtp_qvtias transformation:
@@ -77,7 +77,7 @@ import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
  * Extract each output model with {@link getRootObjects(String)}
  */
 @SuppressWarnings("nls")
-public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
+public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
 {
     public static final /*@NonNull*/ /*@NonInvalid*/ RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
     public static final /*@NonNull*/ /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_env_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example1/env/1.0", null, EnvironmentPackage.eINSTANCE);
@@ -512,7 +512,7 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
              */
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_A_0 = idResolver.getClass(CLSSid_A, null);
             if (_1 == null) {
-                throw new InvalidValueException("Null source for \'source::SElement::ast\'");
+                throwNull(sRoot_0, "Null source for \'source::SElement::ast\'");
             }
             final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = _1.getAst();
             final /*@Nullable*/ /*@Thrown*/ A oclAsType_0 = (A)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_A_0);
@@ -603,7 +603,7 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
              */
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_C_0 = idResolver.getClass(CLSSid_C, null);
             if (_1_0 == null) {
-                throw new InvalidValueException("Null source for \'source::SElement::ast\'");
+                throwNull(x_2, "Null source for \'source::SElement::ast\'");
             }
             final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = _1_0.getAst();
             final /*@Nullable*/ /*@Thrown*/ C oclAsType_1 = (C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_C_0);
@@ -693,7 +693,7 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
              */
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_C_0 = idResolver.getClass(CLSSid_C, null);
             if (_1_0 == null) {
-                throw new InvalidValueException("Null source for \'source::SElement::ast\'");
+                throwNull(x_3, "Null source for \'source::SElement::ast\'");
             }
             final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = _1_0.getAst();
             final /*@Nullable*/ /*@Thrown*/ C oclAsType_1 = (C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_C_0);
@@ -777,7 +777,7 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
              */
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_B_0 = idResolver.getClass(CLSSid_B, null);
             if (_1_0 == null) {
-                throw new InvalidValueException("Null source for \'source::SElement::ast\'");
+                throwNull(x_4, "Null source for \'source::SElement::ast\'");
             }
             final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = _1_0.getAst();
             final /*@Nullable*/ /*@Thrown*/ B oclAsType_1 = (B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_B_0);
@@ -824,7 +824,7 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
         final /*@Nullable*/ /*@Thrown*/ B oclAsType = (B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_B_0);
         final /*@Nullable*/ /*@Thrown*/ Z ownsZ = y1_0.getOwnsZ();
         if (ownsZ == null) {
-            throw new InvalidValueException("Null source for \'source::SElement::ast\'");
+            throwNull(y1_0, "Null source for \'source::SElement::ast\'");
         }
         final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = ownsZ.getAst();
         final /*@Nullable*/ /*@Thrown*/ D oclAsType_0 = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_D_0);
@@ -901,7 +901,7 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
         final /*@Nullable*/ /*@Thrown*/ C oclAsType = (C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_C_0);
         final /*@Nullable*/ /*@Thrown*/ Z ownsZ = y2_0.getOwnsZ();
         if (ownsZ == null) {
-            throw new InvalidValueException("Null source for \'source::SElement::ast\'");
+            throwNull(y2_0, "Null source for \'source::SElement::ast\'");
         }
         final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = ownsZ.getAst();
         final /*@Nullable*/ /*@Thrown*/ D oclAsType_0 = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_D_0);
@@ -988,12 +988,12 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
         final /*@Nullable*/ /*@Thrown*/ D oclAsType = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
         final /*@Nullable*/ /*@Thrown*/ Y2 oclAsType_0 = (Y2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, toY, TYP_source_c_c_Y2_0);
         if (oclAsType_0 == null) {
-            throw new InvalidValueException("Null source for \'source::SElement::ast\'");
+            throwNull(z_1, "Null source for \'source::SElement::ast\'");
         }
         final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = oclAsType_0.getAst();
         final /*@Nullable*/ /*@Thrown*/ C oclAsType_1 = (C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_C_0);
         if (oclAsType_1 == null) {
-            throw new InvalidValueException("Null source for \'target::C::toA2\'");
+            throwNull(z_1, "Null source for \'target::C::toA2\'");
         }
         final /*@Nullable*/ /*@Thrown*/ A2 toA2 = oclAsType_1.getToA2();
         oclAsType.setToA(toA2);
@@ -1107,7 +1107,7 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_C_0 = idResolver.getClass(CLSSid_C, null);
             final /*@Nullable*/ /*@Thrown*/ Y2 oclAsType_0 = (Y2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, toY, TYP_source_c_c_Y2_0);
             if (oclAsType_0 == null) {
-                throw new InvalidValueException("Null source for \'source::SElement::ast\'");
+                throwNull(z_3, "Null source for \'source::SElement::ast\'");
             }
             final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = oclAsType_0.getAst();
             final /*@Nullable*/ /*@Thrown*/ C self_0 = (C)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_C_0);
@@ -1115,7 +1115,7 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_A2_0 = idResolver.getClass(CLSSid_A2, null);
             final /*@Nullable*/ /*@Thrown*/ A2 self_1 = (A2)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, parent, TYP_target_c_c_A2_0);
             if (self_1 == null) {
-                throw new InvalidValueException("Null source for \'target::A2::ownsC\'");
+                throwNull(z_3, "Null source for \'target::A2::ownsC\'");
             }
             final /*@Nullable*/ /*@Thrown*/ List<C> ownedCs = self_1.getOwnsC();
             assert ownedCs != null;
@@ -1181,7 +1181,7 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
                  * _'=' : Boolean
                  */
                 if (_1 == null) {
-                    throw new InvalidValueException("Null source for \'target::NamedElement::name\'");
+                    throwNull(z_3, "Null source for \'target::NamedElement::name\'");
                 }
                 final /*@Nullable*/ /*@Thrown*/ String name_0 = _1.getName();
                 final /*@Thrown*/ boolean eq = (name_0 != null) ? name_0.equals(cName) : (cName == null);
@@ -1247,12 +1247,12 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
         final /*@Nullable*/ /*@Thrown*/ D oclAsType = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
         final /*@Nullable*/ /*@Thrown*/ Y1 oclAsType_0 = (Y1)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, toY, TYP_source_c_c_Y1_0);
         if (oclAsType_0 == null) {
-            throw new InvalidValueException("Null source for \'source::SElement::ast\'");
+            throwNull(z_4, "Null source for \'source::SElement::ast\'");
         }
         final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = oclAsType_0.getAst();
         final /*@Nullable*/ /*@Thrown*/ B oclAsType_1 = (B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_B_0);
         if (oclAsType_1 == null) {
-            throw new InvalidValueException("Null source for \'target::B::toA1\'");
+            throwNull(z_4, "Null source for \'target::B::toA1\'");
         }
         final /*@Nullable*/ /*@Thrown*/ A1 toA1 = oclAsType_1.getToA1();
         oclAsType.setToA(toA1);
@@ -1363,7 +1363,7 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_B_0 = idResolver.getClass(CLSSid_B, null);
             final /*@Nullable*/ /*@Thrown*/ Y1 oclAsType_0 = (Y1)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, toY, TYP_source_c_c_Y1_0);
             if (oclAsType_0 == null) {
-                throw new InvalidValueException("Null source for \'source::SElement::ast\'");
+                throwNull(z_6, "Null source for \'source::SElement::ast\'");
             }
             final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = oclAsType_0.getAst();
             final /*@Nullable*/ /*@Thrown*/ B self_0 = (B)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_target_c_c_B_0);
@@ -1371,7 +1371,7 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
             final /*@NonNull*/ /*@NonInvalid*/ Class TYP_target_c_c_A1_0 = idResolver.getClass(CLSSid_A1, null);
             final /*@Nullable*/ /*@Thrown*/ A1 self_1 = (A1)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, parent, TYP_target_c_c_A1_0);
             if (self_1 == null) {
-                throw new InvalidValueException("Null source for \'target::A1::ownsB\'");
+                throwNull(z_6, "Null source for \'target::A1::ownsB\'");
             }
             final /*@Nullable*/ /*@Thrown*/ List<B> ownedBs = self_1.getOwnsB();
             assert ownedBs != null;
@@ -1437,7 +1437,7 @@ public class Source2Target_qvtp_qvtias extends AbstractTransformationExecutor
                  * _'=' : Boolean
                  */
                 if (_1 == null) {
-                    throw new InvalidValueException("Null source for \'target::NamedElement::name\'");
+                    throwNull(z_6, "Null source for \'target::NamedElement::name\'");
                 }
                 final /*@Nullable*/ /*@Thrown*/ String name_0 = _1.getName();
                 final /*@Thrown*/ boolean eq = (name_0 != null) ? name_0.equals(bName) : (bName == null);

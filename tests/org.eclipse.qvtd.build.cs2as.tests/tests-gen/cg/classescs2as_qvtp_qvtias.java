@@ -55,7 +55,7 @@ import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.pivot.values.SetValue;
-import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
+import org.eclipse.qvtd.build.cs2as.qvti.CS2ASTransformationExecutor;
 
 /**
  * The classescs2as_qvtp_qvtias transformation:
@@ -69,7 +69,7 @@ import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationExecutor;
  * Extract each output model with {@link getRootObjects(String)}
  */
 @SuppressWarnings("nls")
-public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
+public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
 {
     public static final /*@NonNull*/ /*@NonInvalid*/ RootPackageId PACKid_$metamodel$ = IdManager.getRootPackageId("$metamodel$");
     public static final /*@NonNull*/ /*@NonInvalid*/ NsURIPackageId PACKid_http_c_s_s_cs2as_s_tests_s_example2_s_classes_s_1_0 = IdManager.getNsURIPackageId("http://cs2as/tests/example2/classes/1.0", null, ClassesPackage.eINSTANCE);
@@ -588,12 +588,12 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
             final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Package_0 = idResolver.getClass(CLSSid_Package, null);
             final /*@Nullable*/ /*@Thrown*/ Package oclAsType_0 = (Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, parent, TYP_classes_c_c_Package_0);
             if (oclAsType_0 == null) {
-                throw new InvalidValueException("Null source for \'classes::Package::_env(OclElement) : env::Environment\'");
+                throwNull(classCS_1, "Null source for \'classes::Package::_env(OclElement) : env::Environment\'");
             }
             final /*@NonNull*/ /*@Thrown*/ Environment _env = this._env(oclAsType_0, self_5);
             final /*@Nullable*/ /*@Thrown*/ PathNameCS classPathName = classCS_1.getExtends();
             if (classPathName == null) {
-                throw new InvalidValueException("Null source for \'classescs::PathNameCS::path\'");
+                throwNull(classCS_1, "Null source for \'classescs::PathNameCS::path\'");
             }
             final /*@Nullable*/ /*@Thrown*/ List<PathElementCS> pathSeq_0 = classPathName.getPath();
             assert pathSeq_0 != null;
@@ -707,7 +707,7 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
              */
             final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Class_0 = idResolver.getClass(CLSSid_Class, null);
             if (_1 == null) {
-                throw new InvalidValueException("Null source for \'classescs::ElementCS::ast\'");
+                throwNull(packageCS_1, "Null source for \'classescs::ElementCS::ast\'");
             }
             final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = _1.getAst();
             final /*@Nullable*/ /*@Thrown*/ example2.classes.Class oclAsType_0 = (example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_classes_c_c_Class_0);
@@ -769,7 +769,7 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
              * ast.oclAsType(classes::Package)
              */
             if (_1 == null) {
-                throw new InvalidValueException("Null source for \'classescs::ElementCS::ast\'");
+                throwNull(packageCS_2, "Null source for \'classescs::ElementCS::ast\'");
             }
             final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = _1.getAst();
             final /*@Nullable*/ /*@Thrown*/ Package oclAsType_0 = (Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_classes_c_c_Package_0);
@@ -832,7 +832,7 @@ public class classescs2as_qvtp_qvtias extends AbstractTransformationExecutor
              */
             final /*@NonNull*/ /*@NonInvalid*/ org.eclipse.ocl.pivot.Class TYP_classes_c_c_Package_0 = idResolver.getClass(CLSSid_Package, null);
             if (_1 == null) {
-                throw new InvalidValueException("Null source for \'classescs::ElementCS::ast\'");
+                throwNull(rootCS_0, "Null source for \'classescs::ElementCS::ast\'");
             }
             final /*@Nullable*/ /*@Thrown*/ EObject ast_0 = _1.getAst();
             final /*@Nullable*/ /*@Thrown*/ Package oclAsType_0 = (Package)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast_0, TYP_classes_c_c_Package_0);

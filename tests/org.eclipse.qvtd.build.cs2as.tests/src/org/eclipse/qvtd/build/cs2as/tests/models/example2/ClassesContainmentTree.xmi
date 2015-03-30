@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:eCoreContainemntTree="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree"
-    xsi:schemaLocation="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree ../../../../../../../../../../org.eclipse.qvtd.build.etl/model/ECoreContainmentTree.ecore">
+    xsi:schemaLocation="http://www.eclipse.org/qvt/examples/0.1/ECoreContainemntTree ../../../../../../../../../../org.eclipse.qvtd.compiler/model/ECoreContainmentTree.ecore">
   <eCoreContainemntTree:Node name="Element" subTypes="/1 /2 /3 /5 /4" superTypes="/6">
     <element href="Classes.ecore#//Element"/>
   </eCoreContainemntTree:Node>

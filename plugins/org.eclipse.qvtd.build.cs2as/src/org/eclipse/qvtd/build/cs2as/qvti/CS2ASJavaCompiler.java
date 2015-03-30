@@ -48,7 +48,7 @@ public class CS2ASJavaCompiler {
 					js.append("throwNull(");
 					js.appendValueName(cgGuardVariable);
 					js.append(", ");
-					js.appendString(cgGuardExp.getMessage());
+					js.appendString("Null " + cgGuardExp.getMessage());
 //					js.append(", ");
 //					CGValuedElement element = cgGuardExp.getElement();
 //					Object object = element != null ? element.getAst() : null;
