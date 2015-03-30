@@ -33,6 +33,7 @@ import com.google.common.base.Objects;
 
 public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 {
+	private final static @NonNull String BACKSLASH = "/";
 	private final static @NonNull String EMPTY_STRING = "";
 
 	protected static boolean isDefined(final String string) {
@@ -42,7 +43,7 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 	protected String projectName;
 	protected String oclFileURI;
 	protected ResourceSet resourceSet;
-	protected String javaFolder = "emf-gen";
+	protected String javaFolder = "src-gen/";
 	protected String javaPackage = "";
 	protected Map<?, ?> savingOptions;
 
@@ -81,10 +82,10 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 
 	/**
 	 * (Optional) The folder within the project that forms the root of EMF
-	 * generated sources. (default is "src-gen")
+	 * generated sources. (default is "src-gen/")
 	 */
 	public void setJavaFolder(final String javaFolder) {
-		this.javaFolder = javaFolder;
+		this.javaFolder = javaFolder.endsWith(BACKSLASH) ? javaFolder : javaFolder.concat(BACKSLASH);
 	}
 	
 	/**
@@ -92,7 +93,7 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 	 * generated sources. (default is "")
 	 */
 	public void setJavaPackage(final String javaPackage) {
-		this.javaPackage = javaPackage;
+		this.javaPackage = javaPackage.endsWith(BACKSLASH) ? javaPackage : javaPackage.concat(BACKSLASH);
 	}
 
 	/**

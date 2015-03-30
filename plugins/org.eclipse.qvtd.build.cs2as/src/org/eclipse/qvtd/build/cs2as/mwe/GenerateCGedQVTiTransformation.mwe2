@@ -27,7 +27,7 @@ var ResourceSet resourceSet
 /**
  * Optional output 
  */
-var javaFolder = "src-gen/" // FIXME add the trailing slash in the components code   
+var javaFolder = "src-gen/"
 
 var javaPackage = ""
 
