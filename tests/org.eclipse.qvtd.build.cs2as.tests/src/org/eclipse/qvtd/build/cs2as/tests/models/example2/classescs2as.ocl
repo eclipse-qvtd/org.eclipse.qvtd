@@ -25,7 +25,7 @@ def : ast() : classes::Class =
 		name = name,
 		superClass = if (_extends = null) 
 					then null 
-					else ast().env().lookupClass(_extends) 
+					else ast().lookupClass(_extends) 
 					endif
 	}
 

@@ -16,6 +16,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.evaluation.Evaluator;
 
 import example2.classes.NamedElement;
+import example2.classescs.PathElementCS;
 import example2.env.Environment;
 import example2.env.impl.EnvironmentImpl;
 
@@ -28,6 +29,11 @@ public class LookupEnvironment extends EnvironmentImpl   {
 	public LookupEnvironment(@NonNull Evaluator evaluator, @NonNull String name) {
 		this.evaluator = evaluator;
 		this.name = name;
+	}
+	
+	public LookupEnvironment(@NonNull Evaluator evaluator, @NonNull PathElementCS pathElement) {
+		this.evaluator = evaluator;
+		this.name = pathElement.getName();
 	}
 	
 	@Override

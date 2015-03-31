@@ -9,15 +9,8 @@
 
 package example2.classes.util;
 
-import example2.classes.Class;
-import example2.classes.ClassesPackage;
-import example2.classes.Package;
-import example2.classes.Root;
-import example2.classes.util.AbstractExtendingVisitor;
-import example2.classes.util.Visitable;
-import example2.env.Environment;
-import example2.env.EnvironmentPackage;
 import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -30,6 +23,13 @@ import org.eclipse.ocl.pivot.ids.IdResolver;
 import org.eclipse.ocl.pivot.ids.NsURIPackageId;
 import org.eclipse.ocl.pivot.ids.RootPackageId;
 import org.eclipse.ocl.pivot.ids.TypeId;
+
+import example2.classes.Class;
+import example2.classes.ClassesPackage;
+import example2.classes.Package;
+import example2.classes.Root;
+import example2.env.Environment;
+import example2.env.EnvironmentPackage;
 
 public class AbstractClassesLookupVisitor
 	extends AbstractExtendingVisitor<Environment, Environment>
@@ -89,6 +89,17 @@ public class AbstractClassesLookupVisitor
     }
     
     /**
+     * visitClass(element : classes::Class) : env::Environment[?]
+     * 
+     * this.parentEnv(element)
+     */
+    @Override
+    public @Nullable /*@NonInvalid*/ Environment visitClass(final @NonNull /*@NonInvalid*/ Class element) {
+        final @Nullable /*@Thrown*/ Environment parentEnv = this.parentEnv(element);
+        return parentEnv;
+    }
+    
+    /**
      * visitPackage(element : classes::Package) : env::Environment[?]
      * 
      * 
@@ -102,11 +113,11 @@ public class AbstractClassesLookupVisitor
      *   endif
      */
     @Override
-    public @Nullable /*@NonInvalid*/ Environment visitPackage(final @NonNull /*@NonInvalid*/ Package element) {
-        final @Nullable /*@Thrown*/ List<Class> ownedClasses = element.getOwnedClasses();
+    public @Nullable /*@NonInvalid*/ Environment visitPackage(final @NonNull /*@NonInvalid*/ Package element_0) {
+        final @Nullable /*@Thrown*/ List<Class> ownedClasses = element_0.getOwnedClasses();
         assert ownedClasses != null;
         final @NonNull /*@Thrown*/ Environment addElements = context.addElements((EList)ownedClasses);
-        final @Nullable /*@Thrown*/ List<Package> ownedPackages = element.getOwnedPackages();
+        final @Nullable /*@Thrown*/ List<Package> ownedPackages = element_0.getOwnedPackages();
         assert ownedPackages != null;
         final @NonNull /*@Thrown*/ Environment inner = addElements.addElements((EList)ownedPackages);
         final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
@@ -115,7 +126,7 @@ public class AbstractClassesLookupVisitor
             symbol_0 = inner;
         }
         else {
-            final @Nullable /*@Thrown*/ Environment parentEnv = this.parentEnv(element);
+            final @Nullable /*@Thrown*/ Environment parentEnv = this.parentEnv(element_0);
             symbol_0 = parentEnv;
         }
         return symbol_0;
@@ -134,8 +145,8 @@ public class AbstractClassesLookupVisitor
      *   endif
      */
     @Override
-    public @Nullable /*@NonInvalid*/ Environment visitRoot(final @NonNull /*@NonInvalid*/ Root element_0) {
-        final @Nullable /*@Thrown*/ List<Package> ownedPackages = element_0.getOwnedPackages();
+    public @Nullable /*@NonInvalid*/ Environment visitRoot(final @NonNull /*@NonInvalid*/ Root element_1) {
+        final @Nullable /*@Thrown*/ List<Package> ownedPackages = element_1.getOwnedPackages();
         assert ownedPackages != null;
         final @NonNull /*@Thrown*/ Environment inner = context.addElements((EList)ownedPackages);
         final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
@@ -144,7 +155,7 @@ public class AbstractClassesLookupVisitor
             symbol_0 = inner;
         }
         else {
-            final @Nullable /*@Thrown*/ Environment parentEnv = this.parentEnv(element_0);
+            final @Nullable /*@Thrown*/ Environment parentEnv = this.parentEnv(element_1);
             symbol_0 = parentEnv;
         }
         return symbol_0;

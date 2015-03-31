@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated cs2ascgmodel -->
+      <package
+            uri="http://www.eclipse.org/qvt/2015/CS2AScg"
+            class="org.eclipse.qvtd.build.cs2as.cgmodel.CS2ASCGPackage"
+            genModel="model/cs2ascgmodel.genmodel"/>
+   </extension>
+
+</plugin>

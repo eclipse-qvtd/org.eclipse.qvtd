@@ -63,7 +63,7 @@ Workflow {
     	superProjectName = ""
     	superModelName = ""
     	genModelFile = "${examplesFolder}/Classes.genmodel"
-    	lookupFilePath = "${examplesFolder}/ClassesNameResolution_LookupVisitor.ocl"
+    	lookupFilePath = "${examplesFolder}/ClassesNameResolution.ocl"
 		visitorPackageName = "example2.classes.util"
 		visitorClassName = "Visitor"
     	visitableClassName = "Visitable"

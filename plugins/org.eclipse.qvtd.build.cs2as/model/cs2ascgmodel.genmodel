@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    modelDirectory="/org.eclipse.qvtd.build.cs2as/emf-gen" modelPluginID="org.eclipse.qvtd.build.cs2as"
+    modelName="CS2ASCGModel" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
+    usedGenPackages="../../org.eclipse.ocl.examples.codegen/model/cgmodel.genmodel#//cgmodel"
+    importOrganizing="true">
+  <foreignModel>cs2ascgmodel.ecore</foreignModel>
+  <genPackages prefix="CS2ASCG" basePackage="org.eclipse.qvtd.build.cs2as" disposableProviderFactory="true"
+      ecorePackage="cs2ascgmodel.ecore#/">
+    <genClasses ecoreClass="cs2ascgmodel.ecore#//CGLookupCallExp"/>
+  </genPackages>
+</genmodel:GenModel>

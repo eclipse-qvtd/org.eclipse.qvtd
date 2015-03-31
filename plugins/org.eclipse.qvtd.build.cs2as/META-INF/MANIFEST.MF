@@ -7,7 +7,10 @@ Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Export-Package: org.eclipse.qvtd.build.cs2as,
- org.eclipse.qvtd.build.cs2as.qvti
+ org.eclipse.qvtd.build.cs2as.qvti,
+ org.eclipse.qvtd.build.cs2as.cgmodel,
+ org.eclipse.qvtd.build.cs2as.cgmodel.impl,
+ org.eclipse.qvtd.build.cs2as.cgmodel.util
 Require-Bundle: org.eclipse.qvtd.compiler;bundle-version="[1.0.0,2.0.0)",
  org.eclipse.ocl.xtext.completeocl;bundle-version="[1.0.0,2.0.0)",
  org.eclipse.epsilon.eol.engine;bundle-version="[1.2.0,2.0.0)",

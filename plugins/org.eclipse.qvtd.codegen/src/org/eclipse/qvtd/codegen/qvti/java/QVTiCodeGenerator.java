@@ -88,7 +88,7 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		String packagePrefix = getOptions().getPackagePrefix();
 		CGPackage cgPackage = CGModelFactory.eINSTANCE.createCGPackage();
 		cgPackage.setName(packagePrefix);
-		QVTiAS2CGVisitor pivot2CGVisitor = new QVTiAS2CGVisitor(cgAnalyzer,
+		QVTiAS2CGVisitor pivot2CGVisitor = createAS2CGVisitor(cgAnalyzer,
 			getGlobalContext());
 		CGTransformation cgTransformation = (CGTransformation) ClassUtil
 			.nonNullState(transformation.accept(pivot2CGVisitor));
@@ -96,6 +96,9 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		return cgPackage;
 	}
 
+	protected @NonNull QVTiAS2CGVisitor createAS2CGVisitor(@NonNull QVTiAnalyzer analyzer, @NonNull QVTiGlobalContext gContext) {
+		return new QVTiAS2CGVisitor(analyzer, gContext);
+	}
 	@Override
 	public @NonNull CGModelResourceFactory getCGResourceFactory() {
 		return QVTiCGModelResourceFactory.INSTANCE;

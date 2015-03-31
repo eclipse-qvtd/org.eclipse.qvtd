@@ -30,6 +30,10 @@ public abstract class CS2ASTransformationExecutor extends AbstractTransformation
 		handleError(sourceObject, "''" + lookupHint +"'' not found");
 	}
 	
+	protected void handleLookupError(EObject sourceObject, EObject lookupHint) {
+		handleError(sourceObject, "''" + lookupHint.toString() +"'' not found");
+	}
+	
 	protected void handleError(EObject sourceObject, String errorMessage) {
 		txErrors.add(new CS2ASDiagnostic(sourceObject, errorMessage));
 	}
