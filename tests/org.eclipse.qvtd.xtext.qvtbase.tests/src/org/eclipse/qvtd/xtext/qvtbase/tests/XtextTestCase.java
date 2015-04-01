@@ -12,12 +12,9 @@ package org.eclipse.qvtd.xtext.qvtbase.tests;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
-
-import junit.framework.TestCase;
 
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Level;
@@ -57,6 +54,8 @@ import org.eclipse.ocl.pivot.utilities.PivotConstants;
 import org.eclipse.ocl.pivot.utilities.PivotStandaloneSetup;
 import org.eclipse.ocl.pivot.values.Bag;
 import org.eclipse.ocl.xtext.basecs.ModelElementCS;
+
+import junit.framework.TestCase;
 
 public class XtextTestCase extends PivotTestCase
 {	
@@ -115,7 +114,7 @@ public class XtextTestCase extends PivotTestCase
 	 * $WORKSPACE_LOC/* if defined, or $user.dir/../* otherwise.
 	 */
 	public static void configurePlatformResources() {
-		if (!eclipseIsRunning()) {
+		if (!EcorePlugin.IS_ECLIPSE_RUNNING) {
 			String urlString = System.getProperty("WORKSPACE_LOC");
 			File workspaceLoc;
 			if (urlString != null) {
@@ -132,16 +131,6 @@ public class XtextTestCase extends PivotTestCase
 				}
 			}
 		}
-	}
-
-	public static boolean eclipseIsRunning() {
-		try {
-			Class<?> platformClass = Class.forName("org.eclipse.core.runtime.Platform");
-			Method isRunningMethod = platformClass.getDeclaredMethod("isRunning");
-			return Boolean.TRUE.equals(isRunningMethod.invoke(null));
-		} catch (Exception e) {
-		}
-		return false;
 	}
 
 	/**
