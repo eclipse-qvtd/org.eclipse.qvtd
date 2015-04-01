@@ -8,5 +8,5 @@
 <listEntry value="#Wed Jan 14 13:24:09 GMT 2015&#13;&#10;isMetamodelFileBased=false&#13;&#10;name=oclStdLib&#13;&#10;readOnLoad=true&#13;&#10;storeOnDisposal=false&#13;&#10;aliases=&#13;&#10;cached=true&#13;&#10;fileBasedMetamodelUri=&#13;&#10;metamodelUri=http\://www.eclipse.org/ocl/2015/Pivot&#13;&#10;modelUri=platform\:/resource/org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas&#13;&#10;reuseUnmodifiedFileBasedMetamodels=true&#13;&#10;type=EMF&#13;&#10;modelFile=/org.eclipse.ocl.pivot/model-gen/OCL-2.5.oclas&#13;&#10;expand=true&#13;&#10;metamodelFile="/>
 </listAttribute>
 <intAttribute key="originalModel" value="0"/>
-<stringAttribute key="source" value="/org.eclipse.qvtd.build.etl/src/org/eclipse/qvtd/build/etl/mtc/QVTcToQVTu.mig"/>
+<stringAttribute key="source" value="org.eclipse.qvtd.compiler/src/org/eclipse/qvtd/compiler/internal/etl/mtc/QVTcToQVTu.mig"/>
 </launchConfiguration>
