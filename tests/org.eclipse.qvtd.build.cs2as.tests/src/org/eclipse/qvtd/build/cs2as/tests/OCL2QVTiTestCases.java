@@ -36,6 +36,7 @@ import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.ocl.xtext.completeocl.validation.CompleteOCLEObjectValidator;
 import org.eclipse.qvtd.build.cs2as.OCL2QVTiBroker;
+import org.eclipse.qvtd.build.cs2as.qvti.CS2ASJavaCGParameters;
 import org.eclipse.qvtd.build.cs2as.qvti.CS2ASJavaCompiler;
 import org.eclipse.qvtd.build.cs2as.qvti.QVTiFacade;
 import org.eclipse.qvtd.build.cs2as.tests.models.example2.java.classescs2as_qvtp_qvtias_Manual;
@@ -202,8 +203,9 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 
 		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "Source2Target.ocl");
 
+		CS2ASJavaCGParameters cgParams = new CS2ASJavaCGParameters("TODO", "TODO", "TODO", TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
 		Class<? extends TransformationExecutor> txClass = new CS2ASJavaCompiler()
-			.compileTransformation(myQVT, qvtiTransf.getTransformation(), TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
+			.compileTransformation(myQVT, qvtiTransf.getTransformation(), cgParams);
 		// Create a fresh qvt, to avoid meta-model schizophrenia when referring Environment.ecore 
 		myQVT.dispose();
 		myQVT = createQVT();
@@ -220,8 +222,12 @@ public class OCL2QVTiTestCases extends LoadTestCase {
 			
 		PivotModel qvtiTransf = executeOCL2QVTi_MTC(myQVT, baseURI, "classescs2as.ocl");
 		
+		CS2ASJavaCGParameters cgParams = new CS2ASJavaCGParameters("org.eclipse.qvtd.build.cs2as.tests.models.example2.java.LookupEnvironment",
+				"example2.classes.util.ClassesLookupVisitor",
+				"example2.classes.NamedElement",
+				TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
 		Class<? extends TransformationExecutor> txClass = new CS2ASJavaCompiler()
-			.compileTransformation(myQVT, qvtiTransf.getTransformation(), TESTS_GEN_PATH, TESTS_PACKAGE_NAME);
+			.compileTransformation(myQVT, qvtiTransf.getTransformation(), cgParams);
 		
 		
 		// Execute CGed transformation

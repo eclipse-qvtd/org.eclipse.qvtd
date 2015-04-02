@@ -24,6 +24,7 @@ import org.eclipse.ocl.pivot.utilities.OCL;
 import org.eclipse.ocl.pivot.utilities.XMIUtil;
 import org.eclipse.ocl.xtext.completeocl.CompleteOCLStandaloneSetup;
 import org.eclipse.qvtd.build.cs2as.OCL2QVTiBroker;
+import org.eclipse.qvtd.build.cs2as.qvti.CS2ASJavaCGParameters;
 import org.eclipse.qvtd.build.cs2as.qvti.CS2ASJavaCompiler;
 import org.eclipse.qvtd.build.cs2as.qvti.QVTiFacade;
 import org.eclipse.qvtd.compiler.internal.etl.PivotModel;
@@ -67,7 +68,8 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 		PivotModel qvtiTransf;
 		try {
 			qvtiTransf = executeOCL2QVTi_MTC(qvt, oclDocURI.trimSegments(1), oclDocURI.lastSegment());
-			createCompiler().compileTransformation(qvt, qvtiTransf.getTransformation(), javaFolder, javaPackage);
+			CS2ASJavaCGParameters cgParams = createParameters();
+			createCompiler().compileTransformation(qvt, qvtiTransf.getTransformation(), cgParams);
 		} catch (Exception e) {
 			issues.addError(this, "Error while executing " + GenerateCGedQVTiTransformation.class.getName(), null, e, null);
 		}	
@@ -78,7 +80,10 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 	protected CS2ASJavaCompiler createCompiler() {
 		return new CS2ASJavaCompiler();
 	}
-
+	
+	protected CS2ASJavaCGParameters createParameters() {
+		return new CS2ASJavaCGParameters("TODO", "TODO", "TODO",javaFolder, javaPackage);
+	}
 
 	/**
 	 * (Optional) The folder within the project that forms the root of EMF

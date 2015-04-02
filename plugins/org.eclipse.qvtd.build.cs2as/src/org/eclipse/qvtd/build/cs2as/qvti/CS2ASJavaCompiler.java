@@ -53,8 +53,12 @@ public class CS2ASJavaCompiler {
 
 	protected static class CS2ASJavaCodeGenerator extends QVTiCodeGenerator
 	{
-		protected CS2ASJavaCodeGenerator(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation) {
+		private  @NonNull CS2ASJavaCGParameters params;
+		
+		protected CS2ASJavaCodeGenerator(@NonNull QVTiEnvironmentFactory environmentFactory, @NonNull Transformation transformation,
+				@NonNull CS2ASJavaCGParameters params) {
 			super(environmentFactory, transformation);
+			this.params = params;
 		}
 
 		@Override
@@ -99,10 +103,15 @@ public class CS2ASJavaCompiler {
 			return new CS2ASDependencyVisitor(cgAnalyzer, getGlobalContext(),
 					getGlobalPlace());
 		}
+		
+		public @NonNull CS2ASJavaCGParameters getCGParameters() {
+			return params;
+		}
 	}
 
 	protected static class CS2ASCG2JavaVisitor extends QVTiCG2JavaVisitor implements CS2ASCGModelVisitor<Boolean>
 	{
+	
 		protected CS2ASCG2JavaVisitor(@NonNull QVTiCodeGenerator codeGenerator, @NonNull CGPackage cgPackage, @Nullable List<CGValuedElement> sortedGlobals) {
 			super(codeGenerator, cgPackage, sortedGlobals);
 		}
@@ -132,10 +141,11 @@ public class CS2ASJavaCompiler {
 
 		@Override
 		@Nullable
-		public Boolean visitCGLookupCallExp(CGLookupCallExp object) {
-			CGLookupCallExp cgCall = (CGLookupCallExp) object;
+		public Boolean visitCGLookupCallExp(CGLookupCallExp cgCall) {
+			CS2ASJavaCGParameters params = ((CS2ASJavaCodeGenerator)getCodeGenerator()).getCGParameters();
+			
 			CGValuedElement cgSource = cgCall.getSource(); // FIXME to skip env() call. Remove env() call
-			TypeDescriptor typeDescriptor = context.getTypeDescriptor(object);
+			TypeDescriptor typeDescriptor = context.getTypeDescriptor(cgCall);
 			if (!js.appendLocalStatements(cgSource)) {
 				return false;
 			}
@@ -148,12 +158,14 @@ public class CS2ASJavaCompiler {
 					return false;
 				}
 			}
-
 			
-			js.appendClassReference("example2.env.Environment"); // FIXME
-			js.append(" _lookupEnv");
+			String envClassName = params.getEnviromentClassName();
+			String envClassSymbol = getSymbolName(envClassName + cgCall.hashCode(), "_lookupEnv");
+			js.appendClassReference(envClassName);
+			js.append(" ");
+			js.append(envClassSymbol);
 			js.append(" = new ");
-			js.append("org.eclipse.qvtd.build.cs2as.tests.models.example2.java.LookupEnvironment");// FIXME
+			js.append(envClassName);
 			js.append("(evaluator,");
 			List<Parameter> pParameters = cgCall.getReferredOperation().getOwnedParameters();
 			int iMax = Math.min(pParameters.size(), cgArguments.size());
@@ -170,30 +182,40 @@ public class CS2ASJavaCompiler {
 			}
 			js.append(");\n");
 			
-			js.appendClassReference("example2.classes.util.ClassesLookupVisitor"); // FIXME
-			js.append(" _lookupVisitor");
+			String visitorClassName = params.getVisitorClassName();
+			String visitorClassSymbol = getSymbolName(visitorClassName + cgCall.hashCode(), "_lookupVisitor");
+			js.appendClassReference(visitorClassName);
+			js.append(" ");
+			js.append(visitorClassSymbol);
 			js.append(" = new ");
-			js.append(" ClassesLookupVisitor(_lookupEnv);\n"); // FIXME
-
+			js.append(params.getVisitorClassName());
+			js.append("(");
+			js.append(envClassSymbol);
+			js.append(");\n");
 			
-			
-			js.appendClassReference(EList.class, false, "example2.classes.NamedElement"); // FIXME
-			js.append(" _lookupResult");	// FIXME
+			// FIXME what if there is not common named element class name ?
+			String namedElemClassName = params.getNamedElementClassName();
+			String resultSymbol = getSymbolName(namedElemClassName + cgCall.hashCode(), "_lookupResult");
+			js.appendClassReference(EList.class, false, namedElemClassName); 
+			js.append(" ");
+			js.append(resultSymbol);	
 			js.append(" = ");				
 			js.appendReferenceTo(cgSource);
-			js.append(".accept(_lookupVisitor).getNamedElements();\n");
+			js.append(".accept(");
+			js.append(visitorClassSymbol);
+			js.append(").getNamedElements();\n");
 			
 			js.appendClassReference(typeDescriptor);
 			js.append(" ");
 			js.appendReferenceTo(cgCall);
-			js.append( "= null;\n");
-			js.append("if (_lookupResult.size() == 1) {\n");
+			js.append( " = null;\n");
+			js.append("if ("+resultSymbol+".size() == 1) {\n");
 			js.pushIndentation(null);
 			js.appendReferenceTo(cgCall);
 			js.append(" = (");
 			js.appendClassReference(typeDescriptor);
 			js.append(")");
-			js.append(" _lookupResult.get(0);\n");
+			js.append(resultSymbol+".get(0);\n");
 			js.popIndentation();
 			// TODO what about ambigous error report ?
 			js.append("} else {\n");
@@ -380,12 +402,13 @@ public class CS2ASJavaCompiler {
 	
 	// Copied from QVTiCompilerTest
 	public Class<? extends AbstractTransformationExecutor> compileTransformation(@NonNull QVTiFacade qvt,
-			@NonNull Transformation transformation,	@Nullable String savePath, @NonNull String packagePrefix) throws Exception {
+			@NonNull Transformation transformation,	@NonNull CS2ASJavaCGParameters params) throws Exception {
 				
-		QVTiCodeGenerator cg = new CS2ASJavaCodeGenerator(qvt.getEnvironmentFactory(), transformation);
+		QVTiCodeGenerator cg = new CS2ASJavaCodeGenerator(qvt.getEnvironmentFactory(), transformation, params);
 		QVTiCodeGenOptions options = cg.getOptions();
-		options.setPackagePrefix(packagePrefix);
+		options.setPackagePrefix(params.getPackageName());
 		cg.generateClassFile();
+		String savePath = params.getSavePath();
 		if (savePath != null) {
 			cg.saveSourceFile(savePath);
 		}
