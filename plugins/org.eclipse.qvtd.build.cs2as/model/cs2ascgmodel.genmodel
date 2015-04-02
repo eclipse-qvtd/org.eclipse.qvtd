@@ -5,6 +5,11 @@
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
     usedGenPackages="../../org.eclipse.ocl.examples.codegen/model/cgmodel.genmodel#//cgmodel"
     importOrganizing="true">
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/Visitor">
+    <details key="Root Visitor Class" value="org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor"/>
+    <details key="Derived Visitor Class" value="org.eclipse.qvtd.build.cs2as.cgmodel.util.CS2ASCGModelVisitor"/>
+    <details key="Visitable Classes" value="org.eclipse.ocl.examples.codegen.cgmodel.CGElement"/>
+  </genAnnotations>
   <foreignModel>cs2ascgmodel.ecore</foreignModel>
   <genPackages prefix="CS2ASCG" basePackage="org.eclipse.qvtd.build.cs2as" disposableProviderFactory="true"
       ecorePackage="cs2ascgmodel.ecore#/">

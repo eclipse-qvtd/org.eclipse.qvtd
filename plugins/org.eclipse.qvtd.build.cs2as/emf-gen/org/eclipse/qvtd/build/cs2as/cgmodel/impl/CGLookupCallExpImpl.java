@@ -3,12 +3,11 @@
 package org.eclipse.qvtd.build.cs2as.cgmodel.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.cgmodel.impl.CGOperationCallExpImpl;
 import org.eclipse.ocl.examples.codegen.cgmodel.util.CGModelVisitor;
 import org.eclipse.qvtd.build.cs2as.cgmodel.CGLookupCallExp;
 import org.eclipse.qvtd.build.cs2as.cgmodel.CS2ASCGPackage;
+import org.eclipse.qvtd.build.cs2as.cgmodel.util.CS2ASCGModelVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -37,6 +36,17 @@ public class CGLookupCallExpImpl extends CGOperationCallExpImpl implements CGLoo
 		return CS2ASCGPackage.Literals.CG_LOOKUP_CALL_EXP;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public <R> R accept(CGModelVisitor<R> visitor) {
+		return (R) ((CS2ASCGModelVisitor<?>)visitor).visitCGLookupCallExp(this);
+	}
+
+	// FIXME use the CGModelSpecs
 	@Override
 	public boolean isUnboxed() {
 		return true;
@@ -45,10 +55,6 @@ public class CGLookupCallExpImpl extends CGOperationCallExpImpl implements CGLoo
 	@Override
 	public boolean isBoxed() {
 		return false;
-	}
-	
-	public @Nullable <R> R accept(@NonNull CGModelVisitor<R> visitor) {
-		return visitor.visitCGOperationCallExp(this);
 	}
 
 } //CGLookupCallExpImpl

@@ -1,17 +1,26 @@
 package org.eclipse.qvtd.build.cs2as.qvti;
 
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.examples.codegen.analyzer.AnalysisVisitor;
+import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
+import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
+import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
+import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGGuardExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
+import org.eclipse.ocl.examples.codegen.cse.GlobalPlace;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
+import org.eclipse.ocl.examples.codegen.java.CG2JavaPreVisitor;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
@@ -19,9 +28,16 @@ import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.utilities.ClassUtil;
 import org.eclipse.qvtd.build.cs2as.cgmodel.CGLookupCallExp;
 import org.eclipse.qvtd.build.cs2as.cgmodel.CS2ASCGFactory;
+import org.eclipse.qvtd.build.cs2as.cgmodel.util.CS2ASCGModelVisitor;
 import org.eclipse.qvtd.codegen.qvti.QVTiCodeGenOptions;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAS2CGVisitor;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalysisVisitor;
 import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiAnalyzer;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiBoxingAnalyzer;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiDependencyVisitor;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiFieldingAnalyzer;
+import org.eclipse.qvtd.codegen.qvti.analyzer.QVTiReferencesVisitor;
+import org.eclipse.qvtd.codegen.qvti.java.QVTiCG2JavaPreVisitor;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCG2JavaVisitor;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiCodeGenerator;
 import org.eclipse.qvtd.codegen.qvti.java.QVTiGlobalContext;
@@ -51,9 +67,41 @@ public class CS2ASJavaCompiler {
 				@NonNull QVTiGlobalContext gContext) {
 			return new CS2ASAS2CGVisitor(analyzer, gContext);
 		}
+		
+		@Override
+		public @NonNull AnalysisVisitor createAnalysisVisitor() {
+			return new CS2ASAnalysisVisitor(cgAnalyzer);
+		}
+		
+		@Override
+		public @NonNull BoxingAnalyzer createBoxingAnalyzer() {
+		
+			return new CS2ASBoxingAnalyser(cgAnalyzer);
+		}
+		
+		@Override
+		public @NonNull FieldingAnalyzer createFieldingAnalyzer() {
+			return new CS2ASFieldingAnalyser(cgAnalyzer);
+		}
+		
+		@Override
+		public @NonNull CG2JavaPreVisitor createCG2JavaPreVisitor() {
+			return new CS2ASCG2JavaPreVisitor(getGlobalContext());
+		}
+		
+		@Override
+		public @NonNull ReferencesVisitor createReferencesVisitor() {
+			return CS2ASReferencesVisitor.INSTANCE;
+		}
+		
+		@Override
+		public @NonNull DependencyVisitor createDependencyVisitor() {
+			return new CS2ASDependencyVisitor(cgAnalyzer, getGlobalContext(),
+					getGlobalPlace());
+		}
 	}
 
-	protected static class CS2ASCG2JavaVisitor extends QVTiCG2JavaVisitor
+	protected static class CS2ASCG2JavaVisitor extends QVTiCG2JavaVisitor implements CS2ASCGModelVisitor<Boolean>
 	{
 		protected CS2ASCG2JavaVisitor(@NonNull QVTiCodeGenerator codeGenerator, @NonNull CGPackage cgPackage, @Nullable List<CGValuedElement> sortedGlobals) {
 			super(codeGenerator, cgPackage, sortedGlobals);
@@ -81,90 +129,86 @@ public class CS2ASJavaCompiler {
 		protected @NonNull Class<? extends AbstractTransformationExecutor> getAbstractTransformationExecutorClass() {
 			return CS2ASTransformationExecutor.class;
 		}
-		
-		
+
 		@Override
-		public @Nullable Boolean visitCGValuedElement(CGValuedElement object) {
-			// FIXME create visitor infrastructure			
-			if (object instanceof CGLookupCallExp) {
-				CGLookupCallExp cgCall = (CGLookupCallExp) object;
-				CGValuedElement cgSource = cgCall.getSource(); // FIXME to skip env() call. Remove env() call
-				TypeDescriptor typeDescriptor = context.getTypeDescriptor(object);
-				if (!js.appendLocalStatements(cgSource)) {
+		@Nullable
+		public Boolean visitCGLookupCallExp(CGLookupCallExp object) {
+			CGLookupCallExp cgCall = (CGLookupCallExp) object;
+			CGValuedElement cgSource = cgCall.getSource(); // FIXME to skip env() call. Remove env() call
+			TypeDescriptor typeDescriptor = context.getTypeDescriptor(object);
+			if (!js.appendLocalStatements(cgSource)) {
+				return false;
+			}
+			
+			
+			List<CGValuedElement> cgArguments = cgCall.getArguments();
+			for (@NonNull CGValuedElement cgArgument : cgArguments) {
+				CGValuedElement argument = getExpression(cgArgument);
+				if (!js.appendLocalStatements(argument)) {
 					return false;
 				}
-				
-				
-				List<CGValuedElement> cgArguments = cgCall.getArguments();
-				for (@SuppressWarnings("null")@NonNull CGValuedElement cgArgument : cgArguments) {
-					CGValuedElement argument = getExpression(cgArgument);
-					if (!js.appendLocalStatements(argument)) {
-						return false;
-					}
-				}
-
-				
-				js.appendClassReference("example2.env.Environment"); // FIXME
-				js.append(" _lookupEnv");
-				js.append(" = new ");
-				js.append("org.eclipse.qvtd.build.cs2as.tests.models.example2.java.LookupEnvironment");// FIXME
-				js.append("(evaluator,");
-				List<Parameter> pParameters = cgCall.getReferredOperation().getOwnedParameters();
-				int iMax = Math.min(pParameters.size(), cgArguments.size());
-				for (int i = 0; i < iMax; i++) {
-					if ((i > 0)) {
-						js.append(", ");
-					}
-					CGValuedElement cgArgument = cgArguments.get(i);
-					Parameter pParameter = pParameters.get(i);
-					CGTypeId cgTypeId = analyzer.getTypeId(pParameter.getTypeId());
-					TypeDescriptor parameterTypeDescriptor = context.getUnboxedDescriptor(ClassUtil.nonNullState(cgTypeId.getElementId()));
-					CGValuedElement argument = getExpression(cgArgument);
-					js.appendReferenceTo(parameterTypeDescriptor, argument);
-				}
-				js.append(");\n");
-				
-				js.appendClassReference("example2.classes.util.ClassesLookupVisitor"); // FIXME
-				js.append(" _lookupVisitor");
-				js.append(" = new ");
-				js.append(" ClassesLookupVisitor(_lookupEnv);\n"); // FIXME
-
-				
-				
-				js.appendClassReference(EList.class, false, "example2.classes.NamedElement"); // FIXME
-				js.append(" _lookupResult");	// FIXME
-				js.append(" = ");				
-				js.appendReferenceTo(cgSource);
-				js.append(".accept(_lookupVisitor).getNamedElements();\n");
-				
-				js.appendClassReference(typeDescriptor);
-				js.append(" ");
-				js.appendReferenceTo(cgCall);
-				js.append( "= null;\n");
-				js.append("if (_lookupResult.size() == 1) {\n");
-				js.pushIndentation(null);
-				js.appendReferenceTo(cgCall);
-				js.append(" = (");
-				js.appendClassReference(typeDescriptor);
-				js.append(")");
-				js.append(" _lookupResult.get(0);\n");
-				js.popIndentation();
-				// TODO what about ambigous error report ?
-				js.append("} else {\n");
-				js.pushIndentation(null);
-				js.append("handleLookupError(");
-				js.append("(");
-				js.appendClassReference(EObject.class);
-				js.append(")");
-				js.appendReferenceTo(cgSource);
-				js.append(",");
-				js.appendReferenceTo(cgArguments.get(0)); // FIXMe improve handleLookupError
-				js.append(");\n");
-				js.popIndentation();
-				js.append("};\n");
-				return true;
 			}
-			return super.visitCGValuedElement(object);
+
+			
+			js.appendClassReference("example2.env.Environment"); // FIXME
+			js.append(" _lookupEnv");
+			js.append(" = new ");
+			js.append("org.eclipse.qvtd.build.cs2as.tests.models.example2.java.LookupEnvironment");// FIXME
+			js.append("(evaluator,");
+			List<Parameter> pParameters = cgCall.getReferredOperation().getOwnedParameters();
+			int iMax = Math.min(pParameters.size(), cgArguments.size());
+			for (int i = 0; i < iMax; i++) {
+				if ((i > 0)) {
+					js.append(", ");
+				}
+				CGValuedElement cgArgument = cgArguments.get(i);
+				Parameter pParameter = pParameters.get(i);
+				CGTypeId cgTypeId = analyzer.getTypeId(pParameter.getTypeId());
+				TypeDescriptor parameterTypeDescriptor = context.getUnboxedDescriptor(ClassUtil.nonNullState(cgTypeId.getElementId()));
+				CGValuedElement argument = getExpression(cgArgument);
+				js.appendReferenceTo(parameterTypeDescriptor, argument);
+			}
+			js.append(");\n");
+			
+			js.appendClassReference("example2.classes.util.ClassesLookupVisitor"); // FIXME
+			js.append(" _lookupVisitor");
+			js.append(" = new ");
+			js.append(" ClassesLookupVisitor(_lookupEnv);\n"); // FIXME
+
+			
+			
+			js.appendClassReference(EList.class, false, "example2.classes.NamedElement"); // FIXME
+			js.append(" _lookupResult");	// FIXME
+			js.append(" = ");				
+			js.appendReferenceTo(cgSource);
+			js.append(".accept(_lookupVisitor).getNamedElements();\n");
+			
+			js.appendClassReference(typeDescriptor);
+			js.append(" ");
+			js.appendReferenceTo(cgCall);
+			js.append( "= null;\n");
+			js.append("if (_lookupResult.size() == 1) {\n");
+			js.pushIndentation(null);
+			js.appendReferenceTo(cgCall);
+			js.append(" = (");
+			js.appendClassReference(typeDescriptor);
+			js.append(")");
+			js.append(" _lookupResult.get(0);\n");
+			js.popIndentation();
+			// TODO what about ambigous error report ?
+			js.append("} else {\n");
+			js.pushIndentation(null);
+			js.append("handleLookupError(");
+			js.append("(");
+			js.appendClassReference(EObject.class);
+			js.append(")");
+			js.appendReferenceTo(cgSource);
+			js.append(",");
+			js.appendReferenceTo(cgArguments.get(0)); // FIXMe improve handleLookupError
+			js.append(");\n");
+			js.popIndentation();
+			js.append("};\n");
+			return true;
 		}
 	}
 
@@ -204,8 +248,123 @@ public class CS2ASJavaCompiler {
 		}
 	}
 	
+	protected static class CS2ASAnalysisVisitor extends QVTiAnalysisVisitor 
+		implements CS2ASCGModelVisitor<Object> {
+
+		public CS2ASAnalysisVisitor(QVTiAnalyzer analyzer) {
+			super(analyzer);
+		}
+
+		@Override
+		@Nullable
+		public Object visitCGLookupCallExp(CGLookupCallExp object) {
+			return visitCGOperationCallExp(object);
+		}
+	}
 	
+	protected static class CS2ASBoxingAnalyser extends QVTiBoxingAnalyzer
+		implements CS2ASCGModelVisitor<Object> {
+		
+		public CS2ASBoxingAnalyser(QVTiAnalyzer analyzer) {
+			super(analyzer);
+		}
+
+		@Override
+		@Nullable
+		public Object visitCGLookupCallExp(CGLookupCallExp object) {
+			return visitCGOperationCallExp(object);
+		}
+	}
 	
+	protected static class CS2ASFieldingAnalyser extends QVTiFieldingAnalyzer {
+	
+		protected static class CS2ASAnalysisVisitor extends QVTiFieldingAnalyzer.QVTiAnalysisVisitor
+		implements CS2ASCGModelVisitor<Set<CGVariable>> {
+			public CS2ASAnalysisVisitor(QVTiFieldingAnalyzer context) {
+				super(context);
+			}
+
+			@Override
+			@Nullable
+			public Set<CGVariable> visitCGLookupCallExp(CGLookupCallExp object) {
+				return visitCGOperationCallExp(object);
+			}
+		}
+		
+		protected static class CS2ASRewriteVisitor extends QVTiFieldingAnalyzer.QVTiRewriteVisitor
+		implements CS2ASCGModelVisitor<Boolean> {
+			public CS2ASRewriteVisitor(@NonNull QVTiAnalyzer context, @NonNull Set<CGVariable> caughtVariable) {
+				super(context, caughtVariable);
+			}
+
+			@Override
+			@Nullable
+			public Boolean visitCGLookupCallExp(CGLookupCallExp object) {
+				return visitCGOperationCallExp(object);
+			}
+		}
+		
+		
+		
+		public CS2ASFieldingAnalyser(QVTiAnalyzer analyzer) {
+			super(analyzer);
+		}
+	
+		@Override
+		protected @NonNull AnalysisVisitor createAnalysisVisitor() {
+			return new CS2ASAnalysisVisitor(this);
+		}
+		
+		@Override
+		protected @NonNull RewriteVisitor createRewriteVisitor(@NonNull Set<CGVariable> caughtVariables) {
+			return new CS2ASRewriteVisitor((QVTiAnalyzer)analyzer, caughtVariables);
+		}
+	}
+
+	
+	protected static class CS2ASCG2JavaPreVisitor extends QVTiCG2JavaPreVisitor
+		implements CS2ASCGModelVisitor<Object> {
+		
+		public CS2ASCG2JavaPreVisitor(QVTiGlobalContext globalContext) {
+			super(globalContext);
+		}
+
+		@Override
+		@Nullable
+		public Object visitCGLookupCallExp(CGLookupCallExp object) {
+			return visitCGOperationCallExp(object);
+		}
+	}
+	
+	protected static class CS2ASReferencesVisitor extends QVTiReferencesVisitor
+		implements CS2ASCGModelVisitor<List<Object>> {
+	
+		protected static CS2ASReferencesVisitor INSTANCE = new CS2ASReferencesVisitor(new Object());
+		
+		public CS2ASReferencesVisitor(Object context) {
+			super(context);
+		}
+	
+		@Override
+		@Nullable
+		public List<Object> visitCGLookupCallExp(CGLookupCallExp object) {
+			return visitCGOperationCallExp(object);
+		}
+	}
+	
+	protected static class CS2ASDependencyVisitor extends QVTiDependencyVisitor
+		implements CS2ASCGModelVisitor<Object> {
+	
+		public CS2ASDependencyVisitor(QVTiAnalyzer analyzer, QVTiGlobalContext globalContext, GlobalPlace globalPlace) {
+			super(analyzer, globalContext, globalPlace);
+		}
+
+		@Override
+		@Nullable
+		public Object visitCGLookupCallExp(CGLookupCallExp object) {
+			return visitCGOperationCallExp(object);
+		}
+	}
 	
 	// Copied from QVTiCompilerTest
 	@SuppressWarnings("unchecked")
