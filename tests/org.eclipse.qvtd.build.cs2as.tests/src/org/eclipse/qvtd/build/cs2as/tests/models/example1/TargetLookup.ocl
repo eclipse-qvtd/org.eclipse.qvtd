@@ -51,60 +51,81 @@ def : getNamedElements(name : String) : OrderedSet(target::NamedElement) =
 
 -- Specific lookup operations 
 
-def: lookupB(bName : String) : target::B =
-  	
-	let foundBs = namedElements->selectByKind(target::B)->select(name = bName) in
-	if foundBs->isEmpty()
-	then 
-		null
---		if parentEnv.oclIsUndefined()
---	    then invalid -- not found
---	    	 --  TODO this provokes a failure in OCL. Report bugzilla
---	    	 -- invalid -- not found
---	    else parentEnv.lookupB(bName)
---	    endif
-	else foundBs->first() -- TODO Ambiguous name case ?
-	endif
-	
-def: lookupC(cName : String) : target::C =
-	let foundCs = namedElements->selectByKind(target::C)->select(name = cName) in
-	if foundCs->isEmpty()
-	then
-		null
---		if parentEnv.oclIsUndefined()
---	    then null -- not found
---	    	 --  TODO this provokes a failure in OCL. Report bugzilla
---	    	 -- invalid -- not found
---	    else parentEnv.lookupC(cName)
---	    endif
-	else foundCs->first() -- TODO Ambiguous name case ?
-	endif
-
 endpackage
 
 package target
 
+context Visitable 
+def: _lookupBs(env : env::Environment, bName : String) : OrderedSet(B) =
+  	
+	let foundBs = env.namedElements->selectByKind(B)->select(name = bName) 
+	in
+		if foundBs->isEmpty()
+		then if env.parentEnv.oclIsUndefined()
+			then OrderedSet{}
+			else _lookupBs(env.parentEnv, bName)
+			endif
+		else foundBs
+		endif
+	
+def : _lookupB(bName : String) : B =
+	let foundBs = _lookupBs(env(), bName)
+	in
+		if foundBs->isEmpty()
+		then null
+		else foundBs->first() -- LookupVisitor will report ambiguous result
+		endif
+	
+def: _lookupCs(env : env::Environment, cName : String) : OrderedSet(C) =
+	let foundCs = env.namedElements->selectByKind(C)->select(name = cName)
+	in
+		if foundCs->isEmpty()
+		then if env.parentEnv.oclIsUndefined()
+			then OrderedSet{}
+			else _lookupBs(env.parentEnv, cName)
+			endif
+		else foundCs
+		endif
+
+def : _lookupC(bName : String) : C =
+	let foundCs = _lookupCs(env(), bName)
+	in
+		if foundCs->isEmpty()
+		then null
+		else foundCs->first() -- LookupVisitor will report ambiguous result
+		endif
+		
 context TRoot
 def : _env(child : ocl::OclElement) : env::Environment =
 	parentEnv()
 	
 context A1
 def : _env(child : ocl::OclElement) : env::Environment =
-	_env_B(child)
-	
-def : _env_B(child : ocl::OclElement) : env::Environment =
+-- FIXME LookupVisitor doesn't handle any other operation called from this one. Inline here, for the time being
+--	_env_B(child)
 	let ownedBs = self.ownsB
 	in parentEnv().nestedEnv()
 		.addElements(ownedBs->select(x | ownedBs->indexOf(x) < ownedBs->indexOf(child)))
 
+	
+--def : _env_B(child : ocl::OclElement) : env::Environment =
+--	let ownedBs = self.ownsB
+--	in parentEnv().nestedEnv()
+--		.addElements(ownedBs->select(x | ownedBs->indexOf(x) < ownedBs->indexOf(child)))
+
 context A2
 def : _env(child : ocl::OclElement) : env::Environment =
-	_env_C(child)
-	
-def : _env_C(child : ocl::OclElement) : env::Environment =
+-- FIXME LookupVisitor doesn't handle any other operation called from this one. Inline here, for the time being
+--	_env_C(child)
 	let ownedCs = self.ownsC
 	in parentEnv().nestedEnv()
 		.addElements(ownedCs->select(x| ownedCs->indexOf(x) < ownedCs->indexOf(child)))
+
+	
+--def : _env_C(child : ocl::OclElement) : env::Environment =
+--	let ownedCs = self.ownsC
+--	in parentEnv().nestedEnv()
+--		.addElements(ownedCs->select(x| ownedCs->indexOf(x) < ownedCs->indexOf(child)))
 
 context B
 def : _env(child : ocl::OclElement) : env::Environment =
@@ -141,6 +162,8 @@ def : parentEnv() : env::Environment =
 context B
 def : env() : env::Environment =
 	self._env(null)
+
+
 	
 def : parentEnv() : env::Environment =
 	let parent = oclContainer()
@@ -154,8 +177,8 @@ def : parentEnv() : env::Environment =
 	let parent = oclContainer()
 	in parent.oclAsType(A2)._env(self)
 
+
 context D
-	
 def : parentEnv() : env::Environment =
 	let parent = oclContainer()
 	in
@@ -163,5 +186,11 @@ def : parentEnv() : env::Environment =
 		then parent.oclAsType(B)._env(self)
 		else parent.oclAsType(C)._env(self)
 		endif
-	
+
+def : lookupB(bName : String) : B =
+	_lookupB(bName)
+
+def : lookupC(cName : String) : C =
+	_lookupC(cName)	
+
 endpackage

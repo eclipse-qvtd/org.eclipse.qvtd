@@ -67,24 +67,6 @@ public interface TargetPackage extends EPackage {
 	int A = 0;
 
 	/**
-	 * The number of structural features of the '<em>A</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int A_FEATURE_COUNT = 0;
-
-	/**
-	 * The number of operations of the '<em>A</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int A_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link example1.target.impl.A1Impl <em>A1</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -93,6 +75,122 @@ public interface TargetPackage extends EPackage {
 	 * @generated
 	 */
 	int A1 = 1;
+
+	/**
+	 * The meta object id for the '{@link example1.target.impl.A2Impl <em>A2</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see example1.target.impl.A2Impl
+	 * @see example1.target.impl.TargetPackageImpl#getA2()
+	 * @generated
+	 */
+	int A2 = 2;
+
+	/**
+	 * The meta object id for the '{@link example1.target.impl.A3Impl <em>A3</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see example1.target.impl.A3Impl
+	 * @see example1.target.impl.TargetPackageImpl#getA3()
+	 * @generated
+	 */
+	int A3 = 3;
+
+	/**
+	 * The meta object id for the '{@link example1.target.impl.NamedElementImpl <em>Named Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see example1.target.impl.NamedElementImpl
+	 * @see example1.target.impl.TargetPackageImpl#getNamedElement()
+	 * @generated
+	 */
+	int NAMED_ELEMENT = 8;
+
+	/**
+	 * The meta object id for the '{@link example1.target.impl.BImpl <em>B</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see example1.target.impl.BImpl
+	 * @see example1.target.impl.TargetPackageImpl#getB()
+	 * @generated
+	 */
+	int B = 4;
+
+	/**
+	 * The meta object id for the '{@link example1.target.impl.CImpl <em>C</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see example1.target.impl.CImpl
+	 * @see example1.target.impl.TargetPackageImpl#getC()
+	 * @generated
+	 */
+	int C = 5;
+
+	/**
+	 * The meta object id for the '{@link example1.target.impl.DImpl <em>D</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see example1.target.impl.DImpl
+	 * @see example1.target.impl.TargetPackageImpl#getD()
+	 * @generated
+	 */
+	int D = 6;
+
+	/**
+	 * The meta object id for the '{@link example1.target.impl.TRootImpl <em>TRoot</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see example1.target.impl.TRootImpl
+	 * @see example1.target.impl.TargetPackageImpl#getTRoot()
+	 * @generated
+	 */
+	int TROOT = 7;
+
+	/**
+	 * The meta object id for the '{@link example1.target.util.Visitable <em>Visitable</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see example1.target.util.Visitable
+	 * @see example1.target.impl.TargetPackageImpl#getVisitable()
+	 * @generated
+	 */
+	int VISITABLE = 9;
+
+	/**
+	 * The number of structural features of the '<em>Visitable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISITABLE_FEATURE_COUNT = 0;
+
+	/**
+	 * The number of operations of the '<em>Visitable</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VISITABLE_OPERATION_COUNT = 0;
+
+	/**
+	 * The number of structural features of the '<em>A</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int A_FEATURE_COUNT = VISITABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>A</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int A_OPERATION_COUNT = VISITABLE_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owns B</b></em>' containment reference list.
@@ -122,16 +220,6 @@ public interface TargetPackage extends EPackage {
 	int A1_OPERATION_COUNT = A_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link example1.target.impl.A2Impl <em>A2</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see example1.target.impl.A2Impl
-	 * @see example1.target.impl.TargetPackageImpl#getA2()
-	 * @generated
-	 */
-	int A2 = 2;
-
-	/**
 	 * The feature id for the '<em><b>Owns C</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -157,16 +245,6 @@ public interface TargetPackage extends EPackage {
 	 * @ordered
 	 */
 	int A2_OPERATION_COUNT = A_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link example1.target.impl.A3Impl <em>A3</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see example1.target.impl.A3Impl
-	 * @see example1.target.impl.TargetPackageImpl#getA3()
-	 * @generated
-	 */
-	int A3 = 3;
 
 	/**
 	 * The feature id for the '<em><b>Owns C</b></em>' containment reference list.
@@ -196,23 +274,13 @@ public interface TargetPackage extends EPackage {
 	int A3_OPERATION_COUNT = A2_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link example1.target.impl.NamedElementImpl <em>Named Element</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see example1.target.impl.NamedElementImpl
-	 * @see example1.target.impl.TargetPackageImpl#getNamedElement()
-	 * @generated
-	 */
-	int NAMED_ELEMENT = 8;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_ELEMENT__NAME = 0;
+	int NAMED_ELEMENT__NAME = VISITABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Named Element</em>' class.
@@ -221,7 +289,7 @@ public interface TargetPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_ELEMENT_FEATURE_COUNT = 1;
+	int NAMED_ELEMENT_FEATURE_COUNT = VISITABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Named Element</em>' class.
@@ -230,17 +298,7 @@ public interface TargetPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_ELEMENT_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link example1.target.impl.BImpl <em>B</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see example1.target.impl.BImpl
-	 * @see example1.target.impl.TargetPackageImpl#getB()
-	 * @generated
-	 */
-	int B = 4;
+	int NAMED_ELEMENT_OPERATION_COUNT = VISITABLE_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -288,16 +346,6 @@ public interface TargetPackage extends EPackage {
 	int B_OPERATION_COUNT = NAMED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link example1.target.impl.CImpl <em>C</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see example1.target.impl.CImpl
-	 * @see example1.target.impl.TargetPackageImpl#getC()
-	 * @generated
-	 */
-	int C = 5;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -341,16 +389,6 @@ public interface TargetPackage extends EPackage {
 	 * @ordered
 	 */
 	int C_OPERATION_COUNT = NAMED_ELEMENT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link example1.target.impl.DImpl <em>D</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see example1.target.impl.DImpl
-	 * @see example1.target.impl.TargetPackageImpl#getD()
-	 * @generated
-	 */
-	int D = 6;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -425,23 +463,13 @@ public interface TargetPackage extends EPackage {
 	int D_OPERATION_COUNT = NAMED_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link example1.target.impl.TRootImpl <em>TRoot</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see example1.target.impl.TRootImpl
-	 * @see example1.target.impl.TargetPackageImpl#getTRoot()
-	 * @generated
-	 */
-	int TROOT = 7;
-
-	/**
 	 * The feature id for the '<em><b>Owned A</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TROOT__OWNED_A = 0;
+	int TROOT__OWNED_A = VISITABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>TRoot</em>' class.
@@ -450,7 +478,7 @@ public interface TargetPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TROOT_FEATURE_COUNT = 1;
+	int TROOT_FEATURE_COUNT = VISITABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>TRoot</em>' class.
@@ -459,7 +487,7 @@ public interface TargetPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TROOT_OPERATION_COUNT = 0;
+	int TROOT_OPERATION_COUNT = VISITABLE_OPERATION_COUNT + 0;
 
 
 	/**
@@ -696,6 +724,17 @@ public interface TargetPackage extends EPackage {
 	EAttribute getNamedElement_Name();
 
 	/**
+	 * Returns the meta object for class '{@link example1.target.util.Visitable <em>Visitable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Visitable</em>'.
+	 * @see example1.target.util.Visitable
+	 * @model instanceClass="example1.target.util.Visitable"
+	 * @generated
+	 */
+	EClass getVisitable();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -911,6 +950,16 @@ public interface TargetPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute NAMED_ELEMENT__NAME = eINSTANCE.getNamedElement_Name();
+
+		/**
+		 * The meta object literal for the '{@link example1.target.util.Visitable <em>Visitable</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see example1.target.util.Visitable
+		 * @see example1.target.impl.TargetPackageImpl#getVisitable()
+		 * @generated
+		 */
+		EClass VISITABLE = eINSTANCE.getVisitable();
 
 	}
 

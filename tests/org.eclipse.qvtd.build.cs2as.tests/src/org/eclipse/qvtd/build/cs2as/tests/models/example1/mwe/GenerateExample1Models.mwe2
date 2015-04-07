@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.resource.impl.*
 
 var projectName = "org.eclipse.qvtd.build.cs2as.tests"
 var examplesFolder = "src/org/eclipse/qvtd/build/cs2as/tests/models/example1"
-//var platformURI = ".."
 
 /**
  *	Generate the Pivot Model, by performing the merge to create the flattened package
@@ -27,9 +26,9 @@ var examplesFolder = "src/org/eclipse/qvtd/build/cs2as/tests/models/example1"
  */
 Workflow {
 	bean = ResourceSetImpl : resourceSet {}
-    bean = ProjectMapSetup { resourceSet = resourceSet }
-    bean = GenModelSetup { resourceSet = resourceSet }
-
+    bean = ProjectMapSetup{ resourceSet = resourceSet}
+    bean = EcoreGenModelSetup { resourceSet = resourceSet }
+    
 	component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
     	genModel = "/${projectName}/${examplesFolder}/SourceMM1.genmodel"
     }
@@ -42,18 +41,31 @@ Workflow {
     	genModel = "/${projectName}/${examplesFolder}/EnvExample1.genmodel"
     }
 
-    /*component = GenerateASVisitors { resourceSet = resourceSet
+    component = GenerateASVisitors { resourceSet = resourceSet
     	projectName = "${projectName}"
-    	projectPrefix = "Classes"
+    	projectPrefix = "Target"
     	superProjectName = ""
-    	genModelFile = "${examplesFolder}/Classes.genmodel"
+    	genModelFile = "${examplesFolder}/TargetMM1.genmodel"
     	javaFolder = "tests-gen"
-    	modelPackageName = "example2.classes"
-    	visitorPackageName = "example2.classes.util"
+    	modelPackageName = "example1.target"
+    	visitorPackageName = "example1.target.util"
     	visitorClassName = "Visitor"
     	visitableClassName = "Visitable"
-    }*/
+    }
 
+    component = @SubGenerateAutoASModel { resourceSet = resourceSet
+    	projectName = "${projectName}"
+    	modelName = "target"
+    	projectPrefix = "Target"
+    	superProjectName = ""
+    	superModelName = ""
+    	genModelFile = "${examplesFolder}/TargetMM1.genmodel"
+    	lookupFilePath = "${examplesFolder}/TargetLookup.ocl"
+    	javaFolder = "tests-gen"
+		visitorPackageName = "example1.target.util"
+		visitorClassName = "Visitor"
+    	visitableClassName = "Visitable"
+    }
 }
 
 

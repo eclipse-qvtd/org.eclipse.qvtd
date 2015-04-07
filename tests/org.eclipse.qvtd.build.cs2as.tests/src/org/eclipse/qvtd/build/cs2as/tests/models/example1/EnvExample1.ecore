@@ -1,9 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="env" nsURI="http://cs2as/tests/example1/env/1.0" nsPrefix="env">
-  <eClassifiers xsi:type="ecore:EClass" name="Environment">
+  <eAnnotations source="http://www.eclipse.org/OCL/Import">
+    <details key="classes" value="TargetMM1.ecore#/"/>
+  </eAnnotations>
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Environment" eSuperTypes="#//Env4CG">
+    <eOperations name="addElements" eType="#//Environment">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="Environment{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;namedElements = namedElements->includingAll(elements),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;parentEnv = parentEnv&#x9;&#xA;&#x9;&#x9;&#x9;&#x9;}"/>
+      </eAnnotations>
+      <eTypeParameters name="NE">
+        <eBounds eClassifier="ecore:EClass TargetMM1.ecore#//NamedElement"/>
+      </eTypeParameters>
+      <eParameters name="elements" upperBound="-1">
+        <eGenericType eTypeParameter="#//Environment/addElements/NE"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="addElement" eType="#//Environment">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot">
+        <details key="body" value="Environment{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;namedElements = namedElements->including(element),&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;parentEnv = parentEnv&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}"/>
+      </eAnnotations>
+      <eParameters name="element" eType="ecore:EClass TargetMM1.ecore#//NamedElement"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="namedElements" upperBound="-1"
         eType="ecore:EClass TargetMM1.ecore#//NamedElement"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parentEnv" eType="#//Environment"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Env4CG" abstract="true" interface="true">
+    <eOperations name="hasFinalResult" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="throw new &lt;%java.lang.UnsupportedOperationException%>(&quot;Enviroment::hasFinalResult() has been created for CG purposes. Don't call this method&quot;);"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="getEvaluator" eType="#//Evaluator">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="body" value="throw new &lt;%java.lang.UnsupportedOperationException%>(&quot;Enviroment::getEvaluator() has been created for CG purposes. Don't call this method&quot;);"/>
+      </eAnnotations>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Evaluator" instanceClassName="org.eclipse.ocl.pivot.evaluation.Evaluator"
+      abstract="true" interface="true"/>
 </ecore:EPackage>

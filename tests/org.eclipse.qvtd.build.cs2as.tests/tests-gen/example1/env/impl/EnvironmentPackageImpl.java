@@ -2,11 +2,16 @@
  */
 package example1.env.impl;
 
+import example1.env.Env4CG;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EGenericType;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.ETypeParameter;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import example1.env.Environment;
 import example1.env.EnvironmentFactory;
 import example1.env.EnvironmentPackage;
@@ -25,6 +30,19 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * @generated
 	 */
 	private EClass environmentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass env4CGEClass = null;
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass evaluatorEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -122,6 +140,60 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EOperation getEnvironment__AddElements__EList() {
+		return environmentEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getEnvironment__AddElement__NamedElement() {
+		return environmentEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEnv4CG() {
+		return env4CGEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getEnv4CG__HasFinalResult() {
+		return env4CGEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getEnv4CG__GetEvaluator() {
+		return env4CGEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getEvaluator() {
+		return evaluatorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EnvironmentFactory getEnvironmentFactory() {
 		return (EnvironmentFactory)getEFactoryInstance();
 	}
@@ -148,6 +220,14 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 		environmentEClass = createEClass(ENVIRONMENT);
 		createEReference(environmentEClass, ENVIRONMENT__NAMED_ELEMENTS);
 		createEReference(environmentEClass, ENVIRONMENT__PARENT_ENV);
+		createEOperation(environmentEClass, ENVIRONMENT___ADD_ELEMENTS__ELIST);
+		createEOperation(environmentEClass, ENVIRONMENT___ADD_ELEMENT__NAMEDELEMENT);
+
+		env4CGEClass = createEClass(ENV4_CG);
+		createEOperation(env4CGEClass, ENV4_CG___HAS_FINAL_RESULT);
+		createEOperation(env4CGEClass, ENV4_CG___GET_EVALUATOR);
+
+		evaluatorEClass = createEClass(EVALUATOR);
 	}
 
 	/**
@@ -181,14 +261,70 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		environmentEClass.getESuperTypes().add(this.getEnv4CG());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(environmentEClass, Environment.class, "Environment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEnvironment_NamedElements(), theTargetPackage.getNamedElement(), null, "namedElements", null, 0, -1, Environment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getEnvironment_ParentEnv(), this.getEnvironment(), null, "parentEnv", null, 0, 1, Environment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		EOperation op = initEOperation(getEnvironment__AddElements__EList(), this.getEnvironment(), "addElements", 0, 1, IS_UNIQUE, IS_ORDERED);
+		ETypeParameter t1 = addETypeParameter(op, "NE");
+		EGenericType g1 = createEGenericType(theTargetPackage.getNamedElement());
+		t1.getEBounds().add(g1);
+		g1 = createEGenericType(t1);
+		addEParameter(op, g1, "elements", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getEnvironment__AddElement__NamedElement(), this.getEnvironment(), "addElement", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, theTargetPackage.getNamedElement(), "element", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(env4CGEClass, Env4CG.class, "Env4CG", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEOperation(getEnv4CG__HasFinalResult(), ecorePackage.getEBoolean(), "hasFinalResult", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getEnv4CG__GetEvaluator(), this.getEvaluator(), "getEvaluator", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(evaluatorEClass, Evaluator.class, "Evaluator", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// http://www.eclipse.org/OCL/Import
+		createImportAnnotations();
+		// http://www.eclipse.org/emf/2002/Ecore
+		createEcoreAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/OCL/Import</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createImportAnnotations() {
+		String source = "http://www.eclipse.org/OCL/Import";	
+		addAnnotation
+		  (this, 
+		   source, 
+		   new String[] {
+			 "classes", "TargetMM1.ecore#/"
+		   });
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createEcoreAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/Ecore";	
+		addAnnotation
+		  (this, 
+		   source, 
+		   new String[] {
+		   });
 	}
 
 } //EnvironmentPackageImpl

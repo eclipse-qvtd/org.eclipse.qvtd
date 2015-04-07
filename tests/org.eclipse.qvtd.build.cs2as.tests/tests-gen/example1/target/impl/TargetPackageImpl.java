@@ -12,6 +12,7 @@ import example1.target.NamedElement;
 import example1.target.TRoot;
 import example1.target.TargetFactory;
 import example1.target.TargetPackage;
+import example1.target.util.Visitable;
 
 /**
  * <!-- begin-user-doc -->
@@ -82,6 +83,13 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * @generated
 	 */
 	private EClass namedElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass visitableEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -347,6 +355,15 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getVisitable() {
+		return visitableEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public TargetFactory getTargetFactory() {
 		return (TargetFactory)getEFactoryInstance();
 	}
@@ -400,6 +417,8 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 
 		namedElementEClass = createEClass(NAMED_ELEMENT);
 		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
+
+		visitableEClass = createEClass(VISITABLE);
 	}
 
 	/**
@@ -430,12 +449,15 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		aEClass.getESuperTypes().add(this.getVisitable());
 		a1EClass.getESuperTypes().add(this.getA());
 		a2EClass.getESuperTypes().add(this.getA());
 		a3EClass.getESuperTypes().add(this.getA2());
 		bEClass.getESuperTypes().add(this.getNamedElement());
 		cEClass.getESuperTypes().add(this.getNamedElement());
 		dEClass.getESuperTypes().add(this.getNamedElement());
+		tRootEClass.getESuperTypes().add(this.getVisitable());
+		namedElementEClass.getESuperTypes().add(this.getVisitable());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(aEClass, example1.target.A.class, "A", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -469,8 +491,29 @@ public class TargetPackageImpl extends EPackageImpl implements TargetPackage {
 		initEClass(namedElementEClass, NamedElement.class, "NamedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(visitableEClass, Visitable.class, "Visitable", IS_ABSTRACT, IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+
 		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// http://www.eclipse.org/emf/2002/Ecore
+		createEcoreAnnotations();
+	}
+
+	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore</b>.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void createEcoreAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/Ecore";	
+		addAnnotation
+		  (this, 
+		   source, 
+		   new String[] {
+		   });
 	}
 
 } //TargetPackageImpl

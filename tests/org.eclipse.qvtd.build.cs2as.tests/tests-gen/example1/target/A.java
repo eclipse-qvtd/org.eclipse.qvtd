@@ -2,6 +2,7 @@
  */
 package example1.target;
 
+import example1.target.util.Visitable;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -11,8 +12,8 @@ import org.eclipse.emf.ecore.EObject;
  *
  *
  * @see example1.target.TargetPackage#getA()
- * @model abstract="true"
+ * @model abstract="true" superTypes="example1.target.Visitable"
  * @generated
  */
-public interface A extends EObject {
+public interface A extends EObject, Visitable {
 } // A

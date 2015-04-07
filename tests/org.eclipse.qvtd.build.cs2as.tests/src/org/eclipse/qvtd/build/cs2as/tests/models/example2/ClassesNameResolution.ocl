@@ -133,7 +133,7 @@ def : _lookupClasses(env : env::Environment, path : classescs::PathElementCS) : 
 	in
 		if foundClasses->isEmpty()
 		then if env.parentEnv.oclIsUndefined()
-			then null
+			then OrderedSet{}
 			else _lookupClasses(env.parentEnv,path)
 			endif
 		else foundClasses

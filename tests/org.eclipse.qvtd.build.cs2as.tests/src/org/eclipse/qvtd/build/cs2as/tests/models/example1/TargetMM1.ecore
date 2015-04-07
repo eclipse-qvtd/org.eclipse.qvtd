@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="target" nsURI="http://cs2as/tests/example1/targetMM/1.0" nsPrefix="target">
-  <eClassifiers xsi:type="ecore:EClass" name="A" abstract="true"/>
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="A" abstract="true" eSuperTypes="#//Visitable"/>
   <eClassifiers xsi:type="ecore:EClass" name="A1" eSuperTypes="#//A">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownsB" upperBound="-1"
         eType="#//B" containment="true" eOpposite="#//B/toA1"/>
@@ -28,11 +33,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="refsB" eType="#//B"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="refsC" eType="#//C"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TRoot">
+  <eClassifiers xsi:type="ecore:EClass" name="TRoot" eSuperTypes="#//Visitable">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedA" upperBound="-1"
         eType="#//A" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" eSuperTypes="#//Visitable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Visitable" instanceClassName="example1.target.util.Visitable"
+      abstract="true" interface="true"/>
 </ecore:EPackage>

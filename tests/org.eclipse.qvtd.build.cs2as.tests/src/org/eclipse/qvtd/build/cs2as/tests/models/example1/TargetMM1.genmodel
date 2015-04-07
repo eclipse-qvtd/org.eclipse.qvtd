@@ -4,6 +4,14 @@
     modelPluginID="org.eclipse.qvtd.build.cs2as.tests" modelName="TargetMM1" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
     operationReflection="true" importOrganizing="true">
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
+    <details key="Use Delegates" value="false"/>
+    <details key="Use Null Annotations" value="true"/>
+  </genAnnotations>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/Visitor">
+    <details key="Root Visitor Class" value="example1.target.util.Visitor"/>
+    <details key="Visitable Classes" value="example1.target.util.Visitable"/>
+  </genAnnotations>
   <foreignModel>TargetMM1.ecore</foreignModel>
   <genPackages prefix="Target" basePackage="example1" disposableProviderFactory="true"
       ecorePackage="TargetMM1.ecore#/">

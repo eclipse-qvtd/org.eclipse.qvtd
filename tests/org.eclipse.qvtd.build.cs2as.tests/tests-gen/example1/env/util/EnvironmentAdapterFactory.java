@@ -2,11 +2,13 @@
  */
 package example1.env.util;
 
+import example1.env.*;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.ocl.pivot.evaluation.Evaluator;
 import example1.env.Environment;
 import example1.env.EnvironmentPackage;
 
@@ -71,6 +73,14 @@ public class EnvironmentAdapterFactory extends AdapterFactoryImpl {
 				return createEnvironmentAdapter();
 			}
 			@Override
+			public Adapter caseEnv4CG(Env4CG object) {
+				return createEnv4CGAdapter();
+			}
+			@Override
+			public Adapter caseEvaluator(Evaluator object) {
+				return createEvaluatorAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -101,6 +111,34 @@ public class EnvironmentAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEnvironmentAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link example1.env.Env4CG <em>Env4 CG</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see example1.env.Env4CG
+	 * @generated
+	 */
+	public Adapter createEnv4CGAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.evaluation.Evaluator <em>Evaluator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.ocl.pivot.evaluation.Evaluator
+	 * @generated
+	 */
+	public Adapter createEvaluatorAdapter() {
 		return null;
 	}
 

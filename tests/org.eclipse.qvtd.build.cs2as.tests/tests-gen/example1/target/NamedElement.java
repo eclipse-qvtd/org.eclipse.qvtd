@@ -2,6 +2,7 @@
  */
 package example1.target;
 
+import example1.target.util.Visitable;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -17,10 +18,10 @@ import org.eclipse.emf.ecore.EObject;
  * </ul>
  *
  * @see example1.target.TargetPackage#getNamedElement()
- * @model
+ * @model superTypes="example1.target.Visitable"
  * @generated
  */
-public interface NamedElement extends EObject {
+public interface NamedElement extends EObject, Visitable {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -32,7 +33,7 @@ public interface NamedElement extends EObject {
 	 * @return the value of the '<em>Name</em>' attribute.
 	 * @see #setName(String)
 	 * @see example1.target.TargetPackage#getNamedElement_Name()
-	 * @model
+	 * @model annotation="http://www.eclipse.org/emf/2002/GenModel get='throw new UnsupportedOperationException();  // FIXME Unimplemented http://cs2as/tests/example1/targetMM/1.0!NamedElement!name'"
 	 * @generated
 	 */
 	String getName();

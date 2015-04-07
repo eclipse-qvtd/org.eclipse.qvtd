@@ -11,9 +11,12 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import example1.target.A2;
 import example1.target.C;
 import example1.target.TargetPackage;
+import example1.target.util.Visitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -157,6 +160,15 @@ public class A2Impl extends AImpl implements A2 {
 				return ownsC != null && !ownsC.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+		return visitor.visitA2(this);
 	}
 
 } //A2Impl

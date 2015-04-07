@@ -14,7 +14,6 @@ import example2.classes.ClassesPackage;
 import example2.classes.NamedElement;
 import example2.classes.Package;
 import example2.classes.Root;
-import example2.classes.util.ClassesLookupVisitor;
 import example2.classes.util.Visitable;
 import example2.classescs.ClassCS;
 import example2.classescs.ClassescsPackage;
@@ -49,6 +48,7 @@ import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.pivot.values.SetValue;
 import org.eclipse.qvtd.build.cs2as.qvti.CS2ASTransformationExecutor;
+import org.eclipse.qvtd.build.cs2as.tests.models.example2.java.ClassesLookupVisitor;
 import org.eclipse.qvtd.build.cs2as.tests.models.example2.java.LookupEnvironment;
 
 /**
@@ -142,7 +142,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         if (eq) {
             final /*@Nullable*/ /*@Thrown*/ PathElementCS first = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_pathSeq_3);
             LookupEnvironment _lookupEnv = new org.eclipse.qvtd.build.cs2as.tests.models.example2.java.LookupEnvironment(evaluator,first);
-            ClassesLookupVisitor _lookupVisitor = new example2.classes.util.ClassesLookupVisitor(_lookupEnv);
+            ClassesLookupVisitor _lookupVisitor = new org.eclipse.qvtd.build.cs2as.tests.models.example2.java.ClassesLookupVisitor(_lookupEnv);
             EList<NamedElement> _lookupResult = self_0.accept(_lookupVisitor).getNamedElements();
             Package _lookupPackage = null;
             if (_lookupResult.size() == 1) {
@@ -160,7 +160,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
             final /*@NonNull*/ /*@Thrown*/ Package lookupPackage = this.lookupPackage(self_0, UNBOXED_subOrderedSet);
             final /*@Nullable*/ /*@Thrown*/ PathElementCS last = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_pathSeq_3);
             LookupEnvironment _lookupEnv_0 = new org.eclipse.qvtd.build.cs2as.tests.models.example2.java.LookupEnvironment(evaluator,last);
-            ClassesLookupVisitor _lookupVisitor_0 = new example2.classes.util.ClassesLookupVisitor(_lookupEnv_0);
+            ClassesLookupVisitor _lookupVisitor_0 = new org.eclipse.qvtd.build.cs2as.tests.models.example2.java.ClassesLookupVisitor(_lookupEnv_0);
             EList<NamedElement> _lookupResult_0 = lookupPackage.accept(_lookupVisitor_0).getNamedElements();
             Package _lookupPackage_0 = null;
             if (_lookupResult_0.size() == 1) {
@@ -361,7 +361,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
             if (eq_0) {
                 final /*@Nullable*/ /*@Thrown*/ PathElementCS first = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_pathSeq_0_3);
                 LookupEnvironment _lookupEnv = new org.eclipse.qvtd.build.cs2as.tests.models.example2.java.LookupEnvironment(evaluator,first);
-                ClassesLookupVisitor _lookupVisitor = new example2.classes.util.ClassesLookupVisitor(_lookupEnv);
+                ClassesLookupVisitor _lookupVisitor = new org.eclipse.qvtd.build.cs2as.tests.models.example2.java.ClassesLookupVisitor(_lookupEnv);
                 EList<NamedElement> _lookupResult = self_1.accept(_lookupVisitor).getNamedElements();
                 example2.classes.Class _lookupClass = null;
                 if (_lookupResult.size() == 1) {
@@ -382,7 +382,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
                 final /*@NonNull*/ /*@Thrown*/ Package lookupPackage = this.lookupPackage(self_1, UNBOXED_subOrderedSet);
                 final /*@Nullable*/ /*@Thrown*/ PathElementCS last = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_pathSeq_0_3);
                 LookupEnvironment _lookupEnv_0 = new org.eclipse.qvtd.build.cs2as.tests.models.example2.java.LookupEnvironment(evaluator,last);
-                ClassesLookupVisitor _lookupVisitor_0 = new example2.classes.util.ClassesLookupVisitor(_lookupEnv_0);
+                ClassesLookupVisitor _lookupVisitor_0 = new org.eclipse.qvtd.build.cs2as.tests.models.example2.java.ClassesLookupVisitor(_lookupEnv_0);
                 EList<NamedElement> _lookupResult_0 = lookupPackage.accept(_lookupVisitor_0).getNamedElements();
                 example2.classes.Class _lookupClass_0 = null;
                 if (_lookupResult_0.size() == 1) {

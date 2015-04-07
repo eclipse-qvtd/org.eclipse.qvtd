@@ -12,9 +12,12 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import example1.target.A;
 import example1.target.TRoot;
 import example1.target.TargetPackage;
+import example1.target.util.Visitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -143,6 +146,15 @@ public class TRootImpl extends MinimalEObjectImpl.Container implements TRoot {
 				return ownedA != null && !ownedA.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @Nullable <R> R accept(@NonNull Visitor<R> visitor) {
+		return visitor.visitTRoot(this);
 	}
 
 } //TRootImpl
