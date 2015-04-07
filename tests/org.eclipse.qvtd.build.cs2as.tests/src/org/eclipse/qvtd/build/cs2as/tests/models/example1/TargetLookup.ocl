@@ -94,7 +94,15 @@ def : _lookupC(bName : String) : C =
 		then null
 		else foundCs->first() -- LookupVisitor will report ambiguous result
 		endif
-		
+
+context D
+def : lookupB(bName : String) : B =
+	_lookupB(bName)
+
+def : lookupC(cName : String) : C =
+	_lookupC(cName)	
+
+
 context TRoot
 def : _env(child : ocl::OclElement) : env::Environment =
 	parentEnv()
@@ -141,56 +149,52 @@ def : _env(child : ocl::OclElement) : env::Environment =
 
 
 -- Specifying parent() env() operations
+-- Note: Since CG now relies on the LookupVisitor the inlining below is not needed anymore
 
-context TRoot
-def : parentEnv() : env::Environment =
-	env::Environment{}
-	
-context A1
-def : parentEnv() : env::Environment =
-	let parent = oclContainer()
-	in parent.oclAsType(TRoot)._env(self)
-	
-
-context A2
-def : parentEnv() : env::Environment =
-	let parent = oclContainer()
-	in parent.oclAsType(TRoot)._env(self)
-	
-
-
-context B
-def : env() : env::Environment =
-	self._env(null)
-
-
-	
-def : parentEnv() : env::Environment =
-	let parent = oclContainer()
-	in parent.oclAsType(A1)._env(self)
-	
-context C
-def : env() : env::Environment =
-	self._env(null)
-	
-def : parentEnv() : env::Environment =
-	let parent = oclContainer()
-	in parent.oclAsType(A2)._env(self)
-
-
-context D
-def : parentEnv() : env::Environment =
-	let parent = oclContainer()
-	in
-		if parent.oclIsKindOf(B)
-		then parent.oclAsType(B)._env(self)
-		else parent.oclAsType(C)._env(self)
-		endif
-
-def : lookupB(bName : String) : B =
-	_lookupB(bName)
-
-def : lookupC(cName : String) : C =
-	_lookupC(cName)	
+--context TRoot
+--def : parentEnv() : env::Environment =
+--	env::Environment{}
+--	
+--context A1
+--def : parentEnv() : env::Environment =
+--	let parent = oclContainer()
+--	in parent.oclAsType(TRoot)._env(self)
+--	
+--
+--context A2
+--def : parentEnv() : env::Environment =
+--	let parent = oclContainer()
+--	in parent.oclAsType(TRoot)._env(self)
+--	
+--
+--
+--context B
+--def : env() : env::Environment =
+--	self._env(null)
+--
+--
+--	
+--def : parentEnv() : env::Environment =
+--	let parent = oclContainer()
+--	in parent.oclAsType(A1)._env(self)
+--	
+--context C
+--def : env() : env::Environment =
+--	self._env(null)
+--	
+--def : parentEnv() : env::Environment =
+--	let parent = oclContainer()
+--	in parent.oclAsType(A2)._env(self)
+--
+--
+--context D
+--def : parentEnv() : env::Environment =
+--	let parent = oclContainer()
+--	in
+--		if parent.oclIsKindOf(B)
+--		then parent.oclAsType(B)._env(self)
+--		else parent.oclAsType(C)._env(self)
+--		endif
+--
 
 endpackage

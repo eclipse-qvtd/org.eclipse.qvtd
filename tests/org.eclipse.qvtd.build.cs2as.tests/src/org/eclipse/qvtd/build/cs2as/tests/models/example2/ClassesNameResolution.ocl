@@ -149,32 +149,33 @@ def : lookupClass(classPathName : classescs::PathNameCS) : classes::Class =
 		
 -- FIXME 
 -- Inlining, because a generic operations (OclElement::env(), OclElement::parentEnv()) create troubles to the CG
+-- Note: Since CG now relies on the LookupVisitor the inlining below is not needed anymore
 
-context Root
-def : env() : env::Environment =
-	self._env(null)
-	
-def : parentEnv() : env::Environment =
-	env::Environment {}
-	
-context Package
-def : env() : env::Environment =
-	self._env(null)
-	
-def : parentEnv() : env::Environment =
-	let parent = oclContainer() in
-	if parent.oclIsKindOf(Package)
-	then parent.oclAsType(Package)._env(self)
-	else parent.oclAsType(Root)._env(self)
-	endif
-
-context Class
-def : env() : env::Environment =
-	-- Class doesn't contribute elements no the environment, start from its container
-	parentEnv()
-	
-def : parentEnv() : env::Environment =
-	let parent = oclContainer() in	
-	parent.oclAsType(Package)._env(self) -- Classes can only be contained in Packages 
-
+--context Root
+--def : env() : env::Environment =
+--	self._env(null)
+--	
+--def : parentEnv() : env::Environment =
+--	env::Environment {}
+--	
+--context Package
+--def : env() : env::Environment =
+--	self._env(null)
+--	
+--def : parentEnv() : env::Environment =
+--	let parent = oclContainer() in
+--	if parent.oclIsKindOf(Package)
+--	then parent.oclAsType(Package)._env(self)
+--	else parent.oclAsType(Root)._env(self)
+--	endif
+--
+--context Class
+--def : env() : env::Environment =
+--	-- Class doesn't contribute elements no the environment, start from its container
+--	parentEnv()
+--	
+--def : parentEnv() : env::Environment =
+--	let parent = oclContainer() in	
+--	parent.oclAsType(Package)._env(self) -- Classes can only be contained in Packages 
+-- EndOf inlining
 endpackage
