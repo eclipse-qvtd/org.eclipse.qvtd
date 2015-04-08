@@ -46,7 +46,6 @@ import org.eclipse.ocl.pivot.library.logical.BooleanNotOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclAsTypeOperation;
 import org.eclipse.ocl.pivot.library.oclany.OclAnyOclIsKindOfOperation;
 import org.eclipse.ocl.pivot.utilities.ValueUtil;
-import org.eclipse.ocl.pivot.values.InvalidValueException;
 import org.eclipse.ocl.pivot.values.OrderedSetValue;
 import org.eclipse.ocl.pivot.values.SequenceValue;
 import org.eclipse.ocl.pivot.values.SetValue;
@@ -1040,10 +1039,8 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      *   )
      * { |
      * z.ast.oclAsType(target::D)
-     *    = if name.oclIsUndefined()
-     *   then null
-     *   else ast.oclAsType(target::D).lookupC(name)
-     *   endif;
+     *    = ast.oclAsType(target::D)
+     *   .lookupC(z);
      * }
      * 
      * }
@@ -1063,34 +1060,26 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ D oclAsType = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
-        /*@Nullable*/ /*@Caught*/ Object CAUGHT_name;
-        try {
-            final /*@Nullable*/ /*@Thrown*/ String name = z_3.getName();
-            CAUGHT_name = name;
-        }
-        catch (Exception e) {
-            CAUGHT_name = ValueUtil.createInvalidValue(e);
-        }
-        final /*@NonInvalid*/ boolean symbol_0 = (CAUGHT_name == null) || (CAUGHT_name instanceof InvalidValueException);
-        /*@Nullable*/ /*@Thrown*/ C symbol_1;
-        if (symbol_0) {
-            symbol_1 = null;
+        final /*@Nullable*/ /*@Thrown*/ D self_0 = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
+        final /*@Nullable*/ /*@Thrown*/ String name_0 = z_3.getName();
+        final /*@Thrown*/ boolean eq = name_0 == null;
+        /*@Nullable*/ /*@Thrown*/ C symbol_0;
+        if (eq) {
+            symbol_0 = null;
         }
         else {
-            final /*@Nullable*/ /*@Thrown*/ D self_0 = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
-            final /*@Nullable*/ /*@Thrown*/ String cName = z_3.getName();
-            LookupEnvironment _lookupEnv = new org.eclipse.qvtd.build.cs2as.tests.models.example1.java.LookupEnvironment(evaluator,cName);
+            LookupEnvironment _lookupEnv = new org.eclipse.qvtd.build.cs2as.tests.models.example1.java.LookupEnvironment(evaluator,name_0);
             TargetLookupVisitor _lookupVisitor = new org.eclipse.qvtd.build.cs2as.tests.models.example1.java.TargetLookupVisitor(_lookupEnv);
             EList<NamedElement> _lookupResult = self_0.accept(_lookupVisitor).getNamedElements();
             C _lookupC = null;
             if (_lookupResult.size() == 1) {
                 _lookupC = (C)_lookupResult.get(0);
             } else {
-                handleLookupError((EObject)self_0,cName);
+                handleLookupError(z_3,name_0);
             };
-            symbol_1 = _lookupC;
+            symbol_0 = _lookupC;
         }
-        oclAsType.setRefsC(symbol_1);
+        oclAsType.setRefsC(symbol_0);
         // mapping statements
         return true;
     }
@@ -1209,10 +1198,8 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      *   )
      * { |
      * z.ast.oclAsType(target::D)
-     *    = if name.oclIsUndefined()
-     *   then null
-     *   else ast.oclAsType(target::D).lookupB(name)
-     *   endif;
+     *    = ast.oclAsType(target::D)
+     *   .lookupB(z);
      * }
      * 
      * }
@@ -1231,34 +1218,26 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ D oclAsType = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
-        /*@Nullable*/ /*@Caught*/ Object CAUGHT_name;
-        try {
-            final /*@Nullable*/ /*@Thrown*/ String name = z_6.getName();
-            CAUGHT_name = name;
-        }
-        catch (Exception e) {
-            CAUGHT_name = ValueUtil.createInvalidValue(e);
-        }
-        final /*@NonInvalid*/ boolean symbol_0 = (CAUGHT_name == null) || (CAUGHT_name instanceof InvalidValueException);
-        /*@Nullable*/ /*@Thrown*/ B symbol_1;
-        if (symbol_0) {
-            symbol_1 = null;
+        final /*@Nullable*/ /*@Thrown*/ D self_0 = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
+        final /*@Nullable*/ /*@Thrown*/ String name_0 = z_6.getName();
+        final /*@Thrown*/ boolean eq = name_0 == null;
+        /*@Nullable*/ /*@Thrown*/ B symbol_0;
+        if (eq) {
+            symbol_0 = null;
         }
         else {
-            final /*@Nullable*/ /*@Thrown*/ D self_0 = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
-            final /*@Nullable*/ /*@Thrown*/ String bName = z_6.getName();
-            LookupEnvironment _lookupEnv = new org.eclipse.qvtd.build.cs2as.tests.models.example1.java.LookupEnvironment(evaluator,bName);
+            LookupEnvironment _lookupEnv = new org.eclipse.qvtd.build.cs2as.tests.models.example1.java.LookupEnvironment(evaluator,name_0);
             TargetLookupVisitor _lookupVisitor = new org.eclipse.qvtd.build.cs2as.tests.models.example1.java.TargetLookupVisitor(_lookupEnv);
             EList<NamedElement> _lookupResult = self_0.accept(_lookupVisitor).getNamedElements();
             B _lookupB = null;
             if (_lookupResult.size() == 1) {
                 _lookupB = (B)_lookupResult.get(0);
             } else {
-                handleLookupError((EObject)self_0,bName);
+                handleLookupError(z_6,name_0);
             };
-            symbol_1 = _lookupB;
+            symbol_0 = _lookupB;
         }
-        oclAsType.setRefsB(symbol_1);
+        oclAsType.setRefsB(symbol_0);
         // mapping statements
         return true;
     }

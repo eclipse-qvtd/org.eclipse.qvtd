@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.examples.codegen.analyzer.AnalysisVisitor;
@@ -12,11 +11,13 @@ import org.eclipse.ocl.examples.codegen.analyzer.BoxingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.DependencyVisitor;
 import org.eclipse.ocl.examples.codegen.analyzer.FieldingAnalyzer;
 import org.eclipse.ocl.examples.codegen.analyzer.ReferencesVisitor;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGCallExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGGuardExp;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGPackage;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGTypeId;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
+import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.cse.GlobalPlace;
 import org.eclipse.ocl.examples.codegen.dynamic.OCL2JavaFileObject;
 import org.eclipse.ocl.examples.codegen.generator.TypeDescriptor;
@@ -220,17 +221,38 @@ public class CS2ASJavaCompiler {
 			// TODO what about ambigous error report ?
 			js.append("} else {\n");
 			js.pushIndentation(null);
+			
+			CGValuedElement lookupArg = cgArguments.get(0); // FIXMe improve handleLookupError
+			CGValuedElement initialSource = initialSourceCG(lookupArg);
 			js.append("handleLookupError(");
-			js.append("(");
-			js.appendClassReference(EObject.class);
-			js.append(")");
-			js.appendReferenceTo(cgSource);
+			js.appendReferenceTo(initialSource); 
 			js.append(",");
-			js.appendReferenceTo(cgArguments.get(0)); // FIXMe improve handleLookupError
+			js.appendReferenceTo(lookupArg);
 			js.append(");\n");
+			
 			js.popIndentation();
 			js.append("};\n");
 			return true;
+		}
+		
+		/**
+		 * @param cgValue
+		 * @return helper to obtain the initial CGValuedElement corresponding to the source of the lookupCall argument
+		 */
+		private CGValuedElement initialSourceCG(CGValuedElement cgValue) {
+			if (cgValue instanceof CGVariableExp) {
+				CGValuedElement cgVarInit = ((CGVariableExp) cgValue).getReferredVariable().getInit();
+				if (cgVarInit == null) {
+					return cgValue;
+				} else {
+					return cgVarInit == cgValue ? cgVarInit : initialSourceCG(cgVarInit);	
+				}
+				
+			} else if (cgValue instanceof CGCallExp) {
+				CGValuedElement cgSource = ((CGCallExp) cgValue).getSource();
+				return initialSourceCG(cgSource);
+			}
+			return cgValue;
 		}
 	}
 

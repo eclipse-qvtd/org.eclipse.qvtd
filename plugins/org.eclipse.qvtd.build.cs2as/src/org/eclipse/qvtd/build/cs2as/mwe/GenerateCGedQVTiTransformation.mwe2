@@ -20,9 +20,15 @@ import org.eclipse.emf.ecore.resource.*
 var String oclFileURI
 
 /**
- * Optional resource set 
+ * Mandatory resource set 
  */
 var ResourceSet resourceSet
+
+var String environmentClassName
+
+var String lookupVisitorClassName
+
+var String namedElementItfName
 
 /**
  * Optional output 
@@ -31,12 +37,17 @@ var javaFolder = "src-gen/"
 
 var javaPackage = ""
 
+
+
 Workflow {
 
 	component = GenerateCGedQVTiTransformation {
 		resourceSet = resourceSet
 		oclDocURI = oclFileURI
 		javaFolder = javaFolder
-		javaPackage = javaPackage 
+		javaPackage = javaPackage
+		environmentClassName = environmentClassName
+		lookupVisitorClassName = lookupVisitorClassName
+		namedElementItfName = namedElementItfName 
 	}
 }

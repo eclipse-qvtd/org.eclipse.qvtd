@@ -148,7 +148,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
             if (_lookupResult.size() == 1) {
                 _lookupPackage = (Package)_lookupResult.get(0);
             } else {
-                handleLookupError((EObject)self_0,first);
+                handleLookupError(pathSeq,first);
             };
             symbol_0 = _lookupPackage;
         }
@@ -166,7 +166,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
             if (_lookupResult_0.size() == 1) {
                 _lookupPackage_0 = (Package)_lookupResult_0.get(0);
             } else {
-                handleLookupError((EObject)lookupPackage,last);
+                handleLookupError(pathSeq,last);
             };
             symbol_0 = _lookupPackage_0;
         }
@@ -324,10 +324,8 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
      * )
      * { |
      * classCS.ast.oclAsType(classes::Class)
-     *    = if extends = null
-     *   then null
-     *   else ast.oclAsType(classes::Class).lookupClass(extends)
-     *   endif;
+     *    = ast.oclAsType(classes::Class)
+     *   .lookupClass(classCS);
      * }
      * 
      * }
@@ -340,24 +338,23 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
         // creations
         // assignments
         final /*@Nullable*/ /*@Thrown*/ example2.classes.Class oclAsType = (example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_classes_c_c_Class_0);
+        final /*@Nullable*/ /*@Thrown*/ example2.classes.Class self_1 = (example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_classes_c_c_Class_0);
         final /*@Nullable*/ /*@Thrown*/ PathNameCS symbol_0 = classCS_1.getExtends();
         final /*@Thrown*/ boolean eq = symbol_0 == null;
-        /*@Nullable*/ /*@Thrown*/ example2.classes.Class symbol_2;
+        /*@Nullable*/ /*@Thrown*/ example2.classes.Class symbol_3;
         if (eq) {
-            symbol_2 = null;
+            symbol_3 = null;
         }
         else {
-            final /*@Nullable*/ /*@Thrown*/ example2.classes.Class self_1 = (example2.classes.Class)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_classes_c_c_Class_0);
-            final /*@Nullable*/ /*@Thrown*/ PathNameCS classPathName = classCS_1.getExtends();
-            if (classPathName == null) {
+            if (symbol_0 == null) {
                 throwNull(classCS_1, "Null source for \'classescs::PathNameCS::path\'");
             }
-            final /*@Nullable*/ /*@Thrown*/ List<PathElementCS> pathSeq_0 = classPathName.getPath();
+            final /*@Nullable*/ /*@Thrown*/ List<PathElementCS> pathSeq_0 = symbol_0.getPath();
             assert pathSeq_0 != null;
             final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_pathSeq_0_3 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, pathSeq_0);
             final /*@NonNull*/ /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_pathSeq_0_3);
             final /*@Thrown*/ boolean eq_0 = size.equals(INT_1);
-            /*@NonNull*/ /*@Thrown*/ example2.classes.Class symbol_1;
+            /*@NonNull*/ /*@Thrown*/ example2.classes.Class symbol_2;
             if (eq_0) {
                 final /*@Nullable*/ /*@Thrown*/ PathElementCS first = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_pathSeq_0_3);
                 LookupEnvironment _lookupEnv = new org.eclipse.qvtd.build.cs2as.tests.models.example2.java.LookupEnvironment(evaluator,first);
@@ -367,9 +364,9 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
                 if (_lookupResult.size() == 1) {
                     _lookupClass = (example2.classes.Class)_lookupResult.get(0);
                 } else {
-                    handleLookupError((EObject)self_1,first);
+                    handleLookupError(classCS_1,first);
                 };
-                symbol_1 = _lookupClass;
+                symbol_2 = _lookupClass;
             }
             else {
                 if (self_1 == null) {
@@ -388,13 +385,13 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
                 if (_lookupResult_0.size() == 1) {
                     _lookupClass_0 = (example2.classes.Class)_lookupResult_0.get(0);
                 } else {
-                    handleLookupError((EObject)lookupPackage,last);
+                    handleLookupError(classCS_1,last);
                 };
-                symbol_1 = _lookupClass_0;
+                symbol_2 = _lookupClass_0;
             }
-            symbol_2 = symbol_1;
+            symbol_3 = symbol_2;
         }
-        oclAsType.setSuperClass(symbol_2);
+        oclAsType.setSuperClass(symbol_3);
         // mapping statements
         return true;
     }

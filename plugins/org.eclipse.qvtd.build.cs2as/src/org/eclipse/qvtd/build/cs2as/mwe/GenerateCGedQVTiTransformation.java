@@ -46,13 +46,30 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 	protected ResourceSet resourceSet;
 	protected String javaFolder = "src-gen/";
 	protected String javaPackage = "";
+	protected String envClassName;
+	protected String visitorClassName;
+	protected String namedElementItfName;
 	protected Map<?, ?> savingOptions;
 
 	public void checkConfiguration(final Issues issues) {
 		if (!isDefined(oclFileURI)) {
 			issues.addError(this, "OCL document URI not specified.");
 		}
+		
+		if (!isDefined(envClassName)) {
+			issues.addError(this, "Fully qualified name of the Environment java class not specified.");
+		}
+		
+		if (!isDefined(visitorClassName)) {
+			issues.addError(this, "Fully qualified name of the Loookup Visitor java class not specified");
+		}
+		
+		if (!isDefined(namedElementItfName)) {
+			issues.addError(this, "Fully qualified name of the Named Element interface not specified");
+		}
 	}
+	
+	 
 
 	protected void doSetup() {
 		CompleteOCLStandaloneSetup.doSetup();
@@ -82,7 +99,7 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 	}
 	
 	protected CS2ASJavaCGParameters createParameters() {
-		return new CS2ASJavaCGParameters("TODO", "TODO", "TODO",javaFolder, javaPackage);
+		return new CS2ASJavaCGParameters(envClassName, visitorClassName, namedElementItfName, javaFolder, javaPackage);
 	}
 
 	/**
@@ -98,7 +115,7 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 	 * generated sources. (default is "")
 	 */
 	public void setJavaPackage(final String javaPackage) {
-		this.javaPackage = javaPackage.endsWith(BACKSLASH) ? javaPackage : javaPackage.concat(BACKSLASH);
+		this.javaPackage = javaPackage;
 	}
 
 	/**
@@ -108,6 +125,27 @@ public  class GenerateCGedQVTiTransformation extends AbstractWorkflowComponent
 		this.oclFileURI = oclDocURI;
 	}
 
+	/**
+	 * (Mandatory) The fully qualified class name of the Environment java class  
+	 */
+	public void setEnvironmentClassName(final String envClassName) {
+		this.envClassName = envClassName;
+	}
+	
+	/**
+	 * (Mandatory) The fully qualified class name of the Lookup Visitor java class  
+	 */
+	public void setLookupVisitorClassName(final String visitorClassName) {
+		this.visitorClassName = visitorClassName;
+	}
+	
+	/**
+	 * (Mandatory) The fully qualified interface name of the NamedElement (itf which provides the "name" attribute)  
+	 */
+	public void setNamedElementItfName(final String namedElementItfName) {
+		this.namedElementItfName = namedElementItfName;
+	}
+	
 	/**
 	 * An optional ResourceSet that MWE components may share to reduce model
 	 * loading.

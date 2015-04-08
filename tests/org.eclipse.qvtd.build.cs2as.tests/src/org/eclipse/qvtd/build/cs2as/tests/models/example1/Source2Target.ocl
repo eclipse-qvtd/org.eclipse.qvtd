@@ -55,19 +55,13 @@ def : ast() : target::D =
 	then target::D {
 		toA = toY.oclAsType(source::Y1).ast().toA1,
 		name = name,
-		refsB = if name.oclIsUndefined() 
-				then null
-				else ast().lookupB(name)
-				endif 
+		refsB = ast().lookupB(self)
 	}
 	else target::D {
 		toA = toY.oclAsType(source::Y2).ast().toA2,
 		name = name,
-		refsC = if name.oclIsUndefined() 
-				then null
-				else ast().lookupC(name)
-				endif
+		refsC = ast().lookupC(self)
 	}
 	endif
-
+	
 endpackage

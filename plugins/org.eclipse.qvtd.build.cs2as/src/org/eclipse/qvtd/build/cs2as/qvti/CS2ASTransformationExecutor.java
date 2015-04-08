@@ -34,10 +34,24 @@ public abstract class CS2ASTransformationExecutor extends AbstractTransformation
 		handleError(sourceObject, "''" + lookupHint.toString() +"'' not found");
 	}
 	
+	protected void handleLookupError(List<? extends EObject> sourceObjects, EObject lookupHint) {
+		int hintPos = sourceObjects.indexOf(lookupHint);
+		switch (hintPos)  {
+			case -1:
+			case 0:
+					hintPos = 0; // For safety, the default will be the first one
+					break;
+			default:
+					// We assume the element from which we report is the previous one of the lookupHint
+					hintPos = hintPos -1;
+		}
+		
+		handleError(sourceObjects.get(hintPos), "''" + lookupHint.toString() +"'' not found"); 
+	}
+	
 	protected void handleError(EObject sourceObject, String errorMessage) {
 		txErrors.add(new CS2ASDiagnostic(sourceObject, errorMessage));
 	}
-	
 	
 	public List<Diagnostic> getErrors() {
 		return txErrors;

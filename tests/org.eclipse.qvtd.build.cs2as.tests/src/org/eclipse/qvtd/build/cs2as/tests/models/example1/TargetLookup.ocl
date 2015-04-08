@@ -1,5 +1,6 @@
 import 'EnvExample1.ecore'
 --import 'Environment.ocl' FIXME imported OCL doesn't work
+import 'SourceMM1.ecore'
 import 'TargetMM1.ecore'
 
 package ocl
@@ -23,21 +24,6 @@ context Environment
 -- Epsilon can't deal with this. The property is needed in the meta-model
 -- def : namedElements : OrderedSet(classes::NamedElement) = OrderedSet{}
 -- def : parentEnv : Environment = null
-
--- General Environment configuration operations
-def : addElement(element : target::NamedElement) : Environment =
-	Environment{
-		namedElements = namedElements->asSequence() -- FIXME bug 460682
-			->including(element),
-		parentEnv = parentEnv
-	}
-	
-def : addElements(elements : Collection(target::NamedElement)) : Environment =
-	Environment{
-		namedElements = namedElements->asSequence() -- FIXME bug 460682
-			->includingAll(elements),
-		parentEnv = parentEnv
-	}
 	
 def : nestedEnv() : Environment = 
 	Environment {
@@ -45,11 +31,10 @@ def : nestedEnv() : Environment =
 	}
 
 
--- General Environment access operations
-def : getNamedElements(name : String) : OrderedSet(target::NamedElement) =
-	namedElements->select(x | x.name = name)
-
--- Specific lookup operations 
+-- TODO This is not needed. Can be removed
+---- General Environment access operations
+--def : getNamedElements(name : String) : OrderedSet(target::NamedElement) =
+--	namedElements->select(x | x.name = name)
 
 endpackage
 
@@ -96,11 +81,17 @@ def : _lookupC(bName : String) : C =
 		endif
 
 context D
-def : lookupB(bName : String) : B =
-	_lookupB(bName)
+def : lookupB(z : source::Z) : B =
+	if z.name = null
+	then null 
+	else _lookupB(z.name)
+	endif
 
-def : lookupC(cName : String) : C =
-	_lookupC(cName)	
+def : lookupC(z : source::Z) : C =
+	if z.name = null
+	then null 
+	else _lookupC(z.name)
+	endif
 
 
 context TRoot

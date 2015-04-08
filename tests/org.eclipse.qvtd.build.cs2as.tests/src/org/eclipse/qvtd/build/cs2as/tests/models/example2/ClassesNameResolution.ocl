@@ -30,24 +30,23 @@ context Environment
 
 -- General Environment configuration operations
 
-def : mergEnv(env : Environment) : Environment =
-	Environment {
-		namedElements = namedElements->asSequence() -- FIXME bug 460682
-			->includingAll(env.namedElements),
-		parentEnv = parentEnv
-	}
+-- TODO. Not used. Might be removed
+--def : mergEnv(env : Environment) : Environment =
+--	Environment {
+--		namedElements = namedElements->asSequence() -- FIXME bug 460682
+--			->includingAll(env.namedElements),
+--		parentEnv = parentEnv
+--	}
 		
 def : nestedEnv() : Environment = 
 	Environment {
 		parentEnv = self
 	}
 
-
+-- TODO. Not used. Might be removed
 -- General Environment access operations
-def : getNamedElements(name : String) : OrderedSet(classes::NamedElement) =
-	namedElements->select(x | x.name = name)
-	
-
+--def : getNamedElements(name : String) : OrderedSet(classes::NamedElement) =
+--	namedElements->select(x | x.name = name)
 	
 endpackage
 
@@ -89,6 +88,12 @@ context Class
 -- To produce the visit method for Class
 def : _env(child : ocl::OclElement) : env::Environment =
 	parentEnv()
+	
+def : lookupClass(class : classescs::ClassCS) : Class =
+	if class._extends = null
+	then null
+	else lookupClass(class._extends.path)
+ 	endif
 
 context Visitable
 -- Specific Environment access operations	
@@ -139,13 +144,11 @@ def : _lookupClasses(env : env::Environment, path : classescs::PathElementCS) : 
 		else foundClasses
 		endif
 	
-def : lookupClass(classPathName : classescs::PathNameCS) : classes::Class = 
-	let pathSeq = classPathName.path
-	in
-		if pathSeq->size() = 1
-		then _lookupClass(pathSeq->first())
-		else lookupPackage(pathSeq->subOrderedSet(1,pathSeq->size()-1))._lookupClass(pathSeq->last())
-		endif
+def : lookupClass(pathSeq : OrderedSet(classescs::PathElementCS)) : classes::Class = 
+	if pathSeq->size() = 1
+	then _lookupClass(pathSeq->first())
+	else lookupPackage(pathSeq->subOrderedSet(1,pathSeq->size()-1))._lookupClass(pathSeq->last())
+	endif
 		
 -- FIXME 
 -- Inlining, because a generic operations (OclElement::env(), OclElement::parentEnv()) create troubles to the CG
