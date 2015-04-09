@@ -48,9 +48,9 @@ public class QVTrLaunchConfigurationDelegate extends LaunchConfigurationDelegate
         
 		try {
 			String txName = configuration.getAttribute(TX_KEY, "");
-			String directionName = configuration.getAttribute(DIRECTION_KEY, "");
-			String modeName = configuration.getAttribute(MODE_KEY, "");
-			boolean partial = configuration.getAttribute(PARTIAL_KEY, false);
+			@SuppressWarnings("unused") String directionName = configuration.getAttribute(DIRECTION_KEY, "");
+			@SuppressWarnings("unused") String modeName = configuration.getAttribute(MODE_KEY, "");
+			@SuppressWarnings("unused") boolean partial = configuration.getAttribute(PARTIAL_KEY, false);
 			final Map<String, String> inMap = configuration.getAttribute(IN_KEY, EMPTY_MAP);
 			final Map<String, String> outMap = configuration.getAttribute(OUT_KEY, EMPTY_MAP);
 			final @SuppressWarnings("null")@NonNull URI txURI = URI.createURI(txName, true);

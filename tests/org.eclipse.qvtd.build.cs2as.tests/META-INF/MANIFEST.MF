@@ -25,7 +25,7 @@ Require-Bundle: org.junit,
  org.eclipse.qvtd.xtext.qvtbase.tests,
  org.eclipse.qvtd.build.etl.tests
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: example1.env,
  example1.env.impl,
  example1.env.util,
