@@ -73,7 +73,6 @@
 'relation'=38
 'replace'=25
 'self'=98
-'super'=101
 'then'=93
 'top'=36
 'transformation'=41
@@ -97,7 +96,6 @@ RULE_SINGLE_QUOTED_STRING=7
 RULE_SL_COMMENT=13
 RULE_WS=14
 T__100=100
-T__101=101
 T__16=16
 T__17=17
 T__18=18

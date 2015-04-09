@@ -22,7 +22,7 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_SIMPLE_ID", "RULE_ESCAPED_ID", "RULE_INT", "RULE_SINGLE_QUOTED_STRING", "RULE_ESCAPED_CHARACTER", "RULE_LETTER_CHARACTER", "RULE_DOUBLE_QUOTED_STRING", "RULE_ML_SINGLE_QUOTED_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'imports'", "','", "'uses'", "'default'", "'map'", "'in'", "'{'", "'where'", "'}'", "'call'", "':='", "'?='", "';'", "'for'", "':'", "'check'", "'('", "')'", "'enforce'", "'|'", "'import'", "'::'", "'*'", "'library'", "'query'", "'transformation'", "'realize'", "'refines'", "'-'", "'not'", "'/'", "'+'", "'>'", "'<'", "'>='", "'<='", "'='", "'<>'", "'and'", "'or'", "'xor'", "'implies'", "'.'", "'->'", "'?.'", "'?->'", "'Map'", "'Tuple'", "'Boolean'", "'Integer'", "'Real'", "'String'", "'UnlimitedNatural'", "'OclAny'", "'OclInvalid'", "'OclVoid'", "'Set'", "'Bag'", "'Sequence'", "'Collection'", "'OrderedSet'", "'..'", "'++'", "'Lambda'", "'<-'", "'true'", "'false'", "'invalid'", "'null'", "'@'", "'pre'", "'['", "']'", "'if'", "'then'", "'else'", "'endif'", "'elseif'", "'let'", "'self'", "'?'", "'extends'", "'&&'", "'super'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_SIMPLE_ID", "RULE_ESCAPED_ID", "RULE_INT", "RULE_SINGLE_QUOTED_STRING", "RULE_ESCAPED_CHARACTER", "RULE_LETTER_CHARACTER", "RULE_DOUBLE_QUOTED_STRING", "RULE_ML_SINGLE_QUOTED_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'imports'", "','", "'uses'", "'default'", "'map'", "'in'", "'{'", "'where'", "'}'", "'call'", "':='", "'?='", "';'", "'for'", "':'", "'check'", "'('", "')'", "'enforce'", "'|'", "'import'", "'::'", "'*'", "'library'", "'query'", "'transformation'", "'realize'", "'refines'", "'-'", "'not'", "'/'", "'+'", "'>'", "'<'", "'>='", "'<='", "'='", "'<>'", "'and'", "'or'", "'xor'", "'implies'", "'.'", "'->'", "'?.'", "'?->'", "'Map'", "'Tuple'", "'Boolean'", "'Integer'", "'Real'", "'String'", "'UnlimitedNatural'", "'OclAny'", "'OclInvalid'", "'OclVoid'", "'Set'", "'Bag'", "'Sequence'", "'Collection'", "'OrderedSet'", "'..'", "'++'", "'Lambda'", "'<-'", "'true'", "'false'", "'invalid'", "'null'", "'@'", "'pre'", "'['", "']'", "'if'", "'then'", "'else'", "'endif'", "'elseif'", "'let'", "'self'", "'?'", "'extends'", "'&&'"
     };
     public static final int T__29=29;
     public static final int T__28=28;
@@ -49,7 +49,6 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
     public static final int T__18=18;
     public static final int T__17=17;
     public static final int RULE_SIMPLE_ID=4;
-    public static final int T__99=99;
     public static final int T__98=98;
     public static final int T__97=97;
     public static final int T__96=96;
@@ -3873,11 +3872,11 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
                     else if ( (LA22_0==42) ) {
                         int LA22_2 = input.LA(2);
 
-                        if ( (LA22_2==17||LA22_2==24||LA22_2==26||LA22_2==30) ) {
-                            alt22=1;
-                        }
-                        else if ( ((LA22_2>=RULE_SIMPLE_ID && LA22_2<=RULE_ESCAPED_ID)||LA22_2==16||LA22_2==18||LA22_2==20||LA22_2==31||LA22_2==34||LA22_2==36||(LA22_2>=39 && LA22_2<=43)) ) {
+                        if ( ((LA22_2>=RULE_SIMPLE_ID && LA22_2<=RULE_ESCAPED_ID)||LA22_2==16||LA22_2==18||LA22_2==20||LA22_2==31||LA22_2==34||LA22_2==36||(LA22_2>=39 && LA22_2<=43)) ) {
                             alt22=2;
+                        }
+                        else if ( (LA22_2==17||LA22_2==24||LA22_2==26||LA22_2==30) ) {
+                            alt22=1;
                         }
                         else {
                             if (state.backtracking>0) {state.failed=true; return current;}
@@ -4513,11 +4512,11 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
                     else if ( (LA28_0==42) ) {
                         int LA28_2 = input.LA(2);
 
-                        if ( (LA28_2==17||LA28_2==24||LA28_2==26||LA28_2==30||LA28_2==35) ) {
-                            alt28=1;
-                        }
-                        else if ( ((LA28_2>=RULE_SIMPLE_ID && LA28_2<=RULE_ESCAPED_ID)||LA28_2==16||LA28_2==18||LA28_2==20||LA28_2==31||LA28_2==34||LA28_2==36||(LA28_2>=39 && LA28_2<=43)) ) {
+                        if ( ((LA28_2>=RULE_SIMPLE_ID && LA28_2<=RULE_ESCAPED_ID)||LA28_2==16||LA28_2==18||LA28_2==20||LA28_2==31||LA28_2==34||LA28_2==36||(LA28_2>=39 && LA28_2<=43)) ) {
                             alt28=2;
+                        }
+                        else if ( (LA28_2==17||LA28_2==24||LA28_2==26||LA28_2==30||LA28_2==35) ) {
+                            alt28=1;
                         }
                         else {
                             if (state.backtracking>0) {state.failed=true; return current;}
@@ -4651,11 +4650,11 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
                     	    else if ( (LA29_0==42) ) {
                     	        int LA29_2 = input.LA(2);
 
-                    	        if ( (LA29_2==17||LA29_2==24||LA29_2==26||LA29_2==30||LA29_2==35) ) {
-                    	            alt29=1;
-                    	        }
-                    	        else if ( ((LA29_2>=RULE_SIMPLE_ID && LA29_2<=RULE_ESCAPED_ID)||LA29_2==16||LA29_2==18||LA29_2==20||LA29_2==31||LA29_2==34||LA29_2==36||(LA29_2>=39 && LA29_2<=43)) ) {
+                    	        if ( ((LA29_2>=RULE_SIMPLE_ID && LA29_2<=RULE_ESCAPED_ID)||LA29_2==16||LA29_2==18||LA29_2==20||LA29_2==31||LA29_2==34||LA29_2==36||(LA29_2>=39 && LA29_2<=43)) ) {
                     	            alt29=2;
+                    	        }
+                    	        else if ( (LA29_2==17||LA29_2==24||LA29_2==26||LA29_2==30||LA29_2==35) ) {
+                    	            alt29=1;
                     	        }
                     	        else {
                     	            if (state.backtracking>0) {state.failed=true; return current;}
@@ -21595,30 +21594,27 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTypeParameterCS"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7570:1: ruleTypeParameterCS returns [EObject current=null] : ( ( (lv_name_0_0= ruleUnrestrictedName ) ) ( (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* ) | (otherlv_5= 'super' ( (lv_ownedSuper_6_0= ruleTypedRefCS ) ) ) )? ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7570:1: ruleTypeParameterCS returns [EObject current=null] : ( ( (lv_name_0_0= ruleUnrestrictedName ) ) (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* )? ) ;
     public final EObject ruleTypeParameterCS() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
         Token otherlv_3=null;
-        Token otherlv_5=null;
         AntlrDatatypeRuleToken lv_name_0_0 = null;
 
         EObject lv_ownedExtends_2_0 = null;
 
         EObject lv_ownedExtends_4_0 = null;
 
-        EObject lv_ownedSuper_6_0 = null;
-
 
          enterRule(); 
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7573:28: ( ( ( (lv_name_0_0= ruleUnrestrictedName ) ) ( (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* ) | (otherlv_5= 'super' ( (lv_ownedSuper_6_0= ruleTypedRefCS ) ) ) )? ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7574:1: ( ( (lv_name_0_0= ruleUnrestrictedName ) ) ( (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* ) | (otherlv_5= 'super' ( (lv_ownedSuper_6_0= ruleTypedRefCS ) ) ) )? )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7573:28: ( ( ( (lv_name_0_0= ruleUnrestrictedName ) ) (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* )? ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7574:1: ( ( (lv_name_0_0= ruleUnrestrictedName ) ) (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* )? )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7574:1: ( ( (lv_name_0_0= ruleUnrestrictedName ) ) ( (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* ) | (otherlv_5= 'super' ( (lv_ownedSuper_6_0= ruleTypedRefCS ) ) ) )? )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7574:2: ( (lv_name_0_0= ruleUnrestrictedName ) ) ( (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* ) | (otherlv_5= 'super' ( (lv_ownedSuper_6_0= ruleTypedRefCS ) ) ) )?
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7574:1: ( ( (lv_name_0_0= ruleUnrestrictedName ) ) (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* )? )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7574:2: ( (lv_name_0_0= ruleUnrestrictedName ) ) (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* )?
             {
             // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7574:2: ( (lv_name_0_0= ruleUnrestrictedName ) )
             // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7575:1: (lv_name_0_0= ruleUnrestrictedName )
@@ -21655,27 +21651,21 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7592:2: ( (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* ) | (otherlv_5= 'super' ( (lv_ownedSuper_6_0= ruleTypedRefCS ) ) ) )?
-            int alt130=3;
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7592:2: (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* )?
+            int alt130=2;
             int LA130_0 = input.LA(1);
 
             if ( (LA130_0==97) ) {
                 alt130=1;
             }
-            else if ( (LA130_0==99) ) {
-                alt130=2;
-            }
             switch (alt130) {
                 case 1 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7592:3: (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7592:4: otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )*
                     {
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7592:3: (otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )* )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7592:5: otherlv_1= 'extends' ( (lv_ownedExtends_2_0= ruleTypedRefCS ) ) (otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) ) )*
-                    {
-                    otherlv_1=(Token)match(input,97,FollowSets000.FOLLOW_97_in_ruleTypeParameterCS16566); if (state.failed) return current;
+                    otherlv_1=(Token)match(input,97,FollowSets000.FOLLOW_97_in_ruleTypeParameterCS16565); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
-                          	newLeafNode(otherlv_1, grammarAccess.getTypeParameterCSAccess().getExtendsKeyword_1_0_0());
+                          	newLeafNode(otherlv_1, grammarAccess.getTypeParameterCSAccess().getExtendsKeyword_1_0());
                           
                     }
                     // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7596:1: ( (lv_ownedExtends_2_0= ruleTypedRefCS ) )
@@ -21686,10 +21676,10 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
                     {
                     if ( state.backtracking==0 ) {
                        
-                      	        newCompositeNode(grammarAccess.getTypeParameterCSAccess().getOwnedExtendsTypedRefCSParserRuleCall_1_0_1_0()); 
+                      	        newCompositeNode(grammarAccess.getTypeParameterCSAccess().getOwnedExtendsTypedRefCSParserRuleCall_1_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleTypeParameterCS16587);
+                    pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleTypeParameterCS16586);
                     lv_ownedExtends_2_0=ruleTypedRefCS();
 
                     state._fsp--;
@@ -21728,10 +21718,10 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7614:4: otherlv_3= '&&' ( (lv_ownedExtends_4_0= ruleTypedRefCS ) )
                     	    {
-                    	    otherlv_3=(Token)match(input,98,FollowSets000.FOLLOW_98_in_ruleTypeParameterCS16600); if (state.failed) return current;
+                    	    otherlv_3=(Token)match(input,98,FollowSets000.FOLLOW_98_in_ruleTypeParameterCS16599); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
-                    	          	newLeafNode(otherlv_3, grammarAccess.getTypeParameterCSAccess().getAmpersandAmpersandKeyword_1_0_2_0());
+                    	          	newLeafNode(otherlv_3, grammarAccess.getTypeParameterCSAccess().getAmpersandAmpersandKeyword_1_2_0());
                     	          
                     	    }
                     	    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7618:1: ( (lv_ownedExtends_4_0= ruleTypedRefCS ) )
@@ -21742,10 +21732,10 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
                     	    {
                     	    if ( state.backtracking==0 ) {
                     	       
-                    	      	        newCompositeNode(grammarAccess.getTypeParameterCSAccess().getOwnedExtendsTypedRefCSParserRuleCall_1_0_2_1_0()); 
+                    	      	        newCompositeNode(grammarAccess.getTypeParameterCSAccess().getOwnedExtendsTypedRefCSParserRuleCall_1_2_1_0()); 
                     	      	    
                     	    }
-                    	    pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleTypeParameterCS16621);
+                    	    pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleTypeParameterCS16620);
                     	    lv_ownedExtends_4_0=ruleTypedRefCS();
 
                     	    state._fsp--;
@@ -21780,62 +21770,6 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
                     }
-
-
-                    }
-                    break;
-                case 2 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7637:6: (otherlv_5= 'super' ( (lv_ownedSuper_6_0= ruleTypedRefCS ) ) )
-                    {
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7637:6: (otherlv_5= 'super' ( (lv_ownedSuper_6_0= ruleTypedRefCS ) ) )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7637:8: otherlv_5= 'super' ( (lv_ownedSuper_6_0= ruleTypedRefCS ) )
-                    {
-                    otherlv_5=(Token)match(input,99,FollowSets000.FOLLOW_99_in_ruleTypeParameterCS16643); if (state.failed) return current;
-                    if ( state.backtracking==0 ) {
-
-                          	newLeafNode(otherlv_5, grammarAccess.getTypeParameterCSAccess().getSuperKeyword_1_1_0());
-                          
-                    }
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7641:1: ( (lv_ownedSuper_6_0= ruleTypedRefCS ) )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7642:1: (lv_ownedSuper_6_0= ruleTypedRefCS )
-                    {
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7642:1: (lv_ownedSuper_6_0= ruleTypedRefCS )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7643:3: lv_ownedSuper_6_0= ruleTypedRefCS
-                    {
-                    if ( state.backtracking==0 ) {
-                       
-                      	        newCompositeNode(grammarAccess.getTypeParameterCSAccess().getOwnedSuperTypedRefCSParserRuleCall_1_1_1_0()); 
-                      	    
-                    }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleTypeParameterCS16664);
-                    lv_ownedSuper_6_0=ruleTypedRefCS();
-
-                    state._fsp--;
-                    if (state.failed) return current;
-                    if ( state.backtracking==0 ) {
-
-                      	        if (current==null) {
-                      	            current = createModelElementForParent(grammarAccess.getTypeParameterCSRule());
-                      	        }
-                             		set(
-                             			current, 
-                             			"ownedSuper",
-                              		lv_ownedSuper_6_0, 
-                              		"TypedRefCS");
-                      	        afterParserOrEnumRuleCall();
-                      	    
-                    }
-
-                    }
-
-
-                    }
-
-
-                    }
-
-
-                    }
                     break;
 
             }
@@ -21863,7 +21797,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleTypeRefCS"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7667:1: entryRuleTypeRefCS returns [EObject current=null] : iv_ruleTypeRefCS= ruleTypeRefCS EOF ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7644:1: entryRuleTypeRefCS returns [EObject current=null] : iv_ruleTypeRefCS= ruleTypeRefCS EOF ;
     public final EObject entryRuleTypeRefCS() throws RecognitionException {
         EObject current = null;
 
@@ -21871,13 +21805,13 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7668:2: (iv_ruleTypeRefCS= ruleTypeRefCS EOF )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7669:2: iv_ruleTypeRefCS= ruleTypeRefCS EOF
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7645:2: (iv_ruleTypeRefCS= ruleTypeRefCS EOF )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7646:2: iv_ruleTypeRefCS= ruleTypeRefCS EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTypeRefCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypeRefCS_in_entryRuleTypeRefCS16703);
+            pushFollow(FollowSets000.FOLLOW_ruleTypeRefCS_in_entryRuleTypeRefCS16660);
             iv_ruleTypeRefCS=ruleTypeRefCS();
 
             state._fsp--;
@@ -21885,7 +21819,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleTypeRefCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypeRefCS16713); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypeRefCS16670); if (state.failed) return current;
 
             }
 
@@ -21903,7 +21837,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTypeRefCS"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7676:1: ruleTypeRefCS returns [EObject current=null] : (this_TypedRefCS_0= ruleTypedRefCS | this_WildcardTypeRefCS_1= ruleWildcardTypeRefCS ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7653:1: ruleTypeRefCS returns [EObject current=null] : (this_TypedRefCS_0= ruleTypedRefCS | this_WildcardTypeRefCS_1= ruleWildcardTypeRefCS ) ;
     public final EObject ruleTypeRefCS() throws RecognitionException {
         EObject current = null;
 
@@ -21915,10 +21849,10 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7679:28: ( (this_TypedRefCS_0= ruleTypedRefCS | this_WildcardTypeRefCS_1= ruleWildcardTypeRefCS ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7680:1: (this_TypedRefCS_0= ruleTypedRefCS | this_WildcardTypeRefCS_1= ruleWildcardTypeRefCS )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7656:28: ( (this_TypedRefCS_0= ruleTypedRefCS | this_WildcardTypeRefCS_1= ruleWildcardTypeRefCS ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7657:1: (this_TypedRefCS_0= ruleTypedRefCS | this_WildcardTypeRefCS_1= ruleWildcardTypeRefCS )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7680:1: (this_TypedRefCS_0= ruleTypedRefCS | this_WildcardTypeRefCS_1= ruleWildcardTypeRefCS )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7657:1: (this_TypedRefCS_0= ruleTypedRefCS | this_WildcardTypeRefCS_1= ruleWildcardTypeRefCS )
             int alt131=2;
             int LA131_0 = input.LA(1);
 
@@ -21937,7 +21871,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
             }
             switch (alt131) {
                 case 1 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7681:2: this_TypedRefCS_0= ruleTypedRefCS
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7658:2: this_TypedRefCS_0= ruleTypedRefCS
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -21949,7 +21883,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getTypeRefCSAccess().getTypedRefCSParserRuleCall_0()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleTypeRefCS16763);
+                    pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleTypeRefCS16720);
                     this_TypedRefCS_0=ruleTypedRefCS();
 
                     state._fsp--;
@@ -21964,7 +21898,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7694:2: this_WildcardTypeRefCS_1= ruleWildcardTypeRefCS
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7671:2: this_WildcardTypeRefCS_1= ruleWildcardTypeRefCS
                     {
                     if ( state.backtracking==0 ) {
                        
@@ -21976,7 +21910,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
                               newCompositeNode(grammarAccess.getTypeRefCSAccess().getWildcardTypeRefCSParserRuleCall_1()); 
                           
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleWildcardTypeRefCS_in_ruleTypeRefCS16793);
+                    pushFollow(FollowSets000.FOLLOW_ruleWildcardTypeRefCS_in_ruleTypeRefCS16750);
                     this_WildcardTypeRefCS_1=ruleWildcardTypeRefCS();
 
                     state._fsp--;
@@ -22013,7 +21947,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleTypedRefCS"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7713:1: entryRuleTypedRefCS returns [EObject current=null] : iv_ruleTypedRefCS= ruleTypedRefCS EOF ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7690:1: entryRuleTypedRefCS returns [EObject current=null] : iv_ruleTypedRefCS= ruleTypedRefCS EOF ;
     public final EObject entryRuleTypedRefCS() throws RecognitionException {
         EObject current = null;
 
@@ -22021,13 +21955,13 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7714:2: (iv_ruleTypedRefCS= ruleTypedRefCS EOF )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7715:2: iv_ruleTypedRefCS= ruleTypedRefCS EOF
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7691:2: (iv_ruleTypedRefCS= ruleTypedRefCS EOF )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7692:2: iv_ruleTypedRefCS= ruleTypedRefCS EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTypedRefCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_entryRuleTypedRefCS16828);
+            pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_entryRuleTypedRefCS16785);
             iv_ruleTypedRefCS=ruleTypedRefCS();
 
             state._fsp--;
@@ -22035,7 +21969,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleTypedRefCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypedRefCS16838); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypedRefCS16795); if (state.failed) return current;
 
             }
 
@@ -22053,7 +21987,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTypedRefCS"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7722:1: ruleTypedRefCS returns [EObject current=null] : this_TypedTypeRefCS_0= ruleTypedTypeRefCS ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7699:1: ruleTypedRefCS returns [EObject current=null] : this_TypedTypeRefCS_0= ruleTypedTypeRefCS ;
     public final EObject ruleTypedRefCS() throws RecognitionException {
         EObject current = null;
 
@@ -22063,8 +21997,8 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7725:28: (this_TypedTypeRefCS_0= ruleTypedTypeRefCS )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7727:2: this_TypedTypeRefCS_0= ruleTypedTypeRefCS
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7702:28: (this_TypedTypeRefCS_0= ruleTypedTypeRefCS )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7704:2: this_TypedTypeRefCS_0= ruleTypedTypeRefCS
             {
             if ( state.backtracking==0 ) {
                
@@ -22076,7 +22010,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
                       newCompositeNode(grammarAccess.getTypedRefCSAccess().getTypedTypeRefCSParserRuleCall()); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypedTypeRefCS_in_ruleTypedRefCS16887);
+            pushFollow(FollowSets000.FOLLOW_ruleTypedTypeRefCS_in_ruleTypedRefCS16844);
             this_TypedTypeRefCS_0=ruleTypedTypeRefCS();
 
             state._fsp--;
@@ -22107,7 +22041,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleTypedTypeRefCS"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7746:1: entryRuleTypedTypeRefCS returns [EObject current=null] : iv_ruleTypedTypeRefCS= ruleTypedTypeRefCS EOF ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7723:1: entryRuleTypedTypeRefCS returns [EObject current=null] : iv_ruleTypedTypeRefCS= ruleTypedTypeRefCS EOF ;
     public final EObject entryRuleTypedTypeRefCS() throws RecognitionException {
         EObject current = null;
 
@@ -22115,13 +22049,13 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7747:2: (iv_ruleTypedTypeRefCS= ruleTypedTypeRefCS EOF )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7748:2: iv_ruleTypedTypeRefCS= ruleTypedTypeRefCS EOF
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7724:2: (iv_ruleTypedTypeRefCS= ruleTypedTypeRefCS EOF )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7725:2: iv_ruleTypedTypeRefCS= ruleTypedTypeRefCS EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getTypedTypeRefCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypedTypeRefCS_in_entryRuleTypedTypeRefCS16921);
+            pushFollow(FollowSets000.FOLLOW_ruleTypedTypeRefCS_in_entryRuleTypedTypeRefCS16878);
             iv_ruleTypedTypeRefCS=ruleTypedTypeRefCS();
 
             state._fsp--;
@@ -22129,7 +22063,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleTypedTypeRefCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypedTypeRefCS16931); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypedTypeRefCS16888); if (state.failed) return current;
 
             }
 
@@ -22147,7 +22081,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTypedTypeRefCS"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7755:1: ruleTypedTypeRefCS returns [EObject current=null] : ( ( (lv_ownedPathName_0_0= rulePathNameCS ) ) ( (lv_ownedBinding_1_0= ruleTemplateBindingCS ) )? ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7732:1: ruleTypedTypeRefCS returns [EObject current=null] : ( ( (lv_ownedPathName_0_0= rulePathNameCS ) ) ( (lv_ownedBinding_1_0= ruleTemplateBindingCS ) )? ) ;
     public final EObject ruleTypedTypeRefCS() throws RecognitionException {
         EObject current = null;
 
@@ -22159,24 +22093,24 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7758:28: ( ( ( (lv_ownedPathName_0_0= rulePathNameCS ) ) ( (lv_ownedBinding_1_0= ruleTemplateBindingCS ) )? ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7759:1: ( ( (lv_ownedPathName_0_0= rulePathNameCS ) ) ( (lv_ownedBinding_1_0= ruleTemplateBindingCS ) )? )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7735:28: ( ( ( (lv_ownedPathName_0_0= rulePathNameCS ) ) ( (lv_ownedBinding_1_0= ruleTemplateBindingCS ) )? ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7736:1: ( ( (lv_ownedPathName_0_0= rulePathNameCS ) ) ( (lv_ownedBinding_1_0= ruleTemplateBindingCS ) )? )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7759:1: ( ( (lv_ownedPathName_0_0= rulePathNameCS ) ) ( (lv_ownedBinding_1_0= ruleTemplateBindingCS ) )? )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7759:2: ( (lv_ownedPathName_0_0= rulePathNameCS ) ) ( (lv_ownedBinding_1_0= ruleTemplateBindingCS ) )?
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7736:1: ( ( (lv_ownedPathName_0_0= rulePathNameCS ) ) ( (lv_ownedBinding_1_0= ruleTemplateBindingCS ) )? )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7736:2: ( (lv_ownedPathName_0_0= rulePathNameCS ) ) ( (lv_ownedBinding_1_0= ruleTemplateBindingCS ) )?
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7759:2: ( (lv_ownedPathName_0_0= rulePathNameCS ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7760:1: (lv_ownedPathName_0_0= rulePathNameCS )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7736:2: ( (lv_ownedPathName_0_0= rulePathNameCS ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7737:1: (lv_ownedPathName_0_0= rulePathNameCS )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7760:1: (lv_ownedPathName_0_0= rulePathNameCS )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7761:3: lv_ownedPathName_0_0= rulePathNameCS
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7737:1: (lv_ownedPathName_0_0= rulePathNameCS )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7738:3: lv_ownedPathName_0_0= rulePathNameCS
             {
             if ( state.backtracking==0 ) {
                
               	        newCompositeNode(grammarAccess.getTypedTypeRefCSAccess().getOwnedPathNamePathNameCSParserRuleCall_0_0()); 
               	    
             }
-            pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_ruleTypedTypeRefCS16977);
+            pushFollow(FollowSets000.FOLLOW_rulePathNameCS_in_ruleTypedTypeRefCS16934);
             lv_ownedPathName_0_0=rulePathNameCS();
 
             state._fsp--;
@@ -22200,7 +22134,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7777:2: ( (lv_ownedBinding_1_0= ruleTemplateBindingCS ) )?
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7754:2: ( (lv_ownedBinding_1_0= ruleTemplateBindingCS ) )?
             int alt132=2;
             int LA132_0 = input.LA(1);
 
@@ -22209,17 +22143,17 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
             }
             switch (alt132) {
                 case 1 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7778:1: (lv_ownedBinding_1_0= ruleTemplateBindingCS )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7755:1: (lv_ownedBinding_1_0= ruleTemplateBindingCS )
                     {
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7778:1: (lv_ownedBinding_1_0= ruleTemplateBindingCS )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7779:3: lv_ownedBinding_1_0= ruleTemplateBindingCS
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7755:1: (lv_ownedBinding_1_0= ruleTemplateBindingCS )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7756:3: lv_ownedBinding_1_0= ruleTemplateBindingCS
                     {
                     if ( state.backtracking==0 ) {
                        
                       	        newCompositeNode(grammarAccess.getTypedTypeRefCSAccess().getOwnedBindingTemplateBindingCSParserRuleCall_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTemplateBindingCS_in_ruleTypedTypeRefCS16998);
+                    pushFollow(FollowSets000.FOLLOW_ruleTemplateBindingCS_in_ruleTypedTypeRefCS16955);
                     lv_ownedBinding_1_0=ruleTemplateBindingCS();
 
                     state._fsp--;
@@ -22269,7 +22203,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleWildcardTypeRefCS"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7803:1: entryRuleWildcardTypeRefCS returns [EObject current=null] : iv_ruleWildcardTypeRefCS= ruleWildcardTypeRefCS EOF ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7780:1: entryRuleWildcardTypeRefCS returns [EObject current=null] : iv_ruleWildcardTypeRefCS= ruleWildcardTypeRefCS EOF ;
     public final EObject entryRuleWildcardTypeRefCS() throws RecognitionException {
         EObject current = null;
 
@@ -22277,13 +22211,13 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7804:2: (iv_ruleWildcardTypeRefCS= ruleWildcardTypeRefCS EOF )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7805:2: iv_ruleWildcardTypeRefCS= ruleWildcardTypeRefCS EOF
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7781:2: (iv_ruleWildcardTypeRefCS= ruleWildcardTypeRefCS EOF )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7782:2: iv_ruleWildcardTypeRefCS= ruleWildcardTypeRefCS EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getWildcardTypeRefCSRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleWildcardTypeRefCS_in_entryRuleWildcardTypeRefCS17035);
+            pushFollow(FollowSets000.FOLLOW_ruleWildcardTypeRefCS_in_entryRuleWildcardTypeRefCS16992);
             iv_ruleWildcardTypeRefCS=ruleWildcardTypeRefCS();
 
             state._fsp--;
@@ -22291,7 +22225,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleWildcardTypeRefCS; 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleWildcardTypeRefCS17045); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleWildcardTypeRefCS17002); if (state.failed) return current;
 
             }
 
@@ -22309,29 +22243,26 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleWildcardTypeRefCS"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7812:1: ruleWildcardTypeRefCS returns [EObject current=null] : ( () otherlv_1= '?' ( (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) ) | (otherlv_4= 'super' ( (lv_ownedSuper_5_0= ruleTypedRefCS ) ) ) )? ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7789:1: ruleWildcardTypeRefCS returns [EObject current=null] : ( () otherlv_1= '?' (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) )? ) ;
     public final EObject ruleWildcardTypeRefCS() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
         Token otherlv_2=null;
-        Token otherlv_4=null;
         EObject lv_ownedExtends_3_0 = null;
-
-        EObject lv_ownedSuper_5_0 = null;
 
 
          enterRule(); 
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7815:28: ( ( () otherlv_1= '?' ( (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) ) | (otherlv_4= 'super' ( (lv_ownedSuper_5_0= ruleTypedRefCS ) ) ) )? ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7816:1: ( () otherlv_1= '?' ( (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) ) | (otherlv_4= 'super' ( (lv_ownedSuper_5_0= ruleTypedRefCS ) ) ) )? )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7792:28: ( ( () otherlv_1= '?' (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) )? ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7793:1: ( () otherlv_1= '?' (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) )? )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7816:1: ( () otherlv_1= '?' ( (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) ) | (otherlv_4= 'super' ( (lv_ownedSuper_5_0= ruleTypedRefCS ) ) ) )? )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7816:2: () otherlv_1= '?' ( (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) ) | (otherlv_4= 'super' ( (lv_ownedSuper_5_0= ruleTypedRefCS ) ) ) )?
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7793:1: ( () otherlv_1= '?' (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) )? )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7793:2: () otherlv_1= '?' (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) )?
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7816:2: ()
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7817:2: 
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7793:2: ()
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7794:2: 
             {
             if ( state.backtracking==0 ) {
                
@@ -22348,47 +22279,41 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,96,FollowSets000.FOLLOW_96_in_ruleWildcardTypeRefCS17094); if (state.failed) return current;
+            otherlv_1=(Token)match(input,96,FollowSets000.FOLLOW_96_in_ruleWildcardTypeRefCS17051); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
                   	newLeafNode(otherlv_1, grammarAccess.getWildcardTypeRefCSAccess().getQuestionMarkKeyword_1());
                   
             }
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7829:1: ( (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) ) | (otherlv_4= 'super' ( (lv_ownedSuper_5_0= ruleTypedRefCS ) ) ) )?
-            int alt133=3;
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7806:1: (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) )?
+            int alt133=2;
             int LA133_0 = input.LA(1);
 
             if ( (LA133_0==97) ) {
                 alt133=1;
             }
-            else if ( (LA133_0==99) ) {
-                alt133=2;
-            }
             switch (alt133) {
                 case 1 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7829:2: (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7806:3: otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) )
                     {
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7829:2: (otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) ) )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7829:4: otherlv_2= 'extends' ( (lv_ownedExtends_3_0= ruleTypedRefCS ) )
-                    {
-                    otherlv_2=(Token)match(input,97,FollowSets000.FOLLOW_97_in_ruleWildcardTypeRefCS17108); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,97,FollowSets000.FOLLOW_97_in_ruleWildcardTypeRefCS17064); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
-                          	newLeafNode(otherlv_2, grammarAccess.getWildcardTypeRefCSAccess().getExtendsKeyword_2_0_0());
+                          	newLeafNode(otherlv_2, grammarAccess.getWildcardTypeRefCSAccess().getExtendsKeyword_2_0());
                           
                     }
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7833:1: ( (lv_ownedExtends_3_0= ruleTypedRefCS ) )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7834:1: (lv_ownedExtends_3_0= ruleTypedRefCS )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7810:1: ( (lv_ownedExtends_3_0= ruleTypedRefCS ) )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7811:1: (lv_ownedExtends_3_0= ruleTypedRefCS )
                     {
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7834:1: (lv_ownedExtends_3_0= ruleTypedRefCS )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7835:3: lv_ownedExtends_3_0= ruleTypedRefCS
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7811:1: (lv_ownedExtends_3_0= ruleTypedRefCS )
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7812:3: lv_ownedExtends_3_0= ruleTypedRefCS
                     {
                     if ( state.backtracking==0 ) {
                        
-                      	        newCompositeNode(grammarAccess.getWildcardTypeRefCSAccess().getOwnedExtendsTypedRefCSParserRuleCall_2_0_1_0()); 
+                      	        newCompositeNode(grammarAccess.getWildcardTypeRefCSAccess().getOwnedExtendsTypedRefCSParserRuleCall_2_1_0()); 
                       	    
                     }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleWildcardTypeRefCS17129);
+                    pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleWildcardTypeRefCS17085);
                     lv_ownedExtends_3_0=ruleTypedRefCS();
 
                     state._fsp--;
@@ -22406,62 +22331,6 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
                       	        afterParserOrEnumRuleCall();
                       	    
                     }
-
-                    }
-
-
-                    }
-
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7852:6: (otherlv_4= 'super' ( (lv_ownedSuper_5_0= ruleTypedRefCS ) ) )
-                    {
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7852:6: (otherlv_4= 'super' ( (lv_ownedSuper_5_0= ruleTypedRefCS ) ) )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7852:8: otherlv_4= 'super' ( (lv_ownedSuper_5_0= ruleTypedRefCS ) )
-                    {
-                    otherlv_4=(Token)match(input,99,FollowSets000.FOLLOW_99_in_ruleWildcardTypeRefCS17149); if (state.failed) return current;
-                    if ( state.backtracking==0 ) {
-
-                          	newLeafNode(otherlv_4, grammarAccess.getWildcardTypeRefCSAccess().getSuperKeyword_2_1_0());
-                          
-                    }
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7856:1: ( (lv_ownedSuper_5_0= ruleTypedRefCS ) )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7857:1: (lv_ownedSuper_5_0= ruleTypedRefCS )
-                    {
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7857:1: (lv_ownedSuper_5_0= ruleTypedRefCS )
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7858:3: lv_ownedSuper_5_0= ruleTypedRefCS
-                    {
-                    if ( state.backtracking==0 ) {
-                       
-                      	        newCompositeNode(grammarAccess.getWildcardTypeRefCSAccess().getOwnedSuperTypedRefCSParserRuleCall_2_1_1_0()); 
-                      	    
-                    }
-                    pushFollow(FollowSets000.FOLLOW_ruleTypedRefCS_in_ruleWildcardTypeRefCS17170);
-                    lv_ownedSuper_5_0=ruleTypedRefCS();
-
-                    state._fsp--;
-                    if (state.failed) return current;
-                    if ( state.backtracking==0 ) {
-
-                      	        if (current==null) {
-                      	            current = createModelElementForParent(grammarAccess.getWildcardTypeRefCSRule());
-                      	        }
-                             		set(
-                             			current, 
-                             			"ownedSuper",
-                              		lv_ownedSuper_5_0, 
-                              		"TypedRefCS");
-                      	        afterParserOrEnumRuleCall();
-                      	    
-                    }
-
-                    }
-
 
                     }
 
@@ -22497,7 +22366,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleID"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7882:1: entryRuleID returns [String current=null] : iv_ruleID= ruleID EOF ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7836:1: entryRuleID returns [String current=null] : iv_ruleID= ruleID EOF ;
     public final String entryRuleID() throws RecognitionException {
         String current = null;
 
@@ -22505,13 +22374,13 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7883:2: (iv_ruleID= ruleID EOF )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7884:2: iv_ruleID= ruleID EOF
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7837:2: (iv_ruleID= ruleID EOF )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7838:2: iv_ruleID= ruleID EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getIDRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleID_in_entryRuleID17210);
+            pushFollow(FollowSets000.FOLLOW_ruleID_in_entryRuleID17124);
             iv_ruleID=ruleID();
 
             state._fsp--;
@@ -22519,7 +22388,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleID.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleID17221); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleID17135); if (state.failed) return current;
 
             }
 
@@ -22537,7 +22406,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleID"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7891:1: ruleID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_SIMPLE_ID_0= RULE_SIMPLE_ID | this_ESCAPED_ID_1= RULE_ESCAPED_ID ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7845:1: ruleID returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_SIMPLE_ID_0= RULE_SIMPLE_ID | this_ESCAPED_ID_1= RULE_ESCAPED_ID ) ;
     public final AntlrDatatypeRuleToken ruleID() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -22547,10 +22416,10 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7894:28: ( (this_SIMPLE_ID_0= RULE_SIMPLE_ID | this_ESCAPED_ID_1= RULE_ESCAPED_ID ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7895:1: (this_SIMPLE_ID_0= RULE_SIMPLE_ID | this_ESCAPED_ID_1= RULE_ESCAPED_ID )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7848:28: ( (this_SIMPLE_ID_0= RULE_SIMPLE_ID | this_ESCAPED_ID_1= RULE_ESCAPED_ID ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7849:1: (this_SIMPLE_ID_0= RULE_SIMPLE_ID | this_ESCAPED_ID_1= RULE_ESCAPED_ID )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7895:1: (this_SIMPLE_ID_0= RULE_SIMPLE_ID | this_ESCAPED_ID_1= RULE_ESCAPED_ID )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7849:1: (this_SIMPLE_ID_0= RULE_SIMPLE_ID | this_ESCAPED_ID_1= RULE_ESCAPED_ID )
             int alt134=2;
             int LA134_0 = input.LA(1);
 
@@ -22569,9 +22438,9 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
             }
             switch (alt134) {
                 case 1 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7895:6: this_SIMPLE_ID_0= RULE_SIMPLE_ID
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7849:6: this_SIMPLE_ID_0= RULE_SIMPLE_ID
                     {
-                    this_SIMPLE_ID_0=(Token)match(input,RULE_SIMPLE_ID,FollowSets000.FOLLOW_RULE_SIMPLE_ID_in_ruleID17261); if (state.failed) return current;
+                    this_SIMPLE_ID_0=(Token)match(input,RULE_SIMPLE_ID,FollowSets000.FOLLOW_RULE_SIMPLE_ID_in_ruleID17175); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       		current.merge(this_SIMPLE_ID_0);
@@ -22586,9 +22455,9 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7903:10: this_ESCAPED_ID_1= RULE_ESCAPED_ID
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7857:10: this_ESCAPED_ID_1= RULE_ESCAPED_ID
                     {
-                    this_ESCAPED_ID_1=(Token)match(input,RULE_ESCAPED_ID,FollowSets000.FOLLOW_RULE_ESCAPED_ID_in_ruleID17287); if (state.failed) return current;
+                    this_ESCAPED_ID_1=(Token)match(input,RULE_ESCAPED_ID,FollowSets000.FOLLOW_RULE_ESCAPED_ID_in_ruleID17201); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       		current.merge(this_ESCAPED_ID_1);
@@ -22625,7 +22494,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleIdentifier"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7918:1: entryRuleIdentifier returns [String current=null] : iv_ruleIdentifier= ruleIdentifier EOF ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7872:1: entryRuleIdentifier returns [String current=null] : iv_ruleIdentifier= ruleIdentifier EOF ;
     public final String entryRuleIdentifier() throws RecognitionException {
         String current = null;
 
@@ -22633,13 +22502,13 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7919:2: (iv_ruleIdentifier= ruleIdentifier EOF )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7920:2: iv_ruleIdentifier= ruleIdentifier EOF
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7873:2: (iv_ruleIdentifier= ruleIdentifier EOF )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7874:2: iv_ruleIdentifier= ruleIdentifier EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getIdentifierRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_entryRuleIdentifier17333);
+            pushFollow(FollowSets000.FOLLOW_ruleIdentifier_in_entryRuleIdentifier17247);
             iv_ruleIdentifier=ruleIdentifier();
 
             state._fsp--;
@@ -22647,7 +22516,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleIdentifier.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleIdentifier17344); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleIdentifier17258); if (state.failed) return current;
 
             }
 
@@ -22665,7 +22534,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleIdentifier"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7927:1: ruleIdentifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= ruleID ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7881:1: ruleIdentifier returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_ID_0= ruleID ;
     public final AntlrDatatypeRuleToken ruleIdentifier() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -22675,15 +22544,15 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7930:28: (this_ID_0= ruleID )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7932:5: this_ID_0= ruleID
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7884:28: (this_ID_0= ruleID )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7886:5: this_ID_0= ruleID
             {
             if ( state.backtracking==0 ) {
                
                       newCompositeNode(grammarAccess.getIdentifierAccess().getIDParserRuleCall()); 
                   
             }
-            pushFollow(FollowSets000.FOLLOW_ruleID_in_ruleIdentifier17390);
+            pushFollow(FollowSets000.FOLLOW_ruleID_in_ruleIdentifier17304);
             this_ID_0=ruleID();
 
             state._fsp--;
@@ -22718,7 +22587,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleLOWER"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7950:1: entryRuleLOWER returns [String current=null] : iv_ruleLOWER= ruleLOWER EOF ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7904:1: entryRuleLOWER returns [String current=null] : iv_ruleLOWER= ruleLOWER EOF ;
     public final String entryRuleLOWER() throws RecognitionException {
         String current = null;
 
@@ -22726,13 +22595,13 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7951:2: (iv_ruleLOWER= ruleLOWER EOF )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7952:2: iv_ruleLOWER= ruleLOWER EOF
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7905:2: (iv_ruleLOWER= ruleLOWER EOF )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7906:2: iv_ruleLOWER= ruleLOWER EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getLOWERRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleLOWER_in_entryRuleLOWER17435);
+            pushFollow(FollowSets000.FOLLOW_ruleLOWER_in_entryRuleLOWER17349);
             iv_ruleLOWER=ruleLOWER();
 
             state._fsp--;
@@ -22740,7 +22609,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleLOWER.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLOWER17446); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleLOWER17360); if (state.failed) return current;
 
             }
 
@@ -22758,7 +22627,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleLOWER"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7959:1: ruleLOWER returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_INT_0= RULE_INT ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7913:1: ruleLOWER returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_INT_0= RULE_INT ;
     public final AntlrDatatypeRuleToken ruleLOWER() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -22767,10 +22636,10 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7962:28: (this_INT_0= RULE_INT )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7963:5: this_INT_0= RULE_INT
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7916:28: (this_INT_0= RULE_INT )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7917:5: this_INT_0= RULE_INT
             {
-            this_INT_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleLOWER17485); if (state.failed) return current;
+            this_INT_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleLOWER17399); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               		current.merge(this_INT_0);
@@ -22801,7 +22670,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleNUMBER_LITERAL"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7978:1: entryRuleNUMBER_LITERAL returns [String current=null] : iv_ruleNUMBER_LITERAL= ruleNUMBER_LITERAL EOF ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7932:1: entryRuleNUMBER_LITERAL returns [String current=null] : iv_ruleNUMBER_LITERAL= ruleNUMBER_LITERAL EOF ;
     public final String entryRuleNUMBER_LITERAL() throws RecognitionException {
         String current = null;
 
@@ -22809,13 +22678,13 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7979:2: (iv_ruleNUMBER_LITERAL= ruleNUMBER_LITERAL EOF )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7980:2: iv_ruleNUMBER_LITERAL= ruleNUMBER_LITERAL EOF
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7933:2: (iv_ruleNUMBER_LITERAL= ruleNUMBER_LITERAL EOF )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7934:2: iv_ruleNUMBER_LITERAL= ruleNUMBER_LITERAL EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getNUMBER_LITERALRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleNUMBER_LITERAL_in_entryRuleNUMBER_LITERAL17530);
+            pushFollow(FollowSets000.FOLLOW_ruleNUMBER_LITERAL_in_entryRuleNUMBER_LITERAL17444);
             iv_ruleNUMBER_LITERAL=ruleNUMBER_LITERAL();
 
             state._fsp--;
@@ -22823,7 +22692,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleNUMBER_LITERAL.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNUMBER_LITERAL17541); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNUMBER_LITERAL17455); if (state.failed) return current;
 
             }
 
@@ -22841,7 +22710,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleNUMBER_LITERAL"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7987:1: ruleNUMBER_LITERAL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_INT_0= RULE_INT ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7941:1: ruleNUMBER_LITERAL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_INT_0= RULE_INT ;
     public final AntlrDatatypeRuleToken ruleNUMBER_LITERAL() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -22850,10 +22719,10 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7990:28: (this_INT_0= RULE_INT )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7991:5: this_INT_0= RULE_INT
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7944:28: (this_INT_0= RULE_INT )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7945:5: this_INT_0= RULE_INT
             {
-            this_INT_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleNUMBER_LITERAL17580); if (state.failed) return current;
+            this_INT_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleNUMBER_LITERAL17494); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               		current.merge(this_INT_0);
@@ -22884,7 +22753,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleStringLiteral"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8006:1: entryRuleStringLiteral returns [String current=null] : iv_ruleStringLiteral= ruleStringLiteral EOF ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7960:1: entryRuleStringLiteral returns [String current=null] : iv_ruleStringLiteral= ruleStringLiteral EOF ;
     public final String entryRuleStringLiteral() throws RecognitionException {
         String current = null;
 
@@ -22892,13 +22761,13 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8007:2: (iv_ruleStringLiteral= ruleStringLiteral EOF )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8008:2: iv_ruleStringLiteral= ruleStringLiteral EOF
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7961:2: (iv_ruleStringLiteral= ruleStringLiteral EOF )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7962:2: iv_ruleStringLiteral= ruleStringLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getStringLiteralRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral17625);
+            pushFollow(FollowSets000.FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral17539);
             iv_ruleStringLiteral=ruleStringLiteral();
 
             state._fsp--;
@@ -22906,7 +22775,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleStringLiteral.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleStringLiteral17636); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleStringLiteral17550); if (state.failed) return current;
 
             }
 
@@ -22924,7 +22793,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleStringLiteral"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8015:1: ruleStringLiteral returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7969:1: ruleStringLiteral returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING ;
     public final AntlrDatatypeRuleToken ruleStringLiteral() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -22933,10 +22802,10 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8018:28: (this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8019:5: this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7972:28: (this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7973:5: this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING
             {
-            this_SINGLE_QUOTED_STRING_0=(Token)match(input,RULE_SINGLE_QUOTED_STRING,FollowSets000.FOLLOW_RULE_SINGLE_QUOTED_STRING_in_ruleStringLiteral17675); if (state.failed) return current;
+            this_SINGLE_QUOTED_STRING_0=(Token)match(input,RULE_SINGLE_QUOTED_STRING,FollowSets000.FOLLOW_RULE_SINGLE_QUOTED_STRING_in_ruleStringLiteral17589); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               		current.merge(this_SINGLE_QUOTED_STRING_0);
@@ -22967,7 +22836,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleUPPER"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8034:1: entryRuleUPPER returns [String current=null] : iv_ruleUPPER= ruleUPPER EOF ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7988:1: entryRuleUPPER returns [String current=null] : iv_ruleUPPER= ruleUPPER EOF ;
     public final String entryRuleUPPER() throws RecognitionException {
         String current = null;
 
@@ -22975,13 +22844,13 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8035:2: (iv_ruleUPPER= ruleUPPER EOF )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8036:2: iv_ruleUPPER= ruleUPPER EOF
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7989:2: (iv_ruleUPPER= ruleUPPER EOF )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7990:2: iv_ruleUPPER= ruleUPPER EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getUPPERRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleUPPER_in_entryRuleUPPER17720);
+            pushFollow(FollowSets000.FOLLOW_ruleUPPER_in_entryRuleUPPER17634);
             iv_ruleUPPER=ruleUPPER();
 
             state._fsp--;
@@ -22989,7 +22858,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleUPPER.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUPPER17731); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUPPER17645); if (state.failed) return current;
 
             }
 
@@ -23007,7 +22876,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleUPPER"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8043:1: ruleUPPER returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT | kw= '*' ) ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:7997:1: ruleUPPER returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_INT_0= RULE_INT | kw= '*' ) ;
     public final AntlrDatatypeRuleToken ruleUPPER() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -23017,10 +22886,10 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8046:28: ( (this_INT_0= RULE_INT | kw= '*' ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8047:1: (this_INT_0= RULE_INT | kw= '*' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8000:28: ( (this_INT_0= RULE_INT | kw= '*' ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8001:1: (this_INT_0= RULE_INT | kw= '*' )
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8047:1: (this_INT_0= RULE_INT | kw= '*' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8001:1: (this_INT_0= RULE_INT | kw= '*' )
             int alt135=2;
             int LA135_0 = input.LA(1);
 
@@ -23039,9 +22908,9 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
             }
             switch (alt135) {
                 case 1 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8047:6: this_INT_0= RULE_INT
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8001:6: this_INT_0= RULE_INT
                     {
-                    this_INT_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleUPPER17771); if (state.failed) return current;
+                    this_INT_0=(Token)match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleUPPER17685); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       		current.merge(this_INT_0);
@@ -23056,9 +22925,9 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8056:2: kw= '*'
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8010:2: kw= '*'
                     {
-                    kw=(Token)match(input,38,FollowSets000.FOLLOW_38_in_ruleUPPER17795); if (state.failed) return current;
+                    kw=(Token)match(input,38,FollowSets000.FOLLOW_38_in_ruleUPPER17709); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current.merge(kw);
@@ -23091,7 +22960,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleURI"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8069:1: entryRuleURI returns [String current=null] : iv_ruleURI= ruleURI EOF ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8023:1: entryRuleURI returns [String current=null] : iv_ruleURI= ruleURI EOF ;
     public final String entryRuleURI() throws RecognitionException {
         String current = null;
 
@@ -23099,13 +22968,13 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8070:2: (iv_ruleURI= ruleURI EOF )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8071:2: iv_ruleURI= ruleURI EOF
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8024:2: (iv_ruleURI= ruleURI EOF )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8025:2: iv_ruleURI= ruleURI EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getURIRule()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleURI_in_entryRuleURI17836);
+            pushFollow(FollowSets000.FOLLOW_ruleURI_in_entryRuleURI17750);
             iv_ruleURI=ruleURI();
 
             state._fsp--;
@@ -23113,7 +22982,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleURI.getText(); 
             }
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleURI17847); if (state.failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleURI17761); if (state.failed) return current;
 
             }
 
@@ -23131,7 +23000,7 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleURI"
-    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8078:1: ruleURI returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING ;
+    // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8032:1: ruleURI returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING ;
     public final AntlrDatatypeRuleToken ruleURI() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -23140,10 +23009,10 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8081:28: (this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8082:5: this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8035:28: (this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtimperative/src-gen/org/eclipse/qvtd/xtext/qvtimperative/parser/antlr/internal/InternalQVTimperative.g:8036:5: this_SINGLE_QUOTED_STRING_0= RULE_SINGLE_QUOTED_STRING
             {
-            this_SINGLE_QUOTED_STRING_0=(Token)match(input,RULE_SINGLE_QUOTED_STRING,FollowSets000.FOLLOW_RULE_SINGLE_QUOTED_STRING_in_ruleURI17886); if (state.failed) return current;
+            this_SINGLE_QUOTED_STRING_0=(Token)match(input,RULE_SINGLE_QUOTED_STRING,FollowSets000.FOLLOW_RULE_SINGLE_QUOTED_STRING_in_ruleURI17800); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               		current.merge(this_SINGLE_QUOTED_STRING_0);
@@ -23206,11 +23075,11 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
         else if ( (LA147_0==42) ) {
             int LA147_2 = input.LA(2);
 
-            if ( ((LA147_2>=RULE_SIMPLE_ID && LA147_2<=RULE_ESCAPED_ID)||LA147_2==16||LA147_2==18||LA147_2==20||LA147_2==31||LA147_2==34||LA147_2==36||(LA147_2>=39 && LA147_2<=43)) ) {
-                alt147=2;
-            }
-            else if ( (LA147_2==17||LA147_2==24||LA147_2==26||LA147_2==30||LA147_2==35) ) {
+            if ( (LA147_2==17||LA147_2==24||LA147_2==26||LA147_2==30||LA147_2==35) ) {
                 alt147=1;
+            }
+            else if ( ((LA147_2>=RULE_SIMPLE_ID && LA147_2<=RULE_ESCAPED_ID)||LA147_2==16||LA147_2==18||LA147_2==20||LA147_2==31||LA147_2==34||LA147_2==36||(LA147_2>=39 && LA147_2<=43)) ) {
+                alt147=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return ;}
@@ -25959,54 +25828,50 @@ public class InternalQVTimperativeParser extends AbstractInternalAntlrParser {
         public static final BitSet FOLLOW_ruleTypeRefCS_in_ruleTemplateParameterSubstitutionCS16459 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleTypeParameterCS_in_entryRuleTypeParameterCS16496 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleTypeParameterCS16506 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleTypeParameterCS16552 = new BitSet(new long[]{0x0000000000000002L,0x0000000A00000000L});
-        public static final BitSet FOLLOW_97_in_ruleTypeParameterCS16566 = new BitSet(new long[]{0x00000F9480150030L});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleTypeParameterCS16587 = new BitSet(new long[]{0x0000000000000002L,0x0000000400000000L});
-        public static final BitSet FOLLOW_98_in_ruleTypeParameterCS16600 = new BitSet(new long[]{0x00000F9480150030L});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleTypeParameterCS16621 = new BitSet(new long[]{0x0000000000000002L,0x0000000400000000L});
-        public static final BitSet FOLLOW_99_in_ruleTypeParameterCS16643 = new BitSet(new long[]{0x00000F9480150030L});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleTypeParameterCS16664 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypeRefCS_in_entryRuleTypeRefCS16703 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTypeRefCS16713 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleTypeRefCS16763 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleWildcardTypeRefCS_in_ruleTypeRefCS16793 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_entryRuleTypedRefCS16828 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTypedRefCS16838 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypedTypeRefCS_in_ruleTypedRefCS16887 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypedTypeRefCS_in_entryRuleTypedTypeRefCS16921 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTypedTypeRefCS16931 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rulePathNameCS_in_ruleTypedTypeRefCS16977 = new BitSet(new long[]{0x0000000100000002L});
-        public static final BitSet FOLLOW_ruleTemplateBindingCS_in_ruleTypedTypeRefCS16998 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleWildcardTypeRefCS_in_entryRuleWildcardTypeRefCS17035 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleWildcardTypeRefCS17045 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_96_in_ruleWildcardTypeRefCS17094 = new BitSet(new long[]{0x0000000000000002L,0x0000000A00000000L});
-        public static final BitSet FOLLOW_97_in_ruleWildcardTypeRefCS17108 = new BitSet(new long[]{0x00000F9480150030L});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleWildcardTypeRefCS17129 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_99_in_ruleWildcardTypeRefCS17149 = new BitSet(new long[]{0x00000F9480150030L});
-        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleWildcardTypeRefCS17170 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleID_in_entryRuleID17210 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleID17221 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_SIMPLE_ID_in_ruleID17261 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ESCAPED_ID_in_ruleID17287 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleIdentifier_in_entryRuleIdentifier17333 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleIdentifier17344 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleID_in_ruleIdentifier17390 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleLOWER_in_entryRuleLOWER17435 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleLOWER17446 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleLOWER17485 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleNUMBER_LITERAL_in_entryRuleNUMBER_LITERAL17530 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleNUMBER_LITERAL17541 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleNUMBER_LITERAL17580 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral17625 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleStringLiteral17636 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_SINGLE_QUOTED_STRING_in_ruleStringLiteral17675 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleUPPER_in_entryRuleUPPER17720 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleUPPER17731 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleUPPER17771 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_38_in_ruleUPPER17795 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleURI_in_entryRuleURI17836 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleURI17847 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_SINGLE_QUOTED_STRING_in_ruleURI17886 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnrestrictedName_in_ruleTypeParameterCS16552 = new BitSet(new long[]{0x0000000000000002L,0x0000000200000000L});
+        public static final BitSet FOLLOW_97_in_ruleTypeParameterCS16565 = new BitSet(new long[]{0x00000F9480150030L});
+        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleTypeParameterCS16586 = new BitSet(new long[]{0x0000000000000002L,0x0000000400000000L});
+        public static final BitSet FOLLOW_98_in_ruleTypeParameterCS16599 = new BitSet(new long[]{0x00000F9480150030L});
+        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleTypeParameterCS16620 = new BitSet(new long[]{0x0000000000000002L,0x0000000400000000L});
+        public static final BitSet FOLLOW_ruleTypeRefCS_in_entryRuleTypeRefCS16660 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTypeRefCS16670 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleTypeRefCS16720 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleWildcardTypeRefCS_in_ruleTypeRefCS16750 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypedRefCS_in_entryRuleTypedRefCS16785 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTypedRefCS16795 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypedTypeRefCS_in_ruleTypedRefCS16844 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypedTypeRefCS_in_entryRuleTypedTypeRefCS16878 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTypedTypeRefCS16888 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rulePathNameCS_in_ruleTypedTypeRefCS16934 = new BitSet(new long[]{0x0000000100000002L});
+        public static final BitSet FOLLOW_ruleTemplateBindingCS_in_ruleTypedTypeRefCS16955 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleWildcardTypeRefCS_in_entryRuleWildcardTypeRefCS16992 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleWildcardTypeRefCS17002 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_96_in_ruleWildcardTypeRefCS17051 = new BitSet(new long[]{0x0000000000000002L,0x0000000200000000L});
+        public static final BitSet FOLLOW_97_in_ruleWildcardTypeRefCS17064 = new BitSet(new long[]{0x00000F9480150030L});
+        public static final BitSet FOLLOW_ruleTypedRefCS_in_ruleWildcardTypeRefCS17085 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleID_in_entryRuleID17124 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleID17135 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_SIMPLE_ID_in_ruleID17175 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ESCAPED_ID_in_ruleID17201 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleIdentifier_in_entryRuleIdentifier17247 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleIdentifier17258 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleID_in_ruleIdentifier17304 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleLOWER_in_entryRuleLOWER17349 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleLOWER17360 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleLOWER17399 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNUMBER_LITERAL_in_entryRuleNUMBER_LITERAL17444 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleNUMBER_LITERAL17455 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleNUMBER_LITERAL17494 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral17539 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleStringLiteral17550 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_SINGLE_QUOTED_STRING_in_ruleStringLiteral17589 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUPPER_in_entryRuleUPPER17634 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleUPPER17645 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleUPPER17685 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_38_in_ruleUPPER17709 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleURI_in_entryRuleURI17750 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleURI17761 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_SINGLE_QUOTED_STRING_in_ruleURI17800 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_22_in_synpred36_InternalQVTimperative3180 = new BitSet(new long[]{0x00000F9480150030L});
         public static final BitSet FOLLOW_ruleUnrealizedVariableCS_in_synpred36_InternalQVTimperative3202 = new BitSet(new long[]{0x0000000801020000L});
         public static final BitSet FOLLOW_ruleRealizedVariableCS_in_synpred36_InternalQVTimperative3229 = new BitSet(new long[]{0x0000000801020000L});

@@ -2869,8 +2869,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TypeParameterCS:
-	//	name=UnrestrictedName ("extends" ownedExtends+=TypedRefCS ("&&" ownedExtends+=TypedRefCS)* | "super"
-	//	ownedSuper=TypedRefCS)?;
+	//	name=UnrestrictedName ("extends" ownedExtends+=TypedRefCS ("&&" ownedExtends+=TypedRefCS)*)?;
 	public BaseGrammarAccess.TypeParameterCSElements getTypeParameterCSAccess() {
 		return gaEssentialOCL.getTypeParameterCSAccess();
 	}
@@ -2890,7 +2889,7 @@ public class QVTrelationGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//WildcardTypeRefCS:
-	//	{WildcardTypeRefCS} "?" ("extends" ownedExtends=TypedRefCS | "super" ownedSuper=TypedRefCS)?;
+	//	{WildcardTypeRefCS} "?" ("extends" ownedExtends=TypedRefCS)?;
 	public BaseGrammarAccess.WildcardTypeRefCSElements getWildcardTypeRefCSAccess() {
 		return gaEssentialOCL.getWildcardTypeRefCSAccess();
 	}

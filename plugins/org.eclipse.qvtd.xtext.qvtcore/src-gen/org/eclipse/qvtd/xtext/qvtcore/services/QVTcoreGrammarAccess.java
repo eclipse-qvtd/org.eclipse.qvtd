@@ -1259,8 +1259,7 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TypeParameterCS:
-	//	name=UnrestrictedName ("extends" ownedExtends+=TypedRefCS ("&&" ownedExtends+=TypedRefCS)* | "super"
-	//	ownedSuper=TypedRefCS)?;
+	//	name=UnrestrictedName ("extends" ownedExtends+=TypedRefCS ("&&" ownedExtends+=TypedRefCS)*)?;
 	public BaseGrammarAccess.TypeParameterCSElements getTypeParameterCSAccess() {
 		return gaQVTcoreBase.getTypeParameterCSAccess();
 	}
@@ -1300,7 +1299,7 @@ public class QVTcoreGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//WildcardTypeRefCS:
-	//	{WildcardTypeRefCS} "?" ("extends" ownedExtends=TypedRefCS | "super" ownedSuper=TypedRefCS)?;
+	//	{WildcardTypeRefCS} "?" ("extends" ownedExtends=TypedRefCS)?;
 	public BaseGrammarAccess.WildcardTypeRefCSElements getWildcardTypeRefCSAccess() {
 		return gaQVTcoreBase.getWildcardTypeRefCSAccess();
 	}

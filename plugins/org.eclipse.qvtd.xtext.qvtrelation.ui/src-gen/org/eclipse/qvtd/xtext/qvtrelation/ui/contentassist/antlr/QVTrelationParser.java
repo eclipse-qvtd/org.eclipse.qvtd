@@ -78,9 +78,7 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getIfExpCSAccess().getOwnedConditionAlternatives_1_0(), "rule__IfExpCS__OwnedConditionAlternatives_1_0");
 					put(grammarAccess.getMultiplicityCSAccess().getAlternatives_1(), "rule__MultiplicityCS__Alternatives_1");
 					put(grammarAccess.getMultiplicityStringCSAccess().getStringBoundsAlternatives_0(), "rule__MultiplicityStringCS__StringBoundsAlternatives_0");
-					put(grammarAccess.getTypeParameterCSAccess().getAlternatives_1(), "rule__TypeParameterCS__Alternatives_1");
 					put(grammarAccess.getTypeRefCSAccess().getAlternatives(), "rule__TypeRefCS__Alternatives");
-					put(grammarAccess.getWildcardTypeRefCSAccess().getAlternatives_2(), "rule__WildcardTypeRefCS__Alternatives_2");
 					put(grammarAccess.getIDAccess().getAlternatives(), "rule__ID__Alternatives");
 					put(grammarAccess.getUPPERAccess().getAlternatives(), "rule__UPPER__Alternatives");
 					put(grammarAccess.getTopLevelCSAccess().getGroup(), "rule__TopLevelCS__Group__0");
@@ -219,12 +217,10 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTemplateSignatureCSAccess().getGroup(), "rule__TemplateSignatureCS__Group__0");
 					put(grammarAccess.getTemplateSignatureCSAccess().getGroup_2(), "rule__TemplateSignatureCS__Group_2__0");
 					put(grammarAccess.getTypeParameterCSAccess().getGroup(), "rule__TypeParameterCS__Group__0");
-					put(grammarAccess.getTypeParameterCSAccess().getGroup_1_0(), "rule__TypeParameterCS__Group_1_0__0");
-					put(grammarAccess.getTypeParameterCSAccess().getGroup_1_0_2(), "rule__TypeParameterCS__Group_1_0_2__0");
-					put(grammarAccess.getTypeParameterCSAccess().getGroup_1_1(), "rule__TypeParameterCS__Group_1_1__0");
+					put(grammarAccess.getTypeParameterCSAccess().getGroup_1(), "rule__TypeParameterCS__Group_1__0");
+					put(grammarAccess.getTypeParameterCSAccess().getGroup_1_2(), "rule__TypeParameterCS__Group_1_2__0");
 					put(grammarAccess.getWildcardTypeRefCSAccess().getGroup(), "rule__WildcardTypeRefCS__Group__0");
-					put(grammarAccess.getWildcardTypeRefCSAccess().getGroup_2_0(), "rule__WildcardTypeRefCS__Group_2_0__0");
-					put(grammarAccess.getWildcardTypeRefCSAccess().getGroup_2_1(), "rule__WildcardTypeRefCS__Group_2_1__0");
+					put(grammarAccess.getWildcardTypeRefCSAccess().getGroup_2(), "rule__WildcardTypeRefCS__Group_2__0");
 					put(grammarAccess.getTopLevelCSAccess().getOwnedImportsAssignment_0_0(), "rule__TopLevelCS__OwnedImportsAssignment_0_0");
 					put(grammarAccess.getTopLevelCSAccess().getOwnedLibrariesAssignment_0_1(), "rule__TopLevelCS__OwnedLibrariesAssignment_0_1");
 					put(grammarAccess.getTopLevelCSAccess().getOwnedTransformationsAssignment_1(), "rule__TopLevelCS__OwnedTransformationsAssignment_1");
@@ -421,11 +417,9 @@ public class QVTrelationParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTemplateSignatureCSAccess().getOwnedParametersAssignment_1(), "rule__TemplateSignatureCS__OwnedParametersAssignment_1");
 					put(grammarAccess.getTemplateSignatureCSAccess().getOwnedParametersAssignment_2_1(), "rule__TemplateSignatureCS__OwnedParametersAssignment_2_1");
 					put(grammarAccess.getTypeParameterCSAccess().getNameAssignment_0(), "rule__TypeParameterCS__NameAssignment_0");
-					put(grammarAccess.getTypeParameterCSAccess().getOwnedExtendsAssignment_1_0_1(), "rule__TypeParameterCS__OwnedExtendsAssignment_1_0_1");
-					put(grammarAccess.getTypeParameterCSAccess().getOwnedExtendsAssignment_1_0_2_1(), "rule__TypeParameterCS__OwnedExtendsAssignment_1_0_2_1");
-					put(grammarAccess.getTypeParameterCSAccess().getOwnedSuperAssignment_1_1_1(), "rule__TypeParameterCS__OwnedSuperAssignment_1_1_1");
-					put(grammarAccess.getWildcardTypeRefCSAccess().getOwnedExtendsAssignment_2_0_1(), "rule__WildcardTypeRefCS__OwnedExtendsAssignment_2_0_1");
-					put(grammarAccess.getWildcardTypeRefCSAccess().getOwnedSuperAssignment_2_1_1(), "rule__WildcardTypeRefCS__OwnedSuperAssignment_2_1_1");
+					put(grammarAccess.getTypeParameterCSAccess().getOwnedExtendsAssignment_1_1(), "rule__TypeParameterCS__OwnedExtendsAssignment_1_1");
+					put(grammarAccess.getTypeParameterCSAccess().getOwnedExtendsAssignment_1_2_1(), "rule__TypeParameterCS__OwnedExtendsAssignment_1_2_1");
+					put(grammarAccess.getWildcardTypeRefCSAccess().getOwnedExtendsAssignment_2_1(), "rule__WildcardTypeRefCS__OwnedExtendsAssignment_2_1");
 				}
 			};
 		}

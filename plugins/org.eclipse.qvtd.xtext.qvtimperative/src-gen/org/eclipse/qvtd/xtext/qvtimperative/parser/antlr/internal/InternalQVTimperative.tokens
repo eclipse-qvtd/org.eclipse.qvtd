@@ -72,7 +72,6 @@
 'realize'=42
 'refines'=43
 'self'=95
-'super'=99
 'then'=90
 'transformation'=41
 'true'=81
@@ -177,4 +176,3 @@ T__95=95
 T__96=96
 T__97=97
 T__98=98
-T__99=99
