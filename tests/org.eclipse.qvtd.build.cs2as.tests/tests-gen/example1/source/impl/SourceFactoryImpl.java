@@ -2,7 +2,6 @@
  */
 package example1.source.impl;
 
-import example1.source.*;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
