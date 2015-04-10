@@ -11,14 +11,14 @@
 grammar org.eclipse.qvtd.xtext.qvtimperative.QVTimperative with org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBase
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
-import "http://www.eclipse.org/ocl/2015/BaseCS" as base
-import "http://www.eclipse.org/ocl/2015/EssentialOCLCS" as essentialocl
-import "http://www.eclipse.org/ocl/2015/Pivot" as pivot
-import "http://www.eclipse.org/qvt/2015/QVTbase" as qvtbase
-import "http://www.eclipse.org/qvt/2015/QVTcoreBase" as qvtcorebase
-import "http://www.eclipse.org/qvt/2015/QVTimperative" as qvtimperative
-import "http://www.eclipse.org/qvt/2015/QVTcoreBaseCS" as qvtcorebasecs
-import "http://www.eclipse.org/qvt/2015/QVTimperativeCS"
+import "platform:/resource/org.eclipse.ocl.pivot/model/Pivot.ecore" as pivot
+import "platform:/resource/org.eclipse.ocl.xtext.base/model/BaseCS.ecore" as base
+import "platform:/resource/org.eclipse.ocl.xtext.essentialocl/model/EssentialOCLCS.ecore" as essentialocl
+import "platform:/resource/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore" as qvtbase
+import "platform:/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore" as qvtcorebase
+import "platform:/resource/org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.ecore" as qvtimperative
+import "platform:/resource/org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseCS.ecore" as qvtcorebasecs
+import "platform:/resource/org.eclipse.qvtd.xtext.qvtimperative/model/QVTimperativeCS.ecore"
 
 TopLevelCS:
 	(ownedImports+=ImportCS | /*ownedInclude+=IncludeCS |*/ ownedLibraries+=LibraryCS)*

@@ -141,9 +141,9 @@ public class QVTcoreBaseGrammarResource extends AbstractGrammarResource
 			{
 				List<AbstractMetamodelDeclaration> metamodelDeclarations = grammar.getMetamodelDeclarations();
 				metamodelDeclarations.add(MM_ecore);
+				metamodelDeclarations.add(MM_pivot);
 				metamodelDeclarations.add(MM_base);
 				metamodelDeclarations.add(MM_essentialocl);
-				metamodelDeclarations.add(MM_pivot);
 				metamodelDeclarations.add(MM_qvtbase);
 				metamodelDeclarations.add(MM_qvtcorebase);
 				metamodelDeclarations.add(MM);
