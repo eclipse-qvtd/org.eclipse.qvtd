@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.pivot.qvtbase;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.NamedElement;
 
 /**
@@ -74,7 +75,7 @@ public interface TypedModel extends NamedElement {
 	 * @model required="true" ordered="false"
 	 * @generated
 	 */
-	EList<org.eclipse.ocl.pivot.Package> getUsedPackage();
+	@NonNull EList<org.eclipse.ocl.pivot.Package> getUsedPackage();
 
 	/**
 	 * Returns the value of the '<em><b>Depends On</b></em>' reference list.
@@ -91,6 +92,6 @@ public interface TypedModel extends NamedElement {
 	 *        annotation="http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName body='dependent'"
 	 * @generated
 	 */
-	EList<TypedModel> getDependsOn();
+	@NonNull EList<TypedModel> getDependsOn();
 
 } // TypedModel

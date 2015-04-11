@@ -44,12 +44,58 @@ public class QVTbaseUtil
 		}
 	}
 
+	/**
+	 * Return the closure of typedModel and its dependsOn.
+	 */
+	public static @NonNull Set<TypedModel> getAllTypedModels(@NonNull TypedModel typedModel) {
+		Set<TypedModel> allTypedModels = new HashSet<TypedModel>();
+		getAllTypedModelsInternal(allTypedModels, typedModel);
+		return allTypedModels;
+	}
+
+	private static void getAllTypedModelsInternal(@NonNull Set<TypedModel> allTypedModels, @NonNull TypedModel typedModel) {
+		if (allTypedModels.add(typedModel)) {
+			for (@SuppressWarnings("null")@NonNull TypedModel dependsOn : typedModel.getDependsOn()) {
+				getAllTypedModelsInternal(allTypedModels, dependsOn);
+			}
+		}
+	}
+
+	/**
+	 * Return the closure of transformation.modelParameter.usedPackages and their importedPackages.
+	 */
 	public static @NonNull Set<org.eclipse.ocl.pivot.Package> getAllUsedPackages(@NonNull Transformation transformation) {
 		Set<org.eclipse.ocl.pivot.Package> allPackages = new HashSet<org.eclipse.ocl.pivot.Package>();
-		for (TypedModel typedModel : transformation.getModelParameter()) {
-			allPackages.addAll(typedModel.getUsedPackage());
+		for (@SuppressWarnings("null")@NonNull TypedModel typedModel : transformation.getModelParameter()) {
+			getAllUsedPackagesInternal(allPackages, typedModel);
 		}
 		return allPackages;
+	}
+
+	/**
+	 * Return the closure of typedModel.usedPackages and their importedPackages.
+	 */
+	public static @NonNull Set<org.eclipse.ocl.pivot.Package> getAllUsedPackages(@NonNull TypedModel typedModel) {
+		Set<org.eclipse.ocl.pivot.Package> allUsedPackages = new HashSet<org.eclipse.ocl.pivot.Package>();
+		getAllUsedPackagesInternal(allUsedPackages, typedModel);
+		return allUsedPackages;
+	}
+
+	private static void getAllUsedPackagesInternal(@NonNull Set<org.eclipse.ocl.pivot.Package> allUsedPackages,
+			@NonNull TypedModel typedModel) {
+		getAllUsedPackagesInternal(allUsedPackages, typedModel.getUsedPackage());
+		for (@SuppressWarnings("null")@NonNull TypedModel dependsOn : typedModel.getDependsOn()) {
+			getAllUsedPackagesInternal(allUsedPackages, dependsOn);
+		}
+	}
+
+	private static void getAllUsedPackagesInternal(@NonNull Set<org.eclipse.ocl.pivot.Package> allUsedPackages,
+			@NonNull Iterable<org.eclipse.ocl.pivot.Package> moreUsedPackages) {
+		for (org.eclipse.ocl.pivot.Package usedPackage : moreUsedPackages) {
+			if (allUsedPackages.add(usedPackage)) {
+				getAllUsedPackagesInternal(allUsedPackages, usedPackage.getImportedPackages());
+			}
+		}
 	}
 
 	public static @Nullable Domain getContainingDomain(@Nullable EObject eObject) {

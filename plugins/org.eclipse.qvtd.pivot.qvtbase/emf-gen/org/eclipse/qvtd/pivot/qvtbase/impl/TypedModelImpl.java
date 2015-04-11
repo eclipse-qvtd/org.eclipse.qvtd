@@ -132,8 +132,9 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("null")
 	@Override
-	public EList<org.eclipse.ocl.pivot.Package> getUsedPackage() {
+	public @NonNull EList<org.eclipse.ocl.pivot.Package> getUsedPackage() {
 		if (usedPackage == null) {
 			usedPackage = new EObjectResolvingEList<org.eclipse.ocl.pivot.Package>(org.eclipse.ocl.pivot.Package.class, this, QVTbasePackage.TYPED_MODEL__USED_PACKAGE);
 		}
@@ -145,8 +146,9 @@ public class TypedModelImpl extends NamedElementImpl implements TypedModel {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("null")
 	@Override
-	public EList<TypedModel> getDependsOn() {
+	public @NonNull EList<TypedModel> getDependsOn() {
 		if (dependsOn == null) {
 			dependsOn = new EObjectResolvingEList<TypedModel>(TypedModel.class, this, QVTbasePackage.TYPED_MODEL__DEPENDS_ON);
 		}
