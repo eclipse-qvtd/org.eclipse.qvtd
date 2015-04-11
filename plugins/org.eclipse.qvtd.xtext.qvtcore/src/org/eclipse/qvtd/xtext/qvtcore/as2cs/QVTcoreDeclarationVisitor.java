@@ -117,7 +117,8 @@ public class QVTcoreDeclarationVisitor extends QVTcoreBaseDeclarationVisitor imp
 
 	@Override
 	public ElementCS visitMapping(@NonNull Mapping asMapping) {
-		MappingCS csMapping = context.refreshNamedElement(MappingCS.class, QVTcoreCSPackage.Literals.MAPPING_CS, asMapping);
+		String defaultName = asMapping.getContext() != null ? null : "«null»";
+		MappingCS csMapping = context.refreshNamedElement(MappingCS.class, QVTcoreCSPackage.Literals.MAPPING_CS, asMapping, defaultName);
 		csMapping.setPivot(asMapping);
 		csMapping.setIsDefault(asMapping.isIsDefault());
 		refreshOwnedInTransformation(csMapping, asMapping);
