@@ -12,6 +12,9 @@ package org.eclipse.qvtd.pivot.qvtbase.utilities;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.Import;
+import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.Operation;
+import org.eclipse.ocl.pivot.OperationCallExp;
 import org.eclipse.ocl.pivot.utilities.ToStringVisitor;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -54,6 +57,24 @@ public class QVTbaseToStringVisitor extends ToStringVisitor implements QVTbaseVi
 	@Override
 	public String visitFunctionParameter(@NonNull FunctionParameter object) {
 		return visitParameter(object);
+	}
+
+	@Override
+	public String visitOperationCallExp(@NonNull OperationCallExp object) {
+		Operation oper = object.getReferredOperation();
+		if (!(oper instanceof Function)) {
+			return super.visitOperationCallExp(object);
+		}
+		appendName(oper);
+		append("(");
+		String prefix = "";//$NON-NLS-1$
+		for (OCLExpression argument : object.getOwnedArguments()) {
+			append(prefix);
+			safeVisit(argument);
+			prefix = ", ";//$NON-NLS-1$
+		}
+		append(")");
+		return null;
 	}
 
 	@Override

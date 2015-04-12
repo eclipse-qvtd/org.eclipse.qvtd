@@ -60,7 +60,7 @@ def: isTarget : Boolean = mapping.isFromMiddle and oclIsKindOf(CoreDomain)
 context CoreDomain
 def: mapping : qvtimperative::Mapping = rule.oclAsType(qvtimperative::Mapping)
 inv CheckableXorEnforceable: isCheckable xor isEnforceable
-inv NoSideBottomPatternVariables: bottomPattern.variable->isEmpty()
+inv NoSourceBottomPatternVariables: isCheckable implies bottomPattern.variable->isEmpty()
 inv NoSideBottomPatternAssignments: bottomPattern.assignment->isEmpty()
 inv NoSideBottomPatternEnforcements: bottomPattern.enforcementOperation->isEmpty()
 
@@ -83,7 +83,7 @@ inv IsEnforced('RealizedVariable ' + name + ' must be in an enforceable Area'): 
 --	if mapping.isToMiddle then area = mapping else area.oclAsType(CoreDomain).isEnforceable endif
 
 context VariableAssignment
-inv NoVariableAssignmentsInSourceDomain: bottomPattern.area.isTarget
+inv NoVariableAssignmentsInSourceDomain: not bottomPattern.area.isSource
 inv CompatibleType: value.type.conformsTo(targetVariable.type)
 
 endpackage

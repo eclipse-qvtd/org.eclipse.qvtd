@@ -16,11 +16,16 @@ import org.eclipse.ocl.pivot.Element;
 
 /**
  * DomainUsage or rather the derived DomainUsageConstant and DomainUsageVariable identify the results of
- * the DomainUsageAnalysis of an OCL AST node.
+ * the DomainUsageAnalysis of a Pivot AST node.
  */
 public interface DomainUsage
 {
 	void addUsedBy(@NonNull Element element);
 	@Nullable Iterable<Element> getElements();
 	int getMask();
+	boolean isError();
+	boolean isMiddle();
+	boolean isPrimitive();
+	boolean isSource();
+	boolean isTarget();
 }

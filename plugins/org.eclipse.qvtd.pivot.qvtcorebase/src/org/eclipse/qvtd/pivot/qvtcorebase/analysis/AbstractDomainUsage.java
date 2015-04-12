@@ -20,6 +20,7 @@ public abstract class AbstractDomainUsage implements DomainUsage
 	protected static final int SOURCE_BIT = 1 << 1;
 	protected static final int MIDDLE_BIT = 1 << 2;
 	protected static final int TARGET_BIT = 1 << 3;
+	protected static final int ERROR_BIT = 1 << 4;
 
 	protected final int mask;
 	
@@ -40,7 +41,50 @@ public abstract class AbstractDomainUsage implements DomainUsage
 		return mask;
 	}
 	
-//	public boolean isSource() {
-//		return mask & SOURCE_BIT
-//	}
+	@Override
+	public boolean isError() {
+		return (mask & ERROR_BIT) != 0;
+	}
+	
+	@Override
+	public boolean isMiddle() {
+		return (mask & MIDDLE_BIT) != 0;
+	}
+	
+	@Override
+	public boolean isPrimitive() {
+		return (mask & PRIMITIVE_BIT) != 0;
+	}
+	
+	@Override
+	public boolean isSource() {
+		return (mask & SOURCE_BIT) != 0;
+	}
+	
+	@Override
+	public boolean isTarget() {
+		return (mask & TARGET_BIT) != 0;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder s = new StringBuilder();
+		s.append(getClass().getSimpleName());
+		if ((mask & PRIMITIVE_BIT) != 0) {
+			s.append(" PRIMITIVE");
+		}
+		if ((mask & SOURCE_BIT) != 0) {
+			s.append(" SOURCE");
+		}
+		if ((mask & MIDDLE_BIT) != 0) {
+			s.append(" MIDDLE");
+		}
+		if ((mask & TARGET_BIT) != 0) {
+			s.append(" TARGET");
+		}
+		if ((mask & ERROR_BIT) != 0) {
+			s.append(" ERROR");
+		}
+		return s.toString();
+	}
 }

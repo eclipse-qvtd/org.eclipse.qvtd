@@ -18,25 +18,32 @@ import org.eclipse.jdt.annotation.Nullable;
  */
 public class DomainUsageConstant extends AbstractDomainUsage
 {
-	/*package*/ static final @NonNull DomainUsageConstant ANY = new DomainUsageConstant(PRIMITIVE_BIT | SOURCE_BIT | MIDDLE_BIT | TARGET_BIT);
-	private static final @NonNull DomainUsageConstant ERROR = new DomainUsageConstant(0);
-	/*package*/ static final @NonNull DomainUsageConstant MIDDLE = new DomainUsageConstant(MIDDLE_BIT);
-	/*package*/ static final @NonNull DomainUsageConstant PRIMITIVE = new DomainUsageConstant(PRIMITIVE_BIT);
-	/*package*/ static final @NonNull DomainUsageConstant SOURCE = new DomainUsageConstant(SOURCE_BIT);
-	/*package*/ static final @NonNull DomainUsageConstant TARGET = new DomainUsageConstant(TARGET_BIT);
+	private static final int ANY_MASK = PRIMITIVE_BIT | SOURCE_BIT | MIDDLE_BIT | TARGET_BIT;
 	
-	private static final @NonNull DomainUsageConstant[] usages = new DomainUsageConstant[ANY.mask+1];
-	{
-		usages[ANY.mask] = ANY;
-		usages[ERROR.mask] = ERROR;
-		usages[MIDDLE.mask] = MIDDLE;
-		usages[MIDDLE.mask | PRIMITIVE_BIT] = MIDDLE;
-		usages[PRIMITIVE.mask] = PRIMITIVE;
-		usages[SOURCE.mask] = SOURCE;
-		usages[SOURCE.mask | PRIMITIVE_BIT] = SOURCE;
-		usages[TARGET.mask] = TARGET;
-		usages[TARGET.mask | PRIMITIVE_BIT] = TARGET;
+	private static final @NonNull DomainUsageConstant[] usages = new DomainUsageConstant[2 * ERROR_BIT];
+	static {
+		usages[ANY_MASK] = new DomainUsageConstant(ANY_MASK);
+		usages[MIDDLE_BIT] = new DomainUsageConstant(MIDDLE_BIT);
+		usages[PRIMITIVE_BIT] = new DomainUsageConstant(PRIMITIVE_BIT);
+		usages[SOURCE_BIT] = new DomainUsageConstant(SOURCE_BIT);
+		usages[TARGET_BIT] = new DomainUsageConstant(TARGET_BIT);
+		usages[MIDDLE_BIT | PRIMITIVE_BIT] = usages[MIDDLE_BIT];
+		usages[SOURCE_BIT | PRIMITIVE_BIT] = usages[SOURCE_BIT];
+		usages[TARGET_BIT | PRIMITIVE_BIT] = usages[TARGET_BIT];
+		usages[ERROR_BIT] = new DomainUsageConstant(ERROR_BIT);
+		for (int i = 1; i < ERROR_BIT; i++) {
+			usages[ERROR_BIT + i] = usages[ERROR_BIT];
+		}
 	}
+	
+	public static final @SuppressWarnings("null")@NonNull DomainUsageConstant ANY = usages[ANY_MASK];
+	public static final @SuppressWarnings("null")@NonNull DomainUsageConstant ERROR = usages[ERROR_BIT];
+	public static final @SuppressWarnings("null")@NonNull DomainUsageConstant MIDDLE = usages[MIDDLE_BIT];
+	public static final @SuppressWarnings("null")@NonNull DomainUsageConstant PRIMITIVE = usages[PRIMITIVE_BIT];
+	public static final @SuppressWarnings("null")@NonNull DomainUsageConstant SOURCE = usages[SOURCE_BIT];
+	public static final @SuppressWarnings("null")@NonNull DomainUsageConstant TARGET = usages[TARGET_BIT];
+
+	public static final @NonNull DomainUsageConstant NONE = new DomainUsageConstant(0);
 
 	/**
 	 * Return the DomainUsageConstant that represents mask. Returns null if maks cannot be represented as a valid constant.

@@ -10,32 +10,24 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtcorebase.analysis;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.ocl.pivot.Element;
 
 /**
- * A DomainUsageVariable identifies a constrained domain result from the DomainUsageAnalysis of an OCL AST node.
+ * A NestedDomainUsageAnalysis is used for a nested context such as an operation which is analyzed without
+ * regard to its invocation parameters. The invoking context is responsible for 'specializing' the generic
+ * domain analysis to suit the invocations.
  */
-public class DomainUsageVariable extends AbstractDomainUsage
+public class NestedDomainUsageAnalysis extends AbstractDomainUsageAnalysis
 {
-	protected final @NonNull List<Element> usedBy = new ArrayList<Element>();
-	
-	public DomainUsageVariable(int mask) {
-		super(mask);
-//		assert mask != 0;
+	protected final @NonNull RootDomainUsageAnalysis rootAnalysis;
+
+	protected NestedDomainUsageAnalysis(@NonNull RootDomainUsageAnalysis rootAnalysis) {
+		super(rootAnalysis.getEnvironmentFactory());
+		this.rootAnalysis = rootAnalysis;
 	}
 
 	@Override
-	public void addUsedBy(@NonNull Element element) {
-		usedBy.add(element);
-	}
-
-	@Override
-	public @Nullable Iterable<Element> getElements() {
-		return usedBy;
+	protected @NonNull RootDomainUsageAnalysis getRootAnalysis() {
+		return rootAnalysis;
 	}
 }

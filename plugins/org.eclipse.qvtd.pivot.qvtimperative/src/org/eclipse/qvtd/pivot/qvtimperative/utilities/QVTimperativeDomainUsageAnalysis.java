@@ -1,0 +1,107 @@
+/*******************************************************************************
+ * Copyright (c) 2015 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     E.D.Willink - initial API and implementation
+ *******************************************************************************/
+package org.eclipse.qvtd.pivot.qvtimperative.utilities;
+
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Variable;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
+import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
+import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsageConstant;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
+import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
+import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
+
+/**
+ * A QVTimperativeDomainUsageAnalysis identifies a constrained domain result from the DomainUsageAnalysis of an OCL AST node.
+ */
+public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis implements QVTimperativeVisitor<DomainUsage>
+{
+	public QVTimperativeDomainUsageAnalysis(@NonNull EnvironmentFactoryInternal environmentFactory) {
+		super(environmentFactory);
+	}
+
+	@Override
+	public @Nullable DomainUsage visitImperativeModel(@NonNull ImperativeModel object) {
+		return visitBaseModel(object);
+	}
+
+	@Override
+	public @Nullable DomainUsage visitMapping(@NonNull Mapping object) {
+		visitRule(object);
+		visit(object.getGuardPattern());
+		visit(object.getBottomPattern());
+		visit(object.getMappingStatement());
+		return DomainUsageConstant.NONE;
+	}
+
+	@Override
+	public @Nullable DomainUsage visitMappingCall(@NonNull MappingCall object) {
+		for (MappingCallBinding mappingCallBinding : object.getBinding()) {
+			visit(mappingCallBinding);
+		}
+		return DomainUsageConstant.NONE;
+	}
+
+	@Override
+	public @Nullable DomainUsage visitMappingCallBinding(@NonNull MappingCallBinding object) {
+		DomainUsage valueUsage = visit(object.getValue());
+		DomainUsage variableUsage = visit(object.getBoundVariable());
+		return intersection(valueUsage, variableUsage);
+	}
+
+	@Override
+	public @Nullable DomainUsage visitMappingLoop(@NonNull MappingLoop object) {
+		for (Variable iterator : object.getOwnedIterators()) {
+			visit(iterator);
+		}
+		visit(object.getOwnedSource());
+		visit(object.getOwnedBody());
+		return DomainUsageConstant.NONE;
+	}
+
+	@Override
+	public @Nullable DomainUsage visitMappingSequence(@NonNull MappingSequence object) {
+		for (MappingStatement mappingStatement : object.getMappingStatements()) {
+			visit(mappingStatement);
+		}
+		return DomainUsageConstant.NONE;
+	}
+
+	@Override
+	public @Nullable DomainUsage visitMappingStatement(@NonNull MappingStatement object) {
+		return visitOCLExpression(object);
+	}
+
+	@Override
+	public @Nullable DomainUsage visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment object) {
+		return visitPropertyAssignment(object);
+	}
+
+	@Override
+	public @Nullable DomainUsage visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp object) {
+		return visitOppositePropertyCallExp(object);
+	}
+
+	@Override
+	public @Nullable DomainUsage visitVariablePredicate(@NonNull VariablePredicate object) {
+		return visitPredicate(object);
+	}
+}
