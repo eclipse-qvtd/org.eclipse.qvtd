@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -63,7 +64,7 @@ public class QVTcDomainUsageTests extends LoadTestCase
 			super(environmentFactory);
 		}
 
-		protected void checkAnalysis(@NonNull Transformation asTransformation) {
+		protected void checkAnalysis(@NonNull Transformation asTransformation, boolean showAnalysis) {
 			QVTcoreDomainUsageAnalysis domainAnalysis = new QVTcoreDomainUsageAnalysis(getEnvironmentFactory());
 			Map<Element, DomainUsage> analysis = domainAnalysis.analyzeTransformation(asTransformation);
 			Map<DomainUsage, List<Element>> usage2elements = new HashMap<DomainUsage, List<Element>>();
@@ -103,12 +104,9 @@ public class QVTcDomainUsageTests extends LoadTestCase
 					list.add((Element) eObject);
 				}
 			}
-//			for (DomainUsage usage : usage2elements.keySet()) {
-//				System.out.println(usage);
-//				for (Element element : usage2elements.get(usage)) {
-//					System.out.println("\t" + element.eClass().getName() + " " + element);
-//				}
-//			}
+			if (showAnalysis) {
+				printAnalysis(usage2elements);
+			}
 		}
 
 		public @NonNull TxEvaluator createEvaluator(Constructor<? extends TransformationExecutor> txConstructor) throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
@@ -118,6 +116,22 @@ public class QVTcDomainUsageTests extends LoadTestCase
 		@Override
 		public @NonNull EnvironmentFactoryInternal getEnvironmentFactory() {
 			return (EnvironmentFactoryInternal) super.getEnvironmentFactory();
+		}
+		
+		public void printAnalysis(@NonNull Map<DomainUsage, List<Element>> usage2elements) {
+			List<? extends DomainUsage> sortedUsages = new ArrayList<DomainUsage>(usage2elements.keySet());
+			Collections.sort(sortedUsages);
+			for (DomainUsage usage : sortedUsages) {
+				System.out.println(usage);
+				List<String> lines = new ArrayList<String>();
+				for (Element element : usage2elements.get(usage)) {
+					lines.add(element.eClass().getName() + " " + element);
+				}
+				Collections.sort(lines);
+				for (String line : lines) {
+					System.out.println("\t" + line);
+				}
+			}
 		}
 	}
 	
@@ -185,7 +199,7 @@ public class QVTcDomainUsageTests extends LoadTestCase
     	MyQVT myQVT = createQVT();
 		URI transformURI = getProjectFileURI("models/uml2rdbms.qvtu.qvtc");
 		Transformation asTransformation = loadTransformation(myQVT, transformURI);
-		myQVT.checkAnalysis(asTransformation);
+		myQVT.checkAnalysis(asTransformation, true);
         myQVT.dispose();
 	}
 

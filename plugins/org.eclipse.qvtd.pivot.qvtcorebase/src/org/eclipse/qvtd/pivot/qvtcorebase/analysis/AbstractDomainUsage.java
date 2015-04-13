@@ -16,11 +16,11 @@ import org.eclipse.ocl.pivot.Element;
 
 public abstract class AbstractDomainUsage implements DomainUsage
 {
-	protected static final int PRIMITIVE_BIT = 1 << 0;
-	protected static final int SOURCE_BIT = 1 << 1;
-	protected static final int MIDDLE_BIT = 1 << 2;
-	protected static final int TARGET_BIT = 1 << 3;
-	protected static final int ERROR_BIT = 1 << 4;
+	protected static final int PRIMITIVE_BIT = 1 << Domain.PRIMITIVE.ordinal();
+	protected static final int SOURCE_BIT = 1 << Domain.SOURCE.ordinal();
+	protected static final int MIDDLE_BIT = 1 << Domain.MIDDLE.ordinal();
+	protected static final int TARGET_BIT = 1 << Domain.TARGET.ordinal();
+	protected static final int ERROR_BIT = 1 << Domain.ERROR.ordinal();
 
 	protected final int mask;
 	
@@ -30,6 +30,14 @@ public abstract class AbstractDomainUsage implements DomainUsage
 
 	@Override
 	public void addUsedBy(@NonNull Element element) {}
+
+
+	@Override
+	public int compareTo(DomainUsage o) {
+		int m1 = getMask();
+		int m2 = o.getMask();
+		return m1 - m2;
+	}
 
 	@Override
 	public @Nullable Iterable<Element> getElements() {

@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,7 +76,7 @@ public class QVTiDomainUsageTests extends LoadTestCase
 			super(environmentFactory);
 		}
 
-		protected void checkAnalysis(@NonNull Transformation asTransformation) {
+		protected void checkAnalysis(@NonNull Transformation asTransformation, boolean showAnalysis) {
 			QVTimperativeDomainUsageAnalysis domainAnalysis = new QVTimperativeDomainUsageAnalysis(getEnvironmentFactory());
 			Map<Element, DomainUsage> analysis = domainAnalysis.analyzeTransformation(asTransformation);
 			Map<DomainUsage, List<Element>> usage2elements = new HashMap<DomainUsage, List<Element>>();
@@ -115,12 +116,9 @@ public class QVTiDomainUsageTests extends LoadTestCase
 					list.add((Element) eObject);
 				}
 			}
-//			for (DomainUsage usage : usage2elements.keySet()) {
-//				System.out.println(usage);
-//				for (Element element : usage2elements.get(usage)) {
-//					System.out.println("\t" + element.eClass().getName() + " " + element);
-//				}
-//			}
+			if (showAnalysis) {
+				printAnalysis(usage2elements);
+			}
 		}
 
 		public @NonNull TxEvaluator createEvaluator(Constructor<? extends TransformationExecutor> txConstructor) throws IllegalArgumentException, InstantiationException, IllegalAccessException, InvocationTargetException {
@@ -130,6 +128,22 @@ public class QVTiDomainUsageTests extends LoadTestCase
 		@Override
 		public @NonNull QVTiEnvironmentFactory getEnvironmentFactory() {
 			return (QVTiEnvironmentFactory) super.getEnvironmentFactory();
+		}
+		
+		public void printAnalysis(@NonNull Map<DomainUsage, List<Element>> usage2elements) {
+			List<? extends DomainUsage> sortedUsages = new ArrayList<DomainUsage>(usage2elements.keySet());
+			Collections.sort(sortedUsages);
+			for (DomainUsage usage : sortedUsages) {
+				System.out.println(usage);
+				List<String> lines = new ArrayList<String>();
+				for (Element element : usage2elements.get(usage)) {
+					lines.add(element.eClass().getName() + " " + element);
+				}
+				Collections.sort(lines);
+				for (String line : lines) {
+					System.out.println("\t" + line);
+				}
+			}
 		}
 	}
 	
@@ -206,7 +220,7 @@ public class QVTiDomainUsageTests extends LoadTestCase
     	MyQVT myQVT = createQVT();
 		URI transformURI = getProjectFileURI("HSV2HLS/HSV2HLS.qvti");
 		Transformation asTransformation = loadTransformation(myQVT, transformURI);
-		myQVT.checkAnalysis(asTransformation);
+		myQVT.checkAnalysis(asTransformation, false);
         myQVT.dispose();
 	}
 	
@@ -214,7 +228,7 @@ public class QVTiDomainUsageTests extends LoadTestCase
     	MyQVT myQVT = createQVT();
 		URI transformURI = getProjectFileURI("ClassesCS2AS/ClassesCS2AS.qvti");
 		Transformation asTransformation = loadTransformation(myQVT, transformURI);
-		myQVT.checkAnalysis(asTransformation);
+		myQVT.checkAnalysis(asTransformation, false);
         myQVT.dispose();
 	}
 	
@@ -229,15 +243,23 @@ public class QVTiDomainUsageTests extends LoadTestCase
 		
 		URI transformURI = getProjectFileURI("ClassesCS2AS/bug459225/ClassesCS2AS.qvti");
 		Transformation asTransformation = loadTransformation(myQVT, transformURI);
-		myQVT.checkAnalysis(asTransformation);
+		myQVT.checkAnalysis(asTransformation, false);
 		myQVT.dispose();
+	}
+
+	public void testDomainUsage_Graph2GraphMinimal_qvti() throws Exception {
+    	MyQVT myQVT = createQVT();
+		URI transformURI = getProjectFileURI("Graph2GraphMinimal/Graph2GraphMinimal.qvti");
+		Transformation asTransformation = loadTransformation(myQVT, transformURI);
+		myQVT.checkAnalysis(asTransformation, false);
+        myQVT.dispose();
 	}
 
 	public void testDomainUsage_ManualUML2RDBMS_qvti() throws Exception {
     	MyQVT myQVT = createQVT();
 		URI transformURI = getProjectFileURI("ManualUML2RDBMS/ManualUML2RDBMS.qvti");
 		Transformation asTransformation = loadTransformation(myQVT, transformURI);
-		myQVT.checkAnalysis(asTransformation);
+		myQVT.checkAnalysis(asTransformation, false);
         myQVT.dispose();
 	}
 
@@ -245,7 +267,7 @@ public class QVTiDomainUsageTests extends LoadTestCase
     	MyQVT myQVT = createQVT();
 		URI transformURI = getProjectFileURI("SimpleUML2RDBMS/SimpleUML2RDBMS.qvti");
 		Transformation asTransformation = loadTransformation(myQVT, transformURI);
-		myQVT.checkAnalysis(asTransformation);
+		myQVT.checkAnalysis(asTransformation, false);
         myQVT.dispose();
 	}
 

@@ -69,10 +69,12 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 
 	@Override
 	public @Nullable DomainUsage visitMappingLoop(@NonNull MappingLoop object) {
+		DomainUsage sourceUsage = visit(object.getOwnedSource());
 		for (Variable iterator : object.getOwnedIterators()) {
-			visit(iterator);
+			if (iterator != null) {
+				setUsage(iterator, sourceUsage);
+			}
 		}
-		visit(object.getOwnedSource());
 		visit(object.getOwnedBody());
 		return DomainUsageConstant.NONE;
 	}

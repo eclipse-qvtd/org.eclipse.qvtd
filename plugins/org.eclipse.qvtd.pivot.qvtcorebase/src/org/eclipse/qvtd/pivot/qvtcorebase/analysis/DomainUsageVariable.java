@@ -26,7 +26,7 @@ public class DomainUsageVariable extends AbstractDomainUsage
 	
 	public DomainUsageVariable(int mask) {
 		super(mask);
-//		assert mask != 0;
+		assert mask != 0;
 	}
 
 	@Override

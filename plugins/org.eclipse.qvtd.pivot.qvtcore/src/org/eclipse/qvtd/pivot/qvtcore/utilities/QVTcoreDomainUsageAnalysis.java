@@ -13,6 +13,7 @@ package org.eclipse.qvtd.pivot.qvtcore.utilities;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
+import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
@@ -27,6 +28,18 @@ public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implemen
 {
 	public QVTcoreDomainUsageAnalysis(@NonNull EnvironmentFactoryInternal environmentFactory) {
 		super(environmentFactory);
+	}
+
+	@Override
+	protected void setBoundVariablesUsages(@NonNull Rule rule) {
+		super.setBoundVariablesUsages(rule);
+		if (rule instanceof Mapping) {
+			for (Mapping local : ((Mapping)rule).getLocal()) {
+				if (local != null) {
+					setBoundVariablesUsages(local);
+				}
+			}
+		}
 	}
 
 	@Override

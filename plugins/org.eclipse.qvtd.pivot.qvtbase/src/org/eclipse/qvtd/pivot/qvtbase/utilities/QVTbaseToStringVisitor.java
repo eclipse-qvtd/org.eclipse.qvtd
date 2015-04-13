@@ -104,7 +104,6 @@ public class QVTbaseToStringVisitor extends ToStringVisitor implements QVTbaseVi
 
 	@Override
 	public String visitTypedModel(@NonNull TypedModel object) {
-		append("typed model ");
 		appendName(object);
 		return null;
 	}
