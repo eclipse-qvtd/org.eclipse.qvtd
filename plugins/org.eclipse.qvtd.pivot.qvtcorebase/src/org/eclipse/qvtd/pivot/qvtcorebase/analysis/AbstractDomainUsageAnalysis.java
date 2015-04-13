@@ -78,7 +78,10 @@ import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.util.AbstractExtendingQVTcoreBaseVisitor;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseUtil;
 
-public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTcoreBaseVisitor<DomainUsage, EnvironmentFactoryInternal>
+/**
+ * AbstractDomainUsageAnalysis provides shared functionality for the overall analysis and for nested operational analyses.
+ */
+public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTcoreBaseVisitor<DomainUsage, EnvironmentFactoryInternal> implements DomainUsageAnalysis.Internal
 {
 	private DomainUsage selfUsage = null;
 	protected final @NonNull Map<Element, DomainUsage> element2usage = new HashMap<Element, DomainUsage>();
@@ -133,41 +136,46 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 
 	protected abstract @NonNull RootDomainUsageAnalysis getRootAnalysis();
 
+	@Override
+	public @Nullable DomainUsage getUsage(@Nullable EObject element) {
+		return element2usage.get(element);
+	}
+
 	protected @NonNull DomainUsage intersection(@NonNull DomainUsage firstUsage, @NonNull DomainUsage secondUsage) {
-		long firstMask = firstUsage.getMask();
-		long secondMask = secondUsage.getMask();
+		int firstMask = ((DomainUsage.Internal)firstUsage).getMask();
+		int secondMask = ((DomainUsage.Internal)secondUsage).getMask();
 		if (firstMask == secondMask) {
 			if (firstUsage != secondUsage) {
-				if (firstUsage instanceof DomainUsageVariable) {
-					replace((DomainUsageVariable) firstUsage, secondUsage);
+				if (!firstUsage.isConstant()) {
+					replace((DomainUsage.Internal) firstUsage, secondUsage);
 					return secondUsage;
 				}
-				else if (secondUsage instanceof DomainUsageVariable) {
-					replace((DomainUsageVariable) secondUsage, firstUsage);
+				else if (!secondUsage.isConstant()) {
+					replace((DomainUsage.Internal) secondUsage, firstUsage);
 					return firstUsage;
 				}
 			}
 			return firstUsage;
 		}
 		else {
-			long intersectionMask = firstMask & secondMask;
+			int intersectionMask = firstMask & secondMask;
 			DomainUsage usage = getRootAnalysis().getValidUsage(intersectionMask);
 			if (usage != null) {
-				if ((usage != firstUsage) && (firstUsage instanceof DomainUsageVariable)) {
-					replace((DomainUsageVariable) firstUsage, usage);
+				if ((usage != firstUsage) && !firstUsage.isConstant()) {
+					replace((DomainUsage.Internal) firstUsage, usage);
 				}
-				if ((usage != secondUsage) && (secondUsage instanceof DomainUsageVariable)) {
-					replace((DomainUsageVariable) secondUsage, usage);
+				if ((usage != secondUsage) && !secondUsage.isConstant()) {
+					replace((DomainUsage.Internal) secondUsage, usage);
 				}
 				return usage;
 			}
 			else {
-				usage = new DomainUsageVariable(getRootAnalysis(), intersectionMask);
-				if (firstUsage instanceof DomainUsageVariable) {
-					replace((DomainUsageVariable) firstUsage, usage);
+				usage = getRootAnalysis().createVariableUsage(intersectionMask);
+				if (!firstUsage.isConstant()) {
+					replace((DomainUsage.Internal) firstUsage, usage);
 				}
-				if (secondUsage instanceof DomainUsageVariable) {
-					replace((DomainUsageVariable) secondUsage, usage);
+				if (!secondUsage.isConstant()) {
+					replace((DomainUsage.Internal) secondUsage, usage);
 				}
 				return usage;
 			}
@@ -180,15 +188,16 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 	
 	protected DomainUsage pushSelfUsage(@NonNull DomainUsage usage) {
 		DomainUsage oldUsage = selfUsage;
-		DomainUsageConstant constantUsage = getRootAnalysis().getValidUsage(usage.getMask());
+		int usageMask = ((DomainUsage.Internal)usage).getMask();
+		DomainUsage constantUsage = getRootAnalysis().getValidUsage(usageMask);
 		if (constantUsage == null) {
-			usage = new DomainUsageVariable(getRootAnalysis(), usage.getMask());
+			usage = getRootAnalysis().createVariableUsage(usageMask);
 		}
 		selfUsage = usage;
 		return oldUsage;
 	}
 
-	protected void replace(@NonNull DomainUsageVariable oldUsage, @NonNull DomainUsage newUsage) {
+	protected void replace(@NonNull DomainUsage.Internal oldUsage, @NonNull DomainUsage newUsage) {
 		Iterable<Element> elements = oldUsage.getElements();
 		if (elements != null) {
 			for (@SuppressWarnings("null")@NonNull Element element : elements) {
@@ -215,12 +224,14 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 			}
 		}
 		if (rule instanceof AbstractMapping) {
+			DomainUsage middleUsage = getRootAnalysis().getMiddleUsage();
 			for (Variable variable : ((AbstractMapping)rule).getGuardPattern().getVariable()) {
 				if (variable != null) {
 					DomainUsage variableUsage = visit(variable.getType());
 					if (variableUsage != primitiveUsage) {
-						variableUsage = getRootAnalysis().getMiddleUsage();
+						variableUsage = middleUsage;
 					}
+					assert variableUsage != null;
 					setUsage(variable, variableUsage);
 				}
 			}
@@ -229,9 +240,10 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 	
 	protected void setUsage(@NonNull Element element, @NonNull DomainUsage newUsage) {
 		element2usage.put(element, newUsage);
-		newUsage.addUsedBy(element);
+		((DomainUsage.Internal)newUsage).addUsedBy(element);
 	}
 
+	@Override
 	public @NonNull DomainUsage visit(@Nullable Element element) {
 		if (element == null) {
 			return getRootAnalysis().getAnyUsage();
@@ -356,15 +368,41 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 
 	@Override
 	public @Nullable DomainUsage visitIterateExp(@NonNull IterateExp object) {
-		// TODO Auto-generated method stub
-		return super.visitIterateExp(object);
+		DomainUsage sourceUsage = visit(object.getOwnedSource());
+		for (Variable iterator : object.getOwnedIterators()) {
+			if (iterator != null) {
+				setUsage(iterator, sourceUsage);
+			}
+		}
+		visit(object.getOwnedResult());
+		@SuppressWarnings("unused") DomainUsage bodyUsage = visit(object.getOwnedBody());
+		TemplateParameterSubstitutionVisitor visitor = new TemplateParameterSubstitutionVisitor(context, object.getOwnedSource().getType(), null);
+		object.accept(visitor);
+		Iteration iteration = object.getReferredIteration();
+		for (EObject eObject = iteration; eObject != null; eObject = eObject.eContainer()) {
+			if (eObject instanceof TemplateableElement) {
+				TemplateSignature ownedSignature = ((TemplateableElement)eObject).getOwnedSignature();
+				if (ownedSignature != null) {
+					for (TemplateParameter templateParameter : ownedSignature.getOwnedParameters()) {
+						if (templateParameter != null) {
+							Type templateParameterType = visitor.get(templateParameter);
+							DomainUsage templateParameterUsage = visit(templateParameterType);
+							setUsage(templateParameter, templateParameterUsage);
+						}
+					}
+				}
+			}
+		}
+		return visit(iteration.getType());
 	}
 
 	@Override
 	public @Nullable DomainUsage visitIteratorExp(@NonNull IteratorExp object) {
-		@SuppressWarnings("unused") DomainUsage sourceUsage = visit(object.getOwnedSource());
+		DomainUsage sourceUsage = visit(object.getOwnedSource());
 		for (Variable iterator : object.getOwnedIterators()) {
-			visit(iterator);
+			if (iterator != null) {
+				setUsage(iterator, sourceUsage);
+			}
 		}
 		@SuppressWarnings("unused") DomainUsage bodyUsage = visit(object.getOwnedBody());
 		TemplateParameterSubstitutionVisitor visitor = new TemplateParameterSubstitutionVisitor(context, object.getOwnedSource().getType(), null);
@@ -444,31 +482,35 @@ public abstract class AbstractDomainUsageAnalysis extends AbstractExtendingQVTco
 		DomainUsage savedUsage = pushSelfUsage(visit(object.getOwnedSource()));
 		try {
 			Operation operation = ClassUtil.nonNullState(object.getReferredOperation());
-			NestedDomainUsageAnalysis analysis = getRootAnalysis().getAnalysis(operation);
+			DomainUsageAnalysis analysis = getRootAnalysis().getAnalysis(operation);
 			Map<DomainUsage, DomainUsage> referred2specialized = new HashMap<DomainUsage, DomainUsage>();
 			List<Parameter> ownedParameters = operation.getOwnedParameters();
 			int iMax = Math.min(ownedParameters.size(), object.getOwnedArguments().size());
 			for (int i = 0; i < iMax; i++) {
 				Parameter parameter = ownedParameters.get(i);
 				OCLExpression argument = object.getOwnedArguments().get(i);
-				DomainUsage referredParameterUsage = analysis.element2usage.get(parameter);
-				DomainUsage specializedParameterUsage;
-				if (referredParameterUsage instanceof DomainUsageConstant) {
-					specializedParameterUsage = referredParameterUsage;
-				}
-				else {
-					specializedParameterUsage = referred2specialized.get(referredParameterUsage);
-					if (specializedParameterUsage == null) {
-						specializedParameterUsage = new DomainUsageVariable(getRootAnalysis(), referredParameterUsage.getMask());
-						referred2specialized.put(referredParameterUsage, specializedParameterUsage);
+				DomainUsage referredParameterUsage = analysis.getUsage(parameter);
+				if (referredParameterUsage != null) {
+					DomainUsage specializedParameterUsage;
+					if (referredParameterUsage.isConstant()) {
+						specializedParameterUsage = referredParameterUsage;
 					}
+					else {
+						specializedParameterUsage = referred2specialized.get(referredParameterUsage);
+						if (specializedParameterUsage == null) {
+//							specializedParameterUsage = new DomainUsageVariable(getRootAnalysis(), ((DomainUsage.Internal)referredParameterUsage).getMask());
+							specializedParameterUsage = ((DomainUsage.Internal)referredParameterUsage).cloneVariable();
+							referred2specialized.put(referredParameterUsage, specializedParameterUsage);
+						}
+					}
+					DomainUsage argumentUsage = visit(argument);
+					intersection(argumentUsage, specializedParameterUsage);
 				}
-				DomainUsage argumentUsage = visit(argument);
-				intersection(argumentUsage, specializedParameterUsage);
 			}
-			DomainUsage operationUsage = analysis.element2usage.get(operation);
-			if (operationUsage instanceof DomainUsageVariable) {
-				operationUsage = new DomainUsageVariable(getRootAnalysis(), operationUsage.getMask());
+			DomainUsage operationUsage = analysis.getUsage(operation);
+			if ((operationUsage != null) && !operationUsage.isConstant()) {
+//				operationUsage = new DomainUsageVariable(getRootAnalysis(), ((DomainUsage.Internal)operationUsage).getMask());
+				operationUsage = ((DomainUsage.Internal)operationUsage).cloneVariable();
 			}
 			DomainUsage operationCallUsage = visit(object.getType());
 			return operationUsage != null ? intersection(operationUsage, operationCallUsage) : operationCallUsage;

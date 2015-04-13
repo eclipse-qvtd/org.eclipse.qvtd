@@ -19,20 +19,16 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  * DomainUsage or rather the derived DomainUsageConstant and DomainUsageVariable identify the results of
  * the DomainUsageAnalysis of a Pivot AST node.
  */
-public interface DomainUsage extends Comparable<DomainUsage>
+public interface DomainUsage
 {
 	/**
 	 * Source name of an EAnnotation that identifies domain usage of an EReference.
 	 */
-	public static final @NonNull String QVT_DOMAINS_ANNOTATION_SOURCE = "http://www.eclipse.org/qvt#Domains";
+	static final @NonNull String QVT_DOMAINS_ANNOTATION_SOURCE = "http://www.eclipse.org/qvt#Domains";
 	/**
 	 * Key of an EAnnotation that identifies domain usage of an EReference. Values are the names of the Transformation ModelParameters.
 	 */
-	public static final @NonNull String QVT_DOMAINS_ANNOTATION_REFERRED_DOMAIN = "referredDomain";
-
-	void addUsedBy(@NonNull Element element);
-	@Nullable Iterable<Element> getElements();
-	long getMask();
+	static final @NonNull String QVT_DOMAINS_ANNOTATION_REFERRED_DOMAIN = "referredDomain";
 
 	/**
 	 * Return the TypedModel for this usage, null for none, non-null for one, Exception for more than one.
@@ -44,4 +40,17 @@ public interface DomainUsage extends Comparable<DomainUsage>
 	 * Return all the TypedModels for this usage. Note that a primitive TypedModel may be returned for DataType usage; it has no container.
 	 */
 	@NonNull Iterable<TypedModel> getTypedModels();
+
+	/**
+	 * Return true if this usage has been resolve to zero or more TypedModels, false if it is an unresolved variable usage. 
+	 */
+	boolean isConstant();
+	
+	public interface Internal extends DomainUsage, Comparable<DomainUsage.Internal>
+	{
+		void addUsedBy(@NonNull Element element);
+		@NonNull DomainUsage cloneVariable();
+		@Nullable Iterable<Element> getElements();
+		int getMask();
+	}
 }

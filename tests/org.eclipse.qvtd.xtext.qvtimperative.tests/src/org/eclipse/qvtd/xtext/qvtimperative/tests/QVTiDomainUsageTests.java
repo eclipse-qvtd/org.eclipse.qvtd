@@ -18,6 +18,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -49,8 +50,7 @@ import org.eclipse.qvtd.pivot.qvtbase.evaluation.AbstractTransformationEvaluator
 import org.eclipse.qvtd.pivot.qvtbase.evaluation.TransformationExecutor;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
-import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsageConstant;
-import org.eclipse.qvtd.pivot.qvtcorebase.analysis.NestedDomainUsageAnalysis;
+import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsageAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
@@ -88,7 +88,7 @@ public class QVTiDomainUsageTests extends LoadTestCase
 				}
 				DomainUsage usage = analysis.get(eObject);
 				assert usage != null : "No usage for " + eObject.eClass().getName() + " " + eObject;
-				assert usage instanceof DomainUsageConstant : "Variable usage for " + eObject;
+				assert usage.isConstant() : "Variable usage for " + eObject;
 				List<Element> list = usage2elements.get(usage);
 				if (list == null) {
 					list = new ArrayList<Element>();
@@ -101,11 +101,10 @@ public class QVTiDomainUsageTests extends LoadTestCase
 				}
 			}
 			for (@SuppressWarnings("null")@NonNull Operation operation : operations) {
-				NestedDomainUsageAnalysis operationAnalysis = domainAnalysis.getAnalysis(operation);
-				Map<Element, DomainUsage> operationElements = operationAnalysis.getElements2Usage();
+				DomainUsageAnalysis operationAnalysis = domainAnalysis.getAnalysis(operation);
 				for (TreeIterator<EObject> tit = operation.eAllContents(); tit.hasNext(); ) {
 					EObject eObject = tit.next();
-					DomainUsage usage = operationElements.get(eObject);
+					DomainUsage usage = operationAnalysis.getUsage(eObject);
 					assert usage != null : "No nested usage for " + eObject.eClass().getName() + " " + eObject;
 //					assert usage instanceof DomainUsageConstant : "Variable usage for " + eObject;
 					List<Element> list = usage2elements.get(usage);
@@ -131,7 +130,8 @@ public class QVTiDomainUsageTests extends LoadTestCase
 		}
 		
 		public void printAnalysis(@NonNull Map<DomainUsage, List<Element>> usage2elements) {
-			List<? extends DomainUsage> sortedUsages = new ArrayList<DomainUsage>(usage2elements.keySet());
+			@SuppressWarnings("unchecked")Set<DomainUsage.Internal> keySet = (Set<DomainUsage.Internal>)(Set<?>)usage2elements.keySet();
+			List<DomainUsage.Internal> sortedUsages = new ArrayList<DomainUsage.Internal>(keySet);
 			Collections.sort(sortedUsages);
 			for (DomainUsage usage : sortedUsages) {
 				System.out.println(usage);
