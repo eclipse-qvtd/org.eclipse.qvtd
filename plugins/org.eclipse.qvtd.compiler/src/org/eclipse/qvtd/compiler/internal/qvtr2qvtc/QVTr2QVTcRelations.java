@@ -18,11 +18,14 @@ import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.ocl.pivot.Annotation;
 import org.eclipse.ocl.pivot.Class;
+import org.eclipse.ocl.pivot.Detail;
 import org.eclipse.ocl.pivot.EnumLiteralExp;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.PivotFactory;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Type;
@@ -60,9 +63,36 @@ public class QVTr2QVTcRelations {
 	
 	private @NonNull final QvtrToQvtcTransformation transformation;
 	
+	private @NonNull final String OPPOSITE_UPPER_SOURCE = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeUpper";
+	private @NonNull final String OPPOSITE_ROLE_NAME_SOURCE = "http://schema.omg.org/spec/MOF/2.0/emof.xml#Property.oppositeRoleName";
+	private @NonNull final String EMF_ANNOTATION_DETAIL_KEY = "body";
+	private @NonNull final String OPPOSITE_UPPER_VALUE = "1";
+	private @NonNull final String OPPOSITE_ROLE_NAME_VALUE = "middle";
+	
+	
 
 	public QVTr2QVTcRelations(@NonNull QvtrToQvtcTransformation transformation) {
 		this.transformation = transformation;
+	}
+	
+	/*
+	 * Add oppositeUpper and oppositeRoleName annotations
+	 */
+	private void addMiddleSynthesisAnnotations(Property p) {
+		Annotation oppositeUpper = PivotFactory.eINSTANCE.createAnnotation();
+		oppositeUpper.setName(OPPOSITE_UPPER_SOURCE);
+		Detail oppositeUpperDetail = PivotFactory.eINSTANCE.createDetail();
+		oppositeUpperDetail.setName(EMF_ANNOTATION_DETAIL_KEY);
+		oppositeUpperDetail.getValues().add("OPPOSITE_UPPER_VALUE");
+		oppositeUpper.getOwnedDetails().add(oppositeUpperDetail);
+		p.getOwnedAnnotations().add(oppositeUpper);
+		Annotation oppositeRoleName = PivotFactory.eINSTANCE.createAnnotation();
+		oppositeRoleName.setName(OPPOSITE_ROLE_NAME_SOURCE);
+		Detail oppositeRoleNameDetail = PivotFactory.eINSTANCE.createDetail();
+		oppositeRoleNameDetail.setName(EMF_ANNOTATION_DETAIL_KEY);
+		oppositeRoleNameDetail.getValues().add("OPPOSITE_ROLE_NAME_VALUE");
+		oppositeRoleName.getOwnedDetails().add(oppositeRoleNameDetail);
+		p.getOwnedAnnotations().add(oppositeRoleName);
 	}
 	
 	/* =============  Queries ============= */
@@ -455,6 +485,7 @@ public class QVTr2QVTcRelations {
 		assert vn != null;
 		// init
 		Property a = transformation.findProperty(vn, rc);
+		addMiddleSynthesisAnnotations(a);
 		assert a != null;
 	    // assign
 	    a.setType(c);
@@ -483,6 +514,7 @@ public class QVTr2QVTcRelations {
 		// init
 		Property a = transformation.findProperty(vn, rc);
 		assert a != null;
+		addMiddleSynthesisAnnotations(a); 
 		// where
 		for (PropertyTemplateItem pt : t.getPart()) {
 			OCLExpression value = pt.getValue();
