@@ -18,7 +18,6 @@ import org.eclipse.qvtd.pivot.qvtcore.CoreModel;
 import org.eclipse.qvtd.pivot.qvtcore.Mapping;
 import org.eclipse.qvtd.pivot.qvtcore.util.QVTcoreVisitor;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
-import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsageConstant;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
 
 /**
@@ -55,6 +54,6 @@ public class QVTcoreDomainUsageAnalysis extends RootDomainUsageAnalysis implemen
 		for (Mapping local : object.getLocal()) {
 			visit(local);
 		}
-		return DomainUsageConstant.NONE;
+		return getRootAnalysis().getNoneUsage();
 	}
 }

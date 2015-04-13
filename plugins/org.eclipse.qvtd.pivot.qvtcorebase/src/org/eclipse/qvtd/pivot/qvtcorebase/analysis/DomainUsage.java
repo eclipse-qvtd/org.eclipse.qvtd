@@ -13,6 +13,7 @@ package org.eclipse.qvtd.pivot.qvtcorebase.analysis;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 /**
  * DomainUsage or rather the derived DomainUsageConstant and DomainUsageVariable identify the results of
@@ -25,20 +26,22 @@ public interface DomainUsage extends Comparable<DomainUsage>
 	 */
 	public static final @NonNull String QVT_DOMAINS_ANNOTATION_SOURCE = "http://www.eclipse.org/qvt#Domains";
 	/**
-	 * Key of an EAnnotation that identifies domain usage of an EReference. Values are the names of the Domain enumeration.
+	 * Key of an EAnnotation that identifies domain usage of an EReference. Values are the names of the Transformation ModelParameters.
 	 */
 	public static final @NonNull String QVT_DOMAINS_ANNOTATION_REFERRED_DOMAIN = "referredDomain";
-	/**
-	 * The names of the possible domain usage.
-	 */
-	enum Domain { PRIMITIVE, SOURCE, MIDDLE, TARGET, ERROR };
 
 	void addUsedBy(@NonNull Element element);
 	@Nullable Iterable<Element> getElements();
-	int getMask();
-	boolean isError();
-	boolean isMiddle();
-	boolean isPrimitive();
-	boolean isSource();
-	boolean isTarget();
+	long getMask();
+
+	/**
+	 * Return the TypedModel for this usage, null for none, non-null for one, Exception for more than one.
+	 * Note that a primitive TypedModel may be returned for DataType usage; it has no container.
+	 */
+	@Nullable TypedModel getTypedModel() throws IllegalStateException;
+
+	/**
+	 * Return all the TypedModels for this usage. Note that a primitive TypedModel may be returned for DataType usage; it has no container.
+	 */
+	@NonNull Iterable<TypedModel> getTypedModels();
 }

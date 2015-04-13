@@ -10,22 +10,22 @@
  *******************************************************************************/
 package org.eclipse.qvtd.pivot.qvtcorebase.analysis;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Element;
+import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 
 public abstract class AbstractDomainUsage implements DomainUsage
 {
-	protected static final int PRIMITIVE_BIT = 1 << Domain.PRIMITIVE.ordinal();
-	protected static final int SOURCE_BIT = 1 << Domain.SOURCE.ordinal();
-	protected static final int MIDDLE_BIT = 1 << Domain.MIDDLE.ordinal();
-	protected static final int TARGET_BIT = 1 << Domain.TARGET.ordinal();
-	protected static final int ERROR_BIT = 1 << Domain.ERROR.ordinal();
-
-	protected final int mask;
+	protected final @NonNull RootDomainUsageAnalysis rootAnalysis;
+	protected final long bitMask;
 	
-	protected AbstractDomainUsage(int mask) {
-		this.mask = mask;
+	protected AbstractDomainUsage(@NonNull RootDomainUsageAnalysis rootAnalysis, long bitMask) {
+		this.rootAnalysis = rootAnalysis;
+		this.bitMask = bitMask;
 	}
 
 	@Override
@@ -34,9 +34,7 @@ public abstract class AbstractDomainUsage implements DomainUsage
 
 	@Override
 	public int compareTo(DomainUsage o) {
-		int m1 = getMask();
-		int m2 = o.getMask();
-		return m1 - m2;
+		return Long.compare(getMask(), o.getMask());
 	}
 
 	@Override
@@ -45,54 +43,37 @@ public abstract class AbstractDomainUsage implements DomainUsage
 	}
 
 	@Override
-	public int getMask() {
-		return mask;
-	}
-	
-	@Override
-	public boolean isError() {
-		return (mask & ERROR_BIT) != 0;
-	}
-	
-	@Override
-	public boolean isMiddle() {
-		return (mask & MIDDLE_BIT) != 0;
-	}
-	
-	@Override
-	public boolean isPrimitive() {
-		return (mask & PRIMITIVE_BIT) != 0;
-	}
-	
-	@Override
-	public boolean isSource() {
-		return (mask & SOURCE_BIT) != 0;
-	}
-	
-	@Override
-	public boolean isTarget() {
-		return (mask & TARGET_BIT) != 0;
+	public long getMask() {
+		return bitMask;
 	}
 
 	@Override
-	public String toString() {
-		StringBuilder s = new StringBuilder();
-		s.append(getClass().getSimpleName());
-		if ((mask & PRIMITIVE_BIT) != 0) {
-			s.append(" PRIMITIVE");
+	public @Nullable TypedModel getTypedModel() throws IllegalStateException {
+		long residue = bitMask;
+		for (int i = 0; residue != 0; i++) {
+			long bit = 1L << i;
+			if ((residue & bit) != 0) {
+				residue &= ~bit;
+				if (residue == 0) {
+					return rootAnalysis.getTypedModel(i);
+				}
+				throw new IllegalStateException("Amiguous TypedModel: " + this);
+			}
 		}
-		if ((mask & SOURCE_BIT) != 0) {
-			s.append(" SOURCE");
+		return null;
+	}
+
+	@Override
+	public @NonNull Iterable<TypedModel> getTypedModels() {
+		List<TypedModel> typedModels = new ArrayList<TypedModel>();
+		long residue = bitMask;
+		for (int i = 0; residue != 0; i++) {
+			long bit = 1L << i;
+			if ((residue & bit) != 0) {
+				residue &= ~bit;
+				typedModels.add(rootAnalysis.getTypedModel(i));
+			}
 		}
-		if ((mask & MIDDLE_BIT) != 0) {
-			s.append(" MIDDLE");
-		}
-		if ((mask & TARGET_BIT) != 0) {
-			s.append(" TARGET");
-		}
-		if ((mask & ERROR_BIT) != 0) {
-			s.append(" ERROR");
-		}
-		return s.toString();
+		return typedModels;
 	}
 }

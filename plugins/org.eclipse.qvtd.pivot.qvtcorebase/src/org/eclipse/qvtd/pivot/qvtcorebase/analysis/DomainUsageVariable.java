@@ -24,8 +24,8 @@ public class DomainUsageVariable extends AbstractDomainUsage
 {
 	protected final @NonNull List<Element> usedBy = new ArrayList<Element>();
 	
-	public DomainUsageVariable(int mask) {
-		super(mask);
+	public DomainUsageVariable(@NonNull RootDomainUsageAnalysis rootAnalysis, long mask) {
+		super(rootAnalysis, mask);
 		assert mask != 0;
 	}
 
@@ -37,5 +37,10 @@ public class DomainUsageVariable extends AbstractDomainUsage
 	@Override
 	public @Nullable Iterable<Element> getElements() {
 		return usedBy;
+	}
+
+	@Override
+	public String toString() {
+		return "Variable " + rootAnalysis.toString(bitMask);
 	}
 }

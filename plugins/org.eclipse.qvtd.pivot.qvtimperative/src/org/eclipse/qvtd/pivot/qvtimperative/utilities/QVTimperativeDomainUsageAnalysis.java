@@ -16,7 +16,6 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
-import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsageConstant;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -49,7 +48,7 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 		visit(object.getGuardPattern());
 		visit(object.getBottomPattern());
 		visit(object.getMappingStatement());
-		return DomainUsageConstant.NONE;
+		return getNoneUsage();
 	}
 
 	@Override
@@ -57,7 +56,7 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 		for (MappingCallBinding mappingCallBinding : object.getBinding()) {
 			visit(mappingCallBinding);
 		}
-		return DomainUsageConstant.NONE;
+		return getNoneUsage();
 	}
 
 	@Override
@@ -76,7 +75,7 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 			}
 		}
 		visit(object.getOwnedBody());
-		return DomainUsageConstant.NONE;
+		return getNoneUsage();
 	}
 
 	@Override
@@ -84,7 +83,7 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 		for (MappingStatement mappingStatement : object.getMappingStatements()) {
 			visit(mappingStatement);
 		}
-		return DomainUsageConstant.NONE;
+		return getNoneUsage();
 	}
 
 	@Override
