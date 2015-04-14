@@ -27,6 +27,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
@@ -147,6 +148,11 @@ public class QVTiEvaluationVisitor extends QVTiAbstractEvaluationVisitor {
             }
         }*/
     }
+
+	@Override
+	public @Nullable Object visitImperativeBottomPattern(@NonNull ImperativeBottomPattern object) {
+		return visitBottomPattern(object);
+	}
 
     @Override
     public @Nullable Object visitImperativeModel(@NonNull ImperativeModel imperativeModel) {

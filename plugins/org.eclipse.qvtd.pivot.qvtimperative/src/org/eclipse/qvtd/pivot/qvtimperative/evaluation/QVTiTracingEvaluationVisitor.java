@@ -19,6 +19,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 
 
@@ -116,5 +117,10 @@ public class QVTiTracingEvaluationVisitor extends QVTiAbstractTracingEvaluationV
 			}
 		}
 		return result;
+	}
+
+	@Override
+	public @Nullable Object visitImperativeBottomPattern(@NonNull ImperativeBottomPattern object) {
+		return visitBottomPattern(object);
 	}
 }

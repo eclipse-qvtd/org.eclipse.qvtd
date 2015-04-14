@@ -35,13 +35,17 @@ import org.eclipse.qvtd.pivot.qvtbase.Function;
 import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.QVTbasePackage;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
+import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
+import org.eclipse.qvtd.pivot.qvtcorebase.EnforcementOperation;
 import org.eclipse.qvtd.pivot.qvtcorebase.GuardPattern;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBaseFactory;
 import org.eclipse.qvtd.pivot.qvtcorebase.QVTcoreBasePackage;
+import org.eclipse.qvtd.pivot.qvtcorebase.RealizedVariable;
 import org.eclipse.qvtd.pivot.qvtcorebase.VariableAssignment;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -49,9 +53,11 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
+import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.BottomPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.DomainCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.GuardPatternCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
@@ -65,11 +71,25 @@ import org.eclipse.qvtd.xtext.qvtimperativecs.MappingSequenceCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.TopLevelCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.AbstractQVTimperativeCSContainmentVisitor;
 
+import com.google.common.collect.Iterables;
+
 public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSContainmentVisitor
 {
 	public QVTimperativeCSContainmentVisitor(@NonNull CS2ASConversion context) {
 		super(context);
 	}	
+
+	@Override
+	public Continuation<?> visitBottomPatternCS(@NonNull BottomPatternCS csElement) {
+		@NonNull ImperativeBottomPattern pBottomPattern = context.refreshModelElement(ImperativeBottomPattern.class, QVTimperativePackage.Literals.IMPERATIVE_BOTTOM_PATTERN, csElement);
+		context.refreshPivotList(RealizedVariable.class, pBottomPattern.getRealizedVariable(), csElement.getOwnedRealizedVariables());
+		context.refreshPivotList(Variable.class, pBottomPattern.getVariable(), csElement.getOwnedUnrealizedVariables());
+		context.refreshPivotList(EnforcementOperation.class, pBottomPattern.getEnforcementOperation(), csElement.getOwnedEnforcementOperations());
+		context.refreshPivotList(Assignment.class, pBottomPattern.getOrderedAssignment(), Iterables.filter(csElement.getOwnedConstraints(), IsAssignmentPredicate.INSTANCE));
+		context.refreshPivotList(Predicate.class, pBottomPattern.getPredicate(), Iterables.filter(csElement.getOwnedConstraints(), IsPredicatePredicate.INSTANCE));
+		context.refreshComments(pBottomPattern, csElement);
+		return null;
+	}
 
 	@Override
 	public Continuation<?> visitMappingCS(@NonNull MappingCS csElement) {
@@ -82,7 +102,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 		else {
 			BottomPattern bottomPattern = pivotElement.getBottomPattern();
 			if (bottomPattern == null) {
-				bottomPattern = QVTcoreBaseFactory.eINSTANCE.createBottomPattern();
+				bottomPattern = QVTimperativeFactory.eINSTANCE.createImperativeBottomPattern();
 				bottomPattern.getAssignment().clear();
 				bottomPattern.getBindsTo().clear();
 				bottomPattern.getEnforcementOperation().clear();

@@ -37,6 +37,11 @@ public abstract class AbstractNullQVTimperativeVisitor<R, C>
 	}	
 
 	@Override
+	public @Nullable R visitImperativeBottomPattern(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern object) {
+		return null;
+	}
+
+	@Override
 	public @Nullable R visitImperativeModel(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel object) {
 		return null;
 	}

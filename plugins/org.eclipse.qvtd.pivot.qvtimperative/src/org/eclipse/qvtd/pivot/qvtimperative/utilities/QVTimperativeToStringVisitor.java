@@ -13,6 +13,7 @@ package org.eclipse.qvtd.pivot.qvtimperative.utilities;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.qvtcorebase.utilities.QVTcoreBaseToStringVisitor;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -31,6 +32,11 @@ public class QVTimperativeToStringVisitor extends QVTcoreBaseToStringVisitor imp
 {
 	public QVTimperativeToStringVisitor(@NonNull StringBuilder s) {
 		super(s);
+	}
+
+	@Override
+	public @Nullable String visitImperativeBottomPattern(@NonNull ImperativeBottomPattern object) {
+		return visitBottomPattern(object);
 	}
 
 	@Override

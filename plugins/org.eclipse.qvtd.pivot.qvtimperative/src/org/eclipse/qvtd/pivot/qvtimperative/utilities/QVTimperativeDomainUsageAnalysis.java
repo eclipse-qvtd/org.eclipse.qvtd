@@ -16,6 +16,7 @@ import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
 import org.eclipse.qvtd.pivot.qvtcorebase.analysis.RootDomainUsageAnalysis;
+import org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -33,6 +34,11 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 {
 	public QVTimperativeDomainUsageAnalysis(@NonNull EnvironmentFactoryInternal environmentFactory) {
 		super(environmentFactory);
+	}
+
+	@Override
+	public @Nullable DomainUsage visitImperativeBottomPattern(@NonNull ImperativeBottomPattern object) {
+		return visitBottomPattern(object);
 	}
 
 	@Override

@@ -44,6 +44,11 @@ public abstract class AbstractQVTimperativeAS2XMIidVisitor
 	}	
 
 	@Override
+	public @Nullable Boolean visitImperativeBottomPattern(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern object) {
+		return visitBottomPattern(object);
+	}
+
+	@Override
 	public @Nullable Boolean visitImperativeModel(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel object) {
 		return visitBaseModel(object);
 	}

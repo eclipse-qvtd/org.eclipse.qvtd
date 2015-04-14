@@ -32,6 +32,18 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, D extends QVTim
 	}
 
 	@Override
+	public @Nullable R visitImperativeBottomPattern(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern object) {
+		P prologue = preVisit(object);
+		try {
+			R result = delegate.visitImperativeBottomPattern(object);
+			return postVisit(object, prologue, result);
+		}
+		catch (Throwable e) {
+			return badVisit(object, prologue, e);
+		}
+	}
+
+	@Override
 	public @Nullable R visitImperativeModel(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel object) {
 		P prologue = preVisit(object);
 		try {

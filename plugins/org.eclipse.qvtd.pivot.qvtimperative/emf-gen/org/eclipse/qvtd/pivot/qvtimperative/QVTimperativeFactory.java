@@ -30,6 +30,15 @@ public interface QVTimperativeFactory extends EFactory {
 	QVTimperativeFactory eINSTANCE = org.eclipse.qvtd.pivot.qvtimperative.impl.QVTimperativeFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Imperative Bottom Pattern</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Imperative Bottom Pattern</em>'.
+	 * @generated
+	 */
+	ImperativeBottomPattern createImperativeBottomPattern();
+
+	/**
 	 * Returns a new object of class '<em>Imperative Model</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

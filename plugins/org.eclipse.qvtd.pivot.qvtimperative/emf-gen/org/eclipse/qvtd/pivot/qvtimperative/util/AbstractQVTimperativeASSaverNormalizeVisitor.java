@@ -46,6 +46,11 @@ public abstract class AbstractQVTimperativeASSaverNormalizeVisitor
 	}	
 
 	@Override
+	public @Nullable Object visitImperativeBottomPattern(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeBottomPattern object) {
+		return visitBottomPattern(object);
+	}
+
+	@Override
 	public @Nullable Object visitImperativeModel(@NonNull org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel object) {
 		return visitBaseModel(object);
 	}
