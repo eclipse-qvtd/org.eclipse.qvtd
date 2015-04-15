@@ -71,7 +71,7 @@
         <requirement
             name="org.eclipse.uml2.sdk.feature.group"/>
         <requirement
-            name="org.eclipse.ocl.all.sdk.feature.group"/>
+            name="org.eclipse.ocl.examples.feature.group"/>
         <requirement
             name="org.eclipse.emf.validation.feature.group"/>
         <requirement
@@ -247,6 +247,9 @@
         <predicate
             xsi:type="predicates:NamePredicate"
             pattern="org.eclipse.qvtd.codegen"/>
+        <predicate
+            xsi:type="predicates:NamePredicate"
+            pattern="org.eclipse.qvtd.compiler"/>
         <predicate
             xsi:type="predicates:NamePredicate"
             pattern="org.eclipse.qvtd.debug.*"/>
