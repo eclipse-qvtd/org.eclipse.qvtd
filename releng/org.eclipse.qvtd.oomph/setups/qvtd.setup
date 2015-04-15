@@ -77,7 +77,7 @@
         <requirement
             name="org.eclipse.xtext.sdk.feature.group"/>
         <requirement
-            name="org.antlr.runtime.3.1.b1"/>
+            name="org.antlr.runtime_3.1.b1"/>
         <requirement
             name="org.eclipse.epsilon.common"/>
         <requirement
