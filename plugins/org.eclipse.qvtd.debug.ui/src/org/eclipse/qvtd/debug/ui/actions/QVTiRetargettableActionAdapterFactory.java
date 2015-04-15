@@ -27,6 +27,7 @@ public class QVTiRetargettableActionAdapterFactory implements IAdapterFactory
 		super();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Object getAdapter(Object adaptableObject, @SuppressWarnings("rawtypes") Class adapterType) {
 		if (!(adaptableObject instanceof QVTimperativeEditor)) {
 			return null;
@@ -39,7 +40,7 @@ public class QVTiRetargettableActionAdapterFactory implements IAdapterFactory
 		return null;
 	}
 
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Class[] getAdapterList() {
 		return new Class[] { QVTiToggleBreakpointAdapter.class, QVTiRunToLineAdapter.class };
 	}
