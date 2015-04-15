@@ -361,7 +361,12 @@
     </setupTask>
     <stream
         name="master"
-        label="Master (Mars)"/>
+        label="Master (Mars)">
+      <setupTask
+          xsi:type="setup:VariableTask"
+          name="simrel.branch"
+          value="master"/>
+    </stream>
   </project>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
