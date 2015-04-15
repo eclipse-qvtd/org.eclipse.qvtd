@@ -76,6 +76,24 @@
             name="org.eclipse.emf.validation.feature.group"/>
         <requirement
             name="org.eclipse.xtext.sdk.feature.group"/>
+        <requirement
+            name="org.antlr.runtime.3.1.b1"/>
+        <requirement
+            name="org.eclipse.epsilon.common"/>
+        <requirement
+            name="org.eclipse.epsilon.common.dt"/>
+        <requirement
+            name="org.eclipse.epsilon.dependencies"/>
+        <requirement
+            name="org.eclipse.epsilon.emc.emf"/>
+        <requirement
+            name="org.eclipse.epsilon.eol.engine"/>
+        <requirement
+            name="org.eclipse.epsilon.erl.engine"/>
+        <requirement
+            name="org.eclipse.epsilon.etl.engine"/>
+        <requirement
+            name="org.eclipse.epsilon.flock.engine"/>
         <repositoryList
             name="Mars">
           <repository
