@@ -199,7 +199,7 @@ public class QVTcDomainUsageTests extends LoadTestCase
     	MyQVT myQVT = createQVT();
 		URI transformURI = getProjectFileURI("models/uml2rdbms.qvtu.qvtc");
 		Transformation asTransformation = loadTransformation(myQVT, transformURI);
-		myQVT.checkAnalysis(asTransformation, true);
+		myQVT.checkAnalysis(asTransformation, false);
         myQVT.dispose();
 	}
 
