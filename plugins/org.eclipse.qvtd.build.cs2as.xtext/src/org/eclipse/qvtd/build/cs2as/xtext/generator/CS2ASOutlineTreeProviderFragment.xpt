@@ -1,4 +1,4 @@
-Â«REMÂ»
+«REM»
 /*******************************************************************************
  * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
@@ -7,56 +7,57 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-Â«ENDREMÂ»
+«ENDREM»
 
-Â«IMPORT org::eclipse::xtextÂ»
-Â«EXTENSION org::eclipse::xtext::ui::generator::outline::ExtensionsÂ»
-Â«EXTENSION org::eclipse::xtext::generator::NamingÂ»
+«IMPORT org::eclipse::xtext»
 
-Â«DEFINE generate(Boolean generateStub, Boolean generateXtendStub) FOR GrammarÂ»
-	Â«IF generateStubÂ»
-		Â«IF generateXtendStubÂ»
-			Â«EXPAND xtendOutlineTreeProviderÂ»
-		Â«ELSEÂ»
-			Â«EXPAND javaOutlineTreeProviderÂ»
-		Â«ENDIFÂ»
-	Â«ENDIFÂ»
-Â«ENDDEFINEÂ»
+«EXTENSION org::eclipse::xtext::ui::generator::outline::Extensions»
+«EXTENSION org::eclipse::xtext::generator::Naming»
 
-Â«DEFINE javaOutlineTreeProvider FOR GrammarÂ»
- Â«FILE qualifiedName().asPath()+".java" SRC_UI -Â»
-Â«fileHeader()Â»
-package Â«qualifiedName().toJavaPackage()Â»;
+«DEFINE generate(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»
+	«IF generateStub»
+		«IF generateXtendStub»
+			«EXPAND xtendOutlineTreeProvider»
+		«ELSE»
+			«EXPAND javaOutlineTreeProvider»
+		«ENDIF»
+	«ENDIF»
+«ENDDEFINE»
 
-/**
- * Customization of the default outline structure.
- *
- * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#outline
- */
-public class Â«qualifiedName().toSimpleName()Â» extends Â«qualifiedName().toJavaPackage()Â».outline.CS2ASOutlineTreeProvider {
-	
-}
-Â«ENDFILEÂ»
-Â«ENDDEFINEÂ»
-
-Â«DEFINE xtendOutlineTreeProvider FOR GrammarÂ»
- Â«FILE qualifiedName().asPath()+".xtend" SRC_UI -Â»
-Â«fileHeader()Â»
-package Â«qualifiedName().toJavaPackage()Â»
+«DEFINE javaOutlineTreeProvider FOR Grammar»
+ «FILE qualifiedName().asPath()+".java" SRC_UI -»
+«fileHeader()»
+package «qualifiedName().toJavaPackage()»;
 
 /**
  * Customization of the default outline structure.
  *
  * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#outline
  */
-class Â«qualifiedName().toSimpleName()Â» extends Â«qualifiedName().toJavaPackage()Â».outline.CS2ASOutlineTreeProvider {
+public class «qualifiedName().toSimpleName()» extends «qualifiedName().toJavaPackage()».CS2ASOutlineTreeProvider {
 	
 }
-Â«ENDFILEÂ»
-Â«ENDDEFINEÂ»
+«ENDFILE»
+«ENDDEFINE»
 
-Â«DEFINE addToPluginXmlRt(Boolean generateStub, Boolean generateXtendStub) FOR GrammarÂ»Â«ENDDEFINEÂ»
+«DEFINE xtendOutlineTreeProvider FOR Grammar»
+ «FILE qualifiedName().asPath()+".xtend" SRC_UI -»
+«fileHeader()»
+package «qualifiedName().toJavaPackage()»
 
-Â«DEFINE addToPluginXmlUi(Boolean generateStub, Boolean generateXtendStub) FOR GrammarÂ»Â«ENDDEFINEÂ»
+/**
+ * Customization of the default outline structure.
+ *
+ * See https://www.eclipse.org/Xtext/documentation/304_ide_concepts.html#outline
+ */
+class «qualifiedName().toSimpleName()» extends «qualifiedName().toJavaPackage()».CS2ASOutlineTreeProvider {
+	
+}
+«ENDFILE»
+«ENDDEFINE»
 
-Â«DEFINE addToStandaloneSetup(Boolean generateStub, Boolean generateXtendStub) FOR GrammarÂ»Â«ENDDEFINEÂ»
+«DEFINE addToPluginXmlRt(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToPluginXmlUi(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToStandaloneSetup(Boolean generateStub, Boolean generateXtendStub) FOR Grammar»«ENDDEFINE»
