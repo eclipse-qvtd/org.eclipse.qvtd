@@ -7,13 +7,15 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.qvtd.pivot.schedule.DataParameter;
 import org.eclipse.qvtd.pivot.schedule.ParameterDerivation;
 import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
 import org.eclipse.qvtd.pivot.schedule.SecondaryParameter;
+import org.eclipse.qvtd.pivot.schedule.util.ScheduleVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,7 +33,7 @@ import org.eclipse.qvtd.pivot.schedule.SecondaryParameter;
  *
  * @generated
  */
-public class SecondaryParameterImpl extends MinimalEObjectImpl.Container implements SecondaryParameter {
+public class SecondaryParameterImpl extends ScheduleElementImpl implements SecondaryParameter {
 	/**
 	 * The default value of the '{@link #isIsLoop() <em>Is Loop</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -405,6 +407,15 @@ public class SecondaryParameterImpl extends MinimalEObjectImpl.Container impleme
 		result.append(isLoop);
 		result.append(')');
 		return result.toString();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @Nullable <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
+		return visitor.visitSecondaryParameter(this);
 	}
 
 } //SecondaryParameterImpl

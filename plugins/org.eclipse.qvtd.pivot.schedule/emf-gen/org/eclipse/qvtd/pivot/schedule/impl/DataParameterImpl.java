@@ -7,12 +7,14 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.schedule.DataParameter;
 import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
 import org.eclipse.qvtd.pivot.schedule.SecondaryParameter;
+import org.eclipse.qvtd.pivot.schedule.util.ScheduleVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,7 +31,7 @@ import org.eclipse.qvtd.pivot.schedule.SecondaryParameter;
  *
  * @generated
  */
-public class DataParameterImpl extends MinimalEObjectImpl.Container implements DataParameter {
+public class DataParameterImpl extends ScheduleElementImpl implements DataParameter {
 	/**
 	 * The cached value of the '{@link #getVariable() <em>Variable</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -352,6 +354,15 @@ public class DataParameterImpl extends MinimalEObjectImpl.Container implements D
 				return datum != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @Nullable <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
+		return visitor.visitDataParameter(this);
 	}
 
 } //DataParameterImpl

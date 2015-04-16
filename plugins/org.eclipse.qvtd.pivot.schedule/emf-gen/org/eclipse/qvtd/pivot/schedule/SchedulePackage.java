@@ -57,6 +57,34 @@ public interface SchedulePackage extends EPackage {
 	SchedulePackage eINSTANCE = org.eclipse.qvtd.pivot.schedule.impl.SchedulePackageImpl.init();
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.schedule.impl.ScheduleElementImpl <em>Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.qvtd.pivot.schedule.impl.ScheduleElementImpl
+	 * @see org.eclipse.qvtd.pivot.schedule.impl.SchedulePackageImpl#getScheduleElement()
+	 * @generated
+	 */
+	int SCHEDULE_ELEMENT = 10;
+
+	/**
+	 * The number of structural features of the '<em>Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULE_ELEMENT_FEATURE_COUNT = 0;
+
+	/**
+	 * The number of operations of the '<em>Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SCHEDULE_ELEMENT_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.schedule.impl.AbstractDatumImpl <em>Abstract Datum</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -73,7 +101,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATUM__SUPER = 0;
+	int ABSTRACT_DATUM__SUPER = SCHEDULE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Sub</b></em>' reference list.
@@ -82,7 +110,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATUM__SUB = 1;
+	int ABSTRACT_DATUM__SUB = SCHEDULE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Domain</b></em>' reference.
@@ -91,7 +119,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATUM__DOMAIN = 2;
+	int ABSTRACT_DATUM__DOMAIN = SCHEDULE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Produced By</b></em>' reference list.
@@ -100,7 +128,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATUM__PRODUCED_BY = 3;
+	int ABSTRACT_DATUM__PRODUCED_BY = SCHEDULE_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Required By</b></em>' reference list.
@@ -109,7 +137,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATUM__REQUIRED_BY = 4;
+	int ABSTRACT_DATUM__REQUIRED_BY = SCHEDULE_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Schedule</b></em>' container reference.
@@ -118,7 +146,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATUM__SCHEDULE = 5;
+	int ABSTRACT_DATUM__SCHEDULE = SCHEDULE_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Data Parameter</b></em>' reference list.
@@ -127,7 +155,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATUM__DATA_PARAMETER = 6;
+	int ABSTRACT_DATUM__DATA_PARAMETER = SCHEDULE_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Datum</em>' class.
@@ -136,7 +164,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATUM_FEATURE_COUNT = 7;
+	int ABSTRACT_DATUM_FEATURE_COUNT = SCHEDULE_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of operations of the '<em>Abstract Datum</em>' class.
@@ -145,7 +173,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_DATUM_OPERATION_COUNT = 0;
+	int ABSTRACT_DATUM_OPERATION_COUNT = SCHEDULE_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.schedule.impl.AbstractActionImpl <em>Abstract Action</em>}' class.
@@ -164,7 +192,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ACTION__PRODUCTIONS = 0;
+	int ABSTRACT_ACTION__PRODUCTIONS = SCHEDULE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Requisites</b></em>' reference list.
@@ -173,7 +201,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ACTION__REQUISITES = 1;
+	int ABSTRACT_ACTION__REQUISITES = SCHEDULE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Parameter Derivations</b></em>' containment reference list.
@@ -182,7 +210,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ACTION__PARAMETER_DERIVATIONS = 2;
+	int ABSTRACT_ACTION__PARAMETER_DERIVATIONS = SCHEDULE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Order</b></em>' attribute.
@@ -191,7 +219,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ACTION__ORDER = 3;
+	int ABSTRACT_ACTION__ORDER = SCHEDULE_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -200,7 +228,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ACTION__PARENT = 4;
+	int ABSTRACT_ACTION__PARENT = SCHEDULE_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' reference list.
@@ -209,7 +237,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ACTION__CHILDREN = 5;
+	int ABSTRACT_ACTION__CHILDREN = SCHEDULE_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -218,7 +246,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ACTION__PARAMETERS = 6;
+	int ABSTRACT_ACTION__PARAMETERS = SCHEDULE_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Results</b></em>' containment reference list.
@@ -227,7 +255,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ACTION__RESULTS = 7;
+	int ABSTRACT_ACTION__RESULTS = SCHEDULE_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Schedule</b></em>' container reference.
@@ -236,7 +264,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ACTION__SCHEDULE = 8;
+	int ABSTRACT_ACTION__SCHEDULE = SCHEDULE_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Abstract Action</em>' class.
@@ -245,7 +273,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ACTION_FEATURE_COUNT = 9;
+	int ABSTRACT_ACTION_FEATURE_COUNT = SCHEDULE_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of operations of the '<em>Abstract Action</em>' class.
@@ -254,7 +282,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ABSTRACT_ACTION_OPERATION_COUNT = 0;
+	int ABSTRACT_ACTION_OPERATION_COUNT = SCHEDULE_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.schedule.impl.ClassDatumImpl <em>Class Datum</em>}' class.
@@ -382,7 +410,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_PARAMETER__VARIABLE = 0;
+	int DATA_PARAMETER__VARIABLE = SCHEDULE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Secondary Parameter</b></em>' reference.
@@ -391,7 +419,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_PARAMETER__SECONDARY_PARAMETER = 1;
+	int DATA_PARAMETER__SECONDARY_PARAMETER = SCHEDULE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Datum</b></em>' reference.
@@ -400,7 +428,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_PARAMETER__DATUM = 2;
+	int DATA_PARAMETER__DATUM = SCHEDULE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Data Parameter</em>' class.
@@ -409,7 +437,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_PARAMETER_FEATURE_COUNT = 3;
+	int DATA_PARAMETER_FEATURE_COUNT = SCHEDULE_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Data Parameter</em>' class.
@@ -418,7 +446,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DATA_PARAMETER_OPERATION_COUNT = 0;
+	int DATA_PARAMETER_OPERATION_COUNT = SCHEDULE_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.schedule.impl.InputActionImpl <em>Input Action</em>}' class.
@@ -773,7 +801,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER_DERIVATION__TARGET = 0;
+	int PARAMETER_DERIVATION__TARGET = SCHEDULE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Primary Parameter</b></em>' reference.
@@ -782,7 +810,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER_DERIVATION__PRIMARY_PARAMETER = 1;
+	int PARAMETER_DERIVATION__PRIMARY_PARAMETER = SCHEDULE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Secondary Parameter</b></em>' containment reference.
@@ -791,7 +819,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER_DERIVATION__SECONDARY_PARAMETER = 2;
+	int PARAMETER_DERIVATION__SECONDARY_PARAMETER = SCHEDULE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Parameter Derivation</em>' class.
@@ -800,7 +828,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER_DERIVATION_FEATURE_COUNT = 3;
+	int PARAMETER_DERIVATION_FEATURE_COUNT = SCHEDULE_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>Parameter Derivation</em>' class.
@@ -809,7 +837,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETER_DERIVATION_OPERATION_COUNT = 0;
+	int PARAMETER_DERIVATION_OPERATION_COUNT = SCHEDULE_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.schedule.impl.PropertyDatumImpl <em>Property Datum</em>}' class.
@@ -946,7 +974,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEDULE__DATUMS = 0;
+	int SCHEDULE__DATUMS = SCHEDULE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Actions</b></em>' containment reference list.
@@ -955,7 +983,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEDULE__ACTIONS = 1;
+	int SCHEDULE__ACTIONS = SCHEDULE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Schedule</em>' class.
@@ -964,7 +992,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEDULE_FEATURE_COUNT = 2;
+	int SCHEDULE_FEATURE_COUNT = SCHEDULE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Schedule</em>' class.
@@ -973,7 +1001,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SCHEDULE_OPERATION_COUNT = 0;
+	int SCHEDULE_OPERATION_COUNT = SCHEDULE_ELEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.schedule.impl.SecondaryParameterImpl <em>Secondary Parameter</em>}' class.
@@ -983,7 +1011,7 @@ public interface SchedulePackage extends EPackage {
 	 * @see org.eclipse.qvtd.pivot.schedule.impl.SchedulePackageImpl#getSecondaryParameter()
 	 * @generated
 	 */
-	int SECONDARY_PARAMETER = 10;
+	int SECONDARY_PARAMETER = 11;
 
 	/**
 	 * The feature id for the '<em><b>Is Loop</b></em>' attribute.
@@ -992,7 +1020,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SECONDARY_PARAMETER__IS_LOOP = 0;
+	int SECONDARY_PARAMETER__IS_LOOP = SCHEDULE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Data Parameter</b></em>' reference.
@@ -1001,7 +1029,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SECONDARY_PARAMETER__DATA_PARAMETER = 1;
+	int SECONDARY_PARAMETER__DATA_PARAMETER = SCHEDULE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Derivation Property</b></em>' reference.
@@ -1010,7 +1038,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SECONDARY_PARAMETER__DERIVATION_PROPERTY = 2;
+	int SECONDARY_PARAMETER__DERIVATION_PROPERTY = SCHEDULE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Derivation</b></em>' container reference.
@@ -1019,7 +1047,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SECONDARY_PARAMETER__DERIVATION = 3;
+	int SECONDARY_PARAMETER__DERIVATION = SCHEDULE_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Secondary Parameter</em>' class.
@@ -1028,7 +1056,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SECONDARY_PARAMETER_FEATURE_COUNT = 4;
+	int SECONDARY_PARAMETER_FEATURE_COUNT = SCHEDULE_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Secondary Parameter</em>' class.
@@ -1037,7 +1065,7 @@ public interface SchedulePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SECONDARY_PARAMETER_OPERATION_COUNT = 0;
+	int SECONDARY_PARAMETER_OPERATION_COUNT = SCHEDULE_ELEMENT_OPERATION_COUNT + 0;
 
 
 	/**
@@ -1471,6 +1499,16 @@ public interface SchedulePackage extends EPackage {
 	EReference getSchedule_Actions();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.schedule.ScheduleElement <em>Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Element</em>'.
+	 * @see org.eclipse.qvtd.pivot.schedule.ScheduleElement
+	 * @generated
+	 */
+	EClass getScheduleElement();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.schedule.SecondaryParameter <em>Secondary Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1886,6 +1924,16 @@ public interface SchedulePackage extends EPackage {
 		 * @generated
 		 */
 		EReference SCHEDULE__ACTIONS = eINSTANCE.getSchedule_Actions();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.schedule.impl.ScheduleElementImpl <em>Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.qvtd.pivot.schedule.impl.ScheduleElementImpl
+		 * @see org.eclipse.qvtd.pivot.schedule.impl.SchedulePackageImpl#getScheduleElement()
+		 * @generated
+		 */
+		EClass SCHEDULE_ELEMENT = eINSTANCE.getScheduleElement();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.schedule.impl.SecondaryParameterImpl <em>Secondary Parameter</em>}' class.

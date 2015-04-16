@@ -7,13 +7,15 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.DataParameter;
 import org.eclipse.qvtd.pivot.schedule.ParameterDerivation;
 import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
 import org.eclipse.qvtd.pivot.schedule.SecondaryParameter;
+import org.eclipse.qvtd.pivot.schedule.util.ScheduleVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +32,7 @@ import org.eclipse.qvtd.pivot.schedule.SecondaryParameter;
  *
  * @generated
  */
-public class ParameterDerivationImpl extends MinimalEObjectImpl.Container implements ParameterDerivation {
+public class ParameterDerivationImpl extends ScheduleElementImpl implements ParameterDerivation {
 	/**
 	 * The cached value of the '{@link #getPrimaryParameter() <em>Primary Parameter</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -319,6 +321,15 @@ public class ParameterDerivationImpl extends MinimalEObjectImpl.Container implem
 				return secondaryParameter != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @Nullable <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
+		return visitor.visitParameterDerivation(this);
 	}
 
 } //ParameterDerivationImpl

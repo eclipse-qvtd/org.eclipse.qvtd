@@ -10,7 +10,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -40,7 +39,7 @@ import org.eclipse.qvtd.pivot.schedule.Schedule;
  *
  * @generated
  */
-public abstract class AbstractDatumImpl extends MinimalEObjectImpl.Container implements AbstractDatum {
+public abstract class AbstractDatumImpl extends ScheduleElementImpl implements AbstractDatum {
 	/**
 	 * The cached value of the '{@link #getSuper() <em>Super</em>}' reference list.
 	 * <!-- begin-user-doc -->

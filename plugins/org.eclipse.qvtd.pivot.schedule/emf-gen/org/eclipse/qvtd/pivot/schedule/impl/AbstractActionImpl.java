@@ -10,7 +10,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
@@ -44,7 +43,7 @@ import org.eclipse.qvtd.pivot.schedule.Schedule;
  *
  * @generated
  */
-public abstract class AbstractActionImpl extends MinimalEObjectImpl.Container implements AbstractAction {
+public abstract class AbstractActionImpl extends ScheduleElementImpl implements AbstractAction {
 	/**
 	 * The cached value of the '{@link #getProductions() <em>Productions</em>}' reference list.
 	 * <!-- begin-user-doc -->

@@ -14,6 +14,7 @@ module GenerateQVTdScheduleModels
 
 import org.eclipse.qvtd.build.modelspecs.*
 import org.eclipse.qvtd.build.utilities.*
+import org.eclipse.qvtd.build.xtend.*
 import org.eclipse.ocl.examples.build.utilities.*
 import org.eclipse.ocl.examples.build.xtend.*
 import org.eclipse.emf.mwe.utils.*
@@ -34,19 +35,19 @@ Workflow {
     component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
     	genModel = "/org.eclipse.qvtd.pivot.schedule/model/Schedule.genmodel" 	
     }
-/*    component = GenerateCGVisitors { resourceSet = resourceSet
-    	projectName = "org.eclipse.qvtd.codegen"
-    	projectPrefix = "QVTiCGModel"
-    	superProjectName = "org.eclipse.ocl.examples.codegen"
-    	superProjectPrefix = "CGModel"
-    	genModelFile = "model/qvticgmodel.genmodel"
+    component = GenerateScheduleVisitors { resourceSet = resourceSet
+    	projectName = "org.eclipse.qvtd.pivot.schedule"
+    	projectPrefix = "ScheduleModel"
+    	superProjectName = ""
+    	genModelFile = "model/Schedule.genmodel"
     	javaFolder = "emf-gen"
-    	modelPackageName = "org.eclipse.qvtd.codegen.qvticgmodel"
-    	visitorPackageName = "org.eclipse.qvtd.codegen.qvticgmodel.util"
-    	visitorClassName = "QVTiCGModelVisitor"
-    	superVisitorPackageName = "org.eclipse.ocl.examples.codegen.cgmodel.util"
-    	superVisitorClassName = "CGModelVisitor"
-    	visitablePackageName = "org.eclipse.ocl.examples.codegen.cgmodel"
-    	visitableClassName= "CGElement"
-    } */
+    	modelPackageName = "org.eclipse.qvtd.pivot.schedule"
+    	visitorPackageName = "org.eclipse.qvtd.pivot.schedule.util"
+    	visitorClassName = "ScheduleVisitor"
+    	visitablePackageName = "org.eclipse.qvtd.pivot.schedule"
+    	visitableClassName= "ScheduleElement"
+    }
+	component = ConvertToUnixLineEndings {
+		directory = "org.eclipse.qvtd.pivot.schedule/emf-gen"
+	}
 }

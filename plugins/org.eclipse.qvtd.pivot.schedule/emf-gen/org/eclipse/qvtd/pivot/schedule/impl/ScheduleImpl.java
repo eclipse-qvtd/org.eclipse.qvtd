@@ -8,12 +8,14 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.schedule.AbstractAction;
 import org.eclipse.qvtd.pivot.schedule.AbstractDatum;
 import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
+import org.eclipse.qvtd.pivot.schedule.util.ScheduleVisitor;
 import org.eclipse.qvtd.pivot.schedule.Schedule;
 
 /**
@@ -30,7 +32,7 @@ import org.eclipse.qvtd.pivot.schedule.Schedule;
  *
  * @generated
  */
-public class ScheduleImpl extends MinimalEObjectImpl.Container implements Schedule {
+public class ScheduleImpl extends ScheduleElementImpl implements Schedule {
 	/**
 	 * The cached value of the '{@link #getDatums() <em>Datums</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -196,6 +198,14 @@ public class ScheduleImpl extends MinimalEObjectImpl.Container implements Schedu
 				return actions != null && !actions.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	public @Nullable <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
+		return visitor.visitSchedule(this);
 	}
 
 } //ScheduleImpl

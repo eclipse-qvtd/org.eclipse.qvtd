@@ -67,12 +67,14 @@ public class ScheduleSwitch<T> extends Switch<T> {
 			case SchedulePackage.ABSTRACT_DATUM: {
 				AbstractDatum abstractDatum = (AbstractDatum)theEObject;
 				T result = caseAbstractDatum(abstractDatum);
+				if (result == null) result = caseScheduleElement(abstractDatum);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case SchedulePackage.ABSTRACT_ACTION: {
 				AbstractAction abstractAction = (AbstractAction)theEObject;
 				T result = caseAbstractAction(abstractAction);
+				if (result == null) result = caseScheduleElement(abstractAction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -80,12 +82,14 @@ public class ScheduleSwitch<T> extends Switch<T> {
 				ClassDatum classDatum = (ClassDatum)theEObject;
 				T result = caseClassDatum(classDatum);
 				if (result == null) result = caseAbstractDatum(classDatum);
+				if (result == null) result = caseScheduleElement(classDatum);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case SchedulePackage.DATA_PARAMETER: {
 				DataParameter dataParameter = (DataParameter)theEObject;
 				T result = caseDataParameter(dataParameter);
+				if (result == null) result = caseScheduleElement(dataParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -93,6 +97,7 @@ public class ScheduleSwitch<T> extends Switch<T> {
 				InputAction inputAction = (InputAction)theEObject;
 				T result = caseInputAction(inputAction);
 				if (result == null) result = caseAbstractAction(inputAction);
+				if (result == null) result = caseScheduleElement(inputAction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -100,6 +105,7 @@ public class ScheduleSwitch<T> extends Switch<T> {
 				MappingAction mappingAction = (MappingAction)theEObject;
 				T result = caseMappingAction(mappingAction);
 				if (result == null) result = caseAbstractAction(mappingAction);
+				if (result == null) result = caseScheduleElement(mappingAction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -107,12 +113,14 @@ public class ScheduleSwitch<T> extends Switch<T> {
 				OutputAction outputAction = (OutputAction)theEObject;
 				T result = caseOutputAction(outputAction);
 				if (result == null) result = caseAbstractAction(outputAction);
+				if (result == null) result = caseScheduleElement(outputAction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case SchedulePackage.PARAMETER_DERIVATION: {
 				ParameterDerivation parameterDerivation = (ParameterDerivation)theEObject;
 				T result = caseParameterDerivation(parameterDerivation);
+				if (result == null) result = caseScheduleElement(parameterDerivation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -120,18 +128,27 @@ public class ScheduleSwitch<T> extends Switch<T> {
 				PropertyDatum propertyDatum = (PropertyDatum)theEObject;
 				T result = casePropertyDatum(propertyDatum);
 				if (result == null) result = caseAbstractDatum(propertyDatum);
+				if (result == null) result = caseScheduleElement(propertyDatum);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case SchedulePackage.SCHEDULE: {
 				Schedule schedule = (Schedule)theEObject;
 				T result = caseSchedule(schedule);
+				if (result == null) result = caseScheduleElement(schedule);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SchedulePackage.SCHEDULE_ELEMENT: {
+				ScheduleElement scheduleElement = (ScheduleElement)theEObject;
+				T result = caseScheduleElement(scheduleElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case SchedulePackage.SECONDARY_PARAMETER: {
 				SecondaryParameter secondaryParameter = (SecondaryParameter)theEObject;
 				T result = caseSecondaryParameter(secondaryParameter);
+				if (result == null) result = caseScheduleElement(secondaryParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -286,6 +303,21 @@ public class ScheduleSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSchedule(Schedule object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseScheduleElement(ScheduleElement object) {
 		return null;
 	}
 

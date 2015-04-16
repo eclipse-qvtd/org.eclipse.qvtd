@@ -6,6 +6,14 @@
     usedGenPackages="../../org.eclipse.ocl.pivot/model/Pivot.genmodel#//pivot ../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.genmodel#//qvtbase ../../org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.genmodel#//qvtcorebase ../../org.eclipse.qvtd.pivot.qvtimperative/model/QVTimperative.genmodel#//qvtimperative"
     operationReflection="true" importOrganizing="true">
   <foreignModel>Schedule.ecore</foreignModel>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel">
+    <details key="Use Null Annotations" value="true"/>
+  </genAnnotations>
+  <genAnnotations source="http://www.eclipse.org/OCL/GenModel/Visitor">
+    <details key="Root Visitor Class" value="org.eclipse.qvtd.pivot.schedule.util.ScheduleVisitor"/>
+    <details key="Derived Visitor Class" value="org.eclipse.qvtd.pivot.schedule.util.ScheduleVisitor"/>
+    <details key="Visitable Classes" value="org.eclipse.qvtd.pivot.schedule.ScheduleElement"/>
+  </genAnnotations>
   <genPackages prefix="Schedule" basePackage="org.eclipse.qvtd.pivot" disposableProviderFactory="true"
       fileExtensions="qvts" ecorePackage="Schedule.ecore#/">
     <genClasses image="false" ecoreClass="Schedule.ecore#//AbstractDatum">

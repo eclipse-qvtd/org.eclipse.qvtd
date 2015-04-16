@@ -151,4 +151,9 @@ public class GraphMLBuilder implements GraphBuilder
 				s.appendElement("edgedefault", "directed");
 				s.appendElement("id", "G");
 	}
+
+	@Override
+	public String toString() {
+		return s.toString();
+	}
 }

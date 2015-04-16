@@ -22,6 +22,7 @@ import org.eclipse.qvtd.pivot.schedule.PropertyDatum;
 import org.eclipse.qvtd.pivot.schedule.ScheduleFactory;
 import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
 import org.eclipse.qvtd.pivot.schedule.Schedule;
+import org.eclipse.qvtd.pivot.schedule.ScheduleElement;
 import org.eclipse.qvtd.pivot.schedule.SecondaryParameter;
 
 /**
@@ -100,6 +101,13 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * @generated
 	 */
 	private EClass scheduleEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass scheduleElementEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -537,6 +545,15 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getScheduleElement() {
+		return scheduleElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getSecondaryParameter() {
 		return secondaryParameterEClass;
 	}
@@ -655,6 +672,8 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 		createEReference(scheduleEClass, SCHEDULE__DATUMS);
 		createEReference(scheduleEClass, SCHEDULE__ACTIONS);
 
+		scheduleElementEClass = createEClass(SCHEDULE_ELEMENT);
+
 		secondaryParameterEClass = createEClass(SECONDARY_PARAMETER);
 		createEAttribute(secondaryParameterEClass, SECONDARY_PARAMETER__IS_LOOP);
 		createEReference(secondaryParameterEClass, SECONDARY_PARAMETER__DATA_PARAMETER);
@@ -695,11 +714,17 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		abstractDatumEClass.getESuperTypes().add(this.getScheduleElement());
+		abstractActionEClass.getESuperTypes().add(this.getScheduleElement());
 		classDatumEClass.getESuperTypes().add(this.getAbstractDatum());
+		dataParameterEClass.getESuperTypes().add(this.getScheduleElement());
 		inputActionEClass.getESuperTypes().add(this.getAbstractAction());
 		mappingActionEClass.getESuperTypes().add(this.getAbstractAction());
 		outputActionEClass.getESuperTypes().add(this.getAbstractAction());
+		parameterDerivationEClass.getESuperTypes().add(this.getScheduleElement());
 		propertyDatumEClass.getESuperTypes().add(this.getAbstractDatum());
+		scheduleEClass.getESuperTypes().add(this.getScheduleElement());
+		secondaryParameterEClass.getESuperTypes().add(this.getScheduleElement());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(abstractDatumEClass, AbstractDatum.class, "AbstractDatum", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -751,6 +776,8 @@ public class SchedulePackageImpl extends EPackageImpl implements SchedulePackage
 		initEClass(scheduleEClass, Schedule.class, "Schedule", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSchedule_Datums(), this.getAbstractDatum(), this.getAbstractDatum_Schedule(), "datums", null, 0, -1, Schedule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getSchedule_Actions(), this.getAbstractAction(), this.getAbstractAction_Schedule(), "actions", null, 0, -1, Schedule.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(scheduleElementEClass, ScheduleElement.class, "ScheduleElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(secondaryParameterEClass, SecondaryParameter.class, "SecondaryParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSecondaryParameter_IsLoop(), ecorePackage.getEBoolean(), "isLoop", null, 0, 1, SecondaryParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

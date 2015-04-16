@@ -4,8 +4,6 @@ package org.eclipse.qvtd.pivot.schedule;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Abstract Action</b></em>'.
@@ -30,7 +28,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface AbstractAction extends EObject {
+public interface AbstractAction extends ScheduleElement {
 	/**
 	 * Returns the value of the '<em><b>Productions</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.schedule.AbstractDatum}.

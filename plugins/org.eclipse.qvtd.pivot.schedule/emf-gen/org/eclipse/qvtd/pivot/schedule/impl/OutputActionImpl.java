@@ -3,8 +3,11 @@
 package org.eclipse.qvtd.pivot.schedule.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.qvtd.pivot.schedule.OutputAction;
 import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
+import org.eclipse.qvtd.pivot.schedule.util.ScheduleVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -31,6 +34,15 @@ public class OutputActionImpl extends AbstractActionImpl implements OutputAction
 	@Override
 	protected EClass eStaticClass() {
 		return SchedulePackage.Literals.OUTPUT_ACTION;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * @generated
+	 */
+	@Override
+	public @Nullable <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
+		return visitor.visitOutputAction(this);
 	}
 
 } //OutputActionImpl

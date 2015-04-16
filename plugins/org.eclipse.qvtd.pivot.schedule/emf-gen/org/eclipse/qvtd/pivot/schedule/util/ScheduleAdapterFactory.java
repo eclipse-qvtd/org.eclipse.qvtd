@@ -105,6 +105,10 @@ public class ScheduleAdapterFactory extends AdapterFactoryImpl {
 				return createScheduleAdapter();
 			}
 			@Override
+			public Adapter caseScheduleElement(ScheduleElement object) {
+				return createScheduleElementAdapter();
+			}
+			@Override
 			public Adapter caseSecondaryParameter(SecondaryParameter object) {
 				return createSecondaryParameterAdapter();
 			}
@@ -265,6 +269,20 @@ public class ScheduleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createScheduleAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.schedule.ScheduleElement <em>Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.qvtd.pivot.schedule.ScheduleElement
+	 * @generated
+	 */
+	public Adapter createScheduleElementAdapter() {
 		return null;
 	}
 

@@ -2,8 +2,6 @@
  */
 package org.eclipse.qvtd.pivot.schedule;
 
-import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.ocl.pivot.Variable;
 
 /**
@@ -24,7 +22,7 @@ import org.eclipse.ocl.pivot.Variable;
  * @model
  * @generated
  */
-public interface DataParameter extends EObject {
+public interface DataParameter extends ScheduleElement {
 	/**
 	 * Returns the value of the '<em><b>Variable</b></em>' reference.
 	 * <!-- begin-user-doc -->

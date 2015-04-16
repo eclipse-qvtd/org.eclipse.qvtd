@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="schedule" nsURI="http://www.eclipse.org/qvt/2015/Schedule" nsPrefix="qvts">
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractDatum" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractDatum" abstract="true" eSuperTypes="#//ScheduleElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="super" upperBound="-1"
         eType="#//AbstractDatum" eOpposite="#//AbstractDatum/sub"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="sub" upperBound="-1" eType="#//AbstractDatum"
@@ -16,7 +16,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataParameter" upperBound="-1"
         eType="#//DataParameter" eOpposite="#//DataParameter/datum"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="AbstractAction" abstract="true">
+  <eClassifiers xsi:type="ecore:EClass" name="AbstractAction" abstract="true" eSuperTypes="#//ScheduleElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="productions" upperBound="-1"
         eType="#//AbstractDatum" eOpposite="#//AbstractDatum/producedBy"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="requisites" upperBound="-1"
@@ -41,7 +41,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="propertyDatums" upperBound="-1"
         eType="#//PropertyDatum" containment="true" eOpposite="#//PropertyDatum/classDatum"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DataParameter">
+  <eClassifiers xsi:type="ecore:EClass" name="DataParameter" eSuperTypes="#//ScheduleElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variable" lowerBound="1"
         eType="ecore:EClass http://www.eclipse.org/ocl/2015/Pivot#//Variable"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="secondaryParameter" eType="#//SecondaryParameter"
@@ -54,7 +54,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="mapping" eType="ecore:EClass http://www.eclipse.org/qvt/2015/QVTimperative#//Mapping"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OutputAction" eSuperTypes="#//AbstractAction"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ParameterDerivation">
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterDerivation" eSuperTypes="#//ScheduleElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//AbstractAction"
         eOpposite="#//AbstractAction/parameterDerivations"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="primaryParameter" eType="#//DataParameter"/>
@@ -68,13 +68,14 @@
         eType="#//ClassDatum" eOpposite="#//ClassDatum/propertyDatums"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="opposite" eType="#//PropertyDatum"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Schedule">
+  <eClassifiers xsi:type="ecore:EClass" name="Schedule" eSuperTypes="#//ScheduleElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="datums" upperBound="-1"
         eType="#//AbstractDatum" containment="true" eOpposite="#//AbstractDatum/schedule"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
         eType="#//AbstractAction" containment="true" eOpposite="#//AbstractAction/schedule"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SecondaryParameter">
+  <eClassifiers xsi:type="ecore:EClass" name="ScheduleElement" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SecondaryParameter" eSuperTypes="#//ScheduleElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isLoop" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dataParameter" lowerBound="1"
         eType="#//DataParameter" eOpposite="#//DataParameter/secondaryParameter"/>

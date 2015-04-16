@@ -3,26 +3,31 @@
 package org.eclipse.qvtd.pivot.schedule.impl;
 
 import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.qvtd.pivot.schedule.InputAction;
+
+import org.eclipse.qvtd.pivot.schedule.ScheduleElement;
 import org.eclipse.qvtd.pivot.schedule.SchedulePackage;
+
 import org.eclipse.qvtd.pivot.schedule.util.ScheduleVisitor;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Input Action</b></em>'.
+ * An implementation of the model object '<em><b>Element</b></em>'.
  * <!-- end-user-doc -->
  *
  * @generated
  */
-public class InputActionImpl extends AbstractActionImpl implements InputAction {
+public abstract class ScheduleElementImpl extends MinimalEObjectImpl.Container implements ScheduleElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected InputActionImpl() {
+	protected ScheduleElementImpl() {
 		super();
 	}
 
@@ -33,16 +38,15 @@ public class InputActionImpl extends AbstractActionImpl implements InputAction {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return SchedulePackage.Literals.INPUT_ACTION;
+		return SchedulePackage.Literals.SCHEDULE_ELEMENT;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 * @generated
 	 */
-	@Override
 	public @Nullable <R> R accept(@NonNull ScheduleVisitor<R> visitor) {
-		return visitor.visitInputAction(this);
+		return visitor.visitScheduleElement(this);
 	}
 
-} //InputActionImpl
+} //ScheduleElementImpl

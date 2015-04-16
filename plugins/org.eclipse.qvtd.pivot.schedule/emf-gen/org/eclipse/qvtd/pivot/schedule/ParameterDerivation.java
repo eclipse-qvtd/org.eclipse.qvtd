@@ -2,8 +2,6 @@
  */
 package org.eclipse.qvtd.pivot.schedule;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Parameter Derivation</b></em>'.
@@ -22,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface ParameterDerivation extends EObject {
+public interface ParameterDerivation extends ScheduleElement {
 	/**
 	 * Returns the value of the '<em><b>Target</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.eclipse.qvtd.pivot.schedule.AbstractAction#getParameterDerivations <em>Parameter Derivations</em>}'.

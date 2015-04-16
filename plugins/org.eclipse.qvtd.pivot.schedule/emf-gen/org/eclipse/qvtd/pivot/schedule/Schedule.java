@@ -4,7 +4,9 @@ package org.eclipse.qvtd.pivot.schedule;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.qvtd.pivot.schedule.util.ScheduleVisitor;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Schedule extends EObject {
+public interface Schedule extends ScheduleElement {
 	/**
 	 * Returns the value of the '<em><b>Datums</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.schedule.AbstractDatum}.
@@ -59,5 +61,12 @@ public interface Schedule extends EObject {
 	 * @generated
 	 */
 	EList<AbstractAction> getActions();
+
+	/**
+	 * Accept a visit from a visitor and return the result of a call to the derived type-specific visitXXX in the visitor.
+	 * @generated
+	 */
+	// Generated from org.eclipse.ocl.examples.build/templates/model/Class/insert.javajetinc
+	public @Nullable <R> R accept(@NonNull ScheduleVisitor<R> visitor);
 
 } // Schedule

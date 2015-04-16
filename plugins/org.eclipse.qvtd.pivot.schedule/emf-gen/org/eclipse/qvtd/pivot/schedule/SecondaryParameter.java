@@ -2,8 +2,6 @@
  */
 package org.eclipse.qvtd.pivot.schedule;
 
-import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.ocl.pivot.Property;
 
 /**
@@ -25,7 +23,7 @@ import org.eclipse.ocl.pivot.Property;
  * @model
  * @generated
  */
-public interface SecondaryParameter extends EObject {
+public interface SecondaryParameter extends ScheduleElement {
 	/**
 	 * Returns the value of the '<em><b>Is Loop</b></em>' attribute.
 	 * <!-- begin-user-doc -->

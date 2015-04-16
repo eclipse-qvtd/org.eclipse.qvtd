@@ -4,8 +4,6 @@ package org.eclipse.qvtd.pivot.schedule;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
 
 /**
@@ -30,7 +28,7 @@ import org.eclipse.qvtd.pivot.qvtcorebase.CoreDomain;
  * @model abstract="true"
  * @generated
  */
-public interface AbstractDatum extends EObject {
+public interface AbstractDatum extends ScheduleElement {
 	/**
 	 * Returns the value of the '<em><b>Super</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.qvtd.pivot.schedule.AbstractDatum}.
