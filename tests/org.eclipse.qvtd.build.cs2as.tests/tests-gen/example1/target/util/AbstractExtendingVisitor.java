@@ -35,7 +35,7 @@ public abstract class AbstractExtendingVisitor<R, C>
 
 	@Override
 	public @Nullable R visitA(@NonNull example1.target.A object) {
-		return visiting(object);
+		return visitNamespace(object);
 	}
 
 	@Override
@@ -55,12 +55,12 @@ public abstract class AbstractExtendingVisitor<R, C>
 
 	@Override
 	public @Nullable R visitB(@NonNull example1.target.B object) {
-		return visitNamedElement(object);
+		return visitNamespace(object);
 	}
 
 	@Override
 	public @Nullable R visitC(@NonNull example1.target.C object) {
-		return visitNamedElement(object);
+		return visitNamespace(object);
 	}
 
 	@Override
@@ -71,6 +71,11 @@ public abstract class AbstractExtendingVisitor<R, C>
 	@Override
 	public @Nullable R visitNamedElement(@NonNull example1.target.NamedElement object) {
 		return visiting(object);
+	}
+
+	@Override
+	public @Nullable R visitNamespace(@NonNull example1.target.Namespace object) {
+		return visitNamedElement(object);
 	}
 
 	@Override

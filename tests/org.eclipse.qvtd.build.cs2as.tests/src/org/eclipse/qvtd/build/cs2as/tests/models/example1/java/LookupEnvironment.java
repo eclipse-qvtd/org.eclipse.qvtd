@@ -17,16 +17,25 @@ import org.eclipse.ocl.pivot.evaluation.Evaluator;
 
 import example1.env.Environment;
 import example1.env.impl.EnvironmentImpl;
+import example1.source.PathElementCS;
 import example1.target.NamedElement;
 
 public class LookupEnvironment extends EnvironmentImpl   {
 	
 	private @NonNull Evaluator evaluator;
 	private @NonNull String name;
+	private boolean isLocal;
 	
-	public LookupEnvironment(@NonNull Evaluator evaluator, @NonNull String name) {
+	public LookupEnvironment(@NonNull Evaluator evaluator, @NonNull String name, boolean isLocalLookup) {
 		this.evaluator = evaluator;
 		this.name = name;
+		this.isLocal = isLocalLookup;
+	}
+	
+	public LookupEnvironment(@NonNull Evaluator evaluator, @NonNull PathElementCS pathElement, boolean isLocalLookup) {
+		this.evaluator = evaluator;
+		this.name = pathElement.getName();
+		this.isLocal = isLocalLookup;
 	}
 	
 	@Override
@@ -37,6 +46,9 @@ public class LookupEnvironment extends EnvironmentImpl   {
 	
 	@Override
 	public boolean hasFinalResult() {
+		if (isLocal) {
+			return true;
+		}
 		for (NamedElement element : getNamedElements()) {
 			if (name.equals(element.getName())) {
 				return true;

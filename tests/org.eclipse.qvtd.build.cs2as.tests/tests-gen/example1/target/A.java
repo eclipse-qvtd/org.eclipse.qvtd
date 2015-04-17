@@ -2,9 +2,6 @@
  */
 package example1.target;
 
-import example1.target.util.Visitable;
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>A</b></em>'.
@@ -12,8 +9,8 @@ import org.eclipse.emf.ecore.EObject;
  *
  *
  * @see example1.target.TargetPackage#getA()
- * @model abstract="true" superTypes="example1.target.Visitable"
+ * @model abstract="true"
  * @generated
  */
-public interface A extends EObject, Visitable {
+public interface A extends Namespace {
 } // A

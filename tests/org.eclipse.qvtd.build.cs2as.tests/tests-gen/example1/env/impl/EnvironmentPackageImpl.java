@@ -308,7 +308,7 @@ public class EnvironmentPackageImpl extends EPackageImpl implements EnvironmentP
 		  (this, 
 		   source, 
 		   new String[] {
-			 "classes", "TargetMM1.ecore#/"
+			 "target", "TargetMM1.ecore#/"
 		   });
 	}
 

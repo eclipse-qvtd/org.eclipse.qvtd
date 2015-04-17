@@ -11,7 +11,18 @@
   </ownedA>
   <ownedA xsi:type="target:A2" name="X2">
     <ownsC name="Y2-a">
-      <ownsD toA="//@ownedA.1"/>
+      <ownsD toA="//@ownedA.1" refsC="//@ownedA.2/@ownsC.2"/>
+    </ownsC>
+  </ownedA>
+  <ownedA xsi:type="target:A3" name="X3">
+    <ownsC name="Y3-a">
+      <ownsD toA="//@ownedA.2"/>
+    </ownsC>
+    <ownsC name="Y3-b">
+      <ownsD toA="//@ownedA.2" refsC="//@ownedA.2/@ownsC.2"/>
+    </ownsC>
+    <ownsC name="Y3-c">
+      <ownsD toA="//@ownedA.2" refsC="//@ownedA.2/@ownsC.0"/>
     </ownsC>
   </ownedA>
 </target:TRoot>

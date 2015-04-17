@@ -2,6 +2,7 @@
  */
 package example1.source.impl;
 
+import example1.source.PathNameCS;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
@@ -22,31 +23,21 @@ import example1.source.Z;
  * </p>
  * <ul>
  *   <li>{@link example1.source.impl.ZImpl#getToY <em>To Y</em>}</li>
- *   <li>{@link example1.source.impl.ZImpl#getName <em>Name</em>}</li>
+ *   <li>{@link example1.source.impl.ZImpl#getRefers <em>Refers</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ZImpl extends SElementImpl implements Z {
 	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * The cached value of the '{@link #getRefers() <em>Refers</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getName()
+	 * @see #getRefers()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
+	protected PathNameCS refers;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -113,8 +104,8 @@ public class ZImpl extends SElementImpl implements Z {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getName() {
-		return name;
+	public PathNameCS getRefers() {
+		return refers;
 	}
 
 	/**
@@ -122,11 +113,33 @@ public class ZImpl extends SElementImpl implements Z {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setName(String newName) {
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SourcePackage.Z__NAME, oldName, name));
+	public NotificationChain basicSetRefers(PathNameCS newRefers, NotificationChain msgs) {
+		PathNameCS oldRefers = refers;
+		refers = newRefers;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SourcePackage.Z__REFERS, oldRefers, newRefers);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRefers(PathNameCS newRefers) {
+		if (newRefers != refers) {
+			NotificationChain msgs = null;
+			if (refers != null)
+				msgs = ((InternalEObject)refers).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SourcePackage.Z__REFERS, null, msgs);
+			if (newRefers != null)
+				msgs = ((InternalEObject)newRefers).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SourcePackage.Z__REFERS, null, msgs);
+			msgs = basicSetRefers(newRefers, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SourcePackage.Z__REFERS, newRefers, newRefers));
 	}
 
 	/**
@@ -155,6 +168,8 @@ public class ZImpl extends SElementImpl implements Z {
 		switch (featureID) {
 			case SourcePackage.Z__TO_Y:
 				return basicSetToY(null, msgs);
+			case SourcePackage.Z__REFERS:
+				return basicSetRefers(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -183,8 +198,8 @@ public class ZImpl extends SElementImpl implements Z {
 		switch (featureID) {
 			case SourcePackage.Z__TO_Y:
 				return getToY();
-			case SourcePackage.Z__NAME:
-				return getName();
+			case SourcePackage.Z__REFERS:
+				return getRefers();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -200,8 +215,8 @@ public class ZImpl extends SElementImpl implements Z {
 			case SourcePackage.Z__TO_Y:
 				setToY((Y)newValue);
 				return;
-			case SourcePackage.Z__NAME:
-				setName((String)newValue);
+			case SourcePackage.Z__REFERS:
+				setRefers((PathNameCS)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -218,8 +233,8 @@ public class ZImpl extends SElementImpl implements Z {
 			case SourcePackage.Z__TO_Y:
 				setToY((Y)null);
 				return;
-			case SourcePackage.Z__NAME:
-				setName(NAME_EDEFAULT);
+			case SourcePackage.Z__REFERS:
+				setRefers((PathNameCS)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -235,26 +250,10 @@ public class ZImpl extends SElementImpl implements Z {
 		switch (featureID) {
 			case SourcePackage.Z__TO_Y:
 				return getToY() != null;
-			case SourcePackage.Z__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case SourcePackage.Z__REFERS:
+				return refers != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //ZImpl

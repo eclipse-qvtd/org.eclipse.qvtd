@@ -2,6 +2,8 @@
  */
 package example1.source.impl;
 
+import example1.source.PathElementCS;
+import example1.source.PathNameCS;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
@@ -68,6 +70,20 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * @generated
 	 */
 	private EClass sElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass pathNameCSEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass pathElementCSEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -171,6 +187,15 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getX_Name() {
+		return (EAttribute)xEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getY() {
 		return yEClass;
 	}
@@ -243,8 +268,8 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getZ_Name() {
-		return (EAttribute)zEClass.getEStructuralFeatures().get(1);
+	public EReference getZ_Refers() {
+		return (EReference)zEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -288,6 +313,42 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getPathNameCS() {
+		return pathNameCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPathNameCS_Path() {
+		return (EReference)pathNameCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPathElementCS() {
+		return pathElementCSEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getPathElementCS_Name() {
+		return (EAttribute)pathElementCSEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public SourceFactory getSourceFactory() {
 		return (SourceFactory)getEFactoryInstance();
 	}
@@ -315,6 +376,7 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 		createEReference(xEClass, X__OWNS_Y);
 		createEAttribute(xEClass, X__IS_A1);
 		createEAttribute(xEClass, X__IS_A2);
+		createEAttribute(xEClass, X__NAME);
 
 		yEClass = createEClass(Y);
 		createEReference(yEClass, Y__OWNS_Z);
@@ -327,13 +389,19 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 
 		zEClass = createEClass(Z);
 		createEReference(zEClass, Z__TO_Y);
-		createEAttribute(zEClass, Z__NAME);
+		createEReference(zEClass, Z__REFERS);
 
 		sRootEClass = createEClass(SROOT);
 		createEReference(sRootEClass, SROOT__OWNED_X);
 
 		sElementEClass = createEClass(SELEMENT);
 		createEReference(sElementEClass, SELEMENT__AST);
+
+		pathNameCSEClass = createEClass(PATH_NAME_CS);
+		createEReference(pathNameCSEClass, PATH_NAME_CS__PATH);
+
+		pathElementCSEClass = createEClass(PATH_ELEMENT_CS);
+		createEAttribute(pathElementCSEClass, PATH_ELEMENT_CS__NAME);
 	}
 
 	/**
@@ -370,12 +438,15 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 		y2EClass.getESuperTypes().add(this.getY());
 		zEClass.getESuperTypes().add(this.getSElement());
 		sRootEClass.getESuperTypes().add(this.getSElement());
+		pathNameCSEClass.getESuperTypes().add(this.getSElement());
+		pathElementCSEClass.getESuperTypes().add(this.getSElement());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(xEClass, example1.source.X.class, "X", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getX_OwnsY(), this.getY(), this.getY_ToX(), "ownsY", null, 0, -1, example1.source.X.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getX_IsA1(), ecorePackage.getEBoolean(), "isA1", null, 0, 1, example1.source.X.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getX_IsA2(), ecorePackage.getEBoolean(), "isA2", null, 0, 1, example1.source.X.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getX_Name(), ecorePackage.getEString(), "name", null, 0, 1, example1.source.X.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(yEClass, example1.source.Y.class, "Y", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getY_OwnsZ(), this.getZ(), this.getZ_ToY(), "ownsZ", null, 0, 1, example1.source.Y.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -388,13 +459,19 @@ public class SourcePackageImpl extends EPackageImpl implements SourcePackage {
 
 		initEClass(zEClass, example1.source.Z.class, "Z", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getZ_ToY(), this.getY(), this.getY_OwnsZ(), "toY", null, 0, 1, example1.source.Z.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getZ_Name(), ecorePackage.getEString(), "name", null, 0, 1, example1.source.Z.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getZ_Refers(), this.getPathNameCS(), null, "refers", null, 0, 1, example1.source.Z.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sRootEClass, SRoot.class, "SRoot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSRoot_OwnedX(), this.getX(), null, "ownedX", null, 0, -1, SRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(sElementEClass, SElement.class, "SElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getSElement_Ast(), ecorePackage.getEObject(), null, "ast", null, 0, 1, SElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(pathNameCSEClass, PathNameCS.class, "PathNameCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPathNameCS_Path(), this.getPathElementCS(), null, "path", null, 1, -1, PathNameCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(pathElementCSEClass, PathElementCS.class, "PathElementCS", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getPathElementCS_Name(), ecorePackage.getEString(), "name", null, 0, 1, PathElementCS.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

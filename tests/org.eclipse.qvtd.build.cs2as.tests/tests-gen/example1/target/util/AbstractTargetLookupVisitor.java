@@ -11,6 +11,7 @@ package example1.target.util;
 
 import example1.env.Environment;
 import example1.env.EnvironmentPackage;
+import example1.target.A;
 import example1.target.A1;
 import example1.target.A2;
 import example1.target.B;
@@ -49,6 +50,7 @@ public class AbstractTargetLookupVisitor
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_java_c_s_s_org_eclipse_qvtd_build_cs2as_tests_lookup = IdManager.getRootPackageId("java://org.eclipse.qvtd.build.cs2as.tests.lookup");
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_org_eclipse_ocl_pivot_evaluation = IdManager.getRootPackageId("org.eclipse.ocl.pivot.evaluation");
     public static final @NonNull /*@NonInvalid*/ RootPackageId PACKid_org_eclipse_ocl_pivot_ids = IdManager.getRootPackageId("org.eclipse.ocl.pivot.ids");
+    public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_A = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("A", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_A1 = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("A1", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_A2 = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("A2", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_AbstractTargetLookupVisitor = PACKid_java_c_s_s_org_eclipse_qvtd_build_cs2as_tests_lookup.getClassId("AbstractTargetLookupVisitor", 0);
@@ -60,6 +62,7 @@ public class AbstractTargetLookupVisitor
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_IdResolver = PACKid_org_eclipse_ocl_pivot_ids.getClassId("IdResolver", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_OclElement = PACKid_$metamodel$.getClassId("OclElement", 0);
     public static final @NonNull /*@NonInvalid*/ ClassId CLSSid_TRoot = PACKid_http_c_s_s_cs2as_s_tests_s_example1_s_targetMM_s_1_0.getClassId("TRoot", 0);
+    public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_A = TypeId.ORDERED_SET.getSpecializedId(CLSSid_A);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_B = TypeId.ORDERED_SET.getSpecializedId(CLSSid_B);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId ORD_CLSSid_C = TypeId.ORDERED_SET.getSpecializedId(CLSSid_C);
     
@@ -106,53 +109,83 @@ public class AbstractTargetLookupVisitor
      * 
      * let ownedBs : OrderedSet(target::B) = element.ownsB
      * in
-     *   let
-     *     inner : env::Environment = context.addElements(
-     *       ownedBs->select(x | ownedBs->indexOf(x) < ownedBs->indexOf(child)))
-     *   in
-     *     if inner.hasFinalResult()
-     *     then inner
-     *     else this.parentEnv(element)
-     *     endif
+     *   if child = null
+     *   then
+     *     let inner : env::Environment = context.addElements(ownedBs)
+     *     in
+     *       if inner.hasFinalResult()
+     *       then inner
+     *       else this.parentEnv(element)
+     *       endif
+     *   else
+     *     let
+     *       inner : env::Environment = context.addElements(
+     *         ownedBs->select(x |
+     *           ownedBs->indexOf(x) <
+     *           ownedBs->indexOf(child)))
+     *     in
+     *       if inner.hasFinalResult()
+     *       then inner
+     *       else this.parentEnv(element)
+     *       endif
+     *   endif
      */
     @Override
     public @Nullable /*@NonInvalid*/ Environment visitA1(final @NonNull /*@NonInvalid*/ A1 element) {
         final @Nullable /*@Thrown*/ List<B> ownedBs = element.getOwnsB();
         assert ownedBs != null;
-        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedBs = idResolver.createOrderedSetOfAll(ORD_CLSSid_B, ownedBs);
-        @NonNull /*@Thrown*/ OrderedSetValue.Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_B);
-        @Nullable Iterator<?> ITERATOR_x = BOXED_ownedBs.iterator();
-        @NonNull /*@Thrown*/ OrderedSetValue select;
-        while (true) {
-            if (!ITERATOR_x.hasNext()) {
-                select = accumulator;
-                break;
+        final /*@Thrown*/ boolean eq = child == null;
+        @Nullable /*@Thrown*/ Environment symbol_2;
+        if (eq) {
+            final @NonNull /*@Thrown*/ Environment inner = context.addElements((EList)ownedBs);
+            final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
+            @Nullable /*@Thrown*/ Environment symbol_0;
+            if (hasFinalResult) {
+                symbol_0 = inner;
             }
-            @Nullable /*@NonInvalid*/ B x = (B)ITERATOR_x.next();
-            /**
-             * ownedBs->indexOf(x) < ownedBs->indexOf(child)
-             */
-            final @NonNull /*@Thrown*/ IntegerValue indexOf = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedBs, x);
-            final @NonNull /*@Thrown*/ IntegerValue indexOf_0 = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedBs, child);
-            final /*@Thrown*/ boolean lt = OclComparableLessThanOperation.INSTANCE.evaluate(evaluator, indexOf, indexOf_0).booleanValue();
-            //
-            if (lt == ValueUtil.TRUE_VALUE) {
-                accumulator.add(x);
+            else {
+                final @Nullable /*@Thrown*/ Environment parentEnv = this.parentEnv(element);
+                symbol_0 = parentEnv;
             }
-        }
-        final List<B> UNBOXED_select = select.asEcoreObjects(idResolver, B.class);
-        assert UNBOXED_select != null;
-        final @NonNull /*@Thrown*/ Environment inner = context.addElements((EList)UNBOXED_select);
-        final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
-        @Nullable /*@Thrown*/ Environment symbol_0;
-        if (hasFinalResult) {
-            symbol_0 = inner;
+            symbol_2 = symbol_0;
         }
         else {
-            final @Nullable /*@Thrown*/ Environment parentEnv = this.parentEnv(element);
-            symbol_0 = parentEnv;
+            final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedBs = idResolver.createOrderedSetOfAll(ORD_CLSSid_B, ownedBs);
+            @NonNull /*@Thrown*/ OrderedSetValue.Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_B);
+            @Nullable Iterator<?> ITERATOR_x = BOXED_ownedBs.iterator();
+            @NonNull /*@Thrown*/ OrderedSetValue select;
+            while (true) {
+                if (!ITERATOR_x.hasNext()) {
+                    select = accumulator;
+                    break;
+                }
+                @Nullable /*@NonInvalid*/ B x = (B)ITERATOR_x.next();
+                /**
+                 * ownedBs->indexOf(x) < ownedBs->indexOf(child)
+                 */
+                final @NonNull /*@Thrown*/ IntegerValue indexOf = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedBs, x);
+                final @NonNull /*@Thrown*/ IntegerValue indexOf_0 = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedBs, child);
+                final /*@Thrown*/ boolean lt = OclComparableLessThanOperation.INSTANCE.evaluate(evaluator, indexOf, indexOf_0).booleanValue();
+                //
+                if (lt == ValueUtil.TRUE_VALUE) {
+                    accumulator.add(x);
+                }
+            }
+            final List<B> UNBOXED_select = select.asEcoreObjects(idResolver, B.class);
+            assert UNBOXED_select != null;
+            final @NonNull /*@Thrown*/ Environment inner_0 = context.addElements((EList)UNBOXED_select);
+            final /*@Thrown*/ boolean hasFinalResult_0 = inner_0.hasFinalResult();
+            @Nullable /*@Thrown*/ Environment symbol_1;
+            if (hasFinalResult_0) {
+                symbol_1 = inner_0;
+            }
+            else {
+                final @Nullable /*@Thrown*/ Environment parentEnv_0 = this.parentEnv(element);
+                symbol_1 = parentEnv_0;
+            }
+            symbol_2 = symbol_1;
         }
-        return symbol_0;
+        return symbol_2;
     }
     
     /**
@@ -161,53 +194,83 @@ public class AbstractTargetLookupVisitor
      * 
      * let ownedCs : OrderedSet(target::C) = element.ownsC
      * in
-     *   let
-     *     inner : env::Environment = context.addElements(
-     *       ownedCs->select(x | ownedCs->indexOf(x) < ownedCs->indexOf(child)))
-     *   in
-     *     if inner.hasFinalResult()
-     *     then inner
-     *     else this.parentEnv(element)
-     *     endif
+     *   if child = null
+     *   then
+     *     let inner : env::Environment = context.addElements(ownedCs)
+     *     in
+     *       if inner.hasFinalResult()
+     *       then inner
+     *       else this.parentEnv(element)
+     *       endif
+     *   else
+     *     let
+     *       inner : env::Environment = context.addElements(
+     *         ownedCs->select(x |
+     *           ownedCs->indexOf(x) <
+     *           ownedCs->indexOf(child)))
+     *     in
+     *       if inner.hasFinalResult()
+     *       then inner
+     *       else this.parentEnv(element)
+     *       endif
+     *   endif
      */
     @Override
     public @Nullable /*@NonInvalid*/ Environment visitA2(final @NonNull /*@NonInvalid*/ A2 element_0) {
         final @Nullable /*@Thrown*/ List<C> ownedCs = element_0.getOwnsC();
         assert ownedCs != null;
-        final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedCs = idResolver.createOrderedSetOfAll(ORD_CLSSid_C, ownedCs);
-        @NonNull /*@Thrown*/ OrderedSetValue.Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_C);
-        @Nullable Iterator<?> ITERATOR_x = BOXED_ownedCs.iterator();
-        @NonNull /*@Thrown*/ OrderedSetValue select;
-        while (true) {
-            if (!ITERATOR_x.hasNext()) {
-                select = accumulator;
-                break;
+        final /*@Thrown*/ boolean eq = child == null;
+        @Nullable /*@Thrown*/ Environment symbol_2;
+        if (eq) {
+            final @NonNull /*@Thrown*/ Environment inner = context.addElements((EList)ownedCs);
+            final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
+            @Nullable /*@Thrown*/ Environment symbol_0;
+            if (hasFinalResult) {
+                symbol_0 = inner;
             }
-            @Nullable /*@NonInvalid*/ C x = (C)ITERATOR_x.next();
-            /**
-             * ownedCs->indexOf(x) < ownedCs->indexOf(child)
-             */
-            final @NonNull /*@Thrown*/ IntegerValue indexOf = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedCs, x);
-            final @NonNull /*@Thrown*/ IntegerValue indexOf_0 = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedCs, child);
-            final /*@Thrown*/ boolean lt = OclComparableLessThanOperation.INSTANCE.evaluate(evaluator, indexOf, indexOf_0).booleanValue();
-            //
-            if (lt == ValueUtil.TRUE_VALUE) {
-                accumulator.add(x);
+            else {
+                final @Nullable /*@Thrown*/ Environment parentEnv = this.parentEnv(element_0);
+                symbol_0 = parentEnv;
             }
-        }
-        final List<C> UNBOXED_select = select.asEcoreObjects(idResolver, C.class);
-        assert UNBOXED_select != null;
-        final @NonNull /*@Thrown*/ Environment inner = context.addElements((EList)UNBOXED_select);
-        final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
-        @Nullable /*@Thrown*/ Environment symbol_0;
-        if (hasFinalResult) {
-            symbol_0 = inner;
+            symbol_2 = symbol_0;
         }
         else {
-            final @Nullable /*@Thrown*/ Environment parentEnv = this.parentEnv(element_0);
-            symbol_0 = parentEnv;
+            final @NonNull /*@Thrown*/ OrderedSetValue BOXED_ownedCs = idResolver.createOrderedSetOfAll(ORD_CLSSid_C, ownedCs);
+            @NonNull /*@Thrown*/ OrderedSetValue.Accumulator accumulator = ValueUtil.createOrderedSetAccumulatorValue(ORD_CLSSid_C);
+            @Nullable Iterator<?> ITERATOR_x = BOXED_ownedCs.iterator();
+            @NonNull /*@Thrown*/ OrderedSetValue select;
+            while (true) {
+                if (!ITERATOR_x.hasNext()) {
+                    select = accumulator;
+                    break;
+                }
+                @Nullable /*@NonInvalid*/ C x = (C)ITERATOR_x.next();
+                /**
+                 * ownedCs->indexOf(x) < ownedCs->indexOf(child)
+                 */
+                final @NonNull /*@Thrown*/ IntegerValue indexOf = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedCs, x);
+                final @NonNull /*@Thrown*/ IntegerValue indexOf_0 = OrderedCollectionIndexOfOperation.INSTANCE.evaluate(BOXED_ownedCs, child);
+                final /*@Thrown*/ boolean lt = OclComparableLessThanOperation.INSTANCE.evaluate(evaluator, indexOf, indexOf_0).booleanValue();
+                //
+                if (lt == ValueUtil.TRUE_VALUE) {
+                    accumulator.add(x);
+                }
+            }
+            final List<C> UNBOXED_select = select.asEcoreObjects(idResolver, C.class);
+            assert UNBOXED_select != null;
+            final @NonNull /*@Thrown*/ Environment inner_0 = context.addElements((EList)UNBOXED_select);
+            final /*@Thrown*/ boolean hasFinalResult_0 = inner_0.hasFinalResult();
+            @Nullable /*@Thrown*/ Environment symbol_1;
+            if (hasFinalResult_0) {
+                symbol_1 = inner_0;
+            }
+            else {
+                final @Nullable /*@Thrown*/ Environment parentEnv_0 = this.parentEnv(element_0);
+                symbol_1 = parentEnv_0;
+            }
+            symbol_2 = symbol_1;
         }
-        return symbol_0;
+        return symbol_2;
     }
     
     /**
@@ -246,11 +309,28 @@ public class AbstractTargetLookupVisitor
     /**
      * visitTRoot(element : target::TRoot) : env::Environment[?]
      * 
-     * this.parentEnv(element)
+     * 
+     * let inner : env::Environment = context.addElements(ownedA)
+     * in
+     *   if inner.hasFinalResult()
+     *   then inner
+     *   else this.parentEnv(element)
+     *   endif
      */
     @Override
     public @Nullable /*@NonInvalid*/ Environment visitTRoot(final @NonNull /*@NonInvalid*/ TRoot element_4) {
-        final @Nullable /*@Thrown*/ Environment parentEnv = this.parentEnv(element_4);
-        return parentEnv;
+        final @Nullable /*@Thrown*/ List<A> ownedA = element_4.getOwnedA();
+        assert ownedA != null;
+        final @NonNull /*@Thrown*/ Environment inner = context.addElements((EList)ownedA);
+        final /*@Thrown*/ boolean hasFinalResult = inner.hasFinalResult();
+        @Nullable /*@Thrown*/ Environment symbol_0;
+        if (hasFinalResult) {
+            symbol_0 = inner;
+        }
+        else {
+            final @Nullable /*@Thrown*/ Environment parentEnv = this.parentEnv(element_4);
+            symbol_0 = parentEnv;
+        }
+        return symbol_0;
     }
 }

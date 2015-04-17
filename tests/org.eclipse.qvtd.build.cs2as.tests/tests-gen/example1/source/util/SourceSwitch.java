@@ -2,6 +2,7 @@
  */
 package example1.source.util;
 
+import example1.source.*;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
@@ -122,6 +123,20 @@ public class SourceSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case SourcePackage.PATH_NAME_CS: {
+				PathNameCS pathNameCS = (PathNameCS)theEObject;
+				T result = casePathNameCS(pathNameCS);
+				if (result == null) result = caseSElement(pathNameCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SourcePackage.PATH_ELEMENT_CS: {
+				PathElementCS pathElementCS = (PathElementCS)theEObject;
+				T result = casePathElementCS(pathElementCS);
+				if (result == null) result = caseSElement(pathElementCS);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -228,6 +243,36 @@ public class SourceSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSElement(SElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Path Name CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Path Name CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePathNameCS(PathNameCS object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Path Element CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Path Element CS</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePathElementCS(PathElementCS object) {
 		return null;
 	}
 

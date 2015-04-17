@@ -2,6 +2,7 @@
  */
 package example1.target.util;
 
+import example1.target.*;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
@@ -77,6 +78,8 @@ public class TargetSwitch<T> extends Switch<T> {
 			case TargetPackage.A: {
 				A a = (A)theEObject;
 				T result = caseA(a);
+				if (result == null) result = caseNamespace(a);
+				if (result == null) result = caseNamedElement(a);
 				if (result == null) result = caseVisitable(a);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -85,6 +88,8 @@ public class TargetSwitch<T> extends Switch<T> {
 				A1 a1 = (A1)theEObject;
 				T result = caseA1(a1);
 				if (result == null) result = caseA(a1);
+				if (result == null) result = caseNamespace(a1);
+				if (result == null) result = caseNamedElement(a1);
 				if (result == null) result = caseVisitable(a1);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -93,6 +98,8 @@ public class TargetSwitch<T> extends Switch<T> {
 				A2 a2 = (A2)theEObject;
 				T result = caseA2(a2);
 				if (result == null) result = caseA(a2);
+				if (result == null) result = caseNamespace(a2);
+				if (result == null) result = caseNamedElement(a2);
 				if (result == null) result = caseVisitable(a2);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -102,6 +109,8 @@ public class TargetSwitch<T> extends Switch<T> {
 				T result = caseA3(a3);
 				if (result == null) result = caseA2(a3);
 				if (result == null) result = caseA(a3);
+				if (result == null) result = caseNamespace(a3);
+				if (result == null) result = caseNamedElement(a3);
 				if (result == null) result = caseVisitable(a3);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -109,6 +118,7 @@ public class TargetSwitch<T> extends Switch<T> {
 			case TargetPackage.B: {
 				B b = (B)theEObject;
 				T result = caseB(b);
+				if (result == null) result = caseNamespace(b);
 				if (result == null) result = caseNamedElement(b);
 				if (result == null) result = caseVisitable(b);
 				if (result == null) result = defaultCase(theEObject);
@@ -117,6 +127,7 @@ public class TargetSwitch<T> extends Switch<T> {
 			case TargetPackage.C: {
 				C c = (C)theEObject;
 				T result = caseC(c);
+				if (result == null) result = caseNamespace(c);
 				if (result == null) result = caseNamedElement(c);
 				if (result == null) result = caseVisitable(c);
 				if (result == null) result = defaultCase(theEObject);
@@ -141,6 +152,14 @@ public class TargetSwitch<T> extends Switch<T> {
 				NamedElement namedElement = (NamedElement)theEObject;
 				T result = caseNamedElement(namedElement);
 				if (result == null) result = caseVisitable(namedElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TargetPackage.NAMESPACE: {
+				Namespace namespace = (Namespace)theEObject;
+				T result = caseNamespace(namespace);
+				if (result == null) result = caseNamedElement(namespace);
+				if (result == null) result = caseVisitable(namespace);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -286,6 +305,21 @@ public class TargetSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseNamedElement(NamedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Namespace</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Namespace</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNamespace(Namespace object) {
 		return null;
 	}
 

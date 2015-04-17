@@ -70,6 +70,11 @@ public abstract class AbstractNullVisitor<R, C>
 	}
 
 	@Override
+	public @Nullable R visitNamespace(@NonNull example1.target.Namespace object) {
+		return null;
+	}
+
+	@Override
 	public @Nullable R visitTRoot(@NonNull example1.target.TRoot object) {
 		return null;
 	}

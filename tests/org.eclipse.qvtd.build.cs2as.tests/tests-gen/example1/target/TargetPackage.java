@@ -154,7 +154,7 @@ public interface TargetPackage extends EPackage {
 	 * @see example1.target.impl.TargetPackageImpl#getVisitable()
 	 * @generated
 	 */
-	int VISITABLE = 9;
+	int VISITABLE = 10;
 
 	/**
 	 * The number of structural features of the '<em>Visitable</em>' class.
@@ -175,13 +175,86 @@ public interface TargetPackage extends EPackage {
 	int VISITABLE_OPERATION_COUNT = 0;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_ELEMENT__NAME = VISITABLE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Named Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_ELEMENT_FEATURE_COUNT = VISITABLE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Named Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMED_ELEMENT_OPERATION_COUNT = VISITABLE_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link example1.target.impl.NamespaceImpl <em>Namespace</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see example1.target.impl.NamespaceImpl
+	 * @see example1.target.impl.TargetPackageImpl#getNamespace()
+	 * @generated
+	 */
+	int NAMESPACE = 9;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMESPACE__NAME = NAMED_ELEMENT__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Namespace</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMESPACE_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Namespace</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NAMESPACE_OPERATION_COUNT = NAMED_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int A__NAME = NAMESPACE__NAME;
+
+	/**
 	 * The number of structural features of the '<em>A</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int A_FEATURE_COUNT = VISITABLE_FEATURE_COUNT + 0;
+	int A_FEATURE_COUNT = NAMESPACE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>A</em>' class.
@@ -190,7 +263,16 @@ public interface TargetPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int A_OPERATION_COUNT = VISITABLE_OPERATION_COUNT + 0;
+	int A_OPERATION_COUNT = NAMESPACE_OPERATION_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int A1__NAME = A__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owns B</b></em>' containment reference list.
@@ -220,6 +302,15 @@ public interface TargetPackage extends EPackage {
 	int A1_OPERATION_COUNT = A_OPERATION_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int A2__NAME = A__NAME;
+
+	/**
 	 * The feature id for the '<em><b>Owns C</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -245,6 +336,15 @@ public interface TargetPackage extends EPackage {
 	 * @ordered
 	 */
 	int A2_OPERATION_COUNT = A_OPERATION_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int A3__NAME = A2__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Owns C</b></em>' containment reference list.
@@ -280,34 +380,7 @@ public interface TargetPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int NAMED_ELEMENT__NAME = VISITABLE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Named Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_ELEMENT_FEATURE_COUNT = VISITABLE_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Named Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NAMED_ELEMENT_OPERATION_COUNT = VISITABLE_OPERATION_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int B__NAME = NAMED_ELEMENT__NAME;
+	int B__NAME = NAMESPACE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>To A1</b></em>' container reference.
@@ -316,7 +389,7 @@ public interface TargetPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int B__TO_A1 = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int B__TO_A1 = NAMESPACE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owns D</b></em>' containment reference.
@@ -325,7 +398,7 @@ public interface TargetPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int B__OWNS_D = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int B__OWNS_D = NAMESPACE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>B</em>' class.
@@ -334,7 +407,7 @@ public interface TargetPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int B_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int B_FEATURE_COUNT = NAMESPACE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>B</em>' class.
@@ -343,7 +416,7 @@ public interface TargetPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int B_OPERATION_COUNT = NAMED_ELEMENT_OPERATION_COUNT + 0;
+	int B_OPERATION_COUNT = NAMESPACE_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -352,7 +425,7 @@ public interface TargetPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int C__NAME = NAMED_ELEMENT__NAME;
+	int C__NAME = NAMESPACE__NAME;
 
 	/**
 	 * The feature id for the '<em><b>To A2</b></em>' container reference.
@@ -361,7 +434,7 @@ public interface TargetPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int C__TO_A2 = NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int C__TO_A2 = NAMESPACE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owns D</b></em>' containment reference.
@@ -370,7 +443,7 @@ public interface TargetPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int C__OWNS_D = NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int C__OWNS_D = NAMESPACE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>C</em>' class.
@@ -379,7 +452,7 @@ public interface TargetPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int C_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int C_FEATURE_COUNT = NAMESPACE_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>C</em>' class.
@@ -388,7 +461,7 @@ public interface TargetPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int C_OPERATION_COUNT = NAMED_ELEMENT_OPERATION_COUNT + 0;
+	int C_OPERATION_COUNT = NAMESPACE_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -724,6 +797,16 @@ public interface TargetPackage extends EPackage {
 	EAttribute getNamedElement_Name();
 
 	/**
+	 * Returns the meta object for class '{@link example1.target.Namespace <em>Namespace</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Namespace</em>'.
+	 * @see example1.target.Namespace
+	 * @generated
+	 */
+	EClass getNamespace();
+
+	/**
 	 * Returns the meta object for class '{@link example1.target.util.Visitable <em>Visitable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -950,6 +1033,16 @@ public interface TargetPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute NAMED_ELEMENT__NAME = eINSTANCE.getNamedElement_Name();
+
+		/**
+		 * The meta object literal for the '{@link example1.target.impl.NamespaceImpl <em>Namespace</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see example1.target.impl.NamespaceImpl
+		 * @see example1.target.impl.TargetPackageImpl#getNamespace()
+		 * @generated
+		 */
+		EClass NAMESPACE = eINSTANCE.getNamespace();
 
 		/**
 		 * The meta object literal for the '{@link example1.target.util.Visitable <em>Visitable</em>}' class.

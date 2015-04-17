@@ -2,6 +2,7 @@
  */
 package example1.source.util;
 
+import example1.source.*;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
@@ -99,6 +100,14 @@ public class SourceAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseSElement(SElement object) {
 				return createSElementAdapter();
+			}
+			@Override
+			public Adapter casePathNameCS(PathNameCS object) {
+				return createPathNameCSAdapter();
+			}
+			@Override
+			public Adapter casePathElementCS(PathElementCS object) {
+				return createPathElementCSAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -215,6 +224,34 @@ public class SourceAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link example1.source.PathNameCS <em>Path Name CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see example1.source.PathNameCS
+	 * @generated
+	 */
+	public Adapter createPathNameCSAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link example1.source.PathElementCS <em>Path Element CS</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see example1.source.PathElementCS
+	 * @generated
+	 */
+	public Adapter createPathElementCSAdapter() {
 		return null;
 	}
 

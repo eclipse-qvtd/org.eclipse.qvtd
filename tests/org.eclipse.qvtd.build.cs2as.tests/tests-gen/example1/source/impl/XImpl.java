@@ -28,6 +28,7 @@ import example1.source.Y;
  *   <li>{@link example1.source.impl.XImpl#getOwnsY <em>Owns Y</em>}</li>
  *   <li>{@link example1.source.impl.XImpl#isIsA1 <em>Is A1</em>}</li>
  *   <li>{@link example1.source.impl.XImpl#isIsA2 <em>Is A2</em>}</li>
+ *   <li>{@link example1.source.impl.XImpl#getName <em>Name</em>}</li>
  * </ul>
  *
  * @generated
@@ -82,6 +83,26 @@ public class XImpl extends SElementImpl implements X {
 	 * @ordered
 	 */
 	protected boolean isA2 = IS_A2_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -161,6 +182,27 @@ public class XImpl extends SElementImpl implements X {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SourcePackage.X__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -199,6 +241,8 @@ public class XImpl extends SElementImpl implements X {
 				return isIsA1();
 			case SourcePackage.X__IS_A2:
 				return isIsA2();
+			case SourcePackage.X__NAME:
+				return getName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -222,6 +266,9 @@ public class XImpl extends SElementImpl implements X {
 			case SourcePackage.X__IS_A2:
 				setIsA2((Boolean)newValue);
 				return;
+			case SourcePackage.X__NAME:
+				setName((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -243,6 +290,9 @@ public class XImpl extends SElementImpl implements X {
 			case SourcePackage.X__IS_A2:
 				setIsA2(IS_A2_EDEFAULT);
 				return;
+			case SourcePackage.X__NAME:
+				setName(NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -261,6 +311,8 @@ public class XImpl extends SElementImpl implements X {
 				return isA1 != IS_A1_EDEFAULT;
 			case SourcePackage.X__IS_A2:
 				return isA2 != IS_A2_EDEFAULT;
+			case SourcePackage.X__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -279,6 +331,8 @@ public class XImpl extends SElementImpl implements X {
 		result.append(isA1);
 		result.append(", isA2: ");
 		result.append(isA2);
+		result.append(", name: ");
+		result.append(name);
 		result.append(')');
 		return result.toString();
 	}

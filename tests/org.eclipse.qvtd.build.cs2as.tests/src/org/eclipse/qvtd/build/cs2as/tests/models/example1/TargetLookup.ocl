@@ -40,71 +40,109 @@ endpackage
 
 package target
 
-context Visitable 
-def: _lookupBs(env : env::Environment, bName : String) : OrderedSet(B) =
-  	
-	let foundBs = env.namedElements->selectByKind(B)->select(name = bName) 
-	in
-		if foundBs->isEmpty()
-		then if env.parentEnv.oclIsUndefined()
-			then OrderedSet{}
-			else _lookupBs(env.parentEnv, bName)
-			endif
+context Visitable
+
+def : _lookupNamespaces(env : env::Environment, path : source::PathElementCS, local : Boolean) : OrderedSet(Namespace) =
+	let foundNS = env.namedElements->selectByKind(Namespace)->select(name = path.name) 
+	in  if foundNS->isEmpty() and not (env.parentEnv = null) and not local 
+		then _lookupNamespaces(env.parentEnv, path, local)
+		else foundNS
+		endif
+
+def : _lookupNamespace(path : source::PathElementCS, local : Boolean) : Namespace =
+	let foundNS = _lookupNamespaces(env(), path, local)
+	in  if foundNS->isEmpty()
+		then null
+		else foundNS->first() -- LookupVisitor will report ambiguous result
+		endif
+		
+def : lookupNamespace(pathSeq : OrderedSet(source::PathElementCS)) : Namespace =
+	if pathSeq->size() = 1
+	then _lookupNamespace(pathSeq->first(), false)
+	else let namespace =  lookupNamespace(pathSeq->subOrderedSet(1,pathSeq->size()-1))
+			in	if	 namespace = null
+				then null
+				else namespace._lookupNamespace(pathSeq->last(), true)
+				endif
+	endif
+
+def: _lookupBs(env : env::Environment, path : source::PathElementCS, local : Boolean) : OrderedSet(B) =
+	let	foundBs = env.namedElements->selectByKind(B)->select(name = path.name)
+	in	if foundBs->isEmpty() and not (env.parentEnv = null) and not local 
+		then _lookupBs(env.parentEnv, path, local)
 		else foundBs
 		endif
-	
-def : _lookupB(bName : String) : B =
-	let foundBs = _lookupBs(env(), bName)
-	in
-		if foundBs->isEmpty()
+
+def : _lookupB(path : source::PathElementCS, local : Boolean) : B =
+	let	foundBs = _lookupBs(env(), path, local)
+	in	if foundBs->isEmpty()
 		then null
 		else foundBs->first() -- LookupVisitor will report ambiguous result
 		endif
+		
+def : lookupB(pathSeq : OrderedSet(source::PathElementCS)) : B = 
+	if pathSeq->size() = 1
+	then _lookupB(pathSeq->first(), false)
+	else	let	namespace = lookupNamespace(pathSeq->subOrderedSet(1,pathSeq->size()-1))
+			in	if namespace = null
+				then null
+				else namespace._lookupB(pathSeq->last(), true)
+				endif
+	endif
+
 	
-def: _lookupCs(env : env::Environment, cName : String) : OrderedSet(C) =
-	let foundCs = env.namedElements->selectByKind(C)->select(name = cName)
-	in
-		if foundCs->isEmpty()
-		then if env.parentEnv.oclIsUndefined()
-			then OrderedSet{}
-			else _lookupBs(env.parentEnv, cName)
-			endif
+def: _lookupCs(env : env::Environment, path : source::PathElementCS, local : Boolean) : OrderedSet(C) =
+	let	foundCs = env.namedElements->selectByKind(C)->select(name = path.name)
+	in	if foundCs->isEmpty() and not (env.parentEnv = null) and not local 
+		then _lookupBs(env.parentEnv, path, local)
 		else foundCs
 		endif
 
-def : _lookupC(bName : String) : C =
-	let foundCs = _lookupCs(env(), bName)
-	in
-		if foundCs->isEmpty()
+def : _lookupC(path : source::PathElementCS, local : Boolean) : C =
+	let	foundCs = _lookupCs(env(), path, local)
+	in	if foundCs->isEmpty()
 		then null
 		else foundCs->first() -- LookupVisitor will report ambiguous result
 		endif
 
+def : lookupC(pathSeq : OrderedSet(source::PathElementCS)) : C = 
+	if pathSeq->size() = 1
+	then _lookupC(pathSeq->first(), false)
+	else	let	namespace = lookupNamespace(pathSeq->subOrderedSet(1,pathSeq->size()-1)) -- FIXME use safe-navigator when
+			in	if namespace = null	-- FIXME this code is not being code-generated. Why ?
+				then null
+				else namespace._lookupC(pathSeq->last(), true)
+				endif
+	endif
+	
 context D
 def : lookupB(z : source::Z) : B =
-	if z.name = null
+	if z.refers = null
 	then null 
-	else _lookupB(z.name)
+	else lookupB(z.refers.path)
 	endif
 
 def : lookupC(z : source::Z) : C =
-	if z.name = null
+	if z.refers = null
 	then null 
-	else _lookupC(z.name)
+	else lookupC(z.refers.path)
 	endif
 
 
 context TRoot
 def : _env(child : ocl::OclElement) : env::Environment =
-	parentEnv()
+	parentEnv().nestedEnv()
+		.addElements(ownedA)
 	
 context A1
 def : _env(child : ocl::OclElement) : env::Environment =
 -- FIXME LookupVisitor doesn't handle any other operation called from this one. Inline here, for the time being
 --	_env_B(child)
 	let ownedBs = self.ownsB
-	in parentEnv().nestedEnv()
-		.addElements(ownedBs->select(x | ownedBs->indexOf(x) < ownedBs->indexOf(child)))
+	in if child = null -- child = null, then the lookup is a qualified one, hence, add all children
+		then parentEnv().nestedEnv().addElements(ownedBs)
+		else parentEnv().nestedEnv().addElements(ownedBs->select(x | ownedBs->indexOf(x) < ownedBs->indexOf(child)))
+		endif
 
 	
 --def : _env_B(child : ocl::OclElement) : env::Environment =
@@ -117,8 +155,10 @@ def : _env(child : ocl::OclElement) : env::Environment =
 -- FIXME LookupVisitor doesn't handle any other operation called from this one. Inline here, for the time being
 --	_env_C(child)
 	let ownedCs = self.ownsC
-	in parentEnv().nestedEnv()
-		.addElements(ownedCs->select(x| ownedCs->indexOf(x) < ownedCs->indexOf(child)))
+	in if child = null	-- child = null, then the lookup is a qualified one, hence, add all children
+		then parentEnv().nestedEnv().addElements(ownedCs) 
+		else parentEnv().nestedEnv().addElements(ownedCs->select(x| ownedCs->indexOf(x) < ownedCs->indexOf(child)))
+		endif
 
 	
 --def : _env_C(child : ocl::OclElement) : env::Environment =

@@ -13,7 +13,7 @@ package example1.source;
  * </p>
  * <ul>
  *   <li>{@link example1.source.Z#getToY <em>To Y</em>}</li>
- *   <li>{@link example1.source.Z#getName <em>Name</em>}</li>
+ *   <li>{@link example1.source.Z#getRefers <em>Refers</em>}</li>
  * </ul>
  *
  * @see example1.source.SourcePackage#getZ()
@@ -50,29 +50,29 @@ public interface Z extends SElement {
 	void setToY(Y value);
 
 	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>Refers</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Refers</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see example1.source.SourcePackage#getZ_Name()
-	 * @model
+	 * @return the value of the '<em>Refers</em>' containment reference.
+	 * @see #setRefers(PathNameCS)
+	 * @see example1.source.SourcePackage#getZ_Refers()
+	 * @model containment="true"
 	 * @generated
 	 */
-	String getName();
+	PathNameCS getRefers();
 
 	/**
-	 * Sets the value of the '{@link example1.source.Z#getName <em>Name</em>}' attribute.
+	 * Sets the value of the '{@link example1.source.Z#getRefers <em>Refers</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
+	 * @param value the new value of the '<em>Refers</em>' containment reference.
+	 * @see #getRefers()
 	 * @generated
 	 */
-	void setName(String value);
+	void setRefers(PathNameCS value);
 
 } // Z

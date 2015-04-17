@@ -3,7 +3,6 @@
 package example1.target.impl;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import example1.target.A;
 import example1.target.TargetPackage;
@@ -15,7 +14,7 @@ import example1.target.TargetPackage;
  *
  * @generated
  */
-public abstract class AImpl extends MinimalEObjectImpl.Container implements A {
+public abstract class AImpl extends NamespaceImpl implements A {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

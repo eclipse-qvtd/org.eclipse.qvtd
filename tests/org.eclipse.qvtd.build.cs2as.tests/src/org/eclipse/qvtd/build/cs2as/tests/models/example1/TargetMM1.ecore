@@ -6,7 +6,7 @@
     <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
     <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL/Pivot"/>
   </eAnnotations>
-  <eClassifiers xsi:type="ecore:EClass" name="A" abstract="true" eSuperTypes="#//Visitable"/>
+  <eClassifiers xsi:type="ecore:EClass" name="A" abstract="true" eSuperTypes="#//Namespace"/>
   <eClassifiers xsi:type="ecore:EClass" name="A1" eSuperTypes="#//A">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownsB" upperBound="-1"
         eType="#//B" containment="true" eOpposite="#//B/toA1"/>
@@ -16,12 +16,12 @@
         eType="#//C" containment="true" eOpposite="#//C/toA2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="A3" eSuperTypes="#//A2"/>
-  <eClassifiers xsi:type="ecore:EClass" name="B" eSuperTypes="#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="B" eSuperTypes="#//Namespace">
     <eStructuralFeatures xsi:type="ecore:EReference" name="toA1" eType="#//A1" eOpposite="#//A1/ownsB"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownsD" eType="#//D" containment="true"
         eOpposite="#//D/toB"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="C" eSuperTypes="#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="C" eSuperTypes="#//Namespace">
     <eStructuralFeatures xsi:type="ecore:EReference" name="toA2" eType="#//A2" eOpposite="#//A2/ownsC"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownsD" eType="#//D" containment="true"
         eOpposite="#//D/toC"/>
@@ -40,6 +40,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="NamedElement" eSuperTypes="#//Visitable">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Namespace" eSuperTypes="#//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Visitable" instanceClassName="example1.target.util.Visitable"
       abstract="true" interface="true"/>
 </ecore:EPackage>

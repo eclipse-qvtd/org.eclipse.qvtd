@@ -2,6 +2,7 @@
  */
 package example1.target.util;
 
+import example1.target.*;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
@@ -109,6 +110,10 @@ public class TargetAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseNamedElement(NamedElement object) {
 				return createNamedElementAdapter();
+			}
+			@Override
+			public Adapter caseNamespace(Namespace object) {
+				return createNamespaceAdapter();
 			}
 			@Override
 			public Adapter caseVisitable(Visitable object) {
@@ -257,6 +262,20 @@ public class TargetAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNamedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link example1.target.Namespace <em>Namespace</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see example1.target.Namespace
+	 * @generated
+	 */
+	public Adapter createNamespaceAdapter() {
 		return null;
 	}
 

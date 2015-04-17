@@ -92,6 +92,11 @@ public abstract class AbstractDelegatingVisitor<R, C, D extends Visitor<R>>
 	}
 
 	@Override
+	public @Nullable R visitNamespace(@NonNull example1.target.Namespace object) {
+		return delegate.visitNamespace(object);
+	}
+
+	@Override
 	public @Nullable R visitTRoot(@NonNull example1.target.TRoot object) {
 		return delegate.visitTRoot(object);
 	}

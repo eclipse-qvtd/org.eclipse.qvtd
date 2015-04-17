@@ -13,13 +13,19 @@
   <eCoreContainemntTree:Node name="Y2" parent="/0" superTypes="/1 /6">
     <element href="SourceMM1.ecore#//Y2"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="Z" parent="/1" superTypes="/6">
+  <eCoreContainemntTree:Node name="Z" parent="/1" children="/7" superTypes="/6">
     <element href="SourceMM1.ecore#//Z"/>
   </eCoreContainemntTree:Node>
   <eCoreContainemntTree:Node name="SRoot" children="/0" superTypes="/6">
     <element href="SourceMM1.ecore#//SRoot"/>
   </eCoreContainemntTree:Node>
-  <eCoreContainemntTree:Node name="SElement" subTypes="/0 /5 /1 /2 /3 /4">
+  <eCoreContainemntTree:Node name="SElement" subTypes="/0 /5 /1 /2 /3 /4 /7 /8">
     <element href="SourceMM1.ecore#//SElement"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="PathNameCS" parent="/4" children="/8" superTypes="/6">
+    <element href="SourceMM1.ecore#//PathNameCS"/>
+  </eCoreContainemntTree:Node>
+  <eCoreContainemntTree:Node name="PathElementCS" parent="/7" superTypes="/6">
+    <element href="SourceMM1.ecore#//PathElementCS"/>
   </eCoreContainemntTree:Node>
 </xmi:XMI>

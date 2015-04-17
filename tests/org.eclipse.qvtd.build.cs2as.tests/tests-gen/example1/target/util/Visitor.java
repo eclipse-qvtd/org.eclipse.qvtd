@@ -43,5 +43,6 @@ public interface Visitor<R>
 	@Nullable R visitC(@NonNull example1.target.C object);
 	@Nullable R visitD(@NonNull example1.target.D object);
 	@Nullable R visitNamedElement(@NonNull example1.target.NamedElement object);
+	@Nullable R visitNamespace(@NonNull example1.target.Namespace object);
 	@Nullable R visitTRoot(@NonNull example1.target.TRoot object);
 }

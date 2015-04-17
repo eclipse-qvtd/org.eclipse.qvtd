@@ -31,7 +31,7 @@ import example1.target.util.Visitor;
  *
  * @generated
  */
-public class BImpl extends NamedElementImpl implements B {
+public class BImpl extends NamespaceImpl implements B {
 	/**
 	 * The cached value of the '{@link #getOwnsD() <em>Owns D</em>}' containment reference.
 	 * <!-- begin-user-doc -->

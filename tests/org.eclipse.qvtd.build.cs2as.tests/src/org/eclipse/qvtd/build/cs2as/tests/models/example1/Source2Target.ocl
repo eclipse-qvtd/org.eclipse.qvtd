@@ -20,13 +20,16 @@ context X
 def : ast() : target::A =
 	if disambiguatesToA1()
 	then target::A1 {
+		name = name,
 		ownsB = ownsY.oclAsType(Y1).ast()
 	}
 	else if disambiguatesToA2() 
 		then  target::A2 {
+			name = name,
 			ownsC = ownsY.oclAsType(Y2).ast()
 		}
 		else target::A3 {
+			name = name,
 			ownsC = ownsY.oclAsType(Y2).ast()
 		}
 	endif endif
@@ -54,12 +57,10 @@ def : ast() : target::D =
 	if toY.oclIsKindOf(source::Y1)
 	then target::D {
 		toA = toY.oclAsType(source::Y1).ast().toA1,
-		name = name,
 		refsB = ast().lookupB(self)
 	}
 	else target::D {
 		toA = toY.oclAsType(source::Y2).ast().toA2,
-		name = name,
 		refsC = ast().lookupC(self)
 	}
 	endif

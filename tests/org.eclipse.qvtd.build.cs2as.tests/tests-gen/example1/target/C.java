@@ -20,7 +20,7 @@ package example1.target;
  * @model
  * @generated
  */
-public interface C extends NamedElement {
+public interface C extends Namespace {
 	/**
 	 * Returns the value of the '<em><b>To A2</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link example1.target.A2#getOwnsC <em>Owns C</em>}'.

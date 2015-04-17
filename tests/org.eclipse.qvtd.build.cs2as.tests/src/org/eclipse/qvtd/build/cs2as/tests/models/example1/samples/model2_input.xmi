@@ -5,30 +5,38 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:source="http://cs2as/tests/example1/sourceMM/1.0"
     xsi:schemaLocation="http://cs2as/tests/example1/sourceMM/1.0 ../SourceMM1.ecore">
-  <ownedX isA1="true">
+  <ownedX isA1="true"
+      name="X1">
     <ownsY xsi:type="source:Y1"
         name="Y1-a">
-      <ownsZ
-          name=""/>
+      <ownsZ/>
     </ownsY>
     <ownsY xsi:type="source:Y1"
         name="Y1-b">
-      <ownsZ
-          name="Y1-a"/>
+      <ownsZ>
+        <refers>
+          <path
+              name="Y1-a"/>
+        </refers>
+      </ownsZ>
     </ownsY>
   </ownedX>
-  <ownedX isA2="true">
+  <ownedX isA2="true"
+      name="X2">
     <ownsY xsi:type="source:Y2"
         name="Y2-a">
-      <ownsZ
-          name=""/>
+      <ownsZ/>
     </ownsY>
   </ownedX>
-  <ownedX>
+  <ownedX name="X3">
     <ownsY xsi:type="source:Y2"
         name="Y3-a">
-      <ownsZ
-          name="Y3-c"/>
+      <ownsZ>
+        <refers>
+          <path
+              name="Y3-c"/>
+        </refers>
+      </ownsZ>
     </ownsY>
     <ownsY xsi:type="source:Y2"
         name="Y3-b">
@@ -36,8 +44,12 @@
     </ownsY>
     <ownsY xsi:type="source:Y2"
         name="Y3-c">
-      <ownsZ
-          name="Y3-a"/>
+      <ownsZ>
+        <refers>
+          <path
+              name="Y3-a"/>
+        </refers>
+      </ownsZ>
     </ownsY>
   </ownedX>
 </source:SRoot>

@@ -76,6 +76,24 @@ public interface SourceFactory extends EFactory {
 	SElement createSElement();
 
 	/**
+	 * Returns a new object of class '<em>Path Name CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Path Name CS</em>'.
+	 * @generated
+	 */
+	PathNameCS createPathNameCS();
+
+	/**
+	 * Returns a new object of class '<em>Path Element CS</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Path Element CS</em>'.
+	 * @generated
+	 */
+	PathElementCS createPathElementCS();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -31,7 +31,7 @@ import example1.target.util.Visitor;
  *
  * @generated
  */
-public class CImpl extends NamedElementImpl implements C {
+public class CImpl extends NamespaceImpl implements C {
 	/**
 	 * The cached value of the '{@link #getOwnsD() <em>Owns D</em>}' containment reference.
 	 * <!-- begin-user-doc -->

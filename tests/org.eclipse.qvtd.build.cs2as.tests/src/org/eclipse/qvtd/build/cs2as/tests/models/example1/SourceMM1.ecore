@@ -6,6 +6,7 @@
         eType="#//Y" containment="true" eOpposite="#//Y/toX"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isA1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isA2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Y" abstract="true" eSuperTypes="#//SElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownsZ" eType="#//Z" containment="true"
@@ -17,7 +18,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="Y2" eSuperTypes="#//Y"/>
   <eClassifiers xsi:type="ecore:EClass" name="Z" eSuperTypes="#//SElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="toY" eType="#//Y" eOpposite="#//Y/ownsZ"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refers" eType="#//PathNameCS"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SRoot" eSuperTypes="#//SElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedX" upperBound="-1"
@@ -25,5 +27,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="ast" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PathNameCS" eSuperTypes="#//SElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="path" lowerBound="1" upperBound="-1"
+        eType="#//PathElementCS" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PathElementCS" eSuperTypes="#//SElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>
