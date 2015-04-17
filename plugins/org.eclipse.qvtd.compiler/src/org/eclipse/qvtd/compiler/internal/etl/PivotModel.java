@@ -39,6 +39,7 @@ import org.eclipse.ocl.pivot.internal.manager.MetamodelManagerInternal;
 import org.eclipse.ocl.pivot.utilities.EnvironmentFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
+import org.eclipse.qvtd.pivot.schedule.Schedule;
 
 /**
  * The Pivot Model extends the EmfModel to provide access to the utilities
@@ -201,7 +202,7 @@ public class PivotModel extends EmfModel {
 	    		}
 			}
 		}
-		throw new Exception("The QVTi model does not have a Transformation element.");
+		throw new Exception("The QVTd model does not have a Transformation element.");
 	}
 	
 	
@@ -222,5 +223,15 @@ public class PivotModel extends EmfModel {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+
+	public Schedule getSchedule() throws Exception {
+		for (EObject eContent : modelImpl.getContents()) {
+			if (eContent instanceof Schedule) {
+	    		return (Schedule) eContent;
+			}
+		}
+		throw new Exception("The QVTs model does not have a Schedule element.");
 	}
 }
