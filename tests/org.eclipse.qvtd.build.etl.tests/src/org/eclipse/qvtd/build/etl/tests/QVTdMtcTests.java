@@ -31,6 +31,9 @@ public class QVTdMtcTests extends LoadTestCase {
 	
 	private static URI TESTS_BASE_URI = URI.createPlatformResourceURI("/org.eclipse.qvtd.build.etl.tests/src/org/eclipse/qvtd/build/etl/tests", true);
 	
+	/** The Constant CREATE_GRAPHML. */
+	private boolean createGraphml = false;
+	
 	protected class MyQVT extends OCL
 	{
 		public MyQVT(@NonNull QVTiEnvironmentFactory environmentFactory) {
@@ -158,7 +161,8 @@ public class QVTdMtcTests extends LoadTestCase {
     	
     	URI testBaseURI = TESTS_BASE_URI.appendSegment("UpperToLower");;
     	MtcBroker mtc = new MtcBroker(testBaseURI, "UpperToLower.qvtcas", myQVT.getEnvironmentFactory(), TestsXMLUtil.defaultSavingOptions);
-    	mtc.execute();
+    	//mtc.execute();
+    	mtc.executeQvtsToGraphML();
     	//mtc.executeScheduling(false);
     	assertNoValidationErrors("QVTu validation", mtc.getuModel().getRooteObject());
     	assertNoValidationErrors("QVTm validation", mtc.getmModel().getRooteObject());

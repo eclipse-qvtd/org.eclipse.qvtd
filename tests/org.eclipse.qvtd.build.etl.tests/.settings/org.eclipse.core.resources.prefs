@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//schema/graphml-structure.xsd=UTF8
 encoding//schema/graphml.xsd=UTF8
+encoding//schema/ygraphics.xsd=UTF8
 encoding//schema/ygraphml.xsd=UTF8
 encoding/<project>=UTF-8
