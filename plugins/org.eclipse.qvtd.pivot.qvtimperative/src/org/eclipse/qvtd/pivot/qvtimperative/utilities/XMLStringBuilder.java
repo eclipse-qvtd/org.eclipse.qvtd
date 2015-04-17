@@ -52,6 +52,21 @@ public class XMLStringBuilder
 		s.append(">\n");
 		currentTag = null;
 	}
+	
+	// Append value always pops!
+	public void appendValueAndPopTag(@Nullable String value) {
+		if (currentTag != null) {
+			s.append(">");
+			currentTag = null;
+		}
+		if (value == null)
+			value = "";
+		s.append(value);
+		String topTag = tagStack.pop();
+		s.append("</");
+		s.append(topTag);
+		s.append(">\n");
+	}
 
 	public void popTag() {
 		String topTag = tagStack.pop();
