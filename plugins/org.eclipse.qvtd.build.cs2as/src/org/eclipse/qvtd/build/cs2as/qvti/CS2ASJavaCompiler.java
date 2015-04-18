@@ -263,14 +263,12 @@ public class CS2ASJavaCompiler {
 		}
 		
 		@Override
-		public @NonNull CGValuedElement visitOperationCallExp(@NonNull OperationCallExp asOperationCallExp) {
+		protected @NonNull CGValuedElement generateOperationCallExp(@Nullable CGValuedElement cgSource, @NonNull OperationCallExp asOperationCallExp) {
 			
 			Operation asOperation = asOperationCallExp.getReferredOperation();
 			if (isLookupOp(asOperation)) {
 				CGLookupCallExp cgLookupCallExp = CS2ASCGFactory.eINSTANCE.createCGLookupCallExp();				
 				setAst(cgLookupCallExp, asOperationCallExp);
-				OCLExpression expSource = asOperationCallExp.getOwnedSource();
-				CGValuedElement cgSource = expSource != null ? doVisit(CGValuedElement.class, expSource) : null;
 				cgLookupCallExp.setSource(cgSource);
 				for (OCLExpression arg :  asOperationCallExp.getOwnedArguments()) {
 					CGValuedElement cgArg = doVisit(CGValuedElement.class, arg);
@@ -279,7 +277,7 @@ public class CS2ASJavaCompiler {
 				cgLookupCallExp.setReferredOperation(asOperation);
 				return  cgLookupCallExp;
 			}
-			return super.visitOperationCallExp(asOperationCallExp);
+			return super.generateOperationCallExp(cgSource, asOperationCallExp);
 		}
 		
 		protected boolean isLookupOp(Operation op) {
