@@ -150,30 +150,24 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     }
     
     /**
-     * target::Visitable::lookupNamespace(pathSeq : OrderedSet(source::PathElementCS)) : target::Namespace
+     * target::Visitable::lookupNamespace(pathSeq : OrderedSet(source::PathElementCS)) : target::Namespace[?]
      * 
      * 
      * if pathSeq->size() = 1
      * then
      *   _lookupNamespace(pathSeq->first(), false)
      * else
-     *   let
-     *     namespace : Namespace = lookupNamespace(
-     *       pathSeq->subOrderedSet(1, pathSeq->size() - 1))
-     *   in
-     *     if namespace = null
-     *     then null
-     *     else
-     *       namespace._lookupNamespace(pathSeq->last(), true)
-     *     endif
+     *   lookupNamespace(
+     *     pathSeq->subOrderedSet(1, pathSeq->size() - 1))
+     *   ?._lookupNamespace(pathSeq->last(), true)
      * endif
      */
-    public /*@NonNull*/ /*@NonInvalid*/ Namespace lookupNamespace(final /*@NonNull*/ /*@NonInvalid*/ Visitable self_0, final /*@NonNull*/ /*@NonInvalid*/ List<PathElementCS> pathSeq) {
+    public /*@Nullable*/ /*@NonInvalid*/ Namespace lookupNamespace(final /*@NonNull*/ /*@NonInvalid*/ Visitable self_0, final /*@NonNull*/ /*@NonInvalid*/ List<PathElementCS> pathSeq) {
         final /*@NonNull*/ /*@NonInvalid*/ IdResolver idResolver = evaluator.getIdResolver();
         final /*@NonNull*/ /*@NonInvalid*/ OrderedSetValue BOXED_pathSeq_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, pathSeq);
         final /*@NonNull*/ /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_pathSeq_0);
         final /*@Thrown*/ boolean eq = size.equals(INT_1);
-        /*@NonNull*/ /*@Thrown*/ Namespace symbol_0;
+        /*@Nullable*/ /*@Thrown*/ Namespace symbol_1;
         if (eq) {
             final /*@Nullable*/ /*@Thrown*/ PathElementCS first = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_pathSeq_0);
             LookupEnvironment _lookupEnv = new org.eclipse.qvtd.build.cs2as.tests.models.example1.java.LookupEnvironment(evaluator,first, ValueUtil.FALSE_VALUE);
@@ -185,27 +179,35 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
             } else {
                 handleLookupError(pathSeq,first);
             };
-            symbol_0 = _lookupNamespace;
+            symbol_1 = _lookupNamespace;
         }
         else {
             final /*@NonNull*/ /*@Thrown*/ IntegerValue diff = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1);
             final /*@NonNull*/ /*@Thrown*/ OrderedSetValue subOrderedSet = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_pathSeq_0, INT_1, diff);
             final List<PathElementCS> UNBOXED_subOrderedSet = subOrderedSet.asEcoreObjects(idResolver, PathElementCS.class);
             assert UNBOXED_subOrderedSet != null;
-            final /*@NonNull*/ /*@Thrown*/ Namespace namespace = this.lookupNamespace(self_0, UNBOXED_subOrderedSet);
-            final /*@Nullable*/ /*@Thrown*/ PathElementCS last = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_pathSeq_0);
-            LookupEnvironment _lookupEnv_0 = new org.eclipse.qvtd.build.cs2as.tests.models.example1.java.LookupEnvironment(evaluator,last, ValueUtil.TRUE_VALUE);
-            TargetLookupVisitor _lookupVisitor_0 = new org.eclipse.qvtd.build.cs2as.tests.models.example1.java.TargetLookupVisitor(_lookupEnv_0);
-            EList<NamedElement> _lookupResult_0 = namespace.accept(_lookupVisitor_0).getNamedElements();
-            Namespace _lookupNamespace_0 = null;
-            if (_lookupResult_0.size() == 1) {
-                _lookupNamespace_0 = (Namespace)_lookupResult_0.get(0);
-            } else {
-                handleLookupError(pathSeq,last);
-            };
-            symbol_0 = _lookupNamespace_0;
+            final /*@Nullable*/ /*@Thrown*/ Namespace lookupNamespace = this.lookupNamespace(self_0, UNBOXED_subOrderedSet);
+            final /*@Thrown*/ boolean symbol_0 = lookupNamespace == null;
+            /*@Nullable*/ /*@Thrown*/ Namespace safe__lookupNamespace;
+            if (symbol_0) {
+                safe__lookupNamespace = null;
+            }
+            else {
+                final /*@Nullable*/ /*@Thrown*/ PathElementCS last = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_pathSeq_0);
+                LookupEnvironment _lookupEnv_0 = new org.eclipse.qvtd.build.cs2as.tests.models.example1.java.LookupEnvironment(evaluator,last, ValueUtil.TRUE_VALUE);
+                TargetLookupVisitor _lookupVisitor_0 = new org.eclipse.qvtd.build.cs2as.tests.models.example1.java.TargetLookupVisitor(_lookupEnv_0);
+                EList<NamedElement> _lookupResult_0 = lookupNamespace.accept(_lookupVisitor_0).getNamedElements();
+                Namespace _lookupNamespace_0 = null;
+                if (_lookupResult_0.size() == 1) {
+                    _lookupNamespace_0 = (Namespace)_lookupResult_0.get(0);
+                } else {
+                    handleLookupError(pathSeq,last);
+                };
+                safe__lookupNamespace = _lookupNamespace_0;
+            }
+            symbol_1 = safe__lookupNamespace;
         }
-        return symbol_0;
+        return symbol_1;
     }
     
     /**
@@ -1228,9 +1230,9 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@Nullable*/ /*@Thrown*/ D self_1 = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
         final /*@Nullable*/ /*@Thrown*/ PathNameCS refers = z_2.getRefers();
         final /*@Thrown*/ boolean eq = refers == null;
-        /*@Nullable*/ /*@Thrown*/ C symbol_1;
+        /*@Nullable*/ /*@Thrown*/ C symbol_2;
         if (eq) {
-            symbol_1 = null;
+            symbol_2 = null;
         }
         else {
             if (refers == null) {
@@ -1241,7 +1243,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
             final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_pathSeq_0_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, pathSeq_0);
             final /*@NonNull*/ /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_pathSeq_0_0);
             final /*@Thrown*/ boolean eq_0 = size.equals(INT_1);
-            /*@NonNull*/ /*@Thrown*/ C symbol_0;
+            /*@Nullable*/ /*@Thrown*/ C symbol_1;
             if (eq_0) {
                 final /*@Nullable*/ /*@Thrown*/ PathElementCS first = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_pathSeq_0_0);
                 LookupEnvironment _lookupEnv = new org.eclipse.qvtd.build.cs2as.tests.models.example1.java.LookupEnvironment(evaluator,first, ValueUtil.FALSE_VALUE);
@@ -1253,32 +1255,40 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
                 } else {
                     handleLookupError(z_2,first);
                 };
-                symbol_0 = _lookupC;
+                symbol_1 = _lookupC;
             }
             else {
                 if (self_1 == null) {
-                    throwNull(z_2, "Null source for \'target::Visitable::lookupNamespace(OrderedSet(source::PathElementCS)) : target::Namespace\'");
+                    throwNull(z_2, "Null source for \'target::Visitable::lookupNamespace(OrderedSet(source::PathElementCS)) : target::Namespace[?]\'");
                 }
                 final /*@NonNull*/ /*@Thrown*/ IntegerValue diff = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1);
                 final /*@NonNull*/ /*@Thrown*/ OrderedSetValue subOrderedSet = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_pathSeq_0_0, INT_1, diff);
                 final List<PathElementCS> UNBOXED_subOrderedSet = subOrderedSet.asEcoreObjects(idResolver, PathElementCS.class);
                 assert UNBOXED_subOrderedSet != null;
-                final /*@NonNull*/ /*@Thrown*/ Namespace namespace = this.lookupNamespace(self_1, UNBOXED_subOrderedSet);
-                final /*@Nullable*/ /*@Thrown*/ PathElementCS last = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_pathSeq_0_0);
-                LookupEnvironment _lookupEnv_0 = new org.eclipse.qvtd.build.cs2as.tests.models.example1.java.LookupEnvironment(evaluator,last, ValueUtil.TRUE_VALUE);
-                TargetLookupVisitor _lookupVisitor_0 = new org.eclipse.qvtd.build.cs2as.tests.models.example1.java.TargetLookupVisitor(_lookupEnv_0);
-                EList<NamedElement> _lookupResult_0 = namespace.accept(_lookupVisitor_0).getNamedElements();
-                C _lookupC_0 = null;
-                if (_lookupResult_0.size() == 1) {
-                    _lookupC_0 = (C)_lookupResult_0.get(0);
-                } else {
-                    handleLookupError(z_2,last);
-                };
-                symbol_0 = _lookupC_0;
+                final /*@Nullable*/ /*@Thrown*/ Namespace lookupNamespace = this.lookupNamespace(self_1, UNBOXED_subOrderedSet);
+                final /*@Thrown*/ boolean symbol_0 = lookupNamespace == null;
+                /*@Nullable*/ /*@Thrown*/ C safe__lookupC;
+                if (symbol_0) {
+                    safe__lookupC = null;
+                }
+                else {
+                    final /*@Nullable*/ /*@Thrown*/ PathElementCS last = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_pathSeq_0_0);
+                    LookupEnvironment _lookupEnv_0 = new org.eclipse.qvtd.build.cs2as.tests.models.example1.java.LookupEnvironment(evaluator,last, ValueUtil.TRUE_VALUE);
+                    TargetLookupVisitor _lookupVisitor_0 = new org.eclipse.qvtd.build.cs2as.tests.models.example1.java.TargetLookupVisitor(_lookupEnv_0);
+                    EList<NamedElement> _lookupResult_0 = lookupNamespace.accept(_lookupVisitor_0).getNamedElements();
+                    C _lookupC_0 = null;
+                    if (_lookupResult_0.size() == 1) {
+                        _lookupC_0 = (C)_lookupResult_0.get(0);
+                    } else {
+                        handleLookupError(z_2,last);
+                    };
+                    safe__lookupC = _lookupC_0;
+                }
+                symbol_1 = safe__lookupC;
             }
-            symbol_1 = symbol_0;
+            symbol_2 = symbol_1;
         }
-        oclAsType.setRefsC(symbol_1);
+        oclAsType.setRefsC(symbol_2);
         // mapping statements
         return true;
     }
@@ -1378,9 +1388,9 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
         final /*@Nullable*/ /*@Thrown*/ D self_1 = (D)OclAnyOclAsTypeOperation.INSTANCE.evaluate(evaluator, ast, TYP_target_c_c_D_0);
         final /*@Nullable*/ /*@Thrown*/ PathNameCS refers = z_4.getRefers();
         final /*@Thrown*/ boolean eq = refers == null;
-        /*@Nullable*/ /*@Thrown*/ B symbol_1;
+        /*@Nullable*/ /*@Thrown*/ B symbol_2;
         if (eq) {
-            symbol_1 = null;
+            symbol_2 = null;
         }
         else {
             if (refers == null) {
@@ -1391,7 +1401,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
             final /*@NonNull*/ /*@Thrown*/ OrderedSetValue BOXED_pathSeq_0_0 = idResolver.createOrderedSetOfAll(ORD_CLSSid_PathElementCS, pathSeq_0);
             final /*@NonNull*/ /*@Thrown*/ IntegerValue size = CollectionSizeOperation.INSTANCE.evaluate(BOXED_pathSeq_0_0);
             final /*@Thrown*/ boolean eq_0 = size.equals(INT_1);
-            /*@NonNull*/ /*@Thrown*/ B symbol_0;
+            /*@Nullable*/ /*@Thrown*/ B symbol_1;
             if (eq_0) {
                 final /*@Nullable*/ /*@Thrown*/ PathElementCS first = (PathElementCS)OrderedCollectionFirstOperation.INSTANCE.evaluate(BOXED_pathSeq_0_0);
                 LookupEnvironment _lookupEnv = new org.eclipse.qvtd.build.cs2as.tests.models.example1.java.LookupEnvironment(evaluator,first, ValueUtil.FALSE_VALUE);
@@ -1403,32 +1413,40 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
                 } else {
                     handleLookupError(z_4,first);
                 };
-                symbol_0 = _lookupB;
+                symbol_1 = _lookupB;
             }
             else {
                 if (self_1 == null) {
-                    throwNull(z_4, "Null source for \'target::Visitable::lookupNamespace(OrderedSet(source::PathElementCS)) : target::Namespace\'");
+                    throwNull(z_4, "Null source for \'target::Visitable::lookupNamespace(OrderedSet(source::PathElementCS)) : target::Namespace[?]\'");
                 }
                 final /*@NonNull*/ /*@Thrown*/ IntegerValue diff = (IntegerValue)NumericMinusOperation.INSTANCE.evaluate(size, INT_1);
                 final /*@NonNull*/ /*@Thrown*/ OrderedSetValue subOrderedSet = OrderedSetSubOrderedSetOperation.INSTANCE.evaluate(BOXED_pathSeq_0_0, INT_1, diff);
                 final List<PathElementCS> UNBOXED_subOrderedSet = subOrderedSet.asEcoreObjects(idResolver, PathElementCS.class);
                 assert UNBOXED_subOrderedSet != null;
-                final /*@NonNull*/ /*@Thrown*/ Namespace namespace = this.lookupNamespace(self_1, UNBOXED_subOrderedSet);
-                final /*@Nullable*/ /*@Thrown*/ PathElementCS last = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_pathSeq_0_0);
-                LookupEnvironment _lookupEnv_0 = new org.eclipse.qvtd.build.cs2as.tests.models.example1.java.LookupEnvironment(evaluator,last, ValueUtil.TRUE_VALUE);
-                TargetLookupVisitor _lookupVisitor_0 = new org.eclipse.qvtd.build.cs2as.tests.models.example1.java.TargetLookupVisitor(_lookupEnv_0);
-                EList<NamedElement> _lookupResult_0 = namespace.accept(_lookupVisitor_0).getNamedElements();
-                B _lookupB_0 = null;
-                if (_lookupResult_0.size() == 1) {
-                    _lookupB_0 = (B)_lookupResult_0.get(0);
-                } else {
-                    handleLookupError(z_4,last);
-                };
-                symbol_0 = _lookupB_0;
+                final /*@Nullable*/ /*@Thrown*/ Namespace lookupNamespace = this.lookupNamespace(self_1, UNBOXED_subOrderedSet);
+                final /*@Thrown*/ boolean symbol_0 = lookupNamespace == null;
+                /*@Nullable*/ /*@Thrown*/ B safe__lookupB;
+                if (symbol_0) {
+                    safe__lookupB = null;
+                }
+                else {
+                    final /*@Nullable*/ /*@Thrown*/ PathElementCS last = (PathElementCS)OrderedCollectionLastOperation.INSTANCE.evaluate(BOXED_pathSeq_0_0);
+                    LookupEnvironment _lookupEnv_0 = new org.eclipse.qvtd.build.cs2as.tests.models.example1.java.LookupEnvironment(evaluator,last, ValueUtil.TRUE_VALUE);
+                    TargetLookupVisitor _lookupVisitor_0 = new org.eclipse.qvtd.build.cs2as.tests.models.example1.java.TargetLookupVisitor(_lookupEnv_0);
+                    EList<NamedElement> _lookupResult_0 = lookupNamespace.accept(_lookupVisitor_0).getNamedElements();
+                    B _lookupB_0 = null;
+                    if (_lookupResult_0.size() == 1) {
+                        _lookupB_0 = (B)_lookupResult_0.get(0);
+                    } else {
+                        handleLookupError(z_4,last);
+                    };
+                    safe__lookupB = _lookupB_0;
+                }
+                symbol_1 = safe__lookupB;
             }
-            symbol_1 = symbol_0;
+            symbol_2 = symbol_1;
         }
-        oclAsType.setRefsB(symbol_1);
+        oclAsType.setRefsB(symbol_2);
         // mapping statements
         return true;
     }

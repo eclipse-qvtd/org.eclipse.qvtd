@@ -49,21 +49,17 @@ def : _lookupNamespaces(env : env::Environment, path : source::PathElementCS, lo
 		else foundNS
 		endif
 
-def : _lookupNamespace(path : source::PathElementCS, local : Boolean) : Namespace =
+def : _lookupNamespace(path : source::PathElementCS, local : Boolean) : Namespace[?] =
 	let foundNS = _lookupNamespaces(env(), path, local)
 	in  if foundNS->isEmpty()
 		then null
 		else foundNS->first() -- LookupVisitor will report ambiguous result
 		endif
 		
-def : lookupNamespace(pathSeq : OrderedSet(source::PathElementCS)) : Namespace =
+def : lookupNamespace(pathSeq : OrderedSet(source::PathElementCS)) : Namespace[?] =
 	if pathSeq->size() = 1
 	then _lookupNamespace(pathSeq->first(), false)
-	else let namespace =  lookupNamespace(pathSeq->subOrderedSet(1,pathSeq->size()-1))
-			in	if	 namespace = null
-				then null
-				else namespace._lookupNamespace(pathSeq->last(), true)
-				endif
+	else lookupNamespace(pathSeq->subOrderedSet(1,pathSeq->size()-1))?._lookupNamespace(pathSeq->last(), true)
 	endif
 
 def: _lookupBs(env : env::Environment, path : source::PathElementCS, local : Boolean) : OrderedSet(B) =
@@ -73,21 +69,17 @@ def: _lookupBs(env : env::Environment, path : source::PathElementCS, local : Boo
 		else foundBs
 		endif
 
-def : _lookupB(path : source::PathElementCS, local : Boolean) : B =
+def : _lookupB(path : source::PathElementCS, local : Boolean) : B[?] =
 	let	foundBs = _lookupBs(env(), path, local)
 	in	if foundBs->isEmpty()
 		then null
 		else foundBs->first() -- LookupVisitor will report ambiguous result
 		endif
 		
-def : lookupB(pathSeq : OrderedSet(source::PathElementCS)) : B = 
+def : lookupB(pathSeq : OrderedSet(source::PathElementCS)) : B[?] = 
 	if pathSeq->size() = 1
 	then _lookupB(pathSeq->first(), false)
-	else	let	namespace = lookupNamespace(pathSeq->subOrderedSet(1,pathSeq->size()-1))
-			in	if namespace = null
-				then null
-				else namespace._lookupB(pathSeq->last(), true)
-				endif
+	else lookupNamespace(pathSeq->subOrderedSet(1,pathSeq->size()-1))?._lookupB(pathSeq->last(), true)
 	endif
 
 	
@@ -98,21 +90,17 @@ def: _lookupCs(env : env::Environment, path : source::PathElementCS, local : Boo
 		else foundCs
 		endif
 
-def : _lookupC(path : source::PathElementCS, local : Boolean) : C =
+def : _lookupC(path : source::PathElementCS, local : Boolean) : C[?] =
 	let	foundCs = _lookupCs(env(), path, local)
 	in	if foundCs->isEmpty()
 		then null
 		else foundCs->first() -- LookupVisitor will report ambiguous result
 		endif
 
-def : lookupC(pathSeq : OrderedSet(source::PathElementCS)) : C = 
+def : lookupC(pathSeq : OrderedSet(source::PathElementCS)) : C[?] = 
 	if pathSeq->size() = 1
 	then _lookupC(pathSeq->first(), false)
-	else	let	namespace = lookupNamespace(pathSeq->subOrderedSet(1,pathSeq->size()-1)) -- FIXME use safe-navigator when
-			in	if namespace = null	-- FIXME this code is not being code-generated. Why ?
-				then null
-				else namespace._lookupC(pathSeq->last(), true)
-				endif
+	else lookupNamespace(pathSeq->subOrderedSet(1,pathSeq->size()-1))?._lookupC(pathSeq->last(), true)
 	endif
 	
 context D
