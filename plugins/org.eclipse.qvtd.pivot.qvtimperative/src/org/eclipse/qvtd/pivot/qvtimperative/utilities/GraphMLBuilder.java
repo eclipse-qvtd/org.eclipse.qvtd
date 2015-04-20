@@ -62,7 +62,7 @@ public class GraphMLBuilder implements GraphBuilder
 			this.y_pos = y_pos;
 		}
 
-		public void adjustToText(String text, int fontSize) {
+		public void adjustToText(String text, int fontSize, String shapeName) {
 			
 			Font font = new Font("Dialog", Font.PLAIN, fontSize);
 			// get metrics from the graphics
@@ -74,11 +74,26 @@ public class GraphMLBuilder implements GraphBuilder
 			int hgt = metrics.getHeight();
 			// get the advance of my text in this font
 			// and render context
-			int adv = metrics.stringWidth(text);
+			//int adv = metrics.stringWidth(text);
 			// calculate the size of a box to hold the
 			// text with some padding.
-			int numLines = text.split("\r\n|\r|\n").length;
-			this.width = adv*PADDING_FACTOR;
+			int maxW = 0;
+			String[] split = text.split("\r\n|\r|\n");
+			int numLines = split.length;
+			for (String s : split) {
+				int w = metrics.stringWidth(s);
+				maxW = w > maxW ? w : maxW;
+			}
+			int adv = maxW;
+			//System.out.println("Adjust: " + text);
+			switch (ShapeType.valueOf(shapeName)) {
+	            case hexagon: this.width = adv*PADDING_FACTOR+(0.1*adv);
+	            	break;
+	            case rectangle:
+	            default: this.width = adv*PADDING_FACTOR;
+	            	break;
+	        }
+			//System.out.println(adv);
 			this.height = hgt*numLines*PADDING_FACTOR;
 		}
 		
@@ -128,8 +143,15 @@ public class GraphMLBuilder implements GraphBuilder
 	}
 	
 	public enum LineType {
-		
 		line, dashed, dotted
+	}
+	
+	public enum ShapeType {
+		rectangle, roundrectangle, ellipse, parallelogram, hexagon, octagon, diamond, triangle, trapezoid, trapezoid2, rectangle3d
+	}
+	
+	public enum ArrowType {
+		standard, delta, diamond, white_diamond, white_delta, none, plain, concave, convex, circle, dash, transparent_circle, skewed_dash, t_shape
 	}
 	
 	protected static @NonNull String NULL_PLACEHOLDER = "\"<null>\""; //$NON-NLS-1$
@@ -165,13 +187,13 @@ public class GraphMLBuilder implements GraphBuilder
 	public void appendEdge(@NonNull String sourceId, @NonNull String targetId, @NonNull String lineColor,
 			@NonNull String lineType, @NonNull String sourceArrowType, @NonNull String targetArrowType) {
 		s.pushTag("edge");
-			s.appendElement("id", "e" + ++edgeCount);
-			s.appendElement("source", sourceId);
-			s.appendElement("target", targetId);
+			s.appendElement("id", "e" + edgeCount++);
+			s.appendElement("source", "n" + sourceId);
+			s.appendElement("target", "n" + targetId);
 			s.pushTag("data");
 				s.appendElement("key", "d9");
 				s.pushTag("y:PolyLineEdge");
-					appendLineStyle(new LineStyle(lineColor, lineType);
+					appendLineStyle(new LineStyle(lineColor, LineType.valueOf(lineType)));
 					appendArrows(sourceArrowType, targetArrowType);
 				s.popTag();
 			s.popTag();
@@ -213,13 +235,13 @@ public class GraphMLBuilder implements GraphBuilder
 	public void appendNode(@NonNull String id, @NonNull String shapeName,
 			@NonNull String fillColor, String label, @NonNull String labelColor) {
 		s.pushTag("node");
-			s.appendElement("id", id);
+			s.appendElement("id", "n" + id);
 			appendData("d5");
 			s.pushTag("data");
 				s.appendElement("key", "d6");
 				s.pushTag("y:ShapeNode");
 					Geometry g = new Geometry();
-					g.adjustToText(label, 12);
+					g.adjustToText(label, 12, shapeName);
 					appendGeometry(g);
 					appendFill(fillColor);
 					appendBorder(new BorderStyle(labelColor, LineType.line));
