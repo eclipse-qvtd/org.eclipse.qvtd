@@ -35,4 +35,7 @@ Export-Package: org.eclipse.epsilon.common.util;x-friends:="org.eclipse.qvtd.bui
    org.eclipse.epsilon.eol",
  org.eclipse.qvtd.compiler.internal.qvtr2qvtc,
  org.eclipse.qvtd.compiler.internal.qvtr2qvtc.impl,
- org.eclipse.qvtd.compiler.internal.qvtr2qvtc.utilities
+ org.eclipse.qvtd.compiler.internal.qvtr2qvtc.utilities,
+ org.eclipse.qvtd.compiler.internal.qvtcconfig,
+ org.eclipse.qvtd.compiler.internal.qvtcconfig.impl,
+ org.eclipse.qvtd.compiler.internal.qvtcconfig.util

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry kind="src" path="emf-gen"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.epsilon.emc.emf_1.3.0.201503231233.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.epsilon.erl.engine_1.3.0.201503231233.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/org.eclipse.epsilon.etl.engine_1.3.0.201503231233.jar"/>
