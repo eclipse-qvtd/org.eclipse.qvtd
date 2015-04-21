@@ -122,7 +122,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
     }
     
     /**
-     * classes::Visitable::lookupPackage(pathSeq : OrderedSet(classescs::PathElementCS)) : classes::Package
+     * classes::Visitable::lookupPackage(pathSeq : OrderedSet(classescs::PathElementCS)) : classes::Package[1]
      * 
      * 
      * if pathSeq->size() = 1
@@ -176,14 +176,14 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
     /**
      * 
      * map cClassCS_2_Class in classescs2as_qvtp_qvtias) {
-     * leftCS (classCS : classescs::ClassCS;
+     * leftCS (classCS : classescs::ClassCS[1];
      *  |
      * )
      * { |
      * }
      * rightAS ( |
      * )
-     * {realize class : classes::Class;
+     * {realize class : classes::Class[1];
      *  |
      * }
      * where ( |
@@ -209,14 +209,14 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
     /**
      * 
      * map cPackageCS_2_Package in classescs2as_qvtp_qvtias) {
-     * leftCS (packageCS : classescs::PackageCS;
+     * leftCS (packageCS : classescs::PackageCS[1];
      *  |
      * )
      * { |
      * }
      * rightAS ( |
      * )
-     * {realize package : classes::Package;
+     * {realize package : classes::Package[1];
      *  |
      * }
      * where ( |
@@ -242,14 +242,14 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
     /**
      * 
      * map cRootCS_2_Root in classescs2as_qvtp_qvtias) {
-     * leftCS (rootCS : classescs::RootCS;
+     * leftCS (rootCS : classescs::RootCS[1];
      *  |
      * )
      * { |
      * }
      * rightAS ( |
      * )
-     * {realize root : classes::Root;
+     * {realize root : classes::Root[1];
      *  |
      * }
      * where ( |
@@ -276,7 +276,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map uClass_name in classescs2as_qvtp_qvtias) {
      * 
-     *   leftCS (classCS : classescs::ClassCS;
+     *   leftCS (classCS : classescs::ClassCS[1];
      *  |
      * )
      * { |
@@ -311,7 +311,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map uClass_superClass in classescs2as_qvtp_qvtias) {
      * 
-     *   leftCS (classCS : classescs::ClassCS;
+     *   leftCS (classCS : classescs::ClassCS[1];
      *  |
      * )
      * { |
@@ -400,7 +400,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map uPackage_name in classescs2as_qvtp_qvtias) {
      * 
-     *   leftCS (packageCS : classescs::PackageCS;
+     *   leftCS (packageCS : classescs::PackageCS[1];
      *  |
      * )
      * { |
@@ -435,7 +435,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map uPackage_ownedClasses in classescs2as_qvtp_qvtias) {
      * 
-     *   leftCS (packageCS : classescs::PackageCS;
+     *   leftCS (packageCS : classescs::PackageCS[1];
      *  |
      * )
      * { |
@@ -498,7 +498,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map uPackage_ownedPackages in classescs2as_qvtp_qvtias) {
      * 
-     *   leftCS (packageCS : classescs::PackageCS;
+     *   leftCS (packageCS : classescs::PackageCS[1];
      *  |
      * )
      * { |
@@ -560,7 +560,7 @@ public class classescs2as_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map uRoot_ownedPackages in classescs2as_qvtp_qvtias) {
      * 
-     *   leftCS (rootCS : classescs::RootCS;
+     *   leftCS (rootCS : classescs::RootCS[1];
      *  |
      * )
      * { |

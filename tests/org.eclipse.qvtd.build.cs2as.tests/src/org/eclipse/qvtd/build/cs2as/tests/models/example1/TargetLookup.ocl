@@ -42,7 +42,7 @@ package target
 
 context Visitable
 
-def : _lookupNamespaces(env : env::Environment, path : source::PathElementCS, local : Boolean) : OrderedSet(Namespace) =
+def : _lookupNamespaces(env : env::Environment, path : source::PathElementCS, local : Boolean) : Namespace[*] =
 	let foundNS = env.namedElements->selectByKind(Namespace)->select(name = path.name) 
 	in  if foundNS->isEmpty() and not (env.parentEnv = null) and not local 
 		then _lookupNamespaces(env.parentEnv, path, local)
@@ -53,7 +53,7 @@ def : _lookupNamespace(path : source::PathElementCS, local : Boolean) : Namespac
 	let foundNS = _lookupNamespaces(env(), path, local)
 	in  if foundNS->isEmpty()
 		then null
-		else foundNS->first() -- LookupVisitor will report ambiguous result
+		else foundNS->any(true) -- LookupVisitor will report ambiguous result
 		endif
 		
 def : lookupNamespace(pathSeq : OrderedSet(source::PathElementCS)) : Namespace[?] =
@@ -62,7 +62,7 @@ def : lookupNamespace(pathSeq : OrderedSet(source::PathElementCS)) : Namespace[?
 	else lookupNamespace(pathSeq->subOrderedSet(1,pathSeq->size()-1))?._lookupNamespace(pathSeq->last(), true)
 	endif
 
-def: _lookupBs(env : env::Environment, path : source::PathElementCS, local : Boolean) : OrderedSet(B) =
+def: _lookupBs(env : env::Environment, path : source::PathElementCS, local : Boolean) : B[*] =
 	let	foundBs = env.namedElements->selectByKind(B)->select(name = path.name)
 	in	if foundBs->isEmpty() and not (env.parentEnv = null) and not local 
 		then _lookupBs(env.parentEnv, path, local)
@@ -73,7 +73,7 @@ def : _lookupB(path : source::PathElementCS, local : Boolean) : B[?] =
 	let	foundBs = _lookupBs(env(), path, local)
 	in	if foundBs->isEmpty()
 		then null
-		else foundBs->first() -- LookupVisitor will report ambiguous result
+		else foundBs->any(true) -- LookupVisitor will report ambiguous result
 		endif
 		
 def : lookupB(pathSeq : OrderedSet(source::PathElementCS)) : B[?] = 
@@ -83,7 +83,7 @@ def : lookupB(pathSeq : OrderedSet(source::PathElementCS)) : B[?] =
 	endif
 
 	
-def: _lookupCs(env : env::Environment, path : source::PathElementCS, local : Boolean) : OrderedSet(C) =
+def: _lookupCs(env : env::Environment, path : source::PathElementCS, local : Boolean) : C[*] =
 	let	foundCs = env.namedElements->selectByKind(C)->select(name = path.name)
 	in	if foundCs->isEmpty() and not (env.parentEnv = null) and not local 
 		then _lookupBs(env.parentEnv, path, local)
@@ -94,7 +94,7 @@ def : _lookupC(path : source::PathElementCS, local : Boolean) : C[?] =
 	let	foundCs = _lookupCs(env(), path, local)
 	in	if foundCs->isEmpty()
 		then null
-		else foundCs->first() -- LookupVisitor will report ambiguous result
+		else foundCs->any(true) -- LookupVisitor will report ambiguous result
 		endif
 
 def : lookupC(pathSeq : OrderedSet(source::PathElementCS)) : C[?] = 

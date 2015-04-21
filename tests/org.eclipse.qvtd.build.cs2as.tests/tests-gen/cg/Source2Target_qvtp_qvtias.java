@@ -213,14 +213,14 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     /**
      * 
      * map cSRoot_2_TRoot in Source2Target_qvtp_qvtias) {
-     * leftCS (sRoot : source::SRoot;
+     * leftCS (sRoot : source::SRoot[1];
      *  |
      * )
      * { |
      * }
      * rightAS ( |
      * )
-     * {realize tRoot : target::TRoot;
+     * {realize tRoot : target::TRoot[1];
      *  |
      * }
      * where ( |
@@ -247,14 +247,14 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map cX_2_A3 in Source2Target_qvtp_qvtias) {
      * 
-     *   leftCS (x : source::X;
+     *   leftCS (x : source::X[1];
      *  |
      * )
      * { |
      * }
      * rightAS ( |
      * )
-     * {realize a3 : target::A3;
+     * {realize a3 : target::A3[1];
      *  |
      * }
      * where ( |
@@ -292,14 +292,14 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map cX_2_A2 in Source2Target_qvtp_qvtias) {
      * 
-     *   leftCS (x : source::X;
+     *   leftCS (x : source::X[1];
      *  |
      * )
      * { |
      * }
      * rightAS ( |
      * )
-     * {realize a2 : target::A2;
+     * {realize a2 : target::A2[1];
      *  |
      * }
      * where ( |
@@ -336,14 +336,14 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map cX_2_A1 in Source2Target_qvtp_qvtias) {
      * 
-     *   leftCS (x : source::X;
+     *   leftCS (x : source::X[1];
      *  |
      * )
      * { |
      * }
      * rightAS ( |
      * )
-     * {realize a1 : target::A1;
+     * {realize a1 : target::A1[1];
      *  |
      * }
      * where ( |
@@ -373,14 +373,14 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     /**
      * 
      * map cY1_2_B in Source2Target_qvtp_qvtias) {
-     * leftCS (y1 : source::Y1;
+     * leftCS (y1 : source::Y1[1];
      *  |
      * )
      * { |
      * }
      * rightAS ( |
      * )
-     * {realize b : target::B;
+     * {realize b : target::B[1];
      *  |
      * }
      * where ( |
@@ -406,14 +406,14 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
     /**
      * 
      * map cY2_2_C in Source2Target_qvtp_qvtias) {
-     * leftCS (y2 : source::Y2;
+     * leftCS (y2 : source::Y2[1];
      *  |
      * )
      * { |
      * }
      * rightAS ( |
      * )
-     * {realize c : target::C;
+     * {realize c : target::C[1];
      *  |
      * }
      * where ( |
@@ -440,14 +440,14 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map cZ_2_D_0 in Source2Target_qvtp_qvtias) {
      * 
-     *   leftCS (z : source::Z;
+     *   leftCS (z : source::Z[1];
      *  |
      * )
      * { |
      * }
      * rightAS ( |
      * )
-     * {realize d : target::D;
+     * {realize d : target::D[1];
      *  |
      * }
      * where ( |
@@ -482,14 +482,14 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map cZ_2_D_1 in Source2Target_qvtp_qvtias) {
      * 
-     *   leftCS (z : source::Z;
+     *   leftCS (z : source::Z[1];
      *  |
      * )
      * { |
      * }
      * rightAS ( |
      * )
-     * {realize d : target::D;
+     * {realize d : target::D[1];
      *  |
      * }
      * where ( |
@@ -523,7 +523,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map uTRoot_ownedA in Source2Target_qvtp_qvtias) {
      * 
-     *   leftCS (sRoot : source::SRoot;
+     *   leftCS (sRoot : source::SRoot[1];
      *  |
      * )
      * { |
@@ -584,7 +584,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map uA3_name in Source2Target_qvtp_qvtias) {
      * 
-     *   leftCS (x : source::X;
+     *   leftCS (x : source::X[1];
      *  |
      * )
      * { |
@@ -631,7 +631,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map uA3_ownsC in Source2Target_qvtp_qvtias) {
      * 
-     *   leftCS (x : source::X;
+     *   leftCS (x : source::X[1];
      *  |
      * )
      * { |
@@ -722,7 +722,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map uA2_name in Source2Target_qvtp_qvtias) {
      * 
-     *   leftCS (x : source::X;
+     *   leftCS (x : source::X[1];
      *  |
      * )
      * { |
@@ -768,7 +768,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map uA2_ownsC in Source2Target_qvtp_qvtias) {
      * 
-     *   leftCS (x : source::X;
+     *   leftCS (x : source::X[1];
      *  |
      * )
      * { |
@@ -858,7 +858,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map uA1_name in Source2Target_qvtp_qvtias) {
      * 
-     *   leftCS (x : source::X;
+     *   leftCS (x : source::X[1];
      *  |
      * )
      * { |
@@ -898,7 +898,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map uA1_ownsB in Source2Target_qvtp_qvtias) {
      * 
-     *   leftCS (x : source::X;
+     *   leftCS (x : source::X[1];
      *  |
      * )
      * { |
@@ -982,7 +982,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map uB_ownsD in Source2Target_qvtp_qvtias) {
      * 
-     *   leftCS (y1 : source::Y1;
+     *   leftCS (y1 : source::Y1[1];
      *  |
      * )
      * { |
@@ -1024,7 +1024,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map uB_name in Source2Target_qvtp_qvtias) {
      * 
-     *   leftCS (y1 : source::Y1;
+     *   leftCS (y1 : source::Y1[1];
      *  |
      * )
      * { |
@@ -1059,7 +1059,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map uC_ownsD in Source2Target_qvtp_qvtias) {
      * 
-     *   leftCS (y2 : source::Y2;
+     *   leftCS (y2 : source::Y2[1];
      *  |
      * )
      * { |
@@ -1101,7 +1101,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map uC_name in Source2Target_qvtp_qvtias) {
      * 
-     *   leftCS (y2 : source::Y2;
+     *   leftCS (y2 : source::Y2[1];
      *  |
      * )
      * { |
@@ -1136,7 +1136,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map uD_0_toA in Source2Target_qvtp_qvtias) {
      * 
-     *   leftCS (z : source::Z;
+     *   leftCS (z : source::Z[1];
      *  |
      * )
      * { |
@@ -1192,7 +1192,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map uD_0_refsC in Source2Target_qvtp_qvtias) {
      * 
-     *   leftCS (z : source::Z;
+     *   leftCS (z : source::Z[1];
      *  |
      * )
      * { |
@@ -1297,7 +1297,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map uD_1_toA in Source2Target_qvtp_qvtias) {
      * 
-     *   leftCS (z : source::Z;
+     *   leftCS (z : source::Z[1];
      *  |
      * )
      * { |
@@ -1351,7 +1351,7 @@ public class Source2Target_qvtp_qvtias extends CS2ASTransformationExecutor
      * 
      * map uD_1_refsB in Source2Target_qvtp_qvtias) {
      * 
-     *   leftCS (z : source::Z;
+     *   leftCS (z : source::Z[1];
      *  |
      * )
      * { |
