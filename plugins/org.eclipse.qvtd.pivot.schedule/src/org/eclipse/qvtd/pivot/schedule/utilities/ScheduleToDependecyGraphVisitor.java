@@ -76,15 +76,16 @@ public class ScheduleToDependecyGraphVisitor extends AbstractExtendingScheduleVi
 	}
 
 	private String getDomainColor(CoreDomain domain) {
-		if (domain.getName().equals(this.inputDirection)) {
-			return DATUM_INPUT_COLOR;
-		} else if (domain.getName().equals(this.middleDirection)) {
-			return DATUM_MIDDLE_COLOR;
-		} else if (this.outputDirection.contains(domain.getName())) {
-			return DATUM_TARGET_COLOR;
-		} else {
-			return "#000000";
+		if (domain != null) {
+			if (domain.getName().equals(this.inputDirection)) {
+				return DATUM_INPUT_COLOR;
+			} else if (domain.getName().equals(this.middleDirection)) {
+				return DATUM_MIDDLE_COLOR;
+			} else if (this.outputDirection.contains(domain.getName())) {
+				return DATUM_TARGET_COLOR;
+			}
 		}
+		return "#000000";
 	}
 
 	protected @NonNull String getMappingLabel(@NonNull MappingAction object) {

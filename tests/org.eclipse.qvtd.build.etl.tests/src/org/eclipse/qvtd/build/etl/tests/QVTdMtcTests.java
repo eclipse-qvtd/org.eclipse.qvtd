@@ -115,7 +115,7 @@ public class QVTdMtcTests extends LoadTestCase {
     /*
      * 	UmlToRdbms has a loop from NonLeafAttribute in mapping complexAttributeComplexAttributes_LM,
      *  probably breakable by classComplexAttributes_LM, but still we can't schedule it.
-    
+     */
     @Test
     public void testUmlToRdbms() throws Exception {
     	
@@ -124,7 +124,8 @@ public class QVTdMtcTests extends LoadTestCase {
     	URI testBaseURI = TESTS_BASE_URI.appendSegment("UmlToRdbms");;
     	URI samplesBaseUri = testBaseURI.appendSegment("samples");
     	MtcBroker mtc = new MtcBroker(testBaseURI, "UmlToRdbms.qvtcas", myQVT.getEnvironmentFactory());
-    	mtc.execute();
+    	//mtc.execute();
+    	mtc.executeQvtsToGraphML();
     	assertNoValidationErrors("QVTu validation", mtc.getuModel().getRooteObject());
     	assertNoValidationErrors("QVTm validation", mtc.getmModel().getRooteObject());
         assertNoValidationErrors("QVTp validation", mtc.getpModel().getRooteObject());
@@ -152,7 +153,7 @@ public class QVTdMtcTests extends LoadTestCase {
         testEvaluator.dispose();
         mtc.disposeModels();
         myQVT.dispose();
-    }*/
+    }/**/
 
     @Test
     public void testUpperToLower() throws Exception {

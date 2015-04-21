@@ -24,7 +24,11 @@ public class MutiNamedElementKeyImpl implements MultiValueKey<NamedElement, Stri
 		//this.parametersId = IdManager.getParametersId(parameterTypes);
 		this.values = values;
 		for (NamedElement v : values) {
-			valueIds.add(v.getName());
+			if (v != null) {
+				valueIds.add(v.getName());
+			} else {
+				valueIds.add("null");
+			}
 		}
 		hashCode = valueIds.hashCode();
 	}
@@ -43,8 +47,14 @@ public class MutiNamedElementKeyImpl implements MultiValueKey<NamedElement, Stri
 			return false;
 		}
 		for (int i = 0; i < values.length; i++) {
-			if (!values[i].equals(thoseValues[i])) {
-				return false;
+			if (values[i] != null) {
+				if (!values[i].equals(thoseValues[i])) {
+					return false;
+				}
+			} else {
+				if (values[i] != thoseValues[i]) {
+					return false;
+				}
 			}
 		}
 		return true;
