@@ -302,26 +302,9 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 		return visiting(vappingStatement);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitMiddlePropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment)
-	 */
 	@Override
-	public Object visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment propertyAssignment) {
-		
-		indentLevel++;
-		try {
-			Object value = safeVisit(propertyAssignment.getValue());
-			// Unbox to asign to ecore type
-	        value = delegate.getEnvironmentFactory().getIdResolver().unboxedValueOf(value);
-	        logger.info(getIndent() + "VisitMiddlePropertyAssignment " + propertyAssignment.getSlotExpression()
-	        		+ "." + propertyAssignment.getTargetProperty().getName() + " = " + prettyPrint(value));
-		} catch (InvalidValueException ex) {
-	        logger.info(getIndent() + "VisitMiddlePropertyAssignment " + propertyAssignment.getSlotExpression()
-	        		+ "." + propertyAssignment.getTargetProperty().getName() + " = InvalidValue" );
-		}
-		Object result = delegate.visitMiddlePropertyAssignment(propertyAssignment);
-		indentLevel--;
-		return result;
+	public @Nullable Object visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment object) {
+        return delegate.visitMiddlePropertyAssignment(object);
 	}
 
 	/* (non-Javadoc)

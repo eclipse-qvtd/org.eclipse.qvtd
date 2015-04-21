@@ -141,14 +141,14 @@ public class classescs2as extends AbstractTransformationExecutor
     /**
      * 
      * map mClassCS2Class_LM in classescs2as) {
-     * leftCS (classCS : classescs::ClassCS;
+     * leftCS (classCS : classescs::ClassCS[1];
      *  |
      * )
      * { |
      * }
      * middle ( |
      * )
-     * {realize c2c : classescstraces::ClassCS2Class;
+     * {realize c2c : classescstraces::ClassCS2Class[1];
      *  |
      * }
      * where ( |
@@ -175,14 +175,14 @@ public class classescs2as extends AbstractTransformationExecutor
     /**
      * 
      * map mRootCS2Root_LM in classescs2as) {
-     * leftCS (rootCS : classescs::RootCS;
+     * leftCS (rootCS : classescs::RootCS[1];
      *  |
      * )
      * { |
      * }
      * middle ( |
      * )
-     * {realize r2r : classescstraces::RootCS2Root;
+     * {realize r2r : classescstraces::RootCS2Root[1];
      *  |
      * }
      * where ( |
@@ -209,14 +209,14 @@ public class classescs2as extends AbstractTransformationExecutor
     /**
      * 
      * map mPackageCS2Package_LM in classescs2as) {
-     * leftCS (packageCS : classescs::PackageCS;
+     * leftCS (packageCS : classescs::PackageCS[1];
      *  |
      * )
      * { |
      * }
      * middle ( |
      * )
-     * {realize p2p : classescstraces::PackageCS2Package;
+     * {realize p2p : classescstraces::PackageCS2Package[1];
      *  |
      * }
      * where ( |
@@ -243,14 +243,14 @@ public class classescs2as extends AbstractTransformationExecutor
     /**
      * 
      * map mClassCS2Class_MR in classescs2as) {
-     * middle (c2c : classescstraces::ClassCS2Class;
+     * middle (c2c : classescstraces::ClassCS2Class[1];
      *  |
      * )
      * { |
      * }
      * rightAS ( |
      * )
-     * {realize class : classes::Class;
+     * {realize class : classes::Class[1];
      *  |
      * }
      * where ( |
@@ -276,14 +276,14 @@ public class classescs2as extends AbstractTransformationExecutor
     /**
      * 
      * map mRootCS2Root_MR in classescs2as) {
-     * middle (r2r : classescstraces::RootCS2Root;
+     * middle (r2r : classescstraces::RootCS2Root[1];
      *  |
      * )
      * { |
      * }
      * rightAS ( |
      * )
-     * {realize root : classes::Root;
+     * {realize root : classes::Root[1];
      *  |
      * }
      * where ( |
@@ -309,14 +309,14 @@ public class classescs2as extends AbstractTransformationExecutor
     /**
      * 
      * map mPackageCS2Package_MR in classescs2as) {
-     * middle (p2p : classescstraces::PackageCS2Package;
+     * middle (p2p : classescstraces::PackageCS2Package[1];
      *  |
      * )
      * { |
      * }
      * rightAS ( |
      * )
-     * {realize package : classes::Package;
+     * {realize package : classes::Package[1];
      *  |
      * }
      * where ( |
@@ -342,12 +342,12 @@ public class classescs2as extends AbstractTransformationExecutor
     /**
      * 
      * map uClass_name in classescs2as) {
-     * rightAS (class : classes::Class;
+     * rightAS (class : classes::Class[1];
      *  |
      * )
      * { |
      * }
-     * leftCS (classCS : classescs::ClassCS;
+     * leftCS (classCS : classescs::ClassCS[1];
      *  |
      * )
      * { |
@@ -379,12 +379,12 @@ public class classescs2as extends AbstractTransformationExecutor
     /**
      * 
      * map uRoot_ownedPackages in classescs2as) {
-     * rightAS (root : classes::Root;
+     * rightAS (root : classes::Root[1];
      *  |
      * )
      * { |
      * }
-     * leftCS (rootCS : classescs::RootCS;
+     * leftCS (rootCS : classescs::RootCS[1];
      *  |
      * )
      * { |
@@ -461,12 +461,12 @@ public class classescs2as extends AbstractTransformationExecutor
     /**
      * 
      * map uPackage_name in classescs2as) {
-     * rightAS (package : classes::Package;
+     * rightAS (package : classes::Package[1];
      *  |
      * )
      * { |
      * }
-     * leftCS (packageCS : classescs::PackageCS;
+     * leftCS (packageCS : classescs::PackageCS[1];
      *  |
      * )
      * { |
@@ -498,12 +498,12 @@ public class classescs2as extends AbstractTransformationExecutor
     /**
      * 
      * map uPackage_ownedClasses in classescs2as) {
-     * rightAS (package : classes::Package;
+     * rightAS (package : classes::Package[1];
      *  |
      * )
      * { |
      * }
-     * leftCS (packageCS : classescs::PackageCS;
+     * leftCS (packageCS : classescs::PackageCS[1];
      *  |
      * )
      * { |

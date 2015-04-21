@@ -20,6 +20,7 @@ import java.util.Set;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CompleteClass;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
@@ -31,7 +32,7 @@ import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
-import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
+import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 
 /**
@@ -54,7 +55,7 @@ public class QVTiTransformationAnalysis
 	private @NonNull Set<org.eclipse.ocl.pivot.Class> allInstancesClasses = new HashSet<org.eclipse.ocl.pivot.Class>();
 
 	/**
-	 *  Map from navigable property to sequential index.
+	 *  Map from navigable property to sequential index.	// FIXME per-domain
 	 */
 	private @NonNull Map<Property, Integer> property2cacheIndex = new HashMap<Property, Integer>();
 
@@ -62,6 +63,11 @@ public class QVTiTransformationAnalysis
 	 *  Map from opposite property to sequential index.
 	 */
 	private @NonNull Map<Property, Integer> opposite2cacheIndex = new HashMap<Property, Integer>();
+
+	/**
+	 *  Map from property assignment to sequential index.
+	 */
+	private @NonNull Map<PropertyAssignment, Integer> propertyAssignment2cacheIndex = new HashMap<PropertyAssignment, Integer>();
 
 	public QVTiTransformationAnalysis(@NonNull PivotMetamodelManager metamodelManager) {
 	    this.metamodelManager = metamodelManager;
@@ -76,7 +82,7 @@ public class QVTiTransformationAnalysis
 		//
 		Type oclElementType = metamodelManager.getStandardLibrary().getOclElementType();
 		OperationId allInstancesOperationId = oclElementType.getTypeId().getOperationId(0, "allInstances", IdManager.getParametersId());
-		List<MiddlePropertyAssignment> middlePropertyAssignments = new ArrayList<MiddlePropertyAssignment>();
+		List<PropertyAssignment> propertyAssignments = new ArrayList<PropertyAssignment>();
 		for (TreeIterator<EObject> tit = transformation.eAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
 			if (eObject instanceof MiddlePropertyCallExp) {
@@ -87,8 +93,8 @@ public class QVTiTransformationAnalysis
 					middlePropertyCallExp.setCacheIndex(cacheIndex);
 				}
 			}
-			else if (eObject instanceof MiddlePropertyAssignment) {
-				middlePropertyAssignments.add((MiddlePropertyAssignment)eObject);
+			else if (eObject instanceof PropertyAssignment) {
+				propertyAssignments.add((PropertyAssignment)eObject);
 			}
 			else if (eObject instanceof OperationCallExp) {
 				OperationCallExp operationCallExp = (OperationCallExp)eObject;
@@ -118,12 +124,12 @@ public class QVTiTransformationAnalysis
 		//	Second pass
 		//  - install cacheIndex allocated to MiddlePropertyCallExp in each MiddlePropertyAssignment
 		//
-		for (MiddlePropertyAssignment middlePropertyAssignment : middlePropertyAssignments) {
-			Property navigableProperty = middlePropertyAssignment.getTargetProperty();
+		for (PropertyAssignment propertyAssignment : propertyAssignments) {
+			Property navigableProperty = propertyAssignment.getTargetProperty();
 			if (navigableProperty != null) {
 				Integer cacheIndex = property2cacheIndex.get(navigableProperty);
 				if (cacheIndex != null) { 		// No need to set cacheIndex if it is never accessed by a MiddlePropertyCallExp
-					middlePropertyAssignment.setCacheIndex(cacheIndex);
+					propertyAssignment2cacheIndex.put(propertyAssignment, cacheIndex);
 				}
 			}
 		}
@@ -140,6 +146,10 @@ public class QVTiTransformationAnalysis
 			property2cacheIndex.put(navigableProperty, cacheIndex);
 		}
 		return cacheIndex;
+	}
+
+	public @Nullable Integer getCacheIndex(@NonNull PropertyAssignment propertyAssignment) {
+		return propertyAssignment2cacheIndex.get(propertyAssignment);
 	}
 
 	public int getCacheIndexes() {

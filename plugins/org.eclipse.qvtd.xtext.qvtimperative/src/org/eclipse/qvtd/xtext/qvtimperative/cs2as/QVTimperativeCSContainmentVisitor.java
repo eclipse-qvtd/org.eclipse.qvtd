@@ -171,13 +171,7 @@ public class QVTimperativeCSContainmentVisitor extends AbstractQVTimperativeCSCo
 			context.refreshModelElement(VariableAssignment.class, QVTcoreBasePackage.Literals.VARIABLE_ASSIGNMENT, csElement);
 		}
 		else {
-			EObject eContainerContainer = eContainer != null ? eContainer.eContainer() : null;
-			if ((eContainerContainer instanceof DomainCS) && (((DomainCS)eContainerContainer).getName() == null)) {
-				context.refreshModelElement(PropertyAssignment.class, QVTimperativePackage.Literals.MIDDLE_PROPERTY_ASSIGNMENT, csElement);
-			}
-			else {
-				context.refreshModelElement(PropertyAssignment.class, QVTcoreBasePackage.Literals.PROPERTY_ASSIGNMENT, csElement);
-			}
+			context.refreshModelElement(PropertyAssignment.class, QVTcoreBasePackage.Literals.PROPERTY_ASSIGNMENT, csElement);
 		}
 		return null;
 	}

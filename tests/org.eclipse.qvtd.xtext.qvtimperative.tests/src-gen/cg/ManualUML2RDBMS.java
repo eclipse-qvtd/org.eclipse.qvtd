@@ -216,14 +216,14 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * 
      * map packageToSchemaLM in ManualUML2RDBMS) {
      * 
-     *   uml (p : uml::Package;
+     *   uml (p : uml::Package[1];
      *  |
      * )
      * { |
      * }
      * middle ( |
      * )
-     * {realize p2s : uml2rdbms::PackageToSchema;
+     * {realize p2s : uml2rdbms::PackageToSchema[1];
      *  |
      * }
      * where ( |
@@ -314,14 +314,14 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * 
      * map packageToSchemaMR in ManualUML2RDBMS) {
      * 
-     *   middle (p2s : uml2rdbms::PackageToSchema;
+     *   middle (p2s : uml2rdbms::PackageToSchema[1];
      *  |
      * )
      * { |
      * }
      * rdbms ( |
      * )
-     * {realize s : rdbms::Schema;
+     * {realize s : rdbms::Schema[1];
      *  |
      * }
      * where ( |
@@ -392,12 +392,12 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map packageToSchemaMR_1 in ManualUML2RDBMS) {
-     * middle (p2s_1 : uml2rdbms::PackageToSchema;
+     * middle (p2s_1 : uml2rdbms::PackageToSchema[1];
      *  |
      * )
      * { |
      * }
-     * rdbms (s_1 : rdbms::Schema;
+     * rdbms (s_1 : rdbms::Schema[1];
      *  |
      * )
      * { |
@@ -423,16 +423,16 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map integerToNumberLM in ManualUML2RDBMS) {
-     * uml (p : uml::Package;
-     * prim : uml::PrimitiveDataType;
+     * uml (p : uml::Package[1];
+     * prim : uml::PrimitiveDataType[1];
      *  |
      * )
      * { |
      * }
-     * middle (p2s : uml2rdbms::PackageToSchema;
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
      *  |
      * )
-     * {realize p2n : uml2rdbms::PrimitiveToName;
+     * {realize p2n : uml2rdbms::PrimitiveToName[1];
      *  |
      * }
      * where ( |
@@ -482,8 +482,8 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map integerToNumberMR in ManualUML2RDBMS) {
-     * middle (p2s : uml2rdbms::PackageToSchema;
-     * p2n : uml2rdbms::PrimitiveToName;
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
+     * p2n : uml2rdbms::PrimitiveToName[1];
      *  |
      * )
      * { |
@@ -522,16 +522,16 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map booleanToBooleanLM in ManualUML2RDBMS) {
-     * uml (p : uml::Package;
-     * prim : uml::PrimitiveDataType;
+     * uml (p : uml::Package[1];
+     * prim : uml::PrimitiveDataType[1];
      *  |
      * )
      * { |
      * }
-     * middle (p2s : uml2rdbms::PackageToSchema;
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
      *  |
      * )
-     * {realize p2n : uml2rdbms::PrimitiveToName;
+     * {realize p2n : uml2rdbms::PrimitiveToName[1];
      *  |
      * }
      * where ( |
@@ -581,8 +581,8 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map booleanToBooleanMR in ManualUML2RDBMS) {
-     * middle (p2s : uml2rdbms::PackageToSchema;
-     * p2n : uml2rdbms::PrimitiveToName;
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
+     * p2n : uml2rdbms::PrimitiveToName[1];
      *  |
      * )
      * { |
@@ -621,16 +621,16 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map stringToVarcharLM in ManualUML2RDBMS) {
-     * uml (p : uml::Package;
-     * prim : uml::PrimitiveDataType;
+     * uml (p : uml::Package[1];
+     * prim : uml::PrimitiveDataType[1];
      *  |
      * )
      * { |
      * }
-     * middle (p2s : uml2rdbms::PackageToSchema;
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
      *  |
      * )
-     * {realize p2n : uml2rdbms::PrimitiveToName;
+     * {realize p2n : uml2rdbms::PrimitiveToName[1];
      *  |
      * }
      * where ( |
@@ -680,8 +680,8 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map stringToVarcharMR in ManualUML2RDBMS) {
-     * middle (p2s : uml2rdbms::PackageToSchema;
-     * p2n : uml2rdbms::PrimitiveToName;
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
+     * p2n : uml2rdbms::PrimitiveToName[1];
      *  |
      * )
      * { |
@@ -720,16 +720,16 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map classToTableLM in ManualUML2RDBMS) {
-     * uml (p : uml::Package;
-     * c : uml::Class;
+     * uml (p : uml::Package[1];
+     * c : uml::Class[1];
      *  |
      * )
      * { |
      * }
-     * middle (p2s : uml2rdbms::PackageToSchema;
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
      *  |
      * )
-     * {realize c2t : uml2rdbms::ClassToTable;
+     * {realize c2t : uml2rdbms::ClassToTable[1];
      *  |
      * }
      * where ( |
@@ -816,16 +816,16 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map classToTableMR in ManualUML2RDBMS) {
-     * middle (p2s : uml2rdbms::PackageToSchema;
-     * c2t : uml2rdbms::ClassToTable;
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
+     * c2t : uml2rdbms::ClassToTable[1];
      *  |
      * )
      * { |
      * }
-     * rdbms (s : rdbms::Schema;
+     * rdbms (s : rdbms::Schema[1];
      *  |
      * )
-     * {realize t : rdbms::Table;
+     * {realize t : rdbms::Table[1];
      *  |
      * }
      * where ( |
@@ -946,12 +946,12 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map classToTableMR_1 in ManualUML2RDBMS) {
-     * middle (c2t_1 : uml2rdbms::ClassToTable;
+     * middle (c2t_1 : uml2rdbms::ClassToTable[1];
      *  |
      * )
      * { |
      * }
-     * rdbms (t_1 : rdbms::Table;
+     * rdbms (t_1 : rdbms::Table[1];
      *  |
      * )
      * { |
@@ -981,16 +981,16 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * 
      * map classToTableMR_2 in ManualUML2RDBMS) {
      * 
-     *   middle (c2t_2 : uml2rdbms::ClassToTable;
+     *   middle (c2t_2 : uml2rdbms::ClassToTable[1];
      *  |
      * )
      * { |
      * }
-     * rdbms (t_2 : rdbms::Table;
+     * rdbms (t_2 : rdbms::Table[1];
      *  |
      * )
-     * {realize pk : rdbms::Key;
-     * realize pc : rdbms::Column;
+     * {realize pk : rdbms::Key[1];
+     * realize pc : rdbms::Column[1];
      *  |
      * }
      * where ( |
@@ -1044,13 +1044,13 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map classToTableMR_2_1 in ManualUML2RDBMS) {
-     * middle (c2t_2_1 : uml2rdbms::ClassToTable;
+     * middle (c2t_2_1 : uml2rdbms::ClassToTable[1];
      *  |
      * )
      * { |
      * }
-     * rdbms (pk_2_1 : rdbms::Key;
-     * pc_2_1 : rdbms::Column;
+     * rdbms (pk_2_1 : rdbms::Key[1];
+     * pc_2_1 : rdbms::Column[1];
      *  |
      * )
      * { |
@@ -1081,9 +1081,9 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * )
      * { |
      * }
-     * rdbms (pk_2_2 : rdbms::Key;
-     * pc_2_2 : rdbms::Column;
-     * t_2_2 : rdbms::Table;
+     * rdbms (pk_2_2 : rdbms::Key[1];
+     * pc_2_2 : rdbms::Column[1];
+     * t_2_2 : rdbms::Table[1];
      *  |
      * )
      * { |
@@ -1113,20 +1113,20 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map associationToForeignKeyLM in ManualUML2RDBMS) {
-     * uml (p : uml::Package;
-     * sc : uml::Class;
-     * dc : uml::Class;
-     * a : uml::Association;
+     * uml (p : uml::Package[1];
+     * sc : uml::Class[1];
+     * dc : uml::Class[1];
+     * a : uml::Association[1];
      *  |
      * )
      * { |
      * }
-     * middle (p2s : uml2rdbms::PackageToSchema;
-     * sc2t : uml2rdbms::ClassToTable;
-     * dc2t : uml2rdbms::ClassToTable;
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
+     * sc2t : uml2rdbms::ClassToTable[1];
+     * dc2t : uml2rdbms::ClassToTable[1];
      *  |
      * )
-     * {realize a2f : uml2rdbms::AssociationToForeignKey;
+     * {realize a2f : uml2rdbms::AssociationToForeignKey[1];
      *  |
      * }
      * where ( |
@@ -1137,7 +1137,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * a2f = sc2t;
      * a2f = dc2t;
      * a2f = a;
-     * a2f = let dc2 : uml::Class = dc;
+     * a2f = let dc2 : uml::Class[1] = dc;
      * 
      *   in
      *     if a.destination = dc and a.source = sc
@@ -1311,22 +1311,22 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map associationToForeignKeyMR in ManualUML2RDBMS) {
-     * middle (p2s : uml2rdbms::PackageToSchema;
-     * sc2t : uml2rdbms::ClassToTable;
-     * dc2t : uml2rdbms::ClassToTable;
-     * a2f : uml2rdbms::AssociationToForeignKey;
+     * middle (p2s : uml2rdbms::PackageToSchema[1];
+     * sc2t : uml2rdbms::ClassToTable[1];
+     * dc2t : uml2rdbms::ClassToTable[1];
+     * a2f : uml2rdbms::AssociationToForeignKey[1];
      *  |
      * )
      * { |
      * }
-     * rdbms (s : rdbms::Schema;
-     * st : rdbms::Table;
-     * dt : rdbms::Table;
-     * rk : rdbms::Key;
+     * rdbms (s : rdbms::Schema[1];
+     * st : rdbms::Table[1];
+     * dt : rdbms::Table[1];
+     * rk : rdbms::Key[1];
      *  |
      * )
-     * {realize fk : rdbms::ForeignKey;
-     * realize fc : rdbms::Column;
+     * {realize fk : rdbms::ForeignKey[1];
+     * realize fc : rdbms::Column[1];
      *  |
      * }
      * where ( |
@@ -1410,10 +1410,10 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * )
      * { |
      * }
-     * rdbms (fk : rdbms::ForeignKey;
-     * fc : rdbms::Column;
-     * dt : rdbms::Table;
-     * rk : rdbms::Key;
+     * rdbms (fk : rdbms::ForeignKey[1];
+     * fc : rdbms::Column[1];
+     * dt : rdbms::Table[1];
+     * rk : rdbms::Key[1];
      *  |
      * )
      * { |
@@ -1456,13 +1456,13 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map associationToForeignKeyMR_2 in ManualUML2RDBMS) {
-     * middle (a2f_1 : uml2rdbms::AssociationToForeignKey;
+     * middle (a2f_1 : uml2rdbms::AssociationToForeignKey[1];
      *  |
      * )
      * { |
      * }
-     * rdbms (fk_1 : rdbms::ForeignKey;
-     * fc_1 : rdbms::Column;
+     * rdbms (fk_1 : rdbms::ForeignKey[1];
+     * fc_1 : rdbms::Column[1];
      *  |
      * )
      * { |
@@ -1489,18 +1489,18 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map classPrimitiveAttributesLM in ManualUML2RDBMS) {
-     * uml (c : uml::Class;
-     * t : uml::PrimitiveDataType;
-     * a : uml::Attribute;
+     * uml (c : uml::Class[1];
+     * t : uml::PrimitiveDataType[1];
+     * a : uml::Attribute[1];
      *  |
      * )
      * { |
      * }
-     * middle (fao : uml2rdbms::ClassToTable;
-     * p2n : uml2rdbms::PrimitiveToName;
+     * middle (fao : uml2rdbms::ClassToTable[1];
+     * p2n : uml2rdbms::PrimitiveToName[1];
      *  |
      * )
-     * {realize atc : uml2rdbms::AttributeToColumn;
+     * {realize atc : uml2rdbms::AttributeToColumn[1];
      *  |
      * }
      * where ( |
@@ -1565,17 +1565,17 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map classComplexAttributesLM in ManualUML2RDBMS) {
-     * uml (c : uml::Class;
-     * t : uml::Class;
-     * a : uml::Attribute;
+     * uml (c : uml::Class[1];
+     * t : uml::Class[1];
+     * a : uml::Attribute[1];
      *  |
      * )
      * { |
      * }
-     * middle (fao : uml2rdbms::ClassToTable;
+     * middle (fao : uml2rdbms::ClassToTable[1];
      *  |
      * )
-     * {realize fa : uml2rdbms::NonLeafAttribute;
+     * {realize fa : uml2rdbms::NonLeafAttribute[1];
      *  |
      * }
      * where ( |
@@ -1658,13 +1658,13 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map complexAttributePrimitiveAttributesLM in ManualUML2RDBMS) {
-     * uml (c : uml::Class;
-     * ca : uml::Attribute;
+     * uml (c : uml::Class[1];
+     * ca : uml::Attribute[1];
      *  |
      * )
      * { |
      * }
-     * middle (fao : uml2rdbms::NonLeafAttribute;
+     * middle (fao : uml2rdbms::NonLeafAttribute[1];
      *  |
      * )
      * { |
@@ -1718,19 +1718,19 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * 
      * map complexAttributePrimitiveAttributesLM_1 in ManualUML2RDBMS) {
      * 
-     *   uml (c_1 : uml::Class;
-     * t_1 : uml::PrimitiveDataType;
-     * a_1 : uml::Attribute;
-     * ca_1 : uml::Attribute;
+     *   uml (c_1 : uml::Class[1];
+     * t_1 : uml::PrimitiveDataType[1];
+     * a_1 : uml::Attribute[1];
+     * ca_1 : uml::Attribute[1];
      *  |
      * )
      * { |
      * }
-     * middle (fao_1 : uml2rdbms::NonLeafAttribute;
-     * p2n_1 : uml2rdbms::PrimitiveToName;
+     * middle (fao_1 : uml2rdbms::NonLeafAttribute[1];
+     * p2n_1 : uml2rdbms::PrimitiveToName[1];
      *  |
      * )
-     * {realize fa : uml2rdbms::AttributeToColumn;
+     * {realize fa : uml2rdbms::AttributeToColumn[1];
      *  |
      * }
      * where ( |
@@ -1787,13 +1787,13 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map complexAttributeComplexAttributesLM in ManualUML2RDBMS) {
-     * uml (c : uml::Class;
-     * ca : uml::Attribute;
+     * uml (c : uml::Class[1];
+     * ca : uml::Attribute[1];
      *  |
      * )
      * { |
      * }
-     * middle (fao : uml2rdbms::NonLeafAttribute;
+     * middle (fao : uml2rdbms::NonLeafAttribute[1];
      *  |
      * )
      * { |
@@ -1846,18 +1846,18 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map complexAttributeComplexAttributesLM_1 in ManualUML2RDBMS) {
-     * uml (c_1 : uml::Class;
-     * ca_1 : uml::Attribute;
-     * t_1 : uml::Class;
-     * a_1 : uml::Attribute;
+     * uml (c_1 : uml::Class[1];
+     * ca_1 : uml::Attribute[1];
+     * t_1 : uml::Class[1];
+     * a_1 : uml::Attribute[1];
      *  |
      * )
      * { |
      * }
-     * middle (fao_1 : uml2rdbms::NonLeafAttribute;
+     * middle (fao_1 : uml2rdbms::NonLeafAttribute[1];
      *  |
      * )
-     * {realize fa : uml2rdbms::NonLeafAttribute;
+     * {realize fa : uml2rdbms::NonLeafAttribute[1];
      *  |
      * }
      * where ( |
@@ -1938,18 +1938,18 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map attributeColumnsMR in ManualUML2RDBMS) {
-     * middle (c2t : uml2rdbms::ClassToTable;
-     * a2c : uml2rdbms::AttributeToColumn;
-     * p2n : uml2rdbms::PrimitiveToName;
+     * middle (c2t : uml2rdbms::ClassToTable[1];
+     * a2c : uml2rdbms::AttributeToColumn[1];
+     * p2n : uml2rdbms::PrimitiveToName[1];
      *  |
      * )
      * { |
      * }
-     * rdbms (t : rdbms::Table;
-     * ct : String;
+     * rdbms (t : rdbms::Table[1];
+     * ct : String[1];
      *  |
      * )
-     * {realize c : rdbms::Column;
+     * {realize c : rdbms::Column[1];
      *  |
      * }
      * where ( |
@@ -2007,12 +2007,12 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map attributeColumnsMR_1 in ManualUML2RDBMS) {
-     * middle (a2c_1 : uml2rdbms::AttributeToColumn;
+     * middle (a2c_1 : uml2rdbms::AttributeToColumn[1];
      *  |
      * )
      * { |
      * }
-     * rdbms (c_1 : rdbms::Column;
+     * rdbms (c_1 : rdbms::Column[1];
      *  |
      * )
      * { |
@@ -2037,14 +2037,14 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map attributeColumnsMR_2 in ManualUML2RDBMS) {
-     * middle (p2n_2 : uml2rdbms::PrimitiveToName;
-     * a2c_2 : uml2rdbms::AttributeToColumn;
+     * middle (p2n_2 : uml2rdbms::PrimitiveToName[1];
+     * a2c_2 : uml2rdbms::AttributeToColumn[1];
      *  |
      * )
      * { |
      * }
-     * rdbms (c_2 : rdbms::Column;
-     * ct_2 : String;
+     * rdbms (c_2 : rdbms::Column[1];
+     * ct_2 : String[1];
      *  |
      * )
      * { |
@@ -2079,12 +2079,12 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map attributeColumnsMR_2_1 in ManualUML2RDBMS) {
-     * middle (p2n_2_1 : uml2rdbms::PrimitiveToName;
+     * middle (p2n_2_1 : uml2rdbms::PrimitiveToName[1];
      *  |
      * )
      * { |
      * }
-     * rdbms (ct_2_1 : String;
+     * rdbms (ct_2_1 : String[1];
      *  |
      * )
      * { |
@@ -2109,12 +2109,12 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     /**
      * 
      * map attributeColumnsMR_3 in ManualUML2RDBMS) {
-     * middle (a2c_3 : uml2rdbms::AttributeToColumn;
+     * middle (a2c_3 : uml2rdbms::AttributeToColumn[1];
      *  |
      * )
      * { |
      * }
-     * rdbms (c_3 : rdbms::Column;
+     * rdbms (c_3 : rdbms::Column[1];
      *  |
      * )
      * { |

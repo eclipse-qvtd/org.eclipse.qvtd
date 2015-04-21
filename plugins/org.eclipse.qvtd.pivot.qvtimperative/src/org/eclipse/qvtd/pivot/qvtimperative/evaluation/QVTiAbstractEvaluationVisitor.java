@@ -367,20 +367,11 @@ public abstract class QVTiAbstractEvaluationVisitor extends OCLEvaluationVisitor
 	public @Nullable Object visitMappingStatement(@NonNull MappingStatement object) {
 		return visiting(object);	// MappingStatement is abstract
 	}
-	
-	/* (non-Javadoc)
-	* @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitMiddlePropertyAssignment(org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment)
-	*/
+
 	@Override
-	public @Nullable Object visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment propertyAssignment) {
-		
-		Area area = ((BottomPattern)propertyAssignment.eContainer()).getArea();
-		if (area instanceof Mapping) {
-			// TODO Check this approach
-			doPropertyAssignment(propertyAssignment, propertyAssignment.getCacheIndex());
-        }
-        return true;
-    }
+	public @Nullable Object visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment object) {
+		return visitPropertyAssignment(object);
+	}
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitMiddlePropertyCallExp(org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp)
@@ -423,8 +414,10 @@ public abstract class QVTiAbstractEvaluationVisitor extends OCLEvaluationVisitor
      */
     @Override
 	public @Nullable Object visitPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
-		doPropertyAssignment(propertyAssignment, null);
-		return true;
+		QVTiModelManager modelManager2 = getModelManager();
+		QVTiTransformationAnalysis transformationAnalysis = modelManager2.getTransformationAnalysis();
+		doPropertyAssignment(propertyAssignment, transformationAnalysis.getCacheIndex(propertyAssignment));
+        return true;
     }
 
 	/*

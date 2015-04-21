@@ -85,11 +85,6 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A MiddlePropertyAssignment identifies a property assignment to the middle model.&#xA;It adds an additional feature to facilitate efficient access to a cache of&#xA;non-navigable outer-to-middle opposites."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cacheIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Identification of the cache of unnavigable opposites to be maintained&#xA;by this property assignment. May be null if no cache is required."/>
-      </eAnnotations>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MiddlePropertyCallExp" eSuperTypes="../../org.eclipse.ocl.pivot/model/Pivot.ecore#//OppositePropertyCallExp">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

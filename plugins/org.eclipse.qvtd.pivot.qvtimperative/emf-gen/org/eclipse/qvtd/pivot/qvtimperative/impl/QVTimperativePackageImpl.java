@@ -338,16 +338,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EAttribute getMiddlePropertyAssignment_CacheIndex() {
-		return (EAttribute)middlePropertyAssignmentEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getMiddlePropertyCallExp() {
 		return middlePropertyCallExpEClass;
 	}
@@ -434,7 +424,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		mappingStatementEClass = createEClass(MAPPING_STATEMENT);
 
 		middlePropertyAssignmentEClass = createEClass(MIDDLE_PROPERTY_ASSIGNMENT);
-		createEAttribute(middlePropertyAssignmentEClass, MIDDLE_PROPERTY_ASSIGNMENT__CACHE_INDEX);
 
 		middlePropertyCallExpEClass = createEClass(MIDDLE_PROPERTY_CALL_EXP);
 		createEAttribute(middlePropertyCallExpEClass, MIDDLE_PROPERTY_CALL_EXP__CACHE_INDEX);
@@ -515,7 +504,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEClass(mappingStatementEClass, MappingStatement.class, "MappingStatement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(middlePropertyAssignmentEClass, MiddlePropertyAssignment.class, "MiddlePropertyAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getMiddlePropertyAssignment_CacheIndex(), ecorePackage.getEIntegerObject(), "cacheIndex", null, 0, 1, MiddlePropertyAssignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(middlePropertyCallExpEClass, MiddlePropertyCallExp.class, "MiddlePropertyCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMiddlePropertyCallExp_CacheIndex(), ecorePackage.getEIntegerObject(), "cacheIndex", null, 0, 1, MiddlePropertyCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

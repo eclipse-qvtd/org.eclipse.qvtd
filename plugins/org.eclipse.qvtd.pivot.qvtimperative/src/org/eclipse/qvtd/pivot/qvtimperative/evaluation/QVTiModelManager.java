@@ -44,6 +44,7 @@ import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
  */
 public class QVTiModelManager implements ModelManager
 {
+	protected final @NonNull QVTiTransformationAnalysis transformationAnalysis;
 	protected final @NonNull MetamodelManager metamodelManager;
 	// TODO how to manage aliases?
 	/** Map a typed model to its resource (model). */
@@ -69,6 +70,7 @@ public class QVTiModelManager implements ModelManager
 	 * instances of the middle model and the middle model EFactory.
 	 */
 	public QVTiModelManager(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
+	    this.transformationAnalysis = transformationAnalysis;
 	    this.metamodelManager = transformationAnalysis.getMetamodelManager();
 	    this.allInstancesClasses = transformationAnalysis.getAllInstancesClasses();
 	    int cacheIndexes = transformationAnalysis.getCacheIndexes();
@@ -236,6 +238,10 @@ public class QVTiModelManager implements ModelManager
 			}
 		}
 	    return (objectType != null) && objectType.conformsTo(metamodelManager.getStandardLibrary(), requiredType);
+	}
+
+	public @NonNull QVTiTransformationAnalysis getTransformationAnalysis() {
+		return transformationAnalysis;
 	}
 	
 	public List<EObject> getTypeModelEObjectList(TypedModel model) {

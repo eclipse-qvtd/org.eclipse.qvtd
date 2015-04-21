@@ -46,6 +46,11 @@ public class QVTiAnalyzer extends CodeGenAnalyzer
 		cgTypedModels.put(pTypedModel, cgTypedModel);
 	}
 
+	@Override
+	public @NonNull QVTiCodeGenerator getCodeGenerator() {
+		return (QVTiCodeGenerator) super.getCodeGenerator();
+	}
+
 	public @Nullable CGFunction getFunction(@NonNull Function pFunction) {
 		return cgFunctions.get(pFunction);
 	}

@@ -82,6 +82,7 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtbase.TypedModel;
+import org.eclipse.qvtd.pivot.qvtbase.utilities.QVTbaseUtil;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
 import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.BottomPattern;
@@ -103,6 +104,7 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
 public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisitor<CGNamedElement>
@@ -546,26 +548,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	@Override
-	public @Nullable CGNamedElement visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment asPropertyAssignment) {
-//		Property asProperty = ClassUtil.nonNullModel(asPropertyAssignment.getTargetProperty());
-		CGMiddlePropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyAssignment();
-//		setPivot(cgPropertyAssignment, asPredicate);
-		cgPropertyAssignment.setSlotValue(doVisit(CGValuedElement.class, asPropertyAssignment.getSlotExpression()));
-		Property asProperty = asPropertyAssignment.getTargetProperty();
-		cgPropertyAssignment.setReferredProperty(asProperty);
-//		cgPredicate.setName(asPredicate.getName());
-		cgPropertyAssignment.setTypeId(analyzer.getTypeId(TypeId.OCL_VOID));
-//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
-		cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, asPropertyAssignment.getValue()));
-		EStructuralFeature eStructuralFeature = (EStructuralFeature) asProperty.getESObject();
-		if (eStructuralFeature != null) {
-			try {
-				genModelHelper.getGetAccessor(eStructuralFeature);
-				cgPropertyAssignment.setEStructuralFeature(eStructuralFeature);
-			} catch (GenModelException e) {
-			}
-		}
-		return cgPropertyAssignment;
+	public @Nullable CGNamedElement visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment object) {
+		return visitPropertyAssignment(object);
 	}
 
 	@Override
@@ -596,39 +580,88 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		return cgPredicate;
 	}
 
-	@Override
-	public @Nullable CGNamedElement visitPropertyAssignment(@NonNull PropertyAssignment asPropertyAssignment) {
-		Property asTargetProperty = ClassUtil.nonNullModel(asPropertyAssignment.getTargetProperty());
-		LibraryProperty libraryProperty = metamodelManager.getImplementation(asPropertyAssignment, null, asTargetProperty);
-		CGPropertyAssignment cgPropertyAssignment = null;
-		if (isEcoreProperty(libraryProperty)) {
-			EStructuralFeature eStructuralFeature = (EStructuralFeature) asTargetProperty.getESObject();
-			if (eStructuralFeature != null) {
-				try {
-					genModelHelper.getGetAccessor(eStructuralFeature);
-					CGEcorePropertyAssignment cgEcorePropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGEcorePropertyAssignment();
-					cgEcorePropertyAssignment.setEStructuralFeature(eStructuralFeature);
-					cgPropertyAssignment = cgEcorePropertyAssignment;
-				} catch (GenModelException e) {
-				}
-			}
-		}
-		if (cgPropertyAssignment == null) {
-			cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGPropertyAssignment();
-		}
+/*	@Override
+	public @Nullable CGNamedElement visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment asPropertyAssignment) {
+//		Property asProperty = ClassUtil.nonNullModel(asPropertyAssignment.getTargetProperty());
+		CGMiddlePropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyAssignment();
 //		setPivot(cgPropertyAssignment, asPredicate);
 		cgPropertyAssignment.setSlotValue(doVisit(CGValuedElement.class, asPropertyAssignment.getSlotExpression()));
-		cgPropertyAssignment.setReferredProperty(asTargetProperty);
+		Property asProperty = asPropertyAssignment.getTargetProperty();
+		cgPropertyAssignment.setReferredProperty(asProperty);
 //		cgPredicate.setName(asPredicate.getName());
 		cgPropertyAssignment.setTypeId(analyzer.getTypeId(TypeId.OCL_VOID));
 //		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
 		cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, asPropertyAssignment.getValue()));
-
-		CGExecutorProperty cgExecutorProperty = context.createExecutorProperty(asTargetProperty);
-		cgPropertyAssignment.setExecutorProperty(cgExecutorProperty);
-		
-		
+		EStructuralFeature eStructuralFeature = (EStructuralFeature) asProperty.getESObject();
+		if (eStructuralFeature != null) {
+			try {
+				genModelHelper.getGetAccessor(eStructuralFeature);
+				cgPropertyAssignment.setEStructuralFeature(eStructuralFeature);
+			} catch (GenModelException e) {
+			}
+		}
 		return cgPropertyAssignment;
+	} */
+
+	@Override
+	public @Nullable CGNamedElement visitPropertyAssignment(@NonNull PropertyAssignment asPropertyAssignment) {
+		Transformation asTransformation = ClassUtil.nonNullModel(QVTbaseUtil.getContainingTransformation(asPropertyAssignment));
+		QVTiTransformationAnalysis transformationAnalysis = analyzer.getCodeGenerator().getTransformationAnalysis(asTransformation);
+		Integer cacheIndex = transformationAnalysis.getCacheIndex(asPropertyAssignment);
+		if (cacheIndex != null) {
+//			Property asProperty = ClassUtil.nonNullModel(asPropertyAssignment.getTargetProperty());
+			CGMiddlePropertyAssignment cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyAssignment();
+//			setPivot(cgPropertyAssignment, asPredicate);
+			cgPropertyAssignment.setSlotValue(doVisit(CGValuedElement.class, asPropertyAssignment.getSlotExpression()));
+			Property asProperty = asPropertyAssignment.getTargetProperty();
+			cgPropertyAssignment.setReferredProperty(asProperty);
+//			cgPredicate.setName(asPredicate.getName());
+			cgPropertyAssignment.setTypeId(analyzer.getTypeId(TypeId.OCL_VOID));
+//			cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
+			cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, asPropertyAssignment.getValue()));
+			EStructuralFeature eStructuralFeature = (EStructuralFeature) asProperty.getESObject();
+			if (eStructuralFeature != null) {
+				try {
+					genModelHelper.getGetAccessor(eStructuralFeature);
+					cgPropertyAssignment.setEStructuralFeature(eStructuralFeature);
+				} catch (GenModelException e) {
+				}
+			}
+			return cgPropertyAssignment;
+		}
+		else {
+			Property asTargetProperty = ClassUtil.nonNullModel(asPropertyAssignment.getTargetProperty());
+			LibraryProperty libraryProperty = metamodelManager.getImplementation(asPropertyAssignment, null, asTargetProperty);
+			CGPropertyAssignment cgPropertyAssignment = null;
+			if (isEcoreProperty(libraryProperty)) {
+				EStructuralFeature eStructuralFeature = (EStructuralFeature) asTargetProperty.getESObject();
+				if (eStructuralFeature != null) {
+					try {
+						genModelHelper.getGetAccessor(eStructuralFeature);
+						CGEcorePropertyAssignment cgEcorePropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGEcorePropertyAssignment();
+						cgEcorePropertyAssignment.setEStructuralFeature(eStructuralFeature);
+						cgPropertyAssignment = cgEcorePropertyAssignment;
+					} catch (GenModelException e) {
+					}
+				}
+			}
+			if (cgPropertyAssignment == null) {
+				cgPropertyAssignment = QVTiCGModelFactory.eINSTANCE.createCGPropertyAssignment();
+			}
+	//		setPivot(cgPropertyAssignment, asPredicate);
+			cgPropertyAssignment.setSlotValue(doVisit(CGValuedElement.class, asPropertyAssignment.getSlotExpression()));
+			cgPropertyAssignment.setReferredProperty(asTargetProperty);
+	//		cgPredicate.setName(asPredicate.getName());
+			cgPropertyAssignment.setTypeId(analyzer.getTypeId(TypeId.OCL_VOID));
+	//		cgMappingCallBinding.setValueName(localnameasMappingCallBinding.getBoundVariable().getName());
+			cgPropertyAssignment.setInitValue(doVisit(CGValuedElement.class, asPropertyAssignment.getValue()));
+	
+			CGExecutorProperty cgExecutorProperty = context.createExecutorProperty(asTargetProperty);
+			cgPropertyAssignment.setExecutorProperty(cgExecutorProperty);
+			
+			
+			return cgPropertyAssignment;
+		}
 	}
 
 	@Override

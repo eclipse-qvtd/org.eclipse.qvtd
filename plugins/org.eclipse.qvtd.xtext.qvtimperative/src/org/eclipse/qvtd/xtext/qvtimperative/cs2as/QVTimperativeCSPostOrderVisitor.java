@@ -17,7 +17,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.CollectionType;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.OperationCallExp;
-import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.PropertyCallExp;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
@@ -34,10 +33,9 @@ import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
-import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
-import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateCS;
+import org.eclipse.qvtd.xtext.qvtcorebasecs.PredicateOrAssignmentCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingCallBindingCS;
 import org.eclipse.qvtd.xtext.qvtimperativecs.MappingLoopCS;
@@ -73,14 +71,14 @@ public class QVTimperativeCSPostOrderVisitor extends AbstractQVTimperativeCSPost
 	@Override
 	protected @Nullable Assignment refreshPropertyAssignment(@NonNull PropertyCallExp propertyCallExp, @NonNull PredicateOrAssignmentCS csConstraint) {
 		@Nullable PropertyAssignment propertyAssignment;
-		Property referredProperty = propertyCallExp.getReferredProperty();
-		Property oppositeProperty = referredProperty.getOpposite();
-		if ((oppositeProperty != null) && oppositeProperty.isIsImplicit() && QVTimperativeCS2AS.isMiddle(referredProperty.getOwningClass(), csConstraint)) {
-			propertyAssignment = PivotUtil.getPivot(MiddlePropertyAssignment.class, csConstraint);
-		}
-		else {
+//		Property referredProperty = propertyCallExp.getReferredProperty();
+//		Property oppositeProperty = referredProperty.getOpposite();
+//		if ((oppositeProperty != null) && oppositeProperty.isIsImplicit()) {
+//			propertyAssignment = PivotUtil.getPivot(OppositePropertyAssignment.class, csConstraint);
+//		}
+//		else {
 			propertyAssignment = PivotUtil.getPivot(PropertyAssignment.class, csConstraint);
-		}
+//		}
 		if (propertyAssignment != null) {
 			propertyAssignment.setSlotExpression(propertyCallExp.getOwnedSource());
 			propertyAssignment.setTargetProperty(propertyCallExp.getReferredProperty());

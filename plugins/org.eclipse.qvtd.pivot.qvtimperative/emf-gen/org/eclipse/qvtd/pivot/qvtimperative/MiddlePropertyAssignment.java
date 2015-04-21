@@ -23,40 +23,10 @@ import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
  * non-navigable outer-to-middle opposites.
  * <!-- end-model-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment#getCacheIndex <em>Cache Index</em>}</li>
- * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMiddlePropertyAssignment()
  * @generated
  */
 public interface MiddlePropertyAssignment extends PropertyAssignment {
-	/**
-	 * Returns the value of the '<em><b>Cache Index</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Identification of the cache of unnavigable opposites to be maintained
-	 * by this property assignment. May be null if no cache is required.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Cache Index</em>' attribute.
-	 * @see #setCacheIndex(Integer)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMiddlePropertyAssignment_CacheIndex()
-	 * @generated
-	 */
-	Integer getCacheIndex();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment#getCacheIndex <em>Cache Index</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Cache Index</em>' attribute.
-	 * @see #getCacheIndex()
-	 * @generated
-	 */
-	void setCacheIndex(Integer value);
 
 } // MiddlePropertyAssignment

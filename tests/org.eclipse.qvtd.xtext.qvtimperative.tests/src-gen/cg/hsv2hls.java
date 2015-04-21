@@ -143,14 +143,14 @@ public class hsv2hls extends AbstractTransformationExecutor
     /**
      * 
      * map HSV2MiddleRoot in hsv2hls) {
-     * hsv (hsvRoot : HSVTree::HSVNode;
+     * hsv (hsvRoot : HSVTree::HSVNode[1];
      *  |
      * )
      * { |
      * }
      * middle ( |
      * )
-     * {realize middleRoot : HSV2HLS::HSVNode2HLSNode;
+     * {realize middleRoot : HSV2HLS::HSVNode2HLSNode[1];
      *  |
      * }
      * where ( |
@@ -204,15 +204,15 @@ public class hsv2hls extends AbstractTransformationExecutor
      * 
      * map HSV2MiddleRecursion in hsv2hls) {
      * 
-     *   hsv (hsvNode : HSVTree::HSVNode;
+     *   hsv (hsvNode : HSVTree::HSVNode[1];
      *  |
      * )
      * { |
      * }
-     * middle (middleParent : HSV2HLS::HSVNode2HLSNode;
+     * middle (middleParent : HSV2HLS::HSVNode2HLSNode[1];
      *  |
      * )
-     * {realize middleNode : HSV2HLS::HSVNode2HLSNode;
+     * {realize middleNode : HSV2HLS::HSVNode2HLSNode[1];
      *  |
      * }
      * where ( |
@@ -258,14 +258,14 @@ public class hsv2hls extends AbstractTransformationExecutor
      * 
      * map Middle2HLSRoot in hsv2hls) {
      * 
-     *   middle (middleNode : HSV2HLS::HSVNode2HLSNode;
+     *   middle (middleNode : HSV2HLS::HSVNode2HLSNode[1];
      *  |
      * )
      * { |
      * }
      * hls ( |
      * )
-     * {realize hlsNode : HLSTree::HLSNode;
+     * {realize hlsNode : HLSTree::HLSNode[1];
      *  |
      * }
      * where ( |
@@ -310,14 +310,14 @@ public class hsv2hls extends AbstractTransformationExecutor
      * 
      * map Middle2HLSRecursion in hsv2hls) {
      * 
-     *   middle (middleNode : HSV2HLS::HSVNode2HLSNode;
+     *   middle (middleNode : HSV2HLS::HSVNode2HLSNode[1];
      *  |
      * )
      * { |
      * }
      * hls ( |
      * )
-     * {realize hlsNode : HLSTree::HLSNode;
+     * {realize hlsNode : HLSTree::HLSNode[1];
      *  |
      * }
      * where ( |

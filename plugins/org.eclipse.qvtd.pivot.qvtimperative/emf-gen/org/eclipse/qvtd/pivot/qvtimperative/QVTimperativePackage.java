@@ -723,6 +723,15 @@ public interface QVTimperativePackage extends EPackage {
 	int MAPPING_LOOP__IS_IMPLICIT = PivotPackage.LOOP_EXP__IS_IMPLICIT;
 
 	/**
+	 * The feature id for the '<em><b>Is Safe</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MAPPING_LOOP__IS_SAFE = PivotPackage.LOOP_EXP__IS_SAFE;
+
+	/**
 	 * The feature id for the '<em><b>Owned Source</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -968,22 +977,13 @@ public interface QVTimperativePackage extends EPackage {
 	int MIDDLE_PROPERTY_ASSIGNMENT__TARGET_PROPERTY = QVTcoreBasePackage.PROPERTY_ASSIGNMENT__TARGET_PROPERTY;
 
 	/**
-	 * The feature id for the '<em><b>Cache Index</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MIDDLE_PROPERTY_ASSIGNMENT__CACHE_INDEX = QVTcoreBasePackage.PROPERTY_ASSIGNMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>Middle Property Assignment</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MIDDLE_PROPERTY_ASSIGNMENT_FEATURE_COUNT = QVTcoreBasePackage.PROPERTY_ASSIGNMENT_FEATURE_COUNT + 1;
+	int MIDDLE_PROPERTY_ASSIGNMENT_FEATURE_COUNT = QVTcoreBasePackage.PROPERTY_ASSIGNMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MiddlePropertyCallExpImpl <em>Middle Property Call Exp</em>}' class.
@@ -1084,6 +1084,15 @@ public interface QVTimperativePackage extends EPackage {
 	 * @ordered
 	 */
 	int MIDDLE_PROPERTY_CALL_EXP__IS_IMPLICIT = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__IS_IMPLICIT;
+
+	/**
+	 * The feature id for the '<em><b>Is Safe</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MIDDLE_PROPERTY_CALL_EXP__IS_SAFE = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__IS_SAFE;
 
 	/**
 	 * The feature id for the '<em><b>Owned Source</b></em>' containment reference.
@@ -1399,17 +1408,6 @@ public interface QVTimperativePackage extends EPackage {
 	EClass getMiddlePropertyAssignment();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment#getCacheIndex <em>Cache Index</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Cache Index</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment#getCacheIndex()
-	 * @see #getMiddlePropertyAssignment()
-	 * @generated
-	 */
-	EAttribute getMiddlePropertyAssignment_CacheIndex();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp <em>Middle Property Call Exp</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1616,14 +1614,6 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EClass MIDDLE_PROPERTY_ASSIGNMENT = eINSTANCE.getMiddlePropertyAssignment();
-
-		/**
-		 * The meta object literal for the '<em><b>Cache Index</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MIDDLE_PROPERTY_ASSIGNMENT__CACHE_INDEX = eINSTANCE.getMiddlePropertyAssignment_CacheIndex();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.MiddlePropertyCallExpImpl <em>Middle Property Call Exp</em>}' class.

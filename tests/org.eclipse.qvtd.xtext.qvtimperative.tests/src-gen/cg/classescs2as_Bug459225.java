@@ -91,10 +91,10 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
     }
     
     /**
-     * classescs::NamedElementCS::computeName() : String
+     * classescs::NamedElementCS::computeName() : String[1]
      * 
      * 
-     * let container : OclElement = self.oclContainer()
+     * let container : OclElement[?] = self.oclContainer()
      * in
      *   if
      *     not container.oclIsUndefined() and
@@ -169,14 +169,14 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
      * 
      * map createPackage in classescs2as_Bug459225) {
      * 
-     *   leftCS (packageCS : classescs::PackageCS;
+     *   leftCS (packageCS : classescs::PackageCS[1];
      *  |
      * )
      * { |
      * }
      * rightAS ( |
      * )
-     * {realize package : classes::Package;
+     * {realize package : classes::Package[1];
      *  |
      * }
      * where ( |

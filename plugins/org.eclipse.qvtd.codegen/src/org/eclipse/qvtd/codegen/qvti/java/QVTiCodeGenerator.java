@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -46,6 +47,7 @@ import org.eclipse.qvtd.codegen.qvticgmodel.CGTransformation;
 import org.eclipse.qvtd.codegen.utilities.QVTiCGModelResourceFactory;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiEnvironmentFactory;
+import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
 
 /**
  * QVTiCodeGenerator supports generation of the content of a JavaClassFile to
@@ -163,6 +165,17 @@ public class QVTiCodeGenerator extends JavaCodeGenerator
 		} else {
 			return className;
 		}
+	}
+
+	public @NonNull QVTiTransformationAnalysis getTransformationAnalysis(@NonNull Transformation transformation) {
+		Map<Transformation, QVTiTransformationAnalysis> transformation2analysis = new HashMap<Transformation, QVTiTransformationAnalysis>();
+		QVTiTransformationAnalysis transformationAnalysis = transformation2analysis.get(transformation);
+		if (transformationAnalysis == null) {
+			transformationAnalysis = new QVTiTransformationAnalysis(getEnvironmentFactory().getMetamodelManager());
+			transformationAnalysis.analyzeTransformation(transformation);
+			transformation2analysis.put(transformation, transformationAnalysis);
+		}
+		return transformationAnalysis;
 	}
 
 	public void saveSourceFile(@NonNull String savePath) throws IOException {
