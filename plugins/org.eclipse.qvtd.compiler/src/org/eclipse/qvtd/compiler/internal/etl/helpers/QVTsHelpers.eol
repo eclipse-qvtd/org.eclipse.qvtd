@@ -110,10 +110,31 @@ operation QVTs!Schedule getAllDatums() : OrderedSet(QVTs!AbstractDatum) {
 	return classDatums.includingAll(classDatums.propertyDatums.flatten());
 }
 
+/****o* QVTsHelpers/getContextDataParameters
+ * NAME
+ *  getContextDataParameters - Get the data parameters available in the context
+ *  of the mapping.
+ * FUNCTION
+ *  The parameters available are all the DataParameters available in the mapping and
+ *  the mapping's predecessors, excluding those that are guarded. A DataParameter
+ *  is guarded if there exists a predicate that guards the DataParameter's Variable
+ *  or any of its properties
+ * CONTEXT
+ *  QVTs!MappingAction  The MappingAction
+ * RETURNS
+ *  OrderedSet	The set of usable parameters. 
+ *  SEE ALSO
+ */
 @cached
 operation QVTs!MappingAction getContextDataParameters() : OrderedSet {
 	
-	var contextdp = self.getAvailableDataParameters();
+	// Filter guarded DataParameters
+	//self.mapping.println("getContextDataParameters ");
+	//self.getAvailableDataParameters().variable.name.println("getContextDataParameters ");
+	var contextdp = self.getAvailableDataParameters().select(dp | not self.mapping.guardPattern.predicate
+			.exists(p | p.conditionExpression.ownedSource.getAllContentsIncludingSelf()
+				.exists(ex : QVTp!VariableExp | ex.referredVariable = dp.variable)));
+	//contextdp.variable.name.println("getContextDataParameters ");				
 	if (self.parent.isDefined()) {
 		contextdp.addAll(self.parent.closure(p | p.parent).collect(p | p.getAvailableDataParameters()).flatten());
 	}
