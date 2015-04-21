@@ -230,6 +230,8 @@ public class MtcBroker {
 	/** The i model. */
 	protected PivotModel iModel;
 
+	private URI debugUri;
+
 	
 	
 	
@@ -259,6 +261,8 @@ public class MtcBroker {
 		this.savingOptions = savingOptions;
 		this.environmentFactory = environmentFactory;
 		this.baseUri = baseURI;
+		this.debugUri = baseURI.appendSegment("debug");
+		String dgPath = this.debugUri.appendSegment(qvtcSource).trimFileExtension() + "Dependencies";
 		System.out.println("Executing the QVTc to QVTi MTC for " + qvtcSource);
 		this.baseUri = baseURI;
 		URI qvtcURI = baseURI.appendSegment(qvtcSource);
@@ -270,7 +274,7 @@ public class MtcBroker {
 		this.qvtiUri = modelsBaseUri.appendFileExtension("qvtias").toString();
 		this.configUri = URI.createURI(modelsBaseUri.toString() + "Config").appendFileExtension("xmi").toString();
 		this.scheduleUri = URI.createURI(modelsBaseUri.toString() + "Schedule").appendFileExtension("xmi").toString();
-		this.dependencyGraphUri = URI.createURI(modelsBaseUri.toString() + "Dependencies").appendFileExtension("graphml");
+		this.dependencyGraphUri = URI.createURI(dgPath).appendFileExtension("graphml");
 		
 		candidateMetamodelContainmentTrees = new HashMap<String, List<PivotModel>>();
 		registerMetamodels(environmentFactory);
@@ -361,12 +365,12 @@ public class MtcBroker {
 		pModel = qvtmToQvtp(mModel);
 		
 		sModel = qvtpToQvts(pModel);
-		if (createGraphml)
-			qvtsToGraphML(sModel);
 		if (nestedSchedule)
 			qvtpNestingScheduling(pModel, sModel);
 		else
 			qvtpFlatScheduling(pModel, sModel);
+		if (createGraphml)
+			qvtsToGraphML(sModel);
 		iModel = qvtpQvtsToQvti(pModel, sModel);
 	}
 	

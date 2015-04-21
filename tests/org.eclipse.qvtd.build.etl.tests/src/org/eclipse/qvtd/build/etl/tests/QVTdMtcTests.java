@@ -124,8 +124,8 @@ public class QVTdMtcTests extends LoadTestCase {
     	URI testBaseURI = TESTS_BASE_URI.appendSegment("UmlToRdbms");;
     	URI samplesBaseUri = testBaseURI.appendSegment("samples");
     	MtcBroker mtc = new MtcBroker(testBaseURI, "UmlToRdbms.qvtcas", myQVT.getEnvironmentFactory());
-    	//mtc.execute();
-    	mtc.executeQvtsToGraphML();
+    	mtc.setCreateGraphml(true);
+    	mtc.execute();
     	assertNoValidationErrors("QVTu validation", mtc.getuModel().getRooteObject());
     	assertNoValidationErrors("QVTm validation", mtc.getmModel().getRooteObject());
         assertNoValidationErrors("QVTp validation", mtc.getpModel().getRooteObject());
@@ -162,9 +162,8 @@ public class QVTdMtcTests extends LoadTestCase {
     	
     	URI testBaseURI = TESTS_BASE_URI.appendSegment("UpperToLower");;
     	MtcBroker mtc = new MtcBroker(testBaseURI, "UpperToLower.qvtcas", myQVT.getEnvironmentFactory(), TestsXMLUtil.defaultSavingOptions);
-    	//mtc.execute();
-    	mtc.executeQvtsToGraphML();
-    	//mtc.executeScheduling(false);
+    	mtc.setCreateGraphml(true);
+    	mtc.execute();
     	assertNoValidationErrors("QVTu validation", mtc.getuModel().getRooteObject());
     	assertNoValidationErrors("QVTm validation", mtc.getmModel().getRooteObject());
         assertNoValidationErrors("QVTp validation", mtc.getpModel().getRooteObject());
