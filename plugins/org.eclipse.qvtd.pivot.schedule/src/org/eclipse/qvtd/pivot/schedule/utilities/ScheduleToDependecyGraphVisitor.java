@@ -85,7 +85,7 @@ public class ScheduleToDependecyGraphVisitor extends AbstractExtendingScheduleVi
 				return DATUM_TARGET_COLOR;
 			}
 		}
-		return "#000000";
+		return SOL_BASE1;
 	}
 
 	protected @NonNull String getMappingLabel(@NonNull MappingAction object) {
