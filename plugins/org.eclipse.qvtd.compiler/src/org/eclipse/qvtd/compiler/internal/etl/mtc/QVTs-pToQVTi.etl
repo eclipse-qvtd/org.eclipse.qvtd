@@ -447,11 +447,14 @@ operation QVTs!SecondaryParameter getNavigationExp() : QVTi!OCLExpression {
 	if (self.derivationProperty.isDefined()) {
 		//self.dataParameter.variable.name.println("derivationProperty.isDefined ");
 		//self.derivationProperty.name.println("prop ");
-		if (self.derivationProperty.isIsImplicit())
+		if (self.derivationProperty.isIsImplicit()) {
 			exp = new QVTi!OppositePropertyCallExp;
-		else
+			exp.referredProperty = self.derivationProperty.opposite;
+		}
+		else {
 			exp = new QVTi!PropertyCallExp;
-		exp.referredProperty = self.derivationProperty;
+			exp.referredProperty = self.derivationProperty;
+		}
 		exp.type = exp.referredProperty.type;
 		if (self.derivation.primaryParameter.secondaryParameter.isDefined()) {
 			if (self.derivation.primaryParameter.secondaryParameter.isLoop) {
