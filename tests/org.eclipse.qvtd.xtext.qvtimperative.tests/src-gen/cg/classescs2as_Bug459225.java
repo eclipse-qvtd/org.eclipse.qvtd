@@ -65,13 +65,13 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
     public static final @NonNull /*@NonInvalid*/ String STR_unnamed = "unnamed";
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_PackageCS = TypeId.SET.getSpecializedId(CLSSid_PackageCS);
     
-    
     /*
      * Array of the ClassIds of each class for which allInstances() may be invoked. Array index is the ClassIndex.
      */
     private static final @NonNull ClassId[] classIndex2classId = new ClassId[]{
-        CLSSid_PackageCS		// 0 => PackageCS
+        CLSSid_PackageCS                // 0 => PackageCS
     };
+    
     /*
      * Mapping from each ClassIndex to all the ClassIndexes to which an object of the outer index
      * may contribute results to an allInstances() invocation.
@@ -79,7 +79,7 @@ public class classescs2as_Bug459225 extends AbstractTransformationExecutor
      * instance of the derived classId contributes to derived and inherited ClassIndexes.
      */
     private final static @NonNull int[][] classIndex2allClassIndexes = new int[][] {
-        {0}		// 0 : PackageCS -> {PackageCS}
+        {0}                     // 0 : PackageCS -> {PackageCS}
     };
     
     public classescs2as_Bug459225(final @NonNull Evaluator evaluator) {

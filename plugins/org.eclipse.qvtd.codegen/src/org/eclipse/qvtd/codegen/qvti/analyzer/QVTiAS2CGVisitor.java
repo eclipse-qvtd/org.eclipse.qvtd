@@ -30,7 +30,6 @@ import org.eclipse.ocl.examples.codegen.cgmodel.CGOperation;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGParameter;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGValuedElement;
 import org.eclipse.ocl.examples.codegen.cgmodel.CGVariable;
-import org.eclipse.ocl.examples.codegen.cgmodel.CGVariableExp;
 import org.eclipse.ocl.examples.codegen.generator.GenModelException;
 import org.eclipse.ocl.examples.codegen.java.JavaLocalContext;
 import org.eclipse.ocl.pivot.CollectionType;
@@ -42,6 +41,7 @@ import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.OCLExpression;
 import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.OperationCallExp;
+import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
@@ -279,7 +279,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		}
 	}
 
-	protected @NonNull CGValuedElement generateMiddlePropertyCallExp(@NonNull CGValuedElement cgSource, @NonNull MiddlePropertyCallExp asMiddlePropertyCallExp) {
+/*	protected @NonNull CGValuedElement generateMiddlePropertyCallExp(@NonNull CGValuedElement cgSource, @NonNull MiddlePropertyCallExp asMiddlePropertyCallExp) {
 		Property asOppositeProperty = ClassUtil.nonNullModel(asMiddlePropertyCallExp.getReferredProperty());
 		Property asProperty = ClassUtil.nonNullModel(asOppositeProperty.getOpposite());
 		globalContext.addToMiddleProperty(asOppositeProperty);
@@ -294,7 +294,7 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		cgPropertyCallExp.setRequired(asProperty.isIsRequired());
 		cgPropertyCallExp.setSource(cgSource);
 		return cgPropertyCallExp;
-	}
+	} */
 
 	@Override
 	protected @NonNull CGValuedElement generateOperationCallExp(@Nullable CGValuedElement cgSource, @NonNull OperationCallExp asOperationCallExp) {
@@ -314,6 +314,24 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 		else {
 			return super.generateOperationCallExp(cgSource, asOperationCallExp);
 		}
+	}
+
+	@Override
+	protected @NonNull CGValuedElement generateOppositePropertyCallExp(@NonNull CGValuedElement cgSource, @NonNull OppositePropertyCallExp asOppositePropertyCallExp) {
+		Property asOppositeProperty = ClassUtil.nonNullModel(asOppositePropertyCallExp.getReferredProperty());
+		Property asProperty = ClassUtil.nonNullModel(asOppositeProperty.getOpposite());
+		globalContext.addOppositeProperty(asOppositeProperty);
+//		LibraryProperty libraryProperty = metamodelManager.getImplementation(asProperty);
+		CGMiddlePropertyCallExp cgPropertyCallExp = QVTiCGModelFactory.eINSTANCE.createCGMiddlePropertyCallExp();					
+//		CGExecutorProperty cgExecutorProperty = context.getExecutorProperty(asProperty);
+//		cgExecutorPropertyCallExp.setExecutorProperty(cgExecutorProperty);
+//		cgPropertyCallExp = cgExecutorPropertyCallExp;
+//		cgPropertyCallExp.getDependsOn().add(cgExecutorProperty);
+		cgPropertyCallExp.setReferredProperty(asOppositeProperty);
+		setAst(cgPropertyCallExp, asOppositePropertyCallExp);
+		cgPropertyCallExp.setRequired(asProperty.isIsRequired());
+		cgPropertyCallExp.setSource(cgSource);
+		return cgPropertyCallExp;
 	}
 
 	public @NonNull CGFunctionParameter getFunctionParameter(@NonNull FunctionParameter asFunctionParameter) {
@@ -553,15 +571,8 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	}
 
 	@Override
-	public final @Nullable CGNamedElement visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp element) {
-		CGValuedElement cgSource = doVisit(CGValuedElement.class, element.getOwnedSource());
-		if (!element.isIsSafe()) {
-			return generateMiddlePropertyCallExp(cgSource, element);
-		}
-		CGFinalVariable cgVariable = generateSafeVariable(cgSource, "safe_" + element.getReferredProperty().getName());
-		CGVariableExp cgVariableExp = generateSafeVariableExp(element, cgVariable);
-		CGValuedElement cgUnsafeExp = generateMiddlePropertyCallExp(cgVariableExp, element);
-		return generateSafeNavigationGuard(element, cgVariable, cgUnsafeExp);
+	public @Nullable CGNamedElement visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp object) {
+		return visitOppositePropertyCallExp(object);
 	}
 
 	@Override

@@ -18,6 +18,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ocl.pivot.Import;
 import org.eclipse.ocl.pivot.OCLExpression;
+import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.Variable;
@@ -66,6 +67,8 @@ import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 public abstract class QVTiAbstractEvaluationVisitor extends OCLEvaluationVisitor implements IQVTiEvaluationVisitor
 {
 //	private static final Logger logger = Logger.getLogger(QVTiAbstractEvaluationVisitor.class);
+	
+	protected final @NonNull QVTiTransformationAnalysis transformationAnalysis;
         
     /**
      * Instantiates a new QVT imperative abstract visitor.
@@ -75,6 +78,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends OCLEvaluationVisitor
      */
     public QVTiAbstractEvaluationVisitor(@NonNull IQVTiEvaluationEnvironment evalEnv) {
         super(evalEnv);
+		this.transformationAnalysis = getModelManager().getTransformationAnalysis();
     }
 
     /* (non-Javadoc)
@@ -95,7 +99,7 @@ public abstract class QVTiAbstractEvaluationVisitor extends OCLEvaluationVisitor
 			Object ecoreValue = environmentFactory.getIdResolver().ecoreValueOf(instanceClass, boxedValue);
 			targetProperty.initValue((EObject) slotExpValue, ecoreValue);
 			if (cacheIndex != null) {
-				getModelManager().setMiddleOpposite(cacheIndex, slotExpValue, ecoreValue);
+				getModelManager().setUnnavigableOpposite(cacheIndex, slotExpValue, ecoreValue);
 			}
 			return;
 		} else {
@@ -373,19 +377,24 @@ public abstract class QVTiAbstractEvaluationVisitor extends OCLEvaluationVisitor
 		return visitPropertyAssignment(object);
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitMiddlePropertyCallExp(org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp)
-	 */
 	@Override
 	public @Nullable Object visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp pPropertyCallExp) {
-		OCLExpression source = pPropertyCallExp.getOwnedSource();
+		return visitOppositePropertyCallExp(pPropertyCallExp);
+	}
+
+	@Override
+	public Object visitOppositePropertyCallExp(@NonNull OppositePropertyCallExp oppositePropertyCallExp) {
+		Integer cacheIndex = transformationAnalysis.getCacheIndex(oppositePropertyCallExp);
+		if (cacheIndex == null) {
+			return super.visitOppositePropertyCallExp(oppositePropertyCallExp);
+		}
+		OCLExpression source = oppositePropertyCallExp.getOwnedSource();
 		Object sourceValue = source != null ? undecoratedVisitor.evaluate(source) : null;
 		if (sourceValue != null) {
-			Integer cacheIndex = ClassUtil.nonNullState(pPropertyCallExp.getCacheIndex());
-			Object middleOpposite = getModelManager().getMiddleOpposite(cacheIndex, sourceValue);
+			Object middleOpposite = getModelManager().getUnnavigableOpposite(cacheIndex, sourceValue);
 			return ClassUtil.nonNullState(middleOpposite);
 		}
-		throw new InvalidValueException("Failed to evaluate '" + pPropertyCallExp.getReferredProperty() + "'", sourceValue, pPropertyCallExp);
+		throw new InvalidValueException("Failed to evaluate '" + oppositePropertyCallExp.getReferredProperty() + "'", sourceValue, oppositePropertyCallExp);
 	}
 
 	/* (non-Javadoc)
@@ -414,8 +423,6 @@ public abstract class QVTiAbstractEvaluationVisitor extends OCLEvaluationVisitor
      */
     @Override
 	public @Nullable Object visitPropertyAssignment(@NonNull PropertyAssignment propertyAssignment) {
-		QVTiModelManager modelManager2 = getModelManager();
-		QVTiTransformationAnalysis transformationAnalysis = modelManager2.getTransformationAnalysis();
 		doPropertyAssignment(propertyAssignment, transformationAnalysis.getCacheIndex(propertyAssignment));
         return true;
     }

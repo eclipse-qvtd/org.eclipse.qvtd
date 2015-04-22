@@ -23,40 +23,10 @@ import org.eclipse.ocl.pivot.OppositePropertyCallExp;
  * non-navigable outer-to-middle opposites.
  * <!-- end-model-doc -->
  *
- * <p>
- * The following features are supported:
- * </p>
- * <ul>
- *   <li>{@link org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp#getCacheIndex <em>Cache Index</em>}</li>
- * </ul>
  *
  * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMiddlePropertyCallExp()
  * @generated
  */
 public interface MiddlePropertyCallExp extends OppositePropertyCallExp {
-	/**
-	 * Returns the value of the '<em><b>Cache Index</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * Identification of the cache of unnavigable opposites to be exploited
-	 * by this property call. Should not be null during execution.
-	 * <!-- end-model-doc -->
-	 * @return the value of the '<em>Cache Index</em>' attribute.
-	 * @see #setCacheIndex(Integer)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage#getMiddlePropertyCallExp_CacheIndex()
-	 * @generated
-	 */
-	Integer getCacheIndex();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp#getCacheIndex <em>Cache Index</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Cache Index</em>' attribute.
-	 * @see #getCacheIndex()
-	 * @generated
-	 */
-	void setCacheIndex(Integer value);
 
 } // MiddlePropertyCallExp

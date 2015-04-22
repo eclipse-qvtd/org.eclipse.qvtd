@@ -1140,22 +1140,13 @@ public interface QVTimperativePackage extends EPackage {
 	int MIDDLE_PROPERTY_CALL_EXP__REFERRED_PROPERTY = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP__REFERRED_PROPERTY;
 
 	/**
-	 * The feature id for the '<em><b>Cache Index</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MIDDLE_PROPERTY_CALL_EXP__CACHE_INDEX = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP_FEATURE_COUNT + 0;
-
-	/**
 	 * The number of structural features of the '<em>Middle Property Call Exp</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MIDDLE_PROPERTY_CALL_EXP_FEATURE_COUNT = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP_FEATURE_COUNT + 1;
+	int MIDDLE_PROPERTY_CALL_EXP_FEATURE_COUNT = PivotPackage.OPPOSITE_PROPERTY_CALL_EXP_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.VariablePredicateImpl <em>Variable Predicate</em>}' class.
@@ -1418,17 +1409,6 @@ public interface QVTimperativePackage extends EPackage {
 	EClass getMiddlePropertyCallExp();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp#getCacheIndex <em>Cache Index</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Cache Index</em>'.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp#getCacheIndex()
-	 * @see #getMiddlePropertyCallExp()
-	 * @generated
-	 */
-	EAttribute getMiddlePropertyCallExp_CacheIndex();
-
-	/**
 	 * Returns the meta object for class '{@link org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate <em>Variable Predicate</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1624,14 +1604,6 @@ public interface QVTimperativePackage extends EPackage {
 		 * @generated
 		 */
 		EClass MIDDLE_PROPERTY_CALL_EXP = eINSTANCE.getMiddlePropertyCallExp();
-
-		/**
-		 * The meta object literal for the '<em><b>Cache Index</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute MIDDLE_PROPERTY_CALL_EXP__CACHE_INDEX = eINSTANCE.getMiddlePropertyCallExp_CacheIndex();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.qvtd.pivot.qvtimperative.impl.VariablePredicateImpl <em>Variable Predicate</em>}' class.

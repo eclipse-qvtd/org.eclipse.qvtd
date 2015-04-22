@@ -68,7 +68,7 @@ public class QVTiEnvironmentFactory extends AbstractEnvironmentFactory {
 	}
 
 	public @NonNull QVTiTransformationAnalysis createTransformationAnalysis() {
-		return new QVTiTransformationAnalysis(getMetamodelManager());
+		return new QVTiTransformationAnalysis(this);
 	}
 
 	public boolean keepDebug() {

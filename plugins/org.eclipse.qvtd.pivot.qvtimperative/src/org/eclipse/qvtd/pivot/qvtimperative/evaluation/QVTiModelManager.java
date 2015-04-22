@@ -58,11 +58,11 @@ public class QVTiModelManager implements ModelManager
 	private @NonNull Set<org.eclipse.ocl.pivot.Class> allInstancesClasses;
 
 	/**
-	 * Array of caches for the un-navigable opposite of each used navigable middle to outer property. 
-	 * The array index is allocated by the QVTiTransformationAanaysis; it identifies the middle2outerProperty
-	 * of interest. Each cache is from outerObject to middleObject.
+	 * Array of caches for the un-navigable opposite of each used property. 
+	 * The array index is allocated by the QVTiTransformationAnalysis; it identifies the property
+	 * of interest. Each cache is from the sourceObject to the un-navigable targetObject.
 	 */
-	private @NonNull Map<?, ?> middleOpposites[];
+	private @NonNull Map<?, ?> unnavigableOpposites[];
 	
 	
 	/**
@@ -74,9 +74,9 @@ public class QVTiModelManager implements ModelManager
 	    this.metamodelManager = transformationAnalysis.getMetamodelManager();
 	    this.allInstancesClasses = transformationAnalysis.getAllInstancesClasses();
 	    int cacheIndexes = transformationAnalysis.getCacheIndexes();
-		this.middleOpposites = new Map<?, ?>[cacheIndexes];
+		this.unnavigableOpposites = new Map<?, ?>[cacheIndexes];
 		for (int i = 0; i < cacheIndexes; i++) {
-			this.middleOpposites[i] = new HashMap<Object, Object>();
+			this.unnavigableOpposites[i] = new HashMap<Object, Object>();
 		}
 	}
 
@@ -116,8 +116,8 @@ public class QVTiModelManager implements ModelManager
 		modelElementsMap.clear();
 		modelResourceMap.clear();
 		allInstancesClasses.clear();
-		for (Map<?, ?> middleOpposite : middleOpposites) {
-			middleOpposite.clear();
+		for (Map<?, ?> unnavigableOpposite : unnavigableOpposites) {
+			unnavigableOpposite.clear();
 		}
 	}
 
@@ -203,10 +203,10 @@ public class QVTiModelManager implements ModelManager
     }
 
 	/**
-	 * Retrieve the unnavigable opposite of the cacheIndex of outerObject.
+	 * Return the target object of the unnavigable property, associated with cacheIndex, navigation from sourceObject.
 	 */
-	public Object getMiddleOpposite(@NonNull Integer cacheIndex, @NonNull Object outerObject) {
-		return middleOpposites[cacheIndex].get(outerObject);
+	public Object getUnnavigableOpposite(@NonNull Integer cacheIndex, @NonNull Object sourceObject) {
+		return unnavigableOpposites[cacheIndex].get(sourceObject);
 	}
 
 	/**
@@ -312,10 +312,10 @@ public class QVTiModelManager implements ModelManager
     }
 
 	/**
-	 * Register middleObject as the unnavigable opposite of the cacheIndex of outerObject.
+	 * Register targetObject as the target of the unnavigable property, associated with cacheIndex, navigation from sourceObject.
 	 */
 	@SuppressWarnings("unchecked")
-	public void setMiddleOpposite(@NonNull Integer cacheIndex, @NonNull Object middleObject, Object outerObject) {
-		((Map<Object, Object>)middleOpposites[cacheIndex]).put(outerObject, middleObject);
+	public void setUnnavigableOpposite(@NonNull Integer cacheIndex, @NonNull Object targetObject, Object sourceObject) {
+		((Map<Object, Object>)unnavigableOpposites[cacheIndex]).put(sourceObject, targetObject);
 	}
 }

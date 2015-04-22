@@ -42,9 +42,24 @@ public interface DomainUsage
 	@NonNull Iterable<TypedModel> getTypedModels();
 
 	/**
+	 * Return true if this usage includes usage in a checkable domain.
+	 */
+	boolean isCheckable();
+
+	/**
 	 * Return true if this usage has been resolve to zero or more TypedModels, false if it is an unresolved variable usage. 
 	 */
 	boolean isConstant();
+
+	/**
+	 * Return true if this usage includes usage in an enforceable domain.
+	 */
+	boolean isEnforceable();
+
+	/**
+	 * Return true if this usage includes usage in the middle domain.
+	 */
+	boolean isMiddle();
 	
 	public interface Internal extends DomainUsage, Comparable<DomainUsage.Internal>
 	{

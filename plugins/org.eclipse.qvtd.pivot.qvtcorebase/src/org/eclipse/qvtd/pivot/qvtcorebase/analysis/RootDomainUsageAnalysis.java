@@ -85,6 +85,21 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis
 			return typedModels;
 		}
 
+		@Override
+		public boolean isCheckable() {
+			return (bitMask & checkableUsage.bitMask) != 0;
+		}
+
+		@Override
+		public boolean isEnforceable() {
+			return (bitMask & enforceableUsage.bitMask) != 0;
+		}
+
+		@Override
+		public boolean isMiddle() {
+			return (bitMask & middleUsage.bitMask) != 0;
+		}
+
 		protected String toString(@NonNull String prefix) {
 			StringBuilder s = new StringBuilder();
 			s.append(prefix);
@@ -234,6 +249,16 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis
 	private DomainUsageConstant middleUsage = null;
 
 	/**
+	 * The TypedModels that are checkable.
+	 */
+	private DomainUsageConstant checkableUsage = null;
+
+	/**
+	 * The TypedModels that are enforceable.
+	 */
+	private DomainUsageConstant enforceableUsage = null;
+
+	/**
 	 * The domains in which each class may be used.
 	 */
 	protected final @NonNull Map<org.eclipse.ocl.pivot.Class, DomainUsageConstant> class2usage = new HashMap<org.eclipse.ocl.pivot.Class, DomainUsageConstant>();
@@ -282,25 +307,33 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis
 
 	
 	public @NonNull Map<Element, DomainUsage> analyzeTransformation(@NonNull Transformation transformation) {
-		int notMiddleMask = PRIMITIVE_USAGE_BIT_MASK;
+		int checkableMask = 0;
+		int enforceableMask = 0;
 		CompleteModelInternal completeModel = context.getCompleteModel();
 		for (@SuppressWarnings("null")@NonNull TypedModel typedModel : transformation.getModelParameter()) {
 			int nextBit = add(typedModel);
 			int bitMask = 1 << nextBit;
 			DomainUsageConstant typedModelUsage = getConstantUsage(bitMask);
 			validUsages.put(bitMask, typedModelUsage);
-			boolean gotIt = false;
+			boolean isCheckable = false;
+			boolean isEnforceable = false;
 			for (Rule rule : transformation.getRule()) {
 				for (Domain domain : rule.getDomain()) {
-					if ((domain.getTypedModel() == typedModel) && (domain.isIsCheckable() || domain.isIsEnforceable())) {
-						gotIt = true;
-						break;
+					if (domain.getTypedModel() == typedModel) {
+						if (domain.isIsCheckable()) {
+							isCheckable = true;
+						}
+						if (domain.isIsEnforceable()) {
+							isEnforceable = true;
+						}
 					}
 				}
-				if (gotIt) {
-					notMiddleMask |= bitMask;
-					break;
-				}
+			}
+			if (isCheckable) {
+				checkableMask |= bitMask;
+			}
+			if (isEnforceable) {
+				enforceableMask |= bitMask;
 			}
 			setUsage(typedModel, typedModelUsage);
 			Set<CompleteClass> completeClasses = new HashSet<CompleteClass>();
@@ -353,7 +386,9 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis
 			}
 		}
 		class2usage.put(context.getStandardLibrary().getOclTypeType(), getAnyUsage());		// Needed by oclIsKindOf() etc
-		middleUsage = getConstantUsage(getAnyMask() & ~notMiddleMask);
+		checkableUsage = getConstantUsage(getAnyMask() & checkableMask);
+		enforceableUsage = getConstantUsage(getAnyMask() & enforceableMask);
+		middleUsage = getConstantUsage(getAnyMask() & ~checkableMask & ~enforceableMask);
 		visit(transformation);
 		return element2usage;
 	}
@@ -382,6 +417,10 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis
 		return getConstantUsage(getAnyMask());
 	}
 
+	public @NonNull DomainUsage getCheckableUsage() {
+		return ClassUtil.nonNullState(checkableUsage);
+	}
+
 	public @NonNull DomainUsageConstant getConstantUsage(int bitMask) {
 		DomainUsageConstant usage = constantUsages.get(bitMask);
 		if (usage == null) {
@@ -389,6 +428,10 @@ public class RootDomainUsageAnalysis extends AbstractDomainUsageAnalysis
 			constantUsages.put(bitMask, usage);
 		}
 		return usage;
+	}
+
+	public @NonNull DomainUsage getEnforceableUsage() {
+		return ClassUtil.nonNullState(enforceableUsage);
 	}
 
 	public @NonNull DomainUsage getMiddleUsage() {

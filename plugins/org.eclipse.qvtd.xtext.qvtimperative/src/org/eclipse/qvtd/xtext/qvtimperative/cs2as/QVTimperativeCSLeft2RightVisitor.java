@@ -12,14 +12,10 @@ package org.eclipse.qvtd.xtext.qvtimperative.cs2as;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.ocl.pivot.NavigationCallExp;
-import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.Property;
 import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.essentialoclcs.NameExpCS;
-import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
-import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.xtext.qvtimperativecs.util.AbstractQVTimperativeCSLeft2RightVisitor;
 
 public class QVTimperativeCSLeft2RightVisitor extends AbstractQVTimperativeCSLeft2RightVisitor
@@ -36,20 +32,6 @@ public class QVTimperativeCSLeft2RightVisitor extends AbstractQVTimperativeCSLef
 		}
 		else {
 			return super.resolvePropertyReturnType(sourceExp, csNameExp, property);
-		}
-	}
-
-	@Override
-	protected @NonNull OppositePropertyCallExp refreshOppositePropertyCallExp(@NonNull NameExpCS csNameExp, @NonNull OCLExpression sourceExp, @NonNull Property property) {
-		Property oppositeProperty = property.getOpposite();
-		if (QVTimperativeCS2AS.isMiddle(oppositeProperty.getOwningClass(), csNameExp)) {
-			MiddlePropertyCallExp callExp = context.refreshModelElement(MiddlePropertyCallExp.class, QVTimperativePackage.Literals.MIDDLE_PROPERTY_CALL_EXP, csNameExp);
-			callExp.setOwnedSource(sourceExp);			
-			callExp.setReferredProperty(property.getOpposite());
-			return callExp;
-		}
-		else {
-			return super.refreshOppositePropertyCallExp(csNameExp, sourceExp, property);
 		}
 	}
 }

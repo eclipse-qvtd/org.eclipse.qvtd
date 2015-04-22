@@ -131,19 +131,21 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_Package = TypeId.SET.getSpecializedId(CLSSid_Package);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_PrimitiveToName = TypeId.SET.getSpecializedId(CLSSid_PrimitiveToName);
     
-    /* Outer-to-Middle Property navigation caches */
+    /*
+     * Property-source to Property-target unnavigable navigation caches
+     */
     protected final @NonNull Map<Table,ClassToTable> OPPOSITE_OF_ClassToTable_table = new HashMap<Table,ClassToTable>();
     protected final @NonNull Map<manualuml2rdbms.uml.Class,ClassToTable> OPPOSITE_OF_ClassToTable_umlClass = new HashMap<manualuml2rdbms.uml.Class,ClassToTable>();
     protected final @NonNull Map<Attribute,FromAttribute> OPPOSITE_OF_FromAttribute_attribute = new HashMap<Attribute,FromAttribute>();
     protected final @NonNull Map<PrimitiveDataType,PrimitiveToName> OPPOSITE_OF_PrimitiveToName_primitive = new HashMap<PrimitiveDataType,PrimitiveToName>();
     
-    
     /*
      * Array of the ClassIds of each class for which allInstances() may be invoked. Array index is the ClassIndex.
      */
     private static final @NonNull ClassId[] classIndex2classId = new ClassId[]{
-        CLSSid_Package		// 0 => Package
+        CLSSid_Package                  // 0 => Package
     };
+    
     /*
      * Mapping from each ClassIndex to all the ClassIndexes to which an object of the outer index
      * may contribute results to an allInstances() invocation.
@@ -151,7 +153,7 @@ public class ManualUML2RDBMS extends AbstractTransformationExecutor
      * instance of the derived classId contributes to derived and inherited ClassIndexes.
      */
     private final static @NonNull int[][] classIndex2allClassIndexes = new int[][] {
-        {0}		// 0 : Package -> {Package}
+        {0}                     // 0 : Package -> {Package}
     };
     
     public ManualUML2RDBMS(final @NonNull Evaluator evaluator) {

@@ -90,11 +90,6 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A MiddlePropertyCallExp identifies a property call from the middle model.&#xA;It adds an additional feature to facilitate efficient access to a cache of&#xA;non-navigable outer-to-middle opposites."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cacheIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject">
-      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-        <details key="documentation" value="Identification of the cache of unnavigable opposites to be exploited&#xA;by this property call. Should not be null during execution."/>
-      </eAnnotations>
-    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="VariablePredicate" eSuperTypes="../../org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore#//Predicate">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

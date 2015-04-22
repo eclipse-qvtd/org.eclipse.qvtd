@@ -92,26 +92,28 @@ public class classescs2as extends AbstractTransformationExecutor
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_RootCS = TypeId.SET.getSpecializedId(CLSSid_RootCS);
     public static final @NonNull /*@NonInvalid*/ CollectionTypeId SET_CLSSid_RootCS2Root = TypeId.SET.getSpecializedId(CLSSid_RootCS2Root);
     
-    /* Outer-to-Middle Property navigation caches */
+    /*
+     * Property-source to Property-target unnavigable navigation caches
+     */
     protected final @NonNull Map<ClassCS,ClassCS2Class> OPPOSITE_OF_ClassCS2Class_classCS = new HashMap<ClassCS,ClassCS2Class>();
     protected final @NonNull Map<PackageCS,PackageCS2Package> OPPOSITE_OF_PackageCS2Package_packageCS = new HashMap<PackageCS,PackageCS2Package>();
     protected final @NonNull Map<RootCS,RootCS2Root> OPPOSITE_OF_RootCS2Root_rootCS = new HashMap<RootCS,RootCS2Root>();
-    
     
     /*
      * Array of the ClassIds of each class for which allInstances() may be invoked. Array index is the ClassIndex.
      */
     private static final @NonNull ClassId[] classIndex2classId = new ClassId[]{
-        CLSSid_Class,		// 0 => Class
-        CLSSid_ClassCS,		// 1 => ClassCS
-        CLSSid_ClassCS2Class,		// 2 => ClassCS2Class
-        CLSSid_Package,		// 3 => Package
-        CLSSid_PackageCS,		// 4 => PackageCS
-        CLSSid_PackageCS2Package,		// 5 => PackageCS2Package
-        CLSSid_Root,		// 6 => Root
-        CLSSid_RootCS,		// 7 => RootCS
-        CLSSid_RootCS2Root		// 8 => RootCS2Root
+        CLSSid_Class,                   // 0 => Class
+        CLSSid_ClassCS,                 // 1 => ClassCS
+        CLSSid_ClassCS2Class,           // 2 => ClassCS2Class
+        CLSSid_Package,                 // 3 => Package
+        CLSSid_PackageCS,               // 4 => PackageCS
+        CLSSid_PackageCS2Package,       // 5 => PackageCS2Package
+        CLSSid_Root,                    // 6 => Root
+        CLSSid_RootCS,                  // 7 => RootCS
+        CLSSid_RootCS2Root              // 8 => RootCS2Root
     };
+    
     /*
      * Mapping from each ClassIndex to all the ClassIndexes to which an object of the outer index
      * may contribute results to an allInstances() invocation.
@@ -119,15 +121,15 @@ public class classescs2as extends AbstractTransformationExecutor
      * instance of the derived classId contributes to derived and inherited ClassIndexes.
      */
     private final static @NonNull int[][] classIndex2allClassIndexes = new int[][] {
-        {0},		// 0 : Class -> {Class}
-        {1},		// 1 : ClassCS -> {ClassCS}
-        {2},		// 2 : ClassCS2Class -> {ClassCS2Class}
-        {3},		// 3 : Package -> {Package}
-        {4},		// 4 : PackageCS -> {PackageCS}
-        {5},		// 5 : PackageCS2Package -> {PackageCS2Package}
-        {6},		// 6 : Root -> {Root}
-        {7},		// 7 : RootCS -> {RootCS}
-        {8}		// 8 : RootCS2Root -> {RootCS2Root}
+        {0},                    // 0 : Class -> {Class}
+        {1},                    // 1 : ClassCS -> {ClassCS}
+        {2},                    // 2 : ClassCS2Class -> {ClassCS2Class}
+        {3},                    // 3 : Package -> {Package}
+        {4},                    // 4 : PackageCS -> {PackageCS}
+        {5},                    // 5 : PackageCS2Package -> {PackageCS2Package}
+        {6},                    // 6 : Root -> {Root}
+        {7},                    // 7 : RootCS -> {RootCS}
+        {8}                     // 8 : RootCS2Root -> {RootCS2Root}
     };
     
     public classescs2as(final @NonNull Evaluator evaluator) {

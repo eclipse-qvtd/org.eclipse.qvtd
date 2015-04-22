@@ -348,16 +348,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 	 * @generated
 	 */
 	@Override
-	public EAttribute getMiddlePropertyCallExp_CacheIndex() {
-		return (EAttribute)middlePropertyCallExpEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getVariablePredicate() {
 		return variablePredicateEClass;
 	}
@@ -426,7 +416,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		middlePropertyAssignmentEClass = createEClass(MIDDLE_PROPERTY_ASSIGNMENT);
 
 		middlePropertyCallExpEClass = createEClass(MIDDLE_PROPERTY_CALL_EXP);
-		createEAttribute(middlePropertyCallExpEClass, MIDDLE_PROPERTY_CALL_EXP__CACHE_INDEX);
 
 		variablePredicateEClass = createEClass(VARIABLE_PREDICATE);
 		createEReference(variablePredicateEClass, VARIABLE_PREDICATE__TARGET_VARIABLE);
@@ -506,7 +495,6 @@ public class QVTimperativePackageImpl extends EPackageImpl implements QVTimperat
 		initEClass(middlePropertyAssignmentEClass, MiddlePropertyAssignment.class, "MiddlePropertyAssignment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(middlePropertyCallExpEClass, MiddlePropertyCallExp.class, "MiddlePropertyCallExp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getMiddlePropertyCallExp_CacheIndex(), ecorePackage.getEIntegerObject(), "cacheIndex", null, 0, 1, MiddlePropertyCallExp.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(variablePredicateEClass, VariablePredicate.class, "VariablePredicate", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVariablePredicate_TargetVariable(), thePivotPackage.getVariable(), null, "targetVariable", null, 1, 1, VariablePredicate.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

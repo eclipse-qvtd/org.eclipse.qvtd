@@ -298,7 +298,7 @@ public abstract class AbstractTransformationExecutor implements TransformationEx
 	/**
 	 * Return the List of all PropertyIndexes for which an EClass instance could be the unnavigable opposite.
 	 * eReference2propertyIndex contains known equivalences and may be updated if more are discovered
-	 * using -1 as a propertyIndex for#which no unnavigable opposite is appropriate.
+	 * using -1 as a propertyIndex for which no unnavigable opposite is appropriate.
 	 */
     private @NonNull List<Integer> getOppositePropertyIndexes(@NonNull Map<EReference, Integer> eReference2propertyIndex, @NonNull EClass eClass) {
     	List<Integer> propertyIndexes = null;

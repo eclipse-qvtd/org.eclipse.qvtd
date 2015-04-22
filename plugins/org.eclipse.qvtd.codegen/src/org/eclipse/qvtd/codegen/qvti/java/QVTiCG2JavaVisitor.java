@@ -172,11 +172,15 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 			for (int i = 0; i < sortedList.size(); i++) {
 				org.eclipse.ocl.pivot.Class instancesClass = sortedList.get(i);
 				CGTypeId cgTypeId = getCodeGenerator().getAnalyzer().getTypeId(instancesClass.getTypeId());
+				int startLength = js.length();
 				js.appendValueName(cgTypeId);
 				if ((i+1) < sortedList.size()) {
 					js.append(",");
 				}
-				js.append("\t\t// " + i + " => " + instancesClass.getName() + "\n");
+				for (int j = js.length() - startLength; j < 40; j++) {
+					js.append(" ");
+				}
+				js.append("// " + i + " => " + instancesClass.getName() + "\n");
 			}
 			js.popIndentation();
 			js.append("};\n");
@@ -184,6 +188,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 			//	Emit the classIndex2allClassIndexes array of arrays
 			//
 			String classIndex2allClassIndexes = nameManager.getGlobalSymbolName(null, "classIndex2allClassIndexes");
+			js.append("\n");
 			js.append("/*\n");
 			js.append(" * Mapping from each ClassIndex to all the ClassIndexes to which an object of the outer index\n");
 			js.append(" * may contribute results to an allInstances() invocation.\n");
@@ -203,6 +208,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 			for (int i = 0; i < sortedList.size(); i++) {
 				org.eclipse.ocl.pivot.Class instancesClass = sortedList.get(i);
 				List<org.eclipse.ocl.pivot.Class> superInstancesClasses = instancesClassAnalysis.get(instancesClass);
+				int startLength = js.length();
 				js.append("{");
 				boolean isFirst = true;
 				for (org.eclipse.ocl.pivot.Class superInstancesClass : superInstancesClasses) {
@@ -216,7 +222,10 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 				if ((i+1) < sortedList.size()) {
 					js.append(",");
 				}
-				js.append("\t\t// " + i + " : ");
+				for (int j = js.length() - startLength; j < 32; j++) {
+					js.append(" ");
+				}
+				js.append("// " + i + " : ");
 				js.append(instancesClass.getName());
 				js.append(" -> {");
 				isFirst = true;
@@ -279,40 +288,46 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		js.append("}\n");
 	}
     
-	protected void doMiddleOppositeCaches() {
-		Map<Property, String> toMiddleProperties = getGlobalContext().getToMiddleProperties();
-		if (toMiddleProperties != null) {
-			js.append("\n/* Outer-to-Middle Property navigation caches */\n");
-			Map<String, Property> key2property = new HashMap<String, Property>();
-			for (Map.Entry<Property, String> entry : toMiddleProperties.entrySet()) {
-				key2property.put(entry.getValue(), entry.getKey());
-			}
-			List<String> sortedKeys = new ArrayList<String>(key2property.keySet());
-			Collections.sort(sortedKeys);
-			for (String key : sortedKeys) {
-				Property property = key2property.get(key);
-				TypeDescriptor outerTypeDescriptor = context.getBoxedDescriptor(property.getOwningClass().getTypeId());
-				TypeDescriptor middleTypeDescriptor = context.getBoxedDescriptor(property.getType().getTypeId());
-				js.append("protected final ");
-				js.appendIsRequired(true);
-				js.append(" ");
-				js.appendClassReference(Map.class, false, middleTypeDescriptor, outerTypeDescriptor);
-				js.append(" ");
-				js.append(key);
-				js.append(" = new ");
-				js.appendClassReference(HashMap.class, false, middleTypeDescriptor, outerTypeDescriptor);
-				js.append("();\n");
-			}
+	protected void doOppositeCaches(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
+		Map<Property, Integer> opposites = transformationAnalysis.getCaches();
+		if (opposites.size() <= 0) {
+			return;
+		}
+		js.append("\n/*\n * Property-source to Property-target unnavigable navigation caches\n */\n");
+		Map<String, Property> key2property = new HashMap<String, Property>();
+		for (Map.Entry<Property, Integer> entry : opposites.entrySet()) {
+			@SuppressWarnings("null")@NonNull Property property = entry.getKey();
+			String name = getGlobalContext().addOppositeProperty(property);
+			key2property.put(name, entry.getKey());
+		}
+		List<String> sortedKeys = new ArrayList<String>(key2property.keySet());
+		Collections.sort(sortedKeys);
+		for (String key : sortedKeys) {
+			Property property = key2property.get(key);
+			TypeDescriptor outerTypeDescriptor = context.getBoxedDescriptor(property.getOwningClass().getTypeId());
+			TypeDescriptor middleTypeDescriptor = context.getBoxedDescriptor(property.getType().getTypeId());
+			js.append("protected final ");
+			js.appendIsRequired(true);
+			js.append(" ");
+			js.appendClassReference(Map.class, false, middleTypeDescriptor, outerTypeDescriptor);
+			js.append(" ");
+			js.append(key);
+			js.append(" = new ");
+			js.appendClassReference(HashMap.class, false, middleTypeDescriptor, outerTypeDescriptor);
+			js.append("();\n");
 		}
     }
     
-	protected @Nullable String doOppositeCaches(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
-		Map<Property, Integer> opposites = transformationAnalysis.getOpposites();
+	protected @Nullable String doOppositePropertyIds(@NonNull QVTiTransformationAnalysis transformationAnalysis) {
+		Map<Property, Integer> opposites = transformationAnalysis.getSourceCaches();
 		if (opposites.size() <= 0) {
 			return null;
 		}
 		NameManager nameManager = getGlobalContext().getNameManager();
 		List<Property> sortedList = new ArrayList<Property>();
+		for (int i = 0; i < opposites.size();i++) {
+			sortedList.add(null);
+		}
 		for (Map.Entry<Property, Integer> entry : opposites.entrySet()) {
 			sortedList.set(entry.getValue().intValue(), entry.getKey());
 		}
@@ -320,7 +335,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		//	Emit the ClassId array
 		//
 		js.append("/*\n");
-		js.append(" * Array of the PropertyIds of each Property for which unnavigable opposite property navigation may occur.\n");
+		js.append(" * Array of the source PropertyIds of each Property for which unnavigable opposite property navigation may occur.\n");
 		js.append(" */\n");
 		String oppositeIndex2propertyIdName = nameManager.getGlobalSymbolName(null, "oppositeIndex2propertyId");
 		js.append("private static final ");
@@ -330,7 +345,7 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		js.append("[] ");
 		js.append(oppositeIndex2propertyIdName);
 		js.append(" = new ");
-		js.appendClassReference(ClassId.class);
+		js.appendClassReference(PropertyId.class);
 		js.append("[]{\n");
 		js.pushIndentation(null);
 		for (int i = 0; i < sortedList.size(); i++) {
@@ -847,9 +862,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		CGValuedElement slotValue = cgMiddlePropertyAssignment.getSlotValue();
 		CGValuedElement initValue = cgMiddlePropertyAssignment.getInitValue();
 		if ((slotValue != null) && (initValue != null)) {
-			Map<Property, String> toMiddleProperties = getGlobalContext().getToMiddleProperties();
-			if (toMiddleProperties != null) {
-				String cacheName = toMiddleProperties.get(pReferredProperty);
+			Map<Property, String> oppositeProperties = getGlobalContext().getOppositeProperties();
+			if (oppositeProperties != null) {
+				String cacheName = oppositeProperties.get(pReferredProperty);
 				if (cacheName != null) {
 					js.append(cacheName);
 					js.append(".put(");
@@ -875,9 +890,9 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 		//
 		js.appendDeclaration(cgPropertyCallExp);
 		js.append(" = ");
-		Map<Property, String> toMiddleProperties = getGlobalContext().getToMiddleProperties();
-		if (toMiddleProperties != null) {
-			String cacheName = toMiddleProperties.get(pivotProperty);
+		Map<Property, String> oppositeProperties = getGlobalContext().getOppositeProperties();
+		if (oppositeProperties != null) {
+			String cacheName = oppositeProperties.get(pivotProperty);
 			if (cacheName != null) {
 				js.appendClassReference(ClassUtil.class);
 				js.append(".nonNullState (");
@@ -993,13 +1008,15 @@ public class QVTiCG2JavaVisitor extends CG2JavaVisitor<QVTiCodeGenerator> implem
 				cgElement.accept(this);
 			}
 		}
-		doMiddleOppositeCaches();
+		doOppositeCaches(transformationAnalysis);
 		js.append("\n");
-		String oppositeName = doOppositeCaches(transformationAnalysis);
-		js.append("\n");
+		String oppositeIndex2propertyIdName = doOppositePropertyIds(transformationAnalysis);
+		if (oppositeIndex2propertyIdName != null) {
+			js.append("\n");
+		}
 		String[] allInstancesNames = doAllInstances(transformationAnalysis);
 		js.append("\n");
-		doConstructor(cgTransformation, oppositeName, allInstancesNames);
+		doConstructor(cgTransformation, oppositeIndex2propertyIdName, allInstancesNames);
 		js.append("\n");
 		doRun(cgTransformation);
 		for (CGOperation cgOperation : cgTransformation.getOperations()) {

@@ -31,9 +31,11 @@ import org.eclipse.ocl.pivot.Type;
 import org.eclipse.ocl.pivot.ids.IdManager;
 import org.eclipse.ocl.pivot.ids.OperationId;
 import org.eclipse.ocl.pivot.internal.manager.PivotMetamodelManager;
+import org.eclipse.ocl.pivot.internal.utilities.EnvironmentFactoryInternal;
 import org.eclipse.qvtd.pivot.qvtbase.Transformation;
 import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
+import org.eclipse.qvtd.pivot.qvtcorebase.analysis.DomainUsage;
+import org.eclipse.qvtd.pivot.qvtimperative.utilities.QVTimperativeDomainUsageAnalysis;
 
 /**
  * QVTiTransformationAnalysis accumulates salient characteristics of one or more
@@ -47,30 +49,66 @@ import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
  */
 public class QVTiTransformationAnalysis
 {
-	protected final @NonNull PivotMetamodelManager metamodelManager;
+	protected final @NonNull EnvironmentFactoryInternal environmentFactory;
+	
+	/**
+	 * Analysis of domains applicable to each transformation element. 
+	 */
+	private final @NonNull QVTimperativeDomainUsageAnalysis domainAnalysis;
+
 
 	/**
 	 *  Set of all types for which allInstances() is invoked.
 	 */
-	private @NonNull Set<org.eclipse.ocl.pivot.Class> allInstancesClasses = new HashSet<org.eclipse.ocl.pivot.Class>();
+	private final @NonNull Set<org.eclipse.ocl.pivot.Class> allInstancesClasses = new HashSet<org.eclipse.ocl.pivot.Class>();
 
 	/**
-	 *  Map from navigable property to sequential index.	// FIXME per-domain
+	 *  Map from navigable property to sequential index in any TypedModel.
 	 */
-	private @NonNull Map<Property, Integer> property2cacheIndex = new HashMap<Property, Integer>();
+	private final @NonNull Map<Property, Integer> property2cacheIndex = new HashMap<Property, Integer>();
 
 	/**
-	 *  Map from opposite property to sequential index.
+	 *  Map from navigable property to sequential index in a checkable TypedModel.
 	 */
-	private @NonNull Map<Property, Integer> opposite2cacheIndex = new HashMap<Property, Integer>();
+	private final @NonNull Map<Property, Integer> sourceProperty2cacheIndex = new HashMap<Property, Integer>();
 
 	/**
-	 *  Map from property assignment to sequential index.
+	 * Map from propertyAssignment to the cache index of an un-navigable lookup cache to be updated by the assignment.
 	 */
-	private @NonNull Map<PropertyAssignment, Integer> propertyAssignment2cacheIndex = new HashMap<PropertyAssignment, Integer>();
+	private final @NonNull Map<PropertyAssignment, Integer> propertyAssignment2cacheIndex = new HashMap<PropertyAssignment, Integer>();
 
+	/**
+	 * Map from oppositePropertyCallExp to the cache index identifying the relevant un-navigable lookup cache.
+	 */
+	private final @NonNull Map<OppositePropertyCallExp, Integer> oppositePropertyCallExp2cacheIndex = new HashMap<OppositePropertyCallExp, Integer>();;
+
+	/**
+	 * @deprecated Use EnvironmentFactoryInternal constructor
+	 */
+	@Deprecated
 	public QVTiTransformationAnalysis(@NonNull PivotMetamodelManager metamodelManager) {
-	    this.metamodelManager = metamodelManager;
+	    this(metamodelManager.getEnvironmentFactory());
+	}
+
+	public QVTiTransformationAnalysis(@NonNull EnvironmentFactoryInternal environmentFactory) {
+	    this.environmentFactory = environmentFactory;
+		this.domainAnalysis = new QVTimperativeDomainUsageAnalysis(environmentFactory);
+	}
+	
+	protected @NonNull Integer allocateCacheIndex(@Nullable OCLExpression sourceExpression, @NonNull Property navigableProperty) {
+		Integer cacheIndex = property2cacheIndex.get(navigableProperty);
+		if (cacheIndex == null) { 
+			@SuppressWarnings("null")@NonNull Integer size = property2cacheIndex.size();
+			property2cacheIndex.put(navigableProperty, size);
+			if (sourceExpression != null) {
+				DomainUsage sourceUsage = domainAnalysis.getUsage(sourceExpression);
+				if ((sourceUsage != null) && sourceUsage.isCheckable()) {
+					sourceProperty2cacheIndex.put(navigableProperty, size);
+				}
+			}
+			cacheIndex = size;
+		}
+		return cacheIndex;
 	}
 
 	public void analyzeTransformation(@NonNull Transformation transformation) {
@@ -80,17 +118,17 @@ public class QVTiTransformationAnalysis
 		//  - identify all MiddlePropertyAssignments
 		//  - identify all MiddlePropertyCallExp and allocate a cacheIndex
 		//
-		Type oclElementType = metamodelManager.getStandardLibrary().getOclElementType();
+		Type oclElementType = environmentFactory.getStandardLibrary().getOclElementType();
 		OperationId allInstancesOperationId = oclElementType.getTypeId().getOperationId(0, "allInstances", IdManager.getParametersId());
 		List<PropertyAssignment> propertyAssignments = new ArrayList<PropertyAssignment>();
 		for (TreeIterator<EObject> tit = transformation.eAllContents(); tit.hasNext(); ) {
 			EObject eObject = tit.next();
-			if (eObject instanceof MiddlePropertyCallExp) {
-				MiddlePropertyCallExp middlePropertyCallExp = (MiddlePropertyCallExp)eObject;
-				Property navigableProperty = middlePropertyCallExp.getReferredProperty();
+			if (eObject instanceof OppositePropertyCallExp) {
+				OppositePropertyCallExp oppositePropertyCallExp = (OppositePropertyCallExp)eObject;
+				Property navigableProperty = oppositePropertyCallExp.getReferredProperty();
 				if (navigableProperty != null) {
-					int cacheIndex = getCacheIndex(navigableProperty);
-					middlePropertyCallExp.setCacheIndex(cacheIndex);
+					int cacheIndex = allocateCacheIndex(oppositePropertyCallExp.getOwnedSource(), navigableProperty);
+					oppositePropertyCallExp2cacheIndex.put(oppositePropertyCallExp, cacheIndex);
 				}
 			}
 			else if (eObject instanceof PropertyAssignment) {
@@ -112,13 +150,13 @@ public class QVTiTransformationAnalysis
 					}
 				}
 			}
-			else if (eObject instanceof OppositePropertyCallExp) {
+/*			else if (eObject instanceof OppositePropertyCallExp) {
 				OppositePropertyCallExp oppositePropertyCallExp = (OppositePropertyCallExp)eObject;
 				Property referredProperty = oppositePropertyCallExp.getReferredProperty();
 				if (referredProperty != null) {
 					getOppositeCacheIndex(referredProperty);
 				}
-			}
+			} */
 		}
 		//
 		//	Second pass
@@ -128,7 +166,7 @@ public class QVTiTransformationAnalysis
 			Property navigableProperty = propertyAssignment.getTargetProperty();
 			if (navigableProperty != null) {
 				Integer cacheIndex = property2cacheIndex.get(navigableProperty);
-				if (cacheIndex != null) { 		// No need to set cacheIndex if it is never accessed by a MiddlePropertyCallExp
+				if (cacheIndex != null) { 		// No need to set cacheIndex if it is never accessed by an OppositePropertyCallExp
 					propertyAssignment2cacheIndex.put(propertyAssignment, cacheIndex);
 				}
 			}
@@ -138,14 +176,9 @@ public class QVTiTransformationAnalysis
 	public @NonNull Set<org.eclipse.ocl.pivot.Class> getAllInstancesClasses() {
 		return allInstancesClasses;
 	}
-	
-	protected int getCacheIndex(@NonNull Property navigableProperty) {
-		Integer cacheIndex = property2cacheIndex.get(navigableProperty);
-		if (cacheIndex == null) { 
-			cacheIndex = property2cacheIndex.size();
-			property2cacheIndex.put(navigableProperty, cacheIndex);
-		}
-		return cacheIndex;
+
+	public @Nullable Integer getCacheIndex(@NonNull OppositePropertyCallExp oppositePropertyCallExp) {
+		return oppositePropertyCallExp2cacheIndex.get(oppositePropertyCallExp);
 	}
 
 	public @Nullable Integer getCacheIndex(@NonNull PropertyAssignment propertyAssignment) {
@@ -156,11 +189,16 @@ public class QVTiTransformationAnalysis
 		return property2cacheIndex.size();
 	}
 
+	public @NonNull Map<Property, Integer> getCaches() {
+		return property2cacheIndex;
+	}
+
 	/**
 	 * Return a Map from each instanceClasses to the subset of instanceClasses that are transitive superClasses of the particular instanceClass.
 	 */
 	public @NonNull Map<org.eclipse.ocl.pivot.Class, List<org.eclipse.ocl.pivot.Class>> getInstancesClassAnalysis(@NonNull Iterable<org.eclipse.ocl.pivot.Class> instanceClasses) {
 		Map<org.eclipse.ocl.pivot.Class, List<org.eclipse.ocl.pivot.Class>> instancesClassAnalysis = new HashMap<org.eclipse.ocl.pivot.Class, List<org.eclipse.ocl.pivot.Class>>();
+		PivotMetamodelManager metamodelManager = environmentFactory.getMetamodelManager();
 		for (@SuppressWarnings("null")@NonNull org.eclipse.ocl.pivot.Class instanceClass : instanceClasses) {
 			CompleteClass completeInstanceClass = metamodelManager.getCompleteClass(instanceClass);
 			instancesClassAnalysis.put(completeInstanceClass.getPrimaryClass(),  null);
@@ -181,10 +219,10 @@ public class QVTiTransformationAnalysis
 	}
 
 	public @NonNull PivotMetamodelManager getMetamodelManager() {
-		return metamodelManager;
+		return environmentFactory.getMetamodelManager();
 	}
 	
-	protected int getOppositeCacheIndex(@NonNull Property oppositeProperty) {
+/*	protected int getOppositeCacheIndex(@NonNull Property oppositeProperty) {
 		Integer cacheIndex = opposite2cacheIndex.get(oppositeProperty);
 		if (cacheIndex == null) { 
 			cacheIndex = opposite2cacheIndex.size();
@@ -199,5 +237,9 @@ public class QVTiTransformationAnalysis
 
 	public @NonNull Map<Property, Integer> getOpposites() {
 		return opposite2cacheIndex;
+	} */
+
+	public @NonNull Map<Property, Integer> getSourceCaches() {
+		return sourceProperty2cacheIndex;
 	}
 }
