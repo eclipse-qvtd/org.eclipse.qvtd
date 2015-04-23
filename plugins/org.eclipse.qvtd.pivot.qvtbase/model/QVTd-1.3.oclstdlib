@@ -1,0 +1,20 @@
+--import 'http://www.eclipse.org/ocl/2015/Library';
+import 'QVTbase.ecore#/';
+
+library qvtbase : qvtb = 'http://www.eclipse.org/qvt/2015/QVTbase'
+{
+type Transformation {
+	operation modelFor(typedModel : TypedModel) : ocl::Model[?] => 'org.eclipse.qvtd.pivot.qvtbase.library.transformation.TransformationModelForOperation';
+}
+type TypedModel {
+}
+}
+
+library ocl : ocl = 'http://www.eclipse.org/ocl/2015/Pivot'
+{
+type Model {
+	operation objects() : Set(OclElement);
+	operation objectsOfKind(TT)(type : typeof(TT)) : Set(TT) => 'org.eclipse.qvtd.pivot.qvtbase.library.model.ModelObjectsOfKindOperation';
+	operation rootObjects() : Set(OclElement);
+}
+}

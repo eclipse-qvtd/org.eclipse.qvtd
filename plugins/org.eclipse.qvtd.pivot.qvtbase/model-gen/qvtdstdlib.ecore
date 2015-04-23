@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EPackage name="qvtbase" nsURI="http://www.eclipse.org/qvt/2015/QVTbase" nsPrefix="qvtb">
+    <eAnnotations source="http://www.eclipse.org/OCL/ASLibrary"/>
+  </ecore:EPackage>
+  <ecore:EPackage name="ocl" nsURI="http://www.eclipse.org/ocl/2015/Pivot" nsPrefix="ocl">
+    <eClassifiers xsi:type="ecore:EClass" name="Model">
+      <eOperations name="objects" ordered="false" upperBound="-1"/>
+      <eOperations name="objectsOfKind" ordered="false" upperBound="-1">
+        <eGenericType eTypeParameter="#/1/Model/objectsOfKind/TT"/>
+        <eTypeParameters name="TT"/>
+        <eParameters name="type" lowerBound="1">
+          <eGenericType eTypeParameter="#/1/Model/objectsOfKind/TT"/>
+        </eParameters>
+      </eOperations>
+      <eOperations name="rootObjects" ordered="false" upperBound="-1"/>
+    </eClassifiers>
+  </ecore:EPackage>
+</xmi:XMI>

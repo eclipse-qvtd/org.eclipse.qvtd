@@ -1,0 +1,51 @@
+/*******************************************************************************
+ * Copyright (c) 2010,2013 E.D.Willink and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *   E.D.Willink - initial API and implementation
+ *   E.D.Willink (CEA LIST) - Bug 424034
+ *
+ * Run As->MWE2 Workflow to regenerate the pivot model.
+ *******************************************************************************/
+module GenerateQVTdStdlibModel
+
+import org.eclipse.ocl.examples.build.utilities.*
+import org.eclipse.ocl.examples.build.xtend.*
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.emf.ecore.resource.impl.*
+
+var sourceName = "org.eclipse.qvtd.pivot.qvtbase"
+
+/**
+ *	Generate the OCLstdlib Model, by converting oclstdlib.oclstdlib to OCLstdlib.java.
+ */
+Workflow {
+	bean = ResourceSetImpl : resourceSet {}
+    bean = StandaloneSetup { resourceSet = resourceSet
+    	platformUri = "../../plugins"
+//    	scanClassPath = true
+    }
+    bean = GenModelSetup { resourceSet = resourceSet }
+    component = GenerateOCLstdlibXtend { resourceSet = resourceSet
+    	projectName = "${sourceName}"
+    	modelFile = "model/QVTd-1.3.oclstdlib"
+    	uri = "http://www.eclipse.org/qvt/2015/QVTdLibrary"
+    	ecoreFile = "/org.eclipse.qvtd.pivot.qvtbase/model-gen/qvtdstdlib.ecore"
+    	javaFolder = "/org.eclipse.qvtd.pivot.qvtbase/emf-gen"
+    	javaPackageName = "org.eclipse.qvtd.pivot.qvtbase.model"
+    	javaClassName = "QVTdStdlib"
+    }
+    component = GenerateModel { resourceSet = resourceSet skipOnErrors = true
+    	genModel = "/${sourceName}/model/qvtdstdlib.genmodel"
+    }
+    component = Model2tablesGenerator { resourceSet = resourceSet
+    	genModelFile = "/${sourceName}/model/qvtdstdlib.genmodel"
+    	genOCLstdlib = true
+    }
+}
+
