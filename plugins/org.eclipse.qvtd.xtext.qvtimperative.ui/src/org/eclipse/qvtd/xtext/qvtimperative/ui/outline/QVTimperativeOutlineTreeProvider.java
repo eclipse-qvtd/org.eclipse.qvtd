@@ -13,7 +13,6 @@ package org.eclipse.qvtd.xtext.qvtimperative.ui.outline;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.xtext.basecs.ImportCS;
-import org.eclipse.ocl.xtext.basecs.LibraryCS;
 import org.eclipse.ocl.xtext.basecs.PackageCS;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.xtext.qvtcorebase.ui.outline.QVTcoreBaseOutlineTreeProvider;
@@ -45,9 +44,6 @@ public class QVTimperativeOutlineTreeProvider extends QVTcoreBaseOutlineTreeProv
 	protected void _createChildren(IOutlineNode parentNode, TopLevelCS ele) {
 		for (ImportCS csImport : ele.getOwnedImports()) {
 			createNode(parentNode, csImport);
-		}
-		for (LibraryCS csLibrary : ele.getOwnedLibraries()) {
-			createNode(parentNode, csLibrary);
 		}
 		for (PackageCS csPackage : ele.getOwnedPackages()) {
 			createNode(parentNode, csPackage);

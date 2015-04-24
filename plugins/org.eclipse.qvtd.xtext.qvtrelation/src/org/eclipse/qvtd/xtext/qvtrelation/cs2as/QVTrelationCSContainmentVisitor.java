@@ -41,7 +41,6 @@ import org.eclipse.ocl.xtext.base.cs2as.CS2ASConversion;
 import org.eclipse.ocl.xtext.base.cs2as.Continuation;
 import org.eclipse.ocl.xtext.base.cs2as.SingleContinuation;
 import org.eclipse.ocl.xtext.base.utilities.BaseCSResource;
-import org.eclipse.ocl.xtext.basecs.LibraryCS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.ocl.xtext.essentialoclcs.ExpCS;
 import org.eclipse.qvtd.pivot.qvtbase.BaseModel;
@@ -362,12 +361,6 @@ public class QVTrelationCSContainmentVisitor extends AbstractQVTrelationCSContai
 		@SuppressWarnings("unused")
 		Key pivotElement = context.refreshModelElement(Key.class, QVTrelationPackage.Literals.KEY, csElement);
 		return new KeyDeclContentContinuation(context, csElement);
-	}
-
-	@Override
-	public Continuation<?> visitLibraryCS(@NonNull LibraryCS csElement) {
-		csElement.getReferredPackage();					// Resolve the proxy to perform the import.
-		return null;
 	}
 
 	@Override

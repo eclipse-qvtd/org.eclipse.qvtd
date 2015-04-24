@@ -8,7 +8,6 @@ import com.google.inject.Provider;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.xtext.basecs.BaseCSPackage;
 import org.eclipse.ocl.xtext.basecs.ImportCS;
-import org.eclipse.ocl.xtext.basecs.LibraryCS;
 import org.eclipse.ocl.xtext.basecs.MultiplicityBoundsCS;
 import org.eclipse.ocl.xtext.basecs.MultiplicityStringCS;
 import org.eclipse.ocl.xtext.basecs.PathElementCS;
@@ -93,9 +92,6 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTcoreBaseSemant
 		if(semanticObject.eClass().getEPackage() == BaseCSPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case BaseCSPackage.IMPORT_CS:
 				sequence_ImportCS(context, (ImportCS) semanticObject); 
-				return; 
-			case BaseCSPackage.LIBRARY_CS:
-				sequence_LibraryCS(context, (LibraryCS) semanticObject); 
 				return; 
 			case BaseCSPackage.MULTIPLICITY_BOUNDS_CS:
 				sequence_MultiplicityBoundsCS(context, (MultiplicityBoundsCS) semanticObject); 
@@ -435,10 +431,7 @@ public abstract class AbstractQVTcoreSemanticSequencer extends QVTcoreBaseSemant
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         (ownedImports+=ImportCS | ownedLibraries+=LibraryCS)* 
-	 *         (ownedMappings+=MappingCS | ownedTransformations+=TransformationCS | ownedQueries+=QueryCS)*
-	 *     )
+	 *     (ownedImports+=ImportCS* (ownedMappings+=MappingCS | ownedTransformations+=TransformationCS | ownedQueries+=QueryCS)*)
 	 */
 	protected void sequence_TopLevelCS(EObject context, TopLevelCS semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

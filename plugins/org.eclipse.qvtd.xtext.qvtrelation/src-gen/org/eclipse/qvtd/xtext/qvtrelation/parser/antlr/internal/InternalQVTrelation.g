@@ -83,10 +83,10 @@ ruleTopLevelCS returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(((
+((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getTopLevelCSAccess().getOwnedImportsUnitCSParserRuleCall_0_0_0()); 
+	        newCompositeNode(grammarAccess.getTopLevelCSAccess().getOwnedImportsUnitCSParserRuleCall_0_0()); 
 	    }
 		lv_ownedImports_0_0=ruleUnitCS		{
 	        if ($current==null) {
@@ -101,38 +101,19 @@ ruleTopLevelCS returns [EObject current=null]
 	    }
 
 )
-)
-    |(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getTopLevelCSAccess().getOwnedLibrariesLibraryCSParserRuleCall_0_1_0()); 
-	    }
-		lv_ownedLibraries_1_0=ruleLibraryCS		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getTopLevelCSRule());
-	        }
-       		add(
-       			$current, 
-       			"ownedLibraries",
-        		lv_ownedLibraries_1_0, 
-        		"LibraryCS");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))*(
+)*(
 (
 		{ 
 	        newCompositeNode(grammarAccess.getTopLevelCSAccess().getOwnedTransformationsTransformationCSParserRuleCall_1_0()); 
 	    }
-		lv_ownedTransformations_2_0=ruleTransformationCS		{
+		lv_ownedTransformations_1_0=ruleTransformationCS		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getTopLevelCSRule());
 	        }
        		add(
        			$current, 
        			"ownedTransformations",
-        		lv_ownedTransformations_2_0, 
+        		lv_ownedTransformations_1_0, 
         		"TransformationCS");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -779,53 +760,6 @@ ruleKeyDeclCS returns [EObject current=null]
 	otherlv_15=';' 
     {
     	newLeafNode(otherlv_15, grammarAccess.getKeyDeclCSAccess().getSemicolonKeyword_6());
-    }
-)
-;
-
-
-
-
-
-// Entry rule entryRuleLibraryCS
-entryRuleLibraryCS returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getLibraryCSRule()); }
-	 iv_ruleLibraryCS=ruleLibraryCS 
-	 { $current=$iv_ruleLibraryCS.current; } 
-	 EOF 
-;
-
-// Rule LibraryCS
-ruleLibraryCS returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-(	otherlv_0='library' 
-    {
-    	newLeafNode(otherlv_0, grammarAccess.getLibraryCSAccess().getLibraryKeyword_0());
-    }
-(
-(
-		{ 
-		  /* */ 
-		}
-		{
-			if ($current==null) {
-	            $current = createModelElement(grammarAccess.getLibraryCSRule());
-	        }
-        }
-		{ 
-	        newCompositeNode(grammarAccess.getLibraryCSAccess().getReferredPackagePackageCrossReference_1_0()); 
-	    }
-		ruleURI		{ 
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)	otherlv_2=';' 
-    {
-    	newLeafNode(otherlv_2, grammarAccess.getLibraryCSAccess().getSemicolonKeyword_2());
     }
 )
 ;

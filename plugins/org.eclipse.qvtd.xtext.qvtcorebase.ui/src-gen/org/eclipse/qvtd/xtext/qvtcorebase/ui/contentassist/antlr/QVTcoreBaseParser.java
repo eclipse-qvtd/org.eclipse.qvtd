@@ -93,7 +93,6 @@ public class QVTcoreBaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getImportCSAccess().getGroup(), "rule__ImportCS__Group__0");
 					put(grammarAccess.getImportCSAccess().getGroup_1(), "rule__ImportCS__Group_1__0");
 					put(grammarAccess.getImportCSAccess().getGroup_3(), "rule__ImportCS__Group_3__0");
-					put(grammarAccess.getLibraryCSAccess().getGroup(), "rule__LibraryCS__Group__0");
 					put(grammarAccess.getNamedDomainCSAccess().getGroup(), "rule__NamedDomainCS__Group__0");
 					put(grammarAccess.getParamDeclarationCSAccess().getGroup(), "rule__ParamDeclarationCS__Group__0");
 					put(grammarAccess.getPredicateCSAccess().getGroup(), "rule__PredicateCS__Group__0");
@@ -227,7 +226,6 @@ public class QVTcoreBaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getImportCSAccess().getNameAssignment_1_0(), "rule__ImportCS__NameAssignment_1_0");
 					put(grammarAccess.getImportCSAccess().getOwnedPathNameAssignment_2(), "rule__ImportCS__OwnedPathNameAssignment_2");
 					put(grammarAccess.getImportCSAccess().getIsAllAssignment_3_0(), "rule__ImportCS__IsAllAssignment_3_0");
-					put(grammarAccess.getLibraryCSAccess().getReferredPackageAssignment_1(), "rule__LibraryCS__ReferredPackageAssignment_1");
 					put(grammarAccess.getNamedDomainCSAccess().getIsCheckAssignment_0(), "rule__NamedDomainCS__IsCheckAssignment_0");
 					put(grammarAccess.getNamedDomainCSAccess().getIsEnforceAssignment_1(), "rule__NamedDomainCS__IsEnforceAssignment_1");
 					put(grammarAccess.getNamedDomainCSAccess().getDirectionAssignment_2(), "rule__NamedDomainCS__DirectionAssignment_2");

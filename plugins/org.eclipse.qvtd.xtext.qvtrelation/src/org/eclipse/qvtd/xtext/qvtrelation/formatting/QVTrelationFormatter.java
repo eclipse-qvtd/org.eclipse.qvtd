@@ -16,7 +16,6 @@ import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.Coll
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.DefaultValueCSElements;
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.DomainCSElements;
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.KeyDeclCSElements;
-import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.LibraryCSElements;
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.ModelDeclCSElements;
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.ObjectTemplateCSElements;
 import org.eclipse.qvtd.xtext.qvtrelation.services.QVTrelationGrammarAccess.PredicateCSElements;
@@ -104,10 +103,6 @@ public class QVTrelationFormatter extends AbstractEssentialOCLFormatter
 			c.setNoSpace().before(a.getRightParenthesisKeyword_4_1_1_3());
 			c.setNoSpace().around(a.getRightCurlyBracketKeyword_5());
 			setNoSpaceLineWrap(c, a.getSemicolonKeyword_6());
-	    }
-	    {
-	    	LibraryCSElements a = f.getLibraryCSAccess();
-			setNoSpaceLineWrap(c, a.getSemicolonKeyword_2());
 	    }
 	    {
 	    	ModelDeclCSElements a = f.getModelDeclCSAccess();

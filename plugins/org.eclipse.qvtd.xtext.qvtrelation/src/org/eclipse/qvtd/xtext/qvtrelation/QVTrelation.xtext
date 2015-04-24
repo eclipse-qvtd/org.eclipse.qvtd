@@ -19,7 +19,7 @@ import "platform:/resource/org.eclipse.qvtd.pivot.qvtrelation/model/QVTrelation.
 import "platform:/resource/org.eclipse.qvtd.xtext.qvtrelation/model/QVTrelationCS.ecore"
 
 TopLevelCS:
-	(ownedImports+=UnitCS | /*ownedInclude+=IncludeCS |*/ ownedLibraries+=LibraryCS)*
+	ownedImports+=UnitCS*
 	ownedTransformations+=TransformationCS*	
 ;
 		
@@ -50,9 +50,6 @@ KeyDeclCS: 'key' ownedPathName=PathNameCS '{'
 	| ('opposite' '(' ownedOppositePropertyIds+=PathNameCS ')'))
 	)* '}' ';'
 ;
-
-LibraryCS returns base::LibraryCS:
-	'library' referredPackage=[pivot::Package|URI] ';';
 	
 ModelDeclCS: name=UnrestrictedName ':' (metamodelIds+=[pivot::Namespace|UnrestrictedName]
 	| '{' metamodelIds+=[pivot::Namespace|UnrestrictedName] (',' metamodelIds+=[pivot::Namespace|UnrestrictedName])* '}')

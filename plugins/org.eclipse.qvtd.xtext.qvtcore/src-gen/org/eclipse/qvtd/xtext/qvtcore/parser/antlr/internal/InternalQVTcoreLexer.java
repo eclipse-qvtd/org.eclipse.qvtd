@@ -493,10 +493,10 @@ public class InternalQVTcoreLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:29:7: ( 'library' )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:29:9: 'library'
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:29:7: ( 'check' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:29:9: 'check'
             {
-            match("library"); 
+            match("check"); 
 
 
             }
@@ -514,10 +514,10 @@ public class InternalQVTcoreLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:30:7: ( 'check' )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:30:9: 'check'
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:30:7: ( 'enforce' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:30:9: 'enforce'
             {
-            match("check"); 
+            match("enforce"); 
 
 
             }
@@ -535,10 +535,10 @@ public class InternalQVTcoreLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:31:7: ( 'enforce' )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:31:9: 'enforce'
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:31:7: ( ':=' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:31:9: ':='
             {
-            match("enforce"); 
+            match(":="); 
 
 
             }
@@ -556,10 +556,10 @@ public class InternalQVTcoreLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:32:7: ( ':=' )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:32:9: ':='
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:32:7: ( 'query' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:32:9: 'query'
             {
-            match(":="); 
+            match("query"); 
 
 
             }
@@ -577,10 +577,10 @@ public class InternalQVTcoreLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:33:7: ( 'query' )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:33:9: 'query'
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:33:7: ( 'transformation' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:33:9: 'transformation'
             {
-            match("query"); 
+            match("transformation"); 
 
 
             }
@@ -598,10 +598,10 @@ public class InternalQVTcoreLexer extends Lexer {
         try {
             int _type = T__39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:34:7: ( 'transformation' )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:34:9: 'transformation'
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:34:7: ( 'realize' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:34:9: 'realize'
             {
-            match("transformation"); 
+            match("realize"); 
 
 
             }
@@ -619,10 +619,10 @@ public class InternalQVTcoreLexer extends Lexer {
         try {
             int _type = T__40;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:35:7: ( 'realize' )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:35:9: 'realize'
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:35:7: ( 'library' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:35:9: 'library'
             {
-            match("realize"); 
+            match("library"); 
 
 
             }
@@ -1782,8 +1782,8 @@ public class InternalQVTcoreLexer extends Lexer {
     // $ANTLR start "RULE_ESCAPED_CHARACTER"
     public final void mRULE_ESCAPED_CHARACTER() throws RecognitionException {
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7179:33: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7179:35: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7113:33: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7113:35: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
             {
             match('\\'); 
             if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -1807,8 +1807,8 @@ public class InternalQVTcoreLexer extends Lexer {
     // $ANTLR start "RULE_LETTER_CHARACTER"
     public final void mRULE_LETTER_CHARACTER() throws RecognitionException {
         try {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7181:32: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7181:34: ( 'a' .. 'z' | 'A' .. 'Z' | '_' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7115:32: ( ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7115:34: ( 'a' .. 'z' | 'A' .. 'Z' | '_' )
             {
             if ( (input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
                 input.consume();
@@ -1833,11 +1833,11 @@ public class InternalQVTcoreLexer extends Lexer {
         try {
             int _type = RULE_DOUBLE_QUOTED_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7183:27: ( '\"' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7183:29: '\"' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7117:27: ( '\"' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )* '\"' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7117:29: '\"' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
             {
             match('\"'); 
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7183:33: ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7117:33: ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\"' ) ) )*
             loop1:
             do {
                 int alt1=3;
@@ -1853,14 +1853,14 @@ public class InternalQVTcoreLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7183:34: RULE_ESCAPED_CHARACTER
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7117:34: RULE_ESCAPED_CHARACTER
             	    {
             	    mRULE_ESCAPED_CHARACTER(); 
 
             	    }
             	    break;
             	case 2 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7183:57: ~ ( ( '\\\\' | '\"' ) )
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7117:57: ~ ( ( '\\\\' | '\"' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1897,11 +1897,11 @@ public class InternalQVTcoreLexer extends Lexer {
         try {
             int _type = RULE_SINGLE_QUOTED_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7185:27: ( '\\'' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7185:29: '\\'' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7119:27: ( '\\'' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7119:29: '\\'' ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
             {
             match('\''); 
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7185:34: ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7119:34: ( RULE_ESCAPED_CHARACTER | ~ ( ( '\\\\' | '\\'' ) ) )*
             loop2:
             do {
                 int alt2=3;
@@ -1917,14 +1917,14 @@ public class InternalQVTcoreLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7185:35: RULE_ESCAPED_CHARACTER
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7119:35: RULE_ESCAPED_CHARACTER
             	    {
             	    mRULE_ESCAPED_CHARACTER(); 
 
             	    }
             	    break;
             	case 2 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7185:58: ~ ( ( '\\\\' | '\\'' ) )
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7119:58: ~ ( ( '\\\\' | '\\'' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1961,12 +1961,12 @@ public class InternalQVTcoreLexer extends Lexer {
         try {
             int _type = RULE_ML_SINGLE_QUOTED_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7187:30: ( '/\\'' ( options {greedy=false; } : . )* '\\'/' )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7187:32: '/\\'' ( options {greedy=false; } : . )* '\\'/'
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7121:30: ( '/\\'' ( options {greedy=false; } : . )* '\\'/' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7121:32: '/\\'' ( options {greedy=false; } : . )* '\\'/'
             {
             match("/'"); 
 
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7187:38: ( options {greedy=false; } : . )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7121:38: ( options {greedy=false; } : . )*
             loop3:
             do {
                 int alt3=2;
@@ -1991,7 +1991,7 @@ public class InternalQVTcoreLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7187:66: .
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7121:66: .
             	    {
             	    matchAny(); 
 
@@ -2021,11 +2021,11 @@ public class InternalQVTcoreLexer extends Lexer {
         try {
             int _type = RULE_SIMPLE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7189:16: ( RULE_LETTER_CHARACTER ( RULE_LETTER_CHARACTER | '0' .. '9' )* )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7189:18: RULE_LETTER_CHARACTER ( RULE_LETTER_CHARACTER | '0' .. '9' )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7123:16: ( RULE_LETTER_CHARACTER ( RULE_LETTER_CHARACTER | '0' .. '9' )* )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7123:18: RULE_LETTER_CHARACTER ( RULE_LETTER_CHARACTER | '0' .. '9' )*
             {
             mRULE_LETTER_CHARACTER(); 
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7189:40: ( RULE_LETTER_CHARACTER | '0' .. '9' )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7123:40: ( RULE_LETTER_CHARACTER | '0' .. '9' )*
             loop4:
             do {
                 int alt4=2;
@@ -2074,8 +2074,8 @@ public class InternalQVTcoreLexer extends Lexer {
         try {
             int _type = RULE_ESCAPED_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7191:17: ( '_' RULE_SINGLE_QUOTED_STRING )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7191:19: '_' RULE_SINGLE_QUOTED_STRING
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7125:17: ( '_' RULE_SINGLE_QUOTED_STRING )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7125:19: '_' RULE_SINGLE_QUOTED_STRING
             {
             match('_'); 
             mRULE_SINGLE_QUOTED_STRING(); 
@@ -2095,10 +2095,10 @@ public class InternalQVTcoreLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7193:10: ( ( '0' .. '9' )+ )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7193:12: ( '0' .. '9' )+
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7127:10: ( ( '0' .. '9' )+ )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7127:12: ( '0' .. '9' )+
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7193:12: ( '0' .. '9' )+
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7127:12: ( '0' .. '9' )+
             int cnt5=0;
             loop5:
             do {
@@ -2112,7 +2112,7 @@ public class InternalQVTcoreLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7193:13: '0' .. '9'
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7127:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -2144,12 +2144,12 @@ public class InternalQVTcoreLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7195:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7195:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7129:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7129:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7195:24: ( options {greedy=false; } : . )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7129:24: ( options {greedy=false; } : . )*
             loop6:
             do {
                 int alt6=2;
@@ -2174,7 +2174,7 @@ public class InternalQVTcoreLexer extends Lexer {
 
                 switch (alt6) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7195:52: .
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7129:52: .
             	    {
             	    matchAny(); 
 
@@ -2204,12 +2204,12 @@ public class InternalQVTcoreLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7197:17: ( '--' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7197:19: '--' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7131:17: ( '--' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7131:19: '--' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("--"); 
 
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7197:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7131:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop7:
             do {
                 int alt7=2;
@@ -2222,7 +2222,7 @@ public class InternalQVTcoreLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7197:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7131:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2242,7 +2242,7 @@ public class InternalQVTcoreLexer extends Lexer {
                 }
             } while (true);
 
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7197:40: ( ( '\\r' )? '\\n' )?
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7131:40: ( ( '\\r' )? '\\n' )?
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -2251,9 +2251,9 @@ public class InternalQVTcoreLexer extends Lexer {
             }
             switch (alt9) {
                 case 1 :
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7197:41: ( '\\r' )? '\\n'
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7131:41: ( '\\r' )? '\\n'
                     {
-                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7197:41: ( '\\r' )?
+                    // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7131:41: ( '\\r' )?
                     int alt8=2;
                     int LA8_0 = input.LA(1);
 
@@ -2262,7 +2262,7 @@ public class InternalQVTcoreLexer extends Lexer {
                     }
                     switch (alt8) {
                         case 1 :
-                            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7197:41: '\\r'
+                            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7131:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2294,10 +2294,10 @@ public class InternalQVTcoreLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7199:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7199:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7133:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7133:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7199:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7133:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt10=0;
             loop10:
             do {
@@ -2351,8 +2351,8 @@ public class InternalQVTcoreLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7201:16: ( . )
-            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7201:18: .
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7135:16: ( . )
+            // ../../plugins/org.eclipse.qvtd.xtext.qvtcore/src-gen/org/eclipse/qvtd/xtext/qvtcore/parser/antlr/internal/InternalQVTcore.g:7135:18: .
             {
             matchAny(); 
 
@@ -3009,19 +3009,108 @@ public class InternalQVTcoreLexer extends Lexer {
 
     protected DFA11 dfa11 = new DFA11(this);
     static final String DFA11_eotS =
-        "\1\uffff\4\72\2\uffff\1\72\2\uffff\1\72\2\uffff\1\112\2\uffff\5\72\1\130\1\72\1\135\1\137\1\141\1\145\1\uffff\3\72\1\153\1\156\13\72\1\uffff\1\72\2\uffff\1\72\3\70\1\72\4\uffff\1\72\1\uffff\1\72\1\u008b\1\72\1\u008d\1\72\2\uffff\1\72\2\uffff\1\72\7\uffff\11\72\3\uffff\2\72\14\uffff\1\72\1\u00a0\1\72\5\uffff\16\72\1\uffff\1\72\2\uffff\1\72\6\uffff\1\72\1\u00b4\1\72\1\uffff\1\72\1\uffff\5\72\1\u00bd\11\72\1\u00c7\1\72\1\u00c9\1\uffff\1\u00ca\1\u00cb\2\72\1\u00ce\3\72\1\u00d2\7\72\1\u00dc\2\72\1\uffff\6\72\1\u00e5\1\72\1\uffff\3\72\1\u00eb\3\72\1\u00ef\1\u00f0\1\uffff\1\u00f1\3\uffff\2\72\1\uffff\1\72\1\u00f5\1\72\1\uffff\11\72\1\uffff\1\u0100\6\72\1\u0107\1\uffff\1\72\1\u0109\1\72\1\u010b\1\72\1\uffff\1\72\1\u010e\1\72\3\uffff\1\u0110\2\72\1\uffff\11\72\1\u011c\1\uffff\2\72\1\u0120\3\72\1\uffff\1\72\1\uffff\1\72\1\uffff\1\u0126\1\72\1\uffff\1\72\1\uffff\2\72\1\u012b\2\72\1\u012e\4\72\1\u0133\1\uffff\1\u0134\1\u0135\1\u0136\1\uffff\1\u0137\1\u0138\1\u0139\1\u013a\1\u013b\1\uffff\1\u013c\1\72\1\u013e\1\u013f\1\uffff\2\72\1\uffff\1\72\1\u0143\2\72\12\uffff\1\72\2\uffff\1\u0147\2\72\1\uffff\3\72\1\uffff\6\72\1\u0153\1\u0154\1\u0155\2\72\3\uffff\4\72\1\u015c\1\72\1\uffff\1\72\1\u015f\1\uffff";
+        "\1\uffff\4\72\2\uffff\1\72\2\uffff\1\72\2\uffff\1\112\2\uffff\5"+
+        "\72\1\130\1\72\1\135\1\137\1\141\1\145\1\uffff\3\72\1\153\1\156"+
+        "\13\72\1\uffff\1\72\2\uffff\1\72\3\70\1\72\4\uffff\1\72\1\uffff"+
+        "\1\72\1\u008b\1\72\1\u008d\1\72\2\uffff\1\72\2\uffff\1\72\7\uffff"+
+        "\11\72\3\uffff\2\72\14\uffff\1\72\1\u00a0\1\72\5\uffff\16\72\1\uffff"+
+        "\1\72\2\uffff\1\72\6\uffff\1\72\1\u00b4\1\72\1\uffff\1\72\1\uffff"+
+        "\16\72\1\u00c6\1\u00c7\1\72\1\u00c9\1\uffff\1\u00ca\1\u00cb\2\72"+
+        "\1\u00ce\3\72\1\u00d2\7\72\1\u00dc\2\72\1\uffff\6\72\1\u00e5\3\72"+
+        "\1\u00ea\3\72\1\u00ee\1\u00ef\1\72\2\uffff\1\u00f1\3\uffff\2\72"+
+        "\1\uffff\1\72\1\u00f5\1\72\1\uffff\11\72\1\uffff\1\u0100\6\72\1"+
+        "\u0107\1\uffff\1\u0108\1\72\1\u010a\1\72\1\uffff\1\72\1\u010d\1"+
+        "\72\2\uffff\1\72\1\uffff\1\u0110\2\72\1\uffff\11\72\1\u011c\1\uffff"+
+        "\2\72\1\u0120\3\72\2\uffff\1\72\1\uffff\1\u0125\1\72\1\uffff\2\72"+
+        "\1\uffff\2\72\1\u012b\2\72\1\u012e\4\72\1\u0133\1\uffff\1\u0134"+
+        "\1\u0135\1\u0136\1\uffff\1\u0137\1\u0138\1\u0139\1\u013a\1\uffff"+
+        "\1\u013b\1\72\1\u013d\1\u013e\1\u013f\1\uffff\2\72\1\uffff\1\72"+
+        "\1\u0143\2\72\11\uffff\1\72\3\uffff\1\u0147\2\72\1\uffff\3\72\1"+
+        "\uffff\6\72\1\u0153\1\u0154\1\u0155\2\72\3\uffff\4\72\1\u015c\1"+
+        "\72\1\uffff\1\72\1\u015f\1\uffff";
     static final String DFA11_eofS =
         "\u0160\uffff";
     static final String DFA11_minS =
-        "\1\0\1\145\1\141\1\146\1\145\2\uffff\1\150\2\uffff\1\163\2\uffff\1\72\2\uffff\1\145\1\150\1\154\1\165\1\150\1\55\1\157\1\47\1\53\1\75\1\55\1\uffff\1\156\1\162\1\157\1\56\1\55\1\141\1\165\1\141\1\156\2\145\1\156\1\143\1\157\2\141\1\uffff\1\162\2\uffff\1\145\1\46\2\0\1\47\4\uffff\1\146\1\uffff\1\160\1\60\1\160\1\60\1\141\2\uffff\1\145\2\uffff\1\145\7\uffff\1\142\1\164\1\145\1\144\1\163\1\164\1\145\1\141\1\145\3\uffff\1\164\1\154\14\uffff\1\144\1\60\1\162\5\uffff\2\160\1\157\1\147\1\164\1\141\1\162\1\161\2\154\1\144\1\154\1\155\1\154\1\uffff\1\145\2\uffff\1\154\6\uffff\1\141\1\60\1\141\1\uffff\1\154\1\uffff\1\151\1\154\1\162\1\163\1\162\1\60\1\143\1\157\1\151\2\145\1\162\1\156\1\145\1\156\1\60\1\154\1\60\1\uffff\2\60\2\154\1\60\1\145\1\154\1\151\1\60\1\165\1\151\1\101\1\145\1\154\1\142\1\163\1\60\1\146\1\165\1\uffff\1\154\1\162\1\151\1\156\1\151\1\145\1\60\1\141\1\uffff\1\153\1\162\1\146\1\60\1\156\1\171\1\163\2\60\1\uffff\1\60\3\uffff\2\145\1\uffff\1\147\1\60\1\156\1\uffff\1\145\1\155\2\156\1\157\1\162\1\145\1\144\1\145\1\uffff\1\60\1\154\1\151\1\164\2\145\1\172\1\60\1\uffff\1\162\1\60\1\143\1\60\1\146\1\uffff\1\144\1\60\1\146\3\uffff\1\60\1\141\1\145\1\uffff\1\147\1\156\1\151\1\171\1\166\1\151\1\145\1\143\1\141\1\60\1\uffff\1\164\1\144\1\60\2\163\1\145\1\uffff\1\171\1\uffff\1\145\1\uffff\1\60\1\163\1\uffff\1\157\1\uffff\1\156\1\162\1\60\1\143\1\164\1\60\1\141\2\144\1\164\1\60\1\uffff\3\60\1\uffff\5\60\1\uffff\1\60\1\162\2\60\1\uffff\2\145\1\uffff\1\154\1\60\1\123\1\151\12\uffff\1\155\2\uffff\1\60\1\144\1\151\1\uffff\1\145\1\157\1\141\1\uffff\1\116\1\144\1\164\1\156\1\164\1\141\3\60\1\151\1\164\3\uffff\1\157\1\165\1\156\1\162\1\60\1\141\1\uffff\1\154\1\60\1\uffff";
+        "\1\0\1\145\1\141\1\146\1\145\2\uffff\1\150\2\uffff\1\163\2\uffff"+
+        "\1\72\2\uffff\1\150\1\154\1\165\1\150\1\145\1\55\1\157\1\47\1\53"+
+        "\1\75\1\55\1\uffff\1\156\1\162\1\157\1\56\1\55\1\141\1\165\1\141"+
+        "\1\156\2\145\1\156\1\143\1\157\2\141\1\uffff\1\162\2\uffff\1\145"+
+        "\1\46\2\0\1\47\4\uffff\1\146\1\uffff\1\160\1\60\1\160\1\60\1\141"+
+        "\2\uffff\1\145\2\uffff\1\145\7\uffff\1\145\1\144\1\163\1\164\1\145"+
+        "\1\141\1\145\1\142\1\164\3\uffff\1\164\1\154\14\uffff\1\144\1\60"+
+        "\1\162\5\uffff\2\160\1\157\1\147\1\164\1\141\1\162\1\161\2\154\1"+
+        "\144\1\154\1\155\1\154\1\uffff\1\145\2\uffff\1\154\6\uffff\1\141"+
+        "\1\60\1\141\1\uffff\1\154\1\uffff\1\151\1\154\1\162\1\163\1\143"+
+        "\1\157\1\151\2\145\1\162\1\156\1\145\1\156\1\162\2\60\1\154\1\60"+
+        "\1\uffff\2\60\2\154\1\60\1\145\1\154\1\151\1\60\1\165\1\151\1\101"+
+        "\1\145\1\154\1\142\1\163\1\60\1\146\1\165\1\uffff\1\154\1\162\1"+
+        "\151\1\156\1\151\1\145\1\60\1\153\1\162\1\146\1\60\1\156\1\171\1"+
+        "\163\2\60\1\141\2\uffff\1\60\3\uffff\2\145\1\uffff\1\147\1\60\1"+
+        "\156\1\uffff\1\145\1\155\2\156\1\157\1\162\1\145\1\144\1\145\1\uffff"+
+        "\1\60\1\154\1\151\1\164\2\145\1\172\1\60\1\uffff\1\60\1\143\1\60"+
+        "\1\146\1\uffff\1\144\1\60\1\146\2\uffff\1\162\1\uffff\1\60\1\141"+
+        "\1\145\1\uffff\1\147\1\156\1\151\1\171\1\166\1\151\1\145\1\143\1"+
+        "\141\1\60\1\uffff\1\164\1\144\1\60\2\163\1\145\2\uffff\1\145\1\uffff"+
+        "\1\60\1\163\1\uffff\1\157\1\171\1\uffff\1\156\1\162\1\60\1\143\1"+
+        "\164\1\60\1\141\2\144\1\164\1\60\1\uffff\3\60\1\uffff\4\60\1\uffff"+
+        "\1\60\1\162\3\60\1\uffff\2\145\1\uffff\1\154\1\60\1\123\1\151\11"+
+        "\uffff\1\155\3\uffff\1\60\1\144\1\151\1\uffff\1\145\1\157\1\141"+
+        "\1\uffff\1\116\1\144\1\164\1\156\1\164\1\141\3\60\1\151\1\164\3"+
+        "\uffff\1\157\1\165\1\156\1\162\1\60\1\141\1\uffff\1\154\1\60\1\uffff";
     static final String DFA11_maxS =
-        "\1\uffff\1\145\1\141\1\156\1\145\2\uffff\1\150\2\uffff\1\163\2\uffff\1\75\2\uffff\1\151\1\150\1\170\1\165\1\162\1\76\1\165\1\52\1\53\1\75\1\76\1\uffff\1\156\1\162\1\157\2\56\1\141\1\165\1\157\1\156\1\145\1\164\1\156\1\162\1\157\2\141\1\uffff\1\162\2\uffff\1\145\1\46\2\uffff\1\47\4\uffff\1\146\1\uffff\1\160\1\172\1\160\1\172\1\146\2\uffff\1\145\2\uffff\1\145\7\uffff\1\142\1\164\1\145\1\146\1\163\1\164\1\145\1\165\1\145\3\uffff\1\164\1\154\14\uffff\1\144\1\172\1\162\5\uffff\2\160\1\157\1\147\1\164\1\141\1\162\1\164\2\154\1\144\1\154\1\155\1\154\1\uffff\1\145\2\uffff\1\154\6\uffff\1\141\1\172\1\141\1\uffff\1\157\1\uffff\1\151\1\154\1\162\1\163\1\162\1\172\1\143\1\157\1\151\2\145\1\162\1\156\1\145\1\156\1\172\1\154\1\172\1\uffff\2\172\2\154\1\172\1\145\1\154\1\151\1\172\1\165\1\151\1\126\1\145\1\154\1\142\1\163\1\172\1\146\1\165\1\uffff\1\154\1\162\1\151\1\156\1\151\1\145\1\172\1\141\1\uffff\1\153\1\162\1\146\1\172\1\156\1\171\1\163\2\172\1\uffff\1\172\3\uffff\2\145\1\uffff\1\147\1\172\1\156\1\uffff\1\145\1\155\2\156\1\157\1\162\1\145\1\144\1\145\1\uffff\1\172\1\154\1\151\1\164\2\145\2\172\1\uffff\1\162\1\172\1\143\1\172\1\146\1\uffff\1\144\1\172\1\146\3\uffff\1\172\1\141\1\145\1\uffff\1\147\1\156\1\151\1\171\1\166\1\151\1\145\1\143\1\141\1\172\1\uffff\1\164\1\144\1\172\2\163\1\145\1\uffff\1\171\1\uffff\1\145\1\uffff\1\172\1\163\1\uffff\1\157\1\uffff\1\156\1\162\1\172\1\143\1\164\1\172\1\141\2\144\1\164\1\172\1\uffff\3\172\1\uffff\5\172\1\uffff\1\172\1\162\2\172\1\uffff\2\145\1\uffff\1\154\1\172\1\123\1\151\12\uffff\1\155\2\uffff\1\172\1\144\1\151\1\uffff\1\145\1\157\1\141\1\uffff\1\116\1\144\1\164\1\156\1\164\1\141\3\172\1\151\1\164\3\uffff\1\157\1\165\1\156\1\162\1\172\1\141\1\uffff\1\154\1\172\1\uffff";
+        "\1\uffff\1\145\1\141\1\156\1\145\2\uffff\1\150\2\uffff\1\163\2"+
+        "\uffff\1\75\2\uffff\1\150\1\170\1\165\1\162\1\151\1\76\1\165\1\52"+
+        "\1\53\1\75\1\76\1\uffff\1\156\1\162\1\157\2\56\1\141\1\165\1\157"+
+        "\1\156\1\145\1\164\1\156\1\162\1\157\2\141\1\uffff\1\162\2\uffff"+
+        "\1\145\1\46\2\uffff\1\47\4\uffff\1\146\1\uffff\1\160\1\172\1\160"+
+        "\1\172\1\146\2\uffff\1\145\2\uffff\1\145\7\uffff\1\145\1\146\1\163"+
+        "\1\164\1\145\1\165\1\145\1\142\1\164\3\uffff\1\164\1\154\14\uffff"+
+        "\1\144\1\172\1\162\5\uffff\2\160\1\157\1\147\1\164\1\141\1\162\1"+
+        "\164\2\154\1\144\1\154\1\155\1\154\1\uffff\1\145\2\uffff\1\154\6"+
+        "\uffff\1\141\1\172\1\141\1\uffff\1\157\1\uffff\1\151\1\154\1\162"+
+        "\1\163\1\143\1\157\1\151\2\145\1\162\1\156\1\145\1\156\1\162\2\172"+
+        "\1\154\1\172\1\uffff\2\172\2\154\1\172\1\145\1\154\1\151\1\172\1"+
+        "\165\1\151\1\126\1\145\1\154\1\142\1\163\1\172\1\146\1\165\1\uffff"+
+        "\1\154\1\162\1\151\1\156\1\151\1\145\1\172\1\153\1\162\1\146\1\172"+
+        "\1\156\1\171\1\163\2\172\1\141\2\uffff\1\172\3\uffff\2\145\1\uffff"+
+        "\1\147\1\172\1\156\1\uffff\1\145\1\155\2\156\1\157\1\162\1\145\1"+
+        "\144\1\145\1\uffff\1\172\1\154\1\151\1\164\2\145\2\172\1\uffff\1"+
+        "\172\1\143\1\172\1\146\1\uffff\1\144\1\172\1\146\2\uffff\1\162\1"+
+        "\uffff\1\172\1\141\1\145\1\uffff\1\147\1\156\1\151\1\171\1\166\1"+
+        "\151\1\145\1\143\1\141\1\172\1\uffff\1\164\1\144\1\172\2\163\1\145"+
+        "\2\uffff\1\145\1\uffff\1\172\1\163\1\uffff\1\157\1\171\1\uffff\1"+
+        "\156\1\162\1\172\1\143\1\164\1\172\1\141\2\144\1\164\1\172\1\uffff"+
+        "\3\172\1\uffff\4\172\1\uffff\1\172\1\162\3\172\1\uffff\2\145\1\uffff"+
+        "\1\154\1\172\1\123\1\151\11\uffff\1\155\3\uffff\1\172\1\144\1\151"+
+        "\1\uffff\1\145\1\157\1\141\1\uffff\1\116\1\144\1\164\1\156\1\164"+
+        "\1\141\3\172\1\151\1\164\3\uffff\1\157\1\165\1\156\1\162\1\172\1"+
+        "\141\1\uffff\1\154\1\172\1\uffff";
     static final String DFA11_acceptS =
-        "\5\uffff\1\5\1\6\1\uffff\1\10\1\11\1\uffff\1\14\1\15\1\uffff\1\21\1\22\13\uffff\1\42\20\uffff\1\103\1\uffff\1\105\1\106\5\uffff\1\124\1\126\1\131\1\132\1\uffff\1\124\5\uffff\1\5\1\6\1\uffff\1\10\1\11\1\uffff\1\14\1\15\1\20\1\26\1\16\1\21\1\22\11\uffff\1\51\1\130\1\32\2\uffff\1\123\1\127\1\34\1\74\1\35\1\40\1\36\1\41\1\43\1\76\1\37\1\42\3\uffff\1\73\1\50\1\52\1\53\1\116\16\uffff\1\103\1\uffff\1\105\1\106\1\uffff\1\120\1\121\1\122\1\125\1\126\1\131\3\uffff\1\3\1\uffff\1\107\22\uffff\1\45\23\uffff\1\2\10\uffff\1\114\11\uffff\1\33\1\uffff\1\44\1\46\1\54\2\uffff\1\67\3\uffff\1\66\11\uffff\1\104\10\uffff\1\13\5\uffff\1\111\3\uffff\1\77\1\110\1\102\3\uffff\1\60\12\uffff\1\115\6\uffff\1\7\1\uffff\1\24\1\uffff\1\112\2\uffff\1\27\1\uffff\1\55\13\uffff\1\100\3\uffff\1\17\5\uffff\1\113\4\uffff\1\61\2\uffff\1\63\4\uffff\1\75\1\1\1\101\1\12\1\47\1\4\1\31\1\23\1\25\1\117\1\uffff\1\56\1\57\3\uffff\1\65\3\uffff\1\70\13\uffff\1\64\1\72\1\71\6\uffff\1\30\2\uffff\1\62";
+        "\5\uffff\1\5\1\6\1\uffff\1\10\1\11\1\uffff\1\14\1\15\1\uffff\1"+
+        "\21\1\22\13\uffff\1\42\20\uffff\1\103\1\uffff\1\105\1\106\5\uffff"+
+        "\1\124\1\126\1\131\1\132\1\uffff\1\124\5\uffff\1\5\1\6\1\uffff\1"+
+        "\10\1\11\1\uffff\1\14\1\15\1\20\1\25\1\16\1\21\1\22\11\uffff\1\51"+
+        "\1\130\1\32\2\uffff\1\123\1\127\1\34\1\74\1\35\1\40\1\36\1\41\1"+
+        "\43\1\76\1\37\1\42\3\uffff\1\73\1\50\1\52\1\53\1\116\16\uffff\1"+
+        "\103\1\uffff\1\105\1\106\1\uffff\1\120\1\121\1\122\1\125\1\126\1"+
+        "\131\3\uffff\1\3\1\uffff\1\107\22\uffff\1\45\23\uffff\1\2\21\uffff"+
+        "\1\114\1\33\1\uffff\1\44\1\46\1\54\2\uffff\1\67\3\uffff\1\66\11"+
+        "\uffff\1\104\10\uffff\1\13\4\uffff\1\111\3\uffff\1\77\1\110\1\uffff"+
+        "\1\102\3\uffff\1\60\12\uffff\1\115\6\uffff\1\7\1\23\1\uffff\1\112"+
+        "\2\uffff\1\26\2\uffff\1\55\13\uffff\1\100\3\uffff\1\17\4\uffff\1"+
+        "\113\5\uffff\1\61\2\uffff\1\63\4\uffff\1\75\1\1\1\101\1\12\1\47"+
+        "\1\4\1\30\1\24\1\117\1\uffff\1\31\1\56\1\57\3\uffff\1\65\3\uffff"+
+        "\1\70\13\uffff\1\64\1\72\1\71\6\uffff\1\27\2\uffff\1\62";
     static final String DFA11_specialS =
         "\1\1\61\uffff\1\0\1\2\u012c\uffff}>";
     static final String[] DFA11_transitionS = {
-            "\11\70\2\67\2\70\1\67\22\70\1\67\1\70\1\62\3\70\1\61\1\63\1\13\1\14\1\16\1\30\1\5\1\25\1\37\1\27\12\66\1\15\1\17\1\32\1\33\1\31\1\40\1\54\1\65\1\43\1\51\5\65\1\44\2\65\1\52\1\41\1\65\1\50\2\65\1\45\1\46\1\42\1\47\5\65\1\56\1\70\1\57\1\70\1\64\1\70\1\34\1\65\1\21\1\1\1\22\1\53\2\65\1\3\2\65\1\20\1\2\1\26\1\35\1\55\1\23\1\4\1\60\1\24\1\12\1\65\1\7\1\36\2\65\1\6\1\11\1\10\uff82\70",
+            "\11\70\2\67\2\70\1\67\22\70\1\67\1\70\1\62\3\70\1\61\1\63\1"+
+            "\13\1\14\1\16\1\30\1\5\1\25\1\37\1\27\12\66\1\15\1\17\1\32\1"+
+            "\33\1\31\1\40\1\54\1\65\1\43\1\51\5\65\1\44\2\65\1\52\1\41\1"+
+            "\65\1\50\2\65\1\45\1\46\1\42\1\47\5\65\1\56\1\70\1\57\1\70\1"+
+            "\64\1\70\1\34\1\65\1\20\1\1\1\21\1\53\2\65\1\3\2\65\1\24\1\2"+
+            "\1\26\1\35\1\55\1\22\1\4\1\60\1\23\1\12\1\65\1\7\1\36\2\65\1"+
+            "\6\1\11\1\10\uff82\70",
             "\1\71",
             "\1\73",
             "\1\76\6\uffff\1\75\1\74",
@@ -3037,11 +3126,11 @@ public class InternalQVTcoreLexer extends Lexer {
             "\1\110\2\uffff\1\111",
             "",
             "",
-            "\1\116\3\uffff\1\115",
-            "\1\117",
-            "\1\121\1\uffff\1\120\11\uffff\1\122",
-            "\1\123",
-            "\1\125\11\uffff\1\124",
+            "\1\115",
+            "\1\117\1\uffff\1\116\11\uffff\1\120",
+            "\1\121",
+            "\1\123\11\uffff\1\122",
+            "\1\125\3\uffff\1\124",
             "\1\127\20\uffff\1\126",
             "\1\131\5\uffff\1\132",
             "\1\133\2\uffff\1\134",
@@ -3081,7 +3170,8 @@ public class InternalQVTcoreLexer extends Lexer {
             "\1\u0088",
             "",
             "\1\u0089",
-            "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\25\72\1\u008a\4\72",
+            "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\25\72\1\u008a\4"+
+            "\72",
             "\1\u008c",
             "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\32\72",
             "\1\u008f\4\uffff\1\u008e",
@@ -3099,13 +3189,13 @@ public class InternalQVTcoreLexer extends Lexer {
             "",
             "",
             "\1\u0092",
-            "\1\u0093",
-            "\1\u0094",
-            "\1\u0096\1\uffff\1\u0095",
+            "\1\u0094\1\uffff\1\u0093",
+            "\1\u0095",
+            "\1\u0096",
             "\1\u0097",
-            "\1\u0098",
-            "\1\u0099",
-            "\1\u009a\23\uffff\1\u009b",
+            "\1\u0098\23\uffff\1\u0099",
+            "\1\u009a",
+            "\1\u009b",
             "\1\u009c",
             "",
             "",
@@ -3168,7 +3258,7 @@ public class InternalQVTcoreLexer extends Lexer {
             "\1\u00ba",
             "\1\u00bb",
             "\1\u00bc",
-            "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\32\72",
+            "\1\u00bd",
             "\1\u00be",
             "\1\u00bf",
             "\1\u00c0",
@@ -3177,7 +3267,7 @@ public class InternalQVTcoreLexer extends Lexer {
             "\1\u00c3",
             "\1\u00c4",
             "\1\u00c5",
-            "\1\u00c6",
+            "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\32\72",
             "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\32\72",
             "\1\u00c8",
             "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\32\72",
@@ -3210,16 +3300,17 @@ public class InternalQVTcoreLexer extends Lexer {
             "\1\u00e4",
             "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\32\72",
             "\1\u00e6",
-            "",
             "\1\u00e7",
             "\1\u00e8",
-            "\1\u00e9",
-            "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\10\72\1\u00ea\21\72",
+            "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\10\72\1\u00e9\21"+
+            "\72",
+            "\1\u00eb",
             "\1\u00ec",
             "\1\u00ed",
-            "\1\u00ee",
             "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\32\72",
             "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\32\72",
+            "\1\u00f0",
+            "",
             "",
             "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\32\72",
             "",
@@ -3251,17 +3342,17 @@ public class InternalQVTcoreLexer extends Lexer {
             "\1\u0106",
             "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\32\72",
             "",
-            "\1\u0108",
             "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\32\72",
-            "\1\u010a",
+            "\1\u0109",
             "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\32\72",
+            "\1\u010b",
+            "",
             "\1\u010c",
-            "",
-            "\1\u010d",
             "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\32\72",
+            "\1\u010e",
+            "",
+            "",
             "\1\u010f",
-            "",
-            "",
             "",
             "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\32\72",
             "\1\u0111",
@@ -3280,18 +3371,19 @@ public class InternalQVTcoreLexer extends Lexer {
             "",
             "\1\u011d",
             "\1\u011e",
-            "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\22\72\1\u011f\7\72",
+            "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\22\72\1\u011f\7"+
+            "\72",
             "\1\u0121",
             "\1\u0122",
             "\1\u0123",
             "",
+            "",
             "\1\u0124",
             "",
-            "\1\u0125",
-            "",
             "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\32\72",
-            "\1\u0127",
+            "\1\u0126",
             "",
+            "\1\u0127",
             "\1\u0128",
             "",
             "\1\u0129",
@@ -3314,10 +3406,10 @@ public class InternalQVTcoreLexer extends Lexer {
             "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\32\72",
             "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\32\72",
             "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\32\72",
-            "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\32\72",
             "",
             "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\32\72",
-            "\1\u013d",
+            "\1\u013c",
+            "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\32\72",
             "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\32\72",
             "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\32\72",
             "",
@@ -3337,8 +3429,8 @@ public class InternalQVTcoreLexer extends Lexer {
             "",
             "",
             "",
-            "",
             "\1\u0146",
+            "",
             "",
             "",
             "\12\72\7\uffff\32\72\4\uffff\1\72\1\uffff\32\72",
@@ -3455,15 +3547,15 @@ public class InternalQVTcoreLexer extends Lexer {
 
                         else if ( (LA11_0==';') ) {s = 15;}
 
-                        else if ( (LA11_0=='l') ) {s = 16;}
+                        else if ( (LA11_0=='c') ) {s = 16;}
 
-                        else if ( (LA11_0=='c') ) {s = 17;}
+                        else if ( (LA11_0=='e') ) {s = 17;}
 
-                        else if ( (LA11_0=='e') ) {s = 18;}
+                        else if ( (LA11_0=='q') ) {s = 18;}
 
-                        else if ( (LA11_0=='q') ) {s = 19;}
+                        else if ( (LA11_0=='t') ) {s = 19;}
 
-                        else if ( (LA11_0=='t') ) {s = 20;}
+                        else if ( (LA11_0=='l') ) {s = 20;}
 
                         else if ( (LA11_0=='-') ) {s = 21;}
 

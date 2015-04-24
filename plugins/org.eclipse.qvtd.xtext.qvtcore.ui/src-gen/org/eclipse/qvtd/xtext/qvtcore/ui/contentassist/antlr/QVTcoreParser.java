@@ -37,7 +37,6 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
-					put(grammarAccess.getTopLevelCSAccess().getAlternatives_0(), "rule__TopLevelCS__Alternatives_0");
 					put(grammarAccess.getTopLevelCSAccess().getAlternatives_1(), "rule__TopLevelCS__Alternatives_1");
 					put(grammarAccess.getBottomPatternCSAccess().getAlternatives(), "rule__BottomPatternCS__Alternatives");
 					put(grammarAccess.getBottomPatternCSAccess().getAlternatives_0_1(), "rule__BottomPatternCS__Alternatives_0_1");
@@ -101,7 +100,6 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getImportCSAccess().getGroup(), "rule__ImportCS__Group__0");
 					put(grammarAccess.getImportCSAccess().getGroup_1(), "rule__ImportCS__Group_1__0");
 					put(grammarAccess.getImportCSAccess().getGroup_3(), "rule__ImportCS__Group_3__0");
-					put(grammarAccess.getLibraryCSAccess().getGroup(), "rule__LibraryCS__Group__0");
 					put(grammarAccess.getNamedDomainCSAccess().getGroup(), "rule__NamedDomainCS__Group__0");
 					put(grammarAccess.getParamDeclarationCSAccess().getGroup(), "rule__ParamDeclarationCS__Group__0");
 					put(grammarAccess.getPredicateCSAccess().getGroup(), "rule__PredicateCS__Group__0");
@@ -213,8 +211,7 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTypedTypeRefCSAccess().getGroup(), "rule__TypedTypeRefCS__Group__0");
 					put(grammarAccess.getWildcardTypeRefCSAccess().getGroup(), "rule__WildcardTypeRefCS__Group__0");
 					put(grammarAccess.getWildcardTypeRefCSAccess().getGroup_2(), "rule__WildcardTypeRefCS__Group_2__0");
-					put(grammarAccess.getTopLevelCSAccess().getOwnedImportsAssignment_0_0(), "rule__TopLevelCS__OwnedImportsAssignment_0_0");
-					put(grammarAccess.getTopLevelCSAccess().getOwnedLibrariesAssignment_0_1(), "rule__TopLevelCS__OwnedLibrariesAssignment_0_1");
+					put(grammarAccess.getTopLevelCSAccess().getOwnedImportsAssignment_0(), "rule__TopLevelCS__OwnedImportsAssignment_0");
 					put(grammarAccess.getTopLevelCSAccess().getOwnedMappingsAssignment_1_0(), "rule__TopLevelCS__OwnedMappingsAssignment_1_0");
 					put(grammarAccess.getTopLevelCSAccess().getOwnedTransformationsAssignment_1_1(), "rule__TopLevelCS__OwnedTransformationsAssignment_1_1");
 					put(grammarAccess.getTopLevelCSAccess().getOwnedQueriesAssignment_1_2(), "rule__TopLevelCS__OwnedQueriesAssignment_1_2");
@@ -248,7 +245,6 @@ public class QVTcoreParser extends AbstractContentAssistParser {
 					put(grammarAccess.getImportCSAccess().getNameAssignment_1_0(), "rule__ImportCS__NameAssignment_1_0");
 					put(grammarAccess.getImportCSAccess().getOwnedPathNameAssignment_2(), "rule__ImportCS__OwnedPathNameAssignment_2");
 					put(grammarAccess.getImportCSAccess().getIsAllAssignment_3_0(), "rule__ImportCS__IsAllAssignment_3_0");
-					put(grammarAccess.getLibraryCSAccess().getReferredPackageAssignment_1(), "rule__LibraryCS__ReferredPackageAssignment_1");
 					put(grammarAccess.getNamedDomainCSAccess().getIsCheckAssignment_0(), "rule__NamedDomainCS__IsCheckAssignment_0");
 					put(grammarAccess.getNamedDomainCSAccess().getIsEnforceAssignment_1(), "rule__NamedDomainCS__IsEnforceAssignment_1");
 					put(grammarAccess.getNamedDomainCSAccess().getDirectionAssignment_2(), "rule__NamedDomainCS__DirectionAssignment_2");

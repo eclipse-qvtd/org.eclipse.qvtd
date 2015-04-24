@@ -48,12 +48,6 @@ GuardVariableCS returns UnrealizedVariableCS: name=UnrestrictedName ':' ownedTyp
 
 ImportCS returns base::ImportCS:
 	'import' (name=Identifier ':')? ownedPathName=URIPathNameCS (isAll?='::' '*')? ';';
-
-//IncludeCS returns IncludeCS:
-//	'include' namespace=[pivot::Namespace|URI] ';';
-
-LibraryCS returns base::LibraryCS:
-	'library' referredPackage=[pivot::Package|URI] ';';
 	
 NamedDomainCS returns DomainCS: isCheck?='check'? isEnforce?='enforce'? direction=[qvtbase::TypedModel|UnrestrictedName]
 	ownedGuardPattern=GuardPatternCS ownedBottomPattern=BottomPatternCS;

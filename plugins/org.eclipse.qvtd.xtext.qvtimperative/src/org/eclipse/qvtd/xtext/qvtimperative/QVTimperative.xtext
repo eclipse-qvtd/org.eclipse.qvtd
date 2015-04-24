@@ -21,7 +21,7 @@ import "platform:/resource/org.eclipse.qvtd.xtext.qvtcorebase/model/QVTcoreBaseC
 import "platform:/resource/org.eclipse.qvtd.xtext.qvtimperative/model/QVTimperativeCS.ecore"
 
 TopLevelCS:
-	(ownedImports+=ImportCS | /*ownedInclude+=IncludeCS |*/ ownedLibraries+=LibraryCS)*
+	ownedImports+=ImportCS*
 	(ownedTransformations+=TransformationCS | ownedMappings+=MappingCS | ownedQueries+=QueryCS)*
 ;
 	

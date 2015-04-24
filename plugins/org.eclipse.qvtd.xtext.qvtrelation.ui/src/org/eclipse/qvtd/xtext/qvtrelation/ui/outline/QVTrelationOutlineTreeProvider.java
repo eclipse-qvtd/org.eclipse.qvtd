@@ -17,7 +17,6 @@ import org.eclipse.ocl.pivot.Operation;
 import org.eclipse.ocl.pivot.Parameter;
 import org.eclipse.ocl.pivot.Variable;
 import org.eclipse.ocl.xtext.basecs.ImportCS;
-import org.eclipse.ocl.xtext.basecs.LibraryCS;
 import org.eclipse.ocl.xtext.basecs.PackageCS;
 import org.eclipse.ocl.xtext.basecs.PathNameCS;
 import org.eclipse.qvtd.pivot.qvtbase.Domain;
@@ -48,9 +47,6 @@ public class QVTrelationOutlineTreeProvider extends QVTbaseOutlineTreeProvider
 	protected void _createChildren(IOutlineNode parentNode, TopLevelCS ele) {
 		for (ImportCS csImport : ele.getOwnedImports()) {
 			createNode(parentNode, csImport);
-		}
-		for (LibraryCS csLibrary : ele.getOwnedLibraries()) {
-			createNode(parentNode, csLibrary);
 		}
 		for (PackageCS csPackage : ele.getOwnedPackages()) {
 			createNode(parentNode, csPackage);

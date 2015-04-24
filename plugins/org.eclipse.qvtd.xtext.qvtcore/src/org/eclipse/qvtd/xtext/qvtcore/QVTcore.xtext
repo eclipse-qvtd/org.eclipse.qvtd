@@ -20,7 +20,7 @@ import "platform:/resource/org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore" a
 import "platform:/resource/org.eclipse.qvtd.xtext.qvtcore/model/QVTcoreCS.ecore"
 
 TopLevelCS:
-	(ownedImports+=ImportCS | /*ownedInclude+=IncludeCS |*/ ownedLibraries+=LibraryCS)*
+	ownedImports+=ImportCS*
 	(ownedMappings+=MappingCS | ownedTransformations+=TransformationCS | ownedQueries+=QueryCS)*
 ;
 	
