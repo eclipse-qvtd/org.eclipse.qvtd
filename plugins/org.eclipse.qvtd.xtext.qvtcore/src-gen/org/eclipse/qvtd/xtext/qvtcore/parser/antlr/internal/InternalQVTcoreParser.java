@@ -21533,26 +21533,17 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
     static final String DFA18_specialS =
         "\13\uffff}>";
     static final String[] DFA18_transitionS = {
-            "\2\1\13\uffff\1\1\1\uffff\1\1\5\uffff\1\2\1\3\3\uffff\1\1\2"+
-            "\uffff\1\4\2\1\1\uffff\4\1",
+            "\2\1\13\uffff\1\1\1\uffff\1\1\5\uffff\1\2\1\3\3\uffff\1\1\2\uffff\1\4\2\1\1\uffff\4\1",
             "",
-            "\2\4\13\uffff\1\4\1\uffff\1\4\5\uffff\1\5\1\6\3\uffff\1\4"+
-            "\2\uffff\1\1\2\4\1\uffff\4\4",
-            "\2\4\13\uffff\1\4\1\uffff\1\4\5\uffff\1\7\1\10\3\uffff\1\4"+
-            "\2\uffff\1\1\2\4\1\uffff\4\4",
+            "\2\4\13\uffff\1\4\1\uffff\1\4\5\uffff\1\5\1\6\3\uffff\1\4\2\uffff\1\1\2\4\1\uffff\4\4",
+            "\2\4\13\uffff\1\4\1\uffff\1\4\5\uffff\1\7\1\10\3\uffff\1\4\2\uffff\1\1\2\4\1\uffff\4\4",
             "",
-            "\2\1\13\uffff\1\1\1\uffff\1\1\1\4\4\uffff\1\1\1\11\3\uffff"+
-            "\1\1\2\uffff\1\4\2\1\1\uffff\4\1",
-            "\2\1\13\uffff\1\1\1\uffff\1\1\1\4\4\uffff\1\1\1\12\3\uffff"+
-            "\1\1\2\uffff\1\4\2\1\1\uffff\4\1",
-            "\2\1\13\uffff\1\1\1\uffff\1\1\1\4\4\uffff\2\1\3\uffff\1\1"+
-            "\2\uffff\1\4\2\1\1\uffff\4\1",
-            "\2\1\13\uffff\1\1\1\uffff\1\1\1\4\4\uffff\2\1\3\uffff\1\1"+
-            "\2\uffff\1\4\2\1\1\uffff\4\1",
-            "\2\4\13\uffff\1\4\1\uffff\1\4\1\1\4\uffff\1\4\1\10\3\uffff"+
-            "\1\4\2\uffff\1\1\2\4\1\uffff\4\4",
-            "\2\4\13\uffff\1\4\1\uffff\1\4\1\1\4\uffff\2\4\3\uffff\1\4"+
-            "\2\uffff\1\1\2\4\1\uffff\4\4"
+            "\2\1\13\uffff\1\1\1\uffff\1\1\1\4\4\uffff\1\1\1\11\3\uffff\1\1\2\uffff\1\4\2\1\1\uffff\4\1",
+            "\2\1\13\uffff\1\1\1\uffff\1\1\1\4\4\uffff\1\1\1\12\3\uffff\1\1\2\uffff\1\4\2\1\1\uffff\4\1",
+            "\2\1\13\uffff\1\1\1\uffff\1\1\1\4\4\uffff\2\1\3\uffff\1\1\2\uffff\1\4\2\1\1\uffff\4\1",
+            "\2\1\13\uffff\1\1\1\uffff\1\1\1\4\4\uffff\2\1\3\uffff\1\1\2\uffff\1\4\2\1\1\uffff\4\1",
+            "\2\4\13\uffff\1\4\1\uffff\1\4\1\1\4\uffff\1\4\1\10\3\uffff\1\4\2\uffff\1\1\2\4\1\uffff\4\4",
+            "\2\4\13\uffff\1\4\1\uffff\1\4\1\1\4\uffff\2\4\3\uffff\1\4\2\uffff\1\1\2\4\1\uffff\4\4"
     };
 
     static final short[] DFA18_eot = DFA.unpackEncodedString(DFA18_eotS);
@@ -21601,10 +21592,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
     static final String DFA40_specialS =
         "\37\uffff}>";
     static final String[] DFA40_transitionS = {
-            "\1\1\1\2\13\uffff\1\10\1\uffff\1\13\5\uffff\1\6\1\15\3\uffff"+
-            "\1\5\3\uffff\1\3\1\4\1\uffff\1\11\1\14\1\12\1\7\22\uffff\1\34"+
-            "\1\35\1\24\1\25\1\26\1\27\1\30\1\31\1\32\1\33\1\17\1\20\1\21"+
-            "\1\22\1\23",
+            "\1\1\1\2\13\uffff\1\10\1\uffff\1\13\5\uffff\1\6\1\15\3\uffff\1\5\3\uffff\1\3\1\4\1\uffff\1\11\1\14\1\12\1\7\22\uffff\1\34\1\35\1\24\1\25\1\26\1\27\1\30\1\31\1\32\1\33\1\17\1\20\1\21\1\22\1\23",
             "\1\16\5\uffff\1\16\3\uffff\1\36",
             "\1\16\5\uffff\1\16\3\uffff\1\36",
             "\1\16\5\uffff\1\16\3\uffff\1\36",
@@ -21683,9 +21671,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
     static final String DFA41_specialS =
         "\20\uffff}>";
     static final String[] DFA41_transitionS = {
-            "\1\1\1\2\13\uffff\1\10\1\uffff\1\13\5\uffff\1\6\1\15\3\uffff"+
-            "\1\5\3\uffff\1\3\1\4\1\uffff\1\11\1\14\1\12\1\7\22\uffff\17"+
-            "\16",
+            "\1\1\1\2\13\uffff\1\10\1\uffff\1\13\5\uffff\1\6\1\15\3\uffff\1\5\3\uffff\1\3\1\4\1\uffff\1\11\1\14\1\12\1\7\22\uffff\17\16",
             "\1\16\11\uffff\1\17",
             "\1\16\11\uffff\1\17",
             "\1\16\11\uffff\1\17",
@@ -21749,37 +21735,21 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
     static final String DFA63_specialS =
         "\20\uffff}>";
     static final String[] DFA63_transitionS = {
-            "\1\2\1\3\2\1\11\uffff\1\11\1\uffff\1\14\5\uffff\1\7\1\16\1"+
-            "\1\1\uffff\1\17\1\6\1\uffff\1\1\1\uffff\1\4\1\5\1\uffff\1\12"+
-            "\1\15\1\13\1\10\2\1\20\uffff\17\1\2\uffff\1\1\1\uffff\4\1\4"+
-            "\uffff\1\1\4\uffff\2\1",
+            "\1\2\1\3\2\1\11\uffff\1\11\1\uffff\1\14\5\uffff\1\7\1\16\1\1\1\uffff\1\17\1\6\1\uffff\1\1\1\uffff\1\4\1\5\1\uffff\1\12\1\15\1\13\1\10\2\1\20\uffff\17\1\2\uffff\1\1\1\uffff\4\1\4\uffff\1\1\4\uffff\2\1",
             "",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\17\uffff\1\1\7\uffff\1\1\1\uffff\1\1",
             ""
     };
 
@@ -21829,37 +21799,21 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
     static final String DFA66_specialS =
         "\20\uffff}>";
     static final String[] DFA66_transitionS = {
-            "\1\2\1\3\2\1\11\uffff\1\11\1\uffff\1\14\5\uffff\1\7\1\16\1"+
-            "\1\1\uffff\1\17\1\6\1\uffff\1\1\1\uffff\1\4\1\5\1\uffff\1\12"+
-            "\1\15\1\13\1\10\2\1\20\uffff\17\1\2\uffff\1\1\1\uffff\4\1\4"+
-            "\uffff\1\1\4\uffff\2\1",
+            "\1\2\1\3\2\1\11\uffff\1\11\1\uffff\1\14\5\uffff\1\7\1\16\1\1\1\uffff\1\17\1\6\1\uffff\1\1\1\uffff\1\4\1\5\1\uffff\1\12\1\15\1\13\1\10\2\1\20\uffff\17\1\2\uffff\1\1\1\uffff\4\1\4\uffff\1\1\4\uffff\2\1",
             "",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
-            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff"+
-            "\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
+            "\2\1\1\uffff\1\1\3\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1",
             ""
     };
 
@@ -21909,8 +21863,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
     static final String DFA78_specialS =
         "\1\uffff\1\0\14\uffff}>";
     static final String[] DFA78_transitionS = {
-            "\1\2\1\1\1\uffff\2\2\3\uffff\1\2\4\uffff\1\2\2\uffff\1\2\14"+
-            "\uffff\1\2\31\uffff\1\2\10\uffff\1\2\2\uffff\1\2",
+            "\1\2\1\1\1\uffff\2\2\3\uffff\1\2\4\uffff\1\2\2\uffff\1\2\14\uffff\1\2\31\uffff\1\2\10\uffff\1\2\2\uffff\1\2",
             "\1\uffff",
             "",
             "",
@@ -21998,8 +21951,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
     static final String DFA77_specialS =
         "\1\uffff\1\0\14\uffff}>";
     static final String[] DFA77_transitionS = {
-            "\1\2\1\1\1\uffff\2\2\3\uffff\1\2\4\uffff\1\2\2\uffff\1\2\14"+
-            "\uffff\1\2\31\uffff\1\2\10\uffff\1\2\2\uffff\1\2",
+            "\1\2\1\1\1\uffff\2\2\3\uffff\1\2\4\uffff\1\2\2\uffff\1\2\14\uffff\1\2\31\uffff\1\2\10\uffff\1\2\2\uffff\1\2",
             "\1\uffff",
             "",
             "",
@@ -22087,8 +22039,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
     static final String DFA79_specialS =
         "\26\uffff\1\0\1\1\1\2\1\3\1\4\3\uffff}>";
     static final String[] DFA79_transitionS = {
-            "\2\1\13\uffff\1\1\1\uffff\1\1\5\uffff\2\1\3\uffff\1\1\3\uffff"+
-            "\2\1\1\uffff\4\1\22\uffff\12\16\1\26\1\27\1\30\1\31\1\32",
+            "\2\1\13\uffff\1\1\1\uffff\1\1\5\uffff\2\1\3\uffff\1\1\3\uffff\2\1\1\uffff\4\1\22\uffff\12\16\1\26\1\27\1\30\1\31\1\32",
             "",
             "",
             "",
@@ -22252,9 +22203,7 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
     static final String DFA82_specialS =
         "\1\uffff\1\0\1\1\50\uffff}>";
     static final String[] DFA82_transitionS = {
-            "\4\3\11\uffff\1\3\1\uffff\1\3\5\uffff\3\3\2\uffff\1\3\1\uffff"+
-            "\1\3\1\uffff\2\3\1\uffff\4\3\1\1\1\2\20\uffff\17\3\2\uffff\1"+
-            "\3\1\uffff\4\3\4\uffff\1\3\4\uffff\1\52\1\3",
+            "\4\3\11\uffff\1\3\1\uffff\1\3\5\uffff\3\3\2\uffff\1\3\1\uffff\1\3\1\uffff\2\3\1\uffff\4\3\1\1\1\2\20\uffff\17\3\2\uffff\1\3\1\uffff\4\3\4\uffff\1\3\4\uffff\1\52\1\3",
             "\1\uffff",
             "\1\uffff",
             "",
@@ -22382,15 +22331,11 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
     static final String DFA85_maxS =
         "\1\134\12\uffff\7\0\31\uffff";
     static final String DFA85_acceptS =
-        "\1\uffff\1\1\1\2\1\3\1\4\15\uffff\1\10\1\11\7\uffff\1\12\14\uffff"+
-        "\1\5\1\6\1\7";
+        "\1\uffff\1\1\1\2\1\3\1\4\15\uffff\1\10\1\11\7\uffff\1\12\14\uffff\1\5\1\6\1\7";
     static final String DFA85_specialS =
         "\13\uffff\1\0\1\1\1\2\1\3\1\4\1\5\1\6\31\uffff}>";
     static final String[] DFA85_transitionS = {
-            "\2\33\2\4\11\uffff\1\33\1\uffff\1\33\5\uffff\2\33\1\1\2\uffff"+
-            "\1\33\1\uffff\1\4\1\uffff\2\33\1\uffff\4\33\22\uffff\1\14\1"+
-            "\13\10\23\1\15\1\16\1\17\1\20\1\21\2\uffff\1\22\1\uffff\4\4"+
-            "\4\uffff\1\2\5\uffff\1\3",
+            "\2\33\2\4\11\uffff\1\33\1\uffff\1\33\5\uffff\2\33\1\1\2\uffff\1\33\1\uffff\1\4\1\uffff\2\33\1\uffff\4\33\22\uffff\1\14\1\13\10\23\1\15\1\16\1\17\1\20\1\21\2\uffff\1\22\1\uffff\4\4\4\uffff\1\2\5\uffff\1\3",
             "",
             "",
             "",
@@ -22597,37 +22542,21 @@ public class InternalQVTcoreParser extends AbstractInternalAntlrParser {
     static final String DFA109_specialS =
         "\20\uffff}>";
     static final String[] DFA109_transitionS = {
-            "\1\2\1\3\2\1\11\uffff\1\11\1\uffff\1\14\5\uffff\1\7\1\16\1"+
-            "\1\1\uffff\1\17\1\6\1\uffff\1\1\1\uffff\1\4\1\5\1\uffff\1\12"+
-            "\1\15\1\13\1\10\2\1\20\uffff\17\1\2\uffff\1\1\1\uffff\4\1\4"+
-            "\uffff\1\1\4\uffff\2\1",
+            "\1\2\1\3\2\1\11\uffff\1\11\1\uffff\1\14\5\uffff\1\7\1\16\1\1\1\uffff\1\17\1\6\1\uffff\1\1\1\uffff\1\4\1\5\1\uffff\1\12\1\15\1\13\1\10\2\1\20\uffff\17\1\2\uffff\1\1\1\uffff\4\1\4\uffff\1\1\4\uffff\2\1",
             "",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff"+
-            "\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff"+
-            "\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff"+
-            "\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff"+
-            "\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff"+
-            "\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff"+
-            "\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff"+
-            "\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff"+
-            "\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff"+
-            "\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff"+
-            "\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff"+
-            "\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff"+
-            "\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
-            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff"+
-            "\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
+            "\1\1\5\uffff\1\1\1\uffff\1\17\1\uffff\2\1\10\uffff\1\1\1\uffff\20\1\27\uffff\1\1\1\uffff\1\1\2\uffff\1\1",
             ""
     };
 
