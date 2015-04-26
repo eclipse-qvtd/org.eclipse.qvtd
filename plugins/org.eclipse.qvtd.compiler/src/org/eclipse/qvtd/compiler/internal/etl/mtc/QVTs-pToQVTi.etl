@@ -211,8 +211,8 @@ rule PropertyAssignments
     }
 
 rule MiddlePropertyAssignments 
-	transform mpaIn : QVTp!MiddlePropertyAssignment
-	to mpaOut : QVTi!MiddlePropertyAssignment
+	transform mpaIn : QVTp!PropertyAssignment
+	to mpaOut : QVTi!PropertyAssignment
 	extends PropertyAssignments
 	{
 	

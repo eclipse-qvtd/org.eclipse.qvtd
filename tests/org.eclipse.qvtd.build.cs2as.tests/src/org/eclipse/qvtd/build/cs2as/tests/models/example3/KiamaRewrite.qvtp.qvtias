@@ -24,7 +24,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="KiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="KiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Num" referredVariable="#qV..KiamaRewrite_qvtp_qvtias.cNumCS_2_Num.rightAS.bottom.num"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.NumCS" referredVariable="#qV..KiamaRewrite_qvtp_qvtias.cNumCS_2_Num.leftCS.guard.numCS"/>
           </assignment>
@@ -45,7 +45,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="KiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="KiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Plus" referredVariable="#qV..KiamaRewrite_qvtp_qvtias.cPlusCS_2_Plus.rightAS.bottom.plus"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.PlusCS" referredVariable="#qV..KiamaRewrite_qvtp_qvtias.cPlusCS_2_Plus.leftCS.guard.plusCS"/>
           </assignment>
@@ -66,7 +66,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="KiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="KiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Top" referredVariable="#qV..KiamaRewrite_qvtp_qvtias.cTopCS_2_Top.rightAS.bottom.top"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.TopCS" referredVariable="#qV..KiamaRewrite_qvtp_qvtias.cTopCS_2_Top.leftCS.guard.topCS"/>
           </assignment>
@@ -85,7 +85,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Num.value">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Num.value">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
                 referredProperty="KiamaCS.ecore.oclas#p.kiamacs.NumCS.value">
               <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class KiamaCS.ecore.oclas#T.kiamacs.NumCS" isImplicit="true" referredVariable="#qV..KiamaRewrite_qvtp_qvtias.uNum_value.leftCS.guard.numCS"/>
@@ -113,7 +113,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.deep">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.deep">
             <value xsi:type="pivot:LetExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer">
               <ownedIn xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer">
                 <ownedCondition xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
@@ -179,7 +179,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.height">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.height">
             <value xsi:type="pivot:IntegerLiteralExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
                 integerSymbol="0"/>
             <slotExpression xsi:type="pivot:OperationCallExp" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Num" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
@@ -205,7 +205,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Plus.left">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Plus.left">
             <value xsi:type="pivot:OperationCallExp" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Node" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
               <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                   referredProperty="KiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
@@ -240,7 +240,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Plus.right">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Plus.right">
             <value xsi:type="pivot:OperationCallExp" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Node" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
               <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                   referredProperty="KiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">
@@ -275,7 +275,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.deep">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.deep">
             <value xsi:type="pivot:LetExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer">
               <ownedIn xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer">
                 <ownedCondition xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
@@ -341,7 +341,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.height">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Node.height">
             <value xsi:type="pivot:OperationCallExp" name="+" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
                 referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.Integer.%43%..ocl.OclSelf">
               <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Integer"
@@ -408,7 +408,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Top.node">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="KiamaAS.ecore.oclas#p.kiamaas.Top.node">
             <value xsi:type="pivot:OperationCallExp" type="pivot:Class KiamaAS.ecore.oclas#T.kiamaas.Node" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
               <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                   referredProperty="KiamaCS.ecore.oclas#p.kiamacs.BaseCS.ast">

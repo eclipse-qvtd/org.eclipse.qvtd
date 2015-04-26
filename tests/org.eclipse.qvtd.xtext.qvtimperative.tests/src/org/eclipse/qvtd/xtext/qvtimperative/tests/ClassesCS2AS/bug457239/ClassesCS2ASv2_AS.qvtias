@@ -31,7 +31,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" isDefault="false" targetProperty="../Classes.ecore.oclas#p.classes.NamedElement.name">
+          <assignment xsi:type="qvtcb:PropertyAssignment" isDefault="false" targetProperty="../Classes.ecore.oclas#p.classes.NamedElement.name">
             <value xsi:type="pivot:IfExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String">
               <ownedCondition xsi:type="pivot:OperationCallExp" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#Boolean"
                   referredOperation="helpers.ocl.oclas#o.ocl.OclElement.aBooleanElementOp">
