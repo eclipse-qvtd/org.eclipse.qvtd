@@ -11,6 +11,7 @@
 package org.eclipse.qvtd.all.tests;
 
 import org.eclipse.ocl.examples.test.xtext.AbstractGrammarTests;
+import org.eclipse.ocl.xtext.oclinecore.OCLinEcoreStandaloneSetup;
 import org.eclipse.qvtd.xtext.qvtcore.QVTcoreGrammarResource;
 import org.eclipse.qvtd.xtext.qvtcorebase.QVTcoreBaseGrammarResource;
 import org.eclipse.qvtd.xtext.qvtimperative.QVTimperativeGrammarResource;
@@ -23,6 +24,7 @@ public class GrammarTests extends AbstractGrammarTests
 {
 	@Override
 	protected void setUp() throws Exception {
+		OCLinEcoreStandaloneSetup.class.getName();			// Ensure hidden reference is resolveable on classpath.
 		super.setUp();
 	}
 
