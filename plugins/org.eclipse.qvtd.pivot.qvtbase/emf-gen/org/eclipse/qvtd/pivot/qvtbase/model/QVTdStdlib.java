@@ -84,7 +84,7 @@ public class QVTdStdlib extends ASResourceImpl
 	public static @NonNull QVTdStdlib getDefault() {
 		QVTdStdlib oclstdlib = INSTANCE;
 		if (oclstdlib == null) {
-			Contents contents = new Contents("http://www.eclipse.org/qvt/2015/QVTbase", "qvtbase", "qvtb", "http://www.eclipse.org/qvt/2015/QVTbase");
+			Contents contents = new Contents("http://www.eclipse.org/qvt/2015/QVTbase");
 			oclstdlib = INSTANCE = new QVTdStdlib(STDLIB_URI + PivotConstants.DOT_OCL_AS_FILE_EXTENSION, contents.getModel());
 		}
 		return oclstdlib;
@@ -142,8 +142,8 @@ public class QVTdStdlib extends ASResourceImpl
 	 *	Construct a copy of the OCL Standard Library with specified resource URI,
 	 *  and package name, prefix and namespace URI.
 	 */
-	public static @NonNull QVTdStdlib create(@NonNull String asURI, @NonNull String name, @NonNull String nsPrefix, @NonNull String nsURI) {
-		Contents contents = new Contents(asURI, name, nsPrefix, nsURI);
+	public static @NonNull QVTdStdlib create(@NonNull String asURI) {
+		Contents contents = new Contents(asURI);
 		return new QVTdStdlib(asURI, contents.getModel());
 	}
 	
@@ -223,7 +223,8 @@ public class QVTdStdlib extends ASResourceImpl
 		private final @NonNull Library ocl;
 		private final @NonNull Library qvtbase;
 
-		private Contents(@NonNull String asURI, @NonNull String name, @NonNull String nsPrefix, @NonNull String nsURI) {
+		private Contents(@NonNull String asURI)
+		{
 			model = createModel(asURI);
 			orphanage = createPackage("$$", "orphanage", "http://www.eclipse.org/ocl/2015/Orphanage", null);
 			ocl = createLibrary("ocl", "ocl", "http://www.eclipse.org/ocl/2015/Pivot", null);

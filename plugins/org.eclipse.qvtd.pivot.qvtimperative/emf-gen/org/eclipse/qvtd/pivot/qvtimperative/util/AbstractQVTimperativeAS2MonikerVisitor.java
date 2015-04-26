@@ -79,16 +79,6 @@ public abstract class AbstractQVTimperativeAS2MonikerVisitor
 	}
 
 	@Override
-	public @Nullable Object visitMiddlePropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment object) {
-		return visitPropertyAssignment(object);
-	}
-
-	@Override
-	public @Nullable Object visitMiddlePropertyCallExp(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp object) {
-		return visitOppositePropertyCallExp(object);
-	}
-
-	@Override
 	public @Nullable Object visitVariablePredicate(@NonNull org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate object) {
 		return visitPredicate(object);
 	}

@@ -39,12 +39,6 @@ inv UniqueCallBindings: binding->isUnique(boundVariable)
 context MappingCallBinding
 inv CompatibleBinding: value.type.conformsTo(boundVariable.type) or boundVariable.type.conformsTo(value.type)
 
---context MiddlePropertyAssignment
---inv IsMiddleProperty: true --TODO
-
-context MiddlePropertyCallExp
-inv IsMiddleProperty: true --TODO
-
 endpackage
 
 package qvtcorebase

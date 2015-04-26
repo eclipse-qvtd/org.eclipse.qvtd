@@ -15,14 +15,15 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.qvtd.pivot.qvtimperative.*;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
-import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
+import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativeFactory;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
+import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 
 /**
  * <!-- begin-user-doc -->
@@ -74,8 +75,6 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 			case QVTimperativePackage.MAPPING_CALL_BINDING: return createMappingCallBinding();
 			case QVTimperativePackage.MAPPING_LOOP: return createMappingLoop();
 			case QVTimperativePackage.MAPPING_SEQUENCE: return createMappingSequence();
-			case QVTimperativePackage.MIDDLE_PROPERTY_ASSIGNMENT: return createMiddlePropertyAssignment();
-			case QVTimperativePackage.MIDDLE_PROPERTY_CALL_EXP: return createMiddlePropertyCallExp();
 			case QVTimperativePackage.VARIABLE_PREDICATE: return createVariablePredicate();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -146,28 +145,6 @@ public class QVTimperativeFactoryImpl extends EFactoryImpl implements QVTimperat
 	public MappingSequence createMappingSequence() {
 		MappingSequenceImpl mappingSequence = new MappingSequenceImpl();
 		return mappingSequence;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public MiddlePropertyAssignment createMiddlePropertyAssignment() {
-		MiddlePropertyAssignmentImpl middlePropertyAssignment = new MiddlePropertyAssignmentImpl();
-		return middlePropertyAssignment;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public MiddlePropertyCallExp createMiddlePropertyCallExp() {
-		MiddlePropertyCallExpImpl middlePropertyCallExp = new MiddlePropertyCallExpImpl();
-		return middlePropertyCallExp;
 	}
 
 	/**

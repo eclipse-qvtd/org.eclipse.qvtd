@@ -51,14 +51,6 @@ public abstract class AbstractQVTimperativeStepperVisitor
 		return visitElement(object);
 	}
 
-	public @Nullable IStepper visitMiddlePropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment object) {
-		return visitPropertyAssignment(object);
-	}
-
-	public @Nullable IStepper visitMiddlePropertyCallExp(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp object) {
-		return visitOppositePropertyCallExp(object);
-	}
-
 	public @Nullable IStepper visitVariablePredicate(@NonNull org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate object) {
 		return visitPredicate(object);
 	}

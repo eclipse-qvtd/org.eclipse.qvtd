@@ -44,8 +44,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 import org.eclipse.qvtd.xtext.qvtcorebase.as2cs.QVTcoreBaseDeclarationVisitor;
@@ -208,16 +206,6 @@ public class QVTimperativeDeclarationVisitor extends QVTcoreBaseDeclarationVisit
 	@Override
 	public ElementCS visitMappingStatement(@NonNull MappingStatement object) {
 		return visiting(object);
-	}
-
-	@Override
-	public ElementCS visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment asMiddlePropertyAssignment) {
-		return visitPropertyAssignment(asMiddlePropertyAssignment);
-	}
-
-	@Override
-	public ElementCS visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp asMiddlePropertyCallExp) {
-		return visitOppositePropertyCallExp(asMiddlePropertyCallExp);
 	}
 
 	@Override

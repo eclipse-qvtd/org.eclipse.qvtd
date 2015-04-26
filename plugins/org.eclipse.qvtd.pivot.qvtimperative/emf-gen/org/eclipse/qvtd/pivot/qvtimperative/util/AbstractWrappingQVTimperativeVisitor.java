@@ -116,30 +116,6 @@ public abstract class AbstractWrappingQVTimperativeVisitor<R, C, D extends QVTim
 	}
 
 	@Override
-	public @Nullable R visitMiddlePropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment object) {
-		P prologue = preVisit(object);
-		try {
-			R result = delegate.visitMiddlePropertyAssignment(object);
-			return postVisit(object, prologue, result);
-		}
-		catch (Throwable e) {
-			return badVisit(object, prologue, e);
-		}
-	}
-
-	@Override
-	public @Nullable R visitMiddlePropertyCallExp(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp object) {
-		P prologue = preVisit(object);
-		try {
-			R result = delegate.visitMiddlePropertyCallExp(object);
-			return postVisit(object, prologue, result);
-		}
-		catch (Throwable e) {
-			return badVisit(object, prologue, e);
-		}
-	}
-
-	@Override
 	public @Nullable R visitVariablePredicate(@NonNull org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate object) {
 		P prologue = preVisit(object);
 		try {

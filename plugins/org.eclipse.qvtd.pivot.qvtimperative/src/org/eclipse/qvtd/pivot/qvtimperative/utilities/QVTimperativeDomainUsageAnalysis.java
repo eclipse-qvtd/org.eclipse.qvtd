@@ -23,8 +23,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
 
@@ -89,16 +87,6 @@ public class QVTimperativeDomainUsageAnalysis extends RootDomainUsageAnalysis im
 	@Override
 	public @Nullable DomainUsage visitMappingStatement(@NonNull MappingStatement object) {
 		return visitOCLExpression(object);
-	}
-
-	@Override
-	public @Nullable DomainUsage visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment object) {
-		return visitPropertyAssignment(object);
-	}
-
-	@Override
-	public @Nullable DomainUsage visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp object) {
-		return visitOppositePropertyCallExp(object);
 	}
 
 	@Override

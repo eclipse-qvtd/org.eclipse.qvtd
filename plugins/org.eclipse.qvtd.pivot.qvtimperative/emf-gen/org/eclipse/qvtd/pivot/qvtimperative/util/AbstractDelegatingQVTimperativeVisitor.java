@@ -72,16 +72,6 @@ public abstract class AbstractDelegatingQVTimperativeVisitor<R, C, D extends QVT
 	}
 
 	@Override
-	public @Nullable R visitMiddlePropertyAssignment(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment object) {
-		return delegate.visitMiddlePropertyAssignment(object);
-	}
-
-	@Override
-	public @Nullable R visitMiddlePropertyCallExp(@NonNull org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp object) {
-		return delegate.visitMiddlePropertyCallExp(object);
-	}
-
-	@Override
 	public @Nullable R visitVariablePredicate(@NonNull org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate object) {
 		return delegate.visitVariablePredicate(object);
 	}

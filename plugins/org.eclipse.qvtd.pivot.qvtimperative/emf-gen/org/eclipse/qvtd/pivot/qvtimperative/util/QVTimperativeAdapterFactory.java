@@ -16,14 +16,11 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.ocl.pivot.CallExp;
 import org.eclipse.ocl.pivot.Element;
-import org.eclipse.ocl.pivot.FeatureCallExp;
 import org.eclipse.ocl.pivot.LoopExp;
 import org.eclipse.ocl.pivot.Model;
 import org.eclipse.ocl.pivot.NamedElement;
 import org.eclipse.ocl.pivot.Namespace;
-import org.eclipse.ocl.pivot.NavigationCallExp;
 import org.eclipse.ocl.pivot.OCLExpression;
-import org.eclipse.ocl.pivot.OppositePropertyCallExp;
 import org.eclipse.ocl.pivot.ReferringElement;
 import org.eclipse.ocl.pivot.TypedElement;
 import org.eclipse.ocl.pivot.util.Visitable;
@@ -33,9 +30,6 @@ import org.eclipse.qvtd.pivot.qvtbase.Predicate;
 import org.eclipse.qvtd.pivot.qvtbase.Rule;
 import org.eclipse.qvtd.pivot.qvtcorebase.AbstractMapping;
 import org.eclipse.qvtd.pivot.qvtcorebase.Area;
-import org.eclipse.qvtd.pivot.qvtcorebase.Assignment;
-import org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.*;
 import org.eclipse.qvtd.pivot.qvtimperative.ImperativeModel;
 import org.eclipse.qvtd.pivot.qvtimperative.Mapping;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
@@ -43,7 +37,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtimperative.QVTimperativePackage;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 
@@ -132,14 +125,6 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 				return createMappingStatementAdapter();
 			}
 			@Override
-			public Adapter caseMiddlePropertyAssignment(MiddlePropertyAssignment object) {
-				return createMiddlePropertyAssignmentAdapter();
-			}
-			@Override
-			public Adapter caseMiddlePropertyCallExp(MiddlePropertyCallExp object) {
-				return createMiddlePropertyCallExpAdapter();
-			}
-			@Override
 			public Adapter caseVariablePredicate(VariablePredicate object) {
 				return createVariablePredicateAdapter();
 			}
@@ -202,26 +187,6 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseLoopExp(LoopExp object) {
 				return createLoopExpAdapter();
-			}
-			@Override
-			public Adapter caseAssignment(Assignment object) {
-				return createAssignmentAdapter();
-			}
-			@Override
-			public Adapter casePropertyAssignment(PropertyAssignment object) {
-				return createPropertyAssignmentAdapter();
-			}
-			@Override
-			public Adapter caseFeatureCallExp(FeatureCallExp object) {
-				return createFeatureCallExpAdapter();
-			}
-			@Override
-			public Adapter caseNavigationCallExp(NavigationCallExp object) {
-				return createNavigationCallExpAdapter();
-			}
-			@Override
-			public Adapter caseOppositePropertyCallExp(OppositePropertyCallExp object) {
-				return createOppositePropertyCallExpAdapter();
 			}
 			@Override
 			public Adapter casePredicate(Predicate object) {
@@ -370,34 +335,6 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createMappingStatementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment <em>Middle Property Assignment</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment
-	 * @generated
-	 */
-	public Adapter createMiddlePropertyAssignmentAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp <em>Middle Property Call Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp
-	 * @generated
-	 */
-	public Adapter createMiddlePropertyCallExpAdapter() {
 		return null;
 	}
 
@@ -594,76 +531,6 @@ public class QVTimperativeAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createLoopExpAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtcorebase.Assignment <em>Assignment</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtcorebase.Assignment
-	 * @generated
-	 */
-	public Adapter createAssignmentAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment <em>Property Assignment</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.qvtd.pivot.qvtcorebase.PropertyAssignment
-	 * @generated
-	 */
-	public Adapter createPropertyAssignmentAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.FeatureCallExp <em>Feature Call Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.pivot.FeatureCallExp
-	 * @generated
-	 */
-	public Adapter createFeatureCallExpAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.NavigationCallExp <em>Navigation Call Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.pivot.NavigationCallExp
-	 * @generated
-	 */
-	public Adapter createNavigationCallExpAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.ocl.pivot.OppositePropertyCallExp <em>Opposite Property Call Exp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.ocl.pivot.OppositePropertyCallExp
-	 * @generated
-	 */
-	public Adapter createOppositePropertyCallExpAdapter() {
 		return null;
 	}
 

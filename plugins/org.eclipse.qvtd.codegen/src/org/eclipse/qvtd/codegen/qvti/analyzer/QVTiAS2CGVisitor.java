@@ -101,8 +101,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCallBinding;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 import org.eclipse.qvtd.pivot.qvtimperative.evaluation.QVTiTransformationAnalysis;
 import org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor;
@@ -563,16 +561,6 @@ public class QVTiAS2CGVisitor extends AS2CGVisitor implements QVTimperativeVisit
 	@Override
 	public @Nullable CGNamedElement visitMappingStatement(@NonNull MappingStatement object) {
 		return visiting(object);
-	}
-
-	@Override
-	public @Nullable CGNamedElement visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment object) {
-		return visitPropertyAssignment(object);
-	}
-
-	@Override
-	public @Nullable CGNamedElement visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp object) {
-		return visitOppositePropertyCallExp(object);
 	}
 
 	@Override

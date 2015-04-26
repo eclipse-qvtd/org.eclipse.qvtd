@@ -43,8 +43,6 @@ import org.eclipse.qvtd.pivot.qvtimperative.MappingCall;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingLoop;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingSequence;
 import org.eclipse.qvtd.pivot.qvtimperative.MappingStatement;
-import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyAssignment;
-import org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp;
 import org.eclipse.qvtd.pivot.qvtimperative.VariablePredicate;
 
 /**
@@ -300,19 +298,6 @@ public abstract class QVTiAbstractTracingEvaluationVisitor extends QVTiEvaluatio
 	@Override
 	public @Nullable Object visitMappingStatement(@NonNull MappingStatement vappingStatement) {
 		return visiting(vappingStatement);
-	}
-
-	@Override
-	public @Nullable Object visitMiddlePropertyAssignment(@NonNull MiddlePropertyAssignment object) {
-        return delegate.visitMiddlePropertyAssignment(object);
-	}
-
-	/* (non-Javadoc)
-	 * @see org.eclipse.qvtd.pivot.qvtimperative.util.QVTimperativeVisitor#visitMiddlePropertyCallExp(org.eclipse.qvtd.pivot.qvtimperative.MiddlePropertyCallExp)
-	 */
-	@Override
-	public Object visitMiddlePropertyCallExp(@NonNull MiddlePropertyCallExp callExp) {
-        return delegate.visitMiddlePropertyCallExp(callExp);
 	}
 	
 	/* (non-Javadoc)
