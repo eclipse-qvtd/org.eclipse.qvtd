@@ -21,7 +21,7 @@
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated qvticgmodel -->
       <package
-            uri="http://www.eclipse.org/qvti/1.0.0/CG"
+            uri="http://www.eclipse.org/qvti/0.12.0/CG"
             class="org.eclipse.qvtd.codegen.qvticgmodel.QVTiCGModelPackage"
             genModel="model/qvticgmodel.genmodel"/>
    </extension>
@@ -45,7 +45,7 @@
             name="%_UI_QVTiCGModel_content_type"
             priority="normal">
          <describer class="org.eclipse.emf.ecore.xmi.impl.RootXMLContentHandlerImpl$Describer">
-            <parameter name="namespace" value="http://www.eclipse.org/qvti/1.0.0/CG"/>
+            <parameter name="namespace" value="http://www.eclipse.org/qvti/0.12.0/CG"/>
             <parameter name="kind" value="xmi"/>
          </describer>
       </content-type>

@@ -57,7 +57,7 @@ public interface QVTiCGModelPackage extends EPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@NonNull String eNS_URI = "http://www.eclipse.org/qvti/1.0.0/CG";
+	@NonNull String eNS_URI = "http://www.eclipse.org/qvti/0.12.0/CG";
 
 	/**
 	 * The package namespace name.
