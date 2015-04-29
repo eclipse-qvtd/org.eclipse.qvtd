@@ -26,7 +26,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.TRoot" referredVariable="#qV..Source2Target_qvtp_qvtias.cSRoot_2_TRoot.rightAS.bottom.tRoot"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.SRoot" referredVariable="#qV..Source2Target_qvtp_qvtias.cSRoot_2_TRoot.leftCS.guard.sRoot"/>
           </assignment>
@@ -66,7 +66,7 @@
           </predicate>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.A3" referredVariable="#qV..Source2Target_qvtp_qvtias.cX_2_A3.rightAS.bottom.a3"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" referredVariable="#qV..Source2Target_qvtp_qvtias.cX_2_A3.leftCS.guard.x"/>
           </assignment>
@@ -103,7 +103,7 @@
           </predicate>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.A2" referredVariable="#qV..Source2Target_qvtp_qvtias.cX_2_A2.rightAS.bottom.a2"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" referredVariable="#qV..Source2Target_qvtp_qvtias.cX_2_A2.leftCS.guard.x"/>
           </assignment>
@@ -131,7 +131,7 @@
           </predicate>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.A1" referredVariable="#qV..Source2Target_qvtp_qvtias.cX_2_A1.rightAS.bottom.a1"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" referredVariable="#qV..Source2Target_qvtp_qvtias.cX_2_A1.leftCS.guard.x"/>
           </assignment>
@@ -152,7 +152,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.B" referredVariable="#qV..Source2Target_qvtp_qvtias.cY1_2_B.rightAS.bottom.b"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y1" referredVariable="#qV..Source2Target_qvtp_qvtias.cY1_2_B.leftCS.guard.y1"/>
           </assignment>
@@ -173,7 +173,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.C" referredVariable="#qV..Source2Target_qvtp_qvtias.cY2_2_C.rightAS.bottom.c"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y2" referredVariable="#qV..Source2Target_qvtp_qvtias.cY2_2_C.leftCS.guard.y2"/>
           </assignment>
@@ -208,7 +208,7 @@
           </predicate>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.D" referredVariable="#qV..Source2Target_qvtp_qvtias.cZ_2_D_0.rightAS.bottom.d"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.Z" referredVariable="#qV..Source2Target_qvtp_qvtias.cZ_2_D_0.leftCS.guard.z"/>
           </assignment>
@@ -239,7 +239,7 @@
           </predicate>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
             <value xsi:type="pivot:VariableExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.D" referredVariable="#qV..Source2Target_qvtp_qvtias.cZ_2_D_1.rightAS.bottom.d"/>
             <slotExpression xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.Z" referredVariable="#qV..Source2Target_qvtp_qvtias.cZ_2_D_1.leftCS.guard.z"/>
           </assignment>
@@ -258,7 +258,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.TRoot.ownedA">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.TRoot.ownedA">
             <value xsi:type="pivot:IteratorExp" name="collect" type="#//@ownedPackages.1/@ownedClasses.0" isImplicit="true" referredIteration="http://www.eclipse.org/ocl/2015/Library.oclas#i.ocl.OrderedSet.collect..T">
               <ownedSource xsi:type="pivot:PropertyCallExp" type="#//@ownedPackages.1/@ownedClasses.1" referredProperty="SourceMM1.ecore.oclas#p.source.SRoot.ownedX">
                 <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.SRoot" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.uTRoot_ownedA.leftCS.guard.sRoot"/>
@@ -316,7 +316,7 @@
           </predicate>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.NamedElement.name">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.NamedElement.name">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredProperty="SourceMM1.ecore.oclas#p.source.X.name">
               <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.uA3_name.leftCS.guard.x"/>
@@ -363,7 +363,7 @@
           </predicate>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.A2.ownsC">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.A2.ownsC">
             <value xsi:type="pivot:IteratorExp" name="collect" type="#//@ownedPackages.1/@ownedClasses.2" isImplicit="true" referredIteration="http://www.eclipse.org/ocl/2015/Library.oclas#i.ocl.Sequence.collect..T">
               <ownedSource xsi:type="pivot:IteratorExp" name="collect" type="#//@ownedPackages.1/@ownedClasses.3" isImplicit="true" referredIteration="http://www.eclipse.org/ocl/2015/Library.oclas#i.ocl.OrderedSet.collect..T">
                 <ownedSource xsi:type="pivot:PropertyCallExp" type="#//@ownedPackages.1/@ownedClasses.4" referredProperty="SourceMM1.ecore.oclas#p.source.X.ownsY">
@@ -427,7 +427,7 @@
           </predicate>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.NamedElement.name">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.NamedElement.name">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredProperty="SourceMM1.ecore.oclas#p.source.X.name">
               <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.uA2_name.leftCS.guard.x"/>
@@ -471,7 +471,7 @@
           </predicate>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.A2.ownsC">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.A2.ownsC">
             <value xsi:type="pivot:IteratorExp" name="collect" type="#//@ownedPackages.1/@ownedClasses.2" isImplicit="true" referredIteration="http://www.eclipse.org/ocl/2015/Library.oclas#i.ocl.Sequence.collect..T">
               <ownedSource xsi:type="pivot:IteratorExp" name="collect" type="#//@ownedPackages.1/@ownedClasses.3" isImplicit="true" referredIteration="http://www.eclipse.org/ocl/2015/Library.oclas#i.ocl.OrderedSet.collect..T">
                 <ownedSource xsi:type="pivot:PropertyCallExp" type="#//@ownedPackages.1/@ownedClasses.4" referredProperty="SourceMM1.ecore.oclas#p.source.X.ownsY">
@@ -526,7 +526,7 @@
           </predicate>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.NamedElement.name">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.NamedElement.name">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredProperty="SourceMM1.ecore.oclas#p.source.X.name">
               <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.X" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.uA1_name.leftCS.guard.x"/>
@@ -561,7 +561,7 @@
           </predicate>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.A1.ownsB">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.A1.ownsB">
             <value xsi:type="pivot:IteratorExp" name="collect" type="#//@ownedPackages.1/@ownedClasses.5" isImplicit="true" referredIteration="http://www.eclipse.org/ocl/2015/Library.oclas#i.ocl.Sequence.collect..T">
               <ownedSource xsi:type="pivot:IteratorExp" name="collect" type="#//@ownedPackages.1/@ownedClasses.6" isImplicit="true" referredIteration="http://www.eclipse.org/ocl/2015/Library.oclas#i.ocl.OrderedSet.collect..T">
                 <ownedSource xsi:type="pivot:PropertyCallExp" type="#//@ownedPackages.1/@ownedClasses.4" referredProperty="SourceMM1.ecore.oclas#p.source.X.ownsY">
@@ -609,7 +609,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.B.ownsD">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.B.ownsD">
             <value xsi:type="pivot:OperationCallExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.D" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
               <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                   referredProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
@@ -642,7 +642,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.NamedElement.name">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.NamedElement.name">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredProperty="SourceMM1.ecore.oclas#p.source.Y.name">
               <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y1" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.uB_name.leftCS.guard.y1"/>
@@ -670,7 +670,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.C.ownsD">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.C.ownsD">
             <value xsi:type="pivot:OperationCallExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.D" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
               <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
                   referredProperty="SourceMM1.ecore.oclas#p.source.SElement.ast">
@@ -703,7 +703,7 @@
         </domain>
         <guardPattern/>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.NamedElement.name">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.NamedElement.name">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:PrimitiveType http://www.eclipse.org/ocl/2015/Library.oclas#String"
                 referredProperty="SourceMM1.ecore.oclas#p.source.Y.name">
               <ownedSource xsi:type="pivot:VariableExp" type="pivot:Class SourceMM1.ecore.oclas#T.source.Y2" isImplicit="true" referredVariable="#qV..Source2Target_qvtp_qvtias.uC_name.leftCS.guard.y2"/>
@@ -745,7 +745,7 @@
           </predicate>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.D.toA">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.D.toA">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class TargetMM1.ecore.oclas#T.target.A2" referredProperty="TargetMM1.ecore.oclas#p.target.C.toA2">
               <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.C" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
                 <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
@@ -802,7 +802,7 @@
           </predicate>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.D.refsC">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.D.refsC">
             <value xsi:type="pivot:OperationCallExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.C" referredOperation="TargetLookup.ocl.oclas#o.target.D.lookupC..source.Z">
               <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.D" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
                 <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
@@ -847,7 +847,7 @@
           </predicate>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.D.toA">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.D.toA">
             <value xsi:type="pivot:PropertyCallExp" isRequired="false" type="pivot:Class TargetMM1.ecore.oclas#T.target.A1" referredProperty="TargetMM1.ecore.oclas#p.target.B.toA1">
               <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.B" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
                 <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"
@@ -900,7 +900,7 @@
           </predicate>
         </guardPattern>
         <bottomPattern>
-          <assignment xsi:type="qvti:MiddlePropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.D.refsB">
+          <assignment xsi:type="qvtcb:PropertyAssignment" targetProperty="TargetMM1.ecore.oclas#p.target.D.refsB">
             <value xsi:type="pivot:OperationCallExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.B" referredOperation="TargetLookup.ocl.oclas#o.target.D.lookupB..source.Z">
               <ownedSource xsi:type="pivot:OperationCallExp" type="pivot:Class TargetMM1.ecore.oclas#T.target.D" referredOperation="http://www.eclipse.org/ocl/2015/Library.oclas#o.ocl.OclAny.oclAsType..TT">
                 <ownedSource xsi:type="pivot:PropertyCallExp" type="pivot:Class http://www.eclipse.org/emf/2002/Ecore.oclas#T.ecore.EObject"

@@ -80,7 +80,7 @@ rule ShadowExp2Mapping_LM
 	var guardPattern = new QVTi!GuardPattern;
 	var bottomPattern = new QVTi!BottomPattern;
 	
-	var pAssignment = new QVTi!MiddlePropertyAssignment;
+	var pAssignment = new QVTi!PropertyAssignment;
 	var value = new QVTi!VariableExp;
 	value.referredVariable = leftDomain.guardPattern.variable.first();
 	value.type = value.referredVariable.type;
@@ -120,7 +120,7 @@ rule ShadowExp2Mapping_MR
 	var guardPattern = new QVTi!GuardPattern;
 	var bottomPattern = new QVTi!BottomPattern;
 
-	var pAssignment = new QVTi!MiddlePropertyAssignment;
+	var pAssignment = new QVTi!PropertyAssignment;
 	var value = new QVTi!VariableExp;
 	value.referredVariable = rightDomain.bottomPattern.realizedVariable.first();
 	value.type = value.referredVariable.type;
@@ -171,7 +171,7 @@ rule ShadowPart2UpdateMapping
 	sourceVarExp.type = leftVar.type;
 	
 	
-	var sourceMiddlePropCall = new QVTi!MiddlePropertyCallExp;
+	var sourceMiddlePropCall = new QVTi!OppositePropertyCallExp;
 	var middleType = MiddleMM!Class.all.selectOne(x | x.name = shadowExp.getTraceElementName());
 	sourceMiddlePropCall.referredProperty = middleType.ownedProperties.selectOne(x | x.name = leftVar.name);
 	sourceMiddlePropCall.type = middleType;
@@ -370,7 +370,7 @@ operation OCL!OCLExpression createPropertyAssignmentValue(leftVar) : OCL!OCLExpr
 				var middleTypeName = getTraceElementName(exp.ownedSource.type, exp.referredOperation.type); // FIXME This doesnt work with ast() op returning an abstract name
 				var middleType = MiddleMM!Class.all.selectOne(x | x.name = middleTypeName);
 				var leftPropertyName = exp.ownedSource.type.name.firstToLowerCase();
-				var middlePropCall = new QVTi!MiddlePropertyCallExp;
+				var middlePropCall = new QVTi!OppositePropertyCallExp;
 				middlePropCall.referredProperty = middleType.ownedProperties.selectOne(x | x.name = leftPropertyName);
 				middlePropCall.type = middleType;
 				middlePropCall.ownedSource = exp.ownedSource;

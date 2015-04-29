@@ -74,7 +74,7 @@ rule ShadowExp2CreationMapping
 	var guardPattern = new QVTi!GuardPattern;
 	var bottomPattern = new QVTi!BottomPattern;
 	
-	var pAssignment = new QVTi!MiddlePropertyAssignment;
+	var pAssignment = new QVTi!PropertyAssignment;
 	var value = new QVTi!VariableExp;
 	value.referredVariable = rightDomain.bottomPattern.realizedVariable.first();
 	value.type = value.referredVariable.type;
@@ -140,7 +140,7 @@ rule ShadowPart2UpdateMapping
 	asTypeOpCallExp.ownedArguments.add(argTypeExp);
 
 	
-	var pAssignment = new QVTi!MiddlePropertyAssignment;
+	var pAssignment = new QVTi!PropertyAssignment;
 	pAssignment.targetProperty = refProp;
 	pAssignment.value = s.createPropertyAssignmentValue(leftVar);
 	pAssignment.slotExpression = asTypeOpCallExp;
