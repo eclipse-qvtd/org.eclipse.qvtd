@@ -1,8 +1,6 @@
-import '/plugin/org.eclipse.qvtd.pivot.qvtcore/model/QVTcore.ecore'
-import '/plugin/org.eclipse.qvtd.pivot.qvtbase/model/QVTbase.ecore'
+import 'platform:/resource/org.eclipse.qvtd.pivot.qvtcorebase/model/QVTcoreBase.ecore'
 
-
-package qvtcore
+package qvtcorebase
 
 context PropertyAssignment
 --
